@@ -16,12 +16,13 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             private readonly string _trueValueDescription;
             private readonly string _falseValueDescription;
 
-            public BooleanCodeStyleSettingBase(string description,
-                                               string category,
-                                               string? trueValueDescription,
-                                               string? falseValueDescription,
-                                               OptionUpdater updater)
-                : base(description, updater)
+            public BooleanCodeStyleSettingBase(
+                string description,
+                string category,
+                string? trueValueDescription,
+                string? falseValueDescription,
+                OptionUpdater updater
+            ) : base(description, updater)
             {
                 Category = category;
                 _trueValueDescription = trueValueDescription ?? EditorFeaturesResources.Yes;
@@ -30,10 +31,14 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
 
             public override string Category { get; }
             public override Type Type => typeof(bool);
-            public override DiagnosticSeverity Severity => GetOption().Notification.Severity.ToDiagnosticSeverity() ?? DiagnosticSeverity.Hidden;
-            public override string GetCurrentValue() => GetOption().Value ? _trueValueDescription : _falseValueDescription;
+            public override DiagnosticSeverity Severity =>
+                GetOption().Notification.Severity.ToDiagnosticSeverity()
+                ?? DiagnosticSeverity.Hidden;
+            public override string GetCurrentValue() =>
+                GetOption().Value ? _trueValueDescription : _falseValueDescription;
             public override object? Value => GetOption().Value;
-            public override string[] GetValues() => new[] { _trueValueDescription, _falseValueDescription };
+            public override string[] GetValues() =>
+                new[] { _trueValueDescription, _falseValueDescription };
             protected abstract CodeStyleOption2<bool> GetOption();
         }
     }

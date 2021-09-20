@@ -26,8 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Delegate preStoreGeneratedCurrentValueGetter,
             Delegate? originalValueGetter,
             Delegate relationshipSnapshotGetter,
-            Func<ValueBuffer, object>? valueBufferGetter)
-        {
+            Func<ValueBuffer, object>? valueBufferGetter
+        ) {
             CurrentValueGetter = currentValueGetter;
             PreStoreGeneratedCurrentValueGetter = preStoreGeneratedCurrentValueGetter;
             OriginalValueGetter = originalValueGetter;

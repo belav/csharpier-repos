@@ -28,8 +28,13 @@ namespace Microsoft.Extensions.Logging
             builder.AddConsoleFormatter<SystemdConsoleFormatter, ConsoleFormatterOptions>();
             builder.AddConsoleFormatter<SimpleConsoleFormatter, SimpleConsoleFormatterOptions>();
 
-            builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<ILoggerProvider, ConsoleLoggerProvider>());
-            LoggerProviderOptions.RegisterProviderOptions<ConsoleLoggerOptions, ConsoleLoggerProvider>(builder.Services);
+            builder.Services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<ILoggerProvider, ConsoleLoggerProvider>()
+            );
+            LoggerProviderOptions.RegisterProviderOptions<
+                ConsoleLoggerOptions,
+                ConsoleLoggerProvider
+            >(builder.Services);
 
             return builder;
         }
@@ -39,8 +44,10 @@ namespace Microsoft.Extensions.Logging
         /// </summary>
         /// <param name="builder">The <see cref="ILoggingBuilder"/> to use.</param>
         /// <param name="configure">A delegate to configure the <see cref="ConsoleLogger"/>.</param>
-        public static ILoggingBuilder AddConsole(this ILoggingBuilder builder, Action<ConsoleLoggerOptions> configure)
-        {
+        public static ILoggingBuilder AddConsole(
+            this ILoggingBuilder builder,
+            Action<ConsoleLoggerOptions> configure
+        ) {
             if (configure == null)
             {
                 throw new ArgumentNullException(nameof(configure));
@@ -64,9 +71,14 @@ namespace Microsoft.Extensions.Logging
         /// </summary>
         /// <param name="builder">The <see cref="ILoggingBuilder"/> to use.</param>
         /// <param name="configure">A delegate to configure the <see cref="ConsoleLogger"/> options for the built-in default log formatter.</param>
-        public static ILoggingBuilder AddSimpleConsole(this ILoggingBuilder builder, Action<SimpleConsoleFormatterOptions> configure)
-        {
-            return builder.AddConsoleWithFormatter<SimpleConsoleFormatterOptions>(ConsoleFormatterNames.Simple, configure);
+        public static ILoggingBuilder AddSimpleConsole(
+            this ILoggingBuilder builder,
+            Action<SimpleConsoleFormatterOptions> configure
+        ) {
+            return builder.AddConsoleWithFormatter<SimpleConsoleFormatterOptions>(
+                ConsoleFormatterNames.Simple,
+                configure
+            );
         }
 
         /// <summary>
@@ -81,9 +93,14 @@ namespace Microsoft.Extensions.Logging
         /// </summary>
         /// <param name="builder">The <see cref="ILoggingBuilder"/> to use.</param>
         /// <param name="configure">A delegate to configure the <see cref="ConsoleLogger"/> options for the built-in json log formatter.</param>
-        public static ILoggingBuilder AddJsonConsole(this ILoggingBuilder builder, Action<JsonConsoleFormatterOptions> configure)
-        {
-            return builder.AddConsoleWithFormatter<JsonConsoleFormatterOptions>(ConsoleFormatterNames.Json, configure);
+        public static ILoggingBuilder AddJsonConsole(
+            this ILoggingBuilder builder,
+            Action<JsonConsoleFormatterOptions> configure
+        ) {
+            return builder.AddConsoleWithFormatter<JsonConsoleFormatterOptions>(
+                ConsoleFormatterNames.Json,
+                configure
+            );
         }
 
         /// <summary>
@@ -91,9 +108,14 @@ namespace Microsoft.Extensions.Logging
         /// </summary>
         /// <param name="builder">The <see cref="ILoggingBuilder"/> to use.</param>
         /// <param name="configure">A delegate to configure the <see cref="ConsoleLogger"/> options for the built-in systemd log formatter.</param>
-        public static ILoggingBuilder AddSystemdConsole(this ILoggingBuilder builder, Action<ConsoleFormatterOptions> configure)
-        {
-            return builder.AddConsoleWithFormatter<ConsoleFormatterOptions>(ConsoleFormatterNames.Systemd, configure);
+        public static ILoggingBuilder AddSystemdConsole(
+            this ILoggingBuilder builder,
+            Action<ConsoleFormatterOptions> configure
+        ) {
+            return builder.AddConsoleWithFormatter<ConsoleFormatterOptions>(
+                ConsoleFormatterNames.Systemd,
+                configure
+            );
         }
 
         /// <summary>
@@ -103,8 +125,11 @@ namespace Microsoft.Extensions.Logging
         public static ILoggingBuilder AddSystemdConsole(this ILoggingBuilder builder) =>
             builder.AddFormatterWithName(ConsoleFormatterNames.Systemd);
 
-        internal static ILoggingBuilder AddConsoleWithFormatter<TOptions>(this ILoggingBuilder builder, string name, Action<TOptions> configure)
-            where TOptions : ConsoleFormatterOptions
+        internal static ILoggingBuilder AddConsoleWithFormatter<TOptions>(
+            this ILoggingBuilder builder,
+            string name,
+            Action<TOptions> configure
+        ) where TOptions : ConsoleFormatterOptions
         {
             if (configure == null)
             {
@@ -116,22 +141,40 @@ namespace Microsoft.Extensions.Logging
             return builder;
         }
 
-        private static ILoggingBuilder AddFormatterWithName(this ILoggingBuilder builder, string name) =>
-            builder.AddConsole((ConsoleLoggerOptions options) => options.FormatterName = name);
+        private static ILoggingBuilder AddFormatterWithName(
+            this ILoggingBuilder builder,
+            string name
+        ) => builder.AddConsole((ConsoleLoggerOptions options) => options.FormatterName = name);
 
         /// <summary>
         /// Adds a custom console logger formatter 'TFormatter' to be configured with options 'TOptions'.
         /// </summary>
         /// <param name="builder">The <see cref="ILoggingBuilder"/> to use.</param>
-        public static ILoggingBuilder AddConsoleFormatter<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TFormatter, TOptions>(this ILoggingBuilder builder)
+        public static ILoggingBuilder AddConsoleFormatter<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                TFormatter,
+            TOptions
+        >(this ILoggingBuilder builder)
             where TOptions : ConsoleFormatterOptions
             where TFormatter : ConsoleFormatter
         {
             builder.AddConfiguration();
 
-            builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<ConsoleFormatter, TFormatter>());
-            builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<TOptions>, ConsoleLoggerFormatterConfigureOptions<TFormatter, TOptions>>());
-            builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IOptionsChangeTokenSource<TOptions>, ConsoleLoggerFormatterOptionsChangeTokenSource<TFormatter, TOptions>>());
+            builder.Services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<ConsoleFormatter, TFormatter>()
+            );
+            builder.Services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IConfigureOptions<TOptions>,
+                    ConsoleLoggerFormatterConfigureOptions<TFormatter, TOptions>
+                >()
+            );
+            builder.Services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IOptionsChangeTokenSource<TOptions>,
+                    ConsoleLoggerFormatterOptionsChangeTokenSource<TFormatter, TOptions>
+                >()
+            );
 
             return builder;
         }
@@ -141,9 +184,15 @@ namespace Microsoft.Extensions.Logging
         /// </summary>
         /// <param name="builder">The <see cref="ILoggingBuilder"/> to use.</param>
         /// <param name="configure">A delegate to configure options 'TOptions' for custom formatter 'TFormatter'.</param>
-        public static ILoggingBuilder AddConsoleFormatter<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TFormatter, TOptions>(this ILoggingBuilder builder, Action<TOptions> configure)
-            where TOptions : ConsoleFormatterOptions
-            where TFormatter : ConsoleFormatter
+        public static ILoggingBuilder AddConsoleFormatter<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                TFormatter,
+            TOptions
+        >(
+            this ILoggingBuilder builder,
+            Action<TOptions> configure
+        ) where TOptions : ConsoleFormatterOptions
+          where TFormatter : ConsoleFormatter
         {
             if (configure == null)
             {
@@ -157,24 +206,24 @@ namespace Microsoft.Extensions.Logging
     }
 
     [UnsupportedOSPlatform("browser")]
-    internal sealed class ConsoleLoggerFormatterConfigureOptions<TFormatter, TOptions> : ConfigureFromConfigurationOptions<TOptions>
+    internal sealed class ConsoleLoggerFormatterConfigureOptions<TFormatter, TOptions>
+        : ConfigureFromConfigurationOptions<TOptions>
         where TOptions : ConsoleFormatterOptions
         where TFormatter : ConsoleFormatter
     {
-        public ConsoleLoggerFormatterConfigureOptions(ILoggerProviderConfiguration<ConsoleLoggerProvider> providerConfiguration) :
-            base(providerConfiguration.Configuration.GetSection("FormatterOptions"))
-        {
-        }
+        public ConsoleLoggerFormatterConfigureOptions(
+            ILoggerProviderConfiguration<ConsoleLoggerProvider> providerConfiguration
+        ) : base(providerConfiguration.Configuration.GetSection("FormatterOptions")) { }
     }
 
     [UnsupportedOSPlatform("browser")]
-    internal sealed class ConsoleLoggerFormatterOptionsChangeTokenSource<TFormatter, TOptions> : ConfigurationChangeTokenSource<TOptions>
+    internal sealed class ConsoleLoggerFormatterOptionsChangeTokenSource<TFormatter, TOptions>
+        : ConfigurationChangeTokenSource<TOptions>
         where TOptions : ConsoleFormatterOptions
         where TFormatter : ConsoleFormatter
     {
-        public ConsoleLoggerFormatterOptionsChangeTokenSource(ILoggerProviderConfiguration<ConsoleLoggerProvider> providerConfiguration)
-            : base(providerConfiguration.Configuration.GetSection("FormatterOptions"))
-        {
-        }
+        public ConsoleLoggerFormatterOptionsChangeTokenSource(
+            ILoggerProviderConfiguration<ConsoleLoggerProvider> providerConfiguration
+        ) : base(providerConfiguration.Configuration.GetSection("FormatterOptions")) { }
     }
 }

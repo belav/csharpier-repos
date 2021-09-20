@@ -42,9 +42,13 @@ namespace Roslyn.Utilities
             string? basePath,
             string? baseDirectory,
             IEnumerable<string> searchPaths,
-            Func<string, bool> fileExists)
-        {
-            Debug.Assert(baseDirectory == null || searchPaths != null || PathUtilities.IsAbsolute(baseDirectory));
+            Func<string, bool> fileExists
+        ) {
+            Debug.Assert(
+                baseDirectory == null
+                    || searchPaths != null
+                    || PathUtilities.IsAbsolute(baseDirectory)
+            );
             RoslynDebug.Assert(searchPaths != null);
             RoslynDebug.Assert(fileExists != null);
 
@@ -96,14 +100,26 @@ namespace Roslyn.Utilities
             return ResolveRelativePath(path, null, baseDirectory);
         }
 
-        internal static string? ResolveRelativePath(string? path, string? basePath, string? baseDirectory)
-        {
+        internal static string? ResolveRelativePath(
+            string? path,
+            string? basePath,
+            string? baseDirectory
+        ) {
             Debug.Assert(baseDirectory == null || PathUtilities.IsAbsolute(baseDirectory));
-            return ResolveRelativePath(PathUtilities.GetPathKind(path), path, basePath, baseDirectory);
+            return ResolveRelativePath(
+                PathUtilities.GetPathKind(path),
+                path,
+                basePath,
+                baseDirectory
+            );
         }
 
-        private static string? ResolveRelativePath(PathKind kind, string? path, string? basePath, string? baseDirectory)
-        {
+        private static string? ResolveRelativePath(
+            PathKind kind,
+            string? path,
+            string? basePath,
+            string? baseDirectory
+        ) {
             Debug.Assert(PathUtilities.GetPathKind(path) == kind);
 
             switch (kind)
@@ -208,11 +224,16 @@ namespace Roslyn.Utilities
 
         private static readonly char[] s_invalidPathChars = Path.GetInvalidPathChars();
 
-        internal static string? NormalizeRelativePath(string path, string? basePath, string? baseDirectory)
-        {
+        internal static string? NormalizeRelativePath(
+            string path,
+            string? basePath,
+            string? baseDirectory
+        ) {
             // Does this look like a URI at all or does it have any invalid path characters? If so, just use it as is.
-            if (path.IndexOf("://", StringComparison.Ordinal) >= 0 || path.IndexOfAny(s_invalidPathChars) >= 0)
-            {
+            if (
+                path.IndexOf("://", StringComparison.Ordinal) >= 0
+                || path.IndexOfAny(s_invalidPathChars) >= 0
+            ) {
                 return null;
             }
 
@@ -262,7 +283,8 @@ namespace Roslyn.Utilities
 
         internal static string NormalizeDirectoryPath(string path)
         {
-            return NormalizeAbsolutePath(path).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            return NormalizeAbsolutePath(path)
+                .TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
         }
 
         internal static string? TryNormalizeAbsolutePath(string path)
@@ -301,7 +323,17 @@ namespace Roslyn.Utilities
         {
             Debug.Assert(PathUtilities.IsAbsolute(fullPath));
 
-            return RethrowExceptionsAsIOException(() => new FileStream(fullPath, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, FileOptions.Asynchronous));
+            return RethrowExceptionsAsIOException(
+                () =>
+                    new FileStream(
+                        fullPath,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.Read,
+                        4096,
+                        FileOptions.Asynchronous
+                    )
+            );
         }
 
         internal static T RethrowExceptionsAsIOException<T>(Func<T> operation)
@@ -324,8 +356,11 @@ namespace Roslyn.Utilities
         /// Used to create a file given a path specified by the user.
         /// paramName - Provided by the Public surface APIs to have a clearer message. Internal API just rethrow the exception
         /// </summary>
-        internal static Stream CreateFileStreamChecked(Func<string, Stream> factory, string path, string? paramName = null)
-        {
+        internal static Stream CreateFileStreamChecked(
+            Func<string, Stream> factory,
+            string path,
+            string? paramName = null
+        ) {
             try
             {
                 return factory(path);

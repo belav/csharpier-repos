@@ -28,8 +28,10 @@ namespace System.Security.Cryptography.X509Certificates
             return certificate.GetPrivateKey<RSA>();
         }
 
-        public static X509Certificate2 CopyWithPrivateKey(this X509Certificate2 certificate, RSA privateKey)
-        {
+        public static X509Certificate2 CopyWithPrivateKey(
+            this X509Certificate2 certificate,
+            RSA privateKey
+        ) {
             if (certificate == null)
                 throw new ArgumentNullException(nameof(certificate));
             if (privateKey == null)
@@ -46,10 +48,14 @@ namespace System.Security.Cryptography.X509Certificates
                 RSAParameters currentParameters = publicKey.ExportParameters(false);
                 RSAParameters newParameters = privateKey.ExportParameters(false);
 
-                if (!currentParameters.Modulus.ContentsEqual(newParameters.Modulus) ||
-                    !currentParameters.Exponent.ContentsEqual(newParameters.Exponent))
-                {
-                    throw new ArgumentException(SR.Cryptography_PrivateKey_DoesNotMatch, nameof(privateKey));
+                if (
+                    !currentParameters.Modulus.ContentsEqual(newParameters.Modulus)
+                    || !currentParameters.Exponent.ContentsEqual(newParameters.Exponent)
+                ) {
+                    throw new ArgumentException(
+                        SR.Cryptography_PrivateKey_DoesNotMatch,
+                        nameof(privateKey)
+                    );
                 }
             }
 

@@ -16,10 +16,10 @@ namespace System.Xml
 {
     public enum XmlOutputMethod
     {
-        Xml = 0,    // Use Xml 1.0 rules to serialize
-        Html = 1,    // Use Html rules specified by Xslt specification to serialize
-        Text = 2,    // Only serialize text blocks
-        AutoDetect = 3,    // Choose between Xml and Html output methods at runtime (using Xslt rules to do so)
+        Xml = 0, // Use Xml 1.0 rules to serialize
+        Html = 1, // Use Html rules specified by Xslt specification to serialize
+        Text = 2, // Only serialize text blocks
+        AutoDetect = 3, // Choose between Xml and Html output methods at runtime (using Xslt rules to do so)
     }
 
     /// <summary>
@@ -43,7 +43,8 @@ namespace System.Xml
     // XmlWriterSettings class specifies basic features of an XmlWriter.
     public sealed class XmlWriterSettings
     {
-        internal static readonly XmlWriterSettings s_defaultWriterSettings = new XmlWriterSettings() { ReadOnly = true };
+        internal static readonly XmlWriterSettings s_defaultWriterSettings =
+            new XmlWriterSettings() { ReadOnly = true };
 
         //
         // Fields
@@ -96,10 +97,7 @@ namespace System.Xml
 
         public bool Async
         {
-            get
-            {
-                return _useAsync;
-            }
+            get { return _useAsync; }
             set
             {
                 CheckReadOnly(nameof(Async));
@@ -110,10 +108,7 @@ namespace System.Xml
         // Text
         public Encoding Encoding
         {
-            get
-            {
-                return _encoding;
-            }
+            get { return _encoding; }
             [MemberNotNull(nameof(_encoding))]
             set
             {
@@ -125,10 +120,7 @@ namespace System.Xml
         // True if an xml declaration should *not* be written.
         public bool OmitXmlDeclaration
         {
-            get
-            {
-                return _omitXmlDecl;
-            }
+            get { return _omitXmlDecl; }
             set
             {
                 CheckReadOnly(nameof(OmitXmlDeclaration));
@@ -139,10 +131,7 @@ namespace System.Xml
         // See NewLineHandling enum for details.
         public NewLineHandling NewLineHandling
         {
-            get
-            {
-                return _newLineHandling;
-            }
+            get { return _newLineHandling; }
             set
             {
                 CheckReadOnly(nameof(NewLineHandling));
@@ -159,10 +148,7 @@ namespace System.Xml
         // Line terminator string. By default, this is a carriage return followed by a line feed ("\r\n").
         public string NewLineChars
         {
-            get
-            {
-                return _newLineChars;
-            }
+            get { return _newLineChars; }
             [MemberNotNull(nameof(_newLineChars))]
             set
             {
@@ -180,10 +166,7 @@ namespace System.Xml
         // True if output should be indented using rules that are appropriate to the output rules (i.e. Xml, Html, etc).
         public bool Indent
         {
-            get
-            {
-                return _indent == TriState.True;
-            }
+            get { return _indent == TriState.True; }
             set
             {
                 CheckReadOnly(nameof(Indent));
@@ -194,10 +177,7 @@ namespace System.Xml
         // Characters to use when indenting. This is usually tab or some spaces, but can be anything.
         public string IndentChars
         {
-            get
-            {
-                return _indentChars;
-            }
+            get { return _indentChars; }
             [MemberNotNull(nameof(_indentChars))]
             set
             {
@@ -215,10 +195,7 @@ namespace System.Xml
         // Whether or not indent attributes on new lines.
         public bool NewLineOnAttributes
         {
-            get
-            {
-                return _newLineOnAttributes;
-            }
+            get { return _newLineOnAttributes; }
             set
             {
                 CheckReadOnly(nameof(NewLineOnAttributes));
@@ -229,10 +206,7 @@ namespace System.Xml
         // Whether or not the XmlWriter should close the underlying stream or TextWriter when Close is called on the XmlWriter.
         public bool CloseOutput
         {
-            get
-            {
-                return _closeOutput;
-            }
+            get { return _closeOutput; }
             set
             {
                 CheckReadOnly(nameof(CloseOutput));
@@ -240,15 +214,11 @@ namespace System.Xml
             }
         }
 
-
         // Conformance
         // See ConformanceLevel enum for details.
         public ConformanceLevel ConformanceLevel
         {
-            get
-            {
-                return _conformanceLevel;
-            }
+            get { return _conformanceLevel; }
             set
             {
                 CheckReadOnly(nameof(ConformanceLevel));
@@ -264,10 +234,7 @@ namespace System.Xml
         // Whether or not to check content characters that they are valid XML characters.
         public bool CheckCharacters
         {
-            get
-            {
-                return _checkCharacters;
-            }
+            get { return _checkCharacters; }
             set
             {
                 CheckReadOnly(nameof(CheckCharacters));
@@ -278,10 +245,7 @@ namespace System.Xml
         // Whether or not to remove duplicate namespace declarations
         public NamespaceHandling NamespaceHandling
         {
-            get
-            {
-                return _namespaceHandling;
-            }
+            get { return _namespaceHandling; }
             set
             {
                 CheckReadOnly(nameof(NamespaceHandling));
@@ -296,10 +260,7 @@ namespace System.Xml
         //Whether or not to auto complete end-element when close/dispose
         public bool WriteEndDocumentOnClose
         {
-            get
-            {
-                return _writeEndDocumentOnClose;
-            }
+            get { return _writeEndDocumentOnClose; }
             set
             {
                 CheckReadOnly(nameof(WriteEndDocumentOnClose));
@@ -310,14 +271,8 @@ namespace System.Xml
         // Specifies the method (Html, Xml, etc.) that will be used to serialize the result tree.
         public XmlOutputMethod OutputMethod
         {
-            get
-            {
-                return _outputMethod;
-            }
-            internal set
-            {
-                _outputMethod = value;
-            }
+            get { return _outputMethod; }
+            internal set { _outputMethod = value; }
         }
 
         //
@@ -358,10 +313,7 @@ namespace System.Xml
         // Used in Html writer to disable encoding of uri attributes
         public bool DoNotEscapeUriAttributes
         {
-            get
-            {
-                return _doNotEscapeUriAttributes;
-            }
+            get { return _doNotEscapeUriAttributes; }
             set
             {
                 CheckReadOnly(nameof(DoNotEscapeUriAttributes));
@@ -371,10 +323,7 @@ namespace System.Xml
 
         internal bool MergeCDataSections
         {
-            get
-            {
-                return _mergeCDataSections;
-            }
+            get { return _mergeCDataSections; }
             set
             {
                 CheckReadOnly(nameof(MergeCDataSections));
@@ -385,10 +334,7 @@ namespace System.Xml
         // Used in Html writer when writing Meta element.  Null denotes the default media type.
         internal string? MediaType
         {
-            get
-            {
-                return _mediaType;
-            }
+            get { return _mediaType; }
             set
             {
                 CheckReadOnly(nameof(MediaType));
@@ -399,10 +345,7 @@ namespace System.Xml
         // System Id in doc-type declaration.  Null denotes the absence of the system Id.
         internal string? DocTypeSystem
         {
-            get
-            {
-                return _docTypeSystem;
-            }
+            get { return _docTypeSystem; }
             set
             {
                 CheckReadOnly(nameof(DocTypeSystem));
@@ -413,10 +356,7 @@ namespace System.Xml
         // Public Id in doc-type declaration.  Null denotes the absence of the public Id.
         internal string? DocTypePublic
         {
-            get
-            {
-                return _docTypePublic;
-            }
+            get { return _docTypePublic; }
             set
             {
                 CheckReadOnly(nameof(DocTypePublic));
@@ -427,10 +367,7 @@ namespace System.Xml
         // Yes for standalone="yes", No for standalone="no", and Omit for no standalone.
         internal XmlStandalone Standalone
         {
-            get
-            {
-                return _standalone;
-            }
+            get { return _standalone; }
             set
             {
                 CheckReadOnly(nameof(Standalone));
@@ -441,10 +378,7 @@ namespace System.Xml
         // True if an xml declaration should automatically be output (no need to call WriteStartDocument)
         internal bool AutoXmlDeclaration
         {
-            get
-            {
-                return _autoXmlDecl;
-            }
+            get { return _autoXmlDecl; }
             set
             {
                 CheckReadOnly(nameof(AutoXmlDeclaration));
@@ -456,22 +390,18 @@ namespace System.Xml
         // method will default to Indent=true for Html and Indent=false for Xml.
         internal TriState IndentInternal
         {
-            get
-            {
-                return _indent;
-            }
-            set
-            {
-                _indent = value;
-            }
+            get { return _indent; }
+            set { _indent = value; }
         }
 
         internal bool IsQuerySpecific
         {
             get
             {
-                return _cdataSections.Count != 0 || _docTypePublic != null ||
-                       _docTypeSystem != null || _standalone == XmlStandalone.Yes;
+                return _cdataSections.Count != 0
+                    || _docTypePublic != null
+                    || _docTypeSystem != null
+                    || _standalone == XmlStandalone.Yes;
             }
         }
 
@@ -494,7 +424,14 @@ namespace System.Xml
             try
             {
                 // open file stream
-                fs = new FileStream(outputFileName, FileMode.Create, FileAccess.Write, FileShare.Read, 0x1000, _useAsync);
+                fs = new FileStream(
+                    outputFileName,
+                    FileMode.Create,
+                    FileAccess.Write,
+                    FileShare.Read,
+                    0x1000,
+                    _useAsync
+                );
 
                 // create writer
                 return newSettings.CreateWriter(fs);
@@ -688,24 +625,20 @@ namespace System.Xml
             return AddConformanceWrapper(output);
         }
 
-
         internal bool ReadOnly
         {
-            get
-            {
-                return _isReadOnly;
-            }
-            set
-            {
-                _isReadOnly = value;
-            }
+            get { return _isReadOnly; }
+            set { _isReadOnly = value; }
         }
 
         private void CheckReadOnly(string propertyName)
         {
             if (_isReadOnly)
             {
-                throw new XmlException(SR.Xml_ReadOnlyProperty, this.GetType().Name + '.' + propertyName);
+                throw new XmlException(
+                    SR.Xml_ReadOnlyProperty,
+                    this.GetType().Name + '.' + propertyName
+                );
             }
         }
 
@@ -780,9 +713,10 @@ namespace System.Xml
                     checkNames = confLevel == ConformanceLevel.Auto;
                     needWrap = true;
                 }
-                if (_newLineHandling == NewLineHandling.Replace &&
-                     baseWriterSettings.NewLineHandling == NewLineHandling.None)
-                {
+                if (
+                    _newLineHandling == NewLineHandling.Replace
+                    && baseWriterSettings.NewLineHandling == NewLineHandling.None
+                ) {
                     replaceNewLines = true;
                     needWrap = true;
                 }
@@ -798,12 +732,20 @@ namespace System.Xml
                 }
                 if (checkValues || replaceNewLines)
                 {
-                    writer = new XmlCharCheckingWriter(writer, checkValues, checkNames, replaceNewLines, this.NewLineChars);
+                    writer = new XmlCharCheckingWriter(
+                        writer,
+                        checkValues,
+                        checkNames,
+                        replaceNewLines,
+                        this.NewLineChars
+                    );
                 }
             }
 
-            if (this.IsQuerySpecific && (baseWriterSettings == null || !baseWriterSettings.IsQuerySpecific))
-            {
+            if (
+                this.IsQuerySpecific
+                && (baseWriterSettings == null || !baseWriterSettings.IsQuerySpecific)
+            ) {
                 // Create QueryOutputWriterV1 if CData sections or DocType need to be tracked
                 writer = new QueryOutputWriterV1(writer, this);
             }
@@ -823,7 +765,10 @@ namespace System.Xml
             // Encoding encoding;
             // NOTE: For Encoding we serialize only CodePage, and ignore EncoderFallback/DecoderFallback.
             // It suffices for XSLT purposes, but not in the general case.
-            Debug.Assert(Encoding.Equals(Encoding.GetEncoding(Encoding.CodePage)), "Cannot serialize encoding correctly");
+            Debug.Assert(
+                Encoding.Equals(Encoding.GetEncoding(Encoding.CodePage)),
+                "Cannot serialize encoding correctly"
+            );
             writer.Write(Encoding.CodePage);
             // bool omitXmlDecl;
             writer.Write(OmitXmlDeclaration);
@@ -882,7 +827,10 @@ namespace System.Xml
             // string newLineChars;
             NewLineChars = reader.ReadStringQ();
             // TriState indent;
-            IndentInternal = (TriState)reader.ReadSByte((sbyte)TriState.Unknown, (sbyte)TriState.True);
+            IndentInternal = (TriState)reader.ReadSByte(
+                (sbyte)TriState.Unknown,
+                (sbyte)TriState.True
+            );
             // string indentChars;
             IndentChars = reader.ReadStringQ();
             // bool newLineOnAttributes;
@@ -890,7 +838,10 @@ namespace System.Xml
             // bool closeOutput;
             CloseOutput = reader.ReadBoolean();
             // ConformanceLevel conformanceLevel;
-            ConformanceLevel = (ConformanceLevel)reader.ReadSByte(0, (sbyte)ConformanceLevel.Document);
+            ConformanceLevel = (ConformanceLevel)reader.ReadSByte(
+                0,
+                (sbyte)ConformanceLevel.Document
+            );
             // bool checkCharacters;
             CheckCharacters = reader.ReadBoolean();
             // XmlOutputMethod outputMethod;

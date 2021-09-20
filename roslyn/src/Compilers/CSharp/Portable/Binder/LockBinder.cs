@@ -17,22 +17,20 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private readonly LockStatementSyntax _syntax;
 
-        public LockBinder(Binder enclosing, LockStatementSyntax syntax)
-            : base(enclosing)
+        public LockBinder(Binder enclosing, LockStatementSyntax syntax) : base(enclosing)
         {
             _syntax = syntax;
         }
 
         protected override ExpressionSyntax TargetExpressionSyntax
         {
-            get
-            {
-                return _syntax.Expression;
-            }
+            get { return _syntax.Expression; }
         }
 
-        internal override BoundStatement BindLockStatementParts(BindingDiagnosticBag diagnostics, Binder originalBinder)
-        {
+        internal override BoundStatement BindLockStatementParts(
+            BindingDiagnosticBag diagnostics,
+            Binder originalBinder
+        ) {
             // Allow method groups during binding and then rule them out when we check that the expression has
             // a reference type.
             ExpressionSyntax exprSyntax = TargetExpressionSyntax;
@@ -49,13 +47,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                     hasErrors = true;
                 }
             }
-            else if (!exprType.IsReferenceType && (exprType.IsValueType || Compilation.FeatureStrictEnabled))
-            {
+            else if (
+                !exprType.IsReferenceType
+                && (exprType.IsValueType || Compilation.FeatureStrictEnabled)
+            ) {
                 Error(diagnostics, ErrorCode.ERR_LockNeedsReference, exprSyntax, exprType);
                 hasErrors = true;
             }
 
-            BoundStatement stmt = originalBinder.BindPossibleEmbeddedStatement(_syntax.Statement, diagnostics);
+            BoundStatement stmt = originalBinder.BindPossibleEmbeddedStatement(
+                _syntax.Statement,
+                diagnostics
+            );
             Debug.Assert(this.Locals.IsDefaultOrEmpty);
             return new BoundLockStatement(_syntax, expr, stmt, hasErrors);
         }

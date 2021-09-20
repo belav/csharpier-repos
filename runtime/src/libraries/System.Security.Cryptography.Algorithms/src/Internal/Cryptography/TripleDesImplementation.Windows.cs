@@ -16,11 +16,23 @@ namespace Internal.Cryptography
             int blockSize,
             int paddingSize,
             int feedbackSize,
-            bool encrypting)
-        {
-            SafeAlgorithmHandle algorithm = TripleDesBCryptModes.GetSharedHandle(cipherMode, feedbackSize);
+            bool encrypting
+        ) {
+            SafeAlgorithmHandle algorithm = TripleDesBCryptModes.GetSharedHandle(
+                cipherMode,
+                feedbackSize
+            );
 
-            BasicSymmetricCipher cipher = new BasicSymmetricCipherBCrypt(algorithm, cipherMode, blockSize, paddingSize, key, false, iv, encrypting);
+            BasicSymmetricCipher cipher = new BasicSymmetricCipherBCrypt(
+                algorithm,
+                cipherMode,
+                blockSize,
+                paddingSize,
+                key,
+                false,
+                iv,
+                encrypting
+            );
             return UniversalCryptoTransform.Create(paddingMode, cipher, encrypting);
         }
     }

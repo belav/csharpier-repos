@@ -16,7 +16,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
     {
         private static readonly TimeSpan RequestHeadersTimeout = TimeSpan.FromSeconds(10);
         private static readonly TimeSpan LongDelay = TimeSpan.FromSeconds(30);
-        private static readonly TimeSpan ShortDelay = TimeSpan.FromSeconds(LongDelay.TotalSeconds / 10);
+        private static readonly TimeSpan ShortDelay = TimeSpan.FromSeconds(
+            LongDelay.TotalSeconds / 10
+        );
 
         [Theory]
         [InlineData("Host:\r\n")]
@@ -33,12 +35,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 {
                     await connection.TransportConnection.WaitForReadTask;
 
-                    await connection.Send(
-                        "GET / HTTP/1.1",
-                        headers);
+                    await connection.Send("GET / HTTP/1.1", headers);
 
                     // Min amount of time between requests that triggers a request headers timeout.
-                    testContext.MockSystemClock.UtcNow += RequestHeadersTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1);
+                    testContext.MockSystemClock.UtcNow +=
+                        RequestHeadersTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1);
                     heartbeatManager.OnHeartbeat(testContext.SystemClock.UtcNow);
 
                     await ReceiveTimeoutResponse(connection, testContext);
@@ -58,19 +59,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 {
                     await connection.TransportConnection.WaitForReadTask;
 
-                    await connection.Send(
-                        "POST / HTTP/1.1",
-                        "Host:",
-                        "Content-Length: 1",
-                        "",
-                        "");
+                    await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 1", "", "");
 
                     // Min amount of time between requests that triggers a request headers timeout.
-                    testContext.MockSystemClock.UtcNow += RequestHeadersTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1);
+                    testContext.MockSystemClock.UtcNow +=
+                        RequestHeadersTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1);
                     heartbeatManager.OnHeartbeat(testContext.SystemClock.UtcNow);
 
-                    await connection.Send(
-                        "a");
+                    await connection.Send("a");
 
                     await ReceiveResponse(connection, testContext);
                 }
@@ -94,7 +90,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                     await connection.Send(requestLine);
 
                     // Min amount of time between requests that triggers a request headers timeout.
-                    testContext.MockSystemClock.UtcNow += RequestHeadersTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1);
+                    testContext.MockSystemClock.UtcNow +=
+                        RequestHeadersTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1);
                     heartbeatManager.OnHeartbeat(testContext.SystemClock.UtcNow);
 
                     await ReceiveTimeoutResponse(connection, testContext);
@@ -139,15 +136,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             context.ServerOptions.Limits.RequestHeadersTimeout = RequestHeadersTimeout;
             context.ServerOptions.Limits.MinRequestBodyDataRate = null;
 
-            return new TestServer(async httpContext =>
-            {
-                await httpContext.Request.Body.ReadAsync(new byte[1], 0, 1);
-                await httpContext.Response.WriteAsync("hello, world");
-            }, context);
+            return new TestServer(
+                async httpContext =>
+                {
+                    await httpContext.Request.Body.ReadAsync(new byte[1], 0, 1);
+                    await httpContext.Response.WriteAsync("hello, world");
+                },
+                context
+            );
         }
 
-        private async Task ReceiveResponse(InMemoryConnection connection, TestServiceContext testContext)
-        {
+        private async Task ReceiveResponse(
+            InMemoryConnection connection,
+            TestServiceContext testContext
+        ) {
             await connection.Receive(
                 "HTTP/1.1 200 OK",
                 $"Date: {testContext.DateHeaderValue}",
@@ -157,18 +159,22 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                 "hello, world",
                 "0",
                 "",
-                "");
+                ""
+            );
         }
 
-        private async Task ReceiveTimeoutResponse(InMemoryConnection connection, TestServiceContext testContext)
-        {
+        private async Task ReceiveTimeoutResponse(
+            InMemoryConnection connection,
+            TestServiceContext testContext
+        ) {
             await connection.Receive(
                 "HTTP/1.1 408 Request Timeout",
                 "Connection: close",
                 $"Date: {testContext.DateHeaderValue}",
                 "Content-Length: 0",
                 "",
-                "");
+                ""
+            );
         }
     }
 }

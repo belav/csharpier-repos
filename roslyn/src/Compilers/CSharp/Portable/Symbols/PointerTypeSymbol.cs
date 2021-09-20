@@ -39,26 +39,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override bool IsStatic
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsAbstract
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsSealed
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -66,10 +57,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public TypeWithAnnotations PointedAtTypeWithAnnotations
         {
-            get
-            {
-                return _pointedAtType;
-            }
+            get { return _pointedAtType; }
         }
 
         /// <summary>
@@ -86,44 +74,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(ConsList<TypeSymbol> basesBeingResolved)
-        {
+        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
+            ConsList<TypeSymbol> basesBeingResolved
+        ) {
             // Pointers do not support boxing, so they really have no interfaces
             return ImmutableArray<NamedTypeSymbol>.Empty;
         }
 
         public override bool IsReferenceType
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsValueType
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
-        internal sealed override ManagedKind GetManagedKind(ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo) => ManagedKind.Unmanaged;
+        internal sealed override ManagedKind GetManagedKind(
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        ) => ManagedKind.Unmanaged;
 
         public sealed override bool IsRefLikeType
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public sealed override bool IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         internal sealed override ObsoleteAttributeData ObsoleteAttributeData
@@ -158,46 +137,33 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override SymbolKind Kind
         {
-            get
-            {
-                return SymbolKind.PointerType;
-            }
+            get { return SymbolKind.PointerType; }
         }
 
         public override TypeKind TypeKind
         {
-            get
-            {
-                return TypeKind.Pointer;
-            }
+            get { return TypeKind.Pointer; }
         }
 
         public override Symbol ContainingSymbol
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public override ImmutableArray<Location> Locations
         {
-            get
-            {
-                return ImmutableArray<Location>.Empty;
-            }
+            get { return ImmutableArray<Location>.Empty; }
         }
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
-            get
-            {
-                return ImmutableArray<SyntaxReference>.Empty;
-            }
+            get { return ImmutableArray<SyntaxReference>.Empty; }
         }
 
-        internal override TResult Accept<TArgument, TResult>(CSharpSymbolVisitor<TArgument, TResult> visitor, TArgument argument)
-        {
+        internal override TResult Accept<TArgument, TResult>(
+            CSharpSymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        ) {
             return visitor.VisitPointerType(this, argument);
         }
 
@@ -214,7 +180,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public override int GetHashCode()
         {
             // We don't want to blow the stack if we have a type like T***************...***,
-            // so we do not recurse until we have a non-array. 
+            // so we do not recurse until we have a non-array.
 
             int indirections = 0;
             TypeSymbol current = this;
@@ -252,13 +218,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             PointedAtTypeWithAnnotations.AddNullableTransforms(transforms);
         }
 
-        internal override bool ApplyNullableTransforms(byte defaultTransformFlag, ImmutableArray<byte> transforms, ref int position, out TypeSymbol result)
-        {
+        internal override bool ApplyNullableTransforms(
+            byte defaultTransformFlag,
+            ImmutableArray<byte> transforms,
+            ref int position,
+            out TypeSymbol result
+        ) {
             TypeWithAnnotations oldPointedAtType = PointedAtTypeWithAnnotations;
             TypeWithAnnotations newPointedAtType;
 
-            if (!oldPointedAtType.ApplyNullableTransforms(defaultTransformFlag, transforms, ref position, out newPointedAtType))
-            {
+            if (
+                !oldPointedAtType.ApplyNullableTransforms(
+                    defaultTransformFlag,
+                    transforms,
+                    ref position,
+                    out newPointedAtType
+                )
+            ) {
                 result = this;
                 return false;
             }
@@ -267,21 +243,33 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return true;
         }
 
-        internal override TypeSymbol SetNullabilityForReferenceTypes(Func<TypeWithAnnotations, TypeWithAnnotations> transform)
-        {
+        internal override TypeSymbol SetNullabilityForReferenceTypes(
+            Func<TypeWithAnnotations, TypeWithAnnotations> transform
+        ) {
             return WithPointedAtType(transform(PointedAtTypeWithAnnotations));
         }
 
         internal override TypeSymbol MergeEquivalentTypes(TypeSymbol other, VarianceKind variance)
         {
-            Debug.Assert(this.Equals(other, TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes));
-            TypeWithAnnotations pointedAtType = PointedAtTypeWithAnnotations.MergeEquivalentTypes(((PointerTypeSymbol)other).PointedAtTypeWithAnnotations, VarianceKind.None);
+            Debug.Assert(
+                this.Equals(
+                    other,
+                    TypeCompareKind.IgnoreDynamicAndTupleNames
+                        | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                )
+            );
+            TypeWithAnnotations pointedAtType = PointedAtTypeWithAnnotations.MergeEquivalentTypes(
+                ((PointerTypeSymbol)other).PointedAtTypeWithAnnotations,
+                VarianceKind.None
+            );
             return WithPointedAtType(pointedAtType);
         }
 
         internal PointerTypeSymbol WithPointedAtType(TypeWithAnnotations newPointedAtType)
         {
-            return PointedAtTypeWithAnnotations.IsSameAs(newPointedAtType) ? this : new PointerTypeSymbol(newPointedAtType);
+            return PointedAtTypeWithAnnotations.IsSameAs(newPointedAtType)
+                ? this
+                : new PointerTypeSymbol(newPointedAtType);
         }
 
         internal override UseSiteInfo<AssemblySymbol> GetUseSiteInfo()
@@ -289,13 +277,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             UseSiteInfo<AssemblySymbol> result = default;
 
             // Check type, custom modifiers
-            DeriveUseSiteInfoFromType(ref result, this.PointedAtTypeWithAnnotations, AllowedRequiredModifierType.None);
+            DeriveUseSiteInfoFromType(
+                ref result,
+                this.PointedAtTypeWithAnnotations,
+                AllowedRequiredModifierType.None
+            );
             return result;
         }
 
-        internal override bool GetUnificationUseSiteDiagnosticRecursive(ref DiagnosticInfo result, Symbol owner, ref HashSet<TypeSymbol> checkedTypes)
-        {
-            return this.PointedAtTypeWithAnnotations.GetUnificationUseSiteDiagnosticRecursive(ref result, owner, ref checkedTypes);
+        internal override bool GetUnificationUseSiteDiagnosticRecursive(
+            ref DiagnosticInfo result,
+            Symbol owner,
+            ref HashSet<TypeSymbol> checkedTypes
+        ) {
+            return this.PointedAtTypeWithAnnotations.GetUnificationUseSiteDiagnosticRecursive(
+                ref result,
+                owner,
+                ref checkedTypes
+            );
         }
 
         protected override ISymbol CreateISymbol()
@@ -303,8 +302,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return new PublicModel.PointerTypeSymbol(this, DefaultNullableAnnotation);
         }
 
-        protected override ITypeSymbol CreateITypeSymbol(CodeAnalysis.NullableAnnotation nullableAnnotation)
-        {
+        protected override ITypeSymbol CreateITypeSymbol(
+            CodeAnalysis.NullableAnnotation nullableAnnotation
+        ) {
             Debug.Assert(nullableAnnotation != DefaultNullableAnnotation);
             return new PublicModel.PointerTypeSymbol(this, nullableAnnotation);
         }

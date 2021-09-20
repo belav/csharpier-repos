@@ -37,15 +37,20 @@ namespace Microsoft.AspNetCore.Localization
         /// <param name="options">The <see cref="RequestLocalizationOptions"/> representing the options for the
         /// <param name="loggerFactory">The <see cref="ILoggerFactory"/> used for logging.</param>
         /// <see cref="RequestLocalizationMiddleware"/>.</param>
-        public RequestLocalizationMiddleware(RequestDelegate next, IOptions<RequestLocalizationOptions> options, ILoggerFactory loggerFactory)
-        {
+        public RequestLocalizationMiddleware(
+            RequestDelegate next,
+            IOptions<RequestLocalizationOptions> options,
+            ILoggerFactory loggerFactory
+        ) {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
             }
 
             _next = next ?? throw new ArgumentNullException(nameof(next));
-            _logger = loggerFactory?.CreateLogger<RequestLocalizationMiddleware>() ?? throw new ArgumentNullException(nameof(loggerFactory));
+            _logger =
+                loggerFactory?.CreateLogger<RequestLocalizationMiddleware>()
+                ?? throw new ArgumentNullException(nameof(loggerFactory));
             _options = options.Value;
         }
 
@@ -69,7 +74,9 @@ namespace Microsoft.AspNetCore.Localization
             {
                 foreach (var provider in _options.RequestCultureProviders)
                 {
-                    var providerResultCulture = await provider.DetermineProviderCultureResult(context);
+                    var providerResultCulture = await provider.DetermineProviderCultureResult(
+                        context
+                    );
                     if (providerResultCulture == null)
                     {
                         continue;
@@ -84,7 +91,8 @@ namespace Microsoft.AspNetCore.Localization
                         cultureInfo = GetCultureInfo(
                             cultures,
                             _options.SupportedCultures,
-                            _options.FallBackToParentCultures);
+                            _options.FallBackToParentCultures
+                        );
 
                         if (cultureInfo == null)
                         {
@@ -97,7 +105,8 @@ namespace Microsoft.AspNetCore.Localization
                         uiCultureInfo = GetCultureInfo(
                             uiCultures,
                             _options.SupportedUICultures,
-                            _options.FallBackToParentUICultures);
+                            _options.FallBackToParentUICultures
+                        );
 
                         if (uiCultureInfo == null)
                         {
@@ -120,13 +129,18 @@ namespace Microsoft.AspNetCore.Localization
                 }
             }
 
-            context.Features.Set<IRequestCultureFeature>(new RequestCultureFeature(requestCulture, winningProvider));
+            context.Features.Set<IRequestCultureFeature>(
+                new RequestCultureFeature(requestCulture, winningProvider)
+            );
 
             SetCurrentThreadCulture(requestCulture);
 
             if (_options.ApplyCurrentCultureToResponseHeaders)
             {
-                context.Response.Headers.Add(HeaderNames.ContentLanguage, requestCulture.UICulture.Name);
+                context.Response.Headers.Add(
+                    HeaderNames.ContentLanguage,
+                    requestCulture.UICulture.Name
+                );
             }
 
             await _next(context);
@@ -141,15 +155,20 @@ namespace Microsoft.AspNetCore.Localization
         private static CultureInfo? GetCultureInfo(
             IList<StringSegment> cultureNames,
             IList<CultureInfo> supportedCultures,
-            bool fallbackToParentCultures)
-        {
+            bool fallbackToParentCultures
+        ) {
             foreach (var cultureName in cultureNames)
             {
                 // Allow empty string values as they map to InvariantCulture, whereas null culture values will throw in
                 // the CultureInfo ctor
                 if (cultureName != null)
                 {
-                    var cultureInfo = GetCultureInfo(cultureName, supportedCultures, fallbackToParentCultures, currentDepth: 0);
+                    var cultureInfo = GetCultureInfo(
+                        cultureName,
+                        supportedCultures,
+                        fallbackToParentCultures,
+                        currentDepth: 0
+                    );
                     if (cultureInfo != null)
                     {
                         return cultureInfo;
@@ -160,8 +179,10 @@ namespace Microsoft.AspNetCore.Localization
             return null;
         }
 
-        private static CultureInfo? GetCultureInfo(StringSegment name, IList<CultureInfo>? supportedCultures)
-        {
+        private static CultureInfo? GetCultureInfo(
+            StringSegment name,
+            IList<CultureInfo>? supportedCultures
+        ) {
             // Allow only known culture names as this API is called with input from users (HTTP requests) and
             // creating CultureInfo objects is expensive and we don't want it to throw either.
             if (name == null || supportedCultures == null)
@@ -169,7 +190,13 @@ namespace Microsoft.AspNetCore.Localization
                 return null;
             }
             var culture = supportedCultures.FirstOrDefault(
-                supportedCulture => StringSegment.Equals(supportedCulture.Name, name, StringComparison.OrdinalIgnoreCase));
+                supportedCulture =>
+                    StringSegment.Equals(
+                        supportedCulture.Name,
+                        name,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+            );
 
             if (culture == null)
             {
@@ -183,12 +210,15 @@ namespace Microsoft.AspNetCore.Localization
             StringSegment cultureName,
             IList<CultureInfo> supportedCultures,
             bool fallbackToParentCultures,
-            int currentDepth)
-        {
+            int currentDepth
+        ) {
             var culture = GetCultureInfo(cultureName, supportedCultures);
 
-            if (culture == null && fallbackToParentCultures && currentDepth < MaxCultureFallbackDepth)
-            {
+            if (
+                culture == null
+                && fallbackToParentCultures
+                && currentDepth < MaxCultureFallbackDepth
+            ) {
                 var lastIndexOfHyphen = cultureName.LastIndexOf('-');
 
                 if (lastIndexOfHyphen > 0)
@@ -196,7 +226,12 @@ namespace Microsoft.AspNetCore.Localization
                     // Trim the trailing section from the culture name, e.g. "fr-FR" becomes "fr"
                     var parentCultureName = cultureName.Subsegment(0, lastIndexOfHyphen);
 
-                    culture = GetCultureInfo(parentCultureName, supportedCultures, fallbackToParentCultures, currentDepth + 1);
+                    culture = GetCultureInfo(
+                        parentCultureName,
+                        supportedCultures,
+                        fallbackToParentCultures,
+                        currentDepth + 1
+                    );
                 }
             }
 

@@ -8,7 +8,12 @@ class Program
 {
     struct NotPromoted
     {
-        public int a, b, c, d, e, f;
+        public int a,
+            b,
+            c,
+            d,
+            e,
+            f;
     }
 
     class TypeWithStruct
@@ -19,9 +24,7 @@ class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void Escape(bool b)
-    {
-    }
+    static void Escape(bool b) { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static NotPromoted Test(TypeWithStruct obj)

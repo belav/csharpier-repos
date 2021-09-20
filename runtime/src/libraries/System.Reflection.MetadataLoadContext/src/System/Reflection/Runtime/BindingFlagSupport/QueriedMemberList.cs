@@ -33,8 +33,13 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             ImmediateTypeOnly = immediateTypeOnly;
         }
 
-        private QueriedMemberList(int totalCount, int declaredOnlyCount, M[] members, BindingFlags[] allFlagsThatMustMatch, RuntimeTypeInfo? typeThatBlockedBrowsing)
-        {
+        private QueriedMemberList(
+            int totalCount,
+            int declaredOnlyCount,
+            M[] members,
+            BindingFlags[] allFlagsThatMustMatch,
+            RuntimeTypeInfo? typeThatBlockedBrowsing
+        ) {
             _totalCount = totalCount;
             _declaredOnlyCount = declaredOnlyCount;
             _members = members;
@@ -50,7 +55,9 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             get
             {
                 if (_typeThatBlockedBrowsing != null)
-                    throw ReflectionCoreExecution.ExecutionDomain.CreateMissingMetadataException(_typeThatBlockedBrowsing);
+                    throw ReflectionCoreExecution.ExecutionDomain.CreateMissingMetadataException(
+                        _typeThatBlockedBrowsing
+                    );
                 return _totalCount;
             }
         }
@@ -99,14 +106,24 @@ namespace System.Reflection.Runtime.BindingFlagSupport
                 }
             }
 
-            return new QueriedMemberList<M>(newTotalCount, newDeclaredOnlyCount, newMembers, newAllFlagsThatMustMatch, _typeThatBlockedBrowsing);
+            return new QueriedMemberList<M>(
+                newTotalCount,
+                newDeclaredOnlyCount,
+                newMembers,
+                newAllFlagsThatMustMatch,
+                _typeThatBlockedBrowsing
+            );
         }
 
         //
         // Filter by name and visibility from the ReflectedType.
         //
-        public static QueriedMemberList<M> Create(RuntimeTypeInfo type, string? filter, bool ignoreCase, bool immediateTypeOnly)
-        {
+        public static QueriedMemberList<M> Create(
+            RuntimeTypeInfo type,
+            string? filter,
+            bool ignoreCase,
+            bool immediateTypeOnly
+        ) {
             RuntimeTypeInfo reflectedType = type;
 
             MemberPolicies<M> policies = MemberPolicies<M>.Default;
@@ -125,21 +142,42 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             {
                 int numCandidatesInDerivedTypes = queriedMembers._totalCount;
 
-                foreach (M member in policies.CoreGetDeclaredMembers(type, nameFilter, reflectedType))
-                {
-                    policies.GetMemberAttributes(member, out MethodAttributes visibility, out bool isStatic, out bool isVirtual, out bool isNewSlot);
+                foreach (
+                    M member in policies.CoreGetDeclaredMembers(type, nameFilter, reflectedType)
+                ) {
+                    policies.GetMemberAttributes(
+                        member,
+                        out MethodAttributes visibility,
+                        out bool isStatic,
+                        out bool isVirtual,
+                        out bool isNewSlot
+                    );
 
                     if (inBaseClass && visibility == MethodAttributes.Private)
                         continue;
 
-                    if (numCandidatesInDerivedTypes != 0 && policies.IsSuppressedByMoreDerivedMember(member, queriedMembers._members, startIndex: 0, endIndex: numCandidatesInDerivedTypes))
+                    if (
+                        numCandidatesInDerivedTypes != 0
+                        && policies.IsSuppressedByMoreDerivedMember(
+                            member,
+                            queriedMembers._members,
+                            startIndex: 0,
+                            endIndex: numCandidatesInDerivedTypes
+                        )
+                    )
                         continue;
 
                     BindingFlags allFlagsThatMustMatch = default;
-                    allFlagsThatMustMatch |= (isStatic ? BindingFlags.Static : BindingFlags.Instance);
+                    allFlagsThatMustMatch |= (
+                        isStatic ? BindingFlags.Static : BindingFlags.Instance
+                    );
                     if (isStatic && inBaseClass)
                         allFlagsThatMustMatch |= BindingFlags.FlattenHierarchy;
-                    allFlagsThatMustMatch |= ((visibility == MethodAttributes.Public) ? BindingFlags.Public : BindingFlags.NonPublic);
+                    allFlagsThatMustMatch |= (
+                        (visibility == MethodAttributes.Public)
+                            ? BindingFlags.Public
+                            : BindingFlags.NonPublic
+                    );
 
                     queriedMembers.Add(member, allFlagsThatMustMatch);
                 }
@@ -179,11 +217,25 @@ namespace System.Reflection.Runtime.BindingFlagSupport
 
         private void Add(M member, BindingFlags allFlagsThatMustMatch)
         {
-            const BindingFlags validBits = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.FlattenHierarchy;
+            const BindingFlags validBits =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.FlattenHierarchy;
             Debug.Assert((allFlagsThatMustMatch & ~validBits) == 0);
-            Debug.Assert(((allFlagsThatMustMatch & BindingFlags.Public) == 0) != ((allFlagsThatMustMatch & BindingFlags.NonPublic) == 0));
-            Debug.Assert(((allFlagsThatMustMatch & BindingFlags.Instance) == 0) != ((allFlagsThatMustMatch & BindingFlags.Static) == 0));
-            Debug.Assert((allFlagsThatMustMatch & BindingFlags.FlattenHierarchy) == 0 || (allFlagsThatMustMatch & BindingFlags.Static) != 0);
+            Debug.Assert(
+                ((allFlagsThatMustMatch & BindingFlags.Public) == 0)
+                    != ((allFlagsThatMustMatch & BindingFlags.NonPublic) == 0)
+            );
+            Debug.Assert(
+                ((allFlagsThatMustMatch & BindingFlags.Instance) == 0)
+                    != ((allFlagsThatMustMatch & BindingFlags.Static) == 0)
+            );
+            Debug.Assert(
+                (allFlagsThatMustMatch & BindingFlags.FlattenHierarchy) == 0
+                    || (allFlagsThatMustMatch & BindingFlags.Static) != 0
+            );
 
             int count = _totalCount;
             if (count == _members.Length)
@@ -199,7 +251,7 @@ namespace System.Reflection.Runtime.BindingFlagSupport
 
         private int _totalCount; // # of entries including members in base classes.
         private int _declaredOnlyCount; // # of entries for members only in the most derived class.
-        private M[] _members;  // Length is equal to or greater than _totalCount. Entries beyond _totalCount contain null or garbage and should be read.
+        private M[] _members; // Length is equal to or greater than _totalCount. Entries beyond _totalCount contain null or garbage and should be read.
         private BindingFlags[] _allFlagsThatMustMatch; // Length will be equal to _members.Length
         private RuntimeTypeInfo? _typeThatBlockedBrowsing; // If non-null, one of the base classes was missing metadata.
         private const int Grow = 64;

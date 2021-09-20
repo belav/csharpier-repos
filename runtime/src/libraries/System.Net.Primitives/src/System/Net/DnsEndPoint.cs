@@ -31,11 +31,15 @@ namespace System.Net
                 throw new ArgumentOutOfRangeException(nameof(port));
             }
 
-            if (addressFamily != AddressFamily.InterNetwork &&
-                addressFamily != AddressFamily.InterNetworkV6 &&
-                addressFamily != AddressFamily.Unspecified)
-            {
-                throw new ArgumentException(SR.net_sockets_invalid_optionValue_all, nameof(addressFamily));
+            if (
+                addressFamily != AddressFamily.InterNetwork
+                && addressFamily != AddressFamily.InterNetworkV6
+                && addressFamily != AddressFamily.Unspecified
+            ) {
+                throw new ArgumentException(
+                    SR.net_sockets_invalid_optionValue_all,
+                    nameof(addressFamily)
+                );
             }
 
             _host = host;
@@ -52,9 +56,11 @@ namespace System.Net
                 return false;
             }
 
-            return (_family == dnsComparand._family &&
-                    _port == dnsComparand._port &&
-                    _host == dnsComparand._host);
+            return (
+                _family == dnsComparand._family
+                && _port == dnsComparand._port
+                && _host == dnsComparand._host
+            );
         }
 
         public override int GetHashCode()
@@ -69,26 +75,17 @@ namespace System.Net
 
         public string Host
         {
-            get
-            {
-                return _host;
-            }
+            get { return _host; }
         }
 
         public override AddressFamily AddressFamily
         {
-            get
-            {
-                return _family;
-            }
+            get { return _family; }
         }
 
         public int Port
         {
-            get
-            {
-                return _port;
-            }
+            get { return _port; }
         }
     }
 }

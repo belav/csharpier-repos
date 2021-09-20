@@ -39,8 +39,10 @@ namespace Microsoft.AspNet.Facebook.ModelBinders
         /// <returns>
         /// The bound value.
         /// </returns>
-        public virtual object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
-        {
+        public virtual object BindModel(
+            ControllerContext controllerContext,
+            ModelBindingContext bindingContext
+        ) {
             HttpRequestBase request = controllerContext.HttpContext.Request;
             string originUrl = request.QueryString["originUrl"];
             string permissions = request.QueryString["permissions"];
@@ -49,23 +51,38 @@ namespace Microsoft.AspNet.Facebook.ModelBinders
             {
                 if (!originUrl.StartsWith(_config.AppUrl, StringComparison.OrdinalIgnoreCase))
                 {
-                    bindingContext.ModelState.AddModelError(bindingContext.ModelName,
-                        String.Format(CultureInfo.CurrentCulture, Resources.UrlCannotBeExternal, "originUrl", _config.AppUrl));
+                    bindingContext.ModelState.AddModelError(
+                        bindingContext.ModelName,
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.UrlCannotBeExternal,
+                            "originUrl",
+                            _config.AppUrl
+                        )
+                    );
                 }
             }
             else
             {
-                bindingContext.ModelState.AddModelError(bindingContext.ModelName,
-                    String.Format(CultureInfo.CurrentCulture, Resources.ParameterIsRequired, "originUrl"));
+                bindingContext.ModelState.AddModelError(
+                    bindingContext.ModelName,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.ParameterIsRequired,
+                        "originUrl"
+                    )
+                );
             }
 
             string redirectUrl = null;
-            string[] requiredPermissions = permissions != null ? permissions.Split(',') : new string[0];
+            string[] requiredPermissions =
+                permissions != null ? permissions.Split(',') : new string[0];
             if (bindingContext.ModelState.IsValid)
             {
                 FacebookClient client = _config.ClientProvider.CreateClient();
                 // Don't want to redirect to a permissioned URL, the action authorize filters take care of that.
-                redirectUrl = client.GetLoginUrl(originUrl, _config.AppId, String.Empty).AbsoluteUri;
+                redirectUrl =
+                    client.GetLoginUrl(originUrl, _config.AppId, String.Empty).AbsoluteUri;
             }
 
             return new FacebookRedirectContext

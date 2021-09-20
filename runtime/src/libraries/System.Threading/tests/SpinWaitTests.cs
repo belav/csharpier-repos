@@ -20,20 +20,23 @@ namespace System.Threading.Tests
         public static void RunSpinWaitTests_Negative()
         {
             //test SpinUntil
-            Assert.Throws<ArgumentNullException>(
-               () => SpinWait.SpinUntil(null));
+            Assert.Throws<ArgumentNullException>(() => SpinWait.SpinUntil(null));
             // Failure Case:  SpinUntil didn't throw ANE when null condition  passed
             Assert.Throws<ArgumentOutOfRangeException>(
-               () => SpinWait.SpinUntil(() => true, TimeSpan.MaxValue));
+                () => SpinWait.SpinUntil(() => true, TimeSpan.MaxValue)
+            );
             // Failure Case:  SpinUntil didn't throw AORE when milliseconds > int.Max passed
-            Assert.Throws<ArgumentOutOfRangeException>(
-               () => SpinWait.SpinUntil(() => true, -2));
+            Assert.Throws<ArgumentOutOfRangeException>(() => SpinWait.SpinUntil(() => true, -2));
             // Failure Case:  SpinUntil didn't throw AORE when milliseconds < -1 passed
 
-            Assert.False(SpinWait.SpinUntil(() => false, TimeSpan.FromMilliseconds(100)),
-               "RunSpinWaitTests:  SpinUntil returned true when the condition i always false!");
-            Assert.True(SpinWait.SpinUntil(() => true, 0),
-               "RunSpinWaitTests:  SpinUntil returned false when the condition i always true!");
+            Assert.False(
+                SpinWait.SpinUntil(() => false, TimeSpan.FromMilliseconds(100)),
+                "RunSpinWaitTests:  SpinUntil returned true when the condition i always false!"
+            );
+            Assert.True(
+                SpinWait.SpinUntil(() => true, 0),
+                "RunSpinWaitTests:  SpinUntil returned false when the condition i always true!"
+            );
         }
 
         [Fact]
@@ -41,8 +44,14 @@ namespace System.Threading.Tests
         {
             SpinWait spinner = new SpinWait();
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("sleep1Threshold", () => spinner.SpinOnce(-2));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("sleep1Threshold", () => spinner.SpinOnce(int.MinValue));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "sleep1Threshold",
+                () => spinner.SpinOnce(-2)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "sleep1Threshold",
+                () => spinner.SpinOnce(int.MinValue)
+            );
             Assert.Equal(0, spinner.Count);
 
             spinner.SpinOnce(sleep1Threshold: -1);

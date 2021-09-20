@@ -20,11 +20,7 @@ namespace Microsoft.Extensions.Options.Tests
             var sp = services.BuildServiceProvider();
 
             var validations = sp.GetService<IEnumerable<IValidateOptions<ComplexOptions>>>();
-            var options = new ComplexOptions
-            {
-                Boolean = true,
-                Integer = 13
-            };
+            var options = new ComplexOptions { Boolean = true, Integer = 13 };
             foreach (var v in validations)
             {
                 Assert.True(v.Validate(Options.DefaultName, options).Succeeded);
@@ -36,16 +32,12 @@ namespace Microsoft.Extensions.Options.Tests
         public void ValidationResultSkippedIfNameNotMatched()
         {
             var services = new ServiceCollection();
-            services.AddOptions<ComplexOptions>("Name")
-                .Validate(o => o.Boolean);
+            services.AddOptions<ComplexOptions>("Name").Validate(o => o.Boolean);
 
             var sp = services.BuildServiceProvider();
 
             var validations = sp.GetService<IEnumerable<IValidateOptions<ComplexOptions>>>();
-            var options = new ComplexOptions
-            {
-                Boolean = true,
-            };
+            var options = new ComplexOptions { Boolean = true, };
             foreach (var v in validations)
             {
                 Assert.True(v.Validate(Options.DefaultName, options).Skipped);
@@ -57,22 +49,17 @@ namespace Microsoft.Extensions.Options.Tests
         public void ValidationResultFailedOrSkipped()
         {
             var services = new ServiceCollection();
-            services.AddOptions<ComplexOptions>("Name")
-                .Validate(o => o.Boolean);
+            services.AddOptions<ComplexOptions>("Name").Validate(o => o.Boolean);
 
             var sp = services.BuildServiceProvider();
 
             var validations = sp.GetService<IEnumerable<IValidateOptions<ComplexOptions>>>();
-            var options = new ComplexOptions
-            {
-                Boolean = false,
-            };
+            var options = new ComplexOptions { Boolean = false, };
             foreach (var v in validations)
             {
                 Assert.True(v.Validate(Options.DefaultName, options).Skipped);
                 Assert.True(v.Validate("Name", options).Failed);
             }
         }
-
     }
 }

@@ -15,9 +15,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 {
     internal sealed class OverriddenByGraphQuery : IGraphQuery
     {
-        public async Task<GraphBuilder> GetGraphAsync(Solution solution, IGraphContext context, CancellationToken cancellationToken)
-        {
-            var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(solution, context.InputNodes, cancellationToken).ConfigureAwait(false);
+        public async Task<GraphBuilder> GetGraphAsync(
+            Solution solution,
+            IGraphContext context,
+            CancellationToken cancellationToken
+        ) {
+            var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
+                    solution,
+                    context.InputNodes,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             foreach (var node in context.InputNodes)
             {
@@ -28,7 +36,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     if (overriddenMember != null)
                     {
                         var symbolNode = await graphBuilder.AddNodeAsync(
-                            overriddenMember, relatedNode: node).ConfigureAwait(false);
+                                overriddenMember,
+                                relatedNode: node
+                            )
+                            .ConfigureAwait(false);
                         graphBuilder.AddLink(node, RoslynGraphCategories.Overrides, symbolNode);
                     }
                 }

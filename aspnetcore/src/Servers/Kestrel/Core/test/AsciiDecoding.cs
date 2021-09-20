@@ -17,8 +17,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         {
             var byteRange = Enumerable.Range(1, 127).Select(x => (byte)x);
 
-            var byteArray = byteRange
-                .Concat(byteRange)
+            var byteArray = byteRange.Concat(byteRange)
                 .Concat(byteRange)
                 .Concat(byteRange)
                 .Concat(byteRange)
@@ -62,7 +61,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     var byteRange = Enumerable.Range(1, length).Select(x => (byte)x).ToArray();
                     byteRange[position] = b;
 
-                    Assert.Throws<InvalidOperationException>(() => new Span<byte>(byteRange).GetAsciiStringNonNullCharacters());
+                    Assert.Throws<InvalidOperationException>(
+                        () => new Span<byte>(byteRange).GetAsciiStringNonNullCharacters()
+                    );
                 }
             }
         }
@@ -70,7 +71,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         private void LargeAllocationProducesCorrectResults()
         {
-            var byteRange = Enumerable.Range(0, 16384 + 64).Select(x => (byte)((x & 0x7f) | 0x01)).ToArray();
+            var byteRange = Enumerable.Range(0, 16384 + 64)
+                .Select(x => (byte)((x & 0x7f) | 0x01))
+                .ToArray();
             var expectedByteRange = byteRange.Concat(byteRange).ToArray();
 
             var span = new Span<byte>(expectedByteRange);
@@ -90,7 +93,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         private void DifferentLengthsAreNotEqual()
         {
-            var byteRange = Enumerable.Range(0, 4096).Select(x => (byte)((x & 0x7f) | 0x01)).ToArray();
+            var byteRange = Enumerable.Range(0, 4096)
+                .Select(x => (byte)((x & 0x7f) | 0x01))
+                .ToArray();
             var expectedByteRange = byteRange.Concat(byteRange).ToArray();
 
             for (var i = 1; i < byteRange.Length; i++)
@@ -101,12 +106,32 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 Assert.True(StringUtilities.BytesOrdinalEqualsStringAndAscii(s, span));
 
                 // One off end
-                Assert.False(StringUtilities.BytesOrdinalEqualsStringAndAscii(s, span.Slice(0, span.Length - 1)));
-                Assert.False(StringUtilities.BytesOrdinalEqualsStringAndAscii(s.Substring(0, s.Length - 1), span));
+                Assert.False(
+                    StringUtilities.BytesOrdinalEqualsStringAndAscii(
+                        s,
+                        span.Slice(0, span.Length - 1)
+                    )
+                );
+                Assert.False(
+                    StringUtilities.BytesOrdinalEqualsStringAndAscii(
+                        s.Substring(0, s.Length - 1),
+                        span
+                    )
+                );
 
                 // One off start
-                Assert.False(StringUtilities.BytesOrdinalEqualsStringAndAscii(s, span.Slice(1, span.Length - 1)));
-                Assert.False(StringUtilities.BytesOrdinalEqualsStringAndAscii(s.Substring(1, s.Length - 1), span));
+                Assert.False(
+                    StringUtilities.BytesOrdinalEqualsStringAndAscii(
+                        s,
+                        span.Slice(1, span.Length - 1)
+                    )
+                );
+                Assert.False(
+                    StringUtilities.BytesOrdinalEqualsStringAndAscii(
+                        s.Substring(1, s.Length - 1),
+                        span
+                    )
+                );
             }
         }
 
@@ -116,8 +141,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         {
             var byteRange = Enumerable.Range(1, 127).Select(x => (byte)x);
 
-            var byteArray = byteRange
-                .Concat(byteRange)
+            var byteArray = byteRange.Concat(byteRange)
                 .Concat(byteRange)
                 .Concat(byteRange)
                 .Concat(byteRange)

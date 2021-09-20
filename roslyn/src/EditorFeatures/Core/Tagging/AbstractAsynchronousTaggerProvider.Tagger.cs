@@ -57,8 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 IAsynchronousOperationListener listener,
                 IForegroundNotificationService notificationService,
                 TagSource tagSource,
-                ITextBuffer subjectBuffer)
-            {
+                ITextBuffer subjectBuffer
+            ) {
                 Contract.ThrowIfNull(subjectBuffer);
 
                 _subjectBuffer = subjectBuffer;
@@ -66,7 +66,12 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                 _batchChangeNotifier = new BatchChangeNotifier(
                     threadingContext,
-                    subjectBuffer, listener, notificationService, NotifyEditorNow, _cancellationTokenSource.Token);
+                    subjectBuffer,
+                    listener,
+                    notificationService,
+                    NotifyEditorNow,
+                    _cancellationTokenSource.Token
+                );
 
                 _tagSource = tagSource;
 
@@ -76,8 +81,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 _tagSource.Resumed += OnResumed;
 
                 // There is a many-to-one relationship between Taggers and TagSources.  i.e. one
-                // tag-source can be used by many Taggers.  As such, we may be a tagger that is 
-                // wrapping a tag-source that has already produced tags and had sent out the 
+                // tag-source can be used by many Taggers.  As such, we may be a tagger that is
+                // wrapping a tag-source that has already produced tags and had sent out the
                 // notifications about those tags.
                 //
                 // However, we still want to notify the code consuming us that we have tags to
@@ -100,12 +105,14 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                         if (tags != null)
                         {
                             var collection = new NormalizedSnapshotSpanCollection(
-                                tags.GetSpans(_subjectBuffer.CurrentSnapshot).Select(ts => ts.Span));
+                                tags.GetSpans(_subjectBuffer.CurrentSnapshot).Select(ts => ts.Span)
+                            );
                             this.NotifyEditorNow(collection);
                         }
                     },
                     listener.BeginAsyncOperation(GetType().FullName + ".ctor-ReportInitialTags"),
-                    _cancellationTokenSource.Token);
+                    _cancellationTokenSource.Token
+                );
             }
 
             public void Dispose()
@@ -119,15 +126,14 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 _tagSource.OnTaggerDisposed(this);
             }
 
-            private void OnPaused(object sender, EventArgs e)
-                => _batchChangeNotifier.Pause();
+            private void OnPaused(object sender, EventArgs e) => _batchChangeNotifier.Pause();
 
-            private void OnResumed(object sender, EventArgs e)
-                => _batchChangeNotifier.Resume();
+            private void OnResumed(object sender, EventArgs e) => _batchChangeNotifier.Resume();
 
             private void OnTagsChangedForBuffer(
-                ICollection<KeyValuePair<ITextBuffer, DiffResult>> changes, bool initialTags)
-            {
+                ICollection<KeyValuePair<ITextBuffer, DiffResult>> changes,
+                bool initialTags
+            ) {
                 _tagSource.AssertIsForeground();
 
                 // Note: This operation is uncancellable. Once we've been notified here, our cached tags
@@ -145,8 +151,18 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     // Now report them back to the UI on the main thread.
 
                     // We ask to update UI immediately for removed tags
-                    NotifyEditors(change.Value.Removed, initialTags ? TaggerDelay.NearImmediate : _tagSource.RemovedTagNotificationDelay);
-                    NotifyEditors(change.Value.Added, initialTags ? TaggerDelay.NearImmediate : _tagSource.AddedTagNotificationDelay);
+                    NotifyEditors(
+                        change.Value.Removed,
+                        initialTags
+                          ? TaggerDelay.NearImmediate
+                          : _tagSource.RemovedTagNotificationDelay
+                    );
+                    NotifyEditors(
+                        change.Value.Added,
+                        initialTags
+                          ? TaggerDelay.NearImmediate
+                          : _tagSource.AddedTagNotificationDelay
+                    );
                 }
             }
 
@@ -169,15 +185,23 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                 // if delay is anything more than that, we let notifier knows about the change after given delay
                 // event notification is only cancellable when disposing of the tagger.
-                _tagSource.RegisterNotification(() => _batchChangeNotifier.EnqueueChanges(changes), (int)delay.ComputeTimeDelay(_subjectBuffer).TotalMilliseconds, _cancellationTokenSource.Token);
+                _tagSource.RegisterNotification(
+                    () => _batchChangeNotifier.EnqueueChanges(changes),
+                    (int)delay.ComputeTimeDelay(_subjectBuffer).TotalMilliseconds,
+                    _cancellationTokenSource.Token
+                );
             }
 
             private void NotifyEditorNow(NormalizedSnapshotSpanCollection normalizedSpans)
             {
                 _batchChangeNotifier.AssertIsForeground();
 
-                using (Logger.LogBlock(FunctionId.Tagger_BatchChangeNotifier_NotifyEditorNow, CancellationToken.None))
-                {
+                using (
+                    Logger.LogBlock(
+                        FunctionId.Tagger_BatchChangeNotifier_NotifyEditorNow,
+                        CancellationToken.None
+                    )
+                ) {
                     if (normalizedSpans.Count == 0)
                     {
                         return;
@@ -199,8 +223,9 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 }
             }
 
-            internal static NormalizedSnapshotSpanCollection CoalesceSpans(NormalizedSnapshotSpanCollection normalizedSpans)
-            {
+            internal static NormalizedSnapshotSpanCollection CoalesceSpans(
+                NormalizedSnapshotSpanCollection normalizedSpans
+            ) {
                 var snapshot = normalizedSpans.First().Snapshot;
 
                 // Coalesce the spans if there are a lot of them.
@@ -208,25 +233,37 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 {
                     // Spans are normalized.  So to find the whole span we just go from the
                     // start of the first span to the end of the last span.
-                    normalizedSpans = new NormalizedSnapshotSpanCollection(snapshot.GetSpanFromBounds(
-                        normalizedSpans.First().Start,
-                        normalizedSpans.Last().End));
+                    normalizedSpans = new NormalizedSnapshotSpanCollection(
+                        snapshot.GetSpanFromBounds(
+                            normalizedSpans.First().Start,
+                            normalizedSpans.Last().End
+                        )
+                    );
                 }
 
                 return normalizedSpans;
             }
 
-            public IEnumerable<ITagSpan<TTag>> GetTags(NormalizedSnapshotSpanCollection requestedSpans)
-                => GetTagsWorker(requestedSpans, accurate: false, cancellationToken: CancellationToken.None);
+            public IEnumerable<ITagSpan<TTag>> GetTags(
+                NormalizedSnapshotSpanCollection requestedSpans
+            ) =>
+                GetTagsWorker(
+                    requestedSpans,
+                    accurate: false,
+                    cancellationToken: CancellationToken.None
+                );
 
-            public IEnumerable<ITagSpan<TTag>> GetAllTags(NormalizedSnapshotSpanCollection requestedSpans, CancellationToken cancellationToken)
-                => GetTagsWorker(requestedSpans, accurate: true, cancellationToken: cancellationToken);
+            public IEnumerable<ITagSpan<TTag>> GetAllTags(
+                NormalizedSnapshotSpanCollection requestedSpans,
+                CancellationToken cancellationToken
+            ) =>
+                GetTagsWorker(requestedSpans, accurate: true, cancellationToken: cancellationToken);
 
             private IEnumerable<ITagSpan<TTag>> GetTagsWorker(
                 NormalizedSnapshotSpanCollection requestedSpans,
                 bool accurate,
-                CancellationToken cancellationToken)
-            {
+                CancellationToken cancellationToken
+            ) {
                 if (requestedSpans.Count == 0)
                 {
                     return SpecializedCollections.EmptyEnumerable<ITagSpan<TTag>>();

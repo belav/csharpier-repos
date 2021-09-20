@@ -10,12 +10,13 @@ using Xunit;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class ComplexNavigationsODataQueryTests : ODataQueryTestBase, IClassFixture<ComplexNavigationsODataQueryTestFixture>
+    public class ComplexNavigationsODataQueryTests
+        : ODataQueryTestBase,
+          IClassFixture<ComplexNavigationsODataQueryTestFixture>
     {
-        public ComplexNavigationsODataQueryTests(ComplexNavigationsODataQueryTestFixture fixture)
-            : base(fixture)
-        {
-        }
+        public ComplexNavigationsODataQueryTests(
+            ComplexNavigationsODataQueryTestFixture fixture
+        ) : base(fixture) { }
 
         [ConditionalFact]
         public async Task Query_level_ones()

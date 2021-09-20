@@ -19,33 +19,51 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsImplementAbstractClass)]
-    public sealed class ImplementAbstractClassTests_ThroughMemberTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public sealed class ImplementAbstractClassTests_ThroughMemberTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public ImplementAbstractClassTests_ThroughMemberTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpImplementAbstractClassCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpImplementAbstractClassCodeFixProvider());
 
-        private OptionsCollection AllOptionsOff
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection AllOptionsOff =>
+            new OptionsCollection(GetLanguage())
             {
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedMethods, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedOperators, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedIndexers, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedOperators,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
             };
 
         internal Task TestAllOptionsOffAsync(
             string initialMarkup,
             string expectedMarkup,
             OptionsCollection options = null,
-            ParseOptions parseOptions = null)
-        {
+            ParseOptions parseOptions = null
+        ) {
             options ??= new OptionsCollection(GetLanguage());
             options.AddRange(AllOptionsOff);
 
@@ -54,14 +72,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 expectedMarkup,
                 index: 1,
                 options: options,
-                parseOptions: parseOptions);
+                parseOptions: parseOptions
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task FieldInBaseClassIsNotSuggested()
         {
             await TestExactActionSetOfferedAsync(
-@"abstract class Base
+                @"abstract class Base
 {
     public Base Inner;
 
@@ -70,14 +89,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
 
 class [|Derived|] : Base
 {
-}", new[] { FeaturesResources.Implement_abstract_class });
+}",
+                new[] { FeaturesResources.Implement_abstract_class }
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task FieldInMiddleClassIsNotSuggested()
         {
             await TestExactActionSetOfferedAsync(
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract void Method();
 }
@@ -89,14 +110,16 @@ abstract class Middle : Base
 
 class [|Derived|] : Base
 {
-}", new[] { FeaturesResources.Implement_abstract_class });
+}",
+                new[] { FeaturesResources.Implement_abstract_class }
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task FieldOfSameDerivedTypeIsSuggested()
         {
             await TestInRegularAndScriptAsync(
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract void Method();
 }
@@ -105,7 +128,7 @@ class [|Derived|] : Base
 {
     Derived inner;
 }",
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract void Method();
 }
@@ -118,14 +141,17 @@ class Derived : Base
     {
         inner.Method();
     }
-}", index: 1, title: string.Format(FeaturesResources.Implement_through_0, "inner"));
+}",
+                index: 1,
+                title: string.Format(FeaturesResources.Implement_through_0, "inner")
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task SkipInaccessibleMember()
         {
             await TestInRegularAndScriptAsync(
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract void Method1();
     protected abstract void Method2();
@@ -135,7 +161,7 @@ class [|Derived|] : Base
 {
     Base inner;
 }",
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract void Method1();
     protected abstract void Method2();
@@ -149,14 +175,17 @@ class {|Conflict:Derived|} : Base
     {
         inner.Method1();
     }
-}", index: 1, title: string.Format(FeaturesResources.Implement_through_0, "inner"));
+}",
+                index: 1,
+                title: string.Format(FeaturesResources.Implement_through_0, "inner")
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task TestNotOfferedWhenOnlyUnimplementedMemberIsInaccessible()
         {
             await TestExactActionSetOfferedAsync(
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract void Method1();
     protected abstract void Method2();
@@ -170,14 +199,16 @@ class [|Derived|] : Base
     {
         inner.Method1();
     }
-}", new string[] { FeaturesResources.Implement_abstract_class });
+}",
+                new string[] { FeaturesResources.Implement_abstract_class }
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task FieldOfMoreSpecificTypeIsSuggested()
         {
             await TestInRegularAndScriptAsync(
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract void Method();
 }
@@ -190,7 +221,7 @@ class [|Derived|] : Base
 class DerivedAgain : Derived
 {
 }",
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract void Method();
 }
@@ -207,14 +238,17 @@ class Derived : Base
 
 class DerivedAgain : Derived
 {
-}", index: 1, title: string.Format(FeaturesResources.Implement_through_0, "inner"));
+}",
+                index: 1,
+                title: string.Format(FeaturesResources.Implement_through_0, "inner")
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task FieldOfConstrainedGenericTypeIsSuggested()
         {
             await TestInRegularAndScriptAsync(
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract void Method();
 }
@@ -223,7 +257,7 @@ class [|Derived|]<T> : Base where T : Base
 {
     T inner;
 }",
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract void Method();
 }
@@ -236,14 +270,17 @@ class Derived<T> : Base where T : Base
     {
         inner.Method();
     }
-}", index: 1, title: string.Format(FeaturesResources.Implement_through_0, "inner"));
+}",
+                index: 1,
+                title: string.Format(FeaturesResources.Implement_through_0, "inner")
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task DistinguishableOptionsAreShownForExplicitPropertyWithSameName()
         {
             await TestExactActionSetOfferedAsync(
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract void Method();
 }
@@ -258,19 +295,21 @@ class [|Derived|] : Base, IInterface
     Base Inner { get; }
 
     Base IInterface.Inner { get; }
-}", new[]
-{
-    FeaturesResources.Implement_abstract_class,
-    string.Format(FeaturesResources.Implement_through_0, "Inner"),
-    string.Format(FeaturesResources.Implement_through_0, "IInterface.Inner"),
-});
+}",
+                new[]
+                {
+                    FeaturesResources.Implement_abstract_class,
+                    string.Format(FeaturesResources.Implement_through_0, "Inner"),
+                    string.Format(FeaturesResources.Implement_through_0, "IInterface.Inner"),
+                }
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task NotOfferedForDynamicFields()
         {
             await TestExactActionSetOfferedAsync(
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract void Method();
 }
@@ -278,14 +317,16 @@ class [|Derived|] : Base, IInterface
 class [|Derived|] : Base
 {
     dynamic inner;
-}", new[] { FeaturesResources.Implement_abstract_class });
+}",
+                new[] { FeaturesResources.Implement_abstract_class }
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task OfferedForStaticFields()
         {
             await TestInRegularAndScriptAsync(
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract void Method();
 }
@@ -294,7 +335,7 @@ class [|Derived|] : Base
 {
     static Base inner;
 }",
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract void Method();
 }
@@ -307,14 +348,17 @@ class Derived : Base
     {
         inner.Method();
     }
-}", index: 1, title: string.Format(FeaturesResources.Implement_through_0, "inner"));
+}",
+                index: 1,
+                title: string.Format(FeaturesResources.Implement_through_0, "inner")
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task PropertyIsDelegated()
         {
             await TestInRegularAndScriptAsync(
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract int Property { get; set; }
 }
@@ -323,7 +367,7 @@ class [|Derived|] : Base
 {
     Base inner;
 }",
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract int Property { get; set; }
 }
@@ -333,14 +377,17 @@ class Derived : Base
     Base inner;
 
     public override int Property { get => inner.Property; set => inner.Property = value; }
-}", index: 1, title: string.Format(FeaturesResources.Implement_through_0, "inner"));
+}",
+                index: 1,
+                title: string.Format(FeaturesResources.Implement_through_0, "inner")
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task PropertyIsDelegated_AllOptionsOff()
         {
             await TestAllOptionsOffAsync(
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract int Property { get; set; }
 }
@@ -349,7 +396,7 @@ class [|Derived|] : Base
 {
     Base inner;
 }",
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract int Property { get; set; }
 }
@@ -370,14 +417,15 @@ class Derived : Base
             inner.Property = value;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task PropertyWithSingleAccessorIsDelegated()
         {
             await TestInRegularAndScriptAsync(
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract int GetOnly { get; }
     public abstract int SetOnly { set; }
@@ -387,7 +435,7 @@ class [|Derived|] : Base
 {
     Base inner;
 }",
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract int GetOnly { get; }
     public abstract int SetOnly { set; }
@@ -400,14 +448,17 @@ class Derived : Base
     public override int GetOnly => inner.GetOnly;
 
     public override int SetOnly { set => inner.SetOnly = value; }
-}", index: 1, title: string.Format(FeaturesResources.Implement_through_0, "inner"));
+}",
+                index: 1,
+                title: string.Format(FeaturesResources.Implement_through_0, "inner")
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task PropertyWithSingleAccessorIsDelegated_AllOptionsOff()
         {
             await TestAllOptionsOffAsync(
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract int GetOnly { get; }
     public abstract int SetOnly { set; }
@@ -417,7 +468,7 @@ class [|Derived|] : Base
 {
     Base inner;
 }",
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract int GetOnly { get; }
     public abstract int SetOnly { set; }
@@ -442,14 +493,15 @@ class Derived : Base
             inner.SetOnly = value;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task EventIsDelegated()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 abstract class Base
 {
@@ -460,7 +512,7 @@ class [|Derived|] : Base
 {
     Base inner;
 }",
-@"using System;
+                @"using System;
 
 abstract class Base
 {
@@ -483,14 +535,17 @@ class Derived : Base
             inner.Event -= value;
         }
     }
-}", index: 1, title: string.Format(FeaturesResources.Implement_through_0, "inner"));
+}",
+                index: 1,
+                title: string.Format(FeaturesResources.Implement_through_0, "inner")
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task OnlyOverridableMethodsAreOverridden()
         {
             await TestInRegularAndScriptAsync(
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract void Method();
 
@@ -501,7 +556,7 @@ class [|Derived|] : Base
 {
     Base inner;
 }",
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract void Method();
 
@@ -516,14 +571,17 @@ class Derived : Base
     {
         inner.Method();
     }
-}", index: 1, title: string.Format(FeaturesResources.Implement_through_0, "inner"));
+}",
+                index: 1,
+                title: string.Format(FeaturesResources.Implement_through_0, "inner")
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task ProtectedMethodsCannotBeDelegatedThroughBaseType()
         {
             await TestExactActionSetOfferedAsync(
-@"abstract class Base
+                @"abstract class Base
 {
     protected abstract void Method();
 }
@@ -531,14 +589,16 @@ class Derived : Base
 class [|Derived|] : Base
 {
     Base inner;
-}", new[] { FeaturesResources.Implement_abstract_class });
+}",
+                new[] { FeaturesResources.Implement_abstract_class }
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task ProtectedMethodsCanBeDelegatedThroughSameType()
         {
             await TestInRegularAndScriptAsync(
-@"abstract class Base
+                @"abstract class Base
 {
     protected abstract void Method();
 }
@@ -547,7 +607,7 @@ class [|Derived|] : Base
 {
     Derived inner;
 }",
-@"abstract class Base
+                @"abstract class Base
 {
     protected abstract void Method();
 }
@@ -560,14 +620,17 @@ class Derived : Base
     {
         inner.Method();
     }
-}", index: 1, title: string.Format(FeaturesResources.Implement_through_0, "inner"));
+}",
+                index: 1,
+                title: string.Format(FeaturesResources.Implement_through_0, "inner")
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task ProtectedInternalMethodsAreOverridden()
         {
             await TestInRegularAndScriptAsync(
-@"abstract class Base
+                @"abstract class Base
 {
     protected internal abstract void Method();
 }
@@ -576,7 +639,7 @@ class [|Derived|] : Base
 {
     Base inner;
 }",
-@"abstract class Base
+                @"abstract class Base
 {
     protected internal abstract void Method();
 }
@@ -589,14 +652,17 @@ class Derived : Base
     {
         inner.Method();
     }
-}", index: 1, title: string.Format(FeaturesResources.Implement_through_0, "inner"));
+}",
+                index: 1,
+                title: string.Format(FeaturesResources.Implement_through_0, "inner")
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task InternalMethodsAreOverridden()
         {
             await TestInRegularAndScriptAsync(
-@"abstract class Base
+                @"abstract class Base
 {
     internal abstract void Method();
 }
@@ -605,7 +671,7 @@ class [|Derived|] : Base
 {
     Base inner;
 }",
-@"abstract class Base
+                @"abstract class Base
 {
     internal abstract void Method();
 }
@@ -618,14 +684,17 @@ class Derived : Base
     {
         inner.Method();
     }
-}", index: 1, title: string.Format(FeaturesResources.Implement_through_0, "inner"));
+}",
+                index: 1,
+                title: string.Format(FeaturesResources.Implement_through_0, "inner")
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task PrivateProtectedMethodsCannotBeDelegatedThroughBaseType()
         {
             await TestExactActionSetOfferedAsync(
-@"abstract class Base
+                @"abstract class Base
 {
     private protected abstract void Method();
 }
@@ -633,14 +702,16 @@ class Derived : Base
 class [|Derived|] : Base
 {
     Base inner;
-}", new[] { FeaturesResources.Implement_abstract_class });
+}",
+                new[] { FeaturesResources.Implement_abstract_class }
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task PrivateProtectedMethodsCanBeDelegatedThroughSameType()
         {
             await TestInRegularAndScriptAsync(
-@"abstract class Base
+                @"abstract class Base
 {
     private protected abstract void Method();
 }
@@ -649,7 +720,7 @@ class [|Derived|] : Base
 {
     Derived inner;
 }",
-@"abstract class Base
+                @"abstract class Base
 {
     private protected abstract void Method();
 }
@@ -662,14 +733,17 @@ class Derived : Base
     {
         inner.Method();
     }
-}", index: 1, title: string.Format(FeaturesResources.Implement_through_0, "inner"));
+}",
+                index: 1,
+                title: string.Format(FeaturesResources.Implement_through_0, "inner")
+            );
         }
 
         [Fact, WorkItem(41420, "https://github.com/dotnet/roslyn/issues/41420")]
         public async Task AccessorsWithDifferingVisibilityAreGeneratedCorrectly()
         {
             await TestInRegularAndScriptAsync(
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract int InternalGet { internal get; set; }
     public abstract int InternalSet { get; internal set; }
@@ -679,7 +753,7 @@ class [|Derived|] : Base
 {
     Base inner;
 }",
-@"abstract class Base
+                @"abstract class Base
 {
     public abstract int InternalGet { internal get; set; }
     public abstract int InternalSet { get; internal set; }
@@ -691,14 +765,17 @@ class Derived : Base
 
     public override int InternalGet { internal get => inner.InternalGet; set => inner.InternalGet = value; }
     public override int InternalSet { get => inner.InternalSet; internal set => inner.InternalSet = value; }
-}", index: 1, title: string.Format(FeaturesResources.Implement_through_0, "inner"));
+}",
+                index: 1,
+                title: string.Format(FeaturesResources.Implement_through_0, "inner")
+            );
         }
 
         [Fact]
         public async Task TestCrossProjectWithInaccessibleMemberInCase()
         {
             await TestInRegularAndScriptAsync(
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
 public abstract class Base
@@ -718,7 +795,7 @@ class [|Derived|] : Base
         </Document>
     </Project>
 </Workspace>",
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
 public abstract class Base
@@ -742,7 +819,9 @@ class {|Conflict:Derived|} : Base
 }
         </Document>
     </Project>
-</Workspace>", index: 1);
+</Workspace>",
+                index: 1
+            );
         }
     }
 }

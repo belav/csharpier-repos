@@ -28,8 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EventId eventId,
             LogLevel level,
             string eventIdCode,
-            string messageFormat)
-            : base(loggingOptions, eventId, level, eventIdCode)
+            string messageFormat
+        ) : base(loggingOptions, eventId, level, eventIdCode)
         {
             Check.NotEmpty(messageFormat, nameof(messageFormat));
 
@@ -59,8 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <param name="logAction"> A delegate that will log the message to an <see cref="ILogger" />. </param>
         public virtual void Log<TLoggerCategory>(
             IDiagnosticsLogger<TLoggerCategory> logger,
-            Action<ILogger> logAction)
-            where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
+            Action<ILogger> logAction
+        ) where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
         {
             switch (WarningBehavior)
             {

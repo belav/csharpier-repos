@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         /// </summary>
         /// <param name="context">The <see cref="DbContext"/>.</param>
         /// <param name="describer">The <see cref="IdentityErrorDescriber"/>.</param>
-        public RoleStore(DbContext context, IdentityErrorDescriber describer = null) : base(context, describer) { }
+        public RoleStore(DbContext context, IdentityErrorDescriber describer = null)
+            : base(context, describer) { }
     }
 
     /// <summary>
@@ -41,7 +42,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         /// </summary>
         /// <param name="context">The <see cref="DbContext"/>.</param>
         /// <param name="describer">The <see cref="IdentityErrorDescriber"/>.</param>
-        public RoleStore(TContext context, IdentityErrorDescriber describer = null) : base(context, describer) { }
+        public RoleStore(TContext context, IdentityErrorDescriber describer = null)
+            : base(context, describer) { }
     }
 
     /// <summary>
@@ -50,9 +52,10 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
     /// <typeparam name="TRole">The type of the class representing a role.</typeparam>
     /// <typeparam name="TContext">The type of the data context class used to access the store.</typeparam>
     /// <typeparam name="TKey">The type of the primary key for a role.</typeparam>
-    public class RoleStore<TRole, TContext, TKey> : RoleStore<TRole, TContext, TKey, IdentityUserRole<TKey>, IdentityRoleClaim<TKey>>,
-        IQueryableRoleStore<TRole>,
-        IRoleClaimStore<TRole>
+    public class RoleStore<TRole, TContext, TKey>
+        : RoleStore<TRole, TContext, TKey, IdentityUserRole<TKey>, IdentityRoleClaim<TKey>>,
+          IQueryableRoleStore<TRole>,
+          IRoleClaimStore<TRole>
         where TRole : IdentityRole<TKey>
         where TKey : IEquatable<TKey>
         where TContext : DbContext
@@ -62,7 +65,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         /// </summary>
         /// <param name="context">The <see cref="DbContext"/>.</param>
         /// <param name="describer">The <see cref="IdentityErrorDescriber"/>.</param>
-        public RoleStore(TContext context, IdentityErrorDescriber describer = null) : base(context, describer) { }
+        public RoleStore(TContext context, IdentityErrorDescriber describer = null)
+            : base(context, describer) { }
     }
 
     /// <summary>
@@ -73,9 +77,9 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
     /// <typeparam name="TKey">The type of the primary key for a role.</typeparam>
     /// <typeparam name="TUserRole">The type of the class representing a user role.</typeparam>
     /// <typeparam name="TRoleClaim">The type of the class representing a role claim.</typeparam>
-    public class RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim> :
-        IQueryableRoleStore<TRole>,
-        IRoleClaimStore<TRole>
+    public class RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>
+        : IQueryableRoleStore<TRole>,
+          IRoleClaimStore<TRole>
         where TRole : IdentityRole<TKey>
         where TKey : IEquatable<TKey>
         where TContext : DbContext
@@ -98,7 +102,6 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         }
 
         private bool _disposed;
-
 
         /// <summary>
         /// Gets the database context for this store.
@@ -135,8 +138,10 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         /// <param name="role">The role to create in the store.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>A <see cref="Task{TResult}"/> that represents the <see cref="IdentityResult"/> of the asynchronous query.</returns>
-        public async virtual Task<IdentityResult> CreateAsync(TRole role, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        public async virtual Task<IdentityResult> CreateAsync(
+            TRole role,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (role == null)
@@ -154,8 +159,10 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         /// <param name="role">The role to update in the store.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>A <see cref="Task{TResult}"/> that represents the <see cref="IdentityResult"/> of the asynchronous query.</returns>
-        public async virtual Task<IdentityResult> UpdateAsync(TRole role, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        public async virtual Task<IdentityResult> UpdateAsync(
+            TRole role,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (role == null)
@@ -182,8 +189,10 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         /// <param name="role">The role to delete from the store.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>A <see cref="Task{TResult}"/> that represents the <see cref="IdentityResult"/> of the asynchronous query.</returns>
-        public async virtual Task<IdentityResult> DeleteAsync(TRole role, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        public async virtual Task<IdentityResult> DeleteAsync(
+            TRole role,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (role == null)
@@ -208,8 +217,10 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         /// <param name="role">The role whose ID should be returned.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>A <see cref="Task{TResult}"/> that contains the ID of the role.</returns>
-        public virtual Task<string> GetRoleIdAsync(TRole role, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        public virtual Task<string> GetRoleIdAsync(
+            TRole role,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (role == null)
@@ -225,8 +236,10 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         /// <param name="role">The role whose name should be returned.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>A <see cref="Task{TResult}"/> that contains the name of the role.</returns>
-        public virtual Task<string> GetRoleNameAsync(TRole role, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        public virtual Task<string> GetRoleNameAsync(
+            TRole role,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (role == null)
@@ -243,8 +256,11 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         /// <param name="roleName">The name of the role.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        public virtual Task SetRoleNameAsync(TRole role, string roleName, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        public virtual Task SetRoleNameAsync(
+            TRole role,
+            string roleName,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (role == null)
@@ -289,8 +305,10 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         /// <param name="id">The role ID to look for.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>A <see cref="Task{TResult}"/> that result of the look up.</returns>
-        public virtual Task<TRole> FindByIdAsync(string id, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        public virtual Task<TRole> FindByIdAsync(
+            string id,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             var roleId = ConvertIdFromString(id);
@@ -303,11 +321,16 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         /// <param name="normalizedName">The normalized role name to look for.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>A <see cref="Task{TResult}"/> that result of the look up.</returns>
-        public virtual Task<TRole> FindByNameAsync(string normalizedName, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        public virtual Task<TRole> FindByNameAsync(
+            string normalizedName,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
-            return Roles.FirstOrDefaultAsync(r => r.NormalizedName == normalizedName, cancellationToken);
+            return Roles.FirstOrDefaultAsync(
+                r => r.NormalizedName == normalizedName,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -316,8 +339,10 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         /// <param name="role">The role whose normalized name should be retrieved.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>A <see cref="Task{TResult}"/> that contains the name of the role.</returns>
-        public virtual Task<string> GetNormalizedRoleNameAsync(TRole role, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        public virtual Task<string> GetNormalizedRoleNameAsync(
+            TRole role,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (role == null)
@@ -334,8 +359,11 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         /// <param name="normalizedName">The normalized name to set</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        public virtual Task SetNormalizedRoleNameAsync(TRole role, string normalizedName, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        public virtual Task SetNormalizedRoleNameAsync(
+            TRole role,
+            string normalizedName,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (role == null)
@@ -368,15 +396,19 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         /// <param name="role">The role whose claims should be retrieved.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>A <see cref="Task{TResult}"/> that contains the claims granted to a role.</returns>
-        public async virtual Task<IList<Claim>> GetClaimsAsync(TRole role, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        public async virtual Task<IList<Claim>> GetClaimsAsync(
+            TRole role,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             ThrowIfDisposed();
             if (role == null)
             {
                 throw new ArgumentNullException(nameof(role));
             }
 
-            return await RoleClaims.Where(rc => rc.RoleId.Equals(role.Id)).Select(c => new Claim(c.ClaimType, c.ClaimValue)).ToListAsync(cancellationToken);
+            return await RoleClaims.Where(rc => rc.RoleId.Equals(role.Id))
+                .Select(c => new Claim(c.ClaimType, c.ClaimValue))
+                .ToListAsync(cancellationToken);
         }
 
         /// <summary>
@@ -386,8 +418,11 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         /// <param name="claim">The claim to add to the role.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        public virtual Task AddClaimAsync(TRole role, Claim claim, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        public virtual Task AddClaimAsync(
+            TRole role,
+            Claim claim,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             ThrowIfDisposed();
             if (role == null)
             {
@@ -409,8 +444,11 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         /// <param name="claim">The claim to remove from the role.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        public async virtual Task RemoveClaimAsync(TRole role, Claim claim, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        public async virtual Task RemoveClaimAsync(
+            TRole role,
+            Claim claim,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             ThrowIfDisposed();
             if (role == null)
             {
@@ -420,7 +458,13 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
             {
                 throw new ArgumentNullException(nameof(claim));
             }
-            var claims = await RoleClaims.Where(rc => rc.RoleId.Equals(role.Id) && rc.ClaimValue == claim.Value && rc.ClaimType == claim.Type).ToListAsync(cancellationToken);
+            var claims = await RoleClaims.Where(
+                    rc =>
+                        rc.RoleId.Equals(role.Id)
+                        && rc.ClaimValue == claim.Value
+                        && rc.ClaimType == claim.Type
+                )
+                .ToListAsync(cancellationToken);
             foreach (var c in claims)
             {
                 RoleClaims.Remove(c);
@@ -432,7 +476,10 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         /// </summary>
         public virtual IQueryable<TRole> Roles => Context.Set<TRole>();
 
-        private DbSet<TRoleClaim> RoleClaims { get { return Context.Set<TRoleClaim>(); } }
+        private DbSet<TRoleClaim> RoleClaims
+        {
+            get { return Context.Set<TRoleClaim>(); }
+        }
 
         /// <summary>
         /// Creates an entity representing a role claim.
@@ -440,7 +487,7 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         /// <param name="role">The associated role.</param>
         /// <param name="claim">The associated claim.</param>
         /// <returns>The role claim entity.</returns>
-        protected virtual TRoleClaim CreateRoleClaim(TRole role, Claim claim)
-            => new TRoleClaim { RoleId = role.Id, ClaimType = claim.Type, ClaimValue = claim.Value };
+        protected virtual TRoleClaim CreateRoleClaim(TRole role, Claim claim) =>
+            new TRoleClaim { RoleId = role.Id, ClaimType = claim.Type, ClaimValue = claim.Value };
     }
 }

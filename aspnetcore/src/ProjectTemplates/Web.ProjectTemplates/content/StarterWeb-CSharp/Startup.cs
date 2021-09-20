@@ -50,17 +50,20 @@ namespace Company.WebApplication1
         public void ConfigureServices(IServiceCollection services)
         {
 #if (IndividualLocalAuth)
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(
+                options =>
 #if (UseLocalDB)
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 #else
-                options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
+            );
 #endif
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(
+                    options => options.SignIn.RequireConfirmedAccount = true
+                )
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 #elif (OrganizationalAuth)
 #if (GenerateApiOrGraph)
@@ -98,19 +101,19 @@ namespace Company.WebApplication1
 #endif
 #if (OrganizationalAuth)
 
-            services.AddControllersWithViews(options =>
-            {
-                var policy = new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build();
-                options.Filters.Add(new AuthorizeFilter(policy));
-            });
+            services.AddControllersWithViews(
+                options =>
+                {
+                    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser()
+                        .Build();
+                    options.Filters.Add(new AuthorizeFilter(policy));
+                }
+            );
 #else
             services.AddControllersWithViews();
 #endif
 #if (OrganizationalAuth || IndividualB2CAuth)
-           services.AddRazorPages()
-                .AddMicrosoftIdentityUI();
+            services.AddRazorPages().AddMicrosoftIdentityUI();
 #endif
         }
 
@@ -144,15 +147,18 @@ namespace Company.WebApplication1
 #endif
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapControllerRoute(
+                        name: "default",
+                        pattern: "{controller=Home}/{action=Index}/{id?}"
+                    );
 #if (OrganizationalAuth || IndividualAuth)
-                endpoints.MapRazorPages();
+                    endpoints.MapRazorPages();
 #endif
-            });
+                }
+            );
         }
     }
 }

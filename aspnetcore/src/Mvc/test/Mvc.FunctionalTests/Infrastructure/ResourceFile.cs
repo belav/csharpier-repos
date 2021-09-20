@@ -27,8 +27,13 @@ namespace Microsoft.AspNetCore.Mvc
 
         private static object writeLock = new object();
 
-        public static void UpdateOrVerify(Assembly assembly, string outputFile, string expectedContent, string responseContent, string token = null)
-        {
+        public static void UpdateOrVerify(
+            Assembly assembly,
+            string outputFile,
+            string expectedContent,
+            string responseContent,
+            string token = null
+        ) {
             if (GenerateBaselines)
             {
                 // Reverse usual substitution and insert a format item into the new file content.
@@ -42,12 +47,15 @@ namespace Microsoft.AspNetCore.Mvc
             {
                 if (token != null)
                 {
-                    expectedContent = string.Format(CultureInfo.InvariantCulture, expectedContent, token);
+                    expectedContent = string.Format(
+                        CultureInfo.InvariantCulture,
+                        expectedContent,
+                        token
+                    );
                 }
                 Assert.Equal(expectedContent, responseContent, ignoreLineEndingDifferences: true);
             }
         }
-
 
         /// <summary>
         /// Return <see cref="Stream"/> for <paramref name="resourceName"/> from <paramref name="assembly"/>'s
@@ -72,9 +80,12 @@ namespace Microsoft.AspNetCore.Mvc
         /// Thrown if <c>GENERATE_BASELINES</c> is not defined or <paramref name="sourceFile"/> is <c>true</c> and
         /// <paramref name="resourceName"/> is not found in <paramref name="assembly"/>.
         /// </exception>
-        public static Stream GetResourceStream(Assembly assembly, string resourceName, bool sourceFile)
-        {
-            var fullName = $"{ assembly.GetName().Name }.{ resourceName.Replace('/', '.') }";
+        public static Stream GetResourceStream(
+            Assembly assembly,
+            string resourceName,
+            bool sourceFile
+        ) {
+            var fullName = $"{assembly.GetName().Name}.{resourceName.Replace('/', '.')}";
             if (!Exists(assembly, fullName))
             {
                 if (GenerateBaselines)
@@ -82,13 +93,13 @@ namespace Microsoft.AspNetCore.Mvc
                     if (sourceFile)
                     {
                         // Even when generating baselines, a missing source file is a serious problem.
-                        Assert.True(false, $"Manifest resource: { fullName } not found.");
+                        Assert.True(false, $"Manifest resource: {fullName} not found.");
                     }
                 }
                 else
                 {
                     // When not generating baselines, a missing source or output file is always an error.
-                    Assert.True(false, $"Manifest resource '{ fullName }' not found.");
+                    Assert.True(false, $"Manifest resource '{fullName}' not found.");
                 }
 
                 return null;
@@ -138,8 +149,11 @@ namespace Microsoft.AspNetCore.Mvc
         /// <paramref name="resourceName"/> is not found in <paramref name="assembly"/>.
         /// </exception>
         /// <remarks>Normalizes line endings to <see cref="Environment.NewLine"/>.</remarks>
-        public static async Task<string> ReadResourceAsync(Assembly assembly, string resourceName, bool sourceFile)
-        {
+        public static async Task<string> ReadResourceAsync(
+            Assembly assembly,
+            string resourceName,
+            bool sourceFile
+        ) {
             using (var stream = GetResourceStream(assembly, resourceName, sourceFile))
             {
                 if (stream == null)
@@ -211,19 +225,29 @@ namespace Microsoft.AspNetCore.Mvc
         /// <param name="content">
         /// New content of <paramref name="resourceName"/> in <paramref name="assembly"/>.
         /// </param>
-        public static void UpdateFile(Assembly assembly, string resourceName, string previousContent, string content)
-        {
+        public static void UpdateFile(
+            Assembly assembly,
+            string resourceName,
+            string previousContent,
+            string content
+        ) {
             // Normalize line endings to '\r\n' for comparison. This removes Environment.NewLine from the equation. Not
             // worth updating files just because we generate baselines on a different system.
-            var normalizedPreviousContent = previousContent?.Replace("\r", "").Replace("\n", "\r\n");
+            var normalizedPreviousContent = previousContent?.Replace("\r", "")
+                .Replace("\n", "\r\n");
             var normalizedContent = content.Replace("\r", "").Replace("\n", "\r\n");
 
-            if (!string.Equals(normalizedPreviousContent, normalizedContent, StringComparison.Ordinal))
-            {
+            if (
+                !string.Equals(
+                    normalizedPreviousContent,
+                    normalizedContent,
+                    StringComparison.Ordinal
+                )
+            ) {
                 // The build system compiles every file under the resources folder as a resource available at runtime
                 // with the same name as the file name. Need to update this file on disc.
 
-// https://github.com/dotnet/aspnetcore/issues/10423
+                // https://github.com/dotnet/aspnetcore/issues/10423
 #pragma warning disable 0618
                 var solutionPath = TestPathUtilities.GetSolutionRootDirectory("Mvc");
 #pragma warning restore 0618

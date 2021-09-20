@@ -55,8 +55,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var converter = _ipAddressToBytes.ConvertFromProviderExpression.Compile();
 
-            Assert.Throws<ArgumentException>(
-                () => converter(bytesIPV4Invalid));
+            Assert.Throws<ArgumentException>(() => converter(bytesIPV4Invalid));
 
             Assert.Null(converter(null));
         }

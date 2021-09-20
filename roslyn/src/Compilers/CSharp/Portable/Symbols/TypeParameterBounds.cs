@@ -24,8 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<TypeWithAnnotations> constraintTypes,
             ImmutableArray<NamedTypeSymbol> interfaces,
             NamedTypeSymbol effectiveBaseClass,
-            TypeSymbol deducedBaseType)
-        {
+            TypeSymbol deducedBaseType
+        ) {
             Debug.Assert(!constraintTypes.IsDefault);
             Debug.Assert(!interfaces.IsDefault);
             Debug.Assert((object)effectiveBaseClass != null);

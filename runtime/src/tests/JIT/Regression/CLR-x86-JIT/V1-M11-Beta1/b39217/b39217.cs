@@ -36,7 +36,10 @@ namespace Test
             {
                 Main1();
             }
-            catch (NullReferenceException) { return 100; }
+            catch (NullReferenceException)
+            {
+                return 100;
+            }
             return -1;
         }
     }

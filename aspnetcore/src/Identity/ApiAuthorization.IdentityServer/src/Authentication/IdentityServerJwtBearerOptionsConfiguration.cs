@@ -14,7 +14,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
 {
-    internal class IdentityServerJwtBearerOptionsConfiguration : IConfigureNamedOptions<JwtBearerOptions>
+    internal class IdentityServerJwtBearerOptionsConfiguration
+        : IConfigureNamedOptions<JwtBearerOptions>
     {
         private readonly string _scheme;
         private readonly string _apiName;
@@ -23,8 +24,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         public IdentityServerJwtBearerOptionsConfiguration(
             string scheme,
             string apiName,
-            IIdentityServerJwtDescriptor localApiDescriptor)
-        {
+            IIdentityServerJwtDescriptor localApiDescriptor
+        ) {
             _scheme = scheme;
             _apiName = apiName;
             _localApiDescriptor = localApiDescriptor;
@@ -57,21 +58,25 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             }
         }
 
-        internal static async Task ResolveAuthorityAndKeysAsync(MessageReceivedContext messageReceivedContext)
-        {
+        internal static async Task ResolveAuthorityAndKeysAsync(
+            MessageReceivedContext messageReceivedContext
+        ) {
             var options = messageReceivedContext.Options;
-            if (options.TokenValidationParameters.ValidIssuer == null || options.TokenValidationParameters.IssuerSigningKey == null)
-            {
-                var store = messageReceivedContext.HttpContext.RequestServices.GetRequiredService<ISigningCredentialStore>();
+            if (
+                options.TokenValidationParameters.ValidIssuer == null
+                || options.TokenValidationParameters.IssuerSigningKey == null
+            ) {
+                var store =
+                    messageReceivedContext.HttpContext.RequestServices.GetRequiredService<ISigningCredentialStore>();
                 var credential = await store.GetSigningCredentialsAsync();
-                options.Authority = options.Authority ?? messageReceivedContext.HttpContext.GetIdentityServerIssuerUri();
+                options.Authority =
+                    options.Authority
+                    ?? messageReceivedContext.HttpContext.GetIdentityServerIssuerUri();
                 options.TokenValidationParameters.IssuerSigningKey = credential.Key;
                 options.TokenValidationParameters.ValidIssuer = options.Authority;
             }
         }
 
-        public void Configure(JwtBearerOptions options)
-        {
-        }
+        public void Configure(JwtBearerOptions options) { }
     }
 }

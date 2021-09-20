@@ -14,7 +14,9 @@ namespace Microsoft.AspNetCore.Components.Forms
             var emptySet = new InputFileChangeEventArgs(Array.Empty<IBrowserFile>());
             Assert.Equal(0, emptySet.FileCount);
 
-            var twoItemSet = new InputFileChangeEventArgs(new[] { new BrowserFile(), new BrowserFile() });
+            var twoItemSet = new InputFileChangeEventArgs(
+                new[] { new BrowserFile(), new BrowserFile() }
+            );
             Assert.Equal(2, twoItemSet.FileCount);
         }
 
@@ -37,7 +39,9 @@ namespace Microsoft.AspNetCore.Components.Forms
         [Fact]
         public void File_ThrowsIfMultipleFiles()
         {
-            var instance = new InputFileChangeEventArgs(new[] { new BrowserFile(), new BrowserFile() });
+            var instance = new InputFileChangeEventArgs(
+                new[] { new BrowserFile(), new BrowserFile() }
+            );
             var ex = Assert.Throws<InvalidOperationException>(() => instance.File);
             Assert.StartsWith("More than one file was supplied", ex.Message);
         }
@@ -63,7 +67,10 @@ namespace Microsoft.AspNetCore.Components.Forms
             var files = new[] { new BrowserFile(), new BrowserFile() };
             var instance = new InputFileChangeEventArgs(files);
             var ex = Assert.Throws<InvalidOperationException>(() => instance.GetMultipleFiles(1));
-            Assert.Equal($"The maximum number of files accepted is 1, but 2 were supplied.", ex.Message);
+            Assert.Equal(
+                $"The maximum number of files accepted is 1, but 2 were supplied.",
+                ex.Message
+            );
         }
 
         [Fact]

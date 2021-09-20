@@ -50,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// </returns>
         InterceptionResult<DbCommand> CommandCreating(
             CommandCorrelatedEventData eventData,
-            InterceptionResult<DbCommand> result);
+            InterceptionResult<DbCommand> result
+        );
 
         /// <summary>
         ///     <para>
@@ -71,9 +72,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///     A normal implementation of this method for any interceptor that is not attempting to change the result
         ///     is to return the <paramref name="result" /> value passed in.
         /// </returns>
-        DbCommand CommandCreated(
-            CommandEndEventData eventData,
-            DbCommand result);
+        DbCommand CommandCreated(CommandEndEventData eventData, DbCommand result);
 
         /// <summary>
         ///     Called just before EF intends to call <see cref="DbCommand.ExecuteReader()" />.
@@ -96,7 +95,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         InterceptionResult<DbDataReader> ReaderExecuting(
             DbCommand command,
             CommandEventData eventData,
-            InterceptionResult<DbDataReader> result);
+            InterceptionResult<DbDataReader> result
+        );
 
         /// <summary>
         ///     Called just before EF intends to call <see cref="DbCommand.ExecuteScalar()" />.
@@ -119,7 +119,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         InterceptionResult<object> ScalarExecuting(
             DbCommand command,
             CommandEventData eventData,
-            InterceptionResult<object> result);
+            InterceptionResult<object> result
+        );
 
         /// <summary>
         ///     Called just before EF intends to call <see cref="DbCommand.ExecuteNonQuery()" />.
@@ -142,7 +143,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         InterceptionResult<int> NonQueryExecuting(
             DbCommand command,
             CommandEventData eventData,
-            InterceptionResult<int> result);
+            InterceptionResult<int> result
+        );
 
         /// <summary>
         ///     Called just before EF intends to call <see cref="DbCommand.ExecuteReaderAsync()" />.
@@ -168,7 +170,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbCommand command,
             CommandEventData eventData,
             InterceptionResult<DbDataReader> result,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Called just before EF intends to call <see cref="DbCommand.ExecuteScalarAsync()" />.
@@ -194,7 +197,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbCommand command,
             CommandEventData eventData,
             InterceptionResult<object> result,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Called just before EF intends to call <see cref="DbCommand.ExecuteNonQueryAsync()" />.
@@ -220,7 +224,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbCommand command,
             CommandEventData eventData,
             InterceptionResult<int> result,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     <para>
@@ -245,7 +250,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         DbDataReader ReaderExecuted(
             DbCommand command,
             CommandExecutedEventData eventData,
-            DbDataReader result);
+            DbDataReader result
+        );
 
         /// <summary>
         ///     <para>
@@ -270,7 +276,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         object? ScalarExecuted(
             DbCommand command,
             CommandExecutedEventData eventData,
-            object? result);
+            object? result
+        );
 
         /// <summary>
         ///     <para>
@@ -292,10 +299,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         ///     A normal implementation of this method for any interceptor that is not attempting to change the result
         ///     is to return the <paramref name="result" /> value passed in.
         /// </returns>
-        int NonQueryExecuted(
-            DbCommand command,
-            CommandExecutedEventData eventData,
-            int result);
+        int NonQueryExecuted(DbCommand command, CommandExecutedEventData eventData, int result);
 
         /// <summary>
         ///     <para>
@@ -323,7 +327,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbCommand command,
             CommandExecutedEventData eventData,
             DbDataReader result,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     <para>
@@ -351,7 +356,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbCommand command,
             CommandExecutedEventData eventData,
             object? result,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     <para>
@@ -379,16 +385,15 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbCommand command,
             CommandExecutedEventData eventData,
             int result,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Called when execution of a command has failed with an exception.
         /// </summary>
         /// <param name="command"> The command. </param>
         /// <param name="eventData"> Contextual information about the command and execution. </param>
-        void CommandFailed(
-            DbCommand command,
-            CommandErrorEventData eventData);
+        void CommandFailed(DbCommand command, CommandErrorEventData eventData);
 
         /// <summary>
         ///     Called when execution of a command has failed with an exception.
@@ -401,7 +406,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         Task CommandFailedAsync(
             DbCommand command,
             CommandErrorEventData eventData,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         ///     Called when execution of a <see cref="DbDataReader" /> is about to be disposed.
@@ -424,6 +430,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         InterceptionResult DataReaderDisposing(
             DbCommand command,
             DataReaderDisposingEventData eventData,
-            InterceptionResult result);
+            InterceptionResult result
+        );
     }
 }

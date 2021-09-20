@@ -29,38 +29,77 @@ namespace Microsoft.AspNetCore.Components.WebView
             {
                 renderBatchWriter.Write(in renderBatch);
             }
-            var message = IpcCommon.Serialize(IpcCommon.OutgoingMessageType.RenderBatch, batchId, Convert.ToBase64String(arrayBuilder.Buffer, 0, arrayBuilder.Count));
+            var message = IpcCommon.Serialize(
+                IpcCommon.OutgoingMessageType.RenderBatch,
+                batchId,
+                Convert.ToBase64String(arrayBuilder.Buffer, 0, arrayBuilder.Count)
+            );
             DispatchMessageWithErrorHandling(message);
         }
 
         public void Navigate(string uri, bool forceLoad)
         {
-            DispatchMessageWithErrorHandling(IpcCommon.Serialize(IpcCommon.OutgoingMessageType.Navigate, uri, forceLoad));
+            DispatchMessageWithErrorHandling(
+                IpcCommon.Serialize(IpcCommon.OutgoingMessageType.Navigate, uri, forceLoad)
+            );
         }
 
         public void AttachToDocument(int componentId, string selector)
         {
-            DispatchMessageWithErrorHandling(IpcCommon.Serialize(IpcCommon.OutgoingMessageType.AttachToDocument, componentId, selector));
+            DispatchMessageWithErrorHandling(
+                IpcCommon.Serialize(
+                    IpcCommon.OutgoingMessageType.AttachToDocument,
+                    componentId,
+                    selector
+                )
+            );
         }
 
         public void DetachFromDocument(int componentId)
         {
-            DispatchMessageWithErrorHandling(IpcCommon.Serialize(IpcCommon.OutgoingMessageType.DetachFromDocument, componentId));
+            DispatchMessageWithErrorHandling(
+                IpcCommon.Serialize(IpcCommon.OutgoingMessageType.DetachFromDocument, componentId)
+            );
         }
 
-        public void BeginInvokeJS(long taskId, string identifier, string argsJson, JSCallResultType resultType, long targetInstanceId)
-        {
-            DispatchMessageWithErrorHandling(IpcCommon.Serialize(IpcCommon.OutgoingMessageType.BeginInvokeJS, taskId, identifier, argsJson, resultType, targetInstanceId));
+        public void BeginInvokeJS(
+            long taskId,
+            string identifier,
+            string argsJson,
+            JSCallResultType resultType,
+            long targetInstanceId
+        ) {
+            DispatchMessageWithErrorHandling(
+                IpcCommon.Serialize(
+                    IpcCommon.OutgoingMessageType.BeginInvokeJS,
+                    taskId,
+                    identifier,
+                    argsJson,
+                    resultType,
+                    targetInstanceId
+                )
+            );
         }
 
         public void EndInvokeDotNet(string callId, bool success, string invocationResultOrError)
         {
-            DispatchMessageWithErrorHandling(IpcCommon.Serialize(IpcCommon.OutgoingMessageType.EndInvokeDotNet, callId, success, invocationResultOrError));
+            DispatchMessageWithErrorHandling(
+                IpcCommon.Serialize(
+                    IpcCommon.OutgoingMessageType.EndInvokeDotNet,
+                    callId,
+                    success,
+                    invocationResultOrError
+                )
+            );
         }
 
         public void NotifyUnhandledException(Exception exception)
         {
-            var message = IpcCommon.Serialize(IpcCommon.OutgoingMessageType.NotifyUnhandledException, exception.Message, exception.StackTrace);
+            var message = IpcCommon.Serialize(
+                IpcCommon.OutgoingMessageType.NotifyUnhandledException,
+                exception.Message,
+                exception.StackTrace
+            );
             _dispatcher.InvokeAsync(() => _messageDispatcher(message));
         }
 

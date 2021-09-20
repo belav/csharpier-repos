@@ -187,10 +187,12 @@ namespace System.Composition.UnitTests
         {
             var cc = CreateContainer(typeof(PrDepA), typeof(PrDepB));
 
-            var x = Assert.Throws<CompositionFailedException>(() =>
-            {
-                cc.GetExport<PrDepA>();
-            });
+            var x = Assert.Throws<CompositionFailedException>(
+                () =>
+                {
+                    cc.GetExport<PrDepA>();
+                }
+            );
         }
     }
 }

@@ -27,21 +27,32 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         public static Task<IEnumerable<ReferencedSymbol>> FindReferencesAsync(
             ISymbol symbol,
             Solution solution,
-            CancellationToken cancellationToken = default)
-        {
-            return FindReferencesAsync(symbol, solution, FindReferencesSearchOptions.Default, cancellationToken);
+            CancellationToken cancellationToken = default
+        ) {
+            return FindReferencesAsync(
+                symbol,
+                solution,
+                FindReferencesSearchOptions.Default,
+                cancellationToken
+            );
         }
 
         internal static async Task<IEnumerable<ReferencedSymbol>> FindReferencesAsync(
             ISymbol symbol,
             Solution solution,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             var progressCollector = new StreamingProgressCollector();
             await FindReferencesAsync(
-                symbol, solution, progressCollector,
-                documents: null, options, cancellationToken).ConfigureAwait(false);
+                    symbol,
+                    solution,
+                    progressCollector,
+                    documents: null,
+                    options,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return progressCollector.GetReferencedSymbols();
         }
 
@@ -56,9 +67,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ISymbol symbol,
             Solution solution,
             IImmutableSet<Document> documents,
-            CancellationToken cancellationToken = default)
-        {
-            return FindReferencesAsync(symbol, solution, progress: null, documents: documents, cancellationToken: cancellationToken);
+            CancellationToken cancellationToken = default
+        ) {
+            return FindReferencesAsync(
+                symbol,
+                solution,
+                progress: null,
+                documents: documents,
+                cancellationToken: cancellationToken
+            );
         }
 
         /// <summary>
@@ -75,11 +92,17 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Solution solution,
             IFindReferencesProgress progress,
             IImmutableSet<Document> documents,
-            CancellationToken cancellationToken = default)
-        {
+            CancellationToken cancellationToken = default
+        ) {
             return await FindReferencesAsync(
-                symbol, solution, progress, documents,
-                FindReferencesSearchOptions.Default, cancellationToken).ConfigureAwait(false);
+                    symbol,
+                    solution,
+                    progress,
+                    documents,
+                    FindReferencesSearchOptions.Default,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         internal static async Task<ImmutableArray<ReferencedSymbol>> FindReferencesAsync(
@@ -88,14 +111,21 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             IFindReferencesProgress progress,
             IImmutableSet<Document> documents,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             progress ??= NoOpFindReferencesProgress.Instance;
             var streamingProgress = new StreamingProgressCollector(
-                new StreamingFindReferencesProgressAdapter(progress));
+                new StreamingFindReferencesProgressAdapter(progress)
+            );
             await FindReferencesAsync(
-                symbol, solution, streamingProgress, documents,
-                options, cancellationToken).ConfigureAwait(false);
+                    symbol,
+                    solution,
+                    streamingProgress,
+                    documents,
+                    options,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return streamingProgress.GetReferencedSymbols();
         }
 
@@ -107,9 +137,16 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 IFindReferencesProgress progress,
                 IImmutableSet<Document> documents,
                 FindReferencesSearchOptions options,
-                CancellationToken cancellationToken)
-            {
-                return SymbolFinder.FindReferencesAsync(symbol, solution, progress, documents, options, cancellationToken);
+                CancellationToken cancellationToken
+            ) {
+                return SymbolFinder.FindReferencesAsync(
+                    symbol,
+                    solution,
+                    progress,
+                    documents,
+                    options,
+                    cancellationToken
+                );
             }
         }
     }

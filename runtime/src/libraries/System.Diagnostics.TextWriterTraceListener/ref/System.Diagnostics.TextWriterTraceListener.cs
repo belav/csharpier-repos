@@ -20,12 +20,44 @@ namespace System.Diagnostics
         public DelimitedListTraceListener(System.IO.TextWriter writer, string? name) { }
         public DelimitedListTraceListener(string? fileName) { }
         public DelimitedListTraceListener(string? fileName, string? name) { }
-        public string Delimiter { get { throw null; } set { } }
-        protected override string[] GetSupportedAttributes() { throw null; }
-        public override void TraceData(System.Diagnostics.TraceEventCache? eventCache, string source, System.Diagnostics.TraceEventType eventType, int id, object? data) { }
-        public override void TraceData(System.Diagnostics.TraceEventCache? eventCache, string source, System.Diagnostics.TraceEventType eventType, int id, params object?[]? data) { }
-        public override void TraceEvent(System.Diagnostics.TraceEventCache? eventCache, string source, System.Diagnostics.TraceEventType eventType, int id, string? message) { }
-        public override void TraceEvent(System.Diagnostics.TraceEventCache? eventCache, string source, System.Diagnostics.TraceEventType eventType, int id, string? format, params object?[]? args) { }
+        public string Delimiter
+        {
+            get { throw null; }
+            set { }
+        }
+        protected override string[] GetSupportedAttributes()
+        {
+            throw null;
+        }
+        public override void TraceData(
+            System.Diagnostics.TraceEventCache? eventCache,
+            string source,
+            System.Diagnostics.TraceEventType eventType,
+            int id,
+            object? data
+        ) { }
+        public override void TraceData(
+            System.Diagnostics.TraceEventCache? eventCache,
+            string source,
+            System.Diagnostics.TraceEventType eventType,
+            int id,
+            params object?[]? data
+        ) { }
+        public override void TraceEvent(
+            System.Diagnostics.TraceEventCache? eventCache,
+            string source,
+            System.Diagnostics.TraceEventType eventType,
+            int id,
+            string? message
+        ) { }
+        public override void TraceEvent(
+            System.Diagnostics.TraceEventCache? eventCache,
+            string source,
+            System.Diagnostics.TraceEventType eventType,
+            int id,
+            string? format,
+            params object?[]? args
+        ) { }
     }
     public partial class TextWriterTraceListener : System.Diagnostics.TraceListener
     {
@@ -36,7 +68,11 @@ namespace System.Diagnostics
         public TextWriterTraceListener(System.IO.TextWriter writer, string? name) { }
         public TextWriterTraceListener(string? fileName) { }
         public TextWriterTraceListener(string? fileName, string? name) { }
-        public System.IO.TextWriter? Writer { get { throw null; } set { } }
+        public System.IO.TextWriter? Writer
+        {
+            get { throw null; }
+            set { }
+        }
         public override void Close() { }
         protected override void Dispose(bool disposing) { }
         public override void Flush() { }
@@ -53,11 +89,42 @@ namespace System.Diagnostics
         public XmlWriterTraceListener(string? filename, string? name) { }
         public override void Close() { }
         public override void Fail(string? message, string? detailMessage) { }
-        public override void TraceData(System.Diagnostics.TraceEventCache? eventCache, string source, System.Diagnostics.TraceEventType eventType, int id, object? data) { }
-        public override void TraceData(System.Diagnostics.TraceEventCache? eventCache, string source, System.Diagnostics.TraceEventType eventType, int id, params object?[]? data) { }
-        public override void TraceEvent(System.Diagnostics.TraceEventCache? eventCache, string source, System.Diagnostics.TraceEventType eventType, int id, string? message) { }
-        public override void TraceEvent(System.Diagnostics.TraceEventCache? eventCache, string source, System.Diagnostics.TraceEventType eventType, int id, string? format, params object?[]? args) { }
-        public override void TraceTransfer(System.Diagnostics.TraceEventCache? eventCache, string source, int id, string? message, System.Guid relatedActivityId) { }
+        public override void TraceData(
+            System.Diagnostics.TraceEventCache? eventCache,
+            string source,
+            System.Diagnostics.TraceEventType eventType,
+            int id,
+            object? data
+        ) { }
+        public override void TraceData(
+            System.Diagnostics.TraceEventCache? eventCache,
+            string source,
+            System.Diagnostics.TraceEventType eventType,
+            int id,
+            params object?[]? data
+        ) { }
+        public override void TraceEvent(
+            System.Diagnostics.TraceEventCache? eventCache,
+            string source,
+            System.Diagnostics.TraceEventType eventType,
+            int id,
+            string? message
+        ) { }
+        public override void TraceEvent(
+            System.Diagnostics.TraceEventCache? eventCache,
+            string source,
+            System.Diagnostics.TraceEventType eventType,
+            int id,
+            string? format,
+            params object?[]? args
+        ) { }
+        public override void TraceTransfer(
+            System.Diagnostics.TraceEventCache? eventCache,
+            string source,
+            int id,
+            string? message,
+            System.Guid relatedActivityId
+        ) { }
         public override void Write(string? message) { }
         public override void WriteLine(string? message) { }
     }

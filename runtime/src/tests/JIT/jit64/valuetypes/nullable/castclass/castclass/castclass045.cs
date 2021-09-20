@@ -14,7 +14,10 @@ internal class NullableTest
 
     private static bool BoxUnboxToQ(object o)
     {
-        return Helper.Compare((MixedAllStruct?)(ValueType)o, Helper.Create(default(MixedAllStruct)));
+        return Helper.Compare(
+            (MixedAllStruct?)(ValueType)o,
+            Helper.Create(default(MixedAllStruct))
+        );
     }
 
     private static int Main()

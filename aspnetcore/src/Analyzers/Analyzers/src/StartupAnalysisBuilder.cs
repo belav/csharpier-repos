@@ -32,7 +32,9 @@ namespace Microsoft.AspNetCore.Analyzers
                     StartupSymbols,
                     _analysesByType.ToImmutableDictionary(
                         k => k.Key,
-                        v => v.Value.ToImmutableArray()));
+                        v => v.Value.ToImmutableArray()
+                    )
+                );
             }
         }
 

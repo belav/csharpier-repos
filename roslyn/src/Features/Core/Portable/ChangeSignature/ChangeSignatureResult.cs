@@ -28,8 +28,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             Glyph? glyph = null,
             bool previewChanges = false,
             ChangeSignatureFailureKind? changeSignatureFailureKind = null,
-            string? confirmationMessage = null)
-        {
+            string? confirmationMessage = null
+        ) {
             Succeeded = succeeded;
             UpdatedSolution = updatedSolution;
             Name = name;

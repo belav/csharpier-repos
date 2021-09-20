@@ -13,11 +13,19 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal sealed class SynthesizedPrivateImplementationDetailsStaticConstructor : SynthesizedGlobalMethodSymbol
+    internal sealed class SynthesizedPrivateImplementationDetailsStaticConstructor
+        : SynthesizedGlobalMethodSymbol
     {
-        internal SynthesizedPrivateImplementationDetailsStaticConstructor(SourceModuleSymbol containingModule, PrivateImplementationDetails privateImplementationType, NamedTypeSymbol voidType)
-            : base(containingModule, privateImplementationType, voidType, WellKnownMemberNames.StaticConstructorName)
-        {
+        internal SynthesizedPrivateImplementationDetailsStaticConstructor(
+            SourceModuleSymbol containingModule,
+            PrivateImplementationDetails privateImplementationType,
+            NamedTypeSymbol voidType
+        ) : base(
+            containingModule,
+            privateImplementationType,
+            voidType,
+            WellKnownMemberNames.StaticConstructorName
+        ) {
             this.SetParameters(ImmutableArray<ParameterSymbol>.Empty);
         }
 
@@ -25,10 +33,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool HasSpecialName => true;
 
-        internal override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
-        {
+        internal override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        ) {
             CSharpSyntaxNode syntax = this.GetNonNullSyntaxNode();
-            SyntheticBoundNodeFactory factory = new SyntheticBoundNodeFactory(this, syntax, compilationState, diagnostics);
+            SyntheticBoundNodeFactory factory = new SyntheticBoundNodeFactory(
+                this,
+                syntax,
+                compilationState,
+                diagnostics
+            );
             factory.CurrentFunction = this;
             ArrayBuilder<BoundStatement> body = ArrayBuilder<BoundStatement>.GetInstance();
 
@@ -44,15 +59,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             try
             {
-                foreach (KeyValuePair<int, InstrumentationPayloadRootField> payloadRoot in ContainingPrivateImplementationDetailsType.GetInstrumentationPayloadRoots())
-                {
+                foreach (
+                    KeyValuePair<
+                        int,
+                        InstrumentationPayloadRootField
+                    > payloadRoot in ContainingPrivateImplementationDetailsType.GetInstrumentationPayloadRoots()
+                ) {
                     int analysisKind = payloadRoot.Key;
-                    ArrayTypeSymbol payloadArrayType = (ArrayTypeSymbol)payloadRoot.Value.Type.GetInternalSymbol();
+                    ArrayTypeSymbol payloadArrayType =
+                        (ArrayTypeSymbol)payloadRoot.Value.Type.GetInternalSymbol();
 
-                    BoundStatement payloadInitialization =
-                        factory.Assignment(
-                            factory.InstrumentationPayloadRoot(analysisKind, payloadArrayType),
-                            factory.Array(payloadArrayType.ElementType, factory.Binary(BinaryOperatorKind.Addition, factory.SpecialType(SpecialType.System_Int32), factory.MaximumMethodDefIndex(), factory.Literal(1))));
+                    BoundStatement payloadInitialization = factory.Assignment(
+                        factory.InstrumentationPayloadRoot(analysisKind, payloadArrayType),
+                        factory.Array(
+                            payloadArrayType.ElementType,
+                            factory.Binary(
+                                BinaryOperatorKind.Addition,
+                                factory.SpecialType(SpecialType.System_Int32),
+                                factory.MaximumMethodDefIndex(),
+                                factory.Literal(1)
+                            )
+                        )
+                    );
                     body.Add(payloadInitialization);
                 }
 
@@ -60,10 +88,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // MVID = new Guid(ModuleVersionIdString);
                 body.Add(
                     factory.Assignment(
-                       factory.ModuleVersionId(),
-                       factory.New(
-                           factory.WellKnownMethod(WellKnownMember.System_Guid__ctor),
-                           factory.ModuleVersionIdString())));
+                        factory.ModuleVersionId(),
+                        factory.New(
+                            factory.WellKnownMethod(WellKnownMember.System_Guid__ctor),
+                            factory.ModuleVersionIdString()
+                        )
+                    )
+                );
             }
             catch (SyntheticBoundNodeFactory.MissingPredefinedMember missing)
             {

@@ -21,8 +21,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
 {
     public partial class TypeInferrerTests : TypeInferrerTestBase<CSharpTestWorkspaceFixture>
     {
-        protected override async Task TestWorkerAsync(Document document, TextSpan textSpan, string expectedType, TestMode mode)
-        {
+        protected override async Task TestWorkerAsync(
+            Document document,
+            TextSpan textSpan,
+            string expectedType,
+            TestMode mode
+        ) {
             var root = await document.GetSyntaxRootAsync();
             var node = FindExpressionSyntaxFromSpan(root, textSpan);
             var typeInference = document.GetLanguageService<ITypeInferenceService>();
@@ -32,11 +36,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
             if (mode == TestMode.Position)
             {
                 var position = node?.SpanStart ?? textSpan.Start;
-                inferredType = typeInference.InferType(await document.ReuseExistingSpeculativeModelAsync(position, CancellationToken.None), position, objectAsDefault: true, cancellationToken: CancellationToken.None);
+                inferredType = typeInference.InferType(
+                    await document.ReuseExistingSpeculativeModelAsync(
+                        position,
+                        CancellationToken.None
+                    ),
+                    position,
+                    objectAsDefault: true,
+                    cancellationToken: CancellationToken.None
+                );
             }
             else
             {
-                inferredType = typeInference.InferType(await document.ReuseExistingSpeculativeModelAsync(node?.Span ?? textSpan, CancellationToken.None), node, objectAsDefault: true, cancellationToken: CancellationToken.None);
+                inferredType = typeInference.InferType(
+                    await document.ReuseExistingSpeculativeModelAsync(
+                        node?.Span ?? textSpan,
+                        CancellationToken.None
+                    ),
+                    node,
+                    objectAsDefault: true,
+                    cancellationToken: CancellationToken.None
+                );
             }
 
             var typeSyntax = inferredType.GenerateTypeSyntax().NormalizeWhitespace();
@@ -64,8 +84,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
             await TestAsync(text, expectedType, mode);
         }
 
-        private static ExpressionSyntax FindExpressionSyntaxFromSpan(SyntaxNode root, TextSpan textSpan)
-        {
+        private static ExpressionSyntax FindExpressionSyntaxFromSpan(
+            SyntaxNode root,
+            TextSpan textSpan
+        ) {
             var token = root.FindToken(textSpan.Start);
             var currentNode = token.Parent;
             while (currentNode != null)
@@ -87,74 +109,91 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
             // We do not support position inference here as we're before the ? and we only look
             // backwards to infer a type here.
             await TestInMethodAsync(
-@"var q = [|Goo()|] ? 1 : 2;", "global::System.Boolean",
-                TestMode.Node);
+                @"var q = [|Goo()|] ? 1 : 2;",
+                "global::System.Boolean",
+                TestMode.Node
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestConditional2(TestMode mode)
         {
-            await TestInMethodAsync(
-@"var q = a ? [|Goo()|] : 2;", "global::System.Int32", mode);
+            await TestInMethodAsync(@"var q = a ? [|Goo()|] : 2;", "global::System.Int32", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestConditional3(TestMode mode)
         {
             await TestInMethodAsync(
-@"var q = a ? """" : [|Goo()|];", "global::System.String", mode);
+                @"var q = a ? """" : [|Goo()|];",
+                "global::System.String",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestVariableDeclarator1(TestMode mode)
         {
-            await TestInMethodAsync(
-@"int q = [|Goo()|];", "global::System.Int32", mode);
+            await TestInMethodAsync(@"int q = [|Goo()|];", "global::System.Int32", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestVariableDeclarator2(TestMode mode)
         {
-            await TestInMethodAsync(
-@"var q = [|Goo()|];", "global::System.Object", mode);
+            await TestInMethodAsync(@"var q = [|Goo()|];", "global::System.Object", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestVariableDeclaratorNullableReferenceType(TestMode mode)
         {
             await TestInMethodAsync(
-@"#nullable enable
-string? q = [|Goo()|];", "global::System.String?", mode);
+                @"#nullable enable
+string? q = [|Goo()|];",
+                "global::System.String?",
+                mode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestCoalesce1()
         {
             await TestInMethodAsync(
-@"var q = [|Goo()|] ?? 1;", "global::System.Int32?", TestMode.Node);
+                @"var q = [|Goo()|] ?? 1;",
+                "global::System.Int32?",
+                TestMode.Node
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestCoalesce2(TestMode mode)
         {
             await TestInMethodAsync(
-@"bool? b;
-var q = b ?? [|Goo()|];", "global::System.Boolean", mode);
+                @"bool? b;
+var q = b ?? [|Goo()|];",
+                "global::System.Boolean",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestCoalesce3(TestMode mode)
         {
             await TestInMethodAsync(
-@"string s;
-var q = s ?? [|Goo()|];", "global::System.String", mode);
+                @"string s;
+var q = s ?? [|Goo()|];",
+                "global::System.String",
+                mode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestCoalesce4()
         {
             await TestInMethodAsync(
-@"var q = [|Goo()|] ?? string.Empty;", "global::System.String?", TestMode.Node);
+                @"var q = [|Goo()|] ?? string.Empty;",
+                "global::System.String?",
+                TestMode.Node
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
@@ -164,52 +203,57 @@ var q = s ?? [|Goo()|];", "global::System.String", mode);
             // a struct (where the question mark is legal) or a class (where it isn't). We'll thus avoid sticking question marks in this case.
             // https://github.com/dotnet/roslyn/issues/37852 tracks fixing this is a much fancier way.
             await TestInMethodAsync(
-@"ErrorType s;
-var q = [|Goo()|] ?? s;", "ErrorType", TestMode.Node);
+                @"ErrorType s;
+var q = [|Goo()|] ?? s;",
+                "ErrorType",
+                TestMode.Node
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestBinaryExpression1(TestMode mode)
         {
             await TestInMethodAsync(
-@"string s;
-var q = s + [|Goo()|];", "global::System.String", mode);
+                @"string s;
+var q = s + [|Goo()|];",
+                "global::System.String",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestBinaryExpression2(TestMode mode)
         {
             await TestInMethodAsync(
-@"var s;
-var q = s || [|Goo()|];", "global::System.Boolean", mode);
+                @"var s;
+var q = s || [|Goo()|];",
+                "global::System.Boolean",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestBinaryOperator1(TestMode mode)
         {
-            await TestInMethodAsync(
-@"var q = x << [|Goo()|];", "global::System.Int32", mode);
+            await TestInMethodAsync(@"var q = x << [|Goo()|];", "global::System.Int32", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestBinaryOperator2(TestMode mode)
         {
-            await TestInMethodAsync(
-@"var q = x >> [|Goo()|];", "global::System.Int32", mode);
+            await TestInMethodAsync(@"var q = x >> [|Goo()|];", "global::System.Int32", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestAssignmentOperator3(TestMode mode)
         {
-            await TestInMethodAsync(
-@"var q <<= [|Goo()|];", "global::System.Int32", mode);
+            await TestInMethodAsync(@"var q <<= [|Goo()|];", "global::System.Int32", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestAssignmentOperator4(TestMode mode)
         {
-            await TestInMethodAsync(
-@"var q >>= [|Goo()|];", "global::System.Int32", mode);
+            await TestInMethodAsync(@"var q >>= [|Goo()|];", "global::System.Int32", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
@@ -217,7 +261,7 @@ var q = s || [|Goo()|];", "global::System.Boolean", mode);
         public async Task TestOverloadedConditionalLogicalOperatorsInferBool(TestMode mode)
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -240,14 +284,18 @@ class C
     {
         var c = new C() && [|Goo()|];
     }
-}", "global::System.Boolean", mode);
+}",
+                "global::System.Boolean",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestConditionalLogicalOrOperatorAlwaysInfersBool(TestMode mode)
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -262,7 +310,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestConditionalLogicalAndOperatorAlwaysInfersBool(TestMode mode)
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -277,7 +326,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalOrOperatorInference1()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -292,7 +342,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalOrOperatorInference2()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -307,7 +358,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalOrOperatorInference3(TestMode mode)
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -322,7 +374,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalOrOperatorInference4()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -341,7 +394,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalOrOperatorInference5(TestMode mode)
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -360,7 +414,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalOrOperatorInference6()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -375,7 +430,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalOrOperatorInference7(TestMode mode)
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -390,7 +446,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalAndOperatorInference1()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -405,7 +462,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalAndOperatorInference2()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -420,7 +478,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalAndOperatorInference3(TestMode mode)
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -435,7 +494,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalAndOperatorInference4()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -454,7 +514,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalAndOperatorInference5(TestMode mode)
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -473,7 +534,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalAndOperatorInference6()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -488,7 +550,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalAndOperatorInference7(TestMode mode)
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -503,7 +566,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalXorOperatorInference1()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -518,7 +582,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalXorOperatorInference2()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -533,7 +598,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalXorOperatorInference3(TestMode mode)
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -548,7 +614,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalXorOperatorInference4()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -567,7 +634,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalXorOperatorInference5(TestMode mode)
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -586,7 +654,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalXorOperatorInference6()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -601,7 +670,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalXorOperatorInference7(TestMode mode)
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -616,7 +686,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalOrEqualsOperatorInference1(TestMode mode)
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -631,7 +702,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalOrEqualsOperatorInference2(TestMode mode)
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -646,7 +718,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalAndEqualsOperatorInference1(TestMode mode)
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -661,7 +734,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalAndEqualsOperatorInference2(TestMode mode)
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -676,7 +750,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalXorEqualsOperatorInference1(TestMode mode)
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -691,7 +766,8 @@ class C
         [WorkItem(617633, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/617633")]
         public async Task TestLogicalXorEqualsOperatorInference2(TestMode mode)
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 class C
 {
     static void Main(string[] args)
@@ -706,313 +782,381 @@ class C
         public async Task TestReturnInConstructor(TestMode mode)
         {
             await TestInClassAsync(
-@"C()
+                @"C()
 {
     return [|Goo()|];
-}", "void", mode);
+}",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInDestructor(TestMode mode)
         {
             await TestInClassAsync(
-@"~C()
+                @"~C()
 {
     return [|Goo()|];
-}", "void", mode);
+}",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInMethod(TestMode mode)
         {
             await TestInClassAsync(
-@"int M()
+                @"int M()
 {
     return [|Goo()|];
-}", "global::System.Int32", mode);
+}",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInMethodNullableReference(TestMode mode)
         {
             await TestInClassAsync(
-@"#nullable enable
+                @"#nullable enable
 string? M()
 {
     return [|Goo()|];
-}", "global::System.String?", mode);
+}",
+                "global::System.String?",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInVoidMethod(TestMode mode)
         {
             await TestInClassAsync(
-@"void M()
+                @"void M()
 {
     return [|Goo()|];
-}", "void", mode);
+}",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInAsyncTaskOfTMethod(TestMode mode)
         {
             await TestInClassAsync(
-@"async System.Threading.Tasks.Task<int> M()
+                @"async System.Threading.Tasks.Task<int> M()
 {
     return [|Goo()|];
-}", "global::System.Int32", mode);
+}",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInAsyncTaskOfTMethodNestedNullability(TestMode mode)
         {
             await TestInClassAsync(
-@"async System.Threading.Tasks.Task<string?> M()
+                @"async System.Threading.Tasks.Task<string?> M()
 {
     return [|Goo()|];
-}", "global::System.String?", mode);
+}",
+                "global::System.String?",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInAsyncTaskMethod(TestMode mode)
         {
             await TestInClassAsync(
-@"async System.Threading.Tasks.Task M()
+                @"async System.Threading.Tasks.Task M()
 {
     return [|Goo()|];
-}", "void", mode);
+}",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInAsyncVoidMethod(TestMode mode)
         {
             await TestInClassAsync(
-@"async void M()
+                @"async void M()
 {
     return [|Goo()|];
-}", "void", mode);
+}",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInOperator(TestMode mode)
         {
             await TestInClassAsync(
-@"public static C operator ++(C c)
+                @"public static C operator ++(C c)
 {
     return [|Goo()|];
-}", "global::C", mode);
+}",
+                "global::C",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInConversionOperator(TestMode mode)
         {
             await TestInClassAsync(
-@"public static implicit operator int(C c)
+                @"public static implicit operator int(C c)
 {
     return [|Goo()|];
-}", "global::System.Int32", mode);
+}",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInPropertyGetter(TestMode mode)
         {
             await TestInClassAsync(
-@"int P
+                @"int P
 {
     get
     {
         return [|Goo()|];
     }
-}", "global::System.Int32", mode);
+}",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInPropertyGetterNullableReference(TestMode mode)
         {
             await TestInClassAsync(
-@"#nullable enable
+                @"#nullable enable
 string? P
 {
     get
     {
         return [|Goo()|];
     }
-}", "global::System.String?", mode);
+}",
+                "global::System.String?",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInPropertySetter(TestMode mode)
         {
             await TestInClassAsync(
-@"int P
+                @"int P
 {
     set
     {
         return [|Goo()|];
     }
-}", "void", mode);
+}",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInIndexerGetter(TestMode mode)
         {
             await TestInClassAsync(
-@"int this[int i]
+                @"int this[int i]
 {
     get
     {
         return [|Goo()|];
     }
-}", "global::System.Int32", mode);
+}",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInIndexerGetterNullableReference(TestMode mode)
         {
             await TestInClassAsync(
-@"#nullable enable
+                @"#nullable enable
 string? this[int i]
 {
     get
     {
         return [|Goo()|];
     }
-}", "global::System.String?", mode);
+}",
+                "global::System.String?",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInIndexerSetter(TestMode mode)
         {
             await TestInClassAsync(
-@"int this[int i]
+                @"int this[int i]
 {
     set
     {
         return [|Goo()|];
     }
-}", "void", mode);
+}",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInEventAdder(TestMode mode)
         {
             await TestInClassAsync(
-@"event System.EventHandler E
+                @"event System.EventHandler E
 {
     add
     {
         return [|Goo()|];
     }
     remove { }
-}", "void", mode);
+}",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInEventRemover(TestMode mode)
         {
             await TestInClassAsync(
-@"event System.EventHandler E
+                @"event System.EventHandler E
 {
     add { }
     remove
     {
         return [|Goo()|];
     }
-}", "void", mode);
+}",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInLocalFunction(TestMode mode)
         {
             await TestInClassAsync(
-@"void M()
+                @"void M()
 {
     int F()
     {
         return [|Goo()|];
     }
-}", "global::System.Int32", mode);
+}",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInLocalFunctionNullableReference(TestMode mode)
         {
             await TestInClassAsync(
-@"#nullable enable
+                @"#nullable enable
 void M()
 {
     string? F()
     {
         return [|Goo()|];
     }
-}", "global::System.String?", mode);
+}",
+                "global::System.String?",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInAsyncTaskOfTLocalFunction(TestMode mode)
         {
             await TestInClassAsync(
-@"void M()
+                @"void M()
 {
     async System.Threading.Tasks.Task<int> F()
     {
         return [|Goo()|];
     }
-}", "global::System.Int32", mode);
+}",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInAsyncTaskLocalFunction(TestMode mode)
         {
             await TestInClassAsync(
-@"void M()
+                @"void M()
 {
     async System.Threading.Tasks.Task F()
     {
         return [|Goo()|];
     }
-}", "void", mode);
+}",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInAsyncVoidLocalFunction(TestMode mode)
         {
             await TestInClassAsync(
-@"void M()
+                @"void M()
 {
     async void F()
     {
         return [|Goo()|];
     }
-}", "void", mode);
+}",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestExpressionBodiedConstructor(TestMode mode)
         {
-            await TestInClassAsync(
-@"C() => [|Goo()|];", "void", mode);
+            await TestInClassAsync(@"C() => [|Goo()|];", "void", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestExpressionBodiedDestructor(TestMode mode)
         {
-            await TestInClassAsync(
-@"~C() => [|Goo()|];", "void", mode);
+            await TestInClassAsync(@"~C() => [|Goo()|];", "void", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestExpressionBodiedMethod(TestMode mode)
         {
-            await TestInClassAsync(
-@"int M() => [|Goo()|];", "global::System.Int32", mode);
+            await TestInClassAsync(@"int M() => [|Goo()|];", "global::System.Int32", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestExpressionBodiedVoidMethod(TestMode mode)
         {
-            await TestInClassAsync(
-@"void M() => [|Goo()|];", "void", mode);
+            await TestInClassAsync(@"void M() => [|Goo()|];", "void", mode);
         }
 
         [WorkItem(27647, "https://github.com/dotnet/roslyn/issues/27647")]
@@ -1020,7 +1164,10 @@ void M()
         public async Task TestExpressionBodiedAsyncTaskOfTMethod(TestMode mode)
         {
             await TestInClassAsync(
-@"async System.Threading.Tasks.Task<int> M() => [|Goo()|];", "global::System.Int32", mode);
+                @"async System.Threading.Tasks.Task<int> M() => [|Goo()|];",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [WorkItem(27647, "https://github.com/dotnet/roslyn/issues/27647")]
@@ -1028,8 +1175,11 @@ void M()
         public async Task TestExpressionBodiedAsyncTaskOfTMethodNullableReference(TestMode mode)
         {
             await TestInClassAsync(
-@"#nullable enable
-async System.Threading.Tasks.Task<string?> M() => [|Goo()|];", "global::System.String?", mode);
+                @"#nullable enable
+async System.Threading.Tasks.Task<string?> M() => [|Goo()|];",
+                "global::System.String?",
+                mode
+            );
         }
 
         [WorkItem(27647, "https://github.com/dotnet/roslyn/issues/27647")]
@@ -1037,94 +1187,109 @@ async System.Threading.Tasks.Task<string?> M() => [|Goo()|];", "global::System.S
         public async Task TestExpressionBodiedAsyncTaskMethod(TestMode mode)
         {
             await TestInClassAsync(
-@"async System.Threading.Tasks.Task M() => [|Goo()|];", "void", mode);
+                @"async System.Threading.Tasks.Task M() => [|Goo()|];",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestExpressionBodiedAsyncVoidMethod(TestMode mode)
         {
-            await TestInClassAsync(
-@"async void M() => [|Goo()|];", "void", mode);
+            await TestInClassAsync(@"async void M() => [|Goo()|];", "void", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestExpressionBodiedOperator(TestMode mode)
         {
             await TestInClassAsync(
-@"public static C operator ++(C c) => [|Goo()|];", "global::C", mode);
+                @"public static C operator ++(C c) => [|Goo()|];",
+                "global::C",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestExpressionBodiedConversionOperator(TestMode mode)
         {
             await TestInClassAsync(
-@"public static implicit operator int(C c) => [|Goo()|];", "global::System.Int32", mode);
+                @"public static implicit operator int(C c) => [|Goo()|];",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestExpressionBodiedProperty(TestMode mode)
         {
-            await TestInClassAsync(
-@"int P => [|Goo()|];", "global::System.Int32", mode);
+            await TestInClassAsync(@"int P => [|Goo()|];", "global::System.Int32", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestExpressionBodiedIndexer(TestMode mode)
         {
-            await TestInClassAsync(
-@"int this[int i] => [|Goo()|];", "global::System.Int32", mode);
+            await TestInClassAsync(@"int this[int i] => [|Goo()|];", "global::System.Int32", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestExpressionBodiedPropertyGetter(TestMode mode)
         {
-            await TestInClassAsync(
-@"int P { get => [|Goo()|]; }", "global::System.Int32", mode);
+            await TestInClassAsync(@"int P { get => [|Goo()|]; }", "global::System.Int32", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestExpressionBodiedPropertySetter(TestMode mode)
         {
-            await TestInClassAsync(
-@"int P { set => [|Goo()|]; }", "void", mode);
+            await TestInClassAsync(@"int P { set => [|Goo()|]; }", "void", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestExpressionBodiedIndexerGetter(TestMode mode)
         {
             await TestInClassAsync(
-@"int this[int i] { get => [|Goo()|]; }", "global::System.Int32", mode);
+                @"int this[int i] { get => [|Goo()|]; }",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestExpressionBodiedIndexerSetter(TestMode mode)
         {
-            await TestInClassAsync(
-@"int this[int i] { set => [|Goo()|]; }", "void", mode);
+            await TestInClassAsync(@"int this[int i] { set => [|Goo()|]; }", "void", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestExpressionBodiedEventAdder(TestMode mode)
         {
             await TestInClassAsync(
-@"event System.EventHandler E { add => [|Goo()|]; remove { } }", "void", mode);
+                @"event System.EventHandler E { add => [|Goo()|]; remove { } }",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestExpressionBodiedEventRemover(TestMode mode)
         {
             await TestInClassAsync(
-@"event System.EventHandler E { add { } remove => [|Goo()|]; }", "void", mode);
+                @"event System.EventHandler E { add { } remove => [|Goo()|]; }",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestExpressionBodiedLocalFunction(TestMode mode)
         {
             await TestInClassAsync(
-@"void M()
+                @"void M()
 {
     int F() => [|Goo()|];
-}", "global::System.Int32", mode);
+}",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [WorkItem(27647, "https://github.com/dotnet/roslyn/issues/27647")]
@@ -1132,10 +1297,13 @@ async System.Threading.Tasks.Task<string?> M() => [|Goo()|];", "global::System.S
         public async Task TestExpressionBodiedAsyncTaskOfTLocalFunction(TestMode mode)
         {
             await TestInClassAsync(
-@"void M()
+                @"void M()
 {
     async System.Threading.Tasks.Task<int> F() => [|Goo()|];
-}", "global::System.Int32", mode);
+}",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [WorkItem(27647, "https://github.com/dotnet/roslyn/issues/27647")]
@@ -1143,28 +1311,37 @@ async System.Threading.Tasks.Task<string?> M() => [|Goo()|];", "global::System.S
         public async Task TestExpressionBodiedAsyncTaskLocalFunction(TestMode mode)
         {
             await TestInClassAsync(
-@"void M()
+                @"void M()
 {
     async System.Threading.Tasks.Task F() => [|Goo()|];
-}", "void", mode);
+}",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestExpressionBodiedAsyncVoidLocalFunction(TestMode mode)
         {
             await TestInClassAsync(
-@"void M()
+                @"void M()
 {
     async void F() => [|Goo()|];
-}", "void", mode);
+}",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         [WorkItem(827897, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/827897")]
-        public async Task TestYieldReturnInMethod([CombinatorialValues("IEnumerable", "IEnumerator", "InvalidGenericType")] string returnTypeName, TestMode mode)
-        {
+        public async Task TestYieldReturnInMethod(
+            [CombinatorialValues("IEnumerable", "IEnumerator", "InvalidGenericType")]
+                string returnTypeName,
+            TestMode mode
+        ) {
             var markup =
-$@"using System.Collections.Generic;
+                $@"using System.Collections.Generic;
 
 class C
 {{
@@ -1177,10 +1354,13 @@ class C
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
-        public async Task TestYieldReturnInMethodNullableReference([CombinatorialValues("IEnumerable", "IEnumerator", "InvalidGenericType")] string returnTypeName, TestMode mode)
-        {
+        public async Task TestYieldReturnInMethodNullableReference(
+            [CombinatorialValues("IEnumerable", "IEnumerator", "InvalidGenericType")]
+                string returnTypeName,
+            TestMode mode
+        ) {
             var markup =
-$@"#nullable enable
+                $@"#nullable enable
 using System.Collections.Generic;
 
 class C
@@ -1194,10 +1374,13 @@ class C
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
-        public async Task TestYieldReturnInAsyncMethod([CombinatorialValues("IAsyncEnumerable", "IAsyncEnumerator", "InvalidGenericType")] string returnTypeName, TestMode mode)
-        {
+        public async Task TestYieldReturnInAsyncMethod(
+            [CombinatorialValues("IAsyncEnumerable", "IAsyncEnumerator", "InvalidGenericType")]
+                string returnTypeName,
+            TestMode mode
+        ) {
             var markup =
-$@"namespace System.Collections.Generic
+                $@"namespace System.Collections.Generic
 {{
     interface {returnTypeName}<T> {{ }}
     class C
@@ -1212,10 +1395,13 @@ $@"namespace System.Collections.Generic
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
-        public async Task TestYieldReturnInvalidTypeInMethod([CombinatorialValues("int[]", "InvalidNonGenericType", "InvalidGenericType<int, int>")] string returnType, TestMode mode)
-        {
+        public async Task TestYieldReturnInvalidTypeInMethod(
+            [CombinatorialValues("int[]", "InvalidNonGenericType", "InvalidGenericType<int, int>")]
+                string returnType,
+            TestMode mode
+        ) {
             var markup =
-$@"class C
+                $@"class C
 {{
     {returnType} M()
     {{
@@ -1230,7 +1416,7 @@ $@"class C
         public async Task TestYieldReturnInLocalFunction(TestMode mode)
         {
             var markup =
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -1249,7 +1435,7 @@ class C
         public async Task TestYieldReturnInPropertyGetter(TestMode mode)
         {
             var markup =
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -1268,7 +1454,7 @@ class C
         public async Task TestYieldReturnInPropertySetter(TestMode mode)
         {
             var markup =
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -1287,59 +1473,78 @@ class C
         public async Task TestYieldReturnAsGlobalStatement(TestMode mode)
         {
             await TestAsync(
-@"yield return [|abc|]", "global::System.Object", mode, sourceCodeKind: SourceCodeKind.Script);
+                @"yield return [|abc|]",
+                "global::System.Object",
+                mode,
+                sourceCodeKind: SourceCodeKind.Script
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInSimpleLambda(TestMode mode)
         {
             await TestInMethodAsync(
-@"System.Func<string, int> f = s =>
+                @"System.Func<string, int> f = s =>
 {
     return [|Goo()|];
-};", "global::System.Int32", mode);
+};",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInParenthesizedLambda(TestMode mode)
         {
             await TestInMethodAsync(
-@"System.Func<int> f = () =>
+                @"System.Func<int> f = () =>
 {
     return [|Goo()|];
-};", "global::System.Int32", mode);
+};",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInLambdaWithNullableReturn(TestMode mode)
         {
             await TestInMethodAsync(
-@"#nullable enable
+                @"#nullable enable
 System.Func<string, string?> f = s =>
 {
     return [|Goo()|];
-};", "global::System.String?", mode);
+};",
+                "global::System.String?",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInAnonymousMethod(TestMode mode)
         {
             await TestInMethodAsync(
-@"System.Func<int> f = delegate ()
+                @"System.Func<int> f = delegate ()
 {
     return [|Goo()|];
-};", "global::System.Int32", mode);
+};",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInAnonymousMethodWithNullableReturn(TestMode mode)
         {
             await TestInMethodAsync(
-@"#nullable enable
+                @"#nullable enable
 System.Func<string?> f = delegate ()
 {
     return [|Goo()|];
-};", "global::System.String?", mode);
+};",
+                "global::System.String?",
+                mode
+            );
         }
 
         [WorkItem(4486, "https://github.com/dotnet/roslyn/issues/4486")]
@@ -1347,10 +1552,13 @@ System.Func<string?> f = delegate ()
         public async Task TestReturnInAsyncTaskOfTSimpleLambda(TestMode mode)
         {
             await TestInMethodAsync(
-@"System.Func<string, System.Threading.Tasks.Task<int>> f = async s =>
+                @"System.Func<string, System.Threading.Tasks.Task<int>> f = async s =>
 {
     return [|Goo()|];
-};", "global::System.Int32", mode);
+};",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [WorkItem(4486, "https://github.com/dotnet/roslyn/issues/4486")]
@@ -1358,10 +1566,13 @@ System.Func<string?> f = delegate ()
         public async Task TestReturnInAsyncTaskOfTParenthesizedLambda(TestMode mode)
         {
             await TestInMethodAsync(
-@"System.Func<System.Threading.Tasks.Task<int>> f = async () =>
+                @"System.Func<System.Threading.Tasks.Task<int>> f = async () =>
 {
     return [|Goo()|];
-};", "global::System.Int32", mode);
+};",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [WorkItem(4486, "https://github.com/dotnet/roslyn/issues/4486")]
@@ -1369,102 +1580,137 @@ System.Func<string?> f = delegate ()
         public async Task TestReturnInAsyncTaskOfTAnonymousMethod(TestMode mode)
         {
             await TestInMethodAsync(
-@"System.Func<System.Threading.Tasks.Task<int>> f = async delegate ()
+                @"System.Func<System.Threading.Tasks.Task<int>> f = async delegate ()
 {
     return [|Goo()|];
-};", "global::System.Int32", mode);
+};",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
-        public async Task TestReturnInAsyncTaskOfTAnonymousMethodWithNullableReference(TestMode mode)
-        {
+        public async Task TestReturnInAsyncTaskOfTAnonymousMethodWithNullableReference(
+            TestMode mode
+        ) {
             await TestInMethodAsync(
-@"#nullable enable
+                @"#nullable enable
 System.Func<System.Threading.Tasks.Task<string?>> f = async delegate ()
 {
     return [|Goo()|];
-};", "global::System.String?", mode);
+};",
+                "global::System.String?",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInAsyncTaskSimpleLambda(TestMode mode)
         {
             await TestInMethodAsync(
-@"System.Func<string, System.Threading.Tasks.Task> f = async s =>
+                @"System.Func<string, System.Threading.Tasks.Task> f = async s =>
 {
     return [|Goo()|];
-};", "void", mode);
+};",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInAsyncTaskParenthesizedLambda(TestMode mode)
         {
             await TestInMethodAsync(
-@"System.Func<System.Threading.Tasks.Task> f = async () =>
+                @"System.Func<System.Threading.Tasks.Task> f = async () =>
 {
     return [|Goo()|];
-};", "void", mode);
+};",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInAsyncTaskAnonymousMethod(TestMode mode)
         {
             await TestInMethodAsync(
-@"System.Func<System.Threading.Tasks.Task> f = async delegate ()
+                @"System.Func<System.Threading.Tasks.Task> f = async delegate ()
 {
     return [|Goo()|];
-};", "void", mode);
+};",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInAsyncVoidSimpleLambda(TestMode mode)
         {
             await TestInMethodAsync(
-@"System.Action<string> f = async s =>
+                @"System.Action<string> f = async s =>
 {
     return [|Goo()|];
-};", "void", mode);
+};",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInAsyncVoidParenthesizedLambda(TestMode mode)
         {
             await TestInMethodAsync(
-@"System.Action f = async () =>
+                @"System.Action f = async () =>
 {
     return [|Goo()|];
-};", "void", mode);
+};",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnInAsyncVoidAnonymousMethod(TestMode mode)
         {
             await TestInMethodAsync(
-@"System.Action f = async delegate ()
+                @"System.Action f = async delegate ()
 {
     return [|Goo()|];
-};", "void", mode);
+};",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestReturnAsGlobalStatement(TestMode mode)
         {
             await TestAsync(
-@"return [|Goo()|];", "global::System.Object", mode, sourceCodeKind: SourceCodeKind.Script);
+                @"return [|Goo()|];",
+                "global::System.Object",
+                mode,
+                sourceCodeKind: SourceCodeKind.Script
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestSimpleLambda(TestMode mode)
         {
             await TestInMethodAsync(
-@"System.Func<string, int> f = s => [|Goo()|];", "global::System.Int32", mode);
+                @"System.Func<string, int> f = s => [|Goo()|];",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestParenthesizedLambda(TestMode mode)
         {
             await TestInMethodAsync(
-@"System.Func<int> f = () => [|Goo()|];", "global::System.Int32", mode);
+                @"System.Func<int> f = () => [|Goo()|];",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
@@ -1472,15 +1718,21 @@ System.Func<System.Threading.Tasks.Task<string?>> f = async delegate ()
         public async Task TestAsyncTaskOfTSimpleLambda(TestMode mode)
         {
             await TestInMethodAsync(
-@"System.Func<string, System.Threading.Tasks.Task<int>> f = async s => [|Goo()|];", "global::System.Int32", mode);
+                @"System.Func<string, System.Threading.Tasks.Task<int>> f = async s => [|Goo()|];",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestAsyncTaskOfTSimpleLambdaWithNullableReturn(TestMode mode)
         {
             await TestInMethodAsync(
-@"#nullable enable
-System.Func<string, System.Threading.Tasks.Task<string?>> f = async s => [|Goo()|];", "global::System.String?", mode);
+                @"#nullable enable
+System.Func<string, System.Threading.Tasks.Task<string?>> f = async s => [|Goo()|];",
+                "global::System.String?",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
@@ -1488,7 +1740,10 @@ System.Func<string, System.Threading.Tasks.Task<string?>> f = async s => [|Goo()
         public async Task TestAsyncTaskOfTParenthesizedLambda(TestMode mode)
         {
             await TestInMethodAsync(
-@"System.Func<System.Threading.Tasks.Task<int>> f = async () => [|Goo()|];", "global::System.Int32", mode);
+                @"System.Func<System.Threading.Tasks.Task<int>> f = async () => [|Goo()|];",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
@@ -1496,7 +1751,10 @@ System.Func<string, System.Threading.Tasks.Task<string?>> f = async s => [|Goo()
         public async Task TestAsyncTaskSimpleLambda(TestMode mode)
         {
             await TestInMethodAsync(
-@"System.Func<string, System.Threading.Tasks.Task> f = async s => [|Goo()|];", "void", mode);
+                @"System.Func<string, System.Threading.Tasks.Task> f = async s => [|Goo()|];",
+                "void",
+                mode
+            );
         }
 
         [WorkItem(30232, "https://github.com/dotnet/roslyn/issues/30232")]
@@ -1504,298 +1762,376 @@ System.Func<string, System.Threading.Tasks.Task<string?>> f = async s => [|Goo()
         public async Task TestAsyncTaskParenthesizedLambda(TestMode mode)
         {
             await TestInMethodAsync(
-@"System.Func<System.Threading.Tasks.Task> f = async () => [|Goo()|];", "void", mode);
+                @"System.Func<System.Threading.Tasks.Task> f = async () => [|Goo()|];",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestAsyncVoidSimpleLambda(TestMode mode)
         {
             await TestInMethodAsync(
-@"System.Action<string> f = async s => [|Goo()|];", "void", mode);
+                @"System.Action<string> f = async s => [|Goo()|];",
+                "void",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestAsyncVoidParenthesizedLambda(TestMode mode)
         {
-            await TestInMethodAsync(
-@"System.Action f = async () => [|Goo()|];", "void", mode);
+            await TestInMethodAsync(@"System.Action f = async () => [|Goo()|];", "void", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestExpressionTreeSimpleLambda(TestMode mode)
         {
             await TestInMethodAsync(
-@"System.Linq.Expressions.Expression<System.Func<string, int>> f = s => [|Goo()|];", "global::System.Int32", mode);
+                @"System.Linq.Expressions.Expression<System.Func<string, int>> f = s => [|Goo()|];",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestExpressionTreeParenthesizedLambda(TestMode mode)
         {
             await TestInMethodAsync(
-@"System.Linq.Expressions.Expression<System.Func<int>> f = () => [|Goo()|];", "global::System.Int32", mode);
+                @"System.Linq.Expressions.Expression<System.Func<int>> f = () => [|Goo()|];",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestThrow(TestMode mode)
         {
-            await TestInMethodAsync(
-@"throw [|Goo()|];", "global::System.Exception", mode);
+            await TestInMethodAsync(@"throw [|Goo()|];", "global::System.Exception", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
-        public async Task TestCatch(TestMode mode)
-            => await TestInMethodAsync("try { } catch ([|Goo|] ex) { }", "global::System.Exception", mode);
+        public async Task TestCatch(TestMode mode) =>
+            await TestInMethodAsync(
+                "try { } catch ([|Goo|] ex) { }",
+                "global::System.Exception",
+                mode
+            );
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
-        public async Task TestIf(TestMode mode)
-            => await TestInMethodAsync(@"if ([|Goo()|]) { }", "global::System.Boolean", mode);
+        public async Task TestIf(TestMode mode) =>
+            await TestInMethodAsync(@"if ([|Goo()|]) { }", "global::System.Boolean", mode);
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
-        public async Task TestWhile(TestMode mode)
-            => await TestInMethodAsync(@"while ([|Goo()|]) { }", "global::System.Boolean", mode);
+        public async Task TestWhile(TestMode mode) =>
+            await TestInMethodAsync(@"while ([|Goo()|]) { }", "global::System.Boolean", mode);
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
-        public async Task TestDo(TestMode mode)
-            => await TestInMethodAsync(@"do { } while ([|Goo()|])", "global::System.Boolean", mode);
+        public async Task TestDo(TestMode mode) =>
+            await TestInMethodAsync(@"do { } while ([|Goo()|])", "global::System.Boolean", mode);
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestFor1(TestMode mode)
         {
             await TestInMethodAsync(
-@"for (int i = 0; [|Goo()|];
+                @"for (int i = 0; [|Goo()|];
 
-i++) { }", "global::System.Boolean", mode);
+i++) { }",
+                "global::System.Boolean",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
-        public async Task TestFor2(TestMode mode)
-            => await TestInMethodAsync(@"for (string i = [|Goo()|]; ; ) { }", "global::System.String", mode);
+        public async Task TestFor2(TestMode mode) =>
+            await TestInMethodAsync(
+                @"for (string i = [|Goo()|]; ; ) { }",
+                "global::System.String",
+                mode
+            );
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
-        public async Task TestFor3(TestMode mode)
-            => await TestInMethodAsync(@"for (var i = [|Goo()|]; ; ) { }", "global::System.Int32", mode);
+        public async Task TestFor3(TestMode mode) =>
+            await TestInMethodAsync(
+                @"for (var i = [|Goo()|]; ; ) { }",
+                "global::System.Int32",
+                mode
+            );
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestForNullableReference(TestMode mode)
         {
             await TestInMethodAsync(
-@"#nullable enable
-for (string? s = [|Goo()|]; ; ) { }", "global::System.String?", mode);
+                @"#nullable enable
+for (string? s = [|Goo()|]; ; ) { }",
+                "global::System.String?",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
-        public async Task TestUsing1(TestMode mode)
-            => await TestInMethodAsync(@"using ([|Goo()|]) { }", "global::System.IDisposable", mode);
+        public async Task TestUsing1(TestMode mode) =>
+            await TestInMethodAsync(@"using ([|Goo()|]) { }", "global::System.IDisposable", mode);
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
-        public async Task TestUsing2(TestMode mode)
-            => await TestInMethodAsync(@"using (int i = [|Goo()|]) { }", "global::System.Int32", mode);
+        public async Task TestUsing2(TestMode mode) =>
+            await TestInMethodAsync(@"using (int i = [|Goo()|]) { }", "global::System.Int32", mode);
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
-        public async Task TestUsing3(TestMode mode)
-            => await TestInMethodAsync(@"using (var v = [|Goo()|]) { }", "global::System.IDisposable", mode);
+        public async Task TestUsing3(TestMode mode) =>
+            await TestInMethodAsync(
+                @"using (var v = [|Goo()|]) { }",
+                "global::System.IDisposable",
+                mode
+            );
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
-        public async Task TestForEach(TestMode mode)
-            => await TestInMethodAsync(@"foreach (int v in [|Goo()|]) { }", "global::System.Collections.Generic.IEnumerable<global::System.Int32>", mode);
+        public async Task TestForEach(TestMode mode) =>
+            await TestInMethodAsync(
+                @"foreach (int v in [|Goo()|]) { }",
+                "global::System.Collections.Generic.IEnumerable<global::System.Int32>",
+                mode
+            );
 
-        [Theory(Skip = "https://github.com/dotnet/roslyn/issues/37309"), CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
+        [
+            Theory(Skip = "https://github.com/dotnet/roslyn/issues/37309"),
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.TypeInferenceService)
+        ]
         public async Task TestForEachNullableElements(TestMode mode)
         {
             await TestInMethodAsync(
-@"#nullable enable
-foreach (string? v in [|Goo()|]) { }", "global::System.Collections.Generic.IEnumerable<global::System.String?>", mode);
+                @"#nullable enable
+foreach (string? v in [|Goo()|]) { }",
+                "global::System.Collections.Generic.IEnumerable<global::System.String?>",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestPrefixExpression1(TestMode mode)
         {
-            await TestInMethodAsync(
-@"var q = +[|Goo()|];", "global::System.Int32", mode);
+            await TestInMethodAsync(@"var q = +[|Goo()|];", "global::System.Int32", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestPrefixExpression2(TestMode mode)
         {
-            await TestInMethodAsync(
-@"var q = -[|Goo()|];", "global::System.Int32", mode);
+            await TestInMethodAsync(@"var q = -[|Goo()|];", "global::System.Int32", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestPrefixExpression3(TestMode mode)
         {
-            await TestInMethodAsync(
-@"var q = ~[|Goo()|];", "global::System.Int32", mode);
+            await TestInMethodAsync(@"var q = ~[|Goo()|];", "global::System.Int32", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestPrefixExpression4(TestMode mode)
         {
-            await TestInMethodAsync(
-@"var q = ![|Goo()|];", "global::System.Boolean", mode);
+            await TestInMethodAsync(@"var q = ![|Goo()|];", "global::System.Boolean", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestPrefixExpression5(TestMode mode)
         {
             await TestInMethodAsync(
-@"var q = System.DayOfWeek.Monday & ~[|Goo()|];", "global::System.DayOfWeek", mode);
+                @"var q = System.DayOfWeek.Monday & ~[|Goo()|];",
+                "global::System.DayOfWeek",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestArrayRankSpecifier(TestMode mode)
         {
             await TestInMethodAsync(
-@"var q = new string[[|Goo()|]];", "global::System.Int32", mode);
+                @"var q = new string[[|Goo()|]];",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
-        public async Task TestSwitch1(TestMode mode)
-            => await TestInMethodAsync(@"switch ([|Goo()|]) { }", "global::System.Int32", mode);
+        public async Task TestSwitch1(TestMode mode) =>
+            await TestInMethodAsync(@"switch ([|Goo()|]) { }", "global::System.Int32", mode);
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
-        public async Task TestSwitch2(TestMode mode)
-            => await TestInMethodAsync(@"switch ([|Goo()|]) { default: }", "global::System.Int32", mode);
+        public async Task TestSwitch2(TestMode mode) =>
+            await TestInMethodAsync(
+                @"switch ([|Goo()|]) { default: }",
+                "global::System.Int32",
+                mode
+            );
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
-        public async Task TestSwitch3(TestMode mode)
-            => await TestInMethodAsync(@"switch ([|Goo()|]) { case ""a"": }", "global::System.String", mode);
+        public async Task TestSwitch3(TestMode mode) =>
+            await TestInMethodAsync(
+                @"switch ([|Goo()|]) { case ""a"": }",
+                "global::System.String",
+                mode
+            );
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestMethodCall1(TestMode mode)
         {
-            await TestInMethodAsync(
-@"Bar([|Goo()|]);", "global::System.Object", mode);
+            await TestInMethodAsync(@"Bar([|Goo()|]);", "global::System.Object", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestMethodCall2(TestMode mode)
         {
             await TestInClassAsync(
-@"void M()
+                @"void M()
 {
     Bar([|Goo()|]);
 }
 
-void Bar(int i);", "global::System.Int32", mode);
+void Bar(int i);",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestMethodCall3(TestMode mode)
         {
             await TestInClassAsync(
-@"void M()
+                @"void M()
 {
     Bar([|Goo()|]);
 }
 
-void Bar();", "global::System.Object", mode);
+void Bar();",
+                "global::System.Object",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestMethodCall4(TestMode mode)
         {
             await TestInClassAsync(
-@"void M()
+                @"void M()
 {
     Bar([|Goo()|]);
 }
 
-void Bar(int i, string s);", "global::System.Int32", mode);
+void Bar(int i, string s);",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestMethodCall5(TestMode mode)
         {
             await TestInClassAsync(
-@"void M()
+                @"void M()
 {
     Bar(s: [|Goo()|]);
 }
 
-void Bar(int i, string s);", "global::System.String", mode);
+void Bar(int i, string s);",
+                "global::System.String",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestMethodCallNullableReference(TestMode mode)
         {
             await TestInClassAsync(
-@"void M()
+                @"void M()
 {
     Bar([|Goo()|]);
 }
 
-void Bar(string? s);", "global::System.String?", mode);
+void Bar(string? s);",
+                "global::System.String?",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestConstructorCall1(TestMode mode)
         {
-            await TestInMethodAsync(
-@"new C([|Goo()|]);", "global::System.Object", mode);
+            await TestInMethodAsync(@"new C([|Goo()|]);", "global::System.Object", mode);
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestConstructorCall2(TestMode mode)
         {
             await TestInClassAsync(
-@"void M()
+                @"void M()
 {
     new C([|Goo()|]);
 }
 
 C(int i)
 {
-}", "global::System.Int32", mode);
+}",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestConstructorCall3(TestMode mode)
         {
             await TestInClassAsync(
-@"void M()
+                @"void M()
 {
     new C([|Goo()|]);
 }
 
 C()
 {
-}", "global::System.Object", mode);
+}",
+                "global::System.Object",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestConstructorCall4(TestMode mode)
         {
             await TestInClassAsync(
-@"void M()
+                @"void M()
 {
     new C([|Goo()|]);
 }
 
 C(int i, string s)
 {
-}", "global::System.Int32", mode);
+}",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestConstructorCall5(TestMode mode)
         {
             await TestInClassAsync(
-@"void M()
+                @"void M()
 {
     new C(s: [|Goo()|]);
 }
 
 C(int i, string s)
 {
-}", "global::System.String", mode);
+}",
+                "global::System.String",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestConstructorCallNullableParameter(TestMode mode)
         {
             await TestInClassAsync(
-@"#nullable enable
+                @"#nullable enable
 
 void M()
 {
@@ -1804,7 +2140,10 @@ void M()
 
 C(string? s)
 {
-}", "global::System.String?", mode);
+}",
+                "global::System.String?",
+                mode
+            );
         }
 
         [WorkItem(858112, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/858112")]
@@ -1812,12 +2151,15 @@ C(string? s)
         public async Task TestThisConstructorInitializer1(TestMode mode)
         {
             await TestAsync(
-@"class MyClass
+                @"class MyClass
 {
     public MyClass(int x) : this([|test|])
     {
     }
-}", "global::System.Int32", mode);
+}",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [WorkItem(858112, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/858112")]
@@ -1825,26 +2167,32 @@ C(string? s)
         public async Task TestThisConstructorInitializer2(TestMode mode)
         {
             await TestAsync(
-@"class MyClass
+                @"class MyClass
 {
     public MyClass(int x, string y) : this(5, [|test|])
     {
     }
-}", "global::System.String", mode);
+}",
+                "global::System.String",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestThisConstructorInitializerNullableParameter(TestMode mode)
         {
             await TestAsync(
-@"#nullable enable
+                @"#nullable enable
 
 class MyClass
 {
     public MyClass(string? y) : this([|test|])
     {
     }
-}", "global::System.String?", mode);
+}",
+                "global::System.String?",
+                mode
+            );
         }
 
         [WorkItem(858112, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/858112")]
@@ -1852,7 +2200,7 @@ class MyClass
         public async Task TestBaseConstructorInitializer(TestMode mode)
         {
             await TestAsync(
-@"class B
+                @"class B
 {
     public B(int x)
     {
@@ -1864,14 +2212,17 @@ class D : B
     public D() : base([|test|])
     {
     }
-}", "global::System.Int32", mode);
+}",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestBaseConstructorInitializerNullableParameter(TestMode mode)
         {
             await TestAsync(
-@"#nullable enable
+                @"#nullable enable
 
 class B
 {
@@ -1885,63 +2236,78 @@ class D : B
     public D() : base([|test|])
     {
     }
-}", "global::System.String?", mode);
+}",
+                "global::System.String?",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestIndexAccess1(TestMode mode)
         {
             await TestInMethodAsync(
-@"string[] i;
+                @"string[] i;
 
-i[[|Goo()|]];", "global::System.Int32", mode);
+i[[|Goo()|]];",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
-        public async Task TestIndexerCall1(TestMode mode)
-            => await TestInMethodAsync(@"this[[|Goo()|]];", "global::System.Int32", mode);
+        public async Task TestIndexerCall1(TestMode mode) =>
+            await TestInMethodAsync(@"this[[|Goo()|]];", "global::System.Int32", mode);
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestIndexerCall2(TestMode mode)
         {
             await TestInClassAsync(
-@"void M()
+                @"void M()
 {
     this[[|Goo()|]];
 }
 
-int this[long i] { get; }", "global::System.Int64", mode);
+int this[long i] { get; }",
+                "global::System.Int64",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestIndexerCall3(TestMode mode)
         {
             await TestInClassAsync(
-@"void M()
+                @"void M()
 {
     this[42, [|Goo()|]];
 }
 
-int this[int i, string s] { get; }", "global::System.String", mode);
+int this[int i, string s] { get; }",
+                "global::System.String",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestIndexerCall5(TestMode mode)
         {
             await TestInClassAsync(
-@"void M()
+                @"void M()
 {
     this[s: [|Goo()|]];
 }
 
-int this[int i, string s] { get; }", "global::System.String", mode);
+int this[int i, string s] { get; }",
+                "global::System.String",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestArrayInitializerInImplicitArrayCreationSimple(TestMode mode)
         {
             var text =
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -1958,7 +2324,7 @@ class C
         public async Task TestArrayInitializerInImplicitArrayCreation1(TestMode mode)
         {
             var text =
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -1978,7 +2344,7 @@ class C
         public async Task TestArrayInitializerInImplicitArrayCreation2(TestMode mode)
         {
             var text =
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -1997,7 +2363,7 @@ class C
         public async Task TestArrayInitializerInImplicitArrayCreation3(TestMode mode)
         {
             var text =
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -2011,10 +2377,11 @@ class C
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
-        public async Task TestArrayInitializerInImplicitArrayCreationInferredAsNullable(TestMode mode)
-        {
+        public async Task TestArrayInitializerInImplicitArrayCreationInferredAsNullable(
+            TestMode mode
+        ) {
             var text =
-@"#nullable enable
+                @"#nullable enable
 
 using System.Collections.Generic;
 
@@ -2035,7 +2402,7 @@ class C
         public async Task TestArrayInitializerInEqualsValueClauseSimple(TestMode mode)
         {
             var text =
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -2052,7 +2419,7 @@ class C
         public async Task TestArrayInitializerInEqualsValueClause(TestMode mode)
         {
             var text =
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -2071,7 +2438,7 @@ class C
         public async Task TestArrayInitializerInEqualsValueClauseNullableElement(TestMode mode)
         {
             var text =
-@"#nullable enable
+                @"#nullable enable
 
 using System.Collections.Generic;
 
@@ -2091,7 +2458,7 @@ class C
         public async Task TestCollectionInitializer1(TestMode mode)
         {
             var text =
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -2108,7 +2475,7 @@ class C
         public async Task TestCollectionInitializerNullableElement(TestMode mode)
         {
             var text =
-@"#nullable enable
+                @"#nullable enable
 
 using System.Collections.Generic;
 
@@ -2128,7 +2495,7 @@ class C
         public async Task TestCollectionInitializer2(TestMode mode)
         {
             var text =
-@"
+                @"
 using System.Collections.Generic;
 
 class C
@@ -2147,7 +2514,7 @@ class C
         public async Task TestCollectionInitializer3(TestMode mode)
         {
             var text =
-@"
+                @"
 using System.Collections.Generic;
 
 class C
@@ -2166,7 +2533,7 @@ class C
         public async Task TestCustomCollectionInitializerAddMethod1()
         {
             var text =
-@"class C : System.Collections.IEnumerable
+                @"class C : System.Collections.IEnumerable
 {
     void M()
     {
@@ -2190,7 +2557,7 @@ class C
         public async Task TestCustomCollectionInitializerAddMethod2(TestMode mode)
         {
             var text =
-@"class C : System.Collections.IEnumerable
+                @"class C : System.Collections.IEnumerable
 {
     void M()
     {
@@ -2214,7 +2581,7 @@ class C
         public async Task TestCustomCollectionInitializerAddMethod3(TestMode mode)
         {
             var text =
-@"class C : System.Collections.IEnumerable
+                @"class C : System.Collections.IEnumerable
 {
     void M()
     {
@@ -2234,10 +2601,11 @@ class C
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
-        public async Task TestCustomCollectionInitializerAddMethodWithNullableParameter(TestMode mode)
-        {
+        public async Task TestCustomCollectionInitializerAddMethodWithNullableParameter(
+            TestMode mode
+        ) {
             var text =
-@"class C : System.Collections.IEnumerable
+                @"class C : System.Collections.IEnumerable
 {
     void M()
     {
@@ -2260,7 +2628,7 @@ class C
         public async Task TestArrayInference1()
         {
             var text =
-@"
+                @"
 class A
 {
     void Goo()
@@ -2276,7 +2644,7 @@ class A
         public async Task TestArrayInference1_Position()
         {
             var text =
-@"
+                @"
 class A
 {
     void Goo()
@@ -2292,7 +2660,7 @@ class A
         public async Task TestArrayInference2()
         {
             var text =
-@"
+                @"
 class A
 {
     void Goo()
@@ -2308,7 +2676,7 @@ class A
         public async Task TestArrayInference2_Position()
         {
             var text =
-@"
+                @"
 class A
 {
     void Goo()
@@ -2324,7 +2692,7 @@ class A
         public async Task TestArrayInference3()
         {
             var text =
-@"
+                @"
 class A
 {
     void Goo()
@@ -2340,7 +2708,7 @@ class A
         public async Task TestArrayInference3_Position()
         {
             var text =
-@"
+                @"
 class A
 {
     void Goo()
@@ -2356,7 +2724,7 @@ class A
         public async Task TestArrayInference4(TestMode mode)
         {
             var text =
-@"
+                @"
 using System;
 class A
 {
@@ -2366,7 +2734,11 @@ class A
     }
 }";
 
-            await TestAsync(text, "global::System.Func<global::System.Int32, global::System.Int32>", mode);
+            await TestAsync(
+                text,
+                "global::System.Func<global::System.Int32, global::System.Int32>",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
@@ -2374,7 +2746,7 @@ class A
         public async Task TestInsideLambda2(TestMode mode)
         {
             var text =
-@"using System;
+                @"using System;
 class C
 {
   void M()
@@ -2390,7 +2762,7 @@ class C
         public async Task TestInsideLambdaNullableReturn(TestMode mode)
         {
             var text =
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 class C
@@ -2409,7 +2781,7 @@ class C
         public async Task TestPointer1(TestMode mode)
         {
             var text =
-@"class C
+                @"class C
 {
   void M(int* i)
   {
@@ -2425,7 +2797,7 @@ class C
         public async Task TestDynamic1(TestMode mode)
         {
             var text =
-@"class C
+                @"class C
 {
   void M(dynamic i)
   {
@@ -2440,7 +2812,7 @@ class C
         public async Task TestChecked1(TestMode mode)
         {
             var text =
-@"class C
+                @"class C
 {
   void M()
   {
@@ -2456,7 +2828,7 @@ class C
         public async Task TestAwaitTaskOfT(TestMode mode)
         {
             var text =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 class C
 {
   void M()
@@ -2465,14 +2837,18 @@ class C
   }
 }";
 
-            await TestAsync(text, "global::System.Threading.Tasks.Task<global::System.Int32>", mode);
+            await TestAsync(
+                text,
+                "global::System.Threading.Tasks.Task<global::System.Int32>",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestAwaitTaskOfTNullableValue(TestMode mode)
         {
             var text =
-@"#nullable enable
+                @"#nullable enable
 
 using System.Threading.Tasks;
 class C
@@ -2483,7 +2859,11 @@ class C
   }
 }";
 
-            await TestAsync(text, "global::System.Threading.Tasks.Task<global::System.String?>", mode);
+            await TestAsync(
+                text,
+                "global::System.Threading.Tasks.Task<global::System.String?>",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
@@ -2491,7 +2871,7 @@ class C
         public async Task TestAwaitTaskOfTaskOfT(TestMode mode)
         {
             var text =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 class C
 {
   void M()
@@ -2500,7 +2880,11 @@ class C
   }
 }";
 
-            await TestAsync(text, "global::System.Threading.Tasks.Task<global::System.Threading.Tasks.Task<global::System.Int32>>", mode);
+            await TestAsync(
+                text,
+                "global::System.Threading.Tasks.Task<global::System.Threading.Tasks.Task<global::System.Int32>>",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
@@ -2508,7 +2892,7 @@ class C
         public async Task TestAwaitTask(TestMode mode)
         {
             var text =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 class C
 {
   void M()
@@ -2525,7 +2909,7 @@ class C
         public async Task TestLockStatement(TestMode mode)
         {
             var text =
-@"class C
+                @"class C
 {
   void M()
   {
@@ -2543,7 +2927,7 @@ class C
         public async Task TestAwaitExpressionInLockStatement(TestMode mode)
         {
             var text =
-@"class C
+                @"class C
 {
   async void M()
   {
@@ -2553,7 +2937,11 @@ class C
   }
 }";
 
-            await TestAsync(text, "global::System.Threading.Tasks.Task<global::System.Object>", mode);
+            await TestAsync(
+                text,
+                "global::System.Threading.Tasks.Task<global::System.Object>",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
@@ -2561,7 +2949,7 @@ class C
         public async Task TestReturnFromAsyncTaskOfT(TestMode mode)
         {
             var markup =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 class Program
 {
     async Task<int> M()
@@ -2578,7 +2966,7 @@ class Program
         public async Task TestAttributeArguments1(TestMode mode)
         {
             var markup =
-@"[A([|dd|], ee, Y = ff)]
+                @"[A([|dd|], ee, Y = ff)]
 class AAttribute : System.Attribute
 {
     public int X;
@@ -2597,7 +2985,7 @@ class AAttribute : System.Attribute
         public async Task TestAttributeArguments2(TestMode mode)
         {
             var markup =
-@"[A(dd, [|ee|], Y = ff)]
+                @"[A(dd, [|ee|], Y = ff)]
 class AAttribute : System.Attribute
 {
     public int X;
@@ -2616,7 +3004,7 @@ class AAttribute : System.Attribute
         public async Task TestAttributeArguments3(TestMode mode)
         {
             var markup =
-@"[A(dd, ee, Y = [|ff|])]
+                @"[A(dd, ee, Y = [|ff|])]
 class AAttribute : System.Attribute
 {
     public int X;
@@ -2635,7 +3023,7 @@ class AAttribute : System.Attribute
         public async Task TestReturnStatementWithinDelegateWithinAMethodCall(TestMode mode)
         {
             var text =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -2659,7 +3047,7 @@ class Program
         public async Task TestCatchFilterClause(TestMode mode)
         {
             var text =
-@"
+                @"
 try
 { }
 catch (Exception) if ([|M()|])
@@ -2672,7 +3060,7 @@ catch (Exception) if ([|M()|])
         public async Task TestCatchFilterClause1(TestMode mode)
         {
             var text =
-@"
+                @"
 try
 { }
 catch (Exception) if ([|M|])
@@ -2685,7 +3073,7 @@ catch (Exception) if ([|M|])
         public async Task TestCatchFilterClause2()
         {
             var text =
-@"
+                @"
 try
 { }
 catch (Exception) if ([|M|].N)
@@ -2698,7 +3086,7 @@ catch (Exception) if ([|M|].N)
         public async Task TestAwaitExpressionWithChainingMethod()
         {
             var text =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -2708,7 +3096,11 @@ class C
         bool x = await [|M()|].ConfigureAwait(false);
     }
 }";
-            await TestAsync(text, "global::System.Threading.Tasks.Task<global::System.Boolean>", TestMode.Node);
+            await TestAsync(
+                text,
+                "global::System.Threading.Tasks.Task<global::System.Boolean>",
+                TestMode.Node
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
@@ -2716,7 +3108,7 @@ class C
         public async Task TestAwaitExpressionWithChainingMethod2()
         {
             var text =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -2726,7 +3118,11 @@ class C
         bool x = await [|M|].ContinueWith(a => { return true; }).ContinueWith(a => { return false; });
     }
 }";
-            await TestAsync(text, "global::System.Threading.Tasks.Task<global::System.Object>", TestMode.Node);
+            await TestAsync(
+                text,
+                "global::System.Threading.Tasks.Task<global::System.Object>",
+                TestMode.Node
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
@@ -2734,7 +3130,7 @@ class C
         public async Task TestAwaitExpressionWithGenericMethod1()
         {
             var text =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 public class C
 {
@@ -2753,7 +3149,7 @@ public class C
         public async Task TestAwaitExpressionWithGenericMethod2(TestMode mode)
         {
             var text =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 public class C
 {
@@ -2772,7 +3168,7 @@ public class C
         public async Task TestNullCoalescingOperator1(TestMode mode)
         {
             var text =
-    @"class C
+                @"class C
 {
     void M()
     {
@@ -2781,7 +3177,11 @@ public class C
 }";
             // In position mode, we are inferring that the thing to the right is an object, because it's being assigned to a local of type object.
             // In node mode, we are inferring the node is an object? because it's to the left of the ??.
-            await TestAsync(text, mode == TestMode.Node ? "global::System.Object?" : "global::System.Object", mode);
+            await TestAsync(
+                text,
+                mode == TestMode.Node ? "global::System.Object?" : "global::System.Object",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
@@ -2789,7 +3189,7 @@ public class C
         public async Task TestNullCoalescingOperator2(TestMode mode)
         {
             var text =
-    @"class C
+                @"class C
 {
     void M()
     {
@@ -2798,7 +3198,11 @@ public class C
 }";
             // In position mode, we are inferring that the thing to the right is an object, because it's being assigned to a local of type object.
             // In node mode, we are inferring the node is an object? because it's to the left of the ??.
-            await TestAsync(text, mode == TestMode.Node ? "global::System.Object?" : "global::System.Object", mode);
+            await TestAsync(
+                text,
+                mode == TestMode.Node ? "global::System.Object?" : "global::System.Object",
+                mode
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
@@ -2806,7 +3210,7 @@ public class C
         public async Task TestNullCoalescingOperator3(TestMode mode)
         {
             var text =
-    @"class C
+                @"class C
 {
     void M()
     {
@@ -2816,7 +3220,11 @@ public class C
             // In position mode, we are inferring that the thing to the right is an object, because it's to the right of the first ??
             // and thus must be the same type as the object being assigned to.
             // In node mode, we are inferring the node is an object? because it's to the left of the ??.
-            await TestAsync(text, mode == TestMode.Node ? "global::System.Object?" : "global::System.Object", mode);
+            await TestAsync(
+                text,
+                mode == TestMode.Node ? "global::System.Object?" : "global::System.Object",
+                mode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
@@ -2824,7 +3232,7 @@ public class C
         public async Task TestSelectLambda()
         {
             var text =
-    @"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 using System.Linq;
 
 class C
@@ -2842,7 +3250,7 @@ class C
         public async Task TestSelectLambda2()
         {
             var text =
-    @"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 using System.Linq;
 
 class C
@@ -2860,7 +3268,7 @@ class C
         public async Task TestSelectLambda3(TestMode mode)
         {
             var text =
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 using System.Linq;
 
 class A { }
@@ -2880,7 +3288,7 @@ class C
         public async Task TestDefaultStatement1()
         {
             var text =
-    @"class C
+                @"class C
 {
     static void Main(string[] args)
     {
@@ -2895,7 +3303,7 @@ class C
         public async Task TestDefaultStatement2()
         {
             var text =
-    @"class C
+                @"class C
 {
     static void Goo(System.ConsoleModifiers arg)
     {
@@ -2909,7 +3317,7 @@ class C
         public async Task TestWhereCall()
         {
             var text =
-    @"
+                @"
 using System.Collections.Generic;
 class C
 {
@@ -2918,14 +3326,18 @@ class C
         [|ints|].Where(i => i > 10);
     }
 }";
-            await TestAsync(text, "global::System.Collections.Generic.IEnumerable<global::System.Int32>", TestMode.Node);
+            await TestAsync(
+                text,
+                "global::System.Collections.Generic.IEnumerable<global::System.Int32>",
+                TestMode.Node
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestWhereCall2()
         {
             var text =
-    @"
+                @"
 using System.Collections.Generic;
 class C
 {
@@ -2934,7 +3346,11 @@ class C
         [|ints|].Where(i => null);
     }
 }";
-            await TestAsync(text, "global::System.Collections.Generic.IEnumerable<global::System.Object>", TestMode.Node);
+            await TestAsync(
+                text,
+                "global::System.Collections.Generic.IEnumerable<global::System.Object>",
+                TestMode.Node
+            );
         }
 
         [WorkItem(12755, "https://github.com/dotnet/roslyn/issues/12755")]
@@ -2942,7 +3358,7 @@ class C
         public async Task TestObjectCreationBeforeArrayIndexing()
         {
             var text =
-@"using System;
+                @"using System;
 class C
 {
   void M()
@@ -2962,7 +3378,10 @@ class C
         public async Task TestDeconstruction()
         {
             await TestInMethodAsync(
-@"[|(int i, _)|] =", "(global::System.Int32 i, global::System.Object _)", TestMode.Node);
+                @"[|(int i, _)|] =",
+                "(global::System.Int32 i, global::System.Object _)",
+                TestMode.Node
+            );
         }
 
         [WorkItem(15468, "https://github.com/dotnet/roslyn/issues/15468")]
@@ -2971,14 +3390,20 @@ class C
         public async Task TestDeconstruction2()
         {
             await TestInMethodAsync(
-@"(int i, _) =  [||]", "(global::System.Int32 i, global::System.Object _)", TestMode.Position);
+                @"(int i, _) =  [||]",
+                "(global::System.Int32 i, global::System.Object _)",
+                TestMode.Position
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestDeconstructionWithNullableElement()
         {
             await TestInMethodAsync(
-@"[|(string? s, _)|] =", "(global::System.String? s, global::System.Object _)", TestMode.Node);
+                @"[|(string? s, _)|] =",
+                "(global::System.String? s, global::System.Object _)",
+                TestMode.Node
+            );
         }
 
         [WorkItem(13402, "https://github.com/dotnet/roslyn/issues/13402")]
@@ -2986,7 +3411,7 @@ class C
         public async Task TestObjectCreationBeforeBlock()
         {
             var text =
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -3002,7 +3427,7 @@ class C
         public async Task TestInferringThroughGenericFunctionWithNullableReturn(TestMode mode)
         {
             var text =
-@"#nullable enable
+                @"#nullable enable
 
 class Program
 {
@@ -3021,7 +3446,7 @@ class Program
         public async Task TestInferringThroughGenericFunctionMissingArgument()
         {
             var text =
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -3038,7 +3463,7 @@ class Program
         public async Task TestInferringThroughGenericFunctionTooManyArguments(TestMode mode)
         {
             var text =
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -3056,7 +3481,10 @@ class Program
         public async Task TestValueInNestedTuple1(TestMode mode)
         {
             await TestInMethodAsync(
-@"(int, (string, bool)) x = ([|Goo()|], ("""", true));", "global::System.Int32", mode);
+                @"(int, (string, bool)) x = ([|Goo()|], ("""", true));",
+                "global::System.Int32",
+                mode
+            );
         }
 
         [WorkItem(14277, "https://github.com/dotnet/roslyn/issues/14277")]
@@ -3064,7 +3492,10 @@ class Program
         public async Task TestValueInNestedTuple2(TestMode mode)
         {
             await TestInMethodAsync(
-@"(int, (string, bool)) x = (1, ("""", [|Goo()|]));", "global::System.Boolean", mode);
+                @"(int, (string, bool)) x = (1, ("""", [|Goo()|]));",
+                "global::System.Boolean",
+                mode
+            );
         }
 
         [WorkItem(14277, "https://github.com/dotnet/roslyn/issues/14277")]
@@ -3072,14 +3503,17 @@ class Program
         public async Task TestValueInNestedTuple3()
         {
             await TestInMethodAsync(
-@"(int, string) x = (1, [||]);", "global::System.String", TestMode.Position);
+                @"(int, string) x = (1, [||]);",
+                "global::System.String",
+                TestMode.Position
+            );
         }
 
         [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestInferringInEnumHasFlags(TestMode mode)
         {
             var text =
-@"using System.IO;
+                @"using System.IO;
 
 class Program
 {
@@ -3106,9 +3540,12 @@ class Program
         [InlineData("Color.Green orWrittenWrong ", false)]
         [InlineData("not ")]
         [InlineData("not Re")]
-        public async Task TestEnumInPatterns_Is_ConstUnaryAndBinaryPattern(string isPattern, bool shouldInferColor = true)
-        {
-            var markup = @$"
+        public async Task TestEnumInPatterns_Is_ConstUnaryAndBinaryPattern(
+            string isPattern,
+            bool shouldInferColor = true
+        ) {
+            var markup =
+                @$"
 class C
 {{
     public enum Color
@@ -3124,9 +3561,7 @@ class C
 }}
 ";
 
-            var expectedType = shouldInferColor
-                ? "global::C.Color"
-                : "global::System.Object";
+            var expectedType = shouldInferColor ? "global::C.Color" : "global::System.Object";
             await TestAsync(markup, expectedType, TestMode.Position);
         }
 
@@ -3142,7 +3577,8 @@ class C
         [InlineData("not Re")]
         public async Task TestEnumInPatterns_Is_PropertyPattern(string partialWritten)
         {
-            var markup = @$"
+            var markup =
+                @$"
 public enum Color
 {{
     Red,
@@ -3166,7 +3602,8 @@ class C
         [Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestEnumInPatterns_SwitchStatement_PropertyPattern()
         {
-            var markup = @"
+            var markup =
+                @"
 public enum Color
 {
     Red,
@@ -3192,7 +3629,8 @@ class C
         [Trait(Traits.Feature, Traits.Features.TypeInferenceService)]
         public async Task TestEnumInPatterns_SwitchExpression_PropertyPattern()
         {
-            var markup = @"
+            var markup =
+                @"
 public enum Color
 {
     Red,

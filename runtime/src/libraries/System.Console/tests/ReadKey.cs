@@ -23,10 +23,21 @@ public class ReadKey
     }
 
     [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/49568", typeof(PlatformDetection), nameof(PlatformDetection.IsMacOsAppleSilicon))]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/49568",
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsMacOsAppleSilicon)
+    )]
     public static void RedirectedConsole_ReadKey()
     {
-        RunRemote(() => { Assert.Throws<InvalidOperationException>(() => Console.ReadKey()); return 42; }, new ProcessStartInfo() { RedirectStandardInput = true });
+        RunRemote(
+            () =>
+            {
+                Assert.Throws<InvalidOperationException>(() => Console.ReadKey());
+                return 42;
+            },
+            new ProcessStartInfo() { RedirectStandardInput = true }
+        );
     }
 
     [Fact]
@@ -35,7 +46,9 @@ public class ReadKey
         ConsoleKeyInfo info;
         info = new ConsoleKeyInfo('\0', (ConsoleKey)0, false, false, false);
         info = new ConsoleKeyInfo('\0', (ConsoleKey)255, false, false, false);
-        Assert.Throws<ArgumentOutOfRangeException>(() => new ConsoleKeyInfo('\0', (ConsoleKey)256, false, false, false));
+        Assert.Throws<ArgumentOutOfRangeException>(
+            () => new ConsoleKeyInfo('\0', (ConsoleKey)256, false, false, false)
+        );
     }
 
     [Fact]

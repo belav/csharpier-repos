@@ -55,7 +55,6 @@ namespace System.Reflection
         ReflectedType = 1 << 3,
         DeclaringType = 1 << 4,
         Name = 1 << 5
-
     }
 
     internal delegate object GetterAdapter(object _this);
@@ -73,8 +72,11 @@ namespace System.Reflection
 #pragma warning restore 649
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern void get_property_info(RuntimePropertyInfo prop, ref MonoPropertyInfo info,
-                                   PInfo req_info);
+        internal static extern void get_property_info(
+            RuntimePropertyInfo prop,
+            ref MonoPropertyInfo info,
+            PInfo req_info
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern Type[] GetTypeModifiers(RuntimePropertyInfo prop, bool optional);
@@ -82,22 +84,26 @@ namespace System.Reflection
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern object get_default_value(RuntimePropertyInfo prop);
 
-
         internal BindingFlags BindingFlags
         {
             get
             {
                 CachePropertyInfo(PInfo.GetMethod | PInfo.SetMethod);
-                bool isPublic = info.set_method?.IsPublic == true || info.get_method?.IsPublic == true;
-                bool isStatic = info.set_method?.IsStatic == true || info.get_method?.IsStatic == true;
+                bool isPublic =
+                    info.set_method?.IsPublic == true || info.get_method?.IsPublic == true;
+                bool isStatic =
+                    info.set_method?.IsStatic == true || info.get_method?.IsStatic == true;
                 bool isInherited = DeclaringType != ReflectedType;
                 return FilterPreCalculate(isPublic, isInherited, isStatic);
             }
         }
 
         // Copied from https://github.com/dotnet/coreclr/blob/7a24a538cd265993e5864179f51781398c28ecdf/src/System.Private.CoreLib/src/System/RtType.cs#L2022
-        private static BindingFlags FilterPreCalculate(bool isPublic, bool isInherited, bool isStatic)
-        {
+        private static BindingFlags FilterPreCalculate(
+            bool isPublic,
+            bool isInherited,
+            bool isStatic
+        ) {
             BindingFlags bindingFlags = isPublic ? BindingFlags.Public : BindingFlags.NonPublic;
             if (isInherited)
             {
@@ -120,10 +126,7 @@ namespace System.Reflection
 
         public override Module Module
         {
-            get
-            {
-                return GetRuntimeModule();
-            }
+            get { return GetRuntimeModule(); }
         }
 
         internal RuntimeType GetDeclaringTypeInternal()
@@ -133,10 +136,7 @@ namespace System.Reflection
 
         private RuntimeType ReflectedTypeInternal
         {
-            get
-            {
-                return (RuntimeType)ReflectedType;
-            }
+            get { return (RuntimeType)ReflectedType; }
         }
 
         internal RuntimeModule GetRuntimeModule()
@@ -318,7 +318,6 @@ namespace System.Reflection
                 return null;
         }
 
-
         /*TODO verify for attribute based default values, just like ParameterInfo*/
         public override object GetConstantValue()
         {
@@ -348,7 +347,6 @@ namespace System.Reflection
             return CustomAttribute.GetCustomAttributes(this, attributeType, false);
         }
 
-
         private delegate object? GetterAdapter(object? _this);
         private delegate R Getter<T, R>(T _this);
         private delegate R StaticGetter<R>();
@@ -370,8 +368,11 @@ namespace System.Reflection
          * The idea behing this optimization is to use a pair of delegates to simulate the same effect of doing a reflection call.
          * The first delegate cast the this argument to the right type and the second does points to the target method.
          */
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2060:UnrecognizedReflectionPattern",
-            Justification = "MethodInfo used with MakeGenericMethod doesn't have DynamicallyAccessedMembers generic parameters")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2060:UnrecognizedReflectionPattern",
+            Justification = "MethodInfo used with MakeGenericMethod doesn't have DynamicallyAccessedMembers generic parameters"
+        )]
         [DynamicDependency("GetterAdapterFrame`2")]
         [DynamicDependency("StaticGetterAdapterFrame`1")]
         private static GetterAdapter CreateGetterDelegate(MethodInfo method)
@@ -392,15 +393,23 @@ namespace System.Reflection
             else
             {
                 typeVector = new Type[] { method.DeclaringType!, method.ReturnType };
-                getterDelegateType = typeof(Getter<,>);
+                getterDelegateType = typeof(Getter<, >);
                 frameName = "GetterAdapterFrame";
             }
 
             getterType = getterDelegateType.MakeGenericType(typeVector);
             getterDelegate = Delegate.CreateDelegate(getterType, method);
-            adapterFrame = typeof(RuntimePropertyInfo).GetMethod(frameName, BindingFlags.Static | BindingFlags.NonPublic)!;
+            adapterFrame = typeof(RuntimePropertyInfo).GetMethod(
+                frameName,
+                BindingFlags.Static | BindingFlags.NonPublic
+            )!;
             adapterFrame = adapterFrame.MakeGenericMethod(typeVector);
-            return (GetterAdapter)Delegate.CreateDelegate(typeof(GetterAdapter), getterDelegate, adapterFrame, true);
+            return (GetterAdapter)Delegate.CreateDelegate(
+                typeof(GetterAdapter),
+                getterDelegate,
+                adapterFrame,
+                true
+            );
         }
 
         public override object? GetValue(object? obj, object?[]? index)
@@ -413,8 +422,11 @@ namespace System.Reflection
                     MethodInfo? method = GetGetMethod(true);
                     if (method == null)
                         throw new ArgumentException($"Get Method not found for '{Name}'");
-                    if (!DeclaringType.IsValueType && !PropertyType.IsByRef && !method.ContainsGenericParameters)
-                    {
+                    if (
+                        !DeclaringType.IsValueType
+                        && !PropertyType.IsByRef
+                        && !method.ContainsGenericParameters
+                    ) {
                         //FIXME find a way to build an invoke delegate for value types.
                         cached_getter = CreateGetterDelegate(method);
                         // The try-catch preserves the .Invoke () behaviour
@@ -444,8 +456,13 @@ namespace System.Reflection
             return GetValue(obj, BindingFlags.Default, null, index, null);
         }
 
-        public override object? GetValue(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture)
-        {
+        public override object? GetValue(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            CultureInfo? culture
+        ) {
             object? ret = null;
 
             MethodInfo? method = GetGetMethod(true);
@@ -460,8 +477,14 @@ namespace System.Reflection
             return ret;
         }
 
-        public override void SetValue(object? obj, object? value, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture)
-        {
+        public override void SetValue(
+            object? obj,
+            object? value,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            CultureInfo? culture
+        ) {
             MethodInfo? method = GetSetMethod(true);
             if (method == null)
                 throw new ArgumentException("Set Method not found for '" + Name + "'");
@@ -484,36 +507,42 @@ namespace System.Reflection
 
         public override Type[] GetRequiredCustomModifiers() => GetCustomModifiers(false);
 
-        private Type[] GetCustomModifiers(bool optional) => GetTypeModifiers(this, optional) ?? Type.EmptyTypes;
+        private Type[] GetCustomModifiers(bool optional) =>
+            GetTypeModifiers(this, optional) ?? Type.EmptyTypes;
 
         public override IList<CustomAttributeData> GetCustomAttributesData()
         {
             return CustomAttributeData.GetCustomAttributes(this);
         }
 
-        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) => HasSameMetadataDefinitionAsCore<RuntimePropertyInfo>(other);
+        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
+            HasSameMetadataDefinitionAsCore<RuntimePropertyInfo>(other);
 
         public override int MetadataToken
         {
-            get
-            {
-                return get_metadata_token(this);
-            }
+            get { return get_metadata_token(this); }
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern int get_metadata_token(RuntimePropertyInfo monoProperty);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern PropertyInfo internal_from_handle_type(IntPtr event_handle, IntPtr type_handle);
+        private static extern PropertyInfo internal_from_handle_type(
+            IntPtr event_handle,
+            IntPtr type_handle
+        );
 
-        internal static PropertyInfo GetPropertyFromHandle(RuntimePropertyHandle handle, RuntimeTypeHandle reflectedType)
-        {
+        internal static PropertyInfo GetPropertyFromHandle(
+            RuntimePropertyHandle handle,
+            RuntimeTypeHandle reflectedType
+        ) {
             if (handle.Value == IntPtr.Zero)
                 throw new ArgumentException("The handle is invalid.");
             PropertyInfo pi = internal_from_handle_type(handle.Value, reflectedType.Value);
             if (pi == null)
-                throw new ArgumentException("The property handle and the type handle are incompatible.");
+                throw new ArgumentException(
+                    "The property handle and the type handle are incompatible."
+                );
             return pi;
         }
     }

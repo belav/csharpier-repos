@@ -20,10 +20,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         {
             var connectionId = "0";
             var trace = new Mock<IKestrelTrace>();
-            var httpConnectionManager = new ConnectionManager(trace.Object, ResourceCounter.Unlimited);
+            var httpConnectionManager = new ConnectionManager(
+                trace.Object,
+                ResourceCounter.Unlimited
+            );
 
             // Create HttpConnection in inner scope so it doesn't get rooted by the current frame.
-            UnrootedConnectionsGetRemovedFromHeartbeatInnerScope(connectionId, httpConnectionManager, trace);
+            UnrootedConnectionsGetRemovedFromHeartbeatInnerScope(
+                connectionId,
+                httpConnectionManager,
+                trace
+            );
 
             GC.Collect();
             GC.WaitForPendingFinalizers();
@@ -39,13 +46,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         private void UnrootedConnectionsGetRemovedFromHeartbeatInnerScope(
             string connectionId,
             ConnectionManager httpConnectionManager,
-            Mock<IKestrelTrace> trace)
-        {
+            Mock<IKestrelTrace> trace
+        ) {
             var serviceContext = new TestServiceContext();
             var mock = new Mock<DefaultConnectionContext>() { CallBase = true };
             mock.Setup(m => m.ConnectionId).Returns(connectionId);
             var transportConnectionManager = new TransportConnectionManager(httpConnectionManager);
-            var httpConnection = new KestrelConnection<ConnectionContext>(0, serviceContext, transportConnectionManager, _ => Task.CompletedTask, mock.Object, Mock.Of<IKestrelTrace>());
+            var httpConnection = new KestrelConnection<ConnectionContext>(
+                0,
+                serviceContext,
+                transportConnectionManager,
+                _ => Task.CompletedTask,
+                mock.Object,
+                Mock.Of<IKestrelTrace>()
+            );
             transportConnectionManager.AddConnection(0, httpConnection);
 
             var connectionCount = 0;

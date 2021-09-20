@@ -14,9 +14,14 @@ namespace System.Net.Quic.Implementations.Mock
             return new MockListener(options);
         }
 
-        internal override QuicConnectionProvider CreateConnection(QuicClientConnectionOptions options)
-        {
-            return new MockConnection(options.RemoteEndPoint, options.ClientAuthenticationOptions, options.LocalEndPoint);
+        internal override QuicConnectionProvider CreateConnection(
+            QuicClientConnectionOptions options
+        ) {
+            return new MockConnection(
+                options.RemoteEndPoint,
+                options.ClientAuthenticationOptions,
+                options.LocalEndPoint
+            );
         }
     }
 }

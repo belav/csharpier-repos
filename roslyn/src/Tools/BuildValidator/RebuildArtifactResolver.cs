@@ -18,20 +18,29 @@ namespace BuildValidator
         internal LocalSourceResolver SourceResolver { get; }
         internal LocalReferenceResolver ReferenceResolver { get; }
 
-        internal RebuildArtifactResolver(LocalSourceResolver sourceResolver, LocalReferenceResolver referenceResolver)
-        {
+        internal RebuildArtifactResolver(
+            LocalSourceResolver sourceResolver,
+            LocalReferenceResolver referenceResolver
+        ) {
             SourceResolver = sourceResolver;
             ReferenceResolver = referenceResolver;
         }
 
-        public SourceText ResolveSourceText(SourceTextInfo sourceTextInfo)
-            => SourceResolver.ResolveSource(sourceTextInfo);
+        public SourceText ResolveSourceText(SourceTextInfo sourceTextInfo) =>
+            SourceResolver.ResolveSource(sourceTextInfo);
 
-        public MetadataReference ResolveMetadataReference(MetadataReferenceInfo metadataReferenceInfo)
-        {
-            if (!ReferenceResolver.TryResolveReferences(metadataReferenceInfo, out var metadataReference))
-            {
-                throw new InvalidOperationException($"Could not resolve reference: {metadataReferenceInfo.FileName}");
+        public MetadataReference ResolveMetadataReference(
+            MetadataReferenceInfo metadataReferenceInfo
+        ) {
+            if (
+                !ReferenceResolver.TryResolveReferences(
+                    metadataReferenceInfo,
+                    out var metadataReference
+                )
+            ) {
+                throw new InvalidOperationException(
+                    $"Could not resolve reference: {metadataReferenceInfo.FileName}"
+                );
             }
 
             return metadataReference;

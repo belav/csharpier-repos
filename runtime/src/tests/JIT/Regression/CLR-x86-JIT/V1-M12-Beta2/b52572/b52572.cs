@@ -8,18 +8,25 @@ namespace Test
 
     class AA
     {
-        static void Grind() { throw new Exception(); }
+        static void Grind()
+        {
+            throw new Exception();
+        }
 
         static void Main1()
         {
             int A = 1;
             int B = 0;
-            while (B > -1) { Grind(); }
+            while (B > -1)
+            {
+                Grind();
+            }
             while (A > 0)
             {
                 do
                 {
-                    while (B != A) Grind();
+                    while (B != A)
+                        Grind();
                 } while (B > A);
             }
         }

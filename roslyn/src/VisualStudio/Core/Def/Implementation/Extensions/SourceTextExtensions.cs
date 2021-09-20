@@ -14,7 +14,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Extensions
     {
         public static VsTextSpan GetVsTextSpanForSpan(this SourceText text, TextSpan textSpan)
         {
-            text.GetLinesAndOffsets(textSpan, out var startLine, out var startOffset, out var endLine, out var endOffset);
+            text.GetLinesAndOffsets(
+                textSpan,
+                out var startLine,
+                out var startOffset,
+                out var endLine,
+                out var endOffset
+            );
 
             return new VsTextSpan()
             {
@@ -26,7 +32,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Extensions
         }
 
 #pragma warning disable IDE0060 // Remove unused parameter - 'text' is used for API consistency with other extension methods in this file.
-        public static VsTextSpan GetVsTextSpanForLineOffset(this SourceText text, int lineNumber, int offset)
+        public static VsTextSpan GetVsTextSpanForLineOffset(
+            this SourceText text,
+            int lineNumber,
+            int offset
+        )
 #pragma warning restore IDE0060 // Remove unused parameter
         {
             return new VsTextSpan
@@ -38,8 +48,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Extensions
             };
         }
 
-        public static VsTextSpan GetVsTextSpanForPosition(this SourceText text, int position, int virtualSpace)
-        {
+        public static VsTextSpan GetVsTextSpanForPosition(
+            this SourceText text,
+            int position,
+            int virtualSpace
+        ) {
             text.GetLineAndOffset(position, out var lineNumber, out var offset);
 
             offset += virtualSpace;

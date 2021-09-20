@@ -17,7 +17,13 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateMethod
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.GenerateConversion), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.GenerateConversion
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.GenerateEnumMember)]
     internal class GenerateConversionCodeFixProvider : AbstractGenerateMemberCodeFixProvider
     {
@@ -25,25 +31,30 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateMethod
         private const string CS0030 = nameof(CS0030); // error CS0030: Cannot convert type 'type' to 'type'
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public GenerateConversionCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public GenerateConversionCodeFixProvider() { }
 
         public override ImmutableArray<string> FixableDiagnosticIds
         {
             get { return ImmutableArray.Create(CS0029, CS0030); }
         }
 
-        protected override bool IsCandidate(SyntaxNode node, SyntaxToken token, Diagnostic diagnostic)
-        {
-            return node.IsKind(SyntaxKind.IdentifierName) ||
-                   node.IsKind(SyntaxKind.MethodDeclaration) ||
-                   node.IsKind(SyntaxKind.InvocationExpression) ||
-                   node.IsKind(SyntaxKind.CastExpression) ||
-                   node is LiteralExpressionSyntax ||
-                   node is SimpleNameSyntax ||
-                   node is ExpressionSyntax;
+        protected override bool IsCandidate(
+            SyntaxNode node,
+            SyntaxToken token,
+            Diagnostic diagnostic
+        ) {
+            return node.IsKind(SyntaxKind.IdentifierName)
+                || node.IsKind(SyntaxKind.MethodDeclaration)
+                || node.IsKind(SyntaxKind.InvocationExpression)
+                || node.IsKind(SyntaxKind.CastExpression)
+                || node is LiteralExpressionSyntax
+                || node is SimpleNameSyntax
+                || node is ExpressionSyntax;
         }
 
         protected override SyntaxNode GetTargetNode(SyntaxNode node)
@@ -62,8 +73,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateMethod
         }
 
         protected override Task<ImmutableArray<CodeAction>> GetCodeActionsAsync(
-            Document document, SyntaxNode node, CancellationToken cancellationToken)
-        {
+            Document document,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        ) {
             var service = document.GetRequiredLanguageService<IGenerateConversionService>();
             return service.GenerateConversionAsync(document, node, cancellationToken);
         }

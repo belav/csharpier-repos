@@ -23,18 +23,12 @@ namespace Internal.TypeSystem
         /// </summary>
         public IReadOnlyList<string> Arguments
         {
-            get
-            {
-                return _arguments;
-            }
+            get { return _arguments; }
         }
 
         public override string Message
         {
-            get
-            {
-                return GetExceptionString(StringID, _arguments);
-            }
+            get { return GetExceptionString(StringID, _arguments); }
         }
 
         internal TypeSystemException(ExceptionStringID id, params string[] args)
@@ -53,9 +47,12 @@ namespace Internal.TypeSystem
                     return String.Format(formatString, (object[])args);
                 }
             }
-            catch {}
-            
-            return "[TEMPORARY EXCEPTION MESSAGE] " + id.ToString() + ": " + String.Join(", ", args);
+            catch { }
+
+            return "[TEMPORARY EXCEPTION MESSAGE] "
+                + id.ToString()
+                + ": "
+                + String.Join(", ", args);
         }
 
         /// <summary>
@@ -67,15 +64,22 @@ namespace Internal.TypeSystem
 
             public string AssemblyName { get; }
 
-            internal TypeLoadException(ExceptionStringID id, string typeName, string assemblyName, string messageArg)
-                : base(id, new string[] { typeName, assemblyName, messageArg })
+            internal TypeLoadException(
+                ExceptionStringID id,
+                string typeName,
+                string assemblyName,
+                string messageArg
+            ) : base(id, new string[] { typeName, assemblyName, messageArg })
             {
                 TypeName = typeName;
                 AssemblyName = assemblyName;
             }
 
-            internal TypeLoadException(ExceptionStringID id, string typeName, string assemblyName)
-                : base(id, new string[] { typeName, assemblyName })
+            internal TypeLoadException(
+                ExceptionStringID id,
+                string typeName,
+                string assemblyName
+            ) : base(id, new string[] { typeName, assemblyName })
             {
                 TypeName = typeName;
                 AssemblyName = assemblyName;
@@ -88,10 +92,10 @@ namespace Internal.TypeSystem
         /// </summary>
         public abstract class MissingMemberException : TypeSystemException
         {
-            protected internal MissingMemberException(ExceptionStringID id, params string[] args)
-                : base(id, args)
-            {
-            }
+            protected internal MissingMemberException(
+                ExceptionStringID id,
+                params string[] args
+            ) : base(id, args) { }
         }
 
         /// <summary>
@@ -100,9 +104,7 @@ namespace Internal.TypeSystem
         public class MissingMethodException : MissingMemberException
         {
             internal MissingMethodException(ExceptionStringID id, params string[] args)
-                : base(id, args)
-            {
-            }
+                : base(id, args) { }
         }
 
         /// <summary>
@@ -111,9 +113,7 @@ namespace Internal.TypeSystem
         public class MissingFieldException : MissingMemberException
         {
             internal MissingFieldException(ExceptionStringID id, params string[] args)
-                : base(id, args)
-            {
-            }
+                : base(id, args) { }
         }
 
         /// <summary>
@@ -122,9 +122,7 @@ namespace Internal.TypeSystem
         public class FileNotFoundException : TypeSystemException
         {
             internal FileNotFoundException(ExceptionStringID id, string fileName)
-                : base(id, fileName)
-            {
-            }
+                : base(id, fileName) { }
         }
 
         /// <summary>
@@ -133,34 +131,20 @@ namespace Internal.TypeSystem
         /// </summary>
         public class InvalidProgramException : TypeSystemException
         {
-            internal InvalidProgramException(ExceptionStringID id, string method)
-                : base(id, method)
-            {
-            }
+            internal InvalidProgramException(ExceptionStringID id, string method) : base(id, method)
+            { }
 
-            internal InvalidProgramException(ExceptionStringID id)
-                : base(id)
-            {
-            }
+            internal InvalidProgramException(ExceptionStringID id) : base(id) { }
 
-            internal InvalidProgramException()
-                : base(ExceptionStringID.InvalidProgramDefault)
-            {
-            }
+            internal InvalidProgramException() : base(ExceptionStringID.InvalidProgramDefault) { }
         }
 
         public class BadImageFormatException : TypeSystemException
         {
-            internal BadImageFormatException()
-                : base(ExceptionStringID.BadImageFormatGeneric)
-            {
-            }
+            internal BadImageFormatException() : base(ExceptionStringID.BadImageFormatGeneric) { }
 
             internal BadImageFormatException(string reason)
-                : base(ExceptionStringID.BadImageFormatSpecific, reason)
-            {
-
-            }
+                : base(ExceptionStringID.BadImageFormatSpecific, reason) { }
         }
     }
 }

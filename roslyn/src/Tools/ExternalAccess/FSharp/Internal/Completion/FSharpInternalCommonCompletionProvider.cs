@@ -28,13 +28,24 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Completion
             return _provider.ProvideCompletionsAsync(context);
         }
 
-        protected override Task<TextChange?> GetTextChangeAsync(CompletionItem selectedItem, char? ch, CancellationToken cancellationToken)
-        {
-            return _provider.GetTextChangeAsync(base.GetTextChangeAsync, selectedItem, ch, cancellationToken);
+        protected override Task<TextChange?> GetTextChangeAsync(
+            CompletionItem selectedItem,
+            char? ch,
+            CancellationToken cancellationToken
+        ) {
+            return _provider.GetTextChangeAsync(
+                base.GetTextChangeAsync,
+                selectedItem,
+                ch,
+                cancellationToken
+            );
         }
 
-        public override bool IsInsertionTrigger(SourceText text, int insertedCharacterPosition, OptionSet options)
-        {
+        public override bool IsInsertionTrigger(
+            SourceText text,
+            int insertedCharacterPosition,
+            OptionSet options
+        ) {
             return _provider.IsInsertionTrigger(text, insertedCharacterPosition, options);
         }
     }

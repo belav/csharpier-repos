@@ -44,12 +44,18 @@ namespace Microsoft.Win32.SafeHandles
         /// <param name="options">The options for the memory-mapped file.</param>
         /// <param name="capacity">The capacity of the memory-mapped file.</param>
         internal SafeMemoryMappedFileHandle(
-            FileStream? fileStream, bool ownsFileStream, HandleInheritability inheritability,
-            MemoryMappedFileAccess access, MemoryMappedFileOptions options,
-            long capacity)
-            : base(ownsHandle: true)
+            FileStream? fileStream,
+            bool ownsFileStream,
+            HandleInheritability inheritability,
+            MemoryMappedFileAccess access,
+            MemoryMappedFileOptions options,
+            long capacity
+        ) : base(ownsHandle: true)
         {
-            Debug.Assert(!ownsFileStream || fileStream != null, "We can only own a FileStream we're actually given.");
+            Debug.Assert(
+                !ownsFileStream || fileStream != null,
+                "We can only own a FileStream we're actually given."
+            );
 
             // Store the arguments.  We'll actually open the map when the view is created.
             _fileStream = fileStream;
@@ -60,7 +66,9 @@ namespace Microsoft.Win32.SafeHandles
             _capacity = capacity;
 
             // Fake a unique int handle value > 0.
-            int nextHandleValue = (int)((Interlocked.Increment(ref s_counter) % (int.MaxValue - 1)) + 1);
+            int nextHandleValue = (int)(
+                (Interlocked.Increment(ref s_counter) % (int.MaxValue - 1)) + 1
+            );
             SetHandle(new IntPtr(nextHandleValue));
         }
 

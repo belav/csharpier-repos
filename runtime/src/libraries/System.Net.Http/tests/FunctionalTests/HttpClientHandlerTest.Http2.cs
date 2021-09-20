@@ -23,9 +23,7 @@ namespace System.Net.Http.Functional.Tests
 
         public static bool SupportsAlpn => PlatformDetection.SupportsAlpn;
 
-        public HttpClientHandlerTest_Http2(ITestOutputHelper output) : base(output)
-        {
-        }
+        public HttpClientHandlerTest_Http2(ITestOutputHelper output) : base(output) { }
 
         private async Task AssertProtocolErrorAsync<T>(Task task, ProtocolErrors errorCode)
             where T : Exception
@@ -34,8 +32,11 @@ namespace System.Net.Http.Functional.Tests
             string text = e.ToString();
             Assert.Contains(((int)errorCode).ToString("x"), text);
             Assert.Contains(
-                Enum.IsDefined(typeof(ProtocolErrors), errorCode) ? errorCode.ToString() : "(unknown error)",
-                text);
+                Enum.IsDefined(typeof(ProtocolErrors), errorCode)
+                  ? errorCode.ToString()
+                  : "(unknown error)",
+                text
+            );
         }
 
         private Task AssertProtocolErrorAsync(Task task, ProtocolErrors errorCode)
@@ -48,7 +49,10 @@ namespace System.Net.Http.Functional.Tests
             return AssertProtocolErrorAsync<IOException>(task, errorCode);
         }
 
-        private async Task<(bool, T)> IgnoreSpecificException<ExpectedException, T>(Task<T> task, string expectedExceptionContent = null) where ExpectedException : Exception
+        private async Task<(bool, T)> IgnoreSpecificException<ExpectedException, T>(
+            Task<T> task,
+            string expectedExceptionContent = null
+        ) where ExpectedException : Exception
         {
             try
             {
@@ -181,33 +185,42 @@ namespace System.Net.Http.Functional.Tests
         [InlineData("Client content", "Server content")]
         [InlineData(null, null)]
         [InlineData(null, "Server content")]
-        public async Task Http2ClearText_SendAsync_Success(string clientContent, string serverContent)
-        {
-            await Http2LoopbackServer.CreateClientAndServerAsync(async uri =>
-            {
-                using HttpClient client = CreateHttpClient();
-
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri)
+        public async Task Http2ClearText_SendAsync_Success(
+            string clientContent,
+            string serverContent
+        ) {
+            await Http2LoopbackServer.CreateClientAndServerAsync(
+                async uri =>
                 {
-                    Version = UseVersion,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    Content = clientContent is null ? (HttpContent)null : new StringContent(clientContent),
-                };
+                    using HttpClient client = CreateHttpClient();
 
-                using HttpResponseMessage response = await client.SendAsync(request);
-                string responseContent = await response.Content.ReadAsStringAsync();
-                Assert.Equal(serverContent ?? String.Empty, responseContent);
-            },
-            async server =>
-            {
-                Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
-                Assert.IsNotType<SslStream>(connection.Stream);
+                    HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri)
+                    {
+                        Version = UseVersion,
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                        Content = clientContent is null
+                            ? (HttpContent)null
+                            : new StringContent(clientContent),
+                    };
 
-                HttpRequestData requestData = await connection.ReadRequestDataAsync();                
-                string requestContent = requestData.Body is null ? (string)null : Encoding.ASCII.GetString(requestData.Body);
-                Assert.Equal(clientContent, requestContent);
-                await connection.SendResponseAsync(HttpStatusCode.OK, body: serverContent);
-            }, new Http2Options() { UseSsl = false });
+                    using HttpResponseMessage response = await client.SendAsync(request);
+                    string responseContent = await response.Content.ReadAsStringAsync();
+                    Assert.Equal(serverContent ?? String.Empty, responseContent);
+                },
+                async server =>
+                {
+                    Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
+                    Assert.IsNotType<SslStream>(connection.Stream);
+
+                    HttpRequestData requestData = await connection.ReadRequestDataAsync();
+                    string requestContent = requestData.Body is null
+                        ? (string)null
+                        : Encoding.ASCII.GetString(requestData.Body);
+                    Assert.Equal(clientContent, requestContent);
+                    await connection.SendResponseAsync(HttpStatusCode.OK, body: serverContent);
+                },
+                new Http2Options() { UseSsl = false }
+            );
         }
 
         [ConditionalFact(nameof(SupportsAlpn))]
@@ -231,7 +244,8 @@ namespace System.Net.Http.Functional.Tests
                     new SettingsEntry { SettingId = SettingId.MaxFrameSize, Value = 16777215 },
                     new SettingsEntry { SettingId = SettingId.MaxHeaderListSize, Value = 0 },
                     new SettingsEntry { SettingId = SettingId.MaxHeaderListSize, Value = 10000000 },
-                    new SettingsEntry { SettingId = (SettingId)5678, Value = 1234 });
+                    new SettingsEntry { SettingId = (SettingId)5678, Value = 1234 }
+                );
 
                 int streamId = await connection.ReadRequestHeaderAsync();
 
@@ -246,15 +260,20 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(SettingId.MaxFrameSize, 16383, ProtocolErrors.PROTOCOL_ERROR)]
         [InlineData(SettingId.MaxFrameSize, 162777216, ProtocolErrors.PROTOCOL_ERROR)]
         [InlineData(SettingId.InitialWindowSize, 0x80000000, ProtocolErrors.FLOW_CONTROL_ERROR)]
-        public async Task Http2_ServerSendsInvalidSettingsValue_Error(SettingId settingId, uint value, ProtocolErrors expectedError)
-        {
+        public async Task Http2_ServerSendsInvalidSettingsValue_Error(
+            SettingId settingId,
+            uint value,
+            ProtocolErrors expectedError
+        ) {
             using (Http2LoopbackServer server = Http2LoopbackServer.CreateServer())
             using (HttpClient client = CreateHttpClient())
             {
                 Task<HttpResponseMessage> sendTask = client.GetAsync(server.Address);
 
                 // Send invalid initial SETTINGS value
-                await server.EstablishConnectionAsync(new SettingsEntry { SettingId = settingId, Value = value });
+                await server.EstablishConnectionAsync(
+                    new SettingsEntry { SettingId = settingId, Value = value }
+                );
 
                 await AssertProtocolErrorAsync(sendTask, expectedError);
             }
@@ -272,7 +291,11 @@ namespace System.Net.Http.Functional.Tests
                 int streamId = await connection.ReadRequestHeaderAsync();
 
                 // Send a reset stream frame so that the stream moves to a terminal state.
-                RstStreamFrame resetStream = new RstStreamFrame(FrameFlags.None, (int)ProtocolErrors.INTERNAL_ERROR, streamId);
+                RstStreamFrame resetStream = new RstStreamFrame(
+                    FrameFlags.None,
+                    (int)ProtocolErrors.INTERNAL_ERROR,
+                    streamId
+                );
                 await connection.WriteFrameAsync(resetStream);
 
                 await AssertProtocolErrorAsync(sendTask, ProtocolErrors.INTERNAL_ERROR);
@@ -294,7 +317,11 @@ namespace System.Net.Http.Functional.Tests
                 await connection.SendDefaultResponseHeadersAsync(streamId);
 
                 // Send a reset stream frame so that the stream moves to a terminal state.
-                RstStreamFrame resetStream = new RstStreamFrame(FrameFlags.None, (int)ProtocolErrors.INTERNAL_ERROR, streamId);
+                RstStreamFrame resetStream = new RstStreamFrame(
+                    FrameFlags.None,
+                    (int)ProtocolErrors.INTERNAL_ERROR,
+                    streamId
+                );
                 await connection.WriteFrameAsync(resetStream);
 
                 await AssertProtocolErrorAsync(sendTask, ProtocolErrors.INTERNAL_ERROR);
@@ -318,7 +345,11 @@ namespace System.Net.Http.Functional.Tests
                 await connection.WriteFrameAsync(dataFrame);
 
                 // Send a reset stream frame so that the stream moves to a terminal state.
-                RstStreamFrame resetStream = new RstStreamFrame(FrameFlags.None, (int)ProtocolErrors.INTERNAL_ERROR, streamId);
+                RstStreamFrame resetStream = new RstStreamFrame(
+                    FrameFlags.None,
+                    (int)ProtocolErrors.INTERNAL_ERROR,
+                    streamId
+                );
                 await connection.WriteFrameAsync(resetStream);
 
                 await AssertProtocolErrorAsync(sendTask, ProtocolErrors.INTERNAL_ERROR);
@@ -331,29 +362,40 @@ namespace System.Net.Http.Functional.Tests
             using (Http2LoopbackServer server = Http2LoopbackServer.CreateServer())
             using (HttpClient client = CreateHttpClient())
             {
-                (_, Http2LoopbackConnection connection) = await EstablishConnectionAndProcessOneRequestAsync(client, server);
+                (_, Http2LoopbackConnection connection) =
+                    await EstablishConnectionAndProcessOneRequestAsync(client, server);
 
                 Task<HttpResponseMessage> sendTask = client.GetAsync(server.Address);
-                (int streamId1, HttpRequestData requestData1) = await connection.ReadAndParseRequestHeaderAsync(readBody: true);
+                (int streamId1, HttpRequestData requestData1) =
+                    await connection.ReadAndParseRequestHeaderAsync(readBody: true);
 
                 // Send SETTINGS frame to change stream limit to 0, allowing us to send a REFUSED_STREAM error due to the new limit
                 await connection.ExpectSettingsAckAsync();
-                Frame frame = new SettingsFrame(new SettingsEntry() { SettingId = SettingId.MaxConcurrentStreams, Value = 0 });
+                Frame frame = new SettingsFrame(
+                    new SettingsEntry() { SettingId = SettingId.MaxConcurrentStreams, Value = 0 }
+                );
                 await connection.WriteFrameAsync(frame);
 
                 // Send a RST_STREAM with error = REFUSED_STREAM, indicating the request can be retried.
-                frame = new RstStreamFrame(FrameFlags.None, (int)ProtocolErrors.REFUSED_STREAM, streamId1);
+                frame = new RstStreamFrame(
+                    FrameFlags.None,
+                    (int)ProtocolErrors.REFUSED_STREAM,
+                    streamId1
+                );
                 await connection.WriteFrameAsync(frame);
 
                 await connection.PingPong();
 
                 // Send SETTINGS frame to change stream limit to 1, allowing the request to now be processed
                 await connection.ExpectSettingsAckAsync();
-                frame = new SettingsFrame(new SettingsEntry() { SettingId = SettingId.MaxConcurrentStreams, Value = 1 });
+                frame = new SettingsFrame(
+                    new SettingsEntry() { SettingId = SettingId.MaxConcurrentStreams, Value = 1 }
+                );
                 await connection.WriteFrameAsync(frame);
 
                 // Process retried request
-                (int streamId2, HttpRequestData requestData2) = await connection.ReadAndParseRequestHeaderAsync(readBody: true);
+                (int streamId2, HttpRequestData requestData2) =
+                    await connection.ReadAndParseRequestHeaderAsync(readBody: true);
                 await connection.SendDefaultResponseAsync(streamId2);
                 HttpResponseMessage response = await sendTask;
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -368,30 +410,44 @@ namespace System.Net.Http.Functional.Tests
             {
                 const string Content = "Hello world";
 
-                (_, Http2LoopbackConnection connection) = await EstablishConnectionAndProcessOneRequestAsync(client, server);
+                (_, Http2LoopbackConnection connection) =
+                    await EstablishConnectionAndProcessOneRequestAsync(client, server);
 
-                Task<HttpResponseMessage> sendTask = client.PostAsync(server.Address, new StringContent(Content));
-                (int streamId1, HttpRequestData requestData1) = await connection.ReadAndParseRequestHeaderAsync(readBody: true);
+                Task<HttpResponseMessage> sendTask = client.PostAsync(
+                    server.Address,
+                    new StringContent(Content)
+                );
+                (int streamId1, HttpRequestData requestData1) =
+                    await connection.ReadAndParseRequestHeaderAsync(readBody: true);
                 Assert.Equal(Content, Encoding.UTF8.GetString(requestData1.Body));
 
                 // Send SETTINGS frame to change stream limit to 0, allowing us to send a REFUSED_STREAM error due to the new limit
                 await connection.ExpectSettingsAckAsync();
-                Frame frame = new SettingsFrame(new SettingsEntry() { SettingId = SettingId.MaxConcurrentStreams, Value = 0 });
+                Frame frame = new SettingsFrame(
+                    new SettingsEntry() { SettingId = SettingId.MaxConcurrentStreams, Value = 0 }
+                );
                 await connection.WriteFrameAsync(frame);
 
                 // Send a RST_STREAM with error = REFUSED_STREAM, indicating the request can be retried.
-                frame = new RstStreamFrame(FrameFlags.None, (int)ProtocolErrors.REFUSED_STREAM, streamId1);
+                frame = new RstStreamFrame(
+                    FrameFlags.None,
+                    (int)ProtocolErrors.REFUSED_STREAM,
+                    streamId1
+                );
                 await connection.WriteFrameAsync(frame);
 
                 await connection.PingPong();
 
                 // Send SETTINGS frame to change stream limit to 1, allowing the request to now be processed
                 await connection.ExpectSettingsAckAsync();
-                frame = new SettingsFrame(new SettingsEntry() { SettingId = SettingId.MaxConcurrentStreams, Value = 1 });
+                frame = new SettingsFrame(
+                    new SettingsEntry() { SettingId = SettingId.MaxConcurrentStreams, Value = 1 }
+                );
                 await connection.WriteFrameAsync(frame);
 
                 // Process retried request
-                (int streamId2, HttpRequestData requestData2) = await connection.ReadAndParseRequestHeaderAsync(readBody: true);
+                (int streamId2, HttpRequestData requestData2) =
+                    await connection.ReadAndParseRequestHeaderAsync(readBody: true);
                 Assert.Equal(Content, Encoding.UTF8.GetString(requestData2.Body));
                 await connection.SendDefaultResponseAsync(streamId2);
                 HttpResponseMessage response = await sendTask;
@@ -408,7 +464,10 @@ namespace System.Net.Http.Functional.Tests
             using (Http2LoopbackServer server = Http2LoopbackServer.CreateServer())
             using (HttpClient client = CreateHttpClient())
             {
-                Task<Http2LoopbackConnection> connectionTask = AcceptConnectionAndReadSettings(server, timeout);
+                Task<Http2LoopbackConnection> connectionTask = AcceptConnectionAndReadSettings(
+                    server,
+                    timeout
+                );
 
                 List<Task<HttpResponseMessage>> sendTasks = new List<Task<HttpResponseMessage>>();
                 for (int i = 0; i < DefaultMaxConcurrentStreams; i++)
@@ -416,31 +475,60 @@ namespace System.Net.Http.Functional.Tests
                     sendTasks.Add(client.GetAsync(server.Address));
                 }
 
-                Http2LoopbackConnection connection = await connectionTask.WaitAsync(TestHelper.PassingTestTimeout).ConfigureAwait(false);
+                Http2LoopbackConnection connection = await connectionTask.WaitAsync(
+                        TestHelper.PassingTestTimeout
+                    )
+                    .ConfigureAwait(false);
 
                 // Client sets the default MaxConcurrentStreams to 100, so accept 100 requests.
-                List<int> acceptedRequests = await AcceptRequests(connection, DefaultMaxConcurrentStreams).WaitAsync(TestHelper.PassingTestTimeout).ConfigureAwait(false);
+                List<int> acceptedRequests = await AcceptRequests(
+                        connection,
+                        DefaultMaxConcurrentStreams
+                    )
+                    .WaitAsync(TestHelper.PassingTestTimeout)
+                    .ConfigureAwait(false);
 
                 Assert.Equal(DefaultMaxConcurrentStreams, acceptedRequests.Count);
 
                 // Extra request is queued on the client.
                 Task<HttpResponseMessage> extraSendTask = client.GetAsync(server.Address);
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(() => connection.ReadRequestHeaderAsync()).WaitAsync(TestHelper.PassingTestTimeout).ConfigureAwait(false);
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                        () => connection.ReadRequestHeaderAsync()
+                    )
+                    .WaitAsync(TestHelper.PassingTestTimeout)
+                    .ConfigureAwait(false);
 
                 // Send SETTINGS frame to increase the default stream limit by 1, unblocking the extra request.
-                await connection.SendSettingsAsync(timeout, new[] { new SettingsEntry() { SettingId = SettingId.MaxConcurrentStreams, Value = DefaultMaxConcurrentStreams + 1 } }).ConfigureAwait(false);
+                await connection.SendSettingsAsync(
+                        timeout,
+                        new[]
+                        {
+                            new SettingsEntry()
+                            {
+                                SettingId = SettingId.MaxConcurrentStreams,
+                                Value = DefaultMaxConcurrentStreams + 1
+                            }
+                        }
+                    )
+                    .ConfigureAwait(false);
 
-                (int extraStreamId, _) = await connection.ReadAndParseRequestHeaderAsync().WaitAsync(TestHelper.PassingTestTimeout).ConfigureAwait(false);
+                (int extraStreamId, _) = await connection.ReadAndParseRequestHeaderAsync()
+                    .WaitAsync(TestHelper.PassingTestTimeout)
+                    .ConfigureAwait(false);
 
                 // Respond to all the requests.
                 acceptedRequests.Add(extraStreamId);
                 foreach (int streamId in acceptedRequests)
                 {
-                    await connection.SendDefaultResponseAsync(streamId).WaitAsync(TestHelper.PassingTestTimeout).ConfigureAwait(false);
+                    await connection.SendDefaultResponseAsync(streamId)
+                        .WaitAsync(TestHelper.PassingTestTimeout)
+                        .ConfigureAwait(false);
                 }
 
                 sendTasks.Add(extraSendTask);
-                await Task.WhenAll(sendTasks).WaitAsync(TestHelper.PassingTestTimeout).ConfigureAwait(false);
+                await Task.WhenAll(sendTasks)
+                    .WaitAsync(TestHelper.PassingTestTimeout)
+                    .ConfigureAwait(false);
 
                 foreach (Task<HttpResponseMessage> sendTask in sendTasks)
                 {
@@ -460,7 +548,10 @@ namespace System.Net.Http.Functional.Tests
             using (Http2LoopbackServer server = Http2LoopbackServer.CreateServer())
             using (HttpClient client = CreateHttpClient())
             {
-                Task<Http2LoopbackConnection> connectionTask = AcceptConnectionAndReadSettings(server, timeout);
+                Task<Http2LoopbackConnection> connectionTask = AcceptConnectionAndReadSettings(
+                    server,
+                    timeout
+                );
 
                 List<Task<HttpResponseMessage>> sendTasks = new List<Task<HttpResponseMessage>>();
                 for (int i = 0; i < DefaultMaxConcurrentStreams + ExtraStreams; i++)
@@ -468,28 +559,57 @@ namespace System.Net.Http.Functional.Tests
                     sendTasks.Add(client.GetAsync(server.Address));
                 }
 
-                Http2LoopbackConnection connection = await connectionTask.WaitAsync(TestHelper.PassingTestTimeout).ConfigureAwait(false);
+                Http2LoopbackConnection connection = await connectionTask.WaitAsync(
+                        TestHelper.PassingTestTimeout
+                    )
+                    .ConfigureAwait(false);
 
                 // Client sets the default MaxConcurrentStreams to 100, so accept 100 requests.
-                List<int> acceptedRequests = await AcceptRequests(connection, DefaultMaxConcurrentStreams + ExtraStreams).WaitAsync(TestHelper.PassingTestTimeout).ConfigureAwait(false);
+                List<int> acceptedRequests = await AcceptRequests(
+                        connection,
+                        DefaultMaxConcurrentStreams + ExtraStreams
+                    )
+                    .WaitAsync(TestHelper.PassingTestTimeout)
+                    .ConfigureAwait(false);
                 Assert.Equal(DefaultMaxConcurrentStreams, acceptedRequests.Count);
 
                 // Send SETTINGS frame with MaxConcurrentStreams = 102
-                await connection.SendSettingsAsync(timeout, new[] { new SettingsEntry() { SettingId = SettingId.MaxConcurrentStreams, Value = DefaultMaxConcurrentStreams + 2 } }).ConfigureAwait(false);
+                await connection.SendSettingsAsync(
+                        timeout,
+                        new[]
+                        {
+                            new SettingsEntry()
+                            {
+                                SettingId = SettingId.MaxConcurrentStreams,
+                                Value = DefaultMaxConcurrentStreams + 2
+                            }
+                        }
+                    )
+                    .ConfigureAwait(false);
 
                 // Increased MaxConcurrentStreams ublocks only 2 requests.
-                List<int> acceptedExtraRequests = await AcceptRequests(connection, ExtraStreams).WaitAsync(TestHelper.PassingTestTimeout).ConfigureAwait(false);
+                List<int> acceptedExtraRequests = await AcceptRequests(connection, ExtraStreams)
+                    .WaitAsync(TestHelper.PassingTestTimeout)
+                    .ConfigureAwait(false);
                 Assert.Equal(2, acceptedExtraRequests.Count);
 
                 acceptedRequests.AddRange(acceptedExtraRequests);
 
                 // Send SETTINGS frame with MaxConcurrentStreams = DefaultMaxConcurrentStreams + ExtraStreams
                 await connection.ExpectSettingsAckAsync().ConfigureAwait(false);
-                Frame frame = new SettingsFrame(new SettingsEntry() { SettingId = SettingId.MaxConcurrentStreams, Value = DefaultMaxConcurrentStreams + ExtraStreams });
+                Frame frame = new SettingsFrame(
+                    new SettingsEntry()
+                    {
+                        SettingId = SettingId.MaxConcurrentStreams,
+                        Value = DefaultMaxConcurrentStreams + ExtraStreams
+                    }
+                );
                 await connection.WriteFrameAsync(frame).ConfigureAwait(false);
 
                 // Increased MaxConcurrentStreams ublocks all remaining requests.
-                acceptedExtraRequests = await AcceptRequests(connection, ExtraStreams - 2).WaitAsync(TestHelper.PassingTestTimeout).ConfigureAwait(false);
+                acceptedExtraRequests = await AcceptRequests(connection, ExtraStreams - 2)
+                    .WaitAsync(TestHelper.PassingTestTimeout)
+                    .ConfigureAwait(false);
                 Assert.Equal(ExtraStreams - 2, acceptedExtraRequests.Count);
 
                 acceptedRequests.AddRange(acceptedExtraRequests);
@@ -497,10 +617,14 @@ namespace System.Net.Http.Functional.Tests
                 // Respond to all the requests.
                 foreach (int streamId in acceptedRequests)
                 {
-                    await connection.SendDefaultResponseAsync(streamId).WaitAsync(TestHelper.PassingTestTimeout).ConfigureAwait(false);
+                    await connection.SendDefaultResponseAsync(streamId)
+                        .WaitAsync(TestHelper.PassingTestTimeout)
+                        .ConfigureAwait(false);
                 }
 
-                await Task.WhenAll(sendTasks).WaitAsync(TestHelper.PassingTestTimeout).ConfigureAwait(false);
+                await Task.WhenAll(sendTasks)
+                    .WaitAsync(TestHelper.PassingTestTimeout)
+                    .ConfigureAwait(false);
 
                 foreach (Task<HttpResponseMessage> sendTask in sendTasks)
                 {
@@ -519,7 +643,10 @@ namespace System.Net.Http.Functional.Tests
             using (Http2LoopbackServer server = Http2LoopbackServer.CreateServer())
             using (HttpClient client = CreateHttpClient())
             {
-                Task<Http2LoopbackConnection> connectionTask = AcceptConnectionAndReadSettings(server, timeout);
+                Task<Http2LoopbackConnection> connectionTask = AcceptConnectionAndReadSettings(
+                    server,
+                    timeout
+                );
 
                 List<Task<HttpResponseMessage>> sendTasks = new List<Task<HttpResponseMessage>>();
                 for (int i = 0; i < DefaultMaxConcurrentStreams; i++)
@@ -527,18 +654,31 @@ namespace System.Net.Http.Functional.Tests
                     sendTasks.Add(client.GetAsync(server.Address));
                 }
 
-                Http2LoopbackConnection connection = await connectionTask.WaitAsync(TestHelper.PassingTestTimeout).ConfigureAwait(false);
+                Http2LoopbackConnection connection = await connectionTask.WaitAsync(
+                        TestHelper.PassingTestTimeout
+                    )
+                    .ConfigureAwait(false);
 
                 // Client sets the default MaxConcurrentStreams to 100, so accept 100 requests.
-                List<int> acceptedRequests = await AcceptRequests(connection, DefaultMaxConcurrentStreams).WaitAsync(TestHelper.PassingTestTimeout).ConfigureAwait(false);
+                List<int> acceptedRequests = await AcceptRequests(
+                        connection,
+                        DefaultMaxConcurrentStreams
+                    )
+                    .WaitAsync(TestHelper.PassingTestTimeout)
+                    .ConfigureAwait(false);
                 Assert.Equal(DefaultMaxConcurrentStreams, acceptedRequests.Count);
 
                 // Extra request is queued on the client.
                 Task<HttpResponseMessage> extraSendTask = client.GetAsync(server.Address);
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(() => connection.ReadRequestHeaderAsync()).WaitAsync(TestHelper.PassingTestTimeout).ConfigureAwait(false);
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                        () => connection.ReadRequestHeaderAsync()
+                    )
+                    .WaitAsync(TestHelper.PassingTestTimeout)
+                    .ConfigureAwait(false);
 
                 // Send SETTINGS frame without MaxConcurrentSettings value.
-                await connection.SendSettingsAsync(timeout, new SettingsEntry[0]).ConfigureAwait(false);
+                await connection.SendSettingsAsync(timeout, new SettingsEntry[0])
+                    .ConfigureAwait(false);
 
                 // Send 100 more requests
                 sendTasks.Add(extraSendTask);
@@ -548,18 +688,27 @@ namespace System.Net.Http.Functional.Tests
                 }
 
                 // Client sets the MaxConcurrentStreams to 'infinite', so accept 100 + 1 extra requests.
-                List<int> acceptedExtraRequests = await AcceptRequests(connection, DefaultMaxConcurrentStreams + 1).WaitAsync(TestHelper.PassingTestTimeout).ConfigureAwait(false);
+                List<int> acceptedExtraRequests = await AcceptRequests(
+                        connection,
+                        DefaultMaxConcurrentStreams + 1
+                    )
+                    .WaitAsync(TestHelper.PassingTestTimeout)
+                    .ConfigureAwait(false);
                 Assert.Equal(DefaultMaxConcurrentStreams + 1, acceptedExtraRequests.Count);
 
                 // Respond to all the requests.
                 acceptedRequests.AddRange(acceptedExtraRequests);
                 foreach (int streamId in acceptedRequests)
                 {
-                    await connection.SendDefaultResponseAsync(streamId).WaitAsync(TestHelper.PassingTestTimeout).ConfigureAwait(false);
+                    await connection.SendDefaultResponseAsync(streamId)
+                        .WaitAsync(TestHelper.PassingTestTimeout)
+                        .ConfigureAwait(false);
                 }
 
                 sendTasks.Add(extraSendTask);
-                await Task.WhenAll(sendTasks).WaitAsync(TestHelper.PassingTestTimeout).ConfigureAwait(false);
+                await Task.WhenAll(sendTasks)
+                    .WaitAsync(TestHelper.PassingTestTimeout)
+                    .ConfigureAwait(false);
 
                 foreach (Task<HttpResponseMessage> sendTask in sendTasks)
                 {
@@ -646,21 +795,30 @@ namespace System.Net.Http.Functional.Tests
             }
         }
 
-        private async Task<Http2LoopbackConnection> AcceptConnectionAndReadSettings(Http2LoopbackServer server, TimeSpan timeout)
-        {
-            Http2LoopbackConnection connection = await server.AcceptConnectionAsync(timeout).ConfigureAwait(false);
+        private async Task<Http2LoopbackConnection> AcceptConnectionAndReadSettings(
+            Http2LoopbackServer server,
+            TimeSpan timeout
+        ) {
+            Http2LoopbackConnection connection = await server.AcceptConnectionAsync(timeout)
+                .ConfigureAwait(false);
             await connection.ReadSettingsAsync().ConfigureAwait(false);
             return connection;
         }
 
-        private async Task<List<int>> AcceptRequests(Http2LoopbackConnection connection, int maxRequests = int.MaxValue)
-        {
+        private async Task<List<int>> AcceptRequests(
+            Http2LoopbackConnection connection,
+            int maxRequests = int.MaxValue
+        ) {
             List<int> streamIds = new List<int>();
             for (int i = 0; i < maxRequests; i++)
             {
                 try
                 {
-                    streamIds.Add((await connection.ReadAndParseRequestHeaderAsync().ConfigureAwait(false)).streamId);
+                    streamIds.Add(
+                        (
+                            await connection.ReadAndParseRequestHeaderAsync().ConfigureAwait(false)
+                        ).streamId
+                    );
                 }
                 catch (OperationCanceledException)
                 {
@@ -671,25 +829,48 @@ namespace System.Net.Http.Functional.Tests
             return streamIds;
         }
 
-        private static Frame MakeSimpleHeadersFrame(int streamId, bool endHeaders = false, bool endStream = false) =>
-            new HeadersFrame(new byte[] { 0x88 },       // :status: 200
-                (endHeaders ? FrameFlags.EndHeaders : FrameFlags.None) | (endStream ? FrameFlags.EndStream : FrameFlags.None),
-                0, 0, 0, streamId);
+        private static Frame MakeSimpleHeadersFrame(
+            int streamId,
+            bool endHeaders = false,
+            bool endStream = false
+        ) =>
+            new HeadersFrame(
+                new byte[] { 0x88 }, // :status: 200
+                (endHeaders ? FrameFlags.EndHeaders : FrameFlags.None)
+                    | (endStream ? FrameFlags.EndStream : FrameFlags.None),
+                0,
+                0,
+                0,
+                streamId
+            );
 
         private static Frame MakeSimpleContinuationFrame(int streamId, bool endHeaders = false)
         {
             Memory<byte> headerBlock = new byte[Frame.MaxFrameLength];
-            int bytesGenerated = HPackEncoder.EncodeHeader("foo", "bar", HPackFlags.None, headerBlock.Span);
+            int bytesGenerated = HPackEncoder.EncodeHeader(
+                "foo",
+                "bar",
+                HPackFlags.None,
+                headerBlock.Span
+            );
 
-            return new ContinuationFrame(headerBlock.Slice(0, bytesGenerated),
+            return new ContinuationFrame(
+                headerBlock.Slice(0, bytesGenerated),
                 (endHeaders ? FrameFlags.EndHeaders : FrameFlags.None),
-                0, 0, 0, streamId);
+                0,
+                0,
+                0,
+                streamId
+            );
         }
 
         private static Frame MakeSimpleDataFrame(int streamId, bool endStream = false) =>
-            new DataFrame(new byte[] { 0x00 },
+            new DataFrame(
+                new byte[] { 0x00 },
                 (endStream ? FrameFlags.EndStream : FrameFlags.None),
-                0, streamId);
+                0,
+                streamId
+            );
 
         [ConditionalFact(nameof(SupportsAlpn))]
         public async Task ResponseStreamFrames_ContinuationBeforeHeaders_ConnectionError()
@@ -741,8 +922,12 @@ namespace System.Net.Http.Functional.Tests
                 Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
                 int streamId = await connection.ReadRequestHeaderAsync();
 
-                await connection.WriteFrameAsync(MakeSimpleHeadersFrame(streamId, endHeaders: false));
-                await connection.WriteFrameAsync(MakeSimpleHeadersFrame(streamId, endHeaders: false));
+                await connection.WriteFrameAsync(
+                    MakeSimpleHeadersFrame(streamId, endHeaders: false)
+                );
+                await connection.WriteFrameAsync(
+                    MakeSimpleHeadersFrame(streamId, endHeaders: false)
+                );
 
                 // As this is a connection level error, the client should see the request fail.
                 await AssertProtocolErrorAsync(sendTask, ProtocolErrors.PROTOCOL_ERROR);
@@ -762,9 +947,15 @@ namespace System.Net.Http.Functional.Tests
                 Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
                 int streamId = await connection.ReadRequestHeaderAsync();
 
-                await connection.WriteFrameAsync(MakeSimpleHeadersFrame(streamId, endHeaders: false));
-                await connection.WriteFrameAsync(MakeSimpleContinuationFrame(streamId, endHeaders: false));
-                await connection.WriteFrameAsync(MakeSimpleHeadersFrame(streamId, endHeaders: false));
+                await connection.WriteFrameAsync(
+                    MakeSimpleHeadersFrame(streamId, endHeaders: false)
+                );
+                await connection.WriteFrameAsync(
+                    MakeSimpleContinuationFrame(streamId, endHeaders: false)
+                );
+                await connection.WriteFrameAsync(
+                    MakeSimpleHeadersFrame(streamId, endHeaders: false)
+                );
 
                 // As this is a connection level error, the client should see the request fail.
                 await AssertProtocolErrorAsync(sendTask, ProtocolErrors.PROTOCOL_ERROR);
@@ -784,7 +975,9 @@ namespace System.Net.Http.Functional.Tests
                 Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
                 int streamId = await connection.ReadRequestHeaderAsync();
 
-                await connection.WriteFrameAsync(MakeSimpleHeadersFrame(streamId, endHeaders: false));
+                await connection.WriteFrameAsync(
+                    MakeSimpleHeadersFrame(streamId, endHeaders: false)
+                );
                 await connection.WriteFrameAsync(MakeSimpleDataFrame(streamId));
 
                 // As this is a connection level error, the client should see the request fail.
@@ -805,8 +998,12 @@ namespace System.Net.Http.Functional.Tests
                 Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
                 int streamId = await connection.ReadRequestHeaderAsync();
 
-                await connection.WriteFrameAsync(MakeSimpleHeadersFrame(streamId, endHeaders: false));
-                await connection.WriteFrameAsync(MakeSimpleContinuationFrame(streamId, endHeaders: false));
+                await connection.WriteFrameAsync(
+                    MakeSimpleHeadersFrame(streamId, endHeaders: false)
+                );
+                await connection.WriteFrameAsync(
+                    MakeSimpleContinuationFrame(streamId, endHeaders: false)
+                );
                 await connection.WriteFrameAsync(MakeSimpleDataFrame(streamId));
 
                 // As this is a connection level error, the client should see the request fail.
@@ -832,7 +1029,12 @@ namespace System.Net.Http.Functional.Tests
                 await connection.ReadRequestHeaderAsync();
 
                 // Send a GoAway frame on stream 1.
-                GoAwayFrame invalidFrame = new GoAwayFrame(0, (int)ProtocolErrors.ENHANCE_YOUR_CALM, new byte[0], 1);
+                GoAwayFrame invalidFrame = new GoAwayFrame(
+                    0,
+                    (int)ProtocolErrors.ENHANCE_YOUR_CALM,
+                    new byte[0],
+                    1
+                );
                 await connection.WriteFrameAsync(invalidFrame);
 
                 // As this is a connection level error, the client should see the request fail.
@@ -893,11 +1095,12 @@ namespace System.Net.Http.Functional.Tests
                 await connection.WaitForConnectionShutdownAsync();
 
                 // Expect client to detect that server has disconnected and throw an exception
-                await Assert.ThrowsAnyAsync<HttpRequestException>(() =>
-                    new Task[]
-                    {
-                        sendTask
-                    }.WhenAllOrAnyFailed(TestHelper.PassingTestTimeoutMilliseconds));
+                await Assert.ThrowsAnyAsync<HttpRequestException>(
+                    () =>
+                        new Task[] { sendTask }.WhenAllOrAnyFailed(
+                            TestHelper.PassingTestTimeoutMilliseconds
+                        )
+                );
             }
         }
 
@@ -921,7 +1124,8 @@ namespace System.Net.Http.Functional.Tests
                 int streamId2 = await connection1.ReadRequestHeaderAsync();
 
                 // Client should try to restart on new connection when GOAWAY is sent
-                Task<Http2LoopbackConnection> waitForSecondConnection = server.EstablishConnectionAsync();
+                Task<Http2LoopbackConnection> waitForSecondConnection =
+                    server.EstablishConnectionAsync();
 
                 await connection1.SendGoAway(streamId1);
 
@@ -963,7 +1167,8 @@ namespace System.Net.Http.Functional.Tests
                 int streamId2 = await connection1.ReadRequestHeaderAsync();
 
                 // Client should try to restart on new connection when GOAWAY is sent
-                Task<Http2LoopbackConnection> waitForSecondConnection = server.EstablishConnectionAsync();
+                Task<Http2LoopbackConnection> waitForSecondConnection =
+                    server.EstablishConnectionAsync();
 
                 await connection1.SendGoAway(streamId1);
 
@@ -991,7 +1196,8 @@ namespace System.Net.Http.Functional.Tests
         [ConditionalFact(nameof(SupportsAlpn))]
         public async Task GoAwayFrame_RequestInFlight_Finished()
         {
-            await Http2LoopbackServer.CreateClientAndServerAsync(async uri =>
+            await Http2LoopbackServer.CreateClientAndServerAsync(
+                async uri =>
                 {
                     using (HttpClient client = CreateHttpClient())
                     {
@@ -1002,12 +1208,29 @@ namespace System.Net.Http.Functional.Tests
                         Assert.Equal(
                             new byte[20]
                             {
-                                5, 4, 3, 2, 1,
-                                11, 10, 9, 8, 7, 6,
-                                15, 14, 13, 12,
-                                20, 19, 18, 17, 16,
+                                5,
+                                4,
+                                3,
+                                2,
+                                1,
+                                11,
+                                10,
+                                9,
+                                8,
+                                7,
+                                6,
+                                15,
+                                14,
+                                13,
+                                12,
+                                20,
+                                19,
+                                18,
+                                17,
+                                16,
                             },
-                            responseBody);
+                            responseBody
+                        );
                     }
                 },
                 async server =>
@@ -1017,8 +1240,16 @@ namespace System.Net.Http.Functional.Tests
 
                     await connection.SendDefaultResponseHeadersAsync(streamId);
 
-                    await connection.SendResponseBodyAsync(streamId, new byte[5] { 5, 4, 3, 2, 1 }, isFinal: false);
-                    await connection.SendResponseBodyAsync(streamId, new byte[6] { 11, 10, 9, 8, 7, 6 }, isFinal: false);
+                    await connection.SendResponseBodyAsync(
+                        streamId,
+                        new byte[5] { 5, 4, 3, 2, 1 },
+                        isFinal: false
+                    );
+                    await connection.SendResponseBodyAsync(
+                        streamId,
+                        new byte[6] { 11, 10, 9, 8, 7, 6 },
+                        isFinal: false
+                    );
 
                     // Signal that our request is the last thing which will be processed
                     await connection.SendGoAway(streamId);
@@ -1026,11 +1257,20 @@ namespace System.Net.Http.Functional.Tests
                     // Make sure client received GOAWAY
                     await connection.PingPong();
 
-                    await connection.SendResponseBodyAsync(streamId, new byte[4] { 15, 14, 13, 12 }, isFinal: false);
-                    await connection.SendResponseBodyAsync(streamId, new byte[5] { 20, 19, 18, 17, 16 }, isFinal: true);
+                    await connection.SendResponseBodyAsync(
+                        streamId,
+                        new byte[4] { 15, 14, 13, 12 },
+                        isFinal: false
+                    );
+                    await connection.SendResponseBodyAsync(
+                        streamId,
+                        new byte[5] { 20, 19, 18, 17, 16 },
+                        isFinal: true
+                    );
 
                     await connection.WaitForConnectionShutdownAsync();
-                });
+                }
+            );
         }
 
         [ConditionalFact(nameof(SupportsAlpn))]
@@ -1045,7 +1285,12 @@ namespace System.Net.Http.Functional.Tests
                 await connection.ReadRequestHeaderAsync();
 
                 // Send a malformed frame.
-                DataFrame invalidFrame = new DataFrame(new byte[Frame.MaxFrameLength + 1], FrameFlags.None, 0, 0);
+                DataFrame invalidFrame = new DataFrame(
+                    new byte[Frame.MaxFrameLength + 1],
+                    FrameFlags.None,
+                    0,
+                    0
+                );
                 await connection.WriteFrameAsync(invalidFrame);
 
                 // As this is a connection level error, the client should see the request fail.
@@ -1069,7 +1314,12 @@ namespace System.Net.Http.Functional.Tests
 
                 // Send response and end stream.
                 await connection.SendDefaultResponseHeadersAsync(streamId);
-                DataFrame dataFrame = new DataFrame(new byte[10], FrameFlags.EndStream, 0, streamId);
+                DataFrame dataFrame = new DataFrame(
+                    new byte[10],
+                    FrameFlags.EndStream,
+                    0,
+                    streamId
+                );
                 await connection.WriteFrameAsync(dataFrame);
 
                 HttpResponseMessage response = await sendTask;
@@ -1150,14 +1400,17 @@ namespace System.Net.Http.Functional.Tests
             }
             else
             {
-                byte[] headers = new byte[] { 0x88 };   // Encoding for ":status: 200"
+                byte[] headers = new byte[] { 0x88 }; // Encoding for ":status: 200"
                 return new HeadersFrame(headers, FrameFlags.EndHeaders, 0, 0, 0, streamId);
             }
         }
 
         // Validate that connection is still usable, by sending a request and receiving a response
-        private static async Task<int> ValidateConnection(HttpClient client, Uri serverAddress, Http2LoopbackConnection connection)
-        {
+        private static async Task<int> ValidateConnection(
+            HttpClient client,
+            Uri serverAddress,
+            Http2LoopbackConnection connection
+        ) {
             Task<HttpResponseMessage> sendTask = client.GetAsync(serverAddress);
 
             int streamId = await connection.ReadRequestHeaderAsync();
@@ -1171,10 +1424,10 @@ namespace System.Net.Http.Functional.Tests
 
         public static IEnumerable<object[]> ValidAndInvalidProtocolErrors() =>
             Enum.GetValues(typeof(ProtocolErrors))
-            .Cast<ProtocolErrors>()
-            .Where(e => e != ProtocolErrors.REFUSED_STREAM)     // REFUSED_STREAM allows retry instead of abort, so skip it
-            .Concat(new[] { (ProtocolErrors)12345 })
-            .Select(p => new object[] { p });
+                .Cast<ProtocolErrors>()
+                .Where(e => e != ProtocolErrors.REFUSED_STREAM) // REFUSED_STREAM allows retry instead of abort, so skip it
+                .Concat(new[] { (ProtocolErrors)12345 })
+                .Select(p => new object[] { p });
 
         public static IEnumerable<object[]> ValidAndInvalidProtocolErrorsAndBool()
         {
@@ -1187,8 +1440,10 @@ namespace System.Net.Http.Functional.Tests
 
         [ConditionalTheory(nameof(SupportsAlpn))]
         [MemberData(nameof(ValidAndInvalidProtocolErrorsAndBool))]
-        public async Task ResetResponseStream_FrameReceived_Ignored(ProtocolErrors error, bool dataFrame)
-        {
+        public async Task ResetResponseStream_FrameReceived_Ignored(
+            ProtocolErrors error,
+            bool dataFrame
+        ) {
             using (Http2LoopbackServer server = Http2LoopbackServer.CreateServer())
             using (HttpClient client = CreateHttpClient())
             {
@@ -1199,7 +1454,11 @@ namespace System.Net.Http.Functional.Tests
                 await connection.SendDefaultResponseHeadersAsync(streamId);
 
                 // Send a reset stream frame so that stream 1 moves to a terminal state.
-                RstStreamFrame resetStream = new RstStreamFrame(FrameFlags.None, (int)error, streamId);
+                RstStreamFrame resetStream = new RstStreamFrame(
+                    FrameFlags.None,
+                    (int)error,
+                    streamId
+                );
                 await connection.WriteFrameAsync(resetStream);
 
                 await AssertProtocolErrorAsync(sendTask, error);
@@ -1215,8 +1474,10 @@ namespace System.Net.Http.Functional.Tests
             }
         }
 
-        private static async Task<(int, Http2LoopbackConnection)> EstablishConnectionAndProcessOneRequestAsync(HttpClient client, Http2LoopbackServer server)
-        {
+        private static async Task<(int, Http2LoopbackConnection)> EstablishConnectionAndProcessOneRequestAsync(
+            HttpClient client,
+            Http2LoopbackServer server
+        ) {
             int streamId = -1;
 
             // Establish connection and send initial request/response to ensure connection is available for subsequent use
@@ -1224,20 +1485,24 @@ namespace System.Net.Http.Functional.Tests
 
             await new[]
             {
-                Task.Run(async () =>
-                {
-                    using (HttpResponseMessage response = await client.GetAsync(server.Address))
+                Task.Run(
+                    async () =>
                     {
-                        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-                        Assert.Equal(0, (await response.Content.ReadAsByteArrayAsync()).Length);
+                        using (HttpResponseMessage response = await client.GetAsync(server.Address))
+                        {
+                            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                            Assert.Equal(0, (await response.Content.ReadAsByteArrayAsync()).Length);
+                        }
                     }
-                }),
-                Task.Run(async () =>
-                {
-                    connection = await server.EstablishConnectionAsync();
-                    streamId = await connection.ReadRequestHeaderAsync();
-                    await connection.SendDefaultResponseAsync(streamId);
-                })
+                ),
+                Task.Run(
+                    async () =>
+                    {
+                        connection = await server.EstablishConnectionAsync();
+                        streamId = await connection.ReadRequestHeaderAsync();
+                        await connection.SendDefaultResponseAsync(streamId);
+                    }
+                )
             }.WhenAllOrAnyFailed(TestHelper.PassingTestTimeoutMilliseconds);
 
             return (streamId, connection);
@@ -1250,7 +1515,8 @@ namespace System.Net.Http.Functional.Tests
             using (Http2LoopbackServer server = Http2LoopbackServer.CreateServer())
             using (HttpClient client = CreateHttpClient())
             {
-                (int streamId, Http2LoopbackConnection connection) = await EstablishConnectionAndProcessOneRequestAsync(client, server);
+                (int streamId, Http2LoopbackConnection connection) =
+                    await EstablishConnectionAndProcessOneRequestAsync(client, server);
 
                 // Send GOAWAY.
                 GoAwayFrame goAwayFrame = new GoAwayFrame(streamId, 0, new byte[0], 0);
@@ -1270,7 +1536,8 @@ namespace System.Net.Http.Functional.Tests
             using (Http2LoopbackServer server = Http2LoopbackServer.CreateServer())
             using (HttpClient client = CreateHttpClient())
             {
-                (_, Http2LoopbackConnection connection) = await EstablishConnectionAndProcessOneRequestAsync(client, server);
+                (_, Http2LoopbackConnection connection) =
+                    await EstablishConnectionAndProcessOneRequestAsync(client, server);
 
                 // Issue three requests
                 Task<HttpResponseMessage> sendTask1 = client.GetAsync(server.Address);
@@ -1338,7 +1605,8 @@ namespace System.Net.Http.Functional.Tests
                 client.BaseAddress = server.Address;
                 server.AllowMultipleConnections = true;
 
-                (_, Http2LoopbackConnection connection) = await EstablishConnectionAndProcessOneRequestAsync(client, server);
+                (_, Http2LoopbackConnection connection) =
+                    await EstablishConnectionAndProcessOneRequestAsync(client, server);
 
                 // Issue three requests, we want to make sure the specific task is related with specific stream
                 Task<HttpResponseMessage> sendTask1 = client.GetAsync("request1");
@@ -1379,13 +1647,20 @@ namespace System.Net.Http.Functional.Tests
                 string headerData = Encoding.UTF8.GetString(retriedFrame.Data.Span);
 
                 await newConnection.SendDefaultResponseHeadersAsync(retriedStreamId);
-                await newConnection.SendResponseDataAsync(retriedStreamId, new byte[3], endStream: true);
+                await newConnection.SendResponseDataAsync(
+                    retriedStreamId,
+                    new byte[3],
+                    endStream: true
+                );
 
                 Assert.Contains("request1", headerData);
 
                 HttpResponseMessage response1 = await sendTask1;
                 Assert.Equal(HttpStatusCode.OK, response1.StatusCode);
-                await newConnection.ShutdownIgnoringErrorsAsync(retriedStreamId, ProtocolErrors.ENHANCE_YOUR_CALM);
+                await newConnection.ShutdownIgnoringErrorsAsync(
+                    retriedStreamId,
+                    ProtocolErrors.ENHANCE_YOUR_CALM
+                );
 
                 await AssertProtocolErrorAsync(sendTask2, ProtocolErrors.ENHANCE_YOUR_CALM);
                 await AssertProtocolErrorAsync(sendTask3, ProtocolErrors.ENHANCE_YOUR_CALM);
@@ -1394,8 +1669,10 @@ namespace System.Net.Http.Functional.Tests
             }
         }
 
-        private static async Task<int> ReadToEndOfStream(Http2LoopbackConnection connection, int streamId)
-        {
+        private static async Task<int> ReadToEndOfStream(
+            Http2LoopbackConnection connection,
+            int streamId
+        ) {
             int bytesReceived = 0;
             while (true)
             {
@@ -1494,13 +1771,17 @@ namespace System.Net.Http.Functional.Tests
                 Assert.False(readFrameTask.IsCompleted);
 
                 // Increase connection window to allow exactly the remaining request size. This should still not complete the read.
-                await connection.WriteFrameAsync(new WindowUpdateFrame(ContentSize - bytesReceived - 1, 0));
+                await connection.WriteFrameAsync(
+                    new WindowUpdateFrame(ContentSize - bytesReceived - 1, 0)
+                );
 
                 await Task.Delay(500);
                 Assert.False(readFrameTask.IsCompleted);
 
                 // Increase stream window to allow exactly the remaining request size. This should allow the rest of the request to be sent.
-                await connection.WriteFrameAsync(new WindowUpdateFrame(ContentSize - bytesReceived, streamId));
+                await connection.WriteFrameAsync(
+                    new WindowUpdateFrame(ContentSize - bytesReceived, streamId)
+                );
 
                 frame = await readFrameTask;
                 Assert.Equal(streamId, frame.StreamId);
@@ -1539,7 +1820,9 @@ namespace System.Net.Http.Functional.Tests
                 Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
 
                 // Bump connection window so it won't block the client.
-                await connection.WriteFrameAsync(new WindowUpdateFrame(ContentSize - DefaultInitialWindowSize, 0));
+                await connection.WriteFrameAsync(
+                    new WindowUpdateFrame(ContentSize - DefaultInitialWindowSize, 0)
+                );
 
                 Frame frame = await connection.ReadFrameAsync(TimeSpan.FromSeconds(30));
                 int streamId = frame.StreamId;
@@ -1569,7 +1852,11 @@ namespace System.Net.Http.Functional.Tests
 
                 // Change SETTINGS_INITIAL_WINDOW_SIZE to 0. This will make the client's credit go negative.
                 await connection.ExpectSettingsAckAsync();
-                await connection.WriteFrameAsync(new SettingsFrame(new SettingsEntry { SettingId = SettingId.InitialWindowSize, Value = 0 }));
+                await connection.WriteFrameAsync(
+                    new SettingsFrame(
+                        new SettingsEntry { SettingId = SettingId.InitialWindowSize, Value = 0 }
+                    )
+                );
 
                 await Task.Delay(500);
                 Assert.False(readFrameTask.IsCompleted);
@@ -1582,13 +1869,19 @@ namespace System.Net.Http.Functional.Tests
 
                 // Change SETTINGS_INITIAL_WINDOW_SIZE to 1. Client credit will still be negative.
                 await connection.ExpectSettingsAckAsync();
-                await connection.WriteFrameAsync(new SettingsFrame(new SettingsEntry { SettingId = SettingId.InitialWindowSize, Value = 1 }));
+                await connection.WriteFrameAsync(
+                    new SettingsFrame(
+                        new SettingsEntry { SettingId = SettingId.InitialWindowSize, Value = 1 }
+                    )
+                );
 
                 await Task.Delay(500);
                 Assert.False(readFrameTask.IsCompleted);
 
                 // Increase stream window so client credit will be 0.
-                await connection.WriteFrameAsync(new WindowUpdateFrame(DefaultInitialWindowSize - 2, streamId));
+                await connection.WriteFrameAsync(
+                    new WindowUpdateFrame(DefaultInitialWindowSize - 2, streamId)
+                );
 
                 await Task.Delay(500);
                 Assert.False(readFrameTask.IsCompleted);
@@ -1609,7 +1902,11 @@ namespace System.Net.Http.Functional.Tests
 
                 // Increase SETTINGS_INITIAL_WINDOW_SIZE to 2, so client can now send a single byte.
                 await connection.ExpectSettingsAckAsync();
-                await connection.WriteFrameAsync(new SettingsFrame(new SettingsEntry { SettingId = SettingId.InitialWindowSize, Value = 2 }));
+                await connection.WriteFrameAsync(
+                    new SettingsFrame(
+                        new SettingsEntry { SettingId = SettingId.InitialWindowSize, Value = 2 }
+                    )
+                );
 
                 frame = await readFrameTask;
                 Assert.Equal(FrameType.Data, frame.Type);
@@ -1624,7 +1921,15 @@ namespace System.Net.Http.Functional.Tests
 
                 // Increase SETTINGS_INITIAL_WINDOW_SIZE to be enough that the client can send the rest of the content.
                 await connection.ExpectSettingsAckAsync();
-                await connection.WriteFrameAsync(new SettingsFrame(new SettingsEntry { SettingId = SettingId.InitialWindowSize, Value = ContentSize - (DefaultInitialWindowSize - 1) }));
+                await connection.WriteFrameAsync(
+                    new SettingsFrame(
+                        new SettingsEntry
+                        {
+                            SettingId = SettingId.InitialWindowSize,
+                            Value = ContentSize - (DefaultInitialWindowSize - 1)
+                        }
+                    )
+                );
 
                 frame = await readFrameTask;
                 Assert.Equal(streamId, frame.StreamId);
@@ -1648,25 +1953,49 @@ namespace System.Net.Http.Functional.Tests
 
         public static IEnumerable<object[]> KeepAliveTestDataSource()
         {
-            yield return new object[] { Timeout.InfiniteTimeSpan, HttpKeepAlivePingPolicy.Always, false };
-            yield return new object[] { TimeSpan.FromSeconds(1), HttpKeepAlivePingPolicy.WithActiveRequests, false };
-            yield return new object[] { TimeSpan.FromSeconds(1), HttpKeepAlivePingPolicy.Always, false };
-            yield return new object[] { TimeSpan.FromSeconds(1), HttpKeepAlivePingPolicy.WithActiveRequests, true };
+            yield return new object[]
+            {
+                Timeout.InfiniteTimeSpan,
+                HttpKeepAlivePingPolicy.Always,
+                false
+            };
+            yield return new object[]
+            {
+                TimeSpan.FromSeconds(1),
+                HttpKeepAlivePingPolicy.WithActiveRequests,
+                false
+            };
+            yield return new object[]
+            {
+                TimeSpan.FromSeconds(1),
+                HttpKeepAlivePingPolicy.Always,
+                false
+            };
+            yield return new object[]
+            {
+                TimeSpan.FromSeconds(1),
+                HttpKeepAlivePingPolicy.WithActiveRequests,
+                true
+            };
         }
 
         [OuterLoop("Significant delay.")]
         [MemberData(nameof(KeepAliveTestDataSource))]
         [ConditionalTheory(nameof(SupportsAlpn))]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/41929")]
-        public async Task Http2_PingKeepAlive(TimeSpan keepAlivePingDelay, HttpKeepAlivePingPolicy keepAlivePingPolicy, bool expectRequestFail)
-        {
+        public async Task Http2_PingKeepAlive(
+            TimeSpan keepAlivePingDelay,
+            HttpKeepAlivePingPolicy keepAlivePingPolicy,
+            bool expectRequestFail
+        ) {
             TimeSpan pingTimeout = TimeSpan.FromSeconds(5);
             // Simulate failure by delaying the pong, otherwise send it immediately.
             TimeSpan pongDelay = expectRequestFail ? pingTimeout * 2 : TimeSpan.Zero;
             // Pings are send only if KeepAlivePingDelay is not infinite.
             bool expectStreamPing = keepAlivePingDelay != Timeout.InfiniteTimeSpan;
             // Pings (regardless ongoing communication) are send only if sending is on and policy is set to always.
-            bool expectPingWithoutStream = expectStreamPing && keepAlivePingPolicy == HttpKeepAlivePingPolicy.Always;
+            bool expectPingWithoutStream =
+                expectStreamPing && keepAlivePingPolicy == HttpKeepAlivePingPolicy.Always;
 
             TaskCompletionSource serverFinished = new TaskCompletionSource();
 
@@ -1679,7 +2008,10 @@ namespace System.Net.Http.Functional.Tests
                         KeepAlivePingPolicy = keepAlivePingPolicy,
                         KeepAlivePingDelay = keepAlivePingDelay
                     };
-                    handler.SslOptions.RemoteCertificateValidationCallback = delegate { return true; };
+                    handler.SslOptions.RemoteCertificateValidationCallback = delegate
+                    {
+                        return true;
+                    };
 
                     using HttpClient client = new HttpClient(handler);
                     client.DefaultRequestVersion = HttpVersion.Version20;
@@ -1689,7 +2021,9 @@ namespace System.Net.Http.Functional.Tests
                     // Request under the test scope.
                     if (expectRequestFail)
                     {
-                        await Assert.ThrowsAsync<HttpRequestException>(() => client.GetStringAsync(uri));
+                        await Assert.ThrowsAsync<HttpRequestException>(
+                            () => client.GetStringAsync(uri)
+                        );
                         // As stream is closed we don't want to continue with sending data.
                         return;
                     }
@@ -1707,9 +2041,12 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    using Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
+                    using Http2LoopbackConnection connection =
+                        await server.EstablishConnectionAsync();
 
-                    Task<PingFrame> receivePingTask = expectStreamPing ? connection.ExpectPingFrameAsync() : null;
+                    Task<PingFrame> receivePingTask = expectStreamPing
+                        ? connection.ExpectPingFrameAsync()
+                        : null;
 
                     // Warmup the connection.
                     int streamId1 = await connection.ReadRequestHeaderAsync();
@@ -1721,7 +2058,9 @@ namespace System.Net.Http.Functional.Tests
                     // Test ping with active stream.
                     if (!expectStreamPing)
                     {
-                        await Assert.ThrowsAsync<OperationCanceledException>(() => connection.ReadPingAsync(pingTimeout));
+                        await Assert.ThrowsAsync<OperationCanceledException>(
+                            () => connection.ReadPingAsync(pingTimeout)
+                        );
                     }
                     else
                     {
@@ -1745,7 +2084,9 @@ namespace System.Net.Http.Functional.Tests
                     // Send response and close the stream.
                     if (expectRequestFail)
                     {
-                        await Assert.ThrowsAsync<IOException>(() => connection.SendDefaultResponseAsync(streamId2));
+                        await Assert.ThrowsAsync<IOException>(
+                            () => connection.SendDefaultResponseAsync(streamId2)
+                        );
                         // As stream is closed we don't want to continue with sending data.
                         return;
                     }
@@ -1768,11 +2109,14 @@ namespace System.Net.Http.Functional.Tests
                             }
                             catch (OperationCanceledException) { } // if it failed once, it will fail again
                         }
-                        await Assert.ThrowsAsync<OperationCanceledException>(() => connection.ReadPingAsync(pingTimeout));
+                        await Assert.ThrowsAsync<OperationCanceledException>(
+                            () => connection.ReadPingAsync(pingTimeout)
+                        );
                     }
                     serverFinished.SetResult();
                     await connection.WaitForClientDisconnectAsync(true);
-                });
+                }
+            );
         }
 
         [OuterLoop("Uses Task.Delay")]
@@ -1796,7 +2140,9 @@ namespace System.Net.Http.Functional.Tests
 
                 // Change MaxConcurrentStreams setting and wait for ack.
                 // (We don't want to send any new requests until we receive the ack, otherwise we may have a timing issue.)
-                SettingsFrame settingsFrame = new SettingsFrame(new SettingsEntry { SettingId = SettingId.MaxConcurrentStreams, Value = 0 });
+                SettingsFrame settingsFrame = new SettingsFrame(
+                    new SettingsEntry { SettingId = SettingId.MaxConcurrentStreams, Value = 0 }
+                );
                 await connection.WriteFrameAsync(settingsFrame);
                 Frame settingsAckFrame = await connection.ReadFrameAsync(TimeSpan.FromSeconds(30));
                 Assert.Equal(FrameType.Settings, settingsAckFrame.Type);
@@ -1813,7 +2159,9 @@ namespace System.Net.Http.Functional.Tests
 
                 // Change MaxConcurrentStreams again to allow a single request to come through.
                 await connection.ExpectSettingsAckAsync();
-                settingsFrame = new SettingsFrame(new SettingsEntry { SettingId = SettingId.MaxConcurrentStreams, Value = 1 });
+                settingsFrame = new SettingsFrame(
+                    new SettingsEntry { SettingId = SettingId.MaxConcurrentStreams, Value = 1 }
+                );
                 await connection.WriteFrameAsync(settingsFrame);
 
                 // First request should be sent
@@ -1864,7 +2212,9 @@ namespace System.Net.Http.Functional.Tests
 
                 // Change MaxConcurrentStreams setting and wait for ack.
                 // (We don't want to send any new requests until we receive the ack, otherwise we may have a timing issue.)
-                SettingsFrame settingsFrame = new SettingsFrame(new SettingsEntry { SettingId = SettingId.MaxConcurrentStreams, Value = 0 });
+                SettingsFrame settingsFrame = new SettingsFrame(
+                    new SettingsEntry { SettingId = SettingId.MaxConcurrentStreams, Value = 0 }
+                );
                 await connection.WriteFrameAsync(settingsFrame);
                 Frame settingsAckFrame = await connection.ReadFrameAsync(TimeSpan.FromSeconds(30));
                 Assert.Equal(FrameType.Settings, settingsAckFrame.Type);
@@ -1887,7 +2237,6 @@ namespace System.Net.Http.Functional.Tests
                 // Ensure that the cancellation occurs promptly
                 stopwatch.Stop();
                 Assert.True(stopwatch.ElapsedMilliseconds < 30000);
-
                 // As the client has not allocated a stream ID when the corresponding request is cancelled,
                 // we do not send a RST stream frame.
             }
@@ -1911,7 +2260,11 @@ namespace System.Net.Http.Functional.Tests
             using (HttpClient client = CreateHttpClient(handler))
             {
                 var cts = new CancellationTokenSource();
-                Task<HttpResponseMessage> clientTask = client.PostAsync(server.Address, content, cts.Token);
+                Task<HttpResponseMessage> clientTask = client.PostAsync(
+                    server.Address,
+                    content,
+                    cts.Token
+                );
 
                 Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
 
@@ -1938,7 +2291,9 @@ namespace System.Net.Http.Functional.Tests
                 Stopwatch stopwatch = Stopwatch.StartNew();
 
                 cts.Cancel();
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await clientTask);
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                    async () => await clientTask
+                );
 
                 // Ensure that the cancellation occurs promptly
                 stopwatch.Stop();
@@ -1965,7 +2320,11 @@ namespace System.Net.Http.Functional.Tests
             {
                 var cts = new CancellationTokenSource();
 
-                Task<HttpResponseMessage> clientTask = client.PostAsync(server.Address, content, cts.Token);
+                Task<HttpResponseMessage> clientTask = client.PostAsync(
+                    server.Address,
+                    content,
+                    cts.Token
+                );
 
                 Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
 
@@ -1976,13 +2335,17 @@ namespace System.Net.Http.Functional.Tests
 
                 // Increase the size of the HTTP/2 Window, so that it is large enough to fill the
                 // TCP window when we do not perform any reads on the server side.
-                await connection.WriteFrameAsync(new WindowUpdateFrame(InitialWindowSize, streamId));
+                await connection.WriteFrameAsync(
+                    new WindowUpdateFrame(InitialWindowSize, streamId)
+                );
 
                 // Give the client time to read the window update frame, and for the write to pend.
                 await Task.Delay(1000);
                 cts.Cancel();
 
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await clientTask);
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                    async () => await clientTask
+                );
             }
         }
 
@@ -1996,64 +2359,89 @@ namespace System.Net.Http.Functional.Tests
             var rstReceived = new TaskCompletionSource<bool>();
 
             string content = new string('*', 300);
-            var stream = new CustomContent.SlowTestStream(Encoding.UTF8.GetBytes(content), null, count: 60);
-            await Http2LoopbackServer.CreateClientAndServerAsync(async url =>
-            {
-                using (HttpClient client = CreateHttpClient())
+            var stream = new CustomContent.SlowTestStream(
+                Encoding.UTF8.GetBytes(content),
+                null,
+                count: 60
+            );
+            await Http2LoopbackServer.CreateClientAndServerAsync(
+                async url =>
                 {
-                    var request = new HttpRequestMessage(HttpMethod.Post, url);
-                    request.Version = new Version(2,0);
-                    request.Content = new CustomContent(stream);
+                    using (HttpClient client = CreateHttpClient())
+                    {
+                        var request = new HttpRequestMessage(HttpMethod.Post, url);
+                        request.Version = new Version(2, 0);
+                        request.Content = new CustomContent(stream);
 
-                    await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await client.SendAsync(request, cts.Token));
+                        await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                            async () => await client.SendAsync(request, cts.Token)
+                        );
 
-                    // Wait until the RST_STREAM for the previous request is received before the next request starts.
-                    await rstReceived.Task.WaitAsync(TimeSpan.FromSeconds(60));
+                        // Wait until the RST_STREAM for the previous request is received before the next request starts.
+                        await rstReceived.Task.WaitAsync(TimeSpan.FromSeconds(60));
 
-                    // Send another request to verify that connection is still functional.
-                    request = new HttpRequestMessage(HttpMethod.Get, url);
-                    request.Version = new Version(2,0);
+                        // Send another request to verify that connection is still functional.
+                        request = new HttpRequestMessage(HttpMethod.Get, url);
+                        request.Version = new Version(2, 0);
 
-                    await client.SendAsync(request);
-                }
-            },
-            async server =>
-            {
-                Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
-
-                (int streamId, HttpRequestData requestData) = await connection.ReadAndParseRequestHeaderAsync(readBody : false);
-                int frameCount = 0;
-                Frame frame;
-                do
-                {
-                    if (frameCount == (waitForData ? 1 : 0)) {
-                        // Cancel client after receiving Headers or part of request body.
-                        cts.Cancel();
+                        await client.SendAsync(request);
                     }
-                    frame = await connection.ReadFrameAsync(TestHelper.PassingTestTimeout);
-                    Assert.NotNull(frame); // We should get Rst before closing connection.
-                    Assert.Equal(0, (int)(frame.Flags & FrameFlags.EndStream));
-                    frameCount++;
-                 } while (frame.Type != FrameType.RstStream);
-
-                Assert.Equal(1, frame.StreamId);
-
-                rstReceived.SetResult(true);
-
-                frame = null;
-                (streamId, requestData) = await connection.ReadAndParseRequestHeaderAsync();
-                await connection.SendResponseHeadersAsync(streamId, endStream: false, HttpStatusCode.OK);
-                await connection.SendResponseBodyAsync(streamId, Encoding.ASCII.GetBytes($"Http2_PendingSend_SendsReset(waitForData: {waitForData})"), isFinal: false);
-                // Wait for any lingering frames or extra reset frames.
-                try
+                },
+                async server =>
                 {
-                    frame = await connection.ReadFrameAsync(TimeSpan.FromMilliseconds(1000));
+                    Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
+
+                    (int streamId, HttpRequestData requestData) =
+                        await connection.ReadAndParseRequestHeaderAsync(readBody: false);
+                    int frameCount = 0;
+                    Frame frame;
+                    do
+                    {
+                        if (frameCount == (waitForData ? 1 : 0))
+                        {
+                            // Cancel client after receiving Headers or part of request body.
+                            cts.Cancel();
+                        }
+                        frame = await connection.ReadFrameAsync(TestHelper.PassingTestTimeout);
+                        Assert.NotNull(frame); // We should get Rst before closing connection.
+                        Assert.Equal(0, (int)(frame.Flags & FrameFlags.EndStream));
+                        frameCount++;
+                    } while (frame.Type != FrameType.RstStream);
+
+                    Assert.Equal(1, frame.StreamId);
+
+                    rstReceived.SetResult(true);
+
+                    frame = null;
+                    (streamId, requestData) = await connection.ReadAndParseRequestHeaderAsync();
+                    await connection.SendResponseHeadersAsync(
+                        streamId,
+                        endStream: false,
+                        HttpStatusCode.OK
+                    );
+                    await connection.SendResponseBodyAsync(
+                        streamId,
+                        Encoding.ASCII.GetBytes(
+                            $"Http2_PendingSend_SendsReset(waitForData: {waitForData})"
+                        ),
+                        isFinal: false
+                    );
+                    // Wait for any lingering frames or extra reset frames.
+                    try
+                    {
+                        frame = await connection.ReadFrameAsync(TimeSpan.FromMilliseconds(1000));
+                    }
+                    catch (System.OperationCanceledException) { }
+                    ;
+                    Assert.Null(frame); // Make sure we do not get any frames after getting Rst.
+                    await connection.SendResponseBodyAsync(
+                        streamId,
+                        Encoding.ASCII.GetBytes("final"),
+                        isFinal: true
+                    );
+                    await connection.WaitForConnectionShutdownAsync();
                 }
-                catch (System.OperationCanceledException) { };
-                Assert.Null(frame);    // Make sure we do not get any frames after getting Rst.
-                await connection.SendResponseBodyAsync(streamId, Encoding.ASCII.GetBytes("final"), isFinal: true);
-                await connection.WaitForConnectionShutdownAsync();
-            });
+            );
         }
 
         [Theory]
@@ -2067,63 +2455,81 @@ namespace System.Net.Http.Functional.Tests
 
             using (HttpClient client = CreateHttpClient())
             {
-                await Http2LoopbackServer.CreateClientAndServerAsync(async url =>
-                {
-                    var request = new HttpRequestMessage(HttpMethod.Get, url);
-                    request.Version = new Version(2,0);
-
-                    response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cts.Token);
-                    using (Stream stream = await response.Content.ReadAsStreamAsync())
+                await Http2LoopbackServer.CreateClientAndServerAsync(
+                    async url =>
                     {
-                        byte[] buffer = new byte[100];
+                        var request = new HttpRequestMessage(HttpMethod.Get, url);
+                        request.Version = new Version(2, 0);
 
-                        if (doRead)
+                        response = await client.SendAsync(
+                            request,
+                            HttpCompletionOption.ResponseHeadersRead,
+                            cts.Token
+                        );
+                        using (Stream stream = await response.Content.ReadAsStreamAsync())
                         {
-                            // Start reading response as variation.
-                            _ = await stream.ReadAsync(buffer, cts.Token);
-                        }
+                            byte[] buffer = new byte[100];
 
-                        doCancel.SetResult();
-                        _output.WriteLine($"{DateTime.Now} cancellation requested.");
-
-                        // Keep reading response.
-                        if (doRead)
-                        {
-                            try
+                            if (doRead)
                             {
-                                while (true)
-                                {
-                                    _ = await stream.ReadAsync(buffer, cts.Token);
-                                }
+                                // Start reading response as variation.
+                                _ = await stream.ReadAsync(buffer, cts.Token);
                             }
-                            catch (OperationCanceledException) { };
+
+                            doCancel.SetResult();
+                            _output.WriteLine($"{DateTime.Now} cancellation requested.");
+
+                            // Keep reading response.
+                            if (doRead)
+                            {
+                                try
+                                {
+                                    while (true)
+                                    {
+                                        _ = await stream.ReadAsync(buffer, cts.Token);
+                                    }
+                                }
+                                catch (OperationCanceledException) { }
+                                ;
+                            }
                         }
-                    }
-                },
-                async server =>
-                {
-                    Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
-
-                    (int streamId, HttpRequestData requestData) = await connection.ReadAndParseRequestHeaderAsync(readBody : false);
-                    _output.WriteLine($"{DateTime.Now} Connection established");
-
-                    await connection.SendResponseHeadersAsync(streamId, endStream: false, HttpStatusCode.OK);
-                    // Start streaming response
-                    DataFrame dataFrame = new DataFrame(new byte[100], FrameFlags.None, 0, streamId);
-                    await connection.WriteFrameAsync(dataFrame);
-                    // Wait for client to start processing response and cancel it.
-                    await doCancel.Task;
-                    cts.Cancel();
-
-                    _output.WriteLine($"{DateTime.Now} HttpRequest was canceled");
-                    Frame frame;
-                    do
+                    },
+                    async server =>
                     {
-                        frame = await connection.ReadFrameAsync(TestHelper.PassingTestTimeout);
-                        Assert.NotNull(frame); // We should get Rst before closing connection.
-                        Assert.Equal(0, (int)(frame.Flags & FrameFlags.EndStream));
-                    } while (frame.Type != FrameType.RstStream);
-                });
+                        Http2LoopbackConnection connection =
+                            await server.EstablishConnectionAsync();
+
+                        (int streamId, HttpRequestData requestData) =
+                            await connection.ReadAndParseRequestHeaderAsync(readBody: false);
+                        _output.WriteLine($"{DateTime.Now} Connection established");
+
+                        await connection.SendResponseHeadersAsync(
+                            streamId,
+                            endStream: false,
+                            HttpStatusCode.OK
+                        );
+                        // Start streaming response
+                        DataFrame dataFrame = new DataFrame(
+                            new byte[100],
+                            FrameFlags.None,
+                            0,
+                            streamId
+                        );
+                        await connection.WriteFrameAsync(dataFrame);
+                        // Wait for client to start processing response and cancel it.
+                        await doCancel.Task;
+                        cts.Cancel();
+
+                        _output.WriteLine($"{DateTime.Now} HttpRequest was canceled");
+                        Frame frame;
+                        do
+                        {
+                            frame = await connection.ReadFrameAsync(TestHelper.PassingTestTimeout);
+                            Assert.NotNull(frame); // We should get Rst before closing connection.
+                            Assert.Equal(0, (int)(frame.Flags & FrameFlags.EndStream));
+                        } while (frame.Type != FrameType.RstStream);
+                    }
+                );
             }
         }
 
@@ -2134,24 +2540,29 @@ namespace System.Net.Http.Functional.Tests
             var throwingContent = new ThrowingContent(() => new InvalidOperationException());
 
             var tcs = new TaskCompletionSource();
-            await Http2LoopbackServer.CreateClientAndServerAsync(async url =>
-            {
-                using (HttpClient client = CreateHttpClient())
+            await Http2LoopbackServer.CreateClientAndServerAsync(
+                async url =>
                 {
-                    var request = new HttpRequestMessage(HttpMethod.Post, url);
-                    request.Version = new Version(2, 0);
-                    request.Content = throwingContent;
+                    using (HttpClient client = CreateHttpClient())
+                    {
+                        var request = new HttpRequestMessage(HttpMethod.Post, url);
+                        request.Version = new Version(2, 0);
+                        request.Content = throwingContent;
 
-                    HttpRequestException exn = await Assert.ThrowsAnyAsync<HttpRequestException>(async () => await client.SendAsync(request));
-                    Assert.IsType<InvalidOperationException>(exn.InnerException);
-                    await tcs.Task; // prevent disposal of client until server has completed operations
+                        HttpRequestException exn =
+                            await Assert.ThrowsAnyAsync<HttpRequestException>(
+                                async () => await client.SendAsync(request)
+                            );
+                        Assert.IsType<InvalidOperationException>(exn.InnerException);
+                        await tcs.Task; // prevent disposal of client until server has completed operations
+                    }
+                },
+                async server =>
+                {
+                    await server.EstablishConnectionAsync();
+                    tcs.SetResult();
                 }
-            },
-            async server =>
-            {
-                await server.EstablishConnectionAsync();
-                tcs.SetResult();
-            });
+            );
         }
 
         [ConditionalFact(nameof(SupportsAlpn))]
@@ -2163,23 +2574,27 @@ namespace System.Net.Http.Functional.Tests
             var throwingContent = new ThrowingContent(() => new CustomException());
 
             var tcs = new TaskCompletionSource();
-            await Http2LoopbackServer.CreateClientAndServerAsync(async url =>
-            {
-                using (HttpClient client = CreateHttpClient())
+            await Http2LoopbackServer.CreateClientAndServerAsync(
+                async url =>
                 {
-                    var request = new HttpRequestMessage(HttpMethod.Post, url);
-                    request.Version = new Version(2, 0);
-                    request.Content = throwingContent;
+                    using (HttpClient client = CreateHttpClient())
+                    {
+                        var request = new HttpRequestMessage(HttpMethod.Post, url);
+                        request.Version = new Version(2, 0);
+                        request.Content = throwingContent;
 
-                    await Assert.ThrowsAnyAsync<CustomException>(async () => await client.SendAsync(request));
-                    await tcs.Task; // prevent disposal of client until server has completed operations
+                        await Assert.ThrowsAnyAsync<CustomException>(
+                            async () => await client.SendAsync(request)
+                        );
+                        await tcs.Task; // prevent disposal of client until server has completed operations
+                    }
+                },
+                async server =>
+                {
+                    await server.EstablishConnectionAsync();
+                    tcs.SetResult();
                 }
-            },
-            async server =>
-            {
-                await server.EstablishConnectionAsync();
-                tcs.SetResult();
-            });
+            );
         }
 
         private class CustomException : Exception { }
@@ -2189,36 +2604,50 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(false)]
         public async Task PostAsyncExpect100Continue_SendRequest_Ok(bool send100Continue)
         {
-            await Http2LoopbackServer.CreateClientAndServerAsync(async url =>
-            {
-                using (HttpClient client = CreateHttpClient())
+            await Http2LoopbackServer.CreateClientAndServerAsync(
+                async url =>
                 {
-                    var request = new HttpRequestMessage(HttpMethod.Post, url);
-                    request.Version = new Version(2,0);
-                    request.Content = new StringContent(new string('*', 3000));
-                    request.Headers.ExpectContinue = true;
-                    request.Headers.Add("x-test", $"PostAsyncExpect100Continue_SendRequest_Ok({send100Continue}");
+                    using (HttpClient client = CreateHttpClient())
+                    {
+                        var request = new HttpRequestMessage(HttpMethod.Post, url);
+                        request.Version = new Version(2, 0);
+                        request.Content = new StringContent(new string('*', 3000));
+                        request.Headers.ExpectContinue = true;
+                        request.Headers.Add(
+                            "x-test",
+                            $"PostAsyncExpect100Continue_SendRequest_Ok({send100Continue}"
+                        );
 
-                    HttpResponseMessage response = await client.SendAsync(request);
-                    Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-                }
-            },
-            async server =>
-            {
-                Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
-
-                (int streamId, HttpRequestData requestData) = await connection.ReadAndParseRequestHeaderAsync(readBody : false);
-                Assert.Equal("100-continue", requestData.GetSingleHeaderValue("Expect"));
-
-                if (send100Continue)
+                        HttpResponseMessage response = await client.SendAsync(request);
+                        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                    }
+                },
+                async server =>
                 {
-                    await connection.SendResponseHeadersAsync(streamId, endStream: false, HttpStatusCode.Continue);
+                    Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
+
+                    (int streamId, HttpRequestData requestData) =
+                        await connection.ReadAndParseRequestHeaderAsync(readBody: false);
+                    Assert.Equal("100-continue", requestData.GetSingleHeaderValue("Expect"));
+
+                    if (send100Continue)
+                    {
+                        await connection.SendResponseHeadersAsync(
+                            streamId,
+                            endStream: false,
+                            HttpStatusCode.Continue
+                        );
+                    }
+                    await connection.ReadBodyAsync();
+                    await connection.SendResponseHeadersAsync(
+                        streamId,
+                        endStream: false,
+                        HttpStatusCode.OK
+                    );
+                    await connection.SendResponseBodyAsync(streamId, Encoding.ASCII.GetBytes("OK"));
+                    await connection.ShutdownIgnoringErrorsAsync(streamId);
                 }
-                await connection.ReadBodyAsync();
-                await connection.SendResponseHeadersAsync(streamId, endStream: false, HttpStatusCode.OK);
-                await connection.SendResponseBodyAsync(streamId, Encoding.ASCII.GetBytes("OK"));
-                await connection.ShutdownIgnoringErrorsAsync(streamId);
-            });
+            );
         }
 
         [Fact]
@@ -2226,44 +2655,60 @@ namespace System.Net.Http.Functional.Tests
         {
             string responseContent = "no no!";
 
-            await Http2LoopbackServer.CreateClientAndServerAsync(async url =>
-            {
-                using (var handler = new SocketsHttpHandler())
-                using (HttpClient client = CreateHttpClient(handler))
+            await Http2LoopbackServer.CreateClientAndServerAsync(
+                async url =>
                 {
-                    handler.SslOptions.RemoteCertificateValidationCallback = delegate { return true; };
-                    // Increase default Expect: 100-continue timeout to ensure that we don't accidentally fire the timer and send the request body.
-                    handler.Expect100ContinueTimeout = TimeSpan.FromSeconds(300);
+                    using (var handler = new SocketsHttpHandler())
+                    using (HttpClient client = CreateHttpClient(handler))
+                    {
+                        handler.SslOptions.RemoteCertificateValidationCallback = delegate
+                        {
+                            return true;
+                        };
+                        // Increase default Expect: 100-continue timeout to ensure that we don't accidentally fire the timer and send the request body.
+                        handler.Expect100ContinueTimeout = TimeSpan.FromSeconds(300);
 
-                    var request = new HttpRequestMessage(HttpMethod.Post, url);
-                    request.Version = new Version(2,0);
-                    request.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
-                    request.Content = new StringContent(new string('*', 3000));
-                    request.Headers.ExpectContinue = true;
-                    request.Headers.Add("x-test", "PostAsyncExpect100Continue_NonSuccessResponse_RequestBodyNotSent");
+                        var request = new HttpRequestMessage(HttpMethod.Post, url);
+                        request.Version = new Version(2, 0);
+                        request.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
+                        request.Content = new StringContent(new string('*', 3000));
+                        request.Headers.ExpectContinue = true;
+                        request.Headers.Add(
+                            "x-test",
+                            "PostAsyncExpect100Continue_NonSuccessResponse_RequestBodyNotSent"
+                        );
 
-                    HttpResponseMessage response = await client.SendAsync(request);
-                    Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
-                    Assert.Equal(responseContent, await response.Content.ReadAsStringAsync());
+                        HttpResponseMessage response = await client.SendAsync(request);
+                        Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
+                        Assert.Equal(responseContent, await response.Content.ReadAsStringAsync());
+                    }
+                },
+                async server =>
+                {
+                    Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
+
+                    (int streamId, HttpRequestData requestData) =
+                        await connection.ReadAndParseRequestHeaderAsync(readBody: false);
+                    Assert.Equal("100-continue", requestData.GetSingleHeaderValue("Expect"));
+
+                    // Reject content with 403.
+                    await connection.SendResponseHeadersAsync(
+                        streamId,
+                        endStream: false,
+                        HttpStatusCode.Forbidden
+                    );
+                    await connection.SendResponseBodyAsync(
+                        streamId,
+                        Encoding.ASCII.GetBytes(responseContent)
+                    );
+
+                    // Client should send empty request body
+                    byte[] requestBody = await connection.ReadBodyAsync(expectEndOfStream: true);
+                    Assert.Null(requestBody);
+
+                    await connection.ShutdownIgnoringErrorsAsync(streamId);
                 }
-            },
-            async server =>
-            {
-                Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
-
-                (int streamId, HttpRequestData requestData) = await connection.ReadAndParseRequestHeaderAsync(readBody : false);
-                Assert.Equal("100-continue", requestData.GetSingleHeaderValue("Expect"));
-
-                // Reject content with 403.
-                await connection.SendResponseHeadersAsync(streamId, endStream: false, HttpStatusCode.Forbidden);
-                await connection.SendResponseBodyAsync(streamId, Encoding.ASCII.GetBytes(responseContent));
-
-                // Client should send empty request body
-                byte[] requestBody = await connection.ReadBodyAsync(expectEndOfStream:true);
-                Assert.Null(requestBody);
-
-                await connection.ShutdownIgnoringErrorsAsync(streamId);
-            });
+            );
         }
 
         class DuplexContent : HttpContent
@@ -2273,7 +2718,9 @@ namespace System.Net.Http.Functional.Tests
 
             public DuplexContent()
             {
-                _waitForStream = new TaskCompletionSource<Stream>(TaskCreationOptions.RunContinuationsAsynchronously);
+                _waitForStream = new TaskCompletionSource<Stream>(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
             }
 
             protected override bool TryComputeLength(out long length)
@@ -2282,9 +2729,13 @@ namespace System.Net.Http.Functional.Tests
                 return false;
             }
 
-            protected override async Task SerializeToStreamAsync(Stream stream, TransportContext context)
-            {
-                _waitForCompletion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            protected override async Task SerializeToStreamAsync(
+                Stream stream,
+                TransportContext context
+            ) {
+                _waitForCompletion = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
                 _waitForStream.SetResult(stream);
                 await _waitForCompletion.Task;
             }
@@ -2305,8 +2756,12 @@ namespace System.Net.Http.Functional.Tests
             }
         }
 
-        private async Task SendAndReceiveResponseDataAsync(Memory<byte> data, Stream responseStream, Http2LoopbackConnection connection, int streamId)
-        {
+        private async Task SendAndReceiveResponseDataAsync(
+            Memory<byte> data,
+            Stream responseStream,
+            Http2LoopbackConnection connection,
+            int streamId
+        ) {
             byte[] readBuffer = new byte[data.Length];
 
             await connection.SendResponseDataAsync(streamId, data, endStream: false);
@@ -2314,11 +2769,14 @@ namespace System.Net.Http.Functional.Tests
             Assert.True(data.Span.SequenceEqual(readBuffer));
         }
 
-        private async Task SendAndReceiveResponseEOFAsync(Stream responseStream, Http2LoopbackConnection connection, int streamId)
-        {
+        private async Task SendAndReceiveResponseEOFAsync(
+            Stream responseStream,
+            Http2LoopbackConnection connection,
+            int streamId
+        ) {
             byte[] readBuffer = new byte[1];
 
-            await connection.SendResponseDataAsync(streamId, new byte[] { }, endStream: true);
+            await connection.SendResponseDataAsync(streamId, new byte[] {  }, endStream: true);
             int bytesRead = await responseStream.ReadAsync(readBuffer);
             Assert.Equal(0, bytesRead);
 
@@ -2330,26 +2788,48 @@ namespace System.Net.Http.Functional.Tests
             responseStream.Dispose();
 
             // Attempting to read now should throw ObjectDisposedException
-            await Assert.ThrowsAsync<ObjectDisposedException>(async () => { await responseStream.ReadAsync(readBuffer); });
+            await Assert.ThrowsAsync<ObjectDisposedException>(
+                async () =>
+                {
+                    await responseStream.ReadAsync(readBuffer);
+                }
+            );
         }
 
-        private async Task SendAndReceiveRequestDataAsync(Memory<byte> data, Stream requestStream, Http2LoopbackConnection connection, int streamId)
-        {
+        private async Task SendAndReceiveRequestDataAsync(
+            Memory<byte> data,
+            Stream requestStream,
+            Http2LoopbackConnection connection,
+            int streamId
+        ) {
             await requestStream.WriteAsync(data);
             await requestStream.FlushAsync();
-            DataFrame dataFrame = (DataFrame)await connection.ReadFrameAsync(TimeSpan.FromSeconds(30));
+            DataFrame dataFrame = (DataFrame)await connection.ReadFrameAsync(
+                TimeSpan.FromSeconds(30)
+            );
             Assert.True(data.Span.SequenceEqual(dataFrame.Data.Span));
         }
 
-        private async Task SendAndReceiveRequestEOFAsync(DuplexContent duplexContent, Stream requestStream, Http2LoopbackConnection connection, int streamId)
-        {
+        private async Task SendAndReceiveRequestEOFAsync(
+            DuplexContent duplexContent,
+            Stream requestStream,
+            Http2LoopbackConnection connection,
+            int streamId
+        ) {
             duplexContent.Complete();
-            DataFrame dataFrame = (DataFrame)await connection.ReadFrameAsync(TimeSpan.FromSeconds(30));
+            DataFrame dataFrame = (DataFrame)await connection.ReadFrameAsync(
+                TimeSpan.FromSeconds(30)
+            );
             Assert.True(dataFrame.EndStreamFlag);
             Assert.Equal(0, dataFrame.Data.Length);
 
             // Attempting to write now should throw ObjectDisposedException
-            await Assert.ThrowsAsync<ObjectDisposedException>(async () => { await requestStream.WriteAsync(new byte[1]); });
+            await Assert.ThrowsAsync<ObjectDisposedException>(
+                async () =>
+                {
+                    await requestStream.WriteAsync(new byte[1]);
+                }
+            );
         }
 
         [Fact]
@@ -2367,7 +2847,10 @@ namespace System.Net.Http.Functional.Tests
                     var request = new HttpRequestMessage(HttpMethod.Post, server.Address);
                     request.Version = new Version(2, 0);
                     request.Content = duplexContent;
-                    Task<HttpResponseMessage> responseTask = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+                    Task<HttpResponseMessage> responseTask = client.SendAsync(
+                        request,
+                        HttpCompletionOption.ResponseHeadersRead
+                    );
 
                     connection = await server.EstablishConnectionAsync();
 
@@ -2377,10 +2860,17 @@ namespace System.Net.Http.Functional.Tests
                     // Flush the content stream. Otherwise, the request headers are not guaranteed to be sent.
                     await requestStream.FlushAsync();
 
-                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(readBody: false);
+                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(
+                        readBody: false
+                    );
 
                     // Send data to the server, even before we've received response headers.
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
 
                     // Send response headers
                     await connection.SendResponseHeadersAsync(streamId, endStream: false);
@@ -2388,20 +2878,70 @@ namespace System.Net.Http.Functional.Tests
                     Stream responseStream = await response.Content.ReadAsStreamAsync();
 
                     // Send some data back and forth
-                    await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId);
-                    await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId);
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
-                    await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId);
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
-                    await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId);
+                    await SendAndReceiveResponseDataAsync(
+                        contentBytes,
+                        responseStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveResponseDataAsync(
+                        contentBytes,
+                        responseStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveResponseDataAsync(
+                        contentBytes,
+                        responseStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveResponseDataAsync(
+                        contentBytes,
+                        responseStream,
+                        connection,
+                        streamId
+                    );
 
                     // Complete sending the request body
-                    await SendAndReceiveRequestEOFAsync(duplexContent, requestStream, connection, streamId);
+                    await SendAndReceiveRequestEOFAsync(
+                        duplexContent,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
 
                     // Send more data to the client
-                    await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId);
+                    await SendAndReceiveResponseDataAsync(
+                        contentBytes,
+                        responseStream,
+                        connection,
+                        streamId
+                    );
 
                     // Complete sending the response body
                     await SendAndReceiveResponseEOFAsync(responseStream, connection, streamId);
@@ -2427,7 +2967,10 @@ namespace System.Net.Http.Functional.Tests
                     var request = new HttpRequestMessage(HttpMethod.Post, server.Address);
                     request.Version = new Version(2, 0);
                     request.Content = duplexContent;
-                    Task<HttpResponseMessage> responseTask = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+                    Task<HttpResponseMessage> responseTask = client.SendAsync(
+                        request,
+                        HttpCompletionOption.ResponseHeadersRead
+                    );
 
                     connection = await server.EstablishConnectionAsync();
 
@@ -2437,10 +2980,17 @@ namespace System.Net.Http.Functional.Tests
                     // Flush the content stream. Otherwise, the request headers are not guaranteed to be sent.
                     await requestStream.FlushAsync();
 
-                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(readBody: false);
+                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(
+                        readBody: false
+                    );
 
                     // Send data to the server, even before we've received response headers.
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
 
                     // Send response headers
                     await connection.SendResponseHeadersAsync(streamId, endStream: false);
@@ -2448,23 +2998,73 @@ namespace System.Net.Http.Functional.Tests
                     Stream responseStream = await response.Content.ReadAsStreamAsync();
 
                     // Send some data back and forth
-                    await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId);
-                    await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId);
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
-                    await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId);
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
-                    await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId);
+                    await SendAndReceiveResponseDataAsync(
+                        contentBytes,
+                        responseStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveResponseDataAsync(
+                        contentBytes,
+                        responseStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveResponseDataAsync(
+                        contentBytes,
+                        responseStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveResponseDataAsync(
+                        contentBytes,
+                        responseStream,
+                        connection,
+                        streamId
+                    );
 
                     // Complete sending the response body
                     await SendAndReceiveResponseEOFAsync(responseStream, connection, streamId);
 
                     // Send more data to the server
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
 
                     // Complete sending the request body
-                    await SendAndReceiveRequestEOFAsync(duplexContent, requestStream, connection, streamId);
+                    await SendAndReceiveRequestEOFAsync(
+                        duplexContent,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
                 }
 
                 // On handler dispose, client should shutdown the connection without sending additional frames.
@@ -2487,7 +3087,10 @@ namespace System.Net.Http.Functional.Tests
                     var request = new HttpRequestMessage(HttpMethod.Post, server.Address);
                     request.Version = new Version(2, 0);
                     request.Content = duplexContent;
-                    Task<HttpResponseMessage> responseTask = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+                    Task<HttpResponseMessage> responseTask = client.SendAsync(
+                        request,
+                        HttpCompletionOption.ResponseHeadersRead
+                    );
 
                     connection = await server.EstablishConnectionAsync();
 
@@ -2497,10 +3100,17 @@ namespace System.Net.Http.Functional.Tests
                     // Flush the content stream. Otherwise, the request headers are not guaranteed to be sent.
                     await requestStream.FlushAsync();
 
-                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(readBody: false);
+                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(
+                        readBody: false
+                    );
 
                     // Send data to the server, even before we've received response headers.
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
 
                     // Send response headers
                     await connection.SendResponseHeadersAsync(streamId, endStream: false);
@@ -2508,10 +3118,30 @@ namespace System.Net.Http.Functional.Tests
                     Stream responseStream = await response.Content.ReadAsStreamAsync();
 
                     // Send some data back and forth
-                    await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId);
-                    await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId);
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
+                    await SendAndReceiveResponseDataAsync(
+                        contentBytes,
+                        responseStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveResponseDataAsync(
+                        contentBytes,
+                        responseStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
 
                     // Throw an exception from the request content.
                     Exception e = new ArithmeticException();
@@ -2521,7 +3151,15 @@ namespace System.Net.Http.Functional.Tests
                     await connection.ReadRstStreamAsync(streamId);
 
                     // Trying to read on the response stream should fail now, and client should ignore any data received
-                    await Assert.ThrowsAsync<IOException>(async () => await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId));
+                    await Assert.ThrowsAsync<IOException>(
+                        async () =>
+                            await SendAndReceiveResponseDataAsync(
+                                contentBytes,
+                                responseStream,
+                                connection,
+                                streamId
+                            )
+                    );
                 }
 
                 // On handler dispose, client should shutdown the connection without sending additional frames.
@@ -2544,7 +3182,10 @@ namespace System.Net.Http.Functional.Tests
                     var request = new HttpRequestMessage(HttpMethod.Post, server.Address);
                     request.Version = new Version(2, 0);
                     request.Content = duplexContent;
-                    Task<HttpResponseMessage> responseTask = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+                    Task<HttpResponseMessage> responseTask = client.SendAsync(
+                        request,
+                        HttpCompletionOption.ResponseHeadersRead
+                    );
 
                     connection = await server.EstablishConnectionAsync();
 
@@ -2554,10 +3195,17 @@ namespace System.Net.Http.Functional.Tests
                     // Flush the content stream. Otherwise, the request headers are not guaranteed to be sent.
                     await requestStream.FlushAsync();
 
-                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(readBody: false);
+                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(
+                        readBody: false
+                    );
 
                     // Send data to the server, even before we've received response headers.
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
 
                     // Send response headers
                     await connection.SendResponseHeadersAsync(streamId, endStream: false);
@@ -2565,10 +3213,30 @@ namespace System.Net.Http.Functional.Tests
                     Stream responseStream = await response.Content.ReadAsStreamAsync();
 
                     // Send some data back and forth
-                    await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId);
-                    await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId);
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
+                    await SendAndReceiveResponseDataAsync(
+                        contentBytes,
+                        responseStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveResponseDataAsync(
+                        contentBytes,
+                        responseStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
 
                     // Send data on response stream and complete it, but don't read it on the client yet
                     await connection.SendResponseDataAsync(streamId, contentBytes, endStream: true);
@@ -2584,7 +3252,15 @@ namespace System.Net.Http.Functional.Tests
                     await connection.ReadRstStreamAsync(streamId);
 
                     // Trying to read on the response stream should fail now, and client should ignore any data received
-                    await Assert.ThrowsAsync<IOException>(async () => await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId));
+                    await Assert.ThrowsAsync<IOException>(
+                        async () =>
+                            await SendAndReceiveResponseDataAsync(
+                                contentBytes,
+                                responseStream,
+                                connection,
+                                streamId
+                            )
+                    );
                 }
 
                 // On handler dispose, client should shutdown the connection without sending additional frames.
@@ -2609,7 +3285,11 @@ namespace System.Net.Http.Functional.Tests
                     request.Version = new Version(2, 0);
                     request.Content = duplexContent;
                     var cancellationTokenSource = new CancellationTokenSource();
-                    Task<HttpResponseMessage> responseTask = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationTokenSource.Token);
+                    Task<HttpResponseMessage> responseTask = client.SendAsync(
+                        request,
+                        HttpCompletionOption.ResponseHeadersRead,
+                        cancellationTokenSource.Token
+                    );
 
                     connection = await server.EstablishConnectionAsync();
 
@@ -2619,10 +3299,17 @@ namespace System.Net.Http.Functional.Tests
                     // Flush the content stream. Otherwise, the request headers are not guaranteed to be sent.
                     await requestStream.FlushAsync();
 
-                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(readBody: false);
+                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(
+                        readBody: false
+                    );
 
                     // Send data to the server, even before we've received response headers.
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
 
                     // Cancel the request
                     cancellationTokenSource.Cancel();
@@ -2631,7 +3318,17 @@ namespace System.Net.Http.Functional.Tests
                     await Task.Delay(3000);
 
                     // Attempting to write on the request body should now fail with OperationCanceledException.
-                    Exception e = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => { await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId); });
+                    Exception e = await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                        async () =>
+                        {
+                            await SendAndReceiveRequestDataAsync(
+                                contentBytes,
+                                requestStream,
+                                connection,
+                                streamId
+                            );
+                        }
+                    );
 
                     // Propagate the exception to the request stream serialization task.
                     // This allows the request processing to complete.
@@ -2664,7 +3361,10 @@ namespace System.Net.Http.Functional.Tests
                     var request = new HttpRequestMessage(HttpMethod.Post, server.Address);
                     request.Version = new Version(2, 0);
                     request.Content = duplexContent;
-                    Task<HttpResponseMessage> responseTask = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+                    Task<HttpResponseMessage> responseTask = client.SendAsync(
+                        request,
+                        HttpCompletionOption.ResponseHeadersRead
+                    );
 
                     connection = await server.EstablishConnectionAsync();
 
@@ -2674,10 +3374,17 @@ namespace System.Net.Http.Functional.Tests
                     // Flush the content stream. Otherwise, the request headers are not guaranteed to be sent.
                     await requestStream.FlushAsync();
 
-                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(readBody: false);
+                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(
+                        readBody: false
+                    );
 
                     // Send data to the server, even before we've received response headers.
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
 
                     // Send response headers
                     await connection.SendResponseHeadersAsync(streamId, endStream: false);
@@ -2685,19 +3392,63 @@ namespace System.Net.Http.Functional.Tests
                     Stream responseStream = await response.Content.ReadAsStreamAsync();
 
                     // Send some data back and forth
-                    await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId);
-                    await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId);
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
+                    await SendAndReceiveResponseDataAsync(
+                        contentBytes,
+                        responseStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveResponseDataAsync(
+                        contentBytes,
+                        responseStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
 
                     // Send RST_STREAM to client.
-                    await connection.WriteFrameAsync(new RstStreamFrame(FrameFlags.None, (int)ProtocolErrors.ENHANCE_YOUR_CALM, streamId));
+                    await connection.WriteFrameAsync(
+                        new RstStreamFrame(
+                            FrameFlags.None,
+                            (int)ProtocolErrors.ENHANCE_YOUR_CALM,
+                            streamId
+                        )
+                    );
 
                     // Trying to read on the response stream should fail now, and client should ignore any data received
-                    await AssertProtocolErrorForIOExceptionAsync(SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId), ProtocolErrors.ENHANCE_YOUR_CALM);
+                    await AssertProtocolErrorForIOExceptionAsync(
+                        SendAndReceiveResponseDataAsync(
+                            contentBytes,
+                            responseStream,
+                            connection,
+                            streamId
+                        ),
+                        ProtocolErrors.ENHANCE_YOUR_CALM
+                    );
 
                     // Attempting to write on the request body should now fail with OperationCanceledException.
-                    Exception e = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => { await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId); });
+                    Exception e = await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                        async () =>
+                        {
+                            await SendAndReceiveRequestDataAsync(
+                                contentBytes,
+                                requestStream,
+                                connection,
+                                streamId
+                            );
+                        }
+                    );
 
                     // Propagate the exception to the request stream serialization task.
                     // This allows the request processing to complete.
@@ -2725,7 +3476,10 @@ namespace System.Net.Http.Functional.Tests
                     var request = new HttpRequestMessage(HttpMethod.Post, server.Address);
                     request.Version = new Version(2, 0);
                     request.Content = duplexContent;
-                    Task<HttpResponseMessage> responseTask = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+                    Task<HttpResponseMessage> responseTask = client.SendAsync(
+                        request,
+                        HttpCompletionOption.ResponseHeadersRead
+                    );
 
                     connection = await server.EstablishConnectionAsync();
 
@@ -2735,10 +3489,17 @@ namespace System.Net.Http.Functional.Tests
                     // Flush the content stream. Otherwise, the request headers are not guaranteed to be sent.
                     await requestStream.FlushAsync();
 
-                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(readBody: false);
+                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(
+                        readBody: false
+                    );
 
                     // Send data to the server, even before we've received response headers.
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
 
                     // Send response headers
                     await connection.SendResponseHeadersAsync(streamId, endStream: false);
@@ -2746,22 +3507,60 @@ namespace System.Net.Http.Functional.Tests
                     Stream responseStream = await response.Content.ReadAsStreamAsync();
 
                     // Send some data back and forth
-                    await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId);
-                    await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId);
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
+                    await SendAndReceiveResponseDataAsync(
+                        contentBytes,
+                        responseStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveResponseDataAsync(
+                        contentBytes,
+                        responseStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
 
                     // Dispose the response stream.
                     responseStream.Dispose();
 
                     // Trying to read on the response stream should fail now, and client should ignore any data received
-                    await Assert.ThrowsAsync<ObjectDisposedException>(async () => await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId));
+                    await Assert.ThrowsAsync<ObjectDisposedException>(
+                        async () =>
+                            await SendAndReceiveResponseDataAsync(
+                                contentBytes,
+                                responseStream,
+                                connection,
+                                streamId
+                            )
+                    );
 
                     // Cancellation on the request body may not propagate immediately. So wait a brief time to try to ensure it propagates.
                     await Task.Delay(500);
 
                     // Attempting to write on the request body should now fail with OperationCanceledException.
-                    Exception e = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => { await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId); });
+                    Exception e = await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                        async () =>
+                        {
+                            await SendAndReceiveRequestDataAsync(
+                                contentBytes,
+                                requestStream,
+                                connection,
+                                streamId
+                            );
+                        }
+                    );
 
                     // Propagate the exception to the request stream serialization task.
                     // This allows the request processing to complete.
@@ -2792,7 +3591,10 @@ namespace System.Net.Http.Functional.Tests
                     var request = new HttpRequestMessage(HttpMethod.Post, server.Address);
                     request.Version = new Version(2, 0);
                     request.Content = duplexContent;
-                    Task<HttpResponseMessage> responseTask = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+                    Task<HttpResponseMessage> responseTask = client.SendAsync(
+                        request,
+                        HttpCompletionOption.ResponseHeadersRead
+                    );
 
                     connection = await server.EstablishConnectionAsync();
 
@@ -2802,10 +3604,17 @@ namespace System.Net.Http.Functional.Tests
                     // Flush the content stream. Otherwise, the request headers are not guaranteed to be sent.
                     await requestStream.FlushAsync();
 
-                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(readBody: false);
+                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(
+                        readBody: false
+                    );
 
                     // Send data to the server, even before we've received response headers.
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
 
                     // Send response headers
                     await connection.SendResponseHeadersAsync(streamId, endStream: false);
@@ -2813,10 +3622,30 @@ namespace System.Net.Http.Functional.Tests
                     Stream responseStream = await response.Content.ReadAsStreamAsync();
 
                     // Send some data back and forth
-                    await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId);
-                    await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId);
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
+                    await SendAndReceiveResponseDataAsync(
+                        contentBytes,
+                        responseStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveResponseDataAsync(
+                        contentBytes,
+                        responseStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
 
                     // Send data on response stream and completed it, but don't read it on the client yet
                     await connection.SendResponseDataAsync(streamId, contentBytes, endStream: true);
@@ -2828,13 +3657,31 @@ namespace System.Net.Http.Functional.Tests
                     responseStream.Dispose();
 
                     // Trying to read on the response stream should fail now, and client should ignore any data received
-                    await Assert.ThrowsAsync<ObjectDisposedException>(async () => await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId));
+                    await Assert.ThrowsAsync<ObjectDisposedException>(
+                        async () =>
+                            await SendAndReceiveResponseDataAsync(
+                                contentBytes,
+                                responseStream,
+                                connection,
+                                streamId
+                            )
+                    );
 
                     // Cancellation on the request body may not propagate immediately. So wait a brief time to try to ensure it propagates.
                     await Task.Delay(500);
 
                     // Attempting to write on the request body should now fail with OperationCanceledException.
-                    Exception e = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => { await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId); });
+                    Exception e = await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                        async () =>
+                        {
+                            await SendAndReceiveRequestDataAsync(
+                                contentBytes,
+                                requestStream,
+                                connection,
+                                streamId
+                            );
+                        }
+                    );
 
                     // Propagate the exception to the request stream serialization task.
                     // This allows the request processing to complete.
@@ -2865,7 +3712,10 @@ namespace System.Net.Http.Functional.Tests
                     var request = new HttpRequestMessage(HttpMethod.Post, server.Address);
                     request.Version = new Version(2, 0);
                     request.Content = duplexContent;
-                    Task<HttpResponseMessage> responseTask = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+                    Task<HttpResponseMessage> responseTask = client.SendAsync(
+                        request,
+                        HttpCompletionOption.ResponseHeadersRead
+                    );
 
                     connection = await server.EstablishConnectionAsync();
 
@@ -2875,10 +3725,17 @@ namespace System.Net.Http.Functional.Tests
                     // Flush the content stream. Otherwise, the request headers are not guaranteed to be sent.
                     await requestStream.FlushAsync();
 
-                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(readBody: false);
+                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(
+                        readBody: false
+                    );
 
                     // Send data to the server, even before we've received response headers.
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
 
                     // Send response headers
                     await connection.SendResponseHeadersAsync(streamId, endStream: false);
@@ -2886,13 +3743,38 @@ namespace System.Net.Http.Functional.Tests
                     Stream responseStream = await response.Content.ReadAsStreamAsync();
 
                     // Send some data back and forth
-                    await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId);
-                    await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId);
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
+                    await SendAndReceiveResponseDataAsync(
+                        contentBytes,
+                        responseStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveResponseDataAsync(
+                        contentBytes,
+                        responseStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
 
                     // Complete request stream.
-                    await SendAndReceiveRequestEOFAsync(duplexContent, requestStream, connection, streamId);
+                    await SendAndReceiveRequestEOFAsync(
+                        duplexContent,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
 
                     // Send data on response stream and completed it, but don't read it on the client yet
                     await connection.SendResponseDataAsync(streamId, contentBytes, endStream: true);
@@ -2900,13 +3782,19 @@ namespace System.Net.Http.Functional.Tests
                     // Pingpong to ensure it's processed by client
                     await connection.PingPong();
 
-
                     // Dispose the response stream.
                     responseStream.Dispose();
 
                     // Trying to read on the response stream should fail now, and client should ignore any data received
-                    await Assert.ThrowsAsync<ObjectDisposedException>(async () => await SendAndReceiveResponseDataAsync(contentBytes, responseStream, connection, streamId));
-
+                    await Assert.ThrowsAsync<ObjectDisposedException>(
+                        async () =>
+                            await SendAndReceiveResponseDataAsync(
+                                contentBytes,
+                                responseStream,
+                                connection,
+                                streamId
+                            )
+                    );
                     // Client should NOT send RST_STREAM. The stream was completed succesfully, but the remaining response data was discarded.
                 }
 
@@ -2935,7 +3823,10 @@ namespace System.Net.Http.Functional.Tests
                     var request = new HttpRequestMessage(HttpMethod.Post, server.Address);
                     request.Version = new Version(2, 0);
                     request.Content = duplexContent;
-                    Task<HttpResponseMessage> responseTask = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+                    Task<HttpResponseMessage> responseTask = client.SendAsync(
+                        request,
+                        HttpCompletionOption.ResponseHeadersRead
+                    );
 
                     connection = await server.EstablishConnectionAsync();
 
@@ -2945,10 +3836,17 @@ namespace System.Net.Http.Functional.Tests
                     // Flush the content stream. Otherwise, the request headers are not guaranteed to be sent.
                     await requestStream.FlushAsync();
 
-                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(readBody: false);
+                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(
+                        readBody: false
+                    );
 
                     // Send data to the server, even before we've received response headers.
-                    await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId);
+                    await SendAndReceiveRequestDataAsync(
+                        contentBytes,
+                        requestStream,
+                        connection,
+                        streamId
+                    );
 
                     // Send response headers
                     await connection.SendResponseHeadersAsync(streamId, endStream: false);
@@ -2959,13 +3857,25 @@ namespace System.Net.Http.Functional.Tests
                     await connection.SendResponseDataAsync(streamId, contentBytes, endStream: true);
 
                     // Send RST_STREAM to client with error = NO_ERROR.
-                    await connection.WriteFrameAsync(new RstStreamFrame(FrameFlags.None, (int)ProtocolErrors.NO_ERROR, streamId));
+                    await connection.WriteFrameAsync(
+                        new RstStreamFrame(FrameFlags.None, (int)ProtocolErrors.NO_ERROR, streamId)
+                    );
 
                     // Ensure client has processed the RST_STREAM.
                     await connection.PingPong();
 
                     // Attempting to write on the request body should now fail with OperationCanceledException.
-                    Exception e = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => { await SendAndReceiveRequestDataAsync(contentBytes, requestStream, connection, streamId); });
+                    Exception e = await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                        async () =>
+                        {
+                            await SendAndReceiveRequestDataAsync(
+                                contentBytes,
+                                requestStream,
+                                connection,
+                                streamId
+                            );
+                        }
+                    );
 
                     // Propagate the exception to the request stream serialization task.
                     // This allows the request processing to complete.
@@ -3003,23 +3913,32 @@ namespace System.Net.Http.Functional.Tests
                     // but make it large enough to ensure that the content can't be fully sent because of flow control limitations.
                     // This allows us to validate that the content is actually canceled, not just fully sent and completed.
                     const int ContentSize = 100_000;
-                    var requestContent = new ByteArrayContent(TestHelper.GenerateRandomContent(ContentSize));
+                    var requestContent = new ByteArrayContent(
+                        TestHelper.GenerateRandomContent(ContentSize)
+                    );
 
                     var request = new HttpRequestMessage(HttpMethod.Post, server.Address);
                     request.Version = new Version(2, 0);
                     request.Content = requestContent;
-                    Task<HttpResponseMessage> responseTask = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+                    Task<HttpResponseMessage> responseTask = client.SendAsync(
+                        request,
+                        HttpCompletionOption.ResponseHeadersRead
+                    );
 
                     connection = await server.EstablishConnectionAsync();
 
-                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(readBody: false);
+                    (int streamId, _) = await connection.ReadAndParseRequestHeaderAsync(
+                        readBody: false
+                    );
 
                     // Send full response
                     await connection.SendResponseHeadersAsync(streamId, endStream: false);
                     await connection.SendResponseDataAsync(streamId, contentBytes, endStream: true);
 
                     // Send RST_STREAM to client with error = NO_ERROR.
-                    await connection.WriteFrameAsync(new RstStreamFrame(FrameFlags.None, (int)ProtocolErrors.NO_ERROR, streamId));
+                    await connection.WriteFrameAsync(
+                        new RstStreamFrame(FrameFlags.None, (int)ProtocolErrors.NO_ERROR, streamId)
+                    );
 
                     // Response should now complete successfully
                     HttpResponseMessage response = await responseTask;
@@ -3037,8 +3956,10 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(true, HttpStatusCode.OK)]
         [InlineData(false, HttpStatusCode.OK)]
         [OuterLoop("Uses Task.Delay")]
-        public async Task SendAsync_ConcurentSendReceive_Ok(bool shouldWaitForRequestBody, HttpStatusCode responseCode)
-        {
+        public async Task SendAsync_ConcurentSendReceive_Ok(
+            bool shouldWaitForRequestBody,
+            HttpStatusCode responseCode
+        ) {
             string requestContent = new string('*', 300);
             const string responseContent = "SendAsync_ConcurentSendReceive_Ok";
 
@@ -3053,15 +3974,19 @@ namespace System.Net.Http.Functional.Tests
                     request.Version = new Version(2, 0);
                     request.Content = duplexContent;
 
-                    Task<HttpResponseMessage> responseTask = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+                    Task<HttpResponseMessage> responseTask = client.SendAsync(
+                        request,
+                        HttpCompletionOption.ResponseHeadersRead
+                    );
                     connection = await server.EstablishConnectionAsync();
 
-                     // Client should have sent the request headers, and the request stream should now be available
+                    // Client should have sent the request headers, and the request stream should now be available
                     Stream requestStream = await duplexContent.WaitForStreamAsync();
                     // Flush the content stream. Otherwise, the request headers are not guaranteed to be sent.
                     await requestStream.FlushAsync();
 
-                    (int streamId, HttpRequestData requestData) = await connection.ReadAndParseRequestHeaderAsync(readBody : false);
+                    (int streamId, HttpRequestData requestData) =
+                        await connection.ReadAndParseRequestHeaderAsync(readBody: false);
 
                     // Client finished sending request headers and we received them.
                     // Send request body.
@@ -3075,13 +4000,20 @@ namespace System.Net.Http.Functional.Tests
                     }
 
                     // Send response headers
-                    await connection.SendResponseHeadersAsync(streamId, endStream: false, responseCode);
+                    await connection.SendResponseHeadersAsync(
+                        streamId,
+                        endStream: false,
+                        responseCode
+                    );
 
                     HttpResponseMessage response = await responseTask;
                     Assert.Equal(responseCode, response.StatusCode);
 
-
-                    await connection.SendResponseDataAsync(streamId, Encoding.ASCII.GetBytes(responseContent), endStream: false);
+                    await connection.SendResponseDataAsync(
+                        streamId,
+                        Encoding.ASCII.GetBytes(responseContent),
+                        endStream: false
+                    );
                     if (!shouldWaitForRequestBody)
                     {
                         // In duplex case response is sent before reading request body.
@@ -3090,7 +4022,12 @@ namespace System.Net.Http.Functional.Tests
 
                     // Send trailing headers for good measure and close stream.
                     var headers = new HttpHeaderData[] { new HttpHeaderData("x-last", "done") };
-                    await connection.SendResponseHeadersAsync(streamId, endStream: true, isTrailingHeader : true, headers: headers);
+                    await connection.SendResponseHeadersAsync(
+                        streamId,
+                        endStream: true,
+                        isTrailingHeader: true,
+                        headers: headers
+                    );
 
                     // Finish reading response body and verify it for all cases.
                     string responseBody = await response.Content.ReadAsStringAsync();
@@ -3109,74 +4046,100 @@ namespace System.Net.Http.Functional.Tests
             TaskCompletionSource<bool> tsc = new TaskCompletionSource<bool>();
             string requestContent = new string('*', 300);
             const string responseContent = "SendAsync_ConcurentSendReceive_Fail";
-            var stream = new CustomContent.SlowTestStream(Encoding.UTF8.GetBytes(requestContent), tsc, trigger : 1, count : 50);
+            var stream = new CustomContent.SlowTestStream(
+                Encoding.UTF8.GetBytes(requestContent),
+                tsc,
+                trigger: 1,
+                count: 50
+            );
             bool stopSending = false;
 
-            await Http2LoopbackServer.CreateClientAndServerAsync(async url =>
-            {
-                using (HttpClient client = CreateHttpClient())
+            await Http2LoopbackServer.CreateClientAndServerAsync(
+                async url =>
                 {
-                    var request = new HttpRequestMessage(HttpMethod.Post, url);
-                    request.Version = new Version(2,0);
-                    request.Content = new CustomContent(stream);
+                    using (HttpClient client = CreateHttpClient())
+                    {
+                        var request = new HttpRequestMessage(HttpMethod.Post, url);
+                        request.Version = new Version(2, 0);
+                        request.Content = new CustomContent(stream);
 
-                    // This should fail either while getting response headers or while reading response body.
-                    HttpResponseMessage response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
-                    // Wait for request body start streaming.
+                        // This should fail either while getting response headers or while reading response body.
+                        HttpResponseMessage response = await client.SendAsync(
+                            request,
+                            HttpCompletionOption.ResponseHeadersRead
+                        );
+                        // Wait for request body start streaming.
+                        await tsc.Task.ConfigureAwait(false);
+                        // and inject distinct exception on request stream.
+                        stream.SetException(new ArithmeticException("Injected test exception"));
+
+                        HttpRequestException e = await Assert.ThrowsAsync<HttpRequestException>(
+                            () => response.Content.ReadAsStringAsync()
+                        );
+                        Assert.IsType<IOException>(e.InnerException);
+
+                        stopSending = true;
+                    }
+                },
+                async server =>
+                {
+                    Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
+
+                    (int streamId, HttpRequestData requestData) =
+                        await connection.ReadAndParseRequestHeaderAsync(readBody: false);
+                    await connection.SendResponseHeadersAsync(
+                        streamId,
+                        endStream: false,
+                        HttpStatusCode.OK
+                    );
+
+                    // Wait for client so start sending body.
                     await tsc.Task.ConfigureAwait(false);
-                    // and inject distinct exception on request stream.
-                    stream.SetException(new ArithmeticException("Injected test exception"));
 
-                    HttpRequestException e = await Assert.ThrowsAsync<HttpRequestException>(() => response.Content.ReadAsStringAsync());
-                    Assert.IsType<IOException>(e.InnerException);
-
-                    stopSending = true;
-                }
-            },
-            async server =>
-            {
-                Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
-
-                (int streamId, HttpRequestData requestData) = await connection.ReadAndParseRequestHeaderAsync(readBody : false);
-                await connection.SendResponseHeadersAsync(streamId, endStream: false, HttpStatusCode.OK);
-
-                // Wait for client so start sending body.
-                await tsc.Task.ConfigureAwait(false);
-
-                int maxCount = 120;
-                while (!stopSending && maxCount != 0)
-                {
-                   try
+                    int maxCount = 120;
+                    while (!stopSending && maxCount != 0)
                     {
-                        await connection.SendResponseDataAsync(streamId, Encoding.ASCII.GetBytes(responseContent), endStream: false);
+                        try
+                        {
+                            await connection.SendResponseDataAsync(
+                                streamId,
+                                Encoding.ASCII.GetBytes(responseContent),
+                                endStream: false
+                            );
+                        }
+                        catch (IOException)
+                        {
+                            // When client sets stopSending, client will be disposed and sending may fail.
+                            Assert.True(stopSending);
+                            break;
+                        }
+                        await Task.Delay(500);
+                        maxCount--;
                     }
-                    catch (IOException)
-                    {
-                        // When client sets stopSending, client will be disposed and sending may fail.
-                        Assert.True(stopSending);
-                        break;
-                    }
-                    await Task.Delay(500);
-                    maxCount --;
-                }
-                // We should not reach retry limit without failing.
-                Assert.NotEqual(0, maxCount);
+                    // We should not reach retry limit without failing.
+                    Assert.NotEqual(0, maxCount);
 
-                try
-                {
-                    await connection.SendGoAway(streamId);
-                    await connection.WaitForConnectionShutdownAsync();
+                    try
+                    {
+                        await connection.SendGoAway(streamId);
+                        await connection.WaitForConnectionShutdownAsync();
+                    }
+                    catch { }
+                    ;
                 }
-                catch { };
-            });
+            );
         }
 
         [Fact]
         [OuterLoop("Waits for seconds for events that shouldn't happen")]
         public async Task SendAsync_StreamContentRequestBody_WaitsForRequestBodyToComplete()
         {
-            var waitToSendRequestBody = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            var sendAsyncCompleted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            var waitToSendRequestBody = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var sendAsyncCompleted = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             // Create a content stream that will wait for a signal before it dribbles out some request content.
             int sent = 0;
@@ -3186,39 +4149,46 @@ namespace System.Net.Http.Functional.Tests
                 {
                     await waitToSendRequestBody.Task;
                     return sent++ < 10 ? 1 : 0;
-                });
-
-            await Http2LoopbackServer.CreateClientAndServerAsync(async url =>
-            {
-                using (HttpClient client = CreateHttpClient())
-                {
-                    // Connect to the server and SendAsync.
-                    var request = new HttpRequestMessage(HttpMethod.Post, url);
-                    request.Version = new Version(2, 0);
-                    request.Content = new StreamContent(stream);
-                    Task<HttpResponseMessage> sendAsyncTask = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
-
-                    // Wait a bit, and confirm SendAsync hasn't completed yet (because the request content can't have finished yet).
-                    await Task.Delay(1000);
-                    Assert.False(sendAsyncTask.IsCompleted);
-
-                    // Now let the request content go.  The SendAsync task should complete quickly.
-                    waitToSendRequestBody.SetResult();
-                    using (HttpResponseMessage r = await sendAsyncTask)
-                    {
-                        // Wake up the server.
-                        sendAsyncCompleted.SetResult();
-                    }
                 }
-            },
-            async server =>
-            {
-                Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
-                (int streamId, HttpRequestData requestData) = await connection.ReadAndParseRequestHeaderAsync().ConfigureAwait(false);
-                await connection.SendResponseHeadersAsync(streamId);
-                await sendAsyncCompleted.Task;
-                await connection.WaitForConnectionShutdownAsync();
-            });
+            );
+
+            await Http2LoopbackServer.CreateClientAndServerAsync(
+                async url =>
+                {
+                    using (HttpClient client = CreateHttpClient())
+                    {
+                        // Connect to the server and SendAsync.
+                        var request = new HttpRequestMessage(HttpMethod.Post, url);
+                        request.Version = new Version(2, 0);
+                        request.Content = new StreamContent(stream);
+                        Task<HttpResponseMessage> sendAsyncTask = client.SendAsync(
+                            request,
+                            HttpCompletionOption.ResponseHeadersRead
+                        );
+
+                        // Wait a bit, and confirm SendAsync hasn't completed yet (because the request content can't have finished yet).
+                        await Task.Delay(1000);
+                        Assert.False(sendAsyncTask.IsCompleted);
+
+                        // Now let the request content go.  The SendAsync task should complete quickly.
+                        waitToSendRequestBody.SetResult();
+                        using (HttpResponseMessage r = await sendAsyncTask)
+                        {
+                            // Wake up the server.
+                            sendAsyncCompleted.SetResult();
+                        }
+                    }
+                },
+                async server =>
+                {
+                    Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
+                    (int streamId, HttpRequestData requestData) =
+                        await connection.ReadAndParseRequestHeaderAsync().ConfigureAwait(false);
+                    await connection.SendResponseHeadersAsync(streamId);
+                    await sendAsyncCompleted.Task;
+                    await connection.WaitForConnectionShutdownAsync();
+                }
+            );
         }
 
         [ConditionalFact(nameof(SupportsAlpn))]
@@ -3230,30 +4200,58 @@ namespace System.Net.Http.Functional.Tests
             using (HttpClient client = CreateHttpClient())
             {
                 // Create HTTP/1.1 loopback server and advertise HTTP2 via ALPN.
-                await LoopbackServer.CreateServerAsync(async (server, uri) =>
-                {
-                    // Convert http to https as we are going to negotiate TLS.
-                    Task<string> requestTask = client.GetStringAsync(uri.ToString().Replace("http://", "https://"));
-
-                    await server.AcceptConnectionAsync(async connection =>
+                await LoopbackServer.CreateServerAsync(
+                    async (server, uri) =>
                     {
-                        // negotiate TLS with ALPN H/2
-                        var sslStream = new SslStream(connection.Stream, false, delegate { return true; });
-                        SslServerAuthenticationOptions options = new SslServerAuthenticationOptions();
-                        options.ServerCertificate = Net.Test.Common.Configuration.Certificates.GetServerCertificate();
-                        options.ApplicationProtocols = new List<SslApplicationProtocol>() { SslApplicationProtocol.Http2 };
-                        options.ApplicationProtocols.Add(SslApplicationProtocol.Http2);
-                        // Negotiate TLS.
-                        await sslStream.AuthenticateAsServerAsync(options, CancellationToken.None).ConfigureAwait(false);
-                        // Send back HTTP/1.1 response
-                        await sslStream.WriteAsync(Encoding.ASCII.GetBytes("HTTP/1.1 400 Unrecognized request\r\n\r\n"), CancellationToken.None);
-                    });
+                        // Convert http to https as we are going to negotiate TLS.
+                        Task<string> requestTask = client.GetStringAsync(
+                            uri.ToString().Replace("http://", "https://")
+                        );
 
+                        await server.AcceptConnectionAsync(
+                            async connection =>
+                            {
+                                // negotiate TLS with ALPN H/2
+                                var sslStream = new SslStream(
+                                    connection.Stream,
+                                    false,
+                                    delegate
+                                    {
+                                        return true;
+                                    }
+                                );
+                                SslServerAuthenticationOptions options =
+                                    new SslServerAuthenticationOptions();
+                                options.ServerCertificate =
+                                    Net.Test.Common.Configuration.Certificates.GetServerCertificate();
+                                options.ApplicationProtocols = new List<SslApplicationProtocol>()
+                                {
+                                    SslApplicationProtocol.Http2
+                                };
+                                options.ApplicationProtocols.Add(SslApplicationProtocol.Http2);
+                                // Negotiate TLS.
+                                await sslStream.AuthenticateAsServerAsync(
+                                        options,
+                                        CancellationToken.None
+                                    )
+                                    .ConfigureAwait(false);
+                                // Send back HTTP/1.1 response
+                                await sslStream.WriteAsync(
+                                    Encoding.ASCII.GetBytes(
+                                        "HTTP/1.1 400 Unrecognized request\r\n\r\n"
+                                    ),
+                                    CancellationToken.None
+                                );
+                            }
+                        );
 
-                    Exception e = await Assert.ThrowsAsync<HttpRequestException>(() => requestTask);
-                    Assert.NotNull(e.InnerException);
-                    Assert.False(e.InnerException is ObjectDisposedException);
-                });
+                        Exception e = await Assert.ThrowsAsync<HttpRequestException>(
+                            () => requestTask
+                        );
+                        Assert.NotNull(e.InnerException);
+                        Assert.False(e.InnerException is ObjectDisposedException);
+                    }
+                );
             }
         }
 
@@ -3264,12 +4262,20 @@ namespace System.Net.Http.Functional.Tests
             using (Http2LoopbackServer server = Http2LoopbackServer.CreateServer())
             using (HttpClient client = CreateHttpClient())
             {
-                IList<HttpHeaderData> headers = new HttpHeaderData[] { new HttpHeaderData(":status", "300"), new HttpHeaderData("x-test", "Http2GetAsync_MultipleStatusHeaders_Throws") };
+                IList<HttpHeaderData> headers = new HttpHeaderData[]
+                {
+                    new HttpHeaderData(":status", "300"),
+                    new HttpHeaderData("x-test", "Http2GetAsync_MultipleStatusHeaders_Throws")
+                };
                 Task<HttpResponseMessage> sendTask = client.GetAsync(server.Address);
 
                 Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
                 int streamId = await connection.ReadRequestHeaderAsync();
-                await connection.SendResponseHeadersAsync(streamId, endStream : true, headers: headers);
+                await connection.SendResponseHeadersAsync(
+                    streamId,
+                    endStream: true,
+                    headers: headers
+                );
                 await Assert.ThrowsAsync<HttpRequestException>(() => sendTask);
             }
         }
@@ -3281,12 +4287,21 @@ namespace System.Net.Http.Functional.Tests
             using (Http2LoopbackServer server = Http2LoopbackServer.CreateServer())
             using (HttpClient client = CreateHttpClient())
             {
-                IList<HttpHeaderData> headers = new HttpHeaderData[] { new HttpHeaderData("x-test", "Http2GetAsync_StatusHeaderNotFirst_Throws"), new HttpHeaderData(":status", "200") };
+                IList<HttpHeaderData> headers = new HttpHeaderData[]
+                {
+                    new HttpHeaderData("x-test", "Http2GetAsync_StatusHeaderNotFirst_Throws"),
+                    new HttpHeaderData(":status", "200")
+                };
                 Task<HttpResponseMessage> sendTask = client.GetAsync(server.Address);
 
                 Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
                 int streamId = await connection.ReadRequestHeaderAsync();
-                await connection.SendResponseHeadersAsync(streamId, endStream : true, isTrailingHeader : true, headers: headers);
+                await connection.SendResponseHeadersAsync(
+                    streamId,
+                    endStream: true,
+                    isTrailingHeader: true,
+                    headers: headers
+                );
 
                 await Assert.ThrowsAsync<HttpRequestException>(() => sendTask);
             }
@@ -3299,14 +4314,27 @@ namespace System.Net.Http.Functional.Tests
             using (Http2LoopbackServer server = Http2LoopbackServer.CreateServer())
             using (HttpClient client = CreateHttpClient())
             {
-                IList<HttpHeaderData> headers = new HttpHeaderData[] { new HttpHeaderData(":path", "http"), new HttpHeaderData("x-test", "Http2GetAsync_TrailigPseudo_Throw") };
+                IList<HttpHeaderData> headers = new HttpHeaderData[]
+                {
+                    new HttpHeaderData(":path", "http"),
+                    new HttpHeaderData("x-test", "Http2GetAsync_TrailigPseudo_Throw")
+                };
                 Task<HttpResponseMessage> sendTask = client.GetAsync(server.Address);
 
                 Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
                 int streamId = await connection.ReadRequestHeaderAsync();
                 await connection.SendDefaultResponseHeadersAsync(streamId);
-                await connection.SendResponseDataAsync(streamId, Encoding.ASCII.GetBytes("hello"), endStream: false);
-                await connection.SendResponseHeadersAsync(streamId, endStream : true, isTrailingHeader : true, headers: headers);
+                await connection.SendResponseDataAsync(
+                    streamId,
+                    Encoding.ASCII.GetBytes("hello"),
+                    endStream: false
+                );
+                await connection.SendResponseHeadersAsync(
+                    streamId,
+                    endStream: true,
+                    isTrailingHeader: true,
+                    headers: headers
+                );
 
                 await Assert.ThrowsAsync<HttpRequestException>(() => sendTask);
             }
@@ -3322,40 +4350,49 @@ namespace System.Net.Http.Functional.Tests
             string largeHeaderValue = new string('a', 1024);
             int count = continuationCount * 16 + 1;
 
-            await Http2LoopbackServer.CreateClientAndServerAsync(async uri =>
-            {
-                using HttpClient client = CreateHttpClient();
-
-                var message = new HttpRequestMessage(HttpMethod.Get, uri) { Version = UseVersion };
-                for (int i = 0; i < count; i++)
+            await Http2LoopbackServer.CreateClientAndServerAsync(
+                async uri =>
                 {
-                    message.Headers.TryAddWithoutValidation("large-header" + i, largeHeaderValue);
-                }
-                var response = await client.SendAsync(TestAsync, message).ConfigureAwait(false);
-            },
-            async server =>
-            {
-                // Primes the connection, i.e. forces it to exchange SETTINGS whose ACK sometimes flushed the headers as well.
-                // See: https://github.com/dotnet/runtime/issues/860 for repro description.
-                (Http2LoopbackConnection connection, SettingsFrame clientSettings) = await server.EstablishConnectionGetSettingsAsync();
+                    using HttpClient client = CreateHttpClient();
 
-                // Read individual frames and assert number of CONTINUATIONs.
-                int receivedContinuations = 0;
-                int streamId = 0;
-                await foreach (Frame frame in connection.ReadRequestHeadersFrames())
+                    var message = new HttpRequestMessage(HttpMethod.Get, uri)
+                    {
+                        Version = UseVersion
+                    };
+                    for (int i = 0; i < count; i++)
+                    {
+                        message.Headers.TryAddWithoutValidation(
+                            "large-header" + i,
+                            largeHeaderValue
+                        );
+                    }
+                    var response = await client.SendAsync(TestAsync, message).ConfigureAwait(false);
+                },
+                async server =>
                 {
-                    if (frame.Type == FrameType.Headers)
+                    // Primes the connection, i.e. forces it to exchange SETTINGS whose ACK sometimes flushed the headers as well.
+                    // See: https://github.com/dotnet/runtime/issues/860 for repro description.
+                    (Http2LoopbackConnection connection, SettingsFrame clientSettings) =
+                        await server.EstablishConnectionGetSettingsAsync();
+
+                    // Read individual frames and assert number of CONTINUATIONs.
+                    int receivedContinuations = 0;
+                    int streamId = 0;
+                    await foreach (Frame frame in connection.ReadRequestHeadersFrames())
                     {
-                        streamId = ((HeadersFrame)frame).StreamId;
+                        if (frame.Type == FrameType.Headers)
+                        {
+                            streamId = ((HeadersFrame)frame).StreamId;
+                        }
+                        if (frame.Type == FrameType.Continuation)
+                        {
+                            ++receivedContinuations;
+                        }
                     }
-                    if (frame.Type == FrameType.Continuation)
-                    {
-                        ++receivedContinuations;
-                    }
+                    Assert.Equal(continuationCount, receivedContinuations);
+                    await connection.SendResponseAsync(HttpStatusCode.OK, requestId: streamId);
                 }
-                Assert.Equal(continuationCount, receivedContinuations);
-                await connection.SendResponseAsync(HttpStatusCode.OK, requestId: streamId);
-            });
+            );
         }
 
         [Fact]
@@ -3369,21 +4406,28 @@ namespace System.Net.Http.Functional.Tests
                     // An exception will be thrown by either GetAsync or ReadAsStringAsync once
                     // the inbound window size has been exceeded. Which one depends on how quickly
                     // ProcessIncomingFramesAsync() can read data off the socket.
-                    Exception requestException = await Assert.ThrowsAsync<HttpRequestException>(async () =>
-                    {
-                        using HttpClient client = CreateHttpClient();
-                        using HttpResponseMessage response = await client.GetAsync(uri, HttpCompletionOption.ResponseHeadersRead);
+                    Exception requestException = await Assert.ThrowsAsync<HttpRequestException>(
+                        async () =>
+                        {
+                            using HttpClient client = CreateHttpClient();
+                            using HttpResponseMessage response = await client.GetAsync(
+                                uri,
+                                HttpCompletionOption.ResponseHeadersRead
+                            );
 
-                        // Keep client open until server is done.
-                        await semaphore.WaitAsync(10000);
+                            // Keep client open until server is done.
+                            await semaphore.WaitAsync(10000);
 
-                        await response.Content.ReadAsStringAsync();
-                    });
+                            await response.Content.ReadAsStringAsync();
+                        }
+                    );
 
                     // A Http2ConnectionException will be present somewhere in the inner exceptions.
                     // Its location depends on which method threw the exception.
-                    while (requestException?.GetType().FullName.Equals("System.Net.Http.Http2ConnectionException") == false)
-                    {
+                    while (
+                        requestException?.GetType()
+                            .FullName.Equals("System.Net.Http.Http2ConnectionException") == false
+                    ) {
                         requestException = requestException.InnerException;
                     }
 
@@ -3394,10 +4438,17 @@ namespace System.Net.Http.Functional.Tests
                 {
                     try
                     {
-                        (Http2LoopbackConnection connection, SettingsFrame clientSettings) = await server.EstablishConnectionGetSettingsAsync();
+                        (Http2LoopbackConnection connection, SettingsFrame clientSettings) =
+                            await server.EstablishConnectionGetSettingsAsync();
 
-                        SettingsEntry clientWindowSizeSetting = clientSettings.Entries.SingleOrDefault(x => x.SettingId == SettingId.InitialWindowSize);
-                        int clientWindowSize = clientWindowSizeSetting.SettingId == SettingId.InitialWindowSize ? (int)clientWindowSizeSetting.Value : 65535;
+                        SettingsEntry clientWindowSizeSetting =
+                            clientSettings.Entries.SingleOrDefault(
+                                x => x.SettingId == SettingId.InitialWindowSize
+                            );
+                        int clientWindowSize =
+                            clientWindowSizeSetting.SettingId == SettingId.InitialWindowSize
+                                ? (int)clientWindowSizeSetting.Value
+                                : 65535;
 
                         // Exceed the window size by 1 byte.
                         ++clientWindowSize;
@@ -3415,7 +4466,11 @@ namespace System.Net.Http.Functional.Tests
                             int sendSize = Math.Min(buffer.Length, clientWindowSize - totalSent);
                             ReadOnlyMemory<byte> sendBuf = buffer.AsMemory(0, sendSize);
 
-                            await connection.SendResponseDataAsync(streamId, sendBuf, endStream: false);
+                            await connection.SendResponseDataAsync(
+                                streamId,
+                                sendBuf,
+                                endStream: false
+                            );
                             totalSent += sendSize;
                         }
 
@@ -3423,28 +4478,43 @@ namespace System.Net.Http.Functional.Tests
                         // If client is misbehaving, we'll get an OperationCanceledException due to timeout.
                         try
                         {
-                            Frame clientFrame = await connection.ReadFrameAsync(TimeSpan.FromSeconds(5));
-                            Assert.True(clientFrame == null || (clientFrame.Type == FrameType.RstStream && clientFrame.StreamId == streamId),
-                                "Unexpected frame received from HttpClient; Expected either RST_STREAM or connection reset.");
+                            Frame clientFrame = await connection.ReadFrameAsync(
+                                TimeSpan.FromSeconds(5)
+                            );
+                            Assert.True(
+                                clientFrame == null
+                                    || (
+                                        clientFrame.Type == FrameType.RstStream
+                                        && clientFrame.StreamId == streamId
+                                    ),
+                                "Unexpected frame received from HttpClient; Expected either RST_STREAM or connection reset."
+                            );
                         }
                         catch (OperationCanceledException ex)
                         {
-                            Assert.True(ex == null, "Stream unexpectedly left open by HttpClient; Expected either RST_STREAM or connection reset.");
+                            Assert.True(
+                                ex == null,
+                                "Stream unexpectedly left open by HttpClient; Expected either RST_STREAM or connection reset."
+                            );
                         }
                     }
+
                     finally
                     {
                         // Shut down client.
                         semaphore.Release();
                     }
-                });
+                }
+            );
         }
 
         [Fact]
         [OuterLoop("Uses Task.Delay")]
         public async Task SocketSendQueueFull_RequestCanceled_ThrowsOperationCanceled()
         {
-            TaskCompletionSource clientComplete = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            TaskCompletionSource clientComplete = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             await Http2LoopbackServer.CreateClientAndServerAsync(
                 async uri =>
@@ -3454,7 +4524,11 @@ namespace System.Net.Http.Functional.Tests
                     using HttpClient client = CreateHttpClient();
 
                     // Post a large request, large enough to fill the socket send buffer
-                    Task postTask = client.PostAsync(uri, new StringContent(new string('a', 16 * 1024 * 1024)), cancellationTokenSource.Token);
+                    Task postTask = client.PostAsync(
+                        uri,
+                        new StringContent(new string('a', 16 * 1024 * 1024)),
+                        cancellationTokenSource.Token
+                    );
 
                     // Wait a while to hopefully ensure that the send buffer has been completely filled
                     await Task.Delay(3000);
@@ -3471,13 +4545,20 @@ namespace System.Net.Http.Functional.Tests
                 async server =>
                 {
                     // Establish the connection and ensure client is not blocked on windows
-                    Http2LoopbackConnection connection = await server.EstablishConnectionAsync(new SettingsEntry { SettingId = SettingId.InitialWindowSize, Value = 128 * 1024 * 1024 });
+                    Http2LoopbackConnection connection = await server.EstablishConnectionAsync(
+                        new SettingsEntry
+                        {
+                            SettingId = SettingId.InitialWindowSize,
+                            Value = 128 * 1024 * 1024
+                        }
+                    );
                     await connection.WriteFrameAsync(new WindowUpdateFrame(128 * 1024 * 1024, 0));
 
                     // Now, don't process any frames. Let the client's send buffer fill up.
                     // When the client is done, it will signal us.
                     await clientComplete.Task;
-                });
+                }
+            );
         }
 
         [Theory]
@@ -3499,15 +4580,24 @@ namespace System.Net.Http.Functional.Tests
                     Http2LoopbackConnection con = await server.EstablishConnectionAsync();
                     int streamId = await con.ReadRequestHeaderAsync();
 
-                    await con.SendResponseHeadersAsync(streamId, isTrailingHeader: true, headers: new[]
-                    {
-                        // 1000 + other strings = 1024
-                        new HttpHeaderData(":status", "200", huffmanEncoded: huffmanEncode),
-                        new HttpHeaderData("padding-header", new string(' ', 1000), huffmanEncoded: huffmanEncode)
-                    });
+                    await con.SendResponseHeadersAsync(
+                        streamId,
+                        isTrailingHeader: true,
+                        headers: new[]
+                        {
+                            // 1000 + other strings = 1024
+                            new HttpHeaderData(":status", "200", huffmanEncoded: huffmanEncode),
+                            new HttpHeaderData(
+                                "padding-header",
+                                new string(' ', 1000),
+                                huffmanEncoded: huffmanEncode
+                            )
+                        }
+                    );
 
                     await con.ShutdownIgnoringErrorsAsync(streamId);
-                });
+                }
+            );
         }
 
         [Theory]
@@ -3522,23 +4612,37 @@ namespace System.Net.Http.Functional.Tests
                     handler.MaxResponseHeadersLength = 1;
 
                     using HttpClient client = CreateHttpClient(handler);
-                    Exception e = await Assert.ThrowsAsync<HttpRequestException>(() => client.GetAsync(uri));
-                    Assert.Contains((handler.MaxResponseHeadersLength * 1024).ToString(), e.ToString());
+                    Exception e = await Assert.ThrowsAsync<HttpRequestException>(
+                        () => client.GetAsync(uri)
+                    );
+                    Assert.Contains(
+                        (handler.MaxResponseHeadersLength * 1024).ToString(),
+                        e.ToString()
+                    );
                 },
                 async server =>
                 {
                     Http2LoopbackConnection con = await server.EstablishConnectionAsync();
                     int streamId = await con.ReadRequestHeaderAsync();
 
-                    await con.SendResponseHeadersAsync(streamId, isTrailingHeader: true, headers: new[]
-                    {
-                        // 1001 + other strings = 1025
-                        new HttpHeaderData(":status", "200", huffmanEncoded: huffmanEncode),
-                        new HttpHeaderData("padding-header", new string(' ', 1001), huffmanEncoded: huffmanEncode)
-                    });
+                    await con.SendResponseHeadersAsync(
+                        streamId,
+                        isTrailingHeader: true,
+                        headers: new[]
+                        {
+                            // 1001 + other strings = 1025
+                            new HttpHeaderData(":status", "200", huffmanEncoded: huffmanEncode),
+                            new HttpHeaderData(
+                                "padding-header",
+                                new string(' ', 1001),
+                                huffmanEncoded: huffmanEncode
+                            )
+                        }
+                    );
 
                     await con.ShutdownIgnoringErrorsAsync(streamId);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -3551,8 +4655,13 @@ namespace System.Net.Http.Functional.Tests
                     handler.MaxResponseHeadersLength = 1;
 
                     using HttpClient client = CreateHttpClient(handler);
-                    Exception e = await Assert.ThrowsAsync<HttpRequestException>(() => client.GetAsync(uri));
-                    Assert.Contains((handler.MaxResponseHeadersLength * 1024).ToString(), e.ToString());
+                    Exception e = await Assert.ThrowsAsync<HttpRequestException>(
+                        () => client.GetAsync(uri)
+                    );
+                    Assert.Contains(
+                        (handler.MaxResponseHeadersLength * 1024).ToString(),
+                        e.ToString()
+                    );
                 },
                 async server =>
                 {
@@ -3560,12 +4669,56 @@ namespace System.Net.Http.Functional.Tests
                     int streamId = await con.ReadRequestHeaderAsync();
 
                     // A small malicious/corrupt payload that expands into two 1GB strings. We don't want HPackDecoder to allocate buffers when they exceed MaxResponseHeadersLength.
-                    byte[] headerData = new byte[] { 0x88, 0x00, 0x7F, 0x81, 0xFF, 0xFF, 0xFF, 0x03, 0x70, 0x6C, 0x61, 0x69, 0x6E, 0x2D, 0x74, 0x65, 0x78, 0x74, 0x7F, 0x81, 0xFF, 0xFF, 0xFF, 0x03, 0x61, 0x61, 0x61, 0x61, 0x61, 0x61, 0x61, 0x61, 0x61, 0x61 };
-                    HeadersFrame frame = new HeadersFrame(headerData, FrameFlags.EndHeaders | FrameFlags.EndStream, 0, 0, 0, streamId);
+                    byte[] headerData = new byte[]
+                    {
+                        0x88,
+                        0x00,
+                        0x7F,
+                        0x81,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0x03,
+                        0x70,
+                        0x6C,
+                        0x61,
+                        0x69,
+                        0x6E,
+                        0x2D,
+                        0x74,
+                        0x65,
+                        0x78,
+                        0x74,
+                        0x7F,
+                        0x81,
+                        0xFF,
+                        0xFF,
+                        0xFF,
+                        0x03,
+                        0x61,
+                        0x61,
+                        0x61,
+                        0x61,
+                        0x61,
+                        0x61,
+                        0x61,
+                        0x61,
+                        0x61,
+                        0x61
+                    };
+                    HeadersFrame frame = new HeadersFrame(
+                        headerData,
+                        FrameFlags.EndHeaders | FrameFlags.EndStream,
+                        0,
+                        0,
+                        0,
+                        streamId
+                    );
 
                     await con.WriteFrameAsync(frame);
                     await con.ShutdownIgnoringErrorsAsync(streamId);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -3579,18 +4732,30 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    (Http2LoopbackConnection con, SettingsFrame settings) = await server.EstablishConnectionGetSettingsAsync();
+                    (Http2LoopbackConnection con, SettingsFrame settings) =
+                        await server.EstablishConnectionGetSettingsAsync();
                     int streamId = await con.ReadRequestHeaderAsync();
 
                     int headerTableSize = settings.GetHeaderTableSize();
 
                     byte[] headerData = new byte[16];
-                    int headersLen = HPackEncoder.EncodeDynamicTableSizeUpdate(headerTableSize + 1, headerData);
-                    HeadersFrame frame = new HeadersFrame(headerData.AsMemory(0, headersLen), FrameFlags.EndHeaders | FrameFlags.EndStream, 0, 0, 0, streamId);
+                    int headersLen = HPackEncoder.EncodeDynamicTableSizeUpdate(
+                        headerTableSize + 1,
+                        headerData
+                    );
+                    HeadersFrame frame = new HeadersFrame(
+                        headerData.AsMemory(0, headersLen),
+                        FrameFlags.EndHeaders | FrameFlags.EndStream,
+                        0,
+                        0,
+                        0,
+                        streamId
+                    );
 
                     await con.WriteFrameAsync(frame);
                     await con.ShutdownIgnoringErrorsAsync(streamId);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -3602,7 +4767,9 @@ namespace System.Net.Http.Functional.Tests
                     using HttpClient client = CreateHttpClient();
                     using HttpResponseMessage response = await client.GetAsync(uri);
 
-                    Assert.True(response.Headers.TryGetValues("my-header", out IEnumerable<string> values));
+                    Assert.True(
+                        response.Headers.TryGetValues("my-header", out IEnumerable<string> values)
+                    );
                     Assert.True(values.SequenceEqual(new[] { "foo", "bar" }));
                 },
                 async server =>
@@ -3613,14 +4780,39 @@ namespace System.Net.Http.Functional.Tests
                     int streamId = await con.ReadRequestHeaderAsync();
 
                     int pos = 0;
-                    pos += HPackEncoder.EncodeHeader(":status", "200", HPackFlags.None, frameData.AsSpan(pos));
-                    pos += HPackEncoder.EncodeHeader("my-header", "foo", HPackFlags.NewIndexed, frameData.AsSpan(pos));
-                    pos += HPackEncoder.EncodeHeader(HPackEncoder.SmallestDynamicIndex, "bar", HPackFlags.None, frameData.AsSpan(pos));
-                    await con.WriteFrameAsync(new HeadersFrame(frameData.AsMemory(0, pos), FrameFlags.EndHeaders | FrameFlags.EndStream, 0, 0, 0, streamId));
+                    pos += HPackEncoder.EncodeHeader(
+                        ":status",
+                        "200",
+                        HPackFlags.None,
+                        frameData.AsSpan(pos)
+                    );
+                    pos += HPackEncoder.EncodeHeader(
+                        "my-header",
+                        "foo",
+                        HPackFlags.NewIndexed,
+                        frameData.AsSpan(pos)
+                    );
+                    pos += HPackEncoder.EncodeHeader(
+                        HPackEncoder.SmallestDynamicIndex,
+                        "bar",
+                        HPackFlags.None,
+                        frameData.AsSpan(pos)
+                    );
+                    await con.WriteFrameAsync(
+                        new HeadersFrame(
+                            frameData.AsMemory(0, pos),
+                            FrameFlags.EndHeaders | FrameFlags.EndStream,
+                            0,
+                            0,
+                            0,
+                            streamId
+                        )
+                    );
 
                     // Close out connection.
                     await con.ShutdownIgnoringErrorsAsync(streamId);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -3646,7 +4838,12 @@ namespace System.Net.Http.Functional.Tests
                     // Second request should reset the dynamic table.
                     using (HttpResponseMessage response = await client.GetAsync(uri))
                     {
-                        Assert.True(response.Headers.TryGetValues("new-header", out IEnumerable<string> values));
+                        Assert.True(
+                            response.Headers.TryGetValues(
+                                "new-header",
+                                out IEnumerable<string> values
+                            )
+                        );
                         Assert.Equal("baz", Assert.Single(values));
                     }
 
@@ -3671,33 +4868,100 @@ namespace System.Net.Http.Functional.Tests
                     // header-that-goes: 63, header-that-stays: 62
                     int streamId = await con.ReadRequestHeaderAsync();
                     int pos = 0;
-                    pos += HPackEncoder.EncodeHeader(":status", "200", HPackFlags.None, frameData.AsSpan(pos));
-                    pos += HPackEncoder.EncodeHeader("header-that-gos", "bar", HPackFlags.NewIndexed, frameData.AsSpan(pos));
-                    pos += HPackEncoder.EncodeHeader("header-that-stays", "foo", HPackFlags.NewIndexed, frameData.AsSpan(pos));
-                    await con.WriteFrameAsync(new HeadersFrame(frameData.AsMemory(0, pos), FrameFlags.EndHeaders | FrameFlags.EndStream, 0, 0, 0, streamId));
+                    pos += HPackEncoder.EncodeHeader(
+                        ":status",
+                        "200",
+                        HPackFlags.None,
+                        frameData.AsSpan(pos)
+                    );
+                    pos += HPackEncoder.EncodeHeader(
+                        "header-that-gos",
+                        "bar",
+                        HPackFlags.NewIndexed,
+                        frameData.AsSpan(pos)
+                    );
+                    pos += HPackEncoder.EncodeHeader(
+                        "header-that-stays",
+                        "foo",
+                        HPackFlags.NewIndexed,
+                        frameData.AsSpan(pos)
+                    );
+                    await con.WriteFrameAsync(
+                        new HeadersFrame(
+                            frameData.AsMemory(0, pos),
+                            FrameFlags.EndHeaders | FrameFlags.EndStream,
+                            0,
+                            0,
+                            0,
+                            streamId
+                        )
+                    );
 
                     // Second stream, resize the table so that the header-that-gos is removed from table, and add a new header.
                     // 1) resize: header-that-stays: 62
                     // 2) add new header: header-that-stays:63, new-header:62
                     streamId = await con.ReadRequestHeaderAsync();
                     pos = 0;
-                    pos += HPackEncoder.EncodeDynamicTableSizeUpdate("header-that-staysfoo".Length + HttpHeaderData.RfcOverhead, frameData.AsSpan(pos));
+                    pos += HPackEncoder.EncodeDynamicTableSizeUpdate(
+                        "header-that-staysfoo".Length + HttpHeaderData.RfcOverhead,
+                        frameData.AsSpan(pos)
+                    );
                     pos += HPackEncoder.EncodeDynamicTableSizeUpdate(4096, frameData.AsSpan(pos));
-                    pos += HPackEncoder.EncodeHeader(":status", "200", HPackFlags.None, frameData.AsSpan(pos));
-                    pos += HPackEncoder.EncodeHeader("new-header", "baz", HPackFlags.NewIndexed, frameData.AsSpan(pos));
-                    await con.WriteFrameAsync(new HeadersFrame(frameData.AsMemory(0, pos), FrameFlags.EndHeaders | FrameFlags.EndStream, 0, 0, 0, streamId));
+                    pos += HPackEncoder.EncodeHeader(
+                        ":status",
+                        "200",
+                        HPackFlags.None,
+                        frameData.AsSpan(pos)
+                    );
+                    pos += HPackEncoder.EncodeHeader(
+                        "new-header",
+                        "baz",
+                        HPackFlags.NewIndexed,
+                        frameData.AsSpan(pos)
+                    );
+                    await con.WriteFrameAsync(
+                        new HeadersFrame(
+                            frameData.AsMemory(0, pos),
+                            FrameFlags.EndHeaders | FrameFlags.EndStream,
+                            0,
+                            0,
+                            0,
+                            streamId
+                        )
+                    );
 
                     // Third stream, use the dynamic table established in previous stream.
                     streamId = await con.ReadRequestHeaderAsync();
                     pos = 0;
-                    pos += HPackEncoder.EncodeHeader(":status", "200", HPackFlags.None, frameData.AsSpan(pos));
-                    pos += HPackEncoder.EncodeHeader(HPackEncoder.SmallestDynamicIndex + 1, frameData.AsSpan(pos)); // header-that-stays:foo
-                    pos += HPackEncoder.EncodeHeader(HPackEncoder.SmallestDynamicIndex, frameData.AsSpan(pos)); // new-header:baz
-                    await con.WriteFrameAsync(new HeadersFrame(frameData.AsMemory(0, pos), FrameFlags.EndHeaders | FrameFlags.EndStream, 0, 0, 0, streamId));
+                    pos += HPackEncoder.EncodeHeader(
+                        ":status",
+                        "200",
+                        HPackFlags.None,
+                        frameData.AsSpan(pos)
+                    );
+                    pos += HPackEncoder.EncodeHeader(
+                        HPackEncoder.SmallestDynamicIndex + 1,
+                        frameData.AsSpan(pos)
+                    ); // header-that-stays:foo
+                    pos += HPackEncoder.EncodeHeader(
+                        HPackEncoder.SmallestDynamicIndex,
+                        frameData.AsSpan(pos)
+                    ); // new-header:baz
+                    await con.WriteFrameAsync(
+                        new HeadersFrame(
+                            frameData.AsMemory(0, pos),
+                            FrameFlags.EndHeaders | FrameFlags.EndStream,
+                            0,
+                            0,
+                            0,
+                            streamId
+                        )
+                    );
 
                     // Close out connection.
                     await con.ShutdownIgnoringErrorsAsync(streamId);
-                });
+                }
+            );
         }
 
         [Theory]
@@ -3723,9 +4987,13 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    (Http2LoopbackConnection con, SettingsFrame settings) = await server.EstablishConnectionGetSettingsAsync();
+                    (Http2LoopbackConnection con, SettingsFrame settings) =
+                        await server.EstablishConnectionGetSettingsAsync();
 
-                    Debug.Assert(settings.GetHeaderTableSize() >= 4096, "Data for this theory requires a header table size of at least 4096.");
+                    Debug.Assert(
+                        settings.GetHeaderTableSize() >= 4096,
+                        "Data for this theory requires a header table size of at least 4096."
+                    );
 
                     // First stream, create dynamic indexes.
                     int streamId = await con.ReadRequestHeaderAsync();
@@ -3735,29 +5003,61 @@ namespace System.Net.Http.Functional.Tests
 
                     foreach (HttpHeaderData header in headers)
                     {
-                        pos += HPackEncoder.EncodeHeader(header.Name, header.Value, HPackFlags.NewIndexed, frameData.AsSpan(pos));
+                        pos += HPackEncoder.EncodeHeader(
+                            header.Name,
+                            header.Value,
+                            HPackFlags.NewIndexed,
+                            frameData.AsSpan(pos)
+                        );
                     }
 
-                    await con.WriteFrameAsync(new HeadersFrame(frameData.AsMemory(0, pos), FrameFlags.EndHeaders | FrameFlags.EndStream, 0, 0, 0, streamId));
+                    await con.WriteFrameAsync(
+                        new HeadersFrame(
+                            frameData.AsMemory(0, pos),
+                            FrameFlags.EndHeaders | FrameFlags.EndStream,
+                            0,
+                            0,
+                            0,
+                            streamId
+                        )
+                    );
 
                     // Second stream, send headers using indexes only.
                     streamId = await con.ReadRequestHeaderAsync();
                     pos = 0;
-                    for (int i = HPackEncoder.LargestStaticIndex + headers.Count(); i > HPackEncoder.LargestStaticIndex; --i)
-                    {
+                    for (
+                        int i = HPackEncoder.LargestStaticIndex + headers.Count();
+                        i > HPackEncoder.LargestStaticIndex;
+                        --i
+                    ) {
                         pos += HPackEncoder.EncodeHeader(i, frameData.AsSpan(pos));
                     }
 
-                    await con.WriteFrameAsync(new HeadersFrame(frameData.AsMemory(0, pos), FrameFlags.EndHeaders | FrameFlags.EndStream, 0, 0, 0, streamId));
+                    await con.WriteFrameAsync(
+                        new HeadersFrame(
+                            frameData.AsMemory(0, pos),
+                            FrameFlags.EndHeaders | FrameFlags.EndStream,
+                            0,
+                            0,
+                            0,
+                            streamId
+                        )
+                    );
 
                     // Close out connection.
                     await con.ShutdownIgnoringErrorsAsync(streamId);
-                });
+                }
+            );
 
             void AssertExpectedHeaders(HttpResponseMessage response)
             {
-                var expected = headers.Select(x => (name: x.Name.ToLowerInvariant(), value: x.Value.ToLowerInvariant()));
-                var actual = response.Headers.SelectMany(x => x.Value, (kvp, v) => (name: kvp.Key.ToLowerInvariant(), value: v.ToLowerInvariant()));
+                var expected = headers.Select(
+                    x => (name: x.Name.ToLowerInvariant(), value: x.Value.ToLowerInvariant())
+                );
+                var actual = response.Headers.SelectMany(
+                    x => x.Value,
+                    (kvp, v) => (name: kvp.Key.ToLowerInvariant(), value: v.ToLowerInvariant())
+                );
                 Assert.Empty(actual.Except(expected));
             }
         }
@@ -3773,7 +5073,10 @@ namespace System.Net.Http.Functional.Tests
         /// </summary>
         private static IEnumerable<HttpHeaderData> GenerateHeadersWithStatus200(int targetSize)
         {
-            Debug.Assert(targetSize > 64, $"{nameof(targetSize)} must be more than 64 to account for a status 200 and padding headers.");
+            Debug.Assert(
+                targetSize > 64,
+                $"{nameof(targetSize)} must be more than 64 to account for a status 200 and padding headers."
+            );
 
             const string NamePrefix = "hn-";
             const string ValuePrefix = "hv-";

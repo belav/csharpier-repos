@@ -10,12 +10,18 @@ namespace System.Diagnostics.Tests
 {
     public static class CounterSampleCalculatorTests
     {
-        [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndCanWriteAndReadNetPerfCounters))]
+        [ConditionalFact(
+            typeof(Helpers),
+            nameof(Helpers.IsElevatedAndCanWriteAndReadNetPerfCounters)
+        )]
         public static void CounterSampleCalculator_ElapsedTime()
         {
             var name = nameof(CounterSampleCalculator_ElapsedTime) + "_Counter";
 
-            PerformanceCounter counterSample = CreateCounter(name, PerformanceCounterType.ElapsedTime);
+            PerformanceCounter counterSample = CreateCounter(
+                name,
+                PerformanceCounterType.ElapsedTime
+            );
 
             counterSample.RawValue = Stopwatch.GetTimestamp();
             DateTime Start = DateTime.Now;
@@ -29,8 +35,10 @@ namespace System.Diagnostics.Tests
             Assert.True(Math.Abs(dateTimeVal - counterVal) < .3);
         }
 
-        public static PerformanceCounter CreateCounter(string name, PerformanceCounterType counterType)
-        {
+        public static PerformanceCounter CreateCounter(
+            string name,
+            PerformanceCounterType counterType
+        ) {
             var category = name + "_Category";
             var instance = name + "_Instance";
 
@@ -41,7 +49,12 @@ namespace System.Diagnostics.Tests
             ccdc.Add(ccd);
 
             Helpers.DeleteCategory(name);
-            PerformanceCounterCategory.Create(category, "description", PerformanceCounterCategoryType.SingleInstance, ccdc);
+            PerformanceCounterCategory.Create(
+                category,
+                "description",
+                PerformanceCounterCategoryType.SingleInstance,
+                ccdc
+            );
 
             Assert.True(Helpers.PerformanceCounterCategoryCreated(category));
 

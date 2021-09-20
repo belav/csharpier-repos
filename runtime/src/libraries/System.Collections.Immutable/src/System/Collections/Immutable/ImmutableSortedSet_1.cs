@@ -19,11 +19,26 @@ namespace System.Collections.Immutable
     /// </devremarks>
     [DebuggerDisplay("Count = {Count}")]
     [DebuggerTypeProxy(typeof(ImmutableEnumerableDebuggerProxy<>))]
-    #if !NETSTANDARD1_0 && !NETSTANDARD1_3 && !NETSTANDARD2_0 && !NETFRAMEWORK
-    public sealed partial class ImmutableSortedSet<T> : IImmutableSet<T>, ISortKeyCollection<T>, IReadOnlySet<T>, IReadOnlyList<T>, IList<T>, ISet<T>, IList, IStrongEnumerable<T, ImmutableSortedSet<T>.Enumerator>
-    #else
-    public sealed partial class ImmutableSortedSet<T> : IImmutableSet<T>, ISortKeyCollection<T>, IReadOnlyList<T>, IList<T>, ISet<T>, IList, IStrongEnumerable<T, ImmutableSortedSet<T>.Enumerator>
-    #endif
+#if !NETSTANDARD1_0 && !NETSTANDARD1_3 && !NETSTANDARD2_0 && !NETFRAMEWORK
+    public sealed partial class ImmutableSortedSet<T>
+        : IImmutableSet<T>,
+          ISortKeyCollection<T>,
+          IReadOnlySet<T>,
+          IReadOnlyList<T>,
+          IList<T>,
+          ISet<T>,
+          IList,
+          IStrongEnumerable<T, ImmutableSortedSet<T>.Enumerator>
+#else
+    public sealed partial class ImmutableSortedSet<T>
+        : IImmutableSet<T>,
+          ISortKeyCollection<T>,
+          IReadOnlyList<T>,
+          IList<T>,
+          ISet<T>,
+          IList,
+          IStrongEnumerable<T, ImmutableSortedSet<T>.Enumerator>
+#endif
     {
         /// <summary>
         /// This is the factor between the small collection's size and the large collection's size in a bulk operation,
@@ -311,7 +326,10 @@ namespace System.Collections.Immutable
             Requires.NotNull(other, nameof(other));
 
             ImmutableSortedSet<T>? immutableSortedSet;
-            if (TryCastToImmutableSortedSet(other, out immutableSortedSet) && immutableSortedSet.KeyComparer == this.KeyComparer) // argument is a compatible immutable sorted set
+            if (
+                TryCastToImmutableSortedSet(other, out immutableSortedSet)
+                && immutableSortedSet.KeyComparer == this.KeyComparer
+            ) // argument is a compatible immutable sorted set
             {
                 if (immutableSortedSet.IsEmpty)
                 {
@@ -331,8 +349,13 @@ namespace System.Collections.Immutable
             }
 
             int count;
-            if (this.IsEmpty || (other.TryGetCount(out count) && (this.Count + count) * RefillOverIncrementalThreshold > this.Count))
-            {
+            if (
+                this.IsEmpty
+                || (
+                    other.TryGetCount(out count)
+                    && (this.Count + count) * RefillOverIncrementalThreshold > this.Count
+                )
+            ) {
                 // The payload being added is so large compared to this collection's current size
                 // that we likely won't see much memory reuse in the node tree by performing an
                 // incremental update.  So just recreate the entire node tree since that will
@@ -946,9 +969,7 @@ namespace System.Collections.Immutable
         /// </returns>
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-            return this.IsEmpty ?
-                Enumerable.Empty<T>().GetEnumerator() :
-                this.GetEnumerator();
+            return this.IsEmpty ? Enumerable.Empty<T>().GetEnumerator() : this.GetEnumerator();
         }
 
         #endregion
@@ -989,8 +1010,10 @@ namespace System.Collections.Immutable
         /// <summary>
         /// Discovers an immutable sorted set for a given value, if possible.
         /// </summary>
-        private static bool TryCastToImmutableSortedSet(IEnumerable<T> sequence, [NotNullWhen(true)] out ImmutableSortedSet<T>? other)
-        {
+        private static bool TryCastToImmutableSortedSet(
+            IEnumerable<T> sequence,
+            [NotNullWhen(true)] out ImmutableSortedSet<T>? other
+        ) {
             other = sequence as ImmutableSortedSet<T>;
             if (other != null)
             {

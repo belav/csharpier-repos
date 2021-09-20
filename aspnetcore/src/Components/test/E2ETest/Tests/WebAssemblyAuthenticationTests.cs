@@ -43,16 +43,19 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public WebAssemblyAuthenticationTests(
             BrowserFixture browserFixture,
             AspNetSiteServerFixture serverFixture,
-            ITestOutputHelper output) :
-            base(browserFixture, serverFixture, output)
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture, output)
         {
             _serverFixture.ApplicationAssembly = typeof(Program).Assembly;
 
             _serverFixture.AdditionalArguments.Clear();
 
-            _serverFixture.BuildWebHostMethod = args => Program.CreateHostBuilder(args)
-                .ConfigureServices(services => SetupTestDatabase<ApplicationDbContext>(services, _connection))
-                .Build();
+            _serverFixture.BuildWebHostMethod = args =>
+                Program.CreateHostBuilder(args)
+                    .ConfigureServices(
+                        services => SetupTestDatabase<ApplicationDbContext>(services, _connection)
+                    )
+                    .Build();
         }
 
         public override Task InitializeAsync() => base.InitializeAsync(Guid.NewGuid().ToString());
@@ -130,7 +133,6 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             Browser.Exists(By.Id("admin-success"));
         }
 
-
         private void ClickAndNavigate(By link, string page)
         {
             Browser.Exists(link).Click();
@@ -167,44 +169,53 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             Browser.Equal($"Welcome {userName}", () => Browser.Exists(By.TagName("h1")).Text);
 
             var claims = Browser.FindElements(By.CssSelector("p.claim"))
-                .Select(e =>
-                {
-                    var pair = e.Text.Split(":");
-                    return (pair[0].Trim(), pair[1].Trim());
-                })
+                .Select(
+                    e =>
+                    {
+                        var pair = e.Text.Split(":");
+                        return (pair[0].Trim(), pair[1].Trim());
+                    }
+                )
                 .Where(c => !new[] { "s_hash", "auth_time", "sid", "sub" }.Contains(c.Item1))
                 .OrderBy(o => o.Item1)
                 .ToArray();
 
             Assert.Equal(5, claims.Length);
 
-            Assert.Equal(new[]
-            {
-                ("amr", "pwd"),
-                ("idp", "local"),
-                ("name", userName),
-                ("NewUser", "true"),
-                ("preferred_username", userName)
-            },
-            claims);
+            Assert.Equal(
+                new[]
+                {
+                    ("amr", "pwd"),
+                    ("idp", "local"),
+                    ("name", userName),
+                    ("NewUser", "true"),
+                    ("preferred_username", userName)
+                },
+                claims
+            );
 
             var token = Browser.Exists(By.Id("access-token")).Text;
             Assert.NotNull(token);
-            var payload = JsonSerializer.Deserialize<JwtPayload>(Base64UrlTextEncoder.Decode(token.Split(".")[1]));
+            var payload = JsonSerializer.Deserialize<JwtPayload>(
+                Base64UrlTextEncoder.Decode(token.Split(".")[1])
+            );
 
             Assert.StartsWith("http://127.0.0.1", payload.Issuer);
             Assert.StartsWith("Wasm.Authentication.ServerAPI", payload.Audience);
             Assert.StartsWith("Wasm.Authentication.Client", payload.ClientId);
-            Assert.Equal(new[]
-            {
-                "openid",
-                "profile",
-                "Wasm.Authentication.ServerAPI"
-            },
-            payload.Scopes.OrderBy(id => id));
+            Assert.Equal(
+                new[] { "openid", "profile", "Wasm.Authentication.ServerAPI" },
+                payload.Scopes.OrderBy(id => id)
+            );
 
-            var currentTime = DateTimeOffset.Parse(Browser.Exists(By.Id("current-time")).Text, CultureInfo.InvariantCulture);
-            var tokenExpiration = DateTimeOffset.Parse(Browser.Exists(By.Id("access-token-expires")).Text, CultureInfo.InvariantCulture);
+            var currentTime = DateTimeOffset.Parse(
+                Browser.Exists(By.Id("current-time")).Text,
+                CultureInfo.InvariantCulture
+            );
+            var tokenExpiration = DateTimeOffset.Parse(
+                Browser.Exists(By.Id("access-token-expires")).Text,
+                CultureInfo.InvariantCulture
+            );
             Assert.True(currentTime.AddMinutes(50) < tokenExpiration);
             Assert.True(currentTime.AddMinutes(60) >= tokenExpiration);
         }
@@ -311,7 +322,13 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         [Fact]
         public void CanNotRedirect_To_External_ReturnUrl()
         {
-            Browser.Navigate().GoToUrl(new Uri(new Uri(Browser.Url), "/authentication/login?returnUrl=https%3A%2F%2Fwww.bing.com").AbsoluteUri);
+            Browser.Navigate()
+                .GoToUrl(
+                    new Uri(
+                        new Uri(Browser.Url),
+                        "/authentication/login?returnUrl=https%3A%2F%2Fwww.bing.com"
+                    ).AbsoluteUri
+                );
             WaitUntilLoaded(skipHeader: true);
             Browser.Exists(By.CssSelector("[style=\"display: block;\"]"));
             Assert.NotEmpty(Browser.GetBrowserLogs(LogLevel.Severe));
@@ -320,7 +337,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         [Fact]
         public async Task CanNotTrigger_Logout_WithNavigation()
         {
-            Browser.Navigate().GoToUrl(new Uri(new Uri(Browser.Url), "/authentication/logout").AbsoluteUri);
+            Browser.Navigate()
+                .GoToUrl(new Uri(new Uri(Browser.Url), "/authentication/logout").AbsoluteUri);
             WaitUntilLoaded(skipHeader: true);
             Browser.Contains("/authentication/logout-failed", () => Browser.Url);
             await Task.Delay(3000);
@@ -350,7 +368,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             Browser.Exists(By.CssSelector("button.nav-link.btn.btn-link")).Click();
 
             Browser.Contains("/authentication/logged-out", () => Browser.Url);
-            Browser.True(() => Browser.FindElements(By.TagName("p")).Any(e => e.Text == "You are logged out."));
+            Browser.True(
+                () =>
+                    Browser.FindElements(By.TagName("p")).Any(e => e.Text == "You are logged out.")
+            );
         }
 
         private void ValidateFetchData()
@@ -393,11 +414,17 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             {
                 // For some reason the test sometimes get stuck here. Given that this is not something we are testing, to avoid
                 // this we'll retry once to minify the chances it happens on CI runs.
-                ClickAndNavigate(By.PartialLinkText("Click here to confirm your account"), "/Identity/Account/ConfirmEmail");
+                ClickAndNavigate(
+                    By.PartialLinkText("Click here to confirm your account"),
+                    "/Identity/Account/ConfirmEmail"
+                );
             }
             catch
             {
-                ClickAndNavigate(By.PartialLinkText("Click here to confirm your account"), "/Identity/Account/ConfirmEmail");
+                ClickAndNavigate(
+                    By.PartialLinkText("Click here to confirm your account"),
+                    "/Identity/Account/ConfirmEmail"
+                );
             }
 
             // Now we can login
@@ -421,31 +448,42 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             }
         }
 
-        public static IServiceCollection SetupTestDatabase<TContext>(IServiceCollection services, DbConnection connection) where TContext : DbContext
+        public static IServiceCollection SetupTestDatabase<TContext>(
+            IServiceCollection services,
+            DbConnection connection
+        ) where TContext : DbContext
         {
-            var descriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<TContext>));
+            var descriptor = services.SingleOrDefault(
+                d => d.ServiceType == typeof(DbContextOptions<TContext>)
+            );
             if (descriptor != null)
             {
                 services.Remove(descriptor);
             }
 
-            services.AddScoped(p =>
-            DbContextOptionsFactory<TContext>(
-                p,
-                (sp, options) => options
-                    .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning))
-                        .UseSqlite(connection)));
+            services.AddScoped(
+                p =>
+                    DbContextOptionsFactory<TContext>(
+                        p,
+                        (sp, options) =>
+                            options.ConfigureWarnings(
+                                    b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
+                                )
+                                .UseSqlite(connection)
+                    )
+            );
 
             return services;
         }
 
         private static DbContextOptions<TContext> DbContextOptionsFactory<TContext>(
             IServiceProvider applicationServiceProvider,
-            Action<IServiceProvider, DbContextOptionsBuilder> optionsAction)
-            where TContext : DbContext
+            Action<IServiceProvider, DbContextOptionsBuilder> optionsAction
+        ) where TContext : DbContext
         {
             var builder = new DbContextOptionsBuilder<TContext>(
-                new DbContextOptions<TContext>(new Dictionary<Type, IDbContextOptionsExtension>()));
+                new DbContextOptions<TContext>(new Dictionary<Type, IDbContextOptionsExtension>())
+            );
 
             builder.UseApplicationServiceProvider(applicationServiceProvider);
 

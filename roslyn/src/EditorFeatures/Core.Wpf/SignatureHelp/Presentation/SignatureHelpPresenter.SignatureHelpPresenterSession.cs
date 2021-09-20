@@ -20,7 +20,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
 {
     internal partial class SignatureHelpPresenter
     {
-        private class SignatureHelpPresenterSession : ForegroundThreadAffinitizedObject, ISignatureHelpPresenterSession
+        private class SignatureHelpPresenterSession
+            : ForegroundThreadAffinitizedObject,
+              ISignatureHelpPresenterSession
         {
             private readonly ISignatureHelpBroker _sigHelpBroker;
             private readonly ITextView _textView;
@@ -41,8 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             public SignatureHelpPresenterSession(
                 IThreadingContext threadingContext,
                 ISignatureHelpBroker sigHelpBroker,
-                ITextView textView)
-                : base(threadingContext)
+                ITextView textView
+            ) : base(threadingContext)
             {
                 _sigHelpBroker = sigHelpBroker;
                 _textView = textView;
@@ -52,8 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 ITrackingSpan triggerSpan,
                 IList<SignatureHelpItem> signatureHelpItems,
                 SignatureHelpItem selectedItem,
-                int? selectedParameter)
-            {
+                int? selectedParameter
+            ) {
                 _signatureHelpItems = signatureHelpItems;
                 _selectedItem = selectedItem;
 
@@ -64,14 +66,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 // first time, or ask the editor session that we already have to recalculate.
                 if (_editorSessionOpt == null)
                 {
-                    // We're tracking the caret.  Don't have the editor do it. 
+                    // We're tracking the caret.  Don't have the editor do it.
                     _editorSessionOpt = _sigHelpBroker.CreateSignatureHelpSession(
                         _textView,
                         triggerSpan.GetStartTrackingPoint(PointTrackingMode.Negative),
-                        trackCaret: false);
+                        trackCaret: false
+                    );
 
-                    if (_textView is IDebuggerTextView2 debugTextView && !debugTextView.IsImmediateWindow)
-                    {
+                    if (
+                        _textView is IDebuggerTextView2 debugTextView
+                        && !debugTextView.IsImmediateWindow
+                    ) {
                         debugTextView.HACK_StartCompletionSession(_editorSessionOpt);
                     }
 
@@ -108,26 +113,34 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                         _editorSessionOpt.SelectedSignature = defaultValue;
                     }
                 }
+
                 finally
                 {
                     _ignoreSelectionStatusChangedEvent = false;
                 }
             }
 
-            private void CreateSignatures(
-                ITrackingSpan triggerSpan,
-                int? selectedParameter)
+            private void CreateSignatures(ITrackingSpan triggerSpan, int? selectedParameter)
             {
                 _signatureMap = BidirectionalMap<SignatureHelpItem, Signature>.Empty;
 
                 foreach (var item in _signatureHelpItems)
                 {
-                    _signatureMap = _signatureMap.Add(item, new Signature(triggerSpan, item, GetParameterIndexForItem(item, selectedParameter)));
+                    _signatureMap = _signatureMap.Add(
+                        item,
+                        new Signature(
+                            triggerSpan,
+                            item,
+                            GetParameterIndexForItem(item, selectedParameter)
+                        )
+                    );
                 }
             }
 
-            private static int GetParameterIndexForItem(SignatureHelpItem item, int? selectedParameter)
-            {
+            private static int GetParameterIndexForItem(
+                SignatureHelpItem item,
+                int? selectedParameter
+            ) {
                 if (selectedParameter.HasValue)
                 {
                     if (selectedParameter.Value < item.Parameters.Length)
@@ -154,8 +167,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 this.Dismissed?.Invoke(this, new EventArgs());
             }
 
-            private void OnSelectedSignatureChanged(object sender, SelectedSignatureChangedEventArgs eventArgs)
-            {
+            private void OnSelectedSignatureChanged(
+                object sender,
+                SelectedSignatureChangedEventArgs eventArgs
+            ) {
                 AssertIsForeground();
 
                 if (_ignoreSelectionStatusChangedEvent)
@@ -163,7 +178,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                     return;
                 }
 
-                Contract.ThrowIfFalse(_signatureMap.TryGetKey((Signature)eventArgs.NewSelectedSignature, out var helpItem));
+                Contract.ThrowIfFalse(
+                    _signatureMap.TryGetKey(
+                        (Signature)eventArgs.NewSelectedSignature,
+                        out var helpItem
+                    )
+                );
 
                 var helpItemSelected = this.ItemSelected;
                 if (helpItemSelected != null && helpItem != null)
@@ -188,18 +208,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
 
             private bool ExecuteKeyboardCommand(IntellisenseKeyboardCommand command)
             {
-                var target = _editorSessionOpt != null
-                    ? _editorSessionOpt.Presenter as IIntellisenseCommandTarget
-                    : null;
+                var target =
+                    _editorSessionOpt != null
+                        ? _editorSessionOpt.Presenter as IIntellisenseCommandTarget
+                        : null;
 
                 return target != null && target.ExecuteKeyboardCommand(command);
             }
 
-            public void SelectPreviousItem()
-                => ExecuteKeyboardCommand(IntellisenseKeyboardCommand.Up);
+            public void SelectPreviousItem() =>
+                ExecuteKeyboardCommand(IntellisenseKeyboardCommand.Up);
 
-            public void SelectNextItem()
-                => ExecuteKeyboardCommand(IntellisenseKeyboardCommand.Down);
+            public void SelectNextItem() =>
+                ExecuteKeyboardCommand(IntellisenseKeyboardCommand.Down);
 
             // Call backs from our ISignatureHelpSourceProvider.  Used to actually populate the vs
             // session.

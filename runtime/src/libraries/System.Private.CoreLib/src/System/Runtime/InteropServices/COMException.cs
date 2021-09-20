@@ -13,43 +13,43 @@ namespace System.Runtime.InteropServices
     /// recognize the HResult.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class COMException : ExternalException
     {
-        public COMException()
-            : base(SR.Arg_COMException)
+        public COMException() : base(SR.Arg_COMException)
         {
             HResult = HResults.E_FAIL;
         }
 
-        public COMException(string? message)
-            : base(message)
+        public COMException(string? message) : base(message)
         {
             HResult = HResults.E_FAIL;
         }
 
-        public COMException(string? message, Exception? inner)
-            : base(message, inner)
+        public COMException(string? message, Exception? inner) : base(message, inner)
         {
             HResult = HResults.E_FAIL;
         }
 
-        public COMException(string? message, int errorCode)
-            : base(message)
+        public COMException(string? message, int errorCode) : base(message)
         {
             HResult = errorCode;
         }
 
-        protected COMException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected COMException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         public override string ToString()
         {
             StringBuilder s = new StringBuilder();
 
             string className = GetType().ToString();
-            s.Append(className).Append(" (0x").Append(HResult.ToString("X8", CultureInfo.InvariantCulture)).Append(')');
+            s.Append(className)
+                .Append(" (0x")
+                .Append(HResult.ToString("X8", CultureInfo.InvariantCulture))
+                .Append(')');
 
             string message = Message;
             if (!string.IsNullOrEmpty(message))
@@ -60,7 +60,8 @@ namespace System.Runtime.InteropServices
             Exception? innerException = InnerException;
             if (innerException != null)
             {
-                s.Append(Environment.NewLineConst + InnerExceptionPrefix).Append(innerException.ToString());
+                s.Append(Environment.NewLineConst + InnerExceptionPrefix)
+                    .Append(innerException.ToString());
             }
 
             string? stackTrace = StackTrace;

@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.NavigateTo
         /// <summary>
         /// Returns the fully loaded state for both the project system and the remote host.
         /// </summary>
-        ValueTask<(bool projectSystem, bool remoteHost)> IsFullyLoadedAsync(CancellationToken cancellationToken);
+        ValueTask<(bool projectSystem, bool remoteHost)> IsFullyLoadedAsync(
+            CancellationToken cancellationToken
+        );
     }
 
     internal class DefaultNavigateToSearchHost : INavigateToSearcherHost
@@ -44,24 +46,27 @@ namespace Microsoft.CodeAnalysis.NavigateTo
         public DefaultNavigateToSearchHost(
             Solution solution,
             IAsynchronousOperationListener asyncListener,
-            CancellationToken disposalToken)
-        {
+            CancellationToken disposalToken
+        ) {
             _solution = solution;
             _asyncListener = asyncListener;
             _disposalToken = disposalToken;
         }
 
-        public INavigateToSearchService? GetNavigateToSearchService(Project project)
-            => project.GetLanguageService<INavigateToSearchService>();
+        public INavigateToSearchService? GetNavigateToSearchService(Project project) =>
+            project.GetLanguageService<INavigateToSearchService>();
 
-        public async ValueTask<(bool projectSystem, bool remoteHost)> IsFullyLoadedAsync(CancellationToken cancellationToken)
-        {
-            var service = _solution.Workspace.Services.GetRequiredService<IWorkspaceStatusService>();
+        public async ValueTask<(bool projectSystem, bool remoteHost)> IsFullyLoadedAsync(
+            CancellationToken cancellationToken
+        ) {
+            var service =
+                _solution.Workspace.Services.GetRequiredService<IWorkspaceStatusService>();
 
             // We consider ourselves fully loaded when both the project system has completed loaded
             // us, and we've totally hydrated the oop side.  Until that happens, we'll attempt to
             // return cached data from languages that support that.
-            var isProjectSystemFullyLoaded = await service.IsFullyLoadedAsync(cancellationToken).ConfigureAwait(false);
+            var isProjectSystemFullyLoaded = await service.IsFullyLoadedAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (!isProjectSystemFullyLoaded)
                 return (false, false);
 
@@ -92,26 +97,43 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                 if (s_remoteHostHydrateTask == null)
                 {
                     // If there are no projects in this solution that use OOP, then there's nothing we need to do.
-                    if (_solution.Projects.All(p => !RemoteSupportedLanguages.IsSupported(p.Language)))
-                    {
+                    if (
+                        _solution.Projects.All(
+                            p => !RemoteSupportedLanguages.IsSupported(p.Language)
+                        )
+                    ) {
                         s_remoteHostHydrateTask = Task.CompletedTask;
                     }
                     else
                     {
-                        var asyncToken = _asyncListener.BeginAsyncOperation(nameof(GetRemoteHostHydrateTask));
+                        var asyncToken = _asyncListener.BeginAsyncOperation(
+                            nameof(GetRemoteHostHydrateTask)
+                        );
 
-                        s_remoteHostHydrateTask = Task.Run(async () =>
-                        {
-                            var client = await RemoteHostClient.TryGetClientAsync(_solution.Workspace, _disposalToken).ConfigureAwait(false);
-                            if (client != null)
+                        s_remoteHostHydrateTask = Task.Run(
+                            async () =>
                             {
-                                await client.TryInvokeAsync<IRemoteNavigateToSearchService>(
-                                    _solution,
-                                    (service, solutionInfo, cancellationToken) =>
-                                    service.HydrateAsync(solutionInfo, cancellationToken),
-                                    _disposalToken).ConfigureAwait(false);
-                            }
-                        }, _disposalToken);
+                                var client = await RemoteHostClient.TryGetClientAsync(
+                                        _solution.Workspace,
+                                        _disposalToken
+                                    )
+                                    .ConfigureAwait(false);
+                                if (client != null)
+                                {
+                                    await client.TryInvokeAsync<IRemoteNavigateToSearchService>(
+                                            _solution,
+                                            (service, solutionInfo, cancellationToken) =>
+                                                service.HydrateAsync(
+                                                    solutionInfo,
+                                                    cancellationToken
+                                                ),
+                                            _disposalToken
+                                        )
+                                        .ConfigureAwait(false);
+                                }
+                            },
+                            _disposalToken
+                        );
                         s_remoteHostHydrateTask.CompletesAsyncOperation(asyncToken);
                     }
                 }

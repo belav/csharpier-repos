@@ -35,11 +35,7 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest.Task
 
             var document = manifest.ToXmlDocument();
 
-            var settings = new XmlWriterSettings()
-            {
-                Encoding = Encoding.UTF8,
-                CloseOutput = true
-            };
+            var settings = new XmlWriterSettings() { Encoding = Encoding.UTF8, CloseOutput = true };
 
             using (var xmlWriter = GetXmlWriter(settings))
             {
@@ -67,11 +63,15 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest.Task
                 throw new ArgumentNullException(nameof(items));
             }
 
-            return items.Select(er => new EmbeddedItem
-            {
-                ManifestFilePath = GetManifestPath(er),
-                AssemblyResourceName = GetAssemblyResourceName(er)
-            }).ToArray();
+            return items.Select(
+                    er =>
+                        new EmbeddedItem
+                        {
+                            ManifestFilePath = GetManifestPath(er),
+                            AssemblyResourceName = GetAssemblyResourceName(er)
+                        }
+                )
+                .ToArray();
         }
 
         public Manifest BuildManifest(EmbeddedItem[] processedItems)
@@ -90,15 +90,23 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest.Task
             return manifest;
         }
 
-        private string GetManifestPath(ITaskItem taskItem) => string.Equals(taskItem.GetMetadata(LogicalName), taskItem.GetMetadata(ManifestResourceName)) ?
-            taskItem.GetMetadata(TargetPath) :
-            NormalizePath(taskItem.GetMetadata(LogicalName));
+        private string GetManifestPath(ITaskItem taskItem) =>
+            string.Equals(
+                taskItem.GetMetadata(LogicalName),
+                taskItem.GetMetadata(ManifestResourceName)
+            )
+                ? taskItem.GetMetadata(TargetPath)
+                : NormalizePath(taskItem.GetMetadata(LogicalName));
 
-        private string GetAssemblyResourceName(ITaskItem taskItem) => string.Equals(taskItem.GetMetadata(LogicalName), taskItem.GetMetadata(ManifestResourceName)) ?
-            taskItem.GetMetadata(ManifestResourceName) :
-            taskItem.GetMetadata(LogicalName);
+        private string GetAssemblyResourceName(ITaskItem taskItem) =>
+            string.Equals(
+                taskItem.GetMetadata(LogicalName),
+                taskItem.GetMetadata(ManifestResourceName)
+            )
+                ? taskItem.GetMetadata(ManifestResourceName)
+                : taskItem.GetMetadata(LogicalName);
 
-        private string NormalizePath(string path) => Path.DirectorySeparatorChar == '\\' ?
-            path.Replace("/", "\\") : path.Replace("\\", "/");
+        private string NormalizePath(string path) =>
+            Path.DirectorySeparatorChar == '\\' ? path.Replace("/", "\\") : path.Replace("\\", "/");
     }
 }

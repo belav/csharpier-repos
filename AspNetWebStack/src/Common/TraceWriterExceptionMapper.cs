@@ -33,7 +33,9 @@ namespace System.Web.Http.Tracing
         {
             Contract.Assert(traceRecord != null);
 
-            HttpResponseException httpResponseException = ExtractHttpResponseException(traceRecord.Exception);
+            HttpResponseException httpResponseException = ExtractHttpResponseException(
+                traceRecord.Exception
+            );
             if (httpResponseException == null)
             {
                 return;
@@ -105,7 +107,11 @@ namespace System.Web.Http.Tracing
         /// </summary>
         /// <param name="exception">The exception.</param>
         /// <returns>The corresponding trace level if the exception represents an <see cref="HttpResponseException"/>.</returns>
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "shared source. called from a different assembly")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1811:AvoidUncalledPrivateCode",
+            Justification = "shared source. called from a different assembly"
+        )]
         public static TraceLevel? GetMappedTraceLevel(Exception exception)
         {
             HttpResponseException httpResponseException = ExtractHttpResponseException(exception);
@@ -162,10 +168,8 @@ namespace System.Web.Http.Tracing
             var aggregateException = exception as AggregateException;
             if (aggregateException != null)
             {
-                httpResponseException = aggregateException
-                    .Flatten()
-                    .InnerExceptions
-                    .Select(ExtractHttpResponseException)
+                httpResponseException = aggregateException.Flatten()
+                    .InnerExceptions.Select(ExtractHttpResponseException)
                     .Where(ex => ex != null && ex.Response != null)
                     .OrderByDescending(ex => ex.Response.StatusCode)
                     .FirstOrDefault();
@@ -201,21 +205,39 @@ namespace System.Web.Http.Tracing
 
                 if (httpError.TryGetValue(HttpErrorKeys.ExceptionTypeKey, out exceptionTypeObject))
                 {
-                    messages.Add(Error.Format(HttpErrorExceptionTypeFormat, indexText, exceptionTypeObject));
+                    messages.Add(
+                        Error.Format(HttpErrorExceptionTypeFormat, indexText, exceptionTypeObject)
+                    );
                 }
 
-                if (httpError.TryGetValue(HttpErrorKeys.ExceptionMessageKey, out exceptionMessageObject))
-                {
-                    messages.Add(Error.Format(HttpErrorExceptionMessageFormat, indexText, exceptionMessageObject));
+                if (
+                    httpError.TryGetValue(
+                        HttpErrorKeys.ExceptionMessageKey,
+                        out exceptionMessageObject
+                    )
+                ) {
+                    messages.Add(
+                        Error.Format(
+                            HttpErrorExceptionMessageFormat,
+                            indexText,
+                            exceptionMessageObject
+                        )
+                    );
                 }
 
                 if (httpError.TryGetValue(HttpErrorKeys.StackTraceKey, out stackTraceObject))
                 {
-                    messages.Add(Error.Format(HttpErrorStackTraceFormat, indexText, stackTraceObject));
+                    messages.Add(
+                        Error.Format(HttpErrorStackTraceFormat, indexText, stackTraceObject)
+                    );
                 }
 
-                if (!httpError.TryGetValue(HttpErrorKeys.InnerExceptionKey, out innerExceptionObject))
-                {
+                if (
+                    !httpError.TryGetValue(
+                        HttpErrorKeys.InnerExceptionKey,
+                        out innerExceptionObject
+                    )
+                ) {
                     break;
                 }
 
@@ -235,7 +257,13 @@ namespace System.Web.Http.Tracing
                 IEnumerable<string> errorList = pair.Value as IEnumerable<string>;
                 if (errorList != null)
                 {
-                    messages.Add(Error.Format(HttpErrorModelStatePairFormat, pair.Key, String.Join(", ", errorList)));
+                    messages.Add(
+                        Error.Format(
+                            HttpErrorModelStatePairFormat,
+                            pair.Key,
+                            String.Join(", ", errorList)
+                        )
+                    );
                 }
             }
 

@@ -64,7 +64,12 @@ namespace Microsoft.AspNetCore.StaticFiles
         {
             var provider = new FileExtensionContentTypeProvider();
             string contentType;
-            Assert.True(provider.TryGetContentType($"{new string(System.IO.Path.GetInvalidPathChars())}.txt", out contentType));
+            Assert.True(
+                provider.TryGetContentType(
+                    $"{new string(System.IO.Path.GetInvalidPathChars())}.txt",
+                    out contentType
+                )
+            );
         }
     }
 }

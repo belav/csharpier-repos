@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             Constraint = new Regex(
                 regexPattern,
                 RegexOptions.CultureInvariant | RegexOptions.IgnoreCase,
-                RegexMatchTimeout);
+                RegexMatchTimeout
+            );
         }
 
         /// <summary>
@@ -57,8 +58,8 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             IRouter? route,
             string routeKey,
             RouteValueDictionary values,
-            RouteDirection routeDirection)
-        {
+            RouteDirection routeDirection
+        ) {
             if (routeKey == null)
             {
                 throw new ArgumentNullException(nameof(routeKey));
@@ -69,10 +70,12 @@ namespace Microsoft.AspNetCore.Routing.Constraints
                 throw new ArgumentNullException(nameof(values));
             }
 
-            if (values.TryGetValue(routeKey, out var routeValue)
-                && routeValue != null)
+            if (values.TryGetValue(routeKey, out var routeValue) && routeValue != null)
             {
-                var parameterValueString = Convert.ToString(routeValue, CultureInfo.InvariantCulture)!;
+                var parameterValueString = Convert.ToString(
+                    routeValue,
+                    CultureInfo.InvariantCulture
+                )!;
 
                 return Constraint.IsMatch(parameterValueString);
             }

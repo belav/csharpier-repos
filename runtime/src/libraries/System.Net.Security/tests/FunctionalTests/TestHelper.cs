@@ -18,26 +18,24 @@ namespace System.Net.Security.Tests
 {
     public static class TestHelper
     {
-        private static readonly X509KeyUsageExtension s_eeKeyUsage =
-            new X509KeyUsageExtension(
-                X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.KeyEncipherment | X509KeyUsageFlags.DataEncipherment,
-                critical: false);
+        private static readonly X509KeyUsageExtension s_eeKeyUsage = new X509KeyUsageExtension(
+            X509KeyUsageFlags.DigitalSignature
+                | X509KeyUsageFlags.KeyEncipherment
+                | X509KeyUsageFlags.DataEncipherment,
+            critical: false
+        );
 
         private static readonly X509EnhancedKeyUsageExtension s_tlsServerEku =
             new X509EnhancedKeyUsageExtension(
-                new OidCollection
-                {
-                    new Oid("1.3.6.1.5.5.7.3.1", null)
-                },
-                false);
+                new OidCollection { new Oid("1.3.6.1.5.5.7.3.1", null) },
+                false
+            );
 
         private static readonly X509EnhancedKeyUsageExtension s_tlsClientEku =
             new X509EnhancedKeyUsageExtension(
-                new OidCollection
-                {
-                    new Oid("1.3.6.1.5.5.7.3.2", null)
-                },
-                false);
+                new OidCollection { new Oid("1.3.6.1.5.5.7.3.2", null) },
+                false
+            );
 
         private static readonly X509BasicConstraintsExtension s_eeConstraints =
             new X509BasicConstraintsExtension(false, false, 0, false);
@@ -59,26 +57,40 @@ namespace System.Net.Security.Tests
                 return GetConnectedTcpStreams();
             }
 
-            return ConnectedStreams.CreateBidirectional(initialBufferSize: 4096, maxBufferSize: int.MaxValue);
+            return ConnectedStreams.CreateBidirectional(
+                initialBufferSize: 4096,
+                maxBufferSize: int.MaxValue
+            );
         }
 
         internal static (NetworkStream ClientStream, NetworkStream ServerStream) GetConnectedTcpStreams()
         {
-            using (Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                Socket listener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
 
-                var clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                var clientSocket = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                );
                 clientSocket.Connect(listener.LocalEndPoint);
                 Socket serverSocket = listener.Accept();
 
                 serverSocket.NoDelay = true;
                 clientSocket.NoDelay = true;
 
-                return (new NetworkStream(clientSocket, ownsSocket: true), new NetworkStream(serverSocket, ownsSocket: true));
+                return (
+                    new NetworkStream(clientSocket, ownsSocket: true),
+                    new NetworkStream(serverSocket, ownsSocket: true)
+                );
             }
-
         }
 
         internal static void CleanupCertificates([CallerMemberName] string? testName = null)
@@ -86,8 +98,12 @@ namespace System.Net.Security.Tests
             string caName = $"O={testName}";
             try
             {
-                using (X509Store store = new X509Store(StoreName.CertificateAuthority, StoreLocation.LocalMachine))
-                {
+                using (
+                    X509Store store = new X509Store(
+                        StoreName.CertificateAuthority,
+                        StoreLocation.LocalMachine
+                    )
+                ) {
                     store.Open(OpenFlags.ReadWrite);
                     foreach (X509Certificate2 cert in store.Certificates)
                     {
@@ -98,12 +114,17 @@ namespace System.Net.Security.Tests
                     }
                 }
             }
-            catch { };
+            catch { }
+            ;
 
             try
             {
-                using (X509Store store = new X509Store(StoreName.CertificateAuthority, StoreLocation.CurrentUser))
-                {
+                using (
+                    X509Store store = new X509Store(
+                        StoreName.CertificateAuthority,
+                        StoreLocation.CurrentUser
+                    )
+                ) {
                     store.Open(OpenFlags.ReadWrite);
                     foreach (X509Certificate2 cert in store.Certificates)
                     {
@@ -114,11 +135,16 @@ namespace System.Net.Security.Tests
                     }
                 }
             }
-            catch { };
+            catch { }
+            ;
         }
 
-        internal static (X509Certificate2 certificate, X509Certificate2Collection) GenerateCertificates(string targetName, [CallerMemberName] string? testName = null, bool longChain = false, bool serverCertificate = true)
-        {
+        internal static (X509Certificate2 certificate, X509Certificate2Collection) GenerateCertificates(
+            string targetName,
+            [CallerMemberName] string? testName = null,
+            bool longChain = false,
+            bool serverCertificate = true
+        ) {
             const int keySize = 2048;
             if (PlatformDetection.IsWindows && testName != null)
             {
@@ -144,7 +170,8 @@ namespace System.Net.Security.Tests
                 subjectName: targetName,
                 testName: testName,
                 keySize: keySize,
-                extensions: extensions);
+                extensions: extensions
+            );
 
             if (longChain)
             {
@@ -153,25 +180,38 @@ namespace System.Net.Security.Tests
                 {
                     X509Certificate2 intermedPub2 = intermediate.CreateSubordinateCA(
                         $"CN=\"A SSL Test CA 2\", O=\"testName\"",
-                        intermedKey2);
+                        intermedKey2
+                    );
 
                     X509Certificate2 intermedCert2 = intermedPub2.CopyWithPrivateKey(intermedKey2);
                     intermedPub2.Dispose();
-                    CertificateAuthority intermediateAuthority2 = new CertificateAuthority(intermedCert2, null, null, null);
+                    CertificateAuthority intermediateAuthority2 = new CertificateAuthority(
+                        intermedCert2,
+                        null,
+                        null,
+                        null
+                    );
 
                     X509Certificate2 intermedPub3 = intermediateAuthority2.CreateSubordinateCA(
                         $"CN=\"A SSL Test CA 3\", O=\"testName\"",
-                        intermedKey3);
+                        intermedKey3
+                    );
 
                     X509Certificate2 intermedCert3 = intermedPub3.CopyWithPrivateKey(intermedKey3);
                     intermedPub3.Dispose();
-                    CertificateAuthority intermediateAuthority3 = new CertificateAuthority(intermedCert3, null, null, null);
+                    CertificateAuthority intermediateAuthority3 = new CertificateAuthority(
+                        intermedCert3,
+                        null,
+                        null,
+                        null
+                    );
 
                     RSA eeKey = (RSA)endEntity.PrivateKey;
                     endEntity = intermediateAuthority3.CreateEndEntity(
                         $"CN=\"A SSL Test\", O=\"testName\"",
                         eeKey,
-                        extensions);
+                        extensions
+                    );
 
                     endEntity = endEntity.CopyWithPrivateKey(eeKey);
 
@@ -223,15 +263,18 @@ namespace System.Net.Security.Tests
             await t;
         }
 
-        internal static string GetTestSNIName(string testMethodName, params SslProtocols?[] protocols)
-        {
+        internal static string GetTestSNIName(
+            string testMethodName,
+            params SslProtocols?[] protocols
+        ) {
             static string ProtocolToString(SslProtocols? protocol)
             {
                 return (protocol?.ToString() ?? "null").Replace(", ", "-");
             }
 
             var args = string.Join(".", protocols.Select(p => ProtocolToString(p)));
-            var name = testMethodName.Length > 63 ? testMethodName.Substring(0, 63) : testMethodName;
+            var name =
+                testMethodName.Length > 63 ? testMethodName.Substring(0, 63) : testMethodName;
 
             name = $"{name}.{args}";
             if (PlatformDetection.IsAndroid)

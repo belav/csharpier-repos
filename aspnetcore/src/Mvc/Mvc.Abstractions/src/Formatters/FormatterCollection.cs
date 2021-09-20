@@ -16,19 +16,14 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         /// <summary>
         /// Initializes a new instance of the <see cref="FormatterCollection{TFormatter}"/> class that is empty.
         /// </summary>
-        public FormatterCollection()
-        {
-        }
+        public FormatterCollection() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FormatterCollection{TFormatter}"/> class
         /// as a wrapper for the specified list.
         /// </summary>
         /// <param name="list">The list that is wrapped by the new collection.</param>
-        public FormatterCollection(IList<TFormatter> list)
-            : base(list)
-        {
-        }
+        public FormatterCollection(IList<TFormatter> list) : base(list) { }
 
         /// <summary>
         /// Removes all formatters of the specified type.

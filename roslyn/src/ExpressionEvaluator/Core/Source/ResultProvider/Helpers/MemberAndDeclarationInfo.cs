@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
     internal struct MemberAndDeclarationInfo
     {
-        public static readonly IComparer<MemberAndDeclarationInfo> Comparer = new MemberNameComparer();
+        public static readonly IComparer<MemberAndDeclarationInfo> Comparer =
+            new MemberNameComparer();
 
         private readonly MemberInfo _member;
 
@@ -71,8 +72,14 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         /// </summary>
         private readonly int _inheritanceLevel;
 
-        public MemberAndDeclarationInfo(MemberInfo member, DkmClrDebuggerBrowsableAttributeState? browsableState, DeclarationInfo info, int inheritanceLevel, bool canFavorite, bool isFavorite)
-        {
+        public MemberAndDeclarationInfo(
+            MemberInfo member,
+            DkmClrDebuggerBrowsableAttributeState? browsableState,
+            DeclarationInfo info,
+            int inheritanceLevel,
+            bool canFavorite,
+            bool isFavorite
+        ) {
             Debug.Assert(member != null);
 
             _member = member;
@@ -88,58 +95,37 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public Type DeclaringType
         {
-            get
-            {
-                return _member.DeclaringType;
-            }
+            get { return _member.DeclaringType; }
         }
 
         public bool IsPublic
         {
-            get
-            {
-                return _member.IsPublic();
-            }
+            get { return _member.IsPublic(); }
         }
 
         public bool IsStatic
         {
-            get
-            {
-                return IsMemberStatic(_member);
-            }
+            get { return IsMemberStatic(_member); }
         }
 
         public MemberTypes MemberType
         {
-            get
-            {
-                return _member.MemberType;
-            }
+            get { return _member.MemberType; }
         }
 
         public string Name
         {
-            get
-            {
-                return _member.Name;
-            }
+            get { return _member.Name; }
         }
 
         public Type Type
         {
-            get
-            {
-                return GetMemberType(_member);
-            }
+            get { return GetMemberType(_member); }
         }
 
         public Type OriginalDefinitionType
         {
-            get
-            {
-                return GetMemberType(_member.GetOriginalDefinition());
-            }
+            get { return GetMemberType(_member.GetOriginalDefinition()); }
         }
 
         private static Type GetMemberType(MemberInfo member)
@@ -233,8 +219,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     // to display more than one.
                     foreach (var accessor in accessors)
                     {
-                        foreach (var interfaceAccessor in accessor.GetExplicitInterfacesImplemented())
-                        {
+                        foreach (
+                            var interfaceAccessor in accessor.GetExplicitInterfacesImplemented()
+                        ) {
                             memberName = memberName.Substring(dotPos + 1);
                             return interfaceAccessor.DeclaringType;
                         }

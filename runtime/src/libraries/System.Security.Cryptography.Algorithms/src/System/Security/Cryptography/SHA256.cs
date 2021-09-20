@@ -26,7 +26,8 @@ namespace System.Security.Cryptography
         public static new SHA256 Create() => new Implementation();
 
         [RequiresUnreferencedCode(CryptoConfig.CreateFromNameUnreferencedCodeMessage)]
-        public static new SHA256? Create(string hashName) => (SHA256?)CryptoConfig.CreateFromName(hashName);
+        public static new SHA256? Create(string hashName) =>
+            (SHA256?)CryptoConfig.CreateFromName(hashName);
 
         /// <summary>
         /// Computes the hash of data using the SHA256 algorithm.
@@ -77,7 +78,6 @@ namespace System.Security.Cryptography
             return bytesWritten;
         }
 
-
         /// <summary>
         /// Attempts to compute the hash of data using the SHA256 algorithm.
         /// </summary>
@@ -90,15 +90,22 @@ namespace System.Security.Cryptography
         /// <see langword="false"/> if <paramref name="destination"/> is too small to hold the
         /// calculated hash, <see langword="true"/> otherwise.
         /// </returns>
-        public static bool TryHashData(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten)
-        {
+        public static bool TryHashData(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        ) {
             if (destination.Length < HashSizeBytes)
             {
                 bytesWritten = 0;
                 return false;
             }
 
-            bytesWritten = HashProviderDispenser.OneShotHashProvider.HashData(HashAlgorithmNames.SHA256, source, destination);
+            bytesWritten = HashProviderDispenser.OneShotHashProvider.HashData(
+                HashAlgorithmNames.SHA256,
+                source,
+                destination
+            );
             Debug.Assert(bytesWritten == HashSizeBytes);
 
             return true;
@@ -120,11 +127,12 @@ namespace System.Security.Cryptography
             protected sealed override void HashCore(ReadOnlySpan<byte> source) =>
                 _hashProvider.AppendHashData(source);
 
-            protected sealed override byte[] HashFinal() =>
-                _hashProvider.FinalizeHashAndReset();
+            protected sealed override byte[] HashFinal() => _hashProvider.FinalizeHashAndReset();
 
-            protected sealed override bool TryHashFinal(Span<byte> destination, out int bytesWritten) =>
-                _hashProvider.TryFinalizeHashAndReset(destination, out bytesWritten);
+            protected sealed override bool TryHashFinal(
+                Span<byte> destination,
+                out int bytesWritten
+            ) => _hashProvider.TryFinalizeHashAndReset(destination, out bytesWritten);
 
             public sealed override void Initialize()
             {

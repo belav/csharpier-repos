@@ -14,10 +14,15 @@ namespace System.CommandLine.Binding
 
         internal string? ErrorMessage { get; set; }
 
-        internal static FailedArgumentConversionResult Failure(IArgument argument, string error) => new FailedArgumentConversionResult(argument, error);
+        internal static FailedArgumentConversionResult Failure(IArgument argument, string error) =>
+            new FailedArgumentConversionResult(argument, error);
 
-        public static SuccessfulArgumentConversionResult Success(IArgument argument, object? value) => new SuccessfulArgumentConversionResult(argument, value);
+        public static SuccessfulArgumentConversionResult Success(
+            IArgument argument,
+            object? value
+        ) => new SuccessfulArgumentConversionResult(argument, value);
 
-        internal static NoArgumentConversionResult None(IArgument argument) => new NoArgumentConversionResult(argument);
+        internal static NoArgumentConversionResult None(IArgument argument) =>
+            new NoArgumentConversionResult(argument);
     }
 }

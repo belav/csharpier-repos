@@ -44,8 +44,11 @@ namespace System.Drawing
     {
         private Stream _stream;
 
-        public unsafe GdiPlusStreamHelper(Stream stream, bool seekToOrigin, bool makeSeekable = true)
-        {
+        public unsafe GdiPlusStreamHelper(
+            Stream stream,
+            bool seekToOrigin,
+            bool makeSeekable = true
+        ) {
             // Seeking required
             if (makeSeekable && !stream.CanSeek)
             {

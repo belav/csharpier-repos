@@ -51,8 +51,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 (WellKnownMemberNames.MultiplyOperatorName, OperatorPosition.Infix),
                 (WellKnownMemberNames.DivisionOperatorName, OperatorPosition.Infix),
                 (WellKnownMemberNames.ModulusOperatorName, OperatorPosition.Infix),
-                (WellKnownMemberNames.IncrementOperatorName, OperatorPosition.Prefix | OperatorPosition.Postfix),
-                (WellKnownMemberNames.DecrementOperatorName, OperatorPosition.Prefix | OperatorPosition.Postfix),
+                (
+                    WellKnownMemberNames.IncrementOperatorName,
+                    OperatorPosition.Prefix | OperatorPosition.Postfix
+                ),
+                (
+                    WellKnownMemberNames.DecrementOperatorName,
+                    OperatorPosition.Prefix | OperatorPosition.Postfix
+                ),
                 (WellKnownMemberNames.UnaryPlusOperatorName, OperatorPosition.Prefix),
                 (WellKnownMemberNames.UnaryNegationOperatorName, OperatorPosition.Prefix),
                 (WellKnownMemberNames.BitwiseAndOperatorName, OperatorPosition.Infix),
@@ -60,12 +66,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 (WellKnownMemberNames.ExclusiveOrOperatorName, OperatorPosition.Infix),
                 (WellKnownMemberNames.LeftShiftOperatorName, OperatorPosition.Infix),
                 (WellKnownMemberNames.RightShiftOperatorName, OperatorPosition.Infix),
-                (WellKnownMemberNames.OnesComplementOperatorName, OperatorPosition.Prefix));
+                (WellKnownMemberNames.OnesComplementOperatorName, OperatorPosition.Prefix)
+            );
 
         /// <summary>
         /// Mapping from operator name to info about it.
         /// </summary>
-        private static readonly Dictionary<string, (int sortOrder, OperatorPosition position)> s_operatorNameToInfo = new();
+        private static readonly Dictionary<
+            string,
+            (int sortOrder, OperatorPosition position)
+        > s_operatorNameToInfo = new();
 
         private static readonly CompletionItemRules s_operatorRules;
 
@@ -90,59 +100,98 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             }
 
             var opCharacters = ImmutableArray.CreateRange(filterCharacters);
-            s_operatorRules = CompletionItemRules.Default
-                .WithFilterCharacterRule(CharacterSetModificationRule.Create(CharacterSetModificationKind.Add, opCharacters))
-                .WithCommitCharacterRule(CharacterSetModificationRule.Create(CharacterSetModificationKind.Remove, opCharacters));
+            s_operatorRules = CompletionItemRules.Default.WithFilterCharacterRule(
+                    CharacterSetModificationRule.Create(
+                        CharacterSetModificationKind.Add,
+                        opCharacters
+                    )
+                )
+                .WithCommitCharacterRule(
+                    CharacterSetModificationRule.Create(
+                        CharacterSetModificationKind.Remove,
+                        opCharacters
+                    )
+                );
         }
 
-        private void AddOperatorGroup(CompletionContext context, string opName, IEnumerable<ISymbol> operators)
-        {
+        private void AddOperatorGroup(
+            CompletionContext context,
+            string opName,
+            IEnumerable<ISymbol> operators
+        ) {
             if (!s_operatorNameToInfo.TryGetValue(opName, out var sortOrderAndPosition))
                 return;
 
             var displayText = GetOperatorText(opName);
 
-            context.AddItem(SymbolCompletionItem.CreateWithSymbolId(
-                displayText: displayText,
-                displayTextSuffix: null,
-                inlineDescription: GetOperatorInlineDescription(opName),
-                filterText: displayText,
-                sortText: SortText(OperatorSortingGroupIndex, $"{sortOrderAndPosition.sortOrder:000}"),
-                symbols: operators.ToImmutableArray(),
-                rules: s_operatorRules,
-                contextPosition: context.Position,
-                properties: OperatorProperties.Add(OperatorName, opName)));
+            context.AddItem(
+                SymbolCompletionItem.CreateWithSymbolId(
+                    displayText: displayText,
+                    displayTextSuffix: null,
+                    inlineDescription: GetOperatorInlineDescription(opName),
+                    filterText: displayText,
+                    sortText: SortText(
+                        OperatorSortingGroupIndex,
+                        $"{sortOrderAndPosition.sortOrder:000}"
+                    ),
+                    symbols: operators.ToImmutableArray(),
+                    rules: s_operatorRules,
+                    contextPosition: context.Position,
+                    properties: OperatorProperties.Add(OperatorName, opName)
+                )
+            );
         }
 
-        private static string GetOperatorText(string opName)
-            => SyntaxFacts.GetText(SyntaxFacts.GetOperatorKind(opName));
+        private static string GetOperatorText(string opName) =>
+            SyntaxFacts.GetText(SyntaxFacts.GetOperatorKind(opName));
 
         private async Task<CompletionChange> GetOperatorChangeAsync(
-            Document document, CompletionItem item, CancellationToken cancellationToken)
-        {
+            Document document,
+            CompletionItem item,
+            CancellationToken cancellationToken
+        ) {
             var opName = item.Properties[OperatorName];
             var opPosition = GetOperatorPosition(opName);
 
             if (opPosition.HasFlag(OperatorPosition.Infix))
-                return await ReplaceTextAfterOperatorAsync(document, item, text: $" {item.DisplayText} ", cancellationToken).ConfigureAwait(false);
+                return await ReplaceTextAfterOperatorAsync(
+                        document,
+                        item,
+                        text: $" {item.DisplayText} ",
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
             if (opPosition.HasFlag(OperatorPosition.Postfix))
-                return await ReplaceTextAfterOperatorAsync(document, item, text: $"{item.DisplayText} ", cancellationToken).ConfigureAwait(false);
+                return await ReplaceTextAfterOperatorAsync(
+                        document,
+                        item,
+                        text: $"{item.DisplayText} ",
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
             if (opPosition.HasFlag(OperatorPosition.Prefix))
             {
                 var position = SymbolCompletionItem.GetContextPosition(item);
-                var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+                var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var (dotLikeToken, expressionStart) = GetDotAndExpressionStart(root, position);
 
                 // Place the new operator before the expression, and delete the dot.
                 var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-                var replacement = item.DisplayText + text.ToString(TextSpan.FromBounds(expressionStart, dotLikeToken.SpanStart));
+                var replacement =
+                    item.DisplayText
+                    + text.ToString(TextSpan.FromBounds(expressionStart, dotLikeToken.SpanStart));
                 var fullTextChange = new TextChange(
                     TextSpan.FromBounds(
                         expressionStart,
-                        dotLikeToken.Kind() == SyntaxKind.DotDotToken ? dotLikeToken.Span.Start + 1 : dotLikeToken.Span.End),
-                    replacement);
+                        dotLikeToken.Kind() == SyntaxKind.DotDotToken
+                          ? dotLikeToken.Span.Start + 1
+                          : dotLikeToken.Span.End
+                    ),
+                    replacement
+                );
 
                 var newPosition = expressionStart + replacement.Length;
                 return CompletionChange.Create(fullTextChange, newPosition);
@@ -151,11 +200,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             throw ExceptionUtilities.UnexpectedValue(opPosition);
         }
 
-        private static OperatorPosition GetOperatorPosition(string operatorName)
-            => s_operatorNameToInfo[operatorName].position;
+        private static OperatorPosition GetOperatorPosition(string operatorName) =>
+            s_operatorNameToInfo[operatorName].position;
 
-        private static Task<CompletionDescription> GetOperatorDescriptionAsync(Document document, CompletionItem item, CancellationToken cancellationToken)
-            => SymbolCompletionItem.GetDescriptionAsync(item, document, cancellationToken);
+        private static Task<CompletionDescription> GetOperatorDescriptionAsync(
+            Document document,
+            CompletionItem item,
+            CancellationToken cancellationToken
+        ) => SymbolCompletionItem.GetDescriptionAsync(item, document, cancellationToken);
 
         private static string GetOperatorInlineDescription(string opName)
         {

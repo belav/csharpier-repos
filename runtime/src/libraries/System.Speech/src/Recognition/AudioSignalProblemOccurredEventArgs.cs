@@ -9,8 +9,12 @@ namespace System.Speech.Recognition
     {
         #region Constructors
 
-        internal AudioSignalProblemOccurredEventArgs(AudioSignalProblem audioSignalProblem, int audioLevel, TimeSpan audioPosition, TimeSpan recognizerPosition)
-        {
+        internal AudioSignalProblemOccurredEventArgs(
+            AudioSignalProblem audioSignalProblem,
+            int audioLevel,
+            TimeSpan audioPosition,
+            TimeSpan recognizerPosition
+        ) {
             _audioSignalProblem = audioSignalProblem;
             _audioLevel = audioLevel;
             _audioPosition = audioPosition;
@@ -45,7 +49,6 @@ namespace System.Speech.Recognition
         private TimeSpan _recognizerPosition;
         private TimeSpan _audioPosition;
         private int _audioLevel;
-
         #endregion
     }
 }

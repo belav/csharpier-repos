@@ -47,8 +47,7 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
         [Benchmark]
         public virtual async Task LoadAll()
         {
-            var query = _context.Products
-                .ApplyTracking(Tracking);
+            var query = _context.Products.ApplyTracking(Tracking);
 
             if (Async)
             {
@@ -63,8 +62,7 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
         [Benchmark]
         public virtual async Task Where()
         {
-            var query = _context.Products
-                .ApplyTracking(Tracking)
+            var query = _context.Products.ApplyTracking(Tracking)
                 .Where(p => p.ActualStockLevel < 5);
 
             if (Async)
@@ -80,9 +78,7 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
         [Benchmark]
         public virtual async Task OrderBy()
         {
-            var query = _context.Products
-                .ApplyTracking(Tracking)
-                .OrderBy(p => p.ActualStockLevel);
+            var query = _context.Products.ApplyTracking(Tracking).OrderBy(p => p.ActualStockLevel);
 
             if (Async)
             {
@@ -112,8 +108,7 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
         [Benchmark]
         public virtual async Task SkipTake()
         {
-            var query = _context.Products
-                .ApplyTracking(Tracking)
+            var query = _context.Products.ApplyTracking(Tracking)
                 .OrderBy(p => p.ProductId)
                 .Skip(500)
                 .Take(500);
@@ -132,10 +127,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
         // [Benchmark]
         public virtual async Task GroupBy()
         {
-            var query = _context.Products
-                .GroupBy(p => p.ActualStockLevel)
-                .Select(
-                    g => new { ActualStockLevel = g.Key, Products = g });
+            var query = _context.Products.GroupBy(p => p.ActualStockLevel)
+                .Select(g => new { ActualStockLevel = g.Key, Products = g });
 
             if (Async)
             {
@@ -150,9 +143,7 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
         [Benchmark]
         public virtual async Task Include()
         {
-            var query = _context.Customers
-                .ApplyTracking(Tracking)
-                .Include(c => c.Orders);
+            var query = _context.Customers.ApplyTracking(Tracking).Include(c => c.Orders);
 
             if (Async)
             {
@@ -167,9 +158,9 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
         [Benchmark]
         public virtual async Task Projection()
         {
-            var query = _context.Products
-                .Select(
-                    p => new
+            var query = _context.Products.Select(
+                p =>
+                    new
                     {
                         p.ProductId,
                         p.Name,
@@ -178,7 +169,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
                         p.Retail,
                         p.CurrentPrice,
                         p.ActualStockLevel
-                    });
+                    }
+            );
 
             if (Async)
             {
@@ -193,9 +185,9 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
         [Benchmark]
         public virtual async Task ProjectionAcrossNavigation()
         {
-            var query = _context.Orders
-                .Select(
-                    o => new
+            var query = _context.Orders.Select(
+                o =>
+                    new
                     {
                         CustomerTitle = o.Customer.Title,
                         CustomerFirstName = o.Customer.FirstName,
@@ -205,7 +197,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
                         OrderDiscountReason = o.DiscountReason,
                         OrderTax = o.Tax,
                         OrderSpecialRequests = o.SpecialRequests
-                    });
+                    }
+            );
 
             if (Async)
             {

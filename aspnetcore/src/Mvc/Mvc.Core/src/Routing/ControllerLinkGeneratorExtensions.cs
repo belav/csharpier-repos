@@ -38,7 +38,11 @@ namespace Microsoft.AspNetCore.Routing
         /// names from <c>RouteOptions</c>.
         /// </param>
         /// <returns>A URI with an absolute path, or <c>null</c> if a URI cannot be created.</returns>
-        [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+        [SuppressMessage(
+            "ApiDesign",
+            "RS0026:Do not add multiple public overloads with optional parameters",
+            Justification = "Required to maintain compatibility"
+        )]
         public static string? GetPathByAction(
             this LinkGenerator generator,
             HttpContext httpContext,
@@ -47,8 +51,8 @@ namespace Microsoft.AspNetCore.Routing
             object? values = default,
             PathString? pathBase = default,
             FragmentString fragment = default,
-            LinkOptions? options = default)
-        {
+            LinkOptions? options = default
+        ) {
             if (generator == null)
             {
                 throw new ArgumentNullException(nameof(generator));
@@ -67,7 +71,8 @@ namespace Microsoft.AspNetCore.Routing
                 address.AmbientValues,
                 pathBase,
                 fragment,
-                options);
+                options
+            );
         }
 
         /// <summary>
@@ -84,7 +89,11 @@ namespace Microsoft.AspNetCore.Routing
         /// names from <c>RouteOptions</c>.
         /// </param>
         /// <returns>A URI with an absolute path, or <c>null</c> if a URI cannot be created.</returns>
-        [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+        [SuppressMessage(
+            "ApiDesign",
+            "RS0026:Do not add multiple public overloads with optional parameters",
+            Justification = "Required to maintain compatibility"
+        )]
         public static string? GetPathByAction(
             this LinkGenerator generator,
             string action,
@@ -92,8 +101,8 @@ namespace Microsoft.AspNetCore.Routing
             object? values = default,
             PathString pathBase = default,
             FragmentString fragment = default,
-            LinkOptions? options = default)
-        {
+            LinkOptions? options = default
+        ) {
             if (generator == null)
             {
                 throw new ArgumentNullException(nameof(generator));
@@ -110,7 +119,13 @@ namespace Microsoft.AspNetCore.Routing
             }
 
             var address = CreateAddress(httpContext: null, action, controller, values);
-            return generator.GetPathByAddress<RouteValuesAddress>(address, address.ExplicitValues, pathBase, fragment, options);
+            return generator.GetPathByAddress<RouteValuesAddress>(
+                address,
+                address.ExplicitValues,
+                pathBase,
+                fragment,
+                options
+            );
         }
 
         /// <summary>
@@ -150,7 +165,11 @@ namespace Microsoft.AspNetCore.Routing
         /// your deployment environment.
         /// </para>
         /// </remarks>
-        [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+        [SuppressMessage(
+            "ApiDesign",
+            "RS0026:Do not add multiple public overloads with optional parameters",
+            Justification = "Required to maintain compatibility"
+        )]
         public static string? GetUriByAction(
             this LinkGenerator generator,
             HttpContext httpContext,
@@ -161,8 +180,8 @@ namespace Microsoft.AspNetCore.Routing
             HostString? host = default,
             PathString? pathBase = default,
             FragmentString fragment = default,
-            LinkOptions? options = default)
-        {
+            LinkOptions? options = default
+        ) {
             if (generator == null)
             {
                 throw new ArgumentNullException(nameof(generator));
@@ -183,7 +202,8 @@ namespace Microsoft.AspNetCore.Routing
                 host,
                 pathBase,
                 fragment,
-                options);
+                options
+            );
         }
 
         /// <summary>
@@ -210,7 +230,11 @@ namespace Microsoft.AspNetCore.Routing
         /// your deployment environment.
         /// </para>
         /// </remarks>
-        [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+        [SuppressMessage(
+            "ApiDesign",
+            "RS0026:Do not add multiple public overloads with optional parameters",
+            Justification = "Required to maintain compatibility"
+        )]
         public static string? GetUriByAction(
             this LinkGenerator generator,
             string action,
@@ -220,8 +244,8 @@ namespace Microsoft.AspNetCore.Routing
             HostString host,
             PathString pathBase = default,
             FragmentString fragment = default,
-            LinkOptions? options = default)
-        {
+            LinkOptions? options = default
+        ) {
             if (generator == null)
             {
                 throw new ArgumentNullException(nameof(generator));
@@ -238,15 +262,32 @@ namespace Microsoft.AspNetCore.Routing
             }
 
             var address = CreateAddress(httpContext: null, action, controller, values);
-            return generator.GetUriByAddress<RouteValuesAddress>(address, address.ExplicitValues, scheme, host, pathBase, fragment, options);
+            return generator.GetUriByAddress<RouteValuesAddress>(
+                address,
+                address.ExplicitValues,
+                scheme,
+                host,
+                pathBase,
+                fragment,
+                options
+            );
         }
 
-        private static RouteValuesAddress CreateAddress(HttpContext? httpContext, string? action, string? controller, object? values)
-        {
+        private static RouteValuesAddress CreateAddress(
+            HttpContext? httpContext,
+            string? action,
+            string? controller,
+            object? values
+        ) {
             var explicitValues = new RouteValueDictionary(values);
             var ambientValues = GetAmbientValues(httpContext);
 
-            UrlHelperBase.NormalizeRouteValuesForAction(action, controller, explicitValues, ambientValues);
+            UrlHelperBase.NormalizeRouteValuesForAction(
+                action,
+                controller,
+                explicitValues,
+                ambientValues
+            );
 
             return new RouteValuesAddress()
             {

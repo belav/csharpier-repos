@@ -81,10 +81,7 @@ namespace Microsoft.CodeAnalysis
 
         internal EntityHandle Handle
         {
-            get
-            {
-                return EntityHandle.AssemblyDefinition;
-            }
+            get { return EntityHandle.AssemblyDefinition; }
         }
 
         internal PEModule ManifestModule
@@ -94,18 +91,12 @@ namespace Microsoft.CodeAnalysis
 
         internal ImmutableArray<PEModule> Modules
         {
-            get
-            {
-                return _modules;
-            }
+            get { return _modules; }
         }
 
         internal AssemblyIdentity Identity
         {
-            get
-            {
-                return _identity;
-            }
+            get { return _identity; }
         }
 
         internal bool ContainsNoPiaLocalTypes()
@@ -129,7 +120,9 @@ namespace Microsoft.CodeAnalysis
 
         private Dictionary<string, List<ImmutableArray<byte>>> BuildInternalsVisibleToMap()
         {
-            var ivtMap = new Dictionary<string, List<ImmutableArray<byte>>>(StringComparer.OrdinalIgnoreCase);
+            var ivtMap = new Dictionary<string, List<ImmutableArray<byte>>>(
+                StringComparer.OrdinalIgnoreCase
+            );
             foreach (string attrVal in Modules[0].GetInternalsVisibleToAttributeValues(Handle))
             {
                 AssemblyIdentity identity;
@@ -157,10 +150,15 @@ namespace Microsoft.CodeAnalysis
             return ivtMap;
         }
 
-        internal IEnumerable<ImmutableArray<byte>> GetInternalsVisibleToPublicKeys(string simpleName)
-        {
+        internal IEnumerable<ImmutableArray<byte>> GetInternalsVisibleToPublicKeys(
+            string simpleName
+        ) {
             if (_lazyInternalsVisibleToMap == null)
-                Interlocked.CompareExchange(ref _lazyInternalsVisibleToMap, BuildInternalsVisibleToMap(), null);
+                Interlocked.CompareExchange(
+                    ref _lazyInternalsVisibleToMap,
+                    BuildInternalsVisibleToMap(),
+                    null
+                );
 
             List<ImmutableArray<byte>> result;
 

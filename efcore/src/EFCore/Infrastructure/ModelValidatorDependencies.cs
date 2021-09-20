@@ -60,8 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         [EntityFrameworkInternal]
         public ModelValidatorDependencies(
             ITypeMappingSource typeMappingSource,
-            IMemberClassifier memberClassifier)
-        {
+            IMemberClassifier memberClassifier
+        ) {
             Check.NotNull(typeMappingSource, nameof(typeMappingSource));
             Check.NotNull(memberClassifier, nameof(memberClassifier));
 

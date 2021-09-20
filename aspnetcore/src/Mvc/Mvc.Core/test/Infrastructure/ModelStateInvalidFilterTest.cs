@@ -75,10 +75,15 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         private static ActionExecutingContext GetActionExecutingContext()
         {
             return new ActionExecutingContext(
-                new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor()),
+                new ActionContext(
+                    new DefaultHttpContext(),
+                    new RouteData(),
+                    new ActionDescriptor()
+                ),
                 Array.Empty<IFilterMetadata>(),
                 new Dictionary<string, object>(),
-                new object());
+                new object()
+            );
         }
     }
 }

@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis
 
         private const StringComparison _hintNameComparison = StringComparison.OrdinalIgnoreCase;
 
-        private static readonly StringComparer s_hintNameComparer = StringComparer.OrdinalIgnoreCase;
+        private static readonly StringComparer s_hintNameComparer =
+            StringComparer.OrdinalIgnoreCase;
 
         internal AdditionalSourcesCollection(string fileExtension)
         {
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis
             for (int i = 0; i < hintName.Length; i++)
             {
                 char c = hintName[i];
-                if (!UnicodeCharacterUtilities.IsIdentifierPartCharacter(c)
+                if (
+                    !UnicodeCharacterUtilities.IsIdentifierPartCharacter(c)
                     && c != '.'
                     && c != ','
                     && c != '-'
@@ -51,29 +53,42 @@ namespace Microsoft.CodeAnalysis
                     && c != '['
                     && c != ']'
                     && c != '{'
-                    && c != '}')
-                {
-                    throw new ArgumentException(string.Format(CodeAnalysisResources.HintNameInvalidChar, c, i), nameof(hintName));
+                    && c != '}'
+                ) {
+                    throw new ArgumentException(
+                        string.Format(CodeAnalysisResources.HintNameInvalidChar, c, i),
+                        nameof(hintName)
+                    );
                 }
             }
 
             hintName = AppendExtensionIfRequired(hintName);
             if (this.Contains(hintName))
             {
-                throw new ArgumentException(CodeAnalysisResources.HintNameUniquePerGenerator, nameof(hintName));
+                throw new ArgumentException(
+                    CodeAnalysisResources.HintNameUniquePerGenerator,
+                    nameof(hintName)
+                );
             }
 
             if (source.Encoding is null)
             {
-                throw new ArgumentException(CodeAnalysisResources.SourceTextRequiresEncoding, nameof(source));
+                throw new ArgumentException(
+                    CodeAnalysisResources.SourceTextRequiresEncoding,
+                    nameof(source)
+                );
             }
 
             _sourcesAdded.Add(new GeneratedSourceText(hintName, source));
         }
 
-        public void AddRange(ImmutableArray<GeneratedSourceText> texts) => _sourcesAdded.AddRange(texts);
+        public void AddRange(ImmutableArray<GeneratedSourceText> texts) =>
+            _sourcesAdded.AddRange(texts);
 
-        public void AddRange(ImmutableArray<GeneratedSyntaxTree> trees) => _sourcesAdded.AddRange(trees.SelectAsArray(t => new GeneratedSourceText(t.HintName, t.Text)));
+        public void AddRange(ImmutableArray<GeneratedSyntaxTree> trees) =>
+            _sourcesAdded.AddRange(
+                trees.SelectAsArray(t => new GeneratedSourceText(t.HintName, t.Text))
+            );
 
         public void RemoveSource(string hintName)
         {
@@ -101,7 +116,8 @@ namespace Microsoft.CodeAnalysis
             return false;
         }
 
-        internal ImmutableArray<GeneratedSourceText> ToImmutableAndFree() => _sourcesAdded.ToImmutableAndFree();
+        internal ImmutableArray<GeneratedSourceText> ToImmutableAndFree() =>
+            _sourcesAdded.ToImmutableAndFree();
 
         private string AppendExtensionIfRequired(string hintName)
         {

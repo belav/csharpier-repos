@@ -18,8 +18,12 @@ namespace Microsoft.AspNetCore.Components
         /// <param name="suffix">The suffix value. For example, set this to <c>value</c> for <c>bind-value</c>, or set this to <see langword="null" /> for <c>bind</c>.</param>
         /// <param name="valueAttribute">The name of the value attribute to be bound.</param>
         /// <param name="changeAttribute">The name of an attribute that will register an associated change event.</param>
-        public BindElementAttribute(string element, string? suffix, string valueAttribute, string changeAttribute)
-        {
+        public BindElementAttribute(
+            string element,
+            string? suffix,
+            string valueAttribute,
+            string changeAttribute
+        ) {
             if (element == null)
             {
                 throw new ArgumentNullException(nameof(element));
@@ -40,7 +44,7 @@ namespace Microsoft.AspNetCore.Components
             ChangeAttribute = changeAttribute;
             Suffix = suffix;
         }
-        
+
         /// <summary>
         /// Gets the tag name of the element.
         /// </summary>

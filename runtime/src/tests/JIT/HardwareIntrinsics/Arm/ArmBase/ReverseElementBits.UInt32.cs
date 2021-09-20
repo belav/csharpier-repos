@@ -97,7 +97,6 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             Succeeded = true;
 
-            
             _fld = TestLibrary.Generator.GetUInt32();
             _data = TestLibrary.Generator.GetUInt32();
         }
@@ -121,10 +120,17 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(ArmBase).GetMethod(nameof(ArmBase.ReverseElementBits), new Type[] { typeof(UInt32) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.ReadUnaligned<UInt32>(ref Unsafe.As<UInt32, byte>(ref _data))
-                                     });
+            var result = typeof(ArmBase).GetMethod(
+                    nameof(ArmBase.ReverseElementBits),
+                    new Type[] { typeof(UInt32) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.ReadUnaligned<UInt32>(ref Unsafe.As<UInt32, byte>(ref _data))
+                    }
+                );
 
             ValidateResult(_data, (UInt32)result);
         }
@@ -133,9 +139,7 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = ArmBase.ReverseElementBits(
-                _clsVar
-            );
+            var result = ArmBase.ReverseElementBits(_clsVar);
 
             ValidateResult(_clsVar, result);
         }
@@ -207,15 +211,20 @@ namespace JIT.HardwareIntrinsics.Arm
             }
         }
 
-        private void ValidateResult(UInt32 data, UInt32 result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            UInt32 data,
+            UInt32 result,
+            [CallerMemberName] string method = ""
+        ) {
             var isUnexpectedResult = false;
 
             isUnexpectedResult = Helpers.ReverseElementBits(data) != result;
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(ArmBase)}.{nameof(ArmBase.ReverseElementBits)}<UInt32>(UInt32): ReverseElementBits failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(ArmBase)}.{nameof(ArmBase.ReverseElementBits)}<UInt32>(UInt32): ReverseElementBits failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"    data: {data}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);

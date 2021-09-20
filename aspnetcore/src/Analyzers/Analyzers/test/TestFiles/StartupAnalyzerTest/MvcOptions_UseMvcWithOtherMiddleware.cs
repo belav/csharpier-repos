@@ -22,9 +22,7 @@ namespace Microsoft.AspNetCore.Analyzers.TestFiles.StartupAnalyzerTest
             /*MM*/app.UseMvc();
 
             app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-            });
+            app.UseEndpoints(endpoints => { });
         }
     }
 }

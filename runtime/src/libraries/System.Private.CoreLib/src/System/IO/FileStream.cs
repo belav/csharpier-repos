@@ -21,33 +21,47 @@ namespace System.IO
 
         private readonly FileStreamStrategy _strategy;
 
-        [Obsolete("This constructor has been deprecated.  Please use new FileStream(SafeFileHandle handle, FileAccess access) instead.  https://go.microsoft.com/fwlink/?linkid=14202")]
+        [Obsolete(
+            "This constructor has been deprecated.  Please use new FileStream(SafeFileHandle handle, FileAccess access) instead.  https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         public FileStream(IntPtr handle, FileAccess access)
-            : this(handle, access, true, DefaultBufferSize, false)
-        {
-        }
+            : this(handle, access, true, DefaultBufferSize, false) { }
 
-        [Obsolete("This constructor has been deprecated.  Please use new FileStream(SafeFileHandle handle, FileAccess access) instead, and optionally make a new SafeFileHandle with ownsHandle=false if needed.  https://go.microsoft.com/fwlink/?linkid=14202")]
+        [Obsolete(
+            "This constructor has been deprecated.  Please use new FileStream(SafeFileHandle handle, FileAccess access) instead, and optionally make a new SafeFileHandle with ownsHandle=false if needed.  https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         public FileStream(IntPtr handle, FileAccess access, bool ownsHandle)
-            : this(handle, access, ownsHandle, DefaultBufferSize, false)
-        {
-        }
+            : this(handle, access, ownsHandle, DefaultBufferSize, false) { }
 
-        [Obsolete("This constructor has been deprecated.  Please use new FileStream(SafeFileHandle handle, FileAccess access, int bufferSize) instead, and optionally make a new SafeFileHandle with ownsHandle=false if needed.  https://go.microsoft.com/fwlink/?linkid=14202")]
+        [Obsolete(
+            "This constructor has been deprecated.  Please use new FileStream(SafeFileHandle handle, FileAccess access, int bufferSize) instead, and optionally make a new SafeFileHandle with ownsHandle=false if needed.  https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         public FileStream(IntPtr handle, FileAccess access, bool ownsHandle, int bufferSize)
-            : this(handle, access, ownsHandle, bufferSize, false)
-        {
-        }
+            : this(handle, access, ownsHandle, bufferSize, false) { }
 
-        [Obsolete("This constructor has been deprecated.  Please use new FileStream(SafeFileHandle handle, FileAccess access, int bufferSize, bool isAsync) instead, and optionally make a new SafeFileHandle with ownsHandle=false if needed.  https://go.microsoft.com/fwlink/?linkid=14202")]
-        public FileStream(IntPtr handle, FileAccess access, bool ownsHandle, int bufferSize, bool isAsync)
-        {
+        [Obsolete(
+            "This constructor has been deprecated.  Please use new FileStream(SafeFileHandle handle, FileAccess access, int bufferSize, bool isAsync) instead, and optionally make a new SafeFileHandle with ownsHandle=false if needed.  https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
+        public FileStream(
+            IntPtr handle,
+            FileAccess access,
+            bool ownsHandle,
+            int bufferSize,
+            bool isAsync
+        ) {
             SafeFileHandle safeHandle = new SafeFileHandle(handle, ownsHandle: ownsHandle);
             try
             {
                 ValidateHandle(safeHandle, access, bufferSize, isAsync);
 
-                _strategy = FileStreamHelpers.ChooseStrategy(this, safeHandle, access, DefaultShare, bufferSize, isAsync);
+                _strategy = FileStreamHelpers.ChooseStrategy(
+                    this,
+                    safeHandle,
+                    access,
+                    DefaultShare,
+                    bufferSize,
+                    isAsync
+                );
             }
             catch
             {
@@ -63,8 +77,12 @@ namespace System.IO
             }
         }
 
-        private static void ValidateHandle(SafeFileHandle handle, FileAccess access, int bufferSize, bool isAsync)
-        {
+        private static void ValidateHandle(
+            SafeFileHandle handle,
+            FileAccess access,
+            int bufferSize,
+            bool isAsync
+        ) {
             if (handle.IsInvalid)
             {
                 throw new ArgumentException(SR.Arg_InvalidHandle, nameof(handle));
@@ -75,7 +93,10 @@ namespace System.IO
             }
             else if (bufferSize <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(bufferSize), SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(bufferSize),
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
             }
             else if (handle.IsClosed)
             {
@@ -88,49 +109,78 @@ namespace System.IO
         }
 
         public FileStream(SafeFileHandle handle, FileAccess access)
-            : this(handle, access, DefaultBufferSize)
-        {
-        }
+            : this(handle, access, DefaultBufferSize) { }
 
         public FileStream(SafeFileHandle handle, FileAccess access, int bufferSize)
-            : this(handle, access, bufferSize, FileStreamHelpers.GetDefaultIsAsync(handle, DefaultIsAsync))
-        {
-        }
+            : this(
+                handle,
+                access,
+                bufferSize,
+                FileStreamHelpers.GetDefaultIsAsync(handle, DefaultIsAsync)
+            ) { }
 
         public FileStream(SafeFileHandle handle, FileAccess access, int bufferSize, bool isAsync)
         {
             ValidateHandle(handle, access, bufferSize, isAsync);
 
-            _strategy = FileStreamHelpers.ChooseStrategy(this, handle, access, DefaultShare, bufferSize, isAsync);
+            _strategy = FileStreamHelpers.ChooseStrategy(
+                this,
+                handle,
+                access,
+                DefaultShare,
+                bufferSize,
+                isAsync
+            );
         }
 
         public FileStream(string path, FileMode mode)
-            : this(path, mode, mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite, DefaultShare, DefaultBufferSize, DefaultIsAsync)
-        {
-        }
+            : this(
+                path,
+                mode,
+                mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite,
+                DefaultShare,
+                DefaultBufferSize,
+                DefaultIsAsync
+            ) { }
 
         public FileStream(string path, FileMode mode, FileAccess access)
-            : this(path, mode, access, DefaultShare, DefaultBufferSize, DefaultIsAsync)
-        {
-        }
+            : this(path, mode, access, DefaultShare, DefaultBufferSize, DefaultIsAsync) { }
 
         public FileStream(string path, FileMode mode, FileAccess access, FileShare share)
-            : this(path, mode, access, share, DefaultBufferSize, DefaultIsAsync)
-        {
-        }
+            : this(path, mode, access, share, DefaultBufferSize, DefaultIsAsync) { }
 
-        public FileStream(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize)
-            : this(path, mode, access, share, bufferSize, DefaultIsAsync)
-        {
-        }
+        public FileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize
+        ) : this(path, mode, access, share, bufferSize, DefaultIsAsync) { }
 
-        public FileStream(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, bool useAsync)
-            : this(path, mode, access, share, bufferSize, useAsync ? FileOptions.Asynchronous : FileOptions.None)
-        {
-        }
+        public FileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize,
+            bool useAsync
+        ) : this(
+            path,
+            mode,
+            access,
+            share,
+            bufferSize,
+            useAsync ? FileOptions.Asynchronous : FileOptions.None
+        ) { }
 
-        public FileStream(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, FileOptions options)
-        {
+        public FileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize,
+            FileOptions options
+        ) {
             if (path == null)
             {
                 throw new ArgumentNullException(nameof(path), SR.ArgumentNull_Path);
@@ -152,8 +202,9 @@ namespace System.IO
             {
                 badArg = nameof(access);
             }
-            else if (tempshare < FileShare.None || tempshare > (FileShare.ReadWrite | FileShare.Delete))
-            {
+            else if (
+                tempshare < FileShare.None || tempshare > (FileShare.ReadWrite | FileShare.Delete)
+            ) {
                 badArg = nameof(share);
             }
 
@@ -163,22 +214,45 @@ namespace System.IO
             }
 
             // NOTE: any change to FileOptions enum needs to be matched here in the error validation
-            if (options != FileOptions.None && (options & ~(FileOptions.WriteThrough | FileOptions.Asynchronous | FileOptions.RandomAccess | FileOptions.DeleteOnClose | FileOptions.SequentialScan | FileOptions.Encrypted | (FileOptions)0x20000000 /* NoBuffering */)) != 0)
-            {
+            if (
+                options != FileOptions.None
+                && (
+                    options
+                    & ~(
+                        FileOptions.WriteThrough
+                        | FileOptions.Asynchronous
+                        | FileOptions.RandomAccess
+                        | FileOptions.DeleteOnClose
+                        | FileOptions.SequentialScan
+                        | FileOptions.Encrypted
+                        | (FileOptions)0x20000000 /* NoBuffering */
+                    )
+                ) != 0
+            ) {
                 throw new ArgumentOutOfRangeException(nameof(options), SR.ArgumentOutOfRange_Enum);
             }
             else if (bufferSize <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(bufferSize), SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(bufferSize),
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
             }
 
             // Write access validation
             if ((access & FileAccess.Write) == 0)
             {
-                if (mode == FileMode.Truncate || mode == FileMode.CreateNew || mode == FileMode.Create || mode == FileMode.Append)
-                {
+                if (
+                    mode == FileMode.Truncate
+                    || mode == FileMode.CreateNew
+                    || mode == FileMode.Create
+                    || mode == FileMode.Append
+                ) {
                     // No write access, mode and access disagree but flag access since mode comes first
-                    throw new ArgumentException(SR.Format(SR.Argument_InvalidFileModeAndAccessCombo, mode, access), nameof(access));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_InvalidFileModeAndAccessCombo, mode, access),
+                        nameof(access)
+                    );
                 }
             }
 
@@ -188,13 +262,26 @@ namespace System.IO
             }
             else if ((access & FileAccess.Write) == FileAccess.Write)
             {
-                SerializationInfo.ThrowIfDeserializationInProgress("AllowFileWrites", ref s_cachedSerializationSwitch);
+                SerializationInfo.ThrowIfDeserializationInProgress(
+                    "AllowFileWrites",
+                    ref s_cachedSerializationSwitch
+                );
             }
 
-            _strategy = FileStreamHelpers.ChooseStrategy(this, path, mode, access, share, bufferSize, options);
+            _strategy = FileStreamHelpers.ChooseStrategy(
+                this,
+                path,
+                mode,
+                access,
+                share,
+                bufferSize,
+                options
+            );
         }
 
-        [Obsolete("This property has been deprecated.  Please use FileStream's SafeFileHandle property instead.  https://go.microsoft.com/fwlink/?linkid=14202")]
+        [Obsolete(
+            "This property has been deprecated.  Please use FileStream's SafeFileHandle property instead.  https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         public virtual IntPtr Handle => _strategy.Handle;
 
         [UnsupportedOSPlatform("macos")]
@@ -202,7 +289,10 @@ namespace System.IO
         {
             if (position < 0 || length < 0)
             {
-                throw new ArgumentOutOfRangeException(position < 0 ? nameof(position) : nameof(length), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    position < 0 ? nameof(position) : nameof(length),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             else if (_strategy.IsClosed)
             {
@@ -217,7 +307,10 @@ namespace System.IO
         {
             if (position < 0 || length < 0)
             {
-                throw new ArgumentOutOfRangeException(position < 0 ? nameof(position) : nameof(length), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    position < 0 ? nameof(position) : nameof(length),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             else if (_strategy.IsClosed)
             {
@@ -250,8 +343,12 @@ namespace System.IO
 
         public override int Read(Span<byte> buffer) => _strategy.Read(buffer);
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             ValidateBufferArguments(buffer, offset, count);
 
             if (cancellationToken.IsCancellationRequested)
@@ -266,8 +363,10 @@ namespace System.IO
             return _strategy.ReadAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
-        {
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        ) {
             if (cancellationToken.IsCancellationRequested)
             {
                 return ValueTask.FromCanceled<int>(cancellationToken);
@@ -289,8 +388,12 @@ namespace System.IO
 
         public override void Write(ReadOnlySpan<byte> buffer) => _strategy.Write(buffer);
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             ValidateBufferArguments(buffer, offset, count);
 
             if (cancellationToken.IsCancellationRequested)
@@ -305,8 +408,10 @@ namespace System.IO
             return _strategy.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
-        {
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        ) {
             if (cancellationToken.IsCancellationRequested)
             {
                 return ValueTask.FromCanceled(cancellationToken);
@@ -367,7 +472,10 @@ namespace System.IO
         {
             if (value < 0)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.value, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.value,
+                    ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             else if (_strategy.IsClosed)
             {
@@ -431,7 +539,10 @@ namespace System.IO
             {
                 if (value < 0)
                 {
-                    ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.value, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);
+                    ThrowHelper.ThrowArgumentOutOfRangeException(
+                        ExceptionArgument.value,
+                        ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
+                    );
                 }
 
                 _strategy.Seek(value, SeekOrigin.Begin);
@@ -457,13 +568,22 @@ namespace System.IO
 
         public override ValueTask DisposeAsync() => _strategy.DisposeAsync();
 
-        public override void CopyTo(Stream destination, int bufferSize) => _strategy.CopyTo(destination, bufferSize);
+        public override void CopyTo(Stream destination, int bufferSize) =>
+            _strategy.CopyTo(destination, bufferSize);
 
-        public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
-            => _strategy.CopyToAsync(destination, bufferSize, cancellationToken);
+        public override Task CopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        ) => _strategy.CopyToAsync(destination, bufferSize, cancellationToken);
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
-        {
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) {
             ValidateBufferArguments(buffer, offset, count);
 
             if (_strategy.IsClosed)
@@ -488,8 +608,13 @@ namespace System.IO
             return _strategy.EndRead(asyncResult);
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
-        {
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) {
             ValidateBufferArguments(buffer, offset, count);
 
             if (_strategy.IsClosed)
@@ -518,37 +643,62 @@ namespace System.IO
 
         public override long Seek(long offset, SeekOrigin origin) => _strategy.Seek(offset, origin);
 
-        internal Task BaseFlushAsync(CancellationToken cancellationToken)
-            => base.FlushAsync(cancellationToken);
+        internal Task BaseFlushAsync(CancellationToken cancellationToken) =>
+            base.FlushAsync(cancellationToken);
 
         internal int BaseRead(Span<byte> buffer) => base.Read(buffer);
 
-        internal Task<int> BaseReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-            => base.ReadAsync(buffer, offset, count, cancellationToken);
+        internal Task<int> BaseReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) => base.ReadAsync(buffer, offset, count, cancellationToken);
 
-        internal ValueTask<int> BaseReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
-            => base.ReadAsync(buffer, cancellationToken);
+        internal ValueTask<int> BaseReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        ) => base.ReadAsync(buffer, cancellationToken);
 
         internal void BaseWrite(ReadOnlySpan<byte> buffer) => base.Write(buffer);
 
-        internal Task BaseWriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-            => base.WriteAsync(buffer, offset, count, cancellationToken);
+        internal Task BaseWriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) => base.WriteAsync(buffer, offset, count, cancellationToken);
 
-        internal ValueTask BaseWriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
-            => base.WriteAsync(buffer, cancellationToken);
+        internal ValueTask BaseWriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        ) => base.WriteAsync(buffer, cancellationToken);
 
         internal ValueTask BaseDisposeAsync() => base.DisposeAsync();
 
-        internal Task BaseCopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
-            => base.CopyToAsync(destination, bufferSize, cancellationToken);
+        internal Task BaseCopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        ) => base.CopyToAsync(destination, bufferSize, cancellationToken);
 
-        internal IAsyncResult BaseBeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
-            => base.BeginRead(buffer, offset, count, callback, state);
+        internal IAsyncResult BaseBeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) => base.BeginRead(buffer, offset, count, callback, state);
 
         internal int BaseEndRead(IAsyncResult asyncResult) => base.EndRead(asyncResult);
 
-        internal IAsyncResult BaseBeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
-            => base.BeginWrite(buffer, offset, count, callback, state);
+        internal IAsyncResult BaseBeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) => base.BeginWrite(buffer, offset, count, callback, state);
 
         internal void BaseEndWrite(IAsyncResult asyncResult) => base.EndWrite(asyncResult);
     }

@@ -20,17 +20,22 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
     [Guid(Guids.RoslynOptionPageFeatureManagerFeaturesIdString)]
     internal class InternalFeaturesOnOffPage : AbstractOptionPage
     {
-        protected override AbstractOptionPageControl CreateOptionPage(IServiceProvider serviceProvider, OptionStore optionStore)
-        {
-            return new InternalFeaturesOptionsControl(nameof(InternalFeatureOnOffOptions), optionStore);
+        protected override AbstractOptionPageControl CreateOptionPage(
+            IServiceProvider serviceProvider,
+            OptionStore optionStore
+        ) {
+            return new InternalFeaturesOptionsControl(
+                nameof(InternalFeatureOnOffOptions),
+                optionStore
+            );
         }
 
         internal class InternalFeaturesOptionsControl : InternalOptionsControl
         {
-            public InternalFeaturesOptionsControl(string featureOptionName, OptionStore optionStore)
-                : base(featureOptionName, optionStore)
-            {
-            }
+            public InternalFeaturesOptionsControl(
+                string featureOptionName,
+                OptionStore optionStore
+            ) : base(featureOptionName, optionStore) { }
 
             protected override void AddOptions(Panel panel)
             {
@@ -45,7 +50,9 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
                 BindToOption(textBox, ForceLowMemoryMode.SizeInMegabytes);
                 lowMemoryGroup.Children.Add(textBox);
 
-                lowMemoryGroup.Children.Add(new TextBlock { Text = "megabytes of extra memory in devenv.exe" });
+                lowMemoryGroup.Children.Add(
+                    new TextBlock { Text = "megabytes of extra memory in devenv.exe" }
+                );
 
                 panel.Children.Add(lowMemoryGroup);
 

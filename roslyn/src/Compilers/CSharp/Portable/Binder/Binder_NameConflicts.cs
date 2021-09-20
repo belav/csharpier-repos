@@ -10,13 +10,18 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal partial class Binder
     {
-        private bool ValidateLambdaParameterNameConflictsInScope(Location location, string name, BindingDiagnosticBag diagnostics)
-        {
+        private bool ValidateLambdaParameterNameConflictsInScope(
+            Location location,
+            string name,
+            BindingDiagnosticBag diagnostics
+        ) {
             return ValidateNameConflictsInScope(null, location, name, diagnostics);
         }
 
-        internal bool ValidateDeclarationNameConflictsInScope(Symbol symbol, BindingDiagnosticBag diagnostics)
-        {
+        internal bool ValidateDeclarationNameConflictsInScope(
+            Symbol symbol,
+            BindingDiagnosticBag diagnostics
+        ) {
             Location location = GetLocation(symbol);
             return ValidateNameConflictsInScope(symbol, location, symbol.Name, diagnostics);
         }
@@ -31,8 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<TypeParameterSymbol> typeParameters,
             ImmutableArray<ParameterSymbol> parameters,
             bool allowShadowingNames,
-            BindingDiagnosticBag diagnostics)
-        {
+            BindingDiagnosticBag diagnostics
+        ) {
             PooledHashSet<string>? tpNames = null;
             if (!typeParameters.IsDefaultOrEmpty)
             {
@@ -71,7 +76,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (tpNames != null && tpNames.Contains(name))
                     {
                         // CS0412: 'X': a parameter or local variable cannot have the same name as a method type parameter
-                        diagnostics.Add(ErrorCode.ERR_LocalSameNameAsTypeParam, GetLocation(p), name);
+                        diagnostics.Add(
+                            ErrorCode.ERR_LocalSameNameAsTypeParam,
+                            GetLocation(p),
+                            name
+                        );
                     }
 
                     if (!pNames.Add(name))
@@ -93,14 +102,20 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <remarks>
         /// Don't call this one directly - call one of the helpers.
         /// </remarks>
-        private bool ValidateNameConflictsInScope(Symbol? symbol, Location location, string name, BindingDiagnosticBag diagnostics)
-        {
+        private bool ValidateNameConflictsInScope(
+            Symbol? symbol,
+            Location location,
+            string name,
+            BindingDiagnosticBag diagnostics
+        ) {
             if (string.IsNullOrEmpty(name))
             {
                 return false;
             }
 
-            bool allowShadowing = Compilation.IsFeatureEnabled(MessageID.IDS_FeatureNameShadowingInNestedFunctions);
+            bool allowShadowing = Compilation.IsFeatureEnabled(
+                MessageID.IDS_FeatureNameShadowingInNestedFunctions
+            );
 
             for (Binder? binder = this; binder != null; binder = binder.Next)
             {
@@ -143,8 +158,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case SymbolKind.Namespace:
                     return true;
                 default:
-                    return containingMemberOrLambda.ContainingSymbol?.Kind == SymbolKind.NamedType &&
-                           this.Next?.ContainingMemberOrLambda != containingMemberOrLambda;
+                    return containingMemberOrLambda.ContainingSymbol?.Kind == SymbolKind.NamedType
+                        && this.Next?.ContainingMemberOrLambda != containingMemberOrLambda;
             }
         }
     }

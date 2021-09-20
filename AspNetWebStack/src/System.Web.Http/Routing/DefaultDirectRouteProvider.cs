@@ -33,10 +33,10 @@ namespace System.Web.Http.Routing
         /// instances, then route entries will be created for the controller and associated actions.
         /// </remarks>
         public virtual IReadOnlyList<RouteEntry> GetDirectRoutes(
-            HttpControllerDescriptor controllerDescriptor, 
+            HttpControllerDescriptor controllerDescriptor,
             IReadOnlyList<HttpActionDescriptor> actionDescriptors,
-            IInlineConstraintResolver constraintResolver)
-        {
+            IInlineConstraintResolver constraintResolver
+        ) {
             List<RouteEntry> entries = new List<RouteEntry>();
 
             List<HttpActionDescriptor> actionsWithoutRoutes = new List<HttpActionDescriptor>();
@@ -47,7 +47,11 @@ namespace System.Web.Http.Routing
 
                 if (factories != null && factories.Count > 0)
                 {
-                    IReadOnlyCollection<RouteEntry> actionEntries = GetActionDirectRoutes(action, factories, constraintResolver);
+                    IReadOnlyCollection<RouteEntry> actionEntries = GetActionDirectRoutes(
+                        action,
+                        factories,
+                        constraintResolver
+                    );
                     if (actionEntries != null)
                     {
                         entries.AddRange(actionEntries);
@@ -62,14 +66,16 @@ namespace System.Web.Http.Routing
 
             if (actionsWithoutRoutes.Count > 0)
             {
-                IReadOnlyList<IDirectRouteFactory> controllerFactories = GetControllerRouteFactories(controllerDescriptor);
+                IReadOnlyList<IDirectRouteFactory> controllerFactories =
+                    GetControllerRouteFactories(controllerDescriptor);
                 if (controllerFactories != null && controllerFactories.Count > 0)
                 {
                     IReadOnlyCollection<RouteEntry> controllerEntries = GetControllerDirectRoutes(
                         controllerDescriptor,
-                        actionsWithoutRoutes, 
-                        controllerFactories, 
-                        constraintResolver);
+                        actionsWithoutRoutes,
+                        controllerFactories,
+                        constraintResolver
+                    );
 
                     if (controllerEntries != null)
                     {
@@ -89,11 +95,14 @@ namespace System.Web.Http.Routing
         /// <remarks>
         /// The implementation returns <see cref="IDirectRouteFactory"/> instances based on attributes on the controller.
         /// </remarks>
-        protected virtual IReadOnlyList<IDirectRouteFactory> GetControllerRouteFactories(HttpControllerDescriptor controllerDescriptor)
-        {
-            Collection<IDirectRouteFactory> newFactories = controllerDescriptor.GetCustomAttributes<IDirectRouteFactory>(inherit: false);
+        protected virtual IReadOnlyList<IDirectRouteFactory> GetControllerRouteFactories(
+            HttpControllerDescriptor controllerDescriptor
+        ) {
+            Collection<IDirectRouteFactory> newFactories =
+                controllerDescriptor.GetCustomAttributes<IDirectRouteFactory>(inherit: false);
 
-            Collection<IHttpRouteInfoProvider> oldProviders = controllerDescriptor.GetCustomAttributes<IHttpRouteInfoProvider>(inherit: false);
+            Collection<IHttpRouteInfoProvider> oldProviders =
+                controllerDescriptor.GetCustomAttributes<IHttpRouteInfoProvider>(inherit: false);
 
             List<IDirectRouteFactory> combined = new List<IDirectRouteFactory>();
             combined.AddRange(newFactories);
@@ -120,20 +129,26 @@ namespace System.Web.Http.Routing
         /// The implementation returns <see cref="IDirectRouteFactory"/> instances based on attributes on the action. Returns
         /// null if the action was defined on a base class of this controller.
         /// </remarks>
-        protected virtual IReadOnlyList<IDirectRouteFactory> GetActionRouteFactories(HttpActionDescriptor actionDescriptor)
-        {
+        protected virtual IReadOnlyList<IDirectRouteFactory> GetActionRouteFactories(
+            HttpActionDescriptor actionDescriptor
+        ) {
             // Ignore the Route attributes from inherited actions.
-            ReflectedHttpActionDescriptor reflectedActionDescriptor = actionDescriptor as ReflectedHttpActionDescriptor;
-            if (reflectedActionDescriptor != null &&
-                reflectedActionDescriptor.MethodInfo != null &&
-                reflectedActionDescriptor.MethodInfo.DeclaringType != actionDescriptor.ControllerDescriptor.ControllerType)
-            {
+            ReflectedHttpActionDescriptor reflectedActionDescriptor =
+                actionDescriptor as ReflectedHttpActionDescriptor;
+            if (
+                reflectedActionDescriptor != null
+                && reflectedActionDescriptor.MethodInfo != null
+                && reflectedActionDescriptor.MethodInfo.DeclaringType
+                    != actionDescriptor.ControllerDescriptor.ControllerType
+            ) {
                 return null;
             }
 
-            Collection<IDirectRouteFactory> newFactories = actionDescriptor.GetCustomAttributes<IDirectRouteFactory>(inherit: false);
+            Collection<IDirectRouteFactory> newFactories =
+                actionDescriptor.GetCustomAttributes<IDirectRouteFactory>(inherit: false);
 
-            Collection<IHttpRouteInfoProvider> oldProviders = actionDescriptor.GetCustomAttributes<IHttpRouteInfoProvider>(inherit: false);
+            Collection<IHttpRouteInfoProvider> oldProviders =
+                actionDescriptor.GetCustomAttributes<IHttpRouteInfoProvider>(inherit: false);
 
             List<IDirectRouteFactory> combined = new List<IDirectRouteFactory>();
             combined.AddRange(newFactories);
@@ -164,14 +179,15 @@ namespace System.Web.Http.Routing
             HttpControllerDescriptor controllerDescriptor,
             IReadOnlyList<HttpActionDescriptor> actionDescriptors,
             IReadOnlyList<IDirectRouteFactory> factories,
-            IInlineConstraintResolver constraintResolver)
-        {
+            IInlineConstraintResolver constraintResolver
+        ) {
             return CreateRouteEntries(
-                GetRoutePrefix(controllerDescriptor), 
-                factories, 
-                actionDescriptors, 
-                constraintResolver, 
-                targetIsAction: false);
+                GetRoutePrefix(controllerDescriptor),
+                factories,
+                actionDescriptors,
+                constraintResolver,
+                targetIsAction: false
+            );
         }
 
         /// <summary>
@@ -183,16 +199,17 @@ namespace System.Web.Http.Routing
         /// <param name="constraintResolver">The constraint resolver.</param>
         /// <returns>A set of route entries.</returns>
         protected virtual IReadOnlyList<RouteEntry> GetActionDirectRoutes(
-            HttpActionDescriptor actionDescriptor, 
+            HttpActionDescriptor actionDescriptor,
             IReadOnlyList<IDirectRouteFactory> factories,
-            IInlineConstraintResolver constraintResolver)
-        {
+            IInlineConstraintResolver constraintResolver
+        ) {
             return CreateRouteEntries(
-                GetRoutePrefix(actionDescriptor.ControllerDescriptor), 
-                factories, 
-                new HttpActionDescriptor[] { actionDescriptor }, 
-                constraintResolver, 
-                targetIsAction: true);
+                GetRoutePrefix(actionDescriptor.ControllerDescriptor),
+                factories,
+                new HttpActionDescriptor[] { actionDescriptor },
+                constraintResolver,
+                targetIsAction: true
+            );
         }
 
         /// <summary>
@@ -202,7 +219,8 @@ namespace System.Web.Http.Routing
         /// <returns>The route prefix or null.</returns>
         protected virtual string GetRoutePrefix(HttpControllerDescriptor controllerDescriptor)
         {
-            Collection<IRoutePrefix> attributes = controllerDescriptor.GetCustomAttributes<IRoutePrefix>(inherit: false);
+            Collection<IRoutePrefix> attributes =
+                controllerDescriptor.GetCustomAttributes<IRoutePrefix>(inherit: false);
 
             if (attributes == null)
             {
@@ -211,7 +229,10 @@ namespace System.Web.Http.Routing
 
             if (attributes.Count > 1)
             {
-                string errorMessage = Error.Format(SRResources.RoutePrefix_CannotSupportMultiRoutePrefix, controllerDescriptor.ControllerType.FullName);
+                string errorMessage = Error.Format(
+                    SRResources.RoutePrefix_CannotSupportMultiRoutePrefix,
+                    controllerDescriptor.ControllerType.FullName
+                );
                 throw new InvalidOperationException(errorMessage);
             }
 
@@ -226,14 +247,18 @@ namespace System.Web.Http.Routing
                     {
                         string errorMessage = Error.Format(
                             SRResources.RoutePrefix_PrefixCannotBeNull,
-                            controllerDescriptor.ControllerType.FullName);
+                            controllerDescriptor.ControllerType.FullName
+                        );
                         throw new InvalidOperationException(errorMessage);
                     }
 
                     if (prefix.EndsWith("/", StringComparison.Ordinal))
                     {
-                        throw Error.InvalidOperation(SRResources.AttributeRoutes_InvalidPrefix, prefix,
-                            controllerDescriptor.ControllerName);
+                        throw Error.InvalidOperation(
+                            SRResources.AttributeRoutes_InvalidPrefix,
+                            prefix,
+                            controllerDescriptor.ControllerName
+                        );
                     }
 
                     return prefix;
@@ -246,14 +271,20 @@ namespace System.Web.Http.Routing
         private static IReadOnlyList<RouteEntry> CreateRouteEntries(
             string prefix,
             IReadOnlyCollection<IDirectRouteFactory> factories,
-            IReadOnlyCollection<HttpActionDescriptor> actions, 
-            IInlineConstraintResolver constraintResolver, 
-            bool targetIsAction)
-        {
+            IReadOnlyCollection<HttpActionDescriptor> actions,
+            IInlineConstraintResolver constraintResolver,
+            bool targetIsAction
+        ) {
             List<RouteEntry> entries = new List<RouteEntry>();
             foreach (IDirectRouteFactory factory in factories)
             {
-                RouteEntry entry = CreateRouteEntry(prefix, factory, actions, constraintResolver, targetIsAction);
+                RouteEntry entry = CreateRouteEntry(
+                    prefix,
+                    factory,
+                    actions,
+                    constraintResolver,
+                    targetIsAction
+                );
                 entries.Add(entry);
             }
 
@@ -265,17 +296,25 @@ namespace System.Web.Http.Routing
             IDirectRouteFactory factory,
             IReadOnlyCollection<HttpActionDescriptor> actions,
             IInlineConstraintResolver constraintResolver,
-            bool targetIsAction)
-        {
+            bool targetIsAction
+        ) {
             Contract.Assert(factory != null);
 
-            DirectRouteFactoryContext context = new DirectRouteFactoryContext(prefix, actions, constraintResolver, targetIsAction);
+            DirectRouteFactoryContext context = new DirectRouteFactoryContext(
+                prefix,
+                actions,
+                constraintResolver,
+                targetIsAction
+            );
             RouteEntry entry = factory.CreateRoute(context);
 
             if (entry == null)
             {
-                throw Error.InvalidOperation(SRResources.TypeMethodMustNotReturnNull,
-                    typeof(IDirectRouteFactory).Name, "CreateRoute");
+                throw Error.InvalidOperation(
+                    SRResources.TypeMethodMustNotReturnNull,
+                    typeof(IDirectRouteFactory).Name,
+                    "CreateRoute"
+                );
             }
 
             DirectRouteBuilder.ValidateRouteEntry(entry);

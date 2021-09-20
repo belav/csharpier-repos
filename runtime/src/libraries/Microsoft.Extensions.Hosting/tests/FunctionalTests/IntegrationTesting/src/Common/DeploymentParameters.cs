@@ -15,7 +15,8 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
     {
         public DeploymentParameters()
         {
-            var configAttribute = Assembly.GetCallingAssembly().GetCustomAttribute<AssemblyConfigurationAttribute>();
+            var configAttribute = Assembly.GetCallingAssembly()
+                .GetCustomAttribute<AssemblyConfigurationAttribute>();
             if (configAttribute != null && !string.IsNullOrEmpty(configAttribute.Configuration))
             {
                 Configuration = configAttribute.Configuration;
@@ -24,7 +25,8 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
 
         public DeploymentParameters(TestVariant variant)
         {
-            var configAttribute = Assembly.GetCallingAssembly().GetCustomAttribute<AssemblyConfigurationAttribute>();
+            var configAttribute = Assembly.GetCallingAssembly()
+                .GetCustomAttribute<AssemblyConfigurationAttribute>();
             if (configAttribute != null && !string.IsNullOrEmpty(configAttribute.Configuration))
             {
                 Configuration = configAttribute.Configuration;
@@ -44,8 +46,8 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
         public DeploymentParameters(
             string applicationPath,
             RuntimeFlavor runtimeFlavor,
-            RuntimeArchitecture runtimeArchitecture)
-        {
+            RuntimeArchitecture runtimeArchitecture
+        ) {
             if (string.IsNullOrEmpty(applicationPath))
             {
                 throw new ArgumentException("Value cannot be null.", nameof(applicationPath));
@@ -53,14 +55,17 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
 
             if (!Directory.Exists(applicationPath))
             {
-                throw new DirectoryNotFoundException(string.Format("Application path {0} does not exist.", applicationPath));
+                throw new DirectoryNotFoundException(
+                    string.Format("Application path {0} does not exist.", applicationPath)
+                );
             }
 
             ApplicationPath = applicationPath;
             ApplicationName = new DirectoryInfo(ApplicationPath).Name;
             RuntimeFlavor = runtimeFlavor;
 
-            var configAttribute = Assembly.GetCallingAssembly().GetCustomAttribute<AssemblyConfigurationAttribute>();
+            var configAttribute = Assembly.GetCallingAssembly()
+                .GetCustomAttribute<AssemblyConfigurationAttribute>();
             if (configAttribute != null && !string.IsNullOrEmpty(configAttribute.Configuration))
             {
                 Configuration = configAttribute.Configuration;
@@ -90,7 +95,7 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
 
         public ApplicationPublisher ApplicationPublisher { get; set; }
 
-        public RuntimeFlavor RuntimeFlavor { get; set;  }
+        public RuntimeFlavor RuntimeFlavor { get; set; }
 
         public RuntimeArchitecture RuntimeArchitecture { get; set; } = RuntimeArchitecture.x64;
 
@@ -133,12 +138,14 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
         /// Environment variables to be set before starting the host.
         /// Not applicable for IIS Scenarios.
         /// </summary>
-        public IDictionary<string, string> EnvironmentVariables { get; } = new Dictionary<string, string>();
+        public IDictionary<string, string> EnvironmentVariables { get; } =
+            new Dictionary<string, string>();
 
         /// <summary>
         /// Environment variables used when invoking dotnet publish.
         /// </summary>
-        public IDictionary<string, string> PublishEnvironmentVariables { get; } = new Dictionary<string, string>();
+        public IDictionary<string, string> PublishEnvironmentVariables { get; } =
+            new Dictionary<string, string>();
 
         /// <summary>
         /// For any application level cleanup to be invoked after performing host cleanup.
@@ -148,10 +155,11 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
         public override string ToString()
         {
             return string.Format(
-                    "[Variation] :: Runtime={0}, Arch={1}, Publish={2}",
-                    RuntimeFlavor,
-                    RuntimeArchitecture,
-                    PublishApplicationBeforeDeployment);
+                "[Variation] :: Runtime={0}, Arch={1}, Publish={2}",
+                RuntimeFlavor,
+                RuntimeArchitecture,
+                PublishApplicationBeforeDeployment
+            );
         }
     }
 }

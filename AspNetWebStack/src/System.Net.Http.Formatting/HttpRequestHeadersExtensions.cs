@@ -72,15 +72,24 @@ namespace System.Net.Http
         /// <param name="headers">The request headers</param>
         /// <param name="name">The name of the <see cref="CookieState"/> to match.</param>
         /// <returns>A collection of <see cref="CookieHeaderValue"/> instances with a matching <see cref="CookieState"/>.</returns>
-        public static Collection<CookieHeaderValue> GetCookies(this HttpRequestHeaders headers, string name)
-        {
+        public static Collection<CookieHeaderValue> GetCookies(
+            this HttpRequestHeaders headers,
+            string name
+        ) {
             if (name == null)
             {
                 throw Error.ArgumentNull("name");
             }
 
             IEnumerable<CookieHeaderValue> cookieHeaderValues = GetCookies(headers);
-            CookieHeaderValue[] matches = cookieHeaderValues.Where(header => header.Cookies.Any(state => String.Equals(state.Name, name, StringComparison.OrdinalIgnoreCase))).ToArray();
+            CookieHeaderValue[] matches = cookieHeaderValues.Where(
+                    header =>
+                        header.Cookies.Any(
+                            state =>
+                                String.Equals(state.Name, name, StringComparison.OrdinalIgnoreCase)
+                        )
+                )
+                .ToArray();
             return new Collection<CookieHeaderValue>(matches);
         }
     }

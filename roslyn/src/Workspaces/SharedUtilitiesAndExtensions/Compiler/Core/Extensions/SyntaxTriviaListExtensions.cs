@@ -8,8 +8,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static class SyntaxTriviaListExtensions
     {
-        public static SyntaxTrivia? FirstOrNull(this SyntaxTriviaList triviaList, Func<SyntaxTrivia, bool> predicate)
-        {
+        public static SyntaxTrivia? FirstOrNull(
+            this SyntaxTriviaList triviaList,
+            Func<SyntaxTrivia, bool> predicate
+        ) {
             foreach (var trivia in triviaList)
             {
                 if (predicate(trivia))
@@ -21,7 +23,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return null;
         }
 
-        public static SyntaxTrivia LastOrDefault(this SyntaxTriviaList triviaList)
-            => triviaList.Any() ? triviaList.Last() : default;
+        public static SyntaxTrivia LastOrDefault(this SyntaxTriviaList triviaList) =>
+            triviaList.Any() ? triviaList.Last() : default;
     }
 }

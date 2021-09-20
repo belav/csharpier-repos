@@ -18,8 +18,10 @@ namespace Microsoft.EntityFrameworkCore.Internal
     /// </summary>
     public static class QueryableExtensions
     {
-        internal static readonly MethodInfo LeftJoinMethodInfo = typeof(QueryableExtensions).GetTypeInfo()
-            .GetDeclaredMethods(nameof(LeftJoin)).Single(mi => mi.GetParameters().Length == 5);
+        internal static readonly MethodInfo LeftJoinMethodInfo =
+            typeof(QueryableExtensions).GetTypeInfo()
+                .GetDeclaredMethods(nameof(LeftJoin))
+                .Single(mi => mi.GetParameters().Length == 5);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -32,8 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             IEnumerable<TInner> inner,
             Expression<Func<TOuter, TKey>> outerKeySelector,
             Expression<Func<TInner, TKey>> innerKeySelector,
-            Expression<Func<TOuter, TInner, TResult>> resultSelector)
-        {
+            Expression<Func<TOuter, TInner, TResult>> resultSelector
+        ) {
             throw new NotSupportedException();
         }
     }

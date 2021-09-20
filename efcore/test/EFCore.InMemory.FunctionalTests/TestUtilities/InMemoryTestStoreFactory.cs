@@ -10,21 +10,16 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
     {
         public static InMemoryTestStoreFactory Instance { get; } = new();
 
-        protected InMemoryTestStoreFactory()
-        {
-        }
+        protected InMemoryTestStoreFactory() { }
 
-        public TestStore Create(string storeName)
-            => InMemoryTestStore.Create(storeName);
+        public TestStore Create(string storeName) => InMemoryTestStore.Create(storeName);
 
-        public TestStore GetOrCreate(string storeName)
-            => InMemoryTestStore.GetOrCreate(storeName);
+        public TestStore GetOrCreate(string storeName) => InMemoryTestStore.GetOrCreate(storeName);
 
-        public IServiceCollection AddProviderServices(IServiceCollection serviceCollection)
-            => serviceCollection.AddEntityFrameworkInMemoryDatabase()
-                .AddSingleton<TestStoreIndex>();
+        public IServiceCollection AddProviderServices(IServiceCollection serviceCollection) =>
+            serviceCollection.AddEntityFrameworkInMemoryDatabase().AddSingleton<TestStoreIndex>();
 
-        public ListLoggerFactory CreateListLoggerFactory(Func<string, bool> shouldLogCategory)
-            => new(shouldLogCategory);
+        public ListLoggerFactory CreateListLoggerFactory(Func<string, bool> shouldLogCategory) =>
+            new(shouldLogCategory);
     }
 }

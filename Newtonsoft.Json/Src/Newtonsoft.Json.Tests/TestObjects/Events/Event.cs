@@ -77,8 +77,15 @@ namespace Newtonsoft.Json.Tests.TestObjects.Events
             }
         }
 
-        public Event(string sublocation, int userId, EventType type, string summary, string details, string stackTrace, string tag)
-        {
+        public Event(
+            string sublocation,
+            int userId,
+            EventType type,
+            string summary,
+            string details,
+            string stackTrace,
+            string tag
+        ) {
             _sublocation = sublocation;
             _userId = userId;
             _type = type;
@@ -101,7 +108,16 @@ namespace Newtonsoft.Json.Tests.TestObjects.Events
 
         public override string ToString()
         {
-            return string.Format("{{ sublocation = {0}, userId = {1}, type = {2}, summary = {3}, details = {4}, stackTrace = {5}, tag = {6} }}", _sublocation, _userId, _type, _summary, _details, _stackTrace, _tag);
+            return string.Format(
+                "{{ sublocation = {0}, userId = {1}, type = {2}, summary = {3}, details = {4}, stackTrace = {5}, tag = {6} }}",
+                _sublocation,
+                _userId,
+                _type,
+                _summary,
+                _details,
+                _stackTrace,
+                _tag
+            );
         }
 
         public string sublocation

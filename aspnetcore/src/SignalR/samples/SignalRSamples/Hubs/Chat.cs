@@ -33,17 +33,19 @@ namespace SignalRSamples.Hubs
 
         public Task SendToConnection(string connectionId, string name, string message)
         {
-            return Clients.Client(connectionId).SendAsync("Send", $"Private message from {name}: {message}");
+            return Clients.Client(connectionId)
+                .SendAsync("Send", $"Private message from {name}: {message}");
         }
 
-        public Task SendToGroup(string groupName, string name ,string message)
+        public Task SendToGroup(string groupName, string name, string message)
         {
             return Clients.Group(groupName).SendAsync("Send", $"{name}@{groupName}: {message}");
         }
 
-        public Task SendToOthersInGroup(string groupName, string name,string message)
+        public Task SendToOthersInGroup(string groupName, string name, string message)
         {
-            return Clients.OthersInGroup(groupName).SendAsync("Send", $"{name}@{groupName}: {message}");
+            return Clients.OthersInGroup(groupName)
+                .SendAsync("Send", $"{name}@{groupName}: {message}");
         }
 
         public async Task JoinGroup(string groupName, string name)

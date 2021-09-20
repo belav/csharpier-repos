@@ -19,8 +19,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="optionsBuilder">The options builder to add the services to.</param>
         /// <param name="config">The configuration being bound.</param>
         /// <returns>The <see cref="OptionsBuilder{TOptions}"/> so that additional calls can be chained.</returns>
-        public static OptionsBuilder<TOptions> Bind<TOptions>(this OptionsBuilder<TOptions> optionsBuilder, IConfiguration config) where TOptions : class
-            => optionsBuilder.Bind(config, _ => { });
+        public static OptionsBuilder<TOptions> Bind<TOptions>(
+            this OptionsBuilder<TOptions> optionsBuilder,
+            IConfiguration config
+        ) where TOptions : class => optionsBuilder.Bind(config, _ => { });
 
         /// <summary>
         /// Registers a configuration instance which <typeparamref name="TOptions"/> will bind against.
@@ -30,14 +32,22 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="config">The configuration being bound.</param>
         /// <param name="configureBinder">Used to configure the <see cref="BinderOptions"/>.</param>
         /// <returns>The <see cref="OptionsBuilder{TOptions}"/> so that additional calls can be chained.</returns>
-        public static OptionsBuilder<TOptions> Bind<TOptions>(this OptionsBuilder<TOptions> optionsBuilder, IConfiguration config, Action<BinderOptions> configureBinder) where TOptions : class
+        public static OptionsBuilder<TOptions> Bind<TOptions>(
+            this OptionsBuilder<TOptions> optionsBuilder,
+            IConfiguration config,
+            Action<BinderOptions> configureBinder
+        ) where TOptions : class
         {
             if (optionsBuilder == null)
             {
                 throw new ArgumentNullException(nameof(optionsBuilder));
             }
 
-            optionsBuilder.Services.Configure<TOptions>(optionsBuilder.Name, config, configureBinder);
+            optionsBuilder.Services.Configure<TOptions>(
+                optionsBuilder.Name,
+                config,
+                configureBinder
+            );
             return optionsBuilder;
         }
 
@@ -57,19 +67,25 @@ namespace Microsoft.Extensions.DependencyInjection
         public static OptionsBuilder<TOptions> BindConfiguration<TOptions>(
             this OptionsBuilder<TOptions> optionsBuilder,
             string configSectionPath,
-            Action<BinderOptions> configureBinder = null)
-            where TOptions : class
+            Action<BinderOptions> configureBinder = null
+        ) where TOptions : class
         {
             _ = optionsBuilder ?? throw new ArgumentNullException(nameof(optionsBuilder));
             _ = configSectionPath ?? throw new ArgumentNullException(nameof(configSectionPath));
 
-            optionsBuilder.Configure<IConfiguration>((opts, config) =>
-            {
-                IConfiguration section = string.Equals("", configSectionPath, StringComparison.OrdinalIgnoreCase)
-                    ? config
-                    : config.GetSection(configSectionPath);
-                section.Bind(opts, configureBinder);
-            });
+            optionsBuilder.Configure<IConfiguration>(
+                (opts, config) =>
+                {
+                    IConfiguration section = string.Equals(
+                        "",
+                        configSectionPath,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                        ? config
+                        : config.GetSection(configSectionPath);
+                    section.Bind(opts, configureBinder);
+                }
+            );
             return optionsBuilder;
         }
     }

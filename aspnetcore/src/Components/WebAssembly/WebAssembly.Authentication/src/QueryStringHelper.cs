@@ -43,7 +43,10 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
                         ++scanIndex;
                     }
                     var name = queryString[scanIndex..equalIndex];
-                    var value = queryString.Substring(equalIndex + 1, ampersandIndex - equalIndex - 1);
+                    var value = queryString.Substring(
+                        equalIndex + 1,
+                        ampersandIndex - equalIndex - 1
+                    );
                     var processedName = Uri.UnescapeDataString(name.Replace('+', ' '));
                     if (string.Equals(processedName, key, StringComparison.OrdinalIgnoreCase))
                     {

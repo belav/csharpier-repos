@@ -19,8 +19,10 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="app"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public static IApplicationBuilder UseWelcomePage(this IApplicationBuilder app, WelcomePageOptions options)
-        {
+        public static IApplicationBuilder UseWelcomePage(
+            this IApplicationBuilder app,
+            WelcomePageOptions options
+        ) {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -39,17 +41,16 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="app"></param>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static IApplicationBuilder UseWelcomePage(this IApplicationBuilder app, PathString path)
-        {
+        public static IApplicationBuilder UseWelcomePage(
+            this IApplicationBuilder app,
+            PathString path
+        ) {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
             }
 
-            return app.UseWelcomePage(new WelcomePageOptions
-            {
-                Path = path
-            });
+            return app.UseWelcomePage(new WelcomePageOptions { Path = path });
         }
 
         /// <summary>
@@ -65,10 +66,7 @@ namespace Microsoft.AspNetCore.Builder
                 throw new ArgumentNullException(nameof(app));
             }
 
-            return app.UseWelcomePage(new WelcomePageOptions
-            {
-                Path = new PathString(path)
-            });
+            return app.UseWelcomePage(new WelcomePageOptions { Path = new PathString(path) });
         }
 
         /// <summary>

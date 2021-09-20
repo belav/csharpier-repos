@@ -22,27 +22,38 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DocumentationCo
         private readonly IVsXMLMemberIndexService _memberIndexService;
         private readonly Lazy<IVsXMLMemberIndex> _lazyMemberIndex;
 
-        public VisualStudioDocumentationProvider(string filePath, IVsXMLMemberIndexService memberIndexService)
-        {
+        public VisualStudioDocumentationProvider(
+            string filePath,
+            IVsXMLMemberIndexService memberIndexService
+        ) {
             Contract.ThrowIfNull(memberIndexService);
             Contract.ThrowIfNull(filePath);
 
             _filePath = filePath;
             _memberIndexService = memberIndexService;
 
-            _lazyMemberIndex = new Lazy<IVsXMLMemberIndex>(CreateXmlMemberIndex, isThreadSafe: true);
+            _lazyMemberIndex = new Lazy<IVsXMLMemberIndex>(
+                CreateXmlMemberIndex,
+                isThreadSafe: true
+            );
         }
 
-        protected override string GetDocumentationForSymbol(string documentationMemberID, CultureInfo preferredCulture, CancellationToken token = default)
-        {
+        protected override string GetDocumentationForSymbol(
+            string documentationMemberID,
+            CultureInfo preferredCulture,
+            CancellationToken token = default
+        ) {
             var memberIndex = _lazyMemberIndex.Value;
             if (memberIndex == null)
             {
                 return "";
             }
 
-            if (ErrorHandler.Failed(memberIndex.ParseMemberSignature(documentationMemberID, out var methodID)))
-            {
+            if (
+                ErrorHandler.Failed(
+                    memberIndex.ParseMemberSignature(documentationMemberID, out var methodID)
+                )
+            ) {
                 return "";
             }
 
@@ -63,11 +74,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DocumentationCo
             return memberIndex;
         }
 
-        public override bool Equals(object obj)
-            => obj is VisualStudioDocumentationProvider other &&
-               string.Equals(_filePath, other._filePath, StringComparison.OrdinalIgnoreCase);
+        public override bool Equals(object obj) =>
+            obj is VisualStudioDocumentationProvider other
+            && string.Equals(_filePath, other._filePath, StringComparison.OrdinalIgnoreCase);
 
-        public override int GetHashCode()
-            => StringComparer.OrdinalIgnoreCase.GetHashCode(_filePath);
+        public override int GetHashCode() =>
+            StringComparer.OrdinalIgnoreCase.GetHashCode(_filePath);
     }
 }

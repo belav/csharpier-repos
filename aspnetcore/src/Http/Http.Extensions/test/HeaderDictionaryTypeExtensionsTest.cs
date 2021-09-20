@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Http.Headers
             var context = new DefaultHttpContext();
             context.Request.Headers[HeaderNames.ContentType] = "text/plain";
 
-            var result = context.Request.GetTypedHeaders().Get<MediaTypeHeaderValue>(HeaderNames.ContentType);
+            var result = context.Request.GetTypedHeaders()
+                .Get<MediaTypeHeaderValue>(HeaderNames.ContentType);
 
             var expected = new MediaTypeHeaderValue("text/plain");
             Assert.Equal(expected, result);
@@ -28,7 +29,8 @@ namespace Microsoft.AspNetCore.Http.Headers
         {
             var context = new DefaultHttpContext();
 
-            var result = context.Request.GetTypedHeaders().Get<MediaTypeHeaderValue>(HeaderNames.ContentType);
+            var result = context.Request.GetTypedHeaders()
+                .Get<MediaTypeHeaderValue>(HeaderNames.ContentType);
 
             Assert.Null(result);
         }
@@ -39,7 +41,8 @@ namespace Microsoft.AspNetCore.Http.Headers
             var context = new DefaultHttpContext();
             context.Request.Headers[HeaderNames.ContentType] = "invalid";
 
-            var result = context.Request.GetTypedHeaders().Get<MediaTypeHeaderValue>(HeaderNames.ContentType);
+            var result = context.Request.GetTypedHeaders()
+                .Get<MediaTypeHeaderValue>(HeaderNames.ContentType);
 
             Assert.Null(result);
         }
@@ -79,7 +82,9 @@ namespace Microsoft.AspNetCore.Http.Headers
             var context = new DefaultHttpContext();
             context.Request.Headers["custom"] = "valid";
 
-            Assert.Throws<NotSupportedException>(() => context.Request.GetTypedHeaders().Get<object>("custom"));
+            Assert.Throws<NotSupportedException>(
+                () => context.Request.GetTypedHeaders().Get<object>("custom")
+            );
         }
 
         [Fact]
@@ -88,9 +93,11 @@ namespace Microsoft.AspNetCore.Http.Headers
             var context = new DefaultHttpContext();
             context.Request.Headers[HeaderNames.Accept] = "text/plain; q=0.9, text/other, */*";
 
-            var result = context.Request.GetTypedHeaders().GetList<MediaTypeHeaderValue>(HeaderNames.Accept);
+            var result = context.Request.GetTypedHeaders()
+                .GetList<MediaTypeHeaderValue>(HeaderNames.Accept);
 
-            var expected = new[] {
+            var expected = new[]
+            {
                 new MediaTypeHeaderValue("text/plain", 0.9),
                 new MediaTypeHeaderValue("text/other"),
                 new MediaTypeHeaderValue("*/*"),
@@ -103,7 +110,8 @@ namespace Microsoft.AspNetCore.Http.Headers
         {
             var context = new DefaultHttpContext();
 
-            var result = context.Request.GetTypedHeaders().GetList<MediaTypeHeaderValue>(HeaderNames.Accept);
+            var result = context.Request.GetTypedHeaders()
+                .GetList<MediaTypeHeaderValue>(HeaderNames.Accept);
 
             Assert.Empty(result);
         }
@@ -114,7 +122,8 @@ namespace Microsoft.AspNetCore.Http.Headers
             var context = new DefaultHttpContext();
             context.Request.Headers[HeaderNames.Accept] = "invalid";
 
-            var result = context.Request.GetTypedHeaders().GetList<MediaTypeHeaderValue>(HeaderNames.Accept);
+            var result = context.Request.GetTypedHeaders()
+                .GetList<MediaTypeHeaderValue>(HeaderNames.Accept);
 
             Assert.Empty(result);
         }
@@ -155,7 +164,9 @@ namespace Microsoft.AspNetCore.Http.Headers
             var context = new DefaultHttpContext();
             context.Request.Headers["custom"] = "valid";
 
-            Assert.Throws<NotSupportedException>(() => context.Request.GetTypedHeaders().GetList<object>("custom"));
+            Assert.Throws<NotSupportedException>(
+                () => context.Request.GetTypedHeaders().GetList<object>("custom")
+            );
         }
 
         public class TestHeaderValue

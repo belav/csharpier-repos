@@ -12,7 +12,12 @@ namespace Microsoft.AspNetCore.Components
     {
         public const string ServerMarkerType = "server";
 
-        private ServerComponentMarker(string type, string descriptor, int? sequence, string prerenderId) : this()
+        private ServerComponentMarker(
+            string type,
+            string descriptor,
+            int? sequence,
+            string prerenderId
+        ) : this()
         {
             Type = type;
             PrerenderId = prerenderId;
@@ -40,7 +45,12 @@ namespace Microsoft.AspNetCore.Components
 
         // Creates a marker for a prerendered component.
         public static ServerComponentMarker Prerendered(int sequence, string descriptor) =>
-            new ServerComponentMarker(ServerMarkerType, descriptor, sequence, Guid.NewGuid().ToString("N"));
+            new ServerComponentMarker(
+                ServerMarkerType,
+                descriptor,
+                sequence,
+                Guid.NewGuid().ToString("N")
+            );
 
         // Creates a marker for a non prerendered component
         public static ServerComponentMarker NonPrerendered(int sequence, string descriptor) =>
@@ -51,7 +61,9 @@ namespace Microsoft.AspNetCore.Components
         {
             if (PrerenderId == null)
             {
-                throw new InvalidOperationException("Can't get an end record for non-prerendered components.");
+                throw new InvalidOperationException(
+                    "Can't get an end record for non-prerendered components."
+                );
             }
 
             return new ServerComponentMarker(null, null, null, PrerenderId);

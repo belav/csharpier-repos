@@ -17,8 +17,7 @@ namespace Microsoft.Cci
         protected readonly MetadataWriter metadataWriter;
         private readonly HashSet<IImportScope> _alreadySeenScopes = new HashSet<IImportScope>();
 
-        internal ReferenceIndexer(MetadataWriter metadataWriter)
-            : base(metadataWriter.Context)
+        internal ReferenceIndexer(MetadataWriter metadataWriter) : base(metadataWriter.Context)
         {
             this.metadataWriter = metadataWriter;
         }
@@ -57,8 +56,13 @@ namespace Microsoft.Cci
             else
             {
                 definingAssembly = ((IModuleReference)definingUnit).GetContainingAssembly(Context);
-                if (definingAssembly != null && !ReferenceEquals(definingAssembly, Context.Module.GetContainingAssembly(Context)))
-                {
+                if (
+                    definingAssembly != null
+                    && !ReferenceEquals(
+                        definingAssembly,
+                        Context.Module.GetContainingAssembly(Context)
+                    )
+                ) {
                     Visit(definingAssembly);
                 }
             }
@@ -80,7 +84,9 @@ namespace Microsoft.Cci
                 {
                     if (fieldReference.IsContextualNamedEntity)
                     {
-                        ((IContextualNamedEntity)fieldReference).AssociateWithMetadataWriter(this.metadataWriter);
+                        ((IContextualNamedEntity)fieldReference).AssociateWithMetadataWriter(
+                            this.metadataWriter
+                        );
                     }
 
                     this.Visit(fieldReference);
@@ -135,9 +141,9 @@ namespace Microsoft.Cci
             // Visit type and assembly references in import scopes.
             // These references are emitted to Portable debug metadata,
             // so they need to be present in the assembly metadata.
-            // It may happen that some using/import clause references an assembly/type 
+            // It may happen that some using/import clause references an assembly/type
             // that is not actually used in IL. Although rare we need to handle such cases.
-            // We include these references regardless of the format for debugging information 
+            // We include these references regardless of the format for debugging information
             // to avoid dependency of metadata on the chosen debug format.
 
             foreach (var import in imports)

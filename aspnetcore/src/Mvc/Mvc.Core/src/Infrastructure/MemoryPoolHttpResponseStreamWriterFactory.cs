@@ -43,8 +43,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         /// </param>
         public MemoryPoolHttpResponseStreamWriterFactory(
             ArrayPool<byte> bytePool,
-            ArrayPool<char> charPool)
-        {
+            ArrayPool<char> charPool
+        ) {
             if (bytePool == null)
             {
                 throw new ArgumentNullException(nameof(bytePool));
@@ -72,7 +72,13 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 throw new ArgumentNullException(nameof(encoding));
             }
 
-            return new HttpResponseStreamWriter(stream, encoding, DefaultBufferSize, _bytePool, _charPool);
+            return new HttpResponseStreamWriter(
+                stream,
+                encoding,
+                DefaultBufferSize,
+                _bytePool,
+                _charPool
+            );
         }
     }
 }

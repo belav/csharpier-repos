@@ -20,40 +20,218 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     /// </summary>
     public class SqlServerMathTranslator : IMethodCallTranslator
     {
-        private static readonly Dictionary<MethodInfo, string> _supportedMethodTranslations = new()
-        {
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Abs), new[] { typeof(decimal) }), "ABS" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Abs), new[] { typeof(double) }), "ABS" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Abs), new[] { typeof(float) }), "ABS" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Abs), new[] { typeof(int) }), "ABS" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Abs), new[] { typeof(long) }), "ABS" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Abs), new[] { typeof(sbyte) }), "ABS" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Abs), new[] { typeof(short) }), "ABS" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Ceiling), new[] { typeof(decimal) }), "CEILING" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Ceiling), new[] { typeof(double) }), "CEILING" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Floor), new[] { typeof(decimal) }), "FLOOR" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Floor), new[] { typeof(double) }), "FLOOR" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Pow), new[] { typeof(double), typeof(double) }), "POWER" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Exp), new[] { typeof(double) }), "EXP" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Log10), new[] { typeof(double) }), "LOG10" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Log), new[] { typeof(double) }), "LOG" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Log), new[] { typeof(double), typeof(double) }), "LOG" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Sqrt), new[] { typeof(double) }), "SQRT" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Acos), new[] { typeof(double) }), "ACOS" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Asin), new[] { typeof(double) }), "ASIN" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Atan), new[] { typeof(double) }), "ATAN" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Atan2), new[] { typeof(double), typeof(double) }), "ATN2" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Cos), new[] { typeof(double) }), "COS" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Sin), new[] { typeof(double) }), "SIN" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Tan), new[] { typeof(double) }), "TAN" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Sign), new[] { typeof(decimal) }), "SIGN" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Sign), new[] { typeof(double) }), "SIGN" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Sign), new[] { typeof(float) }), "SIGN" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Sign), new[] { typeof(int) }), "SIGN" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Sign), new[] { typeof(long) }), "SIGN" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Sign), new[] { typeof(sbyte) }), "SIGN" },
-            { typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Sign), new[] { typeof(short) }), "SIGN" }
-        };
+        private static readonly Dictionary<MethodInfo, string> _supportedMethodTranslations =
+            new()
+            {
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Abs),
+                        new[] { typeof(decimal) }
+                    ),
+                    "ABS"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Abs),
+                        new[] { typeof(double) }
+                    ),
+                    "ABS"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Abs),
+                        new[] { typeof(float) }
+                    ),
+                    "ABS"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Abs), new[] { typeof(int) }),
+                    "ABS"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Abs), new[] { typeof(long) }),
+                    "ABS"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Abs),
+                        new[] { typeof(sbyte) }
+                    ),
+                    "ABS"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Abs),
+                        new[] { typeof(short) }
+                    ),
+                    "ABS"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Ceiling),
+                        new[] { typeof(decimal) }
+                    ),
+                    "CEILING"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Ceiling),
+                        new[] { typeof(double) }
+                    ),
+                    "CEILING"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Floor),
+                        new[] { typeof(decimal) }
+                    ),
+                    "FLOOR"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Floor),
+                        new[] { typeof(double) }
+                    ),
+                    "FLOOR"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Pow),
+                        new[] { typeof(double), typeof(double) }
+                    ),
+                    "POWER"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Exp),
+                        new[] { typeof(double) }
+                    ),
+                    "EXP"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Log10),
+                        new[] { typeof(double) }
+                    ),
+                    "LOG10"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Log),
+                        new[] { typeof(double) }
+                    ),
+                    "LOG"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Log),
+                        new[] { typeof(double), typeof(double) }
+                    ),
+                    "LOG"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Sqrt),
+                        new[] { typeof(double) }
+                    ),
+                    "SQRT"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Acos),
+                        new[] { typeof(double) }
+                    ),
+                    "ACOS"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Asin),
+                        new[] { typeof(double) }
+                    ),
+                    "ASIN"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Atan),
+                        new[] { typeof(double) }
+                    ),
+                    "ATAN"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Atan2),
+                        new[] { typeof(double), typeof(double) }
+                    ),
+                    "ATN2"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Cos),
+                        new[] { typeof(double) }
+                    ),
+                    "COS"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Sin),
+                        new[] { typeof(double) }
+                    ),
+                    "SIN"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Tan),
+                        new[] { typeof(double) }
+                    ),
+                    "TAN"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Sign),
+                        new[] { typeof(decimal) }
+                    ),
+                    "SIGN"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Sign),
+                        new[] { typeof(double) }
+                    ),
+                    "SIGN"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Sign),
+                        new[] { typeof(float) }
+                    ),
+                    "SIGN"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Sign), new[] { typeof(int) }),
+                    "SIGN"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Sign),
+                        new[] { typeof(long) }
+                    ),
+                    "SIGN"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Sign),
+                        new[] { typeof(sbyte) }
+                    ),
+                    "SIGN"
+                },
+                {
+                    typeof(Math).GetRequiredRuntimeMethod(
+                        nameof(Math.Sign),
+                        new[] { typeof(short) }
+                    ),
+                    "SIGN"
+                }
+            };
 
         private static readonly IEnumerable<MethodInfo> _truncateMethodInfos = new[]
         {
@@ -65,8 +243,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         {
             typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Round), new[] { typeof(decimal) }),
             typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Round), new[] { typeof(double) }),
-            typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Round), new[] { typeof(decimal), typeof(int) }),
-            typeof(Math).GetRequiredRuntimeMethod(nameof(Math.Round), new[] { typeof(double), typeof(int) })
+            typeof(Math).GetRequiredRuntimeMethod(
+                nameof(Math.Round),
+                new[] { typeof(decimal), typeof(int) }
+            ),
+            typeof(Math).GetRequiredRuntimeMethod(
+                nameof(Math.Round),
+                new[] { typeof(double), typeof(int) }
+            )
         };
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -92,24 +276,28 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
 
             if (_supportedMethodTranslations.TryGetValue(method, out var sqlFunctionName))
             {
-                var typeMapping = arguments.Count == 1
-                    ? ExpressionExtensions.InferTypeMapping(arguments[0])
-                    : ExpressionExtensions.InferTypeMapping(arguments[0], arguments[1]);
+                var typeMapping =
+                    arguments.Count == 1
+                        ? ExpressionExtensions.InferTypeMapping(arguments[0])
+                        : ExpressionExtensions.InferTypeMapping(arguments[0], arguments[1]);
 
                 var newArguments = new SqlExpression[arguments.Count];
                 newArguments[0] = _sqlExpressionFactory.ApplyTypeMapping(arguments[0], typeMapping);
 
                 if (arguments.Count == 2)
                 {
-                    newArguments[1] = _sqlExpressionFactory.ApplyTypeMapping(arguments[1], typeMapping);
+                    newArguments[1] = _sqlExpressionFactory.ApplyTypeMapping(
+                        arguments[1],
+                        typeMapping
+                    );
                 }
 
                 return _sqlExpressionFactory.Function(
@@ -118,7 +306,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     nullable: true,
                     argumentsPropagateNullability: newArguments.Select(a => true).ToArray(),
                     method.ReturnType,
-                    sqlFunctionName == "SIGN" ? null : typeMapping);
+                    sqlFunctionName == "SIGN" ? null : typeMapping
+                );
             }
 
             if (_truncateMethodInfos.Contains(method))
@@ -127,17 +316,24 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 
                 return _sqlExpressionFactory.Function(
                     "ROUND",
-                    new[] { argument, _sqlExpressionFactory.Constant(0), _sqlExpressionFactory.Constant(1) },
+                    new[]
+                    {
+                        argument,
+                        _sqlExpressionFactory.Constant(0),
+                        _sqlExpressionFactory.Constant(1)
+                    },
                     nullable: true,
                     argumentsPropagateNullability: new[] { true, false, false },
                     method.ReturnType,
-                    argument.TypeMapping);
+                    argument.TypeMapping
+                );
             }
 
             if (_roundMethodInfos.Contains(method))
             {
                 var argument = arguments[0];
-                var digits = arguments.Count == 2 ? arguments[1] : _sqlExpressionFactory.Constant(0);
+                var digits =
+                    arguments.Count == 2 ? arguments[1] : _sqlExpressionFactory.Constant(0);
 
                 return _sqlExpressionFactory.Function(
                     "ROUND",
@@ -145,7 +341,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     nullable: true,
                     argumentsPropagateNullability: new[] { true, true },
                     method.ReturnType,
-                    argument.TypeMapping);
+                    argument.TypeMapping
+                );
             }
 
             return null;

@@ -17,18 +17,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class WhenKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public WhenKeywordRecommender()
-            : base(SyntaxKind.WhenKeyword, isValidInPreprocessorContext: true)
-        {
+            : base(SyntaxKind.WhenKeyword, isValidInPreprocessorContext: true) { }
+
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) {
+            return context.IsCatchFilterContext
+                || IsAfterCompleteExpressionOrPatternInCaseLabel(context);
         }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-        {
-            return context.IsCatchFilterContext ||
-                IsAfterCompleteExpressionOrPatternInCaseLabel(context);
-        }
-
-        private static bool IsAfterCompleteExpressionOrPatternInCaseLabel(CSharpSyntaxContext context)
-        {
+        private static bool IsAfterCompleteExpressionOrPatternInCaseLabel(
+            CSharpSyntaxContext context
+        ) {
             var switchLabel = context.TargetToken.GetAncestor<SwitchLabelSyntax>();
             if (switchLabel == null)
                 return false;

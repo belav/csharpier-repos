@@ -13,24 +13,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// <summary>
     /// State machine interface property implementation.
     /// </summary>
-    internal class SynthesizedStateMachineProperty : PropertySymbol, ISynthesizedMethodBodyImplementationSymbol
+    internal class SynthesizedStateMachineProperty
+        : PropertySymbol,
+          ISynthesizedMethodBodyImplementationSymbol
     {
         private readonly SynthesizedStateMachineMethod _getter;
         private readonly string _name;
 
         internal SynthesizedStateMachineProperty(
             MethodSymbol interfacePropertyGetter,
-            StateMachineTypeSymbol stateMachineType)
-        {
-            _name = ExplicitInterfaceHelpers.GetMemberName(interfacePropertyGetter.AssociatedSymbol.Name, interfacePropertyGetter.ContainingType, aliasQualifierOpt: null);
-            var getterName = ExplicitInterfaceHelpers.GetMemberName(interfacePropertyGetter.Name, interfacePropertyGetter.ContainingType, aliasQualifierOpt: null);
+            StateMachineTypeSymbol stateMachineType
+        ) {
+            _name = ExplicitInterfaceHelpers.GetMemberName(
+                interfacePropertyGetter.AssociatedSymbol.Name,
+                interfacePropertyGetter.ContainingType,
+                aliasQualifierOpt: null
+            );
+            var getterName = ExplicitInterfaceHelpers.GetMemberName(
+                interfacePropertyGetter.Name,
+                interfacePropertyGetter.ContainingType,
+                aliasQualifierOpt: null
+            );
 
             _getter = new SynthesizedStateMachineDebuggerHiddenMethod(
                 getterName,
                 interfacePropertyGetter,
                 stateMachineType,
                 associatedProperty: this,
-                hasMethodBodyDependency: false);
+                hasMethodBodyDependency: false
+            );
         }
 
         public override string Name

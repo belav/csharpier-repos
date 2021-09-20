@@ -35,22 +35,19 @@ namespace Microsoft.Extensions.FileProviders.Physical
         /// </summary>
         /// <param name="root">The root of the file system.</param>
         /// <param name="pattern">The pattern to watch.</param>
-        public PollingWildCardChangeToken(
-            string root,
-            string pattern)
+        public PollingWildCardChangeToken(string root, string pattern)
             : this(
                 new DirectoryInfoWrapper(new DirectoryInfo(root)),
                 pattern,
-                Physical.Clock.Instance)
-        {
-        }
+                Physical.Clock.Instance
+            ) { }
 
         // Internal for unit testing.
         internal PollingWildCardChangeToken(
             DirectoryInfoBase directoryInfo,
             string pattern,
-            IClock clock)
-        {
+            IClock clock
+        ) {
             _directoryInfo = directoryInfo;
             Clock = clock;
 
@@ -63,21 +60,26 @@ namespace Microsoft.Extensions.FileProviders.Physical
         public bool ActiveChangeCallbacks { get; internal set; }
 
         // Internal for unit testing.
-        internal TimeSpan PollingInterval { get; set; } = PhysicalFilesWatcher.DefaultPollingInterval;
+        internal TimeSpan PollingInterval { get; set; } =
+            PhysicalFilesWatcher.DefaultPollingInterval;
 
         internal CancellationTokenSource CancellationTokenSource
         {
             get => _tokenSource;
             set
             {
-                Debug.Assert(_tokenSource == null, "We expect CancellationTokenSource to be initialized exactly once.");
+                Debug.Assert(
+                    _tokenSource == null,
+                    "We expect CancellationTokenSource to be initialized exactly once."
+                );
 
                 _tokenSource = value;
                 _changeToken = new CancellationChangeToken(_tokenSource.Token);
             }
         }
 
-        CancellationTokenSource IPollingChangeToken.CancellationTokenSource => CancellationTokenSource;
+        CancellationTokenSource IPollingChangeToken.CancellationTokenSource =>
+            CancellationTokenSource;
 
         private IClock Clock { get; }
 
@@ -107,7 +109,10 @@ namespace Microsoft.Extensions.FileProviders.Physical
         {
             PatternMatchingResult result = _matcher.Execute(_directoryInfo);
 
-            IOrderedEnumerable<FilePatternMatch> files = result.Files.OrderBy(f => f.Path, StringComparer.Ordinal);
+            IOrderedEnumerable<FilePatternMatch> files = result.Files.OrderBy(
+                f => f.Path,
+                StringComparer.Ordinal
+            );
             using (var sha256 = IncrementalHash.CreateHash(HashAlgorithmName.SHA256))
             {
                 foreach (FilePatternMatch file in files)

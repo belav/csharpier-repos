@@ -18,31 +18,32 @@ class Test
 {
     static Random random;
 
-    public static int Main ()
+    public static int Main()
     {
-        random = new Random ();
-        VectorSingle_op_Division_VectorSingle_VectorSingle (5);
+        random = new Random();
+        VectorSingle_op_Division_VectorSingle_VectorSingle(5);
         return 100;
     }
 
-    [MethodImpl (MethodImplOptions.NoInlining)]
-    public static void VectorSingle_op_Division_VectorSingle_VectorSingle (long iterations)
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void VectorSingle_op_Division_VectorSingle_VectorSingle(long iterations)
     {
-        Vector<float> dividend = CreateRandomVector ();
-        Vector<float> divisor = CreateRandomVector ();
+        Vector<float> dividend = CreateRandomVector();
+        Vector<float> divisor = CreateRandomVector();
 
         Vector<float> result = dividend / divisor;
-        GC.Collect ();
-        for (long iteration = 0L; iteration < iterations; iteration++) {
+        GC.Collect();
+        for (long iteration = 0L; iteration < iterations; iteration++)
+        {
             result = dividend / divisor;
         }
-        GC.KeepAlive (new object [1] { result });
+        GC.KeepAlive(new object[1] { result });
     }
 
-    [MethodImpl (MethodImplOptions.NoInlining)]
-    static Vector<float> CreateRandomVector ()
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static Vector<float> CreateRandomVector()
     {
-        return new Vector<float> ((float)(random.NextDouble () + 1.0));
+        return new Vector<float>((float)(random.NextDouble() + 1.0));
     }
 }
 

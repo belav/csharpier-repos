@@ -17,8 +17,7 @@ namespace ArrayWithThread
         {
             int retVal = 100;
             int testNum = 0;
-            RngTest[] Tests ={  new RngTest(Test.Test1),
-                        new RngTest(Test.Test2)};
+            RngTest[] Tests = { new RngTest(Test.Test1), new RngTest(Test.Test2) };
             foreach (RngTest test in Tests)
             {
                 testNum++;

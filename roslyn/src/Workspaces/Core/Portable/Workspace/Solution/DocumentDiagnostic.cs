@@ -10,8 +10,11 @@ namespace Microsoft.CodeAnalysis
     {
         public DocumentId DocumentId { get; }
 
-        public DocumentDiagnostic(WorkspaceDiagnosticKind kind, string message, DocumentId documentId)
-            : base(kind, message)
+        public DocumentDiagnostic(
+            WorkspaceDiagnosticKind kind,
+            string message,
+            DocumentId documentId
+        ) : base(kind, message)
         {
             this.DocumentId = documentId;
         }

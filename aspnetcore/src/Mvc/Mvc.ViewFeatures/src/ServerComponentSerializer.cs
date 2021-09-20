@@ -15,21 +15,32 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         private readonly ITimeLimitedDataProtector _dataProtector;
 
         public ServerComponentSerializer(IDataProtectionProvider dataProtectionProvider) =>
-            _dataProtector = dataProtectionProvider
-                .CreateProtector(ServerComponentSerializationSettings.DataProtectionProviderPurpose)
+            _dataProtector = dataProtectionProvider.CreateProtector(
+                    ServerComponentSerializationSettings.DataProtectionProviderPurpose
+                )
                 .ToTimeLimitedDataProtector();
 
-        public ServerComponentMarker SerializeInvocation(ServerComponentInvocationSequence invocationId, Type type, ParameterView parameters, bool prerendered)
-        {
-            var (sequence, serverComponent) = CreateSerializedServerComponent(invocationId, type, parameters);
-            return prerendered ? ServerComponentMarker.Prerendered(sequence, serverComponent) : ServerComponentMarker.NonPrerendered(sequence, serverComponent);
+        public ServerComponentMarker SerializeInvocation(
+            ServerComponentInvocationSequence invocationId,
+            Type type,
+            ParameterView parameters,
+            bool prerendered
+        ) {
+            var (sequence, serverComponent) = CreateSerializedServerComponent(
+                invocationId,
+                type,
+                parameters
+            );
+            return prerendered
+                ? ServerComponentMarker.Prerendered(sequence, serverComponent)
+                : ServerComponentMarker.NonPrerendered(sequence, serverComponent);
         }
 
         private (int sequence, string payload) CreateSerializedServerComponent(
             ServerComponentInvocationSequence invocationId,
             Type rootComponent,
-            ParameterView parameters)
-        {
+            ParameterView parameters
+        ) {
             var sequence = invocationId.Next();
 
             var (definitions, values) = ComponentParameter.FromParameterView(parameters);
@@ -40,10 +51,17 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 rootComponent.FullName,
                 definitions,
                 values,
-                invocationId.Value);
+                invocationId.Value
+            );
 
-            var serializedServerComponentBytes = JsonSerializer.SerializeToUtf8Bytes(serverComponent, ServerComponentSerializationSettings.JsonSerializationOptions);
-            var protectedBytes = _dataProtector.Protect(serializedServerComponentBytes, ServerComponentSerializationSettings.DataExpiration);
+            var serializedServerComponentBytes = JsonSerializer.SerializeToUtf8Bytes(
+                serverComponent,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
+            var protectedBytes = _dataProtector.Protect(
+                serializedServerComponentBytes,
+                ServerComponentSerializationSettings.DataExpiration
+            );
             return (serverComponent.Sequence, Convert.ToBase64String(protectedBytes));
         }
 
@@ -51,7 +69,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             var serializedStartRecord = JsonSerializer.Serialize(
                 record,
-                ServerComponentSerializationSettings.JsonSerializationOptions);
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
 
             if (record.PrerenderId != null)
             {
@@ -81,7 +100,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             var serializedStartRecord = JsonSerializer.Serialize(
                 record.GetEndRecord(),
-                ServerComponentSerializationSettings.JsonSerializationOptions);
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
 
             return PrerenderEnd(serializedStartRecord);
 

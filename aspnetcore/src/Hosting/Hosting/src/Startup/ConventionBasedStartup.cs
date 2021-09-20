@@ -17,7 +17,7 @@ namespace Microsoft.AspNetCore.Hosting
         {
             _methods = methods;
         }
-        
+
         public void Configure(IApplicationBuilder app)
         {
             try

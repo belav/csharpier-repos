@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector128<Int32>>() / sizeof(Int32);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector128<Int32>>() / sizeof(Int32);
 
         public bool Succeeded { get; set; } = true;
 
@@ -71,22 +72,27 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetInt32();
             }
 
-            object result = typeof(Vector128)
-                                .GetMethod(nameof(Vector128.Create), operandTypes)
-                                .Invoke(null, new object[] { values[0], values[1], values[2], values[3] });
+            object result = typeof(Vector128).GetMethod(nameof(Vector128.Create), operandTypes)
+                .Invoke(null, new object[] { values[0], values[1], values[2], values[3] });
 
             ValidateResult((Vector128<Int32>)(result), values);
         }
 
-        private void ValidateResult(Vector128<Int32> result, Int32[] expectedValues, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Vector128<Int32> result,
+            Int32[] expectedValues,
+            [CallerMemberName] string method = ""
+        ) {
             Int32[] resultElements = new Int32[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Int32, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValues, method);
         }
 
-        private void ValidateResult(Int32[] resultElements, Int32[] expectedValues, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Int32[] resultElements,
+            Int32[] expectedValues,
+            [CallerMemberName] string method = ""
+        ) {
             bool succeeded = true;
 
             for (var i = 0; i < ElementCount; i++)
@@ -100,9 +106,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128.Create(Int32): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", expectedValues)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128.Create(Int32): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", expectedValues)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

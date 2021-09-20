@@ -13,13 +13,18 @@ namespace Microsoft.AspNetCore.Builder
     {
         private readonly List<IEndpointConventionBuilder> _endpointConventionBuilders;
 
-        internal MinimalActionEndpointConventionBuilder(IEndpointConventionBuilder endpointConventionBuilder)
-        {
-            _endpointConventionBuilders = new List<IEndpointConventionBuilder>() { endpointConventionBuilder };
+        internal MinimalActionEndpointConventionBuilder(
+            IEndpointConventionBuilder endpointConventionBuilder
+        ) {
+            _endpointConventionBuilders = new List<IEndpointConventionBuilder>()
+            {
+                endpointConventionBuilder
+            };
         }
 
-        internal MinimalActionEndpointConventionBuilder(List<IEndpointConventionBuilder> endpointConventionBuilders)
-        {
+        internal MinimalActionEndpointConventionBuilder(
+            List<IEndpointConventionBuilder> endpointConventionBuilders
+        ) {
             _endpointConventionBuilders = endpointConventionBuilders;
         }
 

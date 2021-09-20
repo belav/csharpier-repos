@@ -13,7 +13,11 @@ namespace Microsoft.AspNetCore.Razor.Language
     public abstract class RazorEngine
     {
 #pragma warning disable CS0618 // Type or member is obsolete
-        private static RazorEngine CreateCore(RazorConfiguration configuration, bool designTime, Action<IRazorEngineBuilder> configure)
+        private static RazorEngine CreateCore(
+            RazorConfiguration configuration,
+            bool designTime,
+            Action<IRazorEngineBuilder> configure
+        )
 #pragma warning restore CS0618 // Type or member is obsolete
         {
             if (configuration == null)
@@ -80,34 +84,48 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             // Default configuration
             var configurationFeature = new DefaultDocumentClassifierPassFeature();
-            configurationFeature.ConfigureClass.Add((document, @class) =>
-            {
-                @class.ClassName = "Template";
-                @class.Modifiers.Add("public");
-            });
+            configurationFeature.ConfigureClass.Add(
+                (document, @class) =>
+                {
+                    @class.ClassName = "Template";
+                    @class.Modifiers.Add("public");
+                }
+            );
 
-            configurationFeature.ConfigureNamespace.Add((document, @namespace) =>
-            {
-                @namespace.Content = "Razor";
-            });
+            configurationFeature.ConfigureNamespace.Add(
+                (document, @namespace) =>
+                {
+                    @namespace.Content = "Razor";
+                }
+            );
 
-            configurationFeature.ConfigureMethod.Add((document, method) =>
-            {
-                method.MethodName = "ExecuteAsync";
-                method.ReturnType = $"global::{typeof(Task).FullName}";
+            configurationFeature.ConfigureMethod.Add(
+                (document, method) =>
+                {
+                    method.MethodName = "ExecuteAsync";
+                    method.ReturnType = $"global::{typeof(Task).FullName}";
 
-                method.Modifiers.Add("public");
-                method.Modifiers.Add("async");
-                method.Modifiers.Add("override");
-            });
+                    method.Modifiers.Add("public");
+                    method.Modifiers.Add("async");
+                    method.Modifiers.Add("override");
+                }
+            );
 
             features.Add(configurationFeature);
         }
 
-        private static void AddDefaultRuntimeFeatures(RazorConfiguration configuration, ICollection<IRazorEngineFeature> features)
-        {
+        private static void AddDefaultRuntimeFeatures(
+            RazorConfiguration configuration,
+            ICollection<IRazorEngineFeature> features
+        ) {
             // Configure options
-            features.Add(new DefaultRazorParserOptionsFeature(designTime: false, version: configuration.LanguageVersion, fileKind: null));
+            features.Add(
+                new DefaultRazorParserOptionsFeature(
+                    designTime: false,
+                    version: configuration.LanguageVersion,
+                    fileKind: null
+                )
+            );
             features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
 
             // Intermediate Node Passes
@@ -121,10 +139,18 @@ namespace Microsoft.AspNetCore.Razor.Language
             targetExtension.TargetExtensions.Add(new PreallocatedAttributeTargetExtension());
         }
 
-        private static void AddDefaultDesignTimeFeatures(RazorConfiguration configuration, ICollection<IRazorEngineFeature> features)
-        {
+        private static void AddDefaultDesignTimeFeatures(
+            RazorConfiguration configuration,
+            ICollection<IRazorEngineFeature> features
+        ) {
             // Configure options
-            features.Add(new DefaultRazorParserOptionsFeature(designTime: true, version: configuration.LanguageVersion, fileKind: null));
+            features.Add(
+                new DefaultRazorParserOptionsFeature(
+                    designTime: true,
+                    version: configuration.LanguageVersion,
+                    fileKind: null
+                )
+            );
             features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: true));
             features.Add(new SuppressChecksumOptionsFeature());
 
@@ -152,17 +178,34 @@ namespace Microsoft.AspNetCore.Razor.Language
             return Create(configure: null);
         }
 
-        [Obsolete("This method is obsolete and will be removed in a future version. The recommended alternative is " + nameof(RazorProjectEngine) + "." + nameof(RazorProjectEngine.Create))]
-        public static RazorEngine Create(Action<IRazorEngineBuilder> configure) => CreateCore(RazorConfiguration.Default, false, configure);
+        [Obsolete(
+            "This method is obsolete and will be removed in a future version. The recommended alternative is "
+                + nameof(RazorProjectEngine)
+                + "."
+                + nameof(RazorProjectEngine.Create)
+        )]
+        public static RazorEngine Create(Action<IRazorEngineBuilder> configure) =>
+            CreateCore(RazorConfiguration.Default, false, configure);
 
-        [Obsolete("This method is obsolete and will be removed in a future version. The recommended alternative is " + nameof(RazorProjectEngine) + "." + nameof(RazorProjectEngine.Create))]
+        [Obsolete(
+            "This method is obsolete and will be removed in a future version. The recommended alternative is "
+                + nameof(RazorProjectEngine)
+                + "."
+                + nameof(RazorProjectEngine.Create)
+        )]
         public static RazorEngine CreateDesignTime()
         {
             return CreateDesignTime(configure: null);
         }
 
-        [Obsolete("This method is obsolete and will be removed in a future version. The recommended alternative is " + nameof(RazorProjectEngine) + "." + nameof(RazorProjectEngine.Create))]
-        public static RazorEngine CreateDesignTime(Action<IRazorEngineBuilder> configure) => CreateCore(RazorConfiguration.Default, true, configure);
+        [Obsolete(
+            "This method is obsolete and will be removed in a future version. The recommended alternative is "
+                + nameof(RazorProjectEngine)
+                + "."
+                + nameof(RazorProjectEngine.Create)
+        )]
+        public static RazorEngine CreateDesignTime(Action<IRazorEngineBuilder> configure) =>
+            CreateCore(RazorConfiguration.Default, true, configure);
 
         [Obsolete("This method is obsolete and will be removed in a future version.")]
         public static RazorEngine CreateEmpty(Action<IRazorEngineBuilder> configure)

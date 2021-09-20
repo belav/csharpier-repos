@@ -49,8 +49,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [InlineData("Score.1812-Overture.somedomain.TLD", true, true)]
         [InlineData("1-800.Lower.somedomain.TLD", false, true)]
         [InlineData("1-800.Lower.somedomain.TLD", true, true)]
-        public static void MatchSubjectAltName(string targetName, bool mixedCase, bool expectedResult)
-        {
+        public static void MatchSubjectAltName(
+            string targetName,
+            bool mixedCase,
+            bool expectedResult
+        ) {
             string[] sanEntries =
             {
                 "Capitalized.SomeDomain.TLD",
@@ -80,20 +83,23 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string subjectCN,
             IList<string> sanDnsNames,
             bool flattenCase,
-            bool expectedResult)
-        {
+            bool expectedResult
+        ) {
             using (RSA rsa = RSA.Create(TestData.RsaBigExponentParams))
             {
                 CertificateRequest request = new CertificateRequest(
                     $"CN={FixCase(subjectCN, flattenCase)}, O=.NET Framework (CoreFX)",
                     rsa,
                     HashAlgorithmName.SHA256,
-                    RSASignaturePadding.Pkcs1);
+                    RSASignaturePadding.Pkcs1
+                );
 
                 request.CertificateExtensions.Add(
                     new X509KeyUsageExtension(
                         X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.DigitalSignature,
-                        false));
+                        false
+                    )
+                );
 
                 if (sanDnsNames != null)
                 {
@@ -133,11 +139,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                             while (idx >= 0)
                             {
-                                if (idx < 2 ||
-                                    extensionBytes[idx - 2] != 0x82 ||
-                                    extensionBytes[idx - 1] != sanDnsName.Length)
-                                {
-                                    int relativeIdx = extensionSpan.Slice(idx + 1).IndexOf(lowerBytes);
+                                if (
+                                    idx < 2
+                                    || extensionBytes[idx - 2] != 0x82
+                                    || extensionBytes[idx - 1] != sanDnsName.Length
+                                ) {
+                                    int relativeIdx = extensionSpan.Slice(idx + 1)
+                                        .IndexOf(lowerBytes);
                                     idx = idx + 1 + relativeIdx;
                                     continue;
                                 }

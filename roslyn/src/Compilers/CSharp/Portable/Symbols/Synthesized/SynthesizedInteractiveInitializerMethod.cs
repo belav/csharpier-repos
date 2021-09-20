@@ -23,8 +23,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly TypeSymbol _returnType;
         private ThreeState _lazyIsNullableAnalysisEnabled;
 
-        internal SynthesizedInteractiveInitializerMethod(SourceMemberContainerTypeSymbol containingType, BindingDiagnosticBag diagnostics)
-        {
+        internal SynthesizedInteractiveInitializerMethod(
+            SourceMemberContainerTypeSymbol containingType,
+            BindingDiagnosticBag diagnostics
+        ) {
             Debug.Assert(containingType.IsScriptClass);
 
             _containingType = containingType;
@@ -146,9 +148,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return TypeWithAnnotations.Create(_returnType); }
         }
 
-        public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations => FlowAnalysisAnnotations.None;
+        public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations =>
+            FlowAnalysisAnnotations.None;
 
-        public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull => ImmutableHashSet<string>.Empty;
+        public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull =>
+            ImmutableHashSet<string>.Empty;
 
         public override ImmutableArray<CustomModifier> RefCustomModifiers
         {
@@ -232,7 +236,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override int CalculateLocalSyntaxOffset(int localPosition, SyntaxTree localTree)
         {
-            return _containingType.CalculateSyntaxOffsetInSynthesizedConstructor(localPosition, localTree, isStatic: false);
+            return _containingType.CalculateSyntaxOffsetInSynthesizedConstructor(
+                localPosition,
+                localTree,
+                isStatic: false
+            );
         }
 
         internal TypeSymbol ResultType
@@ -248,8 +256,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // in any syntax tree. This could be refined to ignore top-level methods and
                 // type declarations but this simple approach matches C#8 behavior.
                 var compilation = DeclaringCompilation;
-                bool value = (compilation.Options.NullableContextOptions != NullableContextOptions.Disable) ||
-                    compilation.SyntaxTrees.Any(tree => ((CSharpSyntaxTree)tree).IsNullableAnalysisEnabled(new TextSpan(0, tree.Length)) == true);
+                bool value =
+                    (compilation.Options.NullableContextOptions != NullableContextOptions.Disable)
+                    || compilation.SyntaxTrees.Any(
+                        tree =>
+                            ((CSharpSyntaxTree)tree).IsNullableAnalysisEnabled(
+                                new TextSpan(0, tree.Length)
+                            ) == true
+                    );
                 _lazyIsNullableAnalysisEnabled = value.ToThreeState();
             }
             return _lazyIsNullableAnalysisEnabled == ThreeState.True;
@@ -259,8 +273,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SourceMemberContainerTypeSymbol containingType,
             BindingDiagnosticBag diagnostics,
             out TypeSymbol resultType,
-            out TypeSymbol returnType)
-        {
+            out TypeSymbol returnType
+        ) {
             CSharpCompilation compilation = containingType.DeclaringCompilation;
             var submissionReturnTypeOpt = compilation.ScriptCompilationInfo?.ReturnTypeOpt;
             var taskT = compilation.GetWellKnownType(WellKnownType.System_Threading_Tasks_Task_T);
@@ -270,9 +284,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // System.Object from the target corlib. This allows cross compiling scripts
             // to run on a target corlib that may differ from the host compiler's corlib.
             // cf. https://github.com/dotnet/roslyn/issues/8506
-            resultType = (object)submissionReturnTypeOpt == null
-                ? compilation.GetSpecialType(SpecialType.System_Object)
-                : compilation.GetTypeByReflectionType(submissionReturnTypeOpt, diagnostics);
+            resultType =
+                (object)submissionReturnTypeOpt == null
+                    ? compilation.GetSpecialType(SpecialType.System_Object)
+                    : compilation.GetTypeByReflectionType(submissionReturnTypeOpt, diagnostics);
             returnType = taskT.Construct(resultType);
         }
     }

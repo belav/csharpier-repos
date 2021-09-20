@@ -9,11 +9,23 @@ namespace Microsoft.CodeAnalysis.CodeGen
     internal interface ITokenDeferral
     {
         uint GetFakeStringTokenForIL(string value);
-        uint GetFakeSymbolTokenForIL(Cci.IReference value, SyntaxNode syntaxNode, DiagnosticBag diagnostics);
-        uint GetFakeSymbolTokenForIL(Cci.ISignature value, SyntaxNode syntaxNode, DiagnosticBag diagnostics);
+        uint GetFakeSymbolTokenForIL(
+            Cci.IReference value,
+            SyntaxNode syntaxNode,
+            DiagnosticBag diagnostics
+        );
+        uint GetFakeSymbolTokenForIL(
+            Cci.ISignature value,
+            SyntaxNode syntaxNode,
+            DiagnosticBag diagnostics
+        );
         uint GetSourceDocumentIndexForIL(Cci.DebugSourceDocument document);
 
-        Cci.IFieldReference GetFieldForData(ImmutableArray<byte> data, SyntaxNode syntaxNode, DiagnosticBag diagnostics);
+        Cci.IFieldReference GetFieldForData(
+            ImmutableArray<byte> data,
+            SyntaxNode syntaxNode,
+            DiagnosticBag diagnostics
+        );
         Cci.IMethodReference GetInitArrayHelper();
 
         string GetStringFromToken(uint token);

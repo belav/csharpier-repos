@@ -3,29 +3,40 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
-class CustomException : Exception
-{
-}
+class CustomException : Exception { }
 
 class Driver
 {
-	/* expected exit code: 255 */
-	static void Main (string[] args)
-	{
-		if (Environment.GetEnvironmentVariable ("TEST_UNHANDLED_EXCEPTION_HANDLER") != null)
-			AppDomain.CurrentDomain.UnhandledException += (s, e) => {};
+    /* expected exit code: 255 */
+    static void Main(string[] args)
+    {
+        if (Environment.GetEnvironmentVariable("TEST_UNHANDLED_EXCEPTION_HANDLER") != null)
+            AppDomain.CurrentDomain.UnhandledException += (s, e) => { };
 
-		ManualResetEvent mre = new ManualResetEvent (false);
+        ManualResetEvent mre = new ManualResetEvent(false);
 
-		ThreadPool.QueueUserWorkItem (_ => { try { throw new CustomException (); } finally { mre.Set (); } });
+        ThreadPool.QueueUserWorkItem(
+            _ =>
+            {
+                try
+                {
+                    throw new CustomException();
+                }
 
-		if (!mre.WaitOne (5000))
-			Environment.Exit (2);
+                finally
+                {
+                    mre.Set();
+                }
+            }
+        );
 
-		/* Give a chance to the threadpool thread to finish executing the exception unwinding
+        if (!mre.WaitOne(5000))
+            Environment.Exit(2);
+
+        /* Give a chance to the threadpool thread to finish executing the exception unwinding
 		 * after the finally, before we exit with status 0 on the current thread */
-		Thread.Sleep (1000);
+        Thread.Sleep(1000);
 
-		Environment.Exit (0);
-	}
+        Environment.Exit(0);
+    }
 }

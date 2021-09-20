@@ -24,8 +24,8 @@ namespace BasicWebSite.Controllers
         [HttpGet]
         public string EchoValue_DefaultParameterValue_ForStructs(
             Guid guid = default(Guid),
-            TimeSpan timeSpan = default(TimeSpan))
-        {
+            TimeSpan timeSpan = default(TimeSpan)
+        ) {
             return $"{guid}, {timeSpan}";
         }
     }

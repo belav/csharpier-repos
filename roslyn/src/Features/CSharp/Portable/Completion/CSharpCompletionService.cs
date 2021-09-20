@@ -20,13 +20,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpCompletionServiceFactory()
-        {
-        }
+        public CSharpCompletionServiceFactory() { }
 
         [Obsolete(MefConstruction.FactoryMethodMessage, error: true)]
-        public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
-            => new CSharpCompletionService(languageServices.WorkspaceServices.Workspace);
+        public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
+            new CSharpCompletionService(languageServices.WorkspaceServices.Workspace);
     }
 
     internal class CSharpCompletionService : CommonCompletionService
@@ -34,16 +32,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion
         private readonly Workspace _workspace;
 
         [Obsolete(MefConstruction.FactoryMethodMessage, error: true)]
-        public CSharpCompletionService(Workspace workspace)
-            : base(workspace)
+        public CSharpCompletionService(Workspace workspace) : base(workspace)
         {
             _workspace = workspace;
         }
 
         public override string Language => LanguageNames.CSharp;
 
-        public override TextSpan GetDefaultCompletionListSpan(SourceText text, int caretPosition)
-            => CompletionUtilities.GetCompletionItemSpan(text, caretPosition);
+        public override TextSpan GetDefaultCompletionListSpan(SourceText text, int caretPosition) =>
+            CompletionUtilities.GetCompletionItemSpan(text, caretPosition);
 
         private CompletionRules _latestRules = CompletionRules.Default;
 
@@ -51,8 +48,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion
         {
             var options = _workspace.Options;
 
-            var enterRule = options.GetOption(CompletionOptions.EnterKeyBehavior, LanguageNames.CSharp);
-            var snippetRule = options.GetOption(CompletionOptions.SnippetsBehavior, LanguageNames.CSharp);
+            var enterRule = options.GetOption(
+                CompletionOptions.EnterKeyBehavior,
+                LanguageNames.CSharp
+            );
+            var snippetRule = options.GetOption(
+                CompletionOptions.SnippetsBehavior,
+                LanguageNames.CSharp
+            );
 
             // Although EnterKeyBehavior is a per-language setting, the meaning of an unset setting (Default) differs between C# and VB
             // In C# the default means Never to maintain previous behavior
@@ -68,7 +71,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion
 
             // use interlocked + stored rules to reduce # of times this gets created when option is different than default
             var newRules = _latestRules.WithDefaultEnterKeyRule(enterRule)
-                                       .WithSnippetsRule(snippetRule);
+                .WithSnippetsRule(snippetRule);
 
             Interlocked.Exchange(ref _latestRules, newRules);
 

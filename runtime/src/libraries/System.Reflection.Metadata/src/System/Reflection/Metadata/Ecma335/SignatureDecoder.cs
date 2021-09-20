@@ -29,8 +29,8 @@ namespace System.Reflection.Metadata.Ecma335
         public SignatureDecoder(
             ISignatureTypeProvider<TType, TGenericContext> provider,
             MetadataReader metadataReader,
-            TGenericContext genericContext)
-        {
+            TGenericContext genericContext
+        ) {
             if (provider == null)
             {
                 Throw.ArgumentNull(nameof(provider));
@@ -52,11 +52,18 @@ namespace System.Reflection.Metadata.Ecma335
         /// <exception cref="System.BadImageFormatException">The reader was not positioned at a valid signature type.</exception>
         public TType DecodeType(ref BlobReader blobReader, bool allowTypeSpecifications = false)
         {
-            return DecodeType(ref blobReader, allowTypeSpecifications, blobReader.ReadCompressedInteger());
+            return DecodeType(
+                ref blobReader,
+                allowTypeSpecifications,
+                blobReader.ReadCompressedInteger()
+            );
         }
 
-        private TType DecodeType(ref BlobReader blobReader, bool allowTypeSpecifications, int typeCode)
-        {
+        private TType DecodeType(
+            ref BlobReader blobReader,
+            bool allowTypeSpecifications,
+            int typeCode
+        ) {
             TType elementType;
             int index;
 
@@ -124,10 +131,16 @@ namespace System.Reflection.Metadata.Ecma335
 
                 case (int)SignatureTypeKind.Class:
                 case (int)SignatureTypeKind.ValueType:
-                    return DecodeTypeHandle(ref blobReader, (byte)typeCode, allowTypeSpecifications);
+                    return DecodeTypeHandle(
+                        ref blobReader,
+                        (byte)typeCode,
+                        allowTypeSpecifications
+                    );
 
                 default:
-                    throw new BadImageFormatException(SR.Format(SR.UnexpectedSignatureTypeCode, typeCode));
+                    throw new BadImageFormatException(
+                        SR.Format(SR.UnexpectedSignatureTypeCode, typeCode)
+                    );
             }
         }
 
@@ -142,7 +155,9 @@ namespace System.Reflection.Metadata.Ecma335
                 // This method is used for Local signatures and method specs, neither of which can have
                 // 0 elements. Parameter sequences can have 0 elements, but they are handled separately
                 // to deal with the sentinel/varargs case.
-                throw new BadImageFormatException(SR.SignatureTypeSequenceMustHaveAtLeastOneElement);
+                throw new BadImageFormatException(
+                    SR.SignatureTypeSequenceMustHaveAtLeastOneElement
+                );
             }
 
             var types = ImmutableArray.CreateBuilder<TType>(count);
@@ -194,7 +209,13 @@ namespace System.Reflection.Metadata.Ecma335
                     {
                         break;
                     }
-                    parameterBuilder.Add(DecodeType(ref blobReader, allowTypeSpecifications: false, typeCode: typeCode));
+                    parameterBuilder.Add(
+                        DecodeType(
+                            ref blobReader,
+                            allowTypeSpecifications: false,
+                            typeCode: typeCode
+                        )
+                    );
                 }
 
                 requiredParameterCount = parameterIndex;
@@ -205,7 +226,13 @@ namespace System.Reflection.Metadata.Ecma335
                 parameterTypes = parameterBuilder.MoveToImmutable();
             }
 
-            return new MethodSignature<TType>(header, returnType, requiredParameterCount, genericParameterCount, parameterTypes);
+            return new MethodSignature<TType>(
+                header,
+                returnType,
+                requiredParameterCount,
+                genericParameterCount,
+                parameterTypes
+            );
         }
 
         /// <summary>
@@ -295,18 +322,29 @@ namespace System.Reflection.Metadata.Ecma335
             return _provider.GetModifiedType(modifier, unmodifiedType, isRequired);
         }
 
-        private TType DecodeTypeHandle(ref BlobReader blobReader, byte rawTypeKind, bool allowTypeSpecifications)
-        {
+        private TType DecodeTypeHandle(
+            ref BlobReader blobReader,
+            byte rawTypeKind,
+            bool allowTypeSpecifications
+        ) {
             EntityHandle handle = blobReader.ReadTypeHandle();
             if (!handle.IsNil)
             {
                 switch (handle.Kind)
                 {
                     case HandleKind.TypeDefinition:
-                        return _provider.GetTypeFromDefinition(_metadataReaderOpt, (TypeDefinitionHandle)handle, rawTypeKind);
+                        return _provider.GetTypeFromDefinition(
+                            _metadataReaderOpt,
+                            (TypeDefinitionHandle)handle,
+                            rawTypeKind
+                        );
 
                     case HandleKind.TypeReference:
-                        return _provider.GetTypeFromReference(_metadataReaderOpt, (TypeReferenceHandle)handle, rawTypeKind);
+                        return _provider.GetTypeFromReference(
+                            _metadataReaderOpt,
+                            (TypeReferenceHandle)handle,
+                            rawTypeKind
+                        );
 
                     case HandleKind.TypeSpecification:
                         if (!allowTypeSpecifications)
@@ -316,7 +354,12 @@ namespace System.Reflection.Metadata.Ecma335
                             throw new BadImageFormatException(SR.NotTypeDefOrRefHandle);
                         }
 
-                        return _provider.GetTypeFromSpecification(_metadataReaderOpt, _genericContext, (TypeSpecificationHandle)handle, rawTypeKind);
+                        return _provider.GetTypeFromSpecification(
+                            _metadataReaderOpt,
+                            _genericContext,
+                            (TypeSpecificationHandle)handle,
+                            rawTypeKind
+                        );
 
                     default:
                         // indicates an error returned from ReadTypeHandle, otherwise unreachable.
@@ -332,7 +375,14 @@ namespace System.Reflection.Metadata.Ecma335
         {
             if (header.Kind != expectedKind)
             {
-                throw new BadImageFormatException(SR.Format(SR.UnexpectedSignatureHeader, expectedKind, header.Kind, header.RawValue));
+                throw new BadImageFormatException(
+                    SR.Format(
+                        SR.UnexpectedSignatureHeader,
+                        expectedKind,
+                        header.Kind,
+                        header.RawValue
+                    )
+                );
             }
         }
 
@@ -341,7 +391,15 @@ namespace System.Reflection.Metadata.Ecma335
             SignatureKind kind = header.Kind;
             if (kind != SignatureKind.Method && kind != SignatureKind.Property)
             {
-                throw new BadImageFormatException(SR.Format(SR.UnexpectedSignatureHeader2, SignatureKind.Property, SignatureKind.Method, header.Kind, header.RawValue));
+                throw new BadImageFormatException(
+                    SR.Format(
+                        SR.UnexpectedSignatureHeader2,
+                        SignatureKind.Property,
+                        SignatureKind.Method,
+                        header.Kind,
+                        header.RawValue
+                    )
+                );
             }
         }
     }

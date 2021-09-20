@@ -10,10 +10,10 @@ namespace Microsoft.CodeAnalysis
 {
     internal class OrderableMetadata
     {
-        [DefaultValue(new string[] { })]
+        [DefaultValue(new string[] {  })]
         public object? After { get; }
 
-        [DefaultValue(new string[] { })]
+        [DefaultValue(new string[] {  })]
         public object? Before { get; }
 
         internal IEnumerable<string> AfterTyped { get; set; }
@@ -29,8 +29,11 @@ namespace Microsoft.CodeAnalysis
             this.Name = (string?)data.GetValueOrDefault("Name");
         }
 
-        public OrderableMetadata(string? name, IEnumerable<string>? after = null, IEnumerable<string>? before = null)
-        {
+        public OrderableMetadata(
+            string? name,
+            IEnumerable<string>? after = null,
+            IEnumerable<string>? before = null
+        ) {
             this.AfterTyped = after ?? SpecializedCollections.EmptyEnumerable<string>();
             this.BeforeTyped = before ?? SpecializedCollections.EmptyEnumerable<string>();
             this.Name = name;

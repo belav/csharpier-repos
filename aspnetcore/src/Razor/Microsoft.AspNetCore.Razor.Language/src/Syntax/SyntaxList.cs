@@ -5,10 +5,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 {
     internal abstract class SyntaxList : SyntaxNode
     {
-        internal SyntaxList(InternalSyntax.SyntaxList green, SyntaxNode parent, int position)
-            : base(green, parent, position)
-        {
-        }
+        internal SyntaxList(
+            InternalSyntax.SyntaxList green,
+            SyntaxNode parent,
+            int position
+        ) : base(green, parent, position) { }
 
         public override TResult Accept<TResult>(SyntaxVisitor<TResult> visitor)
         {
@@ -25,10 +26,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             private SyntaxNode _child0;
             private SyntaxNode _child1;
 
-            internal WithTwoChildren(InternalSyntax.SyntaxList green, SyntaxNode parent, int position)
-                : base(green, parent, position)
-            {
-            }
+            internal WithTwoChildren(
+                InternalSyntax.SyntaxList green,
+                SyntaxNode parent,
+                int position
+            ) : base(green, parent, position) { }
 
             internal override SyntaxNode GetNodeSlot(int index)
             {
@@ -63,10 +65,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             private SyntaxNode _child1;
             private SyntaxNode _child2;
 
-            internal WithThreeChildren(InternalSyntax.SyntaxList green, SyntaxNode parent, int position)
-                : base(green, parent, position)
-            {
-            }
+            internal WithThreeChildren(
+                InternalSyntax.SyntaxList green,
+                SyntaxNode parent,
+                int position
+            ) : base(green, parent, position) { }
 
             internal override SyntaxNode GetNodeSlot(int index)
             {
@@ -103,8 +106,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         {
             private readonly ArrayElement<SyntaxNode>[] _children;
 
-            internal WithManyChildren(InternalSyntax.SyntaxList green, SyntaxNode parent, int position)
-                : base(green, parent, position)
+            internal WithManyChildren(
+                InternalSyntax.SyntaxList green,
+                SyntaxNode parent,
+                int position
+            ) : base(green, parent, position)
             {
                 _children = new ArrayElement<SyntaxNode>[green.SlotCount];
             }

@@ -18,8 +18,11 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         private static readonly JsonEncodedText Detail = JsonEncodedText.Encode("detail");
         private static readonly JsonEncodedText Instance = JsonEncodedText.Encode("instance");
 
-        public override ProblemDetails Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
+        public override ProblemDetails Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        ) {
             var problemDetails = new ProblemDetails();
 
             if (reader.TokenType != JsonTokenType.StartObject)
@@ -40,15 +43,21 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             return problemDetails;
         }
 
-        public override void Write(Utf8JsonWriter writer, ProblemDetails value, JsonSerializerOptions options)
-        {
+        public override void Write(
+            Utf8JsonWriter writer,
+            ProblemDetails value,
+            JsonSerializerOptions options
+        ) {
             writer.WriteStartObject();
             WriteProblemDetails(writer, value, options);
             writer.WriteEndObject();
         }
 
-        internal static void ReadValue(ref Utf8JsonReader reader, ProblemDetails value, JsonSerializerOptions options)
-        {
+        internal static void ReadValue(
+            ref Utf8JsonReader reader,
+            ProblemDetails value,
+            JsonSerializerOptions options
+        ) {
             if (TryReadStringProperty(ref reader, Type, out var propertyValue))
             {
                 value.Type = propertyValue;
@@ -81,12 +90,19 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             {
                 var key = reader.GetString()!;
                 reader.Read();
-                value.Extensions[key] = JsonSerializer.Deserialize(ref reader, typeof(object), options);
+                value.Extensions[key] = JsonSerializer.Deserialize(
+                    ref reader,
+                    typeof(object),
+                    options
+                );
             }
         }
 
-        internal static bool TryReadStringProperty(ref Utf8JsonReader reader, JsonEncodedText propertyName, [NotNullWhen(true)] out string? value)
-        {
+        internal static bool TryReadStringProperty(
+            ref Utf8JsonReader reader,
+            JsonEncodedText propertyName,
+            [NotNullWhen(true)] out string? value
+        ) {
             if (!reader.ValueTextEquals(propertyName.EncodedUtf8Bytes))
             {
                 value = default;
@@ -98,8 +114,11 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             return true;
         }
 
-        internal static void WriteProblemDetails(Utf8JsonWriter writer, ProblemDetails value, JsonSerializerOptions options)
-        {
+        internal static void WriteProblemDetails(
+            Utf8JsonWriter writer,
+            ProblemDetails value,
+            JsonSerializerOptions options
+        ) {
             if (value.Type != null)
             {
                 writer.WriteString(Type, value.Type);
@@ -128,7 +147,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             foreach (var kvp in value.Extensions)
             {
                 writer.WritePropertyName(kvp.Key);
-                JsonSerializer.Serialize(writer, kvp.Value, kvp.Value?.GetType() ?? typeof(object), options);
+                JsonSerializer.Serialize(
+                    writer,
+                    kvp.Value,
+                    kvp.Value?.GetType() ?? typeof(object),
+                    options
+                );
             }
         }
     }

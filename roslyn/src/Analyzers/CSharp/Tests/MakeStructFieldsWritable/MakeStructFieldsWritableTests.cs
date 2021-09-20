@@ -10,21 +10,26 @@ using Microsoft.CodeAnalysis.Test.Utilities;
 using Xunit;
 using VerifyCS = Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions.CSharpCodeFixVerifier<
     Microsoft.CodeAnalysis.CSharp.MakeStructFieldsWritable.CSharpMakeStructFieldsWritableDiagnosticAnalyzer,
-    Microsoft.CodeAnalysis.CSharp.MakeStructFieldsWritable.CSharpMakeStructFieldsWritableCodeFixProvider>;
+    Microsoft.CodeAnalysis.CSharp.MakeStructFieldsWritable.CSharpMakeStructFieldsWritableCodeFixProvider
+>;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritable
 {
     public class MakeStructFieldsWritableTests
     {
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsMakeStructFieldsWritable)]
-        public void TestStandardProperty(AnalyzerProperty property)
-            => VerifyCS.VerifyStandardProperty(property);
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsMakeStructFieldsWritable)
+        ]
+        public void TestStandardProperty(AnalyzerProperty property) =>
+            VerifyCS.VerifyStandardProperty(property);
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeStructFieldsWritable)]
         public async Task SingleReadonlyField_ThisAssigmentInMethod()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"struct [|MyStruct|]
+                @"struct [|MyStruct|]
 {
     public readonly int Value;
 
@@ -38,7 +43,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
         this = new MyStruct(5);
     }
 }",
-@"struct MyStruct
+                @"struct MyStruct
 {
     public int Value;
 
@@ -51,14 +56,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
     {
         this = new MyStruct(5);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeStructFieldsWritable)]
         public async Task SingleReadonlyField_ThisAssigmentInMultipleMethods()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"struct [|MyStruct|]
+                @"struct [|MyStruct|]
 {
     public readonly int Value;
 
@@ -77,7 +83,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
         this = new MyStruct(10);
     }
 }",
-@"struct MyStruct
+                @"struct MyStruct
 {
     public int Value;
 
@@ -95,13 +101,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
     {
         this = new MyStruct(10);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeStructFieldsWritable)]
         public async Task SingleNonReadonlyField_ThisAssigmentInMethod()
         {
-            var code = @"struct MyStruct
+            var code =
+                @"struct MyStruct
 {
     public int Value;
 
@@ -123,7 +131,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
         public async Task MultipleMixedFields_ThisAssigmentInMethod()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"struct [|MyStruct|]
+                @"struct [|MyStruct|]
 {
     public readonly int First;
     public readonly int Second;
@@ -141,7 +149,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
         this = new MyStruct(5, 3, 1);
     }
 }",
-@"struct MyStruct
+                @"struct MyStruct
 {
     public int First;
     public int Second;
@@ -158,13 +166,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
     {
         this = new MyStruct(5, 3, 1);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeStructFieldsWritable)]
         public async Task SingleReadonlyField_ThisAssigmentInCtor()
         {
-            var code = @"struct MyStruct
+            var code =
+                @"struct MyStruct
 {
     public readonly int Value;
 
@@ -185,7 +195,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeStructFieldsWritable)]
         public async Task SingleReadonlyField_NoThisAssigment()
         {
-            var code = @"struct MyStruct
+            var code =
+                @"struct MyStruct
 {
     public readonly int Value;
 
@@ -202,7 +213,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
         public async Task SingleReadonlyField_ThisAssigmentInMethod_ReportDiagnostic()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"struct [|MyStruct|]
+                @"struct [|MyStruct|]
 {
     public readonly int Value;
 
@@ -216,7 +227,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
         this = new MyStruct(5);
     }
 }",
-@"struct MyStruct
+                @"struct MyStruct
 {
     public int Value;
 
@@ -229,13 +240,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
     {
         this = new MyStruct(5);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeStructFieldsWritable)]
         public async Task SingleReadonlyField_InClass()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     public readonly int Value;
 
@@ -257,7 +270,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeStructFieldsWritable)]
         public async Task StructWithoutField()
         {
-            var code = @"struct MyStruct
+            var code =
+                @"struct MyStruct
 {
     public void Test()
     {
@@ -271,7 +285,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeStructFieldsWritable)]
         public async Task SingleProperty_ThisAssigmentInMethod()
         {
-            var code = @"struct MyStruct
+            var code =
+                @"struct MyStruct
 {
     public int Value { get; set; }
 
@@ -292,7 +307,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeStructFieldsWritable)]
         public async Task SingleGetterProperty_ThisAssigmentInMethod()
         {
-            var code = @"struct MyStruct
+            var code =
+                @"struct MyStruct
 {
     public int Value { get; }
 
@@ -314,7 +330,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructFieldsWritabl
         public async Task MultipleStructDeclaration_SingleReadonlyField_ThisAssigmentInMethod()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"struct [|MyStruct|]
+                @"struct [|MyStruct|]
 {
     public readonly int Value;
 
@@ -343,7 +359,7 @@ struct [|MyStruct2|]
         this = new MyStruct2(5);
     }
 }",
-@"struct MyStruct
+                @"struct MyStruct
 {
     public int Value;
 
@@ -371,14 +387,15 @@ struct MyStruct2
     {
         this = new MyStruct2(5);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeStructFieldsWritable)]
         public async Task MultipleStructDeclaration_SingleReadonlyField_ThisAssigmentInMethod_ShouldNotReportDiagnostic()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"struct MyStruct
+                @"struct MyStruct
 {
     public int Value;
 
@@ -407,7 +424,7 @@ struct [|MyStruct2|]
         this = new MyStruct2(5);
     }
 }",
-@"struct MyStruct
+                @"struct MyStruct
 {
     public int Value;
 
@@ -435,14 +452,15 @@ struct MyStruct2
     {
         this = new MyStruct2(5);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeStructFieldsWritable)]
         public async Task NestedStructDeclaration_SingleNestedReadonlyField_ThisAssigmentInMethod()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"struct [|MyStruct|]
+                @"struct [|MyStruct|]
 {
     public readonly int Value;
 
@@ -471,7 +489,7 @@ struct MyStruct2
         }
     }
 }",
-@"struct MyStruct
+                @"struct MyStruct
 {
     public int Value;
 
@@ -499,14 +517,15 @@ struct MyStruct2
             this = new NestedStruct(5);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeStructFieldsWritable)]
         public async Task NestedStructDeclaration_SingleReadonlyField_ThisAssigmentInMethod()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"struct [|MyStruct|]
+                @"struct [|MyStruct|]
 {
     public readonly int Value;
 
@@ -535,7 +554,7 @@ struct MyStruct2
         }
     }
 }",
-@"struct MyStruct
+                @"struct MyStruct
 {
     public int Value;
 
@@ -563,14 +582,15 @@ struct MyStruct2
             this = new NestedStruct(5);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeStructFieldsWritable)]
         public async Task StructDeclaration_MixedFields_MixedAssigmentsInMethods()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"struct [|MyStruct|]
+                @"struct [|MyStruct|]
 {
     public readonly int Value;
     public int TestValue;
@@ -591,7 +611,7 @@ struct MyStruct2
         TestValue = 0;
     }
 }",
-@"struct MyStruct
+                @"struct MyStruct
 {
     public int Value;
     public int TestValue;
@@ -611,14 +631,15 @@ struct MyStruct2
     {
         TestValue = 0;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeStructFieldsWritable)]
         public async Task StructDeclaration_ChangedOrderOfConstructorDeclaration()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"struct [|MyStruct|]
+                @"struct [|MyStruct|]
 {
     public readonly int Value;
 
@@ -632,7 +653,7 @@ struct MyStruct2
         Value = value;
     }
 }",
-@"struct MyStruct
+                @"struct MyStruct
 {
     public int Value;
 
@@ -645,7 +666,8 @@ struct MyStruct2
     {
         Value = value;
     }
-}");
+}"
+            );
         }
     }
 }

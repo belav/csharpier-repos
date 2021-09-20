@@ -18,8 +18,11 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
             public readonly CompletionChange Change;
 
             public RegexItem(
-                string displayText, string inlineDescription, string fullDescription, CompletionChange change)
-            {
+                string displayText,
+                string inlineDescription,
+                string fullDescription,
+                CompletionChange change
+            ) {
                 DisplayText = displayText;
                 InlineDescription = inlineDescription;
                 FullDescription = fullDescription;

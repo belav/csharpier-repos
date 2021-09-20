@@ -36,24 +36,39 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             TestWorkspace workspace,
             IReadOnlyDictionary<string, ImmutableArray<DiagnosticAnalyzer>>? analyzerMap = null,
             IDiagnosticUpdateSource? updateSource = null,
-            bool createTaggerProvider = true)
-        {
+            bool createTaggerProvider = true
+        ) {
             _threadingContext = workspace.GetService<IThreadingContext>();
             _listenerProvider = workspace.GetService<IAsynchronousOperationListenerProvider>();
 
-            var analyzerReference = new TestAnalyzerReferenceByLanguage(analyzerMap ?? DiagnosticExtensions.GetCompilerDiagnosticAnalyzersMap());
-            workspace.TryApplyChanges(workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference }));
+            var analyzerReference = new TestAnalyzerReferenceByLanguage(
+                analyzerMap ?? DiagnosticExtensions.GetCompilerDiagnosticAnalyzersMap()
+            );
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference })
+            );
 
             _workspace = workspace;
 
-            _registrationService = (SolutionCrawlerRegistrationService)workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
+            _registrationService =
+                (SolutionCrawlerRegistrationService)workspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>();
             _registrationService.Register(workspace);
 
-            if (!_registrationService.GetTestAccessor().TryGetWorkCoordinator(workspace, out var coordinator))
+            if (
+                !_registrationService.GetTestAccessor()
+                    .TryGetWorkCoordinator(workspace, out var coordinator)
+            )
                 throw new InvalidOperationException();
 
-            AnalyzerService = (DiagnosticAnalyzerService?)_registrationService.GetTestAccessor().AnalyzerProviders.SelectMany(pair => pair.Value).SingleOrDefault(lazyProvider => lazyProvider.Metadata.Name == WellKnownSolutionCrawlerAnalyzers.Diagnostic && lazyProvider.Metadata.HighPriorityForActiveFile)?.Value;
-            DiagnosticService = (DiagnosticService)workspace.ExportProvider.GetExportedValue<IDiagnosticService>();
+            AnalyzerService = (DiagnosticAnalyzerService?)_registrationService.GetTestAccessor()
+                .AnalyzerProviders.SelectMany(pair => pair.Value)
+                .SingleOrDefault(
+                    lazyProvider =>
+                        lazyProvider.Metadata.Name == WellKnownSolutionCrawlerAnalyzers.Diagnostic
+                        && lazyProvider.Metadata.HighPriorityForActiveFile
+                )?.Value;
+            DiagnosticService =
+                (DiagnosticService)workspace.ExportProvider.GetExportedValue<IDiagnosticService>();
 
             if (updateSource is object)
             {
@@ -72,15 +87,19 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             {
                 if (_taggerProvider == null)
                 {
-                    WpfTestRunner.RequireWpfFact($"{nameof(DiagnosticTaggerWrapper<TProvider, TTag>)}.{nameof(TaggerProvider)} creates asynchronous taggers");
+                    WpfTestRunner.RequireWpfFact(
+                        $"{nameof(DiagnosticTaggerWrapper<TProvider, TTag>)}.{nameof(TaggerProvider)} creates asynchronous taggers"
+                    );
 
-                    if (typeof(TProvider) == typeof(DiagnosticsSquiggleTaggerProvider)
+                    if (
+                        typeof(TProvider) == typeof(DiagnosticsSquiggleTaggerProvider)
                         || typeof(TProvider) == typeof(DiagnosticsSuggestionTaggerProvider)
-                        || typeof(TProvider) == typeof(DiagnosticsClassificationTaggerProvider))
-                    {
-                        _taggerProvider = _workspace.ExportProvider.GetExportedValues<ITaggerProvider>()
-                            .OfType<TProvider>()
-                            .Single();
+                        || typeof(TProvider) == typeof(DiagnosticsClassificationTaggerProvider)
+                    ) {
+                        _taggerProvider =
+                            _workspace.ExportProvider.GetExportedValues<ITaggerProvider>()
+                                .OfType<TProvider>()
+                                .Single();
                     }
                     else
                     {
@@ -92,8 +111,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             }
         }
 
-        public void Dispose()
-            => _registrationService.Unregister(_workspace);
+        public void Dispose() => _registrationService.Unregister(_workspace);
 
         public async Task WaitForTags()
         {
@@ -103,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                 FeatureAttribute.SolutionCrawler,
                 FeatureAttribute.DiagnosticService,
                 FeatureAttribute.ErrorSquiggles,
-                FeatureAttribute.Classification);
+                FeatureAttribute.Classification
+            );
         }
     }
 }

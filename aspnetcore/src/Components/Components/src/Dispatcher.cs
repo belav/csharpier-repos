@@ -32,9 +32,10 @@ namespace Microsoft.AspNetCore.Components
             if (!CheckAccess())
             {
                 throw new InvalidOperationException(
-                    "The current thread is not associated with the Dispatcher. " +
-                    "Use InvokeAsync() to switch execution to the Dispatcher when " +
-                    "triggering rendering or component state.");
+                    "The current thread is not associated with the Dispatcher. "
+                        + "Use InvokeAsync() to switch execution to the Dispatcher when "
+                        + "triggering rendering or component state."
+                );
             }
         }
 

@@ -24,7 +24,6 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             QuestionMark = '?',
             LessThan = '<',
             GreaterThan = '>',
-
             Start = char.MaxValue + 1,
             End,
             Identifier,
@@ -38,8 +37,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             internal readonly string Text;
             internal readonly SyntaxKind KeywordKind;
 
-            internal Token(TokenKind kind, string text = null, SyntaxKind keywordKind = SyntaxKind.None)
-            {
+            internal Token(
+                TokenKind kind,
+                string text = null,
+                SyntaxKind keywordKind = SyntaxKind.None
+            ) {
                 Kind = kind;
                 Text = text;
                 KeywordKind = keywordKind;
@@ -47,9 +49,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
             private string GetDebuggerDisplay()
             {
-                return (Text == null) ?
-                    Kind.ToString() :
-                    $"{Kind}: \"{Text}\"";
+                return (Text == null) ? Kind.ToString() : $"{Kind}: \"{Text}\"";
             }
         }
 
@@ -101,8 +101,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 {
                     return ScanIdentifierAfterStartCharacter(verbatim: false);
                 }
-                else if (c == '@' && _offset < length && UnicodeCharacterUtilities.IsIdentifierStartCharacter(_text[_offset]))
-                {
+                else if (
+                    c == '@'
+                    && _offset < length
+                    && UnicodeCharacterUtilities.IsIdentifierStartCharacter(_text[_offset])
+                ) {
                     _offset++;
                     return ScanIdentifierAfterStartCharacter(verbatim: true);
                 }
@@ -114,19 +117,24 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             {
                 // Assert the offset is immediately following the start character.
                 Debug.Assert(_offset > 0);
-                Debug.Assert(UnicodeCharacterUtilities.IsIdentifierStartCharacter(_text[_offset - 1]));
-                Debug.Assert(_offset == 1 || !UnicodeCharacterUtilities.IsIdentifierPartCharacter(_text[_offset - 2]));
+                Debug.Assert(
+                    UnicodeCharacterUtilities.IsIdentifierStartCharacter(_text[_offset - 1])
+                );
+                Debug.Assert(
+                    _offset == 1
+                        || !UnicodeCharacterUtilities.IsIdentifierPartCharacter(_text[_offset - 2])
+                );
 
                 int length = _text.Length;
                 int start = _offset - 1;
-                while ((_offset < length) && UnicodeCharacterUtilities.IsIdentifierPartCharacter(_text[_offset]))
-                {
+                while (
+                    (_offset < length)
+                    && UnicodeCharacterUtilities.IsIdentifierPartCharacter(_text[_offset])
+                ) {
                     _offset++;
                 }
                 var text = _text.Substring(start, _offset - start);
-                var keywordKind = verbatim ?
-                    SyntaxKind.None :
-                    SyntaxFacts.GetKeywordKind(text);
+                var keywordKind = verbatim ? SyntaxKind.None : SyntaxFacts.GetKeywordKind(text);
                 if (keywordKind == SyntaxKind.None)
                 {
                     return new Token(TokenKind.Identifier, text);

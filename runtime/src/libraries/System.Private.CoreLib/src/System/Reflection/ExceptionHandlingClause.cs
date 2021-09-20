@@ -13,7 +13,8 @@ namespace System.Reflection
         public virtual int TryLength => 0;
         public virtual int HandlerOffset => 0;
         public virtual int HandlerLength => 0;
-        public virtual int FilterOffset => throw new InvalidOperationException(SR.Arg_EHClauseNotFilter);
+        public virtual int FilterOffset =>
+            throw new InvalidOperationException(SR.Arg_EHClauseNotFilter);
         public virtual Type? CatchType => null;
 
         public override string ToString() =>

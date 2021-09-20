@@ -12,13 +12,11 @@ using Microsoft.Extensions.Logging.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class MvcTestFixture<TStartup> : WebApplicationFactory<TStartup>
-        where TStartup : class
+    public class MvcTestFixture<TStartup> : WebApplicationFactory<TStartup> where TStartup : class
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
-            builder
-                .UseRequestCulture<TStartup>("en-GB", "en-US")
+            builder.UseRequestCulture<TStartup>("en-GB", "en-US")
                 .UseEnvironment("Production")
                 .ConfigureServices(
                     services =>
@@ -27,7 +25,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                         var loggerFactory = new TestLoggerFactory(testSink, enabled: true);
                         services.AddSingleton<ILoggerFactory>(loggerFactory);
                         services.AddSingleton<TestSink>(testSink);
-                    });
+                    }
+                );
         }
 
         protected override TestServer CreateServer(IWebHostBuilder builder)
@@ -40,6 +39,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 CultureInfo.CurrentUICulture = new CultureInfo("en-US");
                 return base.CreateServer(builder);
             }
+
             finally
             {
                 CultureInfo.CurrentCulture = originalCulture;
@@ -57,6 +57,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 CultureInfo.CurrentUICulture = new CultureInfo("en-US");
                 return base.CreateHost(builder);
             }
+
             finally
             {
                 CultureInfo.CurrentCulture = originalCulture;

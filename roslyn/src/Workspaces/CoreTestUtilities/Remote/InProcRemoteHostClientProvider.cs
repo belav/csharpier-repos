@@ -18,33 +18,54 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
 {
     internal sealed class InProcRemoteHostClientProvider : IRemoteHostClientProvider, IDisposable
     {
-        [ExportWorkspaceServiceFactory(typeof(IRemoteHostClientProvider), ServiceLayer.Test), Shared, PartNotDiscoverable]
+        [
+            ExportWorkspaceServiceFactory(typeof(IRemoteHostClientProvider), ServiceLayer.Test),
+            Shared,
+            PartNotDiscoverable
+        ]
         internal sealed class Factory : IWorkspaceServiceFactory
         {
             private readonly RemoteServiceCallbackDispatcherRegistry _callbackDispatchers;
 
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Factory([ImportMany] IEnumerable<Lazy<IRemoteServiceCallbackDispatcher, RemoteServiceCallbackDispatcherRegistry.ExportMetadata>> callbackDispatchers)
-                => _callbackDispatchers = new RemoteServiceCallbackDispatcherRegistry(callbackDispatchers);
+            public Factory(
+                [ImportMany]
+                    IEnumerable<
+                    Lazy<
+                        IRemoteServiceCallbackDispatcher,
+                        RemoteServiceCallbackDispatcherRegistry.ExportMetadata
+                    >
+                > callbackDispatchers
+            ) =>
+                _callbackDispatchers = new RemoteServiceCallbackDispatcherRegistry(
+                    callbackDispatchers
+                );
 
-            public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-                => new InProcRemoteHostClientProvider(workspaceServices, _callbackDispatchers);
+            public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+                new InProcRemoteHostClientProvider(workspaceServices, _callbackDispatchers);
         }
 
         private sealed class WorkspaceManager : RemoteWorkspaceManager
         {
-            public WorkspaceManager(SolutionAssetCache assetStorage, Type[]? additionalRemoteParts)
-                : base(assetStorage)
+            public WorkspaceManager(
+                SolutionAssetCache assetStorage,
+                Type[]? additionalRemoteParts
+            ) : base(assetStorage)
             {
                 LazyWorkspace = new Lazy<RemoteWorkspace>(
-                    () => new RemoteWorkspace(FeaturesTestCompositions.RemoteHost.AddParts(additionalRemoteParts).GetHostServices(), WorkspaceKind.RemoteWorkspace));
+                    () =>
+                        new RemoteWorkspace(
+                            FeaturesTestCompositions.RemoteHost.AddParts(additionalRemoteParts)
+                                .GetHostServices(),
+                            WorkspaceKind.RemoteWorkspace
+                        )
+                );
             }
 
             public Lazy<RemoteWorkspace> LazyWorkspace { get; }
 
-            public override RemoteWorkspace GetWorkspace()
-                => LazyWorkspace.Value;
+            public override RemoteWorkspace GetWorkspace() => LazyWorkspace.Value;
         }
 
         private readonly HostWorkspaceServices _services;
@@ -55,18 +76,29 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
         public Type[]? AdditionalRemoteParts { get; set; }
         public TraceListener? TraceListener { get; set; }
 
-        public InProcRemoteHostClientProvider(HostWorkspaceServices services, RemoteServiceCallbackDispatcherRegistry callbackDispatchers)
-        {
+        public InProcRemoteHostClientProvider(
+            HostWorkspaceServices services,
+            RemoteServiceCallbackDispatcherRegistry callbackDispatchers
+        ) {
             _services = services;
 
-            _lazyManager = new Lazy<WorkspaceManager>(() => new WorkspaceManager(RemoteAssetStorage ?? new SolutionAssetCache(), AdditionalRemoteParts));
+            _lazyManager = new Lazy<WorkspaceManager>(
+                () =>
+                    new WorkspaceManager(
+                        RemoteAssetStorage ?? new SolutionAssetCache(),
+                        AdditionalRemoteParts
+                    )
+            );
             _lazyClient = new AsyncLazy<RemoteHostClient>(
-                cancellationToken => InProcRemoteHostClient.CreateAsync(
-                    _services,
-                    callbackDispatchers,
-                    TraceListener,
-                    new RemoteHostTestData(_lazyManager.Value, isInProc: true)),
-                cacheResult: true);
+                cancellationToken =>
+                    InProcRemoteHostClient.CreateAsync(
+                        _services,
+                        callbackDispatchers,
+                        TraceListener,
+                        new RemoteHostTestData(_lazyManager.Value, isInProc: true)
+                    ),
+                cacheResult: true
+            );
         }
 
         public void Dispose()
@@ -82,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
             }
         }
 
-        public Task<RemoteHostClient?> TryGetRemoteHostClientAsync(CancellationToken cancellationToken)
-            => _lazyClient.GetValueAsync(cancellationToken).AsNullable();
+        public Task<RemoteHostClient?> TryGetRemoteHostClientAsync(
+            CancellationToken cancellationToken
+        ) => _lazyClient.GetValueAsync(cancellationToken).AsNullable();
     }
 }

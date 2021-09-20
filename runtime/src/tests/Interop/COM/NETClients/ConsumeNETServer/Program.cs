@@ -54,6 +54,7 @@ namespace NetClient
                 object inst = test.GetRCW();
                 Assert.AreEqual(rcw, inst);
             }
+
             finally
             {
                 test.ReleaseResources();
@@ -71,6 +72,7 @@ namespace NetClient
                 Assert.IsTrue(test.EqualByCCW(test));
                 Assert.IsTrue(test.NotEqualByRCW(test));
             }
+
             finally
             {
                 test.ReleaseResources();
@@ -88,16 +90,21 @@ namespace NetClient
             // Initialize CoreShim and hostpolicymock
             HostPolicyMock.Initialize(Environment.CurrentDirectory, null);
             Environment.SetEnvironmentVariable("CORESHIM_COMACT_ASSEMBLYNAME", "NETServer");
-            Environment.SetEnvironmentVariable("CORESHIM_COMACT_TYPENAME", "ConsumeNETServerTesting");
+            Environment.SetEnvironmentVariable(
+                "CORESHIM_COMACT_TYPENAME",
+                "ConsumeNETServerTesting"
+            );
 
             try
             {
-                using (HostPolicyMock.Mock_corehost_resolve_component_dependencies(
-                    0,
-                    string.Empty,
-                    string.Empty,
-                    string.Empty))
-                {
+                using (
+                    HostPolicyMock.Mock_corehost_resolve_component_dependencies(
+                        0,
+                        string.Empty,
+                        string.Empty,
+                        string.Empty
+                    )
+                ) {
                     Validate_Activation();
                     Validate_CCW_Wasnt_Unwrapped();
                     Validate_Client_CCW_RCW();

@@ -32,7 +32,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                     Resources.FormatFormCollectionModelBinder_CannotBindToFormCollection(
                         typeof(FormCollectionModelBinder).FullName,
                         modelType.FullName,
-                        typeof(IFormCollection).FullName));
+                        typeof(IFormCollection).FullName
+                    )
+                );
             }
 
             if (modelType == typeof(IFormCollection))

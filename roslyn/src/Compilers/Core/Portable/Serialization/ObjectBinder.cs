@@ -48,15 +48,21 @@ namespace Roslyn.Utilities
             {
                 if (s_lastSnapshot == null)
                 {
-                    s_lastSnapshot = new ObjectBinderSnapshot(s_typeToIndex, s_types, s_typeReaders);
+                    s_lastSnapshot = new ObjectBinderSnapshot(
+                        s_typeToIndex,
+                        s_types,
+                        s_typeReaders
+                    );
                 }
 
                 return s_lastSnapshot.Value;
             }
         }
 
-        public static void RegisterTypeReader(Type type, Func<ObjectReader, IObjectWritable> typeReader)
-        {
+        public static void RegisterTypeReader(
+            Type type,
+            Func<ObjectReader, IObjectWritable> typeReader
+        ) {
             lock (s_gate)
             {
                 if (s_typeToIndex.ContainsKey(type))

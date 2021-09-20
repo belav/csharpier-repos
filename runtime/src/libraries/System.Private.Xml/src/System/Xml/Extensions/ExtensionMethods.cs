@@ -3,7 +3,6 @@
 
 using System.Reflection;
 
-
 namespace System.Xml.Extensions
 {
     internal static class ExtensionMethods

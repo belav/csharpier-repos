@@ -17,7 +17,9 @@ namespace System.MathBenchmarks
 
         public static void MaxTest()
         {
-            double result = 0.0, val1 = -1.0, val2 = -1.0 - maxDelta;
+            double result = 0.0,
+                val1 = -1.0,
+                val2 = -1.0 - maxDelta;
 
             for (int iteration = 0; iteration < MathTests.Iterations; iteration++)
             {
@@ -29,7 +31,9 @@ namespace System.MathBenchmarks
 
             if (diff > MathTests.DoubleEpsilon)
             {
-                throw new Exception($"Expected Result {maxExpectedResult,20:g17}; Actual Result {result,20:g17}");
+                throw new Exception(
+                    $"Expected Result {maxExpectedResult, 20:g17}; Actual Result {result, 20:g17}"
+                );
             }
         }
     }

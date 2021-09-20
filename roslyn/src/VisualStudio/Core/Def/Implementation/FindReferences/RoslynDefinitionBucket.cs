@@ -30,19 +30,23 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             /// the same file/span.  So we represent this as one entry with several project flavors.  If
             /// we get more than one flavor, we'll show that the user in the UI.
             /// </summary>
-            private readonly Dictionary<(string? filePath, TextSpan span), DocumentSpanEntry> _locationToEntry = new();
+            private readonly Dictionary<
+                (string? filePath, TextSpan span),
+                DocumentSpanEntry
+            > _locationToEntry = new();
 
             public RoslynDefinitionBucket(
                 string name,
                 bool expandedByDefault,
                 StreamingFindUsagesPresenter presenter,
                 AbstractTableDataSourceFindUsagesContext context,
-                DefinitionItem definitionItem)
-                : base(name,
-                       sourceTypeIdentifier: context.SourceTypeIdentifier,
-                       identifier: context.Identifier,
-                       expandedByDefault: expandedByDefault)
-            {
+                DefinitionItem definitionItem
+            ) : base(
+                name,
+                sourceTypeIdentifier: context.SourceTypeIdentifier,
+                identifier: context.Identifier,
+                expandedByDefault: expandedByDefault
+            ) {
                 _presenter = presenter;
                 DefinitionItem = definitionItem;
             }
@@ -51,20 +55,30 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 StreamingFindUsagesPresenter presenter,
                 AbstractTableDataSourceFindUsagesContext context,
                 DefinitionItem definitionItem,
-                bool expandedByDefault)
-            {
+                bool expandedByDefault
+            ) {
                 var isPrimary = definitionItem.Properties.ContainsKey(DefinitionItem.Primary);
 
                 // Sort the primary item above everything else.
-                var name = $"{(isPrimary ? 0 : 1)} {definitionItem.DisplayParts.JoinText()} {definitionItem.GetHashCode()}";
+                var name =
+                    $"{(isPrimary ? 0 : 1)} {definitionItem.DisplayParts.JoinText()} {definitionItem.GetHashCode()}";
 
                 return new RoslynDefinitionBucket(
-                    name, expandedByDefault, presenter, context, definitionItem);
+                    name,
+                    expandedByDefault,
+                    presenter,
+                    context,
+                    definitionItem
+                );
             }
 
-            public bool TryNavigateTo(bool isPreview, CancellationToken cancellationToken)
-                => DefinitionItem.TryNavigateTo(
-                    _presenter._workspace, showInPreviewTab: isPreview, activateTab: !isPreview, cancellationToken); // Only activate the tab if not opening in preview
+            public bool TryNavigateTo(bool isPreview, CancellationToken cancellationToken) =>
+                DefinitionItem.TryNavigateTo(
+                    _presenter._workspace,
+                    showInPreviewTab: isPreview,
+                    activateTab: !isPreview,
+                    cancellationToken
+                ); // Only activate the tab if not opening in preview
 
             public override bool TryGetValue(string key, out object? content)
             {
@@ -79,8 +93,10 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             /// </summary>
             public override bool TryCreateStringContent(out string? content)
             {
-                if (TryGetValue(StandardTableKeyNames.Text, out var contentValue) && contentValue is string textContent)
-                {
+                if (
+                    TryGetValue(StandardTableKeyNames.Text, out var contentValue)
+                    && contentValue is string textContent
+                ) {
                     content = textContent;
                     return true;
                 }
@@ -99,7 +115,12 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
                     case StandardTableKeyNames2.TextInlines:
                         var inlines = new List<Inline> { new Run(" ") };
-                        inlines.AddRange(DefinitionItem.DisplayParts.ToInlines(_presenter.ClassificationFormatMap, _presenter.TypeMap));
+                        inlines.AddRange(
+                            DefinitionItem.DisplayParts.ToInlines(
+                                _presenter.ClassificationFormatMap,
+                                _presenter.TypeMap
+                            )
+                        );
                         foreach (var inline in inlines)
                         {
                             inline.SetValue(TextElement.FontWeightProperty, FontWeights.Bold);
@@ -114,8 +135,10 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 return null;
             }
 
-            public DocumentSpanEntry GetOrAddEntry(DocumentSpan documentSpan, DocumentSpanEntry entry)
-            {
+            public DocumentSpanEntry GetOrAddEntry(
+                DocumentSpan documentSpan,
+                DocumentSpanEntry entry
+            ) {
                 var key = (documentSpan.Document.FilePath, documentSpan.SourceSpan);
                 lock (_locationToEntry)
                 {

@@ -125,8 +125,11 @@ namespace JIT.HardwareIntrinsics.Arm
             {
                 int sizeOfinArray = inArray.Length * Unsafe.SizeOf<UInt64>();
                 int sizeOfoutArray = outArray.Length * Unsafe.SizeOf<UInt64>();
-                if ((alignment != 16 && alignment != 8) || (alignment * 2) < sizeOfinArray || (alignment * 2) < sizeOfoutArray)
-                {
+                if (
+                    (alignment != 16 && alignment != 8)
+                    || (alignment * 2) < sizeOfinArray
+                    || (alignment * 2) < sizeOfoutArray
+                ) {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -138,11 +141,17 @@ namespace JIT.HardwareIntrinsics.Arm
 
                 this.alignment = (ulong)alignment;
 
-                Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArrayPtr), ref Unsafe.As<UInt64, byte>(ref inArray[0]), (uint)sizeOfinArray);
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.AsRef<byte>(inArrayPtr),
+                    ref Unsafe.As<UInt64, byte>(ref inArray[0]),
+                    (uint)sizeOfinArray
+                );
             }
 
-            public void* inArrayPtr => Align((byte*)(inHandle.AddrOfPinnedObject().ToPointer()), alignment);
-            public void* outArrayPtr => Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* inArrayPtr =>
+                Align((byte*)(inHandle.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* outArrayPtr =>
+                Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
 
             public void Dispose()
             {
@@ -164,22 +173,31 @@ namespace JIT.HardwareIntrinsics.Arm
             {
                 var testStruct = new TestStruct();
 
-                for (var i = 0; i < Op1ElementCount; i++) { _data[i] = TestLibrary.Generator.GetUInt64(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<UInt64>, byte>(ref testStruct._fld), ref Unsafe.As<UInt64, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector128<UInt64>>());
+                for (var i = 0; i < Op1ElementCount; i++)
+                {
+                    _data[i] = TestLibrary.Generator.GetUInt64();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector128<UInt64>, byte>(ref testStruct._fld),
+                    ref Unsafe.As<UInt64, byte>(ref _data[0]),
+                    (uint)Unsafe.SizeOf<Vector128<UInt64>>()
+                );
 
                 return testStruct;
             }
 
-            public void RunStructFldScenario(ImmUnaryOpTest__DuplicateSelectedScalarToVector128_V128_UInt64_1 testClass)
-            {
+            public void RunStructFldScenario(
+                ImmUnaryOpTest__DuplicateSelectedScalarToVector128_V128_UInt64_1 testClass
+            ) {
                 var result = AdvSimd.Arm64.DuplicateSelectedScalarToVector128(_fld, 1);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
                 testClass.ValidateResult(_fld, testClass._dataTable.outArrayPtr);
             }
 
-            public void RunStructFldScenario_Load(ImmUnaryOpTest__DuplicateSelectedScalarToVector128_V128_UInt64_1 testClass)
-            {
+            public void RunStructFldScenario_Load(
+                ImmUnaryOpTest__DuplicateSelectedScalarToVector128_V128_UInt64_1 testClass
+            ) {
                 fixed (Vector128<UInt64>* pFld = &_fld)
                 {
                     var result = AdvSimd.Arm64.DuplicateSelectedScalarToVector128(
@@ -195,8 +213,10 @@ namespace JIT.HardwareIntrinsics.Arm
 
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int Op1ElementCount = Unsafe.SizeOf<Vector128<UInt64>>() / sizeof(UInt64);
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector128<UInt64>>() / sizeof(UInt64);
+        private static readonly int Op1ElementCount =
+            Unsafe.SizeOf<Vector128<UInt64>>() / sizeof(UInt64);
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector128<UInt64>>() / sizeof(UInt64);
         private static readonly byte Imm = 1;
 
         private static UInt64[] _data = new UInt64[Op1ElementCount];
@@ -209,18 +229,35 @@ namespace JIT.HardwareIntrinsics.Arm
 
         static ImmUnaryOpTest__DuplicateSelectedScalarToVector128_V128_UInt64_1()
         {
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = TestLibrary.Generator.GetUInt64(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<UInt64>, byte>(ref _clsVar), ref Unsafe.As<UInt64, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector128<UInt64>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = TestLibrary.Generator.GetUInt64();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<UInt64>, byte>(ref _clsVar),
+                ref Unsafe.As<UInt64, byte>(ref _data[0]),
+                (uint)Unsafe.SizeOf<Vector128<UInt64>>()
+            );
         }
 
         public ImmUnaryOpTest__DuplicateSelectedScalarToVector128_V128_UInt64_1()
         {
             Succeeded = true;
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = TestLibrary.Generator.GetUInt64(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<UInt64>, byte>(ref _fld), ref Unsafe.As<UInt64, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector128<UInt64>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = TestLibrary.Generator.GetUInt64();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<UInt64>, byte>(ref _fld),
+                ref Unsafe.As<UInt64, byte>(ref _data[0]),
+                (uint)Unsafe.SizeOf<Vector128<UInt64>>()
+            );
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = TestLibrary.Generator.GetUInt64(); }
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = TestLibrary.Generator.GetUInt64();
+            }
             _dataTable = new DataTable(_data, new UInt64[RetElementCount], LargestVectorSize);
         }
 
@@ -258,11 +295,14 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(AdvSimd.Arm64).GetMethod(nameof(AdvSimd.Arm64.DuplicateSelectedScalarToVector128), new Type[] { typeof(Vector128<UInt64>), typeof(byte) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.Read<Vector128<UInt64>>(_dataTable.inArrayPtr),
-                                        (byte)1
-                                     });
+            var result = typeof(AdvSimd.Arm64).GetMethod(
+                    nameof(AdvSimd.Arm64.DuplicateSelectedScalarToVector128),
+                    new Type[] { typeof(Vector128<UInt64>), typeof(byte) }
+                )
+                .Invoke(
+                    null,
+                    new object[] { Unsafe.Read<Vector128<UInt64>>(_dataTable.inArrayPtr), (byte)1 }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<UInt64>)(result));
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -272,11 +312,18 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(AdvSimd.Arm64).GetMethod(nameof(AdvSimd.Arm64.DuplicateSelectedScalarToVector128), new Type[] { typeof(Vector128<UInt64>), typeof(byte) })
-                                     .Invoke(null, new object[] {
-                                        AdvSimd.LoadVector128((UInt64*)(_dataTable.inArrayPtr)),
-                                        (byte)1
-                                     });
+            var result = typeof(AdvSimd.Arm64).GetMethod(
+                    nameof(AdvSimd.Arm64.DuplicateSelectedScalarToVector128),
+                    new Type[] { typeof(Vector128<UInt64>), typeof(byte) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        AdvSimd.LoadVector128((UInt64*)(_dataTable.inArrayPtr)),
+                        (byte)1
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<UInt64>)(result));
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -286,10 +333,7 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = AdvSimd.Arm64.DuplicateSelectedScalarToVector128(
-                _clsVar,
-                1
-            );
+            var result = AdvSimd.Arm64.DuplicateSelectedScalarToVector128(_clsVar, 1);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_clsVar, _dataTable.outArrayPtr);
@@ -450,30 +494,51 @@ namespace JIT.HardwareIntrinsics.Arm
             }
         }
 
-        private void ValidateResult(Vector128<UInt64> firstOp, void* result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Vector128<UInt64> firstOp,
+            void* result,
+            [CallerMemberName] string method = ""
+        ) {
             UInt64[] inArray = new UInt64[Op1ElementCount];
             UInt64[] outArray = new UInt64[RetElementCount];
 
             Unsafe.WriteUnaligned(ref Unsafe.As<UInt64, byte>(ref inArray[0]), firstOp);
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<UInt64, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector128<UInt64>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<UInt64, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector128<UInt64>>()
+            );
 
             ValidateResult(inArray, outArray, method);
         }
 
-        private void ValidateResult(void* firstOp, void* result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            void* firstOp,
+            void* result,
+            [CallerMemberName] string method = ""
+        ) {
             UInt64[] inArray = new UInt64[Op1ElementCount];
             UInt64[] outArray = new UInt64[RetElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<UInt64, byte>(ref inArray[0]), ref Unsafe.AsRef<byte>(firstOp), (uint)Unsafe.SizeOf<Vector128<UInt64>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<UInt64, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector128<UInt64>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<UInt64, byte>(ref inArray[0]),
+                ref Unsafe.AsRef<byte>(firstOp),
+                (uint)Unsafe.SizeOf<Vector128<UInt64>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<UInt64, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector128<UInt64>>()
+            );
 
             ValidateResult(inArray, outArray, method);
         }
 
-        private void ValidateResult(UInt64[] firstOp, UInt64[] result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            UInt64[] firstOp,
+            UInt64[] result,
+            [CallerMemberName] string method = ""
+        ) {
             bool succeeded = true;
 
             if (result[0] != firstOp[1])
@@ -494,9 +559,15 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.DuplicateSelectedScalarToVector128)}<UInt64>(Vector128<UInt64>, 1): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
-                TestLibrary.TestFramework.LogInformation($"   result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(AdvSimd.Arm64)}.{nameof(AdvSimd.Arm64.DuplicateSelectedScalarToVector128)}<UInt64>(Vector128<UInt64>, 1): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  firstOp: ({string.Join(", ", firstOp)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

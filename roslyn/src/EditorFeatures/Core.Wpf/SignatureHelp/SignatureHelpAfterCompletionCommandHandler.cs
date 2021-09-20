@@ -40,11 +40,11 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
     // Ensure roslyn comes after LSP to allow them to provide results.
     // https://github.com/dotnet/roslyn/issues/42338
     [Order(After = "LSP SignatureHelpCommandHandler")]
-    internal class SignatureHelpAfterCompletionCommandHandler :
-        AbstractSignatureHelpCommandHandler,
-        IChainedCommandHandler<EscapeKeyCommandArgs>,
-        IChainedCommandHandler<UpKeyCommandArgs>,
-        IChainedCommandHandler<DownKeyCommandArgs>
+    internal class SignatureHelpAfterCompletionCommandHandler
+        : AbstractSignatureHelpCommandHandler,
+          IChainedCommandHandler<EscapeKeyCommandArgs>,
+          IChainedCommandHandler<UpKeyCommandArgs>,
+          IChainedCommandHandler<DownKeyCommandArgs>
     {
         public string DisplayName => EditorFeaturesResources.Signature_Help;
 
@@ -52,22 +52,29 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public SignatureHelpAfterCompletionCommandHandler(
             IThreadingContext threadingContext,
-            SignatureHelpControllerProvider controllerProvider)
-            : base(threadingContext, controllerProvider)
-        {
-        }
+            SignatureHelpControllerProvider controllerProvider
+        ) : base(threadingContext, controllerProvider) { }
 
-        public CommandState GetCommandState(EscapeKeyCommandArgs args, Func<CommandState> nextHandler)
-            => nextHandler();
+        public CommandState GetCommandState(
+            EscapeKeyCommandArgs args,
+            Func<CommandState> nextHandler
+        ) => nextHandler();
 
-        public CommandState GetCommandState(UpKeyCommandArgs args, Func<CommandState> nextHandler)
-            => nextHandler();
+        public CommandState GetCommandState(
+            UpKeyCommandArgs args,
+            Func<CommandState> nextHandler
+        ) => nextHandler();
 
-        public CommandState GetCommandState(DownKeyCommandArgs args, Func<CommandState> nextHandler)
-            => nextHandler();
+        public CommandState GetCommandState(
+            DownKeyCommandArgs args,
+            Func<CommandState> nextHandler
+        ) => nextHandler();
 
-        public void ExecuteCommand(EscapeKeyCommandArgs args, Action nextHandler, CommandExecutionContext context)
-        {
+        public void ExecuteCommand(
+            EscapeKeyCommandArgs args,
+            Action nextHandler,
+            CommandExecutionContext context
+        ) {
             if (TryGetController(args, out var controller) && controller.TryHandleEscapeKey())
             {
                 return;
@@ -76,8 +83,11 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
             nextHandler();
         }
 
-        public void ExecuteCommand(UpKeyCommandArgs args, Action nextHandler, CommandExecutionContext context)
-        {
+        public void ExecuteCommand(
+            UpKeyCommandArgs args,
+            Action nextHandler,
+            CommandExecutionContext context
+        ) {
             if (TryGetController(args, out var controller) && controller.TryHandleUpKey())
             {
                 return;
@@ -86,8 +96,11 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
             nextHandler();
         }
 
-        public void ExecuteCommand(DownKeyCommandArgs args, Action nextHandler, CommandExecutionContext context)
-        {
+        public void ExecuteCommand(
+            DownKeyCommandArgs args,
+            Action nextHandler,
+            CommandExecutionContext context
+        ) {
             if (TryGetController(args, out var controller) && controller.TryHandleDownKey())
             {
                 return;

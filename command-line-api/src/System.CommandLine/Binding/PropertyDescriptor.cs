@@ -9,9 +9,7 @@ namespace System.CommandLine.Binding
     {
         private readonly PropertyInfo _propertyInfo;
 
-        internal PropertyDescriptor(
-            PropertyInfo propertyInfo,
-            ModelDescriptor parent)
+        internal PropertyDescriptor(PropertyInfo propertyInfo, ModelDescriptor parent)
         {
             Parent = parent ?? throw new ArgumentNullException(nameof(parent));
             _propertyInfo = propertyInfo;

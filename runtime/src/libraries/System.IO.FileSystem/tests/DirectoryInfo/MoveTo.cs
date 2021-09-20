@@ -46,7 +46,6 @@ namespace System.IO.Tests
             Assert.Equal(testDirDest2 + Path.DirectorySeparatorChar, sourceDir.FullName);
             Assert.Equal(DestName2, sourceDir.Name);
         }
-
         #endregion
     }
 }

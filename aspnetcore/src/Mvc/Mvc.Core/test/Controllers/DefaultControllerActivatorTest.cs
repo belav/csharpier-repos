@@ -26,19 +26,15 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             var activator = new DefaultControllerActivator(new TypeActivatorCache());
             var serviceProvider = new Mock<IServiceProvider>(MockBehavior.Strict);
 
-            var httpContext = new DefaultHttpContext
-            {
-                RequestServices = serviceProvider.Object
-            };
+            var httpContext = new DefaultHttpContext { RequestServices = serviceProvider.Object };
 
             var context = new ControllerContext(
                 new ActionContext(
                     httpContext,
                     new RouteData(),
-                    new ControllerActionDescriptor
-                    {
-                        ControllerTypeInfo = type.GetTypeInfo()
-                    }));
+                    new ControllerActionDescriptor { ControllerTypeInfo = type.GetTypeInfo() }
+                )
+            );
 
             // Act
             var instance = activator.Create(context);
@@ -123,13 +119,10 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             var serviceProvider = new Mock<IServiceProvider>(MockBehavior.Strict);
             var testService = new TestService();
             serviceProvider.Setup(s => s.GetService(typeof(TestService)))
-                           .Returns(testService)
-                           .Verifiable();
+                .Returns(testService)
+                .Verifiable();
 
-            var httpContext = new DefaultHttpContext
-            {
-                RequestServices = serviceProvider.Object
-            };
+            var httpContext = new DefaultHttpContext { RequestServices = serviceProvider.Object };
 
             var context = new ControllerContext(
                 new ActionContext(
@@ -137,8 +130,11 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
                     new RouteData(),
                     new ControllerActionDescriptor
                     {
-                        ControllerTypeInfo = typeof(TypeDerivingFromControllerWithServices).GetTypeInfo()
-                    }));
+                        ControllerTypeInfo =
+                            typeof(TypeDerivingFromControllerWithServices).GetTypeInfo()
+                    }
+                )
+            );
 
             // Act
             var instance = activator.Create(context);
@@ -171,15 +167,17 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         {
             var metadataProvider = new EmptyModelMetadataProvider();
             var services = new Mock<IServiceProvider>();
-            services
-                .Setup(s => s.GetService(typeof(IUrlHelper)))
-                .Returns(Mock.Of<IUrlHelper>());
-            services
-                .Setup(s => s.GetService(typeof(IModelMetadataProvider)))
+            services.Setup(s => s.GetService(typeof(IUrlHelper))).Returns(Mock.Of<IUrlHelper>());
+            services.Setup(s => s.GetService(typeof(IModelMetadataProvider)))
                 .Returns(metadataProvider);
-            services
-                .Setup(s => s.GetService(typeof(IObjectModelValidator)))
-                .Returns(new DefaultObjectValidator(metadataProvider, new List<IModelValidatorProvider>(), new MvcOptions()));
+            services.Setup(s => s.GetService(typeof(IObjectModelValidator)))
+                .Returns(
+                    new DefaultObjectValidator(
+                        metadataProvider,
+                        new List<IModelValidatorProvider>(),
+                        new MvcOptions()
+                    )
+                );
             return services.Object;
         }
 
@@ -205,9 +203,7 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         {
             public bool Disposed { get; set; }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public ValueTask DisposeAsync()
             {

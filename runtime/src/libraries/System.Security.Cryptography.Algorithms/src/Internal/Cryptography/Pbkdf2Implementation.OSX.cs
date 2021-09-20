@@ -15,8 +15,8 @@ namespace Internal.Cryptography
             ReadOnlySpan<byte> salt,
             int iterations,
             HashAlgorithmName hashAlgorithmName,
-            Span<byte> destination)
-        {
+            Span<byte> destination
+        ) {
             Debug.Assert(!destination.IsEmpty);
 
             PAL_HashAlgorithm prfAlgorithm;
@@ -38,7 +38,8 @@ namespace Internal.Cryptography
                 default:
                     Debug.Fail($"Unexpected hash algorithm '{hashAlgorithmName.Name}'");
                     throw new CryptographicException();
-            };
+            }
+            ;
 
             Interop.AppleCrypto.Pbkdf2(prfAlgorithm, password, salt, iterations, destination);
         }

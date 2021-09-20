@@ -42,8 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             SelectExpression selectExpression,
             Expression innerShaper,
             INavigationBase? navigation,
-            Type elementType)
-        {
+            Type elementType
+        ) {
             Check.NotNull(parentIdentifier, nameof(parentIdentifier));
             Check.NotNull(childIdentifier, nameof(childIdentifier));
             Check.NotEmpty(identifierValueComparers, nameof(identifierValueComparers));
@@ -101,12 +101,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual Type ElementType { get; }
 
         /// <inheritdoc />
-        public override Type Type
-            => Navigation?.ClrType ?? typeof(List<>).MakeGenericType(ElementType);
+        public override Type Type =>
+            Navigation?.ClrType ?? typeof(List<>).MakeGenericType(ElementType);
 
         /// <inheritdoc />
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -134,21 +133,28 @@ namespace Microsoft.EntityFrameworkCore.Query
             Expression parentIdentifier,
             Expression childIdentifier,
             SelectExpression selectExpression,
-            Expression innerShaper)
-        {
+            Expression innerShaper
+        ) {
             Check.NotNull(parentIdentifier, nameof(parentIdentifier));
             Check.NotNull(childIdentifier, nameof(childIdentifier));
             Check.NotNull(selectExpression, nameof(selectExpression));
             Check.NotNull(innerShaper, nameof(innerShaper));
 
             return parentIdentifier != ParentIdentifier
-                || childIdentifier != ChildIdentifier
-                || selectExpression != SelectExpression
-                || innerShaper != InnerShaper
-                    ? new RelationalSplitCollectionShaperExpression(
-                        CollectionId, parentIdentifier, childIdentifier, IdentifierValueComparers, selectExpression, innerShaper,
-                        Navigation, ElementType)
-                    : this;
+            || childIdentifier != ChildIdentifier
+            || selectExpression != SelectExpression
+            || innerShaper != InnerShaper
+                ? new RelationalSplitCollectionShaperExpression(
+                      CollectionId,
+                      parentIdentifier,
+                      childIdentifier,
+                      IdentifierValueComparers,
+                      selectExpression,
+                      innerShaper,
+                      Navigation,
+                      ElementType
+                  )
+                : this;
         }
 
         /// <inheritdoc />

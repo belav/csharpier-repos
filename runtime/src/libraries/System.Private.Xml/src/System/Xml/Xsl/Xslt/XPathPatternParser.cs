@@ -36,6 +36,7 @@ namespace System.Xml.Xsl.Xslt
                 result = this.ParsePattern();
                 _scanner.CheckToken(LexKind.Eof);
             }
+
             finally
             {
                 result = ptrnBuilder.EndBuild(result);
@@ -57,7 +58,11 @@ namespace System.Xml.Xsl.Xslt
             while (_scanner!.Kind == LexKind.Union)
             {
                 _scanner.NextLex();
-                opnd = _ptrnBuilder!.Operator(XPathOperator.Union, opnd, ParseLocationPathPattern());
+                opnd = _ptrnBuilder!.Operator(
+                    XPathOperator.Union,
+                    opnd,
+                    ParseLocationPathPattern()
+                );
             }
             return opnd;
         }
@@ -85,13 +90,21 @@ namespace System.Xml.Xsl.Xslt
                     return _ptrnBuilder!.JoinStep(
                         _ptrnBuilder.Axis(XPathAxis.Root, XPathNodeType.All, null, null),
                         _ptrnBuilder.JoinStep(
-                            _ptrnBuilder.Axis(XPathAxis.DescendantOrSelf, XPathNodeType.All, null, null),
+                            _ptrnBuilder.Axis(
+                                XPathAxis.DescendantOrSelf,
+                                XPathNodeType.All,
+                                null,
+                                null
+                            ),
                             ParseRelativePathPattern()
                         )
                     );
                 case LexKind.Name:
-                    if (_scanner.CanBeFunction && _scanner.Prefix.Length == 0 && (_scanner.Name == "id" || _scanner.Name == "key"))
-                    {
+                    if (
+                        _scanner.CanBeFunction
+                        && _scanner.Prefix.Length == 0
+                        && (_scanner.Name == "id" || _scanner.Name == "key")
+                    ) {
                         opnd = ParseIdKeyPattern();
                         switch (_scanner.Kind)
                         {
@@ -101,9 +114,15 @@ namespace System.Xml.Xsl.Xslt
                                 break;
                             case LexKind.SlashSlash:
                                 _scanner.NextLex();
-                                opnd = _ptrnBuilder!.JoinStep(opnd,
+                                opnd = _ptrnBuilder!.JoinStep(
+                                    opnd,
                                     _ptrnBuilder.JoinStep(
-                                        _ptrnBuilder.Axis(XPathAxis.DescendantOrSelf, XPathNodeType.All, null, null),
+                                        _ptrnBuilder.Axis(
+                                            XPathAxis.DescendantOrSelf,
+                                            XPathNodeType.All,
+                                            null,
+                                            null
+                                        ),
                                         ParseRelativePathPattern()
                                     )
                                 );
@@ -177,9 +196,15 @@ namespace System.Xml.Xsl.Xslt
             else if (_scanner.Kind == LexKind.SlashSlash)
             {
                 _scanner.NextLex();
-                opnd = _ptrnBuilder!.JoinStep(opnd,
+                opnd = _ptrnBuilder!.JoinStep(
+                    opnd,
                     _ptrnBuilder.JoinStep(
-                        _ptrnBuilder.Axis(XPathAxis.DescendantOrSelf, XPathNodeType.All, null, null),
+                        _ptrnBuilder.Axis(
+                            XPathAxis.DescendantOrSelf,
+                            XPathNodeType.All,
+                            null,
+                            null
+                        ),
                         ParseRelativePathPattern()
                     )
                 );
@@ -212,7 +237,7 @@ namespace System.Xml.Xsl.Xslt
                     {
                         throw _scanner.CreateException(SR.XPath_InvalidAxisInPattern);
                     }
-                    _scanner.NextLex();  // Skip '::'
+                    _scanner.NextLex(); // Skip '::'
                     _scanner.NextLex();
                     break;
                 case LexKind.Name:
@@ -225,8 +250,15 @@ namespace System.Xml.Xsl.Xslt
             }
 
             XPathNodeType nodeType;
-            string? nodePrefix, nodeName;
-            XPathParser.InternalParseNodeTest(_scanner, axis, out nodeType, out nodePrefix, out nodeName);
+            string? nodePrefix,
+                nodeName;
+            XPathParser.InternalParseNodeTest(
+                _scanner,
+                axis,
+                out nodeType,
+                out nodePrefix,
+                out nodeName
+            );
             opnd = _ptrnBuilder!.Axis(axis, nodeType, nodePrefix, nodeName);
 
             XPathPatternBuilder? xpathPatternBuilder = _ptrnBuilder as XPathPatternBuilder;
@@ -245,7 +277,11 @@ namespace System.Xml.Xsl.Xslt
             {
                 while (_scanner.Kind == LexKind.LBracket)
                 {
-                    opnd = _ptrnBuilder.Predicate(opnd, ParsePredicate(opnd), /*reverseStep:*/false);
+                    opnd = _ptrnBuilder.Predicate(
+                        opnd,
+                        ParsePredicate(opnd), /*reverseStep:*/
+                        false
+                    );
                 }
             }
             return opnd;
@@ -258,7 +294,11 @@ namespace System.Xml.Xsl.Xslt
         {
             Debug.Assert(_scanner!.Kind == LexKind.LBracket);
             _scanner.NextLex();
-            QilNode result = _predicateParser.Parse(_scanner, _ptrnBuilder!.GetPredicateBuilder(context), LexKind.RBracket);
+            QilNode result = _predicateParser.Parse(
+                _scanner,
+                _ptrnBuilder!.GetPredicateBuilder(context),
+                LexKind.RBracket
+            );
             Debug.Assert(_scanner.Kind == LexKind.RBracket);
             _scanner.NextLex();
             return result;

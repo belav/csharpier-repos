@@ -24,8 +24,14 @@ namespace Microsoft.AspNetCore.Cryptography.SafeHandles
             var duplicateHandle = controlHandle.Duplicate();
 
             // Assert
-            Assert.Equal(expected, new string((char*)duplicateHandle.DangerousGetHandle(), 0, expected.Length)); // contents the same data
-            Assert.NotEqual(controlHandle.DangerousGetHandle(), duplicateHandle.DangerousGetHandle()); // shouldn't just point to the same memory location
+            Assert.Equal(
+                expected,
+                new string((char*)duplicateHandle.DangerousGetHandle(), 0, expected.Length)
+            ); // contents the same data
+            Assert.NotEqual(
+                controlHandle.DangerousGetHandle(),
+                duplicateHandle.DangerousGetHandle()
+            ); // shouldn't just point to the same memory location
         }
     }
 }

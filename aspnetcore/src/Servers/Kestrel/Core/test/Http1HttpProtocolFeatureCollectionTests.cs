@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 serviceContext: new TestServiceContext(),
                 transport: Mock.Of<IDuplexPipe>(),
                 connectionFeatures: new FeatureCollection(),
-                timeoutControl: Mock.Of<ITimeoutControl>());
+                timeoutControl: Mock.Of<ITimeoutControl>()
+            );
 
             _httpConnectionContext = context;
             _http1Connection = new TestHttp1Connection(context);
@@ -174,18 +175,54 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
         private void CompareGenericGetterToIndexer()
         {
-            Assert.Same(_collection.Get<IHttpRequestFeature>(), _collection[typeof(IHttpRequestFeature)]);
-            Assert.Same(_collection.Get<IHttpRequestBodyDetectionFeature>(), _collection[typeof(IHttpRequestBodyDetectionFeature)]);
-            Assert.Same(_collection.Get<IHttpResponseFeature>(), _collection[typeof(IHttpResponseFeature)]);
-            Assert.Same(_collection.Get<IHttpResponseBodyFeature>(), _collection[typeof(IHttpResponseBodyFeature)]);
-            Assert.Same(_collection.Get<IRequestBodyPipeFeature>(), _collection[typeof(IRequestBodyPipeFeature)]);
-            Assert.Same(_collection.Get<IHttpRequestIdentifierFeature>(), _collection[typeof(IHttpRequestIdentifierFeature)]);
-            Assert.Same(_collection.Get<IHttpRequestLifetimeFeature>(), _collection[typeof(IHttpRequestLifetimeFeature)]);
-            Assert.Same(_collection.Get<IHttpConnectionFeature>(), _collection[typeof(IHttpConnectionFeature)]);
-            Assert.Same(_collection.Get<IHttpMaxRequestBodySizeFeature>(), _collection[typeof(IHttpMaxRequestBodySizeFeature)]);
-            Assert.Same(_collection.Get<IHttpMinRequestBodyDataRateFeature>(), _collection[typeof(IHttpMinRequestBodyDataRateFeature)]);
-            Assert.Same(_collection.Get<IHttpMinResponseDataRateFeature>(), _collection[typeof(IHttpMinResponseDataRateFeature)]);
-            Assert.Same(_collection.Get<IHttpBodyControlFeature>(), _collection[typeof(IHttpBodyControlFeature)]);
+            Assert.Same(
+                _collection.Get<IHttpRequestFeature>(),
+                _collection[typeof(IHttpRequestFeature)]
+            );
+            Assert.Same(
+                _collection.Get<IHttpRequestBodyDetectionFeature>(),
+                _collection[typeof(IHttpRequestBodyDetectionFeature)]
+            );
+            Assert.Same(
+                _collection.Get<IHttpResponseFeature>(),
+                _collection[typeof(IHttpResponseFeature)]
+            );
+            Assert.Same(
+                _collection.Get<IHttpResponseBodyFeature>(),
+                _collection[typeof(IHttpResponseBodyFeature)]
+            );
+            Assert.Same(
+                _collection.Get<IRequestBodyPipeFeature>(),
+                _collection[typeof(IRequestBodyPipeFeature)]
+            );
+            Assert.Same(
+                _collection.Get<IHttpRequestIdentifierFeature>(),
+                _collection[typeof(IHttpRequestIdentifierFeature)]
+            );
+            Assert.Same(
+                _collection.Get<IHttpRequestLifetimeFeature>(),
+                _collection[typeof(IHttpRequestLifetimeFeature)]
+            );
+            Assert.Same(
+                _collection.Get<IHttpConnectionFeature>(),
+                _collection[typeof(IHttpConnectionFeature)]
+            );
+            Assert.Same(
+                _collection.Get<IHttpMaxRequestBodySizeFeature>(),
+                _collection[typeof(IHttpMaxRequestBodySizeFeature)]
+            );
+            Assert.Same(
+                _collection.Get<IHttpMinRequestBodyDataRateFeature>(),
+                _collection[typeof(IHttpMinRequestBodyDataRateFeature)]
+            );
+            Assert.Same(
+                _collection.Get<IHttpMinResponseDataRateFeature>(),
+                _collection[typeof(IHttpMinResponseDataRateFeature)]
+            );
+            Assert.Same(
+                _collection.Get<IHttpBodyControlFeature>(),
+                _collection[typeof(IHttpBodyControlFeature)]
+            );
         }
 
         private int EachHttpProtocolFeatureSetAndUnique()
@@ -227,6 +264,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             return featureCount;
         }
 
-        private Http1Connection CreateHttp1Connection() => new TestHttp1Connection(_httpConnectionContext);
+        private Http1Connection CreateHttp1Connection() =>
+            new TestHttp1Connection(_httpConnectionContext);
     }
 }

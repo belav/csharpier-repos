@@ -14,8 +14,10 @@ namespace Microsoft.CodeAnalysis.Scripting
 {
     internal static class ParameterValidationHelpers
     {
-        internal static ImmutableArray<T> CheckImmutableArray<T>(ImmutableArray<T> items, string parameterName)
-        {
+        internal static ImmutableArray<T> CheckImmutableArray<T>(
+            ImmutableArray<T> items,
+            string parameterName
+        ) {
             if (items.IsDefault)
             {
                 throw new ArgumentNullException(parameterName);
@@ -32,16 +34,21 @@ namespace Microsoft.CodeAnalysis.Scripting
             return items;
         }
 
-        internal static ImmutableArray<T> ToImmutableArrayChecked<T>(IEnumerable<T> items, string parameterName)
-            where T : class
+        internal static ImmutableArray<T> ToImmutableArrayChecked<T>(
+            IEnumerable<T> items,
+            string parameterName
+        ) where T : class
         {
             var builder = ArrayBuilder<T>.GetInstance();
             AddRangeChecked(builder, items, parameterName);
             return builder.ToImmutableAndFree();
         }
 
-        internal static ImmutableArray<T> ConcatChecked<T>(ImmutableArray<T> existing, IEnumerable<T> items, string parameterName)
-            where T : class
+        internal static ImmutableArray<T> ConcatChecked<T>(
+            ImmutableArray<T> existing,
+            IEnumerable<T> items,
+            string parameterName
+        ) where T : class
         {
             var builder = ArrayBuilder<T>.GetInstance();
             builder.AddRange(existing);
@@ -49,8 +56,11 @@ namespace Microsoft.CodeAnalysis.Scripting
             return builder.ToImmutableAndFree();
         }
 
-        internal static void AddRangeChecked<T>(ArrayBuilder<T> builder, IEnumerable<T> items, string parameterName)
-            where T : class
+        internal static void AddRangeChecked<T>(
+            ArrayBuilder<T> builder,
+            IEnumerable<T> items,
+            string parameterName
+        ) where T : class
         {
             RequireNonNull(items, parameterName);
 
@@ -65,9 +75,12 @@ namespace Microsoft.CodeAnalysis.Scripting
             }
         }
 
-        internal static IEnumerable<S> SelectChecked<T, S>(IEnumerable<T> items, string parameterName, Func<T, S> selector)
-            where T : class
-            where S : class
+        internal static IEnumerable<S> SelectChecked<T, S>(
+            IEnumerable<T> items,
+            string parameterName,
+            Func<T, S> selector
+        ) where T : class
+          where S : class
         {
             RequireNonNull(items, parameterName);
             return items.Select(item => (item != null) ? selector(item) : null);

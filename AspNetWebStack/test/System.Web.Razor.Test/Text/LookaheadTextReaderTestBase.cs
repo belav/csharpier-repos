@@ -27,8 +27,11 @@ namespace System.Web.Razor.Test.Text
             RunSourceLocationTest(input, expected, r => AdvanceReader(checkAt, r));
         }
 
-        protected void RunSourceLocationTest(string input, SourceLocation expected, Action<LookaheadTextReader> readerAction)
-        {
+        protected void RunSourceLocationTest(
+            string input,
+            SourceLocation expected,
+            Action<LookaheadTextReader> readerAction
+        ) {
             // Arrange
             LookaheadTextReader reader = CreateReader(input);
             readerAction(reader);
@@ -45,14 +48,20 @@ namespace System.Web.Razor.Test.Text
             SourceLocation? expectedLocation = null;
             SourceLocation? actualLocation = null;
 
-            RunLookaheadTest("abc\r\ndef\r\nghi", null,
-                             Read(6),
-                             CaptureSourceLocation(s => expectedLocation = s),
-                             Lookahead(Read(6)),
-                             CaptureSourceLocation(s => actualLocation = s));
+            RunLookaheadTest(
+                "abc\r\ndef\r\nghi",
+                null,
+                Read(6),
+                CaptureSourceLocation(s => expectedLocation = s),
+                Lookahead(Read(6)),
+                CaptureSourceLocation(s => actualLocation = s)
+            );
             // Assert
             Assert.Equal(expectedLocation.Value.AbsoluteIndex, actualLocation.Value.AbsoluteIndex);
-            Assert.Equal(expectedLocation.Value.CharacterIndex, actualLocation.Value.CharacterIndex);
+            Assert.Equal(
+                expectedLocation.Value.CharacterIndex,
+                actualLocation.Value.CharacterIndex
+            );
             Assert.Equal(expectedLocation.Value.LineIndex, actualLocation.Value.LineIndex);
         }
 
@@ -74,12 +83,19 @@ namespace System.Web.Razor.Test.Text
             LookaheadTextReader reader = CreateReader("abcdefg");
 
             // Act and Assert
-            Assert.Throws<InvalidOperationException>(() => reader.CancelBacktrack(), RazorResources.CancelBacktrack_Must_Be_Called_Within_Lookahead);
+            Assert.Throws<InvalidOperationException>(
+                () => reader.CancelBacktrack(),
+                RazorResources.CancelBacktrack_Must_Be_Called_Within_Lookahead
+            );
         }
 
-        protected Action<StringBuilder, LookaheadTextReader> CaptureSourceLocation(Action<SourceLocation> capture)
-        {
-            return (_, reader) => { capture(reader.CurrentLocation); };
+        protected Action<StringBuilder, LookaheadTextReader> CaptureSourceLocation(
+            Action<SourceLocation> capture
+        ) {
+            return (_, reader) =>
+            {
+                capture(reader.CurrentLocation);
+            };
         }
 
         protected Action<StringBuilder, LookaheadTextReader> Read(int count)
@@ -108,8 +124,9 @@ namespace System.Web.Razor.Test.Text
             reader.CancelBacktrack();
         }
 
-        protected Action<StringBuilder, LookaheadTextReader> Lookahead(params Action<StringBuilder, LookaheadTextReader>[] readerCommands)
-        {
+        protected Action<StringBuilder, LookaheadTextReader> Lookahead(
+            params Action<StringBuilder, LookaheadTextReader>[] readerCommands
+        ) {
             return (builder, reader) =>
             {
                 using (reader.BeginLookahead())
@@ -119,8 +136,11 @@ namespace System.Web.Razor.Test.Text
             };
         }
 
-        protected void RunLookaheadTest(string input, string expected, params Action<StringBuilder, LookaheadTextReader>[] readerCommands)
-        {
+        protected void RunLookaheadTest(
+            string input,
+            string expected,
+            params Action<StringBuilder, LookaheadTextReader>[] readerCommands
+        ) {
             // Arrange
             StringBuilder builder = new StringBuilder();
             using (LookaheadTextReader reader = CreateReader(input))
@@ -134,8 +154,12 @@ namespace System.Web.Razor.Test.Text
             }
         }
 
-        protected void RunReadUntilTest(Func<LookaheadTextReader, string> readMethod, int expectedRaw, int expectedChar, int expectedLine)
-        {
+        protected void RunReadUntilTest(
+            Func<LookaheadTextReader, string> readMethod,
+            int expectedRaw,
+            int expectedChar,
+            int expectedLine
+        ) {
             // Arrange
             LookaheadTextReader reader = CreateReader("a\r\nbcd\r\nefg");
 
@@ -163,8 +187,9 @@ namespace System.Web.Razor.Test.Text
             Assert.Equal(read, readMethod(reader));
         }
 
-        protected void RunBufferReadTest(Func<LookaheadTextReader, char[], int, int, int> readMethod)
-        {
+        protected void RunBufferReadTest(
+            Func<LookaheadTextReader, char[], int, int, int> readMethod
+        ) {
             // Arrange
             LookaheadTextReader reader = CreateReader("abcdefg");
 
@@ -191,8 +216,11 @@ namespace System.Web.Razor.Test.Text
             Assert.Equal('b', reader.Peek());
         }
 
-        private static void RunAll(Action<StringBuilder, LookaheadTextReader>[] readerCommands, StringBuilder builder, LookaheadTextReader reader)
-        {
+        private static void RunAll(
+            Action<StringBuilder, LookaheadTextReader>[] readerCommands,
+            StringBuilder builder,
+            LookaheadTextReader reader
+        ) {
             foreach (Action<StringBuilder, LookaheadTextReader> readerCommand in readerCommands)
             {
                 readerCommand(builder, reader);
@@ -240,8 +268,12 @@ namespace System.Web.Razor.Test.Text
             }
         }
 
-        private void AssertReaderValueCorrect(int actual, string input, int expectedOffset, string methodName)
-        {
+        private void AssertReaderValueCorrect(
+            int actual,
+            string input,
+            int expectedOffset,
+            string methodName
+        ) {
             if (expectedOffset < input.Length)
             {
                 Assert.Equal(input[expectedOffset], actual);

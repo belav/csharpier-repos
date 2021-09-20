@@ -29,10 +29,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Dictionary<string, int>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter[0].Key=key0&parameter[0].Value=10");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString(
+                        "?parameter[0].Key=key0&parameter[0].Value=10"
+                    );
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -69,10 +73,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Dictionary<string, int>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter[key0]=10");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?parameter[key0]=10");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -106,11 +112,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Dictionary<string, int>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString =
-                    new QueryString("?parameter.index=low&parameter[low].Key=key0&parameter[low].Value=10");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString(
+                        "?parameter.index=low&parameter[low].Key=key0&parameter[low].Value=10"
+                    );
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -144,26 +153,27 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [InlineData("?prefix[0].Key=key0&prefix[0].Value=10")]
         [InlineData("?prefix.index=low&prefix[low].Key=key0&prefix[low].Value=10")]
         [InlineData("?prefix.index=index&prefix[index].Key=key0&prefix[index].Value=10")]
-        [InlineData("?prefix.index=index&prefix[index].Key=key0&prefix[index].Value=10&prefix[extra].Key=key4&prefix[extra].Value=5")]
+        [InlineData(
+            "?prefix.index=index&prefix[index].Key=key0&prefix[index].Value=10&prefix[extra].Key=key4&prefix[extra].Value=5"
+        )]
         public async Task DictionaryModelBinder_BindsDictionaryOfSimpleType_WithExplicitPrefix_Success(
-            string queryString)
-        {
+            string queryString
+        ) {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor()
             {
                 Name = "parameter",
-                BindingInfo = new BindingInfo()
-                {
-                    BinderModelName = "prefix",
-                },
+                BindingInfo = new BindingInfo() { BinderModelName = "prefix", },
                 ParameterType = typeof(Dictionary<string, int>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString(queryString);
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString(queryString);
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -186,9 +196,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [InlineData("?[0].Key=key0&[0].Value=10")]
         [InlineData("?index=low&[low].Key=key0&[low].Value=10")]
         [InlineData("?index=index&[index].Key=key0&[index].Value=10")]
-        [InlineData("?index=index&[index].Key=key0&[index].Value=10&[extra].Key=key4&[extra].Value=5")]
-        public async Task DictionaryModelBinder_BindsDictionaryOfSimpleType_EmptyPrefix_Success(string queryString)
-        {
+        [InlineData(
+            "?index=index&[index].Key=key0&[index].Value=10&[extra].Key=key4&[extra].Value=5"
+        )]
+        public async Task DictionaryModelBinder_BindsDictionaryOfSimpleType_EmptyPrefix_Success(
+            string queryString
+        ) {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor()
@@ -197,10 +210,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Dictionary<string, int>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString(queryString);
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString(queryString);
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -222,7 +237,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         {
             get
             {
-                var impliedPrefixQueryString = "?parameter[archive]=1&parameter[correlation]=2&parameter[index]=3";
+                var impliedPrefixQueryString =
+                    "?parameter[archive]=1&parameter[correlation]=2&parameter[index]=3";
                 var noPrefixQueryString = "?[archive]=1&[correlation]=2&[index]=3";
                 var reversedNoPrefixQueryString = "?[index]=3&[correlation]=2&[archive]=1";
                 var impliedPrefixDictionary = new Dictionary<string, StringValues>
@@ -329,8 +345,9 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
         [Theory]
         [MemberData(nameof(ThreeEntryTestData))]
-        public async Task DictionaryModelBinder_Binds3EntriesOfSimpleType(Action<HttpRequest> updateRequest)
-        {
+        public async Task DictionaryModelBinder_Binds3EntriesOfSimpleType(
+            Action<HttpRequest> updateRequest
+        ) {
             // Arrange
             var expectedDictionary = new Dictionary<string, int>
             {
@@ -364,8 +381,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [Theory]
         [MemberData(nameof(ThreeEntryTestData))]
         public async Task DictionaryModelBinder_Binds3EntriesOfSimpleType_WithJQueryQueryString(
-            Action<HttpRequest> updateRequest)
-        {
+            Action<HttpRequest> updateRequest
+        ) {
             // Arrange
             var expectedDictionary = new Dictionary<string, int>
             {
@@ -377,7 +394,9 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var testContext = ModelBindingTestHelper.GetTestContext(
                 updateRequest,
-                options => options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory()));
+                options =>
+                    options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory())
+            );
             var modelState = testContext.ModelState;
             var parameter = new ParameterDescriptor
             {
@@ -409,10 +428,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Dictionary<string, int>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -447,7 +468,7 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
             public override string ToString()
             {
-                return $"{{ { Id } }}";
+                return $"{{ {Id} }}";
             }
         }
 
@@ -470,8 +491,9 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
         [Theory]
         [MemberData(nameof(ComplexType_ImpliedPrefixData))]
-        public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithImpliedPrefix(string queryString)
-        {
+        public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithImpliedPrefix(
+            string queryString
+        ) {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor()
@@ -480,10 +502,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Dictionary<string, Person>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString(queryString);
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString(queryString);
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -494,7 +518,10 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             Assert.True(modelBindingResult.IsModelSet);
 
             var model = Assert.IsType<Dictionary<string, Person>>(modelBindingResult.Model);
-            Assert.Equal(new Dictionary<string, Person> { { "key0", new Person { Id = 10 } }, }, model);
+            Assert.Equal(
+                new Dictionary<string, Person> { { "key0", new Person { Id = 10 } }, },
+                model
+            );
 
             Assert.NotEmpty(modelState);
             Assert.Equal(0, modelState.ErrorCount);
@@ -508,17 +535,24 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [InlineData("?parameter[0][Key]=key0&parameter[0][Value][Id]=10")]
         [MemberData(nameof(ComplexType_ImpliedPrefixData))]
         public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithImpliedPrefixAndJQuery(
-            string queryString)
-        {
+            string queryString
+        ) {
             // Arrange
-            var expectedDictionary = new Dictionary<string, Person> { { "key0", new Person { Id = 10 } } };
+            var expectedDictionary = new Dictionary<string, Person>
+            {
+                { "key0", new Person { Id = 10 } }
+            };
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request => request.QueryString = new QueryString(queryString),
                 // Add JQueryQueryStringValueProviderFactory after default factories.
-                options => options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory()));
+                options =>
+                    options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory())
+            );
 
             var modelState = testContext.ModelState;
-            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+                testContext.HttpContext.RequestServices
+            );
             var parameter = new ParameterDescriptor()
             {
                 Name = "parameter",
@@ -546,17 +580,27 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [InlineData("?parameter[0][Key]=key0&parameter[0][Value][Id]=10")]
         [MemberData(nameof(ComplexType_ImpliedPrefixData))]
         public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithImpliedPrefixAndJQueryFirst(
-            string queryString)
-        {
+            string queryString
+        ) {
             // Arrange
-            var expectedDictionary = new Dictionary<string, Person> { { "key0", new Person { Id = 10 } } };
+            var expectedDictionary = new Dictionary<string, Person>
+            {
+                { "key0", new Person { Id = 10 } }
+            };
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request => request.QueryString = new QueryString(queryString),
                 // Add JQueryQueryStringValueProviderFactory before default factories.
-                options => options.ValueProviderFactories.Insert(0, new JQueryQueryStringValueProviderFactory()));
+                options =>
+                    options.ValueProviderFactories.Insert(
+                        0,
+                        new JQueryQueryStringValueProviderFactory()
+                    )
+            );
 
             var modelState = testContext.ModelState;
-            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+                testContext.HttpContext.RequestServices
+            );
             var parameter = new ParameterDescriptor()
             {
                 Name = "parameter",
@@ -581,17 +625,24 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [InlineData("?[42][Id]=10")] // Only Id segment will be rewritten.
         [InlineData("?parameter[42][Id]=10")]
         public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithImpliedPrefixIntegralKeysAndJQuery(
-            string queryString)
-        {
+            string queryString
+        ) {
             // Arrange
-            var expectedDictionary = new Dictionary<string, Person> { { "42", new Person { Id = 10 } } };
+            var expectedDictionary = new Dictionary<string, Person>
+            {
+                { "42", new Person { Id = 10 } }
+            };
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request => request.QueryString = new QueryString(queryString),
                 // Add JQueryQueryStringValueProviderFactory after default factories.
-                options => options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory()));
+                options =>
+                    options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory())
+            );
 
             var modelState = testContext.ModelState;
-            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+                testContext.HttpContext.RequestServices
+            );
             var parameter = new ParameterDescriptor()
             {
                 Name = "parameter",
@@ -616,17 +667,27 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [InlineData("?[42][Id]=10")] // Only Id segment will be rewritten.
         [InlineData("?parameter[42][Id]=10")]
         public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithImpliedPrefixIntegralKeysAndJQueryFirst(
-            string queryString)
-        {
+            string queryString
+        ) {
             // Arrange
-            var expectedDictionary = new Dictionary<string, Person> { { "42", new Person { Id = 10 } } };
+            var expectedDictionary = new Dictionary<string, Person>
+            {
+                { "42", new Person { Id = 10 } }
+            };
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request => request.QueryString = new QueryString(queryString),
                 // Add JQueryQueryStringValueProviderFactory before default factories.
-                options => options.ValueProviderFactories.Insert(0, new JQueryQueryStringValueProviderFactory()));
+                options =>
+                    options.ValueProviderFactories.Insert(
+                        0,
+                        new JQueryQueryStringValueProviderFactory()
+                    )
+            );
 
             var modelState = testContext.ModelState;
-            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+                testContext.HttpContext.RequestServices
+            );
             var parameter = new ParameterDescriptor()
             {
                 Name = "parameter",
@@ -664,24 +725,23 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [Theory]
         [MemberData(nameof(ComplexType_ExplicitPrefixData))]
         public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithExplicitPrefix(
-            string queryString)
-        {
+            string queryString
+        ) {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor()
             {
                 Name = "parameter",
-                BindingInfo = new BindingInfo()
-                {
-                    BinderModelName = "prefix",
-                },
+                BindingInfo = new BindingInfo() { BinderModelName = "prefix", },
                 ParameterType = typeof(Dictionary<string, Person>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString(queryString);
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString(queryString);
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -692,7 +752,10 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             Assert.True(modelBindingResult.IsModelSet);
 
             var model = Assert.IsType<Dictionary<string, Person>>(modelBindingResult.Model);
-            Assert.Equal(new Dictionary<string, Person> { { "key0", new Person { Id = 10 } }, }, model);
+            Assert.Equal(
+                new Dictionary<string, Person> { { "key0", new Person { Id = 10 } }, },
+                model
+            );
 
             Assert.NotEmpty(modelState);
             Assert.Equal(0, modelState.ErrorCount);
@@ -703,22 +766,23 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [InlineData("?prefix[key0][Id]=10")]
         [MemberData(nameof(ComplexType_ExplicitPrefixData))]
         public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_WithExplicitPrefixAndJQuery(
-            string queryString)
-        {
+            string queryString
+        ) {
             // Arrange
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request => request.QueryString = new QueryString(queryString),
                 // Add JQueryQueryStringValueProviderFactory after default factories.
-                options => options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory()));
+                options =>
+                    options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory())
+            );
 
-            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+                testContext.HttpContext.RequestServices
+            );
             var parameter = new ParameterDescriptor()
             {
                 Name = "parameter",
-                BindingInfo = new BindingInfo()
-                {
-                    BinderModelName = "prefix",
-                },
+                BindingInfo = new BindingInfo() { BinderModelName = "prefix", },
                 ParameterType = typeof(Dictionary<string, Person>)
             };
 
@@ -731,7 +795,10 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             Assert.True(modelBindingResult.IsModelSet);
 
             var model = Assert.IsType<Dictionary<string, Person>>(modelBindingResult.Model);
-            Assert.Equal(new Dictionary<string, Person> { { "key0", new Person { Id = 10 } }, }, model);
+            Assert.Equal(
+                new Dictionary<string, Person> { { "key0", new Person { Id = 10 } }, },
+                model
+            );
 
             Assert.NotEmpty(modelState);
             Assert.Equal(0, modelState.ErrorCount);
@@ -745,10 +812,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [InlineData("?parameter[key0].Id=100")]
         [InlineData("?parameter[0].Key=key0&parameter[0].Value.Id=100")]
         [InlineData("?parameter.index=low&parameter[low].Key=key0&parameter[low].Value.Id=100")]
-        [InlineData("?parameter.index=index&parameter[index].Key=key0&parameter[index].Value.Id=100")]
+        [InlineData(
+            "?parameter.index=index&parameter[index].Key=key0&parameter[index].Value.Id=100"
+        )]
         public async Task DictionaryModelBinder_BindsDictionaryOfComplexType_ImpliedPrefix_FindsValidationErrors(
-            string queryString)
-        {
+            string queryString
+        ) {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor()
@@ -757,10 +826,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Dictionary<string, Person>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString(queryString);
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString(queryString);
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -771,17 +842,26 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             Assert.True(modelBindingResult.IsModelSet);
 
             var model = Assert.IsType<Dictionary<string, Person>>(modelBindingResult.Model);
-            Assert.Equal(new Dictionary<string, Person> { { "key0", new Person { Id = 100 } }, }, model);
+            Assert.Equal(
+                new Dictionary<string, Person> { { "key0", new Person { Id = 100 } }, },
+                model
+            );
 
             Assert.NotEmpty(modelState);
             Assert.False(modelState.IsValid);
-            Assert.All(modelState, kvp =>
-            {
-                Assert.NotEqual(ModelValidationState.Unvalidated, kvp.Value.ValidationState);
-                Assert.NotEqual(ModelValidationState.Skipped, kvp.Value.ValidationState);
-            });
+            Assert.All(
+                modelState,
+                kvp =>
+                {
+                    Assert.NotEqual(ModelValidationState.Unvalidated, kvp.Value.ValidationState);
+                    Assert.NotEqual(ModelValidationState.Skipped, kvp.Value.ValidationState);
+                }
+            );
 
-            var entry = Assert.Single(modelState, kvp => kvp.Value.ValidationState == ModelValidationState.Invalid);
+            var entry = Assert.Single(
+                modelState,
+                kvp => kvp.Value.ValidationState == ModelValidationState.Invalid
+            );
             var error = Assert.Single(entry.Value.Errors);
             Assert.Equal("You're out of range.", error.ErrorMessage);
         }
@@ -797,10 +877,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Dictionary<string, Person>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -839,10 +921,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
         [Theory]
         [MemberData(nameof(CollectionType_ImpliedPrefixData))]
-        public async Task DictionaryModelBinder_BindsDictionaryOfCollectionType_WithImpliedPrefix(string queryString)
-        {
+        public async Task DictionaryModelBinder_BindsDictionaryOfCollectionType_WithImpliedPrefix(
+            string queryString
+        ) {
             // Arrange
-            var expectedDictionary = new Dictionary<string, string[]> { { "key0", new[] { "10", "11" } } };
+            var expectedDictionary = new Dictionary<string, string[]>
+            {
+                { "key0", new[] { "10", "11" } }
+            };
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
             var parameter = new ParameterDescriptor()
             {
@@ -851,7 +937,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             };
 
             var testContext = ModelBindingTestHelper.GetTestContext(
-                request => request.QueryString = new QueryString(queryString));
+                request => request.QueryString = new QueryString(queryString)
+            );
             var modelState = testContext.ModelState;
 
             // Act
@@ -871,17 +958,24 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [Theory]
         [MemberData(nameof(CollectionType_ImpliedPrefixData))]
         public async Task DictionaryModelBinder_BindsDictionaryOfCollectionType_WithImpliedPrefixAndJQuery(
-            string queryString)
-        {
+            string queryString
+        ) {
             // Arrange
-            var expectedDictionary = new Dictionary<string, string[]> { { "key0", new[] { "10", "11" } } };
+            var expectedDictionary = new Dictionary<string, string[]>
+            {
+                { "key0", new[] { "10", "11" } }
+            };
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request => request.QueryString = new QueryString(queryString),
                 // Add JQueryQueryStringValueProviderFactory after default factories.
-                options => options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory()));
+                options =>
+                    options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory())
+            );
 
             var modelState = testContext.ModelState;
-            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+                testContext.HttpContext.RequestServices
+            );
             var parameter = new ParameterDescriptor()
             {
                 Name = "parameter",
@@ -905,17 +999,27 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [Theory]
         [MemberData(nameof(CollectionType_ImpliedPrefixData))]
         public async Task DictionaryModelBinder_BindsDictionaryOfCollectionType_WithImpliedPrefixAndJQueryFirst(
-            string queryString)
-        {
+            string queryString
+        ) {
             // Arrange
-            var expectedDictionary = new Dictionary<string, string[]> { { "key0", new[] { "10", "11" } } };
+            var expectedDictionary = new Dictionary<string, string[]>
+            {
+                { "key0", new[] { "10", "11" } }
+            };
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request => request.QueryString = new QueryString(queryString),
                 // Add JQueryQueryStringValueProviderFactory before default factories.
-                options => options.ValueProviderFactories.Insert(0, new JQueryQueryStringValueProviderFactory()));
+                options =>
+                    options.ValueProviderFactories.Insert(
+                        0,
+                        new JQueryQueryStringValueProviderFactory()
+                    )
+            );
 
             var modelState = testContext.ModelState;
-            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+                testContext.HttpContext.RequestServices
+            );
             var parameter = new ParameterDescriptor()
             {
                 Name = "parameter",
@@ -944,17 +1048,24 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [InlineData("?parameter[42][]=10&parameter[42][]=11")]
         [InlineData("?parameter[42][0]=10&parameter[42][1]=11")]
         public async Task DictionaryModelBinder_BindsDictionaryOfCollectionType_WithImpliedPrefixIntegralKeysAndJQuery(
-            string queryString)
-        {
+            string queryString
+        ) {
             // Arrange
-            var expectedDictionary = new Dictionary<string, string[]> { { "42", new[] { "10", "11" } } };
+            var expectedDictionary = new Dictionary<string, string[]>
+            {
+                { "42", new[] { "10", "11" } }
+            };
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request => request.QueryString = new QueryString(queryString),
                 // Add JQueryQueryStringValueProviderFactory after default factories.
-                options => options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory()));
+                options =>
+                    options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory())
+            );
 
             var modelState = testContext.ModelState;
-            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+                testContext.HttpContext.RequestServices
+            );
             var parameter = new ParameterDescriptor()
             {
                 Name = "parameter",
@@ -983,17 +1094,27 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [InlineData("?parameter[42][]=10&parameter[42][]=11")]
         [InlineData("?parameter[42][0]=10&parameter[42][1]=11")]
         public async Task DictionaryModelBinder_BindsDictionaryOfCollectionType_WithImpliedPrefixIntegralKeysAndJQueryFirst(
-            string queryString)
-        {
+            string queryString
+        ) {
             // Arrange
-            var expectedDictionary = new Dictionary<string, string[]> { { "42", new[] { "10", "11" } } };
+            var expectedDictionary = new Dictionary<string, string[]>
+            {
+                { "42", new[] { "10", "11" } }
+            };
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request => request.QueryString = new QueryString(queryString),
                 // Add JQueryQueryStringValueProviderFactory before default factories.
-                options => options.ValueProviderFactories.Insert(0, new JQueryQueryStringValueProviderFactory()));
+                options =>
+                    options.ValueProviderFactories.Insert(
+                        0,
+                        new JQueryQueryStringValueProviderFactory()
+                    )
+            );
 
             var modelState = testContext.ModelState;
-            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+                testContext.HttpContext.RequestServices
+            );
             var parameter = new ParameterDescriptor()
             {
                 Name = "parameter",
@@ -1090,8 +1211,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         public async Task DictionaryModelBinder_BindsParameterToExpectedType(
             Type parameterType,
             string queryString,
-            Type expectedType)
-        {
+            Type expectedType
+        ) {
             // Arrange
             var expectedDictionary = new Dictionary<string, string>
             {
@@ -1105,10 +1226,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             };
 
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString(queryString);
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString(queryString);
+                }
+            );
             var modelState = testContext.ModelState;
 
             // Act
@@ -1133,24 +1256,27 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         public async Task DictionaryModelBinder_ThrowsOn1025Items_AtTopLevel()
         {
             // Arrange
-            var expectedMessage = $"Collection bound to 'parameter' exceeded " +
-                $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingCollectionSize)} (1024). This limit is a " +
-                $"safeguard against incorrect model binders and models. Address issues in " +
-                $"'{typeof(KeyValuePair<SuccessfulModel, SuccessfulModel>)}'. For example, this type may have a " +
-                $"property with a model binder that always succeeds. See the " +
-                $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingCollectionSize)} documentation for more " +
-                $"information.";
+            var expectedMessage =
+                $"Collection bound to 'parameter' exceeded "
+                + $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingCollectionSize)} (1024). This limit is a "
+                + $"safeguard against incorrect model binders and models. Address issues in "
+                + $"'{typeof(KeyValuePair<SuccessfulModel, SuccessfulModel>)}'. For example, this type may have a "
+                + $"property with a model binder that always succeeds. See the "
+                + $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingCollectionSize)} documentation for more "
+                + $"information.";
             var parameter = new ParameterDescriptor()
             {
                 Name = "parameter",
                 ParameterType = typeof(Dictionary<SuccessfulModel, SuccessfulModel>),
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                // CollectionModelBinder binds an empty collection when value providers are all empty.
-                request.QueryString = new QueryString("?a=b");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    // CollectionModelBinder binds an empty collection when value providers are all empty.
+                    request.QueryString = new QueryString("?a=b");
+                }
+            );
 
             var modelState = testContext.ModelState;
             var metadata = testContext.MetadataProvider.GetMetadataForType(parameter.ParameterType);
@@ -1159,7 +1285,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
             // Act & Assert
             var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => parameterBinder.BindModelAsync(parameter, testContext));
+                () => parameterBinder.BindModelAsync(parameter, testContext)
+            );
             Assert.Equal(expectedMessage, exception.Message);
         }
 
@@ -1175,10 +1302,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Dictionary<string, string>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter[key0]=");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?parameter[key0]=");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -1195,7 +1324,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 {
                     Assert.Equal("key0", kvp.Key);
                     Assert.Null(kvp.Value);
-                });
+                }
+            );
 
             Assert.Collection(
                 modelState.OrderBy(kvp => kvp.Key),
@@ -1203,7 +1333,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 {
                     Assert.Equal("parameter[key0]", kvp.Key);
                     Assert.Equal(ModelValidationState.Valid, kvp.Value.ValidationState);
-                });
+                }
+            );
             Assert.Equal(0, modelState.ErrorCount);
             Assert.True(modelState.IsValid);
         }
@@ -1229,10 +1360,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Dictionary<string, NonNullPerson>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter[key0].Age=&parameter[key0].Name=name0&parameter[key1].Age=27&parameter[key1].Name=");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString(
+                        "?parameter[key0].Age=&parameter[key0].Name=name0&parameter[key1].Age=27&parameter[key1].Name="
+                    );
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -1258,7 +1393,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                     var person = kvp.Value;
                     Assert.Equal(27, person.Age);
                     Assert.Null(person.Name);
-                });
+                }
+            );
 
             Assert.Collection(
                 modelState.OrderBy(kvp => kvp.Key),
@@ -1266,7 +1402,10 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 {
                     Assert.Equal("parameter[key0].Age", kvp.Key);
                     Assert.Equal(ModelValidationState.Invalid, kvp.Value.ValidationState);
-                    Assert.Equal("The value '' is invalid.", Assert.Single(kvp.Value.Errors).ErrorMessage);
+                    Assert.Equal(
+                        "The value '' is invalid.",
+                        Assert.Single(kvp.Value.Errors).ErrorMessage
+                    );
                 },
                 kvp =>
                 {
@@ -1282,8 +1421,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 {
                     Assert.Equal("parameter[key1].Name", kvp.Key);
                     Assert.Equal(ModelValidationState.Invalid, kvp.Value.ValidationState);
-                    Assert.Equal("The Name field is required.", Assert.Single(kvp.Value.Errors).ErrorMessage);
-                });
+                    Assert.Equal(
+                        "The Name field is required.",
+                        Assert.Single(kvp.Value.Errors).ErrorMessage
+                    );
+                }
+            );
             Assert.Equal(2, modelState.ErrorCount);
             Assert.False(modelState.IsValid);
         }
@@ -1309,10 +1452,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Dictionary<string, NonNullPersonWithRequiredProperties>)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter[key0].Age=&parameter[key0].Name=name0&parameter[key1].Age=27&parameter[key1].Name=");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString(
+                        "?parameter[key0].Age=&parameter[key0].Name=name0&parameter[key1].Age=27&parameter[key1].Name="
+                    );
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -1322,7 +1469,9 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             // Assert
             Assert.True(modelBindingResult.IsModelSet);
 
-            var model = Assert.IsType<Dictionary<string, NonNullPersonWithRequiredProperties>>(modelBindingResult.Model);
+            var model = Assert.IsType<Dictionary<string, NonNullPersonWithRequiredProperties>>(
+                modelBindingResult.Model
+            );
             Assert.Collection(
                 model.OrderBy(kvp => kvp.Key),
                 kvp =>
@@ -1338,7 +1487,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                     var person = kvp.Value;
                     Assert.Equal(27, person.Age);
                     Assert.Null(person.Name);
-                });
+                }
+            );
 
             Assert.Collection(
                 modelState.OrderBy(kvp => kvp.Key),
@@ -1346,7 +1496,10 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 {
                     Assert.Equal("parameter[key0].Age", kvp.Key);
                     Assert.Equal(ModelValidationState.Invalid, kvp.Value.ValidationState);
-                    Assert.Equal("The value '' is invalid.", Assert.Single(kvp.Value.Errors).ErrorMessage);
+                    Assert.Equal(
+                        "The value '' is invalid.",
+                        Assert.Single(kvp.Value.Errors).ErrorMessage
+                    );
                 },
                 kvp =>
                 {
@@ -1362,8 +1515,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 {
                     Assert.Equal("parameter[key1].Name", kvp.Key);
                     Assert.Equal(ModelValidationState.Invalid, kvp.Value.ValidationState);
-                    Assert.Equal("The Name field is required.", Assert.Single(kvp.Value.Errors).ErrorMessage);
-                });
+                    Assert.Equal(
+                        "The Name field is required.",
+                        Assert.Single(kvp.Value.Errors).ErrorMessage
+                    );
+                }
+            );
             Assert.Equal(2, modelState.ErrorCount);
             Assert.False(modelState.IsValid);
         }
@@ -1382,47 +1539,28 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
             string IDictionary<string, string>.this[string key]
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
-
-                set
-                {
-                    _data[key] = value;
-                }
+                get { throw new NotImplementedException(); }
+                set { _data[key] = value; }
             }
 
             int ICollection<KeyValuePair<string, string>>.Count
             {
-                get
-                {
-                    return _data.Count;
-                }
+                get { return _data.Count; }
             }
 
             bool ICollection<KeyValuePair<string, string>>.IsReadOnly
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             ICollection<string> IDictionary<string, string>.Keys
             {
-                get
-                {
-                    return _data.Keys;
-                }
+                get { return _data.Keys; }
             }
 
             ICollection<string> IDictionary<string, string>.Values
             {
-                get
-                {
-                    return _data.Values;
-                }
+                get { return _data.Values; }
             }
 
             void ICollection<KeyValuePair<string, string>>.Add(KeyValuePair<string, string> item)
@@ -1440,8 +1578,9 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 _data.Clear();
             }
 
-            bool ICollection<KeyValuePair<string, string>>.Contains(KeyValuePair<string, string> item)
-            {
+            bool ICollection<KeyValuePair<string, string>>.Contains(
+                KeyValuePair<string, string> item
+            ) {
                 throw new NotImplementedException();
             }
 
@@ -1450,8 +1589,10 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 throw new NotImplementedException();
             }
 
-            void ICollection<KeyValuePair<string, string>>.CopyTo(KeyValuePair<string, string>[] array, int arrayIndex)
-            {
+            void ICollection<KeyValuePair<string, string>>.CopyTo(
+                KeyValuePair<string, string>[] array,
+                int arrayIndex
+            ) {
                 throw new NotImplementedException();
             }
 
@@ -1460,7 +1601,9 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 return _data.GetEnumerator();
             }
 
-            IEnumerator<KeyValuePair<string, string>> IEnumerable<KeyValuePair<string, string>>.GetEnumerator()
+            IEnumerator<KeyValuePair<string, string>> IEnumerable<
+                KeyValuePair<string, string>
+            >.GetEnumerator()
             {
                 return _data.GetEnumerator();
             }
@@ -1487,47 +1630,28 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
             TValue IDictionary<TKey, TValue>.this[TKey key]
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
-
-                set
-                {
-                    _data[key] = value;
-                }
+                get { throw new NotImplementedException(); }
+                set { _data[key] = value; }
             }
 
             int ICollection<KeyValuePair<TKey, TValue>>.Count
             {
-                get
-                {
-                    return _data.Count;
-                }
+                get { return _data.Count; }
             }
 
             bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             ICollection<TKey> IDictionary<TKey, TValue>.Keys
             {
-                get
-                {
-                    return _data.Keys;
-                }
+                get { return _data.Keys; }
             }
 
             ICollection<TValue> IDictionary<TKey, TValue>.Values
             {
-                get
-                {
-                    return _data.Values;
-                }
+                get { return _data.Values; }
             }
 
             void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item)
@@ -1555,8 +1679,10 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 throw new NotImplementedException();
             }
 
-            void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
-            {
+            void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(
+                KeyValuePair<TKey, TValue>[] array,
+                int arrayIndex
+            ) {
                 throw new NotImplementedException();
             }
 
@@ -1565,7 +1691,9 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 return _data.GetEnumerator();
             }
 
-            IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator()
+            IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<
+                KeyValuePair<TKey, TValue>
+            >.GetEnumerator()
             {
                 return _data.GetEnumerator();
             }

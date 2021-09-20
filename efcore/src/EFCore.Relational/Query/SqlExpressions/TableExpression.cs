@@ -69,10 +69,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <inheritdoc />
         public override bool Equals(object? obj)
             // This should be reference equal only.
-            => obj != null && ReferenceEquals(this, obj);
+            =>
+            obj != null && ReferenceEquals(this, obj);
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), Name, Schema);
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Name, Schema);
     }
 }

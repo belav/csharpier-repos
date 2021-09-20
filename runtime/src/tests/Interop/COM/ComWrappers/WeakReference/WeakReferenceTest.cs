@@ -73,8 +73,11 @@ namespace ComWrappersTests
                 Registration = reg;
             }
 
-            protected unsafe override ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count)
-            {
+            protected unsafe override ComInterfaceEntry* ComputeVtables(
+                object obj,
+                CreateComInterfaceFlags flags,
+                out int count
+            ) {
                 count = 0;
                 return null;
             }
@@ -85,16 +88,21 @@ namespace ComWrappersTests
                 return new WeakReferenceableWrapper(externalComObject, Registration);
             }
 
-            protected override void ReleaseObjects(IEnumerable objects)
-            {
-            }
+            protected override void ReleaseObjects(IEnumerable objects) { }
 
-            public static readonly TestComWrappers TrackerSupportInstance = new TestComWrappers(WrapperRegistration.TrackerSupport);
-            public static readonly TestComWrappers MarshallingInstance = new TestComWrappers(WrapperRegistration.Marshalling);
+            public static readonly TestComWrappers TrackerSupportInstance = new TestComWrappers(
+                WrapperRegistration.TrackerSupport
+            );
+            public static readonly TestComWrappers MarshallingInstance = new TestComWrappers(
+                WrapperRegistration.Marshalling
+            );
         }
 
-        private static void ValidateWeakReferenceState(WeakReference<WeakReferenceableWrapper> wr, bool expectedIsAlive, TestComWrappers sourceWrappers = null)
-        {
+        private static void ValidateWeakReferenceState(
+            WeakReference<WeakReferenceableWrapper> wr,
+            bool expectedIsAlive,
+            TestComWrappers sourceWrappers = null
+        ) {
             WeakReferenceableWrapper target;
             bool isAlive = wr.TryGetTarget(out target);
             Assert.AreEqual(expectedIsAlive, isAlive);
@@ -103,19 +111,28 @@ namespace ComWrappersTests
                 Assert.AreEqual(sourceWrappers.Registration, target.Registration);
         }
 
-        private static (WeakReference<WeakReferenceableWrapper>, IntPtr) GetWeakReference(TestComWrappers cw)
-        {
+        private static (WeakReference<WeakReferenceableWrapper>, IntPtr) GetWeakReference(
+            TestComWrappers cw
+        ) {
             IntPtr objRaw = WeakReferenceNative.CreateWeakReferencableObject();
-            var obj = (WeakReferenceableWrapper)cw.GetOrCreateObjectForComInstance(objRaw, CreateObjectFlags.None);
+            var obj = (WeakReferenceableWrapper)cw.GetOrCreateObjectForComInstance(
+                objRaw,
+                CreateObjectFlags.None
+            );
             var wr = new WeakReference<WeakReferenceableWrapper>(obj);
             ValidateWeakReferenceState(wr, expectedIsAlive: true, cw);
             return (wr, objRaw);
         }
 
-        private static IntPtr SetWeakReferenceTarget(WeakReference<WeakReferenceableWrapper> wr, TestComWrappers cw)
-        {
+        private static IntPtr SetWeakReferenceTarget(
+            WeakReference<WeakReferenceableWrapper> wr,
+            TestComWrappers cw
+        ) {
             IntPtr objRaw = WeakReferenceNative.CreateWeakReferencableObject();
-            var obj = (WeakReferenceableWrapper)cw.GetOrCreateObjectForComInstance(objRaw, CreateObjectFlags.None);
+            var obj = (WeakReferenceableWrapper)cw.GetOrCreateObjectForComInstance(
+                objRaw,
+                CreateObjectFlags.None
+            );
             wr.SetTarget(obj);
             ValidateWeakReferenceState(wr, expectedIsAlive: true, cw);
             return objRaw;
@@ -135,7 +152,7 @@ namespace ComWrappersTests
             // a global ComWrappers instance. If the RCW was created throug a local ComWrappers instance, the weak
             // reference should be dead and stay dead once the RCW is collected.
             bool supportsRehydration = cw.Registration != WrapperRegistration.Local;
-            
+
             Console.WriteLine($"    -- Validate RCW recreation");
             ValidateWeakReferenceState(weakRef, expectedIsAlive: supportsRehydration, cw);
 

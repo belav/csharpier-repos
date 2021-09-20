@@ -8,8 +8,8 @@ namespace System.CommandLine.Binding
         internal BoundValue(
             object? value,
             IValueDescriptor valueDescriptor,
-            IValueSource valueSource)
-        {
+            IValueSource valueSource
+        ) {
             Value = value;
             ValueDescriptor = valueDescriptor;
             ValueSource = valueSource;
@@ -29,10 +29,7 @@ namespace System.CommandLine.Binding
 
             valueSource.TryGetValue(valueDescriptor, null, out var value);
 
-            return new BoundValue(
-                value,
-                valueDescriptor,
-                valueSource);
+            return new BoundValue(value, valueDescriptor, valueSource);
         }
 
         public static BoundValue DefaultForValueDescriptor(IValueDescriptor valueDescriptor)
@@ -41,10 +38,7 @@ namespace System.CommandLine.Binding
 
             valueSource.TryGetValue(valueDescriptor, null, out var value);
 
-            return new BoundValue(
-                value,
-                valueDescriptor,
-                valueSource);
+            return new BoundValue(value, valueDescriptor, valueSource);
         }
     }
 }

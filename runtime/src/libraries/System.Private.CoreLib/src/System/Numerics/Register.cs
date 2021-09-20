@@ -165,7 +165,6 @@ namespace System.Numerics
         internal double double_0;
         [FieldOffset(8)]
         internal double double_1;
-
         #endregion Internal Storage Fields
     }
 }

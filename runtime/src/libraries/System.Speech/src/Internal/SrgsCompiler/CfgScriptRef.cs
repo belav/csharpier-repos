@@ -17,7 +17,6 @@ namespace System.Speech.Internal.SrgsCompiler
         internal int _idMethod;
 
         internal RuleMethodScript _method;
-
         #endregion
     }
 }

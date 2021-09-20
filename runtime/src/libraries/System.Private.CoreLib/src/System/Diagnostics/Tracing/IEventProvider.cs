@@ -19,7 +19,8 @@ namespace System.Diagnostics.Tracing
             EventSource eventSource,
             Interop.Advapi32.EtwEnableCallback enableCallback,
             void* callbackContext,
-            ref long registrationHandle);
+            ref long registrationHandle
+        );
 
         // Unregister an event provider.
         uint EventUnregister(long registrationHandle);
@@ -32,13 +33,24 @@ namespace System.Diagnostics.Tracing
             Guid* activityId,
             Guid* relatedActivityId,
             int userDataCount,
-            EventProvider.EventData* userData);
+            EventProvider.EventData* userData
+        );
 
         // Get or set the per-thread activity ID.
-        int EventActivityIdControl(Interop.Advapi32.ActivityControl ControlCode, ref Guid ActivityId);
+        int EventActivityIdControl(
+            Interop.Advapi32.ActivityControl ControlCode,
+            ref Guid ActivityId
+        );
 
         // Define an EventPipeEvent handle.
-        unsafe IntPtr DefineEventHandle(uint eventID, string eventName, long keywords, uint eventVersion,
-            uint level, byte *pMetadata, uint metadataLength);
+        unsafe IntPtr DefineEventHandle(
+            uint eventID,
+            string eventName,
+            long keywords,
+            uint eventVersion,
+            uint level,
+            byte* pMetadata,
+            uint metadataLength
+        );
     }
 }

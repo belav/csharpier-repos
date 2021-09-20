@@ -17,25 +17,21 @@ namespace Microsoft.CodeAnalysis.PatternMatching
         /// The candidate string matched the pattern exactly.
         /// </summary>
         Exact,
-
         /// <summary>
         /// The pattern was a prefix of the candidate string.
         /// </summary>
         Prefix,
-
         /// <summary>
         /// The pattern was a substring of the candidate string, but in a way that wasn't a CamelCase match.  The
         /// pattern had to have at least one non lowercase letter in it, and the match needs to be case sensitive.
         /// This will match 'savedWork' against 'FindUnsavedWork'.
         /// </summary>
         NonLowercaseSubstring,
-
         /// <summary>
         /// The pattern was a substring of the candidate string, starting at a word within that candidate.  The pattern
         /// can be all lowercase here.  This will match 'save' or 'Save' in 'FindSavedWork'
         /// </summary>
         StartOfWordSubstring,
-
         // Note: CamelCased matches are ordered from best to worst.
 
         /// <summary>
@@ -47,7 +43,6 @@ namespace Microsoft.CodeAnalysis.PatternMatching
         /// Example: "CoFiPrSe" matching "CodeFixProviderService"
         /// </summary>
         CamelCaseExact,
-
         /// <summary>
         /// All camel-humps in the pattern matched a camel-hump in the candidate.  The first camel-hump
         /// in the pattern matched the first camel-hump in the candidate.  There was no gap in the camel-
@@ -58,7 +53,6 @@ namespace Microsoft.CodeAnalysis.PatternMatching
         /// Example: "CoFiPRo" matching "CodeFixProviderService"
         /// </summary>
         CamelCasePrefix,
-
         /// <summary>
         /// All camel-humps in the pattern matched a camel-hump in the candidate.  The first camel-hump
         /// in the pattern matched the first camel-hump in the candidate.  There was at least one gap in 
@@ -69,7 +63,6 @@ namespace Microsoft.CodeAnalysis.PatternMatching
         /// Example: "CoProv" matching "CodeFixProviderService"
         /// </summary>
         CamelCaseNonContiguousPrefix,
-
         /// <summary>
         /// All camel-humps in the pattern matched a camel-hump in the candidate.  The first camel-hump
         /// in the pattern did not match the first camel-hump in the pattern.  There was no gap in the camel-
@@ -80,7 +73,6 @@ namespace Microsoft.CodeAnalysis.PatternMatching
         /// Example: "FixPro" matching "CodeFixProviderService"
         /// </summary>
         CamelCaseSubstring,
-
         /// <summary>
         /// All camel-humps in the pattern matched a camel-hump in the candidate.  The first camel-hump
         /// in the pattern did not match the first camel-hump in the pattern.  There was at least one gap in 
@@ -91,14 +83,12 @@ namespace Microsoft.CodeAnalysis.PatternMatching
         /// Example: "FixSer" matching "CodeFixProviderService"
         /// </summary>
         CamelCaseNonContiguousSubstring,
-
         /// <summary>
         /// The pattern matches the candidate in a fuzzy manner.  Fuzzy matching allows for 
         /// a certain amount of misspellings, missing words, etc. See <see cref="SpellChecker"/> for 
         /// more details.
         /// </summary>
         Fuzzy,
-
         /// <summary>
         /// The pattern was a substring of the candidate and wasn't either <see cref="NonLowercaseSubstring"/> or <see
         /// cref="StartOfWordSubstring"/>.  This can happen when the pattern is allow lowercases and matches some non

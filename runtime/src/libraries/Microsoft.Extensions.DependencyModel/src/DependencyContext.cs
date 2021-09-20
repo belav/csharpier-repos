@@ -10,14 +10,16 @@ namespace Microsoft.Extensions.DependencyModel
 {
     public class DependencyContext
     {
-        private static readonly Lazy<DependencyContext> _defaultContext = new Lazy<DependencyContext>(LoadDefault);
+        private static readonly Lazy<DependencyContext> _defaultContext =
+            new Lazy<DependencyContext>(LoadDefault);
 
-        public DependencyContext(TargetInfo target,
+        public DependencyContext(
+            TargetInfo target,
             CompilationOptions compilationOptions,
             IEnumerable<CompilationLibrary> compileLibraries,
             IEnumerable<RuntimeLibrary> runtimeLibraries,
-            IEnumerable<RuntimeFallbacks> runtimeGraph)
-        {
+            IEnumerable<RuntimeFallbacks> runtimeGraph
+        ) {
             if (target == null)
             {
                 throw new ArgumentNullException(nameof(target));
@@ -68,10 +70,16 @@ namespace Microsoft.Extensions.DependencyModel
             return new DependencyContext(
                 Target,
                 CompilationOptions,
-                CompileLibraries.Union(other.CompileLibraries, new LibraryMergeEqualityComparer<CompilationLibrary>()),
-                RuntimeLibraries.Union(other.RuntimeLibraries, new LibraryMergeEqualityComparer<RuntimeLibrary>()),
+                CompileLibraries.Union(
+                    other.CompileLibraries,
+                    new LibraryMergeEqualityComparer<CompilationLibrary>()
+                ),
+                RuntimeLibraries.Union(
+                    other.RuntimeLibraries,
+                    new LibraryMergeEqualityComparer<RuntimeLibrary>()
+                ),
                 RuntimeGraph.Union(other.RuntimeGraph)
-                );
+            );
         }
 
         private static DependencyContext LoadDefault()
@@ -90,7 +98,8 @@ namespace Microsoft.Extensions.DependencyModel
             return DependencyContextLoader.Default.Load(assembly);
         }
 
-        private sealed class LibraryMergeEqualityComparer<T> : IEqualityComparer<T> where T : Library
+        private sealed class LibraryMergeEqualityComparer<T> : IEqualityComparer<T>
+            where T : Library
         {
             public bool Equals(T x, T y)
             {

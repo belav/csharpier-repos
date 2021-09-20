@@ -10,15 +10,20 @@ namespace System.Linq.Expressions.Tests
     /// those tests with no attribute happening in the same batch as those with an Order of zero.</summary>
     internal class TestOrderer : ITestCaseOrderer
     {
-        IEnumerable<TTestCase> ITestCaseOrderer.OrderTestCases<TTestCase>(IEnumerable<TTestCase> testCases)
-        {
+        IEnumerable<TTestCase> ITestCaseOrderer.OrderTestCases<TTestCase>(
+            IEnumerable<TTestCase> testCases
+        ) {
             Dictionary<int, List<TTestCase>> queue = new Dictionary<int, List<TTestCase>>();
             foreach (TTestCase testCase in testCases)
             {
-                Xunit.Abstractions.IAttributeInfo orderAttribute = testCase.TestMethod.Method.GetCustomAttributes(typeof(TestOrderAttribute)).FirstOrDefault();
+                Xunit.Abstractions.IAttributeInfo orderAttribute =
+                    testCase.TestMethod.Method.GetCustomAttributes(typeof(TestOrderAttribute))
+                        .FirstOrDefault();
                 int order;
-                if (orderAttribute == null || (order = orderAttribute.GetConstructorArguments().Cast<int>().First()) == 0)
-                {
+                if (
+                    orderAttribute == null
+                    || (order = orderAttribute.GetConstructorArguments().Cast<int>().First()) == 0
+                ) {
                     yield return testCase;
                 }
                 else

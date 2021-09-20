@@ -10,7 +10,6 @@ namespace Microsoft.VisualBasic.Tests
 {
     public class InteractionTests
     {
-
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNetCore))]
         public void AppActivate_ProcessId()
         {
@@ -25,9 +24,18 @@ namespace Microsoft.VisualBasic.Tests
 
         [Theory]
         [MemberData(nameof(CallByName_TestData))]
-        public void CallByName(object instance, string methodName, CallType useCallType, object[] args, Func<object, object> getResult, object expected)
-        {
-            Assert.Equal(getResult is null ? expected : null, Interaction.CallByName(instance, methodName, useCallType, args));
+        public void CallByName(
+            object instance,
+            string methodName,
+            CallType useCallType,
+            object[] args,
+            Func<object, object> getResult,
+            object expected
+        ) {
+            Assert.Equal(
+                getResult is null ? expected : null,
+                Interaction.CallByName(instance, methodName, useCallType, args)
+            );
             if (getResult != null)
             {
                 Assert.Equal(expected, getResult(instance));
@@ -36,33 +44,97 @@ namespace Microsoft.VisualBasic.Tests
 
         [Theory]
         [MemberData(nameof(CallByName_ArgumentException_TestData))]
-        public void CallByName_ArgumentException(object instance, string methodName, CallType useCallType, object[] args)
-        {
-            Assert.Throws<ArgumentException>(() => Interaction.CallByName(instance, methodName, useCallType, args));
+        public void CallByName_ArgumentException(
+            object instance,
+            string methodName,
+            CallType useCallType,
+            object[] args
+        ) {
+            Assert.Throws<ArgumentException>(
+                () => Interaction.CallByName(instance, methodName, useCallType, args)
+            );
         }
 
         [Theory]
         [MemberData(nameof(CallByName_MissingMemberException_TestData))]
-        public void CallByName_MissingMemberException(object instance, string methodName, CallType useCallType, object[] args)
-        {
-            Assert.Throws<MissingMemberException>(() => Interaction.CallByName(instance, methodName, useCallType, args));
+        public void CallByName_MissingMemberException(
+            object instance,
+            string methodName,
+            CallType useCallType,
+            object[] args
+        ) {
+            Assert.Throws<MissingMemberException>(
+                () => Interaction.CallByName(instance, methodName, useCallType, args)
+            );
         }
 
         public static IEnumerable<object[]> CallByName_TestData()
         {
-            yield return new object[] { new Class(), "Method", CallType.Method, new object[] { 1, 2 }, null, 3 };
-            yield return new object[] { new Class(), "Method", CallType.Get, new object[] { 2, 3 }, null, 5 };
+            yield return new object[]
+            {
+                new Class(),
+                "Method",
+                CallType.Method,
+                new object[] { 1, 2 },
+                null,
+                3
+            };
+            yield return new object[]
+            {
+                new Class(),
+                "Method",
+                CallType.Get,
+                new object[] { 2, 3 },
+                null,
+                5
+            };
             yield return new object[] { new Class(), "P", CallType.Get, new object[0], null, 0 };
-            yield return new object[] { new Class(), "Item", CallType.Get, new object[] { 2 }, null, 2 };
-            yield return new object[] { new Class(), "P", CallType.Set, new object[] { 3 }, new Func<object, object>(obj => ((Class)obj).Value), 3 };
-            yield return new object[] { new Class(), "Item", CallType.Let, new object[] { 4, 5 }, new Func<object, object>(obj => ((Class)obj).Value), 9 };
+            yield return new object[]
+            {
+                new Class(),
+                "Item",
+                CallType.Get,
+                new object[] { 2 },
+                null,
+                2
+            };
+            yield return new object[]
+            {
+                new Class(),
+                "P",
+                CallType.Set,
+                new object[] { 3 },
+                new Func<object, object>(obj => ((Class)obj).Value),
+                3
+            };
+            yield return new object[]
+            {
+                new Class(),
+                "Item",
+                CallType.Let,
+                new object[] { 4, 5 },
+                new Func<object, object>(obj => ((Class)obj).Value),
+                9
+            };
         }
 
         public static IEnumerable<object[]> CallByName_ArgumentException_TestData()
         {
             yield return new object[] { null, null, default(CallType), new object[0] };
-            yield return new object[] { new Class(), "Method", default(CallType), new object[] { 1, 2 } };
-            yield return new object[] { new Class(), "Method", (CallType)int.MaxValue, new object[] { 1, 2 } };
+            yield return new object[]
+            {
+                new Class(),
+                "Method",
+                default(CallType),
+                new object[] { 1, 2 }
+            };
+            yield return new object[]
+            {
+                new Class(),
+                "Method",
+                (CallType)int.MaxValue,
+                new object[] { 1, 2 }
+            };
         }
 
         public static IEnumerable<object[]> CallByName_MissingMemberException_TestData()
@@ -135,18 +207,22 @@ namespace Microsoft.VisualBasic.Tests
             yield return new object[] { false, 3, "str", "str" };
             yield return new object[] { true, 3, "str", 3 };
         }
-        
+
         [Fact]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/2139", TestRuntimes.Mono)]
         public void DeleteSetting()
         {
             if (!PlatformDetection.IsInAppContainer)
             {
-                Assert.Throws<ArgumentException>(() => Interaction.DeleteSetting(AppName: "", Section: null, Key: null));
+                Assert.Throws<ArgumentException>(
+                    () => Interaction.DeleteSetting(AppName: "", Section: null, Key: null)
+                );
             }
             else
             {
-                Assert.Throws<PlatformNotSupportedException>(() => Interaction.DeleteSetting(AppName: "", Section: null, Key: null));
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => Interaction.DeleteSetting(AppName: "", Section: null, Key: null)
+                );
             }
             // Not tested: valid arguments.
         }
@@ -172,7 +248,7 @@ namespace Microsoft.VisualBasic.Tests
                 Assert.Equal("", Interaction.Environ(i + 1));
             }
         }
-        
+
         [Fact]
         public void Environ_Name()
         {
@@ -200,7 +276,8 @@ namespace Microsoft.VisualBasic.Tests
         {
             var pairs = new List<(string, string)>();
             var vars = Environment.GetEnvironmentVariables();
-            foreach (var key in vars.Keys) {
+            foreach (var key in vars.Keys)
+            {
                 pairs.Add(((string)key, (string)vars[key]));
             }
             return pairs.OrderBy(pair => pair.Item1).ToArray();
@@ -212,11 +289,15 @@ namespace Microsoft.VisualBasic.Tests
         {
             if (!PlatformDetection.IsInAppContainer)
             {
-                Assert.Throws<ArgumentException>(() => Interaction.GetAllSettings(AppName: "", Section: ""));
+                Assert.Throws<ArgumentException>(
+                    () => Interaction.GetAllSettings(AppName: "", Section: "")
+                );
             }
             else
             {
-                Assert.Throws<PlatformNotSupportedException>(() => Interaction.GetAllSettings(AppName: "", Section: ""));
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => Interaction.GetAllSettings(AppName: "", Section: "")
+                );
             }
             // Not tested: valid arguments.
         }
@@ -227,11 +308,15 @@ namespace Microsoft.VisualBasic.Tests
         {
             if (!PlatformDetection.IsInAppContainer)
             {
-                Assert.Throws<ArgumentException>(() => Interaction.GetSetting(AppName: "", Section: "", Key: "", Default: ""));
+                Assert.Throws<ArgumentException>(
+                    () => Interaction.GetSetting(AppName: "", Section: "", Key: "", Default: "")
+                );
             }
             else
             {
-                Assert.Throws<PlatformNotSupportedException>(() => Interaction.GetSetting(AppName: "", Section: "", Key: "", Default: ""));
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => Interaction.GetSetting(AppName: "", Section: "", Key: "", Default: "")
+                );
             }
             // Not tested: valid arguments.
         }
@@ -249,13 +334,25 @@ namespace Microsoft.VisualBasic.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNetCore))]
         public void InputBox()
         {
-            InvokeMissingMethod(() => Interaction.InputBox("Prompt", Title: "", DefaultResponse: "", XPos: -1, YPos: -1));
+            InvokeMissingMethod(
+                () =>
+                    Interaction.InputBox(
+                        "Prompt",
+                        Title: "",
+                        DefaultResponse: "",
+                        XPos: -1,
+                        YPos: -1
+                    )
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNetCore))]
         public void MsgBox()
         {
-            InvokeMissingMethod(() => Interaction.MsgBox("Prompt", Buttons: MsgBoxStyle.ApplicationModal, Title: null));
+            InvokeMissingMethod(
+                () =>
+                    Interaction.MsgBox("Prompt", Buttons: MsgBoxStyle.ApplicationModal, Title: null)
+            );
         }
 
         [Theory]
@@ -277,9 +374,27 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData(150, 100, 120, 10, "121:   ")]
         [InlineData(5001, 1, 10000, 100, " 5001: 5100")]
         [InlineData(1, 0, 1, long.MaxValue, " 0: 1")]
-        [InlineData(1, 0, long.MaxValue - 1, long.MaxValue, "                  0:9223372036854775806")]
-        [InlineData(long.MaxValue, 0, long.MaxValue - 1, 1, "9223372036854775807:                   ")]
-        [InlineData(long.MaxValue - 1, 0, long.MaxValue - 1, 1, "9223372036854775806:9223372036854775806")]
+        [InlineData(
+            1,
+            0,
+            long.MaxValue - 1,
+            long.MaxValue,
+            "                  0:9223372036854775806"
+        )]
+        [InlineData(
+            long.MaxValue,
+            0,
+            long.MaxValue - 1,
+            1,
+            "9223372036854775807:                   "
+        )]
+        [InlineData(
+            long.MaxValue - 1,
+            0,
+            long.MaxValue - 1,
+            1,
+            "9223372036854775806:9223372036854775806"
+        )]
         public void Partition(long Number, long Start, long Stop, long Interval, string expected)
         {
             Assert.Equal(expected, Interaction.Partition(Number, Start, Stop, Interval));
@@ -291,7 +406,9 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData(0, 1, 100, 0)] // Interval < 1
         public void Partition_Invalid(long Number, long Start, long Stop, long Interval)
         {
-            Assert.Throws<ArgumentException>(() => Interaction.Partition(Number, Start, Stop, Interval));
+            Assert.Throws<ArgumentException>(
+                () => Interaction.Partition(Number, Start, Stop, Interval)
+            );
         }
 
         [Theory]
@@ -301,7 +418,9 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData(long.MaxValue - 1, long.MaxValue - 1, long.MaxValue, 1)]
         public void Partition_Overflow(long Number, long Start, long Stop, long Interval)
         {
-            Assert.Throws<OverflowException>(() => Interaction.Partition(Number, Start, Stop, Interval));
+            Assert.Throws<OverflowException>(
+                () => Interaction.Partition(Number, Start, Stop, Interval)
+            );
         }
 
         [Fact]
@@ -310,11 +429,15 @@ namespace Microsoft.VisualBasic.Tests
         {
             if (!PlatformDetection.IsInAppContainer)
             {
-                Assert.Throws<ArgumentException>(() => Interaction.SaveSetting(AppName: "", Section: "", Key: "", Setting: ""));
+                Assert.Throws<ArgumentException>(
+                    () => Interaction.SaveSetting(AppName: "", Section: "", Key: "", Setting: "")
+                );
             }
             else
             {
-                Assert.Throws<PlatformNotSupportedException>(() => Interaction.SaveSetting(AppName: "", Section: "", Key: "", Setting: ""));
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => Interaction.SaveSetting(AppName: "", Section: "", Key: "", Setting: "")
+                );
             }
             // Not tested: valid arguments.
         }
@@ -322,7 +445,15 @@ namespace Microsoft.VisualBasic.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNetCore))]
         public void Shell()
         {
-            InvokeMissingMethod(() => Interaction.Shell("MyPath", Style: AppWinStyle.NormalFocus, Wait: false, Timeout: -1));
+            InvokeMissingMethod(
+                () =>
+                    Interaction.Shell(
+                        "MyPath",
+                        Style: AppWinStyle.NormalFocus,
+                        Wait: false,
+                        Timeout: -1
+                    )
+            );
         }
 
         [Theory]

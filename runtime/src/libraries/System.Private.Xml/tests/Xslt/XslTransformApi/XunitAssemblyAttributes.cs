@@ -6,4 +6,8 @@ using Xunit;
 // For testing purposes, we keep the output of the Transform in a file.
 // Since the content of the file ends up affecting the result of each test,
 // we want to avoid parallelism so that one test doesn't affect another.
-[assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly, DisableTestParallelization = true, MaxParallelThreads = 1)]
+[assembly: CollectionBehavior(
+    CollectionBehavior.CollectionPerAssembly,
+    DisableTestParallelization = true,
+    MaxParallelThreads = 1
+)]

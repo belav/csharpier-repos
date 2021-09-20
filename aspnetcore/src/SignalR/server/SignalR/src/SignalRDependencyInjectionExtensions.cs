@@ -21,14 +21,20 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="signalrBuilder">The <see cref="ISignalRServerBuilder"/>.</param>
         /// <param name="configure">A callback to configure the hub options.</param>
         /// <returns>The same instance of the <see cref="ISignalRServerBuilder"/> for chaining.</returns>
-        public static ISignalRServerBuilder AddHubOptions<THub>(this ISignalRServerBuilder signalrBuilder, Action<HubOptions<THub>> configure) where THub : Hub
+        public static ISignalRServerBuilder AddHubOptions<THub>(
+            this ISignalRServerBuilder signalrBuilder,
+            Action<HubOptions<THub>> configure
+        ) where THub : Hub
         {
             if (signalrBuilder == null)
             {
                 throw new ArgumentNullException(nameof(signalrBuilder));
             }
 
-            signalrBuilder.Services.AddSingleton<IConfigureOptions<HubOptions<THub>>, HubOptionsSetup<THub>>();
+            signalrBuilder.Services.AddSingleton<
+                IConfigureOptions<HubOptions<THub>>,
+                HubOptionsSetup<THub>
+            >();
             signalrBuilder.Services.Configure(configure);
             return signalrBuilder;
         }
@@ -49,7 +55,9 @@ namespace Microsoft.Extensions.DependencyInjection
             // Disable the WebSocket keep alive since SignalR has it's own
             services.Configure<WebSocketOptions>(o => o.KeepAliveInterval = TimeSpan.Zero);
             services.TryAddSingleton<SignalRMarkerService>();
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<HubOptions>, HubOptionsSetup>());
+            services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<IConfigureOptions<HubOptions>, HubOptionsSetup>()
+            );
             return services.AddSignalRCore();
         }
 
@@ -59,8 +67,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
         /// <param name="configure">An <see cref="Action{HubOptions}"/> to configure the provided <see cref="HubOptions"/>.</param>
         /// <returns>An <see cref="ISignalRServerBuilder"/> that can be used to further configure the SignalR services.</returns>
-        public static ISignalRServerBuilder AddSignalR(this IServiceCollection services, Action<HubOptions> configure)
-        {
+        public static ISignalRServerBuilder AddSignalR(
+            this IServiceCollection services,
+            Action<HubOptions> configure
+        ) {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

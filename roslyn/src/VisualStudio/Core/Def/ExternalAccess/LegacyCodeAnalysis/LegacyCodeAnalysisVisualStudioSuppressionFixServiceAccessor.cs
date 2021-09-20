@@ -22,16 +22,27 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.LegacyCodeAnalysis
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LegacyCodeAnalysisVisualStudioSuppressionFixServiceAccessor(IVisualStudioSuppressionFixService implementation)
-            => _implementation = implementation;
+        public LegacyCodeAnalysisVisualStudioSuppressionFixServiceAccessor(
+            IVisualStudioSuppressionFixService implementation
+        ) => _implementation = implementation;
 
-        public bool AddSuppressions(IVsHierarchy projectHierarchyOpt)
-            => _implementation.AddSuppressions(projectHierarchyOpt);
+        public bool AddSuppressions(IVsHierarchy projectHierarchyOpt) =>
+            _implementation.AddSuppressions(projectHierarchyOpt);
 
-        public bool AddSuppressions(bool selectedErrorListEntriesOnly, bool suppressInSource, IVsHierarchy projectHierarchyOpt)
-            => _implementation.AddSuppressions(selectedErrorListEntriesOnly, suppressInSource, projectHierarchyOpt);
+        public bool AddSuppressions(
+            bool selectedErrorListEntriesOnly,
+            bool suppressInSource,
+            IVsHierarchy projectHierarchyOpt
+        ) =>
+            _implementation.AddSuppressions(
+                selectedErrorListEntriesOnly,
+                suppressInSource,
+                projectHierarchyOpt
+            );
 
-        public bool RemoveSuppressions(bool selectedErrorListEntriesOnly, IVsHierarchy projectHierarchyOpt)
-            => _implementation.RemoveSuppressions(selectedErrorListEntriesOnly, projectHierarchyOpt);
+        public bool RemoveSuppressions(
+            bool selectedErrorListEntriesOnly,
+            IVsHierarchy projectHierarchyOpt
+        ) => _implementation.RemoveSuppressions(selectedErrorListEntriesOnly, projectHierarchyOpt);
     }
 }

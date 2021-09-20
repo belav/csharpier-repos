@@ -19,8 +19,13 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteGlobMethodTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _methodInfo = typeof(SqliteDbFunctionsExtensions)
-            .GetRequiredMethod(nameof(SqliteDbFunctionsExtensions.Glob), typeof(DbFunctions), typeof(string), typeof(string));
+        private static readonly MethodInfo _methodInfo =
+            typeof(SqliteDbFunctionsExtensions).GetRequiredMethod(
+                nameof(SqliteDbFunctionsExtensions.Glob),
+                typeof(DbFunctions),
+                typeof(string),
+                typeof(string)
+            );
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -30,8 +35,11 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public SqliteGlobMethodTranslator(ISqlExpressionFactory sqlExpressionFactory)
-            => _sqlExpressionFactory = Check.NotNull(sqlExpressionFactory, nameof(sqlExpressionFactory));
+        public SqliteGlobMethodTranslator(ISqlExpressionFactory sqlExpressionFactory) =>
+            _sqlExpressionFactory = Check.NotNull(
+                sqlExpressionFactory,
+                nameof(sqlExpressionFactory)
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -43,8 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
@@ -53,7 +61,10 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             {
                 var matchExpression = arguments[1];
                 var pattern = arguments[2];
-                var stringTypeMapping = ExpressionExtensions.InferTypeMapping(matchExpression, pattern);
+                var stringTypeMapping = ExpressionExtensions.InferTypeMapping(
+                    matchExpression,
+                    pattern
+                );
 
                 return _sqlExpressionFactory.Function(
                     "glob",
@@ -64,7 +75,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     },
                     nullable: true,
                     argumentsPropagateNullability: new[] { true, true },
-                    typeof(bool));
+                    typeof(bool)
+                );
             }
 
             return null;

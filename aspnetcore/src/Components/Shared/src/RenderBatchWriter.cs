@@ -164,7 +164,10 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                     else
                     {
                         var attributeValueString = frame.AttributeValue as string;
-                        WriteString(attributeValueString, allowDeduplication: string.IsNullOrEmpty(attributeValueString));
+                        WriteString(
+                            attributeValueString,
+                            allowDeduplication: string.IsNullOrEmpty(attributeValueString)
+                        );
                     }
                     _binaryWriter.Write(frame.AttributeEventHandlerId); // 8 bytes
                     break;
@@ -195,7 +198,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 case RenderTreeFrameType.Text:
                     WriteString(
                         frame.TextContent,
-                        allowDeduplication: string.IsNullOrWhiteSpace(frame.TextContent));
+                        allowDeduplication: string.IsNullOrWhiteSpace(frame.TextContent)
+                    );
                     WritePadding(_binaryWriter, 12);
                     break;
                 case RenderTreeFrameType.Markup:
@@ -247,8 +251,10 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             {
                 int stringIndex;
 
-                if (!allowDeduplication || !_deduplicatedStringIndices.TryGetValue(value, out stringIndex))
-                {
+                if (
+                    !allowDeduplication
+                    || !_deduplicatedStringIndices.TryGetValue(value, out stringIndex)
+                ) {
                     stringIndex = _strings.Count;
                     _strings.Append(value);
 

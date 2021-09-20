@@ -123,13 +123,22 @@ namespace System.Reflection.Context.Delegation
             return UnderlyingConstructor.GetParameters();
         }
 
-        public override object Invoke(BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture)
-        {
+        public override object Invoke(
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] parameters,
+            CultureInfo culture
+        ) {
             return UnderlyingConstructor.Invoke(invokeAttr, binder, parameters, culture);
         }
 
-        public override object Invoke(object obj, BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture)
-        {
+        public override object Invoke(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] parameters,
+            CultureInfo culture
+        ) {
             return UnderlyingConstructor.Invoke(obj, invokeAttr, binder, parameters, culture);
         }
 

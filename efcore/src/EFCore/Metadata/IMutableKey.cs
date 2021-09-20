@@ -33,7 +33,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Gets all foreign keys that target a given primary or alternate key.
         /// </summary>
         /// <returns> The foreign keys that reference the given key. </returns>
-        new IEnumerable<IMutableForeignKey> GetReferencingForeignKeys()
-            => ((IReadOnlyKey)this).GetReferencingForeignKeys().Cast<IMutableForeignKey>();
+        new IEnumerable<IMutableForeignKey> GetReferencingForeignKeys() =>
+            ((IReadOnlyKey)this).GetReferencingForeignKeys().Cast<IMutableForeignKey>();
     }
 }

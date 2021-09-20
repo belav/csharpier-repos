@@ -12,9 +12,7 @@ namespace System.Runtime.ConstrainedExecution.Tests
         public sealed class ConstrainedType
         {
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success), PrePrepareMethod]
-            public ConstrainedType()
-            {
-            }
+            public ConstrainedType() { }
 
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success), PrePrepareMethod]
             public bool SomeMethod() => false;
@@ -25,14 +23,18 @@ namespace System.Runtime.ConstrainedExecution.Tests
         {
             Assert.NotNull(
                 typeof(ConstrainedType).GetMethod(nameof(ConstrainedType.SomeMethod))
-                    .GetCustomAttribute<PrePrepareMethodAttribute>());
+                    .GetCustomAttribute<PrePrepareMethodAttribute>()
+            );
         }
 
         [Fact]
         public void SettableOnConstructors()
         {
             Assert.NotNull(
-                typeof(ConstrainedType).GetConstructors()[0].GetCustomAttribute<PrePrepareMethodAttribute>());
+                typeof(ConstrainedType).GetConstructors()[
+                    0
+                ].GetCustomAttribute<PrePrepareMethodAttribute>()
+            );
         }
     }
 #pragma warning restore SYSLIB0004 // Obsolete: CER

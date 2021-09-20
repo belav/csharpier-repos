@@ -5,9 +5,18 @@ namespace Microsoft.AspNetCore.Routing.Matching
 {
     public class SingleEntryAsciiJumpTableTest : SingleEntryJumpTableTestBase
     {
-        private protected override JumpTable CreateJumpTable(int defaultDestination, int exitDestination, string text, int destination)
-        {
-            return new SingleEntryAsciiJumpTable(defaultDestination, exitDestination, text, destination);
+        private protected override JumpTable CreateJumpTable(
+            int defaultDestination,
+            int exitDestination,
+            string text,
+            int destination
+        ) {
+            return new SingleEntryAsciiJumpTable(
+                defaultDestination,
+                exitDestination,
+                text,
+                destination
+            );
         }
     }
 }

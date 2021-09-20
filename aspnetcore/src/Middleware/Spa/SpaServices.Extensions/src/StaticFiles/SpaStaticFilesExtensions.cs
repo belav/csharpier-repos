@@ -24,25 +24,31 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="configuration">If specified, this callback will be invoked to set additional configuration options.</param>
         public static void AddSpaStaticFiles(
             this IServiceCollection services,
-            Action<SpaStaticFilesOptions>? configuration = null)
-        {
-            services.AddSingleton<ISpaStaticFileProvider>(serviceProvider =>
-            {
-                // Use the options configured in DI (or blank if none was configured)
-                var optionsProvider = serviceProvider.GetService<IOptions<SpaStaticFilesOptions>>()!;
-                var options = optionsProvider.Value;
-
-                // Allow the developer to perform further configuration
-                configuration?.Invoke(options);
-
-                if (string.IsNullOrEmpty(options.RootPath))
+            Action<SpaStaticFilesOptions>? configuration = null
+        ) {
+            services.AddSingleton<ISpaStaticFileProvider>(
+                serviceProvider =>
                 {
-                    throw new InvalidOperationException($"No {nameof(SpaStaticFilesOptions.RootPath)} " +
-                        $"was set on the {nameof(SpaStaticFilesOptions)}.");
-                }
+                    // Use the options configured in DI (or blank if none was configured)
+                    var optionsProvider = serviceProvider.GetService<
+                        IOptions<SpaStaticFilesOptions>
+                    >()!;
+                    var options = optionsProvider.Value;
 
-                return new DefaultSpaStaticFileProvider(serviceProvider, options);
-            });
+                    // Allow the developer to perform further configuration
+                    configuration?.Invoke(options);
+
+                    if (string.IsNullOrEmpty(options.RootPath))
+                    {
+                        throw new InvalidOperationException(
+                            $"No {nameof(SpaStaticFilesOptions.RootPath)} "
+                                + $"was set on the {nameof(SpaStaticFilesOptions)}."
+                        );
+                    }
+
+                    return new DefaultSpaStaticFileProvider(serviceProvider, options);
+                }
+            );
         }
 
         /// <summary>
@@ -61,8 +67,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="applicationBuilder">The <see cref="IApplicationBuilder"/>.</param>
         /// <param name="options">Specifies options for serving the static files.</param>
-        public static void UseSpaStaticFiles(this IApplicationBuilder applicationBuilder, StaticFileOptions options)
-        {
+        public static void UseSpaStaticFiles(
+            this IApplicationBuilder applicationBuilder,
+            StaticFileOptions options
+        ) {
             if (applicationBuilder == null)
             {
                 throw new ArgumentNullException(nameof(applicationBuilder));
@@ -73,16 +81,18 @@ namespace Microsoft.Extensions.DependencyInjection
                 throw new ArgumentNullException(nameof(options));
             }
 
-            UseSpaStaticFilesInternal(applicationBuilder,
+            UseSpaStaticFilesInternal(
+                applicationBuilder,
                 staticFileOptions: options,
-                allowFallbackOnServingWebRootFiles: false);
+                allowFallbackOnServingWebRootFiles: false
+            );
         }
 
         internal static void UseSpaStaticFilesInternal(
             this IApplicationBuilder app,
             StaticFileOptions staticFileOptions,
-            bool allowFallbackOnServingWebRootFiles)
-        {
+            bool allowFallbackOnServingWebRootFiles
+        ) {
             if (staticFileOptions == null)
             {
                 throw new ArgumentNullException(nameof(staticFileOptions));
@@ -98,7 +108,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 var shouldServeStaticFiles = ShouldServeStaticFiles(
                     app,
                     allowFallbackOnServingWebRootFiles,
-                    out var fileProviderOrDefault);
+                    out var fileProviderOrDefault
+                );
                 if (shouldServeStaticFiles)
                 {
                     staticFileOptions.FileProvider = fileProviderOrDefault;
@@ -117,9 +128,10 @@ namespace Microsoft.Extensions.DependencyInjection
         private static bool ShouldServeStaticFiles(
             IApplicationBuilder app,
             bool allowFallbackOnServingWebRootFiles,
-            out IFileProvider? fileProviderOrDefault)
-        {
-            var spaStaticFilesService = app.ApplicationServices.GetService<ISpaStaticFileProvider>();
+            out IFileProvider? fileProviderOrDefault
+        ) {
+            var spaStaticFilesService =
+                app.ApplicationServices.GetService<ISpaStaticFileProvider>();
             if (spaStaticFilesService != null)
             {
                 // If an ISpaStaticFileProvider was configured but it says no IFileProvider is available
@@ -132,9 +144,11 @@ namespace Microsoft.Extensions.DependencyInjection
             }
             else if (!allowFallbackOnServingWebRootFiles)
             {
-                throw new InvalidOperationException($"To use {nameof(UseSpaStaticFiles)}, you must " +
-                    $"first register an {nameof(ISpaStaticFileProvider)} in the service provider, typically " +
-                    $"by calling services.{nameof(AddSpaStaticFiles)}.");
+                throw new InvalidOperationException(
+                    $"To use {nameof(UseSpaStaticFiles)}, you must "
+                        + $"first register an {nameof(ISpaStaticFileProvider)} in the service provider, typically "
+                        + $"by calling services.{nameof(AddSpaStaticFiles)}."
+                );
             }
             else
             {

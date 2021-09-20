@@ -40,8 +40,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.target001.target001
 {
     // <Area> Dynamic -- implicit conversion</Area>
@@ -196,8 +194,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.target002.target002
 {
@@ -397,7 +393,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
         #endregion
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/49568", typeof(PlatformDetection), nameof(PlatformDetection.IsMacOsAppleSilicon))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/49568",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsMacOsAppleSilicon)
+        )]
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -417,14 +417,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             result += Verify.Eval(NullableIntTypeWithNumbericConversionFromShortInAssignment);
             result += Verify.Eval(NullableUintTypeWithNumbericConversionFromUshortInAssignment);
             result += Verify.Eval(NullableLongTypeWithNumbericConversionFromIntInAssignment);
-            result += Verify.Eval(NullableUlongTypeWithNullableNumbericConversionFromUintInAssignment);
+            result += Verify.Eval(
+                NullableUlongTypeWithNullableNumbericConversionFromUintInAssignment
+            );
             return result;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.target003.target003
 {
@@ -619,8 +619,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.target004.target004
 {
     // <Area> Dynamic -- implicit conversion</Area>
@@ -810,16 +808,20 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             result += Verify.Eval(UserdefinedGenericStructWithIdentityConversionInAssignment);
             result += Verify.Eval(UserdefinedEnumWithIdentityConversionInAssignment);
             result += Verify.Eval(NullableUserdefinedStructWithIdentityConversionInAssignment);
-            result += Verify.Eval(NullableUserdefinedStructWithNullableUserdefinedImplicitConversionInAssignment);
-            result += Verify.Eval(NullableUserdefinedGenericStructWithNullableIdentityConversionInAssignment);
-            result += Verify.Eval(NullableUserdefinedEnumWithNullableIdentityConversionInAssignment);
+            result += Verify.Eval(
+                NullableUserdefinedStructWithNullableUserdefinedImplicitConversionInAssignment
+            );
+            result += Verify.Eval(
+                NullableUserdefinedGenericStructWithNullableIdentityConversionInAssignment
+            );
+            result += Verify.Eval(
+                NullableUserdefinedEnumWithNullableIdentityConversionInAssignment
+            );
             return result;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.target005.target005
 {
@@ -947,12 +949,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         private static bool ArrayWithReferenceConversionFromUserdefinedArrayInAssignment()
         {
             int failcount = 0;
-            var origin = new[]
-            {
-            1, 2, 3
-            }
-
-            ;
+            var origin = new[] { 1, 2, 3 };
             dynamic d = origin;
             Array result = d;
             if (((int[])result)[1] != origin[1])
@@ -1009,15 +1006,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             result += Verify.Eval(ValueTypeWithBoxingConversionFromUserdefinedStructInAssignment);
             result += Verify.Eval(EnumWithBoxingConversionFromUserdefinedEnumInAssignment);
             result += Verify.Eval(ArrayWithReferenceConversionFromUserdefinedArrayInAssignment);
-            result += Verify.Eval(DelegateWithReferenceConversionFromUserdefinedDelegateInAssignment);
-            result += Verify.Eval(ExceptionWithReferenceConversionFromUserdefinedExceptionInAssignment);
+            result += Verify.Eval(
+                DelegateWithReferenceConversionFromUserdefinedDelegateInAssignment
+            );
+            result += Verify.Eval(
+                ExceptionWithReferenceConversionFromUserdefinedExceptionInAssignment
+            );
             return result;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.target006.target006
 {
@@ -1034,12 +1033,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         private static bool ArrayWithIdentityConversionInAssignment()
         {
             int failcount = 0;
-            var origin = new[]
-            {
-            1, 2, 3
-            }
-
-            ;
+            var origin = new[] { 1, 2, 3 };
             dynamic d = origin;
             int[] result = d;
             if (result[1] != origin[1])
@@ -1054,12 +1048,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         private static bool ArrayWithReferenceConversionInAssignment()
         {
             int failcount = 0;
-            var origin = new[]
-            {
-            "aa", "bb", "cc"
-            }
-
-            ;
+            var origin = new[] { "aa", "bb", "cc" };
             dynamic d = origin;
             object[] result = d;
             if ((string)(result[1]) != origin[1])
@@ -1087,8 +1076,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.target007.target007
 {
@@ -1181,8 +1168,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.target008.target008
 {
     // <Area> Dynamic -- implicit conversion</Area>
@@ -1199,9 +1184,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
     public class C : B
     {
-        public C()
-        {
-        }
+        public C() { }
 
         public int f1 = 10;
         public C(int v)
@@ -1297,8 +1280,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.target010.target010
 {
     // <Area> Dynamic -- implicit conversion</Area>
@@ -1323,7 +1304,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
     public class TargetIsTypeParameter
     {
-        private static bool TestMethodForReferenceConversionFromStringToObjectInAssignment<T>() where T : class
+        private static bool TestMethodForReferenceConversionFromStringToObjectInAssignment<T>()
+            where T : class
         {
             int failcount = 0;
             var origin = "aa";
@@ -1363,7 +1345,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             return TestMethodForReferenceConversionToBaseClassInAssignment<B>();
         }
 
-        private static bool TestMethodForReferenceConversionToBaseInterfaceInAssignment<T>() where T : class, I
+        private static bool TestMethodForReferenceConversionToBaseInterfaceInAssignment<T>()
+            where T : class, I
         {
             int failcount = 0;
             var origin = new C();
@@ -1401,8 +1384,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.target012.target012
 {
     // <Title>Guid as dynamic</Title>
@@ -1415,7 +1396,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
     public class C
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -1424,12 +1404,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         public static int MainMethod()
         {
             dynamic g1 = new Guid("F9168C5E-CEB2-4faa-B6BF-329BF39FA1E4");
-            Strc str1 = new Strc()
-            {
-                Val = g1
-            }
-
-            ;
+            Strc str1 = new Strc() { Val = g1 };
             if (str1.Val.Equals(g1))
                 return 0;
             else
@@ -1447,8 +1422,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.conversion001.conversion001
 {
@@ -1497,8 +1470,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.conversion002.conversion002
 {
@@ -1601,8 +1572,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.conversion003.conversion003
 {
     // <Area> Dynamic -- implicit conversion</Area>
@@ -1638,7 +1607,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (!ErrorVerifier.Verify(ErrorMessageId.NoImplicitConv, e.Message, "string", "int"))
+                if (
+                    !ErrorVerifier.Verify(ErrorMessageId.NoImplicitConv, e.Message, "string", "int")
+                )
                     failcount++;
             }
             catch (Exception e)
@@ -1653,12 +1624,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         private static bool NoPredefinedImplicitAndExplicitConversionForArray()
         {
             int failcount = 0;
-            var origin = new int[]
-            {
-            1, 2, 3
-            }
-
-            ;
+            var origin = new int[] { 1, 2, 3 };
             dynamic d = origin;
             try
             {
@@ -1668,7 +1634,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (!ErrorVerifier.Verify(ErrorMessageId.NoImplicitConv, e.Message, "int[]", "long[]"))
+                if (
+                    !ErrorVerifier.Verify(
+                        ErrorMessageId.NoImplicitConv,
+                        e.Message,
+                        "int[]",
+                        "long[]"
+                    )
+                )
                     failcount++;
             }
             catch (Exception e)
@@ -1723,8 +1696,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.conversion005.conversion005
 {
     public class Test
@@ -1744,8 +1715,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.context001.context001
 {
@@ -1769,30 +1738,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             return i;
         }
 
-        public long P1
-        {
-            get;
-            set;
-        }
+        public long P1 { get; set; }
 
-        public static ulong P2
-        {
-            get;
-            set;
-        }
+        public static ulong P2 { get; set; }
 
         private short _f1;
         public short this[int i]
         {
-            get
-            {
-                return _f1;
-            }
-
-            set
-            {
-                _f1 = value;
-            }
+            get { return _f1; }
+            set { _f1 = value; }
         }
     }
 
@@ -1929,13 +1883,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             dynamic d = origin;
             byte origin2 = 20;
             dynamic d2 = origin2;
-            var c = new C()
-            {
-                F1 = d,
-                P1 = d2
-            }
-
-            ;
+            var c = new C() { F1 = d, P1 = d2 };
             if ((c.F1 != origin) || (c.P1 != origin2))
             {
                 failcount++;
@@ -1968,8 +1916,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.context002.context002
 {
@@ -2031,8 +1977,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                     System.Console.WriteLine("Test failed: Conversion result is incorrect");
                     break;
                 }
-            }
-            while (d);
+            } while (d);
             return failcount == 0;
         }
 
@@ -2068,18 +2013,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         private static bool InWhereClauseOfQueryExpression()
         {
             int failcount = 0;
-            var a = new[]
-            {
-            1, 2, 3
-            }
-
-            ;
+            var a = new[] { 1, 2, 3 };
             bool origin = true;
             dynamic d = origin;
-            var q = (
-                from m in a
-                where d
-                select m).ToArray();
+            var q = (from m in a where d select m).ToArray();
             if (q[1] != a[1])
             {
                 failcount++;
@@ -2110,8 +2047,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.context002a.context002a
 {
     // <Area> Dynamic -- implicit conversion</Area>
@@ -2127,9 +2062,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     {
         public class C
         {
-            public C()
-            {
-            }
+            public C() { }
 
             public C(int f)
             {
@@ -2137,7 +2070,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
 
             public int Field;
-            public static explicit operator bool (C p1)
+            public static explicit operator bool(C p1)
             {
                 if (p1.Field == 0)
                     return true;
@@ -2151,9 +2084,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             int failcount = 0;
             C origin = new C(0);
             dynamic d = origin;
-            if ((bool)d)
-            {
-            }
+            if ((bool)d) { }
             else
             {
                 failcount++;
@@ -2219,11 +2150,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                     count++; // touch here once then break;
                     break;
                 }
-                else
-                {
-                }
-            }
-            while (d);
+                else { }
+            } while (d);
             return failcount == 0 && count == 1;
         }
 
@@ -2245,8 +2173,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                     System.Console.WriteLine("Test failed: Conversion result is incorrect");
                     break;
                 }
-            }
-            while ((bool)d);
+            } while ((bool)d);
             return failcount == 0;
         }
 
@@ -2320,18 +2247,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         private static bool InWhereClauseOfQueryExpression0()
         {
             int failcount = 0;
-            var a = new[]
-            {
-            1, 2, 3
-            }
-
-            ;
+            var a = new[] { 1, 2, 3 };
             C origin = new C(0);
             dynamic d = origin;
-            var q = (
-                from m in a
-                where (bool)d
-                select m).ToArray();
+            var q = (from m in a where (bool)d select m).ToArray();
             if (q[1] != a[1])
             {
                 failcount++;
@@ -2344,18 +2263,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         private static bool InWhereClauseOfQueryExpression1()
         {
             int failcount = 0;
-            var a = new[]
-            {
-            1, 2, 3
-            }
-
-            ;
+            var a = new[] { 1, 2, 3 };
             C origin = new C(1);
             dynamic d = origin;
-            var q = (
-                from m in a
-                where (bool)d
-                select m).ToArray();
+            var q = (from m in a where (bool)d select m).ToArray();
             if (q.Length != 0)
             {
                 failcount++;
@@ -2392,8 +2303,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.context002b.context002b
 {
     // <Area> Dynamic -- implicit conversion</Area>
@@ -2409,9 +2318,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     {
         public class C
         {
-            public C()
-            {
-            }
+            public C() { }
 
             public C(int f)
             {
@@ -2419,7 +2326,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
 
             public int Field;
-            public static implicit operator bool (C p1)
+            public static implicit operator bool(C p1)
             {
                 if (p1.Field == 0)
                     return true;
@@ -2504,8 +2411,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                     System.Console.WriteLine("Test failed: Conversion result is incorrect");
                     break;
                 }
-            }
-            while (!d);
+            } while (!d);
             return failcount == 0;
         }
 
@@ -2527,8 +2433,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                     System.Console.WriteLine("Test failed: Conversion result is incorrect");
                     break;
                 }
-            }
-            while (d);
+            } while (d);
             return failcount == 0;
         }
 
@@ -2593,18 +2498,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         private static bool InWhereClauseOfQueryExpression0()
         {
             int failcount = 0;
-            var a = new[]
-            {
-            1, 2, 3
-            }
-
-            ;
+            var a = new[] { 1, 2, 3 };
             C origin = new C(0);
             dynamic d = origin;
-            var q = (
-                from m in a
-                where d
-                select m).ToArray();
+            var q = (from m in a where d select m).ToArray();
             if (q[1] != a[1])
             {
                 failcount++;
@@ -2617,18 +2514,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         private static bool InWhereClauseOfQueryExpression1()
         {
             int failcount = 0;
-            var a = new[]
-            {
-            1, 2, 3
-            }
-
-            ;
+            var a = new[] { 1, 2, 3 };
             C origin = new C(1);
             dynamic d = origin;
-            var q = (
-                from m in a
-                where !d
-                select m).ToArray();
+            var q = (from m in a where !d select m).ToArray();
             if (q[1] != a[1])
             {
                 failcount++;
@@ -2664,8 +2553,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.context002c.context002c
 {
@@ -2710,9 +2597,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             int failcount = 0;
             C origin = new C();
             dynamic d = origin;
-            if (d)
-            {
-            }
+            if (d) { }
             else
             {
                 failcount++;
@@ -2778,11 +2663,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                     count++; // touch here once then break;
                     break;
                 }
-                else
-                {
-                }
-            }
-            while (d);
+                else { }
+            } while (d);
             return failcount == 0 && count == 1;
         }
 
@@ -2804,8 +2686,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                     System.Console.WriteLine("Test failed: Conversion result is incorrect");
                     break;
                 }
-            }
-            while (d);
+            } while (d);
             return failcount == 0;
         }
 
@@ -2901,8 +2782,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.context003.context003
 {
     // <Area> Dynamic -- implicit conversion</Area>
@@ -2941,11 +2820,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                 dynamic d = s_origin_TestingProperty;
                 return d;
             }
-
-            set
-            {
-                s_origin_TestingProperty = (byte)value;
-            }
+            set { s_origin_TestingProperty = (byte)value; }
         }
 
         private static bool InPropertyGet()
@@ -3021,8 +2896,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.context004.context004
 {
     // <Area> Dynamic -- implicit conversion</Area>
@@ -3090,7 +2963,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                 {
                     isPass = true;
                 }
-
                 break;
             }
 
@@ -3119,7 +2991,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                 {
                     isPass = true;
                 }
-
                 break;
             }
 
@@ -3144,7 +3015,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                 {
                     isPass = true;
                 }
-
                 break;
             }
 
@@ -3167,7 +3037,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                 {
                     isPass = true;
                 }
-
                 break;
             }
 
@@ -3198,8 +3067,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.context005.context005
 {
@@ -3293,8 +3160,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.context006.context006
 {
@@ -3421,14 +3286,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             result += Verify.Eval(DynamicObjectInSecondOperandAndConditionIsTrue);
             result += Verify.Eval(DynamicObjectInThirdOperandAndConditionIsFalse);
             result += Verify.Eval(DynamicObjectInSecondOperandAndThirdIsNullableAndConditionIsTrue);
-            result += Verify.Eval(DynamicObjectInThirdOperandAndSecondIsNullableAndConditionIsFalse);
+            result += Verify.Eval(
+                DynamicObjectInThirdOperandAndSecondIsNullableAndConditionIsFalse
+            );
             return result;
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.context007.context007
 {
@@ -3464,12 +3329,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             byte origin = 24;
             dynamic d = origin;
             dynamic d2 = 33;
-            var a = new int[]
-            {
-            d, d2
-            }
-
-            ;
+            var a = new int[] { d, d2 };
             if ((a[0] != 24) || (a[1] != 33))
             {
                 failcount++;
@@ -3495,8 +3355,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.context008b.context008b
 {
@@ -3562,8 +3420,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.context010.context010
 {
@@ -3649,8 +3505,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.context011.context011
 {
     // <Area> Dynamic -- implicit conversion</Area>
@@ -3697,7 +3551,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (!ErrorVerifier.Verify(ErrorMessageId.NoImplicitConvCast, e.Message, "C1", "System.IDisposable"))
+                if (
+                    !ErrorVerifier.Verify(
+                        ErrorMessageId.NoImplicitConvCast,
+                        e.Message,
+                        "C1",
+                        "System.IDisposable"
+                    )
+                )
                     failcount++;
             }
 
@@ -3720,8 +3581,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.context012.context012
 {
     // <Area> Dynamic -- implicit conversion</Area>
@@ -3741,9 +3600,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             dynamic d = null;
             try
             {
-                using (IDisposable i = d)
-                {
-                }
+                using (IDisposable i = d) { }
             }
             catch (Exception e)
             {
@@ -3764,9 +3621,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                 failcount++;
                 System.Console.WriteLine("Test failed: Conversion result is incorrect");
             }
-            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
-            {
-            }
+            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e) { }
             catch (Exception e)
             {
                 failcount++;
@@ -3850,8 +3705,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.dynamicobj001.dynamicobj001
 {
     // <Area> Dynamic -- identity conversion</Area>
@@ -3885,8 +3738,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.dynamicobj002.dynamicobj002
 {
@@ -3933,8 +3784,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.dynamicobj003.dynamicobj003
 {
     // <Area> Dynamic -- identity conversion</Area>
@@ -3970,34 +3819,22 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
         internal List<object> Prop01
         {
-            get
-            {
-                return new List<object>();
-            }
+            get { return new List<object>(); }
         }
 
         public List<dynamic> Prop02
         {
-            get
-            {
-                return new List<dynamic>();
-            }
+            get { return new List<dynamic>(); }
         }
 
         internal List<object> this[int n]
         {
-            get
-            {
-                return new List<object>(n);
-            }
+            get { return new List<object>(n); }
         }
 
         public List<dynamic> this[long n1, short n2]
         {
-            get
-            {
-                return new List<dynamic>((int)n1);
-            }
+            get { return new List<dynamic>((int)n1); }
         }
 
         private static IEnumerable<object> s_v4 = null;
@@ -4035,8 +3872,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.dynamicobj004.dynamicobj004
 {
     // <Area> Dynamic -- identity conversion</Area>
@@ -4072,8 +3907,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.dynamicobj005.dynamicobj005
 {
@@ -4123,18 +3956,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
         public static MyStack<object> SPropObj
         {
-            get
-            {
-                return new MyStack<object>();
-            }
+            get { return new MyStack<object>(); }
         }
 
         public MyStack<dynamic> PropDyn
         {
-            get
-            {
-                return new MyStack<dynamic>();
-            }
+            get { return new MyStack<dynamic>(); }
         }
 
         public MyStack<dynamic> MethDyn(string s = "AAA")
@@ -4144,10 +3971,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
         public MyStack<object> this[long n]
         {
-            get
-            {
-                return new MyStack<object>();
-            }
+            get { return new MyStack<object>(); }
         }
 
         private delegate MyStack<object> DelObj(int x, string s = null);
@@ -4178,25 +4002,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             Push(t);
         }
 
-        public void RemoveAt(int n)
-        {
-        }
+        public void RemoveAt(int n) { }
 
         public T this[int n]
         {
-            get
-            {
-                return Pop();
-            }
-
-            set
-            {
-            }
+            get { return Pop(); }
+            set { }
         }
 
-        public void Clear()
-        {
-        }
+        public void Clear() { }
 
         public bool Contains(T t)
         {
@@ -4205,23 +4019,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
         public bool IsReadOnly
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public int Count
         {
-            get
-            {
-                return 1;
-            }
+            get { return 1; }
         }
 
-        public void CopyTo(T[] t, int n)
-        {
-        }
+        public void CopyTo(T[] t, int n) { }
 
         public bool Remove(T t)
         {
@@ -4275,8 +4081,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.dynamicobj006.dynamicobj006
 {
     //<Area>Conversion</Area>
@@ -4313,8 +4117,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.dynamicobj007.dynamicobj007
 {
@@ -4353,8 +4155,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.dlgate003.dlgate003
 {
     // <Title>Delegate conversions</Title>
@@ -4385,12 +4185,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         {
             int rez = 0;
             //delegate returns dynamic, methods return non-dynamic
-            D del = delegate ()
+            D del = delegate()
             {
                 return 4;
-            }
-
-            ;
+            };
             var x = del();
             if (x == 4)
                 rez++;
@@ -4403,12 +4201,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             if (obj != null)
                 rez++;
             //delegate returns dynamic, methods return null
-            del = delegate ()
+            del = delegate()
             {
                 return null;
-            }
-
-            ;
+            };
             obj = del();
             if (obj == null)
                 rez++;
@@ -4417,13 +4213,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             if (obj == null)
                 rez++;
             //delegates returning non-dynamic, but we return dynamic
-            D2 del2 = delegate ()
+            D2 del2 = delegate()
             {
                 dynamic d = 3;
                 return d;
-            }
-
-            ;
+            };
             var dyn = del2();
             if (dyn == 3)
                 rez++;
@@ -4431,13 +4225,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             dyn = del2();
             if (dyn == 5)
                 rez++;
-            D3 del3 = delegate ()
+            D3 del3 = delegate()
             {
                 dynamic d = 3;
                 return d.ToString();
-            }
-
-            ;
+            };
             var dyn2 = del3();
             if (dyn2 == "3")
                 rez++;
@@ -4450,8 +4242,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.dlgate004.dlgate004
 {
@@ -4499,8 +4289,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.arrayinit001.arrayinit001
 {
     // <Title>Array initializer conversion</Title>
@@ -4523,18 +4311,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         {
             //array initializer
             dynamic d = 3;
-            var arr = new[]
-            {
-            1, 2, d
-            }
-
-            ;
-            int[] arr2 = new int[]
-            {
-            1, 2, d
-            }
-
-            ;
+            var arr = new[] { 1, 2, d };
+            int[] arr2 = new int[] { 1, 2, d };
             int rez = 0;
             try
             {
@@ -4553,8 +4331,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.ternary001.ternary001
 {
@@ -4606,8 +4382,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.using001.using001
 {
@@ -4687,26 +4461,21 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             Output = "";
 
             //
-            using (IDisposable r1 = d1, r2 = d2, r3 = d3, r4 = d4)
-            {
-            }
+            using (
+                IDisposable r1 = d1,
+                    r2 = d2,
+                    r3 = d3,
+                    r4 = d4
+            ) { }
 
             //
-            using (d1)
-            {
-            }
+            using (d1) { }
 
-            using (d2)
-            {
-            }
+            using (d2) { }
 
-            using (d3)
-            {
-            }
+            using (d3) { }
 
-            using (d4)
-            {
-            }
+            using (d4) { }
 
             if (Output != "SDExpSDImpCDExpCDImpCDImpCDExpSDImpSDExp")
                 return 1;
@@ -4721,29 +4490,39 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             dynamic d = new C();
             try
             {
-                using (IDisposable res = d)
-                {
-                }
+                using (IDisposable res = d) { }
 
                 ret++;
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (!ErrorVerifier.Verify(ErrorMessageId.NoImplicitConvCast, e.Message, "Test.C", "System.IDisposable"))
+                if (
+                    !ErrorVerifier.Verify(
+                        ErrorMessageId.NoImplicitConvCast,
+                        e.Message,
+                        "Test.C",
+                        "System.IDisposable"
+                    )
+                )
                     ret++;
             }
 
             try
             {
-                using (d)
-                {
-                }
+                using (d) { }
 
                 ret++;
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (!ErrorVerifier.Verify(ErrorMessageId.NoImplicitConvCast, e.Message, "Test.C", "System.IDisposable"))
+                if (
+                    !ErrorVerifier.Verify(
+                        ErrorMessageId.NoImplicitConvCast,
+                        e.Message,
+                        "Test.C",
+                        "System.IDisposable"
+                    )
+                )
                     ret++;
             }
 
@@ -4751,29 +4530,39 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             dynamic dd = new S();
             try
             {
-                using (IDisposable res = dd)
-                {
-                }
+                using (IDisposable res = dd) { }
 
                 ret++;
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (!ErrorVerifier.Verify(ErrorMessageId.NoImplicitConv, e.Message, "S", "System.IDisposable"))
+                if (
+                    !ErrorVerifier.Verify(
+                        ErrorMessageId.NoImplicitConv,
+                        e.Message,
+                        "S",
+                        "System.IDisposable"
+                    )
+                )
                     ret++;
             }
 
             try
             {
-                using (dd)
-                {
-                }
+                using (dd) { }
 
                 ret++;
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (!ErrorVerifier.Verify(ErrorMessageId.NoImplicitConv, e.Message, "S", "System.IDisposable"))
+                if (
+                    !ErrorVerifier.Verify(
+                        ErrorMessageId.NoImplicitConv,
+                        e.Message,
+                        "S",
+                        "System.IDisposable"
+                    )
+                )
                     ret++;
             }
 
@@ -4781,8 +4570,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.array001.array001
 {
@@ -4805,12 +4592,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
         public static int MainMethod()
         {
-            dynamic[] arr = new dynamic[]
-            {
-            "x", "y", "z"
-            }
-
-            ;
+            dynamic[] arr = new dynamic[] { "x", "y", "z" };
             IEnumerable<dynamic> ienum = arr;
             dynamic rez = "";
             foreach (var x in ienum)
@@ -4825,8 +4607,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.array002.array002
 {
@@ -4887,8 +4667,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.array003.array003
 {
     // <Title>Array and interfaces conversions</Title>
@@ -4911,15 +4689,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         public static int MainMethod()
         {
             dynamic dr = "";
-            dynamic[] darr = new dynamic[]
-            {
-            "x", "y"
-            }
-
-            ;
-            var dr2 =
-                from x in darr
-                select x;
+            dynamic[] darr = new dynamic[] { "x", "y" };
+            var dr2 = from x in darr select x;
             foreach (var i in dr2)
             {
                 dr += i;
@@ -4930,8 +4701,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.bug819947ulngenum.bug819947ulngenum
 {
@@ -5058,7 +4827,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
                     d = (ULongEnum)val;
                     ret &= (d == ULongEnum.Max); // Overflow
                 }
-
                 unchecked
                 {
                     d = (ULongEnum)ulong.MaxValue;
@@ -5098,8 +4866,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.numeric001.numeric001
 {
@@ -5141,8 +4907,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.numeric002.numeric002
 {
     // <Title>Numeric Conversions</Title>
@@ -5163,10 +4927,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
 
         public static int MainMethod(string[] args)
         {
-            ulong i, j;
+            ulong i,
+                j;
             double x = ulong.MaxValue;
             dynamic d;
-
             unchecked
             {
                 d = x;
@@ -5189,8 +4953,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.numeric003.numeric003
 {
@@ -5231,8 +4993,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.cnst001.cnst001
 {
@@ -5374,8 +5134,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.cnst001b.cnst001b
 {
     // <Title> Conversion -- Implicit constant expression conversions </Title>
@@ -5468,8 +5226,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "*", "ulong", "int"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "*",
+                        "ulong",
+                        "int"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -5482,8 +5247,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "/", "int", "MyStruct"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "/",
+                        "int",
+                        "MyStruct"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -5496,8 +5268,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "%", "MyClass", "int"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "%",
+                        "MyClass",
+                        "int"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -5510,8 +5289,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "|", "MyClass", "int"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "|",
+                        "MyClass",
+                        "int"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -5524,8 +5310,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "^", "int", "MyStruct"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "^",
+                        "int",
+                        "MyStruct"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -5538,8 +5331,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "==", "ulong", "int"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "==",
+                        "ulong",
+                        "int"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -5552,8 +5352,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, ">", "int", "ulong"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        ">",
+                        "int",
+                        "ulong"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -5567,8 +5374,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "+=", "ulong", "int"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "+=",
+                        "ulong",
+                        "int"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -5581,8 +5395,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "+", "Eshort", "int"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "+",
+                        "Eshort",
+                        "int"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -5593,8 +5414,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.cnst002.cnst002
 {
@@ -5727,8 +5546,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.cnst002b.cnst002b
 {
     // <Title> Conversion -- Implicit constant expression conversions </Title>
@@ -5822,8 +5639,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "+", "ulong", "long"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "+",
+                        "ulong",
+                        "long"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -5836,8 +5660,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "*", "long", "ulong"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "*",
+                        "long",
+                        "ulong"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -5850,8 +5681,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "/", "long", "MyStruct"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "/",
+                        "long",
+                        "MyStruct"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -5864,8 +5702,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "%", "MyClass", "long"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "%",
+                        "MyClass",
+                        "long"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -5878,8 +5723,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "&", "long", "ulong"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "&",
+                        "long",
+                        "ulong"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -5892,8 +5744,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "|", "MyClass", "long"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "|",
+                        "MyClass",
+                        "long"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -5906,8 +5765,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "^", "long", "MyStruct"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "^",
+                        "long",
+                        "MyStruct"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -5920,8 +5786,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "==", "ulong", "long"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "==",
+                        "ulong",
+                        "long"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -5934,8 +5807,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, ">", "long", "ulong"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        ">",
+                        "long",
+                        "ulong"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -5949,8 +5829,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "+=", "ulong", "long"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "+=",
+                        "ulong",
+                        "long"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -5963,8 +5850,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "+", "Eulong", "long"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "+",
+                        "Eulong",
+                        "long"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -5977,8 +5871,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "-", "Eulong", "long"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "-",
+                        "Eulong",
+                        "long"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -5989,8 +5890,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions.cnst003.cnst003
 {
@@ -6065,8 +5964,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "+", "MyClass", "uint"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "+",
+                        "MyClass",
+                        "uint"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -6079,8 +5985,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "-", "ulong", "MyStruct"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "-",
+                        "ulong",
+                        "MyStruct"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -6093,8 +6006,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "-", "MyClass", "byte"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "-",
+                        "MyClass",
+                        "byte"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -6107,8 +6027,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "+", "sbyte", "MyStruct"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "+",
+                        "sbyte",
+                        "MyStruct"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -6121,8 +6048,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "+", "MyClass", "short"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "+",
+                        "MyClass",
+                        "short"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -6135,8 +6069,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "-", "ushort", "MyStruct"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "-",
+                        "ushort",
+                        "MyStruct"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -6149,8 +6090,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "*", "MyClass", "float"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "*",
+                        "MyClass",
+                        "float"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -6163,8 +6111,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "*", "double", "MyStruct"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "*",
+                        "double",
+                        "MyStruct"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -6177,8 +6132,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "*", "MyClass", "decimal"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "*",
+                        "MyClass",
+                        "decimal"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -6191,8 +6153,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "*", "bool", "MyStruct"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "*",
+                        "bool",
+                        "MyStruct"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -6205,8 +6174,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "+", "MyClass", "char"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "+",
+                        "MyClass",
+                        "char"
+                    )
+                ) {
                     flag = 0;
                 }
             }
@@ -6219,8 +6195,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, ex.Message, "*", "string", "MyStruct"))
-                {
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        ex.Message,
+                        "*",
+                        "string",
+                        "MyStruct"
+                    )
+                ) {
                     flag = 0;
                 }
             }

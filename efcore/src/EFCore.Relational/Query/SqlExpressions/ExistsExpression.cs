@@ -28,8 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         public ExistsExpression(
             SelectExpression subquery,
             bool negated,
-            RelationalTypeMapping? typeMapping)
-            : base(typeof(bool), typeMapping)
+            RelationalTypeMapping? typeMapping
+        ) : base(typeof(bool), typeMapping)
         {
             Check.NotNull(subquery, nameof(subquery));
 
@@ -90,19 +90,20 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is ExistsExpression existsExpression
-                    && Equals(existsExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is ExistsExpression existsExpression && Equals(existsExpression)
+            );
 
-        private bool Equals(ExistsExpression existsExpression)
-            => base.Equals(existsExpression)
-                && Subquery.Equals(existsExpression.Subquery)
-                && IsNegated == existsExpression.IsNegated;
+        private bool Equals(ExistsExpression existsExpression) =>
+            base.Equals(existsExpression)
+            && Subquery.Equals(existsExpression.Subquery)
+            && IsNegated == existsExpression.IsNegated;
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), Subquery, IsNegated);
+        public override int GetHashCode() =>
+            HashCode.Combine(base.GetHashCode(), Subquery, IsNegated);
     }
 }

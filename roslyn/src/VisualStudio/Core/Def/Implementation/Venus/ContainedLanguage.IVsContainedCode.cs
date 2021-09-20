@@ -20,8 +20,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 {
     internal partial class ContainedLanguage : IVsContainedCode
     {
-        public int HostSpansUpdated()
-            => VSConstants.S_OK;
+        public int HostSpansUpdated() => VSConstants.S_OK;
 
         /// <summary>
         /// Returns the list of code blocks in the generated .cs file that comes from the ASP.NET
@@ -38,14 +37,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             waitIndicator.Wait(
                 "Intellisense",
                 allowCancel: false,
-                action: c => result = EnumOriginalCodeBlocksWorker(c.CancellationToken));
+                action: c => result = EnumOriginalCodeBlocksWorker(c.CancellationToken)
+            );
 
             ppEnum = new CodeBlockEnumerator(result);
             return VSConstants.S_OK;
         }
 
-        private IList<TextSpanAndCookie> EnumOriginalCodeBlocksWorker(CancellationToken cancellationToken)
-        {
+        private IList<TextSpanAndCookie> EnumOriginalCodeBlocksWorker(
+            CancellationToken cancellationToken
+        ) {
             var snapshot = this.SubjectBuffer.CurrentSnapshot;
             var document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
@@ -54,17 +55,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             }
 
             return document.GetVisibleCodeBlocks(cancellationToken)
-                .Select(tuple => new TextSpanAndCookie
-                {
-                    CodeSpan = new VsTextSpan
-                    {
-                        iStartLine = snapshot.GetLineNumberFromPosition(tuple.Item1.Start),
-                        iStartIndex = 0,
-                        iEndLine = snapshot.GetLineNumberFromPosition(tuple.Item1.End),
-                        iEndIndex = tuple.Item1.End - snapshot.GetLineFromPosition(tuple.Item1.End).Start,
-                    },
-                    ulHTMLCookie = tuple.Item2,
-                })
+                .Select(
+                    tuple =>
+                        new TextSpanAndCookie
+                        {
+                            CodeSpan = new VsTextSpan
+                            {
+                                iStartLine = snapshot.GetLineNumberFromPosition(tuple.Item1.Start),
+                                iStartIndex = 0,
+                                iEndLine = snapshot.GetLineNumberFromPosition(tuple.Item1.End),
+                                iEndIndex =
+                                    tuple.Item1.End
+                                    - snapshot.GetLineFromPosition(tuple.Item1.End).Start,
+                            },
+                            ulHTMLCookie = tuple.Item2,
+                        }
+                )
                 .ToArray();
         }
     }

@@ -22,11 +22,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void CreateTreeWithDiagnostics()
         {
             var options = CreateImmutableDictionary(("CS0078", ReportDiagnostic.Suppress));
-            var tree = CSharpSyntaxTree.Create(SyntaxFactory.ParseCompilationUnit(""),
+            var tree = CSharpSyntaxTree.Create(
+                SyntaxFactory.ParseCompilationUnit(""),
                 options: null,
                 path: "",
                 encoding: null,
-                diagnosticOptions: options);
+                diagnosticOptions: options
+            );
             Assert.Same(options, tree.DiagnosticOptions);
         }
 
@@ -40,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 path: "",
                 diagnosticOptions: options,
                 isGeneratedCode: null,
-                cancellationToken: default);
+                cancellationToken: default
+            );
             Assert.Same(options, tree.DiagnosticOptions);
             var newTree = tree.WithChangedText(SourceText.From("class C { }"));
             Assert.Same(options, newTree.DiagnosticOptions);
@@ -55,11 +58,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 path: "",
                 diagnosticOptions: null,
                 isGeneratedCode: null,
-                cancellationToken: default);
+                cancellationToken: default
+            );
             Assert.NotNull(tree.DiagnosticOptions);
             Assert.True(tree.DiagnosticOptions.IsEmpty);
             // The default options are case insensitive but the default empty ImmutableDictionary is not
-            Assert.NotSame(ImmutableDictionary<string, ReportDiagnostic>.Empty, tree.DiagnosticOptions);
+            Assert.NotSame(
+                ImmutableDictionary<string, ReportDiagnostic>.Empty,
+                tree.DiagnosticOptions
+            );
         }
 
         [Fact]
@@ -71,10 +78,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 path: "",
                 diagnosticOptions: ImmutableDictionary<string, ReportDiagnostic>.Empty,
                 isGeneratedCode: null,
-                cancellationToken: default);
+                cancellationToken: default
+            );
             Assert.NotNull(tree.DiagnosticOptions);
             Assert.True(tree.DiagnosticOptions.IsEmpty);
-            Assert.Same(ImmutableDictionary<string, ReportDiagnostic>.Empty, tree.DiagnosticOptions);
+            Assert.Same(
+                ImmutableDictionary<string, ReportDiagnostic>.Empty,
+                tree.DiagnosticOptions
+            );
         }
 
         [Fact]
@@ -87,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 path: "",
                 diagnosticOptions: options,
                 isGeneratedCode: null,
-                cancellationToken: default);
+                cancellationToken: default
+            );
             Assert.Same(options, tree.DiagnosticOptions);
         }
 
@@ -113,7 +125,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void WithDiagnosticOptionsEmpty()
         {
             var tree = SyntaxFactory.SyntaxTree(SyntaxFactory.CompilationUnit());
-            var newTree = tree.WithDiagnosticOptions(ImmutableDictionary<string, ReportDiagnostic>.Empty);
+            var newTree = tree.WithDiagnosticOptions(
+                ImmutableDictionary<string, ReportDiagnostic>.Empty
+            );
             Assert.NotNull(tree.DiagnosticOptions);
             Assert.True(newTree.DiagnosticOptions.IsEmpty);
             // Default empty immutable dictionary is case sensitive
@@ -125,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             var tree = SyntaxFactory.SyntaxTree(SyntaxFactory.CompilationUnit());
             var map = ImmutableDictionary.CreateRange(
-                new[] { KeyValuePair.Create("CS00778", ReportDiagnostic.Suppress) });
+                new[] { KeyValuePair.Create("CS00778", ReportDiagnostic.Suppress) }
+            );
             var newTree = tree.WithDiagnosticOptions(map);
             Assert.NotNull(newTree.DiagnosticOptions);
             Assert.Same(map, newTree.DiagnosticOptions);
@@ -152,7 +167,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void WithRootAndOptions_ParsedTreeWithText()
         {
-            var oldText = SourceText.From("class B {}", Encoding.Unicode, SourceHashAlgorithm.Sha256);
+            var oldText = SourceText.From(
+                "class B {}",
+                Encoding.Unicode,
+                SourceHashAlgorithm.Sha256
+            );
             var oldTree = SyntaxFactory.ParseSyntaxTree(oldText);
 
             var newRoot = SyntaxFactory.ParseCompilationUnit("class C {}");
@@ -194,7 +213,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void WithFilePath_ParsedTreeWithText()
         {
-            var oldText = SourceText.From("class B {}", Encoding.Unicode, SourceHashAlgorithm.Sha256);
+            var oldText = SourceText.From(
+                "class B {}",
+                Encoding.Unicode,
+                SourceHashAlgorithm.Sha256
+            );
             var oldTree = SyntaxFactory.ParseSyntaxTree(oldText, path: "old.cs");
 
             var newTree = oldTree.WithFilePath("new.cs");
@@ -225,7 +248,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             oldTree = SyntaxFactory.ParseSyntaxTree("", path: "old.cs");
             Assert.Equal(string.Empty, oldTree.WithFilePath(null).FilePath);
             Assert.Equal(string.Empty, SyntaxFactory.ParseSyntaxTree("", path: null).FilePath);
-            Assert.Equal(string.Empty, CSharpSyntaxTree.Create((CSharpSyntaxNode)oldTree.GetRoot(), path: null).FilePath);
+            Assert.Equal(
+                string.Empty,
+                CSharpSyntaxTree.Create((CSharpSyntaxNode)oldTree.GetRoot(), path: null).FilePath
+            );
         }
     }
 }

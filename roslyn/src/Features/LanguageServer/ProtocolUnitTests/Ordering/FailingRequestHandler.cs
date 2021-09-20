@@ -21,9 +21,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FailingRequestHandlerProvider()
-        {
-        }
+        public FailingRequestHandlerProvider() { }
 
         public override ImmutableArray<IRequestHandler> CreateRequestHandlers()
         {
@@ -43,8 +41,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
 
         public TextDocumentIdentifier GetTextDocumentIdentifier(TestRequest request) => null;
 
-        public async Task<TestResponse> HandleRequestAsync(TestRequest request, RequestContext context, CancellationToken cancellationToken)
-        {
+        public async Task<TestResponse> HandleRequestAsync(
+            TestRequest request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        ) {
             await Task.Delay(Delay, cancellationToken).ConfigureAwait(false);
 
             throw new InvalidOperationException();

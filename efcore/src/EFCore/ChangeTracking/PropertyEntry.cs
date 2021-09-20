@@ -26,9 +26,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// </summary>
         [EntityFrameworkInternal]
         public PropertyEntry(InternalEntityEntry internalEntry, string name)
-            : this(internalEntry, internalEntry.EntityType.GetProperty(name))
-        {
-        }
+            : this(internalEntry, internalEntry.EntityType.GetProperty(name)) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -38,9 +36,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// </summary>
         [EntityFrameworkInternal]
         public PropertyEntry(InternalEntityEntry internalEntry, IProperty property)
-            : base(internalEntry, property)
-        {
-        }
+            : base(internalEntry, property) { }
 
         /// <summary>
         ///     Gets or sets a value indicating whether the value of this property has been modified
@@ -50,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public override bool IsModified
         {
             get => InternalEntry.IsModified(Metadata);
-            set => InternalEntry.SetPropertyModified(Metadata, changeState: true, isModified: value);
+            set =>
+                InternalEntry.SetPropertyModified(Metadata, changeState: true, isModified: value);
         }
 
         /// <summary>
@@ -77,8 +74,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <summary>
         ///     Gets the metadata that describes the facets of this property and how it maps to the database.
         /// </summary>
-        public new virtual IProperty Metadata
-            => (IProperty)base.Metadata;
+        public new virtual IProperty Metadata => (IProperty)base.Metadata;
 
         /// <summary>
         ///     Gets or sets the value that was assigned to this property when it was retrieved from the database.

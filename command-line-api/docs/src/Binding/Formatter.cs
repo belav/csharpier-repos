@@ -44,19 +44,20 @@ namespace Binding
                         {
                             sb.AppendLine(parseResult.ToString());
                         }
-
                         break;
 
                     default:
 
-                        foreach (var property in obj.GetType()
-                                                    .GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                                                    .Where(p => p.CanRead)
-                                                    .OrderBy(p => p.Name))
-                        {
-                            sb.AppendLine($"{property.Name}: {property.GetValue(obj)} ({property.PropertyType})");
+                        foreach (
+                            var property in obj.GetType()
+                                .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                                .Where(p => p.CanRead)
+                                .OrderBy(p => p.Name)
+                        ) {
+                            sb.AppendLine(
+                                $"{property.Name}: {property.GetValue(obj)} ({property.PropertyType})"
+                            );
                         }
-
                         break;
                 }
             }

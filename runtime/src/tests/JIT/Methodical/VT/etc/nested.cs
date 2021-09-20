@@ -15,13 +15,15 @@ namespace JitTest
             private long _m_l2;
             public void Verify()
             {
-                if (_m_i2 != 0 || _m_l2 != 0) throw new Exception();
+                if (_m_i2 != 0 || _m_l2 != 0)
+                    throw new Exception();
             }
         }
         public Struct2 m_str2;
         public void Verify()
         {
-            if (_m_i1 != 0 || _m_l1 != 0) throw new Exception();
+            if (_m_i1 != 0 || _m_l1 != 0)
+                throw new Exception();
             m_str2.Verify();
         }
     }

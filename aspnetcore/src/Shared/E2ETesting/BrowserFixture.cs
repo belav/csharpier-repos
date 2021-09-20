@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.E2ETesting
 {
     public class BrowserFixture : IAsyncLifetime
     {
-        private ConcurrentDictionary<string, Task<(IWebDriver browser, ILogs log)>> _browsers = new ConcurrentDictionary<string, Task<(IWebDriver, ILogs)>>();
+        private ConcurrentDictionary<string, Task<(IWebDriver browser, ILogs log)>> _browsers =
+            new ConcurrentDictionary<string, Task<(IWebDriver, ILogs)>>();
 
         public BrowserFixture(IMessageSink diagnosticsMessageSink)
         {
@@ -39,23 +40,31 @@ namespace Microsoft.AspNetCore.E2ETesting
         {
             // Do not change the current platform support without explicit approval.
             Assert.False(
-                RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && RuntimeInformation.ProcessArchitecture == Architecture.X64,
-                "Selenium tests should be running in this platform.");
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                    && RuntimeInformation.ProcessArchitecture == Architecture.X64,
+                "Selenium tests should be running in this platform."
+            );
         }
 
         public static bool IsHostAutomationSupported()
         {
             // We emit an assemblymetadata attribute that reflects the value of SeleniumE2ETestsSupported at build
             // time and we use that to conditionally skip Selenium tests parts.
-            var attribute = typeof(BrowserFixture).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
-                .SingleOrDefault(a => a.Key == "Microsoft.AspNetCore.Testing.Selenium.Supported");
+            var attribute =
+                typeof(BrowserFixture).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                    .SingleOrDefault(
+                        a => a.Key == "Microsoft.AspNetCore.Testing.Selenium.Supported"
+                    );
             var attributeValue = attribute != null ? bool.Parse(attribute.Value) : false;
 
             // The environment variable below can be set up before running the tests so as to override the default
             // value provided in the attribute.
-            var environmentOverride = Environment
-                .GetEnvironmentVariable("MICROSOFT_ASPNETCORE_TESTING_SELENIUM_SUPPORTED");
-            var environmentOverrideValue = !string.IsNullOrWhiteSpace(environmentOverride) ? bool.Parse(attribute.Value) : false;
+            var environmentOverride = Environment.GetEnvironmentVariable(
+                "MICROSOFT_ASPNETCORE_TESTING_SELENIUM_SUPPORTED"
+            );
+            var environmentOverrideValue = !string.IsNullOrWhiteSpace(environmentOverride)
+                ? bool.Parse(attribute.Value)
+                : false;
 
             if (environmentOverride != null)
             {
@@ -84,8 +93,10 @@ namespace Microsoft.AspNetCore.E2ETesting
             foreach (var context in _browsers.Keys)
             {
                 var userProfileDirectory = UserProfileDirectory(context);
-                if (!string.IsNullOrEmpty(userProfileDirectory) && Directory.Exists(userProfileDirectory))
-                {
+                if (
+                    !string.IsNullOrEmpty(userProfileDirectory)
+                    && Directory.Exists(userProfileDirectory)
+                ) {
                     var attemptCount = 0;
                     while (true)
                     {
@@ -99,7 +110,9 @@ namespace Microsoft.AspNetCore.E2ETesting
                             attemptCount++;
                             if (attemptCount < 5)
                             {
-                                Console.WriteLine($"Failed to delete browser profile directory '{userProfileDirectory}': '{ex}'. Will retry.");
+                                Console.WriteLine(
+                                    $"Failed to delete browser profile directory '{userProfileDirectory}': '{ex}'. Will retry."
+                                );
                                 await Task.Delay(2000);
                             }
                             else
@@ -112,8 +125,10 @@ namespace Microsoft.AspNetCore.E2ETesting
             }
         }
 
-        public Task<(IWebDriver, ILogs)> GetOrCreateBrowserAsync(ITestOutputHelper output, string isolationContext = "")
-        {
+        public Task<(IWebDriver, ILogs)> GetOrCreateBrowserAsync(
+            ITestOutputHelper output,
+            string isolationContext = ""
+        ) {
             Func<string, ITestOutputHelper, Task<(IWebDriver, ILogs)>> createBrowserFunc;
             if (E2ETestOptions.Instance.SauceTest)
             {
@@ -123,29 +138,37 @@ namespace Microsoft.AspNetCore.E2ETesting
             {
                 if (!IsHostAutomationSupported())
                 {
-                    output.WriteLine($"{nameof(BrowserFixture)}: Host does not support browser automation.");
+                    output.WriteLine(
+                        $"{nameof(BrowserFixture)}: Host does not support browser automation."
+                    );
                     return Task.FromResult<(IWebDriver, ILogs)>(default);
                 }
 
                 createBrowserFunc = CreateBrowserAsync;
             }
 
-
             return _browsers.GetOrAdd(isolationContext, createBrowserFunc, output);
         }
 
         public Task InitializeAsync() => Task.CompletedTask;
 
-        private async Task<(IWebDriver browser, ILogs log)> CreateBrowserAsync(string context, ITestOutputHelper output)
-        {
+        private async Task<(IWebDriver browser, ILogs log)> CreateBrowserAsync(
+            string context,
+            ITestOutputHelper output
+        ) {
             var opts = new ChromeOptions();
 
             // Force language to english for tests
             opts.AddUserProfilePreference("intl.accept_languages", "en");
 
-            if (!Debugger.IsAttached &&
-                !string.Equals(Environment.GetEnvironmentVariable("E2E_TEST_VISIBLE"), "true", StringComparison.OrdinalIgnoreCase))
-            {
+            if (
+                !Debugger.IsAttached
+                && !string.Equals(
+                    Environment.GetEnvironmentVariable("E2E_TEST_VISIBLE"),
+                    "true",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            ) {
                 opts.AddArgument("--headless");
             }
 
@@ -162,7 +185,9 @@ namespace Microsoft.AspNetCore.E2ETesting
             if (!string.IsNullOrEmpty(binaryLocation))
             {
                 opts.BinaryLocation = binaryLocation;
-                output.WriteLine($"Set {nameof(ChromeOptions)}.{nameof(opts.BinaryLocation)} to {binaryLocation}");
+                output.WriteLine(
+                    $"Set {nameof(ChromeOptions)}.{nameof(opts.BinaryLocation)} to {binaryLocation}"
+                );
             }
 
             var userProfileDirectory = UserProfileDirectory(context);
@@ -171,7 +196,10 @@ namespace Microsoft.AspNetCore.E2ETesting
             {
                 Directory.CreateDirectory(userProfileDirectory);
                 opts.AddArgument($"--user-data-dir={userProfileDirectory}");
-                opts.AddUserProfilePreference("download.default_directory", Path.Combine(userProfileDirectory, "Downloads"));
+                opts.AddUserProfilePreference(
+                    "download.default_directory",
+                    Path.Combine(userProfileDirectory, "Downloads")
+                );
             }
 
             var instance = await SeleniumStandaloneServer.GetInstanceAsync(output);
@@ -195,7 +223,8 @@ namespace Microsoft.AspNetCore.E2ETesting
                     var driver = new RemoteWebDriverWithLogs(
                         instance.Uri,
                         opts.ToCapabilities(),
-                        TimeSpan.FromSeconds(60).Add(TimeSpan.FromSeconds(attempt * 60)));
+                        TimeSpan.FromSeconds(60).Add(TimeSpan.FromSeconds(attempt * 60))
+                    );
 
                     driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
                     var logs = new RemoteLogs(driver);
@@ -209,10 +238,12 @@ namespace Microsoft.AspNetCore.E2ETesting
                 }
 
                 attempt++;
-
             } while (attempt < maxAttempts);
 
-            throw new InvalidOperationException("Couldn't create a Selenium remote driver client. The server is irresponsive", innerException);
+            throw new InvalidOperationException(
+                "Couldn't create a Selenium remote driver client. The server is irresponsive",
+                innerException
+            );
         }
 
         private string UserProfileDirectory(string context)
@@ -225,19 +256,24 @@ namespace Microsoft.AspNetCore.E2ETesting
             return Path.Combine(Path.GetTempPath(), "BrowserFixtureUserProfiles", context);
         }
 
-        private async Task<(IWebDriver browser, ILogs log)> CreateSauceBrowserAsync(string context, ITestOutputHelper output)
-        {
+        private async Task<(IWebDriver browser, ILogs log)> CreateSauceBrowserAsync(
+            string context,
+            ITestOutputHelper output
+        ) {
             var sauce = E2ETestOptions.Instance.Sauce;
 
-            if (sauce == null ||
-                string.IsNullOrEmpty(sauce.TestName) ||
-                string.IsNullOrEmpty(sauce.Username) ||
-                string.IsNullOrEmpty(sauce.AccessKey) ||
-                string.IsNullOrEmpty(sauce.TunnelIdentifier) ||
-                string.IsNullOrEmpty(sauce.PlatformName) ||
-                string.IsNullOrEmpty(sauce.BrowserName))
-            {
-                throw new InvalidOperationException("Required SauceLabs environment variables not set.");
+            if (
+                sauce == null
+                || string.IsNullOrEmpty(sauce.TestName)
+                || string.IsNullOrEmpty(sauce.Username)
+                || string.IsNullOrEmpty(sauce.AccessKey)
+                || string.IsNullOrEmpty(sauce.TunnelIdentifier)
+                || string.IsNullOrEmpty(sauce.PlatformName)
+                || string.IsNullOrEmpty(sauce.BrowserName)
+            ) {
+                throw new InvalidOperationException(
+                    "Required SauceLabs environment variables not set."
+                );
             }
 
             var name = sauce.TestName;
@@ -263,7 +299,9 @@ namespace Microsoft.AspNetCore.E2ETesting
                     options = new EdgeOptions();
                     break;
                 default:
-                    throw new InvalidOperationException($"Browser name {sauce.BrowserName} not recognized");
+                    throw new InvalidOperationException(
+                        $"Browser name {sauce.BrowserName} not recognized"
+                    );
             }
 
             // Required config
@@ -327,7 +365,8 @@ namespace Microsoft.AspNetCore.E2ETesting
                     var driver = new RemoteWebDriver(
                         new Uri("http://localhost:4445/wd/hub"),
                         capabilities,
-                        TimeSpan.FromSeconds(60).Add(TimeSpan.FromSeconds(attempt * 60)));
+                        TimeSpan.FromSeconds(60).Add(TimeSpan.FromSeconds(attempt * 60))
+                    );
 
                     // Make sure implicit waits are disabled as they don't mix well with explicit waiting
                     // see https://www.selenium.dev/documentation/en/webdriver/waits/#implicit-wait
@@ -342,19 +381,21 @@ namespace Microsoft.AspNetCore.E2ETesting
                 }
 
                 attempt++;
-
             } while (attempt < maxAttempts);
 
-            throw new InvalidOperationException("Couldn't create a SauceLabs remote driver client.");
+            throw new InvalidOperationException(
+                "Couldn't create a SauceLabs remote driver client."
+            );
         }
 
         // This is a workaround for https://github.com/SeleniumHQ/selenium/issues/8229
         private class RemoteWebDriverWithLogs : RemoteWebDriver, ISupportsLogs
         {
-            public RemoteWebDriverWithLogs(Uri remoteAddress, ICapabilities desiredCapabilities, TimeSpan commandTimeout)
-                : base(remoteAddress, desiredCapabilities, commandTimeout)
-            {
-            }
+            public RemoteWebDriverWithLogs(
+                Uri remoteAddress,
+                ICapabilities desiredCapabilities,
+                TimeSpan commandTimeout
+            ) : base(remoteAddress, desiredCapabilities, commandTimeout) { }
         }
     }
 }

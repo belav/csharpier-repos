@@ -43,7 +43,12 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 throw new ArgumentNullException(nameof(htmlHelper));
             }
 
-            return htmlHelper.DropDownList(expression, selectList: null, optionLabel: null, htmlAttributes: null);
+            return htmlHelper.DropDownList(
+                expression,
+                selectList: null,
+                optionLabel: null,
+                htmlAttributes: null
+            );
         }
 
         /// <summary>
@@ -76,8 +81,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent DropDownList(
             this IHtmlHelper htmlHelper,
             string expression,
-            string optionLabel)
-        {
+            string optionLabel
+        ) {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -87,7 +92,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 expression,
                 selectList: null,
                 optionLabel: optionLabel,
-                htmlAttributes: null);
+                htmlAttributes: null
+            );
         }
 
         /// <summary>
@@ -117,14 +123,19 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent DropDownList(
             this IHtmlHelper htmlHelper,
             string expression,
-            IEnumerable<SelectListItem> selectList)
-        {
+            IEnumerable<SelectListItem> selectList
+        ) {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
             }
 
-            return htmlHelper.DropDownList(expression, selectList, optionLabel: null, htmlAttributes: null);
+            return htmlHelper.DropDownList(
+                expression,
+                selectList,
+                optionLabel: null,
+                htmlAttributes: null
+            );
         }
 
         /// <summary>
@@ -159,14 +170,19 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string expression,
             IEnumerable<SelectListItem> selectList,
-            object htmlAttributes)
-        {
+            object htmlAttributes
+        ) {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
             }
 
-            return htmlHelper.DropDownList(expression, selectList, optionLabel: null, htmlAttributes: htmlAttributes);
+            return htmlHelper.DropDownList(
+                expression,
+                selectList,
+                optionLabel: null,
+                htmlAttributes: htmlAttributes
+            );
         }
 
         /// <summary>
@@ -200,14 +216,19 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper htmlHelper,
             string expression,
             IEnumerable<SelectListItem> selectList,
-            string optionLabel)
-        {
+            string optionLabel
+        ) {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
             }
 
-            return htmlHelper.DropDownList(expression, selectList, optionLabel, htmlAttributes: null);
+            return htmlHelper.DropDownList(
+                expression,
+                selectList,
+                optionLabel,
+                htmlAttributes: null
+            );
         }
 
         /// <summary>
@@ -237,55 +258,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent DropDownListFor<TModel, TResult>(
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression,
-            IEnumerable<SelectListItem> selectList)
-        {
-            if (htmlHelper == null)
-            {
-                throw new ArgumentNullException(nameof(htmlHelper));
-            }
-
-            if (expression == null)
-            {
-                throw new ArgumentNullException(nameof(expression));
-            }
-
-            return htmlHelper.DropDownListFor(expression, selectList, optionLabel: null, htmlAttributes: null);
-        }
-
-        /// <summary>
-        /// Returns a single-selection HTML &lt;select&gt; element for the <paramref name="expression"/>. Adds
-        /// &lt;option&gt; elements based on <paramref name="selectList"/>. Adds a "selected" attribute to an
-        /// &lt;option&gt; if its <see cref="SelectListItem.Value"/> (if non-<c>null</c>) or
-        /// <see cref="SelectListItem.Text"/> matches the first non-<c>null</c> value found in:
-        /// the <see cref="ActionContext.ModelState"/> entry with full name, or
-        /// the <paramref name="expression"/> evaluated against <see cref="ViewFeatures.ViewDataDictionary.Model"/>.
-        /// See <see cref="IHtmlHelper{TModel}.NameFor"/> for more information about a "full name".
-        /// </summary>
-        /// <param name="htmlHelper">The <see cref="IHtmlHelper{TModel}"/> instance this method extends.</param>
-        /// <param name="expression">An expression to be evaluated against the current model.</param>
-        /// <param name="selectList">
-        /// A collection of <see cref="SelectListItem"/> objects used to populate the &lt;select&gt; element with
-        /// &lt;optgroup&gt; and &lt;option&gt; elements. If <c>null</c>, uses the <see cref="IHtmlHelper.ViewData"/>
-        /// entry with full name and that entry must be a collection of <see cref="SelectListItem"/> objects.
-        /// </param>
-        /// <param name="htmlAttributes">
-        /// An <see cref="object"/> that contains the HTML attributes for the &lt;select&gt; element. Alternatively, an
-        /// <see cref="IDictionary{String, Object}"/> instance containing the HTML attributes.
-        /// </param>
-        /// <typeparam name="TModel">The type of the model.</typeparam>
-        /// <typeparam name="TResult">The type of the <paramref name="expression"/> result.</typeparam>
-        /// <returns>A new <see cref="IHtmlContent"/> containing the &lt;select&gt; element.</returns>
-        /// <remarks>
-        /// Combines <see cref="ViewFeatures.TemplateInfo.HtmlFieldPrefix"/> and the string representation of the
-        /// <paramref name="expression"/> to set &lt;select&gt; element's "name" attribute. Sanitizes the string
-        /// representation of the <paramref name="expression"/> to set element's "id" attribute.
-        /// </remarks>
-        public static IHtmlContent DropDownListFor<TModel, TResult>(
-            this IHtmlHelper<TModel> htmlHelper,
-            Expression<Func<TModel, TResult>> expression,
-            IEnumerable<SelectListItem> selectList,
-            object htmlAttributes)
-        {
+            IEnumerable<SelectListItem> selectList
+        ) {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -300,7 +274,60 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 expression,
                 selectList,
                 optionLabel: null,
-                htmlAttributes: htmlAttributes);
+                htmlAttributes: null
+            );
+        }
+
+        /// <summary>
+        /// Returns a single-selection HTML &lt;select&gt; element for the <paramref name="expression"/>. Adds
+        /// &lt;option&gt; elements based on <paramref name="selectList"/>. Adds a "selected" attribute to an
+        /// &lt;option&gt; if its <see cref="SelectListItem.Value"/> (if non-<c>null</c>) or
+        /// <see cref="SelectListItem.Text"/> matches the first non-<c>null</c> value found in:
+        /// the <see cref="ActionContext.ModelState"/> entry with full name, or
+        /// the <paramref name="expression"/> evaluated against <see cref="ViewFeatures.ViewDataDictionary.Model"/>.
+        /// See <see cref="IHtmlHelper{TModel}.NameFor"/> for more information about a "full name".
+        /// </summary>
+        /// <param name="htmlHelper">The <see cref="IHtmlHelper{TModel}"/> instance this method extends.</param>
+        /// <param name="expression">An expression to be evaluated against the current model.</param>
+        /// <param name="selectList">
+        /// A collection of <see cref="SelectListItem"/> objects used to populate the &lt;select&gt; element with
+        /// &lt;optgroup&gt; and &lt;option&gt; elements. If <c>null</c>, uses the <see cref="IHtmlHelper.ViewData"/>
+        /// entry with full name and that entry must be a collection of <see cref="SelectListItem"/> objects.
+        /// </param>
+        /// <param name="htmlAttributes">
+        /// An <see cref="object"/> that contains the HTML attributes for the &lt;select&gt; element. Alternatively, an
+        /// <see cref="IDictionary{String, Object}"/> instance containing the HTML attributes.
+        /// </param>
+        /// <typeparam name="TModel">The type of the model.</typeparam>
+        /// <typeparam name="TResult">The type of the <paramref name="expression"/> result.</typeparam>
+        /// <returns>A new <see cref="IHtmlContent"/> containing the &lt;select&gt; element.</returns>
+        /// <remarks>
+        /// Combines <see cref="ViewFeatures.TemplateInfo.HtmlFieldPrefix"/> and the string representation of the
+        /// <paramref name="expression"/> to set &lt;select&gt; element's "name" attribute. Sanitizes the string
+        /// representation of the <paramref name="expression"/> to set element's "id" attribute.
+        /// </remarks>
+        public static IHtmlContent DropDownListFor<TModel, TResult>(
+            this IHtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TResult>> expression,
+            IEnumerable<SelectListItem> selectList,
+            object htmlAttributes
+        ) {
+            if (htmlHelper == null)
+            {
+                throw new ArgumentNullException(nameof(htmlHelper));
+            }
+
+            if (expression == null)
+            {
+                throw new ArgumentNullException(nameof(expression));
+            }
+
+            return htmlHelper.DropDownListFor(
+                expression,
+                selectList,
+                optionLabel: null,
+                htmlAttributes: htmlAttributes
+            );
         }
 
         /// <summary>
@@ -334,8 +361,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression,
             IEnumerable<SelectListItem> selectList,
-            string optionLabel)
-        {
+            string optionLabel
+        ) {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -346,7 +373,12 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 throw new ArgumentNullException(nameof(expression));
             }
 
-            return htmlHelper.DropDownListFor(expression, selectList, optionLabel, htmlAttributes: null);
+            return htmlHelper.DropDownListFor(
+                expression,
+                selectList,
+                optionLabel,
+                htmlAttributes: null
+            );
         }
 
         /// <summary>
@@ -409,8 +441,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent ListBox(
             this IHtmlHelper htmlHelper,
             string expression,
-            IEnumerable<SelectListItem> selectList)
-        {
+            IEnumerable<SelectListItem> selectList
+        ) {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -446,8 +478,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent ListBoxFor<TModel, TResult>(
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression,
-            IEnumerable<SelectListItem> selectList)
-        {
+            IEnumerable<SelectListItem> selectList
+        ) {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));

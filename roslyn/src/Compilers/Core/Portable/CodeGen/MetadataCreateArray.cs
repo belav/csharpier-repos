@@ -19,8 +19,11 @@ namespace Microsoft.CodeAnalysis.CodeGen
         public Cci.ITypeReference ElementType { get; }
         public ImmutableArray<Cci.IMetadataExpression> Elements { get; }
 
-        public MetadataCreateArray(Cci.IArrayTypeReference arrayType, Cci.ITypeReference elementType, ImmutableArray<Cci.IMetadataExpression> initializers)
-        {
+        public MetadataCreateArray(
+            Cci.IArrayTypeReference arrayType,
+            Cci.ITypeReference elementType,
+            ImmutableArray<Cci.IMetadataExpression> initializers
+        ) {
             ArrayType = arrayType;
             ElementType = elementType;
             Elements = initializers;

@@ -19,8 +19,9 @@ namespace Microsoft.AspNetCore.Builder
         /// </summary>
         /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/>.</param>
         /// <returns>The <see cref="ComponentEndpointConventionBuilder"/>.</returns>
-        public static ComponentEndpointConventionBuilder MapBlazorHub(this IEndpointRouteBuilder endpoints)
-        {
+        public static ComponentEndpointConventionBuilder MapBlazorHub(
+            this IEndpointRouteBuilder endpoints
+        ) {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -37,8 +38,8 @@ namespace Microsoft.AspNetCore.Builder
         /// <returns>The <see cref="ComponentEndpointConventionBuilder"/>.</returns>
         public static ComponentEndpointConventionBuilder MapBlazorHub(
             this IEndpointRouteBuilder endpoints,
-            string path)
-        {
+            string path
+        ) {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -60,8 +61,8 @@ namespace Microsoft.AspNetCore.Builder
         /// <returns>The <see cref="ComponentEndpointConventionBuilder"/>.</returns>
         public static ComponentEndpointConventionBuilder MapBlazorHub(
             this IEndpointRouteBuilder endpoints,
-            Action<HttpConnectionDispatcherOptions> configureOptions)
-        {
+            Action<HttpConnectionDispatcherOptions> configureOptions
+        ) {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -85,8 +86,8 @@ namespace Microsoft.AspNetCore.Builder
         public static ComponentEndpointConventionBuilder MapBlazorHub(
             this IEndpointRouteBuilder endpoints,
             string path,
-            Action<HttpConnectionDispatcherOptions> configureOptions)
-        {
+            Action<HttpConnectionDispatcherOptions> configureOptions
+        ) {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -105,8 +106,11 @@ namespace Microsoft.AspNetCore.Builder
             var hubEndpoint = endpoints.MapHub<ComponentHub>(path, configureOptions);
 
             var disconnectEndpoint = endpoints.Map(
-                (path.EndsWith('/') ? path : path + "/") + "disconnect/",
-                endpoints.CreateApplicationBuilder().UseMiddleware<CircuitDisconnectMiddleware>().Build())
+                    (path.EndsWith('/') ? path : path + "/") + "disconnect/",
+                    endpoints.CreateApplicationBuilder()
+                        .UseMiddleware<CircuitDisconnectMiddleware>()
+                        .Build()
+                )
                 .WithDisplayName("Blazor disconnect");
 
             return new ComponentEndpointConventionBuilder(hubEndpoint, disconnectEndpoint);

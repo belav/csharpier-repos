@@ -15,10 +15,7 @@ namespace System.Net.Http
         private readonly bool _disposeHandler;
         private readonly HttpMessageHandler _handler;
 
-        public HttpMessageInvoker(HttpMessageHandler handler)
-            : this(handler, true)
-        {
-        }
+        public HttpMessageInvoker(HttpMessageHandler handler) : this(handler, true) { }
 
         public HttpMessageInvoker(HttpMessageHandler handler, bool disposeHandler)
         {
@@ -27,24 +24,29 @@ namespace System.Net.Http
                 throw new ArgumentNullException(nameof(handler));
             }
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Associate(this, handler);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Associate(this, handler);
 
             _handler = handler;
             _disposeHandler = disposeHandler;
         }
 
         [UnsupportedOSPlatformAttribute("browser")]
-        public virtual HttpResponseMessage Send(HttpRequestMessage request,
-            CancellationToken cancellationToken)
-        {
+        public virtual HttpResponseMessage Send(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        ) {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
             CheckDisposed();
 
-            if (HttpTelemetry.Log.IsEnabled() && !request.WasSentByHttpClient() && request.RequestUri != null)
-            {
+            if (
+                HttpTelemetry.Log.IsEnabled()
+                && !request.WasSentByHttpClient()
+                && request.RequestUri != null
+            ) {
                 HttpTelemetry.Log.RequestStart(request);
 
                 try
@@ -67,29 +69,37 @@ namespace System.Net.Http
             }
         }
 
-        public virtual Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
-            CancellationToken cancellationToken)
-        {
+        public virtual Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        ) {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
             CheckDisposed();
 
-            if (HttpTelemetry.Log.IsEnabled() && !request.WasSentByHttpClient() && request.RequestUri != null)
-            {
+            if (
+                HttpTelemetry.Log.IsEnabled()
+                && !request.WasSentByHttpClient()
+                && request.RequestUri != null
+            ) {
                 return SendAsyncWithTelemetry(_handler, request, cancellationToken);
             }
 
             return _handler.SendAsync(request, cancellationToken);
 
-            static async Task<HttpResponseMessage> SendAsyncWithTelemetry(HttpMessageHandler handler, HttpRequestMessage request, CancellationToken cancellationToken)
-            {
+            static async Task<HttpResponseMessage> SendAsyncWithTelemetry(
+                HttpMessageHandler handler,
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            ) {
                 HttpTelemetry.Log.RequestStart(request);
 
                 try
                 {
-                    return await handler.SendAsync(request, cancellationToken).ConfigureAwait(false);
+                    return await handler.SendAsync(request, cancellationToken)
+                        .ConfigureAwait(false);
                 }
                 catch when (LogRequestFailed(telemetryStarted: true))
                 {

@@ -21,23 +21,30 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
     public abstract partial class AbstractCodeActionOrUserDiagnosticTest
     {
         protected async Task TestAddDocumentInRegularAndScriptAsync(
-            string initialMarkup, string expectedMarkup,
+            string initialMarkup,
+            string expectedMarkup,
             ImmutableArray<string> expectedContainers,
             string expectedDocumentName,
-            TestParameters parameters = default)
-        {
+            TestParameters parameters = default
+        ) {
             await TestAddDocument(
-                initialMarkup, expectedMarkup,
-                expectedContainers, expectedDocumentName,
-                WithRegularOptions(parameters));
+                initialMarkup,
+                expectedMarkup,
+                expectedContainers,
+                expectedDocumentName,
+                WithRegularOptions(parameters)
+            );
 
             // VB script is not supported:
             if (GetLanguage() == LanguageNames.CSharp)
             {
                 await TestAddDocument(
-                    initialMarkup, expectedMarkup,
-                    expectedContainers, expectedDocumentName,
-                    WithScriptOptions(parameters));
+                    initialMarkup,
+                    expectedMarkup,
+                    expectedContainers,
+                    expectedDocumentName,
+                    WithScriptOptions(parameters)
+                );
             }
         }
 
@@ -46,12 +53,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             TestWorkspace workspace,
             string expectedMarkup,
             string expectedDocumentName,
-            ImmutableArray<string> expectedContainers)
-        {
+            ImmutableArray<string> expectedContainers
+        ) {
             var (_, action) = await GetCodeActionsAsync(workspace, parameters);
             return await TestAddDocument(
-                workspace, expectedMarkup, expectedContainers,
-                expectedDocumentName, action);
+                workspace,
+                expectedMarkup,
+                expectedContainers,
+                expectedDocumentName,
+                action
+            );
         }
 
         protected async Task TestAddDocument(
@@ -59,14 +70,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             string expectedMarkup,
             ImmutableArray<string> expectedContainers,
             string expectedDocumentName,
-            TestParameters parameters = default)
-        {
+            TestParameters parameters = default
+        ) {
             using (var workspace = CreateWorkspaceFromOptions(initialMarkup, parameters))
             {
                 var (_, action) = await GetCodeActionsAsync(workspace, parameters);
                 await TestAddDocument(
-                    workspace, expectedMarkup, expectedContainers,
-                    expectedDocumentName, action);
+                    workspace,
+                    expectedMarkup,
+                    expectedContainers,
+                    expectedDocumentName,
+                    action
+                );
             }
         }
 
@@ -75,8 +90,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             string expectedMarkup,
             ImmutableArray<string> expectedFolders,
             string expectedDocumentName,
-            CodeAction action)
-        {
+            CodeAction action
+        ) {
             var operations = await VerifyActionAndGetOperationsAsync(workspace, action, default);
             return await TestAddDocument(
                 workspace,
@@ -85,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 hasProjectChange: false,
                 modifiedProjectId: null,
                 expectedFolders: expectedFolders,
-                expectedDocumentName: expectedDocumentName);
+                expectedDocumentName: expectedDocumentName
+            );
         }
 
         protected static async Task<Tuple<Solution, Solution>> TestAddDocument(
@@ -95,8 +111,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             bool hasProjectChange,
             ProjectId modifiedProjectId,
             ImmutableArray<string> expectedFolders,
-            string expectedDocumentName)
-        {
+            string expectedDocumentName
+        ) {
             var appliedChanges = ApplyOperationsAndGetSolution(workspace, operations);
             var oldSolution = appliedChanges.Item1;
             var newSolution = appliedChanges.Item2;
@@ -109,7 +125,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             else
             {
                 Assert.NotNull(modifiedProjectId);
-                addedDocument = newSolution.GetProject(modifiedProjectId).Documents.SingleOrDefault(doc => doc.Name == expectedDocumentName);
+                addedDocument = newSolution.GetProject(modifiedProjectId)
+                    .Documents.SingleOrDefault(doc => doc.Name == expectedDocumentName);
             }
 
             Assert.NotNull(addedDocument);
@@ -118,11 +135,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             Assert.Equal(expectedDocumentName, addedDocument.Name);
             Assert.Equal(expected, (await addedDocument.GetTextAsync()).ToString());
 
-            var editHandler = workspace.ExportProvider.GetExportedValue<ICodeActionEditHandlerService>();
+            var editHandler =
+                workspace.ExportProvider.GetExportedValue<ICodeActionEditHandlerService>();
             if (!hasProjectChange)
             {
                 // If there is just one document change then we expect the preview to be a WpfTextView
-                var content = (await editHandler.GetPreviews(workspace, operations, CancellationToken.None).GetPreviewsAsync())[0];
+                var content = (
+                    await editHandler.GetPreviews(workspace, operations, CancellationToken.None)
+                        .GetPreviewsAsync()
+                )[0];
                 using (var diffView = content as DifferenceViewerPreview)
                 {
                     Assert.NotNull(diffView.Viewer);
@@ -131,7 +152,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             else
             {
                 // If there are more changes than just the document we need to browse all the changes and get the document change
-                var contents = editHandler.GetPreviews(workspace, operations, CancellationToken.None);
+                var contents = editHandler.GetPreviews(
+                    workspace,
+                    operations,
+                    CancellationToken.None
+                );
                 var hasPreview = false;
                 var previews = await contents.GetPreviewsAsync();
                 if (previews != null)

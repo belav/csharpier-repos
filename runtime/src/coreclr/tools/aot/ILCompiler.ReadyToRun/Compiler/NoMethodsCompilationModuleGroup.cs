@@ -21,23 +21,24 @@ namespace ILCompiler
             bool isInputBubble,
             IEnumerable<EcmaModule> compilationModuleSet,
             IEnumerable<ModuleDesc> versionBubbleModuleSet,
-            bool compileGenericDependenciesFromVersionBubbleModuleSet) :
-                base(context,
-                     isCompositeBuildMode,
-                     isInputBubble,
-                     compilationModuleSet,
-                     versionBubbleModuleSet,
-                     compileGenericDependenciesFromVersionBubbleModuleSet)
-        {
-        }
+            bool compileGenericDependenciesFromVersionBubbleModuleSet
+        ) : base(
+            context,
+            isCompositeBuildMode,
+            isInputBubble,
+            compilationModuleSet,
+            versionBubbleModuleSet,
+            compileGenericDependenciesFromVersionBubbleModuleSet
+        ) { }
 
         public override bool ContainsMethodBody(MethodDesc method, bool unboxingStub)
         {
             return false;
         }
 
-        public override void ApplyProfilerGuidedCompilationRestriction(ProfileDataManager profileGuidedCompileRestriction)
-        {
+        public override void ApplyProfilerGuidedCompilationRestriction(
+            ProfileDataManager profileGuidedCompileRestriction
+        ) {
             return;
         }
 

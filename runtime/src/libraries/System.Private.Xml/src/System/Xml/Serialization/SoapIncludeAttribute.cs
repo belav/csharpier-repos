@@ -5,7 +5,13 @@ namespace System.Xml.Serialization
 {
     using System;
 
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface | AttributeTargets.Method, AllowMultiple = true)]
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Interface
+            | AttributeTargets.Method,
+        AllowMultiple = true
+    )]
     public class SoapIncludeAttribute : System.Attribute
     {
         private Type _type;

@@ -15,12 +15,23 @@ namespace Microsoft.AspNetCore.Razor.Language
             {
                 repoRoot = AppContext.BaseDirectory;
             }
-            
+
             var projectDirectory = Path.Combine(repoRoot, "src", "Razor", directoryHint, "test");
 
-            if (string.Equals(directoryHint, "Microsoft.AspNetCore.Razor.Language.Test", StringComparison.Ordinal))
-            {
-                projectDirectory = Path.Combine(repoRoot, "src", "Razor", "Microsoft.AspNetCore.Razor.Language", "test");
+            if (
+                string.Equals(
+                    directoryHint,
+                    "Microsoft.AspNetCore.Razor.Language.Test",
+                    StringComparison.Ordinal
+                )
+            ) {
+                projectDirectory = Path.Combine(
+                    repoRoot,
+                    "src",
+                    "Razor",
+                    "Microsoft.AspNetCore.Razor.Language",
+                    "test"
+                );
             }
 
             return projectDirectory;
@@ -36,9 +47,20 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             var assemblyName = type.Assembly.GetName().Name;
             var projectDirectory = Path.Combine(repoRoot, "src", "Razor", assemblyName, "test");
-            if (string.Equals(assemblyName, "Microsoft.AspNetCore.Razor.Language.Test", StringComparison.Ordinal))
-            {
-                projectDirectory = Path.Combine(repoRoot, "src", "Razor", "Microsoft.AspNetCore.Razor.Language", "test");
+            if (
+                string.Equals(
+                    assemblyName,
+                    "Microsoft.AspNetCore.Razor.Language.Test",
+                    StringComparison.Ordinal
+                )
+            ) {
+                projectDirectory = Path.Combine(
+                    repoRoot,
+                    "src",
+                    "Razor",
+                    "Microsoft.AspNetCore.Razor.Language",
+                    "test"
+                );
             }
 
             return projectDirectory;
@@ -55,8 +77,7 @@ namespace Microsoft.AspNetCore.Razor.Language
                     return fileInfo.DirectoryName;
                 }
                 directoryInfo = directoryInfo.Parent;
-            }
-            while (directoryInfo.Parent != null);
+            } while (directoryInfo.Parent != null);
 
             return null;
         }

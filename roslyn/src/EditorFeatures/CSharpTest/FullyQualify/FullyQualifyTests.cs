@@ -20,130 +20,135 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FullyQualify
 {
     public class FullyQualifyTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public FullyQualifyTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+        public FullyQualifyTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpFullyQualifyCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpFullyQualifyCodeFixProvider());
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions)
-            => FlattenActions(actions);
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        ) => FlattenActions(actions);
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestTypeFromMultipleNamespaces1()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|IDictionary|] Method()
     {
         Goo();
     }
 }",
-@"class Class
+                @"class Class
 {
     System.Collections.IDictionary Method()
     {
         Goo();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestTypeFromMultipleNamespaces2()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|IDictionary|] Method()
     {
         Goo();
     }
 }",
-@"class Class
+                @"class Class
 {
     System.Collections.Generic.IDictionary Method()
     {
         Goo();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestGenericWithNoArgs()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|List|] Method()
     {
         Goo();
     }
 }",
-@"class Class
+                @"class Class
 {
     System.Collections.Generic.List Method()
     {
         Goo();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestGenericWithCorrectArgs()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|List<int>|] Method()
     {
         Goo();
     }
 }",
-@"class Class
+                @"class Class
 {
     System.Collections.Generic.List<int> Method()
     {
         Goo();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestSmartTagDisplayText()
         {
             await TestSmartTagTextAsync(
-@"class Class
+                @"class Class
 {
     [|List<int>|] Method()
     {
         Goo();
     }
 }",
-"System.Collections.Generic.List");
+                "System.Collections.Generic.List"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestGenericWithWrongArgs()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|List<int, string>|] Method()
     {
         Goo();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestNotOnVar1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"namespace N
+                @"namespace N
 {
     class var { }
 }
@@ -155,14 +160,15 @@ class C
         [|var|]
     }
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestNotOnVar2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"namespace N
+                @"namespace N
 {
     class Bar { }
 }
@@ -174,52 +180,55 @@ class C
         [|var|]
     }
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestGenericInLocalDeclaration()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Goo()
     {
         [|List<int>|] a = new List<int>();
     }
 }",
-@"class Class
+                @"class Class
 {
     void Goo()
     {
         System.Collections.Generic.List<int> a = new List<int>();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestGenericItemType()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Class
 {
     List<[|Int32|]> l;
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Class
 {
     List<System.Int32> l;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestGenerateWithExistingUsings()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -228,7 +237,7 @@ class Class
         Goo();
     }
 }",
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -236,14 +245,15 @@ class Class
     {
         Goo();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestGenerateInNamespace()
         {
             await TestInRegularAndScriptAsync(
-@"namespace N
+                @"namespace N
 {
     class Class
     {
@@ -253,7 +263,7 @@ class Class
         }
     }
 }",
-@"namespace N
+                @"namespace N
 {
     class Class
     {
@@ -262,14 +272,15 @@ class Class
             Goo();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestGenerateInNamespaceWithUsings()
         {
             await TestInRegularAndScriptAsync(
-@"namespace N
+                @"namespace N
 {
     using System;
 
@@ -281,7 +292,7 @@ class Class
         }
     }
 }",
-@"namespace N
+                @"namespace N
 {
     using System;
 
@@ -292,14 +303,15 @@ class Class
             Goo();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestExistingUsing()
         {
             await TestActionCountAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Class
 {
@@ -308,10 +320,11 @@ class Class
         Goo();
     }
 }",
-count: 1);
+                count: 1
+            );
 
             await TestInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Class
 {
@@ -320,7 +333,7 @@ class Class
         Goo();
     }
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Class
 {
@@ -328,14 +341,15 @@ class Class
     {
         Goo();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestMissingIfUniquelyBound()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Class
 {
@@ -343,14 +357,15 @@ class Class
     {
         Goo();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestMissingIfUniquelyBoundGeneric()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Class
 {
@@ -358,14 +373,15 @@ class Class
     {
         Goo();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestOnEnum()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Goo()
     {
@@ -382,7 +398,7 @@ namespace A
         Blue
     }
 }",
-@"class Class
+                @"class Class
 {
     void Goo()
     {
@@ -398,14 +414,15 @@ namespace A
         Green,
         Blue
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestOnClassInheritance()
         {
             await TestInRegularAndScriptAsync(
-@"class Class : [|Class2|]
+                @"class Class : [|Class2|]
 {
 }
 
@@ -415,7 +432,7 @@ namespace A
     {
     }
 }",
-@"class Class : A.Class2
+                @"class Class : A.Class2
 {
 }
 
@@ -424,14 +441,15 @@ namespace A
     class Class2
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestOnImplementedInterface()
         {
             await TestInRegularAndScriptAsync(
-@"class Class : [|IGoo|]
+                @"class Class : [|IGoo|]
 {
 }
 
@@ -441,7 +459,7 @@ namespace A
     {
     }
 }",
-@"class Class : A.IGoo
+                @"class Class : A.IGoo
 {
 }
 
@@ -450,14 +468,15 @@ namespace A
     interface IGoo
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestAllInBaseList()
         {
             await TestInRegularAndScriptAsync(
-@"class Class : [|IGoo|], Class2
+                @"class Class : [|IGoo|], Class2
 {
 }
 
@@ -474,7 +493,7 @@ namespace B
     {
     }
 }",
-@"class Class : B.IGoo, Class2
+                @"class Class : B.IGoo, Class2
 {
 }
 
@@ -490,10 +509,11 @@ namespace B
     interface IGoo
     {
     }
-}");
+}"
+            );
 
             await TestInRegularAndScriptAsync(
-@"class Class : B.IGoo, [|Class2|]
+                @"class Class : B.IGoo, [|Class2|]
 {
 }
 
@@ -510,7 +530,7 @@ namespace B
     {
     }
 }",
-@"class Class : B.IGoo, A.Class2
+                @"class Class : B.IGoo, A.Class2
 {
 }
 
@@ -526,35 +546,38 @@ namespace B
     interface IGoo
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestAttributeUnexpanded()
         {
             await TestInRegularAndScriptAsync(
-@"[[|Obsolete|]]
+                @"[[|Obsolete|]]
 class Class
 {
 }",
-@"[System.Obsolete]
+                @"[System.Obsolete]
 class Class
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestAttributeExpanded()
         {
             await TestInRegularAndScriptAsync(
-@"[[|ObsoleteAttribute|]]
+                @"[[|ObsoleteAttribute|]]
 class Class
 {
 }",
-@"[System.ObsoleteAttribute]
+                @"[System.ObsoleteAttribute]
 class Class
 {
-}");
+}"
+            );
         }
 
         [WorkItem(527360, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527360")]
@@ -562,7 +585,7 @@ class Class
         public async Task TestExtensionMethods()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class Goo
 {
@@ -571,7 +594,8 @@ class Goo
         var values = new List<int>() { 1, 2, 3 };
         values.[|Where|](i => i > 1);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(538018, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538018")]
@@ -579,7 +603,7 @@ class Goo
         public async Task TestAfterNew()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Goo()
     {
@@ -587,59 +611,62 @@ class Goo
         l = new [|List<int>|]();
     }
 }",
-@"class Class
+                @"class Class
 {
     void Goo()
     {
         List<int> l;
         l = new System.Collections.Generic.List<int>();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestArgumentsInMethodCall()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Test()
     {
         Console.WriteLine([|DateTime|].Today);
     }
 }",
-@"class Class
+                @"class Class
 {
     void Test()
     {
         Console.WriteLine(System.DateTime.Today);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestCallSiteArgs()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Test([|DateTime|] dt)
     {
     }
 }",
-@"class Class
+                @"class Class
 {
     void Test(System.DateTime dt)
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestUsePartialClass()
         {
             await TestInRegularAndScriptAsync(
-@"namespace A
+                @"namespace A
 {
     public class Class
     {
@@ -653,7 +680,7 @@ namespace B
     {
     }
 }",
-@"namespace A
+                @"namespace A
 {
     public class Class
     {
@@ -666,14 +693,15 @@ namespace B
     public partial class PClass
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestGenericClassInNestedNamespace()
         {
             await TestInRegularAndScriptAsync(
-@"namespace A
+                @"namespace A
 {
     namespace B
     {
@@ -690,7 +718,7 @@ namespace C
         [|GenericClass<int>|] c;
     }
 }",
-@"namespace A
+                @"namespace A
 {
     namespace B
     {
@@ -706,25 +734,27 @@ namespace C
     {
         A.B.GenericClass<int> c;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestBeforeStaticMethod()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void Test()
     {
         [|Math|].Sqrt();
     }",
-@"class Class
+                @"class Class
 {
     void Test()
     {
         System.Math.Sqrt();
-    }");
+    }"
+            );
         }
 
         [WorkItem(538136, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538136")]
@@ -732,7 +762,7 @@ namespace C
         public async Task TestBeforeNamespace()
         {
             await TestInRegularAndScriptAsync(
-@"namespace A
+                @"namespace A
 {
     class Class
     {
@@ -749,7 +779,7 @@ namespace B
         }
     }
 }",
-@"namespace A
+                @"namespace A
 {
     class Class
     {
@@ -765,7 +795,8 @@ namespace B
         {
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(527395, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527395")]
@@ -773,8 +804,9 @@ namespace B
         public async Task TestSimpleNameWithLeadingTrivia()
         {
             await TestInRegularAndScriptAsync(
-@"class Class { void Test() { /*goo*/[|Int32|] i; } }",
-@"class Class { void Test() { /*goo*/System.Int32 i; } }");
+                @"class Class { void Test() { /*goo*/[|Int32|] i; } }",
+                @"class Class { void Test() { /*goo*/System.Int32 i; } }"
+            );
         }
 
         [WorkItem(527395, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527395")]
@@ -782,8 +814,9 @@ namespace B
         public async Task TestGenericNameWithLeadingTrivia()
         {
             await TestInRegularAndScriptAsync(
-@"class Class { void Test() { /*goo*/[|List<int>|] l; } }",
-@"class Class { void Test() { /*goo*/System.Collections.Generic.List<int> l; } }");
+                @"class Class { void Test() { /*goo*/[|List<int>|] l; } }",
+                @"class Class { void Test() { /*goo*/System.Collections.Generic.List<int> l; } }"
+            );
         }
 
         [WorkItem(538740, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538740")]
@@ -791,7 +824,7 @@ namespace B
         public async Task TestFullyQualifyTypeName()
         {
             await TestInRegularAndScriptAsync(
-@"public class Program
+                @"public class Program
 {
     public class Inner
     {
@@ -802,7 +835,7 @@ class Test
 {
     [|Inner|] i;
 }",
-@"public class Program
+                @"public class Program
 {
     public class Inner
     {
@@ -812,7 +845,8 @@ class Test
 class Test
 {
     Program.Inner i;
-}");
+}"
+            );
         }
 
         [WorkItem(26887, "https://github.com/dotnet/roslyn/issues/26887")]
@@ -820,7 +854,7 @@ class Test
         public async Task TestFullyQualifyUnboundIdentifier3()
         {
             await TestInRegularAndScriptAsync(
-@"public class Program
+                @"public class Program
 {
     public class Inner
     {
@@ -831,7 +865,7 @@ class Test
 {
     public [|Inner|] Name
 }",
-@"public class Program
+                @"public class Program
 {
     public class Inner
     {
@@ -841,7 +875,8 @@ class Test
 class Test
 {
     public Program.Inner Name
-}");
+}"
+            );
         }
 
         [WorkItem(538740, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538740")]
@@ -849,7 +884,7 @@ class Test
         public async Task TestFullyQualifyTypeName_NotForGenericType()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Program<T>
+                @"class Program<T>
 {
     public class Inner
     {
@@ -859,7 +894,8 @@ class Test
 class Test
 {
     [|Inner|] i;
-}");
+}"
+            );
         }
 
         [WorkItem(538764, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538764")]
@@ -867,18 +903,19 @@ class Test
         public async Task TestFullyQualifyThroughAlias()
         {
             await TestInRegularAndScriptAsync(
-@"using Alias = System;
+                @"using Alias = System;
 
 class C
 {
     [|Int32|] i;
 }",
-@"using Alias = System;
+                @"using Alias = System;
 
 class C
 {
     Alias.Int32 i;
-}");
+}"
+            );
         }
 
         [WorkItem(538763, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538763")]
@@ -886,7 +923,7 @@ class C
         public async Task TestFullyQualifyPrioritizeTypesOverNamespaces1()
         {
             await TestInRegularAndScriptAsync(
-@"namespace Outer
+                @"namespace Outer
 {
     namespace C
     {
@@ -900,7 +937,7 @@ class Test
 {
     [|C|] c;
 }",
-@"namespace Outer
+                @"namespace Outer
 {
     namespace C
     {
@@ -913,7 +950,8 @@ class Test
 class Test
 {
     Outer.C.C c;
-}");
+}"
+            );
         }
 
         [WorkItem(538763, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538763")]
@@ -921,7 +959,7 @@ class Test
         public async Task TestFullyQualifyPrioritizeTypesOverNamespaces2()
         {
             await TestInRegularAndScriptAsync(
-@"namespace Outer
+                @"namespace Outer
 {
     namespace C
     {
@@ -935,7 +973,7 @@ class Test
 {
     [|C|] c;
 }",
-@"namespace Outer
+                @"namespace Outer
 {
     namespace C
     {
@@ -949,7 +987,8 @@ class Test
 {
     Outer.C c;
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [WorkItem(539853, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539853")]
@@ -957,9 +996,10 @@ index: 1);
         public async Task BugFix5950()
         {
             await TestAsync(
-@"using System.Console; WriteLine([|Expression|].Constant(123));",
-@"using System.Console; WriteLine(System.Linq.Expressions.Expression.Constant(123));",
-parseOptions: GetScriptOptions());
+                @"using System.Console; WriteLine([|Expression|].Constant(123));",
+                @"using System.Console; WriteLine(System.Linq.Expressions.Expression.Constant(123));",
+                parseOptions: GetScriptOptions()
+            );
         }
 
         [WorkItem(540318, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540318")]
@@ -967,7 +1007,7 @@ parseOptions: GetScriptOptions());
         public async Task TestAfterAlias()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -977,7 +1017,8 @@ class Program
     {
         System::[|Console|] :: WriteLine(""TEST"");
     }
-}");
+}"
+            );
         }
 
         [WorkItem(540942, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540942")]
@@ -985,7 +1026,7 @@ class Program
         public async Task TestMissingOnIncompleteStatement()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.IO;
 
 class C
@@ -993,7 +1034,8 @@ class C
     static void Main(string[] args)
     {
         [|Path|] }
-}");
+}"
+            );
         }
 
         [WorkItem(542643, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542643")]
@@ -1001,8 +1043,9 @@ class C
         public async Task TestAssemblyAttribute()
         {
             await TestInRegularAndScriptAsync(
-@"[assembly: [|InternalsVisibleTo|](""Project"")]",
-@"[assembly: System.Runtime.CompilerServices.InternalsVisibleTo(""Project"")]");
+                @"[assembly: [|InternalsVisibleTo|](""Project"")]",
+                @"[assembly: System.Runtime.CompilerServices.InternalsVisibleTo(""Project"")]"
+            );
         }
 
         [WorkItem(543388, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543388")]
@@ -1010,7 +1053,7 @@ class C
         public async Task TestMissingOnAliasName()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using [|GIBBERISH|] = Goo.GIBBERISH;
+                @"using [|GIBBERISH|] = Goo.GIBBERISH;
 
 class Program
 {
@@ -1025,20 +1068,22 @@ namespace Goo
     public class GIBBERISH
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestMissingOnAttributeOverloadResolutionError()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System.Runtime.InteropServices;
+                @"using System.Runtime.InteropServices;
 
 class M
 {
     [[|DllImport|]()]
     static extern int? My();
-}");
+}"
+            );
         }
 
         [WorkItem(544950, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544950")]
@@ -1046,7 +1091,7 @@ class M
         public async Task TestNotOnAbstractConstructor()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System.IO;
+                @"using System.IO;
 
 class Program
 {
@@ -1054,7 +1099,8 @@ class Program
     {
         var s = new [|Stream|]();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545774, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545774")]
@@ -1065,8 +1111,9 @@ class Program
             await TestActionCountAsync(input, 2);
 
             await TestInRegularAndScriptAsync(
-input,
-@"[ assembly : System.Runtime.InteropServices.Guid( ""9ed54f84-a89d-4fcd-a854-44251e925f09"" ) ] ");
+                input,
+                @"[ assembly : System.Runtime.InteropServices.Guid( ""9ed54f84-a89d-4fcd-a854-44251e925f09"" ) ] "
+            );
         }
 
         [WorkItem(546027, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546027")]
@@ -1074,7 +1121,7 @@ input,
         public async Task TestGeneratePropertyFromAttribute()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 [AttributeUsage(AttributeTargets.Class)]
 class MyAttrAttribute : Attribute
@@ -1084,7 +1131,8 @@ class MyAttrAttribute : Attribute
 [MyAttr(123, [|Version|] = 1)]
 class D
 {
-}");
+}"
+            );
         }
 
         [WorkItem(775448, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/775448")]
@@ -1093,7 +1141,7 @@ class D
         {
             // CS0308: The non-generic type 'A' cannot be used with type arguments
             await TestInRegularAndScriptAsync(
-@"using System.Collections;
+                @"using System.Collections;
 
 class Test
 {
@@ -1102,7 +1150,7 @@ class Test
         [|IEnumerable<int>|] f;
     }
 }",
-@"using System.Collections;
+                @"using System.Collections;
 
 class Test
 {
@@ -1110,7 +1158,8 @@ class Test
     {
         System.Collections.Generic.IEnumerable<int> f;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(947579, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/947579")]
@@ -1118,7 +1167,7 @@ class Test
         public async Task AmbiguousTypeFix()
         {
             await TestInRegularAndScriptAsync(
-@"using n1;
+                @"using n1;
 using n2;
 
 class B
@@ -1142,7 +1191,7 @@ namespace n2
     {
     }
 }",
-@"using n1;
+                @"using n1;
 using n2;
 
 class B
@@ -1165,7 +1214,8 @@ namespace n2
     class A
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(995857, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/995857")]
@@ -1173,7 +1223,7 @@ namespace n2
         public async Task NonPublicNamespaces()
         {
             await TestInRegularAndScriptAsync(
-@"namespace MS.Internal.Xaml
+                @"namespace MS.Internal.Xaml
 {
     private class A
     {
@@ -1194,7 +1244,7 @@ public class Program
         [|Xaml|]
     }
 }",
-@"namespace MS.Internal.Xaml
+                @"namespace MS.Internal.Xaml
 {
     private class A
     {
@@ -1214,10 +1264,11 @@ public class Program
     {
         System.Xaml
     }
-}");
+}"
+            );
 
             await TestInRegularAndScriptAsync(
-@"namespace MS.Internal.Xaml
+                @"namespace MS.Internal.Xaml
 {
     public class A
     {
@@ -1238,7 +1289,7 @@ public class Program
         [|Xaml|]
     }
 }",
-@"namespace MS.Internal.Xaml
+                @"namespace MS.Internal.Xaml
 {
     public class A
     {
@@ -1258,7 +1309,9 @@ public class Program
     {
         MS.Internal.Xaml
     }
-}", index: 1);
+}",
+                index: 1
+            );
         }
 
         [WorkItem(11071, "https://github.com/dotnet/roslyn/issues/11071")]
@@ -1266,7 +1319,7 @@ public class Program
         public async Task AmbiguousFixOrdering()
         {
             await TestInRegularAndScriptAsync(
-@"using n1;
+                @"using n1;
 using n2;
 
 [[|Inner|].C]
@@ -1290,7 +1343,7 @@ namespace n2
         }
     }
 }",
-@"using n1;
+                @"using n1;
 using n2;
 
 [n2.Inner.C]
@@ -1313,47 +1366,50 @@ namespace n2
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TupleTest()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     ([|IDictionary|], string) Method()
     {
         Goo();
     }
 }",
-@"class Class
+                @"class Class
 {
     (System.Collections.IDictionary, string) Method()
     {
         Goo();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TupleWithOneName()
         {
             await TestInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     ([|IDictionary|] a, string) Method()
     {
         Goo();
     }
 }",
-@"class Class
+                @"class Class
 {
     (System.Collections.IDictionary a, string) Method()
     {
         Goo();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(18275, "https://github.com/dotnet/roslyn/issues/18275")]
@@ -1361,7 +1417,7 @@ namespace n2
         public async Task TestContextualKeyword1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 namespace N
 {
     class nameof
@@ -1375,7 +1431,8 @@ class C
     {
         [|nameof|]
     }
-}");
+}"
+            );
         }
 
         [WorkItem(18623, "https://github.com/dotnet/roslyn/issues/18623")]
@@ -1383,19 +1440,21 @@ class C
         public async Task TestDoNotQualifyToTheSameTypeToFixWrongArity()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 using System.Collections.Generic;
 
 class Program : [|IReadOnlyCollection|]
 {
-}");
+}"
+            );
         }
 
         [WorkItem(19575, "https://github.com/dotnet/roslyn/issues/19575")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestNoNonGenericsWithGenericCodeParsedAsExpression()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     private void GetEvaluationRuleNames()
@@ -1407,8 +1466,8 @@ class C
             await TestActionCountAsync(code, count: 1);
 
             await TestInRegularAndScriptAsync(
-code,
-@"
+                code,
+                @"
 class C
 {
     private void GetEvaluationRuleNames()
@@ -1416,7 +1475,8 @@ class C
         System.Collections.Generic.IEnumerable < Int32 >
         return ImmutableArray.CreateRange();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(49986, "https://github.com/dotnet/roslyn/issues/49986")]
@@ -1424,7 +1484,7 @@ class C
         public async Task TestInUsingContext_Type()
         {
             await TestInRegularAndScriptAsync(
-@"using [|Math|];
+                @"using [|Math|];
 
 class Class
 {
@@ -1432,14 +1492,15 @@ class Class
     {
         Sqrt(1);
     }",
-@"using static System.Math;
+                @"using static System.Math;
 
 class Class
 {
     void Test()
     {
         Sqrt(1);
-    }");
+    }"
+            );
         }
 
         [WorkItem(49986, "https://github.com/dotnet/roslyn/issues/49986")]
@@ -1447,7 +1508,7 @@ class Class
         public async Task TestInUsingContext_Namespace()
         {
             await TestInRegularAndScriptAsync(
-@"using [|Collections|];
+                @"using [|Collections|];
 
 class Class
 {
@@ -1455,14 +1516,15 @@ class Class
     {
         Sqrt(1);
     }",
-@"using System.Collections;
+                @"using System.Collections;
 
 class Class
 {
     void Test()
     {
         Sqrt(1);
-    }");
+    }"
+            );
         }
 
         [WorkItem(49986, "https://github.com/dotnet/roslyn/issues/49986")]
@@ -1470,7 +1532,7 @@ class Class
         public async Task TestInUsingContext_UsingStatic()
         {
             await TestInRegularAndScriptAsync(
-@"using static [|Math|];
+                @"using static [|Math|];
 
 class Class
 {
@@ -1478,23 +1540,22 @@ class Class
     {
         Sqrt(1);
     }",
-@"using static System.Math;
+                @"using static System.Math;
 
 class Class
 {
     void Test()
     {
         Sqrt(1);
-    }");
+    }"
+            );
         }
 
         [WorkItem(51274, "https://github.com/dotnet/roslyn/issues/51274")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestInUsingContext_UsingAlias()
         {
-            await TestInRegularAndScriptAsync(
-@"using M = [|Math|]",
-@"using M = System.Math");
+            await TestInRegularAndScriptAsync(@"using M = [|Math|]", @"using M = System.Math");
         }
     }
 }

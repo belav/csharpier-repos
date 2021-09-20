@@ -12,8 +12,11 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
             return SHA384.Create();
         }
 
-        protected override bool TryHashData(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten)
-        {
+        protected override bool TryHashData(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        ) {
             return SHA384.TryHashData(source, destination, out bytesWritten);
         }
 
@@ -29,7 +32,8 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
         {
             Verify(
                 Array.Empty<byte>(),
-                "38B060A751AC96384CD9327EB1B1E36A21FDB71114BE07434C0CC7BF63F6E1DA274EDEBFE76F65FBD51AD2F14898B95B");
+                "38B060A751AC96384CD9327EB1B1E36A21FDB71114BE07434C0CC7BF63F6E1DA274EDEBFE76F65FBD51AD2F14898B95B"
+            );
         }
 
         // These test cases are from http://csrc.nist.gov/groups/ST/toolkit/documents/Examples/SHA_All.pdf
@@ -38,7 +42,8 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
         {
             Verify(
                 "abc",
-                "CB00753F45A35E8BB5A03D699AC65007272C32AB0EDED1631A8B605A43FF5BED8086072BA1E7CC2358BAECA134C825A7");
+                "CB00753F45A35E8BB5A03D699AC65007272C32AB0EDED1631A8B605A43FF5BED8086072BA1E7CC2358BAECA134C825A7"
+            );
         }
 
         [Fact]
@@ -48,7 +53,8 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
                 "a",
                 "bc",
                 "CB00753F45A35E8BB5A03D699AC65007272C32AB0EDED1631A8B605A43FF5BED8086072BA1E7CC2358BAECA134C825A7",
-                "38B060A751AC96384CD9327EB1B1E36A21FDB71114BE07434C0CC7BF63F6E1DA274EDEBFE76F65FBD51AD2F14898B95B");
+                "38B060A751AC96384CD9327EB1B1E36A21FDB71114BE07434C0CC7BF63F6E1DA274EDEBFE76F65FBD51AD2F14898B95B"
+            );
         }
 
         [Fact]
@@ -56,7 +62,8 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
         {
             Verify(
                 "abcdefghbcdefghicdefghijdefghijkefghijklfghijklmghijklmnhijklmnoijklmnopjklmnopqklmnopqrlmnopqrsmnopqrstnopqrstu",
-                "09330C33F71147E83D192FC782CD1B4753111B173B3B05D22FA08086E3B0F712FCC7C71A557E2DB966C3E9FA91746039");
+                "09330C33F71147E83D192FC782CD1B4753111B173B3B05D22FA08086E3B0F712FCC7C71A557E2DB966C3E9FA91746039"
+            );
         }
     }
 }

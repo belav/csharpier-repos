@@ -65,7 +65,7 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
         {
             Interlocked.Increment(ref stats.nontermsAdded);
         }
-        
+
         internal static void ItemCacheable()
         {
             Interlocked.Increment(ref stats.cacheableNodes);
@@ -83,28 +83,22 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             Console.WriteLine("Nonterminals added: " + nontermsAdded);
             Console.WriteLine("Nonterminals cacheable: " + cacheableNodes);
             Console.WriteLine("CacheHits: " + cacheHits);
-            Console.WriteLine("RateOfAll: " + (cacheHits * 100 / (cacheHits + greenNodes - greenTokens)) + "%");
+            Console.WriteLine(
+                "RateOfAll: " + (cacheHits * 100 / (cacheHits + greenNodes - greenTokens)) + "%"
+            );
             Console.WriteLine("RateOfCacheable: " + (cacheHits * 100 / (cacheableNodes)) + "%");
         }
 #else
-        internal static void NoteGreen(GreenNode node)
-        {
-        }
+        internal static void NoteGreen(GreenNode node) { }
 
         [Conditional("DEBUG")]
-        internal static void ItemAdded()
-        {
-        }
+        internal static void ItemAdded() { }
 
         [Conditional("DEBUG")]
-        internal static void ItemCacheable()
-        {
-        }
+        internal static void ItemCacheable() { }
 
         [Conditional("DEBUG")]
-        internal static void CacheHit()
-        {
-        }
+        internal static void CacheHit() { }
 #endif
     }
 
@@ -158,10 +152,11 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
 
         private static bool ChildInCache(GreenNode? child)
         {
-            // for the purpose of this function consider that 
+            // for the purpose of this function consider that
             // null nodes, tokens and trivias are cached somewhere else.
             // TODO: should use slotCount
-            if (child == null || child.SlotCount == 0) return true;
+            if (child == null || child.SlotCount == 0)
+                return true;
 
             int hash = child.GetCacheHash();
             int idx = hash & CacheMask;
@@ -188,8 +183,12 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             return TryGetNode(kind, child1, GetDefaultNodeFlags(), out hash);
         }
 
-        internal static GreenNode? TryGetNode(int kind, GreenNode? child1, GreenNode.NodeFlags flags, out int hash)
-        {
+        internal static GreenNode? TryGetNode(
+            int kind,
+            GreenNode? child1,
+            GreenNode.NodeFlags flags,
+            out int hash
+        ) {
             if (CanBeCached(child1))
             {
                 GreenStats.ItemCacheable();
@@ -211,13 +210,22 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             return null;
         }
 
-        internal static GreenNode? TryGetNode(int kind, GreenNode? child1, GreenNode? child2, out int hash)
-        {
+        internal static GreenNode? TryGetNode(
+            int kind,
+            GreenNode? child1,
+            GreenNode? child2,
+            out int hash
+        ) {
             return TryGetNode(kind, child1, child2, GetDefaultNodeFlags(), out hash);
         }
 
-        internal static GreenNode? TryGetNode(int kind, GreenNode? child1, GreenNode? child2, GreenNode.NodeFlags flags, out int hash)
-        {
+        internal static GreenNode? TryGetNode(
+            int kind,
+            GreenNode? child1,
+            GreenNode? child2,
+            GreenNode.NodeFlags flags,
+            out int hash
+        ) {
             if (CanBeCached(child1, child2))
             {
                 GreenStats.ItemCacheable();
@@ -225,8 +233,11 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
                 int h = hash = GetCacheHash(kind, flags, child1, child2);
                 int idx = h & CacheMask;
                 var e = s_cache[idx];
-                if (e.hash == h && e.node != null && e.node.IsCacheEquivalent(kind, flags, child1, child2))
-                {
+                if (
+                    e.hash == h
+                    && e.node != null
+                    && e.node.IsCacheEquivalent(kind, flags, child1, child2)
+                ) {
                     GreenStats.CacheHit();
                     return e.node;
                 }
@@ -239,13 +250,24 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             return null;
         }
 
-        internal static GreenNode? TryGetNode(int kind, GreenNode? child1, GreenNode? child2, GreenNode? child3, out int hash)
-        {
+        internal static GreenNode? TryGetNode(
+            int kind,
+            GreenNode? child1,
+            GreenNode? child2,
+            GreenNode? child3,
+            out int hash
+        ) {
             return TryGetNode(kind, child1, child2, child3, GetDefaultNodeFlags(), out hash);
         }
 
-        internal static GreenNode? TryGetNode(int kind, GreenNode? child1, GreenNode? child2, GreenNode? child3, GreenNode.NodeFlags flags, out int hash)
-        {
+        internal static GreenNode? TryGetNode(
+            int kind,
+            GreenNode? child1,
+            GreenNode? child2,
+            GreenNode? child3,
+            GreenNode.NodeFlags flags,
+            out int hash
+        ) {
             if (CanBeCached(child1, child2, child3))
             {
                 GreenStats.ItemCacheable();
@@ -253,8 +275,11 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
                 int h = hash = GetCacheHash(kind, flags, child1, child2, child3);
                 int idx = h & CacheMask;
                 var e = s_cache[idx];
-                if (e.hash == h && e.node != null && e.node.IsCacheEquivalent(kind, flags, child1, child2, child3))
-                {
+                if (
+                    e.hash == h
+                    && e.node != null
+                    && e.node.IsCacheEquivalent(kind, flags, child1, child2, child3)
+                ) {
                     GreenStats.CacheHit();
                     return e.node;
                 }
@@ -277,44 +302,71 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             int code = (int)(flags) ^ kind;
             // the only child is never null
             // https://github.com/dotnet/roslyn/issues/41539
-            code = Hash.Combine(System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(child1!), code);
+            code = Hash.Combine(
+                System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(child1!),
+                code
+            );
 
             // ensure nonnegative hash
             return code & Int32.MaxValue;
         }
 
-        private static int GetCacheHash(int kind, GreenNode.NodeFlags flags, GreenNode? child1, GreenNode? child2)
-        {
+        private static int GetCacheHash(
+            int kind,
+            GreenNode.NodeFlags flags,
+            GreenNode? child1,
+            GreenNode? child2
+        ) {
             int code = (int)(flags) ^ kind;
 
             if (child1 != null)
             {
-                code = Hash.Combine(System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(child1), code);
+                code = Hash.Combine(
+                    System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(child1),
+                    code
+                );
             }
             if (child2 != null)
             {
-                code = Hash.Combine(System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(child2), code);
+                code = Hash.Combine(
+                    System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(child2),
+                    code
+                );
             }
 
             // ensure nonnegative hash
             return code & Int32.MaxValue;
         }
 
-        private static int GetCacheHash(int kind, GreenNode.NodeFlags flags, GreenNode? child1, GreenNode? child2, GreenNode? child3)
-        {
+        private static int GetCacheHash(
+            int kind,
+            GreenNode.NodeFlags flags,
+            GreenNode? child1,
+            GreenNode? child2,
+            GreenNode? child3
+        ) {
             int code = (int)(flags) ^ kind;
 
             if (child1 != null)
             {
-                code = Hash.Combine(System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(child1), code);
+                code = Hash.Combine(
+                    System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(child1),
+                    code
+                );
             }
             if (child2 != null)
             {
-                code = Hash.Combine(System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(child2), code);
+                code = Hash.Combine(
+                    System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(child2),
+                    code
+                );
             }
             if (child3 != null)
             {
-                code = Hash.Combine(System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(child3), code);
+                code = Hash.Combine(
+                    System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(child3),
+                    code
+                );
             }
 
             // ensure nonnegative hash

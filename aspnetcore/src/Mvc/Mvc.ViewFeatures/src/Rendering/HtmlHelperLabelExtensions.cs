@@ -35,8 +35,11 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         /// <param name="expression">Expression name, relative to the current model.</param>
         /// <param name="labelText">The inner text of the element.</param>
         /// <returns>A new <see cref="IHtmlContent"/> containing the &lt;label&gt; element.</returns>
-        public static IHtmlContent Label(this IHtmlHelper htmlHelper, string expression, string labelText)
-        {
+        public static IHtmlContent Label(
+            this IHtmlHelper htmlHelper,
+            string expression,
+            string labelText
+        ) {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -55,8 +58,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         /// <returns>A new <see cref="IHtmlContent"/> containing the &lt;label&gt; element.</returns>
         public static IHtmlContent LabelFor<TModel, TResult>(
             this IHtmlHelper<TModel> htmlHelper,
-            Expression<Func<TModel, TResult>> expression)
-        {
+            Expression<Func<TModel, TResult>> expression
+        ) {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -82,8 +85,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent LabelFor<TModel, TResult>(
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression,
-            string labelText)
-        {
+            string labelText
+        ) {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -113,8 +116,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent LabelFor<TModel, TResult>(
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TResult>> expression,
-            object htmlAttributes)
-        {
+            object htmlAttributes
+        ) {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
@@ -125,7 +128,11 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 throw new ArgumentNullException(nameof(expression));
             }
 
-            return htmlHelper.LabelFor<TResult>(expression, labelText: null, htmlAttributes: htmlAttributes);
+            return htmlHelper.LabelFor<TResult>(
+                expression,
+                labelText: null,
+                htmlAttributes: htmlAttributes
+            );
         }
 
         /// <summary>
@@ -176,7 +183,11 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 throw new ArgumentNullException(nameof(htmlHelper));
             }
 
-            return htmlHelper.Label(expression: null, labelText: null, htmlAttributes: htmlAttributes);
+            return htmlHelper.Label(
+                expression: null,
+                labelText: null,
+                htmlAttributes: htmlAttributes
+            );
         }
 
         /// <summary>
@@ -193,14 +204,18 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent LabelForModel(
             this IHtmlHelper htmlHelper,
             string labelText,
-            object htmlAttributes)
-        {
+            object htmlAttributes
+        ) {
             if (htmlHelper == null)
             {
                 throw new ArgumentNullException(nameof(htmlHelper));
             }
 
-            return htmlHelper.Label(expression: null, labelText: labelText, htmlAttributes: htmlAttributes);
+            return htmlHelper.Label(
+                expression: null,
+                labelText: labelText,
+                htmlAttributes: htmlAttributes
+            );
         }
     }
 }

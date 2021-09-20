@@ -10,25 +10,34 @@ namespace Microsoft.CodeAnalysis.Host
 {
     internal class NoOpPersistentStorageService : IChecksummedPersistentStorageService
     {
-        public static readonly IPersistentStorageService Instance = new NoOpPersistentStorageService();
+        public static readonly IPersistentStorageService Instance =
+            new NoOpPersistentStorageService();
 
-        private NoOpPersistentStorageService()
-        {
-        }
+        private NoOpPersistentStorageService() { }
 
-        public IPersistentStorage GetStorage(Solution solution)
-            => NoOpPersistentStorage.Instance;
+        public IPersistentStorage GetStorage(Solution solution) => NoOpPersistentStorage.Instance;
 
-        public ValueTask<IPersistentStorage> GetStorageAsync(Solution solution, CancellationToken cancellationToken)
-            => new(NoOpPersistentStorage.Instance);
+        public ValueTask<IPersistentStorage> GetStorageAsync(
+            Solution solution,
+            CancellationToken cancellationToken
+        ) => new(NoOpPersistentStorage.Instance);
 
-        ValueTask<IChecksummedPersistentStorage> IChecksummedPersistentStorageService.GetStorageAsync(Solution solution, CancellationToken cancellationToken)
-            => new(NoOpPersistentStorage.Instance);
+        ValueTask<IChecksummedPersistentStorage> IChecksummedPersistentStorageService.GetStorageAsync(
+            Solution solution,
+            CancellationToken cancellationToken
+        ) => new(NoOpPersistentStorage.Instance);
 
-        ValueTask<IChecksummedPersistentStorage> IChecksummedPersistentStorageService.GetStorageAsync(Solution solution, bool checkBranchId, CancellationToken cancellationToken)
-            => new(NoOpPersistentStorage.Instance);
+        ValueTask<IChecksummedPersistentStorage> IChecksummedPersistentStorageService.GetStorageAsync(
+            Solution solution,
+            bool checkBranchId,
+            CancellationToken cancellationToken
+        ) => new(NoOpPersistentStorage.Instance);
 
-        ValueTask<IChecksummedPersistentStorage> IChecksummedPersistentStorageService.GetStorageAsync(Workspace workspace, SolutionKey solutionKey, bool checkBranchId, CancellationToken cancellationToken)
-            => new(NoOpPersistentStorage.Instance);
+        ValueTask<IChecksummedPersistentStorage> IChecksummedPersistentStorageService.GetStorageAsync(
+            Workspace workspace,
+            SolutionKey solutionKey,
+            bool checkBranchId,
+            CancellationToken cancellationToken
+        ) => new(NoOpPersistentStorage.Instance);
     }
 }

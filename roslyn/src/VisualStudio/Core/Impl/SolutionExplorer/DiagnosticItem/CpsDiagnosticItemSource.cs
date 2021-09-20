@@ -13,7 +13,9 @@ using Microsoft.VisualStudio.Shell;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplorer
 {
-    internal partial class CpsDiagnosticItemSource : BaseDiagnosticAndGeneratorItemSource, INotifyPropertyChanged
+    internal partial class CpsDiagnosticItemSource
+        : BaseDiagnosticAndGeneratorItemSource,
+          INotifyPropertyChanged
     {
         private readonly IVsHierarchyItem _item;
         private readonly string _projectDirectoryPath;
@@ -22,8 +24,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public CpsDiagnosticItemSource(Workspace workspace, string projectPath, ProjectId projectId, IVsHierarchyItem item, IAnalyzersCommandHandler commandHandler, IDiagnosticAnalyzerService analyzerService)
-            : base(workspace, projectId, commandHandler, analyzerService)
+        public CpsDiagnosticItemSource(
+            Workspace workspace,
+            string projectPath,
+            ProjectId projectId,
+            IVsHierarchyItem item,
+            IAnalyzersCommandHandler commandHandler,
+            IDiagnosticAnalyzerService analyzerService
+        ) : base(workspace, projectId, commandHandler, analyzerService)
         {
             _item = item;
             _projectDirectoryPath = Path.GetDirectoryName(projectPath);
@@ -37,7 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             }
         }
 
-        public IContextMenuController DiagnosticItemContextMenuController => CommandHandler.DiagnosticContextMenuController;
+        public IContextMenuController DiagnosticItemContextMenuController =>
+            CommandHandler.DiagnosticContextMenuController;
 
         public override object SourceItem => _item;
 
@@ -45,10 +54,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
         private void OnWorkspaceChangedLookForAnalyzer(object sender, WorkspaceChangeEventArgs e)
         {
-            if (e.Kind == WorkspaceChangeKind.SolutionCleared ||
-                e.Kind == WorkspaceChangeKind.SolutionReloaded ||
-                e.Kind == WorkspaceChangeKind.SolutionRemoved)
-            {
+            if (
+                e.Kind == WorkspaceChangeKind.SolutionCleared
+                || e.Kind == WorkspaceChangeKind.SolutionReloaded
+                || e.Kind == WorkspaceChangeKind.SolutionRemoved
+            ) {
                 Workspace.WorkspaceChanged -= OnWorkspaceChangedLookForAnalyzer;
             }
             else if (e.Kind == WorkspaceChangeKind.SolutionAdded)
@@ -67,15 +77,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 {
                     Workspace.WorkspaceChanged -= OnWorkspaceChangedLookForAnalyzer;
                 }
-                else if (e.Kind == WorkspaceChangeKind.ProjectAdded
-                         || e.Kind == WorkspaceChangeKind.ProjectChanged)
-                {
+                else if (
+                    e.Kind == WorkspaceChangeKind.ProjectAdded
+                    || e.Kind == WorkspaceChangeKind.ProjectChanged
+                ) {
                     _analyzerReference = TryGetAnalyzerReference(e.NewSolution);
                     if (_analyzerReference != null)
                     {
                         Workspace.WorkspaceChanged -= OnWorkspaceChangedLookForAnalyzer;
 
-                        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HasItems)));
+                        PropertyChanged?.Invoke(
+                            this,
+                            new PropertyChangedEventArgs(nameof(HasItems))
+                        );
                     }
                 }
             }
@@ -91,14 +105,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             }
 
             var canonicalName = _item.CanonicalName;
-            var analyzerFilePath = CpsUtilities.ExtractAnalyzerFilePath(_projectDirectoryPath, canonicalName);
+            var analyzerFilePath = CpsUtilities.ExtractAnalyzerFilePath(
+                _projectDirectoryPath,
+                canonicalName
+            );
 
             if (string.IsNullOrEmpty(analyzerFilePath))
             {
                 return null;
             }
 
-            return project.AnalyzerReferences.FirstOrDefault(r => string.Equals(r.FullPath, analyzerFilePath, StringComparison.OrdinalIgnoreCase));
+            return project.AnalyzerReferences.FirstOrDefault(
+                r => string.Equals(r.FullPath, analyzerFilePath, StringComparison.OrdinalIgnoreCase)
+            );
         }
     }
 }

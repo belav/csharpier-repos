@@ -10,13 +10,19 @@ namespace System.Text.Json.Serialization.Converters
             IsInternalConverterForNumberType = true;
         }
 
-        public override double Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
+        public override double Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        ) {
             return reader.GetDouble();
         }
 
-        public override void Write(Utf8JsonWriter writer, double value, JsonSerializerOptions options)
-        {
+        public override void Write(
+            Utf8JsonWriter writer,
+            double value,
+            JsonSerializerOptions options
+        ) {
             writer.WriteNumberValue(value);
         }
 
@@ -25,13 +31,19 @@ namespace System.Text.Json.Serialization.Converters
             return reader.GetDoubleWithQuotes();
         }
 
-        internal override void WriteWithQuotes(Utf8JsonWriter writer, double value, JsonSerializerOptions options, ref WriteStack state)
-        {
+        internal override void WriteWithQuotes(
+            Utf8JsonWriter writer,
+            double value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        ) {
             writer.WritePropertyName(value);
         }
 
-        internal override double ReadNumberWithCustomHandling(ref Utf8JsonReader reader, JsonNumberHandling handling)
-        {
+        internal override double ReadNumberWithCustomHandling(
+            ref Utf8JsonReader reader,
+            JsonNumberHandling handling
+        ) {
             if (reader.TokenType == JsonTokenType.String)
             {
                 if ((JsonNumberHandling.AllowReadingFromString & handling) != 0)
@@ -47,8 +59,11 @@ namespace System.Text.Json.Serialization.Converters
             return reader.GetDouble();
         }
 
-        internal override void WriteNumberWithCustomHandling(Utf8JsonWriter writer, double value, JsonNumberHandling handling)
-        {
+        internal override void WriteNumberWithCustomHandling(
+            Utf8JsonWriter writer,
+            double value,
+            JsonNumberHandling handling
+        ) {
             if ((JsonNumberHandling.WriteAsString & handling) != 0)
             {
                 writer.WriteNumberValueAsString(value);

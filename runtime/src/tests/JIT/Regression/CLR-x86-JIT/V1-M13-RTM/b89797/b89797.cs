@@ -21,7 +21,20 @@ internal unsafe class testout1
     {
         ulong* a2_1 = stackalloc ulong[1];
         *a2_1 = 5565938416278830848UL;
-        ulong retval_1 = Convert.ToUInt64(Convert.ToUInt64(Convert.ToUInt64(Convert.ToInt32((Convert.ToInt32((Convert.ToInt32(vt_1.a1_1)) % (Convert.ToInt32(s_a3_1))))) + Convert.ToInt64(Convert.ToInt64(Convert.ToInt16(vt_1.a0_1) + Convert.ToInt64(vtstatic_1.a4_1)))) + (*a2_1)));
+        ulong retval_1 = Convert.ToUInt64(
+            Convert.ToUInt64(
+                Convert.ToUInt64(
+                    Convert.ToInt32(
+                        (Convert.ToInt32((Convert.ToInt32(vt_1.a1_1)) % (Convert.ToInt32(s_a3_1))))
+                    )
+                        + Convert.ToInt64(
+                            Convert.ToInt64(
+                                Convert.ToInt16(vt_1.a0_1) + Convert.ToInt64(vtstatic_1.a4_1)
+                            )
+                        )
+                ) + (*a2_1)
+            )
+        );
         return retval_1;
     }
 

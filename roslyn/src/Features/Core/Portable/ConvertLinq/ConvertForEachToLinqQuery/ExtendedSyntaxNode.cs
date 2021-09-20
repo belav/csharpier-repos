@@ -21,16 +21,14 @@ namespace Microsoft.CodeAnalysis.ConvertLinq.ConvertForEachToLinqQuery
         public ExtendedSyntaxNode(
             SyntaxNode node,
             IEnumerable<SyntaxToken> extraLeadingTokens,
-            IEnumerable<SyntaxToken> extraTrailingTokens)
-         : this(node, extraLeadingTokens.GetTrivia(), extraTrailingTokens.GetTrivia())
-        {
-        }
+            IEnumerable<SyntaxToken> extraTrailingTokens
+        ) : this(node, extraLeadingTokens.GetTrivia(), extraTrailingTokens.GetTrivia()) { }
 
         public ExtendedSyntaxNode(
             SyntaxNode node,
             IEnumerable<SyntaxTrivia> extraLeadingComments,
-            IEnumerable<SyntaxTrivia> extraTrailingComments)
-        {
+            IEnumerable<SyntaxTrivia> extraTrailingComments
+        ) {
             Node = node;
             ExtraLeadingComments = extraLeadingComments.ToImmutableArray();
             ExtraTrailingComments = extraTrailingComments.ToImmutableArray();

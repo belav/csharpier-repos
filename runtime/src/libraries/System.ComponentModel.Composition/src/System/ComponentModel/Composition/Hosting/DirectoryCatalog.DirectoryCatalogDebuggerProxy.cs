@@ -28,16 +28,13 @@ namespace System.ComponentModel.Composition.Hosting
                 get
                 {
                     return _catalog._assemblyCatalogs.Values.Select(catalog => catalog.Assembly)
-                                                                 .ToReadOnlyCollection();
+                        .ToReadOnlyCollection();
                 }
             }
 
             public ReflectionContext? ReflectionContext
             {
-                get
-                {
-                    return _catalog._reflectionContext;
-                }
+                get { return _catalog._reflectionContext; }
             }
 
             public string SearchPattern

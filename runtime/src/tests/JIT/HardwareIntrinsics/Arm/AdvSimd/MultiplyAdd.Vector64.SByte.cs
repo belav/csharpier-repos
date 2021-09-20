@@ -125,14 +125,24 @@ namespace JIT.HardwareIntrinsics.Arm
 
             private ulong alignment;
 
-            public DataTable(SByte[] inArray1, SByte[] inArray2, SByte[] inArray3, SByte[] outArray, int alignment)
-            {
+            public DataTable(
+                SByte[] inArray1,
+                SByte[] inArray2,
+                SByte[] inArray3,
+                SByte[] outArray,
+                int alignment
+            ) {
                 int sizeOfinArray1 = inArray1.Length * Unsafe.SizeOf<SByte>();
                 int sizeOfinArray2 = inArray2.Length * Unsafe.SizeOf<SByte>();
                 int sizeOfinArray3 = inArray3.Length * Unsafe.SizeOf<SByte>();
                 int sizeOfoutArray = outArray.Length * Unsafe.SizeOf<SByte>();
-                if ((alignment != 16 && alignment != 8) || (alignment * 2) < sizeOfinArray1 || (alignment * 2) < sizeOfinArray2 || (alignment * 2) < sizeOfinArray3 || (alignment * 2) < sizeOfoutArray)
-                {
+                if (
+                    (alignment != 16 && alignment != 8)
+                    || (alignment * 2) < sizeOfinArray1
+                    || (alignment * 2) < sizeOfinArray2
+                    || (alignment * 2) < sizeOfinArray3
+                    || (alignment * 2) < sizeOfoutArray
+                ) {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -148,15 +158,31 @@ namespace JIT.HardwareIntrinsics.Arm
 
                 this.alignment = (ulong)alignment;
 
-                Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArray1Ptr), ref Unsafe.As<SByte, byte>(ref inArray1[0]), (uint)sizeOfinArray1);
-                Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArray2Ptr), ref Unsafe.As<SByte, byte>(ref inArray2[0]), (uint)sizeOfinArray2);
-                Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArray3Ptr), ref Unsafe.As<SByte, byte>(ref inArray3[0]), (uint)sizeOfinArray3);
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.AsRef<byte>(inArray1Ptr),
+                    ref Unsafe.As<SByte, byte>(ref inArray1[0]),
+                    (uint)sizeOfinArray1
+                );
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.AsRef<byte>(inArray2Ptr),
+                    ref Unsafe.As<SByte, byte>(ref inArray2[0]),
+                    (uint)sizeOfinArray2
+                );
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.AsRef<byte>(inArray3Ptr),
+                    ref Unsafe.As<SByte, byte>(ref inArray3[0]),
+                    (uint)sizeOfinArray3
+                );
             }
 
-            public void* inArray1Ptr => Align((byte*)(inHandle1.AddrOfPinnedObject().ToPointer()), alignment);
-            public void* inArray2Ptr => Align((byte*)(inHandle2.AddrOfPinnedObject().ToPointer()), alignment);
-            public void* inArray3Ptr => Align((byte*)(inHandle3.AddrOfPinnedObject().ToPointer()), alignment);
-            public void* outArrayPtr => Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* inArray1Ptr =>
+                Align((byte*)(inHandle1.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* inArray2Ptr =>
+                Align((byte*)(inHandle2.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* inArray3Ptr =>
+                Align((byte*)(inHandle3.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* outArrayPtr =>
+                Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
 
             public void Dispose()
             {
@@ -182,29 +208,52 @@ namespace JIT.HardwareIntrinsics.Arm
             {
                 var testStruct = new TestStruct();
 
-                for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetSByte(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector64<SByte>, byte>(ref testStruct._fld1), ref Unsafe.As<SByte, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector64<SByte>>());
-                for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = TestLibrary.Generator.GetSByte(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector64<SByte>, byte>(ref testStruct._fld2), ref Unsafe.As<SByte, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector64<SByte>>());
-                for (var i = 0; i < Op3ElementCount; i++) { _data3[i] = TestLibrary.Generator.GetSByte(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector64<SByte>, byte>(ref testStruct._fld3), ref Unsafe.As<SByte, byte>(ref _data3[0]), (uint)Unsafe.SizeOf<Vector64<SByte>>());
+                for (var i = 0; i < Op1ElementCount; i++)
+                {
+                    _data1[i] = TestLibrary.Generator.GetSByte();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector64<SByte>, byte>(ref testStruct._fld1),
+                    ref Unsafe.As<SByte, byte>(ref _data1[0]),
+                    (uint)Unsafe.SizeOf<Vector64<SByte>>()
+                );
+                for (var i = 0; i < Op2ElementCount; i++)
+                {
+                    _data2[i] = TestLibrary.Generator.GetSByte();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector64<SByte>, byte>(ref testStruct._fld2),
+                    ref Unsafe.As<SByte, byte>(ref _data2[0]),
+                    (uint)Unsafe.SizeOf<Vector64<SByte>>()
+                );
+                for (var i = 0; i < Op3ElementCount; i++)
+                {
+                    _data3[i] = TestLibrary.Generator.GetSByte();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector64<SByte>, byte>(ref testStruct._fld3),
+                    ref Unsafe.As<SByte, byte>(ref _data3[0]),
+                    (uint)Unsafe.SizeOf<Vector64<SByte>>()
+                );
 
                 return testStruct;
             }
 
-            public void RunStructFldScenario(SimpleTernaryOpTest__MultiplyAdd_Vector64_SByte testClass)
-            {
+            public void RunStructFldScenario(
+                SimpleTernaryOpTest__MultiplyAdd_Vector64_SByte testClass
+            ) {
                 var result = AdvSimd.MultiplyAdd(_fld1, _fld2, _fld3);
 
                 Unsafe.Write(testClass._dataTable.outArrayPtr, result);
                 testClass.ValidateResult(_fld1, _fld2, _fld3, testClass._dataTable.outArrayPtr);
             }
 
-            public void RunStructFldScenario_Load(SimpleTernaryOpTest__MultiplyAdd_Vector64_SByte testClass)
-            {
-                fixed (Vector64<SByte>* pFld1 = &_fld1)
-                fixed (Vector64<SByte>* pFld2 = &_fld2)
-                fixed (Vector64<SByte>* pFld3 = &_fld3)
+            public void RunStructFldScenario_Load(
+                SimpleTernaryOpTest__MultiplyAdd_Vector64_SByte testClass
+            ) {
+                fixed (Vector64<SByte>* pFld1 = &_fld1)fixed (
+                    Vector64<SByte>* pFld2 = &_fld2
+                )fixed (Vector64<SByte>* pFld3 = &_fld3)
                 {
                     var result = AdvSimd.MultiplyAdd(
                         AdvSimd.LoadVector64((SByte*)(pFld1)),
@@ -220,10 +269,14 @@ namespace JIT.HardwareIntrinsics.Arm
 
         private static readonly int LargestVectorSize = 8;
 
-        private static readonly int Op1ElementCount = Unsafe.SizeOf<Vector64<SByte>>() / sizeof(SByte);
-        private static readonly int Op2ElementCount = Unsafe.SizeOf<Vector64<SByte>>() / sizeof(SByte);
-        private static readonly int Op3ElementCount = Unsafe.SizeOf<Vector64<SByte>>() / sizeof(SByte);
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector64<SByte>>() / sizeof(SByte);
+        private static readonly int Op1ElementCount =
+            Unsafe.SizeOf<Vector64<SByte>>() / sizeof(SByte);
+        private static readonly int Op2ElementCount =
+            Unsafe.SizeOf<Vector64<SByte>>() / sizeof(SByte);
+        private static readonly int Op3ElementCount =
+            Unsafe.SizeOf<Vector64<SByte>>() / sizeof(SByte);
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector64<SByte>>() / sizeof(SByte);
 
         private static SByte[] _data1 = new SByte[Op1ElementCount];
         private static SByte[] _data2 = new SByte[Op2ElementCount];
@@ -241,29 +294,86 @@ namespace JIT.HardwareIntrinsics.Arm
 
         static SimpleTernaryOpTest__MultiplyAdd_Vector64_SByte()
         {
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetSByte(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector64<SByte>, byte>(ref _clsVar1), ref Unsafe.As<SByte, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector64<SByte>>());
-            for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = TestLibrary.Generator.GetSByte(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector64<SByte>, byte>(ref _clsVar2), ref Unsafe.As<SByte, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector64<SByte>>());
-            for (var i = 0; i < Op3ElementCount; i++) { _data3[i] = TestLibrary.Generator.GetSByte(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector64<SByte>, byte>(ref _clsVar3), ref Unsafe.As<SByte, byte>(ref _data3[0]), (uint)Unsafe.SizeOf<Vector64<SByte>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetSByte();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector64<SByte>, byte>(ref _clsVar1),
+                ref Unsafe.As<SByte, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector64<SByte>>()
+            );
+            for (var i = 0; i < Op2ElementCount; i++)
+            {
+                _data2[i] = TestLibrary.Generator.GetSByte();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector64<SByte>, byte>(ref _clsVar2),
+                ref Unsafe.As<SByte, byte>(ref _data2[0]),
+                (uint)Unsafe.SizeOf<Vector64<SByte>>()
+            );
+            for (var i = 0; i < Op3ElementCount; i++)
+            {
+                _data3[i] = TestLibrary.Generator.GetSByte();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector64<SByte>, byte>(ref _clsVar3),
+                ref Unsafe.As<SByte, byte>(ref _data3[0]),
+                (uint)Unsafe.SizeOf<Vector64<SByte>>()
+            );
         }
 
         public SimpleTernaryOpTest__MultiplyAdd_Vector64_SByte()
         {
             Succeeded = true;
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetSByte(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector64<SByte>, byte>(ref _fld1), ref Unsafe.As<SByte, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector64<SByte>>());
-            for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = TestLibrary.Generator.GetSByte(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector64<SByte>, byte>(ref _fld2), ref Unsafe.As<SByte, byte>(ref _data2[0]), (uint)Unsafe.SizeOf<Vector64<SByte>>());
-            for (var i = 0; i < Op3ElementCount; i++) { _data3[i] = TestLibrary.Generator.GetSByte(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector64<SByte>, byte>(ref _fld3), ref Unsafe.As<SByte, byte>(ref _data3[0]), (uint)Unsafe.SizeOf<Vector64<SByte>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetSByte();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector64<SByte>, byte>(ref _fld1),
+                ref Unsafe.As<SByte, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector64<SByte>>()
+            );
+            for (var i = 0; i < Op2ElementCount; i++)
+            {
+                _data2[i] = TestLibrary.Generator.GetSByte();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector64<SByte>, byte>(ref _fld2),
+                ref Unsafe.As<SByte, byte>(ref _data2[0]),
+                (uint)Unsafe.SizeOf<Vector64<SByte>>()
+            );
+            for (var i = 0; i < Op3ElementCount; i++)
+            {
+                _data3[i] = TestLibrary.Generator.GetSByte();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector64<SByte>, byte>(ref _fld3),
+                ref Unsafe.As<SByte, byte>(ref _data3[0]),
+                (uint)Unsafe.SizeOf<Vector64<SByte>>()
+            );
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetSByte(); }
-            for (var i = 0; i < Op2ElementCount; i++) { _data2[i] = TestLibrary.Generator.GetSByte(); }
-            for (var i = 0; i < Op3ElementCount; i++) { _data3[i] = TestLibrary.Generator.GetSByte(); }
-            _dataTable = new DataTable(_data1, _data2, _data3, new SByte[RetElementCount], LargestVectorSize);
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetSByte();
+            }
+            for (var i = 0; i < Op2ElementCount; i++)
+            {
+                _data2[i] = TestLibrary.Generator.GetSByte();
+            }
+            for (var i = 0; i < Op3ElementCount; i++)
+            {
+                _data3[i] = TestLibrary.Generator.GetSByte();
+            }
+            _dataTable = new DataTable(
+                _data1,
+                _data2,
+                _data3,
+                new SByte[RetElementCount],
+                LargestVectorSize
+            );
         }
 
         public bool IsSupported => AdvSimd.IsSupported;
@@ -281,7 +391,12 @@ namespace JIT.HardwareIntrinsics.Arm
             );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
-            ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.inArray3Ptr, _dataTable.outArrayPtr);
+            ValidateResult(
+                _dataTable.inArray1Ptr,
+                _dataTable.inArray2Ptr,
+                _dataTable.inArray3Ptr,
+                _dataTable.outArrayPtr
+            );
         }
 
         public void RunBasicScenario_Load()
@@ -295,48 +410,83 @@ namespace JIT.HardwareIntrinsics.Arm
             );
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
-            ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.inArray3Ptr, _dataTable.outArrayPtr);
+            ValidateResult(
+                _dataTable.inArray1Ptr,
+                _dataTable.inArray2Ptr,
+                _dataTable.inArray3Ptr,
+                _dataTable.outArrayPtr
+            );
         }
 
         public void RunReflectionScenario_UnsafeRead()
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(AdvSimd).GetMethod(nameof(AdvSimd.MultiplyAdd), new Type[] { typeof(Vector64<SByte>), typeof(Vector64<SByte>), typeof(Vector64<SByte>) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.Read<Vector64<SByte>>(_dataTable.inArray1Ptr),
-                                        Unsafe.Read<Vector64<SByte>>(_dataTable.inArray2Ptr),
-                                        Unsafe.Read<Vector64<SByte>>(_dataTable.inArray3Ptr)
-                                     });
+            var result = typeof(AdvSimd).GetMethod(
+                    nameof(AdvSimd.MultiplyAdd),
+                    new Type[]
+                    {
+                        typeof(Vector64<SByte>),
+                        typeof(Vector64<SByte>),
+                        typeof(Vector64<SByte>)
+                    }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.Read<Vector64<SByte>>(_dataTable.inArray1Ptr),
+                        Unsafe.Read<Vector64<SByte>>(_dataTable.inArray2Ptr),
+                        Unsafe.Read<Vector64<SByte>>(_dataTable.inArray3Ptr)
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector64<SByte>)(result));
-            ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.inArray3Ptr, _dataTable.outArrayPtr);
+            ValidateResult(
+                _dataTable.inArray1Ptr,
+                _dataTable.inArray2Ptr,
+                _dataTable.inArray3Ptr,
+                _dataTable.outArrayPtr
+            );
         }
 
         public void RunReflectionScenario_Load()
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(AdvSimd).GetMethod(nameof(AdvSimd.MultiplyAdd), new Type[] { typeof(Vector64<SByte>), typeof(Vector64<SByte>), typeof(Vector64<SByte>) })
-                                     .Invoke(null, new object[] {
-                                        AdvSimd.LoadVector64((SByte*)(_dataTable.inArray1Ptr)),
-                                        AdvSimd.LoadVector64((SByte*)(_dataTable.inArray2Ptr)),
-                                        AdvSimd.LoadVector64((SByte*)(_dataTable.inArray3Ptr))
-                                     });
+            var result = typeof(AdvSimd).GetMethod(
+                    nameof(AdvSimd.MultiplyAdd),
+                    new Type[]
+                    {
+                        typeof(Vector64<SByte>),
+                        typeof(Vector64<SByte>),
+                        typeof(Vector64<SByte>)
+                    }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        AdvSimd.LoadVector64((SByte*)(_dataTable.inArray1Ptr)),
+                        AdvSimd.LoadVector64((SByte*)(_dataTable.inArray2Ptr)),
+                        AdvSimd.LoadVector64((SByte*)(_dataTable.inArray3Ptr))
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector64<SByte>)(result));
-            ValidateResult(_dataTable.inArray1Ptr, _dataTable.inArray2Ptr, _dataTable.inArray3Ptr, _dataTable.outArrayPtr);
+            ValidateResult(
+                _dataTable.inArray1Ptr,
+                _dataTable.inArray2Ptr,
+                _dataTable.inArray3Ptr,
+                _dataTable.outArrayPtr
+            );
         }
 
         public void RunClsVarScenario()
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = AdvSimd.MultiplyAdd(
-                _clsVar1,
-                _clsVar2,
-                _clsVar3
-            );
+            var result = AdvSimd.MultiplyAdd(_clsVar1, _clsVar2, _clsVar3);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_clsVar1, _clsVar2, _clsVar3, _dataTable.outArrayPtr);
@@ -346,9 +496,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector64<SByte>* pClsVar1 = &_clsVar1)
-            fixed (Vector64<SByte>* pClsVar2 = &_clsVar2)
-            fixed (Vector64<SByte>* pClsVar3 = &_clsVar3)
+            fixed (Vector64<SByte>* pClsVar1 = &_clsVar1)fixed (
+                Vector64<SByte>* pClsVar2 = &_clsVar2
+            )fixed (Vector64<SByte>* pClsVar3 = &_clsVar3)
             {
                 var result = AdvSimd.MultiplyAdd(
                     AdvSimd.LoadVector64((SByte*)(pClsVar1)),
@@ -404,9 +554,9 @@ namespace JIT.HardwareIntrinsics.Arm
 
             var test = new SimpleTernaryOpTest__MultiplyAdd_Vector64_SByte();
 
-            fixed (Vector64<SByte>* pFld1 = &test._fld1)
-            fixed (Vector64<SByte>* pFld2 = &test._fld2)
-            fixed (Vector64<SByte>* pFld3 = &test._fld3)
+            fixed (Vector64<SByte>* pFld1 = &test._fld1)fixed (
+                Vector64<SByte>* pFld2 = &test._fld2
+            )fixed (Vector64<SByte>* pFld3 = &test._fld3)
             {
                 var result = AdvSimd.MultiplyAdd(
                     AdvSimd.LoadVector64((SByte*)(pFld1)),
@@ -433,10 +583,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector64<SByte>* pFld1 = &_fld1)
-            fixed (Vector64<SByte>* pFld2 = &_fld2)
-            fixed (Vector64<SByte>* pFld3 = &_fld3)
-            {
+            fixed (Vector64<SByte>* pFld1 = &_fld1)fixed (Vector64<SByte>* pFld2 = &_fld2)fixed (
+                Vector64<SByte>* pFld3 = &_fld3
+            ) {
                 var result = AdvSimd.MultiplyAdd(
                     AdvSimd.LoadVector64((SByte*)(pFld1)),
                     AdvSimd.LoadVector64((SByte*)(pFld2)),
@@ -511,8 +660,13 @@ namespace JIT.HardwareIntrinsics.Arm
             }
         }
 
-        private void ValidateResult(Vector64<SByte> op1, Vector64<SByte> op2, Vector64<SByte> op3, void* result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Vector64<SByte> op1,
+            Vector64<SByte> op2,
+            Vector64<SByte> op3,
+            void* result,
+            [CallerMemberName] string method = ""
+        ) {
             SByte[] inArray1 = new SByte[Op1ElementCount];
             SByte[] inArray2 = new SByte[Op2ElementCount];
             SByte[] inArray3 = new SByte[Op3ElementCount];
@@ -521,28 +675,58 @@ namespace JIT.HardwareIntrinsics.Arm
             Unsafe.WriteUnaligned(ref Unsafe.As<SByte, byte>(ref inArray1[0]), op1);
             Unsafe.WriteUnaligned(ref Unsafe.As<SByte, byte>(ref inArray2[0]), op2);
             Unsafe.WriteUnaligned(ref Unsafe.As<SByte, byte>(ref inArray3[0]), op3);
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<SByte, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector64<SByte>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<SByte, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector64<SByte>>()
+            );
 
             ValidateResult(inArray1, inArray2, inArray3, outArray, method);
         }
 
-        private void ValidateResult(void* op1, void* op2, void* op3, void* result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            void* op1,
+            void* op2,
+            void* op3,
+            void* result,
+            [CallerMemberName] string method = ""
+        ) {
             SByte[] inArray1 = new SByte[Op1ElementCount];
             SByte[] inArray2 = new SByte[Op2ElementCount];
             SByte[] inArray3 = new SByte[Op3ElementCount];
             SByte[] outArray = new SByte[RetElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<SByte, byte>(ref inArray1[0]), ref Unsafe.AsRef<byte>(op1), (uint)Unsafe.SizeOf<Vector64<SByte>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<SByte, byte>(ref inArray2[0]), ref Unsafe.AsRef<byte>(op2), (uint)Unsafe.SizeOf<Vector64<SByte>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<SByte, byte>(ref inArray3[0]), ref Unsafe.AsRef<byte>(op3), (uint)Unsafe.SizeOf<Vector64<SByte>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<SByte, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector64<SByte>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<SByte, byte>(ref inArray1[0]),
+                ref Unsafe.AsRef<byte>(op1),
+                (uint)Unsafe.SizeOf<Vector64<SByte>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<SByte, byte>(ref inArray2[0]),
+                ref Unsafe.AsRef<byte>(op2),
+                (uint)Unsafe.SizeOf<Vector64<SByte>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<SByte, byte>(ref inArray3[0]),
+                ref Unsafe.AsRef<byte>(op3),
+                (uint)Unsafe.SizeOf<Vector64<SByte>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<SByte, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector64<SByte>>()
+            );
 
             ValidateResult(inArray1, inArray2, inArray3, outArray, method);
         }
 
-        private void ValidateResult(SByte[] firstOp, SByte[] secondOp, SByte[] thirdOp, SByte[] result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            SByte[] firstOp,
+            SByte[] secondOp,
+            SByte[] thirdOp,
+            SByte[] result,
+            [CallerMemberName] string method = ""
+        ) {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)
@@ -556,11 +740,21 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(AdvSimd)}.{nameof(AdvSimd.MultiplyAdd)}<SByte>(Vector64<SByte>, Vector64<SByte>, Vector64<SByte>): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
-                TestLibrary.TestFramework.LogInformation($"secondOp: ({string.Join(", ", secondOp)})");
-                TestLibrary.TestFramework.LogInformation($" thirdOp: ({string.Join(", ", thirdOp)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(AdvSimd)}.{nameof(AdvSimd.MultiplyAdd)}<SByte>(Vector64<SByte>, Vector64<SByte>, Vector64<SByte>): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $" firstOp: ({string.Join(", ", firstOp)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"secondOp: ({string.Join(", ", secondOp)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $" thirdOp: ({string.Join(", ", thirdOp)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

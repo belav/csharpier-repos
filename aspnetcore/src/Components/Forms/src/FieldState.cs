@@ -36,8 +36,9 @@ namespace Microsoft.AspNetCore.Components.Forms
             }
         }
 
-        public void AssociateWithValidationMessageStore(ValidationMessageStore validationMessageStore)
-        {
+        public void AssociateWithValidationMessageStore(
+            ValidationMessageStore validationMessageStore
+        ) {
             if (_validationMessageStores == null)
             {
                 _validationMessageStores = new HashSet<ValidationMessageStore>();
@@ -46,7 +47,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             _validationMessageStores.Add(validationMessageStore);
         }
 
-        public void DissociateFromValidationMessageStore(ValidationMessageStore validationMessageStore)
-            => _validationMessageStores?.Remove(validationMessageStore);
+        public void DissociateFromValidationMessageStore(
+            ValidationMessageStore validationMessageStore
+        ) => _validationMessageStores?.Remove(validationMessageStore);
     }
 }

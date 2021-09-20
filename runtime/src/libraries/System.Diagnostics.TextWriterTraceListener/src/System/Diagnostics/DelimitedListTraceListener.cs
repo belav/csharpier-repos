@@ -16,29 +16,17 @@ namespace System.Diagnostics
         private string _secondaryDelim = ",";
         private bool _initializedDelim;
 
-        public DelimitedListTraceListener(Stream stream) : base(stream)
-        {
-        }
+        public DelimitedListTraceListener(Stream stream) : base(stream) { }
 
-        public DelimitedListTraceListener(Stream stream, string? name) : base(stream, name)
-        {
-        }
+        public DelimitedListTraceListener(Stream stream, string? name) : base(stream, name) { }
 
-        public DelimitedListTraceListener(TextWriter writer) : base(writer)
-        {
-        }
+        public DelimitedListTraceListener(TextWriter writer) : base(writer) { }
 
-        public DelimitedListTraceListener(TextWriter writer, string? name) : base(writer, name)
-        {
-        }
+        public DelimitedListTraceListener(TextWriter writer, string? name) : base(writer, name) { }
 
-        public DelimitedListTraceListener(string? fileName) : base(fileName)
-        {
-        }
+        public DelimitedListTraceListener(string? fileName) : base(fileName) { }
 
-        public DelimitedListTraceListener(string? fileName, string? name) : base(fileName, name)
-        {
-        }
+        public DelimitedListTraceListener(string? fileName, string? name) : base(fileName, name) { }
 
         public string Delimiter
         {
@@ -67,7 +55,9 @@ namespace System.Diagnostics
                     throw new ArgumentNullException(nameof(Delimiter));
 
                 if (value.Length == 0)
-                    throw new ArgumentException(SR.Format(SR.Generic_ArgCantBeEmptyString, nameof(Delimiter)));
+                    throw new ArgumentException(
+                        SR.Format(SR.Generic_ArgCantBeEmptyString, nameof(Delimiter))
+                    );
 
                 lock (this)
                 {
@@ -86,9 +76,18 @@ namespace System.Diagnostics
         // warning would be hitted.
         protected override string[] GetSupportedAttributes() => new string[] { DelimiterKey };
 
-        public override void TraceEvent(TraceEventCache? eventCache, string source, TraceEventType eventType, int id, string? format, params object?[]? args)
-        {
-            if (Filter != null && !Filter.ShouldTrace(eventCache, source, eventType, id, format, args, null, null))
+        public override void TraceEvent(
+            TraceEventCache? eventCache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            string? format,
+            params object?[]? args
+        ) {
+            if (
+                Filter != null
+                && !Filter.ShouldTrace(eventCache, source, eventType, id, format, args, null, null)
+            )
                 return;
 
             WriteHeader(source, eventType, id);
@@ -105,9 +104,17 @@ namespace System.Diagnostics
             WriteFooter(eventCache);
         }
 
-        public override void TraceEvent(TraceEventCache? eventCache, string source, TraceEventType eventType, int id, string? message)
-        {
-            if (Filter != null && !Filter.ShouldTrace(eventCache, source, eventType, id, message, null, null, null))
+        public override void TraceEvent(
+            TraceEventCache? eventCache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            string? message
+        ) {
+            if (
+                Filter != null
+                && !Filter.ShouldTrace(eventCache, source, eventType, id, message, null, null, null)
+            )
                 return;
 
             WriteHeader(source, eventType, id);
@@ -121,9 +128,17 @@ namespace System.Diagnostics
             WriteFooter(eventCache);
         }
 
-        public override void TraceData(TraceEventCache? eventCache, string source, TraceEventType eventType, int id, object? data)
-        {
-            if (Filter != null && !Filter.ShouldTrace(eventCache, source, eventType, id, null, null, data, null))
+        public override void TraceData(
+            TraceEventCache? eventCache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            object? data
+        ) {
+            if (
+                Filter != null
+                && !Filter.ShouldTrace(eventCache, source, eventType, id, null, null, data, null)
+            )
                 return;
 
             WriteHeader(source, eventType, id);
@@ -137,9 +152,17 @@ namespace System.Diagnostics
             WriteFooter(eventCache);
         }
 
-        public override void TraceData(TraceEventCache? eventCache, string source, TraceEventType eventType, int id, params object?[]? data)
-        {
-            if (Filter != null && !Filter.ShouldTrace(eventCache, source, eventType, id, null, null, null, data))
+        public override void TraceData(
+            TraceEventCache? eventCache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            params object?[]? data
+        ) {
+            if (
+                Filter != null
+                && !Filter.ShouldTrace(eventCache, source, eventType, id, null, null, null, data)
+            )
                 return;
 
             WriteHeader(source, eventType, id);

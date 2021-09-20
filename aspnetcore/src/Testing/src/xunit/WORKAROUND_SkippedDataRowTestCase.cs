@@ -15,7 +15,9 @@ namespace Microsoft.AspNetCore.Testing
 
         /// <summary/>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("Called by the de-serializer; should only be called by deriving classes for de-serialization purposes")]
+        [Obsolete(
+            "Called by the de-serializer; should only be called by deriving classes for de-serialization purposes"
+        )]
         public WORKAROUND_SkippedDataRowTestCase() { }
 
         /// <summary>
@@ -27,12 +29,20 @@ namespace Microsoft.AspNetCore.Testing
         /// <param name="skipReason">The reason that this test case will be skipped</param>
         /// <param name="testMethodArguments">The arguments for the test method.</param>
         [Obsolete("Please call the constructor which takes TestMethodDisplayOptions")]
-        public WORKAROUND_SkippedDataRowTestCase(IMessageSink diagnosticMessageSink,
-                                           TestMethodDisplay defaultMethodDisplay,
-                                           ITestMethod testMethod,
-                                           string skipReason,
-                                           object[] testMethodArguments = null)
-            : this(diagnosticMessageSink, defaultMethodDisplay, TestMethodDisplayOptions.None, testMethod, skipReason, testMethodArguments) { }
+        public WORKAROUND_SkippedDataRowTestCase(
+            IMessageSink diagnosticMessageSink,
+            TestMethodDisplay defaultMethodDisplay,
+            ITestMethod testMethod,
+            string skipReason,
+            object[] testMethodArguments = null
+        ) : this(
+            diagnosticMessageSink,
+            defaultMethodDisplay,
+            TestMethodDisplayOptions.None,
+            testMethod,
+            skipReason,
+            testMethodArguments
+        ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XunitSkippedDataRowTestCase"/> class.
@@ -43,14 +53,20 @@ namespace Microsoft.AspNetCore.Testing
         /// <param name="testMethod">The test method this test case belongs to.</param>
         /// <param name="skipReason">The reason that this test case will be skipped</param>
         /// <param name="testMethodArguments">The arguments for the test method.</param>
-        public WORKAROUND_SkippedDataRowTestCase(IMessageSink diagnosticMessageSink,
-                                           TestMethodDisplay defaultMethodDisplay,
-                                           TestMethodDisplayOptions defaultMethodDisplayOptions,
-                                           ITestMethod testMethod,
-                                           string skipReason,
-                                           object[] testMethodArguments = null)
-            : base(diagnosticMessageSink, defaultMethodDisplay, defaultMethodDisplayOptions, testMethod, testMethodArguments)
-        {
+        public WORKAROUND_SkippedDataRowTestCase(
+            IMessageSink diagnosticMessageSink,
+            TestMethodDisplay defaultMethodDisplay,
+            TestMethodDisplayOptions defaultMethodDisplayOptions,
+            ITestMethod testMethod,
+            string skipReason,
+            object[] testMethodArguments = null
+        ) : base(
+            diagnosticMessageSink,
+            defaultMethodDisplay,
+            defaultMethodDisplayOptions,
+            testMethod,
+            testMethodArguments
+        ) {
             this.skipReason = skipReason;
         }
 

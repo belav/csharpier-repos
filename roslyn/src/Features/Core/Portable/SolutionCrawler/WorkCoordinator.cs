@@ -39,19 +39,23 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             private Document? _lastActiveDocument;
 
             public WorkCoordinator(
-                 IAsynchronousOperationListener listener,
-                 IEnumerable<Lazy<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>> analyzerProviders,
-                 bool initializeLazily,
-                 Registration registration)
-            {
+                IAsynchronousOperationListener listener,
+                IEnumerable<
+                    Lazy<IIncrementalAnalyzerProvider, IncrementalAnalyzerProviderMetadata>
+                > analyzerProviders,
+                bool initializeLazily,
+                Registration registration
+            ) {
                 _logAggregator = new LogAggregator();
 
                 _registration = registration;
                 _gate = new object();
 
                 _listener = listener;
-                _optionService = _registration.Workspace.Services.GetRequiredService<IOptionService>();
-                _documentTrackingService = _registration.Workspace.Services.GetService<IDocumentTrackingService>();
+                _optionService =
+                    _registration.Workspace.Services.GetRequiredService<IOptionService>();
+                _documentTrackingService =
+                    _registration.Workspace.Services.GetService<IDocumentTrackingService>();
 
                 // event and worker queues
                 _shutdownNotificationSource = new CancellationTokenSource();
@@ -59,18 +63,42 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                 _eventProcessingQueue = new TaskQueue(listener, TaskScheduler.Default);
 
-                var activeFileBackOffTimeSpanInMS = _optionService.GetOption(InternalSolutionCrawlerOptions.ActiveFileWorkerBackOffTimeSpanInMS);
-                var allFilesWorkerBackOffTimeSpanInMS = _optionService.GetOption(InternalSolutionCrawlerOptions.AllFilesWorkerBackOffTimeSpanInMS);
-                var entireProjectWorkerBackOffTimeSpanInMS = _optionService.GetOption(InternalSolutionCrawlerOptions.EntireProjectWorkerBackOffTimeSpanInMS);
+                var activeFileBackOffTimeSpanInMS = _optionService.GetOption(
+                    InternalSolutionCrawlerOptions.ActiveFileWorkerBackOffTimeSpanInMS
+                );
+                var allFilesWorkerBackOffTimeSpanInMS = _optionService.GetOption(
+                    InternalSolutionCrawlerOptions.AllFilesWorkerBackOffTimeSpanInMS
+                );
+                var entireProjectWorkerBackOffTimeSpanInMS = _optionService.GetOption(
+                    InternalSolutionCrawlerOptions.EntireProjectWorkerBackOffTimeSpanInMS
+                );
 
                 _documentAndProjectWorkerProcessor = new IncrementalAnalyzerProcessor(
-                    listener, analyzerProviders, initializeLazily, _registration,
-                    activeFileBackOffTimeSpanInMS, allFilesWorkerBackOffTimeSpanInMS, entireProjectWorkerBackOffTimeSpanInMS, _shutdownToken);
+                    listener,
+                    analyzerProviders,
+                    initializeLazily,
+                    _registration,
+                    activeFileBackOffTimeSpanInMS,
+                    allFilesWorkerBackOffTimeSpanInMS,
+                    entireProjectWorkerBackOffTimeSpanInMS,
+                    _shutdownToken
+                );
 
-                var semanticBackOffTimeSpanInMS = _optionService.GetOption(InternalSolutionCrawlerOptions.SemanticChangeBackOffTimeSpanInMS);
-                var projectBackOffTimeSpanInMS = _optionService.GetOption(InternalSolutionCrawlerOptions.ProjectPropagationBackOffTimeSpanInMS);
+                var semanticBackOffTimeSpanInMS = _optionService.GetOption(
+                    InternalSolutionCrawlerOptions.SemanticChangeBackOffTimeSpanInMS
+                );
+                var projectBackOffTimeSpanInMS = _optionService.GetOption(
+                    InternalSolutionCrawlerOptions.ProjectPropagationBackOffTimeSpanInMS
+                );
 
-                _semanticChangeProcessor = new SemanticChangeProcessor(listener, _registration, _documentAndProjectWorkerProcessor, semanticBackOffTimeSpanInMS, projectBackOffTimeSpanInMS, _shutdownToken);
+                _semanticChangeProcessor = new SemanticChangeProcessor(
+                    listener,
+                    _registration,
+                    _documentAndProjectWorkerProcessor,
+                    semanticBackOffTimeSpanInMS,
+                    projectBackOffTimeSpanInMS,
+                    _shutdownToken
+                );
 
                 // if option is on
                 if (_optionService.GetOption(InternalSolutionCrawlerOptions.SolutionCrawler))
@@ -87,7 +115,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 // subscribe to active document changed event for active file background analysis scope.
                 if (_documentTrackingService != null)
                 {
-                    _lastActiveDocument = _documentTrackingService.GetActiveDocument(_registration.Workspace.CurrentSolution);
+                    _lastActiveDocument = _documentTrackingService.GetActiveDocument(
+                        _registration.Workspace.CurrentSolution
+                    );
                     _documentTrackingService.ActiveDocumentChanged += OnActiveDocumentChanged;
                 }
             }
@@ -130,7 +160,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     var shutdownTask = Task.WhenAll(
                         _eventProcessingQueue.LastScheduledTask,
                         _documentAndProjectWorkerProcessor.AsyncProcessorTask,
-                        _semanticChangeProcessor.AsyncProcessorTask);
+                        _semanticChangeProcessor.AsyncProcessorTask
+                    );
 
                     try
                     {
@@ -186,27 +217,38 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             {
                 // get off from option changed event handler since it runs on UI thread
                 // getting analyzer can be slow for the very first time since it is lazily initialized
-                _eventProcessingQueue.ScheduleTask(nameof(ReanalyzeOnOptionChange), () =>
-                {
-                    // Force analyze all analyzers if background analysis scope has changed.
-                    var forceAnalyze = e.Option == SolutionCrawlerOptions.BackgroundAnalysisScopeOption;
-
-                    // let each analyzer decide what they want on option change
-                    foreach (var analyzer in _documentAndProjectWorkerProcessor.Analyzers)
+                _eventProcessingQueue.ScheduleTask(
+                    nameof(ReanalyzeOnOptionChange),
+                    () =>
                     {
-                        if (forceAnalyze || analyzer.NeedsReanalysisOnOptionChanged(sender, e))
+                        // Force analyze all analyzers if background analysis scope has changed.
+                        var forceAnalyze =
+                            e.Option == SolutionCrawlerOptions.BackgroundAnalysisScopeOption;
+
+                        // let each analyzer decide what they want on option change
+                        foreach (var analyzer in _documentAndProjectWorkerProcessor.Analyzers)
                         {
-                            var scope = new ReanalyzeScope(_registration.CurrentSolution.Id);
-                            Reanalyze(analyzer, scope);
+                            if (forceAnalyze || analyzer.NeedsReanalysisOnOptionChanged(sender, e))
+                            {
+                                var scope = new ReanalyzeScope(_registration.CurrentSolution.Id);
+                                Reanalyze(analyzer, scope);
+                            }
                         }
-                    }
-                }, _shutdownToken);
+                    },
+                    _shutdownToken
+                );
             }
 
-            public void Reanalyze(IIncrementalAnalyzer analyzer, ReanalyzeScope scope, bool highPriority = false)
-            {
-                _eventProcessingQueue.ScheduleTask("Reanalyze",
-                    () => EnqueueWorkItemAsync(analyzer, scope, highPriority), _shutdownToken);
+            public void Reanalyze(
+                IIncrementalAnalyzer analyzer,
+                ReanalyzeScope scope,
+                bool highPriority = false
+            ) {
+                _eventProcessingQueue.ScheduleTask(
+                    "Reanalyze",
+                    () => EnqueueWorkItemAsync(analyzer, scope, highPriority),
+                    _shutdownToken
+                );
 
                 if (scope.HasMultipleDocuments)
                 {
@@ -214,7 +256,12 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     // we are not interested in 1 file re-analysis request which can happen from like venus typing
                     var solution = _registration.CurrentSolution;
                     SolutionCrawlerLogger.LogReanalyze(
-                        CorrelationId, analyzer, scope.GetDocumentCount(solution), scope.GetLanguagesStringForTelemetry(solution), highPriority);
+                        CorrelationId,
+                        analyzer,
+                        scope.GetDocumentCount(solution),
+                        scope.GetLanguagesStringForTelemetry(solution),
+                        highPriority
+                    );
                 }
             }
 
@@ -233,20 +280,32 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     // As soon as user switches to a source document, we will perform the appropriate analysis callbacks
                     // on the next active document changed event.
                     var activeDocument = solution.GetDocument(activeDocumentId);
-                    if (activeDocument != null &&
-                        SolutionCrawlerOptions.GetBackgroundAnalysisScope(activeDocument.Project) == BackgroundAnalysisScope.ActiveFile)
-                    {
+                    if (
+                        activeDocument != null
+                        && SolutionCrawlerOptions.GetBackgroundAnalysisScope(activeDocument.Project)
+                            == BackgroundAnalysisScope.ActiveFile
+                    ) {
                         lock (_gate)
                         {
                             if (_lastActiveDocument != null)
                             {
-                                EnqueueEvent(_lastActiveDocument.Project.Solution, _lastActiveDocument.Id, InvocationReasons.DocumentClosed, "OnDocumentClosed");
+                                EnqueueEvent(
+                                    _lastActiveDocument.Project.Solution,
+                                    _lastActiveDocument.Id,
+                                    InvocationReasons.DocumentClosed,
+                                    "OnDocumentClosed"
+                                );
                             }
 
                             _lastActiveDocument = activeDocument;
                         }
 
-                        EnqueueEvent(activeDocument.Project.Solution, activeDocument.Id, InvocationReasons.DocumentOpened, "OnDocumentOpened");
+                        EnqueueEvent(
+                            activeDocument.Project.Solution,
+                            activeDocument.Id,
+                            InvocationReasons.DocumentOpened,
+                            "OnDocumentOpened"
+                        );
                     }
                 }
             }
@@ -264,7 +323,6 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     {
                         throw;
                     }
-
                     // it is our cancellation, ignore
                 }
                 catch (AggregateException ae)
@@ -272,19 +330,20 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     ae = ae.Flatten();
 
                     // If we had a mix of exceptions, don't eat it
-                    if (ae.InnerExceptions.Any(e => !(e is OperationCanceledException)) ||
-                        ae.InnerExceptions.Cast<OperationCanceledException>().Any(NotOurShutdownToken))
-                    {
+                    if (
+                        ae.InnerExceptions.Any(e => !(e is OperationCanceledException))
+                        || ae.InnerExceptions.Cast<OperationCanceledException>()
+                            .Any(NotOurShutdownToken)
+                    ) {
                         // We had a cancellation with a different token, so don't eat it
                         throw;
                     }
-
                     // it is our cancellation, ignore
                 }
             }
 
-            private bool NotOurShutdownToken(OperationCanceledException oce)
-                => oce.CancellationToken == _shutdownToken;
+            private bool NotOurShutdownToken(OperationCanceledException oce) =>
+                oce.CancellationToken == _shutdownToken;
 
             private void ProcessEvent(WorkspaceChangeEventArgs args, string eventName)
             {
@@ -327,14 +386,20 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
             private void OnDocumentOpened(object? sender, DocumentEventArgs e)
             {
-                _eventProcessingQueue.ScheduleTask("OnDocumentOpened",
-                    () => EnqueueWorkItemAsync(e.Document, InvocationReasons.DocumentOpened), _shutdownToken);
+                _eventProcessingQueue.ScheduleTask(
+                    "OnDocumentOpened",
+                    () => EnqueueWorkItemAsync(e.Document, InvocationReasons.DocumentOpened),
+                    _shutdownToken
+                );
             }
 
             private void OnDocumentClosed(object? sender, DocumentEventArgs e)
             {
-                _eventProcessingQueue.ScheduleTask("OnDocumentClosed",
-                    () => EnqueueWorkItemAsync(e.Document, InvocationReasons.DocumentClosed), _shutdownToken);
+                _eventProcessingQueue.ScheduleTask(
+                    "OnDocumentClosed",
+                    () => EnqueueWorkItemAsync(e.Document, InvocationReasons.DocumentClosed),
+                    _shutdownToken
+                );
             }
 
             private void ProcessDocumentEvent(WorkspaceChangeEventArgs e, string eventName)
@@ -343,12 +408,22 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 {
                     case WorkspaceChangeKind.DocumentAdded:
                         Contract.ThrowIfNull(e.DocumentId);
-                        EnqueueEvent(e.NewSolution, e.DocumentId, InvocationReasons.DocumentAdded, eventName);
+                        EnqueueEvent(
+                            e.NewSolution,
+                            e.DocumentId,
+                            InvocationReasons.DocumentAdded,
+                            eventName
+                        );
                         break;
 
                     case WorkspaceChangeKind.DocumentRemoved:
                         Contract.ThrowIfNull(e.DocumentId);
-                        EnqueueEvent(e.OldSolution, e.DocumentId, InvocationReasons.DocumentRemoved, eventName);
+                        EnqueueEvent(
+                            e.OldSolution,
+                            e.DocumentId,
+                            InvocationReasons.DocumentRemoved,
+                            eventName
+                        );
                         break;
 
                     case WorkspaceChangeKind.DocumentReloaded:
@@ -367,7 +442,12 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     case WorkspaceChangeKind.AnalyzerConfigDocumentReloaded:
                         // If an additional file or .editorconfig has changed we need to reanalyze the entire project.
                         Contract.ThrowIfNull(e.ProjectId);
-                        EnqueueEvent(e.NewSolution, e.ProjectId, InvocationReasons.AdditionalDocumentChanged, eventName);
+                        EnqueueEvent(
+                            e.NewSolution,
+                            e.ProjectId,
+                            InvocationReasons.AdditionalDocumentChanged,
+                            eventName
+                        );
                         break;
 
                     default:
@@ -381,12 +461,22 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 {
                     case WorkspaceChangeKind.ProjectAdded:
                         Contract.ThrowIfNull(e.ProjectId);
-                        EnqueueEvent(e.NewSolution, e.ProjectId, InvocationReasons.DocumentAdded, eventName);
+                        EnqueueEvent(
+                            e.NewSolution,
+                            e.ProjectId,
+                            InvocationReasons.DocumentAdded,
+                            eventName
+                        );
                         break;
 
                     case WorkspaceChangeKind.ProjectRemoved:
                         Contract.ThrowIfNull(e.ProjectId);
-                        EnqueueEvent(e.OldSolution, e.ProjectId, InvocationReasons.DocumentRemoved, eventName);
+                        EnqueueEvent(
+                            e.OldSolution,
+                            e.ProjectId,
+                            InvocationReasons.DocumentRemoved,
+                            eventName
+                        );
                         break;
 
                     case WorkspaceChangeKind.ProjectChanged:
@@ -428,54 +518,106 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
             private void EnqueueEvent(Solution oldSolution, Solution newSolution, string eventName)
             {
-                _eventProcessingQueue.ScheduleTask(eventName,
-                    () => EnqueueWorkItemAsync(oldSolution, newSolution), _shutdownToken);
+                _eventProcessingQueue.ScheduleTask(
+                    eventName,
+                    () => EnqueueWorkItemAsync(oldSolution, newSolution),
+                    _shutdownToken
+                );
             }
 
-            private void EnqueueEvent(Solution solution, InvocationReasons invocationReasons, string eventName)
-            {
-                _eventProcessingQueue.ScheduleTask(eventName,
-                    () => EnqueueWorkItemForSolutionAsync(solution, invocationReasons), _shutdownToken);
+            private void EnqueueEvent(
+                Solution solution,
+                InvocationReasons invocationReasons,
+                string eventName
+            ) {
+                _eventProcessingQueue.ScheduleTask(
+                    eventName,
+                    () => EnqueueWorkItemForSolutionAsync(solution, invocationReasons),
+                    _shutdownToken
+                );
             }
 
-            private void EnqueueEvent(Solution oldSolution, Solution newSolution, ProjectId projectId, string eventName)
-            {
-                _eventProcessingQueue.ScheduleTask(eventName,
-                    () => EnqueueWorkItemAfterDiffAsync(oldSolution, newSolution, projectId), _shutdownToken);
+            private void EnqueueEvent(
+                Solution oldSolution,
+                Solution newSolution,
+                ProjectId projectId,
+                string eventName
+            ) {
+                _eventProcessingQueue.ScheduleTask(
+                    eventName,
+                    () => EnqueueWorkItemAfterDiffAsync(oldSolution, newSolution, projectId),
+                    _shutdownToken
+                );
             }
 
-            private void EnqueueEvent(Solution solution, ProjectId projectId, InvocationReasons invocationReasons, string eventName)
-            {
-                _eventProcessingQueue.ScheduleTask(eventName,
-                    () => EnqueueWorkItemForProjectAsync(solution, projectId, invocationReasons), _shutdownToken);
+            private void EnqueueEvent(
+                Solution solution,
+                ProjectId projectId,
+                InvocationReasons invocationReasons,
+                string eventName
+            ) {
+                _eventProcessingQueue.ScheduleTask(
+                    eventName,
+                    () => EnqueueWorkItemForProjectAsync(solution, projectId, invocationReasons),
+                    _shutdownToken
+                );
             }
 
-            private void EnqueueEvent(Solution solution, DocumentId documentId, InvocationReasons invocationReasons, string eventName)
-            {
-                _eventProcessingQueue.ScheduleTask(eventName,
-                    () => EnqueueWorkItemForDocumentAsync(solution, documentId, invocationReasons), _shutdownToken);
+            private void EnqueueEvent(
+                Solution solution,
+                DocumentId documentId,
+                InvocationReasons invocationReasons,
+                string eventName
+            ) {
+                _eventProcessingQueue.ScheduleTask(
+                    eventName,
+                    () => EnqueueWorkItemForDocumentAsync(solution, documentId, invocationReasons),
+                    _shutdownToken
+                );
             }
 
-            private void EnqueueEvent(Solution oldSolution, Solution newSolution, DocumentId documentId, string eventName)
-            {
+            private void EnqueueEvent(
+                Solution oldSolution,
+                Solution newSolution,
+                DocumentId documentId,
+                string eventName
+            ) {
                 // document changed event is the special one.
-                _eventProcessingQueue.ScheduleTask(eventName,
-                    () => EnqueueWorkItemAfterDiffAsync(oldSolution, newSolution, documentId), _shutdownToken);
+                _eventProcessingQueue.ScheduleTask(
+                    eventName,
+                    () => EnqueueWorkItemAfterDiffAsync(oldSolution, newSolution, documentId),
+                    _shutdownToken
+                );
             }
 
-            private async Task EnqueueWorkItemAsync(Document document, InvocationReasons invocationReasons, SyntaxNode? changedMember = null)
-            {
+            private async Task EnqueueWorkItemAsync(
+                Document document,
+                InvocationReasons invocationReasons,
+                SyntaxNode? changedMember = null
+            ) {
                 // we are shutting down
                 _shutdownToken.ThrowIfCancellationRequested();
 
-                var priorityService = document.GetLanguageService<IWorkCoordinatorPriorityService>();
-                var isLowPriority = priorityService != null && await priorityService.IsLowPriorityAsync(document, _shutdownToken).ConfigureAwait(false);
+                var priorityService =
+                    document.GetLanguageService<IWorkCoordinatorPriorityService>();
+                var isLowPriority =
+                    priorityService != null
+                    && await priorityService.IsLowPriorityAsync(document, _shutdownToken)
+                        .ConfigureAwait(false);
 
                 var currentMember = GetSyntaxPath(changedMember);
 
                 // call to this method is serialized. and only this method does the writing.
                 _documentAndProjectWorkerProcessor.Enqueue(
-                    new WorkItem(document.Id, document.Project.Language, invocationReasons, isLowPriority, currentMember, _listener.BeginAsyncOperation("WorkItem")));
+                    new WorkItem(
+                        document.Id,
+                        document.Project.Language,
+                        invocationReasons,
+                        isLowPriority,
+                        currentMember,
+                        _listener.BeginAsyncOperation("WorkItem")
+                    )
+                );
 
                 // enqueue semantic work planner
                 if (invocationReasons.Contains(PredefinedInvocationReasons.SemanticChanged))
@@ -498,8 +640,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 return new SyntaxPath(changedMember);
             }
 
-            private async Task EnqueueWorkItemAsync(Project project, InvocationReasons invocationReasons)
-            {
+            private async Task EnqueueWorkItemAsync(
+                Project project,
+                InvocationReasons invocationReasons
+            ) {
                 foreach (var documentId in project.DocumentIds)
                 {
                     var document = project.GetRequiredDocument(documentId);
@@ -507,25 +651,45 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 }
             }
 
-            private async Task EnqueueWorkItemAsync(IIncrementalAnalyzer analyzer, ReanalyzeScope scope, bool highPriority)
-            {
+            private async Task EnqueueWorkItemAsync(
+                IIncrementalAnalyzer analyzer,
+                ReanalyzeScope scope,
+                bool highPriority
+            ) {
                 var solution = _registration.CurrentSolution;
-                var invocationReasons = highPriority ? InvocationReasons.ReanalyzeHighPriority : InvocationReasons.Reanalyze;
+                var invocationReasons = highPriority
+                    ? InvocationReasons.ReanalyzeHighPriority
+                    : InvocationReasons.Reanalyze;
 
                 foreach (var document in scope.GetDocuments(solution))
                 {
-                    await EnqueueWorkItemAsync(analyzer, document, invocationReasons).ConfigureAwait(false);
+                    await EnqueueWorkItemAsync(analyzer, document, invocationReasons)
+                        .ConfigureAwait(false);
                 }
             }
 
-            private async Task EnqueueWorkItemAsync(IIncrementalAnalyzer analyzer, Document document, InvocationReasons invocationReasons)
-            {
-                var priorityService = document.GetLanguageService<IWorkCoordinatorPriorityService>();
-                var isLowPriority = priorityService != null && await priorityService.IsLowPriorityAsync(document, _shutdownToken).ConfigureAwait(false);
+            private async Task EnqueueWorkItemAsync(
+                IIncrementalAnalyzer analyzer,
+                Document document,
+                InvocationReasons invocationReasons
+            ) {
+                var priorityService =
+                    document.GetLanguageService<IWorkCoordinatorPriorityService>();
+                var isLowPriority =
+                    priorityService != null
+                    && await priorityService.IsLowPriorityAsync(document, _shutdownToken)
+                        .ConfigureAwait(false);
 
                 _documentAndProjectWorkerProcessor.Enqueue(
-                    new WorkItem(document.Id, document.Project.Language, invocationReasons,
-                    isLowPriority, analyzer, _listener.BeginAsyncOperation("WorkItem")));
+                    new WorkItem(
+                        document.Id,
+                        document.Project.Language,
+                        invocationReasons,
+                        isLowPriority,
+                        analyzer,
+                        _listener.BeginAsyncOperation("WorkItem")
+                    )
+                );
             }
 
             private async Task EnqueueWorkItemAsync(Solution oldSolution, Solution newSolution)
@@ -535,43 +699,59 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 // TODO: Async version for GetXXX methods?
                 foreach (var addedProject in solutionChanges.GetAddedProjects())
                 {
-                    await EnqueueWorkItemAsync(addedProject, InvocationReasons.DocumentAdded).ConfigureAwait(false);
+                    await EnqueueWorkItemAsync(addedProject, InvocationReasons.DocumentAdded)
+                        .ConfigureAwait(false);
                 }
 
                 foreach (var projectChanges in solutionChanges.GetProjectChanges())
                 {
-                    await EnqueueWorkItemAsync(projectChanges).ConfigureAwait(continueOnCapturedContext: false);
+                    await EnqueueWorkItemAsync(projectChanges)
+                        .ConfigureAwait(continueOnCapturedContext: false);
                 }
 
                 foreach (var removedProject in solutionChanges.GetRemovedProjects())
                 {
-                    await EnqueueWorkItemAsync(removedProject, InvocationReasons.DocumentRemoved).ConfigureAwait(false);
+                    await EnqueueWorkItemAsync(removedProject, InvocationReasons.DocumentRemoved)
+                        .ConfigureAwait(false);
                 }
             }
 
             private async Task EnqueueWorkItemAsync(ProjectChanges projectChanges)
             {
-                await EnqueueProjectConfigurationChangeWorkItemAsync(projectChanges).ConfigureAwait(false);
+                await EnqueueProjectConfigurationChangeWorkItemAsync(projectChanges)
+                    .ConfigureAwait(false);
 
                 foreach (var addedDocumentId in projectChanges.GetAddedDocuments())
                 {
-                    await EnqueueWorkItemAsync(projectChanges.NewProject.GetRequiredDocument(addedDocumentId), InvocationReasons.DocumentAdded).ConfigureAwait(false);
+                    await EnqueueWorkItemAsync(
+                            projectChanges.NewProject.GetRequiredDocument(addedDocumentId),
+                            InvocationReasons.DocumentAdded
+                        )
+                        .ConfigureAwait(false);
                 }
 
                 foreach (var changedDocumentId in projectChanges.GetChangedDocuments())
                 {
-                    await EnqueueWorkItemAsync(projectChanges.OldProject.GetRequiredDocument(changedDocumentId), projectChanges.NewProject.GetRequiredDocument(changedDocumentId))
+                    await EnqueueWorkItemAsync(
+                            projectChanges.OldProject.GetRequiredDocument(changedDocumentId),
+                            projectChanges.NewProject.GetRequiredDocument(changedDocumentId)
+                        )
                         .ConfigureAwait(continueOnCapturedContext: false);
                 }
 
                 foreach (var removedDocumentId in projectChanges.GetRemovedDocuments())
                 {
-                    await EnqueueWorkItemAsync(projectChanges.OldProject.GetRequiredDocument(removedDocumentId), InvocationReasons.DocumentRemoved).ConfigureAwait(false);
+                    await EnqueueWorkItemAsync(
+                            projectChanges.OldProject.GetRequiredDocument(removedDocumentId),
+                            InvocationReasons.DocumentRemoved
+                        )
+                        .ConfigureAwait(false);
                 }
             }
 
-            private async Task EnqueueProjectConfigurationChangeWorkItemAsync(ProjectChanges projectChanges)
-            {
+            private async Task EnqueueProjectConfigurationChangeWorkItemAsync(
+                ProjectChanges projectChanges
+            ) {
                 var oldProject = projectChanges.OldProject;
                 var newProject = projectChanges.NewProject;
 
@@ -580,91 +760,132 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                 if (!object.Equals(oldProject.ParseOptions, newProject.ParseOptions))
                 {
-                    projectConfigurationChange = projectConfigurationChange.With(InvocationReasons.ProjectParseOptionChanged);
+                    projectConfigurationChange = projectConfigurationChange.With(
+                        InvocationReasons.ProjectParseOptionChanged
+                    );
                 }
 
-                if (projectChanges.GetAddedMetadataReferences().Any() ||
-                    projectChanges.GetAddedProjectReferences().Any() ||
-                    projectChanges.GetAddedAnalyzerReferences().Any() ||
-                    projectChanges.GetRemovedMetadataReferences().Any() ||
-                    projectChanges.GetRemovedProjectReferences().Any() ||
-                    projectChanges.GetRemovedAnalyzerReferences().Any() ||
-                    !object.Equals(oldProject.CompilationOptions, newProject.CompilationOptions) ||
-                    !object.Equals(oldProject.AssemblyName, newProject.AssemblyName) ||
-                    !object.Equals(oldProject.Name, newProject.Name) ||
-                    !object.Equals(oldProject.AnalyzerOptions, newProject.AnalyzerOptions) ||
-                    !object.Equals(oldProject.DefaultNamespace, newProject.DefaultNamespace) ||
-                    !object.Equals(oldProject.OutputFilePath, newProject.OutputFilePath) ||
-                    !object.Equals(oldProject.OutputRefFilePath, newProject.OutputRefFilePath) ||
-                    !oldProject.CompilationOutputInfo.Equals(newProject.CompilationOutputInfo) ||
-                    oldProject.State.RunAnalyzers != newProject.State.RunAnalyzers)
-                {
-                    projectConfigurationChange = projectConfigurationChange.With(InvocationReasons.ProjectConfigurationChanged);
+                if (
+                    projectChanges.GetAddedMetadataReferences().Any()
+                    || projectChanges.GetAddedProjectReferences().Any()
+                    || projectChanges.GetAddedAnalyzerReferences().Any()
+                    || projectChanges.GetRemovedMetadataReferences().Any()
+                    || projectChanges.GetRemovedProjectReferences().Any()
+                    || projectChanges.GetRemovedAnalyzerReferences().Any()
+                    || !object.Equals(oldProject.CompilationOptions, newProject.CompilationOptions)
+                    || !object.Equals(oldProject.AssemblyName, newProject.AssemblyName)
+                    || !object.Equals(oldProject.Name, newProject.Name)
+                    || !object.Equals(oldProject.AnalyzerOptions, newProject.AnalyzerOptions)
+                    || !object.Equals(oldProject.DefaultNamespace, newProject.DefaultNamespace)
+                    || !object.Equals(oldProject.OutputFilePath, newProject.OutputFilePath)
+                    || !object.Equals(oldProject.OutputRefFilePath, newProject.OutputRefFilePath)
+                    || !oldProject.CompilationOutputInfo.Equals(newProject.CompilationOutputInfo)
+                    || oldProject.State.RunAnalyzers != newProject.State.RunAnalyzers
+                ) {
+                    projectConfigurationChange = projectConfigurationChange.With(
+                        InvocationReasons.ProjectConfigurationChanged
+                    );
                 }
 
                 if (!projectConfigurationChange.IsEmpty)
                 {
-                    await EnqueueWorkItemAsync(projectChanges.NewProject, projectConfigurationChange).ConfigureAwait(false);
+                    await EnqueueWorkItemAsync(
+                            projectChanges.NewProject,
+                            projectConfigurationChange
+                        )
+                        .ConfigureAwait(false);
                 }
             }
 
             private async Task EnqueueWorkItemAsync(Document oldDocument, Document newDocument)
             {
-                var differenceService = newDocument.GetLanguageService<IDocumentDifferenceService>();
+                var differenceService =
+                    newDocument.GetLanguageService<IDocumentDifferenceService>();
 
                 if (differenceService == null)
                 {
                     // For languages that don't use a Roslyn syntax tree, they don't export a document difference service.
                     // The whole document should be considered as changed in that case.
-                    await EnqueueWorkItemAsync(newDocument, InvocationReasons.DocumentChanged).ConfigureAwait(false);
+                    await EnqueueWorkItemAsync(newDocument, InvocationReasons.DocumentChanged)
+                        .ConfigureAwait(false);
                 }
                 else
                 {
-                    var differenceResult = await differenceService.GetDifferenceAsync(oldDocument, newDocument, _shutdownToken).ConfigureAwait(false);
+                    var differenceResult = await differenceService.GetDifferenceAsync(
+                            oldDocument,
+                            newDocument,
+                            _shutdownToken
+                        )
+                        .ConfigureAwait(false);
 
                     if (differenceResult != null)
                     {
-                        await EnqueueWorkItemAsync(newDocument, differenceResult.ChangeType, differenceResult.ChangedMember).ConfigureAwait(false);
+                        await EnqueueWorkItemAsync(
+                                newDocument,
+                                differenceResult.ChangeType,
+                                differenceResult.ChangedMember
+                            )
+                            .ConfigureAwait(false);
                     }
                 }
             }
 
-            private Task EnqueueWorkItemForDocumentAsync(Solution solution, DocumentId documentId, InvocationReasons invocationReasons)
-            {
+            private Task EnqueueWorkItemForDocumentAsync(
+                Solution solution,
+                DocumentId documentId,
+                InvocationReasons invocationReasons
+            ) {
                 var document = solution.GetRequiredDocument(documentId);
 
                 return EnqueueWorkItemAsync(document, invocationReasons);
             }
 
-            private Task EnqueueWorkItemForProjectAsync(Solution solution, ProjectId projectId, InvocationReasons invocationReasons)
-            {
+            private Task EnqueueWorkItemForProjectAsync(
+                Solution solution,
+                ProjectId projectId,
+                InvocationReasons invocationReasons
+            ) {
                 var project = solution.GetRequiredProject(projectId);
 
                 return EnqueueWorkItemAsync(project, invocationReasons);
             }
 
-            private async Task EnqueueWorkItemForSolutionAsync(Solution solution, InvocationReasons invocationReasons)
-            {
+            private async Task EnqueueWorkItemForSolutionAsync(
+                Solution solution,
+                InvocationReasons invocationReasons
+            ) {
                 foreach (var projectId in solution.ProjectIds)
                 {
-                    await EnqueueWorkItemForProjectAsync(solution, projectId, invocationReasons).ConfigureAwait(false);
+                    await EnqueueWorkItemForProjectAsync(solution, projectId, invocationReasons)
+                        .ConfigureAwait(false);
                 }
             }
 
-            private async Task EnqueueWorkItemAfterDiffAsync(Solution oldSolution, Solution newSolution, ProjectId projectId)
-            {
+            private async Task EnqueueWorkItemAfterDiffAsync(
+                Solution oldSolution,
+                Solution newSolution,
+                ProjectId projectId
+            ) {
                 var oldProject = oldSolution.GetRequiredProject(projectId);
                 var newProject = newSolution.GetRequiredProject(projectId);
 
-                await EnqueueWorkItemAsync(newProject.GetChanges(oldProject)).ConfigureAwait(continueOnCapturedContext: false);
+                await EnqueueWorkItemAsync(newProject.GetChanges(oldProject))
+                    .ConfigureAwait(continueOnCapturedContext: false);
             }
 
-            private async Task EnqueueWorkItemAfterDiffAsync(Solution oldSolution, Solution newSolution, DocumentId documentId)
-            {
+            private async Task EnqueueWorkItemAfterDiffAsync(
+                Solution oldSolution,
+                Solution newSolution,
+                DocumentId documentId
+            ) {
                 var oldProject = oldSolution.GetRequiredProject(documentId.ProjectId);
                 var newProject = newSolution.GetRequiredProject(documentId.ProjectId);
 
-                await EnqueueWorkItemAsync(oldProject.GetRequiredDocument(documentId), newProject.GetRequiredDocument(documentId)).ConfigureAwait(continueOnCapturedContext: false);
+                await EnqueueWorkItemAsync(
+                        oldProject.GetRequiredDocument(documentId),
+                        newProject.GetRequiredDocument(documentId)
+                    )
+                    .ConfigureAwait(continueOnCapturedContext: false);
             }
 
             internal TestAccessor GetTestAccessor()
@@ -690,15 +911,26 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     {
                         foreach (var document in project.Documents)
                         {
-                            list.Add(new WorkItem(document.Id, document.Project.Language, InvocationReasons.DocumentAdded, isLowPriority: false, activeMember: null, EmptyAsyncToken.Instance));
+                            list.Add(
+                                new WorkItem(
+                                    document.Id,
+                                    document.Project.Language,
+                                    InvocationReasons.DocumentAdded,
+                                    isLowPriority: false,
+                                    activeMember: null,
+                                    EmptyAsyncToken.Instance
+                                )
+                            );
                         }
                     }
 
-                    _workCoordinator._documentAndProjectWorkerProcessor.GetTestAccessor().WaitUntilCompletion(workers, list);
+                    _workCoordinator._documentAndProjectWorkerProcessor.GetTestAccessor()
+                        .WaitUntilCompletion(workers, list);
                 }
 
-                internal void WaitUntilCompletion()
-                    => _workCoordinator._documentAndProjectWorkerProcessor.GetTestAccessor().WaitUntilCompletion();
+                internal void WaitUntilCompletion() =>
+                    _workCoordinator._documentAndProjectWorkerProcessor.GetTestAccessor()
+                        .WaitUntilCompletion();
             }
         }
 
@@ -713,8 +945,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 _projectOrDocumentIds = null;
             }
 
-            public ReanalyzeScope(IEnumerable<ProjectId>? projectIds = null, IEnumerable<DocumentId>? documentIds = null)
-            {
+            public ReanalyzeScope(
+                IEnumerable<ProjectId>? projectIds = null,
+                IEnumerable<DocumentId>? documentIds = null
+            ) {
                 projectIds ??= SpecializedCollections.EmptyEnumerable<ProjectId>();
                 documentIds ??= SpecializedCollections.EmptyEnumerable<DocumentId>();
 
@@ -732,13 +966,14 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 }
             }
 
-            public bool HasMultipleDocuments => _solutionId != null || _projectOrDocumentIds?.Count > 1;
+            public bool HasMultipleDocuments =>
+                _solutionId != null || _projectOrDocumentIds?.Count > 1;
 
             public string GetLanguagesStringForTelemetry(Solution solution)
             {
                 if (_solutionId != null && solution.Id != _solutionId)
                 {
-                    // return empty if given solution is not 
+                    // return empty if given solution is not
                     // same as solution this scope is created for
                     return string.Empty;
                 }
@@ -746,7 +981,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 using var pool = SharedPools.Default<HashSet<string>>().GetPooledObject();
                 if (_solutionId != null)
                 {
-                    pool.Object.UnionWith(solution.State.ProjectStates.Select(kv => kv.Value.Language));
+                    pool.Object.UnionWith(
+                        solution.State.ProjectStates.Select(kv => kv.Value.Language)
+                    );
                     return string.Join(",", pool.Object);
                 }
 
@@ -762,7 +999,6 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             {
                                 pool.Object.Add(project.Language);
                             }
-
                             break;
                         case DocumentId documentId:
                             var document = solution.GetDocument(documentId);
@@ -770,7 +1006,6 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             {
                                 pool.Object.Add(document.Project.Language);
                             }
-
                             break;
                         default:
                             throw ExceptionUtilities.UnexpectedValue(projectOrDocumentId);
@@ -810,7 +1045,6 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             {
                                 count += project.DocumentIds.Count;
                             }
-
                             break;
                         case DocumentId documentId:
                             count++;
@@ -847,28 +1081,26 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     switch (projectOrDocumentId)
                     {
                         case ProjectId projectId:
+                        {
+                            var project = solution.GetProject(projectId);
+                            if (project != null)
                             {
-                                var project = solution.GetProject(projectId);
-                                if (project != null)
-                                {
-                                    foreach (var document in project.Documents)
-                                    {
-                                        yield return document;
-                                    }
-                                }
-
-                                break;
-                            }
-                        case DocumentId documentId:
-                            {
-                                var document = solution.GetDocument(documentId);
-                                if (document != null)
+                                foreach (var document in project.Documents)
                                 {
                                     yield return document;
                                 }
-
-                                break;
                             }
+                            break;
+                        }
+                        case DocumentId documentId:
+                        {
+                            var document = solution.GetDocument(documentId);
+                            if (document != null)
+                            {
+                                yield return document;
+                            }
+                            break;
+                        }
                     }
                 }
             }

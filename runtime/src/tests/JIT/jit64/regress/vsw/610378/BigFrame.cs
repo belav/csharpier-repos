@@ -5,7 +5,7 @@
 //  stack frame over 1 page (4K)
 //  non-optimized jit code (compile with no optimizations or run with managed debugger attached
 //  static method with first or second arg as float, or instance method with first arg as float
-//Test code has methods that have just over and just under 1 page frame size.  Repro hits with 
+//Test code has methods that have just over and just under 1 page frame size.  Repro hits with
 //larger frame methods (LargeFrameSize(float,float)).
 //
 //Big frame sizes are accomplished with local structs that have very large explicit layout field offset.

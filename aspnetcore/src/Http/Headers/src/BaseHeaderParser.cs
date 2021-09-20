@@ -7,15 +7,19 @@ namespace Microsoft.Net.Http.Headers
 {
     internal abstract class BaseHeaderParser<T> : HttpHeaderParser<T>
     {
-        protected BaseHeaderParser(bool supportsMultipleValues)
-            : base(supportsMultipleValues)
-        {
-        }
+        protected BaseHeaderParser(bool supportsMultipleValues) : base(supportsMultipleValues) { }
 
-        protected abstract int GetParsedValueLength(StringSegment value, int startIndex, out T? parsedValue);
+        protected abstract int GetParsedValueLength(
+            StringSegment value,
+            int startIndex,
+            out T? parsedValue
+        );
 
-        public sealed override bool TryParseValue(StringSegment value, ref int index, out T? parsedValue)
-        {
+        public sealed override bool TryParseValue(
+            StringSegment value,
+            ref int index,
+            out T? parsedValue
+        ) {
             parsedValue = default;
 
             // If multiple values are supported (i.e. list of values), then accept an empty string: The header may
@@ -29,8 +33,12 @@ namespace Microsoft.Net.Http.Headers
             }
 
             var separatorFound = false;
-            var current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(value, index, SupportsMultipleValues,
-                out separatorFound);
+            var current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(
+                value,
+                index,
+                SupportsMultipleValues,
+                out separatorFound
+            );
 
             if (separatorFound && !SupportsMultipleValues)
             {
@@ -54,12 +62,18 @@ namespace Microsoft.Net.Http.Headers
             }
 
             current = current + length;
-            current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(value, current, SupportsMultipleValues,
-                out separatorFound);
+            current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(
+                value,
+                current,
+                SupportsMultipleValues,
+                out separatorFound
+            );
 
             // If we support multiple values and we've not reached the end of the string, then we must have a separator.
-            if ((separatorFound && !SupportsMultipleValues) || (!separatorFound && (current < value.Length)))
-            {
+            if (
+                (separatorFound && !SupportsMultipleValues)
+                || (!separatorFound && (current < value.Length))
+            ) {
                 return false;
             }
 

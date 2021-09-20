@@ -10,7 +10,13 @@ namespace Microsoft.CodeAnalysis.Razor
     {
         public static SourceSpan AsSourceSpan(this TextSpan textSpan)
         {
-            return new SourceSpan(filePath: null, absoluteIndex: textSpan.Start, lineIndex: -1, characterIndex: -1, length: textSpan.Length);
+            return new SourceSpan(
+                filePath: null,
+                absoluteIndex: textSpan.Start,
+                lineIndex: -1,
+                characterIndex: -1,
+                length: textSpan.Length
+            );
         }
     }
 }

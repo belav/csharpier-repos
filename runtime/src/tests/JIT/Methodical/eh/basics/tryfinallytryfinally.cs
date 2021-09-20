@@ -33,6 +33,7 @@ namespace hello
             {
                 Console.WriteLine("In try");
             }
+
             finally
             {
                 Console.WriteLine("In finally");
@@ -41,6 +42,7 @@ namespace hello
             {
                 Console.WriteLine("In try");
             }
+
             finally
             {
                 Console.WriteLine("In finally");

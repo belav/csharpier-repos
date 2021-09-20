@@ -23,13 +23,9 @@ namespace System.CommandLine.Rendering.Tests
             var one = new ForegroundColorSpan("green", Ansi.Color.Foreground.Green);
             var two = new ForegroundColorSpan("green", Ansi.Color.Foreground.Green);
 
-            one.Equals(two)
-               .Should()
-               .BeTrue();
+            one.Equals(two).Should().BeTrue();
 
-            one.Invoking(code => code.Equals(null))
-               .Should()
-               .NotThrow<NullReferenceException>();
+            one.Invoking(code => code.Equals(null)).Should().NotThrow<NullReferenceException>();
         }
 
         [Fact]
@@ -38,9 +34,7 @@ namespace System.CommandLine.Rendering.Tests
             var one = new ForegroundColorSpan("red", Ansi.Color.Foreground.Green);
             var two = new ForegroundColorSpan("green", Ansi.Color.Foreground.Green);
 
-            one.Equals(two)
-               .Should()
-               .BeFalse();
+            one.Equals(two).Should().BeFalse();
         }
 
         [Fact]
@@ -58,13 +52,9 @@ namespace System.CommandLine.Rendering.Tests
             var one = new BackgroundColorSpan("green", Ansi.Color.Foreground.Green);
             var two = new BackgroundColorSpan("green", Ansi.Color.Foreground.Green);
 
-            one.Equals(two)
-               .Should()
-               .BeTrue();
+            one.Equals(two).Should().BeTrue();
 
-            one.Invoking(code => code.Equals(null))
-               .Should()
-               .NotThrow<NullReferenceException>();
+            one.Invoking(code => code.Equals(null)).Should().NotThrow<NullReferenceException>();
         }
 
         [Fact]
@@ -73,9 +63,7 @@ namespace System.CommandLine.Rendering.Tests
             var one = new BackgroundColorSpan("red", Ansi.Color.Foreground.Red);
             var two = new BackgroundColorSpan("green", Ansi.Color.Foreground.Green);
 
-            one.Equals(two)
-               .Should()
-               .BeFalse();
+            one.Equals(two).Should().BeFalse();
         }
 
         [Fact]
@@ -84,9 +72,7 @@ namespace System.CommandLine.Rendering.Tests
             var one = new ForegroundColorSpan("green", Ansi.Color.Foreground.Green);
             var two = new BackgroundColorSpan("green", Ansi.Color.Foreground.Green);
 
-            one.Equals(two)
-               .Should()
-               .BeFalse();
+            one.Equals(two).Should().BeFalse();
         }
 
         [Fact]
@@ -113,13 +99,9 @@ namespace System.CommandLine.Rendering.Tests
             var one = new StyleSpan("green", Ansi.Color.Foreground.Green);
             var two = new StyleSpan("green", Ansi.Color.Foreground.Green);
 
-            one.Equals(two)
-               .Should()
-               .BeTrue();
+            one.Equals(two).Should().BeTrue();
 
-            one.Invoking(code => code.Equals(null))
-               .Should()
-               .NotThrow<NullReferenceException>();
+            one.Invoking(code => code.Equals(null)).Should().NotThrow<NullReferenceException>();
         }
 
         [Fact]
@@ -128,16 +110,13 @@ namespace System.CommandLine.Rendering.Tests
             var one = new StyleSpan("red", Ansi.Color.Foreground.Green);
             var two = new StyleSpan("green", Ansi.Color.Foreground.Green);
 
-            one.Equals(two)
-               .Should()
-               .BeFalse();
+            one.Equals(two).Should().BeFalse();
         }
 
         [Fact]
         public void FormatSpans_do_not_have_default_string_representations()
         {
-            $"{ForegroundColorSpan.DarkGray()}The {BackgroundColorSpan.Cyan()}quick{StyleSpan.BlinkOn()} brown fox jumped over the lazy dog.{StyleSpan.BoldOff()}{ForegroundColorSpan.Reset()}{BackgroundColorSpan.Reset()}"
-                .Should()
+            $"{ForegroundColorSpan.DarkGray()}The {BackgroundColorSpan.Cyan()}quick{StyleSpan.BlinkOn()} brown fox jumped over the lazy dog.{StyleSpan.BoldOff()}{ForegroundColorSpan.Reset()}{BackgroundColorSpan.Reset()}".Should()
                 .Be("The quick brown fox jumped over the lazy dog.");
         }
     }

@@ -22,8 +22,7 @@ namespace Microsoft.EntityFrameworkCore
         ///     to create instances of this class and it is not designed to be directly constructed in your application code.
         /// </summary>
         /// <param name="extensions"> The extensions that store the configured options. </param>
-        protected DbContextOptions(
-            IReadOnlyDictionary<Type, IDbContextOptionsExtension> extensions)
+        protected DbContextOptions(IReadOnlyDictionary<Type, IDbContextOptionsExtension> extensions)
         {
             Check.NotNull(extensions, nameof(extensions));
 
@@ -33,8 +32,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Gets the extensions that store the configured options.
         /// </summary>
-        public virtual IEnumerable<IDbContextOptionsExtension> Extensions
-            => _extensions.Values;
+        public virtual IEnumerable<IDbContextOptionsExtension> Extensions => _extensions.Values;
 
         /// <summary>
         ///     Gets the extension of the specified type. Returns null if no extension of the specified type is configured.
@@ -42,8 +40,10 @@ namespace Microsoft.EntityFrameworkCore
         /// <typeparam name="TExtension"> The type of the extension to get. </typeparam>
         /// <returns> The extension, or null if none was found. </returns>
         public virtual TExtension? FindExtension<TExtension>()
-            where TExtension : class, IDbContextOptionsExtension
-            => _extensions.TryGetValue(typeof(TExtension), out var extension) ? (TExtension)extension : null;
+            where TExtension : class, IDbContextOptionsExtension =>
+            _extensions.TryGetValue(typeof(TExtension), out var extension)
+                ? (TExtension)extension
+                : null;
 
         /// <summary>
         ///     Gets the extension of the specified type. Throws if no extension of the specified type is configured.
@@ -56,7 +56,9 @@ namespace Microsoft.EntityFrameworkCore
             var extension = FindExtension<TExtension>();
             if (extension == null)
             {
-                throw new InvalidOperationException(CoreStrings.OptionsExtensionNotFound(typeof(TExtension).ShortDisplayName()));
+                throw new InvalidOperationException(
+                    CoreStrings.OptionsExtensionNotFound(typeof(TExtension).ShortDisplayName())
+                );
             }
 
             return extension;
@@ -83,8 +85,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Specifies that no further configuration of this options object should occur.
         /// </summary>
-        public virtual void Freeze()
-            => IsFrozen = true;
+        public virtual void Freeze() => IsFrozen = true;
 
         /// <summary>
         ///     Returns <see langword="true" /> if <see cref="Freeze" /> has been called. A frozen options object cannot be further

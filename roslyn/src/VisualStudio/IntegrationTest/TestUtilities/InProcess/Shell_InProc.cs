@@ -16,37 +16,64 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public string GetVersion()
         {
-            return InvokeOnUIThread(cancellationToken =>
-            {
-                var shell = GetGlobalService<SVsShell, IVsShell>();
-                ErrorHandler.ThrowOnFailure(shell.GetProperty((int)__VSSPROPID5.VSSPROPID_ReleaseVersion, out var version));
-                return (string)version;
-            });
+            return InvokeOnUIThread(
+                cancellationToken =>
+                {
+                    var shell = GetGlobalService<SVsShell, IVsShell>();
+                    ErrorHandler.ThrowOnFailure(
+                        shell.GetProperty(
+                            (int)__VSSPROPID5.VSSPROPID_ReleaseVersion,
+                            out var version
+                        )
+                    );
+                    return (string)version;
+                }
+            );
         }
 
-        public string GetActiveWindowCaption()
-            => InvokeOnUIThread(cancellationToken => GetDTE().ActiveWindow.Caption);
+        public string GetActiveWindowCaption() =>
+            InvokeOnUIThread(cancellationToken => GetDTE().ActiveWindow.Caption);
 
-        public IntPtr GetHWnd()
-            => (IntPtr)GetDTE().MainWindow.HWnd;
+        public IntPtr GetHWnd() => (IntPtr)GetDTE().MainWindow.HWnd;
 
-        public bool IsActiveTabProvisional()
-            => InvokeOnUIThread(cancellationToken =>
-            {
-                var shellMonitorSelection = GetGlobalService<SVsShellMonitorSelection, IVsMonitorSelection>();
-                if (!ErrorHandler.Succeeded(shellMonitorSelection.GetCurrentElementValue((uint)VSConstants.VSSELELEMID.SEID_DocumentFrame, out var windowFrameObject)))
+        public bool IsActiveTabProvisional() =>
+            InvokeOnUIThread(
+                cancellationToken =>
                 {
-                    throw new InvalidOperationException("Tried to get the active document frame but no documents were open.");
-                }
+                    var shellMonitorSelection = GetGlobalService<
+                        SVsShellMonitorSelection,
+                        IVsMonitorSelection
+                    >();
+                    if (
+                        !ErrorHandler.Succeeded(
+                            shellMonitorSelection.GetCurrentElementValue(
+                                (uint)VSConstants.VSSELELEMID.SEID_DocumentFrame,
+                                out var windowFrameObject
+                            )
+                        )
+                    ) {
+                        throw new InvalidOperationException(
+                            "Tried to get the active document frame but no documents were open."
+                        );
+                    }
 
-                var windowFrame = (IVsWindowFrame)windowFrameObject;
-                if (!ErrorHandler.Succeeded(windowFrame.GetProperty((int)VsFramePropID.IsProvisional, out var isProvisionalObject)))
-                {
-                    throw new InvalidOperationException("The active window frame did not have an 'IsProvisional' property.");
-                }
+                    var windowFrame = (IVsWindowFrame)windowFrameObject;
+                    if (
+                        !ErrorHandler.Succeeded(
+                            windowFrame.GetProperty(
+                                (int)VsFramePropID.IsProvisional,
+                                out var isProvisionalObject
+                            )
+                        )
+                    ) {
+                        throw new InvalidOperationException(
+                            "The active window frame did not have an 'IsProvisional' property."
+                        );
+                    }
 
-                return (bool)isProvisionalObject;
-            });
+                    return (bool)isProvisionalObject;
+                }
+            );
 
         public bool IsUIContextActive(Guid context)
         {

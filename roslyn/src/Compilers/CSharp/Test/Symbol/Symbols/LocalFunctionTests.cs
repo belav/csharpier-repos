@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
         [Fact, WorkItem(27719, "https://github.com/dotnet/roslyn/issues/27719")]
         public void LocalFunctionIsNotStatic()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M()
@@ -31,7 +32,10 @@ class C
             var tree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var localSyntax = tree.GetCompilationUnitRoot().DescendantNodes().OfType<LocalFunctionStatementSyntax>().Single();
+            var localSyntax = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<LocalFunctionStatementSyntax>()
+                .Single();
             var local = semanticModel.GetDeclaredSymbol(localSyntax);
             Assert.False(local.IsStatic);
         }
@@ -39,7 +43,8 @@ class C
         [Fact, WorkItem(27719, "https://github.com/dotnet/roslyn/issues/27719")]
         public void StaticLocalFunctionIsStatic()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M()
@@ -52,7 +57,10 @@ class C
             var tree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var localSyntax = tree.GetCompilationUnitRoot().DescendantNodes().OfType<LocalFunctionStatementSyntax>().Single();
+            var localSyntax = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<LocalFunctionStatementSyntax>()
+                .Single();
             var local = semanticModel.GetDeclaredSymbol(localSyntax);
             Assert.True(local.IsStatic);
         }
@@ -60,7 +68,8 @@ class C
         [Fact, WorkItem(27719, "https://github.com/dotnet/roslyn/issues/27719")]
         public void LocalFunctionInStaticMethodIsNotStatic()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static void M()
@@ -73,7 +82,10 @@ class C
             var tree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var localSyntax = tree.GetCompilationUnitRoot().DescendantNodes().OfType<LocalFunctionStatementSyntax>().Single();
+            var localSyntax = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<LocalFunctionStatementSyntax>()
+                .Single();
             var local = semanticModel.GetDeclaredSymbol(localSyntax);
             Assert.False(local.IsStatic);
         }
@@ -81,7 +93,8 @@ class C
         [Fact]
         public void LocalFunctionDoesNotRequireInstanceReceiver()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M()
@@ -96,10 +109,14 @@ class C
             var tree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var localsSyntax = tree.GetCompilationUnitRoot().DescendantNodes().OfType<LocalFunctionStatementSyntax>().ToArray();
+            var localsSyntax = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<LocalFunctionStatementSyntax>()
+                .ToArray();
             var local = semanticModel.GetDeclaredSymbol(localsSyntax[0]).GetSymbol<MethodSymbol>();
             Assert.False(local.RequiresInstanceReceiver);
-            var staticLocal = semanticModel.GetDeclaredSymbol(localsSyntax[0]).GetSymbol<MethodSymbol>();
+            var staticLocal = semanticModel.GetDeclaredSymbol(localsSyntax[0])
+                .GetSymbol<MethodSymbol>();
             Assert.False(staticLocal.RequiresInstanceReceiver);
         }
     }

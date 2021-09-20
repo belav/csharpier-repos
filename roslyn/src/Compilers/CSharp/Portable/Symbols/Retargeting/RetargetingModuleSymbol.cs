@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             public AssemblySymbol To;
             private ConcurrentDictionary<NamedTypeSymbol, NamedTypeSymbol> _symbolMap;
 
-            public ConcurrentDictionary<NamedTypeSymbol, NamedTypeSymbol> SymbolMap => LazyInitializer.EnsureInitialized(ref _symbolMap);
+            public ConcurrentDictionary<NamedTypeSymbol, NamedTypeSymbol> SymbolMap =>
+                LazyInitializer.EnsureInitialized(ref _symbolMap);
         }
 
         internal readonly RetargetingSymbolTranslator RetargetingTranslator;
@@ -73,8 +74,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         /// <param name="underlyingModule">
         /// The underlying ModuleSymbol, cannot be another RetargetingModuleSymbol.
         /// </param>
-        public RetargetingModuleSymbol(RetargetingAssemblySymbol retargetingAssembly, SourceModuleSymbol underlyingModule)
-        {
+        public RetargetingModuleSymbol(
+            RetargetingAssemblySymbol retargetingAssembly,
+            SourceModuleSymbol underlyingModule
+        ) {
             Debug.Assert((object)retargetingAssembly != null);
             Debug.Assert((object)underlyingModule != null);
 
@@ -102,18 +105,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         internal override Machine Machine
         {
-            get
-            {
-                return _underlyingModule.Machine;
-            }
+            get { return _underlyingModule.Machine; }
         }
 
         internal override bool Bit32Required
         {
-            get
-            {
-                return _underlyingModule.Bit32Required;
-            }
+            get { return _underlyingModule.Bit32Required; }
         }
 
         /// <summary>
@@ -121,18 +118,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         /// </summary>
         public SourceModuleSymbol UnderlyingModule
         {
-            get
-            {
-                return _underlyingModule;
-            }
+            get { return _underlyingModule; }
         }
 
         public override NamespaceSymbol GlobalNamespace
         {
-            get
-            {
-                return RetargetingTranslator.Retarget(_underlyingModule.GlobalNamespace);
-            }
+            get { return RetargetingTranslator.Retarget(_underlyingModule.GlobalNamespace); }
         }
 
         public override bool IsImplicitlyDeclared
@@ -142,59 +133,58 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         public override string Name
         {
-            get
-            {
-                return _underlyingModule.Name;
-            }
+            get { return _underlyingModule.Name; }
         }
 
-        public override string GetDocumentationCommentXml(CultureInfo preferredCulture = null, bool expandIncludes = false, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            return _underlyingModule.GetDocumentationCommentXml(preferredCulture, expandIncludes, cancellationToken);
+        public override string GetDocumentationCommentXml(
+            CultureInfo preferredCulture = null,
+            bool expandIncludes = false,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
+            return _underlyingModule.GetDocumentationCommentXml(
+                preferredCulture,
+                expandIncludes,
+                cancellationToken
+            );
         }
 
         public override Symbol ContainingSymbol
         {
-            get
-            {
-                return _retargetingAssembly;
-            }
+            get { return _retargetingAssembly; }
         }
 
         public override AssemblySymbol ContainingAssembly
         {
-            get
-            {
-                return _retargetingAssembly;
-            }
+            get { return _retargetingAssembly; }
         }
 
         public override ImmutableArray<Location> Locations
         {
-            get
-            {
-                return _underlyingModule.Locations;
-            }
+            get { return _underlyingModule.Locations; }
         }
 
         /// <summary>
         /// A helper method for ReferenceManager to set AssemblySymbols for assemblies 
         /// referenced by this module.
         /// </summary>
-        internal override void SetReferences(ModuleReferences<AssemblySymbol> moduleReferences, SourceAssemblySymbol originatingSourceAssemblyDebugOnly)
-        {
+        internal override void SetReferences(
+            ModuleReferences<AssemblySymbol> moduleReferences,
+            SourceAssemblySymbol originatingSourceAssemblyDebugOnly
+        ) {
             base.SetReferences(moduleReferences, originatingSourceAssemblyDebugOnly);
 
             // Build the retargeting map
             _retargetingAssemblyMap.Clear();
 
-            ImmutableArray<AssemblySymbol> underlyingBoundReferences = _underlyingModule.GetReferencedAssemblySymbols();
+            ImmutableArray<AssemblySymbol> underlyingBoundReferences =
+                _underlyingModule.GetReferencedAssemblySymbols();
             ImmutableArray<AssemblySymbol> referencedAssemblySymbols = moduleReferences.Symbols;
 
             Debug.Assert(referencedAssemblySymbols.Length == moduleReferences.Identities.Length);
             Debug.Assert(referencedAssemblySymbols.Length <= underlyingBoundReferences.Length); // Linked references are filtered out.
 
-            int i, j;
+            int i,
+                j;
             for (i = 0, j = 0; i < referencedAssemblySymbols.Length; i++, j++)
             {
                 // Skip linked assemblies for source module
@@ -204,31 +194,50 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 }
 
 #if DEBUG
-                var identityComparer = _underlyingModule.DeclaringCompilation.Options.AssemblyIdentityComparer;
-                var definitionIdentity = ReferenceEquals(referencedAssemblySymbols[i], originatingSourceAssemblyDebugOnly) ?
-                        new AssemblyIdentity(name: originatingSourceAssemblyDebugOnly.Name) :
-                        referencedAssemblySymbols[i].Identity;
+                var identityComparer =
+                    _underlyingModule.DeclaringCompilation.Options.AssemblyIdentityComparer;
+                var definitionIdentity = ReferenceEquals(
+                    referencedAssemblySymbols[i],
+                    originatingSourceAssemblyDebugOnly
+                )
+                    ? new AssemblyIdentity(name: originatingSourceAssemblyDebugOnly.Name)
+                    : referencedAssemblySymbols[i].Identity;
 
-                Debug.Assert(identityComparer.Compare(moduleReferences.Identities[i], definitionIdentity) != AssemblyIdentityComparer.ComparisonResult.NotEquivalent);
-                Debug.Assert(identityComparer.Compare(moduleReferences.Identities[i], underlyingBoundReferences[j].Identity) != AssemblyIdentityComparer.ComparisonResult.NotEquivalent);
+                Debug.Assert(
+                    identityComparer.Compare(moduleReferences.Identities[i], definitionIdentity)
+                        != AssemblyIdentityComparer.ComparisonResult.NotEquivalent
+                );
+                Debug.Assert(
+                    identityComparer.Compare(
+                        moduleReferences.Identities[i],
+                        underlyingBoundReferences[j].Identity
+                    ) != AssemblyIdentityComparer.ComparisonResult.NotEquivalent
+                );
 #endif
 
                 if (!ReferenceEquals(referencedAssemblySymbols[i], underlyingBoundReferences[j]))
                 {
                     DestinationData destinationData;
 
-                    if (!_retargetingAssemblyMap.TryGetValue(underlyingBoundReferences[j], out destinationData))
-                    {
-                        _retargetingAssemblyMap.Add(underlyingBoundReferences[j],
-                            new DestinationData { To = referencedAssemblySymbols[i] });
+                    if (
+                        !_retargetingAssemblyMap.TryGetValue(
+                            underlyingBoundReferences[j],
+                            out destinationData
+                        )
+                    ) {
+                        _retargetingAssemblyMap.Add(
+                            underlyingBoundReferences[j],
+                            new DestinationData { To = referencedAssemblySymbols[i] }
+                        );
                     }
                     else
                     {
-                        Debug.Assert(ReferenceEquals(destinationData.To, referencedAssemblySymbols[i]));
+                        Debug.Assert(
+                            ReferenceEquals(destinationData.To, referencedAssemblySymbols[i])
+                        );
                     }
                 }
             }
-
 #if DEBUG
             while (j < underlyingBoundReferences.Length && underlyingBoundReferences[j].IsLinked)
             {
@@ -255,47 +264,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         internal override ICollection<string> TypeNames
         {
-            get
-            {
-                return _underlyingModule.TypeNames;
-            }
+            get { return _underlyingModule.TypeNames; }
         }
 
         internal override ICollection<string> NamespaceNames
         {
-            get
-            {
-                return _underlyingModule.NamespaceNames;
-            }
+            get { return _underlyingModule.NamespaceNames; }
         }
 
         public override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
-            return RetargetingTranslator.GetRetargetedAttributes(_underlyingModule.GetAttributes(), ref _lazyCustomAttributes);
+            return RetargetingTranslator.GetRetargetedAttributes(
+                _underlyingModule.GetAttributes(),
+                ref _lazyCustomAttributes
+            );
         }
 
         internal override bool HasAssemblyCompilationRelaxationsAttribute
         {
-            get
-            {
-                return _underlyingModule.HasAssemblyCompilationRelaxationsAttribute;
-            }
+            get { return _underlyingModule.HasAssemblyCompilationRelaxationsAttribute; }
         }
 
         internal override bool HasAssemblyRuntimeCompatibilityAttribute
         {
-            get
-            {
-                return _underlyingModule.HasAssemblyRuntimeCompatibilityAttribute;
-            }
+            get { return _underlyingModule.HasAssemblyRuntimeCompatibilityAttribute; }
         }
 
         internal override CharSet? DefaultMarshallingCharSet
         {
-            get
-            {
-                return _underlyingModule.DefaultMarshallingCharSet;
-            }
+            get { return _underlyingModule.DefaultMarshallingCharSet; }
         }
 
         internal sealed override CSharpCompilation DeclaringCompilation // perf, not correctness
@@ -307,10 +304,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
         public sealed override bool AreLocalsZeroed
         {
-            get
-            {
-                throw ExceptionUtilities.Unreachable;
-            }
+            get { throw ExceptionUtilities.Unreachable; }
         }
     }
 }

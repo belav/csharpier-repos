@@ -22,10 +22,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
             internal int InstructionsEmitted
             {
-                get
-                {
-                    return _instructionsEmitted;
-                }
+                get { return _instructionsEmitted; }
             }
 
             internal void InstructionAdded()
@@ -38,10 +35,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
             /// </summary>
             internal int MaxStack
             {
-                get
-                {
-                    return _maxStack;
-                }
+                get { return _maxStack; }
                 private set
                 {
                     Debug.Assert(value >= 0 && value <= ushort.MaxValue);
@@ -54,10 +48,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
             /// </summary>
             internal int CurStack
             {
-                get
-                {
-                    return _curStack;
-                }
+                get { return _curStack; }
                 private set
                 {
                     Debug.Assert(value >= 0 && value <= ushort.MaxValue);

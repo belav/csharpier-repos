@@ -24,8 +24,8 @@ namespace SignalRSamples.Hubs
         public ChannelReader<int> ObservableCounter(int count, double delay)
         {
             var observable = Observable.Interval(TimeSpan.FromMilliseconds(delay))
-                             .Select((_, index) => index)
-                             .Take(count);
+                .Select((_, index) => index)
+                .Take(count);
 
             return observable.AsChannelReader(Context.ConnectionAborted);
         }
@@ -34,16 +34,18 @@ namespace SignalRSamples.Hubs
         {
             var channel = Channel.CreateUnbounded<int>();
 
-            Task.Run(async () =>
-            {
-                for (var i = 0; i < count; i++)
+            Task.Run(
+                async () =>
                 {
-                    await channel.Writer.WriteAsync(i);
-                    await Task.Delay(delay);
-                }
+                    for (var i = 0; i < count; i++)
+                    {
+                        await channel.Writer.WriteAsync(i);
+                        await Task.Delay(delay);
+                    }
 
-                channel.Writer.TryComplete();
-            });
+                    channel.Writer.TryComplete();
+                }
+            );
 
             return channel.Reader;
         }

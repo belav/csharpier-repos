@@ -24,15 +24,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 this.ValueField = value;
             }
 
-            internal SyntaxTokenWithValue(SyntaxKind kind, string text, T value, DiagnosticInfo[] diagnostics, SyntaxAnnotation[] annotations)
-                : base(kind, text.Length, diagnostics, annotations)
+            internal SyntaxTokenWithValue(
+                SyntaxKind kind,
+                string text,
+                T value,
+                DiagnosticInfo[] diagnostics,
+                SyntaxAnnotation[] annotations
+            ) : base(kind, text.Length, diagnostics, annotations)
             {
                 this.TextField = text;
                 this.ValueField = value;
             }
 
-            internal SyntaxTokenWithValue(ObjectReader reader)
-                : base(reader)
+            internal SyntaxTokenWithValue(ObjectReader reader) : base(reader)
             {
                 this.TextField = reader.ReadString();
                 this.FullWidth = this.TextField.Length;
@@ -41,7 +45,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
             static SyntaxTokenWithValue()
             {
-                ObjectBinder.RegisterTypeReader(typeof(SyntaxTokenWithValue<T>), r => new SyntaxTokenWithValue<T>(r));
+                ObjectBinder.RegisterTypeReader(
+                    typeof(SyntaxTokenWithValue<T>),
+                    r => new SyntaxTokenWithValue<T>(r)
+                );
             }
 
             internal override void WriteTo(ObjectWriter writer)
@@ -53,46 +60,65 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
             public override string Text
             {
-                get
-                {
-                    return this.TextField;
-                }
+                get { return this.TextField; }
             }
 
             public override object Value
             {
-                get
-                {
-                    return this.ValueField;
-                }
+                get { return this.ValueField; }
             }
 
             public override string ValueText
             {
-                get
-                {
-                    return Convert.ToString(this.ValueField, CultureInfo.InvariantCulture);
-                }
+                get { return Convert.ToString(this.ValueField, CultureInfo.InvariantCulture); }
             }
 
             public override SyntaxToken TokenWithLeadingTrivia(GreenNode trivia)
             {
-                return new SyntaxTokenWithValueAndTrivia<T>(this.Kind, this.TextField, this.ValueField, trivia, null, this.GetDiagnostics(), this.GetAnnotations());
+                return new SyntaxTokenWithValueAndTrivia<T>(
+                    this.Kind,
+                    this.TextField,
+                    this.ValueField,
+                    trivia,
+                    null,
+                    this.GetDiagnostics(),
+                    this.GetAnnotations()
+                );
             }
 
             public override SyntaxToken TokenWithTrailingTrivia(GreenNode trivia)
             {
-                return new SyntaxTokenWithValueAndTrivia<T>(this.Kind, this.TextField, this.ValueField, null, trivia, this.GetDiagnostics(), this.GetAnnotations());
+                return new SyntaxTokenWithValueAndTrivia<T>(
+                    this.Kind,
+                    this.TextField,
+                    this.ValueField,
+                    null,
+                    trivia,
+                    this.GetDiagnostics(),
+                    this.GetAnnotations()
+                );
             }
 
             internal override GreenNode SetDiagnostics(DiagnosticInfo[] diagnostics)
             {
-                return new SyntaxTokenWithValue<T>(this.Kind, this.TextField, this.ValueField, diagnostics, this.GetAnnotations());
+                return new SyntaxTokenWithValue<T>(
+                    this.Kind,
+                    this.TextField,
+                    this.ValueField,
+                    diagnostics,
+                    this.GetAnnotations()
+                );
             }
 
             internal override GreenNode SetAnnotations(SyntaxAnnotation[] annotations)
             {
-                return new SyntaxTokenWithValue<T>(this.Kind, this.TextField, this.ValueField, this.GetDiagnostics(), annotations);
+                return new SyntaxTokenWithValue<T>(
+                    this.Kind,
+                    this.TextField,
+                    this.ValueField,
+                    this.GetDiagnostics(),
+                    annotations
+                );
             }
         }
     }

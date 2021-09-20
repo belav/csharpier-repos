@@ -17,8 +17,11 @@ namespace System.Text.Json.Serialization.Converters
             IsInternalConverterForNumberType = converter.IsInternalConverterForNumberType;
         }
 
-        public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
+        public override T? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        ) {
             // We do not check _converter.HandleNull, as the underlying struct cannot be null.
             // A custom converter for some type T? can handle null.
             if (reader.TokenType == JsonTokenType.Null)
@@ -44,8 +47,10 @@ namespace System.Text.Json.Serialization.Converters
             }
         }
 
-        internal override T? ReadNumberWithCustomHandling(ref Utf8JsonReader reader, JsonNumberHandling numberHandling)
-        {
+        internal override T? ReadNumberWithCustomHandling(
+            ref Utf8JsonReader reader,
+            JsonNumberHandling numberHandling
+        ) {
             // We do not check _converter.HandleNull, as the underlying struct cannot be null.
             // A custom converter for some type T? can handle null.
             if (reader.TokenType == JsonTokenType.Null)
@@ -57,8 +62,11 @@ namespace System.Text.Json.Serialization.Converters
             return value;
         }
 
-        internal override void WriteNumberWithCustomHandling(Utf8JsonWriter writer, T? value, JsonNumberHandling handling)
-        {
+        internal override void WriteNumberWithCustomHandling(
+            Utf8JsonWriter writer,
+            T? value,
+            JsonNumberHandling handling
+        ) {
             if (!value.HasValue)
             {
                 // We do not check _converter.HandleNull, as the underlying struct cannot be null.

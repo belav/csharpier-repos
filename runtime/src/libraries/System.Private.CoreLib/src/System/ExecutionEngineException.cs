@@ -18,19 +18,21 @@ using System.Runtime.Serialization;
 
 namespace System
 {
-    [Obsolete("This type previously indicated an unspecified fatal error in the runtime. The runtime no longer raises this exception so this type is obsolete.")]
+    [Obsolete(
+        "This type previously indicated an unspecified fatal error in the runtime. The runtime no longer raises this exception so this type is obsolete."
+    )]
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class ExecutionEngineException : SystemException
     {
-        public ExecutionEngineException()
-            : base(SR.Arg_ExecutionEngineException)
+        public ExecutionEngineException() : base(SR.Arg_ExecutionEngineException)
         {
             HResult = HResults.COR_E_EXECUTIONENGINE;
         }
 
-        public ExecutionEngineException(string? message)
-            : base(message)
+        public ExecutionEngineException(string? message) : base(message)
         {
             HResult = HResults.COR_E_EXECUTIONENGINE;
         }
@@ -41,8 +43,7 @@ namespace System
             HResult = HResults.COR_E_EXECUTIONENGINE;
         }
 
-        private ExecutionEngineException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        private ExecutionEngineException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

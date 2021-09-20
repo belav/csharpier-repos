@@ -19,19 +19,29 @@ namespace Microsoft.CodeAnalysis.CSharp
             var builder = ArrayBuilder<BoundStatement>.GetInstance();
             VisitStatementSubList(builder, node.Statements);
 
-            if (!this.Instrument || (node != _rootStatement && (node.WasCompilerGenerated || node.Syntax.Kind() != SyntaxKind.Block)))
-            {
+            if (
+                !this.Instrument
+                || (
+                    node != _rootStatement
+                    && (node.WasCompilerGenerated || node.Syntax.Kind() != SyntaxKind.Block)
+                )
+            ) {
                 return node.Update(node.Locals, node.LocalFunctions, builder.ToImmutableAndFree());
             }
 
             LocalSymbol? synthesizedLocal;
-            BoundStatement? prologue = _instrumenter.CreateBlockPrologue(node, out synthesizedLocal);
+            BoundStatement? prologue = _instrumenter.CreateBlockPrologue(
+                node,
+                out synthesizedLocal
+            );
             if (prologue != null)
             {
                 builder.Insert(0, prologue);
             }
-            else if (node == _rootStatement && _factory.TopLevelMethod is SynthesizedSimpleProgramEntryPointSymbol entryPoint)
-            {
+            else if (
+                node == _rootStatement
+                && _factory.TopLevelMethod is SynthesizedSimpleProgramEntryPointSymbol entryPoint
+            ) {
                 builder.Insert(0, _factory.HiddenSequencePoint());
             }
 
@@ -41,9 +51,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 builder.Add(epilogue);
             }
 
-            return new BoundBlock(node.Syntax, synthesizedLocal == null ? node.Locals : node.Locals.Add(synthesizedLocal), node.LocalFunctions, builder.ToImmutableAndFree(), node.HasErrors);
+            return new BoundBlock(
+                node.Syntax,
+                synthesizedLocal == null ? node.Locals : node.Locals.Add(synthesizedLocal),
+                node.LocalFunctions,
+                builder.ToImmutableAndFree(),
+                node.HasErrors
+            );
         }
-
 
         /// <summary>
         /// Visit a partial list of statements that possibly contain using declarations
@@ -52,11 +67,19 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="statements">The list of statements to visit</param>
         /// <param name="startIndex">The index of the <paramref name="statements"/> to begin visiting at</param>
         /// <returns>An <see cref="ImmutableArray{T}"/> of <see cref="BoundStatement"/></returns>
-        public void VisitStatementSubList(ArrayBuilder<BoundStatement> builder, ImmutableArray<BoundStatement> statements, int startIndex = 0)
-        {
+        public void VisitStatementSubList(
+            ArrayBuilder<BoundStatement> builder,
+            ImmutableArray<BoundStatement> statements,
+            int startIndex = 0
+        ) {
             for (int i = startIndex; i < statements.Length; i++)
             {
-                BoundStatement? statement = VisitPossibleUsingDeclaration(statements[i], statements, i, out var replacedUsingDeclarations);
+                BoundStatement? statement = VisitPossibleUsingDeclaration(
+                    statements[i],
+                    statements,
+                    i,
+                    out var replacedUsingDeclarations
+                );
                 if (statement != null)
                 {
                     builder.Add(statement);
@@ -82,31 +105,50 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// When traversing down a set of labels, we set node to the label.body and recurse, but statements[startIndex] still refers to the original parent label 
         /// as we haven't actually moved down the original statement list
         /// </remarks>
-        public BoundStatement? VisitPossibleUsingDeclaration(BoundStatement node, ImmutableArray<BoundStatement> statements, int statementIndex, out bool replacedLocalDeclarations)
-        {
+        public BoundStatement? VisitPossibleUsingDeclaration(
+            BoundStatement node,
+            ImmutableArray<BoundStatement> statements,
+            int statementIndex,
+            out bool replacedLocalDeclarations
+        ) {
             switch (node.Kind)
             {
                 case BoundKind.LabeledStatement:
                     var labelStatement = (BoundLabeledStatement)node;
-                    return MakeLabeledStatement(labelStatement, VisitPossibleUsingDeclaration(labelStatement.Body, statements, statementIndex, out replacedLocalDeclarations));
+                    return MakeLabeledStatement(
+                        labelStatement,
+                        VisitPossibleUsingDeclaration(
+                            labelStatement.Body,
+                            statements,
+                            statementIndex,
+                            out replacedLocalDeclarations
+                        )
+                    );
                 case BoundKind.UsingLocalDeclarations:
-                    // visit everything after this node 
-                    ArrayBuilder<BoundStatement> builder = ArrayBuilder<BoundStatement>.GetInstance();
+                    // visit everything after this node
+                    ArrayBuilder<BoundStatement> builder =
+                        ArrayBuilder<BoundStatement>.GetInstance();
                     VisitStatementSubList(builder, statements, statementIndex + 1);
                     // make a using declaration with the visited statements as its body
                     replacedLocalDeclarations = true;
-                    return MakeLocalUsingDeclarationStatement((BoundUsingLocalDeclarations)node, builder.ToImmutableAndFree());
+                    return MakeLocalUsingDeclarationStatement(
+                        (BoundUsingLocalDeclarations)node,
+                        builder.ToImmutableAndFree()
+                    );
                 default:
                     replacedLocalDeclarations = false;
                     return VisitStatement(node);
             }
         }
 
-
         public override BoundNode VisitNoOpStatement(BoundNoOpStatement node)
         {
             return (node.WasCompilerGenerated || !this.Instrument)
-                ? new BoundBlock(node.Syntax, ImmutableArray<LocalSymbol>.Empty, ImmutableArray<BoundStatement>.Empty)
+                ? new BoundBlock(
+                      node.Syntax,
+                      ImmutableArray<LocalSymbol>.Empty,
+                      ImmutableArray<BoundStatement>.Empty
+                  )
                 : _instrumenter.InstrumentNoOpStatement(node, node);
         }
     }

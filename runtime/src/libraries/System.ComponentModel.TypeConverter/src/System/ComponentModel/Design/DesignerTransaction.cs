@@ -12,9 +12,7 @@ namespace System.ComponentModel.Design
     {
         private bool _suppressedFinalization;
 
-        protected DesignerTransaction() : this("")
-        {
-        }
+        protected DesignerTransaction() : this("") { }
 
         protected DesignerTransaction(string description) => Description = description;
 

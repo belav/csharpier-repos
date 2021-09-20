@@ -12,7 +12,8 @@ using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal abstract partial class AbstractRenameCommandHandler : ICommandHandler<RenameCommandArgs>
+    internal abstract partial class AbstractRenameCommandHandler
+        : ICommandHandler<RenameCommandArgs>
     {
         public CommandState GetCommandState(RenameCommandArgs args)
         {
@@ -37,8 +38,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 return false;
             }
 
-            using (context.OperationContext.AddScope(allowCancellation: true, EditorFeaturesResources.Finding_token_to_rename))
-            {
+            using (
+                context.OperationContext.AddScope(
+                    allowCancellation: true,
+                    EditorFeaturesResources.Finding_token_to_rename
+                )
+            ) {
                 ExecuteRenameWorker(args, context);
             }
 
@@ -64,8 +69,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             {
                 // Is the caret within any of the rename fields in this buffer?
                 // If so, focus the dashboard
-                if (_renameService.ActiveSession.TryGetContainingEditableSpan(caretPoint.Value, out _))
-                {
+                if (
+                    _renameService.ActiveSession.TryGetContainingEditableSpan(
+                        caretPoint.Value,
+                        out _
+                    )
+                ) {
                     SetFocusToDashboard(args.TextView);
                     return;
                 }
@@ -77,15 +86,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             }
 
             var cancellationToken = context.OperationContext.UserCancellationToken;
-            var document = args.SubjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
-                context.OperationContext, _threadingContext);
+            var document =
+                args.SubjectBuffer.CurrentSnapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
+                    context.OperationContext,
+                    _threadingContext
+                );
             if (document == null)
             {
                 ShowErrorDialog(workspace, EditorFeaturesResources.You_must_rename_an_identifier);
                 return;
             }
 
-            var selectedSpans = args.TextView.Selection.GetSnapshotSpansOnBuffer(args.SubjectBuffer);
+            var selectedSpans = args.TextView.Selection.GetSnapshotSpansOnBuffer(
+                args.SubjectBuffer
+            );
 
             // Now make sure the entire selection is contained within that token.
             // There can be zero selectedSpans in projection scenarios.
@@ -95,7 +109,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 return;
             }
 
-            var sessionInfo = _renameService.StartInlineSession(document, selectedSpans.Single().Span.ToTextSpan(), cancellationToken);
+            var sessionInfo = _renameService.StartInlineSession(
+                document,
+                selectedSpans.Single().Span.ToTextSpan(),
+                cancellationToken
+            );
             if (!sessionInfo.CanRename)
             {
                 ShowErrorDialog(workspace, sessionInfo.LocalizedErrorMessage);
@@ -104,15 +122,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
         private static bool CanRename(RenameCommandArgs args)
         {
-            return args.SubjectBuffer.TryGetWorkspace(out var workspace) &&
-                workspace.CanApplyChange(ApplyChangesKind.ChangeDocument) &&
-                args.SubjectBuffer.SupportsRename() && !args.SubjectBuffer.IsInLspEditorContext();
+            return args.SubjectBuffer.TryGetWorkspace(out var workspace)
+                && workspace.CanApplyChange(ApplyChangesKind.ChangeDocument)
+                && args.SubjectBuffer.SupportsRename()
+                && !args.SubjectBuffer.IsInLspEditorContext();
         }
 
         private static void ShowErrorDialog(Workspace workspace, string message)
         {
             var notificationService = workspace.Services.GetService<INotificationService>();
-            notificationService.SendNotification(message, title: EditorFeaturesResources.Rename, severity: NotificationSeverity.Error);
+            notificationService.SendNotification(
+                message,
+                title: EditorFeaturesResources.Rename,
+                severity: NotificationSeverity.Error
+            );
         }
     }
 }

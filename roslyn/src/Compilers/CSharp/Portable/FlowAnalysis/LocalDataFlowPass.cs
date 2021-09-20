@@ -13,9 +13,13 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// <summary>
     /// Does a data flow analysis for state attached to local variables and fields of struct locals.
     /// </summary>
-    internal abstract partial class LocalDataFlowPass<TLocalState, TLocalFunctionState> : AbstractFlowPass<TLocalState, TLocalFunctionState>
+    internal abstract partial class LocalDataFlowPass<TLocalState, TLocalFunctionState>
+        : AbstractFlowPass<TLocalState, TLocalFunctionState>
         where TLocalState : LocalDataFlowPass<TLocalState, TLocalFunctionState>.ILocalDataFlowState
-        where TLocalFunctionState : AbstractFlowPass<TLocalState, TLocalFunctionState>.AbstractLocalFunctionState
+        where TLocalFunctionState : AbstractFlowPass<
+                TLocalState,
+                TLocalFunctionState
+            >.AbstractLocalFunctionState
     {
         internal interface ILocalDataFlowState : ILocalState
         {
@@ -36,8 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol? member,
             BoundNode node,
             EmptyStructTypeCache emptyStructs,
-            bool trackUnassignments)
-            : base(compilation, member, node, nonMonotonicTransferFunction: trackUnassignments)
+            bool trackUnassignments
+        ) : base(compilation, member, node, nonMonotonicTransferFunction: trackUnassignments)
         {
             Debug.Assert(emptyStructs != null);
             _emptyStructTypeCache = emptyStructs;
@@ -51,9 +55,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode firstInRegion,
             BoundNode lastInRegion,
             bool trackRegions,
-            bool trackUnassignments)
-            : base(compilation, member, node, firstInRegion, lastInRegion, trackRegions: trackRegions, nonMonotonicTransferFunction: trackUnassignments)
-        {
+            bool trackUnassignments
+        ) : base(
+            compilation,
+            member,
+            node,
+            firstInRegion,
+            lastInRegion,
+            trackRegions: trackRegions,
+            nonMonotonicTransferFunction: trackUnassignments
+        ) {
             _emptyStructTypeCache = emptyStructs;
         }
 
@@ -74,10 +85,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         protected int VariableSlot(Symbol symbol, int containingSlot = 0)
         {
-            containingSlot = DescendThroughTupleRestFields(ref symbol, containingSlot, forceContainingSlotsToExist: false);
+            containingSlot = DescendThroughTupleRestFields(
+                ref symbol,
+                containingSlot,
+                forceContainingSlotsToExist: false
+            );
 
             int slot;
-            return TryGetVariable(new VariableIdentifier(symbol, containingSlot), out slot) ? slot : -1;
+            return TryGetVariable(new VariableIdentifier(symbol, containingSlot), out slot)
+                ? slot
+                : -1;
         }
 
         protected virtual bool IsEmptyStructType(TypeSymbol type)
@@ -88,14 +105,23 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Force a variable to have a slot.  Returns -1 if the variable has an empty struct type.
         /// </summary>
-        protected virtual int GetOrCreateSlot(Symbol symbol, int containingSlot = 0, bool forceSlotEvenIfEmpty = false, bool createIfMissing = true)
-        {
+        protected virtual int GetOrCreateSlot(
+            Symbol symbol,
+            int containingSlot = 0,
+            bool forceSlotEvenIfEmpty = false,
+            bool createIfMissing = true
+        ) {
             Debug.Assert(containingSlot >= 0);
             Debug.Assert(symbol != null);
 
-            if (symbol.Kind == SymbolKind.RangeVariable) return -1;
+            if (symbol.Kind == SymbolKind.RangeVariable)
+                return -1;
 
-            containingSlot = DescendThroughTupleRestFields(ref symbol, containingSlot, forceContainingSlotsToExist: true);
+            containingSlot = DescendThroughTupleRestFields(
+                ref symbol,
+                containingSlot,
+                forceContainingSlotsToExist: true
+            );
 
             if (containingSlot < 0)
             {
@@ -149,8 +175,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// a) Rest field does not exist, which could happen in rare error scenarios involving broken ValueTuple types
         /// b) Rest is not tracked already and forceSlotsToExist is false (otherwise we create slots on demand)
         /// </summary>
-        private int DescendThroughTupleRestFields(ref Symbol symbol, int containingSlot, bool forceContainingSlotsToExist)
-        {
+        private int DescendThroughTupleRestFields(
+            ref Symbol symbol,
+            int containingSlot,
+            bool forceContainingSlotsToExist
+        ) {
             if (symbol is TupleElementFieldSymbol fieldSymbol)
             {
                 TypeSymbol containingType = symbol.ContainingType;
@@ -160,9 +189,16 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 // descend through Rest fields
                 // force corresponding slots if do not exist
-                while (!TypeSymbol.Equals(containingType, symbol.ContainingType, TypeCompareKind.ConsiderEverything))
-                {
-                    var restField = containingType.GetMembers(NamedTypeSymbol.ValueTupleRestFieldName).FirstOrDefault() as FieldSymbol;
+                while (
+                    !TypeSymbol.Equals(
+                        containingType,
+                        symbol.ContainingType,
+                        TypeCompareKind.ConsiderEverything
+                    )
+                ) {
+                    var restField =
+                        containingType.GetMembers(NamedTypeSymbol.ValueTupleRestFieldName)
+                            .FirstOrDefault() as FieldSymbol;
                     if (restField is null)
                     {
                         return -1;
@@ -174,8 +210,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                     else
                     {
-                        if (!TryGetVariable(new VariableIdentifier(restField, containingSlot), out containingSlot))
-                        {
+                        if (
+                            !TryGetVariable(
+                                new VariableIdentifier(restField, containingSlot),
+                                out containingSlot
+                            )
+                        ) {
                             return -1;
                         }
                     }
@@ -187,7 +227,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             return containingSlot;
         }
 
-        protected abstract bool TryGetReceiverAndMember(BoundExpression expr, out BoundExpression? receiver, [NotNullWhen(true)] out Symbol? member);
+        protected abstract bool TryGetReceiverAndMember(
+            BoundExpression expr,
+            out BoundExpression? receiver,
+            [NotNullWhen(true)] out Symbol? member
+        );
 
         /// <summary>
         /// Return the slot for a variable, or -1 if it is not tracked (because, for example, it is an empty struct).
@@ -200,7 +244,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 case BoundKind.ThisReference:
                 case BoundKind.BaseReference:
-                    return (object)MethodThisParameter != null ? GetOrCreateSlot(MethodThisParameter) : -1;
+                    return (object)MethodThisParameter != null
+                        ? GetOrCreateSlot(MethodThisParameter)
+                        : -1;
                 case BoundKind.Local:
                     return GetOrCreateSlot(((BoundLocal)node).LocalSymbol);
                 case BoundKind.Parameter:
@@ -210,8 +256,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.FieldAccess:
                 case BoundKind.EventAccess:
                 case BoundKind.PropertyAccess:
-                    if (TryGetReceiverAndMember(node, out BoundExpression? receiver, out Symbol? member))
-                    {
+                    if (
+                        TryGetReceiverAndMember(
+                            node,
+                            out BoundExpression? receiver,
+                            out Symbol? member
+                        )
+                    ) {
                         Debug.Assert((receiver is null) != member.RequiresInstanceReceiver());
                         return MakeMemberSlot(receiver, member);
                     }
@@ -245,12 +296,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             return GetOrCreateSlot(member, containingSlot);
         }
 
-        protected static bool HasInitializer(Symbol field) => field switch
-        {
-            SourceMemberFieldSymbol f => f.HasInitializer,
-            SynthesizedBackingFieldSymbol f => f.HasInitializer,
-            SourceFieldLikeEventSymbol e => e.AssociatedEventField?.HasInitializer == true,
-            _ => false
-        };
+        protected static bool HasInitializer(Symbol field) =>
+            field switch
+            {
+                SourceMemberFieldSymbol f => f.HasInitializer,
+                SynthesizedBackingFieldSymbol f => f.HasInitializer,
+                SourceFieldLikeEventSymbol e => e.AssociatedEventField?.HasInitializer == true,
+                _ => false
+            };
     }
 }

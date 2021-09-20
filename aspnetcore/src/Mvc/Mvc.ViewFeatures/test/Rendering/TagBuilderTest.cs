@@ -27,8 +27,11 @@ namespace Microsoft.AspNetCore.Mvc.Core.Rendering
         [Theory]
         [InlineData(false, "Hello", "World")]
         [InlineData(true, "hello", "something else")]
-        public void MergeAttribute_IgnoresCase(bool replaceExisting, string expectedKey, string expectedValue)
-        {
+        public void MergeAttribute_IgnoresCase(
+            bool replaceExisting,
+            string expectedKey,
+            string expectedValue
+        ) {
             // Arrange
             var tagBuilder = new TagBuilder("p");
             tagBuilder.Attributes.Add("Hello", "World");
@@ -73,8 +76,10 @@ namespace Microsoft.AspNetCore.Mvc.Core.Rendering
 
         [Theory]
         [MemberData(nameof(RenderingTestingData))]
-        public void WriteTo_IgnoresIdAttributeCase(TagRenderMode renderingMode, string expectedOutput)
-        {
+        public void WriteTo_IgnoresIdAttributeCase(
+            TagRenderMode renderingMode,
+            string expectedOutput
+        ) {
             // Arrange
             var tagBuilder = new TagBuilder("p");
             // An empty value id attribute should not be rendered via ToString.
@@ -120,8 +125,8 @@ namespace Microsoft.AspNetCore.Mvc.Core.Rendering
         public void WriteTo_WriteEmptyAttribute_WhenValueIsNullOrEmpty(
             string attributeKey,
             string attributeValue,
-            string expectedOutput)
-        {
+            string expectedOutput
+        ) {
             // Arrange
             var tagBuilder = new TagBuilder("p");
 
@@ -237,7 +242,6 @@ namespace Microsoft.AspNetCore.Mvc.Core.Rendering
 
             // Assert
             Assert.Equal("<p />", HtmlContentUtilities.HtmlContentToString(tag));
-
         }
 
         [Fact]
@@ -264,7 +268,6 @@ namespace Microsoft.AspNetCore.Mvc.Core.Rendering
             // Act
             var clonedTagBuilder = new TagBuilder(originalTagBuilder);
 
-
             // Assert
             Assert.Equal(originalTagBuilder.TagRenderMode, clonedTagBuilder.TagRenderMode);
         }
@@ -281,7 +284,10 @@ namespace Microsoft.AspNetCore.Mvc.Core.Rendering
 
             // Assert
             Assert.NotEqual(originalTagBuilder.InnerHtml, clonedTagBuilder.InnerHtml);
-            Assert.Equal(HtmlContentUtilities.HtmlContentToString(originalTagBuilder.RenderBody()), HtmlContentUtilities.HtmlContentToString(clonedTagBuilder.RenderBody()));
+            Assert.Equal(
+                HtmlContentUtilities.HtmlContentToString(originalTagBuilder.RenderBody()),
+                HtmlContentUtilities.HtmlContentToString(clonedTagBuilder.RenderBody())
+            );
         }
 
         [Fact]

@@ -31,10 +31,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         {
             // Arrange
             var context = CreateContext(pageName: null);
-            var locations = new string[]
-            {
-                "/ignore-me",
-            };
+            var locations = new string[] { "/ignore-me", };
 
             var expander = new PageViewLocationExpander();
 
@@ -53,10 +50,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             // Arrange
             var context = CreateContext(pageName: "test");
             context.ActionContext.ActionDescriptor = new ControllerActionDescriptor();
-            var locations = new string[]
-            {
-                "/ignore-me",
-            };
+            var locations = new string[] { "/ignore-me", };
 
             var expander = new PageViewLocationExpander();
 
@@ -72,10 +66,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         {
             // Arrange
             var context = CreateContext(pageName: null);
-            var locations = new string[]
-            {
-                "/ignore-me",
-            };
+            var locations = new string[] { "/ignore-me", };
 
             var expander = new PageViewLocationExpander();
 
@@ -92,15 +83,12 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         [InlineData("/Customers/Add", new string[] { "/Customers/{0}.cshtml", "/{0}.cshtml" })]
         public void ExpandLocations_ExpandsDirectories_WhenLocationContainsPage(
             string pageName,
-            string[] expected)
-        {
+            string[] expected
+        ) {
             // Arrange
             var context = CreateContext(pageName: pageName);
 
-            var locations = new string[]
-            {
-                "/{1}/{0}.cshtml",
-            };
+            var locations = new string[] { "/{1}/{0}.cshtml", };
 
             var expander = new PageViewLocationExpander();
 
@@ -143,16 +131,16 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         }
 
         [Theory]
-        [InlineData("/Index", new [] { "/Areas/{2}/Pages/{0}.cshtml" })]
-        [InlineData("/Manage/User", new [] { "/Areas/{2}/Pages/Manage/{0}.cshtml", "/Areas/{2}/Pages/{0}.cshtml" })]
+        [InlineData("/Index", new[] { "/Areas/{2}/Pages/{0}.cshtml" })]
+        [InlineData(
+            "/Manage/User",
+            new[] { "/Areas/{2}/Pages/Manage/{0}.cshtml", "/Areas/{2}/Pages/{0}.cshtml" }
+        )]
         public void ExpandLocations_ExpandsAreaPaths(string pageName, string[] expected)
         {
             // Arrange
             var context = CreateContext(pageName: pageName);
-            var locations = new[]
-            {
-                "/Areas/{2}/Pages/{1}/{0}.cshtml",
-            };
+            var locations = new[] { "/Areas/{2}/Pages/{1}/{0}.cshtml", };
 
             var expander = new PageViewLocationExpander();
 
@@ -201,8 +189,10 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             Assert.Equal(expected, actual.ToArray());
         }
 
-        private ViewLocationExpanderContext CreateContext(string viewName = "_LoginPartial.cshtml", string pageName = null)
-        {
+        private ViewLocationExpanderContext CreateContext(
+            string viewName = "_LoginPartial.cshtml",
+            string pageName = null
+        ) {
             var actionContext = new ActionContext
             {
                 ActionDescriptor = new PageActionDescriptor(),
@@ -214,8 +204,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 controllerName: null,
                 areaName: null,
                 pageName: pageName,
-                isMainPage: true)
-            {
+                isMainPage: true
+            ) {
                 Values = new Dictionary<string, string>(),
             };
         }

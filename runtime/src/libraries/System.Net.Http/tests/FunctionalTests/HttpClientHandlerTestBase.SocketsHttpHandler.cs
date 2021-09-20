@@ -18,11 +18,17 @@ namespace System.Net.Http.Functional.Tests
 
         public static bool IsMsQuicSupported => QuicImplementationProviders.MsQuic.IsSupported;
 
-        protected static HttpClientHandler CreateHttpClientHandler(Version useVersion = null, QuicImplementationProvider quicImplementationProvider = null, bool allowAllHttp2Certificates = true)
-        {
+        protected static HttpClientHandler CreateHttpClientHandler(
+            Version useVersion = null,
+            QuicImplementationProvider quicImplementationProvider = null,
+            bool allowAllHttp2Certificates = true
+        ) {
             useVersion ??= HttpVersion.Version11;
 
-            HttpClientHandler handler = (PlatformDetection.SupportsAlpn && useVersion != HttpVersion.Version30) ? new HttpClientHandler() : new VersionHttpClientHandler(useVersion);
+            HttpClientHandler handler =
+                (PlatformDetection.SupportsAlpn && useVersion != HttpVersion.Version30)
+                    ? new HttpClientHandler()
+                    : new VersionHttpClientHandler(useVersion);
 
             if (useVersion >= HttpVersion.Version20 && allowAllHttp2Certificates)
             {
@@ -31,7 +37,8 @@ namespace System.Net.Http.Functional.Tests
 
             if (quicImplementationProvider != null)
             {
-                SocketsHttpHandler socketsHttpHandler = (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(handler);
+                SocketsHttpHandler socketsHttpHandler =
+                    (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(handler);
                 socketsHttpHandler.QuicImplementationProvider = quicImplementationProvider;
             }
 
@@ -43,54 +50,70 @@ namespace System.Net.Http.Functional.Tests
             return new Http3LoopbackServer(UseQuicImplementationProvider);
         }
 
-        protected HttpClientHandler CreateHttpClientHandler() => CreateHttpClientHandler(UseVersion, UseQuicImplementationProvider);
+        protected HttpClientHandler CreateHttpClientHandler() =>
+            CreateHttpClientHandler(UseVersion, UseQuicImplementationProvider);
 
         protected static HttpClientHandler CreateHttpClientHandler(string useVersionString) =>
             CreateHttpClientHandler(Version.Parse(useVersionString));
 
-
         protected static object GetUnderlyingSocketsHttpHandler(HttpClientHandler handler)
         {
-            FieldInfo field = typeof(HttpClientHandler).GetField("_underlyingHandler", BindingFlags.Instance | BindingFlags.NonPublic);
+            FieldInfo field = typeof(HttpClientHandler).GetField(
+                "_underlyingHandler",
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
             return field?.GetValue(handler);
         }
 
-        protected static HttpRequestMessage CreateRequest(HttpMethod method, Uri uri, Version version, bool exactVersion = false) =>
+        protected static HttpRequestMessage CreateRequest(
+            HttpMethod method,
+            Uri uri,
+            Version version,
+            bool exactVersion = false
+        ) =>
             new HttpRequestMessage(method, uri)
             {
                 Version = version,
-                VersionPolicy = exactVersion ? HttpVersionPolicy.RequestVersionExact : HttpVersionPolicy.RequestVersionOrLower
+                VersionPolicy = exactVersion
+                    ? HttpVersionPolicy.RequestVersionExact
+                    : HttpVersionPolicy.RequestVersionOrLower
             };
 
-        protected LoopbackServerFactory LoopbackServerFactory => GetFactoryForVersion(UseVersion, UseQuicImplementationProvider);
+        protected LoopbackServerFactory LoopbackServerFactory =>
+            GetFactoryForVersion(UseVersion, UseQuicImplementationProvider);
 
-        protected static LoopbackServerFactory GetFactoryForVersion(Version useVersion, QuicImplementationProvider quicImplementationProvider = null)
-        {
+        protected static LoopbackServerFactory GetFactoryForVersion(
+            Version useVersion,
+            QuicImplementationProvider quicImplementationProvider = null
+        ) {
             return useVersion.Major switch
             {
 #if NETCOREAPP
 #if HTTP3
                 3 => new Http3LoopbackServerFactory(quicImplementationProvider),
 #endif
-                2 => Http2LoopbackServerFactory.Singleton,
+                2
+                  => Http2LoopbackServerFactory.Singleton,
 #endif
-                _ => Http11LoopbackServerFactory.Singleton
+                _
+                  => Http11LoopbackServerFactory.Singleton
             };
         }
-
     }
 
     internal class VersionHttpClientHandler : HttpClientHandler
     {
         private readonly Version _useVersion;
-        
+
         public VersionHttpClientHandler(Version useVersion)
         {
             _useVersion = useVersion;
         }
 
-        protected override HttpResponseMessage Send(HttpRequestMessage request, Threading.CancellationToken cancellationToken)
-        {
+        protected override HttpResponseMessage Send(
+            HttpRequestMessage request,
+            Threading.CancellationToken cancellationToken
+        ) {
             if (request.Version == _useVersion)
             {
                 request.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
@@ -99,21 +122,23 @@ namespace System.Net.Http.Functional.Tests
             return base.Send(request, cancellationToken);
         }
 
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, Threading.CancellationToken cancellationToken)
-        {
-
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            Threading.CancellationToken cancellationToken
+        ) {
             if (request.Version == _useVersion)
             {
                 request.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
             }
-            
+
             return base.SendAsync(request, cancellationToken);
         }
 
-        protected static HttpRequestMessage CreateRequest(HttpMethod method, Uri uri, Version version, bool exactVersion = false) =>
-            new HttpRequestMessage(method, uri)
-            {
-                Version = version,
-            };
+        protected static HttpRequestMessage CreateRequest(
+            HttpMethod method,
+            Uri uri,
+            Version version,
+            bool exactVersion = false
+        ) => new HttpRequestMessage(method, uri) { Version = version, };
     }
 }

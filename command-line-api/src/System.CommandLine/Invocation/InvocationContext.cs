@@ -14,9 +14,7 @@ namespace System.CommandLine.Invocation
 
         public BindingContext BindingContext { get; }
 
-        public InvocationContext(
-            ParseResult parseResult,
-            IConsole? console = null)
+        public InvocationContext(ParseResult parseResult, IConsole? console = null)
         {
             BindingContext = new BindingContext(parseResult, console);
             BindingContext.ServiceProvider.AddService(_ => GetCancellationToken());
@@ -43,7 +41,9 @@ namespace System.CommandLine.Invocation
             {
                 if (_cts != null)
                 {
-                    throw new InvalidOperationException("Handlers must be added before adding cancellation handling.");
+                    throw new InvalidOperationException(
+                        "Handlers must be added before adding cancellation handling."
+                    );
                 }
 
                 _cancellationHandlingAddedEvent += value;

@@ -163,7 +163,9 @@ namespace System.Formats.Cbor
                     break;
 
                 default:
-                    throw new InvalidOperationException(SR.Format(SR.Cbor_Reader_Skip_InvalidState, state));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.Cbor_Reader_Skip_InvalidState, state)
+                    );
             }
 
             // guards against cases where the caller attempts to skip when reader is not positioned at the start of a value
@@ -171,7 +173,9 @@ namespace System.Formats.Cbor
             {
                 if (depth == 0)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.Cbor_Reader_Skip_InvalidState, state));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.Cbor_Reader_Skip_InvalidState, state)
+                    );
                 }
             }
         }

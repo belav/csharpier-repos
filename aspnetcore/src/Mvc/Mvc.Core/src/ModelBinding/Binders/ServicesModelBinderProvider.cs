@@ -24,9 +24,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 throw new ArgumentNullException(nameof(context));
             }
 
-            if (context.BindingInfo.BindingSource != null &&
-                context.BindingInfo.BindingSource.CanAcceptDataFrom(BindingSource.Services))
-            {
+            if (
+                context.BindingInfo.BindingSource != null
+                && context.BindingInfo.BindingSource.CanAcceptDataFrom(BindingSource.Services)
+            ) {
                 return _modelBinder;
             }
 

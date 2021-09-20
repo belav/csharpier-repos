@@ -25,8 +25,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IRouteBuilder MapRoute(
             this IRouteBuilder routeBuilder,
             string? name,
-            string? template)
-        {
+            string? template
+        ) {
             MapRoute(routeBuilder, name, template, defaults: null);
             return routeBuilder;
         }
@@ -46,8 +46,8 @@ namespace Microsoft.AspNetCore.Builder
             this IRouteBuilder routeBuilder,
             string? name,
             string? template,
-            object? defaults)
-        {
+            object? defaults
+        ) {
             return MapRoute(routeBuilder, name, template, defaults, constraints: null);
         }
 
@@ -72,8 +72,8 @@ namespace Microsoft.AspNetCore.Builder
             string? name,
             string? template,
             object? defaults,
-            object? constraints)
-        {
+            object? constraints
+        ) {
             return MapRoute(routeBuilder, name, template, defaults, constraints, dataTokens: null);
         }
 
@@ -103,36 +103,45 @@ namespace Microsoft.AspNetCore.Builder
             string? template,
             object? defaults,
             object? constraints,
-            object? dataTokens)
-        {
+            object? dataTokens
+        ) {
             if (routeBuilder.DefaultHandler == null)
             {
-                throw new RouteCreationException(Resources.FormatDefaultHandler_MustBeSet(nameof(IRouteBuilder)));
+                throw new RouteCreationException(
+                    Resources.FormatDefaultHandler_MustBeSet(nameof(IRouteBuilder))
+                );
             }
 
-            routeBuilder.Routes.Add(new Route(
-                routeBuilder.DefaultHandler,
-                name,
-                template,
-                new RouteValueDictionary(defaults),
-                new RouteValueDictionary(constraints)!,
-                new RouteValueDictionary(dataTokens),
-                CreateInlineConstraintResolver(routeBuilder.ServiceProvider)));
+            routeBuilder.Routes.Add(
+                new Route(
+                    routeBuilder.DefaultHandler,
+                    name,
+                    template,
+                    new RouteValueDictionary(defaults),
+                    new RouteValueDictionary(constraints)!,
+                    new RouteValueDictionary(dataTokens),
+                    CreateInlineConstraintResolver(routeBuilder.ServiceProvider)
+                )
+            );
 
             return routeBuilder;
         }
 
-        private static IInlineConstraintResolver CreateInlineConstraintResolver(IServiceProvider serviceProvider)
-        {
-            var inlineConstraintResolver = serviceProvider
-                .GetRequiredService<IInlineConstraintResolver>();
+        private static IInlineConstraintResolver CreateInlineConstraintResolver(
+            IServiceProvider serviceProvider
+        ) {
+            var inlineConstraintResolver =
+                serviceProvider.GetRequiredService<IInlineConstraintResolver>();
 
-            var parameterPolicyFactory = serviceProvider
-                .GetRequiredService<ParameterPolicyFactory>();
+            var parameterPolicyFactory =
+                serviceProvider.GetRequiredService<ParameterPolicyFactory>();
 
             // This inline constraint resolver will return a null constraint for non-IRouteConstraint
             // parameter policies so Route does not error
-            return new BackCompatInlineConstraintResolver(inlineConstraintResolver, parameterPolicyFactory);
+            return new BackCompatInlineConstraintResolver(
+                inlineConstraintResolver,
+                parameterPolicyFactory
+            );
         }
 
         private class BackCompatInlineConstraintResolver : IInlineConstraintResolver
@@ -140,8 +149,10 @@ namespace Microsoft.AspNetCore.Builder
             private readonly IInlineConstraintResolver _inner;
             private readonly ParameterPolicyFactory _parameterPolicyFactory;
 
-            public BackCompatInlineConstraintResolver(IInlineConstraintResolver inner, ParameterPolicyFactory parameterPolicyFactory)
-            {
+            public BackCompatInlineConstraintResolver(
+                IInlineConstraintResolver inner,
+                ParameterPolicyFactory parameterPolicyFactory
+            ) {
                 _inner = inner;
                 _parameterPolicyFactory = parameterPolicyFactory;
             }

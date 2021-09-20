@@ -1,5 +1,5 @@
-﻿﻿using Shouldly;
-﻿using Xunit;
+﻿using Shouldly;
+using Xunit;
 
 namespace AutoMapper.UnitTests.Projection
 {
@@ -10,7 +10,6 @@ namespace AutoMapper.UnitTests.Projection
     using AutoMapper;
     using QueryableExtensions;
 
-
     public class ProjectCollectionListTest
     {
         private MapperConfiguration _config;
@@ -19,17 +18,22 @@ namespace AutoMapper.UnitTests.Projection
 
         public ProjectCollectionListTest()
         {
-            _config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateProjection<Address, AddressDto>();
-                cfg.CreateProjection<Customer, CustomerDto>();
-            });
+            _config = new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<Address, AddressDto>();
+                    cfg.CreateProjection<Customer, CustomerDto>();
+                }
+            );
         }
 
         [Fact]
         public void ProjectWithAssignedCollectionSourceProperty()
         {
-            var customer = new Customer { Addresses = new List<Address> { new Address(Street1), new Address(Street2) } };
+            var customer = new Customer
+            {
+                Addresses = new List<Address> { new Address(Street1), new Address(Street2) }
+            };
 
             var customers = new[] { customer }.AsQueryable();
 
@@ -66,8 +70,10 @@ namespace AutoMapper.UnitTests.Projection
         {
             public bool Equals(AddressDto other)
             {
-                if (ReferenceEquals(null, other)) return false;
-                if (ReferenceEquals(this, other)) return true;
+                if (ReferenceEquals(null, other))
+                    return false;
+                if (ReferenceEquals(this, other))
+                    return true;
                 return string.Equals(Street, other.Street);
             }
 

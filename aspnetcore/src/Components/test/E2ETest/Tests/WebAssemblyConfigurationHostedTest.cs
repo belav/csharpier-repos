@@ -13,17 +13,16 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 {
-    public class WebAssemblyConfigurationHostedTest : ServerTestBase<BasicTestAppServerSiteFixture<TestServer.ClientStartup>>
+    public class WebAssemblyConfigurationHostedTest
+        : ServerTestBase<BasicTestAppServerSiteFixture<TestServer.ClientStartup>>
     {
         private IWebElement _appElement;
 
         public WebAssemblyConfigurationHostedTest(
-             BrowserFixture browserFixture,
-             BasicTestAppServerSiteFixture<TestServer.ClientStartup> serverFixture,
-             ITestOutputHelper output) :
-             base(browserFixture, serverFixture, output)
-        {
-        }
+            BrowserFixture browserFixture,
+            BasicTestAppServerSiteFixture<TestServer.ClientStartup> serverFixture,
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture, output) { }
 
         protected override void InitializeAsyncCore()
         {

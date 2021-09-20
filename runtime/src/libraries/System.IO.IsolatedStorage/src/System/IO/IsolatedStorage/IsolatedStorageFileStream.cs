@@ -19,44 +19,88 @@ namespace System.IO.IsolatedStorage
         private readonly string _fullPath;
 
         public IsolatedStorageFileStream(string path, FileMode mode)
-            : this(path, mode, (mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite), FileShare.None, null)
-        {
-        }
+            : this(
+                path,
+                mode,
+                (mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite),
+                FileShare.None,
+                null
+            ) { }
 
-        public IsolatedStorageFileStream(string path, FileMode mode, IsolatedStorageFile? isf)
-            : this(path, mode, (mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite), FileShare.None, isf)
-        {
-        }
+        public IsolatedStorageFileStream(
+            string path,
+            FileMode mode,
+            IsolatedStorageFile? isf
+        ) : this(
+            path,
+            mode,
+            (mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite),
+            FileShare.None,
+            isf
+        ) { }
 
         public IsolatedStorageFileStream(string path, FileMode mode, FileAccess access)
-            : this(path, mode, access, access == FileAccess.Read ? FileShare.Read : FileShare.None, DefaultBufferSize, null)
-        {
-        }
+            : this(
+                path,
+                mode,
+                access,
+                access == FileAccess.Read ? FileShare.Read : FileShare.None,
+                DefaultBufferSize,
+                null
+            ) { }
 
-        public IsolatedStorageFileStream(string path, FileMode mode, FileAccess access, IsolatedStorageFile? isf)
-            : this(path, mode, access, access == FileAccess.Read ? FileShare.Read : FileShare.None, DefaultBufferSize, isf)
-        {
-        }
+        public IsolatedStorageFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            IsolatedStorageFile? isf
+        ) : this(
+            path,
+            mode,
+            access,
+            access == FileAccess.Read ? FileShare.Read : FileShare.None,
+            DefaultBufferSize,
+            isf
+        ) { }
 
-        public IsolatedStorageFileStream(string path, FileMode mode, FileAccess access, FileShare share)
-            : this(path, mode, access, share, DefaultBufferSize, null)
-        {
-        }
+        public IsolatedStorageFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share
+        ) : this(path, mode, access, share, DefaultBufferSize, null) { }
 
-        public IsolatedStorageFileStream(string path, FileMode mode, FileAccess access, FileShare share, IsolatedStorageFile? isf)
-            : this(path, mode, access, share, DefaultBufferSize, isf)
-        {
-        }
+        public IsolatedStorageFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            IsolatedStorageFile? isf
+        ) : this(path, mode, access, share, DefaultBufferSize, isf) { }
 
-        public IsolatedStorageFileStream(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize)
-            : this(path, mode, access, share, bufferSize, null)
-        {
-        }
+        public IsolatedStorageFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize
+        ) : this(path, mode, access, share, bufferSize, null) { }
 
-        public IsolatedStorageFileStream(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, IsolatedStorageFile? isf)
-            : this(path, mode, access, share, bufferSize, InitializeFileStream(path, mode, access, share, bufferSize, isf))
-        {
-        }
+        public IsolatedStorageFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize,
+            IsolatedStorageFile? isf
+        ) : this(
+            path,
+            mode,
+            access,
+            share,
+            bufferSize,
+            InitializeFileStream(path, mode, access, share, bufferSize, isf)
+        ) { }
 
         // On .NET Framework FileStream has an internal no arg constructor that we utilize to provide the facade. We don't have access
         // to internals in .NET Core so we'll do the next best thing and contort ourselves into the SafeFileHandle constructor.
@@ -64,9 +108,21 @@ namespace System.IO.IsolatedStorage
         //
         // We only expose our own nested FileStream so the base class having a handle doesn't matter. Passing a new SafeFileHandle
         // with ownsHandle: false avoids the parent class closing without our knowledge.
-        private IsolatedStorageFileStream(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, InitialiationData initializationData)
-            : base(new SafeFileHandle(initializationData.NestedStream.SafeFileHandle.DangerousGetHandle(), ownsHandle: false), access, bufferSize)
-        {
+        private IsolatedStorageFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize,
+            InitialiationData initializationData
+        ) : base(
+            new SafeFileHandle(
+                initializationData.NestedStream.SafeFileHandle.DangerousGetHandle(),
+                ownsHandle: false
+            ),
+            access,
+            bufferSize
+        ) {
             _isf = initializationData.StorageFile;
             _givenPath = path;
             _fullPath = initializationData.FullPath;
@@ -81,14 +137,19 @@ namespace System.IO.IsolatedStorage
         }
 
         // If IsolatedStorageFile is null, then we default to using a file that is scoped by user, appdomain, and assembly.
-        private static InitialiationData InitializeFileStream(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, IsolatedStorageFile? isf)
-        {
+        private static InitialiationData InitializeFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize,
+            IsolatedStorageFile? isf
+        ) {
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
 
             if ((path.Length == 0) || path.Equals(BackSlash))
-                throw new ArgumentException(
-                   SR.IsolatedStorage_Path);
+                throw new ArgumentException(SR.IsolatedStorage_Path);
 
             bool createdStore = false;
             if (isf == null)
@@ -102,12 +163,12 @@ namespace System.IO.IsolatedStorage
 
             switch (mode)
             {
-                case FileMode.CreateNew:        // Assume new file
-                case FileMode.Create:           // Check for New file & Unreserve
-                case FileMode.OpenOrCreate:     // Check for new file
-                case FileMode.Truncate:         // Unreserve old file size
-                case FileMode.Append:           // Check for new file
-                case FileMode.Open:             // Open existing, else exception
+                case FileMode.CreateNew: // Assume new file
+                case FileMode.Create: // Check for New file & Unreserve
+                case FileMode.OpenOrCreate: // Check for new file
+                case FileMode.Truncate: // Unreserve old file size
+                case FileMode.Append: // Check for new file
+                case FileMode.Open: // Open existing, else exception
                     break;
 
                 default:
@@ -122,7 +183,14 @@ namespace System.IO.IsolatedStorage
 
             try
             {
-                data.NestedStream = new FileStream(data.FullPath, mode, access, share, bufferSize, FileOptions.None);
+                data.NestedStream = new FileStream(
+                    data.FullPath,
+                    mode,
+                    access,
+                    share,
+                    bufferSize,
+                    FileOptions.None
+                );
             }
             catch (Exception e)
             {
@@ -134,16 +202,17 @@ namespace System.IO.IsolatedStorage
                         data.StorageFile?.Dispose();
                     }
                 }
-                catch
-                {
-                }
+                catch { }
 
                 // Exception message might leak the IsolatedStorage path. The .NET Framework prevented this by calling an
                 // internal API which made sure that the exception message was scrubbed. However since the innerException
                 // is never returned to the user(GetIsolatedStorageException() does not populate the innerexception
                 // in retail bits we leak the path only under the debugger via IsolatedStorageException._underlyingException which
                 // they can any way look at via IsolatedStorageFile instance as well.
-                throw IsolatedStorageFile.GetIsolatedStorageException(SR.IsolatedStorage_Operation_ISFS, e);
+                throw IsolatedStorageFile.GetIsolatedStorageException(
+                    SR.IsolatedStorage_Operation_ISFS,
+                    e
+                );
             }
 
             return data;
@@ -151,54 +220,33 @@ namespace System.IO.IsolatedStorage
 
         public override bool CanRead
         {
-            get
-            {
-                return _fs.CanRead;
-            }
+            get { return _fs.CanRead; }
         }
 
         public override bool CanWrite
         {
-            get
-            {
-                return _fs.CanWrite;
-            }
+            get { return _fs.CanWrite; }
         }
 
         public override bool CanSeek
         {
-            get
-            {
-                return _fs.CanSeek;
-            }
+            get { return _fs.CanSeek; }
         }
 
         public override long Length
         {
-            get
-            {
-                return _fs.Length;
-            }
+            get { return _fs.Length; }
         }
 
         public override long Position
         {
-            get
-            {
-                return _fs.Position;
-            }
-            set
-            {
-                _fs.Position = value;
-            }
+            get { return _fs.Position; }
+            set { _fs.Position = value; }
         }
 
         public override bool IsAsync
         {
-            get
-            {
-                return _fs.IsAsync;
-            }
+            get { return _fs.IsAsync; }
         }
 
         protected override void Dispose(bool disposing)
@@ -211,6 +259,7 @@ namespace System.IO.IsolatedStorage
                         _fs.Dispose();
                 }
             }
+
             finally
             {
                 base.Dispose(disposing);
@@ -219,10 +268,9 @@ namespace System.IO.IsolatedStorage
 
         public override ValueTask DisposeAsync()
         {
-            return
-                GetType() != typeof(IsolatedStorageFileStream) ? base.DisposeAsync() :
-                _fs != null ? _fs.DisposeAsync() :
-                default;
+            return GetType() != typeof(IsolatedStorageFileStream)
+                ? base.DisposeAsync()
+                : _fs != null ? _fs.DisposeAsync() : default;
         }
 
         public override void Flush()
@@ -255,13 +303,19 @@ namespace System.IO.IsolatedStorage
             return _fs.Read(buffer);
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, Threading.CancellationToken cancellationToken)
-        {
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            Threading.CancellationToken cancellationToken
+        ) {
             return _fs.ReadAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken)
-        {
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken
+        ) {
             return _fs.ReadAsync(buffer, cancellationToken);
         }
 
@@ -287,13 +341,19 @@ namespace System.IO.IsolatedStorage
             _fs.Write(buffer);
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             return _fs.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken)
-        {
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken
+        ) {
             return _fs.WriteAsync(buffer, cancellationToken);
         }
 
@@ -302,13 +362,23 @@ namespace System.IO.IsolatedStorage
             _fs.WriteByte(value);
         }
 
-        public override IAsyncResult BeginRead(byte[] array, int offset, int numBytes, AsyncCallback? userCallback, object? stateObject)
-        {
+        public override IAsyncResult BeginRead(
+            byte[] array,
+            int offset,
+            int numBytes,
+            AsyncCallback? userCallback,
+            object? stateObject
+        ) {
             return _fs.BeginRead(array, offset, numBytes, userCallback, stateObject);
         }
 
-        public override IAsyncResult BeginWrite(byte[] array, int offset, int numBytes, AsyncCallback? userCallback, object? stateObject)
-        {
+        public override IAsyncResult BeginWrite(
+            byte[] array,
+            int offset,
+            int numBytes,
+            AsyncCallback? userCallback,
+            object? stateObject
+        ) {
             return _fs.BeginWrite(array, offset, numBytes, userCallback, stateObject);
         }
 
@@ -322,7 +392,9 @@ namespace System.IO.IsolatedStorage
             _fs.EndWrite(asyncResult);
         }
 
-        [Obsolete("This property has been deprecated.  Please use IsolatedStorageFileStream's SafeFileHandle property instead.  https://go.microsoft.com/fwlink/?linkid=14202")]
+        [Obsolete(
+            "This property has been deprecated.  Please use IsolatedStorageFileStream's SafeFileHandle property instead.  https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         public override IntPtr Handle
         {
             get { return _fs.Handle; }
@@ -342,10 +414,7 @@ namespace System.IO.IsolatedStorage
 
         public override SafeFileHandle SafeFileHandle
         {
-            get
-            {
-                throw new IsolatedStorageException(SR.IsolatedStorage_Operation_ISFS);
-            }
+            get { throw new IsolatedStorageException(SR.IsolatedStorage_Operation_ISFS); }
         }
     }
 }

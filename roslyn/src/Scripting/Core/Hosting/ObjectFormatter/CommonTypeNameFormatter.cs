@@ -62,8 +62,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             return FormatNonGenericTypeName(typeInfo, options);
         }
 
-        private static string FormatNonGenericTypeName(TypeInfo typeInfo, CommonTypeNameFormatterOptions options)
-        {
+        private static string FormatNonGenericTypeName(
+            TypeInfo typeInfo,
+            CommonTypeNameFormatterOptions options
+        ) {
             if (options.ShowNamespaces)
             {
                 return typeInfo.FullName.Replace('+', '.');
@@ -89,8 +91,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             return typeName;
         }
 
-        public virtual string FormatTypeArguments(Type[] typeArguments, CommonTypeNameFormatterOptions options)
-        {
+        public virtual string FormatTypeArguments(
+            Type[] typeArguments,
+            CommonTypeNameFormatterOptions options
+        ) {
             if (typeArguments == null)
             {
                 throw new ArgumentNullException(nameof(typeArguments));
@@ -129,8 +133,11 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         /// <summary>
         /// Formats an array type name (vector or multidimensional).
         /// </summary>
-        public virtual string FormatArrayTypeName(Type arrayType, Array arrayOpt, CommonTypeNameFormatterOptions options)
-        {
+        public virtual string FormatArrayTypeName(
+            Type arrayType,
+            Array arrayOpt,
+            CommonTypeNameFormatterOptions options
+        ) {
             if (arrayType == null)
             {
                 throw new ArgumentNullException(nameof(arrayType));
@@ -198,8 +205,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 }
 
                 type = type.GetElementType();
-            }
-            while (type.IsArray);
+            } while (type.IsArray);
 
             return sb.ToString();
         }
@@ -211,10 +217,12 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 includeCodePoints: false,
                 quoteStringsAndCharacters: true,
                 escapeNonPrintableCharacters: true,
-                cultureInfo: CultureInfo.InvariantCulture);
-            var formatted = int.MinValue <= bound && bound <= int.MaxValue
-                ? PrimitiveFormatter.FormatPrimitive((int)bound, options)
-                : PrimitiveFormatter.FormatPrimitive(bound, options);
+                cultureInfo: CultureInfo.InvariantCulture
+            );
+            var formatted =
+                int.MinValue <= bound && bound <= int.MaxValue
+                    ? PrimitiveFormatter.FormatPrimitive((int)bound, options)
+                    : PrimitiveFormatter.FormatPrimitive(bound, options);
             sb.Append(formatted);
         }
 
@@ -229,14 +237,18 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             sb.Append(ArrayClosing);
         }
 
-        private string FormatGenericTypeName(TypeInfo typeInfo, CommonTypeNameFormatterOptions options)
-        {
+        private string FormatGenericTypeName(
+            TypeInfo typeInfo,
+            CommonTypeNameFormatterOptions options
+        ) {
             var pooledBuilder = PooledStringBuilder.GetInstance();
             var builder = pooledBuilder.Builder;
 
             // consolidated generic arguments (includes arguments of all declaring types):
             // TODO (DevDiv #173210): shouldn't need parameters, but StackTrace gives us unconstructed symbols.
-            Type[] genericArguments = typeInfo.IsGenericTypeDefinition ? typeInfo.GenericTypeParameters : typeInfo.GenericTypeArguments;
+            Type[] genericArguments = typeInfo.IsGenericTypeDefinition
+                ? typeInfo.GenericTypeParameters
+                : typeInfo.GenericTypeArguments;
 
             if (typeInfo.DeclaringType != null)
             {
@@ -245,8 +257,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 {
                     nestedTypes.Add(typeInfo);
                     typeInfo = typeInfo.DeclaringType?.GetTypeInfo();
-                }
-                while (typeInfo != null);
+                } while (typeInfo != null);
 
                 if (options.ShowNamespaces)
                 {
@@ -260,7 +271,13 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 int typeArgumentIndex = 0;
                 for (int i = nestedTypes.Count - 1; i >= 0; i--)
                 {
-                    AppendTypeInstantiation(builder, nestedTypes[i], genericArguments, ref typeArgumentIndex, options);
+                    AppendTypeInstantiation(
+                        builder,
+                        nestedTypes[i],
+                        genericArguments,
+                        ref typeArgumentIndex,
+                        options
+                    );
                     if (i > 0)
                     {
                         builder.Append('.');
@@ -272,7 +289,13 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             else
             {
                 int typeArgumentIndex = 0;
-                AppendTypeInstantiation(builder, typeInfo, genericArguments, ref typeArgumentIndex, options);
+                AppendTypeInstantiation(
+                    builder,
+                    typeInfo,
+                    genericArguments,
+                    ref typeArgumentIndex,
+                    options
+                );
             }
 
             return pooledBuilder.ToStringAndFree();
@@ -283,10 +306,15 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             TypeInfo typeInfo,
             Type[] genericArguments,
             ref int genericArgIndex,
-            CommonTypeNameFormatterOptions options)
-        {
+            CommonTypeNameFormatterOptions options
+        ) {
             // generic arguments of all the outer types and the current type;
-            int currentArgCount = (typeInfo.IsGenericTypeDefinition ? typeInfo.GenericTypeParameters.Length : typeInfo.GenericTypeArguments.Length) - genericArgIndex;
+            int currentArgCount =
+                (
+                    typeInfo.IsGenericTypeDefinition
+                        ? typeInfo.GenericTypeParameters.Length
+                        : typeInfo.GenericTypeArguments.Length
+                ) - genericArgIndex;
 
             if (currentArgCount > 0)
             {

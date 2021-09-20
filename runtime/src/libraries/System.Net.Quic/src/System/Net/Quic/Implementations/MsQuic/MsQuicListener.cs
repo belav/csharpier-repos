@@ -15,7 +15,8 @@ namespace System.Net.Quic.Implementations.MsQuic
 {
     internal sealed class MsQuicListener : QuicListenerProvider, IDisposable
     {
-        private static readonly ListenerCallbackDelegate s_listenerDelegate = new ListenerCallbackDelegate(NativeCallbackHandler);
+        private static readonly ListenerCallbackDelegate s_listenerDelegate =
+            new ListenerCallbackDelegate(NativeCallbackHandler);
 
         private readonly State _state;
         private GCHandle _stateHandle;
@@ -36,11 +37,13 @@ namespace System.Net.Quic.Implementations.MsQuic
             {
                 ConnectionConfiguration = SafeMsQuicConfigurationHandle.Create(options);
 
-                AcceptConnectionQueue = Channel.CreateBounded<MsQuicConnection>(new BoundedChannelOptions(options.ListenBacklog)
-                {
-                    SingleReader = true,
-                    SingleWriter = true
-                });
+                AcceptConnectionQueue = Channel.CreateBounded<MsQuicConnection>(
+                    new BoundedChannelOptions(options.ListenBacklog)
+                    {
+                        SingleReader = true,
+                        SingleWriter = true
+                    }
+                );
             }
         }
 
@@ -57,7 +60,8 @@ namespace System.Net.Quic.Implementations.MsQuic
                     MsQuicApi.Api.Registration,
                     s_listenerDelegate,
                     GCHandle.ToIntPtr(_stateHandle),
-                    out _state.Handle);
+                    out _state.Handle
+                );
 
                 QuicExceptionHelpers.ThrowIfFailed(status, "ListenerOpen failed.");
             }
@@ -71,19 +75,18 @@ namespace System.Net.Quic.Implementations.MsQuic
 
         internal override IPEndPoint ListenEndPoint
         {
-            get
-            {
-                return new IPEndPoint(_listenEndPoint.Address, _listenEndPoint.Port);
-            }
+            get { return new IPEndPoint(_listenEndPoint.Address, _listenEndPoint.Port); }
         }
 
-        internal override async ValueTask<QuicConnectionProvider> AcceptConnectionAsync(CancellationToken cancellationToken = default)
-        {
+        internal override async ValueTask<QuicConnectionProvider> AcceptConnectionAsync(
+            CancellationToken cancellationToken = default
+        ) {
             ThrowIfDisposed();
 
             try
             {
-                return await _state.AcceptConnectionQueue.Reader.ReadAsync(cancellationToken).ConfigureAwait(false);
+                return await _state.AcceptConnectionQueue.Reader.ReadAsync(cancellationToken)
+                    .ConfigureAwait(false);
             }
             catch (ChannelClosedException)
             {
@@ -111,7 +114,8 @@ namespace System.Net.Quic.Implementations.MsQuic
 
             StopAcceptingConnections();
             _state?.Handle?.Dispose();
-            if (_stateHandle.IsAllocated) _stateHandle.Free();
+            if (_stateHandle.IsAllocated)
+                _stateHandle.Free();
             _state?.ConnectionConfiguration?.Dispose();
             _disposed = true;
         }
@@ -129,8 +133,14 @@ namespace System.Net.Quic.Implementations.MsQuic
             try
             {
                 MsQuicAlpnHelper.Prepare(_applicationProtocols, out handles, out buffers);
-                status = MsQuicApi.Api.ListenerStartDelegate(_state.Handle, (QuicBuffer*)Marshal.UnsafeAddrOfPinnedArrayElement(buffers, 0), (uint)_applicationProtocols.Count, ref address);
+                status = MsQuicApi.Api.ListenerStartDelegate(
+                    _state.Handle,
+                    (QuicBuffer*)Marshal.UnsafeAddrOfPinnedArrayElement(buffers, 0),
+                    (uint)_applicationProtocols.Count,
+                    ref address
+                );
             }
+
             finally
             {
                 MsQuicAlpnHelper.Return(ref handles, ref buffers);
@@ -138,7 +148,12 @@ namespace System.Net.Quic.Implementations.MsQuic
 
             QuicExceptionHelpers.ThrowIfFailed(status, "ListenerStart failed.");
 
-            SOCKADDR_INET inetAddress = MsQuicParameterHelpers.GetINetParam(MsQuicApi.Api, _state.Handle, QUIC_PARAM_LEVEL.LISTENER, (uint)QUIC_PARAM_LISTENER.LOCAL_ADDRESS);
+            SOCKADDR_INET inetAddress = MsQuicParameterHelpers.GetINetParam(
+                MsQuicApi.Api,
+                _state.Handle,
+                QUIC_PARAM_LEVEL.LISTENER,
+                (uint)QUIC_PARAM_LISTENER.LOCAL_ADDRESS
+            );
             _listenEndPoint = MsQuicAddressHelpers.INetToIPEndPoint(ref inetAddress);
         }
 
@@ -160,8 +175,8 @@ namespace System.Net.Quic.Implementations.MsQuic
         private static unsafe uint NativeCallbackHandler(
             IntPtr listener,
             IntPtr context,
-            ref ListenerEvent evt)
-        {
+            ref ListenerEvent evt
+        ) {
             if (evt.Type != QUIC_LISTENER_EVENT.NEW_CONNECTION)
             {
                 return MsQuicStatusCodes.InternalError;
@@ -174,16 +189,32 @@ namespace System.Net.Quic.Implementations.MsQuic
             {
                 ref NewConnectionInfo connectionInfo = ref *evt.Data.NewConnection.Info;
 
-                IPEndPoint localEndPoint = MsQuicAddressHelpers.INetToIPEndPoint(ref *(SOCKADDR_INET*)connectionInfo.LocalAddress);
-                IPEndPoint remoteEndPoint = MsQuicAddressHelpers.INetToIPEndPoint(ref *(SOCKADDR_INET*)connectionInfo.RemoteAddress);
+                IPEndPoint localEndPoint = MsQuicAddressHelpers.INetToIPEndPoint(
+                    ref *(SOCKADDR_INET*)connectionInfo.LocalAddress
+                );
+                IPEndPoint remoteEndPoint = MsQuicAddressHelpers.INetToIPEndPoint(
+                    ref *(SOCKADDR_INET*)connectionInfo.RemoteAddress
+                );
 
-                connectionHandle = new SafeMsQuicConnectionHandle(evt.Data.NewConnection.Connection);
+                connectionHandle = new SafeMsQuicConnectionHandle(
+                    evt.Data.NewConnection.Connection
+                );
 
-                uint status = MsQuicApi.Api.ConnectionSetConfigurationDelegate(connectionHandle, state.ConnectionConfiguration);
+                uint status = MsQuicApi.Api.ConnectionSetConfigurationDelegate(
+                    connectionHandle,
+                    state.ConnectionConfiguration
+                );
                 QuicExceptionHelpers.ThrowIfFailed(status, "ConnectionSetConfiguration failed.");
 
-                var msQuicConnection = new MsQuicConnection(localEndPoint, remoteEndPoint, connectionHandle);
-                msQuicConnection.SetNegotiatedAlpn(connectionInfo.NegotiatedAlpn, connectionInfo.NegotiatedAlpnLength);
+                var msQuicConnection = new MsQuicConnection(
+                    localEndPoint,
+                    remoteEndPoint,
+                    connectionHandle
+                );
+                msQuicConnection.SetNegotiatedAlpn(
+                    connectionInfo.NegotiatedAlpn,
+                    connectionInfo.NegotiatedAlpnLength
+                );
 
                 if (!state.AcceptConnectionQueue.Writer.TryWrite(msQuicConnection))
                 {

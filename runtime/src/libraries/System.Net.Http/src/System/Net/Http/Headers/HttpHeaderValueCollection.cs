@@ -62,24 +62,26 @@ namespace System.Net.Http.Headers
         }
 
         internal HttpHeaderValueCollection(HeaderDescriptor descriptor, HttpHeaders store)
-            : this(descriptor, store, null, null)
-        {
-        }
+            : this(descriptor, store, null, null) { }
 
-        internal HttpHeaderValueCollection(HeaderDescriptor descriptor, HttpHeaders store,
-            Action<HttpHeaderValueCollection<T>, T> validator)
-            : this(descriptor, store, null, validator)
-        {
-        }
+        internal HttpHeaderValueCollection(
+            HeaderDescriptor descriptor,
+            HttpHeaders store,
+            Action<HttpHeaderValueCollection<T>, T> validator
+        ) : this(descriptor, store, null, validator) { }
 
-        internal HttpHeaderValueCollection(HeaderDescriptor descriptor, HttpHeaders store, T specialValue)
-            : this(descriptor, store, specialValue, null)
-        {
-        }
+        internal HttpHeaderValueCollection(
+            HeaderDescriptor descriptor,
+            HttpHeaders store,
+            T specialValue
+        ) : this(descriptor, store, specialValue, null) { }
 
-        internal HttpHeaderValueCollection(HeaderDescriptor descriptor, HttpHeaders store, T? specialValue,
-            Action<HttpHeaderValueCollection<T>, T>? validator)
-        {
+        internal HttpHeaderValueCollection(
+            HeaderDescriptor descriptor,
+            HttpHeaders store,
+            T? specialValue,
+            Action<HttpHeaderValueCollection<T>, T>? validator
+        ) {
             Debug.Assert(descriptor.Name != null);
             Debug.Assert(store != null);
 
@@ -165,9 +167,10 @@ namespace System.Net.Http.Headers
         public IEnumerator<T> GetEnumerator()
         {
             object? storeValue = _store.GetParsedValues(_descriptor);
-            return storeValue is null ?
-                ((IEnumerable<T>)Array.Empty<T>()).GetEnumerator() : // use singleton empty array enumerator
-                Iterate(storeValue);
+            return storeValue is null
+                ? ((IEnumerable<T>)Array.Empty<T>()).GetEnumerator()
+                : // use singleton empty array enumerator
+                  Iterate(storeValue);
 
             static IEnumerator<T> Iterate(object storeValue)
             {
@@ -206,8 +209,10 @@ namespace System.Net.Http.Headers
 
         internal void SetSpecialValue()
         {
-            Debug.Assert(_specialValue != null,
-                "This method can only be used if the collection has a 'special value' set.");
+            Debug.Assert(
+                _specialValue != null,
+                "This method can only be used if the collection has a 'special value' set."
+            );
 
             if (!_store.ContainsParsedValue(_descriptor, _specialValue))
             {
@@ -217,8 +222,10 @@ namespace System.Net.Http.Headers
 
         internal void RemoveSpecialValue()
         {
-            Debug.Assert(_specialValue != null,
-                "This method can only be used if the collection has a 'special value' set.");
+            Debug.Assert(
+                _specialValue != null,
+                "This method can only be used if the collection has a 'special value' set."
+            );
 
             // We're not interested in the return value. It's OK if the "special value" wasn't in the store
             // before calling RemoveParsedValue().

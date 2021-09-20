@@ -48,19 +48,18 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     { "for", modelExpression },
                 },
                 items: new Dictionary<object, object>(),
-                uniqueId: "test");
+                uniqueId: "test"
+            );
             var output = new TagHelperOutput(
                 expectedTagName,
-                attributes: new TagHelperAttributeList
-                {
-                    { "id", "myvalidationmessage" }
-                },
+                attributes: new TagHelperAttributeList { { "id", "myvalidationmessage" } },
                 getChildContentAsync: (useCachedResult, encoder) =>
                 {
                     var tagHelperContent = new DefaultTagHelperContent();
                     tagHelperContent.SetContent("Something");
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
-                });
+                }
+            );
             output.PreContent.SetContent(expectedPreContent);
             output.Content.SetContent(expectedContent);
             output.PostContent.SetContent(expectedPostContent);
@@ -68,7 +67,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var viewContext = TestableHtmlGenerator.GetViewContext(
                 model: null,
                 htmlGenerator: htmlGenerator,
-                metadataProvider: metadataProvider);
+                metadataProvider: metadataProvider
+            );
             validationMessageTagHelper.ViewContext = viewContext;
 
             // Act
@@ -80,9 +80,15 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             Assert.Equal("myvalidationmessage", attribute.Value);
             attribute = Assert.Single(output.Attributes, attr => attr.Name.Equals("class"));
             Assert.Equal("field-validation-valid", attribute.Value);
-            attribute = Assert.Single(output.Attributes, attr => attr.Name.Equals("data-valmsg-for"));
+            attribute = Assert.Single(
+                output.Attributes,
+                attr => attr.Name.Equals("data-valmsg-for")
+            );
             Assert.Equal("Name", attribute.Value);
-            attribute = Assert.Single(output.Attributes, attr => attr.Name.Equals("data-valmsg-replace"));
+            attribute = Assert.Single(
+                output.Attributes,
+                attr => attr.Name.Equals("data-valmsg-replace")
+            );
             Assert.Equal("true", attribute.Value);
             Assert.Equal(expectedPreContent, output.PreContent.GetContent());
             Assert.Equal(expectedContent, output.Content.GetContent());
@@ -95,9 +101,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         {
             // Arrange
             var expectedTagName = "span";
-            var expectedMessage = "The name of an HTML field cannot be null or empty. Instead use methods " +
-                "Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.Editor or Microsoft.AspNetCore.Mvc.Rendering." +
-                "IHtmlHelper`1.EditorFor with a non-empty htmlFieldName argument value.";
+            var expectedMessage =
+                "The name of an HTML field cannot be null or empty. Instead use methods "
+                + "Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.Editor or Microsoft.AspNetCore.Mvc.Rendering."
+                + "IHtmlHelper`1.EditorFor with a non-empty htmlFieldName argument value.";
 
             var metadataProvider = new EmptyModelMetadataProvider();
             var modelExpression = CreateModelExpression(string.Empty);
@@ -105,7 +112,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var viewContext = TestableHtmlGenerator.GetViewContext(
                 model: null,
                 htmlGenerator: htmlGenerator,
-                metadataProvider: metadataProvider);
+                metadataProvider: metadataProvider
+            );
 
             var validationMessageTagHelper = new ValidationMessageTagHelper(htmlGenerator)
             {
@@ -115,23 +123,23 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             var tagHelperContext = new TagHelperContext(
                 expectedTagName,
-                new TagHelperAttributeList
-                {
-                    { "for", modelExpression },
-                },
+                new TagHelperAttributeList { { "for", modelExpression }, },
                 new Dictionary<object, object>(),
-                "test");
+                "test"
+            );
 
             var output = new TagHelperOutput(
                 expectedTagName,
                 new TagHelperAttributeList(),
-                (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent()));
+                (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
 
             // Act & Assert
             await ExceptionAssert.ThrowsArgumentAsync(
                 () => validationMessageTagHelper.ProcessAsync(tagHelperContext, output),
                 paramName: "expression",
-                exceptionMessage: expectedMessage);
+                exceptionMessage: expectedMessage
+            );
         }
 
         [Fact]
@@ -147,7 +155,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var viewContext = TestableHtmlGenerator.GetViewContext(
                 model: null,
                 htmlGenerator: htmlGenerator,
-                metadataProvider: metadataProvider);
+                metadataProvider: metadataProvider
+            );
 
             var validationMessageTagHelper = new ValidationMessageTagHelper(htmlGenerator)
             {
@@ -157,20 +166,16 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             var tagHelperContext = new TagHelperContext(
                 expectedTagName,
-                new TagHelperAttributeList
-                {
-                    { "for", modelExpression },
-                },
+                new TagHelperAttributeList { { "for", modelExpression }, },
                 new Dictionary<object, object>(),
-                "test");
+                "test"
+            );
 
             var output = new TagHelperOutput(
                 expectedTagName,
-                new TagHelperAttributeList
-                {
-                    { "data-valmsg-for", expectedAttributeValue },
-                },
-                (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent()));
+                new TagHelperAttributeList { { "data-valmsg-for", expectedAttributeValue }, },
+                (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
 
             validationMessageTagHelper.ViewContext = viewContext;
 
@@ -179,7 +184,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             // Assert
             Assert.Equal(expectedTagName, output.TagName);
-            Assert.Collection(output.Attributes,
+            Assert.Collection(
+                output.Attributes,
                 attribute =>
                 {
                     Assert.Equal("data-valmsg-for", attribute.Name);
@@ -194,7 +200,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 {
                     Assert.Equal("data-valmsg-replace", attribute.Name);
                     Assert.Equal("true", attribute.Value);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -215,15 +222,14 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 expectedTagName,
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                "test");
+                "test"
+            );
 
             var output = new TagHelperOutput(
                 expectedTagName,
-                new TagHelperAttributeList
-                {
-                    { "data-valmsg-for", expectedAttributeValue },
-                },
-                (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent()));
+                new TagHelperAttributeList { { "data-valmsg-for", expectedAttributeValue }, },
+                (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
 
             // Act
             await validationMessageTagHelper.ProcessAsync(tagHelperContext, output);
@@ -242,14 +248,17 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var expectedViewContext = CreateViewContext();
             var modelExpression = CreateModelExpression("Hello");
             var generator = new Mock<IHtmlGenerator>();
-            generator
-                .Setup(mock => mock.GenerateValidationMessage(
-                    expectedViewContext,
-                    modelExpression.ModelExplorer,
-                    modelExpression.Name,
-                    null,
-                    null,
-                    null))
+            generator.Setup(
+                    mock =>
+                        mock.GenerateValidationMessage(
+                            expectedViewContext,
+                            modelExpression.ModelExplorer,
+                            modelExpression.Name,
+                            null,
+                            null,
+                            null
+                        )
+                )
                 .Returns(new TagBuilder("span"))
                 .Verifiable();
 
@@ -262,10 +271,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var expectedPostContent = "original post-content";
             var context = new TagHelperContext(
                 tagName: "span",
-                allAttributes: new TagHelperAttributeList(
-                    Enumerable.Empty<TagHelperAttribute>()),
+                allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
                 items: new Dictionary<object, object>(),
-                uniqueId: "test");
+                uniqueId: "test"
+            );
             var output = new TagHelperOutput(
                 "span",
                 attributes: new TagHelperAttributeList(),
@@ -274,7 +283,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     var tagHelperContent = new DefaultTagHelperContent();
                     tagHelperContent.SetContent("Something");
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
-                });
+                }
+            );
             output.PreContent.SetContent(expectedPreContent);
             output.Content.SetContent(expectedContent);
             output.PostContent.SetContent(expectedPostContent);
@@ -299,8 +309,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public async Task ProcessAsync_DoesNotOverrideOutputContent(
             string childContent,
             string outputContent,
-            string expectedOutputContent)
-        {
+            string expectedOutputContent
+        ) {
             // Arrange
             var tagBuilder = new TagBuilder("span2");
             tagBuilder.InnerHtml.SetHtmlContent("New HTML");
@@ -308,14 +318,17 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             tagBuilder.Attributes.Add("data-hello", "world");
 
             var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
-            var setup = generator
-                .Setup(mock => mock.GenerateValidationMessage(
-                    It.IsAny<ViewContext>(),
-                    It.IsAny<ModelExplorer>(),
-                    It.IsAny<string>(),
-                    It.IsAny<string>(),
-                    It.IsAny<string>(),
-                    It.IsAny<object>()))
+            var setup = generator.Setup(
+                    mock =>
+                        mock.GenerateValidationMessage(
+                            It.IsAny<ViewContext>(),
+                            It.IsAny<ModelExplorer>(),
+                            It.IsAny<string>(),
+                            It.IsAny<string>(),
+                            It.IsAny<string>(),
+                            It.IsAny<object>()
+                        )
+                )
                 .Returns(tagBuilder);
 
             var validationMessageTagHelper = new ValidationMessageTagHelper(generator.Object)
@@ -330,15 +343,16 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     var tagHelperContent = new DefaultTagHelperContent();
                     tagHelperContent.AppendHtml(childContent);
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
-                });
+                }
+            );
             output.Content.AppendHtml(outputContent);
 
             var context = new TagHelperContext(
                 tagName: "span",
-                allAttributes: new TagHelperAttributeList(
-                    Enumerable.Empty<TagHelperAttribute>()),
+                allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
                 items: new Dictionary<object, object>(),
-                uniqueId: "test");
+                uniqueId: "test"
+            );
 
             var viewContext = CreateViewContext();
             validationMessageTagHelper.ViewContext = viewContext;
@@ -362,8 +376,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public async Task ProcessAsync_MergesTagBuilderFromGenerateValidationMessage(
             string childContent,
             string expectedMessage,
-            string expectedOutputContent)
-        {
+            string expectedOutputContent
+        ) {
             // Arrange
             var tagBuilder = new TagBuilder("span2");
             tagBuilder.InnerHtml.SetHtmlContent("New HTML");
@@ -371,14 +385,17 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             tagBuilder.Attributes.Add("data-hello", "world");
 
             var generator = new Mock<IHtmlGenerator>(MockBehavior.Strict);
-            var setup = generator
-                .Setup(mock => mock.GenerateValidationMessage(
-                    It.IsAny<ViewContext>(),
-                    It.IsAny<ModelExplorer>(),
-                    It.IsAny<string>(),
-                    expectedMessage,
-                    It.IsAny<string>(),
-                    It.IsAny<object>()))
+            var setup = generator.Setup(
+                    mock =>
+                        mock.GenerateValidationMessage(
+                            It.IsAny<ViewContext>(),
+                            It.IsAny<ModelExplorer>(),
+                            It.IsAny<string>(),
+                            expectedMessage,
+                            It.IsAny<string>(),
+                            It.IsAny<object>()
+                        )
+                )
                 .Returns(tagBuilder);
 
             var validationMessageTagHelper = new ValidationMessageTagHelper(generator.Object)
@@ -393,14 +410,15 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     var tagHelperContent = new DefaultTagHelperContent();
                     tagHelperContent.SetContent(childContent);
                     return Task.FromResult<TagHelperContent>(tagHelperContent);
-                });
+                }
+            );
 
             var context = new TagHelperContext(
                 tagName: "span",
-                allAttributes: new TagHelperAttributeList(
-                    Enumerable.Empty<TagHelperAttribute>()),
+                allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
                 items: new Dictionary<object, object>(),
-                uniqueId: "test");
+                uniqueId: "test"
+            );
 
             var viewContext = CreateViewContext();
             validationMessageTagHelper.ViewContext = viewContext;
@@ -430,18 +448,19 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var output = new TagHelperOutput(
                 tagName: "span",
                 attributes: new TagHelperAttributeList(),
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()));
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
             output.PreContent.SetContent(expectedPreContent);
             output.Content.SetContent(expectedContent);
             output.PostContent.SetContent(expectedPostContent);
 
             var context = new TagHelperContext(
                 tagName: "span",
-                allAttributes: new TagHelperAttributeList(
-                    Enumerable.Empty<TagHelperAttribute>()),
+                allAttributes: new TagHelperAttributeList(Enumerable.Empty<TagHelperAttribute>()),
                 items: new Dictionary<object, object>(),
-                uniqueId: "test");
+                uniqueId: "test"
+            );
 
             var viewContext = CreateViewContext();
             validationMessageTagHelper.ViewContext = viewContext;
@@ -462,7 +481,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var modelMetadataProvider = new EmptyModelMetadataProvider();
             return new ModelExpression(
                 name,
-                modelMetadataProvider.GetModelExplorerForType(typeof(object), model: null));
+                modelMetadataProvider.GetModelExplorerForType(typeof(object), model: null)
+            );
         }
 
         private static ViewContext CreateViewContext()
@@ -470,17 +490,20 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var actionContext = new ActionContext(
                 new DefaultHttpContext(),
                 new RouteData(),
-                new ActionDescriptor());
+                new ActionDescriptor()
+            );
 
             return new ViewContext(
                 actionContext,
                 Mock.Of<IView>(),
                 new ViewDataDictionary(
                     new EmptyModelMetadataProvider(),
-                    new ModelStateDictionary()),
+                    new ModelStateDictionary()
+                ),
                 Mock.Of<ITempDataDictionary>(),
                 TextWriter.Null,
-                new HtmlHelperOptions());
+                new HtmlHelperOptions()
+            );
         }
     }
 }

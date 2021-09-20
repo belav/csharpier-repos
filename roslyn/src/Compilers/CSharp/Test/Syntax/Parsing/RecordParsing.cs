@@ -12,28 +12,36 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public sealed class RecordParsingTests : ParsingTests
     {
-        private SyntaxTree UsingTree(string text, CSharpParseOptions? options, params DiagnosticDescription[] expectedErrors)
-        {
+        private SyntaxTree UsingTree(
+            string text,
+            CSharpParseOptions? options,
+            params DiagnosticDescription[] expectedErrors
+        ) {
             var tree = SyntaxFactory.ParseSyntaxTree(text, options);
             UsingNode(text, tree.GetCompilationUnitRoot(), expectedErrors);
             return tree;
         }
 
-        private SyntaxTree UsingTree(string text, params DiagnosticDescription[] expectedErrors)
-            => UsingTree(text, TestOptions.Regular9, expectedErrors);
+        private SyntaxTree UsingTree(string text, params DiagnosticDescription[] expectedErrors) =>
+            UsingTree(text, TestOptions.Regular9, expectedErrors);
 
-        private new void UsingExpression(string text, params DiagnosticDescription[] expectedErrors)
-            => UsingExpression(text, TestOptions.Regular9, expectedErrors);
+        private new void UsingExpression(
+            string text,
+            params DiagnosticDescription[] expectedErrors
+        ) => UsingExpression(text, TestOptions.Regular9, expectedErrors);
 
-        private new void UsingStatement(string text, params DiagnosticDescription[] expectedErrors)
-            => UsingStatement(text, TestOptions.Regular9, expectedErrors);
+        private new void UsingStatement(
+            string text,
+            params DiagnosticDescription[] expectedErrors
+        ) => UsingStatement(text, TestOptions.Regular9, expectedErrors);
 
         public RecordParsingTests(ITestOutputHelper output) : base(output) { }
 
         [Fact]
         public void FieldNamedData()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     int data;
@@ -109,10 +117,14 @@ class C
             EOF();
 
             // In langversion 8, this is a method
-            UsingTree(text, options: TestOptions.Regular8,
+            UsingTree(
+                text,
+                options: TestOptions.Regular8,
                 // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
                 // record C(int X, int Y);
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "record C(int X, int Y);").WithArguments("top-level statements", "9.0").WithLocation(1, 1)
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "record C(int X, int Y);")
+                    .WithArguments("top-level statements", "9.0")
+                    .WithLocation(1, 1)
             );
             N(SyntaxKind.CompilationUnit);
             {
@@ -255,11 +267,14 @@ class C
         public void RecordParsing05()
         {
             var tree = ParseTree("record Point;", options: TestOptions.Regular8);
-            tree.GetDiagnostics().Verify(
-                // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
-                // record Point;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "record Point;").WithArguments("top-level statements", "9.0").WithLocation(1, 1)
-            );
+            tree.GetDiagnostics()
+                .Verify(
+                    // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    // record Point;
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "record Point;")
+                        .WithArguments("top-level statements", "9.0")
+                        .WithLocation(1, 1)
+                );
 
             UsingNode((CSharpSyntaxNode)tree.GetRoot());
 
@@ -292,14 +307,15 @@ class C
         public void RecordParsing06()
         {
             var tree = ParseTree("interface P;", options: null);
-            tree.GetDiagnostics().Verify(
-                // (1,12): error CS1514: { expected	
-                // interface P;	
-                Diagnostic(ErrorCode.ERR_LbraceExpected, ";").WithLocation(1, 12),
-                // (1,12): error CS1513: } expected	
-                // interface P;	
-                Diagnostic(ErrorCode.ERR_RbraceExpected, ";").WithLocation(1, 12)
-            );
+            tree.GetDiagnostics()
+                .Verify(
+                    // (1,12): error CS1514: { expected
+                    // interface P;
+                    Diagnostic(ErrorCode.ERR_LbraceExpected, ";").WithLocation(1, 12),
+                    // (1,12): error CS1513: } expected
+                    // interface P;
+                    Diagnostic(ErrorCode.ERR_RbraceExpected, ";").WithLocation(1, 12)
+                );
 
             UsingNode((CSharpSyntaxNode)tree.GetRoot());
 
@@ -322,39 +338,53 @@ class C
         public void RecordParsing07()
         {
             var tree = ParseTree("interface P(int x, int y);", options: TestOptions.Regular8);
-            tree.GetDiagnostics().Verify(
-                // (1,12): error CS1514: { expected
-                // interface P(int x, int y);
-                Diagnostic(ErrorCode.ERR_LbraceExpected, "(").WithLocation(1, 12),
-                // (1,12): error CS1513: } expected
-                // interface P(int x, int y);
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "(").WithLocation(1, 12),
-                // (1,12): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
-                // interface P(int x, int y);
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "(int x, int y);").WithArguments("top-level statements", "9.0").WithLocation(1, 12),
-                // (1,12): error CS8803: Top-level statements must precede namespace and type declarations.
-                // interface P(int x, int y);
-                Diagnostic(ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType, "(int x, int y);").WithLocation(1, 12)
-            );
+            tree.GetDiagnostics()
+                .Verify(
+                    // (1,12): error CS1514: { expected
+                    // interface P(int x, int y);
+                    Diagnostic(ErrorCode.ERR_LbraceExpected, "(").WithLocation(1, 12),
+                    // (1,12): error CS1513: } expected
+                    // interface P(int x, int y);
+                    Diagnostic(ErrorCode.ERR_RbraceExpected, "(").WithLocation(1, 12),
+                    // (1,12): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    // interface P(int x, int y);
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "(int x, int y);")
+                        .WithArguments("top-level statements", "9.0")
+                        .WithLocation(1, 12),
+                    // (1,12): error CS8803: Top-level statements must precede namespace and type declarations.
+                    // interface P(int x, int y);
+                    Diagnostic(
+                            ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
+                            "(int x, int y);"
+                        )
+                        .WithLocation(1, 12)
+                );
         }
 
         [Fact]
         public void RecordParsingAmbiguities()
         {
-            var text = @"
+            var text =
+                @"
 record R1() { return null; }
 abstract record D
 {
     record R2() { return null; }
     abstract record R3();
 }";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (2,15): error CS1519: Invalid token 'return' in class, record, struct, or interface member declaration
                 // record R1() { return null; }
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "return").WithArguments("return").WithLocation(2, 15),
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "return")
+                    .WithArguments("return")
+                    .WithLocation(2, 15),
                 // (5,19): error CS1519: Invalid token 'return' in class, record, struct, or interface member declaration
                 //     record R2() { return null; }
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "return").WithArguments("return").WithLocation(5, 19));
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "return")
+                    .WithArguments("return")
+                    .WithLocation(5, 19)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -450,11 +480,14 @@ abstract record D
         [Fact, WorkItem(45538, "https://github.com/dotnet/roslyn/issues/45538")]
         public void RecordParsing_ConstraintAndSemiColon_MissingColon()
         {
-            UsingTree("record R<T> where T   class;",
+            UsingTree(
+                "record R<T> where T   class;",
                 // (1,23): error CS1003: Syntax error, ':' expected
                 // record R<T> where T   class;
-                Diagnostic(ErrorCode.ERR_SyntaxError, "class").WithArguments(":", "class").WithLocation(1, 23)
-                );
+                Diagnostic(ErrorCode.ERR_SyntaxError, "class")
+                    .WithArguments(":", "class")
+                    .WithLocation(1, 23)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -552,17 +585,20 @@ abstract record D
         [Fact, WorkItem(45538, "https://github.com/dotnet/roslyn/issues/45538")]
         public void RecordParsing_ConstraintAndSemiColon_Class()
         {
-            UsingTree("abstract class C<T> where T : class;",
+            UsingTree(
+                "abstract class C<T> where T : class;",
                 // (1,36): error CS1003: Syntax error, ',' expected
                 // abstract class C<T> where T : class;
-                Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",", ";").WithLocation(1, 36),
+                Diagnostic(ErrorCode.ERR_SyntaxError, ";")
+                    .WithArguments(",", ";")
+                    .WithLocation(1, 36),
                 // (1,37): error CS1514: { expected
                 // abstract class C<T> where T : class;
                 Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(1, 37),
                 // (1,37): error CS1513: } expected
                 // abstract class C<T> where T : class;
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 37)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -604,17 +640,20 @@ abstract record D
         [Fact, WorkItem(45538, "https://github.com/dotnet/roslyn/issues/45538")]
         public void RecordParsing_TwoConstraintsAndSemiColon_Class()
         {
-            UsingTree("abstract class C<T1, T2> where T1 : class where T2 : class;",
+            UsingTree(
+                "abstract class C<T1, T2> where T1 : class where T2 : class;",
                 // (1,59): error CS1003: Syntax error, ',' expected
                 // abstract class C<T1, T2> where T1 : class where T2 : class;
-                Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",", ";").WithLocation(1, 59),
+                Diagnostic(ErrorCode.ERR_SyntaxError, ";")
+                    .WithArguments(",", ";")
+                    .WithLocation(1, 59),
                 // (1,60): error CS1514: { expected
                 // abstract class C<T1, T2> where T1 : class where T2 : class;
                 Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(1, 60),
                 // (1,60): error CS1513: } expected
                 // abstract class C<T1, T2> where T1 : class where T2 : class;
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 60)
-                );
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -752,14 +791,17 @@ abstract record D
         [Fact]
         public void TestClassWithMultipleConstraints001()
         {
-            UsingTree("class a<b> where b : c where b { }",
+            UsingTree(
+                "class a<b> where b : c where b { }",
                 // (1,32): error CS1003: Syntax error, ':' expected
                 // class a<b> where b : c where b { }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "{").WithArguments(":", "{").WithLocation(1, 32),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "{")
+                    .WithArguments(":", "{")
+                    .WithLocation(1, 32),
                 // (1,32): error CS1031: Type expected
                 // class a<b> where b : c where b { }
                 Diagnostic(ErrorCode.ERR_TypeExpected, "{").WithLocation(1, 32)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -819,17 +861,20 @@ abstract record D
         [Fact]
         public void TestClassWithMultipleConstraints002()
         {
-            UsingTree("class a<b> where b : c where { }",
+            UsingTree(
+                "class a<b> where b : c where { }",
                 // (1,30): error CS1001: Identifier expected
                 // class a<b> where b : c where { }
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "{").WithLocation(1, 30),
                 // (1,30): error CS1003: Syntax error, ':' expected
                 // class a<b> where b : c where { }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "{").WithArguments(":", "{").WithLocation(1, 30),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "{")
+                    .WithArguments(":", "{")
+                    .WithLocation(1, 30),
                 // (1,30): error CS1031: Type expected
                 // class a<b> where b : c where { }
                 Diagnostic(ErrorCode.ERR_TypeExpected, "{").WithLocation(1, 30)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -930,11 +975,12 @@ abstract record D
         [Fact, WorkItem(45538, "https://github.com/dotnet/roslyn/issues/45538")]
         public void RecordParsing_ConstraintAndCommaAndSemiColon()
         {
-            UsingTree("record R<T> where T : class, ;",
+            UsingTree(
+                "record R<T> where T : class, ;",
                 // (1,30): error CS1031: Type expected
                 // record R<T> where T : class, ;
                 Diagnostic(ErrorCode.ERR_TypeExpected, ";").WithLocation(1, 30)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1029,14 +1075,19 @@ abstract record D
         [Fact]
         public void TestWhereWhere()
         {
-            UsingTree("public class Goo<T> : System.Object where where { }",
+            UsingTree(
+                "public class Goo<T> : System.Object where where { }",
                 // (1,37): error CS1003: Syntax error, ',' expected
                 // public class Goo<T> : System.Object where where { }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "where").WithArguments(",", "").WithLocation(1, 37),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "where")
+                    .WithArguments(",", "")
+                    .WithLocation(1, 37),
                 // (1,43): error CS1003: Syntax error, ',' expected
                 // public class Goo<T> : System.Object where where { }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "where").WithArguments(",", "").WithLocation(1, 43)
-                );
+                Diagnostic(ErrorCode.ERR_SyntaxError, "where")
+                    .WithArguments(",", "")
+                    .WithLocation(1, 43)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1100,17 +1151,24 @@ abstract record D
         [Fact]
         public void TestWhereWhereWhere()
         {
-            UsingTree("public class Goo<T> : System.Object where where where { }",
+            UsingTree(
+                "public class Goo<T> : System.Object where where where { }",
                 // (1,37): error CS1003: Syntax error, ',' expected
                 // public class Goo<T> : System.Object where where where { }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "where").WithArguments(",", "").WithLocation(1, 37),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "where")
+                    .WithArguments(",", "")
+                    .WithLocation(1, 37),
                 // (1,43): error CS1003: Syntax error, ',' expected
                 // public class Goo<T> : System.Object where where where { }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "where").WithArguments(",", "").WithLocation(1, 43),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "where")
+                    .WithArguments(",", "")
+                    .WithLocation(1, 43),
                 // (1,49): error CS1003: Syntax error, ',' expected
                 // public class Goo<T> : System.Object where where where { }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "where").WithArguments(",", "").WithLocation(1, 49)
-                );
+                Diagnostic(ErrorCode.ERR_SyntaxError, "where")
+                    .WithArguments(",", "")
+                    .WithLocation(1, 49)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1182,23 +1240,28 @@ abstract record D
         [Fact]
         public void WithParsingLangVer()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     int x = 0 with {};
 }";
             var tree = SyntaxFactory.ParseSyntaxTree(text, options: TestOptions.Regular8);
-            tree.GetDiagnostics().Verify(
-                // (4,15): error CS8400: Feature 'records' is not available in C# 8.0. Please use language version 9.0 or greater.
-                //     int x = 0 with {};
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "with").WithArguments("records", "9.0").WithLocation(4, 15)
-            );
+            tree.GetDiagnostics()
+                .Verify(
+                    // (4,15): error CS8400: Feature 'records' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    //     int x = 0 with {};
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "with")
+                        .WithArguments("records", "9.0")
+                        .WithLocation(4, 15)
+                );
         }
 
         [Fact]
         public void WithParsing1()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     with { };
@@ -1206,22 +1269,30 @@ class C
     int x = with { };
     int x = 0 with { };
 }";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (4,10): error CS1519: Invalid token '{' in class, record, struct, or interface member declaration
                 //     with { };
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "{").WithArguments("{").WithLocation(4, 10),
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "{")
+                    .WithArguments("{")
+                    .WithLocation(4, 10),
                 // (4,10): error CS1519: Invalid token '{' in class, record, struct, or interface member declaration
                 //     with { };
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "{").WithArguments("{").WithLocation(4, 10),
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "{")
+                    .WithArguments("{")
+                    .WithLocation(4, 10),
                 // (5,15): error CS1597: Semicolon after method or accessor block is not valid
                 //     x with { };
                 Diagnostic(ErrorCode.ERR_UnexpectedSemicolon, ";").WithLocation(5, 15),
                 // (6,5): error CS8803: Top-level statements must precede namespace and type declarations.
                 //     int x = with { };
-                Diagnostic(ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType, "int x = with { ").WithLocation(6, 5),
+                Diagnostic(ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType, "int x = with { ")
+                    .WithLocation(6, 5),
                 // (6,18): error CS1003: Syntax error, ',' expected
                 //     int x = with { };
-                Diagnostic(ErrorCode.ERR_SyntaxError, "{").WithArguments(",", "{").WithLocation(6, 18),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "{")
+                    .WithArguments(",", "{")
+                    .WithLocation(6, 18),
                 // (6,20): error CS1002: ; expected
                 //     int x = with { };
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "}").WithLocation(6, 20),
@@ -1340,7 +1411,8 @@ class C
         [Fact]
         public void WithParsing2()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     int M()
@@ -1434,7 +1506,8 @@ class C
         {
             var text = "0 with {";
 
-            UsingExpression(text,
+            UsingExpression(
+                text,
                 // (1,9): error CS1513: } expected
                 // 0 with {
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 9)
@@ -1461,7 +1534,8 @@ class C
         {
             var text = "0 with { X";
 
-            UsingExpression(text,
+            UsingExpression(
+                text,
                 // (1,11): error CS1513: } expected
                 // 0 with { X
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 11)
@@ -1492,13 +1566,18 @@ class C
         {
             var text = "0 with { X 3 =,";
 
-            UsingExpression(text,
+            UsingExpression(
+                text,
                 // (1,12): error CS1003: Syntax error, ',' expected
                 // 0 with { X 3 =,
-                Diagnostic(ErrorCode.ERR_SyntaxError, "3").WithArguments(",", "").WithLocation(1, 12),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "3")
+                    .WithArguments(",", "")
+                    .WithLocation(1, 12),
                 // (1,15): error CS1525: Invalid expression term ','
                 // 0 with { X 3 =,
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(1, 15),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
+                    .WithArguments(",")
+                    .WithLocation(1, 15),
                 // (1,16): error CS1733: Expected expression
                 // 0 with { X 3 =,
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 16),
@@ -1626,10 +1705,13 @@ class C
         {
             var text = @"M() with { }.ToString()";
 
-            UsingExpression(text,
+            UsingExpression(
+                text,
                 // (1,1): error CS1073: Unexpected token '.'
                 // M() with { }.ToString()
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "M() with { }").WithArguments(".").WithLocation(1, 1)
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "M() with { }")
+                    .WithArguments(".")
+                    .WithLocation(1, 1)
             );
 
             N(SyntaxKind.WithExpression);
@@ -1834,10 +1916,13 @@ class C
         {
             // Precedence inversion
             var text = @"x is int y with {}";
-            UsingExpression(text,
+            UsingExpression(
+                text,
                 // (1,12): error CS1073: Unexpected token 'with'
                 // x is int y with {}
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "with").WithArguments("with").WithLocation(1, 12)
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "with")
+                    .WithArguments("with")
+                    .WithLocation(1, 12)
             );
             N(SyntaxKind.WithExpression);
             {
@@ -1911,10 +1996,14 @@ class C
             // The parser doesn't see this as an invalid expression
             // statement, but as a broken declaration, e.g.
             //      x with <missing ,> { X = ""2 "" <missing ;> };
-            UsingStatement(text,
+            UsingStatement(
+                text,
                 // (1,8): error CS1003: Syntax error, ',' expected
                 // x with { X = "2" };
-                Diagnostic(ErrorCode.ERR_SyntaxError, "{").WithArguments(",", "{").WithLocation(1, 8));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "{")
+                    .WithArguments(",", "{")
+                    .WithLocation(1, 8)
+            );
             N(SyntaxKind.LocalDeclarationStatement);
             {
                 N(SyntaxKind.VariableDeclaration);
@@ -1982,10 +2071,14 @@ class C
         public void WithParsing18()
         {
             var text = @"x with { A = e is T y B = y }";
-            UsingExpression(text,
+            UsingExpression(
+                text,
                 // (1,23): error CS1003: Syntax error, ',' expected
                 // x with { A = e is T y B = y }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "B").WithArguments(",", "").WithLocation(1, 23));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "B")
+                    .WithArguments(",", "")
+                    .WithLocation(1, 23)
+            );
             N(SyntaxKind.WithExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -2047,10 +2140,14 @@ class C
         {
             var x = @"x with { , A = 10 }";
 
-            UsingExpression(x,
+            UsingExpression(
+                x,
                 // (1,10): error CS1525: Invalid expression term ','
                 // x with { , A = 10 }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(1, 10));
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
+                    .WithArguments(",")
+                    .WithLocation(1, 10)
+            );
             N(SyntaxKind.WithExpression);
             {
                 N(SyntaxKind.IdentifierName);
@@ -2087,11 +2184,13 @@ class C
         [Fact]
         public void BadParameterListAndBaseListOnClass()
         {
-            var text = @$"
+            var text =
+                @$"
 class C(int X, int Y)
 : B(X, Y)
 {{ }}";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (2,8): error CS1514: { expected
                 // class C(int X, int Y)
                 Diagnostic(ErrorCode.ERR_LbraceExpected, "(").WithLocation(2, 8),
@@ -2100,8 +2199,12 @@ class C(int X, int Y)
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "(").WithLocation(2, 8),
                 // (2,8): error CS8803: Top-level statements must precede namespace and type declarations.
                 // class C(int X, int Y)
-                Diagnostic(ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType, @"(int X, int Y)
-").WithLocation(2, 8),
+                Diagnostic(
+                        ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType,
+                        @"(int X, int Y)
+"
+                    )
+                    .WithLocation(2, 8),
                 // (2,22): error CS1002: ; expected
                 // class C(int X, int Y)
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(2, 22),
@@ -2216,19 +2319,27 @@ class C(int X, int Y)
             [CombinatorialValues("record")] string typeKeyword,
             [CombinatorialValues(true, false)] bool withParameters,
             [CombinatorialValues(true, false)] bool withBaseArguments,
-            [CombinatorialValues(true, false)] bool withBody)
-        {
-            var text = typeKeyword + " C" + (withParameters ? "(int X, int Y)" : "") + @"
-: B" + (withBaseArguments ? "(X, Y)" : "") + @"
-" + (withBody ? "{ }" : ";");
+            [CombinatorialValues(true, false)] bool withBody
+        ) {
+            var text =
+                typeKeyword
+                + " C"
+                + (withParameters ? "(int X, int Y)" : "")
+                + @"
+: B"
+                + (withBaseArguments ? "(X, Y)" : "")
+                + @"
+"
+                + (withBody ? "{ }" : ";");
 
             if (!withParameters && withBaseArguments)
             {
-                UsingTree(text,
+                UsingTree(
+                    text,
                     // (2,4): error CS8861: Unexpected argument list.
                     // : B(X, Y)
                     Diagnostic(ErrorCode.ERR_UnexpectedArgumentList, "(").WithLocation(2, 4)
-                    );
+                );
             }
             else
             {
@@ -2270,7 +2381,11 @@ class C(int X, int Y)
                     N(SyntaxKind.BaseList);
                     {
                         N(SyntaxKind.ColonToken);
-                        N(withBaseArguments ? SyntaxKind.PrimaryConstructorBaseType : SyntaxKind.SimpleBaseType);
+                        N(
+                            withBaseArguments
+                              ? SyntaxKind.PrimaryConstructorBaseType
+                              : SyntaxKind.SimpleBaseType
+                        );
                         {
                             N(SyntaxKind.IdentifierName);
                             {
@@ -2322,21 +2437,32 @@ class C(int X, int Y)
         [CombinatorialData]
         public void Base_02([CombinatorialValues(true, false)] bool withBody)
         {
-            var text = "record C(int X, int Y)" + @"
-: B, D(X, Y)" + @"
-" + (withBody ? "{ }" : ";");
+            var text =
+                "record C(int X, int Y)"
+                + @"
+: B, D(X, Y)"
+                + @"
+"
+                + (withBody ? "{ }" : ";");
 
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (2,7): error CS1003: Syntax error, ',' expected
                 // : B, D(X, Y)
-                Diagnostic(ErrorCode.ERR_SyntaxError, "(").WithArguments(",", "(").WithLocation(2, 7),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "(")
+                    .WithArguments(",", "(")
+                    .WithLocation(2, 7),
                 // (2,8): error CS1003: Syntax error, ',' expected
                 // : B, D(X, Y)
-                Diagnostic(ErrorCode.ERR_SyntaxError, "X").WithArguments(",", "").WithLocation(2, 8),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "X")
+                    .WithArguments(",", "")
+                    .WithLocation(2, 8),
                 // (2,12): error CS1003: Syntax error, ',' expected
                 // : B, D(X, Y)
-                Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments(",", ")").WithLocation(2, 12)
-                );
+                Diagnostic(ErrorCode.ERR_SyntaxError, ")")
+                    .WithArguments(",", ")")
+                    .WithLocation(2, 12)
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2420,17 +2546,20 @@ class C(int X, int Y)
         public void Base_03()
         {
             var text = "interface C : B;";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (1,16): error CS1003: Syntax error, ',' expected
                 // interface C : B;
-                Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",", ";").WithLocation(1, 16),
+                Diagnostic(ErrorCode.ERR_SyntaxError, ";")
+                    .WithArguments(",", ";")
+                    .WithLocation(1, 16),
                 // (1,17): error CS1514: { expected
                 // interface C : B;
                 Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(1, 17),
                 // (1,17): error CS1513: } expected
                 // interface C : B;
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 17)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2461,7 +2590,8 @@ class C(int X, int Y)
         public void Base_04()
         {
             var text = "interface C(int X, int Y) : B;";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (1,12): error CS1514: { expected
                 // interface C(int X, int Y) : B;
                 Diagnostic(ErrorCode.ERR_LbraceExpected, "(").WithLocation(1, 12),
@@ -2470,14 +2600,15 @@ class C(int X, int Y)
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "(").WithLocation(1, 12),
                 // (1,12): error CS8803: Top-level statements must precede namespace and type declarations.
                 // interface C(int X, int Y) : B;
-                Diagnostic(ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType, "(int X, int Y) ").WithLocation(1, 12),
+                Diagnostic(ErrorCode.ERR_TopLevelStatementAfterNamespaceOrType, "(int X, int Y) ")
+                    .WithLocation(1, 12),
                 // (1,27): error CS1002: ; expected
                 // interface C(int X, int Y) : B;
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, ":").WithLocation(1, 27),
                 // (1,27): error CS1022: Type or namespace definition, or end-of-file expected
                 // interface C(int X, int Y) : B;
                 Diagnostic(ErrorCode.ERR_EOFExpected, ":").WithLocation(1, 27)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2549,20 +2680,23 @@ class C(int X, int Y)
         public void Base_05()
         {
             var text = "interface C : B(X, Y);";
-            UsingTree(text,
+            UsingTree(
+                text,
                 // (1,16): error CS8861: Unexpected argument list.
                 // interface C : B(X, Y);
                 Diagnostic(ErrorCode.ERR_UnexpectedArgumentList, "(").WithLocation(1, 16),
                 // (1,22): error CS1003: Syntax error, ',' expected
                 // interface C : B(X, Y);
-                Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",", ";").WithLocation(1, 22),
+                Diagnostic(ErrorCode.ERR_SyntaxError, ";")
+                    .WithArguments(",", ";")
+                    .WithLocation(1, 22),
                 // (1,23): error CS1514: { expected
                 // interface C : B(X, Y);
                 Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(1, 23),
                 // (1,23): error CS1513: } expected
                 // interface C : B(X, Y);
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 23)
-                );
+            );
 
             N(SyntaxKind.CompilationUnit);
             {

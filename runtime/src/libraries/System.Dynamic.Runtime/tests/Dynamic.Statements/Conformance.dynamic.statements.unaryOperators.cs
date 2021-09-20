@@ -23,8 +23,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.unaryOperato
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.unaryOperators.as002.as002
 {
     // <Title> Simple dynamic declarations </Title>
@@ -55,8 +53,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.unaryOperato
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.unaryOperators.errorverifier.errorverifier
 {
@@ -240,8 +236,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.unaryOperato
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.unaryOperators.as003.as003
 {
     // <Title>Unary operators</Title>
@@ -282,8 +276,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.unaryOperato
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.unaryOperators.default001.default001
 {
     // <Title>Default(dynamic)</Title>
@@ -312,8 +304,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.unaryOperato
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.unaryOperators.is001.is001
 {
     public class Test
@@ -333,8 +323,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.unaryOperato
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.unaryOperators.is002.is002
 {
     public class Test
@@ -353,8 +341,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.unaryOperato
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.unaryOperators.is003.is003
 {
@@ -386,8 +372,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.unaryOperato
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.unaryOperators.is005.is005
 {
@@ -428,8 +412,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.unaryOperato
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.unaryOperators.typeof003.typeof003
 {

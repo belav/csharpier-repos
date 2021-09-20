@@ -29,14 +29,22 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private readonly ConversionKind _conversionKind;
 
-        internal CommonConversion(bool exists, bool isIdentity, bool isNumeric, bool isReference, bool isImplicit, bool isNullable, IMethodSymbol? methodSymbol)
-        {
-            _conversionKind = (exists ? ConversionKind.Exists : ConversionKind.None) |
-                              (isIdentity ? ConversionKind.IsIdentity : ConversionKind.None) |
-                              (isNumeric ? ConversionKind.IsNumeric : ConversionKind.None) |
-                              (isReference ? ConversionKind.IsReference : ConversionKind.None) |
-                              (isImplicit ? ConversionKind.IsImplicit : ConversionKind.None) |
-                              (isNullable ? ConversionKind.IsNullable : ConversionKind.None);
+        internal CommonConversion(
+            bool exists,
+            bool isIdentity,
+            bool isNumeric,
+            bool isReference,
+            bool isImplicit,
+            bool isNullable,
+            IMethodSymbol? methodSymbol
+        ) {
+            _conversionKind =
+                (exists ? ConversionKind.Exists : ConversionKind.None)
+                | (isIdentity ? ConversionKind.IsIdentity : ConversionKind.None)
+                | (isNumeric ? ConversionKind.IsNumeric : ConversionKind.None)
+                | (isReference ? ConversionKind.IsReference : ConversionKind.None)
+                | (isImplicit ? ConversionKind.IsImplicit : ConversionKind.None)
+                | (isNullable ? ConversionKind.IsNullable : ConversionKind.None);
             MethodSymbol = methodSymbol;
         }
 
@@ -51,23 +59,28 @@ namespace Microsoft.CodeAnalysis.Operations
         /// <summary>
         /// Returns true if the conversion is an identity conversion.
         /// </summary>
-        public bool IsIdentity => (_conversionKind & ConversionKind.IsIdentity) == ConversionKind.IsIdentity;
+        public bool IsIdentity =>
+            (_conversionKind & ConversionKind.IsIdentity) == ConversionKind.IsIdentity;
         /// <summary>
         /// Returns true if the conversion is an nullable conversion.
         /// </summary>
-        public bool IsNullable => (_conversionKind & ConversionKind.IsNullable) == ConversionKind.IsNullable;
+        public bool IsNullable =>
+            (_conversionKind & ConversionKind.IsNullable) == ConversionKind.IsNullable;
         /// <summary>
         /// Returns true if the conversion is a numeric conversion.
         /// </summary>
-        public bool IsNumeric => (_conversionKind & ConversionKind.IsNumeric) == ConversionKind.IsNumeric;
+        public bool IsNumeric =>
+            (_conversionKind & ConversionKind.IsNumeric) == ConversionKind.IsNumeric;
         /// <summary>
         /// Returns true if the conversion is a reference conversion.
         /// </summary>
-        public bool IsReference => (_conversionKind & ConversionKind.IsReference) == ConversionKind.IsReference;
+        public bool IsReference =>
+            (_conversionKind & ConversionKind.IsReference) == ConversionKind.IsReference;
         /// <summary>
         /// Returns true if the conversion is an implicit (C#) or widening (VB) conversion.
         /// </summary>
-        public bool IsImplicit => (_conversionKind & ConversionKind.IsImplicit) == ConversionKind.IsImplicit;
+        public bool IsImplicit =>
+            (_conversionKind & ConversionKind.IsImplicit) == ConversionKind.IsImplicit;
         /// <summary>
         /// Returns true if the conversion is a user-defined conversion.
         /// </summary>

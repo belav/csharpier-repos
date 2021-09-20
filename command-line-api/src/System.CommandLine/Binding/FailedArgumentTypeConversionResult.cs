@@ -10,29 +10,26 @@ namespace System.CommandLine.Binding
         internal FailedArgumentTypeConversionResult(
             IArgument argument,
             Type expectedType,
-            string value) :
-            base(argument, FormatErrorMessage(argument, expectedType, value))
-        {
-        }
+            string value
+        ) : base(argument, FormatErrorMessage(argument, expectedType, value)) { }
 
         private static string FormatErrorMessage(
             IArgument argument,
             Type expectedType,
-            string value)
-        {
-            if (argument is Argument a &&
-                a.Parents.Count == 1)
+            string value
+        ) {
+            if (argument is Argument a && a.Parents.Count == 1)
             {
                 // TODO: (FailedArgumentTypeConversionResult) localize
 
-                var firstParent = (IIdentifierSymbol) a.Parents[0];
+                var firstParent = (IIdentifierSymbol)a.Parents[0];
 
-                var symbolType =
-                    firstParent switch {
-                        ICommand _ => "command",
-                        IOption _ => "option",
-                        _ => null
-                        };
+                var symbolType = firstParent switch
+                {
+                    ICommand _ => "command",
+                    IOption _ => "option",
+                    _ => null
+                };
 
                 var alias = firstParent.Aliases.First();
 

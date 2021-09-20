@@ -21,8 +21,11 @@ namespace System.Reflection.Metadata
                 if (s_platformSpecificDirectorySeparator == null)
                 {
                     // '*' is a valid char on Unix-based FS
-                    s_platformSpecificDirectorySeparator =
-                        (Array.IndexOf(Path.GetInvalidFileNameChars(), '*') >= 0 ? DirectorySeparatorChar : AltDirectorySeparatorChar).ToString();
+                    s_platformSpecificDirectorySeparator = (
+                        Array.IndexOf(Path.GetInvalidFileNameChars(), '*') >= 0
+                            ? DirectorySeparatorChar
+                            : AltDirectorySeparatorChar
+                    ).ToString();
                 }
 
                 return s_platformSpecificDirectorySeparator;
@@ -43,8 +46,11 @@ namespace System.Reflection.Metadata
             for (int i = path.Length - 1; i >= 0; i--)
             {
                 char ch = path[i];
-                if (ch == DirectorySeparatorChar || ch == AltDirectorySeparatorChar || ch == VolumeSeparatorChar)
-                {
+                if (
+                    ch == DirectorySeparatorChar
+                    || ch == AltDirectorySeparatorChar
+                    || ch == VolumeSeparatorChar
+                ) {
                     return i + 1;
                 }
             }
@@ -70,8 +76,11 @@ namespace System.Reflection.Metadata
             }
 
             char c = root[root.Length - 1];
-            if (c == DirectorySeparatorChar || c == AltDirectorySeparatorChar || c == VolumeSeparatorChar)
-            {
+            if (
+                c == DirectorySeparatorChar
+                || c == AltDirectorySeparatorChar
+                || c == VolumeSeparatorChar
+            ) {
                 return root + relativePath;
             }
 

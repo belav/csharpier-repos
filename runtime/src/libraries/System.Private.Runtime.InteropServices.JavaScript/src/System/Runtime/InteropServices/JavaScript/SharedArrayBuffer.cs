@@ -46,6 +46,7 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <returns>a new JavaScript Core SharedArrayBuffer</returns>
         /// <param name="begin">Beginning index of copy.</param>
         /// <param name="end">Ending index, exclusive.</param>
-        public SharedArrayBuffer Slice(int begin, int end) => (SharedArrayBuffer)Invoke("slice", begin, end);
+        public SharedArrayBuffer Slice(int begin, int end) =>
+            (SharedArrayBuffer)Invoke("slice", begin, end);
     }
 }

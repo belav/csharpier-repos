@@ -8,20 +8,24 @@ namespace Internal.TypeSystem
     /// </summary>
     public sealed partial class ByRefType : ParameterizedType
     {
-        internal ByRefType(TypeDesc parameter)
-            : base(parameter)
-        {
-        }
+        internal ByRefType(TypeDesc parameter) : base(parameter) { }
 
         public override int GetHashCode()
         {
-            return Internal.NativeFormat.TypeHashingAlgorithms.ComputeByrefTypeHashCode(this.ParameterType.GetHashCode());
+            return Internal.NativeFormat.TypeHashingAlgorithms.ComputeByrefTypeHashCode(
+                this.ParameterType.GetHashCode()
+            );
         }
 
-        public override TypeDesc InstantiateSignature(Instantiation typeInstantiation, Instantiation methodInstantiation)
-        {
+        public override TypeDesc InstantiateSignature(
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        ) {
             TypeDesc parameterType = this.ParameterType;
-            TypeDesc instantiatedParameterType = parameterType.InstantiateSignature(typeInstantiation, methodInstantiation);
+            TypeDesc instantiatedParameterType = parameterType.InstantiateSignature(
+                typeInstantiation,
+                methodInstantiation
+            );
             if (instantiatedParameterType != parameterType)
                 return Context.GetByRefType(instantiatedParameterType);
 

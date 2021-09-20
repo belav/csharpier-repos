@@ -53,7 +53,40 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetByte();
             }
 
-            Vector256<Byte> result = Vector256.Create(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15], values[16], values[17], values[18], values[19], values[20], values[21], values[22], values[23], values[24], values[25], values[26], values[27], values[28], values[29], values[30], values[31]);
+            Vector256<Byte> result = Vector256.Create(
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                values[6],
+                values[7],
+                values[8],
+                values[9],
+                values[10],
+                values[11],
+                values[12],
+                values[13],
+                values[14],
+                values[15],
+                values[16],
+                values[17],
+                values[18],
+                values[19],
+                values[20],
+                values[21],
+                values[22],
+                values[23],
+                values[24],
+                values[25],
+                values[26],
+                values[27],
+                values[28],
+                values[29],
+                values[30],
+                values[31]
+            );
 
             ValidateResult(result, values);
         }
@@ -71,22 +104,64 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetByte();
             }
 
-            object result = typeof(Vector256)
-                                .GetMethod(nameof(Vector256.Create), operandTypes)
-                                .Invoke(null, new object[] { values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15], values[16], values[17], values[18], values[19], values[20], values[21], values[22], values[23], values[24], values[25], values[26], values[27], values[28], values[29], values[30], values[31] });
+            object result = typeof(Vector256).GetMethod(nameof(Vector256.Create), operandTypes)
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        values[0],
+                        values[1],
+                        values[2],
+                        values[3],
+                        values[4],
+                        values[5],
+                        values[6],
+                        values[7],
+                        values[8],
+                        values[9],
+                        values[10],
+                        values[11],
+                        values[12],
+                        values[13],
+                        values[14],
+                        values[15],
+                        values[16],
+                        values[17],
+                        values[18],
+                        values[19],
+                        values[20],
+                        values[21],
+                        values[22],
+                        values[23],
+                        values[24],
+                        values[25],
+                        values[26],
+                        values[27],
+                        values[28],
+                        values[29],
+                        values[30],
+                        values[31]
+                    }
+                );
 
             ValidateResult((Vector256<Byte>)(result), values);
         }
 
-        private void ValidateResult(Vector256<Byte> result, Byte[] expectedValues, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Vector256<Byte> result,
+            Byte[] expectedValues,
+            [CallerMemberName] string method = ""
+        ) {
             Byte[] resultElements = new Byte[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Byte, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValues, method);
         }
 
-        private void ValidateResult(Byte[] resultElements, Byte[] expectedValues, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Byte[] resultElements,
+            Byte[] expectedValues,
+            [CallerMemberName] string method = ""
+        ) {
             bool succeeded = true;
 
             for (var i = 0; i < ElementCount; i++)
@@ -100,9 +175,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector256.Create(Byte): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", expectedValues)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector256.Create(Byte): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", expectedValues)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

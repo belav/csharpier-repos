@@ -38,12 +38,17 @@ namespace System.IO.IsolatedStorage
         }
 
         [Theory, MemberData(nameof(ValidStores))]
-        public async Task DisposeAsync_DerivedIsolatedStorageFileStream_DisposeInvoked(PresetScopes scope)
-        {
+        public async Task DisposeAsync_DerivedIsolatedStorageFileStream_DisposeInvoked(
+            PresetScopes scope
+        ) {
             TestHelper.WipeStores();
             using (IsolatedStorageFile isf = GetPresetScope(scope))
-            using (var isfs = new OverridesDisposeIsolatedStorageFileStream("DisposeAsyncFile", FileMode.Create))
-            {
+            using (
+                var isfs = new OverridesDisposeIsolatedStorageFileStream(
+                    "DisposeAsyncFile",
+                    FileMode.Create
+                )
+            ) {
                 Assert.False(isfs.DisposeInvoked);
                 await isfs.DisposeAsync();
                 Assert.True(isfs.DisposeInvoked);
@@ -53,7 +58,8 @@ namespace System.IO.IsolatedStorage
         private sealed class OverridesDisposeIsolatedStorageFileStream : IsolatedStorageFileStream
         {
             public bool DisposeInvoked;
-            public OverridesDisposeIsolatedStorageFileStream(string path, FileMode mode) : base(path, mode) { }
+            public OverridesDisposeIsolatedStorageFileStream(string path, FileMode mode)
+                : base(path, mode) { }
             protected override void Dispose(bool disposing)
             {
                 DisposeInvoked = true;

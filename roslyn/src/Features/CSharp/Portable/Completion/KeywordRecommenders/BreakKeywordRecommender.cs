@@ -13,16 +13,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class BreakKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public BreakKeywordRecommender()
-            : base(SyntaxKind.BreakKeyword)
-        {
-        }
+        public BreakKeywordRecommender() : base(SyntaxKind.BreakKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-        {
-            return
-                IsInBreakableConstructContext(context) ||
-                context.TargetToken.IsAfterYieldKeyword();
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) {
+            return IsInBreakableConstructContext(context)
+                || context.TargetToken.IsAfterYieldKeyword();
         }
 
         private static bool IsInBreakableConstructContext(CSharpSyntaxContext context)

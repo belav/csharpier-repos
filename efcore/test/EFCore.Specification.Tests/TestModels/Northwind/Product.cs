@@ -32,8 +32,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind
 
         public virtual List<OrderDetail> OrderDetails { get; set; }
 
-        protected bool Equals(Product other)
-            => Equals(ProductID, other.ProductID);
+        protected bool Equals(Product other) => Equals(ProductID, other.ProductID);
 
         public override bool Equals(object obj)
         {
@@ -44,14 +43,11 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind
 
             return ReferenceEquals(this, obj)
                 ? true
-                : obj.GetType() == GetType()
-                && Equals((Product)obj);
+                : obj.GetType() == GetType() && Equals((Product)obj);
         }
 
-        public override int GetHashCode()
-            => ProductID.GetHashCode();
+        public override int GetHashCode() => ProductID.GetHashCode();
 
-        public override string ToString()
-            => "Product " + ProductID;
+        public override string ToString() => "Product " + ProductID;
     }
 }

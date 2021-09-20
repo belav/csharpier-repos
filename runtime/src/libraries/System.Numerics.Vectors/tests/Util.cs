@@ -73,7 +73,8 @@ namespace System.Numerics.Tests
             return values;
         }
 
-        public static T[] GenerateRandomValues<T>(int numValues, int min = 1, int max = 100) where T : struct
+        public static T[] GenerateRandomValues<T>(int numValues, int min = 1, int max = 100)
+            where T : struct
         {
             T[] values = new T[numValues];
             for (int g = 0; g < numValues; g++)
@@ -93,7 +94,13 @@ namespace System.Numerics.Tests
 
         public static T Abs<T>(T value) where T : struct
         {
-            Type[] unsignedTypes = new[] { typeof(byte), typeof(ushort), typeof(uint), typeof(ulong) };
+            Type[] unsignedTypes = new[]
+            {
+                typeof(byte),
+                typeof(ushort),
+                typeof(uint),
+                typeof(ulong)
+            };
             if (unsignedTypes.Contains(typeof(T)))
             {
                 return value;

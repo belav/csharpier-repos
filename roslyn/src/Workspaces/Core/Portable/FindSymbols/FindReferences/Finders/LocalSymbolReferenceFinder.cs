@@ -9,7 +9,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
     internal class LocalSymbolReferenceFinder : AbstractMemberScopedReferenceFinder<ILocalSymbol>
     {
-        protected override Func<SyntaxToken, bool> GetTokensMatchFunction(ISyntaxFactsService syntaxFacts, string name)
-            => t => IdentifiersMatch(syntaxFacts, name, t);
+        protected override Func<SyntaxToken, bool> GetTokensMatchFunction(
+            ISyntaxFactsService syntaxFacts,
+            string name
+        ) => t => IdentifiersMatch(syntaxFacts, name, t);
     }
 }

@@ -39,7 +39,15 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLiftedMultiplyCheckedNullableDecimalTest(bool useInterpreter)
         {
-            decimal?[] values = new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
+            decimal?[] values = new decimal?[]
+            {
+                null,
+                decimal.Zero,
+                decimal.One,
+                decimal.MinusOne,
+                decimal.MinValue,
+                decimal.MaxValue
+            };
             for (int i = 0; i < values.Length; i++)
             {
                 for (int j = 0; j < values.Length; j++)
@@ -52,7 +60,19 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLiftedMultiplyCheckedNullableDoubleTest(bool useInterpreter)
         {
-            double?[] values = new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
+            double?[] values = new double?[]
+            {
+                null,
+                0,
+                1,
+                -1,
+                double.MinValue,
+                double.MaxValue,
+                double.Epsilon,
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+                double.NaN
+            };
             for (int i = 0; i < values.Length; i++)
             {
                 for (int j = 0; j < values.Length; j++)
@@ -65,7 +85,19 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLiftedMultiplyCheckedNullableFloatTest(bool useInterpreter)
         {
-            float?[] values = new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
+            float?[] values = new float?[]
+            {
+                null,
+                0,
+                1,
+                -1,
+                float.MinValue,
+                float.MaxValue,
+                float.Epsilon,
+                float.NegativeInfinity,
+                float.PositiveInfinity,
+                float.NaN
+            };
             for (int i = 0; i < values.Length; i++)
             {
                 for (int j = 0; j < values.Length; j++)
@@ -169,7 +201,13 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLiftedMultiplyCheckedNullableNumberTest(bool useInterpreter)
         {
-            Number?[] values = new Number?[] { null, new Number(0), new Number(1), Number.MaxValue };
+            Number?[] values = new Number?[]
+            {
+                null,
+                new Number(0),
+                new Number(1),
+                Number.MaxValue
+            };
             for (int i = 0; i < values.Length; i++)
             {
                 for (int j = 0; j < values.Length; j++)
@@ -249,12 +287,14 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyMultiplyCheckedNullableByte(byte? a, byte? b, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.MultiplyChecked(
-                        Expression.Constant(a, typeof(byte?)),
-                        Expression.Constant(b, typeof(byte?)),
-                        typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyCheckedNullableByte")));
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.MultiplyChecked(
+                    Expression.Constant(a, typeof(byte?)),
+                    Expression.Constant(b, typeof(byte?)),
+                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyCheckedNullableByte")
+                )
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             byte? expected = null;
@@ -273,12 +313,14 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyMultiplyCheckedNullableChar(char? a, char? b, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.MultiplyChecked(
-                        Expression.Constant(a, typeof(char?)),
-                        Expression.Constant(b, typeof(char?)),
-                        typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyCheckedNullableChar")));
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.MultiplyChecked(
+                    Expression.Constant(a, typeof(char?)),
+                    Expression.Constant(b, typeof(char?)),
+                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyCheckedNullableChar")
+                )
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             char? expected = null;
@@ -295,14 +337,19 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyMultiplyCheckedNullableDecimal(decimal? a, decimal? b, bool useInterpreter)
-        {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.MultiplyChecked(
-                        Expression.Constant(a, typeof(decimal?)),
-                        Expression.Constant(b, typeof(decimal?)),
-                        typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyCheckedNullableDecimal")));
+        private static void VerifyMultiplyCheckedNullableDecimal(
+            decimal? a,
+            decimal? b,
+            bool useInterpreter
+        ) {
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.MultiplyChecked(
+                    Expression.Constant(a, typeof(decimal?)),
+                    Expression.Constant(b, typeof(decimal?)),
+                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyCheckedNullableDecimal")
+                )
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             decimal? expected = null;
@@ -319,27 +366,37 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyMultiplyCheckedNullableDouble(double? a, double? b, bool useInterpreter)
-        {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.MultiplyChecked(
-                        Expression.Constant(a, typeof(double?)),
-                        Expression.Constant(b, typeof(double?)),
-                        typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyCheckedNullableDouble")));
+        private static void VerifyMultiplyCheckedNullableDouble(
+            double? a,
+            double? b,
+            bool useInterpreter
+        ) {
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.MultiplyChecked(
+                    Expression.Constant(a, typeof(double?)),
+                    Expression.Constant(b, typeof(double?)),
+                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyCheckedNullableDouble")
+                )
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a * b, f());
         }
 
-        private static void VerifyMultiplyCheckedNullableFloat(float? a, float? b, bool useInterpreter)
-        {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.MultiplyChecked(
-                        Expression.Constant(a, typeof(float?)),
-                        Expression.Constant(b, typeof(float?)),
-                        typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyCheckedNullableFloat")));
+        private static void VerifyMultiplyCheckedNullableFloat(
+            float? a,
+            float? b,
+            bool useInterpreter
+        ) {
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.MultiplyChecked(
+                    Expression.Constant(a, typeof(float?)),
+                    Expression.Constant(b, typeof(float?)),
+                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyCheckedNullableFloat")
+                )
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a * b, f());
@@ -347,12 +404,14 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyMultiplyCheckedNullableInt(int? a, int? b, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.MultiplyChecked(
-                        Expression.Constant(a, typeof(int?)),
-                        Expression.Constant(b, typeof(int?)),
-                        typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyCheckedNullableInt")));
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.MultiplyChecked(
+                    Expression.Constant(a, typeof(int?)),
+                    Expression.Constant(b, typeof(int?)),
+                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyCheckedNullableInt")
+                )
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             int? expected = null;
@@ -371,12 +430,14 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyMultiplyCheckedNullableLong(long? a, long? b, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.MultiplyChecked(
-                        Expression.Constant(a, typeof(long?)),
-                        Expression.Constant(b, typeof(long?)),
-                        typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyCheckedNullableLong")));
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.MultiplyChecked(
+                    Expression.Constant(a, typeof(long?)),
+                    Expression.Constant(b, typeof(long?)),
+                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyCheckedNullableLong")
+                )
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             long? expected = null;
@@ -393,14 +454,19 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyMultiplyCheckedNullableSByte(sbyte? a, sbyte? b, bool useInterpreter)
-        {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.MultiplyChecked(
-                        Expression.Constant(a, typeof(sbyte?)),
-                        Expression.Constant(b, typeof(sbyte?)),
-                        typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyCheckedNullableSByte")));
+        private static void VerifyMultiplyCheckedNullableSByte(
+            sbyte? a,
+            sbyte? b,
+            bool useInterpreter
+        ) {
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.MultiplyChecked(
+                    Expression.Constant(a, typeof(sbyte?)),
+                    Expression.Constant(b, typeof(sbyte?)),
+                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyCheckedNullableSByte")
+                )
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             sbyte? expected = null;
@@ -417,14 +483,19 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyMultiplyCheckedNullableShort(short? a, short? b, bool useInterpreter)
-        {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.MultiplyChecked(
-                        Expression.Constant(a, typeof(short?)),
-                        Expression.Constant(b, typeof(short?)),
-                        typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyCheckedNullableShort")));
+        private static void VerifyMultiplyCheckedNullableShort(
+            short? a,
+            short? b,
+            bool useInterpreter
+        ) {
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.MultiplyChecked(
+                    Expression.Constant(a, typeof(short?)),
+                    Expression.Constant(b, typeof(short?)),
+                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyCheckedNullableShort")
+                )
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             short? expected = null;
@@ -443,12 +514,14 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyMultiplyCheckedNullableUInt(uint? a, uint? b, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.MultiplyChecked(
-                        Expression.Constant(a, typeof(uint?)),
-                        Expression.Constant(b, typeof(uint?)),
-                        typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyCheckedNullableUInt")));
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.MultiplyChecked(
+                    Expression.Constant(a, typeof(uint?)),
+                    Expression.Constant(b, typeof(uint?)),
+                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyCheckedNullableUInt")
+                )
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             uint? expected = null;
@@ -465,14 +538,19 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyMultiplyCheckedNullableULong(ulong? a, ulong? b, bool useInterpreter)
-        {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.MultiplyChecked(
-                        Expression.Constant(a, typeof(ulong?)),
-                        Expression.Constant(b, typeof(ulong?)),
-                        typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyCheckedNullableULong")));
+        private static void VerifyMultiplyCheckedNullableULong(
+            ulong? a,
+            ulong? b,
+            bool useInterpreter
+        ) {
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.MultiplyChecked(
+                    Expression.Constant(a, typeof(ulong?)),
+                    Expression.Constant(b, typeof(ulong?)),
+                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyCheckedNullableULong")
+                )
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             ulong? expected = null;
@@ -489,14 +567,19 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyMultiplyCheckedNullableUShort(ushort? a, ushort? b, bool useInterpreter)
-        {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.MultiplyChecked(
-                        Expression.Constant(a, typeof(ushort?)),
-                        Expression.Constant(b, typeof(ushort?)),
-                        typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyCheckedNullableUShort")));
+        private static void VerifyMultiplyCheckedNullableUShort(
+            ushort? a,
+            ushort? b,
+            bool useInterpreter
+        ) {
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.MultiplyChecked(
+                    Expression.Constant(a, typeof(ushort?)),
+                    Expression.Constant(b, typeof(ushort?)),
+                    typeof(LiftedMultiplyCheckedNullableTests).GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyCheckedNullableUShort")
+                )
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             ushort? expected = null;
@@ -513,20 +596,23 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyMultiplyCheckedNullableNumber(Number? a, Number? b, bool useInterpreter)
-        {
-            Expression<Func<Number?>> e =
-                Expression.Lambda<Func<Number?>>(
-                    Expression.MultiplyChecked(
-                        Expression.Constant(a, typeof(Number?)),
-                        Expression.Constant(b, typeof(Number?))));
+        private static void VerifyMultiplyCheckedNullableNumber(
+            Number? a,
+            Number? b,
+            bool useInterpreter
+        ) {
+            Expression<Func<Number?>> e = Expression.Lambda<Func<Number?>>(
+                Expression.MultiplyChecked(
+                    Expression.Constant(a, typeof(Number?)),
+                    Expression.Constant(b, typeof(Number?))
+                )
+            );
             Assert.Equal(typeof(Number?), e.Body.Type);
             Func<Number?> f = e.Compile(useInterpreter);
 
             Number? expected = a * b;
             Assert.Equal(expected, f()); // NB: checked behavior doesn't apply to non-primitive types
         }
-
         #endregion
     }
 }

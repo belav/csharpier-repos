@@ -9,7 +9,6 @@ namespace System.IO.Tests
 {
     public class StreamWriterTests
     {
-
         [Fact]
         public void DisposeAsync_CanInvokeMultipleTimes()
         {
@@ -38,6 +37,7 @@ namespace System.IO.Tests
                 sw.Write("hello");
                 Assert.Equal(0, ms.Position);
             }
+
             finally
             {
                 await sw.DisposeAsync();
@@ -55,6 +55,7 @@ namespace System.IO.Tests
             {
                 sw.Write("hello");
             }
+
             finally
             {
                 await sw.DisposeAsync();
@@ -71,6 +72,7 @@ namespace System.IO.Tests
             {
                 sw.Write("hello");
             }
+
             finally
             {
                 Assert.False(sw.DisposeInvoked);
@@ -88,6 +90,7 @@ namespace System.IO.Tests
             {
                 sw.Write("hello");
             }
+
             finally
             {
                 Assert.False(sw.DisposeInvoked);
@@ -107,10 +110,15 @@ namespace System.IO.Tests
 
         private sealed class OverrideDisposeAndDisposeAsyncStreamWriter : StreamWriter
         {
-            public bool DisposeInvoked, DisposeAsyncInvoked;
+            public bool DisposeInvoked,
+                DisposeAsyncInvoked;
             public OverrideDisposeAndDisposeAsyncStreamWriter(Stream output) : base(output) { }
             protected override void Dispose(bool disposing) => DisposeInvoked = true;
-            public override ValueTask DisposeAsync() { DisposeAsyncInvoked = true; return default; }
+            public override ValueTask DisposeAsync()
+            {
+                DisposeAsyncInvoked = true;
+                return default;
+            }
         }
     }
 }

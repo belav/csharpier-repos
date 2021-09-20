@@ -16,10 +16,15 @@ namespace Microsoft.EntityFrameworkCore
         {
             using (var context = CreateChipsContext())
             {
-                var honeyDijon = context.Add(
-                    new KettleChips { Name = "Honey Dijon" }).Entity;
-                var buffaloBleu = context.Add(
-                    new KettleChips { Name = "Buffalo Bleu", BestBuyDate = new DateTime(2111, 1, 11) }).Entity;
+                var honeyDijon = context.Add(new KettleChips { Name = "Honey Dijon" }).Entity;
+                var buffaloBleu =
+                    context.Add(
+                        new KettleChips
+                        {
+                            Name = "Buffalo Bleu",
+                            BestBuyDate = new DateTime(2111, 1, 11)
+                        }
+                    ).Entity;
 
                 context.SaveChanges();
 
@@ -29,27 +34,28 @@ namespace Microsoft.EntityFrameworkCore
 
             using (var context = CreateChipsContext())
             {
-                Assert.Equal(new DateTime(2035, 9, 25), context.Chips.Single(c => c.Name == "Honey Dijon").BestBuyDate);
-                Assert.Equal(new DateTime(2111, 1, 11), context.Chips.Single(c => c.Name == "Buffalo Bleu").BestBuyDate);
+                Assert.Equal(
+                    new DateTime(2035, 9, 25),
+                    context.Chips.Single(c => c.Name == "Honey Dijon").BestBuyDate
+                );
+                Assert.Equal(
+                    new DateTime(2111, 1, 11),
+                    context.Chips.Single(c => c.Name == "Buffalo Bleu").BestBuyDate
+                );
             }
         }
 
         protected override string StoreName { get; } = "DefaultKettleChips";
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
         protected override Type ContextType { get; } = typeof(ChipsContext);
 
-        private ChipsContext CreateChipsContext()
-            => (ChipsContext)CreateContext();
+        private ChipsContext CreateChipsContext() => (ChipsContext)CreateContext();
 
         private class ChipsContext : PoolableDbContext
         {
-            public ChipsContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public ChipsContext(DbContextOptions options) : base(options) { }
 
             // ReSharper disable once UnusedAutoPropertyAccessor.Local
             public DbSet<KettleChips> Chips { get; set; }

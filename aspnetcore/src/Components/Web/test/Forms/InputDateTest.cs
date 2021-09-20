@@ -31,7 +31,9 @@ namespace Microsoft.AspNetCore.Components.Forms
             await inputComponent.SetCurrentValueAsStringAsync("invalidDate");
 
             // Assert
-            var validationMessages = rootComponent.EditContext.GetValidationMessages(fieldIdentifier);
+            var validationMessages = rootComponent.EditContext.GetValidationMessages(
+                fieldIdentifier
+            );
             Assert.NotEmpty(validationMessages);
             Assert.Contains("The Date property field must be a date.", validationMessages);
         }
@@ -67,7 +69,12 @@ namespace Microsoft.AspNetCore.Components.Forms
                 // (e.g., from @bind), except to simplify the test code there's an InvokeAsync
                 // here. In production code it wouldn't normally be required because @bind
                 // calls run on the sync context anyway.
-                await InvokeAsync(() => { base.CurrentValueAsString = value; });
+                await InvokeAsync(
+                    () =>
+                    {
+                        base.CurrentValueAsString = value;
+                    }
+                );
             }
         }
     }

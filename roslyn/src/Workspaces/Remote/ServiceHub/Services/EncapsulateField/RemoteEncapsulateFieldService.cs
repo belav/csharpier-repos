@@ -15,50 +15,73 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed class RemoteEncapsulateFieldService : BrokeredServiceBase, IRemoteEncapsulateFieldService
+    internal sealed class RemoteEncapsulateFieldService
+        : BrokeredServiceBase,
+          IRemoteEncapsulateFieldService
     {
         internal sealed class Factory : FactoryBase<IRemoteEncapsulateFieldService>
         {
-            protected override IRemoteEncapsulateFieldService CreateService(in ServiceConstructionArguments arguments)
-                => new RemoteEncapsulateFieldService(arguments);
+            protected override IRemoteEncapsulateFieldService CreateService(
+                in ServiceConstructionArguments arguments
+            ) => new RemoteEncapsulateFieldService(arguments);
         }
 
         public RemoteEncapsulateFieldService(in ServiceConstructionArguments arguments)
-            : base(arguments)
-        {
-        }
+            : base(arguments) { }
 
-        public ValueTask<ImmutableArray<(DocumentId, ImmutableArray<TextChange>)>> EncapsulateFieldsAsync(
+        public ValueTask<
+            ImmutableArray<(DocumentId, ImmutableArray<TextChange>)>
+        > EncapsulateFieldsAsync(
             PinnedSolutionInfo solutionInfo,
             DocumentId documentId,
             ImmutableArray<string> fieldSymbolKeys,
             bool updateReferences,
-            CancellationToken cancellationToken)
-        {
-            return RunServiceAsync(async cancellationToken =>
-            {
-                var solution = await GetSolutionAsync(solutionInfo, cancellationToken).ConfigureAwait(false);
-                var document = solution.GetRequiredDocument(documentId);
-
-                using var _ = ArrayBuilder<IFieldSymbol>.GetInstance(out var fields);
-                var compilation = await document.Project.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
-
-                foreach (var key in fieldSymbolKeys)
+            CancellationToken cancellationToken
+        ) {
+            return RunServiceAsync(
+                async cancellationToken =>
                 {
-                    var resolved = SymbolKey.ResolveString(key, compilation, cancellationToken: cancellationToken).GetAnySymbol() as IFieldSymbol;
-                    if (resolved == null)
-                        return ImmutableArray<(DocumentId, ImmutableArray<TextChange>)>.Empty;
+                    var solution = await GetSolutionAsync(solutionInfo, cancellationToken)
+                        .ConfigureAwait(false);
+                    var document = solution.GetRequiredDocument(documentId);
 
-                    fields.Add(resolved);
-                }
+                    using var _ = ArrayBuilder<IFieldSymbol>.GetInstance(out var fields);
+                    var compilation = await document.Project.GetCompilationAsync(cancellationToken)
+                        .ConfigureAwait(false);
 
-                var service = document.GetLanguageService<AbstractEncapsulateFieldService>();
+                    foreach (var key in fieldSymbolKeys)
+                    {
+                        var resolved =
+                            SymbolKey.ResolveString(
+                                    key,
+                                    compilation,
+                                    cancellationToken: cancellationToken
+                                )
+                                .GetAnySymbol() as IFieldSymbol;
+                        if (resolved == null)
+                            return ImmutableArray<(DocumentId, ImmutableArray<TextChange>)>.Empty;
 
-                var newSolution = await service.EncapsulateFieldsAsync(
-                    document, fields.ToImmutable(), updateReferences, cancellationToken).ConfigureAwait(false);
-                return await RemoteUtilities.GetDocumentTextChangesAsync(
-                    solution, newSolution, cancellationToken).ConfigureAwait(false);
-            }, cancellationToken);
+                        fields.Add(resolved);
+                    }
+
+                    var service = document.GetLanguageService<AbstractEncapsulateFieldService>();
+
+                    var newSolution = await service.EncapsulateFieldsAsync(
+                            document,
+                            fields.ToImmutable(),
+                            updateReferences,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
+                    return await RemoteUtilities.GetDocumentTextChangesAsync(
+                            solution,
+                            newSolution,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
+                },
+                cancellationToken
+            );
         }
     }
 }

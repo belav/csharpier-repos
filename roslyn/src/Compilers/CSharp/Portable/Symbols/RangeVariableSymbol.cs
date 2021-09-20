@@ -23,8 +23,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly ImmutableArray<Location> _locations;
         private readonly Symbol _containingSymbol;
 
-        internal RangeVariableSymbol(string Name, Symbol containingSymbol, Location location, bool isTransparent = false)
-        {
+        internal RangeVariableSymbol(
+            string Name,
+            Symbol containingSymbol,
+            Location location,
+            bool isTransparent = false
+        ) {
             _name = Name;
             _containingSymbol = containingSymbol;
             _locations = ImmutableArray.Create<Location>(location);
@@ -35,86 +39,64 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         public override SymbolKind Kind
         {
-            get
-            {
-                return SymbolKind.RangeVariable;
-            }
+            get { return SymbolKind.RangeVariable; }
         }
 
         public override ImmutableArray<Location> Locations
         {
-            get
-            {
-                return _locations;
-            }
+            get { return _locations; }
         }
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
             get
             {
-                SyntaxToken token = (SyntaxToken)_locations[0].SourceTree.GetRoot().FindToken(_locations[0].SourceSpan.Start);
+                SyntaxToken token = (SyntaxToken)_locations[0].SourceTree.GetRoot()
+                    .FindToken(_locations[0].SourceSpan.Start);
                 Debug.Assert(token.Kind() == SyntaxKind.IdentifierToken);
                 CSharpSyntaxNode node = (CSharpSyntaxNode)token.Parent;
-                Debug.Assert(node is QueryClauseSyntax || node is QueryContinuationSyntax || node is JoinIntoClauseSyntax);
+                Debug.Assert(
+                    node is QueryClauseSyntax
+                        || node is QueryContinuationSyntax
+                        || node is JoinIntoClauseSyntax
+                );
                 return ImmutableArray.Create<SyntaxReference>(node.GetReference());
             }
         }
 
         public override bool IsExtern
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsSealed
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsAbstract
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsOverride
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsVirtual
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsStatic
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -128,22 +110,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override Accessibility DeclaredAccessibility
         {
-            get
-            {
-                return Accessibility.NotApplicable;
-            }
+            get { return Accessibility.NotApplicable; }
         }
 
         public override Symbol ContainingSymbol
         {
-            get
-            {
-                return _containingSymbol;
-            }
+            get { return _containingSymbol; }
         }
 
-        internal override TResult Accept<TArg, TResult>(CSharpSymbolVisitor<TArg, TResult> visitor, TArg a)
-        {
+        internal override TResult Accept<TArg, TResult>(
+            CSharpSymbolVisitor<TArg, TResult> visitor,
+            TArg a
+        ) {
             return visitor.VisitRangeVariable(this, a);
         }
 

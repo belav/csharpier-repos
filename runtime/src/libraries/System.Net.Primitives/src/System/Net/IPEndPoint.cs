@@ -90,9 +90,11 @@ namespace System.Net
             return TryParse(s.AsSpan(), out result);
         }
 
-        public static bool TryParse(ReadOnlySpan<char> s, [NotNullWhen(true)] out IPEndPoint? result)
-        {
-            int addressLength = s.Length;  // If there's no port then send the entire string to the address parser
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            [NotNullWhen(true)] out IPEndPoint? result
+        ) {
+            int addressLength = s.Length; // If there's no port then send the entire string to the address parser
             int lastColonPos = s.LastIndexOf(':');
 
             // Look to see if this is an IPv6 address with a port.
@@ -112,10 +114,18 @@ namespace System.Net
             if (IPAddress.TryParse(s.Slice(0, addressLength), out IPAddress? address))
             {
                 uint port = 0;
-                if (addressLength == s.Length ||
-                    (uint.TryParse(s.Slice(addressLength + 1), NumberStyles.None, CultureInfo.InvariantCulture, out port) && port <= MaxPort))
-
-                {
+                if (
+                    addressLength == s.Length
+                    || (
+                        uint.TryParse(
+                            s.Slice(addressLength + 1),
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture,
+                            out port
+                        )
+                        && port <= MaxPort
+                    )
+                ) {
                     result = new IPEndPoint(address, (int)port);
                     return true;
                 }
@@ -147,8 +157,13 @@ namespace System.Net
 
         public override string ToString()
         {
-            string format = (_address.AddressFamily == AddressFamily.InterNetworkV6) ? "[{0}]:{1}" : "{0}:{1}";
-            return string.Format(format, _address.ToString(), Port.ToString(NumberFormatInfo.InvariantInfo));
+            string format =
+                (_address.AddressFamily == AddressFamily.InterNetworkV6) ? "[{0}]:{1}" : "{0}:{1}";
+            return string.Format(
+                format,
+                _address.ToString(),
+                Port.ToString(NumberFormatInfo.InvariantInfo)
+            );
         }
 
         public override SocketAddress Serialize() => new SocketAddress(Address, Port);
@@ -161,13 +176,31 @@ namespace System.Net
             }
             if (socketAddress.Family != AddressFamily)
             {
-                throw new ArgumentException(SR.Format(SR.net_InvalidAddressFamily, socketAddress.Family.ToString(), GetType().FullName, AddressFamily.ToString()), nameof(socketAddress));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.net_InvalidAddressFamily,
+                        socketAddress.Family.ToString(),
+                        GetType().FullName,
+                        AddressFamily.ToString()
+                    ),
+                    nameof(socketAddress)
+                );
             }
 
-            int minSize = AddressFamily == AddressFamily.InterNetworkV6 ? SocketAddress.IPv6AddressSize : SocketAddress.IPv4AddressSize;
+            int minSize =
+                AddressFamily == AddressFamily.InterNetworkV6
+                    ? SocketAddress.IPv6AddressSize
+                    : SocketAddress.IPv4AddressSize;
             if (socketAddress.Size < minSize)
             {
-                throw new ArgumentException(SR.Format(SR.net_InvalidSocketAddressSize, socketAddress.GetType().FullName, GetType().FullName), nameof(socketAddress));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.net_InvalidSocketAddressSize,
+                        socketAddress.GetType().FullName,
+                        GetType().FullName
+                    ),
+                    nameof(socketAddress)
+                );
             }
 
             return socketAddress.GetIPEndPoint();
@@ -175,7 +208,9 @@ namespace System.Net
 
         public override bool Equals([NotNullWhen(true)] object? comparand)
         {
-            return comparand is IPEndPoint other && other._address.Equals(_address) && other._port == _port;
+            return comparand is IPEndPoint other
+                && other._address.Equals(_address)
+                && other._port == _port;
         }
 
         public override int GetHashCode()

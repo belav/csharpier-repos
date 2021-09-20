@@ -10,14 +10,13 @@ namespace Test
         static void Method1(bool param1)
         {
             long local5 = 0;
-            do
-            {
-            } while (param1);
+            do { } while (param1);
 
             try
             {
                 throw new Exception();
             }
+
             finally
             {
                 while (param1)

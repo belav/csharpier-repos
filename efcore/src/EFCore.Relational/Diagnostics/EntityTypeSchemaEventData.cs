@@ -24,8 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,
             IEntityType entityType,
-            string schema)
-            : base(eventDefinition, messageGenerator)
+            string schema
+        ) : base(eventDefinition, messageGenerator)
         {
             EntityType = entityType;
             Schema = schema;

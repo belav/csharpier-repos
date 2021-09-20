@@ -66,8 +66,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             int mappedStartLine = 0,
             int mappedStartColumn = 0,
             int mappedEndLine = 0,
-            int mappedEndColumn = 0)
-        {
+            int mappedEndColumn = 0
+        ) {
             // If the original source location path is not available then mapped must be as well.
             Contract.ThrowIfFalse(originalFilePath != null || mappedFilePath == null);
 
@@ -91,12 +91,20 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             Contract.ThrowIfTrue(SourceSpan.HasValue);
 
-            return new DiagnosticDataLocation(DocumentId,
-                newSourceSpan, OriginalFilePath,
-                OriginalStartLine, OriginalStartColumn,
-                OriginalEndLine, OriginalEndColumn,
-                MappedFilePath, MappedStartLine, MappedStartColumn,
-                MappedEndLine, MappedEndColumn);
+            return new DiagnosticDataLocation(
+                DocumentId,
+                newSourceSpan,
+                OriginalFilePath,
+                OriginalStartLine,
+                OriginalStartColumn,
+                OriginalEndLine,
+                OriginalEndColumn,
+                MappedFilePath,
+                MappedStartLine,
+                MappedStartColumn,
+                MappedEndLine,
+                MappedEndColumn
+            );
         }
 
         internal FileLinePositionSpan GetFileLinePositionSpan()
@@ -107,13 +115,20 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return default;
             }
 
-            return IsMapped ?
-                new(filePath, new(MappedStartLine, MappedStartColumn), new(MappedEndLine, MappedEndColumn)) :
-                new(filePath, new(OriginalStartLine, OriginalStartColumn), new(OriginalEndLine, OriginalEndColumn));
+            return IsMapped
+                ? new(
+                      filePath,
+                      new(MappedStartLine, MappedStartColumn),
+                      new(MappedEndLine, MappedEndColumn)
+                  )
+                : new(
+                      filePath,
+                      new(OriginalStartLine, OriginalStartColumn),
+                      new(OriginalEndLine, OriginalEndColumn)
+                  );
         }
 
-        internal string? GetFilePath()
-            => GetFilePath(OriginalFilePath, MappedFilePath);
+        internal string? GetFilePath() => GetFilePath(OriginalFilePath, MappedFilePath);
 
         internal static string? GetFilePath(string? original, string? mapped)
         {
@@ -122,7 +137,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return original;
             }
 
-            var combined = PathUtilities.CombinePaths(PathUtilities.GetDirectoryName(original), mapped);
+            var combined = PathUtilities.CombinePaths(
+                PathUtilities.GetDirectoryName(original),
+                mapped
+            );
             try
             {
                 return Path.GetFullPath(combined);

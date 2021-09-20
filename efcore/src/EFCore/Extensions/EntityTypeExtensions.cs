@@ -33,16 +33,20 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="entityType"> The entity type. </param>
         /// <returns> <see langword="true" /> if this entity type has a defining navigation. </returns>
         [DebuggerStepThrough]
-        [Obsolete("Entity types with defining navigations have been replaced by shared-type entity types")]
-        public static bool HasDefiningNavigation(this IEntityType entityType)
-            => entityType.HasDefiningNavigation();
+        [Obsolete(
+            "Entity types with defining navigations have been replaced by shared-type entity types"
+        )]
+        public static bool HasDefiningNavigation(this IEntityType entityType) =>
+            entityType.HasDefiningNavigation();
 
         /// <summary>
         ///     Returns the defining navigation if one exists or <see langword="null" /> otherwise.
         /// </summary>
         /// <param name="entityType"> The entity type. </param>
         /// <returns> The defining navigation if one exists or <see langword="null" /> otherwise. </returns>
-        [Obsolete("Entity types with defining navigations have been replaced by shared-type entity types")]
+        [Obsolete(
+            "Entity types with defining navigations have been replaced by shared-type entity types"
+        )]
         public static INavigation? FindDefiningNavigation(this IEntityType entityType)
         {
             if (!entityType.HasDefiningNavigation())
@@ -50,7 +54,9 @@ namespace Microsoft.EntityFrameworkCore
                 return null;
             }
 
-            var definingNavigation = (INavigation?)entityType.DefiningEntityType!.FindNavigation(entityType.DefiningNavigationName!);
+            var definingNavigation = (INavigation?)entityType.DefiningEntityType!.FindNavigation(
+                entityType.DefiningNavigationName!
+            );
             return definingNavigation?.TargetEntityType == entityType ? definingNavigation : null;
         }
 
@@ -60,8 +66,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="entityType"> The entity type. </param>
         /// <returns> All navigation properties on the given entity type. </returns>
         [Obsolete("Use IReadOnlyEntityType.GetNavigations")]
-        public static IEnumerable<INavigation> GetNavigations(this IEntityType entityType)
-            => entityType.GetNavigations();
+        public static IEnumerable<INavigation> GetNavigations(this IEntityType entityType) =>
+            entityType.GetNavigations();
 
         /// <summary>
         ///     Gets the LINQ query used as the default source for queries of this type.
@@ -88,15 +94,16 @@ namespace Microsoft.EntityFrameworkCore
         /// </returns>
         [Obsolete("Use IReadOnlyEntityType.FindClosestCommonParent")]
         public static IEntityType? GetClosestCommonParent(
-            this IEntityType entityType1, IEntityType entityType2)
-            => (IEntityType?)entityType1.FindClosestCommonParent(entityType2);
+            this IEntityType entityType1,
+            IEntityType entityType2
+        ) => (IEntityType?)entityType1.FindClosestCommonParent(entityType2);
 
         /// <summary>
         ///     Returns the <see cref="IReadOnlyProperty" /> that will be used for storing a discriminator value.
         /// </summary>
         /// <param name="entityType"> The entity type. </param>
         [Obsolete("Use IReadOnlyEntityType.FindDiscriminatorProperty")]
-        public static IProperty? GetDiscriminatorProperty(this IEntityType entityType)
-            => entityType.FindDiscriminatorProperty();
+        public static IProperty? GetDiscriminatorProperty(this IEntityType entityType) =>
+            entityType.FindDiscriminatorProperty();
     }
 }

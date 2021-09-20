@@ -46,7 +46,7 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
             logger.Reset();
             logger.Enabled = false;
             NoNamespace.CouldNotOpenSocket(logger, "microsoft.com");
-            Assert.Equal(0, logger.CallCount);          // ensure the logger doesn't get called when it is disabled
+            Assert.Equal(0, logger.CallCount); // ensure the logger doesn't get called when it is disabled
         }
 
         [Fact]
@@ -79,7 +79,11 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
             Assert.Equal(1, logger.CallCount);
 
             logger.Reset();
-            ArgTestExtensions.Method5(logger, new InvalidOperationException("A"), new InvalidOperationException("B"));
+            ArgTestExtensions.Method5(
+                logger,
+                new InvalidOperationException("A"),
+                new InvalidOperationException("B")
+            );
             Assert.Equal("A", logger.LastException!.Message);
             Assert.Equal("M5 System.InvalidOperationException: B", logger.LastFormattedString);
             Assert.Equal(1, logger.CallCount);
@@ -154,7 +158,13 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
             TestCollection(9, logger);
 
             logger.Reset();
-            CollectionTestExtensions.M9(logger, LogLevel.Critical, 0, new ArgumentException("Foo"), 1);
+            CollectionTestExtensions.M9(
+                logger,
+                LogLevel.Critical,
+                0,
+                new ArgumentException("Foo"),
+                1
+            );
             TestCollection(3, logger);
 
             Assert.True(true);
@@ -317,14 +327,22 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
             var logger = new MockLogger();
 
             logger.Reset();
-            ExceptionTestExtensions.M0(logger, new ArgumentException("Foo"), new ArgumentException("Bar"));
+            ExceptionTestExtensions.M0(
+                logger,
+                new ArgumentException("Foo"),
+                new ArgumentException("Bar")
+            );
             Assert.Equal("Foo", logger.LastException!.Message);
             Assert.Equal("M0 System.ArgumentException: Bar", logger.LastFormattedString);
             Assert.Equal(LogLevel.Trace, logger.LastLogLevel);
             Assert.Equal(1, logger.CallCount);
 
             logger.Reset();
-            ExceptionTestExtensions.M1(new ArgumentException("Foo"), logger, new ArgumentException("Bar"));
+            ExceptionTestExtensions.M1(
+                new ArgumentException("Foo"),
+                logger,
+                new ArgumentException("Bar")
+            );
             Assert.Equal("Foo", logger.LastException!.Message);
             Assert.Equal("M1 System.ArgumentException: Bar", logger.LastFormattedString);
             Assert.Equal(LogLevel.Debug, logger.LastLogLevel);
@@ -354,23 +372,28 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
             TemplateTestExtensions.M0(logger, 0);
             Assert.Null(logger.LastException);
             Assert.Equal("M0 0", logger.LastFormattedString);
-            AssertLastState(logger,
+            AssertLastState(
+                logger,
                 new KeyValuePair<string, object?>("A1", 0),
-                new KeyValuePair<string, object?>("{OriginalFormat}", "M0 {A1}"));
+                new KeyValuePair<string, object?>("{OriginalFormat}", "M0 {A1}")
+            );
 
             logger.Reset();
             TemplateTestExtensions.M1(logger, 42);
             Assert.Null(logger.LastException);
             Assert.Equal("M1 42 42", logger.LastFormattedString);
-            AssertLastState(logger,
+            AssertLastState(
+                logger,
                 new KeyValuePair<string, object?>("A1", 42),
-                new KeyValuePair<string, object?>("{OriginalFormat}", "M1 {A1} {A1}"));
+                new KeyValuePair<string, object?>("{OriginalFormat}", "M1 {A1} {A1}")
+            );
 
             logger.Reset();
             TemplateTestExtensions.M2(logger, 42, 43, 44, 45, 46, 47, 48);
             Assert.Null(logger.LastException);
             Assert.Equal("M2 42 43 44 45 46 47 48", logger.LastFormattedString);
-            AssertLastState(logger,
+            AssertLastState(
+                logger,
                 new KeyValuePair<string, object?>("A1", 42),
                 new KeyValuePair<string, object?>("a2", 43),
                 new KeyValuePair<string, object?>("A3", 44),
@@ -378,21 +401,28 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
                 new KeyValuePair<string, object?>("A5", 46),
                 new KeyValuePair<string, object?>("a6", 47),
                 new KeyValuePair<string, object?>("A7", 48),
-                new KeyValuePair<string, object?>("{OriginalFormat}", "M2 {A1} {a2} {A3} {a4} {A5} {a6} {A7}"));
+                new KeyValuePair<string, object?>(
+                    "{OriginalFormat}",
+                    "M2 {A1} {a2} {A3} {a4} {A5} {a6} {A7}"
+                )
+            );
 
             logger.Reset();
             TemplateTestExtensions.M3(logger, 42, 43);
             Assert.Null(logger.LastException);
             Assert.Equal("M3 43 42", logger.LastFormattedString);
-            AssertLastState(logger,
+            AssertLastState(
+                logger,
                 new KeyValuePair<string, object?>("A1", 42),
                 new KeyValuePair<string, object?>("a2", 43),
-                new KeyValuePair<string, object?>("{OriginalFormat}", "M3 {a2} {A1}"));
-
+                new KeyValuePair<string, object?>("{OriginalFormat}", "M3 {a2} {A1}")
+            );
         }
 
-        private static void AssertLastState(MockLogger logger, params KeyValuePair<string, object?>[] expected)
-        {
+        private static void AssertLastState(
+            MockLogger logger,
+            params KeyValuePair<string, object?>[] expected
+        ) {
             var rol = (IReadOnlyList<KeyValuePair<string, object?>>)logger.LastState!;
             int count = 0;
             foreach (var kvp in expected)

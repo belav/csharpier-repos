@@ -38,10 +38,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
             IAsynchronousOperationListenerProvider listenerProvider,
             ILspWorkspaceRegistrationService lspWorkspaceRegistrationService,
             DefaultCapabilitiesProvider defaultCapabilitiesProvider,
-            [Import(typeof(SAsyncServiceProvider))] VSShell.IAsyncServiceProvider asyncServiceProvider,
-            IThreadingContext threadingContext)
-            : base(csharpVBRequestDispatcherFactory, workspace, diagnosticService, listenerProvider, lspWorkspaceRegistrationService, asyncServiceProvider, threadingContext, diagnosticsClientName: null)
-        {
+            [Import(typeof(SAsyncServiceProvider))]
+                VSShell.IAsyncServiceProvider asyncServiceProvider,
+            IThreadingContext threadingContext
+        ) : base(
+            csharpVBRequestDispatcherFactory,
+            workspace,
+            diagnosticService,
+            listenerProvider,
+            lspWorkspaceRegistrationService,
+            asyncServiceProvider,
+            threadingContext,
+            diagnosticsClientName: null
+        ) {
             _defaultCapabilitiesProvider = defaultCapabilitiesProvider;
         }
 
@@ -49,8 +58,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
 
         protected internal override VSServerCapabilities GetCapabilities()
         {
-            var experimentationService = Workspace.Services.GetRequiredService<IExperimentationService>();
-            var isLspEditorEnabled = experimentationService.IsExperimentEnabled(VisualStudioWorkspaceContextService.LspEditorFeatureFlagName);
+            var experimentationService =
+                Workspace.Services.GetRequiredService<IExperimentationService>();
+            var isLspEditorEnabled = experimentationService.IsExperimentEnabled(
+                VisualStudioWorkspaceContextService.LspEditorFeatureFlagName
+            );
 
             // If the preview feature flag to turn on the LSP editor in local scenarios is on, advertise no capabilities for this Live Share
             // LSP server as LSP requests will be serviced by the AlwaysActiveInProcLanguageClient in both local and remote scenarios.

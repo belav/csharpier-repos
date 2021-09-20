@@ -12,10 +12,7 @@ namespace Microsoft.AspNetCore.WebUtilities
     {
         private Stream _inner;
 
-        public NonSeekableReadStream(byte[] data)
-            : this(new MemoryStream(data))
-        {
-        }
+        public NonSeekableReadStream(byte[] data) : this(new MemoryStream(data)) { }
 
         public NonSeekableReadStream(Stream inner)
         {
@@ -65,8 +62,12 @@ namespace Microsoft.AspNetCore.WebUtilities
             return _inner.Read(buffer, offset, count);
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             count = Math.Max(count, 1);
             return _inner.ReadAsync(buffer, offset, count, cancellationToken);
         }

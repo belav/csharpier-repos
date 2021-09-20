@@ -6,7 +6,6 @@ using System;
 
 class foo
 {
-
     public static int Main()
     {
         int i = 3;
@@ -27,5 +26,4 @@ class foo
 
         return 100;
     }
-
 }

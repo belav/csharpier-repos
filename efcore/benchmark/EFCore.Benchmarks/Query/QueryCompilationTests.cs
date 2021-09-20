@@ -38,27 +38,27 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
                 .BuildServiceProvider();
 
             _context = fixture.CreateContext(noQueryCacheServiceProvider);
-            _simpleQuery = _context.Products
-                .AsNoTracking();
+            _simpleQuery = _context.Products.AsNoTracking();
 
-            _complexQuery = _context.Products
-                .AsNoTracking()
+            _complexQuery = _context.Products.AsNoTracking()
                 .Where(p => p.Retail < 1000)
-                .OrderBy(p => p.Name).ThenBy(p => p.Retail)
+                .OrderBy(p => p.Name)
+                .ThenBy(p => p.Retail)
                 .Select(
-                    p => new DTO
-                    {
-                        ProductId = p.ProductId,
-                        Name = p.Name,
-                        Description = p.Description,
-                        ActualStockLevel = p.ActualStockLevel,
-                        SKU = p.SKU,
-                        Savings = p.Retail - p.CurrentPrice,
-                        Surplus = p.ActualStockLevel - p.TargetStockLevel
-                    });
+                    p =>
+                        new DTO
+                        {
+                            ProductId = p.ProductId,
+                            Name = p.Name,
+                            Description = p.Description,
+                            ActualStockLevel = p.ActualStockLevel,
+                            SKU = p.SKU,
+                            Savings = p.Retail - p.CurrentPrice,
+                            Surplus = p.ActualStockLevel - p.TargetStockLevel
+                        }
+                );
 
-            _multipleJoinQuery = _context.Customers
-                .AsNoTracking()
+            _multipleJoinQuery = _context.Customers.AsNoTracking()
                 .Include(c => c.Orders)
                 .ThenInclude(o => o.OrderLines)
                 .ThenInclude(ol => ol.Product);
@@ -123,9 +123,7 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
 
             private class FakeEntry : ICacheEntry
             {
-                public virtual void Dispose()
-                {
-                }
+                public virtual void Dispose() { }
 
                 public object Key { get; }
                 public object Value { get; set; }
@@ -138,13 +136,9 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
                 public long? Size { get; set; }
             }
 
-            public virtual void Remove(object key)
-            {
-            }
+            public virtual void Remove(object key) { }
 
-            public virtual void Dispose()
-            {
-            }
+            public virtual void Dispose() { }
         }
     }
 }

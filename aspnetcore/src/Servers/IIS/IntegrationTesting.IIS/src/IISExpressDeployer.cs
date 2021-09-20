@@ -26,23 +26,28 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
     public class IISExpressDeployer : IISDeployerBase
     {
         private const string IISExpressRunningMessage = "IIS Express is running.";
-        private const string FailedToInitializeBindingsMessage = "Failed to initialize site bindings";
+        private const string FailedToInitializeBindingsMessage =
+            "Failed to initialize site bindings";
         private const string UnableToStartIISExpressMessage = "Unable to start iisexpress.";
         private const int MaximumAttempts = 5;
-        private readonly TimeSpan ShutdownTimeSpan = Debugger.IsAttached ? TimeSpan.FromMinutes(60) : TimeSpan.FromMinutes(1);
-        private static readonly Regex UrlDetectorRegex = new Regex(@"^\s*Successfully registered URL ""(?<url>[^""]+)"" for site.*$");
+        private readonly TimeSpan ShutdownTimeSpan = Debugger.IsAttached
+            ? TimeSpan.FromMinutes(60)
+            : TimeSpan.FromMinutes(1);
+        private static readonly Regex UrlDetectorRegex = new Regex(
+            @"^\s*Successfully registered URL ""(?<url>[^""]+)"" for site.*$"
+        );
 
         private Process _hostProcess;
 
-        public IISExpressDeployer(DeploymentParameters deploymentParameters, ILoggerFactory loggerFactory)
-            : base(new IISDeploymentParameters(deploymentParameters), loggerFactory)
-        {
-        }
+        public IISExpressDeployer(
+            DeploymentParameters deploymentParameters,
+            ILoggerFactory loggerFactory
+        ) : base(new IISDeploymentParameters(deploymentParameters), loggerFactory) { }
 
-        public IISExpressDeployer(IISDeploymentParameters deploymentParameters, ILoggerFactory loggerFactory)
-            : base(deploymentParameters, loggerFactory)
-        {
-        }
+        public IISExpressDeployer(
+            IISDeploymentParameters deploymentParameters,
+            ILoggerFactory loggerFactory
+        ) : base(deploymentParameters, loggerFactory) { }
 
         public override async Task<DeploymentResult> DeployAsync()
         {
@@ -69,14 +74,22 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                     // Update processPath and arguments for our current scenario
                     contentRoot = DeploymentParameters.ApplicationPath;
 
-                    var executableExtension = DeploymentParameters.ApplicationType == ApplicationType.Portable ? ".dll" : ".exe";
-                    var entryPoint = Path.Combine(dllRoot, DeploymentParameters.ApplicationName + executableExtension);
+                    var executableExtension =
+                        DeploymentParameters.ApplicationType == ApplicationType.Portable
+                            ? ".dll"
+                            : ".exe";
+                    var entryPoint = Path.Combine(
+                        dllRoot,
+                        DeploymentParameters.ApplicationName + executableExtension
+                    );
 
                     var executableName = string.Empty;
                     var executableArgs = string.Empty;
 
-                    if (DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr && DeploymentParameters.ApplicationType == ApplicationType.Portable)
-                    {
+                    if (
+                        DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr
+                        && DeploymentParameters.ApplicationType == ApplicationType.Portable
+                    ) {
                         executableName = GetDotNetExeForArchitecture();
                         executableArgs = entryPoint;
                     }
@@ -85,17 +98,24 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                         executableName = entryPoint;
                     }
 
-                    Logger.LogInformation("Executing: {exe} {args}", executableName, executableArgs);
+                    Logger.LogInformation(
+                        "Executing: {exe} {args}",
+                        executableName,
+                        executableArgs
+                    );
                     DeploymentParameters.EnvironmentVariables["LAUNCHER_PATH"] = executableName;
                     DeploymentParameters.EnvironmentVariables["LAUNCHER_ARGS"] = executableArgs;
 
                     // CurrentDirectory will point to bin/{config}/{tfm}, but the config and static files aren't copied, point to the app base instead.
-                    Logger.LogInformation("ContentRoot: {path}", DeploymentParameters.ApplicationPath);
-                    DeploymentParameters.EnvironmentVariables["ASPNETCORE_CONTENTROOT"] = DeploymentParameters.ApplicationPath;
+                    Logger.LogInformation(
+                        "ContentRoot: {path}",
+                        DeploymentParameters.ApplicationPath
+                    );
+                    DeploymentParameters.EnvironmentVariables["ASPNETCORE_CONTENTROOT"] =
+                        DeploymentParameters.ApplicationPath;
                 }
 
                 RunWebConfigActions(contentRoot);
-
 
                 // Launch the host process.
                 var (actualUri, hostExitToken) = await StartIISExpressAsync(contentRoot);
@@ -110,7 +130,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                     applicationBaseUri: actualUri.ToString(),
                     contentRoot: contentRoot,
                     hostShutdownToken: hostExitToken,
-                    hostProcess: _hostProcess);
+                    hostProcess: _hostProcess
+                );
             }
         }
 
@@ -121,31 +142,43 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             if (!string.IsNullOrEmpty(DeploymentParameters.ApplicationPath))
             {
                 // IISIntegration uses this layout
-                dllRoot = Path.Combine(DeploymentParameters.ApplicationPath, "bin", DeploymentParameters.RuntimeArchitecture.ToString(),
-                    DeploymentParameters.Configuration, targetFramework);
+                dllRoot = Path.Combine(
+                    DeploymentParameters.ApplicationPath,
+                    "bin",
+                    DeploymentParameters.RuntimeArchitecture.ToString(),
+                    DeploymentParameters.Configuration,
+                    targetFramework
+                );
 
                 if (!Directory.Exists(dllRoot))
                 {
                     // Most repos use this layout
-                    dllRoot = Path.Combine(DeploymentParameters.ApplicationPath, "bin", DeploymentParameters.Configuration, targetFramework);
+                    dllRoot = Path.Combine(
+                        DeploymentParameters.ApplicationPath,
+                        "bin",
+                        DeploymentParameters.Configuration,
+                        targetFramework
+                    );
 
                     if (!Directory.Exists(dllRoot))
                     {
                         // The bits we need weren't pre-compiled, compile on publish
                         DeploymentParameters.PublishApplicationBeforeDeployment = true;
                     }
-                    else if (DeploymentParameters.RuntimeFlavor == RuntimeFlavor.Clr
-                             && DeploymentParameters.RuntimeArchitecture == RuntimeArchitecture.x86)
-                    {
+                    else if (
+                        DeploymentParameters.RuntimeFlavor == RuntimeFlavor.Clr
+                        && DeploymentParameters.RuntimeArchitecture == RuntimeArchitecture.x86
+                    ) {
                         // x64 is the default. Publish to rebuild for the right bitness
                         DeploymentParameters.PublishApplicationBeforeDeployment = true;
                     }
                 }
             }
 
-            if (DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr
-                    && DeploymentParameters.ApplicationType == ApplicationType.Standalone)
-            {
+            if (
+                DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr
+                && DeploymentParameters.ApplicationType == ApplicationType.Standalone
+            ) {
                 // Publish is always required to get the correct standalone files in the output directory
                 DeploymentParameters.PublishApplicationBeforeDeployment = true;
             }
@@ -153,29 +186,50 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             return dllRoot;
         }
 
-        private async Task<(Uri url, CancellationToken hostExitToken)> StartIISExpressAsync(string contentRoot)
-        {
+        private async Task<(Uri url, CancellationToken hostExitToken)> StartIISExpressAsync(
+            string contentRoot
+        ) {
             using (Logger.BeginScope("StartIISExpress"))
             {
                 var iisExpressPath = GetIISExpressPath();
 
                 for (var attempt = 0; attempt < MaximumAttempts; attempt++)
                 {
-                    var uri = TestUriHelper.BuildTestUri(ServerType.IISExpress, DeploymentParameters.ApplicationBaseUriHint);
+                    var uri = TestUriHelper.BuildTestUri(
+                        ServerType.IISExpress,
+                        DeploymentParameters.ApplicationBaseUriHint
+                    );
                     var port = uri.Port;
                     if (port == 0)
                     {
-                        port = (uri.Scheme == "https") ? TestPortHelper.GetNextSSLPort() : TestPortHelper.GetNextPort();
+                        port =
+                            (uri.Scheme == "https")
+                                ? TestPortHelper.GetNextSSLPort()
+                                : TestPortHelper.GetNextPort();
                     }
 
                     Logger.LogInformation("Attempting to start IIS Express on port: {port}", port);
                     PrepareConfig(contentRoot, port);
 
-                    var parameters = string.IsNullOrEmpty(DeploymentParameters.ServerConfigLocation) ?
-                                    string.Format(CultureInfo.InvariantCulture, "/port:{0} /path:\"{1}\" /trace:error /systray:false", uri.Port, contentRoot) :
-                                    string.Format(CultureInfo.InvariantCulture, "/site:{0} /config:{1} /trace:error /systray:false", DeploymentParameters.SiteName, DeploymentParameters.ServerConfigLocation);
+                    var parameters = string.IsNullOrEmpty(DeploymentParameters.ServerConfigLocation)
+                        ? string.Format(
+                              CultureInfo.InvariantCulture,
+                              "/port:{0} /path:\"{1}\" /trace:error /systray:false",
+                              uri.Port,
+                              contentRoot
+                          )
+                        : string.Format(
+                              CultureInfo.InvariantCulture,
+                              "/site:{0} /config:{1} /trace:error /systray:false",
+                              DeploymentParameters.SiteName,
+                              DeploymentParameters.ServerConfigLocation
+                          );
 
-                    Logger.LogInformation("Executing command : {iisExpress} {parameters}", iisExpressPath, parameters);
+                    Logger.LogInformation(
+                        "Executing command : {iisExpress} {parameters}",
+                        iisExpressPath,
+                        parameters
+                    );
 
                     var startInfo = new ProcessStartInfo
                     {
@@ -189,7 +243,10 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                         WorkingDirectory = Path.GetDirectoryName(iisExpressPath)
                     };
 
-                    AddEnvironmentVariablesToProcess(startInfo, DeploymentParameters.EnvironmentVariables);
+                    AddEnvironmentVariablesToProcess(
+                        startInfo,
+                        DeploymentParameters.EnvironmentVariables
+                    );
 
                     Uri url = null;
                     var started = new TaskCompletionSource<bool>();
@@ -197,17 +254,34 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                     var process = new Process() { StartInfo = startInfo };
                     process.OutputDataReceived += (sender, dataArgs) =>
                     {
-                        if (string.Equals(dataArgs.Data, UnableToStartIISExpressMessage, StringComparison.Ordinal))
-                        {
+                        if (
+                            string.Equals(
+                                dataArgs.Data,
+                                UnableToStartIISExpressMessage,
+                                StringComparison.Ordinal
+                            )
+                        ) {
                             // We completely failed to start and we don't really know why
-                            started.TrySetException(new InvalidOperationException("Failed to start IIS Express"));
+                            started.TrySetException(
+                                new InvalidOperationException("Failed to start IIS Express")
+                            );
                         }
-                        else if (string.Equals(dataArgs.Data, FailedToInitializeBindingsMessage, StringComparison.Ordinal))
-                        {
+                        else if (
+                            string.Equals(
+                                dataArgs.Data,
+                                FailedToInitializeBindingsMessage,
+                                StringComparison.Ordinal
+                            )
+                        ) {
                             started.TrySetResult(false);
                         }
-                        else if (string.Equals(dataArgs.Data, IISExpressRunningMessage, StringComparison.Ordinal))
-                        {
+                        else if (
+                            string.Equals(
+                                dataArgs.Data,
+                                IISExpressRunningMessage,
+                                StringComparison.Ordinal
+                            )
+                        ) {
                             started.TrySetResult(true);
                         }
                         else if (!string.IsNullOrEmpty(dataArgs.Data))
@@ -227,7 +301,11 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                         Logger.LogInformation("iisexpress Process {pid} shut down", process.Id);
 
                         // If TrySetResult was called above, this will just silently fail to set the new state, which is what we want
-                        started.TrySetException(new Exception($"Command exited unexpectedly with exit code: {process.ExitCode}"));
+                        started.TrySetException(
+                            new Exception(
+                                $"Command exited unexpectedly with exit code: {process.ExitCode}"
+                            )
+                        );
 
                         TriggerHostShutdown(hostExitTokenSource);
                     };
@@ -236,7 +314,12 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
 
                     if (process.HasExited)
                     {
-                        Logger.LogError("Host process {processName} {pid} exited with code {exitCode} or failed to start.", startInfo.FileName, process.Id, process.ExitCode);
+                        Logger.LogError(
+                            "Host process {processName} {pid} exited with code {exitCode} or failed to start.",
+                            startInfo.FileName,
+                            process.Id,
+                            process.ExitCode
+                        );
                         throw new Exception("Failed to start host");
                     }
 
@@ -246,7 +329,11 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                     // just in case we missed one -anurse
                     if (!await started.Task.TimeoutAfter(TimeSpan.FromMinutes(10)))
                     {
-                        Logger.LogInformation("iisexpress Process {pid} failed to bind to port {port}, trying again", process.Id, port);
+                        Logger.LogInformation(
+                            "iisexpress Process {pid} failed to bind to port {port}, trying again",
+                            process.Id,
+                            port
+                        );
 
                         // Wait for the process to exit and try again
                         process.WaitForExit(30 * 1000);
@@ -263,12 +350,17 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                         // cache the process start time for verifying log file name.
                         var _ = _hostProcess.StartTime;
 
-                        Logger.LogInformation("Started iisexpress successfully. Process Id : {processId}, Port: {port}", _hostProcess.Id, port);
+                        Logger.LogInformation(
+                            "Started iisexpress successfully. Process Id : {processId}, Port: {port}",
+                            _hostProcess.Id,
+                            port
+                        );
                         return (url: url, hostExitToken: hostExitTokenSource.Token);
                     }
                 }
 
-                var message = $"Failed to initialize IIS Express after {MaximumAttempts} attempts to select a port";
+                var message =
+                    $"Failed to initialize IIS Express after {MaximumAttempts} attempts to select a port";
                 Logger.LogError(message);
                 throw new TimeoutException(message);
             }
@@ -280,7 +372,12 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             // Config is required. If not present then fall back to one we carry with us.
             if (string.IsNullOrEmpty(serverConfig))
             {
-                using (var stream = GetType().Assembly.GetManifestResourceStream("Microsoft.AspNetCore.Server.IntegrationTesting.IIS.Http.config"))
+                using (
+                    var stream = GetType()
+                        .Assembly.GetManifestResourceStream(
+                            "Microsoft.AspNetCore.Server.IntegrationTesting.IIS.Http.config"
+                        )
+                )
                 using (var reader = new StreamReader(stream))
                 {
                     serverConfig = reader.ReadToEnd();
@@ -291,8 +388,7 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             // Pass on the applicationhost.config to iis express. With this don't need to pass in the /path /port switches as they are in the applicationHost.config
             // We take a copy of the original specified applicationHost.Config to prevent modifying the one in the repo.
 
-            config.Root
-                .RequiredElement("location")
+            config.Root.RequiredElement("location")
                 .RequiredElement("system.webServer")
                 .RequiredElement("modules")
                 .GetOrAdd("add", "name", AspNetCoreModuleV2ModuleName);
@@ -300,8 +396,10 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             ConfigureModuleAndBinding(config.Root, contentRoot, port);
 
             var webConfigPath = Path.Combine(contentRoot, "web.config");
-            if (!DeploymentParameters.PublishApplicationBeforeDeployment && !File.Exists(webConfigPath))
-            {
+            if (
+                !DeploymentParameters.PublishApplicationBeforeDeployment
+                && !File.Exists(webConfigPath)
+            ) {
                 // The elements normally in the web.config are in the applicationhost.config for unpublished apps.
                 AddAspNetCoreElement(config.Root);
             }
@@ -310,28 +408,30 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             serverConfig = config.ToString();
 
             DeploymentParameters.ServerConfigLocation = Path.GetTempFileName();
-            Logger.LogDebug("Saving Config to {configPath}", DeploymentParameters.ServerConfigLocation);
+            Logger.LogDebug(
+                "Saving Config to {configPath}",
+                DeploymentParameters.ServerConfigLocation
+            );
 
             File.WriteAllText(DeploymentParameters.ServerConfigLocation, serverConfig);
         }
 
         private void AddAspNetCoreElement(XElement config)
         {
-            var aspNetCore = config
-                .RequiredElement("system.webServer")
-                .GetOrAdd("aspNetCore");
+            var aspNetCore = config.RequiredElement("system.webServer").GetOrAdd("aspNetCore");
 
-            aspNetCore.SetAttributeValue("hostingModel", DeploymentParameters.HostingModel.ToString());
+            aspNetCore.SetAttributeValue(
+                "hostingModel",
+                DeploymentParameters.HostingModel.ToString()
+            );
             aspNetCore.SetAttributeValue("arguments", "%LAUNCHER_ARGS%");
             aspNetCore.SetAttributeValue("processPath", "%LAUNCHER_PATH%");
 
-            var handlers = config
-                .RequiredElement("location")
+            var handlers = config.RequiredElement("location")
                 .RequiredElement("system.webServer")
                 .RequiredElement("handlers");
 
-            var aspNetCoreHandler = handlers
-                .GetOrAdd("add", "name", "aspNetCore");
+            var aspNetCoreHandler = handlers.GetOrAdd("add", "name", "aspNetCore");
 
             aspNetCoreHandler.SetAttributeValue("path", "*");
             aspNetCoreHandler.SetAttributeValue("verb", "*");
@@ -349,24 +449,32 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                 // For published apps, prefer the content in the web.config, but update it.
                 yield return WebConfigHelpers.AddOrModifyAspNetCoreSection(
                     key: "hostingModel",
-                    value: DeploymentParameters.HostingModel.ToString());
+                    value: DeploymentParameters.HostingModel.ToString()
+                );
 
                 yield return WebConfigHelpers.AddOrModifyHandlerSection(
                     key: "modules",
-                    value: AspNetCoreModuleV2ModuleName);
+                    value: AspNetCoreModuleV2ModuleName
+                );
 
                 // We assume the x64 dotnet.exe is on the path so we need to provide an absolute path for x86 scenarios.
                 // Only do it for scenarios that rely on dotnet.exe (Core, portable, etc.).
-                if (DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr
+                if (
+                    DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr
                     && DeploymentParameters.ApplicationType == ApplicationType.Portable
-                    && DotNetCommands.IsRunningX86OnX64(DeploymentParameters.RuntimeArchitecture))
-                {
-                    var executableName = DotNetCommands.GetDotNetExecutable(DeploymentParameters.RuntimeArchitecture);
+                    && DotNetCommands.IsRunningX86OnX64(DeploymentParameters.RuntimeArchitecture)
+                ) {
+                    var executableName = DotNetCommands.GetDotNetExecutable(
+                        DeploymentParameters.RuntimeArchitecture
+                    );
                     if (!File.Exists(executableName))
                     {
                         throw new Exception($"Unable to find '{executableName}'.'");
                     }
-                    yield return WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", executableName);
+                    yield return WebConfigHelpers.AddOrModifyAspNetCoreSection(
+                        "processPath",
+                        executableName
+                    );
                 }
             }
 
@@ -385,7 +493,12 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             }
 
             // Get path to program files
-            var iisExpressPath = Path.Combine(Environment.GetEnvironmentVariable("SystemDrive") + "\\", programFiles, "IIS Express", "iisexpress.exe");
+            var iisExpressPath = Path.Combine(
+                Environment.GetEnvironmentVariable("SystemDrive") + "\\",
+                programFiles,
+                "IIS Express",
+                "iisexpress.exe"
+            );
 
             if (!File.Exists(iisExpressPath))
             {
@@ -413,11 +526,15 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                     ShutDownIfAnyHostProcess(_hostProcess);
                 }
 
-                if (!string.IsNullOrEmpty(DeploymentParameters.ServerConfigLocation)
-                    && File.Exists(DeploymentParameters.ServerConfigLocation))
-                {
+                if (
+                    !string.IsNullOrEmpty(DeploymentParameters.ServerConfigLocation)
+                    && File.Exists(DeploymentParameters.ServerConfigLocation)
+                ) {
                     // Delete the temp applicationHostConfig that we created.
-                    Logger.LogDebug("Deleting applicationHost.config file from {configLocation}", DeploymentParameters.ServerConfigLocation);
+                    Logger.LogDebug(
+                        "Deleting applicationHost.config file from {configLocation}",
+                        DeploymentParameters.ServerConfigLocation
+                    );
                     try
                     {
                         File.Delete(DeploymentParameters.ServerConfigLocation);
@@ -425,7 +542,11 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                     catch (Exception exception)
                     {
                         // Ignore delete failures - just write a log.
-                        Logger.LogWarning("Failed to delete '{config}'. Exception : {exception}", DeploymentParameters.ServerConfigLocation, exception.Message);
+                        Logger.LogWarning(
+                            "Failed to delete '{config}'. Exception : {exception}",
+                            DeploymentParameters.ServerConfigLocation,
+                            exception.Message
+                        );
                     }
                 }
 
@@ -451,13 +572,25 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
         {
             internal delegate bool EnumWindowProc(IntPtr hwnd, IntPtr lParam);
             [DllImport("user32.dll")]
-            internal static extern uint GetWindowThreadProcessId(IntPtr hwnd, out uint lpdwProcessId);
+            internal static extern uint GetWindowThreadProcessId(
+                IntPtr hwnd,
+                out uint lpdwProcessId
+            );
             [DllImport("user32.dll")]
-            internal static extern bool PostMessage(HandleRef hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+            internal static extern bool PostMessage(
+                HandleRef hWnd,
+                uint Msg,
+                IntPtr wParam,
+                IntPtr lParam
+            );
             [DllImport("user32.dll")]
             internal static extern bool EnumWindows(EnumWindowProc callback, IntPtr lParam);
             [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-            internal static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName,int nMaxCount);
+            internal static extern int GetClassName(
+                IntPtr hWnd,
+                StringBuilder lpClassName,
+                int nMaxCount
+            );
         }
 
         private void SendStopMessageToProcess(int pid)
@@ -470,42 +603,70 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             {
                 Logger.LogInformation($"Sending shutdown request to {pid}");
 
-                WindowsNativeMethods.EnumWindows((ptr, param) => {
-                    WindowsNativeMethods.GetWindowThreadProcessId(ptr, out var windowProcessId);
-                    if (extraLogging)
+                WindowsNativeMethods.EnumWindows(
+                    (ptr, param) =>
                     {
-                        Logger.LogDebug($"EnumWindow returned {ptr} belonging to {windowProcessId}");
-                    }
-
-                    if (pid == windowProcessId)
-                    {
-                        // 256 is the max length
-                        var className = new StringBuilder(256);
-
-                        if (WindowsNativeMethods.GetClassName(ptr, className, className.Capacity) == 0)
+                        WindowsNativeMethods.GetWindowThreadProcessId(ptr, out var windowProcessId);
+                        if (extraLogging)
                         {
-                            throw new InvalidOperationException($"Unable to get window class name: {Marshal.GetLastWin32Error()}");
+                            Logger.LogDebug(
+                                $"EnumWindow returned {ptr} belonging to {windowProcessId}"
+                            );
                         }
 
-                        if (!string.Equals(className.ToString(), "IISEXPRESS", StringComparison.OrdinalIgnoreCase))
+                        if (pid == windowProcessId)
                         {
-                            Logger.LogDebug($"Skipping window {ptr} with class name {className}");
-                            // skip windows without IISEXPRESS class
-                            return true;
+                            // 256 is the max length
+                            var className = new StringBuilder(256);
+
+                            if (
+                                WindowsNativeMethods.GetClassName(
+                                    ptr,
+                                    className,
+                                    className.Capacity
+                                ) == 0
+                            ) {
+                                throw new InvalidOperationException(
+                                    $"Unable to get window class name: {Marshal.GetLastWin32Error()}"
+                                );
+                            }
+
+                            if (
+                                !string.Equals(
+                                    className.ToString(),
+                                    "IISEXPRESS",
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            ) {
+                                Logger.LogDebug(
+                                    $"Skipping window {ptr} with class name {className}"
+                                );
+                                // skip windows without IISEXPRESS class
+                                return true;
+                            }
+
+                            var hWnd = new HandleRef(null, ptr);
+                            if (
+                                !WindowsNativeMethods.PostMessage(
+                                    hWnd,
+                                    0x12,
+                                    IntPtr.Zero,
+                                    IntPtr.Zero
+                                )
+                            ) {
+                                throw new InvalidOperationException(
+                                    $"Unable to PostMessage to process {pid}. LastError: {Marshal.GetLastWin32Error()}"
+                                );
+                            }
+
+                            found = true;
+                            return false;
                         }
 
-                        var hWnd = new HandleRef(null, ptr);
-                        if (!WindowsNativeMethods.PostMessage(hWnd, 0x12, IntPtr.Zero, IntPtr.Zero))
-                        {
-                            throw new InvalidOperationException($"Unable to PostMessage to process {pid}. LastError: {Marshal.GetLastWin32Error()}");
-                        }
-
-                        found = true;
-                        return false;
-                    }
-
-                    return true;
-                }, IntPtr.Zero);
+                        return true;
+                    },
+                    IntPtr.Zero
+                );
 
                 if (!found)
                 {
@@ -519,7 +680,9 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
 
             if (!found)
             {
-                throw new InvalidOperationException($"Unable to find main window for process {pid}");
+                throw new InvalidOperationException(
+                    $"Unable to find main window for process {pid}"
+                );
             }
         }
 
@@ -536,17 +699,25 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                 SendStopMessageToProcess(hostProcess.Id);
                 if (!hostProcess.WaitForExit((int)ShutdownTimeSpan.TotalMilliseconds))
                 {
-                    throw new InvalidOperationException($"iisexpress Process {hostProcess.Id} failed to gracefully shutdown.");
+                    throw new InvalidOperationException(
+                        $"iisexpress Process {hostProcess.Id} failed to gracefully shutdown."
+                    );
                 }
                 if (hostProcess.ExitCode != 0)
                 {
-                    Logger.LogWarning($"IISExpress exit code is non-zero after graceful shutdown. Exit code: {hostProcess.ExitCode}");
-                    throw new InvalidOperationException($"IISExpress exit code is non-zero after graceful shutdown. Exit code: {hostProcess.ExitCode}.");
+                    Logger.LogWarning(
+                        $"IISExpress exit code is non-zero after graceful shutdown. Exit code: {hostProcess.ExitCode}"
+                    );
+                    throw new InvalidOperationException(
+                        $"IISExpress exit code is non-zero after graceful shutdown. Exit code: {hostProcess.ExitCode}."
+                    );
                 }
             }
             else
             {
-                throw new InvalidOperationException($"iisexpress Process {hostProcess?.Id} crashed before shutdown was triggered.");
+                throw new InvalidOperationException(
+                    $"iisexpress Process {hostProcess?.Id} crashed before shutdown was triggered."
+                );
             }
         }
     }

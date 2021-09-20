@@ -38,8 +38,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             IRazorViewEngine razorViewEngine,
             IRazorPageActivator razorPageActivator,
             DiagnosticListener diagnosticListener,
-            HtmlEncoder htmlEncoder)
-            : base(writerFactory, compositeViewEngine, diagnosticListener)
+            HtmlEncoder htmlEncoder
+        ) : base(writerFactory, compositeViewEngine, diagnosticListener)
         {
             _razorViewEngine = razorViewEngine;
             _htmlEncoder = htmlEncoder;
@@ -76,7 +76,10 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             }
 
             var viewContext = result.Page.ViewContext;
-            var pageAdapter = new RazorPageAdapter(result.Page, pageContext.ActionDescriptor.DeclaredModelTypeInfo);
+            var pageAdapter = new RazorPageAdapter(
+                result.Page,
+                pageContext.ActionDescriptor.DeclaredModelTypeInfo
+            );
 
             viewContext.View = new RazorView(
                 _razorViewEngine,
@@ -84,8 +87,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 viewStarts,
                 pageAdapter,
                 _htmlEncoder,
-                _diagnosticListener)
-            {
+                _diagnosticListener
+            ) {
                 OnAfterPageActivated = (page, currentViewContext) =>
                 {
                     if (page != pageAdapter)
@@ -105,7 +108,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         private void OnExecuting(PageContext pageContext)
         {
-            var viewDataValuesProvider = pageContext.HttpContext.Features.Get<IViewDataValuesProviderFeature>();
+            var viewDataValuesProvider =
+                pageContext.HttpContext.Features.Get<IViewDataValuesProviderFeature>();
             if (viewDataValuesProvider != null)
             {
                 viewDataValuesProvider.ProvideViewDataValues(pageContext.ViewData);

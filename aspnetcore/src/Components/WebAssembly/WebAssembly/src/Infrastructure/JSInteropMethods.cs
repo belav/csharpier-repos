@@ -34,12 +34,19 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Infrastructure
         public static Task DispatchEvent(WebEventDescriptor eventDescriptor, string eventArgsJson)
         {
             var renderer = RendererRegistry.Find(eventDescriptor.BrowserRendererId);
-            var jsonSerializerOptions = DefaultWebAssemblyJSRuntime.Instance.ReadJsonSerializerOptions();
-            var webEvent = WebEventData.Parse(renderer, jsonSerializerOptions, eventDescriptor, eventArgsJson);
+            var jsonSerializerOptions =
+                DefaultWebAssemblyJSRuntime.Instance.ReadJsonSerializerOptions();
+            var webEvent = WebEventData.Parse(
+                renderer,
+                jsonSerializerOptions,
+                eventDescriptor,
+                eventArgsJson
+            );
             return renderer.DispatchEventAsync(
                 webEvent.EventHandlerId,
                 webEvent.EventFieldInfo,
-                webEvent.EventArgs);
+                webEvent.EventArgs
+            );
         }
     }
 }

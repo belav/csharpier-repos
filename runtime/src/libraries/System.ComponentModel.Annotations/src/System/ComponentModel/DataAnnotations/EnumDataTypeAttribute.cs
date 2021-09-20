@@ -8,12 +8,15 @@ using System.Linq;
 namespace System.ComponentModel.DataAnnotations
 {
     [AttributeUsage(
-        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Method | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+        AttributeTargets.Property
+            | AttributeTargets.Field
+            | AttributeTargets.Method
+            | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
     public sealed class EnumDataTypeAttribute : DataTypeAttribute
     {
-        public EnumDataTypeAttribute(Type enumType)
-            : base("Enumeration")
+        public EnumDataTypeAttribute(Type enumType) : base("Enumeration")
         {
             EnumType = enumType;
         }
@@ -28,7 +31,9 @@ namespace System.ComponentModel.DataAnnotations
             }
             if (!EnumType.IsEnum)
             {
-                throw new InvalidOperationException(SR.Format(SR.EnumDataTypeAttribute_TypeNeedsToBeAnEnum, EnumType.FullName));
+                throw new InvalidOperationException(
+                    SR.Format(SR.EnumDataTypeAttribute_TypeNeedsToBeAnEnum, EnumType.FullName)
+                );
             }
 
             if (value == null)
@@ -54,12 +59,13 @@ namespace System.ComponentModel.DataAnnotations
                 return false;
             }
 
-            if (valueType == typeof(bool) ||
-                valueType == typeof(float) ||
-                valueType == typeof(double) ||
-                valueType == typeof(decimal) ||
-                valueType == typeof(char))
-            {
+            if (
+                valueType == typeof(bool)
+                || valueType == typeof(float)
+                || valueType == typeof(double)
+                || valueType == typeof(decimal)
+                || valueType == typeof(char)
+            ) {
                 // non-integral types cannot be converted
                 return false;
             }
@@ -67,16 +73,20 @@ namespace System.ComponentModel.DataAnnotations
             object convertedValue;
             if (valueType.IsEnum)
             {
-                Debug.Assert(valueType == value.GetType(), "The valueType should equal the Type of the value");
+                Debug.Assert(
+                    valueType == value.GetType(),
+                    "The valueType should equal the Type of the value"
+                );
                 convertedValue = value;
             }
             else
             {
                 try
                 {
-                    convertedValue = stringValue != null
-                        ? Enum.Parse(EnumType, stringValue, false)
-                        : Enum.ToObject(EnumType, value);
+                    convertedValue =
+                        stringValue != null
+                            ? Enum.Parse(EnumType, stringValue, false)
+                            : Enum.ToObject(EnumType, value);
                 }
                 catch (ArgumentException)
                 {
@@ -103,6 +113,11 @@ namespace System.ComponentModel.DataAnnotations
             enumType.GetCustomAttributes(typeof(FlagsAttribute), false).Any();
 
         private static string? GetUnderlyingTypeValueString(Type enumType, object enumValue) =>
-            Convert.ChangeType(enumValue, Enum.GetUnderlyingType(enumType), CultureInfo.InvariantCulture).ToString();
+            Convert.ChangeType(
+                    enumValue,
+                    Enum.GetUnderlyingType(enumType),
+                    CultureInfo.InvariantCulture
+                )
+                .ToString();
     }
 }

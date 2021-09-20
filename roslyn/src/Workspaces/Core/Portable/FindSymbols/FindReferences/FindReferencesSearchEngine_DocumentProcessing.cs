@@ -15,21 +15,24 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     {
         private async Task ProcessDocumentQueueAsync(
             Document document,
-            HashSet<(SymbolGroup group, ISymbol symbol, IReferenceFinder finder)> documentQueue)
-        {
+            HashSet<(SymbolGroup group, ISymbol symbol, IReferenceFinder finder)> documentQueue
+        ) {
             await _progress.OnFindInDocumentStartedAsync(document).ConfigureAwait(false);
 
             SemanticModel? model = null;
             try
             {
-                model = await document.GetRequiredSemanticModelAsync(_cancellationToken).ConfigureAwait(false);
+                model = await document.GetRequiredSemanticModelAsync(_cancellationToken)
+                    .ConfigureAwait(false);
 
                 // start cache for this semantic model
                 FindReferenceCache.Start(model);
 
                 foreach (var (group, symbol, finder) in documentQueue)
-                    await ProcessDocumentAsync(document, model, group, symbol, finder).ConfigureAwait(false);
+                    await ProcessDocumentAsync(document, model, group, symbol, finder)
+                        .ConfigureAwait(false);
             }
+
             finally
             {
                 FindReferenceCache.Stop(model);
@@ -40,7 +43,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
         private static readonly Func<Document, ISymbol, string> s_logDocument = (d, s) =>
         {
-            return (d.Name != null && s.Name != null) ? string.Format("{0} - {1}", d.Name, s.Name) : string.Empty;
+            return (d.Name != null && s.Name != null)
+                ? string.Format("{0} - {1}", d.Name, s.Name)
+                : string.Empty;
         };
 
         private async Task ProcessDocumentAsync(
@@ -48,19 +53,33 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SemanticModel semanticModel,
             SymbolGroup group,
             ISymbol symbol,
-            IReferenceFinder finder)
-        {
-            using (Logger.LogBlock(FunctionId.FindReference_ProcessDocumentAsync, s_logDocument, document, symbol, _cancellationToken))
-            {
+            IReferenceFinder finder
+        ) {
+            using (
+                Logger.LogBlock(
+                    FunctionId.FindReference_ProcessDocumentAsync,
+                    s_logDocument,
+                    document,
+                    symbol,
+                    _cancellationToken
+                )
+            ) {
                 try
                 {
                     var references = await finder.FindReferencesInDocumentAsync(
-                        symbol, document, semanticModel, _options, _cancellationToken).ConfigureAwait(false);
+                            symbol,
+                            document,
+                            semanticModel,
+                            _options,
+                            _cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     foreach (var (_, location) in references)
                     {
                         await HandleLocationAsync(group, symbol, location).ConfigureAwait(false);
                     }
                 }
+
                 finally
                 {
                     await _progressTracker.ItemCompletedAsync().ConfigureAwait(false);

@@ -25,11 +25,13 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint1 = CreateEndpoint(
                 "About/{id}",
                 defaults: new { page = "/About", },
-                requiredValues:new { page = "/About", });
+                requiredValues: new { page = "/About", }
+            );
             var endpoint2 = CreateEndpoint(
                 "Admin/ManageUsers/{handler?}",
                 defaults: new { page = "/Admin/ManageUsers", },
-                requiredValues:new { page = "/Admin/ManageUsers", });
+                requiredValues: new { page = "/Admin/ManageUsers", }
+            );
 
             var linkGenerator = CreateLinkGenerator(endpoint1, endpoint2);
 
@@ -41,7 +43,8 @@ namespace Microsoft.AspNetCore.Routing
                 httpContext,
                 values: new RouteValueDictionary(new { id = 18, query = "some?query" }),
                 fragment: new FragmentString("#Fragment?"),
-                options: new LinkOptions() { AppendTrailingSlash = true, });
+                options: new LinkOptions() { AppendTrailingSlash = true, }
+            );
 
             // Assert
             Assert.Equal("/Foo/Bar%3Fencodeme%3F/About/18/?query=some%3Fquery#Fragment?", path);
@@ -54,11 +57,13 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint1 = CreateEndpoint(
                 "About/{id}",
                 defaults: new { page = "/About", },
-                requiredValues:new { page = "/About", });
+                requiredValues: new { page = "/About", }
+            );
             var endpoint2 = CreateEndpoint(
                 "Admin/ManageUsers/{handler?}",
                 defaults: new { page = "/Admin/ManageUsers", },
-                requiredValues:new { page = "/Admin/ManageUsers", });
+                requiredValues: new { page = "/Admin/ManageUsers", }
+            );
 
             var linkGenerator = CreateLinkGenerator(endpoint1, endpoint2);
 
@@ -69,10 +74,14 @@ namespace Microsoft.AspNetCore.Routing
                 values: new RouteValueDictionary(new { user = "jamesnk", query = "some?query" }),
                 new PathString("/Foo/Bar?encodeme?"),
                 new FragmentString("#Fragment?"),
-                new LinkOptions() { AppendTrailingSlash = true, });
+                new LinkOptions() { AppendTrailingSlash = true, }
+            );
 
             // Assert
-            Assert.Equal("/Foo/Bar%3Fencodeme%3F/Admin/ManageUsers/Delete/?user=jamesnk&query=some%3Fquery#Fragment?", path);
+            Assert.Equal(
+                "/Foo/Bar%3Fencodeme%3F/Admin/ManageUsers/Delete/?user=jamesnk&query=some%3Fquery#Fragment?",
+                path
+            );
         }
 
         [Fact]
@@ -82,15 +91,19 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint1 = CreateEndpoint(
                 "About/{id}",
                 defaults: new { page = "/About", },
-                requiredValues:new { page = "/About", });
+                requiredValues: new { page = "/About", }
+            );
             var endpoint2 = CreateEndpoint(
                 "Admin/ManageUsers",
                 defaults: new { page = "/Admin/ManageUsers", },
-                requiredValues:new { page = "/Admin/ManageUsers", });
+                requiredValues: new { page = "/Admin/ManageUsers", }
+            );
 
             var linkGenerator = CreateLinkGenerator(endpoint1, endpoint2);
 
-            var httpContext = CreateHttpContext(new { page = "/Admin/ManageUsers", handler = "DeleteUser", });
+            var httpContext = CreateHttpContext(
+                new { page = "/Admin/ManageUsers", handler = "DeleteUser", }
+            );
             httpContext.Request.PathBase = new PathString("/Foo/Bar?encodeme?");
 
             // Act
@@ -99,7 +112,8 @@ namespace Microsoft.AspNetCore.Routing
                 page: "/About",
                 values: new RouteValueDictionary(new { id = 19, query = "some?query" }),
                 fragment: new FragmentString("#Fragment?"),
-                options: new LinkOptions() { AppendTrailingSlash = true, });
+                options: new LinkOptions() { AppendTrailingSlash = true, }
+            );
 
             // Assert
             Assert.Equal("/Foo/Bar%3Fencodeme%3F/About/19/?query=some%3Fquery#Fragment?", path);
@@ -112,11 +126,13 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint1 = CreateEndpoint(
                 "About/{id}",
                 defaults: new { page = "/About", },
-                requiredValues:new { page = "/About", });
+                requiredValues: new { page = "/About", }
+            );
             var endpoint2 = CreateEndpoint(
                 "Admin/ManageUsers",
                 defaults: new { page = "/Admin/ManageUsers", },
-                requiredValues:new { page = "/Admin/ManageUsers", });
+                requiredValues: new { page = "/Admin/ManageUsers", }
+            );
 
             var linkGenerator = CreateLinkGenerator(endpoint1, endpoint2);
 
@@ -129,10 +145,14 @@ namespace Microsoft.AspNetCore.Routing
                 new HostString("example.com"),
                 new PathString("/Foo/Bar?encodeme?"),
                 new FragmentString("#Fragment?"),
-                new LinkOptions() { AppendTrailingSlash = true, });
+                new LinkOptions() { AppendTrailingSlash = true, }
+            );
 
             // Assert
-            Assert.Equal("http://example.com/Foo/Bar%3Fencodeme%3F/About/19/?query=some%3Fquery#Fragment?", path);
+            Assert.Equal(
+                "http://example.com/Foo/Bar%3Fencodeme%3F/About/19/?query=some%3Fquery#Fragment?",
+                path
+            );
         }
 
         [Fact]
@@ -142,11 +162,13 @@ namespace Microsoft.AspNetCore.Routing
             var endpoint1 = CreateEndpoint(
                 "About/{id}",
                 defaults: new { page = "/About", },
-                requiredValues:new { page = "/About", });
+                requiredValues: new { page = "/About", }
+            );
             var endpoint2 = CreateEndpoint(
                 "Admin/ManageUsers",
                 defaults: new { page = "/Admin/ManageUsers", },
-                requiredValues:new { page = "/Admin/ManageUsers", });
+                requiredValues: new { page = "/Admin/ManageUsers", }
+            );
 
             var linkGenerator = CreateLinkGenerator(endpoint1, endpoint2);
 
@@ -160,10 +182,14 @@ namespace Microsoft.AspNetCore.Routing
                 httpContext,
                 values: new RouteValueDictionary(new { query = "some?query" }),
                 fragment: new FragmentString("#Fragment?"),
-                options: new LinkOptions() { AppendTrailingSlash = true, });
+                options: new LinkOptions() { AppendTrailingSlash = true, }
+            );
 
             // Assert
-            Assert.Equal("http://example.com/Foo/Bar%3Fencodeme%3F/Admin/ManageUsers/?query=some%3Fquery#Fragment?", uri);
+            Assert.Equal(
+                "http://example.com/Foo/Bar%3Fencodeme%3F/Admin/ManageUsers/?query=some%3Fquery#Fragment?",
+                uri
+            );
         }
 
         private RouteEndpoint CreateEndpoint(
@@ -171,14 +197,20 @@ namespace Microsoft.AspNetCore.Routing
             object defaults = null,
             object requiredValues = null,
             int order = 0,
-            object[] metadata = null)
-        {
+            object[] metadata = null
+        ) {
             return new RouteEndpoint(
                 (httpContext) => Task.CompletedTask,
-                RoutePatternFactory.Parse(template, defaults, parameterPolicies: null, requiredValues),
+                RoutePatternFactory.Parse(
+                    template,
+                    defaults,
+                    parameterPolicies: null,
+                    requiredValues
+                ),
                 order,
                 new EndpointMetadataCollection(metadata ?? Array.Empty<object>()),
-                null);
+                null
+            );
         }
 
         private IServiceProvider CreateServices(IEnumerable<Endpoint> endpoints)
@@ -192,9 +224,12 @@ namespace Microsoft.AspNetCore.Routing
             services.AddOptions();
             services.AddLogging();
             services.AddRouting();
-            services
-                .AddSingleton<UrlEncoder>(UrlEncoder.Default);
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<EndpointDataSource>(new DefaultEndpointDataSource(endpoints)));
+            services.AddSingleton<UrlEncoder>(UrlEncoder.Default);
+            services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<EndpointDataSource>(
+                    new DefaultEndpointDataSource(endpoints)
+                )
+            );
             return services.BuildServiceProvider();
         }
 

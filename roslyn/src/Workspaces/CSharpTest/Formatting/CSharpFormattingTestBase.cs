@@ -17,20 +17,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Formatting
     {
         private Workspace _ws;
 
-        protected Workspace DefaultWorkspace
-            => _ws ?? (_ws = new AdhocWorkspace());
+        protected Workspace DefaultWorkspace => _ws ?? (_ws = new AdhocWorkspace());
 
-        protected override SyntaxNode ParseCompilation(string text, ParseOptions parseOptions)
-            => SyntaxFactory.ParseCompilationUnit(text, options: (CSharpParseOptions)parseOptions);
+        protected override SyntaxNode ParseCompilation(string text, ParseOptions parseOptions) =>
+            SyntaxFactory.ParseCompilationUnit(text, options: (CSharpParseOptions)parseOptions);
 
         private protected Task AssertNoFormattingChangesAsync(
             string code,
             bool debugMode = false,
             OptionsCollection changedOptionSet = null,
             bool testWithTransformation = true,
-            ParseOptions parseOptions = null)
-        {
-            return AssertFormatAsync(code, code, SpecializedCollections.SingletonEnumerable(new TextSpan(0, code.Length)), debugMode, changedOptionSet, testWithTransformation, parseOptions);
+            ParseOptions parseOptions = null
+        ) {
+            return AssertFormatAsync(
+                code,
+                code,
+                SpecializedCollections.SingletonEnumerable(new TextSpan(0, code.Length)),
+                debugMode,
+                changedOptionSet,
+                testWithTransformation,
+                parseOptions
+            );
         }
 
         private protected Task AssertFormatAsync(
@@ -39,9 +46,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Formatting
             bool debugMode = false,
             OptionsCollection changedOptionSet = null,
             bool testWithTransformation = true,
-            ParseOptions parseOptions = null)
-        {
-            return AssertFormatAsync(expected, code, SpecializedCollections.SingletonEnumerable(new TextSpan(0, code.Length)), debugMode, changedOptionSet, testWithTransformation, parseOptions);
+            ParseOptions parseOptions = null
+        ) {
+            return AssertFormatAsync(
+                expected,
+                code,
+                SpecializedCollections.SingletonEnumerable(new TextSpan(0, code.Length)),
+                debugMode,
+                changedOptionSet,
+                testWithTransformation,
+                parseOptions
+            );
         }
 
         private protected Task AssertFormatAsync(
@@ -51,9 +66,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Formatting
             bool debugMode = false,
             OptionsCollection changedOptionSet = null,
             bool testWithTransformation = true,
-            ParseOptions parseOptions = null)
-        {
-            return AssertFormatAsync(expected, code, spans, LanguageNames.CSharp, debugMode, changedOptionSet, testWithTransformation, parseOptions);
+            ParseOptions parseOptions = null
+        ) {
+            return AssertFormatAsync(
+                expected,
+                code,
+                spans,
+                LanguageNames.CSharp,
+                debugMode,
+                changedOptionSet,
+                testWithTransformation,
+                parseOptions
+            );
         }
     }
 }

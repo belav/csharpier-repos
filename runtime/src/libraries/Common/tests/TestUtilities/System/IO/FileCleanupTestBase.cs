@@ -11,7 +11,9 @@ namespace System.IO
     /// <summary>Base class for test classes the use temporary files that need to be cleaned up.</summary>
     public abstract class FileCleanupTestBase : IDisposable
     {
-        private static readonly Lazy<bool> s_isElevated = new Lazy<bool>(() => AdminHelpers.IsProcessElevated());
+        private static readonly Lazy<bool> s_isElevated = new Lazy<bool>(
+            () => AdminHelpers.IsProcessElevated()
+        );
 
         private string fallbackGuid = Guid.NewGuid().ToString("N").Substring(0, 10);
 
@@ -31,7 +33,10 @@ namespace System.IO
             string failure = string.Empty;
             for (int i = 0; i <= 2; i++)
             {
-                TestDirectory = Path.Combine(Path.GetTempPath(), GetType().Name + "_" + Path.GetRandomFileName());
+                TestDirectory = Path.Combine(
+                    Path.GetTempPath(),
+                    GetType().Name + "_" + Path.GetRandomFileName()
+                );
                 try
                 {
                     Directory.CreateDirectory(TestDirectory);
@@ -44,7 +49,10 @@ namespace System.IO
                 }
             }
 
-            Assert.True(Directory.Exists(TestDirectory), $"FileCleanupTestBase failed to create {TestDirectory}. {failure}");
+            Assert.True(
+                Directory.Exists(TestDirectory),
+                $"FileCleanupTestBase failed to create {TestDirectory}. {failure}"
+            );
         }
 
         /// <summary>Delete the associated test directory.</summary>
@@ -65,7 +73,10 @@ namespace System.IO
         {
             // No managed resources to clean up, so disposing is ignored.
 
-            try { Directory.Delete(TestDirectory, recursive: true); }
+            try
+            {
+                Directory.Delete(TestDirectory, recursive: true);
+            }
             catch { } // avoid exceptions escaping Dispose
         }
 
@@ -79,15 +90,21 @@ namespace System.IO
         /// <param name="index">An optional index value to use as a suffix on the file name.  Typically a loop index.</param>
         /// <param name="memberName">The member name of the function calling this method.</param>
         /// <param name="lineNumber">The line number of the function calling this method.</param>
-        protected string GetTestFilePath(int? index = null, [CallerMemberName] string memberName = null, [CallerLineNumber] int lineNumber = 0) =>
-            Path.Combine(TestDirectory, GetTestFileName(index, memberName, lineNumber));
+        protected string GetTestFilePath(
+            int? index = null,
+            [CallerMemberName] string memberName = null,
+            [CallerLineNumber] int lineNumber = 0
+        ) => Path.Combine(TestDirectory, GetTestFileName(index, memberName, lineNumber));
 
         /// <summary>Gets a test file name that is associated with the call site.</summary>
         /// <param name="index">An optional index value to use as a suffix on the file name.  Typically a loop index.</param>
         /// <param name="memberName">The member name of the function calling this method.</param>
         /// <param name="lineNumber">The line number of the function calling this method.</param>
-        protected string GetTestFileName(int? index = null, [CallerMemberName] string memberName = null, [CallerLineNumber] int lineNumber = 0)
-        {
+        protected string GetTestFileName(
+            int? index = null,
+            [CallerMemberName] string memberName = null,
+            [CallerLineNumber] int lineNumber = 0
+        ) {
             string testFileName = GenerateTestFileName(index, memberName, lineNumber);
             string testFilePath = Path.Combine(TestDirectory, testFileName);
 
@@ -102,7 +119,10 @@ namespace System.IO
                 if (excessLength < memberName.Length + "...".Length)
                 {
                     // Take a chunk out of the middle as perhaps it's the least interesting part of the name
-                    memberName = memberName.Substring(0, memberName.Length / 2 - excessLength / 2) + "..." + memberName.Substring(memberName.Length / 2 + excessLength / 2);
+                    memberName =
+                        memberName.Substring(0, memberName.Length / 2 - excessLength / 2)
+                        + "..."
+                        + memberName.Substring(memberName.Length / 2 + excessLength / 2);
 
                     testFileName = GenerateTestFileName(index, memberName, lineNumber);
                     testFilePath = Path.Combine(TestDirectory, testFileName);
@@ -124,6 +144,7 @@ namespace System.IO
                 memberName ?? "TestBase",
                 lineNumber,
                 index.GetValueOrDefault(),
-                Guid.NewGuid().ToString("N").Substring(0, 8)); // randomness to avoid collisions between derived test classes using same base method concurrently
+                Guid.NewGuid().ToString("N").Substring(0, 8)
+            ); // randomness to avoid collisions between derived test classes using same base method concurrently
     }
 }

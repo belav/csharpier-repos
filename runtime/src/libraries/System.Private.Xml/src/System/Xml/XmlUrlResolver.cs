@@ -16,9 +16,9 @@ namespace System.Xml
         private IWebProxy? _proxy;
 
         private static XmlDownloadManager DownloadManager =>
-            s_downloadManager ??
-            Interlocked.CompareExchange(ref s_downloadManager, new XmlDownloadManager(), null) ??
-            s_downloadManager;
+            s_downloadManager
+            ?? Interlocked.CompareExchange(ref s_downloadManager, new XmlDownloadManager(), null)
+            ?? s_downloadManager;
 
         public XmlUrlResolver() { }
 
@@ -42,8 +42,11 @@ namespace System.Xml
         // Maps a URI to an Object containing the actual resource.
         public override object? GetEntity(Uri absoluteUri, string? role, Type? ofObjectToReturn)
         {
-            if (ofObjectToReturn is null || ofObjectToReturn == typeof(System.IO.Stream) || ofObjectToReturn == typeof(object))
-            {
+            if (
+                ofObjectToReturn is null
+                || ofObjectToReturn == typeof(System.IO.Stream)
+                || ofObjectToReturn == typeof(object)
+            ) {
                 return DownloadManager.GetStream(absoluteUri, _credentials, _proxy);
             }
 

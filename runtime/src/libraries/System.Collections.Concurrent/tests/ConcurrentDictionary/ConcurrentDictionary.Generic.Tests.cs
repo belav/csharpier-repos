@@ -8,7 +8,8 @@ using Xunit;
 
 namespace System.Collections.Concurrent.Tests
 {
-    public class ConcurrentDictionary_Generic_Tests_enum_enum : ConcurrentDictionary_Generic_Tests<SimpleEnum, SimpleEnum>
+    public class ConcurrentDictionary_Generic_Tests_enum_enum
+        : ConcurrentDictionary_Generic_Tests<SimpleEnum, SimpleEnum>
     {
         protected override bool DefaultValueAllowed => true;
 
@@ -22,7 +23,8 @@ namespace System.Collections.Concurrent.Tests
         protected override SimpleEnum CreateTValue(int seed) => CreateTKey(seed);
     }
 
-    public class ConcurrentDictionary_Generic_Tests_string_string : ConcurrentDictionary_Generic_Tests<string, string>
+    public class ConcurrentDictionary_Generic_Tests_string_string
+        : ConcurrentDictionary_Generic_Tests<string, string>
     {
         protected override KeyValuePair<string, string> CreateT(int seed)
         {
@@ -41,7 +43,8 @@ namespace System.Collections.Concurrent.Tests
         protected override string CreateTValue(int seed) => CreateTKey(seed);
     }
 
-    public class ConcurrentDictionary_Generic_Tests_ulong_ulong : ConcurrentDictionary_Generic_Tests<ulong, ulong>
+    public class ConcurrentDictionary_Generic_Tests_ulong_ulong
+        : ConcurrentDictionary_Generic_Tests<ulong, ulong>
     {
         protected override bool DefaultValueAllowed => true;
 
@@ -63,7 +66,8 @@ namespace System.Collections.Concurrent.Tests
         protected override ulong CreateTValue(int seed) => CreateTKey(seed);
     }
 
-    public class ConcurrentDictionary_Generic_Tests_int_int : ConcurrentDictionary_Generic_Tests<int, int>
+    public class ConcurrentDictionary_Generic_Tests_int_int
+        : ConcurrentDictionary_Generic_Tests<int, int>
     {
         protected override bool DefaultValueAllowed => true;
 
@@ -81,22 +85,31 @@ namespace System.Collections.Concurrent.Tests
     /// <summary>
     /// Contains tests that ensure the correctness of the ConcurrentDictionary class.
     /// </summary>
-    public abstract class ConcurrentDictionary_Generic_Tests<TKey, TValue> : IDictionary_Generic_Tests<TKey, TValue>
+    public abstract class ConcurrentDictionary_Generic_Tests<TKey, TValue>
+        : IDictionary_Generic_Tests<TKey, TValue>
     {
         #region IDictionary<TKey, TValue Helper Methods
 
-        protected override IDictionary<TKey, TValue> GenericIDictionaryFactory() => new ConcurrentDictionary<TKey, TValue>();
+        protected override IDictionary<TKey, TValue> GenericIDictionaryFactory() =>
+            new ConcurrentDictionary<TKey, TValue>();
 
-        protected override IDictionary<TKey, TValue> GenericIDictionaryFactory(IEqualityComparer<TKey> comparer) => new ConcurrentDictionary<TKey, TValue>(comparer);
+        protected override IDictionary<TKey, TValue> GenericIDictionaryFactory(
+            IEqualityComparer<TKey> comparer
+        ) => new ConcurrentDictionary<TKey, TValue>(comparer);
 
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations) => new List<ModifyEnumerable>();
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        ) => new List<ModifyEnumerable>();
 
-        protected override bool IDictionary_Generic_Keys_Values_Enumeration_ThrowsInvalidOperation_WhenParentModified => false;
+        protected override bool IDictionary_Generic_Keys_Values_Enumeration_ThrowsInvalidOperation_WhenParentModified =>
+            false;
 
-        protected override bool IDictionary_Generic_Keys_Values_ModifyingTheDictionaryUpdatesTheCollection => false;
+        protected override bool IDictionary_Generic_Keys_Values_ModifyingTheDictionaryUpdatesTheCollection =>
+            false;
 
         protected override bool ResetImplemented => true;
-        protected override bool IDictionary_Generic_Keys_Values_Enumeration_ResetImplemented => true;
+        protected override bool IDictionary_Generic_Keys_Values_Enumeration_ResetImplemented =>
+            true;
 
         protected override EnumerableOrder Order => EnumerableOrder.Unspecified;
 
@@ -119,7 +132,10 @@ namespace System.Collections.Concurrent.Tests
         {
             IEqualityComparer<TKey> comparer = GetKeyIEqualityComparer();
             IDictionary<TKey, TValue> source = GenericIDictionaryFactory(count);
-            ConcurrentDictionary<TKey, TValue> copied = new ConcurrentDictionary<TKey, TValue>(source, comparer);
+            ConcurrentDictionary<TKey, TValue> copied = new ConcurrentDictionary<TKey, TValue>(
+                source,
+                comparer
+            );
             Assert.Equal(source, copied);
         }
 
@@ -129,7 +145,10 @@ namespace System.Collections.Concurrent.Tests
         {
             IEqualityComparer<TKey> comparer = GetKeyIEqualityComparer();
             IDictionary<TKey, TValue> source = GenericIDictionaryFactory(count);
-            ConcurrentDictionary<TKey, TValue> copied = new ConcurrentDictionary<TKey, TValue>(source, comparer);
+            ConcurrentDictionary<TKey, TValue> copied = new ConcurrentDictionary<TKey, TValue>(
+                source,
+                comparer
+            );
             Assert.Equal(source, copied);
         }
 
@@ -156,7 +175,6 @@ namespace System.Collections.Concurrent.Tests
             IEnumerable<TValue> values = ((IReadOnlyDictionary<TKey, TValue>)dictionary).Values;
             Assert.True(expected.SequenceEqual(values));
         }
-
         #endregion
     }
 }

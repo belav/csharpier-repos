@@ -27,10 +27,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     internal partial class OverrideCompletionProvider : AbstractOverrideCompletionProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public OverrideCompletionProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public OverrideCompletionProvider() { }
 
         protected override SyntaxNode GetSyntax(SyntaxToken token)
         {
@@ -41,19 +43,36 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 ?? (SyntaxNode)token.GetAncestor<MethodDeclarationSyntax>();
         }
 
-        public override bool IsInsertionTrigger(SourceText text, int characterPosition, OptionSet options)
-            => CompletionUtilities.IsTriggerAfterSpaceOrStartOfWordCharacter(text, characterPosition, options);
+        public override bool IsInsertionTrigger(
+            SourceText text,
+            int characterPosition,
+            OptionSet options
+        ) =>
+            CompletionUtilities.IsTriggerAfterSpaceOrStartOfWordCharacter(
+                text,
+                characterPosition,
+                options
+            );
 
-        public override ImmutableHashSet<char> TriggerCharacters { get; } = CompletionUtilities.SpaceTriggerCharacter;
+        public override ImmutableHashSet<char> TriggerCharacters { get; } =
+            CompletionUtilities.SpaceTriggerCharacter;
 
-        protected override SyntaxToken GetToken(CompletionItem completionItem, SyntaxTree tree, CancellationToken cancellationToken)
-        {
+        protected override SyntaxToken GetToken(
+            CompletionItem completionItem,
+            SyntaxTree tree,
+            CancellationToken cancellationToken
+        ) {
             var tokenSpanEnd = MemberInsertionCompletionItem.GetTokenSpanEnd(completionItem);
             return tree.FindTokenOnLeftOfPosition(tokenSpanEnd, cancellationToken);
         }
 
-        public override bool TryDetermineReturnType(SyntaxToken startToken, SemanticModel semanticModel, CancellationToken cancellationToken, out ITypeSymbol returnType, out SyntaxToken nextToken)
-        {
+        public override bool TryDetermineReturnType(
+            SyntaxToken startToken,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken,
+            out ITypeSymbol returnType,
+            out SyntaxToken nextToken
+        ) {
             nextToken = startToken;
             returnType = null;
             if (startToken.Parent is TypeSyntax typeSyntax)
@@ -61,9 +80,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 // 'partial' is actually an identifier.  If we see it just bail.  This does mean
                 // we won't handle overrides that actually return a type called 'partial'.  And
                 // not a single tear was shed.
-                if (typeSyntax is IdentifierNameSyntax identifierName &&
-                    identifierName.Identifier.IsKindOrHasMatchingText(SyntaxKind.PartialKeyword))
-                {
+                if (
+                    typeSyntax is IdentifierNameSyntax identifierName
+                    && identifierName.Identifier.IsKindOrHasMatchingText(SyntaxKind.PartialKeyword)
+                ) {
                     return false;
                 }
 
@@ -74,9 +94,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return true;
         }
 
-        public override bool TryDetermineModifiers(SyntaxToken startToken, SourceText text, int startLine, out Accessibility seenAccessibility,
-            out DeclarationModifiers modifiers)
-        {
+        public override bool TryDetermineModifiers(
+            SyntaxToken startToken,
+            SourceText text,
+            int startLine,
+            out Accessibility seenAccessibility,
+            out DeclarationModifiers modifiers
+        ) {
             var token = startToken;
             modifiers = new DeclarationModifiers();
             seenAccessibility = Accessibility.NotApplicable;
@@ -85,8 +109,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             var isSealed = false;
             var isAbstract = false;
 
-            while (IsOnStartLine(token.SpanStart, text, startLine) && !token.IsKind(SyntaxKind.None))
-            {
+            while (
+                IsOnStartLine(token.SpanStart, text, startLine) && !token.IsKind(SyntaxKind.None)
+            ) {
                 switch (token.Kind())
                 {
                     case SyntaxKind.UnsafeKeyword:
@@ -111,52 +136,44 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         {
                             seenAccessibility = Accessibility.Public;
                         }
-
                         break;
                     case SyntaxKind.PrivateKeyword:
                         if (seenAccessibility == Accessibility.NotApplicable)
                         {
                             seenAccessibility = Accessibility.Private;
                         }
-
                         // If we see private AND protected, filter for private protected
                         else if (seenAccessibility == Accessibility.Protected)
                         {
                             seenAccessibility = Accessibility.ProtectedAndInternal;
                         }
-
                         break;
                     case SyntaxKind.InternalKeyword:
                         if (seenAccessibility == Accessibility.NotApplicable)
                         {
                             seenAccessibility = Accessibility.Internal;
                         }
-
                         // If we see internal AND protected, filter for protected internal
                         else if (seenAccessibility == Accessibility.Protected)
                         {
                             seenAccessibility = Accessibility.ProtectedOrInternal;
                         }
-
                         break;
                     case SyntaxKind.ProtectedKeyword:
                         if (seenAccessibility == Accessibility.NotApplicable)
                         {
                             seenAccessibility = Accessibility.Protected;
                         }
-
                         // If we see protected AND internal, filter for protected internal
                         else if (seenAccessibility == Accessibility.Internal)
                         {
                             seenAccessibility = Accessibility.ProtectedOrInternal;
                         }
-
                         // If we see private AND protected, filter for private protected
                         else if (seenAccessibility == Accessibility.Private)
                         {
                             seenAccessibility = Accessibility.ProtectedAndInternal;
                         }
-
                         break;
                     default:
                         // Anything else and we bail.
@@ -166,28 +183,42 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 var previousToken = token.GetPreviousToken();
 
                 // We want only want to consume modifiers
-                if (previousToken.IsKind(SyntaxKind.None) || !IsOnStartLine(previousToken.SpanStart, text, startLine))
-                {
+                if (
+                    previousToken.IsKind(SyntaxKind.None)
+                    || !IsOnStartLine(previousToken.SpanStart, text, startLine)
+                ) {
                     break;
                 }
 
                 token = previousToken;
             }
 
-            modifiers = new DeclarationModifiers(isUnsafe: isUnsafe, isAbstract: isAbstract, isOverride: true, isSealed: isSealed);
-            return overrideToken.IsKind(SyntaxKind.OverrideKeyword) && IsOnStartLine(overrideToken.Parent.SpanStart, text, startLine);
+            modifiers = new DeclarationModifiers(
+                isUnsafe: isUnsafe,
+                isAbstract: isAbstract,
+                isOverride: true,
+                isSealed: isSealed
+            );
+            return overrideToken.IsKind(SyntaxKind.OverrideKeyword)
+                && IsOnStartLine(overrideToken.Parent.SpanStart, text, startLine);
         }
 
-        public override SyntaxToken FindStartingToken(SyntaxTree tree, int position, CancellationToken cancellationToken)
-        {
+        public override SyntaxToken FindStartingToken(
+            SyntaxTree tree,
+            int position,
+            CancellationToken cancellationToken
+        ) {
             var token = tree.FindTokenOnLeftOfPosition(position, cancellationToken);
             return token.GetPreviousTokenIfTouchingWord(position);
         }
 
-        public override ImmutableArray<ISymbol> FilterOverrides(ImmutableArray<ISymbol> members, ITypeSymbol returnType)
-        {
-            var filteredMembers = members.WhereAsArray(m =>
-                SymbolEquivalenceComparer.Instance.Equals(GetReturnType(m), returnType));
+        public override ImmutableArray<ISymbol> FilterOverrides(
+            ImmutableArray<ISymbol> members,
+            ITypeSymbol returnType
+        ) {
+            var filteredMembers = members.WhereAsArray(
+                m => SymbolEquivalenceComparer.Instance.Equals(GetReturnType(m), returnType)
+            );
 
             // Don't filter by return type if we would then have nothing to show.
             // This way, the user gets completion even if they speculatively typed the wrong return type
@@ -208,12 +239,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             else if (caretTarget is BasePropertyDeclarationSyntax propertyDeclaration)
             {
                 // property: no accessors; move to the end of the declaration
-                if (propertyDeclaration.AccessorList != null && propertyDeclaration.AccessorList.Accessors.Any())
-                {
+                if (
+                    propertyDeclaration.AccessorList != null
+                    && propertyDeclaration.AccessorList.Accessors.Any()
+                ) {
                     // move to the end of the last statement of the first accessor
                     var firstAccessor = propertyDeclaration.AccessorList.Accessors[0];
-                    var firstAccessorStatement = (SyntaxNode)firstAccessor.Body?.Statements.LastOrDefault() ??
-                        firstAccessor.ExpressionBody.Expression;
+                    var firstAccessorStatement =
+                        (SyntaxNode)firstAccessor.Body?.Statements.LastOrDefault()
+                        ?? firstAccessor.ExpressionBody.Expression;
                     return firstAccessorStatement.GetLocation().SourceSpan.End;
                 }
                 else

@@ -14,10 +14,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
     {
         private readonly ExpressionFinder _expressionFinder = new();
 
-        public StringConcatWithSelfExpressionMutator(DbContext context)
-            : base(context)
-        {
-        }
+        public StringConcatWithSelfExpressionMutator(DbContext context) : base(context) { }
 
         public override bool IsValid(Expression expression)
         {
@@ -30,12 +27,15 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
         {
             var i = random.Next(_expressionFinder.FoundExpressions.Count);
 
-            var stringConcatMethodInfo
-                = typeof(string).GetRuntimeMethod(
-                    nameof(string.Concat),
-                    new[] { typeof(string), typeof(string) });
+            var stringConcatMethodInfo = typeof(string).GetRuntimeMethod(
+                nameof(string.Concat),
+                new[] { typeof(string), typeof(string) }
+            );
 
-            var injector = new ExpressionInjector(_expressionFinder.FoundExpressions[i], e => Expression.Add(e, e, stringConcatMethodInfo));
+            var injector = new ExpressionInjector(
+                _expressionFinder.FoundExpressions[i],
+                e => Expression.Add(e, e, stringConcatMethodInfo)
+            );
 
             return injector.Visit(expression);
         }
@@ -48,10 +48,11 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
 
             public override Expression Visit(Expression node)
             {
-                if (_insideLambda
+                if (
+                    _insideLambda
                     && node?.Type == typeof(string)
-                    && node.NodeType != ExpressionType.Parameter)
-                {
+                    && node.NodeType != ExpressionType.Parameter
+                ) {
                     FoundExpressions.Add(node);
                 }
 
@@ -72,8 +73,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
 
             protected override Expression VisitMethodCall(MethodCallExpression node)
             {
-                if (node != null
-                    && node.Method.IsEFPropertyMethod())
+                if (node != null && node.Method.IsEFPropertyMethod())
                 {
                     return node;
                 }

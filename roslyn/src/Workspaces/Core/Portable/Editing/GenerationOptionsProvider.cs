@@ -18,10 +18,9 @@ namespace Microsoft.CodeAnalysis.Editing
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public GenerationOptionsProvider()
-        {
-        }
+        public GenerationOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = GenerationOptions.AllOptions.As<IOption>();
+        public ImmutableArray<IOption> Options { get; } =
+            GenerationOptions.AllOptions.As<IOption>();
     }
 }

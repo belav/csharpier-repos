@@ -14,17 +14,13 @@ using System.Diagnostics;
 
 namespace EventCounterRegressionTests
 {
-
     public class SimpleEventListener : EventListener
-    {        
+    {
         private readonly EventLevel _level = EventLevel.Verbose;
 
         public int MaxIncrement { get; private set; } = 0;
 
-        public SimpleEventListener()
-        {
-        }
-
+        public SimpleEventListener() { }
 
         protected override void OnEventSourceCreated(EventSource source)
         {
@@ -43,12 +39,16 @@ namespace EventCounterRegressionTests
 
             for (int i = 0; i < eventData.Payload.Count; i++)
             {
-                IDictionary<string, object> eventPayload = eventData.Payload[i] as IDictionary<string, object>;
+                IDictionary<string, object> eventPayload =
+                    eventData.Payload[i] as IDictionary<string, object>;
                 if (eventPayload != null)
                 {
                     foreach (KeyValuePair<string, object> payload in eventPayload)
                     {
-                        if (payload.Key.Equals("Name") && payload.Value.ToString().Equals("exception-count"))
+                        if (
+                            payload.Key.Equals("Name")
+                            && payload.Value.ToString().Equals("exception-count")
+                        )
                             isExceptionCounter = true;
                         if (payload.Key.Equals("Increment"))
                         {
@@ -69,7 +69,6 @@ namespace EventCounterRegressionTests
 
     public partial class TestEventCounter
     {
-
         public static void ThrowExceptionTask()
         {
             // This will throw an exception every 1000 ms
@@ -78,11 +77,12 @@ namespace EventCounterRegressionTests
                 Thread.Sleep(1000);
                 try
                 {
-                    Debug.WriteLine("Exception thrown at " + DateTime.UtcNow.ToString("mm.ss.ffffff"));
+                    Debug.WriteLine(
+                        "Exception thrown at " + DateTime.UtcNow.ToString("mm.ss.ffffff")
+                    );
                     throw new Exception("an exception");
                 }
-                catch
-                {}
+                catch { }
             }
         }
 
@@ -96,15 +96,17 @@ namespace EventCounterRegressionTests
             {
                 Thread.Sleep(5000);
 
-                // The number below is supposed to be 2 at maximum, but in debug builds, the calls to 
-                // EventSource.Write() takes a lot longer than we thought, and the reflection in 
-                // workingset counter also adds a huge amount of time, which makes the test fail in 
-                // debug CIs. 
-                // This gives us 2 + 1 (EventSource delay) + 1 (Reflection delay) = 4 maximum possible increments 
+                // The number below is supposed to be 2 at maximum, but in debug builds, the calls to
+                // EventSource.Write() takes a lot longer than we thought, and the reflection in
+                // workingset counter also adds a huge amount of time, which makes the test fail in
+                // debug CIs.
+                // This gives us 2 + 1 (EventSource delay) + 1 (Reflection delay) = 4 maximum possible increments
                 // for the very first callback we get in EventListener. Setting the check to 4 to compensate for these.
                 if (myListener.MaxIncrement > 4)
                 {
-                    Console.WriteLine($"Test Failed - Saw more than 3 exceptions / sec {myListener.MaxIncrement}");
+                    Console.WriteLine(
+                        $"Test Failed - Saw more than 3 exceptions / sec {myListener.MaxIncrement}"
+                    );
                     return 1;
                 }
                 else

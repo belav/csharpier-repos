@@ -14,7 +14,10 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
     {
         private readonly ILogger<LoggingHttpMessageHandler> _logger;
 
-        public LoggingHttpMessageHandler(HttpMessageHandler inner, ILoggerFactory loggerFactory) : base(inner)
+        public LoggingHttpMessageHandler(
+            HttpMessageHandler inner,
+            ILoggerFactory loggerFactory
+        ) : base(inner)
         {
             if (loggerFactory == null)
             {
@@ -24,15 +27,22 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
             _logger = loggerFactory.CreateLogger<LoggingHttpMessageHandler>();
         }
 
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-        {
+        protected override async Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        ) {
             Log.SendingHttpRequest(_logger, request.Method, request.RequestUri!);
 
             var response = await base.SendAsync(request, cancellationToken);
 
             if (!response.IsSuccessStatusCode)
             {
-                Log.UnsuccessfulHttpResponse(_logger, response.StatusCode, request.Method, request.RequestUri!);
+                Log.UnsuccessfulHttpResponse(
+                    _logger,
+                    response.StatusCode,
+                    request.Method,
+                    request.RequestUri!
+                );
             }
 
             return response;
@@ -40,18 +50,42 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
 
         private static class Log
         {
-            private static readonly Action<ILogger, HttpMethod, Uri, Exception?> _sendingHttpRequest =
-                LoggerMessage.Define<HttpMethod, Uri>(LogLevel.Trace, new EventId(1, "SendingHttpRequest"), "Sending HTTP request {RequestMethod} '{RequestUrl}'.");
+            private static readonly Action<
+                ILogger,
+                HttpMethod,
+                Uri,
+                Exception?
+            > _sendingHttpRequest = LoggerMessage.Define<HttpMethod, Uri>(
+                LogLevel.Trace,
+                new EventId(1, "SendingHttpRequest"),
+                "Sending HTTP request {RequestMethod} '{RequestUrl}'."
+            );
 
-            private static readonly Action<ILogger, int, HttpMethod, Uri, Exception?> _unsuccessfulHttpResponse =
-                LoggerMessage.Define<int, HttpMethod, Uri>(LogLevel.Warning, new EventId(2, "UnsuccessfulHttpResponse"), "Unsuccessful HTTP response {StatusCode} return from {RequestMethod} '{RequestUrl}'.");
+            private static readonly Action<
+                ILogger,
+                int,
+                HttpMethod,
+                Uri,
+                Exception?
+            > _unsuccessfulHttpResponse = LoggerMessage.Define<int, HttpMethod, Uri>(
+                LogLevel.Warning,
+                new EventId(2, "UnsuccessfulHttpResponse"),
+                "Unsuccessful HTTP response {StatusCode} return from {RequestMethod} '{RequestUrl}'."
+            );
 
-            public static void SendingHttpRequest(ILogger logger, HttpMethod requestMethod, Uri requestUrl)
-            {
+            public static void SendingHttpRequest(
+                ILogger logger,
+                HttpMethod requestMethod,
+                Uri requestUrl
+            ) {
                 _sendingHttpRequest(logger, requestMethod, requestUrl, null);
             }
-            public static void UnsuccessfulHttpResponse(ILogger logger, HttpStatusCode statusCode, HttpMethod requestMethod, Uri requestUrl)
-            {
+            public static void UnsuccessfulHttpResponse(
+                ILogger logger,
+                HttpStatusCode statusCode,
+                HttpMethod requestMethod,
+                Uri requestUrl
+            ) {
                 _unsuccessfulHttpResponse(logger, (int)statusCode, requestMethod, requestUrl, null);
             }
         }

@@ -30,16 +30,22 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         public static void SubjectIdentifier_DoesNotMatchCert(SubjectIdentifierType type)
         {
             using (X509Certificate2 cert = Certificates.RSAKeyTransfer_ExplicitSki.GetCertificate())
-            using (X509Certificate2 notMatchingCert = Certificates.RSAKeyTransfer4_ExplicitSki.GetCertificate())
-            {
+            using (
+                X509Certificate2 notMatchingCert =
+                    Certificates.RSAKeyTransfer4_ExplicitSki.GetCertificate()
+            ) {
                 EnvelopedCms cms = GetDocWithRecipient(type, cert);
                 Assert.Equal(1, cms.RecipientInfos.Count);
-                Assert.False(cms.RecipientInfos[0].RecipientIdentifier.MatchesCertificate(notMatchingCert));
+                Assert.False(
+                    cms.RecipientInfos[0].RecipientIdentifier.MatchesCertificate(notMatchingCert)
+                );
             }
         }
 
-        private static EnvelopedCms GetDocWithRecipient(SubjectIdentifierType type, X509Certificate2 cert)
-        {
+        private static EnvelopedCms GetDocWithRecipient(
+            SubjectIdentifierType type,
+            X509Certificate2 cert
+        ) {
             byte[] content = new byte[] { 1, 2, 3, 4 };
             EnvelopedCms cms = new EnvelopedCms(new ContentInfo(content));
             CmsRecipient recipient = new CmsRecipient(type, cert);

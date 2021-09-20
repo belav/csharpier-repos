@@ -10,8 +10,11 @@ namespace Microsoft.AspNetCore.Components.Server.BlazorPack
 {
     internal sealed class BlazorPackHubProtocolWorker : MessagePackHubProtocolWorker
     {
-        protected override object DeserializeObject(ref MessagePackReader reader, Type type, string field)
-        {
+        protected override object DeserializeObject(
+            ref MessagePackReader reader,
+            Type type,
+            string field
+        ) {
             try
             {
                 if (type == typeof(string))
@@ -37,7 +40,10 @@ namespace Microsoft.AspNetCore.Components.Server.BlazorPack
             }
             catch (Exception ex)
             {
-                throw new InvalidDataException($"Deserializing object of the `{type.Name}` type for '{field}' failed.", ex);
+                throw new InvalidDataException(
+                    $"Deserializing object of the `{type.Name}` type for '{field}' failed.",
+                    ex
+                );
             }
 
             throw new FormatException($"Type {type} is not supported");

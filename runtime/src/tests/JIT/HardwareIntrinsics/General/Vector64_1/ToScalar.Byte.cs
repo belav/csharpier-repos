@@ -53,7 +53,16 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetByte();
             }
 
-            Vector64<Byte> value = Vector64.Create(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7]);
+            Vector64<Byte> value = Vector64.Create(
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                values[6],
+                values[7]
+            );
 
             Byte result = value.ToScalar();
             ValidateResult(result, values);
@@ -70,22 +79,37 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetByte();
             }
 
-            Vector64<Byte> value = Vector64.Create(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7]);
+            Vector64<Byte> value = Vector64.Create(
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                values[6],
+                values[7]
+            );
 
-            object result = typeof(Vector64)
-                                .GetMethod(nameof(Vector64.ToScalar))
-                                .MakeGenericMethod(typeof(Byte))
-                                .Invoke(null, new object[] { value });
+            object result = typeof(Vector64).GetMethod(nameof(Vector64.ToScalar))
+                .MakeGenericMethod(typeof(Byte))
+                .Invoke(null, new object[] { value });
 
             ValidateResult((Byte)(result), values);
         }
 
-        private void ValidateResult(Byte result, Byte[] values, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Byte result,
+            Byte[] values,
+            [CallerMemberName] string method = ""
+        ) {
             if (result != values[0])
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64<Byte>.ToScalar(): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  values: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64<Byte>.ToScalar(): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  values: ({string.Join(", ", values)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

@@ -14,7 +14,7 @@ namespace Microsoft.Extensions.Hosting.Tests.Fakes
 
         public Action<CancellationToken> StartAction { get; set; }
         public Action StopAction { get; set; }
-        
+
         public Task WaitForStartAsync(CancellationToken cancellationToken)
         {
             StartCount++;

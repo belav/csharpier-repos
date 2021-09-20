@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
     /// </summary>
     internal class SimplifiedStringHashComparer : IEqualityComparer<string>
     {
-        public readonly static SimplifiedStringHashComparer Instance = new SimplifiedStringHashComparer();
+        public readonly static SimplifiedStringHashComparer Instance =
+            new SimplifiedStringHashComparer();
 
         public bool Equals(string? x, string? y)
         {
@@ -36,7 +37,8 @@ namespace Microsoft.AspNetCore.Components.Rendering
                 return unchecked(
                     char.ToLowerInvariant(key[keyLength - 1])
                     + 31 * char.ToLowerInvariant(key[keyLength / 2])
-                    + 961 * keyLength);
+                    + 961 * keyLength
+                );
             }
             else
             {

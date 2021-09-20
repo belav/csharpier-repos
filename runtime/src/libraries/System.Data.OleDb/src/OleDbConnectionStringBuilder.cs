@@ -33,7 +33,10 @@ namespace System.Data.OleDb
             DbConnectionStringKeywords.PersistSecurityInfo,
             DbConnectionStringKeywords.OleDbServices
         };
-        private static readonly Dictionary<string, Keywords> s_keywords = new Dictionary<string, Keywords>(5, StringComparer.OrdinalIgnoreCase)
+        private static readonly Dictionary<string, Keywords> s_keywords = new Dictionary<
+            string,
+            Keywords
+        >(5, StringComparer.OrdinalIgnoreCase)
         {
             { DbConnectionStringKeywords.FileName, Keywords.FileName },
             { DbConnectionStringKeywords.Provider, Keywords.Provider },
@@ -146,8 +149,10 @@ namespace System.Data.OleDb
         }
 
         [DisplayName(DbConnectionStringKeywords.FileName)]
-        [Editor("System.Windows.Forms.Design.FileNameEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-                "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+        [Editor(
+            "System.Windows.Forms.Design.FileNameEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        )]
         [RefreshProperties(RefreshProperties.All)]
         // TODO: hand off to VS, they derive from FileNameEditor and set the OpenDialogFilter to *.UDL
         public string FileName
@@ -413,7 +418,9 @@ namespace System.Data.OleDb
             Dictionary<string, OleDbPropertyInfo>? providerInfo = _propertyInfo;
             if (null == providerInfo)
             {
-                providerInfo = new Dictionary<string, OleDbPropertyInfo>(StringComparer.OrdinalIgnoreCase);
+                providerInfo = new Dictionary<string, OleDbPropertyInfo>(
+                    StringComparer.OrdinalIgnoreCase
+                );
                 if (!ADP.IsEmpty(provider))
                 {
                     Dictionary<string, OleDbPropertyInfo>? hash = null;
@@ -421,24 +428,36 @@ namespace System.Data.OleDb
                     {
                         StringBuilder builder = new StringBuilder();
                         AppendKeyValuePair(builder, DbConnectionStringKeywords.Provider, provider);
-                        OleDbConnectionString constr = new OleDbConnectionString(builder.ToString(), true);
+                        OleDbConnectionString constr = new OleDbConnectionString(
+                            builder.ToString(),
+                            true
+                        );
 
                         // load provider without calling Initialize or CreateDataSource
-                        using (OleDbConnectionInternal connection = new OleDbConnectionInternal(constr, null))
-                        {
+                        using (
+                            OleDbConnectionInternal connection = new OleDbConnectionInternal(
+                                constr,
+                                null
+                            )
+                        ) {
                             // get all the init property information for the provider
-                            hash = connection.GetPropertyInfo(new Guid[] { OleDbPropertySetGuid.DBInitAll })!;
+                            hash = connection.GetPropertyInfo(
+                                new Guid[] { OleDbPropertySetGuid.DBInitAll }
+                            )!;
                             foreach (KeyValuePair<string, OleDbPropertyInfo> entry in hash)
                             {
                                 Keywords index;
                                 OleDbPropertyInfo info = entry.Value;
                                 if (!s_keywords.TryGetValue(info._description!, out index))
                                 {
-                                    if ((OleDbPropertySetGuid.DBInit == info._propertySet) &&
-                                            ((ODB.DBPROP_INIT_ASYNCH == info._propertyID) ||
-                                             (ODB.DBPROP_INIT_HWND == info._propertyID) ||
-                                             (ODB.DBPROP_INIT_PROMPT == info._propertyID)))
-                                    {
+                                    if (
+                                        (OleDbPropertySetGuid.DBInit == info._propertySet)
+                                        && (
+                                            (ODB.DBPROP_INIT_ASYNCH == info._propertyID)
+                                            || (ODB.DBPROP_INIT_HWND == info._propertyID)
+                                            || (ODB.DBPROP_INIT_PROMPT == info._propertyID)
+                                        )
+                                    ) {
                                         continue; // skip this keyword
                                     }
                                     providerInfo[info._description!] = info;
@@ -461,11 +480,17 @@ namespace System.Data.OleDb
                             // get all the init property values for the provider
                             using (PropertyIDSet propidset = new PropertyIDSet(arrayPropertySets))
                             {
-                                using (IDBPropertiesWrapper idbProperties = connection.IDBProperties())
-                                {
+                                using (
+                                    IDBPropertiesWrapper idbProperties = connection.IDBProperties()
+                                ) {
                                     OleDbHResult hr;
-                                    using (DBPropSet propset = new DBPropSet(idbProperties.Value, propidset, out hr))
-                                    {
+                                    using (
+                                        DBPropSet propset = new DBPropSet(
+                                            idbProperties.Value,
+                                            propidset,
+                                            out hr
+                                        )
+                                    ) {
                                         // OleDbConnectionStringBuilder is ignoring/hiding potential errors of OLEDB provider when reading its properties information
                                         if (0 <= (int)hr)
                                         {
@@ -473,16 +498,25 @@ namespace System.Data.OleDb
                                             for (int i = 0; i < count; ++i)
                                             {
                                                 Guid propertyset;
-                                                ItagDBPROP[] props = propset.GetPropertySet(i, out propertyset);
+                                                ItagDBPROP[] props = propset.GetPropertySet(
+                                                    i,
+                                                    out propertyset
+                                                );
 
                                                 // attach the default property value to the property info
                                                 foreach (ItagDBPROP prop in props)
                                                 {
-                                                    foreach (KeyValuePair<string, OleDbPropertyInfo> entry in hash)
-                                                    {
+                                                    foreach (
+                                                        KeyValuePair<
+                                                            string,
+                                                            OleDbPropertyInfo
+                                                        > entry in hash
+                                                    ) {
                                                         OleDbPropertyInfo info = entry.Value;
-                                                        if ((info._propertyID == prop.dwPropertyID) && (info._propertySet == propertyset))
-                                                        {
+                                                        if (
+                                                            (info._propertyID == prop.dwPropertyID)
+                                                            && (info._propertySet == propertyset)
+                                                        ) {
                                                             info._defaultValue = prop.vValue;
 
                                                             if (null == info._defaultValue)
@@ -536,9 +570,7 @@ namespace System.Data.OleDb
             private StandardValuesCollection? _standardValues;
 
             // converter classes should have public ctor
-            public OleDbProviderConverter()
-            {
-            }
+            public OleDbProviderConverter() { }
 
             public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
             {
@@ -550,8 +582,9 @@ namespace System.Data.OleDb
                 return false;
             }
 
-            public override StandardValuesCollection? GetStandardValues(ITypeDescriptorContext context)
-            {
+            public override StandardValuesCollection? GetStandardValues(
+                ITypeDescriptorContext context
+            ) {
                 StandardValuesCollection? dataSourceNames = _standardValues;
                 if (null == _standardValues)
                 {
@@ -562,12 +595,15 @@ namespace System.Data.OleDb
                     DataColumn column5 = table.Columns["SOURCES_TYPE"]!;
                     //DataColumn column4 = table.Columns["SOURCES_DESCRIPTION"];
 
-                    System.Collections.Generic.List<string> providerNames = new System.Collections.Generic.List<string>(table.Rows.Count);
+                    System.Collections.Generic.List<string> providerNames =
+                        new System.Collections.Generic.List<string>(table.Rows.Count);
                     foreach (DataRow row in table.Rows)
                     {
                         int sourceType = (int)row[column5];
-                        if (DBSOURCETYPE_DATASOURCE_TDP == sourceType || DBSOURCETYPE_DATASOURCE_MDP == sourceType)
-                        {
+                        if (
+                            DBSOURCETYPE_DATASOURCE_TDP == sourceType
+                            || DBSOURCETYPE_DATASOURCE_MDP == sourceType
+                        ) {
                             string progid = (string)row[column2];
                             if (!OleDbConnectionString.IsMSDASQL(progid.ToLowerInvariant()))
                             {
@@ -604,9 +640,7 @@ namespace System.Data.OleDb
             private StandardValuesCollection? _standardValues;
 
             // converter classes should have public ctor
-            public OleDbServicesConverter() : base()
-            {
-            }
+            public OleDbServicesConverter() : base() { }
 
             public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
             {
@@ -614,8 +648,11 @@ namespace System.Data.OleDb
                 return ((typeof(string) == sourceType) || base.CanConvertFrom(context, sourceType));
             }
 
-            public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
-            {
+            public override object ConvertFrom(
+                ITypeDescriptorContext context,
+                System.Globalization.CultureInfo culture,
+                object value
+            ) {
                 string? svalue = (value as string);
                 if (null != svalue)
                 {
@@ -632,13 +669,21 @@ namespace System.Data.OleDb
                             string[] values = svalue.Split(new char[] { ',' });
                             foreach (string v in values)
                             {
-                                convertedValue |= (int)(OleDbServiceValues)Enum.Parse(typeof(OleDbServiceValues), v, true);
+                                convertedValue |= (int)(OleDbServiceValues)Enum.Parse(
+                                    typeof(OleDbServiceValues),
+                                    v,
+                                    true
+                                );
                             }
                             return (int)convertedValue;
                         }
                         else
                         {
-                            return (int)(OleDbServiceValues)Enum.Parse(typeof(OleDbServiceValues), svalue, true);
+                            return (int)(OleDbServiceValues)Enum.Parse(
+                                typeof(OleDbServiceValues),
+                                svalue,
+                                true
+                            );
                         }
                     }
                 }
@@ -648,14 +693,28 @@ namespace System.Data.OleDb
             public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
             {
                 // Only know how to convert to the NetworkLibrary enumeration
-                return ((typeof(string) == destinationType) || base.CanConvertTo(context, destinationType));
+                return (
+                    (typeof(string) == destinationType)
+                    || base.CanConvertTo(context, destinationType)
+                );
             }
 
-            public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
-            {
-                if ((typeof(string) == destinationType) && (null != value) && (typeof(int) == value.GetType()))
-                {
-                    return Enum.Format(typeof(OleDbServiceValues), ((OleDbServiceValues)(int)value), "G");
+            public override object ConvertTo(
+                ITypeDescriptorContext context,
+                System.Globalization.CultureInfo culture,
+                object value,
+                Type destinationType
+            ) {
+                if (
+                    (typeof(string) == destinationType)
+                    && (null != value)
+                    && (typeof(int) == value.GetType())
+                ) {
+                    return Enum.Format(
+                        typeof(OleDbServiceValues),
+                        ((OleDbServiceValues)(int)value),
+                        "G"
+                    );
                 }
                 return base.ConvertTo(context, culture, value, destinationType);
             }
@@ -670,8 +729,9 @@ namespace System.Data.OleDb
                 return false;
             }
 
-            public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
-            {
+            public override StandardValuesCollection GetStandardValues(
+                ITypeDescriptorContext context
+            ) {
                 StandardValuesCollection? standardValues = _standardValues;
                 if (null == standardValues)
                 {
@@ -693,27 +753,33 @@ namespace System.Data.OleDb
         internal sealed class OleDbConnectionStringBuilderConverter : ExpandableObjectConverter
         {
             // converter classes should have public ctor
-            public OleDbConnectionStringBuilderConverter()
-            {
-            }
+            public OleDbConnectionStringBuilderConverter() { }
 
             public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
             {
-                if (typeof(System.ComponentModel.Design.Serialization.InstanceDescriptor) == destinationType)
-                {
+                if (
+                    typeof(System.ComponentModel.Design.Serialization.InstanceDescriptor)
+                    == destinationType
+                ) {
                     return true;
                 }
                 return base.CanConvertTo(context, destinationType);
             }
 
-            public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-            {
+            public override object ConvertTo(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value,
+                Type destinationType
+            ) {
                 if (destinationType == null)
                 {
                     throw ADP.ArgumentNull("destinationType");
                 }
-                if (typeof(System.ComponentModel.Design.Serialization.InstanceDescriptor) == destinationType)
-                {
+                if (
+                    typeof(System.ComponentModel.Design.Serialization.InstanceDescriptor)
+                    == destinationType
+                ) {
                     OleDbConnectionStringBuilder? obj = (value as OleDbConnectionStringBuilder);
                     if (null != obj)
                     {
@@ -723,12 +789,17 @@ namespace System.Data.OleDb
                 return base.ConvertTo(context, culture, value, destinationType);
             }
 
-            private System.ComponentModel.Design.Serialization.InstanceDescriptor ConvertToInstanceDescriptor(OleDbConnectionStringBuilder options)
-            {
+            private System.ComponentModel.Design.Serialization.InstanceDescriptor ConvertToInstanceDescriptor(
+                OleDbConnectionStringBuilder options
+            ) {
                 Type[] ctorParams = new Type[] { typeof(string) };
                 object[] ctorValues = new object[] { options.ConnectionString };
-                System.Reflection.ConstructorInfo ctor = typeof(OleDbConnectionStringBuilder).GetConstructor(ctorParams)!;
-                return new System.ComponentModel.Design.Serialization.InstanceDescriptor(ctor, ctorValues);
+                System.Reflection.ConstructorInfo ctor =
+                    typeof(OleDbConnectionStringBuilder).GetConstructor(ctorParams)!;
+                return new System.ComponentModel.Design.Serialization.InstanceDescriptor(
+                    ctor,
+                    ctorValues
+                );
             }
         }
     }

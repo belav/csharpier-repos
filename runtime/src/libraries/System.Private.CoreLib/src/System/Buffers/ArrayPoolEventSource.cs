@@ -6,12 +6,16 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Buffers
 {
-    [EventSource(Guid = "0866B2B8-5CEF-5DB9-2612-0C0FFD814A44", Name = "System.Buffers.ArrayPoolEventSource")]
+    [EventSource(
+        Guid = "0866B2B8-5CEF-5DB9-2612-0C0FFD814A44",
+        Name = "System.Buffers.ArrayPoolEventSource"
+    )]
     [EventSourceAutoGenerate]
     internal sealed partial class ArrayPoolEventSource : EventSource
     {
 #if !ES_BUILD_STANDALONE
-        private const string EventSourceSuppressMessage = "Parameters to this method are primitive and are trimmer safe";
+        private const string EventSourceSuppressMessage =
+            "Parameters to this method are primitive and are trimmer safe";
 #endif
         internal static readonly ArrayPoolEventSource Log = new ArrayPoolEventSource();
 
@@ -51,8 +55,11 @@ namespace System.Buffers
         /// less than).
         /// </summary>
 #if !ES_BUILD_STANDALONE
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
 #endif
         [Event(1, Level = EventLevel.Verbose)]
         internal unsafe void BufferRented(int bufferId, int bufferSize, int poolId, int bucketId)
@@ -79,12 +86,20 @@ namespace System.Buffers
         /// BufferReturned events.
         /// </summary>
 #if !ES_BUILD_STANDALONE
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
 #endif
         [Event(2, Level = EventLevel.Informational)]
-        internal unsafe void BufferAllocated(int bufferId, int bufferSize, int poolId, int bucketId, BufferAllocatedReason reason)
-        {
+        internal unsafe void BufferAllocated(
+            int bufferId,
+            int bufferSize,
+            int poolId,
+            int bucketId,
+            BufferAllocatedReason reason
+        ) {
             EventData* payload = stackalloc EventData[5];
             payload[0].Size = sizeof(int);
             payload[0].DataPointer = ((IntPtr)(&bufferId));
@@ -110,7 +125,8 @@ namespace System.Buffers
         /// events exactly matches the number of BufferRented events.
         /// </summary>
         [Event(3, Level = EventLevel.Verbose)]
-        internal void BufferReturned(int bufferId, int bufferSize, int poolId) => WriteEvent(3, bufferId, bufferSize, poolId);
+        internal void BufferReturned(int bufferId, int bufferSize, int poolId) =>
+            WriteEvent(3, bufferId, bufferSize, poolId);
 
         /// <summary>
         /// Event raised when we attempt to free a buffer due to inactivity or memory pressure (by no longer
@@ -118,24 +134,34 @@ namespace System.Buffers
         /// to free it. A rent event before or after this event for the same ID, is a rare, but expected case.
         /// </summary>
         [Event(4, Level = EventLevel.Informational)]
-        internal void BufferTrimmed(int bufferId, int bufferSize, int poolId) => WriteEvent(4, bufferId, bufferSize, poolId);
+        internal void BufferTrimmed(int bufferId, int bufferSize, int poolId) =>
+            WriteEvent(4, bufferId, bufferSize, poolId);
 
         /// <summary>
         /// Event raised when we check to trim buffers.
         /// </summary>
         [Event(5, Level = EventLevel.Informational)]
-        internal void BufferTrimPoll(int milliseconds, int pressure) => WriteEvent(5, milliseconds, pressure);
+        internal void BufferTrimPoll(int milliseconds, int pressure) =>
+            WriteEvent(5, milliseconds, pressure);
 
         /// <summary>
         /// Event raised when a buffer returned to the pool is dropped.
         /// </summary>
 #if !ES_BUILD_STANDALONE
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                   Justification = EventSourceSuppressMessage)]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = EventSourceSuppressMessage
+        )]
 #endif
         [Event(6, Level = EventLevel.Informational)]
-        internal unsafe void BufferDropped(int bufferId, int bufferSize, int poolId, int bucketId, BufferDroppedReason reason)
-        {
+        internal unsafe void BufferDropped(
+            int bufferId,
+            int bufferSize,
+            int poolId,
+            int bucketId,
+            BufferDroppedReason reason
+        ) {
             EventData* payload = stackalloc EventData[5];
             payload[0].Size = sizeof(int);
             payload[0].DataPointer = ((IntPtr)(&bufferId));

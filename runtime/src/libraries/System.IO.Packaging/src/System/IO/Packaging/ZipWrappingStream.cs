@@ -19,8 +19,14 @@ namespace System.IO.Packaging
         private readonly bool _canRead;
         private readonly bool _canWrite;
 
-        public ZipWrappingStream(ZipArchiveEntry zipArchiveEntry, Stream stream, FileMode packageFileMode, FileAccess packageFileAccess, bool canRead, bool canWrite)
-        {
+        public ZipWrappingStream(
+            ZipArchiveEntry zipArchiveEntry,
+            Stream stream,
+            FileMode packageFileMode,
+            FileAccess packageFileAccess,
+            bool canRead,
+            bool canWrite
+        ) {
             _zipArchiveEntry = zipArchiveEntry;
             _baseStream = stream;
             _packageFileMode = packageFileMode;
@@ -49,35 +55,22 @@ namespace System.IO.Packaging
             }
         }
 
-        public override void Write(
-            byte[] buffer,
-            int offset,
-            int count
-        )
+        public override void Write(byte[] buffer, int offset, int count)
         {
             _baseStream.Write(buffer, offset, count);
         }
 
-        public override int Read(
-            byte[] buffer,
-            int offset,
-            int count
-        )
+        public override int Read(byte[] buffer, int offset, int count)
         {
             return _baseStream.Read(buffer, offset, count);
         }
 
-        public override void SetLength(
-            long value
-        )
+        public override void SetLength(long value)
         {
             _baseStream.SetLength(value);
         }
 
-        public override long Seek(
-            long offset,
-            SeekOrigin origin
-        )
+        public override long Seek(long offset, SeekOrigin origin)
         {
             return _baseStream.Seek(offset, origin);
         }
@@ -89,14 +82,8 @@ namespace System.IO.Packaging
 
         public override long Position
         {
-            get
-            {
-                return _baseStream.Position;
-            }
-            set
-            {
-                _baseStream.Position = value;
-            }
+            get { return _baseStream.Position; }
+            set { _baseStream.Position = value; }
         }
 
         public override long Length

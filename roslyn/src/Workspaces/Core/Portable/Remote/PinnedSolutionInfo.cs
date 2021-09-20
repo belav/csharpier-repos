@@ -39,8 +39,12 @@ namespace Microsoft.CodeAnalysis.Remote
         [DataMember(Order = 3)]
         public readonly Checksum SolutionChecksum;
 
-        public PinnedSolutionInfo(int scopeId, bool fromPrimaryBranch, int workspaceVersion, Checksum solutionChecksum)
-        {
+        public PinnedSolutionInfo(
+            int scopeId,
+            bool fromPrimaryBranch,
+            int workspaceVersion,
+            Checksum solutionChecksum
+        ) {
             ScopeId = scopeId;
             FromPrimaryBranch = fromPrimaryBranch;
             WorkspaceVersion = workspaceVersion;

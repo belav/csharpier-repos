@@ -20,7 +20,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Test
             Assert.True(result.IsModelSet);
             Assert.Same(model, result.Model);
         }
-        
+
         [Fact]
         public void Failed_SetsProperties()
         {

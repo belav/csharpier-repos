@@ -27,8 +27,14 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         TLocalDeclarationStatementSyntax,
         TVariableDeclaratorSyntax,
         TExpressionSyntax,
-        TConditionalExpressionSyntax>
-        : AbstractUseConditionalExpressionCodeFixProvider<TStatementSyntax, TIfStatementSyntax, TExpressionSyntax, TConditionalExpressionSyntax>
+        TConditionalExpressionSyntax
+    >
+        : AbstractUseConditionalExpressionCodeFixProvider<
+              TStatementSyntax,
+              TIfStatementSyntax,
+              TExpressionSyntax,
+              TConditionalExpressionSyntax
+          >
         where TStatementSyntax : SyntaxNode
         where TIfStatementSyntax : TStatementSyntax
         where TLocalDeclarationStatementSyntax : TStatementSyntax
@@ -36,18 +42,28 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         where TExpressionSyntax : SyntaxNode
         where TConditionalExpressionSyntax : TExpressionSyntax
     {
-        protected abstract TVariableDeclaratorSyntax WithInitializer(TVariableDeclaratorSyntax variable, TExpressionSyntax value);
-        protected abstract TVariableDeclaratorSyntax GetDeclaratorSyntax(IVariableDeclaratorOperation declarator);
-        protected abstract TLocalDeclarationStatementSyntax AddSimplificationToType(TLocalDeclarationStatementSyntax updatedLocalDeclaration);
+        protected abstract TVariableDeclaratorSyntax WithInitializer(
+            TVariableDeclaratorSyntax variable,
+            TExpressionSyntax value
+        );
+        protected abstract TVariableDeclaratorSyntax GetDeclaratorSyntax(
+            IVariableDeclaratorOperation declarator
+        );
+        protected abstract TLocalDeclarationStatementSyntax AddSimplificationToType(
+            TLocalDeclarationStatementSyntax updatedLocalDeclaration
+        );
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.UseConditionalExpressionForAssignmentDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(
+                IDEDiagnosticIds.UseConditionalExpressionForAssignmentDiagnosticId
+            );
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             context.RegisterCodeFix(
                 new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics.First(), c)),
-                context.Diagnostics);
+                context.Diagnostics
+            );
             return Task.CompletedTask;
         }
 
@@ -56,74 +72,107 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         /// formatted specially.
         /// </summary>
         protected override async Task FixOneAsync(
-            Document document, Diagnostic diagnostic,
-            SyntaxEditor editor, CancellationToken cancellationToken)
-        {
+            Document document,
+            Diagnostic diagnostic,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        ) {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var ifStatement = diagnostic.AdditionalLocations[0].FindNode(cancellationToken);
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var ifOperation = (IConditionalOperation)semanticModel.GetOperation(ifStatement, cancellationToken)!;
+            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var ifOperation = (IConditionalOperation)semanticModel.GetOperation(
+                ifStatement,
+                cancellationToken
+            )!;
 
-            if (!UseConditionalExpressionForAssignmentHelpers.TryMatchPattern(
-                    syntaxFacts, ifOperation,
-                    out var trueStatement, out var falseStatement,
-                    out var trueAssignment, out var falseAssignment))
-            {
+            if (
+                !UseConditionalExpressionForAssignmentHelpers.TryMatchPattern(
+                    syntaxFacts,
+                    ifOperation,
+                    out var trueStatement,
+                    out var falseStatement,
+                    out var trueAssignment,
+                    out var falseAssignment
+                )
+            ) {
                 return;
             }
 
             var conditionalExpression = await CreateConditionalExpressionAsync(
-                document, ifOperation,
-                trueStatement, falseStatement,
-                trueAssignment?.Value ?? trueStatement,
-                falseAssignment?.Value ?? falseStatement,
-                trueAssignment?.IsRef == true, cancellationToken).ConfigureAwait(false);
+                    document,
+                    ifOperation,
+                    trueStatement,
+                    falseStatement,
+                    trueAssignment?.Value ?? trueStatement,
+                    falseAssignment?.Value ?? falseStatement,
+                    trueAssignment?.IsRef == true,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // See if we're assigning to a variable declared directly above the if statement. If so,
             // try to inline the conditional directly into the initializer for that variable.
-            if (TryConvertWhenAssignmentToLocalDeclaredImmediateAbove(
-                    syntaxFacts, editor, ifOperation,
-                    trueAssignment, falseAssignment, conditionalExpression))
-            {
+            if (
+                TryConvertWhenAssignmentToLocalDeclaredImmediateAbove(
+                    syntaxFacts,
+                    editor,
+                    ifOperation,
+                    trueAssignment,
+                    falseAssignment,
+                    conditionalExpression
+                )
+            ) {
                 return;
-
             }
 
             // If not, just replace the if-statement with a single assignment of the new
             // conditional.
             ConvertOnlyIfToConditionalExpression(
-                editor, ifOperation, (trueAssignment ?? falseAssignment)!, conditionalExpression);
+                editor,
+                ifOperation,
+                (trueAssignment ?? falseAssignment)!,
+                conditionalExpression
+            );
         }
 
         private void ConvertOnlyIfToConditionalExpression(
             SyntaxEditor editor,
             IConditionalOperation ifOperation,
             ISimpleAssignmentOperation assignment,
-            TExpressionSyntax conditionalExpression)
-        {
+            TExpressionSyntax conditionalExpression
+        ) {
             var generator = editor.Generator;
             var ifStatement = (TIfStatementSyntax)ifOperation.Syntax;
             var expressionStatement = (TStatementSyntax)generator.ExpressionStatement(
-                generator.AssignmentStatement(
-                    assignment.Target.Syntax,
-                    conditionalExpression)).WithTriviaFrom(ifStatement);
+                    generator.AssignmentStatement(assignment.Target.Syntax, conditionalExpression)
+                )
+                .WithTriviaFrom(ifStatement);
 
             editor.ReplaceNode(
                 ifOperation.Syntax,
-                WrapWithBlockIfAppropriate(ifStatement, expressionStatement));
+                WrapWithBlockIfAppropriate(ifStatement, expressionStatement)
+            );
         }
 
         private bool TryConvertWhenAssignmentToLocalDeclaredImmediateAbove(
-            ISyntaxFactsService syntaxFacts, SyntaxEditor editor, IConditionalOperation ifOperation,
+            ISyntaxFactsService syntaxFacts,
+            SyntaxEditor editor,
+            IConditionalOperation ifOperation,
             ISimpleAssignmentOperation? trueAssignment,
             ISimpleAssignmentOperation? falseAssignment,
-            TExpressionSyntax conditionalExpression)
-        {
-            if (!TryFindMatchingLocalDeclarationImmediatelyAbove(
-                    ifOperation, trueAssignment, falseAssignment,
-                    out var localDeclarationOperation, out var declarator))
-            {
+            TExpressionSyntax conditionalExpression
+        ) {
+            if (
+                !TryFindMatchingLocalDeclarationImmediatelyAbove(
+                    ifOperation,
+                    trueAssignment,
+                    falseAssignment,
+                    out var localDeclarationOperation,
+                    out var declarator
+                )
+            ) {
                 return false;
             }
 
@@ -139,10 +188,14 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             // appropriately so that can happen later down the line.
             var updatedLocalDeclaration = localDeclaration.ReplaceNode(variable, updatedVariable);
             updatedLocalDeclaration = AddSimplificationToType(
-                (TLocalDeclarationStatementSyntax)updatedLocalDeclaration);
+                (TLocalDeclarationStatementSyntax)updatedLocalDeclaration
+            );
 
             editor.ReplaceNode(localDeclaration, updatedLocalDeclaration);
-            editor.RemoveNode(ifOperation.Syntax, GetRemoveOptions(syntaxFacts, ifOperation.Syntax));
+            editor.RemoveNode(
+                ifOperation.Syntax,
+                GetRemoveOptions(syntaxFacts, ifOperation.Syntax)
+            );
             return true;
         }
 
@@ -151,8 +204,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             ISimpleAssignmentOperation? trueAssignment,
             ISimpleAssignmentOperation? falseAssignment,
             [NotNullWhen(true)] out IVariableDeclarationGroupOperation? localDeclaration,
-            [NotNullWhen(true)] out IVariableDeclaratorOperation? declarator)
-        {
+            [NotNullWhen(true)] out IVariableDeclaratorOperation? declarator
+        ) {
             localDeclaration = null;
             declarator = null;
 
@@ -193,7 +246,8 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                 return false;
             }
 
-            localDeclaration = parentBlock.Operations[ifIndex - 1] as IVariableDeclarationGroupOperation;
+            localDeclaration =
+                parentBlock.Operations[ifIndex - 1] as IVariableDeclarationGroupOperation;
             if (localDeclaration == null)
             {
                 return false;
@@ -230,8 +284,7 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
                 var unwrapped = UnwrapImplicitConversion(variableInitializer.Value);
                 // the variable has to either not have an initializer, or it needs to be basic
                 // literal/default expression.
-                if (!(unwrapped is ILiteralOperation) &&
-                    !(unwrapped is IDefaultValueOperation))
+                if (!(unwrapped is ILiteralOperation) && !(unwrapped is IDefaultValueOperation))
                 {
                     return false;
                 }
@@ -244,9 +297,10 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
 
         private bool ReferencesLocalVariable(IOperation operation, ILocalSymbol variable)
         {
-            if (operation is ILocalReferenceOperation localReference &&
-                Equals(variable, localReference.Local))
-            {
+            if (
+                operation is ILocalReferenceOperation localReference
+                && Equals(variable, localReference.Local)
+            ) {
                 return true;
             }
 
@@ -263,10 +317,13 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(AnalyzersResources.Convert_to_conditional_expression, createChangedDocument, IDEDiagnosticIds.UseConditionalExpressionForAssignmentDiagnosticId)
-            {
-            }
+            public MyCodeAction(
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(
+                AnalyzersResources.Convert_to_conditional_expression,
+                createChangedDocument,
+                IDEDiagnosticIds.UseConditionalExpressionForAssignmentDiagnosticId
+            ) { }
         }
     }
 }

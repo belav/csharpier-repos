@@ -20,8 +20,14 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
         private readonly int _sendDurationSeconds;
         private readonly HttpTransportType _transportType;
 
-        public Runner(Agent agent, string targetUrl, int numberOfWorkers, int numberOfConnections, int sendDurationInSeconds, HttpTransportType transportType)
-        {
+        public Runner(
+            Agent agent,
+            string targetUrl,
+            int numberOfWorkers,
+            int numberOfConnections,
+            int sendDurationInSeconds,
+            HttpTransportType transportType
+        ) {
             _agent = agent;
             _targetUrl = targetUrl;
             _numberOfWorkers = numberOfWorkers;
@@ -34,16 +40,23 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
         {
             _agent.Runner = this;
 
-            await _agent.StartWorkersAsync(_targetUrl, _numberOfWorkers, _transportType, _numberOfConnections);
+            await _agent.StartWorkersAsync(
+                _targetUrl,
+                _numberOfWorkers,
+                _transportType,
+                _numberOfConnections
+            );
 
             // Begin writing worker status information
             var writeStatusCts = new CancellationTokenSource();
             var writeStatusTask = WriteConnectionStatusAsync(writeStatusCts.Token);
 
             // Wait until all connections are connected
-            while (_agent.GetWorkerStatus().Aggregate(0, (state, status) => state + status.Value.ConnectedCount) <
-                _agent.TotalConnectionsRequested)
-            {
+            while (
+                _agent.GetWorkerStatus()
+                    .Aggregate(0, (state, status) => state + status.Value.ConnectedCount)
+                < _agent.TotalConnectionsRequested
+            ) {
                 await Task.Delay(1000);
             }
 
@@ -60,28 +73,30 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
 
         private Task WriteConnectionStatusAsync(CancellationToken cancellationToken)
         {
-            return Task.Run(async () =>
-            {
-                var peakConnections = 0;
-                while (!cancellationToken.IsCancellationRequested)
+            return Task.Run(
+                async () =>
                 {
-                    var statusDictionary = _agent.GetWorkerStatus();
-
-                    // Total things up
-                    var status = new StatusInformation();
-                    foreach (var value in statusDictionary.Values)
+                    var peakConnections = 0;
+                    while (!cancellationToken.IsCancellationRequested)
                     {
-                        status = status.Add(value);
+                        var statusDictionary = _agent.GetWorkerStatus();
+
+                        // Total things up
+                        var status = new StatusInformation();
+                        foreach (var value in statusDictionary.Values)
+                        {
+                            status = status.Add(value);
+                        }
+
+                        peakConnections = Math.Max(peakConnections, status.ConnectedCount);
+                        status.PeakConnections = peakConnections;
+
+                        Trace.WriteLine(JsonConvert.SerializeObject(status));
+
+                        await Task.Delay(1000);
                     }
-
-                    peakConnections = Math.Max(peakConnections, status.ConnectedCount);
-                    status.PeakConnections = peakConnections;
-
-                    Trace.WriteLine(JsonConvert.SerializeObject(status));
-
-                    await Task.Delay(1000);
                 }
-            });
+            );
         }
 
         public Task PongWorkerAsync(int workerId, int value)

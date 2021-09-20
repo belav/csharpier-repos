@@ -61,16 +61,22 @@ namespace Microsoft.CodeAnalysis
     {
         public readonly ICollection<TAssemblySymbol>? DependenciesBag;
 
-        protected BindingDiagnosticBag(DiagnosticBag? diagnosticBag, ICollection<TAssemblySymbol>? dependenciesBag)
-            : base(diagnosticBag)
+        protected BindingDiagnosticBag(
+            DiagnosticBag? diagnosticBag,
+            ICollection<TAssemblySymbol>? dependenciesBag
+        ) : base(diagnosticBag)
         {
             Debug.Assert(diagnosticBag?.GetType().IsValueType != true);
             DependenciesBag = dependenciesBag;
         }
 
         protected BindingDiagnosticBag(bool usePool)
-            : this(usePool ? DiagnosticBag.GetInstance() : new DiagnosticBag(), usePool ? PooledHashSet<TAssemblySymbol>.GetInstance() : new HashSet<TAssemblySymbol>())
-        { }
+            : this(
+                usePool ? DiagnosticBag.GetInstance() : new DiagnosticBag(),
+                usePool
+                  ? PooledHashSet<TAssemblySymbol>.GetInstance()
+                  : new HashSet<TAssemblySymbol>()
+            ) { }
 
         internal bool AccumulatesDependencies => DependenciesBag is object;
 
@@ -82,7 +88,10 @@ namespace Microsoft.CodeAnalysis
 
         internal ImmutableBindingDiagnostic<TAssemblySymbol> ToReadOnly()
         {
-            return new ImmutableBindingDiagnostic<TAssemblySymbol>(DiagnosticBag?.ToReadOnly() ?? default, DependenciesBag?.ToImmutableArray() ?? default);
+            return new ImmutableBindingDiagnostic<TAssemblySymbol>(
+                DiagnosticBag?.ToReadOnly() ?? default,
+                DependenciesBag?.ToImmutableArray() ?? default
+            );
         }
 
         internal ImmutableBindingDiagnostic<TAssemblySymbol> ToReadOnlyAndFree()
@@ -104,19 +113,32 @@ namespace Microsoft.CodeAnalysis
             DependenciesBag?.Clear();
         }
 
-        internal void AddRange(ImmutableBindingDiagnostic<TAssemblySymbol> other, bool allowMismatchInDependencyAccumulation = false)
-        {
+        internal void AddRange(
+            ImmutableBindingDiagnostic<TAssemblySymbol> other,
+            bool allowMismatchInDependencyAccumulation = false
+        ) {
             AddRange(other.Diagnostics);
-            Debug.Assert(allowMismatchInDependencyAccumulation || other.Dependencies.IsDefaultOrEmpty || this.AccumulatesDependencies || !this.AccumulatesDiagnostics);
+            Debug.Assert(
+                allowMismatchInDependencyAccumulation
+                    || other.Dependencies.IsDefaultOrEmpty
+                    || this.AccumulatesDependencies
+                    || !this.AccumulatesDiagnostics
+            );
             AddDependencies(other.Dependencies);
         }
 
-        internal void AddRange(BindingDiagnosticBag<TAssemblySymbol>? other, bool allowMismatchInDependencyAccumulation = false)
-        {
+        internal void AddRange(
+            BindingDiagnosticBag<TAssemblySymbol>? other,
+            bool allowMismatchInDependencyAccumulation = false
+        ) {
             if (other is object)
             {
                 AddRange(other.DiagnosticBag);
-                Debug.Assert(allowMismatchInDependencyAccumulation || !other.AccumulatesDependencies || this.AccumulatesDependencies);
+                Debug.Assert(
+                    allowMismatchInDependencyAccumulation
+                        || !other.AccumulatesDependencies
+                        || this.AccumulatesDependencies
+                );
                 AddDependencies(other.DependenciesBag);
             }
         }
@@ -181,9 +203,15 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        internal void AddDependencies(BindingDiagnosticBag<TAssemblySymbol> dependencies, bool allowMismatchInDependencyAccumulation = false)
-        {
-            Debug.Assert(allowMismatchInDependencyAccumulation || !dependencies.AccumulatesDependencies || this.AccumulatesDependencies);
+        internal void AddDependencies(
+            BindingDiagnosticBag<TAssemblySymbol> dependencies,
+            bool allowMismatchInDependencyAccumulation = false
+        ) {
+            Debug.Assert(
+                allowMismatchInDependencyAccumulation
+                    || !dependencies.AccumulatesDependencies
+                    || this.AccumulatesDependencies
+            );
             AddDependencies(dependencies.DependenciesBag);
         }
 
@@ -210,13 +238,17 @@ namespace Microsoft.CodeAnalysis
             return Add(node.Location, useSiteInfo);
         }
 
-        internal bool AddDiagnostics(SyntaxNode node, CompoundUseSiteInfo<TAssemblySymbol> useSiteInfo)
-        {
+        internal bool AddDiagnostics(
+            SyntaxNode node,
+            CompoundUseSiteInfo<TAssemblySymbol> useSiteInfo
+        ) {
             return AddDiagnostics(node.Location, useSiteInfo);
         }
 
-        internal bool AddDiagnostics(Location location, CompoundUseSiteInfo<TAssemblySymbol> useSiteInfo)
-        {
+        internal bool AddDiagnostics(
+            Location location,
+            CompoundUseSiteInfo<TAssemblySymbol> useSiteInfo
+        ) {
             if (DiagnosticBag is DiagnosticBag diagnosticBag)
             {
                 if (!useSiteInfo.Diagnostics.IsNullOrEmpty())
@@ -262,7 +294,11 @@ namespace Microsoft.CodeAnalysis
             return false;
         }
 
-        protected abstract bool ReportUseSiteDiagnostic(DiagnosticInfo diagnosticInfo, DiagnosticBag diagnosticBag, Location location);
+        protected abstract bool ReportUseSiteDiagnostic(
+            DiagnosticInfo diagnosticInfo,
+            DiagnosticBag diagnosticBag,
+            Location location
+        );
 
         internal bool Add(UseSiteInfo<TAssemblySymbol> useSiteInfo, SyntaxNode node)
         {
@@ -296,7 +332,8 @@ namespace Microsoft.CodeAnalysis
         }
     }
 
-    internal readonly struct ImmutableBindingDiagnostic<TAssemblySymbol> where TAssemblySymbol : class, IAssemblySymbolInternal
+    internal readonly struct ImmutableBindingDiagnostic<TAssemblySymbol>
+        where TAssemblySymbol : class, IAssemblySymbolInternal
     {
         private readonly ImmutableArray<Diagnostic> _diagnostics;
         private readonly ImmutableArray<TAssemblySymbol> _dependencies;
@@ -304,23 +341,32 @@ namespace Microsoft.CodeAnalysis
         public ImmutableArray<Diagnostic> Diagnostics => _diagnostics.NullToEmpty();
         public ImmutableArray<TAssemblySymbol> Dependencies => _dependencies.NullToEmpty();
 
-        public static ImmutableBindingDiagnostic<TAssemblySymbol> Empty => new ImmutableBindingDiagnostic<TAssemblySymbol>(default, default);
+        public static ImmutableBindingDiagnostic<TAssemblySymbol> Empty =>
+            new ImmutableBindingDiagnostic<TAssemblySymbol>(default, default);
 
-        public ImmutableBindingDiagnostic(ImmutableArray<Diagnostic> diagnostics, ImmutableArray<TAssemblySymbol> dependencies)
-        {
+        public ImmutableBindingDiagnostic(
+            ImmutableArray<Diagnostic> diagnostics,
+            ImmutableArray<TAssemblySymbol> dependencies
+        ) {
             _diagnostics = diagnostics.NullToEmpty();
             _dependencies = dependencies.NullToEmpty();
         }
 
-        public ImmutableBindingDiagnostic<TAssemblySymbol> NullToEmpty() => new ImmutableBindingDiagnostic<TAssemblySymbol>(Diagnostics, Dependencies);
+        public ImmutableBindingDiagnostic<TAssemblySymbol> NullToEmpty() =>
+            new ImmutableBindingDiagnostic<TAssemblySymbol>(Diagnostics, Dependencies);
 
-        public static bool operator ==(ImmutableBindingDiagnostic<TAssemblySymbol> first, ImmutableBindingDiagnostic<TAssemblySymbol> second)
-        {
-            return first.Diagnostics == second.Diagnostics && first.Dependencies == second.Dependencies;
+        public static bool operator ==(
+            ImmutableBindingDiagnostic<TAssemblySymbol> first,
+            ImmutableBindingDiagnostic<TAssemblySymbol> second
+        ) {
+            return first.Diagnostics == second.Diagnostics
+                && first.Dependencies == second.Dependencies;
         }
 
-        public static bool operator !=(ImmutableBindingDiagnostic<TAssemblySymbol> first, ImmutableBindingDiagnostic<TAssemblySymbol> second)
-        {
+        public static bool operator !=(
+            ImmutableBindingDiagnostic<TAssemblySymbol> first,
+            ImmutableBindingDiagnostic<TAssemblySymbol> second
+        ) {
             return !(first == second);
         }
 

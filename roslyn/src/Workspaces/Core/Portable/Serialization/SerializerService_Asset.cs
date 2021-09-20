@@ -19,8 +19,12 @@ namespace Microsoft.CodeAnalysis.Serialization
     /// </summary>
     internal partial class SerializerService
     {
-        public void SerializeSourceText(SerializableSourceText text, ObjectWriter writer, SolutionReplicationContext context, CancellationToken cancellationToken)
-        {
+        public void SerializeSourceText(
+            SerializableSourceText text,
+            ObjectWriter writer,
+            SolutionReplicationContext context,
+            CancellationToken cancellationToken
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
             if (text.Storage is not null)
             {
@@ -45,8 +49,10 @@ namespace Microsoft.CodeAnalysis.Serialization
             }
         }
 
-        private SerializableSourceText DeserializeSerializableSourceText(ObjectReader reader, CancellationToken cancellationToken)
-        {
+        private SerializableSourceText DeserializeSerializableSourceText(
+            ObjectReader reader,
+            CancellationToken cancellationToken
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
 
             var checksumAlgorithm = (SourceHashAlgorithm)reader.ReadInt32();
@@ -61,7 +67,14 @@ namespace Microsoft.CodeAnalysis.Serialization
                 var offset = reader.ReadInt64();
                 var size = reader.ReadInt64();
 
-                var storage = storage2.AttachTemporaryTextStorage(name, offset, size, checksumAlgorithm, encoding, cancellationToken);
+                var storage = storage2.AttachTemporaryTextStorage(
+                    name,
+                    offset,
+                    size,
+                    checksumAlgorithm,
+                    encoding,
+                    cancellationToken
+                );
                 if (storage is ITemporaryTextStorageWithName storageWithName)
                 {
                     return new SerializableSourceText(storageWithName);
@@ -73,17 +86,28 @@ namespace Microsoft.CodeAnalysis.Serialization
             }
 
             Contract.ThrowIfFalse(kind == SerializationKinds.Bits);
-            return new SerializableSourceText(SourceTextExtensions.ReadFrom(_textService, reader, encoding, cancellationToken));
+            return new SerializableSourceText(
+                SourceTextExtensions.ReadFrom(_textService, reader, encoding, cancellationToken)
+            );
         }
 
-        private SourceText DeserializeSourceText(ObjectReader reader, CancellationToken cancellationToken)
-        {
-            var serializableSourceText = DeserializeSerializableSourceText(reader, cancellationToken);
-            return serializableSourceText.Text ?? serializableSourceText.Storage!.ReadText(cancellationToken);
+        private SourceText DeserializeSourceText(
+            ObjectReader reader,
+            CancellationToken cancellationToken
+        ) {
+            var serializableSourceText = DeserializeSerializableSourceText(
+                reader,
+                cancellationToken
+            );
+            return serializableSourceText.Text
+                ?? serializableSourceText.Storage!.ReadText(cancellationToken);
         }
 
-        public void SerializeCompilationOptions(CompilationOptions options, ObjectWriter writer, CancellationToken cancellationToken)
-        {
+        public void SerializeCompilationOptions(
+            CompilationOptions options,
+            ObjectWriter writer,
+            CancellationToken cancellationToken
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
 
             var language = options.Language;
@@ -95,8 +119,10 @@ namespace Microsoft.CodeAnalysis.Serialization
             service.WriteTo(options, writer, cancellationToken);
         }
 
-        private CompilationOptions DeserializeCompilationOptions(ObjectReader reader, CancellationToken cancellationToken)
-        {
+        private CompilationOptions DeserializeCompilationOptions(
+            ObjectReader reader,
+            CancellationToken cancellationToken
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
 
             var language = reader.ReadString();
@@ -116,8 +142,10 @@ namespace Microsoft.CodeAnalysis.Serialization
             service.WriteTo(options, writer);
         }
 
-        private ParseOptions DeserializeParseOptions(ObjectReader reader, CancellationToken cancellationToken)
-        {
+        private ParseOptions DeserializeParseOptions(
+            ObjectReader reader,
+            CancellationToken cancellationToken
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
 
             var language = reader.ReadString();
@@ -126,8 +154,11 @@ namespace Microsoft.CodeAnalysis.Serialization
             return service.ReadParseOptionsFrom(reader, cancellationToken);
         }
 
-        public void SerializeProjectReference(ProjectReference reference, ObjectWriter writer, CancellationToken cancellationToken)
-        {
+        public void SerializeProjectReference(
+            ProjectReference reference,
+            ObjectWriter writer,
+            CancellationToken cancellationToken
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
 
             reference.ProjectId.WriteTo(writer);
@@ -135,37 +166,54 @@ namespace Microsoft.CodeAnalysis.Serialization
             writer.WriteBoolean(reference.EmbedInteropTypes);
         }
 
-        private static ProjectReference DeserializeProjectReference(ObjectReader reader, CancellationToken cancellationToken)
-        {
+        private static ProjectReference DeserializeProjectReference(
+            ObjectReader reader,
+            CancellationToken cancellationToken
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
 
             var projectId = ProjectId.ReadFrom(reader);
             var aliases = reader.ReadArray<string>();
             var embedInteropTypes = reader.ReadBoolean();
 
-            return new ProjectReference(projectId, aliases.ToImmutableArrayOrEmpty(), embedInteropTypes);
+            return new ProjectReference(
+                projectId,
+                aliases.ToImmutableArrayOrEmpty(),
+                embedInteropTypes
+            );
         }
 
-        public void SerializeMetadataReference(MetadataReference reference, ObjectWriter writer, SolutionReplicationContext context, CancellationToken cancellationToken)
-        {
+        public void SerializeMetadataReference(
+            MetadataReference reference,
+            ObjectWriter writer,
+            SolutionReplicationContext context,
+            CancellationToken cancellationToken
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
             WriteMetadataReferenceTo(reference, writer, context, cancellationToken);
         }
 
-        private MetadataReference DeserializeMetadataReference(ObjectReader reader, CancellationToken cancellationToken)
-        {
+        private MetadataReference DeserializeMetadataReference(
+            ObjectReader reader,
+            CancellationToken cancellationToken
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
             return ReadMetadataReferenceFrom(reader, cancellationToken);
         }
 
-        public void SerializeAnalyzerReference(AnalyzerReference reference, ObjectWriter writer, CancellationToken cancellationToken)
-        {
+        public void SerializeAnalyzerReference(
+            AnalyzerReference reference,
+            ObjectWriter writer,
+            CancellationToken cancellationToken
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
             WriteTo(reference, writer, cancellationToken);
         }
 
-        private AnalyzerReference DeserializeAnalyzerReference(ObjectReader reader, CancellationToken cancellationToken)
-        {
+        private AnalyzerReference DeserializeAnalyzerReference(
+            ObjectReader reader,
+            CancellationToken cancellationToken
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
             return ReadAnalyzerReferenceFrom(reader, cancellationToken);
         }

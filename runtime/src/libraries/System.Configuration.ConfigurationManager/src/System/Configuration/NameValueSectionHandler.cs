@@ -23,8 +23,12 @@ namespace System.Configuration
             return CreateStatic(parent, section, DefaultKeyAttribute, DefaultValueAttribute);
         }
 
-        internal static object CreateStatic(object parent, XmlNode section, string keyAttriuteName, string valueAttributeName)
-        {
+        internal static object CreateStatic(
+            object parent,
+            XmlNode section,
+            string keyAttriuteName,
+            string valueAttributeName
+        ) {
             ReadOnlyNameValueCollection result;
 
             // start result off as a shallow clone of the parent
@@ -43,7 +47,6 @@ namespace System.Configuration
 
             foreach (XmlNode child in section.ChildNodes)
             {
-
                 // skip whitespace and comments
                 if (HandlerBase.IsIgnorableAlsoCheckForNonElement(child))
                     continue;
@@ -52,7 +55,11 @@ namespace System.Configuration
                 if (child.Name == "add")
                 {
                     string key = HandlerBase.RemoveRequiredAttribute(child, keyAttriuteName);
-                    string value = HandlerBase.RemoveRequiredAttribute(child, valueAttributeName, true/*allowEmptyString*/);
+                    string value = HandlerBase.RemoveRequiredAttribute(
+                        child,
+                        valueAttributeName,
+                        true /*allowEmptyString*/
+                    );
                     HandlerBase.CheckForUnrecognizedAttributes(child);
 
                     result[key] = value;
@@ -96,5 +103,4 @@ namespace System.Configuration
             get { return DefaultValueAttribute; }
         }
     }
-
 }

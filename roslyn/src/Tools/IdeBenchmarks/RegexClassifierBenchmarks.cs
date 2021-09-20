@@ -22,7 +22,8 @@ namespace IdeBenchmarks
 {
     public class RegexClassifierBenchmarks
     {
-        private readonly UseExportProviderAttribute _useExportProviderAttribute = new UseExportProviderAttribute();
+        private readonly UseExportProviderAttribute _useExportProviderAttribute =
+            new UseExportProviderAttribute();
 
         [Params(0, 1000, 10000)]
         public int StringLength { get; set; }
@@ -31,25 +32,39 @@ namespace IdeBenchmarks
         public char RepeatElement { get; set; }
 
         [IterationSetup]
-        public void IterationSetup()
-            => _useExportProviderAttribute.Before(null);
+        public void IterationSetup() => _useExportProviderAttribute.Before(null);
 
         [IterationCleanup]
-        public void IterationCleanup()
-            => _useExportProviderAttribute.After(null);
+        public void IterationCleanup() => _useExportProviderAttribute.After(null);
 
         [Benchmark(Baseline = true, Description = "String literal")]
         public object TestStringLiteral()
         {
-            var code = CreateTestInput(isRegularExpression: false, element: RepeatElement, length: StringLength);
-            return GetClassificationSpansAsync(code, new TextSpan(0, code.Length), parseOptions: null).Result;
+            var code = CreateTestInput(
+                isRegularExpression: false,
+                element: RepeatElement,
+                length: StringLength
+            );
+            return GetClassificationSpansAsync(
+                code,
+                new TextSpan(0, code.Length),
+                parseOptions: null
+            ).Result;
         }
 
         [Benchmark(Description = "Regular expression")]
         public object TestEmptyRegexStringLiteral()
         {
-            var code = CreateTestInput(isRegularExpression: true, element: RepeatElement, length: StringLength);
-            return GetClassificationSpansAsync(code, new TextSpan(0, code.Length), parseOptions: null).Result;
+            var code = CreateTestInput(
+                isRegularExpression: true,
+                element: RepeatElement,
+                length: StringLength
+            );
+            return GetClassificationSpansAsync(
+                code,
+                new TextSpan(0, code.Length),
+                parseOptions: null
+            ).Result;
         }
 
         private static string CreateTestInput(bool isRegularExpression, char element, int length)
@@ -59,37 +74,52 @@ class Program
 {
     void Method()
     {
-        // " + (isRegularExpression ? "l" : "x") + @"anguage=regex
-        _ = """ + new string(element, element == '\\' ? 2 * length : length) + @""";
+        // "
+                + (isRegularExpression ? "l" : "x")
+                + @"anguage=regex
+        _ = """
+                + new string(element, element == '\\' ? 2 * length : length)
+                + @""";
     }
 }
 ";
         }
 
-        protected Task<ImmutableArray<ClassifiedSpan>> GetClassificationSpansAsync(string code, TextSpan span, ParseOptions parseOptions)
-        {
+        protected Task<ImmutableArray<ClassifiedSpan>> GetClassificationSpansAsync(
+            string code,
+            TextSpan span,
+            ParseOptions parseOptions
+        ) {
             using (var workspace = TestWorkspace.CreateCSharp(code, parseOptions))
             {
-                var document = workspace.CurrentSolution.GetDocument(workspace.Documents.First().Id);
+                var document = workspace.CurrentSolution.GetDocument(
+                    workspace.Documents.First().Id
+                );
                 return GetSemanticClassificationsAsync(document, span);
             }
         }
 
-        protected static async Task<ImmutableArray<ClassifiedSpan>> GetSemanticClassificationsAsync(Document document, TextSpan span)
-        {
+        protected static async Task<ImmutableArray<ClassifiedSpan>> GetSemanticClassificationsAsync(
+            Document document,
+            TextSpan span
+        ) {
             var tree = await document.GetSyntaxTreeAsync();
 
             var service = document.GetLanguageService<ISyntaxClassificationService>();
             var classifiers = service.GetDefaultSyntaxClassifiers();
-            var extensionManager = document.Project.Solution.Workspace.Services.GetService<IExtensionManager>();
+            var extensionManager =
+                document.Project.Solution.Workspace.Services.GetService<IExtensionManager>();
 
             var results = ArrayBuilder<ClassifiedSpan>.GetInstance();
 
-            await service.AddSemanticClassificationsAsync(document, span,
+            await service.AddSemanticClassificationsAsync(
+                document,
+                span,
                 extensionManager.CreateNodeExtensionGetter(classifiers, c => c.SyntaxNodeTypes),
                 extensionManager.CreateTokenExtensionGetter(classifiers, c => c.SyntaxTokenKinds),
                 results,
-                CancellationToken.None);
+                CancellationToken.None
+            );
 
             return results.ToImmutableAndFree();
         }

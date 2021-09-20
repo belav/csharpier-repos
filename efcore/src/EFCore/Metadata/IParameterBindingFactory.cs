@@ -25,9 +25,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="parameterType"> The parameter type. </param>
         /// <param name="parameterName"> The parameter name. </param>
         /// <returns> <see langword="true" /> if this parameter can be bound; <see langword="false" /> otherwise. </returns>
-        bool CanBind(
-            Type parameterType,
-            string parameterName);
+        bool CanBind(Type parameterType, string parameterName);
 
         /// <summary>
         ///     Creates a <see cref="ParameterBinding" /> for the given type and name on the given entity type.
@@ -39,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ParameterBinding Bind(
             IReadOnlyEntityType entityType,
             Type parameterType,
-            string parameterName);
+            string parameterName
+        );
 
         /// <summary>
         ///     Creates a <see cref="ParameterBinding" /> for the given type and name on the given entity type.
@@ -51,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ParameterBinding Bind(
             IMutableEntityType entityType,
             Type parameterType,
-            string parameterName);
+            string parameterName
+        );
 
         /// <summary>
         ///     Creates a <see cref="ParameterBinding" /> for the given type and name on the given entity type.
@@ -63,6 +63,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ParameterBinding Bind(
             IConventionEntityType entityType,
             Type parameterType,
-            string parameterName);
+            string parameterName
+        );
     }
 }

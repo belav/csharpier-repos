@@ -22,8 +22,7 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
 
         public CalleeSavedRegister() { }
 
-        public CalleeSavedRegister(int codeOffset, CalleeSavedRegisters reg)
-            : base(codeOffset)
+        public CalleeSavedRegister(int codeOffset, CalleeSavedRegisters reg) : base(codeOffset)
         {
             Register = reg;
         }
@@ -40,8 +39,7 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
 
         public IPtrMask() { }
 
-        public IPtrMask(int codeOffset, uint imask)
-            : base(codeOffset)
+        public IPtrMask(int codeOffset, uint imask) : base(codeOffset)
         {
             IMask = imask;
         }
@@ -62,8 +60,14 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
 
         public GcTransitionRegister() { }
 
-        public GcTransitionRegister(int codeOffset, Registers reg, Action isLive, bool isThis = false, bool iptr = false, int pushCountOrPopSize = -1)
-            : base(codeOffset)
+        public GcTransitionRegister(
+            int codeOffset,
+            Registers reg,
+            Action isLive,
+            bool isThis = false,
+            bool iptr = false,
+            int pushCountOrPopSize = -1
+        ) : base(codeOffset)
         {
             Register = reg;
             IsLive = isLive;
@@ -110,8 +114,16 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
 
         public GcTransitionPointer() { }
 
-        public GcTransitionPointer(int codeOffset, uint argOffs, uint argCnt, Action act, bool isEbpFrame, bool isThis = false, bool iptr = false, bool isPtr = true)
-            : base(codeOffset)
+        public GcTransitionPointer(
+            int codeOffset,
+            uint argOffs,
+            uint argCnt,
+            Action act,
+            bool isEbpFrame,
+            bool isThis = false,
+            bool iptr = false,
+            bool isPtr = true
+        ) : base(codeOffset)
         {
             _isEbpFrame = isEbpFrame;
             CodeOffset = codeOffset;
@@ -200,8 +212,7 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
 
         public GcTransitionCall() { }
 
-        public GcTransitionCall(int codeOffset)
-            : base(codeOffset)
+        public GcTransitionCall(int codeOffset) : base(codeOffset)
         {
             CallRegisters = new List<CallRegister>();
             PtrArgs = new List<PtrArg>();
@@ -209,8 +220,12 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
             IArgs = 0;
         }
 
-        public GcTransitionCall(int codeOffset, bool isEbpFrame, uint regMask, uint byRefRegMask)
-            : base(codeOffset)
+        public GcTransitionCall(
+            int codeOffset,
+            bool isEbpFrame,
+            uint regMask,
+            uint byRefRegMask
+        ) : base(codeOffset)
         {
             CallRegisters = new List<CallRegister>();
             PtrArgs = new List<PtrArg>();

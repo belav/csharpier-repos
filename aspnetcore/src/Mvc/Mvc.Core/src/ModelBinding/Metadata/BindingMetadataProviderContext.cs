@@ -18,9 +18,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         /// </summary>
         /// <param name="key">The <see cref="ModelMetadataIdentity"/> for the <see cref="ModelMetadata"/>.</param>
         /// <param name="attributes">The attributes for the <see cref="ModelMetadata"/>.</param>
-        public BindingMetadataProviderContext(
-            ModelMetadataIdentity key,
-            ModelAttributes attributes)
+        public BindingMetadataProviderContext(ModelMetadataIdentity key, ModelAttributes attributes)
         {
             if (attributes == null)
             {

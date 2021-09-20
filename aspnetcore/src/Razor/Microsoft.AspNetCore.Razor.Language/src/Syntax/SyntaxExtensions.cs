@@ -9,7 +9,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
     {
         protected override string GetDebuggerDisplay()
         {
-            return string.Format(CultureInfo.InvariantCulture, "{0} [{1}]", base.GetDebuggerDisplay(), this.GetContent());
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "{0} [{1}]",
+                base.GetDebuggerDisplay(),
+                this.GetContent()
+            );
         }
     }
 
@@ -17,7 +22,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
     {
         protected override string GetDebuggerDisplay()
         {
-            return string.Format(CultureInfo.InvariantCulture, "{0} [{1}]", base.GetDebuggerDisplay(), this.GetContent());
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "{0} [{1}]",
+                base.GetDebuggerDisplay(),
+                this.GetContent()
+            );
         }
     }
 
@@ -25,7 +35,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
     {
         protected override string GetDebuggerDisplay()
         {
-            return string.Format(CultureInfo.InvariantCulture, "{0} [{1}]", base.GetDebuggerDisplay(), this.GetContent());
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "{0} [{1}]",
+                base.GetDebuggerDisplay(),
+                this.GetContent()
+            );
         }
     }
 
@@ -33,7 +48,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
     {
         protected override string GetDebuggerDisplay()
         {
-            return string.Format(CultureInfo.InvariantCulture, "{0} [{1}]", base.GetDebuggerDisplay(), this.GetContent());
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "{0} [{1}]",
+                base.GetDebuggerDisplay(),
+                this.GetContent()
+            );
         }
     }
 
@@ -41,7 +61,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
     {
         protected override string GetDebuggerDisplay()
         {
-            return string.Format(CultureInfo.InvariantCulture, "{0} [{1}]", base.GetDebuggerDisplay(), this.GetContent());
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "{0} [{1}]",
+                base.GetDebuggerDisplay(),
+                this.GetContent()
+            );
         }
     }
 
@@ -49,7 +74,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
     {
         protected override string GetDebuggerDisplay()
         {
-            return string.Format(CultureInfo.InvariantCulture, "{0} [{1}]", base.GetDebuggerDisplay(), this.GetContent());
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "{0} [{1}]",
+                base.GetDebuggerDisplay(),
+                this.GetContent()
+            );
         }
     }
 }

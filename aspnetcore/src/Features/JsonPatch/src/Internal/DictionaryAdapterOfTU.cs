@@ -19,9 +19,11 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             string segment,
             IContractResolver contractResolver,
             object value,
-            out string errorMessage)
-        {
-            var contract = (JsonDictionaryContract)contractResolver.ResolveContract(target.GetType());
+            out string errorMessage
+        ) {
+            var contract = (JsonDictionaryContract)contractResolver.ResolveContract(
+                target.GetType()
+            );
             var key = contract.DictionaryKeyResolver(segment);
             var dictionary = (IDictionary<TKey, TValue>)target;
 
@@ -46,9 +48,11 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             string segment,
             IContractResolver contractResolver,
             out object value,
-            out string errorMessage)
-        {
-            var contract = (JsonDictionaryContract)contractResolver.ResolveContract(target.GetType());
+            out string errorMessage
+        ) {
+            var contract = (JsonDictionaryContract)contractResolver.ResolveContract(
+                target.GetType()
+            );
             var key = contract.DictionaryKeyResolver(segment);
             var dictionary = (IDictionary<TKey, TValue>)target;
 
@@ -74,9 +78,11 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             object target,
             string segment,
             IContractResolver contractResolver,
-            out string errorMessage)
-        {
-            var contract = (JsonDictionaryContract)contractResolver.ResolveContract(target.GetType());
+            out string errorMessage
+        ) {
+            var contract = (JsonDictionaryContract)contractResolver.ResolveContract(
+                target.GetType()
+            );
             var key = contract.DictionaryKeyResolver(segment);
             var dictionary = (IDictionary<TKey, TValue>)target;
 
@@ -101,9 +107,11 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             string segment,
             IContractResolver contractResolver,
             object value,
-            out string errorMessage)
-        {
-            var contract = (JsonDictionaryContract)contractResolver.ResolveContract(target.GetType());
+            out string errorMessage
+        ) {
+            var contract = (JsonDictionaryContract)contractResolver.ResolveContract(
+                target.GetType()
+            );
             var key = contract.DictionaryKeyResolver(segment);
             var dictionary = (IDictionary<TKey, TValue>)target;
 
@@ -135,9 +143,11 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             string segment,
             IContractResolver contractResolver,
             object value,
-            out string errorMessage)
-        {
-            var contract = (JsonDictionaryContract)contractResolver.ResolveContract(target.GetType());
+            out string errorMessage
+        ) {
+            var contract = (JsonDictionaryContract)contractResolver.ResolveContract(
+                target.GetType()
+            );
             var key = contract.DictionaryKeyResolver(segment);
             var dictionary = (IDictionary<TKey, TValue>)target;
 
@@ -167,9 +177,17 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                 return false;
             }
 
-            if (!JToken.DeepEquals(JsonConvert.SerializeObject(currentValue), JsonConvert.SerializeObject(convertedValue)))
-            {
-                errorMessage = Resources.FormatValueNotEqualToTestValue(currentValue, value, segment);
+            if (
+                !JToken.DeepEquals(
+                    JsonConvert.SerializeObject(currentValue),
+                    JsonConvert.SerializeObject(convertedValue)
+                )
+            ) {
+                errorMessage = Resources.FormatValueNotEqualToTestValue(
+                    currentValue,
+                    value,
+                    segment
+                );
                 return false;
             }
             else
@@ -184,9 +202,11 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             string segment,
             IContractResolver contractResolver,
             out object nextTarget,
-            out string errorMessage)
-        {
-            var contract = (JsonDictionaryContract)contractResolver.ResolveContract(target.GetType());
+            out string errorMessage
+        ) {
+            var contract = (JsonDictionaryContract)contractResolver.ResolveContract(
+                target.GetType()
+            );
             var key = contract.DictionaryKeyResolver(segment);
             var dictionary = (IDictionary<TKey, TValue>)target;
 
@@ -210,8 +230,11 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             }
         }
 
-        protected virtual bool TryConvertKey(string key, out TKey convertedKey, out string errorMessage)
-        {
+        protected virtual bool TryConvertKey(
+            string key,
+            out TKey convertedKey,
+            out string errorMessage
+        ) {
             var conversionResult = ConversionResultProvider.ConvertTo(key, typeof(TKey));
             if (conversionResult.CanBeConverted)
             {
@@ -227,8 +250,11 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             }
         }
 
-        protected virtual bool TryConvertValue(object value, out TValue convertedValue, out string errorMessage)
-        {
+        protected virtual bool TryConvertValue(
+            object value,
+            out TValue convertedValue,
+            out string errorMessage
+        ) {
             var conversionResult = ConversionResultProvider.ConvertTo(value, typeof(TValue));
             if (conversionResult.CanBeConverted)
             {

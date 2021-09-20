@@ -11,6 +11,5 @@ namespace System.Speech.Recognition
         SubsequenceContentRequired,
         OrderedSubsetContentRequired
     }
-
     #endregion
 }

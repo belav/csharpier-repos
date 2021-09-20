@@ -30,7 +30,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                 {
                     if (c.IsVisible || ((c as ColumnState2)?.GroupingPriority > 0))
                     {
-                        var definition = control.ColumnDefinitionManager.GetColumnDefinition(c.Name);
+                        var definition = control.ColumnDefinitionManager.GetColumnDefinition(
+                            c.Name
+                        );
                         if (definition != null)
                         {
                             newVisibleColumns.Add(definition);
@@ -60,8 +62,13 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                         continue;
                     }
 
-                    if (!AtLeastOneColumnOrDetailsContentMatches(entry, searchToken, cachedColumnValues))
-                    {
+                    if (
+                        !AtLeastOneColumnOrDetailsContentMatches(
+                            entry,
+                            searchToken,
+                            cachedColumnValues
+                        )
+                    ) {
                         return false;
                     }
                 }
@@ -69,8 +76,11 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                 return true;
             }
 
-            private bool AtLeastOneColumnOrDetailsContentMatches(ITableEntryHandle entry, IVsSearchToken searchToken, string[] cachedColumnValues)
-            {
+            private bool AtLeastOneColumnOrDetailsContentMatches(
+                ITableEntryHandle entry,
+                IVsSearchToken searchToken,
+                string[] cachedColumnValues
+            ) {
                 // Check details content for any matches
                 if (cachedColumnValues[0] == null)
                 {
@@ -94,7 +104,10 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                 {
                     if (cachedColumnValues[i + 1] == null)
                     {
-                        cachedColumnValues[i + 1] = GetColumnValueAsString(entry, _visibleColumns[i]);
+                        cachedColumnValues[i + 1] = GetColumnValueAsString(
+                            entry,
+                            _visibleColumns[i]
+                        );
                     }
 
                     var columnValue = cachedColumnValues[i + 1];
@@ -110,8 +123,18 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                 return false;
             }
 
-            private static string GetColumnValueAsString(ITableEntryHandle entry, ITableColumnDefinition column)
-                => (entry.TryCreateStringContent(column, truncatedText: false, singleColumnView: false, content: out var columnValue) && columnValue is not null)
+            private static string GetColumnValueAsString(
+                ITableEntryHandle entry,
+                ITableColumnDefinition column
+            ) =>
+                (
+                    entry.TryCreateStringContent(
+                        column,
+                        truncatedText: false,
+                        singleColumnView: false,
+                        content: out var columnValue
+                    ) && columnValue is not null
+                )
                     ? columnValue
                     : string.Empty;
 
@@ -130,8 +153,14 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                 return detailsString ?? string.Empty;
             }
 
-            private static bool Match(string columnValue, IVsSearchToken searchToken)
-                => (columnValue is not null) && (columnValue.IndexOf(searchToken.ParsedTokenText, StringComparison.OrdinalIgnoreCase) >= 0);
+            private static bool Match(string columnValue, IVsSearchToken searchToken) =>
+                (columnValue is not null)
+                && (
+                    columnValue.IndexOf(
+                        searchToken.ParsedTokenText,
+                        StringComparison.OrdinalIgnoreCase
+                    ) >= 0
+                );
         }
     }
 }

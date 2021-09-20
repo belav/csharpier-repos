@@ -319,7 +319,10 @@ namespace System.CodeDom.Tests
         public void Ctor_NullWriter_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>("writer", () => new IndentedTextWriter(null));
-            Assert.Throws<ArgumentNullException>("writer", () => new IndentedTextWriter(null, "TabString"));
+            Assert.Throws<ArgumentNullException>(
+                "writer",
+                () => new IndentedTextWriter(null, "TabString")
+            );
         }
 
         [Theory]
@@ -346,10 +349,16 @@ namespace System.CodeDom.Tests
 
             string expectedTab = string.Concat(Enumerable.Repeat(TabString, itw.Indent));
             Assert.Equal(
-                "first" + Environment.NewLine +
-                expectedTab + "second" + Environment.NewLine +
-                expectedTab + "third" + Environment.NewLine,
-                sb.ToString());
+                "first"
+                    + Environment.NewLine
+                    + expectedTab
+                    + "second"
+                    + Environment.NewLine
+                    + expectedTab
+                    + "third"
+                    + Environment.NewLine,
+                sb.ToString()
+            );
         }
 
         [Theory]
@@ -361,8 +370,12 @@ namespace System.CodeDom.Tests
         {
             var sb = new StringBuilder();
             var sw = new StringWriter(sb);
-            using (var itw = tabString == null ? new IndentedTextWriter(sw) : new IndentedTextWriter(sw, tabString))
-            {
+            using (
+                var itw =
+                    tabString == null
+                        ? new IndentedTextWriter(sw)
+                        : new IndentedTextWriter(sw, tabString)
+            ) {
                 itw.Indent = 1;
                 if (tabString == null)
                 {
@@ -373,7 +386,10 @@ namespace System.CodeDom.Tests
                 itw.WriteLine("Should be indented");
                 itw.Flush();
 
-                Assert.Equal(itw.NewLine + tabString + "Should be indented" + itw.NewLine, sb.ToString());
+                Assert.Equal(
+                    itw.NewLine + tabString + "Should be indented" + itw.NewLine,
+                    sb.ToString()
+                );
                 itw.Close();
             }
         }
@@ -440,30 +456,54 @@ namespace System.CodeDom.Tests
             itw.WriteLineNoTabs("notabs");
 
             Assert.Equal(
-                "" + newline +
-                "tTrueabcde45.66.789101112131415 1615 16 1715 16 17 18True" + newline +
-                "ta" + newline +
-                "tbc" + newline +
-                "tde" + newline +
-                "t4" + newline +
-                "t5.6" + newline +
-                "t6.7" + newline +
-                "t8" + newline +
-                "t9" + newline +
-                "t10" + newline +
-                "t11" + newline +
-                "t12" + newline +
-                "t13" + newline +
-                "t14" + newline +
-                "t15 16" + newline +
-                "t15 16 17" + newline +
-                "t15 16 17 18" + newline +
-                "tabcde1a" + newline +
-                "tbc" + newline +
-                "tde" + newline +
-                "t1" + newline +
-                "notabs" + newline,
-                sb.ToString());
+                ""
+                    + newline
+                    + "tTrueabcde45.66.789101112131415 1615 16 1715 16 17 18True"
+                    + newline
+                    + "ta"
+                    + newline
+                    + "tbc"
+                    + newline
+                    + "tde"
+                    + newline
+                    + "t4"
+                    + newline
+                    + "t5.6"
+                    + newline
+                    + "t6.7"
+                    + newline
+                    + "t8"
+                    + newline
+                    + "t9"
+                    + newline
+                    + "t10"
+                    + newline
+                    + "t11"
+                    + newline
+                    + "t12"
+                    + newline
+                    + "t13"
+                    + newline
+                    + "t14"
+                    + newline
+                    + "t15 16"
+                    + newline
+                    + "t15 16 17"
+                    + newline
+                    + "t15 16 17 18"
+                    + newline
+                    + "tabcde1a"
+                    + newline
+                    + "tbc"
+                    + newline
+                    + "tde"
+                    + newline
+                    + "t1"
+                    + newline
+                    + "notabs"
+                    + newline,
+                sb.ToString()
+            );
         }
 
         public static IEnumerable<object[]> Write_MemberData
@@ -477,21 +517,51 @@ namespace System.CodeDom.Tests
 
                 yield return CreateParameters(x => x.Write(true), true.ToString());
                 yield return CreateParameters(x => x.Write('c'), "c");
-                yield return CreateParameters(x => x.Write("Hello World".ToCharArray()), "Hello World");
-                yield return CreateParameters(x => x.Write(1.234m), (1.234m).ToString(CultureInfo.InvariantCulture));
-                yield return CreateParameters(x => x.Write(12345.0), (12345.0).ToString(CultureInfo.InvariantCulture));
-                yield return CreateParameters(x => x.Write(12345.0f), (12345.0f).ToString(CultureInfo.InvariantCulture));
+                yield return CreateParameters(
+                    x => x.Write("Hello World".ToCharArray()),
+                    "Hello World"
+                );
+                yield return CreateParameters(
+                    x => x.Write(1.234m),
+                    (1.234m).ToString(CultureInfo.InvariantCulture)
+                );
+                yield return CreateParameters(
+                    x => x.Write(12345.0),
+                    (12345.0).ToString(CultureInfo.InvariantCulture)
+                );
+                yield return CreateParameters(
+                    x => x.Write(12345.0f),
+                    (12345.0f).ToString(CultureInfo.InvariantCulture)
+                );
                 yield return CreateParameters(x => x.Write(12345), (12345).ToString());
                 yield return CreateParameters(x => x.Write(1234567890L), (1234567890L).ToString());
                 yield return CreateParameters(x => x.Write(new object()), new object().ToString());
                 yield return CreateParameters(x => x.Write("Hello World"), "Hello World");
                 yield return CreateParameters(x => x.Write(0xDEADBEEF), (0xDEADBEEF).ToString());
-                yield return CreateParameters(x => x.Write(0xDEADBEEFBAADF00DUL), (0xDEADBEEFBAADF00DUL).ToString());
-                yield return CreateParameters(x => x.Write("Hello {0} World", "Digital"), "Hello Digital World");
-                yield return CreateParameters(x => x.Write("Hello {0} World{1}", "Digital", "!!"), "Hello Digital World!!");
-                yield return CreateParameters(x => x.Write("Hello {0} {1} World{2}", "Dot", "NET", "!!"), "Hello Dot NET World!!");
-                yield return CreateParameters(x => x.Write("Hello {0} {1} {2} World{3}", "Digital", "Dot", "NET", "!!"), "Hello Digital Dot NET World!!");
-                yield return CreateParameters(x => x.Write("Hello World".ToCharArray(), 6, 5), "World");
+                yield return CreateParameters(
+                    x => x.Write(0xDEADBEEFBAADF00DUL),
+                    (0xDEADBEEFBAADF00DUL).ToString()
+                );
+                yield return CreateParameters(
+                    x => x.Write("Hello {0} World", "Digital"),
+                    "Hello Digital World"
+                );
+                yield return CreateParameters(
+                    x => x.Write("Hello {0} World{1}", "Digital", "!!"),
+                    "Hello Digital World!!"
+                );
+                yield return CreateParameters(
+                    x => x.Write("Hello {0} {1} World{2}", "Dot", "NET", "!!"),
+                    "Hello Dot NET World!!"
+                );
+                yield return CreateParameters(
+                    x => x.Write("Hello {0} {1} {2} World{3}", "Digital", "Dot", "NET", "!!"),
+                    "Hello Digital Dot NET World!!"
+                );
+                yield return CreateParameters(
+                    x => x.Write("Hello World".ToCharArray(), 6, 5),
+                    "World"
+                );
             }
         }
 
@@ -507,21 +577,63 @@ namespace System.CodeDom.Tests
                 yield return CreateParameters(x => x.WriteLine(), NewLine);
                 yield return CreateParameters(x => x.WriteLine(true), $"{true}{NewLine}");
                 yield return CreateParameters(x => x.WriteLine('c'), $"c{NewLine}");
-                yield return CreateParameters(x => x.WriteLine("Hello World".ToCharArray()), $"Hello World{NewLine}");
-                yield return CreateParameters(x => x.WriteLine(3.14159m), $"{(3.14159m).ToString(CultureInfo.InvariantCulture)}{NewLine}");
-                yield return CreateParameters(x => x.WriteLine(12345.0), $"{(12345.0).ToString(CultureInfo.InvariantCulture)}{NewLine}");
-                yield return CreateParameters(x => x.WriteLine(12345.0f), $"{(12345.0f).ToString(CultureInfo.InvariantCulture)}{NewLine}");
+                yield return CreateParameters(
+                    x => x.WriteLine("Hello World".ToCharArray()),
+                    $"Hello World{NewLine}"
+                );
+                yield return CreateParameters(
+                    x => x.WriteLine(3.14159m),
+                    $"{(3.14159m).ToString(CultureInfo.InvariantCulture)}{NewLine}"
+                );
+                yield return CreateParameters(
+                    x => x.WriteLine(12345.0),
+                    $"{(12345.0).ToString(CultureInfo.InvariantCulture)}{NewLine}"
+                );
+                yield return CreateParameters(
+                    x => x.WriteLine(12345.0f),
+                    $"{(12345.0f).ToString(CultureInfo.InvariantCulture)}{NewLine}"
+                );
                 yield return CreateParameters(x => x.WriteLine(12345), $"{12345}{NewLine}");
-                yield return CreateParameters(x => x.WriteLine(0xDEADBEEFBADF00DL), $"{0xDEADBEEFBADF00DL}{NewLine}");
-                yield return CreateParameters(x => x.WriteLine(new object()), $"{new object()}{NewLine}");
-                yield return CreateParameters(x => x.WriteLine("Hello World"), $"Hello World{NewLine}");
-                yield return CreateParameters(x => x.WriteLine(0xDEADBEEF), $"{0xDEADBEEF}{NewLine}");
-                yield return CreateParameters(x => x.WriteLine(0xDEADBEEFBAADF00DUL), $"{0xDEADBEEFBAADF00DUL}{NewLine}");
-                yield return CreateParameters(x => x.WriteLine("Hello {0} World", "Digital"), $"Hello Digital World{NewLine}");
-                yield return CreateParameters(x => x.WriteLine("Hello {0} {1} World", "Dot", "NET"), $"Hello Dot NET World{NewLine}");
-                yield return CreateParameters(x => x.WriteLine("Hello {0} {1} World{2}", "Dot", "NET", "!!"), $"Hello Dot NET World!!{NewLine}");
-                yield return CreateParameters(x => x.WriteLine("Hello World".ToCharArray(), 6, 5), $"World{NewLine}");
-                yield return CreateParameters(x => x.WriteLine("Hello {0} {1} {2} World{3}", "Digital", "Dot", "NET", "!!"), $"Hello Digital Dot NET World!!{NewLine}");
+                yield return CreateParameters(
+                    x => x.WriteLine(0xDEADBEEFBADF00DL),
+                    $"{0xDEADBEEFBADF00DL}{NewLine}"
+                );
+                yield return CreateParameters(
+                    x => x.WriteLine(new object()),
+                    $"{new object()}{NewLine}"
+                );
+                yield return CreateParameters(
+                    x => x.WriteLine("Hello World"),
+                    $"Hello World{NewLine}"
+                );
+                yield return CreateParameters(
+                    x => x.WriteLine(0xDEADBEEF),
+                    $"{0xDEADBEEF}{NewLine}"
+                );
+                yield return CreateParameters(
+                    x => x.WriteLine(0xDEADBEEFBAADF00DUL),
+                    $"{0xDEADBEEFBAADF00DUL}{NewLine}"
+                );
+                yield return CreateParameters(
+                    x => x.WriteLine("Hello {0} World", "Digital"),
+                    $"Hello Digital World{NewLine}"
+                );
+                yield return CreateParameters(
+                    x => x.WriteLine("Hello {0} {1} World", "Dot", "NET"),
+                    $"Hello Dot NET World{NewLine}"
+                );
+                yield return CreateParameters(
+                    x => x.WriteLine("Hello {0} {1} World{2}", "Dot", "NET", "!!"),
+                    $"Hello Dot NET World!!{NewLine}"
+                );
+                yield return CreateParameters(
+                    x => x.WriteLine("Hello World".ToCharArray(), 6, 5),
+                    $"World{NewLine}"
+                );
+                yield return CreateParameters(
+                    x => x.WriteLine("Hello {0} {1} {2} World{3}", "Digital", "Dot", "NET", "!!"),
+                    $"Hello Digital Dot NET World!!{NewLine}"
+                );
             }
         }
 
@@ -529,13 +641,18 @@ namespace System.CodeDom.Tests
         {
             get
             {
-                object[] CreateParameters(Func<IndentedTextWriter, Task> callWriteAsync, string expected)
-                {
+                object[] CreateParameters(
+                    Func<IndentedTextWriter, Task> callWriteAsync,
+                    string expected
+                ) {
                     return new object[] { callWriteAsync, expected };
                 }
 
                 yield return CreateParameters(x => x.WriteAsync('c'), "c");
-                yield return CreateParameters(x => x.WriteAsync("Hello World".ToCharArray(), 6, 5), "World");
+                yield return CreateParameters(
+                    x => x.WriteAsync("Hello World".ToCharArray(), 6, 5),
+                    "World"
+                );
                 yield return CreateParameters(x => x.WriteAsync("Hello World"), "Hello World");
             }
         }
@@ -544,15 +661,23 @@ namespace System.CodeDom.Tests
         {
             get
             {
-                object[] CreateParameters(Func<IndentedTextWriter, Task> callWriteLineAsync, string expected)
-                {
+                object[] CreateParameters(
+                    Func<IndentedTextWriter, Task> callWriteLineAsync,
+                    string expected
+                ) {
                     return new object[] { callWriteLineAsync, expected };
                 }
 
                 yield return CreateParameters(x => x.WriteLineAsync(), NewLine);
                 yield return CreateParameters(x => x.WriteLineAsync('c'), $"c{NewLine}");
-                yield return CreateParameters(x => x.WriteLineAsync("Hello World".ToCharArray(), 6, 5), $"World{NewLine}");
-                yield return CreateParameters(x => x.WriteLineAsync("Hello World"), $"Hello World{NewLine}");
+                yield return CreateParameters(
+                    x => x.WriteLineAsync("Hello World".ToCharArray(), 6, 5),
+                    $"World{NewLine}"
+                );
+                yield return CreateParameters(
+                    x => x.WriteLineAsync("Hello World"),
+                    $"Hello World{NewLine}"
+                );
             }
         }
 
@@ -562,8 +687,10 @@ namespace System.CodeDom.Tests
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]
         [Theory]
         [MemberData(nameof(WriteAsync_MemberData))]
-        public async Task WriteAsync_WithoutIndents_CallsInnerWriteAsync(Func<IndentedTextWriter, Task> callWriteAsync, string expected)
-        {
+        public async Task WriteAsync_WithoutIndents_CallsInnerWriteAsync(
+            Func<IndentedTextWriter, Task> callWriteAsync,
+            string expected
+        ) {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -577,8 +704,10 @@ namespace System.CodeDom.Tests
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]
         [Theory]
         [MemberData(nameof(WriteAsync_MemberData))]
-        public async Task WriteAsync_WithIndents_WritesTabsAfterWriteLineAsync(Func<IndentedTextWriter, Task> callWriteAsync, string expected)
-        {
+        public async Task WriteAsync_WithIndents_WritesTabsAfterWriteLineAsync(
+            Func<IndentedTextWriter, Task> callWriteAsync,
+            string expected
+        ) {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -589,13 +718,18 @@ namespace System.CodeDom.Tests
             await callWriteAsync(itw);
 
             Assert.Equal(nameof(IndentedTextWriter.WriteAsync), indicator.LastCalledMethod);
-            Assert.Equal($"{prefix}{NewLine}{TabString}{expected}", indicator.GetStringBuilder().ToString());
+            Assert.Equal(
+                $"{prefix}{NewLine}{TabString}{expected}",
+                indicator.GetStringBuilder().ToString()
+            );
         }
 
         [Theory]
         [MemberData(nameof(WriteAsync_MemberData))]
-        public async Task WriteAsync_WithIndents_OmitsTabsAfterWriteAsync(Func<IndentedTextWriter, Task> callWriteAsync, string expected)
-        {
+        public async Task WriteAsync_WithIndents_OmitsTabsAfterWriteAsync(
+            Func<IndentedTextWriter, Task> callWriteAsync,
+            string expected
+        ) {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -611,8 +745,10 @@ namespace System.CodeDom.Tests
 
         [Theory]
         [MemberData(nameof(WriteLineAsync_MemberData))]
-        public async Task WriteLineAsync_WithoutIndents_CallsInnerWriteLineAsync(Func<IndentedTextWriter, Task> callWriteLineAsync, string expected)
-        {
+        public async Task WriteLineAsync_WithoutIndents_CallsInnerWriteLineAsync(
+            Func<IndentedTextWriter, Task> callWriteLineAsync,
+            string expected
+        ) {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -624,8 +760,10 @@ namespace System.CodeDom.Tests
 
         [Theory]
         [MemberData(nameof(WriteLineAsync_MemberData))]
-        public async Task WriteLineAsync_WithIndents_FirstLine_IsNotIndented(Func<IndentedTextWriter, Task> callWriteLineAsync, string expected)
-        {
+        public async Task WriteLineAsync_WithIndents_FirstLine_IsNotIndented(
+            Func<IndentedTextWriter, Task> callWriteLineAsync,
+            string expected
+        ) {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -638,8 +776,10 @@ namespace System.CodeDom.Tests
 
         [Theory]
         [MemberData(nameof(WriteLineAsync_MemberData))]
-        public async Task WriteLineAsync_WithIndents_SubsequentLines_AreIndented(Func<IndentedTextWriter, Task> callWriteLineAsync, string expected)
-        {
+        public async Task WriteLineAsync_WithIndents_SubsequentLines_AreIndented(
+            Func<IndentedTextWriter, Task> callWriteLineAsync,
+            string expected
+        ) {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -650,7 +790,10 @@ namespace System.CodeDom.Tests
             await callWriteLineAsync(itw);
 
             Assert.Equal(nameof(IndentedTextWriter.WriteLineAsync), indicator.LastCalledMethod);
-            Assert.Equal($"{prefix}{NewLine}{TabString}{expected}", indicator.GetStringBuilder().ToString());
+            Assert.Equal(
+                $"{prefix}{NewLine}{TabString}{expected}",
+                indicator.GetStringBuilder().ToString()
+            );
         }
 
         [Fact]
@@ -666,15 +809,18 @@ namespace System.CodeDom.Tests
             await itw.WriteLineAsync("Wooble");
             await itw.WriteLineAsync("Qwux");
 
-            string expected = $"Wibble{NewLine}Wobble{NewLine}{TabString}Wooble{NewLine}{TabString}Qwux{NewLine}";
+            string expected =
+                $"Wibble{NewLine}Wobble{NewLine}{TabString}Wooble{NewLine}{TabString}Qwux{NewLine}";
 
             Assert.Equal(expected, sw.GetStringBuilder().ToString());
         }
 
         [Theory]
         [MemberData(nameof(Write_MemberData))]
-        public void Write_WithoutIndents_CallsInnerWrite(Action<IndentedTextWriter> callWrite, string expected)
-        {
+        public void Write_WithoutIndents_CallsInnerWrite(
+            Action<IndentedTextWriter> callWrite,
+            string expected
+        ) {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -687,8 +833,10 @@ namespace System.CodeDom.Tests
 
         [Theory]
         [MemberData(nameof(Write_MemberData))]
-        public void Write_WithIndents_FirstLine_IsNotIndented(Action<IndentedTextWriter> callWrite, string expected)
-        {
+        public void Write_WithIndents_FirstLine_IsNotIndented(
+            Action<IndentedTextWriter> callWrite,
+            string expected
+        ) {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -702,8 +850,10 @@ namespace System.CodeDom.Tests
 
         [Theory]
         [MemberData(nameof(Write_MemberData))]
-        public void Write_IsIndented_AfterWriteLine(Action<IndentedTextWriter> callWrite, string expected)
-        {
+        public void Write_IsIndented_AfterWriteLine(
+            Action<IndentedTextWriter> callWrite,
+            string expected
+        ) {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -714,13 +864,18 @@ namespace System.CodeDom.Tests
             callWrite(itw);
 
             Assert.Equal(nameof(IndentedTextWriter.Write), indicator.LastCalledMethod);
-            Assert.Equal($"{prefix}{NewLine}{TabString}{expected}", indicator.GetStringBuilder().ToString());
+            Assert.Equal(
+                $"{prefix}{NewLine}{TabString}{expected}",
+                indicator.GetStringBuilder().ToString()
+            );
         }
 
         [Theory]
         [MemberData(nameof(WriteLine_MemberData))]
-        public void WriteLine_CallsInnerWriteLine(Action<IndentedTextWriter> callWriteLine, string expected)
-        {
+        public void WriteLine_CallsInnerWriteLine(
+            Action<IndentedTextWriter> callWriteLine,
+            string expected
+        ) {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -733,8 +888,10 @@ namespace System.CodeDom.Tests
 
         [Theory]
         [MemberData(nameof(WriteLine_MemberData))]
-        public void WriteLine_FirstLine_IsNotIndented(Action<IndentedTextWriter> callWriteLine, string expected)
-        {
+        public void WriteLine_FirstLine_IsNotIndented(
+            Action<IndentedTextWriter> callWriteLine,
+            string expected
+        ) {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -748,8 +905,10 @@ namespace System.CodeDom.Tests
 
         [Theory]
         [MemberData(nameof(WriteLine_MemberData))]
-        public void WriteLine_IsIndented_AfterWriteLine(Action<IndentedTextWriter> callWriteLine, string expected)
-        {
+        public void WriteLine_IsIndented_AfterWriteLine(
+            Action<IndentedTextWriter> callWriteLine,
+            string expected
+        ) {
             var indicator = new IndicatingTextWriter();
             var itw = new IndentedTextWriter(indicator, TabString);
             itw.NewLine = NewLine;
@@ -760,7 +919,10 @@ namespace System.CodeDom.Tests
             callWriteLine(itw);
 
             Assert.Equal(nameof(IndentedTextWriter.WriteLine), indicator.LastCalledMethod);
-            Assert.Equal($"{prefix}{NewLine}{TabString}{expected}", indicator.GetStringBuilder().ToString());
+            Assert.Equal(
+                $"{prefix}{NewLine}{TabString}{expected}",
+                indicator.GetStringBuilder().ToString()
+            );
         }
 
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]

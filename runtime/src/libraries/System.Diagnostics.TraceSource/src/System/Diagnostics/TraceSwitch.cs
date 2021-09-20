@@ -15,14 +15,14 @@ namespace System.Diagnostics
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TraceSwitch'/> class.</para>
         /// </devdoc>
-        public TraceSwitch(string displayName, string? description)
-            : base(displayName, description)
-        {
-        }
-
-        public TraceSwitch(string displayName, string? description, string defaultSwitchValue)
-            : base(displayName, description, defaultSwitchValue)
+        public TraceSwitch(string displayName, string? description) : base(displayName, description)
         { }
+
+        public TraceSwitch(
+            string displayName,
+            string? description,
+            string defaultSwitchValue
+        ) : base(displayName, description, defaultSwitchValue) { }
 
         /// <devdoc>
         ///    <para>Gets or sets the trace
@@ -30,11 +30,7 @@ namespace System.Diagnostics
         /// </devdoc>
         public TraceLevel Level
         {
-            get
-            {
-                return (TraceLevel)SwitchSetting;
-            }
-
+            get { return (TraceLevel)SwitchSetting; }
             set
             {
                 if (value < TraceLevel.Off || value > TraceLevel.Verbose)
@@ -51,10 +47,7 @@ namespace System.Diagnostics
         /// </devdoc>
         public bool TraceError
         {
-            get
-            {
-                return (Level >= TraceLevel.Error);
-            }
+            get { return (Level >= TraceLevel.Error); }
         }
 
         /// <devdoc>
@@ -64,10 +57,7 @@ namespace System.Diagnostics
         /// </devdoc>
         public bool TraceWarning
         {
-            get
-            {
-                return (Level >= TraceLevel.Warning);
-            }
+            get { return (Level >= TraceLevel.Warning); }
         }
 
         /// <devdoc>
@@ -77,10 +67,7 @@ namespace System.Diagnostics
         /// </devdoc>
         public bool TraceInfo
         {
-            get
-            {
-                return (Level >= TraceLevel.Info);
-            }
+            get { return (Level >= TraceLevel.Info); }
         }
 
         /// <devdoc>
@@ -90,10 +77,7 @@ namespace System.Diagnostics
         /// </devdoc>
         public bool TraceVerbose
         {
-            get
-            {
-                return (Level == TraceLevel.Verbose);
-            }
+            get { return (Level == TraceLevel.Verbose); }
         }
 
         /// <devdoc>

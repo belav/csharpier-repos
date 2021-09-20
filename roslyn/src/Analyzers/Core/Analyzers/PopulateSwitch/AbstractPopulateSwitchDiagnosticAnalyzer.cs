@@ -11,21 +11,36 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.PopulateSwitch
 {
-    internal abstract class AbstractPopulateSwitchDiagnosticAnalyzer<TSwitchOperation, TSwitchSyntax> :
-        AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal abstract class AbstractPopulateSwitchDiagnosticAnalyzer<
+        TSwitchOperation,
+        TSwitchSyntax
+    > : AbstractBuiltInCodeStyleDiagnosticAnalyzer
         where TSwitchOperation : IOperation
         where TSwitchSyntax : SyntaxNode
     {
-        private static readonly LocalizableString s_localizableTitle = new LocalizableResourceString(nameof(AnalyzersResources.Add_missing_cases), AnalyzersResources.ResourceManager, typeof(AnalyzersResources));
-        private static readonly LocalizableString s_localizableMessage = new LocalizableResourceString(nameof(AnalyzersResources.Populate_switch), AnalyzersResources.ResourceManager, typeof(AnalyzersResources));
+        private static readonly LocalizableString s_localizableTitle =
+            new LocalizableResourceString(
+                nameof(AnalyzersResources.Add_missing_cases),
+                AnalyzersResources.ResourceManager,
+                typeof(AnalyzersResources)
+            );
+        private static readonly LocalizableString s_localizableMessage =
+            new LocalizableResourceString(
+                nameof(AnalyzersResources.Populate_switch),
+                AnalyzersResources.ResourceManager,
+                typeof(AnalyzersResources)
+            );
 
-        protected AbstractPopulateSwitchDiagnosticAnalyzer(string diagnosticId, EnforceOnBuild enforceOnBuild)
-            : base(diagnosticId,
-                   enforceOnBuild,
-                   option: null,
-                   s_localizableTitle, s_localizableMessage)
-        {
-        }
+        protected AbstractPopulateSwitchDiagnosticAnalyzer(
+            string diagnosticId,
+            EnforceOnBuild enforceOnBuild
+        ) : base(
+            diagnosticId,
+            enforceOnBuild,
+            option: null,
+            s_localizableTitle,
+            s_localizableMessage
+        ) { }
 
         #region Interface methods
 
@@ -35,10 +50,11 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
         protected abstract bool HasDefaultCase(TSwitchOperation operation);
         protected abstract Location GetDiagnosticLocation(TSwitchSyntax switchBlock);
 
-        public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory() => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-        protected sealed override void InitializeWorker(AnalysisContext context)
-            => context.RegisterOperationAction(AnalyzeOperation, OperationKind);
+        protected sealed override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterOperationAction(AnalyzeOperation, OperationKind);
 
         private void AnalyzeOperation(OperationAnalysisContext context)
         {
@@ -48,20 +64,30 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
 
             var tree = switchBlock.SyntaxTree;
 
-            if (SwitchIsIncomplete(switchOperation, out var missingCases, out var missingDefaultCase) &&
-                !tree.OverlapsHiddenPosition(switchBlock.Span, context.CancellationToken))
-            {
+            if (
+                SwitchIsIncomplete(
+                    switchOperation,
+                    out var missingCases,
+                    out var missingDefaultCase
+                ) && !tree.OverlapsHiddenPosition(switchBlock.Span, context.CancellationToken)
+            ) {
                 Debug.Assert(missingCases || missingDefaultCase);
-                var properties = ImmutableDictionary<string, string?>.Empty
-                    .Add(PopulateSwitchStatementHelpers.MissingCases, missingCases.ToString())
-                    .Add(PopulateSwitchStatementHelpers.MissingDefaultCase, missingDefaultCase.ToString());
+                var properties = ImmutableDictionary<string, string?>.Empty.Add(
+                        PopulateSwitchStatementHelpers.MissingCases,
+                        missingCases.ToString()
+                    )
+                    .Add(
+                        PopulateSwitchStatementHelpers.MissingDefaultCase,
+                        missingDefaultCase.ToString()
+                    );
 
 #pragma warning disable CS8620 // Mismatch in nullability of 'properties' parameter and argument types - Parameter type for 'properties' has been updated to 'ImmutableDictionary<string, string?>?' in newer version of Microsoft.CodeAnalysis (3.7.x).
                 var diagnostic = Diagnostic.Create(
                     Descriptor,
                     GetDiagnosticLocation(switchBlock),
                     properties: properties,
-                    additionalLocations: new[] { switchBlock.GetLocation() });
+                    additionalLocations: new[] { switchBlock.GetLocation() }
+                );
 #pragma warning restore CS8620
 
                 context.ReportDiagnostic(diagnostic);
@@ -72,8 +98,9 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
 
         private bool SwitchIsIncomplete(
             TSwitchOperation operation,
-            out bool missingCases, out bool missingDefaultCase)
-        {
+            out bool missingCases,
+            out bool missingDefaultCase
+        ) {
             var missingEnumMembers = GetMissingEnumMembers(operation);
 
             missingCases = missingEnumMembers.Count > 0;

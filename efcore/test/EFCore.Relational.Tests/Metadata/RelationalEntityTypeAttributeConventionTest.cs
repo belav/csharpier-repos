@@ -42,8 +42,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var entityBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            entityBuilder.HasAnnotation(RelationalAnnotationNames.TableName, "ConventionalName", ConfigurationSource.Convention);
-            entityBuilder.HasAnnotation(RelationalAnnotationNames.Schema, "ConventionalSchema", ConfigurationSource.Convention);
+            entityBuilder.HasAnnotation(
+                RelationalAnnotationNames.TableName,
+                "ConventionalName",
+                ConfigurationSource.Convention
+            );
+            entityBuilder.HasAnnotation(
+                RelationalAnnotationNames.Schema,
+                "ConventionalSchema",
+                ConfigurationSource.Convention
+            );
 
             RunConvention(entityBuilder);
 
@@ -56,8 +64,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var entityBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            entityBuilder.HasAnnotation(RelationalAnnotationNames.TableName, "ExplicitName", ConfigurationSource.Explicit);
-            entityBuilder.HasAnnotation(RelationalAnnotationNames.Schema, "ExplicitName", ConfigurationSource.Explicit);
+            entityBuilder.HasAnnotation(
+                RelationalAnnotationNames.TableName,
+                "ExplicitName",
+                ConfigurationSource.Explicit
+            );
+            entityBuilder.HasAnnotation(
+                RelationalAnnotationNames.Schema,
+                "ExplicitName",
+                ConfigurationSource.Explicit
+            );
 
             RunConvention(entityBuilder);
 
@@ -70,7 +86,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var entityBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            entityBuilder.HasAnnotation(RelationalAnnotationNames.Comment, "ConventionalComment", ConfigurationSource.Convention);
+            entityBuilder.HasAnnotation(
+                RelationalAnnotationNames.Comment,
+                "ConventionalComment",
+                ConfigurationSource.Convention
+            );
 
             RunConvention(entityBuilder);
 
@@ -82,7 +102,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var entityBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            entityBuilder.HasAnnotation(RelationalAnnotationNames.Comment, "ExplicitName", ConfigurationSource.Explicit);
+            entityBuilder.HasAnnotation(
+                RelationalAnnotationNames.Comment,
+                "ExplicitName",
+                ConfigurationSource.Explicit
+            );
 
             RunConvention(entityBuilder);
 
@@ -91,34 +115,43 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
         private void RunConvention(InternalEntityTypeBuilder entityTypeBuilder)
         {
-            var context = new ConventionContext<IConventionEntityTypeBuilder>(entityTypeBuilder.Metadata.Model.ConventionDispatcher);
+            var context = new ConventionContext<IConventionEntityTypeBuilder>(
+                entityTypeBuilder.Metadata.Model.ConventionDispatcher
+            );
 
-            new RelationalTableAttributeConvention(CreateDependencies(), CreateRelationalDependencies())
-                .ProcessEntityTypeAdded(entityTypeBuilder, context);
+            new RelationalTableAttributeConvention(
+                CreateDependencies(),
+                CreateRelationalDependencies()
+            ).ProcessEntityTypeAdded(entityTypeBuilder, context);
 
-            new RelationalTableCommentAttributeConvention(CreateDependencies(), CreateRelationalDependencies())
-                .ProcessEntityTypeAdded(entityTypeBuilder, context);
+            new RelationalTableCommentAttributeConvention(
+                CreateDependencies(),
+                CreateRelationalDependencies()
+            ).ProcessEntityTypeAdded(entityTypeBuilder, context);
         }
 
         private InternalEntityTypeBuilder CreateInternalEntityTypeBuilder<T>()
         {
             var conventionSet = new ConventionSet();
             conventionSet.EntityTypeAddedConventions.Add(
-                new PropertyDiscoveryConvention(CreateDependencies()));
+                new PropertyDiscoveryConvention(CreateDependencies())
+            );
 
             var modelBuilder = new InternalModelBuilder(new Model(conventionSet));
 
             return modelBuilder.Entity(typeof(T), ConfigurationSource.Explicit);
         }
 
-        private ProviderConventionSetBuilderDependencies CreateDependencies()
-            => RelationalTestHelpers.Instance.CreateContextServices().GetRequiredService<ProviderConventionSetBuilderDependencies>();
+        private ProviderConventionSetBuilderDependencies CreateDependencies() =>
+            RelationalTestHelpers.Instance.CreateContextServices()
+                .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
-        private RelationalConventionSetBuilderDependencies CreateRelationalDependencies()
-            => RelationalTestHelpers.Instance.CreateContextServices().GetRequiredService<RelationalConventionSetBuilderDependencies>();
+        private RelationalConventionSetBuilderDependencies CreateRelationalDependencies() =>
+            RelationalTestHelpers.Instance.CreateContextServices()
+                .GetRequiredService<RelationalConventionSetBuilderDependencies>();
 
-        protected virtual ModelBuilder CreateConventionalModelBuilder()
-            => RelationalTestHelpers.Instance.CreateConventionBuilder();
+        protected virtual ModelBuilder CreateConventionalModelBuilder() =>
+            RelationalTestHelpers.Instance.CreateConventionBuilder();
 
         [Table("MyTable", Schema = "MySchema")]
         [Comment("Test table comment")]

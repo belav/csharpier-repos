@@ -13,7 +13,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal partial class Binder
     {
-        private delegate BoundBlock LambdaBodyFactory(LambdaSymbol lambdaSymbol, Binder lambdaBodyBinder, BindingDiagnosticBag diagnostics);
+        private delegate BoundBlock LambdaBodyFactory(
+            LambdaSymbol lambdaSymbol,
+            Binder lambdaBodyBinder,
+            BindingDiagnosticBag diagnostics
+        );
 
         private sealed class QueryUnboundLambdaState : UnboundLambdaState
         {
@@ -21,29 +25,69 @@ namespace Microsoft.CodeAnalysis.CSharp
             private readonly LambdaBodyFactory _bodyFactory;
             private readonly RangeVariableMap _rangeVariableMap;
 
-            public QueryUnboundLambdaState(Binder binder, RangeVariableMap rangeVariableMap, ImmutableArray<RangeVariableSymbol> parameters, LambdaBodyFactory bodyFactory, bool includeCache = true)
-                : base(binder, includeCache)
+            public QueryUnboundLambdaState(
+                Binder binder,
+                RangeVariableMap rangeVariableMap,
+                ImmutableArray<RangeVariableSymbol> parameters,
+                LambdaBodyFactory bodyFactory,
+                bool includeCache = true
+            ) : base(binder, includeCache)
             {
                 _parameters = parameters;
                 _rangeVariableMap = rangeVariableMap;
                 _bodyFactory = bodyFactory;
             }
 
-            public override string ParameterName(int index) { return _parameters[index].Name; }
-            public override bool ParameterIsDiscard(int index) { return false; }
-            public override bool HasNames { get { return true; } }
-            public override bool HasSignature { get { return true; } }
-            public override bool HasExplicitlyTypedParameterList { get { return false; } }
-            public override int ParameterCount { get { return _parameters.Length; } }
-            public override bool IsAsync { get { return false; } }
-            public override bool IsStatic => false;
-            public override RefKind RefKind(int index) { return Microsoft.CodeAnalysis.RefKind.None; }
-            public override MessageID MessageID { get { return MessageID.IDS_FeatureQueryExpression; } } // TODO: what is the correct ID here?
-            public override Location ParameterLocation(int index) { return _parameters[index].Locations[0]; }
-            public override TypeWithAnnotations ParameterTypeWithAnnotations(int index) { throw new ArgumentException(); } // implicitly typed
-
-            public override void GenerateAnonymousFunctionConversionError(BindingDiagnosticBag diagnostics, TypeSymbol targetType)
+            public override string ParameterName(int index)
             {
+                return _parameters[index].Name;
+            }
+            public override bool ParameterIsDiscard(int index)
+            {
+                return false;
+            }
+            public override bool HasNames
+            {
+                get { return true; }
+            }
+            public override bool HasSignature
+            {
+                get { return true; }
+            }
+            public override bool HasExplicitlyTypedParameterList
+            {
+                get { return false; }
+            }
+            public override int ParameterCount
+            {
+                get { return _parameters.Length; }
+            }
+            public override bool IsAsync
+            {
+                get { return false; }
+            }
+            public override bool IsStatic => false;
+            public override RefKind RefKind(int index)
+            {
+                return Microsoft.CodeAnalysis.RefKind.None;
+            }
+            public override MessageID MessageID
+            {
+                get { return MessageID.IDS_FeatureQueryExpression; }
+            } // TODO: what is the correct ID here?
+            public override Location ParameterLocation(int index)
+            {
+                return _parameters[index].Locations[0];
+            }
+            public override TypeWithAnnotations ParameterTypeWithAnnotations(int index)
+            {
+                throw new ArgumentException();
+            } // implicitly typed
+
+            public override void GenerateAnonymousFunctionConversionError(
+                BindingDiagnosticBag diagnostics,
+                TypeSymbol targetType
+            ) {
                 // TODO: improved diagnostics for query expressions
                 base.GenerateAnonymousFunctionConversionError(diagnostics, targetType);
             }
@@ -55,7 +99,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             protected override UnboundLambdaState WithCachingCore(bool includeCache)
             {
-                return new QueryUnboundLambdaState(Binder, _rangeVariableMap, _parameters, _bodyFactory, includeCache);
+                return new QueryUnboundLambdaState(
+                    Binder,
+                    _rangeVariableMap,
+                    _parameters,
+                    _bodyFactory,
+                    includeCache
+                );
             }
 
             protected override BoundExpression GetLambdaExpressionBody(BoundBlock body)
@@ -63,13 +113,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return null;
             }
 
-            protected override BoundBlock CreateBlockFromLambdaExpressionBody(Binder lambdaBodyBinder, BoundExpression expression, BindingDiagnosticBag diagnostics)
-            {
+            protected override BoundBlock CreateBlockFromLambdaExpressionBody(
+                Binder lambdaBodyBinder,
+                BoundExpression expression,
+                BindingDiagnosticBag diagnostics
+            ) {
                 throw ExceptionUtilities.Unreachable;
             }
 
-            protected override BoundBlock BindLambdaBody(LambdaSymbol lambdaSymbol, Binder lambdaBodyBinder, BindingDiagnosticBag diagnostics)
-            {
+            protected override BoundBlock BindLambdaBody(
+                LambdaSymbol lambdaSymbol,
+                Binder lambdaBodyBinder,
+                BindingDiagnosticBag diagnostics
+            ) {
                 return _bodyFactory(lambdaSymbol, lambdaBodyBinder, diagnostics);
             }
         }

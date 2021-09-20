@@ -36,8 +36,8 @@ namespace Microsoft.AspNetCore.Routing
         public static RouteValueDictionary? ParsePathByEndpointName(
             this LinkParser parser,
             string endpointName,
-            PathString path)
-        {
+            PathString path
+        ) {
             if (parser == null)
             {
                 throw new ArgumentNullException(nameof(parser));

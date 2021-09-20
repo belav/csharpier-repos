@@ -11,9 +11,7 @@ namespace ILCompiler.DependencyAnalysis
 {
     public abstract class AssemblyStubNode : ObjectNode, ISymbolDefinitionNode
     {
-        public AssemblyStubNode()
-        {
-        }
+        public AssemblyStubNode() { }
 
         /// <summary>
         /// Gets a value indicating whether the stub's address is visible from managed code
@@ -34,9 +32,9 @@ namespace ILCompiler.DependencyAnalysis
             // If the address is expected to be visible from managed code, we need to align
             // at the managed code boundaries to prevent the stub from being confused with
             // a fat fuction pointer. Otherwise we can align tighter.
-            int alignment = IsVisibleFromManagedCode ?
-                factory.Target.MinimumFunctionAlignment :
-                factory.Target.MinimumCodeAlignment;
+            int alignment = IsVisibleFromManagedCode
+                ? factory.Target.MinimumFunctionAlignment
+                : factory.Target.MinimumCodeAlignment;
 
             switch (factory.Target.Architecture)
             {
@@ -73,9 +71,25 @@ namespace ILCompiler.DependencyAnalysis
             }
         }
 
-        protected abstract void EmitCode(NodeFactory factory, ref X64.X64Emitter instructionEncoder, bool relocsOnly);
-        protected abstract void EmitCode(NodeFactory factory, ref X86.X86Emitter instructionEncoder, bool relocsOnly);
-        protected abstract void EmitCode(NodeFactory factory, ref ARM.ARMEmitter instructionEncoder, bool relocsOnly);
-        protected abstract void EmitCode(NodeFactory factory, ref ARM64.ARM64Emitter instructionEncoder, bool relocsOnly);
+        protected abstract void EmitCode(
+            NodeFactory factory,
+            ref X64.X64Emitter instructionEncoder,
+            bool relocsOnly
+        );
+        protected abstract void EmitCode(
+            NodeFactory factory,
+            ref X86.X86Emitter instructionEncoder,
+            bool relocsOnly
+        );
+        protected abstract void EmitCode(
+            NodeFactory factory,
+            ref ARM.ARMEmitter instructionEncoder,
+            bool relocsOnly
+        );
+        protected abstract void EmitCode(
+            NodeFactory factory,
+            ref ARM64.ARM64Emitter instructionEncoder,
+            bool relocsOnly
+        );
     }
 }

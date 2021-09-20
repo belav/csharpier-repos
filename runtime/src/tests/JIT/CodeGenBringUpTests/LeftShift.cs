@@ -11,12 +11,17 @@ public class BringUpTest
     const int Fail = -1;
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static int LeftShift(int x, int y) { return x << y; }
+    public static int LeftShift(int x, int y)
+    {
+        return x << y;
+    }
 
     public static int Main()
     {
         int y = LeftShift(12, 3);
-        if (y == 96) return Pass;
-        else return Fail;
+        if (y == 96)
+            return Pass;
+        else
+            return Fail;
     }
 }

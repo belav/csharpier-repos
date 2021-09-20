@@ -16,9 +16,8 @@ namespace Microsoft.AspNetCore.Components
         /// </summary>
         /// <param name="attributeName"></param>
         /// <param name="eventArgsType"></param>
-        public EventHandlerAttribute(string attributeName, Type eventArgsType) : this(attributeName, eventArgsType, false, false)
-        {
-        }
+        public EventHandlerAttribute(string attributeName, Type eventArgsType)
+            : this(attributeName, eventArgsType, false, false) { }
 
         /// <summary>
         /// Constructs an instance of <see cref="EventHandlerAttribute"/>.
@@ -27,8 +26,12 @@ namespace Microsoft.AspNetCore.Components
         /// <param name="eventArgsType"></param>
         /// <param name="enableStopPropagation"></param>
         /// <param name="enablePreventDefault"></param>
-        public EventHandlerAttribute(string attributeName, Type eventArgsType, bool enableStopPropagation, bool enablePreventDefault)
-        {
+        public EventHandlerAttribute(
+            string attributeName,
+            Type eventArgsType,
+            bool enableStopPropagation,
+            bool enablePreventDefault
+        ) {
             if (attributeName == null)
             {
                 throw new ArgumentNullException(nameof(attributeName));

@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <summary>
     ///     A convention that configures the table comment for an entity type based on the applied <see cref="CommentAttribute" />.
     /// </summary>
-    public class RelationalTableCommentAttributeConvention : EntityTypeAttributeConventionBase<CommentAttribute>
+    public class RelationalTableCommentAttributeConvention
+        : EntityTypeAttributeConventionBase<CommentAttribute>
     {
         /// <summary>
         ///     Creates a new instance of <see cref="RelationalTableCommentAttributeConvention" />.
@@ -18,10 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="relationalDependencies">  Parameter object containing relational dependencies for this convention. </param>
         public RelationalTableCommentAttributeConvention(
             ProviderConventionSetBuilderDependencies dependencies,
-            RelationalConventionSetBuilderDependencies relationalDependencies)
-            : base(dependencies)
-        {
-        }
+            RelationalConventionSetBuilderDependencies relationalDependencies
+        ) : base(dependencies) { }
 
         /// <summary>
         ///     Called after an entity type is added to the model if it has an attribute.
@@ -32,8 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         protected override void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
             CommentAttribute attribute,
-            IConventionContext<IConventionEntityTypeBuilder> context)
-        {
+            IConventionContext<IConventionEntityTypeBuilder> context
+        ) {
             if (!string.IsNullOrWhiteSpace(attribute.Comment))
             {
                 entityTypeBuilder.HasComment(attribute.Comment);

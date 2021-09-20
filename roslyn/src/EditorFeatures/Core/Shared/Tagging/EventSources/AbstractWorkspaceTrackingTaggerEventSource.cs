@@ -20,10 +20,15 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
         protected ITextBuffer SubjectBuffer { get; }
         protected Workspace? CurrentWorkspace { get; private set; }
 
-        protected AbstractWorkspaceTrackingTaggerEventSource(ITextBuffer subjectBuffer, TaggerDelay delay) : base(delay)
+        protected AbstractWorkspaceTrackingTaggerEventSource(
+            ITextBuffer subjectBuffer,
+            TaggerDelay delay
+        ) : base(delay)
         {
             this.SubjectBuffer = subjectBuffer;
-            _workspaceRegistration = Workspace.GetWorkspaceRegistration(subjectBuffer.AsTextContainer());
+            _workspaceRegistration = Workspace.GetWorkspaceRegistration(
+                subjectBuffer.AsTextContainer()
+            );
         }
 
         protected abstract void ConnectToWorkspace(Workspace workspace);

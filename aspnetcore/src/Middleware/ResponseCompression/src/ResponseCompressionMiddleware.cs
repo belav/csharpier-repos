@@ -18,14 +18,15 @@ namespace Microsoft.AspNetCore.ResponseCompression
 
         private readonly IResponseCompressionProvider _provider;
 
-
         /// <summary>
         /// Initialize the Response Compression middleware.
         /// </summary>
         /// <param name="next">The delegate representing the remaining middleware in the request pipeline.</param>
         /// <param name="provider">The <see cref="IResponseCompressionProvider"/>.</param>
-        public ResponseCompressionMiddleware(RequestDelegate next, IResponseCompressionProvider provider)
-        {
+        public ResponseCompressionMiddleware(
+            RequestDelegate next,
+            IResponseCompressionProvider provider
+        ) {
             if (next == null)
             {
                 throw new ArgumentNullException(nameof(next));
@@ -57,7 +58,11 @@ namespace Microsoft.AspNetCore.ResponseCompression
 
             Debug.Assert(originalBodyFeature != null);
 
-            var compressionBody = new ResponseCompressionBody(context, _provider, originalBodyFeature);
+            var compressionBody = new ResponseCompressionBody(
+                context,
+                _provider,
+                originalBodyFeature
+            );
             context.Features.Set<IHttpResponseBodyFeature>(compressionBody);
             context.Features.Set<IHttpsCompressionFeature>(compressionBody);
 
@@ -66,6 +71,7 @@ namespace Microsoft.AspNetCore.ResponseCompression
                 await _next(context);
                 await compressionBody.FinishCompressionAsync();
             }
+
             finally
             {
                 context.Features.Set(originalBodyFeature);

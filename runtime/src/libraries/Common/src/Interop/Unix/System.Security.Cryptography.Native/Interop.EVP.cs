@@ -19,20 +19,37 @@ internal static partial class Interop
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpDigestReset")]
         internal static extern int EvpDigestReset(SafeEvpMdCtxHandle ctx, IntPtr type);
 
-        internal static int EvpDigestUpdate(SafeEvpMdCtxHandle ctx, ReadOnlySpan<byte> d, int cnt) =>
-            EvpDigestUpdate(ctx, ref MemoryMarshal.GetReference(d), cnt);
+        internal static int EvpDigestUpdate(
+            SafeEvpMdCtxHandle ctx,
+            ReadOnlySpan<byte> d,
+            int cnt
+        ) => EvpDigestUpdate(ctx, ref MemoryMarshal.GetReference(d), cnt);
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpDigestUpdate")]
         private static extern int EvpDigestUpdate(SafeEvpMdCtxHandle ctx, ref byte d, int cnt);
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpDigestFinalEx")]
-        internal static extern int EvpDigestFinalEx(SafeEvpMdCtxHandle ctx, ref byte md, ref uint s);
+        internal static extern int EvpDigestFinalEx(
+            SafeEvpMdCtxHandle ctx,
+            ref byte md,
+            ref uint s
+        );
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpDigestCurrent")]
-        internal static extern int EvpDigestCurrent(SafeEvpMdCtxHandle ctx, ref byte md, ref uint s);
+        internal static extern int EvpDigestCurrent(
+            SafeEvpMdCtxHandle ctx,
+            ref byte md,
+            ref uint s
+        );
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpDigestOneShot")]
-        internal static unsafe extern int EvpDigestOneShot(IntPtr type, byte* source, int sourceSize, byte* md, ref uint mdSize);
+        internal static unsafe extern int EvpDigestOneShot(
+            IntPtr type,
+            byte* source,
+            int sourceSize,
+            byte* md,
+            ref uint mdSize
+        );
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpMdSize")]
         internal static extern int EvpMdSize(IntPtr md);
@@ -49,19 +66,19 @@ internal static partial class Interop
             int iterations,
             IntPtr digestEvp,
             byte* pDestination,
-            int destinationLength);
+            int destinationLength
+        );
 
         internal static unsafe int Pbkdf2(
             ReadOnlySpan<byte> password,
             ReadOnlySpan<byte> salt,
             int iterations,
             IntPtr digestEvp,
-            Span<byte> destination)
-        {
-            fixed (byte* pPassword = password)
-            fixed (byte* pSalt = salt)
-            fixed (byte* pDestination = destination)
-            {
+            Span<byte> destination
+        ) {
+            fixed (byte* pPassword = password)fixed (byte* pSalt = salt)fixed (
+                byte* pDestination = destination
+            ) {
                 return Pbkdf2(
                     pPassword,
                     password.Length,
@@ -70,7 +87,8 @@ internal static partial class Interop
                     iterations,
                     digestEvp,
                     pDestination,
-                    destination.Length);
+                    destination.Length
+                );
             }
         }
 

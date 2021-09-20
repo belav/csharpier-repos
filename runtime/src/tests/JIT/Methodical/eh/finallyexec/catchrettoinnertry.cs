@@ -1,14 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// catch ret to the beginning of the inner try 
+// catch ret to the beginning of the inner try
 // we will need to use the il after the C# compiler is fixed
 
 using System;
 
 namespace strswitch
 {
-
     class Class1
     {
         private static TestUtil.TestLog testLog;
@@ -56,6 +55,7 @@ namespace strswitch
                     goto beginloop;
                 }
             }
+
             finally
             {
                 Console.WriteLine("In outer finally");

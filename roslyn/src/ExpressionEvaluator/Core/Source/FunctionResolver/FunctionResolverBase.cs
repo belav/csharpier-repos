@@ -27,8 +27,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         internal abstract Guid GetLanguageId(TRequest request);
         internal abstract Guid LanguageId { get; }
 
-        internal void EnableResolution(TProcess process, TRequest request, OnFunctionResolvedDelegate<TModule, TRequest> onFunctionResolved)
-        {
+        internal void EnableResolution(
+            TProcess process,
+            TRequest request,
+            OnFunctionResolvedDelegate<TModule, TRequest> onFunctionResolved
+        ) {
             if (!ShouldHandleRequest(request))
             {
                 return;
@@ -67,8 +70,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             }
         }
 
-        internal void OnModuleLoad(TProcess process, TModule module, OnFunctionResolvedDelegate<TModule, TRequest> onFunctionResolved)
-        {
+        internal void OnModuleLoad(
+            TProcess process,
+            TModule module,
+            OnFunctionResolvedDelegate<TModule, TRequest> onFunctionResolved
+        ) {
             if (!ShouldEnableFunctionResolver(process))
             {
                 return;
@@ -114,9 +120,15 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             TProcess process,
             TModule module,
             MetadataReader reader,
-            OnFunctionResolvedDelegate<TModule, TRequest> onFunctionResolved)
-        {
-            return new MetadataResolver<TProcess, TModule, TRequest>(process, module, reader, IgnoreCase, onFunctionResolved);
+            OnFunctionResolvedDelegate<TModule, TRequest> onFunctionResolved
+        ) {
+            return new MetadataResolver<TProcess, TModule, TRequest>(
+                process,
+                module,
+                reader,
+                IgnoreCase,
+                onFunctionResolved
+            );
         }
 
         private bool ShouldHandleRequest(TRequest request)
@@ -124,9 +136,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             var languageId = GetLanguageId(request);
             // Handle requests with no language id, a matching language id,
             // or causality breakpoint requests (debugging web services).
-            return languageId == Guid.Empty ||
-                languageId == LanguageId ||
-                languageId == DkmLanguageId.CausalityBreakpoint;
+            return languageId == Guid.Empty
+                || languageId == LanguageId
+                || languageId == DkmLanguageId.CausalityBreakpoint;
         }
 
         private bool ShouldModuleHandleRequest(TModule module, string moduleName)

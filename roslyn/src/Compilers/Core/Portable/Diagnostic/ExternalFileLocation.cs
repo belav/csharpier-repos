@@ -16,18 +16,18 @@ namespace Microsoft.CodeAnalysis
         private readonly TextSpan _sourceSpan;
         private readonly FileLinePositionSpan _lineSpan;
 
-        internal ExternalFileLocation(string filePath, TextSpan sourceSpan, LinePositionSpan lineSpan)
-        {
+        internal ExternalFileLocation(
+            string filePath,
+            TextSpan sourceSpan,
+            LinePositionSpan lineSpan
+        ) {
             _sourceSpan = sourceSpan;
             _lineSpan = new FileLinePositionSpan(filePath, lineSpan);
         }
 
         public override TextSpan SourceSpan
         {
-            get
-            {
-                return _sourceSpan;
-            }
+            get { return _sourceSpan; }
         }
 
         public string FilePath => _lineSpan.Path;
@@ -44,10 +44,7 @@ namespace Microsoft.CodeAnalysis
 
         public override LocationKind Kind
         {
-            get
-            {
-                return LocationKind.ExternalFile;
-            }
+            get { return LocationKind.ExternalFile; }
         }
 
         public override bool Equals(object? obj)
@@ -62,9 +59,7 @@ namespace Microsoft.CodeAnalysis
                 return true;
             }
 
-            return obj != null
-                && _sourceSpan == obj._sourceSpan
-                && _lineSpan.Equals(obj._lineSpan);
+            return obj != null && _sourceSpan == obj._sourceSpan && _lineSpan.Equals(obj._lineSpan);
         }
 
         public override int GetHashCode()

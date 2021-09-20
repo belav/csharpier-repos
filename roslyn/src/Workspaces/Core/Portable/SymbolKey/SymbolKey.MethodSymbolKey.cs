@@ -18,19 +18,25 @@ namespace Microsoft.CodeAnalysis
                 visitor.WriteSymbolKey(symbol.ReceiverType);
             }
 
-            public static SymbolKeyResolution Resolve(SymbolKeyReader reader, out string? failureReason)
-            {
+            public static SymbolKeyResolution Resolve(
+                SymbolKeyReader reader,
+                out string? failureReason
+            ) {
                 var reducedFromResolution = reader.ReadSymbolKey(out var reducedFromFailureReason);
                 if (reducedFromFailureReason != null)
                 {
-                    failureReason = $"({nameof(ReducedExtensionMethodSymbolKey)} {nameof(reducedFromResolution)} failed -> {reducedFromFailureReason})";
+                    failureReason =
+                        $"({nameof(ReducedExtensionMethodSymbolKey)} {nameof(reducedFromResolution)} failed -> {reducedFromFailureReason})";
                     return default;
                 }
 
-                var receiverTypeResolution = reader.ReadSymbolKey(out var receiverTypeFailureReason);
+                var receiverTypeResolution = reader.ReadSymbolKey(
+                    out var receiverTypeFailureReason
+                );
                 if (receiverTypeFailureReason != null)
                 {
-                    failureReason = $"({nameof(ReducedExtensionMethodSymbolKey)} {nameof(receiverTypeResolution)} failed -> {receiverTypeFailureReason})";
+                    failureReason =
+                        $"({nameof(ReducedExtensionMethodSymbolKey)} {nameof(receiverTypeResolution)} failed -> {receiverTypeFailureReason})";
                     return default;
                 }
 
@@ -43,7 +49,11 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
 
-                return CreateResolution(result, $"({nameof(ReducedExtensionMethodSymbolKey)} failed)", out failureReason);
+                return CreateResolution(
+                    result,
+                    $"({nameof(ReducedExtensionMethodSymbolKey)} failed)",
+                    out failureReason
+                );
             }
         }
     }
@@ -58,25 +68,32 @@ namespace Microsoft.CodeAnalysis
                 visitor.WriteSymbolKeyArray(symbol.TypeArguments);
             }
 
-            public static SymbolKeyResolution Resolve(SymbolKeyReader reader, out string? failureReason)
-            {
+            public static SymbolKeyResolution Resolve(
+                SymbolKeyReader reader,
+                out string? failureReason
+            ) {
                 var constructedFrom = reader.ReadSymbolKey(out var constructedFromFailureReason);
                 if (constructedFromFailureReason != null)
                 {
-                    failureReason = $"({nameof(ConstructedMethodSymbolKey)} {nameof(constructedFrom)} failed -> {constructedFromFailureReason})";
+                    failureReason =
+                        $"({nameof(ConstructedMethodSymbolKey)} {nameof(constructedFrom)} failed -> {constructedFromFailureReason})";
                     return default;
                 }
 
-                using var typeArguments = reader.ReadSymbolKeyArray<ITypeSymbol>(out var typeArgumentsFailureReason);
+                using var typeArguments = reader.ReadSymbolKeyArray<ITypeSymbol>(
+                    out var typeArgumentsFailureReason
+                );
                 if (typeArgumentsFailureReason != null)
                 {
-                    failureReason = $"({nameof(ConstructedMethodSymbolKey)} {nameof(typeArguments)} failed -> {typeArgumentsFailureReason})";
+                    failureReason =
+                        $"({nameof(ConstructedMethodSymbolKey)} {nameof(typeArguments)} failed -> {typeArgumentsFailureReason})";
                     return default;
                 }
 
                 if (constructedFrom.SymbolCount == 0 || typeArguments.IsDefault)
                 {
-                    failureReason = $"({nameof(ConstructedMethodSymbolKey)} {nameof(typeArguments)} failed -> 'constructedFrom.SymbolCount == 0 || typeArguments.IsDefault')";
+                    failureReason =
+                        $"({nameof(ConstructedMethodSymbolKey)} {nameof(typeArguments)} failed -> 'constructedFrom.SymbolCount == 0 || typeArguments.IsDefault')";
                     return default;
                 }
 
@@ -91,7 +108,11 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
 
-                return CreateResolution(result, $"({nameof(ConstructedMethodSymbolKey)} could not successfully construct)", out failureReason);
+                return CreateResolution(
+                    result,
+                    $"({nameof(ConstructedMethodSymbolKey)} could not successfully construct)",
+                    out failureReason
+                );
             }
         }
     }
@@ -110,7 +131,7 @@ namespace Microsoft.CodeAnalysis
                 visitor.WriteBoolean(symbol.PartialDefinitionPart != null);
                 visitor.WriteRefKindArray(symbol.Parameters);
 
-                // Mark that we're writing out the signature of a method.  This way if we hit a 
+                // Mark that we're writing out the signature of a method.  This way if we hit a
                 // method type parameter in our parameter-list or return type, we won't recurse
                 // into it, but will instead only write out the type parameter ordinal.  This
                 // happens with cases like Goo<T>(T t);
@@ -132,8 +153,10 @@ namespace Microsoft.CodeAnalysis
                 visitor.PopMethod(symbol);
             }
 
-            public static SymbolKeyResolution Resolve(SymbolKeyReader reader, out string? failureReason)
-            {
+            public static SymbolKeyResolution Resolve(
+                SymbolKeyReader reader,
+                out string? failureReason
+            ) {
                 var metadataName = reader.ReadString()!;
 
                 var containingType = reader.ReadSymbolKey(out var containingTypeFailureReason);
@@ -143,7 +166,7 @@ namespace Microsoft.CodeAnalysis
 
                 // For each method that we look at, we'll have to resolve the parameter list and
                 // return type in the context of that method.  i.e. if we have Goo<T>(IList<T> list)
-                // then we'll need to have marked that we're on the Goo<T> method so that we know 
+                // then we'll need to have marked that we're on the Goo<T> method so that we know
                 // 'T' in IList<T> resolves to.
                 //
                 // Because of this, we keep track of where we are in the reader.  Before resolving
@@ -151,13 +174,23 @@ namespace Microsoft.CodeAnalysis
                 // point.
                 var beforeParametersPosition = reader.Position;
 
-                using var methods = GetMembersOfNamedType<IMethodSymbol>(containingType, metadataName: null);
+                using var methods = GetMembersOfNamedType<IMethodSymbol>(
+                    containingType,
+                    metadataName: null
+                );
                 using var result = PooledArrayBuilder<IMethodSymbol>.GetInstance();
 
                 foreach (var candidate in methods)
                 {
-                    var method = Resolve(reader, metadataName, arity, isPartialMethodImplementationPart,
-                        parameterRefKinds, beforeParametersPosition, candidate);
+                    var method = Resolve(
+                        reader,
+                        metadataName,
+                        arity,
+                        isPartialMethodImplementationPart,
+                        parameterRefKinds,
+                        beforeParametersPosition,
+                        candidate
+                    );
 
                     // Note: after finding the first method that matches we stop.  That's necessary
                     // as we cache results while searching.  We don't want to override these positive
@@ -191,28 +224,38 @@ namespace Microsoft.CodeAnalysis
 
                 if (containingTypeFailureReason != null)
                 {
-                    failureReason = $"({nameof(MethodSymbolKey)} {nameof(containingType)} failed -> {containingTypeFailureReason})";
+                    failureReason =
+                        $"({nameof(MethodSymbolKey)} {nameof(containingType)} failed -> {containingTypeFailureReason})";
                     return default;
                 }
 
-                return CreateResolution(result, $"({nameof(MethodSymbolKey)} '{metadataName}' not found)", out failureReason);
+                return CreateResolution(
+                    result,
+                    $"({nameof(MethodSymbolKey)} '{metadataName}' not found)",
+                    out failureReason
+                );
             }
 
             private static IMethodSymbol? Resolve(
-                SymbolKeyReader reader, string metadataName, int arity, bool isPartialMethodImplementationPart,
-                PooledArrayBuilder<RefKind> parameterRefKinds, int beforeParametersPosition,
-                IMethodSymbol method)
-            {
-                if (method.Arity == arity &&
-                    method.MetadataName == metadataName &&
-                    ParameterRefKindsMatch(method.Parameters, parameterRefKinds))
-                {
-                    // Method looks like a potential match.  It has the right arity, name and 
+                SymbolKeyReader reader,
+                string metadataName,
+                int arity,
+                bool isPartialMethodImplementationPart,
+                PooledArrayBuilder<RefKind> parameterRefKinds,
+                int beforeParametersPosition,
+                IMethodSymbol method
+            ) {
+                if (
+                    method.Arity == arity
+                    && method.MetadataName == metadataName
+                    && ParameterRefKindsMatch(method.Parameters, parameterRefKinds)
+                ) {
+                    // Method looks like a potential match.  It has the right arity, name and
                     // refkinds match.  We now need to do the more complicated work of checking
-                    // the parameters (and possibly the return type).  This is more complicated 
+                    // the parameters (and possibly the return type).  This is more complicated
                     // because those symbols might refer to method type parameters.  In order
                     // for resolution to work on those type parameters, we have to keep track
-                    // in the reader that we're resolving this method. 
+                    // in the reader that we're resolving this method.
 
                     // Restore our position to right before the list of parameters.  Also, push
                     // this method into our method-resolution-stack so that we can properly resolve
@@ -234,15 +277,20 @@ namespace Microsoft.CodeAnalysis
             }
 
             private static IMethodSymbol? Resolve(
-                SymbolKeyReader reader, bool isPartialMethodImplementationPart, IMethodSymbol method)
-            {
+                SymbolKeyReader reader,
+                bool isPartialMethodImplementationPart,
+                IMethodSymbol method
+            ) {
                 using var originalParameterTypes = reader.ReadSymbolKeyArray<ITypeSymbol>(out _);
                 var returnType = (ITypeSymbol?)reader.ReadSymbolKey(out _).GetAnySymbol();
 
-                if (reader.ParameterTypesMatch(method.OriginalDefinition.Parameters, originalParameterTypes))
-                {
-                    if (returnType == null ||
-                        reader.Comparer.Equals(returnType, method.ReturnType))
+                if (
+                    reader.ParameterTypesMatch(
+                        method.OriginalDefinition.Parameters,
+                        originalParameterTypes
+                    )
+                ) {
+                    if (returnType == null || reader.Comparer.Equals(returnType, method.ReturnType))
                     {
                         if (isPartialMethodImplementationPart)
                         {

@@ -8,8 +8,12 @@ namespace System.Configuration
 {
     public sealed class CommaDelimitedStringCollectionConverter : ConfigurationConverterBase
     {
-        public override object ConvertTo(ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
-        {
+        public override object ConvertTo(
+            ITypeDescriptorContext ctx,
+            CultureInfo ci,
+            object value,
+            Type type
+        ) {
             ValidateType(value, typeof(CommaDelimitedStringCollection));
             CommaDelimitedStringCollection internalValue = value as CommaDelimitedStringCollection;
             return internalValue?.ToString();
@@ -17,7 +21,8 @@ namespace System.Configuration
 
         public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data)
         {
-            CommaDelimitedStringCollection attributeCollection = new CommaDelimitedStringCollection();
+            CommaDelimitedStringCollection attributeCollection =
+                new CommaDelimitedStringCollection();
             attributeCollection.FromString((string)data);
             return attributeCollection;
         }

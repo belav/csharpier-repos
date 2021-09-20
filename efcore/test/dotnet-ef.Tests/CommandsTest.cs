@@ -21,9 +21,10 @@ namespace Microsoft.EntityFrameworkCore.Tools
                     Assert.True(
                         group.Key == null || group.Count() == 1,
                         "Duplicate short names on command '"
-                        + GetFullName(command)
-                        + "': "
-                        + string.Join("; ", group.Select(o => o.Template)));
+                            + GetFullName(command)
+                            + "': "
+                            + string.Join("; ", group.Select(o => o.Template))
+                    );
                 }
             }
         }
@@ -37,8 +38,9 @@ namespace Microsoft.EntityFrameworkCore.Tools
             return GetCommands(app);
         }
 
-        private static IEnumerable<CommandLineApplication> GetCommands(CommandLineApplication command)
-        {
+        private static IEnumerable<CommandLineApplication> GetCommands(
+            CommandLineApplication command
+        ) {
             var commands = new Stack<CommandLineApplication>();
             commands.Push(command);
 

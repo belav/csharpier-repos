@@ -12,8 +12,10 @@ namespace System.Net
             public readonly Interop.NetSecurityNative.GssFlags GssFlags;
             public readonly ContextFlagsPal ContextFlag;
 
-            public ContextFlagMapping(Interop.NetSecurityNative.GssFlags gssFlag, ContextFlagsPal contextFlag)
-            {
+            public ContextFlagMapping(
+                Interop.NetSecurityNative.GssFlags gssFlag,
+                ContextFlagsPal contextFlag
+            ) {
                 GssFlags = gssFlag;
                 ContextFlag = contextFlag;
             }
@@ -21,16 +23,32 @@ namespace System.Net
 
         private static readonly ContextFlagMapping[] s_contextFlagMapping = new[]
         {
-            new ContextFlagMapping(Interop.NetSecurityNative.GssFlags.GSS_C_CONF_FLAG, ContextFlagsPal.Confidentiality),
-            new ContextFlagMapping(Interop.NetSecurityNative.GssFlags.GSS_C_MUTUAL_FLAG, ContextFlagsPal.MutualAuth),
-            new ContextFlagMapping(Interop.NetSecurityNative.GssFlags.GSS_C_REPLAY_FLAG, ContextFlagsPal.ReplayDetect),
-            new ContextFlagMapping(Interop.NetSecurityNative.GssFlags.GSS_C_SEQUENCE_FLAG, ContextFlagsPal.SequenceDetect),
-            new ContextFlagMapping(Interop.NetSecurityNative.GssFlags.GSS_C_DELEG_FLAG, ContextFlagsPal.Delegate)
+            new ContextFlagMapping(
+                Interop.NetSecurityNative.GssFlags.GSS_C_CONF_FLAG,
+                ContextFlagsPal.Confidentiality
+            ),
+            new ContextFlagMapping(
+                Interop.NetSecurityNative.GssFlags.GSS_C_MUTUAL_FLAG,
+                ContextFlagsPal.MutualAuth
+            ),
+            new ContextFlagMapping(
+                Interop.NetSecurityNative.GssFlags.GSS_C_REPLAY_FLAG,
+                ContextFlagsPal.ReplayDetect
+            ),
+            new ContextFlagMapping(
+                Interop.NetSecurityNative.GssFlags.GSS_C_SEQUENCE_FLAG,
+                ContextFlagsPal.SequenceDetect
+            ),
+            new ContextFlagMapping(
+                Interop.NetSecurityNative.GssFlags.GSS_C_DELEG_FLAG,
+                ContextFlagsPal.Delegate
+            )
         };
 
-
-        internal static ContextFlagsPal GetContextFlagsPalFromInterop(Interop.NetSecurityNative.GssFlags gssFlags, bool isServer)
-        {
+        internal static ContextFlagsPal GetContextFlagsPalFromInterop(
+            Interop.NetSecurityNative.GssFlags gssFlags,
+            bool isServer
+        ) {
             ContextFlagsPal flags = ContextFlagsPal.None;
 
             // GSS_C_IDENTIFY_FLAG is handled separately as its value can either be AcceptIdentify (used by server) or InitIdentify (used by client)
@@ -64,8 +82,10 @@ namespace System.Net
             return flags;
         }
 
-        internal static Interop.NetSecurityNative.GssFlags GetInteropFromContextFlagsPal(ContextFlagsPal flags, bool isServer)
-        {
+        internal static Interop.NetSecurityNative.GssFlags GetInteropFromContextFlagsPal(
+            ContextFlagsPal flags,
+            bool isServer
+        ) {
             Interop.NetSecurityNative.GssFlags gssFlags = 0;
 
             // GSS_C_IDENTIFY_FLAG is set if either AcceptIdentify (used by server) or InitIdentify (used by client) is set

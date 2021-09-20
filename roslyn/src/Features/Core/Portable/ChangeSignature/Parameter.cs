@@ -39,8 +39,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             string callSiteValue = "",
             bool isRequired = true,
             string defaultValue = "",
-            bool typeBinds = true)
-        {
+            bool typeBinds = true
+        ) {
             Type = type;
             TypeBinds = typeBinds;
             TypeName = typeName;
@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                     CallSiteValue = callSiteValue;
                     break;
                 case CallSiteKind.Todo:
-                    CallSiteValue = FeaturesResources.ChangeSignature_NewParameterIntroduceTODOVariable;
+                    CallSiteValue =
+                        FeaturesResources.ChangeSignature_NewParameterIntroduceTODOVariable;
                     break;
                 case CallSiteKind.Omitted:
                     CallSiteValue = FeaturesResources.ChangeSignature_NewParameterOmitValue;
@@ -98,6 +99,7 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         public string DefaultValue { get; }
 
         // For test purposes: to display assert failure details in tests.
-        public override string ToString() => $"{Type.ToDisplayString(new SymbolDisplayFormat(genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters))} {Name} ({CallSiteValue})";
+        public override string ToString() =>
+            $"{Type.ToDisplayString(new SymbolDisplayFormat(genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters))} {Name} ({CallSiteValue})";
     }
 }

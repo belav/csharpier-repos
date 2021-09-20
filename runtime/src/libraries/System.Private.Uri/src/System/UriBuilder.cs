@@ -23,9 +23,7 @@ namespace System
 
         // constructors
 
-        public UriBuilder()
-        {
-        }
+        public UriBuilder() { }
 
         public UriBuilder(string uri)
         {
@@ -91,21 +89,19 @@ namespace System
             Port = portNumber;
         }
 
-        public UriBuilder(string? scheme,
-                          string? host,
-                          int port,
-                          string? pathValue
-                          ) : this(scheme, host, port)
+        public UriBuilder(string? scheme, string? host, int port, string? pathValue)
+            : this(scheme, host, port)
         {
             Path = pathValue;
         }
 
-        public UriBuilder(string? scheme,
-                          string? host,
-                          int port,
-                          string? path,
-                          string? extraValue
-                          ) : this(scheme, host, port, path)
+        public UriBuilder(
+            string? scheme,
+            string? host,
+            int port,
+            string? path,
+            string? extraValue
+        ) : this(scheme, host, port, path)
         {
             try
             {
@@ -167,10 +163,7 @@ namespace System
         [AllowNull]
         public string Fragment
         {
-            get
-            {
-                return _fragment;
-            }
+            get { return _fragment; }
             set
             {
                 if (value == null)
@@ -189,10 +182,7 @@ namespace System
         [AllowNull]
         public string Host
         {
-            get
-            {
-                return _host;
-            }
+            get { return _host; }
             set
             {
                 if (value == null)
@@ -214,10 +204,7 @@ namespace System
         [AllowNull]
         public string Password
         {
-            get
-            {
-                return _password;
-            }
+            get { return _password; }
             set
             {
                 if (value == null)
@@ -232,25 +219,19 @@ namespace System
         [AllowNull]
         public string Path
         {
-            get
-            {
-                return _path;
-            }
+            get { return _path; }
             set
             {
-                _path = string.IsNullOrEmpty(value) ?
-                    "/" :
-                    Uri.InternalEscapeString(value.Replace('\\', '/'));
+                _path = string.IsNullOrEmpty(value)
+                    ? "/"
+                    : Uri.InternalEscapeString(value.Replace('\\', '/'));
                 _changed = true;
             }
         }
 
         public int Port
         {
-            get
-            {
-                return _port;
-            }
+            get { return _port; }
             set
             {
                 if (value < -1 || value > 0xFFFF)
@@ -265,10 +246,7 @@ namespace System
         [AllowNull]
         public string Query
         {
-            get
-            {
-                return _query;
-            }
+            get { return _query; }
             set
             {
                 if (value == null)
@@ -287,10 +265,7 @@ namespace System
         [AllowNull]
         public string Scheme
         {
-            get
-            {
-                return _scheme;
-            }
+            get { return _scheme; }
             set
             {
                 if (value == null)
@@ -334,10 +309,7 @@ namespace System
         [AllowNull]
         public string UserName
         {
-            get
-            {
-                return _username;
-            }
+            get { return _username; }
             set
             {
                 if (value == null)
@@ -404,8 +376,13 @@ namespace System
             {
                 UriParser? syntax = UriParser.GetSyntax(_scheme);
                 if (syntax != null)
-                    _schemeDelimiter = syntax.InFact(UriSyntaxFlags.MustHaveAuthority) ||
-                                        (_host.Length != 0 && syntax.NotAny(UriSyntaxFlags.MailToLikeUri) && syntax.InFact(UriSyntaxFlags.OptionalAuthority))
+                    _schemeDelimiter =
+                        syntax.InFact(UriSyntaxFlags.MustHaveAuthority)
+                        || (
+                            _host.Length != 0
+                            && syntax.NotAny(UriSyntaxFlags.MailToLikeUri)
+                            && syntax.InFact(UriSyntaxFlags.OptionalAuthority)
+                        )
                             ? Uri.SchemeDelimiter
                             : ":";
                 else
@@ -414,14 +391,19 @@ namespace System
 
             string result = _scheme.Length != 0 ? (_scheme + _schemeDelimiter) : string.Empty;
             return result
-                    + _username
-                    + ((_password.Length > 0) ? (":" + _password) : string.Empty)
-                    + ((_username.Length > 0) ? "@" : string.Empty)
-                    + _host
-                    + (((_port != -1) && (_host.Length > 0)) ? (":" + _port.ToString()) : string.Empty)
-                    + (((_host.Length > 0) && (_path.Length != 0) && (_path[0] != '/')) ? "/" : string.Empty) + _path
-                    + _query
-                    + _fragment;
+                + _username
+                + ((_password.Length > 0) ? (":" + _password) : string.Empty)
+                + ((_username.Length > 0) ? "@" : string.Empty)
+                + _host
+                + (((_port != -1) && (_host.Length > 0)) ? (":" + _port.ToString()) : string.Empty)
+                + (
+                    ((_host.Length > 0) && (_path.Length != 0) && (_path[0] != '/'))
+                        ? "/"
+                        : string.Empty
+                )
+                + _path
+                + _query
+                + _fragment;
         }
     }
 }

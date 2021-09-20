@@ -24,16 +24,37 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
         protected abstract string CaseFormat { get; }
         protected abstract string DefaultCase { get; }
 
-        public AbstractSnippetFunctionGenerateSwitchCases(AbstractSnippetExpansionClient snippetExpansionClient, ITextBuffer subjectBuffer, string caseGenerationLocationField, string switchExpressionField)
-            : base(snippetExpansionClient, subjectBuffer)
+        public AbstractSnippetFunctionGenerateSwitchCases(
+            AbstractSnippetExpansionClient snippetExpansionClient,
+            ITextBuffer subjectBuffer,
+            string caseGenerationLocationField,
+            string switchExpressionField
+        ) : base(snippetExpansionClient, subjectBuffer)
         {
             this.CaseGenerationLocationField = caseGenerationLocationField;
-            this.SwitchExpressionField = (switchExpressionField.Length >= 2 && switchExpressionField[0] == '$' && switchExpressionField[switchExpressionField.Length - 1] == '$')
-                ? switchExpressionField.Substring(1, switchExpressionField.Length - 2) : switchExpressionField;
+            this.SwitchExpressionField =
+                (
+                    switchExpressionField.Length >= 2
+                    && switchExpressionField[0] == '$'
+                    && switchExpressionField[switchExpressionField.Length - 1] == '$'
+                )
+                    ? switchExpressionField.Substring(1, switchExpressionField.Length - 2)
+                    : switchExpressionField;
         }
 
-        protected abstract bool TryGetEnumTypeSymbol(CancellationToken cancellationToken, out ITypeSymbol typeSymbol);
-        protected abstract bool TryGetSimplifiedTypeNameInCaseContext(Document document, string fullyQualifiedTypeName, string firstEnumMemberName, int startPosition, int endPosition, CancellationToken cancellationToken, out string simplifiedTypeName);
+        protected abstract bool TryGetEnumTypeSymbol(
+            CancellationToken cancellationToken,
+            out ITypeSymbol typeSymbol
+        );
+        protected abstract bool TryGetSimplifiedTypeNameInCaseContext(
+            Document document,
+            string fullyQualifiedTypeName,
+            string firstEnumMemberName,
+            int startPosition,
+            int endPosition,
+            CancellationToken cancellationToken,
+            out string simplifiedTypeName
+        );
 
         protected override int FieldChanged(string field, out int requeryFunction)
         {
@@ -41,27 +62,35 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
             return VSConstants.S_OK;
         }
 
-        protected override int GetCurrentValue(CancellationToken cancellationToken, out string value, out int hasCurrentValue)
-        {
+        protected override int GetCurrentValue(
+            CancellationToken cancellationToken,
+            out string value,
+            out int hasCurrentValue
+        ) {
             // If the switch expression is invalid, still show the default case
             value = DefaultCase;
             hasCurrentValue = 1;
-            if (!TryGetEnumTypeSymbol(cancellationToken, out var typeSymbol) || typeSymbol.TypeKind != TypeKind.Enum)
-            {
+            if (
+                !TryGetEnumTypeSymbol(cancellationToken, out var typeSymbol)
+                || typeSymbol.TypeKind != TypeKind.Enum
+            ) {
                 return VSConstants.S_OK;
             }
 
-            var enumFields = typeSymbol.GetMembers().Where(m => m.Kind == SymbolKind.Field && m.IsStatic);
+            var enumFields = typeSymbol.GetMembers()
+                .Where(m => m.Kind == SymbolKind.Field && m.IsStatic);
 
             // Find and use the most simplified legal version of the enum type name in this context
             var simplifiedTypeName = string.Empty;
-            if (!enumFields.Any() ||
-                !TryGetSimplifiedTypeName(
+            if (
+                !enumFields.Any()
+                || !TryGetSimplifiedTypeName(
                     typeSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
                     enumFields.First().Name,
                     cancellationToken,
-                    out simplifiedTypeName))
-            {
+                    out simplifiedTypeName
+                )
+            ) {
                 return VSConstants.S_OK;
             }
 
@@ -77,8 +106,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
             return VSConstants.S_OK;
         }
 
-        private bool TryGetSimplifiedTypeName(string fullyQualifiedTypeName, string firstEnumMemberName, CancellationToken cancellationToken, out string simplifiedTypeName)
-        {
+        private bool TryGetSimplifiedTypeName(
+            string fullyQualifiedTypeName,
+            string firstEnumMemberName,
+            CancellationToken cancellationToken,
+            out string simplifiedTypeName
+        ) {
             simplifiedTypeName = string.Empty;
             if (!TryGetDocument(out var document))
             {
@@ -88,17 +121,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
             // Add the first switch case using the fully qualified type name, then simplify it in
             // that context
             var surfaceBufferFieldSpan = new VsTextSpan[1];
-            if (snippetExpansionClient.ExpansionSession.GetFieldSpan(CaseGenerationLocationField, surfaceBufferFieldSpan) != VSConstants.S_OK)
-            {
+            if (
+                snippetExpansionClient.ExpansionSession.GetFieldSpan(
+                    CaseGenerationLocationField,
+                    surfaceBufferFieldSpan
+                ) != VSConstants.S_OK
+            ) {
                 return false;
             }
 
-            if (!snippetExpansionClient.TryGetSubjectBufferSpan(surfaceBufferFieldSpan[0], out var subjectBufferFieldSpan))
-            {
+            if (
+                !snippetExpansionClient.TryGetSubjectBufferSpan(
+                    surfaceBufferFieldSpan[0],
+                    out var subjectBufferFieldSpan
+                )
+            ) {
                 return false;
             }
 
-            return TryGetSimplifiedTypeNameInCaseContext(document, fullyQualifiedTypeName, firstEnumMemberName, subjectBufferFieldSpan.Start.Position, subjectBufferFieldSpan.End.Position, cancellationToken, out simplifiedTypeName);
+            return TryGetSimplifiedTypeNameInCaseContext(
+                document,
+                fullyQualifiedTypeName,
+                firstEnumMemberName,
+                subjectBufferFieldSpan.Start.Position,
+                subjectBufferFieldSpan.End.Position,
+                cancellationToken,
+                out simplifiedTypeName
+            );
         }
     }
 }

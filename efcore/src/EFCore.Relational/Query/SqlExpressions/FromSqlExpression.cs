@@ -26,8 +26,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <param name="arguments"> A user-provided parameters to pass to the custom SQL. </param>
         /// <param name="alias"> A string alias for the table source. </param>
         [Obsolete("Use the constructor which takes alias as first argument.")]
-        public FromSqlExpression(string sql, Expression arguments, string alias)
-            : base(alias)
+        public FromSqlExpression(string sql, Expression arguments, string alias) : base(alias)
         {
             Check.NotEmpty(sql, nameof(sql));
             Check.NotNull(arguments, nameof(arguments));
@@ -42,8 +41,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <param name="alias"> A string alias for the table source. </param>
         /// <param name="sql"> A user-provided custom SQL for the table source. </param>
         /// <param name="arguments"> A user-provided parameters to pass to the custom SQL. </param>
-        public FromSqlExpression(string alias, string sql, Expression arguments)
-            : base(alias)
+        public FromSqlExpression(string alias, string sql, Expression arguments) : base(alias)
         {
             Check.NotEmpty(sql, nameof(sql));
             Check.NotNull(arguments, nameof(arguments));
@@ -82,9 +80,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         {
             Check.NotNull(arguments, nameof(arguments));
 
-            return arguments != Arguments
-                ? new FromSqlExpression(Alias, Sql, arguments)
-                : this;
+            return arguments != Arguments ? new FromSqlExpression(Alias, Sql, arguments) : this;
         }
 
         /// <inheritdoc />
@@ -104,19 +100,19 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is FromSqlExpression fromSqlExpression
-                    && Equals(fromSqlExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is FromSqlExpression fromSqlExpression && Equals(fromSqlExpression)
+            );
 
-        private bool Equals(FromSqlExpression fromSqlExpression)
-            => base.Equals(fromSqlExpression)
-                && Sql == fromSqlExpression.Sql
-                && ExpressionEqualityComparer.Instance.Equals(Arguments, fromSqlExpression.Arguments);
+        private bool Equals(FromSqlExpression fromSqlExpression) =>
+            base.Equals(fromSqlExpression)
+            && Sql == fromSqlExpression.Sql
+            && ExpressionEqualityComparer.Instance.Equals(Arguments, fromSqlExpression.Arguments);
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), Sql);
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Sql);
     }
 }

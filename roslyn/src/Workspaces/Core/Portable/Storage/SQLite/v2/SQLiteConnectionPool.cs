@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 {
     internal sealed partial class SQLiteConnectionPool : IDisposable
     {
-        // We pool connections to the DB so that we don't have to take the hit of 
+        // We pool connections to the DB so that we don't have to take the hit of
         // reconnecting.  The connections also cache the prepared statements used
         // to get/set data from the db.  A connection is safe to use by one thread
         // at a time, but is not safe for simultaneous use by multiple threads.
@@ -27,8 +27,12 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         private readonly string _databasePath;
         private readonly IDisposable _ownershipLock;
 
-        public SQLiteConnectionPool(SQLiteConnectionPoolService connectionPoolService, IPersistentStorageFaultInjector? faultInjector, string databasePath, IDisposable ownershipLock)
-        {
+        public SQLiteConnectionPool(
+            SQLiteConnectionPoolService connectionPoolService,
+            IPersistentStorageFaultInjector? faultInjector,
+            string databasePath,
+            IDisposable ownershipLock
+        ) {
             _connectionPoolService = connectionPoolService;
             _faultInjector = faultInjector;
             _databasePath = databasePath;
@@ -37,8 +41,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 
         internal void Initialize(
             Action<SqlConnection, CancellationToken> initializer,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             // This is our startup path.  No other code can be running.  So it's safe for us to access a connection that
             // can talk to the db without having to be on the reader/writer scheduler queue.
             using var _ = GetPooledConnection(checkScheduler: false, out var connection);
@@ -55,6 +59,7 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 _shutdownTokenSource.Cancel();
                 CloseWorker();
             }
+
             finally
             {
                 // let the lock go
@@ -83,21 +88,28 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         /// longer in use. In particular, make sure to avoid letting a connection lease cross an <see langword="await"/>
         /// boundary, as it will prevent code in the asynchronous operation from using the existing connection.
         /// </remarks>
-        internal PooledConnection GetPooledConnection(out SqlConnection connection)
-            => GetPooledConnection(checkScheduler: true, out connection);
+        internal PooledConnection GetPooledConnection(out SqlConnection connection) =>
+            GetPooledConnection(checkScheduler: true, out connection);
 
         /// <summary>
         /// <inheritdoc cref="GetPooledConnection(out SqlConnection)"/>
         /// Only use this overload if it is safe to bypass the normal scheduler check.  Only startup code (which runs
         /// before any reads/writes/flushes happen) should use this.
         /// </summary>
-        private PooledConnection GetPooledConnection(bool checkScheduler, out SqlConnection connection)
-        {
+        private PooledConnection GetPooledConnection(
+            bool checkScheduler,
+            out SqlConnection connection
+        ) {
             if (checkScheduler)
             {
                 var scheduler = TaskScheduler.Current;
-                if (scheduler != _connectionPoolService.Scheduler.ConcurrentScheduler && scheduler != _connectionPoolService.Scheduler.ExclusiveScheduler)
-                    throw new InvalidOperationException($"Cannot get a connection to the DB unless running on one of {nameof(SQLiteConnectionPoolService)}'s schedulers");
+                if (
+                    scheduler != _connectionPoolService.Scheduler.ConcurrentScheduler
+                    && scheduler != _connectionPoolService.Scheduler.ExclusiveScheduler
+                )
+                    throw new InvalidOperationException(
+                        $"Cannot get a connection to the DB unless running on one of {nameof(SQLiteConnectionPoolService)}'s schedulers"
+                    );
             }
 
             var result = new PooledConnection(this, GetConnection());
@@ -124,7 +136,7 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         {
             lock (_connectionGate)
             {
-                // If we've been asked to shutdown, then don't actually add the connection back to 
+                // If we've been asked to shutdown, then don't actually add the connection back to
                 // the pool.  Instead, just close it as we no longer need it.
                 if (_shutdownTokenSource.IsCancellationRequested)
                 {

@@ -16,11 +16,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 yield return new object[]
                 {
                     LanguageViewLocationExpanderFormat.Suffix,
-                    new[]
-                    {
-                        "/Views/{1}/{0}.cshtml",
-                        "/Views/Shared/{0}.cshtml"
-                    },
+                    new[] { "/Views/{1}/{0}.cshtml", "/Views/Shared/{0}.cshtml" },
                     new[]
                     {
                         "/Views/{1}/{0}.en-GB.cshtml",
@@ -35,11 +31,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 yield return new object[]
                 {
                     LanguageViewLocationExpanderFormat.SubFolder,
-                    new[]
-                    {
-                        "/Views/{1}/{0}.cshtml",
-                        "/Views/Shared/{0}.cshtml"
-                    },
+                    new[] { "/Views/{1}/{0}.cshtml", "/Views/Shared/{0}.cshtml" },
                     new[]
                     {
                         "/Views/{1}/en-GB/{0}.cshtml",
@@ -105,11 +97,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             {
                 yield return new object[]
                 {
-                    new[]
-                    {
-                        "/Views/{1}/{0}.cshtml",
-                        "/Views/Shared/{0}.cshtml"
-                    }
+                    new[] { "/Views/{1}/{0}.cshtml", "/Views/Shared/{0}.cshtml" }
                 };
 
                 yield return new object[]
@@ -129,8 +117,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         public void ExpandViewLocations_SpecificLocale(
             LanguageViewLocationExpanderFormat format,
             IEnumerable<string> viewLocations,
-            IEnumerable<string> expectedViewLocations)
-        {
+            IEnumerable<string> expectedViewLocations
+        ) {
             // Arrange
             var viewLocationExpanderContext = new ViewLocationExpanderContext(
                 new ActionContext(),
@@ -138,7 +126,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 "test-controller",
                 "",
                 null,
-                false);
+                false
+            );
             var languageViewLocationExpander = new LanguageViewLocationExpander(format);
             viewLocationExpanderContext.Values = new Dictionary<string, string>();
             viewLocationExpanderContext.Values["language"] = "en-GB";
@@ -146,7 +135,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             // Act
             var expandedViewLocations = languageViewLocationExpander.ExpandViewLocations(
                 viewLocationExpanderContext,
-                viewLocations);
+                viewLocations
+            );
 
             // Assert
             Assert.Equal(expectedViewLocations, expandedViewLocations);
@@ -163,27 +153,34 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 "test-controller",
                 "test-area",
                 null,
-                false);
+                false
+            );
             var languageViewLocationExpander = new LanguageViewLocationExpander();
             viewLocationExpanderContext.Values = new Dictionary<string, string>();
 
             // Act
             var expandedViewLocations = languageViewLocationExpander.ExpandViewLocations(
                 viewLocationExpanderContext,
-                viewLocations);
+                viewLocations
+            );
 
             // Assert
             Assert.Equal(viewLocations, expandedViewLocations);
         }
 
         [ConditionalTheory]
-        [OSSkipCondition(OperatingSystems.Linux,
-            SkipReason = "Invalid culture detection is OS-specific")]
-        [OSSkipCondition(OperatingSystems.MacOSX,
-            SkipReason = "Invalid culture detection is OS-specific")]
+        [OSSkipCondition(
+            OperatingSystems.Linux,
+            SkipReason = "Invalid culture detection is OS-specific"
+        )]
+        [OSSkipCondition(
+            OperatingSystems.MacOSX,
+            SkipReason = "Invalid culture detection is OS-specific"
+        )]
         [MemberData(nameof(ViewLocationExpanderTestData))]
-        public void ExpandViewLocations_IncorrectLocaleContextValue(IEnumerable<string> viewLocations)
-        {
+        public void ExpandViewLocations_IncorrectLocaleContextValue(
+            IEnumerable<string> viewLocations
+        ) {
             // Arrange
             var viewLocationExpanderContext = new ViewLocationExpanderContext(
                 new ActionContext(),
@@ -191,7 +188,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 "test-controller",
                 "test-area",
                 null,
-                false);
+                false
+            );
             var languageViewLocationExpander = new LanguageViewLocationExpander();
             viewLocationExpanderContext.Values = new Dictionary<string, string>();
             viewLocationExpanderContext.Values["language"] = "!-invalid-culture-!";
@@ -199,7 +197,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             // Act
             var expandedViewLocations = languageViewLocationExpander.ExpandViewLocations(
                 viewLocationExpanderContext,
-                viewLocations);
+                viewLocations
+            );
 
             // Assert
             Assert.Equal(viewLocations, expandedViewLocations);

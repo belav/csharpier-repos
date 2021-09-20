@@ -53,8 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         [EntityFrameworkInternal]
         public ModelRuntimeInitializerDependencies(
             RuntimeModelDependencies runtimeModelDependencies,
-            IModelValidator modelValidator)
-        {
+            IModelValidator modelValidator
+        ) {
             Check.NotNull(runtimeModelDependencies, nameof(runtimeModelDependencies));
             Check.NotNull(modelValidator, nameof(modelValidator));
 

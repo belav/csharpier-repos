@@ -24,10 +24,15 @@ namespace Microsoft.AspNetCore.Mvc.Localization
             // Act
             MvcLocalizationServices.AddMvcViewLocalizationServices(
                 collection,
-                LanguageViewLocationExpanderFormat.Suffix);
+                LanguageViewLocationExpanderFormat.Suffix
+            );
 
             // Assert
-            AssertContainsSingle(collection, typeof(IHtmlLocalizerFactory), typeof(HtmlLocalizerFactory));
+            AssertContainsSingle(
+                collection,
+                typeof(IHtmlLocalizerFactory),
+                typeof(HtmlLocalizerFactory)
+            );
             AssertContainsSingle(collection, typeof(IHtmlLocalizer<>), typeof(HtmlLocalizer<>));
             AssertContainsSingle(collection, typeof(IViewLocalizer), typeof(ViewLocalizer));
         }
@@ -39,15 +44,29 @@ namespace Microsoft.AspNetCore.Mvc.Localization
             var collection = new ServiceCollection();
 
             // Act
-            collection.Add(ServiceDescriptor.Singleton(typeof(IHtmlLocalizerFactory), typeof(TestHtmlLocalizerFactory)));
-            collection.Add(ServiceDescriptor.Transient(typeof(IHtmlLocalizer<>), typeof(TestHtmlLocalizer<>)));
-            collection.Add(ServiceDescriptor.Transient(typeof(IViewLocalizer), typeof(TestViewLocalizer)));
+            collection.Add(
+                ServiceDescriptor.Singleton(
+                    typeof(IHtmlLocalizerFactory),
+                    typeof(TestHtmlLocalizerFactory)
+                )
+            );
+            collection.Add(
+                ServiceDescriptor.Transient(typeof(IHtmlLocalizer<>), typeof(TestHtmlLocalizer<>))
+            );
+            collection.Add(
+                ServiceDescriptor.Transient(typeof(IViewLocalizer), typeof(TestViewLocalizer))
+            );
 
             MvcLocalizationServices.AddMvcViewLocalizationServices(
                 collection,
-                LanguageViewLocationExpanderFormat.Suffix);
+                LanguageViewLocationExpanderFormat.Suffix
+            );
 
-            AssertContainsSingle(collection, typeof(IHtmlLocalizerFactory), typeof(TestHtmlLocalizerFactory));
+            AssertContainsSingle(
+                collection,
+                typeof(IHtmlLocalizerFactory),
+                typeof(TestHtmlLocalizerFactory)
+            );
             AssertContainsSingle(collection, typeof(IHtmlLocalizer<>), typeof(TestHtmlLocalizer<>));
             AssertContainsSingle(collection, typeof(IViewLocalizer), typeof(TestViewLocalizer));
         }
@@ -55,25 +74,27 @@ namespace Microsoft.AspNetCore.Mvc.Localization
         private void AssertContainsSingle(
             IServiceCollection services,
             Type serviceType,
-            Type implementationType)
-        {
-            var matches = services
-                .Where(sd =>
-                    sd.ServiceType == serviceType &&
-                    sd.ImplementationType == implementationType)
+            Type implementationType
+        ) {
+            var matches = services.Where(
+                    sd =>
+                        sd.ServiceType == serviceType && sd.ImplementationType == implementationType
+                )
                 .ToArray();
 
             if (matches.Length == 0)
             {
                 Assert.True(
                     false,
-                    $"Could not find an instance of {implementationType} registered as {serviceType}");
+                    $"Could not find an instance of {implementationType} registered as {serviceType}"
+                );
             }
             else if (matches.Length > 1)
             {
                 Assert.True(
                     false,
-                    $"Found multiple instances of {implementationType} registered as {serviceType}");
+                    $"Found multiple instances of {implementationType} registered as {serviceType}"
+                );
             }
         }
 
@@ -81,8 +102,8 @@ namespace Microsoft.AspNetCore.Mvc.Localization
         {
             public LocalizedHtmlString this[string name] => throw new NotImplementedException();
 
-            public LocalizedHtmlString this[string name, params object[] arguments]
-                => throw new NotImplementedException();
+            public LocalizedHtmlString this[string name, params object[] arguments] =>
+                throw new NotImplementedException();
 
             public LocalizedString GetString(string name)
             {
@@ -99,7 +120,9 @@ namespace Microsoft.AspNetCore.Mvc.Localization
                 throw new NotImplementedException();
             }
 
-            [Obsolete("This method is obsolete. Use `CurrentCulture` and `CurrentUICulture` instead.")]
+            [Obsolete(
+                "This method is obsolete. Use `CurrentCulture` and `CurrentUICulture` instead."
+            )]
             public IHtmlLocalizer WithCulture(CultureInfo culture)
             {
                 throw new NotImplementedException();
@@ -110,8 +133,8 @@ namespace Microsoft.AspNetCore.Mvc.Localization
         {
             public LocalizedHtmlString this[string name] => throw new NotImplementedException();
 
-            public LocalizedHtmlString this[string name, params object[] arguments]
-                => throw new NotImplementedException();
+            public LocalizedHtmlString this[string name, params object[] arguments] =>
+                throw new NotImplementedException();
 
             public LocalizedString GetString(string name)
             {
@@ -128,7 +151,9 @@ namespace Microsoft.AspNetCore.Mvc.Localization
                 throw new NotImplementedException();
             }
 
-            [Obsolete("This method is obsolete. Use `CurrentCulture` and `CurrentUICulture` instead.")]
+            [Obsolete(
+                "This method is obsolete. Use `CurrentCulture` and `CurrentUICulture` instead."
+            )]
             public IHtmlLocalizer WithCulture(CultureInfo culture)
             {
                 throw new NotImplementedException();

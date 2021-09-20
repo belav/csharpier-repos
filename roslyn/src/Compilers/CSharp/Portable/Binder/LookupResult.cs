@@ -97,10 +97,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal LookupResultKind Kind
         {
-            get
-            {
-                return _kind;
-            }
+            get { return _kind; }
         }
 
         /// <summary>
@@ -108,26 +105,17 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         internal Symbol SingleSymbolOrDefault
         {
-            get
-            {
-                return (_symbolList.Count == 1) ? _symbolList[0] : null;
-            }
+            get { return (_symbolList.Count == 1) ? _symbolList[0] : null; }
         }
 
         internal ArrayBuilder<Symbol> Symbols
         {
-            get
-            {
-                return _symbolList;
-            }
+            get { return _symbolList; }
         }
 
         internal DiagnosticInfo Error
         {
-            get
-            {
-                return _error;
-            }
+            get { return _error; }
         }
 
         /// <summary>
@@ -135,10 +123,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         internal bool IsMultiViable
         {
-            get
-            {
-                return Kind == LookupResultKind.Viable;
-            }
+            get { return Kind == LookupResultKind.Viable; }
         }
 
         /// <summary>
@@ -146,10 +131,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         internal bool IsSingleViable
         {
-            get
-            {
-                return Kind == LookupResultKind.Viable && _symbolList.Count == 1;
-            }
+            get { return Kind == LookupResultKind.Viable && _symbolList.Count == 1; }
         }
 
         internal static SingleLookupResult Good(Symbol symbol)
@@ -172,8 +154,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new SingleLookupResult(LookupResultKind.NotReferencable, symbol, error);
         }
 
-        internal static SingleLookupResult StaticInstanceMismatch(Symbol symbol, DiagnosticInfo error)
-        {
+        internal static SingleLookupResult StaticInstanceMismatch(
+            Symbol symbol,
+            DiagnosticInfo error
+        ) {
             return new SingleLookupResult(LookupResultKind.StaticInstanceMismatch, symbol, error);
         }
 
@@ -182,9 +166,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new SingleLookupResult(LookupResultKind.Inaccessible, symbol, error);
         }
 
-        internal static SingleLookupResult NotInvocable(Symbol unwrappedSymbol, Symbol symbol, bool diagnose)
-        {
-            var diagInfo = diagnose ? new CSDiagnosticInfo(ErrorCode.ERR_NonInvocableMemberCalled, unwrappedSymbol) : null;
+        internal static SingleLookupResult NotInvocable(
+            Symbol unwrappedSymbol,
+            Symbol symbol,
+            bool diagnose
+        ) {
+            var diagInfo = diagnose
+                ? new CSDiagnosticInfo(ErrorCode.ERR_NonInvocableMemberCalled, unwrappedSymbol)
+                : null;
             return new SingleLookupResult(LookupResultKind.NotInvocable, symbol, diagInfo);
         }
 
@@ -198,10 +187,20 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new SingleLookupResult(LookupResultKind.NotATypeOrNamespace, symbol, error);
         }
 
-        internal static SingleLookupResult NotTypeOrNamespace(Symbol unwrappedSymbol, Symbol symbol, bool diagnose)
-        {
-            // TODO: determine correct diagnosis 
-            var diagInfo = diagnose ? new CSDiagnosticInfo(ErrorCode.ERR_BadSKknown, unwrappedSymbol.Name, unwrappedSymbol.GetKindText(), MessageID.IDS_SK_TYPE.Localize()) : null;
+        internal static SingleLookupResult NotTypeOrNamespace(
+            Symbol unwrappedSymbol,
+            Symbol symbol,
+            bool diagnose
+        ) {
+            // TODO: determine correct diagnosis
+            var diagInfo = diagnose
+                ? new CSDiagnosticInfo(
+                      ErrorCode.ERR_BadSKknown,
+                      unwrappedSymbol.Name,
+                      unwrappedSymbol.GetKindText(),
+                      MessageID.IDS_SK_TYPE.Localize()
+                  )
+                : null;
             return new SingleLookupResult(LookupResultKind.NotATypeOrNamespace, symbol, diagInfo);
         }
 

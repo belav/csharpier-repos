@@ -55,8 +55,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.gettype01
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.gettype02.gettype02
 {
     // <Area>variance</Area>
@@ -72,9 +70,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.gettype02
 
     public class Variance<T> : iVariance<T>
     {
-        public void Boo(T t)
-        {
-        }
+        public void Boo(T t) { }
     }
 
     public class Animal
@@ -107,8 +103,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.gettype02
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.gettype03.gettype03
 {
     // <Area>variance</Area>
@@ -137,11 +131,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.gettype03
 
         public static int MainMethod()
         {
-            dynamic f1 = (Foo<Animal>)((Animal a) =>
-            {
-            }
-
-            );
+            dynamic f1 = (Foo<Animal>)((Animal a) => { });
             Foo<Tiger> f2 = f1;
             dynamic f3 = (Foo<Tiger>)f1;
             if (typeof(Foo<Animal>).ToString() != f2.GetType().ToString())
@@ -153,8 +143,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.gettype03
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.gettype04.gettype04
 {
@@ -184,12 +172,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.gettype04
 
         public static int MainMethod()
         {
-            dynamic f1 = (Foo<Tiger>)(() =>
-            {
-                return new Tiger();
-            }
-
-            );
+            dynamic f1 =
+                (Foo<Tiger>)(
+                    () =>
+                    {
+                        return new Tiger();
+                    }
+                );
             Foo<Animal> f2 = f1;
             dynamic f3 = (Foo<Animal>)f1;
             if (typeof(Foo<Tiger>).ToString() != f2.GetType().ToString())
@@ -201,8 +190,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.gettype04
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is01.is01
 {
@@ -256,8 +243,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is01.is01
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is02.is02
 {
     // <Area>variance</Area>
@@ -310,8 +295,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is02.is02
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is03.is03
 {
     // <Area>variance</Area>
@@ -340,11 +323,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is03.is03
 
         public static int MainMethod()
         {
-            dynamic f1 = (Foo<Animal>)((Animal a) =>
-            {
-            }
-
-            );
+            dynamic f1 = (Foo<Animal>)((Animal a) => { });
             Foo<Tiger> f2 = f1;
             dynamic f3 = (Foo<Tiger>)f1;
             if (!(f2 is Foo<Tiger>))
@@ -356,8 +335,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is03.is03
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is04.is04
 {
@@ -386,11 +363,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is04.is04
 
         public static int MainMethod()
         {
-            Foo<Animal> f1 = (Animal a) =>
-            {
-            }
-
-            ;
+            Foo<Animal> f1 = (Animal a) => { };
             Foo<Tiger> f2 = f1;
             dynamic f3 = (Foo<Tiger>)f1;
             if (!(f2 is Foo<Animal>))
@@ -402,8 +375,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is04.is04
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is05.is05
 {
@@ -455,8 +426,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is05.is05
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is06.is06
 {
     // <Area>variance</Area>
@@ -507,8 +476,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is06.is06
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is07.is07
 {
     // <Area>variance</Area>
@@ -537,11 +504,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is07.is07
 
         public static int MainMethod()
         {
-            dynamic f1 = (Foo<Animal>)((Animal a) =>
-            {
-            }
-
-            );
+            dynamic f1 = (Foo<Animal>)((Animal a) => { });
             Foo<Tiger> f2 = f1;
             if (f1 is Foo<Tiger>)
                 return 0;
@@ -551,8 +514,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is07.is07
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is08.is08
 {
@@ -582,11 +543,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is08.is08
 
         public static int MainMethod()
         {
-            dynamic f1 = (Foo<Animal>)((Animal a) =>
-            {
-            }
-
-            );
+            dynamic f1 = (Foo<Animal>)((Animal a) => { });
             Foo<Tiger> f2 = f1;
             if (f1 is Foo<Animal>)
                 return 0;
@@ -596,8 +553,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is08.is08
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is09.is09
 {
@@ -648,8 +603,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is09.is09
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is10.is10
 {
     // <Area>variance</Area>
@@ -699,8 +652,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is10.is10
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is11.is11
 {
     // <Area>variance</Area>
@@ -728,11 +679,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is11.is11
 
         public static int MainMethod()
         {
-            dynamic f1 = (Foo<Animal>)((Animal a) =>
-            {
-            }
-
-            );
+            dynamic f1 = (Foo<Animal>)((Animal a) => { });
             if (f1 is Foo<Tiger>)
                 return 1;
             else
@@ -741,8 +688,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is11.is11
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is12.is12
 {
@@ -771,11 +716,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is12.is12
 
         public static int MainMethod()
         {
-            dynamic f1 = (Foo<Animal>)((Animal a) =>
-            {
-            }
-
-            );
+            dynamic f1 = (Foo<Animal>)((Animal a) => { });
             if (f1 is Foo<Animal>)
                 return 0;
             else

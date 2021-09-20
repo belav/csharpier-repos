@@ -16,10 +16,9 @@ namespace TestApp
             value = v;
         }
 
-
         public bool Equals(StructWithValue other)
         {
-            if (value.Equals (other.value))
+            if (value.Equals(other.value))
                 return true;
             else
                 return false;
@@ -33,7 +32,7 @@ namespace TestApp
         {
             var comparer = EqualityComparer<StructWithValue>.Default;
 
-            for (ushort i = 0; ; i++)
+            for (ushort i = 0;; i++)
             {
                 var a = new StructWithValue(i);
                 var b = new StructWithValue(i);

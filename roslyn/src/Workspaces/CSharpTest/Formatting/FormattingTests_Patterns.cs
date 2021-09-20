@@ -20,9 +20,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Formatting
         [CombinatorialData]
         public async Task FormatRelationalPatterns1(
             [CombinatorialValues("<", "<=", ">", ">=")] string operatorText,
-            BinaryOperatorSpacingOptions spacing)
-        {
-            var content = $@"
+            BinaryOperatorSpacingOptions spacing
+        ) {
+            var content =
+                $@"
 class A
 {{
     bool Method(int value)
@@ -32,7 +33,8 @@ class A
 }}
 ";
 
-            var expectedSingle = $@"
+            var expectedSingle =
+                $@"
 class A
 {{
     bool Method(int value)
@@ -41,7 +43,8 @@ class A
     }}
 }}
 ";
-            var expectedIgnore = $@"
+            var expectedIgnore =
+                $@"
 class A
 {{
     bool Method(int value)
@@ -50,7 +53,8 @@ class A
     }}
 }}
 ";
-            var expectedRemove = $@"
+            var expectedRemove =
+                $@"
 class A
 {{
     bool Method(int value)
@@ -80,9 +84,10 @@ class A
         public async Task FormatRelationalPatterns2(
             [CombinatorialValues("<", "<=", ">", ">=")] string operatorText,
             BinaryOperatorSpacingOptions spacing,
-            bool spaceWithinExpressionParentheses)
-        {
-            var content = $@"
+            bool spaceWithinExpressionParentheses
+        ) {
+            var content =
+                $@"
 class A
 {{
     bool Method(int value)
@@ -92,7 +97,8 @@ class A
 }}
 ";
 
-            var expectedSingleFalse = $@"
+            var expectedSingleFalse =
+                $@"
 class A
 {{
     bool Method(int value)
@@ -101,7 +107,8 @@ class A
     }}
 }}
 ";
-            var expectedIgnoreFalse = $@"
+            var expectedIgnoreFalse =
+                $@"
 class A
 {{
     bool Method(int value)
@@ -110,7 +117,8 @@ class A
     }}
 }}
 ";
-            var expectedRemoveFalse = $@"
+            var expectedRemoveFalse =
+                $@"
 class A
 {{
     bool Method(int value)
@@ -119,7 +127,8 @@ class A
     }}
 }}
 ";
-            var expectedSingleTrue = $@"
+            var expectedSingleTrue =
+                $@"
 class A
 {{
     bool Method(int value)
@@ -128,7 +137,8 @@ class A
     }}
 }}
 ";
-            var expectedIgnoreTrue = $@"
+            var expectedIgnoreTrue =
+                $@"
 class A
 {{
     bool Method(int value)
@@ -137,7 +147,8 @@ class A
     }}
 }}
 ";
-            var expectedRemoveTrue = $@"
+            var expectedRemoveTrue =
+                $@"
 class A
 {{
     bool Method(int value)
@@ -161,7 +172,10 @@ class A
             var changingOptions = new OptionsCollection(LanguageNames.CSharp)
             {
                 { CSharpFormattingOptions2.SpacingAroundBinaryOperator, spacing },
-                { CSharpFormattingOptions2.SpaceWithinExpressionParentheses, spaceWithinExpressionParentheses },
+                {
+                    CSharpFormattingOptions2.SpaceWithinExpressionParentheses,
+                    spaceWithinExpressionParentheses
+                },
             };
             await AssertFormatAsync(expected, content, changedOptionSet: changingOptions);
         }
@@ -170,7 +184,8 @@ class A
         [CombinatorialData]
         public async Task FormatNotPatterns1(BinaryOperatorSpacingOptions spacing)
         {
-            var content = $@"
+            var content =
+                $@"
 class A
 {{
     bool Method(int value)
@@ -180,7 +195,8 @@ class A
 }}
 ";
 
-            var expectedSingle = $@"
+            var expectedSingle =
+                $@"
 class A
 {{
     bool Method(int value)
@@ -189,7 +205,8 @@ class A
     }}
 }}
 ";
-            var expectedIgnore = $@"
+            var expectedIgnore =
+                $@"
 class A
 {{
     bool Method(int value)
@@ -198,7 +215,8 @@ class A
     }}
 }}
 ";
-            var expectedRemove = $@"
+            var expectedRemove =
+                $@"
 class A
 {{
     bool Method(int value)
@@ -227,9 +245,10 @@ class A
         [CombinatorialData]
         public async Task FormatNotPatterns2(
             BinaryOperatorSpacingOptions spacing,
-            bool spaceWithinExpressionParentheses)
-        {
-            var content = $@"
+            bool spaceWithinExpressionParentheses
+        ) {
+            var content =
+                $@"
 class A
 {{
     bool Method(int value)
@@ -239,7 +258,8 @@ class A
 }}
 ";
 
-            var expectedSingleFalse = $@"
+            var expectedSingleFalse =
+                $@"
 class A
 {{
     bool Method(int value)
@@ -248,7 +268,8 @@ class A
     }}
 }}
 ";
-            var expectedIgnoreFalse = $@"
+            var expectedIgnoreFalse =
+                $@"
 class A
 {{
     bool Method(int value)
@@ -257,7 +278,8 @@ class A
     }}
 }}
 ";
-            var expectedRemoveFalse = $@"
+            var expectedRemoveFalse =
+                $@"
 class A
 {{
     bool Method(int value)
@@ -266,7 +288,8 @@ class A
     }}
 }}
 ";
-            var expectedSingleTrue = $@"
+            var expectedSingleTrue =
+                $@"
 class A
 {{
     bool Method(int value)
@@ -275,7 +298,8 @@ class A
     }}
 }}
 ";
-            var expectedIgnoreTrue = $@"
+            var expectedIgnoreTrue =
+                $@"
 class A
 {{
     bool Method(int value)
@@ -284,7 +308,8 @@ class A
     }}
 }}
 ";
-            var expectedRemoveTrue = $@"
+            var expectedRemoveTrue =
+                $@"
 class A
 {{
     bool Method(int value)
@@ -308,7 +333,10 @@ class A
             var changingOptions = new OptionsCollection(LanguageNames.CSharp)
             {
                 { CSharpFormattingOptions2.SpacingAroundBinaryOperator, spacing },
-                { CSharpFormattingOptions2.SpaceWithinExpressionParentheses, spaceWithinExpressionParentheses },
+                {
+                    CSharpFormattingOptions2.SpaceWithinExpressionParentheses,
+                    spaceWithinExpressionParentheses
+                },
             };
             await AssertFormatAsync(expected, content, changedOptionSet: changingOptions);
         }
@@ -317,7 +345,8 @@ class A
         [WorkItem(46284, "https://github.com/dotnet/roslyn/issues/46284")]
         public async Task FormatMultiLinePattern1()
         {
-            var content = @"
+            var content =
+                @"
 class TypeName
 {
     bool MethodName(string value)
@@ -330,7 +359,8 @@ class TypeName
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TypeName
 {
     bool MethodName(string value)
@@ -351,7 +381,8 @@ class TypeName
         [WorkItem(46284, "https://github.com/dotnet/roslyn/issues/46284")]
         public async Task FormatMultiLinePattern2()
         {
-            var content = @"
+            var content =
+                @"
 class TypeName
 {
     private static bool IsCallingConventionModifier(CustomModifier modifier)
@@ -377,7 +408,8 @@ class TypeName
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TypeName
 {
     private static bool IsCallingConventionModifier(CustomModifier modifier)
@@ -411,7 +443,8 @@ class TypeName
         [WorkItem(46284, "https://github.com/dotnet/roslyn/issues/46284")]
         public async Task FormatMultiLinePattern3()
         {
-            var content = @"
+            var content =
+                @"
 class TypeName
 {
     private static bool IsCallingConventionModifier(CustomModifier modifier)
@@ -437,7 +470,8 @@ ContainingNamespace: { IsGlobalNamespace: true }
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TypeName
 {
     private static bool IsCallingConventionModifier(CustomModifier modifier)
@@ -471,7 +505,8 @@ class TypeName
         [WorkItem(42861, "https://github.com/dotnet/roslyn/issues/42861")]
         public async Task FormatMultiLinePattern4()
         {
-            var content = @"
+            var content =
+                @"
 class TypeName
 {
     void MethodName(string value)
@@ -485,7 +520,8 @@ class TypeName
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TypeName
 {
     void MethodName(string value)
@@ -507,7 +543,8 @@ class TypeName
         [WorkItem(42861, "https://github.com/dotnet/roslyn/issues/42861")]
         public async Task FormatMultiLinePattern5()
         {
-            var content = @"
+            var content =
+                @"
 class TypeName
 {
     void MethodName(string value)
@@ -521,7 +558,8 @@ class TypeName
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TypeName
 {
     void MethodName(string value)

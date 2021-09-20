@@ -28,12 +28,20 @@ namespace ApiExplorerWebSite
                 {
                     foreach (var action in controller.Actions)
                     {
-                        if (action.ActionName == nameof(ApiExplorerInboundOutBoundController.SuppressedForPathMatching))
-                        {
+                        if (
+                            action.ActionName
+                            == nameof(
+                                ApiExplorerInboundOutBoundController.SuppressedForPathMatching
+                            )
+                        ) {
                             action.Selectors[0].AttributeRouteModel.SuppressPathMatching = true;
                         }
-                        else if (action.ActionName == nameof(ApiExplorerInboundOutBoundController.SuppressedForLinkGeneration))
-                        {
+                        else if (
+                            action.ActionName
+                            == nameof(
+                                ApiExplorerInboundOutBoundController.SuppressedForLinkGeneration
+                            )
+                        ) {
                             action.Selectors[0].AttributeRouteModel.SuppressLinkGeneration = true;
                         }
                     }

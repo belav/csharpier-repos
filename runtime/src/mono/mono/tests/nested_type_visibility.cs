@@ -22,14 +22,14 @@ namespace ConsoleApplication1
             var childInnerClass = new ChildInnerClass();
         }
     }
-    
+
     internal class Program
     {
         public static int Main(string[] args)
         {
             new ChildClass();
 
-			return 0;
+            return 0;
         }
     }
 }

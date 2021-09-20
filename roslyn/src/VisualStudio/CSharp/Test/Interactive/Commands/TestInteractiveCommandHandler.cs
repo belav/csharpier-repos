@@ -24,14 +24,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive.Commands
             ISendToInteractiveSubmissionProvider sendToInteractiveSubmissionProvider,
             IContentTypeRegistryService contentTypeRegistryService,
             IEditorOptionsFactoryService editorOptionsFactoryService,
-            IEditorOperationsFactoryService editorOperationsFactoryService)
-            : base(contentTypeRegistryService, editorOptionsFactoryService, editorOperationsFactoryService)
-        {
+            IEditorOperationsFactoryService editorOperationsFactoryService
+        ) : base(
+            contentTypeRegistryService,
+            editorOptionsFactoryService,
+            editorOperationsFactoryService
+        ) {
             _interactiveWindow = interactiveWindow;
             _sendToInteractiveSubmissionProvider = sendToInteractiveSubmissionProvider;
         }
 
-        protected override ISendToInteractiveSubmissionProvider SendToInteractiveSubmissionProvider => _sendToInteractiveSubmissionProvider;
+        protected override ISendToInteractiveSubmissionProvider SendToInteractiveSubmissionProvider =>
+            _sendToInteractiveSubmissionProvider;
 
         protected override IInteractiveWindow OpenInteractiveWindow(bool focus)
         {

@@ -12,7 +12,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
     {
         private IServiceProviderEngineCallback _callback;
 
-        private readonly Func<Type, Func<ServiceProviderEngineScope, object>> _createServiceAccessor;
+        private readonly Func<
+            Type,
+            Func<ServiceProviderEngineScope, object>
+        > _createServiceAccessor;
 
         private bool _disposed;
 
@@ -24,10 +27,16 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             CallSiteFactory = new CallSiteFactory(serviceDescriptors);
             CallSiteFactory.Add(typeof(IServiceProvider), new ServiceProviderCallSite());
             CallSiteFactory.Add(typeof(IServiceScopeFactory), new ServiceScopeFactoryCallSite());
-            RealizedServices = new ConcurrentDictionary<Type, Func<ServiceProviderEngineScope, object>>();
+            RealizedServices = new ConcurrentDictionary<
+                Type,
+                Func<ServiceProviderEngineScope, object>
+            >();
         }
 
-        internal ConcurrentDictionary<Type, Func<ServiceProviderEngineScope, object>> RealizedServices { get; }
+        internal ConcurrentDictionary<
+            Type,
+            Func<ServiceProviderEngineScope, object>
+        > RealizedServices { get; }
 
         internal CallSiteFactory CallSiteFactory { get; }
 
@@ -44,14 +53,19 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
         public void ValidateService(ServiceDescriptor descriptor)
         {
-            if (descriptor.ServiceType.IsGenericType && !descriptor.ServiceType.IsConstructedGenericType)
-            {
+            if (
+                descriptor.ServiceType.IsGenericType
+                && !descriptor.ServiceType.IsConstructedGenericType
+            ) {
                 return;
             }
 
             try
             {
-                ServiceCallSite callSite = CallSiteFactory.GetCallSite(descriptor, new CallSiteChain());
+                ServiceCallSite callSite = CallSiteFactory.GetCallSite(
+                    descriptor,
+                    new CallSiteChain()
+                );
                 if (callSite != null)
                 {
                     _callback?.OnCreate(callSite);
@@ -59,13 +73,18 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             }
             catch (Exception e)
             {
-                throw new InvalidOperationException($"Error while validating the service descriptor '{descriptor}': {e.Message}", e);
+                throw new InvalidOperationException(
+                    $"Error while validating the service descriptor '{descriptor}': {e.Message}",
+                    e
+                );
             }
         }
 
         public object GetService(Type serviceType) => GetService(serviceType, Root);
 
-        protected abstract Func<ServiceProviderEngineScope, object> RealizeService(ServiceCallSite callSite);
+        protected abstract Func<ServiceProviderEngineScope, object> RealizeService(
+            ServiceCallSite callSite
+        );
 
         public void Dispose()
         {
@@ -79,14 +98,19 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             return Root.DisposeAsync();
         }
 
-        internal object GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
-        {
+        internal object GetService(
+            Type serviceType,
+            ServiceProviderEngineScope serviceProviderEngineScope
+        ) {
             if (_disposed)
             {
                 ThrowHelper.ThrowObjectDisposedException();
             }
 
-            Func<ServiceProviderEngineScope, object> realizedService = RealizedServices.GetOrAdd(serviceType, _createServiceAccessor);
+            Func<ServiceProviderEngineScope, object> realizedService = RealizedServices.GetOrAdd(
+                serviceType,
+                _createServiceAccessor
+            );
             _callback?.OnResolve(serviceType, serviceProviderEngineScope);
             DependencyInjectionEventSource.Log.ServiceResolved(serviceType);
             return realizedService.Invoke(serviceProviderEngineScope);
@@ -104,7 +128,10 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
         private Func<ServiceProviderEngineScope, object> CreateServiceAccessor(Type serviceType)
         {
-            ServiceCallSite callSite = CallSiteFactory.GetCallSite(serviceType, new CallSiteChain());
+            ServiceCallSite callSite = CallSiteFactory.GetCallSite(
+                serviceType,
+                new CallSiteChain()
+            );
             if (callSite != null)
             {
                 DependencyInjectionEventSource.Log.CallSiteBuilt(serviceType, callSite);

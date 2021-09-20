@@ -26,15 +26,15 @@ namespace Microsoft.CodeAnalysis.Remote
         // test data are only available when running tests:
         internal readonly RemoteHostTestData? TestData;
 
-        static BrokeredServiceBase()
-        {
-        }
+        static BrokeredServiceBase() { }
 
         protected BrokeredServiceBase(in ServiceConstructionArguments arguments)
         {
             _logger = (TraceSource)arguments.ServiceProvider.GetService(typeof(TraceSource));
 
-            TestData = (RemoteHostTestData?)arguments.ServiceProvider.GetService(typeof(RemoteHostTestData));
+            TestData = (RemoteHostTestData?)arguments.ServiceProvider.GetService(
+                typeof(RemoteHostTestData)
+            );
             WorkspaceManager = TestData?.WorkspaceManager ?? RemoteWorkspaceManager.Default;
 
 #pragma warning disable VSTHRD012 // Provide JoinableTaskFactory where allowed
@@ -44,53 +44,73 @@ namespace Microsoft.CodeAnalysis.Remote
             SolutionAssetSource = new SolutionAssetSource(ServiceBrokerClient);
         }
 
-        public void Dispose()
-            => ServiceBrokerClient.Dispose();
+        public void Dispose() => ServiceBrokerClient.Dispose();
 
-        public RemoteWorkspace GetWorkspace()
-            => WorkspaceManager.GetWorkspace();
+        public RemoteWorkspace GetWorkspace() => WorkspaceManager.GetWorkspace();
 
-        protected void Log(TraceEventType errorType, string message)
-            => _logger.TraceEvent(errorType, 0, $"{GetType()}: {message}");
+        protected void Log(TraceEventType errorType, string message) =>
+            _logger.TraceEvent(errorType, 0, $"{GetType()}: {message}");
 
-        protected ValueTask<Solution> GetSolutionAsync(PinnedSolutionInfo solutionInfo, CancellationToken cancellationToken)
-        {
+        protected ValueTask<Solution> GetSolutionAsync(
+            PinnedSolutionInfo solutionInfo,
+            CancellationToken cancellationToken
+        ) {
             var workspace = GetWorkspace();
-            var assetProvider = workspace.CreateAssetProvider(solutionInfo, WorkspaceManager.SolutionAssetCache, SolutionAssetSource);
-            return workspace.GetSolutionAsync(assetProvider, solutionInfo.SolutionChecksum, solutionInfo.FromPrimaryBranch, solutionInfo.WorkspaceVersion, cancellationToken);
+            var assetProvider = workspace.CreateAssetProvider(
+                solutionInfo,
+                WorkspaceManager.SolutionAssetCache,
+                SolutionAssetSource
+            );
+            return workspace.GetSolutionAsync(
+                assetProvider,
+                solutionInfo.SolutionChecksum,
+                solutionInfo.FromPrimaryBranch,
+                solutionInfo.WorkspaceVersion,
+                cancellationToken
+            );
         }
 
-        protected ValueTask<T> RunServiceAsync<T>(Func<CancellationToken, ValueTask<T>> implementation, CancellationToken cancellationToken)
-        {
+        protected ValueTask<T> RunServiceAsync<T>(
+            Func<CancellationToken, ValueTask<T>> implementation,
+            CancellationToken cancellationToken
+        ) {
             WorkspaceManager.SolutionAssetCache.UpdateLastActivityTime();
             return RunServiceImplAsync(implementation, cancellationToken);
         }
 
-        internal static async ValueTask<T> RunServiceImplAsync<T>(Func<CancellationToken, ValueTask<T>> implementation, CancellationToken cancellationToken)
-        {
+        internal static async ValueTask<T> RunServiceImplAsync<T>(
+            Func<CancellationToken, ValueTask<T>> implementation,
+            CancellationToken cancellationToken
+        ) {
             try
             {
                 return await implementation(cancellationToken).ConfigureAwait(false);
             }
-            catch (Exception ex) when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
+            catch (Exception ex)
+                when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
             {
                 throw ExceptionUtilities.Unreachable;
             }
         }
 
-        protected ValueTask RunServiceAsync(Func<CancellationToken, ValueTask> implementation, CancellationToken cancellationToken)
-        {
+        protected ValueTask RunServiceAsync(
+            Func<CancellationToken, ValueTask> implementation,
+            CancellationToken cancellationToken
+        ) {
             WorkspaceManager.SolutionAssetCache.UpdateLastActivityTime();
             return RunServiceImplAsync(implementation, cancellationToken);
         }
 
-        internal static async ValueTask RunServiceImplAsync(Func<CancellationToken, ValueTask> implementation, CancellationToken cancellationToken)
-        {
+        internal static async ValueTask RunServiceImplAsync(
+            Func<CancellationToken, ValueTask> implementation,
+            CancellationToken cancellationToken
+        ) {
             try
             {
                 await implementation(cancellationToken).ConfigureAwait(false);
             }
-            catch (Exception ex) when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
+            catch (Exception ex)
+                when (FatalError.ReportAndPropagateUnlessCanceled(ex, cancellationToken))
             {
                 throw ExceptionUtilities.Unreachable;
             }

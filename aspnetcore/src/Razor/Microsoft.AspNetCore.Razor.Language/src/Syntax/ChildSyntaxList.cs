@@ -10,7 +10,9 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax
 {
-    internal readonly struct ChildSyntaxList : IEquatable<ChildSyntaxList>, IReadOnlyList<SyntaxNode>
+    internal readonly struct ChildSyntaxList
+        : IEquatable<ChildSyntaxList>,
+          IReadOnlyList<SyntaxNode>
     {
         private readonly SyntaxNode _node;
         private readonly int _count;
@@ -26,10 +28,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         /// </summary>
         public int Count
         {
-            get
-            {
-                return _count;
-            }
+            get { return _count; }
         }
 
         internal static int CountNodes(GreenNode green)
@@ -167,7 +166,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             // Find the green node that spans the target position.
             // We will be skipping whole slots here so we will not loop for long
             int slot;
-            for (slot = 0; ; slot++)
+            for (slot = 0;; slot++)
             {
                 var greenChild = green.GetSlot(slot);
                 if (greenChild != null)
@@ -268,10 +267,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         // for debugging
         private SyntaxNode[] Nodes
         {
-            get
-            {
-                return this.ToArray();
-            }
+            get { return this.ToArray(); }
         }
 
         public bool Any()
@@ -283,7 +279,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         /// Returns the first child in the list.
         /// </summary>
         /// <returns>The first child in the list.</returns>
-        /// <exception cref="System.InvalidOperationException">The list is empty.</exception>    
+        /// <exception cref="System.InvalidOperationException">The list is empty.</exception>
         public SyntaxNode First()
         {
             if (Any())
@@ -298,7 +294,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         /// Returns the last child in the list.
         /// </summary>
         /// <returns>The last child in the list.</returns>
-        /// <exception cref="System.InvalidOperationException">The list is empty.</exception>    
+        /// <exception cref="System.InvalidOperationException">The list is empty.</exception>
         public SyntaxNode Last()
         {
             if (Any())
@@ -432,10 +428,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             /// <returns>The element in the <see cref="ChildSyntaxList" /> at the current position of the enumerator.</returns>
             public SyntaxNode Current
             {
-                get
-                {
-                    return ItemInternal(_node, _childIndex);
-                }
+                get { return ItemInternal(_node, _childIndex); }
             }
 
             /// <summary>Sets the enumerator to its initial position, which is before the first element in the collection.</summary>
@@ -524,8 +517,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             /// <summary>
             /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
             /// </summary>
-            public void Dispose()
-            { }
+            public void Dispose() { }
         }
 
         public readonly partial struct Reversed : IEnumerable<SyntaxNode>, IEquatable<Reversed>
@@ -584,8 +576,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 
             public bool Equals(Reversed other)
             {
-                return _node == other._node
-                    && _count == other._count;
+                return _node == other._node && _count == other._count;
             }
 
             public struct Enumerator
@@ -608,10 +599,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 
                 public SyntaxNode Current
                 {
-                    get
-                    {
-                        return ItemInternal(_node, _childIndex);
-                    }
+                    get { return ItemInternal(_node, _childIndex); }
                 }
 
                 public void Reset()
@@ -675,8 +663,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                 /// <summary>
                 /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
                 /// </summary>
-                public void Dispose()
-                { }
+                public void Dispose() { }
             }
         }
 
@@ -684,17 +671,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         {
             public static readonly IEnumerator<T> Instance = new EmptyEnumerator<T>();
 
-            protected EmptyEnumerator()
-            {
-            }
+            protected EmptyEnumerator() { }
 
             public T Current => throw new InvalidOperationException();
 
             object IEnumerator.Current => throw new NotImplementedException();
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public bool MoveNext()
             {

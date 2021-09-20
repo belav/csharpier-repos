@@ -13,7 +13,11 @@ namespace Microsoft.AspNetCore.Mvc
     /// <summary>
     /// Sets the specified limits to the <see cref="HttpRequest.Form"/>.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        AllowMultiple = false,
+        Inherited = true
+    )]
     public class RequestFormLimitsAttribute : Attribute, IFilterFactory, IOrderedFilter
     {
         /// <summary>

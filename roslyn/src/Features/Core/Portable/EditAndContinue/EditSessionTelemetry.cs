@@ -32,7 +32,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 HadValidInsignificantChanges = telemetry._hadValidInsignificantChanges;
             }
 
-            public bool IsEmpty => !(HadCompilationErrors || HadRudeEdits || HadValidChanges || HadValidInsignificantChanges);
+            public bool IsEmpty =>
+                !(
+                    HadCompilationErrors
+                    || HadRudeEdits
+                    || HadValidChanges
+                    || HadValidInsignificantChanges
+                );
         }
 
         private readonly object _guard = new();
@@ -70,8 +76,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
         }
 
-        public void LogProjectAnalysisSummary(ProjectAnalysisSummary summary, ImmutableArray<string> errorsIds)
-        {
+        public void LogProjectAnalysisSummary(
+            ProjectAnalysisSummary summary,
+            ImmutableArray<string> errorsIds
+        ) {
             lock (_guard)
             {
                 _emitErrorIds.AddRange(errorsIds);
@@ -103,8 +111,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
         }
 
-        public void LogProjectAnalysisSummary(ProjectAnalysisSummary summary, ImmutableArray<Diagnostic> emitDiagnostics)
-            => LogProjectAnalysisSummary(summary, emitDiagnostics.SelectAsArray(d => d.Severity == DiagnosticSeverity.Error, d => d.Id));
+        public void LogProjectAnalysisSummary(
+            ProjectAnalysisSummary summary,
+            ImmutableArray<Diagnostic> emitDiagnostics
+        ) =>
+            LogProjectAnalysisSummary(
+                summary,
+                emitDiagnostics.SelectAsArray(
+                    d => d.Severity == DiagnosticSeverity.Error,
+                    d => d.Id
+                )
+            );
 
         public void LogRudeEditDiagnostics(ImmutableArray<RudeEditDiagnostic> diagnostics)
         {

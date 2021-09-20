@@ -17,18 +17,17 @@ namespace Microsoft.CodeAnalysis.Editor.Undo
     [ExportWorkspaceServiceFactory(typeof(IGlobalUndoService), ServiceLayer.Default), Shared]
     internal class NoOpGlobalUndoServiceFactory : IWorkspaceServiceFactory
     {
-        public static readonly IWorkspaceGlobalUndoTransaction Transaction = new NoOpUndoTransaction();
+        public static readonly IWorkspaceGlobalUndoTransaction Transaction =
+            new NoOpUndoTransaction();
 
         private readonly NoOpGlobalUndoService _singleton = new();
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NoOpGlobalUndoServiceFactory()
-        {
-        }
+        public NoOpGlobalUndoServiceFactory() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => _singleton;
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            _singleton;
 
         private class NoOpGlobalUndoService : IGlobalUndoService
         {
@@ -44,8 +43,10 @@ namespace Microsoft.CodeAnalysis.Editor.Undo
                 return false;
             }
 
-            public IWorkspaceGlobalUndoTransaction OpenGlobalUndoTransaction(Workspace workspace, string description)
-                => Transaction;
+            public IWorkspaceGlobalUndoTransaction OpenGlobalUndoTransaction(
+                Workspace workspace,
+                string description
+            ) => Transaction;
         }
 
         /// <summary>
@@ -53,17 +54,11 @@ namespace Microsoft.CodeAnalysis.Editor.Undo
         /// </summary>
         private class NoOpUndoTransaction : IWorkspaceGlobalUndoTransaction
         {
-            public void Commit()
-            {
-            }
+            public void Commit() { }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
-            public void AddDocument(DocumentId id)
-            {
-            }
+            public void AddDocument(DocumentId id) { }
         }
     }
 }

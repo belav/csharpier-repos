@@ -8,13 +8,20 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
 {
     internal static class ConditionEvaluator
     {
-        public static MatchResults Evaluate(IEnumerable<Condition> conditions, RewriteContext context, BackReferenceCollection? backReferences)
-        {
+        public static MatchResults Evaluate(
+            IEnumerable<Condition> conditions,
+            RewriteContext context,
+            BackReferenceCollection? backReferences
+        ) {
             return Evaluate(conditions, context, backReferences, trackAllCaptures: false);
         }
 
-        public static MatchResults Evaluate(IEnumerable<Condition> conditions, RewriteContext context, BackReferenceCollection? backReferences, bool trackAllCaptures)
-        {
+        public static MatchResults Evaluate(
+            IEnumerable<Condition> conditions,
+            RewriteContext context,
+            BackReferenceCollection? backReferences,
+            bool trackAllCaptures
+        ) {
             BackReferenceCollection? prevBackReferences = null;
             MatchResults? condResult = null;
             var orSucceeded = false;
@@ -50,7 +57,10 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
                 prevBackReferences = currentBackReferences;
             }
 
-            Debug.Assert(condResult != null, "ConditionEvaluator must be passed at least one condition to evaluate.");
+            Debug.Assert(
+                condResult != null,
+                "ConditionEvaluator must be passed at least one condition to evaluate."
+            );
             return new MatchResults(condResult.Success, prevBackReferences);
         }
     }

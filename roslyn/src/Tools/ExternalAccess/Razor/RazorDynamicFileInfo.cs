@@ -14,8 +14,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
     /// </summary>
     internal sealed class RazorDynamicFileInfo
     {
-        public RazorDynamicFileInfo(string filePath, SourceCodeKind sourceCodeKind, TextLoader textLoader, IRazorDocumentServiceProvider documentServiceProvider)
-        {
+        public RazorDynamicFileInfo(
+            string filePath,
+            SourceCodeKind sourceCodeKind,
+            TextLoader textLoader,
+            IRazorDocumentServiceProvider documentServiceProvider
+        ) {
             FilePath = filePath;
             SourceCodeKind = sourceCodeKind;
             TextLoader = textLoader;

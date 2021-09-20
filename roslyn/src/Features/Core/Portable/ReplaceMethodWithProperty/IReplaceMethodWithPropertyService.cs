@@ -16,13 +16,28 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
     {
         Task<SyntaxNode> GetMethodDeclarationAsync(CodeRefactoringContext context);
 
-        void ReplaceGetReference(SyntaxEditor editor, SyntaxToken nameToken, string propertyName, bool nameChanged);
-        void ReplaceSetReference(SyntaxEditor editor, SyntaxToken nameToken, string propertyName, bool nameChanged);
+        void ReplaceGetReference(
+            SyntaxEditor editor,
+            SyntaxToken nameToken,
+            string propertyName,
+            bool nameChanged
+        );
+        void ReplaceSetReference(
+            SyntaxEditor editor,
+            SyntaxToken nameToken,
+            string propertyName,
+            bool nameChanged
+        );
 
         void ReplaceGetMethodWithProperty(
-            DocumentOptionSet documentOptions, ParseOptions parseOptions,
-            SyntaxEditor editor, SemanticModel semanticModel,
-            GetAndSetMethods getAndSetMethods, string propertyName, bool nameChanged);
+            DocumentOptionSet documentOptions,
+            ParseOptions parseOptions,
+            SyntaxEditor editor,
+            SemanticModel semanticModel,
+            GetAndSetMethods getAndSetMethods,
+            string propertyName,
+            bool nameChanged
+        );
 
         void RemoveSetMethod(SyntaxEditor editor, SyntaxNode setMethodDeclaration);
     }
@@ -35,9 +50,11 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
         public readonly SyntaxNode SetMethodDeclaration;
 
         public GetAndSetMethods(
-            IMethodSymbol getMethod, IMethodSymbol setMethod,
-            SyntaxNode getMethodDeclaration, SyntaxNode setMethodDeclaration)
-        {
+            IMethodSymbol getMethod,
+            IMethodSymbol setMethod,
+            SyntaxNode getMethodDeclaration,
+            SyntaxNode setMethodDeclaration
+        ) {
             GetMethod = getMethod;
             SetMethod = setMethod;
             GetMethodDeclaration = getMethodDeclaration;

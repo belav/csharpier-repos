@@ -34,7 +34,12 @@ internal static partial class Interop
         }
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "AndroidCryptoNative_X509DecodeCollection")]
-        private static extern int X509DecodeCollection(ref byte buf, int bufLen, IntPtr[]? ptrs, ref int handlesLen);
+        private static extern int X509DecodeCollection(
+            ref byte buf,
+            int bufLen,
+            IntPtr[]? ptrs,
+            ref int handlesLen
+        );
         internal static SafeX509Handle[] X509DecodeCollection(ReadOnlySpan<byte> data)
         {
             ref byte buf = ref MemoryMarshal.GetReference(data);
@@ -61,7 +66,12 @@ internal static partial class Interop
         }
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "AndroidCryptoNative_X509ExportPkcs7")]
-        private static extern int X509ExportPkcs7(IntPtr[] certs, int certsLen, [Out] byte[]? buf, ref int len);
+        private static extern int X509ExportPkcs7(
+            IntPtr[] certs,
+            int certsLen,
+            [Out] byte[]? buf,
+            ref int len
+        );
         internal static byte[] X509ExportPkcs7(IntPtr[] certHandles)
         {
             int len = 0;
@@ -93,7 +103,10 @@ internal static partial class Interop
         }
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "AndroidCryptoNative_X509PublicKey")]
-        internal static extern IntPtr X509GetPublicKey(SafeX509Handle x, PAL_KeyAlgorithm algorithm);
+        internal static extern IntPtr X509GetPublicKey(
+            SafeX509Handle x,
+            PAL_KeyAlgorithm algorithm
+        );
     }
 }
 
@@ -101,13 +114,8 @@ namespace System.Security.Cryptography.X509Certificates
 {
     internal sealed class SafeX509Handle : Interop.JObjectLifetime.SafeJObjectHandle
     {
-        public SafeX509Handle()
-        {
-        }
+        public SafeX509Handle() { }
 
-        internal SafeX509Handle(IntPtr ptr)
-            : base(ptr)
-        {
-        }
+        internal SafeX509Handle(IntPtr ptr) : base(ptr) { }
     }
 }

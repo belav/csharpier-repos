@@ -22,11 +22,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         public StreamingFindReferencesProgressAdapter(IFindReferencesProgress progress)
         {
             _progress = progress;
-            ProgressTracker = new StreamingProgressTracker((current, max) =>
-            {
-                _progress.ReportProgress(current, max);
-                return default;
-            });
+            ProgressTracker = new StreamingProgressTracker(
+                (current, max) =>
+                {
+                    _progress.ReportProgress(current, max);
+                    return default;
+                }
+            );
         }
 
         public ValueTask OnCompletedAsync()
@@ -55,8 +57,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             return default;
         }
 
-        public ValueTask OnReferenceFoundAsync(SymbolGroup group, ISymbol symbol, ReferenceLocation location)
-        {
+        public ValueTask OnReferenceFoundAsync(
+            SymbolGroup group,
+            ISymbol symbol,
+            ReferenceLocation location
+        ) {
             _progress.OnReferenceFound(symbol, location);
             return default;
         }

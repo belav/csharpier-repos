@@ -18,10 +18,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
     /// </summary>
     internal class EnumBoolConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            => value?.Equals(parameter) ?? DependencyProperty.UnsetValue;
+        public object Convert(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        ) => value?.Equals(parameter) ?? DependencyProperty.UnsetValue;
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            => value?.Equals(true) == true ? parameter : Binding.DoNothing;
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        ) => value?.Equals(true) == true ? parameter : Binding.DoNothing;
     }
 }

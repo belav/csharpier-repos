@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.CodeAnalysis.Razor
 {
-    public sealed class DefaultTagHelperDescriptorProvider : RazorEngineFeatureBase, ITagHelperDescriptorProvider
+    public sealed class DefaultTagHelperDescriptorProvider
+        : RazorEngineFeatureBase,
+          ITagHelperDescriptorProvider
     {
         public int Order { get; set; }
 
@@ -45,8 +47,9 @@ namespace Microsoft.CodeAnalysis.Razor
                 visitor.Visit(compilation.Assembly.GlobalNamespace);
                 foreach (var reference in compilation.References)
                 {
-                    if (compilation.GetAssemblyOrModuleSymbol(reference) is IAssemblySymbol assembly)
-                    {
+                    if (
+                        compilation.GetAssemblyOrModuleSymbol(reference) is IAssemblySymbol assembly
+                    ) {
                         if (IsTagHelperAssembly(assembly))
                         {
                             visitor.Visit(assembly.GlobalNamespace);
@@ -55,8 +58,11 @@ namespace Microsoft.CodeAnalysis.Razor
                 }
             }
 
-
-            var factory = new DefaultTagHelperDescriptorFactory(compilation, context.IncludeDocumentation, context.ExcludeHidden);
+            var factory = new DefaultTagHelperDescriptorFactory(
+                compilation,
+                context.IncludeDocumentation,
+                context.ExcludeHidden
+            );
             for (var i = 0; i < types.Count; i++)
             {
                 var descriptor = factory.CreateDescriptor(types[i]);
@@ -70,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Razor
 
         private bool IsTagHelperAssembly(IAssemblySymbol assembly)
         {
-            return assembly.Name != null && !assembly.Name.StartsWith("System.", StringComparison.Ordinal);
+            return assembly.Name != null
+                && !assembly.Name.StartsWith("System.", StringComparison.Ordinal);
         }
     }
 }

@@ -31,10 +31,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Compilation
         {
             // Arrange
             var path = "/Views/Home/Index.cshtml";
-            var compiledView = new CompiledViewDescriptor
-            {
-                RelativePath = path,
-            };
+            var compiledView = new CompiledViewDescriptor { RelativePath = path, };
             var viewCompiler = GetViewCompiler(compiledViews: new[] { compiledView });
 
             // Act
@@ -51,14 +48,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Compilation
         [InlineData("/views/home/index.cshtml")]
         [InlineData("/VIEWS/HOME/INDEX.CSHTML")]
         [InlineData("/viEws/HoME/inDex.cshtml")]
-        public async Task CompileAsync_PerformsCaseInsensitiveLookupsForCompiledViews(string lookupPath)
-        {
+        public async Task CompileAsync_PerformsCaseInsensitiveLookupsForCompiledViews(
+            string lookupPath
+        ) {
             // Arrange
             var path = "/Views/Home/Index.cshtml";
-            var precompiledView = new CompiledViewDescriptor
-            {
-                RelativePath = path,
-            };
+            var precompiledView = new CompiledViewDescriptor { RelativePath = path, };
             var viewCompiler = GetViewCompiler(compiledViews: new[] { precompiledView });
 
             // Act
@@ -73,10 +68,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Compilation
         {
             // Arrange
             var path = "/Views/Home/Index.cshtml";
-            var compiledView = new CompiledViewDescriptor
-            {
-                RelativePath = path,
-            };
+            var compiledView = new CompiledViewDescriptor { RelativePath = path, };
             var viewCompiler = GetViewCompiler(compiledViews: new[] { compiledView });
 
             // Act
@@ -86,8 +78,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Compilation
             Assert.Same(compiledView, result);
         }
 
-        private static TestRazorViewCompiler GetViewCompiler(IList<CompiledViewDescriptor> compiledViews = null)
-        {
+        private static TestRazorViewCompiler GetViewCompiler(
+            IList<CompiledViewDescriptor> compiledViews = null
+        ) {
             compiledViews = compiledViews ?? Array.Empty<CompiledViewDescriptor>();
 
             var viewCompiler = new TestRazorViewCompiler(compiledViews);
@@ -96,10 +89,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Compilation
 
         private class TestRazorViewCompiler : DefaultViewCompiler
         {
-            public TestRazorViewCompiler(IList<CompiledViewDescriptor> compiledViews) :
-                base(compiledViews, NullLogger.Instance)
-            {
-            }
+            public TestRazorViewCompiler(IList<CompiledViewDescriptor> compiledViews)
+                : base(compiledViews, NullLogger.Instance) { }
         }
     }
 }

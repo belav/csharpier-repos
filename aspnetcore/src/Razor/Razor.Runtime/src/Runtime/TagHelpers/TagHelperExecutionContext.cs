@@ -27,15 +27,15 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
         /// Internal for testing purposes only.
         /// </summary>
         internal TagHelperExecutionContext(string tagName, TagMode tagMode)
-            : this(tagName,
-                   tagMode,
-                   items: new Dictionary<object, object>(),
-                   uniqueId: string.Empty,
-                   executeChildContentAsync: () => Task.CompletedTask,
-                   startTagHelperWritingScope: _ => { },
-                   endTagHelperWritingScope: () => new DefaultTagHelperContent())
-        {
-        }
+            : this(
+                tagName,
+                tagMode,
+                items: new Dictionary<object, object>(),
+                uniqueId: string.Empty,
+                executeChildContentAsync: () => Task.CompletedTask,
+                startTagHelperWritingScope: _ => { },
+                endTagHelperWritingScope: () => new DefaultTagHelperContent()
+            ) { }
 
         /// <summary>
         /// Instantiates a new <see cref="TagHelperExecutionContext"/>.
@@ -58,8 +58,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
             string uniqueId,
             Func<Task> executeChildContentAsync,
             Action<HtmlEncoder> startTagHelperWritingScope,
-            Func<TagHelperContent> endTagHelperWritingScope)
-        {
+            Func<TagHelperContent> endTagHelperWritingScope
+        ) {
             if (startTagHelperWritingScope == null)
             {
                 throw new ArgumentNullException(nameof(startTagHelperWritingScope));
@@ -74,8 +74,11 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
             _allAttributes = new TagHelperAttributeList();
 
             Context = new TagHelperContext(tagName, _allAttributes, items, uniqueId);
-            Output = new TagHelperOutput(tagName, new TagHelperAttributeList(), GetChildContentAsync)
-            {
+            Output = new TagHelperOutput(
+                tagName,
+                new TagHelperAttributeList(),
+                GetChildContentAsync
+            ) {
                 TagMode = tagMode
             };
 
@@ -165,8 +168,11 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
         /// <param name="name">The bound attribute name.</param>
         /// <param name="value">The attribute value.</param>
         /// <param name="valueStyle">The value style of the attribute.</param>
-        public void AddTagHelperAttribute(string name, object value, HtmlAttributeValueStyle valueStyle)
-        {
+        public void AddTagHelperAttribute(
+            string name,
+            object value,
+            HtmlAttributeValueStyle valueStyle
+        ) {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
@@ -203,8 +209,8 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
             TagMode tagMode,
             IDictionary<object, object> items,
             string uniqueId,
-            Func<Task> executeChildContentAsync)
-        {
+            Func<Task> executeChildContentAsync
+        ) {
             if (tagName == null)
             {
                 throw new ArgumentNullException(nameof(tagName));
@@ -252,6 +258,7 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                 {
                     await _executeChildContentAsync();
                 }
+
                 finally
                 {
                     childContent = _endTagHelperWritingScope();
@@ -264,8 +271,10 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
         }
 
         // Internal for testing.
-        internal async Task<TagHelperContent> GetChildContentAsync(bool useCachedResult, HtmlEncoder encoder)
-        {
+        internal async Task<TagHelperContent> GetChildContentAsync(
+            bool useCachedResult,
+            HtmlEncoder encoder
+        ) {
             // Get cached content for this encoder.
             TagHelperContent childContent;
             if (encoder == null)
@@ -292,6 +301,7 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                 {
                     await _executeChildContentAsync();
                 }
+
                 finally
                 {
                     childContent = _endTagHelperWritingScope();

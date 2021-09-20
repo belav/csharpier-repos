@@ -5,19 +5,24 @@ namespace System.Text.Json.Serialization.Converters
 {
     internal sealed class SingleConverter : JsonConverter<float>
     {
-
         public SingleConverter()
         {
             IsInternalConverterForNumberType = true;
         }
 
-        public override float Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
+        public override float Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        ) {
             return reader.GetSingle();
         }
 
-        public override void Write(Utf8JsonWriter writer, float value, JsonSerializerOptions options)
-        {
+        public override void Write(
+            Utf8JsonWriter writer,
+            float value,
+            JsonSerializerOptions options
+        ) {
             writer.WriteNumberValue(value);
         }
 
@@ -26,13 +31,19 @@ namespace System.Text.Json.Serialization.Converters
             return reader.GetSingleWithQuotes();
         }
 
-        internal override void WriteWithQuotes(Utf8JsonWriter writer, float value, JsonSerializerOptions options, ref WriteStack state)
-        {
+        internal override void WriteWithQuotes(
+            Utf8JsonWriter writer,
+            float value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        ) {
             writer.WritePropertyName(value);
         }
 
-        internal override float ReadNumberWithCustomHandling(ref Utf8JsonReader reader, JsonNumberHandling handling)
-        {
+        internal override float ReadNumberWithCustomHandling(
+            ref Utf8JsonReader reader,
+            JsonNumberHandling handling
+        ) {
             if (reader.TokenType == JsonTokenType.String)
             {
                 if ((JsonNumberHandling.AllowReadingFromString & handling) != 0)
@@ -48,8 +59,11 @@ namespace System.Text.Json.Serialization.Converters
             return reader.GetSingle();
         }
 
-        internal override void WriteNumberWithCustomHandling(Utf8JsonWriter writer, float value, JsonNumberHandling handling)
-        {
+        internal override void WriteNumberWithCustomHandling(
+            Utf8JsonWriter writer,
+            float value,
+            JsonNumberHandling handling
+        ) {
             if ((JsonNumberHandling.WriteAsString & handling) != 0)
             {
                 writer.WriteNumberValueAsString(value);

@@ -31,14 +31,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RenameCommandHandler(IThreadingContext threadingContext, InlineRenameService renameService)
-            : base(threadingContext, renameService)
-        {
-        }
+        public RenameCommandHandler(
+            IThreadingContext threadingContext,
+            InlineRenameService renameService
+        ) : base(threadingContext, renameService) { }
 
 #if !COCOA
-        protected override bool DashboardShouldReceiveKeyboardNavigation(ITextView textView)
-            => GetDashboard(textView) is { } dashboard && dashboard.ShouldReceiveKeyboardNavigation;
+        protected override bool DashboardShouldReceiveKeyboardNavigation(ITextView textView) =>
+            GetDashboard(textView) is { } dashboard && dashboard.ShouldReceiveKeyboardNavigation;
 
         protected override void SetFocusToTextView(ITextView textView)
         {
@@ -86,8 +86,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             }
         }
 #else
-        protected override bool DashboardShouldReceiveKeyboardNavigation(ITextView textView)
-            => false;
+        protected override bool DashboardShouldReceiveKeyboardNavigation(ITextView textView) =>
+            false;
 
         protected override void SetFocusToTextView(ITextView textView)
         {

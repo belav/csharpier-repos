@@ -5,7 +5,6 @@ using System.Speech.Internal.SrgsParser;
 
 namespace System.Speech.Internal.GrammarBuilding
 {
-
     internal sealed class RuleElement : BuilderElements
     {
         #region Constructors
@@ -15,8 +14,7 @@ namespace System.Speech.Internal.GrammarBuilding
             _name = name;
         }
 
-        internal RuleElement(GrammarBuilderBase builder, string name)
-            : this(name)
+        internal RuleElement(GrammarBuilderBase builder, string name) : this(name)
         {
             Add(builder);
         }
@@ -54,8 +52,12 @@ namespace System.Speech.Internal.GrammarBuilding
             return rule;
         }
 
-        internal override IElement CreateElement(IElementFactory elementFactory, IElement parent, IRule rule, IdentifierCollection ruleIds)
-        {
+        internal override IElement CreateElement(
+            IElementFactory elementFactory,
+            IElement parent,
+            IRule rule,
+            IdentifierCollection ruleIds
+        ) {
             if (_rule == null)
             {
                 IGrammar grammar = elementFactory.Grammar;
@@ -86,26 +88,17 @@ namespace System.Speech.Internal.GrammarBuilding
 
         internal override string DebugSummary
         {
-            get
-            {
-                return _name + "=" + base.DebugSummary;
-            }
+            get { return _name + "=" + base.DebugSummary; }
         }
 
         internal string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         internal string RuleName
         {
-            get
-            {
-                return _ruleName;
-            }
+            get { return _ruleName; }
         }
 
         #endregion
@@ -115,7 +108,6 @@ namespace System.Speech.Internal.GrammarBuilding
         private readonly string _name;
         private string _ruleName;
         private IRule _rule;
-
         #endregion
     }
 }

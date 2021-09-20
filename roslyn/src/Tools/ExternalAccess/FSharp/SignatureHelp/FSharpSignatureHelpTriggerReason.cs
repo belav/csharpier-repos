@@ -12,12 +12,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.SignatureHelp
         /// Signature Help was triggered through the 'Invoke Signature Help' command
         /// </summary>
         InvokeSignatureHelpCommand,
-
         /// <summary>
         /// Signature Help was triggered through the 'Type Char' command.
         /// </summary>
         TypeCharCommand,
-
         /// <summary>
         /// Signature Help was triggered through typing a closing brace.
         /// </summary>

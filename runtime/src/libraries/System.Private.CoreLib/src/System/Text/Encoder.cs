@@ -38,8 +38,7 @@ namespace System.Text
 
                 // Can't change fallback if buffer is wrong
                 if (_fallbackBuffer != null && _fallbackBuffer.Remaining > 0)
-                    throw new ArgumentException(
-                      SR.Argument_FallbackBufferNotEmpty, nameof(value));
+                    throw new ArgumentException(SR.Argument_FallbackBufferNotEmpty, nameof(value));
 
                 _fallback = value;
                 _fallbackBuffer = null;
@@ -57,7 +56,8 @@ namespace System.Text
                     if (_fallback != null)
                         _fallbackBuffer = _fallback.CreateFallbackBuffer();
                     else
-                        _fallbackBuffer = EncoderFallback.ReplacementFallback.CreateFallbackBuffer();
+                        _fallbackBuffer =
+                            EncoderFallback.ReplacementFallback.CreateFallbackBuffer();
                 }
 
                 return _fallbackBuffer;
@@ -101,12 +101,13 @@ namespace System.Text
         {
             // Validate input parameters
             if (chars == null)
-                throw new ArgumentNullException(nameof(chars),
-                      SR.ArgumentNull_Array);
+                throw new ArgumentNullException(nameof(chars), SR.ArgumentNull_Array);
 
             if (count < 0)
-                throw new ArgumentOutOfRangeException(nameof(count),
-                      SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             char[] arrChar = new char[count];
             int index;
@@ -144,8 +145,14 @@ namespace System.Text
         // determine the maximum number of bytes that will be produced for a given
         // number of characters, regardless of the actual character values.
         //
-        public abstract int GetBytes(char[] chars, int charIndex, int charCount,
-                                        byte[] bytes, int byteIndex, bool flush);
+        public abstract int GetBytes(
+            char[] chars,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex,
+            bool flush
+        );
 
         // We expect this to be the workhorse for NLS Encodings, but for existing
         // ones we need a working (if slow) default implementation)
@@ -164,17 +171,25 @@ namespace System.Text
         // could easily overflow our output buffer.  Therefore we do an extra test
         // when we copy the buffer so that we don't overflow byteCount either.
         [CLSCompliant(false)]
-        public virtual unsafe int GetBytes(char* chars, int charCount,
-                                              byte* bytes, int byteCount, bool flush)
-        {
+        public virtual unsafe int GetBytes(
+            char* chars,
+            int charCount,
+            byte* bytes,
+            int byteCount,
+            bool flush
+        ) {
             // Validate input parameters
             if (bytes == null || chars == null)
-                throw new ArgumentNullException(bytes == null ? nameof(bytes) : nameof(chars),
-                    SR.ArgumentNull_Array);
+                throw new ArgumentNullException(
+                    bytes == null ? nameof(bytes) : nameof(chars),
+                    SR.ArgumentNull_Array
+                );
 
             if (charCount < 0 || byteCount < 0)
-                throw new ArgumentOutOfRangeException(charCount < 0 ? nameof(charCount) : nameof(byteCount),
-                    SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    charCount < 0 ? nameof(charCount) : nameof(byteCount),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             // Get the char array to convert
             char[] arrChar = new char[charCount];
@@ -208,9 +223,9 @@ namespace System.Text
 
         public virtual unsafe int GetBytes(ReadOnlySpan<char> chars, Span<byte> bytes, bool flush)
         {
-            fixed (char* charsPtr = &MemoryMarshal.GetNonNullPinnableReference(chars))
-            fixed (byte* bytesPtr = &MemoryMarshal.GetNonNullPinnableReference(bytes))
-            {
+            fixed (char* charsPtr = &MemoryMarshal.GetNonNullPinnableReference(chars))fixed (
+                byte* bytesPtr = &MemoryMarshal.GetNonNullPinnableReference(bytes)
+            ) {
                 return GetBytes(charsPtr, chars.Length, bytesPtr, bytes.Length, flush);
             }
         }
@@ -228,30 +243,48 @@ namespace System.Text
         // Note that if all of the input chars are not consumed, then we'll do a /2, which means
         // that its likely that we didn't consume as many chars as we could have.  For some
         // applications this could be slow.  (Like trying to exactly fill an output buffer from a bigger stream)
-        public virtual void Convert(char[] chars, int charIndex, int charCount,
-                                      byte[] bytes, int byteIndex, int byteCount, bool flush,
-                                      out int charsUsed, out int bytesUsed, out bool completed)
-        {
+        public virtual void Convert(
+            char[] chars,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            bool flush,
+            out int charsUsed,
+            out int bytesUsed,
+            out bool completed
+        ) {
             // Validate parameters
             if (chars == null || bytes == null)
-                throw new ArgumentNullException(chars == null ? nameof(chars) : nameof(bytes),
-                      SR.ArgumentNull_Array);
+                throw new ArgumentNullException(
+                    chars == null ? nameof(chars) : nameof(bytes),
+                    SR.ArgumentNull_Array
+                );
 
             if (charIndex < 0 || charCount < 0)
-                throw new ArgumentOutOfRangeException(charIndex < 0 ? nameof(charIndex) : nameof(charCount),
-                      SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    charIndex < 0 ? nameof(charIndex) : nameof(charCount),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             if (byteIndex < 0 || byteCount < 0)
-                throw new ArgumentOutOfRangeException(byteIndex < 0 ? nameof(byteIndex) : nameof(byteCount),
-                      SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    byteIndex < 0 ? nameof(byteIndex) : nameof(byteCount),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             if (chars.Length - charIndex < charCount)
-                throw new ArgumentOutOfRangeException(nameof(chars),
-                      SR.ArgumentOutOfRange_IndexCountBuffer);
+                throw new ArgumentOutOfRangeException(
+                    nameof(chars),
+                    SR.ArgumentOutOfRange_IndexCountBuffer
+                );
 
             if (bytes.Length - byteIndex < byteCount)
-                throw new ArgumentOutOfRangeException(nameof(bytes),
-                      SR.ArgumentOutOfRange_IndexCountBuffer);
+                throw new ArgumentOutOfRangeException(
+                    nameof(bytes),
+                    SR.ArgumentOutOfRange_IndexCountBuffer
+                );
 
             charsUsed = charCount;
 
@@ -263,8 +296,10 @@ namespace System.Text
                 if (GetByteCount(chars, charIndex, charsUsed, flush) <= byteCount)
                 {
                     bytesUsed = GetBytes(chars, charIndex, charsUsed, bytes, byteIndex, flush);
-                    completed = (charsUsed == charCount &&
-                        (_fallbackBuffer == null || _fallbackBuffer.Remaining == 0));
+                    completed = (
+                        charsUsed == charCount
+                        && (_fallbackBuffer == null || _fallbackBuffer.Remaining == 0)
+                    );
                     return;
                 }
 
@@ -285,17 +320,27 @@ namespace System.Text
         // that its likely that we didn't consume as many chars as we could have.  For some
         // applications this could be slow.  (Like trying to exactly fill an output buffer from a bigger stream)
         [CLSCompliant(false)]
-        public virtual unsafe void Convert(char* chars, int charCount,
-                                             byte* bytes, int byteCount, bool flush,
-                                             out int charsUsed, out int bytesUsed, out bool completed)
-        {
+        public virtual unsafe void Convert(
+            char* chars,
+            int charCount,
+            byte* bytes,
+            int byteCount,
+            bool flush,
+            out int charsUsed,
+            out int bytesUsed,
+            out bool completed
+        ) {
             // Validate input parameters
             if (bytes == null || chars == null)
-                throw new ArgumentNullException(bytes == null ? nameof(bytes) : nameof(chars),
-                    SR.ArgumentNull_Array);
+                throw new ArgumentNullException(
+                    bytes == null ? nameof(bytes) : nameof(chars),
+                    SR.ArgumentNull_Array
+                );
             if (charCount < 0 || byteCount < 0)
-                throw new ArgumentOutOfRangeException(charCount < 0 ? nameof(charCount) : nameof(byteCount),
-                    SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    charCount < 0 ? nameof(charCount) : nameof(byteCount),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             // Get ready to do it
             charsUsed = charCount;
@@ -306,8 +351,10 @@ namespace System.Text
                 if (GetByteCount(chars, charsUsed, flush) <= byteCount)
                 {
                     bytesUsed = GetBytes(chars, charsUsed, bytes, byteCount, flush);
-                    completed = (charsUsed == charCount &&
-                        (_fallbackBuffer == null || _fallbackBuffer.Remaining == 0));
+                    completed = (
+                        charsUsed == charCount
+                        && (_fallbackBuffer == null || _fallbackBuffer.Remaining == 0)
+                    );
                     return;
                 }
 
@@ -320,12 +367,27 @@ namespace System.Text
             throw new ArgumentException(SR.Argument_ConversionOverflow);
         }
 
-        public virtual unsafe void Convert(ReadOnlySpan<char> chars, Span<byte> bytes, bool flush, out int charsUsed, out int bytesUsed, out bool completed)
-        {
-            fixed (char* charsPtr = &MemoryMarshal.GetNonNullPinnableReference(chars))
-            fixed (byte* bytesPtr = &MemoryMarshal.GetNonNullPinnableReference(bytes))
-            {
-                Convert(charsPtr, chars.Length, bytesPtr, bytes.Length, flush, out charsUsed, out bytesUsed, out completed);
+        public virtual unsafe void Convert(
+            ReadOnlySpan<char> chars,
+            Span<byte> bytes,
+            bool flush,
+            out int charsUsed,
+            out int bytesUsed,
+            out bool completed
+        ) {
+            fixed (char* charsPtr = &MemoryMarshal.GetNonNullPinnableReference(chars))fixed (
+                byte* bytesPtr = &MemoryMarshal.GetNonNullPinnableReference(bytes)
+            ) {
+                Convert(
+                    charsPtr,
+                    chars.Length,
+                    bytesPtr,
+                    bytes.Length,
+                    flush,
+                    out charsUsed,
+                    out bytesUsed,
+                    out completed
+                );
             }
         }
     }

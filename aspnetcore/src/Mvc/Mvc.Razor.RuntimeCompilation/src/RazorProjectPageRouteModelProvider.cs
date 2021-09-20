@@ -22,8 +22,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         public RazorProjectPageRouteModelProvider(
             RazorProjectFileSystem razorFileSystem,
             IOptions<RazorPagesOptions> pagesOptionsAccessor,
-            ILoggerFactory loggerFactory)
-        {
+            ILoggerFactory loggerFactory
+        ) {
             _razorFileSystem = razorFileSystem;
             _pagesOptions = pagesOptionsAccessor.Value;
             _logger = loggerFactory.CreateLogger<RazorProjectPageRouteModelProvider>();
@@ -35,9 +35,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         /// </remarks>
         public int Order => -1000 + 10;
 
-        public void OnProvidersExecuted(PageRouteModelProviderContext context)
-        {
-        }
+        public void OnProvidersExecuted(PageRouteModelProviderContext context) { }
 
         public void OnProvidersExecuting(PageRouteModelProviderContext context)
         {
@@ -54,8 +52,16 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             foreach (var item in _razorFileSystem.EnumerateItems(_pagesOptions.RootDirectory))
             {
                 var relativePath = item.CombinedPath;
-                if (context.RouteModels.Any(m => string.Equals(relativePath, m.RelativePath, StringComparison.OrdinalIgnoreCase)))
-                {
+                if (
+                    context.RouteModels.Any(
+                        m =>
+                            string.Equals(
+                                relativePath,
+                                m.RelativePath,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                    )
+                ) {
                     // A route for this file was already registered either by the CompiledPageRouteModel or as an area route.
                     // by this provider. Skip registering an additional entry.
 
@@ -83,8 +89,16 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             foreach (var item in _razorFileSystem.EnumerateItems(AreaRootDirectory))
             {
                 var relativePath = item.CombinedPath;
-                if (context.RouteModels.Any(m => string.Equals(relativePath, m.RelativePath, StringComparison.OrdinalIgnoreCase)))
-                {
+                if (
+                    context.RouteModels.Any(
+                        m =>
+                            string.Equals(
+                                relativePath,
+                                m.RelativePath,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                    )
+                ) {
                     // A route for this file was already registered either by the CompiledPageRouteModel.
                     // Skip registering an additional entry.
                     continue;
@@ -96,7 +110,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                     continue;
                 }
 
-                var routeModel = _routeModelFactory.CreateAreaRouteModel(relativePath, routeTemplate);
+                var routeModel = _routeModelFactory.CreateAreaRouteModel(
+                    relativePath,
+                    routeTemplate
+                );
                 if (routeModel != null)
                 {
                     context.RouteModels.Add(routeModel);

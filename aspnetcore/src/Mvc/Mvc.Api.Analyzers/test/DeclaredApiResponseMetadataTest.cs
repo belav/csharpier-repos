@@ -48,7 +48,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         public void Matches_ReturnsTrue_IfDeclaredMetadataIs200_AndActualMetadataIsDefaultResponse()
         {
             // Arrange
-            var declaredMetadata = DeclaredApiResponseMetadata.ForProducesResponseType(200, AttributeData, Mock.Of<IMethodSymbol>());
+            var declaredMetadata = DeclaredApiResponseMetadata.ForProducesResponseType(
+                200,
+                AttributeData,
+                Mock.Of<IMethodSymbol>()
+            );
             var actualMetadata = new ActualApiResponseMetadata(ReturnStatement, null);
 
             // Act
@@ -66,7 +70,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         public void Matches_ReturnsTrue_IfDeclaredMetadataIs201_AndActualMetadataIsDefault()
         {
             // Arrange
-            var declaredMetadata = DeclaredApiResponseMetadata.ForProducesResponseType(201, AttributeData, Mock.Of<IMethodSymbol>());
+            var declaredMetadata = DeclaredApiResponseMetadata.ForProducesResponseType(
+                201,
+                AttributeData,
+                Mock.Of<IMethodSymbol>()
+            );
             var actualMetadata = new ActualApiResponseMetadata(ReturnStatement, null);
 
             // Act
@@ -84,7 +92,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         public void Matches_ReturnsFalse_IfDeclaredMetadataIs201_AndActualMetadataIs200()
         {
             // Arrange
-            var declaredMetadata = DeclaredApiResponseMetadata.ForProducesResponseType(201, AttributeData, Mock.Of<IMethodSymbol>());
+            var declaredMetadata = DeclaredApiResponseMetadata.ForProducesResponseType(
+                201,
+                AttributeData,
+                Mock.Of<IMethodSymbol>()
+            );
             var actualMetadata = new ActualApiResponseMetadata(ReturnStatement, 200, null);
 
             // Act
@@ -98,7 +110,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         public void Matches_ReturnsTrue_IfDeclaredMetadataAndActualMetadataHaveSameStatusCode()
         {
             // Arrange
-            var declaredMetadata = DeclaredApiResponseMetadata.ForProducesResponseType(302, AttributeData, Mock.Of<IMethodSymbol>());
+            var declaredMetadata = DeclaredApiResponseMetadata.ForProducesResponseType(
+                302,
+                AttributeData,
+                Mock.Of<IMethodSymbol>()
+            );
             var actualMetadata = new ActualApiResponseMetadata(ReturnStatement, 302, null);
 
             // Act
@@ -112,11 +128,19 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         [InlineData(400)]
         [InlineData(409)]
         [InlineData(500)]
-        public void Matches_ReturnsTrue_IfDeclaredMetadataIsDefault_AndActualMetadataIsErrorStatusCode(int actualStatusCode)
-        {
+        public void Matches_ReturnsTrue_IfDeclaredMetadataIsDefault_AndActualMetadataIsErrorStatusCode(
+            int actualStatusCode
+        ) {
             // Arrange
-            var declaredMetadata = DeclaredApiResponseMetadata.ForProducesDefaultResponse(AttributeData, Mock.Of<IMethodSymbol>());
-            var actualMetadata = new ActualApiResponseMetadata(ReturnStatement, actualStatusCode, null);
+            var declaredMetadata = DeclaredApiResponseMetadata.ForProducesDefaultResponse(
+                AttributeData,
+                Mock.Of<IMethodSymbol>()
+            );
+            var actualMetadata = new ActualApiResponseMetadata(
+                ReturnStatement,
+                actualStatusCode,
+                null
+            );
 
             // Act
             var matches = declaredMetadata.Matches(actualMetadata);
@@ -129,7 +153,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         public void Matches_ReturnsFalse_IfDeclaredMetadataIsDefault_AndActualMetadataIsNotErrorStatusCode()
         {
             // Arrange
-            var declaredMetadata = DeclaredApiResponseMetadata.ForProducesDefaultResponse(AttributeData, Mock.Of<IMethodSymbol>());
+            var declaredMetadata = DeclaredApiResponseMetadata.ForProducesDefaultResponse(
+                AttributeData,
+                Mock.Of<IMethodSymbol>()
+            );
             var actualMetadata = new ActualApiResponseMetadata(ReturnStatement, 204, null);
 
             // Act
@@ -143,7 +170,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         public void Matches_ReturnsFalse_IfDeclaredMetadataIsDefault_AndActualMetadataIsDefaultResponse()
         {
             // Arrange
-            var declaredMetadata = DeclaredApiResponseMetadata.ForProducesDefaultResponse(AttributeData, Mock.Of<IMethodSymbol>());
+            var declaredMetadata = DeclaredApiResponseMetadata.ForProducesDefaultResponse(
+                AttributeData,
+                Mock.Of<IMethodSymbol>()
+            );
             var actualMetadata = new ActualApiResponseMetadata(ReturnStatement, null);
 
             // Act
@@ -155,15 +185,21 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
         private class TestAttributeData : AttributeData
         {
-            protected override INamedTypeSymbol CommonAttributeClass => throw new System.NotImplementedException();
+            protected override INamedTypeSymbol CommonAttributeClass =>
+                throw new System.NotImplementedException();
 
-            protected override IMethodSymbol CommonAttributeConstructor => throw new System.NotImplementedException();
+            protected override IMethodSymbol CommonAttributeConstructor =>
+                throw new System.NotImplementedException();
 
-            protected override SyntaxReference CommonApplicationSyntaxReference => throw new System.NotImplementedException();
+            protected override SyntaxReference CommonApplicationSyntaxReference =>
+                throw new System.NotImplementedException();
 
-            protected override ImmutableArray<TypedConstant> CommonConstructorArguments => throw new System.NotImplementedException();
+            protected override ImmutableArray<TypedConstant> CommonConstructorArguments =>
+                throw new System.NotImplementedException();
 
-            protected override ImmutableArray<KeyValuePair<string, TypedConstant>> CommonNamedArguments => throw new System.NotImplementedException();
+            protected override ImmutableArray<
+                KeyValuePair<string, TypedConstant>
+            > CommonNamedArguments => throw new System.NotImplementedException();
         }
     }
 }

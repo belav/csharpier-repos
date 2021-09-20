@@ -10,7 +10,11 @@ using Xunit;
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 {
     [SkipIfHostableWebCoreNotAvailable]
-    [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win8, SkipReason = "https://github.com/aspnet/IISIntegration/issues/866")]
+    [MinimumOSVersion(
+        OperatingSystems.Windows,
+        WindowsVersions.Win8,
+        SkipReason = "https://github.com/aspnet/IISIntegration/issues/866"
+    )]
     public class TestServerTest : StrictTestServerTests
     {
         [ConditionalFact]
@@ -20,12 +24,16 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             var expectedPath = "/Path";
 
             string path = null;
-            using (var testServer = await TestServer.Create(ctx =>
-            {
-                path = ctx.Request.Path.ToString();
-                return ctx.Response.WriteAsync(helloWorld);
-            }, LoggerFactory))
-            {
+            using (
+                var testServer = await TestServer.Create(
+                    ctx =>
+                    {
+                        path = ctx.Request.Path.ToString();
+                        return ctx.Response.WriteAsync(helloWorld);
+                    },
+                    LoggerFactory
+                )
+            ) {
                 var result = await testServer.HttpClient.GetAsync(expectedPath);
                 Assert.Equal(helloWorld, await result.Content.ReadAsStringAsync());
                 Assert.Equal(expectedPath, path);

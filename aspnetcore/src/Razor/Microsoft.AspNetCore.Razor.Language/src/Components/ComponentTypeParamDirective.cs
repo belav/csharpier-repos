@@ -9,8 +9,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
     {
         public static DirectiveDescriptor Directive = null;
 
-        public static RazorProjectEngineBuilder Register(RazorProjectEngineBuilder builder, bool supportConstraints)
-        {
+        public static RazorProjectEngineBuilder Register(
+            RazorProjectEngineBuilder builder,
+            bool supportConstraints
+        ) {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -26,11 +28,18 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         DirectiveKind.SingleLine,
                         builder =>
                         {
-                            builder.AddMemberToken(ComponentResources.TypeParamDirective_Token_Name, ComponentResources.TypeParamDirective_Token_Description);
-                            builder.AddOptionalGenericTypeConstraintToken(ComponentResources.TypeParamDirective_Constraint_Name, ComponentResources.TypeParamDirective_Constraint_Description);
+                            builder.AddMemberToken(
+                                ComponentResources.TypeParamDirective_Token_Name,
+                                ComponentResources.TypeParamDirective_Token_Description
+                            );
+                            builder.AddOptionalGenericTypeConstraintToken(
+                                ComponentResources.TypeParamDirective_Constraint_Name,
+                                ComponentResources.TypeParamDirective_Constraint_Description
+                            );
                             builder.Usage = DirectiveUsage.FileScopedMultipleOccurring;
                             builder.Description = ComponentResources.TypeParamDirective_Description;
-                        });
+                        }
+                    );
                 }
                 else
                 {
@@ -39,10 +48,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                         DirectiveKind.SingleLine,
                         builder =>
                         {
-                            builder.AddMemberToken(ComponentResources.TypeParamDirective_Token_Name, ComponentResources.TypeParamDirective_Token_Description);
+                            builder.AddMemberToken(
+                                ComponentResources.TypeParamDirective_Token_Name,
+                                ComponentResources.TypeParamDirective_Token_Description
+                            );
                             builder.Usage = DirectiveUsage.FileScopedMultipleOccurring;
                             builder.Description = ComponentResources.TypeParamDirective_Description;
-                        });
+                        }
+                    );
                 }
             }
 

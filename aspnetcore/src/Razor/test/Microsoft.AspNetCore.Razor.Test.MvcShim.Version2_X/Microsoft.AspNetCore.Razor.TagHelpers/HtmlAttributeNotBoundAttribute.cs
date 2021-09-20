@@ -14,8 +14,6 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         /// <summary>
         /// Instantiates a new instance of the <see cref="HtmlAttributeNotBoundAttribute"/> class.
         /// </summary>
-        public HtmlAttributeNotBoundAttribute()
-        {
-        }
+        public HtmlAttributeNotBoundAttribute() { }
     }
 }

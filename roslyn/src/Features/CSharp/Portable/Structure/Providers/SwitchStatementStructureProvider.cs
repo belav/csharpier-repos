@@ -12,19 +12,28 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
-    internal class SwitchStatementStructureProvider : AbstractSyntaxNodeStructureProvider<SwitchStatementSyntax>
+    internal class SwitchStatementStructureProvider
+        : AbstractSyntaxNodeStructureProvider<SwitchStatementSyntax>
     {
         protected override void CollectBlockSpans(
             SwitchStatementSyntax node,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
-            CancellationToken cancellationToken)
-        {
-            spans.Add(new BlockSpan(
-                isCollapsible: true,
-                textSpan: TextSpan.FromBounds((node.CloseParenToken != default) ? node.CloseParenToken.Span.End : node.Expression.Span.End, node.CloseBraceToken.Span.End),
-                hintSpan: node.Span,
-                type: BlockTypes.Conditional));
+            CancellationToken cancellationToken
+        ) {
+            spans.Add(
+                new BlockSpan(
+                    isCollapsible: true,
+                    textSpan: TextSpan.FromBounds(
+                        (node.CloseParenToken != default)
+                          ? node.CloseParenToken.Span.End
+                          : node.Expression.Span.End,
+                        node.CloseBraceToken.Span.End
+                    ),
+                    hintSpan: node.Span,
+                    type: BlockTypes.Conditional
+                )
+            );
         }
     }
 }

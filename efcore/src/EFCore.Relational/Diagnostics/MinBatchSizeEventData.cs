@@ -27,8 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Func<EventDefinitionBase, EventData, string> messageGenerator,
             IEnumerable<IUpdateEntry> entries,
             int commandCount,
-            int minBatchSize)
-            : base(eventDefinition, messageGenerator, entries, commandCount)
+            int minBatchSize
+        ) : base(eventDefinition, messageGenerator, entries, commandCount)
         {
             MinBatchSize = minBatchSize;
         }

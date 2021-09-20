@@ -18,8 +18,8 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             IRouter? route,
             string routeKey,
             RouteValueDictionary values,
-            RouteDirection routeDirection)
-        {
+            RouteDirection routeDirection
+        ) {
             if (routeKey == null)
             {
                 throw new ArgumentNullException(nameof(routeKey));
@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.Routing.Constraints
                     valueString,
                     NumberStyles.Float | NumberStyles.AllowThousands,
                     CultureInfo.InvariantCulture,
-                    out _);
+                    out _
+                );
             }
 
             return false;

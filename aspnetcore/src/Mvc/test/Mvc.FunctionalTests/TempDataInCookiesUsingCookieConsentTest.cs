@@ -15,14 +15,18 @@ using Xunit;
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
     public class TempDataInCookiesUsingCookieConsentTest
-        : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithCookieTempDataProviderAndCookieConsent>>
+        : IClassFixture<
+              MvcTestFixture<BasicWebSite.StartupWithCookieTempDataProviderAndCookieConsent>
+          >
     {
         private readonly HttpClient _client;
 
         public TempDataInCookiesUsingCookieConsentTest(
-            MvcTestFixture<BasicWebSite.StartupWithCookieTempDataProviderAndCookieConsent> fixture)
-        {
-            var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+            MvcTestFixture<BasicWebSite.StartupWithCookieTempDataProviderAndCookieConsent> fixture
+        ) {
+            var factory =
+                fixture.Factories.FirstOrDefault()
+                ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
             _client = factory.CreateDefaultClient();
         }
 
@@ -42,7 +46,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var response = await _client.GetAsync("/TempData/GrantConsent");
 
             // Act 1
-            response = await _client.SendAsync(GetPostRequest("/TempData/SetTempData", content, response));
+            response = await _client.SendAsync(
+                GetPostRequest("/TempData/SetTempData", content, response)
+            );
 
             // Assert 1
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -92,8 +98,11 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             return request;
         }
 
-        private HttpRequestMessage GetPostRequest(string path, HttpContent content, HttpResponseMessage response)
-        {
+        private HttpRequestMessage GetPostRequest(
+            string path,
+            HttpContent content,
+            HttpResponseMessage response
+        ) {
             var request = new HttpRequestMessage(HttpMethod.Post, path);
             request.Content = content;
             SetCookieHeaders(request, response);
@@ -109,7 +118,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 {
                     if (cookie.Expires == null || cookie.Expires >= DateTimeOffset.UtcNow)
                     {
-                        request.Headers.Add("Cookie", new CookieHeaderValue(cookie.Name, cookie.Value).ToString());
+                        request.Headers.Add(
+                            "Cookie",
+                            new CookieHeaderValue(cookie.Name, cookie.Value).ToString()
+                        );
                     }
                 }
             }

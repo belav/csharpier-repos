@@ -26,8 +26,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         /// </summary>
         /// <param name="loggerFactory">Used to create loggers.</param>
         /// <param name="urlHelperFactory">Used to create url helpers.</param>
-        public LocalRedirectResultExecutor(ILoggerFactory loggerFactory, IUrlHelperFactory urlHelperFactory)
-        {
+        public LocalRedirectResultExecutor(
+            ILoggerFactory loggerFactory,
+            IUrlHelperFactory urlHelperFactory
+        ) {
             if (loggerFactory == null)
             {
                 throw new ArgumentNullException(nameof(loggerFactory));
@@ -68,8 +70,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             if (result.PreserveMethod)
             {
-                context.HttpContext.Response.StatusCode = result.Permanent ?
-                    StatusCodes.Status308PermanentRedirect : StatusCodes.Status307TemporaryRedirect;
+                context.HttpContext.Response.StatusCode = result.Permanent
+                    ? StatusCodes.Status308PermanentRedirect
+                    : StatusCodes.Status307TemporaryRedirect;
                 context.HttpContext.Response.Headers[HeaderNames.Location] = destinationUrl;
             }
             else

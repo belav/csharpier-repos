@@ -11,8 +11,10 @@ namespace System.Web.Http.ModelBinding.Binders
     // Describes a complex model, but uses a collection rather than individual properties as the data store.
     public class ComplexModelDto
     {
-        public ComplexModelDto(ModelMetadata modelMetadata, IEnumerable<ModelMetadata> propertyMetadata)
-        {
+        public ComplexModelDto(
+            ModelMetadata modelMetadata,
+            IEnumerable<ModelMetadata> propertyMetadata
+        ) {
             if (modelMetadata == null)
             {
                 throw Error.ArgumentNull("modelMetadata");

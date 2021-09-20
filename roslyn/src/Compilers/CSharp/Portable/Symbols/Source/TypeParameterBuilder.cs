@@ -23,16 +23,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly SourceNamedTypeSymbol _owner;
         private readonly Location _location;
 
-        internal TypeParameterBuilder(SyntaxReference syntaxRef, SourceNamedTypeSymbol owner, Location location)
-        {
+        internal TypeParameterBuilder(
+            SyntaxReference syntaxRef,
+            SourceNamedTypeSymbol owner,
+            Location location
+        ) {
             _syntaxRef = syntaxRef;
             Debug.Assert(syntaxRef.GetSyntax().IsKind(SyntaxKind.TypeParameter));
             _owner = owner;
             _location = location;
         }
 
-        internal TypeParameterSymbol MakeSymbol(int ordinal, IList<TypeParameterBuilder> builders, BindingDiagnosticBag diagnostics)
-        {
+        internal TypeParameterSymbol MakeSymbol(
+            int ordinal,
+            IList<TypeParameterBuilder> builders,
+            BindingDiagnosticBag diagnostics
+        ) {
             var syntaxNode = (TypeParameterSyntax)_syntaxRef.GetSyntax();
             var result = new SourceTypeParameterSymbol(
                 _owner,
@@ -40,12 +46,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ordinal,
                 syntaxNode.VarianceKeyword.VarianceKindFromToken(),
                 ToLocations(builders),
-                ToSyntaxRefs(builders));
+                ToSyntaxRefs(builders)
+            );
 
             // SPEC: A type parameter [of a type] cannot have the same name as the type itself.
             if (result.Name == result.ContainingSymbol.Name)
             {
-                diagnostics.Add(ErrorCode.ERR_TypeVariableSameAsParent, result.Locations[0], result.Name);
+                diagnostics.Add(
+                    ErrorCode.ERR_TypeVariableSameAsParent,
+                    result.Locations[0],
+                    result.Name
+                );
             }
 
             return result;
@@ -62,8 +73,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return arrayBuilder.ToImmutableAndFree();
         }
 
-        private static ImmutableArray<SyntaxReference> ToSyntaxRefs(IList<TypeParameterBuilder> builders)
-        {
+        private static ImmutableArray<SyntaxReference> ToSyntaxRefs(
+            IList<TypeParameterBuilder> builders
+        ) {
             var arrayBuilder = ArrayBuilder<SyntaxReference>.GetInstance(builders.Count);
             foreach (var builder in builders)
             {

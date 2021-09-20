@@ -32,7 +32,12 @@ namespace System.Net.Security.Tests
         [Fact]
         public async Task ClientAsyncAuthenticate_ConnectionInfoInCallback_DoesNotThrow()
         {
-            await ClientAsyncSslHelper(EncryptionPolicy.RequireEncryption, SslProtocols.Tls12, SslProtocolSupport.DefaultSslProtocols, AllowAnyServerCertificateAndVerifyConnectionInfo);
+            await ClientAsyncSslHelper(
+                EncryptionPolicy.RequireEncryption,
+                SslProtocols.Tls12,
+                SslProtocolSupport.DefaultSslProtocols,
+                AllowAnyServerCertificateAndVerifyConnectionInfo
+            );
         }
 
         [Fact]
@@ -40,15 +45,20 @@ namespace System.Net.Security.Tests
         {
             // Don't use Tls13 since we are trying to use NullEncryption
             await Assert.ThrowsAsync<AuthenticationException>(
-                () => ClientAsyncSslHelper(
-                    EncryptionPolicy.NoEncryption,
-                    SslProtocolSupport.DefaultSslProtocols, SslProtocols.Tls | SslProtocols.Tls11 |  SslProtocols.Tls12));
+                () =>
+                    ClientAsyncSslHelper(
+                        EncryptionPolicy.NoEncryption,
+                        SslProtocolSupport.DefaultSslProtocols,
+                        SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12
+                    )
+            );
         }
 
         [Theory]
         [ClassData(typeof(SslProtocolSupport.SupportedSslProtocolsTestData))]
-        public async Task ClientAsyncAuthenticate_EachSupportedProtocol_Success(SslProtocols protocol)
-        {
+        public async Task ClientAsyncAuthenticate_EachSupportedProtocol_Success(
+            SslProtocols protocol
+        ) {
             await ClientAsyncSslHelper(protocol, protocol);
         }
 
@@ -71,9 +81,11 @@ namespace System.Net.Security.Tests
         public async Task ClientAsyncAuthenticate_MismatchProtocols_Fails(
             SslProtocols serverProtocol,
             SslProtocols clientProtocol,
-            Type expectedException)
-        {
-            Exception e = await Record.ExceptionAsync(() => ClientAsyncSslHelper(serverProtocol, clientProtocol));
+            Type expectedException
+        ) {
+            Exception e = await Record.ExceptionAsync(
+                () => ClientAsyncSslHelper(serverProtocol, clientProtocol)
+            );
             Assert.NotNull(e);
             Assert.IsAssignableFrom(expectedException, e);
         }
@@ -83,22 +95,23 @@ namespace System.Net.Security.Tests
         {
             await ClientAsyncSslHelper(
                 SslProtocolSupport.SupportedSslProtocols,
-                SslProtocolSupport.SupportedSslProtocols);
+                SslProtocolSupport.SupportedSslProtocols
+            );
         }
 
         [Theory]
         [ClassData(typeof(SslProtocolSupport.SupportedSslProtocolsTestData))]
         public async Task ClientAsyncAuthenticate_AllServerVsIndividualClientSupportedProtocols_Success(
-            SslProtocols clientProtocol)
-        {
+            SslProtocols clientProtocol
+        ) {
             await ClientAsyncSslHelper(clientProtocol, SslProtocolSupport.SupportedSslProtocols);
         }
 
         [Theory]
         [ClassData(typeof(SslProtocolSupport.SupportedSslProtocolsTestData))]
         public async Task ClientAsyncAuthenticate_IndividualServerVsAllClientSupportedProtocols_Success(
-            SslProtocols serverProtocol)
-        {
+            SslProtocols serverProtocol
+        ) {
             await ClientAsyncSslHelper(SslProtocolSupport.SupportedSslProtocols, serverProtocol);
             // Cached Tls creds fail when used against Tls servers of higher versions.
             // Servers are not expected to dynamically change versions.
@@ -111,32 +124,72 @@ namespace System.Net.Security.Tests
             yield return new object[] { SslProtocols.Ssl2, SslProtocols.Tls12, typeof(Exception) };
             yield return new object[] { SslProtocols.Ssl3, SslProtocols.Tls12, typeof(Exception) };
 #pragma warning restore 0618
-            yield return new object[] { SslProtocols.Tls, SslProtocols.Tls11, typeof(AuthenticationException) };
-            yield return new object[] { SslProtocols.Tls, SslProtocols.Tls12, typeof(AuthenticationException) };
-            yield return new object[] { SslProtocols.Tls11, SslProtocols.Tls, typeof(AuthenticationException) };
-            yield return new object[] { SslProtocols.Tls12, SslProtocols.Tls, typeof(AuthenticationException) };
-            yield return new object[] { SslProtocols.Tls12, SslProtocols.Tls11, typeof(AuthenticationException) };
-            yield return new object[] { SslProtocols.Tls11, SslProtocols.Tls12, typeof(AuthenticationException) };
+            yield return new object[]
+            {
+                SslProtocols.Tls,
+                SslProtocols.Tls11,
+                typeof(AuthenticationException)
+            };
+            yield return new object[]
+            {
+                SslProtocols.Tls,
+                SslProtocols.Tls12,
+                typeof(AuthenticationException)
+            };
+            yield return new object[]
+            {
+                SslProtocols.Tls11,
+                SslProtocols.Tls,
+                typeof(AuthenticationException)
+            };
+            yield return new object[]
+            {
+                SslProtocols.Tls12,
+                SslProtocols.Tls,
+                typeof(AuthenticationException)
+            };
+            yield return new object[]
+            {
+                SslProtocols.Tls12,
+                SslProtocols.Tls11,
+                typeof(AuthenticationException)
+            };
+            yield return new object[]
+            {
+                SslProtocols.Tls11,
+                SslProtocols.Tls12,
+                typeof(AuthenticationException)
+            };
         }
 
         #region Helpers
 
         private Task ClientAsyncSslHelper(EncryptionPolicy encryptionPolicy)
         {
-            return ClientAsyncSslHelper(encryptionPolicy, SslProtocolSupport.DefaultSslProtocols, SslProtocolSupport.DefaultSslProtocols);
+            return ClientAsyncSslHelper(
+                encryptionPolicy,
+                SslProtocolSupport.DefaultSslProtocols,
+                SslProtocolSupport.DefaultSslProtocols
+            );
         }
 
-        private Task ClientAsyncSslHelper(SslProtocols clientSslProtocols, SslProtocols serverSslProtocols)
-        {
-            return ClientAsyncSslHelper(EncryptionPolicy.RequireEncryption, clientSslProtocols, serverSslProtocols);
+        private Task ClientAsyncSslHelper(
+            SslProtocols clientSslProtocols,
+            SslProtocols serverSslProtocols
+        ) {
+            return ClientAsyncSslHelper(
+                EncryptionPolicy.RequireEncryption,
+                clientSslProtocols,
+                serverSslProtocols
+            );
         }
 
         private async Task ClientAsyncSslHelper(
             EncryptionPolicy encryptionPolicy,
             SslProtocols clientSslProtocols,
             SslProtocols serverSslProtocols,
-            RemoteCertificateValidationCallback certificateCallback = null)
-        {
+            RemoteCertificateValidationCallback certificateCallback = null
+        ) {
             _log.WriteLine("Server: " + serverSslProtocols + "; Client: " + clientSslProtocols);
 
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Loopback, 0);
@@ -146,46 +199,75 @@ namespace System.Net.Security.Tests
             {
                 server.SslProtocols = serverSslProtocols;
                 // Use a different SNI for each connection to prevent TLS 1.3 renegotiation issue: https://github.com/dotnet/runtime/issues/47378
-                string serverName = TestHelper.GetTestSNIName(nameof(ClientAsyncSslHelper), clientSslProtocols, serverSslProtocols);
+                string serverName = TestHelper.GetTestSNIName(
+                    nameof(ClientAsyncSslHelper),
+                    clientSslProtocols,
+                    serverSslProtocols
+                );
 
-                await client.ConnectAsync(server.RemoteEndPoint.Address, server.RemoteEndPoint.Port);
-                using (SslStream sslStream = new SslStream(client.GetStream(), false, certificateCallback != null ? certificateCallback : AllowAnyServerCertificate, null))
-                {
-                    Task clientAuthTask = sslStream.AuthenticateAsClientAsync(serverName, null, clientSslProtocols, false);
+                await client.ConnectAsync(
+                    server.RemoteEndPoint.Address,
+                    server.RemoteEndPoint.Port
+                );
+                using (
+                    SslStream sslStream = new SslStream(
+                        client.GetStream(),
+                        false,
+                        certificateCallback != null
+                          ? certificateCallback
+                          : AllowAnyServerCertificate,
+                        null
+                    )
+                ) {
+                    Task clientAuthTask = sslStream.AuthenticateAsClientAsync(
+                        serverName,
+                        null,
+                        clientSslProtocols,
+                        false
+                    );
                     await clientAuthTask.WaitAsync(TestConfiguration.PassingTestTimeout);
 
-                    _log.WriteLine("Client authenticated to server({0}) with encryption cipher: {1} {2}-bit strength",
-                        server.RemoteEndPoint, sslStream.CipherAlgorithm, sslStream.CipherStrength);
-                    Assert.True(sslStream.CipherAlgorithm != CipherAlgorithmType.Null, "Cipher algorithm should not be NULL");
-                    Assert.True(sslStream.CipherStrength > 0, "Cipher strength should be greater than 0");
+                    _log.WriteLine(
+                        "Client authenticated to server({0}) with encryption cipher: {1} {2}-bit strength",
+                        server.RemoteEndPoint,
+                        sslStream.CipherAlgorithm,
+                        sslStream.CipherStrength
+                    );
+                    Assert.True(
+                        sslStream.CipherAlgorithm != CipherAlgorithmType.Null,
+                        "Cipher algorithm should not be NULL"
+                    );
+                    Assert.True(
+                        sslStream.CipherStrength > 0,
+                        "Cipher strength should be greater than 0"
+                    );
                 }
             }
         }
 
         // The following method is invoked by the RemoteCertificateValidationDelegate.
         private bool AllowAnyServerCertificate(
-              object sender,
-              X509Certificate certificate,
-              X509Chain chain,
-              SslPolicyErrors sslPolicyErrors)
-        {
-            return true;  // allow everything
+            object sender,
+            X509Certificate certificate,
+            X509Chain chain,
+            SslPolicyErrors sslPolicyErrors
+        ) {
+            return true; // allow everything
         }
 
         private bool AllowAnyServerCertificateAndVerifyConnectionInfo(
-              object sender,
-              X509Certificate certificate,
-              X509Chain chain,
-              SslPolicyErrors sslPolicyErrors)
-        {
+            object sender,
+            X509Certificate certificate,
+            X509Chain chain,
+            SslPolicyErrors sslPolicyErrors
+        ) {
             SslStream stream = (SslStream)sender;
 
             Assert.NotEqual(SslProtocols.None, stream.SslProtocol);
             Assert.NotEqual(CipherAlgorithmType.None, stream.CipherAlgorithm);
 
-            return true;  // allow everything
+            return true; // allow everything
         }
-
         #endregion Helpers
     }
 }

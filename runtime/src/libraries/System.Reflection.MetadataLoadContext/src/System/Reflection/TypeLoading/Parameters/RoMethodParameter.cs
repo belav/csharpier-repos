@@ -12,8 +12,11 @@ namespace System.Reflection.TypeLoading
     {
         private readonly Type _parameterType;
 
-        protected RoMethodParameter(IRoMethodBase roMethodBase, int position, Type parameterType)
-            : base(roMethodBase.MethodBase, position)
+        protected RoMethodParameter(
+            IRoMethodBase roMethodBase,
+            int position,
+            Type parameterType
+        ) : base(roMethodBase.MethodBase, position)
         {
             Debug.Assert(roMethodBase != null);
             Debug.Assert(parameterType != null);
@@ -23,10 +26,14 @@ namespace System.Reflection.TypeLoading
 
         public sealed override Type ParameterType => _parameterType;
 
-        public sealed override Type[] GetOptionalCustomModifiers() => GetRoMethodBase().GetCustomModifiers(Position, isRequired: false).CloneArray();
-        public sealed override Type[] GetRequiredCustomModifiers() => GetRoMethodBase().GetCustomModifiers(Position, isRequired: true).CloneArray();
+        public sealed override Type[] GetOptionalCustomModifiers() =>
+            GetRoMethodBase().GetCustomModifiers(Position, isRequired: false).CloneArray();
+        public sealed override Type[] GetRequiredCustomModifiers() =>
+            GetRoMethodBase().GetCustomModifiers(Position, isRequired: true).CloneArray();
 
-        public sealed override string ToString() => Loader.GetDisposedString() ?? GetRoMethodBase().GetMethodSigString(Position) + " " + Name;
+        public sealed override string ToString() =>
+            Loader.GetDisposedString()
+            ?? GetRoMethodBase().GetMethodSigString(Position) + " " + Name;
 
         internal IRoMethodBase GetRoMethodBase() => (IRoMethodBase)Member;
         private MetadataLoadContext Loader => GetRoMethodBase().Loader;

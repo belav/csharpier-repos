@@ -99,8 +99,11 @@ namespace System.Speech.Internal.Synthesis
                 }
                 try
                 {
-                    waveFormat = _engine.GetOutputFormat(targetWaveFormat != null ? targetFormat.AddrOfPinnedObject() : IntPtr.Zero);
+                    waveFormat = _engine.GetOutputFormat(
+                        targetWaveFormat != null ? targetFormat.AddrOfPinnedObject() : IntPtr.Zero
+                    );
                 }
+
                 finally
                 {
                     if (targetWaveFormat != null)
@@ -130,18 +133,12 @@ namespace System.Speech.Internal.Synthesis
 
         internal ITtsEngineProxy TtsEngine
         {
-            get
-            {
-                return _engine;
-            }
+            get { return _engine; }
         }
 
         internal VoiceInfo VoiceInfo
         {
-            get
-            {
-                return _voiceId;
-            }
+            get { return _voiceId; }
         }
 
         #endregion
@@ -152,7 +149,6 @@ namespace System.Speech.Internal.Synthesis
         private VoiceInfo _voiceId;
         private List<LexiconEntry> _lexicons = new();
         private byte[] _waveFormat;
-
         #endregion
     }
 }

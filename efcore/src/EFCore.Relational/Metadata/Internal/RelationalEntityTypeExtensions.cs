@@ -28,11 +28,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static IEnumerable<ITableMappingBase> GetViewOrTableMappings(this IEntityType entityType)
-            => (IEnumerable<ITableMappingBase>?)(entityType.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.ViewMappings)
-                    ?? entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.TableMappings))
-                ?? Enumerable.Empty<ITableMappingBase>();
+        public static IEnumerable<ITableMappingBase> GetViewOrTableMappings(
+            this IEntityType entityType
+        ) =>
+            (IEnumerable<ITableMappingBase>?)(
+                entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.ViewMappings)
+                ?? entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.TableMappings)
+            ) ?? Enumerable.Empty<ITableMappingBase>();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -40,8 +42,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static IReadOnlyList<string> GetTptDiscriminatorValues(this IReadOnlyEntityType entityType)
-            => entityType.GetConcreteDerivedTypesInclusive().Select(et => et.ShortName()).ToList();
+        public static IReadOnlyList<string> GetTptDiscriminatorValues(
+            this IReadOnlyEntityType entityType
+        ) => entityType.GetConcreteDerivedTypesInclusive().Select(et => et.ShortName()).ToList();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -49,8 +52,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static IReadOnlyList<IProperty> GetNonPrincipalSharedNonPkProperties(this IEntityType entityType, ITableBase table)
-        {
+        public static IReadOnlyList<IProperty> GetNonPrincipalSharedNonPkProperties(
+            this IEntityType entityType,
+            ITableBase table
+        ) {
             var nonPrincipalSharedProperties = new List<IProperty>();
             var principalEntityTypes = new HashSet<IEntityType>();
             PopulatePrincipalEntityTypes(table, entityType, principalEntityTypes);
@@ -62,9 +67,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
 
                 var propertyMappings = table.FindColumn(property)!.PropertyMappings;
-                if (propertyMappings.Count() > 1
-                    && propertyMappings.Any(pm => principalEntityTypes.Contains(pm.TableMapping.EntityType)))
-                {
+                if (
+                    propertyMappings.Count() > 1
+                    && propertyMappings.Any(
+                        pm => principalEntityTypes.Contains(pm.TableMapping.EntityType)
+                    )
+                ) {
                     continue;
                 }
 
@@ -73,8 +81,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             return nonPrincipalSharedProperties;
 
-            static void PopulatePrincipalEntityTypes(ITableBase table, IEntityType entityType, HashSet<IEntityType> entityTypes)
-            {
+            static void PopulatePrincipalEntityTypes(
+                ITableBase table,
+                IEntityType entityType,
+                HashSet<IEntityType> entityTypes
+            ) {
                 foreach (var linkingFk in table.GetRowInternalForeignKeys(entityType))
                 {
                     entityTypes.Add(linkingFk.PrincipalEntityType);

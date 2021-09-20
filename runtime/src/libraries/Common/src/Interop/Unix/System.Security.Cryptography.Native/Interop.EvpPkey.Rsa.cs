@@ -35,15 +35,16 @@ internal static partial class Interop
             RSAEncryptionPaddingMode paddingMode,
             IntPtr digestAlgorithm,
             ref byte destination,
-            int destinationLength);
+            int destinationLength
+        );
 
         internal static int RsaDecrypt(
             SafeEvpPKeyHandle pkey,
             ReadOnlySpan<byte> source,
             RSAEncryptionPaddingMode paddingMode,
             IntPtr digestAlgorithm,
-            Span<byte> destination)
-        {
+            Span<byte> destination
+        ) {
             int written = CryptoNative_RsaDecrypt(
                 pkey,
                 ref MemoryMarshal.GetReference(source),
@@ -51,7 +52,8 @@ internal static partial class Interop
                 paddingMode,
                 digestAlgorithm,
                 ref MemoryMarshal.GetReference(destination),
-                destination.Length);
+                destination.Length
+            );
 
             if (written < 0)
             {
@@ -70,15 +72,16 @@ internal static partial class Interop
             ref byte hash,
             int hashLength,
             ref byte destination,
-            int destinationLength);
+            int destinationLength
+        );
 
         internal static int RsaSignHash(
             SafeEvpPKeyHandle pkey,
             RSASignaturePaddingMode paddingMode,
             IntPtr digestAlgorithm,
             ReadOnlySpan<byte> hash,
-            Span<byte> destination)
-        {
+            Span<byte> destination
+        ) {
             int written = CryptoNative_RsaSignHash(
                 pkey,
                 paddingMode,
@@ -86,7 +89,8 @@ internal static partial class Interop
                 ref MemoryMarshal.GetReference(hash),
                 hash.Length,
                 ref MemoryMarshal.GetReference(destination),
-                destination.Length);
+                destination.Length
+            );
 
             if (written < 0)
             {

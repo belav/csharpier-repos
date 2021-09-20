@@ -17,14 +17,12 @@ namespace System.Speech.Internal.GrammarBuilding
             _value = value;
         }
 
-        internal TagElement(GrammarBuilderBase builder, object value)
-            : this(value)
+        internal TagElement(GrammarBuilderBase builder, object value) : this(value)
         {
             Add(builder);
         }
 
-        internal TagElement(GrammarBuilder builder, object value)
-            : this(value)
+        internal TagElement(GrammarBuilder builder, object value) : this(value)
         {
             Add(builder);
         }
@@ -62,8 +60,12 @@ namespace System.Speech.Internal.GrammarBuilding
             return tag;
         }
 
-        internal override IElement CreateElement(IElementFactory elementFactory, IElement parent, IRule rule, IdentifierCollection ruleIds)
-        {
+        internal override IElement CreateElement(
+            IElementFactory elementFactory,
+            IElement parent,
+            IRule rule,
+            IdentifierCollection ruleIds
+        ) {
             // Create the children elements
             IItem item = parent as IItem;
             if (item != null)
@@ -94,10 +96,7 @@ namespace System.Speech.Internal.GrammarBuilding
 
         internal override string DebugSummary
         {
-            get
-            {
-                return base.DebugSummary + " {" + _value + "}";
-            }
+            get { return base.DebugSummary + " {" + _value + "}"; }
         }
 
         #endregion
@@ -105,7 +104,6 @@ namespace System.Speech.Internal.GrammarBuilding
         #region Private Fields
 
         private readonly object _value;
-
         #endregion
     }
 }

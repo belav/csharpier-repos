@@ -87,13 +87,23 @@ namespace System.Threading
             {
                 fixed (char* pThreadName = _name)
                 {
-                    StartInternal(GetNativeHandle(), _startHelper?._maxStackSize ?? 0, _priority, pThreadName);
+                    StartInternal(
+                        GetNativeHandle(),
+                        _startHelper?._maxStackSize ?? 0,
+                        _priority,
+                        pThreadName
+                    );
                 }
             }
         }
 
         [DllImport(RuntimeHelpers.QCall)]
-        private static extern unsafe void StartInternal(ThreadHandle t, int stackSize, int priority, char* pThreadName);
+        private static extern unsafe void StartInternal(
+            ThreadHandle t,
+            int stackSize,
+            int priority,
+            char* pThreadName
+        );
 
         // Called from the runtime
         private void StartCallback()
@@ -138,7 +148,8 @@ namespace System.Threading
         public static bool Yield() => YieldInternal() != Interop.BOOL.FALSE;
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static Thread InitializeCurrentThread() => t_currentThread = GetCurrentThreadNative();
+        private static Thread InitializeCurrentThread() =>
+            t_currentThread = GetCurrentThreadNative();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern Thread GetCurrentThreadNative();
@@ -251,8 +262,10 @@ namespace System.Threading
             //  Once we CoUninitialize the thread, the OS will still
             //  report the thread as implicitly in the MTA if any
             //  other thread in the process is CoInitialized.
-            if ((state == System.Threading.ApartmentState.Unknown) && (retState == System.Threading.ApartmentState.MTA))
-            {
+            if (
+                (state == System.Threading.ApartmentState.Unknown)
+                && (retState == System.Threading.ApartmentState.MTA)
+            ) {
                 return true;
             }
 
@@ -278,17 +291,17 @@ namespace System.Threading
 #else // FEATURE_COMINTEROP_APARTMENT_SUPPORT
         private static bool SetApartmentStateUnchecked(ApartmentState state, bool throwOnError)
         {
-             if (state != ApartmentState.Unknown)
-             {
+            if (state != ApartmentState.Unknown)
+            {
                 if (throwOnError)
                 {
                     throw new PlatformNotSupportedException(SR.PlatformNotSupported_ComInterop);
                 }
 
                 return false;
-             }
+            }
 
-             return true;
+            return true;
         }
 #endif // FEATURE_COMINTEROP_APARTMENT_SUPPORT
 
@@ -296,9 +309,7 @@ namespace System.Threading
         [MethodImpl(MethodImplOptions.InternalCall)]
         public extern void DisableComObjectEagerCleanup();
 #else // !FEATURE_COMINTEROP
-        public void DisableComObjectEagerCleanup()
-        {
-        }
+        public void DisableComObjectEagerCleanup() { }
 #endif // FEATURE_COMINTEROP
 
         /// <summary>
@@ -336,7 +347,9 @@ namespace System.Threading
             get
             {
                 int optimalMaxSpinWaitsPerSpinIteration = s_optimalMaxSpinWaitsPerSpinIteration;
-                return optimalMaxSpinWaitsPerSpinIteration != 0 ? optimalMaxSpinWaitsPerSpinIteration : CalculateOptimalMaxSpinWaitsPerSpinIteration();
+                return optimalMaxSpinWaitsPerSpinIteration != 0
+                    ? optimalMaxSpinWaitsPerSpinIteration
+                    : CalculateOptimalMaxSpinWaitsPerSpinIteration();
             }
         }
 
@@ -346,7 +359,8 @@ namespace System.Threading
             // This is done lazily because the first call to the function below in the process triggers a measurement that
             // takes a nontrivial amount of time if the measurement has not already been done in the backgorund.
             // See Thread::InitializeYieldProcessorNormalized(), which describes and calculates this value.
-            s_optimalMaxSpinWaitsPerSpinIteration = GetOptimalMaxSpinWaitsPerSpinIterationInternal();
+            s_optimalMaxSpinWaitsPerSpinIteration =
+                GetOptimalMaxSpinWaitsPerSpinIterationInternal();
             Debug.Assert(s_optimalMaxSpinWaitsPerSpinIteration > 0);
             return s_optimalMaxSpinWaitsPerSpinIteration;
         }
@@ -367,7 +381,8 @@ namespace System.Threading
 
         // a speed check will determine refresh rate of the cache and will report if caching is not advisable.
         // we will record that in a readonly static so that it could become a JIT constant and bypass caching entirely.
-        private static readonly bool s_isProcessorNumberReallyFast = ProcessorIdCache.ProcessorNumberSpeedCheck();
+        private static readonly bool s_isProcessorNumberReallyFast =
+            ProcessorIdCache.ProcessorNumberSpeedCheck();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void ResetThreadPoolThread()

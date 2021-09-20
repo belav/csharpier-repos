@@ -42,9 +42,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             IVsMonitorSelection monitorSelection,
             IVsSolutionBuildManager buildManager,
             Func<string, string> createReference,
-            Func<string, string> createImport)
-            : base(componentModel.GetService<IEditorOptionsFactoryService>(), createReference, createImport)
-        {
+            Func<string, string> createImport
+        ) : base(
+            componentModel.GetService<IEditorOptionsFactoryService>(),
+            createReference,
+            createImport
+        ) {
             _workspace = workspace;
             _dte = dte;
             _componentModel = componentModel;
@@ -61,8 +64,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             out ImmutableArray<string> sourceSearchPaths,
             out ImmutableArray<string> projectNamespaces,
             out string projectDirectory,
-            out InteractiveHostPlatform? platform)
-        {
+            out InteractiveHostPlatform? platform
+        ) {
             var hierarchyPointer = default(IntPtr);
             var selectionContainerPointer = default(IntPtr);
             references = ImmutableArray<string>.Empty;
@@ -74,15 +77,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
 
             try
             {
-                Marshal.ThrowExceptionForHR(_monitorSelection.GetCurrentSelection(
-                    out hierarchyPointer, out var itemid, out var multiItemSelectPointer, out selectionContainerPointer));
+                Marshal.ThrowExceptionForHR(
+                    _monitorSelection.GetCurrentSelection(
+                        out hierarchyPointer,
+                        out var itemid,
+                        out var multiItemSelectPointer,
+                        out selectionContainerPointer
+                    )
+                );
 
                 if (hierarchyPointer != IntPtr.Zero)
                 {
-                    GetProjectProperties(hierarchyPointer, out references, out referenceSearchPaths, out sourceSearchPaths, out projectNamespaces, out projectDirectory, out platform);
+                    GetProjectProperties(
+                        hierarchyPointer,
+                        out references,
+                        out referenceSearchPaths,
+                        out sourceSearchPaths,
+                        out projectNamespaces,
+                        out projectDirectory,
+                        out platform
+                    );
                     return true;
                 }
             }
+
             finally
             {
                 SafeRelease(hierarchyPointer);
@@ -99,11 +117,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             out ImmutableArray<string> sourceSearchPaths,
             out ImmutableArray<string> projectNamespaces,
             out string projectDirectory,
-            out InteractiveHostPlatform? platform)
-        {
+            out InteractiveHostPlatform? platform
+        ) {
             var hierarchy = (IVsHierarchy)Marshal.GetObjectForIUnknown(hierarchyPointer);
             Marshal.ThrowExceptionForHR(
-                hierarchy.GetProperty((uint)VSConstants.VSITEMID.Root, (int)__VSHPROPID.VSHPROPID_ExtObject, out var extensibilityObject));
+                hierarchy.GetProperty(
+                    (uint)VSConstants.VSITEMID.Root,
+                    (int)__VSHPROPID.VSHPROPID_ExtObject,
+                    out var extensibilityObject
+                )
+            );
 
             var dteProject = (EnvDTE.Project)extensibilityObject;
             var vsProject = (VSLangProj.VSProject)dteProject.Object;
@@ -117,8 +140,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             var projectDir = (string)dteProject.Properties.Item("FullPath").Value;
             var outputFileName = (string)dteProject.Properties.Item("OutputFileName").Value;
             var defaultNamespace = (string)dteProject.Properties.Item("DefaultNamespace").Value;
-            var targetFrameworkMoniker = (string)dteProject.Properties.Item("TargetFrameworkMoniker").Value;
-            var relativeOutputPath = (string)dteProject.ConfigurationManager.ActiveConfiguration.Properties.Item("OutputPath").Value;
+            var targetFrameworkMoniker = (string)dteProject.Properties.Item(
+                "TargetFrameworkMoniker"
+            ).Value;
+            var relativeOutputPath =
+                (string)dteProject.ConfigurationManager.ActiveConfiguration.Properties.Item(
+                    "OutputPath"
+                ).Value;
 
             Debug.Assert(!string.IsNullOrEmpty(projectDir));
             Debug.Assert(!string.IsNullOrEmpty(outputFileName));
@@ -156,14 +184,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             sourceSearchPaths = sourceSearchPathsBuilder.ToImmutableArray();
             projectNamespaces = namespacesToImportBuilder.ToImmutableArray();
 
-            platform = (projectOpt != null) ? GetInteractiveHostPlatform(targetFrameworkMoniker, projectOpt.CompilationOptions.Platform) : null;
+            platform =
+                (projectOpt != null)
+                    ? GetInteractiveHostPlatform(
+                          targetFrameworkMoniker,
+                          projectOpt.CompilationOptions.Platform
+                      )
+                    : null;
         }
 
-        internal Project GetProjectFromHierarchy(IVsHierarchy hierarchy)
-            => _workspace.CurrentSolution.Projects.FirstOrDefault(proj => ProjectIdMatchesHierarchy(_workspace, proj.Id, hierarchy));
+        internal Project GetProjectFromHierarchy(IVsHierarchy hierarchy) =>
+            _workspace.CurrentSolution.Projects.FirstOrDefault(
+                proj => ProjectIdMatchesHierarchy(_workspace, proj.Id, hierarchy)
+            );
 
-        private static bool ProjectIdMatchesHierarchy(VisualStudioWorkspace workspace, ProjectId projectId, IVsHierarchy hierarchy)
-        {
+        private static bool ProjectIdMatchesHierarchy(
+            VisualStudioWorkspace workspace,
+            ProjectId projectId,
+            IVsHierarchy hierarchy
+        ) {
             var hierarchyForProject = workspace.GetHierarchy(projectId);
 
             if (hierarchyForProject == null)
@@ -180,22 +219,36 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             // we get from Solution Explorer (it's a wrapper implementation), so we'll
             // have to compare properties.
 
-            hierarchyForProject.GetProperty((uint)VSConstants.VSITEMID.Root, (int)__VSHPROPID.VSHPROPID_Name, out var rawValue);
+            hierarchyForProject.GetProperty(
+                (uint)VSConstants.VSITEMID.Root,
+                (int)__VSHPROPID.VSHPROPID_Name,
+                out var rawValue
+            );
 
             if (rawValue is string projectName)
             {
-                hierarchy.GetProperty((uint)VSConstants.VSITEMID.Root, (int)__VSHPROPID.VSHPROPID_Name, out rawValue);
+                hierarchy.GetProperty(
+                    (uint)VSConstants.VSITEMID.Root,
+                    (int)__VSHPROPID.VSHPROPID_Name,
+                    out rawValue
+                );
                 return projectName == (rawValue as string);
             }
 
             return false;
         }
 
-        private static InteractiveHostPlatform? GetInteractiveHostPlatform(string targetFrameworkMoniker, Platform platform)
-        {
-            if (targetFrameworkMoniker.StartsWith(".NETCoreApp", StringComparison.OrdinalIgnoreCase) ||
-                targetFrameworkMoniker.StartsWith(".NETStandard", StringComparison.OrdinalIgnoreCase))
-            {
+        private static InteractiveHostPlatform? GetInteractiveHostPlatform(
+            string targetFrameworkMoniker,
+            Platform platform
+        ) {
+            if (
+                targetFrameworkMoniker.StartsWith(".NETCoreApp", StringComparison.OrdinalIgnoreCase)
+                || targetFrameworkMoniker.StartsWith(
+                    ".NETStandard",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            ) {
                 return InteractiveHostPlatform.Core;
             }
 
@@ -231,7 +284,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             }
 
             return reference.Path;
-
 #if TODO // TODO: This shouldn't directly depend on GAC, rather we should have some kind of "reference simplifier".
             var possibleGacNames = GlobalAssemblyCache.GetAssemblyIdentities(name).ToArray();
             if (possibleGacNames.Length == 0)
@@ -251,7 +303,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
                 ", Culture=",
                 (culture == "") ? "neutral" : culture,
                 ", PublicKeyToken=",
-                publicKeyToken.ToLowerInvariant());
+                publicKeyToken.ToLowerInvariant()
+            );
 
             AssemblyIdentity identity;
             if (!AssemblyIdentity.TryParseDisplayName(fullName, out identity))
@@ -264,8 +317,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             var foundNonEquivalent = false;
             foreach (var possibleGacName in possibleGacNames)
             {
-                if (DesktopAssemblyIdentityComparer.Default.ReferenceMatchesDefinition(identity, possibleGacName))
-                {
+                if (
+                    DesktopAssemblyIdentityComparer.Default.ReferenceMatchesDefinition(
+                        identity,
+                        possibleGacName
+                    )
+                ) {
                     foundEquivalent = true;
                 }
                 else
@@ -320,20 +377,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             return taskSource.Task;
         }
 
-        protected override void CancelBuildProject()
-            => _dte.ExecuteCommand("Build.Cancel");
+        protected override void CancelBuildProject() => _dte.ExecuteCommand("Build.Cancel");
 
-        protected override IWaitIndicator GetWaitIndicator()
-            => _componentModel.GetService<IWaitIndicator>();
+        protected override IWaitIndicator GetWaitIndicator() =>
+            _componentModel.GetService<IWaitIndicator>();
 
         /// <summary>
         /// Return namespaces that can be resolved in the latest interactive compilation.
         /// </summary>
-        protected override async Task<IEnumerable<string>> GetNamespacesToImportAsync(IEnumerable<string> namespacesToImport, IInteractiveWindow interactiveWindow)
-        {
-            var document = interactiveWindow.CurrentLanguageBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+        protected override async Task<IEnumerable<string>> GetNamespacesToImportAsync(
+            IEnumerable<string> namespacesToImport,
+            IInteractiveWindow interactiveWindow
+        ) {
+            var document =
+                interactiveWindow.CurrentLanguageBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             var compilation = await document.Project.GetCompilationAsync().ConfigureAwait(true);
-            return namespacesToImport.Where(ns => compilation.GlobalNamespace.GetQualifiedNamespace(ns) != null);
+            return namespacesToImport.Where(
+                ns => compilation.GlobalNamespace.GetQualifiedNamespace(ns) != null
+            );
         }
     }
 }

@@ -11,10 +11,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
     [DebuggerDisplay("{" + nameof(DebuggerToString) + "(),nq}")]
     internal class LocationTagged<TValue> : IFormattable
     {
-        public LocationTagged(TValue value, int absoluteIndex, int lineIndex, int characterIndex)
-            : this (value, new SourceLocation(absoluteIndex, lineIndex, characterIndex))
-        {
-        }
+        public LocationTagged(
+            TValue value,
+            int absoluteIndex,
+            int lineIndex,
+            int characterIndex
+        ) : this(value, new SourceLocation(absoluteIndex, lineIndex, characterIndex)) { }
 
         public LocationTagged(TValue value, SourceLocation location)
         {
@@ -39,8 +41,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 return false;
             }
 
-            return Equals(other.Location, Location) &&
-                Equals(other.Value, Value);
+            return Equals(other.Location, Location) && Equals(other.Value, Value);
         }
 
         public override int GetHashCode()

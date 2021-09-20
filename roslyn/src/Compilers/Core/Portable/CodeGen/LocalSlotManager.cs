@@ -49,15 +49,17 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 // ITypeReference does not have object identity.
                 // Same type may be represented by multiple instances.
                 // Therefore the use of "Equals" here.
-                return _constraints == other._constraints &&
-                    (Cci.SymbolEquivalentEqualityComparer.Instance.Equals(_type, other._type));
+                return _constraints == other._constraints
+                    && (Cci.SymbolEquivalentEqualityComparer.Instance.Equals(_type, other._type));
             }
 
-            public override int GetHashCode()
-                => Hash.Combine(Cci.SymbolEquivalentEqualityComparer.Instance.GetHashCode(_type), (int)_constraints);
+            public override int GetHashCode() =>
+                Hash.Combine(
+                    Cci.SymbolEquivalentEqualityComparer.Instance.GetHashCode(_type),
+                    (int)_constraints
+                );
 
-            public override bool Equals(object? obj)
-                => obj is LocalSignature ls && Equals(ls);
+            public override bool Equals(object? obj) => obj is LocalSignature ls && Equals(ls);
         }
 
         // maps local identities to locals.
@@ -77,7 +79,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
         {
             _slotAllocator = slotAllocator;
 
-            // Add placeholders for pre-allocated locals. 
+            // Add placeholders for pre-allocated locals.
             // The actual identities are populated if/when the locals are reused.
             if (slotAllocator != null)
             {
@@ -93,7 +95,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 var map = _localMap;
                 if (map == null)
                 {
-                    map = new Dictionary<ILocalSymbolInternal, LocalDefinition>(ReferenceEqualityComparer.Instance);
+                    map = new Dictionary<ILocalSymbolInternal, LocalDefinition>(
+                        ReferenceEqualityComparer.Instance
+                    );
                     _localMap = map;
                 }
 
@@ -126,13 +130,25 @@ namespace Microsoft.CodeAnalysis.CodeGen
             LocalSlotConstraints constraints,
             ImmutableArray<bool> dynamicTransformFlags,
             ImmutableArray<string> tupleElementNames,
-            bool isSlotReusable)
-        {
+            bool isSlotReusable
+        ) {
             LocalDefinition? local;
 
-            if (!isSlotReusable || !FreeSlots.TryPop(new LocalSignature(type, constraints), out local))
-            {
-                local = this.DeclareLocalImpl(type, symbol, name, kind, id, pdbAttributes, constraints, dynamicTransformFlags, tupleElementNames);
+            if (
+                !isSlotReusable
+                || !FreeSlots.TryPop(new LocalSignature(type, constraints), out local)
+            ) {
+                local = this.DeclareLocalImpl(
+                    type,
+                    symbol,
+                    name,
+                    kind,
+                    id,
+                    pdbAttributes,
+                    constraints,
+                    dynamicTransformFlags,
+                    tupleElementNames
+                );
             }
 
             LocalMap.Add(symbol, local);
@@ -165,10 +181,11 @@ namespace Microsoft.CodeAnalysis.CodeGen
             Cci.ITypeReference type,
             LocalSlotConstraints constraints,
             ImmutableArray<bool> dynamicTransformFlags = default,
-            ImmutableArray<string> tupleElementNames = default)
-        {
-            if (!FreeSlots.TryPop(new LocalSignature(type, constraints), out LocalDefinition? local))
-            {
+            ImmutableArray<string> tupleElementNames = default
+        ) {
+            if (
+                !FreeSlots.TryPop(new LocalSignature(type, constraints), out LocalDefinition? local)
+            ) {
                 local = DeclareLocalImpl(
                     type: type,
                     symbol: null,
@@ -178,7 +195,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                     pdbAttributes: LocalVariableAttributes.DebuggerHidden,
                     constraints: constraints,
                     dynamicTransformFlags: dynamicTransformFlags,
-                    tupleElementNames: tupleElementNames);
+                    tupleElementNames: tupleElementNames
+                );
             }
 
             return local;
@@ -193,8 +211,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             LocalVariableAttributes pdbAttributes,
             LocalSlotConstraints constraints,
             ImmutableArray<bool> dynamicTransformFlags,
-            ImmutableArray<string> tupleElementNames)
-        {
+            ImmutableArray<string> tupleElementNames
+        ) {
             if (_lazyAllLocals == null)
             {
                 _lazyAllLocals = new ArrayBuilder<Cci.ILocalDefinition>(1);
@@ -213,7 +231,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                     pdbAttributes,
                     constraints,
                     dynamicTransformFlags: dynamicTransformFlags,
-                    tupleElementNames: tupleElementNames);
+                    tupleElementNames: tupleElementNames
+                );
 
                 if (local != null)
                 {
@@ -233,7 +252,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 pdbAttributes: pdbAttributes,
                 constraints: constraints,
                 dynamicTransformFlags: dynamicTransformFlags,
-                tupleElementNames: tupleElementNames);
+                tupleElementNames: tupleElementNames
+            );
 
             _lazyAllLocals.Add(local);
             return local;

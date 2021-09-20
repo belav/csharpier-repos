@@ -17,7 +17,10 @@ namespace System.ComponentModel.Tests
         [DefaultValue(DefaultPropertyValue)]
         public int Property { get; set; }
 
-        public object PropertyWhichThrows { get { throw new NotImplementedException(); } }
+        public object PropertyWhichThrows
+        {
+            get { throw new NotImplementedException(); }
+        }
 
         public string StringProperty { get; private set; }
 
@@ -54,9 +57,7 @@ namespace System.ComponentModel.Tests
                 return null;
             }
 
-            return _services.TryGetValue(serviceType, out var service)
-                ? service
-                : null;
+            return _services.TryGetValue(serviceType, out var service) ? service : null;
         }
 
         public IComponent Component => this;
@@ -65,22 +66,14 @@ namespace System.ComponentModel.Tests
 
         public string Name
         {
-            get
-            {
-                return nameof(DescriptorTestComponent);
-            }
-            set
-            { }
+            get { return nameof(DescriptorTestComponent); }
+            set { }
         }
 
         public ISite Site
         {
-            get
-            {
-                return this;
-            }
-            set
-            { }
+            get { return this; }
+            set { }
         }
     }
 }

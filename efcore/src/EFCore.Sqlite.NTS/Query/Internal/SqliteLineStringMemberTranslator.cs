@@ -20,14 +20,29 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteLineStringMemberTranslator : IMemberTranslator
     {
-        private static readonly IDictionary<MemberInfo, string> _memberToFunctionName
-            = new Dictionary<MemberInfo, string>
+        private static readonly IDictionary<MemberInfo, string> _memberToFunctionName =
+            new Dictionary<MemberInfo, string>
             {
-                { typeof(LineString).GetRequiredRuntimeProperty(nameof(LineString.Count)), "NumPoints" },
-                { typeof(LineString).GetRequiredRuntimeProperty(nameof(LineString.EndPoint)), "EndPoint" },
-                { typeof(LineString).GetRequiredRuntimeProperty(nameof(LineString.IsClosed)), "IsClosed" },
-                { typeof(LineString).GetRequiredRuntimeProperty(nameof(LineString.IsRing)), "IsRing" },
-                { typeof(LineString).GetRequiredRuntimeProperty(nameof(LineString.StartPoint)), "StartPoint" }
+                {
+                    typeof(LineString).GetRequiredRuntimeProperty(nameof(LineString.Count)),
+                    "NumPoints"
+                },
+                {
+                    typeof(LineString).GetRequiredRuntimeProperty(nameof(LineString.EndPoint)),
+                    "EndPoint"
+                },
+                {
+                    typeof(LineString).GetRequiredRuntimeProperty(nameof(LineString.IsClosed)),
+                    "IsClosed"
+                },
+                {
+                    typeof(LineString).GetRequiredRuntimeProperty(nameof(LineString.IsRing)),
+                    "IsRing"
+                },
+                {
+                    typeof(LineString).GetRequiredRuntimeProperty(nameof(LineString.StartPoint)),
+                    "StartPoint"
+                }
             };
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -53,35 +68,38 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             SqlExpression? instance,
             MemberInfo member,
             Type returnType,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) {
             Check.NotNull(member, nameof(member));
             Check.NotNull(returnType, nameof(returnType));
             Check.NotNull(logger, nameof(logger));
 
-            if (_memberToFunctionName.TryGetValue(member, out var functionName)
-                && instance != null)
+            if (_memberToFunctionName.TryGetValue(member, out var functionName) && instance != null)
             {
                 return returnType == typeof(bool)
                     ? _sqlExpressionFactory.Case(
-                        new[]
-                        {
-                            new CaseWhenClause(
-                                _sqlExpressionFactory.IsNotNull(instance),
-                                _sqlExpressionFactory.Function(
-                                    functionName,
-                                    new[] { instance },
-                                    nullable: false,
-                                    argumentsPropagateNullability: new[] { false },
-                                    returnType))
-                        },
-                        null)
+                          new[]
+                          {
+                              new CaseWhenClause(
+                                  _sqlExpressionFactory.IsNotNull(instance),
+                                  _sqlExpressionFactory.Function(
+                                      functionName,
+                                      new[] { instance },
+                                      nullable: false,
+                                      argumentsPropagateNullability: new[] { false },
+                                      returnType
+                                  )
+                              )
+                          },
+                          null
+                      )
                     : (SqlExpression)_sqlExpressionFactory.Function(
-                        functionName,
-                        new[] { instance },
-                        nullable: true,
-                        argumentsPropagateNullability: new[] { true },
-                        returnType);
+                          functionName,
+                          new[] { instance },
+                          nullable: true,
+                          argumentsPropagateNullability: new[] { true },
+                          returnType
+                      );
             }
 
             return null;

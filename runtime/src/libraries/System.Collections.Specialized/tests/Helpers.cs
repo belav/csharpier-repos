@@ -41,8 +41,10 @@ namespace System.Collections.Specialized.Tests
             return stringDictionary;
         }
 
-        public static HybridDictionary CreateHybridDictionary(int count, bool caseInsensitive = false)
-        {
+        public static HybridDictionary CreateHybridDictionary(
+            int count,
+            bool caseInsensitive = false
+        ) {
             HybridDictionary hybridDictionary = new HybridDictionary(caseInsensitive);
 
             for (int i = 0; i < count; i++)

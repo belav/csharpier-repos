@@ -22,7 +22,7 @@ namespace System.Reflection.Internal.Tests
                 {
                     Assert.Equal(4, block.Size);
                     AssertEx.Equal(provider.Pointer, block.Pointer);
-                    AssertEx.Equal(new byte[] { }, block.GetContentUnchecked(0, 0));
+                    AssertEx.Equal(new byte[] {  }, block.GetContentUnchecked(0, 0));
                     AssertEx.Equal(new byte[] { 3, 4 }, block.GetContentUnchecked(2, 2));
                     AssertEx.Equal(new byte[] { 1, 2, 3 }, block.GetContentUnchecked(0, 3));
                 }
@@ -33,7 +33,7 @@ namespace System.Reflection.Internal.Tests
                     Assert.Equal(2, block.Size);
                     AssertEx.Equal(new byte[] { 2, 3 }, block.GetContentUnchecked(0, 2));
                     AssertEx.Equal(new byte[] { 3 }, block.GetContentUnchecked(1, 1));
-                    AssertEx.Equal(new byte[] { }, block.GetContentUnchecked(2, 0));
+                    AssertEx.Equal(new byte[] {  }, block.GetContentUnchecked(2, 0));
                 }
             }
         }
@@ -50,7 +50,7 @@ namespace System.Reflection.Internal.Tests
                     {
                         Assert.Equal(4, block.Size);
                         AssertEx.Equal(provider.Pointer, block.Pointer);
-                        AssertEx.Equal(new byte[] { }, block.GetContentUnchecked(0, 0));
+                        AssertEx.Equal(new byte[] {  }, block.GetContentUnchecked(0, 0));
                         AssertEx.Equal(new byte[] { 3, 4 }, block.GetContentUnchecked(2, 2));
                         AssertEx.Equal(new byte[] { 1, 2, 3 }, block.GetContentUnchecked(0, 3));
                     }
@@ -61,7 +61,7 @@ namespace System.Reflection.Internal.Tests
                         Assert.Equal(2, block.Size);
                         AssertEx.Equal(new byte[] { 2, 3 }, block.GetContentUnchecked(0, 2));
                         AssertEx.Equal(new byte[] { 3 }, block.GetContentUnchecked(1, 1));
-                        AssertEx.Equal(new byte[] { }, block.GetContentUnchecked(2, 0));
+                        AssertEx.Equal(new byte[] {  }, block.GetContentUnchecked(2, 0));
                     }
                 }
             }
@@ -75,13 +75,20 @@ namespace System.Reflection.Internal.Tests
             {
                 Assert.False(FileStreamReadLightUp.IsFileStream(stream));
 
-                using (var provider = new StreamMemoryBlockProvider(stream, 0, array.Length, isFileStream: false, leaveOpen: true))
-                {
+                using (
+                    var provider = new StreamMemoryBlockProvider(
+                        stream,
+                        0,
+                        array.Length,
+                        isFileStream: false,
+                        leaveOpen: true
+                    )
+                ) {
                     using (var block = provider.GetMemoryBlock())
                     {
                         Assert.IsType<NativeHeapMemoryBlock>(block);
                         Assert.Equal(4, block.Size);
-                        AssertEx.Equal(new byte[] { }, block.GetContentUnchecked(0, 0));
+                        AssertEx.Equal(new byte[] {  }, block.GetContentUnchecked(0, 0));
                         AssertEx.Equal(new byte[] { 3, 4 }, block.GetContentUnchecked(2, 2));
                         AssertEx.Equal(new byte[] { 1, 2, 3 }, block.GetContentUnchecked(0, 3));
                     }
@@ -94,19 +101,26 @@ namespace System.Reflection.Internal.Tests
                         Assert.Equal(2, block.Size);
                         AssertEx.Equal(new byte[] { 2, 3 }, block.GetContentUnchecked(0, 2));
                         AssertEx.Equal(new byte[] { 3 }, block.GetContentUnchecked(1, 1));
-                        AssertEx.Equal(new byte[] { }, block.GetContentUnchecked(2, 0));
+                        AssertEx.Equal(new byte[] {  }, block.GetContentUnchecked(2, 0));
                     }
 
                     Assert.Equal(3, stream.Position);
                 }
 
-                using (var provider = new StreamMemoryBlockProvider(stream, 0, array.Length, isFileStream: false, leaveOpen: false))
-                {
+                using (
+                    var provider = new StreamMemoryBlockProvider(
+                        stream,
+                        0,
+                        array.Length,
+                        isFileStream: false,
+                        leaveOpen: false
+                    )
+                ) {
                     using (var block = provider.GetMemoryBlock())
                     {
                         Assert.IsType<NativeHeapMemoryBlock>(block);
                         Assert.Equal(4, block.Size);
-                        AssertEx.Equal(new byte[] { }, block.GetContentUnchecked(0, 0));
+                        AssertEx.Equal(new byte[] {  }, block.GetContentUnchecked(0, 0));
                         AssertEx.Equal(new byte[] { 3, 4 }, block.GetContentUnchecked(2, 2));
                         AssertEx.Equal(new byte[] { 1, 2, 3 }, block.GetContentUnchecked(0, 3));
                     }
@@ -119,7 +133,12 @@ namespace System.Reflection.Internal.Tests
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34493", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34493",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void FileStream()
         {
             string filePath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
@@ -135,12 +154,27 @@ namespace System.Reflection.Internal.Tests
 
                 foreach (bool useAsync in new[] { true, false })
                 {
-                    using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, useAsync))
-                    {
+                    using (
+                        var stream = new FileStream(
+                            filePath,
+                            FileMode.Open,
+                            FileAccess.Read,
+                            FileShare.Read,
+                            4096,
+                            useAsync
+                        )
+                    ) {
                         Assert.True(FileStreamReadLightUp.IsFileStream(stream));
 
-                        using (var provider = new StreamMemoryBlockProvider(stream, imageStart: 0, imageSize: array.Length, isFileStream: true, leaveOpen: false))
-                        {
+                        using (
+                            var provider = new StreamMemoryBlockProvider(
+                                stream,
+                                imageStart: 0,
+                                imageSize: array.Length,
+                                isFileStream: true,
+                                leaveOpen: false
+                            )
+                        ) {
                             // large:
                             using (var block = provider.GetMemoryBlock())
                             {
@@ -157,7 +191,10 @@ namespace System.Reflection.Internal.Tests
                             {
                                 Assert.IsType<NativeHeapMemoryBlock>(block);
                                 Assert.Equal(2, block.Size);
-                                Assert.Equal(new byte[] { 0x12, 0x12 }, block.GetContentUnchecked(0, block.Size));
+                                Assert.Equal(
+                                    new byte[] { 0x12, 0x12 },
+                                    block.GetContentUnchecked(0, block.Size)
+                                );
                             }
 
                             Assert.Equal(3, stream.Position);
@@ -167,6 +204,7 @@ namespace System.Reflection.Internal.Tests
                     }
                 }
             }
+
             finally
             {
                 File.Delete(filePath);
@@ -209,7 +247,12 @@ namespace System.Reflection.Internal.Tests
 
             for (int i = 0; i < memoryMappedBlocks.Length; i++)
             {
-                memoryMappedBlocks[i] = new MemoryMappedFileBlock(new TestOnceDisposable(), new TestSafeBuffer(), offset: 0, size: 1);
+                memoryMappedBlocks[i] = new MemoryMappedFileBlock(
+                    new TestOnceDisposable(),
+                    new TestSafeBuffer(),
+                    offset: 0,
+                    size: 1
+                );
             }
 
             for (int i = 0; i < memoryMappedBlocks.Length; i++)
@@ -217,29 +260,31 @@ namespace System.Reflection.Internal.Tests
                 pinnedObjects[i] = new PinnedObject(new byte[4]);
             }
 
-            var worker = new ThreadStart(() =>
-            {
-                for (int k = 0; k < 2; k++)
+            var worker = new ThreadStart(
+                () =>
                 {
-                    for (int i = 0; i < nativeBlocks.Length; i++)
+                    for (int k = 0; k < 2; k++)
                     {
-                        nativeBlocks[i].Dispose();
-                        Thread.Yield();
-                    }
+                        for (int i = 0; i < nativeBlocks.Length; i++)
+                        {
+                            nativeBlocks[i].Dispose();
+                            Thread.Yield();
+                        }
 
-                    for (int i = 0; i < memoryMappedBlocks.Length; i++)
-                    {
-                        memoryMappedBlocks[i].Dispose();
-                        Thread.Yield();
-                    }
+                        for (int i = 0; i < memoryMappedBlocks.Length; i++)
+                        {
+                            memoryMappedBlocks[i].Dispose();
+                            Thread.Yield();
+                        }
 
-                    for (int i = 0; i < pinnedObjects.Length; i++)
-                    {
-                        pinnedObjects[i].Dispose();
-                        Thread.Yield();
+                        for (int i = 0; i < pinnedObjects.Length; i++)
+                        {
+                            pinnedObjects[i].Dispose();
+                            Thread.Yield();
+                        }
                     }
                 }
-            });
+            );
 
             var t1 = new Thread(worker);
             var t2 = new Thread(worker);

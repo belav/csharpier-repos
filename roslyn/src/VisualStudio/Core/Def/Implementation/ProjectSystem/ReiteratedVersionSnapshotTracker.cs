@@ -59,8 +59,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
         public void StopTracking(ITextBuffer buffer)
         {
-            if (_trackingBuffer == buffer && buffer != null && _latestReiteratedVersionSnapshot != null)
-            {
+            if (
+                _trackingBuffer == buffer
+                && buffer != null
+                && _latestReiteratedVersionSnapshot != null
+            ) {
                 buffer.ChangedHighPriority -= OnTextBufferChanged;
 
                 _trackingBuffer = null;
@@ -73,9 +76,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             if (sender is ITextBuffer)
             {
                 var snapshot = _latestReiteratedVersionSnapshot;
-                if (snapshot != null && snapshot.Version != null && e.AfterVersion != null &&
-                    snapshot.Version.ReiteratedVersionNumber < e.AfterVersion.ReiteratedVersionNumber)
-                {
+                if (
+                    snapshot != null
+                    && snapshot.Version != null
+                    && e.AfterVersion != null
+                    && snapshot.Version.ReiteratedVersionNumber
+                        < e.AfterVersion.ReiteratedVersionNumber
+                ) {
                     _latestReiteratedVersionSnapshot = e.After;
                 }
             }

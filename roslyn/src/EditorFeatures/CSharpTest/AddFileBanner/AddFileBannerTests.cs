@@ -14,14 +14,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddFileBanner
 {
     public partial class AddFileBannerTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpAddFileBannerCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpAddFileBannerCodeRefactoringProvider();
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddFileBanner)]
         public async Task TestBanner1()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>[||]using System;
@@ -41,7 +43,7 @@ class Program2
         </Document>
     </Project>
 </Workspace>",
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>// This is the banner
@@ -62,14 +64,15 @@ class Program2
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddFileBanner)]
         public async Task TestMultiLineBanner1()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>[||]using System;
@@ -90,7 +93,7 @@ class Program2
         </Document>
     </Project>
 </Workspace>",
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>// This is the banner
@@ -113,7 +116,8 @@ class Program2
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddFileBanner)]
@@ -121,7 +125,7 @@ class Program2
         public async Task TestSingleLineDocCommentBanner()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>[||]using System;
@@ -142,7 +146,7 @@ class Program2
         </Document>
     </Project>
 </Workspace>",
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>/// This is the banner
@@ -165,7 +169,8 @@ class Program2
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddFileBanner)]
@@ -173,7 +178,7 @@ class Program2
         public async Task TestMultiLineDocCommentBanner()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>[||]using System;
@@ -195,7 +200,7 @@ class Program2
         </Document>
     </Project>
 </Workspace>",
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>/** This is the banner
@@ -220,14 +225,15 @@ class Program2
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddFileBanner)]
         public async Task TestMissingWhenAlreadyThere()
         {
             await TestMissingAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>[||]// I already have a banner
@@ -248,7 +254,8 @@ class Program2
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsAddFileBanner)]
@@ -256,9 +263,12 @@ class Program2
         [InlineData("file_header_template =", 1)]
         [InlineData("file_header_template = unset", 1)]
         [InlineData("file_header_template = defined file header", 0)]
-        public async Task TestMissingWhenHandledByAnalyzer(string fileHeaderTemplate, int expectedActionCount)
-        {
-            var initialMarkup = $@"
+        public async Task TestMissingWhenHandledByAnalyzer(
+            string fileHeaderTemplate,
+            int expectedActionCount
+        ) {
+            var initialMarkup =
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""/0/Test0.cs"">[||]using System;
@@ -293,7 +303,7 @@ root = true
         public async Task TestMissingIfOtherFileDoesNotHaveBanner()
         {
             await TestMissingAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>[||]
@@ -314,14 +324,15 @@ class Program2
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddFileBanner)]
         public async Task TestMissingIfOtherFileIsAutoGenerated()
         {
             await TestMissingAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>[||]
@@ -342,7 +353,8 @@ class Program2
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [WorkItem(32792, "https://github.com/dotnet/roslyn/issues/32792")]
@@ -350,7 +362,7 @@ class Program2
         public async Task TestUpdateFileNameInComment()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""Goo.cs"">[||]using System;
@@ -372,7 +384,7 @@ class Program2
         </Document>
     </Project>
 </Workspace>",
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""Goo.cs"">// This is the banner in Goo.cs
@@ -397,7 +409,8 @@ class Program2
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [WorkItem(32792, "https://github.com/dotnet/roslyn/issues/32792")]
@@ -405,7 +418,7 @@ class Program2
         public async Task TestUpdateFileNameInComment2()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""Goo.cs"">[||]using System;
@@ -427,7 +440,7 @@ class Program2
         </Document>
     </Project>
 </Workspace>",
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""Goo.cs"">/* This is the banner in Goo.cs
@@ -452,7 +465,8 @@ class Program2
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddFileBanner)]
@@ -460,7 +474,7 @@ class Program2
         public async Task TestUpdateFileNameInComment3()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""Goo.cs"">[||]using System;
@@ -482,7 +496,7 @@ class Program2
         </Document>
     </Project>
 </Workspace>",
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""Goo.cs"">/** This is the banner in Goo.cs
@@ -507,7 +521,8 @@ class Program2
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddFileBanner)]
@@ -515,7 +530,7 @@ class Program2
         public async Task TestUpdateFileNameInComment4()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""Goo.cs"">[||]using System;
@@ -537,7 +552,7 @@ class Program2
         </Document>
     </Project>
 </Workspace>",
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""Goo.cs"">/// This is the banner in Goo.cs
@@ -562,7 +577,8 @@ class Program2
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
     }
 }

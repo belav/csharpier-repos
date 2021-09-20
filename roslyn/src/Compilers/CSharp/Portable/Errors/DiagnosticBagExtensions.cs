@@ -18,8 +18,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="code"></param>
         /// <param name="location"></param>
         /// <returns></returns>
-        internal static CSDiagnosticInfo Add(this DiagnosticBag diagnostics, ErrorCode code, Location location)
-        {
+        internal static CSDiagnosticInfo Add(
+            this DiagnosticBag diagnostics,
+            ErrorCode code,
+            Location location
+        ) {
             var info = new CSDiagnosticInfo(code);
             var diag = new CSDiagnostic(info, location);
             diagnostics.Add(diag);
@@ -34,24 +37,36 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="location"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        internal static CSDiagnosticInfo Add(this DiagnosticBag diagnostics, ErrorCode code, Location location, params object[] args)
-        {
+        internal static CSDiagnosticInfo Add(
+            this DiagnosticBag diagnostics,
+            ErrorCode code,
+            Location location,
+            params object[] args
+        ) {
             var info = new CSDiagnosticInfo(code, args);
             var diag = new CSDiagnostic(info, location);
             diagnostics.Add(diag);
             return info;
         }
 
-        internal static CSDiagnosticInfo Add(this DiagnosticBag diagnostics, ErrorCode code, Location location, ImmutableArray<Symbol> symbols, params object[] args)
-        {
+        internal static CSDiagnosticInfo Add(
+            this DiagnosticBag diagnostics,
+            ErrorCode code,
+            Location location,
+            ImmutableArray<Symbol> symbols,
+            params object[] args
+        ) {
             var info = new CSDiagnosticInfo(code, args, symbols, ImmutableArray<Location>.Empty);
             var diag = new CSDiagnostic(info, location);
             diagnostics.Add(diag);
             return info;
         }
 
-        internal static void Add(this DiagnosticBag diagnostics, DiagnosticInfo info, Location location)
-        {
+        internal static void Add(
+            this DiagnosticBag diagnostics,
+            DiagnosticInfo info,
+            Location location
+        ) {
             var diag = new CSDiagnostic(info, location);
             diagnostics.Add(diag);
         }
@@ -62,9 +77,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static bool Add(
             this DiagnosticBag diagnostics,
             SyntaxNode node,
-            HashSet<DiagnosticInfo> useSiteDiagnostics)
-        {
-            return !useSiteDiagnostics.IsNullOrEmpty() && diagnostics.Add(node.Location, useSiteDiagnostics);
+            HashSet<DiagnosticInfo> useSiteDiagnostics
+        ) {
+            return !useSiteDiagnostics.IsNullOrEmpty()
+                && diagnostics.Add(node.Location, useSiteDiagnostics);
         }
 
         /// <summary>
@@ -73,16 +89,17 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static bool Add(
             this DiagnosticBag diagnostics,
             SyntaxToken token,
-            HashSet<DiagnosticInfo> useSiteDiagnostics)
-        {
-            return !useSiteDiagnostics.IsNullOrEmpty() && diagnostics.Add(token.GetLocation(), useSiteDiagnostics);
+            HashSet<DiagnosticInfo> useSiteDiagnostics
+        ) {
+            return !useSiteDiagnostics.IsNullOrEmpty()
+                && diagnostics.Add(token.GetLocation(), useSiteDiagnostics);
         }
 
         internal static bool Add(
             this DiagnosticBag diagnostics,
             Location location,
-            IReadOnlyCollection<DiagnosticInfo> useSiteDiagnostics)
-        {
+            IReadOnlyCollection<DiagnosticInfo> useSiteDiagnostics
+        ) {
             if (useSiteDiagnostics.IsNullOrEmpty())
             {
                 return false;

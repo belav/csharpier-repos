@@ -25,9 +25,16 @@ namespace System.Formats.Cbor
 
             if (header.AdditionalInfo == CborAdditionalInfo.IndefiniteLength)
             {
-                if (_isConformanceModeCheckEnabled && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode))
-                {
-                    throw new CborContentException(SR.Format(SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported, ConformanceMode));
+                if (
+                    _isConformanceModeCheckEnabled
+                    && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode)
+                ) {
+                    throw new CborContentException(
+                        SR.Format(
+                            SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported,
+                            ConformanceMode
+                        )
+                    );
                 }
 
                 AdvanceBuffer(1);

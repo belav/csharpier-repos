@@ -15,8 +15,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         /// </summary>
         /// <param name="modelMetadata">The <see cref="ModelBinding.ModelMetadata"/>.</param>
         /// <param name="items">The list of <see cref="ValidatorItem"/>s.</param>
-        public ModelValidatorProviderContext(ModelMetadata modelMetadata, IList<ValidatorItem> items)
-        {
+        public ModelValidatorProviderContext(
+            ModelMetadata modelMetadata,
+            IList<ValidatorItem> items
+        ) {
             ModelMetadata = modelMetadata;
             Results = items;
         }

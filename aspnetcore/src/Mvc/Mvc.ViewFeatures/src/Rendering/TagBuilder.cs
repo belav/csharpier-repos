@@ -47,7 +47,10 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             if (tagBuilder == null)
             {
-                throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(tagBuilder));
+                throw new ArgumentException(
+                    Resources.ArgumentCannotBeNullOrEmpty,
+                    nameof(tagBuilder)
+                );
             }
 
             if (tagBuilder._attributes != null)
@@ -257,9 +260,10 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                 foreach (var attribute in Attributes)
                 {
                     var key = attribute.Key;
-                    if (string.Equals(key, "id", StringComparison.OrdinalIgnoreCase) &&
-                        string.IsNullOrEmpty(attribute.Value))
-                    {
+                    if (
+                        string.Equals(key, "id", StringComparison.OrdinalIgnoreCase)
+                        && string.IsNullOrEmpty(attribute.Value)
+                    ) {
                         continue;
                     }
 
@@ -323,8 +327,10 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         /// <typeparam name="TValue">The value type.</typeparam>
         /// <param name="attributes">The attributes.</param>
         /// <param name="replaceExisting">Whether to replace existing attributes.</param>
-        public void MergeAttributes<TKey, TValue>(IDictionary<TKey, TValue?> attributes, bool replaceExisting)
-        {
+        public void MergeAttributes<TKey, TValue>(
+            IDictionary<TKey, TValue?> attributes,
+            bool replaceExisting
+        ) {
             // Perf: Avoid allocating enumerator for `attributes` if possible
             if (attributes != null && attributes.Count > 0)
             {
@@ -363,7 +369,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         /// Returns an <see cref="IHtmlContent"/> that renders the start tag.
         /// </summary>
         /// <returns>An <see cref="IHtmlContent"/> that renders the start tag.</returns>
-        public IHtmlContent RenderStartTag() => new RenderTagHtmlContent(this, TagRenderMode.StartTag);
+        public IHtmlContent RenderStartTag() =>
+            new RenderTagHtmlContent(this, TagRenderMode.StartTag);
 
         /// <summary>
         /// Returns an <see cref="IHtmlContent"/> that renders the end tag.
@@ -375,14 +382,15 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         /// Returns an <see cref="IHtmlContent"/> that renders the self-closing tag.
         /// </summary>
         /// <returns>An <see cref="IHtmlContent"/> that renders the self-closing tag.</returns>
-        public IHtmlContent RenderSelfClosingTag() => new RenderTagHtmlContent(this, TagRenderMode.SelfClosing);
+        public IHtmlContent RenderSelfClosingTag() =>
+            new RenderTagHtmlContent(this, TagRenderMode.SelfClosing);
 
         private static void WriteTo(
             TagBuilder tagBuilder,
             TextWriter writer,
             HtmlEncoder encoder,
-            TagRenderMode tagRenderMode)
-        {
+            TagRenderMode tagRenderMode
+        ) {
             switch (tagRenderMode)
             {
                 case TagRenderMode.StartTag:
@@ -448,12 +456,18 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             public static bool IsAsciiLetter(char testChar)
             {
-                return (('A' <= testChar && testChar <= 'Z') || ('a' <= testChar && testChar <= 'z'));
+                return (
+                    ('A' <= testChar && testChar <= 'Z') || ('a' <= testChar && testChar <= 'z')
+                );
             }
 
             public static bool IsValidIdCharacter(char testChar)
             {
-                return (IsAsciiLetter(testChar) || IsAsciiDigit(testChar) || IsAllowableSpecialCharacter(testChar));
+                return (
+                    IsAsciiLetter(testChar)
+                    || IsAsciiDigit(testChar)
+                    || IsAllowableSpecialCharacter(testChar)
+                );
             }
 
             private static bool IsAsciiDigit(char testChar)

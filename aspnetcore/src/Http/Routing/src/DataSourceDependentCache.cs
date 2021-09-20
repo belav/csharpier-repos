@@ -27,8 +27,10 @@ namespace Microsoft.AspNetCore.Routing
         private IDisposable? _disposable;
         private bool _disposed;
 
-        public DataSourceDependentCache(EndpointDataSource dataSource, Func<IReadOnlyList<Endpoint>, T> initialize)
-        {
+        public DataSourceDependentCache(
+            EndpointDataSource dataSource,
+            Func<IReadOnlyList<Endpoint>, T> initialize
+        ) {
             if (dataSource == null)
             {
                 throw new ArgumentNullException(nameof(dataSource));
@@ -56,7 +58,12 @@ namespace Microsoft.AspNetCore.Routing
         [MemberNotNull(nameof(_value))]
         public T EnsureInitialized()
         {
-            return LazyInitializer.EnsureInitialized<T>(ref _value, ref _initialized, ref _lock, _initializer);
+            return LazyInitializer.EnsureInitialized<T>(
+                ref _value,
+                ref _initialized,
+                ref _lock,
+                _initializer
+            );
         }
 
         private T Initialize()

@@ -95,7 +95,10 @@ namespace Internal.NativeCrypto
                 if (rsaParameters.DQ == null || rsaParameters.DQ.Length != halfModulusLength)
                     throw GetBadDataException();
 
-                if (rsaParameters.InverseQ == null || rsaParameters.InverseQ.Length != halfModulusLength)
+                if (
+                    rsaParameters.InverseQ == null
+                    || rsaParameters.InverseQ.Length != halfModulusLength
+                )
                     throw GetBadDataException();
 
                 if (rsaParameters.D == null || rsaParameters.D.Length != modulusLength)
@@ -108,14 +111,14 @@ namespace Internal.NativeCrypto
             BinaryWriter bw = new BinaryWriter(ms);
 
             // Write out the BLOBHEADER
-            bw.Write((byte)(isPrivate ? PRIVATEKEYBLOB : PUBLICKEYBLOB));  // BLOBHEADER.bType
-            bw.Write((byte)(BLOBHEADER_CURRENT_BVERSION));                 // BLOBHEADER.bVersion
-            bw.Write((ushort)0);                                           // BLOBHEADER.wReserved
-            bw.Write((uint)CapiHelper.CALG_RSA_KEYX);                      // BLOBHEADER.aiKeyAlg
+            bw.Write((byte)(isPrivate ? PRIVATEKEYBLOB : PUBLICKEYBLOB)); // BLOBHEADER.bType
+            bw.Write((byte)(BLOBHEADER_CURRENT_BVERSION)); // BLOBHEADER.bVersion
+            bw.Write((ushort)0); // BLOBHEADER.wReserved
+            bw.Write((uint)CapiHelper.CALG_RSA_KEYX); // BLOBHEADER.aiKeyAlg
 
             // Write the RSAPubKey header
-            bw.Write((int)(isPrivate ? RSA_PRIV_MAGIC : RSA_PUB_MAGIC));   // RSAPubKey.magic
-            bw.Write((uint)(modulusLength * 8));                           // RSAPubKey.bitLen
+            bw.Write((int)(isPrivate ? RSA_PRIV_MAGIC : RSA_PUB_MAGIC)); // RSAPubKey.magic
+            bw.Write((uint)(modulusLength * 8)); // RSAPubKey.bitLen
 
             uint expAsDword = 0;
             for (int i = 0; i < rsaParameters.Exponent.Length; i++)
@@ -123,9 +126,9 @@ namespace Internal.NativeCrypto
                 expAsDword <<= 8;
                 expAsDword |= rsaParameters.Exponent[i];
             }
-            bw.Write((uint)expAsDword);                                    // RSAPubKey.pubExp
+            bw.Write((uint)expAsDword); // RSAPubKey.pubExp
 
-            bw.WriteReversed(rsaParameters.Modulus);                       // Copy over the modulus for both public and private
+            bw.WriteReversed(rsaParameters.Modulus); // Copy over the modulus for both public and private
 
             if (isPrivate)
             {
@@ -156,21 +159,23 @@ namespace Internal.NativeCrypto
         /// <summary>
         /// Helper for RsaCryptoServiceProvider.ExportParameters()
         /// </summary>
-        internal static RSAParameters ToRSAParameters(this byte[] cspBlob, bool includePrivateParameters)
-        {
+        internal static RSAParameters ToRSAParameters(
+            this byte[] cspBlob,
+            bool includePrivateParameters
+        ) {
             try
             {
                 BinaryReader br = new BinaryReader(new MemoryStream(cspBlob));
 
-                br.ReadByte();    // BLOBHEADER.bType: Expected to be 0x6 (PUBLICKEYBLOB) or 0x7 (PRIVATEKEYBLOB), though there's no check for backward compat reasons.
+                br.ReadByte(); // BLOBHEADER.bType: Expected to be 0x6 (PUBLICKEYBLOB) or 0x7 (PRIVATEKEYBLOB), though there's no check for backward compat reasons.
                 br.ReadByte(); // BLOBHEADER.bVersion: Expected to be 0x2, though there's no check for backward compat reasons.
-                br.ReadUInt16();               // BLOBHEADER.wReserved
-                int algId = br.ReadInt32();    // BLOBHEADER.aiKeyAlg
+                br.ReadUInt16(); // BLOBHEADER.wReserved
+                int algId = br.ReadInt32(); // BLOBHEADER.aiKeyAlg
                 if (algId != CALG_RSA_KEYX && algId != CALG_RSA_SIGN)
-                    throw new PlatformNotSupportedException();  // The FCall this code was ported from supports other algid's but we're only porting what we use.
+                    throw new PlatformNotSupportedException(); // The FCall this code was ported from supports other algid's but we're only porting what we use.
 
-                br.ReadInt32();    // RSAPubKey.magic: Expected to be 0x31415352 ('RSA1') or 0x32415352 ('RSA2')
-                int bitLen = br.ReadInt32();   // RSAPubKey.bitLen
+                br.ReadInt32(); // RSAPubKey.magic: Expected to be 0x31415352 ('RSA1') or 0x32415352 ('RSA2')
+                int bitLen = br.ReadInt32(); // RSAPubKey.bitLen
 
                 int modulusLength = bitLen / 8;
                 int halfModulusLength = (modulusLength + 1) / 2;
@@ -222,11 +227,7 @@ namespace Internal.NativeCrypto
             {
                 unchecked
                 {
-                    return new[]
-                    {
-                        (byte)(exponent >> 8),
-                        (byte)(exponent)
-                    };
+                    return new[] { (byte)(exponent >> 8), (byte)(exponent) };
                 }
             }
             else if (exponent <= 0xFFFFFF)

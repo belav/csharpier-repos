@@ -22,20 +22,21 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.Completion
     public abstract class AbstractArgumentProviderTests<TWorkspaceFixture> : TestBase
         where TWorkspaceFixture : TestWorkspaceFixture, new()
     {
-        private static readonly TestComposition s_baseComposition = EditorTestCompositions.EditorFeatures.AddExcludedPartTypes(typeof(ArgumentProvider));
+        private static readonly TestComposition s_baseComposition =
+            EditorTestCompositions.EditorFeatures.AddExcludedPartTypes(typeof(ArgumentProvider));
 
         private readonly TestFixtureHelper<TWorkspaceFixture> _fixtureHelper = new();
 
         private ExportProvider? _lazyExportProvider;
 
-        protected ExportProvider ExportProvider
-            => _lazyExportProvider ??= GetComposition().ExportProviderFactory.CreateExportProvider();
+        protected ExportProvider ExportProvider =>
+            _lazyExportProvider ??= GetComposition().ExportProviderFactory.CreateExportProvider();
 
-        protected virtual TestComposition GetComposition()
-            => s_baseComposition.AddParts(GetArgumentProviderType());
+        protected virtual TestComposition GetComposition() =>
+            s_baseComposition.AddParts(GetArgumentProviderType());
 
-        private protected ReferenceCountedDisposable<TWorkspaceFixture> GetOrCreateWorkspaceFixture()
-            => _fixtureHelper.GetOrCreateFixture();
+        private protected ReferenceCountedDisposable<TWorkspaceFixture> GetOrCreateWorkspaceFixture() =>
+            _fixtureHelper.GetOrCreateFixture();
 
         internal abstract Type GetArgumentProviderType();
 
@@ -44,8 +45,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.Completion
         private protected async Task VerifyDefaultValueAsync(
             string markup,
             string? expectedDefaultValue,
-            string? previousDefaultValue = null)
-        {
+            string? previousDefaultValue = null
+        ) {
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 
             var workspace = workspaceFixture.Target.GetWorkspace(markup, ExportProvider);
@@ -61,13 +62,25 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.Completion
 
             var root = await document.GetRequiredSyntaxRootAsync(CancellationToken.None);
             var token = root.FindToken(position - 2);
-            var semanticModel = await document.GetRequiredSemanticModelAsync(CancellationToken.None);
-            var symbolInfo = semanticModel.GetSymbolInfo(token.GetRequiredParent(), CancellationToken.None);
+            var semanticModel = await document.GetRequiredSemanticModelAsync(
+                CancellationToken.None
+            );
+            var symbolInfo = semanticModel.GetSymbolInfo(
+                token.GetRequiredParent(),
+                CancellationToken.None
+            );
             var target = symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.Single();
             Contract.ThrowIfNull(target);
 
             var parameter = target.GetParameters().Single();
-            var context = new ArgumentContext(provider, semanticModel, position, parameter, previousDefaultValue, CancellationToken.None);
+            var context = new ArgumentContext(
+                provider,
+                semanticModel,
+                position,
+                parameter,
+                previousDefaultValue,
+                CancellationToken.None
+            );
             await provider.ProvideArgumentAsync(context);
 
             Assert.Equal(expectedDefaultValue, context.DefaultValue);

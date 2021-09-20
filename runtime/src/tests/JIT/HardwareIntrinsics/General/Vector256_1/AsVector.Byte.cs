@@ -40,9 +40,11 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 32;
 
-        private static readonly int VectorElementCount = Unsafe.SizeOf<Vector256<Byte>>() / sizeof(Byte);
+        private static readonly int VectorElementCount =
+            Unsafe.SizeOf<Vector256<Byte>>() / sizeof(Byte);
 
-        private static readonly int NumericsElementCount = Unsafe.SizeOf<Vector<Byte>>() / sizeof(Byte);
+        private static readonly int NumericsElementCount =
+            Unsafe.SizeOf<Vector<Byte>>() / sizeof(Byte);
 
         public bool Succeeded { get; set; } = true;
 
@@ -65,32 +67,40 @@ namespace JIT.HardwareIntrinsics.General
             Vector256<Byte> value;
 
             value = Vector256.Create((byte)TestLibrary.Generator.GetByte());
-            object Result = typeof(Vector256)
-                                .GetMethod(nameof(Vector256.AsVector))
-                                .MakeGenericMethod(typeof(Byte))
-                                .Invoke(null, new object[] { value });
+            object Result = typeof(Vector256).GetMethod(nameof(Vector256.AsVector))
+                .MakeGenericMethod(typeof(Byte))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector<Byte>)(Result), value);
 
-            value = (Vector256<Byte>)typeof(Vector256)
-                                .GetMethods()
-                                .Where((methodInfo) => {
-                                    if (methodInfo.Name == nameof(Vector256.AsVector256))
-                                    {
-                                        var parameters = methodInfo.GetParameters();
-                                        return (parameters.Length == 1) &&
-                                               (parameters[0].ParameterType.IsGenericType) &&
-                                               (parameters[0].ParameterType.GetGenericTypeDefinition() == typeof(Vector<>));
-                                    }
-                                    return false;
-                                })
-                                .Single()
-                                .MakeGenericMethod(typeof(Byte))
-                                .Invoke(null, new object[] { Result });
+            value =
+                (Vector256<Byte>)typeof(Vector256).GetMethods()
+                    .Where(
+                        (methodInfo) =>
+                        {
+                            if (methodInfo.Name == nameof(Vector256.AsVector256))
+                            {
+                                var parameters = methodInfo.GetParameters();
+                                return (parameters.Length == 1)
+                                    && (parameters[0].ParameterType.IsGenericType)
+                                    && (
+                                        parameters[0].ParameterType.GetGenericTypeDefinition()
+                                        == typeof(Vector<>)
+                                    );
+                            }
+                            return false;
+                        }
+                    )
+                    .Single()
+                    .MakeGenericMethod(typeof(Byte))
+                    .Invoke(null, new object[] { Result });
             ValidateResult(value, (Vector<Byte>)(Result));
         }
 
-        private void ValidateResult(Vector<Byte> result, Vector256<Byte> value, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Vector<Byte> result,
+            Vector256<Byte> value,
+            [CallerMemberName] string method = ""
+        ) {
             Byte[] resultElements = new Byte[NumericsElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Byte, byte>(ref resultElements[0]), result);
 
@@ -100,8 +110,11 @@ namespace JIT.HardwareIntrinsics.General
             ValidateResult(resultElements, valueElements, method);
         }
 
-        private void ValidateResult(Vector256<Byte> result, Vector<Byte> value, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Vector256<Byte> result,
+            Vector<Byte> value,
+            [CallerMemberName] string method = ""
+        ) {
             Byte[] resultElements = new Byte[VectorElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Byte, byte>(ref resultElements[0]), result);
 
@@ -111,8 +124,11 @@ namespace JIT.HardwareIntrinsics.General
             ValidateResult(resultElements, valueElements, method);
         }
 
-        private void ValidateResult(Byte[] resultElements, Byte[] valueElements, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Byte[] resultElements,
+            Byte[] valueElements,
+            [CallerMemberName] string method = ""
+        ) {
             bool succeeded = true;
 
             if (resultElements.Length <= valueElements.Length)
@@ -149,9 +165,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector256<Byte>.AsVector: {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", valueElements)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector256<Byte>.AsVector: {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", valueElements)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -16,7 +16,10 @@ namespace XDocumentTests.SDMSample
             XElement element = new XElement("x");
             XText text = new XText("text-value");
             XComment comment = new XComment("comment");
-            XProcessingInstruction processingInstruction = new XProcessingInstruction("target", "data");
+            XProcessingInstruction processingInstruction = new XProcessingInstruction(
+                "target",
+                "data"
+            );
 
             Assert.Equal(XmlNodeType.Document, document.NodeType);
             Assert.Equal(XmlNodeType.Element, element.NodeType);

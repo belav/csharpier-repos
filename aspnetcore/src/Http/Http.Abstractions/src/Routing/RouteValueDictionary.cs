@@ -16,7 +16,9 @@ namespace Microsoft.AspNetCore.Routing
     /// <summary>
     /// An <see cref="IDictionary{String, Object}"/> type for route values.
     /// </summary>
-    public class RouteValueDictionary : IDictionary<string, object?>, IReadOnlyDictionary<string, object?>
+    public class RouteValueDictionary
+        : IDictionary<string, object?>,
+          IReadOnlyDictionary<string, object?>
     {
         // 4 is a good default capacity here because that leaves enough space for area/controller/action/id
         private readonly int DefaultCapacity = 4;
@@ -69,11 +71,7 @@ namespace Microsoft.AspNetCore.Routing
                 }
             }
 
-            return new RouteValueDictionary()
-            {
-                _arrayStorage = items!,
-                _count = start,
-            };
+            return new RouteValueDictionary() { _arrayStorage = items!, _count = start, };
         }
 
         /// <summary>
@@ -177,7 +175,6 @@ namespace Microsoft.AspNetCore.Routing
                 TryGetValue(key, out var value);
                 return value;
             }
-
             set
             {
                 if (key == null)
@@ -275,7 +272,10 @@ namespace Microsoft.AspNetCore.Routing
 
             if (ContainsKeyArray(key))
             {
-                var message = Resources.FormatRouteValueDictionary_DuplicateKey(key, nameof(RouteValueDictionary));
+                var message = Resources.FormatRouteValueDictionary_DuplicateKey(
+                    key,
+                    nameof(RouteValueDictionary)
+                );
                 throw new ArgumentException(message, nameof(key));
             }
 
@@ -306,7 +306,8 @@ namespace Microsoft.AspNetCore.Routing
         /// <inheritdoc />
         bool ICollection<KeyValuePair<string, object?>>.Contains(KeyValuePair<string, object?> item)
         {
-            return TryGetValue(item.Key, out var value) && EqualityComparer<object>.Default.Equals(value, item.Value);
+            return TryGetValue(item.Key, out var value)
+                && EqualityComparer<object>.Default.Equals(value, item.Value);
         }
 
         /// <inheritdoc />
@@ -334,15 +335,18 @@ namespace Microsoft.AspNetCore.Routing
         /// <inheritdoc />
         void ICollection<KeyValuePair<string, object?>>.CopyTo(
             KeyValuePair<string, object?>[] array,
-            int arrayIndex)
-        {
+            int arrayIndex
+        ) {
             if (array == null)
             {
                 throw new ArgumentNullException(nameof(array));
             }
 
-            if (arrayIndex < 0 || arrayIndex > array.Length || array.Length - arrayIndex < this.Count)
-            {
+            if (
+                arrayIndex < 0
+                || arrayIndex > array.Length
+                || array.Length - arrayIndex < this.Count
+            ) {
                 throw new ArgumentOutOfRangeException(nameof(arrayIndex));
             }
 
@@ -364,7 +368,9 @@ namespace Microsoft.AspNetCore.Routing
         }
 
         /// <inheritdoc />
-        IEnumerator<KeyValuePair<string, object?>> IEnumerable<KeyValuePair<string, object?>>.GetEnumerator()
+        IEnumerator<KeyValuePair<string, object?>> IEnumerable<
+            KeyValuePair<string, object?>
+        >.GetEnumerator()
         {
             return GetEnumerator();
         }
@@ -389,8 +395,10 @@ namespace Microsoft.AspNetCore.Routing
 
             var index = FindIndex(item.Key);
             var array = _arrayStorage;
-            if (index >= 0 && EqualityComparer<object>.Default.Equals(array[index].Value, item.Value))
-            {
+            if (
+                index >= 0
+                && EqualityComparer<object>.Default.Equals(array[index].Value, item.Value)
+            ) {
                 Array.Copy(array, index + 1, array, index, _count - index);
                 _count--;
                 array[_count] = default;
@@ -519,8 +527,13 @@ namespace Microsoft.AspNetCore.Routing
                 var storage = _propertyStorage;
                 for (var i = 0; i < storage.Properties.Length; i++)
                 {
-                    if (string.Equals(storage.Properties[i].Name, key, StringComparison.OrdinalIgnoreCase))
-                    {
+                    if (
+                        string.Equals(
+                            storage.Properties[i].Name,
+                            key,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    ) {
                         value = storage.Properties[i].GetValue(storage.Value);
                         return true;
                     }
@@ -560,7 +573,10 @@ namespace Microsoft.AspNetCore.Routing
                 for (var i = 0; i < storage.Properties.Length; i++)
                 {
                     var property = storage.Properties[i];
-                    array[i] = new KeyValuePair<string, object?>(property.Name, property.GetValue(storage.Value));
+                    array[i] = new KeyValuePair<string, object?>(
+                        property.Name,
+                        property.GetValue(storage.Value)
+                    );
                 }
 
                 _arrayStorage = array;
@@ -692,9 +708,7 @@ namespace Microsoft.AspNetCore.Routing
             /// <summary>
             /// Releases resources used by the <see cref="Enumerator"/>.
             /// </summary>
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             // Similar to the design of List<T>.Enumerator - Split into fast path and slow path for inlining friendliness
             /// <inheritdoc />
@@ -721,7 +735,10 @@ namespace Microsoft.AspNetCore.Routing
                 {
                     var storage = dictionary._propertyStorage;
                     var property = storage.Properties[_index];
-                    Current = new KeyValuePair<string, object?>(property.Name, property.GetValue(storage.Value));
+                    Current = new KeyValuePair<string, object?>(
+                        property.Name,
+                        property.GetValue(storage.Value)
+                    );
                     _index++;
                     return true;
                 }
@@ -741,7 +758,8 @@ namespace Microsoft.AspNetCore.Routing
 
         internal class PropertyStorage
         {
-            private static readonly ConcurrentDictionary<Type, PropertyHelper[]> _propertyCache = new ConcurrentDictionary<Type, PropertyHelper[]>();
+            private static readonly ConcurrentDictionary<Type, PropertyHelper[]> _propertyCache =
+                new ConcurrentDictionary<Type, PropertyHelper[]>();
 
             public readonly object Value;
             public readonly PropertyHelper[] Properties;
@@ -763,7 +781,9 @@ namespace Microsoft.AspNetCore.Routing
 
             private static void ValidatePropertyNames(Type type, PropertyHelper[] properties)
             {
-                var names = new Dictionary<string, PropertyHelper>(StringComparer.OrdinalIgnoreCase);
+                var names = new Dictionary<string, PropertyHelper>(
+                    StringComparer.OrdinalIgnoreCase
+                );
                 for (var i = 0; i < properties.Length; i++)
                 {
                     var property = properties[i];
@@ -774,7 +794,8 @@ namespace Microsoft.AspNetCore.Routing
                             type.FullName,
                             property.Name,
                             duplicate.Name,
-                            nameof(RouteValueDictionary));
+                            nameof(RouteValueDictionary)
+                        );
                         throw new InvalidOperationException(message);
                     }
 

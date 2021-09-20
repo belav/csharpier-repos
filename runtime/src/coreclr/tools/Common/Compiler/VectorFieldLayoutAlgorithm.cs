@@ -15,14 +15,18 @@ namespace ILCompiler
         private readonly FieldLayoutAlgorithm _fallbackAlgorithm;
         private readonly bool _vectorAbiIsStable;
 
-        public VectorFieldLayoutAlgorithm(FieldLayoutAlgorithm fallbackAlgorithm, bool vectorAbiIsStable = true)
-        {
+        public VectorFieldLayoutAlgorithm(
+            FieldLayoutAlgorithm fallbackAlgorithm,
+            bool vectorAbiIsStable = true
+        ) {
             _vectorAbiIsStable = vectorAbiIsStable;
             _fallbackAlgorithm = fallbackAlgorithm;
         }
 
-        public override ComputedInstanceFieldLayout ComputeInstanceLayout(DefType defType, InstanceLayoutKind layoutKind)
-        {
+        public override ComputedInstanceFieldLayout ComputeInstanceLayout(
+            DefType defType,
+            InstanceLayoutKind layoutKind
+        ) {
             Debug.Assert(IsVectorType(defType));
 
             LayoutInt alignment;
@@ -36,7 +40,7 @@ namespace ILCompiler
             {
                 if (defType.Context.Target.Architecture == TargetArchitecture.ARM)
                 {
-                    // The Procedure Call Standard for ARM defaults to 8-byte alignment for __m128 
+                    // The Procedure Call Standard for ARM defaults to 8-byte alignment for __m128
                     alignment = new LayoutInt(8);
                 }
                 else
@@ -50,13 +54,13 @@ namespace ILCompiler
 
                 if (defType.Context.Target.Architecture == TargetArchitecture.ARM)
                 {
-                    // No such type exists for the Procedure Call Standard for ARM. We will default 
+                    // No such type exists for the Procedure Call Standard for ARM. We will default
                     // to the same alignment as __m128, which is supported by the ABI.
                     alignment = new LayoutInt(8);
                 }
                 else if (defType.Context.Target.Architecture == TargetArchitecture.ARM64)
                 {
-                    // The Procedure Call Standard for ARM 64-bit (with SVE support) defaults to 
+                    // The Procedure Call Standard for ARM 64-bit (with SVE support) defaults to
                     // 16-byte alignment for __m256.
                     alignment = new LayoutInt(16);
                 }
@@ -66,7 +70,8 @@ namespace ILCompiler
                 }
             }
 
-            ComputedInstanceFieldLayout layoutFromMetadata = _fallbackAlgorithm.ComputeInstanceLayout(defType, layoutKind);
+            ComputedInstanceFieldLayout layoutFromMetadata =
+                _fallbackAlgorithm.ComputeInstanceLayout(defType, layoutKind);
 
             return new ComputedInstanceFieldLayout
             {
@@ -79,8 +84,10 @@ namespace ILCompiler
             };
         }
 
-        public override ComputedStaticFieldLayout ComputeStaticFieldLayout(DefType defType, StaticLayoutKind layoutKind)
-        {
+        public override ComputedStaticFieldLayout ComputeStaticFieldLayout(
+            DefType defType,
+            StaticLayoutKind layoutKind
+        ) {
             return _fallbackAlgorithm.ComputeStaticFieldLayout(defType, layoutKind);
         }
 
@@ -90,11 +97,13 @@ namespace ILCompiler
             return false;
         }
 
-        public override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(DefType type)
-        {
-            if (type.Context.Target.Architecture == TargetArchitecture.ARM64 &&
-                type.Instantiation[0].IsPrimitiveNumeric)
-            {
+        public override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(
+            DefType type
+        ) {
+            if (
+                type.Context.Target.Architecture == TargetArchitecture.ARM64
+                && type.Instantiation[0].IsPrimitiveNumeric
+            ) {
                 return type.InstanceFieldSize.AsInt switch
                 {
                     8 => ValueTypeShapeCharacteristics.Vector64Aggregate,
@@ -107,11 +116,13 @@ namespace ILCompiler
 
         public static bool IsVectorType(DefType type)
         {
-            return type.IsIntrinsic &&
-                type.Namespace == "System.Runtime.Intrinsics" &&
-                (type.Name == "Vector64`1" ||
-                type.Name == "Vector128`1" ||
-                type.Name == "Vector256`1");
+            return type.IsIntrinsic
+                && type.Namespace == "System.Runtime.Intrinsics"
+                && (
+                    type.Name == "Vector64`1"
+                    || type.Name == "Vector128`1"
+                    || type.Name == "Vector256`1"
+                );
         }
     }
 }

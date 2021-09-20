@@ -27,7 +27,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// 
         /// Entry will be lazily filled in.
         /// </summary>
-        private readonly ConcurrentDictionary<string, ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>>> _hostDiagnosticAnalyzersPerLanguageMap;
+        private readonly ConcurrentDictionary<
+            string,
+            ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>>
+        > _hostDiagnosticAnalyzersPerLanguageMap;
 
         /// <summary>
         /// Key is <see cref="AnalyzerReference.Id"/>.
@@ -36,7 +39,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// 
         /// We populate it lazily. otherwise, we will bring in all analyzers preemptively
         /// </summary>
-        private readonly Lazy<ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>>> _lazyHostDiagnosticAnalyzersPerReferenceMap;
+        private readonly Lazy<
+            ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>>
+        > _lazyHostDiagnosticAnalyzersPerReferenceMap;
 
         /// <summary>
         /// Maps <see cref="LanguageNames"/> to compiler diagnostic analyzers.
@@ -51,49 +56,95 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// It is quite common for multiple projects to have the same set of analyzer references, yet we will create
         /// multiple instances of the analyzer list and thus not share the info.
         /// </remarks>
-        private readonly ConditionalWeakTable<IReadOnlyList<AnalyzerReference>, StrongBox<ImmutableDictionary<string, SkippedHostAnalyzersInfo>>> _skippedHostAnalyzers;
+        private readonly ConditionalWeakTable<
+            IReadOnlyList<AnalyzerReference>,
+            StrongBox<ImmutableDictionary<string, SkippedHostAnalyzersInfo>>
+        > _skippedHostAnalyzers;
 
         internal HostDiagnosticAnalyzers(IEnumerable<AnalyzerReference> hostAnalyzerReferences)
         {
             _hostAnalyzerReferencesMap = CreateAnalyzerReferencesMap(hostAnalyzerReferences);
-            _hostDiagnosticAnalyzersPerLanguageMap = new ConcurrentDictionary<string, ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>>>(concurrencyLevel: 2, capacity: 2);
-            _lazyHostDiagnosticAnalyzersPerReferenceMap = new Lazy<ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>>>(() => CreateDiagnosticAnalyzersPerReferenceMap(_hostAnalyzerReferencesMap), isThreadSafe: true);
+            _hostDiagnosticAnalyzersPerLanguageMap = new ConcurrentDictionary<
+                string,
+                ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>>
+            >(concurrencyLevel: 2, capacity: 2);
+            _lazyHostDiagnosticAnalyzersPerReferenceMap = new Lazy<
+                ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>>
+            >(
+                () => CreateDiagnosticAnalyzersPerReferenceMap(_hostAnalyzerReferencesMap),
+                isThreadSafe: true
+            );
 
             _compilerDiagnosticAnalyzerMap = ImmutableDictionary<string, DiagnosticAnalyzer>.Empty;
-            _skippedHostAnalyzers = new ConditionalWeakTable<IReadOnlyList<AnalyzerReference>, StrongBox<ImmutableDictionary<string, SkippedHostAnalyzersInfo>>>();
+            _skippedHostAnalyzers = new ConditionalWeakTable<
+                IReadOnlyList<AnalyzerReference>,
+                StrongBox<ImmutableDictionary<string, SkippedHostAnalyzersInfo>>
+            >();
         }
 
         /// <summary>
         /// It returns a map with <see cref="AnalyzerReference.Id"/> as key and <see cref="AnalyzerReference"/> as value
         /// </summary>
-        public ImmutableDictionary<object, AnalyzerReference> GetHostAnalyzerReferencesMap()
-            => _hostAnalyzerReferencesMap;
+        public ImmutableDictionary<object, AnalyzerReference> GetHostAnalyzerReferencesMap() =>
+            _hostAnalyzerReferencesMap;
 
         /// <summary>
         /// Get <see cref="AnalyzerReference"/> identity and <see cref="DiagnosticAnalyzer"/>s map for given <paramref name="language"/>
-        /// </summary> 
-        public ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>> GetOrCreateHostDiagnosticAnalyzersPerReference(string language)
-            => _hostDiagnosticAnalyzersPerLanguageMap.GetOrAdd(language, CreateHostDiagnosticAnalyzersAndBuildMap);
+        /// </summary>
+        public ImmutableDictionary<
+            object,
+            ImmutableArray<DiagnosticAnalyzer>
+        > GetOrCreateHostDiagnosticAnalyzersPerReference(string language) =>
+            _hostDiagnosticAnalyzersPerLanguageMap.GetOrAdd(
+                language,
+                CreateHostDiagnosticAnalyzersAndBuildMap
+            );
 
-        public ImmutableDictionary<string, ImmutableArray<DiagnosticDescriptor>> GetDiagnosticDescriptorsPerReference(DiagnosticAnalyzerInfoCache infoCache)
+        public ImmutableDictionary<
+            string,
+            ImmutableArray<DiagnosticDescriptor>
+        > GetDiagnosticDescriptorsPerReference(DiagnosticAnalyzerInfoCache infoCache)
         {
             return ConvertReferenceIdentityToName(
-                CreateDiagnosticDescriptorsPerReference(infoCache, _lazyHostDiagnosticAnalyzersPerReferenceMap.Value),
-                _hostAnalyzerReferencesMap);
+                CreateDiagnosticDescriptorsPerReference(
+                    infoCache,
+                    _lazyHostDiagnosticAnalyzersPerReferenceMap.Value
+                ),
+                _hostAnalyzerReferencesMap
+            );
         }
 
-        public ImmutableDictionary<string, ImmutableArray<DiagnosticDescriptor>> GetDiagnosticDescriptorsPerReference(DiagnosticAnalyzerInfoCache infoCache, Project project)
-        {
-            var descriptorPerReference = CreateDiagnosticDescriptorsPerReference(infoCache, CreateDiagnosticAnalyzersPerReference(project));
-            var map = _hostAnalyzerReferencesMap.AddRange(CreateProjectAnalyzerReferencesMap(project.AnalyzerReferences));
+        public ImmutableDictionary<
+            string,
+            ImmutableArray<DiagnosticDescriptor>
+        > GetDiagnosticDescriptorsPerReference(
+            DiagnosticAnalyzerInfoCache infoCache,
+            Project project
+        ) {
+            var descriptorPerReference = CreateDiagnosticDescriptorsPerReference(
+                infoCache,
+                CreateDiagnosticAnalyzersPerReference(project)
+            );
+            var map = _hostAnalyzerReferencesMap.AddRange(
+                CreateProjectAnalyzerReferencesMap(project.AnalyzerReferences)
+            );
             return ConvertReferenceIdentityToName(descriptorPerReference, map);
         }
 
-        private static ImmutableDictionary<string, ImmutableArray<DiagnosticDescriptor>> ConvertReferenceIdentityToName(
-            ImmutableDictionary<object, ImmutableArray<DiagnosticDescriptor>> descriptorsPerReference,
-            ImmutableDictionary<object, AnalyzerReference> map)
-        {
-            var builder = ImmutableDictionary.CreateBuilder<string, ImmutableArray<DiagnosticDescriptor>>();
+        private static ImmutableDictionary<
+            string,
+            ImmutableArray<DiagnosticDescriptor>
+        > ConvertReferenceIdentityToName(
+            ImmutableDictionary<
+                object,
+                ImmutableArray<DiagnosticDescriptor>
+            > descriptorsPerReference,
+            ImmutableDictionary<object, AnalyzerReference> map
+        ) {
+            var builder = ImmutableDictionary.CreateBuilder<
+                string,
+                ImmutableArray<DiagnosticDescriptor>
+            >();
 
             foreach (var (id, descriptors) in descriptorsPerReference)
             {
@@ -121,10 +172,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// Create <see cref="AnalyzerReference"/> identity and <see cref="DiagnosticAnalyzer"/>s map for given <paramref name="project"/> that
         /// includes both host and project analyzers
         /// </summary>
-        public ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>> CreateDiagnosticAnalyzersPerReference(Project project)
+        public ImmutableDictionary<
+            object,
+            ImmutableArray<DiagnosticAnalyzer>
+        > CreateDiagnosticAnalyzersPerReference(Project project)
         {
-            var hostAnalyzerReferences = GetOrCreateHostDiagnosticAnalyzersPerReference(project.Language);
-            var projectAnalyzerReferences = CreateProjectDiagnosticAnalyzersPerReference(project.AnalyzerReferences, project.Language);
+            var hostAnalyzerReferences = GetOrCreateHostDiagnosticAnalyzersPerReference(
+                project.Language
+            );
+            var projectAnalyzerReferences = CreateProjectDiagnosticAnalyzersPerReference(
+                project.AnalyzerReferences,
+                project.Language
+            );
 
             return MergeDiagnosticAnalyzerMap(hostAnalyzerReferences, projectAnalyzerReferences);
         }
@@ -133,11 +192,26 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// Create <see cref="AnalyzerReference"/> identity and <see cref="DiagnosticAnalyzer"/>s map for given <paramref name="project"/> that
         /// has only project analyzers
         /// </summary>
-        public ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>> CreateProjectDiagnosticAnalyzersPerReference(Project project)
-            => CreateProjectDiagnosticAnalyzersPerReference(project.AnalyzerReferences, project.Language);
+        public ImmutableDictionary<
+            object,
+            ImmutableArray<DiagnosticAnalyzer>
+        > CreateProjectDiagnosticAnalyzersPerReference(Project project) =>
+            CreateProjectDiagnosticAnalyzersPerReference(
+                project.AnalyzerReferences,
+                project.Language
+            );
 
-        public ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>> CreateProjectDiagnosticAnalyzersPerReference(IReadOnlyList<AnalyzerReference> projectAnalyzerReferences, string language)
-            => CreateDiagnosticAnalyzersPerReferenceMap(CreateProjectAnalyzerReferencesMap(projectAnalyzerReferences), language);
+        public ImmutableDictionary<
+            object,
+            ImmutableArray<DiagnosticAnalyzer>
+        > CreateProjectDiagnosticAnalyzersPerReference(
+            IReadOnlyList<AnalyzerReference> projectAnalyzerReferences,
+            string language
+        ) =>
+            CreateDiagnosticAnalyzersPerReferenceMap(
+                CreateProjectAnalyzerReferencesMap(projectAnalyzerReferences),
+                language
+            );
 
         /// <summary>
         /// Return compiler <see cref="DiagnosticAnalyzer"/> for the given language.
@@ -153,14 +227,26 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return null;
         }
 
-        private ImmutableDictionary<object, AnalyzerReference> CreateProjectAnalyzerReferencesMap(IReadOnlyList<AnalyzerReference> projectAnalyzerReferences)
-            => CreateAnalyzerReferencesMap(projectAnalyzerReferences.Where(reference => !_hostAnalyzerReferencesMap.ContainsKey(reference.Id)));
+        private ImmutableDictionary<object, AnalyzerReference> CreateProjectAnalyzerReferencesMap(
+            IReadOnlyList<AnalyzerReference> projectAnalyzerReferences
+        ) =>
+            CreateAnalyzerReferencesMap(
+                projectAnalyzerReferences.Where(
+                    reference => !_hostAnalyzerReferencesMap.ContainsKey(reference.Id)
+                )
+            );
 
-        private static ImmutableDictionary<object, ImmutableArray<DiagnosticDescriptor>> CreateDiagnosticDescriptorsPerReference(
+        private static ImmutableDictionary<
+            object,
+            ImmutableArray<DiagnosticDescriptor>
+        > CreateDiagnosticDescriptorsPerReference(
             DiagnosticAnalyzerInfoCache infoCache,
-            ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>> analyzersMap)
-        {
-            var builder = ImmutableDictionary.CreateBuilder<object, ImmutableArray<DiagnosticDescriptor>>();
+            ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>> analyzersMap
+        ) {
+            var builder = ImmutableDictionary.CreateBuilder<
+                object,
+                ImmutableArray<DiagnosticDescriptor>
+            >();
             foreach (var (referenceId, analyzers) in analyzersMap)
             {
                 var descriptors = ImmutableArray.CreateBuilder<DiagnosticDescriptor>();
@@ -177,11 +263,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return builder.ToImmutable();
         }
 
-        private ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>> CreateHostDiagnosticAnalyzersAndBuildMap(string language)
+        private ImmutableDictionary<
+            object,
+            ImmutableArray<DiagnosticAnalyzer>
+        > CreateHostDiagnosticAnalyzersAndBuildMap(string language)
         {
             Contract.ThrowIfNull(language);
 
-            var builder = ImmutableDictionary.CreateBuilder<object, ImmutableArray<DiagnosticAnalyzer>>();
+            var builder = ImmutableDictionary.CreateBuilder<
+                object,
+                ImmutableArray<DiagnosticAnalyzer>
+            >();
             foreach (var (referenceIdentity, reference) in _hostAnalyzerReferencesMap)
             {
                 var analyzers = reference.GetAnalyzers(language);
@@ -199,8 +291,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return builder.ToImmutable();
         }
 
-        private void UpdateCompilerAnalyzerMapIfNeeded(string language, ImmutableArray<DiagnosticAnalyzer> analyzers)
-        {
+        private void UpdateCompilerAnalyzerMapIfNeeded(
+            string language,
+            ImmutableArray<DiagnosticAnalyzer> analyzers
+        ) {
             if (_compilerDiagnosticAnalyzerMap.ContainsKey(language))
             {
                 return;
@@ -210,20 +304,34 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 if (analyzer.IsCompilerAnalyzer())
                 {
-                    ImmutableInterlocked.GetOrAdd(ref _compilerDiagnosticAnalyzerMap, language, analyzer);
+                    ImmutableInterlocked.GetOrAdd(
+                        ref _compilerDiagnosticAnalyzerMap,
+                        language,
+                        analyzer
+                    );
                     return;
                 }
             }
         }
 
-        private static ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>> CreateDiagnosticAnalyzersPerReferenceMap(
-            IDictionary<object, AnalyzerReference> analyzerReferencesMap, string? language = null)
-        {
-            var builder = ImmutableDictionary.CreateBuilder<object, ImmutableArray<DiagnosticAnalyzer>>();
+        private static ImmutableDictionary<
+            object,
+            ImmutableArray<DiagnosticAnalyzer>
+        > CreateDiagnosticAnalyzersPerReferenceMap(
+            IDictionary<object, AnalyzerReference> analyzerReferencesMap,
+            string? language = null
+        ) {
+            var builder = ImmutableDictionary.CreateBuilder<
+                object,
+                ImmutableArray<DiagnosticAnalyzer>
+            >();
 
             foreach (var reference in analyzerReferencesMap)
             {
-                var analyzers = language == null ? reference.Value.GetAnalyzersForAllLanguages() : reference.Value.GetAnalyzers(language);
+                var analyzers =
+                    language == null
+                        ? reference.Value.GetAnalyzersForAllLanguages()
+                        : reference.Value.GetAnalyzers(language);
                 if (analyzers.Length == 0)
                 {
                     continue;
@@ -236,8 +344,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return builder.ToImmutable();
         }
 
-        private static ImmutableDictionary<object, AnalyzerReference> CreateAnalyzerReferencesMap(IEnumerable<AnalyzerReference> analyzerReferences)
-        {
+        private static ImmutableDictionary<object, AnalyzerReference> CreateAnalyzerReferencesMap(
+            IEnumerable<AnalyzerReference> analyzerReferences
+        ) {
             var builder = ImmutableDictionary.CreateBuilder<object, AnalyzerReference>();
             foreach (var reference in analyzerReferences)
             {
@@ -255,10 +364,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return builder.ToImmutable();
         }
 
-        private static ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>> MergeDiagnosticAnalyzerMap(
+        private static ImmutableDictionary<
+            object,
+            ImmutableArray<DiagnosticAnalyzer>
+        > MergeDiagnosticAnalyzerMap(
             ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>> map1,
-            ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>> map2)
-        {
+            ImmutableDictionary<object, ImmutableArray<DiagnosticAnalyzer>> map2
+        ) {
             var current = map1;
             var seen = new HashSet<DiagnosticAnalyzer>(map1.Values.SelectMany(v => v));
 
@@ -269,14 +381,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     continue;
                 }
 
-                current = current.Add(referenceIdentity, analyzers.Where(a => seen.Add(a)).ToImmutableArray());
+                current = current.Add(
+                    referenceIdentity,
+                    analyzers.Where(a => seen.Add(a)).ToImmutableArray()
+                );
             }
 
             return current;
         }
 
-        public SkippedHostAnalyzersInfo GetSkippedAnalyzersInfo(Project project, DiagnosticAnalyzerInfoCache infoCache)
-        {
+        public SkippedHostAnalyzersInfo GetSkippedAnalyzersInfo(
+            Project project,
+            DiagnosticAnalyzerInfoCache infoCache
+        ) {
             var box = _skippedHostAnalyzers.GetOrCreateValue(project.AnalyzerReferences);
 
             if (box.Value != null && box.Value.TryGetValue(project.Language, out var info))
@@ -290,7 +407,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 if (!box.Value.TryGetValue(project.Language, out info))
                 {
-                    info = SkippedHostAnalyzersInfo.Create(this, project.AnalyzerReferences, project.Language, infoCache);
+                    info = SkippedHostAnalyzersInfo.Create(
+                        this,
+                        project.AnalyzerReferences,
+                        project.Language,
+                        infoCache
+                    );
                     box.Value = box.Value.Add(project.Language, info);
                 }
 

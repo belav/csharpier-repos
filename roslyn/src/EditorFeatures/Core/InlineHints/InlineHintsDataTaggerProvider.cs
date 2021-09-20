@@ -43,39 +43,101 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
         /// is desirable is 'cut line'. If the tags aren't removed, then the line will be gone but the tags will remain
         /// at whatever points the tracking spans moved them to.
         /// </summary>
-        protected override TaggerTextChangeBehavior TextChangeBehavior => TaggerTextChangeBehavior.RemoveTagsThatIntersectEdits;
+        protected override TaggerTextChangeBehavior TextChangeBehavior =>
+            TaggerTextChangeBehavior.RemoveTagsThatIntersectEdits;
 
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         [ImportingConstructor]
         public InlineHintsDataTaggerProvider(
             IThreadingContext threadingContext,
             IAsynchronousOperationListenerProvider listenerProvider,
-            IForegroundNotificationService notificationService)
-            : base(threadingContext, listenerProvider.GetListener(FeatureAttribute.InlineParameterNameHints), notificationService)
-        {
+            IForegroundNotificationService notificationService
+        ) : base(
+            threadingContext,
+            listenerProvider.GetListener(FeatureAttribute.InlineParameterNameHints),
+            notificationService
+        ) {
             _listener = listenerProvider.GetListener(FeatureAttribute.InlineParameterNameHints);
         }
 
-        protected override ITaggerEventSource CreateEventSource(ITextView textViewOpt, ITextBuffer subjectBuffer)
-        {
+        protected override ITaggerEventSource CreateEventSource(
+            ITextView textViewOpt,
+            ITextBuffer subjectBuffer
+        ) {
             return TaggerEventSources.Compose(
-                TaggerEventSources.OnViewSpanChanged(ThreadingContext, textViewOpt, textChangeDelay: TaggerDelay.Short, scrollChangeDelay: TaggerDelay.NearImmediate),
-                TaggerEventSources.OnWorkspaceChanged(subjectBuffer, TaggerDelay.NearImmediate, _listener),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineHintsOptions.DisplayAllOverride, TaggerDelay.NearImmediate),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineHintsOptions.EnabledForParameters, TaggerDelay.NearImmediate),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineHintsOptions.ForLiteralParameters, TaggerDelay.NearImmediate),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineHintsOptions.ForObjectCreationParameters, TaggerDelay.NearImmediate),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineHintsOptions.ForOtherParameters, TaggerDelay.NearImmediate),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineHintsOptions.SuppressForParametersThatMatchMethodIntent, TaggerDelay.NearImmediate),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineHintsOptions.SuppressForParametersThatDifferOnlyBySuffix, TaggerDelay.NearImmediate),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineHintsOptions.EnabledForTypes, TaggerDelay.NearImmediate),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineHintsOptions.ForImplicitVariableTypes, TaggerDelay.NearImmediate),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineHintsOptions.ForLambdaParameterTypes, TaggerDelay.NearImmediate),
-                TaggerEventSources.OnOptionChanged(subjectBuffer, InlineHintsOptions.ForImplicitObjectCreation, TaggerDelay.NearImmediate));
+                TaggerEventSources.OnViewSpanChanged(
+                    ThreadingContext,
+                    textViewOpt,
+                    textChangeDelay: TaggerDelay.Short,
+                    scrollChangeDelay: TaggerDelay.NearImmediate
+                ),
+                TaggerEventSources.OnWorkspaceChanged(
+                    subjectBuffer,
+                    TaggerDelay.NearImmediate,
+                    _listener
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineHintsOptions.DisplayAllOverride,
+                    TaggerDelay.NearImmediate
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineHintsOptions.EnabledForParameters,
+                    TaggerDelay.NearImmediate
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineHintsOptions.ForLiteralParameters,
+                    TaggerDelay.NearImmediate
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineHintsOptions.ForObjectCreationParameters,
+                    TaggerDelay.NearImmediate
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineHintsOptions.ForOtherParameters,
+                    TaggerDelay.NearImmediate
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineHintsOptions.SuppressForParametersThatMatchMethodIntent,
+                    TaggerDelay.NearImmediate
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineHintsOptions.SuppressForParametersThatDifferOnlyBySuffix,
+                    TaggerDelay.NearImmediate
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineHintsOptions.EnabledForTypes,
+                    TaggerDelay.NearImmediate
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineHintsOptions.ForImplicitVariableTypes,
+                    TaggerDelay.NearImmediate
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineHintsOptions.ForLambdaParameterTypes,
+                    TaggerDelay.NearImmediate
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    InlineHintsOptions.ForImplicitObjectCreation,
+                    TaggerDelay.NearImmediate
+                )
+            );
         }
 
-        protected override IEnumerable<SnapshotSpan> GetSpansToTag(ITextView textView, ITextBuffer subjectBuffer)
-        {
+        protected override IEnumerable<SnapshotSpan> GetSpansToTag(
+            ITextView textView,
+            ITextBuffer subjectBuffer
+        ) {
             this.AssertIsForeground();
 
             // Find the visible span some 100 lines +/- what's actually in view.  This way
@@ -90,8 +152,11 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             return SpecializedCollections.SingletonEnumerable(visibleSpanOpt.Value);
         }
 
-        protected override async Task ProduceTagsAsync(TaggerContext<InlineHintDataTag> context, DocumentSnapshotSpan documentSnapshotSpan, int? caretPosition)
-        {
+        protected override async Task ProduceTagsAsync(
+            TaggerContext<InlineHintDataTag> context,
+            DocumentSnapshotSpan documentSnapshotSpan,
+            int? caretPosition
+        ) {
             var cancellationToken = context.CancellationToken;
             var document = documentSnapshotSpan.Document;
             if (document == null)
@@ -102,16 +167,24 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 return;
 
             var snapshotSpan = documentSnapshotSpan.SnapshotSpan;
-            var hints = await service.GetInlineHintsAsync(document, snapshotSpan.Span.ToTextSpan(), cancellationToken).ConfigureAwait(false);
+            var hints = await service.GetInlineHintsAsync(
+                    document,
+                    snapshotSpan.Span.ToTextSpan(),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             foreach (var hint in hints)
             {
                 // If we don't have any text to actually show the user, then don't make a tag.
                 if (hint.DisplayParts.Sum(p => p.ToString().Length) == 0)
                     continue;
 
-                context.AddTag(new TagSpan<InlineHintDataTag>(
-                    hint.Span.ToSnapshotSpan(snapshotSpan.Snapshot),
-                    new InlineHintDataTag(hint)));
+                context.AddTag(
+                    new TagSpan<InlineHintDataTag>(
+                        hint.Span.ToSnapshotSpan(snapshotSpan.Snapshot),
+                        new InlineHintDataTag(hint)
+                    )
+                );
             }
         }
     }

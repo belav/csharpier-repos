@@ -12,26 +12,37 @@ internal static partial class Interop
     internal static partial class Crypto
     {
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpPKeyCtxCreate")]
-        internal static extern SafeEvpPKeyCtxHandle EvpPKeyCtxCreate(SafeEvpPKeyHandle pkey, SafeEvpPKeyHandle peerkey, out uint secretLength);
+        internal static extern SafeEvpPKeyCtxHandle EvpPKeyCtxCreate(
+            SafeEvpPKeyHandle pkey,
+            SafeEvpPKeyHandle peerkey,
+            out uint secretLength
+        );
 
-        [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpPKeyDeriveSecretAgreement")]
+        [DllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_EvpPKeyDeriveSecretAgreement"
+        )]
         private static extern int EvpPKeyDeriveSecretAgreement(
             ref byte secret,
             uint secretLength,
-            SafeEvpPKeyCtxHandle ctx);
+            SafeEvpPKeyCtxHandle ctx
+        );
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpPKeyCtxDestroy")]
         internal static extern void EvpPKeyCtxDestroy(IntPtr ctx);
 
-        internal static void EvpPKeyDeriveSecretAgreement(SafeEvpPKeyCtxHandle ctx, Span<byte> destination)
-        {
+        internal static void EvpPKeyDeriveSecretAgreement(
+            SafeEvpPKeyCtxHandle ctx,
+            Span<byte> destination
+        ) {
             Debug.Assert(ctx != null);
             Debug.Assert(!ctx.IsInvalid);
 
             int ret = EvpPKeyDeriveSecretAgreement(
                 ref MemoryMarshal.GetReference(destination),
                 (uint)destination.Length,
-                ctx);
+                ctx
+            );
 
             if (ret != 1)
             {

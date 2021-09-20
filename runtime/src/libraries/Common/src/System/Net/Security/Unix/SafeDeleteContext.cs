@@ -15,8 +15,7 @@ namespace System.Net.Security
 #endif
         private SafeFreeCredentials _credential;
 
-        protected SafeDeleteContext(SafeFreeCredentials credential)
-            : base(IntPtr.Zero, true)
+        protected SafeDeleteContext(SafeFreeCredentials credential) : base(IntPtr.Zero, true)
         {
             Debug.Assert((null != credential), "Invalid credential passed to SafeDeleteContext");
 

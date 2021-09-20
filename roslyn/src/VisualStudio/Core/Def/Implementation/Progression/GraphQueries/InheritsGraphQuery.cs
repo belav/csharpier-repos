@@ -21,9 +21,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 {
     internal sealed class InheritsGraphQuery : IGraphQuery
     {
-        public async Task<GraphBuilder> GetGraphAsync(Solution solution, IGraphContext context, CancellationToken cancellationToken)
-        {
-            var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(solution, context.InputNodes, cancellationToken).ConfigureAwait(false);
+        public async Task<GraphBuilder> GetGraphAsync(
+            Solution solution,
+            IGraphContext context,
+            CancellationToken cancellationToken
+        ) {
+            var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(
+                    solution,
+                    context.InputNodes,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             var nodesToProcess = context.InputNodes;
 
             for (var depth = 0; depth < context.LinkDepth; depth++)
@@ -39,18 +47,35 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         if (namedType.BaseType != null)
                         {
                             var baseTypeNode = await graphBuilder.AddNodeAsync(
-                                namedType.BaseType, relatedNode: node).ConfigureAwait(false);
+                                    namedType.BaseType,
+                                    relatedNode: node
+                                )
+                                .ConfigureAwait(false);
                             newNodes.Add(baseTypeNode);
-                            graphBuilder.AddLink(node, CodeLinkCategories.InheritsFrom, baseTypeNode);
+                            graphBuilder.AddLink(
+                                node,
+                                CodeLinkCategories.InheritsFrom,
+                                baseTypeNode
+                            );
                         }
-                        else if (namedType.TypeKind == TypeKind.Interface && !namedType.OriginalDefinition.AllInterfaces.IsEmpty)
-                        {
-                            foreach (var baseNode in namedType.OriginalDefinition.AllInterfaces.Distinct())
-                            {
+                        else if (
+                            namedType.TypeKind == TypeKind.Interface
+                            && !namedType.OriginalDefinition.AllInterfaces.IsEmpty
+                        ) {
+                            foreach (
+                                var baseNode in namedType.OriginalDefinition.AllInterfaces.Distinct()
+                            ) {
                                 var baseTypeNode = await graphBuilder.AddNodeAsync(
-                                    baseNode, relatedNode: node).ConfigureAwait(false);
+                                        baseNode,
+                                        relatedNode: node
+                                    )
+                                    .ConfigureAwait(false);
                                 newNodes.Add(baseTypeNode);
-                                graphBuilder.AddLink(node, CodeLinkCategories.InheritsFrom, baseTypeNode);
+                                graphBuilder.AddLink(
+                                    node,
+                                    CodeLinkCategories.InheritsFrom,
+                                    baseTypeNode
+                                );
                             }
                         }
                     }

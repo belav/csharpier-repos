@@ -14,22 +14,36 @@ namespace Internal.IO
             Interop.Kernel32.WIN32_FILE_ATTRIBUTE_DATA data = default;
             int errorCode = FillAttributeInfo(fullPath, ref data, returnErrorOnNotFound: true);
 
-            return (errorCode == 0) && (data.dwFileAttributes != -1)
-                    && ((data.dwFileAttributes & Interop.Kernel32.FileAttributes.FILE_ATTRIBUTE_DIRECTORY) == 0);
+            return (errorCode == 0)
+                && (data.dwFileAttributes != -1)
+                && (
+                    (
+                        data.dwFileAttributes
+                        & Interop.Kernel32.FileAttributes.FILE_ATTRIBUTE_DIRECTORY
+                    ) == 0
+                );
         }
 
         /// <summary>
         /// Returns 0 on success, otherwise a Win32 error code.  Note that
         /// classes should use -1 as the uninitialized state for dataInitialized.
         /// </summary>
-        internal static int FillAttributeInfo(string path, ref Interop.Kernel32.WIN32_FILE_ATTRIBUTE_DATA data, bool returnErrorOnNotFound)
-        {
+        internal static int FillAttributeInfo(
+            string path,
+            ref Interop.Kernel32.WIN32_FILE_ATTRIBUTE_DATA data,
+            bool returnErrorOnNotFound
+        ) {
             int errorCode = Interop.Errors.ERROR_SUCCESS;
 
             using (DisableMediaInsertionPrompt.Create())
             {
-                if (!Interop.Kernel32.GetFileAttributesEx(path, Interop.Kernel32.GET_FILEEX_INFO_LEVELS.GetFileExInfoStandard, ref data))
-                {
+                if (
+                    !Interop.Kernel32.GetFileAttributesEx(
+                        path,
+                        Interop.Kernel32.GET_FILEEX_INFO_LEVELS.GetFileExInfoStandard,
+                        ref data
+                    )
+                ) {
                     errorCode = Marshal.GetLastWin32Error();
                     if (errorCode == Interop.Errors.ERROR_ACCESS_DENIED)
                     {
@@ -39,8 +53,12 @@ namespace Internal.IO
                         // for marked-for-deletion files.
 
                         Interop.Kernel32.WIN32_FIND_DATA findData = default;
-                        using (SafeFindHandle handle = Interop.Kernel32.FindFirstFile(path, ref findData))
-                        {
+                        using (
+                            SafeFindHandle handle = Interop.Kernel32.FindFirstFile(
+                                path,
+                                ref findData
+                            )
+                        ) {
                             if (handle.IsInvalid)
                             {
                                 errorCode = Marshal.GetLastWin32Error();

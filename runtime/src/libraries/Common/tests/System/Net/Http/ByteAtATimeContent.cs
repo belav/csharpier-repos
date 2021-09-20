@@ -14,10 +14,20 @@ namespace System.Net.Http.Functional.Tests
         private readonly int _length;
         private readonly int _millisecondDelayBetweenBytes;
 
-        public ByteAtATimeContent(int length) : this(length, Task.CompletedTask, new TaskCompletionSource<bool>(), millisecondDelayBetweenBytes: 0) { }
+        public ByteAtATimeContent(int length)
+            : this(
+                length,
+                Task.CompletedTask,
+                new TaskCompletionSource<bool>(),
+                millisecondDelayBetweenBytes: 0
+            ) { }
 
-        public ByteAtATimeContent(int length, Task waitToSend, TaskCompletionSource<bool> startedSend, int millisecondDelayBetweenBytes)
-        {
+        public ByteAtATimeContent(
+            int length,
+            Task waitToSend,
+            TaskCompletionSource<bool> startedSend,
+            int millisecondDelayBetweenBytes
+        ) {
             _length = length;
             _waitToSend = waitToSend;
             _startedSend = startedSend;
@@ -25,12 +35,17 @@ namespace System.Net.Http.Functional.Tests
         }
 
 #if NETCOREAPP
-        protected override void SerializeToStream(Stream stream, TransportContext context, CancellationToken cancellationToken) =>
-            SerializeToStreamAsync(stream, context).GetAwaiter().GetResult();
+        protected override void SerializeToStream(
+            Stream stream,
+            TransportContext context,
+            CancellationToken cancellationToken
+        ) => SerializeToStreamAsync(stream, context).GetAwaiter().GetResult();
 #endif
 
-        protected override async Task SerializeToStreamAsync(Stream stream, TransportContext context)
-        {
+        protected override async Task SerializeToStreamAsync(
+            Stream stream,
+            TransportContext context
+        ) {
             await _waitToSend;
             _startedSend.SetResult(true);
 

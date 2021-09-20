@@ -23,8 +23,9 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         public static ApiResourceBuilder ApiResource(string name)
         {
             var apiResource = new ApiResource(name);
-            return new ApiResourceBuilder(apiResource)
-                .WithApplicationProfile(ApplicationProfiles.API)
+            return new ApiResourceBuilder(apiResource).WithApplicationProfile(
+                    ApplicationProfiles.API
+                )
                 .WithScopes(name);
         }
 
@@ -36,16 +37,15 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         public static ApiResourceBuilder IdentityServerJwt(string name)
         {
             var apiResource = new ApiResource(name);
-            return new ApiResourceBuilder(apiResource)
-                .WithApplicationProfile(ApplicationProfiles.IdentityServerJwt);
+            return new ApiResourceBuilder(apiResource).WithApplicationProfile(
+                ApplicationProfiles.IdentityServerJwt
+            );
         }
 
         /// <summary>
         /// Initializes a new instance of <see cref="ApiResourceBuilder"/>.
         /// </summary>
-        public ApiResourceBuilder() : this(new ApiResource())
-        {
-        }
+        public ApiResourceBuilder() : this(new ApiResource()) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="ApiResourceBuilder"/>.
@@ -105,10 +105,11 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         /// <returns>The <see cref="ApiResourceBuilder"/>.</returns>
         public ApiResourceBuilder AllowAllClients()
         {
-            _apiResource.Properties[ApplicationProfilesPropertyNames.Clients] = ApplicationProfilesPropertyValues.AllowAllApplications;
+            _apiResource.Properties[ApplicationProfilesPropertyNames.Clients] =
+                ApplicationProfilesPropertyValues.AllowAllApplications;
             return this;
         }
-        
+
         /// <summary>
         /// Builds the API resource.
         /// </summary>
@@ -132,7 +133,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
 
         internal ApiResourceBuilder FromConfiguration()
         {
-            _apiResource.Properties[ApplicationProfilesPropertyNames.Source] = ApplicationProfilesPropertyValues.Configuration;
+            _apiResource.Properties[ApplicationProfilesPropertyNames.Source] =
+                ApplicationProfilesPropertyValues.Configuration;
             return this;
         }
     }

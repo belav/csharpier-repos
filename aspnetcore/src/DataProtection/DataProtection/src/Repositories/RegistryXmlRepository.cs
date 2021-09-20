@@ -19,7 +19,9 @@ namespace Microsoft.AspNetCore.DataProtection.Repositories
     [SupportedOSPlatform("windows")]
     public class RegistryXmlRepository : IXmlRepository
     {
-        private static readonly Lazy<RegistryKey?> _defaultRegistryKeyLazy = new Lazy<RegistryKey?>(GetDefaultHklmStorageKey);
+        private static readonly Lazy<RegistryKey?> _defaultRegistryKeyLazy = new Lazy<RegistryKey?>(
+            GetDefaultHklmStorageKey
+        );
 
         private readonly ILogger _logger;
 
@@ -83,19 +85,28 @@ namespace Microsoft.AspNetCore.DataProtection.Repositories
         {
             try
             {
-                var registryView = IntPtr.Size == 4 ? RegistryView.Registry32 : RegistryView.Registry64;
+                var registryView =
+                    IntPtr.Size == 4 ? RegistryView.Registry32 : RegistryView.Registry64;
                 // Try reading the auto-generated machine key from HKLM
-                using (var hklmBaseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, registryView))
-                {
+                using (
+                    var hklmBaseKey = RegistryKey.OpenBaseKey(
+                        RegistryHive.LocalMachine,
+                        registryView
+                    )
+                ) {
                     // Even though this is in HKLM, WAS ensures that applications hosted in IIS are properly isolated.
                     // See APP_POOL::EnsureSharedMachineKeyStorage in WAS source for more info.
                     // The version number will need to change if IIS hosts Core CLR directly.
                     var aspnetAutoGenKeysBaseKeyName = string.Format(
                         CultureInfo.InvariantCulture,
                         @"SOFTWARE\Microsoft\ASP.NET\4.0.30319.0\AutoGenKeys\{0}",
-                        WindowsIdentity.GetCurrent()!.User!.Value);
+                        WindowsIdentity.GetCurrent()!.User!.Value
+                    );
 
-                    var aspnetBaseKey = hklmBaseKey.OpenSubKey(aspnetAutoGenKeysBaseKeyName, writable: true);
+                    var aspnetBaseKey = hklmBaseKey.OpenSubKey(
+                        aspnetAutoGenKeysBaseKeyName,
+                        writable: true
+                    );
                     if (aspnetBaseKey != null)
                     {
                         using (aspnetBaseKey)
@@ -118,12 +129,17 @@ namespace Microsoft.AspNetCore.DataProtection.Repositories
         private static bool IsSafeRegistryValueName(string filename)
         {
             // Must be non-empty and contain only a-zA-Z0-9, hyphen, and underscore.
-            return (!String.IsNullOrEmpty(filename) && filename.All(c =>
-                c == '-'
-                || c == '_'
-                || ('0' <= c && c <= '9')
-                || ('A' <= c && c <= 'Z')
-                || ('a' <= c && c <= 'z')));
+            return (
+                !String.IsNullOrEmpty(filename)
+                && filename.All(
+                    c =>
+                        c == '-'
+                        || c == '_'
+                        || ('0' <= c && c <= '9')
+                        || ('A' <= c && c <= 'Z')
+                        || ('a' <= c && c <= 'z')
+                )
+            );
         }
 
         private XElement? ReadElementFromRegKey(RegistryKey regKey, string valueName)

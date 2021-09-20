@@ -34,8 +34,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public CodeActionsHandlerProvider(
             ICodeFixService codeFixService,
             ICodeRefactoringService codeRefactoringService,
-            IThreadingContext threadingContext)
-        {
+            IThreadingContext threadingContext
+        ) {
             _codeFixService = codeFixService;
             _codeRefactoringService = codeRefactoringService;
             _threadingContext = threadingContext;
@@ -46,8 +46,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var codeActionsCache = new CodeActionsCache();
             return ImmutableArray.Create<IRequestHandler>(
                 new CodeActionsHandler(codeActionsCache, _codeFixService, _codeRefactoringService),
-                new CodeActionResolveHandler(codeActionsCache, _codeFixService, _codeRefactoringService),
-                new RunCodeActionHandler(codeActionsCache, _codeFixService, _codeRefactoringService, _threadingContext));
+                new CodeActionResolveHandler(
+                    codeActionsCache,
+                    _codeFixService,
+                    _codeRefactoringService
+                ),
+                new RunCodeActionHandler(
+                    codeActionsCache,
+                    _codeFixService,
+                    _codeRefactoringService,
+                    _threadingContext
+                )
+            );
         }
     }
 }

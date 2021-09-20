@@ -11,8 +11,15 @@ namespace System
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
-    public readonly struct Int16 : IComparable, IConvertible, ISpanFormattable, IComparable<short>, IEquatable<short>
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
+    public readonly struct Int16
+        : IComparable,
+          IConvertible,
+          ISpanFormattable,
+          IComparable<short>,
+          IEquatable<short>
     {
         private readonly short m_value; // Do not rename (binary serialization)
 
@@ -66,7 +73,6 @@ namespace System
             return m_value;
         }
 
-
         public override string ToString()
         {
             return Number.Int32ToDecStr(m_value);
@@ -87,39 +93,61 @@ namespace System
             return Number.FormatInt32(m_value, 0x0000FFFF, format, provider);
         }
 
-        public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format = default, IFormatProvider? provider = null)
-        {
-            return Number.TryFormatInt32(m_value, 0x0000FFFF, format, provider, destination, out charsWritten);
+        public bool TryFormat(
+            Span<char> destination,
+            out int charsWritten,
+            ReadOnlySpan<char> format = default,
+            IFormatProvider? provider = null
+        ) {
+            return Number.TryFormatInt32(
+                m_value,
+                0x0000FFFF,
+                format,
+                provider,
+                destination,
+                out charsWritten
+            );
         }
 
         public static short Parse(string s)
         {
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Parse((ReadOnlySpan<char>)s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
         }
 
         public static short Parse(string s, NumberStyles style)
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Parse((ReadOnlySpan<char>)s, style, NumberFormatInfo.CurrentInfo);
         }
 
         public static short Parse(string s, IFormatProvider? provider)
         {
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
-            return Parse((ReadOnlySpan<char>)s, NumberStyles.Integer, NumberFormatInfo.GetInstance(provider));
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            return Parse(
+                (ReadOnlySpan<char>)s,
+                NumberStyles.Integer,
+                NumberFormatInfo.GetInstance(provider)
+            );
         }
 
         public static short Parse(string s, NumberStyles style, IFormatProvider? provider)
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Parse((ReadOnlySpan<char>)s, style, NumberFormatInfo.GetInstance(provider));
         }
 
-        public static short Parse(ReadOnlySpan<char> s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null)
-        {
+        public static short Parse(
+            ReadOnlySpan<char> s,
+            NumberStyles style = NumberStyles.Integer,
+            IFormatProvider? provider = null
+        ) {
             NumberFormatInfo.ValidateParseStyleInteger(style);
             return Parse(s, style, NumberFormatInfo.GetInstance(provider));
         }
@@ -134,8 +162,10 @@ namespace System
 
             // For hex number styles AllowHexSpecifier << 6 == 0x8000 and cancels out MinValue so the check is effectively: (uint)i > ushort.MaxValue
             // For integer styles it's zero and the effective check is (uint)(i - MinValue) > ushort.MaxValue
-            if ((uint)(i - MinValue - ((int)(style & NumberStyles.AllowHexSpecifier) << 6)) > ushort.MaxValue)
-            {
+            if (
+                (uint)(i - MinValue - ((int)(style & NumberStyles.AllowHexSpecifier) << 6))
+                > ushort.MaxValue
+            ) {
                 Number.ThrowOverflowException(TypeCode.Int16);
             }
             return (short)i;
@@ -149,7 +179,12 @@ namespace System
                 return false;
             }
 
-            return TryParse((ReadOnlySpan<char>)s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result);
+            return TryParse(
+                (ReadOnlySpan<char>)s,
+                NumberStyles.Integer,
+                NumberFormatInfo.CurrentInfo,
+                out result
+            );
         }
 
         public static bool TryParse(ReadOnlySpan<char> s, out short result)
@@ -157,8 +192,12 @@ namespace System
             return TryParse(s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result);
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out short result)
-        {
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out short result
+        ) {
             NumberFormatInfo.ValidateParseStyleInteger(style);
 
             if (s == null)
@@ -167,22 +206,37 @@ namespace System
                 return false;
             }
 
-            return TryParse((ReadOnlySpan<char>)s, style, NumberFormatInfo.GetInstance(provider), out result);
+            return TryParse(
+                (ReadOnlySpan<char>)s,
+                style,
+                NumberFormatInfo.GetInstance(provider),
+                out result
+            );
         }
 
-        public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out short result)
-        {
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out short result
+        ) {
             NumberFormatInfo.ValidateParseStyleInteger(style);
             return TryParse(s, style, NumberFormatInfo.GetInstance(provider), out result);
         }
 
-        private static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, NumberFormatInfo info, out short result)
-        {
+        private static bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            NumberFormatInfo info,
+            out short result
+        ) {
             // For hex number styles AllowHexSpecifier << 6 == 0x8000 and cancels out MinValue so the check is effectively: (uint)i > ushort.MaxValue
             // For integer styles it's zero and the effective check is (uint)(i - MinValue) > ushort.MaxValue
-            if (Number.TryParseInt32(s, style, info, out int i) != Number.ParsingStatus.OK
-                || (uint)(i - MinValue - ((int)(style & NumberStyles.AllowHexSpecifier) << 6)) > ushort.MaxValue)
-            {
+            if (
+                Number.TryParseInt32(s, style, info, out int i) != Number.ParsingStatus.OK
+                || (uint)(i - MinValue - ((int)(style & NumberStyles.AllowHexSpecifier) << 6))
+                    > ushort.MaxValue
+            ) {
                 result = 0;
                 return false;
             }
@@ -198,7 +252,6 @@ namespace System
         {
             return TypeCode.Int16;
         }
-
 
         bool IConvertible.ToBoolean(IFormatProvider? provider)
         {

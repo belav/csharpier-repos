@@ -21,8 +21,12 @@ namespace IntelHardwareIntrinsicTest
 
             if (Sse2.IsSupported)
             {
-                using (TestTable<double> doubleTable = new TestTable<double>(new double[2] { 1, -5 }, new double[2]))
-                {
+                using (
+                    TestTable<double> doubleTable = new TestTable<double>(
+                        new double[2] { 1, -5 },
+                        new double[2]
+                    )
+                ) {
                     var vf = Unsafe.Read<Vector128<double>>(doubleTable.inArrayPtr);
                     Sse2.StoreHigh((double*)(doubleTable.outArrayPtr), vf);
 
@@ -71,6 +75,5 @@ namespace IntelHardwareIntrinsicTest
                 outHandle.Free();
             }
         }
-
     }
 }

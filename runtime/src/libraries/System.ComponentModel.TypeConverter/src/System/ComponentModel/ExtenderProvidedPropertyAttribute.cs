@@ -15,8 +15,11 @@ namespace System.ComponentModel
         /// <summary>
         /// Creates a new ExtenderProvidedPropertyAttribute.
         /// </summary>
-        internal static ExtenderProvidedPropertyAttribute Create(PropertyDescriptor extenderProperty, Type receiverType, IExtenderProvider provider)
-        {
+        internal static ExtenderProvidedPropertyAttribute Create(
+            PropertyDescriptor extenderProperty,
+            Type receiverType,
+            IExtenderProvider provider
+        ) {
             return new ExtenderProvidedPropertyAttribute
             {
                 ExtenderProperty = extenderProperty,
@@ -28,9 +31,7 @@ namespace System.ComponentModel
         /// <summary>
         /// Creates an empty ExtenderProvidedPropertyAttribute.
         /// </summary>
-        public ExtenderProvidedPropertyAttribute()
-        {
-        }
+        public ExtenderProvidedPropertyAttribute() { }
 
         /// <summary>
         /// PropertyDescriptor of the property that is being provided.

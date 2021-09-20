@@ -6,24 +6,27 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public abstract class NorthwindNavigationsQueryRelationalTestBase<TFixture> : NorthwindNavigationsQueryTestBase<TFixture>
+    public abstract class NorthwindNavigationsQueryRelationalTestBase<TFixture>
+        : NorthwindNavigationsQueryTestBase<TFixture>
         where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()
     {
-        protected NorthwindNavigationsQueryRelationalTestBase(TFixture fixture)
-            : base(fixture)
-        {
-        }
+        protected NorthwindNavigationsQueryRelationalTestBase(TFixture fixture) : base(fixture) { }
 
         public override Task Where_subquery_on_navigation_client_eval(bool async)
         {
-            return AssertTranslationFailed(() => base.Where_subquery_on_navigation_client_eval(async));
+            return AssertTranslationFailed(
+                () => base.Where_subquery_on_navigation_client_eval(async)
+            );
         }
 
-        protected virtual bool CanExecuteQueryString
-            => false;
+        protected virtual bool CanExecuteQueryString => false;
 
-        protected override QueryAsserter CreateQueryAsserter(TFixture fixture)
-            => new RelationalQueryAsserter(
-                fixture, RewriteExpectedQueryExpression, RewriteServerQueryExpression, canExecuteQueryString: CanExecuteQueryString);
+        protected override QueryAsserter CreateQueryAsserter(TFixture fixture) =>
+            new RelationalQueryAsserter(
+                fixture,
+                RewriteExpectedQueryExpression,
+                RewriteServerQueryExpression,
+                canExecuteQueryString: CanExecuteQueryString
+            );
     }
 }

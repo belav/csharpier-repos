@@ -7,8 +7,11 @@ namespace Microsoft.AspNetCore.Components.Rendering
 {
     internal class RenderTreeUpdater
     {
-        public static void UpdateToMatchClientState(RenderTreeBuilder renderTreeBuilder, ulong eventHandlerId, object newFieldValue)
-        {
+        public static void UpdateToMatchClientState(
+            RenderTreeBuilder renderTreeBuilder,
+            ulong eventHandlerId,
+            object newFieldValue
+        ) {
             // We only allow the client to supply string or bool currently, since those are the only kinds of
             // values we output on attributes that go to the client
             if (!(newFieldValue is string || newFieldValue is bool))
@@ -32,14 +35,16 @@ namespace Microsoft.AspNetCore.Components.Rendering
                     case RenderTreeFrameType.Attribute:
                         if (frame.AttributeEventHandlerIdField == eventHandlerId)
                         {
-                            if (!string.IsNullOrEmpty(frame.AttributeEventUpdatesAttributeNameField))
-                            {
+                            if (
+                                !string.IsNullOrEmpty(frame.AttributeEventUpdatesAttributeNameField)
+                            ) {
                                 UpdateFrameToMatchClientState(
                                     renderTreeBuilder,
                                     framesArray,
                                     closestElementFrameIndex,
                                     frame.AttributeEventUpdatesAttributeNameField,
-                                    newFieldValue);
+                                    newFieldValue
+                                );
                             }
 
                             // Whether or not we did update the frame, that was the one that matches
@@ -51,13 +56,22 @@ namespace Microsoft.AspNetCore.Components.Rendering
             }
         }
 
-        private static void UpdateFrameToMatchClientState(RenderTreeBuilder renderTreeBuilder, RenderTreeFrame[] framesArray, int elementFrameIndex, string attributeName, object attributeValue)
-        {
+        private static void UpdateFrameToMatchClientState(
+            RenderTreeBuilder renderTreeBuilder,
+            RenderTreeFrame[] framesArray,
+            int elementFrameIndex,
+            string attributeName,
+            object attributeValue
+        ) {
             // Find the attribute frame
             ref var elementFrame = ref framesArray[elementFrameIndex];
-            var elementSubtreeEndIndexExcl = elementFrameIndex + elementFrame.ElementSubtreeLengthField;
-            for (var attributeFrameIndex = elementFrameIndex + 1; attributeFrameIndex < elementSubtreeEndIndexExcl; attributeFrameIndex++)
-            {
+            var elementSubtreeEndIndexExcl =
+                elementFrameIndex + elementFrame.ElementSubtreeLengthField;
+            for (
+                var attributeFrameIndex = elementFrameIndex + 1;
+                attributeFrameIndex < elementSubtreeEndIndexExcl;
+                attributeFrameIndex++
+            ) {
                 ref var attributeFrame = ref framesArray[attributeFrameIndex];
                 if (attributeFrame.FrameTypeField != RenderTreeFrameType.Attribute)
                 {
@@ -75,7 +89,12 @@ namespace Microsoft.AspNetCore.Components.Rendering
 
             // If we get here, we didn't find the desired attribute, so we have to insert a new frame for it
             var insertAtIndex = elementFrameIndex + 1;
-            var didInsertFrame = renderTreeBuilder.InsertAttributeExpensive(insertAtIndex, RenderTreeDiffBuilder.SystemAddedAttributeSequenceNumber, attributeName, attributeValue);
+            var didInsertFrame = renderTreeBuilder.InsertAttributeExpensive(
+                insertAtIndex,
+                RenderTreeDiffBuilder.SystemAddedAttributeSequenceNumber,
+                attributeName,
+                attributeValue
+            );
             if (!didInsertFrame)
             {
                 // The builder decided to omit the new frame, e.g., because it's a false-valued bool
@@ -94,25 +113,25 @@ namespace Microsoft.AspNetCore.Components.Rendering
                 switch (otherFrame.FrameTypeField)
                 {
                     case RenderTreeFrameType.Element:
+                    {
+                        var otherFrameSubtreeLength = otherFrame.ElementSubtreeLengthField;
+                        var otherFrameEndIndexExcl = otherFrameIndex + otherFrameSubtreeLength;
+                        if (otherFrameEndIndexExcl > elementFrameIndex) // i.e., contains the element we're inserting into
                         {
-                            var otherFrameSubtreeLength = otherFrame.ElementSubtreeLengthField;
-                            var otherFrameEndIndexExcl = otherFrameIndex + otherFrameSubtreeLength;
-                            if (otherFrameEndIndexExcl > elementFrameIndex) // i.e., contains the element we're inserting into
-                            {
-                                otherFrame.ElementSubtreeLengthField = otherFrameSubtreeLength + 1;
-                            }
-                            break;
+                            otherFrame.ElementSubtreeLengthField = otherFrameSubtreeLength + 1;
                         }
+                        break;
+                    }
                     case RenderTreeFrameType.Region:
+                    {
+                        var otherFrameSubtreeLength = otherFrame.RegionSubtreeLengthField;
+                        var otherFrameEndIndexExcl = otherFrameIndex + otherFrameSubtreeLength;
+                        if (otherFrameEndIndexExcl > elementFrameIndex) // i.e., contains the element we're inserting into
                         {
-                            var otherFrameSubtreeLength = otherFrame.RegionSubtreeLengthField;
-                            var otherFrameEndIndexExcl = otherFrameIndex + otherFrameSubtreeLength;
-                            if (otherFrameEndIndexExcl > elementFrameIndex) // i.e., contains the element we're inserting into
-                            {
-                                otherFrame.RegionSubtreeLengthField = otherFrameSubtreeLength + 1;
-                            }
-                            break;
+                            otherFrame.RegionSubtreeLengthField = otherFrameSubtreeLength + 1;
                         }
+                        break;
+                    }
                 }
             }
         }

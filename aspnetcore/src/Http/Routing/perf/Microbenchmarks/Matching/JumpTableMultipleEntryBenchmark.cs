@@ -46,8 +46,20 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
             _linearSearch = new LinearSearchJumpTable(0, -1, entries.ToArray());
             _dictionary = new DictionaryJumpTable(0, -1, entries.ToArray());
-            _trie = new ILEmitTrieJumpTable(0, -1, entries.ToArray(), vectorize: false, _dictionary);
-            _vectorTrie = new ILEmitTrieJumpTable(0, -1, entries.ToArray(), vectorize: true, _dictionary);
+            _trie = new ILEmitTrieJumpTable(
+                0,
+                -1,
+                entries.ToArray(),
+                vectorize: false,
+                _dictionary
+            );
+            _vectorTrie = new ILEmitTrieJumpTable(
+                0,
+                -1,
+                entries.ToArray(),
+                vectorize: true,
+                _dictionary
+            );
         }
 
         // This baseline is similar to SingleEntryJumpTable. We just want
@@ -80,7 +92,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                         @string,
                         0,
                         segment.Length,
-                        StringComparison.OrdinalIgnoreCase);
+                        StringComparison.OrdinalIgnoreCase
+                    );
                 }
             }
 

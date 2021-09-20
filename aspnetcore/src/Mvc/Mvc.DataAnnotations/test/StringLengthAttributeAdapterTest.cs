@@ -23,9 +23,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var metadata = provider.GetMetadataForProperty(typeof(string), "Length");
 
             var attribute = new StringLengthAttribute(8);
-            attribute.ErrorMessage = "Property must not be longer than '{1}' characters and not shorter than '{2}' characters.";
+            attribute.ErrorMessage =
+                "Property must not be longer than '{1}' characters and not shorter than '{2}' characters.";
 
-            var expectedMessage = "Property must not be longer than '8' characters and not shorter than '0' characters.";
+            var expectedMessage =
+                "Property must not be longer than '8' characters and not shorter than '0' characters.";
 
             var stringLocalizer = new Mock<IStringLocalizer>();
             var expectedProperties = new object[] { "Length", 8, 0 };
@@ -33,10 +35,18 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             stringLocalizer.Setup(s => s[attribute.ErrorMessage, expectedProperties])
                 .Returns(new LocalizedString(attribute.ErrorMessage, expectedMessage));
 
-            var adapter = new StringLengthAttributeAdapter(attribute, stringLocalizer: stringLocalizer.Object);
+            var adapter = new StringLengthAttributeAdapter(
+                attribute,
+                stringLocalizer: stringLocalizer.Object
+            );
 
             var actionContext = new ActionContext();
-            var context = new ClientModelValidationContext(actionContext, metadata, provider, new Dictionary<string, string>());
+            var context = new ClientModelValidationContext(
+                actionContext,
+                metadata,
+                provider,
+                new Dictionary<string, string>()
+            );
 
             // Act
             adapter.AddValidation(context);
@@ -44,9 +54,22 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Assert
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
-                kvp => { Assert.Equal("data-val-length", kvp.Key); Assert.Equal(expectedMessage, kvp.Value); },
-                kvp => { Assert.Equal("data-val-length-max", kvp.Key); Assert.Equal("8", kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("true", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-length", kvp.Key);
+                    Assert.Equal(expectedMessage, kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-length-max", kvp.Key);
+                    Assert.Equal("8", kvp.Value);
+                }
+            );
         }
 
         [Fact]
@@ -63,7 +86,12 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var expectedMessage = attribute.FormatErrorMessage("Length");
 
             var actionContext = new ActionContext();
-            var context = new ClientModelValidationContext(actionContext, metadata, provider, new Dictionary<string, string>());
+            var context = new ClientModelValidationContext(
+                actionContext,
+                metadata,
+                provider,
+                new Dictionary<string, string>()
+            );
 
             // Act
             adapter.AddValidation(context);
@@ -71,9 +99,22 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Assert
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
-                kvp => { Assert.Equal("data-val-length", kvp.Key); Assert.Equal(expectedMessage, kvp.Value); },
-                kvp => { Assert.Equal("data-val-length-max", kvp.Key); Assert.Equal("8", kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("true", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-length", kvp.Key);
+                    Assert.Equal(expectedMessage, kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-length-max", kvp.Key);
+                    Assert.Equal("8", kvp.Value);
+                }
+            );
         }
 
         [Fact]
@@ -90,7 +131,12 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var expectedMessage = attribute.FormatErrorMessage("Length");
 
             var actionContext = new ActionContext();
-            var context = new ClientModelValidationContext(actionContext, metadata, provider, new Dictionary<string, string>());
+            var context = new ClientModelValidationContext(
+                actionContext,
+                metadata,
+                provider,
+                new Dictionary<string, string>()
+            );
 
             // Act
             adapter.AddValidation(context);
@@ -98,10 +144,27 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Assert
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
-                kvp => { Assert.Equal("data-val-length", kvp.Key); Assert.Equal(expectedMessage, kvp.Value); },
-                kvp => { Assert.Equal("data-val-length-max", kvp.Key); Assert.Equal("10", kvp.Value); },
-                kvp => { Assert.Equal("data-val-length-min", kvp.Key); Assert.Equal("3", kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("true", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-length", kvp.Key);
+                    Assert.Equal(expectedMessage, kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-length-max", kvp.Key);
+                    Assert.Equal("10", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-length-min", kvp.Key);
+                    Assert.Equal("3", kvp.Value);
+                }
+            );
         }
 
         [Fact]
@@ -118,7 +181,12 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var expectedMessage = attribute.FormatErrorMessage("Length");
 
             var actionContext = new ActionContext();
-            var context = new ClientModelValidationContext(actionContext, metadata, provider, new Dictionary<string, string>());
+            var context = new ClientModelValidationContext(
+                actionContext,
+                metadata,
+                provider,
+                new Dictionary<string, string>()
+            );
 
             // Act
             adapter.AddValidation(context);
@@ -126,8 +194,17 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Assert
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
-                kvp => { Assert.Equal("data-val-length", kvp.Key); Assert.Equal(expectedMessage, kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("true", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-length", kvp.Key);
+                    Assert.Equal(expectedMessage, kvp.Value);
+                }
+            );
         }
 
         [Fact]
@@ -144,7 +221,12 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var expectedMessage = attribute.FormatErrorMessage("Length");
 
             var actionContext = new ActionContext();
-            var context = new ClientModelValidationContext(actionContext, metadata, provider, new Dictionary<string, string>());
+            var context = new ClientModelValidationContext(
+                actionContext,
+                metadata,
+                provider,
+                new Dictionary<string, string>()
+            );
 
             context.Attributes.Add("data-val", "original");
             context.Attributes.Add("data-val-length", "original");
@@ -157,10 +239,27 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Assert
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("original", kvp.Value); },
-                kvp => { Assert.Equal("data-val-length", kvp.Key); Assert.Equal("original", kvp.Value); },
-                kvp => { Assert.Equal("data-val-length-max", kvp.Key); Assert.Equal("original", kvp.Value); },
-                kvp => { Assert.Equal("data-val-length-min", kvp.Key); Assert.Equal("original", kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("original", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-length", kvp.Key);
+                    Assert.Equal("original", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-length-max", kvp.Key);
+                    Assert.Equal("original", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-length-min", kvp.Key);
+                    Assert.Equal("original", kvp.Value);
+                }
+            );
         }
     }
 }

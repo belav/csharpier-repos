@@ -30,11 +30,14 @@ namespace System.Data
             while (reader.LocalName == Keywords.MSD_ERRORS && reader.NamespaceURI == Keywords.DFFNS)
             {
                 ProcessErrors(ds, reader);
-                Debug.Assert(reader.LocalName == Keywords.MSD_ERRORS && reader.NamespaceURI == Keywords.DFFNS, "something fishy");
+                Debug.Assert(
+                    reader.LocalName == Keywords.MSD_ERRORS
+                        && reader.NamespaceURI == Keywords.DFFNS,
+                    "something fishy"
+                );
                 reader.Read(); // pass the end of errors tag
             }
         }
-
 
         private void CreateTablesHierarchy(DataTable dt)
         {
@@ -65,7 +68,11 @@ namespace System.Data
             while (reader.LocalName == Keywords.MSD_ERRORS && reader.NamespaceURI == Keywords.DFFNS)
             {
                 ProcessErrors(_tables, reader);
-                Debug.Assert(reader.LocalName == Keywords.MSD_ERRORS && reader.NamespaceURI == Keywords.DFFNS, "something fishy");
+                Debug.Assert(
+                    reader.LocalName == Keywords.MSD_ERRORS
+                        && reader.NamespaceURI == Keywords.DFFNS,
+                    "something fishy"
+                );
                 reader.Read(); // pass the end of errors tag
             }
         }
@@ -92,7 +99,8 @@ namespace System.Data
                 // the diffgramm always contains sql:before and sql:after pairs
 
                 diffId = ssync.GetAttribute(Keywords.DIFFID, Keywords.DFFNS);
-                bool hasErrors = ssync.GetAttribute(Keywords.HASERRORS, Keywords.DFFNS) == Keywords.TRUE;
+                bool hasErrors =
+                    ssync.GetAttribute(Keywords.HASERRORS, Keywords.DFFNS) == Keywords.TRUE;
                 oldRowRecord = ReadOldRowData(ds, ref tableBefore, ref pos, ssync);
                 if (oldRowRecord == -1)
                     continue;
@@ -143,7 +151,8 @@ namespace System.Data
                 // the diffgramm always contains sql:before and sql:after pairs
 
                 diffId = ssync.GetAttribute(Keywords.DIFFID, Keywords.DFFNS);
-                bool hasErrors = ssync.GetAttribute(Keywords.HASERRORS, Keywords.DFFNS) == Keywords.TRUE;
+                bool hasErrors =
+                    ssync.GetAttribute(Keywords.HASERRORS, Keywords.DFFNS) == Keywords.TRUE;
                 oldRowRecord = ReadOldRowData(_dataSet, ref tableBefore, ref pos, ssync);
                 if (oldRowRecord == -1)
                     continue;
@@ -174,7 +183,6 @@ namespace System.Data
             return;
         }
 
-
         internal void ProcessErrors(DataSet ds, XmlReader ssync)
         {
             DataTable table;
@@ -184,7 +192,10 @@ namespace System.Data
 
             while (iSsyncDepth < ssync.Depth)
             {
-                table = ds.Tables.GetTable(XmlConvert.DecodeName(ssync.LocalName), ssync.NamespaceURI);
+                table = ds.Tables.GetTable(
+                    XmlConvert.DecodeName(ssync.LocalName),
+                    ssync.NamespaceURI
+                );
                 if (table == null)
                     throw ExceptionBuilder.DiffgramMissingSQL();
                 string diffId = ssync.GetAttribute(Keywords.DIFFID, Keywords.DFFNS);
@@ -198,7 +209,10 @@ namespace System.Data
                 {
                     if (XmlNodeType.Element == ssync.NodeType)
                     {
-                        DataColumn col = table.Columns[XmlConvert.DecodeName(ssync.LocalName), ssync.NamespaceURI];
+                        DataColumn col = table.Columns[
+                            XmlConvert.DecodeName(ssync.LocalName),
+                            ssync.NamespaceURI
+                        ];
                         //if (col == null)
                         // throw exception here
                         string colError = ssync.GetAttribute(Keywords.MSD_ERROR, Keywords.DFFNS);
@@ -252,7 +266,10 @@ namespace System.Data
                 {
                     if (XmlNodeType.Element == ssync.NodeType)
                     {
-                        DataColumn col = table.Columns[XmlConvert.DecodeName(ssync.LocalName), ssync.NamespaceURI];
+                        DataColumn col = table.Columns[
+                            XmlConvert.DecodeName(ssync.LocalName),
+                            ssync.NamespaceURI
+                        ];
                         //if (col == null)
                         // throw exception here
                         string colError = ssync.GetAttribute(Keywords.MSD_ERROR, Keywords.DFFNS);
@@ -277,8 +294,10 @@ namespace System.Data
             for (int i = 0; i < _tables.Count; i++)
             {
                 DataTable dt = (DataTable)_tables[i];
-                if (string.Equals(dt.TableName, tableName, StringComparison.Ordinal)
-                    && string.Equals(dt.Namespace, ns, StringComparison.Ordinal))
+                if (
+                    string.Equals(dt.TableName, tableName, StringComparison.Ordinal)
+                    && string.Equals(dt.Namespace, ns, StringComparison.Ordinal)
+                )
                     return dt;
             }
             return null;
@@ -319,8 +338,10 @@ namespace System.Data
 
             foreach (DataColumn col in table.Columns)
             {
-                if ((col.ColumnMapping == MappingType.Element) ||
-                    (col.ColumnMapping == MappingType.SimpleContent))
+                if (
+                    (col.ColumnMapping == MappingType.Element)
+                    || (col.ColumnMapping == MappingType.SimpleContent)
+                )
                     continue;
 
                 if (col.ColumnMapping == MappingType.Hidden)
@@ -372,7 +393,11 @@ namespace System.Data
 
                     if (column == null)
                     {
-                        while ((row.NodeType != XmlNodeType.EndElement) && (row.LocalName != ln) && (row.NamespaceURI != ns))
+                        while (
+                            (row.NodeType != XmlNodeType.EndElement)
+                            && (row.LocalName != ln)
+                            && (row.NamespaceURI != ns)
+                        )
                             row.Read(); // consume the current node
                         row.Read(); // now points to the next column
                         //SkipWhitespaces(row); seems no need, just in case if we see other issue , this will be here as hint
@@ -382,8 +407,11 @@ namespace System.Data
                     if (column.IsCustomType)
                     {
                         // if column's type is object or column type does not implement IXmlSerializable
-                        bool isPolymorphism = (column.DataType == typeof(object) || (row.GetAttribute(Keywords.MSD_INSTANCETYPE, Keywords.MSDNS) != null) ||
-                        (row.GetAttribute(Keywords.TYPE, Keywords.XSINS) != null));
+                        bool isPolymorphism = (
+                            column.DataType == typeof(object)
+                            || (row.GetAttribute(Keywords.MSD_INSTANCETYPE, Keywords.MSDNS) != null)
+                            || (row.GetAttribute(Keywords.TYPE, Keywords.XSINS) != null)
+                        );
 
                         bool skipped = false;
                         if (column.Table.DataSet != null && column.Table.DataSet._udtIsWrapped)
@@ -411,7 +439,6 @@ namespace System.Data
                         // for else case xmlAttrib MUST be null
                         column[record] = column.ConvertXmlToObject(row, xmlAttrib); // you need to pass null XmlAttib here
 
-
                         if (skipped)
                         {
                             row.Read(); // if Wrapper is skipped, skip its end tag
@@ -425,8 +452,11 @@ namespace System.Data
                         // SkipWhitespaces(row);seems no need, just in case if we see other issue , this will be here as hint
                         if (row.Depth > iColumnDepth)
                         { //we are inside the column
-                            if (row.NodeType == XmlNodeType.Text || row.NodeType == XmlNodeType.Whitespace || row.NodeType == XmlNodeType.SignificantWhitespace)
-                            {
+                            if (
+                                row.NodeType == XmlNodeType.Text
+                                || row.NodeType == XmlNodeType.Whitespace
+                                || row.NodeType == XmlNodeType.SignificantWhitespace
+                            ) {
                                 string text = row.ReadString();
                                 column[record] = column.ConvertXmlToObject(text);
 
@@ -449,8 +479,10 @@ namespace System.Data
 
         internal void SkipWhitespaces(XmlReader reader)
         {
-            while (reader.NodeType == XmlNodeType.Whitespace || reader.NodeType == XmlNodeType.SignificantWhitespace)
-            {
+            while (
+                reader.NodeType == XmlNodeType.Whitespace
+                || reader.NodeType == XmlNodeType.SignificantWhitespace
+            ) {
                 reader.Read();
             }
         }

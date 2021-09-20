@@ -14,9 +14,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         public TagHelperOutput(
             string tagName,
             TagHelperAttributeList attributes,
-            Func<bool, HtmlEncoder, Task<TagHelperContent>> getChildContentAsync)
-        {
-        }
+            Func<bool, HtmlEncoder, Task<TagHelperContent>> getChildContentAsync
+        ) { }
 
         public string TagName { get; set; }
 
@@ -36,13 +35,9 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
 
         public TagHelperAttributeList Attributes { get; }
 
-        public void Reinitialize(string tagName, TagMode tagMode)
-        {
-        }
+        public void Reinitialize(string tagName, TagMode tagMode) { }
 
-        public void SuppressOutput()
-        {
-        }
+        public void SuppressOutput() { }
 
         public Task<TagHelperContent> GetChildContentAsync()
         {
@@ -59,21 +54,17 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             throw null;
         }
 
-        public Task<TagHelperContent> GetChildContentAsync(bool useCachedResult, HtmlEncoder encoder)
-        {
+        public Task<TagHelperContent> GetChildContentAsync(
+            bool useCachedResult,
+            HtmlEncoder encoder
+        ) {
             throw null;
         }
 
-        void IHtmlContentContainer.CopyTo(IHtmlContentBuilder destination)
-        {
-        }
+        void IHtmlContentContainer.CopyTo(IHtmlContentBuilder destination) { }
 
-        void IHtmlContentContainer.MoveTo(IHtmlContentBuilder destination)
-        {
-        }
+        void IHtmlContentContainer.MoveTo(IHtmlContentBuilder destination) { }
 
-        public void WriteTo(TextWriter writer, HtmlEncoder encoder)
-        {
-        }
+        public void WriteTo(TextWriter writer, HtmlEncoder encoder) { }
     }
 }

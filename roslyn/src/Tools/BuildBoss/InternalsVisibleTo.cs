@@ -10,8 +10,12 @@ namespace BuildBoss
 {
     internal readonly struct InternalsVisibleTo
     {
-        public InternalsVisibleTo(string targetAssembly, string publicKey, string loadsWithinVisualStudio, string workItem)
-        {
+        public InternalsVisibleTo(
+            string targetAssembly,
+            string publicKey,
+            string loadsWithinVisualStudio,
+            string workItem
+        ) {
             TargetAssembly = targetAssembly;
             PublicKey = publicKey;
             LoadsWithinVisualStudio = loadsWithinVisualStudio;

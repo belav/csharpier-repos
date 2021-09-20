@@ -6,18 +6,18 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Web.Mvc
 {
-    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "This is a shipped API")]
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1710:IdentifiersShouldHaveCorrectSuffix",
+        Justification = "This is a shipped API"
+    )]
     public class SelectList : MultiSelectList
     {
-        public SelectList(IEnumerable items)
-            : this(items, selectedValue: null)
-        {
-        }
+        public SelectList(IEnumerable items) : this(items, selectedValue: null) { }
 
         public SelectList(IEnumerable items, object selectedValue)
             : this(items, dataValueField: null, dataTextField: null, selectedValue: selectedValue)
-        {
-        }
+        { }
 
         /// <summary>
         /// Initializes a new instance of the SelectList class by using the specified items for the list,
@@ -28,22 +28,27 @@ namespace System.Web.Mvc
         /// <see cref="SelectListItem"/>.</param>
         /// <param name="disabledValues">The disabled values. Used to match the Disabled property of the corresponding
         /// <see cref="SelectListItem"/>.</param>
-        public SelectList(IEnumerable items, object selectedValue, IEnumerable disabledValues)
-            : this(items,
-                   dataValueField: null,
-                   dataTextField: null,
-                   selectedValue: selectedValue,
-                   disabledValues: disabledValues)
-        {
-        }
+        public SelectList(
+            IEnumerable items,
+            object selectedValue,
+            IEnumerable disabledValues
+        ) : this(
+            items,
+            dataValueField: null,
+            dataTextField: null,
+            selectedValue: selectedValue,
+            disabledValues: disabledValues
+        ) { }
 
         public SelectList(IEnumerable items, string dataValueField, string dataTextField)
-            : this(items, dataValueField, dataTextField, selectedValue: null)
-        {
-        }
+            : this(items, dataValueField, dataTextField, selectedValue: null) { }
 
-        public SelectList(IEnumerable items, string dataValueField, string dataTextField, object selectedValue)
-            : base(items, dataValueField, dataTextField, ToEnumerable(selectedValue))
+        public SelectList(
+            IEnumerable items,
+            string dataValueField,
+            string dataTextField,
+            object selectedValue
+        ) : base(items, dataValueField, dataTextField, ToEnumerable(selectedValue))
         {
             SelectedValue = selectedValue;
         }
@@ -61,12 +66,13 @@ namespace System.Web.Mvc
         /// <see cref="SelectListItem"/>.</param>
         /// <param name="selectedValue">The selected value. Used to match the Selected property of the corresponding
         /// <see cref="SelectListItem"/>.</param>
-        public SelectList(IEnumerable items,
-                          string dataValueField,
-                          string dataTextField,
-                          string dataGroupField,
-                          object selectedValue)
-            : base(items, dataValueField, dataTextField, dataGroupField, ToEnumerable(selectedValue))
+        public SelectList(
+            IEnumerable items,
+            string dataValueField,
+            string dataTextField,
+            string dataGroupField,
+            object selectedValue
+        ) : base(items, dataValueField, dataTextField, dataGroupField, ToEnumerable(selectedValue))
         {
             SelectedValue = selectedValue;
         }
@@ -84,12 +90,13 @@ namespace System.Web.Mvc
         /// <see cref="SelectListItem"/>.</param>
         /// <param name="disabledValues">The disabled values. Used to match the Disabled property of the corresponding
         /// <see cref="SelectListItem"/>.</param>
-        public SelectList(IEnumerable items,
-                          string dataValueField,
-                          string dataTextField,
-                          object selectedValue,
-                          IEnumerable disabledValues)
-            : base(items, dataValueField, dataTextField, ToEnumerable(selectedValue), disabledValues)
+        public SelectList(
+            IEnumerable items,
+            string dataValueField,
+            string dataTextField,
+            object selectedValue,
+            IEnumerable disabledValues
+        ) : base(items, dataValueField, dataTextField, ToEnumerable(selectedValue), disabledValues)
         {
             SelectedValue = selectedValue;
         }
@@ -110,14 +117,21 @@ namespace System.Web.Mvc
         /// <see cref="SelectListItem"/>.</param>
         /// <param name="disabledValues">The disabled values. Used to match the Disabled property of the corresponding
         /// <see cref="SelectListItem"/>.</param>
-        public SelectList(IEnumerable items,
-                          string dataValueField,
-                          string dataTextField,
-                          string dataGroupField,
-                          object selectedValue,
-                          IEnumerable disabledValues)
-            : base(items, dataValueField, dataTextField, dataGroupField, ToEnumerable(selectedValue), disabledValues)
-        {
+        public SelectList(
+            IEnumerable items,
+            string dataValueField,
+            string dataTextField,
+            string dataGroupField,
+            object selectedValue,
+            IEnumerable disabledValues
+        ) : base(
+            items,
+            dataValueField,
+            dataTextField,
+            dataGroupField,
+            ToEnumerable(selectedValue),
+            disabledValues
+        ) {
             SelectedValue = selectedValue;
         }
 
@@ -139,21 +153,23 @@ namespace System.Web.Mvc
         /// <see cref="SelectListItem"/>.</param>
         /// <param name="disabledGroups">The disabled groups. Used to match the Disabled property of the corresponding
         /// <see cref="SelectListGroup"/>.</param>
-        public SelectList(IEnumerable items,
-                          string dataValueField,
-                          string dataTextField,
-                          string dataGroupField,
-                          object selectedValue,
-                          IEnumerable disabledValues,
-                          IEnumerable disabledGroups)
-            : base(items,
-                   dataValueField,
-                   dataTextField,
-                   dataGroupField,
-                   ToEnumerable(selectedValue),
-                   disabledValues,
-                   disabledGroups)
-        {
+        public SelectList(
+            IEnumerable items,
+            string dataValueField,
+            string dataTextField,
+            string dataGroupField,
+            object selectedValue,
+            IEnumerable disabledValues,
+            IEnumerable disabledGroups
+        ) : base(
+            items,
+            dataValueField,
+            dataTextField,
+            dataGroupField,
+            ToEnumerable(selectedValue),
+            disabledValues,
+            disabledGroups
+        ) {
             SelectedValue = selectedValue;
         }
 

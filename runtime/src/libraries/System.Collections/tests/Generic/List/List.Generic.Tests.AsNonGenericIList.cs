@@ -54,7 +54,6 @@ namespace System.Collections.Tests
                 return rand.Next();
             }
         }
-
         #endregion
     }
 }

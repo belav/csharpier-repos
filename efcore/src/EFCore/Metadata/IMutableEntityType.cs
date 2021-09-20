@@ -38,7 +38,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Gets the defining entity type.
         /// </summary>
-        [Obsolete("Entity types with defining navigations have been replaced by shared-type entity types")]
+        [Obsolete(
+            "Entity types with defining navigations have been replaced by shared-type entity types"
+        )]
         new IMutableEntityType? DefiningEntityType => null;
 
         /// <summary>
@@ -72,8 +74,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Returns the property that will be used for storing a discriminator value.
         /// </summary>
         /// <returns> The property that will be used for storing a discriminator value. </returns>
-        new IMutableProperty? FindDiscriminatorProperty()
-            => (IMutableProperty?)((IReadOnlyEntityType)this).FindDiscriminatorProperty();
+        new IMutableProperty? FindDiscriminatorProperty() =>
+            (IMutableProperty?)((IReadOnlyEntityType)this).FindDiscriminatorProperty();
 
         /// <summary>
         ///     Sets the <see cref="IReadOnlyProperty" /> that will be used for storing a discriminator value.
@@ -85,21 +87,23 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Sets the value indicating whether the discriminator mapping is complete.
         /// </summary>
         /// <param name="complete"> The value indicating whether the discriminator mapping is complete. </param>
-        void SetDiscriminatorMappingComplete(bool? complete)
-            => SetOrRemoveAnnotation(CoreAnnotationNames.DiscriminatorMappingComplete, complete);
+        void SetDiscriminatorMappingComplete(bool? complete) =>
+            SetOrRemoveAnnotation(CoreAnnotationNames.DiscriminatorMappingComplete, complete);
 
         /// <summary>
         ///     Sets the discriminator value for this entity type.
         /// </summary>
         /// <param name="value"> The value to set. </param>
-        void SetDiscriminatorValue(object? value)
-            => SetAnnotation(CoreAnnotationNames.DiscriminatorValue, EntityType.CheckDiscriminatorValue(this, value));
+        void SetDiscriminatorValue(object? value) =>
+            SetAnnotation(
+                CoreAnnotationNames.DiscriminatorValue,
+                EntityType.CheckDiscriminatorValue(this, value)
+            );
 
         /// <summary>
         ///     Removes the discriminator value for this entity type.
         /// </summary>
-        void RemoveDiscriminatorValue()
-            => RemoveAnnotation(CoreAnnotationNames.DiscriminatorValue);
+        void RemoveDiscriminatorValue() => RemoveAnnotation(CoreAnnotationNames.DiscriminatorValue);
 
         /// <summary>
         ///     Gets all types in the model from which a given entity type derives, starting with the root.
@@ -107,8 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns>
         ///     The base types.
         /// </returns>
-        new IEnumerable<IMutableEntityType> GetAllBaseTypes()
-            => GetAllBaseTypesAscending().Reverse();
+        new IEnumerable<IMutableEntityType> GetAllBaseTypes() =>
+            GetAllBaseTypesAscending().Reverse();
 
         /// <summary>
         ///     Gets all types in the model from which a given entity type derives, starting with the closest one.
@@ -116,43 +120,44 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns>
         ///     The base types.
         /// </returns>
-        new IEnumerable<IMutableEntityType> GetAllBaseTypesAscending()
-            => GetAllBaseTypesInclusiveAscending().Skip(1);
+        new IEnumerable<IMutableEntityType> GetAllBaseTypesAscending() =>
+            GetAllBaseTypesInclusiveAscending().Skip(1);
 
         /// <summary>
         ///     Returns all base types of this entity type, including the type itself, top to bottom.
         /// </summary>
         /// <returns> Base types. </returns>
-        new IEnumerable<IMutableEntityType> GetAllBaseTypesInclusive()
-            => ((IReadOnlyEntityType)this).GetAllBaseTypesInclusive().Cast<IMutableEntityType>();
+        new IEnumerable<IMutableEntityType> GetAllBaseTypesInclusive() =>
+            ((IReadOnlyEntityType)this).GetAllBaseTypesInclusive().Cast<IMutableEntityType>();
 
         /// <summary>
         ///     Returns all base types of the given entity type, including the type itself, bottom to top.
         /// </summary>
         /// <returns> Base types. </returns>
-        new IEnumerable<IMutableEntityType> GetAllBaseTypesInclusiveAscending()
-            => ((IReadOnlyEntityType)this).GetAllBaseTypesInclusiveAscending().Cast<IMutableEntityType>();
+        new IEnumerable<IMutableEntityType> GetAllBaseTypesInclusiveAscending() =>
+            ((IReadOnlyEntityType)this).GetAllBaseTypesInclusiveAscending()
+                .Cast<IMutableEntityType>();
 
         /// <summary>
         ///     Gets all types in the model that derive from a given entity type.
         /// </summary>
         /// <returns> The derived types. </returns>
-        new IEnumerable<IMutableEntityType> GetDerivedTypes()
-            => ((IReadOnlyEntityType)this).GetDerivedTypes().Cast<IMutableEntityType>();
+        new IEnumerable<IMutableEntityType> GetDerivedTypes() =>
+            ((IReadOnlyEntityType)this).GetDerivedTypes().Cast<IMutableEntityType>();
 
         /// <summary>
         ///     Returns all derived types of this entity type, including the type itself.
         /// </summary>
         /// <returns> Derived types. </returns>
-        new IEnumerable<IMutableEntityType> GetDerivedTypesInclusive()
-            => ((IReadOnlyEntityType)this).GetDerivedTypesInclusive().Cast<IMutableEntityType>();
+        new IEnumerable<IMutableEntityType> GetDerivedTypesInclusive() =>
+            ((IReadOnlyEntityType)this).GetDerivedTypesInclusive().Cast<IMutableEntityType>();
 
         /// <summary>
         ///     Gets all types in the model that directly derive from a given entity type.
         /// </summary>
         /// <returns> The derived types. </returns>
-        new IEnumerable<IMutableEntityType> GetDirectlyDerivedTypes()
-            => ((IReadOnlyEntityType)this).GetDirectlyDerivedTypes().Cast<IMutableEntityType>();
+        new IEnumerable<IMutableEntityType> GetDirectlyDerivedTypes() =>
+            ((IReadOnlyEntityType)this).GetDirectlyDerivedTypes().Cast<IMutableEntityType>();
 
         /// <summary>
         ///     Gets the root base type for a given entity type.
@@ -160,8 +165,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns>
         ///     The root base type. If the given entity type is not a derived type, then the same entity type is returned.
         /// </returns>
-        new IMutableEntityType GetRootType()
-            => (IMutableEntityType)((IReadOnlyEntityType)this).GetRootType();
+        new IMutableEntityType GetRootType() =>
+            (IMutableEntityType)((IReadOnlyEntityType)this).GetRootType();
 
         /// <summary>
         ///     Returns the closest entity type that is a parent of both given entity types. If one of the given entities is
@@ -173,8 +178,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     The closest common parent of this entity type and <paramref name="otherEntityType" />,
         ///     or <see langword="null" /> if they have not common parent.
         /// </returns>
-        new IMutableEntityType? FindClosestCommonParent(IReadOnlyEntityType otherEntityType)
-            => (IMutableEntityType?)((IReadOnlyEntityType)this).FindClosestCommonParent(otherEntityType);
+        new IMutableEntityType? FindClosestCommonParent(IReadOnlyEntityType otherEntityType) =>
+            (IMutableEntityType?)((IReadOnlyEntityType)this).FindClosestCommonParent(
+                otherEntityType
+            );
 
         /// <summary>
         ///     Gets the least derived type between the specified two.
@@ -184,8 +191,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     The least derived type between the specified two.
         ///     If the given entity types are not related, then <see langword="null" /> is returned.
         /// </returns>
-        new IMutableEntityType? LeastDerivedType(IReadOnlyEntityType otherEntityType)
-            => (IMutableEntityType?)((IReadOnlyEntityType)this).LeastDerivedType(otherEntityType);
+        new IMutableEntityType? LeastDerivedType(IReadOnlyEntityType otherEntityType) =>
+            (IMutableEntityType?)((IReadOnlyEntityType)this).LeastDerivedType(otherEntityType);
 
         /// <summary>
         ///     Sets the primary key for this entity type.
@@ -199,8 +206,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="property"> The primary key property. </param>
         /// <returns> The newly created key. </returns>
-        IMutableKey? SetPrimaryKey(IMutableProperty? property)
-            => SetPrimaryKey(property == null ? null : new[] { property });
+        IMutableKey? SetPrimaryKey(IMutableProperty? property) =>
+            SetPrimaryKey(property == null ? null : new[] { property });
 
         /// <summary>
         ///     Gets primary key for this entity type. Returns <see langword="null" /> if no primary key is defined.
@@ -213,8 +220,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="property"> The property to use as an alternate key. </param>
         /// <returns> The newly created key. </returns>
-        IMutableKey AddKey(IMutableProperty property)
-            => AddKey(new[] { property });
+        IMutableKey AddKey(IMutableProperty property) => AddKey(new[] { property });
 
         /// <summary>
         ///     Adds a new alternate key to this entity type.
@@ -229,8 +235,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="property"> The property that the key is defined on. </param>
         /// <returns> The key, or null if none is defined. </returns>
-        new IMutableKey? FindKey(IReadOnlyProperty property)
-             => FindKey(new[] { property });
+        new IMutableKey? FindKey(IReadOnlyProperty property) => FindKey(new[] { property });
 
         /// <summary>
         ///     Gets the primary or alternate key that is defined on the given properties.
@@ -251,8 +256,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     </para>
         /// </summary>
         /// <returns> Declared keys. </returns>
-        new IEnumerable<IMutableKey> GetDeclaredKeys()
-            => ((IReadOnlyEntityType)this).GetDeclaredKeys().Cast<IMutableKey>();
+        new IEnumerable<IMutableKey> GetDeclaredKeys() =>
+            ((IReadOnlyEntityType)this).GetDeclaredKeys().Cast<IMutableKey>();
 
         /// <summary>
         ///     Gets the primary and alternate keys for this entity type.
@@ -288,8 +293,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         IMutableForeignKey AddForeignKey(
             IMutableProperty property,
             IMutableKey principalKey,
-            IMutableEntityType principalEntityType)
-            => AddForeignKey(new[] { property }, principalKey, principalEntityType);
+            IMutableEntityType principalEntityType
+        ) => AddForeignKey(new[] { property }, principalKey, principalEntityType);
 
         /// <summary>
         ///     Adds a new relationship to this entity type.
@@ -305,7 +310,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         IMutableForeignKey AddForeignKey(
             IReadOnlyList<IMutableProperty> properties,
             IMutableKey principalKey,
-            IMutableEntityType principalEntityType);
+            IMutableEntityType principalEntityType
+        );
 
         /// <summary>
         ///     Gets the foreign keys defined on the given property. Only foreign keys that are defined on exactly the specified
@@ -313,8 +319,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="property"> The property to find the foreign keys on. </param>
         /// <returns> The foreign keys. </returns>
-        new IEnumerable<IMutableForeignKey> FindForeignKeys(IReadOnlyProperty property)
-            => FindForeignKeys(new[] { property });
+        new IEnumerable<IMutableForeignKey> FindForeignKeys(IReadOnlyProperty property) =>
+            FindForeignKeys(new[] { property });
 
         /// <summary>
         ///     Gets the foreign keys defined on the given properties. Only foreign keys that are defined on exactly the specified
@@ -322,8 +328,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="properties"> The properties to find the foreign keys on. </param>
         /// <returns> The foreign keys. </returns>
-        new IEnumerable<IMutableForeignKey> FindForeignKeys(IReadOnlyList<IReadOnlyProperty> properties)
-            => ((IReadOnlyEntityType)this).FindForeignKeys(properties).Cast<IMutableForeignKey>();
+        new IEnumerable<IMutableForeignKey> FindForeignKeys(
+            IReadOnlyList<IReadOnlyProperty> properties
+        ) => ((IReadOnlyEntityType)this).FindForeignKeys(properties).Cast<IMutableForeignKey>();
 
         /// <summary>
         ///     Gets the foreign key for the given properties that points to a given primary or alternate key. Returns <see langword="null" />
@@ -340,8 +347,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         new IMutableForeignKey? FindForeignKey(
             IReadOnlyProperty property,
             IReadOnlyKey principalKey,
-            IReadOnlyEntityType principalEntityType)
-            => FindForeignKey(new[] { property }, principalKey, principalEntityType);
+            IReadOnlyEntityType principalEntityType
+        ) => FindForeignKey(new[] { property }, principalKey, principalEntityType);
 
         /// <summary>
         ///     Gets the foreign key for the given properties that points to a given primary or alternate key.
@@ -358,7 +365,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         new IMutableForeignKey? FindForeignKey(
             IReadOnlyList<IReadOnlyProperty> properties,
             IReadOnlyKey principalKey,
-            IReadOnlyEntityType principalEntityType);
+            IReadOnlyEntityType principalEntityType
+        );
 
         /// <summary>
         ///     Gets the foreign keys declared on this entity type using the given properties.
@@ -366,8 +374,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="properties"> The properties to find the foreign keys on. </param>
         /// <returns> Declared foreign keys. </returns>
         new IEnumerable<IMutableForeignKey> FindDeclaredForeignKeys(
-            IReadOnlyList<IReadOnlyProperty> properties)
-            => ((IReadOnlyEntityType)this).FindDeclaredForeignKeys(properties).Cast<IMutableForeignKey>();
+            IReadOnlyList<IReadOnlyProperty> properties
+        ) =>
+            ((IReadOnlyEntityType)this).FindDeclaredForeignKeys(properties)
+                .Cast<IMutableForeignKey>();
 
         /// <summary>
         ///     <para>
@@ -380,8 +390,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     </para>
         /// </summary>
         /// <returns> Declared foreign keys. </returns>
-        new IEnumerable<IMutableForeignKey> GetDeclaredForeignKeys()
-            => ((IReadOnlyEntityType)this).GetDeclaredForeignKeys().Cast<IMutableForeignKey>();
+        new IEnumerable<IMutableForeignKey> GetDeclaredForeignKeys() =>
+            ((IReadOnlyEntityType)this).GetDeclaredForeignKeys().Cast<IMutableForeignKey>();
 
         /// <summary>
         ///     <para>
@@ -389,8 +399,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     </para>
         /// </summary>
         /// <returns> Derived foreign keys. </returns>
-        new IEnumerable<IMutableForeignKey> GetDerivedForeignKeys()
-            => ((IReadOnlyEntityType)this).GetDerivedForeignKeys().Cast<IMutableForeignKey>();
+        new IEnumerable<IMutableForeignKey> GetDerivedForeignKeys() =>
+            ((IReadOnlyEntityType)this).GetDerivedForeignKeys().Cast<IMutableForeignKey>();
 
         /// <summary>
         ///     Gets the foreign keys defined on this entity type.
@@ -403,23 +413,24 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     is the principal).
         /// </summary>
         /// <returns> The foreign keys that reference the given entity type. </returns>
-        new IEnumerable<IMutableForeignKey> GetDeclaredReferencingForeignKeys()
-            => ((IReadOnlyEntityType)this).GetDeclaredReferencingForeignKeys().Cast<IMutableForeignKey>();
+        new IEnumerable<IMutableForeignKey> GetDeclaredReferencingForeignKeys() =>
+            ((IReadOnlyEntityType)this).GetDeclaredReferencingForeignKeys()
+                .Cast<IMutableForeignKey>();
 
         /// <summary>
         ///     Gets all foreign keys that target a given entity type (i.e. foreign keys where the given entity type
         ///     or a type it's derived from is the principal).
         /// </summary>
         /// <returns> The foreign keys that reference the given entity type. </returns>
-        new IEnumerable<IMutableForeignKey> GetReferencingForeignKeys()
-            => ((IReadOnlyEntityType)this).GetReferencingForeignKeys().Cast<IMutableForeignKey>();
+        new IEnumerable<IMutableForeignKey> GetReferencingForeignKeys() =>
+            ((IReadOnlyEntityType)this).GetReferencingForeignKeys().Cast<IMutableForeignKey>();
 
         /// <summary>
         ///     Returns the relationship to the owner if this is an owned type or <see langword="null" /> otherwise.
         /// </summary>
         /// <returns> The relationship to the owner if this is an owned type or <see langword="null" /> otherwise. </returns>
-        new IMutableForeignKey? FindOwnership()
-            => (IMutableForeignKey?)((IReadOnlyEntityType)this).FindOwnership();
+        new IMutableForeignKey? FindOwnership() =>
+            (IMutableForeignKey?)((IReadOnlyEntityType)this).FindOwnership();
 
         /// <summary>
         ///     Removes a foreign key from this entity type.
@@ -435,7 +446,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         IMutableForeignKey? RemoveForeignKey(
             IReadOnlyList<IReadOnlyProperty> properties,
             IMutableKey principalKey,
-            IMutableEntityType principalEntityType);
+            IMutableEntityType principalEntityType
+        );
 
         /// <summary>
         ///     Removes a foreign key from this entity type.
@@ -449,16 +461,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="memberInfo"> The navigation property on the entity class. </param>
         /// <returns> The navigation property, or <see langword="null" /> if none is found. </returns>
-        new IMutableNavigation? FindNavigation(MemberInfo memberInfo)
-            => FindNavigation(Check.NotNull(memberInfo, nameof(memberInfo)).GetSimpleMemberName());
+        new IMutableNavigation? FindNavigation(MemberInfo memberInfo) =>
+            FindNavigation(Check.NotNull(memberInfo, nameof(memberInfo)).GetSimpleMemberName());
 
         /// <summary>
         ///     Gets a navigation property on the given entity type. Returns <see langword="null" /> if no navigation property is found.
         /// </summary>
         /// <param name="name"> The name of the navigation property on the entity class. </param>
         /// <returns> The navigation property, or <see langword="null" /> if none is found. </returns>
-        new IMutableNavigation? FindNavigation(string name)
-            => (IMutableNavigation?)((IReadOnlyEntityType)this).FindNavigation(name);
+        new IMutableNavigation? FindNavigation(string name) =>
+            (IMutableNavigation?)((IReadOnlyEntityType)this).FindNavigation(name);
 
         /// <summary>
         ///     Gets a navigation property on the given entity type. Does not return navigation properties defined on a base type.
@@ -466,8 +478,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="name"> The name of the navigation property on the entity class. </param>
         /// <returns> The navigation property, or <see langword="null" /> if none is found. </returns>
-        new IMutableNavigation? FindDeclaredNavigation(string name)
-            => (IMutableNavigation?)((IReadOnlyEntityType)this).FindDeclaredNavigation(name);
+        new IMutableNavigation? FindDeclaredNavigation(string name) =>
+            (IMutableNavigation?)((IReadOnlyEntityType)this).FindDeclaredNavigation(name);
 
         /// <summary>
         ///     <para>
@@ -480,8 +492,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     </para>
         /// </summary>
         /// <returns> Declared navigation properties. </returns>
-        new IEnumerable<IMutableNavigation> GetDeclaredNavigations()
-            => ((IReadOnlyEntityType)this).GetDeclaredNavigations().Cast<IMutableNavigation>();
+        new IEnumerable<IMutableNavigation> GetDeclaredNavigations() =>
+            ((IReadOnlyEntityType)this).GetDeclaredNavigations().Cast<IMutableNavigation>();
 
         /// <summary>
         ///     <para>
@@ -494,15 +506,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     </para>
         /// </summary>
         /// <returns> Derived navigation properties. </returns>
-        new IEnumerable<IMutableNavigation> GetDerivedNavigations()
-            => ((IReadOnlyEntityType)this).GetDerivedNavigations().Cast<IMutableNavigation>();
+        new IEnumerable<IMutableNavigation> GetDerivedNavigations() =>
+            ((IReadOnlyEntityType)this).GetDerivedNavigations().Cast<IMutableNavigation>();
 
         /// <summary>
         ///     Gets all navigation properties on the given entity type.
         /// </summary>
         /// <returns> All navigation properties on the given entity type. </returns>
-        new IEnumerable<IMutableNavigation> GetNavigations()
-            => ((IReadOnlyEntityType)this).GetNavigations().Cast<IMutableNavigation>();
+        new IEnumerable<IMutableNavigation> GetNavigations() =>
+            ((IReadOnlyEntityType)this).GetNavigations().Cast<IMutableNavigation>();
 
         /// <summary>
         ///     Adds a new skip navigation property to this entity type.
@@ -527,15 +539,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             MemberInfo? memberInfo,
             IMutableEntityType targetEntityType,
             bool collection,
-            bool onDependent);
+            bool onDependent
+        );
 
         /// <summary>
         ///     Gets a skip navigation property on this entity type. Returns <see langword="null" /> if no navigation property is found.
         /// </summary>
         /// <param name="memberInfo"> The navigation property on the entity class. </param>
         /// <returns> The navigation property, or <see langword="null" /> if none is found. </returns>
-        new IMutableSkipNavigation? FindSkipNavigation(MemberInfo memberInfo)
-            => (IMutableSkipNavigation?)((IReadOnlyEntityType)this).FindSkipNavigation(memberInfo);
+        new IMutableSkipNavigation? FindSkipNavigation(MemberInfo memberInfo) =>
+            (IMutableSkipNavigation?)((IReadOnlyEntityType)this).FindSkipNavigation(memberInfo);
 
         /// <summary>
         ///     Gets a skip navigation property on this entity type. Returns <see langword="null" /> if no skip navigation property is found.
@@ -550,8 +563,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="name"> The name of the navigation property on the entity class. </param>
         /// <returns> The navigation property, or <see langword="null" /> if none is found. </returns>
-        new IMutableSkipNavigation? FindDeclaredSkipNavigation(string name)
-            => (IMutableSkipNavigation?)((IReadOnlyEntityType)this).FindDeclaredSkipNavigation(name);
+        new IMutableSkipNavigation? FindDeclaredSkipNavigation(string name) =>
+            (IMutableSkipNavigation?)((IReadOnlyEntityType)this).FindDeclaredSkipNavigation(name);
 
         /// <summary>
         ///     <para>
@@ -564,8 +577,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     </para>
         /// </summary>
         /// <returns> Declared foreign keys. </returns>
-        new IEnumerable<IMutableSkipNavigation> GetDeclaredSkipNavigations()
-            => ((IReadOnlyEntityType)this).GetDeclaredSkipNavigations().Cast<IMutableSkipNavigation>();
+        new IEnumerable<IMutableSkipNavigation> GetDeclaredSkipNavigations() =>
+            ((IReadOnlyEntityType)this).GetDeclaredSkipNavigations().Cast<IMutableSkipNavigation>();
 
         /// <summary>
         ///     <para>
@@ -578,8 +591,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     </para>
         /// </summary>
         /// <returns> Derived skip navigation properties. </returns>
-        new IEnumerable<IMutableSkipNavigation> GetDerivedSkipNavigations()
-            => ((IReadOnlyEntityType)this).GetDerivedSkipNavigations().Cast<IMutableSkipNavigation>();
+        new IEnumerable<IMutableSkipNavigation> GetDerivedSkipNavigations() =>
+            ((IReadOnlyEntityType)this).GetDerivedSkipNavigations().Cast<IMutableSkipNavigation>();
 
         /// <summary>
         ///     Gets the skip navigation properties on this entity type.
@@ -599,8 +612,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="property"> The property to be indexed. </param>
         /// <returns> The newly created index. </returns>
-        IMutableIndex AddIndex(IMutableProperty property)
-            => AddIndex(new[] { property });
+        IMutableIndex AddIndex(IMutableProperty property) => AddIndex(new[] { property });
 
         /// <summary>
         ///     Adds an unnamed index to this entity type.
@@ -615,8 +627,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="property"> The property to be indexed. </param>
         /// <param name="name"> The name of the index. </param>
         /// <returns> The newly created index. </returns>
-        IMutableIndex AddIndex(IMutableProperty property, string name)
-            => AddIndex(new[] { property }, name);
+        IMutableIndex AddIndex(IMutableProperty property, string name) =>
+            AddIndex(new[] { property }, name);
 
         /// <summary>
         ///     Adds a named index to this entity type.
@@ -631,8 +643,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="property"> The property to find the index on. </param>
         /// <returns> The index, or <see langword="null" /> if none is found. </returns>
-        new IMutableIndex? FindIndex(IReadOnlyProperty property)
-            => FindIndex(new[] { property });
+        new IMutableIndex? FindIndex(IReadOnlyProperty property) => FindIndex(new[] { property });
 
         /// <summary>
         ///     <para>
@@ -664,8 +675,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     </para>
         /// </summary>
         /// <returns> Declared indexes. </returns>
-        new IEnumerable<IMutableIndex> GetDeclaredIndexes()
-            => ((IReadOnlyEntityType)this).GetDeclaredIndexes().Cast<IMutableIndex>();
+        new IEnumerable<IMutableIndex> GetDeclaredIndexes() =>
+            ((IReadOnlyEntityType)this).GetDeclaredIndexes().Cast<IMutableIndex>();
 
         /// <summary>
         ///     <para>
@@ -673,8 +684,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     </para>
         /// </summary>
         /// <returns> Derived indexes. </returns>
-        new IEnumerable<IMutableIndex> GetDerivedIndexes()
-            => ((IReadOnlyEntityType)this).GetDerivedIndexes().Cast<IMutableIndex>();
+        new IEnumerable<IMutableIndex> GetDerivedIndexes() =>
+            ((IReadOnlyEntityType)this).GetDerivedIndexes().Cast<IMutableIndex>();
 
         /// <summary>
         ///     Gets the indexes defined on this entity type.
@@ -723,8 +734,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="memberInfo"> The property on the entity class. </param>
         /// <returns> The property, or <see langword="null" /> if none is found. </returns>
-        new IMutableProperty? FindProperty(MemberInfo memberInfo)
-            => (IMutableProperty?)((IReadOnlyEntityType)this).FindProperty(memberInfo);
+        new IMutableProperty? FindProperty(MemberInfo memberInfo) =>
+            (IMutableProperty?)((IReadOnlyEntityType)this).FindProperty(memberInfo);
 
         /// <summary>
         ///     <para>
@@ -750,8 +761,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="propertyNames"> The property names. </param>
         /// <returns> The properties, or <see langword="null" /> if any property is not found. </returns>
-        new IReadOnlyList<IMutableProperty>? FindProperties(IReadOnlyList<string> propertyNames)
-            => (IReadOnlyList<IMutableProperty>?)((IReadOnlyEntityType)this).FindProperties(propertyNames);
+        new IReadOnlyList<IMutableProperty>? FindProperties(IReadOnlyList<string> propertyNames) =>
+            (IReadOnlyList<IMutableProperty>?)((IReadOnlyEntityType)this).FindProperties(
+                propertyNames
+            );
 
         /// <summary>
         ///     Finds a property declared on the type with the given name.
@@ -759,8 +772,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="name"> The property name. </param>
         /// <returns> The property, or <see langword="null" /> if none is found. </returns>
-        new IMutableProperty? FindDeclaredProperty(string name)
-            => (IMutableProperty?)((IReadOnlyEntityType)this).FindDeclaredProperty(name);
+        new IMutableProperty? FindDeclaredProperty(string name) =>
+            (IMutableProperty?)((IReadOnlyEntityType)this).FindDeclaredProperty(name);
 
         /// <summary>
         ///     <para>
@@ -773,16 +786,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="name"> The property name. </param>
         /// <returns> The property, or <see langword="null" /> if none is found. </returns>
-        new IMutableProperty GetProperty(string name)
-            => (IMutableProperty)((IReadOnlyEntityType)this).GetProperty(name);
+        new IMutableProperty GetProperty(string name) =>
+            (IMutableProperty)((IReadOnlyEntityType)this).GetProperty(name);
 
         /// <summary>
         ///     Adds a property to this entity type.
         /// </summary>
         /// <param name="memberInfo"> The corresponding member on the entity class. </param>
         /// <returns> The newly created property. </returns>
-        IMutableProperty AddProperty(MemberInfo memberInfo)
-            => AddProperty(memberInfo.GetSimpleMemberName(), memberInfo.GetMemberType(), memberInfo);
+        IMutableProperty AddProperty(MemberInfo memberInfo) =>
+            AddProperty(memberInfo.GetSimpleMemberName(), memberInfo.GetMemberType(), memberInfo);
 
         /// <summary>
         ///     Adds a property to this entity type.
@@ -805,15 +818,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="name"> The name of the property to add. </param>
         /// <param name="propertyType"> The type of value the property will hold. </param>
         /// <returns> The newly created property. </returns>
-        IMutableProperty AddIndexerProperty(
-            string name,
-            Type propertyType)
+        IMutableProperty AddIndexerProperty(string name, Type propertyType)
         {
             var indexerPropertyInfo = FindIndexerPropertyInfo();
             if (indexerPropertyInfo == null)
             {
                 throw new InvalidOperationException(
-                    CoreStrings.NonIndexerEntityType(name, DisplayName(), typeof(string).ShortDisplayName()));
+                    CoreStrings.NonIndexerEntityType(
+                        name,
+                        DisplayName(),
+                        typeof(string).ShortDisplayName()
+                    )
+                );
             }
 
             return AddProperty(name, propertyType, indexerPropertyInfo);
@@ -830,8 +846,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     </para>
         /// </summary>
         /// <returns> Declared non-navigation properties. </returns>
-        new IEnumerable<IMutableProperty> GetDeclaredProperties()
-            => ((IReadOnlyEntityType)this).GetDeclaredProperties().Cast<IMutableProperty>();
+        new IEnumerable<IMutableProperty> GetDeclaredProperties() =>
+            ((IReadOnlyEntityType)this).GetDeclaredProperties().Cast<IMutableProperty>();
 
         /// <summary>
         ///     <para>
@@ -844,8 +860,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     </para>
         /// </summary>
         /// <returns> Derived non-navigation properties. </returns>
-        new IEnumerable<IMutableProperty> GetDerivedProperties()
-            => ((IReadOnlyEntityType)this).GetDerivedProperties().Cast<IMutableProperty>();
+        new IEnumerable<IMutableProperty> GetDerivedProperties() =>
+            ((IReadOnlyEntityType)this).GetDerivedProperties().Cast<IMutableProperty>();
 
         /// <summary>
         ///     <para>
@@ -905,8 +921,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     </para>
         /// </summary>
         /// <returns> Declared service properties. </returns>
-        new IEnumerable<IMutableServiceProperty> GetDeclaredServiceProperties()
-            => ((IReadOnlyEntityType)this).GetDeclaredServiceProperties().Cast<IMutableServiceProperty>();
+        new IEnumerable<IMutableServiceProperty> GetDeclaredServiceProperties() =>
+            ((IReadOnlyEntityType)this).GetDeclaredServiceProperties()
+                .Cast<IMutableServiceProperty>();
 
         /// <summary>
         ///     <para>
@@ -919,8 +936,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     </para>
         /// </summary>
         /// <returns> Derived service properties. </returns>
-        new IEnumerable<IMutableServiceProperty> GetDerivedServiceProperties()
-            => ((IReadOnlyEntityType)this).GetDerivedServiceProperties().Cast<IMutableServiceProperty>();
+        new IEnumerable<IMutableServiceProperty> GetDerivedServiceProperties() =>
+            ((IReadOnlyEntityType)this).GetDerivedServiceProperties()
+                .Cast<IMutableServiceProperty>();
 
         /// <summary>
         ///     <para>

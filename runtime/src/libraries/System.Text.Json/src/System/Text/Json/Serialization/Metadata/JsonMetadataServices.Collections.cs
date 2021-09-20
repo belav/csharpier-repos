@@ -19,13 +19,15 @@ namespace System.Text.Json.Serialization.Metadata
         public static JsonTypeInfo<TElement[]> CreateArrayInfo<TElement>(
             JsonSerializerOptions options,
             JsonTypeInfo elementInfo,
-            JsonNumberHandling numberHandling)
-            => new JsonTypeInfoInternal<TElement[]>(
+            JsonNumberHandling numberHandling
+        ) =>
+            new JsonTypeInfoInternal<TElement[]>(
                 options,
                 createObjectFunc: null,
                 new ArrayConverter<TElement[], TElement>(),
                 elementInfo,
-                numberHandling);
+                numberHandling
+            );
 
         /// <summary>
         /// Creates metadata for types assignable to <see cref="List{T}"/>.
@@ -41,14 +43,15 @@ namespace System.Text.Json.Serialization.Metadata
             JsonSerializerOptions options,
             Func<TCollection>? createObjectFunc,
             JsonTypeInfo elementInfo,
-            JsonNumberHandling numberHandling)
-            where TCollection : List<TElement>
-            => new JsonTypeInfoInternal<TCollection>(
+            JsonNumberHandling numberHandling
+        ) where TCollection : List<TElement> =>
+            new JsonTypeInfoInternal<TCollection>(
                 options,
                 createObjectFunc,
                 new ListOfTConverter<TCollection, TElement>(),
                 elementInfo,
-                numberHandling);
+                numberHandling
+            );
 
         /// <summary>
         /// Creates metadata for types assignable to <see cref="Dictionary{TKey, TValue}"/>.
@@ -67,15 +70,16 @@ namespace System.Text.Json.Serialization.Metadata
             Func<TCollection> createObjectFunc,
             JsonTypeInfo keyInfo,
             JsonTypeInfo valueInfo,
-            JsonNumberHandling numberHandling)
-            where TCollection : Dictionary<TKey, TValue>
-            where TKey : notnull
-            => new JsonTypeInfoInternal<TCollection>(
+            JsonNumberHandling numberHandling
+        ) where TCollection : Dictionary<TKey, TValue>
+          where TKey : notnull =>
+            new JsonTypeInfoInternal<TCollection>(
                 options,
                 createObjectFunc,
                 new DictionaryOfTKeyTValueConverter<TCollection, TKey, TValue>(),
                 keyInfo,
                 valueInfo,
-                numberHandling);
+                numberHandling
+            );
     }
 }

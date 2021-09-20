@@ -16,18 +16,14 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
         /// <summary>
         /// Initializes a new instance of <see cref="ClientCollection"/>.
         /// </summary>
-        public ClientCollection()
-        {
-        }
+        public ClientCollection() { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="ClientCollection"/> with the given
         /// clients in <paramref name="list"/>.
         /// </summary>
         /// <param name="list">The initial list of <see cref="Client"/>.</param>
-        public ClientCollection(IList<Client> list) : base(list)
-        {
-        }
+        public ClientCollection(IList<Client> list) : base(list) { }
 
         /// <summary>
         /// Gets a client given its client id.

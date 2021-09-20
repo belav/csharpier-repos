@@ -31,8 +31,10 @@ namespace System.Collections.Immutable
             /// <remarks>
             /// We utilize this resource pool to make "allocation free" enumeration achievable.
             /// </remarks>
-            private static readonly SecureObjectPool<Stack<RefAsValueType<Node>>, Enumerator> s_EnumeratingStacks =
-                new SecureObjectPool<Stack<RefAsValueType<Node>>, Enumerator>();
+            private static readonly SecureObjectPool<
+                Stack<RefAsValueType<Node>>,
+                Enumerator
+            > s_EnumeratingStacks = new SecureObjectPool<Stack<RefAsValueType<Node>>, Enumerator>();
 
             /// <summary>
             /// The builder being enumerated, if applicable.
@@ -93,13 +95,26 @@ namespace System.Collections.Immutable
             /// <param name="startIndex">The index of the first element to enumerate.</param>
             /// <param name="count">The number of elements in this collection.</param>
             /// <param name="reversed"><c>true</c> if the list should be enumerated in reverse order.</param>
-            internal Enumerator(Node root, Builder? builder = null, int startIndex = -1, int count = -1, bool reversed = false)
-            {
+            internal Enumerator(
+                Node root,
+                Builder? builder = null,
+                int startIndex = -1,
+                int count = -1,
+                bool reversed = false
+            ) {
                 Requires.NotNull(root, nameof(root));
                 Requires.Range(startIndex >= -1, nameof(startIndex));
                 Requires.Range(count >= -1, nameof(count));
-                Requires.Argument(reversed || count == -1 || (startIndex == -1 ? 0 : startIndex) + count <= root.Count);
-                Requires.Argument(!reversed || count == -1 || (startIndex == -1 ? root.Count - 1 : startIndex) - count + 1 >= 0);
+                Requires.Argument(
+                    reversed
+                        || count == -1
+                        || (startIndex == -1 ? 0 : startIndex) + count <= root.Count
+                );
+                Requires.Argument(
+                    !reversed
+                        || count == -1
+                        || (startIndex == -1 ? root.Count - 1 : startIndex) - count + 1 >= 0
+                );
 
                 _root = root;
                 _builder = builder;
@@ -115,7 +130,10 @@ namespace System.Collections.Immutable
                 {
                     if (!s_EnumeratingStacks.TryTake(this, out _stack))
                     {
-                        _stack = s_EnumeratingStacks.PrepNew(this, new Stack<RefAsValueType<Node>>(root.Height));
+                        _stack = s_EnumeratingStacks.PrepNew(
+                            this,
+                            new Stack<RefAsValueType<Node>>(root.Height)
+                        );
                     }
 
                     this.ResetStack();
@@ -154,8 +172,10 @@ namespace System.Collections.Immutable
             {
                 _root = null!;
                 _current = null;
-                if (_stack != null && _stack.TryUse(ref this, out Stack<RefAsValueType<Node>>? stack))
-                {
+                if (
+                    _stack != null
+                    && _stack.TryUse(ref this, out Stack<RefAsValueType<Node>>? stack)
+                ) {
                     stack.ClearFastWhenEmpty();
                     s_EnumeratingStacks.TryAdd(this, _stack!);
                 }

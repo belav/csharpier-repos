@@ -12,8 +12,10 @@ namespace System.Web.Http.Controllers
     /// </summary>
     public class VoidResultConverter : IActionResultConverter
     {
-        public HttpResponseMessage Convert(HttpControllerContext controllerContext, object actionResult)
-        {
+        public HttpResponseMessage Convert(
+            HttpControllerContext controllerContext,
+            object actionResult
+        ) {
             if (controllerContext == null)
             {
                 throw Error.ArgumentNull("controllerContext");

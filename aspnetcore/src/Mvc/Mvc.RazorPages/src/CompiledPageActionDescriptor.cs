@@ -17,9 +17,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         /// <summary>
         /// Initializes an empty <see cref="CompiledPageActionDescriptor"/>.
         /// </summary>
-        public CompiledPageActionDescriptor()
-        {
-        }
+        public CompiledPageActionDescriptor() { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="CompiledPageActionDescriptor"/>
@@ -27,9 +25,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         /// </summary>
         /// <param name="actionDescriptor">The <see cref="PageActionDescriptor"/>.</param>
         public CompiledPageActionDescriptor(PageActionDescriptor actionDescriptor)
-            : base(actionDescriptor)
-        {
-        }
+            : base(actionDescriptor) { }
 
         /// <summary>
         /// Gets the list of handler methods for the page. 
@@ -72,7 +68,10 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         internal override CompiledPageActionDescriptor CompiledPageDescriptor
         {
             get => this;
-            set => throw new InvalidOperationException("Setting the compiled descriptor on a compiled descriptor is not allowed.");
+            set =>
+                throw new InvalidOperationException(
+                    "Setting the compiled descriptor on a compiled descriptor is not allowed."
+                );
         }
     }
 }

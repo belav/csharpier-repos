@@ -17,10 +17,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             return model;
         }
 
-        protected override ConventionSet GetConventionSet()
-            => SqliteConventionSetBuilder.Build();
+        protected override ConventionSet GetConventionSet() => SqliteConventionSetBuilder.Build();
 
-        protected override ModelBuilder GetModelBuilder()
-            => SqliteConventionSetBuilder.CreateModelBuilder();
+        protected override ModelBuilder GetModelBuilder() =>
+            SqliteConventionSetBuilder.CreateModelBuilder();
     }
 }

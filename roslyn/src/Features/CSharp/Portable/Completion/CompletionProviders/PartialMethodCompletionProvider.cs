@@ -29,13 +29,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PartialMethodCompletionProvider()
-        {
-        }
+        public PartialMethodCompletionProvider() { }
 
-        protected override bool IncludeAccessibility(IMethodSymbol method, CancellationToken cancellationToken)
-        {
-            var declaration = (MethodDeclarationSyntax)method.DeclaringSyntaxReferences[0].GetSyntax(cancellationToken);
+        protected override bool IncludeAccessibility(
+            IMethodSymbol method,
+            CancellationToken cancellationToken
+        ) {
+            var declaration = (MethodDeclarationSyntax)method.DeclaringSyntaxReferences[
+                0
+            ].GetSyntax(cancellationToken);
             foreach (var mod in declaration.Modifiers)
             {
                 switch (mod.Kind())
@@ -66,28 +68,50 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return CompletionUtilities.GetTargetCaretPositionForMethod(methodDeclaration);
         }
 
-        protected override SyntaxToken GetToken(CompletionItem completionItem, SyntaxTree tree, CancellationToken cancellationToken)
-        {
+        protected override SyntaxToken GetToken(
+            CompletionItem completionItem,
+            SyntaxTree tree,
+            CancellationToken cancellationToken
+        ) {
             var tokenSpanEnd = MemberInsertionCompletionItem.GetTokenSpanEnd(completionItem);
             return tree.FindTokenOnLeftOfPosition(tokenSpanEnd, cancellationToken);
         }
 
-        public override bool IsInsertionTrigger(SourceText text, int characterPosition, OptionSet options)
-        {
+        public override bool IsInsertionTrigger(
+            SourceText text,
+            int characterPosition,
+            OptionSet options
+        ) {
             var ch = text[characterPosition];
-            return ch == ' ' || (CompletionUtilities.IsStartingNewWord(text, characterPosition) && options.GetOption(CompletionOptions.TriggerOnTypingLetters2, LanguageNames.CSharp));
+            return ch == ' '
+                || (
+                    CompletionUtilities.IsStartingNewWord(text, characterPosition)
+                    && options.GetOption(
+                        CompletionOptions.TriggerOnTypingLetters2,
+                        LanguageNames.CSharp
+                    )
+                );
         }
 
-        public override ImmutableHashSet<char> TriggerCharacters { get; } = CompletionUtilities.SpaceTriggerCharacter;
+        public override ImmutableHashSet<char> TriggerCharacters { get; } =
+            CompletionUtilities.SpaceTriggerCharacter;
 
         protected override bool IsPartial(IMethodSymbol method)
         {
-            var declarations = method.DeclaringSyntaxReferences.Select(r => r.GetSyntax()).OfType<MethodDeclarationSyntax>();
-            return declarations.Any(d => d.Body == null && d.Modifiers.Any(SyntaxKind.PartialKeyword));
+            var declarations = method.DeclaringSyntaxReferences.Select(r => r.GetSyntax())
+                .OfType<MethodDeclarationSyntax>();
+            return declarations.Any(
+                d => d.Body == null && d.Modifiers.Any(SyntaxKind.PartialKeyword)
+            );
         }
 
-        protected override bool IsPartialMethodCompletionContext(SyntaxTree tree, int position, CancellationToken cancellationToken, out DeclarationModifiers modifiers, out SyntaxToken token)
-        {
+        protected override bool IsPartialMethodCompletionContext(
+            SyntaxTree tree,
+            int position,
+            CancellationToken cancellationToken,
+            out DeclarationModifiers modifiers,
+            out SyntaxToken token
+        ) {
             var touchingToken = tree.FindTokenOnLeftOfPosition(position, cancellationToken);
             var targetToken = touchingToken.GetPreviousTokenIfTouchingWord(position);
             var text = tree.GetText(cancellationToken);
@@ -96,18 +120,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
             modifiers = default;
 
-            if (targetToken.IsKind(SyntaxKind.VoidKeyword, SyntaxKind.PartialKeyword) ||
-                (targetToken.Kind() == SyntaxKind.IdentifierToken && targetToken.HasMatchingText(SyntaxKind.PartialKeyword)))
-            {
-                return !IsOnSameLine(touchingToken.GetNextToken(), touchingToken, text) &&
-                    VerifyModifiers(tree, position, cancellationToken, out modifiers);
+            if (
+                targetToken.IsKind(SyntaxKind.VoidKeyword, SyntaxKind.PartialKeyword)
+                || (
+                    targetToken.Kind() == SyntaxKind.IdentifierToken
+                    && targetToken.HasMatchingText(SyntaxKind.PartialKeyword)
+                )
+            ) {
+                return !IsOnSameLine(touchingToken.GetNextToken(), touchingToken, text)
+                    && VerifyModifiers(tree, position, cancellationToken, out modifiers);
             }
 
             return false;
         }
 
-        private static bool VerifyModifiers(SyntaxTree tree, int position, CancellationToken cancellationToken, out DeclarationModifiers modifiers)
-        {
+        private static bool VerifyModifiers(
+            SyntaxTree tree,
+            int position,
+            CancellationToken cancellationToken,
+            out DeclarationModifiers modifiers
+        ) {
             var touchingToken = tree.FindTokenOnLeftOfPosition(position, cancellationToken);
             var token = touchingToken.GetPreviousToken();
 
@@ -121,7 +153,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     foundAsync = true;
                 }
 
-                foundPartial = foundPartial || token.IsKindOrHasMatchingText(SyntaxKind.PartialKeyword);
+                foundPartial =
+                    foundPartial || token.IsKindOrHasMatchingText(SyntaxKind.PartialKeyword);
 
                 token = token.GetPreviousToken();
             }
@@ -131,14 +164,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return foundPartial;
         }
 
-        private static bool IsOnSameLine(SyntaxToken syntaxToken, SyntaxToken touchingToken, SourceText text)
-        {
+        private static bool IsOnSameLine(
+            SyntaxToken syntaxToken,
+            SyntaxToken touchingToken,
+            SourceText text
+        ) {
             return !syntaxToken.IsKind(SyntaxKind.None)
                 && !touchingToken.IsKind(SyntaxKind.None)
-                && text.Lines.IndexOf(syntaxToken.SpanStart) == text.Lines.IndexOf(touchingToken.SpanStart);
+                && text.Lines.IndexOf(syntaxToken.SpanStart)
+                    == text.Lines.IndexOf(touchingToken.SpanStart);
         }
 
-        protected override string GetDisplayText(IMethodSymbol method, SemanticModel semanticModel, int position)
-            => method.ToMinimalDisplayString(semanticModel, position, SignatureDisplayFormat);
+        protected override string GetDisplayText(
+            IMethodSymbol method,
+            SemanticModel semanticModel,
+            int position
+        ) => method.ToMinimalDisplayString(semanticModel, position, SignatureDisplayFormat);
     }
 }

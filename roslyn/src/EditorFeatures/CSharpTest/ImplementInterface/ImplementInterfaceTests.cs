@@ -20,54 +20,111 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementInterface
 {
-    public partial class ImplementInterfaceTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class ImplementInterfaceTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        private readonly NamingStylesTestOptionSets _options = new NamingStylesTestOptionSets(LanguageNames.CSharp);
+        private readonly NamingStylesTestOptionSets _options = new NamingStylesTestOptionSets(
+            LanguageNames.CSharp
+        );
 
-        public ImplementInterfaceTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+        public ImplementInterfaceTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpImplementInterfaceCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpImplementInterfaceCodeFixProvider());
 
-        private OptionsCollection AllOptionsOff
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection AllOptionsOff =>
+            new OptionsCollection(GetLanguage())
             {
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedMethods, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedOperators, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedIndexers, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedOperators,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
             };
 
-        private OptionsCollection AllOptionsOn
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection AllOptionsOn =>
+            new OptionsCollection(GetLanguage())
             {
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedMethods, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedOperators, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedIndexers, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedOperators,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                },
             };
 
-        private OptionsCollection AccessorOptionsOn
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection AccessorOptionsOn =>
+            new OptionsCollection(GetLanguage())
             {
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedMethods, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedOperators, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                 { CSharpCodeStyleOptions.PreferExpressionBodiedIndexers, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedOperators,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
             };
 
-        private static readonly ParseOptions CSharp7_1 = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_1);
+        private static readonly ParseOptions CSharp7_1 =
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_1);
 
-        private const string NullableAttributesCode = @"
+        private const string NullableAttributesCode =
+            @"
 namespace System.Diagnostics.CodeAnalysis
 {
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property, Inherited = false)]
@@ -115,34 +172,58 @@ namespace System.Diagnostics.CodeAnalysis
 }";
 
         internal async Task TestWithAllCodeStyleOptionsOffAsync(
-            string initialMarkup, string expectedMarkup,
-            int index = 0, ParseOptions? parseOptions = null)
-        {
-            await TestAsync(initialMarkup, expectedMarkup, parseOptions, null,
-                index, options: AllOptionsOff);
+            string initialMarkup,
+            string expectedMarkup,
+            int index = 0,
+            ParseOptions? parseOptions = null
+        ) {
+            await TestAsync(
+                initialMarkup,
+                expectedMarkup,
+                parseOptions,
+                null,
+                index,
+                options: AllOptionsOff
+            );
         }
 
         internal async Task TestWithAllCodeStyleOptionsOnAsync(
-            string initialMarkup, string expectedMarkup,
-            int index = 0, ParseOptions? parseOptions = null)
-        {
-            await TestAsync(initialMarkup, expectedMarkup, parseOptions, null,
-                index, options: AllOptionsOn);
+            string initialMarkup,
+            string expectedMarkup,
+            int index = 0,
+            ParseOptions? parseOptions = null
+        ) {
+            await TestAsync(
+                initialMarkup,
+                expectedMarkup,
+                parseOptions,
+                null,
+                index,
+                options: AllOptionsOn
+            );
         }
 
         internal async Task TestWithAccessorCodeStyleOptionsOnAsync(
-            string initialMarkup, string expectedMarkup,
-            int index = 0, ParseOptions? parseOptions = null)
-        {
-            await TestAsync(initialMarkup, expectedMarkup, parseOptions, null,
-                index, options: AccessorOptionsOn);
+            string initialMarkup,
+            string expectedMarkup,
+            int index = 0,
+            ParseOptions? parseOptions = null
+        ) {
+            await TestAsync(
+                initialMarkup,
+                expectedMarkup,
+                parseOptions,
+                null,
+                index,
+                options: AccessorOptionsOn
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestMethod()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 }
@@ -150,7 +231,7 @@ namespace System.Diagnostics.CodeAnalysis
 class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 }
@@ -161,14 +242,15 @@ class Class : IInterface
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestMethodInRecord()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 }
@@ -176,7 +258,7 @@ class Class : IInterface
 record Record : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 }
@@ -187,14 +269,17 @@ record Record : IInterface
     {
         throw new System.NotImplementedException();
     }
-}", parseOptions: TestOptions.RegularPreview);
+}",
+                parseOptions: TestOptions.RegularPreview
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         [WorkItem(42986, "https://github.com/dotnet/roslyn/issues/42986")]
         public async Task TestMethodWithNativeIntegers()
         {
-            var nativeIntegerAttributeDefinition = @"
+            var nativeIntegerAttributeDefinition =
+                @"
 namespace System.Runtime.CompilerServices
 {
     [System.AttributeUsage(AttributeTargets.All)]
@@ -211,7 +296,7 @@ namespace System.Runtime.CompilerServices
 
             // Note: we're putting the attribute by hand to simulate metadata
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     [return: System.Runtime.CompilerServices.NativeInteger(new[] { true, true })]
     (nint, nuint) Method(nint x, nuint x2);
@@ -220,7 +305,7 @@ namespace System.Runtime.CompilerServices
 class Class : [|IInterface|]
 {
 }" + nativeIntegerAttributeDefinition,
-    @"interface IInterface
+                @"interface IInterface
 {
     [return: System.Runtime.CompilerServices.NativeInteger(new[] { true, true })]
     (nint, nuint) Method(nint x, nuint x2);
@@ -232,14 +317,15 @@ class Class : IInterface
     {
         throw new System.NotImplementedException();
     }
-}" + nativeIntegerAttributeDefinition);
+}" + nativeIntegerAttributeDefinition
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestMethodWithTuple()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     (int, int) Method((string, string) x);
 }
@@ -247,7 +333,7 @@ class Class : IInterface
 class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     (int, int) Method((string, string) x);
 }
@@ -258,7 +344,8 @@ class Class : IInterface
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(16793, "https://github.com/dotnet/roslyn/issues/16793")]
@@ -266,7 +353,7 @@ class Class : IInterface
         public async Task TestMethodWithValueTupleArity1()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"
+                @"
 using System;
 interface I
 {
@@ -275,7 +362,7 @@ interface I
 class C : [|I|]
 {
 }",
-@"
+                @"
 using System;
 interface I
 {
@@ -287,14 +374,15 @@ class C : I
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestExpressionBodiedMethod1()
         {
             await TestWithAllCodeStyleOptionsOnAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 }
@@ -302,7 +390,7 @@ class C : I
 class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 }
@@ -310,23 +398,28 @@ class Class : [|IInterface|]
 class Class : IInterface
 {
     public void Method1() => throw new System.NotImplementedException();
-}");
+}"
+            );
         }
 
         private const string s_tupleElementNamesAttribute =
-@"namespace System.Runtime.CompilerServices
+            @"namespace System.Runtime.CompilerServices
 {
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Event )]
     public sealed class TupleElementNamesAttribute : Attribute { }
 }
 ";
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface), CompilerTrait(CompilerFeature.Tuples)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface),
+            CompilerTrait(CompilerFeature.Tuples)
+        ]
         public async Task TupleWithNamesInMethod()
         {
             // Note: we're putting the attribute by hand to simulate metadata
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     [return: System.Runtime.CompilerServices.TupleElementNames(new[] { ""a"", ""b"" })]
     (int a, int b)[] Method1((int c, string) x);
@@ -335,7 +428,7 @@ class Class : IInterface
 class Class : [|IInterface|]
 {
 }" + s_tupleElementNamesAttribute,
-@"interface IInterface
+                @"interface IInterface
 {
     [return: System.Runtime.CompilerServices.TupleElementNames(new[] { ""a"", ""b"" })]
     (int a, int b)[] Method1((int c, string) x);
@@ -348,14 +441,19 @@ class Class : IInterface
         throw new System.NotImplementedException();
     }
 }
-" + s_tupleElementNamesAttribute);
+" + s_tupleElementNamesAttribute
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface), CompilerTrait(CompilerFeature.Tuples)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface),
+            CompilerTrait(CompilerFeature.Tuples)
+        ]
         public async Task TupleWithNamesInMethod_Explicitly()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     [return: System.Runtime.CompilerServices.TupleElementNames(new[] { ""a"", ""b"" })]
     (int a, int b)[] Method1((int c, string) x);
@@ -364,7 +462,7 @@ class Class : IInterface
 class Class : [|IInterface|]
 {
 }" + s_tupleElementNamesAttribute,
-@"interface IInterface
+                @"interface IInterface
 {
     [return: System.Runtime.CompilerServices.TupleElementNames(new[] { ""a"", ""b"" })]
     (int a, int b)[] Method1((int c, string) x);
@@ -378,14 +476,19 @@ class Class : IInterface
     }
 }
 " + s_tupleElementNamesAttribute,
-index: 1);
+                index: 1
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface), CompilerTrait(CompilerFeature.Tuples)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface),
+            CompilerTrait(CompilerFeature.Tuples)
+        ]
         public async Task TupleWithNamesInProperty()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     [System.Runtime.CompilerServices.TupleElementNames(new[] { ""a"", ""b"" })]
     (int a, int b)[] Property1 { [System.Runtime.CompilerServices.TupleElementNames(new[] { ""a"", ""b"" })] get; [System.Runtime.CompilerServices.TupleElementNames(new[] { ""a"", ""b"" })] set; }
@@ -394,7 +497,7 @@ index: 1);
 class Class : [|IInterface|]
 {
 }" + s_tupleElementNamesAttribute,
-@"interface IInterface
+                @"interface IInterface
 {
     [System.Runtime.CompilerServices.TupleElementNames(new[] { ""a"", ""b"" })]
     (int a, int b)[] Property1 { [System.Runtime.CompilerServices.TupleElementNames(new[] { ""a"", ""b"" })] get; [System.Runtime.CompilerServices.TupleElementNames(new[] { ""a"", ""b"" })] set; }
@@ -415,14 +518,19 @@ class Class : IInterface
         }
     }
 }
-" + s_tupleElementNamesAttribute);
+" + s_tupleElementNamesAttribute
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface), CompilerTrait(CompilerFeature.Tuples)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface),
+            CompilerTrait(CompilerFeature.Tuples)
+        ]
         public async Task TupleWithNamesInEvent()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     [System.Runtime.CompilerServices.TupleElementNames(new[] { ""a"", ""b"" })]
     event Func<(int a, int b)> Event1;
@@ -431,7 +539,7 @@ class Class : IInterface
 class Class : [|IInterface|]
 {
 }" + s_tupleElementNamesAttribute,
-@"interface IInterface
+                @"interface IInterface
 {
     [System.Runtime.CompilerServices.TupleElementNames(new[] { ""a"", ""b"" })]
     event Func<(int a, int b)> Event1;
@@ -441,14 +549,15 @@ class Class : IInterface
 {
     public event Func<(int a, int b)> Event1;
 }
-" + s_tupleElementNamesAttribute);
+" + s_tupleElementNamesAttribute
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task NoDynamicAttributeInMethod()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     [return: System.Runtime.CompilerServices.DynamicAttribute()]
     object Method1();
@@ -457,7 +566,7 @@ class Class : IInterface
 class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     [return: System.Runtime.CompilerServices.DynamicAttribute()]
     object Method1();
@@ -469,13 +578,15 @@ class Class : IInterface
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task NoNullableAttributesInMethodFromMetadata()
         {
-            var initial = @"
+            var initial =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <MetadataReferenceFromSource Language=""C#"" CommonReferences=""true"">
@@ -500,7 +611,8 @@ class C : [|IInterface|]
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 #nullable enable
 
 using System;
@@ -533,13 +645,13 @@ class C : IInterface
         public async Task TestMethodWhenClassBracesAreMissing()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 }
 
 class Class : [|IInterface|]",
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 }
@@ -551,14 +663,15 @@ class Class : IInterface
         throw new System.NotImplementedException();
     }
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestInheritance1()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface1
+                @"interface IInterface1
 {
     void Method1();
 }
@@ -570,7 +683,7 @@ interface IInterface2 : IInterface1
 class Class : [|IInterface2|]
 {
 }",
-@"interface IInterface1
+                @"interface IInterface1
 {
     void Method1();
 }
@@ -585,14 +698,15 @@ class Class : IInterface2
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestInheritance2()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface1
+                @"interface IInterface1
 {
 }
 
@@ -604,7 +718,7 @@ interface IInterface2 : IInterface1
 class Class : [|IInterface2|]
 {
 }",
-@"interface IInterface1
+                @"interface IInterface1
 {
 }
 
@@ -619,14 +733,15 @@ class Class : IInterface2
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestInheritance3()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface1
+                @"interface IInterface1
 {
     void Method1();
 }
@@ -639,7 +754,7 @@ interface IInterface2 : IInterface1
 class Class : [|IInterface2|]
 {
 }",
-@"interface IInterface1
+                @"interface IInterface1
 {
     void Method1();
 }
@@ -660,14 +775,15 @@ class Class : IInterface2
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestInheritanceMatchingMethod()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface1
+                @"interface IInterface1
 {
     void Method1();
 }
@@ -680,7 +796,7 @@ interface IInterface2 : IInterface1
 class Class : [|IInterface2|]
 {
 }",
-@"interface IInterface1
+                @"interface IInterface1
 {
     void Method1();
 }
@@ -696,14 +812,15 @@ class Class : IInterface2
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestExistingConflictingMethodReturnType()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface1
+                @"interface IInterface1
 {
     void Method1();
 }
@@ -715,7 +832,7 @@ class Class : [|IInterface1|]
         return 0;
     }
 }",
-@"interface IInterface1
+                @"interface IInterface1
 {
     void Method1();
 }
@@ -731,14 +848,15 @@ class Class : IInterface1
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestExistingConflictingMethodParameters()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface1
+                @"interface IInterface1
 {
     void Method1(int i);
 }
@@ -749,7 +867,7 @@ class Class : [|IInterface1|]
     {
     }
 }",
-@"interface IInterface1
+                @"interface IInterface1
 {
     void Method1(int i);
 }
@@ -764,14 +882,15 @@ class Class : IInterface1
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementGenericType()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface1<T>
+                @"interface IInterface1<T>
 {
     void Method1(T t);
 }
@@ -779,7 +898,7 @@ class Class : IInterface1
 class Class : [|IInterface1<int>|]
 {
 }",
-@"interface IInterface1<T>
+                @"interface IInterface1<T>
 {
     void Method1(T t);
 }
@@ -790,14 +909,15 @@ class Class : IInterface1<int>
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementGenericTypeWithGenericMethod()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface1<T>
+                @"interface IInterface1<T>
 {
     void Method1<U>(T t, U u);
 }
@@ -805,7 +925,7 @@ class Class : IInterface1<int>
 class Class : [|IInterface1<int>|]
 {
 }",
-@"interface IInterface1<T>
+                @"interface IInterface1<T>
 {
     void Method1<U>(T t, U u);
 }
@@ -816,14 +936,15 @@ class Class : IInterface1<int>
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementGenericTypeWithGenericMethodWithNaturalConstraint()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface1<T>
+                @"interface IInterface1<T>
 {
     void Method1<U>(T t, U u) where U : IList<T>;
 }
@@ -831,7 +952,7 @@ class Class : IInterface1<int>
 class Class : [|IInterface1<int>|]
 {
 }",
-@"interface IInterface1<T>
+                @"interface IInterface1<T>
 {
     void Method1<U>(T t, U u) where U : IList<T>;
 }
@@ -842,14 +963,15 @@ class Class : IInterface1<int>
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementGenericTypeWithGenericMethodWithUnexpressibleConstraint()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface1<T>
+                @"interface IInterface1<T>
 {
     void Method1<U>(T t, U u) where U : T;
 }
@@ -857,7 +979,7 @@ class Class : IInterface1<int>
 class Class : [|IInterface1<int>|]
 {
 }",
-@"interface IInterface1<T>
+                @"interface IInterface1<T>
 {
     void Method1<U>(T t, U u) where U : T;
 }
@@ -868,14 +990,15 @@ class Class : IInterface1<int>
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestArrayType()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     string[] M();
 }
@@ -883,7 +1006,7 @@ class Class : IInterface1<int>
 class C : [|I|]
 {
 }",
-@"interface I
+                @"interface I
 {
     string[] M();
 }
@@ -894,14 +1017,15 @@ class C : I
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementThroughFieldMember()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     void Method1();
 }
@@ -910,7 +1034,7 @@ class C : [|I|]
 {
     I i;
 }",
-@"interface I
+                @"interface I
 {
     void Method1();
 }
@@ -924,14 +1048,15 @@ class C : I
         i.Method1();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementThroughFieldMember_FixAll_SameMemberInDifferentType()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     void Method1();
 }
@@ -945,7 +1070,7 @@ class D : I
 {
     I i;
 }",
-@"interface I
+                @"interface I
 {
     void Method1();
 }
@@ -969,14 +1094,15 @@ class D : I
         i.Method1();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementThroughFieldMember_FixAll_FieldInOnePropInAnother()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     void Method1();
 }
@@ -990,7 +1116,7 @@ class D : I
 {
     I i { get; }
 }",
-@"interface I
+                @"interface I
 {
     void Method1();
 }
@@ -1014,14 +1140,15 @@ class D : I
         i.Method1();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementThroughFieldMember_FixAll_FieldInOneNonViableInAnother()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     void Method1();
 }
@@ -1035,7 +1162,7 @@ class D : I
 {
     int i;
 }",
-@"interface I
+                @"interface I
 {
     void Method1();
 }
@@ -1054,14 +1181,15 @@ class D : I
 {
     int i;
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementThroughFieldMemberInterfaceWithIndexer()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IGoo
+                @"interface IGoo
 {
     int this[int x] { get; set; }
 }
@@ -1070,7 +1198,7 @@ class Goo : [|IGoo|]
 {
     IGoo f;
 }",
-@"interface IGoo
+                @"interface IGoo
 {
     int this[int x] { get; set; }
 }
@@ -1092,7 +1220,8 @@ class Goo : IGoo
         }
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [WorkItem(472, "https://github.com/dotnet/roslyn/issues/472")]
@@ -1100,13 +1229,13 @@ index: 1);
         public async Task TestImplementThroughFieldMemberRemoveUnnecessaryCast()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System.Collections;
+                @"using System.Collections;
 
 sealed class X : [|IComparer|]
 {
     X x;
 }",
-@"using System.Collections;
+                @"using System.Collections;
 
 sealed class X : IComparer
 {
@@ -1117,7 +1246,8 @@ sealed class X : IComparer
         return ((IComparer)this.x).Compare(x, y);
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [WorkItem(472, "https://github.com/dotnet/roslyn/issues/472")]
@@ -1125,13 +1255,13 @@ index: 1);
         public async Task TestImplementThroughFieldMemberRemoveUnnecessaryCastAndThis()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System.Collections;
+                @"using System.Collections;
 
 sealed class X : [|IComparer|]
 {
     X a;
 }",
-@"using System.Collections;
+                @"using System.Collections;
 
 sealed class X : IComparer
 {
@@ -1142,14 +1272,15 @@ sealed class X : IComparer
         return ((IComparer)a).Compare(x, y);
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementAbstract()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     void Method1();
 }
@@ -1157,7 +1288,7 @@ index: 1);
 abstract class C : [|I|]
 {
 }",
-@"interface I
+                @"interface I
 {
     void Method1();
 }
@@ -1166,14 +1297,15 @@ abstract class C : I
 {
     public abstract void Method1();
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementInterfaceWithRefOutParameters()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"class C : [|I|]
+                @"class C : [|I|]
 {
     I goo;
 }
@@ -1183,7 +1315,7 @@ interface I
     void Method1(ref int x, out int y, int z);
     int Method2();
 }",
-@"class C : I
+                @"class C : I
 {
     I goo;
 
@@ -1203,14 +1335,15 @@ interface I
     void Method1(ref int x, out int y, int z);
     int Method2();
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestConflictingMethods1()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"class B
+                @"class B
 {
     public int Method1()
     {
@@ -1225,7 +1358,7 @@ interface I
 {
     void Method1();
 }",
-@"class B
+                @"class B
 {
     public int Method1()
     {
@@ -1243,14 +1376,15 @@ class C : B, I
 interface I
 {
     void Method1();
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestConflictingProperties()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"class Test : [|I1|]
+                @"class Test : [|I1|]
 {
     int Prop { get; set; }
 }
@@ -1259,7 +1393,7 @@ interface I1
 {
     int Prop { get; set; }
 }",
-@"class Test : I1
+                @"class Test : I1
 {
     int Prop { get; set; }
 
@@ -1280,7 +1414,8 @@ interface I1
 interface I1
 {
     int Prop { get; set; }
-}");
+}"
+            );
         }
 
         [WorkItem(539043, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539043")]
@@ -1288,7 +1423,7 @@ interface I1
         public async Task TestExplicitProperties()
         {
             await TestMissingInRegularAndScriptAsync(
-@"interface I2
+                @"interface I2
 {
     decimal Calc { get; }
 }
@@ -1304,7 +1439,8 @@ class C : [|I2|]
             return pay;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539489, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539489")]
@@ -1312,7 +1448,7 @@ class C : [|I2|]
         public async Task TestEscapedMethodName()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     void @M();
 }
@@ -1320,7 +1456,7 @@ class C : [|I2|]
 class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     void @M();
 }
@@ -1331,7 +1467,8 @@ class Class : IInterface
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539489, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539489")]
@@ -1339,7 +1476,7 @@ class Class : IInterface
         public async Task TestEscapedMethodKeyword()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     void @int();
 }
@@ -1347,7 +1484,7 @@ class Class : IInterface
 class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     void @int();
 }
@@ -1358,7 +1495,8 @@ class Class : IInterface
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539489, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539489")]
@@ -1366,7 +1504,7 @@ class Class : IInterface
         public async Task TestEscapedInterfaceName1()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface @IInterface
+                @"interface @IInterface
 {
     void M();
 }
@@ -1375,7 +1513,7 @@ class Class : [|@IInterface|]
 {
     string M();
 }",
-@"interface @IInterface
+                @"interface @IInterface
 {
     void M();
 }
@@ -1388,7 +1526,8 @@ class Class : @IInterface
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539489, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539489")]
@@ -1396,7 +1535,7 @@ class Class : @IInterface
         public async Task TestEscapedInterfaceName2()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface @IInterface
+                @"interface @IInterface
 {
     void @M();
 }
@@ -1405,7 +1544,7 @@ class Class : [|@IInterface|]
 {
     string M();
 }",
-@"interface @IInterface
+                @"interface @IInterface
 {
     void @M();
 }
@@ -1418,7 +1557,8 @@ class Class : @IInterface
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539489, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539489")]
@@ -1426,7 +1566,7 @@ class Class : @IInterface
         public async Task TestEscapedInterfaceKeyword1()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface @int
+                @"interface @int
 {
     void M();
 }
@@ -1435,7 +1575,7 @@ class Class : [|@int|]
 {
     string M();
 }",
-@"interface @int
+                @"interface @int
 {
     void M();
 }
@@ -1448,7 +1588,8 @@ class Class : @int
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539489, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539489")]
@@ -1456,7 +1597,7 @@ class Class : @int
         public async Task TestEscapedInterfaceKeyword2()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface @int
+                @"interface @int
 {
     void @bool();
 }
@@ -1465,7 +1606,7 @@ class Class : [|@int|]
 {
     string @bool();
 }",
-@"interface @int
+                @"interface @int
 {
     void @bool();
 }
@@ -1478,7 +1619,8 @@ class Class : @int
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539522, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539522")]
@@ -1486,14 +1628,14 @@ class Class : @int
         public async Task TestPropertyFormatting()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"public interface DD
+                @"public interface DD
 {
     int Prop { get; set; }
 }
 public class A : [|DD|]
 {
 }",
-@"public interface DD
+                @"public interface DD
 {
     int Prop { get; set; }
 }
@@ -1511,14 +1653,15 @@ public class A : DD
             throw new System.NotImplementedException();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestProperty_PropertyCodeStyleOn1()
         {
             await TestWithAllCodeStyleOptionsOnAsync(
-@"public interface DD
+                @"public interface DD
 {
     int Prop { get; }
 }
@@ -1526,7 +1669,7 @@ public class A : DD
 public class A : [|DD|]
 {
 }",
-@"public interface DD
+                @"public interface DD
 {
     int Prop { get; }
 }
@@ -1534,14 +1677,15 @@ public class A : [|DD|]
 public class A : DD
 {
     public int Prop => throw new System.NotImplementedException();
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestProperty_AccessorCodeStyleOn1()
         {
             await TestWithAccessorCodeStyleOptionsOnAsync(
-@"public interface DD
+                @"public interface DD
 {
     int Prop { get; }
 }
@@ -1549,7 +1693,7 @@ public class A : DD
 public class A : [|DD|]
 {
 }",
-@"public interface DD
+                @"public interface DD
 {
     int Prop { get; }
 }
@@ -1557,14 +1701,15 @@ public class A : [|DD|]
 public class A : DD
 {
     public int Prop { get => throw new System.NotImplementedException(); }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestIndexer_IndexerCodeStyleOn1()
         {
             await TestWithAllCodeStyleOptionsOnAsync(
-@"public interface DD
+                @"public interface DD
 {
     int this[int i] { get; }
 }
@@ -1572,7 +1717,7 @@ public class A : DD
 public class A : [|DD|]
 {
 }",
-@"public interface DD
+                @"public interface DD
 {
     int this[int i] { get; }
 }
@@ -1580,14 +1725,15 @@ public class A : [|DD|]
 public class A : DD
 {
     public int this[int i] => throw new System.NotImplementedException();
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestIndexer_AccessorCodeStyleOn1()
         {
             await TestWithAccessorCodeStyleOptionsOnAsync(
-@"public interface DD
+                @"public interface DD
 {
     int this[int i] { get; }
 }
@@ -1595,7 +1741,7 @@ public class A : DD
 public class A : [|DD|]
 {
 }",
-@"public interface DD
+                @"public interface DD
 {
     int this[int i] { get; }
 }
@@ -1603,14 +1749,15 @@ public class A : [|DD|]
 public class A : DD
 {
     public int this[int i] { get => throw new System.NotImplementedException(); }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestMethod_AllCodeStyleOn1()
         {
             await TestWithAllCodeStyleOptionsOnAsync(
-@"public interface DD
+                @"public interface DD
 {
     int M();
 }
@@ -1618,7 +1765,7 @@ public class A : DD
 public class A : [|DD|]
 {
 }",
-@"public interface DD
+                @"public interface DD
 {
     int M();
 }
@@ -1626,7 +1773,8 @@ public class A : [|DD|]
 public class A : DD
 {
     public int M() => throw new System.NotImplementedException();
-}");
+}"
+            );
         }
 
         [WorkItem(539522, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539522")]
@@ -1634,21 +1782,22 @@ public class A : DD
         public async Task TestReadonlyPropertyExpressionBodyYes1()
         {
             await TestWithAllCodeStyleOptionsOnAsync(
-@"public interface DD
+                @"public interface DD
 {
     int Prop { get; }
 }
 public class A : [|DD|]
 {
 }",
-@"public interface DD
+                @"public interface DD
 {
     int Prop { get; }
 }
 public class A : DD
 {
     public int Prop => throw new System.NotImplementedException();
-}");
+}"
+            );
         }
 
         [WorkItem(539522, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539522")]
@@ -1656,7 +1805,7 @@ public class A : DD
         public async Task TestReadonlyPropertyAccessorBodyYes1()
         {
             await TestWithAccessorCodeStyleOptionsOnAsync(
-@"public interface DD
+                @"public interface DD
 {
     int Prop { get; }
 }
@@ -1664,7 +1813,7 @@ public class A : DD
 public class A : [|DD|]
 {
 }",
-@"public interface DD
+                @"public interface DD
 {
     int Prop { get; }
 }
@@ -1672,7 +1821,8 @@ public class A : [|DD|]
 public class A : DD
 {
     public int Prop { get => throw new System.NotImplementedException(); }
-}");
+}"
+            );
         }
 
         [WorkItem(539522, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539522")]
@@ -1680,7 +1830,7 @@ public class A : DD
         public async Task TestReadonlyPropertyAccessorBodyYes2()
         {
             await TestWithAccessorCodeStyleOptionsOnAsync(
-@"public interface DD
+                @"public interface DD
 {
     int Prop { get; set; }
 }
@@ -1688,7 +1838,7 @@ public class A : DD
 public class A : [|DD|]
 {
 }",
-@"public interface DD
+                @"public interface DD
 {
     int Prop { get; set; }
 }
@@ -1696,7 +1846,8 @@ public class A : [|DD|]
 public class A : DD
 {
     public int Prop { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-}");
+}"
+            );
         }
 
         [WorkItem(539522, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539522")]
@@ -1704,7 +1855,7 @@ public class A : DD
         public async Task TestReadonlyPropertyExpressionBodyNo1()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"public interface DD
+                @"public interface DD
 {
     int Prop { get; }
 }
@@ -1712,7 +1863,7 @@ public class A : DD
 public class A : [|DD|]
 {
 }",
-@"public interface DD
+                @"public interface DD
 {
     int Prop { get; }
 }
@@ -1726,14 +1877,15 @@ public class A : DD
             throw new System.NotImplementedException();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestIndexerExpressionBodyYes1()
         {
             await TestWithAllCodeStyleOptionsOnAsync(
-@"public interface DD
+                @"public interface DD
 {
     int this[int i] { get; }
 }
@@ -1741,7 +1893,7 @@ public class A : DD
 public class A : [|DD|]
 {
 }",
-@"public interface DD
+                @"public interface DD
 {
     int this[int i] { get; }
 }
@@ -1749,14 +1901,15 @@ public class A : [|DD|]
 public class A : DD
 {
     public int this[int i] => throw new System.NotImplementedException();
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestIndexerExpressionBodyNo1()
         {
             await TestWithAllCodeStyleOptionsOnAsync(
-@"public interface DD
+                @"public interface DD
 {
     int this[int i] { get; set; }
 }
@@ -1764,7 +1917,7 @@ public class A : DD
 public class A : [|DD|]
 {
 }",
-@"public interface DD
+                @"public interface DD
 {
     int this[int i] { get; set; }
 }
@@ -1772,14 +1925,15 @@ public class A : [|DD|]
 public class A : DD
 {
     public int this[int i] { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestIndexerAccessorExpressionBodyYes1()
         {
             await TestWithAccessorCodeStyleOptionsOnAsync(
-@"public interface DD
+                @"public interface DD
 {
     int this[int i] { get; }
 }
@@ -1787,7 +1941,7 @@ public class A : DD
 public class A : [|DD|]
 {
 }",
-@"public interface DD
+                @"public interface DD
 {
     int this[int i] { get; }
 }
@@ -1795,14 +1949,15 @@ public class A : [|DD|]
 public class A : DD
 {
     public int this[int i] { get => throw new System.NotImplementedException(); }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestIndexerAccessorExpressionBodyYes2()
         {
             await TestWithAllCodeStyleOptionsOnAsync(
-@"public interface DD
+                @"public interface DD
 {
     int this[int i] { get; set; }
 }
@@ -1810,7 +1965,7 @@ public class A : DD
 public class A : [|DD|]
 {
 }",
-@"public interface DD
+                @"public interface DD
 {
     int this[int i] { get; set; }
 }
@@ -1818,14 +1973,15 @@ public class A : [|DD|]
 public class A : DD
 {
     public int this[int i] { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestCommentPlacement()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"public interface DD
+                @"public interface DD
 {
     void Goo();
 }
@@ -1833,7 +1989,7 @@ public class A : [|DD|]
 {
     //comments
 }",
-@"public interface DD
+                @"public interface DD
 {
     void Goo();
 }
@@ -1844,7 +2000,8 @@ public class A : DD
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(539991, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539991")]
@@ -1852,9 +2009,9 @@ public class A : DD
         public async Task TestBracePlacement()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 class C : [|IServiceProvider|]",
-@"using System;
+                @"using System;
 class C : IServiceProvider
 {
     public object GetService(Type serviceType)
@@ -1862,7 +2019,8 @@ class C : IServiceProvider
         throw new NotImplementedException();
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(540318, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/540318")]
@@ -1870,7 +2028,7 @@ class C : IServiceProvider
         public async Task TestMissingWithIncompleteMember()
         {
             await TestMissingInRegularAndScriptAsync(
-@"interface ITest
+                @"interface ITest
 {
     void Method();
 }
@@ -1881,7 +2039,8 @@ class Test : [|ITest|]
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(541380, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541380")]
@@ -1889,7 +2048,7 @@ class Test : [|ITest|]
         public async Task TestExplicitProperty()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface i1
+                @"interface i1
 {
     int p { get; set; }
 }
@@ -1897,7 +2056,7 @@ class Test : [|ITest|]
 class c1 : [|i1|]
 {
 }",
-@"interface i1
+                @"interface i1
 {
     int p { get; set; }
 }
@@ -1917,7 +2076,8 @@ class c1 : i1
         }
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [WorkItem(541981, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541981")]
@@ -1925,7 +2085,7 @@ index: 1);
         public async Task TestNoDelegateThroughField1()
         {
             await TestActionCountAsync(
-@"interface I
+                @"interface I
 {
     void Method1();
 }
@@ -1934,9 +2094,10 @@ class C : [|I|]
 {
     I i { get; set; }
 }",
-count: 3);
+                count: 3
+            );
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     void Method1();
 }
@@ -1945,7 +2106,7 @@ class C : [|I|]
 {
     I i { get; set; }
 }",
-@"interface I
+                @"interface I
 {
     void Method1();
 }
@@ -1959,9 +2120,10 @@ class C : I
         throw new System.NotImplementedException();
     }
 }",
-index: 0);
+                index: 0
+            );
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     void Method1();
 }
@@ -1970,7 +2132,7 @@ class C : [|I|]
 {
     I i { get; set; }
 }",
-@"interface I
+                @"interface I
 {
     void Method1();
 }
@@ -1984,9 +2146,10 @@ class C : I
         i.Method1();
     }
 }",
-index: 1);
+                index: 1
+            );
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     void Method1();
 }
@@ -1995,7 +2158,7 @@ class C : [|I|]
 {
     I i { get; set; }
 }",
-@"interface I
+                @"interface I
 {
     void Method1();
 }
@@ -2009,7 +2172,8 @@ class C : I
         throw new System.NotImplementedException();
     }
 }",
-index: 2);
+                index: 2
+            );
         }
 
         [WorkItem(768799, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/768799")]
@@ -2017,13 +2181,13 @@ index: 2);
         public async Task TestImplementIReadOnlyListThroughField()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class A : [|IReadOnlyList<int>|]
 {
     int[] field;
 }",
-@"using System.Collections;
+                @"using System.Collections;
 using System.Collections.Generic;
 
 class A : IReadOnlyList<int>
@@ -2056,7 +2220,8 @@ class A : IReadOnlyList<int>
         return field.GetEnumerator();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [WorkItem(768799, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/768799")]
@@ -2064,13 +2229,13 @@ index: 1);
         public async Task TestImplementIReadOnlyListThroughProperty()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class A : [|IReadOnlyList<int>|]
 {
     int[] field { get; set; }
 }",
-@"using System.Collections;
+                @"using System.Collections;
 using System.Collections.Generic;
 
 class A : IReadOnlyList<int>
@@ -2103,7 +2268,8 @@ class A : IReadOnlyList<int>
         return field.GetEnumerator();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [WorkItem(768799, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/768799")]
@@ -2111,7 +2277,7 @@ index: 1);
         public async Task TestImplementInterfaceThroughField()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     int M();
 }
@@ -2128,7 +2294,7 @@ class B : [|I|]
 {
     A a;
 }",
-@"interface I
+                @"interface I
 {
     int M();
 }
@@ -2150,7 +2316,8 @@ class B : I
         return ((I)a).M();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [WorkItem(768799, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/768799")]
@@ -2158,7 +2325,7 @@ index: 1);
         public async Task TestImplementInterfaceThroughField_FieldImplementsMultipleInterfaces()
         {
             await TestActionCountAsync(
-@"interface I
+                @"interface I
 {
     int M();
 }
@@ -2184,9 +2351,10 @@ class B : [|I|], I2
 {
     A a;
 }",
-count: 3);
+                count: 3
+            );
             await TestActionCountAsync(
-@"interface I
+                @"interface I
 {
     int M();
 }
@@ -2212,9 +2380,10 @@ class B : I, [|I2|]
 {
     A a;
 }",
-count: 3);
+                count: 3
+            );
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     int M();
 }
@@ -2240,7 +2409,7 @@ class B : [|I|], I2
 {
     A a;
 }",
-@"interface I
+                @"interface I
 {
     int M();
 }
@@ -2271,9 +2440,10 @@ class B : I, I2
         return ((I)a).M();
     }
 }",
-index: 1);
+                index: 1
+            );
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     int M();
 }
@@ -2299,7 +2469,7 @@ class B : I, [|I2|]
 {
     A a;
 }",
-@"interface I
+                @"interface I
 {
     int M();
 }
@@ -2330,7 +2500,8 @@ class B : I, I2
         return ((I2)a).M2();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [WorkItem(768799, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/768799")]
@@ -2338,7 +2509,7 @@ index: 1);
         public async Task TestImplementInterfaceThroughField_MultipleFieldsCanImplementInterface()
         {
             await TestActionCountAsync(
-@"interface I
+                @"interface I
 {
     int M();
 }
@@ -2356,9 +2527,10 @@ class B : [|I|]
     A a;
     A aa;
 }",
-count: 4);
+                count: 4
+            );
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     int M();
 }
@@ -2376,7 +2548,7 @@ class B : [|I|]
     A a;
     A aa;
 }",
-@"interface I
+                @"interface I
 {
     int M();
 }
@@ -2399,9 +2571,10 @@ class B : I
         return ((I)a).M();
     }
 }",
-index: 1);
+                index: 1
+            );
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     int M();
 }
@@ -2419,7 +2592,7 @@ class B : [|I|]
     A a;
     A aa;
 }",
-@"interface I
+                @"interface I
 {
     int M();
 }
@@ -2442,7 +2615,8 @@ class B : I
         return ((I)aa).M();
     }
 }",
-index: 2);
+                index: 2
+            );
         }
 
         [WorkItem(768799, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/768799")]
@@ -2450,7 +2624,7 @@ index: 2);
         public async Task TestImplementInterfaceThroughField_MultipleFieldsForMultipleInterfaces()
         {
             await TestActionCountAsync(
-@"interface I
+                @"interface I
 {
     int M();
 }
@@ -2480,9 +2654,10 @@ class C : [|I|], I2
     A a;
     B b;
 }",
-count: 3);
+                count: 3
+            );
             await TestActionCountAsync(
-@"interface I
+                @"interface I
 {
     int M();
 }
@@ -2512,9 +2687,10 @@ class C : I, [|I2|]
     A a;
     B b;
 }",
-count: 3);
+                count: 3
+            );
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     int M();
 }
@@ -2544,7 +2720,7 @@ class C : [|I|], I2
     A a;
     B b;
 }",
-@"interface I
+                @"interface I
 {
     int M();
 }
@@ -2579,9 +2755,10 @@ class C : I, I2
         return ((I)a).M();
     }
 }",
-index: 1);
+                index: 1
+            );
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     int M();
 }
@@ -2611,7 +2788,7 @@ class C : I, [|I2|]
     A a;
     B b;
 }",
-@"interface I
+                @"interface I
 {
     int M();
 }
@@ -2646,7 +2823,8 @@ class C : I, I2
         return ((I2)b).M2();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [WorkItem(18556, "https://github.com/dotnet/roslyn/issues/18556")]
@@ -2654,7 +2832,7 @@ index: 1);
         public async Task TestImplementInterfaceThroughExplicitProperty()
         {
             await TestActionCountAsync(
-@"interface IA
+                @"interface IA
 {
     IB B { get; }
 }
@@ -2666,9 +2844,10 @@ class AB : IA, [|IB|]
 {
     IB IA.B => null;
 }",
-count: 3);
+                count: 3
+            );
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IA
+                @"interface IA
 {
     IB B { get; }
 }
@@ -2680,7 +2859,7 @@ class AB : IA, [|IB|]
 {
     IB IA.B => null;
 }",
-@"interface IA
+                @"interface IA
 {
     IB B { get; }
 }
@@ -2696,7 +2875,9 @@ class AB : IA, [|IB|]
     {
         return ((IA)this).B.M();
     }
-}", index: 1);
+}",
+                index: 1
+            );
         }
 
         [WorkItem(768799, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/768799")]
@@ -2704,7 +2885,7 @@ class AB : IA, [|IB|]
         public async Task TestNoImplementThroughIndexer()
         {
             await TestActionCountAsync(
-@"interface I
+                @"interface I
 {
     int M();
 }
@@ -2727,7 +2908,8 @@ class B : [|I|]
         }
     };
 }",
-count: 2);
+                count: 2
+            );
         }
 
         [WorkItem(768799, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/768799")]
@@ -2735,7 +2917,7 @@ count: 2);
         public async Task TestNoImplementThroughWriteOnlyProperty()
         {
             await TestActionCountAsync(
-@"interface I
+                @"interface I
 {
     int M();
 }
@@ -2757,13 +2939,15 @@ class B : [|I|]
         }
     }
 }",
-count: 2);
+                count: 2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementEventThroughMember()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 interface IGoo
 {
     event System.EventHandler E;
@@ -2778,7 +2962,7 @@ class HasCanGoo : [|IGoo|]
 {
     CanGoo canGoo;
 }",
-@"
+                @"
 using System;
 
 interface IGoo
@@ -2807,15 +2991,17 @@ class HasCanGoo : IGoo
             ((IGoo)canGoo).E -= value;
         }
     }
-}", index: 1);
+}",
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementEventThroughExplicitMember()
         {
             await TestInRegularAndScriptAsync(
-@"interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event IGoo.EventHandler E; } class HasCanGoo : [|IGoo|] { CanGoo canGoo; } ",
-@"using System;
+                @"interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event IGoo.EventHandler E; } class HasCanGoo : [|IGoo|] { CanGoo canGoo; } ",
+                @"using System;
 
 interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event IGoo.EventHandler E; } class HasCanGoo : IGoo { CanGoo canGoo;
 
@@ -2832,14 +3018,15 @@ interface IGoo { event System . EventHandler E ; } class CanGoo : IGoo { event I
         }
     }
 } ",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementEvent()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IGoo
+                @"interface IGoo
 {
     event System.EventHandler E;
 }
@@ -2847,7 +3034,7 @@ index: 1);
 abstract class Goo : [|IGoo|]
 {
 }",
-@"using System;
+                @"using System;
 
 interface IGoo
 {
@@ -2858,14 +3045,15 @@ abstract class Goo : IGoo
 {
     public event EventHandler E;
 }",
-index: 0);
+                index: 0
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementEventAbstractly()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IGoo
+                @"interface IGoo
 {
     event System.EventHandler E;
 }
@@ -2873,7 +3061,7 @@ index: 0);
 abstract class Goo : [|IGoo|]
 {
 }",
-@"using System;
+                @"using System;
 
 interface IGoo
 {
@@ -2884,14 +3072,15 @@ abstract class Goo : IGoo
 {
     public abstract event EventHandler E;
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementEventExplicitly()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IGoo
+                @"interface IGoo
 {
     event System.EventHandler E;
 }
@@ -2899,7 +3088,7 @@ index: 1);
 abstract class Goo : [|IGoo|]
 {
 }",
-@"using System;
+                @"using System;
 
 interface IGoo
 {
@@ -2921,14 +3110,15 @@ abstract class Goo : IGoo
         }
     }
 }",
-index: 2);
+                index: 2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestFaultToleranceInStaticMembers_01()
         {
             await TestMissingAsync(
-@"interface IFoo
+                @"interface IFoo
 {
     static string Name { set; get; }
 
@@ -2937,14 +3127,15 @@ index: 2);
 
 class Program : [|IFoo|]
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestFaultToleranceInStaticMembers_02()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IFoo
+                @"interface IFoo
 {
     string Name { set; get; }
 
@@ -2954,7 +3145,7 @@ class Program : [|IFoo|]
 class Program : [|IFoo|]
 {
 }",
-@"interface IFoo
+                @"interface IFoo
 {
     string Name { set; get; }
 
@@ -2975,14 +3166,15 @@ class Program : IFoo
             throw new System.NotImplementedException();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestFaultToleranceInStaticMembers_03()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IGoo
+                @"interface IGoo
 {
     static string Name { set; get; }
 
@@ -2992,7 +3184,7 @@ class Program : IFoo
 class Program : [|IGoo|]
 {
 }",
-@"interface IGoo
+                @"interface IGoo
 {
     static string Name { set; get; }
 
@@ -3005,14 +3197,15 @@ class Program : IGoo
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestIndexers()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"public interface ISomeInterface
+                @"public interface ISomeInterface
 {
     int this[int index] { get; set; }
 }
@@ -3020,7 +3213,7 @@ class Program : IGoo
 class IndexerClass : [|ISomeInterface|]
 {
 }",
-@"public interface ISomeInterface
+                @"public interface ISomeInterface
 {
     int this[int index] { get; set; }
 }
@@ -3039,14 +3232,15 @@ class IndexerClass : ISomeInterface
             throw new System.NotImplementedException();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestIndexersExplicit()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"public interface ISomeInterface
+                @"public interface ISomeInterface
 {
     int this[int index] { get; set; }
 }
@@ -3054,7 +3248,7 @@ class IndexerClass : ISomeInterface
 class IndexerClass : [|ISomeInterface|]
 {
 }",
-@"public interface ISomeInterface
+                @"public interface ISomeInterface
 {
     int this[int index] { get; set; }
 }
@@ -3074,14 +3268,15 @@ class IndexerClass : ISomeInterface
         }
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestIndexersWithASingleAccessor()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"public interface ISomeInterface
+                @"public interface ISomeInterface
 {
     int this[int index] { get; }
 }
@@ -3089,7 +3284,7 @@ index: 1);
 class IndexerClass : [|ISomeInterface|]
 {
 }",
-@"public interface ISomeInterface
+                @"public interface ISomeInterface
 {
     int this[int index] { get; }
 }
@@ -3103,7 +3298,8 @@ class IndexerClass : ISomeInterface
             throw new System.NotImplementedException();
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542357, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542357")]
@@ -3111,7 +3307,7 @@ class IndexerClass : ISomeInterface
         public async Task TestConstraints1()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     void Goo<T>() where T : class;
 }
@@ -3119,7 +3315,7 @@ class IndexerClass : ISomeInterface
 class A : [|I|]
 {
 }",
-@"interface I
+                @"interface I
 {
     void Goo<T>() where T : class;
 }
@@ -3130,7 +3326,8 @@ class A : I
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542357, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542357")]
@@ -3138,7 +3335,7 @@ class A : I
         public async Task TestConstraintsExplicit()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     void Goo<T>() where T : class;
 }
@@ -3146,7 +3343,7 @@ class A : I
 class A : [|I|]
 {
 }",
-@"interface I
+                @"interface I
 {
     void Goo<T>() where T : class;
 }
@@ -3158,7 +3355,8 @@ class A : I
         throw new System.NotImplementedException();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [WorkItem(542357, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542357")]
@@ -3166,7 +3364,7 @@ index: 1);
         public async Task TestUsingAddedForConstraint()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     void Goo<T>() where T : System.Attribute;
 }
@@ -3174,7 +3372,7 @@ index: 1);
 class A : [|I|]
 {
 }",
-@"using System;
+                @"using System;
 
 interface I
 {
@@ -3187,7 +3385,8 @@ class A : I
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542379, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542379")]
@@ -3195,7 +3394,7 @@ class A : I
         public async Task TestIndexer()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     int this[int x] { get; set; }
 }
@@ -3203,7 +3402,7 @@ class A : I
 class C : [|I|]
 {
 }",
-@"interface I
+                @"interface I
 {
     int this[int x] { get; set; }
 }
@@ -3222,7 +3421,8 @@ class C : I
             throw new System.NotImplementedException();
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542588, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542588")]
@@ -3230,7 +3430,7 @@ class C : I
         public async Task TestRecursiveConstraint1()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 interface I
 {
@@ -3240,7 +3440,7 @@ interface I
 class C : [|I|]
 {
 }",
-@"using System;
+                @"using System;
 
 interface I
 {
@@ -3253,7 +3453,8 @@ class C : I
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542588, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542588")]
@@ -3261,7 +3462,7 @@ class C : I
         public async Task TestRecursiveConstraint2()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 interface I
 {
@@ -3271,7 +3472,7 @@ interface I
 class C : [|I|]
 {
 }",
-@"using System;
+                @"using System;
 
 interface I
 {
@@ -3285,7 +3486,8 @@ class C : I
         throw new NotImplementedException();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [WorkItem(542587, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542587")]
@@ -3293,7 +3495,7 @@ index: 1);
         public async Task TestUnexpressibleConstraint1()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I<S>
+                @"interface I<S>
 {
     void Goo<T>() where T : class, S;
 }
@@ -3301,7 +3503,7 @@ index: 1);
 class A : [|I<string>|]
 {
 }",
-@"interface I<S>
+                @"interface I<S>
 {
     void Goo<T>() where T : class, S;
 }
@@ -3312,7 +3514,8 @@ class A : I<string>
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542587, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542587")]
@@ -3320,7 +3523,7 @@ class A : I<string>
         public async Task TestUnexpressibleConstraint2()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I<S>
+                @"interface I<S>
 {
     void Goo<T>() where T : class, S;
 }
@@ -3328,7 +3531,7 @@ class A : I<string>
 class A : [|I<object>|]
 {
 }",
-@"interface I<S>
+                @"interface I<S>
 {
     void Goo<T>() where T : class, S;
 }
@@ -3339,7 +3542,8 @@ class A : I<object>
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542587, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542587")]
@@ -3347,7 +3551,7 @@ class A : I<object>
         public async Task TestUnexpressibleConstraint3()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I<S>
+                @"interface I<S>
 {
     void Goo<T>() where T : class, S;
 }
@@ -3355,7 +3559,7 @@ class A : I<object>
 class A : [|I<object>|]
 {
 }",
-@"interface I<S>
+                @"interface I<S>
 {
     void Goo<T>() where T : class, S;
 }
@@ -3367,7 +3571,8 @@ class A : I<object>
         throw new System.NotImplementedException();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [WorkItem(542587, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542587")]
@@ -3375,7 +3580,7 @@ index: 1);
         public async Task TestUnexpressibleConstraint4()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 interface I<S>
 {
@@ -3385,7 +3590,7 @@ interface I<S>
 class A : [|I<Delegate>|]
 {
 }",
-@"using System;
+                @"using System;
 
 interface I<S>
 {
@@ -3398,7 +3603,8 @@ class A : I<Delegate>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542587, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542587")]
@@ -3406,7 +3612,7 @@ class A : I<Delegate>
         public async Task TestUnexpressibleConstraint5()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 interface I<S>
 {
@@ -3416,7 +3622,7 @@ interface I<S>
 class A : [|I<MulticastDelegate>|]
 {
 }",
-@"using System;
+                @"using System;
 
 interface I<S>
 {
@@ -3429,7 +3635,8 @@ class A : I<MulticastDelegate>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542587, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542587")]
@@ -3437,7 +3644,7 @@ class A : I<MulticastDelegate>
         public async Task TestUnexpressibleConstraint6()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 interface I<S>
 {
@@ -3449,7 +3656,7 @@ delegate void Bar();
 class A : [|I<Bar>|]
 {
 }",
-@"using System;
+                @"using System;
 
 interface I<S>
 {
@@ -3464,7 +3671,8 @@ class A : I<Bar>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542587, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542587")]
@@ -3472,7 +3680,7 @@ class A : I<Bar>
         public async Task TestUnexpressibleConstraint7()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 interface I<S>
 {
@@ -3482,7 +3690,7 @@ interface I<S>
 class A : [|I<Enum>|]
 {
 }",
-@"using System;
+                @"using System;
 
 interface I<S>
 {
@@ -3495,7 +3703,8 @@ class A : I<Enum>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542587, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542587")]
@@ -3503,7 +3712,7 @@ class A : I<Enum>
         public async Task TestUnexpressibleConstraint8()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 interface I<S>
 {
@@ -3513,7 +3722,7 @@ interface I<S>
 class A : [|I<int[]>|]
 {
 }",
-@"using System;
+                @"using System;
 
 interface I<S>
 {
@@ -3526,7 +3735,8 @@ class A : I<int[]>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542587, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542587")]
@@ -3534,7 +3744,7 @@ class A : I<int[]>
         public async Task TestUnexpressibleConstraint9()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 interface I<S>
 {
@@ -3548,7 +3758,7 @@ enum E
 class A : [|I<E>|]
 {
 }",
-@"using System;
+                @"using System;
 
 interface I<S>
 {
@@ -3565,7 +3775,8 @@ class A : I<E>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542621, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542621")]
@@ -3573,7 +3784,7 @@ class A : I<E>
         public async Task TestUnexpressibleConstraint10()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 interface I<S>
 {
@@ -3583,7 +3794,7 @@ interface I<S>
 class A : [|I<ValueType>|]
 {
 }",
-@"using System;
+                @"using System;
 
 interface I<S>
 {
@@ -3596,7 +3807,8 @@ class A : I<ValueType>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542669, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542669")]
@@ -3604,7 +3816,7 @@ class A : I<ValueType>
         public async Task TestArrayConstraint()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 interface I<S>
 {
@@ -3614,7 +3826,7 @@ interface I<S>
 class C : [|I<Array>|]
 {
 }",
-@"using System;
+                @"using System;
 
 interface I<S>
 {
@@ -3627,7 +3839,8 @@ class C : I<Array>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542743, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542743")]
@@ -3635,7 +3848,7 @@ class C : I<Array>
         public async Task TestMultipleClassConstraints()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 interface I<S>
 {
@@ -3645,7 +3858,7 @@ interface I<S>
 class C : [|I<Attribute>|]
 {
 }",
-@"using System;
+                @"using System;
 
 interface I<S>
 {
@@ -3658,7 +3871,8 @@ class C : I<Attribute>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542751, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542751")]
@@ -3666,7 +3880,7 @@ class C : I<Attribute>
         public async Task TestClassConstraintAndRefConstraint()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 interface I<S>
 {
@@ -3676,7 +3890,7 @@ interface I<S>
 class C : [|I<Exception>|]
 {
 }",
-@"using System;
+                @"using System;
 
 interface I<S>
 {
@@ -3689,7 +3903,8 @@ class C : I<Exception>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542505, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542505")]
@@ -3697,7 +3912,7 @@ class C : I<Exception>
         public async Task TestRenameConflictingTypeParameters1()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 interface I<T>
@@ -3708,7 +3923,7 @@ interface I<T>
 class A<S> : [|I<S>|]
 {
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 interface I<T>
@@ -3722,7 +3937,8 @@ class A<S> : I<S>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542505, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542505")]
@@ -3730,7 +3946,7 @@ class A<S> : I<S>
         public async Task TestRenameConflictingTypeParameters2()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 interface I<T>
@@ -3741,7 +3957,7 @@ interface I<T>
 class A<S> : [|I<S>|]
 {
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 interface I<T>
@@ -3756,7 +3972,8 @@ class A<S> : I<S>
         throw new NotImplementedException();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [WorkItem(542505, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542505")]
@@ -3764,7 +3981,7 @@ index: 1);
         public async Task TestRenameConflictingTypeParameters3()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 interface I<X, Y>
@@ -3777,7 +3994,7 @@ interface I<X, Y>
 class C<A, B> : [|I<A, B>|]
 {
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 interface I<X, Y>
@@ -3795,7 +4012,8 @@ class C<A, B> : I<A, B>
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542505, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542505")]
@@ -3803,7 +4021,7 @@ class C<A, B> : I<A, B>
         public async Task TestRenameConflictingTypeParameters4()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 interface I<X, Y>
@@ -3816,7 +4034,7 @@ interface I<X, Y>
 class C<A, B> : [|I<A, B>|]
 {
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 interface I<X, Y>
@@ -3833,7 +4051,8 @@ class C<A, B> : I<A, B>
         throw new NotImplementedException();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [WorkItem(542506, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542506")]
@@ -3841,7 +4060,7 @@ index: 1);
         public async Task TestNameSimplification()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 class A<T>
 {
@@ -3858,7 +4077,7 @@ class A<T>
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class A<T>
 {
@@ -3878,7 +4097,8 @@ class A<T>
             throw new NotImplementedException();
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542506, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542506")]
@@ -3886,7 +4106,7 @@ class A<T>
         public async Task TestNameSimplification2()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"class A<T>
+                @"class A<T>
 {
     class B
     {
@@ -3901,7 +4121,7 @@ class A<T>
     {
     }
 }",
-@"class A<T>
+                @"class A<T>
 {
     class B
     {
@@ -3919,7 +4139,8 @@ class A<T>
             throw new System.NotImplementedException();
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(542506, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542506")]
@@ -3927,7 +4148,7 @@ class A<T>
         public async Task TestNameSimplification3()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"class A<T>
+                @"class A<T>
 {
     class B
     {
@@ -3942,7 +4163,7 @@ class A<T>
     {
     }
 }",
-@"class A<T>
+                @"class A<T>
 {
     class B
     {
@@ -3960,7 +4181,8 @@ class A<T>
             throw new System.NotImplementedException();
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(544166, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544166")]
@@ -3968,7 +4190,7 @@ class A<T>
         public async Task TestImplementAbstractProperty()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IGoo
+                @"interface IGoo
 {
     int Gibberish { get; set; }
 }
@@ -3976,7 +4198,7 @@ class A<T>
 abstract class Goo : [|IGoo|]
 {
 }",
-@"interface IGoo
+                @"interface IGoo
 {
     int Gibberish { get; set; }
 }
@@ -3985,7 +4207,8 @@ abstract class Goo : IGoo
 {
     public abstract int Gibberish { get; set; }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [WorkItem(544210, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544210")]
@@ -3993,14 +4216,15 @@ index: 1);
         public async Task TestMissingOnWrongArity()
         {
             await TestMissingInRegularAndScriptAsync(
-@"interface I1<T>
+                @"interface I1<T>
 {
     int X { get; set; }
 }
 
 class C : [|I1|]
 {
-}");
+}"
+            );
         }
 
         [WorkItem(544281, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544281")]
@@ -4008,7 +4232,7 @@ class C : [|I1|]
         public async Task TestImplicitDefaultValue()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IOptional
+                @"interface IOptional
 {
     int Goo(int g = 0);
 }
@@ -4016,7 +4240,7 @@ class C : [|I1|]
 class Opt : [|IOptional|]
 {
 }",
-@"interface IOptional
+                @"interface IOptional
 {
     int Goo(int g = 0);
 }
@@ -4027,7 +4251,8 @@ class Opt : IOptional
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(544281, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544281")]
@@ -4035,7 +4260,7 @@ class Opt : IOptional
         public async Task TestExplicitDefaultValue()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IOptional
+                @"interface IOptional
 {
     int Goo(int g = 0);
 }
@@ -4043,7 +4268,7 @@ class Opt : IOptional
 class Opt : [|IOptional|]
 {
 }",
-@"interface IOptional
+                @"interface IOptional
 {
     int Goo(int g = 0);
 }
@@ -4055,27 +4280,29 @@ class Opt : IOptional
         throw new System.NotImplementedException();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestMissingInHiddenType()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program : [|IComparable|]
 {
 #line hidden
 }
-#line default");
+#line default"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestGenerateIntoVisiblePart()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"#line default
+                @"#line default
 using System;
 
 partial class Program : [|IComparable|]
@@ -4086,7 +4313,7 @@ partial class Program : [|IComparable|]
     }
 }
 #line default",
-@"#line default
+                @"#line default
 using System;
 
 partial class Program : IComparable
@@ -4101,14 +4328,15 @@ partial class Program : IComparable
 #line hidden
     }
 }
-#line default");
+#line default"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestGenerateIfAvailableRegionExists()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 partial class Program : [|IComparable|]
 {
@@ -4119,7 +4347,7 @@ partial class Program : [|IComparable|]
 partial class Program
 {
 }",
-@"using System;
+                @"using System;
 
 partial class Program : IComparable
 {
@@ -4133,7 +4361,8 @@ partial class Program
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545334, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545334")]
@@ -4141,14 +4370,15 @@ partial class Program
         public async Task TestNoGenerateInVenusCase1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 #line 1 ""Bar""
 class Goo : [|IComparable|]
 
 
 #line default
 #line hidden
-// stuff");
+// stuff"
+            );
         }
 
         [WorkItem(545476, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545476")]
@@ -4156,7 +4386,7 @@ class Goo : [|IComparable|]
         public async Task TestOptionalDateTime1()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -4168,7 +4398,7 @@ interface IGoo
 public class C : [|IGoo|]
 {
 }",
-@"using System;
+                @"using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -4183,7 +4413,8 @@ public class C : IGoo
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545476, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545476")]
@@ -4191,7 +4422,7 @@ public class C : IGoo
         public async Task TestOptionalDateTime2()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -4203,7 +4434,7 @@ interface IGoo
 public class C : [|IGoo|]
 {
 }",
-@"using System;
+                @"using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -4219,7 +4450,8 @@ public class C : IGoo
         throw new NotImplementedException();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [WorkItem(545477, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545477")]
@@ -4227,7 +4459,7 @@ index: 1);
         public async Task TestIUnknownIDispatchAttributes1()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System.Runtime.CompilerServices;
+                @"using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 interface IGoo
@@ -4239,7 +4471,7 @@ interface IGoo
 public class C : [|IGoo|]
 {
 }",
-@"using System.Runtime.CompilerServices;
+                @"using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 interface IGoo
@@ -4259,7 +4491,8 @@ public class C : IGoo
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545477, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545477")]
@@ -4267,7 +4500,7 @@ public class C : IGoo
         public async Task TestIUnknownIDispatchAttributes2()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System.Runtime.CompilerServices;
+                @"using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 interface IGoo
@@ -4279,7 +4512,7 @@ interface IGoo
 public class C : [|IGoo|]
 {
 }",
-@"using System.Runtime.CompilerServices;
+                @"using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 interface IGoo
@@ -4300,7 +4533,8 @@ public class C : IGoo
         throw new System.NotImplementedException();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [WorkItem(545464, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545464")]
@@ -4308,7 +4542,7 @@ index: 1);
         public async Task TestTypeNameConflict()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IGoo
+                @"interface IGoo
 {
     void Goo();
 }
@@ -4316,7 +4550,7 @@ index: 1);
 public class Goo : [|IGoo|]
 {
 }",
-@"interface IGoo
+                @"interface IGoo
 {
     void Goo();
 }
@@ -4327,22 +4561,24 @@ public class Goo : IGoo
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestStringLiteral()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IGoo { void Goo ( string s = ""\"""" ) ; } class B : [|IGoo|] { } ",
-@"interface IGoo { void Goo ( string s = ""\"""" ) ; }
+                @"interface IGoo { void Goo ( string s = ""\"""" ) ; } class B : [|IGoo|] { } ",
+                @"interface IGoo { void Goo ( string s = ""\"""" ) ; }
 class B : IGoo
 {
     public void Goo(string s = ""\"""")
     {
         throw new System.NotImplementedException();
     }
-} ");
+} "
+            );
         }
 
         [WorkItem(916114, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/916114")]
@@ -4350,7 +4586,7 @@ class B : IGoo
         public async Task TestOptionalNullableStructParameter1()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"struct b
+                @"struct b
 {
 }
 
@@ -4362,7 +4598,7 @@ interface d
 class c : [|d|]
 {
 }",
-@"struct b
+                @"struct b
 {
 }
 
@@ -4377,7 +4613,8 @@ class c : d
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(916114, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/916114")]
@@ -4385,7 +4622,7 @@ class c : d
         public async Task TestOptionalNullableStructParameter2()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"struct b
+                @"struct b
 {
 }
 
@@ -4397,7 +4634,7 @@ interface d
 class c : [|d|]
 {
 }",
-@"struct b
+                @"struct b
 {
 }
 
@@ -4412,7 +4649,9 @@ class c : d
     {
         throw new System.NotImplementedException();
     }
-}", 1);
+}",
+                1
+            );
         }
 
         [WorkItem(916114, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/916114")]
@@ -4420,7 +4659,7 @@ class c : d
         public async Task TestOptionalNullableIntParameter()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface d
+                @"interface d
 {
     void m(int? x = 5, int? y = null);
 }
@@ -4428,7 +4667,7 @@ class c : d
 class c : [|d|]
 {
 }",
-@"interface d
+                @"interface d
 {
     void m(int? x = 5, int? y = null);
 }
@@ -4439,7 +4678,8 @@ class c : d
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545613, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545613")]
@@ -4447,7 +4687,7 @@ class c : d
         public async Task TestOptionalWithNoDefaultValue()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System.Runtime.InteropServices;
+                @"using System.Runtime.InteropServices;
 
 interface I
 {
@@ -4457,7 +4697,7 @@ interface I
 class C : [|I|]
 {
 }",
-@"using System.Runtime.InteropServices;
+                @"using System.Runtime.InteropServices;
 
 interface I
 {
@@ -4470,14 +4710,15 @@ class C : I
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestIntegralAndFloatLiterals()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     void M01(short s = short.MinValue);
     void M02(short s = -1);
@@ -4508,7 +4749,7 @@ class C : I
 class C : [|I|]
 {
 }",
-@"interface I
+                @"interface I
 {
     void M01(short s = short.MinValue);
     void M02(short s = -1);
@@ -4657,14 +4898,15 @@ class C : I
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestEnumLiterals()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 enum E
 {
@@ -4688,7 +4930,7 @@ interface I
 class C : [|I|]
 {
 }",
-@"using System;
+                @"using System;
 
 enum E
 {
@@ -4720,14 +4962,15 @@ class C : I
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestCharLiterals()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 interface I
 {
@@ -4747,7 +4990,7 @@ interface I
 class C : [|I|]
 {
 }",
-@"using System;
+                @"using System;
 
 interface I
 {
@@ -4820,7 +5063,8 @@ class C : I
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545695, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545695")]
@@ -4828,7 +5072,7 @@ class C : I
         public async Task TestRemoveParenthesesAroundTypeReference1()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 interface I
 {
@@ -4839,7 +5083,7 @@ class C : [|I|]
 {
     DayOfWeek DayOfWeek { get; set; }
 }",
-@"using System;
+                @"using System;
 
 interface I
 {
@@ -4854,7 +5098,8 @@ class C : I
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545696, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545696")]
@@ -4862,7 +5107,7 @@ class C : I
         public async Task TestDecimalConstants1()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     void Goo(decimal x = decimal.MaxValue);
 }
@@ -4870,7 +5115,7 @@ class C : I
 class C : [|I|]
 {
 }",
-@"interface I
+                @"interface I
 {
     void Goo(decimal x = decimal.MaxValue);
 }
@@ -4881,7 +5126,8 @@ class C : I
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545711, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545711")]
@@ -4889,7 +5135,7 @@ class C : I
         public async Task TestNullablePrimitiveLiteral()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     void Goo(decimal? x = decimal.MaxValue);
 }
@@ -4897,7 +5143,7 @@ class C : I
 class C : [|I|]
 {
 }",
-@"interface I
+                @"interface I
 {
     void Goo(decimal? x = decimal.MaxValue);
 }
@@ -4908,7 +5154,8 @@ class C : I
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545715, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545715")]
@@ -4916,7 +5163,7 @@ class C : I
         public async Task TestNullableEnumType()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 interface I
 {
@@ -4926,7 +5173,7 @@ interface I
 class C : [|I|]
 {
 }",
-@"using System;
+                @"using System;
 
 interface I
 {
@@ -4939,7 +5186,8 @@ class C : I
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545752, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545752")]
@@ -4947,7 +5195,7 @@ class C : I
         public async Task TestByteLiterals()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     void Goo(byte x = 1);
 }
@@ -4955,7 +5203,7 @@ class C : I
 class C : [|I|]
 {
 }",
-@"interface I
+                @"interface I
 {
     void Goo(byte x = 1);
 }
@@ -4966,14 +5214,16 @@ class C : I
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545736, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545736")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestCastedOptionalParameter1()
         {
-            const string code = @"
+            const string code =
+                @"
 using System;
 interface I
 {
@@ -4984,7 +5234,8 @@ class C : [|I|]
 {
 }";
 
-            const string expected = @"
+            const string expected =
+                @"
 using System;
 interface I
 {
@@ -5007,7 +5258,7 @@ class C : I
         public async Task TestCastedEnumValue()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 interface I
 {
@@ -5017,7 +5268,7 @@ interface I
 class C : [|I|]
 {
 }",
-@"using System;
+                @"using System;
 
 interface I
 {
@@ -5030,7 +5281,8 @@ class C : I
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545785, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545785")]
@@ -5038,7 +5290,7 @@ class C : I
         public async Task TestNoCastFromZeroToEnum()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"enum E
+                @"enum E
 {
     A = 1,
 }
@@ -5051,7 +5303,7 @@ interface I
 class C : [|I|]
 {
 }",
-@"enum E
+                @"enum E
 {
     A = 1,
 }
@@ -5067,7 +5319,8 @@ class C : I
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545793, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545793")]
@@ -5075,7 +5328,7 @@ class C : I
         public async Task TestMultiDimArray()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System.Runtime.InteropServices;
+                @"using System.Runtime.InteropServices;
 
 interface I
 {
@@ -5085,7 +5338,7 @@ interface I
 class C : [|I|]
 {
 }",
-@"using System.Runtime.InteropServices;
+                @"using System.Runtime.InteropServices;
 
 interface I
 {
@@ -5098,7 +5351,8 @@ class C : I
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545794, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545794")]
@@ -5106,7 +5360,7 @@ class C : I
         public async Task TestParametersAfterOptionalParameter()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System.Runtime.InteropServices;
+                @"using System.Runtime.InteropServices;
 
 interface I
 {
@@ -5116,7 +5370,7 @@ interface I
 class C : [|I|]
 {
 }",
-@"using System.Runtime.InteropServices;
+                @"using System.Runtime.InteropServices;
 
 interface I
 {
@@ -5129,7 +5383,8 @@ class C : I
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545605, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545605")]
@@ -5137,7 +5392,7 @@ class C : I
         public async Task TestAttributeInParameter()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -5149,7 +5404,7 @@ class C : [|I|]
 {
 }
 ",
-@"using System;
+                @"using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -5164,7 +5419,8 @@ class C : I
         throw new NotImplementedException();
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(545897, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545897")]
@@ -5172,7 +5428,7 @@ class C : I
         public async Task TestNameConflictBetweenMethodAndTypeParameter()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I<S>
+                @"interface I<S>
 {
     void T1<T>(S x, T y);
 }
@@ -5180,7 +5436,7 @@ class C : I
 class C<T> : [|I<T>|]
 {
 }",
-@"interface I<S>
+                @"interface I<S>
 {
     void T1<T>(S x, T y);
 }
@@ -5191,7 +5447,8 @@ class C<T> : I<T>
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545895, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545895")]
@@ -5199,7 +5456,7 @@ class C<T> : I<T>
         public async Task TestTypeParameterReplacementWithOuterType()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 interface I<S>
 {
@@ -5209,7 +5466,7 @@ interface I<S>
 class D<T> : [|I<T>|]
 {
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 interface I<S>
 {
@@ -5222,7 +5479,8 @@ class D<T> : I<T>
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545864, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545864")]
@@ -5230,7 +5488,7 @@ class D<T> : I<T>
         public async Task TestFloatConstant()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     void Goo(float x = 1E10F);
 }
@@ -5238,7 +5496,7 @@ class D<T> : I<T>
 class C : [|I|]
 {
 }",
-@"interface I
+                @"interface I
 {
     void Goo(float x = 1E10F);
 }
@@ -5249,7 +5507,8 @@ class C : I
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(544640, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544640")]
@@ -5257,13 +5516,13 @@ class C : I
         public async Task TestKeywordForTypeParameterName()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     void Goo<@class>();
 }
 
 class C : [|I|]",
-@"interface I
+                @"interface I
 {
     void Goo<@class>();
 }
@@ -5275,7 +5534,8 @@ class C : I
         throw new System.NotImplementedException();
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(545922, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545922")]
@@ -5283,7 +5543,7 @@ class C : I
         public async Task TestExtremeDecimals()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     void Goo1(decimal x = 1E28M);
     void Goo2(decimal x = -1E28M);
@@ -5292,7 +5552,7 @@ class C : I
 class C : [|I|]
 {
 }",
-@"interface I
+                @"interface I
 {
     void Goo1(decimal x = 1E28M);
     void Goo2(decimal x = -1E28M);
@@ -5309,7 +5569,8 @@ class C : I
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(544659, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544659")]
@@ -5317,7 +5578,7 @@ class C : I
         public async Task TestNonZeroScaleDecimals()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     void Goo(decimal x = 0.1M);
 }
@@ -5325,7 +5586,7 @@ class C : I
 class C : [|I|]
 {
 }",
-@"interface I
+                @"interface I
 {
     void Goo(decimal x = 0.1M);
 }
@@ -5336,7 +5597,8 @@ class C : I
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(544639, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544639")]
@@ -5344,12 +5606,12 @@ class C : I
         public async Task TestUnterminatedComment()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
  
 // Implement interface
 class C : [|IServiceProvider|] /*
 ",
-@"using System;
+                @"using System;
 
 // Implement interface
 class C : IServiceProvider /*
@@ -5360,7 +5622,8 @@ class C : IServiceProvider /*
         throw new NotImplementedException();
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(529920, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529920")]
@@ -5368,13 +5631,13 @@ class C : IServiceProvider /*
         public async Task TestNewLineBeforeDirective()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
  
 // Implement interface
 class C : [|IServiceProvider|]
 #pragma warning disable
 ",
-@"using System;
+                @"using System;
 
 // Implement interface
 class C : IServiceProvider
@@ -5385,7 +5648,8 @@ class C : IServiceProvider
     }
 }
 #pragma warning disable
-");
+"
+            );
         }
 
         [WorkItem(529947, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529947")]
@@ -5393,11 +5657,11 @@ class C : IServiceProvider
         public async Task TestCommentAfterInterfaceList1()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
  
 class C : [|IServiceProvider|] // Implement interface
 ",
-@"using System;
+                @"using System;
 
 class C : IServiceProvider // Implement interface
 {
@@ -5406,7 +5670,8 @@ class C : IServiceProvider // Implement interface
         throw new NotImplementedException();
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(529947, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529947")]
@@ -5414,12 +5679,12 @@ class C : IServiceProvider // Implement interface
         public async Task TestCommentAfterInterfaceList2()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
  
 class C : [|IServiceProvider|] 
 // Implement interface
 ",
-@"using System;
+                @"using System;
 
 class C : IServiceProvider
 {
@@ -5429,7 +5694,8 @@ class C : IServiceProvider
     }
 }
 // Implement interface
-");
+"
+            );
         }
 
         [WorkItem(994456, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/994456")]
@@ -5438,9 +5704,9 @@ class C : IServiceProvider
         public async Task TestImplementIDisposable_NoDisposePattern()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 class C : [|IDisposable|]",
-@"using System;
+                @"using System;
 class C : IDisposable
 {
     public void Dispose()
@@ -5448,7 +5714,9 @@ class C : IDisposable
         throw new NotImplementedException();
     }
 }
-", index: 0);
+",
+                index: 0
+            );
         }
 
         [WorkItem(994456, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/994456")]
@@ -5457,16 +5725,18 @@ class C : IDisposable
         public async Task TestImplementIDisposable_DisposePattern()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 class C : [|IDisposable|]",
-$@"using System;
+                $@"using System;
 class C : IDisposable
 {{
     private bool disposedValue;
 
 {DisposePattern("protected virtual ", "C", "public void ")}
 }}
-", index: 1);
+",
+                index: 1
+            );
         }
 
         [WorkItem(994456, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/994456")]
@@ -5475,9 +5745,9 @@ class C : IDisposable
         public async Task TestImplementIDisposableExplicitly_NoDisposePattern()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 class C : [|IDisposable|]",
-@"using System;
+                @"using System;
 class C : IDisposable
 {
     void IDisposable.Dispose()
@@ -5485,7 +5755,9 @@ class C : IDisposable
         throw new NotImplementedException();
     }
 }
-", index: 2);
+",
+                index: 2
+            );
         }
 
         [WorkItem(994456, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/994456")]
@@ -5494,14 +5766,14 @@ class C : IDisposable
         public async Task TestImplementIDisposableExplicitly_DisposePattern()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 class C : [|System.IDisposable|]
 {
     class IDisposable
     {
     }
 }",
-$@"using System;
+                $@"using System;
 class C : System.IDisposable
 {{
     private bool disposedValue;
@@ -5511,7 +5783,9 @@ class C : System.IDisposable
     }}
 
 {DisposePattern("protected virtual ", "C", "void System.IDisposable.")}
-}}", index: 3);
+}}",
+                index: 3
+            );
         }
 
         [WorkItem(994456, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/994456")]
@@ -5520,14 +5794,16 @@ class C : System.IDisposable
         public async Task TestImplementIDisposableAbstractly_NoDisposePattern()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 abstract class C : [|IDisposable|]",
-@"using System;
+                @"using System;
 abstract class C : IDisposable
 {
     public abstract void Dispose();
 }
-", index: 2);
+",
+                index: 2
+            );
         }
 
         [WorkItem(994456, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/994456")]
@@ -5536,12 +5812,12 @@ abstract class C : IDisposable
         public async Task TestImplementIDisposableThroughMember_NoDisposePattern()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 class C : [|IDisposable|]
 {
     private IDisposable goo;
 }",
-@"using System;
+                @"using System;
 class C : IDisposable
 {
     private IDisposable goo;
@@ -5550,7 +5826,9 @@ class C : IDisposable
     {
         goo.Dispose();
     }
-}", index: 2);
+}",
+                index: 2
+            );
         }
 
         [WorkItem(941469, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/941469")]
@@ -5558,14 +5836,16 @@ class C : IDisposable
         public async Task TestImplementIDisposableExplicitly_NoNamespaceImportForSystem()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"class C : [|System.IDisposable|]",
-$@"class C : System.IDisposable
+                @"class C : [|System.IDisposable|]",
+                $@"class C : System.IDisposable
 {{
     private bool disposedValue;
 
 {DisposePattern("protected virtual ", "C", "void System.IDisposable.", gcPrefix: "System.")}
 }}
-", index: 3);
+",
+                index: 3
+            );
         }
 
         [WorkItem(951968, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/951968")]
@@ -5573,7 +5853,7 @@ $@"class C : System.IDisposable
         public async Task TestImplementIDisposableViaBaseInterface_NoDisposePattern()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 interface I : IDisposable
 {
     void F();
@@ -5581,7 +5861,7 @@ interface I : IDisposable
 class C : [|I|]
 {
 }",
-@"using System;
+                @"using System;
 interface I : IDisposable
 {
     void F();
@@ -5597,7 +5877,9 @@ class C : I
     {
         throw new NotImplementedException();
     }
-}", index: 0);
+}",
+                index: 0
+            );
         }
 
         [WorkItem(951968, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/951968")]
@@ -5605,7 +5887,7 @@ class C : I
         public async Task TestImplementIDisposableViaBaseInterface()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 interface I : IDisposable
 {
     void F();
@@ -5613,7 +5895,7 @@ interface I : IDisposable
 class C : [|I|]
 {
 }",
-$@"using System;
+                $@"using System;
 interface I : IDisposable
 {{
     void F();
@@ -5628,7 +5910,9 @@ class C : I
     }}
 
 {DisposePattern("protected virtual ", "C", "public void ")}
-}}", index: 1);
+}}",
+                index: 1
+            );
         }
 
         [WorkItem(951968, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/951968")]
@@ -5636,7 +5920,7 @@ class C : I
         public async Task TestImplementIDisposableExplicitlyViaBaseInterface()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 interface I : IDisposable
 {
     void F();
@@ -5644,7 +5928,7 @@ interface I : IDisposable
 class C : [|I|]
 {
 }",
-$@"using System;
+                $@"using System;
 interface I : IDisposable
 {{
     void F();
@@ -5659,7 +5943,9 @@ class C : I
     }}
 
 {DisposePattern("protected virtual ", "C", "void IDisposable.")}
-}}", index: 3);
+}}",
+                index: 3
+            );
         }
 
         [WorkItem(941469, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/941469")]
@@ -5667,7 +5953,7 @@ class C : I
         public async Task TestDontImplementDisposePatternForLocallyDefinedIDisposable()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"namespace System
+                @"namespace System
 {
     interface IDisposable
     {
@@ -5676,7 +5962,7 @@ class C : I
 
     class C : [|IDisposable|]
 }",
-@"namespace System
+                @"namespace System
 {
     interface IDisposable
     {
@@ -5690,16 +5976,18 @@ class C : I
             throw new NotImplementedException();
         }
     }
-}", index: 1);
+}",
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestDontImplementDisposePatternForStructures1()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 struct S : [|IDisposable|]",
-@"using System;
+                @"using System;
 struct S : IDisposable
 {
     public void Dispose()
@@ -5707,16 +5995,17 @@ struct S : IDisposable
         throw new NotImplementedException();
     }
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestDontImplementDisposePatternForStructures2()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 struct S : [|IDisposable|]",
-@"using System;
+                @"using System;
 struct S : IDisposable
 {
     void IDisposable.Dispose()
@@ -5724,7 +6013,9 @@ struct S : IDisposable
         throw new NotImplementedException();
     }
 }
-", index: 1);
+",
+                index: 1
+            );
         }
 
         [WorkItem(545924, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545924")]
@@ -5732,7 +6023,7 @@ struct S : IDisposable
         public async Task TestEnumNestedInGeneric()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"class C<T>
+                @"class C<T>
 {
     public enum E
     {
@@ -5748,7 +6039,7 @@ interface I
 class D : [|I|]
 {
 }",
-@"class C<T>
+                @"class C<T>
 {
     public enum E
     {
@@ -5767,7 +6058,8 @@ class D : I
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545939, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545939")]
@@ -5775,10 +6067,10 @@ class D : I
         public async Task TestUnterminatedString1()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 class C : [|IServiceProvider|] @""",
-@"using System;
+                @"using System;
 
 class C : IServiceProvider @""""{
     public object GetService(Type serviceType)
@@ -5786,7 +6078,8 @@ class C : IServiceProvider @""""{
         throw new NotImplementedException();
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(545939, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545939")]
@@ -5794,10 +6087,10 @@ class C : IServiceProvider @""""{
         public async Task TestUnterminatedString2()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 class C : [|IServiceProvider|] """,
-@"using System;
+                @"using System;
 
 class C : IServiceProvider """"{
     public object GetService(Type serviceType)
@@ -5805,7 +6098,8 @@ class C : IServiceProvider """"{
         throw new NotImplementedException();
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(545939, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545939")]
@@ -5813,10 +6107,10 @@ class C : IServiceProvider """"{
         public async Task TestUnterminatedString3()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 class C : [|IServiceProvider|] @""",
-@"using System;
+                @"using System;
 
 class C : IServiceProvider @""""{
     public object GetService(Type serviceType)
@@ -5824,7 +6118,8 @@ class C : IServiceProvider @""""{
         throw new NotImplementedException();
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(545939, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545939")]
@@ -5832,10 +6127,10 @@ class C : IServiceProvider @""""{
         public async Task TestUnterminatedString4()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 class C : [|IServiceProvider|] """,
-@"using System;
+                @"using System;
 
 class C : IServiceProvider """"{
     public object GetService(Type serviceType)
@@ -5843,7 +6138,8 @@ class C : IServiceProvider """"{
         throw new NotImplementedException();
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(545940, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545940")]
@@ -5851,7 +6147,7 @@ class C : IServiceProvider """"{
         public async Task TestDecimalENotation()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     void Goo1(decimal x = 1E-25M);
     void Goo2(decimal x = -1E-25M);
@@ -5862,7 +6158,7 @@ class C : IServiceProvider """"{
 class C : [|I|]
 {
 }",
-@"interface I
+                @"interface I
 {
     void Goo1(decimal x = 1E-25M);
     void Goo2(decimal x = -1E-25M);
@@ -5891,7 +6187,8 @@ class C : I
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545938, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545938")]
@@ -5899,7 +6196,7 @@ class C : I
         public async Task TestGenericEnumWithRenamedTypeParameters()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"class C<T>
+                @"class C<T>
 {
     public enum E
     {
@@ -5915,7 +6212,7 @@ interface I<S>
 class D<T> : [|I<T>|]
 {
 }",
-@"class C<T>
+                @"class C<T>
 {
     public enum E
     {
@@ -5934,7 +6231,8 @@ class D<T> : I<T>
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(545919, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545919")]
@@ -5942,7 +6240,7 @@ class D<T> : I<T>
         public async Task TestDoNotRenameTypeParameterToParameterName()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I<S>
+                @"interface I<S>
 {
     void Goo<T>(S T1);
 }
@@ -5950,7 +6248,7 @@ class D<T> : I<T>
 class C<T> : [|I<T>|]
 {
 }",
-@"interface I<S>
+                @"interface I<S>
 {
     void Goo<T>(S T1);
 }
@@ -5961,7 +6259,8 @@ class C<T> : I<T>
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(530265, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530265")]
@@ -5969,7 +6268,7 @@ class C<T> : I<T>
         public async Task TestAttributes()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System.Runtime.InteropServices;
+                @"using System.Runtime.InteropServices;
 
 interface I
 {
@@ -5980,7 +6279,7 @@ interface I
 class C : [|I|]
 {
 }",
-@"using System.Runtime.InteropServices;
+                @"using System.Runtime.InteropServices;
 
 interface I
 {
@@ -5995,7 +6294,8 @@ class C : I
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(530265, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530265")]
@@ -6003,7 +6303,7 @@ class C : I
         public async Task TestAttributesExplicit()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System.Runtime.InteropServices;
+                @"using System.Runtime.InteropServices;
 
 interface I
 {
@@ -6014,7 +6314,7 @@ interface I
 class C : [|I|]
 {
 }",
-@"using System.Runtime.InteropServices;
+                @"using System.Runtime.InteropServices;
 
 interface I
 {
@@ -6029,7 +6329,8 @@ class C : I
         throw new System.NotImplementedException();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [WorkItem(546443, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546443")]
@@ -6037,7 +6338,7 @@ index: 1);
         public async Task TestParameterNameWithTypeName()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 interface IGoo
 {
@@ -6047,7 +6348,7 @@ interface IGoo
 class C : [|IGoo|]
 {
 }",
-@"using System;
+                @"using System;
 
 interface IGoo
 {
@@ -6060,7 +6361,8 @@ class C : IGoo
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(530521, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530521")]
@@ -6068,7 +6370,7 @@ class C : IGoo
         public async Task TestUnboundGeneric()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 interface I
@@ -6080,7 +6382,7 @@ interface I
 class C : [|I|]
 {
 }",
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 interface I
@@ -6096,7 +6398,8 @@ class C : I
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(752436, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/752436")]
@@ -6104,7 +6407,7 @@ class C : I
         public async Task TestQualifiedNameImplicitInterface()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"namespace N
+                @"namespace N
 {
     public interface I
     {
@@ -6115,7 +6418,7 @@ class C : I
 class C : [|N.I|]
 {
 }",
-@"namespace N
+                @"namespace N
 {
     public interface I
     {
@@ -6129,7 +6432,8 @@ class C : N.I
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(752436, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/752436")]
@@ -6137,7 +6441,7 @@ class C : N.I
         public async Task TestQualifiedNameExplicitInterface()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"namespace N
+                @"namespace N
 {
     public interface I
     {
@@ -6148,7 +6452,7 @@ class C : N.I
 class C : [|N.I|]
 {
 }",
-@"using N;
+                @"using N;
 
 namespace N
 {
@@ -6164,7 +6468,9 @@ class C : N.I
     {
         throw new System.NotImplementedException();
     }
-}", index: 1);
+}",
+                index: 1
+            );
         }
 
         [WorkItem(847464, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/847464")]
@@ -6172,7 +6478,7 @@ class C : N.I
         public async Task TestImplementInterfaceForPartialType()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"public interface I
+                @"public interface I
 {
     void Goo();
 }
@@ -6184,7 +6490,7 @@ partial class C
 partial class C : [|I|]
 {
 }",
-@"public interface I
+                @"public interface I
 {
     void Goo();
 }
@@ -6199,7 +6505,9 @@ partial class C : I
     {
         throw new System.NotImplementedException();
     }
-}", index: 1);
+}",
+                index: 1
+            );
         }
 
         [WorkItem(847464, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/847464")]
@@ -6207,7 +6515,7 @@ partial class C : I
         public async Task TestImplementInterfaceForPartialType2()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"public interface I
+                @"public interface I
 {
     void Goo();
 }
@@ -6219,7 +6527,7 @@ partial class C : [|I|]
 partial class C
 {
 }",
-@"public interface I
+                @"public interface I
 {
     void Goo();
 }
@@ -6234,7 +6542,9 @@ partial class C : I
 
 partial class C
 {
-}", index: 1);
+}",
+                index: 1
+            );
         }
 
         [WorkItem(847464, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/847464")]
@@ -6242,7 +6552,7 @@ partial class C
         public async Task TestImplementInterfaceForPartialType3()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"public interface I
+                @"public interface I
 {
     void Goo();
 }
@@ -6259,7 +6569,7 @@ partial class C : [|I|]
 partial class C : I2
 {
 }",
-@"public interface I
+                @"public interface I
 {
     void Goo();
 }
@@ -6279,14 +6589,17 @@ partial class C : I
 
 partial class C : I2
 {
-}", index: 1);
+}",
+                index: 1
+            );
         }
 
         [WorkItem(752447, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/752447")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestExplicitImplOfIndexedProperty()
         {
-            var initial = @"
+            var initial =
+                @"
 <Workspace>
     <Project Language=""Visual Basic"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -6305,7 +6618,8 @@ public class Test : [|IGoo|]
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 public class Test : IGoo
 {
     string IGoo.get_IndexProp(int p1)
@@ -6327,7 +6641,8 @@ public class Test : IGoo
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplicitImplOfIndexedProperty()
         {
-            var initial = @"
+            var initial =
+                @"
 <Workspace>
     <Project Language=""Visual Basic"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -6348,7 +6663,8 @@ class C : [|I|]
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 class C : I
@@ -6371,7 +6687,8 @@ class C : I
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementationOfIndexerWithInaccessibleAttributes()
         {
-            var initial = @"
+            var initial =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -6395,7 +6712,8 @@ class C : [|I|]
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 class C : I
@@ -6432,36 +6750,41 @@ class Goo : [|IComparable|]
         }
 #endif
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)
+        ]
         public async Task TestImplementInterfaceForImplicitIDisposable()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 class Program : [|IDisposable|]
 {
 }",
-$@"using System;
+                $@"using System;
 
 class Program : IDisposable
 {{
     private bool disposedValue;
 
 {DisposePattern("protected virtual ", "Program", "public void ")}
-}}", index: 1);
+}}",
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementInterfaceForExplicitIDisposable()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 class Program : [|IDisposable|]
 {
     private bool DisposedValue;
 }",
-$@"using System;
+                $@"using System;
 
 class Program : IDisposable
 {{
@@ -6469,20 +6792,22 @@ class Program : IDisposable
     private bool disposedValue;
 
 {DisposePattern("protected virtual ", "Program", "void IDisposable.")}
-}}", index: 3);
+}}",
+                index: 3
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementInterfaceForIDisposableNonApplicable1()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 class Program : [|IDisposable|]
 {
     private bool disposedValue;
 }",
-@"using System;
+                @"using System;
 
 class Program : IDisposable
 {
@@ -6492,14 +6817,16 @@ class Program : IDisposable
     {
         throw new NotImplementedException();
     }
-}", index: 0);
+}",
+                index: 0
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementInterfaceForIDisposableNonApplicable2()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 class Program : [|IDisposable|]
 {
@@ -6507,7 +6834,7 @@ class Program : [|IDisposable|]
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class Program : IDisposable
 {
@@ -6519,26 +6846,30 @@ class Program : IDisposable
     {
         throw new NotImplementedException();
     }
-}", index: 0);
+}",
+                index: 0
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementInterfaceForExplicitIDisposableWithSealedClass()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 sealed class Program : [|IDisposable|]
 {
 }",
-$@"using System;
+                $@"using System;
 
 sealed class Program : IDisposable
 {{
     private bool disposedValue;
 
 {DisposePattern("private ", "Program", "void IDisposable.")}
-}}", index: 3);
+}}",
+                index: 3
+            );
         }
 
         [WorkItem(9760, "https://github.com/dotnet/roslyn/issues/9760")]
@@ -6546,13 +6877,13 @@ sealed class Program : IDisposable
         public async Task TestImplementInterfaceForExplicitIDisposableWithExistingField()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 class Program : [|IDisposable|]
 {
     private bool disposedValue;
 }",
-$@"using System;
+                $@"using System;
 
 class Program : IDisposable
 {{
@@ -6560,7 +6891,9 @@ class Program : IDisposable
     private bool disposedValue1;
 
 {DisposePattern("protected virtual ", "Program", "public void ", disposeField: "disposedValue1")}
-}}", index: 1);
+}}",
+                index: 1
+            );
         }
 
         [WorkItem(9760, "https://github.com/dotnet/roslyn/issues/9760")]
@@ -6568,19 +6901,22 @@ class Program : IDisposable
         public async Task TestImplementInterfaceUnderscoreNameForFields()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program : [|IDisposable|]
 {
 }",
-$@"using System;
+                $@"using System;
 
 class Program : IDisposable
 {{
     private bool _disposedValue;
 
 {DisposePattern("protected virtual ", "Program", "public void ", disposeField: "_disposedValue")}
-}}", index: 1, options: _options.FieldNamesAreCamelCaseWithUnderscorePrefix);
+}}",
+                index: 1,
+                options: _options.FieldNamesAreCamelCaseWithUnderscorePrefix
+            );
         }
 
         [WorkItem(939123, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/939123")]
@@ -6588,7 +6924,7 @@ class Program : IDisposable
         public async Task TestNoComAliasNameAttributeOnMethodParameters()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     void M([System.Runtime.InteropServices.ComAliasName(""pAlias"")] int p);
 }
@@ -6596,7 +6932,7 @@ class Program : IDisposable
 class C : [|I|]
 {
 }",
-@"interface I
+                @"interface I
 {
     void M([System.Runtime.InteropServices.ComAliasName(""pAlias"")] int p);
 }
@@ -6607,7 +6943,8 @@ class C : I
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(939123, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/939123")]
@@ -6615,7 +6952,7 @@ class C : I
         public async Task TestNoComAliasNameAttributeOnMethodReturnType()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System.Runtime.InteropServices;
+                @"using System.Runtime.InteropServices;
 
 interface I
 {
@@ -6626,7 +6963,7 @@ interface I
 class C : [|I|]
 {
 }",
-@"using System.Runtime.InteropServices;
+                @"using System.Runtime.InteropServices;
 
 interface I
 {
@@ -6640,7 +6977,8 @@ class C : I
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(939123, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/939123")]
@@ -6648,7 +6986,7 @@ class C : I
         public async Task TestNoComAliasNameAttributeOnIndexerParameters()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I
+                @"interface I
 {
     long this[[System.Runtime.InteropServices.ComAliasName(""pAlias"")] int p] { get; }
 }
@@ -6656,7 +6994,7 @@ class C : I
 class C : [|I|]
 {
 }",
-@"interface I
+                @"interface I
 {
     long this[[System.Runtime.InteropServices.ComAliasName(""pAlias"")] int p] { get; }
 }
@@ -6670,7 +7008,8 @@ class C : I
             throw new System.NotImplementedException();
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(947819, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/947819")]
@@ -6678,7 +7017,7 @@ class C : I
         public async Task TestMissingOpenBrace()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"namespace Scenarios
+                @"namespace Scenarios
 {
     public interface TestInterface
     {
@@ -6690,7 +7029,7 @@ class C : I
 
     // Comment
 }",
-@"namespace Scenarios
+                @"namespace Scenarios
 {
     public interface TestInterface
     {
@@ -6707,7 +7046,8 @@ class C : I
 
 
     // Comment
-}");
+}"
+            );
         }
 
         [WorkItem(994328, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/994328")]
@@ -6716,7 +7056,7 @@ class C : I
         {
             //CSharpFeaturesResources.DisposePattern
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I<T, U> : System.IDisposable, System.IEquatable<int> where U : T
+                @"interface I<T, U> : System.IDisposable, System.IEquatable<int> where U : T
 {
     System.Collections.Generic.List<U> M(System.Collections.Generic.Dictionary<T, System.Collections.Generic.List<U>> a, T b, U c);
     System.Collections.Generic.List<UU> M<TT, UU>(System.Collections.Generic.Dictionary<TT, System.Collections.Generic.List<UU>> a, TT b, UU c) where UU : TT;
@@ -6729,7 +7069,7 @@ partial class C
 partial class C : [|I<System.Exception, System.AggregateException>|], System.IDisposable
 {
 }",
-$@"using System;
+                $@"using System;
 using System.Collections.Generic;
 
 interface I<T, U> : System.IDisposable, System.IEquatable<int> where U : T
@@ -6762,7 +7102,9 @@ partial class C : I<System.Exception, System.AggregateException>, System.IDispos
     }}
 
 {DisposePattern("protected virtual ", "C", "public void ")}
-}}", index: 1);
+}}",
+                index: 1
+            );
         }
 
         [WorkItem(994328, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/994328")]
@@ -6770,7 +7112,7 @@ partial class C : I<System.Exception, System.AggregateException>, System.IDispos
         public async Task TestDisposePatternWhenAdditionalUsingsAreIntroduced2()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface I<T, U> : System.IDisposable, System.IEquatable<int> where U : T
+                @"interface I<T, U> : System.IDisposable, System.IEquatable<int> where U : T
 {
     System.Collections.Generic.List<U> M(System.Collections.Generic.Dictionary<T, System.Collections.Generic.List<U>> a, T b, U c);
     System.Collections.Generic.List<UU> M<TT, UU>(System.Collections.Generic.Dictionary<TT, System.Collections.Generic.List<UU>> a, TT b, UU c) where UU : TT;
@@ -6783,7 +7125,7 @@ partial class C : [|I<System.Exception, System.AggregateException>|], System.IDi
 partial class C
 {
 }",
-$@"using System;
+                $@"using System;
 using System.Collections.Generic;
 
 interface I<T, U> : System.IDisposable, System.IEquatable<int> where U : T
@@ -6816,7 +7158,9 @@ partial class C : I<System.Exception, System.AggregateException>, System.IDispos
 
 partial class C
 {{
-}}", index: 3);
+}}",
+                index: 3
+            );
         }
 
         private static string DisposePattern(
@@ -6824,8 +7168,8 @@ partial class C
             string className,
             string implementationVisibility,
             string disposeField = "disposedValue",
-            string gcPrefix = "")
-        {
+            string gcPrefix = ""
+        ) {
             return $@"    {disposeVisibility}void Dispose(bool disposing)
     {{
         if (!{disposeField})
@@ -6861,7 +7205,7 @@ partial class C
         public async Task TestInaccessibleAttributes()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 
 public class Goo : [|Holder.SomeInterface|]
 {
@@ -6878,7 +7222,7 @@ public class Holder
     {
     }
 }",
-@"using System;
+                @"using System;
 
 public class Goo : Holder.SomeInterface
 {
@@ -6898,7 +7242,8 @@ public class Holder
     private class SomeAttribute : Attribute
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(2785, "https://github.com/dotnet/roslyn/issues/2785")]
@@ -6906,7 +7251,7 @@ public class Holder
         public async Task TestImplementInterfaceThroughStaticMemberInGenericClass()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6915,7 +7260,7 @@ class Issue2785<T> : [|IList<object>|]
 {
     private static List<object> innerList = new List<object>();
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7004,14 +7349,19 @@ class Issue2785<T> : IList<object>
         return ((IEnumerable)innerList).GetEnumerator();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface), CompilerTrait(CompilerFeature.Tuples)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface),
+            CompilerTrait(CompilerFeature.Tuples)
+        ]
         public async Task LongTuple()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     (int, string, int, string, int, string, int, string) Method1((int, string, int, string, int, string, int, string) y);
 }
@@ -7020,7 +7370,7 @@ class Class : [|IInterface|]
 {
     (int, string) x;
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     (int, string, int, string, int, string, int, string) Method1((int, string, int, string, int, string, int, string) y);
 }
@@ -7033,14 +7383,15 @@ class Class : IInterface
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task LongTupleWithNames()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     (int a, string b, int c, string d, int e, string f, int g, string h) Method1((int a, string b, int c, string d, int e, string f, int g, string h) y);
 }
@@ -7049,7 +7400,7 @@ class Class : [|IInterface|]
 {
     (int, string) x;
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     (int a, string b, int c, string d, int e, string f, int g, string h) Method1((int a, string b, int c, string d, int e, string f, int g, string h) y);
 }
@@ -7062,14 +7413,15 @@ class Class : IInterface
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task GenericWithTuple()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface<TA, TB>
+                @"interface IInterface<TA, TB>
 {
     (TA, TB) Method1((TA, TB) y);
 }
@@ -7078,7 +7430,7 @@ class Class : [|IInterface<(int, string), int>|]
 {
     (int, string) x;
 }",
-@"interface IInterface<TA, TB>
+                @"interface IInterface<TA, TB>
 {
     (TA, TB) Method1((TA, TB) y);
 }
@@ -7091,14 +7443,15 @@ class Class : IInterface<(int, string), int>
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task GenericWithTupleWithNamess()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface<TA, TB>
+                @"interface IInterface<TA, TB>
 {
     (TA a, TB b) Method1((TA a, TB b) y);
 }
@@ -7107,7 +7460,7 @@ class Class : [|IInterface<(int, string), int>|]
 {
     (int, string) x;
 }",
-@"interface IInterface<TA, TB>
+                @"interface IInterface<TA, TB>
 {
     (TA a, TB b) Method1((TA a, TB b) y);
 }
@@ -7120,7 +7473,8 @@ class Class : IInterface<(int, string), int>
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(15387, "https://github.com/dotnet/roslyn/issues/15387")]
@@ -7128,7 +7482,7 @@ class Class : IInterface<(int, string), int>
         public async Task TestWithGroupingOff1()
         {
             await TestInRegularAndScriptAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     int Prop { get; }
 }
@@ -7137,7 +7491,7 @@ class Class : [|IInterface|]
 {
     void M() { }
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     int Prop { get; }
 }
@@ -7147,7 +7501,12 @@ class Class : IInterface
     void M() { }
 
     public int Prop => throw new System.NotImplementedException();
-}", options: Option(ImplementTypeOptions.InsertionBehavior, ImplementTypeInsertionBehavior.AtTheEnd));
+}",
+                options: Option(
+                    ImplementTypeOptions.InsertionBehavior,
+                    ImplementTypeInsertionBehavior.AtTheEnd
+                )
+            );
         }
 
         [WorkItem(15387, "https://github.com/dotnet/roslyn/issues/15387")]
@@ -7155,7 +7514,7 @@ class Class : IInterface
         public async Task TestDoNotReorderComImportMembers_01()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System.Runtime.InteropServices;
 
 [ComImport]
@@ -7170,7 +7529,7 @@ interface IComInterface
 class Class : [|IComInterface|]
 {
 }",
-@"
+                @"
 using System.Runtime.InteropServices;
 
 [ComImport]
@@ -7200,7 +7559,8 @@ class Class : IComInterface
     }
 
     public int Prop => throw new System.NotImplementedException();
-}");
+}"
+            );
         }
 
         [WorkItem(15387, "https://github.com/dotnet/roslyn/issues/15387")]
@@ -7208,7 +7568,7 @@ class Class : IComInterface
         public async Task TestDoNotReorderComImportMembers_02()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System.Runtime.InteropServices;
 
 [ComImport]
@@ -7223,7 +7583,7 @@ interface IComInterface
 class Class : [|IComInterface|]
 {
 }",
-@"
+                @"
 using System.Runtime.InteropServices;
 
 [ComImport]
@@ -7238,14 +7598,15 @@ interface IComInterface
 class Class : IComInterface
 {
     public int Prop => throw new System.NotImplementedException();
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestRefReturns()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 interface I {
@@ -7257,7 +7618,7 @@ interface I {
 class C : [|I|]
 {
 }",
-@"
+                @"
 using System;
 
 interface I {
@@ -7276,7 +7637,8 @@ class C : I
     {
         throw new NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(13932, "https://github.com/dotnet/roslyn/issues/13932")]
@@ -7285,7 +7647,7 @@ class C : I
         public async Task TestAutoProperties()
         {
             await TestInRegularAndScript1Async(
-@"interface IInterface
+                @"interface IInterface
 {
     int ReadOnlyProp { get; }
     int ReadWriteProp { get; set; }
@@ -7295,7 +7657,7 @@ class C : I
 class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     int ReadOnlyProp { get; }
     int ReadWriteProp { get; set; }
@@ -7307,16 +7669,21 @@ class Class : IInterface
     public int ReadOnlyProp { get; }
     public int ReadWriteProp { get; set; }
     public int WriteOnlyProp { set => throw new System.NotImplementedException(); }
-}", parameters: new TestParameters(options: Option(
-    ImplementTypeOptions.PropertyGenerationBehavior,
-    ImplementTypePropertyGenerationBehavior.PreferAutoProperties)));
+}",
+                parameters: new TestParameters(
+                    options: Option(
+                        ImplementTypeOptions.PropertyGenerationBehavior,
+                        ImplementTypePropertyGenerationBehavior.PreferAutoProperties
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestOptionalParameterWithDefaultLiteral()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"
+                @"
 using System.Threading;
 
 interface IInterface
@@ -7327,7 +7694,7 @@ interface IInterface
 class Class : [|IInterface|]
 {
 }",
-@"
+                @"
 using System.Threading;
 
 interface IInterface
@@ -7341,21 +7708,23 @@ class Class : IInterface
     {
         throw new System.NotImplementedException();
     }
-}", parseOptions: CSharp7_1);
+}",
+                parseOptions: CSharp7_1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestInWithMethod_Parameters()
         {
             await TestInRegularAndScriptAsync(
-@"interface ITest
+                @"interface ITest
 {
     void Method(in int p);
 }
 public class Test : [|ITest|]
 {
 }",
-@"interface ITest
+                @"interface ITest
 {
     void Method(in int p);
 }
@@ -7365,21 +7734,22 @@ public class Test : ITest
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestRefReadOnlyWithMethod_ReturnType()
         {
             await TestInRegularAndScriptAsync(
-@"interface ITest
+                @"interface ITest
 {
     ref readonly int Method();
 }
 public class Test : [|ITest|]
 {
 }",
-@"interface ITest
+                @"interface ITest
 {
     ref readonly int Method();
 }
@@ -7389,84 +7759,88 @@ public class Test : ITest
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestRefReadOnlyWithProperty()
         {
             await TestInRegularAndScriptAsync(
-@"interface ITest
+                @"interface ITest
 {
     ref readonly int Property { get; }
 }
 public class Test : [|ITest|]
 {
 }",
-@"interface ITest
+                @"interface ITest
 {
     ref readonly int Property { get; }
 }
 public class Test : ITest
 {
     public ref readonly int Property => throw new System.NotImplementedException();
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestInWithIndexer_Parameters()
         {
             await TestInRegularAndScriptAsync(
-@"interface ITest
+                @"interface ITest
 {
     int this[in int p] { set; }
 }
 public class Test : [|ITest|]
 {
 }",
-@"interface ITest
+                @"interface ITest
 {
     int this[in int p] { set; }
 }
 public class Test : ITest
 {
     public int this[in int p] { set => throw new System.NotImplementedException(); }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestRefReadOnlyWithIndexer_ReturnType()
         {
             await TestInRegularAndScriptAsync(
-@"interface ITest
+                @"interface ITest
 {
     ref readonly int this[int p] { get; }
 }
 public class Test : [|ITest|]
 {
 }",
-@"interface ITest
+                @"interface ITest
 {
     ref readonly int this[int p] { get; }
 }
 public class Test : ITest
 {
     public ref readonly int this[int p] => throw new System.NotImplementedException();
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestUnmanagedConstraint()
         {
             await TestInRegularAndScriptAsync(
-@"public interface ITest
+                @"public interface ITest
 {
     void M<T>() where T : unmanaged;
 }
 public class Test : [|ITest|]
 {
 }",
-@"public interface ITest
+                @"public interface ITest
 {
     void M<T>() where T : unmanaged;
 }
@@ -7476,14 +7850,15 @@ public class Test : ITest
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestSealedMember_01()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -7494,7 +7869,7 @@ public class Test : ITest
 class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -7508,14 +7883,15 @@ class Class : IInterface
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestSealedMember_02()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -7526,7 +7902,7 @@ class Class : IInterface
 class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -7541,14 +7917,15 @@ class Class : IInterface
         throw new System.NotImplementedException();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestSealedMember_03()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -7559,7 +7936,7 @@ index: 1);
 abstract class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -7571,14 +7948,15 @@ abstract class Class : IInterface
 {
     public abstract void Method1();
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestNonPublicMember_01()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -7589,7 +7967,7 @@ index: 1);
 class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -7603,14 +7981,15 @@ class Class : IInterface
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestNonPublicMember_02()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     protected void M1();
     protected int P1 {get;}
@@ -7619,7 +7998,7 @@ class Class : IInterface
 class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     protected void M1();
     protected int P1 {get;}
@@ -7640,14 +8019,15 @@ class Class : IInterface
         throw new System.NotImplementedException();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestNonPublicMember_03()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -7658,7 +8038,7 @@ index: 1);
 abstract class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -7670,14 +8050,15 @@ abstract class Class : IInterface
 {
     public abstract void Method1();
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestNonPublicAccessor_01()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -7688,7 +8069,7 @@ index: 1);
 class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -7702,14 +8083,15 @@ class Class : IInterface
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestNonPublicAccessor_02()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     int P1 {get; protected set;}
     int P2 {protected get; set;}
@@ -7718,7 +8100,7 @@ class Class : IInterface
 class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     int P1 {get; protected set;}
     int P2 {protected get; set;}
@@ -7751,14 +8133,15 @@ class Class : IInterface
             throw new System.NotImplementedException();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestNonPublicAccessor_03()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -7769,7 +8152,7 @@ class Class : IInterface
 abstract class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -7781,14 +8164,15 @@ abstract class Class : IInterface
 {
     public abstract void Method1();
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestPrivateAccessor_01()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -7799,7 +8183,7 @@ index: 1);
 class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -7813,14 +8197,15 @@ class Class : IInterface
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestPrivateAccessor_02()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -7831,7 +8216,7 @@ class Class : IInterface
 class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -7846,14 +8231,15 @@ class Class : IInterface
         throw new System.NotImplementedException();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestPrivateAccessor_03()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -7864,7 +8250,7 @@ index: 1);
 abstract class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -7876,14 +8262,15 @@ abstract class Class : IInterface
 {
     public abstract void Method1();
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestInaccessibleMember_01()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -7905,7 +8292,7 @@ class Class : [|IInterface|]
         </Document>
     </Project>
 </Workspace>",
-@"
+                @"
 class Class : IInterface
 {
     public void Method1()
@@ -7913,14 +8300,15 @@ class Class : IInterface
         throw new System.NotImplementedException();
     }
 }
-        ");
+        "
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestInaccessibleMember_02()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -7942,7 +8330,7 @@ class Class : [|IInterface|]
         </Document>
     </Project>
 </Workspace>",
-@"
+                @"
 class Class : IInterface
 {
     void IInterface.Method1()
@@ -7951,14 +8339,15 @@ class Class : IInterface
     }
 }
         ",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestInaccessibleMember_03()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -7980,20 +8369,21 @@ abstract class Class : [|IInterface|]
         </Document>
     </Project>
 </Workspace>",
-@"
+                @"
 abstract class Class : IInterface
 {
     public abstract void Method1();
 }
         ",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestInaccessibleAccessor_01()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -8015,7 +8405,7 @@ class Class : [|IInterface|]
         </Document>
     </Project>
 </Workspace>",
-@"
+                @"
 class Class : IInterface
 {
     public void Method1()
@@ -8023,14 +8413,15 @@ class Class : IInterface
         throw new System.NotImplementedException();
     }
 }
-        ");
+        "
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestInaccessibleAccessor_02()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -8052,7 +8443,7 @@ class Class : [|IInterface|]
         </Document>
     </Project>
 </Workspace>",
-@"
+                @"
 class Class : IInterface
 {
     void IInterface.Method1()
@@ -8061,14 +8452,15 @@ class Class : IInterface
     }
 }
         ",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestInaccessibleAccessor_03()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -8090,20 +8482,21 @@ abstract class Class : [|IInterface|]
         </Document>
     </Project>
 </Workspace>",
-@"
+                @"
 abstract class Class : IInterface
 {
     public abstract void Method1();
 }
         ",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestVirtualMember_01()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -8114,7 +8507,7 @@ index: 1);
 class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -8128,14 +8521,15 @@ class Class : IInterface
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestVirtualMember_02()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -8146,7 +8540,7 @@ class Class : IInterface
 class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -8161,14 +8555,15 @@ class Class : IInterface
         throw new System.NotImplementedException();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestVirtualMember_03()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -8179,7 +8574,7 @@ index: 1);
 abstract class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -8191,14 +8586,15 @@ abstract class Class : IInterface
 {
     public abstract void Method1();
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestStaticMember_01()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -8211,7 +8607,7 @@ index: 1);
 class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -8227,14 +8623,15 @@ class Class : IInterface
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestStaticMember_02()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -8247,7 +8644,7 @@ class Class : IInterface
 class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -8264,14 +8661,15 @@ class Class : IInterface
         throw new System.NotImplementedException();
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestStaticMember_03()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -8284,7 +8682,7 @@ index: 1);
 abstract class Class : [|IInterface|]
 {
 }",
-@"interface IInterface
+                @"interface IInterface
 {
     void Method1();
 
@@ -8298,21 +8696,22 @@ abstract class Class : IInterface
 {
     public abstract void Method1();
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestNotNullConstraint()
         {
             await TestInRegularAndScriptAsync(
-@"public interface ITest
+                @"public interface ITest
 {
     void M<T>() where T : notnull;
 }
 public class Test : [|ITest|]
 {
 }",
-@"public interface ITest
+                @"public interface ITest
 {
     void M<T>() where T : notnull;
 }
@@ -8322,14 +8721,15 @@ public class Test : ITest
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestWithNullableProperty()
         {
             await TestInRegularAndScriptAsync(
-@"#nullable enable 
+                @"#nullable enable 
 
 public interface ITest
 {
@@ -8338,7 +8738,7 @@ public interface ITest
 public class Test : [|ITest|]
 {
 }",
-@"#nullable enable 
+                @"#nullable enable 
 
 public interface ITest
 {
@@ -8347,14 +8747,15 @@ public interface ITest
 public class Test : ITest
 {
     public string? P => throw new System.NotImplementedException();
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestWithNullablePropertyAlreadyImplemented()
         {
             await TestMissingAsync(
-@"#nullable enable 
+                @"#nullable enable 
 
 public interface ITest
 {
@@ -8363,14 +8764,15 @@ public interface ITest
 public class Test : [|ITest|]
 {
     public string? P => throw new System.NotImplementedException();
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestWithNullableMethod()
         {
             await TestInRegularAndScriptAsync(
-@"#nullable enable 
+                @"#nullable enable 
 
 public interface ITest
 {
@@ -8379,7 +8781,7 @@ public interface ITest
 public class Test : [|ITest|]
 {
 }",
-@"#nullable enable 
+                @"#nullable enable 
 
 public interface ITest
 {
@@ -8391,16 +8793,17 @@ public class Test : ITest
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestWithNullableEvent()
         {
             // Question whether this is needed,
-            // see https://github.com/dotnet/roslyn/issues/36673 
+            // see https://github.com/dotnet/roslyn/issues/36673
             await TestInRegularAndScriptAsync(
-@"#nullable enable 
+                @"#nullable enable 
 
 using System;
 
@@ -8411,7 +8814,7 @@ public interface ITest
 public class Test : [|ITest|]
 {
 }",
-@"#nullable enable 
+                @"#nullable enable 
 
 using System;
 
@@ -8422,14 +8825,15 @@ public interface ITest
 public class Test : ITest
 {
     public event EventHandler? SomeEvent;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestWithNullableDisabled()
         {
             await TestInRegularAndScriptAsync(
-@"#nullable enable 
+                @"#nullable enable 
 
 public interface ITest
 {
@@ -8441,7 +8845,7 @@ public interface ITest
 public class Test : [|ITest|]
 {
 }",
-@"#nullable enable 
+                @"#nullable enable 
 
 public interface ITest
 {
@@ -8453,14 +8857,15 @@ public interface ITest
 public class Test : ITest
 {
     public string P => throw new System.NotImplementedException();
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task GenericInterfaceNotNull1()
         {
             await TestInRegularAndScriptAsync(
-@$"#nullable enable 
+                @$"#nullable enable 
 
 using System.Diagnostics.CodeAnalysis;
 
@@ -8478,7 +8883,7 @@ interface IFoo<T>
 class A : [|IFoo<int>|]
 {{
 }}",
-@$"#nullable enable 
+                @$"#nullable enable 
 
 using System.Diagnostics.CodeAnalysis;
 
@@ -8506,7 +8911,8 @@ class A : [|IFoo<int>|]
     {{
         throw new System.NotImplementedException();
     }}
-}}");
+}}"
+            );
         }
 
         [WorkItem(13427, "https://github.com/dotnet/roslyn/issues/13427")]
@@ -8514,7 +8920,7 @@ class A : [|IFoo<int>|]
         public async Task TestDoNotAddNewWithGenericAndNonGenericMethods()
         {
             await TestWithAllCodeStyleOptionsOffAsync(
-@"class B
+                @"class B
 {
     public void M<T>() { }
 }
@@ -8527,7 +8933,7 @@ interface I
 class D : B, [|I|]
 {
 }",
-@"class B
+                @"class B
 {
     public void M<T>() { }
 }
@@ -8543,13 +8949,15 @@ class D : B, I
     {
         throw new System.NotImplementedException();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task ImplementRemainingExplicitlyWhenPartiallyImplemented()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 interface I
 {
     void M1();
@@ -8560,7 +8968,7 @@ class C : [|I|]
 {
     public void M1(){}
 }",
-@"
+                @"
 interface I
 {
     void M1();
@@ -8575,13 +8983,16 @@ class C : [|I|]
     {
         throw new System.NotImplementedException();
     }
-}", index: 2);
+}",
+                index: 2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task ImplementInitOnlyProperty()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 interface I
 {
     int Property { get; init; }
@@ -8590,7 +9001,7 @@ interface I
 class C : [|I|]
 {
 }",
-@"
+                @"
 interface I
 {
     int Property { get; init; }
@@ -8599,13 +9010,15 @@ interface I
 class C : [|I|]
 {
     public int Property { get => throw new System.NotImplementedException(); init => throw new System.NotImplementedException(); }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task ImplementRemainingExplicitlyMissingWhenAllImplemented()
         {
-            await TestActionCountAsync(@"
+            await TestActionCountAsync(
+                @"
 interface I
 {
     void M1();
@@ -8616,13 +9029,16 @@ class C : [|I|]
 {
     public void M1(){}
     public void M2(){}
-}", 0);
+}",
+                0
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task ImplementRemainingExplicitlyMissingWhenAllImplementedAreExplicit()
         {
-            await TestActionCountAsync(@"
+            await TestActionCountAsync(
+                @"
 interface I
 {
     void M1();
@@ -8632,13 +9048,16 @@ interface I
 class C : [|I|]
 {
     void I.M1(){}
-}", 2);
+}",
+                2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementRemainingExplicitlyNonPublicMember()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 interface I
 {
     void M1();
@@ -8649,7 +9068,7 @@ class C : [|I|]
 {
     public void M1(){}
 }",
-@"
+                @"
 interface I
 {
     void M1();
@@ -8664,14 +9083,17 @@ class C : [|I|]
     {
         throw new System.NotImplementedException();
     }
-}", index: 1);
+}",
+                index: 1
+            );
         }
 
         [WorkItem(48295, "https://github.com/dotnet/roslyn/issues/48295")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementOnRecord_WithSemiColon()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 interface I
 {
     void M1();
@@ -8679,7 +9101,7 @@ interface I
 
 record C : [|I|];
 ",
-@"
+                @"
 interface I
 {
     void M1();
@@ -8692,14 +9114,16 @@ record C : [|I|]
         throw new System.NotImplementedException();
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(48295, "https://github.com/dotnet/roslyn/issues/48295")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementOnRecord_WithBracesAndTrivia()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 interface I
 {
     void M1();
@@ -8707,7 +9131,7 @@ interface I
 
 record C : [|I|] { } // hello
 ",
-@"
+                @"
 interface I
 {
     void M1();
@@ -8720,14 +9144,16 @@ record C : [|I|]
         throw new System.NotImplementedException();
     }
 } // hello
-");
+"
+            );
         }
 
         [WorkItem(48295, "https://github.com/dotnet/roslyn/issues/48295")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestImplementOnRecord_WithSemiColonAndTrivia()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 interface I
 {
     void M1();
@@ -8735,7 +9161,7 @@ interface I
 
 record C : [|I|]; // hello
 ",
-@"
+                @"
 interface I
 {
     void M1();
@@ -8748,14 +9174,16 @@ record C : [|I|] // hello
         throw new System.NotImplementedException();
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(49019, "https://github.com/dotnet/roslyn/issues/49019")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestUnconstrainedGenericInstantiatedWithValueType()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 interface IGoo<T>
 {
     void Bar(T? x);
@@ -8765,7 +9193,7 @@ class C : [|IGoo<int>|]
 {
 }
 ",
-@"
+                @"
 interface IGoo<T>
 {
     void Bar(T? x);
@@ -8778,14 +9206,16 @@ class C : IGoo<int>
         throw new System.NotImplementedException();
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(49019, "https://github.com/dotnet/roslyn/issues/49019")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestConstrainedGenericInstantiatedWithValueType()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 interface IGoo<T> where T : struct
 {
     void Bar(T? x);
@@ -8795,7 +9225,7 @@ class C : [|IGoo<int>|]
 {
 }
 ",
-@"
+                @"
 interface IGoo<T> where T : struct
 {
     void Bar(T? x);
@@ -8808,14 +9238,16 @@ class C : IGoo<int>
         throw new System.NotImplementedException();
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(49019, "https://github.com/dotnet/roslyn/issues/49019")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestUnconstrainedGenericInstantiatedWithReferenceType()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 interface IGoo<T>
 {
     void Bar(T? x);
@@ -8825,7 +9257,7 @@ class C : [|IGoo<string>|]
 {
 }
 ",
-@"
+                @"
 interface IGoo<T>
 {
     void Bar(T? x);
@@ -8838,14 +9270,16 @@ class C : IGoo<string>
         throw new System.NotImplementedException();
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(49019, "https://github.com/dotnet/roslyn/issues/49019")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestUnconstrainedGenericInstantiatedWithReferenceType_NullableEnable()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 #nullable enable
 
 interface IGoo<T>
@@ -8857,7 +9291,7 @@ class C : [|IGoo<string>|]
 {
 }
 ",
-@"
+                @"
 #nullable enable
 
 interface IGoo<T>
@@ -8872,14 +9306,16 @@ class C : IGoo<string>
         throw new System.NotImplementedException();
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(49019, "https://github.com/dotnet/roslyn/issues/49019")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestConstrainedGenericInstantiatedWithReferenceType()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 interface IGoo<T> where T : class
 {
     void Bar(T? x);
@@ -8889,7 +9325,7 @@ class C : [|IGoo<string>|]
 {
 }
 ",
-@"
+                @"
 interface IGoo<T> where T : class
 {
     void Bar(T? x);
@@ -8902,14 +9338,16 @@ class C : IGoo<string>
         throw new System.NotImplementedException();
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(49019, "https://github.com/dotnet/roslyn/issues/49019")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsImplementInterface)]
         public async Task TestConstrainedGenericInstantiatedWithReferenceType_NullableEnable()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 #nullable enable
 
 interface IGoo<T> where T : class
@@ -8921,7 +9359,7 @@ class C : [|IGoo<string>|]
 {
 }
 ",
-@"
+                @"
 #nullable enable
 
 interface IGoo<T> where T : class
@@ -8936,7 +9374,8 @@ class C : IGoo<string>
         throw new System.NotImplementedException();
     }
 }
-");
+"
+            );
         }
     }
 }

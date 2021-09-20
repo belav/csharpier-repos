@@ -5,7 +5,8 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class MappingQuerySqlServerTest : MappingQueryTestBase<MappingQuerySqlServerTest.MappingQuerySqlServerFixture>
+    public class MappingQuerySqlServerTest
+        : MappingQueryTestBase<MappingQuerySqlServerTest.MappingQuerySqlServerFixture>
     {
         public override void All_customers()
         {
@@ -13,7 +14,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             AssertSql(
                 @"SELECT [c].[CustomerID], [c].[CompanyName]
-FROM [dbo].[Customers] AS [c]");
+FROM [dbo].[Customers] AS [c]"
+            );
         }
 
         public override void All_employees()
@@ -22,7 +24,8 @@ FROM [dbo].[Customers] AS [c]");
 
             AssertSql(
                 @"SELECT [e].[EmployeeID], [e].[City]
-FROM [dbo].[Employees] AS [e]");
+FROM [dbo].[Employees] AS [e]"
+            );
         }
 
         public override void All_orders()
@@ -31,7 +34,8 @@ FROM [dbo].[Employees] AS [e]");
 
             AssertSql(
                 @"SELECT [o].[OrderID], [o].[ShipVia]
-FROM [dbo].[Orders] AS [o]");
+FROM [dbo].[Orders] AS [o]"
+            );
         }
 
         public override void Project_nullable_enum()
@@ -40,22 +44,22 @@ FROM [dbo].[Orders] AS [o]");
 
             AssertSql(
                 @"SELECT [o].[ShipVia]
-FROM [dbo].[Orders] AS [o]");
+FROM [dbo].[Orders] AS [o]"
+            );
         }
 
-        public MappingQuerySqlServerTest(MappingQuerySqlServerFixture fixture)
-            : base(fixture)
+        public MappingQuerySqlServerTest(MappingQuerySqlServerFixture fixture) : base(fixture)
         {
             Fixture.TestSqlLoggerFactory.Clear();
         }
 
-        private void AssertSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+        private void AssertSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
         public class MappingQuerySqlServerFixture : MappingQueryFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => SqlServerNorthwindTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqlServerNorthwindTestStoreFactory.Instance;
 
             protected override string DatabaseSchema { get; } = "dbo";
 
@@ -69,7 +73,8 @@ FROM [dbo].[Orders] AS [o]");
                         e.Property(c => c.CompanyName2).Metadata.SetColumnName("CompanyName");
                         e.Metadata.SetTableName("Customers");
                         e.Metadata.SetSchema("dbo");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<MappedEmployee>()
                     .Property(c => c.EmployeeID)

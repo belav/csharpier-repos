@@ -17,19 +17,20 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public InputFocusTest(
             BrowserFixture browserFixture,
             ToggleExecutionModeServerFixture<Program> serverFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, serverFixture, output)
-        {
-        }
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture, output) { }
 
         protected override void InitializeAsyncCore()
         {
             // On WebAssembly, page reloads are expensive so skip if possible
-            Navigate(ServerPathBase, noReload: _serverFixture.ExecutionMode == ExecutionMode.Client);
+            Navigate(
+                ServerPathBase,
+                noReload: _serverFixture.ExecutionMode == ExecutionMode.Client
+            );
         }
 
-        protected virtual IWebElement MountInputActionsComponent()
-            => Browser.MountTestComponent<InputFocusComponent>();
+        protected virtual IWebElement MountInputActionsComponent() =>
+            Browser.MountTestComponent<InputFocusComponent>();
 
         [Fact]
         public void InputElementsGetFocusedSuccessfully()

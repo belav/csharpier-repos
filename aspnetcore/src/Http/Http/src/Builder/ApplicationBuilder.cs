@@ -43,7 +43,10 @@ namespace Microsoft.AspNetCore.Builder
 
         private ApplicationBuilder(ApplicationBuilder builder)
         {
-            Properties = new CopyOnWriteDictionary<string, object?>(builder.Properties, StringComparer.Ordinal);
+            Properties = new CopyOnWriteDictionary<string, object?>(
+                builder.Properties,
+                StringComparer.Ordinal
+            );
         }
 
         /// <summary>
@@ -51,14 +54,8 @@ namespace Microsoft.AspNetCore.Builder
         /// </summary>
         public IServiceProvider ApplicationServices
         {
-            get
-            {
-                return GetProperty<IServiceProvider>(ApplicationServicesKey)!;
-            }
-            set
-            {
-                SetProperty<IServiceProvider>(ApplicationServicesKey, value);
-            }
+            get { return GetProperty<IServiceProvider>(ApplicationServicesKey)!; }
+            set { SetProperty<IServiceProvider>(ApplicationServicesKey, value); }
         }
 
         /// <summary>
@@ -66,10 +63,7 @@ namespace Microsoft.AspNetCore.Builder
         /// </summary>
         public IFeatureCollection ServerFeatures
         {
-            get
-            {
-                return GetProperty<IFeatureCollection>(ServerFeaturesKey)!;
-            }
+            get { return GetProperty<IFeatureCollection>(ServerFeaturesKey)!; }
         }
 
         /// <summary>
@@ -126,9 +120,9 @@ namespace Microsoft.AspNetCore.Builder
                 if (endpointRequestDelegate != null)
                 {
                     var message =
-                        $"The request reached the end of the pipeline without executing the endpoint: '{endpoint!.DisplayName}'. " +
-                        $"Please register the EndpointMiddleware using '{nameof(IApplicationBuilder)}.UseEndpoints(...)' if using " +
-                        $"routing.";
+                        $"The request reached the end of the pipeline without executing the endpoint: '{endpoint!.DisplayName}'. "
+                        + $"Please register the EndpointMiddleware using '{nameof(IApplicationBuilder)}.UseEndpoints(...)' if using "
+                        + $"routing.";
                     throw new InvalidOperationException(message);
                 }
 

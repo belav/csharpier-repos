@@ -46,8 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// </summary>
         /// <param name="annotationName"> The key of the annotation to find. </param>
         /// <returns> The annotation with the specified name. </returns>
-        IAnnotation GetAnnotation(string annotationName)
-            => Annotatable.GetAnnotation(this, annotationName);
+        IAnnotation GetAnnotation(string annotationName) =>
+            Annotatable.GetAnnotation(this, annotationName);
 
         /// <summary>
         ///     Gets the debug string for all annotations declared on the object.
@@ -68,8 +68,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             builder.AppendLine().Append(indentString).Append("Annotations: ");
             foreach (var annotation in annotations)
             {
-                builder
-                    .AppendLine()
+                builder.AppendLine()
                     .Append(indentString)
                     .Append("  ")
                     .Append(annotation.Name)

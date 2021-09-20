@@ -10,7 +10,9 @@ namespace Microsoft.AspNetCore.Routing.TestObjects
         public string TransformOutbound(object value)
         {
             // Slugify value
-            return value == null ? null : Regex.Replace(value.ToString(), "([a-z])([A-Z])", "$1-$2").ToLowerInvariant();
+            return value == null
+                ? null
+                : Regex.Replace(value.ToString(), "([a-z])([A-Z])", "$1-$2").ToLowerInvariant();
         }
     }
 }

@@ -50,13 +50,16 @@ namespace System.Collections.Tests
             while (collection.Count < numberOfItemsToAdd)
             {
                 T toAdd = CreateT(seed++);
-                while (collection.Contains(toAdd, comparer) || InvalidValues.Contains(toAdd, comparer))
+                while (
+                    collection.Contains(toAdd, comparer) || InvalidValues.Contains(toAdd, comparer)
+                )
                     toAdd = CreateT(seed++);
                 collection.Add(toAdd);
             }
         }
 
-        protected virtual Type ICollection_Generic_CopyTo_IndexLargerThanArrayCount_ThrowType => typeof(ArgumentException);
+        protected virtual Type ICollection_Generic_CopyTo_IndexLargerThanArrayCount_ThrowType =>
+            typeof(ArgumentException);
 
         #endregion
 
@@ -70,10 +73,13 @@ namespace System.Collections.Tests
         /// <summary>
         /// Returns a set of ModifyEnumerable delegates that modify the enumerable passed to them.
         /// </summary>
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations)
-        {
-            if (!AddRemoveClear_ThrowsNotSupported && (operations & ModifyOperation.Add) == ModifyOperation.Add)
-            {
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        ) {
+            if (
+                !AddRemoveClear_ThrowsNotSupported
+                && (operations & ModifyOperation.Add) == ModifyOperation.Add
+            ) {
                 yield return (IEnumerable<T> enumerable) =>
                 {
                     var casted = (ICollection<T>)enumerable;
@@ -81,8 +87,10 @@ namespace System.Collections.Tests
                     return true;
                 };
             }
-            if (!AddRemoveClear_ThrowsNotSupported && (operations & ModifyOperation.Remove) == ModifyOperation.Remove)
-            {
+            if (
+                !AddRemoveClear_ThrowsNotSupported
+                && (operations & ModifyOperation.Remove) == ModifyOperation.Remove
+            ) {
                 yield return (IEnumerable<T> enumerable) =>
                 {
                     var casted = (ICollection<T>)enumerable;
@@ -94,8 +102,10 @@ namespace System.Collections.Tests
                     return false;
                 };
             }
-            if (!AddRemoveClear_ThrowsNotSupported && (operations & ModifyOperation.Clear) == ModifyOperation.Clear)
-            {
+            if (
+                !AddRemoveClear_ThrowsNotSupported
+                && (operations & ModifyOperation.Clear) == ModifyOperation.Clear
+            ) {
                 yield return (IEnumerable<T> enumerable) =>
                 {
                     var casted = (ICollection<T>)enumerable;
@@ -118,7 +128,7 @@ namespace System.Collections.Tests
         public void ICollection_Generic_IsReadOnly_Validity(int count)
         {
             ICollection<T> collection = GenericICollectionFactory(count);
-            Assert.Equal(IsReadOnly_ValidityValue , collection.IsReadOnly);
+            Assert.Equal(IsReadOnly_ValidityValue, collection.IsReadOnly);
         }
 
         #endregion
@@ -155,14 +165,17 @@ namespace System.Collections.Tests
         {
             if (!IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
-                Assert.All(InvalidValues, invalidValue =>
-                {
-                    ICollection<T> collection = GenericICollectionFactory(count);
-                    collection.Add(invalidValue);
-                    for (int i = 0; i < count; i++)
-                        collection.Add(CreateT(i));
-                    Assert.Equal(count * 2, collection.Count);
-                });
+                Assert.All(
+                    InvalidValues,
+                    invalidValue =>
+                    {
+                        ICollection<T> collection = GenericICollectionFactory(count);
+                        collection.Add(invalidValue);
+                        for (int i = 0; i < count; i++)
+                            collection.Add(CreateT(i));
+                        Assert.Equal(count * 2, collection.Count);
+                    }
+                );
             }
         }
 
@@ -172,14 +185,17 @@ namespace System.Collections.Tests
         {
             if (!IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
-                Assert.All(InvalidValues, invalidValue =>
-                {
-                    ICollection<T> collection = GenericICollectionFactory(0);
-                    collection.Add(invalidValue);
-                    for (int i = 0; i < count; i++)
-                        collection.Add(CreateT(i));
-                    Assert.Equal(count, collection.Count);
-                });
+                Assert.All(
+                    InvalidValues,
+                    invalidValue =>
+                    {
+                        ICollection<T> collection = GenericICollectionFactory(0);
+                        collection.Add(invalidValue);
+                        for (int i = 0; i < count; i++)
+                            collection.Add(CreateT(i));
+                        Assert.Equal(count, collection.Count);
+                    }
+                );
             }
         }
 
@@ -189,12 +205,15 @@ namespace System.Collections.Tests
         {
             if (!IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
-                Assert.All(InvalidValues, invalidValue =>
-                {
-                    ICollection<T> collection = GenericICollectionFactory(count);
-                    collection.Add(invalidValue);
-                    Assert.Equal(count, collection.Count);
-                });
+                Assert.All(
+                    InvalidValues,
+                    invalidValue =>
+                    {
+                        ICollection<T> collection = GenericICollectionFactory(count);
+                        collection.Add(invalidValue);
+                        Assert.Equal(count, collection.Count);
+                    }
+                );
             }
         }
 
@@ -336,7 +355,10 @@ namespace System.Collections.Tests
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsPreciseGcSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsPreciseGcSupported)
+        )]
         [InlineData(false)]
         [InlineData(true)]
         public void ICollection_Generic_Remove_ReferenceRemovedFromCollection(bool useRemove)
@@ -349,11 +371,16 @@ namespace System.Collections.Tests
             ICollection<T> collection = GenericICollectionFactory();
 
             WeakReference<object> wr = PopulateAndRemove(collection, useRemove);
-            Assert.True(SpinWait.SpinUntil(() =>
-            {
-                GC.Collect();
-                return !wr.TryGetTarget(out _);
-            }, 30_000));
+            Assert.True(
+                SpinWait.SpinUntil(
+                    () =>
+                    {
+                        GC.Collect();
+                        return !wr.TryGetTarget(out _);
+                    },
+                    30_000
+                )
+            );
             GC.KeepAlive(collection);
 
             [MethodImpl(MethodImplOptions.NoInlining)]
@@ -382,8 +409,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void ICollection_Generic_Contains_ValidValueOnCollectionNotContainingThatValue(int count)
-        {
+        public void ICollection_Generic_Contains_ValidValueOnCollectionNotContainingThatValue(
+            int count
+        ) {
             ICollection<T> collection = GenericICollectionFactory(count);
             int seed = 4315;
             T item = CreateT(seed++);
@@ -394,8 +422,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void ICollection_Generic_Contains_ValidValueOnCollectionContainingThatValue(int count)
-        {
+        public void ICollection_Generic_Contains_ValidValueOnCollectionContainingThatValue(
+            int count
+        ) {
             ICollection<T> collection = GenericICollectionFactory(count);
             foreach (T item in collection)
                 Assert.True(collection.Contains(item));
@@ -403,8 +432,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void ICollection_Generic_Contains_DefaultValueOnCollectionNotContainingDefaultValue(int count)
-        {
+        public void ICollection_Generic_Contains_DefaultValueOnCollectionNotContainingDefaultValue(
+            int count
+        ) {
             ICollection<T> collection = GenericICollectionFactory(count);
             if (DefaultValueAllowed)
                 Assert.False(collection.Contains(default(T)));
@@ -412,8 +442,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public virtual void ICollection_Generic_Contains_DefaultValueOnCollectionContainingDefaultValue(int count)
-        {
+        public virtual void ICollection_Generic_Contains_DefaultValueOnCollectionContainingDefaultValue(
+            int count
+        ) {
             if (DefaultValueAllowed && !IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
                 ICollection<T> collection = GenericICollectionFactory(count);
@@ -441,8 +472,10 @@ namespace System.Collections.Tests
         public void ICollection_Generic_Contains_InvalidValue_ThrowsArgumentException(int count)
         {
             ICollection<T> collection = GenericICollectionFactory(count);
-            Assert.All(InvalidValues, invalidValue =>
-                Assert.Throws<ArgumentException>(() => collection.Contains(invalidValue))
+            Assert.All(
+                InvalidValues,
+                invalidValue =>
+                    Assert.Throws<ArgumentException>(() => collection.Contains(invalidValue))
             );
         }
 
@@ -454,7 +487,10 @@ namespace System.Collections.Tests
             {
                 ICollection<T> collection = GenericICollectionFactory(count);
                 if (DefaultValueWhenNotAllowed_Throws)
-                    AssertExtensions.Throws<ArgumentNullException>("item", () => collection.Contains(default(T)));
+                    AssertExtensions.Throws<ArgumentNullException>(
+                        "item",
+                        () => collection.Contains(default(T))
+                    );
                 else
                     Assert.False(collection.Contains(default(T)));
             }
@@ -474,18 +510,22 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void ICollection_Generic_CopyTo_NegativeIndex_ThrowsArgumentOutOfRangeException(int count)
-        {
+        public void ICollection_Generic_CopyTo_NegativeIndex_ThrowsArgumentOutOfRangeException(
+            int count
+        ) {
             ICollection<T> collection = GenericICollectionFactory(count);
             T[] array = new T[count];
             Assert.Throws<ArgumentOutOfRangeException>(() => collection.CopyTo(array, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => collection.CopyTo(array, int.MinValue));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => collection.CopyTo(array, int.MinValue)
+            );
         }
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void ICollection_Generic_CopyTo_IndexEqualToArrayCount_ThrowsArgumentException(int count)
-        {
+        public void ICollection_Generic_CopyTo_IndexEqualToArrayCount_ThrowsArgumentException(
+            int count
+        ) {
             ICollection<T> collection = GenericICollectionFactory(count);
             T[] array = new T[count];
             if (count > 0)
@@ -496,17 +536,22 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void ICollection_Generic_CopyTo_IndexLargerThanArrayCount_ThrowsAnyArgumentException(int count)
-        {
+        public void ICollection_Generic_CopyTo_IndexLargerThanArrayCount_ThrowsAnyArgumentException(
+            int count
+        ) {
             ICollection<T> collection = GenericICollectionFactory(count);
             T[] array = new T[count];
-            Assert.Throws(ICollection_Generic_CopyTo_IndexLargerThanArrayCount_ThrowType, () => collection.CopyTo(array, count + 1));
+            Assert.Throws(
+                ICollection_Generic_CopyTo_IndexLargerThanArrayCount_ThrowType,
+                () => collection.CopyTo(array, count + 1)
+            );
         }
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void ICollection_Generic_CopyTo_NotEnoughSpaceInOffsettedArray_ThrowsArgumentException(int count)
-        {
+        public void ICollection_Generic_CopyTo_NotEnoughSpaceInOffsettedArray_ThrowsArgumentException(
+            int count
+        ) {
             if (count > 0) // Want the T array to have at least 1 element
             {
                 ICollection<T> collection = GenericICollectionFactory(count);
@@ -541,8 +586,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void ICollection_Generic_Remove_OnReadOnlyCollection_ThrowsNotSupportedException(int count)
-        {
+        public void ICollection_Generic_Remove_OnReadOnlyCollection_ThrowsNotSupportedException(
+            int count
+        ) {
             if (IsReadOnly || AddRemoveClear_ThrowsNotSupported)
             {
                 ICollection<T> collection = GenericICollectionFactory(count);
@@ -554,8 +600,12 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void ICollection_Generic_Remove_DefaultValueNotContainedInCollection(int count)
         {
-            if (!IsReadOnly && !AddRemoveClear_ThrowsNotSupported && DefaultValueAllowed && !Enumerable.Contains(InvalidValues, default(T)))
-            {
+            if (
+                !IsReadOnly
+                && !AddRemoveClear_ThrowsNotSupported
+                && DefaultValueAllowed
+                && !Enumerable.Contains(InvalidValues, default(T))
+            ) {
                 int seed = count * 21;
                 ICollection<T> collection = GenericICollectionFactory(count);
                 T value = default(T);
@@ -589,8 +639,12 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public virtual void ICollection_Generic_Remove_DefaultValueContainedInCollection(int count)
         {
-            if (!IsReadOnly && !AddRemoveClear_ThrowsNotSupported && DefaultValueAllowed && !Enumerable.Contains(InvalidValues, default(T)))
-            {
+            if (
+                !IsReadOnly
+                && !AddRemoveClear_ThrowsNotSupported
+                && DefaultValueAllowed
+                && !Enumerable.Contains(InvalidValues, default(T))
+            ) {
                 int seed = count * 21;
                 ICollection<T> collection = GenericICollectionFactory(count);
                 T value = default(T);
@@ -648,10 +702,13 @@ namespace System.Collections.Tests
             if (!IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
                 ICollection<T> collection = GenericICollectionFactory(count);
-                Assert.All(collection.ToList(), value =>
-                {
-                    Assert.True(collection.Remove(value));
-                });
+                Assert.All(
+                    collection.ToList(),
+                    value =>
+                    {
+                        Assert.True(collection.Remove(value));
+                    }
+                );
                 Assert.Empty(collection);
             }
         }
@@ -661,10 +718,13 @@ namespace System.Collections.Tests
         public void ICollection_Generic_Remove_InvalidValue_ThrowsArgumentException(int count)
         {
             ICollection<T> collection = GenericICollectionFactory(count);
-            Assert.All(InvalidValues, value =>
-            {
-                Assert.Throws<ArgumentException>(() => collection.Remove(value));
-            });
+            Assert.All(
+                InvalidValues,
+                value =>
+                {
+                    Assert.Throws<ArgumentException>(() => collection.Remove(value));
+                }
+            );
             Assert.Equal(count, collection.Count);
         }
 
@@ -681,7 +741,6 @@ namespace System.Collections.Tests
                     Assert.False(collection.Remove(default(T)));
             }
         }
-
         #endregion
     }
 }

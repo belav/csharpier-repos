@@ -26,8 +26,9 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         /// Initializes an instance of <see cref="KnownRouteValueConstraint"/>.
         /// </summary>
         /// <param name="actionDescriptorCollectionProvider">The <see cref="IActionDescriptorCollectionProvider"/>.</param>
-        public KnownRouteValueConstraint(IActionDescriptorCollectionProvider actionDescriptorCollectionProvider)
-        {
+        public KnownRouteValueConstraint(
+            IActionDescriptorCollectionProvider actionDescriptorCollectionProvider
+        ) {
             if (actionDescriptorCollectionProvider == null)
             {
                 throw new ArgumentNullException(nameof(actionDescriptorCollectionProvider));
@@ -42,8 +43,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             IRouter? route,
             string routeKey,
             RouteValueDictionary values,
-            RouteDirection routeDirection)
-        {
+            RouteDirection routeDirection
+        ) {
             if (routeKey == null)
             {
                 throw new ArgumentNullException(nameof(routeKey));
@@ -88,7 +89,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 }
 
                 var services = httpContext.RequestServices;
-                actionDescriptorsProvider = services.GetRequiredService<IActionDescriptorCollectionProvider>();
+                actionDescriptorsProvider =
+                    services.GetRequiredService<IActionDescriptorCollectionProvider>();
             }
 
             var actionDescriptors = actionDescriptorsProvider.ActionDescriptors;
@@ -97,28 +99,32 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 throw new InvalidOperationException(
                     Resources.FormatPropertyOfTypeCannotBeNull(
                         nameof(IActionDescriptorCollectionProvider.ActionDescriptors),
-                        actionDescriptorsProvider.GetType()));
+                        actionDescriptorsProvider.GetType()
+                    )
+                );
             }
 
             return actionDescriptors;
         }
 
-        private string[] GetAndCacheAllMatchingValues(string routeKey, ActionDescriptorCollection actionDescriptors)
-        {
+        private string[] GetAndCacheAllMatchingValues(
+            string routeKey,
+            ActionDescriptorCollection actionDescriptors
+        ) {
             var version = actionDescriptors.Version;
             var valuesCollection = _cachedValuesCollection;
 
-            if (valuesCollection == null ||
-                version != valuesCollection.Version)
+            if (valuesCollection == null || version != valuesCollection.Version)
             {
                 var values = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
                 for (var i = 0; i < actionDescriptors.Items.Count; i++)
                 {
                     var action = actionDescriptors.Items[i];
 
-                    if (action.RouteValues.TryGetValue(routeKey, out var value) &&
-                        !string.IsNullOrEmpty(value))
-                    {
+                    if (
+                        action.RouteValues.TryGetValue(routeKey, out var value)
+                        && !string.IsNullOrEmpty(value)
+                    ) {
                         values.Add(value);
                     }
                 }

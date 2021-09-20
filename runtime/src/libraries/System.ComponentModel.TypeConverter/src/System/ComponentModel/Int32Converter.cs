@@ -19,7 +19,8 @@ namespace System.ComponentModel
         /// <summary>
         /// Convert the given value to a string using the given radix
         /// </summary>
-        internal override object FromString(string value, int radix) => Convert.ToInt32(value, radix);
+        internal override object FromString(string value, int radix) =>
+            Convert.ToInt32(value, radix);
 
         /// <summary>
         /// Convert the given value to a string using the given formatInfo

@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.ResultSetTr
     internal interface IResultSetTracker
     {
         Id<ResultSet> GetResultSetIdForSymbol(ISymbol symbol);
-        Id<T> GetResultIdForSymbol<T>(ISymbol symbol, string edgeKind, Func<T> vertexCreator) where T : Vertex;
+        Id<T> GetResultIdForSymbol<T>(ISymbol symbol, string edgeKind, Func<T> vertexCreator)
+            where T : Vertex;
         bool ResultSetNeedsInformationalEdgeAdded(ISymbol symbol, string edgeKind);
     }
 }

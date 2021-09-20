@@ -11,23 +11,28 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
     internal class ExplicitInterfaceMethodReferenceFinder : AbstractReferenceFinder<IMethodSymbol>
     {
-        protected override bool CanFind(IMethodSymbol symbol)
-            => symbol.MethodKind == MethodKind.ExplicitInterfaceImplementation;
+        protected override bool CanFind(IMethodSymbol symbol) =>
+            symbol.MethodKind == MethodKind.ExplicitInterfaceImplementation;
 
-        protected override Task<ImmutableArray<(ISymbol symbol, FindReferencesCascadeDirection cascadeDirection)>> DetermineCascadedSymbolsAsync(
+        protected override Task<
+            ImmutableArray<(ISymbol symbol, FindReferencesCascadeDirection cascadeDirection)>
+        > DetermineCascadedSymbolsAsync(
             IMethodSymbol symbol,
             Solution solution,
             IImmutableSet<Project>? projects,
             FindReferencesSearchOptions options,
             FindReferencesCascadeDirection cascadeDirection,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             if (!cascadeDirection.HasFlag(FindReferencesCascadeDirection.Up))
                 return SpecializedTasks.EmptyImmutableArray<(ISymbol symbol, FindReferencesCascadeDirection cascadeDirection)>();
 
             // An explicit interface method will cascade to all the methods that it implements in the up direction.
             return Task.FromResult(
-                symbol.ExplicitInterfaceImplementations.SelectAsArray(m => ((ISymbol)m, FindReferencesCascadeDirection.Up)));
+                symbol.ExplicitInterfaceImplementations.SelectAsArray(
+                    m => ((ISymbol)m, FindReferencesCascadeDirection.Up)
+                )
+            );
         }
 
         protected override Task<ImmutableArray<Document>> DetermineDocumentsToSearchAsync(
@@ -35,8 +40,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Project project,
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             // An explicit method can't be referenced anywhere.
             return SpecializedTasks.EmptyImmutableArray<Document>();
         }
@@ -46,10 +51,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Document document,
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             // An explicit method can't be referenced anywhere.
-            return new ValueTask<ImmutableArray<FinderLocation>>(ImmutableArray<FinderLocation>.Empty);
+            return new ValueTask<ImmutableArray<FinderLocation>>(
+                ImmutableArray<FinderLocation>.Empty
+            );
         }
     }
 }

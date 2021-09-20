@@ -27,8 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             int? scaffoldMaxLength,
             bool? scaffoldFixedLength,
             int? scaffoldPrecision,
-            int? scaffoldScale)
-        {
+            int? scaffoldScale
+        ) {
             Check.NotNull(clrType, nameof(clrType));
 
             IsInferred = inferred;

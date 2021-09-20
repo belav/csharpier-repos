@@ -69,9 +69,18 @@ namespace System.Drawing.Tests
             {
                 using (var font = new Font(fontFamily, emSize))
                 {
-                    VerifyFont(font, fontFamily.Name, emSize, FontStyle.Regular, GraphicsUnit.Point, 1, false);
+                    VerifyFont(
+                        font,
+                        fontFamily.Name,
+                        emSize,
+                        FontStyle.Regular,
+                        GraphicsUnit.Point,
+                        1,
+                        false
+                    );
                 }
             }
+
             finally
             {
                 fontFamily.Dispose();
@@ -86,9 +95,18 @@ namespace System.Drawing.Tests
             {
                 using (var font = new Font(fontFamily.Name, emSize))
                 {
-                    VerifyFont(font, fontFamily.Name, emSize, FontStyle.Regular, GraphicsUnit.Point, 1, false);
+                    VerifyFont(
+                        font,
+                        fontFamily.Name,
+                        emSize,
+                        FontStyle.Regular,
+                        GraphicsUnit.Point,
+                        1,
+                        false
+                    );
                 }
             }
+
             finally
             {
                 fontFamily.Dispose();
@@ -101,7 +119,12 @@ namespace System.Drawing.Tests
             yield return new object[] { FontFamily.GenericSerif, 2, FontStyle.Italic };
             yield return new object[] { FontFamily.GenericSansSerif, 3, FontStyle.Regular };
             yield return new object[] { FontFamily.GenericSerif, 4, FontStyle.Strikeout };
-            yield return new object[] { FontFamily.GenericSerif, float.MaxValue, FontStyle.Underline };
+            yield return new object[]
+            {
+                FontFamily.GenericSerif,
+                float.MaxValue,
+                FontStyle.Underline
+            };
             yield return new object[] { FontFamily.GenericSerif, 16, (FontStyle)(-1) };
             yield return new object[] { FontFamily.GenericSerif, 16, (FontStyle)int.MinValue };
             yield return new object[] { FontFamily.GenericSerif, 16, (FontStyle)int.MaxValue };
@@ -118,6 +141,7 @@ namespace System.Drawing.Tests
                     VerifyFont(font, fontFamily.Name, emSize, style, GraphicsUnit.Point, 1, false);
                 }
             }
+
             finally
             {
                 fontFamily.Dispose();
@@ -135,6 +159,7 @@ namespace System.Drawing.Tests
                     VerifyFont(font, fontFamily.Name, emSize, style, GraphicsUnit.Point, 1, false);
                 }
             }
+
             finally
             {
                 fontFamily.Dispose();
@@ -147,7 +172,12 @@ namespace System.Drawing.Tests
             yield return new object[] { FontFamily.GenericSerif, 2, GraphicsUnit.Inch };
             yield return new object[] { FontFamily.GenericSansSerif, 3, GraphicsUnit.Millimeter };
             yield return new object[] { FontFamily.GenericSerif, 4, GraphicsUnit.Point };
-            yield return new object[] { FontFamily.GenericSerif, float.MaxValue, GraphicsUnit.Pixel };
+            yield return new object[]
+            {
+                FontFamily.GenericSerif,
+                float.MaxValue,
+                GraphicsUnit.Pixel
+            };
             yield return new object[] { FontFamily.GenericSerif, 16, GraphicsUnit.World };
         }
 
@@ -162,6 +192,7 @@ namespace System.Drawing.Tests
                     VerifyFont(font, fontFamily.Name, emSize, FontStyle.Regular, unit, 1, false);
                 }
             }
+
             finally
             {
                 fontFamily.Dispose();
@@ -170,8 +201,11 @@ namespace System.Drawing.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Ctor_Family_Size_Unit_TestData))]
-        public void Ctor_FamilyName_Size_Unit(FontFamily fontFamily, float emSize, GraphicsUnit unit)
-        {
+        public void Ctor_FamilyName_Size_Unit(
+            FontFamily fontFamily,
+            float emSize,
+            GraphicsUnit unit
+        ) {
             try
             {
                 using (var font = new Font(fontFamily.Name, emSize, unit))
@@ -179,6 +213,7 @@ namespace System.Drawing.Tests
                     VerifyFont(font, fontFamily.Name, emSize, FontStyle.Regular, unit, 1, false);
                 }
             }
+
             finally
             {
                 fontFamily.Dispose();
@@ -187,20 +222,72 @@ namespace System.Drawing.Tests
 
         public static IEnumerable<object[]> Ctor_Family_Size_Style_Unit_TestData()
         {
-            yield return new object[] { FontFamily.GenericMonospace, 1, FontStyle.Bold, GraphicsUnit.Document };
-            yield return new object[] { FontFamily.GenericSerif, 2, FontStyle.Italic, GraphicsUnit.Inch };
-            yield return new object[] { FontFamily.GenericSansSerif, 3, FontStyle.Regular, GraphicsUnit.Millimeter };
-            yield return new object[] { FontFamily.GenericSerif, 4, FontStyle.Strikeout, GraphicsUnit.Point };
-            yield return new object[] { FontFamily.GenericSerif, float.MaxValue, FontStyle.Underline, GraphicsUnit.Pixel };
-            yield return new object[] { FontFamily.GenericSerif, 16, (FontStyle)(-1), GraphicsUnit.World };
-            yield return new object[] { FontFamily.GenericSerif, 16, (FontStyle)int.MinValue, GraphicsUnit.Millimeter };
-            yield return new object[] { FontFamily.GenericSerif, 16, (FontStyle)int.MaxValue, GraphicsUnit.Millimeter };
+            yield return new object[]
+            {
+                FontFamily.GenericMonospace,
+                1,
+                FontStyle.Bold,
+                GraphicsUnit.Document
+            };
+            yield return new object[]
+            {
+                FontFamily.GenericSerif,
+                2,
+                FontStyle.Italic,
+                GraphicsUnit.Inch
+            };
+            yield return new object[]
+            {
+                FontFamily.GenericSansSerif,
+                3,
+                FontStyle.Regular,
+                GraphicsUnit.Millimeter
+            };
+            yield return new object[]
+            {
+                FontFamily.GenericSerif,
+                4,
+                FontStyle.Strikeout,
+                GraphicsUnit.Point
+            };
+            yield return new object[]
+            {
+                FontFamily.GenericSerif,
+                float.MaxValue,
+                FontStyle.Underline,
+                GraphicsUnit.Pixel
+            };
+            yield return new object[]
+            {
+                FontFamily.GenericSerif,
+                16,
+                (FontStyle)(-1),
+                GraphicsUnit.World
+            };
+            yield return new object[]
+            {
+                FontFamily.GenericSerif,
+                16,
+                (FontStyle)int.MinValue,
+                GraphicsUnit.Millimeter
+            };
+            yield return new object[]
+            {
+                FontFamily.GenericSerif,
+                16,
+                (FontStyle)int.MaxValue,
+                GraphicsUnit.Millimeter
+            };
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Ctor_Family_Size_Style_Unit_TestData))]
-        public void Ctor_Family_Size_Style_Unit(FontFamily fontFamily, float emSize, FontStyle style, GraphicsUnit unit)
-        {
+        public void Ctor_Family_Size_Style_Unit(
+            FontFamily fontFamily,
+            float emSize,
+            FontStyle style,
+            GraphicsUnit unit
+        ) {
             try
             {
                 using (var font = new Font(fontFamily, emSize, style, unit))
@@ -208,6 +295,7 @@ namespace System.Drawing.Tests
                     VerifyFont(font, fontFamily.Name, emSize, style, unit, 1, false);
                 }
             }
+
             finally
             {
                 fontFamily.Dispose();
@@ -216,8 +304,12 @@ namespace System.Drawing.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Ctor_Family_Size_Style_Unit_TestData))]
-        public void Ctor_FamilyName_Size_Style_Unit(FontFamily fontFamily, float emSize, FontStyle style, GraphicsUnit unit)
-        {
+        public void Ctor_FamilyName_Size_Style_Unit(
+            FontFamily fontFamily,
+            float emSize,
+            FontStyle style,
+            GraphicsUnit unit
+        ) {
             try
             {
                 using (var font = new Font(fontFamily.Name, emSize, style, unit))
@@ -225,6 +317,7 @@ namespace System.Drawing.Tests
                     VerifyFont(font, fontFamily.Name, emSize, style, unit, 1, false);
                 }
             }
+
             finally
             {
                 fontFamily.Dispose();
@@ -233,20 +326,81 @@ namespace System.Drawing.Tests
 
         public static IEnumerable<object[]> Ctor_Family_Size_Style_Unit_GdiCharSet_TestData()
         {
-            yield return new object[] { FontFamily.GenericMonospace, 1, FontStyle.Bold, GraphicsUnit.Document, 0 };
-            yield return new object[] { FontFamily.GenericSerif, 2, FontStyle.Italic, GraphicsUnit.Inch, 1 };
-            yield return new object[] { FontFamily.GenericSansSerif, 3, FontStyle.Regular, GraphicsUnit.Millimeter, 255 };
-            yield return new object[] { FontFamily.GenericSerif, 4, FontStyle.Strikeout, GraphicsUnit.Point, 10 };
-            yield return new object[] { FontFamily.GenericSerif, float.MaxValue, FontStyle.Underline, GraphicsUnit.Pixel, 10 };
-            yield return new object[] { FontFamily.GenericSerif, 16, (FontStyle)(-1), GraphicsUnit.World, 8 };
-            yield return new object[] { FontFamily.GenericSerif, 16, (FontStyle)int.MinValue, GraphicsUnit.Millimeter, 127 };
-            yield return new object[] { FontFamily.GenericSerif, 16, (FontStyle)int.MaxValue, GraphicsUnit.Millimeter, 200 };
+            yield return new object[]
+            {
+                FontFamily.GenericMonospace,
+                1,
+                FontStyle.Bold,
+                GraphicsUnit.Document,
+                0
+            };
+            yield return new object[]
+            {
+                FontFamily.GenericSerif,
+                2,
+                FontStyle.Italic,
+                GraphicsUnit.Inch,
+                1
+            };
+            yield return new object[]
+            {
+                FontFamily.GenericSansSerif,
+                3,
+                FontStyle.Regular,
+                GraphicsUnit.Millimeter,
+                255
+            };
+            yield return new object[]
+            {
+                FontFamily.GenericSerif,
+                4,
+                FontStyle.Strikeout,
+                GraphicsUnit.Point,
+                10
+            };
+            yield return new object[]
+            {
+                FontFamily.GenericSerif,
+                float.MaxValue,
+                FontStyle.Underline,
+                GraphicsUnit.Pixel,
+                10
+            };
+            yield return new object[]
+            {
+                FontFamily.GenericSerif,
+                16,
+                (FontStyle)(-1),
+                GraphicsUnit.World,
+                8
+            };
+            yield return new object[]
+            {
+                FontFamily.GenericSerif,
+                16,
+                (FontStyle)int.MinValue,
+                GraphicsUnit.Millimeter,
+                127
+            };
+            yield return new object[]
+            {
+                FontFamily.GenericSerif,
+                16,
+                (FontStyle)int.MaxValue,
+                GraphicsUnit.Millimeter,
+                200
+            };
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Ctor_Family_Size_Style_Unit_GdiCharSet_TestData))]
-        public void Ctor_Family_Size_Style_Unit_GdiCharSet(FontFamily fontFamily, float emSize, FontStyle style, GraphicsUnit unit, byte gdiCharSet)
-        {
+        public void Ctor_Family_Size_Style_Unit_GdiCharSet(
+            FontFamily fontFamily,
+            float emSize,
+            FontStyle style,
+            GraphicsUnit unit,
+            byte gdiCharSet
+        ) {
             try
             {
                 using (var font = new Font(fontFamily, emSize, style, unit, gdiCharSet))
@@ -254,6 +408,7 @@ namespace System.Drawing.Tests
                     VerifyFont(font, fontFamily.Name, emSize, style, unit, gdiCharSet, false);
                 }
             }
+
             finally
             {
                 fontFamily.Dispose();
@@ -262,8 +417,13 @@ namespace System.Drawing.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Ctor_Family_Size_Style_Unit_GdiCharSet_TestData))]
-        public void Ctor_FamilyName_Size_Style_Unit_GdiCharSet(FontFamily fontFamily, float emSize, FontStyle style, GraphicsUnit unit, byte gdiCharSet)
-        {
+        public void Ctor_FamilyName_Size_Style_Unit_GdiCharSet(
+            FontFamily fontFamily,
+            float emSize,
+            FontStyle style,
+            GraphicsUnit unit,
+            byte gdiCharSet
+        ) {
             try
             {
                 using (var font = new Font(fontFamily.Name, emSize, style, unit, gdiCharSet))
@@ -271,6 +431,7 @@ namespace System.Drawing.Tests
                     VerifyFont(font, fontFamily.Name, emSize, style, unit, gdiCharSet, false);
                 }
             }
+
             finally
             {
                 fontFamily.Dispose();
@@ -279,27 +440,114 @@ namespace System.Drawing.Tests
 
         public static IEnumerable<object[]> Ctor_Family_Size_Style_Unit_GdiCharSet_GdiVerticalFont_TestData()
         {
-            yield return new object[] { FontFamily.GenericMonospace, 1, FontStyle.Bold, GraphicsUnit.Document, 0, true };
-            yield return new object[] { FontFamily.GenericSerif, 2, FontStyle.Italic, GraphicsUnit.Inch, 1, false };
-            yield return new object[] { FontFamily.GenericSansSerif, 3, FontStyle.Regular, GraphicsUnit.Millimeter, 255, true };
-            yield return new object[] { FontFamily.GenericSerif, 4, FontStyle.Strikeout, GraphicsUnit.Point, 10, false };
-            yield return new object[] { FontFamily.GenericSerif, float.MaxValue, FontStyle.Underline, GraphicsUnit.Pixel, 10, true };
-            yield return new object[] { FontFamily.GenericSerif, 16, (FontStyle)(-1), GraphicsUnit.World, 8, false };
-            yield return new object[] { FontFamily.GenericSerif, 16, (FontStyle)int.MinValue, GraphicsUnit.Millimeter, 127, true };
-            yield return new object[] { FontFamily.GenericSerif, 16, (FontStyle)int.MaxValue, GraphicsUnit.Millimeter, 200, false };
+            yield return new object[]
+            {
+                FontFamily.GenericMonospace,
+                1,
+                FontStyle.Bold,
+                GraphicsUnit.Document,
+                0,
+                true
+            };
+            yield return new object[]
+            {
+                FontFamily.GenericSerif,
+                2,
+                FontStyle.Italic,
+                GraphicsUnit.Inch,
+                1,
+                false
+            };
+            yield return new object[]
+            {
+                FontFamily.GenericSansSerif,
+                3,
+                FontStyle.Regular,
+                GraphicsUnit.Millimeter,
+                255,
+                true
+            };
+            yield return new object[]
+            {
+                FontFamily.GenericSerif,
+                4,
+                FontStyle.Strikeout,
+                GraphicsUnit.Point,
+                10,
+                false
+            };
+            yield return new object[]
+            {
+                FontFamily.GenericSerif,
+                float.MaxValue,
+                FontStyle.Underline,
+                GraphicsUnit.Pixel,
+                10,
+                true
+            };
+            yield return new object[]
+            {
+                FontFamily.GenericSerif,
+                16,
+                (FontStyle)(-1),
+                GraphicsUnit.World,
+                8,
+                false
+            };
+            yield return new object[]
+            {
+                FontFamily.GenericSerif,
+                16,
+                (FontStyle)int.MinValue,
+                GraphicsUnit.Millimeter,
+                127,
+                true
+            };
+            yield return new object[]
+            {
+                FontFamily.GenericSerif,
+                16,
+                (FontStyle)int.MaxValue,
+                GraphicsUnit.Millimeter,
+                200,
+                false
+            };
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Ctor_Family_Size_Style_Unit_GdiCharSet_GdiVerticalFont_TestData))]
-        public void Ctor_Family_Size_Style_Unit_GdiCharSet_GdiVerticalFont(FontFamily fontFamily, float emSize, FontStyle style, GraphicsUnit unit, byte gdiCharSet, bool gdiVerticalFont)
-        {
+        public void Ctor_Family_Size_Style_Unit_GdiCharSet_GdiVerticalFont(
+            FontFamily fontFamily,
+            float emSize,
+            FontStyle style,
+            GraphicsUnit unit,
+            byte gdiCharSet,
+            bool gdiVerticalFont
+        ) {
             try
             {
-                using (var font = new Font(fontFamily, emSize, style, unit, gdiCharSet, gdiVerticalFont))
-                {
-                    VerifyFont(font, fontFamily.Name, emSize, style, unit, gdiCharSet, gdiVerticalFont);
+                using (
+                    var font = new Font(
+                        fontFamily,
+                        emSize,
+                        style,
+                        unit,
+                        gdiCharSet,
+                        gdiVerticalFont
+                    )
+                ) {
+                    VerifyFont(
+                        font,
+                        fontFamily.Name,
+                        emSize,
+                        style,
+                        unit,
+                        gdiCharSet,
+                        gdiVerticalFont
+                    );
                 }
             }
+
             finally
             {
                 fontFamily.Dispose();
@@ -308,15 +556,38 @@ namespace System.Drawing.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Ctor_Family_Size_Style_Unit_GdiCharSet_GdiVerticalFont_TestData))]
-        public void Ctor_FamilyName_Size_Style_Unit_GdiCharSet_GdiVerticalFont(FontFamily fontFamily, float emSize, FontStyle style, GraphicsUnit unit, byte gdiCharSet, bool gdiVerticalFont)
-        {
+        public void Ctor_FamilyName_Size_Style_Unit_GdiCharSet_GdiVerticalFont(
+            FontFamily fontFamily,
+            float emSize,
+            FontStyle style,
+            GraphicsUnit unit,
+            byte gdiCharSet,
+            bool gdiVerticalFont
+        ) {
             try
             {
-                using (var font = new Font(fontFamily.Name, emSize, style, unit, gdiCharSet, gdiVerticalFont))
-                {
-                    VerifyFont(font, fontFamily.Name, emSize, style, unit, gdiCharSet, gdiVerticalFont);
+                using (
+                    var font = new Font(
+                        fontFamily.Name,
+                        emSize,
+                        style,
+                        unit,
+                        gdiCharSet,
+                        gdiVerticalFont
+                    )
+                ) {
+                    VerifyFont(
+                        font,
+                        fontFamily.Name,
+                        emSize,
+                        style,
+                        unit,
+                        gdiCharSet,
+                        gdiVerticalFont
+                    );
                 }
             }
+
             finally
             {
                 fontFamily.Dispose();
@@ -360,12 +631,38 @@ namespace System.Drawing.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Ctor_NullFamily_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("family", () => new Font((FontFamily)null, 10));
-            AssertExtensions.Throws<ArgumentNullException>("family", () => new Font((FontFamily)null, 10, FontStyle.Italic));
-            AssertExtensions.Throws<ArgumentNullException>("family", () => new Font((FontFamily)null, 10, GraphicsUnit.Display));
-            AssertExtensions.Throws<ArgumentNullException>("family", () => new Font((FontFamily)null, 10, FontStyle.Italic, GraphicsUnit.Display));
-            AssertExtensions.Throws<ArgumentNullException>("family", () => new Font((FontFamily)null, 10, FontStyle.Italic, GraphicsUnit.Display, 10));
-            AssertExtensions.Throws<ArgumentNullException>("family", () => new Font((FontFamily)null, 10, FontStyle.Italic, GraphicsUnit.Display, 10, gdiVerticalFont: true));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "family",
+                () => new Font((FontFamily)null, 10)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "family",
+                () => new Font((FontFamily)null, 10, FontStyle.Italic)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "family",
+                () => new Font((FontFamily)null, 10, GraphicsUnit.Display)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "family",
+                () => new Font((FontFamily)null, 10, FontStyle.Italic, GraphicsUnit.Display)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "family",
+                () => new Font((FontFamily)null, 10, FontStyle.Italic, GraphicsUnit.Display, 10)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "family",
+                () =>
+                    new Font(
+                        (FontFamily)null,
+                        10,
+                        FontStyle.Italic,
+                        GraphicsUnit.Display,
+                        10,
+                        gdiVerticalFont: true
+                    )
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -375,11 +672,34 @@ namespace System.Drawing.Tests
             family.Dispose();
 
             AssertExtensions.Throws<ArgumentException>(null, () => new Font(family, 10));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Font(family, 10, FontStyle.Italic));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Font(family, 10, GraphicsUnit.Display));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Font(family, 10, FontStyle.Italic, GraphicsUnit.Display));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Font(family, 10, FontStyle.Italic, GraphicsUnit.Display, 10));
-            AssertExtensions.Throws<ArgumentException>(null, () => new Font(family, 10, FontStyle.Italic, GraphicsUnit.Display, 10, gdiVerticalFont: true));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Font(family, 10, FontStyle.Italic)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Font(family, 10, GraphicsUnit.Display)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Font(family, 10, FontStyle.Italic, GraphicsUnit.Display)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new Font(family, 10, FontStyle.Italic, GraphicsUnit.Display, 10)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    new Font(
+                        family,
+                        10,
+                        FontStyle.Italic,
+                        GraphicsUnit.Display,
+                        10,
+                        gdiVerticalFont: true
+                    )
+            );
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
@@ -393,18 +713,70 @@ namespace System.Drawing.Tests
         {
             using (FontFamily family = FontFamily.GenericSansSerif)
             {
-                AssertExtensions.Throws<ArgumentException>("emSize", () => new Font(family, emSize));
-                AssertExtensions.Throws<ArgumentException>("emSize", () => new Font(family.Name, emSize));
-                AssertExtensions.Throws<ArgumentException>("emSize", () => new Font(family, emSize, FontStyle.Italic));
-                AssertExtensions.Throws<ArgumentException>("emSize", () => new Font(family.Name, emSize, FontStyle.Italic));
-                AssertExtensions.Throws<ArgumentException>("emSize", () => new Font(family, emSize, GraphicsUnit.Document));
-                AssertExtensions.Throws<ArgumentException>("emSize", () => new Font(family.Name, emSize, GraphicsUnit.Document));
-                AssertExtensions.Throws<ArgumentException>("emSize", () => new Font(family, emSize, FontStyle.Italic, GraphicsUnit.Document));
-                AssertExtensions.Throws<ArgumentException>("emSize", () => new Font(family.Name, emSize, FontStyle.Italic, GraphicsUnit.Document));
-                AssertExtensions.Throws<ArgumentException>("emSize", () => new Font(family, emSize, FontStyle.Italic, GraphicsUnit.Document, 10));
-                AssertExtensions.Throws<ArgumentException>("emSize", () => new Font(family.Name, emSize, FontStyle.Italic, GraphicsUnit.Document, 10));
-                AssertExtensions.Throws<ArgumentException>("emSize", () => new Font(family, emSize, FontStyle.Italic, GraphicsUnit.Document, 10, gdiVerticalFont: true));
-                AssertExtensions.Throws<ArgumentException>("emSize", () => new Font(family.Name, emSize, FontStyle.Italic, GraphicsUnit.Document, 10, gdiVerticalFont: true));
+                AssertExtensions.Throws<ArgumentException>(
+                    "emSize",
+                    () => new Font(family, emSize)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "emSize",
+                    () => new Font(family.Name, emSize)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "emSize",
+                    () => new Font(family, emSize, FontStyle.Italic)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "emSize",
+                    () => new Font(family.Name, emSize, FontStyle.Italic)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "emSize",
+                    () => new Font(family, emSize, GraphicsUnit.Document)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "emSize",
+                    () => new Font(family.Name, emSize, GraphicsUnit.Document)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "emSize",
+                    () => new Font(family, emSize, FontStyle.Italic, GraphicsUnit.Document)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "emSize",
+                    () => new Font(family.Name, emSize, FontStyle.Italic, GraphicsUnit.Document)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "emSize",
+                    () => new Font(family, emSize, FontStyle.Italic, GraphicsUnit.Document, 10)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "emSize",
+                    () => new Font(family.Name, emSize, FontStyle.Italic, GraphicsUnit.Document, 10)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "emSize",
+                    () =>
+                        new Font(
+                            family,
+                            emSize,
+                            FontStyle.Italic,
+                            GraphicsUnit.Document,
+                            10,
+                            gdiVerticalFont: true
+                        )
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "emSize",
+                    () =>
+                        new Font(
+                            family.Name,
+                            emSize,
+                            FontStyle.Italic,
+                            GraphicsUnit.Document,
+                            10,
+                            gdiVerticalFont: true
+                        )
+                );
             }
         }
 
@@ -417,13 +789,35 @@ namespace System.Drawing.Tests
             using (FontFamily family = FontFamily.GenericSansSerif)
             {
                 AssertExtensions.Throws<ArgumentException>(null, () => new Font(family, 10, unit));
-                AssertExtensions.Throws<ArgumentException>(null, () => new Font(family.Name, 10, unit));
-                AssertExtensions.Throws<ArgumentException>(null, () => new Font(family, 10, FontStyle.Italic, unit));
-                AssertExtensions.Throws<ArgumentException>(null, () => new Font(family.Name, 10, FontStyle.Italic, unit));
-                AssertExtensions.Throws<ArgumentException>(null, () => new Font(family, 10, FontStyle.Italic, unit, 10));
-                AssertExtensions.Throws<ArgumentException>(null, () => new Font(family.Name, 10, FontStyle.Italic, unit, 10));
-                AssertExtensions.Throws<ArgumentException>(null, () => new Font(family, 10, FontStyle.Italic, unit, 10, gdiVerticalFont: true));
-                AssertExtensions.Throws<ArgumentException>(null, () => new Font(family.Name, 10, FontStyle.Italic, unit, 10, gdiVerticalFont: true));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => new Font(family.Name, 10, unit)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => new Font(family, 10, FontStyle.Italic, unit)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => new Font(family.Name, 10, FontStyle.Italic, unit)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => new Font(family, 10, FontStyle.Italic, unit, 10)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => new Font(family.Name, 10, FontStyle.Italic, unit, 10)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => new Font(family, 10, FontStyle.Italic, unit, 10, gdiVerticalFont: true)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        new Font(family.Name, 10, FontStyle.Italic, unit, 10, gdiVerticalFont: true)
+                );
             }
         }
 
@@ -431,8 +825,16 @@ namespace System.Drawing.Tests
         public void Clone_Invoke_ReturnsExpected()
         {
             using (FontFamily family = FontFamily.GenericSansSerif)
-            using (var font = new Font(family, 10, FontStyle.Bold, GraphicsUnit.Inch, 10, gdiVerticalFont: true))
-            {
+            using (
+                var font = new Font(
+                    family,
+                    10,
+                    FontStyle.Bold,
+                    GraphicsUnit.Inch,
+                    10,
+                    gdiVerticalFont: true
+                )
+            ) {
                 Font clone = Assert.IsType<Font>(font.Clone());
                 Assert.NotSame(font, clone);
 
@@ -461,18 +863,64 @@ namespace System.Drawing.Tests
         public static IEnumerable<object[]> Equals_TestData()
         {
             FontFamily family = FontFamily.GenericSansSerif;
-            var font = new Font(family, 10, FontStyle.Bold, GraphicsUnit.Inch, 10, gdiVerticalFont: true);
+            var font = new Font(
+                family,
+                10,
+                FontStyle.Bold,
+                GraphicsUnit.Inch,
+                10,
+                gdiVerticalFont: true
+            );
 
             yield return new object[] { font, font, true };
             // [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
             if (PlatformDetection.IsWindows)
             {
-                yield return new object[] { font.Clone(), new Font(family, 10, FontStyle.Bold, GraphicsUnit.Inch, 10, gdiVerticalFont: true), false };
+                yield return new object[]
+                {
+                    font.Clone(),
+                    new Font(
+                        family,
+                        10,
+                        FontStyle.Bold,
+                        GraphicsUnit.Inch,
+                        10,
+                        gdiVerticalFont: true
+                    ),
+                    false
+                };
             }
-            yield return new object[] { font.Clone(), new Font(family, 9, FontStyle.Bold, GraphicsUnit.Inch, 10, gdiVerticalFont: true), false };
-            yield return new object[] { font.Clone(), new Font(family, 10, FontStyle.Italic, GraphicsUnit.Millimeter, 10, gdiVerticalFont: true), false };
-            yield return new object[] { font.Clone(), new Font(family, 10, FontStyle.Bold, GraphicsUnit.Inch, 9, gdiVerticalFont: true), false };
-            yield return new object[] { font.Clone(), new Font(family, 10, FontStyle.Bold, GraphicsUnit.Inch, 10, gdiVerticalFont: false), false };
+            yield return new object[]
+            {
+                font.Clone(),
+                new Font(family, 9, FontStyle.Bold, GraphicsUnit.Inch, 10, gdiVerticalFont: true),
+                false
+            };
+            yield return new object[]
+            {
+                font.Clone(),
+                new Font(
+                    family,
+                    10,
+                    FontStyle.Italic,
+                    GraphicsUnit.Millimeter,
+                    10,
+                    gdiVerticalFont: true
+                ),
+                false
+            };
+            yield return new object[]
+            {
+                font.Clone(),
+                new Font(family, 10, FontStyle.Bold, GraphicsUnit.Inch, 9, gdiVerticalFont: true),
+                false
+            };
+            yield return new object[]
+            {
+                font.Clone(),
+                new Font(family, 10, FontStyle.Bold, GraphicsUnit.Inch, 10, gdiVerticalFont: false),
+                false
+            };
 
             yield return new object[] { new Font(family, 10), new object(), false };
             yield return new object[] { new Font(family, 10), null, false };
@@ -493,6 +941,7 @@ namespace System.Drawing.Tests
                 Assert.Equal(expected, font.Equals(other));
                 Assert.Equal(font.GetHashCode(), font.GetHashCode());
             }
+
             finally
             {
                 font.Dispose();
@@ -522,6 +971,7 @@ namespace System.Drawing.Tests
                 {
                     AssertExtensions.Throws<ArgumentException>(null, () => Font.FromHdc(hdc));
                 }
+
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -584,7 +1034,10 @@ namespace System.Drawing.Tests
             using (FontFamily family = FontFamily.GenericSansSerif)
             using (var font = new Font(family, 10))
             {
-                AssertExtensions.Throws<ArgumentNullException>("graphics", () => font.GetHeight(null));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "graphics",
+                    () => font.GetHeight(null)
+                );
             }
         }
 
@@ -629,10 +1082,21 @@ namespace System.Drawing.Tests
         [InlineData(FontStyle.Regular, 300, 0)]
         [InlineData(FontStyle.Regular, 400, 0)]
         [InlineData(FontStyle.Strikeout | FontStyle.Underline | FontStyle.Italic, 549, 1)]
-        [InlineData(FontStyle.Strikeout | FontStyle.Underline | FontStyle.Italic | FontStyle.Bold, 550, 1)]
-        [InlineData(FontStyle.Strikeout | FontStyle.Underline | FontStyle.Bold | FontStyle.Italic, int.MaxValue, 1)]
-        public void FromLogFont_ValidLogFont_ReturnsExpected(FontStyle fontStyle, int weight, byte charSet)
-        {
+        [InlineData(
+            FontStyle.Strikeout | FontStyle.Underline | FontStyle.Italic | FontStyle.Bold,
+            550,
+            1
+        )]
+        [InlineData(
+            FontStyle.Strikeout | FontStyle.Underline | FontStyle.Bold | FontStyle.Italic,
+            int.MaxValue,
+            1
+        )]
+        public void FromLogFont_ValidLogFont_ReturnsExpected(
+            FontStyle fontStyle,
+            int weight,
+            byte charSet
+        ) {
             // The boundary values of the weight that is considered Bold are different between Windows 7 and Windows 8.
             if (PlatformDetection.IsWindows7 || PlatformDetection.IsWindows8x)
             {
@@ -652,7 +1116,15 @@ namespace System.Drawing.Tests
                 };
                 using (Font font = Font.FromLogFont(logFont))
                 {
-                    VerifyFont(font, family.Name, font.Size, fontStyle, GraphicsUnit.World, charSet, expectedGdiVerticalFont: false);
+                    VerifyFont(
+                        font,
+                        family.Name,
+                        font.Size,
+                        fontStyle,
+                        GraphicsUnit.World,
+                        charSet,
+                        expectedGdiVerticalFont: false
+                    );
                 }
             }
         }
@@ -669,15 +1141,28 @@ namespace System.Drawing.Tests
                 {
                     if (PlatformDetection.IsNetFramework)
                     {
-                        AssertExtensions.Throws<ArgumentException>(null, () => Font.FromLogFont(null));
-                        AssertExtensions.Throws<ArgumentException>(null, () => Font.FromLogFont(null, hdc));
+                        AssertExtensions.Throws<ArgumentException>(
+                            null,
+                            () => Font.FromLogFont(null)
+                        );
+                        AssertExtensions.Throws<ArgumentException>(
+                            null,
+                            () => Font.FromLogFont(null, hdc)
+                        );
                     }
                     else
                     {
-                        AssertExtensions.Throws<ArgumentNullException>("lf", () => Font.FromLogFont(null));
-                        AssertExtensions.Throws<ArgumentNullException>("lf", () => Font.FromLogFont(null, hdc));
+                        AssertExtensions.Throws<ArgumentNullException>(
+                            "lf",
+                            () => Font.FromLogFont(null)
+                        );
+                        AssertExtensions.Throws<ArgumentNullException>(
+                            "lf",
+                            () => Font.FromLogFont(null, hdc)
+                        );
                     }
                 }
+
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -696,9 +1181,16 @@ namespace System.Drawing.Tests
                 try
                 {
                     var logFont = new LOGFONT();
-                    AssertExtensions.Throws<ArgumentException>(null, () => Font.FromLogFont(logFont));
-                    AssertExtensions.Throws<ArgumentException>(null, () => Font.FromLogFont(logFont, hdc));
+                    AssertExtensions.Throws<ArgumentException>(
+                        null,
+                        () => Font.FromLogFont(logFont)
+                    );
+                    AssertExtensions.Throws<ArgumentException>(
+                        null,
+                        () => Font.FromLogFont(logFont, hdc)
+                    );
                 }
+
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -717,10 +1209,7 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    var logFont = new UnblittableLOGFONT
-                    {
-                        lfOutPrecision = OUT_TT_ONLY_PRECIS
-                    };
+                    var logFont = new UnblittableLOGFONT { lfOutPrecision = OUT_TT_ONLY_PRECIS };
 
                     using (Font font = Font.FromLogFont(logFont))
                     {
@@ -728,6 +1217,7 @@ namespace System.Drawing.Tests
                         Assert.NotEmpty(font.Name);
                     }
                 }
+
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -784,11 +1274,24 @@ namespace System.Drawing.Tests
         [InlineData(FontStyle.Strikeout | FontStyle.Bold | FontStyle.Italic, 255, true, "@", 700)]
         [InlineData(FontStyle.Regular, 0, false, "", 400)]
         [InlineData(FontStyle.Regular, 10, false, "", 400)]
-        public void ToLogFont_Invoke_ReturnsExpected(FontStyle fontStyle, byte gdiCharSet, bool gdiVerticalFont, string expectedNamePrefix, int expectedWeight)
-        {
+        public void ToLogFont_Invoke_ReturnsExpected(
+            FontStyle fontStyle,
+            byte gdiCharSet,
+            bool gdiVerticalFont,
+            string expectedNamePrefix,
+            int expectedWeight
+        ) {
             using (FontFamily family = FontFamily.GenericMonospace)
-            using (var font = new Font(family, 10, fontStyle, GraphicsUnit.Point, gdiCharSet, gdiVerticalFont))
-            {
+            using (
+                var font = new Font(
+                    family,
+                    10,
+                    fontStyle,
+                    GraphicsUnit.Point,
+                    gdiCharSet,
+                    gdiVerticalFont
+                )
+            ) {
                 var logFont = new LOGFONT();
                 font.ToLogFont(logFont);
 
@@ -847,7 +1350,10 @@ namespace System.Drawing.Tests
         }
 
         [ConditionalFact(Helpers.IsWindowsOrAtLeastLibgdiplus6)]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "AV Exception is wrapped in a TargetInvocationException in the .NET Framework.")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "AV Exception is wrapped in a TargetInvocationException in the .NET Framework."
+        )]
         public void ToLogFont_NullLogFont_ThrowsArgumentNullException()
         {
             using (FontFamily family = FontFamily.GenericMonospace)
@@ -866,7 +1372,10 @@ namespace System.Drawing.Tests
             using (FontFamily family = FontFamily.GenericMonospace)
             using (var font = new Font(family, 10))
             {
-                AssertExtensions.Throws<ArgumentNullException>("graphics", () => font.ToLogFont(new LOGFONT(), null));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "graphics",
+                    () => font.ToLogFont(new LOGFONT(), null)
+                );
             }
         }
 
@@ -925,8 +1434,16 @@ namespace System.Drawing.Tests
         public void ToHfont_ComplicatedFont_DoesNotRoundtrip()
         {
             using (FontFamily family = FontFamily.GenericSansSerif)
-            using (var font = new Font(family, 10, FontStyle.Bold, GraphicsUnit.Inch, 10, gdiVerticalFont: true))
-            {
+            using (
+                var font = new Font(
+                    family,
+                    10,
+                    FontStyle.Bold,
+                    GraphicsUnit.Inch,
+                    10,
+                    gdiVerticalFont: true
+                )
+            ) {
                 IntPtr hfont = font.ToHfont();
                 Assert.NotEqual(IntPtr.Zero, hfont);
                 Assert.NotEqual(hfont, font.ToHfont());
@@ -954,14 +1471,32 @@ namespace System.Drawing.Tests
         public void ToString_Invoke_ReturnsExpected()
         {
             using (FontFamily family = FontFamily.GenericSansSerif)
-            using (var font = new Font(family, 10, FontStyle.Bold, GraphicsUnit.Inch, 10, gdiVerticalFont: true))
-            {
-                Assert.Equal($"[Font: Name={family.Name}, Size=10, Units=4, GdiCharSet=10, GdiVerticalFont=True]", font.ToString());
+            using (
+                var font = new Font(
+                    family,
+                    10,
+                    FontStyle.Bold,
+                    GraphicsUnit.Inch,
+                    10,
+                    gdiVerticalFont: true
+                )
+            ) {
+                Assert.Equal(
+                    $"[Font: Name={family.Name}, Size=10, Units=4, GdiCharSet=10, GdiVerticalFont=True]",
+                    font.ToString()
+                );
             }
         }
 
-        private static void VerifyFont(Font font, string expectedName, float expectedEmSize, FontStyle expectedStyle, GraphicsUnit expectedUnit, byte expectedGdiCharset, bool expectedGdiVerticalFont)
-        {
+        private static void VerifyFont(
+            Font font,
+            string expectedName,
+            float expectedEmSize,
+            FontStyle expectedStyle,
+            GraphicsUnit expectedUnit,
+            byte expectedGdiCharset,
+            bool expectedGdiVerticalFont
+        ) {
             Assert.Equal(expectedName, font.Name);
             Assert.Equal(expectedEmSize, font.Size);
 

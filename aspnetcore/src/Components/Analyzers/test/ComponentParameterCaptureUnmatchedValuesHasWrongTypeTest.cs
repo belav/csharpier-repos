@@ -11,13 +11,16 @@ namespace Microsoft.AspNetCore.Components.Analyzers.Test
     public class ComponentParameterCaptureUnmatchedValuesHasWrongTypeTest : DiagnosticVerifier
     {
         [Theory]
-        [InlineData("System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string, object>>")]
+        [InlineData(
+            "System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string, object>>"
+        )]
         [InlineData("System.Collections.Generic.Dictionary<string, object>")]
         [InlineData("System.Collections.Generic.IDictionary<string, object>")]
         [InlineData("System.Collections.Generic.IReadOnlyDictionary<string, object>")]
         public void IgnoresPropertiesWithSupportedType(string propertyType)
         {
-            var test = $@"
+            var test =
+                $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -33,7 +36,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers.Test
         [Fact]
         public void IgnoresPropertiesWithCaptureUnmatchedValuesFalse()
         {
-            var test = $@"
+            var test =
+                $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -49,7 +53,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers.Test
         [Fact]
         public void AddsDiagnosticForInvalidType()
         {
-            var test = $@"
+            var test =
+                $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -59,17 +64,18 @@ namespace Microsoft.AspNetCore.Components.Analyzers.Test
         }}
     }}" + ComponentsTestDeclarations.Source;
 
-            VerifyCSharpDiagnostic(test,
-                    new DiagnosticResult
-                    {
-                        Id = DiagnosticDescriptors.ComponentParameterCaptureUnmatchedValuesHasWrongType.Id,
-                        Message = "Component parameter 'ConsoleApplication1.TypeName.MyProperty' defines CaptureUnmatchedValues but has an unsupported type 'string'. Use a type assignable from 'System.Collections.Generic.Dictionary<string, object>'.",
-                        Severity = DiagnosticSeverity.Warning,
-                        Locations = new[]
-                        {
-                        new DiagnosticResultLocation("Test0.cs", 7, 70)
-                        }
-                    });
+            VerifyCSharpDiagnostic(
+                test,
+                new DiagnosticResult
+                {
+                    Id =
+                        DiagnosticDescriptors.ComponentParameterCaptureUnmatchedValuesHasWrongType.Id,
+                    Message =
+                        "Component parameter 'ConsoleApplication1.TypeName.MyProperty' defines CaptureUnmatchedValues but has an unsupported type 'string'. Use a type assignable from 'System.Collections.Generic.Dictionary<string, object>'.",
+                    Severity = DiagnosticSeverity.Warning,
+                    Locations = new[] { new DiagnosticResultLocation("Test0.cs", 7, 70) }
+                }
+            );
         }
 
         protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()

@@ -14,32 +14,61 @@ namespace System.Net.Sockets.Tests
         public abstract EndPoint EndPoint { get; }
         public event Action<Socket> Accepted;
 
-        public static SocketTestServer SocketTestServerFactory(SocketImplementationType type, EndPoint endpoint, ProtocolType protocolType = ProtocolType.Tcp)
-        {
-            return SocketTestServerFactory(type, DefaultNumConnections, DefaultReceiveBufferSize, endpoint, protocolType);
+        public static SocketTestServer SocketTestServerFactory(
+            SocketImplementationType type,
+            EndPoint endpoint,
+            ProtocolType protocolType = ProtocolType.Tcp
+        ) {
+            return SocketTestServerFactory(
+                type,
+                DefaultNumConnections,
+                DefaultReceiveBufferSize,
+                endpoint,
+                protocolType
+            );
         }
 
-        public static SocketTestServer SocketTestServerFactory(SocketImplementationType type, IPAddress address, out int port)
-        {
-            return SocketTestServerFactory(type, DefaultNumConnections, DefaultReceiveBufferSize, address, out port);
+        public static SocketTestServer SocketTestServerFactory(
+            SocketImplementationType type,
+            IPAddress address,
+            out int port
+        ) {
+            return SocketTestServerFactory(
+                type,
+                DefaultNumConnections,
+                DefaultReceiveBufferSize,
+                address,
+                out port
+            );
         }
 
-        public static SocketTestServer SocketTestServerFactory(SocketImplementationType type, IPAddress address)
-            => SocketTestServerFactory(type, address, out _);
+        public static SocketTestServer SocketTestServerFactory(
+            SocketImplementationType type,
+            IPAddress address
+        ) => SocketTestServerFactory(type, address, out _);
 
         public static SocketTestServer SocketTestServerFactory(
             SocketImplementationType type,
             int numConnections,
             int receiveBufferSize,
             EndPoint localEndPoint,
-            ProtocolType protocolType = ProtocolType.Tcp)
-        {
+            ProtocolType protocolType = ProtocolType.Tcp
+        ) {
             switch (type)
             {
                 case SocketImplementationType.APM:
-                    return new SocketTestServerAPM(numConnections, receiveBufferSize, localEndPoint);
+                    return new SocketTestServerAPM(
+                        numConnections,
+                        receiveBufferSize,
+                        localEndPoint
+                    );
                 case SocketImplementationType.Async:
-                    return new SocketTestServerAsync(numConnections, receiveBufferSize, localEndPoint, protocolType);
+                    return new SocketTestServerAsync(
+                        numConnections,
+                        receiveBufferSize,
+                        localEndPoint,
+                        protocolType
+                    );
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type));
             }
@@ -50,9 +79,14 @@ namespace System.Net.Sockets.Tests
             int numConnections,
             int receiveBufferSize,
             IPAddress address,
-            out int port)
-        {
-            SocketTestServer server = SocketTestServerFactory(type, numConnections, receiveBufferSize, new IPEndPoint(address, 0));
+            out int port
+        ) {
+            SocketTestServer server = SocketTestServerFactory(
+                type,
+                numConnections,
+                receiveBufferSize,
+                new IPEndPoint(address, 0)
+            );
             port = server.Port;
             return server;
         }

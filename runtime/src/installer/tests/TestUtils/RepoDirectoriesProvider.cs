@@ -28,25 +28,28 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public RepoDirectoriesProvider(
             string builtDotnet = null,
-            string microsoftNETCoreAppVersion = null)
-        {
+            string microsoftNETCoreAppVersion = null
+        ) {
             RepoRoot = GetRepoRootDirectory();
             BaseArtifactsFolder = Path.Combine(RepoRoot, "artifacts");
 
             _testContextVariableFilePath = Path.Combine(
                 Directory.GetCurrentDirectory(),
-                "TestContextVariables.txt");
+                "TestContextVariables.txt"
+            );
 
             _testContextVariables = File.ReadAllLines(_testContextVariableFilePath)
                 .ToImmutableDictionary(
                     line => line.Substring(0, line.IndexOf('=')),
                     line => line.Substring(line.IndexOf('=') + 1),
-                    StringComparer.OrdinalIgnoreCase);
+                    StringComparer.OrdinalIgnoreCase
+                );
 
             TargetRID = GetTestContextVariable("TEST_TARGETRID");
             BuildRID = GetTestContextVariable("BUILDRID");
             BuildArchitecture = GetTestContextVariable("BUILD_ARCHITECTURE");
-            MicrosoftNETCoreAppVersion = microsoftNETCoreAppVersion ?? GetTestContextVariable("MNA_VERSION");
+            MicrosoftNETCoreAppVersion =
+                microsoftNETCoreAppVersion ?? GetTestContextVariable("MNA_VERSION");
             TestAssetsFolder = GetTestContextVariable("TEST_ASSETS");
 
             Configuration = GetTestContextVariable("BUILD_CONFIGURATION");
@@ -61,16 +64,21 @@ namespace Microsoft.DotNet.CoreSetup.Test
                 throw new InvalidOperationException("ERROR: Test SDK folder not found.");
             }
 
-            NugetPackages = GetTestContextVariable("NUGET_PACKAGES") ?? Path.Combine(RepoRoot, ".packages");
+            NugetPackages =
+                GetTestContextVariable("NUGET_PACKAGES") ?? Path.Combine(RepoRoot, ".packages");
 
-            BuiltDotnet = builtDotnet ?? Path.Combine(GetTestContextVariable("TEST_ARTIFACTS"), "sharedFrameworkPublish");
+            BuiltDotnet =
+                builtDotnet
+                ?? Path.Combine(GetTestContextVariable("TEST_ARTIFACTS"), "sharedFrameworkPublish");
         }
 
         public string GetTestContextVariable(string name)
         {
-            return GetTestContextVariableOrNull(name) ?? throw new ArgumentException(
-                $"Unable to find variable '{name}' in " +
-                $"test context variable file '{_testContextVariableFilePath}'");
+            return GetTestContextVariableOrNull(name)
+                ?? throw new ArgumentException(
+                    $"Unable to find variable '{name}' in "
+                        + $"test context variable file '{_testContextVariableFilePath}'"
+                );
         }
 
         public string GetTestContextVariableOrNull(string name)

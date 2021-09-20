@@ -14,21 +14,37 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         // for most DI providers, the structs default constructor shouldn't run when creating an instance of ClassWithOptionalArgsCtorWithStructs
         public virtual bool ExpectStructWithPublicDefaultConstructorInvoked => false;
 
-        public delegate object CreateInstanceFunc(IServiceProvider provider, Type type, object[] args);
+        public delegate object CreateInstanceFunc(
+            IServiceProvider provider,
+            Type type,
+            object[] args
+        );
 
-        private static object CreateInstanceDirectly(IServiceProvider provider, Type type, object[] args)
-        {
+        private static object CreateInstanceDirectly(
+            IServiceProvider provider,
+            Type type,
+            object[] args
+        ) {
             return ActivatorUtilities.CreateInstance(provider, type, args);
         }
 
-        private static object CreateInstanceFromFactory(IServiceProvider provider, Type type, object[] args)
-        {
-            var factory = ActivatorUtilities.CreateFactory(type, args.Select(a => a.GetType()).ToArray());
+        private static object CreateInstanceFromFactory(
+            IServiceProvider provider,
+            Type type,
+            object[] args
+        ) {
+            var factory = ActivatorUtilities.CreateFactory(
+                type,
+                args.Select(a => a.GetType()).ToArray()
+            );
             return factory(provider, args);
         }
 
-        private static T CreateInstance<T>(CreateInstanceFunc func, IServiceProvider provider, params object[] args)
-        {
+        private static T CreateInstance<T>(
+            CreateInstanceFunc func,
+            IServiceProvider provider,
+            params object[] args
+        ) {
             return (T)func(provider, typeof(T), args);
         }
 
@@ -43,11 +59,14 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
         [Theory]
         [MemberData(nameof(CreateInstanceFuncs))]
-        public void TypeActivatorEnablesYouToCreateAnyTypeWithServicesEvenWhenNotInIocContainer(CreateInstanceFunc createFunc)
-        {
+        public void TypeActivatorEnablesYouToCreateAnyTypeWithServicesEvenWhenNotInIocContainer(
+            CreateInstanceFunc createFunc
+        ) {
             // Arrange
-            var serviceCollection = new TestServiceCollection()
-                .AddTransient<IFakeService, FakeService>();
+            var serviceCollection = new TestServiceCollection().AddTransient<
+                IFakeService,
+                FakeService
+            >();
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
             var anotherClass = CreateInstance<AnotherClass>(createFunc, serviceProvider);
@@ -57,15 +76,23 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
         [Theory]
         [MemberData(nameof(CreateInstanceFuncs))]
-        public void TypeActivatorAcceptsAnyNumberOfAdditionalConstructorParametersToProvide(CreateInstanceFunc createFunc)
-        {
+        public void TypeActivatorAcceptsAnyNumberOfAdditionalConstructorParametersToProvide(
+            CreateInstanceFunc createFunc
+        ) {
             // Arrange
-            var serviceCollection = new TestServiceCollection()
-                .AddTransient<IFakeService, FakeService>();
+            var serviceCollection = new TestServiceCollection().AddTransient<
+                IFakeService,
+                FakeService
+            >();
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
             // Act
-            var anotherClass = CreateInstance<AnotherClassAcceptingData>(createFunc, serviceProvider, "1", "2");
+            var anotherClass = CreateInstance<AnotherClassAcceptingData>(
+                createFunc,
+                serviceProvider,
+                "1",
+                "2"
+            );
 
             // Assert
             Assert.NotNull(anotherClass.FakeService);
@@ -93,7 +120,10 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             var serviceProvider = CreateServiceProvider(provider);
 
             // Act
-            var anotherClass = CreateInstance<ClassWithOptionalArgsCtor>(createFunc, serviceProvider);
+            var anotherClass = CreateInstance<ClassWithOptionalArgsCtor>(
+                createFunc,
+                serviceProvider
+            );
 
             // Assert
             Assert.NotNull(anotherClass);
@@ -102,14 +132,18 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
         [Theory]
         [MemberData(nameof(CreateInstanceFuncs))]
-        public void TypeActivatorWorksWithCtorWithOptionalArgs_WithStructDefaults(CreateInstanceFunc createFunc)
-        {
+        public void TypeActivatorWorksWithCtorWithOptionalArgs_WithStructDefaults(
+            CreateInstanceFunc createFunc
+        ) {
             // Arrange
             var provider = new TestServiceCollection();
             var serviceProvider = CreateServiceProvider(provider);
 
             // Act
-            var anotherClass = CreateInstance<ClassWithOptionalArgsCtorWithStructs>(createFunc, serviceProvider);
+            var anotherClass = CreateInstance<ClassWithOptionalArgsCtorWithStructs>(
+                createFunc,
+                serviceProvider
+            );
 
             // Assert
             Assert.NotNull(anotherClass);
@@ -124,15 +158,23 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
         [Theory]
         [MemberData(nameof(CreateInstanceFuncs))]
-        public void TypeActivatorCanDisambiguateConstructorsWithUniqueArguments(CreateInstanceFunc createFunc)
-        {
+        public void TypeActivatorCanDisambiguateConstructorsWithUniqueArguments(
+            CreateInstanceFunc createFunc
+        ) {
             // Arrange
-            var serviceCollection = new TestServiceCollection()
-                .AddTransient<IFakeService, FakeService>();
+            var serviceCollection = new TestServiceCollection().AddTransient<
+                IFakeService,
+                FakeService
+            >();
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
             // Act
-            var instance = CreateInstance<ClassWithAmbiguousCtors>(createFunc, serviceProvider, "1", 2);
+            var instance = CreateInstance<ClassWithAmbiguousCtors>(
+                createFunc,
+                serviceProvider,
+                "1",
+                2
+            );
 
             // Assert
             Assert.NotNull(instance);
@@ -143,20 +185,29 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
         public static IEnumerable<object[]> TypesWithNonPublicConstructorData =>
             CreateInstanceFuncs.Zip(
-                    new[] { typeof(ClassWithPrivateCtor), typeof(ClassWithInternalConstructor), typeof(ClassWithProtectedConstructor), typeof(StaticConstructorClass) },
-                    (a, b) => new object[] { a[0], b });
+                new[]
+                {
+                    typeof(ClassWithPrivateCtor),
+                    typeof(ClassWithInternalConstructor),
+                    typeof(ClassWithProtectedConstructor),
+                    typeof(StaticConstructorClass)
+                },
+                (a, b) => new object[] { a[0], b }
+            );
 
         [Theory]
         [MemberData(nameof(TypesWithNonPublicConstructorData))]
         public void TypeActivatorRequiresPublicConstructor(CreateInstanceFunc createFunc, Type type)
         {
             // Arrange
-            var expectedMessage = $"A suitable constructor for type '{type}' could not be located. " +
-                "Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.";
+            var expectedMessage =
+                $"A suitable constructor for type '{type}' could not be located. "
+                + "Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.";
 
             // Act and Assert
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                createFunc(provider: null, type: type, args: Array.Empty<object>()));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => createFunc(provider: null, type: type, args: Array.Empty<object>())
+            );
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -166,16 +217,28 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         public void TypeActivatorRequiresAllArgumentsCanBeAccepted(CreateInstanceFunc createFunc)
         {
             // Arrange
-            var expectedMessage = $"A suitable constructor for type '{typeof(AnotherClassAcceptingData).FullName}' could not be located. " +
-                "Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.";
-            var serviceCollection = new TestServiceCollection()
-                .AddTransient<IFakeService, FakeService>();
+            var expectedMessage =
+                $"A suitable constructor for type '{typeof(AnotherClassAcceptingData).FullName}' could not be located. "
+                + "Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.";
+            var serviceCollection = new TestServiceCollection().AddTransient<
+                IFakeService,
+                FakeService
+            >();
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
-            var ex1 = Assert.Throws<InvalidOperationException>(() =>
-                CreateInstance<AnotherClassAcceptingData>(createFunc, serviceProvider, "1", "2", "3"));
-            var ex2 = Assert.Throws<InvalidOperationException>(() =>
-                CreateInstance<AnotherClassAcceptingData>(createFunc, serviceProvider, 1, 2));
+            var ex1 = Assert.Throws<InvalidOperationException>(
+                () =>
+                    CreateInstance<AnotherClassAcceptingData>(
+                        createFunc,
+                        serviceProvider,
+                        "1",
+                        "2",
+                        "3"
+                    )
+            );
+            var ex2 = Assert.Throws<InvalidOperationException>(
+                () => CreateInstance<AnotherClassAcceptingData>(createFunc, serviceProvider, 1, 2)
+            );
 
             Assert.Equal(expectedMessage, ex1.Message);
             Assert.Equal(expectedMessage, ex2.Message);
@@ -183,14 +246,22 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
         [Theory]
         [MemberData(nameof(CreateInstanceFuncs))]
-        public void TypeActivatorRethrowsOriginalExceptionFromConstructor(CreateInstanceFunc createFunc)
-        {
+        public void TypeActivatorRethrowsOriginalExceptionFromConstructor(
+            CreateInstanceFunc createFunc
+        ) {
             // Act
-            var ex1 = Assert.Throws<Exception>(() =>
-                CreateInstance<ClassWithThrowingEmptyCtor>(createFunc, provider: null));
+            var ex1 = Assert.Throws<Exception>(
+                () => CreateInstance<ClassWithThrowingEmptyCtor>(createFunc, provider: null)
+            );
 
-            var ex2 = Assert.Throws<Exception>(() =>
-                CreateInstance<ClassWithThrowingCtor>(createFunc, provider: null, args: new[] { new FakeService() }));
+            var ex2 = Assert.Throws<Exception>(
+                () =>
+                    CreateInstance<ClassWithThrowingCtor>(
+                        createFunc,
+                        provider: null,
+                        args: new[] { new FakeService() }
+                    )
+            );
 
             // Assert
             Assert.Equal(nameof(ClassWithThrowingEmptyCtor), ex1.Message);
@@ -200,16 +271,19 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         [Theory]
         [InlineData(typeof(string))]
         [InlineData(typeof(int))]
-        public void TypeActivatorCreateFactoryDoesNotAllowForAmbiguousConstructorMatches(Type paramType)
-        {
+        public void TypeActivatorCreateFactoryDoesNotAllowForAmbiguousConstructorMatches(
+            Type paramType
+        ) {
             // Arrange
             var type = typeof(ClassWithAmbiguousCtors);
-            var expectedMessage = $"Multiple constructors accepting all given argument types have been found in type '{type}'. " +
-                "There should only be one applicable constructor.";
+            var expectedMessage =
+                $"Multiple constructors accepting all given argument types have been found in type '{type}'. "
+                + "There should only be one applicable constructor.";
 
             // Act
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                ActivatorUtilities.CreateFactory(type, new[] { paramType }));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => ActivatorUtilities.CreateFactory(type, new[] { paramType })
+            );
 
             // Assert
             Assert.Equal(expectedMessage, ex.Message);
@@ -218,8 +292,10 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         [Theory]
         [InlineData("", "string")]
         [InlineData(5, "IFakeService, int")]
-        public void TypeActivatorCreateInstanceUsesFirstMathchedConstructor(object value, string ctor)
-        {
+        public void TypeActivatorCreateInstanceUsesFirstMathchedConstructor(
+            object value,
+            string ctor
+        ) {
             // Arrange
             var serviceCollection = new TestServiceCollection();
             serviceCollection.AddSingleton<IFakeService, FakeService>();
@@ -243,7 +319,11 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
             // Act
-            var instance = CreateInstance<ClassWithAmbiguousCtorsAndAttribute>(createFunc, serviceProvider, "hello");
+            var instance = CreateInstance<ClassWithAmbiguousCtorsAndAttribute>(
+                createFunc,
+                serviceProvider,
+                "hello"
+            );
 
             // Assert
             Assert.Equal("IFakeService, string", instance.CtorUsed);
@@ -254,21 +334,38 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         public void TypeActivatorThrowsOnMultipleMarkedCtors(CreateInstanceFunc createFunc)
         {
             // Act
-            var exception = Assert.Throws<InvalidOperationException>(() => CreateInstance<ClassWithMultipleMarkedCtors>(createFunc, null, "hello"));
+            var exception = Assert.Throws<InvalidOperationException>(
+                () => CreateInstance<ClassWithMultipleMarkedCtors>(createFunc, null, "hello")
+            );
 
             // Assert
-            Assert.Equal("Multiple constructors were marked with ActivatorUtilitiesConstructorAttribute.", exception.Message);
+            Assert.Equal(
+                "Multiple constructors were marked with ActivatorUtilitiesConstructorAttribute.",
+                exception.Message
+            );
         }
 
         [Theory]
         [MemberData(nameof(CreateInstanceFuncs))]
-        public void TypeActivatorThrowsWhenMarkedCtorDoesntAcceptArguments(CreateInstanceFunc createFunc)
-        {
+        public void TypeActivatorThrowsWhenMarkedCtorDoesntAcceptArguments(
+            CreateInstanceFunc createFunc
+        ) {
             // Act
-            var exception = Assert.Throws<InvalidOperationException>(() => CreateInstance<ClassWithAmbiguousCtorsAndAttribute>(createFunc, null, 0, "hello"));
+            var exception = Assert.Throws<InvalidOperationException>(
+                () =>
+                    CreateInstance<ClassWithAmbiguousCtorsAndAttribute>(
+                        createFunc,
+                        null,
+                        0,
+                        "hello"
+                    )
+            );
 
             // Assert
-            Assert.Equal("Constructor marked with ActivatorUtilitiesConstructorAttribute does not accept all given argument types.", exception.Message);
+            Assert.Equal(
+                "Constructor marked with ActivatorUtilitiesConstructorAttribute does not accept all given argument types.",
+                exception.Message
+            );
         }
 
         [Fact]
@@ -279,18 +376,24 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             {
                 CreationCountFakeService.InstanceCount = 0;
 
-                var serviceCollection = new TestServiceCollection()
-                    .AddTransient<IFakeService, FakeService>()
-                    .AddTransient<CreationCountFakeService>();
+                var serviceCollection = new TestServiceCollection().AddTransient<
+                    IFakeService,
+                    FakeService
+                >().AddTransient<CreationCountFakeService>();
 
                 var serviceProvider = CreateServiceProvider(serviceCollection);
 
-                var service = ActivatorUtilities.GetServiceOrCreateInstance<CreationCountFakeService>(serviceProvider);
+                var service =
+                    ActivatorUtilities.GetServiceOrCreateInstance<CreationCountFakeService>(
+                        serviceProvider
+                    );
                 Assert.NotNull(service);
                 Assert.Equal(1, service.InstanceId);
                 Assert.Equal(1, CreationCountFakeService.InstanceCount);
 
-                service = ActivatorUtilities.GetServiceOrCreateInstance<CreationCountFakeService>(serviceProvider);
+                service = ActivatorUtilities.GetServiceOrCreateInstance<CreationCountFakeService>(
+                    serviceProvider
+                );
                 Assert.NotNull(service);
                 Assert.Equal(2, service.InstanceId);
                 Assert.Equal(2, CreationCountFakeService.InstanceCount);
@@ -306,18 +409,24 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
                 // Reset the count because test order is not guaranteed
                 CreationCountFakeService.InstanceCount = 0;
 
-                var serviceCollection = new TestServiceCollection()
-                    .AddTransient<IFakeService, FakeService>()
-                    .AddSingleton<CreationCountFakeService>();
+                var serviceCollection = new TestServiceCollection().AddTransient<
+                    IFakeService,
+                    FakeService
+                >().AddSingleton<CreationCountFakeService>();
                 var serviceProvider = CreateServiceProvider(serviceCollection);
 
                 // Act and Assert
-                var service = ActivatorUtilities.GetServiceOrCreateInstance<CreationCountFakeService>(serviceProvider);
+                var service =
+                    ActivatorUtilities.GetServiceOrCreateInstance<CreationCountFakeService>(
+                        serviceProvider
+                    );
                 Assert.NotNull(service);
                 Assert.Equal(1, service.InstanceId);
                 Assert.Equal(1, CreationCountFakeService.InstanceCount);
 
-                service = ActivatorUtilities.GetServiceOrCreateInstance<CreationCountFakeService>(serviceProvider);
+                service = ActivatorUtilities.GetServiceOrCreateInstance<CreationCountFakeService>(
+                    serviceProvider
+                );
                 Assert.NotNull(service);
                 Assert.Equal(1, service.InstanceId);
                 Assert.Equal(1, CreationCountFakeService.InstanceCount);
@@ -333,19 +442,25 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
                 // Reset the count because test order is not guaranteed
                 CreationCountFakeService.InstanceCount = 0;
 
-                var serviceCollection = new TestServiceCollection()
-                    .AddTransient<IFakeService, FakeService>();
+                var serviceCollection = new TestServiceCollection().AddTransient<
+                    IFakeService,
+                    FakeService
+                >();
                 var serviceProvider = CreateServiceProvider(serviceCollection);
 
                 // Act and Assert
-                var service = (CreationCountFakeService)ActivatorUtilities.GetServiceOrCreateInstance(
-                    serviceProvider,
-                    typeof(CreationCountFakeService));
+                var service =
+                    (CreationCountFakeService)ActivatorUtilities.GetServiceOrCreateInstance(
+                        serviceProvider,
+                        typeof(CreationCountFakeService)
+                    );
                 Assert.NotNull(service);
                 Assert.Equal(1, service.InstanceId);
                 Assert.Equal(1, CreationCountFakeService.InstanceCount);
 
-                service = ActivatorUtilities.GetServiceOrCreateInstance<CreationCountFakeService>(serviceProvider);
+                service = ActivatorUtilities.GetServiceOrCreateInstance<CreationCountFakeService>(
+                    serviceProvider
+                );
                 Assert.NotNull(service);
                 Assert.Equal(2, service.InstanceId);
                 Assert.Equal(2, CreationCountFakeService.InstanceCount);
@@ -354,25 +469,36 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
         [Theory]
         [MemberData(nameof(CreateInstanceFuncs))]
-        public void UnRegisteredServiceAsConstructorParameterThrowsException(CreateInstanceFunc createFunc)
-        {
-            var serviceCollection = new TestServiceCollection()
-                .AddSingleton<CreationCountFakeService>();
+        public void UnRegisteredServiceAsConstructorParameterThrowsException(
+            CreateInstanceFunc createFunc
+        ) {
+            var serviceCollection =
+                new TestServiceCollection().AddSingleton<CreationCountFakeService>();
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-            CreateInstance<CreationCountFakeService>(createFunc, serviceProvider));
-            Assert.Equal($"Unable to resolve service for type '{typeof(IFakeService)}' while attempting" +
-                $" to activate '{typeof(CreationCountFakeService)}'.",
-                ex.Message);
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => CreateInstance<CreationCountFakeService>(createFunc, serviceProvider)
+            );
+            Assert.Equal(
+                $"Unable to resolve service for type '{typeof(IFakeService)}' while attempting"
+                    + $" to activate '{typeof(CreationCountFakeService)}'.",
+                ex.Message
+            );
         }
 
         [Fact]
         public void CreateInstance_WithAbstractTypeAndPublicConstructor_ThrowsCorrectException()
         {
             // Act & Assert
-            var ex = Assert.Throws<InvalidOperationException>(() => ActivatorUtilities.CreateInstance(default(IServiceProvider), typeof(AbstractFoo)));
-            var msg = "A suitable constructor for type 'Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests+AbstractFoo' could not be located. Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.";
+            var ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                    ActivatorUtilities.CreateInstance(
+                        default(IServiceProvider),
+                        typeof(AbstractFoo)
+                    )
+            );
+            var msg =
+                "A suitable constructor for type 'Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests+AbstractFoo' could not be located. Ensure the type is concrete and all parameters of a public constructor are either registered as services or passed as arguments. Also ensure no extraneous arguments are provided.";
             Assert.Equal(msg, ex.Message);
         }
 
@@ -380,7 +506,9 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         public void CreateInstance_CapturesInnerException_OfTargetInvocationException()
         {
             // Act & Assert
-            var ex = Assert.Throws<InvalidOperationException>(() => ActivatorUtilities.CreateInstance(default(IServiceProvider), typeof(Bar)));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => ActivatorUtilities.CreateInstance(default(IServiceProvider), typeof(Bar))
+            );
             var msg = "some error";
             Assert.Equal(msg, ex.Message);
         }
@@ -388,9 +516,7 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         private abstract class AbstractFoo
         {
             // The constructor should be public, since that is checked as well.
-            public AbstractFoo()
-            {
-            }
+            public AbstractFoo() { }
         }
 
         private class Bar

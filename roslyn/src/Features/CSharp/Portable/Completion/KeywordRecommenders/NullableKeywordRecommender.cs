@@ -12,12 +12,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class NullableKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public NullableKeywordRecommender()
-            : base(SyntaxKind.NullableKeyword, isValidInPreprocessorContext: true)
-        {
-        }
+            : base(SyntaxKind.NullableKeyword, isValidInPreprocessorContext: true) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-        {
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) {
             // #nullable
             if (context.IsPreProcessorKeywordContext)
             {
@@ -30,12 +31,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             var previousToken4 = previousToken3.GetPreviousToken(includeSkipped: true);
 
             return
-               // # pragma warning <action> |
-               (previousToken1.Kind() == SyntaxKind.DisableKeyword || previousToken1.Kind() == SyntaxKind.RestoreKeyword ||
-                previousToken1.Kind() == SyntaxKind.EnableKeyword) &&
-               previousToken2.Kind() == SyntaxKind.WarningKeyword &&
-               previousToken3.Kind() == SyntaxKind.PragmaKeyword &&
-               previousToken4.Kind() == SyntaxKind.HashToken;
+                // # pragma warning <action> |
+                (
+                    previousToken1.Kind() == SyntaxKind.DisableKeyword
+                    || previousToken1.Kind() == SyntaxKind.RestoreKeyword
+                    || previousToken1.Kind() == SyntaxKind.EnableKeyword
+                )
+                && previousToken2.Kind() == SyntaxKind.WarningKeyword
+                && previousToken3.Kind() == SyntaxKind.PragmaKeyword
+                && previousToken4.Kind() == SyntaxKind.HashToken;
         }
     }
 }

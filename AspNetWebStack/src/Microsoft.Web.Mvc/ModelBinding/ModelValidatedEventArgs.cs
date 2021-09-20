@@ -8,8 +8,10 @@ namespace Microsoft.Web.Mvc.ModelBinding
 {
     public sealed class ModelValidatedEventArgs : EventArgs
     {
-        public ModelValidatedEventArgs(ControllerContext controllerContext, ModelValidationNode parentNode)
-        {
+        public ModelValidatedEventArgs(
+            ControllerContext controllerContext,
+            ModelValidationNode parentNode
+        ) {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException("controllerContext");

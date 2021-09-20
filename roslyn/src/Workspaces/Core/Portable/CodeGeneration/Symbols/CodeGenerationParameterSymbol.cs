@@ -30,9 +30,15 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             string name,
             bool isOptional,
             bool hasDefaultValue,
-            object defaultValue)
-            : base(containingType?.ContainingAssembly, containingType, attributes, Accessibility.NotApplicable, new DeclarationModifiers(), name)
-        {
+            object defaultValue
+        ) : base(
+            containingType?.ContainingAssembly,
+            containingType,
+            attributes,
+            Accessibility.NotApplicable,
+            new DeclarationModifiers(),
+            name
+        ) {
             this.RefKind = refKind;
             this.IsParams = isParams;
             this.Type = type;
@@ -44,26 +50,34 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         protected override CodeGenerationSymbol Clone()
         {
             return new CodeGenerationParameterSymbol(
-                this.ContainingType, this.GetAttributes(), this.RefKind,
-                this.IsParams, this.Type, this.Name, this.IsOptional, this.HasExplicitDefaultValue,
-                this.ExplicitDefaultValue);
+                this.ContainingType,
+                this.GetAttributes(),
+                this.RefKind,
+                this.IsParams,
+                this.Type,
+                this.Name,
+                this.IsOptional,
+                this.HasExplicitDefaultValue,
+                this.ExplicitDefaultValue
+            );
         }
 
         public new IParameterSymbol OriginalDefinition => this;
 
         public override SymbolKind Kind => SymbolKind.Parameter;
 
-        public override void Accept(SymbolVisitor visitor)
-            => visitor.VisitParameter(this);
+        public override void Accept(SymbolVisitor visitor) => visitor.VisitParameter(this);
 
-        public override TResult Accept<TResult>(SymbolVisitor<TResult> visitor)
-            => visitor.VisitParameter(this);
+        public override TResult Accept<TResult>(SymbolVisitor<TResult> visitor) =>
+            visitor.VisitParameter(this);
 
         public bool IsThis => false;
 
-        public ImmutableArray<CustomModifier> RefCustomModifiers => ImmutableArray.Create<CustomModifier>();
+        public ImmutableArray<CustomModifier> RefCustomModifiers =>
+            ImmutableArray.Create<CustomModifier>();
 
-        public ImmutableArray<CustomModifier> CustomModifiers => ImmutableArray.Create<CustomModifier>();
+        public ImmutableArray<CustomModifier> CustomModifiers =>
+            ImmutableArray.Create<CustomModifier>();
 
         public bool IsDiscard => false;
     }

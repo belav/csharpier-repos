@@ -8,9 +8,19 @@ namespace System.Resources
 {
     internal partial class ManifestBasedResourceGroveler
     {
-        private static Assembly? InternalGetSatelliteAssembly(Assembly mainAssembly, CultureInfo culture, Version? version)
-        {
-            return (RuntimeAssembly.InternalGetSatelliteAssembly(mainAssembly, culture, version, throwOnFileNotFound: false));
+        private static Assembly? InternalGetSatelliteAssembly(
+            Assembly mainAssembly,
+            CultureInfo culture,
+            Version? version
+        ) {
+            return (
+                RuntimeAssembly.InternalGetSatelliteAssembly(
+                    mainAssembly,
+                    culture,
+                    version,
+                    throwOnFileNotFound: false
+                )
+            );
         }
     }
 }

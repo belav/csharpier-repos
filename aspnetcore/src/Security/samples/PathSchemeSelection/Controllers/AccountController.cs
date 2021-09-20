@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthSamples.PathSchemeSelection.Controllers
 {
-
     public class AccountController : Controller
     {
         [HttpGet]
@@ -24,8 +23,11 @@ namespace AuthSamples.PathSchemeSelection.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(string userName, string password, string returnUrl = null)
-        {
+        public async Task<IActionResult> Login(
+            string userName,
+            string password,
+            string returnUrl = null
+        ) {
             ViewData["ReturnUrl"] = returnUrl;
 
             // Normally Identity handles sign in, but you can do it directly
@@ -37,7 +39,10 @@ namespace AuthSamples.PathSchemeSelection.Controllers
                     new Claim("role", "Member")
                 };
 
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(new ClaimsIdentity(claims, "Cookies", "user", "role")));
+                await HttpContext.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(new ClaimsIdentity(claims, "Cookies", "user", "role"))
+                );
 
                 if (Url.IsLocalUrl(returnUrl))
                 {

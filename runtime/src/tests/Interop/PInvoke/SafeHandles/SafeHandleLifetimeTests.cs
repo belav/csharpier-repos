@@ -38,7 +38,7 @@ namespace SafeHandleTests
 
             SafeHandleNative.StructWithSafeHandleByValue(str, initialValue);
             Assert.IsFalse(str.handle.IsClosed);
-            
+
             SafeHandleNative.StructWithSafeHandleByRef(ref str, initialValue, initialValue);
             Assert.IsFalse(str.handle.IsClosed);
         }

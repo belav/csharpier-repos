@@ -14,7 +14,7 @@ namespace Polly
     public static class HttpRequestMessageExtensions
     {
         internal static readonly string PolicyExecutionContextKey = "PolicyExecutionContext";
-        
+
         /// <summary>
         /// Gets the <see cref="Context"/> associated with the provided <see cref="HttpRequestMessage"/>.
         /// </summary>
@@ -46,8 +46,10 @@ namespace Polly
         /// to executing a <see cref="Policy"/>, if one does not already exist. The <see cref="Context"/> will be provided
         /// to the policy for use inside the <see cref="Policy"/> and in other message handlers.
         /// </remarks>
-        public static void SetPolicyExecutionContext(this HttpRequestMessage request, Context context)
-        {
+        public static void SetPolicyExecutionContext(
+            this HttpRequestMessage request,
+            Context context
+        ) {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));

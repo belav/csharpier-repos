@@ -38,8 +38,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             ArrayPool<char> charPool,
             ObjectPoolProvider objectPoolProvider,
             MvcOptions options,
-            MvcNewtonsoftJsonOptions jsonOptions)
-            : base(logger, serializerSettings, charPool, objectPoolProvider, options, jsonOptions)
+            MvcNewtonsoftJsonOptions jsonOptions
+        ) : base(logger, serializerSettings, charPool, objectPoolProvider, options, jsonOptions)
         {
             // Clear all values and only include json-patch+json value.
             SupportedMediaTypes.Clear();
@@ -63,8 +63,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         /// <inheritdoc />
         public async override Task<InputFormatterResult> ReadRequestBodyAsync(
             InputFormatterContext context,
-            Encoding encoding)
-        {
+            Encoding encoding
+        ) {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
@@ -78,8 +78,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             var result = await base.ReadRequestBodyAsync(context, encoding);
             if (!result.HasError)
             {
-                if (result.Model is IJsonPatchDocument jsonPatchDocument && SerializerSettings.ContractResolver is not  null)
-                {
+                if (
+                    result.Model is IJsonPatchDocument jsonPatchDocument
+                    && SerializerSettings.ContractResolver is not null
+                ) {
                     jsonPatchDocument.ContractResolver = SerializerSettings.ContractResolver;
                 }
             }
@@ -96,8 +98,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             }
 
             var modelType = context.ModelType;
-            if (!typeof(IJsonPatchDocument).IsAssignableFrom(modelType) ||
-                !modelType.IsGenericType)
+            if (!typeof(IJsonPatchDocument).IsAssignableFrom(modelType) || !modelType.IsGenericType)
             {
                 return false;
             }

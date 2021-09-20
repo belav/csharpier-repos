@@ -24,8 +24,11 @@ namespace System.Security.Cryptography.Xml.Tests
             return doc;
         }
 
-        private static void EncryptElement(XmlDocument doc, string elementName, SymmetricAlgorithm key)
-        {
+        private static void EncryptElement(
+            XmlDocument doc,
+            string elementName,
+            SymmetricAlgorithm key
+        ) {
             var elementToEncrypt = (XmlElement)doc.GetElementsByTagName(elementName)[0];
 
             var encryptedXml = new EncryptedXml();
@@ -35,7 +38,11 @@ namespace System.Security.Cryptography.Xml.Tests
                 EncryptionMethod = new EncryptionMethod(TestHelpers.GetEncryptionMethodName(key))
             };
 
-            encryptedData.CipherData.CipherValue = encryptedXml.EncryptData(elementToEncrypt, key, false);
+            encryptedData.CipherData.CipherValue = encryptedXml.EncryptData(
+                elementToEncrypt,
+                key,
+                false
+            );
 
             EncryptedXml.ReplaceElement(elementToEncrypt, encryptedData, false);
         }
@@ -67,7 +74,8 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             const string testString = "some text node";
             const string ExampleXmlRootElement = "example";
-            const string ExampleXml = @"<?xml version=""1.0""?>
+            const string ExampleXml =
+                @"<?xml version=""1.0""?>
 <example>
 <test>some text node</test>
 </example>";
@@ -82,7 +90,10 @@ namespace System.Security.Cryptography.Xml.Tests
                 XmlDocument xmlDocToDecrypt = LoadXmlFromString(xmlDocToEncrypt.OuterXml);
                 Decrypt(xmlDocToDecrypt, key);
 
-                Assert.Equal(ExampleXml.Replace("\r\n", "\n"), xmlDocToDecrypt.OuterXml.Replace("\r\n", "\n"));
+                Assert.Equal(
+                    ExampleXml.Replace("\r\n", "\n"),
+                    xmlDocToDecrypt.OuterXml.Replace("\r\n", "\n")
+                );
             }
         }
     }

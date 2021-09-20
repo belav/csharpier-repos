@@ -18,15 +18,20 @@ namespace System.Drawing
 
         public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType)
         {
-            if ((destinationType == typeof(string)) || (destinationType == typeof(InstanceDescriptor)))
-            {
+            if (
+                (destinationType == typeof(string))
+                || (destinationType == typeof(InstanceDescriptor))
+            ) {
                 return true;
             }
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
-        {
+        public override object ConvertFrom(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object value
+        ) {
             // we must be able to convert from short names and long names
             string? strFormat = value as string;
             if (strFormat == null)
@@ -35,8 +40,11 @@ namespace System.Drawing
                 return base.ConvertFrom(context, culture, value);
             }
 
-            if ((strFormat[0] == '[') && (strFormat.Length >= 50) && Guid.TryParse(strFormat.AsSpan(14, 36), out Guid guid))
-            {
+            if (
+                (strFormat[0] == '[')
+                && (strFormat.Length >= 50)
+                && Guid.TryParse(strFormat.AsSpan(14, 36), out Guid guid)
+            ) {
                 // case #2, this is probably a long format (guid)
                 return new ImageFormat(guid);
             }
@@ -63,11 +71,17 @@ namespace System.Drawing
             else if (strFormat.Equals("Wmf", StringComparison.OrdinalIgnoreCase))
                 return ImageFormat.Wmf;
 
-            throw new FormatException(SR.Format(SR.ConvertInvalidPrimitive, strFormat, nameof(ImageFormat)));
+            throw new FormatException(
+                SR.Format(SR.ConvertInvalidPrimitive, strFormat, nameof(ImageFormat))
+            );
         }
 
-        public override object ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
-        {
+        public override object ConvertTo(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value,
+            Type destinationType
+        ) {
             if (value is ImageFormat imgFormat)
             {
                 if (destinationType == typeof(string))
@@ -101,11 +115,16 @@ namespace System.Drawing
 
                     if (strFormat != null)
                     {
-                        return new InstanceDescriptor(typeof(ImageFormat).GetProperty(strFormat), null);
+                        return new InstanceDescriptor(
+                            typeof(ImageFormat).GetProperty(strFormat),
+                            null
+                        );
                     }
                     else
                     {
-                        ConstructorInfo? ctor = typeof(ImageFormat).GetConstructor(new Type[] { typeof(Guid) });
+                        ConstructorInfo? ctor = typeof(ImageFormat).GetConstructor(
+                            new Type[] { typeof(Guid) }
+                        );
                         return new InstanceDescriptor(ctor, new object[] { imgFormat.Guid });
                     }
                 }
@@ -116,19 +135,21 @@ namespace System.Drawing
 
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext? context)
         {
-            return new TypeConverter.StandardValuesCollection(new ImageFormat[]
-            {
-                ImageFormat.MemoryBmp,
-                ImageFormat.Bmp,
-                ImageFormat.Emf,
-                ImageFormat.Wmf,
-                ImageFormat.Gif,
-                ImageFormat.Jpeg,
-                ImageFormat.Png,
-                ImageFormat.Tiff,
-                ImageFormat.Exif,
-                ImageFormat.Icon
-            });
+            return new TypeConverter.StandardValuesCollection(
+                new ImageFormat[]
+                {
+                    ImageFormat.MemoryBmp,
+                    ImageFormat.Bmp,
+                    ImageFormat.Emf,
+                    ImageFormat.Wmf,
+                    ImageFormat.Gif,
+                    ImageFormat.Jpeg,
+                    ImageFormat.Png,
+                    ImageFormat.Tiff,
+                    ImageFormat.Exif,
+                    ImageFormat.Icon
+                }
+            );
         }
 
         public override bool GetStandardValuesSupported(ITypeDescriptorContext? context) => true;

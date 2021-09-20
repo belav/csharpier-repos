@@ -12,12 +12,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         /// An <c>@addTagHelper</c> directive.
         /// </summary>
         AddTagHelper,
-
         /// <summary>
         /// A <c>@removeTagHelper</c> directive.
         /// </summary>
         RemoveTagHelper,
-
         /// <summary>
         /// A <c>@tagHelperPrefix</c> directive.
         /// </summary>

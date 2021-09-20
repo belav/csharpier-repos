@@ -48,23 +48,26 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests
         public async Task TracksQueueLength()
         {
             // Arrange
-            using var eventListener = new TestCounterListener(new[] {
-                "queue-length",
-                "queue-duration",
-                "requests-rejected",
-            });
+            using var eventListener = new TestCounterListener(
+                new[] { "queue-length", "queue-duration", "requests-rejected", }
+            );
 
             using var eventSource = GetConcurrencyLimiterEventSource();
 
             using var timeoutTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(30));
 
-            var lengthValues = eventListener.GetCounterValues("queue-length", timeoutTokenSource.Token).GetAsyncEnumerator();
+            var lengthValues = eventListener.GetCounterValues(
+                    "queue-length",
+                    timeoutTokenSource.Token
+                )
+                .GetAsyncEnumerator();
 
-            eventListener.EnableEvents(eventSource, EventLevel.Informational, EventKeywords.None,
-                new Dictionary<string, string>
-                {
-                    {"EventCounterIntervalSec", ".1" }
-                });
+            eventListener.EnableEvents(
+                eventSource,
+                EventLevel.Informational,
+                EventKeywords.None,
+                new Dictionary<string, string> { { "EventCounterIntervalSec", ".1" } }
+            );
 
             // Act
             eventSource.RequestRejected();
@@ -89,23 +92,26 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests
         public async Task TracksDurationSpentInQueue()
         {
             // Arrange
-            using var eventListener = new TestCounterListener(new[] {
-                "queue-length",
-                "queue-duration",
-                "requests-rejected",
-            });
+            using var eventListener = new TestCounterListener(
+                new[] { "queue-length", "queue-duration", "requests-rejected", }
+            );
 
             using var eventSource = GetConcurrencyLimiterEventSource();
 
             using var timeoutTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(5));
 
-            var durationValues = eventListener.GetCounterValues("queue-duration", timeoutTokenSource.Token).GetAsyncEnumerator();
+            var durationValues = eventListener.GetCounterValues(
+                    "queue-duration",
+                    timeoutTokenSource.Token
+                )
+                .GetAsyncEnumerator();
 
-            eventListener.EnableEvents(eventSource, EventLevel.Informational, EventKeywords.None,
-                new Dictionary<string, string>
-                {
-                    {"EventCounterIntervalSec", ".1" }
-                });
+            eventListener.EnableEvents(
+                eventSource,
+                EventLevel.Informational,
+                EventKeywords.None,
+                new Dictionary<string, string> { { "EventCounterIntervalSec", ".1" } }
+            );
 
             // Act
             Assert.True(await UntilValueMatches(durationValues, 0));

@@ -50,18 +50,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
+            get { return this.name; }
         }
 
         public ImmutableArray<Declaration> Children
         {
-            get
-            {
-                return GetDeclarationChildren();
-            }
+            get { return GetDeclarationChildren(); }
         }
 
         public abstract DeclarationKind Kind { get; }

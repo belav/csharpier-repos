@@ -8,12 +8,13 @@ using Microsoft.Extensions.Localization;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 {
-    internal class RegularExpressionAttributeAdapter : AttributeAdapterBase<RegularExpressionAttribute>
+    internal class RegularExpressionAttributeAdapter
+        : AttributeAdapterBase<RegularExpressionAttribute>
     {
-        public RegularExpressionAttributeAdapter(RegularExpressionAttribute attribute, IStringLocalizer? stringLocalizer)
-            : base(attribute, stringLocalizer)
-        {
-        }
+        public RegularExpressionAttributeAdapter(
+            RegularExpressionAttribute attribute,
+            IStringLocalizer? stringLocalizer
+        ) : base(attribute, stringLocalizer) { }
 
         public override void AddValidation(ClientModelValidationContext context)
         {
@@ -38,7 +39,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             return GetErrorMessage(
                 validationContext.ModelMetadata,
                 validationContext.ModelMetadata.GetDisplayName(),
-                Attribute.Pattern);
+                Attribute.Pattern
+            );
         }
     }
 }

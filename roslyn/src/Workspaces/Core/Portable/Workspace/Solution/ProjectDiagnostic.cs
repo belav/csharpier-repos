@@ -10,8 +10,11 @@ namespace Microsoft.CodeAnalysis
     {
         public ProjectId ProjectId { get; }
 
-        public ProjectDiagnostic(WorkspaceDiagnosticKind kind, string message, ProjectId projectId)
-            : base(kind, message)
+        public ProjectDiagnostic(
+            WorkspaceDiagnosticKind kind,
+            string message,
+            ProjectId projectId
+        ) : base(kind, message)
         {
             this.ProjectId = projectId;
         }

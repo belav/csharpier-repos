@@ -23,13 +23,38 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 yield return new object[] { "", new string[] { "utf-8", "utf-16" }, "utf-8" };
 
                 yield return new object[] { "utf-8", new string[] { "utf-8", "utf-16" }, "utf-8" };
-                yield return new object[] { "utf-16", new string[] { "utf-8", "utf-16" }, "utf-16" };
-                yield return new object[] { "utf-16; q=0.5", new string[] { "utf-8", "utf-16" }, "utf-16" };
+                yield return new object[]
+                {
+                    "utf-16",
+                    new string[] { "utf-8", "utf-16" },
+                    "utf-16"
+                };
+                yield return new object[]
+                {
+                    "utf-16; q=0.5",
+                    new string[] { "utf-8", "utf-16" },
+                    "utf-16"
+                };
 
-                yield return new object[] { "utf-8; q=0.0", new string[] { "utf-8", "utf-16" }, "utf-8" };
-                yield return new object[] { "utf-8; q=0.0, utf-16; q=0.0", new string[] { "utf-8", "utf-16" }, "utf-8" };
+                yield return new object[]
+                {
+                    "utf-8; q=0.0",
+                    new string[] { "utf-8", "utf-16" },
+                    "utf-8"
+                };
+                yield return new object[]
+                {
+                    "utf-8; q=0.0, utf-16; q=0.0",
+                    new string[] { "utf-8", "utf-16" },
+                    "utf-8"
+                };
 
-                yield return new object[] { "*; q=0.0", new string[] { "utf-8", "utf-16" }, "utf-8" };
+                yield return new object[]
+                {
+                    "*; q=0.0",
+                    new string[] { "utf-8", "utf-16" },
+                    "utf-8"
+                };
             }
         }
 
@@ -38,8 +63,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public void SelectResponseCharacterEncoding_SelectsEncoding(
             string acceptCharsetHeaders,
             string[] supportedEncodings,
-            string expectedEncoding)
-        {
+            string expectedEncoding
+        ) {
             // Arrange
             var httpContext = new Mock<HttpContext>();
             var httpRequest = new DefaultHttpContext().Request;
@@ -57,8 +82,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 httpContext.Object,
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 typeof(string),
-                "someValue")
-            {
+                "someValue"
+            ) {
                 ContentType = new StringSegment(httpRequest.Headers[HeaderNames.Accept]),
             };
 
@@ -71,11 +96,14 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
         [Theory]
         [InlineData("application/json; charset=utf-16", "application/json; charset=utf-32")]
-        [InlineData("application/json; charset=utf-16; format=indent", "application/json; charset=utf-32; format=indent")]
+        [InlineData(
+            "application/json; charset=utf-16; format=indent",
+            "application/json; charset=utf-32; format=indent"
+        )]
         public void WriteResponse_OverridesCharset_IfDifferentFromContentTypeCharset(
             string contentType,
-            string expectedContentType)
-        {
+            string expectedContentType
+        ) {
             // Arrange
             var formatter = new OverrideEncodingFormatter(Encoding.UTF32);
 
@@ -83,8 +111,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
-                @object: null)
-            {
+                @object: null
+            ) {
                 ContentType = new StringSegment(contentType),
             };
 
@@ -105,8 +133,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
-                @object: null)
-            {
+                @object: null
+            ) {
                 ContentType = new StringSegment("application/json"),
             };
 
@@ -136,8 +164,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
-                @object: null)
-            {
+                @object: null
+            ) {
                 ContentType = new StringSegment("application/json; charset=utf-7"),
             };
 
@@ -148,7 +176,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             formatter.WriteAsync(formatterContext);
 
             // Assert
-            Assert.Equal(new StringSegment("application/json; charset=utf-8"), formatterContext.ContentType);
+            Assert.Equal(
+                new StringSegment("application/json; charset=utf-8"),
+                formatterContext.ContentType
+            );
         }
 
         [Fact]
@@ -162,8 +193,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
-                @object: null)
-            {
+                @object: null
+            ) {
                 ContentType = new StringSegment(contentType),
             };
 
@@ -193,8 +224,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
-                @object: null)
-            {
+                @object: null
+            ) {
                 ContentType = testContentType,
             };
 
@@ -206,7 +237,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             Assert.Equal(testContentType, context.ContentType);
 
             // If we had set an encoding, it would be part of the content type header
-            Assert.Equal(MediaTypeHeaderValue.Parse(testContentType.Value), context.HttpContext.Response.GetTypedHeaders().ContentType);
+            Assert.Equal(
+                MediaTypeHeaderValue.Parse(testContentType.Value),
+                context.HttpContext.Response.GetTypedHeaders().ContentType
+            );
         }
 
         [Fact]
@@ -222,8 +256,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
-                @object: null)
-            {
+                @object: null
+            ) {
                 ContentType = testContentType,
             };
 
@@ -231,7 +265,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             await formatter.WriteAsync(context);
 
             // Assert
-            Assert.Equal(StatusCodes.Status406NotAcceptable, context.HttpContext.Response.StatusCode);
+            Assert.Equal(
+                StatusCodes.Status406NotAcceptable,
+                context.HttpContext.Response.StatusCode
+            );
         }
 
         [Fact]
@@ -248,7 +285,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 context,
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
-                @object: null);
+                @object: null
+            );
 
             // Act
             var result = TextOutputFormatter.GetAcceptCharsetHeaderValues(writerContext);
@@ -264,8 +302,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 SupportedMediaTypes.Add("application/acceptCharset");
             }
 
-            public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
-            {
+            public override Task WriteResponseBodyAsync(
+                OutputFormatterWriteContext context,
+                Encoding selectedEncoding
+            ) {
                 return Task.FromResult(true);
             }
         }
@@ -284,8 +324,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 return _encoding;
             }
 
-            public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
-            {
+            public override Task WriteResponseBodyAsync(
+                OutputFormatterWriteContext context,
+                Encoding selectedEncoding
+            ) {
                 return Task.FromResult(true);
             }
         }

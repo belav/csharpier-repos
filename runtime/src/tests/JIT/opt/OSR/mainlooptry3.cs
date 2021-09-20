@@ -12,33 +12,31 @@ using System;
 
 class MainLoopCloselyNestedTry
 {
-   public static int Main()
-   {
-       Console.WriteLine($"starting sum");
-       int result = 0;
-       try 
-       {
-           try 
-           {
-               int temp = 0;
-               for (int i = 0; i < 1_000; i++)
-               {
-                   for (int j = 0; j < 1_000; j++)
-                   {
-                       temp += 1000 * i + j;
-                   }
-               }
-               result = temp;
-           }
-           catch (Exception)
-           {
-               
-           }
-       }
-       finally
-       {
-           Console.WriteLine($"done, sum is {result}");
-       }
-       return result == 1783293664 ? 100 : -1;
-   }  
+    public static int Main()
+    {
+        Console.WriteLine($"starting sum");
+        int result = 0;
+        try
+        {
+            try
+            {
+                int temp = 0;
+                for (int i = 0; i < 1_000; i++)
+                {
+                    for (int j = 0; j < 1_000; j++)
+                    {
+                        temp += 1000 * i + j;
+                    }
+                }
+                result = temp;
+            }
+            catch (Exception) { }
+        }
+
+        finally
+        {
+            Console.WriteLine($"done, sum is {result}");
+        }
+        return result == 1783293664 ? 100 : -1;
+    }
 }

@@ -3,11 +3,11 @@
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class FiltersInheritanceQueryInMemoryTest : FiltersInheritanceQueryTestBase<FiltersInheritanceQueryInMemoryFixture>
+    public class FiltersInheritanceQueryInMemoryTest
+        : FiltersInheritanceQueryTestBase<FiltersInheritanceQueryInMemoryFixture>
     {
-        public FiltersInheritanceQueryInMemoryTest(FiltersInheritanceQueryInMemoryFixture fixture)
-            : base(fixture)
-        {
-        }
+        public FiltersInheritanceQueryInMemoryTest(
+            FiltersInheritanceQueryInMemoryFixture fixture
+        ) : base(fixture) { }
     }
 }

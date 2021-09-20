@@ -15,17 +15,26 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(conversion.ConversionKind == ConversionKind.InterpolatedString);
             BoundExpression format;
             ArrayBuilder<BoundExpression> expressions;
-            MakeInterpolatedStringFormat((BoundInterpolatedString)conversion.Operand, out format, out expressions);
+            MakeInterpolatedStringFormat(
+                (BoundInterpolatedString)conversion.Operand,
+                out format,
+                out expressions
+            );
             expressions.Insert(0, format);
-            var stringFactory = _factory.WellKnownType(WellKnownType.System_Runtime_CompilerServices_FormattableStringFactory);
+            var stringFactory = _factory.WellKnownType(
+                WellKnownType.System_Runtime_CompilerServices_FormattableStringFactory
+            );
 
             // The normal pattern for lowering is to lower subtrees before the enclosing tree. However we cannot lower
             // the arguments first in this situation because we do not know what conversions will be
             // produced for the arguments until after we've done overload resolution. So we produce the invocation
             // and then lower it along with its arguments.
-            var result = _factory.StaticCall(stringFactory, "Create", expressions.ToImmutableAndFree(),
+            var result = _factory.StaticCall(
+                stringFactory,
+                "Create",
+                expressions.ToImmutableAndFree(),
                 allowUnexpandedForm: false // if an interpolation expression is the null literal, it should not match a params parameter.
-                );
+            );
             if (!result.HasAnyErrors)
             {
                 result = VisitExpression(result); // lower the arguments AND handle expanded form, argument conversions, etc.
@@ -42,12 +51,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (part is BoundStringInsert fillin)
                 {
                     // this is one of the expression holes
-                    if (_inExpressionLambda ||
-                        fillin.HasErrors ||
-                        fillin.Value.Type?.SpecialType != SpecialType.System_String ||
-                        fillin.Alignment != null ||
-                        fillin.Format != null)
-                    {
+                    if (
+                        _inExpressionLambda
+                        || fillin.HasErrors
+                        || fillin.Value.Type?.SpecialType != SpecialType.System_String
+                        || fillin.Alignment != null
+                        || fillin.Format != null
+                    ) {
                         return false;
                     }
                 }
@@ -56,8 +66,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             return true;
         }
 
-        private void MakeInterpolatedStringFormat(BoundInterpolatedString node, out BoundExpression format, out ArrayBuilder<BoundExpression> expressions)
-        {
+        private void MakeInterpolatedStringFormat(
+            BoundInterpolatedString node,
+            out BoundExpression format,
+            out ArrayBuilder<BoundExpression> expressions
+        ) {
             _factory.Syntax = node.Syntax;
             int n = node.Parts.Length - 1;
             var formatString = PooledStringBuilder.GetInstance();
@@ -134,13 +147,25 @@ namespace Microsoft.CodeAnalysis.CSharp
                     else
                     {
                         // this is one of the literal parts
-                        Debug.Assert(part is BoundLiteral && part.ConstantValue is { StringValue: { } });
-                        part = _factory.StringLiteral(ConstantValueUtils.UnescapeInterpolatedStringLiteral(part.ConstantValue.StringValue));
+                        Debug.Assert(
+                            part is BoundLiteral && part.ConstantValue is { StringValue: { } }
+                        );
+                        part = _factory.StringLiteral(
+                            ConstantValueUtils.UnescapeInterpolatedStringLiteral(
+                                part.ConstantValue.StringValue
+                            )
+                        );
                     }
 
-                    result = result == null ?
-                        part :
-                        _factory.Binary(BinaryOperatorKind.StringConcatenation, node.Type, result, part);
+                    result =
+                        result == null
+                            ? part
+                            : _factory.Binary(
+                                  BinaryOperatorKind.StringConcatenation,
+                                  node.Type,
+                                  result,
+                                  part
+                              );
                 }
 
                 if (length == 1)
@@ -160,7 +185,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 //     String.Format("Jenny don\'t change your number {0}", new object[] { 8675309 })
                 //
 
-                MakeInterpolatedStringFormat(node, out BoundExpression format, out ArrayBuilder<BoundExpression> expressions);
+                MakeInterpolatedStringFormat(
+                    node,
+                    out BoundExpression format,
+                    out ArrayBuilder<BoundExpression> expressions
+                );
 
                 // The normal pattern for lowering is to lower subtrees before the enclosing tree. However we cannot lower
                 // the arguments first in this situation because we do not know what conversions will be
@@ -168,9 +197,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // and then lower it along with its arguments.
                 expressions.Insert(0, format);
                 var stringType = node.Type;
-                result = _factory.StaticCall(stringType, "Format", expressions.ToImmutableAndFree(),
+                result = _factory.StaticCall(
+                    stringType,
+                    "Format",
+                    expressions.ToImmutableAndFree(),
                     allowUnexpandedForm: false // if an interpolation expression is the null literal, it should not match a params parameter.
-                    );
+                );
             }
 
             Debug.Assert(result is { });

@@ -38,8 +38,10 @@ namespace Microsoft.AspNetCore.Authorization
         /// <returns>The default authorization policy.</returns>
         public Task<AuthorizationPolicy> GetDefaultPolicyAsync()
         {
-            if (_cachedDefaultPolicy == null || _cachedDefaultPolicy.Result != _options.DefaultPolicy)
-            {
+            if (
+                _cachedDefaultPolicy == null
+                || _cachedDefaultPolicy.Result != _options.DefaultPolicy
+            ) {
                 _cachedDefaultPolicy = Task.FromResult(_options.DefaultPolicy);
             }
 
@@ -52,8 +54,10 @@ namespace Microsoft.AspNetCore.Authorization
         /// <returns>The fallback authorization policy.</returns>
         public Task<AuthorizationPolicy?> GetFallbackPolicyAsync()
         {
-            if (_cachedFallbackPolicy == null || _cachedFallbackPolicy.Result != _options.FallbackPolicy)
-            {
+            if (
+                _cachedFallbackPolicy == null
+                || _cachedFallbackPolicy.Result != _options.FallbackPolicy
+            ) {
                 _cachedFallbackPolicy = Task.FromResult(_options.FallbackPolicy);
             }
 

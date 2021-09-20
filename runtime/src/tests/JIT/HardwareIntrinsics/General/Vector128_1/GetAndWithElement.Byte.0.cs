@@ -57,7 +57,24 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetByte();
             }
 
-            Vector128<Byte> value = Vector128.Create(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15]);
+            Vector128<Byte> value = Vector128.Create(
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                values[6],
+                values[7],
+                values[8],
+                values[9],
+                values[10],
+                values[11],
+                values[12],
+                values[13],
+                values[14],
+                values[15]
+            );
 
             bool succeeded = !expectedOutOfRangeException;
 
@@ -73,7 +90,9 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<Byte.GetElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<Byte.GetElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -95,7 +114,9 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<Byte.WithElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<Byte.WithElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -113,27 +134,45 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetByte();
             }
 
-            Vector128<Byte> value = Vector128.Create(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15]);
+            Vector128<Byte> value = Vector128.Create(
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                values[6],
+                values[7],
+                values[8],
+                values[9],
+                values[10],
+                values[11],
+                values[12],
+                values[13],
+                values[14],
+                values[15]
+            );
 
             bool succeeded = !expectedOutOfRangeException;
 
             try
             {
-                object result = typeof(Vector128)
-                                    .GetMethod(nameof(Vector128.GetElement))
-                                    .MakeGenericMethod(typeof(Byte))
-                                    .Invoke(null, new object[] { value, imm });
+                object result = typeof(Vector128).GetMethod(nameof(Vector128.GetElement))
+                    .MakeGenericMethod(typeof(Byte))
+                    .Invoke(null, new object[] { value, imm });
                 ValidateGetResult((Byte)(result), values);
             }
             catch (TargetInvocationException e)
             {
-                succeeded = expectedOutOfRangeException
-                          && e.InnerException is ArgumentOutOfRangeException;
+                succeeded =
+                    expectedOutOfRangeException && e.InnerException is ArgumentOutOfRangeException;
             }
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<Byte.GetElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<Byte.GetElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -145,21 +184,22 @@ namespace JIT.HardwareIntrinsics.General
 
             try
             {
-                object result2 = typeof(Vector128)
-                                    .GetMethod(nameof(Vector128.WithElement))
-                                    .MakeGenericMethod(typeof(Byte))
-                                    .Invoke(null, new object[] { value, imm, insertedValue });
+                object result2 = typeof(Vector128).GetMethod(nameof(Vector128.WithElement))
+                    .MakeGenericMethod(typeof(Byte))
+                    .Invoke(null, new object[] { value, imm, insertedValue });
                 ValidateWithResult((Vector128<Byte>)(result2), values, insertedValue);
             }
             catch (TargetInvocationException e)
             {
-                succeeded = expectedOutOfRangeException
-                          && e.InnerException is ArgumentOutOfRangeException;
+                succeeded =
+                    expectedOutOfRangeException && e.InnerException is ArgumentOutOfRangeException;
             }
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<Byte.WithElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<Byte.WithElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -175,28 +215,43 @@ namespace JIT.HardwareIntrinsics.General
             RunReflectionScenario(0 + ElementCount, expectedOutOfRangeException: true);
         }
 
-        private void ValidateGetResult(Byte result, Byte[] values, [CallerMemberName] string method = "")
-        {
+        private void ValidateGetResult(
+            Byte result,
+            Byte[] values,
+            [CallerMemberName] string method = ""
+        ) {
             if (result != values[0])
             {
                 Succeeded = false;
 
-                TestLibrary.TestFramework.LogInformation($"Vector128<Byte.GetElement(0): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<Byte.GetElement(0): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"  result: ({result})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
             }
         }
 
-        private void ValidateWithResult(Vector128<Byte> result, Byte[] values, Byte insertedValue, [CallerMemberName] string method = "")
-        {
+        private void ValidateWithResult(
+            Vector128<Byte> result,
+            Byte[] values,
+            Byte insertedValue,
+            [CallerMemberName] string method = ""
+        ) {
             Byte[] resultElements = new Byte[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Byte, byte>(ref resultElements[0]), result);
             ValidateWithResult(resultElements, values, insertedValue, method);
         }
 
-        private void ValidateWithResult(Byte[] result, Byte[] values, Byte insertedValue, [CallerMemberName] string method = "")
-        {
+        private void ValidateWithResult(
+            Byte[] result,
+            Byte[] values,
+            Byte insertedValue,
+            [CallerMemberName] string method = ""
+        ) {
             bool succeeded = true;
 
             for (int i = 0; i < ElementCount; i++)
@@ -215,10 +270,16 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<Byte.WithElement(0): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<Byte.WithElement(0): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"  insert: insertedValue");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

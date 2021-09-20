@@ -15,8 +15,10 @@ namespace Microsoft.EntityFrameworkCore.Tools
     {
         private readonly object _executor;
         private readonly Assembly _commandsAssembly;
-        private const string ReportHandlerTypeName = "Microsoft.EntityFrameworkCore.Design.OperationReportHandler";
-        private const string ResultHandlerTypeName = "Microsoft.EntityFrameworkCore.Design.OperationResultHandler";
+        private const string ReportHandlerTypeName =
+            "Microsoft.EntityFrameworkCore.Design.OperationReportHandler";
+        private const string ResultHandlerTypeName =
+            "Microsoft.EntityFrameworkCore.Design.OperationResultHandler";
         private readonly Type _resultHandlerType;
 
         public ReflectionOperationExecutor(
@@ -26,8 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Tools
             string? dataDirectory,
             string? rootNamespace,
             string? language,
-            string[] remainingArguments)
-            : base(assembly, startupAssembly, projectDir, rootNamespace, language, remainingArguments)
+            string[] remainingArguments
+        ) : base(assembly, startupAssembly, projectDir, rootNamespace, language, remainingArguments)
         {
             if (dataDirectory != null)
             {
@@ -38,14 +40,19 @@ namespace Microsoft.EntityFrameworkCore.Tools
             AppDomain.CurrentDomain.AssemblyResolve += ResolveAssembly;
 
             _commandsAssembly = Assembly.Load(new AssemblyName { Name = DesignAssemblyName });
-            var reportHandlerType = _commandsAssembly.GetType(ReportHandlerTypeName, throwOnError: true, ignoreCase: false)!;
+            var reportHandlerType = _commandsAssembly.GetType(
+                ReportHandlerTypeName,
+                throwOnError: true,
+                ignoreCase: false
+            )!;
 
             var reportHandler = Activator.CreateInstance(
                 reportHandlerType,
                 (Action<string>)Reporter.WriteError,
                 (Action<string>)Reporter.WriteWarning,
                 (Action<string>)Reporter.WriteInformation,
-                (Action<string>)Reporter.WriteVerbose)!;
+                (Action<string>)Reporter.WriteVerbose
+            )!;
 
             _executor = Activator.CreateInstance(
                 _commandsAssembly.GetType(ExecutorTypeName, throwOnError: true, ignoreCase: false)!,
@@ -59,20 +66,34 @@ namespace Microsoft.EntityFrameworkCore.Tools
                     { "language", Language },
                     { "toolsVersion", ProductInfo.GetVersion() },
                     { "remainingArguments", RemainingArguments }
-                })!;
+                }
+            )!;
 
-            _resultHandlerType = _commandsAssembly.GetType(ResultHandlerTypeName, throwOnError: true, ignoreCase: false)!;
+            _resultHandlerType = _commandsAssembly.GetType(
+                ResultHandlerTypeName,
+                throwOnError: true,
+                ignoreCase: false
+            )!;
         }
 
-        protected override object CreateResultHandler()
-            => Activator.CreateInstance(_resultHandlerType)!;
+        protected override object CreateResultHandler() =>
+            Activator.CreateInstance(_resultHandlerType)!;
 
-        protected override void Execute(string operationName, object resultHandler, IDictionary arguments)
-            => Activator.CreateInstance(
-                _commandsAssembly.GetType(ExecutorTypeName + "+" + operationName, throwOnError: true, ignoreCase: true)!,
+        protected override void Execute(
+            string operationName,
+            object resultHandler,
+            IDictionary arguments
+        ) =>
+            Activator.CreateInstance(
+                _commandsAssembly.GetType(
+                    ExecutorTypeName + "+" + operationName,
+                    throwOnError: true,
+                    ignoreCase: true
+                )!,
                 _executor,
                 resultHandler,
-                arguments);
+                arguments
+            );
 
         private Assembly? ResolveAssembly(object? sender, ResolveEventArgs args)
         {
@@ -87,16 +108,14 @@ namespace Microsoft.EntityFrameworkCore.Tools
                     {
                         return Assembly.LoadFrom(path);
                     }
-                    catch
-                    {
-                    }
+                    catch { }
                 }
             }
 
             return null;
         }
 
-        public override void Dispose()
-            => AppDomain.CurrentDomain.AssemblyResolve -= ResolveAssembly;
+        public override void Dispose() =>
+            AppDomain.CurrentDomain.AssemblyResolve -= ResolveAssembly;
     }
 }

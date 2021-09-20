@@ -15,8 +15,9 @@ namespace System.ComponentModel.Composition.Factories
             return new AggregateCatalog();
         }
 
-        public static AggregateCatalog CreateAggregateCatalog(params ComposablePartCatalog[] catalogs)
-        {
+        public static AggregateCatalog CreateAggregateCatalog(
+            params ComposablePartCatalog[] catalogs
+        ) {
             return new AggregateCatalog(catalogs);
         }
 
@@ -62,13 +63,16 @@ namespace System.ComponentModel.Composition.Factories
             return new NonFilteringTypeCatalog(types);
         }
 
-        public static MutableComposablePartCatalog CreateMutable(params ComposablePartDefinition[] definitions)
-        {
+        public static MutableComposablePartCatalog CreateMutable(
+            params ComposablePartDefinition[] definitions
+        ) {
             return new MutableComposablePartCatalog(definitions);
         }
 
-        public static ComposablePartCatalog CreateFiltered(ComposablePartCatalog catalog, Func<ComposablePartDefinition, bool> filter)
-        {
+        public static ComposablePartCatalog CreateFiltered(
+            ComposablePartCatalog catalog,
+            Func<ComposablePartDefinition, bool> filter
+        ) {
             return new FilteredCatalog(catalog, filter);
         }
     }

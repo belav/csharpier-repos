@@ -9,12 +9,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 {
     public sealed class DefaultTagHelperHtmlAttributeIntermediateNode : ExtensionIntermediateNode
     {
-        public DefaultTagHelperHtmlAttributeIntermediateNode()
-        {
-        }
+        public DefaultTagHelperHtmlAttributeIntermediateNode() { }
 
-        public DefaultTagHelperHtmlAttributeIntermediateNode(TagHelperHtmlAttributeIntermediateNode htmlAttributeNode)
-        {
+        public DefaultTagHelperHtmlAttributeIntermediateNode(
+            TagHelperHtmlAttributeIntermediateNode htmlAttributeNode
+        ) {
             if (htmlAttributeNode == null)
             {
                 throw new ArgumentNullException(nameof(htmlAttributeNode));
@@ -39,7 +38,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 
         public AttributeStructure AttributeStructure { get; set; }
 
-        public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();
+        public override IntermediateNodeCollection Children { get; } =
+            new IntermediateNodeCollection();
 
         public override void Accept(IntermediateNodeVisitor visitor)
         {

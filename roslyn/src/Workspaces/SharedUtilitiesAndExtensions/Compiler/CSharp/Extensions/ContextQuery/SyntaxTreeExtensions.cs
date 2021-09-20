@@ -17,8 +17,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
 {
     internal static partial class SyntaxTreeExtensions
     {
-        public static bool IsPreProcessorDirectiveContext(this SyntaxTree syntaxTree, int position, SyntaxToken preProcessorTokenOnLeftOfPosition, CancellationToken cancellationToken)
-        {
+        public static bool IsPreProcessorDirectiveContext(
+            this SyntaxTree syntaxTree,
+            int position,
+            SyntaxToken preProcessorTokenOnLeftOfPosition,
+            CancellationToken cancellationToken
+        ) {
             var token = preProcessorTokenOnLeftOfPosition;
             var directive = token.GetAncestor<DirectiveTriviaSyntax>();
 
@@ -32,9 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                 return false;
             }
 
-            return
-                directive.FullSpan.Contains(position) ||
-                directive.FullSpan.End == syntaxTree.GetRoot(cancellationToken).FullSpan.End;
+            return directive.FullSpan.Contains(position)
+                || directive.FullSpan.End == syntaxTree.GetRoot(cancellationToken).FullSpan.End;
         }
     }
 }

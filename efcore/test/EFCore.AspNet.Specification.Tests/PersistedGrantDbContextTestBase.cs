@@ -24,8 +24,8 @@ namespace Microsoft.EntityFrameworkCore
     public abstract class PersistedGrantDbContextTestBase<TFixture> : IClassFixture<TFixture>
         where TFixture : PersistedGrantDbContextTestBase<TFixture>.PersistedGrantDbContextFixtureBase
     {
-        protected PersistedGrantDbContextTestBase(PersistedGrantDbContextFixtureBase fixture)
-            => Fixture = fixture;
+        protected PersistedGrantDbContextTestBase(PersistedGrantDbContextFixtureBase fixture) =>
+            Fixture = fixture;
 
         protected PersistedGrantDbContextFixtureBase Fixture { get; }
 
@@ -39,15 +39,21 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 async context =>
                 {
-                    var store = new PersistedGrantStore(context, new FakeLogger<PersistedGrantStore>());
+                    var store = new PersistedGrantStore(
+                        context,
+                        new FakeLogger<PersistedGrantStore>()
+                    );
 
-                    var results = (await store.GetAllAsync(
-                        new PersistedGrantFilter
-                        {
-                            Type = "T1",
-                            SessionId = "Se1",
-                            SubjectId = "Su1"
-                        })).ToList();
+                    var results = (
+                        await store.GetAllAsync(
+                            new PersistedGrantFilter
+                            {
+                                Type = "T1",
+                                SessionId = "Se1",
+                                SubjectId = "Su1"
+                            }
+                        )
+                    ).ToList();
 
                     Assert.Equal(2, results.Count);
                 }
@@ -70,7 +76,8 @@ namespace Microsoft.EntityFrameworkCore
                     Expiration = null,
                     ConsumedTime = null,
                     Data = "Data1"
-                });
+                }
+            );
             await store.StoreAsync(
                 new PersistedGrant
                 {
@@ -84,7 +91,8 @@ namespace Microsoft.EntityFrameworkCore
                     Expiration = DateTime.Now + new TimeSpan(1, 0, 0, 0),
                     ConsumedTime = null,
                     Data = "Data2"
-                });
+                }
+            );
             await store.StoreAsync(
                 new PersistedGrant
                 {
@@ -98,7 +106,8 @@ namespace Microsoft.EntityFrameworkCore
                     Expiration = null,
                     ConsumedTime = null,
                     Data = "Data3"
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -111,7 +120,10 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 async context =>
                 {
-                    var store = new PersistedGrantStore(context, new FakeLogger<PersistedGrantStore>());
+                    var store = new PersistedGrantStore(
+                        context,
+                        new FakeLogger<PersistedGrantStore>()
+                    );
 
                     Assert.Equal("Data2", (await store.GetAsync("K2")).Data);
                     Assert.Null(await store.GetAsync("???"));
@@ -129,7 +141,10 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 async context =>
                 {
-                    var store = new PersistedGrantStore(context, new FakeLogger<PersistedGrantStore>());
+                    var store = new PersistedGrantStore(
+                        context,
+                        new FakeLogger<PersistedGrantStore>()
+                    );
 
                     await store.RemoveAsync("K2");
                     Assert.Null(await store.GetAsync("K2"));
@@ -148,7 +163,10 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 async context =>
                 {
-                    var store = new PersistedGrantStore(context, new FakeLogger<PersistedGrantStore>());
+                    var store = new PersistedGrantStore(
+                        context,
+                        new FakeLogger<PersistedGrantStore>()
+                    );
 
                     await store.RemoveAllAsync(
                         new PersistedGrantFilter
@@ -156,7 +174,8 @@ namespace Microsoft.EntityFrameworkCore
                             Type = "T1",
                             SessionId = "Se1",
                             SubjectId = "Su1"
-                        });
+                        }
+                    );
 
                     Assert.Null(await store.GetAsync("K1"));
                     Assert.Null(await store.GetAsync("K2"));
@@ -176,7 +195,11 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 async context =>
                 {
-                    var service = new TokenCleanupService(new OperationalStoreOptions(), context, new FakeLogger<TokenCleanupService>());
+                    var service = new TokenCleanupService(
+                        new OperationalStoreOptions(),
+                        context,
+                        new FakeLogger<TokenCleanupService>()
+                    );
 
                     await service.RemoveExpiredGrantsAsync();
                 }
@@ -193,7 +216,11 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 async context =>
                 {
-                    var store = new DeviceFlowStore(context, new PersistentGrantSerializer(), new FakeLogger<DeviceFlowStore>());
+                    var store = new DeviceFlowStore(
+                        context,
+                        new PersistentGrantSerializer(),
+                        new FakeLogger<DeviceFlowStore>()
+                    );
 
                     Assert.Equal("D2", (await store.FindByUserCodeAsync("U2")).Description);
                 }
@@ -210,7 +237,11 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 async context =>
                 {
-                    var store = new DeviceFlowStore(context, new PersistentGrantSerializer(), new FakeLogger<DeviceFlowStore>());
+                    var store = new DeviceFlowStore(
+                        context,
+                        new PersistentGrantSerializer(),
+                        new FakeLogger<DeviceFlowStore>()
+                    );
 
                     Assert.Equal("D2", (await store.FindByDeviceCodeAsync("DC2")).Description);
                     await store.RemoveByDeviceCodeAsync("DC2");
@@ -223,10 +254,16 @@ namespace Microsoft.EntityFrameworkCore
 
         private static async Task SaveDevices(PersistedGrantDbContext context)
         {
-            var store = new DeviceFlowStore(context, new PersistentGrantSerializer(), new FakeLogger<DeviceFlowStore>());
+            var store = new DeviceFlowStore(
+                context,
+                new PersistentGrantSerializer(),
+                new FakeLogger<DeviceFlowStore>()
+            );
 
             await store.StoreDeviceAuthorizationAsync(
-                "DC1", "U1", new DeviceCode
+                "DC1",
+                "U1",
+                new DeviceCode
                 {
                     CreationTime = DateTime.Now,
                     Lifetime = 100,
@@ -237,10 +274,13 @@ namespace Microsoft.EntityFrameworkCore
                     RequestedScopes = new List<string>(),
                     AuthorizedScopes = new List<string>(),
                     SessionId = "S1"
-                });
+                }
+            );
 
             await store.StoreDeviceAuthorizationAsync(
-                "DC2", "U2", new DeviceCode
+                "DC2",
+                "U2",
+                new DeviceCode
                 {
                     CreationTime = DateTime.Now,
                     Lifetime = 100,
@@ -251,10 +291,13 @@ namespace Microsoft.EntityFrameworkCore
                     RequestedScopes = new List<string>(),
                     AuthorizedScopes = new List<string>(),
                     SessionId = "S2"
-                });
+                }
+            );
 
             await store.StoreDeviceAuthorizationAsync(
-                "DC3", "U3", new DeviceCode
+                "DC3",
+                "U3",
+                new DeviceCode
                 {
                     CreationTime = DateTime.Now,
                     Lifetime = 100,
@@ -265,7 +308,8 @@ namespace Microsoft.EntityFrameworkCore
                     RequestedScopes = new List<string>(),
                     AuthorizedScopes = new List<string>(),
                     SessionId = "S3"
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -273,14 +317,16 @@ namespace Microsoft.EntityFrameworkCore
         {
             using (var context = CreateContext())
             {
-                var entityTypeMappings = context.Model.GetEntityTypes().Select(e => new EntityTypeMapping(e)).ToList();
+                var entityTypeMappings = context.Model.GetEntityTypes()
+                    .Select(e => new EntityTypeMapping(e))
+                    .ToList();
 
                 EntityTypeMapping.AssertEqual(ExpectedMappings, entityTypeMappings);
             }
         }
 
-        protected virtual List<EntityTypeMapping> ExpectedMappings
-            => new()
+        protected virtual List<EntityTypeMapping> ExpectedMappings =>
+            new()
             {
                 new EntityTypeMapping()
                 {
@@ -299,10 +345,7 @@ namespace Microsoft.EntityFrameworkCore
                         "Property: DeviceFlowCodes.SessionId (string) MaxLength(100)",
                         "Property: DeviceFlowCodes.SubjectId (string) MaxLength(200)",
                     },
-                    Indexes =
-                    {
-                        "{'DeviceCode'} Unique", "{'Expiration'} ",
-                    },
+                    Indexes = { "{'DeviceCode'} Unique", "{'Expiration'} ", },
                 },
                 new EntityTypeMapping()
                 {
@@ -331,38 +374,47 @@ namespace Microsoft.EntityFrameworkCore
                 },
             };
 
-        protected PersistedGrantDbContext CreateContext()
-            => Fixture.CreateContext();
+        protected PersistedGrantDbContext CreateContext() => Fixture.CreateContext();
 
         protected virtual Task ExecuteWithStrategyInTransactionAsync(
             Func<PersistedGrantDbContext, Task> testOperation,
             Func<PersistedGrantDbContext, Task> nestedTestOperation1 = null,
             Func<PersistedGrantDbContext, Task> nestedTestOperation2 = null,
-            Func<PersistedGrantDbContext, Task> nestedTestOperation3 = null)
-            => TestHelpers.ExecuteWithStrategyInTransactionAsync(
-                CreateContext, UseTransaction,
-                testOperation, nestedTestOperation1, nestedTestOperation2, nestedTestOperation3);
+            Func<PersistedGrantDbContext, Task> nestedTestOperation3 = null
+        ) =>
+            TestHelpers.ExecuteWithStrategyInTransactionAsync(
+                CreateContext,
+                UseTransaction,
+                testOperation,
+                nestedTestOperation1,
+                nestedTestOperation2,
+                nestedTestOperation3
+            );
 
-        protected virtual void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-            => facade.UseTransaction(transaction.GetDbTransaction());
+        protected virtual void UseTransaction(
+            DatabaseFacade facade,
+            IDbContextTransaction transaction
+        ) => facade.UseTransaction(transaction.GetDbTransaction());
 
-        public abstract class PersistedGrantDbContextFixtureBase : SharedStoreFixtureBase<PersistedGrantDbContext>
+        public abstract class PersistedGrantDbContextFixtureBase
+            : SharedStoreFixtureBase<PersistedGrantDbContext>
         {
-            protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-                => base.AddServices(serviceCollection)
-                    .AddSingleton<OperationalStoreOptions>();
+            protected override IServiceCollection AddServices(
+                IServiceCollection serviceCollection
+            ) => base.AddServices(serviceCollection).AddSingleton<OperationalStoreOptions>();
 
-            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-                => base.AddOptions(builder)
+            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+                base.AddOptions(builder)
                     .EnableDetailedErrors()
                     .EnableSensitiveDataLogging()
                     .ConfigureWarnings(
-                        b => b.Default(WarningBehavior.Throw)
-                            .Log(CoreEventId.SensitiveDataLoggingEnabledWarning)
-                            .Log(CoreEventId.PossibleUnintendedReferenceComparisonWarning));
+                        b =>
+                            b.Default(WarningBehavior.Throw)
+                                .Log(CoreEventId.SensitiveDataLoggingEnabledWarning)
+                                .Log(CoreEventId.PossibleUnintendedReferenceComparisonWarning)
+                    );
 
-            protected override bool UsePooling
-                => false; // The IdentityServer ConfigurationDbContext has additional service dependencies
+            protected override bool UsePooling => false; // The IdentityServer ConfigurationDbContext has additional service dependencies
         }
     }
 }

@@ -15,8 +15,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class NullableClassCurrentProviderValueComparer<TModel, TProvider> : IComparer<IUpdateEntry>
-        where TModel : class
+    public class NullableClassCurrentProviderValueComparer<TModel, TProvider>
+        : IComparer<IUpdateEntry> where TModel : class
     {
         private readonly IPropertyBase _property;
         private readonly IComparer<TProvider> _underlyingComparer;
@@ -30,8 +30,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         public NullableClassCurrentProviderValueComparer(
             IPropertyBase property,
-            ValueConverter<TModel, TProvider> converter)
-        {
+            ValueConverter<TModel, TProvider> converter
+        ) {
             _property = property;
             _converter = converter.ConvertToProviderExpression.Compile();
             _underlyingComparer = Comparer<TProvider>.Default;
@@ -63,14 +63,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var xValue = x.GetCurrentValue<TModel>(_property);
             var yValue = y.GetCurrentValue<TModel>(_property);
 
-            return xValue == null
-                && yValue == null
-                    ? 0
-                    : xValue == null
-                        ? -1
-                        : yValue == null
-                            ? 1
-                            : _underlyingComparer.Compare(_converter(xValue), _converter(yValue));
+            return xValue == null && yValue == null
+                ? 0
+                : xValue == null
+                    ? -1
+                    : yValue == null
+                        ? 1
+                        : _underlyingComparer.Compare(_converter(xValue), _converter(yValue));
         }
     }
 }

@@ -9,8 +9,14 @@ namespace System.Speech.Internal.SrgsCompiler
     {
         #region Constructors
 
-        internal Item(Backend backend, Rule rule, int minRepeat, int maxRepeat, float repeatProbability, float weigth)
-            : base(backend, rule)
+        internal Item(
+            Backend backend,
+            Rule rule,
+            int minRepeat,
+            int maxRepeat,
+            float repeatProbability,
+            float weigth
+        ) : base(backend, rule)
         {
             // Validated by the caller
             _minRepeat = minRepeat;
@@ -33,8 +39,13 @@ namespace System.Speech.Internal.SrgsCompiler
             //    <tag>res= res * 2;</tag>
             // </item>
             // Should the result be 2 or 4
-            if (_maxRepeat != _minRepeat && _startArc != null && _startArc == _endArc && _endArc.IsEpsilonTransition && !_endArc.IsPropertylessTransition)
-            {
+            if (
+                _maxRepeat != _minRepeat
+                && _startArc != null
+                && _startArc == _endArc
+                && _endArc.IsEpsilonTransition
+                && !_endArc.IsPropertylessTransition
+            ) {
                 XmlParser.ThrowSrgsException((SRID.InvalidTagInAnEmptyItem));
             }
 
@@ -81,14 +92,21 @@ namespace System.Speech.Internal.SrgsCompiler
                             State newStartState = _backend.CreateNewState(_endArc.Start.Rule);
 
                             // Clone subgraphs and update CurrentEndState.
-                            State newEndState = _backend.CloneSubGraph(currentStartState, _endArc.Start, newStartState);
+                            State newEndState = _backend.CloneSubGraph(
+                                currentStartState,
+                                _endArc.Start,
+                                newStartState
+                            );
 
                             // Connect the last state with the first state
                             //_endArc.Start.OutArcs.Add (_endArc);
                             _endArc.End = newStartState;
 
                             // reset the _endArc
-                            System.Diagnostics.Debug.Assert(newEndState.OutArcs.CountIsOne && Arc.CompareContent(_endArc, newEndState.OutArcs.First) == 0);
+                            System.Diagnostics.Debug.Assert(
+                                newEndState.OutArcs.CountIsOne
+                                    && Arc.CompareContent(_endArc, newEndState.OutArcs.First) == 0
+                            );
                             _endArc = newEndState.OutArcs.First;
 
                             if (_maxRepeat == int.MaxValue)
@@ -99,14 +117,22 @@ namespace System.Speech.Internal.SrgsCompiler
                                     // Create a new state and attach the last Arc to add
                                     _endArc = InsertState(_endArc, 1.0f, Position.After);
 
-                                    AddEpsilonTransition(_endArc.Start, newStartState, 1 - _repeatProbability);
+                                    AddEpsilonTransition(
+                                        _endArc.Start,
+                                        newStartState,
+                                        1 - _repeatProbability
+                                    );
                                     break;
                                 }
                             }
                             else if (cnt <= _maxRepeat - _minRepeat)
                             {
                                 // If we are beyond _minRepeat, add epsilon transition from startState with (1-_repeatProbability).
-                                AddEpsilonTransition(startState, newStartState, 1 - _repeatProbability);
+                                AddEpsilonTransition(
+                                    startState,
+                                    newStartState,
+                                    1 - _repeatProbability
+                                );
                             }
 
                             // reset the current start state
@@ -155,7 +181,6 @@ namespace System.Speech.Internal.SrgsCompiler
         private int _maxRepeat = NotSet;
 
         private const int NotSet = -1;
-
         #endregion
     }
 }

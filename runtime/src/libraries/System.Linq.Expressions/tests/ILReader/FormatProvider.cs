@@ -37,8 +37,10 @@ namespace System.Linq.Expressions.Tests
             int length = offsets.Length;
             for (int i = 0; i < length; i++)
             {
-                if (i == 0) sb.AppendFormat("(");
-                else sb.AppendFormat(", ");
+                if (i == 0)
+                    sb.AppendFormat("(");
+                else
+                    sb.AppendFormat(", ");
                 sb.Append(Label(offsets[i]));
             }
             sb.AppendFormat(")");
@@ -52,13 +54,20 @@ namespace System.Linq.Expressions.Tests
             for (int i = 0; i < length; i++)
             {
                 char ch = str[i];
-                if (ch == '\t') sb.Append("\\t");
-                else if (ch == '\n') sb.Append("\\n");
-                else if (ch == '\r') sb.Append("\\r");
-                else if (ch == '\"') sb.Append("\\\"");
-                else if (ch == '\\') sb.Append("\\");
-                else if (ch < 0x20 || ch >= 0x7f) sb.AppendFormat("\\u{0:x4}", (int)ch);
-                else sb.Append(ch);
+                if (ch == '\t')
+                    sb.Append("\\t");
+                else if (ch == '\n')
+                    sb.Append("\\n");
+                else if (ch == '\r')
+                    sb.Append("\\r");
+                else if (ch == '\"')
+                    sb.Append("\\\"");
+                else if (ch == '\\')
+                    sb.Append("\\");
+                else if (ch < 0x20 || ch >= 0x7f)
+                    sb.AppendFormat("\\u{0:x4}", (int)ch);
+                else
+                    sb.Append(ch);
             }
             return "\"" + sb.ToString() + "\"";
         }
@@ -69,8 +78,10 @@ namespace System.Linq.Expressions.Tests
             int length = sig.Length;
             for (int i = 0; i < length; i++)
             {
-                if (i == 0) sb.AppendFormat("SIG [");
-                else sb.AppendFormat(" ");
+                if (i == 0)
+                    sb.AppendFormat("SIG [");
+                else
+                    sb.AppendFormat(" ");
                 sb.Append(Int8ToHex(sig[i]));
             }
             sb.AppendFormat("]");

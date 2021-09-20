@@ -29,10 +29,16 @@ namespace System.Collections
             _compareInfo = culture.CompareInfo;
         }
 
-        public static CaseInsensitiveHashCodeProvider Default => new CaseInsensitiveHashCodeProvider();
+        public static CaseInsensitiveHashCodeProvider Default =>
+            new CaseInsensitiveHashCodeProvider();
 
-        public static CaseInsensitiveHashCodeProvider DefaultInvariant => s_invariantCaseInsensitiveHashCodeProvider ??
-            (s_invariantCaseInsensitiveHashCodeProvider = new CaseInsensitiveHashCodeProvider(CultureInfo.InvariantCulture));
+        public static CaseInsensitiveHashCodeProvider DefaultInvariant =>
+            s_invariantCaseInsensitiveHashCodeProvider
+            ?? (
+                s_invariantCaseInsensitiveHashCodeProvider = new CaseInsensitiveHashCodeProvider(
+                    CultureInfo.InvariantCulture
+                )
+            );
 
         public int GetHashCode(object obj)
         {
@@ -42,9 +48,9 @@ namespace System.Collections
             }
 
             string? s = obj as string;
-            return s != null ?
-                _compareInfo.GetHashCode(s, CompareOptions.IgnoreCase) :
-                obj.GetHashCode();
+            return s != null
+                ? _compareInfo.GetHashCode(s, CompareOptions.IgnoreCase)
+                : obj.GetHashCode();
         }
     }
 }

@@ -7,8 +7,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 {
     internal class TagHelperAttributeNode
     {
-        public TagHelperAttributeNode(string name, SyntaxNode value, AttributeStructure attributeStructure)
-        {
+        public TagHelperAttributeNode(
+            string name,
+            SyntaxNode value,
+            AttributeStructure attributeStructure
+        ) {
             Name = name;
             Value = value;
             AttributeStructure = attributeStructure;
@@ -16,9 +19,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         // Internal for testing
         internal TagHelperAttributeNode(string name, SyntaxNode value)
-            : this(name, value, AttributeStructure.DoubleQuotes)
-        {
-        }
+            : this(name, value, AttributeStructure.DoubleQuotes) { }
 
         public string Name { get; }
 

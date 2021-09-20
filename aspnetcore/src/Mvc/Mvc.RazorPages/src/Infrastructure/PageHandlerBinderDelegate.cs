@@ -6,5 +6,8 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 {
-    internal delegate Task PageHandlerBinderDelegate(PageContext pageContext, IDictionary<string, object> arguments);
+    internal delegate Task PageHandlerBinderDelegate(
+        PageContext pageContext,
+        IDictionary<string, object> arguments
+    );
 }

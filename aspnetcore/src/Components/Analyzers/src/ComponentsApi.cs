@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers
 
         public static class ParameterAttribute
         {
-            public static readonly string FullTypeName = "Microsoft.AspNetCore.Components.ParameterAttribute";
+            public static readonly string FullTypeName =
+                "Microsoft.AspNetCore.Components.ParameterAttribute";
             public static readonly string MetadataName = FullTypeName;
 
             public static readonly string CaptureUnmatchedValues = "CaptureUnmatchedValues";
@@ -19,13 +20,15 @@ namespace Microsoft.AspNetCore.Components.Analyzers
 
         public static class CascadingParameterAttribute
         {
-            public static readonly string FullTypeName = "Microsoft.AspNetCore.Components.CascadingParameterAttribute";
+            public static readonly string FullTypeName =
+                "Microsoft.AspNetCore.Components.CascadingParameterAttribute";
             public static readonly string MetadataName = FullTypeName;
         }
 
         public static class IComponent
         {
-            public static readonly string FullTypeName = "Microsoft.AspNetCore.Components.IComponent";
+            public static readonly string FullTypeName =
+                "Microsoft.AspNetCore.Components.IComponent";
             public static readonly string MetadataName = FullTypeName;
         }
     }

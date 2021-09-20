@@ -35,9 +35,13 @@ namespace System.Web.Http
             IExceptionHandler exceptionHandler = CreateDummyExceptionHandler();
 
             using (HttpServer server = CreateServer())
-            using (HttpBatchHandler handler = CreateProductUnderTest(server, expectedExceptionLogger,
-                exceptionHandler))
-            {
+            using (
+                HttpBatchHandler handler = CreateProductUnderTest(
+                    server,
+                    expectedExceptionLogger,
+                    exceptionHandler
+                )
+            ) {
                 // Act
                 IExceptionLogger exceptionLogger = handler.ExceptionLogger;
 
@@ -54,9 +58,13 @@ namespace System.Web.Http
             IExceptionHandler expectedExceptionHandler = CreateDummyExceptionHandler();
 
             using (HttpServer server = CreateServer())
-            using (HttpBatchHandler handler = CreateProductUnderTest(server, exceptionLogger,
-                expectedExceptionHandler))
-            {
+            using (
+                HttpBatchHandler handler = CreateProductUnderTest(
+                    server,
+                    exceptionLogger,
+                    expectedExceptionHandler
+                )
+            ) {
                 // Act
                 IExceptionHandler exceptionHandler = handler.ExceptionHandler;
 
@@ -81,7 +89,8 @@ namespace System.Web.Http
                     IExceptionLogger exceptionLogger = product.ExceptionLogger;
 
                     // Assert
-                    CompositeExceptionLogger compositeLogger = Assert.IsType<CompositeExceptionLogger>(exceptionLogger);
+                    CompositeExceptionLogger compositeLogger =
+                        Assert.IsType<CompositeExceptionLogger>(exceptionLogger);
                     IEnumerable<IExceptionLogger> loggers = compositeLogger.Loggers;
                     Assert.NotNull(loggers);
                     IExceptionLogger logger = Assert.Single(loggers);
@@ -106,7 +115,8 @@ namespace System.Web.Http
                     IExceptionHandler exceptionHandler = product.ExceptionHandler;
 
                     // Assert
-                    LastChanceExceptionHandler lastChanceHandler = Assert.IsType<LastChanceExceptionHandler>(exceptionHandler);
+                    LastChanceExceptionHandler lastChanceHandler =
+                        Assert.IsType<LastChanceExceptionHandler>(exceptionHandler);
                     Assert.Same(expectedExceptionHandler, lastChanceHandler.InnerHandler);
                 }
             }
@@ -126,14 +136,23 @@ namespace System.Web.Http
         public async Task SendAsync_CallsProcessBatchAsync()
         {
             Mock<HttpBatchHandler> handler = new Mock<HttpBatchHandler>(new HttpServer());
-            handler.Setup(h => h.ProcessBatchAsync(It.IsAny<HttpRequestMessage>(), CancellationToken.None))
-                .Returns(Task.FromResult(new HttpResponseMessage(HttpStatusCode.Redirect)
-                {
-                    Content = new StringContent("ProcessBatchAsync called.")
-                }));
+            handler.Setup(
+                    h => h.ProcessBatchAsync(It.IsAny<HttpRequestMessage>(), CancellationToken.None)
+                )
+                .Returns(
+                    Task.FromResult(
+                        new HttpResponseMessage(HttpStatusCode.Redirect)
+                        {
+                            Content = new StringContent("ProcessBatchAsync called.")
+                        }
+                    )
+                );
             HttpMessageInvoker invoker = new HttpMessageInvoker(handler.Object);
 
-            var response = await invoker.SendAsync(new HttpRequestMessage(), CancellationToken.None);
+            var response = await invoker.SendAsync(
+                new HttpRequestMessage(),
+                CancellationToken.None
+            );
 
             Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
             Assert.Equal("ProcessBatchAsync called.", await response.Content.ReadAsStringAsync());
@@ -143,20 +162,32 @@ namespace System.Web.Http
         public async Task SendAsync_ReturnsHttpResponseException()
         {
             Mock<HttpBatchHandler> handler = new Mock<HttpBatchHandler>(new HttpServer());
-            handler.Setup(h => h.ProcessBatchAsync(It.IsAny<HttpRequestMessage>(), CancellationToken.None))
-                .Returns(() =>
-                {
-                    throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.BadRequest)
+            handler.Setup(
+                    h => h.ProcessBatchAsync(It.IsAny<HttpRequestMessage>(), CancellationToken.None)
+                )
+                .Returns(
+                    () =>
                     {
-                        Content = new StringContent("HttpResponseException Error.")
-                    });
-                });
+                        throw new HttpResponseException(
+                            new HttpResponseMessage(HttpStatusCode.BadRequest)
+                            {
+                                Content = new StringContent("HttpResponseException Error.")
+                            }
+                        );
+                    }
+                );
             HttpMessageInvoker invoker = new HttpMessageInvoker(handler.Object);
 
-            var response = await invoker.SendAsync(new HttpRequestMessage(), CancellationToken.None);
+            var response = await invoker.SendAsync(
+                new HttpRequestMessage(),
+                CancellationToken.None
+            );
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-            Assert.Equal("HttpResponseException Error.", await response.Content.ReadAsStringAsync());
+            Assert.Equal(
+                "HttpResponseException Error.",
+                await response.Content.ReadAsStringAsync()
+            );
         }
 
         [Fact]
@@ -174,13 +205,20 @@ namespace System.Web.Http
             using (HttpRequestMessage expectedRequest = CreateRequest())
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpServer server = CreateServer(configuration))
-            using (HttpBatchHandler product = new LambdaHttpBatchHandler(server, exceptionLogger, exceptionHandler,
-                (i1, i2) => CreateFaultedTask<HttpResponseMessage>(expectedException)))
-            {
+            using (
+                HttpBatchHandler product = new LambdaHttpBatchHandler(
+                    server,
+                    exceptionLogger,
+                    exceptionHandler,
+                    (i1, i2) => CreateFaultedTask<HttpResponseMessage>(expectedException)
+                )
+            ) {
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act
-                await Assert.ThrowsAsync<Exception>(() => product.SendAsync(expectedRequest, cancellationToken));
+                await Assert.ThrowsAsync<Exception>(
+                    () => product.SendAsync(expectedRequest, cancellationToken)
+                );
 
                 // Assert
                 Func<ExceptionContext, bool> exceptionContextMatches = (c) =>
@@ -189,13 +227,27 @@ namespace System.Web.Http
                     && c.CatchBlock == ExceptionCatchBlocks.HttpBatchHandler
                     && c.Request == expectedRequest;
 
-                exceptionLoggerMock.Verify(l => l.LogAsync(
-                    It.Is<ExceptionLoggerContext>(c => exceptionContextMatches(c.ExceptionContext)),
-                    cancellationToken), Times.Once());
+                exceptionLoggerMock.Verify(
+                    l =>
+                        l.LogAsync(
+                            It.Is<ExceptionLoggerContext>(
+                                c => exceptionContextMatches(c.ExceptionContext)
+                            ),
+                            cancellationToken
+                        ),
+                    Times.Once()
+                );
 
-                exceptionHandlerMock.Verify(h => h.HandleAsync(
-                    It.Is<ExceptionHandlerContext>((c) => exceptionContextMatches(c.ExceptionContext)),
-                    cancellationToken), Times.Once());
+                exceptionHandlerMock.Verify(
+                    h =>
+                        h.HandleAsync(
+                            It.Is<ExceptionHandlerContext>(
+                                (c) => exceptionContextMatches(c.ExceptionContext)
+                            ),
+                            cancellationToken
+                        ),
+                    Times.Once()
+                );
             }
         }
 
@@ -205,22 +257,33 @@ namespace System.Web.Http
             // Arrange
             Exception expectedException = new OperationCanceledException();
 
-            Mock<IExceptionLogger> exceptionLoggerMock = new Mock<IExceptionLogger>(MockBehavior.Strict);
+            Mock<IExceptionLogger> exceptionLoggerMock = new Mock<IExceptionLogger>(
+                MockBehavior.Strict
+            );
             IExceptionLogger exceptionLogger = exceptionLoggerMock.Object;
 
-            Mock<IExceptionHandler> exceptionHandlerMock = new Mock<IExceptionHandler>(MockBehavior.Strict);
+            Mock<IExceptionHandler> exceptionHandlerMock = new Mock<IExceptionHandler>(
+                MockBehavior.Strict
+            );
             IExceptionHandler exceptionHandler = exceptionHandlerMock.Object;
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpServer server = CreateServer(configuration))
-            using (HttpBatchHandler product = new LambdaHttpBatchHandler(server, exceptionLogger, exceptionHandler,
-                (i1, i2) => CreateFaultedTask<HttpResponseMessage>(expectedException)))
-            {
+            using (
+                HttpBatchHandler product = new LambdaHttpBatchHandler(
+                    server,
+                    exceptionLogger,
+                    exceptionHandler,
+                    (i1, i2) => CreateFaultedTask<HttpResponseMessage>(expectedException)
+                )
+            ) {
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act & Assert
-                await Assert.ThrowsAsync<OperationCanceledException>(() => product.SendAsync(expectedRequest, cancellationToken));
+                await Assert.ThrowsAsync<OperationCanceledException>(
+                    () => product.SendAsync(expectedRequest, cancellationToken)
+                );
             }
         }
 
@@ -233,9 +296,16 @@ namespace System.Web.Http
 
             IExceptionLogger exceptionLogger = CreateStubExceptionLogger();
 
-            Mock<IExceptionHandler> exceptionHandlerMock = new Mock<IExceptionHandler>(MockBehavior.Strict);
-            exceptionHandlerMock
-                .Setup(h => h.HandleAsync(It.IsAny<ExceptionHandlerContext>(), It.IsAny<CancellationToken>()))
+            Mock<IExceptionHandler> exceptionHandlerMock = new Mock<IExceptionHandler>(
+                MockBehavior.Strict
+            );
+            exceptionHandlerMock.Setup(
+                    h =>
+                        h.HandleAsync(
+                            It.IsAny<ExceptionHandlerContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
                 .Callback<ExceptionHandlerContext, CancellationToken>((c, i) => c.Result = null)
                 .Returns(Task.FromResult(0));
             IExceptionHandler exceptionHandler = exceptionHandlerMock.Object;
@@ -243,13 +313,20 @@ namespace System.Web.Http
             using (HttpRequestMessage request = CreateRequest())
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpServer server = CreateServer(configuration))
-            using (HttpBatchHandler product = new LambdaHttpBatchHandler(server, exceptionLogger, exceptionHandler,
-                (i1, i2) => CreateFaultedTask<HttpResponseMessage>(expectedException)))
-            {
+            using (
+                HttpBatchHandler product = new LambdaHttpBatchHandler(
+                    server,
+                    exceptionLogger,
+                    exceptionHandler,
+                    (i1, i2) => CreateFaultedTask<HttpResponseMessage>(expectedException)
+                )
+            ) {
                 CancellationToken cancellationToken = CreateCancellationToken();
 
                 // Act
-                var exception = await Assert.ThrowsAsync<Exception>(() => product.SendAsync(request, cancellationToken));
+                var exception = await Assert.ThrowsAsync<Exception>(
+                    () => product.SendAsync(request, cancellationToken)
+                );
 
                 // Assert
                 Assert.Same(expectedException, exception);
@@ -266,24 +343,40 @@ namespace System.Web.Http
 
             using (HttpResponseMessage expectedResponse = CreateResponse())
             {
-                Mock<IExceptionHandler> exceptionHandlerMock = new Mock<IExceptionHandler>(MockBehavior.Strict);
-                exceptionHandlerMock
-                    .Setup(h => h.HandleAsync(It.IsAny<ExceptionHandlerContext>(), It.IsAny<CancellationToken>()))
-                    .Callback<ExceptionHandlerContext, CancellationToken>((c, i) =>
-                        c.Result = new ResponseMessageResult(expectedResponse))
+                Mock<IExceptionHandler> exceptionHandlerMock = new Mock<IExceptionHandler>(
+                    MockBehavior.Strict
+                );
+                exceptionHandlerMock.Setup(
+                        h =>
+                            h.HandleAsync(
+                                It.IsAny<ExceptionHandlerContext>(),
+                                It.IsAny<CancellationToken>()
+                            )
+                    )
+                    .Callback<ExceptionHandlerContext, CancellationToken>(
+                        (c, i) => c.Result = new ResponseMessageResult(expectedResponse)
+                    )
                     .Returns(Task.FromResult(0));
                 IExceptionHandler exceptionHandler = exceptionHandlerMock.Object;
 
                 using (HttpRequestMessage request = CreateRequest())
                 using (HttpConfiguration configuration = new HttpConfiguration())
                 using (HttpServer server = CreateServer(configuration))
-                using (HttpBatchHandler product = new LambdaHttpBatchHandler(server, exceptionLogger, exceptionHandler,
-                    (i1, i2) => CreateFaultedTask<HttpResponseMessage>(CreateException())))
-                {
+                using (
+                    HttpBatchHandler product = new LambdaHttpBatchHandler(
+                        server,
+                        exceptionLogger,
+                        exceptionHandler,
+                        (i1, i2) => CreateFaultedTask<HttpResponseMessage>(CreateException())
+                    )
+                ) {
                     CancellationToken cancellationToken = CreateCancellationToken();
 
                     // Act
-                    HttpResponseMessage response = await product.SendAsync(request, cancellationToken);
+                    HttpResponseMessage response = await product.SendAsync(
+                        request,
+                        cancellationToken
+                    );
 
                     // Assert
                     Assert.Same(expectedResponse, response);
@@ -295,14 +388,21 @@ namespace System.Web.Http
         public async Task SendAsync_WithDefaultExceptionHandler_IfProcessBatchAsyncTaskIsFaulted_ReturnsInternalServerError()
         {
             Mock<HttpBatchHandler> handler = new Mock<HttpBatchHandler>(new HttpServer());
-            handler.Setup(h => h.ProcessBatchAsync(It.IsAny<HttpRequestMessage>(), CancellationToken.None))
-                .Returns(() =>
-                {
-                    throw new InvalidOperationException();
-                });
+            handler.Setup(
+                    h => h.ProcessBatchAsync(It.IsAny<HttpRequestMessage>(), CancellationToken.None)
+                )
+                .Returns(
+                    () =>
+                    {
+                        throw new InvalidOperationException();
+                    }
+                );
             HttpMessageInvoker invoker = new HttpMessageInvoker(handler.Object);
 
-            var response = await invoker.SendAsync(new HttpRequestMessage(), CancellationToken.None);
+            var response = await invoker.SendAsync(
+                new HttpRequestMessage(),
+                CancellationToken.None
+            );
 
             Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
         }
@@ -357,9 +457,11 @@ namespace System.Web.Http
             return new MockHttpBatchHandler(httpServer);
         }
 
-        private static HttpBatchHandler CreateProductUnderTest(HttpServer httpServer, IExceptionLogger exceptionLogger,
-                IExceptionHandler exceptionHanlder)
-        {
+        private static HttpBatchHandler CreateProductUnderTest(
+            HttpServer httpServer,
+            IExceptionLogger exceptionLogger,
+            IExceptionHandler exceptionHanlder
+        ) {
             return new MockHttpBatchHandler(httpServer, exceptionLogger, exceptionHanlder);
         }
 
@@ -386,8 +488,13 @@ namespace System.Web.Http
         private static Mock<IExceptionHandler> CreateStubExceptionHandlerMock()
         {
             Mock<IExceptionHandler> mock = new Mock<IExceptionHandler>(MockBehavior.Strict);
-            mock
-                .Setup(h => h.HandleAsync(It.IsAny<ExceptionHandlerContext>(), It.IsAny<CancellationToken>()))
+            mock.Setup(
+                    h =>
+                        h.HandleAsync(
+                            It.IsAny<ExceptionHandlerContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
                 .Returns(Task.FromResult(0));
             return mock;
         }
@@ -400,20 +507,35 @@ namespace System.Web.Http
         private static Mock<IExceptionLogger> CreateStubExceptionLoggerMock()
         {
             Mock<IExceptionLogger> mock = new Mock<IExceptionLogger>(MockBehavior.Strict);
-            mock
-                .Setup(l => l.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>()))
+            mock.Setup(
+                    l =>
+                        l.LogAsync(
+                            It.IsAny<ExceptionLoggerContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
                 .Returns(Task.FromResult(0));
             return mock;
         }
 
         private class LambdaHttpBatchHandler : HttpBatchHandler
         {
-            Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> _processBatchAsync;
+            Func<
+                HttpRequestMessage,
+                CancellationToken,
+                Task<HttpResponseMessage>
+            > _processBatchAsync;
 
-            public LambdaHttpBatchHandler(HttpServer httpServer, IExceptionLogger exceptionLogger,
+            public LambdaHttpBatchHandler(
+                HttpServer httpServer,
+                IExceptionLogger exceptionLogger,
                 IExceptionHandler exceptionHandler,
-                Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> processBatchAsync)
-                : base(httpServer)
+                Func<
+                    HttpRequestMessage,
+                    CancellationToken,
+                    Task<HttpResponseMessage>
+                > processBatchAsync
+            ) : base(httpServer)
             {
                 Contract.Assert(processBatchAsync != null);
                 _processBatchAsync = processBatchAsync;
@@ -421,22 +543,23 @@ namespace System.Web.Http
                 ExceptionHandler = exceptionHandler;
             }
 
-            public override Task<HttpResponseMessage> ProcessBatchAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-            {
+            public override Task<HttpResponseMessage> ProcessBatchAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            ) {
                 return _processBatchAsync.Invoke(request, cancellationToken);
             }
         }
 
         private class MockHttpBatchHandler : HttpBatchHandler
         {
-            public MockHttpBatchHandler(HttpServer server)
-                : base(server)
-            {
-            }
+            public MockHttpBatchHandler(HttpServer server) : base(server) { }
 
-            public MockHttpBatchHandler(HttpServer httpServer, IExceptionLogger exceptionLogger,
-                IExceptionHandler exceptionHanlder)
-                : base(httpServer)
+            public MockHttpBatchHandler(
+                HttpServer httpServer,
+                IExceptionLogger exceptionLogger,
+                IExceptionHandler exceptionHanlder
+            ) : base(httpServer)
             {
                 ExceptionLogger = exceptionLogger;
                 ExceptionHandler = exceptionHanlder;
@@ -447,8 +570,10 @@ namespace System.Web.Http
                 return SendAsync(request, CancellationToken.None);
             }
 
-            public override Task<HttpResponseMessage> ProcessBatchAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-            {
+            public override Task<HttpResponseMessage> ProcessBatchAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            ) {
                 return Task.FromResult(new HttpResponseMessage());
             }
         }

@@ -26,15 +26,19 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             : base(
                 v => ToBytes(v),
                 v => v == null ? default : FromBytes(v),
-                _defaultHints.With(mappingHints))
-        {
-        }
+                _defaultHints.With(mappingHints)
+            ) { }
 
         /// <summary>
         ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
         /// </summary>
-        public static ValueConverterInfo DefaultInfo { get; }
-            = new(typeof(DateTimeOffset), typeof(byte[]), i => new DateTimeOffsetToBytesConverter(i.MappingHints), _defaultHints);
+        public static ValueConverterInfo DefaultInfo { get; } =
+            new(
+                typeof(DateTimeOffset),
+                typeof(byte[]),
+                i => new DateTimeOffsetToBytesConverter(i.MappingHints),
+                _defaultHints
+            );
 
         private static byte[] ToBytes(DateTimeOffset value)
         {
@@ -49,7 +53,10 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             // externally (revisit as part of #13850)
             var timeBinary = (long)_longToBytes.ConvertFromProvider(bytes)!;
             var offsetMins = (short)_shortToBytes.ConvertFromProvider(bytes.Skip(8).ToArray())!;
-            return new DateTimeOffset(DateTime.FromBinary(timeBinary), new TimeSpan(0, offsetMins, 0));
+            return new DateTimeOffset(
+                DateTime.FromBinary(timeBinary),
+                new TimeSpan(0, offsetMins, 0)
+            );
         }
     }
 }

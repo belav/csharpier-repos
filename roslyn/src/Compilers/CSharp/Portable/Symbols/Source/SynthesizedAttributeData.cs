@@ -13,8 +13,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal sealed class SynthesizedAttributeData : SourceAttributeData
     {
-        internal SynthesizedAttributeData(MethodSymbol wellKnownMember, ImmutableArray<TypedConstant> arguments, ImmutableArray<KeyValuePair<string, TypedConstant>> namedArguments)
-            : base(
+        internal SynthesizedAttributeData(
+            MethodSymbol wellKnownMember,
+            ImmutableArray<TypedConstant> arguments,
+            ImmutableArray<KeyValuePair<string, TypedConstant>> namedArguments
+        ) : base(
             applicationNode: null,
             attributeClass: wellKnownMember.ContainingType,
             attributeConstructor: wellKnownMember,
@@ -22,8 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             constructorArgumentsSourceIndices: default,
             namedArguments: namedArguments,
             hasErrors: false,
-            isConditionallyOmitted: false)
-        {
+            isConditionallyOmitted: false
+        ) {
             Debug.Assert((object)wellKnownMember != null);
             Debug.Assert(!arguments.IsDefault);
             Debug.Assert(!namedArguments.IsDefault); // Frequently empty though.
@@ -31,15 +34,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal SynthesizedAttributeData(SourceAttributeData original)
             : base(
-            applicationNode: original.ApplicationSyntaxReference,
-            attributeClass: original.AttributeClass,
-            attributeConstructor: original.AttributeConstructor,
-            constructorArguments: original.CommonConstructorArguments,
-            constructorArgumentsSourceIndices: original.ConstructorArgumentsSourceIndices,
-            namedArguments: original.CommonNamedArguments,
-            hasErrors: original.HasErrors,
-            isConditionallyOmitted: original.IsConditionallyOmitted)
-        {
-        }
+                applicationNode: original.ApplicationSyntaxReference,
+                attributeClass: original.AttributeClass,
+                attributeConstructor: original.AttributeConstructor,
+                constructorArguments: original.CommonConstructorArguments,
+                constructorArgumentsSourceIndices: original.ConstructorArgumentsSourceIndices,
+                namedArguments: original.CommonNamedArguments,
+                hasErrors: original.HasErrors,
+                isConditionallyOmitted: original.IsConditionallyOmitted
+            ) { }
     }
 }

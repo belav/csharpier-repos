@@ -21,17 +21,25 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseDeconstruction), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UseDeconstruction
+        ),
+        Shared
+    ]
     internal class CSharpUseDeconstructionCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpUseDeconstructionCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpUseDeconstructionCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.UseDeconstructionDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.UseDeconstructionDiagnosticId);
 
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
 
@@ -39,32 +47,51 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
         {
             context.RegisterCodeFix(
                 new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics[0], c)),
-                context.Diagnostics);
+                context.Diagnostics
+            );
 
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
-        {
-            var nodesToProcess = diagnostics.SelectAsArray(d => d.Location.FindToken(cancellationToken).Parent);
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        ) {
+            var nodesToProcess = diagnostics.SelectAsArray(
+                d => d.Location.FindToken(cancellationToken).Parent
+            );
 
             // When doing a fix all, we have to avoid introducing the same name multiple times
             // into the same scope.  However, checking results after each change would be very
-            // expensive (lots of forking + new semantic models, etc.).  So we use 
+            // expensive (lots of forking + new semantic models, etc.).  So we use
             // ApplyMethodBodySemanticEditsAsync to help out here.  It will only do the forking
-            // if there are multiple results in the same method body.  If there's only one 
+            // if there are multiple results in the same method body.  If there's only one
             // result in a method body, we will just apply it without doing any extra analysis.
             return editor.ApplyMethodBodySemanticEditsAsync(
-                document, nodesToProcess,
+                document,
+                nodesToProcess,
                 (semanticModel, node) => true,
-                (semanticModel, currentRoot, node) => UpdateRoot(semanticModel, currentRoot, node, document.Project.Solution.Workspace, cancellationToken),
-                cancellationToken);
+                (semanticModel, currentRoot, node) =>
+                    UpdateRoot(
+                        semanticModel,
+                        currentRoot,
+                        node,
+                        document.Project.Solution.Workspace,
+                        cancellationToken
+                    ),
+                cancellationToken
+            );
         }
 
-        private SyntaxNode UpdateRoot(SemanticModel semanticModel, SyntaxNode root, SyntaxNode node, Workspace workspace, CancellationToken cancellationToken)
-        {
+        private SyntaxNode UpdateRoot(
+            SemanticModel semanticModel,
+            SyntaxNode root,
+            SyntaxNode node,
+            Workspace workspace,
+            CancellationToken cancellationToken
+        ) {
             var editor = new SyntaxEditor(root, workspace);
 
             // We use the callback form of ReplaceNode because we may have nested code that
@@ -75,30 +102,49 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
             if (node is VariableDeclaratorSyntax variableDeclarator)
             {
                 var variableDeclaration = (VariableDeclarationSyntax)variableDeclarator.Parent;
-                if (CSharpUseDeconstructionDiagnosticAnalyzer.TryAnalyzeVariableDeclaration(
-                        semanticModel, variableDeclaration,
-                        out var tupleType, out memberAccessExpressions,
-                        cancellationToken))
-                {
+                if (
+                    CSharpUseDeconstructionDiagnosticAnalyzer.TryAnalyzeVariableDeclaration(
+                        semanticModel,
+                        variableDeclaration,
+                        out var tupleType,
+                        out memberAccessExpressions,
+                        cancellationToken
+                    )
+                ) {
                     editor.ReplaceNode(
                         variableDeclaration.Parent,
                         (current, _) =>
                         {
-                            var currentDeclarationStatement = (LocalDeclarationStatementSyntax)current;
-                            return CreateDeconstructionStatement(tupleType, currentDeclarationStatement, currentDeclarationStatement.Declaration.Variables[0]);
-                        });
+                            var currentDeclarationStatement =
+                                (LocalDeclarationStatementSyntax)current;
+                            return CreateDeconstructionStatement(
+                                tupleType,
+                                currentDeclarationStatement,
+                                currentDeclarationStatement.Declaration.Variables[0]
+                            );
+                        }
+                    );
                 }
             }
             else if (node is ForEachStatementSyntax forEachStatement)
             {
-                if (CSharpUseDeconstructionDiagnosticAnalyzer.TryAnalyzeForEachStatement(
-                        semanticModel, forEachStatement,
-                        out var tupleType, out memberAccessExpressions,
-                        cancellationToken))
-                {
+                if (
+                    CSharpUseDeconstructionDiagnosticAnalyzer.TryAnalyzeForEachStatement(
+                        semanticModel,
+                        forEachStatement,
+                        out var tupleType,
+                        out memberAccessExpressions,
+                        cancellationToken
+                    )
+                ) {
                     editor.ReplaceNode(
                         forEachStatement,
-                        (current, _) => CreateForEachVariableStatement(tupleType, (ForEachStatementSyntax)current));
+                        (current, _) =>
+                            CreateForEachVariableStatement(
+                                tupleType,
+                                (ForEachStatementSyntax)current
+                            )
+                    );
                 }
             }
 
@@ -110,14 +156,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
                     {
                         var currentMemberAccess = (MemberAccessExpressionSyntax)current;
                         return currentMemberAccess.Name.WithTriviaFrom(currentMemberAccess);
-                    });
+                    }
+                );
             }
 
             return editor.GetChangedRoot();
         }
 
-        private ForEachVariableStatementSyntax CreateForEachVariableStatement(INamedTypeSymbol tupleType, ForEachStatementSyntax forEachStatement)
-        {
+        private ForEachVariableStatementSyntax CreateForEachVariableStatement(
+            INamedTypeSymbol tupleType,
+            ForEachStatementSyntax forEachStatement
+        ) {
             // Copy all the tokens/nodes from the existing foreach statement to the new foreach statement.
             // However, convert the existing declaration over to a "var (x, y)" declaration or (int x, int y)
             // tuple expression.
@@ -130,26 +179,36 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
                 forEachStatement.InKeyword,
                 forEachStatement.Expression,
                 forEachStatement.CloseParenToken,
-                forEachStatement.Statement);
+                forEachStatement.Statement
+            );
         }
 
         private ExpressionStatementSyntax CreateDeconstructionStatement(
-            INamedTypeSymbol tupleType, LocalDeclarationStatementSyntax declarationStatement, VariableDeclaratorSyntax variableDeclarator)
-        {
+            INamedTypeSymbol tupleType,
+            LocalDeclarationStatementSyntax declarationStatement,
+            VariableDeclaratorSyntax variableDeclarator
+        ) {
             // Copy all the tokens/nodes from the existing declaration statement to the new assignment
-            // statement. However, convert the existing declaration over to a "var (x, y)" declaration 
+            // statement. However, convert the existing declaration over to a "var (x, y)" declaration
             // or (int x, int y) tuple expression.
             return SyntaxFactory.ExpressionStatement(
                 SyntaxFactory.AssignmentExpression(
                     SyntaxKind.SimpleAssignmentExpression,
-                    CreateTupleOrDeclarationExpression(tupleType, declarationStatement.Declaration.Type),
+                    CreateTupleOrDeclarationExpression(
+                        tupleType,
+                        declarationStatement.Declaration.Type
+                    ),
                     variableDeclarator.Initializer.EqualsToken,
-                    variableDeclarator.Initializer.Value),
-                declarationStatement.SemicolonToken);
+                    variableDeclarator.Initializer.Value
+                ),
+                declarationStatement.SemicolonToken
+            );
         }
 
-        private ExpressionSyntax CreateTupleOrDeclarationExpression(INamedTypeSymbol tupleType, TypeSyntax typeNode)
-        {
+        private ExpressionSyntax CreateTupleOrDeclarationExpression(
+            INamedTypeSymbol tupleType,
+            TypeSyntax typeNode
+        ) {
             // If we have an explicit tuple type in code, convert that over to a tuple expression.
             // i.e.   (int x, int y) t = ...   will be converted to (int x, int y) = ...
             //
@@ -159,17 +218,35 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
                 : CreateDeclarationExpression(tupleType, typeNode);
         }
 
-        private static DeclarationExpressionSyntax CreateDeclarationExpression(INamedTypeSymbol tupleType, TypeSyntax typeNode)
-            => SyntaxFactory.DeclarationExpression(
-                typeNode, SyntaxFactory.ParenthesizedVariableDesignation(
-                    SyntaxFactory.SeparatedList<VariableDesignationSyntax>(tupleType.TupleElements.Select(
-                        e => SyntaxFactory.SingleVariableDesignation(SyntaxFactory.Identifier(e.Name.EscapeIdentifier()))))));
+        private static DeclarationExpressionSyntax CreateDeclarationExpression(
+            INamedTypeSymbol tupleType,
+            TypeSyntax typeNode
+        ) =>
+            SyntaxFactory.DeclarationExpression(
+                typeNode,
+                SyntaxFactory.ParenthesizedVariableDesignation(
+                    SyntaxFactory.SeparatedList<VariableDesignationSyntax>(
+                        tupleType.TupleElements.Select(
+                            e =>
+                                SyntaxFactory.SingleVariableDesignation(
+                                    SyntaxFactory.Identifier(e.Name.EscapeIdentifier())
+                                )
+                        )
+                    )
+                )
+            );
 
-        private TupleExpressionSyntax CreateTupleExpression(TupleTypeSyntax typeNode)
-            => SyntaxFactory.TupleExpression(
+        private TupleExpressionSyntax CreateTupleExpression(TupleTypeSyntax typeNode) =>
+            SyntaxFactory.TupleExpression(
                 typeNode.OpenParenToken,
-                SyntaxFactory.SeparatedList<ArgumentSyntax>(new SyntaxNodeOrTokenList(typeNode.Elements.GetWithSeparators().Select(ConvertTupleTypeElementComponent))),
-                typeNode.CloseParenToken);
+                SyntaxFactory.SeparatedList<ArgumentSyntax>(
+                    new SyntaxNodeOrTokenList(
+                        typeNode.Elements.GetWithSeparators()
+                            .Select(ConvertTupleTypeElementComponent)
+                    )
+                ),
+                typeNode.CloseParenToken
+            );
 
         private SyntaxNodeOrToken ConvertTupleTypeElementComponent(SyntaxNodeOrToken nodeOrToken)
         {
@@ -185,15 +262,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UseDeconstruction
             return SyntaxFactory.Argument(
                 SyntaxFactory.DeclarationExpression(
                     node.Type,
-                    SyntaxFactory.SingleVariableDesignation(node.Identifier)));
+                    SyntaxFactory.SingleVariableDesignation(node.Identifier)
+                )
+            );
         }
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(CSharpAnalyzersResources.Deconstruct_variable_declaration, createChangedDocument, CSharpAnalyzersResources.Deconstruct_variable_declaration)
-            {
-            }
+            public MyCodeAction(
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(
+                CSharpAnalyzersResources.Deconstruct_variable_declaration,
+                createChangedDocument,
+                CSharpAnalyzersResources.Deconstruct_variable_declaration
+            ) { }
         }
     }
 }

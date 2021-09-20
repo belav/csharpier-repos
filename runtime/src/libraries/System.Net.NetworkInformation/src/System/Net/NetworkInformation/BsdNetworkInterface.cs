@@ -27,17 +27,25 @@ namespace System.Net.NetworkInformation
             }
             else
             {
-                _operationalStatus = (nativeStats.Flags & (ulong)Interop.Sys.InterfaceFlags.InterfaceHasLink) != 0 ?  OperationalStatus.Up : OperationalStatus.Down;
+                _operationalStatus =
+                    (nativeStats.Flags & (ulong)Interop.Sys.InterfaceFlags.InterfaceHasLink) != 0
+                        ? OperationalStatus.Up
+                        : OperationalStatus.Down;
             }
 
-            _supportsMulticast = (nativeStats.Flags & (ulong)Interop.Sys.InterfaceFlags.InterfaceSupportsMulticast) != 0;
+            _supportsMulticast =
+                (nativeStats.Flags & (ulong)Interop.Sys.InterfaceFlags.InterfaceSupportsMulticast)
+                != 0;
             _speed = (long)nativeStats.Speed;
             _ipProperties = new BsdIpInterfaceProperties(this, (int)nativeStats.Mtu);
         }
 
         public static unsafe NetworkInterface[] GetBsdNetworkInterfaces()
         {
-            Dictionary<string, BsdNetworkInterface> interfacesByName = new Dictionary<string, BsdNetworkInterface>();
+            Dictionary<string, BsdNetworkInterface> interfacesByName = new Dictionary<
+                string,
+                BsdNetworkInterface
+            >();
             List<Exception>? exceptions = null;
             const int MaxTries = 3;
             for (int attempt = 0; attempt < MaxTries; attempt++)
@@ -50,7 +58,11 @@ namespace System.Net.NetworkInformation
                     {
                         try
                         {
-                            BsdNetworkInterface oni = GetOrCreate(interfacesByName, name, ipAddr->InterfaceIndex);
+                            BsdNetworkInterface oni = GetOrCreate(
+                                interfacesByName,
+                                name,
+                                ipAddr->InterfaceIndex
+                            );
                             oni.ProcessIpv4Address(ipAddr);
                         }
                         catch (Exception e)
@@ -66,7 +78,11 @@ namespace System.Net.NetworkInformation
                     {
                         try
                         {
-                            BsdNetworkInterface oni = GetOrCreate(interfacesByName, name, ipAddr->InterfaceIndex);
+                            BsdNetworkInterface oni = GetOrCreate(
+                                interfacesByName,
+                                name,
+                                ipAddr->InterfaceIndex
+                            );
                             oni.ProcessIpv6Address(ipAddr, *scopeId);
                         }
                         catch (Exception e)
@@ -82,7 +98,11 @@ namespace System.Net.NetworkInformation
                     {
                         try
                         {
-                            BsdNetworkInterface oni = GetOrCreate(interfacesByName, name, llAddr->InterfaceIndex);
+                            BsdNetworkInterface oni = GetOrCreate(
+                                interfacesByName,
+                                name,
+                                llAddr->InterfaceIndex
+                            );
                             oni.ProcessLinkLayerAddress(llAddr);
                         }
                         catch (Exception e)
@@ -93,10 +113,14 @@ namespace System.Net.NetworkInformation
                             }
                             exceptions.Add(e);
                         }
-                    });
+                    }
+                );
                 if (exceptions != null)
                 {
-                    throw new NetworkInformationException(SR.net_PInvokeError, new AggregateException(exceptions));
+                    throw new NetworkInformationException(
+                        SR.net_PInvokeError,
+                        new AggregateException(exceptions)
+                    );
                 }
                 else if (result == 0)
                 {
@@ -125,8 +149,11 @@ namespace System.Net.NetworkInformation
         /// <param name="name">The name of the interface.</param>
         /// <param name="index">Interface index of the interface.</param>
         /// <returns>The cached or new BsdNetworkInterface with the given name.</returns>
-        private static BsdNetworkInterface GetOrCreate(Dictionary<string, BsdNetworkInterface> interfaces, string name, int index)
-        {
+        private static BsdNetworkInterface GetOrCreate(
+            Dictionary<string, BsdNetworkInterface> interfaces,
+            string name,
+            int index
+        ) {
             BsdNetworkInterface? oni;
             if (!interfaces.TryGetValue(name, out oni))
             {
@@ -152,12 +179,24 @@ namespace System.Net.NetworkInformation
             return new BsdIPv4InterfaceStatistics(Name);
         }
 
-        public override OperationalStatus OperationalStatus { get { return _operationalStatus; } }
+        public override OperationalStatus OperationalStatus
+        {
+            get { return _operationalStatus; }
+        }
 
-        public override long Speed { get { return _speed; } }
+        public override long Speed
+        {
+            get { return _speed; }
+        }
 
-        public override bool SupportsMulticast { get { return _supportsMulticast; } }
+        public override bool SupportsMulticast
+        {
+            get { return _supportsMulticast; }
+        }
 
-        public override bool IsReceiveOnly { get { return false; } }
+        public override bool IsReceiveOnly
+        {
+            get { return false; }
+        }
     }
 }

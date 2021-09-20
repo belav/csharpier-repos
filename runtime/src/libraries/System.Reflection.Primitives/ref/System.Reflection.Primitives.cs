@@ -14,7 +14,9 @@ namespace System.Reflection.Emit
         Cond_Branch = 3,
         Meta = 4,
         Next = 5,
-        [System.ObsoleteAttribute("This API has been deprecated. https://go.microsoft.com/fwlink/?linkid=14202")]
+        [System.ObsoleteAttribute(
+            "This API has been deprecated. https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         Phi = 6,
         Return = 7,
         Throw = 8,
@@ -22,20 +24,66 @@ namespace System.Reflection.Emit
     public readonly partial struct OpCode : System.IEquatable<System.Reflection.Emit.OpCode>
     {
         private readonly int _dummyPrimitive;
-        public System.Reflection.Emit.FlowControl FlowControl { get { throw null; } }
-        public string? Name { get { throw null; } }
-        public System.Reflection.Emit.OpCodeType OpCodeType { get { throw null; } }
-        public System.Reflection.Emit.OperandType OperandType { get { throw null; } }
-        public int Size { get { throw null; } }
-        public System.Reflection.Emit.StackBehaviour StackBehaviourPop { get { throw null; } }
-        public System.Reflection.Emit.StackBehaviour StackBehaviourPush { get { throw null; } }
-        public short Value { get { throw null; } }
-        public override bool Equals(object? obj) { throw null; }
-        public bool Equals(System.Reflection.Emit.OpCode obj) { throw null; }
-        public override int GetHashCode() { throw null; }
-        public static bool operator ==(System.Reflection.Emit.OpCode a, System.Reflection.Emit.OpCode b) { throw null; }
-        public static bool operator !=(System.Reflection.Emit.OpCode a, System.Reflection.Emit.OpCode b) { throw null; }
-        public override string? ToString() { throw null; }
+        public System.Reflection.Emit.FlowControl FlowControl
+        {
+            get { throw null; }
+        }
+        public string? Name
+        {
+            get { throw null; }
+        }
+        public System.Reflection.Emit.OpCodeType OpCodeType
+        {
+            get { throw null; }
+        }
+        public System.Reflection.Emit.OperandType OperandType
+        {
+            get { throw null; }
+        }
+        public int Size
+        {
+            get { throw null; }
+        }
+        public System.Reflection.Emit.StackBehaviour StackBehaviourPop
+        {
+            get { throw null; }
+        }
+        public System.Reflection.Emit.StackBehaviour StackBehaviourPush
+        {
+            get { throw null; }
+        }
+        public short Value
+        {
+            get { throw null; }
+        }
+        public override bool Equals(object? obj)
+        {
+            throw null;
+        }
+        public bool Equals(System.Reflection.Emit.OpCode obj)
+        {
+            throw null;
+        }
+        public override int GetHashCode()
+        {
+            throw null;
+        }
+        public static bool operator ==(
+            System.Reflection.Emit.OpCode a,
+            System.Reflection.Emit.OpCode b
+        ) {
+            throw null;
+        }
+        public static bool operator !=(
+            System.Reflection.Emit.OpCode a,
+            System.Reflection.Emit.OpCode b
+        ) {
+            throw null;
+        }
+        public override string? ToString()
+        {
+            throw null;
+        }
     }
     public partial class OpCodes
     {
@@ -266,11 +314,16 @@ namespace System.Reflection.Emit
         public static readonly System.Reflection.Emit.OpCode Unbox_Any;
         public static readonly System.Reflection.Emit.OpCode Volatile;
         public static readonly System.Reflection.Emit.OpCode Xor;
-        public static bool TakesSingleByteArgument(System.Reflection.Emit.OpCode inst) { throw null; }
+        public static bool TakesSingleByteArgument(System.Reflection.Emit.OpCode inst)
+        {
+            throw null;
+        }
     }
     public enum OpCodeType
     {
-        [System.ObsoleteAttribute("This API has been deprecated. https://go.microsoft.com/fwlink/?linkid=14202")]
+        [System.ObsoleteAttribute(
+            "This API has been deprecated. https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         Annotation = 0,
         Macro = 1,
         Nternal = 2,
@@ -286,7 +339,9 @@ namespace System.Reflection.Emit
         InlineI8 = 3,
         InlineMethod = 4,
         InlineNone = 5,
-        [System.ObsoleteAttribute("This API has been deprecated. https://go.microsoft.com/fwlink/?linkid=14202")]
+        [System.ObsoleteAttribute(
+            "This API has been deprecated. https://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         InlinePhi = 6,
         InlineR = 7,
         InlineSig = 9,

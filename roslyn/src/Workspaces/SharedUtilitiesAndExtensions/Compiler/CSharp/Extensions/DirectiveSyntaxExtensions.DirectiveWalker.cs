@@ -17,8 +17,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
     {
         private class DirectiveWalker : CSharpSyntaxWalker
         {
-            private readonly IDictionary<DirectiveTriviaSyntax, DirectiveTriviaSyntax> _directiveMap;
-            private readonly IDictionary<DirectiveTriviaSyntax, IReadOnlyList<DirectiveTriviaSyntax>> _conditionalMap;
+            private readonly IDictionary<
+                DirectiveTriviaSyntax,
+                DirectiveTriviaSyntax
+            > _directiveMap;
+            private readonly IDictionary<
+                DirectiveTriviaSyntax,
+                IReadOnlyList<DirectiveTriviaSyntax>
+            > _conditionalMap;
             private readonly CancellationToken _cancellationToken;
 
             private readonly Stack<DirectiveTriviaSyntax> _regionStack = new();
@@ -26,9 +32,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
             public DirectiveWalker(
                 IDictionary<DirectiveTriviaSyntax, DirectiveTriviaSyntax> directiveMap,
-                IDictionary<DirectiveTriviaSyntax, IReadOnlyList<DirectiveTriviaSyntax>> conditionalMap,
-                CancellationToken cancellationToken)
-                : base(SyntaxWalkerDepth.Token)
+                IDictionary<
+                    DirectiveTriviaSyntax,
+                    IReadOnlyList<DirectiveTriviaSyntax>
+                > conditionalMap,
+                CancellationToken cancellationToken
+            ) : base(SyntaxWalkerDepth.Token)
             {
                 _directiveMap = directiveMap;
                 _conditionalMap = conditionalMap;
@@ -65,7 +74,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                             HandleIfDirective((DirectiveTriviaSyntax)directive.GetStructure());
                             break;
                         case SyntaxKind.EndRegionDirectiveTrivia:
-                            HandleEndRegionDirective((DirectiveTriviaSyntax)directive.GetStructure());
+                            HandleEndRegionDirective(
+                                (DirectiveTriviaSyntax)directive.GetStructure()
+                            );
                             break;
                         case SyntaxKind.EndIfDirectiveTrivia:
                             HandleEndIfDirective((DirectiveTriviaSyntax)directive.GetStructure());
@@ -80,17 +91,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 }
             }
 
-            private void HandleIfDirective(DirectiveTriviaSyntax directive)
-                => _ifStack.Push(directive);
+            private void HandleIfDirective(DirectiveTriviaSyntax directive) =>
+                _ifStack.Push(directive);
 
-            private void HandleRegionDirective(DirectiveTriviaSyntax directive)
-                => _regionStack.Push(directive);
+            private void HandleRegionDirective(DirectiveTriviaSyntax directive) =>
+                _regionStack.Push(directive);
 
-            private void HandleElifDirective(DirectiveTriviaSyntax directive)
-                => _ifStack.Push(directive);
+            private void HandleElifDirective(DirectiveTriviaSyntax directive) =>
+                _ifStack.Push(directive);
 
-            private void HandleElseDirective(DirectiveTriviaSyntax directive)
-                => _ifStack.Push(directive);
+            private void HandleElseDirective(DirectiveTriviaSyntax directive) =>
+                _ifStack.Push(directive);
 
             private void HandleEndIfDirective(DirectiveTriviaSyntax directive)
             {
@@ -130,9 +141,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 // #If should be the first one in sorted order
                 var ifDirective = condDirectives.First();
                 Debug.Assert(
-                    ifDirective.Kind() == SyntaxKind.IfDirectiveTrivia ||
-                    ifDirective.Kind() == SyntaxKind.ElifDirectiveTrivia ||
-                    ifDirective.Kind() == SyntaxKind.ElseDirectiveTrivia);
+                    ifDirective.Kind() == SyntaxKind.IfDirectiveTrivia
+                        || ifDirective.Kind() == SyntaxKind.ElifDirectiveTrivia
+                        || ifDirective.Kind() == SyntaxKind.ElseDirectiveTrivia
+                );
 
                 if (directiveOpt != null)
                 {

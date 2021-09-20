@@ -18,9 +18,6 @@ namespace Microsoft.AspNetCore.Mvc
         /// <summary>
         /// Initializes a new instance of the <see cref="OkResult"/> class.
         /// </summary>
-        public OkResult()
-            : base(DefaultStatusCode)
-        {
-        }
+        public OkResult() : base(DefaultStatusCode) { }
     }
 }

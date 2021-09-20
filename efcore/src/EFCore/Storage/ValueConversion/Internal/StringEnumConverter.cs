@@ -26,10 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal
         public StringEnumConverter(
             Expression<Func<TModel, TProvider>> convertToProviderExpression,
             Expression<Func<TProvider, TModel>> convertFromProviderExpression,
-            ConverterMappingHints? mappingHints = null)
-            : base(convertToProviderExpression, convertFromProviderExpression, mappingHints)
-        {
-        }
+            ConverterMappingHints? mappingHints = null
+        ) : base(convertToProviderExpression, convertFromProviderExpression, mappingHints) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -37,8 +35,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected static new Expression<Func<TEnum, string>> ToString()
-            => v => v.ToString()!;
+        protected static new Expression<Func<TEnum, string>> ToString() => v => v.ToString()!;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -54,14 +51,16 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal
                     CoreStrings.ConverterBadType(
                         typeof(StringEnumConverter<TModel, TProvider, TEnum>).ShortDisplayName(),
                         typeof(TEnum).ShortDisplayName(),
-                        "enum types"));
+                        "enum types"
+                    )
+                );
             }
 
             return v => ConvertToEnum(v);
         }
 
-        private static TEnum ConvertToEnum(string value)
-            => Enum.TryParse<TEnum>(value, out var result)
+        private static TEnum ConvertToEnum(string value) =>
+            Enum.TryParse<TEnum>(value, out var result)
                 ? result
                 : Enum.TryParse(value, true, out result)
                     ? result
@@ -72,6 +71,10 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal
                             : string.IsNullOrEmpty(value)
                                 ? default
                                 : throw new InvalidOperationException(
-                                    CoreStrings.CannotConvertEnumValue(value, typeof(TEnum).ShortDisplayName()));
+                                      CoreStrings.CannotConvertEnumValue(
+                                          value,
+                                          typeof(TEnum).ShortDisplayName()
+                                      )
+                                  );
     }
 }

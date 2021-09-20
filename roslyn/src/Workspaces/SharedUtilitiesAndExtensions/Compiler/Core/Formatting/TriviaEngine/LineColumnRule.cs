@@ -20,8 +20,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             IndentationOperations indentationOperation,
             int lines,
             int spaces,
-            int indentation)
-        {
+            int indentation
+        ) {
             SpaceOperation = spaceOperation;
             LineOperation = lineOperation;
             IndentationOperation = indentationOperation;
@@ -30,14 +30,22 @@ namespace Microsoft.CodeAnalysis.Formatting
             Indentation = indentation;
         }
 
-        public LineColumnRule With(int? lines = null, int? spaces = null, int? indentation = null, LineOperations? lineOperation = null, SpaceOperations? spaceOperation = null, IndentationOperations? indentationOperation = null)
-            => new(
+        public LineColumnRule With(
+            int? lines = null,
+            int? spaces = null,
+            int? indentation = null,
+            LineOperations? lineOperation = null,
+            SpaceOperations? spaceOperation = null,
+            IndentationOperations? indentationOperation = null
+        ) =>
+            new(
                 spaceOperation == null ? SpaceOperation : spaceOperation.Value,
                 lineOperation == null ? LineOperation : lineOperation.Value,
                 indentationOperation == null ? IndentationOperation : indentationOperation.Value,
                 lines == null ? Lines : lines.Value,
                 spaces == null ? Spaces : spaces.Value,
-                indentation == null ? Indentation : indentation.Value);
+                indentation == null ? Indentation : indentation.Value
+            );
 
         public static readonly LineColumnRule Preserve =
             new(
@@ -46,43 +54,51 @@ namespace Microsoft.CodeAnalysis.Formatting
                 IndentationOperations.Preserve,
                 lines: 0,
                 spaces: 0,
-                indentation: 0);
+                indentation: 0
+            );
 
-        public static LineColumnRule PreserveWithGivenSpaces(int spaces)
-            => new(
+        public static LineColumnRule PreserveWithGivenSpaces(int spaces) =>
+            new(
                 SpaceOperations.Preserve,
                 LineOperations.Preserve,
                 IndentationOperations.Given,
                 lines: 0,
                 spaces,
-                indentation: 0);
+                indentation: 0
+            );
 
-        public static LineColumnRule PreserveLinesWithDefaultIndentation(int lines)
-            => new(
+        public static LineColumnRule PreserveLinesWithDefaultIndentation(int lines) =>
+            new(
                 SpaceOperations.Preserve,
                 LineOperations.Preserve,
                 IndentationOperations.Default,
                 lines,
                 spaces: 0,
-                indentation: -1);
+                indentation: -1
+            );
 
-        public static LineColumnRule PreserveLinesWithGivenIndentation(int lines)
-            => new(
+        public static LineColumnRule PreserveLinesWithGivenIndentation(int lines) =>
+            new(
                 SpaceOperations.Preserve,
                 LineOperations.Preserve,
                 IndentationOperations.Given,
                 lines,
                 spaces: 0,
-                indentation: -1);
+                indentation: -1
+            );
 
-        public static LineColumnRule PreserveLinesWithAbsoluteIndentation(int lines, int indentation)
-            => new(
+        public static LineColumnRule PreserveLinesWithAbsoluteIndentation(
+            int lines,
+            int indentation
+        ) =>
+            new(
                 SpaceOperations.Preserve,
                 LineOperations.Preserve,
                 IndentationOperations.Absolute,
                 lines,
                 spaces: 0,
-                indentation);
+                indentation
+            );
 
         public static readonly LineColumnRule PreserveLinesWithFollowingPrecedingIndentation =
             new(
@@ -91,43 +107,48 @@ namespace Microsoft.CodeAnalysis.Formatting
                 IndentationOperations.Follow,
                 lines: -1,
                 spaces: 0,
-                indentation: -1);
+                indentation: -1
+            );
 
-        public static LineColumnRule ForceSpaces(int spaces)
-            => new(
+        public static LineColumnRule ForceSpaces(int spaces) =>
+            new(
                 SpaceOperations.Force,
                 LineOperations.Preserve,
                 IndentationOperations.Preserve,
                 lines: 0,
                 spaces,
-                indentation: 0);
+                indentation: 0
+            );
 
-        public static LineColumnRule PreserveSpacesOrUseDefaultIndentation(int spaces)
-            => new(
+        public static LineColumnRule PreserveSpacesOrUseDefaultIndentation(int spaces) =>
+            new(
                 SpaceOperations.Preserve,
                 LineOperations.Preserve,
                 IndentationOperations.Default,
                 lines: 0,
                 spaces,
-                indentation: -1);
+                indentation: -1
+            );
 
-        public static LineColumnRule ForceSpacesOrUseDefaultIndentation(int spaces)
-            => new(
+        public static LineColumnRule ForceSpacesOrUseDefaultIndentation(int spaces) =>
+            new(
                 SpaceOperations.Force,
                 LineOperations.Preserve,
                 IndentationOperations.Default,
                 lines: 0,
                 spaces,
-                indentation: -1);
+                indentation: -1
+            );
 
-        public static LineColumnRule ForceSpacesOrUseAbsoluteIndentation(int spacesOrIndentation)
-            => new(
+        public static LineColumnRule ForceSpacesOrUseAbsoluteIndentation(int spacesOrIndentation) =>
+            new(
                 SpaceOperations.Force,
                 LineOperations.Preserve,
                 IndentationOperations.Absolute,
                 lines: 0,
                 spacesOrIndentation,
-                spacesOrIndentation);
+                spacesOrIndentation
+            );
 
         public enum SpaceOperations
         {

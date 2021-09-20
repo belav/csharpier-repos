@@ -12,7 +12,7 @@ namespace System.Net.Sockets.Tests
 {
     public abstract class Connect<T> : SocketTestHelperBase<T> where T : SocketHelperBase, new()
     {
-        public Connect(ITestOutputHelper output) : base(output) {}
+        public Connect(ITestOutputHelper output) : base(output) { }
 
         [OuterLoop]
         [Theory]
@@ -20,10 +20,20 @@ namespace System.Net.Sockets.Tests
         public async Task Connect_Success(IPAddress listenAt)
         {
             int port;
-            using (SocketTestServer.SocketTestServerFactory(SocketImplementationType.Async, listenAt, out port))
-            {
-                using (Socket client = new Socket(listenAt.AddressFamily, SocketType.Stream, ProtocolType.Tcp))
-                {
+            using (
+                SocketTestServer.SocketTestServerFactory(
+                    SocketImplementationType.Async,
+                    listenAt,
+                    out port
+                )
+            ) {
+                using (
+                    Socket client = new Socket(
+                        listenAt.AddressFamily,
+                        SocketType.Stream,
+                        ProtocolType.Tcp
+                    )
+                ) {
                     Task connectTask = ConnectAsync(client, new IPEndPoint(listenAt, port));
                     await connectTask;
                     Assert.True(client.Connected);
@@ -35,11 +45,22 @@ namespace System.Net.Sockets.Tests
         [MemberData(nameof(Loopbacks))]
         public async Task Connect_Udp_Success(IPAddress listenAt)
         {
-            using Socket listener = new Socket(listenAt.AddressFamily, SocketType.Dgram, ProtocolType.Udp);
-            using Socket client = new Socket(listenAt.AddressFamily, SocketType.Dgram, ProtocolType.Udp);
+            using Socket listener = new Socket(
+                listenAt.AddressFamily,
+                SocketType.Dgram,
+                ProtocolType.Udp
+            );
+            using Socket client = new Socket(
+                listenAt.AddressFamily,
+                SocketType.Dgram,
+                ProtocolType.Udp
+            );
             listener.Bind(new IPEndPoint(listenAt, 0));
 
-            await ConnectAsync(client, new IPEndPoint(listenAt, ((IPEndPoint)listener.LocalEndPoint).Port));
+            await ConnectAsync(
+                client,
+                new IPEndPoint(listenAt, ((IPEndPoint)listener.LocalEndPoint).Port)
+            );
             Assert.True(client.Connected);
         }
 
@@ -54,10 +75,20 @@ namespace System.Net.Sockets.Tests
             }
 
             int port;
-            using (SocketTestServer.SocketTestServerFactory(SocketImplementationType.Async, listenAt, out port))
-            {
-                using (Socket client = new Socket(listenAt.AddressFamily, SocketType.Stream, ProtocolType.Tcp))
-                {
+            using (
+                SocketTestServer.SocketTestServerFactory(
+                    SocketImplementationType.Async,
+                    listenAt,
+                    out port
+                )
+            ) {
+                using (
+                    Socket client = new Socket(
+                        listenAt.AddressFamily,
+                        SocketType.Stream,
+                        ProtocolType.Tcp
+                    )
+                ) {
                     Task connectTask = ConnectAsync(client, new DnsEndPoint("localhost", port));
                     await connectTask;
                     Assert.True(client.Connected);
@@ -74,10 +105,25 @@ namespace System.Net.Sockets.Tests
                 return;
 
             int port;
-            using (SocketTestServer.SocketTestServerFactory(SocketImplementationType.Async, listenAt, out port))
-            using (Socket client = new Socket(listenAt.AddressFamily, SocketType.Stream, ProtocolType.Tcp))
-            {
-                Task connectTask = MultiConnectAsync(client, new IPAddress[] { IPAddress.Loopback, IPAddress.IPv6Loopback }, port);
+            using (
+                SocketTestServer.SocketTestServerFactory(
+                    SocketImplementationType.Async,
+                    listenAt,
+                    out port
+                )
+            )
+            using (
+                Socket client = new Socket(
+                    listenAt.AddressFamily,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
+                Task connectTask = MultiConnectAsync(
+                    client,
+                    new IPAddress[] { IPAddress.Loopback, IPAddress.IPv6Loopback },
+                    port
+                );
                 await connectTask;
                 Assert.True(client.Connected);
             }
@@ -87,13 +133,26 @@ namespace System.Net.Sockets.Tests
         public async Task Connect_OnConnectedSocket_Fails()
         {
             int port;
-            using (SocketTestServer.SocketTestServerFactory(SocketImplementationType.Async, IPAddress.Loopback, out port))
-            using (Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                SocketTestServer.SocketTestServerFactory(
+                    SocketImplementationType.Async,
+                    IPAddress.Loopback,
+                    out port
+                )
+            )
+            using (
+                Socket client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 await ConnectAsync(client, new IPEndPoint(IPAddress.Loopback, port));
 
                 // In the sync case, we throw a derived exception here, so need to use ThrowsAnyAsync
-                SocketException se = await Assert.ThrowsAnyAsync<SocketException>(() => ConnectAsync(client, new IPEndPoint(IPAddress.Loopback, port)));
+                SocketException se = await Assert.ThrowsAnyAsync<SocketException>(
+                    () => ConnectAsync(client, new IPEndPoint(IPAddress.Loopback, port))
+                );
                 Assert.Equal(SocketError.IsConnected, se.SocketErrorCode);
             }
         }
@@ -104,26 +163,44 @@ namespace System.Net.Sockets.Tests
         public async Task Connect_AfterDisconnect_Fails()
         {
             int port;
-            using (SocketTestServer.SocketTestServerFactory(SocketImplementationType.Async, IPAddress.Loopback, out port))
-            using (Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                SocketTestServer.SocketTestServerFactory(
+                    SocketImplementationType.Async,
+                    IPAddress.Loopback,
+                    out port
+                )
+            )
+            using (
+                Socket client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 await ConnectAsync(client, new IPEndPoint(IPAddress.Loopback, port));
                 client.Disconnect(reuseSocket: false);
 
                 if (ConnectAfterDisconnectResultsInInvalidOperationException)
                 {
-                    await Assert.ThrowsAsync<InvalidOperationException>(() => ConnectAsync(client, new IPEndPoint(IPAddress.Loopback, port)));
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => ConnectAsync(client, new IPEndPoint(IPAddress.Loopback, port))
+                    );
                 }
                 else
                 {
-                    SocketException se = await Assert.ThrowsAsync<SocketException>(() => ConnectAsync(client, new IPEndPoint(IPAddress.Loopback, port)));
+                    SocketException se = await Assert.ThrowsAsync<SocketException>(
+                        () => ConnectAsync(client, new IPEndPoint(IPAddress.Loopback, port))
+                    );
                     Assert.Equal(SocketError.IsConnected, se.SocketErrorCode);
                 }
             }
         }
 
         [OuterLoop("Connects to external server")]
-        [SkipOnPlatform(TestPlatforms.OSX | TestPlatforms.FreeBSD, "Not supported on BSD like OSes.")]
+        [SkipOnPlatform(
+            TestPlatforms.OSX | TestPlatforms.FreeBSD,
+            "Not supported on BSD like OSes."
+        )]
         [Theory]
         [InlineData("1.1.1.1", false)]
         [InlineData("1.1.1.1", true)]
@@ -136,81 +213,97 @@ namespace System.Net.Sockets.Tests
             // We try this a couple of times to deal with a timing race: if the Dispose happens
             // before the operation is started, we won't see a SocketException.
             int msDelay = 100;
-            await RetryHelper.ExecuteAsync(async () =>
-            {
-                var client = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                if (address.IsIPv4MappedToIPv6) client.DualMode = true;
-
-                Task connectTask = ConnectAsync(client, useDns ?
-                    new DnsEndPoint("one.one.one.one", 23) :
-                    new IPEndPoint(address, 23));
-
-                // Wait a little so the operation is started.
-                await Task.Delay(Math.Min(msDelay, 1000));
-                msDelay *= 2;
-                Task disposeTask = Task.Run(() => client.Dispose());
-
-                await Task.WhenAny(disposeTask, connectTask).WaitAsync(TimeSpan.FromSeconds(30));
-                await disposeTask;
-
-                SocketError? localSocketError = null;
-                bool disposedException = false;
-                try
+            await RetryHelper.ExecuteAsync(
+                async () =>
                 {
-                    await connectTask;
-                }
-                catch (SocketException se)
-                {
-                    // On connection timeout, retry.
-                    Assert.NotEqual(SocketError.TimedOut, se.SocketErrorCode);
+                    var client = new Socket(
+                        address.AddressFamily,
+                        SocketType.Stream,
+                        ProtocolType.Tcp
+                    );
+                    if (address.IsIPv4MappedToIPv6)
+                        client.DualMode = true;
 
-                    localSocketError = se.SocketErrorCode;
-                }
-                catch (ObjectDisposedException)
-                {
-                    disposedException = true;
-                }
+                    Task connectTask = ConnectAsync(
+                        client,
+                        useDns
+                          ? new DnsEndPoint("one.one.one.one", 23)
+                          : new IPEndPoint(address, 23)
+                    );
 
-                if (UsesApm)
-                {
-                    Assert.Null(localSocketError);
-                    Assert.True(disposedException);
-                }
-                else if (UsesSync)
-                {
-                    Assert.True(disposedException || localSocketError == SocketError.NotSocket, $"{disposedException} {localSocketError}");
-                }
-                else
-                {
-                    Assert.Equal(SocketError.OperationAborted, localSocketError);
-                }
-            }, maxAttempts: 10, retryWhen: e => e is XunitException);
+                    // Wait a little so the operation is started.
+                    await Task.Delay(Math.Min(msDelay, 1000));
+                    msDelay *= 2;
+                    Task disposeTask = Task.Run(() => client.Dispose());
+
+                    await Task.WhenAny(disposeTask, connectTask)
+                        .WaitAsync(TimeSpan.FromSeconds(30));
+                    await disposeTask;
+
+                    SocketError? localSocketError = null;
+                    bool disposedException = false;
+                    try
+                    {
+                        await connectTask;
+                    }
+                    catch (SocketException se)
+                    {
+                        // On connection timeout, retry.
+                        Assert.NotEqual(SocketError.TimedOut, se.SocketErrorCode);
+
+                        localSocketError = se.SocketErrorCode;
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        disposedException = true;
+                    }
+
+                    if (UsesApm)
+                    {
+                        Assert.Null(localSocketError);
+                        Assert.True(disposedException);
+                    }
+                    else if (UsesSync)
+                    {
+                        Assert.True(
+                            disposedException || localSocketError == SocketError.NotSocket,
+                            $"{disposedException} {localSocketError}"
+                        );
+                    }
+                    else
+                    {
+                        Assert.Equal(SocketError.OperationAborted, localSocketError);
+                    }
+                },
+                maxAttempts: 10,
+                retryWhen: e => e is XunitException
+            );
         }
     }
 
     public sealed class ConnectSync : Connect<SocketHelperArraySync>
     {
-        public ConnectSync(ITestOutputHelper output) : base(output) {}
+        public ConnectSync(ITestOutputHelper output) : base(output) { }
     }
 
     public sealed class ConnectSyncForceNonBlocking : Connect<SocketHelperSyncForceNonBlocking>
     {
-        public ConnectSyncForceNonBlocking(ITestOutputHelper output) : base(output) {}
+        public ConnectSyncForceNonBlocking(ITestOutputHelper output) : base(output) { }
     }
 
     public sealed class ConnectApm : Connect<SocketHelperApm>
     {
-        public ConnectApm(ITestOutputHelper output) : base(output) {}
+        public ConnectApm(ITestOutputHelper output) : base(output) { }
     }
 
     public sealed class ConnectTask : Connect<SocketHelperTask>
     {
-        public ConnectTask(ITestOutputHelper output) : base(output) {}
+        public ConnectTask(ITestOutputHelper output) : base(output) { }
     }
 
     public sealed class ConnectEap : Connect<SocketHelperEap>
     {
-        public ConnectEap(ITestOutputHelper output) : base(output) {}
+        public ConnectEap(ITestOutputHelper output) : base(output) { }
     }
 
     public sealed class ConnectCancellableTask : Connect<SocketHelperCancellableTask>
@@ -222,60 +315,102 @@ namespace System.Net.Sockets.Tests
         {
             EndPoint ep = new IPEndPoint(IPAddress.Parse("1.2.3.4"), 1);
 
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 var cts = new CancellationTokenSource();
                 cts.Cancel();
 
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await client.ConnectAsync(ep, cts.Token));
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                    async () => await client.ConnectAsync(ep, cts.Token)
+                );
             }
         }
 
         [Fact]
         public async Task ConnectAddressAndPort_Precanceled_Throws()
         {
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 var cts = new CancellationTokenSource();
                 cts.Cancel();
 
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await client.ConnectAsync(IPAddress.Parse("1.2.3.4"), 1, cts.Token));
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                    async () => await client.ConnectAsync(IPAddress.Parse("1.2.3.4"), 1, cts.Token)
+                );
             }
         }
 
         [Fact]
         public async Task ConnectMultiAddressAndPort_Precanceled_Throws()
         {
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 var cts = new CancellationTokenSource();
                 cts.Cancel();
 
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await client.ConnectAsync(new IPAddress[] { IPAddress.Parse("1.2.3.4"), IPAddress.Parse("1.2.3.5") }, 1, cts.Token));
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                    async () =>
+                        await client.ConnectAsync(
+                            new IPAddress[]
+                            {
+                                IPAddress.Parse("1.2.3.4"),
+                                IPAddress.Parse("1.2.3.5")
+                            },
+                            1,
+                            cts.Token
+                        )
+                );
             }
         }
 
         [Fact]
         public async Task ConnectHostNameAndPort_Precanceled_Throws()
         {
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 var cts = new CancellationTokenSource();
                 cts.Cancel();
 
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await client.ConnectAsync("1.2.3.4", 1, cts.Token));
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                    async () => await client.ConnectAsync("1.2.3.4", 1, cts.Token)
+                );
             }
         }
 
         [Fact]
         [OuterLoop("Uses Task.Delay")]
-        [PlatformSpecific(TestPlatforms.Windows)]   // Linux will not even attempt to connect to the invalid IP address
+        [PlatformSpecific(TestPlatforms.Windows)] // Linux will not even attempt to connect to the invalid IP address
         public async Task ConnectEndPoint_CancelDuringConnect_Throws()
         {
             EndPoint ep = new IPEndPoint(IPAddress.Parse("1.2.3.4"), 1);
 
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 var cts = new CancellationTokenSource();
 
                 ValueTask t = client.ConnectAsync(ep, cts.Token);
@@ -289,11 +424,16 @@ namespace System.Net.Sockets.Tests
 
         [Fact]
         [OuterLoop("Uses Task.Delay")]
-        [PlatformSpecific(TestPlatforms.Windows)]   // Linux will not even attempt to connect to the invalid IP address
+        [PlatformSpecific(TestPlatforms.Windows)] // Linux will not even attempt to connect to the invalid IP address
         public async Task ConnectAddressAndPort_CancelDuringConnect_Throws()
         {
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 var cts = new CancellationTokenSource();
 
                 ValueTask t = client.ConnectAsync(IPAddress.Parse("1.2.3.4"), 1, cts.Token);
@@ -307,14 +447,23 @@ namespace System.Net.Sockets.Tests
 
         [Fact]
         [OuterLoop("Uses Task.Delay")]
-        [PlatformSpecific(TestPlatforms.Windows)]   // Linux will not even attempt to connect to the invalid IP address
+        [PlatformSpecific(TestPlatforms.Windows)] // Linux will not even attempt to connect to the invalid IP address
         public async Task ConnectMultiAddressAndPort_CancelDuringConnect_Throws()
         {
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 var cts = new CancellationTokenSource();
 
-                ValueTask t = client.ConnectAsync(new IPAddress[] { IPAddress.Parse("1.2.3.4"), IPAddress.Parse("1.2.3.5") }, 1, cts.Token);
+                ValueTask t = client.ConnectAsync(
+                    new IPAddress[] { IPAddress.Parse("1.2.3.4"), IPAddress.Parse("1.2.3.5") },
+                    1,
+                    cts.Token
+                );
 
                 // Delay cancellation a bit to try to ensure the OS actually attempts to connect
                 cts.CancelAfter(100);
@@ -325,11 +474,16 @@ namespace System.Net.Sockets.Tests
 
         [Fact]
         [OuterLoop("Uses Task.Delay")]
-        [PlatformSpecific(TestPlatforms.Windows)]   // Linux will not even attempt to connect to the invalid IP address
+        [PlatformSpecific(TestPlatforms.Windows)] // Linux will not even attempt to connect to the invalid IP address
         public async Task ConnectHostNameAndPort_CancelDuringConnect_Throws()
         {
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 var cts = new CancellationTokenSource();
 
                 ValueTask t = client.ConnectAsync("1.2.3.4", 1, cts.Token);

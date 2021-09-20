@@ -15,7 +15,10 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(attribute));
             }
 
-            attribute.Metadata.TryGetValue(TagHelperMetadata.Common.PropertyName, out var propertyName);
+            attribute.Metadata.TryGetValue(
+                TagHelperMetadata.Common.PropertyName,
+                out var propertyName
+            );
             return propertyName;
         }
 
@@ -26,28 +29,42 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(attribute));
             }
 
-            return string.Equals(attribute.Kind, TagHelperConventions.DefaultKind, StringComparison.Ordinal);
+            return string.Equals(
+                attribute.Kind,
+                TagHelperConventions.DefaultKind,
+                StringComparison.Ordinal
+            );
         }
 
-        internal static bool ExpectsStringValue(this BoundAttributeDescriptor attribute, string name)
-        {
+        internal static bool ExpectsStringValue(
+            this BoundAttributeDescriptor attribute,
+            string name
+        ) {
             if (attribute.IsStringProperty)
             {
                 return true;
             }
 
-            var isIndexerNameMatch = TagHelperMatchingConventions.SatisfiesBoundAttributeIndexer(name, attribute);
+            var isIndexerNameMatch = TagHelperMatchingConventions.SatisfiesBoundAttributeIndexer(
+                name,
+                attribute
+            );
             return isIndexerNameMatch && attribute.IsIndexerStringProperty;
         }
 
-        internal static bool ExpectsBooleanValue(this BoundAttributeDescriptor attribute, string name)
-        {
+        internal static bool ExpectsBooleanValue(
+            this BoundAttributeDescriptor attribute,
+            string name
+        ) {
             if (attribute.IsBooleanProperty)
             {
                 return true;
             }
 
-            var isIndexerNameMatch = TagHelperMatchingConventions.SatisfiesBoundAttributeIndexer(name, attribute);
+            var isIndexerNameMatch = TagHelperMatchingConventions.SatisfiesBoundAttributeIndexer(
+                name,
+                attribute
+            );
             return isIndexerNameMatch && attribute.IsIndexerBooleanProperty;
         }
 
@@ -58,9 +75,10 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(attribute));
             }
 
-            return
-                attribute.Metadata.TryGetValue(ComponentMetadata.Common.DirectiveAttribute, out var value) &&
-                string.Equals(bool.TrueString, value);
+            return attribute.Metadata.TryGetValue(
+                    ComponentMetadata.Common.DirectiveAttribute,
+                    out var value
+                ) && string.Equals(bool.TrueString, value);
         }
 
         public static bool IsDefaultKind(this BoundAttributeParameterDescriptor parameter)
@@ -70,7 +88,11 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(parameter));
             }
 
-            return string.Equals(parameter.Kind, TagHelperConventions.DefaultKind, StringComparison.Ordinal);
+            return string.Equals(
+                parameter.Kind,
+                TagHelperConventions.DefaultKind,
+                StringComparison.Ordinal
+            );
         }
 
         public static string GetPropertyName(this BoundAttributeParameterDescriptor parameter)
@@ -80,7 +102,10 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(parameter));
             }
 
-            parameter.Metadata.TryGetValue(TagHelperMetadata.Common.PropertyName, out var propertyName);
+            parameter.Metadata.TryGetValue(
+                TagHelperMetadata.Common.PropertyName,
+                out var propertyName
+            );
             return propertyName;
         }
     }

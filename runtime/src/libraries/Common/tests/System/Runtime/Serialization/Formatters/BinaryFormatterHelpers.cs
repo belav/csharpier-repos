@@ -11,12 +11,13 @@ namespace System.Runtime.Serialization.Formatters.Tests
 {
     public static class BinaryFormatterHelpers
     {
-        internal static T Clone<T>(T obj,
+        internal static T Clone<T>(
+            T obj,
             ISerializationSurrogate surrogate = null,
             FormatterAssemblyStyle assemblyFormat = FormatterAssemblyStyle.Full,
             TypeFilterLevel filterLevel = TypeFilterLevel.Full,
-            FormatterTypeStyle typeFormat = FormatterTypeStyle.TypesAlways)
-        {
+            FormatterTypeStyle typeFormat = FormatterTypeStyle.TypesAlways
+        ) {
             BinaryFormatter f;
             if (surrogate == null)
             {
@@ -76,12 +77,16 @@ namespace System.Runtime.Serialization.Formatters.Tests
             foreach (ConstructorInfo c in exceptionType.GetTypeInfo().DeclaredConstructors)
             {
                 ParameterInfo[] parameters = c.GetParameters();
-                if (parameters.Length == 2 && parameters[0].ParameterType == typeof(SerializationInfo) && parameters[1].ParameterType == typeof(StreamingContext))
-                {
+                if (
+                    parameters.Length == 2
+                    && parameters[0].ParameterType == typeof(SerializationInfo)
+                    && parameters[1].ParameterType == typeof(StreamingContext)
+                ) {
                     constructor = c;
                     break;
                 }
-            };
+            }
+            ;
 
             // .NET Native prevents reflection on private constructors on non-serializable types.
             if (constructor == null)
@@ -89,13 +94,16 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 return;
             }
 
-            Exception ex = Assert.Throws<TargetInvocationException>(() => constructor.Invoke(new object[] { info, new StreamingContext() }));
+            Exception ex = Assert.Throws<TargetInvocationException>(
+                () => constructor.Invoke(new object[] { info, new StreamingContext() })
+            );
             Assert.IsType<PlatformNotSupportedException>(ex.InnerException);
         }
 
-        public static byte[] ToByteArray(object obj,
-            FormatterAssemblyStyle assemblyStyle = FormatterAssemblyStyle.Full)
-        {
+        public static byte[] ToByteArray(
+            object obj,
+            FormatterAssemblyStyle assemblyStyle = FormatterAssemblyStyle.Full
+        ) {
             BinaryFormatter bf = new BinaryFormatter();
             bf.AssemblyFormat = assemblyStyle;
             using (MemoryStream ms = new MemoryStream())
@@ -105,16 +113,18 @@ namespace System.Runtime.Serialization.Formatters.Tests
             }
         }
 
-        public static string ToBase64String(object obj,
-            FormatterAssemblyStyle assemblyStyle = FormatterAssemblyStyle.Full)
-        {
+        public static string ToBase64String(
+            object obj,
+            FormatterAssemblyStyle assemblyStyle = FormatterAssemblyStyle.Full
+        ) {
             byte[] raw = ToByteArray(obj, assemblyStyle);
             return Convert.ToBase64String(raw);
         }
 
-        public static object FromByteArray(byte[] raw,
-            FormatterAssemblyStyle assemblyStyle = FormatterAssemblyStyle.Full)
-        {
+        public static object FromByteArray(
+            byte[] raw,
+            FormatterAssemblyStyle assemblyStyle = FormatterAssemblyStyle.Full
+        ) {
             var binaryFormatter = new BinaryFormatter();
             binaryFormatter.AssemblyFormat = assemblyStyle;
             using (var serializedStream = new MemoryStream(raw))
@@ -123,9 +133,10 @@ namespace System.Runtime.Serialization.Formatters.Tests
             }
         }
 
-        public static object FromBase64String(string base64Str,
-            FormatterAssemblyStyle assemblyStyle = FormatterAssemblyStyle.Full)
-        {
+        public static object FromBase64String(
+            string base64Str,
+            FormatterAssemblyStyle assemblyStyle = FormatterAssemblyStyle.Full
+        ) {
             byte[] raw = Convert.FromBase64String(base64Str);
             return FromByteArray(raw, assemblyStyle);
         }

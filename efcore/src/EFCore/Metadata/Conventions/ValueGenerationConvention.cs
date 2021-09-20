@@ -13,13 +13,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///     A convention that configures store value generation as <see cref="ValueGenerated.OnAdd" /> on properties that are
     ///     part of the primary key and not part of any foreign keys.
     /// </summary>
-    public class ValueGenerationConvention :
-        IEntityTypePrimaryKeyChangedConvention,
-        IForeignKeyAddedConvention,
-        IForeignKeyRemovedConvention,
-        IForeignKeyPropertiesChangedConvention,
-        IEntityTypeBaseTypeChangedConvention,
-        IForeignKeyOwnershipChangedConvention
+    public class ValueGenerationConvention
+        : IEntityTypePrimaryKeyChangedConvention,
+          IForeignKeyAddedConvention,
+          IForeignKeyRemovedConvention,
+          IForeignKeyPropertiesChangedConvention,
+          IEntityTypeBaseTypeChangedConvention,
+          IForeignKeyOwnershipChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="ValueGenerationConvention" />.
@@ -42,8 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context"> Additional information associated with convention execution. </param>
         public virtual void ProcessForeignKeyAdded(
             IConventionForeignKeyBuilder relationshipBuilder,
-            IConventionContext<IConventionForeignKeyBuilder> context)
-        {
+            IConventionContext<IConventionForeignKeyBuilder> context
+        ) {
             var foreignKey = relationshipBuilder.Metadata;
             if (!foreignKey.IsBaseLinking())
             {
@@ -63,8 +63,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessForeignKeyRemoved(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionForeignKey foreignKey,
-            IConventionContext<IConventionForeignKey> context)
-        {
+            IConventionContext<IConventionForeignKey> context
+        ) {
             OnForeignKeyRemoved(foreignKey.Properties);
         }
 
@@ -79,15 +79,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionForeignKeyBuilder relationshipBuilder,
             IReadOnlyList<IConventionProperty> oldDependentProperties,
             IConventionKey oldPrincipalKey,
-            IConventionContext<IReadOnlyList<IConventionProperty>> context)
-        {
+            IConventionContext<IReadOnlyList<IConventionProperty>> context
+        ) {
             var foreignKey = relationshipBuilder.Metadata;
             if (!foreignKey.Properties.SequenceEqual(oldDependentProperties))
             {
                 OnForeignKeyRemoved(oldDependentProperties);
 
-                if (relationshipBuilder.Metadata.IsInModel
-                    && !foreignKey.IsBaseLinking())
+                if (relationshipBuilder.Metadata.IsInModel && !foreignKey.IsBaseLinking())
                 {
                     foreach (var property in foreignKey.Properties)
                     {
@@ -130,8 +129,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionKey? newPrimaryKey,
             IConventionKey? previousPrimaryKey,
-            IConventionContext<IConventionKey> context)
-        {
+            IConventionContext<IConventionKey> context
+        ) {
             if (previousPrimaryKey != null)
             {
                 foreach (var property in previousPrimaryKey.Properties)
@@ -163,8 +162,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionEntityType? newBaseType,
             IConventionEntityType? oldBaseType,
-            IConventionContext<IConventionEntityType> context)
-        {
+            IConventionContext<IConventionEntityType> context
+        ) {
             if (entityTypeBuilder.Metadata.BaseType != newBaseType)
             {
                 return;
@@ -181,26 +180,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The store value generation strategy to set for the given property. </returns>
-        protected virtual ValueGenerated? GetValueGenerated(IConventionProperty property)
-            => GetValueGenerated((IReadOnlyProperty)property);
+        protected virtual ValueGenerated? GetValueGenerated(IConventionProperty property) =>
+            GetValueGenerated((IReadOnlyProperty)property);
 
         /// <summary>
         ///     Returns the store value generation strategy to set for the given property.
         /// </summary>
         /// <param name="property"> The property. </param>
         /// <returns> The store value generation strategy to set for the given property. </returns>
-        public static ValueGenerated? GetValueGenerated(IReadOnlyProperty property)
-            => !property.GetContainingForeignKeys().Any(fk => !fk.IsBaseLinking())
-                && ShouldHaveGeneratedProperty(property.FindContainingPrimaryKey())
-                && CanBeGenerated(property)
-                    ? ValueGenerated.OnAdd
-                    : (ValueGenerated?)null;
+        public static ValueGenerated? GetValueGenerated(IReadOnlyProperty property) =>
+            !property.GetContainingForeignKeys().Any(fk => !fk.IsBaseLinking())
+            && ShouldHaveGeneratedProperty(property.FindContainingPrimaryKey())
+            && CanBeGenerated(property)
+                ? ValueGenerated.OnAdd
+                : (ValueGenerated?)null;
 
-        private static bool ShouldHaveGeneratedProperty(IReadOnlyKey? key)
-            => key != null
-                && key.DeclaringEntityType.IsOwned() is var onOwnedType
-                && (onOwnedType && key.Properties.Count(p => !p.IsForeignKey()) == 1
-                    || !onOwnedType && key.Properties.Count == 1);
+        private static bool ShouldHaveGeneratedProperty(IReadOnlyKey? key) =>
+            key != null
+            && key.DeclaringEntityType.IsOwned() is var onOwnedType
+            && (
+                onOwnedType && key.Properties.Count(p => !p.IsForeignKey()) == 1
+                || !onOwnedType && key.Properties.Count == 1
+            );
 
         /// <summary>
         ///     Indicates whether the specified property can have the value generated by the store or by a non-temporary value generator
@@ -211,8 +212,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private static bool CanBeGenerated(IReadOnlyProperty property)
         {
             var propertyType = property.ClrType.UnwrapNullableType();
-            return (propertyType.IsInteger()
-                    && propertyType != typeof(byte))
+            return (propertyType.IsInteger() && propertyType != typeof(byte))
                 || propertyType == typeof(Guid);
         }
 
@@ -223,10 +223,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context"> Additional information associated with convention execution. </param>
         public virtual void ProcessForeignKeyOwnershipChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
-            IConventionContext<bool?> context)
-        {
-            foreach (var property in relationshipBuilder.Metadata.DeclaringEntityType.GetProperties())
-            {
+            IConventionContext<bool?> context
+        ) {
+            foreach (
+                var property in relationshipBuilder.Metadata.DeclaringEntityType.GetProperties()
+            ) {
                 property.Builder.ValueGenerated(GetValueGenerated(property));
             }
         }

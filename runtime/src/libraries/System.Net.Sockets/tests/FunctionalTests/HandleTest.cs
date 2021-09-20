@@ -10,8 +10,9 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public static void ValidHandle_NotNegativeOne()
         {
-            using (var s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
+            using (
+                var s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)
+            ) {
                 Assert.NotEqual((IntPtr)(-1), s.Handle);
             }
         }
@@ -19,8 +20,9 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public static void ValidHandle_NotZero()
         {
-            using (var s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
-            {
+            using (
+                var s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)
+            ) {
                 Assert.NotEqual(IntPtr.Zero, s.Handle);
             }
         }

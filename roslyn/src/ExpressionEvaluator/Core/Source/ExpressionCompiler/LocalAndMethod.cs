@@ -19,8 +19,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         public readonly string MethodName;
         public readonly DkmClrCompilationResultFlags Flags;
 
-        public LocalAndMethod(string localName, string localDisplayName, string methodName, DkmClrCompilationResultFlags flags)
-        {
+        public LocalAndMethod(
+            string localName,
+            string localDisplayName,
+            string methodName,
+            DkmClrCompilationResultFlags flags
+        ) {
             this.LocalName = localName;
             this.LocalDisplayName = localDisplayName;
             this.MethodName = methodName;

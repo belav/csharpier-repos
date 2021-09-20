@@ -44,8 +44,10 @@ namespace System.Linq
             }
         }
 
-        public static bool Any<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
-        {
+        public static bool Any<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, bool> predicate
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -67,8 +69,10 @@ namespace System.Linq
             return false;
         }
 
-        public static bool All<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
-        {
+        public static bool All<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, bool> predicate
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);

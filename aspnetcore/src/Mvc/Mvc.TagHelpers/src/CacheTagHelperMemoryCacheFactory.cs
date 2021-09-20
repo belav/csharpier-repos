@@ -18,10 +18,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         /// <param name="options">The <see cref="CacheTagHelperOptions"/> to apply to the <see cref="Cache"/>.</param>
         public CacheTagHelperMemoryCacheFactory(IOptions<CacheTagHelperOptions> options)
         {
-            Cache = new MemoryCache(new MemoryCacheOptions
-            {
-                SizeLimit = options.Value.SizeLimit
-            });
+            Cache = new MemoryCache(new MemoryCacheOptions { SizeLimit = options.Value.SizeLimit });
         }
 
         // For testing only.

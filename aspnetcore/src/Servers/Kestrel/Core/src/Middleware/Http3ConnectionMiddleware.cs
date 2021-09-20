@@ -16,8 +16,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
         private readonly ServiceContext _serviceContext;
         private readonly IHttpApplication<TContext> _application;
 
-        public Http3ConnectionMiddleware(ServiceContext serviceContext, IHttpApplication<TContext> application)
-        {
+        public Http3ConnectionMiddleware(
+            ServiceContext serviceContext,
+            IHttpApplication<TContext> application
+        ) {
             _serviceContext = serviceContext;
             _application = application;
         }
@@ -33,7 +35,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
                 connectionContext.Features,
                 memoryPoolFeature?.MemoryPool ?? System.Buffers.MemoryPool<byte>.Shared,
                 connectionContext.LocalEndPoint as IPEndPoint,
-                connectionContext.RemoteEndPoint as IPEndPoint);
+                connectionContext.RemoteEndPoint as IPEndPoint
+            );
 
             var connection = new Http3Connection(http3ConnectionContext);
 

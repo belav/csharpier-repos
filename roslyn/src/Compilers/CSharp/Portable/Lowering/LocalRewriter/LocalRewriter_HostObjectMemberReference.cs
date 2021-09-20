@@ -8,8 +8,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal partial class LocalRewriter
     {
-        public override BoundNode VisitHostObjectMemberReference(BoundHostObjectMemberReference node)
-        {
+        public override BoundNode VisitHostObjectMemberReference(
+            BoundHostObjectMemberReference node
+        ) {
             Debug.Assert(_previousSubmissionFields != null);
             Debug.Assert(_factory.TopLevelMethod is { IsStatic: false });
             Debug.Assert(_factory.CurrentType is { });
@@ -17,7 +18,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             var syntax = node.Syntax;
             var hostObjectReference = _previousSubmissionFields.GetHostObjectField();
             var thisReference = new BoundThisReference(syntax, _factory.CurrentType);
-            return new BoundFieldAccess(syntax, thisReference, hostObjectReference, constantValueOpt: null);
+            return new BoundFieldAccess(
+                syntax,
+                thisReference,
+                hostObjectReference,
+                constantValueOpt: null
+            );
         }
     }
 }

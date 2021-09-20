@@ -14,8 +14,7 @@ namespace System.Reflection.TypeLoading
         private readonly bool _multiDim;
         private readonly int _rank;
 
-        internal RoArrayType(RoType elementType, bool multiDim, int rank)
-            : base(elementType)
+        internal RoArrayType(RoType elementType, bool multiDim, int rank) : base(elementType)
         {
             Debug.Assert(elementType != null);
             Debug.Assert(multiDim || rank == 1);
@@ -34,7 +33,8 @@ namespace System.Reflection.TypeLoading
 
         public sealed override int GetArrayRank() => _rank;
 
-        protected sealed override RoType? ComputeBaseTypeWithoutDesktopQuirk() => Loader.GetCoreType(CoreType.Array);
+        protected sealed override RoType? ComputeBaseTypeWithoutDesktopQuirk() =>
+            Loader.GetCoreType(CoreType.Array);
 
         protected sealed override IEnumerable<RoType> ComputeDirectlyImplementedInterfaces()
         {
@@ -50,9 +50,13 @@ namespace System.Reflection.TypeLoading
                     // All of our types are from a fixed list so we know they're supposed be generic interfaces taking one type parameter.
                     // But since we're loading them from a core assembly that the user supplied us, we should verify and skip if
                     // this is not the case.
-                    if (ifc is RoDefinitionType roDefinitionType && roDefinitionType.GetGenericParameterCount() == 1)
-                    {
-                        yield return roDefinitionType.GetUniqueConstructedGenericType(typeArguments);
+                    if (
+                        ifc is RoDefinitionType roDefinitionType
+                        && roDefinitionType.GetGenericParameterCount() == 1
+                    ) {
+                        yield return roDefinitionType.GetUniqueConstructedGenericType(
+                            typeArguments
+                        );
                     }
                 }
             }
@@ -66,10 +70,17 @@ namespace System.Reflection.TypeLoading
             CoreType.IReadOnlyListT,
         };
 
-        protected sealed override TypeAttributes ComputeAttributeFlags() => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.Sealed | TypeAttributes.Serializable;
+        protected sealed override TypeAttributes ComputeAttributeFlags() =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.Public
+            | TypeAttributes.Sealed
+            | TypeAttributes.Serializable;
 
-        internal sealed override IEnumerable<ConstructorInfo> GetConstructorsCore(NameFilter? filter)
-        {
+        internal sealed override IEnumerable<ConstructorInfo> GetConstructorsCore(
+            NameFilter? filter
+        ) {
             if (filter == null || filter.Matches(ConstructorInfo.ConstructorName))
             {
                 int rank = _rank;
@@ -147,8 +158,10 @@ namespace System.Reflection.TypeLoading
             }
         }
 
-        internal sealed override IEnumerable<MethodInfo> GetMethodsCore(NameFilter? filter, Type reflectedType)
-        {
+        internal sealed override IEnumerable<MethodInfo> GetMethodsCore(
+            NameFilter? filter,
+            Type reflectedType
+        ) {
             int rank = _rank;
 
             int uniquifier = 0;
@@ -163,7 +176,13 @@ namespace System.Reflection.TypeLoading
                 {
                     getParameters[i] = systemInt32;
                 }
-                yield return new RoSyntheticMethod(this, uniquifier++, "Get", elementType, getParameters);
+                yield return new RoSyntheticMethod(
+                    this,
+                    uniquifier++,
+                    "Get",
+                    elementType,
+                    getParameters
+                );
             }
 
             if (filter == null || filter.Matches("Set"))
@@ -174,7 +193,13 @@ namespace System.Reflection.TypeLoading
                     setParameters[i] = systemInt32;
                 }
                 setParameters[rank] = elementType;
-                yield return new RoSyntheticMethod(this, uniquifier++, "Set", systemVoid, setParameters);
+                yield return new RoSyntheticMethod(
+                    this,
+                    uniquifier++,
+                    "Set",
+                    systemVoid,
+                    setParameters
+                );
             }
 
             if (filter == null || filter.Matches("Address"))
@@ -184,7 +209,13 @@ namespace System.Reflection.TypeLoading
                 {
                     addressParameters[i] = systemInt32;
                 }
-                yield return new RoSyntheticMethod(this, uniquifier++, "Address", elementType.GetUniqueByRefType(), addressParameters);
+                yield return new RoSyntheticMethod(
+                    this,
+                    uniquifier++,
+                    "Address",
+                    elementType.GetUniqueByRefType(),
+                    addressParameters
+                );
             }
         }
     }

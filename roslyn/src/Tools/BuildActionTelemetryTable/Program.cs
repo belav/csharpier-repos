@@ -17,7 +17,9 @@ namespace BuildActionTelemetryTable
 {
     public class Program
     {
-        private static readonly string s_executingPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        private static readonly string s_executingPath = Path.GetDirectoryName(
+            Assembly.GetExecutingAssembly().Location
+        );
 
         public static void Main(string[] args)
         {
@@ -26,7 +28,9 @@ namespace BuildActionTelemetryTable
             var assemblies = GetAssemblies(args);
             var codeActionTypes = GetCodeActionTypes(assemblies);
 
-            Console.WriteLine($"Generating Kusto datatable of {codeActionTypes.Length} CodeAction hashes ...");
+            Console.WriteLine(
+                $"Generating Kusto datatable of {codeActionTypes.Length} CodeAction hashes ..."
+            );
 
             var telemetryInfos = GetTelemetryInfos(codeActionTypes);
             var datatable = GenerateKustoDatatable(telemetryInfos);
@@ -50,17 +54,20 @@ namespace BuildActionTelemetryTable
             }
 
             var currentDirectory = new Uri(Environment.CurrentDirectory + "\\");
-            return paths.Select(path =>
-            {
-                Console.WriteLine($"Loading assembly from {GetRelativePath(path, currentDirectory)}.");
-                return Assembly.LoadFrom(path);
-            }).ToImmutableArray();
+            return paths.Select(
+                    path =>
+                    {
+                        Console.WriteLine(
+                            $"Loading assembly from {GetRelativePath(path, currentDirectory)}."
+                        );
+                        return Assembly.LoadFrom(path);
+                    }
+                )
+                .ToImmutableArray();
 
             static string GetRelativePath(string path, Uri baseUri)
             {
-                var rootedPath = Path.IsPathRooted(path)
-                    ? path
-                    : Path.GetFullPath(path);
+                var rootedPath = Path.IsPathRooted(path) ? path : Path.GetFullPath(path);
                 var relativePath = baseUri.MakeRelativeUri(new Uri(rootedPath));
                 return relativePath.ToString();
             }
@@ -69,23 +76,30 @@ namespace BuildActionTelemetryTable
         internal static ImmutableArray<Type> GetCodeActionTypes(IEnumerable<Assembly> assemblies)
         {
             var types = assemblies.SelectMany(
-                assembly => assembly.GetTypes().Where(
-                    type => !type.GetTypeInfo().IsInterface && !type.GetTypeInfo().IsAbstract));
+                assembly =>
+                    assembly.GetTypes()
+                        .Where(
+                            type =>
+                                !type.GetTypeInfo().IsInterface && !type.GetTypeInfo().IsAbstract
+                        )
+            );
 
-            return types
-                .Where(t => typeof(CodeAction).IsAssignableFrom(t))
-                .ToImmutableArray();
+            return types.Where(t => typeof(CodeAction).IsAssignableFrom(t)).ToImmutableArray();
         }
 
-        internal static ImmutableArray<TelemetryInfo> GetTelemetryInfos(ImmutableArray<Type> codeActionTypes)
-        {
-            return codeActionTypes.Select(GetTelemetryInfo)
-                .ToImmutableArray();
+        internal static ImmutableArray<TelemetryInfo> GetTelemetryInfos(
+            ImmutableArray<Type> codeActionTypes
+        ) {
+            return codeActionTypes.Select(GetTelemetryInfo).ToImmutableArray();
 
             static TelemetryInfo GetTelemetryInfo(Type type)
             {
                 var telemetryId = type.GetTelemetryId().ToString();
-                return Tuple.Create(type.FullName, telemetryId.Substring(0, 8), telemetryId.Substring(19));
+                return Tuple.Create(
+                    type.FullName,
+                    telemetryId.Substring(0, 8),
+                    telemetryId.Substring(19)
+                );
             }
         }
 
@@ -93,7 +107,9 @@ namespace BuildActionTelemetryTable
         {
             var table = new StringBuilder();
 
-            table.AppendLine("let actions = datatable(ActionName: string, StringHash: string, FnvHash: string)");
+            table.AppendLine(
+                "let actions = datatable(ActionName: string, StringHash: string, FnvHash: string)"
+            );
             table.AppendLine("[");
 
             foreach (var (actionTypeName, stringHash, fnvHash) in telemetryInfos)

@@ -32,7 +32,8 @@ namespace System.Reflection.Emit
             PropertyAttributes attr, // property attribute such as DefaultProperty, Bindable, DisplayBind, etc
             Type returnType, // return type of the property.
             int prToken, // the metadata token for this property
-            TypeBuilder containingType) // the containing type
+            TypeBuilder containingType
+        ) // the containing type
         {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
@@ -56,13 +57,8 @@ namespace System.Reflection.Emit
         {
             m_containingType.ThrowIfCreated();
 
-            TypeBuilder.SetConstantValue(
-                m_moduleBuilder,
-                m_tkProperty,
-                m_returnType,
-                defaultValue);
+            TypeBuilder.SetConstantValue(m_moduleBuilder, m_tkProperty, m_returnType, defaultValue);
         }
-
 
         // Return the Token for this property within the TypeBuilder that the
         // property is defined within.
@@ -70,8 +66,10 @@ namespace System.Reflection.Emit
 
         public override Module Module => m_containingType.Module;
 
-        private void SetMethodSemantics(MethodBuilder mdBuilder, MethodSemanticsAttributes semantics)
-        {
+        private void SetMethodSemantics(
+            MethodBuilder mdBuilder,
+            MethodSemanticsAttributes semantics
+        ) {
             if (mdBuilder == null)
             {
                 throw new ArgumentNullException(nameof(mdBuilder));
@@ -83,7 +81,8 @@ namespace System.Reflection.Emit
                 new QCallModule(ref module),
                 m_tkProperty,
                 semantics,
-                mdBuilder.MetadataToken);
+                mdBuilder.MetadataToken
+            );
         }
 
         public void SetGetMethod(MethodBuilder mdBuilder)
@@ -117,7 +116,8 @@ namespace System.Reflection.Emit
                 m_moduleBuilder,
                 m_tkProperty,
                 m_moduleBuilder.GetConstructorToken(con),
-                binaryAttribute);
+                binaryAttribute
+            );
         }
 
         // Use this function if client wishes to build CustomAttribute using CustomAttributeBuilder
@@ -137,8 +137,13 @@ namespace System.Reflection.Emit
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
 
-        public override object GetValue(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture)
-        {
+        public override object GetValue(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            CultureInfo? culture
+        ) {
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
 
@@ -147,8 +152,14 @@ namespace System.Reflection.Emit
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
 
-        public override void SetValue(object? obj, object? value, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture)
-        {
+        public override void SetValue(
+            object? obj,
+            object? value,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            CultureInfo? culture
+        ) {
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
 
@@ -188,12 +199,24 @@ namespace System.Reflection.Emit
 
         public override bool CanRead
         {
-            get { if (m_getMethod != null) return true; else return false; }
+            get
+            {
+                if (m_getMethod != null)
+                    return true;
+                else
+                    return false;
+            }
         }
 
         public override bool CanWrite
         {
-            get { if (m_setMethod != null) return true; else return false; }
+            get
+            {
+                if (m_setMethod != null)
+                    return true;
+                else
+                    return false;
+            }
         }
 
         public override object[] GetCustomAttributes(bool inherit)

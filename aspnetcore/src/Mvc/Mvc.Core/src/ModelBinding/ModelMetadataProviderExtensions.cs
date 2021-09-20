@@ -24,8 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public static ModelMetadata GetMetadataForProperty(
             this IModelMetadataProvider provider,
             Type containerType,
-            string propertyName)
-        {
+            string propertyName
+        ) {
             if (provider == null)
             {
                 throw new ArgumentNullException(nameof(provider));

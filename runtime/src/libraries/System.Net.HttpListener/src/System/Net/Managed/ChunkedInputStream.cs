@@ -56,8 +56,13 @@ namespace System.Net
             }
         }
 
-        public ChunkedInputStream(HttpListenerContext context, Stream stream, byte[] buffer, int offset, int length)
-                    : base(stream, buffer, offset, length)
+        public ChunkedInputStream(
+            HttpListenerContext context,
+            Stream stream,
+            byte[] buffer,
+            int offset,
+            int length
+        ) : base(stream, buffer, offset, length)
         {
             _context = context;
             WebHeaderCollection coll = (WebHeaderCollection)context.Request.Headers;
@@ -76,8 +81,13 @@ namespace System.Net
             return EndRead(ares);
         }
 
-        protected override IAsyncResult BeginReadCore(byte[] buffer, int offset, int size, AsyncCallback? cback, object? state)
-        {
+        protected override IAsyncResult BeginReadCore(
+            byte[] buffer,
+            int offset,
+            int size,
+            AsyncCallback? cback,
+            object? state
+        ) {
             HttpStreamAsyncResult ares = new HttpStreamAsyncResult(this);
             ares._callback = cback;
             ares._state = state;
@@ -161,7 +171,9 @@ namespace System.Net
             }
             if (ares._endCalled)
             {
-                throw new InvalidOperationException(SR.Format(SR.net_io_invalidendcall, nameof(EndRead)));
+                throw new InvalidOperationException(
+                    SR.Format(SR.net_io_invalidendcall, nameof(EndRead))
+                );
             }
             ares._endCalled = true;
 
@@ -169,7 +181,10 @@ namespace System.Net
                 asyncResult.AsyncWaitHandle.WaitOne();
 
             if (ares._error != null)
-                throw new HttpListenerException((int)HttpStatusCode.BadRequest, SR.Format(SR.net_io_operation_aborted, ares._error.Message));
+                throw new HttpListenerException(
+                    (int)HttpStatusCode.BadRequest,
+                    SR.Format(SR.net_io_operation_aborted, ares._error.Message)
+                );
 
             return ares._count;
         }

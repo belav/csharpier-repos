@@ -15,8 +15,14 @@ namespace Microsoft.CodeAnalysis.Operations
     /// </summary>
     internal sealed class NoneOperation : Operation
     {
-        public NoneOperation(ImmutableArray<IOperation> children, SemanticModel? semanticModel, SyntaxNode syntax, ITypeSymbol? type, ConstantValue? constantValue, bool isImplicit) :
-            base(semanticModel, syntax, isImplicit)
+        public NoneOperation(
+            ImmutableArray<IOperation> children,
+            SemanticModel? semanticModel,
+            SyntaxNode syntax,
+            ITypeSymbol? type,
+            ConstantValue? constantValue,
+            bool isImplicit
+        ) : base(semanticModel, syntax, isImplicit)
         {
             Children = SetParentOperation(children, this);
             Type = type;
@@ -25,21 +31,24 @@ namespace Microsoft.CodeAnalysis.Operations
 
         internal ImmutableArray<IOperation> Children { get; }
 
-        protected override IOperation GetCurrent(int slot, int index)
-            => slot switch
+        protected override IOperation GetCurrent(int slot, int index) =>
+            slot switch
             {
-                0 when index < Children.Length
-                    => Children[index],
+                0 when index < Children.Length => Children[index],
                 _ => throw ExceptionUtilities.UnexpectedValue((slot, index))
             };
 
-        protected override (bool hasNext, int nextSlot, int nextIndex) MoveNext(int previousSlot, int previousIndex)
-        {
+        protected override (bool hasNext, int nextSlot, int nextIndex) MoveNext(
+            int previousSlot,
+            int previousIndex
+        ) {
             switch (previousSlot)
             {
                 case -1:
-                    if (!Children.IsEmpty) return (true, 0, 0);
-                    else goto case 0;
+                    if (!Children.IsEmpty)
+                        return (true, 0, 0);
+                    else
+                        goto case 0;
                 case 0 when previousIndex + 1 < Children.Length:
                     return (true, 0, previousIndex + 1);
                 case 0:
@@ -59,7 +68,10 @@ namespace Microsoft.CodeAnalysis.Operations
             visitor.VisitNoneOperation(this);
         }
 
-        public override TResult? Accept<TArgument, TResult>(OperationVisitor<TArgument, TResult> visitor, TArgument argument) where TResult : default
+        public override TResult? Accept<TArgument, TResult>(
+            OperationVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        ) where TResult : default
         {
             return visitor.VisitNoneOperation(this, argument);
         }
@@ -72,8 +84,14 @@ namespace Microsoft.CodeAnalysis.Operations
 
     internal sealed partial class InvalidOperation : Operation, IInvalidOperation
     {
-        public InvalidOperation(ImmutableArray<IOperation> children, SemanticModel? semanticModel, SyntaxNode syntax, ITypeSymbol? type, ConstantValue? constantValue, bool isImplicit) :
-            base(semanticModel, syntax, isImplicit)
+        public InvalidOperation(
+            ImmutableArray<IOperation> children,
+            SemanticModel? semanticModel,
+            SyntaxNode syntax,
+            ITypeSymbol? type,
+            ConstantValue? constantValue,
+            bool isImplicit
+        ) : base(semanticModel, syntax, isImplicit)
         {
             // we don't allow null children.
             Debug.Assert(children.All(o => o != null));
@@ -84,21 +102,24 @@ namespace Microsoft.CodeAnalysis.Operations
 
         internal ImmutableArray<IOperation> Children { get; }
 
-        protected override IOperation GetCurrent(int slot, int index)
-            => slot switch
+        protected override IOperation GetCurrent(int slot, int index) =>
+            slot switch
             {
-                0 when index < Children.Length
-                    => Children[index],
+                0 when index < Children.Length => Children[index],
                 _ => throw ExceptionUtilities.UnexpectedValue((slot, index))
             };
 
-        protected override (bool hasNext, int nextSlot, int nextIndex) MoveNext(int previousSlot, int previousIndex)
-        {
+        protected override (bool hasNext, int nextSlot, int nextIndex) MoveNext(
+            int previousSlot,
+            int previousIndex
+        ) {
             switch (previousSlot)
             {
                 case -1:
-                    if (!Children.IsEmpty) return (true, 0, 0);
-                    else goto case 0;
+                    if (!Children.IsEmpty)
+                        return (true, 0, 0);
+                    else
+                        goto case 0;
                 case 0 when previousIndex + 1 < Children.Length:
                     return (true, 0, previousIndex + 1);
                 case 0:
@@ -118,27 +139,39 @@ namespace Microsoft.CodeAnalysis.Operations
             visitor.VisitInvalid(this);
         }
 
-        public override TResult? Accept<TArgument, TResult>(OperationVisitor<TArgument, TResult> visitor, TArgument argument) where TResult : default
+        public override TResult? Accept<TArgument, TResult>(
+            OperationVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        ) where TResult : default
         {
             return visitor.VisitInvalid(this, argument);
         }
     }
 
-    internal sealed class FlowAnonymousFunctionOperation : Operation, IFlowAnonymousFunctionOperation
+    internal sealed class FlowAnonymousFunctionOperation
+        : Operation,
+          IFlowAnonymousFunctionOperation
     {
         public readonly ControlFlowGraphBuilder.Context Context;
         public readonly IAnonymousFunctionOperation Original;
 
-        public FlowAnonymousFunctionOperation(in ControlFlowGraphBuilder.Context context, IAnonymousFunctionOperation original, bool isImplicit) :
-            base(semanticModel: null, original.Syntax, isImplicit)
+        public FlowAnonymousFunctionOperation(
+            in ControlFlowGraphBuilder.Context context,
+            IAnonymousFunctionOperation original,
+            bool isImplicit
+        ) : base(semanticModel: null, original.Syntax, isImplicit)
         {
             Context = context;
             Original = original;
         }
         public IMethodSymbol Symbol => Original.Symbol;
 
-        protected override IOperation GetCurrent(int slot, int index) => throw ExceptionUtilities.UnexpectedValue((slot, index));
-        protected override (bool hasNext, int nextSlot, int nextIndex) MoveNext(int previousSlot, int previousIndex) => (false, int.MinValue, int.MinValue);
+        protected override IOperation GetCurrent(int slot, int index) =>
+            throw ExceptionUtilities.UnexpectedValue((slot, index));
+        protected override (bool hasNext, int nextSlot, int nextIndex) MoveNext(
+            int previousSlot,
+            int previousIndex
+        ) => (false, int.MinValue, int.MinValue);
 
         public override OperationKind Kind => OperationKind.FlowAnonymousFunction;
         public override ITypeSymbol? Type => null;
@@ -148,7 +181,10 @@ namespace Microsoft.CodeAnalysis.Operations
         {
             visitor.VisitFlowAnonymousFunction(this);
         }
-        public override TResult? Accept<TArgument, TResult>(OperationVisitor<TArgument, TResult> visitor, TArgument argument) where TResult : default
+        public override TResult? Accept<TArgument, TResult>(
+            OperationVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        ) where TResult : default
         {
             return visitor.VisitFlowAnonymousFunction(this, argument);
         }
@@ -206,8 +242,15 @@ namespace Microsoft.CodeAnalysis.Operations
 
     internal abstract partial class HasDynamicArgumentsExpression : Operation
     {
-        protected HasDynamicArgumentsExpression(ImmutableArray<IOperation> arguments, ImmutableArray<string> argumentNames, ImmutableArray<RefKind> argumentRefKinds, SemanticModel? semanticModel, SyntaxNode syntax, ITypeSymbol? type, bool isImplicit) :
-            base(semanticModel, syntax, isImplicit)
+        protected HasDynamicArgumentsExpression(
+            ImmutableArray<IOperation> arguments,
+            ImmutableArray<string> argumentNames,
+            ImmutableArray<RefKind> argumentRefKinds,
+            SemanticModel? semanticModel,
+            SyntaxNode syntax,
+            ITypeSymbol? type,
+            bool isImplicit
+        ) : base(semanticModel, syntax, isImplicit)
         {
             Arguments = SetParentOperation(arguments, this);
             ArgumentNames = argumentNames;
@@ -221,11 +264,28 @@ namespace Microsoft.CodeAnalysis.Operations
         public override ITypeSymbol? Type { get; }
     }
 
-    internal sealed partial class DynamicObjectCreationOperation : HasDynamicArgumentsExpression, IDynamicObjectCreationOperation
+    internal sealed partial class DynamicObjectCreationOperation
+        : HasDynamicArgumentsExpression,
+          IDynamicObjectCreationOperation
     {
-        public DynamicObjectCreationOperation(IObjectOrCollectionInitializerOperation? initializer, ImmutableArray<IOperation> arguments, ImmutableArray<string> argumentNames, ImmutableArray<RefKind> argumentRefKinds, SemanticModel? semanticModel, SyntaxNode syntax, ITypeSymbol? type, bool isImplicit) :
-            base(arguments, argumentNames, argumentRefKinds, semanticModel, syntax, type, isImplicit)
-        {
+        public DynamicObjectCreationOperation(
+            IObjectOrCollectionInitializerOperation? initializer,
+            ImmutableArray<IOperation> arguments,
+            ImmutableArray<string> argumentNames,
+            ImmutableArray<RefKind> argumentRefKinds,
+            SemanticModel? semanticModel,
+            SyntaxNode syntax,
+            ITypeSymbol? type,
+            bool isImplicit
+        ) : base(
+            arguments,
+            argumentNames,
+            argumentRefKinds,
+            semanticModel,
+            syntax,
+            type,
+            isImplicit
+        ) {
             Initializer = SetParentOperation(initializer, this);
         }
 
@@ -233,30 +293,34 @@ namespace Microsoft.CodeAnalysis.Operations
         internal override ConstantValue? OperationConstantValue => null;
         public override OperationKind Kind => OperationKind.DynamicObjectCreation;
 
-        protected override IOperation GetCurrent(int slot, int index)
-            => slot switch
+        protected override IOperation GetCurrent(int slot, int index) =>
+            slot switch
             {
-                0 when index < Arguments.Length
-                    => Arguments[index],
-                1 when Initializer != null
-                    => Initializer,
+                0 when index < Arguments.Length => Arguments[index],
+                1 when Initializer != null => Initializer,
                 _ => throw ExceptionUtilities.UnexpectedValue((slot, index)),
             };
 
-        protected override (bool hasNext, int nextSlot, int nextIndex) MoveNext(int previousSlot, int previousIndex)
-        {
+        protected override (bool hasNext, int nextSlot, int nextIndex) MoveNext(
+            int previousSlot,
+            int previousIndex
+        ) {
             switch (previousSlot)
             {
                 case -1:
-                    if (!Arguments.IsEmpty) return (true, 0, 0);
-                    else goto case 0;
+                    if (!Arguments.IsEmpty)
+                        return (true, 0, 0);
+                    else
+                        goto case 0;
 
                 case 0 when previousIndex + 1 < Arguments.Length:
                     return (true, 0, previousIndex + 1);
 
                 case 0:
-                    if (Initializer != null) return (true, 1, 0);
-                    else goto case 1;
+                    if (Initializer != null)
+                        return (true, 1, 0);
+                    else
+                        goto case 1;
 
                 case 1:
                 case 2:
@@ -271,41 +335,65 @@ namespace Microsoft.CodeAnalysis.Operations
         {
             visitor.VisitDynamicObjectCreation(this);
         }
-        public override TResult? Accept<TArgument, TResult>(OperationVisitor<TArgument, TResult> visitor, TArgument argument) where TResult : default
+        public override TResult? Accept<TArgument, TResult>(
+            OperationVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        ) where TResult : default
         {
             return visitor.VisitDynamicObjectCreation(this, argument);
         }
     }
 
-    internal sealed partial class DynamicInvocationOperation : HasDynamicArgumentsExpression, IDynamicInvocationOperation
+    internal sealed partial class DynamicInvocationOperation
+        : HasDynamicArgumentsExpression,
+          IDynamicInvocationOperation
     {
-        public DynamicInvocationOperation(IOperation operation, ImmutableArray<IOperation> arguments, ImmutableArray<string> argumentNames, ImmutableArray<RefKind> argumentRefKinds, SemanticModel? semanticModel, SyntaxNode syntax, ITypeSymbol? type, bool isImplicit) :
-            base(arguments, argumentNames, argumentRefKinds, semanticModel, syntax, type, isImplicit)
-        {
+        public DynamicInvocationOperation(
+            IOperation operation,
+            ImmutableArray<IOperation> arguments,
+            ImmutableArray<string> argumentNames,
+            ImmutableArray<RefKind> argumentRefKinds,
+            SemanticModel? semanticModel,
+            SyntaxNode syntax,
+            ITypeSymbol? type,
+            bool isImplicit
+        ) : base(
+            arguments,
+            argumentNames,
+            argumentRefKinds,
+            semanticModel,
+            syntax,
+            type,
+            isImplicit
+        ) {
             Operation = SetParentOperation(operation, this);
         }
 
-        protected override IOperation GetCurrent(int slot, int index)
-            => slot switch
+        protected override IOperation GetCurrent(int slot, int index) =>
+            slot switch
             {
-                0 when Operation != null
-                    => Operation,
-                1 when index < Arguments.Length
-                    => Arguments[index],
+                0 when Operation != null => Operation,
+                1 when index < Arguments.Length => Arguments[index],
                 _ => throw ExceptionUtilities.UnexpectedValue((slot, index)),
             };
 
-        protected override (bool hasNext, int nextSlot, int nextIndex) MoveNext(int previousSlot, int previousIndex)
-        {
+        protected override (bool hasNext, int nextSlot, int nextIndex) MoveNext(
+            int previousSlot,
+            int previousIndex
+        ) {
             switch (previousSlot)
             {
                 case -1:
-                    if (Operation != null) return (true, 0, 0);
-                    else goto case 0;
+                    if (Operation != null)
+                        return (true, 0, 0);
+                    else
+                        goto case 0;
 
                 case 0:
-                    if (!Arguments.IsEmpty) return (true, 1, 0);
-                    else goto case 1;
+                    if (!Arguments.IsEmpty)
+                        return (true, 1, 0);
+                    else
+                        goto case 1;
 
                 case 1 when previousIndex + 1 < Arguments.Length:
                     return (true, 1, previousIndex + 1);
@@ -327,17 +415,37 @@ namespace Microsoft.CodeAnalysis.Operations
         {
             visitor.VisitDynamicInvocation(this);
         }
-        public override TResult? Accept<TArgument, TResult>(OperationVisitor<TArgument, TResult> visitor, TArgument argument) where TResult : default
+        public override TResult? Accept<TArgument, TResult>(
+            OperationVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        ) where TResult : default
         {
             return visitor.VisitDynamicInvocation(this, argument);
         }
     }
 
-    internal sealed partial class DynamicIndexerAccessOperation : HasDynamicArgumentsExpression, IDynamicIndexerAccessOperation
+    internal sealed partial class DynamicIndexerAccessOperation
+        : HasDynamicArgumentsExpression,
+          IDynamicIndexerAccessOperation
     {
-        public DynamicIndexerAccessOperation(IOperation operation, ImmutableArray<IOperation> arguments, ImmutableArray<string> argumentNames, ImmutableArray<RefKind> argumentRefKinds, SemanticModel? semanticModel, SyntaxNode syntax, ITypeSymbol? type, bool isImplicit) :
-            base(arguments, argumentNames, argumentRefKinds, semanticModel, syntax, type, isImplicit)
-        {
+        public DynamicIndexerAccessOperation(
+            IOperation operation,
+            ImmutableArray<IOperation> arguments,
+            ImmutableArray<string> argumentNames,
+            ImmutableArray<RefKind> argumentRefKinds,
+            SemanticModel? semanticModel,
+            SyntaxNode syntax,
+            ITypeSymbol? type,
+            bool isImplicit
+        ) : base(
+            arguments,
+            argumentNames,
+            argumentRefKinds,
+            semanticModel,
+            syntax,
+            type,
+            isImplicit
+        ) {
             Operation = SetParentOperation(operation, this);
         }
 
@@ -345,27 +453,31 @@ namespace Microsoft.CodeAnalysis.Operations
         internal override ConstantValue? OperationConstantValue => null;
         public override OperationKind Kind => OperationKind.DynamicIndexerAccess;
 
-        protected override IOperation GetCurrent(int slot, int index)
-            => slot switch
+        protected override IOperation GetCurrent(int slot, int index) =>
+            slot switch
             {
-                0 when Operation != null
-                    => Operation,
-                1 when index < Arguments.Length
-                    => Arguments[index],
+                0 when Operation != null => Operation,
+                1 when index < Arguments.Length => Arguments[index],
                 _ => throw ExceptionUtilities.UnexpectedValue((slot, index)),
             };
 
-        protected override (bool hasNext, int nextSlot, int nextIndex) MoveNext(int previousSlot, int previousIndex)
-        {
+        protected override (bool hasNext, int nextSlot, int nextIndex) MoveNext(
+            int previousSlot,
+            int previousIndex
+        ) {
             switch (previousSlot)
             {
                 case -1:
-                    if (Operation != null) return (true, 0, 0);
-                    else goto case 0;
+                    if (Operation != null)
+                        return (true, 0, 0);
+                    else
+                        goto case 0;
 
                 case 0:
-                    if (!Arguments.IsEmpty) return (true, 1, 0);
-                    else goto case 1;
+                    if (!Arguments.IsEmpty)
+                        return (true, 1, 0);
+                    else
+                        goto case 1;
 
                 case 1 when previousIndex + 1 < Arguments.Length:
                     return (true, 1, previousIndex + 1);
@@ -383,7 +495,10 @@ namespace Microsoft.CodeAnalysis.Operations
         {
             visitor.VisitDynamicIndexerAccess(this);
         }
-        public override TResult? Accept<TArgument, TResult>(OperationVisitor<TArgument, TResult> visitor, TArgument argument) where TResult : default
+        public override TResult? Accept<TArgument, TResult>(
+            OperationVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        ) where TResult : default
         {
             return visitor.VisitDynamicIndexerAccess(this, argument);
         }
@@ -410,33 +525,29 @@ namespace Microsoft.CodeAnalysis.Operations
         {
             return ConditionIsTop ? getCurrentSwitchTop() : getCurrentSwitchBottom();
 
-            IOperation getCurrentSwitchTop()
-                => slot switch
+            IOperation getCurrentSwitchTop() =>
+                slot switch
                 {
-                    0 when Condition != null
-                        => Condition,
-                    1 when Body != null
-                        => Body,
-                    2 when IgnoredCondition != null
-                        => IgnoredCondition,
+                    0 when Condition != null => Condition,
+                    1 when Body != null => Body,
+                    2 when IgnoredCondition != null => IgnoredCondition,
                     _ => throw ExceptionUtilities.UnexpectedValue((slot, index)),
                 };
 
-            IOperation getCurrentSwitchBottom()
-                => slot switch
+            IOperation getCurrentSwitchBottom() =>
+                slot switch
                 {
-                    0 when Body != null
-                        => Body,
-                    1 when Condition != null
-                        => Condition,
-                    2 when IgnoredCondition != null
-                        => IgnoredCondition,
+                    0 when Body != null => Body,
+                    1 when Condition != null => Condition,
+                    2 when IgnoredCondition != null => IgnoredCondition,
                     _ => throw ExceptionUtilities.UnexpectedValue((slot, index)),
                 };
         }
 
-        protected override (bool hasNext, int nextSlot, int nextIndex) MoveNext(int previousSlot, int previousIndex)
-        {
+        protected override (bool hasNext, int nextSlot, int nextIndex) MoveNext(
+            int previousSlot,
+            int previousIndex
+        ) {
             return ConditionIsTop ? moveNextConditionIsTop() : moveNextConditionIsBottom();
 
             (bool hasNext, int nextSlot, int nextIndex) moveNextConditionIsTop()
@@ -444,14 +555,20 @@ namespace Microsoft.CodeAnalysis.Operations
                 switch (previousSlot)
                 {
                     case -1:
-                        if (Condition != null) return (true, 0, 0);
-                        else goto case 0;
+                        if (Condition != null)
+                            return (true, 0, 0);
+                        else
+                            goto case 0;
                     case 0:
-                        if (Body != null) return (true, 1, 0);
-                        else goto case 1;
+                        if (Body != null)
+                            return (true, 1, 0);
+                        else
+                            goto case 1;
                     case 1:
-                        if (IgnoredCondition != null) return (true, 2, 0);
-                        else goto case 2;
+                        if (IgnoredCondition != null)
+                            return (true, 2, 0);
+                        else
+                            goto case 2;
                     case 2:
                     case 3:
                         return (false, 3, 0);
@@ -465,14 +582,20 @@ namespace Microsoft.CodeAnalysis.Operations
                 switch (previousSlot)
                 {
                     case -1:
-                        if (Body != null) return (true, 0, 0);
-                        else goto case 0;
+                        if (Body != null)
+                            return (true, 0, 0);
+                        else
+                            goto case 0;
                     case 0:
-                        if (Condition != null) return (true, 1, 0);
-                        else goto case 1;
+                        if (Condition != null)
+                            return (true, 1, 0);
+                        else
+                            goto case 1;
                     case 1:
-                        if (IgnoredCondition != null) return (true, 2, 0);
-                        else goto case 2;
+                        if (IgnoredCondition != null)
+                            return (true, 2, 0);
+                        else
+                            goto case 2;
                     case 2:
                     case 3:
                         return (false, 3, 0);
@@ -487,16 +610,25 @@ namespace Microsoft.CodeAnalysis.Operations
 
     internal sealed partial class FlowCaptureReferenceOperation
     {
-        public FlowCaptureReferenceOperation(int id, SyntaxNode syntax, ITypeSymbol? type, ConstantValue? constantValue) :
-            this(new CaptureId(id), semanticModel: null, syntax: syntax, type: type, constantValue: constantValue, isImplicit: true)
-        {
-        }
+        public FlowCaptureReferenceOperation(
+            int id,
+            SyntaxNode syntax,
+            ITypeSymbol? type,
+            ConstantValue? constantValue
+        ) : this(
+            new CaptureId(id),
+            semanticModel: null,
+            syntax: syntax,
+            type: type,
+            constantValue: constantValue,
+            isImplicit: true
+        ) { }
     }
 
     internal sealed partial class FlowCaptureOperation
     {
-        public FlowCaptureOperation(int id, SyntaxNode syntax, IOperation value) :
-            this(new CaptureId(id), value, semanticModel: null, syntax: syntax, isImplicit: true)
+        public FlowCaptureOperation(int id, SyntaxNode syntax, IOperation value)
+            : this(new CaptureId(id), value, semanticModel: null, syntax: syntax, isImplicit: true)
         {
             Debug.Assert(value != null);
         }
@@ -504,27 +636,36 @@ namespace Microsoft.CodeAnalysis.Operations
 
     internal sealed partial class IsNullOperation
     {
-        public IsNullOperation(SyntaxNode syntax, IOperation operand, ITypeSymbol type, ConstantValue? constantValue) :
-            this(operand, semanticModel: null, syntax: syntax, type: type, constantValue: constantValue, isImplicit: true)
-        {
+        public IsNullOperation(
+            SyntaxNode syntax,
+            IOperation operand,
+            ITypeSymbol type,
+            ConstantValue? constantValue
+        ) : this(
+            operand,
+            semanticModel: null,
+            syntax: syntax,
+            type: type,
+            constantValue: constantValue,
+            isImplicit: true
+        ) {
             Debug.Assert(operand != null);
         }
     }
 
     internal sealed partial class CaughtExceptionOperation
     {
-        public CaughtExceptionOperation(SyntaxNode syntax, ITypeSymbol type) :
-            this(semanticModel: null, syntax: syntax, type: type, isImplicit: true)
-        {
-        }
+        public CaughtExceptionOperation(SyntaxNode syntax, ITypeSymbol type)
+            : this(semanticModel: null, syntax: syntax, type: type, isImplicit: true) { }
     }
 
     internal sealed partial class StaticLocalInitializationSemaphoreOperation
     {
-        public StaticLocalInitializationSemaphoreOperation(ILocalSymbol local, SyntaxNode syntax, ITypeSymbol type) :
-            this(local, semanticModel: null, syntax, type, isImplicit: true)
-        {
-        }
+        public StaticLocalInitializationSemaphoreOperation(
+            ILocalSymbol local,
+            SyntaxNode syntax,
+            ITypeSymbol type
+        ) : this(local, semanticModel: null, syntax, type, isImplicit: true) { }
     }
 
     internal sealed partial class BlockOperation
@@ -534,18 +675,30 @@ namespace Microsoft.CodeAnalysis.Operations
         /// statements from another block. Blocks created by this API violate IOperation tree constraints and should
         /// never be exposed from a public API.
         /// </summary>
-        public static BlockOperation CreateTemporaryBlock(ImmutableArray<IOperation> statements, SemanticModel semanticModel, SyntaxNode syntax)
-            => new BlockOperation(statements, semanticModel, syntax);
+        public static BlockOperation CreateTemporaryBlock(
+            ImmutableArray<IOperation> statements,
+            SemanticModel semanticModel,
+            SyntaxNode syntax
+        ) => new BlockOperation(statements, semanticModel, syntax);
 
-        private BlockOperation(ImmutableArray<IOperation> statements, SemanticModel semanticModel, SyntaxNode syntax)
-            : base(semanticModel, syntax, isImplicit: true)
+        private BlockOperation(
+            ImmutableArray<IOperation> statements,
+            SemanticModel semanticModel,
+            SyntaxNode syntax
+        ) : base(semanticModel, syntax, isImplicit: true)
         {
             // Intentionally skipping SetParentOperation: this is used by CreateTemporaryBlock for the purposes of the
             // control flow factory, to temporarily create a new block for use in emulating the "block" a using variable
             // declaration introduces. These statements already have a parent node, and `SetParentOperation`'s verification
             // would fail because that parent isn't this. In error cases, the parent can also be a switch statement if
             // the using declaration was used directly as an embedded statement in the case without a block.
-            Debug.Assert(statements.All(s => s.Parent != this && s.Parent!.Kind is OperationKind.Block or OperationKind.SwitchCase));
+            Debug.Assert(
+                statements.All(
+                    s =>
+                        s.Parent != this
+                        && s.Parent!.Kind is OperationKind.Block or OperationKind.SwitchCase
+                )
+            );
             Operations = statements;
             Locals = ImmutableArray<ILocalSymbol>.Empty;
         }

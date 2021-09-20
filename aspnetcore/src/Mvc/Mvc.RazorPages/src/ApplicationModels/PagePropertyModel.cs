@@ -22,8 +22,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// <param name="attributes">Any attributes which are annotated on the property.</param>
         public PagePropertyModel(
             PropertyInfo propertyInfo,
-            IReadOnlyList<object> attributes)
-            : base(propertyInfo?.PropertyType, attributes)
+            IReadOnlyList<object> attributes
+        ) : base(propertyInfo?.PropertyType, attributes)
         {
             PropertyInfo = propertyInfo ?? throw new ArgumentNullException(nameof(propertyInfo));
         }
@@ -32,8 +32,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// Creates a new instance of <see cref="PagePropertyModel"/> from a given <see cref="PagePropertyModel"/>.
         /// </summary>
         /// <param name="other">The <see cref="PagePropertyModel"/> which needs to be copied.</param>
-        public PagePropertyModel(PagePropertyModel other)
-            : base(other)
+        public PagePropertyModel(PagePropertyModel other) : base(other)
         {
             if (other == null)
             {

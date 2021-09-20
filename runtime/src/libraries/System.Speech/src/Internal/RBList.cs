@@ -15,9 +15,7 @@ namespace System.Speech.Internal
     {
         #region Constructors
 
-        internal RBList()
-        {
-        }
+        internal RBList() { }
 
         #endregion
 
@@ -87,26 +85,17 @@ namespace System.Speech.Internal
 
         internal bool IsEmpty
         {
-            get
-            {
-                return _root == null;
-            }
+            get { return _root == null; }
         }
 
         internal bool CountIsOne
         {
-            get
-            {
-                return _root != null && _root.Left == null && _root.Right == null;
-            }
+            get { return _root != null && _root.Left == null && _root.Right == null; }
         }
 
         internal bool ContainsMoreThanOneItem
         {
-            get
-            {
-                return _root != null && (_root.Right != null || _root.Left != null);
-            }
+            get { return _root != null && (_root.Right != null || _root.Left != null); }
         }
 
         internal object First
@@ -413,7 +402,11 @@ namespace System.Speech.Internal
             TreeNode onlyChild = node.Left == null ? node.Right : node.Left;
 
             // This node should have been deleted already, and the child has replaced the this node.
-            Debug.Assert(node.Parent == null || node.Parent.Left == onlyChild || node.Parent.Right == onlyChild);
+            Debug.Assert(
+                node.Parent == null
+                    || node.Parent.Left == onlyChild
+                    || node.Parent.Right == onlyChild
+            );
             Debug.Assert(onlyChild == null || onlyChild.Parent == node.Parent);
 
             //
@@ -427,7 +420,7 @@ namespace System.Speech.Internal
                 {
                     SetColor(onlyChild, NodeColor.BLACK);
                 }
-                else if (node.Parent == null)  // if we remove a root node, nothing has changed.
+                else if (node.Parent == null) // if we remove a root node, nothing has changed.
                 {
                     return;
                 }
@@ -487,11 +480,12 @@ namespace System.Speech.Internal
 
         private static void FixRemovalCase3(TreeNode sibling)
         {
-            if (GetColor(sibling.Parent) == NodeColor.BLACK &&
-                GetColor(sibling) == NodeColor.BLACK &&
-                GetColor(sibling.Left) == NodeColor.BLACK &&
-                GetColor(sibling.Right) == NodeColor.BLACK)
-            {
+            if (
+                GetColor(sibling.Parent) == NodeColor.BLACK
+                && GetColor(sibling) == NodeColor.BLACK
+                && GetColor(sibling.Left) == NodeColor.BLACK
+                && GetColor(sibling.Right) == NodeColor.BLACK
+            ) {
                 SetColor(sibling, NodeColor.RED);
                 FixRemovalCase1(sibling.Parent);
             }
@@ -503,11 +497,12 @@ namespace System.Speech.Internal
 
         private static void FixRemovalCase4(TreeNode sibling)
         {
-            if (GetColor(sibling.Parent) == NodeColor.RED &&
-                GetColor(sibling) == NodeColor.BLACK &&
-                GetColor(sibling.Left) == NodeColor.BLACK &&
-                GetColor(sibling.Right) == NodeColor.BLACK)
-            {
+            if (
+                GetColor(sibling.Parent) == NodeColor.RED
+                && GetColor(sibling) == NodeColor.BLACK
+                && GetColor(sibling.Left) == NodeColor.BLACK
+                && GetColor(sibling.Right) == NodeColor.BLACK
+            ) {
                 SetColor(sibling, NodeColor.RED);
                 SetColor(sibling.Parent, NodeColor.BLACK);
             }
@@ -519,21 +514,23 @@ namespace System.Speech.Internal
 
         private static void FixRemovalCase5(TreeNode sibling)
         {
-            if (sibling == sibling.Parent.Right &&
-                GetColor(sibling) == NodeColor.BLACK &&
-                GetColor(sibling.Left) == NodeColor.RED &&
-                GetColor(sibling.Right) == NodeColor.BLACK)
-            {
+            if (
+                sibling == sibling.Parent.Right
+                && GetColor(sibling) == NodeColor.BLACK
+                && GetColor(sibling.Left) == NodeColor.RED
+                && GetColor(sibling.Right) == NodeColor.BLACK
+            ) {
                 SetColor(sibling, NodeColor.RED);
                 SetColor(sibling.Left, NodeColor.BLACK);
                 RotateRight(sibling);
                 sibling = sibling.Parent;
             }
-            else if (sibling == sibling.Parent.Left &&
-                GetColor(sibling) == NodeColor.BLACK &&
-                GetColor(sibling.Right) == NodeColor.RED &&
-                GetColor(sibling.Left) == NodeColor.BLACK)
-            {
+            else if (
+                sibling == sibling.Parent.Left
+                && GetColor(sibling) == NodeColor.BLACK
+                && GetColor(sibling.Right) == NodeColor.RED
+                && GetColor(sibling.Left) == NodeColor.BLACK
+            ) {
                 SetColor(sibling, NodeColor.RED);
                 SetColor(sibling.Right, NodeColor.BLACK);
                 RotateLeft(sibling);
@@ -641,10 +638,7 @@ namespace System.Speech.Internal
 
             internal TreeNode Left
             {
-                get
-                {
-                    return _leftChild;
-                }
+                get { return _leftChild; }
                 set
                 {
                     _leftChild = value;
@@ -657,10 +651,7 @@ namespace System.Speech.Internal
 
             internal TreeNode Right
             {
-                get
-                {
-                    return _rightChild;
-                }
+                get { return _rightChild; }
                 set
                 {
                     _rightChild = value;
@@ -673,34 +664,19 @@ namespace System.Speech.Internal
 
             internal TreeNode Parent
             {
-                get
-                {
-                    return _parent;
-                }
-                set
-                {
-                    _parent = value;
-                }
+                get { return _parent; }
+                set { _parent = value; }
             }
 
             internal bool IsRed
             {
-                get
-                {
-                    return _isRed;
-                }
-                set
-                {
-                    _isRed = value;
-                }
+                get { return _isRed; }
+                set { _isRed = value; }
             }
 
             internal object Key
             {
-                get
-                {
-                    return _key;
-                }
+                get { return _key; }
             }
 
             internal void CopyNode(TreeNode from)
@@ -714,7 +690,9 @@ namespace System.Speech.Internal
             private object _key;
             private bool _isRed;
 
-            private TreeNode _leftChild, _rightChild, _parent;
+            private TreeNode _leftChild,
+                _rightChild,
+                _parent;
         }
 
         private enum NodeColor
@@ -722,7 +700,6 @@ namespace System.Speech.Internal
             BLACK = 0,
             RED = 1
         }
-
         #endregion
     }
 }

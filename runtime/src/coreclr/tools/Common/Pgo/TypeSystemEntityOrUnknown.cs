@@ -39,7 +39,8 @@ namespace Internal.Pgo
 
         public override int GetHashCode() => _data.GetHashCode();
 
-        public override bool Equals(object obj) => obj is TypeSystemEntityOrUnknown other && other.Equals(this);
+        public override bool Equals(object obj) =>
+            obj is TypeSystemEntityOrUnknown other && other.Equals(this);
 
         public override string ToString()
         {

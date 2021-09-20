@@ -45,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind
                         CompanyName = customer.CompanyName,
                         ContactName = customer.ContactName,
                         ContactTitle = customer.ContactTitle
-                    });
+                    }
+                );
             }
 
             CustomerQueries = customerQueries.ToArray();
@@ -64,7 +65,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind
                             CategoryName = "Food",
                             ProductID = product.ProductID,
                             ProductName = product.ProductName
-                        });
+                        }
+                    );
                 }
             }
 
@@ -81,7 +83,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind
                 customer.Orders.Add(order);
 
                 orderQueries.Add(
-                    new OrderQuery { CustomerID = order.CustomerID, Customer = order.Customer });
+                    new OrderQuery { CustomerID = order.CustomerID, Customer = order.Customer }
+                );
             }
 
             OrderQueries = orderQueries.ToArray();
@@ -112,8 +115,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind
             Product[] products,
             ProductQuery[] productQueries,
             Order[] orders,
-            OrderDetail[] orderDetails)
-        {
+            OrderDetail[] orderDetails
+        ) {
             Customers = customers;
             CustomerQueries = customerQueries;
             CustomerQueriesWithQueryFilter = customerQueriesWithQueryFilter;
@@ -124,8 +127,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind
             OrderDetails = orderDetails;
         }
 
-        public IQueryable<TEntity> Set<TEntity>()
-            where TEntity : class
+        public IQueryable<TEntity> Set<TEntity>() where TEntity : class
         {
             if (typeof(TEntity) == typeof(Customer))
             {
@@ -188,7 +190,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind
         {
             context.Set<Customer>().AddRange(CreateCustomers());
 
-            var titleProperty = context.Model.FindEntityType(typeof(Employee)).FindProperty("Title");
+            var titleProperty = context.Model.FindEntityType(typeof(Employee))
+                .FindProperty("Title");
             foreach (var employee in CreateEmployees())
             {
                 context.Set<Employee>().Add(employee);

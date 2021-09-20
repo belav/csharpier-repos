@@ -80,11 +80,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             using (CreateScratch<DatabaseContext>(_ => { }, "9849"))
             {
                 using var context = new DatabaseContext();
-                var results
-                    = (from _ in context.VehicleInspections
-                       join _f in context.Motors on _.Id equals _f.Id
-                       join __ in context.VehicleInspections on _f.Id equals __.Id
-                       select _).ToList();
+                var results = (
+                    from _ in context.VehicleInspections
+                    join _f in context.Motors on _.Id equals _f.Id
+                    join __ in context.VehicleInspections on _f.Id equals __.Id
+                    select _
+                ).ToList();
 
                 Assert.Empty(results);
             }
@@ -103,10 +104,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                 var _f = 0L;
 #pragma warning restore IDE1006 // Naming Styles
 
-                var results
-                    = (from v in context.VehicleInspections
-                       where v.Id == _ || v.Id == __ || v.Id == _f
-                       select _).ToList();
+                var results = (
+                    from v in context.VehicleInspections
+                    where v.Id == _ || v.Id == __ || v.Id == _f
+                    select _
+                ).ToList();
 
                 Assert.Empty(results);
             }
@@ -116,8 +118,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("9849");
             }
 
@@ -125,7 +126,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 var builder = modelBuilder.Entity<VehicleInspection>();
 
-                builder.HasMany(i => i.Motors).WithOne(a => a.Inspection).HasForeignKey(i => i.VehicleInspectionId);
+                builder.HasMany(i => i.Motors)
+                    .WithOne(a => a.Inspection)
+                    .HasForeignKey(i => i.VehicleInspectionId);
             }
 
             public DbSet<VehicleInspection> VehicleInspections { get; set; }
@@ -155,13 +158,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             using (CreateScratch<Context3595>(Seed3595, "3595"))
             {
                 using var context = new Context3595();
-                var q0 = from instance in context.Exams
-                         join question in context.ExamQuestions
-                             on instance.Id equals question.ExamId
-                         where instance.Id != 3
-                         group question by question.QuestionId
-                         into gQuestions
-                         select new { gQuestions.Key, MaxDate = gQuestions.Max(q => q.Modified) };
+                var q0 =
+                    from instance in context.Exams
+                    join question in context.ExamQuestions on instance.Id equals question.ExamId
+                    where instance.Id != 3
+                    group question by question.QuestionId into gQuestions
+                    select new { gQuestions.Key, MaxDate = gQuestions.Max(q => q.Modified) };
 
                 var result = q0.ToList();
 
@@ -173,7 +175,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             var question = new Question3595();
             var examInstance = new Exam3595();
-            var examInstanceQuestion = new ExamQuestion3595 { Question = question, Exam = examInstance };
+            var examInstanceQuestion = new ExamQuestion3595
+            {
+                Question = question,
+                Exam = examInstance
+            };
 
             context.Add(question);
             context.Add(examInstance);
@@ -215,8 +221,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("3595");
             }
         }
@@ -231,12 +236,13 @@ namespace Microsoft.EntityFrameworkCore.Query
             using (CreateScratch<MyContext3101>(Seed3101, "3101"))
             {
                 using var ctx = new MyContext3101();
-                var query = from eVersion in ctx.Entities
-                            join eRoot in ctx.Entities.Include(e => e.Children).AsNoTracking()
-                                on eVersion.RootEntityId equals (int?)eRoot.Id
-                                into RootEntities
-                            from eRootJoined in RootEntities.DefaultIfEmpty()
-                            select eRootJoined ?? eVersion;
+                var query =
+                    from eVersion in ctx.Entities
+                    join eRoot in ctx.Entities.Include(e => e.Children).AsNoTracking()
+                        on eVersion.RootEntityId equals (int?)eRoot.Id
+                        into RootEntities
+                    from eRootJoined in RootEntities.DefaultIfEmpty()
+                    select eRootJoined ?? eVersion;
 
                 Assert.Equal(3, query.ToList().Count);
             }
@@ -248,12 +254,13 @@ namespace Microsoft.EntityFrameworkCore.Query
             using (CreateScratch<MyContext3101>(Seed3101, "3101"))
             {
                 using var ctx = new MyContext3101();
-                var query = from eVersion in ctx.Entities
-                            join eRoot in ctx.Entities.Include(e => e.Children)
-                                on eVersion.RootEntityId equals (int?)eRoot.Id
-                                into RootEntities
-                            from eRootJoined in RootEntities.DefaultIfEmpty()
-                            select eRootJoined ?? eVersion;
+                var query =
+                    from eVersion in ctx.Entities
+                    join eRoot in ctx.Entities.Include(e => e.Children)
+                        on eVersion.RootEntityId equals (int?)eRoot.Id
+                        into RootEntities
+                    from eRootJoined in RootEntities.DefaultIfEmpty()
+                    select eRootJoined ?? eVersion;
 
                 var result = query.ToList();
                 Assert.Equal(2, result.Count(e => e.Children.Count > 0));
@@ -266,12 +273,13 @@ namespace Microsoft.EntityFrameworkCore.Query
             using (CreateScratch<MyContext3101>(Seed3101, "3101"))
             {
                 using var ctx = new MyContext3101();
-                var query = from eVersion in ctx.Entities.Include(e => e.Children)
-                            join eRoot in ctx.Entities.Include(e => e.Children)
-                                on eVersion.RootEntityId equals (int?)eRoot.Id
-                                into RootEntities
-                            from eRootJoined in RootEntities.DefaultIfEmpty()
-                            select eRootJoined ?? eVersion;
+                var query =
+                    from eVersion in ctx.Entities.Include(e => e.Children)
+                    join eRoot in ctx.Entities.Include(e => e.Children)
+                        on eVersion.RootEntityId equals (int?)eRoot.Id
+                        into RootEntities
+                    from eRootJoined in RootEntities.DefaultIfEmpty()
+                    select eRootJoined ?? eVersion;
 
                 var result = query.ToList();
 
@@ -285,12 +293,13 @@ namespace Microsoft.EntityFrameworkCore.Query
             using (CreateScratch<MyContext3101>(Seed3101, "3101"))
             {
                 using var ctx = new MyContext3101();
-                var query = from eVersion in ctx.Entities.Include(e => e.Children)
-                            join eRoot in ctx.Entities
-                                on eVersion.RootEntityId equals (int?)eRoot.Id
-                                into RootEntities
-                            from eRootJoined in RootEntities.DefaultIfEmpty()
-                            select new { One = 1, Coalesce = eRootJoined ?? eVersion };
+                var query =
+                    from eVersion in ctx.Entities.Include(e => e.Children)
+                    join eRoot in ctx.Entities
+                        on eVersion.RootEntityId equals (int?)eRoot.Id
+                        into RootEntities
+                    from eRootJoined in RootEntities.DefaultIfEmpty()
+                    select new { One = 1, Coalesce = eRootJoined ?? eVersion };
 
                 var result = query.ToList();
                 Assert.True(result.All(e => e.Coalesce.Children.Count > 0));
@@ -303,12 +312,13 @@ namespace Microsoft.EntityFrameworkCore.Query
             using (CreateScratch<MyContext3101>(Seed3101, "3101"))
             {
                 using var ctx = new MyContext3101();
-                var query = from eVersion in ctx.Entities
-                            join eRoot in ctx.Entities.Include(e => e.Children)
-                                on eVersion.RootEntityId equals (int?)eRoot.Id
-                                into RootEntities
-                            from eRootJoined in RootEntities.DefaultIfEmpty()
-                            select new { Root = eRootJoined, Coalesce = eRootJoined ?? eVersion };
+                var query =
+                    from eVersion in ctx.Entities
+                    join eRoot in ctx.Entities.Include(e => e.Children)
+                        on eVersion.RootEntityId equals (int?)eRoot.Id
+                        into RootEntities
+                    from eRootJoined in RootEntities.DefaultIfEmpty()
+                    select new { Root = eRootJoined, Coalesce = eRootJoined ?? eVersion };
 
                 var result = query.ToList();
                 Assert.Equal(2, result.Count(e => e.Coalesce.Children.Count > 0));
@@ -321,12 +331,13 @@ namespace Microsoft.EntityFrameworkCore.Query
             using (CreateScratch<MyContext3101>(Seed3101, "3101"))
             {
                 using var ctx = new MyContext3101();
-                var query = from eVersion in ctx.Entities
-                            join eRoot in ctx.Entities.Include(e => e.Children)
-                                on eVersion.RootEntityId equals (int?)eRoot.Id
-                                into RootEntities
-                            from eRootJoined in RootEntities.DefaultIfEmpty()
-                            select new { One = 1, Coalesce = eRootJoined ?? (eVersion ?? eRootJoined) };
+                var query =
+                    from eVersion in ctx.Entities
+                    join eRoot in ctx.Entities.Include(e => e.Children)
+                        on eVersion.RootEntityId equals (int?)eRoot.Id
+                        into RootEntities
+                    from eRootJoined in RootEntities.DefaultIfEmpty()
+                    select new { One = 1, Coalesce = eRootJoined ?? (eVersion ?? eRootJoined) };
 
                 var result = query.ToList();
                 Assert.Equal(2, result.Count(e => e.Coalesce.Children.Count > 0));
@@ -339,17 +350,18 @@ namespace Microsoft.EntityFrameworkCore.Query
             using (CreateScratch<MyContext3101>(Seed3101, "3101"))
             {
                 using var ctx = new MyContext3101();
-                var query = from eVersion in ctx.Entities.Include(e => e.Children)
-                            join eRoot in ctx.Entities
-                                on eVersion.RootEntityId equals (int?)eRoot.Id
-                                into RootEntities
-                            from eRootJoined in RootEntities.DefaultIfEmpty()
-                            select new
-                            {
-                                One = eRootJoined,
-                                Two = 2,
-                                Coalesce = eRootJoined ?? (eVersion ?? eRootJoined)
-                            };
+                var query =
+                    from eVersion in ctx.Entities.Include(e => e.Children)
+                    join eRoot in ctx.Entities
+                        on eVersion.RootEntityId equals (int?)eRoot.Id
+                        into RootEntities
+                    from eRootJoined in RootEntities.DefaultIfEmpty()
+                    select new
+                    {
+                        One = eRootJoined,
+                        Two = 2,
+                        Coalesce = eRootJoined ?? (eVersion ?? eRootJoined)
+                    };
 
                 var result = query.ToList();
                 Assert.True(result.All(e => e.Coalesce.Children.Count > 0));
@@ -362,13 +374,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             using (CreateScratch<MyContext3101>(Seed3101, "3101"))
             {
                 using var ctx = new MyContext3101();
-                var query = from eVersion in ctx.Entities.Include(e => e.Children)
-                            join eRoot in ctx.Entities
-                                on eVersion.RootEntityId equals (int?)eRoot.Id
-                                into RootEntities
-                            from eRootJoined in RootEntities.DefaultIfEmpty()
+                var query =
+                    from eVersion in ctx.Entities.Include(e => e.Children)
+                    join eRoot in ctx.Entities
+                        on eVersion.RootEntityId equals (int?)eRoot.Id
+                        into RootEntities
+                    from eRootJoined in RootEntities.DefaultIfEmpty()
 #pragma warning disable IDE0029 // Use coalesce expression
-                            select eRootJoined != null ? eRootJoined : eVersion;
+                    select eRootJoined != null ? eRootJoined : eVersion;
 #pragma warning restore IDE0029 // Use coalesce expression
 
                 var result = query.ToList();
@@ -382,17 +395,13 @@ namespace Microsoft.EntityFrameworkCore.Query
             using (CreateScratch<MyContext3101>(Seed3101, "3101"))
             {
                 using var ctx = new MyContext3101();
-                var query = from eVersion in ctx.Entities
-                            join eRoot in ctx.Entities
-                                on eVersion.RootEntityId equals (int?)eRoot.Id
-                                into RootEntities
-                            from eRootJoined in RootEntities.DefaultIfEmpty()
-                            select new
-                            {
-                                eRootJoined,
-                                eVersion,
-                                foo = eRootJoined ?? eVersion
-                            };
+                var query =
+                    from eVersion in ctx.Entities
+                    join eRoot in ctx.Entities
+                        on eVersion.RootEntityId equals (int?)eRoot.Id
+                        into RootEntities
+                    from eRootJoined in RootEntities.DefaultIfEmpty()
+                    select new { eRootJoined, eVersion, foo = eRootJoined ?? eVersion };
 
                 Assert.Equal(3, query.ToList().Count);
 
@@ -430,8 +439,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("3101");
             }
 
@@ -473,13 +481,18 @@ namespace Microsoft.EntityFrameworkCore.Query
             using (CreateScratch<MyContext5456>(Seed5456, "5456"))
             {
                 Parallel.For(
-                    0, 10, i =>
+                    0,
+                    10,
+                    i =>
                     {
                         using var ctx = new MyContext5456();
-                        var result = ctx.Posts.Where(x => x.Blog.Id > 1).Include(x => x.Blog).ToList();
+                        var result = ctx.Posts.Where(x => x.Blog.Id > 1)
+                            .Include(x => x.Blog)
+                            .ToList();
 
                         Assert.Equal(198, result.Count);
-                    });
+                    }
+                );
             }
         }
 
@@ -489,13 +502,18 @@ namespace Microsoft.EntityFrameworkCore.Query
             using (CreateScratch<MyContext5456>(Seed5456, "5456"))
             {
                 Parallel.For(
-                    0, 10, async i =>
+                    0,
+                    10,
+                    async i =>
                     {
                         using var ctx = new MyContext5456();
-                        var result = await ctx.Posts.Where(x => x.Blog.Id > 1).Include(x => x.Blog).ToListAsync();
+                        var result = await ctx.Posts.Where(x => x.Blog.Id > 1)
+                            .Include(x => x.Blog)
+                            .ToListAsync();
 
                         Assert.Equal(198, result.Count);
-                    });
+                    }
+                );
             }
         }
 
@@ -505,13 +523,19 @@ namespace Microsoft.EntityFrameworkCore.Query
             using (CreateScratch<MyContext5456>(Seed5456, "5456"))
             {
                 Parallel.For(
-                    0, 10, i =>
+                    0,
+                    10,
+                    i =>
                     {
                         using var ctx = new MyContext5456();
-                        var result = ctx.Posts.Where(x => x.Blog.Id > 1).Include(x => x.Blog).Include(x => x.Comments).ToList();
+                        var result = ctx.Posts.Where(x => x.Blog.Id > 1)
+                            .Include(x => x.Blog)
+                            .Include(x => x.Comments)
+                            .ToList();
 
                         Assert.Equal(198, result.Count);
-                    });
+                    }
+                );
             }
         }
 
@@ -521,14 +545,19 @@ namespace Microsoft.EntityFrameworkCore.Query
             using (CreateScratch<MyContext5456>(Seed5456, "5456"))
             {
                 Parallel.For(
-                    0, 10, async i =>
+                    0,
+                    10,
+                    async i =>
                     {
                         using var ctx = new MyContext5456();
-                        var result = await ctx.Posts.Where(x => x.Blog.Id > 1).Include(x => x.Blog).Include(x => x.Comments)
+                        var result = await ctx.Posts.Where(x => x.Blog.Id > 1)
+                            .Include(x => x.Blog)
+                            .Include(x => x.Comments)
                             .ToListAsync();
 
                         Assert.Equal(198, result.Count);
-                    });
+                    }
+                );
             }
         }
 
@@ -538,13 +567,19 @@ namespace Microsoft.EntityFrameworkCore.Query
             using (CreateScratch<MyContext5456>(Seed5456, "5456"))
             {
                 Parallel.For(
-                    0, 10, i =>
+                    0,
+                    10,
+                    i =>
                     {
                         using var ctx = new MyContext5456();
-                        var result = ctx.Posts.Where(x => x.Blog.Id > 1).Include(x => x.Blog).ThenInclude(b => b.Author).ToList();
+                        var result = ctx.Posts.Where(x => x.Blog.Id > 1)
+                            .Include(x => x.Blog)
+                            .ThenInclude(b => b.Author)
+                            .ToList();
 
                         Assert.Equal(198, result.Count);
-                    });
+                    }
+                );
             }
         }
 
@@ -554,14 +589,19 @@ namespace Microsoft.EntityFrameworkCore.Query
             using (CreateScratch<MyContext5456>(Seed5456, "5456"))
             {
                 Parallel.For(
-                    0, 10, async i =>
+                    0,
+                    10,
+                    async i =>
                     {
                         using var ctx = new MyContext5456();
-                        var result = await ctx.Posts.Where(x => x.Blog.Id > 1).Include(x => x.Blog).ThenInclude(b => b.Author)
+                        var result = await ctx.Posts.Where(x => x.Blog.Id > 1)
+                            .Include(x => x.Blog)
+                            .ThenInclude(b => b.Author)
                             .ToListAsync();
 
                         Assert.Equal(198, result.Count);
-                    });
+                    }
+                );
             }
         }
 
@@ -579,7 +619,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                             new()
                         },
                         Author = new Author5456()
-                    });
+                    }
+                );
             }
 
             context.SaveChanges();
@@ -594,8 +635,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("5456");
             }
 
@@ -654,8 +694,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("8282");
             }
         }
@@ -693,7 +732,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     t => AssertCustomerView(t, 1, "First", 1, "FirstChild"),
                     t => AssertCustomerView(t, 2, "Second", 2, "SecondChild1"),
                     t => AssertCustomerView(t, 2, "Second", 3, "SecondChild2"),
-                    t => AssertCustomerView(t, 3, "Third", null, ""));
+                    t => AssertCustomerView(t, 3, "Third", null, "")
+                );
             }
 
             static void AssertCustomerView(
@@ -701,8 +741,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 int id,
                 string name,
                 int? customerMembershipId,
-                string customerMembershipName)
-            {
+                string customerMembershipName
+            ) {
                 Assert.Equal(id, actual.Id);
                 Assert.Equal(name, actual.Name);
                 Assert.Equal(customerMembershipId, actual.CustomerMembershipId);
@@ -717,29 +757,35 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("19708");
             }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<CustomerView19708>().HasNoKey().ToInMemoryQuery(Build_Customers_Sql_View_InMemory());
+                modelBuilder.Entity<CustomerView19708>()
+                    .HasNoKey()
+                    .ToInMemoryQuery(Build_Customers_Sql_View_InMemory());
             }
 
-            private Expression<Func<IQueryable<CustomerView19708>>> Build_Customers_Sql_View_InMemory()
+            private Expression<
+                Func<IQueryable<CustomerView19708>>
+            > Build_Customers_Sql_View_InMemory()
             {
                 Expression<Func<IQueryable<CustomerView19708>>> query = () =>
                     from customer in Customers
-                    join customerMembership in CustomerMemberships on customer.Id equals customerMembership.CustomerId into
-                        nullableCustomerMemberships
+                    join customerMembership in CustomerMemberships
+                        on customer.Id equals customerMembership.CustomerId
+                        into nullableCustomerMemberships
                     from customerMembership in nullableCustomerMemberships.DefaultIfEmpty()
                     select new CustomerView19708
                     {
                         Id = customer.Id,
                         Name = customer.Name,
-                        CustomerMembershipId = customerMembership != null ? customerMembership.Id : default(int?),
-                        CustomerMembershipName = customerMembership != null ? customerMembership.Name : ""
+                        CustomerMembershipId =
+                            customerMembership != null ? customerMembership.Id : default(int?),
+                        CustomerMembershipName =
+                            customerMembership != null ? customerMembership.Name : ""
                     };
                 return query;
             }
@@ -751,9 +797,21 @@ namespace Microsoft.EntityFrameworkCore.Query
             var customer2 = new Customer19708 { Name = "Second" };
             var customer3 = new Customer19708 { Name = "Third" };
 
-            var customerMembership1 = new CustomerMembership19708 { Name = "FirstChild", Customer = customer1 };
-            var customerMembership2 = new CustomerMembership19708 { Name = "SecondChild1", Customer = customer2 };
-            var customerMembership3 = new CustomerMembership19708 { Name = "SecondChild2", Customer = customer2 };
+            var customerMembership1 = new CustomerMembership19708
+            {
+                Name = "FirstChild",
+                Customer = customer1
+            };
+            var customerMembership2 = new CustomerMembership19708
+            {
+                Name = "SecondChild1",
+                Customer = customer2
+            };
+            var customerMembership3 = new CustomerMembership19708
+            {
+                Name = "SecondChild2",
+                Customer = customer2
+            };
 
             context.AddRange(customer1, customer2, customer3);
             context.AddRange(customerMembership1, customerMembership2, customerMembership3);
@@ -793,17 +851,26 @@ namespace Microsoft.EntityFrameworkCore.Query
             using (CreateScratch<MyContext21768>(t => { }, "21768"))
             {
                 using var context = new MyContext21768();
-                Expression<Func<IBook21768, BookViewModel21768>> projection = b => new BookViewModel21768
-                {
-                    FirstPage = b.FrontCover.Illustrations.FirstOrDefault(i => i.State >= IllustrationState21768.Approved) != null
-                        ? new PageViewModel21768
-                        {
-                            Uri = b.FrontCover.Illustrations.FirstOrDefault(i => i.State >= IllustrationState21768.Approved).Uri
-                        }
-                        : null,
-                };
+                Expression<Func<IBook21768, BookViewModel21768>> projection = b =>
+                    new BookViewModel21768
+                    {
+                        FirstPage =
+                            b.FrontCover.Illustrations.FirstOrDefault(
+                                i => i.State >= IllustrationState21768.Approved
+                            ) != null
+                                ? new PageViewModel21768
+                                  {
+                                      Uri =
+                                          b.FrontCover.Illustrations.FirstOrDefault(
+                                              i => i.State >= IllustrationState21768.Approved
+                                          ).Uri
+                                  }
+                                : null,
+                    };
 
-                var result = context.Books.Where(b => b.Id == 1).Select(projection).SingleOrDefault();
+                var result = context.Books.Where(b => b.Id == 1)
+                    .Select(projection)
+                    .SingleOrDefault();
             }
         }
 
@@ -853,11 +920,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             public BookCover21768 BackCover { get; set; }
             public int BackCoverId { get; set; }
 
-            IBookCover21768 IBook21768.FrontCover
-                => FrontCover;
+            IBookCover21768 IBook21768.FrontCover => FrontCover;
 
-            IBookCover21768 IBook21768.BackCover
-                => BackCover;
+            IBookCover21768 IBook21768.BackCover => BackCover;
         }
 
         private class BookCover21768 : IBookCover21768
@@ -865,8 +930,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             public int Id { get; set; }
             public ICollection<CoverIllustration21768> Illustrations { get; set; }
 
-            IEnumerable<ICoverIllustration21768> IBookCover21768.Illustrations
-                => Illustrations;
+            IEnumerable<ICoverIllustration21768> IBookCover21768.Illustrations => Illustrations;
         }
 
         private class CoverIllustration21768 : ICoverIllustration21768
@@ -877,8 +941,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             public string Uri { get; set; }
             public IllustrationState21768 State { get; set; }
 
-            IBookCover21768 ICoverIllustration21768.Cover
-                => Cover;
+            IBookCover21768 ICoverIllustration21768.Cover => Cover;
         }
 
         private enum IllustrationState21768
@@ -897,8 +960,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("21768");
             }
         }
@@ -914,7 +976,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 using var context = new MyContext21803();
 
-                var query = context.Set<AppEntity21803>().Select(appEntity => appEntity.OtherEntities);
+                var query = context.Set<AppEntity21803>()
+                    .Select(appEntity => appEntity.OtherEntities);
 
                 query.ToList();
             }
@@ -927,7 +990,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 new OtherEntity21803 { AppEntity = appEntity },
                 new OtherEntity21803 { AppEntity = appEntity },
                 new OtherEntity21803 { AppEntity = appEntity },
-                new OtherEntity21803 { AppEntity = appEntity });
+                new OtherEntity21803 { AppEntity = appEntity }
+            );
 
             context.SaveChanges();
         }
@@ -938,8 +1002,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             public int Id { get; private set; }
 
-            public IEnumerable<OtherEntity21803> OtherEntities
-                => _otherEntities;
+            public IEnumerable<OtherEntity21803> OtherEntities => _otherEntities;
         }
 
         private class OtherEntity21803
@@ -954,8 +1017,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("21803");
             }
         }
@@ -972,18 +1034,25 @@ namespace Microsoft.EntityFrameworkCore.Query
                 using var context = new MyContext20729();
 
                 var query = context.Set<Owner20729>()
-                    .Select(dtoOwner => new
-                    {
-                        dtoOwner.Id,
-                        Owned2 = dtoOwner.Owned2 == null ? null : new
-                        {
-                            Other = dtoOwner.Owned2.Other == null ? null : new { dtoOwner.Owned2.Other.Id }
-                        }
-                        ,
-                        Owned1 = dtoOwner.Owned1 == null ? null : new { dtoOwner.Owned1.Value }
-
-                    }
-                    ).ToList();
+                    .Select(
+                        dtoOwner =>
+                            new
+                            {
+                                dtoOwner.Id,
+                                Owned2 = dtoOwner.Owned2 == null
+                                    ? null
+                                    : new
+                                      {
+                                          Other = dtoOwner.Owned2.Other == null
+                                              ? null
+                                              : new { dtoOwner.Owned2.Other.Id }
+                                      },
+                                Owned1 = dtoOwner.Owned1 == null
+                                    ? null
+                                    : new { dtoOwner.Owned1.Value }
+                            }
+                    )
+                    .ToList();
 
                 var owner = Assert.Single(query);
                 Assert.NotNull(owner.Owned1);
@@ -993,11 +1062,9 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private static void Seed20729(MyContext20729 context)
         {
-            context.Owners.Add(new Owner20729
-            {
-                Owned1 = new Owned120729(),
-                Owned2 = new Owned220729(),
-            });
+            context.Owners.Add(
+                new Owner20729 { Owned1 = new Owned120729(), Owned2 = new Owned220729(), }
+            );
 
             context.SaveChanges();
         }
@@ -1030,8 +1097,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("20729");
             }
         }
@@ -1054,31 +1120,30 @@ namespace Microsoft.EntityFrameworkCore.Query
                         context.B,
                         leftKeySelector,
                         rightKeySelector,
-                        (left, rightg) => new
-                        {
-                            left,
-                            rightg
-                        })
+                        (left, rightg) => new { left, rightg }
+                    )
                     .SelectMany(
                         r => r.rightg.DefaultIfEmpty(),
-                        (x, y) => new JoinResult19253<A19253, B19253>
-                        {
-                            Left = x.left,
-                            Right = y
-                        })
+                        (x, y) => new JoinResult19253<A19253, B19253> { Left = x.left, Right = y }
+                    )
                     .Concat(
                         context.B.GroupJoin(
                                 context.A,
                                 rightKeySelector,
                                 leftKeySelector,
-                                (right, leftg) => new { leftg, right })
-                            .SelectMany(l => l.leftg.DefaultIfEmpty(),
-                                (x, y) => new JoinResult19253<A19253, B19253>
-                                {
-                                    Left = y,
-                                    Right = x.right
-                                })
-                            .Where(z => z.Left.Equals(null)))
+                                (right, leftg) => new { leftg, right }
+                            )
+                            .SelectMany(
+                                l => l.leftg.DefaultIfEmpty(),
+                                (x, y) =>
+                                    new JoinResult19253<A19253, B19253>
+                                    {
+                                        Left = y,
+                                        Right = x.right
+                                    }
+                            )
+                            .Where(z => z.Left.Equals(null))
+                    )
                     .ToList();
 
                 Assert.Equal(3, query.Count);
@@ -1099,31 +1164,30 @@ namespace Microsoft.EntityFrameworkCore.Query
                         context.B,
                         leftKeySelector,
                         rightKeySelector,
-                        (left, rightg) => new
-                        {
-                            left,
-                            rightg
-                        })
+                        (left, rightg) => new { left, rightg }
+                    )
                     .SelectMany(
                         r => r.rightg.DefaultIfEmpty(),
-                        (x, y) => new JoinResult19253<A19253, B19253>
-                        {
-                            Left = x.left,
-                            Right = y
-                        })
+                        (x, y) => new JoinResult19253<A19253, B19253> { Left = x.left, Right = y }
+                    )
                     .Union(
                         context.B.GroupJoin(
                                 context.A,
                                 rightKeySelector,
                                 leftKeySelector,
-                                (right, leftg) => new { leftg, right })
-                            .SelectMany(l => l.leftg.DefaultIfEmpty(),
-                                (x, y) => new JoinResult19253<A19253, B19253>
-                                {
-                                    Left = y,
-                                    Right = x.right
-                                })
-                            .Where(z => z.Left.Equals(null)))
+                                (right, leftg) => new { leftg, right }
+                            )
+                            .SelectMany(
+                                l => l.leftg.DefaultIfEmpty(),
+                                (x, y) =>
+                                    new JoinResult19253<A19253, B19253>
+                                    {
+                                        Left = y,
+                                        Right = x.right
+                                    }
+                            )
+                            .Where(z => z.Left.Equals(null))
+                    )
                     .ToList();
 
                 Assert.Equal(3, query.Count);
@@ -1143,30 +1207,29 @@ namespace Microsoft.EntityFrameworkCore.Query
                         context.B,
                         leftKeySelector,
                         rightKeySelector,
-                        (left, rightg) => new
-                        {
-                            left,
-                            rightg
-                        })
+                        (left, rightg) => new { left, rightg }
+                    )
                     .SelectMany(
                         r => r.rightg.DefaultIfEmpty(),
-                        (x, y) => new JoinResult19253<A19253, B19253>
-                        {
-                            Left = x.left,
-                            Right = y
-                        })
+                        (x, y) => new JoinResult19253<A19253, B19253> { Left = x.left, Right = y }
+                    )
                     .Except(
                         context.B.GroupJoin(
                                 context.A,
                                 rightKeySelector,
                                 leftKeySelector,
-                                (right, leftg) => new { leftg, right })
-                            .SelectMany(l => l.leftg.DefaultIfEmpty(),
-                                (x, y) => new JoinResult19253<A19253, B19253>
-                                {
-                                    Left = y,
-                                    Right = x.right
-                                }))
+                                (right, leftg) => new { leftg, right }
+                            )
+                            .SelectMany(
+                                l => l.leftg.DefaultIfEmpty(),
+                                (x, y) =>
+                                    new JoinResult19253<A19253, B19253>
+                                    {
+                                        Left = y,
+                                        Right = x.right
+                                    }
+                            )
+                    )
                     .ToList();
 
                 Assert.Single(query);
@@ -1186,30 +1249,29 @@ namespace Microsoft.EntityFrameworkCore.Query
                         context.B,
                         leftKeySelector,
                         rightKeySelector,
-                        (left, rightg) => new
-                        {
-                            left,
-                            rightg
-                        })
+                        (left, rightg) => new { left, rightg }
+                    )
                     .SelectMany(
                         r => r.rightg.DefaultIfEmpty(),
-                        (x, y) => new JoinResult19253<A19253, B19253>
-                        {
-                            Left = x.left,
-                            Right = y
-                        })
+                        (x, y) => new JoinResult19253<A19253, B19253> { Left = x.left, Right = y }
+                    )
                     .Intersect(
                         context.B.GroupJoin(
                                 context.A,
                                 rightKeySelector,
                                 leftKeySelector,
-                                (right, leftg) => new { leftg, right })
-                            .SelectMany(l => l.leftg.DefaultIfEmpty(),
-                                (x, y) => new JoinResult19253<A19253, B19253>
-                                {
-                                    Left = y,
-                                    Right = x.right
-                                }))
+                                (right, leftg) => new { leftg, right }
+                            )
+                            .SelectMany(
+                                l => l.leftg.DefaultIfEmpty(),
+                                (x, y) =>
+                                    new JoinResult19253<A19253, B19253>
+                                    {
+                                        Left = y,
+                                        Right = x.right
+                                    }
+                            )
+                    )
                     .ToList();
 
                 Assert.Single(query);
@@ -1223,8 +1285,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("19253");
             }
         }
@@ -1242,7 +1303,6 @@ namespace Microsoft.EntityFrameworkCore.Query
             public string a { get; set; }
             public string a1 { get; set; }
             public string forkey { get; set; }
-
         }
 
         private class B19253
@@ -1257,13 +1317,13 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             var tmp_a = new A19253[]
             {
-                new() {a = "a0", a1 = "a1", forkey = "a"},
-                new() {a = "a2", a1 = "a1", forkey = "d"},
+                new() { a = "a0", a1 = "a1", forkey = "a" },
+                new() { a = "a2", a1 = "a1", forkey = "d" },
             };
             var tmp_b = new B19253[]
             {
-                new() {b = "b0", b1 = "b1", forkey = "a"},
-                new() {b = "b2", b1 = "b1", forkey = "c"},
+                new() { b = "b0", b1 = "b1", forkey = "a" },
+                new() { b = "b2", b1 = "b1", forkey = "c" },
             };
             context.A.AddRange(tmp_a);
             context.B.AddRange(tmp_b);
@@ -1325,8 +1385,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("23285");
             }
 
@@ -1358,7 +1417,14 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private static void Seed23687(MyContext23687 context)
         {
-            context.Table.Add(new Root23687 { Id1 = 1, Id2 = 11, OwnedProp = new OwnedClass23687 { A = "A", B = "B" } });
+            context.Table.Add(
+                new Root23687
+                {
+                    Id1 = 1,
+                    Id2 = 11,
+                    OwnedProp = new OwnedClass23687 { A = "A", B = "B" }
+                }
+            );
 
             context.SaveChanges();
         }
@@ -1383,8 +1449,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("23687");
             }
 
@@ -1405,9 +1470,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 using var context = new MyContext23593();
 
-                var query = from sm in context.StatusMaps
-                            join sme in context.StatusMapEvents on sm.Id equals sme.Id
-                            select sm;
+                var query =
+                    from sm in context.StatusMaps
+                    join sme in context.StatusMapEvents on sm.Id equals sme.Id
+                    select sm;
 
                 var result = Assert.Single(query);
                 Assert.Equal(StatusMapCode23593.Two, result.Id);
@@ -1421,9 +1487,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 using var context = new MyContext23593();
 
-                var query = from sm in context.StatusMaps
-                            join sme in context.StatusMapEvents on new { sm.Id } equals new { sme.Id }
-                            select sm;
+                var query =
+                    from sm in context.StatusMaps
+                    join sme in context.StatusMapEvents on new { sm.Id } equals new { sme.Id }
+                    select sm;
 
                 var result = Assert.Single(query);
                 Assert.Equal(StatusMapCode23593.Two, result.Id);
@@ -1437,9 +1504,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 using var context = new MyContext23593();
 
-                var query = from sm in context.StatusMaps
-                            join sme in context.StatusMapEvents on new { sm.Id, A = 1 } equals new { sme.Id, A = 1 }
-                            select sm;
+                var query =
+                    from sm in context.StatusMaps
+                    join sme in context.StatusMapEvents
+                        on new { sm.Id, A = 1 } equals new { sme.Id, A = 1 }
+                    select sm;
 
                 var result = Assert.Single(query);
                 Assert.Equal(StatusMapCode23593.Two, result.Id);
@@ -1472,7 +1541,6 @@ namespace Microsoft.EntityFrameworkCore.Query
             public StatusMapCode23593 Id { get; set; }
         }
 
-
         private class MyContext23593 : DbContext
         {
             public DbSet<StatusMap23593> StatusMaps { get; set; }
@@ -1480,8 +1548,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("23593");
             }
         }
@@ -1542,14 +1609,14 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("23926");
             }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<User23926>().HasDiscriminator(e => e.Type)
+                modelBuilder.Entity<User23926>()
+                    .HasDiscriminator(e => e.Type)
                     .HasValue<User23926>(UserTypes23926.User)
                     .HasValue<DerivedUser23926>(UserTypes23926.DerivedUser);
             }
@@ -1566,15 +1633,18 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 using var context = new MyContext18435();
 
-                var result = context.TestEntities
-                    .Select(x => new
-                    {
-                        x.Value,
-                        A = x.Owned.First,
-                        B = x.Owned.Second,
-                        C = x.Child.Owned.First,
-                        D = x.Child.Owned.Second
-                    }).FirstOrDefault();
+                var result = context.TestEntities.Select(
+                        x =>
+                            new
+                            {
+                                x.Value,
+                                A = x.Owned.First,
+                                B = x.Owned.Second,
+                                C = x.Child.Owned.First,
+                                D = x.Child.Owned.Second
+                            }
+                    )
+                    .FirstOrDefault();
 
                 Assert.Equal("test", result.Value);
                 Assert.Equal(2, result.A);
@@ -1586,25 +1656,22 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private static void Seed18435(MyContext18435 context)
         {
-            context.Add(new RootEntity18435
-            {
-                Value = "test",
-                Owned = new TestOwned18435
+            context.Add(
+                new RootEntity18435
                 {
-                    First = 2,
-                    Second = 4,
-                    AnotherValueType = "yay"
-                },
-                Child = new ChildEntity18435
-                {
-                    Owned = new TestOwned18435
+                    Value = "test",
+                    Owned = new TestOwned18435 { First = 2, Second = 4, AnotherValueType = "yay" },
+                    Child = new ChildEntity18435
                     {
-                        First = 1,
-                        Second = 3,
-                        AnotherValueType = "nay"
+                        Owned = new TestOwned18435
+                        {
+                            First = 1,
+                            Second = 3,
+                            AnotherValueType = "nay"
+                        }
                     }
                 }
-            });
+            );
 
             context.SaveChanges();
         }
@@ -1615,7 +1682,6 @@ namespace Microsoft.EntityFrameworkCore.Query
             public string Value { get; set; }
             public TestOwned18435 Owned { get; set; }
             public ChildEntity18435 Child { get; set; }
-
         }
 
         private class ChildEntity18435
@@ -1639,8 +1705,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("18435");
             }
         }
@@ -1656,11 +1721,10 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 using var context = new MyContext19425();
 
-                var query = (from foo in context.FooTable
-                             select new
-                             {
-                                 Bar = foo.Bar != null ? (Bar19425)foo.Bar : (Bar19425?)null
-                             }).ToList();
+                var query = (
+                    from foo in context.FooTable
+                    select new { Bar = foo.Bar != null ? (Bar19425)foo.Bar : (Bar19425?)null }
+                ).ToList();
 
                 Assert.Single(query);
             }
@@ -1691,8 +1755,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("19425");
             }
         }
@@ -1708,7 +1771,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 using var context = new MyContext19667();
 
-                var query = context.Entities.OrderByDescending(e => e.Id).FirstOrDefault(p => p.Type.Date.Year == 2020);
+                var query = context.Entities.OrderByDescending(e => e.Id)
+                    .FirstOrDefault(p => p.Type.Date.Year == 2020);
 
                 Assert.Equal(2, query.Id);
             }
@@ -1716,8 +1780,20 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private static void Seed19667(MyContext19667 context)
         {
-            context.Entities.Add(new MyEntity19667 { Id = 1, Type = new MyType19667 { Date = new DateTime(2020, 1, 1) } });
-            context.Entities.Add(new MyEntity19667 { Id = 2, Type = new MyType19667 { Date = new DateTime(2020, 1, 1).AddDays(1) } });
+            context.Entities.Add(
+                new MyEntity19667
+                {
+                    Id = 1,
+                    Type = new MyType19667 { Date = new DateTime(2020, 1, 1) }
+                }
+            );
+            context.Entities.Add(
+                new MyEntity19667
+                {
+                    Id = 2,
+                    Type = new MyType19667 { Date = new DateTime(2020, 1, 1).AddDays(1) }
+                }
+            );
 
             context.SaveChanges();
         }
@@ -1741,8 +1817,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("19667");
             }
         }
@@ -1758,19 +1833,15 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 using var context = new MyContext20359();
 
-                var result1 = (from r in context.Root
-                               select new
-                               {
-                                   r.B.BValue,
-                                   r.A.Sub.AValue
-                               }).FirstOrDefault();
+                var result1 = (
+                    from r in context.Root
+                    select new { r.B.BValue, r.A.Sub.AValue }
+                ).FirstOrDefault();
 
-                var result2 = (from r in context.Root
-                               select new
-                               {
-                                   r.A.Sub.AValue,
-                                   r.B.BValue,
-                               }).FirstOrDefault();
+                var result2 = (
+                    from r in context.Root
+                    select new { r.A.Sub.AValue, r.B.BValue, }
+                ).FirstOrDefault();
 
                 Assert.Equal(result1.BValue, result2.BValue);
             }
@@ -1820,22 +1891,25 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("20359");
             }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<A20359>(builder =>
-                {
-                    builder.OwnsOne(x => x.Sub);
-                });
+                modelBuilder.Entity<A20359>(
+                    builder =>
+                    {
+                        builder.OwnsOne(x => x.Sub);
+                    }
+                );
 
-                modelBuilder.Entity<Root20359>(builder =>
-                {
-                    builder.OwnsOne(x => x.B);
-                });
+                modelBuilder.Entity<Root20359>(
+                    builder =>
+                    {
+                        builder.OwnsOne(x => x.B);
+                    }
+                );
             }
         }
 
@@ -1850,21 +1924,25 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 using var context = new MyContext23360();
 
-                var userQuery = context.User
-                   .Select(u => new CommonSelectType23360()
-                   {
-                       // 1. FirstName, 2. LastName
-                       FirstName = u.Forename,
-                       LastName = u.Surname,
-                   });
+                var userQuery = context.User.Select(
+                    u =>
+                        new CommonSelectType23360()
+                        {
+                            // 1. FirstName, 2. LastName
+                            FirstName = u.Forename,
+                            LastName = u.Surname,
+                        }
+                );
 
-                var customerQuery = context.Customer
-                    .Select(c => new CommonSelectType23360()
-                    {
-                        // 1. LastName, 2. FirstName
-                        LastName = c.FamilyName,
-                        FirstName = c.GivenName,
-                    });
+                var customerQuery = context.Customer.Select(
+                    c =>
+                        new CommonSelectType23360()
+                        {
+                            // 1. LastName, 2. FirstName
+                            LastName = c.FamilyName,
+                            FirstName = c.GivenName,
+                        }
+                );
 
                 var result = userQuery.Union(customerQuery).ToList();
 
@@ -1877,17 +1955,9 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private static void Seed23360(MyContext23360 context)
         {
-            context.User.Add(new User23360()
-            {
-                Forename = "Peter",
-                Surname = "Smith",
-            });
+            context.User.Add(new User23360() { Forename = "Peter", Surname = "Smith", });
 
-            context.Customer.Add(new Customer23360()
-            {
-                GivenName = "John",
-                FamilyName = "Doe",
-            });
+            context.Customer.Add(new Customer23360() { GivenName = "John", FamilyName = "Doe", });
 
             context.SaveChanges();
         }
@@ -1923,8 +1993,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("23360");
             }
         }
@@ -1940,24 +2009,30 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 using var context = new MyContext18394();
 
-                var myA = context.As
-                    .Where(x => x.Id == 1)
-                    .Select(x => new ADto18394
-                    {
-                        Id = x.Id,
-                        PropertyB = (x.PropertyB == null)
-                            ? null
-                            : new BDto18394
+                var myA = context.As.Where(x => x.Id == 1)
+                    .Select(
+                        x =>
+                            new ADto18394
                             {
-                                Id = x.PropertyB.Id,
-                                PropertyCList = x.PropertyB.PropertyCList.Select(
-                                    y => new CDto18394
-                                    {
-                                        Id = y.Id,
-                                        SomeText = y.SomeText
-                                    }).ToList()
+                                Id = x.Id,
+                                PropertyB =
+                                    (x.PropertyB == null)
+                                        ? null
+                                        : new BDto18394
+                                          {
+                                              Id = x.PropertyB.Id,
+                                              PropertyCList = x.PropertyB.PropertyCList.Select(
+                                                      y =>
+                                                          new CDto18394
+                                                          {
+                                                              Id = y.Id,
+                                                              SomeText = y.SomeText
+                                                          }
+                                                  )
+                                                  .ToList()
+                                          }
                             }
-                    })
+                    )
                     .FirstOrDefault();
 
                 Assert.Equal("TestText", myA.PropertyB.PropertyCList.First().SomeText);
@@ -1970,10 +2045,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 PropertyB = new B18394
                 {
-                    PropertyCList = new List<C18394>
-                    {
-                        new C18394 { SomeText = "TestText" }
-                    }
+                    PropertyCList = new List<C18394> { new C18394 { SomeText = "TestText" } }
                 }
             };
             context.As.Add(a);
@@ -2030,7 +2102,6 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             public string SomeText { get; set; }
 
-
             public B18394 B { get; set; }
         }
 
@@ -2042,8 +2113,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("18394");
             }
         }
@@ -2061,7 +2131,10 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                 var criteria = new DateTime(2020, 1, 1);
 
-                var data = context.Outers.Where(x => x.OwnedProp.At >= criteria || x.Inner.OwnedProp.At >= criteria).ToList();
+                var data = context.Outers.Where(
+                        x => x.OwnedProp.At >= criteria || x.Inner.OwnedProp.At >= criteria
+                    )
+                    .ToList();
 
                 Assert.Single(data);
             }
@@ -2116,8 +2189,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase("23934");
             }
         }
@@ -2126,13 +2198,14 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         #region SharedHelper
 
-        private static InMemoryTestStore CreateScratch<TContext>(Action<TContext> seed, string databaseName)
-            where TContext : DbContext, new()
+        private static InMemoryTestStore CreateScratch<TContext>(
+            Action<TContext> seed,
+            string databaseName
+        ) where TContext : DbContext, new()
         {
             return InMemoryTestStore.GetOrCreate(databaseName)
                 .InitializeInMemory(null, () => new TContext(), c => seed((TContext)c));
         }
-
         #endregion
     }
 }

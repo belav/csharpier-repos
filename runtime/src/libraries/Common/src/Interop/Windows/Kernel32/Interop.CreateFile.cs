@@ -13,7 +13,14 @@ internal static partial class Interop
         /// <summary>
         /// WARNING: This method does not implicitly handle long paths. Use CreateFile.
         /// </summary>
-        [DllImport(Libraries.Kernel32, EntryPoint = "CreateFileW", SetLastError = true, CharSet = CharSet.Unicode, BestFitMapping = false, ExactSpelling = true)]
+        [DllImport(
+            Libraries.Kernel32,
+            EntryPoint = "CreateFileW",
+            SetLastError = true,
+            CharSet = CharSet.Unicode,
+            BestFitMapping = false,
+            ExactSpelling = true
+        )]
         private static extern unsafe SafeFileHandle CreateFilePrivate(
             string lpFileName,
             int dwDesiredAccess,
@@ -21,7 +28,8 @@ internal static partial class Interop
             SECURITY_ATTRIBUTES* lpSecurityAttributes,
             FileMode dwCreationDisposition,
             int dwFlagsAndAttributes,
-            IntPtr hTemplateFile);
+            IntPtr hTemplateFile
+        );
 
         internal static unsafe SafeFileHandle CreateFile(
             string lpFileName,
@@ -30,10 +38,18 @@ internal static partial class Interop
             SECURITY_ATTRIBUTES* lpSecurityAttributes,
             FileMode dwCreationDisposition,
             int dwFlagsAndAttributes,
-            IntPtr hTemplateFile)
-        {
+            IntPtr hTemplateFile
+        ) {
             lpFileName = PathInternal.EnsureExtendedPrefixIfNeeded(lpFileName);
-            return CreateFilePrivate(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
+            return CreateFilePrivate(
+                lpFileName,
+                dwDesiredAccess,
+                dwShareMode,
+                lpSecurityAttributes,
+                dwCreationDisposition,
+                dwFlagsAndAttributes,
+                hTemplateFile
+            );
         }
 
         internal static unsafe SafeFileHandle CreateFile(
@@ -41,10 +57,18 @@ internal static partial class Interop
             int dwDesiredAccess,
             FileShare dwShareMode,
             FileMode dwCreationDisposition,
-            int dwFlagsAndAttributes)
-        {
+            int dwFlagsAndAttributes
+        ) {
             lpFileName = PathInternal.EnsureExtendedPrefixIfNeeded(lpFileName);
-            return CreateFilePrivate(lpFileName, dwDesiredAccess, dwShareMode, null, dwCreationDisposition, dwFlagsAndAttributes, IntPtr.Zero);
+            return CreateFilePrivate(
+                lpFileName,
+                dwDesiredAccess,
+                dwShareMode,
+                null,
+                dwCreationDisposition,
+                dwFlagsAndAttributes,
+                IntPtr.Zero
+            );
         }
     }
 }

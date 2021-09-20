@@ -24,30 +24,58 @@ namespace System.Net.Security.Tests
 
         // The following method is invoked by the RemoteCertificateValidationDelegate.
         public bool AllowAnyServerCertificate(
-              object sender,
-              X509Certificate certificate,
-              X509Chain chain,
-              SslPolicyErrors sslPolicyErrors)
-        {
-            return true;  // allow everything
+            object sender,
+            X509Certificate certificate,
+            X509Chain chain,
+            SslPolicyErrors sslPolicyErrors
+        ) {
+            return true; // allow everything
         }
 
         [Fact]
         public async Task ClientDefaultEncryption_ServerRequireEncryption_ConnectWithEncryption()
         {
-            using (var serverRequireEncryption = new DummyTcpServer(
-                new IPEndPoint(IPAddress.Loopback, 0), EncryptionPolicy.RequireEncryption))
+            using (
+                var serverRequireEncryption = new DummyTcpServer(
+                    new IPEndPoint(IPAddress.Loopback, 0),
+                    EncryptionPolicy.RequireEncryption
+                )
+            )
             using (var client = new TcpClient())
             {
-                await client.ConnectAsync(serverRequireEncryption.RemoteEndPoint.Address, serverRequireEncryption.RemoteEndPoint.Port);
+                await client.ConnectAsync(
+                    serverRequireEncryption.RemoteEndPoint.Address,
+                    serverRequireEncryption.RemoteEndPoint.Port
+                );
 
-                using (var sslStream = new SslStream(client.GetStream(), false, AllowAnyServerCertificate, null))
-                {
-                    await sslStream.AuthenticateAsClientAsync("localhost", null, SslProtocolSupport.DefaultSslProtocols, false);
-                    _log.WriteLine("Client authenticated to server({0}) with encryption cipher: {1} {2}-bit strength",
-                        serverRequireEncryption.RemoteEndPoint, sslStream.CipherAlgorithm, sslStream.CipherStrength);
-                    Assert.True(sslStream.CipherAlgorithm != CipherAlgorithmType.Null, "Cipher algorithm should not be NULL");
-                    Assert.True(sslStream.CipherStrength > 0, "Cipher strength should be greater than 0");
+                using (
+                    var sslStream = new SslStream(
+                        client.GetStream(),
+                        false,
+                        AllowAnyServerCertificate,
+                        null
+                    )
+                ) {
+                    await sslStream.AuthenticateAsClientAsync(
+                        "localhost",
+                        null,
+                        SslProtocolSupport.DefaultSslProtocols,
+                        false
+                    );
+                    _log.WriteLine(
+                        "Client authenticated to server({0}) with encryption cipher: {1} {2}-bit strength",
+                        serverRequireEncryption.RemoteEndPoint,
+                        sslStream.CipherAlgorithm,
+                        sslStream.CipherStrength
+                    );
+                    Assert.True(
+                        sslStream.CipherAlgorithm != CipherAlgorithmType.Null,
+                        "Cipher algorithm should not be NULL"
+                    );
+                    Assert.True(
+                        sslStream.CipherStrength > 0,
+                        "Cipher strength should be greater than 0"
+                    );
                 }
             }
         }
@@ -55,19 +83,47 @@ namespace System.Net.Security.Tests
         [Fact]
         public async Task ClientDefaultEncryption_ServerAllowNoEncryption_ConnectWithEncryption()
         {
-            using (var serverAllowNoEncryption = new DummyTcpServer(
-                new IPEndPoint(IPAddress.Loopback, 0), EncryptionPolicy.AllowNoEncryption))
+            using (
+                var serverAllowNoEncryption = new DummyTcpServer(
+                    new IPEndPoint(IPAddress.Loopback, 0),
+                    EncryptionPolicy.AllowNoEncryption
+                )
+            )
             using (var client = new TcpClient())
             {
-                await client.ConnectAsync(serverAllowNoEncryption.RemoteEndPoint.Address, serverAllowNoEncryption.RemoteEndPoint.Port);
+                await client.ConnectAsync(
+                    serverAllowNoEncryption.RemoteEndPoint.Address,
+                    serverAllowNoEncryption.RemoteEndPoint.Port
+                );
 
-                using (var sslStream = new SslStream(client.GetStream(), false, AllowAnyServerCertificate, null))
-                {
-                    await sslStream.AuthenticateAsClientAsync("localhost", null, SslProtocolSupport.DefaultSslProtocols, false);
-                    _log.WriteLine("Client authenticated to server({0}) with encryption cipher: {1} {2}-bit strength",
-                        serverAllowNoEncryption.RemoteEndPoint, sslStream.CipherAlgorithm, sslStream.CipherStrength);
-                    Assert.True(sslStream.CipherAlgorithm != CipherAlgorithmType.Null, "Cipher algorithm should not be NULL");
-                    Assert.True(sslStream.CipherStrength > 0, "Cipher strength should be greater than 0");
+                using (
+                    var sslStream = new SslStream(
+                        client.GetStream(),
+                        false,
+                        AllowAnyServerCertificate,
+                        null
+                    )
+                ) {
+                    await sslStream.AuthenticateAsClientAsync(
+                        "localhost",
+                        null,
+                        SslProtocolSupport.DefaultSslProtocols,
+                        false
+                    );
+                    _log.WriteLine(
+                        "Client authenticated to server({0}) with encryption cipher: {1} {2}-bit strength",
+                        serverAllowNoEncryption.RemoteEndPoint,
+                        sslStream.CipherAlgorithm,
+                        sslStream.CipherStrength
+                    );
+                    Assert.True(
+                        sslStream.CipherAlgorithm != CipherAlgorithmType.Null,
+                        "Cipher algorithm should not be NULL"
+                    );
+                    Assert.True(
+                        sslStream.CipherStrength > 0,
+                        "Cipher strength should be greater than 0"
+                    );
                 }
             }
         }
@@ -75,16 +131,36 @@ namespace System.Net.Security.Tests
         [Fact]
         public async Task ClientDefaultEncryption_ServerNoEncryption_NoConnect()
         {
-            using (var serverNoEncryption = new DummyTcpServer(
-                new IPEndPoint(IPAddress.Loopback, 0), EncryptionPolicy.NoEncryption))
+            using (
+                var serverNoEncryption = new DummyTcpServer(
+                    new IPEndPoint(IPAddress.Loopback, 0),
+                    EncryptionPolicy.NoEncryption
+                )
+            )
             using (var client = new TcpClient())
             {
-                await client.ConnectAsync(serverNoEncryption.RemoteEndPoint.Address, serverNoEncryption.RemoteEndPoint.Port);
+                await client.ConnectAsync(
+                    serverNoEncryption.RemoteEndPoint.Address,
+                    serverNoEncryption.RemoteEndPoint.Port
+                );
 
-                using (var sslStream = new SslStream(client.GetStream(), false, AllowAnyServerCertificate, null))
-                {
-                    await Assert.ThrowsAsync<AuthenticationException>(() =>
-                        sslStream.AuthenticateAsClientAsync("localhost", null, SslProtocolSupport.DefaultSslProtocols, false));
+                using (
+                    var sslStream = new SslStream(
+                        client.GetStream(),
+                        false,
+                        AllowAnyServerCertificate,
+                        null
+                    )
+                ) {
+                    await Assert.ThrowsAsync<AuthenticationException>(
+                        () =>
+                            sslStream.AuthenticateAsClientAsync(
+                                "localhost",
+                                null,
+                                SslProtocolSupport.DefaultSslProtocols,
+                                false
+                            )
+                    );
                 }
             }
         }

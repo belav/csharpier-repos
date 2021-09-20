@@ -74,14 +74,17 @@ namespace System.ComponentModel.Composition.Hosting
                 var traversalClosure = GetTraversalClosure(_innerCatalog.Where(_filter), traversal);
                 return new FilteredCatalog(_innerCatalog, p => traversalClosure.Contains(p));
             }
+
             finally
             {
                 UnfreezeInnerCatalog();
             }
         }
 
-        private static HashSet<ComposablePartDefinition> GetTraversalClosure(IEnumerable<ComposablePartDefinition> parts, IComposablePartCatalogTraversal traversal)
-        {
+        private static HashSet<ComposablePartDefinition> GetTraversalClosure(
+            IEnumerable<ComposablePartDefinition> parts,
+            IComposablePartCatalogTraversal traversal
+        ) {
             if (traversal == null)
             {
                 throw new ArgumentNullException(nameof(traversal));
@@ -91,14 +94,21 @@ namespace System.ComponentModel.Composition.Hosting
             return traversedParts;
         }
 
-        private static void GetTraversalClosure(IEnumerable<ComposablePartDefinition> parts, HashSet<ComposablePartDefinition> traversedParts, IComposablePartCatalogTraversal traversal)
-        {
+        private static void GetTraversalClosure(
+            IEnumerable<ComposablePartDefinition> parts,
+            HashSet<ComposablePartDefinition> traversedParts,
+            IComposablePartCatalogTraversal traversal
+        ) {
             foreach (var part in parts)
             {
                 if (traversedParts.Add(part))
                 {
-                    if (traversal.TryTraverse(part, out IEnumerable<ComposablePartDefinition>? partsToTraverse))
-                    {
+                    if (
+                        traversal.TryTraverse(
+                            part,
+                            out IEnumerable<ComposablePartDefinition>? partsToTraverse
+                        )
+                    ) {
                         GetTraversalClosure(partsToTraverse, traversedParts, traversal);
                     }
                 }
@@ -121,8 +131,10 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        private static void ThrowOnRecomposition(object? sender, ComposablePartCatalogChangeEventArgs e)
-        {
+        private static void ThrowOnRecomposition(
+            object? sender,
+            ComposablePartCatalogChangeEventArgs e
+        ) {
             throw new ChangeRejectedException();
         }
     }

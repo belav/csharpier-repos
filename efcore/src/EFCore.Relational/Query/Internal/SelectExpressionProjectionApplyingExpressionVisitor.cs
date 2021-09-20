@@ -27,7 +27,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             if (extensionExpression is ShapedQueryExpression shapedQueryExpression)
             {
-                return shapedQueryExpression.Update(Visit(shapedQueryExpression.QueryExpression), shapedQueryExpression.ShaperExpression);
+                return shapedQueryExpression.Update(
+                    Visit(shapedQueryExpression.QueryExpression),
+                    shapedQueryExpression.ShaperExpression
+                );
             }
 
             if (extensionExpression is SelectExpression selectExpression)

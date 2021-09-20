@@ -29,7 +29,10 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
 {
     using BadHttpRequestException = Microsoft.AspNetCore.Http.BadHttpRequestException;
 
-    internal abstract partial class IISHttpContext : NativeRequestContext, IThreadPoolWorkItem, IDisposable
+    internal abstract partial class IISHttpContext
+        : NativeRequestContext,
+          IThreadPoolWorkItem,
+          IDisposable
     {
         private const int MinAllocBufferSize = 2048;
         private const int PauseWriterThreshold = 65536;
@@ -80,9 +83,11 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             IISServerOptions options,
             IISHttpServer server,
             ILogger logger,
-            bool useLatin1)
-            : base((HttpApiTypes.HTTP_REQUEST*)NativeMethods.HttpGetRawRequest(pInProcessHandler), useLatin1: useLatin1)
-        {
+            bool useLatin1
+        ) : base(
+            (HttpApiTypes.HTTP_REQUEST*)NativeMethods.HttpGetRawRequest(pInProcessHandler),
+            useLatin1: useLatin1
+        ) {
             _memoryPool = memoryPool;
             _requestNativeHandle = pInProcessHandler;
             _options = options;
@@ -120,7 +125,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
         public IHeaderDictionary ResponseHeaders { get; set; } = default!;
         public IHeaderDictionary? ResponseTrailers { get; set; }
         private HeaderCollection HttpResponseHeaders { get; set; } = default!;
-        private HeaderCollection HttpResponseTrailers => _trailers ??= new HeaderCollection(checkTrailers: true);
+        private HeaderCollection HttpResponseTrailers =>
+            _trailers ??= new HeaderCollection(checkTrailers: true);
         internal bool HasTrailers => _trailers?.Count > 0;
 
         internal HttpApiTypes.HTTP_VERB KnownMethod { get; private set; }
@@ -142,14 +148,17 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                 RawTarget = GetRawUrl() ?? string.Empty;
                 // TODO version is slow.
                 HttpVersion = GetVersion();
-                Scheme = SslStatus != SslStatus.Insecure ? Constants.HttpsScheme : Constants.HttpScheme;
+                Scheme =
+                    SslStatus != SslStatus.Insecure ? Constants.HttpsScheme : Constants.HttpScheme;
                 KnownMethod = VerbId;
                 StatusCode = 200;
 
                 var originalPath = GetOriginalPath();
 
-                if (KnownMethod == HttpApiTypes.HTTP_VERB.HttpVerbOPTIONS && string.Equals(RawTarget, "*", StringComparison.Ordinal))
-                {
+                if (
+                    KnownMethod == HttpApiTypes.HTTP_VERB.HttpVerbOPTIONS
+                    && string.Equals(RawTarget, "*", StringComparison.Ordinal)
+                ) {
                     PathBase = string.Empty;
                     Path = string.Empty;
                 }
@@ -198,7 +207,9 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                         readerScheduler: PipeScheduler.ThreadPool,
                         pauseWriterThreshold: PauseWriterThreshold,
                         resumeWriterThreshold: ResumeWriterTheshold,
-                        minimumSegmentSize: MinAllocBufferSize));
+                        minimumSegmentSize: MinAllocBufferSize
+                    )
+                );
                 _bodyOutput = new OutputProducer(pipe);
             }
 
@@ -260,8 +271,13 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             // Note Http.Sys adds the Transfer-Encoding: chunked header to HTTP/2 requests with bodies for back compat.
             // Transfer-Encoding takes priority over Content-Length.
             string transferEncoding = RequestHeaders[HttpKnownHeaderNames.TransferEncoding];
-            if (string.Equals("chunked", transferEncoding?.Trim(), StringComparison.OrdinalIgnoreCase))
-            {
+            if (
+                string.Equals(
+                    "chunked",
+                    transferEncoding?.Trim(),
+                    StringComparison.OrdinalIgnoreCase
+                )
+            ) {
                 return true;
             }
 
@@ -316,8 +332,7 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
 
         private bool StatusCodeCanHaveBody()
         {
-            return StatusCode != 204
-                && StatusCode != 304;
+            return StatusCode != 204 && StatusCode != 304;
         }
 
         private void InitializeRequestIO()
@@ -333,7 +348,13 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
 
             EnsureIOInitialized();
 
-            _bodyInputPipe = new Pipe(new PipeOptions(_memoryPool, readerScheduler: PipeScheduler.ThreadPool, minimumSegmentSize: MinAllocBufferSize));
+            _bodyInputPipe = new Pipe(
+                new PipeOptions(
+                    _memoryPool,
+                    readerScheduler: PipeScheduler.ThreadPool,
+                    minimumSegmentSize: MinAllocBufferSize
+                )
+            );
             _readBodyTask = ReadBody();
         }
 
@@ -349,7 +370,10 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
 
         private void ThrowResponseAbortedException()
         {
-            throw new ObjectDisposedException(CoreStrings.UnhandledApplicationException, _applicationException);
+            throw new ObjectDisposedException(
+                CoreStrings.UnhandledApplicationException,
+                _applicationException
+            );
         }
 
         protected Task ProduceEnd()
@@ -399,10 +423,16 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
         public unsafe void SetResponseHeaders()
         {
             // Verifies we have sent the statuscode before writing a header
-            var reasonPhrase = string.IsNullOrEmpty(ReasonPhrase) ? ReasonPhrases.GetReasonPhrase(StatusCode) : ReasonPhrase;
+            var reasonPhrase = string.IsNullOrEmpty(ReasonPhrase)
+                ? ReasonPhrases.GetReasonPhrase(StatusCode)
+                : ReasonPhrase;
 
             // This copies data into the underlying buffer
-            NativeMethods.HttpSetResponseStatusCode(_requestNativeHandle, (ushort)StatusCode, reasonPhrase);
+            NativeMethods.HttpSetResponseStatusCode(
+                _requestNativeHandle,
+                (ushort)StatusCode,
+                reasonPhrase
+            );
 
             HttpResponseHeaders.IsReadOnly = true;
             foreach (var headerPair in HttpResponseHeaders)
@@ -414,7 +444,9 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                     continue;
                 }
 
-                var knownHeaderIndex = HttpApiTypes.HTTP_RESPONSE_HEADER_ID.IndexOfKnownHeader(headerPair.Key);
+                var knownHeaderIndex = HttpApiTypes.HTTP_RESPONSE_HEADER_ID.IndexOfKnownHeader(
+                    headerPair.Key
+                );
                 for (var i = 0; i < headerValues.Count; i++)
                 {
                     if (string.IsNullOrEmpty(headerValues[i]))
@@ -431,12 +463,24 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                             var headerNameBytes = Encoding.UTF8.GetBytes(headerPair.Key);
                             fixed (byte* pHeaderName = headerNameBytes)
                             {
-                                NativeMethods.HttpResponseSetUnknownHeader(_requestNativeHandle, pHeaderName, pHeaderValue, (ushort)headerValueBytes.Length, fReplace: isFirst);
+                                NativeMethods.HttpResponseSetUnknownHeader(
+                                    _requestNativeHandle,
+                                    pHeaderName,
+                                    pHeaderValue,
+                                    (ushort)headerValueBytes.Length,
+                                    fReplace: isFirst
+                                );
                             }
                         }
                         else
                         {
-                            NativeMethods.HttpResponseSetKnownHeader(_requestNativeHandle, knownHeaderIndex, pHeaderValue, (ushort)headerValueBytes.Length, fReplace: isFirst);
+                            NativeMethods.HttpResponseSetKnownHeader(
+                                _requestNativeHandle,
+                                knownHeaderIndex,
+                                pHeaderValue,
+                                (ushort)headerValueBytes.Length,
+                                fReplace: isFirst
+                            );
                         }
                     }
                 }
@@ -470,7 +514,13 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                         var headerValueBytes = Encoding.UTF8.GetBytes(headerValue);
                         fixed (byte* pHeaderValue = headerValueBytes)
                         {
-                            NativeMethods.HttpResponseSetTrailer(_requestNativeHandle, pHeaderName, pHeaderValue, (ushort)headerValueBytes.Length, replace: isFirst);
+                            NativeMethods.HttpResponseSetTrailer(
+                                _requestNativeHandle,
+                                pHeaderName,
+                                pHeaderValue,
+                                (ushort)headerValueBytes.Length,
+                                replace: isFirst
+                            );
                         }
 
                         isFirst = false;
@@ -552,7 +602,12 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                     }
                     catch (Exception ex)
                     {
-                        Log.ApplicationError(_logger, ((IHttpConnectionFeature)this).ConnectionId, ((IHttpRequestIdentifierFeature)this).TraceIdentifier, ex);
+                        Log.ApplicationError(
+                            _logger,
+                            ((IHttpConnectionFeature)this).ConnectionId,
+                            ((IHttpRequestIdentifierFeature)this).TraceIdentifier,
+                            ex
+                        );
                     }
                 }
             }
@@ -590,11 +645,17 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                 _applicationException = new AggregateException(_applicationException, ex);
             }
 
-            Log.ApplicationError(_logger, ((IHttpConnectionFeature)this).ConnectionId, ((IHttpRequestIdentifierFeature)this).TraceIdentifier, ex);
+            Log.ApplicationError(
+                _logger,
+                ((IHttpConnectionFeature)this).ConnectionId,
+                ((IHttpRequestIdentifierFeature)this).TraceIdentifier,
+                ex
+            );
         }
 
-        public void PostCompletion(NativeMethods.REQUEST_NOTIFICATION_STATUS requestNotificationStatus)
-        {
+        public void PostCompletion(
+            NativeMethods.REQUEST_NOTIFICATION_STATUS requestNotificationStatus
+        ) {
             NativeMethods.HttpSetCompletionStatus(_requestNativeHandle, requestNotificationStatus);
             NativeMethods.HttpPostCompletion(_requestNativeHandle, 0);
         }
@@ -642,19 +703,34 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
 
         private void ThrowResponseAlreadyStartedException(string name)
         {
-            throw new InvalidOperationException(CoreStrings.FormatParameterReadOnlyAfterResponseStarted(name));
+            throw new InvalidOperationException(
+                CoreStrings.FormatParameterReadOnlyAfterResponseStarted(name)
+            );
         }
 
         private WindowsPrincipal? GetWindowsPrincipal()
         {
-            NativeMethods.HttpGetAuthenticationInformation(_requestNativeHandle, out var authenticationType, out var token);
+            NativeMethods.HttpGetAuthenticationInformation(
+                _requestNativeHandle,
+                out var authenticationType,
+                out var token
+            );
 
             if (token != IntPtr.Zero && authenticationType != null)
             {
-                if ((authenticationType.Equals(NtlmString, StringComparison.OrdinalIgnoreCase)
-                    || authenticationType.Equals(NegotiateString, StringComparison.OrdinalIgnoreCase)
-                    || authenticationType.Equals(BasicString, StringComparison.OrdinalIgnoreCase)))
-                {
+                if (
+                    (
+                        authenticationType.Equals(NtlmString, StringComparison.OrdinalIgnoreCase)
+                        || authenticationType.Equals(
+                            NegotiateString,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                        || authenticationType.Equals(
+                            BasicString,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                ) {
                     return new WindowsPrincipal(new WindowsIdentity(token, authenticationType));
                 }
             }
@@ -676,7 +752,11 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             }
             catch (Exception ex)
             {
-                _logger.LogError(0, ex, $"Unexpected exception in {nameof(IISHttpContext)}.{nameof(HandleRequest)}.");
+                _logger.LogError(
+                    0,
+                    ex,
+                    $"Unexpected exception in {nameof(IISHttpContext)}.{nameof(HandleRequest)}."
+                );
             }
             finally
             {
@@ -699,10 +779,12 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             }
         }
 
-        private static NativeMethods.REQUEST_NOTIFICATION_STATUS ConvertRequestCompletionResults(bool success)
-        {
-            return success ? NativeMethods.REQUEST_NOTIFICATION_STATUS.RQ_NOTIFICATION_CONTINUE
-                           : NativeMethods.REQUEST_NOTIFICATION_STATUS.RQ_NOTIFICATION_FINISH_REQUEST;
+        private static NativeMethods.REQUEST_NOTIFICATION_STATUS ConvertRequestCompletionResults(
+            bool success
+        ) {
+            return success
+                ? NativeMethods.REQUEST_NOTIFICATION_STATUS.RQ_NOTIFICATION_CONTINUE
+                : NativeMethods.REQUEST_NOTIFICATION_STATUS.RQ_NOTIFICATION_FINISH_REQUEST;
         }
     }
 }

@@ -31,15 +31,18 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         ///     facets for the converted data.
         /// </param>
         public NumberToBytesConverter(ConverterMappingHints? mappingHints = null)
-            : base(ToBytes(), ToNumber(), _defaultHints.With(mappingHints))
-        {
-        }
+            : base(ToBytes(), ToNumber(), _defaultHints.With(mappingHints)) { }
 
         /// <summary>
         ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
         /// </summary>
-        public static ValueConverterInfo DefaultInfo { get; }
-            = new(typeof(TNumber), typeof(byte[]), i => new NumberToBytesConverter<TNumber>(i.MappingHints), _defaultHints);
+        public static ValueConverterInfo DefaultInfo { get; } =
+            new(
+                typeof(TNumber),
+                typeof(byte[]),
+                i => new NumberToBytesConverter<TNumber>(i.MappingHints),
+                _defaultHints
+            );
 
         private static Expression<Func<TNumber, byte[]>> ToBytes()
         {
@@ -48,9 +51,19 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             CheckTypeSupported(
                 type,
                 typeof(NumberToBytesConverter<TNumber>),
-                typeof(double), typeof(float), typeof(decimal), typeof(char),
-                typeof(int), typeof(long), typeof(short), typeof(byte),
-                typeof(uint), typeof(ulong), typeof(ushort), typeof(sbyte));
+                typeof(double),
+                typeof(float),
+                typeof(decimal),
+                typeof(char),
+                typeof(int),
+                typeof(long),
+                typeof(short),
+                typeof(byte),
+                typeof(uint),
+                typeof(ulong),
+                typeof(ushort),
+                typeof(sbyte)
+            );
 
             var param = Expression.Parameter(typeof(TNumber), "v");
 
@@ -58,31 +71,36 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                 ? Expression.Convert(param, type)
                 : (Expression)param;
 
-            var output = type == typeof(byte)
-                ? Expression.NewArrayInit(typeof(byte), input)
-                : type == typeof(sbyte)
-                    ? Expression.NewArrayInit(
-                        typeof(byte),
-                        Expression.Convert(input, typeof(byte)))
-                    : type == typeof(decimal)
-                        ? Expression.Call(
-                            _toBytesMethod,
-                            input)
-                        : EnsureEndian(
-                            Expression.Call(
-                                typeof(BitConverter).GetMethod(
-                                    nameof(BitConverter.GetBytes),
-                                    new[] { type })!,
-                                input));
+            var output =
+                type == typeof(byte)
+                    ? Expression.NewArrayInit(typeof(byte), input)
+                    : type == typeof(sbyte)
+                        ? Expression.NewArrayInit(
+                              typeof(byte),
+                              Expression.Convert(input, typeof(byte))
+                          )
+                        : type == typeof(decimal)
+                            ? Expression.Call(_toBytesMethod, input)
+                            : EnsureEndian(
+                                  Expression.Call(
+                                      typeof(BitConverter).GetMethod(
+                                          nameof(BitConverter.GetBytes),
+                                          new[] { type }
+                                      )!,
+                                      input
+                                  )
+                              );
 
             if (typeof(TNumber).IsNullableType())
             {
                 output = Expression.Condition(
                     Expression.Property(
                         param,
-                        typeof(TNumber).GetProperty(nameof(Nullable<int>.HasValue))!),
+                        typeof(TNumber).GetProperty(nameof(Nullable<int>.HasValue))!
+                    ),
                     output,
-                    Expression.Constant(null, typeof(byte[])));
+                    Expression.Constant(null, typeof(byte[]))
+                );
             }
 
             return Expression.Lambda<Func<TNumber, byte[]>>(output, param);
@@ -93,24 +111,24 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             var type = typeof(TNumber).UnwrapNullableType();
             var param = Expression.Parameter(typeof(byte[]), "v");
 
-            var output = type == typeof(byte)
-                ? Expression.ArrayAccess(param, Expression.Constant(0))
-                : type == typeof(sbyte)
-                    ? Expression.Convert(
-                        Expression.ArrayAccess(
-                            param,
-                            Expression.Constant(0)),
-                        typeof(sbyte))
-                    : type == typeof(decimal)
-                        ? Expression.Call(
-                            _toDecimalMethod,
-                            param)
-                        : (Expression)Expression.Call(
-                            typeof(BitConverter).GetMethod(
-                                "To" + type.Name,
-                                new[] { typeof(byte[]), typeof(int) })!,
-                            EnsureEndian(HandleEmptyArray(param)),
-                            Expression.Constant(0));
+            var output =
+                type == typeof(byte)
+                    ? Expression.ArrayAccess(param, Expression.Constant(0))
+                    : type == typeof(sbyte)
+                        ? Expression.Convert(
+                              Expression.ArrayAccess(param, Expression.Constant(0)),
+                              typeof(sbyte)
+                          )
+                        : type == typeof(decimal)
+                            ? Expression.Call(_toDecimalMethod, param)
+                            : (Expression)Expression.Call(
+                                  typeof(BitConverter).GetMethod(
+                                      "To" + type.Name,
+                                      new[] { typeof(byte[]), typeof(int) }
+                                  )!,
+                                  EnsureEndian(HandleEmptyArray(param)),
+                                  Expression.Constant(0)
+                              );
 
             if (typeof(TNumber).IsNullableType())
             {
@@ -121,8 +139,10 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                 Expression.Condition(
                     Expression.ReferenceEqual(param, Expression.Constant(null)),
                     Expression.Constant(default(TNumber), typeof(TNumber)),
-                    output),
-                param);
+                    output
+                ),
+                param
+            );
         }
 
         private static Expression HandleEmptyArray(Expression expression)
@@ -135,7 +155,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             return Expression.Condition(
                 Expression.Equal(Expression.ArrayLength(expression), Expression.Constant(0)),
                 Expression.NewArrayBounds(typeof(byte), Expression.Constant(GetByteCount())),
-                expression);
+                expression
+            );
         }
 
         private static Expression EnsureEndian(Expression expression)
@@ -158,29 +179,41 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             }
         }
 
-        private static readonly MethodInfo _reverseLongMethod
-            = typeof(NumberToBytesConverter<TNumber>).GetMethod(
+        private static readonly MethodInfo _reverseLongMethod =
+            typeof(NumberToBytesConverter<TNumber>).GetMethod(
                 nameof(ReverseLong),
-                BindingFlags.Static | BindingFlags.NonPublic)!;
+                BindingFlags.Static | BindingFlags.NonPublic
+            )!;
 
-        private static readonly MethodInfo _reverseIntMethod
-            = typeof(NumberToBytesConverter<TNumber>).GetMethod(
+        private static readonly MethodInfo _reverseIntMethod =
+            typeof(NumberToBytesConverter<TNumber>).GetMethod(
                 nameof(ReverseInt),
-                BindingFlags.Static | BindingFlags.NonPublic)!;
+                BindingFlags.Static | BindingFlags.NonPublic
+            )!;
 
-        private static readonly MethodInfo _reverseShortMethod
-            = typeof(NumberToBytesConverter<TNumber>).GetMethod(
+        private static readonly MethodInfo _reverseShortMethod =
+            typeof(NumberToBytesConverter<TNumber>).GetMethod(
                 nameof(ReverseShort),
-                BindingFlags.Static | BindingFlags.NonPublic)!;
+                BindingFlags.Static | BindingFlags.NonPublic
+            )!;
 
-        private static byte[] ReverseLong(byte[] bytes)
-            => new[] { bytes[7], bytes[6], bytes[5], bytes[4], bytes[3], bytes[2], bytes[1], bytes[0] };
+        private static byte[] ReverseLong(byte[] bytes) =>
+            new[]
+            {
+                bytes[7],
+                bytes[6],
+                bytes[5],
+                bytes[4],
+                bytes[3],
+                bytes[2],
+                bytes[1],
+                bytes[0]
+            };
 
-        private static byte[] ReverseInt(byte[] bytes)
-            => new[] { bytes[3], bytes[2], bytes[1], bytes[0] };
+        private static byte[] ReverseInt(byte[] bytes) =>
+            new[] { bytes[3], bytes[2], bytes[1], bytes[0] };
 
-        private static byte[] ReverseShort(byte[] bytes)
-            => new[] { bytes[1], bytes[0] };
+        private static byte[] ReverseShort(byte[] bytes) => new[] { bytes[1], bytes[0] };
 
         private static int GetByteCount()
         {
@@ -188,30 +221,31 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
 
             return type == typeof(decimal)
                 ? 16
-                : (type == typeof(long)
-                    || type == typeof(ulong)
-                    || type == typeof(double)
-                        ? 8
-                        : (type == typeof(int)
-                            || type == typeof(uint)
-                            || type == typeof(float)
-                                ? 4
-                                : (type == typeof(short)
-                                    || type == typeof(ushort)
-                                    || type == typeof(char)
-                                        ? 2
-                                        : 1)));
+                : (
+                      type == typeof(long) || type == typeof(ulong) || type == typeof(double)
+                          ? 8
+                          : (
+                                type == typeof(int) || type == typeof(uint) || type == typeof(float)
+                                    ? 4
+                                    : (
+                                          type == typeof(short)
+                                          || type == typeof(ushort)
+                                          || type == typeof(char)
+                                              ? 2
+                                              : 1
+                                      )
+                            )
+                  );
         }
 
-        private static byte[] EnsureEndianInt(byte[] bytes)
-            => BitConverter.IsLittleEndian
-                ? ReverseInt(bytes)
-                : bytes;
+        private static byte[] EnsureEndianInt(byte[] bytes) =>
+            BitConverter.IsLittleEndian ? ReverseInt(bytes) : bytes;
 
-        private static readonly MethodInfo _toBytesMethod
-            = typeof(NumberToBytesConverter<TNumber>).GetMethod(
+        private static readonly MethodInfo _toBytesMethod =
+            typeof(NumberToBytesConverter<TNumber>).GetMethod(
                 nameof(DecimalToBytes),
-                BindingFlags.Static | BindingFlags.NonPublic)!;
+                BindingFlags.Static | BindingFlags.NonPublic
+            )!;
 
         private static byte[] DecimalToBytes(decimal value)
         {
@@ -226,10 +260,11 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             return bytes;
         }
 
-        private static readonly MethodInfo _toDecimalMethod
-            = typeof(NumberToBytesConverter<TNumber>).GetMethod(
+        private static readonly MethodInfo _toDecimalMethod =
+            typeof(NumberToBytesConverter<TNumber>).GetMethod(
                 nameof(BytesToDecimal),
-                BindingFlags.Static | BindingFlags.NonPublic)!;
+                BindingFlags.Static | BindingFlags.NonPublic
+            )!;
 
         private static decimal BytesToDecimal(byte[] bytes)
         {
@@ -251,7 +286,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                 BitConverter.ToInt32(gotBytes, 8),
                 BitConverter.ToInt32(gotBytes, 4),
                 (specialBits & 0x80000000) != 0,
-                (byte)((specialBits & 0x00FF0000) >> 16));
+                (byte)((specialBits & 0x00FF0000) >> 16)
+            );
         }
     }
 }

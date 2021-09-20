@@ -36,19 +36,23 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        protected virtual InternalDbFunctionBuilder Builder { [DebuggerStepThrough] get; }
+        protected virtual InternalDbFunctionBuilder Builder
+        {
+            [DebuggerStepThrough]
+            get;
+        }
 
         /// <inheritdoc />
         IConventionDbFunctionBuilder IInfrastructure<IConventionDbFunctionBuilder>.Instance
         {
-            [DebuggerStepThrough] get => Builder;
+            [DebuggerStepThrough]
+            get => Builder;
         }
 
         /// <summary>
         ///     The function being configured.
         /// </summary>
-        public virtual IMutableDbFunction Metadata
-            => Builder.Metadata;
+        public virtual IMutableDbFunction Metadata => Builder.Metadata;
 
         /// <summary>
         ///     Sets the name of the database function.
@@ -92,8 +96,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </summary>
         /// <param name="name"> The parameter name. </param>
         /// <returns> The builder to use for further parameter configuration. </returns>
-        public virtual DbFunctionParameterBuilder HasParameter(string name)
-            => new(Builder.HasParameter(name, ConfigurationSource.Explicit).Metadata);
+        public virtual DbFunctionParameterBuilder HasParameter(string name) =>
+            new(Builder.HasParameter(name, ConfigurationSource.Explicit).Metadata);
 
         #region Hidden System.Object members
 
@@ -102,8 +106,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </summary>
         /// <returns> A string that represents the current object. </returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override string? ToString()
-            => base.ToString();
+        public override string? ToString() => base.ToString();
 
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
@@ -112,8 +115,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> <see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />. </returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectEqualsIsObjectEquals
-        public override bool Equals(object? obj)
-            => base.Equals(obj);
+        public override bool Equals(object? obj) => base.Equals(obj);
 
         /// <summary>
         ///     Serves as the default hash function.
@@ -121,9 +123,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> A hash code for the current object. </returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-        public override int GetHashCode()
-            => base.GetHashCode();
-
+        public override int GetHashCode() => base.GetHashCode();
         #endregion
     }
 }

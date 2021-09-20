@@ -16,8 +16,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             string directiveText,
             string typePattern,
             string assemblyName,
-            List<RazorDiagnostic> diagnostics)
-        {
+            List<RazorDiagnostic> diagnostics
+        ) {
             LookupText = lookupText;
             DirectiveText = directiveText;
             AssemblyName = assemblyName;
@@ -39,12 +39,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public override bool Equals(object obj)
         {
             var other = obj as AddTagHelperChunkGenerator;
-            return base.Equals(other) &&
-                Enumerable.SequenceEqual(Diagnostics, other.Diagnostics) &&
-                string.Equals(LookupText, other.LookupText, StringComparison.Ordinal) &&
-                string.Equals(DirectiveText, other.DirectiveText, StringComparison.Ordinal) &&
-                string.Equals(TypePattern, other.TypePattern, StringComparison.Ordinal) &&
-                string.Equals(AssemblyName, other.AssemblyName, StringComparison.Ordinal);
+            return base.Equals(other)
+                && Enumerable.SequenceEqual(Diagnostics, other.Diagnostics)
+                && string.Equals(LookupText, other.LookupText, StringComparison.Ordinal)
+                && string.Equals(DirectiveText, other.DirectiveText, StringComparison.Ordinal)
+                && string.Equals(TypePattern, other.TypePattern, StringComparison.Ordinal)
+                && string.Equals(AssemblyName, other.AssemblyName, StringComparison.Ordinal);
         }
 
         /// <inheritdoc />
@@ -75,7 +75,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             if (Diagnostics.Count > 0)
             {
                 builder.Append(" [");
-                var ids = string.Join(", ", Diagnostics.Select(diagnostic => $"{diagnostic.Id}{diagnostic.Span}"));
+                var ids = string.Join(
+                    ", ",
+                    Diagnostics.Select(diagnostic => $"{diagnostic.Id}{diagnostic.Span}")
+                );
                 builder.Append(ids);
                 builder.Append("]");
             }

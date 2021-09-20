@@ -15,18 +15,19 @@ namespace AutoMapper.UnitTests
         {
             var featureA = new MappingExpressionFeatureA(1);
             var featureB = new MappingExpressionFeatureB(1);
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Source, Dest>()
-                    .SetFeature(new MappingExpressionFeatureA(3))
-                    .SetFeature(new MappingExpressionFeatureA(2))
-                    .SetFeature(featureA)
-                    .SetFeature(new MappingExpressionFeatureB(3))
-                    .SetFeature(new MappingExpressionFeatureB(2))
-                    .SetFeature(featureB)
-                    .ReverseMap();
-            });
-
+            var config = new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>()
+                        .SetFeature(new MappingExpressionFeatureA(3))
+                        .SetFeature(new MappingExpressionFeatureA(2))
+                        .SetFeature(featureA)
+                        .SetFeature(new MappingExpressionFeatureB(3))
+                        .SetFeature(new MappingExpressionFeatureB(2))
+                        .SetFeature(featureB)
+                        .ReverseMap();
+                }
+            );
 
             var typeMap = config.FindTypeMapFor<Source, Dest>();
             typeMap.Features.Count().ShouldBe(2);
@@ -48,12 +49,12 @@ namespace AutoMapper.UnitTests
         public void Add_single_feature_with_reverse()
         {
             var featureA = new MappingExpressionFeatureA(1);
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Source, Dest>()
-                    .SetFeature(featureA)
-                    .ReverseMap();
-            });
+            var config = new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>().SetFeature(featureA).ReverseMap();
+                }
+            );
 
             var typeMap = config.FindTypeMapFor<Source, Dest>();
             typeMap.Features.Count().ShouldBe(1);
@@ -86,13 +87,15 @@ namespace AutoMapper.UnitTests
         {
             var featureA = new MappingExpressionFeatureA(1);
             var featureB = new MappingExpressionFeatureB(2);
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Source, Dest>()
-                    .SetFeature(featureA)
-                    .SetFeature(featureB)
-                    .ReverseMap();
-            });
+            var config = new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>()
+                        .SetFeature(featureA)
+                        .SetFeature(featureB)
+                        .ReverseMap();
+                }
+            );
 
             var typeMap = config.FindTypeMapFor<Source, Dest>();
             typeMap.Features.Count().ShouldBe(2);
@@ -127,14 +130,16 @@ namespace AutoMapper.UnitTests
             var featureA = new MappingExpressionFeatureA(1);
             var featureB = new MappingExpressionFeatureB(2);
             var overridenFeatureB = new MappingExpressionFeatureB(10);
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Source, Dest>()
-                    .SetFeature(featureA)
-                    .SetFeature(featureB)
-                    .ReverseMap()
-                    .SetFeature(overridenFeatureB);
-            });
+            var config = new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>()
+                        .SetFeature(featureA)
+                        .SetFeature(featureB)
+                        .ReverseMap()
+                        .SetFeature(overridenFeatureB);
+                }
+            );
 
             var typeMap = config.FindTypeMapFor<Source, Dest>();
             typeMap.Features.Count().ShouldBe(2);
@@ -147,8 +152,12 @@ namespace AutoMapper.UnitTests
             Validate<TypeMapFeatureA>(featureA, typeMapReverse, value: featureA.Value + 1);
             Validate<TypeMapFeatureB>(overridenFeatureB, typeMapReverse, 0);
 
-            void Validate<TFeature>(MappingExpressionFeatureBase feature, TypeMap map, int reverseExecutedCount = 1, int? value = null)
-                where TFeature : TypeMapFeatureBase
+            void Validate<TFeature>(
+                MappingExpressionFeatureBase feature,
+                TypeMap map,
+                int reverseExecutedCount = 1,
+                int? value = null
+            ) where TFeature : TypeMapFeatureBase
             {
                 feature.ConfigureTypeMaps.ShouldBeOfLength(1);
                 feature.ReverseMaps.ShouldBeOfLength(reverseExecutedCount);
@@ -162,16 +171,22 @@ namespace AutoMapper.UnitTests
 
         public class MappingExpressionFeatureA : MappingExpressionFeatureBase<TypeMapFeatureA>
         {
-            public MappingExpressionFeatureA(int value) : base(value, new TypeMapFeatureA(value), () => new MappingExpressionFeatureA(value + 1))
-            {
-            }
+            public MappingExpressionFeatureA(int value)
+                : base(
+                    value,
+                    new TypeMapFeatureA(value),
+                    () => new MappingExpressionFeatureA(value + 1)
+                ) { }
         }
 
         public class MappingExpressionFeatureB : MappingExpressionFeatureBase<TypeMapFeatureB>
         {
-            public MappingExpressionFeatureB(int value) : base(value, new TypeMapFeatureB(value), () => new MappingExpressionFeatureB(value + 1))
-            {
-            }
+            public MappingExpressionFeatureB(int value)
+                : base(
+                    value,
+                    new TypeMapFeatureB(value),
+                    () => new MappingExpressionFeatureB(value + 1)
+                ) { }
         }
 
         public abstract class MappingExpressionFeatureBase<TFeature> : MappingExpressionFeatureBase
@@ -179,8 +194,11 @@ namespace AutoMapper.UnitTests
         {
             private readonly TFeature _feature;
 
-            protected MappingExpressionFeatureBase(int value, TFeature feature, Func<IMappingFeature> reverseMappingExpressionFeature)
-                : base(value, reverseMappingExpressionFeature)
+            protected MappingExpressionFeatureBase(
+                int value,
+                TFeature feature,
+                Func<IMappingFeature> reverseMappingExpressionFeature
+            ) : base(value, reverseMappingExpressionFeature)
             {
                 _feature = feature;
             }
@@ -200,8 +218,10 @@ namespace AutoMapper.UnitTests
 
             private readonly Func<IMappingFeature> _reverseMappingExpressionFeature;
 
-            protected MappingExpressionFeatureBase(int value, Func<IMappingFeature> reverseMappingExpressionFeature)
-            {
+            protected MappingExpressionFeatureBase(
+                int value,
+                Func<IMappingFeature> reverseMappingExpressionFeature
+            ) {
                 Value = value;
                 _reverseMappingExpressionFeature = reverseMappingExpressionFeature;
             }
@@ -218,16 +238,12 @@ namespace AutoMapper.UnitTests
 
         public class TypeMapFeatureA : TypeMapFeatureBase
         {
-            public TypeMapFeatureA(int value) : base(value)
-            {
-            }
+            public TypeMapFeatureA(int value) : base(value) { }
         }
 
         public class TypeMapFeatureB : TypeMapFeatureBase
         {
-            public TypeMapFeatureB(int value) : base(value)
-            {
-            }
+            public TypeMapFeatureB(int value) : base(value) { }
         }
 
         public abstract class TypeMapFeatureBase : IRuntimeFeature
@@ -245,7 +261,6 @@ namespace AutoMapper.UnitTests
                 SealedCount++;
             }
         }
-
 
         public class Source
         {

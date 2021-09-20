@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
     {
         // From MurmurHash:
         // 'm' and 'r' are mixing constants generated off-line.
-        // The values for m and r are chosen through experimentation and 
+        // The values for m and r are chosen through experimentation and
         // supported by evidence that they work well.
         private const uint Compute_Hash_m = 0x5bd1e995;
         private const int Compute_Hash_r = 24;
@@ -51,8 +51,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             _isCaseSensitive = isCaseSensitive;
         }
 
-        public BloomFilter(double falsePositiveProbability, bool isCaseSensitive, ICollection<string> values)
-            : this(values.Count, falsePositiveProbability, isCaseSensitive)
+        public BloomFilter(
+            double falsePositiveProbability,
+            bool isCaseSensitive,
+            ICollection<string> values
+        ) : this(values.Count, falsePositiveProbability, isCaseSensitive)
         {
             AddRange(values);
         }
@@ -60,9 +63,12 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         public BloomFilter(
             double falsePositiveProbability,
             ICollection<string> stringValues,
-            ICollection<long> longValues)
-            : this(stringValues.Count + longValues.Count, falsePositiveProbability, isCaseSensitive: false)
-        {
+            ICollection<long> longValues
+        ) : this(
+            stringValues.Count + longValues.Count,
+            falsePositiveProbability,
+            isCaseSensitive: false
+        ) {
             AddRange(stringValues);
             AddRange(longValues);
         }

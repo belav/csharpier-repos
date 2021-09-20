@@ -27,6 +27,7 @@ namespace System.Runtime.InteropServices.Tests
                     Assert.Equal((byte)i, Marshal.ReadByte(p + i));
                 }
             }
+
             finally
             {
                 Marshal.FreeHGlobal(p);

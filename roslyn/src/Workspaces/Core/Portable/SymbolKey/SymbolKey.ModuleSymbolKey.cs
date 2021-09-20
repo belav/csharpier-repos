@@ -8,16 +8,21 @@ namespace Microsoft.CodeAnalysis
     {
         private static class ModuleSymbolKey
         {
-            public static void Create(IModuleSymbol symbol, SymbolKeyWriter visitor)
-                => visitor.WriteSymbolKey(symbol.ContainingSymbol);
+            public static void Create(IModuleSymbol symbol, SymbolKeyWriter visitor) =>
+                visitor.WriteSymbolKey(symbol.ContainingSymbol);
 
-            public static SymbolKeyResolution Resolve(SymbolKeyReader reader, out string? failureReason)
-            {
-                var containingSymbolResolution = reader.ReadSymbolKey(out var containingSymbolFailureReason);
+            public static SymbolKeyResolution Resolve(
+                SymbolKeyReader reader,
+                out string? failureReason
+            ) {
+                var containingSymbolResolution = reader.ReadSymbolKey(
+                    out var containingSymbolFailureReason
+                );
 
                 if (containingSymbolFailureReason != null)
                 {
-                    failureReason = $"({nameof(ModuleSymbolKey)} {nameof(containingSymbolResolution)} failed -> {containingSymbolFailureReason})";
+                    failureReason =
+                        $"({nameof(ModuleSymbolKey)} {nameof(containingSymbolResolution)} failed -> {containingSymbolFailureReason})";
                     return default;
                 }
 
@@ -29,7 +34,11 @@ namespace Microsoft.CodeAnalysis
                     result.AddValuesIfNotNull(assembly.Modules);
                 }
 
-                return CreateResolution(result, $"({nameof(ModuleSymbolKey)} failed)", out failureReason);
+                return CreateResolution(
+                    result,
+                    $"({nameof(ModuleSymbolKey)} failed)",
+                    out failureReason
+                );
             }
         }
     }

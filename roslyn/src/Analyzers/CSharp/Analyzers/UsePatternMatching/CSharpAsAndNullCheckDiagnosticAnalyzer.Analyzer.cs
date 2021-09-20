@@ -31,8 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 ExpressionSyntax operand,
                 SyntaxNode localStatement,
                 SyntaxNode enclosingBlock,
-                CancellationToken cancellationToken)
-            {
+                CancellationToken cancellationToken
+            ) {
                 Debug.Assert(semanticModel != null);
                 Debug.Assert(localSymbol != null);
                 Debug.Assert(comparison != null);
@@ -56,9 +56,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 ExpressionSyntax operand,
                 SyntaxNode localStatement,
                 SyntaxNode enclosingBlock,
-                CancellationToken cancellationToken)
-            {
-                var analyzer = new Analyzer(semanticModel, localSymbol, comparison, operand, localStatement, enclosingBlock, cancellationToken);
+                CancellationToken cancellationToken
+            ) {
+                var analyzer = new Analyzer(
+                    semanticModel,
+                    localSymbol,
+                    comparison,
+                    operand,
+                    localStatement,
+                    enclosingBlock,
+                    cancellationToken
+                );
                 return analyzer.CanSafelyConvertToPatternMatching();
             }
 
@@ -94,7 +102,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 // Keep track of whether the pattern variable is definitely assigned when false/true.
                 // We start by the null-check itself, if it's compared with '==', the pattern variable
                 // will be definitely assigned when false, because we wrap the is-operator in a !-operator.
-                var defAssignedWhenTrue = _comparison.IsKind(SyntaxKind.NotEqualsExpression, SyntaxKind.IsExpression);
+                var defAssignedWhenTrue = _comparison.IsKind(
+                    SyntaxKind.NotEqualsExpression,
+                    SyntaxKind.IsExpression
+                );
 
                 foreach (var current in _comparison.Ancestors())
                 {
@@ -135,10 +146,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 
                         case SyntaxKind.ConditionalExpression:
                             var conditionalExpression = (ConditionalExpressionSyntax)current;
-                            if (LocalFlowsIn(defAssignedWhenTrue
-                                    ? conditionalExpression.WhenFalse
-                                    : conditionalExpression.WhenTrue))
-                            {
+                            if (
+                                LocalFlowsIn(
+                                    defAssignedWhenTrue
+                                      ? conditionalExpression.WhenFalse
+                                      : conditionalExpression.WhenTrue
+                                )
+                            ) {
                                 // In a conditional expression, the pattern variable
                                 // would not be definitely assigned in the opposite branch.
                                 return false;
@@ -155,11 +169,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                                 return false;
                             }
 
-                            return CheckLoop(forStatement, forStatement.Statement, defAssignedWhenTrue);
+                            return CheckLoop(
+                                forStatement,
+                                forStatement.Statement,
+                                defAssignedWhenTrue
+                            );
 
                         case SyntaxKind.WhileStatement:
                             var whileStatement = (WhileStatementSyntax)current;
-                            return CheckLoop(whileStatement, whileStatement.Statement, defAssignedWhenTrue);
+                            return CheckLoop(
+                                whileStatement,
+                                whileStatement.Statement,
+                                defAssignedWhenTrue
+                            );
 
                         case SyntaxKind.IfStatement:
                             var ifStatement = (IfStatementSyntax)current;
@@ -195,9 +217,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                                 }
                             }
 
-                            if (!defAssignedWhenTrue &&
-                                !_semanticModel.AnalyzeControlFlow(ifStatement.Statement).EndPointIsReachable)
-                            {
+                            if (
+                                !defAssignedWhenTrue
+                                && !_semanticModel.AnalyzeControlFlow(
+                                    ifStatement.Statement
+                                ).EndPointIsReachable
+                            ) {
                                 // Access before assignment here is only valid if we have a negative
                                 // pattern-matching in an if-statement with an unreachable endpoint.
                                 // For example:
@@ -230,7 +255,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                             // Therefore, we should ensure that there is no use before assignment.
                             return CheckStatement(statement);
                     }
-
                     // Bail out for error cases and unhandled cases.
                     break;
                 }
@@ -238,8 +262,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 return false;
             }
 
-            private bool CheckLoop(SyntaxNode statement, StatementSyntax body, bool defAssignedWhenTrue)
-            {
+            private bool CheckLoop(
+                SyntaxNode statement,
+                StatementSyntax body,
+                bool defAssignedWhenTrue
+            ) {
                 if (_operand.Kind() == SyntaxKind.IdentifierName)
                 {
                     // We have something like:
@@ -288,12 +315,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 // of the new variable. Otherwise the scope is the statement itself.
                 if (statement.Parent.IsKind(SyntaxKind.Block, out BlockSyntax block))
                 {
-                    // Check if the local is accessed before assignment 
+                    // Check if the local is accessed before assignment
                     // in the subsequent statements. If so, this can't
                     // be converted to pattern-matching.
-                    if (LocalFlowsIn(firstStatement: statement.GetNextStatement(),
-                                     lastStatement: block.Statements.Last()))
-                    {
+                    if (
+                        LocalFlowsIn(
+                            firstStatement: statement.GetNextStatement(),
+                            lastStatement: block.Statements.Last()
+                        )
+                    ) {
                         return false;
                     }
 
@@ -326,16 +356,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                         continue;
                     }
 
-                    if (descendentNodeSpanStart >= comparisonSpanStart && scopeSpan.Contains(descendentNode.Span))
-                    {
+                    if (
+                        descendentNodeSpanStart >= comparisonSpanStart
+                        && scopeSpan.Contains(descendentNode.Span)
+                    ) {
                         // If this is in the scope and after null-check, we don't bother checking the symbol.
                         continue;
                     }
 
-                    if (descendentNode.IsKind(SyntaxKind.IdentifierName, out IdentifierNameSyntax identifierName) &&
-                        identifierName.Identifier.ValueText == variableName &&
-                        _localSymbol.Equals(_semanticModel.GetSymbolInfo(identifierName, _cancellationToken).Symbol))
-                    {
+                    if (
+                        descendentNode.IsKind(
+                            SyntaxKind.IdentifierName,
+                            out IdentifierNameSyntax identifierName
+                        )
+                        && identifierName.Identifier.ValueText == variableName
+                        && _localSymbol.Equals(
+                            _semanticModel.GetSymbolInfo(identifierName, _cancellationToken).Symbol
+                        )
+                    ) {
                         // If we got here, it means we have a local
                         // reference out of scope of the pattern variable.
                         return true;
@@ -359,7 +397,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                     return false;
                 }
 
-                return _semanticModel.AnalyzeDataFlow(statementOrExpression).DataFlowsIn.Contains(_localSymbol);
+                return _semanticModel.AnalyzeDataFlow(statementOrExpression)
+                    .DataFlowsIn.Contains(_localSymbol);
             }
 
             private bool LocalFlowsIn(StatementSyntax firstStatement, StatementSyntax lastStatement)
@@ -374,7 +413,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                     return false;
                 }
 
-                return _semanticModel.AnalyzeDataFlow(firstStatement, lastStatement).DataFlowsIn.Contains(_localSymbol);
+                return _semanticModel.AnalyzeDataFlow(firstStatement, lastStatement)
+                    .DataFlowsIn.Contains(_localSymbol);
             }
         }
     }

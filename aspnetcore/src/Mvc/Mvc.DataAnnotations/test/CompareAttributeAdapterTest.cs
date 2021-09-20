@@ -20,19 +20,24 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         {
             // Arrange
             var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-            var metadata = metadataProvider.GetMetadataForProperty(typeof(PropertyDisplayNameModel), "MyProperty");
+            var metadata = metadataProvider.GetMetadataForProperty(
+                typeof(PropertyDisplayNameModel),
+                "MyProperty"
+            );
 
             var attribute = new CompareAttribute("OtherProperty");
             var adapter = new CompareAttributeAdapter(attribute, stringLocalizer: null);
 
-            var expectedMessage = "'MyPropertyDisplayName' and 'OtherPropertyDisplayName' do not match.";
+            var expectedMessage =
+                "'MyPropertyDisplayName' and 'OtherPropertyDisplayName' do not match.";
 
             var actionContext = new ActionContext();
             var context = new ClientModelValidationContext(
                 actionContext,
                 metadata,
                 metadataProvider,
-                new Dictionary<string, string>());
+                new Dictionary<string, string>()
+            );
 
             // Act
             adapter.AddValidation(context);
@@ -40,13 +45,22 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Assert
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
-                kvp => { Assert.Equal("data-val-equalto", kvp.Key); Assert.Equal(expectedMessage, kvp.Value); },
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("true", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-equalto", kvp.Key);
+                    Assert.Equal(expectedMessage, kvp.Value);
+                },
                 kvp =>
                 {
                     Assert.Equal("data-val-equalto-other", kvp.Key);
                     Assert.Equal("*.OtherProperty", kvp.Value);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -55,27 +69,39 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         {
             // Arrange
             var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-            var metadata = metadataProvider.GetMetadataForProperty(typeof(PropertyDisplayNameModel), "MyProperty");
+            var metadata = metadataProvider.GetMetadataForProperty(
+                typeof(PropertyDisplayNameModel),
+                "MyProperty"
+            );
 
             var attribute = new CompareAttribute("OtherProperty");
             attribute.ErrorMessage = "CompareAttributeErrorMessage";
 
             var stringLocalizer = new Mock<IStringLocalizer>();
-            var expectedProperties = new object[] { "MyPropertyDisplayName", "OtherPropertyDisplayName" };
+            var expectedProperties = new object[]
+            {
+                "MyPropertyDisplayName",
+                "OtherPropertyDisplayName"
+            };
 
-            var expectedMessage = "'MyPropertyDisplayName' and 'OtherPropertyDisplayName' do not match.";
+            var expectedMessage =
+                "'MyPropertyDisplayName' and 'OtherPropertyDisplayName' do not match.";
 
             stringLocalizer.Setup(s => s[attribute.ErrorMessage, expectedProperties])
                 .Returns(new LocalizedString(attribute.ErrorMessage, expectedMessage));
 
-            var adapter = new CompareAttributeAdapter(attribute, stringLocalizer: stringLocalizer.Object);
+            var adapter = new CompareAttributeAdapter(
+                attribute,
+                stringLocalizer: stringLocalizer.Object
+            );
 
             var actionContext = new ActionContext();
             var context = new ClientModelValidationContext(
                 actionContext,
                 metadata,
                 metadataProvider,
-                new Dictionary<string, string>());
+                new Dictionary<string, string>()
+            );
 
             // Act
             adapter.AddValidation(context);
@@ -83,13 +109,22 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Assert
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
-                kvp => { Assert.Equal("data-val-equalto", kvp.Key); Assert.Equal(expectedMessage, kvp.Value); },
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("true", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-equalto", kvp.Key);
+                    Assert.Equal(expectedMessage, kvp.Value);
+                },
                 kvp =>
                 {
                     Assert.Equal("data-val-equalto-other", kvp.Key);
                     Assert.Equal("*.OtherProperty", kvp.Value);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -98,7 +133,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         {
             // Arrange
             var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-            var metadata = metadataProvider.GetMetadataForProperty(typeof(PropertyNameModel), "MyProperty");
+            var metadata = metadataProvider.GetMetadataForProperty(
+                typeof(PropertyNameModel),
+                "MyProperty"
+            );
 
             var attribute = new CompareAttribute("OtherProperty");
             var adapter = new CompareAttributeAdapter(attribute, stringLocalizer: null);
@@ -110,7 +148,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 actionContext,
                 metadata,
                 metadataProvider,
-                new Dictionary<string, string>());
+                new Dictionary<string, string>()
+            );
 
             // Act
             adapter.AddValidation(context);
@@ -118,13 +157,22 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Assert
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
-                kvp => { Assert.Equal("data-val-equalto", kvp.Key); Assert.Equal(expectedMessage, kvp.Value); },
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("true", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-equalto", kvp.Key);
+                    Assert.Equal(expectedMessage, kvp.Value);
+                },
                 kvp =>
                 {
                     Assert.Equal("data-val-equalto-other", kvp.Key);
                     Assert.Equal("*.OtherProperty", kvp.Value);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -132,7 +180,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         {
             // Arrange
             var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-            var metadata = metadataProvider.GetMetadataForProperty(typeof(PropertyNameModel), "MyProperty");
+            var metadata = metadataProvider.GetMetadataForProperty(
+                typeof(PropertyNameModel),
+                "MyProperty"
+            );
 
             var attribute = new CompareAttribute("OtherProperty")
             {
@@ -147,7 +198,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 actionContext,
                 metadata,
                 metadataProvider,
-                new Dictionary<string, string>());
+                new Dictionary<string, string>()
+            );
 
             // Act
             adapter.AddValidation(context);
@@ -155,13 +207,22 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Assert
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
-                kvp => { Assert.Equal("data-val-equalto", kvp.Key); Assert.Equal(expectedMessage, kvp.Value); },
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("true", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-equalto", kvp.Key);
+                    Assert.Equal(expectedMessage, kvp.Value);
+                },
                 kvp =>
                 {
                     Assert.Equal("data-val-equalto-other", kvp.Key);
                     Assert.Equal("*.OtherProperty", kvp.Value);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -171,7 +232,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         {
             // Arrange
             var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-            var metadata = metadataProvider.GetMetadataForProperty(typeof(PropertyNameModel), "MyProperty");
+            var metadata = metadataProvider.GetMetadataForProperty(
+                typeof(PropertyNameModel),
+                "MyProperty"
+            );
 
             var attribute = new CompareAttribute("OtherProperty")
             {
@@ -187,7 +251,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 actionContext,
                 metadata,
                 metadataProvider,
-                new Dictionary<string, string>());
+                new Dictionary<string, string>()
+            );
 
             // Act
             adapter.AddValidation(context);
@@ -195,13 +260,22 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Assert
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
-                kvp => { Assert.Equal("data-val-equalto", kvp.Key); Assert.Equal(expectedMessage, kvp.Value); },
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("true", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-equalto", kvp.Key);
+                    Assert.Equal(expectedMessage, kvp.Value);
+                },
                 kvp =>
                 {
                     Assert.Equal("data-val-equalto-other", kvp.Key);
                     Assert.Equal("*.OtherProperty", kvp.Value);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -210,7 +284,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         {
             // Arrange
             var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
-            var metadata = metadataProvider.GetMetadataForProperty(typeof(PropertyNameModel), "MyProperty");
+            var metadata = metadataProvider.GetMetadataForProperty(
+                typeof(PropertyNameModel),
+                "MyProperty"
+            );
 
             var attribute = new CompareAttribute("OtherProperty");
             var adapter = new CompareAttributeAdapter(attribute, stringLocalizer: null);
@@ -220,7 +297,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                 actionContext,
                 metadata,
                 metadataProvider,
-                new Dictionary<string, string>());
+                new Dictionary<string, string>()
+            );
 
             context.Attributes.Add("data-val", "original");
             context.Attributes.Add("data-val-equalto", "original");
@@ -232,9 +310,22 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Assert
             Assert.Collection(
                 context.Attributes,
-                kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("original", kvp.Value); },
-                kvp => { Assert.Equal("data-val-equalto", kvp.Key); Assert.Equal("original", kvp.Value); },
-                kvp => { Assert.Equal("data-val-equalto-other", kvp.Key); Assert.Equal("original", kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("data-val", kvp.Key);
+                    Assert.Equal("original", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-equalto", kvp.Key);
+                    Assert.Equal("original", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("data-val-equalto-other", kvp.Key);
+                    Assert.Equal("original", kvp.Value);
+                }
+            );
         }
 
         private class PropertyDisplayNameModel

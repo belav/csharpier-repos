@@ -21,8 +21,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 {
     internal static class AnalyzerDependencyChecker
     {
-        public static AnalyzerDependencyResults ComputeDependencyConflicts(IEnumerable<string> analyzerFilePaths, IEnumerable<IIgnorableAssemblyList> ignorableAssemblyLists, IBindingRedirectionService bindingRedirectionService = null, CancellationToken cancellationToken = default)
-        {
+        public static AnalyzerDependencyResults ComputeDependencyConflicts(
+            IEnumerable<string> analyzerFilePaths,
+            IEnumerable<IIgnorableAssemblyList> ignorableAssemblyLists,
+            IBindingRedirectionService bindingRedirectionService = null,
+            CancellationToken cancellationToken = default
+        ) {
             var analyzerInfos = new List<AnalyzerInfo>();
 
             foreach (var analyzerFilePath in analyzerFilePaths)
@@ -37,8 +41,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 }
             }
 
-            var allIgnorableAssemblyLists = new List<IIgnorableAssemblyList>(ignorableAssemblyLists);
-            allIgnorableAssemblyLists.Add(new IgnorableAssemblyIdentityList(analyzerInfos.Select(info => info.Identity)));
+            var allIgnorableAssemblyLists = new List<IIgnorableAssemblyList>(
+                ignorableAssemblyLists
+            );
+            allIgnorableAssemblyLists.Add(
+                new IgnorableAssemblyIdentityList(analyzerInfos.Select(info => info.Identity))
+            );
 
             // First check for analyzers with the same identity but different
             // contents (that is, different MVIDs).
@@ -47,13 +55,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
             // Then check for missing references.
 
-            var missingDependencies = FindMissingDependencies(analyzerInfos, allIgnorableAssemblyLists, bindingRedirectionService, cancellationToken);
+            var missingDependencies = FindMissingDependencies(
+                analyzerInfos,
+                allIgnorableAssemblyLists,
+                bindingRedirectionService,
+                cancellationToken
+            );
 
             return new AnalyzerDependencyResults(conflicts, missingDependencies);
         }
 
-        private static ImmutableArray<MissingAnalyzerDependency> FindMissingDependencies(List<AnalyzerInfo> analyzerInfos, List<IIgnorableAssemblyList> ignorableAssemblyLists, IBindingRedirectionService bindingRedirectionService, CancellationToken cancellationToken)
-        {
+        private static ImmutableArray<MissingAnalyzerDependency> FindMissingDependencies(
+            List<AnalyzerInfo> analyzerInfos,
+            List<IIgnorableAssemblyList> ignorableAssemblyLists,
+            IBindingRedirectionService bindingRedirectionService,
+            CancellationToken cancellationToken
+        ) {
             var builder = ImmutableArray.CreateBuilder<MissingAnalyzerDependency>();
 
             foreach (var analyzerInfo in analyzerInfos)
@@ -62,15 +79,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    var redirectedReference = bindingRedirectionService != null
-                        ? bindingRedirectionService.ApplyBindingRedirects(reference)
-                        : reference;
+                    var redirectedReference =
+                        bindingRedirectionService != null
+                            ? bindingRedirectionService.ApplyBindingRedirects(reference)
+                            : reference;
 
-                    if (!ignorableAssemblyLists.Any(ignorableAssemblyList => ignorableAssemblyList.Includes(redirectedReference)))
-                    {
-                        builder.Add(new MissingAnalyzerDependency(
-                            analyzerInfo.Path,
-                            reference));
+                    if (
+                        !ignorableAssemblyLists.Any(
+                            ignorableAssemblyList =>
+                                ignorableAssemblyList.Includes(redirectedReference)
+                        )
+                    ) {
+                        builder.Add(new MissingAnalyzerDependency(analyzerInfo.Path, reference));
                     }
                 }
             }
@@ -78,8 +98,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             return builder.ToImmutable();
         }
 
-        private static ImmutableArray<AnalyzerDependencyConflict> FindConflictingAnalyzers(List<AnalyzerInfo> analyzerInfos, CancellationToken cancellationToken)
-        {
+        private static ImmutableArray<AnalyzerDependencyConflict> FindConflictingAnalyzers(
+            List<AnalyzerInfo> analyzerInfos,
+            CancellationToken cancellationToken
+        ) {
             var builder = ImmutableArray.CreateBuilder<AnalyzerDependencyConflict>();
 
             foreach (var identityGroup in analyzerInfos.GroupBy(di => di.Identity))
@@ -94,10 +116,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
                         if (identityGroupArray[i].MVID != identityGroupArray[j].MVID)
                         {
-                            builder.Add(new AnalyzerDependencyConflict(
-                                identityGroup.Key,
-                                identityGroupArray[i].Path,
-                                identityGroupArray[j].Path));
+                            builder.Add(
+                                new AnalyzerDependencyConflict(
+                                    identityGroup.Key,
+                                    identityGroupArray[i].Path,
+                                    identityGroupArray[j].Path
+                                )
+                            );
                         }
                     }
                 }
@@ -110,7 +135,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         {
             try
             {
-                using var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read | FileShare.Delete);
+                using var stream = new FileStream(
+                    filePath,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read | FileShare.Delete
+                );
                 using var peReader = new PEReader(stream);
                 var metadataReader = peReader.GetMetadataReader();
 
@@ -125,8 +155,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             return null;
         }
 
-        private static ImmutableArray<AssemblyIdentity> ReadReferences(SystemMetadataReader metadataReader)
-        {
+        private static ImmutableArray<AssemblyIdentity> ReadReferences(
+            SystemMetadataReader metadataReader
+        ) {
             var builder = ImmutableArray.CreateBuilder<AssemblyIdentity>();
             foreach (var referenceHandle in metadataReader.AssemblyReferences)
             {
@@ -139,7 +170,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 var refflags = reference.Flags;
                 var refhasPublicKey = (refflags & AssemblyFlags.PublicKey) != 0;
 
-                builder.Add(new AssemblyIdentity(refname, refversion, refcultureName, refpublicKeyOrToken, hasPublicKey: refhasPublicKey));
+                builder.Add(
+                    new AssemblyIdentity(
+                        refname,
+                        refversion,
+                        refcultureName,
+                        refpublicKeyOrToken,
+                        hasPublicKey: refhasPublicKey
+                    )
+                );
             }
 
             return builder.ToImmutable();
@@ -155,7 +194,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             var flags = assemblyDefinition.Flags;
             var hasPublicKey = (flags & AssemblyFlags.PublicKey) != 0;
 
-            return new AssemblyIdentity(name, version, cultureName, publicKeyOrToken, hasPublicKey: hasPublicKey);
+            return new AssemblyIdentity(
+                name,
+                version,
+                cultureName,
+                publicKeyOrToken,
+                hasPublicKey: hasPublicKey
+            );
         }
 
         private static Guid ReadMvid(SystemMetadataReader metadataReader)
@@ -166,8 +211,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
         private sealed class AnalyzerInfo
         {
-            public AnalyzerInfo(string filePath, AssemblyIdentity identity, Guid mvid, ImmutableArray<AssemblyIdentity> references)
-            {
+            public AnalyzerInfo(
+                string filePath,
+                AssemblyIdentity identity,
+                Guid mvid,
+                ImmutableArray<AssemblyIdentity> references
+            ) {
                 Path = filePath;
                 Identity = identity;
                 MVID = mvid;

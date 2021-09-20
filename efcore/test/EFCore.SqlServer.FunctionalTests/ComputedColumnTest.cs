@@ -13,20 +13,13 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_use_computed_columns()
         {
-            var serviceProvider = new ServiceCollection()
-                .AddEntityFrameworkSqlServer()
+            var serviceProvider = new ServiceCollection().AddEntityFrameworkSqlServer()
                 .BuildServiceProvider();
 
             using var context = new Context(serviceProvider, TestStore.Name);
             context.Database.EnsureCreatedResiliently();
 
-            var entity = context.Add(
-                new Entity
-                {
-                    P1 = 20,
-                    P2 = 30,
-                    P3 = 80
-                }).Entity;
+            var entity = context.Add(new Entity { P1 = 20, P2 = 30, P3 = 80 }).Entity;
 
             context.SaveChanges();
 
@@ -37,8 +30,7 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_use_computed_columns_with_null_values()
         {
-            var serviceProvider = new ServiceCollection()
-                .AddEntityFrameworkSqlServer()
+            var serviceProvider = new ServiceCollection().AddEntityFrameworkSqlServer()
                 .BuildServiceProvider();
 
             using var context = new Context(serviceProvider, TestStore.Name);
@@ -65,20 +57,18 @@ namespace Microsoft.EntityFrameworkCore
 
             public DbSet<Entity> Entities { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
-                    .UseSqlServer(SqlServerTestStore.CreateConnectionString(_databaseName), b => b.ApplyConfiguration())
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder.UseSqlServer(
+                        SqlServerTestStore.CreateConnectionString(_databaseName),
+                        b => b.ApplyConfiguration()
+                    )
                     .UseInternalServiceProvider(_serviceProvider);
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Entity>()
-                    .Property(e => e.P4)
-                    .HasComputedColumnSql("P1 + P2");
+                modelBuilder.Entity<Entity>().Property(e => e.P4).HasComputedColumnSql("P1 + P2");
 
-                modelBuilder.Entity<Entity>()
-                    .Property(e => e.P5)
-                    .HasComputedColumnSql("P1 + P3");
+                modelBuilder.Entity<Entity>().Property(e => e.P5).HasComputedColumnSql("P1 + P3");
             }
         }
 
@@ -121,13 +111,15 @@ namespace Microsoft.EntityFrameworkCore
 
             public DbSet<EnumItem> EnumItems { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
-                    .UseSqlServer(SqlServerTestStore.CreateConnectionString(_databaseName), b => b.ApplyConfiguration())
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder.UseSqlServer(
+                        SqlServerTestStore.CreateConnectionString(_databaseName),
+                        b => b.ApplyConfiguration()
+                    )
                     .UseInternalServiceProvider(_serviceProvider);
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<EnumItem>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<EnumItem>()
                     .Property(entity => entity.CalculatedFlagEnum)
                     .HasComputedColumnSql("FlagEnum | OptionalFlagEnum");
         }
@@ -135,14 +127,16 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_use_computed_columns_with_nullable_enum()
         {
-            var serviceProvider = new ServiceCollection()
-                .AddEntityFrameworkSqlServer()
+            var serviceProvider = new ServiceCollection().AddEntityFrameworkSqlServer()
                 .BuildServiceProvider();
 
             using var context = new NullableContext(serviceProvider, TestStore.Name);
             context.Database.EnsureCreatedResiliently();
 
-            var entity = context.EnumItems.Add(new EnumItem { FlagEnum = FlagEnum.AValue, OptionalFlagEnum = FlagEnum.BValue }).Entity;
+            var entity =
+                context.EnumItems.Add(
+                    new EnumItem { FlagEnum = FlagEnum.AValue, OptionalFlagEnum = FlagEnum.BValue }
+                ).Entity;
             context.SaveChanges();
 
             Assert.Equal(FlagEnum.AValue | FlagEnum.BValue, entity.CalculatedFlagEnum);
@@ -155,7 +149,6 @@ namespace Microsoft.EntityFrameworkCore
 
         protected SqlServerTestStore TestStore { get; }
 
-        public virtual void Dispose()
-            => TestStore.Dispose();
+        public virtual void Dispose() => TestStore.Dispose();
     }
 }

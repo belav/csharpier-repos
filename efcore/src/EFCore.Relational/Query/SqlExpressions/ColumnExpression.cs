@@ -26,9 +26,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <param name="type"> The <see cref="System.Type" /> of the expression. </param>
         /// <param name="typeMapping"> The <see cref="RelationalTypeMapping" /> associated with the expression. </param>
         protected ColumnExpression(Type type, RelationalTypeMapping? typeMapping)
-            : base(type, typeMapping)
-        {
-        }
+            : base(type, typeMapping) { }
 
         /// <summary>
         ///     The name of the column.
@@ -56,7 +54,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <returns> A new expression which has <see cref="IsNullable" /> property set to true. </returns>
         public abstract ColumnExpression MakeNullable();
 
-       /// <inheritdoc />
+        /// <inheritdoc />
         protected override void Print(ExpressionPrinter expressionPrinter)
         {
             Check.NotNull(expressionPrinter, nameof(expressionPrinter));
@@ -65,7 +63,6 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             expressionPrinter.Append(Name);
         }
 
-        private string DebuggerDisplay()
-            => $"{TableAlias}.{Name}";
+        private string DebuggerDisplay() => $"{TableAlias}.{Name}";
     }
 }

@@ -28,45 +28,91 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
 {
     internal static class CSharpHelpers
     {
-        public static CSharpProjectShim CreateCSharpProject(TestEnvironment environment, string projectName)
-        {
+        public static CSharpProjectShim CreateCSharpProject(
+            TestEnvironment environment,
+            string projectName
+        ) {
             var projectBinPath = Path.GetTempPath();
-            var hierarchy = environment.CreateHierarchy(projectName, projectBinPath, projectRefPath: null, projectCapabilities: "CSharp");
+            var hierarchy = environment.CreateHierarchy(
+                projectName,
+                projectBinPath,
+                projectRefPath: null,
+                projectCapabilities: "CSharp"
+            );
 
             return CreateCSharpProject(environment, projectName, hierarchy);
         }
 
-        public static CSharpProjectShim CreateCSharpProject(TestEnvironment environment, string projectName, IVsHierarchy hierarchy)
-        {
+        public static CSharpProjectShim CreateCSharpProject(
+            TestEnvironment environment,
+            string projectName,
+            IVsHierarchy hierarchy
+        ) {
             return new CSharpProjectShim(
                 new MockCSharpProjectRoot(hierarchy),
                 projectSystemName: projectName,
                 hierarchy: hierarchy,
                 serviceProvider: environment.ServiceProvider,
-                threadingContext: environment.ThreadingContext);
+                threadingContext: environment.ThreadingContext
+            );
         }
 
-        public static Task<CPSProject> CreateCSharpCPSProjectAsync(TestEnvironment environment, string projectName, params string[] commandLineArguments)
-        {
-            return CreateCSharpCPSProjectAsync(environment, projectName, projectGuid: Guid.NewGuid(), commandLineArguments: commandLineArguments);
+        public static Task<CPSProject> CreateCSharpCPSProjectAsync(
+            TestEnvironment environment,
+            string projectName,
+            params string[] commandLineArguments
+        ) {
+            return CreateCSharpCPSProjectAsync(
+                environment,
+                projectName,
+                projectGuid: Guid.NewGuid(),
+                commandLineArguments: commandLineArguments
+            );
         }
 
-        public static Task<CPSProject> CreateCSharpCPSProjectAsync(TestEnvironment environment, string projectName, Guid projectGuid, params string[] commandLineArguments)
-        {
+        public static Task<CPSProject> CreateCSharpCPSProjectAsync(
+            TestEnvironment environment,
+            string projectName,
+            Guid projectGuid,
+            params string[] commandLineArguments
+        ) {
             var projectFilePath = Path.GetTempPath();
-            var binOutputPath = GetOutputPathFromArguments(commandLineArguments) ?? Path.Combine(projectFilePath, projectName + ".dll");
+            var binOutputPath =
+                GetOutputPathFromArguments(commandLineArguments)
+                ?? Path.Combine(projectFilePath, projectName + ".dll");
 
-            return CreateCSharpCPSProjectAsync(environment, projectName, projectFilePath, binOutputPath, projectGuid, commandLineArguments);
+            return CreateCSharpCPSProjectAsync(
+                environment,
+                projectName,
+                projectFilePath,
+                binOutputPath,
+                projectGuid,
+                commandLineArguments
+            );
         }
 
-        public static Task<CPSProject> CreateCSharpCPSProjectAsync(TestEnvironment environment, string projectName, string binOutputPath, params string[] commandLineArguments)
-        {
+        public static Task<CPSProject> CreateCSharpCPSProjectAsync(
+            TestEnvironment environment,
+            string projectName,
+            string binOutputPath,
+            params string[] commandLineArguments
+        ) {
             var projectFilePath = Path.GetTempPath();
-            return CreateCSharpCPSProjectAsync(environment, projectName, projectFilePath, binOutputPath, projectGuid: Guid.NewGuid(), commandLineArguments: commandLineArguments);
+            return CreateCSharpCPSProjectAsync(
+                environment,
+                projectName,
+                projectFilePath,
+                binOutputPath,
+                projectGuid: Guid.NewGuid(),
+                commandLineArguments: commandLineArguments
+            );
         }
 
-        public static unsafe void SetOption(this CSharpProjectShim csharpProject, CompilerOptions optionID, object value)
-        {
+        public static unsafe void SetOption(
+            this CSharpProjectShim csharpProject,
+            CompilerOptions optionID,
+            object value
+        ) {
             Assert.Equal(sizeof(HACK_VariantStructure), 8 + 2 * IntPtr.Size);
             Assert.Equal(8, (int)Marshal.OffsetOf<HACK_VariantStructure>("_booleanValue"));
 
@@ -75,10 +121,22 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
             csharpProject.SetOption(optionID, variant);
         }
 
-        public static async Task<CPSProject> CreateCSharpCPSProjectAsync(TestEnvironment environment, string projectName, string projectFilePath, string binOutputPath, Guid projectGuid, params string[] commandLineArguments)
-        {
-            var hierarchy = environment.CreateHierarchy(projectName, binOutputPath, projectRefPath: null, "CSharp");
-            var cpsProjectFactory = environment.ExportProvider.GetExportedValue<IWorkspaceProjectContextFactory>();
+        public static async Task<CPSProject> CreateCSharpCPSProjectAsync(
+            TestEnvironment environment,
+            string projectName,
+            string projectFilePath,
+            string binOutputPath,
+            Guid projectGuid,
+            params string[] commandLineArguments
+        ) {
+            var hierarchy = environment.CreateHierarchy(
+                projectName,
+                binOutputPath,
+                projectRefPath: null,
+                "CSharp"
+            );
+            var cpsProjectFactory =
+                environment.ExportProvider.GetExportedValue<IWorkspaceProjectContextFactory>();
             var cpsProject = (CPSProject)await cpsProjectFactory.CreateProjectContextAsync(
                 LanguageNames.CSharp,
                 projectName,
@@ -86,17 +144,27 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
                 projectGuid,
                 hierarchy,
                 binOutputPath,
-                CancellationToken.None);
+                CancellationToken.None
+            );
 
             cpsProject.SetOptions(ImmutableArray.Create(commandLineArguments));
 
             return cpsProject;
         }
 
-        public static async Task<CPSProject> CreateNonCompilableProjectAsync(TestEnvironment environment, string projectName, string projectFilePath)
-        {
-            var hierarchy = environment.CreateHierarchy(projectName, projectBinPath: null, projectRefPath: null, "");
-            var cpsProjectFactory = environment.ExportProvider.GetExportedValue<IWorkspaceProjectContextFactory>();
+        public static async Task<CPSProject> CreateNonCompilableProjectAsync(
+            TestEnvironment environment,
+            string projectName,
+            string projectFilePath
+        ) {
+            var hierarchy = environment.CreateHierarchy(
+                projectName,
+                projectBinPath: null,
+                projectRefPath: null,
+                ""
+            );
+            var cpsProjectFactory =
+                environment.ExportProvider.GetExportedValue<IWorkspaceProjectContextFactory>();
 
             return (CPSProject)await cpsProjectFactory.CreateProjectContextAsync(
                 NoCompilationConstants.LanguageName,
@@ -105,7 +173,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
                 Guid.NewGuid(),
                 hierarchy,
                 binOutputPath: null,
-                CancellationToken.None);
+                CancellationToken.None
+            );
         }
 
         private static string GetOutputPathFromArguments(string[] commandLineArguments)
@@ -126,14 +195,22 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
 
         private sealed class TestCSharpCommandLineParserService : ICommandLineParserService
         {
-            public CommandLineArguments Parse(IEnumerable<string> arguments, string baseDirectory, bool isInteractive, string sdkDirectory)
-            {
+            public CommandLineArguments Parse(
+                IEnumerable<string> arguments,
+                string baseDirectory,
+                bool isInteractive,
+                string sdkDirectory
+            ) {
                 if (baseDirectory == null || !Directory.Exists(baseDirectory))
                 {
                     baseDirectory = Path.GetTempPath();
                 }
 
-                return CSharpCommandLineParser.Default.Parse(arguments, baseDirectory, sdkDirectory);
+                return CSharpCommandLineParser.Default.Parse(
+                    arguments,
+                    baseDirectory,
+                    sdkDirectory
+                );
             }
         }
 
@@ -161,8 +238,11 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
                 throw new NotImplementedException();
             }
 
-            void ICSharpProjectRoot.ConfigureCompiler(ICSCompiler compiler, ICSInputSet inputSet, bool addSources)
-            {
+            void ICSharpProjectRoot.ConfigureCompiler(
+                ICSCompiler compiler,
+                ICSInputSet inputSet,
+                bool addSources
+            ) {
                 throw new NotImplementedException();
             }
 
@@ -181,8 +261,11 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
                 throw new NotImplementedException();
             }
 
-            int ICSharpProjectRoot.GetHierarchyAndItemID(string pszFile, out IVsHierarchy ppHier, out uint pItemID)
-            {
+            int ICSharpProjectRoot.GetHierarchyAndItemID(
+                string pszFile,
+                out IVsHierarchy ppHier,
+                out uint pItemID
+            ) {
                 ppHier = _hierarchy;
 
                 // Each item should have it's own ItemID, but for simplicity we'll just hard-code a value of
@@ -192,8 +275,12 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
                 return VSConstants.S_OK;
             }
 
-            void ICSharpProjectRoot.GetHierarchyAndItemIDOptionallyInProject(string pszFile, out IVsHierarchy ppHier, out uint pItemID, bool mustBeInProject)
-            {
+            void ICSharpProjectRoot.GetHierarchyAndItemIDOptionallyInProject(
+                string pszFile,
+                out IVsHierarchy ppHier,
+                out uint pItemID,
+                bool mustBeInProject
+            ) {
                 throw new NotImplementedException();
             }
 

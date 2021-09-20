@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector128<Int32>>() / sizeof(Int32);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector128<Int32>>() / sizeof(Int32);
 
         public bool Succeeded { get; set; } = true;
 
@@ -72,20 +73,26 @@ namespace JIT.HardwareIntrinsics.General
 
             Vector128<Int32> value = Vector128.Create(values[0], values[1], values[2], values[3]);
 
-            object result = typeof(Vector128)
-                                .GetMethod(nameof(Vector128.ToScalar))
-                                .MakeGenericMethod(typeof(Int32))
-                                .Invoke(null, new object[] { value });
+            object result = typeof(Vector128).GetMethod(nameof(Vector128.ToScalar))
+                .MakeGenericMethod(typeof(Int32))
+                .Invoke(null, new object[] { value });
 
             ValidateResult((Int32)(result), values);
         }
 
-        private void ValidateResult(Int32 result, Int32[] values, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Int32 result,
+            Int32[] values,
+            [CallerMemberName] string method = ""
+        ) {
             if (result != values[0])
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<Int32>.ToScalar(): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  values: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<Int32>.ToScalar(): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  values: ({string.Join(", ", values)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

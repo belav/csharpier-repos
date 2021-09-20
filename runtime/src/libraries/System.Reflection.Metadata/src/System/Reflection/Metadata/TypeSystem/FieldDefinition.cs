@@ -76,9 +76,15 @@ namespace System.Reflection.Metadata
             }
         }
 
-        public TType DecodeSignature<TType, TGenericContext>(ISignatureTypeProvider<TType, TGenericContext> provider, TGenericContext genericContext)
-        {
-            var decoder = new SignatureDecoder<TType, TGenericContext>(provider, _reader, genericContext);
+        public TType DecodeSignature<TType, TGenericContext>(
+            ISignatureTypeProvider<TType, TGenericContext> provider,
+            TGenericContext genericContext
+        ) {
+            var decoder = new SignatureDecoder<TType, TGenericContext>(
+                provider,
+                _reader,
+                genericContext
+            );
             var blob = _reader.GetBlobReader(Signature);
             return decoder.DecodeFieldSignature(ref blob);
         }

@@ -59,8 +59,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             return _body!.CompleteAsync(exception);
         }
 
-        public override ValueTask<ReadResult> ReadAsync(CancellationToken cancellationToken = default)
-        {
+        public override ValueTask<ReadResult> ReadAsync(
+            CancellationToken cancellationToken = default
+        ) {
             ValidateState(cancellationToken);
 
             return _body!.ReadAsync(cancellationToken);
@@ -131,7 +132,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 }
             }
 
-            static void ThrowObjectDisposedException() => throw new ObjectDisposedException(nameof(HttpRequestStream));
+            static void ThrowObjectDisposedException() =>
+                throw new ObjectDisposedException(nameof(HttpRequestStream));
             static void ThrowTaskCanceledException() => throw new TaskCanceledException();
         }
     }

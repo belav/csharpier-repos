@@ -37,6 +37,11 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
         ///
         /// All cryptography-related exceptions should be homogenized to CryptographicException.
         /// </remarks>
-        byte[] Encrypt(ArraySegment<byte> plaintext, ArraySegment<byte> additionalAuthenticatedData, uint preBufferSize, uint postBufferSize);
+        byte[] Encrypt(
+            ArraySegment<byte> plaintext,
+            ArraySegment<byte> additionalAuthenticatedData,
+            uint preBufferSize,
+            uint postBufferSize
+        );
     }
 }

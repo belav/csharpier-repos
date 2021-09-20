@@ -22,19 +22,14 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         /// Initializes a <see cref="MediaType"/> instance.
         /// </summary>
         /// <param name="mediaType">The <see cref="string"/> with the media type.</param>
-        public MediaType(string mediaType)
-            : this(mediaType, 0, mediaType.Length)
-        {
-        }
+        public MediaType(string mediaType) : this(mediaType, 0, mediaType.Length) { }
 
         /// <summary>
         /// Initializes a <see cref="MediaType"/> instance.
         /// </summary>
         /// <param name="mediaType">The <see cref="StringSegment"/> with the media type.</param>
         public MediaType(StringSegment mediaType)
-            : this(mediaType.Buffer, mediaType.Offset, mediaType.Length)
-        {
-        }
+            : this(mediaType.Buffer, mediaType.Offset, mediaType.Length) { }
 
         /// <summary>
         /// Initializes a <see cref="MediaTypeParameterParser"/> instance.
@@ -56,14 +51,16 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
             if (length != null)
             {
-                if(length < 0 || length > mediaType.Length)
+                if (length < 0 || length > mediaType.Length)
                 {
                     throw new ArgumentOutOfRangeException(nameof(length));
                 }
 
                 if (offset > mediaType.Length - length)
                 {
-                    throw new ArgumentException(Resources.FormatArgument_InvalidOffsetLength(nameof(offset), nameof(length)));
+                    throw new ArgumentException(
+                        Resources.FormatArgument_InvalidOffsetLength(nameof(offset), nameof(length))
+                    );
                 }
             }
 
@@ -97,8 +94,14 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
                 if (TryGetSuffixLength(subType, out var subtypeSuffixLength))
                 {
-                    SubTypeWithoutSuffix = subType.Subsegment(0, subType.Length - subtypeSuffixLength - 1);
-                    SubTypeSuffix = subType.Subsegment(subType.Length - subtypeSuffixLength, subtypeSuffixLength);
+                    SubTypeWithoutSuffix = subType.Subsegment(
+                        0,
+                        subType.Length - subtypeSuffixLength - 1
+                    );
+                    SubTypeSuffix = subType.Subsegment(
+                        subType.Length - subtypeSuffixLength,
+                        subtypeSuffixLength
+                    );
                 }
                 else
                 {
@@ -107,7 +110,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 }
             }
 
-            _parameterParser = new MediaTypeParameterParser(mediaType, offset + typeLength + subTypeLength, length);
+            _parameterParser = new MediaTypeParameterParser(
+                mediaType,
+                offset + typeLength + subTypeLength,
+                length
+            );
         }
 
         // All GetXXXLength methods work in the same way. They expect to be on the right position for
@@ -153,7 +160,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             }
 
             current++; // skip delimiter.
-            current +=  HttpTokenParsingRules.GetWhitespaceLength(input, current);
+            current += HttpTokenParsingRules.GetWhitespaceLength(input, current);
 
             var subtypeLength = HttpTokenParsingRules.GetTokenLength(input, current);
             if (subtypeLength == 0)
@@ -164,8 +171,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
             subType = new StringSegment(input, current, subtypeLength);
 
-            current +=  subtypeLength;
-            current +=  HttpTokenParsingRules.GetWhitespaceLength(input, current);
+            current += subtypeLength;
+            current += HttpTokenParsingRules.GetWhitespaceLength(input, current);
 
             return current - offset;
         }
@@ -247,7 +254,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         /// <example>
         /// For the media type <c>"application/vnd.example+json"</c>, this property is <c>false</c>.
         /// </example>
-        public bool MatchesAllSubTypesWithoutSuffix => SubTypeWithoutSuffix.Equals("*", StringComparison.OrdinalIgnoreCase);
+        public bool MatchesAllSubTypesWithoutSuffix =>
+            SubTypeWithoutSuffix.Equals("*", StringComparison.OrdinalIgnoreCase);
 
         /// <summary>
         /// Gets the <see cref="System.Text.Encoding"/> of the <see cref="MediaType"/> if it has one.
@@ -269,9 +277,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         {
             get
             {
-                return MatchesAllTypes ||
-                    MatchesAllSubTypesWithoutSuffix ||
-                    GetParameter("*").Equals("*", StringComparison.OrdinalIgnoreCase);
+                return MatchesAllTypes
+                    || MatchesAllSubTypesWithoutSuffix
+                    || GetParameter("*").Equals("*", StringComparison.OrdinalIgnoreCase);
             }
         }
 
@@ -285,9 +293,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         /// </returns>
         public bool IsSubsetOf(MediaType set)
         {
-            return MatchesType(set) &&
-                MatchesSubtype(set) &&
-                ContainsAllParameters(set._parameterParser);
+            return MatchesType(set)
+                && MatchesSubtype(set)
+                && ContainsAllParameters(set._parameterParser);
         }
 
         /// <summary>
@@ -352,8 +360,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             var parsedMediaType = new MediaType(mediaType);
             var charset = parsedMediaType.GetParameter("charset");
 
-            if (charset.HasValue && charset.Equals(encoding.WebName, StringComparison.OrdinalIgnoreCase))
-            {
+            if (
+                charset.HasValue
+                && charset.Equals(encoding.WebName, StringComparison.OrdinalIgnoreCase)
+            ) {
                 return mediaType.Value;
             }
 
@@ -367,7 +377,12 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             var restLength = mediaType.Length - restOffset;
             var finalLength = charsetOffset + encoding.WebName.Length + restLength;
 
-            var builder = new StringBuilder(mediaType.Buffer, mediaType.Offset, charsetOffset, finalLength);
+            var builder = new StringBuilder(
+                mediaType.Buffer,
+                mediaType.Offset,
+                charsetOffset,
+                finalLength
+            );
             builder.Append(encoding.WebName);
             builder.Append(mediaType.Buffer, restOffset, restLength);
 
@@ -402,15 +417,18 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         /// <param name="mediaType">The media type to parse.</param>
         /// <param name="start">The position at which the parsing starts.</param>
         /// <returns>The parsed media type with its associated quality.</returns>
-        public static MediaTypeSegmentWithQuality CreateMediaTypeSegmentWithQuality(string mediaType, int start)
-        {
+        public static MediaTypeSegmentWithQuality CreateMediaTypeSegmentWithQuality(
+            string mediaType,
+            int start
+        ) {
             var parsedMediaType = new MediaType(mediaType, start, length: null);
 
             // Short-circuit use of the MediaTypeParameterParser if constructor detected an invalid type or subtype.
             // Parser would set ParsingFailed==true in this case. But, we handle invalid parameters as a separate case.
-            if (parsedMediaType.Type.Equals(default(StringSegment)) ||
-                parsedMediaType.SubType.Equals(default(StringSegment)))
-            {
+            if (
+                parsedMediaType.Type.Equals(default(StringSegment))
+                || parsedMediaType.SubType.Equals(default(StringSegment))
+            ) {
                 return default(MediaTypeSegmentWithQuality);
             }
 
@@ -423,8 +441,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 {
                     // If media type contains two `q` values i.e. it's invalid in an uncommon way, pick last value.
                     quality = double.Parse(
-                        parameter.Value.Value, NumberStyles.AllowDecimalPoint,
-                        NumberFormatInfo.InvariantInfo);
+                        parameter.Value.Value,
+                        NumberStyles.AllowDecimalPoint,
+                        NumberFormatInfo.InvariantInfo
+                    );
                 }
             }
 
@@ -437,7 +457,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
             return new MediaTypeSegmentWithQuality(
                 new StringSegment(mediaType, start, parser.CurrentOffset - start),
-                quality);
+                quality
+            );
         }
 
         private static Encoding? GetEncodingFromCharset(StringSegment charset)
@@ -462,15 +483,16 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             }
         }
 
-        private static string CreateMediaTypeWithEncoding(StringSegment mediaType, Encoding encoding)
-        {
+        private static string CreateMediaTypeWithEncoding(
+            StringSegment mediaType,
+            Encoding encoding
+        ) {
             return $"{mediaType.Value}; charset={encoding.WebName}";
         }
 
         private bool MatchesType(MediaType set)
         {
-            return set.MatchesAllTypes ||
-                set.Type.Equals(Type, StringComparison.OrdinalIgnoreCase);
+            return set.MatchesAllTypes || set.Type.Equals(Type, StringComparison.OrdinalIgnoreCase);
         }
 
         private bool MatchesSubtype(MediaType set)
@@ -504,8 +526,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
         private bool MatchesSubtypeWithoutSuffix(MediaType set)
         {
-            return set.MatchesAllSubTypesWithoutSuffix ||
-                set.SubTypeWithoutSuffix.Equals(SubTypeWithoutSuffix, StringComparison.OrdinalIgnoreCase);
+            return set.MatchesAllSubTypesWithoutSuffix
+                || set.SubTypeWithoutSuffix.Equals(
+                    SubTypeWithoutSuffix,
+                    StringComparison.OrdinalIgnoreCase
+                );
         }
 
         private bool MatchesSubtypeSuffix(MediaType set)
@@ -517,8 +542,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
         private bool MatchesEitherSubtypeOrSuffix(MediaType set)
         {
-            return set.SubType.Equals(SubType, StringComparison.OrdinalIgnoreCase) ||
-                set.SubType.Equals(SubTypeSuffix, StringComparison.OrdinalIgnoreCase);
+            return set.SubType.Equals(SubType, StringComparison.OrdinalIgnoreCase)
+                || set.SubType.Equals(SubTypeSuffix, StringComparison.OrdinalIgnoreCase);
         }
 
         private bool ContainsAllParameters(MediaTypeParameterParser setParameters)
@@ -544,8 +569,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 // We can do this because it's a struct
                 var subSetParameters = _parameterParser;
                 parameterFound = false;
-                while (subSetParameters.ParseNextParameter(out var subSetParameter) && !parameterFound)
-                {
+                while (
+                    subSetParameters.ParseNextParameter(out var subSetParameter) && !parameterFound
+                ) {
                     parameterFound = subSetParameter.Equals(setParameter);
                 }
             }
@@ -579,8 +605,12 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                     return false;
                 }
 
-                var parameterLength = GetParameterLength(_mediaTypeBuffer, CurrentOffset, out result);
-                CurrentOffset +=  parameterLength;
+                var parameterLength = GetParameterLength(
+                    _mediaTypeBuffer,
+                    CurrentOffset,
+                    out result
+                );
+                CurrentOffset += parameterLength;
 
                 if (parameterLength == 0)
                 {
@@ -591,8 +621,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 return true;
             }
 
-            private static int GetParameterLength(string input, int startIndex, out MediaTypeParameter parsedValue)
-            {
+            private static int GetParameterLength(
+                string input,
+                int startIndex,
+                out MediaTypeParameter parsedValue
+            ) {
                 if (OffsetIsOutOfRange(startIndex, input.Length) || input[startIndex] != ';')
                 {
                     parsedValue = default(MediaTypeParameter);
@@ -603,10 +636,15 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
                 var current = startIndex + nameLength;
 
-                if (nameLength == 0 || OffsetIsOutOfRange(current, input.Length) || input[current] != '=')
-                {
-                    if (current == input.Length && name.Equals("*", StringComparison.OrdinalIgnoreCase))
-                    {
+                if (
+                    nameLength == 0
+                    || OffsetIsOutOfRange(current, input.Length)
+                    || input[current] != '='
+                ) {
+                    if (
+                        current == input.Length
+                        && name.Equals("*", StringComparison.OrdinalIgnoreCase)
+                    ) {
                         // As a special case, we allow a trailing ";*" to indicate a wildcard
                         // string allowing any other parameters. It's the same as ";*=*".
                         var asterisk = new StringSegment("*");
@@ -623,7 +661,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 var valueLength = GetValueLength(input, current, out var value);
 
                 parsedValue = new MediaTypeParameter(name, value);
-                current +=  valueLength;
+                current += valueLength;
 
                 return current - startIndex;
             }
@@ -633,7 +671,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 var current = startIndex;
 
                 current++; // skip ';'
-                current +=  HttpTokenParsingRules.GetWhitespaceLength(input, current);
+                current += HttpTokenParsingRules.GetWhitespaceLength(input, current);
 
                 var nameLength = HttpTokenParsingRules.GetTokenLength(input, current);
                 if (nameLength == 0)
@@ -644,8 +682,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
                 name = new StringSegment(input, current, nameLength);
 
-                current +=  nameLength;
-                current +=  HttpTokenParsingRules.GetWhitespaceLength(input, current);
+                current += nameLength;
+                current += HttpTokenParsingRules.GetWhitespaceLength(input, current);
 
                 return current - startIndex;
             }
@@ -655,14 +693,18 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 var current = startIndex;
 
                 current++; // skip '='.
-                current +=  HttpTokenParsingRules.GetWhitespaceLength(input, current);
+                current += HttpTokenParsingRules.GetWhitespaceLength(input, current);
 
                 var valueLength = HttpTokenParsingRules.GetTokenLength(input, current);
 
                 if (valueLength == 0)
                 {
                     // A value can either be a token or a quoted string. Check if it is a quoted string.
-                    var result = HttpTokenParsingRules.GetQuotedStringLength(input, current, out valueLength);
+                    var result = HttpTokenParsingRules.GetQuotedStringLength(
+                        input,
+                        current,
+                        out valueLength
+                    );
                     if (result != HttpParseResult.Parsed)
                     {
                         // We have an invalid value. Reset the name and return.
@@ -678,8 +720,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                     value = new StringSegment(input, current, valueLength);
                 }
 
-                current +=  valueLength;
-                current +=  HttpTokenParsingRules.GetWhitespaceLength(input, current);
+                current += valueLength;
+                current += HttpTokenParsingRules.GetWhitespaceLength(input, current);
 
                 return current - startIndex;
             }
@@ -714,7 +756,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
             public bool Equals(MediaTypeParameter other)
             {
-                return HasName(other.Name) && Value.Equals(other.Value, StringComparison.OrdinalIgnoreCase);
+                return HasName(other.Name)
+                    && Value.Equals(other.Value, StringComparison.OrdinalIgnoreCase);
             }
 
             public override string ToString() => $"{Name}={Value}";

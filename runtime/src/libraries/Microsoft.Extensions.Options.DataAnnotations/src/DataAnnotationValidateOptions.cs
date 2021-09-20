@@ -10,7 +10,8 @@ namespace Microsoft.Extensions.Options
     /// Implementation of <see cref="IValidateOptions{TOptions}"/> that uses DataAnnotation's <see cref="Validator"/> for validation.
     /// </summary>
     /// <typeparam name="TOptions">The instance being validated.</typeparam>
-    public class DataAnnotationValidateOptions<TOptions> : IValidateOptions<TOptions> where TOptions : class
+    public class DataAnnotationValidateOptions<TOptions> : IValidateOptions<TOptions>
+        where TOptions : class
     {
         /// <summary>
         /// Constructor.
@@ -38,18 +39,23 @@ namespace Microsoft.Extensions.Options
             if (Name == null || name == Name)
             {
                 var validationResults = new List<ValidationResult>();
-                if (Validator.TryValidateObject(options,
-                    new ValidationContext(options, serviceProvider: null, items: null),
-                    validationResults,
-                    validateAllProperties: true))
-                {
+                if (
+                    Validator.TryValidateObject(
+                        options,
+                        new ValidationContext(options, serviceProvider: null, items: null),
+                        validationResults,
+                        validateAllProperties: true
+                    )
+                ) {
                     return ValidateOptionsResult.Success;
                 }
 
                 var errors = new List<string>();
                 foreach (ValidationResult r in validationResults)
                 {
-                    errors.Add($"DataAnnotation validation failed for members: '{string.Join(",", r.MemberNames)}' with the error: '{r.ErrorMessage}'.");
+                    errors.Add(
+                        $"DataAnnotation validation failed for members: '{string.Join(",", r.MemberNames)}' with the error: '{r.ErrorMessage}'."
+                    );
                 }
                 return ValidateOptionsResult.Fail(errors);
             }

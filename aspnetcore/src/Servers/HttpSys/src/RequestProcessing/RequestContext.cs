@@ -54,11 +54,14 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     }
                     else
                     {
-                        var connectionDisconnectToken = Server.DisconnectListener.GetTokenForConnection(Request.UConnectionId);
+                        var connectionDisconnectToken =
+                            Server.DisconnectListener.GetTokenForConnection(Request.UConnectionId);
 
                         if (connectionDisconnectToken.CanBeCanceled)
                         {
-                            _requestAbortSource = CancellationTokenSource.CreateLinkedTokenSource(connectionDisconnectToken);
+                            _requestAbortSource = CancellationTokenSource.CreateLinkedTokenSource(
+                                connectionDisconnectToken
+                            );
                             _disconnectToken = _requestAbortSource.Token;
                         }
                         else
@@ -77,7 +80,19 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             {
                 // This is the base GUID used by HTTP.SYS for generating the activity ID.
                 // HTTP.SYS overwrites the first 8 bytes of the base GUID with RequestId to generate ETW activity ID.
-                var guid = new Guid(0xffcb4c93, 0xa57f, 0x453c, 0xb6, 0x3f, 0x84, 0x71, 0xc, 0x79, 0x67, 0xbb);
+                var guid = new Guid(
+                    0xffcb4c93,
+                    0xa57f,
+                    0x453c,
+                    0xb6,
+                    0x3f,
+                    0x84,
+                    0x71,
+                    0xc,
+                    0x79,
+                    0x67,
+                    0xbb
+                );
                 *((ulong*)&guid) = Request.RequestId;
                 return guid;
             }
@@ -91,11 +106,15 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         {
             if (!IsUpgradableRequest)
             {
-                throw new InvalidOperationException("This request cannot be upgraded, it is incompatible.");
+                throw new InvalidOperationException(
+                    "This request cannot be upgraded, it is incompatible."
+                );
             }
             if (Response.HasStarted)
             {
-                throw new InvalidOperationException("This request cannot be upgraded, the response has already started.");
+                throw new InvalidOperationException(
+                    "This request cannot be upgraded, the response has already started."
+                );
             }
 
             // Set the status code and reason phrase
@@ -118,9 +137,16 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 return false;
             }
 
-            value = ClientCertLoader.GetChannelBindingFromTls(Server.RequestQueue, Request.UConnectionId, Logger);
+            value = ClientCertLoader.GetChannelBindingFromTls(
+                Server.RequestQueue,
+                Request.UConnectionId,
+                Logger
+            );
 
-            Debug.Assert(value != null, "GetChannelBindingFromTls returned null even though OS supposedly supports Extended Protection");
+            Debug.Assert(
+                value != null,
+                "GetChannelBindingFromTls returned null even though OS supposedly supports Extended Protection"
+            );
             Log.ChannelBindingRetrieved(Logger);
             return value != null;
         }
@@ -172,9 +198,7 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 {
                     _requestAbortSource.Cancel();
                 }
-                catch (ObjectDisposedException)
-                {
-                }
+                catch (ObjectDisposedException) { }
                 catch (Exception ex)
                 {
                     Log.AbortError(Logger, ex);
@@ -193,8 +217,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             context.Abort();
         }
 
-        internal CancellationTokenRegistration RegisterForCancellation(CancellationToken cancellationToken)
-        {
+        internal CancellationTokenRegistration RegisterForCancellation(
+            CancellationToken cancellationToken
+        ) {
             return cancellationToken.Register(AbortDelegate, this);
         }
 
@@ -203,8 +228,11 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         {
             try
             {
-                var statusCode = HttpApi.HttpCancelHttpRequest(Server.RequestQueue.Handle,
-                    Request.RequestId, IntPtr.Zero);
+                var statusCode = HttpApi.HttpCancelHttpRequest(
+                    Server.RequestQueue.Handle,
+                    Request.RequestId,
+                    IntPtr.Zero
+                );
 
                 // Either the connection has already dropped, or the last write is in progress.
                 // The requestId becomes invalid as soon as the last Content-Length write starts.
@@ -230,9 +258,18 @@ namespace Microsoft.AspNetCore.Server.HttpSys
 
             try
             {
-                var streamError = new HttpApiTypes.HTTP_REQUEST_PROPERTY_STREAM_ERROR() { ErrorCode = (uint)errorCode };
-                var statusCode = HttpApi.HttpSetRequestProperty(Server.RequestQueue.Handle, Request.RequestId, HttpApiTypes.HTTP_REQUEST_PROPERTY.HttpRequestPropertyStreamError, (void*)&streamError,
-                    (uint)sizeof(HttpApiTypes.HTTP_REQUEST_PROPERTY_STREAM_ERROR), IntPtr.Zero);
+                var streamError = new HttpApiTypes.HTTP_REQUEST_PROPERTY_STREAM_ERROR()
+                {
+                    ErrorCode = (uint)errorCode
+                };
+                var statusCode = HttpApi.HttpSetRequestProperty(
+                    Server.RequestQueue.Handle,
+                    Request.RequestId,
+                    HttpApiTypes.HTTP_REQUEST_PROPERTY.HttpRequestPropertyStreamError,
+                    (void*)&streamError,
+                    (uint)sizeof(HttpApiTypes.HTTP_REQUEST_PROPERTY_STREAM_ERROR),
+                    IntPtr.Zero
+                );
             }
             catch (ObjectDisposedException)
             {
@@ -244,7 +281,7 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         {
             return Task.CompletedTask;
         }
-        
+
         public void Execute()
         {
             _ = ExecuteAsync();
@@ -265,11 +302,15 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             }
             if (Request.HasRequestBodyStarted)
             {
-                throw new InvalidOperationException("This request cannot be delegated, the request body has already started.");
+                throw new InvalidOperationException(
+                    "This request cannot be delegated, the request body has already started."
+                );
             }
             if (Response.HasStarted)
             {
-                throw new InvalidOperationException("This request cannot be delegated, the response has already started.");
+                throw new InvalidOperationException(
+                    "This request cannot be delegated, the response has already started."
+                );
             }
 
             var source = Server.RequestQueue;
@@ -280,17 +321,22 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             {
                 var property = new HttpApiTypes.HTTP_DELEGATE_REQUEST_PROPERTY_INFO()
                 {
-                    PropertyId = HttpApiTypes.HTTP_DELEGATE_REQUEST_PROPERTY_ID.DelegateRequestDelegateUrlProperty,
+                    PropertyId =
+                        HttpApiTypes.HTTP_DELEGATE_REQUEST_PROPERTY_ID.DelegateRequestDelegateUrlProperty,
                     PropertyInfo = (IntPtr)uriPointer,
-                    PropertyInfoLength = (uint)System.Text.Encoding.Unicode.GetByteCount(destination.UrlPrefix)
+                    PropertyInfoLength = (uint)System.Text.Encoding.Unicode.GetByteCount(
+                        destination.UrlPrefix
+                    )
                 };
 
-                statusCode = HttpApi.HttpDelegateRequestEx(source.Handle,
-                                                               destination.Queue.Handle,
-                                                               Request.RequestId,
-                                                               destination.Queue.UrlGroup.Id,
-                                                               propertyInfoSetSize: 1,
-                                                               &property);
+                statusCode = HttpApi.HttpDelegateRequestEx(
+                    source.Handle,
+                    destination.Queue.Handle,
+                    Request.RequestId,
+                    destination.Queue.UrlGroup.Id,
+                    propertyInfoSetSize: 1,
+                    &property
+                );
             }
 
             if (statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS)

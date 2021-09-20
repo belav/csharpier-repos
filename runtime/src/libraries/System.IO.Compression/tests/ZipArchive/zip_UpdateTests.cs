@@ -21,16 +21,27 @@ namespace System.IO.Compression.Tests
         [InlineData("unicode.zip", "unicode")]
         public static async Task UpdateReadNormal(string zipFile, string zipFolder)
         {
-            IsZipSameAsDir(await StreamHelpers.CreateTempCopyStream(zfile(zipFile)), zfolder(zipFolder), ZipArchiveMode.Update, requireExplicit: true, checkTimes: true);
+            IsZipSameAsDir(
+                await StreamHelpers.CreateTempCopyStream(zfile(zipFile)),
+                zfolder(zipFolder),
+                ZipArchiveMode.Update,
+                requireExplicit: true,
+                checkTimes: true
+            );
         }
 
         [Fact]
         public static async Task UpdateReadTwice()
         {
-            using (ZipArchive archive = new ZipArchive(await StreamHelpers.CreateTempCopyStream(zfile("small.zip")), ZipArchiveMode.Update))
-            {
+            using (
+                ZipArchive archive = new ZipArchive(
+                    await StreamHelpers.CreateTempCopyStream(zfile("small.zip")),
+                    ZipArchiveMode.Update
+                )
+            ) {
                 ZipArchiveEntry entry = archive.Entries[0];
-                string contents1, contents2;
+                string contents1,
+                    contents2;
                 using (StreamReader s = new StreamReader(entry.Open()))
                 {
                     contents1 = s.ReadToEnd();
@@ -51,7 +62,13 @@ namespace System.IO.Compression.Tests
         {
             var zs = new LocalMemoryStream();
             await CreateFromDir(zfolder(zipFolder), zs, ZipArchiveMode.Update);
-            IsZipSameAsDir(zs.Clone(), zfolder(zipFolder), ZipArchiveMode.Read, requireExplicit: true, checkTimes: true);
+            IsZipSameAsDir(
+                zs.Clone(),
+                zfolder(zipFolder),
+                ZipArchiveMode.Read,
+                requireExplicit: true,
+                checkTimes: true
+            );
         }
 
         [Theory]
@@ -61,7 +78,15 @@ namespace System.IO.Compression.Tests
         {
             string data1 = "test data written to file.";
             string data2 = "more test data written to file.";
-            DateTimeOffset lastWrite = new DateTimeOffset(1992, 4, 5, 12, 00, 30, new TimeSpan(-5, 0, 0));
+            DateTimeOffset lastWrite = new DateTimeOffset(
+                1992,
+                4,
+                5,
+                12,
+                00,
+                30,
+                new TimeSpan(-5, 0, 0)
+            );
 
             var baseline = new LocalMemoryStream();
             using (ZipArchive archive = new ZipArchive(baseline, mode))
@@ -108,7 +133,10 @@ namespace System.IO.Compression.Tests
                 e.LastWriteTime = lastWrite;
             }
             //compare
-            Assert.True(ArraysEqual(baseline.ToArray(), test.ToArray()), "Arrays didn't match after update");
+            Assert.True(
+                ArraysEqual(baseline.ToArray(), test.ToArray()),
+                "Arrays didn't match after update"
+            );
         }
 
         [Fact]
@@ -124,16 +152,23 @@ namespace System.IO.Compression.Tests
                 toBeDeleted.Delete(); //delete twice should be okay
                 ZipArchiveEntry moved = archive.CreateEntry("notempty/secondnewname.txt");
                 ZipArchiveEntry orig = archive.GetEntry("notempty/second.txt");
-                using (Stream origMoved = orig.Open(), movedStream = moved.Open())
-                {
+                using (
+                    Stream origMoved = orig.Open(),
+                        movedStream = moved.Open()
+                ) {
                     origMoved.CopyTo(movedStream);
                 }
                 moved.LastWriteTime = orig.LastWriteTime;
                 orig.Delete();
             }
 
-            IsZipSameAsDir(testArchive, zmodified("deleteMove"), ZipArchiveMode.Read, requireExplicit: true, checkTimes: true);
-
+            IsZipSameAsDir(
+                testArchive,
+                zmodified("deleteMove"),
+                ZipArchiveMode.Read,
+                requireExplicit: true,
+                checkTimes: true
+            );
         }
         [Theory]
         [InlineData(false)]
@@ -150,7 +185,9 @@ namespace System.IO.Compression.Tests
                 {
                     s.Seek(0, SeekOrigin.End);
 
-                    byte[] data = Encoding.ASCII.GetBytes("\r\n\r\nThe answer my friend, is blowin' in the wind.");
+                    byte[] data = Encoding.ASCII.GetBytes(
+                        "\r\n\r\nThe answer my friend, is blowin' in the wind."
+                    );
                     if (writeWithSpans)
                     {
                         s.Write(data, 0, data.Length);
@@ -165,8 +202,13 @@ namespace System.IO.Compression.Tests
                 e.LastWriteTime = file.LastModifiedDate;
             }
 
-            IsZipSameAsDir(testArchive, zmodified("append"), ZipArchiveMode.Read, requireExplicit: true, checkTimes: true);
-
+            IsZipSameAsDir(
+                testArchive,
+                zmodified("append"),
+                ZipArchiveMode.Read,
+                requireExplicit: true,
+                checkTimes: true
+            );
         }
         [Fact]
         public static async Task OverwriteEntry()
@@ -192,7 +234,13 @@ namespace System.IO.Compression.Tests
                 }
             }
 
-            IsZipSameAsDir(testArchive, zmodified("overwrite"), ZipArchiveMode.Read, requireExplicit: true, checkTimes: true);
+            IsZipSameAsDir(
+                testArchive,
+                zmodified("overwrite"),
+                ZipArchiveMode.Read,
+                requireExplicit: true,
+                checkTimes: true
+            );
         }
 
         [Fact]
@@ -203,10 +251,20 @@ namespace System.IO.Compression.Tests
 
             using (ZipArchive archive = new ZipArchive(testArchive, ZipArchiveMode.Update, true))
             {
-                await updateArchive(archive, zmodified(Path.Combine("addFile", "added.txt")), "added.txt");
+                await updateArchive(
+                    archive,
+                    zmodified(Path.Combine("addFile", "added.txt")),
+                    "added.txt"
+                );
             }
 
-            IsZipSameAsDir(testArchive, zmodified ("addFile"), ZipArchiveMode.Read, requireExplicit: true, checkTimes: true);
+            IsZipSameAsDir(
+                testArchive,
+                zmodified("addFile"),
+                ZipArchiveMode.Read,
+                requireExplicit: true,
+                checkTimes: true
+            );
         }
 
         [Fact]
@@ -219,10 +277,20 @@ namespace System.IO.Compression.Tests
             {
                 var x = archive.Entries;
 
-                await updateArchive(archive, zmodified(Path.Combine("addFile", "added.txt")), "added.txt");
+                await updateArchive(
+                    archive,
+                    zmodified(Path.Combine("addFile", "added.txt")),
+                    "added.txt"
+                );
             }
 
-            IsZipSameAsDir(testArchive, zmodified("addFile"), ZipArchiveMode.Read, requireExplicit: true, checkTimes: true);
+            IsZipSameAsDir(
+                testArchive,
+                zmodified("addFile"),
+                ZipArchiveMode.Read,
+                requireExplicit: true,
+                checkTimes: true
+            );
         }
 
         [Fact]
@@ -233,16 +301,29 @@ namespace System.IO.Compression.Tests
 
             using (ZipArchive archive = new ZipArchive(testArchive, ZipArchiveMode.Update, true))
             {
-                await updateArchive(archive, zmodified(Path.Combine("addFile", "added.txt")), "added.txt");
+                await updateArchive(
+                    archive,
+                    zmodified(Path.Combine("addFile", "added.txt")),
+                    "added.txt"
+                );
 
                 var x = archive.Entries;
             }
 
-            IsZipSameAsDir(testArchive, zmodified("addFile"), ZipArchiveMode.Read, requireExplicit: true, checkTimes: true);
+            IsZipSameAsDir(
+                testArchive,
+                zmodified("addFile"),
+                ZipArchiveMode.Read,
+                requireExplicit: true,
+                checkTimes: true
+            );
         }
 
-        private static async Task updateArchive(ZipArchive archive, string installFile, string entryName)
-        {
+        private static async Task updateArchive(
+            ZipArchive archive,
+            string installFile,
+            string entryName
+        ) {
             ZipArchiveEntry e = archive.CreateEntry(entryName);
 
             var file = FileData.GetFile(installFile);
@@ -262,8 +343,9 @@ namespace System.IO.Compression.Tests
         [Fact]
         public static async Task UpdateModeInvalidOperations()
         {
-            using (LocalMemoryStream ms = await LocalMemoryStream.readAppFileAsync(zfile("normal.zip")))
-            {
+            using (
+                LocalMemoryStream ms = await LocalMemoryStream.readAppFileAsync(zfile("normal.zip"))
+            ) {
                 ZipArchive target = new ZipArchive(ms, ZipArchiveMode.Update, leaveOpen: true);
 
                 ZipArchiveEntry edeleted = target.GetEntry("first.txt");
@@ -271,31 +353,66 @@ namespace System.IO.Compression.Tests
                 Stream s = edeleted.Open();
                 //invalid ops while entry open
                 Assert.Throws<IOException>(() => edeleted.Open());
-                Assert.Throws<InvalidOperationException>(() => { var x = edeleted.Length; });
-                Assert.Throws<InvalidOperationException>(() => { var x = edeleted.CompressedLength; });
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                    {
+                        var x = edeleted.Length;
+                    }
+                );
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                    {
+                        var x = edeleted.CompressedLength;
+                    }
+                );
                 Assert.Throws<IOException>(() => edeleted.Delete());
                 s.Dispose();
 
                 //invalid ops on stream after entry closed
                 Assert.Throws<ObjectDisposedException>(() => s.ReadByte());
 
-                Assert.Throws<InvalidOperationException>(() => { var x = edeleted.Length; });
-                Assert.Throws<InvalidOperationException>(() => { var x = edeleted.CompressedLength; });
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                    {
+                        var x = edeleted.Length;
+                    }
+                );
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                    {
+                        var x = edeleted.CompressedLength;
+                    }
+                );
 
                 edeleted.Delete();
                 //invalid ops while entry deleted
                 Assert.Throws<InvalidOperationException>(() => edeleted.Open());
-                Assert.Throws<InvalidOperationException>(() => { edeleted.LastWriteTime = new DateTimeOffset(); });
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                    {
+                        edeleted.LastWriteTime = new DateTimeOffset();
+                    }
+                );
 
                 ZipArchiveEntry e = target.GetEntry("notempty/second.txt");
 
                 target.Dispose();
 
-                Assert.Throws<ObjectDisposedException>(() => { var x = target.Entries; });
+                Assert.Throws<ObjectDisposedException>(
+                    () =>
+                    {
+                        var x = target.Entries;
+                    }
+                );
                 Assert.Throws<ObjectDisposedException>(() => target.CreateEntry("dirka"));
                 Assert.Throws<ObjectDisposedException>(() => e.Open());
                 Assert.Throws<ObjectDisposedException>(() => e.Delete());
-                Assert.Throws<ObjectDisposedException>(() => { e.LastWriteTime = new DateTimeOffset(); });
+                Assert.Throws<ObjectDisposedException>(
+                    () =>
+                    {
+                        e.LastWriteTime = new DateTimeOffset();
+                    }
+                );
             }
         }
 
@@ -308,7 +425,10 @@ namespace System.IO.Compression.Tests
             {
                 using (var zip = new ZipArchive(memStream, ZipArchiveMode.Create))
                 {
-                    ZipArchiveEntry entry = zip.CreateEntry("testing", CompressionLevel.NoCompression);
+                    ZipArchiveEntry entry = zip.CreateEntry(
+                        "testing",
+                        CompressionLevel.NoCompression
+                    );
                     using (var writer = new StreamWriter(entry.Open(), utf8WithoutBom))
                     {
                         writer.Write("hello");

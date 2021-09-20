@@ -26,23 +26,32 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Debugger
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public DebuggerFindReferencesService(
             IThreadingContext threadingContext,
-            Lazy<IStreamingFindUsagesPresenter> streamingPresenter)
-        {
+            Lazy<IStreamingFindUsagesPresenter> streamingPresenter
+        ) {
             _streamingPresenter = streamingPresenter;
         }
 
-        public async Task FindSymbolReferencesAsync(ISymbol symbol, Project project, CancellationToken cancellationToken)
-        {
+        public async Task FindSymbolReferencesAsync(
+            ISymbol symbol,
+            Project project,
+            CancellationToken cancellationToken
+        ) {
             var streamingPresenter = _streamingPresenter.Value;
 
             // Let the presenter know we're starting a search.  It will give us back
             // the context object that the FAR service will push results into.
-            var context = streamingPresenter.StartSearch(EditorFeaturesResources.Find_References, supportsReferences: true, cancellationToken);
+            var context = streamingPresenter.StartSearch(
+                EditorFeaturesResources.Find_References,
+                supportsReferences: true,
+                cancellationToken
+            );
 
             try
             {
-                await AbstractFindUsagesService.FindSymbolReferencesAsync(context, symbol, project).ConfigureAwait(false);
+                await AbstractFindUsagesService.FindSymbolReferencesAsync(context, symbol, project)
+                    .ConfigureAwait(false);
             }
+
             finally
             {
                 await context.OnCompletedAsync().ConfigureAwait(false);

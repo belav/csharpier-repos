@@ -22,8 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             Workspace workspace,
             ProjectId projectId,
             IVsHierarchyItem parentItem,
-            IContextMenuController contextMenuController)
-            : base(SolutionExplorerShim.Analyzers)
+            IContextMenuController contextMenuController
+        ) : base(SolutionExplorerShim.Analyzers)
         {
             Workspace = workspace;
             ProjectId = projectId;

@@ -25,18 +25,57 @@ namespace Microsoft.AspNetCore.WebSockets
 
         // "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"
         // This uses C# compiler's ability to refer to static data directly. For more information see https://vcsjones.dev/2019/02/01/csharp-readonly-span-bytes-static
-        private static ReadOnlySpan<byte> EncodedWebSocketKey => new byte[]
-        {
-            (byte)'2', (byte)'5', (byte)'8', (byte)'E', (byte)'A', (byte)'F', (byte)'A', (byte)'5', (byte)'-',
-            (byte)'E', (byte)'9', (byte)'1', (byte)'4', (byte)'-', (byte)'4', (byte)'7', (byte)'D', (byte)'A',
-            (byte)'-', (byte)'9', (byte)'5', (byte)'C', (byte)'A', (byte)'-', (byte)'C', (byte)'5', (byte)'A',
-            (byte)'B', (byte)'0', (byte)'D', (byte)'C', (byte)'8', (byte)'5', (byte)'B', (byte)'1', (byte)'1'
-        };
+        private static ReadOnlySpan<byte> EncodedWebSocketKey =>
+            new byte[]
+            {
+                (byte)'2',
+                (byte)'5',
+                (byte)'8',
+                (byte)'E',
+                (byte)'A',
+                (byte)'F',
+                (byte)'A',
+                (byte)'5',
+                (byte)'-',
+                (byte)'E',
+                (byte)'9',
+                (byte)'1',
+                (byte)'4',
+                (byte)'-',
+                (byte)'4',
+                (byte)'7',
+                (byte)'D',
+                (byte)'A',
+                (byte)'-',
+                (byte)'9',
+                (byte)'5',
+                (byte)'C',
+                (byte)'A',
+                (byte)'-',
+                (byte)'C',
+                (byte)'5',
+                (byte)'A',
+                (byte)'B',
+                (byte)'0',
+                (byte)'D',
+                (byte)'C',
+                (byte)'8',
+                (byte)'5',
+                (byte)'B',
+                (byte)'1',
+                (byte)'1'
+            };
 
         // Verify Method, Upgrade, Connection, version,  key, etc..
-        public static bool CheckSupportedWebSocketRequest(string method, List<KeyValuePair<string, string>> interestingHeaders, IHeaderDictionary requestHeaders)
-        {
-            bool validUpgrade = false, validConnection = false, validKey = false, validVersion = false;
+        public static bool CheckSupportedWebSocketRequest(
+            string method,
+            List<KeyValuePair<string, string>> interestingHeaders,
+            IHeaderDictionary requestHeaders
+        ) {
+            bool validUpgrade = false,
+                validConnection = false,
+                validKey = false,
+                validVersion = false;
 
             if (!string.Equals("GET", method, StringComparison.OrdinalIgnoreCase))
             {
@@ -45,29 +84,60 @@ namespace Microsoft.AspNetCore.WebSockets
 
             foreach (var pair in interestingHeaders)
             {
-                if (string.Equals(HeaderNames.Connection, pair.Key, StringComparison.OrdinalIgnoreCase))
-                {
-                    if (string.Equals(HeaderNames.Upgrade, pair.Value, StringComparison.OrdinalIgnoreCase))
-                    {
+                if (
+                    string.Equals(
+                        HeaderNames.Connection,
+                        pair.Key,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                ) {
+                    if (
+                        string.Equals(
+                            HeaderNames.Upgrade,
+                            pair.Value,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    ) {
                         validConnection = true;
                     }
                 }
-                else if (string.Equals(HeaderNames.Upgrade, pair.Key, StringComparison.OrdinalIgnoreCase))
-                {
-                    if (string.Equals(Constants.Headers.UpgradeWebSocket, pair.Value, StringComparison.OrdinalIgnoreCase))
-                    {
+                else if (
+                    string.Equals(HeaderNames.Upgrade, pair.Key, StringComparison.OrdinalIgnoreCase)
+                ) {
+                    if (
+                        string.Equals(
+                            Constants.Headers.UpgradeWebSocket,
+                            pair.Value,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    ) {
                         validUpgrade = true;
                     }
                 }
-                else if (string.Equals(HeaderNames.SecWebSocketVersion, pair.Key, StringComparison.OrdinalIgnoreCase))
-                {
-                    if (string.Equals(Constants.Headers.SupportedVersion, pair.Value, StringComparison.OrdinalIgnoreCase))
-                    {
+                else if (
+                    string.Equals(
+                        HeaderNames.SecWebSocketVersion,
+                        pair.Key,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                ) {
+                    if (
+                        string.Equals(
+                            Constants.Headers.SupportedVersion,
+                            pair.Value,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    ) {
                         validVersion = true;
                     }
                 }
-                else if (string.Equals(HeaderNames.SecWebSocketKey, pair.Key, StringComparison.OrdinalIgnoreCase))
-                {
+                else if (
+                    string.Equals(
+                        HeaderNames.SecWebSocketKey,
+                        pair.Key,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                ) {
                     validKey = IsRequestKeyValid(pair.Value);
                 }
             }
@@ -83,14 +153,18 @@ namespace Microsoft.AspNetCore.WebSockets
             }
             if (validVersion && requestHeaders[HeaderNames.SecWebSocketVersion].Count == 1)
             {
-                requestHeaders[HeaderNames.SecWebSocketVersion] = Constants.Headers.SupportedVersion;
+                requestHeaders[HeaderNames.SecWebSocketVersion] =
+                    Constants.Headers.SupportedVersion;
             }
 
             return validConnection && validUpgrade && validVersion && validKey;
         }
 
-        public static void GenerateResponseHeaders(string key, string? subProtocol, IHeaderDictionary headers)
-        {
+        public static void GenerateResponseHeaders(
+            string key,
+            string? subProtocol,
+            IHeaderDictionary headers
+        ) {
             headers[HeaderNames.Connection] = HeaderNames.Upgrade;
             headers[HeaderNames.Upgrade] = Constants.Headers.UpgradeWebSocket;
             headers[HeaderNames.SecWebSocketAccept] = CreateResponseKey(key);
@@ -134,7 +208,9 @@ namespace Microsoft.AspNetCore.WebSockets
             var written = SHA1.HashData(mergedBytes, hashedBytes);
             if (written != 20)
             {
-                throw new InvalidOperationException("Could not compute the hash for the 'Sec-WebSocket-Accept' header.");
+                throw new InvalidOperationException(
+                    "Could not compute the hash for the 'Sec-WebSocket-Accept' header."
+                );
             }
 
             return Convert.ToBase64String(hashedBytes);

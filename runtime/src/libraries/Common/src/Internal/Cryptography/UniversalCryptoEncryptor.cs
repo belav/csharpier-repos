@@ -17,24 +17,31 @@ namespace Internal.Cryptography
     //
     internal sealed class UniversalCryptoEncryptor : UniversalCryptoTransform
     {
-        public UniversalCryptoEncryptor(PaddingMode paddingMode, BasicSymmetricCipher basicSymmetricCipher)
-            : base(paddingMode, basicSymmetricCipher)
-        {
-        }
+        public UniversalCryptoEncryptor(
+            PaddingMode paddingMode,
+            BasicSymmetricCipher basicSymmetricCipher
+        ) : base(paddingMode, basicSymmetricCipher) { }
 
-        protected override int UncheckedTransformBlock(ReadOnlySpan<byte> inputBuffer, Span<byte> outputBuffer)
-        {
+        protected override int UncheckedTransformBlock(
+            ReadOnlySpan<byte> inputBuffer,
+            Span<byte> outputBuffer
+        ) {
             return BasicSymmetricCipher.Transform(inputBuffer, outputBuffer);
         }
 
-        protected override int UncheckedTransformFinalBlock(ReadOnlySpan<byte> inputBuffer, Span<byte> outputBuffer)
-        {
+        protected override int UncheckedTransformFinalBlock(
+            ReadOnlySpan<byte> inputBuffer,
+            Span<byte> outputBuffer
+        ) {
             // The only caller of this method is the array-allocating overload, outputBuffer is
             // always new memory, not a user-provided buffer.
             Debug.Assert(!inputBuffer.Overlaps(outputBuffer));
 
             int padWritten = PadBlock(inputBuffer, outputBuffer);
-            int transformWritten = BasicSymmetricCipher.TransformFinal(outputBuffer.Slice(0, padWritten), outputBuffer);
+            int transformWritten = BasicSymmetricCipher.TransformFinal(
+                outputBuffer.Slice(0, padWritten),
+                outputBuffer
+            );
 
             // After padding, we should have an even number of blocks, and the same applies
             // to the transform.
@@ -43,15 +50,21 @@ namespace Internal.Cryptography
             return transformWritten;
         }
 
-        protected override byte[] UncheckedTransformFinalBlock(byte[] inputBuffer, int inputOffset, int inputCount)
-        {
+        protected override byte[] UncheckedTransformFinalBlock(
+            byte[] inputBuffer,
+            int inputOffset,
+            int inputCount
+        ) {
             byte[] buffer;
 #if NETSTANDARD || NETFRAMEWORK || NETCOREAPP3_0
             buffer = new byte[GetCiphertextLength(inputCount)];
 #else
             buffer = GC.AllocateUninitializedArray<byte>(GetCiphertextLength(inputCount));
 #endif
-            int written = UncheckedTransformFinalBlock(inputBuffer.AsSpan(inputOffset, inputCount), buffer);
+            int written = UncheckedTransformFinalBlock(
+                inputBuffer.AsSpan(inputOffset, inputCount),
+                buffer
+            );
             Debug.Assert(written == buffer.Length);
             return buffer;
         }
@@ -60,8 +73,10 @@ namespace Internal.Cryptography
         {
             Debug.Assert(plaintextLength >= 0);
 
-             //divisor and factor are same and won't overflow.
-            int wholeBlocks = Math.DivRem(plaintextLength, PaddingSizeBytes, out int remainder) * PaddingSizeBytes;
+            //divisor and factor are same and won't overflow.
+            int wholeBlocks =
+                Math.DivRem(plaintextLength, PaddingSizeBytes, out int remainder)
+                * PaddingSizeBytes;
 
             switch (PaddingMode)
             {
@@ -95,7 +110,10 @@ namespace Internal.Cryptography
                 case PaddingMode.None:
                     if (destination.Length < count)
                     {
-                        throw new ArgumentException(SR.Argument_DestinationTooShort, nameof(destination));
+                        throw new ArgumentException(
+                            SR.Argument_DestinationTooShort,
+                            nameof(destination)
+                        );
                     }
 
                     block.CopyTo(destination);
@@ -110,7 +128,10 @@ namespace Internal.Cryptography
 
                     if (destination.Length < ansiSize)
                     {
-                        throw new ArgumentException(SR.Argument_DestinationTooShort, nameof(destination));
+                        throw new ArgumentException(
+                            SR.Argument_DestinationTooShort,
+                            nameof(destination)
+                        );
                     }
 
                     block.CopyTo(destination);
@@ -127,7 +148,10 @@ namespace Internal.Cryptography
 
                     if (destination.Length < isoSize)
                     {
-                        throw new ArgumentException(SR.Argument_DestinationTooShort, nameof(destination));
+                        throw new ArgumentException(
+                            SR.Argument_DestinationTooShort,
+                            nameof(destination)
+                        );
                     }
 
                     block.CopyTo(destination);
@@ -144,7 +168,10 @@ namespace Internal.Cryptography
 
                     if (destination.Length < pkcsSize)
                     {
-                        throw new ArgumentException(SR.Argument_DestinationTooShort, nameof(destination));
+                        throw new ArgumentException(
+                            SR.Argument_DestinationTooShort,
+                            nameof(destination)
+                        );
                     }
 
                     block.CopyTo(destination);
@@ -165,7 +192,10 @@ namespace Internal.Cryptography
 
                     if (destination.Length < zeroSize)
                     {
-                        throw new ArgumentException(SR.Argument_DestinationTooShort, nameof(destination));
+                        throw new ArgumentException(
+                            SR.Argument_DestinationTooShort,
+                            nameof(destination)
+                        );
                     }
 
                     destination.Slice(0, zeroSize).Clear();

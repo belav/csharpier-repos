@@ -19,7 +19,9 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             get
             {
-                var errors = Diagnostics.Any(diagnostic => diagnostic.Severity == RazorDiagnosticSeverity.Error);
+                var errors = Diagnostics.Any(
+                    diagnostic => diagnostic.Severity == RazorDiagnosticSeverity.Error
+                );
 
                 return errors;
             }

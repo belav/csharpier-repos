@@ -28,10 +28,15 @@ namespace Owin
         /// <param name="builder">The application builder.</param>
         /// <param name="configuration">The <see cref="HttpConfiguration"/> used to configure the endpoint.</param>
         /// <returns>The application builder.</returns>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope",
-            Justification = "In the success path, HttpMessageHandlerAdapter owns the message handler.")]
-        public static IAppBuilder UseWebApi(this IAppBuilder builder, HttpConfiguration configuration)
-        {
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "In the success path, HttpMessageHandlerAdapter owns the message handler."
+        )]
+        public static IAppBuilder UseWebApi(
+            this IAppBuilder builder,
+            HttpConfiguration configuration
+        ) {
             if (builder == null)
             {
                 throw new ArgumentNullException("builder");
@@ -79,17 +84,21 @@ namespace Owin
             return UseMessageHandler(builder, options);
         }
 
-        private static IAppBuilder UseMessageHandler(this IAppBuilder builder, HttpMessageHandlerOptions options)
-        {
+        private static IAppBuilder UseMessageHandler(
+            this IAppBuilder builder,
+            HttpMessageHandlerOptions options
+        ) {
             Contract.Assert(builder != null);
             Contract.Assert(options != null);
 
             return builder.Use(typeof(HttpMessageHandlerAdapter), options);
         }
 
-        private static HttpMessageHandlerOptions CreateOptions(IAppBuilder builder, HttpServer server,
-            HttpConfiguration configuration)
-        {
+        private static HttpMessageHandlerOptions CreateOptions(
+            IAppBuilder builder,
+            HttpServer server,
+            HttpConfiguration configuration
+        ) {
             Contract.Assert(builder != null);
             Contract.Assert(server != null);
             Contract.Assert(configuration != null);
@@ -97,8 +106,8 @@ namespace Owin
             ServicesContainer services = configuration.Services;
             Contract.Assert(services != null);
 
-            IHostBufferPolicySelector bufferPolicySelector = services.GetHostBufferPolicySelector()
-                ?? _defaultBufferPolicySelector;
+            IHostBufferPolicySelector bufferPolicySelector =
+                services.GetHostBufferPolicySelector() ?? _defaultBufferPolicySelector;
             IExceptionLogger exceptionLogger = ExceptionServices.GetLogger(services);
             IExceptionHandler exceptionHandler = ExceptionServices.GetHandler(services);
 

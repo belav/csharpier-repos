@@ -11,14 +11,28 @@ namespace Microsoft.Win32
         [Fact]
         public void GetAccessControl_NullArgument_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() => RegistryAclExtensions.GetAccessControl(null));
-            Assert.Throws<ArgumentNullException>(() => RegistryAclExtensions.GetAccessControl(null, System.Security.AccessControl.AccessControlSections.All));
+            Assert.Throws<ArgumentNullException>(
+                () => RegistryAclExtensions.GetAccessControl(null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    RegistryAclExtensions.GetAccessControl(
+                        null,
+                        System.Security.AccessControl.AccessControlSections.All
+                    )
+            );
         }
 
         [Fact]
         public void SetAccessControl_NullArgument_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() => RegistryAclExtensions.SetAccessControl(null, new System.Security.AccessControl.RegistrySecurity()));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    RegistryAclExtensions.SetAccessControl(
+                        null,
+                        new System.Security.AccessControl.RegistrySecurity()
+                    )
+            );
         }
     }
 }

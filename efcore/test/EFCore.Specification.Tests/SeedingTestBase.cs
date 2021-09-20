@@ -47,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore
                     var _ = async
                         ? await context.Database.EnsureCreatedResilientlyAsync()
                         : context.Database.EnsureCreatedResiliently();
-                });
+                }
+            );
             Assert.Equal(CoreStrings.SeedKeylessEntity(nameof(KeylessSeed)), exception.Message);
         }
 
@@ -55,21 +56,21 @@ namespace Microsoft.EntityFrameworkCore
 
         protected abstract SeedingContext CreateContextWithEmptyDatabase(string testId);
 
-        protected virtual KeylessSeedingContext CreateKeylessContextWithEmptyDatabase()
-            => new(TestStore.AddProviderOptions(new DbContextOptionsBuilder()).Options);
+        protected virtual KeylessSeedingContext CreateKeylessContextWithEmptyDatabase() =>
+            new(TestStore.AddProviderOptions(new DbContextOptionsBuilder()).Options);
 
         protected abstract class SeedingContext : DbContext
         {
             public string TestId { get; }
 
-            protected SeedingContext(string testId)
-                => TestId = testId;
+            protected SeedingContext(string testId) => TestId = testId;
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Seed>().HasData(
-                    new Seed { Id = 321, Species = "Apple" },
-                    new Seed { Id = 322, Species = "Orange" }
-                );
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Seed>()
+                    .HasData(
+                        new Seed { Id = 321, Species = "Apple" },
+                        new Seed { Id = 322, Species = "Orange" }
+                    );
         }
 
         protected class Seed
@@ -82,18 +83,15 @@ namespace Microsoft.EntityFrameworkCore
 
         public class KeylessSeedingContext : DbContext
         {
-            public KeylessSeedingContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public KeylessSeedingContext(DbContextOptions options) : base(options) { }
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<KeylessSeed>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<KeylessSeed>()
                     .HasNoKey()
                     .HasData(
-                    new KeylessSeed { Species = "Apple" },
-                    new KeylessSeed { Species = "Orange" }
-                );
+                        new KeylessSeed { Species = "Apple" },
+                        new KeylessSeed { Species = "Orange" }
+                    );
         }
 
         public class KeylessSeed

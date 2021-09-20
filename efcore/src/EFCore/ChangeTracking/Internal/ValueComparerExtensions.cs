@@ -35,18 +35,23 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 Expression.Lambda(
                     comparer.ExtractEqualsBody(
                         Expression.Convert(newEqualsParam1, type),
-                        Expression.Convert(newEqualsParam2, type)),
-                    newEqualsParam1, newEqualsParam2),
+                        Expression.Convert(newEqualsParam2, type)
+                    ),
+                    newEqualsParam1,
+                    newEqualsParam2
+                ),
                 Expression.Lambda(
-                    comparer.ExtractHashCodeBody(
-                        Expression.Convert(newHashCodeParam, type)),
-                    newHashCodeParam),
+                    comparer.ExtractHashCodeBody(Expression.Convert(newHashCodeParam, type)),
+                    newHashCodeParam
+                ),
                 Expression.Lambda(
                     Expression.Convert(
-                        comparer.ExtractSnapshotBody(
-                            Expression.Convert(newSnapshotParam, type)),
-                        nullableType),
-                    newSnapshotParam))!;
+                        comparer.ExtractSnapshotBody(Expression.Convert(newSnapshotParam, type)),
+                        nullableType
+                    ),
+                    newSnapshotParam
+                )
+            )!;
         }
 
         private sealed class NonNullNullableValueComparer<T> : ValueComparer<T>
@@ -56,13 +61,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 #pragma warning restore CA1061 // Do not hide base class methods
                 LambdaExpression equalsExpression,
                 LambdaExpression hashCodeExpression,
-                LambdaExpression snapshotExpression)
-                : base(
-                    (Expression<Func<T?, T?, bool>>)equalsExpression,
-                    (Expression<Func<T, int>>)hashCodeExpression,
-                    (Expression<Func<T?, T?>>)snapshotExpression)
-            {
-            }
+                LambdaExpression snapshotExpression
+            ) : base(
+                (Expression<Func<T?, T?, bool>>)equalsExpression,
+                (Expression<Func<T, int>>)hashCodeExpression,
+                (Expression<Func<T?, T?>>)snapshotExpression
+            ) { }
         }
     }
 }

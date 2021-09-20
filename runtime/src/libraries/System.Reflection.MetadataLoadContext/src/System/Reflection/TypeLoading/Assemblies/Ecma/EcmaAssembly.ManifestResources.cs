@@ -18,19 +18,33 @@ namespace System.Reflection.TypeLoading.Ecma
             if (resourceName.Length == 0)
                 throw new ArgumentException(nameof(resourceName));
 
-            InternalManifestResourceInfo internalManifestResourceInfo = GetEcmaManifestModule().GetInternalManifestResourceInfo(resourceName);
+            InternalManifestResourceInfo internalManifestResourceInfo = GetEcmaManifestModule()
+                .GetInternalManifestResourceInfo(resourceName);
 
-            if (internalManifestResourceInfo.ResourceLocation == ResourceLocation.ContainedInAnotherAssembly)
-            {
+            if (
+                internalManifestResourceInfo.ResourceLocation
+                == ResourceLocation.ContainedInAnotherAssembly
+            ) {
                 // Must get resource info from other assembly, and OR in the contained in another assembly information
-                ManifestResourceInfo underlyingManifestResourceInfo = internalManifestResourceInfo.ReferencedAssembly.GetManifestResourceInfo(resourceName)!;
-                internalManifestResourceInfo.FileName = underlyingManifestResourceInfo.FileName ?? string.Empty;
-                internalManifestResourceInfo.ResourceLocation = underlyingManifestResourceInfo.ResourceLocation | ResourceLocation.ContainedInAnotherAssembly;
+                ManifestResourceInfo underlyingManifestResourceInfo =
+                    internalManifestResourceInfo.ReferencedAssembly.GetManifestResourceInfo(
+                        resourceName
+                    )!;
+                internalManifestResourceInfo.FileName =
+                    underlyingManifestResourceInfo.FileName ?? string.Empty;
+                internalManifestResourceInfo.ResourceLocation =
+                    underlyingManifestResourceInfo.ResourceLocation
+                    | ResourceLocation.ContainedInAnotherAssembly;
                 if (underlyingManifestResourceInfo.ReferencedAssembly != null)
-                    internalManifestResourceInfo.ReferencedAssembly = underlyingManifestResourceInfo.ReferencedAssembly;
+                    internalManifestResourceInfo.ReferencedAssembly =
+                        underlyingManifestResourceInfo.ReferencedAssembly;
             }
 
-            return new ManifestResourceInfo(internalManifestResourceInfo.ReferencedAssembly, internalManifestResourceInfo.FileName, internalManifestResourceInfo.ResourceLocation);
+            return new ManifestResourceInfo(
+                internalManifestResourceInfo.ReferencedAssembly,
+                internalManifestResourceInfo.FileName,
+                internalManifestResourceInfo.ResourceLocation
+            );
         }
 
         public sealed override string[] GetManifestResourceNames()
@@ -58,19 +72,27 @@ namespace System.Reflection.TypeLoading.Ecma
             if (name.Length == 0)
                 throw new ArgumentException(nameof(name));
 
-            InternalManifestResourceInfo internalManifestResourceInfo = GetEcmaManifestModule().GetInternalManifestResourceInfo(name);
+            InternalManifestResourceInfo internalManifestResourceInfo = GetEcmaManifestModule()
+                .GetInternalManifestResourceInfo(name);
             if ((internalManifestResourceInfo.ResourceLocation & ResourceLocation.Embedded) != 0)
             {
                 unsafe
                 {
-                    return new UnmanagedMemoryStream(internalManifestResourceInfo.PointerToResource, internalManifestResourceInfo.SizeOfResource);
+                    return new UnmanagedMemoryStream(
+                        internalManifestResourceInfo.PointerToResource,
+                        internalManifestResourceInfo.SizeOfResource
+                    );
                 }
             }
             else
             {
-                if (internalManifestResourceInfo.ResourceLocation == ResourceLocation.ContainedInAnotherAssembly)
-                {
-                    return internalManifestResourceInfo.ReferencedAssembly.GetManifestResourceStream(name);
+                if (
+                    internalManifestResourceInfo.ResourceLocation
+                    == ResourceLocation.ContainedInAnotherAssembly
+                ) {
+                    return internalManifestResourceInfo.ReferencedAssembly.GetManifestResourceStream(
+                        name
+                    );
                 }
                 else
                 {

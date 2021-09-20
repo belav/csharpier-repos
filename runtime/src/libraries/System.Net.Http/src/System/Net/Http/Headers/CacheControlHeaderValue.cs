@@ -25,7 +25,8 @@ namespace System.Net.Http.Headers
         private const string publicString = "public";
         private const string sharedMaxAgeString = "s-maxage";
 
-        private static readonly HttpHeaderParser s_nameValueListParser = GenericHeaderParser.MultipleValueNameValueParser;
+        private static readonly HttpHeaderParser s_nameValueListParser =
+            GenericHeaderParser.MultipleValueNameValueParser;
         private static readonly Action<string> s_checkIsValidToken = CheckIsValidToken;
 
         private bool _noCache;
@@ -51,7 +52,8 @@ namespace System.Net.Http.Headers
             set { _noCache = value; }
         }
 
-        public ICollection<string> NoCacheHeaders => _noCacheHeaders ??= new ObjectCollection<string>(s_checkIsValidToken);
+        public ICollection<string> NoCacheHeaders =>
+            _noCacheHeaders ??= new ObjectCollection<string>(s_checkIsValidToken);
 
         public bool NoStore
         {
@@ -113,7 +115,8 @@ namespace System.Net.Http.Headers
             set { _privateField = value; }
         }
 
-        public ICollection<string> PrivateHeaders => _privateHeaders ??= new ObjectCollection<string>(s_checkIsValidToken);
+        public ICollection<string> PrivateHeaders =>
+            _privateHeaders ??= new ObjectCollection<string>(s_checkIsValidToken);
 
         public bool MustRevalidate
         {
@@ -127,11 +130,10 @@ namespace System.Net.Http.Headers
             set { _proxyRevalidate = value; }
         }
 
-        public ICollection<NameValueHeaderValue> Extensions => _extensions ??= new ObjectCollection<NameValueHeaderValue>();
+        public ICollection<NameValueHeaderValue> Extensions =>
+            _extensions ??= new ObjectCollection<NameValueHeaderValue>();
 
-        public CacheControlHeaderValue()
-        {
-        }
+        public CacheControlHeaderValue() { }
 
         private CacheControlHeaderValue(CacheControlHeaderValue source)
         {
@@ -288,25 +290,41 @@ namespace System.Net.Http.Headers
                 return false;
             }
 
-            if ((_noCache != other._noCache) || (_noStore != other._noStore) || (_maxAge != other._maxAge) ||
-                (_sharedMaxAge != other._sharedMaxAge) || (_maxStale != other._maxStale) ||
-                (_maxStaleLimit != other._maxStaleLimit) || (_minFresh != other._minFresh) ||
-                (_noTransform != other._noTransform) || (_onlyIfCached != other._onlyIfCached) ||
-                (_publicField != other._publicField) || (_privateField != other._privateField) ||
-                (_mustRevalidate != other._mustRevalidate) || (_proxyRevalidate != other._proxyRevalidate))
-            {
+            if (
+                (_noCache != other._noCache)
+                || (_noStore != other._noStore)
+                || (_maxAge != other._maxAge)
+                || (_sharedMaxAge != other._sharedMaxAge)
+                || (_maxStale != other._maxStale)
+                || (_maxStaleLimit != other._maxStaleLimit)
+                || (_minFresh != other._minFresh)
+                || (_noTransform != other._noTransform)
+                || (_onlyIfCached != other._onlyIfCached)
+                || (_publicField != other._publicField)
+                || (_privateField != other._privateField)
+                || (_mustRevalidate != other._mustRevalidate)
+                || (_proxyRevalidate != other._proxyRevalidate)
+            ) {
                 return false;
             }
 
-            if (!HeaderUtilities.AreEqualCollections(_noCacheHeaders, other._noCacheHeaders,
-                StringComparer.OrdinalIgnoreCase))
-            {
+            if (
+                !HeaderUtilities.AreEqualCollections(
+                    _noCacheHeaders,
+                    other._noCacheHeaders,
+                    StringComparer.OrdinalIgnoreCase
+                )
+            ) {
                 return false;
             }
 
-            if (!HeaderUtilities.AreEqualCollections(_privateHeaders, other._privateHeaders,
-                StringComparer.OrdinalIgnoreCase))
-            {
+            if (
+                !HeaderUtilities.AreEqualCollections(
+                    _privateHeaders,
+                    other._privateHeaders,
+                    StringComparer.OrdinalIgnoreCase
+                )
+            ) {
                 return false;
             }
 
@@ -323,17 +341,25 @@ namespace System.Net.Http.Headers
             // Use a different bit for bool fields: bool.GetHashCode() will return 0 (false) or 1 (true). So we would
             // end up having the same hash code for e.g. two instances where one has only noCache set and the other
             // only noStore.
-            int result = _noCache.GetHashCode() ^ (_noStore.GetHashCode() << 1) ^ (_maxStale.GetHashCode() << 2) ^
-                (_noTransform.GetHashCode() << 3) ^ (_onlyIfCached.GetHashCode() << 4) ^
-                (_publicField.GetHashCode() << 5) ^ (_privateField.GetHashCode() << 6) ^
-                (_mustRevalidate.GetHashCode() << 7) ^ (_proxyRevalidate.GetHashCode() << 8);
+            int result =
+                _noCache.GetHashCode()
+                ^ (_noStore.GetHashCode() << 1)
+                ^ (_maxStale.GetHashCode() << 2)
+                ^ (_noTransform.GetHashCode() << 3)
+                ^ (_onlyIfCached.GetHashCode() << 4)
+                ^ (_publicField.GetHashCode() << 5)
+                ^ (_privateField.GetHashCode() << 6)
+                ^ (_mustRevalidate.GetHashCode() << 7)
+                ^ (_proxyRevalidate.GetHashCode() << 8);
 
             // XOR the hashcode of timespan values with different numbers to make sure two instances with the same
             // timespan set on different fields result in different hashcodes.
-            result = result ^ (_maxAge.HasValue ? _maxAge.Value.GetHashCode() ^ 1 : 0) ^
-                (_sharedMaxAge.HasValue ? _sharedMaxAge.Value.GetHashCode() ^ 2 : 0) ^
-                (_maxStaleLimit.HasValue ? _maxStaleLimit.Value.GetHashCode() ^ 4 : 0) ^
-                (_minFresh.HasValue ? _minFresh.Value.GetHashCode() ^ 8 : 0);
+            result =
+                result
+                ^ (_maxAge.HasValue ? _maxAge.Value.GetHashCode() ^ 1 : 0)
+                ^ (_sharedMaxAge.HasValue ? _sharedMaxAge.Value.GetHashCode() ^ 2 : 0)
+                ^ (_maxStaleLimit.HasValue ? _maxStaleLimit.Value.GetHashCode() ^ 4 : 0)
+                ^ (_minFresh.HasValue ? _minFresh.Value.GetHashCode() ^ 8 : 0);
 
             if ((_noCacheHeaders != null) && (_noCacheHeaders.Count > 0))
             {
@@ -365,7 +391,11 @@ namespace System.Net.Http.Headers
         public static CacheControlHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (CacheControlHeaderValue)CacheControlHeaderParser.Parser.ParseValue(input, null, ref index);
+            return (CacheControlHeaderValue)CacheControlHeaderParser.Parser.ParseValue(
+                input,
+                null,
+                ref index
+            );
         }
 
         public static bool TryParse(string? input, out CacheControlHeaderValue? parsedValue)
@@ -373,17 +403,26 @@ namespace System.Net.Http.Headers
             int index = 0;
             parsedValue = null;
 
-            if (CacheControlHeaderParser.Parser.TryParseValue(input, null, ref index, out object? output))
-            {
+            if (
+                CacheControlHeaderParser.Parser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
+            ) {
                 parsedValue = (CacheControlHeaderValue?)output;
                 return true;
             }
             return false;
         }
 
-        internal static int GetCacheControlLength(string? input, int startIndex, CacheControlHeaderValue? storeValue,
-            out CacheControlHeaderValue? parsedValue)
-        {
+        internal static int GetCacheControlLength(
+            string? input,
+            int startIndex,
+            CacheControlHeaderValue? storeValue,
+            out CacheControlHeaderValue? parsedValue
+        ) {
             Debug.Assert(startIndex >= 0);
 
             parsedValue = null;
@@ -437,9 +476,10 @@ namespace System.Net.Http.Headers
             return input.Length - startIndex;
         }
 
-        private static bool TrySetCacheControlValues(CacheControlHeaderValue cc,
-            List<NameValueHeaderValue> nameValueList)
-        {
+        private static bool TrySetCacheControlValues(
+            CacheControlHeaderValue cc,
+            List<NameValueHeaderValue> nameValueList
+        ) {
             foreach (NameValueHeaderValue nameValue in nameValueList)
             {
                 bool success = true;
@@ -448,7 +488,11 @@ namespace System.Net.Http.Headers
                 switch (name)
                 {
                     case noCacheString:
-                        success = TrySetOptionalTokenList(nameValue, ref cc._noCache, ref cc._noCacheHeaders);
+                        success = TrySetOptionalTokenList(
+                            nameValue,
+                            ref cc._noCache,
+                            ref cc._noCacheHeaders
+                        );
                         break;
 
                     case noStoreString:
@@ -460,7 +504,10 @@ namespace System.Net.Http.Headers
                         break;
 
                     case maxStaleString:
-                        success = ((nameValue.Value == null) || TrySetTimeSpan(nameValue, ref cc._maxStaleLimit));
+                        success = (
+                            (nameValue.Value == null)
+                            || TrySetTimeSpan(nameValue, ref cc._maxStaleLimit)
+                        );
                         if (success)
                         {
                             cc._maxStale = true;
@@ -484,7 +531,11 @@ namespace System.Net.Http.Headers
                         break;
 
                     case privateString:
-                        success = TrySetOptionalTokenList(nameValue, ref cc._privateField, ref cc._privateHeaders);
+                        success = TrySetOptionalTokenList(
+                            nameValue,
+                            ref cc._privateField,
+                            ref cc._privateHeaders
+                        );
                         break;
 
                     case mustRevalidateString:
@@ -524,9 +575,11 @@ namespace System.Net.Http.Headers
             return true;
         }
 
-        private static bool TrySetOptionalTokenList(NameValueHeaderValue nameValue, ref bool boolField,
-            ref ObjectCollection<string>? destination)
-        {
+        private static bool TrySetOptionalTokenList(
+            NameValueHeaderValue nameValue,
+            ref bool boolField,
+            ref ObjectCollection<string>? destination
+        ) {
             Debug.Assert(nameValue != null);
 
             if (nameValue.Value == null)
@@ -538,8 +591,11 @@ namespace System.Net.Http.Headers
             // We need the string to be at least 3 chars long: 2x quotes and at least 1 character. Also make sure we
             // have a quoted string. Note that NameValueHeaderValue will never have leading/trailing whitespace.
             string valueString = nameValue.Value;
-            if ((valueString.Length < 3) || (valueString[0] != '\"') || (valueString[valueString.Length - 1] != '\"'))
-            {
+            if (
+                (valueString.Length < 3)
+                || (valueString[0] != '\"')
+                || (valueString[valueString.Length - 1] != '\"')
+            ) {
                 return false;
             }
 
@@ -550,8 +606,12 @@ namespace System.Net.Http.Headers
             int originalValueCount = destination == null ? 0 : destination.Count;
             while (current < maxLength)
             {
-                current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(valueString, current, true,
-                    out separatorFound);
+                current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(
+                    valueString,
+                    current,
+                    true,
+                    out separatorFound
+                );
 
                 if (current == maxLength)
                 {

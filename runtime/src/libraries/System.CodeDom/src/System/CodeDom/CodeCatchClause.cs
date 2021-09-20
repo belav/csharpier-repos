@@ -22,8 +22,11 @@ namespace System.CodeDom
             _catchExceptionType = catchExceptionType;
         }
 
-        public CodeCatchClause(string localName, CodeTypeReference catchExceptionType, params CodeStatement[] statements)
-        {
+        public CodeCatchClause(
+            string localName,
+            CodeTypeReference catchExceptionType,
+            params CodeStatement[] statements
+        ) {
             _localName = localName;
             _catchExceptionType = catchExceptionType;
             Statements.AddRange(statements);
@@ -37,10 +40,13 @@ namespace System.CodeDom
 
         public CodeTypeReference CatchExceptionType
         {
-            get => _catchExceptionType ?? (_catchExceptionType = new CodeTypeReference(typeof(Exception)));
+            get =>
+                _catchExceptionType
+                ?? (_catchExceptionType = new CodeTypeReference(typeof(Exception)));
             set => _catchExceptionType = value;
         }
 
-        public CodeStatementCollection Statements => _statements ?? (_statements = new CodeStatementCollection());
+        public CodeStatementCollection Statements =>
+            _statements ?? (_statements = new CodeStatementCollection());
     }
 }

@@ -12,9 +12,7 @@ namespace Microsoft.AspNetCore.Mvc.Localization.Test
     {
         private CultureInfo _culture { get; set; }
 
-        public TestStringLocalizer() : this(null)
-        {
-        }
+        public TestStringLocalizer() : this(null) { }
 
         public TestStringLocalizer(CultureInfo culture)
         {

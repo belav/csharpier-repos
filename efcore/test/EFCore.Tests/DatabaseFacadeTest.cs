@@ -26,7 +26,8 @@ namespace Microsoft.EntityFrameworkCore
             var creator = new FakeDatabaseCreator();
 
             var context = InMemoryTestHelpers.Instance.CreateContext(
-                new ServiceCollection().AddSingleton<IDatabaseCreator>(creator));
+                new ServiceCollection().AddSingleton<IDatabaseCreator>(creator)
+            );
 
             if (async)
             {
@@ -104,7 +105,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = InMemoryTestHelpers.Instance.CreateContext();
             Assert.Same(
                 ((IInfrastructure<IServiceProvider>)context).Instance,
-                ((IInfrastructure<IServiceProvider>)context.Database).Instance);
+                ((IInfrastructure<IServiceProvider>)context.Database).Instance
+            );
         }
 
         [ConditionalFact]
@@ -113,7 +115,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = InMemoryTestHelpers.Instance.CreateContext();
             Assert.Same(
                 context.GetService<IDatabaseCreator>(),
-                context.Database.GetService<IDatabaseCreator>());
+                context.Database.GetService<IDatabaseCreator>()
+            );
         }
 
         [ConditionalFact]
@@ -132,13 +135,16 @@ namespace Microsoft.EntityFrameworkCore
 
             var context = InMemoryTestHelpers.Instance.CreateContext(
                 new ServiceCollection().AddSingleton<IDbContextTransactionManager>(
-                    new FakeDbContextTransactionManager(transaction)));
+                    new FakeDbContextTransactionManager(transaction)
+                )
+            );
 
             Assert.Same(
                 transaction,
                 async
-                    ? await context.Database.BeginTransactionAsync()
-                    : context.Database.BeginTransaction());
+                  ? await context.Database.BeginTransactionAsync()
+                  : context.Database.BeginTransaction()
+            );
         }
 
         private class FakeDbContextTransactionManager : IDbContextTransactionManager
@@ -157,14 +163,13 @@ namespace Microsoft.EntityFrameworkCore
             public int ReleaseSavepointCalls;
             public int SupportsSavepointsCalls;
 
-            public IDbContextTransaction BeginTransaction()
-                => _transaction;
+            public IDbContextTransaction BeginTransaction() => _transaction;
 
-            public Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
-                => Task.FromResult<IDbContextTransaction>(_transaction);
+            public Task<IDbContextTransaction> BeginTransactionAsync(
+                CancellationToken cancellationToken = default
+            ) => Task.FromResult<IDbContextTransaction>(_transaction);
 
-            public void CommitTransaction()
-                => CommitCalls++;
+            public void CommitTransaction() => CommitCalls++;
 
             public Task CommitTransactionAsync(CancellationToken cancellationToken = default)
             {
@@ -172,8 +177,7 @@ namespace Microsoft.EntityFrameworkCore
                 return Task.CompletedTask;
             }
 
-            public void RollbackTransaction()
-                => RollbackCalls++;
+            public void RollbackTransaction() => RollbackCalls++;
 
             public Task RollbackTransactionAsync(CancellationToken cancellationToken = default)
             {
@@ -181,29 +185,32 @@ namespace Microsoft.EntityFrameworkCore
                 return Task.CompletedTask;
             }
 
-            public void CreateSavepoint(string name)
-                => CreateSavepointCalls++;
+            public void CreateSavepoint(string name) => CreateSavepointCalls++;
 
-            public Task CreateSavepointAsync(string name, CancellationToken cancellationToken = default)
-            {
+            public Task CreateSavepointAsync(
+                string name,
+                CancellationToken cancellationToken = default
+            ) {
                 CreateSavepointCalls++;
                 return Task.CompletedTask;
             }
 
-            public void RollbackToSavepoint(string name)
-                => RollbackSavepointCalls++;
+            public void RollbackToSavepoint(string name) => RollbackSavepointCalls++;
 
-            public Task RollbackToSavepointAsync(string name, CancellationToken cancellationToken = default)
-            {
+            public Task RollbackToSavepointAsync(
+                string name,
+                CancellationToken cancellationToken = default
+            ) {
                 RollbackSavepointCalls++;
                 return Task.CompletedTask;
             }
 
-            public void ReleaseSavepoint(string name)
-                => ReleaseSavepointCalls++;
+            public void ReleaseSavepoint(string name) => ReleaseSavepointCalls++;
 
-            public Task ReleaseSavepointAsync(string name, CancellationToken cancellationToken = default)
-            {
+            public Task ReleaseSavepointAsync(
+                string name,
+                CancellationToken cancellationToken = default
+            ) {
                 ReleaseSavepointCalls++;
                 return Task.CompletedTask;
             }
@@ -217,42 +224,36 @@ namespace Microsoft.EntityFrameworkCore
                 }
             }
 
-            public IDbContextTransaction CurrentTransaction
-                => _transaction;
+            public IDbContextTransaction CurrentTransaction => _transaction;
 
             public Transaction EnlistedTransaction { get; }
 
-            public void EnlistTransaction(Transaction transaction)
-                => throw new NotImplementedException();
+            public void EnlistTransaction(Transaction transaction) =>
+                throw new NotImplementedException();
 
-            public void ResetState()
-                => throw new NotImplementedException();
+            public void ResetState() => throw new NotImplementedException();
 
-            public Task ResetStateAsync(CancellationToken cancellationToken = default)
-                => throw new NotImplementedException();
+            public Task ResetStateAsync(CancellationToken cancellationToken = default) =>
+                throw new NotImplementedException();
         }
 
         private class FakeDbContextTransaction : IDbContextTransaction
         {
-            public void Dispose()
-                => throw new NotImplementedException();
+            public void Dispose() => throw new NotImplementedException();
 
-            public ValueTask DisposeAsync()
-                => throw new NotImplementedException();
+            public ValueTask DisposeAsync() => throw new NotImplementedException();
 
             public Guid TransactionId { get; }
 
-            public void Commit()
-                => throw new NotImplementedException();
+            public void Commit() => throw new NotImplementedException();
 
-            public Task CommitAsync(CancellationToken cancellationToken = default)
-                => throw new NotImplementedException();
+            public Task CommitAsync(CancellationToken cancellationToken = default) =>
+                throw new NotImplementedException();
 
-            public void Rollback()
-                => throw new NotImplementedException();
+            public void Rollback() => throw new NotImplementedException();
 
-            public Task RollbackAsync(CancellationToken cancellationToken = default)
-                => throw new NotImplementedException();
+            public Task RollbackAsync(CancellationToken cancellationToken = default) =>
+                throw new NotImplementedException();
         }
 
         [ConditionalFact]
@@ -261,7 +262,8 @@ namespace Microsoft.EntityFrameworkCore
             var manager = new FakeDbContextTransactionManager(new FakeDbContextTransaction());
 
             var context = InMemoryTestHelpers.Instance.CreateContext(
-                new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager));
+                new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager)
+            );
 
             context.Database.CommitTransaction();
 
@@ -274,7 +276,8 @@ namespace Microsoft.EntityFrameworkCore
             var manager = new FakeDbContextTransactionManager(new FakeDbContextTransaction());
 
             var context = InMemoryTestHelpers.Instance.CreateContext(
-                new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager));
+                new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager)
+            );
 
             await context.Database.CommitTransactionAsync();
 
@@ -287,7 +290,8 @@ namespace Microsoft.EntityFrameworkCore
             var manager = new FakeDbContextTransactionManager(new FakeDbContextTransaction());
 
             var context = InMemoryTestHelpers.Instance.CreateContext(
-                new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager));
+                new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager)
+            );
 
             context.Database.RollbackTransaction();
 
@@ -300,7 +304,8 @@ namespace Microsoft.EntityFrameworkCore
             var manager = new FakeDbContextTransactionManager(new FakeDbContextTransaction());
 
             var context = InMemoryTestHelpers.Instance.CreateContext(
-                new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager));
+                new ServiceCollection().AddSingleton<IDbContextTransactionManager>(manager)
+            );
 
             await context.Database.RollbackTransactionAsync();
 
@@ -314,7 +319,9 @@ namespace Microsoft.EntityFrameworkCore
 
             var context = InMemoryTestHelpers.Instance.CreateContext(
                 new ServiceCollection().AddSingleton<IDbContextTransactionManager>(
-                    new FakeDbContextTransactionManager(transaction)));
+                    new FakeDbContextTransactionManager(transaction)
+                )
+            );
 
             Assert.Same(transaction, context.Database.CurrentTransaction);
         }
@@ -328,13 +335,19 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(() => context.Database.GetService<IModel>()).Message);
+                Assert.Throws<ObjectDisposedException>(
+                    () => context.Database.GetService<IModel>()
+                ).Message
+            );
 
             foreach (var methodInfo in facade.GetType().GetMethods(BindingFlags.Public))
             {
                 Assert.StartsWith(
                     CoreStrings.ContextDisposed,
-                    Assert.Throws<ObjectDisposedException>(() => methodInfo.Invoke(facade, null)).Message);
+                    Assert.Throws<ObjectDisposedException>(
+                        () => methodInfo.Invoke(facade, null)
+                    ).Message
+                );
             }
         }
     }

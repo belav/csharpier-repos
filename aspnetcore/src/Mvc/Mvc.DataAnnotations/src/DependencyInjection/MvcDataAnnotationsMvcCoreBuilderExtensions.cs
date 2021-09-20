@@ -54,8 +54,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IMvcBuilder"/>.</returns>
         public static IMvcCoreBuilder AddDataAnnotationsLocalization(
             this IMvcCoreBuilder builder,
-            Action<MvcDataAnnotationsLocalizationOptions>? setupAction)
-        {
+            Action<MvcDataAnnotationsLocalizationOptions>? setupAction
+        ) {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -69,16 +69,26 @@ namespace Microsoft.Extensions.DependencyInjection
         internal static void AddDataAnnotationsServices(IServiceCollection services)
         {
             services.TryAddEnumerable(
-                ServiceDescriptor.Transient<IConfigureOptions<MvcOptions>, MvcDataAnnotationsMvcOptionsSetup>());
-            services.TryAddSingleton<IValidationAttributeAdapterProvider, ValidationAttributeAdapterProvider>();
+                ServiceDescriptor.Transient<
+                    IConfigureOptions<MvcOptions>,
+                    MvcDataAnnotationsMvcOptionsSetup
+                >()
+            );
+            services.TryAddSingleton<
+                IValidationAttributeAdapterProvider,
+                ValidationAttributeAdapterProvider
+            >();
         }
 
         // Internal for testing.
         internal static void AddDataAnnotationsLocalizationServices(
             IServiceCollection services,
-            Action<MvcDataAnnotationsLocalizationOptions>? setupAction)
-        {
-            DataAnnotationsLocalizationServices.AddDataAnnotationsLocalizationServices(services, setupAction);
+            Action<MvcDataAnnotationsLocalizationOptions>? setupAction
+        ) {
+            DataAnnotationsLocalizationServices.AddDataAnnotationsLocalizationServices(
+                services,
+                setupAction
+            );
         }
     }
 }

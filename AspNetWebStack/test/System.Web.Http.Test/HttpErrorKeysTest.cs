@@ -28,8 +28,10 @@ namespace System.Web.Http
 
         [Theory]
         [PropertyData("ErrorKeys")]
-        public void HttpErrorKeyProperties_Returns_CorrectKeys(Func<string> productUnderTest, string expectedResult)
-        {
+        public void HttpErrorKeyProperties_Returns_CorrectKeys(
+            Func<string> productUnderTest,
+            string expectedResult
+        ) {
             // Act
             string actualResult = productUnderTest.Invoke();
 

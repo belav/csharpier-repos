@@ -20,10 +20,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public CurrentPropertyValues(InternalEntityEntry internalEntry)
-            : base(internalEntry)
-        {
-        }
+        public CurrentPropertyValues(InternalEntityEntry internalEntry) : base(internalEntry) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -31,8 +28,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override TValue GetValue<TValue>(string propertyName)
-            => InternalEntry.GetCurrentValue<TValue>(InternalEntry.EntityType.GetProperty(propertyName));
+        public override TValue GetValue<TValue>(string propertyName) =>
+            InternalEntry.GetCurrentValue<TValue>(
+                InternalEntry.EntityType.GetProperty(propertyName)
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -40,8 +39,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override TValue GetValue<TValue>(IProperty property)
-            => InternalEntry.GetCurrentValue<TValue>(InternalEntry.EntityType.CheckPropertyBelongsToType(property));
+        public override TValue GetValue<TValue>(IProperty property) =>
+            InternalEntry.GetCurrentValue<TValue>(
+                InternalEntry.EntityType.CheckPropertyBelongsToType(property)
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -49,8 +50,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override void SetValueInternal(IProperty property, object? value)
-            => InternalEntry[property] = value;
+        protected override void SetValueInternal(IProperty property, object? value) =>
+            InternalEntry[property] = value;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -58,7 +59,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override object? GetValueInternal(IProperty property)
-            => InternalEntry[property];
+        protected override object? GetValueInternal(IProperty property) => InternalEntry[property];
     }
 }

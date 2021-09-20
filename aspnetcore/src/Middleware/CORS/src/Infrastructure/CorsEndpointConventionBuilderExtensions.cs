@@ -19,17 +19,20 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="builder">The endpoint convention builder.</param>
         /// <param name="policyName">The CORS policy name.</param>
         /// <returns>The original convention builder parameter.</returns>
-        public static TBuilder RequireCors<TBuilder>(this TBuilder builder, string policyName) where TBuilder : IEndpointConventionBuilder
+        public static TBuilder RequireCors<TBuilder>(this TBuilder builder, string policyName)
+            where TBuilder : IEndpointConventionBuilder
         {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.Add(endpointBuilder =>
-            {
-                endpointBuilder.Metadata.Add(new EnableCorsAttribute(policyName));
-            });
+            builder.Add(
+                endpointBuilder =>
+                {
+                    endpointBuilder.Metadata.Add(new EnableCorsAttribute(policyName));
+                }
+            );
             return builder;
         }
 
@@ -39,7 +42,10 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="builder">The endpoint convention builder.</param>
         /// <param name="configurePolicy">A delegate which can use a policy builder to build a policy.</param>
         /// <returns>The original convention builder parameter.</returns>
-        public static TBuilder RequireCors<TBuilder>(this TBuilder builder, Action<CorsPolicyBuilder> configurePolicy) where TBuilder : IEndpointConventionBuilder
+        public static TBuilder RequireCors<TBuilder>(
+            this TBuilder builder,
+            Action<CorsPolicyBuilder> configurePolicy
+        ) where TBuilder : IEndpointConventionBuilder
         {
             if (builder == null)
             {
@@ -55,10 +61,12 @@ namespace Microsoft.AspNetCore.Builder
             configurePolicy(policyBuilder);
             var policy = policyBuilder.Build();
 
-            builder.Add(endpointBuilder =>
-            {
-                endpointBuilder.Metadata.Add(new CorsPolicyMetadata(policy));
-            });
+            builder.Add(
+                endpointBuilder =>
+                {
+                    endpointBuilder.Metadata.Add(new CorsPolicyMetadata(policy));
+                }
+            );
             return builder;
         }
     }

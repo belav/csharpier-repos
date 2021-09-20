@@ -11,21 +11,21 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
-    internal abstract class AbstractMethodOrPropertyOrEventSymbolReferenceFinder<TSymbol> : AbstractReferenceFinder<TSymbol>
-        where TSymbol : ISymbol
+    internal abstract class AbstractMethodOrPropertyOrEventSymbolReferenceFinder<TSymbol>
+        : AbstractReferenceFinder<TSymbol> where TSymbol : ISymbol
     {
-        protected AbstractMethodOrPropertyOrEventSymbolReferenceFinder()
-        {
-        }
+        protected AbstractMethodOrPropertyOrEventSymbolReferenceFinder() { }
 
-        protected override async Task<ImmutableArray<(ISymbol symbol, FindReferencesCascadeDirection cascadeDirection)>> DetermineCascadedSymbolsAsync(
+        protected override async Task<
+            ImmutableArray<(ISymbol symbol, FindReferencesCascadeDirection cascadeDirection)>
+        > DetermineCascadedSymbolsAsync(
             TSymbol symbol,
             Solution solution,
             IImmutableSet<Project>? projects,
             FindReferencesSearchOptions options,
             FindReferencesCascadeDirection cascadeDirection,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             // Static methods can't cascade.
             if (symbol.IsStatic)
                 return ImmutableArray<(ISymbol symbol, FindReferencesCascadeDirection cascadeDirection)>.Empty;
@@ -35,7 +35,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 // We have an interface method.  Walk down the inheritance hierarchy and find all implementations of
                 // that method and cascade to them.
                 var result = cascadeDirection.HasFlag(FindReferencesCascadeDirection.Down)
-                    ? await SymbolFinder.FindMemberImplementationsArrayAsync(symbol, solution, projects, cancellationToken).ConfigureAwait(false)
+                    ? await SymbolFinder.FindMemberImplementationsArrayAsync(
+                              symbol,
+                              solution,
+                              projects,
+                              cancellationToken
+                          )
+                          .ConfigureAwait(false)
                     : ImmutableArray<ISymbol>.Empty;
                 return result.SelectAsArray(s => (s, FindReferencesCascadeDirection.Down));
             }
@@ -43,35 +49,62 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             {
                 // We have a normal method.  Find any interface methods up the inheritance hierarchy that it implicitly
                 // or explicitly implements and cascade to those.
-                var interfaceMembersImplemented = cascadeDirection.HasFlag(FindReferencesCascadeDirection.Up)
-                    ? await SymbolFinder.FindImplementedInterfaceMembersArrayAsync(symbol, solution, projects, cancellationToken).ConfigureAwait(false)
+                var interfaceMembersImplemented = cascadeDirection.HasFlag(
+                    FindReferencesCascadeDirection.Up
+                )
+                    ? await SymbolFinder.FindImplementedInterfaceMembersArrayAsync(
+                              symbol,
+                              solution,
+                              projects,
+                              cancellationToken
+                          )
+                          .ConfigureAwait(false)
                     : ImmutableArray<ISymbol>.Empty;
 
                 // Finally, methods can cascade through virtual/override inheritance.  NOTE(cyrusn):
                 // We only need to go up or down one level.  Then, when we're finding references on
                 // those members, we'll end up traversing the entire hierarchy.
                 var overrides = cascadeDirection.HasFlag(FindReferencesCascadeDirection.Down)
-                    ? await SymbolFinder.FindOverridesArrayAsync(symbol, solution, projects, cancellationToken).ConfigureAwait(false)
+                    ? await SymbolFinder.FindOverridesArrayAsync(
+                              symbol,
+                              solution,
+                              projects,
+                              cancellationToken
+                          )
+                          .ConfigureAwait(false)
                     : ImmutableArray<ISymbol>.Empty;
 
                 var overriddenMember = cascadeDirection.HasFlag(FindReferencesCascadeDirection.Up)
                     ? symbol.GetOverriddenMember()
                     : null;
 
-                var interfaceMembersImplementedWithDirection = interfaceMembersImplemented.SelectAsArray(s => (s, FindReferencesCascadeDirection.Up));
-                var overridesWithDirection = overrides.SelectAsArray(s => (s, FindReferencesCascadeDirection.Down));
-                var overriddenMemberWithDirection = (overriddenMember!, FindReferencesCascadeDirection.Up);
+                var interfaceMembersImplementedWithDirection =
+                    interfaceMembersImplemented.SelectAsArray(
+                        s => (s, FindReferencesCascadeDirection.Up)
+                    );
+                var overridesWithDirection = overrides.SelectAsArray(
+                    s => (s, FindReferencesCascadeDirection.Down)
+                );
+                var overriddenMemberWithDirection = (
+                    overriddenMember!,
+                    FindReferencesCascadeDirection.Up
+                );
 
                 return overriddenMember == null
                     ? interfaceMembersImplementedWithDirection.Concat(overridesWithDirection)
-                    : interfaceMembersImplementedWithDirection.Concat(overridesWithDirection).Concat(overriddenMemberWithDirection);
+                    : interfaceMembersImplementedWithDirection.Concat(overridesWithDirection)
+                          .Concat(overriddenMemberWithDirection);
             }
         }
 
         protected static ImmutableArray<IMethodSymbol> GetReferencedAccessorSymbols(
-            ISyntaxFactsService syntaxFacts, ISemanticFactsService semanticFacts,
-            SemanticModel model, IPropertySymbol property, SyntaxNode node, CancellationToken cancellationToken)
-        {
+            ISyntaxFactsService syntaxFacts,
+            ISemanticFactsService semanticFacts,
+            SemanticModel model,
+            IPropertySymbol property,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        ) {
             if (syntaxFacts.IsForEachStatement(node))
             {
                 var symbols = semanticFacts.GetForEachSymbols(model, node);
@@ -105,7 +138,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 //
                 // This list is thought to be complete.  However, if new examples are found, they
                 // can be added here.
-                var inNameOf = semanticFacts.IsInsideNameOfExpression(model, node, cancellationToken);
+                var inNameOf = semanticFacts.IsInsideNameOfExpression(
+                    model,
+                    node,
+                    cancellationToken
+                );
                 var inStructuredTrivia = node.IsPartOfStructuredTrivia();
 
                 return inNameOf || inStructuredTrivia || property.GetMethod == null

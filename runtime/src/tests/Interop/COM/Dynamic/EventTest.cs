@@ -210,8 +210,11 @@ namespace Dynamic
 
             public EventTestHandler Handler => _handler;
 
-            public override bool TryInvoke(System.Dynamic.InvokeBinder binder, object[] args, out object result)
-            {
+            public override bool TryInvoke(
+                System.Dynamic.InvokeBinder binder,
+                object[] args,
+                out object result
+            ) {
                 result = null;
                 if (args.Length != 1 || !(args[0] is int))
                     return false;
@@ -264,13 +267,21 @@ namespace Dynamic
 
             public void Validate(bool called, int id = InvalidId)
             {
-                Assert.AreEqual(called, _eventReceived, $"Event handler should {(called ? "" : "not ")}have been called");
+                Assert.AreEqual(
+                    called,
+                    _eventReceived,
+                    $"Event handler should {(called ? "" : "not ")}have been called"
+                );
                 Assert.AreEqual(id, _id, "Unexpected event arguments received");
             }
 
             public void ValidateMessage(bool called, string message = "")
             {
-                Assert.AreEqual(called, _eventMessageReceived, $"Event handler should {(called ? "" : "not ")}have been called");
+                Assert.AreEqual(
+                    called,
+                    _eventMessageReceived,
+                    $"Event handler should {(called ? "" : "not ")}have been called"
+                );
                 Assert.AreEqual(message, _message, "Unexpected event arguments received");
             }
         }

@@ -35,8 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public MemberClassifier(
             ITypeMappingSource typeMappingSource,
-            IParameterBindingFactories parameterBindingFactories)
-        {
+            IParameterBindingFactories parameterBindingFactories
+        ) {
             Check.NotNull(typeMappingSource, nameof(typeMappingSource));
             Check.NotNull(parameterBindingFactories, nameof(parameterBindingFactories));
 
@@ -56,9 +56,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             var targetType = memberInfo.GetMemberType();
             var targetSequenceType = targetType.TryGetSequenceType();
-            if (!(memberInfo is PropertyInfo propertyInfo)
-                || !propertyInfo.IsCandidateProperty(targetSequenceType == null))
-            {
+            if (
+                !(memberInfo is PropertyInfo propertyInfo)
+                || !propertyInfo.IsCandidateProperty(targetSequenceType == null)
+            ) {
                 return null;
             }
 
@@ -66,13 +67,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             targetType = targetType.UnwrapNullableType();
 
             return targetType.IsInterface
-                || targetType.IsValueType
-                || targetType == typeof(object)
-                || _parameterBindingFactories.FindFactory(targetType, memberInfo.GetSimpleMemberName()) != null
-                || _typeMappingSource.FindMapping(targetType) != null
-                || targetType.IsArray
-                    ? null
-                    : targetType;
+            || targetType.IsValueType
+            || targetType == typeof(object)
+            || _parameterBindingFactories.FindFactory(targetType, memberInfo.GetSimpleMemberName())
+                != null
+            || _typeMappingSource.FindMapping(targetType) != null
+            || targetType.IsArray
+                ? null
+                : targetType;
         }
     }
 }

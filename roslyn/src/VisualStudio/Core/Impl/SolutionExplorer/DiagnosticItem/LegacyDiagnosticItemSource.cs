@@ -11,9 +11,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
     {
         private readonly AnalyzerItem _item;
 
-        public LegacyDiagnosticItemSource(AnalyzerItem item, IAnalyzersCommandHandler commandHandler, IDiagnosticAnalyzerService diagnosticAnalyzerService)
-            : base(item.AnalyzersFolder.Workspace, item.AnalyzersFolder.ProjectId, commandHandler, diagnosticAnalyzerService)
-        {
+        public LegacyDiagnosticItemSource(
+            AnalyzerItem item,
+            IAnalyzersCommandHandler commandHandler,
+            IDiagnosticAnalyzerService diagnosticAnalyzerService
+        ) : base(
+            item.AnalyzersFolder.Workspace,
+            item.AnalyzersFolder.ProjectId,
+            commandHandler,
+            diagnosticAnalyzerService
+        ) {
             _item = item;
         }
 

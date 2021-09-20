@@ -20,10 +20,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             ImmutableArray<int> constructorArgumentsSourceIndices,
             ImmutableArray<KeyValuePair<string, TypedConstant>> namedArguments,
             bool hasErrors,
-            bool isConditionallyOmitted)
-            : base(applicationNode, attributeClass, attributeConstructor, constructorArguments, constructorArgumentsSourceIndices, namedArguments, hasErrors, isConditionallyOmitted)
-        {
-        }
+            bool isConditionallyOmitted
+        ) : base(
+            applicationNode,
+            attributeClass,
+            attributeConstructor,
+            constructorArguments,
+            constructorArgumentsSourceIndices,
+            namedArguments,
+            hasErrors,
+            isConditionallyOmitted
+        ) { }
 
         /// <summary>
         /// Gets the retargeted System.Type type symbol.
@@ -32,15 +39,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         /// <returns>Retargeted System.Type type symbol.</returns>
         internal override TypeSymbol GetSystemType(Symbol targetSymbol)
         {
-            var retargetingAssembly = (RetargetingAssemblySymbol)(targetSymbol.Kind == SymbolKind.Assembly ? targetSymbol : targetSymbol.ContainingAssembly);
+            var retargetingAssembly = (RetargetingAssemblySymbol)(
+                targetSymbol.Kind == SymbolKind.Assembly
+                    ? targetSymbol
+                    : targetSymbol.ContainingAssembly
+            );
             var underlyingAssembly = (SourceAssemblySymbol)retargetingAssembly.UnderlyingAssembly;
 
             // Get the System.Type from the underlying assembly's Compilation
-            TypeSymbol systemType = underlyingAssembly.DeclaringCompilation.GetWellKnownType(WellKnownType.System_Type);
+            TypeSymbol systemType = underlyingAssembly.DeclaringCompilation.GetWellKnownType(
+                WellKnownType.System_Type
+            );
 
             // Retarget the type
             var retargetingModule = (RetargetingModuleSymbol)retargetingAssembly.Modules[0];
-            return retargetingModule.RetargetingTranslator.Retarget(systemType, RetargetOptions.RetargetPrimitiveTypesByTypeCode);
+            return retargetingModule.RetargetingTranslator.Retarget(
+                systemType,
+                RetargetOptions.RetargetPrimitiveTypesByTypeCode
+            );
         }
     }
 }

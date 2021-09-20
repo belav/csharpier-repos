@@ -58,8 +58,12 @@ namespace System.Security.Cryptography.Xml
 
         // The goal behind this method is to pump the input stream through the transforms and get back something that
         // can be hashed
-        internal Stream TransformToOctetStream(object inputObject, Type inputType, XmlResolver resolver, string baseUri)
-        {
+        internal Stream TransformToOctetStream(
+            object inputObject,
+            Type inputType,
+            XmlResolver resolver,
+            string baseUri
+        ) {
             object currentInput = inputObject;
             foreach (Transform transform in _transforms)
             {
@@ -82,7 +86,11 @@ namespace System.Security.Cryptography.Xml
                             Stream currentInputStream = currentInput as Stream;
                             XmlDocument doc = new XmlDocument();
                             doc.PreserveWhitespace = true;
-                            XmlReader valReader = Utils.PreProcessStreamInput(currentInputStream, resolver, baseUri);
+                            XmlReader valReader = Utils.PreProcessStreamInput(
+                                currentInputStream,
+                                resolver,
+                                baseUri
+                            );
                             doc.Load(valReader);
                             transform.LoadInput(doc);
                             currentInputStream.Close();
@@ -91,14 +99,20 @@ namespace System.Security.Cryptography.Xml
                         }
                         else
                         {
-                            throw new CryptographicException(SR.Cryptography_Xml_TransformIncorrectInputType);
+                            throw new CryptographicException(
+                                SR.Cryptography_Xml_TransformIncorrectInputType
+                            );
                         }
                     }
                     if (currentInput is XmlNodeList)
                     {
                         if (transform.AcceptsType(typeof(Stream)))
                         {
-                            CanonicalXml c14n = new CanonicalXml((XmlNodeList)currentInput, resolver, false);
+                            CanonicalXml c14n = new CanonicalXml(
+                                (XmlNodeList)currentInput,
+                                resolver,
+                                false
+                            );
                             MemoryStream ms = new MemoryStream(c14n.GetBytes());
                             transform.LoadInput(ms);
                             currentInput = transform.GetOutput();
@@ -107,14 +121,19 @@ namespace System.Security.Cryptography.Xml
                         }
                         else
                         {
-                            throw new CryptographicException(SR.Cryptography_Xml_TransformIncorrectInputType);
+                            throw new CryptographicException(
+                                SR.Cryptography_Xml_TransformIncorrectInputType
+                            );
                         }
                     }
                     if (currentInput is XmlDocument)
                     {
                         if (transform.AcceptsType(typeof(Stream)))
                         {
-                            CanonicalXml c14n = new CanonicalXml((XmlDocument)currentInput, resolver);
+                            CanonicalXml c14n = new CanonicalXml(
+                                (XmlDocument)currentInput,
+                                resolver
+                            );
                             MemoryStream ms = new MemoryStream(c14n.GetBytes());
                             transform.LoadInput(ms);
                             currentInput = transform.GetOutput();
@@ -123,10 +142,14 @@ namespace System.Security.Cryptography.Xml
                         }
                         else
                         {
-                            throw new CryptographicException(SR.Cryptography_Xml_TransformIncorrectInputType);
+                            throw new CryptographicException(
+                                SR.Cryptography_Xml_TransformIncorrectInputType
+                            );
                         }
                     }
-                    throw new CryptographicException(SR.Cryptography_Xml_TransformIncorrectInputType);
+                    throw new CryptographicException(
+                        SR.Cryptography_Xml_TransformIncorrectInputType
+                    );
                 }
             }
 
@@ -155,8 +178,11 @@ namespace System.Security.Cryptography.Xml
             return TransformToOctetStream(input, typeof(Stream), resolver, baseUri);
         }
 
-        internal Stream TransformToOctetStream(XmlDocument document, XmlResolver resolver, string baseUri)
-        {
+        internal Stream TransformToOctetStream(
+            XmlDocument document,
+            XmlResolver resolver,
+            string baseUri
+        ) {
             return TransformToOctetStream(document, typeof(XmlDocument), resolver, baseUri);
         }
 
@@ -192,7 +218,11 @@ namespace System.Security.Cryptography.Xml
             for (int i = 0; i < transformNodes.Count; ++i)
             {
                 XmlElement transformElement = (XmlElement)transformNodes.Item(i);
-                string algorithm = Utils.GetAttribute(transformElement, "Algorithm", SignedXml.XmlDsigNamespaceUrl);
+                string algorithm = Utils.GetAttribute(
+                    transformElement,
+                    "Algorithm",
+                    SignedXml.XmlDsigNamespaceUrl
+                );
                 Transform transform = CryptoHelpers.CreateFromName<Transform>(algorithm);
                 if (transform == null)
                     throw new CryptographicException(SR.Cryptography_Xml_UnknownTransform);

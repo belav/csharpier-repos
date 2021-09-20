@@ -30,8 +30,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
 
         public LSP.TextDocumentIdentifier TextDocument { get; }
 
-        public CodeActionResolveData(string uniqueIdentifier, ImmutableArray<string> customTags, LSP.Range range, LSP.TextDocumentIdentifier textDocument)
-        {
+        public CodeActionResolveData(
+            string uniqueIdentifier,
+            ImmutableArray<string> customTags,
+            LSP.Range range,
+            LSP.TextDocumentIdentifier textDocument
+        ) {
             UniqueIdentifier = uniqueIdentifier;
             CustomTags = customTags;
             Range = range;

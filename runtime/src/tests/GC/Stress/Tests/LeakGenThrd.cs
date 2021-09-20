@@ -6,7 +6,6 @@ using System.Threading;
 using System;
 using System.IO;
 
-
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 //
 
@@ -60,7 +59,6 @@ namespace LGen
             }
         }
 
-
         public bool runTest(int iRep, int iObj)
         {
             Cv_iRep = iRep;
@@ -76,8 +74,6 @@ namespace LGen
 
             return true;
         }
-
-
 
         public void ThreadStart()
         {

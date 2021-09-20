@@ -14,16 +14,36 @@ namespace System.Drawing.Imaging
     {
         // Format IDs
         // private static ImageFormat undefined = new ImageFormat(new Guid("{b96b3ca9-0728-11d3-9d7b-0000f81ef32e}"));
-        private static readonly ImageFormat s_memoryBMP = new ImageFormat(new Guid("{b96b3caa-0728-11d3-9d7b-0000f81ef32e}"));
-        private static readonly ImageFormat s_bmp = new ImageFormat(new Guid("{b96b3cab-0728-11d3-9d7b-0000f81ef32e}"));
-        private static readonly ImageFormat s_emf = new ImageFormat(new Guid("{b96b3cac-0728-11d3-9d7b-0000f81ef32e}"));
-        private static readonly ImageFormat s_wmf = new ImageFormat(new Guid("{b96b3cad-0728-11d3-9d7b-0000f81ef32e}"));
-        private static readonly ImageFormat s_jpeg = new ImageFormat(new Guid("{b96b3cae-0728-11d3-9d7b-0000f81ef32e}"));
-        private static readonly ImageFormat s_png = new ImageFormat(new Guid("{b96b3caf-0728-11d3-9d7b-0000f81ef32e}"));
-        private static readonly ImageFormat s_gif = new ImageFormat(new Guid("{b96b3cb0-0728-11d3-9d7b-0000f81ef32e}"));
-        private static readonly ImageFormat s_tiff = new ImageFormat(new Guid("{b96b3cb1-0728-11d3-9d7b-0000f81ef32e}"));
-        private static readonly ImageFormat s_exif = new ImageFormat(new Guid("{b96b3cb2-0728-11d3-9d7b-0000f81ef32e}"));
-        private static readonly ImageFormat s_icon = new ImageFormat(new Guid("{b96b3cb5-0728-11d3-9d7b-0000f81ef32e}"));
+        private static readonly ImageFormat s_memoryBMP = new ImageFormat(
+            new Guid("{b96b3caa-0728-11d3-9d7b-0000f81ef32e}")
+        );
+        private static readonly ImageFormat s_bmp = new ImageFormat(
+            new Guid("{b96b3cab-0728-11d3-9d7b-0000f81ef32e}")
+        );
+        private static readonly ImageFormat s_emf = new ImageFormat(
+            new Guid("{b96b3cac-0728-11d3-9d7b-0000f81ef32e}")
+        );
+        private static readonly ImageFormat s_wmf = new ImageFormat(
+            new Guid("{b96b3cad-0728-11d3-9d7b-0000f81ef32e}")
+        );
+        private static readonly ImageFormat s_jpeg = new ImageFormat(
+            new Guid("{b96b3cae-0728-11d3-9d7b-0000f81ef32e}")
+        );
+        private static readonly ImageFormat s_png = new ImageFormat(
+            new Guid("{b96b3caf-0728-11d3-9d7b-0000f81ef32e}")
+        );
+        private static readonly ImageFormat s_gif = new ImageFormat(
+            new Guid("{b96b3cb0-0728-11d3-9d7b-0000f81ef32e}")
+        );
+        private static readonly ImageFormat s_tiff = new ImageFormat(
+            new Guid("{b96b3cb1-0728-11d3-9d7b-0000f81ef32e}")
+        );
+        private static readonly ImageFormat s_exif = new ImageFormat(
+            new Guid("{b96b3cb2-0728-11d3-9d7b-0000f81ef32e}")
+        );
+        private static readonly ImageFormat s_icon = new ImageFormat(
+            new Guid("{b96b3cb5-0728-11d3-9d7b-0000f81ef32e}")
+        );
 
         private Guid _guid;
 
@@ -160,16 +180,26 @@ namespace System.Drawing.Imaging
         /// </summary>
         public override string ToString()
         {
-            if (this.Guid == s_memoryBMP.Guid) return "MemoryBMP";
-            if (this.Guid == s_bmp.Guid) return "Bmp";
-            if (this.Guid == s_emf.Guid) return "Emf";
-            if (this.Guid == s_wmf.Guid) return "Wmf";
-            if (this.Guid == s_gif.Guid) return "Gif";
-            if (this.Guid == s_jpeg.Guid) return "Jpeg";
-            if (this.Guid == s_png.Guid) return "Png";
-            if (this.Guid == s_tiff.Guid) return "Tiff";
-            if (this.Guid == s_exif.Guid) return "Exif";
-            if (this.Guid == s_icon.Guid) return "Icon";
+            if (this.Guid == s_memoryBMP.Guid)
+                return "MemoryBMP";
+            if (this.Guid == s_bmp.Guid)
+                return "Bmp";
+            if (this.Guid == s_emf.Guid)
+                return "Emf";
+            if (this.Guid == s_wmf.Guid)
+                return "Wmf";
+            if (this.Guid == s_gif.Guid)
+                return "Gif";
+            if (this.Guid == s_jpeg.Guid)
+                return "Jpeg";
+            if (this.Guid == s_png.Guid)
+                return "Png";
+            if (this.Guid == s_tiff.Guid)
+                return "Tiff";
+            if (this.Guid == s_exif.Guid)
+                return "Exif";
+            if (this.Guid == s_icon.Guid)
+                return "Icon";
             return "[ImageFormat: " + _guid + "]";
         }
     }

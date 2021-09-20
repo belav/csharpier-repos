@@ -15,7 +15,7 @@ namespace System.CommandLine.Parsing
         [return: MaybeNull]
         public static T GetValueOrDefault<T>(this ArgumentResult argumentResult) =>
             argumentResult.GetArgumentConversionResult()
-                          .ConvertIfNeeded(argumentResult, typeof(T))
-                          .GetValueOrDefault<T>();
+                .ConvertIfNeeded(argumentResult, typeof(T))
+                .GetValueOrDefault<T>();
     }
 }

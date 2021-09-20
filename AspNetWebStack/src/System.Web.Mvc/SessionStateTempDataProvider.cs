@@ -16,7 +16,8 @@ namespace System.Web.Mvc
 
             if (session != null)
             {
-                Dictionary<string, object> tempDataDictionary = session[TempDataSessionStateKey] as Dictionary<string, object>;
+                Dictionary<string, object> tempDataDictionary =
+                    session[TempDataSessionStateKey] as Dictionary<string, object>;
 
                 if (tempDataDictionary != null)
                 {
@@ -29,8 +30,10 @@ namespace System.Web.Mvc
             return new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
         }
 
-        public virtual void SaveTempData(ControllerContext controllerContext, IDictionary<string, object> values)
-        {
+        public virtual void SaveTempData(
+            ControllerContext controllerContext,
+            IDictionary<string, object> values
+        ) {
             if (controllerContext == null)
             {
                 throw new ArgumentNullException("controllerContext");
@@ -43,7 +46,9 @@ namespace System.Web.Mvc
             {
                 if (isDirty)
                 {
-                    throw new InvalidOperationException(MvcResources.SessionStateTempDataProvider_SessionStateDisabled);
+                    throw new InvalidOperationException(
+                        MvcResources.SessionStateTempDataProvider_SessionStateDisabled
+                    );
                 }
             }
             else

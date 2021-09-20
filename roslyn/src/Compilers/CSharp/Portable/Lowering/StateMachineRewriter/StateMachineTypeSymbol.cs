@@ -13,22 +13,38 @@ using Microsoft.CodeAnalysis.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal abstract class StateMachineTypeSymbol : SynthesizedContainer, ISynthesizedMethodBodyImplementationSymbol
+    internal abstract class StateMachineTypeSymbol
+        : SynthesizedContainer,
+          ISynthesizedMethodBodyImplementationSymbol
     {
         private ImmutableArray<CSharpAttributeData> _attributes;
         public readonly MethodSymbol KickoffMethod;
 
-        public StateMachineTypeSymbol(VariableSlotAllocator slotAllocatorOpt, TypeCompilationState compilationState, MethodSymbol kickoffMethod, int kickoffMethodOrdinal)
-            : base(MakeName(slotAllocatorOpt, compilationState, kickoffMethod, kickoffMethodOrdinal), kickoffMethod)
-        {
+        public StateMachineTypeSymbol(
+            VariableSlotAllocator slotAllocatorOpt,
+            TypeCompilationState compilationState,
+            MethodSymbol kickoffMethod,
+            int kickoffMethodOrdinal
+        ) : base(
+            MakeName(slotAllocatorOpt, compilationState, kickoffMethod, kickoffMethodOrdinal),
+            kickoffMethod
+        ) {
             Debug.Assert(kickoffMethod != null);
             this.KickoffMethod = kickoffMethod;
         }
 
-        private static string MakeName(VariableSlotAllocator slotAllocatorOpt, TypeCompilationState compilationState, MethodSymbol kickoffMethod, int kickoffMethodOrdinal)
-        {
-            return slotAllocatorOpt?.PreviousStateMachineTypeName ??
-                   GeneratedNames.MakeStateMachineTypeName(kickoffMethod.Name, kickoffMethodOrdinal, compilationState.ModuleBuilderOpt.CurrentGenerationOrdinal);
+        private static string MakeName(
+            VariableSlotAllocator slotAllocatorOpt,
+            TypeCompilationState compilationState,
+            MethodSymbol kickoffMethod,
+            int kickoffMethodOrdinal
+        ) {
+            return slotAllocatorOpt?.PreviousStateMachineTypeName
+                ?? GeneratedNames.MakeStateMachineTypeName(
+                    kickoffMethod.Name,
+                    kickoffMethodOrdinal,
+                    compilationState.ModuleBuilderOpt.CurrentGenerationOrdinal
+                );
         }
 
         private static int SequenceNumber(MethodSymbol kickoffMethod)
@@ -78,9 +94,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var kickoffType = KickoffMethod.ContainingType;
                 foreach (var attribute in kickoffType.GetAttributes())
                 {
-                    if (attribute.IsTargetAttribute(kickoffType, AttributeDescription.DebuggerNonUserCodeAttribute) ||
-                        attribute.IsTargetAttribute(kickoffType, AttributeDescription.DebuggerStepThroughAttribute))
-                    {
+                    if (
+                        attribute.IsTargetAttribute(
+                            kickoffType,
+                            AttributeDescription.DebuggerNonUserCodeAttribute
+                        )
+                        || attribute.IsTargetAttribute(
+                            kickoffType,
+                            AttributeDescription.DebuggerStepThroughAttribute
+                        )
+                    ) {
                         if (builder == null)
                         {
                             builder = ArrayBuilder<CSharpAttributeData>.GetInstance(2); // only 2 different attributes are inherited at the moment
@@ -90,9 +113,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                 }
 
-                ImmutableInterlocked.InterlockedCompareExchange(ref _attributes,
-                                                                builder == null ? ImmutableArray<CSharpAttributeData>.Empty : builder.ToImmutableAndFree(),
-                                                                default(ImmutableArray<CSharpAttributeData>));
+                ImmutableInterlocked.InterlockedCompareExchange(
+                    ref _attributes,
+                    builder == null
+                      ? ImmutableArray<CSharpAttributeData>.Empty
+                      : builder.ToImmutableAndFree(),
+                    default(ImmutableArray<CSharpAttributeData>)
+                );
             }
 
             return _attributes;

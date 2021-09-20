@@ -15,17 +15,18 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
 
         public NextGetAdjustSpacesOperation(
             ImmutableArray<AbstractFormattingRule> formattingRules,
-            int index)
-        {
+            int index
+        ) {
             _formattingRules = formattingRules;
             _index = index;
         }
 
-        private NextGetAdjustSpacesOperation NextOperation
-            => new(_formattingRules, _index + 1);
+        private NextGetAdjustSpacesOperation NextOperation => new(_formattingRules, _index + 1);
 
-        public AdjustSpacesOperation? Invoke(in SyntaxToken previousToken, in SyntaxToken currentToken)
-        {
+        public AdjustSpacesOperation? Invoke(
+            in SyntaxToken previousToken,
+            in SyntaxToken currentToken
+        ) {
             // If we have no remaining handlers to execute, then we'll execute our last handler
             if (_index >= _formattingRules.Length)
             {
@@ -34,7 +35,11 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             else
             {
                 // Call the handler at the index, passing a continuation that will come back to here with index + 1
-                return _formattingRules[_index].GetAdjustSpacesOperation(in previousToken, in currentToken, NextOperation);
+                return _formattingRules[_index].GetAdjustSpacesOperation(
+                    in previousToken,
+                    in currentToken,
+                    NextOperation
+                );
             }
         }
     }

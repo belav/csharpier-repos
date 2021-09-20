@@ -52,7 +52,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        InternalEntityEntry? TryGetEntry(object?[] keyValues, bool throwOnNullKey, out bool hasNullKey);
+        InternalEntityEntry? TryGetEntry(
+            object?[] keyValues,
+            bool throwOnNullKey,
+            out bool hasNullKey
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -60,7 +64,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        InternalEntityEntry? TryGetEntry(IForeignKey foreignKey, InternalEntityEntry dependentEntry);
+        InternalEntityEntry? TryGetEntry(
+            IForeignKey foreignKey,
+            InternalEntityEntry dependentEntry
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -70,7 +77,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         InternalEntityEntry? TryGetEntryUsingPreStoreGeneratedValues(
             IForeignKey foreignKey,
-            InternalEntityEntry dependentEntry);
+            InternalEntityEntry dependentEntry
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -80,7 +88,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         InternalEntityEntry? TryGetEntryUsingRelationshipSnapshot(
             IForeignKey foreignKey,
-            InternalEntityEntry dependentEntry);
+            InternalEntityEntry dependentEntry
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -22,8 +22,11 @@ namespace Microsoft.Extensions.Internal
             CoercerResultType = null;
         }
 
-        public CoercedAwaitableInfo(Expression coercerExpression, Type coercerResultType, AwaitableInfo coercedAwaitableInfo)
-        {
+        public CoercedAwaitableInfo(
+            Expression coercerExpression,
+            Type coercerResultType,
+            AwaitableInfo coercedAwaitableInfo
+        ) {
             CoercerExpression = coercerExpression;
             CoercerResultType = coercerResultType;
             AwaitableInfo = coercedAwaitableInfo;
@@ -39,13 +42,20 @@ namespace Microsoft.Extensions.Internal
 
             // It's not directly awaitable, but maybe we can coerce it.
             // Currently we support coercing FSharpAsync<T>.
-            if (ObjectMethodExecutorFSharpSupport.TryBuildCoercerFromFSharpAsyncToAwaitable(type,
-                out var coercerExpression,
-                out var coercerResultType))
-            {
+            if (
+                ObjectMethodExecutorFSharpSupport.TryBuildCoercerFromFSharpAsyncToAwaitable(
+                    type,
+                    out var coercerExpression,
+                    out var coercerResultType
+                )
+            ) {
                 if (AwaitableInfo.IsTypeAwaitable(coercerResultType, out var coercedAwaitableInfo))
                 {
-                    info = new CoercedAwaitableInfo(coercerExpression, coercerResultType, coercedAwaitableInfo);
+                    info = new CoercedAwaitableInfo(
+                        coercerExpression,
+                        coercerResultType,
+                        coercedAwaitableInfo
+                    );
                     return true;
                 }
             }

@@ -10,15 +10,10 @@ namespace BenchmarkDotNet.Attributes
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Assembly)]
     internal class AspNetCoreBenchmarkAttribute : Attribute, IConfigSource
     {
-        public AspNetCoreBenchmarkAttribute()
-            : this(typeof(DefaultCoreConfig))
-        {
-        }
+        public AspNetCoreBenchmarkAttribute() : this(typeof(DefaultCoreConfig)) { }
 
         public AspNetCoreBenchmarkAttribute(Type configType)
-            : this(configType, typeof(DefaultCoreValidationConfig))
-        {
-        }
+            : this(configType, typeof(DefaultCoreValidationConfig)) { }
 
         public AspNetCoreBenchmarkAttribute(Type configType, Type validationConfigType)
         {
@@ -46,13 +41,18 @@ namespace BenchmarkDotNet.Attributes
         {
             get
             {
-                if (!ConfigTypes.TryGetValue(ConfigName ?? NamedConfiguration.Default, out var configType))
-                {
-                    var message = $"Could not find a configuration matching {ConfigName}. " +
-                        $"Known configurations: {string.Join(", ", ConfigTypes.Keys)}";
+                if (
+                    !ConfigTypes.TryGetValue(
+                        ConfigName ?? NamedConfiguration.Default,
+                        out var configType
+                    )
+                ) {
+                    var message =
+                        $"Could not find a configuration matching {ConfigName}. "
+                        + $"Known configurations: {string.Join(", ", ConfigTypes.Keys)}";
                     throw new InvalidOperationException(message);
                 }
-                
+
                 return (IConfig)Activator.CreateInstance(configType, Array.Empty<object>());
             }
         }

@@ -25,8 +25,12 @@ namespace Roslyn.Utilities
             }
         }
 
-        public static TValue GetOrAdd<TKey, TArg, TValue>(this ConcurrentDictionary<TKey, TValue> dictionary, TKey key, Func<TKey, TArg, TValue> valueFactory, TArg factoryArgument)
-            where TKey : notnull
+        public static TValue GetOrAdd<TKey, TArg, TValue>(
+            this ConcurrentDictionary<TKey, TValue> dictionary,
+            TKey key,
+            Func<TKey, TArg, TValue> valueFactory,
+            TArg factoryArgument
+        ) where TKey : notnull
         {
 #if NETCOREAPP
             return dictionary.GetOrAdd(key, valueFactory, factoryArgument);
@@ -34,7 +38,11 @@ namespace Roslyn.Utilities
             if (dictionary.TryGetValue(key, out var value))
                 return value;
 
-            using var _ = PooledDelegates.GetPooledFunction(valueFactory, factoryArgument, out var boundFunction);
+            using var _ = PooledDelegates.GetPooledFunction(
+                valueFactory,
+                factoryArgument,
+                out var boundFunction
+            );
             return dictionary.GetOrAdd(key, boundFunction);
 #endif
         }

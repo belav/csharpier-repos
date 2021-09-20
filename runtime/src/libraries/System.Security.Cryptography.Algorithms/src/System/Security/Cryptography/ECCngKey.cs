@@ -19,8 +19,9 @@ namespace System.Security.Cryptography
         internal ECCngKey(string algorithmGroup, string disposedName)
         {
             Debug.Assert(
-                algorithmGroup == BCryptNative.AlgorithmName.ECDH ||
-                algorithmGroup == BCryptNative.AlgorithmName.ECDsa);
+                algorithmGroup == BCryptNative.AlgorithmName.ECDH
+                    || algorithmGroup == BCryptNative.AlgorithmName.ECDsa
+            );
 
             _algorithmGroup = algorithmGroup;
             _disposedName = disposedName;
@@ -91,7 +92,10 @@ namespace System.Security.Cryptography
                         DisposeKey();
                     }
 
-                    _keyHandle = CngKeyLite.GenerateNewExportableKey(algorithm, callerKeySizeProperty);
+                    _keyHandle = CngKeyLite.GenerateNewExportableKey(
+                        algorithm,
+                        callerKeySizeProperty
+                    );
                     _lastKeySize = callerKeySizeProperty;
                     _lastAlgorithm = algorithm;
                     KeySize = callerKeySizeProperty;
@@ -119,7 +123,8 @@ namespace System.Security.Cryptography
                 if (string.IsNullOrEmpty(curve.Oid.FriendlyName))
                 {
                     throw new PlatformNotSupportedException(
-                        SR.Format(SR.Cryptography_InvalidCurveOid, curve.Oid.Value));
+                        SR.Format(SR.Cryptography_InvalidCurveOid, curve.Oid.Value)
+                    );
                 }
 
                 // Map curve name to algorithm to support pre-Win10 curves
@@ -137,7 +142,10 @@ namespace System.Security.Cryptography
                 {
                     try
                     {
-                        _keyHandle = CngKeyLite.GenerateNewExportableKey(algorithm, curve.Oid.FriendlyName);
+                        _keyHandle = CngKeyLite.GenerateNewExportableKey(
+                            algorithm,
+                            curve.Oid.FriendlyName
+                        );
                         keySize = CngKeyLite.GetKeyLength(_keyHandle);
                     }
                     catch (CryptographicException e)
@@ -145,11 +153,18 @@ namespace System.Security.Cryptography
                         // Map to PlatformNotSupportedException if appropriate
                         Interop.NCrypt.ErrorCode errorCode = (Interop.NCrypt.ErrorCode)e.HResult;
 
-                        if (curve.IsNamed && errorCode == Interop.NCrypt.ErrorCode.NTE_INVALID_PARAMETER ||
-                            errorCode == Interop.NCrypt.ErrorCode.NTE_NOT_SUPPORTED)
-                        {
+                        if (
+                            curve.IsNamed
+                                && errorCode == Interop.NCrypt.ErrorCode.NTE_INVALID_PARAMETER
+                            || errorCode == Interop.NCrypt.ErrorCode.NTE_NOT_SUPPORTED
+                        ) {
                             throw new PlatformNotSupportedException(
-                                SR.Format(SR.Cryptography_CurveNotSupported, curve.Oid.FriendlyName), e);
+                                SR.Format(
+                                    SR.Cryptography_CurveNotSupported,
+                                    curve.Oid.FriendlyName
+                                ),
+                                e
+                            );
                         }
 
                         throw;
@@ -189,7 +204,8 @@ namespace System.Security.Cryptography
             else
             {
                 throw new PlatformNotSupportedException(
-                    SR.Format(SR.Cryptography_CurveNotSupported, curve.CurveType.ToString()));
+                    SR.Format(SR.Cryptography_CurveNotSupported, curve.CurveType.ToString())
+                );
             }
 
             _lastAlgorithm = algorithm;

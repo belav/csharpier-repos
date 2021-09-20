@@ -13,13 +13,9 @@ namespace AssemblyDependencyResolverTests
         protected string BinaryBasePath { get; private set; }
         protected string CoreRoot { get; private set; }
 
-        protected virtual void Initialize()
-        {
-        }
+        protected virtual void Initialize() { }
 
-        protected virtual void Cleanup()
-        {
-        }
+        protected virtual void Cleanup() { }
 
         public static int RunTests(params Type[] testTypes)
         {
@@ -52,6 +48,7 @@ namespace AssemblyDependencyResolverTests
                 runner.RunTestsForInstance(runner);
                 return runner._retValue;
             }
+
             finally
             {
                 runner.Cleanup();
@@ -79,10 +76,11 @@ namespace AssemblyDependencyResolverTests
 
         private void RunTestsForInstance(object testClass)
         {
-            foreach (MethodInfo m in testClass.GetType()
-                .GetMethods(BindingFlags.Instance | BindingFlags.Public)
-                .Where(m => m.Name.StartsWith("Test") && m.GetParameters().Length == 0))
-            {
+            foreach (
+                MethodInfo m in testClass.GetType()
+                    .GetMethods(BindingFlags.Instance | BindingFlags.Public)
+                    .Where(m => m.Name.StartsWith("Test") && m.GetParameters().Length == 0)
+            ) {
                 RunSingleTest(() => m.Invoke(testClass, new object[0]), m.Name);
             }
         }

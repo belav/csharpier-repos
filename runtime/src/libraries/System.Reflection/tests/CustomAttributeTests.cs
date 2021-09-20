@@ -26,16 +26,14 @@ namespace System.Reflection.Tests
         {
             SameTypesAttribute attr;
 
-            attr = typeof(SameTypesClass1)
-                .GetCustomAttributes(typeof(SameTypesAttribute), true)
+            attr = typeof(SameTypesClass1).GetCustomAttributes(typeof(SameTypesAttribute), true)
                 .Cast<SameTypesAttribute>()
                 .Single();
 
             Assert.Null(attr.ObjectArray1);
             Assert.Equal(1, attr.ObjectArray2.Length);
 
-            attr = typeof(SameTypesClass2)
-                .GetCustomAttributes(typeof(SameTypesAttribute), true)
+            attr = typeof(SameTypesClass2).GetCustomAttributes(typeof(SameTypesAttribute), true)
                 .Cast<SameTypesAttribute>()
                 .Single();
 
@@ -60,16 +58,20 @@ namespace System.Reflection.Tests
         {
             DifferentTypesAttribute attr;
 
-            attr = typeof(DifferentTypesClass1)
-                .GetCustomAttributes(typeof(DifferentTypesAttribute), true)
+            attr = typeof(DifferentTypesClass1).GetCustomAttributes(
+                    typeof(DifferentTypesAttribute),
+                    true
+                )
                 .Cast<DifferentTypesAttribute>()
                 .Single();
 
             Assert.Null(attr.ObjectArray);
             Assert.Equal(1, attr.StringArray.Length);
 
-            attr = typeof(DifferentTypesClass2)
-                .GetCustomAttributes(typeof(DifferentTypesAttribute), true)
+            attr = typeof(DifferentTypesClass2).GetCustomAttributes(
+                    typeof(DifferentTypesAttribute),
+                    true
+                )
                 .Cast<DifferentTypesAttribute>()
                 .Single();
 

@@ -11,7 +11,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
         Enter = 0x0D,
         Tab = 0x09,
         Escape = 0x1B,
-
         PageUp = 0x21,
         PageDown = 0x22,
         End = 0x23,
@@ -20,25 +19,20 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
         Up = 0x26,
         Right = 0x27,
         Down = 0x28,
-
         Shift = 0x10,
         Control = 0x11,
         Alt = 0x12,
-
         CapsLock = 0x14,
         NumLock = 0x90,
         ScrollLock = 0x91,
         PrintScreen = 0x2C,
         Break = 0x03,
         Help = 0x2F,
-
         Backspace = 0x08,
         Clear = 0x0C,
         Insert = 0x2D,
         Delete = 0x2E,
-
         Space = 0x20,
-
         F1 = 0x70,
         F2 = 0x71,
         F3 = 0x72,
@@ -55,7 +49,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
         F14 = 0x7D,
         F15 = 0x7E,
         F16 = 0x7F,
-
         A = 0x41,
         B = 0x42,
         C = 0x43,
@@ -82,15 +75,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Input
         X = 0x58,
         Y = 0x59,
         Z = 0x5A,
-
         Period = 0xBE,
-
         /// <summary>
         /// Used for miscellaneous characters; it can vary by keyboard.<br/>
         /// For the US standard keyboard, the '[{' key.
         /// </summary>
         VK_OEM_4 = 0xDB,
-
         /// <summary>
         /// Used for miscellaneous characters; it can vary by keyboard.<br/>
         /// For the US standard keyboard, the ']}' key.

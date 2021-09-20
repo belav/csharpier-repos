@@ -13,8 +13,7 @@ namespace Microsoft.AspNetCore.Http
         public void CreateHttpContextSetsHttpContextAccessor()
         {
             // Arrange
-            var services = new ServiceCollection()
-                .AddOptions()
+            var services = new ServiceCollection().AddOptions()
                 .AddHttpContextAccessor()
                 .BuildServiceProvider();
             var accessor = services.GetRequiredService<IHttpContextAccessor>();
@@ -31,8 +30,7 @@ namespace Microsoft.AspNetCore.Http
         public void DisposeHttpContextSetsHttpContextAccessorToNull()
         {
             // Arrange
-            var services = new ServiceCollection()
-                .AddOptions()
+            var services = new ServiceCollection().AddOptions()
                 .AddHttpContextAccessor()
                 .BuildServiceProvider();
             var accessor = services.GetRequiredService<IHttpContextAccessor>();
@@ -53,9 +51,7 @@ namespace Microsoft.AspNetCore.Http
         public void AllowsCreatingContextWithoutSettingAccessor()
         {
             // Arrange
-            var services = new ServiceCollection()
-                .AddOptions()
-                .BuildServiceProvider();
+            var services = new ServiceCollection().AddOptions().BuildServiceProvider();
             var contextFactory = new DefaultHttpContextFactory(services);
 
             // Act & Assert
@@ -67,9 +63,7 @@ namespace Microsoft.AspNetCore.Http
         public void SetsDefaultPropertiesOnHttpContext()
         {
             // Arrange
-            var services = new ServiceCollection()
-                .AddOptions()
-                .BuildServiceProvider();
+            var services = new ServiceCollection().AddOptions().BuildServiceProvider();
             var contextFactory = new DefaultHttpContextFactory(services);
 
             // Act & Assert
@@ -78,7 +72,10 @@ namespace Microsoft.AspNetCore.Http
             Assert.NotNull(context.FormOptions);
             Assert.NotNull(context.ServiceScopeFactory);
 
-            Assert.Same(services.GetRequiredService<IServiceScopeFactory>(), context.ServiceScopeFactory);
+            Assert.Same(
+                services.GetRequiredService<IServiceScopeFactory>(),
+                context.ServiceScopeFactory
+            );
         }
     }
 }

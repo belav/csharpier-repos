@@ -12,8 +12,11 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
     {
         private class RemoteControlService : IRemoteControlService
         {
-            public IRemoteControlClient CreateClient(string hostId, string serverPath, int pollingMinutes)
-            {
+            public IRemoteControlClient CreateClient(
+                string hostId,
+                string serverPath,
+                int pollingMinutes
+            ) {
                 // BaseUrl provided by the VS RemoteControl client team.  This is URL we are supposed
                 // to use to publish and access data from.
                 const string BaseUrl = "https://az700632.vo.msecnd.net/pub";

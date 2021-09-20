@@ -15,14 +15,16 @@ namespace Microsoft.AspNetCore.Routing
 
         public DefaultParameterPolicyFactory(
             IOptions<RouteOptions> options,
-            IServiceProvider serviceProvider)
-        {
+            IServiceProvider serviceProvider
+        ) {
             _options = options.Value;
             _serviceProvider = serviceProvider;
         }
 
-        public override IParameterPolicy Create(RoutePatternParameterPart? parameter, IParameterPolicy parameterPolicy)
-        {
+        public override IParameterPolicy Create(
+            RoutePatternParameterPart? parameter,
+            IParameterPolicy parameterPolicy
+        ) {
             if (parameterPolicy == null)
             {
                 throw new ArgumentNullException(nameof(parameterPolicy));
@@ -36,8 +38,10 @@ namespace Microsoft.AspNetCore.Routing
             return parameterPolicy;
         }
 
-        public override IParameterPolicy Create(RoutePatternParameterPart? parameter, string inlineText)
-        {
+        public override IParameterPolicy Create(
+            RoutePatternParameterPart? parameter,
+            string inlineText
+        ) {
             if (inlineText == null)
             {
                 throw new ArgumentNullException(nameof(inlineText));
@@ -47,14 +51,18 @@ namespace Microsoft.AspNetCore.Routing
                 _options.ConstraintMap,
                 _serviceProvider,
                 inlineText,
-                out var parameterPolicyKey);
+                out var parameterPolicyKey
+            );
 
             if (parameterPolicy == null)
             {
-                throw new InvalidOperationException(Resources.FormatRoutePattern_ConstraintReferenceNotFound(
+                throw new InvalidOperationException(
+                    Resources.FormatRoutePattern_ConstraintReferenceNotFound(
                         parameterPolicyKey,
                         typeof(RouteOptions),
-                        nameof(RouteOptions.ConstraintMap)));
+                        nameof(RouteOptions.ConstraintMap)
+                    )
+                );
             }
 
             if (parameterPolicy is IRouteConstraint constraint)
@@ -67,8 +75,8 @@ namespace Microsoft.AspNetCore.Routing
 
         private IParameterPolicy InitializeRouteConstraint(
             bool optional,
-            IRouteConstraint routeConstraint)
-        {
+            IRouteConstraint routeConstraint
+        ) {
             if (optional)
             {
                 routeConstraint = new OptionalRouteConstraint(routeConstraint);

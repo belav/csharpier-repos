@@ -21,8 +21,8 @@ namespace BlazorServerWeb_CSharp.Areas.Identity
         public RevalidatingIdentityAuthenticationStateProvider(
             ILoggerFactory loggerFactory,
             IServiceScopeFactory scopeFactory,
-            IOptions<IdentityOptions> optionsAccessor)
-            : base(loggerFactory)
+            IOptions<IdentityOptions> optionsAccessor
+        ) : base(loggerFactory)
         {
             _scopeFactory = scopeFactory;
             _options = optionsAccessor.Value;
@@ -31,8 +31,9 @@ namespace BlazorServerWeb_CSharp.Areas.Identity
         protected override TimeSpan RevalidationInterval => TimeSpan.FromMinutes(30);
 
         protected override async Task<bool> ValidateAuthenticationStateAsync(
-            AuthenticationState authenticationState, CancellationToken cancellationToken)
-        {
+            AuthenticationState authenticationState,
+            CancellationToken cancellationToken
+        ) {
             // Get the user manager from a new scope to ensure it fetches fresh data
             var scope = _scopeFactory.CreateScope();
             try
@@ -40,6 +41,7 @@ namespace BlazorServerWeb_CSharp.Areas.Identity
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<TUser>>();
                 return await ValidateSecurityStampAsync(userManager, authenticationState.User);
             }
+
             finally
             {
                 if (scope is IAsyncDisposable asyncDisposable)
@@ -53,8 +55,10 @@ namespace BlazorServerWeb_CSharp.Areas.Identity
             }
         }
 
-        private async Task<bool> ValidateSecurityStampAsync(UserManager<TUser> userManager, ClaimsPrincipal principal)
-        {
+        private async Task<bool> ValidateSecurityStampAsync(
+            UserManager<TUser> userManager,
+            ClaimsPrincipal principal
+        ) {
             var user = await userManager.GetUserAsync(principal);
             if (user == null)
             {
@@ -66,7 +70,9 @@ namespace BlazorServerWeb_CSharp.Areas.Identity
             }
             else
             {
-                var principalStamp = principal.FindFirstValue(_options.ClaimsIdentity.SecurityStampClaimType);
+                var principalStamp = principal.FindFirstValue(
+                    _options.ClaimsIdentity.SecurityStampClaimType
+                );
                 var userStamp = await userManager.GetSecurityStampAsync(user);
                 return principalStamp == userStamp;
             }

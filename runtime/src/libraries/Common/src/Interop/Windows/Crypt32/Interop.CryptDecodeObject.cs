@@ -8,9 +8,22 @@ internal static partial class Interop
 {
     internal static partial class Crypt32
     {
-        internal static unsafe bool CryptDecodeObject(CryptDecodeObjectStructType lpszStructType, IntPtr pbEncoded, int cbEncoded, void* pvStructInfo, ref int pcbStructInfo)
-        {
-            return CryptDecodeObject(MsgEncodingType.All, (IntPtr)lpszStructType, pbEncoded, cbEncoded, 0, pvStructInfo, ref pcbStructInfo);
+        internal static unsafe bool CryptDecodeObject(
+            CryptDecodeObjectStructType lpszStructType,
+            IntPtr pbEncoded,
+            int cbEncoded,
+            void* pvStructInfo,
+            ref int pcbStructInfo
+        ) {
+            return CryptDecodeObject(
+                MsgEncodingType.All,
+                (IntPtr)lpszStructType,
+                pbEncoded,
+                cbEncoded,
+                0,
+                pvStructInfo,
+                ref pcbStructInfo
+            );
         }
 
         [DllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
@@ -21,6 +34,7 @@ internal static partial class Interop
             int cbEncoded,
             int dwFlags,
             void* pvStructInfo,
-            ref int pcbStructInfo);
+            ref int pcbStructInfo
+        );
     }
 }

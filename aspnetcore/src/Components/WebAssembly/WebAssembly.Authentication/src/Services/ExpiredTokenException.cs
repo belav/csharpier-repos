@@ -26,10 +26,13 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         public AccessTokenNotAvailableException(
             NavigationManager navigation,
             AccessTokenResult tokenResult,
-            IEnumerable<string> scopes)
-            : base(message: "Unable to provision an access token for the requested scopes: " +
-                  scopes != null ? $"'{string.Join(", ", scopes ?? Array.Empty<string>())}'" : "(default scopes)")
-        {
+            IEnumerable<string> scopes
+        ) : base(
+            message: "Unable to provision an access token for the requested scopes: " + scopes
+                != null
+              ? $"'{string.Join(", ", scopes ?? Array.Empty<string>())}'"
+              : "(default scopes)"
+        ) {
             _tokenResult = tokenResult;
             _navigation = navigation;
         }

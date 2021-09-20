@@ -19,10 +19,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     Creates a new instance of <see cref="TypeMappingInfo" />.
         /// </summary>
         /// <param name="property"> The property for which mapping is needed. </param>
-        public TypeMappingInfo(IProperty property)
-            : this(property.GetPrincipals())
-        {
-        }
+        public TypeMappingInfo(IProperty property) : this(property.GetPrincipals()) { }
 
         /// <summary>
         ///     Creates a new instance of <see cref="TypeMappingInfo" />.
@@ -49,8 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             bool? fallbackUnicode = null,
             int? fallbackSize = null,
             int? fallbackPrecision = null,
-            int? fallbackScale = null)
-        {
+            int? fallbackScale = null
+        ) {
             Check.NotNull(principals, nameof(principals));
 
             ValueConverter? customConverter = null;
@@ -113,7 +110,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
             IsKeyOrIndex = property.IsKey() || property.IsForeignKey() || property.IsIndex();
             Size = size ?? mappingHints?.Size ?? fallbackSize;
             IsUnicode = isUnicode ?? mappingHints?.IsUnicode ?? fallbackUnicode;
-            IsRowVersion = property.IsConcurrencyToken && property.ValueGenerated == ValueGenerated.OnAddOrUpdate;
+            IsRowVersion =
+                property.IsConcurrencyToken
+                && property.ValueGenerated == ValueGenerated.OnAddOrUpdate;
             ClrType = (customConverter?.ProviderClrType ?? property.ClrType).UnwrapNullableType();
             Scale = scale ?? mappingHints?.Scale ?? fallbackScale;
             Precision = precision ?? mappingHints?.Precision ?? fallbackPrecision;
@@ -132,8 +131,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             bool? unicode = null,
             int? size = null,
             int? precision = null,
-            int? scale = null)
-            : this(Check.NotNull(member, nameof(member)).GetMemberType())
+            int? scale = null
+        ) : this(Check.NotNull(member, nameof(member)).GetMemberType())
         {
             IsUnicode = unicode;
             Size = size;
@@ -158,8 +157,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             int? size = null,
             bool? rowVersion = null,
             int? precision = null,
-            int? scale = null)
-        {
+            int? scale = null
+        ) {
             ClrType = type?.UnwrapNullableType();
 
             IsKeyOrIndex = keyOrIndex;
@@ -185,8 +184,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             bool? unicode = null,
             int? size = null,
             int? precision = null,
-            int? scale = null)
-        {
+            int? scale = null
+        ) {
             Check.NotNull(source, nameof(source));
 
             IsRowVersion = source.IsRowVersion;
@@ -207,8 +206,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         /// <param name="converterInfo"> The converter to apply. </param>
         /// <returns> The new mapping info. </returns>
-        public TypeMappingInfo WithConverter(in ValueConverterInfo converterInfo)
-            => new(this, converterInfo);
+        public TypeMappingInfo WithConverter(in ValueConverterInfo converterInfo) =>
+            new(this, converterInfo);
 
         /// <summary>
         ///     Indicates whether or not the mapping is part of a key or index.
@@ -251,30 +250,36 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         /// <param name="other"> The other object. </param>
         /// <returns> <see langword="true" /> if they represent the same mapping; <see langword="false" /> otherwise. </returns>
-        public bool Equals(TypeMappingInfo other)
-            => ClrType == other.ClrType
-                && IsKeyOrIndex == other.IsKeyOrIndex
-                && Size == other.Size
-                && IsUnicode == other.IsUnicode
-                && IsRowVersion == other.IsRowVersion
-                && Precision == other.Precision
-                && Scale == other.Scale;
+        public bool Equals(TypeMappingInfo other) =>
+            ClrType == other.ClrType
+            && IsKeyOrIndex == other.IsKeyOrIndex
+            && Size == other.Size
+            && IsUnicode == other.IsUnicode
+            && IsRowVersion == other.IsRowVersion
+            && Precision == other.Precision
+            && Scale == other.Scale;
 
         /// <summary>
         ///     Compares this <see cref="TypeMappingInfo" /> to another to check if they represent the same mapping.
         /// </summary>
         /// <param name="obj"> The other object. </param>
         /// <returns> <see langword="true" /> if they represent the same mapping; <see langword="false" /> otherwise. </returns>
-        public override bool Equals(object? obj)
-            => obj != null
-                && obj.GetType() == GetType()
-                && Equals((TypeMappingInfo)obj);
+        public override bool Equals(object? obj) =>
+            obj != null && obj.GetType() == GetType() && Equals((TypeMappingInfo)obj);
 
         /// <summary>
         ///     Returns a hash code for this object.
         /// </summary>
         /// <returns> The hash code. </returns>
-        public override int GetHashCode()
-            => HashCode.Combine(ClrType, IsKeyOrIndex, Size, IsUnicode, IsRowVersion, Scale, Precision);
+        public override int GetHashCode() =>
+            HashCode.Combine(
+                ClrType,
+                IsKeyOrIndex,
+                Size,
+                IsUnicode,
+                IsRowVersion,
+                Scale,
+                Precision
+            );
     }
 }

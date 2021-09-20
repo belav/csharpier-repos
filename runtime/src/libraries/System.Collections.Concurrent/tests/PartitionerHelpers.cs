@@ -58,8 +58,9 @@ namespace System.Collections.Concurrent.Tests
         /// </summary>
         /// <param name="pairEnumerator"></param>
         /// <returns></returns>
-        public static IEnumerable<long> UnRoll(this IEnumerator<KeyValuePair<long, Tuple<long, long>>> pairEnumerator)
-        {
+        public static IEnumerable<long> UnRoll(
+            this IEnumerator<KeyValuePair<long, Tuple<long, long>>> pairEnumerator
+        ) {
             long key = -1;
             while (pairEnumerator.MoveNext())
             {
@@ -68,10 +69,19 @@ namespace System.Collections.Concurrent.Tests
                 {
                     Assert.True(
                         key.Equals(pairEnumerator.Current.Key - 1),
-                        string.Format("Keys are not normalized {0} {1}", key, pairEnumerator.Current.Key));
+                        string.Format(
+                            "Keys are not normalized {0} {1}",
+                            key,
+                            pairEnumerator.Current.Key
+                        )
+                    );
                 }
                 key = pairEnumerator.Current.Key;
-                for (long i = pairEnumerator.Current.Value.Item1; i < pairEnumerator.Current.Value.Item2; i++)
+                for (
+                    long i = pairEnumerator.Current.Value.Item1;
+                    i < pairEnumerator.Current.Value.Item2;
+                    i++
+                )
                     yield return i;
             }
         }
@@ -81,8 +91,9 @@ namespace System.Collections.Concurrent.Tests
         /// </summary>
         /// <param name="pairEnumerator"></param>
         /// <returns></returns>
-        public static IEnumerable<long> UnRollIndices(this IEnumerator<KeyValuePair<long, Tuple<long, long>>> pairEnumerator)
-        {
+        public static IEnumerable<long> UnRollIndices(
+            this IEnumerator<KeyValuePair<long, Tuple<long, long>>> pairEnumerator
+        ) {
             long key = -1;
             while (pairEnumerator.MoveNext())
             {
@@ -91,7 +102,12 @@ namespace System.Collections.Concurrent.Tests
                 {
                     Assert.True(
                         key.Equals(pairEnumerator.Current.Key - 1),
-                        string.Format("Keys are not normalized {0} {1}", key, pairEnumerator.Current.Key));
+                        string.Format(
+                            "Keys are not normalized {0} {1}",
+                            key,
+                            pairEnumerator.Current.Key
+                        )
+                    );
                 }
                 key = pairEnumerator.Current.Key;
                 var tuple = pairEnumerator.Current.Value;
@@ -129,8 +145,9 @@ namespace System.Collections.Concurrent.Tests
         /// </summary>
         /// <param name="tupleEnumerator"></param>
         /// <returns></returns>
-        public static IEnumerable<long> GetRangeSize(this IEnumerator<Tuple<long, long>> tupleEnumerator)
-        {
+        public static IEnumerable<long> GetRangeSize(
+            this IEnumerator<Tuple<long, long>> tupleEnumerator
+        ) {
             while (tupleEnumerator.MoveNext())
             {
                 yield return GetRangeSize(tupleEnumerator.Current);
@@ -142,8 +159,9 @@ namespace System.Collections.Concurrent.Tests
         /// </summary>
         /// <param name="pairEnumerator"></param>
         /// <returns></returns>
-        public static IEnumerable<long> GetRangeSize(this IEnumerator<KeyValuePair<long, Tuple<long, long>>> pairEnumerator)
-        {
+        public static IEnumerable<long> GetRangeSize(
+            this IEnumerator<KeyValuePair<long, Tuple<long, long>>> pairEnumerator
+        ) {
             while (pairEnumerator.MoveNext())
             {
                 yield return GetRangeSize(pairEnumerator.Current.Value);
@@ -190,8 +208,9 @@ namespace System.Collections.Concurrent.Tests
         /// </summary>
         /// <param name="pairEnumerator"></param>
         /// <returns></returns>
-        public static IEnumerable<int> UnRoll(this IEnumerator<KeyValuePair<long, Tuple<int, int>>> pairEnumerator)
-        {
+        public static IEnumerable<int> UnRoll(
+            this IEnumerator<KeyValuePair<long, Tuple<int, int>>> pairEnumerator
+        ) {
             long key = -1;
             while (pairEnumerator.MoveNext())
             {
@@ -200,10 +219,19 @@ namespace System.Collections.Concurrent.Tests
                 {
                     Assert.True(
                         key.Equals(pairEnumerator.Current.Key - 1),
-                        string.Format("Keys are not normalized {0} {1}", key, pairEnumerator.Current.Key));
+                        string.Format(
+                            "Keys are not normalized {0} {1}",
+                            key,
+                            pairEnumerator.Current.Key
+                        )
+                    );
                 }
                 key = pairEnumerator.Current.Key;
-                for (int i = pairEnumerator.Current.Value.Item1; i < pairEnumerator.Current.Value.Item2; i++)
+                for (
+                    int i = pairEnumerator.Current.Value.Item1;
+                    i < pairEnumerator.Current.Value.Item2;
+                    i++
+                )
                     yield return i;
             }
         }
@@ -213,8 +241,9 @@ namespace System.Collections.Concurrent.Tests
         /// </summary>
         /// <param name="pairEnumerator"></param>
         /// <returns></returns>
-        public static IEnumerable<long> UnRollIndices(this IEnumerator<KeyValuePair<long, Tuple<int, int>>> pairEnumerator)
-        {
+        public static IEnumerable<long> UnRollIndices(
+            this IEnumerator<KeyValuePair<long, Tuple<int, int>>> pairEnumerator
+        ) {
             long key = -1;
             while (pairEnumerator.MoveNext())
             {
@@ -223,7 +252,12 @@ namespace System.Collections.Concurrent.Tests
                 {
                     Assert.True(
                         key.Equals(pairEnumerator.Current.Key - 1),
-                        string.Format("Keys are not normalized {0} {1}", key, pairEnumerator.Current.Key));
+                        string.Format(
+                            "Keys are not normalized {0} {1}",
+                            key,
+                            pairEnumerator.Current.Key
+                        )
+                    );
                 }
                 key = pairEnumerator.Current.Key;
                 var tuple = pairEnumerator.Current.Value;
@@ -261,8 +295,9 @@ namespace System.Collections.Concurrent.Tests
         /// </summary>
         /// <param name="tupleEnumerator"></param>
         /// <returns></returns>
-        public static IEnumerable<int> GetRangeSize(this IEnumerator<Tuple<int, int>> tupleEnumerator)
-        {
+        public static IEnumerable<int> GetRangeSize(
+            this IEnumerator<Tuple<int, int>> tupleEnumerator
+        ) {
             while (tupleEnumerator.MoveNext())
             {
                 yield return GetRangeSize(tupleEnumerator.Current);
@@ -274,8 +309,9 @@ namespace System.Collections.Concurrent.Tests
         /// </summary>
         /// <param name="pairEnumerator"></param>
         /// <returns></returns>
-        public static IEnumerable<int> GetRangeSize(this IEnumerator<KeyValuePair<long, Tuple<int, int>>> pairEnumerator)
-        {
+        public static IEnumerable<int> GetRangeSize(
+            this IEnumerator<KeyValuePair<long, Tuple<int, int>>> pairEnumerator
+        ) {
             while (pairEnumerator.MoveNext())
             {
                 yield return GetRangeSize(pairEnumerator.Current.Value);
@@ -300,13 +336,20 @@ namespace System.Collections.Concurrent.Tests
                     // 'actual' ran out of elements before expected.
                     if (!e2.MoveNext())
                     {
-                        Console.WriteLine("Partitioner returned fewer elements. Next element expected: {0}", e1.Current);
+                        Console.WriteLine(
+                            "Partitioner returned fewer elements. Next element expected: {0}",
+                            e1.Current
+                        );
                         return false;
                     }
 
                     if (!e1.Current.Equals(e2.Current))
                     {
-                        Console.WriteLine("Mismatching elements. Expected: {0}, Actual: {1}", e1.Current, e2.Current);
+                        Console.WriteLine(
+                            "Mismatching elements. Expected: {0}, Actual: {1}",
+                            e1.Current,
+                            e2.Current
+                        );
                         return false;
                     }
                 }
@@ -314,7 +357,10 @@ namespace System.Collections.Concurrent.Tests
                 // 'actual' still has elements
                 if (e2.MoveNext())
                 {
-                    Console.WriteLine("Partitioner returned more elements. Next element returned by partitioner: {0}", e2.Current);
+                    Console.WriteLine(
+                        "Partitioner returned more elements. Next element returned by partitioner: {0}",
+                        e2.Current
+                    );
                     return false;
                 }
             }

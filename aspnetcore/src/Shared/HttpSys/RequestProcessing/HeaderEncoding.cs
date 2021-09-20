@@ -9,7 +9,10 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
 {
     internal static class HeaderEncoding
     {
-        private static readonly Encoding Encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: false);
+        private static readonly Encoding Encoding = new UTF8Encoding(
+            encoderShouldEmitUTF8Identifier: false,
+            throwOnInvalidBytes: false
+        );
 
         internal static unsafe string GetString(byte* pBytes, int byteCount, bool useLatin1)
         {
@@ -19,7 +22,10 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
             }
             else
             {
-                return new ReadOnlySpan<byte>(pBytes, byteCount).GetAsciiOrUTF8StringNonNullCharacters(Encoding);
+                return new ReadOnlySpan<byte>(
+                    pBytes,
+                    byteCount
+                ).GetAsciiOrUTF8StringNonNullCharacters(Encoding);
             }
         }
 

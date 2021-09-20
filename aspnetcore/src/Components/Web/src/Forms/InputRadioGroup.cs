@@ -11,7 +11,9 @@ namespace Microsoft.AspNetCore.Components.Forms
     /// <summary>
     /// Groups child <see cref="InputRadio{TValue}"/> components.
     /// </summary>
-    public class InputRadioGroup<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue> : InputBase<TValue>
+    public class InputRadioGroup<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue
+    > : InputBase<TValue>
     {
         private readonly string _defaultGroupName = Guid.NewGuid().ToString("N");
         private InputRadioContext? _context;
@@ -19,23 +21,36 @@ namespace Microsoft.AspNetCore.Components.Forms
         /// <summary>
         /// Gets or sets the child content to be rendering inside the <see cref="InputRadioGroup{TValue}"/>.
         /// </summary>
-        [Parameter] public RenderFragment? ChildContent { get; set; }
+        [Parameter]
+        public RenderFragment? ChildContent { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the group.
         /// </summary>
-        [Parameter] public string? Name { get; set; }
+        [Parameter]
+        public string? Name { get; set; }
 
-        [CascadingParameter] private InputRadioContext? CascadedContext { get; set; }
+        [CascadingParameter]
+        private InputRadioContext? CascadedContext { get; set; }
 
         /// <inheritdoc />
         protected override void OnParametersSet()
         {
             var groupName = !string.IsNullOrEmpty(Name) ? Name : _defaultGroupName;
             var fieldClass = EditContext.FieldCssClass(FieldIdentifier);
-            var changeEventCallback = EventCallback.Factory.CreateBinder<string?>(this, __value => CurrentValueAsString = __value, CurrentValueAsString);
+            var changeEventCallback = EventCallback.Factory.CreateBinder<string?>(
+                this,
+                __value => CurrentValueAsString = __value,
+                CurrentValueAsString
+            );
 
-            _context = new InputRadioContext(CascadedContext, groupName, CurrentValue, fieldClass, changeEventCallback);
+            _context = new InputRadioContext(
+                CascadedContext,
+                groupName,
+                CurrentValue,
+                fieldClass,
+                changeEventCallback
+            );
         }
 
         /// <inheritdoc />
@@ -52,7 +67,10 @@ namespace Microsoft.AspNetCore.Components.Forms
         }
 
         /// <inheritdoc />
-        protected override bool TryParseValueFromString(string? value, [MaybeNullWhen(false)] out TValue result, [NotNullWhen(false)] out string? validationErrorMessage)
-            => this.TryParseSelectableValueFromString(value, out result, out validationErrorMessage);
+        protected override bool TryParseValueFromString(
+            string? value,
+            [MaybeNullWhen(false)] out TValue result,
+            [NotNullWhen(false)] out string? validationErrorMessage
+        ) => this.TryParseSelectableValueFromString(value, out result, out validationErrorMessage);
     }
 }

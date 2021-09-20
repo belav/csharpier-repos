@@ -18,8 +18,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             private readonly ImmutableArray<ParameterSymbol> _parameters;
 
-            internal AnonymousTypeConstructorSymbol(NamedTypeSymbol container, ImmutableArray<AnonymousTypePropertySymbol> properties)
-                : base(container, WellKnownMemberNames.InstanceConstructorName)
+            internal AnonymousTypeConstructorSymbol(
+                NamedTypeSymbol container,
+                ImmutableArray<AnonymousTypePropertySymbol> properties
+            ) : base(container, WellKnownMemberNames.InstanceConstructorName)
             {
                 // Create constructor parameters
                 int fieldsCount = properties.Length;
@@ -29,7 +31,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     for (int index = 0; index < fieldsCount; index++)
                     {
                         PropertySymbol property = properties[index];
-                        paramsArr[index] = SynthesizedParameterSymbol.Create(this, property.TypeWithAnnotations, index, RefKind.None, property.Name);
+                        paramsArr[index] = SynthesizedParameterSymbol.Create(
+                            this,
+                            property.TypeWithAnnotations,
+                            index,
+                            RefKind.None,
+                            property.Name
+                        );
                     }
                     _parameters = paramsArr.AsImmutableOrNull();
                 }
@@ -69,17 +77,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { return false; }
             }
 
-            internal sealed override bool IsMetadataVirtual(bool ignoreInterfaceImplementationChanges = false)
-            {
+            internal sealed override bool IsMetadataVirtual(
+                bool ignoreInterfaceImplementationChanges = false
+            ) {
                 return false;
             }
 
             internal override bool IsMetadataFinal
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override ImmutableArray<Location> Locations

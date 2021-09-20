@@ -30,8 +30,11 @@ namespace Microsoft.NETCore.Platforms.BuildTasks.Tests
             _output.WriteLine(message, messageArgs);
         }
 
-        public void LogMessage(LogImportance importance, string message, params object[] messageArgs)
-        {
+        public void LogMessage(
+            LogImportance importance,
+            string message,
+            params object[] messageArgs
+        ) {
             _output.WriteLine(message, messageArgs);
         }
 

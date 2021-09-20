@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved. 
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information. 
+// Copyright (c) .NET Foundation. All rights reserved.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
 using System.Threading.Tasks;
@@ -28,8 +28,9 @@ namespace Microsoft.AspNetCore.Localization
         public string CookieName { get; set; } = DefaultCookieName;
 
         /// <inheritdoc />
-        public override Task<ProviderCultureResult?> DetermineProviderCultureResult(HttpContext httpContext)
-        {
+        public override Task<ProviderCultureResult?> DetermineProviderCultureResult(
+            HttpContext httpContext
+        ) {
             if (httpContext == null)
             {
                 throw new ArgumentNullException(nameof(httpContext));
@@ -59,9 +60,11 @@ namespace Microsoft.AspNetCore.Localization
                 throw new ArgumentNullException(nameof(requestCulture));
             }
 
-            return string.Join(_cookieSeparator,
+            return string.Join(
+                _cookieSeparator,
                 $"{_culturePrefix}{requestCulture.Culture.Name}",
-                $"{_uiCulturePrefix}{requestCulture.UICulture.Name}");
+                $"{_uiCulturePrefix}{requestCulture.UICulture.Name}"
+            );
         }
 
         /// <summary>
@@ -87,9 +90,10 @@ namespace Microsoft.AspNetCore.Localization
             var potentialCultureName = parts[0];
             var potentialUICultureName = parts[1];
 
-            if (!potentialCultureName.StartsWith(_culturePrefix, StringComparison.Ordinal) || !
-                potentialUICultureName.StartsWith(_uiCulturePrefix, StringComparison.Ordinal))
-            {
+            if (
+                !potentialCultureName.StartsWith(_culturePrefix, StringComparison.Ordinal)
+                || !potentialUICultureName.StartsWith(_uiCulturePrefix, StringComparison.Ordinal)
+            ) {
                 return null;
             }
 

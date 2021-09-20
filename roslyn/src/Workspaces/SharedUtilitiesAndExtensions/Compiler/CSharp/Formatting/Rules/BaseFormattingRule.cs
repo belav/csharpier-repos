@@ -18,14 +18,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxToken startToken,
             SyntaxToken endToken,
             TextSpan textSpan,
-            IndentBlockOption option = IndentBlockOption.RelativePosition)
-        {
+            IndentBlockOption option = IndentBlockOption.RelativePosition
+        ) {
             if (startToken.Kind() == SyntaxKind.None || endToken.Kind() == SyntaxKind.None)
             {
                 return;
             }
 
-            list.Add(FormattingOperations.CreateIndentBlockOperation(startToken, endToken, textSpan, indentationDelta: -1, option: option));
+            list.Add(
+                FormattingOperations.CreateIndentBlockOperation(
+                    startToken,
+                    endToken,
+                    textSpan,
+                    indentationDelta: -1,
+                    option: option
+                )
+            );
         }
 
         protected static void AddUnindentBlockOperation(
@@ -33,8 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxToken startToken,
             SyntaxToken endToken,
             bool includeTriviaAtEnd = false,
-            IndentBlockOption option = IndentBlockOption.RelativePosition)
-        {
+            IndentBlockOption option = IndentBlockOption.RelativePosition
+        ) {
             if (startToken.Kind() == SyntaxKind.None || endToken.Kind() == SyntaxKind.None)
             {
                 return;
@@ -42,14 +50,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
             if (includeTriviaAtEnd)
             {
-                list.Add(FormattingOperations.CreateIndentBlockOperation(startToken, endToken, indentationDelta: -1, option: option));
+                list.Add(
+                    FormattingOperations.CreateIndentBlockOperation(
+                        startToken,
+                        endToken,
+                        indentationDelta: -1,
+                        option: option
+                    )
+                );
             }
             else
             {
                 var startPosition = CommonFormattingHelpers.GetStartPositionOfSpan(startToken);
                 var endPosition = endToken.Span.End;
 
-                list.Add(FormattingOperations.CreateIndentBlockOperation(startToken, endToken, TextSpan.FromBounds(startPosition, endPosition), indentationDelta: -1, option: option));
+                list.Add(
+                    FormattingOperations.CreateIndentBlockOperation(
+                        startToken,
+                        endToken,
+                        TextSpan.FromBounds(startPosition, endPosition),
+                        indentationDelta: -1,
+                        option: option
+                    )
+                );
             }
         }
 
@@ -57,28 +80,42 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             List<IndentBlockOperation> list,
             SyntaxToken startToken,
             SyntaxToken endToken,
-            IndentBlockOption option = IndentBlockOption.AbsolutePosition)
-        {
+            IndentBlockOption option = IndentBlockOption.AbsolutePosition
+        ) {
             if (startToken.Kind() == SyntaxKind.None || endToken.Kind() == SyntaxKind.None)
             {
                 return;
             }
 
-            list.Add(FormattingOperations.CreateIndentBlockOperation(startToken, endToken, indentationDelta: 0, option: option));
+            list.Add(
+                FormattingOperations.CreateIndentBlockOperation(
+                    startToken,
+                    endToken,
+                    indentationDelta: 0,
+                    option: option
+                )
+            );
         }
 
         protected static void AddIndentBlockOperation(
             List<IndentBlockOperation> list,
             SyntaxToken startToken,
             SyntaxToken endToken,
-            IndentBlockOption option = IndentBlockOption.RelativePosition)
-        {
+            IndentBlockOption option = IndentBlockOption.RelativePosition
+        ) {
             if (startToken.Kind() == SyntaxKind.None || endToken.Kind() == SyntaxKind.None)
             {
                 return;
             }
 
-            list.Add(FormattingOperations.CreateIndentBlockOperation(startToken, endToken, indentationDelta: 1, option: option));
+            list.Add(
+                FormattingOperations.CreateIndentBlockOperation(
+                    startToken,
+                    endToken,
+                    indentationDelta: 1,
+                    option: option
+                )
+            );
         }
 
         protected static void AddIndentBlockOperation(
@@ -86,14 +123,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxToken startToken,
             SyntaxToken endToken,
             TextSpan textSpan,
-            IndentBlockOption option = IndentBlockOption.RelativePosition)
-        {
+            IndentBlockOption option = IndentBlockOption.RelativePosition
+        ) {
             if (startToken.Kind() == SyntaxKind.None || endToken.Kind() == SyntaxKind.None)
             {
                 return;
             }
 
-            list.Add(FormattingOperations.CreateIndentBlockOperation(startToken, endToken, textSpan, indentationDelta: 1, option: option));
+            list.Add(
+                FormattingOperations.CreateIndentBlockOperation(
+                    startToken,
+                    endToken,
+                    textSpan,
+                    indentationDelta: 1,
+                    option: option
+                )
+            );
         }
 
         protected static void AddIndentBlockOperation(
@@ -101,9 +146,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxToken baseToken,
             SyntaxToken startToken,
             SyntaxToken endToken,
-            IndentBlockOption option = IndentBlockOption.RelativePosition)
-        {
-            list.Add(FormattingOperations.CreateRelativeIndentBlockOperation(baseToken, startToken, endToken, indentationDelta: 1, option: option));
+            IndentBlockOption option = IndentBlockOption.RelativePosition
+        ) {
+            list.Add(
+                FormattingOperations.CreateRelativeIndentBlockOperation(
+                    baseToken,
+                    startToken,
+                    endToken,
+                    indentationDelta: 1,
+                    option: option
+                )
+            );
         }
 
         protected static void SetAlignmentBlockOperation(
@@ -111,19 +164,51 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxToken baseToken,
             SyntaxToken startToken,
             SyntaxToken endToken,
-            IndentBlockOption option = IndentBlockOption.RelativePosition)
-        {
-            list.Add(FormattingOperations.CreateRelativeIndentBlockOperation(baseToken, startToken, endToken, indentationDelta: 0, option: option));
+            IndentBlockOption option = IndentBlockOption.RelativePosition
+        ) {
+            list.Add(
+                FormattingOperations.CreateRelativeIndentBlockOperation(
+                    baseToken,
+                    startToken,
+                    endToken,
+                    indentationDelta: 0,
+                    option: option
+                )
+            );
         }
 
-        protected static void AddSuppressWrappingIfOnSingleLineOperation(List<SuppressOperation> list, SyntaxToken startToken, SyntaxToken endToken, SuppressOption extraOption = SuppressOption.None)
-            => AddSuppressOperation(list, startToken, endToken, SuppressOption.NoWrappingIfOnSingleLine | extraOption);
+        protected static void AddSuppressWrappingIfOnSingleLineOperation(
+            List<SuppressOperation> list,
+            SyntaxToken startToken,
+            SyntaxToken endToken,
+            SuppressOption extraOption = SuppressOption.None
+        ) =>
+            AddSuppressOperation(
+                list,
+                startToken,
+                endToken,
+                SuppressOption.NoWrappingIfOnSingleLine | extraOption
+            );
 
-        protected static void AddSuppressAllOperationIfOnMultipleLine(List<SuppressOperation> list, SyntaxToken startToken, SyntaxToken endToken, SuppressOption extraOption = SuppressOption.None)
-            => AddSuppressOperation(list, startToken, endToken, SuppressOption.NoSpacingIfOnMultipleLine | SuppressOption.NoWrapping | extraOption);
+        protected static void AddSuppressAllOperationIfOnMultipleLine(
+            List<SuppressOperation> list,
+            SyntaxToken startToken,
+            SyntaxToken endToken,
+            SuppressOption extraOption = SuppressOption.None
+        ) =>
+            AddSuppressOperation(
+                list,
+                startToken,
+                endToken,
+                SuppressOption.NoSpacingIfOnMultipleLine | SuppressOption.NoWrapping | extraOption
+            );
 
-        protected static void AddSuppressOperation(List<SuppressOperation> list, SyntaxToken startToken, SyntaxToken endToken, SuppressOption option)
-        {
+        protected static void AddSuppressOperation(
+            List<SuppressOperation> list,
+            SyntaxToken startToken,
+            SyntaxToken endToken,
+            SuppressOption option
+        ) {
             if (startToken.Kind() == SyntaxKind.None || endToken.Kind() == SyntaxKind.None)
             {
                 return;
@@ -132,8 +217,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             list.Add(FormattingOperations.CreateSuppressOperation(startToken, endToken, option));
         }
 
-        protected static void AddAnchorIndentationOperation(List<AnchorIndentationOperation> list, SyntaxToken anchorToken, SyntaxToken endToken)
-        {
+        protected static void AddAnchorIndentationOperation(
+            List<AnchorIndentationOperation> list,
+            SyntaxToken anchorToken,
+            SyntaxToken endToken
+        ) {
             if (anchorToken.Kind() == SyntaxKind.None || endToken.Kind() == SyntaxKind.None)
             {
                 return;
@@ -142,8 +230,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             list.Add(FormattingOperations.CreateAnchorIndentationOperation(anchorToken, endToken));
         }
 
-        protected static void AddAlignIndentationOfTokensToBaseTokenOperation(List<AlignTokensOperation> list, SyntaxNode containingNode, SyntaxToken baseNode, IEnumerable<SyntaxToken> tokens, AlignTokensOption option = AlignTokensOption.AlignIndentationOfTokensToBaseToken)
-        {
+        protected static void AddAlignIndentationOfTokensToBaseTokenOperation(
+            List<AlignTokensOperation> list,
+            SyntaxNode containingNode,
+            SyntaxToken baseNode,
+            IEnumerable<SyntaxToken> tokens,
+            AlignTokensOption option = AlignTokensOption.AlignIndentationOfTokensToBaseToken
+        ) {
             if (containingNode == null || tokens == null)
             {
                 return;
@@ -152,14 +245,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             list.Add(FormattingOperations.CreateAlignTokensOperation(baseNode, tokens, option));
         }
 
-        protected static AdjustNewLinesOperation CreateAdjustNewLinesOperation(int line, AdjustNewLinesOption option)
-            => FormattingOperations.CreateAdjustNewLinesOperation(line, option);
+        protected static AdjustNewLinesOperation CreateAdjustNewLinesOperation(
+            int line,
+            AdjustNewLinesOption option
+        ) => FormattingOperations.CreateAdjustNewLinesOperation(line, option);
 
-        protected static AdjustSpacesOperation CreateAdjustSpacesOperation(int space, AdjustSpacesOption option)
-            => FormattingOperations.CreateAdjustSpacesOperation(space, option);
+        protected static AdjustSpacesOperation CreateAdjustSpacesOperation(
+            int space,
+            AdjustSpacesOption option
+        ) => FormattingOperations.CreateAdjustSpacesOperation(space, option);
 
-        protected static void AddBraceSuppressOperations(List<SuppressOperation> list, SyntaxNode node)
-        {
+        protected static void AddBraceSuppressOperations(
+            List<SuppressOperation> list,
+            SyntaxNode node
+        ) {
             var bracePair = node.GetBracePair();
             if (!bracePair.IsValidBracePair())
             {
@@ -170,7 +269,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
             if (node is MemberDeclarationSyntax memberDeclNode)
             {
-                (firstTokenOfNode, _) = memberDeclNode.GetFirstAndLastMemberDeclarationTokensAfterAttributes();
+                (firstTokenOfNode, _) =
+                    memberDeclNode.GetFirstAndLastMemberDeclarationTokensAfterAttributes();
             }
 
             if (node.IsLambdaBodyBlock())
@@ -186,10 +286,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 firstTokenOfNode = firstTokenOfNode.GetPreviousToken();
             }
 
-            // suppress wrapping on whole construct that owns braces and also brace pair itself if 
+            // suppress wrapping on whole construct that owns braces and also brace pair itself if
             // it is on same line
-            AddSuppressWrappingIfOnSingleLineOperation(list, firstTokenOfNode, bracePair.closeBrace);
-            AddSuppressWrappingIfOnSingleLineOperation(list, bracePair.openBrace, bracePair.closeBrace);
+            AddSuppressWrappingIfOnSingleLineOperation(
+                list,
+                firstTokenOfNode,
+                bracePair.closeBrace
+            );
+            AddSuppressWrappingIfOnSingleLineOperation(
+                list,
+                bracePair.openBrace,
+                bracePair.closeBrace
+            );
         }
     }
 }

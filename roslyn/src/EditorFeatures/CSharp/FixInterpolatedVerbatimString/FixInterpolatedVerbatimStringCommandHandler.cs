@@ -25,18 +25,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.FixInterpolatedVerbatimString
     [Export(typeof(ICommandHandler))]
     [ContentType(ContentTypeNames.CSharpContentType)]
     [Name(nameof(FixInterpolatedVerbatimStringCommandHandler))]
-    internal sealed class FixInterpolatedVerbatimStringCommandHandler : IChainedCommandHandler<TypeCharCommandArgs>
+    internal sealed class FixInterpolatedVerbatimStringCommandHandler
+        : IChainedCommandHandler<TypeCharCommandArgs>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FixInterpolatedVerbatimStringCommandHandler()
-        {
-        }
+        public FixInterpolatedVerbatimStringCommandHandler() { }
 
         public string DisplayName => CSharpEditorResources.Fix_interpolated_verbatim_string;
 
-        public void ExecuteCommand(TypeCharCommandArgs args, Action nextCommandHandler, CommandExecutionContext executionContext)
-        {
+        public void ExecuteCommand(
+            TypeCharCommandArgs args,
+            Action nextCommandHandler,
+            CommandExecutionContext executionContext
+        ) {
             // We need to check for the token *after* the opening quote is typed, so defer to the editor first
             nextCommandHandler();
 
@@ -58,8 +60,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.FixInterpolatedVerbatimString
             }
         }
 
-        private static void ExecuteCommandWorker(TypeCharCommandArgs args, CancellationToken cancellationToken)
-        {
+        private static void ExecuteCommandWorker(
+            TypeCharCommandArgs args,
+            CancellationToken cancellationToken
+        ) {
             if (args.TypedChar == '"')
             {
                 var caret = args.TextView.GetCaretPoint(args.SubjectBuffer);
@@ -68,11 +72,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.FixInterpolatedVerbatimString
                     var position = caret.Value.Position;
                     var snapshot = caret.Value.Snapshot;
 
-                    if (position >= 3 &&
-                        snapshot[position - 1] == '"' &&
-                        snapshot[position - 2] == '$' &&
-                        snapshot[position - 3] == '@')
-                    {
+                    if (
+                        position >= 3
+                        && snapshot[position - 1] == '"'
+                        && snapshot[position - 2] == '$'
+                        && snapshot[position - 3] == '@'
+                    ) {
                         var document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
                         if (document != null)
                         {
@@ -88,7 +93,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.FixInterpolatedVerbatimString
             }
         }
 
-        public CommandState GetCommandState(TypeCharCommandArgs args, Func<CommandState> nextCommandHandler)
-            => nextCommandHandler();
+        public CommandState GetCommandState(
+            TypeCharCommandArgs args,
+            Func<CommandState> nextCommandHandler
+        ) => nextCommandHandler();
     }
 }

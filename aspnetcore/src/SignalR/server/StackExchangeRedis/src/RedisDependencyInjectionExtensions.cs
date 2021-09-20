@@ -18,8 +18,9 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="signalrBuilder">The <see cref="ISignalRServerBuilder"/>.</param>
         /// <returns>The same instance of the <see cref="ISignalRServerBuilder"/> for chaining.</returns>
-        public static ISignalRServerBuilder AddStackExchangeRedis(this ISignalRServerBuilder signalrBuilder)
-        {
+        public static ISignalRServerBuilder AddStackExchangeRedis(
+            this ISignalRServerBuilder signalrBuilder
+        ) {
             return AddStackExchangeRedis(signalrBuilder, o => { });
         }
 
@@ -29,12 +30,17 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="signalrBuilder">The <see cref="ISignalRServerBuilder"/>.</param>
         /// <param name="redisConnectionString">The connection string used to connect to the Redis server.</param>
         /// <returns>The same instance of the <see cref="ISignalRServerBuilder"/> for chaining.</returns>
-        public static ISignalRServerBuilder AddStackExchangeRedis(this ISignalRServerBuilder signalrBuilder, string redisConnectionString)
-        {
-            return AddStackExchangeRedis(signalrBuilder, o =>
-            {
-                o.Configuration = ConfigurationOptions.Parse(redisConnectionString);
-            });
+        public static ISignalRServerBuilder AddStackExchangeRedis(
+            this ISignalRServerBuilder signalrBuilder,
+            string redisConnectionString
+        ) {
+            return AddStackExchangeRedis(
+                signalrBuilder,
+                o =>
+                {
+                    o.Configuration = ConfigurationOptions.Parse(redisConnectionString);
+                }
+            );
         }
 
         /// <summary>
@@ -43,10 +49,15 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="signalrBuilder">The <see cref="ISignalRServerBuilder"/>.</param>
         /// <param name="configure">A callback to configure the Redis options.</param>
         /// <returns>The same instance of the <see cref="ISignalRServerBuilder"/> for chaining.</returns>
-        public static ISignalRServerBuilder AddStackExchangeRedis(this ISignalRServerBuilder signalrBuilder, Action<RedisOptions> configure)
-        {
+        public static ISignalRServerBuilder AddStackExchangeRedis(
+            this ISignalRServerBuilder signalrBuilder,
+            Action<RedisOptions> configure
+        ) {
             signalrBuilder.Services.Configure(configure);
-            signalrBuilder.Services.AddSingleton(typeof(HubLifetimeManager<>), typeof(RedisHubLifetimeManager<>));
+            signalrBuilder.Services.AddSingleton(
+                typeof(HubLifetimeManager<>),
+                typeof(RedisHubLifetimeManager<>)
+            );
             return signalrBuilder;
         }
 
@@ -57,13 +68,19 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="redisConnectionString">The connection string used to connect to the Redis server.</param>
         /// <param name="configure">A callback to configure the Redis options.</param>
         /// <returns>The same instance of the <see cref="ISignalRServerBuilder"/> for chaining.</returns>
-        public static ISignalRServerBuilder AddStackExchangeRedis(this ISignalRServerBuilder signalrBuilder, string redisConnectionString, Action<RedisOptions> configure)
-        {
-            return AddStackExchangeRedis(signalrBuilder, o =>
-            {
-                o.Configuration = ConfigurationOptions.Parse(redisConnectionString);
-                configure(o);
-            });
+        public static ISignalRServerBuilder AddStackExchangeRedis(
+            this ISignalRServerBuilder signalrBuilder,
+            string redisConnectionString,
+            Action<RedisOptions> configure
+        ) {
+            return AddStackExchangeRedis(
+                signalrBuilder,
+                o =>
+                {
+                    o.Configuration = ConfigurationOptions.Parse(redisConnectionString);
+                    configure(o);
+                }
+            );
         }
     }
 }

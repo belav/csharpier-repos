@@ -31,16 +31,16 @@ namespace Microsoft.Extensions.Configuration.KeyPerFile
                     {
                         Thread.Sleep(Source.ReloadDelay);
                         Load(reload: true);
-                    });
+                    }
+                );
             }
-
         }
 
-        private static string NormalizeKey(string key)
-            => key.Replace("__", ConfigurationPath.KeyDelimiter);
+        private static string NormalizeKey(string key) =>
+            key.Replace("__", ConfigurationPath.KeyDelimiter);
 
-        private static string TrimNewLine(string value)
-            => value.EndsWith(Environment.NewLine, StringComparison.Ordinal)
+        private static string TrimNewLine(string value) =>
+            value.EndsWith(Environment.NewLine, StringComparison.Ordinal)
                 ? value.Substring(0, value.Length - Environment.NewLine.Length)
                 : value;
 
@@ -64,7 +64,9 @@ namespace Microsoft.Extensions.Configuration.KeyPerFile
                     return;
                 }
 
-                throw new DirectoryNotFoundException("A non-null file provider for the directory is required when this source is not optional.");
+                throw new DirectoryNotFoundException(
+                    "A non-null file provider for the directory is required when this source is not optional."
+                );
             }
 
             var directory = Source.FileProvider.GetDirectoryContents("/");
@@ -75,7 +77,9 @@ namespace Microsoft.Extensions.Configuration.KeyPerFile
                     Data = data;
                     return;
                 }
-                throw new DirectoryNotFoundException("The root directory for the FileProvider doesn't exist and is not optional.");
+                throw new DirectoryNotFoundException(
+                    "The root directory for the FileProvider doesn't exist and is not optional."
+                );
             }
             else
             {
@@ -93,22 +97,21 @@ namespace Microsoft.Extensions.Configuration.KeyPerFile
                     {
                         data.Add(NormalizeKey(file.Name), TrimNewLine(streamReader.ReadToEnd()));
                     }
-
                 }
             }
 
             Data = data;
         }
 
-        private string GetDirectoryName()
-            => Source.FileProvider?.GetFileInfo("/")?.PhysicalPath ?? "<Unknown>";
+        private string GetDirectoryName() =>
+            Source.FileProvider?.GetFileInfo("/")?.PhysicalPath ?? "<Unknown>";
 
         /// <summary>
         /// Generates a string representing this provider name and relevant details.
         /// </summary>
         /// <returns>The configuration name.</returns>
-        public override string ToString()
-            => $"{GetType().Name} for files in '{GetDirectoryName()}' ({(Source.Optional ? "Optional" : "Required")})";
+        public override string ToString() =>
+            $"{GetType().Name} for files in '{GetDirectoryName()}' ({(Source.Optional ? "Optional" : "Required")})";
 
         /// <inheritdoc />
         public void Dispose()

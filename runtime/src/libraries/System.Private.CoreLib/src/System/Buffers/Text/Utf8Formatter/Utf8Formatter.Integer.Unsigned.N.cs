@@ -8,15 +8,23 @@ namespace System.Buffers.Text
     /// </summary>
     public static partial class Utf8Formatter
     {
-        private static bool TryFormatUInt64N(ulong value, byte precision, Span<byte> destination, bool insertNegationSign, out int bytesWritten)
-        {
+        private static bool TryFormatUInt64N(
+            ulong value,
+            byte precision,
+            Span<byte> destination,
+            bool insertNegationSign,
+            out int bytesWritten
+        ) {
             // Calculate the actual digit count, number of group separators required, and the
             // number of trailing zeros requested. From all of this we can get the required
             // buffer length.
 
             int digitCount = FormattingHelpers.CountDigits(value);
             int commaCount = (digitCount - 1) / 3;
-            int trailingZeroCount = (precision == StandardFormat.NoPrecision) ? 2 /* default for 'N' */ : precision;
+            int trailingZeroCount =
+                (precision == StandardFormat.NoPrecision)
+                    ? 2 /* default for 'N' */
+                    : precision;
 
             int requiredBufferLength = digitCount + commaCount;
             if (trailingZeroCount > 0)
@@ -43,12 +51,17 @@ namespace System.Buffers.Text
                 destination = destination.Slice(1);
             }
 
-            FormattingHelpers.WriteDigitsWithGroupSeparator(value, destination.Slice(0, digitCount + commaCount));
+            FormattingHelpers.WriteDigitsWithGroupSeparator(
+                value,
+                destination.Slice(0, digitCount + commaCount)
+            );
 
             if (trailingZeroCount > 0)
             {
                 destination[digitCount + commaCount] = Utf8Constants.Period;
-                FormattingHelpers.FillWithAsciiZeros(destination.Slice(digitCount + commaCount + 1, trailingZeroCount));
+                FormattingHelpers.FillWithAsciiZeros(
+                    destination.Slice(digitCount + commaCount + 1, trailingZeroCount)
+                );
             }
 
             return true;

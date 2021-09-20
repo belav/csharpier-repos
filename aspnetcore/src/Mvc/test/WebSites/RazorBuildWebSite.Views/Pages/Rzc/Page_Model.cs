@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorBuildWebSite.Pages.Rzc
 {

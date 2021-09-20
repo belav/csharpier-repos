@@ -29,19 +29,17 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public event EventHandler<WorkspaceChangeEventArgs> WorkspaceChanged
         {
-            add
-            {
-                _eventMap.AddEventHandler(WorkspaceChangeEventName, value);
-            }
-
-            remove
-            {
-                _eventMap.RemoveEventHandler(WorkspaceChangeEventName, value);
-            }
+            add { _eventMap.AddEventHandler(WorkspaceChangeEventName, value); }
+            remove { _eventMap.RemoveEventHandler(WorkspaceChangeEventName, value); }
         }
 
-        protected Task RaiseWorkspaceChangedEventAsync(WorkspaceChangeKind kind, Solution oldSolution, Solution newSolution, ProjectId projectId = null, DocumentId documentId = null)
-        {
+        protected Task RaiseWorkspaceChangedEventAsync(
+            WorkspaceChangeKind kind,
+            Solution oldSolution,
+            Solution newSolution,
+            ProjectId projectId = null,
+            DocumentId documentId = null
+        ) {
             if (newSolution == null)
             {
                 throw new ArgumentNullException(nameof(newSolution));
@@ -60,14 +58,32 @@ namespace Microsoft.CodeAnalysis
             var ev = GetEventHandlers<WorkspaceChangeEventArgs>(WorkspaceChangeEventName);
             if (ev.HasHandlers)
             {
-                return this.ScheduleTask(() =>
-                {
-                    using (Logger.LogBlock(FunctionId.Workspace_Events, (s, p, d, k) => $"{s.Id} - {p} - {d} {kind.ToString()}", newSolution, projectId, documentId, kind, CancellationToken.None))
+                return this.ScheduleTask(
+                    () =>
                     {
-                        var args = new WorkspaceChangeEventArgs(kind, oldSolution, newSolution, projectId, documentId);
-                        ev.RaiseEvent(handler => handler(this, args));
-                    }
-                }, WorkspaceChangeEventName);
+                        using (
+                            Logger.LogBlock(
+                                FunctionId.Workspace_Events,
+                                (s, p, d, k) => $"{s.Id} - {p} - {d} {kind.ToString()}",
+                                newSolution,
+                                projectId,
+                                documentId,
+                                kind,
+                                CancellationToken.None
+                            )
+                        ) {
+                            var args = new WorkspaceChangeEventArgs(
+                                kind,
+                                oldSolution,
+                                newSolution,
+                                projectId,
+                                documentId
+                            );
+                            ev.RaiseEvent(handler => handler(this, args));
+                        }
+                    },
+                    WorkspaceChangeEventName
+                );
             }
             else
             {
@@ -81,15 +97,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public event EventHandler<WorkspaceDiagnosticEventArgs> WorkspaceFailed
         {
-            add
-            {
-                _eventMap.AddEventHandler(WorkspaceFailedEventName, value);
-            }
-
-            remove
-            {
-                _eventMap.RemoveEventHandler(WorkspaceFailedEventName, value);
-            }
+            add { _eventMap.AddEventHandler(WorkspaceFailedEventName, value); }
+            remove { _eventMap.RemoveEventHandler(WorkspaceFailedEventName, value); }
         }
 
         protected internal virtual void OnWorkspaceFailed(WorkspaceDiagnostic diagnostic)
@@ -107,15 +116,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public event EventHandler<DocumentEventArgs> DocumentOpened
         {
-            add
-            {
-                _eventMap.AddEventHandler(DocumentOpenedEventName, value);
-            }
-
-            remove
-            {
-                _eventMap.RemoveEventHandler(DocumentOpenedEventName, value);
-            }
+            add { _eventMap.AddEventHandler(DocumentOpenedEventName, value); }
+            remove { _eventMap.RemoveEventHandler(DocumentOpenedEventName, value); }
         }
 
         protected Task RaiseDocumentOpenedEventAsync(Document document)
@@ -123,11 +125,14 @@ namespace Microsoft.CodeAnalysis
             var ev = GetEventHandlers<DocumentEventArgs>(DocumentOpenedEventName);
             if (ev.HasHandlers && document != null)
             {
-                return this.ScheduleTask(() =>
-                {
-                    var args = new DocumentEventArgs(document);
-                    ev.RaiseEvent(handler => handler(this, args));
-                }, DocumentOpenedEventName);
+                return this.ScheduleTask(
+                    () =>
+                    {
+                        var args = new DocumentEventArgs(document);
+                        ev.RaiseEvent(handler => handler(this, args));
+                    },
+                    DocumentOpenedEventName
+                );
             }
             else
             {
@@ -140,15 +145,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public event EventHandler<DocumentEventArgs> DocumentClosed
         {
-            add
-            {
-                _eventMap.AddEventHandler(DocumentClosedEventName, value);
-            }
-
-            remove
-            {
-                _eventMap.RemoveEventHandler(DocumentClosedEventName, value);
-            }
+            add { _eventMap.AddEventHandler(DocumentClosedEventName, value); }
+            remove { _eventMap.RemoveEventHandler(DocumentClosedEventName, value); }
         }
 
         protected Task RaiseDocumentClosedEventAsync(Document document)
@@ -156,11 +154,14 @@ namespace Microsoft.CodeAnalysis
             var ev = GetEventHandlers<DocumentEventArgs>(DocumentClosedEventName);
             if (ev.HasHandlers && document != null)
             {
-                return this.ScheduleTask(() =>
-                {
-                    var args = new DocumentEventArgs(document);
-                    ev.RaiseEvent(handler => handler(this, args));
-                }, DocumentClosedEventName);
+                return this.ScheduleTask(
+                    () =>
+                    {
+                        var args = new DocumentEventArgs(document);
+                        ev.RaiseEvent(handler => handler(this, args));
+                    },
+                    DocumentClosedEventName
+                );
             }
             else
             {
@@ -174,34 +175,47 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public event EventHandler<DocumentActiveContextChangedEventArgs> DocumentActiveContextChanged
         {
-            add
-            {
-                _eventMap.AddEventHandler(DocumentActiveContextChangedName, value);
-            }
-
-            remove
-            {
-                _eventMap.RemoveEventHandler(DocumentActiveContextChangedName, value);
-            }
+            add { _eventMap.AddEventHandler(DocumentActiveContextChangedName, value); }
+            remove { _eventMap.RemoveEventHandler(DocumentActiveContextChangedName, value); }
         }
 
-        [Obsolete("This member is obsolete. Use the RaiseDocumentActiveContextChangedEventAsync(SourceTextContainer, DocumentId, DocumentId) overload instead.", error: true)]
-        protected Task RaiseDocumentActiveContextChangedEventAsync(Document document)
-            => throw new NotImplementedException();
+        [Obsolete(
+            "This member is obsolete. Use the RaiseDocumentActiveContextChangedEventAsync(SourceTextContainer, DocumentId, DocumentId) overload instead.",
+            error: true
+        )]
+        protected Task RaiseDocumentActiveContextChangedEventAsync(Document document) =>
+            throw new NotImplementedException();
 
-        protected Task RaiseDocumentActiveContextChangedEventAsync(SourceTextContainer sourceTextContainer, DocumentId oldActiveContextDocumentId, DocumentId newActiveContextDocumentId)
-        {
-            var ev = GetEventHandlers<DocumentActiveContextChangedEventArgs>(DocumentActiveContextChangedName);
-            if (ev.HasHandlers && sourceTextContainer != null && oldActiveContextDocumentId != null && newActiveContextDocumentId != null)
-            {
+        protected Task RaiseDocumentActiveContextChangedEventAsync(
+            SourceTextContainer sourceTextContainer,
+            DocumentId oldActiveContextDocumentId,
+            DocumentId newActiveContextDocumentId
+        ) {
+            var ev = GetEventHandlers<DocumentActiveContextChangedEventArgs>(
+                DocumentActiveContextChangedName
+            );
+            if (
+                ev.HasHandlers
+                && sourceTextContainer != null
+                && oldActiveContextDocumentId != null
+                && newActiveContextDocumentId != null
+            ) {
                 // Capture the current solution snapshot (inside the _serializationLock of OnDocumentContextUpdated)
                 var currentSolution = this.CurrentSolution;
 
-                return this.ScheduleTask(() =>
-                {
-                    var args = new DocumentActiveContextChangedEventArgs(currentSolution, sourceTextContainer, oldActiveContextDocumentId, newActiveContextDocumentId);
-                    ev.RaiseEvent(handler => handler(this, args));
-                }, "Workspace.WorkspaceChanged");
+                return this.ScheduleTask(
+                    () =>
+                    {
+                        var args = new DocumentActiveContextChangedEventArgs(
+                            currentSolution,
+                            sourceTextContainer,
+                            oldActiveContextDocumentId,
+                            newActiveContextDocumentId
+                        );
+                        ev.RaiseEvent(handler => handler(this, args));
+                    },
+                    "Workspace.WorkspaceChanged"
+                );
             }
             else
             {
@@ -209,7 +223,8 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        private EventMap.EventHandlerSet<EventHandler<T>> GetEventHandlers<T>(string eventName) where T : EventArgs
+        private EventMap.EventHandlerSet<EventHandler<T>> GetEventHandlers<T>(string eventName)
+            where T : EventArgs
         {
             // this will register features that want to listen to workspace events
             // lazily first time workspace event is actually fired

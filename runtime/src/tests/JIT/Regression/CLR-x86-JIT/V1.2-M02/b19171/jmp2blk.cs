@@ -7,14 +7,11 @@ public struct AA
 {
     public static int[,] Static2()
     {
-    label1:
-        try
-        {
-        }
-        finally
-        {
-        }
-    label2:
+        label1:
+        try { }
+
+        finally { }
+        label2:
         return (new int[1, 1]);
     }
 

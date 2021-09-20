@@ -25,15 +25,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     /// </summary>
     public class LazyLoaderParameterBindingFactory : ServiceParameterBindingFactory
     {
-        private static readonly MethodInfo _loadMethod = typeof(ILazyLoader).GetMethod(nameof(ILazyLoader.Load))!;
-        private static readonly MethodInfo _loadAsyncMethod = typeof(ILazyLoader).GetMethod(nameof(ILazyLoader.LoadAsync))!;
+        private static readonly MethodInfo _loadMethod = typeof(ILazyLoader).GetMethod(
+            nameof(ILazyLoader.Load)
+        )!;
+        private static readonly MethodInfo _loadAsyncMethod = typeof(ILazyLoader).GetMethod(
+            nameof(ILazyLoader.LoadAsync)
+        )!;
 
         /// <summary>
         ///     Creates a new <see cref="LazyLoaderParameterBindingFactory" /> instance.
         /// </summary>
         /// <param name="dependencies"> The service dependencies to use. </param>
-        public LazyLoaderParameterBindingFactory(LazyLoaderParameterBindingFactoryDependencies dependencies)
-            : base(typeof(ILazyLoader))
+        public LazyLoaderParameterBindingFactory(
+            LazyLoaderParameterBindingFactoryDependencies dependencies
+        ) : base(typeof(ILazyLoader))
         {
             Check.NotNull(dependencies, nameof(dependencies));
         }
@@ -44,9 +49,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="parameterType"> The parameter type. </param>
         /// <param name="parameterName"> The parameter name. </param>
         /// <returns> <see langword="true" /> if this parameter can be bound; <see langword="false" /> otherwise. </returns>
-        public override bool CanBind(
-            Type parameterType,
-            string parameterName)
+        public override bool CanBind(Type parameterType, string parameterName)
         {
             Check.NotNull(parameterType, nameof(parameterType));
             Check.NotEmpty(parameterName, nameof(parameterName));
@@ -66,8 +69,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public override ParameterBinding Bind(
             IMutableEntityType entityType,
             Type parameterType,
-            string parameterName)
-        {
+            string parameterName
+        ) {
             Check.NotNull(entityType, nameof(entityType));
             Check.NotNull(parameterType, nameof(parameterType));
             Check.NotEmpty(parameterName, nameof(parameterName));
@@ -77,8 +80,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             {
                 baseType.SetNavigationAccessMode(PropertyAccessMode.Field);
                 baseType = baseType.BaseType;
-            }
-            while (baseType != null);
+            } while (baseType != null);
 
             return Bind((IEntityType)entityType, parameterType);
         }
@@ -93,8 +95,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public override ParameterBinding Bind(
             IConventionEntityType entityType,
             Type parameterType,
-            string parameterName)
-        {
+            string parameterName
+        ) {
             Check.NotNull(entityType, nameof(entityType));
             Check.NotNull(parameterType, nameof(parameterType));
             Check.NotEmpty(parameterName, nameof(parameterName));
@@ -104,8 +106,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             {
                 baseType.SetNavigationAccessMode(PropertyAccessMode.Field);
                 baseType = baseType.BaseType;
-            }
-            while (baseType != null);
+            } while (baseType != null);
 
             return Bind((IEntityType)entityType, parameterType);
         }
@@ -120,8 +121,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public override ParameterBinding Bind(
             IReadOnlyEntityType entityType,
             Type parameterType,
-            string parameterName)
-        {
+            string parameterName
+        ) {
             Check.NotNull(entityType, nameof(entityType));
             Check.NotNull(parameterType, nameof(parameterType));
             Check.NotEmpty(parameterName, nameof(parameterName));
@@ -129,34 +130,44 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             return Bind((IEntityType)entityType, parameterType);
         }
 
-        private static ParameterBinding Bind(IEntityType entityType, Type parameterType)
-            => parameterType == typeof(ILazyLoader)
+        private static ParameterBinding Bind(IEntityType entityType, Type parameterType) =>
+            parameterType == typeof(ILazyLoader)
                 ? new DependencyInjectionParameterBinding(
-                    typeof(ILazyLoader),
-                    typeof(ILazyLoader),
-                    entityType.GetServiceProperties().Cast<IPropertyBase>().Where(p => IsLazyLoader(p.ClrType)).ToArray())
+                      typeof(ILazyLoader),
+                      typeof(ILazyLoader),
+                      entityType.GetServiceProperties()
+                          .Cast<IPropertyBase>()
+                          .Where(p => IsLazyLoader(p.ClrType))
+                          .ToArray()
+                  )
                 : parameterType == typeof(Action<object, string>)
                     ? new DependencyInjectionMethodParameterBinding(
-                        typeof(Action<object, string>),
-                        typeof(ILazyLoader),
-                        _loadMethod,
-                        entityType.GetServiceProperties().Cast<IPropertyBase>().Where(p => IsLazyLoaderMethod(p.ClrType, p.Name)).ToArray())
+                          typeof(Action<object, string>),
+                          typeof(ILazyLoader),
+                          _loadMethod,
+                          entityType.GetServiceProperties()
+                              .Cast<IPropertyBase>()
+                              .Where(p => IsLazyLoaderMethod(p.ClrType, p.Name))
+                              .ToArray()
+                      )
                     : new DependencyInjectionMethodParameterBinding(
-                        typeof(Func<object, CancellationToken, string, Task>),
-                        typeof(ILazyLoader),
-                        _loadAsyncMethod,
-                        entityType.GetServiceProperties().Cast<IPropertyBase>().Where(p => IsLazyLoaderAsyncMethod(p.ClrType, p.Name))
-                            .ToArray());
+                          typeof(Func<object, CancellationToken, string, Task>),
+                          typeof(ILazyLoader),
+                          _loadAsyncMethod,
+                          entityType.GetServiceProperties()
+                              .Cast<IPropertyBase>()
+                              .Where(p => IsLazyLoaderAsyncMethod(p.ClrType, p.Name))
+                              .ToArray()
+                      );
 
-        private static bool IsLazyLoader(Type type)
-            => type == typeof(ILazyLoader);
+        private static bool IsLazyLoader(Type type) => type == typeof(ILazyLoader);
 
-        private static bool IsLazyLoaderMethod(Type type, string name)
-            => type == typeof(Action<object, string>)
-                && name.Equals("lazyLoader", StringComparison.OrdinalIgnoreCase);
+        private static bool IsLazyLoaderMethod(Type type, string name) =>
+            type == typeof(Action<object, string>)
+            && name.Equals("lazyLoader", StringComparison.OrdinalIgnoreCase);
 
-        private static bool IsLazyLoaderAsyncMethod(Type type, string name)
-            => type == typeof(Func<object, CancellationToken, string, Task>)
-                && name.Equals("lazyLoader", StringComparison.OrdinalIgnoreCase);
+        private static bool IsLazyLoaderAsyncMethod(Type type, string name) =>
+            type == typeof(Func<object, CancellationToken, string, Task>)
+            && name.Equals("lazyLoader", StringComparison.OrdinalIgnoreCase);
     }
 }

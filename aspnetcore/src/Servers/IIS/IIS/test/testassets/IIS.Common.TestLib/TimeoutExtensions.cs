@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting
 {
-
     public static class TimeoutExtensions
     {
         public static TimeSpan DefaultTimeoutValue = TimeSpan.FromSeconds(300);

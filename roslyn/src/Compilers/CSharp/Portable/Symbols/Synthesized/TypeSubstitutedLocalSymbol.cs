@@ -16,8 +16,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly TypeWithAnnotations _type;
         private readonly Symbol _containingSymbol;
 
-        public TypeSubstitutedLocalSymbol(LocalSymbol originalVariable, TypeWithAnnotations type, Symbol containingSymbol)
-        {
+        public TypeSubstitutedLocalSymbol(
+            LocalSymbol originalVariable,
+            TypeWithAnnotations type,
+            Symbol containingSymbol
+        ) {
             Debug.Assert(originalVariable != null);
             Debug.Assert(type.HasType);
             Debug.Assert(containingSymbol != null);
@@ -109,24 +112,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         internal override uint RefEscapeScope => throw ExceptionUtilities.Unreachable;
 
-        internal override ConstantValue GetConstantValue(SyntaxNode node, LocalSymbol inProgress, BindingDiagnosticBag diagnostics)
-        {
+        internal override ConstantValue GetConstantValue(
+            SyntaxNode node,
+            LocalSymbol inProgress,
+            BindingDiagnosticBag diagnostics
+        ) {
             return _originalVariable.GetConstantValue(node, inProgress, diagnostics);
         }
 
-        internal override ImmutableBindingDiagnostic<AssemblySymbol> GetConstantValueDiagnostics(BoundExpression boundInitValue)
-        {
+        internal override ImmutableBindingDiagnostic<AssemblySymbol> GetConstantValueDiagnostics(
+            BoundExpression boundInitValue
+        ) {
             return _originalVariable.GetConstantValueDiagnostics(boundInitValue);
         }
 
-        internal override LocalSymbol WithSynthesizedLocalKindAndSyntax(SynthesizedLocalKind kind, SyntaxNode syntax)
-        {
+        internal override LocalSymbol WithSynthesizedLocalKindAndSyntax(
+            SynthesizedLocalKind kind,
+            SyntaxNode syntax
+        ) {
             var origSynthesized = (SynthesizedLocal)_originalVariable;
             return new TypeSubstitutedLocalSymbol(
-                    origSynthesized.WithSynthesizedLocalKindAndSyntax(kind, syntax),
-                    _type,
-                    _containingSymbol
-                );
+                origSynthesized.WithSynthesizedLocalKindAndSyntax(kind, syntax),
+                _type,
+                _containingSymbol
+            );
         }
     }
 }

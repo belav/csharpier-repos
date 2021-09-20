@@ -62,8 +62,8 @@ namespace Microsoft.Extensions.Internal
             // Arrange
             var expected = "new value";
             var instance = new BaseClass { PropA = "old value" };
-            var helper = PropertyHelper.GetProperties(
-                instance.GetType()).First(prop => prop.Name == "PropA");
+            var helper = PropertyHelper.GetProperties(instance.GetType())
+                .First(prop => prop.Name == "PropA");
 
             // Act
             helper.SetValue(instance, expected);
@@ -78,8 +78,8 @@ namespace Microsoft.Extensions.Internal
             // Arrange
             var expected = "new value";
             var instance = new BaseClass { PropA = "old value" };
-            var helper = PropertyHelper.GetProperties(
-                instance.GetType()).First(prop => prop.Name == "PropA");
+            var helper = PropertyHelper.GetProperties(instance.GetType())
+                .First(prop => prop.Name == "PropA");
 
             // Act and Assert
             Assert.NotNull(helper.ValueSetter);
@@ -127,7 +127,9 @@ namespace Microsoft.Extensions.Internal
             var anonymous = new { bar_baz2 = "foo" };
 
             // Act + Assert
-            var helper = Assert.Single(PropertyHelper.GetProperties(anonymous.GetType().GetTypeInfo()));
+            var helper = Assert.Single(
+                PropertyHelper.GetProperties(anonymous.GetType().GetTypeInfo())
+            );
             Assert.Equal("bar_baz2", helper.Name);
         }
 
@@ -138,7 +140,9 @@ namespace Microsoft.Extensions.Internal
             var anonymous = new PrivateProperties();
 
             // Act + Assert
-            var helper = Assert.Single(PropertyHelper.GetProperties(anonymous.GetType().GetTypeInfo()));
+            var helper = Assert.Single(
+                PropertyHelper.GetProperties(anonymous.GetType().GetTypeInfo())
+            );
             Assert.Equal("Prop1", helper.Name);
         }
 
@@ -149,7 +153,9 @@ namespace Microsoft.Extensions.Internal
             var anonymous = new Static();
 
             // Act + Assert
-            var helper = Assert.Single(PropertyHelper.GetProperties(anonymous.GetType().GetTypeInfo()));
+            var helper = Assert.Single(
+                PropertyHelper.GetProperties(anonymous.GetType().GetTypeInfo())
+            );
             Assert.Equal("Prop5", helper.Name);
         }
 
@@ -176,7 +182,9 @@ namespace Microsoft.Extensions.Internal
             var anonymous = new SetOnly();
 
             // Act + Assert
-            var helper = Assert.Single(PropertyHelper.GetProperties(anonymous.GetType().GetTypeInfo()));
+            var helper = Assert.Single(
+                PropertyHelper.GetProperties(anonymous.GetType().GetTypeInfo())
+            );
             Assert.Equal("Prop6", helper.Name);
         }
 
@@ -216,8 +224,14 @@ namespace Microsoft.Extensions.Internal
             anonymous.StringProp = "Five";
 
             // Act + Assert
-            var helper1 = Assert.Single(PropertyHelper.GetProperties(anonymous.GetType().GetTypeInfo()).Where(prop => prop.Name == "IntProp"));
-            var helper2 = Assert.Single(PropertyHelper.GetProperties(anonymous.GetType().GetTypeInfo()).Where(prop => prop.Name == "StringProp"));
+            var helper1 = Assert.Single(
+                PropertyHelper.GetProperties(anonymous.GetType().GetTypeInfo())
+                    .Where(prop => prop.Name == "IntProp")
+            );
+            var helper2 = Assert.Single(
+                PropertyHelper.GetProperties(anonymous.GetType().GetTypeInfo())
+                    .Where(prop => prop.Name == "StringProp")
+            );
             Assert.Equal(3, helper1.GetValue(anonymous));
             Assert.Equal("Five", helper2.GetValue(anonymous));
         }
@@ -266,7 +280,11 @@ namespace Microsoft.Extensions.Internal
         public void PropertyHelper_ForDerived_WithVirtual()
         {
             // Arrange
-            var derived = new DerivedClassWithOverride { PropA = "propAValue", PropB = "propBValue" };
+            var derived = new DerivedClassWithOverride
+            {
+                PropA = "propAValue",
+                PropB = "propBValue"
+            };
 
             // Act
             var helpers = PropertyHelper.GetProperties(derived.GetType().GetTypeInfo()).ToArray();
@@ -294,8 +312,15 @@ namespace Microsoft.Extensions.Internal
             // Assert
             Assert.Collection(
                 helpers.OrderBy(helper => helper.Name, StringComparer.Ordinal),
-                helper => { Assert.Equal(expectedNames[0], helper.Name, StringComparer.Ordinal); },
-                helper => { Assert.Equal(expectedNames[1], helper.Name, StringComparer.Ordinal); });
+                helper =>
+                {
+                    Assert.Equal(expectedNames[0], helper.Name, StringComparer.Ordinal);
+                },
+                helper =>
+                {
+                    Assert.Equal(expectedNames[1], helper.Name, StringComparer.Ordinal);
+                }
+            );
         }
 
         [Fact]
@@ -310,10 +335,23 @@ namespace Microsoft.Extensions.Internal
             // Assert
             Assert.Collection(
                 helpers.OrderBy(helper => helper.Name, StringComparer.Ordinal),
-                helper => { Assert.Equal(expectedNames[0], helper.Name, StringComparer.Ordinal); },
-                helper => { Assert.Equal(expectedNames[1], helper.Name, StringComparer.Ordinal); },
-                helper => { Assert.Equal(expectedNames[2], helper.Name, StringComparer.Ordinal); },
-                helper => { Assert.Equal(expectedNames[3], helper.Name, StringComparer.Ordinal); });
+                helper =>
+                {
+                    Assert.Equal(expectedNames[0], helper.Name, StringComparer.Ordinal);
+                },
+                helper =>
+                {
+                    Assert.Equal(expectedNames[1], helper.Name, StringComparer.Ordinal);
+                },
+                helper =>
+                {
+                    Assert.Equal(expectedNames[2], helper.Name, StringComparer.Ordinal);
+                },
+                helper =>
+                {
+                    Assert.Equal(expectedNames[3], helper.Name, StringComparer.Ordinal);
+                }
+            );
         }
 
         [Fact]
@@ -486,8 +524,7 @@ namespace Microsoft.Extensions.Internal
         public void MakeFastPropertyGetter_ReferenceType_ForNullObject_Throws()
         {
             // Arrange
-            var property = PropertyHelper
-                .GetProperties(typeof(BaseClass))
+            var property = PropertyHelper.GetProperties(typeof(BaseClass))
                 .Single(p => p.Name == nameof(BaseClass.PropA));
 
             var accessor = PropertyHelper.MakeFastPropertyGetter(property.Property);
@@ -500,8 +537,7 @@ namespace Microsoft.Extensions.Internal
         public void MakeFastPropertyGetter_ValueType_ForNullObject_Throws()
         {
             // Arrange
-            var property = PropertyHelper
-                .GetProperties(typeof(MyProperties))
+            var property = PropertyHelper.GetProperties(typeof(MyProperties))
                 .Single(p => p.Name == nameof(MyProperties.StringProp));
 
             var accessor = PropertyHelper.MakeFastPropertyGetter(property.Property);
@@ -514,8 +550,7 @@ namespace Microsoft.Extensions.Internal
         public void MakeNullSafeFastPropertyGetter_ReferenceType_Success()
         {
             // Arrange
-            var property = PropertyHelper
-                .GetProperties(typeof(BaseClass))
+            var property = PropertyHelper.GetProperties(typeof(BaseClass))
                 .Single(p => p.Name == nameof(BaseClass.PropA));
 
             var accessor = PropertyHelper.MakeNullSafeFastPropertyGetter(property.Property);
@@ -531,8 +566,7 @@ namespace Microsoft.Extensions.Internal
         public void MakeNullSafeFastPropertyGetter_ValueType_Success()
         {
             // Arrange
-            var property = PropertyHelper
-                .GetProperties(typeof(MyProperties))
+            var property = PropertyHelper.GetProperties(typeof(MyProperties))
                 .Single(p => p.Name == nameof(MyProperties.StringProp));
 
             var accessor = PropertyHelper.MakeNullSafeFastPropertyGetter(property.Property);
@@ -548,8 +582,7 @@ namespace Microsoft.Extensions.Internal
         public void MakeNullSafeFastPropertyGetter_ReferenceType_ForNullObject_ReturnsNull()
         {
             // Arrange
-            var property = PropertyHelper
-                .GetProperties(typeof(BaseClass))
+            var property = PropertyHelper.GetProperties(typeof(BaseClass))
                 .Single(p => p.Name == nameof(BaseClass.PropA));
 
             var accessor = PropertyHelper.MakeNullSafeFastPropertyGetter(property.Property);
@@ -565,8 +598,7 @@ namespace Microsoft.Extensions.Internal
         public void MakeNullSafeFastPropertyGetter_ValueType_ForNullObject_ReturnsNull()
         {
             // Arrange
-            var property = PropertyHelper
-                .GetProperties(typeof(MyProperties))
+            var property = PropertyHelper.GetProperties(typeof(MyProperties))
                 .Single(p => p.Name == nameof(MyProperties.StringProp));
 
             var accessor = PropertyHelper.MakeNullSafeFastPropertyGetter(property.Property);
@@ -585,27 +617,15 @@ namespace Microsoft.Extensions.Internal
                 return new TheoryData<object, KeyValuePair<string, object>>
                 {
                     {
-                        new
-                        {
-                            selected = true,
-                            SeLeCtEd = false
-                        },
+                        new { selected = true, SeLeCtEd = false },
                         new KeyValuePair<string, object>("selected", false)
                     },
                     {
-                        new
-                        {
-                            SeLeCtEd = false,
-                            selected = true
-                        },
+                        new { SeLeCtEd = false, selected = true },
                         new KeyValuePair<string, object>("SeLeCtEd", true)
                     },
                     {
-                        new
-                        {
-                            SelECTeD = false,
-                            SeLECTED = true
-                        },
+                        new { SelECTeD = false, SeLECTED = true },
                         new KeyValuePair<string, object>("SelECTeD", true)
                     }
                 };
@@ -614,9 +634,10 @@ namespace Microsoft.Extensions.Internal
 
         [Theory]
         [MemberData(nameof(IgnoreCaseTestData))]
-        public void ObjectToDictionary_IgnoresPropertyCase(object testObject,
-                                                           KeyValuePair<string, object> expectedEntry)
-        {
+        public void ObjectToDictionary_IgnoresPropertyCase(
+            object testObject,
+            KeyValuePair<string, object> expectedEntry
+        ) {
             // Act
             var result = PropertyHelper.ObjectToDictionary(testObject);
 
@@ -758,7 +779,10 @@ namespace Microsoft.Extensions.Internal
 
         private class SetOnly
         {
-            public int Prop2 { set { } }
+            public int Prop2
+            {
+                set { }
+            }
             public int Prop6 { get; set; }
         }
 

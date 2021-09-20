@@ -14,10 +14,7 @@ namespace System.Security.Cryptography
     [UnsupportedOSPlatform("browser")]
     public class HMACMD5 : HMAC
     {
-        public HMACMD5()
-            : this(RandomNumberGenerator.GetBytes(BlockSize))
-        {
-        }
+        public HMACMD5() : this(RandomNumberGenerator.GetBytes(BlockSize)) { }
 
         public HMACMD5(byte[] key)
         {
@@ -37,10 +34,7 @@ namespace System.Security.Cryptography
 
         public override byte[] Key
         {
-            get
-            {
-                return base.Key;
-            }
+            get { return base.Key; }
             set
             {
                 if (value is null)
@@ -59,8 +53,7 @@ namespace System.Security.Cryptography
         protected override void HashCore(ReadOnlySpan<byte> source) =>
             _hMacCommon.AppendHashData(source);
 
-        protected override byte[] HashFinal() =>
-            _hMacCommon.FinalizeHashAndReset();
+        protected override byte[] HashFinal() => _hMacCommon.FinalizeHashAndReset();
 
         protected override bool TryHashFinal(Span<byte> destination, out int bytesWritten) =>
             _hMacCommon.TryFinalizeHashAndReset(destination, out bytesWritten);

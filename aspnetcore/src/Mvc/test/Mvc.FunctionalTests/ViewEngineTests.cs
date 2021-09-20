@@ -32,21 +32,21 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 yield return new[]
                 {
                     "ViewWithLayout",
-@"<layout>
+                    @"<layout>
 ViewWithLayout-Content
 </layout>"
                 };
                 yield return new[]
                 {
                     "ViewWithFullPath",
-@"<layout>
+                    @"<layout>
 ViewWithFullPath-content
 </layout>"
                 };
                 yield return new[]
                 {
                     "ViewWithNestedLayout",
-@"<layout>
+                    @"<layout>
 <nested-layout>
 /ViewEngine/ViewWithNestedLayout
 ViewWithNestedLayout-Content
@@ -80,7 +80,8 @@ ViewWithNestedLayout-Content
         public async Task RazorView_ExecutesPartialPagesWithCorrectContext()
         {
             // Arrange
-            var expected = @"<partial>98052
+            var expected =
+                @"<partial>98052
 
 </partial>
 <partial2>98052
@@ -103,7 +104,8 @@ test-value";
 
             // Act
             var body = await Client.GetStringAsync(
-                "http://localhost/ViewEngine/ViewWithPartialTakingModelFromIEnumerable");
+                "http://localhost/ViewEngine/ViewWithPartialTakingModelFromIEnumerable"
+            );
 
             // Assert
             Assert.Equal(expected, body.Trim());
@@ -114,11 +116,13 @@ test-value";
         {
             // Arrange
             var expected =
-@"<title>Page title</title>
+                @"<title>Page title</title>
 partial-contentcomponent-content";
 
             // Act
-            var body = await Client.GetStringAsync("http://localhost/ViewEngine/ViewPassesViewDataToLayout");
+            var body = await Client.GetStringAsync(
+                "http://localhost/ViewEngine/ViewPassesViewDataToLayout"
+            );
 
             // Assert
             Assert.Equal(expected, body.Trim(), ignoreLineEndingDifferences: true);
@@ -128,18 +132,21 @@ partial-contentcomponent-content";
         {
             get
             {
-                var expected1 = @"expander-index
+                var expected1 =
+                    @"expander-index
 gb-partial";
                 yield return new[] { "en-GB", expected1 };
 
-                var expected2 = @"fr-index
+                var expected2 =
+                    @"fr-index
 fr-partial";
                 yield return new[] { "fr", expected2 };
 
                 if (!TestPlatformHelper.IsMono)
                 {
                     // https://github.com/aspnet/Mvc/issues/2759
-                    var expected3 = @"expander-index
+                    var expected3 =
+                        @"expander-index
 expander-partial";
                     yield return new[] { "!-invalid-!", expected3 };
                 }
@@ -148,13 +155,23 @@ expander-partial";
 
         [Theory]
         [MemberData(nameof(RazorViewEngine_UsesAllExpandedPathsToLookForViewsData))]
-        public async Task RazorViewEngine_UsesViewExpandersForViewsAndPartials(string value, string expected)
-        {
+        public async Task RazorViewEngine_UsesViewExpandersForViewsAndPartials(
+            string value,
+            string expected
+        ) {
             // Arrange
             var cultureCookie = "c=" + value + "|uic=" + value;
-            var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/TemplateExpander");
-            request.Headers.Add("Cookie",
-                new CookieHeaderValue(CookieRequestCultureProvider.DefaultCookieName, cultureCookie).ToString());
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/TemplateExpander"
+            );
+            request.Headers.Add(
+                "Cookie",
+                new CookieHeaderValue(
+                    CookieRequestCultureProvider.DefaultCookieName,
+                    cultureCookie
+                ).ToString()
+            );
 
             // Act
             var response = await Client.SendAsync(request);
@@ -184,8 +201,10 @@ expander-partial";
 
         [Theory]
         [MemberData(nameof(ViewLocationExpanders_GetIsMainPageFromContextData))]
-        public async Task ViewLocationExpanders_GetIsMainPageFromContext(string action, string expected)
-        {
+        public async Task ViewLocationExpanders_GetIsMainPageFromContext(
+            string action,
+            string expected
+        ) {
             // Arrange & Act
             var body = await Client.GetStringAsync($"http://localhost/ExpanderViews/{action}");
 
@@ -197,28 +216,25 @@ expander-partial";
         {
             get
             {
-                yield return new[]
-                {
-                    "ViewWithoutLayout", "ViewWithoutLayout-Content"
-                };
+                yield return new[] { "ViewWithoutLayout", "ViewWithoutLayout-Content" };
                 yield return new[]
                 {
                     "PartialViewWithNamePassedIn",
-@"<layout>
+                    @"<layout>
 ViewWithLayout-Content
 </layout>"
                 };
                 yield return new[]
                 {
                     "ViewWithFullPath",
-@"<layout>
+                    @"<layout>
 ViewWithFullPath-content
 </layout>"
                 };
                 yield return new[]
                 {
                     "ViewWithNestedLayout",
-@"<layout>
+                    @"<layout>
 <nested-layout>
 /PartialViewEngine/ViewWithNestedLayout
 ViewWithNestedLayout-Content
@@ -227,7 +243,8 @@ ViewWithNestedLayout-Content
                 };
                 yield return new[]
                 {
-                    "PartialWithDataFromController", "<h1>hello from controller</h1>"
+                    "PartialWithDataFromController",
+                    "<h1>hello from controller</h1>"
                 };
                 yield return new[]
                 {
@@ -244,7 +261,9 @@ ViewWithNestedLayout-Content
         public async Task RazorViewEngine_RendersPartialViews(string actionName, string expected)
         {
             // Arrange & Act
-            var response = await Client.GetAsync("http://localhost/PartialViewEngine/" + actionName);
+            var response = await Client.GetAsync(
+                "http://localhost/PartialViewEngine/" + actionName
+            );
 
             // Assert
             await response.AssertStatusCodeAsync(HttpStatusCode.OK);
@@ -256,7 +275,8 @@ ViewWithNestedLayout-Content
         public async Task LayoutValueIsPassedBetweenNestedViewStarts()
         {
             // Arrange
-            var expected = @"<title>viewstart-value</title>
+            var expected =
+                @"<title>viewstart-value</title>
 ~/Views/NestedViewStarts/NestedViewStarts/Layout.cshtml
 index-content";
 
@@ -272,7 +292,7 @@ index-content";
             get
             {
                 var expected1 =
- @"<language-layout>View With Layout
+                    @"<language-layout>View With Layout
 </language-layout>";
 
                 yield return new[] { "en-GB", expected1 };
@@ -284,7 +304,7 @@ index-content";
                 }
 
                 var expected2 =
-@"<fr-language-layout>View With Layout
+                    @"<fr-language-layout>View With Layout
 </fr-language-layout>";
                 yield return new[] { "fr", expected2 };
             }
@@ -296,9 +316,17 @@ index-content";
         {
             // Arrange
             var cultureCookie = "c=" + value + "|uic=" + value;
-            var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/TemplateExpander/ViewWithLayout");
-            request.Headers.Add("Cookie",
-                new CookieHeaderValue(CookieRequestCultureProvider.DefaultCookieName, cultureCookie).ToString());
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/TemplateExpander/ViewWithLayout"
+            );
+            request.Headers.Add(
+                "Cookie",
+                new CookieHeaderValue(
+                    CookieRequestCultureProvider.DefaultCookieName,
+                    cultureCookie
+                ).ToString()
+            );
 
             // Act
             var response = await Client.SendAsync(request);
@@ -313,7 +341,7 @@ index-content";
         {
             // Arrange
             var expected =
-@"<view-start>Hello Controller-Person</view-start>
+                @"<view-start>Hello Controller-Person</view-start>
 <page>Hello Controller-Person</page>";
             var target = "http://localhost/NestedViewImports";
 
@@ -329,13 +357,15 @@ index-content";
         {
             // Arrange
             var expected =
-@"<title>View With Component With Layout</title>
+                @"<title>View With Component With Layout</title>
 Page Content
 <component-title>ViewComponent With Title</component-title>
 <component-body>Component With Layout</component-body>";
 
             // Act
-            var body = await Client.GetStringAsync("http://localhost/ViewEngine/ViewWithComponentThatHasLayout");
+            var body = await Client.GetStringAsync(
+                "http://localhost/ViewEngine/ViewWithComponentThatHasLayout"
+            );
 
             // Assert
             Assert.Equal(expected, body.Trim(), ignoreLineEndingDifferences: true);
@@ -346,7 +376,7 @@ Page Content
         {
             // Arrange
             var expected =
-@"<layout>
+                @"<layout>
 <nested-layout>
 /ViewEngine/ViewWithRelativePath
 ViewWithRelativePath-content
@@ -359,7 +389,9 @@ WriteLiteral says:<strong>Write says:98052WriteLiteral says:</strong></component
 </layout>";
 
             // Act
-            var body = await Client.GetStringAsync("http://localhost/ViewEngine/ViewWithRelativePath");
+            var body = await Client.GetStringAsync(
+                "http://localhost/ViewEngine/ViewWithRelativePath"
+            );
 
             // Assert
             Assert.Equal(expected, body.Trim(), ignoreLineEndingDifferences: true);
@@ -372,7 +404,9 @@ WriteLiteral says:<strong>Write says:98052WriteLiteral says:</strong></component
             var expected = @"<page-content>ViewComponent With ViewStart</page-content>";
 
             // Act
-            var body = await Client.GetStringAsync("http://localhost/ViewEngine/ViewWithComponentThatHasViewStart");
+            var body = await Client.GetStringAsync(
+                "http://localhost/ViewEngine/ViewWithComponentThatHasViewStart"
+            );
 
             // Assert
             Assert.Equal(expected, body.Trim());
@@ -385,7 +419,9 @@ WriteLiteral says:<strong>Write says:98052WriteLiteral says:</strong></component
             var expected = "Partial that does not specify Layout";
 
             // Act
-            var body = await Client.GetStringAsync("http://localhost/PartialsWithLayout/PartialDoesNotExecuteViewStarts");
+            var body = await Client.GetStringAsync(
+                "http://localhost/PartialsWithLayout/PartialDoesNotExecuteViewStarts"
+            );
 
             // Assert
             Assert.Equal(expected, body.Trim());
@@ -396,11 +432,13 @@ WriteLiteral says:<strong>Write says:98052WriteLiteral says:</strong></component
         {
             // Arrange
             var expected =
-@"<layout-for-viewstart-with-layout><layout-for-viewstart-with-layout>Partial that specifies Layout
+                @"<layout-for-viewstart-with-layout><layout-for-viewstart-with-layout>Partial that specifies Layout
 </layout-for-viewstart-with-layout>Partial that does not specify Layout</layout-for-viewstart-with-layout>";
 
             // Act
-            var body = await Client.GetStringAsync("http://localhost/PartialsWithLayout/PartialsRenderedViaRenderPartial");
+            var body = await Client.GetStringAsync(
+                "http://localhost/PartialsWithLayout/PartialsRenderedViaRenderPartial"
+            );
 
             // Assert
             Assert.Equal(expected, body.Trim(), ignoreLineEndingDifferences: true);
@@ -411,13 +449,15 @@ WriteLiteral says:<strong>Write says:98052WriteLiteral says:</strong></component
         {
             // Arrange
             var expected =
-@"<layout-for-viewstart-with-layout><layout-for-viewstart-with-layout>Partial that specifies Layout
+                @"<layout-for-viewstart-with-layout><layout-for-viewstart-with-layout>Partial that specifies Layout
 </layout-for-viewstart-with-layout>
 Partial that does not specify Layout
 </layout-for-viewstart-with-layout>";
 
             // Act
-            var response = await Client.GetAsync("http://localhost/PartialsWithLayout/PartialsRenderedViaPartial");
+            var response = await Client.GetAsync(
+                "http://localhost/PartialsWithLayout/PartialsRenderedViaPartial"
+            );
             await response.AssertStatusCodeAsync(HttpStatusCode.OK);
 
             var body = await response.Content.ReadAsStringAsync();
@@ -431,7 +471,11 @@ Partial that does not specify Layout
         {
             // Arrange
             var outputFile = "compiler/resources/ViewEngineController.ViewWithPaths.txt";
-            var expectedContent = await ResourceFile.ReadResourceAsync(_assembly, outputFile, sourceFile: false);
+            var expectedContent = await ResourceFile.ReadResourceAsync(
+                _assembly,
+                outputFile,
+                sourceFile: false
+            );
 
             // Act
             var responseContent = await Client.GetStringAsync("http://localhost/ViewWithPaths");
@@ -446,7 +490,7 @@ Partial that does not specify Layout
         {
             // Arrange
             var expected =
-@"Layout
+                @"Layout
 Page
 Partial";
 

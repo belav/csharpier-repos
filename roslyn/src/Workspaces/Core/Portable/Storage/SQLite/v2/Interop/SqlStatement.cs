@@ -38,14 +38,12 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
             _rawStatement = statement;
         }
 
-        internal void Close_OnlyForUseBySqlConnection()
-            => _rawStatement.Dispose();
+        internal void Close_OnlyForUseBySqlConnection() => _rawStatement.Dispose();
 
-        public void ClearBindings()
-            => _connection.ThrowIfNotOk(NativeMethods.sqlite3_clear_bindings(_rawStatement));
+        public void ClearBindings() =>
+            _connection.ThrowIfNotOk(NativeMethods.sqlite3_clear_bindings(_rawStatement));
 
-        public void Reset()
-            => _connection.ThrowIfNotOk(NativeMethods.sqlite3_reset(_rawStatement));
+        public void Reset() => _connection.ThrowIfNotOk(NativeMethods.sqlite3_reset(_rawStatement));
 
         public Result Step(bool throwOnError = true)
         {
@@ -90,38 +88,54 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
                 {
                     Span<byte> bytes = stackalloc byte[utf8ByteCount];
 #if NETCOREAPP
-                    Contract.ThrowIfFalse(Encoding.UTF8.GetBytes(value.AsSpan(), bytes) == utf8ByteCount);
+                    Contract.ThrowIfFalse(
+                        Encoding.UTF8.GetBytes(value.AsSpan(), bytes) == utf8ByteCount
+                    );
 #else
                     unsafe
                     {
-                        fixed (char* charsPtr = value)
-                        fixed (byte* bytesPtr = bytes)
+                        fixed (char* charsPtr = value)fixed (byte* bytesPtr = bytes)
                         {
-                            Contract.ThrowIfFalse(Encoding.UTF8.GetBytes(charsPtr, value.Length, bytesPtr, utf8ByteCount) == utf8ByteCount);
+                            Contract.ThrowIfFalse(
+                                Encoding.UTF8.GetBytes(
+                                    charsPtr,
+                                    value.Length,
+                                    bytesPtr,
+                                    utf8ByteCount
+                                ) == utf8ByteCount
+                            );
                         }
                     }
 #endif
-                    _connection.ThrowIfNotOk(NativeMethods.sqlite3_bind_text(_rawStatement, parameterIndex, bytes));
+                    _connection.ThrowIfNotOk(
+                        NativeMethods.sqlite3_bind_text(_rawStatement, parameterIndex, bytes)
+                    );
                     return;
                 }
             }
 
-            _connection.ThrowIfNotOk(NativeMethods.sqlite3_bind_text(_rawStatement, parameterIndex, value));
+            _connection.ThrowIfNotOk(
+                NativeMethods.sqlite3_bind_text(_rawStatement, parameterIndex, value)
+            );
         }
 
-        internal void BindInt64Parameter(int parameterIndex, long value)
-            => _connection.ThrowIfNotOk(NativeMethods.sqlite3_bind_int64(_rawStatement, parameterIndex, value));
+        internal void BindInt64Parameter(int parameterIndex, long value) =>
+            _connection.ThrowIfNotOk(
+                NativeMethods.sqlite3_bind_int64(_rawStatement, parameterIndex, value)
+            );
 
-        internal void BindBlobParameter(int parameterIndex, ReadOnlySpan<byte> bytes)
-            => _connection.ThrowIfNotOk(NativeMethods.sqlite3_bind_blob(_rawStatement, parameterIndex, bytes));
+        internal void BindBlobParameter(int parameterIndex, ReadOnlySpan<byte> bytes) =>
+            _connection.ThrowIfNotOk(
+                NativeMethods.sqlite3_bind_blob(_rawStatement, parameterIndex, bytes)
+            );
 
-        internal int GetInt32At(int columnIndex)
-            => NativeMethods.sqlite3_column_int(_rawStatement, columnIndex);
+        internal int GetInt32At(int columnIndex) =>
+            NativeMethods.sqlite3_column_int(_rawStatement, columnIndex);
 
-        internal long GetInt64At(int columnIndex)
-            => NativeMethods.sqlite3_column_int64(_rawStatement, columnIndex);
+        internal long GetInt64At(int columnIndex) =>
+            NativeMethods.sqlite3_column_int64(_rawStatement, columnIndex);
 
-        internal string GetStringAt(int columnIndex)
-            => NativeMethods.sqlite3_column_text(_rawStatement, columnIndex);
+        internal string GetStringAt(int columnIndex) =>
+            NativeMethods.sqlite3_column_text(_rawStatement, columnIndex);
     }
 }

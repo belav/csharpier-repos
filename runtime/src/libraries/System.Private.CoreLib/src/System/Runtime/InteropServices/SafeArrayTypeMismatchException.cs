@@ -10,17 +10,17 @@ namespace System.Runtime.InteropServices
     /// than the safe array sub type specified in the metadata.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class SafeArrayTypeMismatchException : SystemException
     {
-        public SafeArrayTypeMismatchException()
-            : base(SR.Arg_SafeArrayTypeMismatchException)
+        public SafeArrayTypeMismatchException() : base(SR.Arg_SafeArrayTypeMismatchException)
         {
             HResult = HResults.COR_E_SAFEARRAYTYPEMISMATCH;
         }
 
-        public SafeArrayTypeMismatchException(string? message)
-            : base(message)
+        public SafeArrayTypeMismatchException(string? message) : base(message)
         {
             HResult = HResults.COR_E_SAFEARRAYTYPEMISMATCH;
         }
@@ -31,8 +31,9 @@ namespace System.Runtime.InteropServices
             HResult = HResults.COR_E_SAFEARRAYTYPEMISMATCH;
         }
 
-        protected SafeArrayTypeMismatchException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected SafeArrayTypeMismatchException(
+            SerializationInfo info,
+            StreamingContext context
+        ) : base(info, context) { }
     }
 }

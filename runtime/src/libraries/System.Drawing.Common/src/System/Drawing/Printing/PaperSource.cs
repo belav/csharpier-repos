@@ -65,9 +65,7 @@ namespace System.Drawing.Printing
         /// </summary>
         public override string ToString()
         {
-            return "[PaperSource " + SourceName
-                + " Kind=" + Kind.ToString()
-                + "]";
+            return "[PaperSource " + SourceName + " Kind=" + Kind.ToString() + "]";
         }
     }
 }

@@ -15,13 +15,20 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public void CopyConstructor_CopiesAllProperties()
         {
             // Arrange
-            var propertyModel = new PropertyModel(typeof(TestController).GetProperty("Property"),
-                                               new List<object>() { new FromBodyAttribute() });
+            var propertyModel = new PropertyModel(
+                typeof(TestController).GetProperty("Property"),
+                new List<object>() { new FromBodyAttribute() }
+            );
 
-            propertyModel.Controller = new ControllerModel(typeof(TestController).GetTypeInfo(), new List<object>());
+            propertyModel.Controller = new ControllerModel(
+                typeof(TestController).GetTypeInfo(),
+                new List<object>()
+            );
             propertyModel.BindingInfo = BindingInfo.GetBindingInfo(propertyModel.Attributes);
             propertyModel.PropertyName = "Property";
-            propertyModel.Properties.Add(new KeyValuePair<object, object>("test key", "test value"));
+            propertyModel.Properties.Add(
+                new KeyValuePair<object, object>("test key", "test value")
+            );
 
             // Act
             var propertyModel2 = new PropertyModel(propertyModel);
@@ -45,16 +52,18 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                     // Ensure non-default value
                     Assert.NotEmpty((IEnumerable<object>)value1);
                 }
-                else if (typeof(IDictionary<object, object>).IsAssignableFrom(property.PropertyType))
-                {
+                else if (
+                    typeof(IDictionary<object, object>).IsAssignableFrom(property.PropertyType)
+                ) {
                     Assert.Equal(value1, value2);
 
                     // Ensure non-default value
                     Assert.NotEmpty((IDictionary<object, object>)value1);
                 }
-                else if (property.PropertyType.GetTypeInfo().IsValueType ||
-                    Nullable.GetUnderlyingType(property.PropertyType) != null)
-                {
+                else if (
+                    property.PropertyType.GetTypeInfo().IsValueType
+                    || Nullable.GetUnderlyingType(property.PropertyType) != null
+                ) {
                     Assert.Equal(value1, value2);
 
                     // Ensure non-default value

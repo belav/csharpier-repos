@@ -17,8 +17,7 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Can_use_sequential_GUID_end_to_end_async()
         {
-            var serviceProvider = new ServiceCollection()
-                .AddEntityFrameworkSqlServer()
+            var serviceProvider = new ServiceCollection().AddEntityFrameworkSqlServer()
                 .BuildServiceProvider();
 
             using (var context = new BronieContext(serviceProvider, TestStore.Name))
@@ -27,8 +26,7 @@ namespace Microsoft.EntityFrameworkCore
 
                 for (var i = 0; i < 50; i++)
                 {
-                    context.Add(
-                        new Pegasus { Name = "Rainbow Dash " + i });
+                    context.Add(new Pegasus { Name = "Rainbow Dash " + i });
                 }
 
                 await context.SaveChangesAsync();
@@ -48,8 +46,7 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Can_use_explicit_values()
         {
-            var serviceProvider = new ServiceCollection()
-                .AddEntityFrameworkSqlServer()
+            var serviceProvider = new ServiceCollection().AddEntityFrameworkSqlServer()
                 .BuildServiceProvider();
 
             var guids = new List<Guid>();
@@ -67,7 +64,9 @@ namespace Microsoft.EntityFrameworkCore
                                 Name = "Rainbow Dash " + i,
                                 Index = i,
                                 Id = Guid.NewGuid()
-                            }).Entity.Id);
+                            }
+                        ).Entity.Id
+                    );
                 }
 
                 await context.SaveChangesAsync();
@@ -98,9 +97,11 @@ namespace Microsoft.EntityFrameworkCore
 
             public DbSet<Pegasus> Pegasuses { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
-                    .UseSqlServer(SqlServerTestStore.CreateConnectionString(_databaseName), b => b.ApplyConfiguration())
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder.UseSqlServer(
+                        SqlServerTestStore.CreateConnectionString(_databaseName),
+                        b => b.ApplyConfiguration()
+                    )
                     .UseInternalServiceProvider(_serviceProvider);
         }
 
@@ -118,7 +119,6 @@ namespace Microsoft.EntityFrameworkCore
 
         protected SqlServerTestStore TestStore { get; }
 
-        public virtual void Dispose()
-            => TestStore.Dispose();
+        public virtual void Dispose() => TestStore.Dispose();
     }
 }

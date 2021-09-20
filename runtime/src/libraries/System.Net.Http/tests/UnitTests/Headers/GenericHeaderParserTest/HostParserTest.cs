@@ -58,12 +58,18 @@ namespace System.Net.Http.Tests
 
         #region Helper methods
 
-        private void CheckValidParsedValue(string input, int startIndex, string expectedResult, int expectedIndex)
-        {
+        private void CheckValidParsedValue(
+            string input,
+            int startIndex,
+            string expectedResult,
+            int expectedIndex
+        ) {
             HttpHeaderParser parser = GenericHeaderParser.HostParser;
             object result = null;
-            Assert.True(parser.TryParseValue(input, null, ref startIndex, out result),
-                string.Format("TryParse returned false: {0}", input));
+            Assert.True(
+                parser.TryParseValue(input, null, ref startIndex, out result),
+                string.Format("TryParse returned false: {0}", input)
+            );
             Assert.Equal(expectedIndex, startIndex);
             Assert.Equal(expectedResult, result);
         }
@@ -73,8 +79,10 @@ namespace System.Net.Http.Tests
             HttpHeaderParser parser = GenericHeaderParser.HostParser;
             object result = null;
             int newIndex = startIndex;
-            Assert.False(parser.TryParseValue(input, null, ref newIndex, out result),
-                string.Format("TryParse returned true: {0}", input));
+            Assert.False(
+                parser.TryParseValue(input, null, ref newIndex, out result),
+                string.Format("TryParse returned true: {0}", input)
+            );
             Assert.Null(result);
             Assert.Equal(startIndex, newIndex);
         }

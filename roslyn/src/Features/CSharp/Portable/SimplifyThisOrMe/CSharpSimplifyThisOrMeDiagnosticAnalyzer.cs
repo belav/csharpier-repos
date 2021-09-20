@@ -17,22 +17,31 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyThisOrMe
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal sealed class CSharpSimplifyThisOrMeDiagnosticAnalyzer
         : AbstractSimplifyThisOrMeDiagnosticAnalyzer<
-            SyntaxKind,
-            ExpressionSyntax,
-            ThisExpressionSyntax,
-            MemberAccessExpressionSyntax>
+              SyntaxKind,
+              ExpressionSyntax,
+              ThisExpressionSyntax,
+              MemberAccessExpressionSyntax
+          >
     {
-        protected override string GetLanguageName()
-            => LanguageNames.CSharp;
+        protected override string GetLanguageName() => LanguageNames.CSharp;
 
-        protected override ISyntaxFacts GetSyntaxFacts()
-            => CSharpSyntaxFacts.Instance;
+        protected override ISyntaxFacts GetSyntaxFacts() => CSharpSyntaxFacts.Instance;
 
         protected override bool CanSimplifyTypeNameExpression(
-            SemanticModel model, MemberAccessExpressionSyntax node, OptionSet optionSet,
-            out TextSpan issueSpan, CancellationToken cancellationToken)
-        {
-            return ExpressionSimplifier.Instance.TrySimplify(node, model, optionSet, out _, out issueSpan, cancellationToken);
+            SemanticModel model,
+            MemberAccessExpressionSyntax node,
+            OptionSet optionSet,
+            out TextSpan issueSpan,
+            CancellationToken cancellationToken
+        ) {
+            return ExpressionSimplifier.Instance.TrySimplify(
+                node,
+                model,
+                optionSet,
+                out _,
+                out issueSpan,
+                cancellationToken
+            );
         }
     }
 }

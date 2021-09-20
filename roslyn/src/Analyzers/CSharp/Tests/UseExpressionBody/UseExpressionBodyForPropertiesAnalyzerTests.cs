@@ -17,12 +17,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 {
     using VerifyCS = CSharpCodeFixVerifier<
         UseExpressionBodyDiagnosticAnalyzer,
-        UseExpressionBodyCodeFixProvider>;
+        UseExpressionBodyCodeFixProvider
+    >;
 
     public class UseExpressionBodyForPropertiesAnalyzerTests
     {
-        private static async Task TestWithUseExpressionBody(string code, string fixedCode, LanguageVersion version = LanguageVersion.CSharp8)
-        {
+        private static async Task TestWithUseExpressionBody(
+            string code,
+            string fixedCode,
+            LanguageVersion version = LanguageVersion.CSharp8
+        ) {
             await new VerifyCS.Test
             {
                 TestCode = code,
@@ -30,8 +34,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                 LanguageVersion = version,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, ExpressionBodyPreference.WhenPossible },
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, ExpressionBodyPreference.Never },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                        ExpressionBodyPreference.WhenPossible
+                    },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                        ExpressionBodyPreference.Never
+                    },
                 },
                 MarkupOptions = MarkupOptions.None,
             }.RunAsync();
@@ -45,8 +55,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                 FixedCode = fixedCode,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, ExpressionBodyPreference.Never },
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, ExpressionBodyPreference.Never },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                        ExpressionBodyPreference.Never
+                    },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                        ExpressionBodyPreference.Never
+                    },
                 },
                 MarkupOptions = MarkupOptions.None,
             }.RunAsync();
@@ -55,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseExpressionBody1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     int Bar() { return 0; }
@@ -68,7 +85,8 @@ class C
         }
     }|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     int Bar() { return 0; }
@@ -81,7 +99,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestMissingWithSetter()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     int Bar() { return 0; }
@@ -104,7 +123,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestMissingWithAttribute()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class AAttribute : Attribute {}
@@ -128,7 +148,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestMissingOnSetter1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void Bar() { }
@@ -147,7 +168,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseExpressionBody3()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -160,7 +182,8 @@ class C
         }
     }|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class C
@@ -173,7 +196,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseExpressionBody4()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -186,7 +210,8 @@ class C
         }
     }|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class C
@@ -199,14 +224,16 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseBlockBody1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     int Bar() { return 0; }
 
     {|IDE0025:int Goo => Bar();|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     int Bar() { return 0; }
@@ -226,14 +253,16 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseBlockBodyForAccessorEventWhenAccessorWantExpression1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     int Bar() { return 0; }
 
     {|IDE0025:int Goo => Bar();|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     int Bar() { return 0; }
@@ -249,8 +278,14 @@ class C
                 FixedCode = fixedCode,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, ExpressionBodyPreference.Never },
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, ExpressionBodyPreference.WhenPossible },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                        ExpressionBodyPreference.Never
+                    },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                        ExpressionBodyPreference.WhenPossible
+                    },
                 },
                 MarkupOptions = MarkupOptions.None,
                 NumberOfFixAllIterations = 2,
@@ -261,14 +296,16 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseBlockBody3()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
 {
     {|IDE0025:int Goo => throw new NotImplementedException();|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class C
@@ -287,14 +324,16 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseBlockBody4()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
 {
     {|IDE0025:int Goo => throw new NotImplementedException();|} // comment
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class C
@@ -314,7 +353,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestUseExpressionBodyKeepTrailingTrivia()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     private string _prop = ""HELLO THERE!"";
@@ -322,7 +362,8 @@ class C
 
     public string OtherThing => ""Pickles"";
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     private string _prop = ""HELLO THERE!"";
@@ -337,7 +378,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestDirectivesInBlockBody1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     int Bar() { return 0; }
@@ -355,7 +397,8 @@ class C
         }
     }|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     int Bar() { return 0; }
@@ -376,7 +419,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestDirectivesInBlockBody2()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     int Bar() { return 0; }
@@ -394,7 +438,8 @@ class C
         }
     }|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     int Bar() { return 0; }
@@ -415,7 +460,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestMissingWithDirectivesInExpressionBody1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     int Bar() { return 0; }
@@ -435,7 +481,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestMissingWithDirectivesInExpressionBody2()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     int Bar() { return 0; }
@@ -456,14 +503,16 @@ class C
         public async Task TestMoveTriviaFromExpressionToReturnStatement()
         {
             // TODO: This test is unrelated to properties. It should be moved to UseExpressionBodyForMethodsAnalyzerTests.
-            var code = @"
+            var code =
+                @"
 class C
 {
     {|IDE0022:int Goo(int i) =>
         //comment
         i * i;|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     int Goo(int i)
@@ -479,13 +528,15 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestOfferToConvertToBlockEvenIfExpressionBodyPreferredIfHasThrowExpressionPriorToCSharp7()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 class C
 {
     {|IDE0025:int Goo => {|CS8059:throw new NotImplementedException()|};|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 class C
 {
@@ -504,14 +555,16 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task TestOfferToConvertToBlockEvenIfExpressionBodyPreferredIfHasThrowExpressionPriorToCSharp7_FixAll()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 class C
 {
     {|IDE0025:int Goo => {|CS8059:throw new NotImplementedException()|};|}
     {|IDE0025:int Bar => {|CS8059:throw new NotImplementedException()|};|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 class C
 {

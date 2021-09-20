@@ -15,8 +15,11 @@ namespace System.Text
         public abstract Encoding? GetEncoding(int codepage);
 
         // GetEncoding should return either valid encoding or null. shouldn't throw any exception except on null name
-        public virtual Encoding? GetEncoding(string name, EncoderFallback encoderFallback, DecoderFallback decoderFallback)
-        {
+        public virtual Encoding? GetEncoding(
+            string name,
+            EncoderFallback encoderFallback,
+            DecoderFallback decoderFallback
+        ) {
             Encoding? enc = GetEncoding(name);
             if (enc != null)
             {
@@ -28,8 +31,11 @@ namespace System.Text
             return enc;
         }
 
-        public virtual Encoding? GetEncoding(int codepage, EncoderFallback encoderFallback, DecoderFallback decoderFallback)
-        {
+        public virtual Encoding? GetEncoding(
+            int codepage,
+            EncoderFallback encoderFallback,
+            DecoderFallback decoderFallback
+        ) {
             Encoding? enc = GetEncoding(codepage);
             if (enc != null)
             {
@@ -54,9 +60,15 @@ namespace System.Text
             // they're generally not added concurrently.  So use an optimistic concurrency scheme rather than paying for a lock
             // object allocation on the startup path.
 
-            if (s_providers is null &&
-                Interlocked.CompareExchange(ref s_providers, new EncodingProvider[1] { provider }, null) is null)
-            {
+            if (
+                s_providers is null
+                && Interlocked.CompareExchange(
+                    ref s_providers,
+                    new EncodingProvider[1] { provider },
+                    null
+                )
+                    is null
+            ) {
                 return;
             }
 
@@ -73,8 +85,10 @@ namespace System.Text
                 Array.Copy(providers, newProviders, providers.Length);
                 providers[^1] = provider;
 
-                if (Interlocked.CompareExchange(ref s_providers, newProviders, providers) == providers)
-                {
+                if (
+                    Interlocked.CompareExchange(ref s_providers, newProviders, providers)
+                    == providers
+                ) {
                     return;
                 }
             }
@@ -135,8 +149,11 @@ namespace System.Text
             return null;
         }
 
-        internal static Encoding? GetEncodingFromProvider(int codepage, EncoderFallback enc, DecoderFallback dec)
-        {
+        internal static Encoding? GetEncodingFromProvider(
+            int codepage,
+            EncoderFallback enc,
+            DecoderFallback dec
+        ) {
             if (s_providers == null)
                 return null;
 
@@ -151,8 +168,11 @@ namespace System.Text
             return null;
         }
 
-        internal static Encoding? GetEncodingFromProvider(string encodingName, EncoderFallback enc, DecoderFallback dec)
-        {
+        internal static Encoding? GetEncodingFromProvider(
+            string encodingName,
+            EncoderFallback enc,
+            DecoderFallback dec
+        ) {
             if (s_providers == null)
                 return null;
 

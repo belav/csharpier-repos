@@ -7,7 +7,9 @@ using Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal;
 using Microsoft.EntityFrameworkCore.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly: DesignTimeProviderServices("Microsoft.EntityFrameworkCore.SqlServer.Design.Internal.SqlServerDesignTimeServices")]
+[assembly: DesignTimeProviderServices(
+    "Microsoft.EntityFrameworkCore.SqlServer.Design.Internal.SqlServerDesignTimeServices"
+)]
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
 {
@@ -30,8 +32,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
             Check.NotNull(serviceCollection, nameof(serviceCollection));
 
             serviceCollection.AddEntityFrameworkSqlServer();
-            new EntityFrameworkRelationalDesignServicesBuilder(serviceCollection)
-                .TryAdd<IAnnotationCodeGenerator, SqlServerAnnotationCodeGenerator>()
+            new EntityFrameworkRelationalDesignServicesBuilder(serviceCollection).TryAdd<
+                IAnnotationCodeGenerator,
+                SqlServerAnnotationCodeGenerator
+            >()
                 .TryAdd<IDatabaseModelFactory, SqlServerDatabaseModelFactory>()
                 .TryAdd<IProviderConfigurationCodeGenerator, SqlServerCodeGenerator>()
                 .TryAddCoreServices();

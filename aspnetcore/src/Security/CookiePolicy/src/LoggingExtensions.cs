@@ -22,39 +22,48 @@ namespace Microsoft.Extensions.Logging
             _needsConsent = LoggerMessage.Define<bool>(
                 eventId: new EventId(1, "NeedsConsent"),
                 logLevel: LogLevel.Trace,
-                formatString: "Needs consent: {needsConsent}.");
+                formatString: "Needs consent: {needsConsent}."
+            );
             _hasConsent = LoggerMessage.Define<bool>(
                 eventId: new EventId(2, "HasConsent"),
                 logLevel: LogLevel.Trace,
-                formatString: "Has consent: {hasConsent}.");
+                formatString: "Has consent: {hasConsent}."
+            );
             _consentGranted = LoggerMessage.Define(
                 eventId: new EventId(3, "ConsentGranted"),
                 logLevel: LogLevel.Debug,
-                formatString: "Consent granted.");
+                formatString: "Consent granted."
+            );
             _consentWithdrawn = LoggerMessage.Define(
                 eventId: new EventId(4, "ConsentWithdrawn"),
                 logLevel: LogLevel.Debug,
-                formatString: "Consent withdrawn.");
+                formatString: "Consent withdrawn."
+            );
             _cookieSuppressed = LoggerMessage.Define<string>(
                 eventId: new EventId(5, "CookieSuppressed"),
                 logLevel: LogLevel.Debug,
-                formatString: "Cookie '{key}' suppressed due to consent policy.");
+                formatString: "Cookie '{key}' suppressed due to consent policy."
+            );
             _deleteCookieSuppressed = LoggerMessage.Define<string>(
                 eventId: new EventId(6, "DeleteCookieSuppressed"),
                 logLevel: LogLevel.Debug,
-                formatString: "Delete cookie '{key}' suppressed due to developer policy.");
+                formatString: "Delete cookie '{key}' suppressed due to developer policy."
+            );
             _upgradedToSecure = LoggerMessage.Define<string>(
                 eventId: new EventId(7, "UpgradedToSecure"),
                 logLevel: LogLevel.Debug,
-                formatString: "Cookie '{key}' upgraded to 'secure'.");
+                formatString: "Cookie '{key}' upgraded to 'secure'."
+            );
             _upgradedSameSite = LoggerMessage.Define<string, string>(
                 eventId: new EventId(8, "UpgradedSameSite"),
                 logLevel: LogLevel.Debug,
-                formatString: "Cookie '{key}' same site mode upgraded to '{mode}'.");
+                formatString: "Cookie '{key}' same site mode upgraded to '{mode}'."
+            );
             _upgradedToHttpOnly = LoggerMessage.Define<string>(
                 eventId: new EventId(9, "UpgradedToHttpOnly"),
                 logLevel: LogLevel.Debug,
-                formatString: "Cookie '{key}' upgraded to 'httponly'.");
+                formatString: "Cookie '{key}' upgraded to 'httponly'."
+            );
         }
 
         public static void NeedsConsent(this ILogger logger, bool needsConsent)

@@ -12,7 +12,6 @@ public class PerfNotIf
     int icount = 100000000;
     bool m_i;
 
-
     PerfNotIf()
     {
         m_i = true;
@@ -28,7 +27,6 @@ public class PerfNotIf
         notIf(m_i);
         int t2 = Environment.TickCount;
         Console.WriteLine("Time for not & if:\t" + (t2 - t1) + " ms");
-
     }
 
     private bool notIf(bool i)

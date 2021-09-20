@@ -33,7 +33,9 @@ namespace Microsoft.Extensions.Configuration
             foreach (IConfigurationProvider p in providers)
             {
                 p.Load();
-                _changeTokenRegistrations.Add(ChangeToken.OnChange(() => p.GetReloadToken(), () => RaiseChanged()));
+                _changeTokenRegistrations.Add(
+                    ChangeToken.OnChange(() => p.GetReloadToken(), () => RaiseChanged())
+                );
             }
         }
 
@@ -81,7 +83,8 @@ namespace Microsoft.Extensions.Configuration
         /// Gets the immediate children sub-sections.
         /// </summary>
         /// <returns>The children.</returns>
-        public IEnumerable<IConfigurationSection> GetChildren() => this.GetChildrenImplementation(null);
+        public IEnumerable<IConfigurationSection> GetChildren() =>
+            this.GetChildrenImplementation(null);
 
         /// <summary>
         /// Returns a <see cref="IChangeToken"/> that can be used to observe when this configuration is reloaded.
@@ -98,8 +101,7 @@ namespace Microsoft.Extensions.Configuration
         ///     This method will never return <c>null</c>. If no matching sub-section is found with the specified key,
         ///     an empty <see cref="IConfigurationSection"/> will be returned.
         /// </remarks>
-        public IConfigurationSection GetSection(string key)
-            => new ConfigurationSection(this, key);
+        public IConfigurationSection GetSection(string key) => new ConfigurationSection(this, key);
 
         /// <summary>
         /// Force the configuration values to be reloaded from the underlying sources.
@@ -115,7 +117,10 @@ namespace Microsoft.Extensions.Configuration
 
         private void RaiseChanged()
         {
-            ConfigurationReloadToken previousToken = Interlocked.Exchange(ref _changeToken, new ConfigurationReloadToken());
+            ConfigurationReloadToken previousToken = Interlocked.Exchange(
+                ref _changeToken,
+                new ConfigurationReloadToken()
+            );
             previousToken.OnReload();
         }
 

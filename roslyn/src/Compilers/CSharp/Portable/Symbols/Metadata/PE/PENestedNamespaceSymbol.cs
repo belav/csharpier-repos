@@ -18,8 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
     /// Namespaces that differ only by casing in name are not merged.
     /// </summary>
     /// <remarks></remarks>
-    internal sealed class PENestedNamespaceSymbol
-        : PENamespaceSymbol
+    internal sealed class PENestedNamespaceSymbol : PENamespaceSymbol
     {
         /// <summary>
         /// The parent namespace. There is always one, Global namespace contains all
@@ -70,8 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         internal PENestedNamespaceSymbol(
             string name,
             PENamespaceSymbol containingNamespace,
-            IEnumerable<IGrouping<string, TypeDefinitionHandle>> typesByNS)
-        {
+            IEnumerable<IGrouping<string, TypeDefinitionHandle>> typesByNS
+        ) {
             Debug.Assert(name != null);
             Debug.Assert((object)containingNamespace != null);
             Debug.Assert(typesByNS != null);
@@ -93,34 +92,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         public override string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         public override bool IsGlobalNamespace
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override AssemblySymbol ContainingAssembly
         {
-            get
-            {
-                return ContainingPEModule.ContainingAssembly;
-            }
+            get { return ContainingPEModule.ContainingAssembly; }
         }
 
         internal override ModuleSymbol ContainingModule
         {
-            get
-            {
-                return _containingNamespaceSymbol.ContainingPEModule;
-            }
+            get { return _containingNamespaceSymbol.ContainingPEModule; }
         }
 
         protected override void EnsureAllMembersLoaded()

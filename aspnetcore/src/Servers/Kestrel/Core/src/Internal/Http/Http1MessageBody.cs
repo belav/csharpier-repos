@@ -24,13 +24,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             RequestKeepAlive = keepAlive;
         }
 
-        public override ValueTask<ReadResult> ReadAsync(CancellationToken cancellationToken = default)
-        {
+        public override ValueTask<ReadResult> ReadAsync(
+            CancellationToken cancellationToken = default
+        ) {
             ThrowIfReaderCompleted();
             return ReadAsyncInternal(cancellationToken);
         }
 
-        public abstract ValueTask<ReadResult> ReadAsyncInternal(CancellationToken cancellationToken = default);
+        public abstract ValueTask<ReadResult> ReadAsyncInternal(
+            CancellationToken cancellationToken = default
+        );
 
         public override bool TryRead(out ReadResult readResult)
         {
@@ -69,7 +72,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             }
             catch (InvalidOperationException ex)
             {
-                var connectionAbortedException = new ConnectionAbortedException(CoreStrings.ConnectionAbortedByApplication, ex);
+                var connectionAbortedException = new ConnectionAbortedException(
+                    CoreStrings.ConnectionAbortedByApplication,
+                    ex
+                );
                 _context.ReportApplicationError(connectionAbortedException);
 
                 // Have to abort the connection because we can't finish draining the request
@@ -84,7 +90,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         {
             Log.RequestBodyNotEntirelyRead(_context.ConnectionIdFeature, _context.TraceIdentifier);
 
-            _context.TimeoutControl.SetTimeout(Constants.RequestBodyDrainTimeout.Ticks, TimeoutReason.RequestBodyDrain);
+            _context.TimeoutControl.SetTimeout(
+                Constants.RequestBodyDrainTimeout.Ticks,
+                TimeoutReason.RequestBodyDrain
+            );
 
             try
             {
@@ -99,13 +108,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             {
                 _context.SetBadRequestState(ex);
             }
-            catch (OperationCanceledException ex) when (ex is ConnectionAbortedException || ex is TaskCanceledException)
+            catch (OperationCanceledException ex)
+                when (ex is ConnectionAbortedException || ex is TaskCanceledException)
             {
-                Log.RequestBodyDrainTimedOut(_context.ConnectionIdFeature, _context.TraceIdentifier);
+                Log.RequestBodyDrainTimedOut(
+                    _context.ConnectionIdFeature,
+                    _context.TraceIdentifier
+                );
             }
             catch (InvalidOperationException ex)
             {
-                var connectionAbortedException = new ConnectionAbortedException(CoreStrings.ConnectionAbortedByApplication, ex);
+                var connectionAbortedException = new ConnectionAbortedException(
+                    CoreStrings.ConnectionAbortedByApplication,
+                    ex
+                );
                 _context.ReportApplicationError(connectionAbortedException);
 
                 // Have to abort the connection because we can't finish draining the request
@@ -120,8 +136,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         public static MessageBody For(
             HttpVersion httpVersion,
             HttpRequestHeaders headers,
-            Http1Connection context)
-        {
+            Http1Connection context
+        ) {
             // see also http://tools.ietf.org/html/rfc2616#section-4.4
             var keepAlive = httpVersion != HttpVersion.Http10;
             var upgrade = false;
@@ -138,10 +154,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             // Ignore upgrades if the request has a body. Technically it's possible to support, but we'd have to add a lot
             // more logic to allow reading/draining the normal body before the connection could be fully upgraded.
             // See https://tools.ietf.org/html/rfc7230#section-6.7, https://tools.ietf.org/html/rfc7540#section-3.2
-            if (upgrade
+            if (
+                upgrade
                 && headers.ContentLength.GetValueOrDefault() == 0
-                && headers.HeaderTransferEncoding.Count == 0)
-            {
+                && headers.HeaderTransferEncoding.Count == 0
+            ) {
                 context.OnTrailersComplete(); // No trailers for these.
                 return new Http1UpgradeMessageBody(context, keepAlive);
             }
@@ -159,7 +176,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 // status code and then close the connection.
                 if (transferCoding != TransferCoding.Chunked)
                 {
-                    KestrelBadHttpRequestException.Throw(RequestRejectionReason.FinalTransferCodingNotChunked, transferEncoding);
+                    KestrelBadHttpRequestException.Throw(
+                        RequestRejectionReason.FinalTransferCodingNotChunked,
+                        transferEncoding
+                    );
                 }
 
                 // TODO may push more into the wrapper rather than just calling into the message body
@@ -173,7 +193,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
                 if (contentLength == 0)
                 {
-                    return keepAlive ? MessageBody.ZeroContentLengthKeepAlive : MessageBody.ZeroContentLengthClose;
+                    return keepAlive
+                        ? MessageBody.ZeroContentLengthKeepAlive
+                        : MessageBody.ZeroContentLengthClose;
                 }
 
                 return new Http1ContentLengthMessageBody(context, contentLength, keepAlive);
@@ -183,12 +205,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             // Reject with 411 Length Required.
             if (context.Method == HttpMethod.Post || context.Method == HttpMethod.Put)
             {
-                var requestRejectionReason = httpVersion == HttpVersion.Http11 ? RequestRejectionReason.LengthRequired : RequestRejectionReason.LengthRequiredHttp10;
+                var requestRejectionReason =
+                    httpVersion == HttpVersion.Http11
+                        ? RequestRejectionReason.LengthRequired
+                        : RequestRejectionReason.LengthRequiredHttp10;
                 KestrelBadHttpRequestException.Throw(requestRejectionReason, context.Method);
             }
 
             context.OnTrailersComplete(); // No trailers for these.
-            return keepAlive ? MessageBody.ZeroContentLengthKeepAlive : MessageBody.ZeroContentLengthClose;
+            return keepAlive
+                ? MessageBody.ZeroContentLengthKeepAlive
+                : MessageBody.ZeroContentLengthClose;
         }
 
         [StackTraceHidden]
@@ -196,7 +223,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
         {
             if (_readerCompleted)
             {
-                throw new InvalidOperationException("Reading is not allowed after the reader was completed.");
+                throw new InvalidOperationException(
+                    "Reading is not allowed after the reader was completed."
+                );
             }
         }
 
@@ -210,7 +239,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             // closing the connection without a response as expected.
             _context.OnInputOrOutputCompleted();
 
-            KestrelBadHttpRequestException.Throw(RequestRejectionReason.UnexpectedEndOfRequestContent);
+            KestrelBadHttpRequestException.Throw(
+                RequestRejectionReason.UnexpectedEndOfRequestContent
+            );
         }
     }
 }

@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.Classification
 
         public ClassifiedSpansAndHighlightSpan(
             ImmutableArray<ClassifiedSpan> classifiedSpans,
-            TextSpan highlightSpan)
-        {
+            TextSpan highlightSpan
+        ) {
             ClassifiedSpans = classifiedSpans;
             HighlightSpan = highlightSpan;
         }

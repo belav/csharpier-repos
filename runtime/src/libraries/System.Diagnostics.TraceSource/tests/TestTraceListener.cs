@@ -24,13 +24,9 @@ namespace System.Diagnostics.TraceSourceTests
 
         private const int MethodEnumCount = 9;
 
-        public TestTraceListener(bool threadSafe = false)
-            : this(null, threadSafe)
-        {
-        }
+        public TestTraceListener(bool threadSafe = false) : this(null, threadSafe) { }
 
-        public TestTraceListener(string name, bool threadSafe = false)
-            : base(name)
+        public TestTraceListener(string name, bool threadSafe = false) : base(name)
         {
             _threadSafe = threadSafe;
             _calls = new int[MethodEnumCount];
@@ -41,10 +37,7 @@ namespace System.Diagnostics.TraceSourceTests
 
         public override bool IsThreadSafe
         {
-            get
-            {
-                return _threadSafe;
-            }
+            get { return _threadSafe; }
         }
 
         /// <summary>
@@ -80,33 +73,63 @@ namespace System.Diagnostics.TraceSourceTests
             Call(Method.Flush);
         }
 
-        public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id)
-        {
+        public override void TraceEvent(
+            TraceEventCache eventCache,
+            string source,
+            TraceEventType eventType,
+            int id
+        ) {
             Call(Method.TraceEvent);
         }
 
-        public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string format, params object[] args)
-        {
+        public override void TraceEvent(
+            TraceEventCache eventCache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            string format,
+            params object[] args
+        ) {
             Call(Method.TraceEvent);
         }
 
-        public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string message)
-        {
+        public override void TraceEvent(
+            TraceEventCache eventCache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            string message
+        ) {
             Call(Method.TraceEvent);
         }
 
-        public override void TraceData(TraceEventCache eventCache, string source, TraceEventType eventType, int id, object data)
-        {
+        public override void TraceData(
+            TraceEventCache eventCache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            object data
+        ) {
             Call(Method.TraceData);
         }
 
-        public override void TraceData(TraceEventCache eventCache, string source, TraceEventType eventType, int id, params object[] data)
-        {
+        public override void TraceData(
+            TraceEventCache eventCache,
+            string source,
+            TraceEventType eventType,
+            int id,
+            params object[] data
+        ) {
             Call(Method.TraceData);
         }
 
-        public override void TraceTransfer(TraceEventCache eventCache, string source, int id, string message, Guid relatedActivityId)
-        {
+        public override void TraceTransfer(
+            TraceEventCache eventCache,
+            string source,
+            int id,
+            string message,
+            Guid relatedActivityId
+        ) {
             Call(Method.TraceTransfer);
         }
 

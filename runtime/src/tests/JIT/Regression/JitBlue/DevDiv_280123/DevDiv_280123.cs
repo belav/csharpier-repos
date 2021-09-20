@@ -25,6 +25,7 @@ static class C
         {
             b = i != 1;
         }
+
         finally
         {
             b = i != 0;

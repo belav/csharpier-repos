@@ -14,7 +14,7 @@
 
 namespace Castle.DynamicProxy.Tests.Interceptors
 {
-	using NUnit.Framework;
+    using NUnit.Framework;
 
     public class AssertCanChangeTargetInterceptor : IInterceptor
     {
@@ -22,10 +22,9 @@ namespace Castle.DynamicProxy.Tests.Interceptors
 
         public void Intercept(IInvocation invocation)
         {
-            Assert.IsInstanceOf(typeof (IChangeProxyTarget), invocation);
+            Assert.IsInstanceOf(typeof(IChangeProxyTarget), invocation);
             invocation.Proceed();
         }
-
         #endregion
     }
 }

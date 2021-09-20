@@ -18,14 +18,21 @@ namespace System.Security.Cryptography.Pkcs
         private Oid? _hashAlgorithmId;
         private Oid? _requestedPolicyId;
 
-        private Rfc3161TimestampRequest()
-        {
-        }
+        private Rfc3161TimestampRequest() { }
 
         public int Version => _parsedData.Version;
         public ReadOnlyMemory<byte> GetMessageHash() => _parsedData.MessageImprint.HashedMessage;
-        public Oid HashAlgorithmId => (_hashAlgorithmId ??= new Oid(_parsedData.MessageImprint.HashAlgorithm.Algorithm, null));
-        public Oid? RequestedPolicyId => _parsedData.ReqPolicy == null ? null : (_requestedPolicyId ??= new Oid(_parsedData.ReqPolicy, null));
+        public Oid HashAlgorithmId =>
+            (
+                _hashAlgorithmId ??= new Oid(
+                    _parsedData.MessageImprint.HashAlgorithm.Algorithm,
+                    null
+                )
+            );
+        public Oid? RequestedPolicyId =>
+            _parsedData.ReqPolicy == null
+                ? null
+                : (_requestedPolicyId ??= new Oid(_parsedData.ReqPolicy, null));
         public bool RequestSignerCertificate => _parsedData.CertReq;
         public ReadOnlyMemory<byte>? GetNonce() => _parsedData.Nonce;
         public bool HasExtensions => _parsedData.Extensions?.Length > 0;
@@ -46,7 +53,8 @@ namespace System.Security.Cryptography.Pkcs
                 X509Extension extension = new X509Extension(
                     rawExtension.ExtnId,
                     rawExtension.ExtnValue.ToArray(),
-                    rawExtension.Critical);
+                    rawExtension.Critical
+                );
 
                 // Currently there are no extensions defined.
                 // Should this dip into CryptoConfig or other extensible
@@ -57,10 +65,19 @@ namespace System.Security.Cryptography.Pkcs
             return coll;
         }
 
-        public Rfc3161TimestampToken ProcessResponse(ReadOnlyMemory<byte> responseBytes, out int bytesConsumed)
-        {
-            if (ProcessResponse(responseBytes, out Rfc3161TimestampToken? token, out Rfc3161RequestResponseStatus status, out int localBytesRead, shouldThrow: true))
-            {
+        public Rfc3161TimestampToken ProcessResponse(
+            ReadOnlyMemory<byte> responseBytes,
+            out int bytesConsumed
+        ) {
+            if (
+                ProcessResponse(
+                    responseBytes,
+                    out Rfc3161TimestampToken? token,
+                    out Rfc3161RequestResponseStatus status,
+                    out int localBytesRead,
+                    shouldThrow: true
+                )
+            ) {
                 Debug.Assert(status == Rfc3161RequestResponseStatus.Accepted);
                 bytesConsumed = localBytesRead;
                 return token;
@@ -75,8 +92,8 @@ namespace System.Security.Cryptography.Pkcs
             [NotNullWhen(true)] out Rfc3161TimestampToken? token,
             out Rfc3161RequestResponseStatus status,
             out int bytesConsumed,
-            bool shouldThrow)
-        {
+            bool shouldThrow
+        ) {
             status = Rfc3161RequestResponseStatus.Unknown;
             token = null;
 
@@ -111,8 +128,7 @@ namespace System.Security.Cryptography.Pkcs
 
             PkiStatus pkiStatus = (PkiStatus)resp.Status.Status;
 
-            if (pkiStatus != PkiStatus.Granted &&
-                pkiStatus != PkiStatus.GrantedWithMods)
+            if (pkiStatus != PkiStatus.Granted && pkiStatus != PkiStatus.GrantedWithMods)
             {
                 if (shouldThrow)
                 {
@@ -120,15 +136,22 @@ namespace System.Security.Cryptography.Pkcs
                         SR.Format(
                             SR.Cryptography_TimestampReq_Failure,
                             pkiStatus,
-                            resp.Status.FailInfo.GetValueOrDefault()));
+                            resp.Status.FailInfo.GetValueOrDefault()
+                        )
+                    );
                 }
 
                 status = Rfc3161RequestResponseStatus.RequestFailed;
                 return false;
             }
 
-            if (!Rfc3161TimestampToken.TryDecode(resp.TimeStampToken.GetValueOrDefault(), out token, out _))
-            {
+            if (
+                !Rfc3161TimestampToken.TryDecode(
+                    resp.TimeStampToken.GetValueOrDefault(),
+                    out token,
+                    out _
+                )
+            ) {
                 if (shouldThrow)
                 {
                     throw new CryptographicException(SR.Cryptography_TimestampReq_BadResponse);
@@ -167,8 +190,8 @@ namespace System.Security.Cryptography.Pkcs
             Oid? requestedPolicyId = null,
             ReadOnlyMemory<byte>? nonce = null,
             bool requestSignerCertificates = false,
-            X509ExtensionCollection? extensions = null)
-        {
+            X509ExtensionCollection? extensions = null
+        ) {
             if (signerInfo == null)
             {
                 throw new ArgumentNullException(nameof(signerInfo));
@@ -185,7 +208,8 @@ namespace System.Security.Cryptography.Pkcs
                 requestedPolicyId,
                 nonce,
                 requestSignerCertificates,
-                extensions);
+                extensions
+            );
         }
 
         public static Rfc3161TimestampRequest CreateFromData(
@@ -194,8 +218,8 @@ namespace System.Security.Cryptography.Pkcs
             Oid? requestedPolicyId = null,
             ReadOnlyMemory<byte>? nonce = null,
             bool requestSignerCertificates = false,
-            X509ExtensionCollection? extensions = null)
-        {
+            X509ExtensionCollection? extensions = null
+        ) {
             using (IncrementalHash hasher = IncrementalHash.CreateHash(hashAlgorithm))
             {
                 hasher.AppendData(data);
@@ -207,7 +231,8 @@ namespace System.Security.Cryptography.Pkcs
                     requestedPolicyId,
                     nonce,
                     requestSignerCertificates,
-                    extensions);
+                    extensions
+                );
             }
         }
 
@@ -217,8 +242,8 @@ namespace System.Security.Cryptography.Pkcs
             Oid? requestedPolicyId = null,
             ReadOnlyMemory<byte>? nonce = null,
             bool requestSignerCertificates = false,
-            X509ExtensionCollection? extensions = null)
-        {
+            X509ExtensionCollection? extensions = null
+        ) {
             string oidStr = PkcsHelpers.GetOidFromHashAlgorithm(hashAlgorithm);
 
             return CreateFromHash(
@@ -227,7 +252,8 @@ namespace System.Security.Cryptography.Pkcs
                 requestedPolicyId,
                 nonce,
                 requestSignerCertificates,
-                extensions);
+                extensions
+            );
         }
 
         /// <summary>
@@ -261,8 +287,8 @@ namespace System.Security.Cryptography.Pkcs
             Oid? requestedPolicyId = null,
             ReadOnlyMemory<byte>? nonce = null,
             bool requestSignerCertificates = false,
-            X509ExtensionCollection? extensions = null)
-        {
+            X509ExtensionCollection? extensions = null
+        ) {
             // Normalize the nonce:
             if (nonce.HasValue)
             {
@@ -306,7 +332,6 @@ namespace System.Security.Cryptography.Pkcs
                         Algorithm = hashAlgorithmId.Value!,
                         Parameters = AlgorithmIdentifierAsn.ExplicitDerNull,
                     },
-
                     HashedMessage = hash,
                 },
                 ReqPolicy = requestedPolicyId?.Value,
@@ -344,8 +369,8 @@ namespace System.Security.Cryptography.Pkcs
         public static bool TryDecode(
             ReadOnlyMemory<byte> encodedBytes,
             [NotNullWhen(true)] out Rfc3161TimestampRequest? request,
-            out int bytesConsumed)
-        {
+            out int bytesConsumed
+        ) {
             try
             {
                 // RFC 3161 doesn't have a concise statement that TimeStampReq will
@@ -370,12 +395,8 @@ namespace System.Security.Cryptography.Pkcs
                 bytesConsumed = firstElement.Length;
                 return true;
             }
-            catch (AsnContentException)
-            {
-            }
-            catch (CryptographicException)
-            {
-            }
+            catch (AsnContentException) { }
+            catch (CryptographicException) { }
 
             request = null;
             bytesConsumed = 0;
@@ -384,8 +405,8 @@ namespace System.Security.Cryptography.Pkcs
 
         private Rfc3161RequestResponseStatus ValidateResponse(
             Rfc3161TimestampToken token,
-            bool shouldThrow)
-        {
+            bool shouldThrow
+        ) {
             Debug.Assert(token != null);
 
             // This method validates the acceptance criteria sprinkled throughout the
@@ -427,9 +448,10 @@ namespace System.Security.Cryptography.Pkcs
             // don't check anything if no nonce was requested.
             if (requestNonce != null)
             {
-                if (responseNonce == null ||
-                    !requestNonce.Value.Span.SequenceEqual(responseNonce.Value.Span))
-                {
+                if (
+                    responseNonce == null
+                    || !requestNonce.Value.Span.SequenceEqual(responseNonce.Value.Span)
+                ) {
                     if (shouldThrow)
                     {
                         throw new CryptographicException(SR.Cryptography_TimestampReq_BadNonce);
@@ -468,7 +490,9 @@ namespace System.Security.Cryptography.Pkcs
                 {
                     if (shouldThrow)
                     {
-                        throw new CryptographicException(SR.Cryptography_TimestampReq_UnexpectedCertFound);
+                        throw new CryptographicException(
+                            SR.Cryptography_TimestampReq_UnexpectedCertFound
+                        );
                     }
 
                     return Rfc3161RequestResponseStatus.UnexpectedCertificates;

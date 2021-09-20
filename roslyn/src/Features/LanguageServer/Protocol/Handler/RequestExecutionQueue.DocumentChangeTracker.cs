@@ -34,8 +34,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 _tracker = tracker;
             }
 
-            public IEnumerable<(Uri DocumentUri, SourceText Text)> GetTrackedDocuments()
-                => _tracker.GetTrackedDocuments();
+            public IEnumerable<(Uri DocumentUri, SourceText Text)> GetTrackedDocuments() =>
+                _tracker.GetTrackedDocuments();
 
             public SourceText GetTrackedDocumentSourceText(Uri documentUri)
             {
@@ -43,8 +43,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 throw new NotImplementedException();
             }
 
-            public bool IsTracking(Uri documentUri)
-                => _tracker.IsTracking(documentUri);
+            public bool IsTracking(Uri documentUri) => _tracker.IsTracking(documentUri);
 
             public void StartTracking(Uri documentUri, SourceText initialText)
             {
@@ -73,53 +72,62 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         {
             private readonly Dictionary<Uri, SourceText> _trackedDocuments = new();
 
-            public bool IsTracking(Uri documentUri)
-                => _trackedDocuments.ContainsKey(documentUri);
+            public bool IsTracking(Uri documentUri) => _trackedDocuments.ContainsKey(documentUri);
 
             public void StartTracking(Uri documentUri, SourceText initialText)
             {
-                Contract.ThrowIfTrue(_trackedDocuments.ContainsKey(documentUri), $"didOpen received for {documentUri} which is already open.");
+                Contract.ThrowIfTrue(
+                    _trackedDocuments.ContainsKey(documentUri),
+                    $"didOpen received for {documentUri} which is already open."
+                );
 
                 _trackedDocuments.Add(documentUri, initialText);
             }
 
             public void UpdateTrackedDocument(Uri documentUri, SourceText text)
             {
-                Contract.ThrowIfFalse(_trackedDocuments.ContainsKey(documentUri), $"didChange received for {documentUri} which is not open.");
+                Contract.ThrowIfFalse(
+                    _trackedDocuments.ContainsKey(documentUri),
+                    $"didChange received for {documentUri} which is not open."
+                );
 
                 _trackedDocuments[documentUri] = text;
             }
 
             public SourceText GetTrackedDocumentSourceText(Uri documentUri)
             {
-                Contract.ThrowIfFalse(_trackedDocuments.ContainsKey(documentUri), "didChange received for a document that isn't open.");
+                Contract.ThrowIfFalse(
+                    _trackedDocuments.ContainsKey(documentUri),
+                    "didChange received for a document that isn't open."
+                );
 
                 return _trackedDocuments[documentUri];
             }
 
             public void StopTracking(Uri documentUri)
             {
-                Contract.ThrowIfFalse(_trackedDocuments.ContainsKey(documentUri), $"didClose received for {documentUri} which is not open.");
+                Contract.ThrowIfFalse(
+                    _trackedDocuments.ContainsKey(documentUri),
+                    $"didClose received for {documentUri} which is not open."
+                );
 
                 _trackedDocuments.Remove(documentUri);
             }
 
-            public IEnumerable<(Uri DocumentUri, SourceText Text)> GetTrackedDocuments()
-                => _trackedDocuments.Select(k => (k.Key, k.Value));
+            public IEnumerable<(Uri DocumentUri, SourceText Text)> GetTrackedDocuments() =>
+                _trackedDocuments.Select(k => (k.Key, k.Value));
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new TestAccessor(this);
+        internal TestAccessor GetTestAccessor() => new TestAccessor(this);
 
         internal readonly struct TestAccessor
         {
             private readonly RequestExecutionQueue _queue;
 
-            public TestAccessor(RequestExecutionQueue queue)
-                => _queue = queue;
+            public TestAccessor(RequestExecutionQueue queue) => _queue = queue;
 
-            public List<SourceText> GetTrackedTexts()
-                => _queue._documentChangeTracker.GetTrackedDocuments().Select(i => i.Text).ToList();
+            public List<SourceText> GetTrackedTexts() =>
+                _queue._documentChangeTracker.GetTrackedDocuments().Select(i => i.Text).ToList();
         }
     }
 }

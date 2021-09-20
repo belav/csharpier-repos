@@ -32,7 +32,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public void INodeBuilderPolicy_AppliesToNode_EndpointWithoutHttpMethods_ReturnsFalse()
         {
             // Arrange
-            var endpoints = new[] 
+            var endpoints = new[]
             {
                 CreateEndpoint("/", new HttpMethodMetadata(Array.Empty<string>())),
             };
@@ -72,7 +72,11 @@ namespace Microsoft.AspNetCore.Routing.Matching
             var endpoints = new[]
             {
                 CreateEndpoint("/", new HttpMethodMetadata(Array.Empty<string>())),
-                CreateEndpoint("/", new HttpMethodMetadata(new[] { "GET", }), new DynamicEndpointMetadata()),
+                CreateEndpoint(
+                    "/",
+                    new HttpMethodMetadata(new[] { "GET", }),
+                    new DynamicEndpointMetadata()
+                ),
             };
 
             var policy = (INodeBuilderPolicy)CreatePolicy();
@@ -105,7 +109,11 @@ namespace Microsoft.AspNetCore.Routing.Matching
             // Arrange
             var endpoints = new[]
             {
-                CreateEndpoint("/", new HttpMethodMetadata(Array.Empty<string>()), new DynamicEndpointMetadata()),
+                CreateEndpoint(
+                    "/",
+                    new HttpMethodMetadata(Array.Empty<string>()),
+                    new DynamicEndpointMetadata()
+                ),
             };
 
             var policy = (IEndpointSelectorPolicy)CreatePolicy();
@@ -123,7 +131,11 @@ namespace Microsoft.AspNetCore.Routing.Matching
             // Arrange
             var endpoints = new[]
             {
-                CreateEndpoint("/", new HttpMethodMetadata(Array.Empty<string>()), new DynamicEndpointMetadata()),
+                CreateEndpoint(
+                    "/",
+                    new HttpMethodMetadata(Array.Empty<string>()),
+                    new DynamicEndpointMetadata()
+                ),
                 CreateEndpoint("/", new HttpMethodMetadata(new[] { "GET", })),
             };
 
@@ -186,18 +198,28 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 e =>
                 {
                     Assert.Equal(new EdgeKey("GET", isCorsPreflightRequest: false), e.State);
-                    Assert.Equal(new[] { endpoints[0], endpoints[1], endpoints[2], endpoints[4], }, e.Endpoints.ToArray());
+                    Assert.Equal(
+                        new[] { endpoints[0], endpoints[1], endpoints[2], endpoints[4], },
+                        e.Endpoints.ToArray()
+                    );
                 },
                 e =>
                 {
                     Assert.Equal(new EdgeKey("POST", isCorsPreflightRequest: false), e.State);
-                    Assert.Equal(new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4], }, e.Endpoints.ToArray());
+                    Assert.Equal(
+                        new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4], },
+                        e.Endpoints.ToArray()
+                    );
                 },
                 e =>
                 {
                     Assert.Equal(new EdgeKey("PUT", isCorsPreflightRequest: false), e.State);
-                    Assert.Equal(new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4], }, e.Endpoints.ToArray());
-                });
+                    Assert.Equal(
+                        new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4], },
+                        e.Endpoints.ToArray()
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -210,9 +232,18 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 // this way so we can verify that ordering is preserved by GetEdges.
                 CreateEndpoint("/", new HttpMethodMetadata(new[] { "GET", })),
                 CreateEndpoint("/", new HttpMethodMetadata(Array.Empty<string>())),
-                CreateEndpoint("/", new HttpMethodMetadata(new[] { "GET", "PUT", "POST" }, acceptCorsPreflight: true)),
+                CreateEndpoint(
+                    "/",
+                    new HttpMethodMetadata(
+                        new[] { "GET", "PUT", "POST" },
+                        acceptCorsPreflight: true
+                    )
+                ),
                 CreateEndpoint("/", new HttpMethodMetadata(new[] { "PUT", "POST" })),
-                CreateEndpoint("/", new HttpMethodMetadata(Array.Empty<string>(), acceptCorsPreflight: true)),
+                CreateEndpoint(
+                    "/",
+                    new HttpMethodMetadata(Array.Empty<string>(), acceptCorsPreflight: true)
+                ),
             };
 
             var policy = CreatePolicy();
@@ -236,7 +267,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 e =>
                 {
                     Assert.Equal(new EdgeKey("GET", isCorsPreflightRequest: false), e.State);
-                    Assert.Equal(new[] { endpoints[0], endpoints[1], endpoints[2], endpoints[4], }, e.Endpoints.ToArray());
+                    Assert.Equal(
+                        new[] { endpoints[0], endpoints[1], endpoints[2], endpoints[4], },
+                        e.Endpoints.ToArray()
+                    );
                 },
                 e =>
                 {
@@ -246,7 +280,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 e =>
                 {
                     Assert.Equal(new EdgeKey("POST", isCorsPreflightRequest: false), e.State);
-                    Assert.Equal(new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4], }, e.Endpoints.ToArray());
+                    Assert.Equal(
+                        new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4], },
+                        e.Endpoints.ToArray()
+                    );
                 },
                 e =>
                 {
@@ -256,13 +293,17 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 e =>
                 {
                     Assert.Equal(new EdgeKey("PUT", isCorsPreflightRequest: false), e.State);
-                    Assert.Equal(new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4], }, e.Endpoints.ToArray());
+                    Assert.Equal(
+                        new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4], },
+                        e.Endpoints.ToArray()
+                    );
                 },
                 e =>
                 {
                     Assert.Equal(new EdgeKey("PUT", isCorsPreflightRequest: true), e.State);
                     Assert.Equal(new[] { endpoints[2], endpoints[4], }, e.Endpoints.ToArray());
-                });
+                }
+            );
         }
 
         [Fact] // See explanation in GetEdges for how this case is different
@@ -305,8 +346,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 {
                     Assert.Equal(new EdgeKey("PUT", isCorsPreflightRequest: false), e.State);
                     Assert.Equal(new[] { endpoints[1], endpoints[2], }, e.Endpoints.ToArray());
-                });
-
+                }
+            );
         }
 
         [Fact] // See explanation in GetEdges for how this case is different
@@ -318,7 +359,13 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 // These are arrange in an order that we won't actually see in a product scenario. It's done
                 // this way so we can verify that ordering is preserved by GetEdges.
                 CreateEndpoint("/", new HttpMethodMetadata(new[] { "GET", })),
-                CreateEndpoint("/", new HttpMethodMetadata(new[] { "GET", "PUT", "POST" }, acceptCorsPreflight: true)),
+                CreateEndpoint(
+                    "/",
+                    new HttpMethodMetadata(
+                        new[] { "GET", "PUT", "POST" },
+                        acceptCorsPreflight: true
+                    )
+                ),
                 CreateEndpoint("/", new HttpMethodMetadata(new[] { "PUT", "POST" })),
             };
 
@@ -364,11 +411,15 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 {
                     Assert.Equal(new EdgeKey("PUT", isCorsPreflightRequest: true), e.State);
                     Assert.Equal(new[] { endpoints[1], }, e.Endpoints.ToArray());
-                });
+                }
+            );
         }
 
-        private static RouteEndpoint CreateEndpoint(string template, HttpMethodMetadata httpMethodMetadata, params object[] more)
-        {
+        private static RouteEndpoint CreateEndpoint(
+            string template,
+            HttpMethodMetadata httpMethodMetadata,
+            params object[] more
+        ) {
             var metadata = new List<object>();
             if (httpMethodMetadata != null)
             {
@@ -385,7 +436,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 RoutePatternFactory.Parse(template),
                 0,
                 new EndpointMetadataCollection(metadata),
-                $"test: {template}");
+                $"test: {template}"
+            );
         }
 
         private static HttpMethodMatcherPolicy CreatePolicy()

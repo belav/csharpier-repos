@@ -20,9 +20,18 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
         public static TestEntry File(string name, string path = null) =>
             new TestEntry() { Name = name, ResourcePath = path ?? name };
 
-        public XElement ToXElement() => IsFile ?
-            new XElement("File", new XAttribute("Name", Name), new XElement("ResourcePath", ResourcePath)) :
-            new XElement("Directory", new XAttribute("Name", Name), Children.Select(c => c.ToXElement()));
+        public XElement ToXElement() =>
+            IsFile
+                ? new XElement(
+                      "File",
+                      new XAttribute("Name", Name),
+                      new XElement("ResourcePath", ResourcePath)
+                  )
+                : new XElement(
+                      "Directory",
+                      new XAttribute("Name", Name),
+                      Children.Select(c => c.ToXElement())
+                  );
 
         public IEnumerable<TestEntry> GetFiles()
         {
@@ -36,6 +45,5 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
 
             return files.Concat(otherFiles).ToArray();
         }
-
     }
 }

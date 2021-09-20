@@ -19,9 +19,11 @@ namespace System.Text.Json
     {
         internal const int BufferSizeDefault = 16 * 1024;
 
-        internal static readonly JsonSerializerOptions s_defaultOptions = new JsonSerializerOptions();
+        internal static readonly JsonSerializerOptions s_defaultOptions =
+            new JsonSerializerOptions();
 
-        private readonly ConcurrentDictionary<Type, JsonTypeInfo> _classes = new ConcurrentDictionary<Type, JsonTypeInfo>();
+        private readonly ConcurrentDictionary<Type, JsonTypeInfo> _classes =
+            new ConcurrentDictionary<Type, JsonTypeInfo>();
 
         // Simple LRU cache for the public (de)serialize entry points that avoid some lookups in _classes.
         // Although this may be written by multiple threads, 'volatile' was not added since any local affinity is fine.
@@ -108,7 +110,8 @@ namespace System.Text.Json
         }
 
         /// <summary>Tracks the options instance to enable all instances to be enumerated.</summary>
-        private static void TrackOptionsInstance(JsonSerializerOptions options) => TrackedOptionsInstances.All.Add(options, null);
+        private static void TrackOptionsInstance(JsonSerializerOptions options) =>
+            TrackedOptionsInstances.All.Add(options, null);
 
         internal static class TrackedOptionsInstances
         {
@@ -169,10 +172,7 @@ namespace System.Text.Json
         /// </remarks>
         public bool AllowTrailingCommas
         {
-            get
-            {
-                return _allowTrailingCommas;
-            }
+            get { return _allowTrailingCommas; }
             set
             {
                 VerifyMutable();
@@ -190,10 +190,7 @@ namespace System.Text.Json
         /// </exception>
         public int DefaultBufferSize
         {
-            get
-            {
-                return _defaultBufferSize;
-            }
+            get { return _defaultBufferSize; }
             set
             {
                 VerifyMutable();
@@ -212,10 +209,7 @@ namespace System.Text.Json
         /// </summary>
         public JavaScriptEncoder? Encoder
         {
-            get
-            {
-                return _encoder;
-            }
+            get { return _encoder; }
             set
             {
                 VerifyMutable();
@@ -233,10 +227,7 @@ namespace System.Text.Json
         /// </remarks>
         public JsonNamingPolicy? DictionaryKeyPolicy
         {
-            get
-            {
-                return _dictionaryKeyPolicy;
-            }
+            get { return _dictionaryKeyPolicy; }
             set
             {
                 VerifyMutable();
@@ -252,14 +243,14 @@ namespace System.Text.Json
         /// Thrown if this property is set after serialization or deserialization has occurred.
         /// or <see cref="DefaultIgnoreCondition"/> has been set to a non-default value. These properties cannot be used together.
         /// </exception>
-        [Obsolete("To ignore null values when serializing, set DefaultIgnoreCondition to JsonIgnoreCondition.WhenWritingNull.", error: false)]
+        [Obsolete(
+            "To ignore null values when serializing, set DefaultIgnoreCondition to JsonIgnoreCondition.WhenWritingNull.",
+            error: false
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool IgnoreNullValues
         {
-            get
-            {
-                return _ignoreNullValues;
-            }
+            get { return _ignoreNullValues; }
             set
             {
                 VerifyMutable();
@@ -286,10 +277,7 @@ namespace System.Text.Json
         /// </exception>
         public JsonIgnoreCondition DefaultIgnoreCondition
         {
-            get
-            {
-                return _defaultIgnoreCondition;
-            }
+            get { return _defaultIgnoreCondition; }
             set
             {
                 VerifyMutable();
@@ -342,10 +330,7 @@ namespace System.Text.Json
         /// </exception>
         public bool IgnoreReadOnlyProperties
         {
-            get
-            {
-                return _ignoreReadOnlyProperties;
-            }
+            get { return _ignoreReadOnlyProperties; }
             set
             {
                 VerifyMutable();
@@ -366,10 +351,7 @@ namespace System.Text.Json
         /// </exception>
         public bool IgnoreReadOnlyFields
         {
-            get
-            {
-                return _ignoreReadonlyFields;
-            }
+            get { return _ignoreReadonlyFields; }
             set
             {
                 VerifyMutable();
@@ -386,10 +368,7 @@ namespace System.Text.Json
         /// </exception>
         public bool IncludeFields
         {
-            get
-            {
-                return _includeFields;
-            }
+            get { return _includeFields; }
             set
             {
                 VerifyMutable();
@@ -418,7 +397,9 @@ namespace System.Text.Json
 
                 if (value < 0)
                 {
-                    throw ThrowHelper.GetArgumentOutOfRangeException_MaxDepthMustBePositive(nameof(value));
+                    throw ThrowHelper.GetArgumentOutOfRangeException_MaxDepthMustBePositive(
+                        nameof(value)
+                    );
                 }
 
                 _maxDepth = value;
@@ -440,10 +421,7 @@ namespace System.Text.Json
         /// </remarks>
         public JsonNamingPolicy? PropertyNamingPolicy
         {
-            get
-            {
-                return _jsonPropertyNamingPolicy;
-            }
+            get { return _jsonPropertyNamingPolicy; }
             set
             {
                 VerifyMutable();
@@ -458,10 +436,7 @@ namespace System.Text.Json
         /// <remarks>There is a performance cost associated when the value is true.</remarks>
         public bool PropertyNameCaseInsensitive
         {
-            get
-            {
-                return _propertyNameCaseInsensitive;
-            }
+            get { return _propertyNameCaseInsensitive; }
             set
             {
                 VerifyMutable();
@@ -483,17 +458,17 @@ namespace System.Text.Json
         /// </remarks>
         public JsonCommentHandling ReadCommentHandling
         {
-            get
-            {
-                return _readCommentHandling;
-            }
+            get { return _readCommentHandling; }
             set
             {
                 VerifyMutable();
 
                 Debug.Assert(value >= 0);
                 if (value > JsonCommentHandling.Skip)
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.JsonSerializerDoesNotSupportComments);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.JsonSerializerDoesNotSupportComments
+                    );
 
                 _readCommentHandling = value;
             }
@@ -522,10 +497,7 @@ namespace System.Text.Json
         /// </exception>
         public bool WriteIndented
         {
-            get
-            {
-                return _writeIndented;
-            }
+            get { return _writeIndented; }
             set
             {
                 VerifyMutable();
@@ -543,12 +515,14 @@ namespace System.Text.Json
             {
                 VerifyMutable();
                 _referenceHandler = value;
-                ReferenceHandlingStrategy = value?.HandlingStrategy ?? ReferenceHandlingStrategy.None;
+                ReferenceHandlingStrategy =
+                    value?.HandlingStrategy ?? ReferenceHandlingStrategy.None;
             }
         }
 
         // The cached value used to determine if ReferenceHandler should use Preserve or IgnoreCycles semanitcs or None of them.
-        internal ReferenceHandlingStrategy ReferenceHandlingStrategy = ReferenceHandlingStrategy.None;
+        internal ReferenceHandlingStrategy ReferenceHandlingStrategy =
+            ReferenceHandlingStrategy.None;
 
         internal MemberAccessor MemberAccessorStrategy
         {

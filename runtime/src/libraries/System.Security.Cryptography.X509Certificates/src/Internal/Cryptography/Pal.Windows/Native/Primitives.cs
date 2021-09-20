@@ -17,62 +17,51 @@ namespace Internal.Cryptography.Pal.Native
     internal enum ExpectedContentTypeFlags : int
     {
         //encoded single certificate
-         CERT_QUERY_CONTENT_FLAG_CERT = 1 << ContentType.CERT_QUERY_CONTENT_CERT,
-
+        CERT_QUERY_CONTENT_FLAG_CERT = 1 << ContentType.CERT_QUERY_CONTENT_CERT,
         //encoded single CTL
-         CERT_QUERY_CONTENT_FLAG_CTL = 1 << ContentType.CERT_QUERY_CONTENT_CTL,
-
+        CERT_QUERY_CONTENT_FLAG_CTL = 1 << ContentType.CERT_QUERY_CONTENT_CTL,
         //encoded single CRL
-         CERT_QUERY_CONTENT_FLAG_CRL = 1 << ContentType.CERT_QUERY_CONTENT_CRL,
-
+        CERT_QUERY_CONTENT_FLAG_CRL = 1 << ContentType.CERT_QUERY_CONTENT_CRL,
         //serialized store
-         CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE = 1 << ContentType.CERT_QUERY_CONTENT_SERIALIZED_STORE,
-
+        CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE =
+            1 << ContentType.CERT_QUERY_CONTENT_SERIALIZED_STORE,
         //serialized single certificate
-         CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT = 1 << ContentType.CERT_QUERY_CONTENT_SERIALIZED_CERT,
-
+        CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT =
+            1 << ContentType.CERT_QUERY_CONTENT_SERIALIZED_CERT,
         //serialized single CTL
-         CERT_QUERY_CONTENT_FLAG_SERIALIZED_CTL = 1 << ContentType.CERT_QUERY_CONTENT_SERIALIZED_CTL,
-
+        CERT_QUERY_CONTENT_FLAG_SERIALIZED_CTL = 1 << ContentType.CERT_QUERY_CONTENT_SERIALIZED_CTL,
         //serialized single CRL
-         CERT_QUERY_CONTENT_FLAG_SERIALIZED_CRL = 1 << ContentType.CERT_QUERY_CONTENT_SERIALIZED_CRL,
-
+        CERT_QUERY_CONTENT_FLAG_SERIALIZED_CRL = 1 << ContentType.CERT_QUERY_CONTENT_SERIALIZED_CRL,
         //an encoded PKCS#7 signed message
-         CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED = 1 << ContentType.CERT_QUERY_CONTENT_PKCS7_SIGNED,
-
+        CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED = 1 << ContentType.CERT_QUERY_CONTENT_PKCS7_SIGNED,
         //an encoded PKCS#7 message.  But it is not a signed message
-         CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED = 1 << ContentType.CERT_QUERY_CONTENT_PKCS7_UNSIGNED,
-
+        CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED = 1 << ContentType.CERT_QUERY_CONTENT_PKCS7_UNSIGNED,
         //the content includes an embedded PKCS7 signed message
-         CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED = 1 << ContentType.CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED,
-
+        CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED =
+            1 << ContentType.CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED,
         //an encoded PKCS#10
-         CERT_QUERY_CONTENT_FLAG_PKCS10 = 1 << ContentType.CERT_QUERY_CONTENT_PKCS10,
-
+        CERT_QUERY_CONTENT_FLAG_PKCS10 = 1 << ContentType.CERT_QUERY_CONTENT_PKCS10,
         //an encoded PFX BLOB
-         CERT_QUERY_CONTENT_FLAG_PFX = 1 << ContentType.CERT_QUERY_CONTENT_PFX,
-
+        CERT_QUERY_CONTENT_FLAG_PFX = 1 << ContentType.CERT_QUERY_CONTENT_PFX,
         //an encoded CertificatePair (contains forward and/or reverse cross certs)
-         CERT_QUERY_CONTENT_FLAG_CERT_PAIR = 1 << ContentType.CERT_QUERY_CONTENT_CERT_PAIR,
-
+        CERT_QUERY_CONTENT_FLAG_CERT_PAIR = 1 << ContentType.CERT_QUERY_CONTENT_CERT_PAIR,
         //an encoded PFX BLOB, and we do want to load it (not included in
         //CERT_QUERY_CONTENT_FLAG_ALL)
-         CERT_QUERY_CONTENT_FLAG_PFX_AND_LOAD = 1 << ContentType.CERT_QUERY_CONTENT_PFX_AND_LOAD,
-
-         CERT_QUERY_CONTENT_FLAG_ALL =
-             CERT_QUERY_CONTENT_FLAG_CERT |
-             CERT_QUERY_CONTENT_FLAG_CTL |
-             CERT_QUERY_CONTENT_FLAG_CRL |
-             CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE |
-             CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT |
-             CERT_QUERY_CONTENT_FLAG_SERIALIZED_CTL |
-             CERT_QUERY_CONTENT_FLAG_SERIALIZED_CRL |
-             CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED |
-             CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED |
-             CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED |
-             CERT_QUERY_CONTENT_FLAG_PKCS10 |
-             CERT_QUERY_CONTENT_FLAG_PFX |
-             CERT_QUERY_CONTENT_FLAG_CERT_PAIR,
+        CERT_QUERY_CONTENT_FLAG_PFX_AND_LOAD = 1 << ContentType.CERT_QUERY_CONTENT_PFX_AND_LOAD,
+        CERT_QUERY_CONTENT_FLAG_ALL =
+            CERT_QUERY_CONTENT_FLAG_CERT
+            | CERT_QUERY_CONTENT_FLAG_CTL
+            | CERT_QUERY_CONTENT_FLAG_CRL
+            | CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE
+            | CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT
+            | CERT_QUERY_CONTENT_FLAG_SERIALIZED_CTL
+            | CERT_QUERY_CONTENT_FLAG_SERIALIZED_CRL
+            | CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED
+            | CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED
+            | CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED
+            | CERT_QUERY_CONTENT_FLAG_PKCS10
+            | CERT_QUERY_CONTENT_FLAG_PFX
+            | CERT_QUERY_CONTENT_FLAG_CERT_PAIR,
     }
 
     [Flags]
@@ -80,49 +69,51 @@ namespace Internal.Cryptography.Pal.Native
     {
         CERT_QUERY_FORMAT_FLAG_BINARY = 1 << FormatType.CERT_QUERY_FORMAT_BINARY,
         CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED = 1 << FormatType.CERT_QUERY_FORMAT_BASE64_ENCODED,
-        CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED = 1 << FormatType.CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED,
-
-        CERT_QUERY_FORMAT_FLAG_ALL = CERT_QUERY_FORMAT_FLAG_BINARY | CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED | CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED,
+        CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED =
+            1 << FormatType.CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED,
+        CERT_QUERY_FORMAT_FLAG_ALL =
+            CERT_QUERY_FORMAT_FLAG_BINARY
+            | CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED
+            | CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED,
     }
 
     internal enum CertEncodingType : int
     {
         PKCS_7_ASN_ENCODING = 0x10000,
-        X509_ASN_ENCODING   = 0x00001,
-
+        X509_ASN_ENCODING = 0x00001,
         All = PKCS_7_ASN_ENCODING | X509_ASN_ENCODING,
     }
 
     internal enum ContentType : int
     {
         //encoded single certificate
-        CERT_QUERY_CONTENT_CERT                = 1,
+        CERT_QUERY_CONTENT_CERT = 1,
         //encoded single CTL
-        CERT_QUERY_CONTENT_CTL                 = 2,
+        CERT_QUERY_CONTENT_CTL = 2,
         //encoded single CRL
-        CERT_QUERY_CONTENT_CRL                 = 3,
+        CERT_QUERY_CONTENT_CRL = 3,
         //serialized store
-        CERT_QUERY_CONTENT_SERIALIZED_STORE    = 4,
+        CERT_QUERY_CONTENT_SERIALIZED_STORE = 4,
         //serialized single certificate
-        CERT_QUERY_CONTENT_SERIALIZED_CERT     = 5,
+        CERT_QUERY_CONTENT_SERIALIZED_CERT = 5,
         //serialized single CTL
-        CERT_QUERY_CONTENT_SERIALIZED_CTL      = 6,
+        CERT_QUERY_CONTENT_SERIALIZED_CTL = 6,
         //serialized single CRL
-        CERT_QUERY_CONTENT_SERIALIZED_CRL      = 7,
+        CERT_QUERY_CONTENT_SERIALIZED_CRL = 7,
         //a PKCS#7 signed message
-        CERT_QUERY_CONTENT_PKCS7_SIGNED        = 8,
+        CERT_QUERY_CONTENT_PKCS7_SIGNED = 8,
         //a PKCS#7 message, such as enveloped message.  But it is not a signed message,
-        CERT_QUERY_CONTENT_PKCS7_UNSIGNED      = 9,
+        CERT_QUERY_CONTENT_PKCS7_UNSIGNED = 9,
         //a PKCS7 signed message embedded in a file
-        CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED  = 10,
+        CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED = 10,
         //an encoded PKCS#10
-        CERT_QUERY_CONTENT_PKCS10              = 11,
+        CERT_QUERY_CONTENT_PKCS10 = 11,
         //an encoded PFX BLOB
-        CERT_QUERY_CONTENT_PFX                 = 12,
+        CERT_QUERY_CONTENT_PFX = 12,
         //an encoded CertificatePair (contains forward and/or reverse cross certs)
-        CERT_QUERY_CONTENT_CERT_PAIR           = 13,
+        CERT_QUERY_CONTENT_CERT_PAIR = 13,
         //an encoded PFX BLOB, which was loaded to phCertStore
-        CERT_QUERY_CONTENT_PFX_AND_LOAD        = 14,
+        CERT_QUERY_CONTENT_PFX_AND_LOAD = 14,
     }
 
     internal enum FormatType : int
@@ -160,12 +151,12 @@ namespace Internal.Cryptography.Pal.Native
 
     internal enum CertContextPropId : int
     {
-        CERT_KEY_PROV_INFO_PROP_ID   = 2,
-        CERT_SHA1_HASH_PROP_ID       = 3,
-        CERT_KEY_CONTEXT_PROP_ID     = 5,
-        CERT_FRIENDLY_NAME_PROP_ID   = 11,
-        CERT_ARCHIVED_PROP_ID        = 19,
-        CERT_KEY_IDENTIFIER_PROP_ID  = 20,
+        CERT_KEY_PROV_INFO_PROP_ID = 2,
+        CERT_SHA1_HASH_PROP_ID = 3,
+        CERT_KEY_CONTEXT_PROP_ID = 5,
+        CERT_FRIENDLY_NAME_PROP_ID = 11,
+        CERT_ARCHIVED_PROP_ID = 19,
+        CERT_KEY_IDENTIFIER_PROP_ID = 20,
         CERT_PUBKEY_ALG_PARA_PROP_ID = 22,
         CERT_NCRYPT_KEY_HANDLE_PROP_ID = 78,
         CERT_CLR_DELETE_KEY_PROP_ID = 125,
@@ -175,7 +166,7 @@ namespace Internal.Cryptography.Pal.Native
     internal enum CertSetPropertyFlags : int
     {
         CERT_SET_PROPERTY_INHIBIT_PERSIST_FLAG = 0x40000000,
-        None                                   = 0x00000000,
+        None = 0x00000000,
     }
 
     internal enum CertNameType : int
@@ -193,14 +184,13 @@ namespace Internal.Cryptography.Pal.Native
     [Flags]
     internal enum CertNameFlags : int
     {
-        None                  = 0x00000000,
+        None = 0x00000000,
         CERT_NAME_ISSUER_FLAG = 0x00000001,
     }
 
     internal enum CertNameStringType : int
     {
         CERT_X500_NAME_STR = 3,
-
         CERT_NAME_STR_REVERSE_FLAG = 0x02000000,
     }
 
@@ -288,7 +278,6 @@ namespace Internal.Cryptography.Pal.Native
         public static FILETIME FromDateTime(DateTime dt)
         {
             long fileTime = dt.ToFileTime();
-
             unchecked
             {
                 return new FILETIME()
@@ -309,52 +298,50 @@ namespace Internal.Cryptography.Pal.Native
     [Flags]
     internal enum CertStoreFlags : int
     {
-        CERT_STORE_NO_CRYPT_RELEASE_FLAG                = 0x00000001,
-        CERT_STORE_SET_LOCALIZED_NAME_FLAG              = 0x00000002,
-        CERT_STORE_DEFER_CLOSE_UNTIL_LAST_FREE_FLAG     = 0x00000004,
-        CERT_STORE_DELETE_FLAG                          = 0x00000010,
-        CERT_STORE_UNSAFE_PHYSICAL_FLAG                 = 0x00000020,
-        CERT_STORE_SHARE_STORE_FLAG                     = 0x00000040,
-        CERT_STORE_SHARE_CONTEXT_FLAG                   = 0x00000080,
-        CERT_STORE_MANIFOLD_FLAG                        = 0x00000100,
-        CERT_STORE_ENUM_ARCHIVED_FLAG                   = 0x00000200,
-        CERT_STORE_UPDATE_KEYID_FLAG                    = 0x00000400,
-        CERT_STORE_BACKUP_RESTORE_FLAG                  = 0x00000800,
-        CERT_STORE_READONLY_FLAG                        = 0x00008000,
-        CERT_STORE_OPEN_EXISTING_FLAG                   = 0x00004000,
-        CERT_STORE_CREATE_NEW_FLAG                      = 0x00002000,
-        CERT_STORE_MAXIMUM_ALLOWED_FLAG                 = 0x00001000,
-
-        CERT_SYSTEM_STORE_CURRENT_USER                  = 0x00010000,
-        CERT_SYSTEM_STORE_LOCAL_MACHINE                 = 0x00020000,
-
-        None                                            = 0x00000000,
+        CERT_STORE_NO_CRYPT_RELEASE_FLAG = 0x00000001,
+        CERT_STORE_SET_LOCALIZED_NAME_FLAG = 0x00000002,
+        CERT_STORE_DEFER_CLOSE_UNTIL_LAST_FREE_FLAG = 0x00000004,
+        CERT_STORE_DELETE_FLAG = 0x00000010,
+        CERT_STORE_UNSAFE_PHYSICAL_FLAG = 0x00000020,
+        CERT_STORE_SHARE_STORE_FLAG = 0x00000040,
+        CERT_STORE_SHARE_CONTEXT_FLAG = 0x00000080,
+        CERT_STORE_MANIFOLD_FLAG = 0x00000100,
+        CERT_STORE_ENUM_ARCHIVED_FLAG = 0x00000200,
+        CERT_STORE_UPDATE_KEYID_FLAG = 0x00000400,
+        CERT_STORE_BACKUP_RESTORE_FLAG = 0x00000800,
+        CERT_STORE_READONLY_FLAG = 0x00008000,
+        CERT_STORE_OPEN_EXISTING_FLAG = 0x00004000,
+        CERT_STORE_CREATE_NEW_FLAG = 0x00002000,
+        CERT_STORE_MAXIMUM_ALLOWED_FLAG = 0x00001000,
+        CERT_SYSTEM_STORE_CURRENT_USER = 0x00010000,
+        CERT_SYSTEM_STORE_LOCAL_MACHINE = 0x00020000,
+        None = 0x00000000,
     }
 
     internal enum CertStoreAddDisposition : int
     {
-        CERT_STORE_ADD_NEW                                  = 1,
-        CERT_STORE_ADD_USE_EXISTING                         = 2,
-        CERT_STORE_ADD_REPLACE_EXISTING                     = 3,
-        CERT_STORE_ADD_ALWAYS                               = 4,
-        CERT_STORE_ADD_REPLACE_EXISTING_INHERIT_PROPERTIES  = 5,
-        CERT_STORE_ADD_NEWER                                = 6,
-        CERT_STORE_ADD_NEWER_INHERIT_PROPERTIES             = 7,
+        CERT_STORE_ADD_NEW = 1,
+        CERT_STORE_ADD_USE_EXISTING = 2,
+        CERT_STORE_ADD_REPLACE_EXISTING = 3,
+        CERT_STORE_ADD_ALWAYS = 4,
+        CERT_STORE_ADD_REPLACE_EXISTING_INHERIT_PROPERTIES = 5,
+        CERT_STORE_ADD_NEWER = 6,
+        CERT_STORE_ADD_NEWER_INHERIT_PROPERTIES = 7,
     }
 
     [Flags]
     internal enum PfxCertStoreFlags : int
     {
-        CRYPT_EXPORTABLE                   = 0x00000001,
-        CRYPT_USER_PROTECTED               = 0x00000002,
-        CRYPT_MACHINE_KEYSET               = 0x00000020,
-        CRYPT_USER_KEYSET                  = 0x00001000,
-        PKCS12_PREFER_CNG_KSP              = 0x00000100,
-        PKCS12_ALWAYS_CNG_KSP              = 0x00000200,
-        PKCS12_ALLOW_OVERWRITE_KEY         = 0x00004000,
-        PKCS12_NO_PERSIST_KEY              = 0x00008000,
+        CRYPT_EXPORTABLE = 0x00000001,
+        CRYPT_USER_PROTECTED = 0x00000002,
+        CRYPT_MACHINE_KEYSET = 0x00000020,
+        CRYPT_USER_KEYSET = 0x00001000,
+        PKCS12_PREFER_CNG_KSP = 0x00000100,
+        PKCS12_ALWAYS_CNG_KSP = 0x00000200,
+        PKCS12_ALLOW_OVERWRITE_KEY = 0x00004000,
+        PKCS12_NO_PERSIST_KEY = 0x00008000,
         PKCS12_INCLUDE_EXTENDED_PROPERTIES = 0x00000010,
-        None                               = 0x00000000,
+        None = 0x00000000,
     }
 
     internal enum CryptMessageParameterType : int
@@ -364,7 +351,7 @@ namespace Internal.Cryptography.Pal.Native
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal struct CMSG_SIGNER_INFO_Partial  // This is not the full definition of CMSG_SIGNER_INFO. Only defining the part we use.
+    internal struct CMSG_SIGNER_INFO_Partial // This is not the full definition of CMSG_SIGNER_INFO. Only defining the part we use.
     {
         public int dwVersion;
         public CRYPTOAPI_BLOB Issuer;
@@ -381,20 +368,20 @@ namespace Internal.Cryptography.Pal.Native
     internal enum CertFindType : int
     {
         CERT_FIND_SUBJECT_CERT = 0x000b0000,
-        CERT_FIND_HASH         = 0x00010000,
-        CERT_FIND_SUBJECT_STR  = 0x00080007,
-        CERT_FIND_ISSUER_STR   = 0x00080004,
-        CERT_FIND_EXISTING     = 0x000d0000,
-        CERT_FIND_ANY          = 0x00000000,
+        CERT_FIND_HASH = 0x00010000,
+        CERT_FIND_SUBJECT_STR = 0x00080007,
+        CERT_FIND_ISSUER_STR = 0x00080004,
+        CERT_FIND_EXISTING = 0x000d0000,
+        CERT_FIND_ANY = 0x00000000,
     }
 
     [Flags]
     internal enum PFXExportFlags : int
     {
-        REPORT_NO_PRIVATE_KEY                 = 0x00000001,
+        REPORT_NO_PRIVATE_KEY = 0x00000001,
         REPORT_NOT_ABLE_TO_EXPORT_PRIVATE_KEY = 0x00000002,
-        EXPORT_PRIVATE_KEYS                   = 0x00000004,
-        None                                  = 0x00000000,
+        EXPORT_PRIVATE_KEYS = 0x00000004,
+        None = 0x00000000,
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -420,21 +407,19 @@ namespace Internal.Cryptography.Pal.Native
     [Flags]
     internal enum CertNameStrTypeAndFlags : int
     {
-        CERT_SIMPLE_NAME_STR                   = 1,
-        CERT_OID_NAME_STR                      = 2,
-        CERT_X500_NAME_STR                     = 3,
-
-        CERT_NAME_STR_SEMICOLON_FLAG           = 0x40000000,
-        CERT_NAME_STR_NO_PLUS_FLAG             = 0x20000000,
-        CERT_NAME_STR_NO_QUOTING_FLAG          = 0x10000000,
-        CERT_NAME_STR_CRLF_FLAG                = 0x08000000,
-        CERT_NAME_STR_COMMA_FLAG               = 0x04000000,
-        CERT_NAME_STR_REVERSE_FLAG             = 0x02000000,
-
-        CERT_NAME_STR_DISABLE_IE4_UTF8_FLAG    = 0x00010000,
-        CERT_NAME_STR_ENABLE_T61_UNICODE_FLAG  = 0x00020000,
+        CERT_SIMPLE_NAME_STR = 1,
+        CERT_OID_NAME_STR = 2,
+        CERT_X500_NAME_STR = 3,
+        CERT_NAME_STR_SEMICOLON_FLAG = 0x40000000,
+        CERT_NAME_STR_NO_PLUS_FLAG = 0x20000000,
+        CERT_NAME_STR_NO_QUOTING_FLAG = 0x10000000,
+        CERT_NAME_STR_CRLF_FLAG = 0x08000000,
+        CERT_NAME_STR_COMMA_FLAG = 0x04000000,
+        CERT_NAME_STR_REVERSE_FLAG = 0x02000000,
+        CERT_NAME_STR_DISABLE_IE4_UTF8_FLAG = 0x00010000,
+        CERT_NAME_STR_ENABLE_T61_UNICODE_FLAG = 0x00020000,
         CERT_NAME_STR_ENABLE_UTF8_UNICODE_FLAG = 0x00040000,
-        CERT_NAME_STR_FORCE_UTF8_DIR_STR_FLAG  = 0x00080000,
+        CERT_NAME_STR_FORCE_UTF8_DIR_STR_FLAG = 0x00080000,
     }
 
     internal enum FormatObjectType : int
@@ -452,7 +437,7 @@ namespace Internal.Cryptography.Pal.Native
         public const int CALG_RSA_KEYX = 0xa400;
         public const int CALG_RSA_SIGN = 0x2400;
         public const int CALG_DSS_SIGN = 0x2200;
-        public const int CALG_SHA1     = 0x8004;
+        public const int CALG_SHA1 = 0x8004;
     }
 
     [Flags]
@@ -492,7 +477,7 @@ namespace Internal.Cryptography.Pal.Native
     internal enum CertUsageMatchType : int
     {
         USAGE_MATCH_TYPE_AND = 0x00000000,
-        USAGE_MATCH_TYPE_OR  = 0x00000001,
+        USAGE_MATCH_TYPE_OR = 0x00000001,
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -512,13 +497,13 @@ namespace Internal.Cryptography.Pal.Native
     [Flags]
     internal enum CertChainFlags : int
     {
-        None                                           = 0x00000000,
-        CERT_CHAIN_DISABLE_AUTH_ROOT_AUTO_UPDATE       = 0x00000100,
-        CERT_CHAIN_DISABLE_AIA                         = 0x00002000,
-        CERT_CHAIN_REVOCATION_CHECK_END_CERT           = 0x10000000,
-        CERT_CHAIN_REVOCATION_CHECK_CHAIN              = 0x20000000,
+        None = 0x00000000,
+        CERT_CHAIN_DISABLE_AUTH_ROOT_AUTO_UPDATE = 0x00000100,
+        CERT_CHAIN_DISABLE_AIA = 0x00002000,
+        CERT_CHAIN_REVOCATION_CHECK_END_CERT = 0x10000000,
+        CERT_CHAIN_REVOCATION_CHECK_CHAIN = 0x20000000,
         CERT_CHAIN_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT = 0x40000000,
-        CERT_CHAIN_REVOCATION_CHECK_CACHE_ONLY         = unchecked((int)0x80000000),
+        CERT_CHAIN_REVOCATION_CHECK_CACHE_ONLY = unchecked((int)0x80000000),
     }
 
     internal enum ChainEngine : int
@@ -568,7 +553,7 @@ namespace Internal.Cryptography.Pal.Native
         public IntPtr* rgpszUsageIdentifier; // LPSTR*
     }
 
-    internal enum CertStoreSaveAs :  int
+    internal enum CertStoreSaveAs : int
     {
         CERT_STORE_SAVE_AS_STORE = 1,
         CERT_STORE_SAVE_AS_PKCS7 = 2,
@@ -624,54 +609,49 @@ namespace Internal.Cryptography.Pal.Native
     [Flags]
     internal enum CertTrustErrorStatus : int
     {
-        CERT_TRUST_NO_ERROR                            = 0x00000000,
-        CERT_TRUST_IS_NOT_TIME_VALID                   = 0x00000001,
-        CERT_TRUST_IS_NOT_TIME_NESTED                  = 0x00000002,
-        CERT_TRUST_IS_REVOKED                          = 0x00000004,
-        CERT_TRUST_IS_NOT_SIGNATURE_VALID              = 0x00000008,
-        CERT_TRUST_IS_NOT_VALID_FOR_USAGE              = 0x00000010,
-        CERT_TRUST_IS_UNTRUSTED_ROOT                   = 0x00000020,
-        CERT_TRUST_REVOCATION_STATUS_UNKNOWN           = 0x00000040,
-        CERT_TRUST_IS_CYCLIC                           = 0x00000080,
-
-        CERT_TRUST_INVALID_EXTENSION                   = 0x00000100,
-        CERT_TRUST_INVALID_POLICY_CONSTRAINTS          = 0x00000200,
-        CERT_TRUST_INVALID_BASIC_CONSTRAINTS           = 0x00000400,
-        CERT_TRUST_INVALID_NAME_CONSTRAINTS            = 0x00000800,
-        CERT_TRUST_HAS_NOT_SUPPORTED_NAME_CONSTRAINT   = 0x00001000,
-        CERT_TRUST_HAS_NOT_DEFINED_NAME_CONSTRAINT     = 0x00002000,
-        CERT_TRUST_HAS_NOT_PERMITTED_NAME_CONSTRAINT   = 0x00004000,
-        CERT_TRUST_HAS_EXCLUDED_NAME_CONSTRAINT        = 0x00008000,
-
-        CERT_TRUST_IS_OFFLINE_REVOCATION               = 0x01000000,
-        CERT_TRUST_NO_ISSUANCE_CHAIN_POLICY            = 0x02000000,
-        CERT_TRUST_IS_EXPLICIT_DISTRUST                = 0x04000000,
-        CERT_TRUST_HAS_NOT_SUPPORTED_CRITICAL_EXT      = 0x08000000,
-        CERT_TRUST_HAS_WEAK_SIGNATURE                  = 0x00100000,
-
+        CERT_TRUST_NO_ERROR = 0x00000000,
+        CERT_TRUST_IS_NOT_TIME_VALID = 0x00000001,
+        CERT_TRUST_IS_NOT_TIME_NESTED = 0x00000002,
+        CERT_TRUST_IS_REVOKED = 0x00000004,
+        CERT_TRUST_IS_NOT_SIGNATURE_VALID = 0x00000008,
+        CERT_TRUST_IS_NOT_VALID_FOR_USAGE = 0x00000010,
+        CERT_TRUST_IS_UNTRUSTED_ROOT = 0x00000020,
+        CERT_TRUST_REVOCATION_STATUS_UNKNOWN = 0x00000040,
+        CERT_TRUST_IS_CYCLIC = 0x00000080,
+        CERT_TRUST_INVALID_EXTENSION = 0x00000100,
+        CERT_TRUST_INVALID_POLICY_CONSTRAINTS = 0x00000200,
+        CERT_TRUST_INVALID_BASIC_CONSTRAINTS = 0x00000400,
+        CERT_TRUST_INVALID_NAME_CONSTRAINTS = 0x00000800,
+        CERT_TRUST_HAS_NOT_SUPPORTED_NAME_CONSTRAINT = 0x00001000,
+        CERT_TRUST_HAS_NOT_DEFINED_NAME_CONSTRAINT = 0x00002000,
+        CERT_TRUST_HAS_NOT_PERMITTED_NAME_CONSTRAINT = 0x00004000,
+        CERT_TRUST_HAS_EXCLUDED_NAME_CONSTRAINT = 0x00008000,
+        CERT_TRUST_IS_OFFLINE_REVOCATION = 0x01000000,
+        CERT_TRUST_NO_ISSUANCE_CHAIN_POLICY = 0x02000000,
+        CERT_TRUST_IS_EXPLICIT_DISTRUST = 0x04000000,
+        CERT_TRUST_HAS_NOT_SUPPORTED_CRITICAL_EXT = 0x08000000,
+        CERT_TRUST_HAS_WEAK_SIGNATURE = 0x00100000,
         // These can be applied to chains only
-        CERT_TRUST_IS_PARTIAL_CHAIN                    = 0x00010000,
-        CERT_TRUST_CTL_IS_NOT_TIME_VALID               = 0x00020000,
-        CERT_TRUST_CTL_IS_NOT_SIGNATURE_VALID          = 0x00040000,
-        CERT_TRUST_CTL_IS_NOT_VALID_FOR_USAGE          = 0x00080000,
+        CERT_TRUST_IS_PARTIAL_CHAIN = 0x00010000,
+        CERT_TRUST_CTL_IS_NOT_TIME_VALID = 0x00020000,
+        CERT_TRUST_CTL_IS_NOT_SIGNATURE_VALID = 0x00040000,
+        CERT_TRUST_CTL_IS_NOT_VALID_FOR_USAGE = 0x00080000,
     }
 
     [Flags]
     internal enum CertTrustInfoStatus : int
     {
         // These can be applied to certificates only
-        CERT_TRUST_HAS_EXACT_MATCH_ISSUER      = 0x00000001,
-        CERT_TRUST_HAS_KEY_MATCH_ISSUER        = 0x00000002,
-        CERT_TRUST_HAS_NAME_MATCH_ISSUER       = 0x00000004,
-        CERT_TRUST_IS_SELF_SIGNED              = 0x00000008,
-
+        CERT_TRUST_HAS_EXACT_MATCH_ISSUER = 0x00000001,
+        CERT_TRUST_HAS_KEY_MATCH_ISSUER = 0x00000002,
+        CERT_TRUST_HAS_NAME_MATCH_ISSUER = 0x00000004,
+        CERT_TRUST_IS_SELF_SIGNED = 0x00000008,
         // These can be applied to certificates and chains
-        CERT_TRUST_HAS_PREFERRED_ISSUER        = 0x00000100,
-        CERT_TRUST_HAS_ISSUANCE_CHAIN_POLICY   = 0x00000200,
-        CERT_TRUST_HAS_VALID_NAME_CONSTRAINTS  = 0x00000400,
-
+        CERT_TRUST_HAS_PREFERRED_ISSUER = 0x00000100,
+        CERT_TRUST_HAS_ISSUANCE_CHAIN_POLICY = 0x00000200,
+        CERT_TRUST_HAS_VALID_NAME_CONSTRAINTS = 0x00000400,
         // These can be applied to chains only
-        CERT_TRUST_IS_COMPLEX_CHAIN            = 0x00010000,
+        CERT_TRUST_IS_COMPLEX_CHAIN = 0x00010000,
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -709,7 +689,7 @@ namespace Internal.Cryptography.Pal.Native
         // dwRevocationFreshnessTime is the largest time across all elements
         // checked.
         public int fHasRevocationFreshnessTime;
-        public int dwRevocationFreshnessTime;    // seconds
+        public int dwRevocationFreshnessTime; // seconds
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -732,7 +712,7 @@ namespace Internal.Cryptography.Pal.Native
         // dwRevocationFreshnessTime is the largest time across all elements
         // checked.
         public int fHasRevocationFreshnessTime;
-        public int dwRevocationFreshnessTime;    // seconds
+        public int dwRevocationFreshnessTime; // seconds
 
         // Flags passed when created via CertGetCertificateChain
         public int dwCreateFlags;

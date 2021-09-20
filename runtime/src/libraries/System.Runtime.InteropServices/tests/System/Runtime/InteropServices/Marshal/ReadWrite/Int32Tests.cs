@@ -36,6 +36,7 @@ namespace System.Runtime.InteropServices.Tests
                     Assert.Equal(values[i], value);
                 }
             }
+
             finally
             {
                 Marshal.FreeCoTaskMem(ptr);
@@ -43,17 +44,17 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [Fact]
-        [SkipOnMono("Marshal.WriteInt32 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.WriteInt32 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void WriteInt32_BlittableObject_Roundtrips()
         {
-            int offset1 = Marshal.OffsetOf<BlittableStruct>(nameof(BlittableStruct.value1)).ToInt32();
-            int offset2 = Marshal.OffsetOf<BlittableStruct>(nameof(BlittableStruct.value2)).ToInt32();
+            int offset1 = Marshal.OffsetOf<BlittableStruct>(nameof(BlittableStruct.value1))
+                .ToInt32();
+            int offset2 = Marshal.OffsetOf<BlittableStruct>(nameof(BlittableStruct.value2))
+                .ToInt32();
 
-            object structure = new BlittableStruct
-            {
-                value1 = 10,
-                value2 = 20
-            };
+            object structure = new BlittableStruct { value1 = 10, value2 = 20 };
 
             Marshal.WriteInt32(structure, offset1, 11);
             Marshal.WriteInt32(structure, offset2, 21);
@@ -65,12 +66,23 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [Fact]
-        [SkipOnMono("Marshal.WriteInt32 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.WriteInt32 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void WriteInt32_StructWithReferenceTypes_ReturnsExpected()
         {
-            int pointerOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.pointerValue)).ToInt32();
-            int stringOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.stringValue)).ToInt32();
-            int arrayOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.byValueArray)).ToInt32();
+            int pointerOffset = Marshal.OffsetOf<StructWithReferenceTypes>(
+                    nameof(StructWithReferenceTypes.pointerValue)
+                )
+                .ToInt32();
+            int stringOffset = Marshal.OffsetOf<StructWithReferenceTypes>(
+                    nameof(StructWithReferenceTypes.stringValue)
+                )
+                .ToInt32();
+            int arrayOffset = Marshal.OffsetOf<StructWithReferenceTypes>(
+                    nameof(StructWithReferenceTypes.byValueArray)
+                )
+                .ToInt32();
 
             object structure = new StructWithReferenceTypes
             {
@@ -84,36 +96,50 @@ namespace System.Runtime.InteropServices.Tests
 
             Assert.Equal((IntPtr)200, ((StructWithReferenceTypes)structure).pointerValue);
             Assert.Equal("ABC", ((StructWithReferenceTypes)structure).stringValue);
-            Assert.Equal(new int[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 100 }, ((StructWithReferenceTypes)structure).byValueArray);
+            Assert.Equal(
+                new int[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 100 },
+                ((StructWithReferenceTypes)structure).byValueArray
+            );
             Assert.Equal(200, Marshal.ReadInt32(structure, pointerOffset));
             Assert.NotEqual(0, Marshal.ReadInt32(structure, stringOffset));
             Assert.Equal(100, Marshal.ReadInt32(structure, arrayOffset + sizeof(int) * 9));
         }
 
         [Fact]
-        [SkipOnMono("Marshal.ReadInt32 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.ReadInt32 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void ReadInt32_BlittableObject_ReturnsExpected()
         {
-            int offset1 = Marshal.OffsetOf<BlittableStruct>(nameof(BlittableStruct.value1)).ToInt32();
-            int offset2 = Marshal.OffsetOf<BlittableStruct>(nameof(BlittableStruct.value2)).ToInt32();
+            int offset1 = Marshal.OffsetOf<BlittableStruct>(nameof(BlittableStruct.value1))
+                .ToInt32();
+            int offset2 = Marshal.OffsetOf<BlittableStruct>(nameof(BlittableStruct.value2))
+                .ToInt32();
 
-            object structure = new BlittableStruct
-            {
-                value1 = 10,
-                value2 = 20
-            };
+            object structure = new BlittableStruct { value1 = 10, value2 = 20 };
 
             Assert.Equal(10, Marshal.ReadInt32(structure, offset1));
             Assert.Equal(20, Marshal.ReadInt32(structure, offset2));
         }
 
         [Fact]
-        [SkipOnMono("Marshal.ReadInt32 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.ReadInt32 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void ReadInt32_StructWithReferenceTypes_ReturnsExpected()
         {
-            int pointerOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.pointerValue)).ToInt32();
-            int stringOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.stringValue)).ToInt32();
-            int arrayOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.byValueArray)).ToInt32();
+            int pointerOffset = Marshal.OffsetOf<StructWithReferenceTypes>(
+                    nameof(StructWithReferenceTypes.pointerValue)
+                )
+                .ToInt32();
+            int stringOffset = Marshal.OffsetOf<StructWithReferenceTypes>(
+                    nameof(StructWithReferenceTypes.stringValue)
+                )
+                .ToInt32();
+            int arrayOffset = Marshal.OffsetOf<StructWithReferenceTypes>(
+                    nameof(StructWithReferenceTypes.byValueArray)
+                )
+                .ToInt32();
 
             object structure = new StructWithReferenceTypes
             {
@@ -128,59 +154,91 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [Fact]
-        [SkipOnMono("Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void ReadInt32_ZeroPoint_ThrowsException()
         {
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() => Marshal.ReadInt32(IntPtr.Zero));
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() => Marshal.ReadInt32(IntPtr.Zero, 2));
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
+                () => Marshal.ReadInt32(IntPtr.Zero)
+            );
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
+                () => Marshal.ReadInt32(IntPtr.Zero, 2)
+            );
         }
 
         [Fact]
-        [SkipOnMono("Marshal.ReadInt32 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.ReadInt32 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void ReadInt32_NullObject_ThrowsAccessViolationException()
         {
             Assert.Throws<AccessViolationException>(() => Marshal.ReadInt32(null, 2));
         }
 
         [Fact]
-        [SkipOnMono("Marshal.ReadInt32 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.ReadInt32 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void ReadInt32_NotReadable_ThrowsArgumentException()
         {
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.RunAndCollect);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.RunAndCollect
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
             Type collectibleType = typeBuilder.CreateType();
             object collectibleObject = Activator.CreateInstance(collectibleType);
 
-            AssertExtensions.Throws<ArgumentException>(null, () => Marshal.ReadInt32(collectibleObject, 0));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Marshal.ReadInt32(collectibleObject, 0)
+            );
         }
 
         [Fact]
-        [SkipOnMono("Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void WriteInt32_ZeroPointer_ThrowsException()
         {
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() => Marshal.WriteInt32(IntPtr.Zero, 0));
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() => Marshal.WriteInt32(IntPtr.Zero, 2, 0));
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
+                () => Marshal.WriteInt32(IntPtr.Zero, 0)
+            );
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
+                () => Marshal.WriteInt32(IntPtr.Zero, 2, 0)
+            );
         }
 
         [Fact]
-        [SkipOnMono("Marshal.WriteInt32 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.WriteInt32 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void WriteInt32_NullObject_ThrowsAccessViolationException()
         {
             Assert.Throws<AccessViolationException>(() => Marshal.WriteInt32(null, 2, 0));
         }
 
         [Fact]
-        [SkipOnMono("Marshal.WriteInt32 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.WriteInt32 will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void WriteInt32_NotReadable_ThrowsArgumentException()
         {
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.RunAndCollect);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.RunAndCollect
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
             Type collectibleType = typeBuilder.CreateType();
             object collectibleObject = Activator.CreateInstance(collectibleType);
 
-            AssertExtensions.Throws<ArgumentException>(null, () => Marshal.WriteInt32(collectibleObject, 0, 0));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Marshal.WriteInt32(collectibleObject, 0, 0)
+            );
         }
 
         public struct BlittableStruct

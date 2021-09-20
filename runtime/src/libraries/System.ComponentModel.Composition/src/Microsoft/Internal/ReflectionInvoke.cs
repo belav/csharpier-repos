@@ -13,13 +13,18 @@ namespace Microsoft.Internal
             return Activator.CreateInstance(type, arguments);
         }
 
-        public static object SafeInvoke(this ConstructorInfo constructor, params object?[]? arguments)
-        {
+        public static object SafeInvoke(
+            this ConstructorInfo constructor,
+            params object?[]? arguments
+        ) {
             return constructor.Invoke(arguments);
         }
 
-        public static object? SafeInvoke(this MethodInfo method, object? instance, params object?[]? arguments)
-        {
+        public static object? SafeInvoke(
+            this MethodInfo method,
+            object? instance,
+            params object?[]? arguments
+        ) {
             return method.Invoke(instance, arguments);
         }
 

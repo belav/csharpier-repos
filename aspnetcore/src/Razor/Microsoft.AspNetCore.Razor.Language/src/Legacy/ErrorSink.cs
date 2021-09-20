@@ -29,6 +29,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         /// Tracks the given <paramref name="error"/>.
         /// </summary>
         /// <param name="error">The <see cref="RazorDiagnostic"/> to track.</param>
-        public void OnError(RazorDiagnostic error) =>_errors.Add(error);
+        public void OnError(RazorDiagnostic error) => _errors.Add(error);
     }
 }

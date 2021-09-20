@@ -15,8 +15,7 @@ namespace Microsoft.EntityFrameworkCore
     ///     in <see cref="DbContext.OnModelCreating(ModelBuilder)" />.
     /// </summary>
     /// <typeparam name="TEntity"> The entity type to be configured. </typeparam>
-    public interface IEntityTypeConfiguration<TEntity>
-        where TEntity : class
+    public interface IEntityTypeConfiguration<TEntity> where TEntity : class
     {
         /// <summary>
         ///     Configures the entity of type <typeparamref name="TEntity" />.

@@ -15,8 +15,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 
         public void WriteSection(CodeRenderingContext context, SectionIntermediateNode node)
         {
-            context.CodeWriter
-                .WriteStartMethodInvocation(SectionMethodName)
+            context.CodeWriter.WriteStartMethodInvocation(SectionMethodName)
                 .Write("\"")
                 .Write(node.SectionName)
                 .Write("\", ");

@@ -14,8 +14,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         public readonly IReadOnlyDictionary<T, T> Forward;
         public readonly IReadOnlyDictionary<T, T> Reverse;
 
-        public BidirectionalMap(IReadOnlyDictionary<T, T> forward, IReadOnlyDictionary<T, T> reverse)
-        {
+        public BidirectionalMap(
+            IReadOnlyDictionary<T, T> forward,
+            IReadOnlyDictionary<T, T> reverse
+        ) {
             Forward = forward;
             Reverse = reverse;
         }
@@ -35,8 +37,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Reverse = reverseMap;
         }
 
-        public static BidirectionalMap<T> FromMatch(Match<T> match)
-            => new(match.Matches, match.ReverseMatches);
+        public static BidirectionalMap<T> FromMatch(Match<T> match) =>
+            new(match.Matches, match.ReverseMatches);
 
         public bool IsDefaultOrEmpty => Forward == null || Forward.Count == 0;
     }

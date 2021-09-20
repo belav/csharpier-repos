@@ -19,8 +19,11 @@ namespace System.Text.Json.Serialization.Tests
                 return typeof(IMemberInterface).IsAssignableFrom(typeToConvert);
             }
 
-            public override IMemberInterface Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            {
+            public override IMemberInterface Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) {
                 ReadCallCount++;
 
                 string value = reader.GetString();
@@ -49,11 +52,18 @@ namespace System.Text.Json.Serialization.Tests
                 throw new JsonException();
             }
 
-            public override void Write(Utf8JsonWriter writer, IMemberInterface value, JsonSerializerOptions options)
-            {
+            public override void Write(
+                Utf8JsonWriter writer,
+                IMemberInterface value,
+                JsonSerializerOptions options
+            ) {
                 WriteCallCount++;
 
-                JsonSerializer.Serialize<string>(writer, value == null ? null : value.Value, options);
+                JsonSerializer.Serialize<string>(
+                    writer,
+                    value == null ? null : value.Value,
+                    options
+                );
             }
         }
 
@@ -69,8 +79,11 @@ namespace System.Text.Json.Serialization.Tests
                 return typeof(IMemberInterface).IsAssignableFrom(typeToConvert);
             }
 
-            public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            {
+            public override object Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) {
                 ReadCallCount++;
 
                 string value = reader.GetString();
@@ -99,11 +112,18 @@ namespace System.Text.Json.Serialization.Tests
                 throw new JsonException();
             }
 
-            public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
-            {
+            public override void Write(
+                Utf8JsonWriter writer,
+                object value,
+                JsonSerializerOptions options
+            ) {
                 WriteCallCount++;
 
-                JsonSerializer.Serialize<string>(writer, value == null ? null : ((IMemberInterface)value).Value, options);
+                JsonSerializer.Serialize<string>(
+                    writer,
+                    value == null ? null : ((IMemberInterface)value).Value,
+                    options
+                );
             }
         }
 
@@ -116,14 +136,50 @@ namespace System.Text.Json.Serialization.Tests
 
             Exception ex;
             // Invalid cast OtherVTMember
-            ex = Assert.Throws<InvalidCastException>(() => JsonSerializer.Deserialize<TestClassWithValueTypedMember>(@"{""MyValueTypedProperty"":""OtherVTProperty""}", options));
-            ex = Assert.Throws<InvalidCastException>(() => JsonSerializer.Deserialize<TestClassWithValueTypedMember>(@"{""MyValueTypedField"":""OtherVTField""}", options));
+            ex = Assert.Throws<InvalidCastException>(
+                () =>
+                    JsonSerializer.Deserialize<TestClassWithValueTypedMember>(
+                        @"{""MyValueTypedProperty"":""OtherVTProperty""}",
+                        options
+                    )
+            );
+            ex = Assert.Throws<InvalidCastException>(
+                () =>
+                    JsonSerializer.Deserialize<TestClassWithValueTypedMember>(
+                        @"{""MyValueTypedField"":""OtherVTField""}",
+                        options
+                    )
+            );
             // Invalid cast OtherRTMember
-            ex = Assert.Throws<InvalidCastException>(() => JsonSerializer.Deserialize<TestClassWithValueTypedMember>(@"{""MyValueTypedProperty"":""OtherRTProperty""}", options));
-            ex = Assert.Throws<InvalidCastException>(() => JsonSerializer.Deserialize<TestClassWithValueTypedMember>(@"{""MyValueTypedField"":""OtherRTField""}", options));
+            ex = Assert.Throws<InvalidCastException>(
+                () =>
+                    JsonSerializer.Deserialize<TestClassWithValueTypedMember>(
+                        @"{""MyValueTypedProperty"":""OtherRTProperty""}",
+                        options
+                    )
+            );
+            ex = Assert.Throws<InvalidCastException>(
+                () =>
+                    JsonSerializer.Deserialize<TestClassWithValueTypedMember>(
+                        @"{""MyValueTypedField"":""OtherRTField""}",
+                        options
+                    )
+            );
             // Invalid null
-            ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<TestClassWithValueTypedMember>(@"{""MyValueTypedProperty"":null}", options));
-            ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<TestClassWithValueTypedMember>(@"{""MyValueTypedField"":null}", options));
+            ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                    JsonSerializer.Deserialize<TestClassWithValueTypedMember>(
+                        @"{""MyValueTypedProperty"":null}",
+                        options
+                    )
+            );
+            ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                    JsonSerializer.Deserialize<TestClassWithValueTypedMember>(
+                        @"{""MyValueTypedField"":null}",
+                        options
+                    )
+            );
         }
 
         [Fact]
@@ -135,14 +191,50 @@ namespace System.Text.Json.Serialization.Tests
 
             Exception ex;
             // Invalid cast OtherVTMember
-            ex = Assert.Throws<InvalidCastException>(() => JsonSerializer.Deserialize<TestClassWithValueTypedMember>(@"{""MyValueTypedProperty"":""OtherVTProperty""}", options));
-            ex = Assert.Throws<InvalidCastException>(() => JsonSerializer.Deserialize<TestClassWithValueTypedMember>(@"{""MyValueTypedField"":""OtherVTField""}", options));
+            ex = Assert.Throws<InvalidCastException>(
+                () =>
+                    JsonSerializer.Deserialize<TestClassWithValueTypedMember>(
+                        @"{""MyValueTypedProperty"":""OtherVTProperty""}",
+                        options
+                    )
+            );
+            ex = Assert.Throws<InvalidCastException>(
+                () =>
+                    JsonSerializer.Deserialize<TestClassWithValueTypedMember>(
+                        @"{""MyValueTypedField"":""OtherVTField""}",
+                        options
+                    )
+            );
             // Invalid cast OtherRTMember
-            ex = Assert.Throws<InvalidCastException>(() => JsonSerializer.Deserialize<TestClassWithValueTypedMember>(@"{""MyValueTypedProperty"":""OtherRTProperty""}", options));
-            ex = Assert.Throws<InvalidCastException>(() => JsonSerializer.Deserialize<TestClassWithValueTypedMember>(@"{""MyValueTypedField"":""OtherRTField""}", options));
+            ex = Assert.Throws<InvalidCastException>(
+                () =>
+                    JsonSerializer.Deserialize<TestClassWithValueTypedMember>(
+                        @"{""MyValueTypedProperty"":""OtherRTProperty""}",
+                        options
+                    )
+            );
+            ex = Assert.Throws<InvalidCastException>(
+                () =>
+                    JsonSerializer.Deserialize<TestClassWithValueTypedMember>(
+                        @"{""MyValueTypedField"":""OtherRTField""}",
+                        options
+                    )
+            );
             // Invalid null
-            ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<TestClassWithValueTypedMember>(@"{""MyValueTypedProperty"":null}", options));
-            ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize<TestClassWithValueTypedMember>(@"{""MyValueTypedField"":null}", options));
+            ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                    JsonSerializer.Deserialize<TestClassWithValueTypedMember>(
+                        @"{""MyValueTypedProperty"":null}",
+                        options
+                    )
+            );
+            ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                    JsonSerializer.Deserialize<TestClassWithValueTypedMember>(
+                        @"{""MyValueTypedField"":null}",
+                        options
+                    )
+            );
         }
 
         [Fact]
@@ -155,13 +247,40 @@ namespace System.Text.Json.Serialization.Tests
             TestClassWithNullableValueTypedMember obj;
             Exception ex;
             // Invalid cast OtherVTMember
-            ex = Assert.Throws<InvalidCastException>(() => JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(@"{""MyValueTypedProperty"":""OtherVTProperty""}", options));
-            ex = Assert.Throws<InvalidCastException>(() => JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(@"{""MyValueTypedField"":""OtherVTField""}", options));
+            ex = Assert.Throws<InvalidCastException>(
+                () =>
+                    JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(
+                        @"{""MyValueTypedProperty"":""OtherVTProperty""}",
+                        options
+                    )
+            );
+            ex = Assert.Throws<InvalidCastException>(
+                () =>
+                    JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(
+                        @"{""MyValueTypedField"":""OtherVTField""}",
+                        options
+                    )
+            );
             // Invalid cast OtherRTMember
-            ex = Assert.Throws<InvalidCastException>(() => JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(@"{""MyValueTypedProperty"":""OtherRTProperty""}", options));
-            ex = Assert.Throws<InvalidCastException>(() => JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(@"{""MyValueTypedField"":""OtherRTField""}", options));
+            ex = Assert.Throws<InvalidCastException>(
+                () =>
+                    JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(
+                        @"{""MyValueTypedProperty"":""OtherRTProperty""}",
+                        options
+                    )
+            );
+            ex = Assert.Throws<InvalidCastException>(
+                () =>
+                    JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(
+                        @"{""MyValueTypedField"":""OtherRTField""}",
+                        options
+                    )
+            );
             // Valid null
-            obj = JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(@"{""MyValueTypedProperty"":null,""MyValueTypedField"":null}", options);
+            obj = JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(
+                @"{""MyValueTypedProperty"":null,""MyValueTypedField"":null}",
+                options
+            );
             Assert.Null(obj.MyValueTypedProperty);
             Assert.Null(obj.MyValueTypedField);
         }
@@ -176,13 +295,40 @@ namespace System.Text.Json.Serialization.Tests
             TestClassWithNullableValueTypedMember obj;
             Exception ex;
             // Invalid cast OtherVTMember
-            ex = Assert.Throws<InvalidCastException>(() => JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(@"{""MyValueTypedProperty"":""OtherVTProperty""}", options));
-            ex = Assert.Throws<InvalidCastException>(() => JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(@"{""MyValueTypedField"":""OtherVTField""}", options));
+            ex = Assert.Throws<InvalidCastException>(
+                () =>
+                    JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(
+                        @"{""MyValueTypedProperty"":""OtherVTProperty""}",
+                        options
+                    )
+            );
+            ex = Assert.Throws<InvalidCastException>(
+                () =>
+                    JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(
+                        @"{""MyValueTypedField"":""OtherVTField""}",
+                        options
+                    )
+            );
             // Invalid cast OtherRTMember
-            ex = Assert.Throws<InvalidCastException>(() => JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(@"{""MyValueTypedProperty"":""OtherRTProperty""}", options));
-            ex = Assert.Throws<InvalidCastException>(() => JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(@"{""MyValueTypedField"":""OtherRTField""}", options));
+            ex = Assert.Throws<InvalidCastException>(
+                () =>
+                    JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(
+                        @"{""MyValueTypedProperty"":""OtherRTProperty""}",
+                        options
+                    )
+            );
+            ex = Assert.Throws<InvalidCastException>(
+                () =>
+                    JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(
+                        @"{""MyValueTypedField"":""OtherRTField""}",
+                        options
+                    )
+            );
             // Valid null
-            obj = JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(@"{""MyValueTypedProperty"":null,""MyValueTypedField"":null}", options);
+            obj = JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(
+                @"{""MyValueTypedProperty"":null,""MyValueTypedField"":null}",
+                options
+            );
             Assert.Null(obj.MyValueTypedProperty);
             Assert.Null(obj.MyValueTypedField);
         }
@@ -190,13 +336,11 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ValueTypedMemberToInterfaceConverter()
         {
-            const string expected = @"{""MyValueTypedProperty"":""ValueTypedProperty"",""MyRefTypedProperty"":""RefTypedProperty"",""MyValueTypedField"":""ValueTypedField"",""MyRefTypedField"":""RefTypedField""}";
+            const string expected =
+                @"{""MyValueTypedProperty"":""ValueTypedProperty"",""MyRefTypedProperty"":""RefTypedProperty"",""MyValueTypedField"":""ValueTypedField"",""MyRefTypedField"":""RefTypedField""}";
 
             var converter = new ValueTypeToInterfaceConverter();
-            var options = new JsonSerializerOptions()
-            {
-                IncludeFields = true,
-            };
+            var options = new JsonSerializerOptions() { IncludeFields = true, };
             options.Converters.Add(converter);
 
             string json;
@@ -222,13 +366,11 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ValueTypedMemberToObjectConverter()
         {
-            const string expected = @"{""MyValueTypedProperty"":""ValueTypedProperty"",""MyRefTypedProperty"":""RefTypedProperty"",""MyValueTypedField"":""ValueTypedField"",""MyRefTypedField"":""RefTypedField""}";
+            const string expected =
+                @"{""MyValueTypedProperty"":""ValueTypedProperty"",""MyRefTypedProperty"":""RefTypedProperty"",""MyValueTypedField"":""ValueTypedField"",""MyRefTypedField"":""RefTypedField""}";
 
             var converter = new ValueTypeToObjectConverter();
-            var options = new JsonSerializerOptions()
-            {
-                IncludeFields = true,
-            };
+            var options = new JsonSerializerOptions() { IncludeFields = true, };
             options.Converters.Add(converter);
 
             string json;
@@ -254,13 +396,11 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void NullableValueTypedMemberToInterfaceConverter()
         {
-            const string expected = @"{""MyValueTypedProperty"":""ValueTypedProperty"",""MyRefTypedProperty"":""RefTypedProperty"",""MyValueTypedField"":""ValueTypedField"",""MyRefTypedField"":""RefTypedField""}";
+            const string expected =
+                @"{""MyValueTypedProperty"":""ValueTypedProperty"",""MyRefTypedProperty"":""RefTypedProperty"",""MyValueTypedField"":""ValueTypedField"",""MyRefTypedField"":""RefTypedField""}";
 
             var converter = new ValueTypeToInterfaceConverter();
-            var options = new JsonSerializerOptions()
-            {
-                IncludeFields = true,
-            };
+            var options = new JsonSerializerOptions() { IncludeFields = true, };
             options.Converters.Add(converter);
 
             string json;
@@ -276,7 +416,10 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             {
-                var obj = JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(json, options);
+                var obj = JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(
+                    json,
+                    options
+                );
                 obj.Verify();
 
                 Assert.Equal(4, converter.ReadCallCount);
@@ -286,13 +429,11 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void NullableValueTypedMemberToObjectConverter()
         {
-            const string expected = @"{""MyValueTypedProperty"":""ValueTypedProperty"",""MyRefTypedProperty"":""RefTypedProperty"",""MyValueTypedField"":""ValueTypedField"",""MyRefTypedField"":""RefTypedField""}";
+            const string expected =
+                @"{""MyValueTypedProperty"":""ValueTypedProperty"",""MyRefTypedProperty"":""RefTypedProperty"",""MyValueTypedField"":""ValueTypedField"",""MyRefTypedField"":""RefTypedField""}";
 
             var converter = new ValueTypeToObjectConverter();
-            var options = new JsonSerializerOptions()
-            {
-                IncludeFields = true,
-            };
+            var options = new JsonSerializerOptions() { IncludeFields = true, };
             options.Converters.Add(converter);
 
             string json;
@@ -308,7 +449,10 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             {
-                var obj = JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(json, options);
+                var obj = JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(
+                    json,
+                    options
+                );
                 obj.Verify();
 
                 Assert.Equal(4, converter.ReadCallCount);
@@ -318,13 +462,11 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void NullableValueTypedMemberWithNullsToInterfaceConverter()
         {
-            const string expected = @"{""MyValueTypedProperty"":null,""MyRefTypedProperty"":null,""MyValueTypedField"":null,""MyRefTypedField"":null}";
+            const string expected =
+                @"{""MyValueTypedProperty"":null,""MyRefTypedProperty"":null,""MyValueTypedField"":null,""MyRefTypedField"":null}";
 
             var converter = new ValueTypeToInterfaceConverter();
-            var options = new JsonSerializerOptions()
-            {
-                IncludeFields = true,
-            };
+            var options = new JsonSerializerOptions() { IncludeFields = true, };
             options.Converters.Add(converter);
 
             string json;
@@ -338,7 +480,10 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             {
-                var obj = JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(json, options);
+                var obj = JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(
+                    json,
+                    options
+                );
 
                 Assert.Equal(4, converter.ReadCallCount);
                 Assert.Null(obj.MyValueTypedProperty);
@@ -351,13 +496,11 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void NullableValueTypedMemberWithNullsToObjectConverter()
         {
-            const string expected = @"{""MyValueTypedProperty"":null,""MyRefTypedProperty"":null,""MyValueTypedField"":null,""MyRefTypedField"":null}";
+            const string expected =
+                @"{""MyValueTypedProperty"":null,""MyRefTypedProperty"":null,""MyValueTypedField"":null,""MyRefTypedField"":null}";
 
             var converter = new ValueTypeToObjectConverter();
-            var options = new JsonSerializerOptions()
-            {
-                IncludeFields = true,
-            };
+            var options = new JsonSerializerOptions() { IncludeFields = true, };
             options.Converters.Add(converter);
 
             string json;
@@ -371,7 +514,10 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             {
-                var obj = JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(json, options);
+                var obj = JsonSerializer.Deserialize<TestClassWithNullableValueTypedMember>(
+                    json,
+                    options
+                );
 
                 Assert.Equal(4, converter.ReadCallCount);
                 Assert.Null(obj.MyValueTypedProperty);

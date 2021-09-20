@@ -26,8 +26,8 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.ModelNotFinalized(nameof(IReadOnlyProperty.GetTypeMapping)),
-                Assert.Throws<InvalidOperationException>(
-                    () => property.GetTypeMapping()).Message);
+                Assert.Throws<InvalidOperationException>(() => property.GetTypeMapping()).Message
+            );
         }
 
         [ConditionalFact]
@@ -80,9 +80,16 @@ namespace Microsoft.EntityFrameworkCore
             property2.SetValueConverter(new CastingConverter<int?, decimal>());
 
             Assert.Equal(
-                CoreStrings.ConverterPropertyMismatch("long", "Entity (Dictionary<string, object>)", "Property1", "int"),
+                CoreStrings.ConverterPropertyMismatch(
+                    "long",
+                    "Entity (Dictionary<string, object>)",
+                    "Property1",
+                    "int"
+                ),
                 Assert.Throws<InvalidOperationException>(
-                    () => property1.SetValueConverter(new CastingConverter<long, decimal>())).Message);
+                    () => property1.SetValueConverter(new CastingConverter<long, decimal>())
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -130,7 +137,10 @@ namespace Microsoft.EntityFrameworkCore
 
             firstProperty.ValueGenerated = ValueGenerated.OnAdd;
 
-            Assert.Equal((IProperty)firstProperty, ((IProperty)thirdProperty).FindGenerationProperty());
+            Assert.Equal(
+                (IProperty)firstProperty,
+                ((IProperty)thirdProperty).FindGenerationProperty()
+            );
         }
 
         [ConditionalFact]
@@ -152,7 +162,11 @@ namespace Microsoft.EntityFrameworkCore
             var middleProperty2 = middleType.AddProperty("FK2", typeof(int));
             var middleKey1 = middleType.AddKey(middleProperty1);
             middleType.AddForeignKey(middleProperty1, leftKey, leftType);
-            middleType.AddForeignKey(new[] { middleProperty2, middleProperty1 }, rightKey, rightType);
+            middleType.AddForeignKey(
+                new[] { middleProperty2, middleProperty1 },
+                rightKey,
+                rightType
+            );
 
             var endType = model.AddEntityType("End");
             var endProperty = endType.AddProperty("FK", typeof(int));
@@ -199,19 +213,39 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 (IProperty)model.FindEntityType(typeof(Product)).FindProperty("Id"),
-                ((IProperty)model.FindEntityType(typeof(ProductDetails)).GetForeignKeys().Single().Properties[0]).FindGenerationProperty());
+                (
+                    (IProperty)model.FindEntityType(typeof(ProductDetails))
+                        .GetForeignKeys()
+                        .Single().Properties[0]
+                ).FindGenerationProperty()
+            );
 
             Assert.Equal(
                 (IProperty)model.FindEntityType(typeof(Product)).FindProperty("Id"),
-                ((IProperty)model.FindEntityType(typeof(ProductDetailsTag)).GetForeignKeys().Single().Properties[0]).FindGenerationProperty());
+                (
+                    (IProperty)model.FindEntityType(typeof(ProductDetailsTag))
+                        .GetForeignKeys()
+                        .Single().Properties[0]
+                ).FindGenerationProperty()
+            );
 
             Assert.Equal(
                 (IProperty)model.FindEntityType(typeof(ProductDetails)).FindProperty("Id2"),
-                ((IProperty)model.FindEntityType(typeof(ProductDetailsTag)).GetForeignKeys().Single().Properties[1]).FindGenerationProperty());
+                (
+                    (IProperty)model.FindEntityType(typeof(ProductDetailsTag))
+                        .GetForeignKeys()
+                        .Single().Properties[1]
+                ).FindGenerationProperty()
+            );
 
             Assert.Equal(
                 (IProperty)model.FindEntityType(typeof(ProductDetails)).FindProperty("Id2"),
-                ((IProperty)model.FindEntityType(typeof(ProductDetailsTagDetails)).GetForeignKeys().Single().Properties[0]).FindGenerationProperty());
+                (
+                    (IProperty)model.FindEntityType(typeof(ProductDetailsTagDetails))
+                        .GetForeignKeys()
+                        .Single().Properties[0]
+                ).FindGenerationProperty()
+            );
         }
 
         [ConditionalFact]
@@ -221,13 +255,21 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 (IProperty)model.FindEntityType(typeof(Order)).FindProperty("Id"),
-                ((IProperty)model.FindEntityType(typeof(OrderDetails)).GetForeignKeys().Single(k => k.Properties.First().Name == "OrderId")
-                    .Properties[0]).FindGenerationProperty());
+                (
+                    (IProperty)model.FindEntityType(typeof(OrderDetails))
+                        .GetForeignKeys()
+                        .Single(k => k.Properties.First().Name == "OrderId").Properties[0]
+                ).FindGenerationProperty()
+            );
 
             Assert.Equal(
                 (IProperty)model.FindEntityType(typeof(Product)).FindProperty("Id"),
-                ((IProperty)model.FindEntityType(typeof(OrderDetails)).GetForeignKeys().Single(k => k.Properties.First().Name == "ProductId")
-                    .Properties[0]).FindGenerationProperty());
+                (
+                    (IProperty)model.FindEntityType(typeof(OrderDetails))
+                        .GetForeignKeys()
+                        .Single(k => k.Properties.First().Name == "ProductId").Properties[0]
+                ).FindGenerationProperty()
+            );
         }
 
         private class Category
@@ -292,62 +334,53 @@ namespace Microsoft.EntityFrameworkCore
             public Product Product { get; set; }
         }
 
-        private static IMutableModel CreateModel()
-            => new Model();
+        private static IMutableModel CreateModel() => new Model();
 
         private IMutableModel BuildModel()
         {
             var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
-            modelBuilder
-                .Entity<Category>()
-                .HasMany(e => e.Products)
-                .WithOne(e => e.Category);
+            modelBuilder.Entity<Category>().HasMany(e => e.Products).WithOne(e => e.Category);
 
-            modelBuilder
-                .Entity<ProductDetailsTag>(
-                    b =>
-                    {
-                        b.HasKey(
-                            e => new { e.Id1, e.Id2 });
-                        b.HasOne(e => e.TagDetails)
-                            .WithOne(e => e.Tag)
-                            .HasPrincipalKey<ProductDetailsTag>(e => e.Id2)
-                            .HasForeignKey<ProductDetailsTagDetails>(e => e.Id);
-                    });
+            modelBuilder.Entity<ProductDetailsTag>(
+                b =>
+                {
+                    b.HasKey(e => new { e.Id1, e.Id2 });
+                    b.HasOne(e => e.TagDetails)
+                        .WithOne(e => e.Tag)
+                        .HasPrincipalKey<ProductDetailsTag>(e => e.Id2)
+                        .HasForeignKey<ProductDetailsTagDetails>(e => e.Id);
+                }
+            );
 
-            modelBuilder
-                .Entity<ProductDetails>(
-                    b =>
-                    {
-                        b.HasKey(
-                            e => new { e.Id1, e.Id2 });
-                        b.Property(e => e.Id2).ValueGeneratedOnAdd();
-                        b.HasOne(e => e.Tag)
-                            .WithOne(e => e.Details)
-                            .HasForeignKey<ProductDetailsTag>(
-                                e => new { e.Id1, e.Id2 });
-                    });
+            modelBuilder.Entity<ProductDetails>(
+                b =>
+                {
+                    b.HasKey(e => new { e.Id1, e.Id2 });
+                    b.Property(e => e.Id2).ValueGeneratedOnAdd();
+                    b.HasOne(e => e.Tag)
+                        .WithOne(e => e.Details)
+                        .HasForeignKey<ProductDetailsTag>(e => new { e.Id1, e.Id2 });
+                }
+            );
 
-            modelBuilder
-                .Entity<Product>()
+            modelBuilder.Entity<Product>()
                 .HasOne(e => e.Details)
                 .WithOne(e => e.Product)
-                .HasForeignKey<ProductDetails>(
-                    e => new { e.Id1 });
+                .HasForeignKey<ProductDetails>(e => new { e.Id1 });
 
             modelBuilder.Entity<OrderDetails>(
                 b =>
                 {
-                    b.HasKey(
-                        e => new { e.OrderId, e.ProductId });
+                    b.HasKey(e => new { e.OrderId, e.ProductId });
                     b.HasOne(e => e.Order)
                         .WithMany(e => e.OrderDetails)
                         .HasForeignKey(e => e.OrderId);
                     b.HasOne(e => e.Product)
                         .WithMany(e => e.OrderDetails)
                         .HasForeignKey(e => e.ProductId);
-                });
+                }
+            );
 
             return modelBuilder.Model;
         }

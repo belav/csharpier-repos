@@ -7,5 +7,6 @@ namespace System.CommandLine.Invocation
 {
     public delegate Task InvocationMiddleware(
         InvocationContext context,
-        Func<InvocationContext, Task> next);
+        Func<InvocationContext, Task> next
+    );
 }

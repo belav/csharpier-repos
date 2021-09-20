@@ -63,8 +63,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             IExecutionStrategyFactory executionStrategyFactory,
             IConcurrencyDetector concurrencyDetector,
             IDiagnosticsLogger<DbLoggerCategory.Database.Command> commandLogger,
-            IDiagnosticsLogger<DbLoggerCategory.Query> queryLogger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Query> queryLogger
+        ) {
             Check.NotNull(currentContext, nameof(currentContext));
             Check.NotNull(executionStrategyFactory, nameof(executionStrategyFactory));
             Check.NotNull(concurrencyDetector, nameof(concurrencyDetector));
@@ -90,15 +90,13 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        public IStateManager StateManager
-            => CurrentContext.GetDependencies().StateManager;
+        public IStateManager StateManager => CurrentContext.GetDependencies().StateManager;
 
         /// <summary>
         ///     Gets the query provider.
         /// </summary>
         [Obsolete("Use the service by getting it from " + nameof(CurrentContext) + ".")]
-        public IQueryProvider QueryProvider
-            => CurrentContext.GetDependencies().QueryProvider;
+        public IQueryProvider QueryProvider => CurrentContext.GetDependencies().QueryProvider;
 
         /// <summary>
         ///     The execution strategy.

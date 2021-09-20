@@ -8,7 +8,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal enum EnumOverflowKind { NoOverflow, OverflowReport, OverflowIgnore }
+    internal enum EnumOverflowKind
+    {
+        NoOverflow,
+        OverflowReport,
+        OverflowIgnore
+    }
 
     internal static class EnumConstantHelper
     {
@@ -17,8 +22,11 @@ namespace Microsoft.CodeAnalysis
         /// and offset by the given non-negative amount. Return ConstantValue.Bad
         /// if the generated constant would be outside the valid range of the type.
         /// </summary>
-        internal static EnumOverflowKind OffsetValue(ConstantValue constantValue, uint offset, out ConstantValue offsetValue)
-        {
+        internal static EnumOverflowKind OffsetValue(
+            ConstantValue constantValue,
+            uint offset,
+            out ConstantValue offsetValue
+        ) {
             Debug.Assert(!constantValue.IsBad);
             Debug.Assert(offset > 0);
 
@@ -28,6 +36,7 @@ namespace Microsoft.CodeAnalysis
             switch (constantValue.Discriminator)
             {
                 case ConstantValueTypeDiscriminator.SByte:
+
                     {
                         long previous = constantValue.SByteValue;
                         overflowKind = CheckOverflow(sbyte.MaxValue, previous, offset);
@@ -38,6 +47,7 @@ namespace Microsoft.CodeAnalysis
                     }
                     break;
                 case ConstantValueTypeDiscriminator.Byte:
+
                     {
                         ulong previous = constantValue.ByteValue;
                         overflowKind = CheckOverflow(byte.MaxValue, previous, offset);
@@ -48,6 +58,7 @@ namespace Microsoft.CodeAnalysis
                     }
                     break;
                 case ConstantValueTypeDiscriminator.Int16:
+
                     {
                         long previous = constantValue.Int16Value;
                         overflowKind = CheckOverflow(short.MaxValue, previous, offset);
@@ -58,6 +69,7 @@ namespace Microsoft.CodeAnalysis
                     }
                     break;
                 case ConstantValueTypeDiscriminator.UInt16:
+
                     {
                         ulong previous = constantValue.UInt16Value;
                         overflowKind = CheckOverflow(ushort.MaxValue, previous, offset);
@@ -68,6 +80,7 @@ namespace Microsoft.CodeAnalysis
                     }
                     break;
                 case ConstantValueTypeDiscriminator.Int32:
+
                     {
                         long previous = constantValue.Int32Value;
                         overflowKind = CheckOverflow(int.MaxValue, previous, offset);
@@ -78,6 +91,7 @@ namespace Microsoft.CodeAnalysis
                     }
                     break;
                 case ConstantValueTypeDiscriminator.UInt32:
+
                     {
                         ulong previous = constantValue.UInt32Value;
                         overflowKind = CheckOverflow(uint.MaxValue, previous, offset);
@@ -88,6 +102,7 @@ namespace Microsoft.CodeAnalysis
                     }
                     break;
                 case ConstantValueTypeDiscriminator.Int64:
+
                     {
                         long previous = constantValue.Int64Value;
                         overflowKind = CheckOverflow(long.MaxValue, previous, offset);
@@ -98,6 +113,7 @@ namespace Microsoft.CodeAnalysis
                     }
                     break;
                 case ConstantValueTypeDiscriminator.UInt64:
+
                     {
                         ulong previous = constantValue.UInt64Value;
                         overflowKind = CheckOverflow(ulong.MaxValue, previous, offset);
@@ -128,9 +144,13 @@ namespace Microsoft.CodeAnalysis
 
         private static EnumOverflowKind CheckOverflow(ulong maxOffset, uint offset)
         {
-            return (offset <= maxOffset) ?
-                EnumOverflowKind.NoOverflow :
-                (((offset - 1) == maxOffset) ? EnumOverflowKind.OverflowReport : EnumOverflowKind.OverflowIgnore);
+            return (offset <= maxOffset)
+                ? EnumOverflowKind.NoOverflow
+                : (
+                      ((offset - 1) == maxOffset)
+                          ? EnumOverflowKind.OverflowReport
+                          : EnumOverflowKind.OverflowIgnore
+                  );
         }
     }
 }

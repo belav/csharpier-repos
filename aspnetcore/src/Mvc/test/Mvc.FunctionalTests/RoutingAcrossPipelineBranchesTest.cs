@@ -14,14 +14,19 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class RoutingAcrossPipelineBranchesTests : IClassFixture<MvcTestFixture<RoutingWebSite.StartupRoutingDifferentBranches>>
+    public class RoutingAcrossPipelineBranchesTests
+        : IClassFixture<MvcTestFixture<RoutingWebSite.StartupRoutingDifferentBranches>>
     {
-        public RoutingAcrossPipelineBranchesTests(MvcTestFixture<RoutingWebSite.StartupRoutingDifferentBranches> fixture)
-        {
-            Factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        public RoutingAcrossPipelineBranchesTests(
+            MvcTestFixture<RoutingWebSite.StartupRoutingDifferentBranches> fixture
+        ) {
+            Factory =
+                fixture.Factories.FirstOrDefault()
+                ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         }
 
-        private static void ConfigureWebHostBuilder(IWebHostBuilder builder) => builder.UseStartup<RoutingWebSite.StartupRoutingDifferentBranches>();
+        private static void ConfigureWebHostBuilder(IWebHostBuilder builder) =>
+            builder.UseStartup<RoutingWebSite.StartupRoutingDifferentBranches>();
 
         public WebApplicationFactory<StartupRoutingDifferentBranches> Factory { get; }
 
@@ -31,8 +36,14 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var client = Factory.CreateClient();
 
             // Arrange
-            var subdirRequest = new HttpRequestMessage(HttpMethod.Get, "subdir/literal/Branches/Index/s");
-            var commonRequest = new HttpRequestMessage(HttpMethod.Get, "common/Branches/Index/c/literal");
+            var subdirRequest = new HttpRequestMessage(
+                HttpMethod.Get,
+                "subdir/literal/Branches/Index/s"
+            );
+            var commonRequest = new HttpRequestMessage(
+                HttpMethod.Get,
+                "common/Branches/Index/c/literal"
+            );
             var defaultRequest = new HttpRequestMessage(HttpMethod.Get, "Branches/literal/Index/d");
 
             // Act
@@ -65,10 +76,19 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var client = Factory.CreateClient();
             var linkQuery = "?link";
 
-                // Arrange
-            var subdirRequest = new HttpRequestMessage(HttpMethod.Get, "subdir/literal/Branches/Index/s" + linkQuery);
-            var commonRequest = new HttpRequestMessage(HttpMethod.Get, "common/Branches/Index/c/literal" + linkQuery);
-            var defaultRequest = new HttpRequestMessage(HttpMethod.Get, "Branches/literal/Index/d" + linkQuery);
+            // Arrange
+            var subdirRequest = new HttpRequestMessage(
+                HttpMethod.Get,
+                "subdir/literal/Branches/Index/s" + linkQuery
+            );
+            var commonRequest = new HttpRequestMessage(
+                HttpMethod.Get,
+                "common/Branches/Index/c/literal" + linkQuery
+            );
+            var defaultRequest = new HttpRequestMessage(
+                HttpMethod.Get,
+                "Branches/literal/Index/d" + linkQuery
+            );
 
             // Act
             var subdirResponse = await client.SendAsync(subdirRequest);
@@ -100,8 +120,14 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var linkQuery = "?link";
 
             // Arrange
-            var subdirRequest = new HttpRequestMessage(HttpMethod.Get, "subdir/literal/Branches/Index/s" + linkQuery + "&link_common=c&link_subdir");
-            var defaultRequest = new HttpRequestMessage(HttpMethod.Get, "Branches/literal/Index/d" + linkQuery + "&link_subdir=s");
+            var subdirRequest = new HttpRequestMessage(
+                HttpMethod.Get,
+                "subdir/literal/Branches/Index/s" + linkQuery + "&link_common=c&link_subdir"
+            );
+            var defaultRequest = new HttpRequestMessage(
+                HttpMethod.Get,
+                "Branches/literal/Index/d" + linkQuery + "&link_subdir=s"
+            );
 
             // Act
             var subdirResponse = await client.SendAsync(subdirRequest);
@@ -129,9 +155,18 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var client = Factory.CreateClient();
 
             // Arrange
-            var commonRequest = new HttpRequestMessage(HttpMethod.Get, "common/literal/Branches/Index/s");
-            var subdirRequest = new HttpRequestMessage(HttpMethod.Get, "subdir/Branches/Index/c/literal");
-            var defaultRequest = new HttpRequestMessage(HttpMethod.Get, "common/Branches/literal/Index/d");
+            var commonRequest = new HttpRequestMessage(
+                HttpMethod.Get,
+                "common/literal/Branches/Index/s"
+            );
+            var subdirRequest = new HttpRequestMessage(
+                HttpMethod.Get,
+                "subdir/Branches/Index/c/literal"
+            );
+            var defaultRequest = new HttpRequestMessage(
+                HttpMethod.Get,
+                "common/Branches/literal/Index/d"
+            );
 
             // Act
             var commonResponse = await client.SendAsync(commonRequest);
@@ -152,7 +187,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var client = Factory.CreateClient();
 
             // Arrange
-            var request = new HttpRequestMessage(HttpMethod.Get, "dynamicattributeorder/dynamic/route/rest");
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                "dynamicattributeorder/dynamic/route/rest"
+            );
 
             // Act
             var response = await client.SendAsync(request);
@@ -167,6 +205,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal("Index", action);
         }
 
-        private record RouteInfo(string RouteName, IDictionary<string, string> RouteValues, string Link);
+        private record RouteInfo(
+            string RouteName,
+            IDictionary<string, string> RouteValues,
+            string Link
+        );
     }
 }

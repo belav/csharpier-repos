@@ -25,7 +25,6 @@ public class Test
         return false;
     }
 
-
     public static int Main()
     {
         Test t = new Test();

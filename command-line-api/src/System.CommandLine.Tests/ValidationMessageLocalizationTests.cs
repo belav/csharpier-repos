@@ -19,18 +19,14 @@ namespace System.CommandLine.Tests
 
             var command = new Command("the-command")
             {
-                new Argument
-                {
-                    Arity = ArgumentArity.ExactlyOne
-                }
+                new Argument { Arity = ArgumentArity.ExactlyOne }
             };
-            var parser = new Parser(new CommandLineConfiguration(new[] { command }, validationMessages: messages));
+            var parser = new Parser(
+                new CommandLineConfiguration(new[] { command }, validationMessages: messages)
+            );
             var result = parser.Parse("the-command");
 
-            result.Errors
-                  .Select(e => e.Message)
-                  .Should()
-                  .Contain("the-message");
+            result.Errors.Select(e => e.Message).Should().Contain("the-message");
         }
 
         [Fact]
@@ -38,22 +34,13 @@ namespace System.CommandLine.Tests
         {
             var messages = new FakeValidationMessages("the-message");
 
-            var parser = new CommandLineBuilder(new Command("the-command")
-                         {
-                             new Argument
-                             {
-                                 Arity = ArgumentArity.ExactlyOne
-                             }
-                         })
-                         .UseValidationMessages(messages)
-                         .Build();
+            var parser = new CommandLineBuilder(
+                new Command("the-command") { new Argument { Arity = ArgumentArity.ExactlyOne } }
+            ).UseValidationMessages(messages).Build();
 
             var result = parser.Parse("the-command");
 
-            result.Errors
-                  .Select(e => e.Message)
-                  .Should()
-                  .Contain("the-message");
+            result.Errors.Select(e => e.Message).Should().Contain("the-message");
         }
 
         public class FakeValidationMessages : Resources
@@ -73,7 +60,10 @@ namespace System.CommandLine.Tests
 
             public override string RequiredCommandWasNotProvided() => message;
 
-            public override string UnrecognizedArgument(string unrecognizedArg, IReadOnlyCollection<string> allowedValues) => message;
+            public override string UnrecognizedArgument(
+                string unrecognizedArg,
+                IReadOnlyCollection<string> allowedValues
+            ) => message;
 
             public override string UnrecognizedCommandOrArgument(string arg) => message;
         }

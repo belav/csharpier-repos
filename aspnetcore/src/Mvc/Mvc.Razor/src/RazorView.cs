@@ -42,8 +42,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             IReadOnlyList<IRazorPage> viewStartPages,
             IRazorPage razorPage,
             HtmlEncoder htmlEncoder,
-            DiagnosticListener diagnosticListener)
-        {
+            DiagnosticListener diagnosticListener
+        ) {
             if (viewEngine == null)
             {
                 throw new ArgumentNullException(nameof(viewEngine));
@@ -109,7 +109,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             // is the component responsible for creating RazorViews and it is a Singleton service. It doesn't
             // have access to the RequestServices so requiring the service when we render the page is the best
             // we can do.
-            _bufferScope = context.HttpContext.RequestServices.GetRequiredService<IViewBufferScope>();
+            _bufferScope =
+                context.HttpContext.RequestServices.GetRequiredService<IViewBufferScope>();
             var bodyWriter = await RenderPageAsync(RazorPage, context, invokeViewStarts: true);
             await RenderLayoutAsync(context, bodyWriter);
         }
@@ -117,8 +118,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         private async Task<ViewBufferTextWriter> RenderPageAsync(
             IRazorPage page,
             ViewContext context,
-            bool invokeViewStarts)
-        {
+            bool invokeViewStarts
+        ) {
             var writer = context.Writer as ViewBufferTextWriter;
             if (writer == null)
             {
@@ -127,7 +128,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 // If we get here, this is likely the top-level page (not a partial) - this means
                 // that context.Writer is wrapping the output stream. We need to buffer, so create a buffered writer.
                 var buffer = new ViewBuffer(_bufferScope, page.Path, ViewBuffer.ViewPageSize);
-                writer = new ViewBufferTextWriter(buffer, context.Writer.Encoding, _htmlEncoder, context.Writer);
+                writer = new ViewBufferTextWriter(
+                    buffer,
+                    context.Writer.Encoding,
+                    _htmlEncoder,
+                    context.Writer
+                );
             }
             else
             {
@@ -156,6 +162,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 await RenderPageCoreAsync(page, context);
                 return writer;
             }
+
             finally
             {
                 context.Writer = oldWriter;
@@ -176,6 +183,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             {
                 await page.ExecuteAsync();
             }
+
             finally
             {
                 _diagnosticListener.AfterViewPage(page, context);
@@ -207,6 +215,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                     layout = _viewEngine.GetAbsolutePath(viewStart.Path, viewStart.Layout);
                 }
             }
+
             finally
             {
                 context.ExecutingFilePath = oldFilePath;
@@ -219,9 +228,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             }
         }
 
-        private async Task RenderLayoutAsync(
-            ViewContext context,
-            ViewBufferTextWriter bodyWriter)
+        private async Task RenderLayoutAsync(ViewContext context, ViewBufferTextWriter bodyWriter)
         {
             // A layout page can specify another layout page. We'll need to continue
             // looking for layout pages until they're no longer specified.
@@ -240,19 +247,29 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                     // the body content. Throwing this exception wouldn't return a 500 (since content has already been
                     // written), but a diagnostic component should be able to capture it.
 
-                    var message = Resources.FormatLayoutCannotBeRendered(Path, nameof(Razor.RazorPage.FlushAsync));
+                    var message = Resources.FormatLayoutCannotBeRendered(
+                        Path,
+                        nameof(Razor.RazorPage.FlushAsync)
+                    );
                     throw new InvalidOperationException(message);
                 }
 
                 var layoutPage = GetLayoutPage(context, previousPage.Path, previousPage.Layout);
 
-                if (renderedLayouts.Count > 0 &&
-                    renderedLayouts.Any(l => string.Equals(l.Path, layoutPage.Path, StringComparison.Ordinal)))
-                {
+                if (
+                    renderedLayouts.Count > 0
+                    && renderedLayouts.Any(
+                        l => string.Equals(l.Path, layoutPage.Path, StringComparison.Ordinal)
+                    )
+                ) {
                     // If the layout has been previously rendered as part of this view, we're potentially in a layout
                     // rendering cycle.
                     throw new InvalidOperationException(
-                        Resources.FormatLayoutHasCircularReference(previousPage.Path, layoutPage.Path));
+                        Resources.FormatLayoutHasCircularReference(
+                            previousPage.Path,
+                            layoutPage.Path
+                        )
+                    );
                 }
 
                 // Notify the previous page that any writes that are performed on it are part of sections being written
@@ -294,8 +311,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             }
         }
 
-        private IRazorPage GetLayoutPage(ViewContext context, string executingFilePath, string layoutPath)
-        {
+        private IRazorPage GetLayoutPage(
+            ViewContext context,
+            string executingFilePath,
+            string layoutPath
+        ) {
             var layoutPageResult = _viewEngine.GetPage(executingFilePath, layoutPath);
             var originalLocations = layoutPageResult.SearchedLocations;
             if (layoutPageResult.Page == null)
@@ -305,21 +325,27 @@ namespace Microsoft.AspNetCore.Mvc.Razor
 
             if (layoutPageResult.Page == null)
             {
-                Debug.Assert(originalLocations is not null && layoutPageResult.SearchedLocations is not null);
+                Debug.Assert(
+                    originalLocations is not null && layoutPageResult.SearchedLocations is not null
+                );
 
                 var locations = string.Empty;
                 if (originalLocations!.Any())
                 {
-                    locations = Environment.NewLine + string.Join(Environment.NewLine, originalLocations);
+                    locations =
+                        Environment.NewLine + string.Join(Environment.NewLine, originalLocations);
                 }
 
                 if (layoutPageResult.SearchedLocations.Any())
                 {
                     locations +=
-                        Environment.NewLine + string.Join(Environment.NewLine, layoutPageResult.SearchedLocations);
+                        Environment.NewLine
+                        + string.Join(Environment.NewLine, layoutPageResult.SearchedLocations);
                 }
 
-                throw new InvalidOperationException(Resources.FormatLayoutCannotBeLocated(layoutPath, locations));
+                throw new InvalidOperationException(
+                    Resources.FormatLayoutCannotBeLocated(layoutPath, locations)
+                );
             }
 
             var layoutPage = layoutPageResult.Page;

@@ -14,9 +14,18 @@ namespace SerializerTrimmingTest
         static int Main(string[] args)
         {
             string json = @"{""Key"":1}";
-            object obj = JsonSerializer.Deserialize(json, typeof(ImmutableSortedDictionary<string, int>));
-            if (!(TestHelper.AssertCollectionAndSerialize<ImmutableSortedDictionary<string, int>>(obj, json)))
-            {
+            object obj = JsonSerializer.Deserialize(
+                json,
+                typeof(ImmutableSortedDictionary<string, int>)
+            );
+            if (
+                !(
+                    TestHelper.AssertCollectionAndSerialize<ImmutableSortedDictionary<string, int>>(
+                        obj,
+                        json
+                    )
+                )
+            ) {
                 return -1;
             }
 

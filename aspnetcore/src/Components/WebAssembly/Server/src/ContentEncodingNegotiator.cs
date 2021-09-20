@@ -15,20 +15,26 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server
     internal class ContentEncodingNegotiator
     {
         // List of encodings by preference order with their associated extension so that we can easily handle "*".
-        private static readonly StringSegment[] _preferredEncodings =
-            new StringSegment[] { "br", "gzip" };
-
-        private static readonly Dictionary<StringSegment, string> _encodingExtensionMap = new Dictionary<StringSegment, string>(StringSegmentComparer.OrdinalIgnoreCase)
+        private static readonly StringSegment[] _preferredEncodings = new StringSegment[]
         {
-            ["br"] = ".br",
-            ["gzip"] = ".gz"
+            "br",
+            "gzip"
         };
+
+        private static readonly Dictionary<StringSegment, string> _encodingExtensionMap =
+            new Dictionary<StringSegment, string>(StringSegmentComparer.OrdinalIgnoreCase)
+            {
+                ["br"] = ".br",
+                ["gzip"] = ".gz"
+            };
 
         private readonly RequestDelegate _next;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ContentEncodingNegotiator(RequestDelegate next, IWebHostEnvironment webHostEnvironment)
-        {
+        public ContentEncodingNegotiator(
+            RequestDelegate next,
+            IWebHostEnvironment webHostEnvironment
+        ) {
             _next = next;
             _webHostEnvironment = webHostEnvironment;
         }
@@ -48,8 +54,10 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server
                 return;
             }
 
-            if (!StringWithQualityHeaderValue.TryParseList(accept, out var encodings) || encodings.Count == 0)
-            {
+            if (
+                !StringWithQualityHeaderValue.TryParseList(accept, out var encodings)
+                || encodings.Count == 0
+            ) {
                 return;
             }
 
@@ -65,10 +73,16 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server
                 {
                     if (quality == selectedEncodingQuality)
                     {
-                        selectedEncoding = PickPreferredEncoding(context, selectedEncoding, encoding);
+                        selectedEncoding = PickPreferredEncoding(
+                            context,
+                            selectedEncoding,
+                            encoding
+                        );
                     }
-                    else if (_encodingExtensionMap.TryGetValue(encodingName, out var encodingExtension) && ResourceExists(context, encodingExtension))
-                    {
+                    else if (
+                        _encodingExtensionMap.TryGetValue(encodingName, out var encodingExtension)
+                        && ResourceExists(context, encodingExtension)
+                    ) {
                         selectedEncoding = encodingName;
                         selectedEncodingQuality = quality;
                     }
@@ -80,8 +94,13 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server
                         selectedEncodingQuality = quality;
                     }
 
-                    if (StringSegment.Equals("identity", encodingName, StringComparison.OrdinalIgnoreCase))
-                    {
+                    if (
+                        StringSegment.Equals(
+                            "identity",
+                            encodingName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    ) {
                         selectedEncoding = StringSegment.Empty;
                         selectedEncodingQuality = quality;
                     }
@@ -97,8 +116,11 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server
 
             return;
 
-            StringSegment PickPreferredEncoding(HttpContext context, StringSegment selectedEncoding, StringWithQualityHeaderValue encoding)
-            {
+            StringSegment PickPreferredEncoding(
+                HttpContext context,
+                StringSegment selectedEncoding,
+                StringWithQualityHeaderValue encoding
+            ) {
                 foreach (var preferredEncoding in _preferredEncodings)
                 {
                     if (preferredEncoding == selectedEncoding)
@@ -106,8 +128,10 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server
                         return selectedEncoding;
                     }
 
-                    if ((preferredEncoding == encoding.Value || encoding.Value == "*") && ResourceExists(context, _encodingExtensionMap[preferredEncoding]))
-                    {
+                    if (
+                        (preferredEncoding == encoding.Value || encoding.Value == "*")
+                        && ResourceExists(context, _encodingExtensionMap[preferredEncoding])
+                    ) {
                         return preferredEncoding;
                     }
                 }
@@ -117,6 +141,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server
         }
 
         private bool ResourceExists(HttpContext context, string extension) =>
-            _webHostEnvironment.WebRootFileProvider.GetFileInfo(context.Request.Path + extension).Exists;
+            _webHostEnvironment.WebRootFileProvider.GetFileInfo(
+                context.Request.Path + extension
+            ).Exists;
     }
 }

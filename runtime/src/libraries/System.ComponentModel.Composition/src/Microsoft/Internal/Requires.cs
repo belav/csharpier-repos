@@ -21,9 +21,11 @@ namespace Microsoft.Internal
         }
 
         [DebuggerStepThrough]
-        public static void NullOrNotNullElements<TKey, TValue>(IEnumerable<KeyValuePair<TKey, TValue>>? values, string parameterName)
-            where TKey : class
-            where TValue : class
+        public static void NullOrNotNullElements<TKey, TValue>(
+            IEnumerable<KeyValuePair<TKey, TValue>>? values,
+            string parameterName
+        ) where TKey : class
+          where TValue : class
         {
             NotNullElements(values, parameterName);
         }
@@ -59,8 +61,7 @@ namespace Microsoft.Internal
         }
 
         [DebuggerStepThrough]
-        private static void NotNullElements<T>(T[]? values, string parameterName)
-            where T : class
+        private static void NotNullElements<T>(T[]? values, string parameterName) where T : class
         {
             if (values != null)
             {
@@ -75,9 +76,11 @@ namespace Microsoft.Internal
         }
 
         [DebuggerStepThrough]
-        private static void NotNullElements<TKey, TValue>(IEnumerable<KeyValuePair<TKey, TValue>>? values, string parameterName)
-            where TKey : class
-            where TValue : class
+        private static void NotNullElements<TKey, TValue>(
+            IEnumerable<KeyValuePair<TKey, TValue>>? values,
+            string parameterName
+        ) where TKey : class
+          where TValue : class
         {
             if (values != null)
             {
@@ -92,17 +95,30 @@ namespace Microsoft.Internal
         }
 
         [DebuggerStepThrough]
-        public static void IsInMembertypeSet(MemberTypes value, string parameterName, MemberTypes enumFlagSet)
-        {
-            if ((value & enumFlagSet) != value || // Ensure the member is in the set
-                (value & (value - 1)) != 0) // Ensure that there is only one flag in the value (i.e. value is a power of 2).
+        public static void IsInMembertypeSet(
+            MemberTypes value,
+            string parameterName,
+            MemberTypes enumFlagSet
+        ) {
+            if (
+                (value & enumFlagSet) != value
+                || // Ensure the member is in the set
+                (value & (value - 1)) != 0
+            ) // Ensure that there is only one flag in the value (i.e. value is a power of 2).
             {
-                throw new ArgumentException(SR.Format(SR.ArgumentOutOfRange_InvalidEnumInSet, parameterName, value, enumFlagSet.ToString()), parameterName);
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.ArgumentOutOfRange_InvalidEnumInSet,
+                        parameterName,
+                        value,
+                        enumFlagSet.ToString()
+                    ),
+                    parameterName
+                );
             }
         }
 
-        public static void NotNull<T>(T value, string parameterName)
-            where T : class
+        public static void NotNull<T>(T value, string parameterName) where T : class
         {
             if (value == null)
             {
@@ -116,9 +132,11 @@ namespace Microsoft.Internal
 
             if (value.Length == 0)
             {
-                throw new ArgumentException(SR.Format(SR.ArgumentException_EmptyString, parameterName), parameterName);
+                throw new ArgumentException(
+                    SR.Format(SR.ArgumentException_EmptyString, parameterName),
+                    parameterName
+                );
             }
         }
-
     }
 }

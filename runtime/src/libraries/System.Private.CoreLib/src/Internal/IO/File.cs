@@ -51,8 +51,15 @@ namespace Internal.IO
         public static byte[] ReadAllBytes(string path)
         {
             // bufferSize == 1 used to avoid unnecessary buffer in FileStream
-            using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 1))
-            {
+            using (
+                FileStream fs = new FileStream(
+                    path,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read,
+                    bufferSize: 1
+                )
+            ) {
                 long fileLength = fs.Length;
                 if (fileLength > int.MaxValue)
                     throw new IOException(SR.IO_FileTooLong2GB);

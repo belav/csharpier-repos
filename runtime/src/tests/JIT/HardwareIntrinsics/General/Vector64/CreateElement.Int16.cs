@@ -71,22 +71,27 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetInt16();
             }
 
-            object result = typeof(Vector64)
-                                .GetMethod(nameof(Vector64.Create), operandTypes)
-                                .Invoke(null, new object[] { values[0], values[1], values[2], values[3] });
+            object result = typeof(Vector64).GetMethod(nameof(Vector64.Create), operandTypes)
+                .Invoke(null, new object[] { values[0], values[1], values[2], values[3] });
 
             ValidateResult((Vector64<Int16>)(result), values);
         }
 
-        private void ValidateResult(Vector64<Int16> result, Int16[] expectedValues, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Vector64<Int16> result,
+            Int16[] expectedValues,
+            [CallerMemberName] string method = ""
+        ) {
             Int16[] resultElements = new Int16[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Int16, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValues, method);
         }
 
-        private void ValidateResult(Int16[] resultElements, Int16[] expectedValues, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Int16[] resultElements,
+            Int16[] expectedValues,
+            [CallerMemberName] string method = ""
+        ) {
             bool succeeded = true;
 
             for (var i = 0; i < ElementCount; i++)
@@ -100,9 +105,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64.Create(Int16): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", expectedValues)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64.Create(Int16): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", expectedValues)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

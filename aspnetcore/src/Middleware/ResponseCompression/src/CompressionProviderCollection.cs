@@ -38,7 +38,10 @@ namespace Microsoft.AspNetCore.ResponseCompression
 
             if (!typeof(ICompressionProvider).IsAssignableFrom(providerType))
             {
-                throw new ArgumentException($"The provider must implement {nameof(ICompressionProvider)}.", nameof(providerType));
+                throw new ArgumentException(
+                    $"The provider must implement {nameof(ICompressionProvider)}.",
+                    nameof(providerType)
+                );
             }
 
             var factory = new CompressionProviderFactory(providerType);

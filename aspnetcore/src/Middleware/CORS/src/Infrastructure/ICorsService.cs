@@ -19,13 +19,11 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         /// used by the caller to set appropriate response headers.</returns>
         CorsResult EvaluatePolicy(HttpContext context, CorsPolicy policy);
 
-
         /// <summary>
         /// Adds CORS-specific response headers to the given <paramref name="response"/>.
         /// </summary>
         /// <param name="result">The <see cref="CorsResult"/> used to read the allowed values.</param>
         /// <param name="response">The <see cref="HttpResponse"/> associated with the current call.</param>
         void ApplyResult(CorsResult result, HttpResponse response);
-
     }
 }

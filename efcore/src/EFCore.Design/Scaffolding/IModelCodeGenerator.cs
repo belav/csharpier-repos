@@ -17,8 +17,6 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         /// <param name="model"> The model. </param>
         /// <param name="options"> The options to use during generation. </param>
         /// <returns> The generated model. </returns>
-        ScaffoldedModel GenerateModel(
-            IModel model,
-            ModelCodeGenerationOptions options);
+        ScaffoldedModel GenerateModel(IModel model, ModelCodeGenerationOptions options);
     }
 }

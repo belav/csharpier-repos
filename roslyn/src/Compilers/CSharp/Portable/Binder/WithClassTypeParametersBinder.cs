@@ -20,16 +20,27 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly NamedTypeSymbol _namedType;
         private MultiDictionary<string, TypeParameterSymbol> _lazyTypeParameterMap;
 
-        internal WithClassTypeParametersBinder(NamedTypeSymbol container, Binder next)
-            : base(next)
+        internal WithClassTypeParametersBinder(NamedTypeSymbol container, Binder next) : base(next)
         {
             Debug.Assert((object)container != null);
             _namedType = container;
         }
 
-        internal override bool IsAccessibleHelper(Symbol symbol, TypeSymbol accessThroughType, out bool failedThroughTypeCheck, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo, ConsList<TypeSymbol> basesBeingResolved)
-        {
-            return this.IsSymbolAccessibleConditional(symbol, _namedType, accessThroughType, out failedThroughTypeCheck, ref useSiteInfo, basesBeingResolved);
+        internal override bool IsAccessibleHelper(
+            Symbol symbol,
+            TypeSymbol accessThroughType,
+            out bool failedThroughTypeCheck,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
+            ConsList<TypeSymbol> basesBeingResolved
+        ) {
+            return this.IsSymbolAccessibleConditional(
+                symbol,
+                _namedType,
+                accessThroughType,
+                out failedThroughTypeCheck,
+                ref useSiteInfo,
+                basesBeingResolved
+            );
         }
 
         protected override MultiDictionary<string, TypeParameterSymbol> TypeParameterMap
@@ -49,8 +60,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        protected override void AddLookupSymbolsInfoInSingleBinder(LookupSymbolsInfo result, LookupOptions options, Binder originalBinder)
-        {
+        protected override void AddLookupSymbolsInfoInSingleBinder(
+            LookupSymbolsInfo result,
+            LookupOptions options,
+            Binder originalBinder
+        ) {
             if (CanConsiderTypeParameters(options))
             {
                 foreach (var parameter in _namedType.TypeParameters)

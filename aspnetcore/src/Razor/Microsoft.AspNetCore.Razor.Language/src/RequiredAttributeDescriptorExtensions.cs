@@ -15,9 +15,10 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(descriptor));
             }
 
-            return
-                descriptor.Metadata.TryGetValue(ComponentMetadata.Common.DirectiveAttribute, out var value) &&
-                string.Equals(bool.TrueString, value);
+            return descriptor.Metadata.TryGetValue(
+                    ComponentMetadata.Common.DirectiveAttribute,
+                    out var value
+                ) && string.Equals(bool.TrueString, value);
         }
     }
 }

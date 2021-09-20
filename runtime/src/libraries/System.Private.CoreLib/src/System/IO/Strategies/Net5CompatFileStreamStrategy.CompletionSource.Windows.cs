@@ -31,8 +31,12 @@ namespace System.IO.Strategies
             private long _result; // Using long since this needs to be used in Interlocked APIs
 
             // Using RunContinuationsAsynchronously for compat reasons (old API used Task.Factory.StartNew for continuations)
-            internal CompletionSource(Net5CompatFileStreamStrategy strategy, PreAllocatedOverlapped? preallocatedOverlapped,
-                int numBufferedBytes, byte[]? bytes) : base(TaskCreationOptions.RunContinuationsAsynchronously)
+            internal CompletionSource(
+                Net5CompatFileStreamStrategy strategy,
+                PreAllocatedOverlapped? preallocatedOverlapped,
+                int numBufferedBytes,
+                byte[]? bytes
+            ) : base(TaskCreationOptions.RunContinuationsAsynchronously)
             {
                 _numBufferedBytes = numBufferedBytes;
                 _strategy = strategy;
@@ -40,9 +44,18 @@ namespace System.IO.Strategies
 
                 // The _preallocatedOverlapped is null if the internal buffer was never created, so we check for
                 // a non-null bytes before using the stream's _preallocatedOverlapped
-                _overlapped = bytes != null && strategy.CompareExchangeCurrentOverlappedOwner(this, null) == null ?
-                    strategy._fileHandle.ThreadPoolBinding!.AllocateNativeOverlapped(preallocatedOverlapped!) : // allocated when buffer was created, and buffer is non-null
-                    strategy._fileHandle.ThreadPoolBinding!.AllocateNativeOverlapped(s_ioCallback, this, bytes);
+                _overlapped =
+                    bytes != null
+                    && strategy.CompareExchangeCurrentOverlappedOwner(this, null) == null
+                        ? strategy._fileHandle.ThreadPoolBinding!.AllocateNativeOverlapped(
+                              preallocatedOverlapped!
+                          )
+                        : // allocated when buffer was created, and buffer is non-null
+                          strategy._fileHandle.ThreadPoolBinding!.AllocateNativeOverlapped(
+                              s_ioCallback,
+                              this,
+                              bytes
+                          );
                 Debug.Assert(_overlapped != null, "AllocateNativeOverlapped returned null");
             }
 
@@ -58,7 +71,10 @@ namespace System.IO.Strategies
             {
 #if DEBUG
                 Debug.Assert(cancellationToken.CanBeCanceled);
-                Debug.Assert(!_cancellationHasBeenRegistered, "Cannot register for cancellation twice");
+                Debug.Assert(
+                    !_cancellationHasBeenRegistered,
+                    "Cannot register for cancellation twice"
+                );
                 _cancellationHasBeenRegistered = true;
 #endif
 
@@ -68,10 +84,17 @@ namespace System.IO.Strategies
                     Action<object?>? cancelCallback = s_cancelCallback ??= Cancel;
 
                     // Register the cancellation only if the IO hasn't completed
-                    long packedResult = Interlocked.CompareExchange(ref _result, TaskSourceCodes.RegisteringCancellation, TaskSourceCodes.NoResult);
+                    long packedResult = Interlocked.CompareExchange(
+                        ref _result,
+                        TaskSourceCodes.RegisteringCancellation,
+                        TaskSourceCodes.NoResult
+                    );
                     if (packedResult == TaskSourceCodes.NoResult)
                     {
-                        _cancellationRegistration = cancellationToken.UnsafeRegister(cancelCallback, this);
+                        _cancellationRegistration = cancellationToken.UnsafeRegister(
+                            cancelCallback,
+                            this
+                        );
 
                         // Switch the result, just in case IO completed while we were setting the registration
                         packedResult = Interlocked.Exchange(ref _result, TaskSourceCodes.NoResult);
@@ -84,8 +107,11 @@ namespace System.IO.Strategies
                     }
 
                     // If we have a callback that needs to be completed
-                    if ((packedResult != TaskSourceCodes.NoResult) && (packedResult != TaskSourceCodes.CompletedCallback) && (packedResult != TaskSourceCodes.RegisteringCancellation))
-                    {
+                    if (
+                        (packedResult != TaskSourceCodes.NoResult)
+                        && (packedResult != TaskSourceCodes.CompletedCallback)
+                        && (packedResult != TaskSourceCodes.RegisteringCancellation)
+                    ) {
                         CompleteCallback((ulong)packedResult);
                     }
                 }
@@ -113,8 +139,11 @@ namespace System.IO.Strategies
             // When doing IO asynchronously (i.e. _isAsync==true), this callback is
             // called by a free thread in the threadpool when the IO operation
             // completes.
-            internal static void IOCallback(uint errorCode, uint numBytes, NativeOverlapped* pOverlapped)
-            {
+            internal static void IOCallback(
+                uint errorCode,
+                uint numBytes,
+                NativeOverlapped* pOverlapped
+            ) {
                 // Extract the completion source from the overlapped.  The state in the overlapped
                 // will either be a FileStreamStrategy (in the case where the preallocated overlapped was used),
                 // in which case the operation being completed is its _currentOverlappedOwner, or it'll
@@ -135,8 +164,11 @@ namespace System.IO.Strategies
                 // an async read on a pipe to be issued and then the pipe is closed,
                 // returning this error.  This may very well be necessary.
                 ulong packedResult;
-                if (errorCode != 0 && errorCode != Interop.Errors.ERROR_BROKEN_PIPE && errorCode != Interop.Errors.ERROR_NO_DATA)
-                {
+                if (
+                    errorCode != 0
+                    && errorCode != Interop.Errors.ERROR_BROKEN_PIPE
+                    && errorCode != Interop.Errors.ERROR_NO_DATA
+                ) {
                     packedResult = ((ulong)TaskSourceCodes.ResultError | errorCode);
                 }
                 else
@@ -146,11 +178,17 @@ namespace System.IO.Strategies
 
                 // Stow the result so that other threads can observe it
                 // And, if no other thread is registering cancellation, continue
-                if (TaskSourceCodes.NoResult == Interlocked.Exchange(ref completionSource._result, (long)packedResult))
-                {
+                if (
+                    TaskSourceCodes.NoResult
+                    == Interlocked.Exchange(ref completionSource._result, (long)packedResult)
+                ) {
                     // Successfully set the state, attempt to take back the callback
-                    if (Interlocked.Exchange(ref completionSource._result, TaskSourceCodes.CompletedCallback) != TaskSourceCodes.NoResult)
-                    {
+                    if (
+                        Interlocked.Exchange(
+                            ref completionSource._result,
+                            TaskSourceCodes.CompletedCallback
+                        ) != TaskSourceCodes.NoResult
+                    ) {
                         // Successfully got the callback, finish the callback
                         completionSource.CompleteCallback(packedResult);
                     }
@@ -172,7 +210,11 @@ namespace System.IO.Strategies
                     int errorCode = unchecked((int)(packedResult & uint.MaxValue));
                     if (errorCode == Interop.Errors.ERROR_OPERATION_ABORTED)
                     {
-                        TrySetCanceled(cancellationToken.IsCancellationRequested ? cancellationToken : new CancellationToken(true));
+                        TrySetCanceled(
+                            cancellationToken.IsCancellationRequested
+                              ? cancellationToken
+                              : new CancellationToken(true)
+                        );
                     }
                     else
                     {
@@ -194,12 +236,19 @@ namespace System.IO.Strategies
 
                 Debug.Assert(state is CompletionSource, "Unknown state passed to cancellation");
                 CompletionSource completionSource = (CompletionSource)state;
-                Debug.Assert(completionSource._overlapped != null && !completionSource.Task.IsCompleted, "IO should not have completed yet");
+                Debug.Assert(
+                    completionSource._overlapped != null && !completionSource.Task.IsCompleted,
+                    "IO should not have completed yet"
+                );
 
                 // If the handle is still valid, attempt to cancel the IO
-                if (!completionSource._strategy._fileHandle.IsInvalid &&
-                    !Interop.Kernel32.CancelIoEx(completionSource._strategy._fileHandle, completionSource._overlapped))
-                {
+                if (
+                    !completionSource._strategy._fileHandle.IsInvalid
+                    && !Interop.Kernel32.CancelIoEx(
+                        completionSource._strategy._fileHandle,
+                        completionSource._overlapped
+                    )
+                ) {
                     int errorCode = Marshal.GetLastWin32Error();
 
                     // ERROR_NOT_FOUND is returned if CancelIoEx cannot find the request to cancel.
@@ -211,16 +260,25 @@ namespace System.IO.Strategies
                 }
             }
 
-            public static CompletionSource Create(Net5CompatFileStreamStrategy strategy, PreAllocatedOverlapped? preallocatedOverlapped,
-                int numBufferedBytesRead, ReadOnlyMemory<byte> memory)
-            {
+            public static CompletionSource Create(
+                Net5CompatFileStreamStrategy strategy,
+                PreAllocatedOverlapped? preallocatedOverlapped,
+                int numBufferedBytesRead,
+                ReadOnlyMemory<byte> memory
+            ) {
                 // If the memory passed in is the strategy's internal buffer, we can use the base FileStreamCompletionSource,
                 // which has a PreAllocatedOverlapped with the memory already pinned.  Otherwise, we use the derived
                 // MemoryFileStreamCompletionSource, which Retains the memory, which will result in less pinning in the case
                 // where the underlying memory is backed by pre-pinned buffers.
-                return preallocatedOverlapped != null && MemoryMarshal.TryGetArray(memory, out ArraySegment<byte> buffer)
-                    && preallocatedOverlapped.IsUserObject(buffer.Array) // preallocatedOverlapped is allocated when BufferedStream|Net5CompatFileStreamStrategy allocates the buffer
-                    ? new CompletionSource(strategy, preallocatedOverlapped, numBufferedBytesRead, buffer.Array)
+                return preallocatedOverlapped != null
+                && MemoryMarshal.TryGetArray(memory, out ArraySegment<byte> buffer)
+                && preallocatedOverlapped.IsUserObject(buffer.Array) // preallocatedOverlapped is allocated when BufferedStream|Net5CompatFileStreamStrategy allocates the buffer
+                    ? new CompletionSource(
+                          strategy,
+                          preallocatedOverlapped,
+                          numBufferedBytesRead,
+                          buffer.Array
+                      )
                     : new MemoryFileStreamCompletionSource(strategy, numBufferedBytesRead, memory);
             }
         }
@@ -234,8 +292,11 @@ namespace System.IO.Strategies
         {
             private MemoryHandle _handle; // mutable struct; do not make this readonly
 
-            internal MemoryFileStreamCompletionSource(Net5CompatFileStreamStrategy strategy, int numBufferedBytes, ReadOnlyMemory<byte> memory)
-                : base(strategy, null, numBufferedBytes, null) // this type handles the pinning, so null is passed for bytes
+            internal MemoryFileStreamCompletionSource(
+                Net5CompatFileStreamStrategy strategy,
+                int numBufferedBytes,
+                ReadOnlyMemory<byte> memory
+            ) : base(strategy, null, numBufferedBytes, null) // this type handles the pinning, so null is passed for bytes
             {
                 _handle = memory.Pin();
             }

@@ -18,8 +18,8 @@ namespace Microsoft.AspNetCore.Components.Server
             ILogger<CircuitDisconnectMiddleware> logger,
             CircuitRegistry registry,
             CircuitIdFactory circuitIdFactory,
-            RequestDelegate next)
-        {
+            RequestDelegate next
+        ) {
             Logger = logger;
             Registry = registry;
             CircuitIdFactory = circuitIdFactory;
@@ -90,20 +90,41 @@ namespace Microsoft.AspNetCore.Components.Server
 
         private class Log
         {
-            private static readonly Action<ILogger, CircuitId, Exception> _circuitTerminatingGracefully =
-                LoggerMessage.Define<CircuitId>(LogLevel.Debug, new EventId(1, "CircuitTerminatingGracefully"), "Circuit with id '{CircuitId}' terminating gracefully.");
+            private static readonly Action<
+                ILogger,
+                CircuitId,
+                Exception
+            > _circuitTerminatingGracefully = LoggerMessage.Define<CircuitId>(
+                LogLevel.Debug,
+                new EventId(1, "CircuitTerminatingGracefully"),
+                "Circuit with id '{CircuitId}' terminating gracefully."
+            );
 
-            private static readonly Action<ILogger, CircuitId, Exception> _circuitTerminatedGracefully =
-                LoggerMessage.Define<CircuitId>(LogLevel.Debug, new EventId(2, "CircuitTerminatedGracefully"), "Circuit with id '{CircuitId}' terminated gracefully.");
+            private static readonly Action<
+                ILogger,
+                CircuitId,
+                Exception
+            > _circuitTerminatedGracefully = LoggerMessage.Define<CircuitId>(
+                LogLevel.Debug,
+                new EventId(2, "CircuitTerminatedGracefully"),
+                "Circuit with id '{CircuitId}' terminated gracefully."
+            );
 
             private static readonly Action<ILogger, string, Exception> _invalidCircuitId =
-                LoggerMessage.Define<string>(LogLevel.Debug, new EventId(3, "InvalidCircuitId"), "CircuitDisconnectMiddleware received an invalid circuit id '{CircuitIdSecret}'.");
+                LoggerMessage.Define<string>(
+                    LogLevel.Debug,
+                    new EventId(3, "InvalidCircuitId"),
+                    "CircuitDisconnectMiddleware received an invalid circuit id '{CircuitIdSecret}'."
+                );
 
-            public static void CircuitTerminatingGracefully(ILogger logger, CircuitId circuitId) => _circuitTerminatingGracefully(logger, circuitId, null);
+            public static void CircuitTerminatingGracefully(ILogger logger, CircuitId circuitId) =>
+                _circuitTerminatingGracefully(logger, circuitId, null);
 
-            public static void CircuitTerminatedGracefully(ILogger logger, CircuitId circuitId) => _circuitTerminatedGracefully(logger, circuitId, null);
+            public static void CircuitTerminatedGracefully(ILogger logger, CircuitId circuitId) =>
+                _circuitTerminatedGracefully(logger, circuitId, null);
 
-            public static void InvalidCircuitId(ILogger logger, string circuitSecret) => _invalidCircuitId(logger, circuitSecret, null);
+            public static void InvalidCircuitId(ILogger logger, string circuitSecret) =>
+                _invalidCircuitId(logger, circuitSecret, null);
         }
     }
 }

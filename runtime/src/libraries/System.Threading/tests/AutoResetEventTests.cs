@@ -89,26 +89,39 @@ namespace System.Threading.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/49890", TestPlatforms.Android)]
         public void PingPong()
         {
-            using (AutoResetEvent are1 = new AutoResetEvent(true), are2 = new AutoResetEvent(false))
-            {
+            using (
+                AutoResetEvent are1 = new AutoResetEvent(true),
+                    are2 = new AutoResetEvent(false)
+            ) {
                 const int Iters = 10;
                 Task.WaitAll(
-                    Task.Factory.StartNew(() =>
-                    {
-                        for (int i = 0; i < Iters; i++)
+                    Task.Factory.StartNew(
+                        () =>
                         {
-                            Assert.True(are1.WaitOne(FailedWaitTimeout));
-                            are2.Set();
-                        }
-                    }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default),
-                    Task.Factory.StartNew(() =>
-                    {
-                        for (int i = 0; i < Iters; i++)
+                            for (int i = 0; i < Iters; i++)
+                            {
+                                Assert.True(are1.WaitOne(FailedWaitTimeout));
+                                are2.Set();
+                            }
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    ),
+                    Task.Factory.StartNew(
+                        () =>
                         {
-                            Assert.True(are2.WaitOne(FailedWaitTimeout));
-                            are1.Set();
-                        }
-                    }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default));
+                            for (int i = 0; i < Iters; i++)
+                            {
+                                Assert.True(are2.WaitOne(FailedWaitTimeout));
+                                are1.Set();
+                            }
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    )
+                );
             }
         }
     }

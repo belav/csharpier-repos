@@ -8,7 +8,8 @@ namespace System.Threading
     /// </summary>
     internal sealed class ThreadPoolBoundHandleOverlapped : Overlapped
     {
-        private static readonly unsafe IOCompletionCallback s_completionCallback = CompletionCallback;
+        private static readonly unsafe IOCompletionCallback s_completionCallback =
+            CompletionCallback;
 
         private readonly IOCompletionCallback _userCallback;
         internal readonly object? _userState;
@@ -17,20 +18,28 @@ namespace System.Threading
         internal ThreadPoolBoundHandle? _boundHandle;
         internal bool _completed;
 
-        public unsafe ThreadPoolBoundHandleOverlapped(IOCompletionCallback callback, object? state, object? pinData, PreAllocatedOverlapped? preAllocated)
-        {
+        public unsafe ThreadPoolBoundHandleOverlapped(
+            IOCompletionCallback callback,
+            object? state,
+            object? pinData,
+            PreAllocatedOverlapped? preAllocated
+        ) {
             _userCallback = callback;
             _userState = state;
             _preAllocated = preAllocated;
 
             _nativeOverlapped = Pack(s_completionCallback, pinData);
-            _nativeOverlapped->OffsetLow = 0;        // CLR reuses NativeOverlapped instances and does not reset these
+            _nativeOverlapped->OffsetLow = 0; // CLR reuses NativeOverlapped instances and does not reset these
             _nativeOverlapped->OffsetHigh = 0;
         }
 
-        private static unsafe void CompletionCallback(uint errorCode, uint numBytes, NativeOverlapped* nativeOverlapped)
-        {
-            ThreadPoolBoundHandleOverlapped overlapped = (ThreadPoolBoundHandleOverlapped)Overlapped.Unpack(nativeOverlapped);
+        private static unsafe void CompletionCallback(
+            uint errorCode,
+            uint numBytes,
+            NativeOverlapped* nativeOverlapped
+        ) {
+            ThreadPoolBoundHandleOverlapped overlapped =
+                (ThreadPoolBoundHandleOverlapped)Overlapped.Unpack(nativeOverlapped);
 
             //
             // The Win32 thread pool implementation of ThreadPoolBoundHandle does not permit reuse of NativeOverlapped

@@ -16,12 +16,21 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.VisualStudio
 {
     internal static class FSharpProjectExternalErrorReporterFactory
     {
-        public static IVsLanguageServiceBuildErrorReporter2 Create(ProjectId projectId, string errorCodePrefix, IServiceProvider serviceProvider)
-        {
+        public static IVsLanguageServiceBuildErrorReporter2 Create(
+            ProjectId projectId,
+            string errorCodePrefix,
+            IServiceProvider serviceProvider
+        ) {
             ThreadHelper.ThrowIfNotOnUIThread();
-            var workspace = (VisualStudioWorkspaceImpl)serviceProvider.GetMefService<VisualStudioWorkspace>();
+            var workspace =
+                (VisualStudioWorkspaceImpl)serviceProvider.GetMefService<VisualStudioWorkspace>();
             workspace.SubscribeExternalErrorDiagnosticUpdateSourceToSolutionBuildEvents();
-            return new ProjectExternalErrorReporter(projectId, errorCodePrefix, LanguageNames.FSharp, workspace);
+            return new ProjectExternalErrorReporter(
+                projectId,
+                errorCodePrefix,
+                LanguageNames.FSharp,
+                workspace
+            );
         }
     }
 }

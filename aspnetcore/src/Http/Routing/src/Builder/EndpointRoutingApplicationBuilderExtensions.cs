@@ -73,8 +73,10 @@ namespace Microsoft.AspNetCore.Builder
         /// <see cref="Endpoint"/> associated with the <see cref="HttpContext"/>.
         /// </para>
         /// </remarks>
-        public static IApplicationBuilder UseEndpoints(this IApplicationBuilder builder, Action<IEndpointRouteBuilder> configure)
-        {
+        public static IApplicationBuilder UseEndpoints(
+            this IApplicationBuilder builder,
+            Action<IEndpointRouteBuilder> configure
+        ) {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -96,7 +98,9 @@ namespace Microsoft.AspNetCore.Builder
             //
             // Each middleware gets its own collection of data sources, and all of those data sources also
             // get added to a global collection.
-            var routeOptions = builder.ApplicationServices.GetRequiredService<IOptions<RouteOptions>>();
+            var routeOptions = builder.ApplicationServices.GetRequiredService<
+                IOptions<RouteOptions>
+            >();
             foreach (var dataSource in endpointRouteBuilder.DataSources)
             {
                 routeOptions.Value.EndpointDataSources.Add(dataSource);
@@ -111,22 +115,27 @@ namespace Microsoft.AspNetCore.Builder
             // We use the RoutingMarkerService to make sure if all the services were added.
             if (app.ApplicationServices.GetService(typeof(RoutingMarkerService)) == null)
             {
-                throw new InvalidOperationException(Resources.FormatUnableToFindServices(
-                    nameof(IServiceCollection),
-                    nameof(RoutingServiceCollectionExtensions.AddRouting),
-                    "ConfigureServices(...)"));
+                throw new InvalidOperationException(
+                    Resources.FormatUnableToFindServices(
+                        nameof(IServiceCollection),
+                        nameof(RoutingServiceCollectionExtensions.AddRouting),
+                        "ConfigureServices(...)"
+                    )
+                );
             }
         }
 
-        private static void VerifyEndpointRoutingMiddlewareIsRegistered(IApplicationBuilder app, out DefaultEndpointRouteBuilder endpointRouteBuilder)
-        {
+        private static void VerifyEndpointRoutingMiddlewareIsRegistered(
+            IApplicationBuilder app,
+            out DefaultEndpointRouteBuilder endpointRouteBuilder
+        ) {
             if (!app.Properties.TryGetValue(EndpointRouteBuilder, out var obj))
             {
                 var message =
-                    $"{nameof(EndpointRoutingMiddleware)} matches endpoints setup by {nameof(EndpointMiddleware)} and so must be added to the request " +
-                    $"execution pipeline before {nameof(EndpointMiddleware)}. " +
-                    $"Please add {nameof(EndpointRoutingMiddleware)} by calling '{nameof(IApplicationBuilder)}.{nameof(UseRouting)}' inside the call " +
-                    $"to 'Configure(...)' in the application startup code.";
+                    $"{nameof(EndpointRoutingMiddleware)} matches endpoints setup by {nameof(EndpointMiddleware)} and so must be added to the request "
+                    + $"execution pipeline before {nameof(EndpointMiddleware)}. "
+                    + $"Please add {nameof(EndpointRoutingMiddleware)} by calling '{nameof(IApplicationBuilder)}.{nameof(UseRouting)}' inside the call "
+                    + $"to 'Configure(...)' in the application startup code.";
                 throw new InvalidOperationException(message);
             }
 
@@ -138,9 +147,9 @@ namespace Microsoft.AspNetCore.Builder
             if (!object.ReferenceEquals(app, endpointRouteBuilder.ApplicationBuilder))
             {
                 var message =
-                    $"The {nameof(EndpointRoutingMiddleware)} and {nameof(EndpointMiddleware)} must be added to the same {nameof(IApplicationBuilder)} instance. " +
-                    $"To use Endpoint Routing with 'Map(...)', make sure to call '{nameof(IApplicationBuilder)}.{nameof(UseRouting)}' before " +
-                    $"'{nameof(IApplicationBuilder)}.{nameof(UseEndpoints)}' for each branch of the middleware pipeline.";
+                    $"The {nameof(EndpointRoutingMiddleware)} and {nameof(EndpointMiddleware)} must be added to the same {nameof(IApplicationBuilder)} instance. "
+                    + $"To use Endpoint Routing with 'Map(...)', make sure to call '{nameof(IApplicationBuilder)}.{nameof(UseRouting)}' before "
+                    + $"'{nameof(IApplicationBuilder)}.{nameof(UseEndpoints)}' for each branch of the middleware pipeline.";
                 throw new InvalidOperationException(message);
             }
         }

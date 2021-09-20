@@ -9,10 +9,18 @@ namespace System
     {
         // Systems without the Windows registry pretend that it's always empty.
 
-        private static string? GetEnvironmentVariableFromRegistry(string variable, bool fromMachine) => null;
+        private static string? GetEnvironmentVariableFromRegistry(
+            string variable,
+            bool fromMachine
+        ) => null;
 
-        private static void SetEnvironmentVariableFromRegistry(string variable, string? value, bool fromMachine) { }
+        private static void SetEnvironmentVariableFromRegistry(
+            string variable,
+            string? value,
+            bool fromMachine
+        ) { }
 
-        private static IDictionary GetEnvironmentVariablesFromRegistry(bool fromMachine) => new Hashtable();
+        private static IDictionary GetEnvironmentVariablesFromRegistry(bool fromMachine) =>
+            new Hashtable();
     }
 }

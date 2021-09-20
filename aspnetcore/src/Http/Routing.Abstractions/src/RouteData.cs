@@ -141,8 +141,11 @@ namespace Microsoft.AspNetCore.Routing
         /// <see cref="DataTokens"/> will not be changed.
         /// </param>
         /// <returns>A <see cref="RouteDataSnapshot"/> that captures the current state.</returns>
-        public RouteDataSnapshot PushState(IRouter? router, RouteValueDictionary? values, RouteValueDictionary? dataTokens)
-        {
+        public RouteDataSnapshot PushState(
+            IRouter? router,
+            RouteValueDictionary? values,
+            RouteValueDictionary? dataTokens
+        ) {
             // Perf: this is optimized for small list sizes, in particular to avoid overhead of a native call in
             // Array.CopyTo inside the List(IEnumerable<T>) constructor.
             List<IRouter>? routers = null;
@@ -160,9 +163,10 @@ namespace Microsoft.AspNetCore.Routing
 
             var snapshot = new RouteDataSnapshot(
                 this,
-                _dataTokens?.Count > 0 ? new RouteValueDictionary(_dataTokens) : null, 
+                _dataTokens?.Count > 0 ? new RouteValueDictionary(_dataTokens) : null,
                 routers,
-                _values?.Count > 0 ? new RouteValueDictionary(_values) : null);
+                _values?.Count > 0 ? new RouteValueDictionary(_values) : null
+            );
 
             if (router != null)
             {
@@ -212,8 +216,8 @@ namespace Microsoft.AspNetCore.Routing
                 RouteData routeData,
                 RouteValueDictionary? dataTokens,
                 IList<IRouter>? routers,
-                RouteValueDictionary? values)
-            {
+                RouteValueDictionary? values
+            ) {
                 if (routeData == null)
                 {
                     throw new ArgumentNullException(nameof(routeData));
@@ -257,7 +261,7 @@ namespace Microsoft.AspNetCore.Routing
                     // Perf: this is optimized for small list sizes, in particular to avoid overhead of a native call in
                     // Array.Clear inside the List.Clear() method.
                     var routers = _routeData._routers!;
-                    for (var i = routers.Count - 1; i >= 0 ; i--)
+                    for (var i = routers.Count - 1; i >= 0; i--)
                     {
                         routers.RemoveAt(i);
                     }

@@ -19,8 +19,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             IFeatureCollection connectionFeatures,
             MemoryPool<byte> memoryPool,
             IPEndPoint? localEndPoint,
-            IPEndPoint? remoteEndPoint)
-        {
+            IPEndPoint? remoteEndPoint
+        ) {
             ConnectionId = connectionId;
             ConnectionContext = connectionContext;
             ServiceContext = serviceContext;

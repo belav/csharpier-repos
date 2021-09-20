@@ -21,11 +21,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static SourceEnumConstantSymbol CreateExplicitValuedConstant(
             SourceMemberContainerTypeSymbol containingEnum,
             EnumMemberDeclarationSyntax syntax,
-            BindingDiagnosticBag diagnostics)
-        {
+            BindingDiagnosticBag diagnostics
+        ) {
             var initializer = syntax.EqualsValue;
             Debug.Assert(initializer != null);
-            return new ExplicitValuedEnumConstantSymbol(containingEnum, syntax, initializer, diagnostics);
+            return new ExplicitValuedEnumConstantSymbol(
+                containingEnum,
+                syntax,
+                initializer,
+                diagnostics
+            );
         }
 
         public static SourceEnumConstantSymbol CreateImplicitValuedConstant(
@@ -33,8 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             EnumMemberDeclarationSyntax syntax,
             SourceEnumConstantSymbol otherConstant,
             int otherConstantOffset,
-            BindingDiagnosticBag diagnostics)
-        {
+            BindingDiagnosticBag diagnostics
+        ) {
             if ((object)otherConstant == null)
             {
                 Debug.Assert(otherConstantOffset == 0);
@@ -43,16 +48,33 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             else
             {
                 Debug.Assert(otherConstantOffset > 0);
-                return new ImplicitValuedEnumConstantSymbol(containingEnum, syntax, otherConstant, (uint)otherConstantOffset, diagnostics);
+                return new ImplicitValuedEnumConstantSymbol(
+                    containingEnum,
+                    syntax,
+                    otherConstant,
+                    (uint)otherConstantOffset,
+                    diagnostics
+                );
             }
         }
 
-        protected SourceEnumConstantSymbol(SourceMemberContainerTypeSymbol containingEnum, EnumMemberDeclarationSyntax syntax, BindingDiagnosticBag diagnostics)
-            : base(containingEnum, syntax.Identifier.ValueText, syntax.GetReference(), syntax.Identifier.GetLocation())
-        {
+        protected SourceEnumConstantSymbol(
+            SourceMemberContainerTypeSymbol containingEnum,
+            EnumMemberDeclarationSyntax syntax,
+            BindingDiagnosticBag diagnostics
+        ) : base(
+            containingEnum,
+            syntax.Identifier.ValueText,
+            syntax.GetReference(),
+            syntax.Identifier.GetLocation()
+        ) {
             if (this.Name == WellKnownMemberNames.EnumBackingFieldName)
             {
-                diagnostics.Add(ErrorCode.ERR_ReservedEnumerator, this.ErrorLocation, WellKnownMemberNames.EnumBackingFieldName);
+                diagnostics.Add(
+                    ErrorCode.ERR_ReservedEnumerator,
+                    this.ErrorLocation,
+                    WellKnownMemberNames.EnumBackingFieldName
+                );
             }
         }
 
@@ -63,26 +85,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override Symbol AssociatedSymbol
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         protected sealed override DeclarationModifiers Modifiers
         {
             get
             {
-                return DeclarationModifiers.Const | DeclarationModifiers.Static | DeclarationModifiers.Public;
+                return DeclarationModifiers.Const
+                    | DeclarationModifiers.Static
+                    | DeclarationModifiers.Public;
             }
         }
 
         public new EnumMemberDeclarationSyntax SyntaxNode
         {
-            get
-            {
-                return (EnumMemberDeclarationSyntax)base.SyntaxNode;
-            }
+            get { return (EnumMemberDeclarationSyntax)base.SyntaxNode; }
         }
 
         protected override SyntaxList<AttributeListSyntax> AttributeDeclarationSyntaxList
@@ -98,8 +116,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal sealed override void ForceComplete(SourceLocation locationOpt, CancellationToken cancellationToken)
-        {
+        internal sealed override void ForceComplete(
+            SourceLocation locationOpt,
+            CancellationToken cancellationToken
+        ) {
             while (true)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -120,7 +140,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         break;
 
                     case CompletionPart.ConstantValue:
-                        GetConstantValue(ConstantFieldsInProgress.Empty, earlyDecodingWellKnownAttributes: false);
+                        GetConstantValue(
+                            ConstantFieldsInProgress.Empty,
+                            earlyDecodingWellKnownAttributes: false
+                        );
                         break;
 
                     case CompletionPart.None:
@@ -141,13 +164,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             public ZeroValuedEnumConstantSymbol(
                 SourceMemberContainerTypeSymbol containingEnum,
                 EnumMemberDeclarationSyntax syntax,
-                BindingDiagnosticBag diagnostics)
-                : base(containingEnum, syntax, diagnostics)
-            {
-            }
+                BindingDiagnosticBag diagnostics
+            ) : base(containingEnum, syntax, diagnostics) { }
 
-            protected override ConstantValue MakeConstantValue(HashSet<SourceFieldSymbolWithSyntaxReference> dependencies, bool earlyDecodingWellKnownAttributes, BindingDiagnosticBag diagnostics)
-            {
+            protected override ConstantValue MakeConstantValue(
+                HashSet<SourceFieldSymbolWithSyntaxReference> dependencies,
+                bool earlyDecodingWellKnownAttributes,
+                BindingDiagnosticBag diagnostics
+            ) {
                 var constantType = this.ContainingType.EnumUnderlyingType.SpecialType;
                 return Microsoft.CodeAnalysis.ConstantValue.Default(constantType);
             }
@@ -161,15 +185,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 SourceMemberContainerTypeSymbol containingEnum,
                 EnumMemberDeclarationSyntax syntax,
                 EqualsValueClauseSyntax initializer,
-                BindingDiagnosticBag diagnostics) :
-                base(containingEnum, syntax, diagnostics)
+                BindingDiagnosticBag diagnostics
+            ) : base(containingEnum, syntax, diagnostics)
             {
                 _equalsValueNodeRef = initializer.GetReference();
             }
 
-            protected override ConstantValue MakeConstantValue(HashSet<SourceFieldSymbolWithSyntaxReference> dependencies, bool earlyDecodingWellKnownAttributes, BindingDiagnosticBag diagnostics)
-            {
-                return ConstantValueUtils.EvaluateFieldConstant(this, (EqualsValueClauseSyntax)_equalsValueNodeRef.GetSyntax(), dependencies, earlyDecodingWellKnownAttributes, diagnostics);
+            protected override ConstantValue MakeConstantValue(
+                HashSet<SourceFieldSymbolWithSyntaxReference> dependencies,
+                bool earlyDecodingWellKnownAttributes,
+                BindingDiagnosticBag diagnostics
+            ) {
+                return ConstantValueUtils.EvaluateFieldConstant(
+                    this,
+                    (EqualsValueClauseSyntax)_equalsValueNodeRef.GetSyntax(),
+                    dependencies,
+                    earlyDecodingWellKnownAttributes,
+                    diagnostics
+                );
             }
         }
 
@@ -183,8 +216,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 EnumMemberDeclarationSyntax syntax,
                 SourceEnumConstantSymbol otherConstant,
                 uint otherConstantOffset,
-                BindingDiagnosticBag diagnostics) :
-                base(containingEnum, syntax, diagnostics)
+                BindingDiagnosticBag diagnostics
+            ) : base(containingEnum, syntax, diagnostics)
             {
                 Debug.Assert((object)otherConstant != null);
                 Debug.Assert(otherConstantOffset > 0);
@@ -193,9 +226,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 _otherConstantOffset = otherConstantOffset;
             }
 
-            protected override ConstantValue MakeConstantValue(HashSet<SourceFieldSymbolWithSyntaxReference> dependencies, bool earlyDecodingWellKnownAttributes, BindingDiagnosticBag diagnostics)
-            {
-                var otherValue = _otherConstant.GetConstantValue(new ConstantFieldsInProgress(this, dependencies), earlyDecodingWellKnownAttributes);
+            protected override ConstantValue MakeConstantValue(
+                HashSet<SourceFieldSymbolWithSyntaxReference> dependencies,
+                bool earlyDecodingWellKnownAttributes,
+                BindingDiagnosticBag diagnostics
+            ) {
+                var otherValue = _otherConstant.GetConstantValue(
+                    new ConstantFieldsInProgress(this, dependencies),
+                    earlyDecodingWellKnownAttributes
+                );
                 // Value may be Unset if there are dependencies
                 // that must be evaluated first.
                 if (otherValue == Microsoft.CodeAnalysis.ConstantValue.Unset)
@@ -207,7 +246,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return Microsoft.CodeAnalysis.ConstantValue.Bad;
                 }
                 ConstantValue value;
-                var overflowKind = EnumConstantHelper.OffsetValue(otherValue, _otherConstantOffset, out value);
+                var overflowKind = EnumConstantHelper.OffsetValue(
+                    otherValue,
+                    _otherConstantOffset,
+                    out value
+                );
                 if (overflowKind == EnumOverflowKind.OverflowReport)
                 {
                     // Report an error if the value is immediately

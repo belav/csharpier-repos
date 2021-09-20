@@ -7,13 +7,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 {
     internal sealed partial class MarkupTagHelperDirectiveAttributeSyntax
     {
-        private static readonly string TagHelperAttributeInfoKey = typeof(TagHelperAttributeInfo).Name;
+        private static readonly string TagHelperAttributeInfoKey =
+            typeof(TagHelperAttributeInfo).Name;
 
         public TagHelperAttributeInfo TagHelperAttributeInfo
         {
             get
             {
-                var tagHelperAttributeInfo = this.GetAnnotationValue(TagHelperAttributeInfoKey) as TagHelperAttributeInfo;
+                var tagHelperAttributeInfo =
+                    this.GetAnnotationValue(TagHelperAttributeInfoKey) as TagHelperAttributeInfo;
                 return tagHelperAttributeInfo;
             }
         }
@@ -26,13 +28,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                     Transition.GetContent(),
                     Name.GetContent(),
                     Colon?.GetContent() ?? string.Empty,
-                    ParameterName?.GetContent() ?? string.Empty);
+                    ParameterName?.GetContent() ?? string.Empty
+                );
                 return fullName;
             }
         }
 
-        public MarkupTagHelperDirectiveAttributeSyntax WithTagHelperAttributeInfo(TagHelperAttributeInfo info)
-        {
+        public MarkupTagHelperDirectiveAttributeSyntax WithTagHelperAttributeInfo(
+            TagHelperAttributeInfo info
+        ) {
             var annotations = new List<SyntaxAnnotation>(GetAnnotations())
             {
                 new SyntaxAnnotation(TagHelperAttributeInfoKey, info)

@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
 {
     public sealed class ViewComponentTagHelperIntermediateNode : ExtensionIntermediateNode
     {
-        public override IntermediateNodeCollection Children { get; } = IntermediateNodeCollection.ReadOnly;
+        public override IntermediateNodeCollection Children { get; } =
+            IntermediateNodeCollection.ReadOnly;
 
         public string ClassName { get; set; }
 

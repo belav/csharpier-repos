@@ -11,10 +11,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Telemetry
     /// </summary>
     internal class AnalyzerActionCounts
     {
-        internal static readonly AnalyzerActionCounts Empty = new AnalyzerActionCounts(in AnalyzerActions.Empty);
+        internal static readonly AnalyzerActionCounts Empty = new AnalyzerActionCounts(
+            in AnalyzerActions.Empty
+        );
 
-        internal AnalyzerActionCounts(in AnalyzerActions analyzerActions) :
-            this(
+        internal AnalyzerActionCounts(in AnalyzerActions analyzerActions)
+            : this(
                 analyzerActions.CompilationStartActionsCount,
                 analyzerActions.CompilationEndActionsCount,
                 analyzerActions.CompilationActionsCount,
@@ -32,9 +34,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Telemetry
                 analyzerActions.OperationBlockStartActionsCount,
                 analyzerActions.OperationBlockEndActionsCount,
                 analyzerActions.OperationBlockActionsCount,
-                analyzerActions.Concurrent)
-        {
-        }
+                analyzerActions.Concurrent
+            ) { }
 
         internal AnalyzerActionCounts(
             int compilationStartActionsCount,
@@ -54,8 +55,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Telemetry
             int operationBlockStartActionsCount,
             int operationBlockEndActionsCount,
             int operationBlockActionsCount,
-            bool concurrent)
-        {
+            bool concurrent
+        ) {
             CompilationStartActionsCount = compilationStartActionsCount;
             CompilationEndActionsCount = compilationEndActionsCount;
             CompilationActionsCount = compilationActionsCount;
@@ -75,13 +76,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Telemetry
             OperationBlockActionsCount = operationBlockActionsCount;
             Concurrent = concurrent;
 
-            HasAnyExecutableCodeActions = CodeBlockActionsCount > 0 ||
-                CodeBlockStartActionsCount > 0 ||
-                SyntaxNodeActionsCount > 0 ||
-                OperationActionsCount > 0 ||
-                OperationBlockActionsCount > 0 ||
-                OperationBlockStartActionsCount > 0 ||
-                SymbolStartActionsCount > 0;
+            HasAnyExecutableCodeActions =
+                CodeBlockActionsCount > 0
+                || CodeBlockStartActionsCount > 0
+                || SyntaxNodeActionsCount > 0
+                || OperationActionsCount > 0
+                || OperationBlockActionsCount > 0
+                || OperationBlockStartActionsCount > 0
+                || SymbolStartActionsCount > 0;
         }
 
         /// <summary>

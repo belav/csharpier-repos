@@ -60,7 +60,6 @@ namespace System.Transactions.Tests
             using (TransactionScope scope = new TransactionScope())
             {
                 irm.Value = 2;
-
                 /* Not completing this..
                 scope.Complete ();*/
             }
@@ -71,37 +70,41 @@ namespace System.Transactions.Tests
         [Fact]
         public void Vol1_Dur0_Fail2()
         {
-            Assert.Throws<TransactionAbortedException>(() =>
-           {
-               IntResourceManager irm = new IntResourceManager(1);
+            Assert.Throws<TransactionAbortedException>(
+                () =>
+                {
+                    IntResourceManager irm = new IntResourceManager(1);
 
-               irm.FailPrepare = true;
+                    irm.FailPrepare = true;
 
-               using (TransactionScope scope = new TransactionScope())
-               {
-                   irm.Value = 2;
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        irm.Value = 2;
 
-                   scope.Complete();
-               }
-           });
+                        scope.Complete();
+                    }
+                }
+            );
         }
 
         [Fact]
         public void Vol1_Dur0_Fail3()
         {
-            Assert.Throws<TransactionAbortedException>(() =>
-            {
-                IntResourceManager irm = new IntResourceManager(1);
-                irm.UseSingle = true;
-                irm.FailSPC = true;
-
-                using (TransactionScope scope = new TransactionScope())
+            Assert.Throws<TransactionAbortedException>(
+                () =>
                 {
-                    irm.Value = 2;
+                    IntResourceManager irm = new IntResourceManager(1);
+                    irm.UseSingle = true;
+                    irm.FailSPC = true;
 
-                    scope.Complete();
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        irm.Value = 2;
+
+                        scope.Complete();
+                    }
                 }
-            });
+            );
         }
 
         #endregion
@@ -182,15 +185,17 @@ namespace System.Transactions.Tests
             irm.Type = ResourceManagerType.Durable;
             irm.FailSPC = true;
             irm.UseSingle = true;
-            Assert.Throws<TransactionAbortedException>(() =>
-            {
-                using (TransactionScope scope = new TransactionScope())
+            Assert.Throws<TransactionAbortedException>(
+                () =>
                 {
-                    irm.Value = 2;
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        irm.Value = 2;
 
-                    scope.Complete();
+                        scope.Complete();
+                    }
                 }
-            });
+            );
             irm.Check(1, 0, 0, 0, 0, 0, 0, "irm");
         }
         #endregion
@@ -247,18 +252,20 @@ namespace System.Transactions.Tests
 
             /* Durable RM irm[0] does Abort on SPC, so
              * all volatile RMs get Rollback */
-            Assert.Throws<TransactionAbortedException>(() =>
-            {
-                using (TransactionScope scope = new TransactionScope())
+            Assert.Throws<TransactionAbortedException>(
+                () =>
                 {
-                    irm[0].Value = 2;
-                    irm[1].Value = 6;
-                    irm[2].Value = 10;
-                    irm[3].Value = 14;
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        irm[0].Value = 2;
+                        irm[1].Value = 6;
+                        irm[2].Value = 10;
+                        irm[3].Value = 14;
 
-                    scope.Complete();
+                        scope.Complete();
+                    }
                 }
-            });
+            );
             irm[0].CheckSPC("irm [0]");
             /* Volatile RMs get 2PC Prepare, and then get rolled back */
             for (int i = 1; i < 4; i++)
@@ -285,18 +292,20 @@ namespace System.Transactions.Tests
 
             /* Durable RM irm[2] does on SPC, so
              * all volatile RMs get Rollback */
-            Assert.Throws<TransactionAbortedException>(() =>
-            {
-                using (TransactionScope scope = new TransactionScope())
+            Assert.Throws<TransactionAbortedException>(
+                () =>
                 {
-                    irm[0].Value = 2;
-                    irm[1].Value = 6;
-                    irm[2].Value = 10;
-                    irm[3].Value = 14;
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        irm[0].Value = 2;
+                        irm[1].Value = 6;
+                        irm[2].Value = 10;
+                        irm[3].Value = 14;
 
-                    scope.Complete();
+                        scope.Complete();
+                    }
                 }
-            });
+            );
             irm[0].Check(0, 0, 0, 1, 0, 0, 0, "irm [0]");
 
             /* irm [1] & [2] get prepare,
@@ -324,16 +333,18 @@ namespace System.Transactions.Tests
 
             /* Durable RM irm[2] does on SPC, so
              * all volatile RMs get Rollback */
-            TransactionAbortedException e = Assert.Throws<TransactionAbortedException>(() =>
-            {
-                using (TransactionScope scope = new TransactionScope())
+            TransactionAbortedException e = Assert.Throws<TransactionAbortedException>(
+                () =>
                 {
-                    irm[0].Value = 2;
-                    irm[1].Value = 6;
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        irm[0].Value = 2;
+                        irm[1].Value = 6;
 
-                    scope.Complete();
+                        scope.Complete();
+                    }
                 }
-            });
+            );
             Assert.IsType<NotSupportedException>(e.InnerException);
 
             irm[0].Check(1, 0, 0, 0, 0, 0, 0, "irm [0]");
@@ -367,13 +378,17 @@ namespace System.Transactions.Tests
                 scope.Complete();
             }
 
-            TransactionAbortedException tae = Assert.Throws<TransactionAbortedException>(() => ct.Commit());
+            TransactionAbortedException tae = Assert.Throws<TransactionAbortedException>(
+                () => ct.Commit()
+            );
             Assert.IsType<NotSupportedException>(tae.InnerException);
 
             irm[0].Check(1, 0, 0, 0, 0, 0, 0, "irm [0]");
             irm[1].Check(0, 1, 0, 1, 0, 0, 0, "irm [1]");
 
-            InvalidOperationException ioe = Assert.Throws<InvalidOperationException>(() => ct.Commit());
+            InvalidOperationException ioe = Assert.Throws<InvalidOperationException>(
+                () => ct.Commit()
+            );
             Assert.Null(ioe.InnerException);
 
             Transaction.Current = null;
@@ -426,7 +441,6 @@ namespace System.Transactions.Tests
                 irm1.Value = 2;
                 Assert.Equal(0, irm1.NumEnlistFailed);
             }
-
             // TODO: Technically this is not correct. A call to EnlistPromotableSinglePhase is called AFTER a
             // DurableEnlist for a given transaction will return "false", which should probably be considered
             // an enlistment failure. An exception is not thrown, but the PSPE still "failed"
@@ -445,7 +459,6 @@ namespace System.Transactions.Tests
                 irm1.Value = 2;
                 Assert.Equal(0, irm1.NumEnlistFailed);
             }
-
             // TODO: Technically this is not correct. A call to EnlistPromotableSinglePhase is called AFTER a
             // successful EnlistPromotableSinglePhase for a given transaction will return "false", which should
             // probably be considered an enlistment failure. An exception is not thrown, but the second PSPE still "failed".
@@ -504,6 +517,7 @@ namespace System.Transactions.Tests
             {
                 ct.Dispose();
             }
+
             finally
             {
                 Transaction.Current = null;
@@ -526,6 +540,7 @@ namespace System.Transactions.Tests
                 ct.Commit();
                 ct.Dispose();
             }
+
             finally
             {
                 Transaction.Current = null;
@@ -583,7 +598,11 @@ namespace System.Transactions.Tests
             {
                 rm.Value = 2;
                 var tr = Transaction.Current;
-                tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                tr.TransactionCompleted += (s, e) =>
+                {
+                    called = true;
+                    status = e.Transaction.TransactionInformation.Status;
+                };
                 ts.Complete();
             }
 
@@ -597,16 +616,17 @@ namespace System.Transactions.Tests
         {
             bool called = false;
             TransactionStatus status = TransactionStatus.Active;
-            var rm = new IntResourceManager(1)
-            {
-                Type = ResourceManagerType.Volatile,
-            };
+            var rm = new IntResourceManager(1) { Type = ResourceManagerType.Volatile, };
 
             using (var ts = new TransactionScope())
             {
                 rm.Value = 2;
                 var tr = Transaction.Current;
-                tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                tr.TransactionCompleted += (s, e) =>
+                {
+                    called = true;
+                    status = e.Transaction.TransactionInformation.Status;
+                };
                 ts.Complete();
             }
 
@@ -620,16 +640,17 @@ namespace System.Transactions.Tests
         {
             bool called = false;
             TransactionStatus status = TransactionStatus.Active;
-            var rm = new IntResourceManager(1)
-            {
-                Type = ResourceManagerType.Volatile,
-            };
+            var rm = new IntResourceManager(1) { Type = ResourceManagerType.Volatile, };
 
             using (var ts = new TransactionScope())
             {
                 rm.Value = 2;
                 var tr = Transaction.Current;
-                tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                tr.TransactionCompleted += (s, e) =>
+                {
+                    called = true;
+                    status = e.Transaction.TransactionInformation.Status;
+                };
                 // Not calling ts.Complete() on purpose..
             }
 
@@ -659,7 +680,11 @@ namespace System.Transactions.Tests
                 {
                     rm.Value = 2;
                     var tr = Transaction.Current;
-                    tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                    tr.TransactionCompleted += (s, e) =>
+                    {
+                        called = true;
+                        status = e.Transaction.TransactionInformation.Status;
+                    };
                     ts.Complete();
                 }
             }
@@ -697,7 +722,11 @@ namespace System.Transactions.Tests
                 {
                     rm.Value = 2;
                     var tr = Transaction.Current;
-                    tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                    tr.TransactionCompleted += (s, e) =>
+                    {
+                        called = true;
+                        status = e.Transaction.TransactionInformation.Status;
+                    };
                     ts.Complete();
                 }
             }
@@ -732,7 +761,11 @@ namespace System.Transactions.Tests
                 {
                     rm.Value = 2;
                     var tr = Transaction.Current;
-                    tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                    tr.TransactionCompleted += (s, e) =>
+                    {
+                        called = true;
+                        status = e.Transaction.TransactionInformation.Status;
+                    };
                     // Not calling ts.Complete() on purpose..
                 }
             }
@@ -769,7 +802,11 @@ namespace System.Transactions.Tests
                 {
                     rm.Value = 2;
                     var tr = Transaction.Current;
-                    tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                    tr.TransactionCompleted += (s, e) =>
+                    {
+                        called = true;
+                        status = e.Transaction.TransactionInformation.Status;
+                    };
                     ts.Complete();
                 }
             }
@@ -811,7 +848,11 @@ namespace System.Transactions.Tests
                 rm1.Value = 11;
                 rm2.Value = 22;
                 var tr = Transaction.Current;
-                tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                tr.TransactionCompleted += (s, e) =>
+                {
+                    called = true;
+                    status = e.Transaction.TransactionInformation.Status;
+                };
                 ts.Complete();
             }
 
@@ -829,21 +870,19 @@ namespace System.Transactions.Tests
         {
             TransactionStatus status = TransactionStatus.Active;
             bool called = false;
-            var rm1 = new IntResourceManager(1)
-            {
-                Type = ResourceManagerType.Volatile
-            };
-            var rm2 = new IntResourceManager(1)
-            {
-                Type = ResourceManagerType.Volatile
-            };
+            var rm1 = new IntResourceManager(1) { Type = ResourceManagerType.Volatile };
+            var rm2 = new IntResourceManager(1) { Type = ResourceManagerType.Volatile };
 
             using (var ts = new TransactionScope())
             {
                 rm1.Value = 11;
                 rm2.Value = 22;
                 var tr = Transaction.Current;
-                tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                tr.TransactionCompleted += (s, e) =>
+                {
+                    called = true;
+                    status = e.Transaction.TransactionInformation.Status;
+                };
                 ts.Complete();
             }
             rm1.Check(0, 1, 1, 0, 0, 0, 0, "rm1");
@@ -858,21 +897,19 @@ namespace System.Transactions.Tests
         {
             TransactionStatus status = TransactionStatus.Active;
             bool called = false;
-            var rm1 = new IntResourceManager(1)
-            {
-                Type = ResourceManagerType.Volatile
-            };
-            var rm2 = new IntResourceManager(1)
-            {
-                Type = ResourceManagerType.Volatile
-            };
+            var rm1 = new IntResourceManager(1) { Type = ResourceManagerType.Volatile };
+            var rm2 = new IntResourceManager(1) { Type = ResourceManagerType.Volatile };
 
             using (var ts = new TransactionScope())
             {
                 rm1.Value = 11;
                 rm2.Value = 22;
                 var tr = Transaction.Current;
-                tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                tr.TransactionCompleted += (s, e) =>
+                {
+                    called = true;
+                    status = e.Transaction.TransactionInformation.Status;
+                };
                 // Not calling ts.Complete() on purpose..
             }
 
@@ -911,7 +948,11 @@ namespace System.Transactions.Tests
                     rm2.Value = 22;
 
                     var tr = Transaction.Current;
-                    tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                    tr.TransactionCompleted += (s, e) =>
+                    {
+                        called = true;
+                        status = e.Transaction.TransactionInformation.Status;
+                    };
                     ts.Complete();
                 }
             }
@@ -943,10 +984,7 @@ namespace System.Transactions.Tests
                 ThrowThisException = new InvalidOperationException("rm1"),
                 Type = ResourceManagerType.Volatile
             };
-            var rm2 = new IntResourceManager(2)
-            {
-                Type = ResourceManagerType.Volatile
-            };
+            var rm2 = new IntResourceManager(2) { Type = ResourceManagerType.Volatile };
 
             try
             {
@@ -986,10 +1024,7 @@ namespace System.Transactions.Tests
                 ThrowThisException = new InvalidOperationException("rm1"),
                 Type = ResourceManagerType.Volatile
             };
-            var rm2 = new IntResourceManager(2)
-            {
-                Type = ResourceManagerType.Volatile
-            };
+            var rm2 = new IntResourceManager(2) { Type = ResourceManagerType.Volatile };
 
             try
             {
@@ -1031,10 +1066,7 @@ namespace System.Transactions.Tests
                 ThrowThisException = new InvalidOperationException("rm1"),
                 Type = ResourceManagerType.Volatile
             };
-            var rm2 = new IntResourceManager(2)
-            {
-                Type = ResourceManagerType.Volatile
-            };
+            var rm2 = new IntResourceManager(2) { Type = ResourceManagerType.Volatile };
 
             try
             {
@@ -1044,7 +1076,11 @@ namespace System.Transactions.Tests
                     rm2.Value = 22;
 
                     var tr = Transaction.Current;
-                    tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                    tr.TransactionCompleted += (s, e) =>
+                    {
+                        called = true;
+                        status = e.Transaction.TransactionInformation.Status;
+                    };
                     ts.Complete();
                 }
             }
@@ -1070,10 +1106,7 @@ namespace System.Transactions.Tests
             TransactionStatus status = TransactionStatus.Active;
             bool called = false;
             Exception ex = null;
-            var rm1 = new IntResourceManager(1)
-            {
-                Type = ResourceManagerType.Volatile
-            };
+            var rm1 = new IntResourceManager(1) { Type = ResourceManagerType.Volatile };
             var rm2 = new IntResourceManager(2)
             {
                 FailPrepare = true,
@@ -1089,7 +1122,11 @@ namespace System.Transactions.Tests
                     rm2.Value = 22;
 
                     var tr = Transaction.Current;
-                    tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                    tr.TransactionCompleted += (s, e) =>
+                    {
+                        called = true;
+                        status = e.Transaction.TransactionInformation.Status;
+                    };
                     ts.Complete();
                 }
             }
@@ -1138,7 +1175,11 @@ namespace System.Transactions.Tests
                     rm2.Value = 22;
 
                     var tr = Transaction.Current;
-                    tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                    tr.TransactionCompleted += (s, e) =>
+                    {
+                        called = true;
+                        status = e.Transaction.TransactionInformation.Status;
+                    };
                     ts.Complete();
                 }
             }
@@ -1185,7 +1226,11 @@ namespace System.Transactions.Tests
                     rm2.Value = 22;
 
                     var tr = Transaction.Current;
-                    tr.TransactionCompleted += (s, e) => { called = true; status = e.Transaction.TransactionInformation.Status; };
+                    tr.TransactionCompleted += (s, e) =>
+                    {
+                        called = true;
+                        status = e.Transaction.TransactionInformation.Status;
+                    };
                     ts.Complete();
                 }
             }
@@ -1202,7 +1247,6 @@ namespace System.Transactions.Tests
             Assert.NotNull(ex);
             Assert.Equal(rm1.ThrowThisException, ex);
         }
-
         #endregion
 
         #endregion

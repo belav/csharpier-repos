@@ -17,8 +17,8 @@ namespace Microsoft.AspNetCore.Antiforgery
 
         public DefaultAntiforgeryTokenGenerator(
             IClaimUidExtractor claimUidExtractor,
-            IAntiforgeryAdditionalDataProvider additionalDataProvider)
-        {
+            IAntiforgeryAdditionalDataProvider additionalDataProvider
+        ) {
             _claimUidExtractor = claimUidExtractor;
             _additionalDataProvider = additionalDataProvider;
         }
@@ -36,8 +36,8 @@ namespace Microsoft.AspNetCore.Antiforgery
         /// <inheritdoc />
         public AntiforgeryToken GenerateRequestToken(
             HttpContext httpContext,
-            AntiforgeryToken cookieToken)
-        {
+            AntiforgeryToken cookieToken
+        ) {
             if (httpContext == null)
             {
                 throw new ArgumentNullException(nameof(httpContext));
@@ -52,7 +52,8 @@ namespace Microsoft.AspNetCore.Antiforgery
             {
                 throw new ArgumentException(
                     Resources.Antiforgery_CookieToken_IsInvalid,
-                    nameof(cookieToken));
+                    nameof(cookieToken)
+                );
             }
 
             var requestToken = new AntiforgeryToken()
@@ -68,7 +69,9 @@ namespace Microsoft.AspNetCore.Antiforgery
             if (authenticatedIdentity != null)
             {
                 isIdentityAuthenticated = true;
-                requestToken.ClaimUid = GetClaimUidBlob(_claimUidExtractor.ExtractClaimUid(httpContext.User));
+                requestToken.ClaimUid = GetClaimUidBlob(
+                    _claimUidExtractor.ExtractClaimUid(httpContext.User)
+                );
 
                 if (requestToken.ClaimUid == null)
                 {
@@ -79,14 +82,17 @@ namespace Microsoft.AspNetCore.Antiforgery
             // populate AdditionalData
             if (_additionalDataProvider != null)
             {
-                requestToken.AdditionalData = _additionalDataProvider.GetAdditionalData(httpContext);
+                requestToken.AdditionalData = _additionalDataProvider.GetAdditionalData(
+                    httpContext
+                );
             }
 
-            if (isIdentityAuthenticated
+            if (
+                isIdentityAuthenticated
                 && string.IsNullOrEmpty(requestToken.Username)
                 && requestToken.ClaimUid == null
-                && string.IsNullOrEmpty(requestToken.AdditionalData))
-            {
+                && string.IsNullOrEmpty(requestToken.AdditionalData)
+            ) {
                 // Application says user is authenticated, but we have no identifier for the user.
                 throw new InvalidOperationException(
                     Resources.FormatAntiforgeryTokenValidator_AuthenticatedUserWithoutUsername(
@@ -95,7 +101,9 @@ namespace Microsoft.AspNetCore.Antiforgery
                         "true",
                         nameof(IIdentity.Name),
                         nameof(IAntiforgeryAdditionalDataProvider),
-                        nameof(DefaultAntiforgeryAdditionalDataProvider)));
+                        nameof(DefaultAntiforgeryAdditionalDataProvider)
+                    )
+                );
             }
 
             return requestToken;
@@ -112,8 +120,8 @@ namespace Microsoft.AspNetCore.Antiforgery
             HttpContext httpContext,
             AntiforgeryToken cookieToken,
             AntiforgeryToken requestToken,
-            [NotNullWhen(false)] out string? message)
-        {
+            [NotNullWhen(false)] out string? message
+        ) {
             if (httpContext == null)
             {
                 throw new ArgumentNullException(nameof(httpContext));
@@ -123,14 +131,16 @@ namespace Microsoft.AspNetCore.Antiforgery
             {
                 throw new ArgumentNullException(
                     nameof(cookieToken),
-                    Resources.Antiforgery_CookieToken_MustBeProvided_Generic);
+                    Resources.Antiforgery_CookieToken_MustBeProvided_Generic
+                );
             }
 
             if (requestToken == null)
             {
                 throw new ArgumentNullException(
                     nameof(requestToken),
-                    Resources.Antiforgery_RequestToken_MustBeProvided_Generic);
+                    Resources.Antiforgery_RequestToken_MustBeProvided_Generic
+                );
             }
 
             // Do the tokens have the correct format?
@@ -154,7 +164,9 @@ namespace Microsoft.AspNetCore.Antiforgery
             var authenticatedIdentity = GetAuthenticatedIdentity(httpContext.User);
             if (authenticatedIdentity != null)
             {
-                currentClaimUid = GetClaimUidBlob(_claimUidExtractor.ExtractClaimUid(httpContext.User));
+                currentClaimUid = GetClaimUidBlob(
+                    _claimUidExtractor.ExtractClaimUid(httpContext.User)
+                );
                 if (currentClaimUid == null)
                 {
                     currentUsername = authenticatedIdentity.Name ?? string.Empty;
@@ -164,15 +176,19 @@ namespace Microsoft.AspNetCore.Antiforgery
             // OpenID and other similar authentication schemes use URIs for the username.
             // These should be treated as case-sensitive.
             var comparer = StringComparer.OrdinalIgnoreCase;
-            if (currentUsername.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
-                currentUsername.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
-            {
+            if (
+                currentUsername.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
+                || currentUsername.StartsWith("https://", StringComparison.OrdinalIgnoreCase)
+            ) {
                 comparer = StringComparer.Ordinal;
             }
 
             if (!comparer.Equals(requestToken.Username, currentUsername))
             {
-                message = Resources.FormatAntiforgeryToken_UsernameMismatch(requestToken.Username, currentUsername);
+                message = Resources.FormatAntiforgeryToken_UsernameMismatch(
+                    requestToken.Username,
+                    currentUsername
+                );
                 return false;
             }
 
@@ -183,9 +199,13 @@ namespace Microsoft.AspNetCore.Antiforgery
             }
 
             // Is the AdditionalData valid?
-            if (_additionalDataProvider != null &&
-                !_additionalDataProvider.ValidateAdditionalData(httpContext, requestToken.AdditionalData))
-            {
+            if (
+                _additionalDataProvider != null
+                && !_additionalDataProvider.ValidateAdditionalData(
+                    httpContext,
+                    requestToken.AdditionalData
+                )
+            ) {
                 message = Resources.AntiforgeryToken_AdditionalDataCheckFailed;
                 return false;
             }

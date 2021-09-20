@@ -23,19 +23,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             return new HtmlAttributePropertyHelper(property);
         }
 
-        public HtmlAttributePropertyHelper(PropertyInfo property)
-            : base(property)
-        {
-        }
+        public HtmlAttributePropertyHelper(PropertyInfo property) : base(property) { }
 
         public override string Name
         {
             get => base.Name;
-
-            protected set
-            {
-                base.Name = value == null ? null : value.Replace('_', '-');
-            }
+            protected set { base.Name = value == null ? null : value.Replace('_', '-'); }
         }
     }
 }

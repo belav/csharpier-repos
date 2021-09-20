@@ -21,8 +21,11 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     /// </summary>
     public class SqlServerPolygonMethodTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _getInteriorRingN = typeof(Polygon).GetRequiredRuntimeMethod(
-            nameof(Polygon.GetInteriorRingN), new[] { typeof(int) });
+        private static readonly MethodInfo _getInteriorRingN =
+            typeof(Polygon).GetRequiredRuntimeMethod(
+                nameof(Polygon.GetInteriorRingN),
+                new[] { typeof(int) }
+            );
 
         private readonly IRelationalTypeMappingSource _typeMappingSource;
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -35,8 +38,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         public SqlServerPolygonMethodTranslator(
             IRelationalTypeMappingSource typeMappingSource,
-            ISqlExpressionFactory sqlExpressionFactory)
-        {
+            ISqlExpressionFactory sqlExpressionFactory
+        ) {
             _typeMappingSource = typeMappingSource;
             _sqlExpressionFactory = sqlExpressionFactory;
         }
@@ -51,17 +54,24 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
 
             if (Equals(method, _getInteriorRingN))
             {
-                Check.DebugAssert(instance!.TypeMapping != null, "Instance must have typeMapping assigned.");
+                Check.DebugAssert(
+                    instance!.TypeMapping != null,
+                    "Instance must have typeMapping assigned."
+                );
                 var storeType = instance.TypeMapping.StoreType;
-                var isGeography = string.Equals(storeType, "geography", StringComparison.OrdinalIgnoreCase);
+                var isGeography = string.Equals(
+                    storeType,
+                    "geography",
+                    StringComparison.OrdinalIgnoreCase
+                );
 
                 if (isGeography)
                 {
@@ -72,13 +82,15 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         {
                             _sqlExpressionFactory.Add(
                                 arguments[0],
-                                _sqlExpressionFactory.Constant(2))
+                                _sqlExpressionFactory.Constant(2)
+                            )
                         },
                         nullable: true,
                         instancePropagatesNullability: true,
                         argumentsPropagateNullability: new[] { true },
                         method.ReturnType,
-                        _typeMappingSource.FindMapping(method.ReturnType, storeType));
+                        _typeMappingSource.FindMapping(method.ReturnType, storeType)
+                    );
                 }
 
                 return _sqlExpressionFactory.Function(
@@ -86,15 +98,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     "STInteriorRingN",
                     new[]
                     {
-                        _sqlExpressionFactory.Add(
-                            arguments[0],
-                            _sqlExpressionFactory.Constant(1))
+                        _sqlExpressionFactory.Add(arguments[0], _sqlExpressionFactory.Constant(1))
                     },
                     nullable: true,
                     instancePropagatesNullability: true,
                     argumentsPropagateNullability: new[] { true },
                     method.ReturnType,
-                    _typeMappingSource.FindMapping(method.ReturnType, storeType));
+                    _typeMappingSource.FindMapping(method.ReturnType, storeType)
+                );
             }
 
             return null;

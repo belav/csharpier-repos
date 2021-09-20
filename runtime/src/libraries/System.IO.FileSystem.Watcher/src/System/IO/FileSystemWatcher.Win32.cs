@@ -34,7 +34,9 @@ namespace System.IO
                 dwDesiredAccess: Interop.Kernel32.FileOperations.FILE_LIST_DIRECTORY,
                 dwShareMode: FileShare.Read | FileShare.Delete | FileShare.Write,
                 dwCreationDisposition: FileMode.Open,
-                dwFlagsAndAttributes: Interop.Kernel32.FileOperations.FILE_FLAG_BACKUP_SEMANTICS | Interop.Kernel32.FileOperations.FILE_FLAG_OVERLAPPED);
+                dwFlagsAndAttributes: Interop.Kernel32.FileOperations.FILE_FLAG_BACKUP_SEMANTICS
+                    | Interop.Kernel32.FileOperations.FILE_FLAG_OVERLAPPED
+            );
 
             if (IsHandleInvalid(_directoryHandle))
             {
@@ -54,18 +56,31 @@ namespace System.IO
                 // Store all state, including a preallocated overlapped, into the state object that'll be
                 // passed from iteration to iteration during the lifetime of the operation.  The buffer will be pinned
                 // from now until the end of the operation.
-                state = new AsyncReadState(session, buffer, _directoryHandle, ThreadPoolBoundHandle.BindHandle(_directoryHandle), this);
+                state = new AsyncReadState(
+                    session,
+                    buffer,
+                    _directoryHandle,
+                    ThreadPoolBoundHandle.BindHandle(_directoryHandle),
+                    this
+                );
                 unsafe
                 {
-                    state.PreAllocatedOverlapped = new PreAllocatedOverlapped((errorCode, numBytes, overlappedPointer) =>
-                    {
-                        AsyncReadState state = (AsyncReadState)ThreadPoolBoundHandle.GetNativeOverlappedState(overlappedPointer)!;
-                        state.ThreadPoolBinding.FreeNativeOverlapped(overlappedPointer);
-                        if (state.WeakWatcher.TryGetTarget(out FileSystemWatcher? watcher))
+                    state.PreAllocatedOverlapped = new PreAllocatedOverlapped(
+                        (errorCode, numBytes, overlappedPointer) =>
                         {
-                            watcher.ReadDirectoryChangesCallback(errorCode, numBytes, state);
-                        }
-                    }, state, buffer);
+                            AsyncReadState state =
+                                (AsyncReadState)ThreadPoolBoundHandle.GetNativeOverlappedState(
+                                    overlappedPointer
+                                )!;
+                            state.ThreadPoolBinding.FreeNativeOverlapped(overlappedPointer);
+                            if (state.WeakWatcher.TryGetTarget(out FileSystemWatcher? watcher))
+                            {
+                                watcher.ReadDirectoryChangesCallback(errorCode, numBytes, state);
+                            }
+                        },
+                        state,
+                        buffer
+                    );
                 }
             }
             catch
@@ -154,7 +169,9 @@ namespace System.IO
                     return;
 
                 // Get the overlapped pointer to use for this iteration.
-                overlappedPointer = state.ThreadPoolBinding.AllocateNativeOverlapped(state.PreAllocatedOverlapped);
+                overlappedPointer = state.ThreadPoolBinding.AllocateNativeOverlapped(
+                    state.PreAllocatedOverlapped
+                );
                 continueExecuting = Interop.Kernel32.ReadDirectoryChangesW(
                     state.DirectoryHandle,
                     state.Buffer, // the buffer is kept pinned for the duration of the sync and async operation by the PreAllocatedOverlapped
@@ -163,7 +180,8 @@ namespace System.IO
                     (uint)_notifyFilters,
                     null,
                     overlappedPointer,
-                    null);
+                    null
+                );
             }
             catch (ObjectDisposedException)
             {
@@ -173,7 +191,10 @@ namespace System.IO
             catch (ArgumentNullException)
             {
                 //Ignore.  The disposed handle could also manifest as an ArgumentNullException.
-                Debug.Assert(IsHandleInvalid(state.DirectoryHandle), "ArgumentNullException from something other than SafeHandle?");
+                Debug.Assert(
+                    IsHandleInvalid(state.DirectoryHandle),
+                    "ArgumentNullException from something other than SafeHandle?"
+                );
             }
             finally
             {
@@ -203,8 +224,11 @@ namespace System.IO
         }
 
         /// <summary>Callback invoked when an asynchronous read on the directory handle completes.</summary>
-        private void ReadDirectoryChangesCallback(uint errorCode, uint numBytes, AsyncReadState state)
-        {
+        private void ReadDirectoryChangesCallback(
+            uint errorCode,
+            uint numBytes,
+            AsyncReadState state
+        ) {
             try
             {
                 if (IsHandleInvalid(state.DirectoryHandle))
@@ -238,9 +262,12 @@ namespace System.IO
                 }
                 else
                 {
-                    ParseEventBufferAndNotifyForEach(new ReadOnlySpan<byte>(state.Buffer, 0, (int)numBytes));
+                    ParseEventBufferAndNotifyForEach(
+                        new ReadOnlySpan<byte>(state.Buffer, 0, (int)numBytes)
+                    );
                 }
             }
+
             finally
             {
                 // Call Monitor again to either start the next iteration or clean up the whole operation.
@@ -263,7 +290,8 @@ namespace System.IO
                     Debug.Assert(false);
                     break;
                 }
-                ref readonly FILE_NOTIFY_INFORMATION info = ref MemoryMarshal.AsRef<FILE_NOTIFY_INFORMATION>(buffer);
+                ref readonly FILE_NOTIFY_INFORMATION info =
+                    ref MemoryMarshal.AsRef<FILE_NOTIFY_INFORMATION>(buffer);
 
                 // Validate the data we received isn't truncated.
                 if (info.FileNameLength > (uint)buffer.Length - sizeof(FILE_NOTIFY_INFORMATION))
@@ -273,7 +301,8 @@ namespace System.IO
                     break;
                 }
                 ReadOnlySpan<char> fileName = MemoryMarshal.Cast<byte, char>(
-                    buffer.Slice(sizeof(FILE_NOTIFY_INFORMATION), (int)info.FileNameLength));
+                    buffer.Slice(sizeof(FILE_NOTIFY_INFORMATION), (int)info.FileNameLength)
+                );
 
                 // A slightly convoluted piece of code follows.  Here's what's happening:
                 //
@@ -308,17 +337,18 @@ namespace System.IO
                         break;
                     case Interop.Kernel32.FileAction.FILE_ACTION_RENAMED_NEW_NAME:
                         // oldName may be empty if we didn't receive FILE_ACTION_RENAMED_OLD_NAME first
-                        NotifyRenameEventArgs(
-                            WatcherChangeTypes.Renamed,
-                            fileName,
-                            oldName);
+                        NotifyRenameEventArgs(WatcherChangeTypes.Renamed, fileName, oldName);
                         oldName = ReadOnlySpan<char>.Empty;
                         break;
                     default:
                         if (!oldName.IsEmpty)
                         {
                             // Previous FILE_ACTION_RENAMED_OLD_NAME with no new name
-                            NotifyRenameEventArgs(WatcherChangeTypes.Renamed, ReadOnlySpan<char>.Empty, oldName);
+                            NotifyRenameEventArgs(
+                                WatcherChangeTypes.Renamed,
+                                ReadOnlySpan<char>.Empty,
+                                oldName
+                            );
                             oldName = ReadOnlySpan<char>.Empty;
                         }
 
@@ -334,10 +364,11 @@ namespace System.IO
                                 NotifyFileSystemEventArgs(WatcherChangeTypes.Changed, fileName);
                                 break;
                             default:
-                                Debug.Fail($"Unknown FileSystemEvent action type!  Value: {info.Action}");
+                                Debug.Fail(
+                                    $"Unknown FileSystemEvent action type!  Value: {info.Action}"
+                                );
                                 break;
                         }
-
                         break;
                 }
 
@@ -360,7 +391,11 @@ namespace System.IO
             if (!oldName.IsEmpty)
             {
                 // Previous FILE_ACTION_RENAMED_OLD_NAME with no new name
-                NotifyRenameEventArgs(WatcherChangeTypes.Renamed, ReadOnlySpan<char>.Empty, oldName);
+                NotifyRenameEventArgs(
+                    WatcherChangeTypes.Renamed,
+                    ReadOnlySpan<char>.Empty,
+                    oldName
+                );
             }
         }
 
@@ -370,8 +405,13 @@ namespace System.IO
         /// </summary>
         private sealed class AsyncReadState
         {
-            internal AsyncReadState(int session, byte[] buffer, SafeFileHandle handle, ThreadPoolBoundHandle binding, FileSystemWatcher parent)
-            {
+            internal AsyncReadState(
+                int session,
+                byte[] buffer,
+                SafeFileHandle handle,
+                ThreadPoolBoundHandle binding,
+                FileSystemWatcher parent
+            ) {
                 Debug.Assert(buffer != null);
                 Debug.Assert(buffer.Length > 0);
                 Debug.Assert(handle != null);

@@ -25,17 +25,21 @@ namespace System.Data
 
         private sealed class ColumnInfo
         {
-            public bool flag;               // Misc. Use
-            public bool equalsOperator;     // True when the associated expr has = Operator defined
-            public BinaryNode? expr;          // Binary Search capable expression associated
+            public bool flag; // Misc. Use
+            public bool equalsOperator; // True when the associated expr has = Operator defined
+            public BinaryNode? expr; // Binary Search capable expression associated
         }
 
         private ColumnInfo[]? _candidateColumns;
         private int _nCandidates;
         private int _matchedCandidates;
 
-        public Select(DataTable table, string? filterExpression, string? sort, DataViewRowState recordStates)
-        {
+        public Select(
+            DataTable table,
+            string? filterExpression,
+            string? sort,
+            DataViewRowState recordStates
+        ) {
             _table = table;
             _indexFields = table.ParseSortString(sort);
             if (filterExpression != null && filterExpression.Length > 0)
@@ -48,7 +52,11 @@ namespace System.Data
 
         private bool IsSupportedOperator(int op)
         {
-            return ((op >= Operators.EqualTo && op <= Operators.LessOrEqual) || op == Operators.Is || op == Operators.IsNot);
+            return (
+                (op >= Operators.EqualTo && op <= Operators.LessOrEqual)
+                || op == Operators.Is
+                || op == Operators.IsNot
+            );
         }
 
         // Gathers all linear expressions in to this.linearExpression and all binary expressions in to their respective candidate columns expressions
@@ -64,10 +72,10 @@ namespace System.Data
                 _linearExpression = _expression;
                 return;
             }
-            else
-            if (expr._op == Operators.And)
+            else if (expr._op == Operators.And)
             {
-                bool isLeft = false, isRight = false;
+                bool isLeft = false,
+                    isRight = false;
                 if (expr._left is BinaryNode)
                 {
                     AnalyzeExpression((BinaryNode)expr._left);
@@ -80,8 +88,11 @@ namespace System.Data
                     UnaryNode? unaryNode = expr._left as UnaryNode;
                     if (unaryNode != null)
                     {
-                        while (unaryNode._op == Operators.Noop && unaryNode._right is UnaryNode && ((UnaryNode)unaryNode._right)._op == Operators.Noop)
-                        {
+                        while (
+                            unaryNode._op == Operators.Noop
+                            && unaryNode._right is UnaryNode
+                            && ((UnaryNode)unaryNode._right)._op == Operators.Noop
+                        ) {
                             unaryNode = (UnaryNode)unaryNode._right;
                         }
                         if (unaryNode._op == Operators.Noop && unaryNode._right is BinaryNode)
@@ -108,8 +119,11 @@ namespace System.Data
                     UnaryNode? unaryNode = expr._right as UnaryNode;
                     if (unaryNode != null)
                     {
-                        while (unaryNode._op == Operators.Noop && unaryNode._right is UnaryNode && ((UnaryNode)unaryNode._right)._op == Operators.Noop)
-                        {
+                        while (
+                            unaryNode._op == Operators.Noop
+                            && unaryNode._right is UnaryNode
+                            && ((UnaryNode)unaryNode._right)._op == Operators.Noop
+                        ) {
                             unaryNode = (UnaryNode)unaryNode._right;
                         }
                         if (unaryNode._op == Operators.Noop && unaryNode._right is BinaryNode)
@@ -129,16 +143,25 @@ namespace System.Data
                     return;
 
                 ExpressionNode e = isLeft ? expr._right : expr._left;
-                _linearExpression = (_linearExpression == null ? e : new BinaryNode(_table, Operators.And, e, _linearExpression));
+                _linearExpression = (
+                    _linearExpression == null
+                        ? e
+                        : new BinaryNode(_table, Operators.And, e, _linearExpression)
+                );
                 return;
             }
-            else
-            if (IsSupportedOperator(expr._op))
+            else if (IsSupportedOperator(expr._op))
             {
                 if (expr._left is NameNode && expr._right is ConstNode)
                 {
-                    ColumnInfo canColumn = _candidateColumns[((NameNode)(expr._left))._column!.Ordinal];
-                    canColumn.expr = (canColumn.expr == null ? expr : new BinaryNode(_table, Operators.And, expr, canColumn.expr));
+                    ColumnInfo canColumn = _candidateColumns[
+                        ((NameNode)(expr._left))._column!.Ordinal
+                    ];
+                    canColumn.expr = (
+                        canColumn.expr == null
+                            ? expr
+                            : new BinaryNode(_table, Operators.And, expr, canColumn.expr)
+                    );
                     if (expr._op == Operators.EqualTo)
                     {
                         canColumn.equalsOperator = true;
@@ -146,22 +169,36 @@ namespace System.Data
                     _candidatesForBinarySearch = true;
                     return;
                 }
-                else
-                if (expr._right is NameNode && expr._left is ConstNode)
+                else if (expr._right is NameNode && expr._left is ConstNode)
                 {
                     ExpressionNode temp = expr._left;
                     expr._left = expr._right;
                     expr._right = temp;
                     switch (expr._op)
                     {
-                        case Operators.GreaterThen: expr._op = Operators.LessThen; break;
-                        case Operators.LessThen: expr._op = Operators.GreaterThen; break;
-                        case Operators.GreaterOrEqual: expr._op = Operators.LessOrEqual; break;
-                        case Operators.LessOrEqual: expr._op = Operators.GreaterOrEqual; break;
-                        default: break;
+                        case Operators.GreaterThen:
+                            expr._op = Operators.LessThen;
+                            break;
+                        case Operators.LessThen:
+                            expr._op = Operators.GreaterThen;
+                            break;
+                        case Operators.GreaterOrEqual:
+                            expr._op = Operators.LessOrEqual;
+                            break;
+                        case Operators.LessOrEqual:
+                            expr._op = Operators.GreaterOrEqual;
+                            break;
+                        default:
+                            break;
                     }
-                    ColumnInfo canColumn = _candidateColumns[((NameNode)(expr._left))._column!.Ordinal];
-                    canColumn.expr = (canColumn.expr == null ? expr : new BinaryNode(_table, Operators.And, expr, canColumn.expr));
+                    ColumnInfo canColumn = _candidateColumns[
+                        ((NameNode)(expr._left))._column!.Ordinal
+                    ];
+                    canColumn.expr = (
+                        canColumn.expr == null
+                            ? expr
+                            : new BinaryNode(_table, Operators.And, expr, canColumn.expr)
+                    );
                     if (expr._op == Operators.EqualTo)
                     {
                         canColumn.equalsOperator = true;
@@ -171,7 +208,11 @@ namespace System.Data
                 }
             }
 
-            _linearExpression = (_linearExpression == null ? expr : new BinaryNode(_table, Operators.And, expr, _linearExpression));
+            _linearExpression = (
+                _linearExpression == null
+                    ? expr
+                    : new BinaryNode(_table, Operators.And, expr, _linearExpression)
+            );
             return;
         }
 
@@ -221,6 +262,7 @@ namespace System.Data
                     }
                 }
             }
+
             finally
             {
                 _table._indexesLock.ExitUpgradeableReadLock();
@@ -242,8 +284,7 @@ namespace System.Data
                 {
                     break;
                 }
-                else
-                if (!canColumn.equalsOperator)
+                else if (!canColumn.equalsOperator)
                 {
                     return i + 1;
                 }
@@ -269,8 +310,9 @@ namespace System.Data
                     if (!ndx.IsSharable)
                         continue;
                     int match = CompareClosestCandidateIndexDesc(ndx._indexFields);
-                    if (match > _matchedCandidates || (match == _matchedCandidates && !sortPriority))
-                    {
+                    if (
+                        match > _matchedCandidates || (match == _matchedCandidates && !sortPriority)
+                    ) {
                         _matchedCandidates = match;
                         _index = ndx;
                         sortPriority = CompareSortIndexDesc(ndx._indexFields);
@@ -281,6 +323,7 @@ namespace System.Data
                     }
                 }
             }
+
             finally
             {
                 _table._indexesLock.ExitUpgradeableReadLock();
@@ -340,7 +383,9 @@ namespace System.Data
                     int j = 0;
                     for (i = 0; i < lenIndexDesc; i++)
                     {
-                        ColumnInfo candidateColumn = _candidateColumns[_indexFields[i].Column.Ordinal];
+                        ColumnInfo candidateColumn = _candidateColumns[
+                            _indexFields[i].Column.Ordinal
+                        ];
                         if (candidateColumn != null)
                         {
                             candidateColumn.flag = true;
@@ -357,13 +402,18 @@ namespace System.Data
                         {
                             if (_candidateColumns[i] != null)
                             {
-                                ndxFields[j++] = new IndexField(_table.Columns[i], isDescending: false);
+                                ndxFields[j++] = new IndexField(
+                                    _table.Columns[i],
+                                    isDescending: false
+                                );
                                 _candidateColumns[i].flag = false; // this means it is processed
                             }
                         }
                         for (i = 0; i < lenIndexDesc; i++)
                         {
-                            ColumnInfo canColumn = _candidateColumns[_indexFields[i].Column.Ordinal];
+                            ColumnInfo canColumn = _candidateColumns[
+                                _indexFields[i].Column.Ordinal
+                            ];
                             if (canColumn == null || canColumn.flag)
                             { // if sort column is not a filter col , or not processed
                                 ndxFields[j++] = _indexFields[i];
@@ -392,7 +442,6 @@ namespace System.Data
                             _index.AddRef();
                         }
 
-
                         _matchedCandidates = _nCandidates;
                     }
                     else
@@ -400,7 +449,9 @@ namespace System.Data
                         for (i = 0; i < lenIndexDesc; i++)
                         {
                             ndxFields[i] = _indexFields[i];
-                            ColumnInfo canColumn = _candidateColumns[_indexFields[i].Column.Ordinal];
+                            ColumnInfo canColumn = _candidateColumns[
+                                _indexFields[i].Column.Ordinal
+                            ];
                             if (canColumn != null)
                                 canColumn.flag = true;
                         }
@@ -411,7 +462,10 @@ namespace System.Data
                             {
                                 if (!_candidateColumns[i].flag)
                                 {
-                                    ndxFields[j++] = new IndexField(_table.Columns[i], isDescending: false);
+                                    ndxFields[j++] = new IndexField(
+                                        _table.Columns[i],
+                                        isDescending: false
+                                    );
                                 }
                                 else
                                 {
@@ -428,7 +482,9 @@ namespace System.Data
                             IndexField[] fields = _index._indexFields;
                             while (_matchedCandidates < j)
                             {
-                                ColumnInfo canColumn = _candidateColumns[fields[_matchedCandidates].Column.Ordinal];
+                                ColumnInfo canColumn = _candidateColumns[
+                                    fields[_matchedCandidates].Column.Ordinal
+                                ];
                                 if (canColumn == null || canColumn.expr == null)
                                     break;
                                 _matchedCandidates++;
@@ -448,23 +504,21 @@ namespace System.Data
             }
         }
 
-
         private bool IsOperatorIn(ExpressionNode? enode)
         {
             BinaryNode? bnode = (enode as BinaryNode);
             if (null != bnode)
             {
-                if (Operators.In == bnode._op ||
-                    IsOperatorIn(bnode._right) ||
-                    IsOperatorIn(bnode._left))
-                {
+                if (
+                    Operators.In == bnode._op
+                    || IsOperatorIn(bnode._right)
+                    || IsOperatorIn(bnode._left)
+                ) {
                     return true;
                 }
             }
             return false;
         }
-
-
 
         // Based on the current index and candidate columns settings, build the linear expression; Should be called only when there is atleast something for Binary Searching
         private void BuildLinearExpression()
@@ -474,11 +528,17 @@ namespace System.Data
             int i;
             IndexField[] fields = _index!._indexFields;
             int lenId = fields.Length;
-            Debug.Assert(_matchedCandidates > 0 && _matchedCandidates <= lenId, "BuildLinearExpression : Invalid Index");
+            Debug.Assert(
+                _matchedCandidates > 0 && _matchedCandidates <= lenId,
+                "BuildLinearExpression : Invalid Index"
+            );
             for (i = 0; i < _matchedCandidates; i++)
             {
                 ColumnInfo canColumn = _candidateColumns[fields[i].Column.Ordinal];
-                Debug.Assert(canColumn != null && canColumn.expr != null, "BuildLinearExpression : Must be a matched candidate");
+                Debug.Assert(
+                    canColumn != null && canColumn.expr != null,
+                    "BuildLinearExpression : Must be a matched candidate"
+                );
                 canColumn.flag = true;
             }
             //this is invalid assert, assumption was that all equals operator exists at the beginning of candidateColumns
@@ -493,7 +553,11 @@ namespace System.Data
                     {
                         if (_candidateColumns[i].expr is BinaryNode expr)
                         {
-                            _linearExpression = (_linearExpression == null ? _candidateColumns[i].expr : new BinaryNode(_table, Operators.And, expr, _linearExpression));
+                            _linearExpression = (
+                                _linearExpression == null
+                                    ? _candidateColumns[i].expr
+                                    : new BinaryNode(_table, Operators.And, expr, _linearExpression)
+                            );
                         }
                     }
                     else
@@ -557,7 +621,10 @@ namespace System.Data
             if (_matchedCandidates == 0)
             {
                 range = new Range(0, _index.RecordCount - 1);
-                Debug.Assert(!needSorting, "What are we doing here if no real reuse of this index ?");
+                Debug.Assert(
+                    !needSorting,
+                    "What are we doing here if no real reuse of this index ?"
+                );
                 _linearExpression = _expression;
                 return GetLinearFilteredRows(range);
             }
@@ -651,9 +718,15 @@ namespace System.Data
                 bool isLConst = (expr._left is ConstNode);
                 bool isRConst = (expr._right is ConstNode);
 
-                if ((vLeft == DBNull.Value) || (expr._left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft)))
+                if (
+                    (vLeft == DBNull.Value)
+                    || (expr._left.IsSqlColumn && DataStorage.IsObjectSqlNull(vLeft))
+                )
                     return -1;
-                if ((vRight == DBNull.Value) || (expr._right.IsSqlColumn && DataStorage.IsObjectSqlNull(vRight)))
+                if (
+                    (vRight == DBNull.Value)
+                    || (expr._right.IsSqlColumn && DataStorage.IsObjectSqlNull(vRight))
+                )
                     return 1;
 
                 StorageType leftType = DataStorage.GetStorageType(vLeft.GetType());
@@ -662,14 +735,25 @@ namespace System.Data
                     if ((isRConst) || (!expr._right.IsSqlColumn))
                         vRight = Convert.ToChar(vRight, _table.FormatProvider);
                     else
-                        vRight = SqlConvert.ChangeType2(vRight, StorageType.Char, typeof(char), _table.FormatProvider);
+                        vRight = SqlConvert.ChangeType2(
+                            vRight,
+                            StorageType.Char,
+                            typeof(char),
+                            _table.FormatProvider
+                        );
                 }
 
                 StorageType rightType = DataStorage.GetStorageType(vRight.GetType());
                 StorageType resultType;
                 if (expr._left.IsSqlColumn || expr._right.IsSqlColumn)
                 {
-                    resultType = expr.ResultSqlType(leftType, rightType, isLConst, isRConst, expr._op);
+                    resultType = expr.ResultSqlType(
+                        leftType,
+                        rightType,
+                        isLConst,
+                        isRConst,
+                        expr._op
+                    );
                 }
                 else
                 {
@@ -686,22 +770,55 @@ namespace System.Data
                 // This fix is restricted to DataTable.Select("GuidColumn = 'string literal'") types of queries
                 NameNode? namedNode = null;
                 System.Globalization.CompareInfo? comparer =
-                    ((isLConst && !isRConst && (leftType == StorageType.String) && (rightType == StorageType.Guid) && (null != (namedNode = expr._right as NameNode)) && (namedNode._column!.DataType == typeof(Guid))) ||
-                     (isRConst && !isLConst && (rightType == StorageType.String) && (leftType == StorageType.Guid) && (null != (namedNode = expr._left as NameNode)) && (namedNode._column!.DataType == typeof(Guid))))
-                     ? System.Globalization.CultureInfo.InvariantCulture.CompareInfo : null;
+                    (
+                        (
+                            isLConst
+                            && !isRConst
+                            && (leftType == StorageType.String)
+                            && (rightType == StorageType.Guid)
+                            && (null != (namedNode = expr._right as NameNode))
+                            && (namedNode._column!.DataType == typeof(Guid))
+                        )
+                        || (
+                            isRConst
+                            && !isLConst
+                            && (rightType == StorageType.String)
+                            && (leftType == StorageType.Guid)
+                            && (null != (namedNode = expr._left as NameNode))
+                            && (namedNode._column!.DataType == typeof(Guid))
+                        )
+                    )
+                        ? System.Globalization.CultureInfo.InvariantCulture.CompareInfo
+                        : null;
 
                 c = expr.BinaryCompare(vLeft, vRight, resultType, expr._op, comparer);
             }
             switch (expr._op)
             {
-                case Operators.EqualTo: c = (c == 0 ? 0 : c < 0 ? -1 : 1); break;
-                case Operators.GreaterThen: c = (c > 0 ? 0 : -1); break;
-                case Operators.LessThen: c = (c < 0 ? 0 : 1); break;
-                case Operators.GreaterOrEqual: c = (c >= 0 ? 0 : -1); break;
-                case Operators.LessOrEqual: c = (c <= 0 ? 0 : 1); break;
-                case Operators.Is: c = (vLeft == DBNull.Value ? 0 : -1); break;
-                case Operators.IsNot: c = (vLeft != DBNull.Value ? 0 : 1); break;
-                default: Debug.Assert(true, "Unsupported Binary Search Operator!"); break;
+                case Operators.EqualTo:
+                    c = (c == 0 ? 0 : c < 0 ? -1 : 1);
+                    break;
+                case Operators.GreaterThen:
+                    c = (c > 0 ? 0 : -1);
+                    break;
+                case Operators.LessThen:
+                    c = (c < 0 ? 0 : 1);
+                    break;
+                case Operators.GreaterOrEqual:
+                    c = (c >= 0 ? 0 : -1);
+                    break;
+                case Operators.LessOrEqual:
+                    c = (c <= 0 ? 0 : 1);
+                    break;
+                case Operators.Is:
+                    c = (vLeft == DBNull.Value ? 0 : -1);
+                    break;
+                case Operators.IsNot:
+                    c = (vLeft != DBNull.Value ? 0 : 1);
+                    break;
+                default:
+                    Debug.Assert(true, "Unsupported Binary Search Operator!");
+                    break;
             }
             return (int)c;
         }
@@ -734,7 +851,10 @@ namespace System.Data
             {
                 var candidateColumn = _candidateColumns[fields[i].Column.Ordinal];
                 Debug.Assert(candidateColumn != null, "How come this is not a candidate column");
-                Debug.Assert(candidateColumn.expr != null, "How come there is no associated expression");
+                Debug.Assert(
+                    candidateColumn.expr != null,
+                    "How come there is no associated expression"
+                );
                 int c = Eval(candidateColumn.expr, row, version);
                 if (c != 0)
                     return fields[i].IsDescending ? -c : c;
@@ -754,9 +874,14 @@ namespace System.Data
                 int i = lo + hi >> 1;
                 int recNo = _index.GetRecord(i);
                 int c = Evaluate(recNo);
-                if (c == 0) { rec = i; }
-                if (c < 0) lo = i + 1;
-                else hi = i - 1;
+                if (c == 0)
+                {
+                    rec = i;
+                }
+                if (c < 0)
+                    lo = i + 1;
+                else
+                    hi = i - 1;
             }
             return rec;
         }
@@ -772,9 +897,14 @@ namespace System.Data
                 int i = lo + hi >> 1;
                 int recNo = _index.GetRecord(i);
                 int c = Evaluate(recNo);
-                if (c == 0) { rec = i; }
-                if (c <= 0) lo = i + 1;
-                else hi = i - 1;
+                if (c == 0)
+                {
+                    rec = i;
+                }
+                if (c <= 0)
+                    lo = i + 1;
+                else
+                    hi = i - 1;
             }
             return rec;
         }
@@ -787,7 +917,10 @@ namespace System.Data
             {
                 return new Range(0, _index.RecordCount - 1);
             }
-            Debug.Assert(_matchedCandidates <= _index._indexFields.Length, "GetBinaryFilteredRecords : Invalid Index");
+            Debug.Assert(
+                _matchedCandidates <= _index._indexFields.Length,
+                "GetBinaryFilteredRecords : Invalid Index"
+            );
             int lo = FindFirstMatchingRecord();
             if (lo == -1)
             {
@@ -851,7 +984,6 @@ namespace System.Data
             return resultRows;
         }
 
-
         private int CompareRecords(int record1, int record2)
         {
             int lenIndexDesc = _indexFields.Length;
@@ -860,7 +992,8 @@ namespace System.Data
                 int c = _indexFields[i].Column.Compare(record1, record2);
                 if (c != 0)
                 {
-                    if (_indexFields[i].IsDescending) c = -c;
+                    if (_indexFields[i].IsDescending)
+                        c = -c;
                     return c;
                 }
             }
@@ -884,7 +1017,8 @@ namespace System.Data
 
         private void Sort(int left, int right)
         {
-            int i, j;
+            int i,
+                j;
             int record;
             do
             {
@@ -893,8 +1027,10 @@ namespace System.Data
                 record = _records![i + j >> 1];
                 do
                 {
-                    while (CompareRecords(_records[i], record) < 0) i++;
-                    while (CompareRecords(_records[j], record) > 0) j--;
+                    while (CompareRecords(_records[i], record) < 0)
+                        i++;
+                    while (CompareRecords(_records[j], record) > 0)
+                        j--;
                     if (i <= j)
                     {
                         int r = _records[i];
@@ -904,7 +1040,8 @@ namespace System.Data
                         j--;
                     }
                 } while (i <= j);
-                if (left < j) Sort(left, j);
+                if (left < j)
+                    Sort(left, j);
                 left = i;
             } while (i < right);
         }

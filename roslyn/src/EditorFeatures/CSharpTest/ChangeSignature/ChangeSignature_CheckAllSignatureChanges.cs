@@ -19,11 +19,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
 #pragma warning disable xUnit1019
         // There is a bug in xUnit analyzer might generate false alarm, temporary disable it
         // https://github.com/xunit/xunit/issues/1968
-        [MemberData(nameof(AbstractChangeSignatureTests.GetAllSignatureSpecificationsForTheory), new[] { 1, 3, 2, 1 }, MemberType = typeof(AbstractChangeSignatureTests))]
+        [MemberData(
+            nameof(AbstractChangeSignatureTests.GetAllSignatureSpecificationsForTheory),
+            new[] { 1, 3, 2, 1 },
+            MemberType = typeof(AbstractChangeSignatureTests)
+        )]
 #pragma warning restore xUnit1019
-        public async Task TestAllSignatureChanges_1This_3Regular_2Default_1Params(int totalParameters, int[] signature)
-        {
-            var markup = @"
+        public async Task TestAllSignatureChanges_1This_3Regular_2Default_1Params(
+            int totalParameters,
+            int[] signature
+        ) {
+            var markup =
+                @"
 static class Ext
 {
     /// <summary>
@@ -71,18 +78,26 @@ static class Ext
                 expectedSuccess: true,
                 updatedSignature: signature,
                 totalParameters: totalParameters,
-                verifyNoDiagnostics: true);
+                verifyNoDiagnostics: true
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
 #pragma warning disable xUnit1019
         // There is a bug in xUnit analyzer might generate false alarm, temporary disable it
         // https://github.com/xunit/xunit/issues/1968
-        [MemberData(nameof(AbstractChangeSignatureTests.GetAllSignatureSpecificationsForTheory), new[] { 0, 3, 0, 0 }, MemberType = typeof(AbstractChangeSignatureTests))]
+        [MemberData(
+            nameof(AbstractChangeSignatureTests.GetAllSignatureSpecificationsForTheory),
+            new[] { 0, 3, 0, 0 },
+            MemberType = typeof(AbstractChangeSignatureTests)
+        )]
 #pragma warning restore xUnit1019
-        public async Task TestAllSignatureChanges_OnDelegate_3Regular(int totalParameters, int[] signature)
-        {
-            var markup = @"
+        public async Task TestAllSignatureChanges_OnDelegate_3Regular(
+            int totalParameters,
+            int[] signature
+        ) {
+            var markup =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -177,7 +192,8 @@ class C
                 updatedSignature: signature,
                 totalParameters: totalParameters,
                 verifyNoDiagnostics: true,
-                parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7));
+                parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7)
+            );
         }
     }
 }

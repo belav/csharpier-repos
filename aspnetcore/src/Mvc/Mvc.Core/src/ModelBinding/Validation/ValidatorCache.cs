@@ -23,8 +23,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         /// <param name="metadata">The model metadata.</param>
         /// <param name="validatorProvider">The validator provider.</param>
         /// <returns>A list of model validators.</returns>
-        public IReadOnlyList<IModelValidator> GetValidators(ModelMetadata metadata, IModelValidatorProvider validatorProvider)
-        {
+        public IReadOnlyList<IModelValidator> GetValidators(
+            ModelMetadata metadata,
+            IModelValidatorProvider validatorProvider
+        ) {
             if (_cacheEntries.TryGetValue(metadata, out var entry))
             {
                 return GetValidatorsFromEntry(entry, metadata, validatorProvider);
@@ -65,8 +67,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             return validators;
         }
 
-        private IReadOnlyList<IModelValidator> GetValidatorsFromEntry(CacheEntry entry, ModelMetadata metadata, IModelValidatorProvider validationProvider)
-        {
+        private IReadOnlyList<IModelValidator> GetValidatorsFromEntry(
+            CacheEntry entry,
+            ModelMetadata metadata,
+            IModelValidatorProvider validationProvider
+        ) {
             if (entry.Validators != null)
             {
                 return entry.Validators;
@@ -93,8 +98,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             return ExtractValidators(items);
         }
 
-        private void ExecuteProvider(IModelValidatorProvider validatorProvider, ModelMetadata metadata, List<ValidatorItem> items)
-        {
+        private void ExecuteProvider(
+            IModelValidatorProvider validatorProvider,
+            ModelMetadata metadata,
+            List<ValidatorItem> items
+        ) {
             var context = new ModelValidatorProviderContext(metadata, items);
             validatorProvider.CreateValidators(context);
         }

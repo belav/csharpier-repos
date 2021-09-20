@@ -23,12 +23,13 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
 
         public static CompilationFailedException Create(
             RazorCodeDocument codeDocument,
-            IEnumerable<RazorDiagnostic> diagnostics)
-        {
+            IEnumerable<RazorDiagnostic> diagnostics
+        ) {
             // If a SourceLocation does not specify a file path, assume it is produced from parsing the current file.
             var messageGroups = diagnostics.GroupBy(
                 razorError => razorError.Span.FilePath ?? codeDocument.Source.FilePath,
-                StringComparer.Ordinal);
+                StringComparer.Ordinal
+            );
 
             var failures = new List<CompilationFailure>();
             foreach (var group in messageGroups)
@@ -39,7 +40,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                     filePath,
                     fileContent,
                     compiledContent: string.Empty,
-                    messages: group.Select(parserError => CreateDiagnosticMessage(parserError, filePath)));
+                    messages: group.Select(
+                        parserError => CreateDiagnosticMessage(parserError, filePath)
+                    )
+                );
                 failures.Add(compilationFailure);
             }
 
@@ -50,11 +54,17 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             RazorCodeDocument codeDocument,
             string compilationContent,
             string assemblyName,
-            IEnumerable<Diagnostic> diagnostics)
-        {
-            var diagnosticGroups = diagnostics
-                .Where(diagnostic => diagnostic.IsWarningAsError || diagnostic.Severity == DiagnosticSeverity.Error)
-                .GroupBy(diagnostic => GetFilePath(codeDocument, diagnostic), StringComparer.Ordinal);
+            IEnumerable<Diagnostic> diagnostics
+        ) {
+            var diagnosticGroups = diagnostics.Where(
+                    diagnostic =>
+                        diagnostic.IsWarningAsError
+                        || diagnostic.Severity == DiagnosticSeverity.Error
+                )
+                .GroupBy(
+                    diagnostic => GetFilePath(codeDocument, diagnostic),
+                    StringComparer.Ordinal
+                );
 
             var failures = new List<CompilationFailure>();
             foreach (var group in diagnosticGroups)
@@ -73,12 +83,16 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                 }
 
                 string additionalMessage = null;
-                if (group.Any(g =>
-                    string.Equals(CS0234, g.Id, StringComparison.OrdinalIgnoreCase) ||
-                    string.Equals(CS0246, g.Id, StringComparison.OrdinalIgnoreCase)))
-                {
+                if (
+                    group.Any(
+                        g =>
+                            string.Equals(CS0234, g.Id, StringComparison.OrdinalIgnoreCase)
+                            || string.Equals(CS0246, g.Id, StringComparison.OrdinalIgnoreCase)
+                    )
+                ) {
                     additionalMessage = Resources.FormatCompilation_MissingReferences(
-                        "CopyRefAssembliesToPublishDirectory");
+                        "CopyRefAssembliesToPublishDirectory"
+                    );
                 }
 
                 var compilationFailure = new CompilationFailure(
@@ -86,7 +100,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                     sourceFileContent,
                     compilationContent,
                     group.Select(GetDiagnosticMessage),
-                    additionalMessage);
+                    additionalMessage
+                );
 
                 failures.Add(compilationFailure);
             }
@@ -97,13 +112,17 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         private static string ReadContent(RazorCodeDocument codeDocument, string filePath)
         {
             RazorSourceDocument sourceDocument;
-            if (string.IsNullOrEmpty(filePath) || string.Equals(codeDocument.Source.FilePath, filePath, StringComparison.Ordinal))
-            {
+            if (
+                string.IsNullOrEmpty(filePath)
+                || string.Equals(codeDocument.Source.FilePath, filePath, StringComparison.Ordinal)
+            ) {
                 sourceDocument = codeDocument.Source;
             }
             else
             {
-                sourceDocument = codeDocument.Imports.FirstOrDefault(f => string.Equals(f.FilePath, filePath, StringComparison.Ordinal));
+                sourceDocument = codeDocument.Imports.FirstOrDefault(
+                    f => string.Equals(f.FilePath, filePath, StringComparison.Ordinal)
+                );
             }
 
             if (sourceDocument != null)
@@ -126,13 +145,14 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                 mappedLineSpan.StartLinePosition.Line + 1,
                 mappedLineSpan.StartLinePosition.Character + 1,
                 mappedLineSpan.EndLinePosition.Line + 1,
-                mappedLineSpan.EndLinePosition.Character + 1);
+                mappedLineSpan.EndLinePosition.Character + 1
+            );
         }
 
         private static DiagnosticMessage CreateDiagnosticMessage(
             RazorDiagnostic razorDiagnostic,
-            string filePath)
-        {
+            string filePath
+        ) {
             var sourceSpan = razorDiagnostic.Span;
             var message = razorDiagnostic.GetMessage(CultureInfo.CurrentCulture);
             return new DiagnosticMessage(
@@ -142,7 +162,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                 startLine: sourceSpan.LineIndex + 1,
                 startColumn: sourceSpan.CharacterIndex,
                 endLine: sourceSpan.LineIndex + 1,
-                endColumn: sourceSpan.CharacterIndex + sourceSpan.Length);
+                endColumn: sourceSpan.CharacterIndex + sourceSpan.Length
+            );
         }
 
         private static string GetFilePath(RazorCodeDocument codeDocument, Diagnostic diagnostic)

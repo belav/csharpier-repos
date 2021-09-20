@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             builder =>
             {
                 builder.Description = Resources.FunctionsDirective_Description;
-            });
+            }
+        );
 
         public static void Register(RazorProjectEngineBuilder builder)
         {

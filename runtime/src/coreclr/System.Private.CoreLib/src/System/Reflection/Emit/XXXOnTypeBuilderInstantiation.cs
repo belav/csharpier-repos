@@ -40,30 +40,58 @@ namespace System.Reflection.Emit
         public override string Name => m_method.Name;
         public override Type? DeclaringType => m_type;
         public override Type? ReflectedType => m_type;
-        public override object[] GetCustomAttributes(bool inherit) { return m_method.GetCustomAttributes(inherit); }
-        public override object[] GetCustomAttributes(Type attributeType, bool inherit) { return m_method.GetCustomAttributes(attributeType, inherit); }
-        public override bool IsDefined(Type attributeType, bool inherit) { return m_method.IsDefined(attributeType, inherit); }
+        public override object[] GetCustomAttributes(bool inherit)
+        {
+            return m_method.GetCustomAttributes(inherit);
+        }
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit)
+        {
+            return m_method.GetCustomAttributes(attributeType, inherit);
+        }
+        public override bool IsDefined(Type attributeType, bool inherit)
+        {
+            return m_method.IsDefined(attributeType, inherit);
+        }
         public override Module Module => m_method.Module;
         #endregion
 
         #region MethodBase Members
-        public override ParameterInfo[] GetParameters() { return m_method.GetParameters(); }
-        public override MethodImplAttributes GetMethodImplementationFlags() { return m_method.GetMethodImplementationFlags(); }
+        public override ParameterInfo[] GetParameters()
+        {
+            return m_method.GetParameters();
+        }
+        public override MethodImplAttributes GetMethodImplementationFlags()
+        {
+            return m_method.GetMethodImplementationFlags();
+        }
         public override RuntimeMethodHandle MethodHandle => m_method.MethodHandle;
         public override MethodAttributes Attributes => m_method.Attributes;
-        public override object Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
-        {
+        public override object Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        ) {
             throw new NotSupportedException();
         }
         public override CallingConventions CallingConvention => m_method.CallingConvention;
-        public override Type[] GetGenericArguments() { return m_method.GetGenericArguments(); }
-        public override MethodInfo GetGenericMethodDefinition() { return m_method; }
+        public override Type[] GetGenericArguments()
+        {
+            return m_method.GetGenericArguments();
+        }
+        public override MethodInfo GetGenericMethodDefinition()
+        {
+            return m_method;
+        }
         public override bool IsGenericMethodDefinition => m_method.IsGenericMethodDefinition;
         public override bool ContainsGenericParameters => m_method.ContainsGenericParameters;
         public override MethodInfo MakeGenericMethod(params Type[] typeArgs)
         {
             if (!IsGenericMethodDefinition)
-                throw new InvalidOperationException(SR.Format(SR.Arg_NotGenericMethodDefinition, this));
+                throw new InvalidOperationException(
+                    SR.Format(SR.Arg_NotGenericMethodDefinition, this)
+                );
 
             return MethodBuilderInstantiation.MakeGenericMethod(this, typeArgs);
         }
@@ -75,16 +103,22 @@ namespace System.Reflection.Emit
         #region Public Abstract\Virtual Members
         public override Type ReturnType => m_method.ReturnType;
         public override ParameterInfo ReturnParameter => throw new NotSupportedException();
-        public override ICustomAttributeProvider ReturnTypeCustomAttributes => throw new NotSupportedException();
-        public override MethodInfo GetBaseDefinition() { throw new NotSupportedException(); }
+        public override ICustomAttributeProvider ReturnTypeCustomAttributes =>
+            throw new NotSupportedException();
+        public override MethodInfo GetBaseDefinition()
+        {
+            throw new NotSupportedException();
+        }
         #endregion
     }
 
     internal sealed class ConstructorOnTypeBuilderInstantiation : ConstructorInfo
     {
         #region Private Static Members
-        internal static ConstructorInfo GetConstructor(ConstructorInfo Constructor, TypeBuilderInstantiation type)
-        {
+        internal static ConstructorInfo GetConstructor(
+            ConstructorInfo Constructor,
+            TypeBuilderInstantiation type
+        ) {
             return new ConstructorOnTypeBuilderInstantiation(Constructor, type);
         }
         #endregion
@@ -95,9 +129,13 @@ namespace System.Reflection.Emit
         #endregion
 
         #region Constructor
-        internal ConstructorOnTypeBuilderInstantiation(ConstructorInfo constructor, TypeBuilderInstantiation type)
-        {
-            Debug.Assert(constructor is ConstructorBuilder || constructor is RuntimeConstructorInfo);
+        internal ConstructorOnTypeBuilderInstantiation(
+            ConstructorInfo constructor,
+            TypeBuilderInstantiation type
+        ) {
+            Debug.Assert(
+                constructor is ConstructorBuilder || constructor is RuntimeConstructorInfo
+            );
 
             m_ctor = constructor;
             m_type = type;
@@ -119,9 +157,18 @@ namespace System.Reflection.Emit
         public override string Name => m_ctor.Name;
         public override Type? DeclaringType => m_type;
         public override Type? ReflectedType => m_type;
-        public override object[] GetCustomAttributes(bool inherit) { return m_ctor.GetCustomAttributes(inherit); }
-        public override object[] GetCustomAttributes(Type attributeType, bool inherit) { return m_ctor.GetCustomAttributes(attributeType, inherit); }
-        public override bool IsDefined(Type attributeType, bool inherit) { return m_ctor.IsDefined(attributeType, inherit); }
+        public override object[] GetCustomAttributes(bool inherit)
+        {
+            return m_ctor.GetCustomAttributes(inherit);
+        }
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit)
+        {
+            return m_ctor.GetCustomAttributes(attributeType, inherit);
+        }
+        public override bool IsDefined(Type attributeType, bool inherit)
+        {
+            return m_ctor.IsDefined(attributeType, inherit);
+        }
         public override int MetadataToken
         {
             get
@@ -141,16 +188,30 @@ namespace System.Reflection.Emit
         #endregion
 
         #region MethodBase Members
-        public override ParameterInfo[] GetParameters() { return m_ctor.GetParameters(); }
-        public override MethodImplAttributes GetMethodImplementationFlags() { return m_ctor.GetMethodImplementationFlags(); }
+        public override ParameterInfo[] GetParameters()
+        {
+            return m_ctor.GetParameters();
+        }
+        public override MethodImplAttributes GetMethodImplementationFlags()
+        {
+            return m_ctor.GetMethodImplementationFlags();
+        }
         public override RuntimeMethodHandle MethodHandle => m_ctor.MethodHandle;
         public override MethodAttributes Attributes => m_ctor.Attributes;
-        public override object Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
-        {
+        public override object Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        ) {
             throw new NotSupportedException();
         }
         public override CallingConventions CallingConvention => m_ctor.CallingConvention;
-        public override Type[] GetGenericArguments() { return m_ctor.GetGenericArguments(); }
+        public override Type[] GetGenericArguments()
+        {
+            return m_ctor.GetGenericArguments();
+        }
         public override bool IsGenericMethodDefinition => false;
         public override bool ContainsGenericParameters => false;
 
@@ -158,8 +219,12 @@ namespace System.Reflection.Emit
         #endregion
 
         #region ConstructorInfo Members
-        public override object Invoke(BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
-        {
+        public override object Invoke(
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        ) {
             throw new InvalidOperationException();
         }
         #endregion
@@ -220,9 +285,18 @@ namespace System.Reflection.Emit
         public override string Name => m_field.Name;
         public override Type? DeclaringType => m_type;
         public override Type? ReflectedType => m_type;
-        public override object[] GetCustomAttributes(bool inherit) { return m_field.GetCustomAttributes(inherit); }
-        public override object[] GetCustomAttributes(Type attributeType, bool inherit) { return m_field.GetCustomAttributes(attributeType, inherit); }
-        public override bool IsDefined(Type attributeType, bool inherit) { return m_field.IsDefined(attributeType, inherit); }
+        public override object[] GetCustomAttributes(bool inherit)
+        {
+            return m_field.GetCustomAttributes(inherit);
+        }
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit)
+        {
+            return m_field.GetCustomAttributes(attributeType, inherit);
+        }
+        public override bool IsDefined(Type attributeType, bool inherit)
+        {
+            return m_field.IsDefined(attributeType, inherit);
+        }
         public override int MetadataToken
         {
             get
@@ -242,8 +316,14 @@ namespace System.Reflection.Emit
         #endregion
 
         #region Public Abstract\Virtual Members
-        public override Type[] GetRequiredCustomModifiers() { return m_field.GetRequiredCustomModifiers(); }
-        public override Type[] GetOptionalCustomModifiers() { return m_field.GetOptionalCustomModifiers(); }
+        public override Type[] GetRequiredCustomModifiers()
+        {
+            return m_field.GetRequiredCustomModifiers();
+        }
+        public override Type[] GetOptionalCustomModifiers()
+        {
+            return m_field.GetOptionalCustomModifiers();
+        }
         public override void SetValueDirect(TypedReference obj, object value)
         {
             throw new NotImplementedException();
@@ -254,8 +334,19 @@ namespace System.Reflection.Emit
         }
         public override RuntimeFieldHandle FieldHandle => throw new NotImplementedException();
         public override Type FieldType => throw new NotImplementedException();
-        public override object GetValue(object? obj) { throw new InvalidOperationException(); }
-        public override void SetValue(object? obj, object? value, BindingFlags invokeAttr, Binder? binder, CultureInfo? culture) { throw new InvalidOperationException(); }
+        public override object GetValue(object? obj)
+        {
+            throw new InvalidOperationException();
+        }
+        public override void SetValue(
+            object? obj,
+            object? value,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            CultureInfo? culture
+        ) {
+            throw new InvalidOperationException();
+        }
         public override FieldAttributes Attributes => m_field.Attributes;
         #endregion
     }

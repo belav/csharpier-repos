@@ -21,9 +21,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 
         public static List<ClassifiedSpan> GetOrCreateClassifiedSpanList()
         {
-            return s_spanCache.TryDequeue(out var result)
-                ? result
-                : new List<ClassifiedSpan>();
+            return s_spanCache.TryDequeue(out var result) ? result : new List<ClassifiedSpan>();
         }
 
         public static void ReturnClassifiedSpanList(List<ClassifiedSpan> list)
@@ -37,23 +35,36 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             s_spanCache.Enqueue(list);
         }
 
-        public static void Convert(ClassificationTypeMap typeMap, ITextSnapshot snapshot, List<ClassifiedSpan> list, Action<ITagSpan<IClassificationTag>> addTag)
-        {
+        public static void Convert(
+            ClassificationTypeMap typeMap,
+            ITextSnapshot snapshot,
+            List<ClassifiedSpan> list,
+            Action<ITagSpan<IClassificationTag>> addTag
+        ) {
             foreach (var classifiedSpan in list)
             {
                 addTag(Convert(typeMap, snapshot, classifiedSpan));
             }
         }
 
-        public static TagSpan<IClassificationTag> Convert(ClassificationTypeMap typeMap, ITextSnapshot snapshot, ClassifiedSpan classifiedSpan)
-        {
+        public static TagSpan<IClassificationTag> Convert(
+            ClassificationTypeMap typeMap,
+            ITextSnapshot snapshot,
+            ClassifiedSpan classifiedSpan
+        ) {
             return new TagSpan<IClassificationTag>(
                 classifiedSpan.TextSpan.ToSnapshotSpan(snapshot),
-                new ClassificationTag(typeMap.GetClassificationType(classifiedSpan.ClassificationType)));
+                new ClassificationTag(
+                    typeMap.GetClassificationType(classifiedSpan.ClassificationType)
+                )
+            );
         }
 
-        public static List<ITagSpan<IClassificationTag>> ConvertAndReturnList(ClassificationTypeMap typeMap, ITextSnapshot snapshot, List<ClassifiedSpan> classifiedSpans)
-        {
+        public static List<ITagSpan<IClassificationTag>> ConvertAndReturnList(
+            ClassificationTypeMap typeMap,
+            ITextSnapshot snapshot,
+            List<ClassifiedSpan> classifiedSpans
+        ) {
             var result = new List<ITagSpan<IClassificationTag>>();
             Convert(typeMap, snapshot, classifiedSpans, result.Add);
             ReturnClassifiedSpanList(classifiedSpans);

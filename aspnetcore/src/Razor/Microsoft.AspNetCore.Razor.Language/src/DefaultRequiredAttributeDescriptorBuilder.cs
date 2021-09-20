@@ -13,8 +13,9 @@ namespace Microsoft.AspNetCore.Razor.Language
         private RazorDiagnosticCollection _diagnostics;
         private readonly Dictionary<string, string> _metadata = new Dictionary<string, string>();
 
-        public DefaultRequiredAttributeDescriptorBuilder(DefaultTagMatchingRuleDescriptorBuilder parent)
-        {
+        public DefaultRequiredAttributeDescriptorBuilder(
+            DefaultTagMatchingRuleDescriptorBuilder parent
+        ) {
             _parent = parent;
         }
 
@@ -61,21 +62,25 @@ namespace Microsoft.AspNetCore.Razor.Language
                 ValueComparisonMode,
                 displayName,
                 diagnostics.ToArray(),
-                new Dictionary<string, string>(Metadata));
+                new Dictionary<string, string>(Metadata)
+            );
 
             return rule;
         }
 
         private string GetDisplayName()
         {
-            return NameComparisonMode == RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch ? string.Concat(Name, "...") : Name;
+            return NameComparisonMode == RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch
+                ? string.Concat(Name, "...")
+                : Name;
         }
 
         private IEnumerable<RazorDiagnostic> Validate()
         {
             if (string.IsNullOrWhiteSpace(Name))
             {
-                var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeNameNullOrWhitespace();
+                var diagnostic =
+                    RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeNameNullOrWhitespace();
 
                 yield return diagnostic;
             }
@@ -89,16 +94,26 @@ namespace Microsoft.AspNetCore.Razor.Language
                 }
                 else if (isDirectiveAttribute)
                 {
-                    var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidRequiredDirectiveAttributeName(GetDisplayName(), Name);
+                    var diagnostic =
+                        RazorDiagnosticFactory.CreateTagHelper_InvalidRequiredDirectiveAttributeName(
+                            GetDisplayName(),
+                            Name
+                        );
 
                     yield return diagnostic;
                 }
 
                 foreach (var character in name)
                 {
-                    if (char.IsWhiteSpace(character) || HtmlConventions.InvalidNonWhitespaceHtmlCharacters.Contains(character))
-                    {
-                        var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeName(Name, character);
+                    if (
+                        char.IsWhiteSpace(character)
+                        || HtmlConventions.InvalidNonWhitespaceHtmlCharacters.Contains(character)
+                    ) {
+                        var diagnostic =
+                            RazorDiagnosticFactory.CreateTagHelper_InvalidTargetedAttributeName(
+                                Name,
+                                character
+                            );
 
                         yield return diagnostic;
                     }

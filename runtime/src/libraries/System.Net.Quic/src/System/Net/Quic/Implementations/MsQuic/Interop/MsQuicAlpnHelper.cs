@@ -11,8 +11,11 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
 {
     internal static class MsQuicAlpnHelper
     {
-        public static unsafe void Prepare(List<SslApplicationProtocol> alpnProtocols, [NotNull] out MemoryHandle[]? handles, [NotNull] out QuicBuffer[]? buffers)
-        {
+        public static unsafe void Prepare(
+            List<SslApplicationProtocol> alpnProtocols,
+            [NotNull] out MemoryHandle[]? handles,
+            [NotNull] out QuicBuffer[]? buffers
+        ) {
             handles = ArrayPool<MemoryHandle>.Shared.Rent(alpnProtocols.Count);
             buffers = ArrayPool<QuicBuffer>.Shared.Rent(alpnProtocols.Count);
 

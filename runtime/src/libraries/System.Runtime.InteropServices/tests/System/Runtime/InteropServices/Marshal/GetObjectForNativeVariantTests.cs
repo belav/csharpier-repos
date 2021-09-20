@@ -21,28 +21,50 @@ namespace System.Runtime.InteropServices.Tests
         [StructLayout(LayoutKind.Explicit)]
         public struct UnionTypes
         {
-            [FieldOffset(0)] internal sbyte _i1;
-            [FieldOffset(0)] internal short _i2;
-            [FieldOffset(0)] internal int _i4;
-            [FieldOffset(0)] internal long _i8;
-            [FieldOffset(0)] internal byte _ui1;
-            [FieldOffset(0)] internal ushort _ui2;
-            [FieldOffset(0)] internal uint _ui4;
-            [FieldOffset(0)] internal ulong _ui8;
-            [FieldOffset(0)] internal int _int;
-            [FieldOffset(0)] internal uint _uint;
-            [FieldOffset(0)] internal float _r4;
-            [FieldOffset(0)] internal double _r8;
-            [FieldOffset(0)] internal long _cy;
-            [FieldOffset(0)] internal double _date;
-            [FieldOffset(0)] internal IntPtr _bstr;
-            [FieldOffset(0)] internal IntPtr _unknown;
-            [FieldOffset(0)] internal IntPtr _dispatch;
-            [FieldOffset(0)] internal int _error;
-            [FieldOffset(0)] internal IntPtr _pvarVal;
-            [FieldOffset(0)] internal IntPtr _byref;
-            [FieldOffset(0)] internal Record _record;
-            [FieldOffset(0)] internal IntPtr _parray;
+            [FieldOffset(0)]
+            internal sbyte _i1;
+            [FieldOffset(0)]
+            internal short _i2;
+            [FieldOffset(0)]
+            internal int _i4;
+            [FieldOffset(0)]
+            internal long _i8;
+            [FieldOffset(0)]
+            internal byte _ui1;
+            [FieldOffset(0)]
+            internal ushort _ui2;
+            [FieldOffset(0)]
+            internal uint _ui4;
+            [FieldOffset(0)]
+            internal ulong _ui8;
+            [FieldOffset(0)]
+            internal int _int;
+            [FieldOffset(0)]
+            internal uint _uint;
+            [FieldOffset(0)]
+            internal float _r4;
+            [FieldOffset(0)]
+            internal double _r8;
+            [FieldOffset(0)]
+            internal long _cy;
+            [FieldOffset(0)]
+            internal double _date;
+            [FieldOffset(0)]
+            internal IntPtr _bstr;
+            [FieldOffset(0)]
+            internal IntPtr _unknown;
+            [FieldOffset(0)]
+            internal IntPtr _dispatch;
+            [FieldOffset(0)]
+            internal int _error;
+            [FieldOffset(0)]
+            internal IntPtr _pvarVal;
+            [FieldOffset(0)]
+            internal IntPtr _byref;
+            [FieldOffset(0)]
+            internal Record _record;
+            [FieldOffset(0)]
+            internal IntPtr _parray;
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -58,8 +80,10 @@ namespace System.Runtime.InteropServices.Tests
         [StructLayout(LayoutKind.Explicit)]
         public struct Variant
         {
-            [FieldOffset(0)] public TypeUnion m_Variant;
-            [FieldOffset(0)] public decimal m_decimal;
+            [FieldOffset(0)]
+            public TypeUnion m_Variant;
+            [FieldOffset(0)]
+            public decimal m_decimal;
 
             public override string ToString() => "0x" + m_Variant.vt.ToString("X");
         }
@@ -144,7 +168,10 @@ namespace System.Runtime.InteropServices.Tests
         public unsafe void GetObjectForNativeVariant_DecimalByRef_Success(decimal d)
         {
             IntPtr ptr = new IntPtr(&d);
-            Variant variant = CreateVariant(VT_DECIMAL | VT_BYREF, new UnionTypes { _pvarVal = ptr });
+            Variant variant = CreateVariant(
+                VT_DECIMAL | VT_BYREF,
+                new UnionTypes { _pvarVal = ptr }
+            );
             Assert.Equal(d, GetObjectForNativeVariant(variant));
         }
 
@@ -169,16 +196,26 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void GetObjectForNativeVariant_Unix_ThrowsPlatformNotSupportedException()
         {
-            Assert.Throws<PlatformNotSupportedException>(() => Marshal.GetObjectForNativeVariant(IntPtr.Zero));
-            Assert.Throws<PlatformNotSupportedException>(() => Marshal.GetObjectForNativeVariant<int>(IntPtr.Zero));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Marshal.GetObjectForNativeVariant(IntPtr.Zero)
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Marshal.GetObjectForNativeVariant<int>(IntPtr.Zero)
+            );
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void GetObjectForNativeVariant_ZeroPointer_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("pSrcNativeVariant", () => Marshal.GetObjectForNativeVariant(IntPtr.Zero));
-            AssertExtensions.Throws<ArgumentNullException>("pSrcNativeVariant", () => Marshal.GetObjectForNativeVariant<int>(IntPtr.Zero));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "pSrcNativeVariant",
+                () => Marshal.GetObjectForNativeVariant(IntPtr.Zero)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "pSrcNativeVariant",
+                () => Marshal.GetObjectForNativeVariant<int>(IntPtr.Zero)
+            );
         }
 
         [Theory]
@@ -229,13 +266,17 @@ namespace System.Runtime.InteropServices.Tests
         [InlineData(VT_RESERVED | VT_BYREF)]
         [InlineData(VT_ILLEGAL | VT_BYREF)]
         [PlatformSpecific(TestPlatforms.Windows)]
-        public void GetObjectForNativeVariant_ZeroByRefTypeNotEmptyOrNull_ThrowsArgumentException(ushort vt)
-        {
+        public void GetObjectForNativeVariant_ZeroByRefTypeNotEmptyOrNull_ThrowsArgumentException(
+            ushort vt
+        ) {
             var variant = new Variant();
             variant.m_Variant.vt = vt;
             variant.m_Variant._unionTypes._byref = IntPtr.Zero;
 
-            AssertExtensions.Throws<ArgumentException>(null, () => GetObjectForNativeVariant(variant));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => GetObjectForNativeVariant(variant)
+            );
         }
 
         [Theory]
@@ -248,15 +289,24 @@ namespace System.Runtime.InteropServices.Tests
         public void GetObjectForNativeVariant_InvalidDate_ThrowsArgumentException(double value)
         {
             Variant variant = CreateVariant(VT_DATE, new UnionTypes { _date = value });
-            AssertExtensions.Throws<ArgumentException>(null, () => GetObjectForNativeVariant(variant));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => GetObjectForNativeVariant(variant)
+            );
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void GetObjectForNativeVariant_NoDataForRecord_ThrowsArgumentException()
         {
-            Variant variant = CreateVariant(VT_RECORD, new UnionTypes { _record = new Record { _recordInfo = IntPtr.Zero } });
-            AssertExtensions.Throws<ArgumentException>(null, () => GetObjectForNativeVariant(variant));
+            Variant variant = CreateVariant(
+                VT_RECORD,
+                new UnionTypes { _record = new Record { _recordInfo = IntPtr.Zero } }
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => GetObjectForNativeVariant(variant)
+            );
         }
 
         public static IEnumerable<object[]> GetObjectForNativeVariant_NoSuchGuid_TestData()
@@ -273,21 +323,26 @@ namespace System.Runtime.InteropServices.Tests
             int record = 10;
             var recordInfo = new RecordInfo { Guid = guid };
             IntPtr pRecord = Marshal.AllocHGlobal(Marshal.SizeOf<int>());
-            IntPtr pRecordInfo = Marshal.GetComInterfaceForObject<RecordInfo, IRecordInfo>(recordInfo);
+            IntPtr pRecordInfo = Marshal.GetComInterfaceForObject<RecordInfo, IRecordInfo>(
+                recordInfo
+            );
             try
             {
                 Marshal.StructureToPtr(record, pRecord, fDeleteOld: false);
 
-                Variant variant = CreateVariant(VT_RECORD, new UnionTypes
-                {
-                    _record = new Record
+                Variant variant = CreateVariant(
+                    VT_RECORD,
+                    new UnionTypes
                     {
-                        _record = pRecord,
-                        _recordInfo = pRecordInfo
+                        _record = new Record { _record = pRecord, _recordInfo = pRecordInfo }
                     }
-                });
-                AssertExtensions.Throws<ArgumentException>(null, () => GetObjectForNativeVariant(variant));
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => GetObjectForNativeVariant(variant)
+                );
             }
+
             finally
             {
                 Marshal.DestroyStructure<int>(pRecord);
@@ -334,7 +389,10 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void GetObjectForNativeVariant_CantMap_ThrowsArgumentException(Variant variant)
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => GetObjectForNativeVariant(variant));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => GetObjectForNativeVariant(variant)
+            );
         }
 
         [Theory]
@@ -343,7 +401,10 @@ namespace System.Runtime.InteropServices.Tests
         public void GetObjectForNativeVariant_CantMapByRef_ThrowsArgumentException(Variant variant)
         {
             variant.m_Variant.vt |= VT_BYREF;
-            AssertExtensions.Throws<ArgumentException>(null, () => GetObjectForNativeVariant(variant));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => GetObjectForNativeVariant(variant)
+            );
         }
 
         public static IEnumerable<object[]> GetObjectForNativeVariant_InvalidVarType_TestData()
@@ -365,8 +426,9 @@ namespace System.Runtime.InteropServices.Tests
         [Theory]
         [MemberData(nameof(GetObjectForNativeVariant_InvalidVarType_TestData))]
         [PlatformSpecific(TestPlatforms.Windows)]
-        public void GetObjectForNativeVariant_InvalidVarType_InvalidOleVariantTypeException(ushort vt)
-        {
+        public void GetObjectForNativeVariant_InvalidVarType_InvalidOleVariantTypeException(
+            ushort vt
+        ) {
             Variant variant = CreateVariant(vt, new UnionTypes { _byref = (IntPtr)10 });
             Assert.Throws<InvalidOleVariantTypeException>(() => GetObjectForNativeVariant(variant));
         }
@@ -374,9 +436,13 @@ namespace System.Runtime.InteropServices.Tests
         [Theory]
         [MemberData(nameof(GetObjectForNativeVariant_InvalidVarType_TestData))]
         [PlatformSpecific(TestPlatforms.Windows)]
-        public void GetObjectForNativeVariant_InvalidVarTypeByRef_InvalidOleVariantTypeException(ushort vt)
-        {
-            Variant variant = CreateVariant((ushort)(vt | VT_BYREF), new UnionTypes { _byref = (IntPtr)10 });
+        public void GetObjectForNativeVariant_InvalidVarTypeByRef_InvalidOleVariantTypeException(
+            ushort vt
+        ) {
+            Variant variant = CreateVariant(
+                (ushort)(vt | VT_BYREF),
+                new UnionTypes { _byref = (IntPtr)10 }
+            );
             Assert.Throws<InvalidOleVariantTypeException>(() => GetObjectForNativeVariant(variant));
         }
 
@@ -397,8 +463,11 @@ namespace System.Runtime.InteropServices.Tests
                 variant.m_Variant.vt = VT_VARIANT | VT_BYREF;
                 variant.m_Variant._unionTypes._pvarVal = ptr;
 
-                Assert.Throws<InvalidOleVariantTypeException>(() => GetObjectForNativeVariant(variant));
+                Assert.Throws<InvalidOleVariantTypeException>(
+                    () => GetObjectForNativeVariant(variant)
+                );
             }
+
             finally
             {
                 Marshal.DestroyStructure<Variant>(ptr);
@@ -422,6 +491,7 @@ namespace System.Runtime.InteropServices.Tests
                 Marshal.StructureToPtr(variant, ptr, fDeleteOld: false);
                 return Marshal.GetObjectForNativeVariant(ptr);
             }
+
             finally
             {
                 Marshal.DestroyStructure<Variant>(ptr);
@@ -443,12 +513,16 @@ namespace System.Runtime.InteropServices.Tests
             {
                 Marshal.FreeBSTR(variant.m_Variant._unionTypes._bstr);
             }
-            else if (variant.m_Variant.vt == VT_UNKNOWN && variant.m_Variant._unionTypes._unknown != IntPtr.Zero)
-            {
+            else if (
+                variant.m_Variant.vt == VT_UNKNOWN
+                && variant.m_Variant._unionTypes._unknown != IntPtr.Zero
+            ) {
                 Marshal.Release(variant.m_Variant._unionTypes._unknown);
             }
-            else if (variant.m_Variant.vt == VT_DISPATCH && variant.m_Variant._unionTypes._dispatch != IntPtr.Zero)
-            {
+            else if (
+                variant.m_Variant.vt == VT_DISPATCH
+                && variant.m_Variant._unionTypes._dispatch != IntPtr.Zero
+            ) {
                 Marshal.Release(variant.m_Variant._unionTypes._dispatch);
             }
         }
@@ -487,38 +561,61 @@ namespace System.Runtime.InteropServices.Tests
                 throw new NotImplementedException();
             }
 
-            public void GetTypeInfo([MarshalAs(UnmanagedType.CustomMarshaler, MarshalType = "System.Runtime.InteropServices.CustomMarshalers.TypeToTypeInfoMarshaler")] out Type ppTypeInfo)
-            {
+            public void GetTypeInfo(
+                [MarshalAs(
+                    UnmanagedType.CustomMarshaler,
+                    MarshalType = "System.Runtime.InteropServices.CustomMarshalers.TypeToTypeInfoMarshaler"
+                )]
+                    out Type ppTypeInfo
+            ) {
                 throw new NotImplementedException();
             }
 
-            public void GetField([In] IntPtr pvData, [In, MarshalAs(UnmanagedType.LPWStr)] string szFieldName, [MarshalAs(UnmanagedType.Struct)] out object pvarField)
-            {
+            public void GetField(
+                [In] IntPtr pvData,
+                [In, MarshalAs(UnmanagedType.LPWStr)] string szFieldName,
+                [MarshalAs(UnmanagedType.Struct)] out object pvarField
+            ) {
                 throw new NotImplementedException();
             }
 
-            public void GetFieldNoCopy([In] IntPtr pvData, [In, MarshalAs(UnmanagedType.LPWStr)] string szFieldName, [MarshalAs(UnmanagedType.Struct)] out object pvarField, out IntPtr ppvDataCArray)
-            {
+            public void GetFieldNoCopy(
+                [In] IntPtr pvData,
+                [In, MarshalAs(UnmanagedType.LPWStr)] string szFieldName,
+                [MarshalAs(UnmanagedType.Struct)] out object pvarField,
+                out IntPtr ppvDataCArray
+            ) {
                 throw new NotImplementedException();
             }
 
-            public void PutField([In] uint wFlags, [In, Out] IntPtr pvData, [In, MarshalAs(UnmanagedType.LPWStr)] string szFieldName, [In, MarshalAs(UnmanagedType.Struct)] ref object pvarField)
-            {
+            public void PutField(
+                [In] uint wFlags,
+                [In, Out] IntPtr pvData,
+                [In, MarshalAs(UnmanagedType.LPWStr)] string szFieldName,
+                [In, MarshalAs(UnmanagedType.Struct)] ref object pvarField
+            ) {
                 throw new NotImplementedException();
             }
 
-            public void PutFieldNoCopy([In] uint wFlags, [In, Out] IntPtr pvData, [In, MarshalAs(UnmanagedType.LPWStr)] string szFieldName, [In, MarshalAs(UnmanagedType.Struct)] ref object pvarField)
-            {
+            public void PutFieldNoCopy(
+                [In] uint wFlags,
+                [In, Out] IntPtr pvData,
+                [In, MarshalAs(UnmanagedType.LPWStr)] string szFieldName,
+                [In, MarshalAs(UnmanagedType.Struct)] ref object pvarField
+            ) {
                 throw new NotImplementedException();
             }
 
-            public void GetFieldNames([In, Out] ref uint pcNames, [MarshalAs(UnmanagedType.BStr)] out string rgBstrNames)
-            {
+            public void GetFieldNames(
+                [In, Out] ref uint pcNames,
+                [MarshalAs(UnmanagedType.BStr)] out string rgBstrNames
+            ) {
                 throw new NotImplementedException();
             }
 
-            public int IsMatchingType([In, MarshalAs(UnmanagedType.Interface)] IRecordInfo pRecordInfo)
-            {
+            public int IsMatchingType(
+                [In, MarshalAs(UnmanagedType.Interface)] IRecordInfo pRecordInfo
+            ) {
                 throw new NotImplementedException();
             }
 
@@ -538,7 +635,10 @@ namespace System.Runtime.InteropServices.Tests
             }
         }
 
-        [Guid("0000002F-0000-0000-C000-000000000046"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        [
+            Guid("0000002F-0000-0000-C000-000000000046"),
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+        ]
         [ComImport]
         public interface IRecordInfo
         {
@@ -561,22 +661,50 @@ namespace System.Runtime.InteropServices.Tests
             void GetSize(out uint pcbSize);
 
             [MethodImpl(MethodImplOptions.InternalCall)]
-            void GetTypeInfo([MarshalAs(UnmanagedType.CustomMarshaler, MarshalType = "System.Runtime.InteropServices.CustomMarshalers.TypeToTypeInfoMarshaler")] out Type ppTypeInfo);
+            void GetTypeInfo(
+                [MarshalAs(
+                    UnmanagedType.CustomMarshaler,
+                    MarshalType = "System.Runtime.InteropServices.CustomMarshalers.TypeToTypeInfoMarshaler"
+                )]
+                    out Type ppTypeInfo
+            );
 
             [MethodImpl(MethodImplOptions.InternalCall)]
-            void GetField([In] IntPtr pvData, [MarshalAs(UnmanagedType.LPWStr)] [In] string szFieldName, [MarshalAs(UnmanagedType.Struct)] out object pvarField);
+            void GetField(
+                [In] IntPtr pvData,
+                [MarshalAs(UnmanagedType.LPWStr)] [In] string szFieldName,
+                [MarshalAs(UnmanagedType.Struct)] out object pvarField
+            );
 
             [MethodImpl(MethodImplOptions.InternalCall)]
-            void GetFieldNoCopy([In] IntPtr pvData, [MarshalAs(UnmanagedType.LPWStr)] [In] string szFieldName, [MarshalAs(UnmanagedType.Struct)] out object pvarField, out IntPtr ppvDataCArray);
+            void GetFieldNoCopy(
+                [In] IntPtr pvData,
+                [MarshalAs(UnmanagedType.LPWStr)] [In] string szFieldName,
+                [MarshalAs(UnmanagedType.Struct)] out object pvarField,
+                out IntPtr ppvDataCArray
+            );
 
             [MethodImpl(MethodImplOptions.InternalCall)]
-            void PutField([In] uint wFlags, [In] [Out] IntPtr pvData, [MarshalAs(UnmanagedType.LPWStr)] [In] string szFieldName, [MarshalAs(UnmanagedType.Struct)] [In] ref object pvarField);
+            void PutField(
+                [In] uint wFlags,
+                [In] [Out] IntPtr pvData,
+                [MarshalAs(UnmanagedType.LPWStr)] [In] string szFieldName,
+                [MarshalAs(UnmanagedType.Struct)] [In] ref object pvarField
+            );
 
             [MethodImpl(MethodImplOptions.InternalCall)]
-            void PutFieldNoCopy([In] uint wFlags, [In] [Out] IntPtr pvData, [MarshalAs(UnmanagedType.LPWStr)] [In] string szFieldName, [MarshalAs(UnmanagedType.Struct)] [In] ref object pvarField);
+            void PutFieldNoCopy(
+                [In] uint wFlags,
+                [In] [Out] IntPtr pvData,
+                [MarshalAs(UnmanagedType.LPWStr)] [In] string szFieldName,
+                [MarshalAs(UnmanagedType.Struct)] [In] ref object pvarField
+            );
 
             [MethodImpl(MethodImplOptions.InternalCall)]
-            void GetFieldNames([In] [Out] ref uint pcNames, [MarshalAs(UnmanagedType.BStr)] out string rgBstrNames);
+            void GetFieldNames(
+                [In] [Out] ref uint pcNames,
+                [MarshalAs(UnmanagedType.BStr)] out string rgBstrNames
+            );
 
             [MethodImpl(MethodImplOptions.PreserveSig | MethodImplOptions.InternalCall)]
             int IsMatchingType([MarshalAs(UnmanagedType.Interface)] [In] IRecordInfo pRecordInfo);

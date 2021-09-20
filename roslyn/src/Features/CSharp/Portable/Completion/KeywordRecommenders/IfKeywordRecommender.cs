@@ -12,16 +12,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class IfKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public IfKeywordRecommender()
-            : base(SyntaxKind.IfKeyword, isValidInPreprocessorContext: true)
-        {
-        }
+            : base(SyntaxKind.IfKeyword, isValidInPreprocessorContext: true) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-        {
-            return
-                context.IsPreProcessorKeywordContext ||
-                context.IsStatementContext ||
-                context.IsGlobalStatementContext;
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) {
+            return context.IsPreProcessorKeywordContext
+                || context.IsStatementContext
+                || context.IsGlobalStatementContext;
         }
     }
 }

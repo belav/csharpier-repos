@@ -39,8 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             string projectDir,
             string? rootNamespace,
             string? language,
-            string[]? args)
-        {
+            string[]? args
+        ) {
             Check.NotNull(reporter, nameof(reporter));
             Check.NotNull(startupAssembly, nameof(startupAssembly));
             Check.NotNull(projectDir, nameof(projectDir));
@@ -51,7 +51,12 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             _language = language;
             _args = args ?? Array.Empty<string>();
 
-            _servicesBuilder = new DesignTimeServicesBuilder(assembly, startupAssembly, reporter, _args);
+            _servicesBuilder = new DesignTimeServicesBuilder(
+                assembly,
+                startupAssembly,
+                reporter,
+                _args
+            );
         }
 
         /// <summary>
@@ -74,20 +79,22 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             bool overwriteFiles,
             bool useDatabaseNames,
             bool suppressOnConfiguring,
-            bool noPluralize)
-        {
+            bool noPluralize
+        ) {
             Check.NotEmpty(provider, nameof(provider));
             Check.NotEmpty(connectionString, nameof(connectionString));
             Check.NotNull(schemas, nameof(schemas));
             Check.NotNull(tables, nameof(tables));
 
-            outputDir = outputDir != null
-                ? Path.GetFullPath(Path.Combine(_projectDir, outputDir))
-                : _projectDir;
+            outputDir =
+                outputDir != null
+                    ? Path.GetFullPath(Path.Combine(_projectDir, outputDir))
+                    : _projectDir;
 
-            outputContextDir = outputContextDir != null
-                ? Path.GetFullPath(Path.Combine(_projectDir, outputContextDir))
-                : outputDir;
+            outputContextDir =
+                outputContextDir != null
+                    ? Path.GetFullPath(Path.Combine(_projectDir, outputContextDir))
+                    : outputDir;
 
             var services = _servicesBuilder.Build(provider);
 
@@ -100,7 +107,11 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var scaffoldedModel = scaffolder.ScaffoldModel(
                 connectionString,
                 new DatabaseModelFactoryOptions(tables, schemas),
-                new ModelReverseEngineerOptions { UseDatabaseNames = useDatabaseNames, NoPluralize = noPluralize },
+                new ModelReverseEngineerOptions
+                {
+                    UseDatabaseNames = useDatabaseNames,
+                    NoPluralize = noPluralize
+                },
                 new ModelCodeGenerationOptions
                 {
                     UseDataAnnotations = useDataAnnotations,
@@ -111,12 +122,10 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                     ContextDir = MakeDirRelative(outputDir, outputContextDir),
                     ContextName = dbContextClassName,
                     SuppressOnConfiguring = suppressOnConfiguring
-                });
+                }
+            );
 
-            return scaffolder.Save(
-                scaffoldedModel,
-                outputDir,
-                overwriteFiles);
+            return scaffolder.Save(scaffoldedModel, outputDir, overwriteFiles);
         }
 
         private string? GetNamespaceFromOutputPath(string directoryPath)
@@ -143,17 +152,23 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
             return !string.IsNullOrWhiteSpace(subPath)
                 ? string.Join(
-                    ".",
-                    subPath.Split(
-                        new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries))
+                      ".",
+                      subPath.Split(
+                          new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar },
+                          StringSplitOptions.RemoveEmptyEntries
+                      )
+                  )
                 : null;
         }
 
         private static string MakeDirRelative(string root, string path)
         {
-            var relativeUri = new Uri(NormalizeDir(root)).MakeRelativeUri(new Uri(NormalizeDir(path)));
+            var relativeUri = new Uri(NormalizeDir(root)).MakeRelativeUri(
+                new Uri(NormalizeDir(path))
+            );
 
-            return Uri.UnescapeDataString(relativeUri.ToString()).Replace('/', Path.DirectorySeparatorChar);
+            return Uri.UnescapeDataString(relativeUri.ToString())
+                .Replace('/', Path.DirectorySeparatorChar);
         }
 
         private static string NormalizeDir(string path)
@@ -164,10 +179,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             }
 
             var last = path[path.Length - 1];
-            return last == Path.DirectorySeparatorChar
-                || last == Path.AltDirectorySeparatorChar
-                    ? path
-                    : path + Path.DirectorySeparatorChar;
+            return last == Path.DirectorySeparatorChar || last == Path.AltDirectorySeparatorChar
+                ? path
+                : path + Path.DirectorySeparatorChar;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace System.Web.Http.ModelBinding
 {
     public static class FormDataCollectionExtensions
     {
-        // This is a helper method to use Model Binding over a JQuery syntax. 
+        // This is a helper method to use Model Binding over a JQuery syntax.
         // Normalize from JQuery to MVC keys. The model binding infrastructure uses MVC keys
         // x[] --> x
         // [] --> ""
@@ -61,18 +61,18 @@ namespace System.Web.Http.ModelBinding
 
                 if (indexClose == indexOpen + 1)
                 {
-                    // Empty bracket. Signifies array. Just remove. 
+                    // Empty bracket. Signifies array. Just remove.
                 }
                 else
                 {
                     if (Char.IsDigit(key[indexOpen + 1]))
                     {
-                        // array index. Leave unchanged. 
+                        // array index. Leave unchanged.
                         sb.Append(key, indexOpen, indexClose - indexOpen + 1);
                     }
                     else
                     {
-                        // Field name.  Convert to dot notation. 
+                        // Field name.  Convert to dot notation.
                         sb.Append('.');
                         sb.Append(key, indexOpen + 1, indexClose - indexOpen - 1);
                     }
@@ -87,8 +87,9 @@ namespace System.Web.Http.ModelBinding
             return sb.ToString();
         }
 
-        internal static IEnumerable<KeyValuePair<string, string>> GetJQueryNameValuePairs(this FormDataCollection formData)
-        {
+        internal static IEnumerable<KeyValuePair<string, string>> GetJQueryNameValuePairs(
+            this FormDataCollection formData
+        ) {
             if (formData == null)
             {
                 throw Error.ArgumentNull("formData");
@@ -112,7 +113,11 @@ namespace System.Web.Http.ModelBinding
         {
             if (count >= MediaTypeFormatter.MaxHttpCollectionKeys)
             {
-                throw Error.InvalidOperation(SRResources.MaxHttpCollectionKeyLimitReached, MediaTypeFormatter.MaxHttpCollectionKeys, typeof(MediaTypeFormatter));
+                throw Error.InvalidOperation(
+                    SRResources.MaxHttpCollectionKeyLimitReached,
+                    MediaTypeFormatter.MaxHttpCollectionKeys,
+                    typeof(MediaTypeFormatter)
+                );
             }
         }
 
@@ -140,26 +145,52 @@ namespace System.Web.Http.ModelBinding
 
         public static object ReadAs(this FormDataCollection formData, Type type)
         {
-            return ReadAs(formData, type, String.Empty, requiredMemberSelector: null, formatterLogger: null);
+            return ReadAs(
+                formData,
+                type,
+                String.Empty,
+                requiredMemberSelector: null,
+                formatterLogger: null
+            );
         }
 
-        public static object ReadAs(this FormDataCollection formData, Type type, HttpActionContext actionContext)
-        {
+        public static object ReadAs(
+            this FormDataCollection formData,
+            Type type,
+            HttpActionContext actionContext
+        ) {
             return ReadAs(formData, type, String.Empty, actionContext);
         }
 
-        public static T ReadAs<T>(this FormDataCollection formData, string modelName, IRequiredMemberSelector requiredMemberSelector, IFormatterLogger formatterLogger)
-        {
-            return (T)ReadAs(formData, typeof(T), modelName, requiredMemberSelector, formatterLogger);
+        public static T ReadAs<T>(
+            this FormDataCollection formData,
+            string modelName,
+            IRequiredMemberSelector requiredMemberSelector,
+            IFormatterLogger formatterLogger
+        ) {
+            return (T)ReadAs(
+                formData,
+                typeof(T),
+                modelName,
+                requiredMemberSelector,
+                formatterLogger
+            );
         }
 
-        public static T ReadAs<T>(this FormDataCollection formData, string modelName, HttpActionContext actionContext)
-        {
+        public static T ReadAs<T>(
+            this FormDataCollection formData,
+            string modelName,
+            HttpActionContext actionContext
+        ) {
             return (T)ReadAs(formData, typeof(T), modelName, actionContext);
         }
 
-        public static object ReadAs(this FormDataCollection formData, Type type, string modelName, HttpActionContext actionContext)
-        {
+        public static object ReadAs(
+            this FormDataCollection formData,
+            Type type,
+            string modelName,
+            HttpActionContext actionContext
+        ) {
             if (formData == null)
             {
                 throw Error.ArgumentNull("formData");
@@ -176,10 +207,21 @@ namespace System.Web.Http.ModelBinding
             return ReadAsInternal(formData, type, modelName, actionContext);
         }
 
-        public static object ReadAs(this FormDataCollection formData, Type type, string modelName,
-            IRequiredMemberSelector requiredMemberSelector, IFormatterLogger formatterLogger)
-        {
-            return ReadAs(formData, type, modelName, requiredMemberSelector, formatterLogger, config: null);
+        public static object ReadAs(
+            this FormDataCollection formData,
+            Type type,
+            string modelName,
+            IRequiredMemberSelector requiredMemberSelector,
+            IFormatterLogger formatterLogger
+        ) {
+            return ReadAs(
+                formData,
+                type,
+                modelName,
+                requiredMemberSelector,
+                formatterLogger,
+                config: null
+            );
         }
 
         /// <summary>
@@ -196,10 +238,14 @@ namespace System.Web.Http.ModelBinding
         /// <param name="config">The <see cref="HttpConfiguration"/> configuration to pick binder from.
         /// Can be null if the config was not created already. In that case a new config is created.</param>
         /// <returns>best attempt to bind the object. The best attempt may be null.</returns>
-        public static object ReadAs(this FormDataCollection formData, Type type, string modelName, 
-                                        IRequiredMemberSelector requiredMemberSelector,
-                                        IFormatterLogger formatterLogger, HttpConfiguration config)
-        {
+        public static object ReadAs(
+            this FormDataCollection formData,
+            Type type,
+            string modelName,
+            IRequiredMemberSelector requiredMemberSelector,
+            IFormatterLogger formatterLogger,
+            HttpConfiguration config
+        ) {
             if (formData == null)
             {
                 throw Error.ArgumentNull("formData");
@@ -212,17 +258,20 @@ namespace System.Web.Http.ModelBinding
             object result = null;
             HttpActionContext actionContext = null;
 
-            bool validateRequiredMembers = requiredMemberSelector != null && formatterLogger != null;
+            bool validateRequiredMembers =
+                requiredMemberSelector != null && formatterLogger != null;
 
             if (validateRequiredMembers)
             {
-                // We wrap the config so we can override the services and cache 
+                // We wrap the config so we can override the services and cache
                 // without affecting outside callers or users of the config.
                 using (HttpConfiguration wrapperConfig = new HttpConfiguration())
                 {
                     config = config == null ? wrapperConfig : config;
-                    wrapperConfig.Services = new ServicesContainerWrapper(config,
-                                                new RequiredMemberModelValidatorProvider(requiredMemberSelector));
+                    wrapperConfig.Services = new ServicesContainerWrapper(
+                        config,
+                        new RequiredMemberModelValidatorProvider(requiredMemberSelector)
+                    );
 
                     // The HttpActionContext provides access to configuration for ModelBinders, and is also provided
                     // to the IModelBinder when binding occurs. Since HttpActionContext was not provided, create a default.
@@ -248,12 +297,13 @@ namespace System.Web.Http.ModelBinding
             }
 
             // The model binding will log any errors to the HttpActionContext's ModelState. Since this is a context
-            // that we created and doesn't map to a real action invocation, we want to forward the errors to 
+            // that we created and doesn't map to a real action invocation, we want to forward the errors to
             // the user-specified IFormatterLogger.
             if (formatterLogger != null)
             {
-                foreach (KeyValuePair<string, ModelState> modelStatePair in actionContext.ModelState)
-                {
+                foreach (
+                    KeyValuePair<string, ModelState> modelStatePair in actionContext.ModelState
+                ) {
                     foreach (ModelError modelError in modelStatePair.Value.Errors)
                     {
                         if (modelError.Exception != null)
@@ -271,18 +321,30 @@ namespace System.Web.Http.ModelBinding
             return result;
         }
 
-        private static object ReadAsInternal(this FormDataCollection formData, Type type, string modelName, HttpActionContext actionContext)
-        {
+        private static object ReadAsInternal(
+            this FormDataCollection formData,
+            Type type,
+            string modelName,
+            HttpActionContext actionContext
+        ) {
             Contract.Assert(formData != null);
             Contract.Assert(type != null);
             Contract.Assert(actionContext != null);
 
             IValueProvider valueProvider = formData.GetJQueryValueProvider();
-            ModelBindingContext bindingContext = CreateModelBindingContext(actionContext, modelName ?? String.Empty, type, valueProvider);
+            ModelBindingContext bindingContext = CreateModelBindingContext(
+                actionContext,
+                modelName ?? String.Empty,
+                type,
+                valueProvider
+            );
 
             ModelBinderProvider modelBinderProvider = CreateModelBindingProvider(actionContext);
 
-            IModelBinder modelBinder = modelBinderProvider.GetBinder(actionContext.ControllerContext.Configuration, type);
+            IModelBinder modelBinder = modelBinderProvider.GetBinder(
+                actionContext.ControllerContext.Configuration,
+                type
+            );
             bool haveResult = modelBinder.BindModel(actionContext, bindingContext);
             if (haveResult)
             {
@@ -292,9 +354,10 @@ namespace System.Web.Http.ModelBinding
             return MediaTypeFormatter.GetDefaultValueForType(type);
         }
 
-        // Helper for ReadAs() to get a ModelBinderProvider to read FormUrl data. 
-        private static ModelBinderProvider CreateModelBindingProvider(HttpActionContext actionContext)
-        {
+        // Helper for ReadAs() to get a ModelBinderProvider to read FormUrl data.
+        private static ModelBinderProvider CreateModelBindingProvider(
+            HttpActionContext actionContext
+        ) {
             Contract.Assert(actionContext != null);
 
             ServicesContainer cs = actionContext.ControllerContext.Configuration.Services;
@@ -303,9 +366,13 @@ namespace System.Web.Http.ModelBinding
             return modelBinderProvider;
         }
 
-        // Helper for ReadAs() to get a ModelBindingContext to invoke model binding over FormUrl data. 
-        private static ModelBindingContext CreateModelBindingContext(HttpActionContext actionContext, string modelName, Type type, IValueProvider vp)
-        {
+        // Helper for ReadAs() to get a ModelBindingContext to invoke model binding over FormUrl data.
+        private static ModelBindingContext CreateModelBindingContext(
+            HttpActionContext actionContext,
+            string modelName,
+            Type type,
+            IValueProvider vp
+        ) {
             Contract.Assert(actionContext != null);
             Contract.Assert(type != null);
             Contract.Assert(vp != null);
@@ -325,14 +392,21 @@ namespace System.Web.Http.ModelBinding
         }
 
         // Creates a default action context to invoke model binding
-        private static HttpActionContext CreateActionContextForModelBinding(HttpConfiguration config)
-        {
+        private static HttpActionContext CreateActionContextForModelBinding(
+            HttpConfiguration config
+        ) {
             Contract.Assert(config != null);
 
-            HttpControllerContext controllerContext = new HttpControllerContext() { Configuration = config };
+            HttpControllerContext controllerContext = new HttpControllerContext()
+            {
+                Configuration = config
+            };
             controllerContext.ControllerDescriptor = new HttpControllerDescriptor(config);
 
-            HttpActionContext actionContext = new HttpActionContext { ControllerContext = controllerContext };
+            HttpActionContext actionContext = new HttpActionContext
+            {
+                ControllerContext = controllerContext
+            };
 
             return actionContext;
         }
@@ -344,9 +418,9 @@ namespace System.Web.Http.ModelBinding
             private ModelValidatorProvider _requiredMemberModelValidatorProvider;
 
             public ServicesContainerWrapper(
-                                HttpConfiguration originalConfig,
-                                ModelValidatorProvider requiredMemberModelValidatorProvider)
-            {
+                HttpConfiguration originalConfig,
+                ModelValidatorProvider requiredMemberModelValidatorProvider
+            ) {
                 _originalConfig = originalConfig;
                 _requiredMemberModelValidatorProvider = requiredMemberModelValidatorProvider;
             }
@@ -359,8 +433,10 @@ namespace System.Web.Http.ModelBinding
                 if (serviceType == typeof(IModelValidatorCache))
                 {
                     return new ModelValidatorCache(
-                                    new Lazy<IEnumerable<ModelValidatorProvider>>(
-                                        () => this.GetServices<ModelValidatorProvider>()));
+                        new Lazy<IEnumerable<ModelValidatorProvider>>(
+                            () => this.GetServices<ModelValidatorProvider>()
+                        )
+                    );
                 }
                 else if (serviceType == typeof(ModelValidatorProvider))
                 {

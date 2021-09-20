@@ -36,7 +36,8 @@ namespace System.Runtime.InteropServices.CustomMarshalers
                     ref dispParams,
                     new IntPtr(resultLocal),
                     IntPtr.Zero,
-                    IntPtr.Zero);
+                    IntPtr.Zero
+                );
             }
 
             Debug.Assert(OperatingSystem.IsWindows());
@@ -50,8 +51,12 @@ namespace System.Runtime.InteropServices.CustomMarshalers
                 }
 
                 enumVariantPtr = Marshal.GetIUnknownForObject(enumVariant);
-                return (System.Collections.IEnumerator)EnumeratorToEnumVariantMarshaler.GetInstance(null).MarshalNativeToManaged(enumVariantPtr);
+                return (System.Collections.IEnumerator)EnumeratorToEnumVariantMarshaler.GetInstance(
+                        null
+                    )
+                    .MarshalNativeToManaged(enumVariantPtr);
             }
+
             finally
             {
                 result.Clear();

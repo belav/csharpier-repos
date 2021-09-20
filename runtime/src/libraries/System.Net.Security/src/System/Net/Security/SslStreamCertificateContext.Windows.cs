@@ -16,8 +16,10 @@ namespace System.Net.Security
             return new SslStreamCertificateContext(target, Array.Empty<X509Certificate2>());
         }
 
-        private SslStreamCertificateContext(X509Certificate2 target, X509Certificate2[] intermediates)
-        {
+        private SslStreamCertificateContext(
+            X509Certificate2 target,
+            X509Certificate2[] intermediates
+        ) {
             if (intermediates.Length > 0)
             {
                 using (X509Chain chain = new X509Chain())
@@ -30,8 +32,10 @@ namespace System.Net.Security
                     int count = 0;
                     foreach (X509ChainStatus status in chain.ChainStatus)
                     {
-                        if (status.Status.HasFlag(X509ChainStatusFlags.PartialChain) || status.Status.HasFlag(X509ChainStatusFlags.NotSignatureValid))
-                        {
+                        if (
+                            status.Status.HasFlag(X509ChainStatusFlags.PartialChain)
+                            || status.Status.HasFlag(X509ChainStatusFlags.NotSignatureValid)
+                        ) {
                             osCanBuildChain = false;
                             break;
                         }
@@ -43,7 +47,10 @@ namespace System.Net.Security
                     // We will try to add them to "Intermediate Certification Authorities" store.
                     if (!osCanBuildChain)
                     {
-                        X509Store? store = new X509Store(StoreName.CertificateAuthority, StoreLocation.LocalMachine);
+                        X509Store? store = new X509Store(
+                            StoreName.CertificateAuthority,
+                            StoreLocation.LocalMachine
+                        );
 
                         try
                         {
@@ -53,7 +60,10 @@ namespace System.Net.Security
                         {
                             // If using system store fails, try to fall-back to user store.
                             store.Dispose();
-                            store = new X509Store(StoreName.CertificateAuthority, StoreLocation.CurrentUser);
+                            store = new X509Store(
+                                StoreName.CertificateAuthority,
+                                StoreLocation.CurrentUser
+                            );
                             try
                             {
                                 store.Open(OpenFlags.ReadWrite);
@@ -64,7 +74,10 @@ namespace System.Net.Security
                                 store = null;
                                 if (NetEventSource.Log.IsEnabled())
                                 {
-                                    NetEventSource.Error(this, $"Failed to open certificate store for intermediates.");
+                                    NetEventSource.Error(
+                                        this,
+                                        $"Failed to open certificate store for intermediates."
+                                    );
                                 }
                             }
                         }
@@ -82,8 +95,12 @@ namespace System.Net.Security
                                 osCanBuildChain = chain.Build(target);
                                 foreach (X509ChainStatus status in chain.ChainStatus)
                                 {
-                                    if (status.Status.HasFlag(X509ChainStatusFlags.PartialChain) || status.Status.HasFlag(X509ChainStatusFlags.NotSignatureValid))
-                                    {
+                                    if (
+                                        status.Status.HasFlag(X509ChainStatusFlags.PartialChain)
+                                        || status.Status.HasFlag(
+                                            X509ChainStatusFlags.NotSignatureValid
+                                        )
+                                    ) {
                                         osCanBuildChain = false;
                                         break;
                                     }
