@@ -48,9 +48,9 @@ namespace System.Buffers.Text
                 return OperationStatus.Done;
             }
 
-            fixed (byte* srcBytes = &MemoryMarshal.GetReference(utf8))fixed (
-                byte* destBytes = &MemoryMarshal.GetReference(bytes)
-            ) {
+            fixed (byte* srcBytes = &MemoryMarshal.GetReference(utf8))
+            fixed (byte* destBytes = &MemoryMarshal.GetReference(bytes))
+            {
                 int srcLength = utf8.Length & ~0x3; // only decode input up to the closest multiple of 4.
                 int destLength = bytes.Length;
                 int maxSrcLength = srcLength;

@@ -226,7 +226,8 @@ namespace JIT.HardwareIntrinsics.Arm
             public void RunStructFldScenario_Load(
                 StoreBinaryOpTest__StorePairNonTemporal_Vector128_Single testClass
             ) {
-                fixed (Vector128<Single>* pFld1 = &_fld1)fixed (Vector128<Single>* pFld2 = &_fld2)
+                fixed (Vector128<Single>* pFld1 = &_fld1)
+                fixed (Vector128<Single>* pFld2 = &_fld2)
                 {
                     AdvSimd.Arm64.StorePairNonTemporal(
                         (Single*)testClass._dataTable.outArrayPtr,
@@ -410,9 +411,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector128<Single>* pClsVar1 = &_clsVar1)fixed (
-                Vector128<Single>* pClsVar2 = &_clsVar2
-            ) {
+            fixed (Vector128<Single>* pClsVar1 = &_clsVar1)
+            fixed (Vector128<Single>* pClsVar2 = &_clsVar2)
+            {
                 AdvSimd.Arm64.StorePairNonTemporal(
                     (Single*)_dataTable.outArrayPtr,
                     AdvSimd.LoadVector128((Single*)(pClsVar1)),
@@ -465,9 +466,9 @@ namespace JIT.HardwareIntrinsics.Arm
 
             var test = new StoreBinaryOpTest__StorePairNonTemporal_Vector128_Single();
 
-            fixed (Vector128<Single>* pFld1 = &test._fld1)fixed (
-                Vector128<Single>* pFld2 = &test._fld2
-            ) {
+            fixed (Vector128<Single>* pFld1 = &test._fld1)
+            fixed (Vector128<Single>* pFld2 = &test._fld2)
+            {
                 AdvSimd.Arm64.StorePairNonTemporal(
                     (Single*)_dataTable.outArrayPtr,
                     AdvSimd.LoadVector128((Single*)(pFld1)),
@@ -491,7 +492,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector128<Single>* pFld1 = &_fld1)fixed (Vector128<Single>* pFld2 = &_fld2)
+            fixed (Vector128<Single>* pFld1 = &_fld1)
+            fixed (Vector128<Single>* pFld2 = &_fld2)
             {
                 AdvSimd.Arm64.StorePairNonTemporal(
                     (Single*)_dataTable.outArrayPtr,

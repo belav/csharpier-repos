@@ -94,7 +94,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
 #else
                     unsafe
                     {
-                        fixed (char* charsPtr = value)fixed (byte* bytesPtr = bytes)
+                        fixed (char* charsPtr = value)
+                        fixed (byte* bytesPtr = bytes)
                         {
                             Contract.ThrowIfFalse(
                                 Encoding.UTF8.GetBytes(

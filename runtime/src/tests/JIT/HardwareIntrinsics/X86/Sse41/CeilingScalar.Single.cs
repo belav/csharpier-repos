@@ -229,7 +229,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario_Load(SimpleBinaryOpTest__CeilingScalarSingle testClass)
             {
-                fixed (Vector128<Single>* pFld1 = &_fld1)fixed (Vector128<Single>* pFld2 = &_fld2)
+                fixed (Vector128<Single>* pFld1 = &_fld1)
+                fixed (Vector128<Single>* pFld2 = &_fld2)
                 {
                     var result = Sse41.CeilingScalar(
                         Sse.LoadVector128((Single*)(pFld1)),
@@ -443,9 +444,9 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector128<Single>* pClsVar1 = &_clsVar1)fixed (
-                Vector128<Single>* pClsVar2 = &_clsVar2
-            ) {
+            fixed (Vector128<Single>* pClsVar1 = &_clsVar1)
+            fixed (Vector128<Single>* pClsVar2 = &_clsVar2)
+            {
                 var result = Sse41.CeilingScalar(
                     Sse.LoadVector128((Single*)(pClsVar1)),
                     Sse.LoadVector128((Single*)(pClsVar2))
@@ -509,9 +510,9 @@ namespace JIT.HardwareIntrinsics.X86
 
             var test = new SimpleBinaryOpTest__CeilingScalarSingle();
 
-            fixed (Vector128<Single>* pFld1 = &test._fld1)fixed (
-                Vector128<Single>* pFld2 = &test._fld2
-            ) {
+            fixed (Vector128<Single>* pFld1 = &test._fld1)
+            fixed (Vector128<Single>* pFld2 = &test._fld2)
+            {
                 var result = Sse41.CeilingScalar(
                     Sse.LoadVector128((Single*)(pFld1)),
                     Sse.LoadVector128((Single*)(pFld2))
@@ -536,7 +537,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector128<Single>* pFld1 = &_fld1)fixed (Vector128<Single>* pFld2 = &_fld2)
+            fixed (Vector128<Single>* pFld1 = &_fld1)
+            fixed (Vector128<Single>* pFld2 = &_fld2)
             {
                 var result = Sse41.CeilingScalar(
                     Sse.LoadVector128((Single*)(pFld1)),

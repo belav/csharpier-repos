@@ -231,7 +231,8 @@ namespace JIT.HardwareIntrinsics.X86
             public void RunStructFldScenario_Load(
                 SimpleBinaryOpTest__CompareNotGreaterThanSingle testClass
             ) {
-                fixed (Vector256<Single>* pFld1 = &_fld1)fixed (Vector256<Single>* pFld2 = &_fld2)
+                fixed (Vector256<Single>* pFld1 = &_fld1)
+                fixed (Vector256<Single>* pFld2 = &_fld2)
                 {
                     var result = Avx.CompareNotGreaterThan(
                         Avx.LoadVector256((Single*)(pFld1)),
@@ -445,9 +446,9 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector256<Single>* pClsVar1 = &_clsVar1)fixed (
-                Vector256<Single>* pClsVar2 = &_clsVar2
-            ) {
+            fixed (Vector256<Single>* pClsVar1 = &_clsVar1)
+            fixed (Vector256<Single>* pClsVar2 = &_clsVar2)
+            {
                 var result = Avx.CompareNotGreaterThan(
                     Avx.LoadVector256((Single*)(pClsVar1)),
                     Avx.LoadVector256((Single*)(pClsVar2))
@@ -511,9 +512,9 @@ namespace JIT.HardwareIntrinsics.X86
 
             var test = new SimpleBinaryOpTest__CompareNotGreaterThanSingle();
 
-            fixed (Vector256<Single>* pFld1 = &test._fld1)fixed (
-                Vector256<Single>* pFld2 = &test._fld2
-            ) {
+            fixed (Vector256<Single>* pFld1 = &test._fld1)
+            fixed (Vector256<Single>* pFld2 = &test._fld2)
+            {
                 var result = Avx.CompareNotGreaterThan(
                     Avx.LoadVector256((Single*)(pFld1)),
                     Avx.LoadVector256((Single*)(pFld2))
@@ -538,7 +539,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector256<Single>* pFld1 = &_fld1)fixed (Vector256<Single>* pFld2 = &_fld2)
+            fixed (Vector256<Single>* pFld1 = &_fld1)
+            fixed (Vector256<Single>* pFld2 = &_fld2)
             {
                 var result = Avx.CompareNotGreaterThan(
                     Avx.LoadVector256((Single*)(pFld1)),

@@ -219,7 +219,8 @@ namespace JIT.HardwareIntrinsics.X86
             public void RunStructFldScenario_Load(
                 BooleanBinaryOpTest__TestNotZAndNotCByte testClass
             ) {
-                fixed (Vector256<Byte>* pFld1 = &_fld1)fixed (Vector256<Byte>* pFld2 = &_fld2)
+                fixed (Vector256<Byte>* pFld1 = &_fld1)
+                fixed (Vector256<Byte>* pFld2 = &_fld2)
                 {
                     var result = Avx.TestNotZAndNotC(
                         Avx.LoadVector256((Byte*)(pFld1)),
@@ -418,9 +419,9 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector256<Byte>* pClsVar1 = &_clsVar1)fixed (
-                Vector256<Byte>* pClsVar2 = &_clsVar2
-            ) {
+            fixed (Vector256<Byte>* pClsVar1 = &_clsVar1)
+            fixed (Vector256<Byte>* pClsVar2 = &_clsVar2)
+            {
                 var result = Avx.TestNotZAndNotC(
                     Avx.LoadVector256((Byte*)(pClsVar1)),
                     Avx.LoadVector256((Byte*)(pClsVar2))
@@ -479,7 +480,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             var test = new BooleanBinaryOpTest__TestNotZAndNotCByte();
 
-            fixed (Vector256<Byte>* pFld1 = &test._fld1)fixed (Vector256<Byte>* pFld2 = &test._fld2)
+            fixed (Vector256<Byte>* pFld1 = &test._fld1)
+            fixed (Vector256<Byte>* pFld2 = &test._fld2)
             {
                 var result = Avx.TestNotZAndNotC(
                     Avx.LoadVector256((Byte*)(pFld1)),
@@ -503,7 +505,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector256<Byte>* pFld1 = &_fld1)fixed (Vector256<Byte>* pFld2 = &_fld2)
+            fixed (Vector256<Byte>* pFld1 = &_fld1)
+            fixed (Vector256<Byte>* pFld2 = &_fld2)
             {
                 var result = Avx.TestNotZAndNotC(
                     Avx.LoadVector256((Byte*)(pFld1)),

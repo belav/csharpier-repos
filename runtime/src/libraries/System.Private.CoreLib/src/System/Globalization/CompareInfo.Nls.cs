@@ -71,9 +71,9 @@ namespace System.Globalization
             Debug.Assert(!source.IsEmpty);
             Debug.Assert(!value.IsEmpty);
 
-            fixed (char* pSource = &MemoryMarshal.GetReference(source))fixed (
-                char* pValue = &MemoryMarshal.GetReference(value)
-            ) {
+            fixed (char* pSource = &MemoryMarshal.GetReference(source))
+            fixed (char* pValue = &MemoryMarshal.GetReference(value))
+            {
                 Debug.Assert(pSource != null);
                 Debug.Assert(pValue != null);
 
@@ -248,7 +248,8 @@ namespace System.Globalization
             Debug.Assert(count1 > 0);
             Debug.Assert(count2 > 0);
 
-            fixed (char* char1 = &string1)fixed (char* char2 = &string2)
+            fixed (char* char1 = &string1)
+            fixed (char* char2 = &string2)
             {
                 Debug.Assert(char1 != null);
                 Debug.Assert(char2 != null);
@@ -296,9 +297,9 @@ namespace System.Globalization
                 string2 = string.Empty;
             }
 
-            fixed (char* pLocaleName = localeName)fixed (
-                char* pString1 = &MemoryMarshal.GetReference(string1)
-            )fixed (char* pString2 = &MemoryMarshal.GetReference(string2))
+            fixed (char* pLocaleName = localeName)
+            fixed (char* pString1 = &MemoryMarshal.GetReference(string1))
+            fixed (char* pString2 = &MemoryMarshal.GetReference(string2))
             {
                 Debug.Assert(*pString1 >= 0); // assert that we can always dereference this
                 Debug.Assert(*pString2 >= 0); // assert that we can always dereference this
@@ -349,9 +350,9 @@ namespace System.Globalization
                 lpStringSourceLength = -1;
             }
 
-            fixed (char* pLocaleName = localeName)fixed (
-                char* pSource = &MemoryMarshal.GetReference(lpStringSource)
-            )fixed (char* pValue = &MemoryMarshal.GetReference(lpStringValue))
+            fixed (char* pLocaleName = localeName)
+            fixed (char* pSource = &MemoryMarshal.GetReference(lpStringSource))
+            fixed (char* pValue = &MemoryMarshal.GetReference(lpStringValue))
             {
                 Debug.Assert(pSource != null && pValue != null);
 
@@ -585,9 +586,9 @@ namespace System.Globalization
 
             int actualSortKeyLength;
 
-            fixed (char* pSource = &MemoryMarshal.GetReference(source))fixed (
-                byte* pSortKey = &MemoryMarshal.GetReference(destination)
-            ) {
+            fixed (char* pSource = &MemoryMarshal.GetReference(source))
+            fixed (byte* pSortKey = &MemoryMarshal.GetReference(destination))
+            {
                 Debug.Assert(pSource != null);
                 Debug.Assert(pSortKey != null);
 

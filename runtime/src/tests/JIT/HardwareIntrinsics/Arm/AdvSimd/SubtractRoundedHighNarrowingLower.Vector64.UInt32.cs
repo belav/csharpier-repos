@@ -222,7 +222,8 @@ namespace JIT.HardwareIntrinsics.Arm
             public void RunStructFldScenario_Load(
                 SimpleBinaryOpTest__SubtractRoundedHighNarrowingLower_Vector64_UInt32 testClass
             ) {
-                fixed (Vector128<UInt64>* pFld1 = &_fld1)fixed (Vector128<UInt64>* pFld2 = &_fld2)
+                fixed (Vector128<UInt64>* pFld1 = &_fld1)
+                fixed (Vector128<UInt64>* pFld2 = &_fld2)
                 {
                     var result = AdvSimd.SubtractRoundedHighNarrowingLower(
                         AdvSimd.LoadVector128((UInt64*)(pFld1)),
@@ -402,9 +403,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector128<UInt64>* pClsVar1 = &_clsVar1)fixed (
-                Vector128<UInt64>* pClsVar2 = &_clsVar2
-            ) {
+            fixed (Vector128<UInt64>* pClsVar1 = &_clsVar1)
+            fixed (Vector128<UInt64>* pClsVar2 = &_clsVar2)
+            {
                 var result = AdvSimd.SubtractRoundedHighNarrowingLower(
                     AdvSimd.LoadVector128((UInt64*)(pClsVar1)),
                     AdvSimd.LoadVector128((UInt64*)(pClsVar2))
@@ -456,9 +457,9 @@ namespace JIT.HardwareIntrinsics.Arm
 
             var test = new SimpleBinaryOpTest__SubtractRoundedHighNarrowingLower_Vector64_UInt32();
 
-            fixed (Vector128<UInt64>* pFld1 = &test._fld1)fixed (
-                Vector128<UInt64>* pFld2 = &test._fld2
-            ) {
+            fixed (Vector128<UInt64>* pFld1 = &test._fld1)
+            fixed (Vector128<UInt64>* pFld2 = &test._fld2)
+            {
                 var result = AdvSimd.SubtractRoundedHighNarrowingLower(
                     AdvSimd.LoadVector128((UInt64*)(pFld1)),
                     AdvSimd.LoadVector128((UInt64*)(pFld2))
@@ -483,7 +484,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector128<UInt64>* pFld1 = &_fld1)fixed (Vector128<UInt64>* pFld2 = &_fld2)
+            fixed (Vector128<UInt64>* pFld1 = &_fld1)
+            fixed (Vector128<UInt64>* pFld2 = &_fld2)
             {
                 var result = AdvSimd.SubtractRoundedHighNarrowingLower(
                     AdvSimd.LoadVector128((UInt64*)(pFld1)),

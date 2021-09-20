@@ -428,13 +428,8 @@ namespace System
                     );
 
             Array? array = null;
-            fixed (int* pLengths = &lengths[0])InternalCreate(
-                ref array,
-                runtimeType._impl.Value,
-                lengths.Length,
-                pLengths,
-                null
-            );
+            fixed (int* pLengths = &lengths[0])
+            InternalCreate(ref array, runtimeType._impl.Value, lengths.Length, pLengths, null);
             GC.KeepAlive(runtimeType);
             return array;
         }
@@ -471,9 +466,9 @@ namespace System
                 );
 
             Array? array = null;
-            fixed (int* pLengths = &lengths[0])fixed (
-                int* pLowerBounds = &lowerBounds[0]
-            )InternalCreate(
+            fixed (int* pLengths = &lengths[0])
+            fixed (int* pLowerBounds = &lowerBounds[0])
+            InternalCreate(
                 ref array,
                 runtimeType._impl.Value,
                 lengths.Length,

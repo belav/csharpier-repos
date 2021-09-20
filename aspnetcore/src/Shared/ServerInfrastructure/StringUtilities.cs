@@ -88,7 +88,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
 
             var resultString = new string('\0', span.Length);
 
-            fixed (char* output = resultString)fixed (byte* buffer = span)
+            fixed (char* output = resultString)
+            fixed (byte* buffer = span)
             {
                 // This returns false if there are any null (0 byte) characters in the string.
                 if (!TryGetLatin1String(buffer, output, span.Length))

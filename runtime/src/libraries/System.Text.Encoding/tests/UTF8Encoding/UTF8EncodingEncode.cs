@@ -1219,7 +1219,8 @@ namespace System.Text.Tests
             Assert.Equal(7, encoding.GetBytes(c, 0, 5, new byte[7], 0));
 
             byte[] b = new byte[8];
-            fixed (char* pChar = c)fixed (byte* pByte = b)
+            fixed (char* pChar = c)
+            fixed (byte* pByte = b)
             {
                 Assert.Equal(4, encoding.GetBytes(pChar, 2, pByte, 4));
                 Assert.Equal(5, encoding.GetBytes(pChar, 3, pByte, 5));
@@ -1295,7 +1296,8 @@ namespace System.Text.Tests
             int byteCount
         ) {
             Encoding encoding = Encoding.UTF8;
-            fixed (char* pChar = c)fixed (byte* pByte = b)
+            fixed (char* pChar = c)
+            fixed (byte* pByte = b)
             {
                 Assert.Equal(byteCount, encoding.GetBytes(pChar, charCount, pByte, byteCount));
             }

@@ -183,7 +183,8 @@ namespace System.Reflection
                 if (largeResult != null)
                     return largeResult[index];
 
-                fixed (int* p = smallResult)return p[index];
+                fixed (int* p = smallResult)
+                return p[index];
             }
         }
     }

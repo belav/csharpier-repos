@@ -120,7 +120,8 @@ namespace Internal.Cryptography
                 return 0;
             }
 
-            fixed (byte* pInput = input)fixed (byte* pOutput = output)
+            fixed (byte* pInput = input)
+            fixed (byte* pOutput = output)
             {
                 ret = Interop.AppleCrypto.CryptorUpdate(
                     _cryptor,
@@ -146,7 +147,8 @@ namespace Internal.Cryptography
 
             byte[]? iv = IV;
 
-            fixed (byte* pbKey = _key)fixed (byte* pbIv = iv)
+            fixed (byte* pbKey = _key)
+            fixed (byte* pbIv = iv)
             {
                 ret = Interop.AppleCrypto.CryptorCreate(
                     _encrypting

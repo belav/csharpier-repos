@@ -537,11 +537,13 @@ namespace System.Security.Cryptography
         {
             RSAParameters rsaParameters = ExportParameters(true);
 
-            fixed (byte* dPin = rsaParameters.D)fixed (byte* pPin = rsaParameters.P)fixed (
-                byte* qPin = rsaParameters.Q
-            )fixed (byte* dpPin = rsaParameters.DP)fixed (byte* dqPin = rsaParameters.DQ)fixed (
-                byte* qInvPin = rsaParameters.InverseQ
-            ) {
+            fixed (byte* dPin = rsaParameters.D)
+            fixed (byte* pPin = rsaParameters.P)
+            fixed (byte* qPin = rsaParameters.Q)
+            fixed (byte* dpPin = rsaParameters.DP)
+            fixed (byte* dqPin = rsaParameters.DQ)
+            fixed (byte* qInvPin = rsaParameters.InverseQ)
+            {
                 try
                 {
                     return RSAKeyFormatHelper.WritePkcs1PrivateKey(rsaParameters);
@@ -640,13 +642,13 @@ namespace System.Security.Cryptography
                             out RSAParameters rsaParameters
                         );
 
-                        fixed (byte* dPin = rsaParameters.D)fixed (
-                            byte* pPin = rsaParameters.P
-                        )fixed (byte* qPin = rsaParameters.Q)fixed (
-                            byte* dpPin = rsaParameters.DP
-                        )fixed (byte* dqPin = rsaParameters.DQ)fixed (
-                            byte* qInvPin = rsaParameters.InverseQ
-                        ) {
+                        fixed (byte* dPin = rsaParameters.D)
+                        fixed (byte* pPin = rsaParameters.P)
+                        fixed (byte* qPin = rsaParameters.Q)
+                        fixed (byte* dpPin = rsaParameters.DP)
+                        fixed (byte* dqPin = rsaParameters.DQ)
+                        fixed (byte* qInvPin = rsaParameters.InverseQ)
+                        {
                             try
                             {
                                 ImportParameters(rsaParameters);
@@ -700,9 +702,12 @@ namespace System.Security.Cryptography
                 out RSAParameters ret
             );
 
-            fixed (byte* dPin = ret.D)fixed (byte* pPin = ret.P)fixed (byte* qPin = ret.Q)fixed (
-                byte* dpPin = ret.DP
-            )fixed (byte* dqPin = ret.DQ)fixed (byte* qInvPin = ret.InverseQ)
+            fixed (byte* dPin = ret.D)
+            fixed (byte* pPin = ret.P)
+            fixed (byte* qPin = ret.Q)
+            fixed (byte* dpPin = ret.DP)
+            fixed (byte* dqPin = ret.DQ)
+            fixed (byte* qInvPin = ret.InverseQ)
             {
                 try
                 {
@@ -730,9 +735,12 @@ namespace System.Security.Cryptography
                 out RSAParameters ret
             );
 
-            fixed (byte* dPin = ret.D)fixed (byte* pPin = ret.P)fixed (byte* qPin = ret.Q)fixed (
-                byte* dpPin = ret.DP
-            )fixed (byte* dqPin = ret.DQ)fixed (byte* qInvPin = ret.InverseQ)
+            fixed (byte* dPin = ret.D)
+            fixed (byte* pPin = ret.P)
+            fixed (byte* qPin = ret.Q)
+            fixed (byte* dpPin = ret.DP)
+            fixed (byte* dqPin = ret.DQ)
+            fixed (byte* qInvPin = ret.InverseQ)
             {
                 try
                 {

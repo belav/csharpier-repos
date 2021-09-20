@@ -222,7 +222,8 @@ namespace JIT.HardwareIntrinsics.Arm
             public void RunStructFldScenario_Load(
                 InsertScalarTest__InsertScalar_Vector128_Int64_1 testClass
             ) {
-                fixed (Vector128<Int64>* pFld1 = &_fld1)fixed (Vector64<Int64>* pFld2 = &_fld3)
+                fixed (Vector128<Int64>* pFld1 = &_fld1)
+                fixed (Vector64<Int64>* pFld2 = &_fld3)
                 {
                     var result = AdvSimd.InsertScalar(
                         AdvSimd.LoadVector128((Int64*)pFld1),
@@ -408,9 +409,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector128<Int64>* pClsVar1 = &_clsVar1)fixed (
-                Vector64<Int64>* pClsVar3 = &_clsVar3
-            ) {
+            fixed (Vector128<Int64>* pClsVar1 = &_clsVar1)
+            fixed (Vector64<Int64>* pClsVar3 = &_clsVar3)
+            {
                 var result = AdvSimd.InsertScalar(
                     AdvSimd.LoadVector128((Int64*)(pClsVar1)),
                     1,
@@ -463,9 +464,9 @@ namespace JIT.HardwareIntrinsics.Arm
 
             var test = new InsertScalarTest__InsertScalar_Vector128_Int64_1();
 
-            fixed (Vector128<Int64>* pFld1 = &test._fld1)fixed (
-                Vector64<Int64>* pFld2 = &test._fld3
-            ) {
+            fixed (Vector128<Int64>* pFld1 = &test._fld1)
+            fixed (Vector64<Int64>* pFld2 = &test._fld3)
+            {
                 var result = AdvSimd.InsertScalar(
                     AdvSimd.LoadVector128((Int64*)pFld1),
                     1,
@@ -491,7 +492,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector128<Int64>* pFld1 = &_fld1)fixed (Vector64<Int64>* pFld2 = &_fld3)
+            fixed (Vector128<Int64>* pFld1 = &_fld1)
+            fixed (Vector64<Int64>* pFld2 = &_fld3)
             {
                 var result = AdvSimd.InsertScalar(
                     AdvSimd.LoadVector128((Int64*)pFld1),

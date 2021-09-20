@@ -225,7 +225,8 @@ namespace Microsoft.AspNetCore.Http2Cat
 
             var asciiString = new string('\0', span.Length);
 
-            fixed (char* output = asciiString)fixed (byte* buffer = span)
+            fixed (char* output = asciiString)
+            fixed (byte* buffer = span)
             {
                 // This version if AsciiUtilities returns null if there are any null (0 byte) characters
                 // in the string
@@ -246,7 +247,8 @@ namespace Microsoft.AspNetCore.Http2Cat
 
             var resultString = new string('\0', span.Length);
 
-            fixed (char* output = resultString)fixed (byte* buffer = span)
+            fixed (char* output = resultString)
+            fixed (byte* buffer = span)
             {
                 // This version if AsciiUtilities returns null if there are any null (0 byte) characters
                 // in the string

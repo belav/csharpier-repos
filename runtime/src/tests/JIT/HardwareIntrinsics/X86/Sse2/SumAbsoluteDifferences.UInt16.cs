@@ -231,7 +231,8 @@ namespace JIT.HardwareIntrinsics.X86
             public void RunStructFldScenario_Load(
                 SimpleBinaryOpTest__SumAbsoluteDifferencesUInt16 testClass
             ) {
-                fixed (Vector128<Byte>* pFld1 = &_fld1)fixed (Vector128<Byte>* pFld2 = &_fld2)
+                fixed (Vector128<Byte>* pFld1 = &_fld1)
+                fixed (Vector128<Byte>* pFld2 = &_fld2)
                 {
                     var result = Sse2.SumAbsoluteDifferences(
                         Sse2.LoadVector128((Byte*)(pFld1)),
@@ -445,9 +446,9 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector128<Byte>* pClsVar1 = &_clsVar1)fixed (
-                Vector128<Byte>* pClsVar2 = &_clsVar2
-            ) {
+            fixed (Vector128<Byte>* pClsVar1 = &_clsVar1)
+            fixed (Vector128<Byte>* pClsVar2 = &_clsVar2)
+            {
                 var result = Sse2.SumAbsoluteDifferences(
                     Sse2.LoadVector128((Byte*)(pClsVar1)),
                     Sse2.LoadVector128((Byte*)(pClsVar2))
@@ -511,7 +512,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             var test = new SimpleBinaryOpTest__SumAbsoluteDifferencesUInt16();
 
-            fixed (Vector128<Byte>* pFld1 = &test._fld1)fixed (Vector128<Byte>* pFld2 = &test._fld2)
+            fixed (Vector128<Byte>* pFld1 = &test._fld1)
+            fixed (Vector128<Byte>* pFld2 = &test._fld2)
             {
                 var result = Sse2.SumAbsoluteDifferences(
                     Sse2.LoadVector128((Byte*)(pFld1)),
@@ -537,7 +539,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector128<Byte>* pFld1 = &_fld1)fixed (Vector128<Byte>* pFld2 = &_fld2)
+            fixed (Vector128<Byte>* pFld1 = &_fld1)
+            fixed (Vector128<Byte>* pFld2 = &_fld2)
             {
                 var result = Sse2.SumAbsoluteDifferences(
                     Sse2.LoadVector128((Byte*)(pFld1)),

@@ -166,7 +166,8 @@ namespace System.Text
                 bytes = new byte[1];
 
             // Just call pointer version
-            fixed (char* pChars = &chars[0])fixed (byte* pBytes = &bytes[0])
+            fixed (char* pChars = &chars[0])
+            fixed (byte* pBytes = &bytes[0])
             // Remember that charCount is # to decode, not size of array.
             return GetBytes(pChars + charIndex, charCount, pBytes + byteIndex, byteCount, flush);
         }

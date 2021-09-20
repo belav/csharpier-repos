@@ -20,7 +20,8 @@ namespace System.Globalization
             Debug.Assert(value != null);
             Debug.Assert(startIndex >= 0 && startIndex < source.Length);
 
-            fixed (char* pSource = source)fixed (char* pValue = value)
+            fixed (char* pSource = source)
+            fixed (char* pValue = value)
             {
                 char* pSrc = &pSource[startIndex];
                 int index = InvariantFindString(
@@ -48,9 +49,9 @@ namespace System.Globalization
             Debug.Assert(source.Length != 0);
             Debug.Assert(value.Length != 0);
 
-            fixed (char* pSource = &MemoryMarshal.GetReference(source))fixed (
-                char* pValue = &MemoryMarshal.GetReference(value)
-            ) {
+            fixed (char* pSource = &MemoryMarshal.GetReference(source))
+            fixed (char* pValue = &MemoryMarshal.GetReference(value))
+            {
                 return InvariantFindString(
                     pSource,
                     source.Length,
@@ -73,7 +74,8 @@ namespace System.Globalization
             Debug.Assert(value != null);
             Debug.Assert(startIndex >= 0 && startIndex < source.Length);
 
-            fixed (char* pSource = source)fixed (char* pValue = value)
+            fixed (char* pSource = source)
+            fixed (char* pValue = value)
             {
                 char* pSrc = &pSource[startIndex - count + 1];
                 int index = InvariantFindString(

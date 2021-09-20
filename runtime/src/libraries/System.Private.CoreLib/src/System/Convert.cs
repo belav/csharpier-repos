@@ -2569,9 +2569,9 @@ namespace System
             );
             unsafe
             {
-                fixed (byte* bytesPtr = &MemoryMarshal.GetReference(bytes))fixed (
-                    char* charsPtr = result
-                ) {
+                fixed (byte* bytesPtr = &MemoryMarshal.GetReference(bytes))
+                fixed (char* charsPtr = result)
+                {
                     int charsWritten = ConvertToBase64Array(
                         charsPtr,
                         bytesPtr,
@@ -2723,9 +2723,9 @@ namespace System
                 return false;
             }
 
-            fixed (char* outChars = &MemoryMarshal.GetReference(chars))fixed (
-                byte* inData = &MemoryMarshal.GetReference(bytes)
-            ) {
+            fixed (char* outChars = &MemoryMarshal.GetReference(chars))
+            fixed (byte* inData = &MemoryMarshal.GetReference(bytes))
+            {
                 charsWritten = ConvertToBase64Array(
                     outChars,
                     inData,

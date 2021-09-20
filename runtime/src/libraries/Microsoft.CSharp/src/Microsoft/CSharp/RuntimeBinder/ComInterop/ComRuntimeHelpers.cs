@@ -320,9 +320,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         ) {
             Guid IID_NULL = default;
 
-            fixed (ComTypes.DISPPARAMS* pDispParams = &dispParams)fixed (
-                Variant* pResult = &result
-            )fixed (ExcepInfo* pExcepInfo = &excepInfo)fixed (uint* pArgErr = &argErr)
+            fixed (ComTypes.DISPPARAMS* pDispParams = &dispParams)
+            fixed (Variant* pResult = &result)
+            fixed (ExcepInfo* pExcepInfo = &excepInfo)
+            fixed (uint* pArgErr = &argErr)
             {
                 var pfnIDispatchInvoke = (delegate* unmanaged<
                     IntPtr,

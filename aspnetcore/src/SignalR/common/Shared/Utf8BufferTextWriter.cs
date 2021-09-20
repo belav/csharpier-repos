@@ -195,9 +195,9 @@ namespace Microsoft.AspNetCore.Internal
 #else
                 unsafe
                 {
-                    fixed (char* sourceChars = &MemoryMarshal.GetReference(buffer))fixed (
-                        byte* destinationBytes = &MemoryMarshal.GetReference(destination)
-                    ) {
+                    fixed (char* sourceChars = &MemoryMarshal.GetReference(buffer))
+                    fixed (byte* destinationBytes = &MemoryMarshal.GetReference(destination))
+                    {
                         _encoder.Convert(
                             sourceChars,
                             buffer.Length,

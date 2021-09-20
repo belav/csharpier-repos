@@ -60,9 +60,9 @@ namespace System.Text.Unicode
             _ = source.Length;
             _ = destination.Length;
 
-            fixed (char* pOriginalSource = &MemoryMarshal.GetReference(source))fixed (
-                byte* pOriginalDestination = &MemoryMarshal.GetReference(destination)
-            ) {
+            fixed (char* pOriginalSource = &MemoryMarshal.GetReference(source))
+            fixed (byte* pOriginalDestination = &MemoryMarshal.GetReference(destination))
+            {
                 // We're going to bulk transcode as much as we can in a loop, iterating
                 // every time we see bad data that requires replacement.
 
@@ -179,9 +179,9 @@ namespace System.Text.Unicode
 
             // We'll be mutating these values throughout our loop.
 
-            fixed (byte* pOriginalSource = &MemoryMarshal.GetReference(source))fixed (
-                char* pOriginalDestination = &MemoryMarshal.GetReference(destination)
-            ) {
+            fixed (byte* pOriginalSource = &MemoryMarshal.GetReference(source))
+            fixed (char* pOriginalDestination = &MemoryMarshal.GetReference(destination))
+            {
                 // We're going to bulk transcode as much as we can in a loop, iterating
                 // every time we see bad data that requires replacement.
 

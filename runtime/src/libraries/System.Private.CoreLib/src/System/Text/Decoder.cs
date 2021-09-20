@@ -233,9 +233,9 @@ namespace System.Text
 
         public virtual unsafe int GetChars(ReadOnlySpan<byte> bytes, Span<char> chars, bool flush)
         {
-            fixed (byte* bytesPtr = &MemoryMarshal.GetNonNullPinnableReference(bytes))fixed (
-                char* charsPtr = &MemoryMarshal.GetNonNullPinnableReference(chars)
-            ) {
+            fixed (byte* bytesPtr = &MemoryMarshal.GetNonNullPinnableReference(bytes))
+            fixed (char* charsPtr = &MemoryMarshal.GetNonNullPinnableReference(chars))
+            {
                 return GetChars(bytesPtr, bytes.Length, charsPtr, chars.Length, flush);
             }
         }
@@ -385,9 +385,9 @@ namespace System.Text
             out int charsUsed,
             out bool completed
         ) {
-            fixed (byte* bytesPtr = &MemoryMarshal.GetNonNullPinnableReference(bytes))fixed (
-                char* charsPtr = &MemoryMarshal.GetNonNullPinnableReference(chars)
-            ) {
+            fixed (byte* bytesPtr = &MemoryMarshal.GetNonNullPinnableReference(bytes))
+            fixed (char* charsPtr = &MemoryMarshal.GetNonNullPinnableReference(chars))
+            {
                 Convert(
                     bytesPtr,
                     bytes.Length,

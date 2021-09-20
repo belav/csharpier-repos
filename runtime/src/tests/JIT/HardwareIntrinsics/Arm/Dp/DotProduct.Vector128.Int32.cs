@@ -251,9 +251,9 @@ namespace JIT.HardwareIntrinsics.Arm
             public void RunStructFldScenario_Load(
                 SimpleTernaryOpTest__DotProduct_Vector128_Int32 testClass
             ) {
-                fixed (Vector128<Int32>* pFld1 = &_fld1)fixed (
-                    Vector128<SByte>* pFld2 = &_fld2
-                )fixed (Vector128<SByte>* pFld3 = &_fld3)
+                fixed (Vector128<Int32>* pFld1 = &_fld1)
+                fixed (Vector128<SByte>* pFld2 = &_fld2)
+                fixed (Vector128<SByte>* pFld3 = &_fld3)
                 {
                     var result = Dp.DotProduct(
                         AdvSimd.LoadVector128((Int32*)(pFld1)),
@@ -496,9 +496,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector128<Int32>* pClsVar1 = &_clsVar1)fixed (
-                Vector128<SByte>* pClsVar2 = &_clsVar2
-            )fixed (Vector128<SByte>* pClsVar3 = &_clsVar3)
+            fixed (Vector128<Int32>* pClsVar1 = &_clsVar1)
+            fixed (Vector128<SByte>* pClsVar2 = &_clsVar2)
+            fixed (Vector128<SByte>* pClsVar3 = &_clsVar3)
             {
                 var result = Dp.DotProduct(
                     AdvSimd.LoadVector128((Int32*)(pClsVar1)),
@@ -554,9 +554,9 @@ namespace JIT.HardwareIntrinsics.Arm
 
             var test = new SimpleTernaryOpTest__DotProduct_Vector128_Int32();
 
-            fixed (Vector128<Int32>* pFld1 = &test._fld1)fixed (
-                Vector128<SByte>* pFld2 = &test._fld2
-            )fixed (Vector128<SByte>* pFld3 = &test._fld3)
+            fixed (Vector128<Int32>* pFld1 = &test._fld1)
+            fixed (Vector128<SByte>* pFld2 = &test._fld2)
+            fixed (Vector128<SByte>* pFld3 = &test._fld3)
             {
                 var result = Dp.DotProduct(
                     AdvSimd.LoadVector128((Int32*)(pFld1)),
@@ -583,9 +583,10 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector128<Int32>* pFld1 = &_fld1)fixed (Vector128<SByte>* pFld2 = &_fld2)fixed (
-                Vector128<SByte>* pFld3 = &_fld3
-            ) {
+            fixed (Vector128<Int32>* pFld1 = &_fld1)
+            fixed (Vector128<SByte>* pFld2 = &_fld2)
+            fixed (Vector128<SByte>* pFld3 = &_fld3)
+            {
                 var result = Dp.DotProduct(
                     AdvSimd.LoadVector128((Int32*)(pFld1)),
                     AdvSimd.LoadVector128((SByte*)(pFld2)),

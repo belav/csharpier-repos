@@ -146,7 +146,8 @@ namespace System.Diagnostics.Tracing
                     );
                 }
 
-                fixed (char* outputFilePath = outputFile)fixed (
+                fixed (char* outputFilePath = outputFile)
+                fixed (
                     EventPipeProviderConfigurationNative* providersNativePointer = providersNative
                 ) {
                     return Enable(

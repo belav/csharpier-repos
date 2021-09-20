@@ -223,7 +223,8 @@ namespace JIT.HardwareIntrinsics.Arm
             public void RunStructFldScenario_Load(
                 ImmBinaryOpTest__MultiplyScalarBySelectedScalar_Vector64_Double_Vector128_Double_1 testClass
             ) {
-                fixed (Vector64<Double>* pFld1 = &_fld1)fixed (Vector128<Double>* pFld2 = &_fld2)
+                fixed (Vector64<Double>* pFld1 = &_fld1)
+                fixed (Vector128<Double>* pFld2 = &_fld2)
                 {
                     var result = AdvSimd.Arm64.MultiplyScalarBySelectedScalar(
                         AdvSimd.LoadVector64((Double*)(pFld1)),
@@ -409,9 +410,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector64<Double>* pClsVar1 = &_clsVar1)fixed (
-                Vector128<Double>* pClsVar2 = &_clsVar2
-            ) {
+            fixed (Vector64<Double>* pClsVar1 = &_clsVar1)
+            fixed (Vector128<Double>* pClsVar2 = &_clsVar2)
+            {
                 var result = AdvSimd.Arm64.MultiplyScalarBySelectedScalar(
                     AdvSimd.LoadVector64((Double*)(pClsVar1)),
                     AdvSimd.LoadVector128((Double*)(pClsVar2)),
@@ -465,9 +466,9 @@ namespace JIT.HardwareIntrinsics.Arm
             var test =
                 new ImmBinaryOpTest__MultiplyScalarBySelectedScalar_Vector64_Double_Vector128_Double_1();
 
-            fixed (Vector64<Double>* pFld1 = &test._fld1)fixed (
-                Vector128<Double>* pFld2 = &test._fld2
-            ) {
+            fixed (Vector64<Double>* pFld1 = &test._fld1)
+            fixed (Vector128<Double>* pFld2 = &test._fld2)
+            {
                 var result = AdvSimd.Arm64.MultiplyScalarBySelectedScalar(
                     AdvSimd.LoadVector64((Double*)(pFld1)),
                     AdvSimd.LoadVector128((Double*)(pFld2)),
@@ -493,7 +494,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector64<Double>* pFld1 = &_fld1)fixed (Vector128<Double>* pFld2 = &_fld2)
+            fixed (Vector64<Double>* pFld1 = &_fld1)
+            fixed (Vector128<Double>* pFld2 = &_fld2)
             {
                 var result = AdvSimd.Arm64.MultiplyScalarBySelectedScalar(
                     AdvSimd.LoadVector64((Double*)(pFld1)),

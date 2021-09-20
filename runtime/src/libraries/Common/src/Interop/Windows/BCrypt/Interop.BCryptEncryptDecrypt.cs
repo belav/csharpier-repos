@@ -20,7 +20,8 @@ internal static partial class Interop
         ) {
             unsafe
             {
-                fixed (byte* pbInput = input)fixed (byte* pbOutput = output)
+                fixed (byte* pbInput = input)
+                fixed (byte* pbOutput = output)
                 {
                     int cbResult;
                     NTSTATUS ntStatus = BCryptEncrypt(
@@ -55,7 +56,8 @@ internal static partial class Interop
         ) {
             unsafe
             {
-                fixed (byte* pbInput = input)fixed (byte* pbOutput = output)
+                fixed (byte* pbInput = input)
+                fixed (byte* pbOutput = output)
                 {
                     int cbResult;
                     NTSTATUS ntStatus = BCryptDecrypt(

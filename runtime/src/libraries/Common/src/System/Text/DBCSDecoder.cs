@@ -190,7 +190,8 @@ namespace System.Text
             if (byteCount == 0 && (_leftOverLeadByte == 0 || !flush))
                 return 0;
 
-            fixed (char* pChars = &chars[0])fixed (byte* pBytes = bytes)
+            fixed (char* pChars = &chars[0])
+            fixed (byte* pBytes = bytes)
             {
                 byte dummyByte;
                 byte* pBuffer = pBytes == null ? &dummyByte : pBytes + byteIndex;
@@ -313,7 +314,8 @@ namespace System.Text
                 return;
             }
 
-            fixed (char* pChars = &chars[0])fixed (byte* pBytes = bytes)
+            fixed (char* pChars = &chars[0])
+            fixed (byte* pBytes = bytes)
             {
                 byte dummyByte;
                 byte* pBuffer = pBytes == null ? &dummyByte : pBytes + byteIndex;

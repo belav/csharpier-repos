@@ -65,9 +65,8 @@ namespace System.Text
                 );
 
             // Just call pointer version
-            fixed (
-                byte* pBytes = &MemoryMarshal.GetReference((Span<byte>)bytes)
-            )return GetCharCount(pBytes + index, count, flush);
+            fixed (byte* pBytes = &MemoryMarshal.GetReference((Span<byte>)bytes))
+            return GetCharCount(pBytes + index, count, flush);
         }
 
         public override unsafe int GetCharCount(byte* bytes, int count, bool flush)
@@ -137,9 +136,8 @@ namespace System.Text
             int charCount = chars.Length - charIndex;
 
             // Just call pointer version
-            fixed (byte* pBytes = &MemoryMarshal.GetReference((Span<byte>)bytes))fixed (
-                char* pChars = &MemoryMarshal.GetReference((Span<char>)chars)
-            )
+            fixed (byte* pBytes = &MemoryMarshal.GetReference((Span<byte>)bytes))
+            fixed (char* pChars = &MemoryMarshal.GetReference((Span<char>)chars))
             // Remember that charCount is # to decode, not size of array
             return GetChars(pBytes + byteIndex, byteCount, pChars + charIndex, charCount, flush);
         }

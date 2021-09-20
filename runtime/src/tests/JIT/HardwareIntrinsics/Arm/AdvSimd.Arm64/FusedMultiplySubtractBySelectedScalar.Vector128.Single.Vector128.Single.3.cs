@@ -257,9 +257,9 @@ namespace JIT.HardwareIntrinsics.Arm
             public void RunStructFldScenario_Load(
                 SimpleTernaryOpTest__FusedMultiplySubtractBySelectedScalar_Vector128_Single_Vector128_Single_3 testClass
             ) {
-                fixed (Vector128<Single>* pFld1 = &_fld1)fixed (
-                    Vector128<Single>* pFld2 = &_fld2
-                )fixed (Vector128<Single>* pFld3 = &_fld3)
+                fixed (Vector128<Single>* pFld1 = &_fld1)
+                fixed (Vector128<Single>* pFld2 = &_fld2)
+                fixed (Vector128<Single>* pFld3 = &_fld3)
                 {
                     var result = AdvSimd.Arm64.FusedMultiplySubtractBySelectedScalar(
                         AdvSimd.LoadVector128((Single*)(pFld1)),
@@ -515,9 +515,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector128<Single>* pClsVar1 = &_clsVar1)fixed (
-                Vector128<Single>* pClsVar2 = &_clsVar2
-            )fixed (Vector128<Single>* pClsVar3 = &_clsVar3)
+            fixed (Vector128<Single>* pClsVar1 = &_clsVar1)
+            fixed (Vector128<Single>* pClsVar2 = &_clsVar2)
+            fixed (Vector128<Single>* pClsVar3 = &_clsVar3)
             {
                 var result = AdvSimd.Arm64.FusedMultiplySubtractBySelectedScalar(
                     AdvSimd.LoadVector128((Single*)(pClsVar1)),
@@ -581,9 +581,9 @@ namespace JIT.HardwareIntrinsics.Arm
             var test =
                 new SimpleTernaryOpTest__FusedMultiplySubtractBySelectedScalar_Vector128_Single_Vector128_Single_3();
 
-            fixed (Vector128<Single>* pFld1 = &test._fld1)fixed (
-                Vector128<Single>* pFld2 = &test._fld2
-            )fixed (Vector128<Single>* pFld3 = &test._fld3)
+            fixed (Vector128<Single>* pFld1 = &test._fld1)
+            fixed (Vector128<Single>* pFld2 = &test._fld2)
+            fixed (Vector128<Single>* pFld3 = &test._fld3)
             {
                 var result = AdvSimd.Arm64.FusedMultiplySubtractBySelectedScalar(
                     AdvSimd.LoadVector128((Single*)(pFld1)),
@@ -616,9 +616,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector128<Single>* pFld1 = &_fld1)fixed (
-                Vector128<Single>* pFld2 = &_fld2
-            )fixed (Vector128<Single>* pFld3 = &_fld3)
+            fixed (Vector128<Single>* pFld1 = &_fld1)
+            fixed (Vector128<Single>* pFld2 = &_fld2)
+            fixed (Vector128<Single>* pFld3 = &_fld3)
             {
                 var result = AdvSimd.Arm64.FusedMultiplySubtractBySelectedScalar(
                     AdvSimd.LoadVector128((Single*)(pFld1)),

@@ -123,9 +123,8 @@ namespace System.Text
             int byteCount = bytes.Length - byteIndex;
 
             // Just call pointer version
-            fixed (char* pChars = &MemoryMarshal.GetReference((Span<char>)chars))fixed (
-                byte* pBytes = &MemoryMarshal.GetReference((Span<byte>)bytes)
-            )
+            fixed (char* pChars = &MemoryMarshal.GetReference((Span<char>)chars))
+            fixed (byte* pBytes = &MemoryMarshal.GetReference((Span<byte>)bytes))
             // Remember that charCount is # to decode, not size of array.
             return GetBytes(pChars + charIndex, charCount, pBytes + byteIndex, byteCount, flush);
         }

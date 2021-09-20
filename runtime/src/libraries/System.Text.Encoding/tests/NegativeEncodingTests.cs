@@ -270,9 +270,10 @@ namespace System.Text.Tests
             char[] chars = new char[3];
             byte[] bytes = new byte[3];
             byte[] smallBytes = new byte[1];
-            fixed (char* pChars = chars)fixed (byte* pBytes = bytes)fixed (
-                byte* pSmallBytes = smallBytes
-            ) {
+            fixed (char* pChars = chars)
+            fixed (byte* pBytes = bytes)
+            fixed (byte* pSmallBytes = smallBytes)
+            {
                 char* pCharsLocal = pChars;
                 byte* pBytesLocal = pBytes;
                 byte* pSmallBytesLocal = pSmallBytes;
@@ -472,9 +473,10 @@ namespace System.Text.Tests
             byte[] bytes = new byte[encoding.GetMaxByteCount(2)];
             char[] chars = new char[4];
             char[] smallChars = new char[1];
-            fixed (byte* pBytes = bytes)fixed (char* pChars = chars)fixed (
-                char* pSmallChars = smallChars
-            ) {
+            fixed (byte* pBytes = bytes)
+            fixed (char* pChars = chars)
+            fixed (char* pSmallChars = smallChars)
+            {
                 byte* pBytesLocal = pBytes;
                 char* pCharsLocal = pChars;
                 char* pSmallCharsLocal = pSmallChars;
@@ -654,7 +656,8 @@ namespace System.Text.Tests
                 () => encoding.GetBytes(charsArray, index, count, bytes, 0)
             );
 
-            fixed (char* pChars = chars)fixed (byte* pBytes = bytes)
+            fixed (char* pChars = chars)
+            fixed (byte* pBytes = bytes)
             {
                 char* pCharsLocal = pChars;
                 byte* pBytesLocal = pBytes;
@@ -697,7 +700,8 @@ namespace System.Text.Tests
                 () => encoding.GetChars(bytes, index, count, chars, 0)
             );
 
-            fixed (byte* pBytes = bytes)fixed (char* pChars = chars)
+            fixed (byte* pBytes = bytes)
+            fixed (char* pChars = chars)
             {
                 byte* pBytesLocal = pBytes;
                 char* pCharsLocal = pChars;

@@ -252,9 +252,9 @@ namespace JIT.HardwareIntrinsics.Arm
             public void RunStructFldScenario_Load(
                 SimpleTernaryOpTest__SubtractRoundedHighNarrowingUpper_Vector128_UInt16 testClass
             ) {
-                fixed (Vector64<UInt16>* pFld1 = &_fld1)fixed (
-                    Vector128<UInt32>* pFld2 = &_fld2
-                )fixed (Vector128<UInt32>* pFld3 = &_fld3)
+                fixed (Vector64<UInt16>* pFld1 = &_fld1)
+                fixed (Vector128<UInt32>* pFld2 = &_fld2)
+                fixed (Vector128<UInt32>* pFld3 = &_fld3)
                 {
                     var result = AdvSimd.SubtractRoundedHighNarrowingUpper(
                         AdvSimd.LoadVector64((UInt16*)(pFld1)),
@@ -497,9 +497,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector64<UInt16>* pClsVar1 = &_clsVar1)fixed (
-                Vector128<UInt32>* pClsVar2 = &_clsVar2
-            )fixed (Vector128<UInt32>* pClsVar3 = &_clsVar3)
+            fixed (Vector64<UInt16>* pClsVar1 = &_clsVar1)
+            fixed (Vector128<UInt32>* pClsVar2 = &_clsVar2)
+            fixed (Vector128<UInt32>* pClsVar3 = &_clsVar3)
             {
                 var result = AdvSimd.SubtractRoundedHighNarrowingUpper(
                     AdvSimd.LoadVector64((UInt16*)(pClsVar1)),
@@ -561,9 +561,9 @@ namespace JIT.HardwareIntrinsics.Arm
             var test =
                 new SimpleTernaryOpTest__SubtractRoundedHighNarrowingUpper_Vector128_UInt16();
 
-            fixed (Vector64<UInt16>* pFld1 = &test._fld1)fixed (
-                Vector128<UInt32>* pFld2 = &test._fld2
-            )fixed (Vector128<UInt32>* pFld3 = &test._fld3)
+            fixed (Vector64<UInt16>* pFld1 = &test._fld1)
+            fixed (Vector128<UInt32>* pFld2 = &test._fld2)
+            fixed (Vector128<UInt32>* pFld3 = &test._fld3)
             {
                 var result = AdvSimd.SubtractRoundedHighNarrowingUpper(
                     AdvSimd.LoadVector64((UInt16*)(pFld1)),
@@ -590,9 +590,10 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector64<UInt16>* pFld1 = &_fld1)fixed (Vector128<UInt32>* pFld2 = &_fld2)fixed (
-                Vector128<UInt32>* pFld3 = &_fld3
-            ) {
+            fixed (Vector64<UInt16>* pFld1 = &_fld1)
+            fixed (Vector128<UInt32>* pFld2 = &_fld2)
+            fixed (Vector128<UInt32>* pFld3 = &_fld3)
+            {
                 var result = AdvSimd.SubtractRoundedHighNarrowingUpper(
                     AdvSimd.LoadVector64((UInt16*)(pFld1)),
                     AdvSimd.LoadVector128((UInt32*)(pFld2)),

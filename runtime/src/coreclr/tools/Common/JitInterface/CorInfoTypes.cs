@@ -318,9 +318,8 @@ namespace Internal.JitInterface
             {
                 // constLookup is union with runtimeLookup
                 Debug.Assert(sizeof(CORINFO_RUNTIME_LOOKUP) >= sizeof(CORINFO_CONST_LOOKUP));
-                fixed (
-                    CORINFO_RUNTIME_LOOKUP* p = &runtimeLookup
-                )return ref *(CORINFO_CONST_LOOKUP*)p;
+                fixed (CORINFO_RUNTIME_LOOKUP* p = &runtimeLookup)
+                return ref *(CORINFO_CONST_LOOKUP*)p;
             }
         }
     }

@@ -277,7 +277,8 @@ namespace System.Text
                 );
             }
 
-            fixed (char* pChars = chars)fixed (byte* pBytes = bytes)
+            fixed (char* pChars = chars)
+            fixed (byte* pBytes = bytes)
             {
                 return GetBytesCommon(
                     pChars + charIndex,
@@ -292,9 +293,9 @@ namespace System.Text
         {
             // It's ok for us to operate on null / empty spans.
 
-            fixed (char* charsPtr = &MemoryMarshal.GetReference(chars))fixed (
-                byte* bytesPtr = &MemoryMarshal.GetReference(bytes)
-            ) {
+            fixed (char* charsPtr = &MemoryMarshal.GetReference(chars))
+            fixed (byte* bytesPtr = &MemoryMarshal.GetReference(bytes))
+            {
                 return GetBytesCommon(charsPtr, chars.Length, bytesPtr, bytes.Length);
             }
         }
@@ -342,7 +343,8 @@ namespace System.Text
                 );
             }
 
-            fixed (char* pChars = s)fixed (byte* pBytes = bytes)
+            fixed (char* pChars = s)
+            fixed (byte* pBytes = bytes)
             {
                 return GetBytesCommon(
                     pChars + charIndex,
@@ -565,7 +567,8 @@ namespace System.Text
 
             char[] chars = new char[bytes.Length];
 
-            fixed (byte* pBytes = bytes)fixed (char* pChars = chars)
+            fixed (byte* pBytes = bytes)
+            fixed (char* pChars = chars)
             {
                 GetCharsCommon(pBytes, bytes.Length, pChars, chars.Length);
             }
@@ -616,7 +619,8 @@ namespace System.Text
                 );
             }
 
-            fixed (byte* pBytes = bytes)fixed (char* pChars = chars)
+            fixed (byte* pBytes = bytes)
+            fixed (char* pChars = chars)
             {
                 return GetCharsCommon(
                     pBytes + byteIndex,
@@ -659,7 +663,8 @@ namespace System.Text
 
             char[] chars = new char[count];
 
-            fixed (byte* pBytes = bytes)fixed (char* pChars = chars)
+            fixed (byte* pBytes = bytes)
+            fixed (char* pChars = chars)
             {
                 GetCharsCommon(pBytes + index, count, pChars, chars.Length);
             }
@@ -671,9 +676,9 @@ namespace System.Text
         {
             // It's ok for us to pass null pointers down to the workhorse below.
 
-            fixed (byte* bytesPtr = &MemoryMarshal.GetReference(bytes))fixed (
-                char* charsPtr = &MemoryMarshal.GetReference(chars)
-            ) {
+            fixed (byte* bytesPtr = &MemoryMarshal.GetReference(bytes))
+            fixed (char* charsPtr = &MemoryMarshal.GetReference(chars))
+            {
                 return GetCharsCommon(bytesPtr, bytes.Length, charsPtr, chars.Length);
             }
         }
@@ -692,7 +697,8 @@ namespace System.Text
                 {
                     Debug.Assert(chars.Length == args.bytes.Length);
 
-                    fixed (byte* pBytes = args.bytes)fixed (char* pChars = chars)
+                    fixed (byte* pBytes = args.bytes)
+                    fixed (char* pChars = chars)
                     {
                         args.encoding.GetCharsCommon(
                             pBytes,
@@ -738,7 +744,8 @@ namespace System.Text
                 (encoding: this, bytes, index),
                 static (chars, args) =>
                 {
-                    fixed (byte* pBytes = args.bytes)fixed (char* pChars = chars)
+                    fixed (byte* pBytes = args.bytes)
+                    fixed (char* pChars = chars)
                     {
                         args.encoding.GetCharsCommon(
                             pBytes + args.index,

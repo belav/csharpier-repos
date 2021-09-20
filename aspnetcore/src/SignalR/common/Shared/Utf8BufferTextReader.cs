@@ -85,9 +85,9 @@ namespace Microsoft.AspNetCore.SignalR.Internal
 #else
             unsafe
             {
-                fixed (char* destinationChars = &buffer[index])fixed (
-                    byte* sourceBytes = &MemoryMarshal.GetReference(source)
-                ) {
+                fixed (char* destinationChars = &buffer[index])
+                fixed (byte* sourceBytes = &MemoryMarshal.GetReference(source))
+                {
                     _decoder.Convert(
                         sourceBytes,
                         source.Length,

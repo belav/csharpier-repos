@@ -221,7 +221,8 @@ namespace JIT.HardwareIntrinsics.Arm
             public void RunStructFldScenario_Load(
                 StoreBinaryOpTest__StorePair_Vector64_Byte testClass
             ) {
-                fixed (Vector64<Byte>* pFld1 = &_fld1)fixed (Vector64<Byte>* pFld2 = &_fld2)
+                fixed (Vector64<Byte>* pFld1 = &_fld1)
+                fixed (Vector64<Byte>* pFld2 = &_fld2)
                 {
                     AdvSimd.Arm64.StorePair(
                         (Byte*)testClass._dataTable.outArrayPtr,
@@ -395,7 +396,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector64<Byte>* pClsVar1 = &_clsVar1)fixed (Vector64<Byte>* pClsVar2 = &_clsVar2)
+            fixed (Vector64<Byte>* pClsVar1 = &_clsVar1)
+            fixed (Vector64<Byte>* pClsVar2 = &_clsVar2)
             {
                 AdvSimd.Arm64.StorePair(
                     (Byte*)_dataTable.outArrayPtr,
@@ -445,7 +447,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             var test = new StoreBinaryOpTest__StorePair_Vector64_Byte();
 
-            fixed (Vector64<Byte>* pFld1 = &test._fld1)fixed (Vector64<Byte>* pFld2 = &test._fld2)
+            fixed (Vector64<Byte>* pFld1 = &test._fld1)
+            fixed (Vector64<Byte>* pFld2 = &test._fld2)
             {
                 AdvSimd.Arm64.StorePair(
                     (Byte*)_dataTable.outArrayPtr,
@@ -470,7 +473,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector64<Byte>* pFld1 = &_fld1)fixed (Vector64<Byte>* pFld2 = &_fld2)
+            fixed (Vector64<Byte>* pFld1 = &_fld1)
+            fixed (Vector64<Byte>* pFld2 = &_fld2)
             {
                 AdvSimd.Arm64.StorePair(
                     (Byte*)_dataTable.outArrayPtr,

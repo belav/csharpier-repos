@@ -28,9 +28,10 @@ namespace System.Text.Encodings.Tests
             int charsUsed;
             bool completed;
 
-            fixed (byte* pBytes1 = bytes1)fixed (byte* pBytes2 = bytes2)fixed (
-                byte* pBytes3 = bytes3
-            )fixed (char* pChars = chars)
+            fixed (byte* pBytes1 = bytes1)
+            fixed (byte* pBytes2 = bytes2)
+            fixed (byte* pBytes3 = bytes3)
+            fixed (char* pChars = chars)
             {
                 decoder.Convert(
                     pBytes1,
@@ -155,7 +156,8 @@ namespace System.Text.Encodings.Tests
 
             byte[] bytes = Encoding.UTF8.GetBytes("\u0D800\uDC00");
 
-            fixed (byte* bytesPtr = bytes)fixed (char* charsPtr = new char[1])
+            fixed (byte* bytesPtr = bytes)
+            fixed (char* charsPtr = new char[1])
             {
                 byte* pBytes = bytesPtr;
                 char* pChars = charsPtr;
@@ -241,7 +243,8 @@ namespace System.Text.Encodings.Tests
                 )
                 .GetDecoder();
 
-            fixed (byte* bytesPtr = new byte[] { 0xFF, 0xFF })fixed (char* charsPtr = new char[2])
+            fixed (byte* bytesPtr = new byte[] { 0xFF, 0xFF })
+            fixed (char* charsPtr = new char[2])
             {
                 byte* pBytes = bytesPtr;
                 char* pChars = charsPtr;
@@ -277,9 +280,10 @@ namespace System.Text.Encodings.Tests
             byte[] bytes2 = utf8.GetBytes(s2);
             byte[] bytes3 = utf8.GetBytes(s3);
 
-            fixed (byte* pBytes1 = bytes1)fixed (byte* pBytes2 = bytes2)fixed (
-                byte* pBytes3 = bytes3
-            )fixed (char* pChars = chars)
+            fixed (byte* pBytes1 = bytes1)
+            fixed (byte* pBytes2 = bytes2)
+            fixed (byte* pBytes3 = bytes3)
+            fixed (char* pChars = chars)
             {
                 int charsUsed = decoder.GetChars(
                     pBytes1,
@@ -332,7 +336,8 @@ namespace System.Text.Encodings.Tests
             Decoder decoder = Encoding.UTF8.GetDecoder();
             byte[] bytes = Encoding.UTF8.GetBytes("\u0D800\uDC00");
 
-            fixed (byte* bytesPtr = bytes)fixed (char* charsPtr = new char[1])
+            fixed (byte* bytesPtr = bytes)
+            fixed (char* charsPtr = new char[1])
             {
                 byte* pBytes = bytesPtr;
                 char* pChars = charsPtr;
@@ -376,7 +381,8 @@ namespace System.Text.Encodings.Tests
                 )
                 .GetDecoder();
 
-            fixed (byte* bytesPtr = new byte[] { 0xFF, 0xFF })fixed (char* charsPtr = new char[2])
+            fixed (byte* bytesPtr = new byte[] { 0xFF, 0xFF })
+            fixed (char* charsPtr = new char[2])
             {
                 byte* pBytes = bytesPtr;
                 char* pChars = charsPtr;

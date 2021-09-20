@@ -161,7 +161,8 @@ namespace System.Runtime.InteropServices
             if (pUnk == IntPtr.Zero)
                 throw new ArgumentNullException(nameof(pUnk));
 
-            fixed (Guid* pIID = &iid)fixed (IntPtr* p = &ppv)
+            fixed (Guid* pIID = &iid)
+            fixed (IntPtr* p = &ppv)
             {
                 return (
                     (delegate* unmanaged<IntPtr, Guid*, IntPtr*, int>)(

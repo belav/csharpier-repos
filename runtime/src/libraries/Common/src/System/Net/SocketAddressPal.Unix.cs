@@ -125,9 +125,9 @@ namespace System.Net
         ) {
             uint localScope;
             Interop.Error err;
-            fixed (byte* rawAddress = &MemoryMarshal.GetReference(buffer))fixed (
-                byte* ipAddress = &MemoryMarshal.GetReference(address)
-            ) {
+            fixed (byte* rawAddress = &MemoryMarshal.GetReference(buffer))
+            fixed (byte* ipAddress = &MemoryMarshal.GetReference(address))
+            {
                 err = Interop.Sys.GetIPv6Address(
                     rawAddress,
                     buffer.Length,

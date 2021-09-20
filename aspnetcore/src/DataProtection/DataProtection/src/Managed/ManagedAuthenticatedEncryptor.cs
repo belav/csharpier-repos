@@ -252,11 +252,11 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
                     checked(decryptionSubkey.Length + validationSubkey.Length)
                 ];
 
-                fixed (byte* __unused__1 = decryptedKdk)fixed (
-                    byte* __unused__2 = decryptionSubkey
-                )fixed (byte* __unused__3 = validationSubkey)fixed (
-                    byte* __unused__4 = derivedKeysBuffer
-                ) {
+                fixed (byte* __unused__1 = decryptedKdk)
+                fixed (byte* __unused__2 = decryptionSubkey)
+                fixed (byte* __unused__3 = validationSubkey)
+                fixed (byte* __unused__4 = derivedKeysBuffer)
+                {
                     try
                     {
                         _keyDerivationKey.WriteSecretIntoBuffer(
@@ -406,11 +406,11 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
                     checked(encryptionSubkey.Length + validationSubkey.Length)
                 ];
 
-                fixed (byte* __unused__1 = decryptedKdk)fixed (
-                    byte* __unused__2 = encryptionSubkey
-                )fixed (byte* __unused__3 = validationSubkey)fixed (
-                    byte* __unused__4 = derivedKeysBuffer
-                ) {
+                fixed (byte* __unused__1 = decryptedKdk)
+                fixed (byte* __unused__2 = encryptionSubkey)
+                fixed (byte* __unused__3 = validationSubkey)
+                fixed (byte* __unused__4 = derivedKeysBuffer)
+                {
                     try
                     {
                         _keyDerivationKey.WriteSecretIntoBuffer(

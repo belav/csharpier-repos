@@ -413,11 +413,11 @@ namespace System.Net.Security
                 Span<Interop.SspiCli.SecBuffer> inUnmanagedBuffer =
                     stackalloc Interop.SspiCli.SecBuffer[3];
 
-                fixed (void* inUnmanagedBufferPtr = inUnmanagedBuffer)fixed (
-                    void* pinnedToken0 = inSecBuffers._item0.Token
-                )fixed (void* pinnedToken1 = inSecBuffers._item1.Token)fixed (
-                    void* pinnedToken2 = inSecBuffers._item2.Token
-                ) {
+                fixed (void* inUnmanagedBufferPtr = inUnmanagedBuffer)
+                fixed (void* pinnedToken0 = inSecBuffers._item0.Token)
+                fixed (void* pinnedToken1 = inSecBuffers._item1.Token)
+                fixed (void* pinnedToken2 = inSecBuffers._item2.Token)
+                {
                     // Fix Descriptor pointer that points to unmanaged SecurityBuffers.
                     inSecurityBufferDescriptor.pBuffers = inUnmanagedBufferPtr;
                     // Updated pvBuffer with pinned address. UnmanagedToken takes precedence.
@@ -794,11 +794,11 @@ namespace System.Net.Security
                 Span<Interop.SspiCli.SecBuffer> inUnmanagedBuffer =
                     stackalloc Interop.SspiCli.SecBuffer[3];
 
-                fixed (void* inUnmanagedBufferPtr = inUnmanagedBuffer)fixed (
-                    void* outUnmanagedBufferPtr = outUnmanagedBuffer
-                )fixed (void* pinnedToken0 = inSecBuffers._item0.Token)fixed (
-                    void* pinnedToken1 = inSecBuffers._item1.Token
-                )fixed (void* pinnedToken2 = inSecBuffers._item2.Token)
+                fixed (void* inUnmanagedBufferPtr = inUnmanagedBuffer)
+                fixed (void* outUnmanagedBufferPtr = outUnmanagedBuffer)
+                fixed (void* pinnedToken0 = inSecBuffers._item0.Token)
+                fixed (void* pinnedToken1 = inSecBuffers._item1.Token)
+                fixed (void* pinnedToken2 = inSecBuffers._item2.Token)
                 {
                     inSecurityBufferDescriptor.pBuffers = inUnmanagedBufferPtr;
                     // Updated pvBuffer with pinned address. UnmanagedToken takes precedence.

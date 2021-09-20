@@ -292,9 +292,9 @@ namespace System.Diagnostics
                 int domainNameLen = 256;
                 unsafe
                 {
-                    fixed (char* bufUserName = new char[userNameLen])fixed (
-                        char* bufDomainName = new char[domainNameLen]
-                    ) {
+                    fixed (char* bufUserName = new char[userNameLen])
+                    fixed (char* bufDomainName = new char[domainNameLen])
+                    {
                         if (
                             Interop.Advapi32.LookupAccountSid(
                                 MachineName,

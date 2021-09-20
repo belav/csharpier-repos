@@ -264,9 +264,10 @@ namespace Microsoft.AspNetCore.DataProtection.SP800_108
         ) {
             byte[] derivedSubkey = new byte[numDerivedBytes];
 
-            fixed (byte* pbKdk = kdk)fixed (byte* pbLabel = label)fixed (
-                byte* pbContext = context
-            )fixed (byte* pbDerivedSubkey = derivedSubkey)
+            fixed (byte* pbKdk = kdk)
+            fixed (byte* pbLabel = label)
+            fixed (byte* pbContext = context)
+            fixed (byte* pbDerivedSubkey = derivedSubkey)
             {
                 ISP800_108_CTR_HMACSHA512Provider provider = factory(pbKdk, (uint)kdk.Length);
                 provider.DeriveKeyWithContextHeader(

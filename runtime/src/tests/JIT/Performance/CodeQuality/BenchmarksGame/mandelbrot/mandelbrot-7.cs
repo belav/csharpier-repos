@@ -148,7 +148,8 @@ namespace BenchmarksGame
             var Crb = new double[adjustedSize];
             var Cib = new double[adjustedSize];
 
-            fixed (double* pCrb = &Crb[0])fixed (double* pCib = &Cib[0])
+            fixed (double* pCrb = &Crb[0])
+            fixed (double* pCib = &Cib[0])
             {
                 var invN = new Vector<double>(2.0 / size);
 

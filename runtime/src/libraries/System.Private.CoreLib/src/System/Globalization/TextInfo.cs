@@ -248,7 +248,8 @@ namespace System.Globalization
                 goto Return;
             }
 
-            fixed (char* pSource = &source)fixed (char* pDestination = &destination)
+            fixed (char* pSource = &source)
+            fixed (char* pDestination = &destination)
             {
                 nuint currIdx = 0; // in chars
 

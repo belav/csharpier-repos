@@ -512,18 +512,15 @@ namespace System.Reflection.Emit
                     case CorElementType.ELEMENT_TYPE_I8:
                     case CorElementType.ELEMENT_TYPE_U8:
                     case CorElementType.ELEMENT_TYPE_R8:
-                        fixed (byte* pData = &value.GetRawData())SetConstantValue(
-                            new QCallModule(ref module),
-                            tk,
-                            (int)corType,
-                            pData
-                        );
+                        fixed (byte* pData = &value.GetRawData())
+                        SetConstantValue(new QCallModule(ref module), tk, (int)corType, pData);
                         break;
 
                     default:
                         if (type == typeof(string))
                         {
-                            fixed (char* pString = (string)value)SetConstantValue(
+                            fixed (char* pString = (string)value)
+                            SetConstantValue(
                                 new QCallModule(ref module),
                                 tk,
                                 (int)CorElementType.ELEMENT_TYPE_STRING,

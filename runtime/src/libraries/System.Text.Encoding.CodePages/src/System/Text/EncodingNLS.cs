@@ -76,7 +76,8 @@ namespace System.Text
                 return 0;
 
             // Just call the pointer version
-            fixed (char* pChars = &chars[0])return GetByteCount(pChars + index, count, null);
+            fixed (char* pChars = &chars[0])
+            return GetByteCount(pChars + index, count, null);
         }
 
         // All of our public Encodings that don't use EncodingNLS must have this (including EncodingNLS)
@@ -88,7 +89,8 @@ namespace System.Text
             if (s == null)
                 throw new ArgumentNullException(nameof(s));
 
-            fixed (char* pChars = s)return GetByteCount(pChars, s.Length, null);
+            fixed (char* pChars = s)
+            return GetByteCount(pChars, s.Length, null);
         }
 
         // All of our public Encodings that don't use EncodingNLS must have this (including EncodingNLS)
@@ -147,13 +149,9 @@ namespace System.Text
             if (bytes.Length == 0)
                 bytes = new byte[1];
 
-            fixed (char* pChars = s)fixed (byte* pBytes = &bytes[0])return GetBytes(
-                pChars + charIndex,
-                charCount,
-                pBytes + byteIndex,
-                byteCount,
-                null
-            );
+            fixed (char* pChars = s)
+            fixed (byte* pBytes = &bytes[0])
+            return GetBytes(pChars + charIndex, charCount, pBytes + byteIndex, byteCount, null);
         }
 
         // Encodes a range of characters in a character array into a range of bytes
@@ -211,7 +209,8 @@ namespace System.Text
             if (bytes.Length == 0)
                 bytes = new byte[1];
 
-            fixed (char* pChars = &chars[0])fixed (byte* pBytes = &bytes[0])
+            fixed (char* pChars = &chars[0])
+            fixed (byte* pBytes = &bytes[0])
             // Remember that byteCount is # to decode, not size of array.
             return GetBytes(pChars + charIndex, charCount, pBytes + byteIndex, byteCount, null);
         }
@@ -265,7 +264,8 @@ namespace System.Text
                 return 0;
 
             // Just call pointer version
-            fixed (byte* pBytes = &bytes[0])return GetCharCount(pBytes + index, count, null);
+            fixed (byte* pBytes = &bytes[0])
+            return GetCharCount(pBytes + index, count, null);
         }
 
         // All of our public Encodings that don't use EncodingNLS must have this (including EncodingNLS)
@@ -331,7 +331,8 @@ namespace System.Text
             if (chars.Length == 0)
                 chars = new char[1];
 
-            fixed (byte* pBytes = &bytes[0])fixed (char* pChars = &chars[0])
+            fixed (byte* pBytes = &bytes[0])
+            fixed (char* pChars = &chars[0])
             // Remember that charCount is # to decode, not size of array
             return GetChars(pBytes + byteIndex, byteCount, pChars + charIndex, charCount, null);
         }
@@ -384,7 +385,8 @@ namespace System.Text
             if (bytes.Length == 0)
                 return string.Empty;
 
-            fixed (byte* pBytes = &bytes[0])return GetString(pBytes + index, count);
+            fixed (byte* pBytes = &bytes[0])
+            return GetString(pBytes + index, count);
         }
 
         public override Decoder GetDecoder()

@@ -369,9 +369,9 @@ namespace System.Net.Sockets
                     );
                     unsafe
                     {
-                        fixed (byte* buffer = socketAddress.Buffer)fixed (
-                            int* bufferSize = &socketAddress.InternalSize
-                        ) {
+                        fixed (byte* buffer = socketAddress.Buffer)
+                        fixed (int* bufferSize = &socketAddress.InternalSize)
+                        {
                             // This may throw ObjectDisposedException.
                             SocketError errorCode = SocketPal.GetSockName(
                                 _handle,

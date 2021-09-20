@@ -749,9 +749,9 @@ namespace System.Text
 
             // Since we're using Unsafe.AsPointer in our central loop, we want to ensure everything is pinned.
 
-            fixed (char* _pChars_Unused = &MemoryMarshal.GetReference(chars))fixed (
-                byte* _pBytes_Unused = &MemoryMarshal.GetReference(bytes)
-            ) {
+            fixed (char* _pChars_Unused = &MemoryMarshal.GetReference(chars))
+            fixed (byte* _pBytes_Unused = &MemoryMarshal.GetReference(bytes))
+            {
                 EncoderFallbackBuffer fallbackBuffer = EncoderFallbackBuffer.CreateAndInitialize(
                     this,
                     encoder,
@@ -1531,9 +1531,9 @@ namespace System.Text
 
             // Since we're using Unsafe.AsPointer in our central loop, we want to ensure everything is pinned.
 
-            fixed (byte* _pBytes_Unused = &MemoryMarshal.GetReference(bytes))fixed (
-                char* _pChars_Unused = &MemoryMarshal.GetReference(chars)
-            ) {
+            fixed (byte* _pBytes_Unused = &MemoryMarshal.GetReference(bytes))
+            fixed (char* _pChars_Unused = &MemoryMarshal.GetReference(chars))
+            {
                 DecoderFallbackBuffer fallbackBuffer = DecoderFallbackBuffer.CreateAndInitialize(
                     this,
                     decoder,

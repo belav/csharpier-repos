@@ -48,9 +48,9 @@ namespace System.Buffers.Text
                 return OperationStatus.Done;
             }
 
-            fixed (byte* srcBytes = &MemoryMarshal.GetReference(bytes))fixed (
-                byte* destBytes = &MemoryMarshal.GetReference(utf8)
-            ) {
+            fixed (byte* srcBytes = &MemoryMarshal.GetReference(bytes))
+            fixed (byte* destBytes = &MemoryMarshal.GetReference(utf8))
+            {
                 int srcLength = bytes.Length;
                 int destLength = utf8.Length;
                 int maxSrcLength;

@@ -323,7 +323,8 @@ namespace System.Text
                 );
             }
 
-            fixed (char* pChars = s)fixed (byte* pBytes = bytes)
+            fixed (char* pChars = s)
+            fixed (byte* pBytes = bytes)
             {
                 return GetBytesCommon(
                     pChars + charIndex,
@@ -391,7 +392,8 @@ namespace System.Text
                 );
             }
 
-            fixed (char* pChars = chars)fixed (byte* pBytes = bytes)
+            fixed (char* pChars = chars)
+            fixed (byte* pBytes = bytes)
             {
                 return GetBytesCommon(
                     pChars + charIndex,
@@ -436,9 +438,9 @@ namespace System.Text
         {
             // It's ok for us to operate on null / empty spans.
 
-            fixed (char* charsPtr = &MemoryMarshal.GetReference(chars))fixed (
-                byte* bytesPtr = &MemoryMarshal.GetReference(bytes)
-            ) {
+            fixed (char* charsPtr = &MemoryMarshal.GetReference(chars))
+            fixed (byte* bytesPtr = &MemoryMarshal.GetReference(bytes))
+            {
                 return GetBytesCommon(charsPtr, chars.Length, bytesPtr, bytes.Length);
             }
         }
@@ -644,7 +646,8 @@ namespace System.Text
                 );
             }
 
-            fixed (byte* pBytes = bytes)fixed (char* pChars = chars)
+            fixed (byte* pBytes = bytes)
+            fixed (char* pChars = chars)
             {
                 return GetCharsCommon(
                     pBytes + byteIndex,
@@ -689,9 +692,9 @@ namespace System.Text
         {
             // It's ok for us to pass null pointers down to the workhorse below.
 
-            fixed (byte* bytesPtr = &MemoryMarshal.GetReference(bytes))fixed (
-                char* charsPtr = &MemoryMarshal.GetReference(chars)
-            ) {
+            fixed (byte* bytesPtr = &MemoryMarshal.GetReference(bytes))
+            fixed (char* charsPtr = &MemoryMarshal.GetReference(chars))
+            {
                 return GetCharsCommon(bytesPtr, bytes.Length, charsPtr, chars.Length);
             }
         }

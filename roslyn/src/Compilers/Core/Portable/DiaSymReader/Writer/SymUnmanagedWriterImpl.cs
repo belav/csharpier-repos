@@ -569,9 +569,9 @@ namespace Microsoft.DiaSymReader
                     {
                         unsafe
                         {
-                            fixed (int* yieldPtr = yieldOffsets)fixed (
-                                int* resumePtr = resumeOffsets
-                            )fixed (int* methodsPtr = methods)
+                            fixed (int* yieldPtr = yieldOffsets)
+                            fixed (int* resumePtr = resumeOffsets)
+                            fixed (int* methodsPtr = methods)
                             {
                                 asyncMethodPropertyWriter.DefineAsyncStepInfo(
                                     count,

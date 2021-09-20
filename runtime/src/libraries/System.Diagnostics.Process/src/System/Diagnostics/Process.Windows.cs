@@ -686,7 +686,9 @@ namespace System.Diagnostics
                         fixed (
                             char* passwordInClearTextPtr =
                                 startInfo.PasswordInClearText ?? string.Empty
-                        )fixed (char* environmentBlockPtr = environmentBlock)fixed (
+                        )
+                        fixed (char* environmentBlockPtr = environmentBlock)
+                        fixed (
                             char* commandLinePtr = &commandLine.GetPinnableReference(
                                 terminate: true
                             )
@@ -726,7 +728,8 @@ namespace System.Diagnostics
                     }
                     else
                     {
-                        fixed (char* environmentBlockPtr = environmentBlock)fixed (
+                        fixed (char* environmentBlockPtr = environmentBlock)
+                        fixed (
                             char* commandLinePtr = &commandLine.GetPinnableReference(
                                 terminate: true
                             )

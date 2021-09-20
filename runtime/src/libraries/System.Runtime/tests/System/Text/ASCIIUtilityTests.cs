@@ -432,9 +432,9 @@ namespace System.Text.Tests
         {
             Assert.Equal(utf16.Length, ascii.Length);
 
-            fixed (char* pUtf16 = &MemoryMarshal.GetReference(utf16))fixed (
-                byte* pAscii = &MemoryMarshal.GetReference(ascii)
-            ) {
+            fixed (char* pUtf16 = &MemoryMarshal.GetReference(utf16))
+            fixed (byte* pAscii = &MemoryMarshal.GetReference(ascii))
+            {
                 // Conversions between UIntPtr <-> int are not checked by default.
                 return checked(
                     (int)_fnNarrowUtf16ToAscii.Delegate(pUtf16, pAscii, (UIntPtr)utf16.Length)
@@ -446,9 +446,9 @@ namespace System.Text.Tests
         {
             Assert.Equal(ascii.Length, utf16.Length);
 
-            fixed (byte* pAscii = &MemoryMarshal.GetReference(ascii))fixed (
-                char* pUtf16 = &MemoryMarshal.GetReference(utf16)
-            ) {
+            fixed (byte* pAscii = &MemoryMarshal.GetReference(ascii))
+            fixed (char* pUtf16 = &MemoryMarshal.GetReference(utf16))
+            {
                 // Conversions between UIntPtr <-> int are not checked by default.
                 return checked(
                     (int)_fnWidenAsciiToUtf16.Delegate(pAscii, pUtf16, (UIntPtr)ascii.Length)

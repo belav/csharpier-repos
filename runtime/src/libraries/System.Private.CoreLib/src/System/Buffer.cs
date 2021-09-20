@@ -480,7 +480,9 @@ namespace System
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static unsafe void _Memmove(ref byte dest, ref byte src, nuint len)
         {
-            fixed (byte* pDest = &dest)fixed (byte* pSrc = &src)__Memmove(pDest, pSrc, len);
+            fixed (byte* pDest = &dest)
+            fixed (byte* pSrc = &src)
+            __Memmove(pDest, pSrc, len);
         }
 
 #if HAS_CUSTOM_BLOCKS

@@ -221,7 +221,8 @@ namespace JIT.HardwareIntrinsics.Arm
             public void RunStructFldScenario_Load(
                 StoreBinaryOpTest__StorePair_Vector64_Int16 testClass
             ) {
-                fixed (Vector64<Int16>* pFld1 = &_fld1)fixed (Vector64<Int16>* pFld2 = &_fld2)
+                fixed (Vector64<Int16>* pFld1 = &_fld1)
+                fixed (Vector64<Int16>* pFld2 = &_fld2)
                 {
                     AdvSimd.Arm64.StorePair(
                         (Int16*)testClass._dataTable.outArrayPtr,
@@ -395,9 +396,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector64<Int16>* pClsVar1 = &_clsVar1)fixed (
-                Vector64<Int16>* pClsVar2 = &_clsVar2
-            ) {
+            fixed (Vector64<Int16>* pClsVar1 = &_clsVar1)
+            fixed (Vector64<Int16>* pClsVar2 = &_clsVar2)
+            {
                 AdvSimd.Arm64.StorePair(
                     (Int16*)_dataTable.outArrayPtr,
                     AdvSimd.LoadVector64((Int16*)(pClsVar1)),
@@ -446,7 +447,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             var test = new StoreBinaryOpTest__StorePair_Vector64_Int16();
 
-            fixed (Vector64<Int16>* pFld1 = &test._fld1)fixed (Vector64<Int16>* pFld2 = &test._fld2)
+            fixed (Vector64<Int16>* pFld1 = &test._fld1)
+            fixed (Vector64<Int16>* pFld2 = &test._fld2)
             {
                 AdvSimd.Arm64.StorePair(
                     (Int16*)_dataTable.outArrayPtr,
@@ -471,7 +473,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector64<Int16>* pFld1 = &_fld1)fixed (Vector64<Int16>* pFld2 = &_fld2)
+            fixed (Vector64<Int16>* pFld1 = &_fld1)
+            fixed (Vector64<Int16>* pFld2 = &_fld2)
             {
                 AdvSimd.Arm64.StorePair(
                     (Int16*)_dataTable.outArrayPtr,

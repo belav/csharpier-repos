@@ -438,9 +438,9 @@ namespace System.IO
                 ThrowIfDisposed();
                 char[] charBuffer = _charBuffer;
 
-                fixed (char* bufferPtr = &MemoryMarshal.GetReference(buffer))fixed (
-                    char* dstPtr = &charBuffer[0]
-                ) {
+                fixed (char* bufferPtr = &MemoryMarshal.GetReference(buffer))
+                fixed (char* dstPtr = &charBuffer[0])
+                {
                     char* srcPtr = bufferPtr;
                     int count = buffer.Length;
                     int dstPos = _charPos; // use a local copy of _charPos for safety

@@ -192,9 +192,9 @@ namespace Internal.Cryptography
             ulong kdfIterations = (ulong)iterations; // Previously asserted to be positive.
 
             using (keyHandle)
-                fixed (char* pHashAlgorithmName = hashAlgorithmName)fixed (
-                    byte* pSalt = salt
-                )fixed (byte* pDestination = destination)
+                fixed (char* pHashAlgorithmName = hashAlgorithmName)
+                fixed (byte* pSalt = salt)
+                fixed (byte* pDestination = destination)
                 {
                     Span<BCryptBuffer> buffers = stackalloc BCryptBuffer[3];
                     buffers[0].BufferType = CngBufferDescriptors.KDF_ITERATION_COUNT;
@@ -260,9 +260,10 @@ namespace Internal.Cryptography
                     out _
                 );
 
-            fixed (byte* pPassword = password)fixed (byte* pSalt = salt)fixed (
-                byte* pDestination = destination
-            ) {
+            fixed (byte* pPassword = password)
+            fixed (byte* pSalt = salt)
+            fixed (byte* pDestination = destination)
+            {
                 NTSTATUS status = Interop.BCrypt.BCryptDeriveKeyPBKDF2(
                     handle,
                     pPassword,

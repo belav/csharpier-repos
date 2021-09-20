@@ -839,9 +839,9 @@ namespace System.Text
 
         public virtual unsafe int GetBytes(ReadOnlySpan<char> chars, Span<byte> bytes)
         {
-            fixed (char* charsPtr = &MemoryMarshal.GetNonNullPinnableReference(chars))fixed (
-                byte* bytesPtr = &MemoryMarshal.GetNonNullPinnableReference(bytes)
-            ) {
+            fixed (char* charsPtr = &MemoryMarshal.GetNonNullPinnableReference(chars))
+            fixed (byte* bytesPtr = &MemoryMarshal.GetNonNullPinnableReference(bytes))
+            {
                 return GetBytes(charsPtr, chars.Length, bytesPtr, bytes.Length);
             }
         }
@@ -994,9 +994,9 @@ namespace System.Text
 
         public virtual unsafe int GetChars(ReadOnlySpan<byte> bytes, Span<char> chars)
         {
-            fixed (byte* bytesPtr = &MemoryMarshal.GetNonNullPinnableReference(bytes))fixed (
-                char* charsPtr = &MemoryMarshal.GetNonNullPinnableReference(chars)
-            ) {
+            fixed (byte* bytesPtr = &MemoryMarshal.GetNonNullPinnableReference(bytes))
+            fixed (char* charsPtr = &MemoryMarshal.GetNonNullPinnableReference(chars))
+            {
                 return GetChars(bytesPtr, bytes.Length, charsPtr, chars.Length);
             }
         }

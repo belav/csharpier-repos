@@ -396,7 +396,8 @@ namespace System.Net.Sockets
             ReadOnlySpan<byte> postBuffer,
             TransmitFileOptions flags
         ) {
-            fixed (byte* prePinnedBuffer = preBuffer)fixed (byte* postPinnedBuffer = postBuffer)
+            fixed (byte* prePinnedBuffer = preBuffer)
+            fixed (byte* postPinnedBuffer = postBuffer)
             {
                 bool success = TransmitFileHelper(
                     handle,
@@ -652,9 +653,9 @@ namespace System.Net.Sockets
             bytesTransferred = 0;
             receiveAddress = socketAddress;
             ipPacketInformation = default(IPPacketInformation);
-            fixed (byte* bufferPtr = &MemoryMarshal.GetReference(buffer))fixed (
-                byte* ptrSocketAddress = socketAddress.Buffer
-            ) {
+            fixed (byte* bufferPtr = &MemoryMarshal.GetReference(buffer))
+            fixed (byte* ptrSocketAddress = socketAddress.Buffer)
+            {
                 Interop.Winsock.WSAMsg wsaMsg;
                 wsaMsg.socketAddress = (IntPtr)ptrSocketAddress;
                 wsaMsg.addressLength = (uint)socketAddress.Size;
@@ -1304,9 +1305,9 @@ namespace System.Net.Sockets
                 // for example, (-2) specified for microseconds, will continue to get the same behavior.
 
                 int socketCount;
-                fixed (IntPtr* readPtr = &MemoryMarshal.GetReference(readfileDescriptorSet))fixed (
-                    IntPtr* writePtr = &MemoryMarshal.GetReference(writefileDescriptorSet)
-                )fixed (IntPtr* errPtr = &MemoryMarshal.GetReference(errfileDescriptorSet))
+                fixed (IntPtr* readPtr = &MemoryMarshal.GetReference(readfileDescriptorSet))
+                fixed (IntPtr* writePtr = &MemoryMarshal.GetReference(writefileDescriptorSet))
+                fixed (IntPtr* errPtr = &MemoryMarshal.GetReference(errfileDescriptorSet))
                 {
                     if (microseconds != -1)
                     {

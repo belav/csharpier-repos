@@ -119,7 +119,8 @@ namespace System.Text
                 return 0;
 
             // Just call the pointer version
-            fixed (char* pChars = chars)return GetByteCount(pChars + index, count, null);
+            fixed (char* pChars = chars)
+            return GetByteCount(pChars + index, count, null);
         }
 
         // All of our public Encodings that don't use EncodingNLS must have this (including EncodingNLS)
@@ -135,7 +136,8 @@ namespace System.Text
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             }
 
-            fixed (char* pChars = s)return GetByteCount(pChars, s.Length, null);
+            fixed (char* pChars = s)
+            return GetByteCount(pChars, s.Length, null);
         }
 
         // All of our public Encodings that don't use EncodingNLS must have this (including EncodingNLS)
@@ -194,9 +196,9 @@ namespace System.Text
 
             int byteCount = bytes.Length - byteIndex;
 
-            fixed (char* pChars = s)fixed (
-                byte* pBytes = &MemoryMarshal.GetReference((Span<byte>)bytes)
-            )return GetBytes(pChars + charIndex, charCount, pBytes + byteIndex, byteCount, null);
+            fixed (char* pChars = s)
+            fixed (byte* pBytes = &MemoryMarshal.GetReference((Span<byte>)bytes))
+            return GetBytes(pChars + charIndex, charCount, pBytes + byteIndex, byteCount, null);
         }
 
         // Encodes a range of characters in a character array into a range of bytes
@@ -252,9 +254,8 @@ namespace System.Text
             // Just call pointer version
             int byteCount = bytes.Length - byteIndex;
 
-            fixed (char* pChars = chars)fixed (
-                byte* pBytes = &MemoryMarshal.GetReference((Span<byte>)bytes)
-            )
+            fixed (char* pChars = chars)
+            fixed (byte* pBytes = &MemoryMarshal.GetReference((Span<byte>)bytes))
             // Remember that byteCount is # to decode, not size of array.
             return GetBytes(pChars + charIndex, charCount, pBytes + byteIndex, byteCount, null);
         }
@@ -313,7 +314,8 @@ namespace System.Text
                 return 0;
 
             // Just call pointer version
-            fixed (byte* pBytes = bytes)return GetCharCount(pBytes + index, count, null);
+            fixed (byte* pBytes = bytes)
+            return GetCharCount(pBytes + index, count, null);
         }
 
         // All of our public Encodings that don't use EncodingNLS must have this (including EncodingNLS)
@@ -380,9 +382,8 @@ namespace System.Text
             // Just call pointer version
             int charCount = chars.Length - charIndex;
 
-            fixed (byte* pBytes = bytes)fixed (
-                char* pChars = &MemoryMarshal.GetReference((Span<char>)chars)
-            )
+            fixed (byte* pBytes = bytes)
+            fixed (char* pChars = &MemoryMarshal.GetReference((Span<char>)chars))
             // Remember that charCount is # to decode, not size of array
             return GetChars(pBytes + byteIndex, byteCount, pChars + charIndex, charCount, null);
         }
@@ -440,11 +441,8 @@ namespace System.Text
             if (count == 0)
                 return string.Empty;
 
-            fixed (byte* pBytes = bytes)return string.CreateStringFromEncoding(
-                pBytes + index,
-                count,
-                this
-            );
+            fixed (byte* pBytes = bytes)
+            return string.CreateStringFromEncoding(pBytes + index, count, this);
         }
 
         //

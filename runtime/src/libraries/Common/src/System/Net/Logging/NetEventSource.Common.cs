@@ -502,9 +502,10 @@ namespace System.Net
                 if (arg4 == null)
                     arg4 = "";
 
-                fixed (char* string1Bytes = arg1)fixed (char* string2Bytes = arg2)fixed (
-                    char* string3Bytes = arg3
-                )fixed (char* string4Bytes = arg4)
+                fixed (char* string1Bytes = arg1)
+                fixed (char* string2Bytes = arg2)
+                fixed (char* string3Bytes = arg3)
+                fixed (char* string4Bytes = arg4)
                 {
                     const int NumEventDatas = 4;
                     var descrs = stackalloc EventData[NumEventDatas];
@@ -554,7 +555,9 @@ namespace System.Net
                 if (arg3 == null)
                     arg3 = Array.Empty<byte>();
 
-                fixed (char* arg1Ptr = arg1)fixed (char* arg2Ptr = arg2)fixed (byte* arg3Ptr = arg3)
+                fixed (char* arg1Ptr = arg1)
+                fixed (char* arg2Ptr = arg2)
+                fixed (byte* arg3Ptr = arg3)
                 {
                     int bufferLength = arg3.Length;
                     const int NumEventDatas = 4;
@@ -633,7 +636,8 @@ namespace System.Net
                 if (arg3 == null)
                     arg3 = "";
 
-                fixed (char* arg1Ptr = arg1)fixed (char* arg3Ptr = arg3)
+                fixed (char* arg1Ptr = arg1)
+                fixed (char* arg3Ptr = arg3)
                 {
                     const int NumEventDatas = 3;
                     var descrs = stackalloc EventData[NumEventDatas];
@@ -672,7 +676,8 @@ namespace System.Net
                 if (arg2 == null)
                     arg2 = "";
 
-                fixed (char* arg1Ptr = arg1)fixed (char* arg2Ptr = arg2)
+                fixed (char* arg1Ptr = arg1)
+                fixed (char* arg2Ptr = arg2)
                 {
                     const int NumEventDatas = 3;
                     var descrs = stackalloc EventData[NumEventDatas];
@@ -718,7 +723,9 @@ namespace System.Net
                 if (arg3 == null)
                     arg3 = "";
 
-                fixed (char* arg1Ptr = arg1)fixed (char* arg2Ptr = arg2)fixed (char* arg3Ptr = arg3)
+                fixed (char* arg1Ptr = arg1)
+                fixed (char* arg2Ptr = arg2)
+                fixed (char* arg3Ptr = arg3)
                 {
                     const int NumEventDatas = 4;
                     var descrs = stackalloc EventData[NumEventDatas];
@@ -815,7 +822,8 @@ namespace System.Net
                 if (arg2 == null)
                     arg2 = "";
 
-                fixed (char* arg1Ptr = arg1)fixed (char* arg2Ptr = arg2)
+                fixed (char* arg1Ptr = arg1)
+                fixed (char* arg2Ptr = arg2)
                 {
                     const int NumEventDatas = 5;
                     var descrs = stackalloc EventData[NumEventDatas];

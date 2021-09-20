@@ -96,7 +96,8 @@ class GitHub_25039
             try
             {
                 var src = new int[1024];
-                fixed (int* pSrc = &src[0])fixed (byte* pBase = &PermTable[0])
+                fixed (int* pSrc = &src[0])
+                fixed (byte* pBase = &PermTable[0])
                 {
                     for (var i = 0; i < 100; i++)
                     {

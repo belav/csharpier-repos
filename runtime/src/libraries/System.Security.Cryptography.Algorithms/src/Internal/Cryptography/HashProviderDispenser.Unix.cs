@@ -40,7 +40,8 @@ namespace Internal.Cryptography
                 if (hashSize <= 0 || destination.Length < hashSize)
                     throw new CryptographicException();
 
-                fixed (byte* pSource = source)fixed (byte* pDestination = destination)
+                fixed (byte* pSource = source)
+                fixed (byte* pDestination = destination)
                 {
                     uint length = (uint)destination.Length;
                     Check(

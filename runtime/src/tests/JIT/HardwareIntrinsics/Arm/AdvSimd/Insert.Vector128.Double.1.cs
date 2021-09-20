@@ -199,7 +199,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(InsertTest__Insert_Vector128_Double_1 testClass)
             {
-                fixed (Vector128<Double>* pFld1 = &_fld1)fixed (Double* pFld3 = &_fld3)
+                fixed (Vector128<Double>* pFld1 = &_fld1)
+                fixed (Double* pFld3 = &_fld3)
                 {
                     var result = AdvSimd.Insert(
                         AdvSimd.LoadVector128((Double*)pFld1),
@@ -363,7 +364,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector128<Double>* pClsVar1 = &_clsVar1)fixed (Double* pClsVar3 = &_clsVar3)
+            fixed (Vector128<Double>* pClsVar1 = &_clsVar1)
+            fixed (Double* pClsVar3 = &_clsVar3)
             {
                 var result = AdvSimd.Insert(
                     AdvSimd.LoadVector128((Double*)pClsVar1),
@@ -419,7 +421,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             var test = new InsertTest__Insert_Vector128_Double_1();
 
-            fixed (Vector128<Double>* pFld1 = &test._fld1)fixed (Double* pFld3 = &test._fld3)
+            fixed (Vector128<Double>* pFld1 = &test._fld1)
+            fixed (Double* pFld3 = &test._fld3)
             {
                 var result = AdvSimd.Insert(
                     AdvSimd.LoadVector128((Double*)pFld1),
@@ -446,7 +449,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector128<Double>* pFld1 = &_fld1)fixed (Double* pFld3 = &_fld3)
+            fixed (Vector128<Double>* pFld1 = &_fld1)
+            fixed (Double* pFld3 = &_fld3)
             {
                 var result = AdvSimd.Insert(
                     AdvSimd.LoadVector128((Double*)pFld1),

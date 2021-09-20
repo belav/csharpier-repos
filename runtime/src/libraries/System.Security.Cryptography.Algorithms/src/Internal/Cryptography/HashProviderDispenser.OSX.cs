@@ -49,7 +49,8 @@ namespace Internal.Cryptography
                     hashAlgorithmId
                 );
 
-                fixed (byte* pSource = source)fixed (byte* pDestination = destination)
+                fixed (byte* pSource = source)
+                fixed (byte* pDestination = destination)
                 {
                     int ret = Interop.AppleCrypto.DigestOneShot(
                         algorithm,

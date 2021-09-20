@@ -222,7 +222,8 @@ namespace JIT.HardwareIntrinsics.Arm
             public void RunStructFldScenario_Load(
                 SimpleBinaryOpTest__AddSaturate_Vector128_Byte_Vector128_SByte testClass
             ) {
-                fixed (Vector128<Byte>* pFld1 = &_fld1)fixed (Vector128<SByte>* pFld2 = &_fld2)
+                fixed (Vector128<Byte>* pFld1 = &_fld1)
+                fixed (Vector128<SByte>* pFld2 = &_fld2)
                 {
                     var result = AdvSimd.Arm64.AddSaturate(
                         AdvSimd.LoadVector128((Byte*)(pFld1)),
@@ -402,9 +403,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector128<Byte>* pClsVar1 = &_clsVar1)fixed (
-                Vector128<SByte>* pClsVar2 = &_clsVar2
-            ) {
+            fixed (Vector128<Byte>* pClsVar1 = &_clsVar1)
+            fixed (Vector128<SByte>* pClsVar2 = &_clsVar2)
+            {
                 var result = AdvSimd.Arm64.AddSaturate(
                     AdvSimd.LoadVector128((Byte*)(pClsVar1)),
                     AdvSimd.LoadVector128((SByte*)(pClsVar2))
@@ -456,9 +457,9 @@ namespace JIT.HardwareIntrinsics.Arm
 
             var test = new SimpleBinaryOpTest__AddSaturate_Vector128_Byte_Vector128_SByte();
 
-            fixed (Vector128<Byte>* pFld1 = &test._fld1)fixed (
-                Vector128<SByte>* pFld2 = &test._fld2
-            ) {
+            fixed (Vector128<Byte>* pFld1 = &test._fld1)
+            fixed (Vector128<SByte>* pFld2 = &test._fld2)
+            {
                 var result = AdvSimd.Arm64.AddSaturate(
                     AdvSimd.LoadVector128((Byte*)(pFld1)),
                     AdvSimd.LoadVector128((SByte*)(pFld2))
@@ -483,7 +484,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector128<Byte>* pFld1 = &_fld1)fixed (Vector128<SByte>* pFld2 = &_fld2)
+            fixed (Vector128<Byte>* pFld1 = &_fld1)
+            fixed (Vector128<SByte>* pFld2 = &_fld2)
             {
                 var result = AdvSimd.Arm64.AddSaturate(
                     AdvSimd.LoadVector128((Byte*)(pFld1)),

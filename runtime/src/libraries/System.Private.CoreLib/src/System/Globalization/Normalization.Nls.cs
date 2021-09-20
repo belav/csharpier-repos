@@ -95,9 +95,9 @@ namespace System.Globalization
                     // NormalizeString pinvoke has SetLastError attribute property which will set the last error
                     // to 0 (ERROR_SUCCESS) before executing the calls.
                     int realLength;
-                    fixed (char* pInput = strInput)fixed (
-                        char* pDest = &MemoryMarshal.GetReference(buffer)
-                    ) {
+                    fixed (char* pInput = strInput)
+                    fixed (char* pDest = &MemoryMarshal.GetReference(buffer))
+                    {
                         realLength = Interop.Normaliz.NormalizeString(
                             normalizationForm,
                             pInput,

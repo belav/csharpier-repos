@@ -161,7 +161,8 @@ namespace System.Text.Tests
             if (expectedBytes.Length > 0)
             {
                 byte[] charPointerBytes = (byte[])bytes.Clone();
-                fixed (char* pChars = source.ToCharArray())fixed (byte* pBytes = charPointerBytes)
+                fixed (char* pChars = source.ToCharArray())
+                fixed (byte* pBytes = charPointerBytes)
                 {
                     int charPointerByteCount = encoding.GetBytes(
                         pChars + index,
@@ -307,7 +308,8 @@ namespace System.Text.Tests
             if (expectedChars.Length > 0)
             {
                 char[] bytePointerChars = (char[])chars.Clone();
-                fixed (byte* pBytes = bytes)fixed (char* pChars = bytePointerChars)
+                fixed (byte* pBytes = bytes)
+                fixed (char* pChars = bytePointerChars)
                 {
                     int charPointerCount = encoding.GetChars(
                         pBytes + byteIndex,

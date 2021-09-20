@@ -260,9 +260,9 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario_Load(SimpleTernaryOpTest__BlendVariableInt64 testClass)
             {
-                fixed (Vector256<Int64>* pFld1 = &_fld1)fixed (
-                    Vector256<Int64>* pFld2 = &_fld2
-                )fixed (Vector256<Int64>* pFld3 = &_fld3)
+                fixed (Vector256<Int64>* pFld1 = &_fld1)
+                fixed (Vector256<Int64>* pFld2 = &_fld2)
+                fixed (Vector256<Int64>* pFld3 = &_fld3)
                 {
                     var result = Avx2.BlendVariable(
                         Avx.LoadVector256((Int64*)(pFld1)),
@@ -556,9 +556,9 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector256<Int64>* pClsVar1 = &_clsVar1)fixed (
-                Vector256<Int64>* pClsVar2 = &_clsVar2
-            )fixed (Vector256<Int64>* pClsVar3 = &_clsVar3)
+            fixed (Vector256<Int64>* pClsVar1 = &_clsVar1)
+            fixed (Vector256<Int64>* pClsVar2 = &_clsVar2)
+            fixed (Vector256<Int64>* pClsVar3 = &_clsVar3)
             {
                 var result = Avx2.BlendVariable(
                     Avx.LoadVector256((Int64*)(pClsVar1)),
@@ -627,9 +627,9 @@ namespace JIT.HardwareIntrinsics.X86
 
             var test = new SimpleTernaryOpTest__BlendVariableInt64();
 
-            fixed (Vector256<Int64>* pFld1 = &test._fld1)fixed (
-                Vector256<Int64>* pFld2 = &test._fld2
-            )fixed (Vector256<Int64>* pFld3 = &test._fld3)
+            fixed (Vector256<Int64>* pFld1 = &test._fld1)
+            fixed (Vector256<Int64>* pFld2 = &test._fld2)
+            fixed (Vector256<Int64>* pFld3 = &test._fld3)
             {
                 var result = Avx2.BlendVariable(
                     Avx.LoadVector256((Int64*)(pFld1)),
@@ -656,9 +656,10 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector256<Int64>* pFld1 = &_fld1)fixed (Vector256<Int64>* pFld2 = &_fld2)fixed (
-                Vector256<Int64>* pFld3 = &_fld3
-            ) {
+            fixed (Vector256<Int64>* pFld1 = &_fld1)
+            fixed (Vector256<Int64>* pFld2 = &_fld2)
+            fixed (Vector256<Int64>* pFld3 = &_fld3)
+            {
                 var result = Avx2.BlendVariable(
                     Avx.LoadVector256((Int64*)(pFld1)),
                     Avx.LoadVector256((Int64*)(pFld2)),

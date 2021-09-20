@@ -57,9 +57,10 @@ namespace IntelHardwareIntrinsicTest
                 Vector128<long> indexl;
                 Vector256<long> indexl256;
 
-                fixed (int* iptr = intIndexTable)fixed (long* lptr = longIndexTable)fixed (
-                    long* l256ptr = vector256longIndexTable
-                ) {
+                fixed (int* iptr = intIndexTable)
+                fixed (long* lptr = longIndexTable)
+                fixed (long* l256ptr = vector256longIndexTable)
+                {
                     indexi = Sse2.LoadVector128(iptr);
                     indexl = Sse2.LoadVector128(lptr);
                     indexl256 = Avx.LoadVector256(l256ptr);
@@ -72,7 +73,8 @@ namespace IntelHardwareIntrinsicTest
                 Vector128<float> maskf;
                 Vector128<double> maskd;
 
-                fixed (int* iptr = intMaskTable)fixed (long* lptr = longMaskTable)
+                fixed (int* iptr = intMaskTable)
+                fixed (long* lptr = longMaskTable)
                 {
                     maski = Sse2.LoadVector128(iptr);
                     maskl = Sse2.LoadVector128(lptr);

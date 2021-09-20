@@ -113,9 +113,9 @@ namespace Internal.Cryptography
                     throw new CryptographicException();
                 }
 
-                fixed (byte* pSrc = &MemoryMarshal.GetReference(source))fixed (
-                    byte* pDest = &MemoryMarshal.GetReference(destination)
-                ) {
+                fixed (byte* pSrc = &MemoryMarshal.GetReference(source))
+                fixed (byte* pDest = &MemoryMarshal.GetReference(destination))
+                {
                     NTSTATUS ntStatus = Interop.BCrypt.BCryptHash(
                         (uint)algHandle,
                         pbSecret: null,

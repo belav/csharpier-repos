@@ -230,9 +230,9 @@ namespace System.IO.Compression
                 // 2. Span's have a maximum length of the int boundary.
                 while ((int)availableOutput > 0)
                 {
-                    fixed (byte* inBytes = &MemoryMarshal.GetReference(source))fixed (
-                        byte* outBytes = &MemoryMarshal.GetReference(destination)
-                    ) {
+                    fixed (byte* inBytes = &MemoryMarshal.GetReference(source))
+                    fixed (byte* outBytes = &MemoryMarshal.GetReference(destination))
+                    {
                         if (
                             !Interop.Brotli.BrotliEncoderCompressStream(
                                 _state,
@@ -324,9 +324,9 @@ namespace System.IO.Compression
             }
             unsafe
             {
-                fixed (byte* inBytes = &MemoryMarshal.GetReference(source))fixed (
-                    byte* outBytes = &MemoryMarshal.GetReference(destination)
-                ) {
+                fixed (byte* inBytes = &MemoryMarshal.GetReference(source))
+                fixed (byte* outBytes = &MemoryMarshal.GetReference(destination))
+                {
                     nuint availableOutput = (nuint)destination.Length;
                     bool success = Interop.Brotli.BrotliEncoderCompress(
                         quality,

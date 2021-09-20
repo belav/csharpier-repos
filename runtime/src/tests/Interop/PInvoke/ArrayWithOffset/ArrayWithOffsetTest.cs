@@ -20,9 +20,9 @@ unsafe class ArrayWithOffsetTest
                 int[] array = new int[] { 1, 2, 3, 4, 5, 6 };
                 ArrayWithOffset offset = new ArrayWithOffset(array, i * 4); // The offset parameter in ArrayWithOffset is a byte-offset, not an element offset.
 
-                fixed (int* expectedSubArray = expected.Slice(i))fixed (
-                    int* newValueSubArray = newValue.Slice(i)
-                ) {
+                fixed (int* expectedSubArray = expected.Slice(i))
+                fixed (int* newValueSubArray = newValue.Slice(i))
+                {
                     Assert.IsTrue(
                         ArrayWithOffsetNative.Marshal_InOut(
                             expectedSubArray,

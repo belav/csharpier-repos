@@ -53,9 +53,10 @@ namespace IntelHardwareIntrinsicTest
                 Vector256<long> indexl;
                 Vector128<int> indexi128;
 
-                fixed (int* iptr = intIndexTable)fixed (long* lptr = longIndexTable)fixed (
-                    int* i128ptr = vector128intIndexTable
-                ) {
+                fixed (int* iptr = intIndexTable)
+                fixed (long* lptr = longIndexTable)
+                fixed (int* i128ptr = vector128intIndexTable)
+                {
                     indexi = Avx.LoadVector256(iptr);
                     indexl = Avx.LoadVector256(lptr);
                     indexi128 = Sse2.LoadVector128(i128ptr);

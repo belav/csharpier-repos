@@ -160,7 +160,8 @@ namespace System.Text
             if (charCount == 0 && (_charLeftOver == NULL_CHAR || !flush))
                 return 0;
 
-            fixed (char* pChars = chars)fixed (byte* pBytes = &bytes[0])
+            fixed (char* pChars = chars)
+            fixed (byte* pBytes = &bytes[0])
             {
                 char dummyChar;
                 char* pBuffer = pChars == null ? &dummyChar : pChars + charIndex;
@@ -283,7 +284,8 @@ namespace System.Text
                 return;
             }
 
-            fixed (char* pChars = chars)fixed (byte* pBytes = &bytes[0])
+            fixed (char* pChars = chars)
+            fixed (byte* pBytes = &bytes[0])
             {
                 char dummyChar;
                 char* pBuffer = pChars == null ? &dummyChar : pChars + charIndex;

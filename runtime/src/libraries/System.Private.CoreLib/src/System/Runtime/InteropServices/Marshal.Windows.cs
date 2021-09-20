@@ -131,7 +131,8 @@ namespace System.Runtime.InteropServices
             }
             else
             {
-                fixed (char* pChars = chars)fixed (byte* pBytes = bytes)
+                fixed (char* pChars = chars)
+                fixed (byte* pBytes = bytes)
                 {
                     byteLength = Interop.Kernel32.WideCharToMultiByte(
                         Interop.Kernel32.CP_ACP,

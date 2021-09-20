@@ -55,11 +55,9 @@ namespace System.Reflection
                 return Array.Empty<byte>();
 
             var token = new byte[8];
-            fixed (byte* pkt = token)fixed (byte* pk = _publicKey)get_public_token(
-                pkt,
-                pk,
-                _publicKey.Length
-            );
+            fixed (byte* pkt = token)
+            fixed (byte* pk = _publicKey)
+            get_public_token(pkt, pk, _publicKey.Length);
             return token;
         }
 

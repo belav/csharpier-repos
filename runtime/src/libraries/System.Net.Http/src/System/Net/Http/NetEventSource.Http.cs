@@ -110,7 +110,8 @@ namespace System.Net
                 if (arg5 == null)
                     arg5 = "";
 
-                fixed (char* string4Bytes = arg4)fixed (char* string5Bytes = arg5)
+                fixed (char* string4Bytes = arg4)
+                fixed (char* string5Bytes = arg5)
                 {
                     const int NumEventDatas = 5;
                     var descrs = stackalloc EventData[NumEventDatas];

@@ -199,7 +199,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(InsertTest__Insert_Vector64_Byte_1 testClass)
             {
-                fixed (Vector64<Byte>* pFld1 = &_fld1)fixed (Byte* pFld3 = &_fld3)
+                fixed (Vector64<Byte>* pFld1 = &_fld1)
+                fixed (Byte* pFld3 = &_fld3)
                 {
                     var result = AdvSimd.Insert(
                         AdvSimd.LoadVector64((Byte*)pFld1),
@@ -363,7 +364,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector64<Byte>* pClsVar1 = &_clsVar1)fixed (Byte* pClsVar3 = &_clsVar3)
+            fixed (Vector64<Byte>* pClsVar1 = &_clsVar1)
+            fixed (Byte* pClsVar3 = &_clsVar3)
             {
                 var result = AdvSimd.Insert(
                     AdvSimd.LoadVector64((Byte*)pClsVar1),
@@ -419,7 +421,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             var test = new InsertTest__Insert_Vector64_Byte_1();
 
-            fixed (Vector64<Byte>* pFld1 = &test._fld1)fixed (Byte* pFld3 = &test._fld3)
+            fixed (Vector64<Byte>* pFld1 = &test._fld1)
+            fixed (Byte* pFld3 = &test._fld3)
             {
                 var result = AdvSimd.Insert(
                     AdvSimd.LoadVector64((Byte*)pFld1),
@@ -446,7 +449,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector64<Byte>* pFld1 = &_fld1)fixed (Byte* pFld3 = &_fld3)
+            fixed (Vector64<Byte>* pFld1 = &_fld1)
+            fixed (Byte* pFld3 = &_fld3)
             {
                 var result = AdvSimd.Insert(
                     AdvSimd.LoadVector64((Byte*)pFld1),

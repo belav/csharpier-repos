@@ -223,7 +223,8 @@ namespace JIT.HardwareIntrinsics.Arm
             public void RunStructFldScenario_Load(
                 InsertSelectedScalarTest__InsertSelectedScalar_Vector64_Int16_3_Vector64_Int16_3 testClass
             ) {
-                fixed (Vector64<Int16>* pFld1 = &_fld1)fixed (Vector64<Int16>* pFld2 = &_fld3)
+                fixed (Vector64<Int16>* pFld1 = &_fld1)
+                fixed (Vector64<Int16>* pFld2 = &_fld3)
                 {
                     var result = AdvSimd.Arm64.InsertSelectedScalar(
                         AdvSimd.LoadVector64((Int16*)pFld1),
@@ -427,9 +428,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector64<Int16>* pClsVar1 = &_clsVar1)fixed (
-                Vector64<Int16>* pClsVar3 = &_clsVar3
-            ) {
+            fixed (Vector64<Int16>* pClsVar1 = &_clsVar1)
+            fixed (Vector64<Int16>* pClsVar3 = &_clsVar3)
+            {
                 var result = AdvSimd.Arm64.InsertSelectedScalar(
                     AdvSimd.LoadVector64((Int16*)(pClsVar1)),
                     3,
@@ -485,7 +486,8 @@ namespace JIT.HardwareIntrinsics.Arm
             var test =
                 new InsertSelectedScalarTest__InsertSelectedScalar_Vector64_Int16_3_Vector64_Int16_3();
 
-            fixed (Vector64<Int16>* pFld1 = &test._fld1)fixed (Vector64<Int16>* pFld2 = &test._fld3)
+            fixed (Vector64<Int16>* pFld1 = &test._fld1)
+            fixed (Vector64<Int16>* pFld2 = &test._fld3)
             {
                 var result = AdvSimd.Arm64.InsertSelectedScalar(
                     AdvSimd.LoadVector64((Int16*)pFld1),
@@ -513,7 +515,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector64<Int16>* pFld1 = &_fld1)fixed (Vector64<Int16>* pFld2 = &_fld3)
+            fixed (Vector64<Int16>* pFld1 = &_fld1)
+            fixed (Vector64<Int16>* pFld2 = &_fld3)
             {
                 var result = AdvSimd.Arm64.InsertSelectedScalar(
                     AdvSimd.LoadVector64((Int16*)pFld1),

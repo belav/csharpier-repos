@@ -417,11 +417,11 @@ namespace System.Net
                 stackalloc Interop.SspiCli.SecBuffer[input.Length];
             unmanagedBuffer.Clear();
 
-            fixed (Interop.SspiCli.SecBuffer* unmanagedBufferPtr = unmanagedBuffer)fixed (
-                byte* pinnedBuffer0 = input.Length > 0 ? input[0].token : null
-            )fixed (byte* pinnedBuffer1 = input.Length > 1 ? input[1].token : null)fixed (
-                byte* pinnedBuffer2 = input.Length > 2 ? input[2].token : null
-            ) {
+            fixed (Interop.SspiCli.SecBuffer* unmanagedBufferPtr = unmanagedBuffer)
+            fixed (byte* pinnedBuffer0 = input.Length > 0 ? input[0].token : null)
+            fixed (byte* pinnedBuffer1 = input.Length > 1 ? input[1].token : null)
+            fixed (byte* pinnedBuffer2 = input.Length > 2 ? input[2].token : null)
+            {
                 sdcInOut.pBuffers = unmanagedBufferPtr;
 
                 ThreeByteArrays byteArrayStruct = default;

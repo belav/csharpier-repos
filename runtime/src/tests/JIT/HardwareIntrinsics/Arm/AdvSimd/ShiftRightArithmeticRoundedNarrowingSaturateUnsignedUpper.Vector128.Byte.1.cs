@@ -227,7 +227,8 @@ namespace JIT.HardwareIntrinsics.Arm
             public void RunStructFldScenario_Load(
                 ImmBinaryOpTest__ShiftRightArithmeticRoundedNarrowingSaturateUnsignedUpper_Vector128_Byte_1 testClass
             ) {
-                fixed (Vector64<Byte>* pFld1 = &_fld1)fixed (Vector128<Int16>* pFld2 = &_fld2)
+                fixed (Vector64<Byte>* pFld1 = &_fld1)
+                fixed (Vector128<Int16>* pFld2 = &_fld2)
                 {
                     var result = AdvSimd.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedUpper(
                         AdvSimd.LoadVector64((Byte*)(pFld1)),
@@ -417,9 +418,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector64<Byte>* pClsVar1 = &_clsVar1)fixed (
-                Vector128<Int16>* pClsVar2 = &_clsVar2
-            ) {
+            fixed (Vector64<Byte>* pClsVar1 = &_clsVar1)
+            fixed (Vector128<Int16>* pClsVar2 = &_clsVar2)
+            {
                 var result = AdvSimd.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedUpper(
                     AdvSimd.LoadVector64((Byte*)(pClsVar1)),
                     AdvSimd.LoadVector128((Int16*)(pClsVar2)),
@@ -485,7 +486,8 @@ namespace JIT.HardwareIntrinsics.Arm
             var test =
                 new ImmBinaryOpTest__ShiftRightArithmeticRoundedNarrowingSaturateUnsignedUpper_Vector128_Byte_1();
 
-            fixed (Vector64<Byte>* pFld1 = &test._fld1)fixed (Vector128<Int16>* pFld2 = &test._fld2)
+            fixed (Vector64<Byte>* pFld1 = &test._fld1)
+            fixed (Vector128<Int16>* pFld2 = &test._fld2)
             {
                 var result = AdvSimd.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedUpper(
                     AdvSimd.LoadVector64((Byte*)(pFld1)),
@@ -516,7 +518,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector64<Byte>* pFld1 = &_fld1)fixed (Vector128<Int16>* pFld2 = &_fld2)
+            fixed (Vector64<Byte>* pFld1 = &_fld1)
+            fixed (Vector128<Int16>* pFld2 = &_fld2)
             {
                 var result = AdvSimd.ShiftRightArithmeticRoundedNarrowingSaturateUnsignedUpper(
                     AdvSimd.LoadVector64((Byte*)(pFld1)),

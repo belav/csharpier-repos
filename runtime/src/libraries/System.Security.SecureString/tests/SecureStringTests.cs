@@ -37,7 +37,8 @@ namespace System.Security.Tests
                 "length",
                 () =>
                 {
-                    fixed (char* chars = "test")new SecureString(chars, -1);
+                    fixed (char* chars = "test")
+                    new SecureString(chars, -1);
                 }
             );
             AssertExtensions.Throws<ArgumentOutOfRangeException>(

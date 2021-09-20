@@ -25,9 +25,10 @@ namespace System.Text.Encodings.Tests
             byte[] outputBytes = new byte[100];
             char[] outputChars = new char[100];
 
-            fixed (byte* pBytes = outputBytes)fixed (byte* pFilledBytes = bytes)fixed (
-                char* pChars = s
-            )fixed (char* pOutputChars = outputChars)
+            fixed (byte* pBytes = outputBytes)
+            fixed (byte* pFilledBytes = bytes)
+            fixed (char* pChars = s)
+            fixed (char* pOutputChars = outputChars)
             {
                 int count = encoding.GetBytes(pChars, s.Length, pBytes, outputBytes.Length);
                 Assert.Equal(bytes.Length, count);
@@ -61,9 +62,10 @@ namespace System.Text.Encodings.Tests
                 new DecoderExceptionFallback()
             );
 
-            fixed (byte* pBytesPtr = new byte[10])fixed (char* pCharsPtr = "some string")fixed (
-                char* pInvalidSurrogatePtr = "\uD800\uB800"
-            ) {
+            fixed (byte* pBytesPtr = new byte[10])
+            fixed (char* pCharsPtr = "some string")
+            fixed (char* pInvalidSurrogatePtr = "\uD800\uB800")
+            {
                 byte* pBytes = pBytesPtr;
                 char* pChars = pCharsPtr;
                 char* pInvalidSurrogate = pInvalidSurrogatePtr;
@@ -120,9 +122,10 @@ namespace System.Text.Encodings.Tests
             char[] chars = new char[20];
             byte[] invalid = new byte[] { 0x00, 0xD8, 0x00, 0xD8 };
 
-            fixed (byte* pBytesPtr = bytes)fixed (byte* pInvalidPtr = invalid)fixed (
-                char* pCharsPtr = chars
-            ) {
+            fixed (byte* pBytesPtr = bytes)
+            fixed (byte* pInvalidPtr = invalid)
+            fixed (char* pCharsPtr = chars)
+            {
                 byte* pBytes = pBytesPtr;
                 byte* pInvalid = pInvalidPtr;
                 char* pChars = pCharsPtr;

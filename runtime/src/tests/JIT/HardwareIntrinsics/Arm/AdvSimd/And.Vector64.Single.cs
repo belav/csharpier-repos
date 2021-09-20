@@ -220,7 +220,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             public void RunStructFldScenario_Load(SimpleBinaryOpTest__And_Vector64_Single testClass)
             {
-                fixed (Vector64<Single>* pFld1 = &_fld1)fixed (Vector64<Single>* pFld2 = &_fld2)
+                fixed (Vector64<Single>* pFld1 = &_fld1)
+                fixed (Vector64<Single>* pFld2 = &_fld2)
                 {
                     var result = AdvSimd.And(
                         AdvSimd.LoadVector64((Single*)(pFld1)),
@@ -400,9 +401,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector64<Single>* pClsVar1 = &_clsVar1)fixed (
-                Vector64<Single>* pClsVar2 = &_clsVar2
-            ) {
+            fixed (Vector64<Single>* pClsVar1 = &_clsVar1)
+            fixed (Vector64<Single>* pClsVar2 = &_clsVar2)
+            {
                 var result = AdvSimd.And(
                     AdvSimd.LoadVector64((Single*)(pClsVar1)),
                     AdvSimd.LoadVector64((Single*)(pClsVar2))
@@ -454,9 +455,9 @@ namespace JIT.HardwareIntrinsics.Arm
 
             var test = new SimpleBinaryOpTest__And_Vector64_Single();
 
-            fixed (Vector64<Single>* pFld1 = &test._fld1)fixed (
-                Vector64<Single>* pFld2 = &test._fld2
-            ) {
+            fixed (Vector64<Single>* pFld1 = &test._fld1)
+            fixed (Vector64<Single>* pFld2 = &test._fld2)
+            {
                 var result = AdvSimd.And(
                     AdvSimd.LoadVector64((Single*)(pFld1)),
                     AdvSimd.LoadVector64((Single*)(pFld2))
@@ -481,7 +482,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector64<Single>* pFld1 = &_fld1)fixed (Vector64<Single>* pFld2 = &_fld2)
+            fixed (Vector64<Single>* pFld1 = &_fld1)
+            fixed (Vector64<Single>* pFld2 = &_fld2)
             {
                 var result = AdvSimd.And(
                     AdvSimd.LoadVector64((Single*)(pFld1)),

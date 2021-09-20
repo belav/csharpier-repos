@@ -69,9 +69,8 @@ namespace System.DirectoryServices.AccountManagement
 
             // Logon user expects the username in UPN or to have the username and domain split to the separate parameters.
             // It does not work properly with NT4 style name formats.  This function will put the username in the proper format.
-            fixed (
-                char* splitUsername = new char[UnsafeNativeMethods.CRED_MAX_USERNAME_LENGTH]
-            )fixed (char* splitDomain = new char[UnsafeNativeMethods.CRED_MAX_DOMAIN_TARGET_LENGTH])
+            fixed (char* splitUsername = new char[UnsafeNativeMethods.CRED_MAX_USERNAME_LENGTH])
+            fixed (char* splitDomain = new char[UnsafeNativeMethods.CRED_MAX_DOMAIN_TARGET_LENGTH])
             {
                 int result = UnsafeNativeMethods.CredUIParseUserName(
                     username,

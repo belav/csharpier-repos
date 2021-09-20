@@ -1823,7 +1823,8 @@ namespace System.Tests
         {
             ReadOnlySpan<char> span = s;
             Assert.Equal(s.Length, span.Length);
-            fixed (char* stringPtr = s)fixed (char* spanPtr = &MemoryMarshal.GetReference(span))
+            fixed (char* stringPtr = s)
+            fixed (char* spanPtr = &MemoryMarshal.GetReference(span))
             {
                 Assert.Equal((IntPtr)stringPtr, (IntPtr)spanPtr);
             }

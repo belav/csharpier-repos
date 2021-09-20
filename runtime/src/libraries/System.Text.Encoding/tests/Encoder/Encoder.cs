@@ -29,9 +29,11 @@ namespace System.Text.Encodings.Tests
             int charsUsed;
             bool completed;
 
-            fixed (char* pChars1 = s1)fixed (char* pChars2 = s2)fixed (char* pChars3 = s3)fixed (
-                byte* pBytes = bytes
-            ) {
+            fixed (char* pChars1 = s1)
+            fixed (char* pChars2 = s2)
+            fixed (char* pChars3 = s3)
+            fixed (byte* pBytes = bytes)
+            {
                 encoder.Convert(
                     pChars1,
                     s1.Length,
@@ -166,7 +168,8 @@ namespace System.Text.Encodings.Tests
             string chars = "\u0D800\uDC00";
             byte[] bytes = new byte[4];
 
-            fixed (byte* bytesPtr = bytes)fixed (char* charsPtr = chars)
+            fixed (byte* bytesPtr = bytes)
+            fixed (char* charsPtr = chars)
             {
                 byte* pBytes = bytesPtr;
                 char* pChars = charsPtr;
@@ -252,7 +255,8 @@ namespace System.Text.Encodings.Tests
                 )
                 .GetEncoder();
 
-            fixed (char* charsPtr = "\uFFFF")fixed (byte* bytesPtr = new byte[2])
+            fixed (char* charsPtr = "\uFFFF")
+            fixed (byte* bytesPtr = new byte[2])
             {
                 byte* pBytes = bytesPtr;
                 char* pChars = charsPtr;
@@ -288,9 +292,11 @@ namespace System.Text.Encodings.Tests
             byte[] bytes2 = utf8.GetBytes(s2);
             byte[] bytes3 = utf8.GetBytes(s3);
 
-            fixed (char* pChars1 = s1)fixed (char* pChars2 = s2)fixed (char* pChars3 = s3)fixed (
-                byte* pBytes = bytes
-            ) {
+            fixed (char* pChars1 = s1)
+            fixed (char* pChars2 = s2)
+            fixed (char* pChars3 = s3)
+            fixed (byte* pBytes = bytes)
+            {
                 int bytesUsed = encoder.GetBytes(pChars1, s1.Length, pBytes, bytes.Length, true);
                 Assert.Equal(bytes1.Length, bytesUsed);
                 Assert.Equal(bytes1.Length, encoder.GetByteCount(pChars1, s1.Length, true));
@@ -340,7 +346,8 @@ namespace System.Text.Encodings.Tests
             Encoder encoder = Encoding.UTF8.GetEncoder();
             string s = "\u0D800\uDC00";
 
-            fixed (char* charsPtr = s)fixed (byte* bytesPtr = new byte[4])
+            fixed (char* charsPtr = s)
+            fixed (byte* bytesPtr = new byte[4])
             {
                 byte* pBytes = bytesPtr;
                 char* pChars = charsPtr;
@@ -384,7 +391,8 @@ namespace System.Text.Encodings.Tests
                 )
                 .GetEncoder();
 
-            fixed (char* charsPtr = "\uFFFF")fixed (byte* bytesPtr = new byte[2])
+            fixed (char* charsPtr = "\uFFFF")
+            fixed (byte* bytesPtr = new byte[2])
             {
                 byte* pBytes = bytesPtr;
                 char* pChars = charsPtr;

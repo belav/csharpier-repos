@@ -52,11 +52,10 @@ namespace System.Diagnostics
 
             string arguments = startInfo.BuildArguments();
 
+            fixed (char* fileName = startInfo.FileName.Length > 0 ? startInfo.FileName : null)
+            fixed (char* verb = startInfo.Verb.Length > 0 ? startInfo.Verb : null)
+            fixed (char* parameters = arguments.Length > 0 ? arguments : null)
             fixed (
-                char* fileName = startInfo.FileName.Length > 0 ? startInfo.FileName : null
-            )fixed (char* verb = startInfo.Verb.Length > 0 ? startInfo.Verb : null)fixed (
-                char* parameters = arguments.Length > 0 ? arguments : null
-            )fixed (
                 char* directory =
                     startInfo.WorkingDirectory.Length > 0 ? startInfo.WorkingDirectory : null
             ) {

@@ -19,7 +19,8 @@ namespace VectorWiden
 
         static unsafe int Main(string[] args)
         {
-            fixed (byte* pBytes = &_asciiBytes[0])fixed (char* pString = _asciiString)
+            fixed (byte* pBytes = &_asciiBytes[0])
+            fixed (char* pString = _asciiString)
             {
                 TryGetAsciiStringVectorWiden(pBytes, pString, _asciiBytes.Length);
             }

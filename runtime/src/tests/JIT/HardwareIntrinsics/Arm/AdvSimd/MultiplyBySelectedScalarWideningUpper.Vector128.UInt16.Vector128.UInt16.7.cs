@@ -223,7 +223,8 @@ namespace JIT.HardwareIntrinsics.Arm
             public void RunStructFldScenario_Load(
                 ImmBinaryOpTest__MultiplyBySelectedScalarWideningUpper_Vector128_UInt16_Vector128_UInt16_7 testClass
             ) {
-                fixed (Vector128<UInt16>* pFld1 = &_fld1)fixed (Vector128<UInt16>* pFld2 = &_fld2)
+                fixed (Vector128<UInt16>* pFld1 = &_fld1)
+                fixed (Vector128<UInt16>* pFld2 = &_fld2)
                 {
                     var result = AdvSimd.MultiplyBySelectedScalarWideningUpper(
                         AdvSimd.LoadVector128((UInt16*)(pFld1)),
@@ -419,9 +420,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector128<UInt16>* pClsVar1 = &_clsVar1)fixed (
-                Vector128<UInt16>* pClsVar2 = &_clsVar2
-            ) {
+            fixed (Vector128<UInt16>* pClsVar1 = &_clsVar1)
+            fixed (Vector128<UInt16>* pClsVar2 = &_clsVar2)
+            {
                 var result = AdvSimd.MultiplyBySelectedScalarWideningUpper(
                     AdvSimd.LoadVector128((UInt16*)(pClsVar1)),
                     AdvSimd.LoadVector128((UInt16*)(pClsVar2)),
@@ -475,9 +476,9 @@ namespace JIT.HardwareIntrinsics.Arm
             var test =
                 new ImmBinaryOpTest__MultiplyBySelectedScalarWideningUpper_Vector128_UInt16_Vector128_UInt16_7();
 
-            fixed (Vector128<UInt16>* pFld1 = &test._fld1)fixed (
-                Vector128<UInt16>* pFld2 = &test._fld2
-            ) {
+            fixed (Vector128<UInt16>* pFld1 = &test._fld1)
+            fixed (Vector128<UInt16>* pFld2 = &test._fld2)
+            {
                 var result = AdvSimd.MultiplyBySelectedScalarWideningUpper(
                     AdvSimd.LoadVector128((UInt16*)(pFld1)),
                     AdvSimd.LoadVector128((UInt16*)(pFld2)),
@@ -503,7 +504,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector128<UInt16>* pFld1 = &_fld1)fixed (Vector128<UInt16>* pFld2 = &_fld2)
+            fixed (Vector128<UInt16>* pFld1 = &_fld1)
+            fixed (Vector128<UInt16>* pFld2 = &_fld2)
             {
                 var result = AdvSimd.MultiplyBySelectedScalarWideningUpper(
                     AdvSimd.LoadVector128((UInt16*)(pFld1)),

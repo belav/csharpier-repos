@@ -67,7 +67,8 @@ namespace System.IO
 
             int commonChars = 0;
 
-            fixed (char* f = first)fixed (char* s = second)
+            fixed (char* f = first)
+            fixed (char* s = second)
             {
                 char* l = f;
                 char* r = s;

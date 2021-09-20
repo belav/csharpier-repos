@@ -1237,15 +1237,13 @@ namespace System.Diagnostics.Tracing
                         rgGCHandle[i] = GCHandle.Alloc(dataRefObj[i], GCHandleType.Pinned);
                         if (dataRefObj[i] is string)
                         {
-                            fixed (char* p = (string?)dataRefObj[i])userDataPtr[
-                                refObjPosition[i]
-                            ].Ptr = (ulong)p;
+                            fixed (char* p = (string?)dataRefObj[i])
+                            userDataPtr[refObjPosition[i]].Ptr = (ulong)p;
                         }
                         else
                         {
-                            fixed (byte* p = (byte[]?)dataRefObj[i])userDataPtr[
-                                refObjPosition[i]
-                            ].Ptr = (ulong)p;
+                            fixed (byte* p = (byte[]?)dataRefObj[i])
+                            userDataPtr[refObjPosition[i]].Ptr = (ulong)p;
                         }
                     }
 

@@ -103,7 +103,8 @@ namespace System
 
             int length = Math.Min(strA.Length, strB.Length);
 
-            fixed (char* ap = &strA._firstChar)fixed (char* bp = &strB._firstChar)
+            fixed (char* ap = &strA._firstChar)
+            fixed (char* bp = &strB._firstChar)
             {
                 char* a = ap;
                 char* b = bp;

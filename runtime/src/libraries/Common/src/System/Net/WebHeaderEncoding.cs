@@ -31,7 +31,8 @@ namespace System.Net
                 (bytes, byteIndex),
                 (buffer, state) =>
                 {
-                    fixed (byte* pByt = &state.bytes[state.byteIndex])fixed (char* pStr = buffer)
+                    fixed (byte* pByt = &state.bytes[state.byteIndex])
+                    fixed (char* pStr = buffer)
                     {
                         byte* pBytes = pByt;
                         char* pString = pStr;

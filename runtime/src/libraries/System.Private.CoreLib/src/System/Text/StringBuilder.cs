@@ -1522,7 +1522,8 @@ namespace System.Text
             {
                 unsafe
                 {
-                    fixed (char* sourcePtr = value)Insert(index, sourcePtr, value.Length);
+                    fixed (char* sourcePtr = value)
+                    Insert(index, sourcePtr, value.Length);
                 }
             }
             return this;
@@ -1605,7 +1606,8 @@ namespace System.Text
             {
                 unsafe
                 {
-                    fixed (char* sourcePtr = &value[startIndex])Insert(index, sourcePtr, charCount);
+                    fixed (char* sourcePtr = &value[startIndex])
+                    Insert(index, sourcePtr, charCount);
                 }
             }
             return this;
@@ -1644,11 +1646,8 @@ namespace System.Text
             {
                 unsafe
                 {
-                    fixed (char* sourcePtr = &MemoryMarshal.GetReference(value))Insert(
-                        index,
-                        sourcePtr,
-                        value.Length
-                    );
+                    fixed (char* sourcePtr = &MemoryMarshal.GetReference(value))
+                    Insert(index, sourcePtr, value.Length);
                 }
             }
             return this;
@@ -2456,9 +2455,8 @@ namespace System.Text
                         if (delta != 0) // can skip the sliding of gaps if source an target string are the same size.
                         {
                             // Copy the gap data between the current replacement and the next replacement
-                            fixed (
-                                char* sourcePtr = &sourceChunk.m_ChunkChars[gapStart]
-                            )ReplaceInPlaceAtChunk(
+                            fixed (char* sourcePtr = &sourceChunk.m_ChunkChars[gapStart])
+                            ReplaceInPlaceAtChunk(
                                 ref targetChunk!,
                                 ref targetIndexInChunk,
                                 sourcePtr,

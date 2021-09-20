@@ -63,7 +63,8 @@ namespace Layout
         {
             int length = strA.Length;
 
-            fixed (char* ap = strA)fixed (char* bp = strB)
+            fixed (char* ap = strA)
+            fixed (char* bp = strB)
             {
                 char* a = ap;
                 char* b = bp;
@@ -91,7 +92,8 @@ namespace Layout
         {
             int length = strA.Length;
 
-            fixed (char* ap = strA)fixed (char* bp = strB)
+            fixed (char* ap = strA)
+            fixed (char* bp = strB)
             {
                 char* a = ap;
                 char* b = bp;

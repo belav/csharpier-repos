@@ -705,11 +705,8 @@ namespace Internal.JitInterface
 #if DEBUG
             // In debug, write some bogus data to the struct to ensure we have filled everything
             // properly.
-            fixed (CORINFO_LOOKUP* tmp = &pLookup)MemoryHelper.FillMemory(
-                (byte*)tmp,
-                0xcc,
-                sizeof(CORINFO_LOOKUP)
-            );
+            fixed (CORINFO_LOOKUP* tmp = &pLookup)
+            MemoryHelper.FillMemory((byte*)tmp, 0xcc, sizeof(CORINFO_LOOKUP));
 #endif
 
             TypeDesc delegateTypeDesc = HandleToObject(delegateType);
@@ -2543,7 +2540,8 @@ namespace Internal.JitInterface
 #if DEBUG
             // In debug, write some bogus data to the struct to ensure we have filled everything
             // properly.
-            fixed (CORINFO_GENERICHANDLE_RESULT* tmp = &pResult)MemoryHelper.FillMemory(
+            fixed (CORINFO_GENERICHANDLE_RESULT* tmp = &pResult)
+            MemoryHelper.FillMemory(
                 (byte*)tmp,
                 0xcc,
                 Marshal.SizeOf<CORINFO_GENERICHANDLE_RESULT>()

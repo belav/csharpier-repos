@@ -33,7 +33,8 @@ namespace System.Drawing.Drawing2D
             if (pts.Length != types.Length)
                 throw Gdip.StatusException(Gdip.InvalidParameter);
 
-            fixed (PointF* p = pts)fixed (byte* t = types)
+            fixed (PointF* p = pts)
+            fixed (byte* t = types)
             {
                 Gdip.CheckStatus(
                     Gdip.GdipCreatePath2(p, t, types.Length, (int)fillMode, out IntPtr nativePath)
@@ -52,7 +53,8 @@ namespace System.Drawing.Drawing2D
             if (pts.Length != types.Length)
                 throw Gdip.StatusException(Gdip.InvalidParameter);
 
-            fixed (byte* t = types)fixed (Point* p = pts)
+            fixed (byte* t = types)
+            fixed (Point* p = pts)
             {
                 Gdip.CheckStatus(
                     Gdip.GdipCreatePath2I(
@@ -172,7 +174,8 @@ namespace System.Drawing.Drawing2D
             if (count == 0)
                 return pathData;
 
-            fixed (byte* t = pathData.Types)fixed (PointF* p = pathData.Points)
+            fixed (byte* t = pathData.Types)
+            fixed (PointF* p = pathData.Points)
             {
                 GpPathData data = new GpPathData { Count = count, Points = p, Types = t };
 

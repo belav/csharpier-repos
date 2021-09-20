@@ -170,9 +170,9 @@ namespace System.Security.Cryptography.X509Certificates
             out AsnEncodedData parameters,
             out AsnEncodedData keyValue
         ) {
-            fixed (byte* ptr = &MemoryMarshal.GetReference(source))using (
-                MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length)
-            ) {
+            fixed (byte* ptr = &MemoryMarshal.GetReference(source))
+            using (MemoryManager<byte> manager = new PointerMemoryManager<byte>(ptr, source.Length))
+            {
                 AsnValueReader reader = new AsnValueReader(source, AsnEncodingRules.DER);
 
                 int read;

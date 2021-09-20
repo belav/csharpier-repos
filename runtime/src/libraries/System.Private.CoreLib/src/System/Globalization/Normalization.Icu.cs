@@ -62,9 +62,9 @@ namespace System.Globalization
                 for (int attempt = 0; attempt < 2; attempt++)
                 {
                     int realLen;
-                    fixed (char* pInput = strInput)fixed (
-                        char* pDest = &MemoryMarshal.GetReference(buffer)
-                    ) {
+                    fixed (char* pInput = strInput)
+                    fixed (char* pDest = &MemoryMarshal.GetReference(buffer))
+                    {
                         realLen = Interop.Globalization.NormalizeString(
                             normalizationForm,
                             pInput,

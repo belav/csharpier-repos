@@ -55,9 +55,9 @@ namespace System.Globalization
             // GetReference may return nullptr if the input span is defaulted. The native layer handles
             // this appropriately; no workaround is needed on the managed side.
 
-            fixed (char* pString1 = &MemoryMarshal.GetReference(string1))fixed (
-                char* pString2 = &MemoryMarshal.GetReference(string2)
-            ) {
+            fixed (char* pString1 = &MemoryMarshal.GetReference(string1))
+            fixed (char* pString2 = &MemoryMarshal.GetReference(string2))
+            {
                 return Interop.Globalization.CompareString(
                     _sortHandle,
                     pString1,
@@ -104,9 +104,9 @@ namespace System.Globalization
                 // GetReference may return nullptr if the input span is defaulted. The native layer handles
                 // this appropriately; no workaround is needed on the managed side.
 
-                fixed (char* pSource = &MemoryMarshal.GetReference(source))fixed (
-                    char* pTarget = &MemoryMarshal.GetReference(target)
-                ) {
+                fixed (char* pSource = &MemoryMarshal.GetReference(source))
+                fixed (char* pTarget = &MemoryMarshal.GetReference(target))
+                {
                     if (fromBeginning)
                         return Interop.Globalization.IndexOf(
                             _sortHandle,
@@ -148,9 +148,9 @@ namespace System.Globalization
             Debug.Assert(!target.IsEmpty);
             Debug.Assert(_isAsciiEqualityOrdinal);
 
-            fixed (char* ap = &MemoryMarshal.GetReference(source))fixed (
-                char* bp = &MemoryMarshal.GetReference(target)
-            ) {
+            fixed (char* ap = &MemoryMarshal.GetReference(source))
+            fixed (char* bp = &MemoryMarshal.GetReference(target))
+            {
                 char* a = ap;
                 char* b = bp;
 
@@ -276,9 +276,9 @@ namespace System.Globalization
             Debug.Assert(!target.IsEmpty);
             Debug.Assert(_isAsciiEqualityOrdinal);
 
-            fixed (char* ap = &MemoryMarshal.GetReference(source))fixed (
-                char* bp = &MemoryMarshal.GetReference(target)
-            ) {
+            fixed (char* ap = &MemoryMarshal.GetReference(source))
+            fixed (char* bp = &MemoryMarshal.GetReference(target))
+            {
                 char* a = ap;
                 char* b = bp;
 
@@ -410,9 +410,7 @@ namespace System.Globalization
             }
             else
             {
-                fixed (
-                    char* pSource = &MemoryMarshal.GetReference(source)
-                ) // could be null (or otherwise unable to be dereferenced)
+                fixed (char* pSource = &MemoryMarshal.GetReference(source)) // could be null (or otherwise unable to be dereferenced)
                 fixed (char* pPrefix = &MemoryMarshal.GetReference(prefix))
                 {
                     return Interop.Globalization.StartsWith(
@@ -441,9 +439,7 @@ namespace System.Globalization
 
             int length = Math.Min(source.Length, prefix.Length);
 
-            fixed (
-                char* ap = &MemoryMarshal.GetReference(source)
-            ) // could be null (or otherwise unable to be dereferenced)
+            fixed (char* ap = &MemoryMarshal.GetReference(source)) // could be null (or otherwise unable to be dereferenced)
             fixed (char* bp = &MemoryMarshal.GetReference(prefix))
             {
                 char* a = ap;
@@ -539,9 +535,7 @@ namespace System.Globalization
 
             int length = Math.Min(source.Length, prefix.Length);
 
-            fixed (
-                char* ap = &MemoryMarshal.GetReference(source)
-            ) // could be null (or otherwise unable to be dereferenced)
+            fixed (char* ap = &MemoryMarshal.GetReference(source)) // could be null (or otherwise unable to be dereferenced)
             fixed (char* bp = &MemoryMarshal.GetReference(prefix))
             {
                 char* a = ap;
@@ -634,9 +628,7 @@ namespace System.Globalization
             }
             else
             {
-                fixed (
-                    char* pSource = &MemoryMarshal.GetReference(source)
-                ) // could be null (or otherwise unable to be dereferenced)
+                fixed (char* pSource = &MemoryMarshal.GetReference(source)) // could be null (or otherwise unable to be dereferenced)
                 fixed (char* pSuffix = &MemoryMarshal.GetReference(suffix))
                 {
                     return Interop.Globalization.EndsWith(
@@ -665,9 +657,7 @@ namespace System.Globalization
 
             int length = Math.Min(source.Length, suffix.Length);
 
-            fixed (
-                char* ap = &MemoryMarshal.GetReference(source)
-            ) // could be null (or otherwise unable to be dereferenced)
+            fixed (char* ap = &MemoryMarshal.GetReference(source)) // could be null (or otherwise unable to be dereferenced)
             fixed (char* bp = &MemoryMarshal.GetReference(suffix))
             {
                 char* a = ap + source.Length - 1;
@@ -763,9 +753,7 @@ namespace System.Globalization
 
             int length = Math.Min(source.Length, suffix.Length);
 
-            fixed (
-                char* ap = &MemoryMarshal.GetReference(source)
-            ) // could be null (or otherwise unable to be dereferenced)
+            fixed (char* ap = &MemoryMarshal.GetReference(source)) // could be null (or otherwise unable to be dereferenced)
             fixed (char* bp = &MemoryMarshal.GetReference(suffix))
             {
                 char* a = ap + source.Length - 1;
@@ -895,9 +883,9 @@ namespace System.Globalization
 
             int actualSortKeyLength;
 
-            fixed (char* pSource = &MemoryMarshal.GetReference(source))fixed (
-                byte* pDest = &MemoryMarshal.GetReference(destination)
-            ) {
+            fixed (char* pSource = &MemoryMarshal.GetReference(source))
+            fixed (byte* pDest = &MemoryMarshal.GetReference(destination))
+            {
                 actualSortKeyLength = Interop.Globalization.GetSortKey(
                     _sortHandle,
                     pSource,

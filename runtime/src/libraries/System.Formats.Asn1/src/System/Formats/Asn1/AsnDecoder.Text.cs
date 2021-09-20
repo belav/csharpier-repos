@@ -410,9 +410,9 @@ namespace System.Formats.Asn1
                 return true;
             }
 
-            fixed (byte* bytePtr = &MemoryMarshal.GetReference(source))fixed (
-                char* charPtr = &MemoryMarshal.GetReference(destination)
-            ) {
+            fixed (byte* bytePtr = &MemoryMarshal.GetReference(source))
+            fixed (char* charPtr = &MemoryMarshal.GetReference(destination))
+            {
                 try
                 {
                     int charCount = encoding.GetCharCount(bytePtr, source.Length);

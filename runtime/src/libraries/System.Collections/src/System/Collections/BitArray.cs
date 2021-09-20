@@ -442,7 +442,8 @@ namespace System.Collections
             uint i = 0;
             if (Avx2.IsSupported)
             {
-                fixed (int* leftPtr = thisArray)fixed (int* rightPtr = valueArray)
+                fixed (int* leftPtr = thisArray)
+                fixed (int* rightPtr = valueArray)
                 {
                     for (; i < (uint)count - (Vector256IntCount - 1u); i += Vector256IntCount)
                     {
@@ -454,7 +455,8 @@ namespace System.Collections
             }
             else if (Sse2.IsSupported)
             {
-                fixed (int* leftPtr = thisArray)fixed (int* rightPtr = valueArray)
+                fixed (int* leftPtr = thisArray)
+                fixed (int* rightPtr = valueArray)
                 {
                     for (; i < (uint)count - (Vector128IntCount - 1u); i += Vector128IntCount)
                     {
@@ -466,7 +468,8 @@ namespace System.Collections
             }
             else if (AdvSimd.IsSupported)
             {
-                fixed (int* leftPtr = thisArray)fixed (int* rightPtr = valueArray)
+                fixed (int* leftPtr = thisArray)
+                fixed (int* rightPtr = valueArray)
                 {
                     for (; i < (uint)count - (Vector128IntCount - 1u); i += Vector128IntCount)
                     {
@@ -544,7 +547,8 @@ namespace System.Collections
             uint i = 0;
             if (Avx2.IsSupported)
             {
-                fixed (int* leftPtr = thisArray)fixed (int* rightPtr = valueArray)
+                fixed (int* leftPtr = thisArray)
+                fixed (int* rightPtr = valueArray)
                 {
                     for (; i < (uint)count - (Vector256IntCount - 1u); i += Vector256IntCount)
                     {
@@ -556,7 +560,8 @@ namespace System.Collections
             }
             else if (Sse2.IsSupported)
             {
-                fixed (int* leftPtr = thisArray)fixed (int* rightPtr = valueArray)
+                fixed (int* leftPtr = thisArray)
+                fixed (int* rightPtr = valueArray)
                 {
                     for (; i < (uint)count - (Vector128IntCount - 1u); i += Vector128IntCount)
                     {
@@ -568,7 +573,8 @@ namespace System.Collections
             }
             else if (AdvSimd.IsSupported)
             {
-                fixed (int* leftPtr = thisArray)fixed (int* rightPtr = valueArray)
+                fixed (int* leftPtr = thisArray)
+                fixed (int* rightPtr = valueArray)
                 {
                     for (; i < (uint)count - (Vector128IntCount - 1u); i += Vector128IntCount)
                     {
@@ -646,7 +652,8 @@ namespace System.Collections
             uint i = 0;
             if (Avx2.IsSupported)
             {
-                fixed (int* leftPtr = m_array)fixed (int* rightPtr = value.m_array)
+                fixed (int* leftPtr = m_array)
+                fixed (int* rightPtr = value.m_array)
                 {
                     for (; i < (uint)count - (Vector256IntCount - 1u); i += Vector256IntCount)
                     {
@@ -658,7 +665,8 @@ namespace System.Collections
             }
             else if (Sse2.IsSupported)
             {
-                fixed (int* leftPtr = thisArray)fixed (int* rightPtr = valueArray)
+                fixed (int* leftPtr = thisArray)
+                fixed (int* rightPtr = valueArray)
                 {
                     for (; i < (uint)count - (Vector128IntCount - 1u); i += Vector128IntCount)
                     {
@@ -670,7 +678,8 @@ namespace System.Collections
             }
             else if (AdvSimd.IsSupported)
             {
-                fixed (int* leftPtr = thisArray)fixed (int* rightPtr = valueArray)
+                fixed (int* leftPtr = thisArray)
+                fixed (int* rightPtr = valueArray)
                 {
                     for (; i < (uint)count - (Vector128IntCount - 1u); i += Vector128IntCount)
                     {

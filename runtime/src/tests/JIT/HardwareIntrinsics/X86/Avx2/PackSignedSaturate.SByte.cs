@@ -230,7 +230,8 @@ namespace JIT.HardwareIntrinsics.X86
             public void RunStructFldScenario_Load(
                 SimpleBinaryOpTest__PackSignedSaturateSByte testClass
             ) {
-                fixed (Vector256<Int16>* pFld1 = &_fld1)fixed (Vector256<Int16>* pFld2 = &_fld2)
+                fixed (Vector256<Int16>* pFld1 = &_fld1)
+                fixed (Vector256<Int16>* pFld2 = &_fld2)
                 {
                     var result = Avx2.PackSignedSaturate(
                         Avx.LoadVector256((Int16*)(pFld1)),
@@ -444,9 +445,9 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector256<Int16>* pClsVar1 = &_clsVar1)fixed (
-                Vector256<Int16>* pClsVar2 = &_clsVar2
-            ) {
+            fixed (Vector256<Int16>* pClsVar1 = &_clsVar1)
+            fixed (Vector256<Int16>* pClsVar2 = &_clsVar2)
+            {
                 var result = Avx2.PackSignedSaturate(
                     Avx.LoadVector256((Int16*)(pClsVar1)),
                     Avx.LoadVector256((Int16*)(pClsVar2))
@@ -510,9 +511,9 @@ namespace JIT.HardwareIntrinsics.X86
 
             var test = new SimpleBinaryOpTest__PackSignedSaturateSByte();
 
-            fixed (Vector256<Int16>* pFld1 = &test._fld1)fixed (
-                Vector256<Int16>* pFld2 = &test._fld2
-            ) {
+            fixed (Vector256<Int16>* pFld1 = &test._fld1)
+            fixed (Vector256<Int16>* pFld2 = &test._fld2)
+            {
                 var result = Avx2.PackSignedSaturate(
                     Avx.LoadVector256((Int16*)(pFld1)),
                     Avx.LoadVector256((Int16*)(pFld2))
@@ -537,7 +538,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector256<Int16>* pFld1 = &_fld1)fixed (Vector256<Int16>* pFld2 = &_fld2)
+            fixed (Vector256<Int16>* pFld1 = &_fld1)
+            fixed (Vector256<Int16>* pFld2 = &_fld2)
             {
                 var result = Avx2.PackSignedSaturate(
                     Avx.LoadVector256((Int16*)(pFld1)),

@@ -74,9 +74,9 @@ namespace System.Formats.Asn1
             }
             unsafe
             {
-                fixed (char* charsPtr = &MemoryMarshal.GetReference(chars))fixed (
-                    byte* bytesPtr = &MemoryMarshal.GetReference(bytes)
-                ) {
+                fixed (char* charsPtr = &MemoryMarshal.GetReference(chars))
+                fixed (byte* bytesPtr = &MemoryMarshal.GetReference(bytes))
+                {
                     return encoding.GetBytes(charsPtr, chars.Length, bytesPtr, bytes.Length);
                 }
             }

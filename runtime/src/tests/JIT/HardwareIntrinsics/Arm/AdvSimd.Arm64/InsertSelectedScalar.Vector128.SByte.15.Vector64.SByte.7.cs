@@ -223,7 +223,8 @@ namespace JIT.HardwareIntrinsics.Arm
             public void RunStructFldScenario_Load(
                 InsertSelectedScalarTest__InsertSelectedScalar_Vector128_SByte_15_Vector64_SByte_7 testClass
             ) {
-                fixed (Vector128<SByte>* pFld1 = &_fld1)fixed (Vector64<SByte>* pFld2 = &_fld3)
+                fixed (Vector128<SByte>* pFld1 = &_fld1)
+                fixed (Vector64<SByte>* pFld2 = &_fld3)
                 {
                     var result = AdvSimd.Arm64.InsertSelectedScalar(
                         AdvSimd.LoadVector128((SByte*)pFld1),
@@ -427,9 +428,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector128<SByte>* pClsVar1 = &_clsVar1)fixed (
-                Vector64<SByte>* pClsVar3 = &_clsVar3
-            ) {
+            fixed (Vector128<SByte>* pClsVar1 = &_clsVar1)
+            fixed (Vector64<SByte>* pClsVar3 = &_clsVar3)
+            {
                 var result = AdvSimd.Arm64.InsertSelectedScalar(
                     AdvSimd.LoadVector128((SByte*)(pClsVar1)),
                     15,
@@ -485,9 +486,9 @@ namespace JIT.HardwareIntrinsics.Arm
             var test =
                 new InsertSelectedScalarTest__InsertSelectedScalar_Vector128_SByte_15_Vector64_SByte_7();
 
-            fixed (Vector128<SByte>* pFld1 = &test._fld1)fixed (
-                Vector64<SByte>* pFld2 = &test._fld3
-            ) {
+            fixed (Vector128<SByte>* pFld1 = &test._fld1)
+            fixed (Vector64<SByte>* pFld2 = &test._fld3)
+            {
                 var result = AdvSimd.Arm64.InsertSelectedScalar(
                     AdvSimd.LoadVector128((SByte*)pFld1),
                     15,
@@ -514,7 +515,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector128<SByte>* pFld1 = &_fld1)fixed (Vector64<SByte>* pFld2 = &_fld3)
+            fixed (Vector128<SByte>* pFld1 = &_fld1)
+            fixed (Vector64<SByte>* pFld2 = &_fld3)
             {
                 var result = AdvSimd.Arm64.InsertSelectedScalar(
                     AdvSimd.LoadVector128((SByte*)pFld1),

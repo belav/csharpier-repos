@@ -36,9 +36,9 @@ namespace System.Text.Json
             // KEEP THIS IMPLEMENTATION IN SYNC WITH https://github.com/dotnet/coreclr/blob/master/src/System.Private.CoreLib/shared/System/Text/UTF8Encoding.cs#L841
             //
             //
-            fixed (byte* chars = &MemoryMarshal.GetReference(utf16Source))fixed (
-                byte* bytes = &MemoryMarshal.GetReference(utf8Destination)
-            ) {
+            fixed (byte* chars = &MemoryMarshal.GetReference(utf16Source))
+            fixed (byte* bytes = &MemoryMarshal.GetReference(utf8Destination))
+            {
                 char* pSrc = (char*)chars;
                 byte* pTarget = bytes;
 

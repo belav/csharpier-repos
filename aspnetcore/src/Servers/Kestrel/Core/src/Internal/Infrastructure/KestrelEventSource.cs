@@ -390,9 +390,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             arg4 ??= string.Empty;
             arg5 ??= string.Empty;
 
-            fixed (char* arg1Ptr = arg1)fixed (char* arg2Ptr = arg2)fixed (
-                char* arg3Ptr = arg3
-            )fixed (char* arg4Ptr = arg4)fixed (char* arg5Ptr = arg5)
+            fixed (char* arg1Ptr = arg1)
+            fixed (char* arg2Ptr = arg2)
+            fixed (char* arg3Ptr = arg3)
+            fixed (char* arg4Ptr = arg4)
+            fixed (char* arg5Ptr = arg5)
             {
                 EventData* data = stackalloc EventData[EventDataCount];
 

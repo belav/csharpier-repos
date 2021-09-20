@@ -166,9 +166,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     string rsrcInXml;
                     unsafe
                     {
-                        fixed (byte* p = (r.data))rsrcInXml = Win32Res.VersionResourceToXml(
-                            (IntPtr)p
-                        );
+                        fixed (byte* p = (r.data))
+                        rsrcInXml = Win32Res.VersionResourceToXml((IntPtr)p);
                     }
 
                     Assert.Equal(xmlExpectedVersion, rsrcInXml);

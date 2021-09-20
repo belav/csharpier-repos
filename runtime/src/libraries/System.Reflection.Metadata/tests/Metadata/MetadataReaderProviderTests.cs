@@ -41,10 +41,8 @@ namespace System.Reflection.Metadata.Tests
             Assert.Throws<ArgumentOutOfRangeException>(
                 () =>
                 {
-                    fixed (byte* p = new byte[] { 0 })MetadataReaderProvider.FromMetadataImage(
-                        p,
-                        -1
-                    );
+                    fixed (byte* p = new byte[] { 0 })
+                    MetadataReaderProvider.FromMetadataImage(p, -1);
                 }
             );
 

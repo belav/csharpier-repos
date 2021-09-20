@@ -102,7 +102,8 @@ namespace System.Text
                 bytes = new byte[1];
 
             // Just call pointer version
-            fixed (byte* pBytes = &bytes[0])return GetCharCount(pBytes + index, count, flush);
+            fixed (byte* pBytes = &bytes[0])
+            return GetCharCount(pBytes + index, count, flush);
         }
 
         public override unsafe int GetCharCount(byte* bytes, int count, bool flush)
@@ -177,7 +178,8 @@ namespace System.Text
                 chars = new char[1];
 
             // Just call pointer version
-            fixed (byte* pBytes = &bytes[0])fixed (char* pChars = &chars[0])
+            fixed (byte* pBytes = &bytes[0])
+            fixed (char* pChars = &chars[0])
             // Remember that charCount is # to decode, not size of array
             return GetChars(pBytes + byteIndex, byteCount, pChars + charIndex, charCount, flush);
         }

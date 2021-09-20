@@ -906,7 +906,8 @@ namespace BasicEventSourceTests
         ) {
             if (blob == null || start + size > blob.Length)
                 throw new ArgumentException("start + size must be smaller than blob.Length");
-            fixed (byte* p = blob)EventWithBytePtrArg(size, p + start, n);
+            fixed (byte* p = blob)
+            EventWithBytePtrArg(size, p + start, n);
         }
 
         [Event(2, Level = EventLevel.Informational, Message = "Int arg after byte ptr: {2}")]

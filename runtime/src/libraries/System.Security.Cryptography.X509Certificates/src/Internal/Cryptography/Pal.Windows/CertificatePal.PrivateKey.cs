@@ -410,9 +410,9 @@ namespace Internal.Cryptography.Pal
 
             CRYPT_KEY_PROV_INFO keyProvInfo = default;
 
-            fixed (char* keyNamePtr = cngKey.KeyName)fixed (
-                char* provNamePtr = cngKey.Provider!.Provider
-            ) {
+            fixed (char* keyNamePtr = cngKey.KeyName)
+            fixed (char* provNamePtr = cngKey.Provider!.Provider)
+            {
                 keyProvInfo.pwszContainerName = keyNamePtr;
                 keyProvInfo.pwszProvName = provNamePtr;
                 keyProvInfo.dwFlags = machineKey
@@ -600,9 +600,9 @@ namespace Internal.Cryptography.Pal
             );
             CRYPT_KEY_PROV_INFO keyProvInfo = default;
 
-            fixed (char* keyName = keyContainerInfo.KeyContainerName)fixed (
-                char* provName = keyContainerInfo.ProviderName
-            ) {
+            fixed (char* keyName = keyContainerInfo.KeyContainerName)
+            fixed (char* provName = keyContainerInfo.ProviderName)
+            {
                 keyProvInfo.pwszContainerName = keyName;
                 keyProvInfo.pwszProvName = provName;
                 keyProvInfo.dwFlags = keyContainerInfo.MachineKeyStore

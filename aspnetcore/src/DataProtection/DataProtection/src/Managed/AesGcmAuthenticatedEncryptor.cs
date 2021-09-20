@@ -231,7 +231,8 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
                 var decryptedKdk = new byte[_keyDerivationKey.Length];
                 var derivedKey = new byte[_derivedkeySizeInBytes];
 
-                fixed (byte* __unused__1 = decryptedKdk)fixed (byte* __unused__2 = derivedKey)
+                fixed (byte* __unused__1 = decryptedKdk)
+                fixed (byte* __unused__2 = derivedKey)
                 {
                     try
                     {
@@ -333,7 +334,8 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
                 // We'll need a temporary buffer to hold the symmetric encryption subkey
                 var decryptedKdk = new byte[_keyDerivationKey.Length];
                 var derivedKey = new byte[_derivedkeySizeInBytes];
-                fixed (byte* __unused__1 = decryptedKdk)fixed (byte* __unused__2 = derivedKey)
+                fixed (byte* __unused__1 = decryptedKdk)
+                fixed (byte* __unused__2 = derivedKey)
                 {
                     try
                     {

@@ -205,7 +205,9 @@ namespace System.Net.Http
                 if (arg4 == null)
                     arg4 = "";
 
-                fixed (char* arg1Ptr = arg1)fixed (char* arg2Ptr = arg2)fixed (char* arg4Ptr = arg4)
+                fixed (char* arg1Ptr = arg1)
+                fixed (char* arg2Ptr = arg2)
+                fixed (char* arg4Ptr = arg4)
                 {
                     const int NumEventDatas = 7;
                     EventData* descrs = stackalloc EventData[NumEventDatas];

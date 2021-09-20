@@ -252,9 +252,9 @@ namespace JIT.HardwareIntrinsics.Arm
             public void RunStructFldScenario_Load(
                 SimpleTernaryOpTest__AbsoluteDifferenceWideningLowerAndAdd_Vector64_SByte testClass
             ) {
-                fixed (Vector128<Int16>* pFld1 = &_fld1)fixed (
-                    Vector64<SByte>* pFld2 = &_fld2
-                )fixed (Vector64<SByte>* pFld3 = &_fld3)
+                fixed (Vector128<Int16>* pFld1 = &_fld1)
+                fixed (Vector64<SByte>* pFld2 = &_fld2)
+                fixed (Vector64<SByte>* pFld3 = &_fld3)
                 {
                     var result = AdvSimd.AbsoluteDifferenceWideningLowerAndAdd(
                         AdvSimd.LoadVector128((Int16*)(pFld1)),
@@ -501,9 +501,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector128<Int16>* pClsVar1 = &_clsVar1)fixed (
-                Vector64<SByte>* pClsVar2 = &_clsVar2
-            )fixed (Vector64<SByte>* pClsVar3 = &_clsVar3)
+            fixed (Vector128<Int16>* pClsVar1 = &_clsVar1)
+            fixed (Vector64<SByte>* pClsVar2 = &_clsVar2)
+            fixed (Vector64<SByte>* pClsVar3 = &_clsVar3)
             {
                 var result = AdvSimd.AbsoluteDifferenceWideningLowerAndAdd(
                     AdvSimd.LoadVector128((Int16*)(pClsVar1)),
@@ -565,9 +565,9 @@ namespace JIT.HardwareIntrinsics.Arm
             var test =
                 new SimpleTernaryOpTest__AbsoluteDifferenceWideningLowerAndAdd_Vector64_SByte();
 
-            fixed (Vector128<Int16>* pFld1 = &test._fld1)fixed (
-                Vector64<SByte>* pFld2 = &test._fld2
-            )fixed (Vector64<SByte>* pFld3 = &test._fld3)
+            fixed (Vector128<Int16>* pFld1 = &test._fld1)
+            fixed (Vector64<SByte>* pFld2 = &test._fld2)
+            fixed (Vector64<SByte>* pFld3 = &test._fld3)
             {
                 var result = AdvSimd.AbsoluteDifferenceWideningLowerAndAdd(
                     AdvSimd.LoadVector128((Int16*)(pFld1)),
@@ -594,9 +594,10 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector128<Int16>* pFld1 = &_fld1)fixed (Vector64<SByte>* pFld2 = &_fld2)fixed (
-                Vector64<SByte>* pFld3 = &_fld3
-            ) {
+            fixed (Vector128<Int16>* pFld1 = &_fld1)
+            fixed (Vector64<SByte>* pFld2 = &_fld2)
+            fixed (Vector64<SByte>* pFld3 = &_fld3)
+            {
                 var result = AdvSimd.AbsoluteDifferenceWideningLowerAndAdd(
                     AdvSimd.LoadVector128((Int16*)(pFld1)),
                     AdvSimd.LoadVector64((SByte*)(pFld2)),

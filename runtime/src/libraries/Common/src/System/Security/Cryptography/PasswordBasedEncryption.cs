@@ -352,7 +352,8 @@ namespace System.Security.Cryptography
                 }
             }
 
-            fixed (byte* pkcs8RentPin = sourceRent)fixed (byte* pwdTmpBytesPtr = pwdTmpBytes)
+            fixed (byte* pkcs8RentPin = sourceRent)
+            fixed (byte* pwdTmpBytesPtr = pwdTmpBytes)
             {
                 if (isPkcs12)
                 {
@@ -808,7 +809,8 @@ namespace System.Security.Cryptography
             byte[] tmpPassword = new byte[password.Length];
             byte[] tmpSalt = new byte[saltMemory.Length];
 
-            fixed (byte* tmpPasswordPtr = tmpPassword)fixed (byte* tmpSaltPtr = tmpSalt)
+            fixed (byte* tmpPasswordPtr = tmpPassword)
+            fixed (byte* tmpSaltPtr = tmpSalt)
             {
                 password.CopyTo(tmpPassword);
                 saltMemory.CopyTo(tmpSalt);
@@ -957,9 +959,10 @@ namespace System.Security.Cryptography
             byte[] rentedDestination = CryptoPool.Rent(destination.Length);
 
             // Keep all the arrays pinned so they can be correctly cleared
-            fixed (byte* tmpKeyPtr = tmpKey)fixed (byte* tmpIvPtr = tmpIv)fixed (
-                byte* rentedEncryptedDataPtr = rentedEncryptedData
-            )fixed (byte* rentedDestinationPtr = rentedDestination)
+            fixed (byte* tmpKeyPtr = tmpKey)
+            fixed (byte* tmpIvPtr = tmpIv)
+            fixed (byte* rentedEncryptedDataPtr = rentedEncryptedData)
+            fixed (byte* rentedDestinationPtr = rentedDestination)
             {
                 try
                 {

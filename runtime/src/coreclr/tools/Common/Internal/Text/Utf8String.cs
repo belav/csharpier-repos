@@ -89,7 +89,8 @@ namespace Internal.Text
                 return true;
             unsafe
             {
-                fixed (byte* ap = _value)fixed (byte* bp = other._value)
+                fixed (byte* ap = _value)
+                fixed (byte* bp = other._value)
                 {
                     byte* a = ap;
                     byte* b = bp;
@@ -125,7 +126,8 @@ namespace Internal.Text
             int length = Math.Min(strA.Length, strB.Length);
             unsafe
             {
-                fixed (byte* ap = strA._value)fixed (byte* bp = strB._value)
+                fixed (byte* ap = strA._value)
+                fixed (byte* bp = strB._value)
                 {
                     byte* a = ap;
                     byte* b = bp;

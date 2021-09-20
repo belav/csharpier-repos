@@ -317,7 +317,8 @@ namespace System.Text.Json
                 }
                 unsafe
                 {
-                    fixed (char* charPtr = text)fixed (byte* destPtr = dest)
+                    fixed (char* charPtr = text)
+                    fixed (byte* destPtr = dest)
                     {
                         return s_utf8Encoding.GetBytes(charPtr, text.Length, destPtr, dest.Length);
                     }

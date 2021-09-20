@@ -206,7 +206,8 @@ namespace JIT.HardwareIntrinsics.Arm
             public void RunStructFldScenario_Load(
                 LoadAndInsertTest__LoadAndInsertScalar_Vector128_UInt32_3 testClass
             ) {
-                fixed (Vector128<UInt32>* pFld1 = &_fld1)fixed (UInt32* pFld3 = &_fld3)
+                fixed (Vector128<UInt32>* pFld1 = &_fld1)
+                fixed (UInt32* pFld3 = &_fld3)
                 {
                     var result = AdvSimd.LoadAndInsertScalar(
                         AdvSimd.LoadVector128((UInt32*)pFld1),
@@ -376,7 +377,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector128<UInt32>* pClsVar1 = &_clsVar1)fixed (UInt32* pClsVar3 = &_clsVar3)
+            fixed (Vector128<UInt32>* pClsVar1 = &_clsVar1)
+            fixed (UInt32* pClsVar3 = &_clsVar3)
             {
                 var result = AdvSimd.LoadAndInsertScalar(
                     AdvSimd.LoadVector128((UInt32*)pClsVar1),
@@ -434,7 +436,8 @@ namespace JIT.HardwareIntrinsics.Arm
 
             var test = new LoadAndInsertTest__LoadAndInsertScalar_Vector128_UInt32_3();
 
-            fixed (Vector128<UInt32>* pFld1 = &test._fld1)fixed (UInt32* pFld3 = &test._fld3)
+            fixed (Vector128<UInt32>* pFld1 = &test._fld1)
+            fixed (UInt32* pFld3 = &test._fld3)
             {
                 var result = AdvSimd.LoadAndInsertScalar(
                     AdvSimd.LoadVector128((UInt32*)pFld1),
@@ -465,7 +468,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector128<UInt32>* pFld1 = &_fld1)fixed (UInt32* pFld3 = &_fld3)
+            fixed (Vector128<UInt32>* pFld1 = &_fld1)
+            fixed (UInt32* pFld3 = &_fld3)
             {
                 var result = AdvSimd.LoadAndInsertScalar(
                     AdvSimd.LoadVector128((UInt32*)pFld1),

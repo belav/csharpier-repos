@@ -302,7 +302,8 @@ namespace System.Text.Tests
             byte[] b,
             int byteCount
         ) {
-            fixed (char* pChar = c)fixed (byte* pByte = b)
+            fixed (char* pChar = c)
+            fixed (byte* pByte = b)
             {
                 Assert.Equal(
                     byteCount,

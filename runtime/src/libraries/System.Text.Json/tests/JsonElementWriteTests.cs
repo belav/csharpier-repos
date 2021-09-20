@@ -305,7 +305,8 @@ namespace System.Text.Json.Tests
                 // Use fixed and the older version of GetBytes-in-place because of the .NET Framework build.
                 unsafe
                 {
-                    fixed (byte* dataPtr = utf8Data)fixed (char* inputPtr = overwriteJson)
+                    fixed (byte* dataPtr = utf8Data)
+                    fixed (char* inputPtr = overwriteJson)
                     {
                         // Overwrite the number in the memory buffer still referenced by the document.
                         // If it doesn't hit a 100% overlap then we're not testing what we thought we were.

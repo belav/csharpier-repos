@@ -174,9 +174,9 @@ namespace System.Net.Sockets
             long received = 0;
             int sockAddrLen = socketAddress != null ? socketAddressLen : 0;
 
-            fixed (byte* sockAddr = socketAddress)fixed (
-                byte* b = &MemoryMarshal.GetReference(buffer)
-            ) {
+            fixed (byte* sockAddr = socketAddress)
+            fixed (byte* b = &MemoryMarshal.GetReference(buffer))
+            {
                 var iov = new Interop.Sys.IOVector { Base = b, Count = (UIntPtr)buffer.Length };
 
                 var messageHeader = new Interop.Sys.MessageHeader
@@ -270,9 +270,9 @@ namespace System.Net.Sockets
             Debug.Assert(socket.IsSocket);
 
             int sent;
-            fixed (byte* sockAddr = socketAddress)fixed (
-                byte* b = &MemoryMarshal.GetReference(buffer)
-            ) {
+            fixed (byte* sockAddr = socketAddress)
+            fixed (byte* b = &MemoryMarshal.GetReference(buffer))
+            {
                 var iov = new Interop.Sys.IOVector { Base = b + offset, Count = (UIntPtr)count };
 
                 var messageHeader = new Interop.Sys.MessageHeader
@@ -348,7 +348,8 @@ namespace System.Net.Sockets
                 }
 
                 // Make the call
-                fixed (byte* sockAddr = socketAddress)fixed (Interop.Sys.IOVector* iov = iovecs)
+                fixed (byte* sockAddr = socketAddress)
+                fixed (Interop.Sys.IOVector* iov = iovecs)
                 {
                     var messageHeader = new Interop.Sys.MessageHeader
                     {
@@ -489,7 +490,8 @@ namespace System.Net.Sockets
                 }
 
                 // Make the call.
-                fixed (byte* sockAddr = socketAddress)fixed (Interop.Sys.IOVector* iov = iovecs)
+                fixed (byte* sockAddr = socketAddress)
+                fixed (Interop.Sys.IOVector* iov = iovecs)
                 {
                     var messageHeader = new Interop.Sys.MessageHeader
                     {
@@ -550,9 +552,9 @@ namespace System.Net.Sockets
             Interop.Sys.MessageHeader messageHeader;
 
             long received = 0;
-            fixed (byte* rawSocketAddress = socketAddress)fixed (
-                byte* b = &MemoryMarshal.GetReference(buffer)
-            ) {
+            fixed (byte* rawSocketAddress = socketAddress)
+            fixed (byte* b = &MemoryMarshal.GetReference(buffer))
+            {
                 var iov = new Interop.Sys.IOVector { Base = b, Count = (UIntPtr)buffer.Length };
 
                 messageHeader = new Interop.Sys.MessageHeader
@@ -621,7 +623,8 @@ namespace System.Net.Sockets
                 }
 
                 // Make the call.
-                fixed (byte* sockAddr = socketAddress)fixed (Interop.Sys.IOVector* iov = iovecs)
+                fixed (byte* sockAddr = socketAddress)
+                fixed (Interop.Sys.IOVector* iov = iovecs)
                 {
                     int cmsgBufferLen = Interop.Sys.GetControlMessageBufferSize(
                         Convert.ToInt32(isIPv4),

@@ -76,9 +76,10 @@ internal static partial class Interop
             IntPtr digestEvp,
             Span<byte> destination
         ) {
-            fixed (byte* pPassword = password)fixed (byte* pSalt = salt)fixed (
-                byte* pDestination = destination
-            ) {
+            fixed (byte* pPassword = password)
+            fixed (byte* pSalt = salt)
+            fixed (byte* pDestination = destination)
+            {
                 return Pbkdf2(
                     pPassword,
                     password.Length,

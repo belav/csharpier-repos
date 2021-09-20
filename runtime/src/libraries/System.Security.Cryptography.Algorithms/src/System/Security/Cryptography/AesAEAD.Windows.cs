@@ -19,9 +19,11 @@ namespace System.Security.Cryptography
             Span<byte> ciphertext,
             Span<byte> tag
         ) {
-            fixed (byte* plaintextBytes = plaintext)fixed (byte* nonceBytes = nonce)fixed (
-                byte* ciphertextBytes = ciphertext
-            )fixed (byte* tagBytes = tag)fixed (byte* associatedDataBytes = associatedData)
+            fixed (byte* plaintextBytes = plaintext)
+            fixed (byte* nonceBytes = nonce)
+            fixed (byte* ciphertextBytes = ciphertext)
+            fixed (byte* tagBytes = tag)
+            fixed (byte* associatedDataBytes = associatedData)
             {
                 BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO authInfo =
                     BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO.Create();
@@ -64,9 +66,11 @@ namespace System.Security.Cryptography
             Span<byte> plaintext,
             bool clearPlaintextOnFailure
         ) {
-            fixed (byte* plaintextBytes = plaintext)fixed (byte* nonceBytes = nonce)fixed (
-                byte* ciphertextBytes = ciphertext
-            )fixed (byte* tagBytes = tag)fixed (byte* associatedDataBytes = associatedData)
+            fixed (byte* plaintextBytes = plaintext)
+            fixed (byte* nonceBytes = nonce)
+            fixed (byte* ciphertextBytes = ciphertext)
+            fixed (byte* tagBytes = tag)
+            fixed (byte* associatedDataBytes = associatedData)
             {
                 BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO authInfo =
                     BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO.Create();

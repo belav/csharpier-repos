@@ -136,9 +136,10 @@ namespace Microsoft.Extensions.Logging.EventSource
                 EventName ??= "";
                 FormattedMessage ??= "";
 
-                fixed (char* loggerName = LoggerName)fixed (char* eventName = EventName)fixed (
-                    char* formattedMessage = FormattedMessage
-                ) {
+                fixed (char* loggerName = LoggerName)
+                fixed (char* eventName = EventName)
+                fixed (char* formattedMessage = FormattedMessage)
+                {
                     const int eventDataCount = 6;
                     EventData* eventData = stackalloc EventData[eventDataCount];
 
@@ -248,11 +249,12 @@ namespace Microsoft.Extensions.Logging.EventSource
                 ArgumentsJson ??= "";
                 FormattedMessage ??= "";
 
-                fixed (char* loggerName = LoggerName)fixed (char* eventName = EventName)fixed (
-                    char* exceptionJson = ExceptionJson
-                )fixed (char* argumentsJson = ArgumentsJson)fixed (
-                    char* formattedMessage = FormattedMessage
-                ) {
+                fixed (char* loggerName = LoggerName)
+                fixed (char* eventName = EventName)
+                fixed (char* exceptionJson = ExceptionJson)
+                fixed (char* argumentsJson = ArgumentsJson)
+                fixed (char* formattedMessage = FormattedMessage)
+                {
                     const int eventDataCount = 8;
                     EventData* eventData = stackalloc EventData[eventDataCount];
 
@@ -287,7 +289,8 @@ namespace Microsoft.Extensions.Logging.EventSource
                 LoggerName ??= "";
                 ArgumentsJson ??= "";
 
-                fixed (char* loggerName = LoggerName)fixed (char* argumentsJson = ArgumentsJson)
+                fixed (char* loggerName = LoggerName)
+                fixed (char* argumentsJson = ArgumentsJson)
                 {
                     const int eventDataCount = 4;
                     EventData* eventData = stackalloc EventData[eventDataCount];

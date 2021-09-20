@@ -210,7 +210,8 @@ namespace System.Drawing.Drawing2D
             if (points.Length == 0)
                 return 0;
 
-            fixed (PointF* p = points)fixed (byte* t = types)
+            fixed (PointF* p = points)
+            fixed (byte* t = types)
             {
                 int status = Gdip.GdipPathIterEnumerate(
                     new HandleRef(this, nativeIter),
@@ -238,7 +239,8 @@ namespace System.Drawing.Drawing2D
             if ((points.Length != types.Length) || (endIndex - startIndex + 1 > points.Length))
                 throw Gdip.StatusException(Gdip.InvalidParameter);
 
-            fixed (PointF* p = points)fixed (byte* t = types)
+            fixed (PointF* p = points)
+            fixed (byte* t = types)
             {
                 int status = Gdip.GdipPathIterCopyData(
                     new HandleRef(this, nativeIter),

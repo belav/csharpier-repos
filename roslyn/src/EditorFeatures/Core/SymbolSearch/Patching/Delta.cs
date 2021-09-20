@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch.Patching
 
         public static unsafe byte[] ApplyPatch(byte[] sourceBytes, byte[] patchBytes)
         {
-            fixed (byte* pSourceBuf = sourceBytes)fixed (byte* pPatchBuf = patchBytes)
+            fixed (byte* pSourceBuf = sourceBytes)
+            fixed (byte* pPatchBuf = patchBytes)
             {
                 var ds = new DeltaInput(pSourceBuf, sourceBytes.Length, true);
                 var dp = new DeltaInput(pPatchBuf, patchBytes.Length, true);

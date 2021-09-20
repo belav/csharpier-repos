@@ -999,7 +999,8 @@ namespace System.Diagnostics.Tracing
             {
                 arg1 ??= "";
                 arg2 ??= "";
-                fixed (char* string1Bytes = arg1)fixed (char* string2Bytes = arg2)
+                fixed (char* string1Bytes = arg1)
+                fixed (char* string2Bytes = arg2)
                 {
                     EventSource.EventData* descrs = stackalloc EventSource.EventData[2];
                     descrs[0].DataPointer = (IntPtr)string1Bytes;
@@ -1027,9 +1028,10 @@ namespace System.Diagnostics.Tracing
                 arg1 ??= "";
                 arg2 ??= "";
                 arg3 ??= "";
-                fixed (char* string1Bytes = arg1)fixed (char* string2Bytes = arg2)fixed (
-                    char* string3Bytes = arg3
-                ) {
+                fixed (char* string1Bytes = arg1)
+                fixed (char* string2Bytes = arg2)
+                fixed (char* string3Bytes = arg3)
+                {
                     EventSource.EventData* descrs = stackalloc EventSource.EventData[3];
                     descrs[0].DataPointer = (IntPtr)string1Bytes;
                     descrs[0].Size = ((arg1.Length + 1) * 2);

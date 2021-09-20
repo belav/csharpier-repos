@@ -144,9 +144,9 @@ namespace System.Text.Tests
             using BoundedMemory<byte> latin1Mem = BoundedMemory.Allocate<byte>(0);
             using BoundedMemory<char> utf16Mem = BoundedMemory.Allocate<char>(0);
 
-            fixed (byte* pLatin1 = &MemoryMarshal.GetReference(latin1Mem.Span))fixed (
-                char* pUtf16 = &MemoryMarshal.GetReference(utf16Mem.Span)
-            ) {
+            fixed (byte* pLatin1 = &MemoryMarshal.GetReference(latin1Mem.Span))
+            fixed (char* pUtf16 = &MemoryMarshal.GetReference(utf16Mem.Span))
+            {
                 _fnWidenLatin1ToUtf16.Delegate(pLatin1, pUtf16, UIntPtr.Zero); // just want to make sure it doesn't AV
             }
         }
@@ -222,9 +222,9 @@ namespace System.Text.Tests
             using BoundedMemory<char> utf16Mem = BoundedMemory.Allocate<char>(0);
             using BoundedMemory<byte> latin1Mem = BoundedMemory.Allocate<byte>(0);
 
-            fixed (char* pUtf16 = &MemoryMarshal.GetReference(utf16Mem.Span))fixed (
-                byte* pLatin1 = &MemoryMarshal.GetReference(latin1Mem.Span)
-            ) {
+            fixed (char* pUtf16 = &MemoryMarshal.GetReference(utf16Mem.Span))
+            fixed (byte* pLatin1 = &MemoryMarshal.GetReference(latin1Mem.Span))
+            {
                 Assert.Equal(
                     UIntPtr.Zero,
                     _fnNarrowUtf16ToLatin1.Delegate(pUtf16, pLatin1, UIntPtr.Zero)
@@ -335,9 +335,9 @@ namespace System.Text.Tests
         {
             Assert.Equal(utf16.Length, latin1.Length);
 
-            fixed (char* pUtf16 = &MemoryMarshal.GetReference(utf16))fixed (
-                byte* pLatin1 = &MemoryMarshal.GetReference(latin1)
-            ) {
+            fixed (char* pUtf16 = &MemoryMarshal.GetReference(utf16))
+            fixed (byte* pLatin1 = &MemoryMarshal.GetReference(latin1))
+            {
                 // Conversions between UIntPtr <-> int are not checked by default.
                 return checked(
                     (int)_fnNarrowUtf16ToLatin1.Delegate(pUtf16, pLatin1, (UIntPtr)utf16.Length)
@@ -349,9 +349,9 @@ namespace System.Text.Tests
         {
             Assert.Equal(latin1.Length, utf16.Length);
 
-            fixed (byte* pLatin1 = &MemoryMarshal.GetReference(latin1))fixed (
-                char* pUtf16 = &MemoryMarshal.GetReference(utf16)
-            ) {
+            fixed (byte* pLatin1 = &MemoryMarshal.GetReference(latin1))
+            fixed (char* pUtf16 = &MemoryMarshal.GetReference(utf16))
+            {
                 // Conversions between UIntPtr <-> int are not checked by default.
                 // Unlike other APIs on Latin1Utility, the "widen to UTF-16" API returns void.
                 _fnWidenLatin1ToUtf16.Delegate(pLatin1, pUtf16, checked((UIntPtr)latin1.Length));

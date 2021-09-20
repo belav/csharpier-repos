@@ -127,12 +127,8 @@ namespace System
                         ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
                     );
 
-            fixed (int* pLengths = &lengths[0])return InternalCreate(
-                (void*)t.TypeHandle.Value,
-                lengths.Length,
-                pLengths,
-                null
-            );
+            fixed (int* pLengths = &lengths[0])
+            return InternalCreate((void*)t.TypeHandle.Value, lengths.Length, pLengths, null);
         }
 
         public static unsafe Array CreateInstance(
@@ -170,9 +166,9 @@ namespace System
                         ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
                     );
 
-            fixed (int* pLengths = &lengths[0])fixed (
-                int* pLowerBounds = &lowerBounds[0]
-            )return InternalCreate(
+            fixed (int* pLengths = &lengths[0])
+            fixed (int* pLowerBounds = &lowerBounds[0])
+            return InternalCreate(
                 (void*)t.TypeHandle.Value,
                 lengths.Length,
                 pLengths,
@@ -455,11 +451,8 @@ namespace System
                 ThrowHelper.ThrowArgumentException(ExceptionResource.Arg_RankIndices);
 
             TypedReference elemref = default;
-            fixed (int* pIndices = &indices[0])InternalGetReference(
-                &elemref,
-                indices.Length,
-                pIndices
-            );
+            fixed (int* pIndices = &indices[0])
+            InternalGetReference(&elemref, indices.Length, pIndices);
             return TypedReference.InternalToObject(&elemref);
         }
 
@@ -549,11 +542,8 @@ namespace System
                 ThrowHelper.ThrowArgumentException(ExceptionResource.Arg_RankIndices);
 
             TypedReference elemref = default;
-            fixed (int* pIndices = &indices[0])InternalGetReference(
-                &elemref,
-                indices.Length,
-                pIndices
-            );
+            fixed (int* pIndices = &indices[0])
+            InternalGetReference(&elemref, indices.Length, pIndices);
             InternalSetValue(&elemref, value);
         }
 

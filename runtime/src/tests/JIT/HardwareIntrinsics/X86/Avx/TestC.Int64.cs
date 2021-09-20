@@ -218,7 +218,8 @@ namespace JIT.HardwareIntrinsics.X86
 
             public void RunStructFldScenario_Load(BooleanBinaryOpTest__TestCInt64 testClass)
             {
-                fixed (Vector256<Int64>* pFld1 = &_fld1)fixed (Vector256<Int64>* pFld2 = &_fld2)
+                fixed (Vector256<Int64>* pFld1 = &_fld1)
+                fixed (Vector256<Int64>* pFld2 = &_fld2)
                 {
                     var result = Avx.TestC(
                         Avx.LoadVector256((Int64*)(pFld1)),
@@ -417,9 +418,9 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector256<Int64>* pClsVar1 = &_clsVar1)fixed (
-                Vector256<Int64>* pClsVar2 = &_clsVar2
-            ) {
+            fixed (Vector256<Int64>* pClsVar1 = &_clsVar1)
+            fixed (Vector256<Int64>* pClsVar2 = &_clsVar2)
+            {
                 var result = Avx.TestC(
                     Avx.LoadVector256((Int64*)(pClsVar1)),
                     Avx.LoadVector256((Int64*)(pClsVar2))
@@ -478,9 +479,9 @@ namespace JIT.HardwareIntrinsics.X86
 
             var test = new BooleanBinaryOpTest__TestCInt64();
 
-            fixed (Vector256<Int64>* pFld1 = &test._fld1)fixed (
-                Vector256<Int64>* pFld2 = &test._fld2
-            ) {
+            fixed (Vector256<Int64>* pFld1 = &test._fld1)
+            fixed (Vector256<Int64>* pFld2 = &test._fld2)
+            {
                 var result = Avx.TestC(
                     Avx.LoadVector256((Int64*)(pFld1)),
                     Avx.LoadVector256((Int64*)(pFld2))
@@ -503,7 +504,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector256<Int64>* pFld1 = &_fld1)fixed (Vector256<Int64>* pFld2 = &_fld2)
+            fixed (Vector256<Int64>* pFld1 = &_fld1)
+            fixed (Vector256<Int64>* pFld2 = &_fld2)
             {
                 var result = Avx.TestC(
                     Avx.LoadVector256((Int64*)(pFld1)),

@@ -94,7 +94,8 @@ namespace System.Text
                 throw new ArgumentOutOfRangeException(SR.Argument_EncodingConversionOverflowBytes);
             }
 
-            fixed (char* pChars = s)fixed (byte* pBytes = &bytes[0])
+            fixed (char* pChars = s)
+            fixed (byte* pBytes = &bytes[0])
             {
                 return WideCharToMultiByte(
                     _codePage,
@@ -145,7 +146,8 @@ namespace System.Text
                 throw new ArgumentOutOfRangeException(SR.Argument_EncodingConversionOverflowBytes);
             }
 
-            fixed (char* pChars = chars)fixed (byte* pBytes = &bytes[0])
+            fixed (char* pChars = chars)
+            fixed (byte* pBytes = &bytes[0])
             {
                 return WideCharToMultiByte(
                     _codePage,
@@ -220,7 +222,8 @@ namespace System.Text
             if (chars.Length == 0)
                 throw new ArgumentOutOfRangeException(SR.Argument_EncodingConversionOverflowChars);
 
-            fixed (byte* pBytes = bytes)fixed (char* pChars = &chars[0])
+            fixed (byte* pBytes = bytes)
+            fixed (char* pChars = &chars[0])
             {
                 return MultiByteToWideChar(
                     _codePage,

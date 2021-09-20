@@ -223,7 +223,8 @@ namespace JIT.HardwareIntrinsics.Arm
             public void RunStructFldScenario_Load(
                 ImmBinaryOpTest__MultiplyBySelectedScalar_Vector64_Single_Vector128_Single_3 testClass
             ) {
-                fixed (Vector64<Single>* pFld1 = &_fld1)fixed (Vector128<Single>* pFld2 = &_fld2)
+                fixed (Vector64<Single>* pFld1 = &_fld1)
+                fixed (Vector128<Single>* pFld2 = &_fld2)
                 {
                     var result = AdvSimd.MultiplyBySelectedScalar(
                         AdvSimd.LoadVector64((Single*)(pFld1)),
@@ -409,9 +410,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector64<Single>* pClsVar1 = &_clsVar1)fixed (
-                Vector128<Single>* pClsVar2 = &_clsVar2
-            ) {
+            fixed (Vector64<Single>* pClsVar1 = &_clsVar1)
+            fixed (Vector128<Single>* pClsVar2 = &_clsVar2)
+            {
                 var result = AdvSimd.MultiplyBySelectedScalar(
                     AdvSimd.LoadVector64((Single*)(pClsVar1)),
                     AdvSimd.LoadVector128((Single*)(pClsVar2)),
@@ -465,9 +466,9 @@ namespace JIT.HardwareIntrinsics.Arm
             var test =
                 new ImmBinaryOpTest__MultiplyBySelectedScalar_Vector64_Single_Vector128_Single_3();
 
-            fixed (Vector64<Single>* pFld1 = &test._fld1)fixed (
-                Vector128<Single>* pFld2 = &test._fld2
-            ) {
+            fixed (Vector64<Single>* pFld1 = &test._fld1)
+            fixed (Vector128<Single>* pFld2 = &test._fld2)
+            {
                 var result = AdvSimd.MultiplyBySelectedScalar(
                     AdvSimd.LoadVector64((Single*)(pFld1)),
                     AdvSimd.LoadVector128((Single*)(pFld2)),
@@ -493,7 +494,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector64<Single>* pFld1 = &_fld1)fixed (Vector128<Single>* pFld2 = &_fld2)
+            fixed (Vector64<Single>* pFld1 = &_fld1)
+            fixed (Vector128<Single>* pFld2 = &_fld2)
             {
                 var result = AdvSimd.MultiplyBySelectedScalar(
                     AdvSimd.LoadVector64((Single*)(pFld1)),

@@ -260,9 +260,9 @@ namespace JIT.HardwareIntrinsics.X86
             public void RunStructFldScenario_Load(
                 SimpleTernaryOpTest__MultiplySubtractScalarDouble testClass
             ) {
-                fixed (Vector128<Double>* pFld1 = &_fld1)fixed (
-                    Vector128<Double>* pFld2 = &_fld2
-                )fixed (Vector128<Double>* pFld3 = &_fld3)
+                fixed (Vector128<Double>* pFld1 = &_fld1)
+                fixed (Vector128<Double>* pFld2 = &_fld2)
+                fixed (Vector128<Double>* pFld3 = &_fld3)
                 {
                     var result = Fma.MultiplySubtractScalar(
                         Sse2.LoadVector128((Double*)(pFld1)),
@@ -556,9 +556,9 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector128<Double>* pClsVar1 = &_clsVar1)fixed (
-                Vector128<Double>* pClsVar2 = &_clsVar2
-            )fixed (Vector128<Double>* pClsVar3 = &_clsVar3)
+            fixed (Vector128<Double>* pClsVar1 = &_clsVar1)
+            fixed (Vector128<Double>* pClsVar2 = &_clsVar2)
+            fixed (Vector128<Double>* pClsVar3 = &_clsVar3)
             {
                 var result = Fma.MultiplySubtractScalar(
                     Sse2.LoadVector128((Double*)(pClsVar1)),
@@ -627,9 +627,9 @@ namespace JIT.HardwareIntrinsics.X86
 
             var test = new SimpleTernaryOpTest__MultiplySubtractScalarDouble();
 
-            fixed (Vector128<Double>* pFld1 = &test._fld1)fixed (
-                Vector128<Double>* pFld2 = &test._fld2
-            )fixed (Vector128<Double>* pFld3 = &test._fld3)
+            fixed (Vector128<Double>* pFld1 = &test._fld1)
+            fixed (Vector128<Double>* pFld2 = &test._fld2)
+            fixed (Vector128<Double>* pFld3 = &test._fld3)
             {
                 var result = Fma.MultiplySubtractScalar(
                     Sse2.LoadVector128((Double*)(pFld1)),
@@ -656,9 +656,9 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector128<Double>* pFld1 = &_fld1)fixed (
-                Vector128<Double>* pFld2 = &_fld2
-            )fixed (Vector128<Double>* pFld3 = &_fld3)
+            fixed (Vector128<Double>* pFld1 = &_fld1)
+            fixed (Vector128<Double>* pFld2 = &_fld2)
+            fixed (Vector128<Double>* pFld3 = &_fld3)
             {
                 var result = Fma.MultiplySubtractScalar(
                     Sse2.LoadVector128((Double*)(pFld1)),

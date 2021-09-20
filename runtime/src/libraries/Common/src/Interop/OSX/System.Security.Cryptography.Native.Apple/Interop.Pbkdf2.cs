@@ -17,9 +17,10 @@ internal static partial class Interop
             int iterations,
             Span<byte> destination
         ) {
-            fixed (byte* pPassword = password)fixed (byte* pSalt = salt)fixed (
-                byte* pDestination = destination
-            ) {
+            fixed (byte* pPassword = password)
+            fixed (byte* pSalt = salt)
+            fixed (byte* pDestination = destination)
+            {
                 int ret = AppleCryptoNative_Pbkdf2(
                     prfAlgorithm,
                     pPassword,

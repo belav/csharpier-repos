@@ -770,9 +770,9 @@ namespace System.DirectoryServices.AccountManagement
                 Debug.Assert(nameLength > 0);
                 Debug.Assert(domainNameLength > 0);
 
-                fixed (char* sbName = new char[nameLength])fixed (
-                    char* sbDomainName = new char[domainNameLength]
-                ) {
+                fixed (char* sbName = new char[nameLength])
+                fixed (char* sbDomainName = new char[domainNameLength])
+                {
                     f = Interop.Advapi32.LookupAccountSid(
                         serverName,
                         sid,

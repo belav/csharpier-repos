@@ -221,7 +221,8 @@ namespace JIT.HardwareIntrinsics.Arm
             public void RunStructFldScenario_Load(
                 StoreBinaryOpTest__StorePair_Vector128_Int32 testClass
             ) {
-                fixed (Vector128<Int32>* pFld1 = &_fld1)fixed (Vector128<Int32>* pFld2 = &_fld2)
+                fixed (Vector128<Int32>* pFld1 = &_fld1)
+                fixed (Vector128<Int32>* pFld2 = &_fld2)
                 {
                     AdvSimd.Arm64.StorePair(
                         (Int32*)testClass._dataTable.outArrayPtr,
@@ -405,9 +406,9 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector128<Int32>* pClsVar1 = &_clsVar1)fixed (
-                Vector128<Int32>* pClsVar2 = &_clsVar2
-            ) {
+            fixed (Vector128<Int32>* pClsVar1 = &_clsVar1)
+            fixed (Vector128<Int32>* pClsVar2 = &_clsVar2)
+            {
                 AdvSimd.Arm64.StorePair(
                     (Int32*)_dataTable.outArrayPtr,
                     AdvSimd.LoadVector128((Int32*)(pClsVar1)),
@@ -456,9 +457,9 @@ namespace JIT.HardwareIntrinsics.Arm
 
             var test = new StoreBinaryOpTest__StorePair_Vector128_Int32();
 
-            fixed (Vector128<Int32>* pFld1 = &test._fld1)fixed (
-                Vector128<Int32>* pFld2 = &test._fld2
-            ) {
+            fixed (Vector128<Int32>* pFld1 = &test._fld1)
+            fixed (Vector128<Int32>* pFld2 = &test._fld2)
+            {
                 AdvSimd.Arm64.StorePair(
                     (Int32*)_dataTable.outArrayPtr,
                     AdvSimd.LoadVector128((Int32*)(pFld1)),
@@ -482,7 +483,8 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector128<Int32>* pFld1 = &_fld1)fixed (Vector128<Int32>* pFld2 = &_fld2)
+            fixed (Vector128<Int32>* pFld1 = &_fld1)
+            fixed (Vector128<Int32>* pFld2 = &_fld2)
             {
                 AdvSimd.Arm64.StorePair(
                     (Int32*)_dataTable.outArrayPtr,
