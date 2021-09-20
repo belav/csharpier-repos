@@ -92,8 +92,14 @@ namespace Microsoft.AspNetCore.DiagnosticsViewPage.Views
 
         private List<string>? AttributeValues { get; set; }
 
-        protected void WriteAttributeValue(string thingy, int startPostion, object value, int endValue, int dealyo, bool yesno)
-        {
+        protected void WriteAttributeValue(
+            string thingy,
+            int startPostion,
+            object value,
+            int endValue,
+            int dealyo,
+            bool yesno
+        ) {
             if (AttributeValues == null)
             {
                 AttributeValues = new List<string>();
@@ -104,8 +110,14 @@ namespace Microsoft.AspNetCore.DiagnosticsViewPage.Views
 
         private string? AttributeEnding { get; set; }
 
-        protected void BeginWriteAttribute(string name, string beginning, int startPosition, string ending, int endPosition, int thingy)
-        {
+        protected void BeginWriteAttribute(
+            string name,
+            string beginning,
+            int startPosition,
+            string ending,
+            int endPosition,
+            int thingy
+        ) {
             Debug.Assert(string.IsNullOrEmpty(AttributeEnding));
 
             Output.Write(beginning);
@@ -138,8 +150,8 @@ namespace Microsoft.AspNetCore.DiagnosticsViewPage.Views
             string name,
             string leader,
             string trailer,
-            params AttributeValue[] values)
-        {
+            params AttributeValue[] values
+        ) {
             if (writer == null)
             {
                 throw new ArgumentNullException(nameof(writer));
@@ -159,7 +171,6 @@ namespace Microsoft.AspNetCore.DiagnosticsViewPage.Views
             {
                 throw new ArgumentNullException(nameof(trailer));
             }
-
 
             WriteLiteralTo(writer, leader);
             foreach (var value in values)
@@ -305,10 +316,12 @@ namespace Microsoft.AspNetCore.DiagnosticsViewPage.Views
             }
 
             // Split on line breaks before passing it through the encoder.
-            return string.Join("<br />" + Environment.NewLine,
+            return string.Join(
+                "<br />" + Environment.NewLine,
                 input.Split(new[] { "\r\n" }, StringSplitOptions.None)
-                .SelectMany(s => s.Split(new[] { '\r', '\n' }, StringSplitOptions.None))
-                .Select(HtmlEncoder.Encode));
+                    .SelectMany(s => s.Split(new[] { '\r', '\n' }, StringSplitOptions.None))
+                    .Select(HtmlEncoder.Encode)
+            );
         }
     }
 }

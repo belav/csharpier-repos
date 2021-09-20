@@ -36,13 +36,19 @@ namespace Internal.Cryptography.Pal
             X509ChainTrustMode trustMode,
             DateTime verificationTime,
             TimeSpan timeout,
-            bool disableAia)
-        {
+            bool disableAia
+        ) {
             var chainPal = new AndroidCertPath();
             try
             {
                 chainPal.Initialize(cert, extraStore, customTrustStore, trustMode);
-                chainPal.Evaluate(verificationTime, applicationPolicy, certificatePolicy, revocationMode, revocationFlag);
+                chainPal.Evaluate(
+                    verificationTime,
+                    applicationPolicy,
+                    certificatePolicy,
+                    revocationMode,
+                    revocationFlag
+                );
             }
             catch
             {
@@ -82,7 +88,11 @@ namespace Internal.Cryptography.Pal
                     // policy constraint - on Android. It will not build any chain without these
                     // all being valid. This will be an empty chain with PartialChain status.
                     Debug.Assert(ChainElements!.Length == 0);
-                    Debug.Assert(ChainStatus!.Length > 0 && (ChainStatus[0].Status & X509ChainStatusFlags.PartialChain) == X509ChainStatusFlags.PartialChain);
+                    Debug.Assert(
+                        ChainStatus!.Length > 0
+                            && (ChainStatus[0].Status & X509ChainStatusFlags.PartialChain)
+                                == X509ChainStatusFlags.PartialChain
+                    );
                     return false;
                 }
 
@@ -93,9 +103,12 @@ namespace Internal.Cryptography.Pal
                 ICertificatePal cert,
                 X509Certificate2Collection? extraStore,
                 X509Certificate2Collection customTrustStore,
-                X509ChainTrustMode trustMode)
-            {
-                List<SafeHandle> extraCertHandles = new List<SafeHandle>() { ((AndroidCertificatePal)cert).SafeHandle };
+                X509ChainTrustMode trustMode
+            ) {
+                List<SafeHandle> extraCertHandles = new List<SafeHandle>()
+                {
+                    ((AndroidCertificatePal)cert).SafeHandle
+                };
                 if (extraStore != null)
                 {
                     foreach (X509Certificate2 extraCert in extraStore)
@@ -105,8 +118,10 @@ namespace Internal.Cryptography.Pal
                 }
 
                 Debug.Assert(
-                    trustMode == X509ChainTrustMode.System || trustMode == X509ChainTrustMode.CustomRootTrust,
-                    "Unsupported trust mode. Only System and CustomRootTrust are currently handled");
+                    trustMode == X509ChainTrustMode.System
+                        || trustMode == X509ChainTrustMode.CustomRootTrust,
+                    "Unsupported trust mode. Only System and CustomRootTrust are currently handled"
+                );
 
                 List<SafeHandle> customTrustCertHandles = new List<SafeHandle>();
                 bool useCustomRootTrust = trustMode == X509ChainTrustMode.CustomRootTrust;
@@ -144,14 +159,17 @@ namespace Internal.Cryptography.Pal
                     _chainContext = Interop.AndroidCrypto.X509ChainCreateContext(
                         ((AndroidCertificatePal)cert).SafeHandle,
                         extraCerts,
-                        extraCerts.Length);
+                        extraCerts.Length
+                    );
 
                     if (useCustomRootTrust)
                     {
                         // Android does not support an empty set of trust anchors
                         if (customTrustCertHandles.Count == 0)
                         {
-                            throw new PlatformNotSupportedException(SR.Chain_EmptyCustomTrustNotSupported);
+                            throw new PlatformNotSupportedException(
+                                SR.Chain_EmptyCustomTrustNotSupported
+                            );
                         }
 
                         IntPtr[] customTrustCerts = new IntPtr[customTrustCertHandles.Count];
@@ -163,13 +181,18 @@ namespace Internal.Cryptography.Pal
                             customTrustCerts[customIdx] = handle.DangerousGetHandle();
                         }
 
-                        int res = Interop.AndroidCrypto.X509ChainSetCustomTrustStore(_chainContext, customTrustCerts, customTrustCerts.Length);
+                        int res = Interop.AndroidCrypto.X509ChainSetCustomTrustStore(
+                            _chainContext,
+                            customTrustCerts,
+                            customTrustCerts.Length
+                        );
                         if (res != 1)
                         {
                             throw new CryptographicException();
                         }
                     }
                 }
+
                 finally
                 {
                     for (extraIdx -= 1; extraIdx >= 0; extraIdx--)
@@ -189,19 +212,25 @@ namespace Internal.Cryptography.Pal
                 OidCollection applicationPolicy,
                 OidCollection certificatePolicy,
                 X509RevocationMode revocationMode,
-                X509RevocationFlag revocationFlag)
-            {
+                X509RevocationFlag revocationFlag
+            ) {
                 Debug.Assert(_chainContext != null);
 
-                long timeInMsFromUnixEpoch = new DateTimeOffset(verificationTime).ToUnixTimeMilliseconds();
-                _isValid = Interop.AndroidCrypto.X509ChainBuild(_chainContext, timeInMsFromUnixEpoch);
+                long timeInMsFromUnixEpoch = new DateTimeOffset(
+                    verificationTime
+                ).ToUnixTimeMilliseconds();
+                _isValid = Interop.AndroidCrypto.X509ChainBuild(
+                    _chainContext,
+                    timeInMsFromUnixEpoch
+                );
                 if (!_isValid)
                 {
                     // Android always validates name, time, signature, and trusted root.
                     // There is no way bypass that validation and build a path.
                     ChainElements = Array.Empty<X509ChainElement>();
 
-                    Interop.AndroidCrypto.ValidationError[] errors = Interop.AndroidCrypto.X509ChainGetErrors(_chainContext);
+                    Interop.AndroidCrypto.ValidationError[] errors =
+                        Interop.AndroidCrypto.X509ChainGetErrors(_chainContext);
                     var chainStatus = new X509ChainStatus[errors.Length];
                     for (int i = 0; i < errors.Length; i++)
                     {
@@ -215,11 +244,18 @@ namespace Internal.Cryptography.Pal
                 }
 
                 byte checkedRevocation;
-                int res = Interop.AndroidCrypto.X509ChainValidate(_chainContext, revocationMode, revocationFlag, out checkedRevocation);
+                int res = Interop.AndroidCrypto.X509ChainValidate(
+                    _chainContext,
+                    revocationMode,
+                    revocationFlag,
+                    out checkedRevocation
+                );
                 if (res != 1)
                     throw new CryptographicException();
 
-                X509Certificate2[] certs = Interop.AndroidCrypto.X509ChainGetCertificates(_chainContext);
+                X509Certificate2[] certs = Interop.AndroidCrypto.X509ChainGetCertificates(
+                    _chainContext
+                );
                 List<X509ChainStatus> overallStatus = new List<X509ChainStatus>();
                 List<X509ChainStatus>[] statuses = new List<X509ChainStatus>[certs.Length];
 
@@ -228,7 +264,9 @@ namespace Internal.Cryptography.Pal
                 // beyond the first error
                 int firstNonRevocationErrorIndex = -1;
                 int firstRevocationErrorIndex = -1;
-                Dictionary<int, List<X509ChainStatus>> errorsByIndex = GetStatusByIndex(_chainContext);
+                Dictionary<int, List<X509ChainStatus>> errorsByIndex = GetStatusByIndex(
+                    _chainContext
+                );
                 foreach (int index in errorsByIndex.Keys)
                 {
                     List<X509ChainStatus> errors = errorsByIndex[index];
@@ -242,13 +280,21 @@ namespace Internal.Cryptography.Pal
                     if (index != -1)
                     {
                         statuses[index] = errorsByIndex[index];
-                        if (errorsByIndex[index].Exists(s => s.Status == X509ChainStatusFlags.Revoked || s.Status == X509ChainStatusFlags.RevocationStatusUnknown))
-                        {
+                        if (
+                            errorsByIndex[index].Exists(
+                                s =>
+                                    s.Status == X509ChainStatusFlags.Revoked
+                                    || s.Status == X509ChainStatusFlags.RevocationStatusUnknown
+                            )
+                        ) {
                             firstRevocationErrorIndex = Math.Max(index, firstRevocationErrorIndex);
                         }
                         else
                         {
-                            firstNonRevocationErrorIndex = Math.Max(index, firstNonRevocationErrorIndex);
+                            firstNonRevocationErrorIndex = Math.Max(
+                                index,
+                                firstNonRevocationErrorIndex
+                            );
                         }
                     }
                 }
@@ -261,7 +307,12 @@ namespace Internal.Cryptography.Pal
                         Status = X509ChainStatusFlags.PartialChain,
                         StatusInformation = SR.Chain_PartialChain,
                     };
-                    AddStatusFromIndexToEndCertificate(firstNonRevocationErrorIndex - 1, ref partialChainStatus, statuses, overallStatus);
+                    AddStatusFromIndexToEndCertificate(
+                        firstNonRevocationErrorIndex - 1,
+                        ref partialChainStatus,
+                        statuses,
+                        overallStatus
+                    );
                 }
 
                 if (firstRevocationErrorIndex > 0)
@@ -272,7 +323,12 @@ namespace Internal.Cryptography.Pal
                         Status = X509ChainStatusFlags.RevocationStatusUnknown,
                         StatusInformation = SR.Chain_RevocationStatusUnknown,
                     };
-                    AddStatusFromIndexToEndCertificate(firstRevocationErrorIndex - 1, ref revocationUnknownStatus, statuses, overallStatus);
+                    AddStatusFromIndexToEndCertificate(
+                        firstRevocationErrorIndex - 1,
+                        ref revocationUnknownStatus,
+                        statuses,
+                        overallStatus
+                    );
                 }
 
                 if (revocationMode != X509RevocationMode.NoCheck && checkedRevocation == 0)
@@ -284,7 +340,12 @@ namespace Internal.Cryptography.Pal
                         Status = X509ChainStatusFlags.RevocationStatusUnknown,
                         StatusInformation = SR.Chain_RevocationStatusUnknown,
                     };
-                    AddStatusFromIndexToEndCertificate(statuses.Length - 1, ref revocationUnknownStatus, statuses, overallStatus);
+                    AddStatusFromIndexToEndCertificate(
+                        statuses.Length - 1,
+                        ref revocationUnknownStatus,
+                        statuses,
+                        overallStatus
+                    );
                 }
 
                 if (!IsPolicyMatch(certs, applicationPolicy, certificatePolicy))
@@ -295,13 +356,21 @@ namespace Internal.Cryptography.Pal
                         Status = X509ChainStatusFlags.NotValidForUsage,
                         StatusInformation = SR.Chain_NoPolicyMatch,
                     };
-                    AddStatusFromIndexToEndCertificate(statuses.Length - 1, ref policyFailStatus, statuses, overallStatus);
+                    AddStatusFromIndexToEndCertificate(
+                        statuses.Length - 1,
+                        ref policyFailStatus,
+                        statuses,
+                        overallStatus
+                    );
                 }
 
                 X509ChainElement[] elements = new X509ChainElement[certs.Length];
                 for (int i = 0; i < certs.Length; i++)
                 {
-                    X509ChainStatus[] elementStatus = statuses[i] == null ? Array.Empty<X509ChainStatus>() : statuses[i].ToArray();
+                    X509ChainStatus[] elementStatus =
+                        statuses[i] == null
+                            ? Array.Empty<X509ChainStatus>()
+                            : statuses[i].ToArray();
                     elements[i] = new X509ChainElement(certs[i], elementStatus, string.Empty);
                 }
 
@@ -313,8 +382,8 @@ namespace Internal.Cryptography.Pal
                 int index,
                 ref X509ChainStatus statusToSet,
                 List<X509ChainStatus>[] statuses,
-                List<X509ChainStatus> overallStatus)
-            {
+                List<X509ChainStatus> overallStatus
+            ) {
                 AddUniqueStatus(overallStatus, ref statusToSet);
                 for (int i = index; i >= 0; i--)
                 {
@@ -327,8 +396,10 @@ namespace Internal.Cryptography.Pal
                 }
             }
 
-            private static void AddUniqueStatus(List<X509ChainStatus> list, ref X509ChainStatus status)
-            {
+            private static void AddUniqueStatus(
+                List<X509ChainStatus> list,
+                ref X509ChainStatus status
+            ) {
                 X509ChainStatusFlags statusFlags = status.Status;
                 string statusInfo = status.StatusInformation;
                 if (!list.Exists(s => s.Status == statusFlags && s.StatusInformation == statusInfo))
@@ -337,10 +408,12 @@ namespace Internal.Cryptography.Pal
                 }
             }
 
-            private static Dictionary<int, List<X509ChainStatus>> GetStatusByIndex(SafeX509ChainContextHandle ctx)
-            {
+            private static Dictionary<int, List<X509ChainStatus>> GetStatusByIndex(
+                SafeX509ChainContextHandle ctx
+            ) {
                 var statusByIndex = new Dictionary<int, List<X509ChainStatus>>();
-                Interop.AndroidCrypto.ValidationError[] errors = Interop.AndroidCrypto.X509ChainGetErrors(ctx);
+                Interop.AndroidCrypto.ValidationError[] errors =
+                    Interop.AndroidCrypto.X509ChainGetErrors(ctx);
                 for (int i = 0; i < errors.Length; i++)
                 {
                     Interop.AndroidCrypto.ValidationError error = errors[i];
@@ -358,8 +431,9 @@ namespace Internal.Cryptography.Pal
                 return statusByIndex;
             }
 
-            private static X509ChainStatus ValidationErrorToChainStatus(Interop.AndroidCrypto.ValidationError error)
-            {
+            private static X509ChainStatus ValidationErrorToChainStatus(
+                Interop.AndroidCrypto.ValidationError error
+            ) {
                 X509ChainStatusFlags statusFlags = (X509ChainStatusFlags)error.Status;
                 Debug.Assert(statusFlags != X509ChainStatusFlags.NoError);
 
@@ -373,23 +447,29 @@ namespace Internal.Cryptography.Pal
             private static bool IsPolicyMatch(
                 X509Certificate2[] certs,
                 OidCollection? applicationPolicy,
-                OidCollection? certificatePolicy)
-            {
-                bool hasApplicationPolicy = applicationPolicy != null && applicationPolicy.Count > 0;
-                bool hasCertificatePolicy = certificatePolicy != null && certificatePolicy.Count > 0;
+                OidCollection? certificatePolicy
+            ) {
+                bool hasApplicationPolicy =
+                    applicationPolicy != null && applicationPolicy.Count > 0;
+                bool hasCertificatePolicy =
+                    certificatePolicy != null && certificatePolicy.Count > 0;
 
                 if (!hasApplicationPolicy && !hasCertificatePolicy)
                     return true;
 
                 List<X509Certificate2> certsToRead = new List<X509Certificate2>(certs);
                 CertificatePolicyChain policyChain = new CertificatePolicyChain(certsToRead);
-                if (hasCertificatePolicy && !policyChain.MatchesCertificatePolicies(certificatePolicy!))
-                {
+                if (
+                    hasCertificatePolicy
+                    && !policyChain.MatchesCertificatePolicies(certificatePolicy!)
+                ) {
                     return false;
                 }
 
-                if (hasApplicationPolicy && !policyChain.MatchesApplicationPolicies(applicationPolicy!))
-                {
+                if (
+                    hasApplicationPolicy
+                    && !policyChain.MatchesApplicationPolicies(applicationPolicy!)
+                ) {
                     return false;
                 }
 

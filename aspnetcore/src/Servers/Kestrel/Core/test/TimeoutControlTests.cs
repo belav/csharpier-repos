@@ -38,7 +38,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             _mockTimeoutHandler.Verify(h => h.OnTimeout(It.IsAny<TimeoutReason>()), Times.Never);
         }
 
-
         [Fact]
         public void DoesNotTimeOutWhenRequestBodyDoesNotSatisfyMinimumDataRateButDebuggerIsAttached()
         {
@@ -63,7 +62,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public void RequestBodyMinimumDataRateNotEnforcedDuringGracePeriod()
         {
-            var minRate = new MinDataRate(bytesPerSecond: 100, gracePeriod: TimeSpan.FromSeconds(2));
+            var minRate = new MinDataRate(
+                bytesPerSecond: 100,
+                gracePeriod: TimeSpan.FromSeconds(2)
+            );
 
             // Initialize timestamp
             var now = DateTimeOffset.UtcNow;
@@ -152,11 +154,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             _mockTimeoutHandler.Verify(h => h.OnTimeout(TimeoutReason.ReadDataRate), Times.Once);
         }
 
-
         [Fact]
         public void RequestBodyDataRateNotComputedOnPausedTime()
         {
-            var minRate = new MinDataRate(bytesPerSecond: 100, gracePeriod: TimeSpan.FromSeconds(2));
+            var minRate = new MinDataRate(
+                bytesPerSecond: 100,
+                gracePeriod: TimeSpan.FromSeconds(2)
+            );
 
             // Initialize timestamp
             _timeoutControl.Initialize(_systemClock.UtcNow.Ticks);
@@ -212,7 +216,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public void ReadTimingNotPausedWhenResumeCalledBeforeNextTick()
         {
-            var minRate = new MinDataRate(bytesPerSecond: 100, gracePeriod: TimeSpan.FromSeconds(2));
+            var minRate = new MinDataRate(
+                bytesPerSecond: 100,
+                gracePeriod: TimeSpan.FromSeconds(2)
+            );
 
             // Initialize timestamp
             _timeoutControl.Initialize(_systemClock.UtcNow.Ticks);
@@ -258,7 +265,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         public void ReadTimingNotEnforcedWhenTimeoutIsSet()
         {
             var timeout = TimeSpan.FromSeconds(5);
-            var minRate = new MinDataRate(bytesPerSecond: 100, gracePeriod: TimeSpan.FromSeconds(2));
+            var minRate = new MinDataRate(
+                bytesPerSecond: 100,
+                gracePeriod: TimeSpan.FromSeconds(2)
+            );
 
             var startTime = _systemClock.UtcNow;
 
@@ -283,13 +293,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             _timeoutControl.Tick(_systemClock.UtcNow);
 
             // Timed out
-            _mockTimeoutHandler.Verify(h => h.OnTimeout(TimeoutReason.RequestBodyDrain), Times.Once);
+            _mockTimeoutHandler.Verify(
+                h => h.OnTimeout(TimeoutReason.RequestBodyDrain),
+                Times.Once
+            );
         }
 
         [Fact]
         public void ReadTimingNotEnforcedWhenLowConnectionInputFlowControlAvailability()
         {
-            var minRate = new MinDataRate(bytesPerSecond: 100, gracePeriod: TimeSpan.FromSeconds(2));
+            var minRate = new MinDataRate(
+                bytesPerSecond: 100,
+                gracePeriod: TimeSpan.FromSeconds(2)
+            );
 
             var flowControl = new InputFlowControl(initialWindowSize: 2, minWindowSizeIncrement: 1);
 
@@ -325,7 +341,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             // Still not timed out
             _mockTimeoutHandler.Verify(h => h.OnTimeout(It.IsAny<TimeoutReason>()), Times.Never);
-            
+
             // Read 0 bytes in 1 second
             now += TimeSpan.FromSeconds(1);
             _timeoutControl.Tick(now);
@@ -337,7 +353,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public void ReadTimingOnlyCountsUpToOneHeartbeatIntervalPerTick()
         {
-            var minRate = new MinDataRate(bytesPerSecond: 100, gracePeriod: TimeSpan.FromSeconds(2));
+            var minRate = new MinDataRate(
+                bytesPerSecond: 100,
+                gracePeriod: TimeSpan.FromSeconds(2)
+            );
 
             // Initialize timestamp
             var now = DateTimeOffset.UtcNow;
@@ -376,7 +395,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public void WriteTimingAbortsConnectionWhenWriteDoesNotCompleteWithMinimumDataRate()
         {
-            var minRate = new MinDataRate(bytesPerSecond: 100, gracePeriod: TimeSpan.FromSeconds(2));
+            var minRate = new MinDataRate(
+                bytesPerSecond: 100,
+                gracePeriod: TimeSpan.FromSeconds(2)
+            );
 
             // Initialize timestamp
             _timeoutControl.Initialize(_systemClock.UtcNow.Ticks);
@@ -394,7 +416,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public void WriteTimingAbortsConnectionWhenSmallWriteDoesNotCompleteWithinGracePeriod()
         {
-            var minRate = new MinDataRate(bytesPerSecond: 100, gracePeriod: TimeSpan.FromSeconds(5));
+            var minRate = new MinDataRate(
+                bytesPerSecond: 100,
+                gracePeriod: TimeSpan.FromSeconds(5)
+            );
 
             // Initialize timestamp
             var startTime = _systemClock.UtcNow;
@@ -419,7 +444,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public void WriteTimingTimeoutPushedOnConcurrentWrite()
         {
-            var minRate = new MinDataRate(bytesPerSecond: 100, gracePeriod: TimeSpan.FromSeconds(2));
+            var minRate = new MinDataRate(
+                bytesPerSecond: 100,
+                gracePeriod: TimeSpan.FromSeconds(2)
+            );
 
             // Initialize timestamp
             _timeoutControl.Initialize(_systemClock.UtcNow.Ticks);
@@ -450,7 +478,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public void WriteTimingAbortsConnectionWhenRepeatedSmallWritesDoNotCompleteWithMinimumDataRate()
         {
-            var minRate = new MinDataRate(bytesPerSecond: 100, gracePeriod: TimeSpan.FromSeconds(5));
+            var minRate = new MinDataRate(
+                bytesPerSecond: 100,
+                gracePeriod: TimeSpan.FromSeconds(5)
+            );
             var numWrites = 5;
             var writeSize = 100;
 
@@ -470,7 +501,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             // Move the clock forward Heartbeat.Interval + MinDataRate.GracePeriod + 4 seconds.
             // The grace period should only be added for the first write. The subsequent 4 100 byte writes should add 1 second each to the timeout given the 100 byte/s min rate.
-            AdvanceClock(Heartbeat.Interval + minRate.GracePeriod + TimeSpan.FromSeconds((numWrites - 1) * writeSize / minRate.BytesPerSecond));
+            AdvanceClock(
+                Heartbeat.Interval
+                    + minRate.GracePeriod
+                    + TimeSpan.FromSeconds((numWrites - 1) * writeSize / minRate.BytesPerSecond)
+            );
 
             _mockTimeoutHandler.Verify(h => h.OnTimeout(It.IsAny<TimeoutReason>()), Times.Never);
 
@@ -484,7 +519,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public void WriteTimingOnlyCountsUpToOneHeartbeatIntervalPerTick()
         {
-            var minRate = new MinDataRate(bytesPerSecond: 100, gracePeriod: TimeSpan.FromSeconds(2));
+            var minRate = new MinDataRate(
+                bytesPerSecond: 100,
+                gracePeriod: TimeSpan.FromSeconds(2)
+            );
 
             // Initialize timestamp
             _timeoutControl.Initialize(_systemClock.UtcNow.Ticks);
@@ -494,7 +532,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             _timeoutControl.StartTimingWrite();
 
             // Tick just past 4s plus Heartbeat.Interval at once
-            _systemClock.UtcNow += TimeSpan.FromSeconds(4) + Heartbeat.Interval + TimeSpan.FromTicks(1);
+            _systemClock.UtcNow +=
+                TimeSpan.FromSeconds(4) + Heartbeat.Interval + TimeSpan.FromTicks(1);
             _timeoutControl.Tick(_systemClock.UtcNow);
 
             _mockTimeoutHandler.Verify(h => h.OnTimeout(TimeoutReason.WriteDataRate), Times.Never);

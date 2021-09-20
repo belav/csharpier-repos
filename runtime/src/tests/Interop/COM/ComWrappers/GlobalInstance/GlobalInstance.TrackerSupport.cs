@@ -17,11 +17,17 @@ namespace ComWrappersTests.GlobalInstance
 
             var testObj = new Test();
             IntPtr comWrapper1 = Marshal.GetIUnknownForObject(testObj);
-            Assert.IsNull(GlobalComWrappers.Instance.LastComputeVtablesObject, "ComWrappers instance should not have been called");
+            Assert.IsNull(
+                GlobalComWrappers.Instance.LastComputeVtablesObject,
+                "ComWrappers instance should not have been called"
+            );
 
             IntPtr trackerObjRaw = MockReferenceTrackerRuntime.CreateTrackerObject();
             object objWrapper = Marshal.GetObjectForIUnknown(trackerObjRaw);
-            Assert.IsFalse(objWrapper is FakeWrapper, $"ComWrappers instance should not have been called");
+            Assert.IsFalse(
+                objWrapper is FakeWrapper,
+                $"ComWrappers instance should not have been called"
+            );
         }
 
         static int Main(string[] doNotUse)
@@ -35,7 +41,10 @@ namespace ComWrappersTests.GlobalInstance
                 ValidateNotRegisteredForMarshalling();
 
                 IntPtr trackerObjRaw = MockReferenceTrackerRuntime.CreateTrackerObject();
-                var trackerObj = GlobalComWrappers.Instance.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.TrackerObject);
+                var trackerObj = GlobalComWrappers.Instance.GetOrCreateObjectForComInstance(
+                    trackerObjRaw,
+                    CreateObjectFlags.TrackerObject
+                );
                 Marshal.Release(trackerObjRaw);
 
                 ValidateNotifyEndOfReferenceTrackingOnThread();

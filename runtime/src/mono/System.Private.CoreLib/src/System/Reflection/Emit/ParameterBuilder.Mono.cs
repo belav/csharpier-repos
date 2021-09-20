@@ -54,9 +54,13 @@ namespace System.Reflection.Emit
         private object? def_value;
 #endregion
 
-        [DynamicDependency(nameof(def_value))]  // Automatically keeps all previous fields too due to StructLayout
-        internal ParameterBuilder(MethodBase mb, int pos, ParameterAttributes attributes, string? strParamName)
-        {
+        [DynamicDependency(nameof(def_value))] // Automatically keeps all previous fields too due to StructLayout
+        internal ParameterBuilder(
+            MethodBase mb,
+            int pos,
+            ParameterAttributes attributes,
+            string? strParamName
+        ) {
             name = strParamName;
             position = pos;
             attrs = attributes;
@@ -96,8 +100,11 @@ namespace System.Reflection.Emit
         {
             if (position > 0)
             {
-                TypeBuilder.SetConstantValue(methodb.GetParameterType(position - 1),
-                                  defaultValue, ref defaultValue);
+                TypeBuilder.SetConstantValue(
+                    methodb.GetParameterType(position - 1),
+                    defaultValue,
+                    ref defaultValue
+                );
             }
 
             def_value = defaultValue;
@@ -132,7 +139,8 @@ namespace System.Reflection.Emit
             else if (attrname == "System.Runtime.InteropServices.DefaultParameterValueAttribute")
             {
                 /* MS.NET doesn't handle this attribute but we handle it for consistency */
-                CustomAttributeBuilder.CustomAttributeInfo cinfo = CustomAttributeBuilder.decode_cattr(customBuilder);
+                CustomAttributeBuilder.CustomAttributeInfo cinfo =
+                    CustomAttributeBuilder.decode_cattr(customBuilder);
                 /* FIXME: check for type compatibility */
                 SetConstant(cinfo.ctorArgs[0]);
                 return;

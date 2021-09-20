@@ -9,16 +9,17 @@ namespace System.Configuration
     {
         internal ConfigurationSettings() { }
 
-        [Obsolete("This property is obsolete, it has been replaced by System.Configuration.ConfigurationManager.AppSettings")]
+        [Obsolete(
+            "This property is obsolete, it has been replaced by System.Configuration.ConfigurationManager.AppSettings"
+        )]
         public static NameValueCollection AppSettings
         {
-            get
-            {
-                return ConfigurationManager.AppSettings;
-            }
+            get { return ConfigurationManager.AppSettings; }
         }
 
-        [Obsolete("This method is obsolete, it has been replaced by System.Configuration.ConfigurationManager.GetSection")]
+        [Obsolete(
+            "This method is obsolete, it has been replaced by System.Configuration.ConfigurationManager.GetSection"
+        )]
         public static object GetConfig(string sectionName)
         {
             return ConfigurationManager.GetSection(sectionName);

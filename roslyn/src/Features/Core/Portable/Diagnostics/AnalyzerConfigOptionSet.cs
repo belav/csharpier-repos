@@ -16,8 +16,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private readonly AnalyzerConfigOptions _analyzerConfigOptions;
         private readonly OptionSet? _optionSet;
 
-        public AnalyzerConfigOptionSet(AnalyzerConfigOptions analyzerConfigOptions, OptionSet? optionSet)
-        {
+        public AnalyzerConfigOptionSet(
+            AnalyzerConfigOptions analyzerConfigOptions,
+            OptionSet? optionSet
+        ) {
             _analyzerConfigOptions = analyzerConfigOptions;
             _optionSet = optionSet;
         }
@@ -25,8 +27,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private protected override object GetOptionCore(OptionKey optionKey)
         {
             // First try to find the option from the .editorconfig options parsed by the compiler.
-            if (_analyzerConfigOptions.TryGetEditorConfigOption<object>(optionKey.Option, out var value))
-            {
+            if (
+                _analyzerConfigOptions.TryGetEditorConfigOption<object>(
+                    optionKey.Option,
+                    out var value
+                )
+            ) {
                 return value;
             }
 
@@ -34,20 +40,25 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return _optionSet?.GetOption(optionKey) ?? optionKey.Option.DefaultValue!;
         }
 
-        public override OptionSet WithChangedOption(OptionKey optionAndLanguage, object? value)
-            => throw new NotImplementedException();
+        public override OptionSet WithChangedOption(OptionKey optionAndLanguage, object? value) =>
+            throw new NotImplementedException();
 
-        private protected override AnalyzerConfigOptions CreateAnalyzerConfigOptions(IOptionService optionService, string? language)
-        {
+        private protected override AnalyzerConfigOptions CreateAnalyzerConfigOptions(
+            IOptionService optionService,
+            string? language
+        ) {
             if (_optionSet is null)
             {
                 return _analyzerConfigOptions;
             }
 
-            return new AnalyzerConfigOptionsImpl(_analyzerConfigOptions, _optionSet.AsAnalyzerConfigOptions(optionService, language));
+            return new AnalyzerConfigOptionsImpl(
+                _analyzerConfigOptions,
+                _optionSet.AsAnalyzerConfigOptions(optionService, language)
+            );
         }
 
-        internal override IEnumerable<OptionKey> GetChangedOptions(OptionSet optionSet)
-            => throw new NotImplementedException();
+        internal override IEnumerable<OptionKey> GetChangedOptions(OptionSet optionSet) =>
+            throw new NotImplementedException();
     }
 }

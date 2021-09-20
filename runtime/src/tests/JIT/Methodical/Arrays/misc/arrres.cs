@@ -11,7 +11,10 @@ namespace GCTest
         public bool m_die = false;
         private static Test[] s_arr = new Test[50];
 
-        public Test(int indx) { _indx = indx; }
+        public Test(int indx)
+        {
+            _indx = indx;
+        }
 
         public virtual void CheckValid()
         {
@@ -43,70 +46,89 @@ namespace GCTest
             Console.WriteLine("Test passed.");
             return 100;
         }
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         private static void CollectAndFinalize()
         {
             GC.Collect();
             GC.WaitForPendingFinalizers();
             GC.Collect();
         }
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         private static void Test1()
         {
             for (int i = 0; i < 50; i++)
                 s_arr[i] = new Test(i);
             CollectAndFinalize();
         }
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         private static void Test2()
         {
             for (int i = 0; i < 50; i++)
             {
-                if (s_arr[i] == null) throw new Exception();
+                if (s_arr[i] == null)
+                    throw new Exception();
                 s_arr[i].CheckValid();
                 s_arr[i] = null;
             }
         }
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         private static void Test3()
         {
             CollectAndFinalize();
             for (int i = 0; i < 50; i++)
             {
-                if (s_arr[i] == null) throw new Exception();
+                if (s_arr[i] == null)
+                    throw new Exception();
                 s_arr[i].CheckValid();
                 s_arr[i] = null;
             }
         }
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         private static void Test4()
         {
             CollectAndFinalize();
             for (int i = 0; i < 50; i++)
             {
-                if (s_arr[i] == null) throw new Exception();
+                if (s_arr[i] == null)
+                    throw new Exception();
                 s_arr[i].CheckValid();
                 s_arr[i] = null;
             }
         }
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         private static void Test5()
         {
             CollectAndFinalize();
             for (int i = 0; i < 50; i++)
             {
-                if (s_arr[i] == null) throw new Exception();
+                if (s_arr[i] == null)
+                    throw new Exception();
                 s_arr[i].CheckValid();
                 s_arr[i] = null;
             }
         }
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         private static void Test6()
         {
             CollectAndFinalize();
             for (int i = 0; i < 50; i++)
             {
-                if (s_arr[i] == null) throw new Exception();
+                if (s_arr[i] == null)
+                    throw new Exception();
                 s_arr[i].CheckValid();
                 s_arr[i].m_die = true;
                 s_arr[i] = null;

@@ -24,8 +24,8 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             DateTimeOffset activationDate,
             DateTimeOffset expirationDate,
             Lazy<IAuthenticatedEncryptorDescriptor> lazyDescriptor,
-            IEnumerable<IAuthenticatedEncryptorFactory> encryptorFactories)
-        {
+            IEnumerable<IAuthenticatedEncryptorFactory> encryptorFactories
+        ) {
             KeyId = keyId;
             CreationDate = creationDate;
             ActivationDate = activationDate;
@@ -46,10 +46,7 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
 
         public IAuthenticatedEncryptorDescriptor Descriptor
         {
-            get
-            {
-                return _lazyDescriptor.Value;
-            }
+            get { return _lazyDescriptor.Value; }
         }
 
         public IAuthenticatedEncryptor? CreateEncryptor()

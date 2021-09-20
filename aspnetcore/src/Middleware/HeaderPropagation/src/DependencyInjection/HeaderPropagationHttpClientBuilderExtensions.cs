@@ -29,17 +29,24 @@ namespace Microsoft.Extensions.DependencyInjection
 
             builder.Services.AddHeaderPropagation();
 
-            builder.AddHttpMessageHandler(services =>
-            {
-                var options = new HeaderPropagationMessageHandlerOptions();
-                var middlewareOptions = services.GetRequiredService<IOptions<HeaderPropagationOptions>>();
-                for (var i = 0; i < middlewareOptions.Value.Headers.Count; i++)
+            builder.AddHttpMessageHandler(
+                services =>
                 {
-                    var header = middlewareOptions.Value.Headers[i];
-                    options.Headers.Add(header.CapturedHeaderName, header.CapturedHeaderName);
+                    var options = new HeaderPropagationMessageHandlerOptions();
+                    var middlewareOptions = services.GetRequiredService<
+                        IOptions<HeaderPropagationOptions>
+                    >();
+                    for (var i = 0; i < middlewareOptions.Value.Headers.Count; i++)
+                    {
+                        var header = middlewareOptions.Value.Headers[i];
+                        options.Headers.Add(header.CapturedHeaderName, header.CapturedHeaderName);
+                    }
+                    return new HeaderPropagationMessageHandler(
+                        options,
+                        services.GetRequiredService<HeaderPropagationValues>()
+                    );
                 }
-                return new HeaderPropagationMessageHandler(options, services.GetRequiredService<HeaderPropagationValues>());
-            });
+            );
 
             return builder;
         }
@@ -52,8 +59,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="builder">The <see cref="IHttpClientBuilder"/> to add the message handler to.</param>
         /// <param name="configure">A delegate used to configure the <see cref="HeaderPropagationMessageHandlerOptions"/>.</param>
         /// <returns>The <see cref="IHttpClientBuilder"/> so that additional calls can be chained.</returns>
-        public static IHttpClientBuilder AddHeaderPropagation(this IHttpClientBuilder builder, Action<HeaderPropagationMessageHandlerOptions> configure)
-        {
+        public static IHttpClientBuilder AddHeaderPropagation(
+            this IHttpClientBuilder builder,
+            Action<HeaderPropagationMessageHandlerOptions> configure
+        ) {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
@@ -66,12 +75,17 @@ namespace Microsoft.Extensions.DependencyInjection
 
             builder.Services.AddHeaderPropagation();
 
-            builder.AddHttpMessageHandler(services =>
-            {
-                var options = new HeaderPropagationMessageHandlerOptions();
-                configure(options);
-                return new HeaderPropagationMessageHandler(options, services.GetRequiredService<HeaderPropagationValues>());
-            });
+            builder.AddHttpMessageHandler(
+                services =>
+                {
+                    var options = new HeaderPropagationMessageHandlerOptions();
+                    configure(options);
+                    return new HeaderPropagationMessageHandler(
+                        options,
+                        services.GetRequiredService<HeaderPropagationValues>()
+                    );
+                }
+            );
 
             return builder;
         }

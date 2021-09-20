@@ -4,14 +4,19 @@
 
 using System;
 
-
 namespace SinCalc
 {
     internal class MistakeException : Exception
     {
         public object mistake;
-        public MistakeException(double m) : base("Mistake!") { mistake = m; }
-        override public String ToString() { return "Mistake is " + mistake.ToString(); }
+        public MistakeException(double m) : base("Mistake!")
+        {
+            mistake = m;
+        }
+        override public String ToString()
+        {
+            return "Mistake is " + mistake.ToString();
+        }
     }
 
     internal class SinCalc
@@ -20,7 +25,10 @@ namespace SinCalc
 
         protected static object mySin(object Angle)
         {
-            object powX, sumOfTerms, term, fact = 1.0;
+            object powX,
+                sumOfTerms,
+                term,
+                fact = 1.0;
 
             powX = term = Angle;
             sumOfTerms = 0.0;
@@ -65,7 +73,9 @@ namespace SinCalc
             testresults[8] = 0.587785252d;
             testresults[9] = 0.309016994d;
 
-            object total1 = 0.0d, total2 = 0.0d, total3 = 0.0d;
+            object total1 = 0.0d,
+                total2 = 0.0d,
+                total3 = 0.0d;
             for (i = 0; (int)i < 10; i = (int)i + 1)
             {
                 try
@@ -74,14 +84,25 @@ namespace SinCalc
                     {
                         Angle = ((double)PI) * ((int)i / 10.0);
                         total2 = (double)total2 + (double)Angle;
-                        total3 = (double)total3 +
-                            (double)CalcAndCheck(Angle, (double)testresults[(int)i] + 0.0000000004 * (int)i);
+                        total3 =
+                            (double)total3
+                            + (double)CalcAndCheck(
+                                Angle,
+                                (double)testresults[(int)i] + 0.0000000004 * (int)i
+                            );
                         Console.WriteLine("OK");
                     }
+
                     finally
                     {
-                        Console.WriteLine("Current totals " + total1.ToString() + " and " +
-                            ((double)total2).ToString() + " and " + total3.ToString());
+                        Console.WriteLine(
+                            "Current totals "
+                                + total1.ToString()
+                                + " and "
+                                + ((double)total2).ToString()
+                                + " and "
+                                + total3.ToString()
+                        );
                     }
                 }
                 catch (MistakeException ex)

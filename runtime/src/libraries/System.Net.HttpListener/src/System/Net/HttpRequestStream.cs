@@ -15,7 +15,11 @@ namespace System.Net
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "buffer.Length:" + buffer.Length + " count:" + count + " offset:" + offset);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    "buffer.Length:" + buffer.Length + " count:" + count + " offset:" + offset
+                );
 
             ValidateBufferArguments(buffer, offset, count);
 
@@ -27,9 +31,18 @@ namespace System.Net
             return ReadCore(buffer, offset, count);
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
-        {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "buffer.Length:" + buffer.Length + " count:" + count + " offset:" + offset);
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) {
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    "buffer.Length:" + buffer.Length + " count:" + count + " offset:" + offset
+                );
 
             ValidateBufferArguments(buffer, offset, count);
 
@@ -47,24 +60,34 @@ namespace System.Net
             set => throw new NotSupportedException(SR.net_noseek);
         }
 
-        public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException(SR.net_noseek);
+        public override long Seek(long offset, SeekOrigin origin) =>
+            throw new NotSupportedException(SR.net_noseek);
 
-        public override void SetLength(long value) => throw new NotSupportedException(SR.net_noseek);
+        public override void SetLength(long value) =>
+            throw new NotSupportedException(SR.net_noseek);
 
-        public override void Write(byte[] buffer, int offset, int count) => throw new InvalidOperationException(SR.net_readonlystream);
+        public override void Write(byte[] buffer, int offset, int count) =>
+            throw new InvalidOperationException(SR.net_readonlystream);
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
-        {
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) {
             throw new InvalidOperationException(SR.net_readonlystream);
         }
 
-        public override void EndWrite(IAsyncResult asyncResult) => throw new InvalidOperationException(SR.net_readonlystream);
+        public override void EndWrite(IAsyncResult asyncResult) =>
+            throw new InvalidOperationException(SR.net_readonlystream);
 
         internal bool Closed => _closed;
 
         protected override void Dispose(bool disposing)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "_closed:" + _closed);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, "_closed:" + _closed);
 
             _closed = true;
             base.Dispose(disposing);

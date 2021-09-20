@@ -21,8 +21,10 @@ namespace System.Linq
         /// <typeparam name="TResult">The type of the result element.</typeparam>
         /// <param name="immutableArray">The immutable array.</param>
         /// <param name="selector">The selector.</param>
-        public static IEnumerable<TResult> Select<T, TResult>(this ImmutableArray<T> immutableArray, Func<T, TResult> selector)
-        {
+        public static IEnumerable<TResult> Select<T, TResult>(
+            this ImmutableArray<T> immutableArray,
+            Func<T, TResult> selector
+        ) {
             immutableArray.ThrowNullRefIfNotInitialized();
 
             // LINQ Select/Where have optimized treatment for arrays.
@@ -51,8 +53,8 @@ namespace System.Linq
         public static IEnumerable<TResult> SelectMany<TSource, TCollection, TResult>(
             this ImmutableArray<TSource> immutableArray,
             Func<TSource, IEnumerable<TCollection>> collectionSelector,
-            Func<TSource, TCollection, TResult> resultSelector)
-        {
+            Func<TSource, TCollection, TResult> resultSelector
+        ) {
             immutableArray.ThrowNullRefIfNotInitialized();
             if (collectionSelector == null || resultSelector == null)
             {
@@ -70,17 +72,19 @@ namespace System.Linq
             // immutable array object that would be allocated when it's passed as an IEnumerable<T>,
             // and for the EnumeratorObject that would be allocated when enumerating the boxed array.
 
-            return immutableArray.Length == 0 ?
-                Enumerable.Empty<TResult>() :
-                SelectManyIterator(immutableArray, collectionSelector, resultSelector);
+            return immutableArray.Length == 0
+              ? Enumerable.Empty<TResult>()
+              : SelectManyIterator(immutableArray, collectionSelector, resultSelector);
         }
 
         /// <summary>
         /// Filters a sequence of values based on a predicate.
         /// </summary>
         /// <typeparam name="T">The type of element contained by the collection.</typeparam>
-        public static IEnumerable<T> Where<T>(this ImmutableArray<T> immutableArray, Func<T, bool> predicate)
-        {
+        public static IEnumerable<T> Where<T>(
+            this ImmutableArray<T> immutableArray,
+            Func<T, bool> predicate
+        ) {
             immutableArray.ThrowNullRefIfNotInitialized();
 
             // LINQ Select/Where have optimized treatment for arrays.
@@ -153,7 +157,11 @@ namespace System.Linq
         /// </summary>
         /// <typeparam name="TDerived">The type of element in the compared array.</typeparam>
         /// <typeparam name="TBase">The type of element contained by the collection.</typeparam>
-        public static bool SequenceEqual<TDerived, TBase>(this ImmutableArray<TBase> immutableArray, ImmutableArray<TDerived> items, IEqualityComparer<TBase>? comparer = null) where TDerived : TBase
+        public static bool SequenceEqual<TDerived, TBase>(
+            this ImmutableArray<TBase> immutableArray,
+            ImmutableArray<TDerived> items,
+            IEqualityComparer<TBase>? comparer = null
+        ) where TDerived : TBase
         {
             immutableArray.ThrowNullRefIfNotInitialized();
             items.ThrowNullRefIfNotInitialized();
@@ -188,7 +196,11 @@ namespace System.Linq
         /// </summary>
         /// <typeparam name="TDerived">The type of element in the compared array.</typeparam>
         /// <typeparam name="TBase">The type of element contained by the collection.</typeparam>
-        public static bool SequenceEqual<TDerived, TBase>(this ImmutableArray<TBase> immutableArray, IEnumerable<TDerived> items, IEqualityComparer<TBase>? comparer = null) where TDerived : TBase
+        public static bool SequenceEqual<TDerived, TBase>(
+            this ImmutableArray<TBase> immutableArray,
+            IEnumerable<TDerived> items,
+            IEqualityComparer<TBase>? comparer = null
+        ) where TDerived : TBase
         {
             Requires.NotNull(items, nameof(items));
 
@@ -222,7 +234,11 @@ namespace System.Linq
         /// </summary>
         /// <typeparam name="TDerived">The type of element in the compared array.</typeparam>
         /// <typeparam name="TBase">The type of element contained by the collection.</typeparam>
-        public static bool SequenceEqual<TDerived, TBase>(this ImmutableArray<TBase> immutableArray, ImmutableArray<TDerived> items, Func<TBase, TBase, bool> predicate) where TDerived : TBase
+        public static bool SequenceEqual<TDerived, TBase>(
+            this ImmutableArray<TBase> immutableArray,
+            ImmutableArray<TDerived> items,
+            Func<TBase, TBase, bool> predicate
+        ) where TDerived : TBase
         {
             Requires.NotNull(predicate, nameof(predicate));
             immutableArray.ThrowNullRefIfNotInitialized();
@@ -276,8 +292,11 @@ namespace System.Linq
         /// </summary>
         /// <typeparam name="TAccumulate">The type of the accumulated value.</typeparam>
         /// <typeparam name="T">The type of element contained by the collection.</typeparam>
-        public static TAccumulate Aggregate<TAccumulate, T>(this ImmutableArray<T> immutableArray, TAccumulate seed, Func<TAccumulate, T, TAccumulate> func)
-        {
+        public static TAccumulate Aggregate<TAccumulate, T>(
+            this ImmutableArray<T> immutableArray,
+            TAccumulate seed,
+            Func<TAccumulate, T, TAccumulate> func
+        ) {
             Requires.NotNull(func, nameof(func));
 
             var result = seed;
@@ -295,8 +314,12 @@ namespace System.Linq
         /// <typeparam name="TAccumulate">The type of the accumulated value.</typeparam>
         /// <typeparam name="TResult">The type of result returned by the result selector.</typeparam>
         /// <typeparam name="T">The type of element contained by the collection.</typeparam>
-        public static TResult Aggregate<TAccumulate, TResult, T>(this ImmutableArray<T> immutableArray, TAccumulate seed, Func<TAccumulate, T, TAccumulate> func, Func<TAccumulate, TResult> resultSelector)
-        {
+        public static TResult Aggregate<TAccumulate, TResult, T>(
+            this ImmutableArray<T> immutableArray,
+            TAccumulate seed,
+            Func<TAccumulate, T, TAccumulate> func,
+            Func<TAccumulate, TResult> resultSelector
+        ) {
             Requires.NotNull(resultSelector, nameof(resultSelector));
 
             return resultSelector(Aggregate(immutableArray, seed, func));
@@ -352,12 +375,11 @@ namespace System.Linq
         /// <param name="immutableArray"></param>
         public static T First<T>(this ImmutableArray<T> immutableArray)
         {
-
             // In the event of an empty array, generate the same exception
             // that the linq extension method would.
             return immutableArray.Length > 0
-                ? immutableArray[0]
-                : Enumerable.First(immutableArray.array!);
+              ? immutableArray[0]
+              : Enumerable.First(immutableArray.array!);
         }
 
         /// <summary>
@@ -374,8 +396,10 @@ namespace System.Linq
         /// Returns the first element of the sequence that satisfies a condition or a default value if no such element is found.
         /// </summary>
         /// <typeparam name="T">The type of element contained by the collection.</typeparam>
-        public static T? FirstOrDefault<T>(this ImmutableArray<T> immutableArray, Func<T, bool> predicate)
-        {
+        public static T? FirstOrDefault<T>(
+            this ImmutableArray<T> immutableArray,
+            Func<T, bool> predicate
+        ) {
             Requires.NotNull(predicate, nameof(predicate));
 
             foreach (var v in immutableArray.array!)
@@ -399,8 +423,8 @@ namespace System.Linq
             // In the event of an empty array, generate the same exception
             // that the linq extension method would.
             return immutableArray.Length > 0
-                ? immutableArray[immutableArray.Length - 1]
-                : Enumerable.Last(immutableArray.array!);
+              ? immutableArray[immutableArray.Length - 1]
+              : Enumerable.Last(immutableArray.array!);
         }
 
         /// <summary>
@@ -438,8 +462,10 @@ namespace System.Linq
         /// Returns the last element of a sequence that satisfies a condition or a default value if no such element is found.
         /// </summary>
         /// <typeparam name="T">The type of element contained by the collection.</typeparam>
-        public static T? LastOrDefault<T>(this ImmutableArray<T> immutableArray, Func<T, bool> predicate)
-        {
+        public static T? LastOrDefault<T>(
+            this ImmutableArray<T> immutableArray,
+            Func<T, bool> predicate
+        ) {
             Requires.NotNull(predicate, nameof(predicate));
 
             for (int i = immutableArray.Length - 1; i >= 0; i--)
@@ -511,8 +537,10 @@ namespace System.Linq
         /// Returns the only element of a sequence that satisfies a specified condition or a default value if no such element exists; this method throws an exception if more than one element satisfies the condition.
         /// </summary>
         /// <typeparam name="T">The type of element contained by the collection.</typeparam>
-        public static T? SingleOrDefault<T>(this ImmutableArray<T> immutableArray, Func<T, bool> predicate)
-        {
+        public static T? SingleOrDefault<T>(
+            this ImmutableArray<T> immutableArray,
+            Func<T, bool> predicate
+        ) {
             Requires.NotNull(predicate, nameof(predicate));
 
             bool first = true;
@@ -542,7 +570,10 @@ namespace System.Linq
         /// <param name="immutableArray"></param>
         /// <param name="keySelector">The key selector.</param>
         /// <returns>The newly initialized dictionary.</returns>
-        public static Dictionary<TKey, T> ToDictionary<TKey, T>(this ImmutableArray<T> immutableArray, Func<T, TKey> keySelector) where TKey : notnull
+        public static Dictionary<TKey, T> ToDictionary<TKey, T>(
+            this ImmutableArray<T> immutableArray,
+            Func<T, TKey> keySelector
+        ) where TKey : notnull
         {
             return ToDictionary(immutableArray, keySelector, EqualityComparer<TKey>.Default);
         }
@@ -557,9 +588,18 @@ namespace System.Linq
         /// <param name="keySelector">The key selector.</param>
         /// <param name="elementSelector">The element selector.</param>
         /// <returns>The newly initialized dictionary.</returns>
-        public static Dictionary<TKey, TElement> ToDictionary<TKey, TElement, T>(this ImmutableArray<T> immutableArray, Func<T, TKey> keySelector, Func<T, TElement> elementSelector) where TKey : notnull
+        public static Dictionary<TKey, TElement> ToDictionary<TKey, TElement, T>(
+            this ImmutableArray<T> immutableArray,
+            Func<T, TKey> keySelector,
+            Func<T, TElement> elementSelector
+        ) where TKey : notnull
         {
-            return ToDictionary(immutableArray, keySelector, elementSelector, EqualityComparer<TKey>.Default);
+            return ToDictionary(
+                immutableArray,
+                keySelector,
+                elementSelector,
+                EqualityComparer<TKey>.Default
+            );
         }
 
         /// <summary>
@@ -571,7 +611,11 @@ namespace System.Linq
         /// <param name="keySelector">The key selector.</param>
         /// <param name="comparer">The comparer to initialize the dictionary with.</param>
         /// <returns>The newly initialized dictionary.</returns>
-        public static Dictionary<TKey, T> ToDictionary<TKey, T>(this ImmutableArray<T> immutableArray, Func<T, TKey> keySelector, IEqualityComparer<TKey>? comparer) where TKey : notnull
+        public static Dictionary<TKey, T> ToDictionary<TKey, T>(
+            this ImmutableArray<T> immutableArray,
+            Func<T, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer
+        ) where TKey : notnull
         {
             Requires.NotNull(keySelector, nameof(keySelector));
 
@@ -595,7 +639,12 @@ namespace System.Linq
         /// <param name="elementSelector">The element selector.</param>
         /// <param name="comparer">The comparer to initialize the dictionary with.</param>
         /// <returns>The newly initialized dictionary.</returns>
-        public static Dictionary<TKey, TElement> ToDictionary<TKey, TElement, T>(this ImmutableArray<T> immutableArray, Func<T, TKey> keySelector, Func<T, TElement> elementSelector, IEqualityComparer<TKey>? comparer) where TKey : notnull
+        public static Dictionary<TKey, TElement> ToDictionary<TKey, TElement, T>(
+            this ImmutableArray<T> immutableArray,
+            Func<T, TKey> keySelector,
+            Func<T, TElement> elementSelector,
+            IEqualityComparer<TKey>? comparer
+        ) where TKey : notnull
         {
             Requires.NotNull(keySelector, nameof(keySelector));
             Requires.NotNull(elementSelector, nameof(elementSelector));
@@ -698,8 +747,8 @@ namespace System.Linq
         private static IEnumerable<TResult> SelectManyIterator<TSource, TCollection, TResult>(
             this ImmutableArray<TSource> immutableArray,
             Func<TSource, IEnumerable<TCollection>> collectionSelector,
-            Func<TSource, TCollection, TResult> resultSelector)
-        {
+            Func<TSource, TCollection, TResult> resultSelector
+        ) {
             foreach (TSource item in immutableArray.array!)
             {
                 foreach (TCollection result in collectionSelector(item))

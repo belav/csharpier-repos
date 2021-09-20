@@ -12,8 +12,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
     {
         public string? Name { get; }
 
-        public PerLanguageIncrementalAnalyzerProviderMetadata(IDictionary<string, object> data)
-            : base(data)
+        public PerLanguageIncrementalAnalyzerProviderMetadata(
+            IDictionary<string, object> data
+        ) : base(data)
         {
             Name = (string?)data.GetValueOrDefault("Name");
         }

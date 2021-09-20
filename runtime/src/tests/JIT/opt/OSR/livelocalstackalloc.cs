@@ -21,7 +21,8 @@ class LiveLocalStackalloc
         for (int i = 0; i < nn; i++)
         {
             int* p = *(ptrs + i);
-            if (p != null)  result += *p;
+            if (p != null)
+                result += *p;
         }
 
         return result;

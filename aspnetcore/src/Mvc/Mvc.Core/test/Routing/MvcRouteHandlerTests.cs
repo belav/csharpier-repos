@@ -26,8 +26,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var loggerFactory = new TestLoggerFactory(sink, enabled: true);
 
             var mockActionSelector = new Mock<IActionSelector>();
-            mockActionSelector
-                .Setup(a => a.SelectCandidates(It.IsAny<RouteContext>()))
+            mockActionSelector.Setup(a => a.SelectCandidates(It.IsAny<RouteContext>()))
                 .Returns(new ActionDescriptor[0]);
 
             var context = CreateRouteContext();
@@ -36,9 +35,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
             var handler = CreateMvcRouteHandler(
                 actionSelector: mockActionSelector.Object,
-                loggerFactory: loggerFactory);
+                loggerFactory: loggerFactory
+            );
 
-            var expectedMessage = "No actions matched the current request. Route values: controller=Home, action=Index";
+            var expectedMessage =
+                "No actions matched the current request. Route values: controller=Home, action=Index";
 
             // Act
             await handler.RouteAsync(context);
@@ -54,8 +55,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             IActionSelector actionSelector = null,
             IActionInvokerFactory invokerFactory = null,
             ILoggerFactory loggerFactory = null,
-            object diagnosticListener = null)
-        {
+            object diagnosticListener = null
+        ) {
             if (actionDescriptor == null)
             {
                 var mockAction = new Mock<ActionDescriptor>();
@@ -65,12 +66,16 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             if (actionSelector == null)
             {
                 var mockActionSelector = new Mock<IActionSelector>();
-                mockActionSelector
-                    .Setup(a => a.SelectCandidates(It.IsAny<RouteContext>()))
+                mockActionSelector.Setup(a => a.SelectCandidates(It.IsAny<RouteContext>()))
                     .Returns(new ActionDescriptor[] { actionDescriptor });
 
-                mockActionSelector
-                    .Setup(a => a.SelectBestCandidate(It.IsAny<RouteContext>(), It.IsAny<IReadOnlyList<ActionDescriptor>>()))
+                mockActionSelector.Setup(
+                        a =>
+                            a.SelectBestCandidate(
+                                It.IsAny<RouteContext>(),
+                                It.IsAny<IReadOnlyList<ActionDescriptor>>()
+                            )
+                    )
                     .Returns(actionDescriptor);
                 actionSelector = mockActionSelector.Object;
             }
@@ -89,8 +94,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             if (invokerFactory == null)
             {
                 var mockInvoker = new Mock<IActionInvoker>();
-                mockInvoker.Setup(i => i.InvokeAsync())
-                    .Returns(Task.FromResult(true));
+                mockInvoker.Setup(i => i.InvokeAsync()).Returns(Task.FromResult(true));
 
                 var mockInvokerFactory = new Mock<IActionInvokerFactory>();
                 mockInvokerFactory.Setup(f => f.CreateInvoker(It.IsAny<ActionContext>()))
@@ -103,7 +107,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 invokerFactory,
                 actionSelector,
                 diagnosticSource,
-                loggerFactory);
+                loggerFactory
+            );
         }
 
         private RouteContext CreateRouteContext()
@@ -111,9 +116,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var routingFeature = new RoutingFeature();
 
             var httpContext = new Mock<HttpContext>();
-            httpContext
-                .Setup(h => h.Features[typeof(IRoutingFeature)])
-                .Returns(routingFeature);
+            httpContext.Setup(h => h.Features[typeof(IRoutingFeature)]).Returns(routingFeature);
 
             var routeContext = new RouteContext(httpContext.Object);
             routingFeature.RouteData = routeContext.RouteData;

@@ -45,22 +45,34 @@ namespace System.ServiceModel.Syndication
             }
             _type = string.IsNullOrEmpty(_type) ? Atom10Constants.XmlMediaType : _type;
             _contentBuffer = new XmlBuffer(int.MaxValue);
-            using (XmlDictionaryWriter writer = _contentBuffer.OpenSection(XmlDictionaryReaderQuotas.Max))
-            {
+            using (
+                XmlDictionaryWriter writer = _contentBuffer.OpenSection(
+                    XmlDictionaryReaderQuotas.Max
+                )
+            ) {
                 writer.WriteNode(reader, false);
             }
             _contentBuffer.CloseSection();
             _contentBuffer.Close();
         }
 
-        public XmlSyndicationContent(string type, object dataContractExtension, XmlObjectSerializer dataContractSerializer)
-        {
+        public XmlSyndicationContent(
+            string type,
+            object dataContractExtension,
+            XmlObjectSerializer dataContractSerializer
+        ) {
             _type = string.IsNullOrEmpty(type) ? Atom10Constants.XmlMediaType : type;
-            Extension = new SyndicationElementExtension(dataContractExtension, dataContractSerializer);
+            Extension = new SyndicationElementExtension(
+                dataContractExtension,
+                dataContractSerializer
+            );
         }
 
-        public XmlSyndicationContent(string type, object xmlSerializerExtension, XmlSerializer serializer)
-        {
+        public XmlSyndicationContent(
+            string type,
+            object xmlSerializerExtension,
+            XmlSerializer serializer
+        ) {
             _type = string.IsNullOrEmpty(type) ? Atom10Constants.XmlMediaType : type;
             Extension = new SyndicationElementExtension(xmlSerializerExtension, serializer);
         }
@@ -91,7 +103,8 @@ namespace System.ServiceModel.Syndication
             return _contentBuffer.GetReader(0);
         }
 
-        public TContent ReadContent<TContent>() => ReadContent<TContent>((DataContractSerializer)null);
+        public TContent ReadContent<TContent>() =>
+            ReadContent<TContent>((DataContractSerializer)null);
 
         public TContent ReadContent<TContent>(XmlObjectSerializer dataContractSerializer)
         {

@@ -32,7 +32,6 @@ namespace System.Web.Http.SelfHost.Channels
         public HttpBindingSecurityMode Mode
         {
             get { return _mode; }
-
             set
             {
                 HttpBindingSecurityModeHelper.Validate(value, "value");
@@ -47,7 +46,6 @@ namespace System.Web.Http.SelfHost.Channels
         public HttpTransportSecurity Transport
         {
             get { return _transportSecurity; }
-
             set { _transportSecurity = value ?? new HttpTransportSecurity(); }
         }
     }

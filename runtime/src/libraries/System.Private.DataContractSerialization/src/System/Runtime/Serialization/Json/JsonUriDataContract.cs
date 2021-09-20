@@ -9,16 +9,18 @@ namespace System.Runtime.Serialization.Json
     {
         [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
         public JsonUriDataContract(UriDataContract traditionalUriDataContract)
-            : base(traditionalUriDataContract)
-        {
-        }
+            : base(traditionalUriDataContract) { }
 
         [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
-        public override object? ReadJsonValueCore(XmlReaderDelegator jsonReader, XmlObjectSerializerReadContextComplexJson? context)
-        {
+        public override object? ReadJsonValueCore(
+            XmlReaderDelegator jsonReader,
+            XmlObjectSerializerReadContextComplexJson? context
+        ) {
             if (context == null)
             {
-                return TryReadNullAtTopLevel(jsonReader) ? null : jsonReader.ReadElementContentAsUri();
+                return TryReadNullAtTopLevel(jsonReader)
+                  ? null
+                  : jsonReader.ReadElementContentAsUri();
             }
             else
             {

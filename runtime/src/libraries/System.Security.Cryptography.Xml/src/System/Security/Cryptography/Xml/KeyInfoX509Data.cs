@@ -55,15 +55,22 @@ namespace System.Security.Cryptography.Xml
                     chain.Build(certificate);
 
                     // Can't honor the option if we only have a partial chain.
-                    if ((chain.ChainStatus.Length > 0) &&
-                        ((chain.ChainStatus[0].Status & X509ChainStatusFlags.PartialChain) == X509ChainStatusFlags.PartialChain))
-                    {
+                    if (
+                        (chain.ChainStatus.Length > 0)
+                        && (
+                            (chain.ChainStatus[0].Status & X509ChainStatusFlags.PartialChain)
+                            == X509ChainStatusFlags.PartialChain
+                        )
+                    ) {
                         throw new CryptographicException(SR.Cryptography_Partial_Chain);
                     }
 
                     elements = (X509ChainElementCollection)chain.ChainElements;
-                    for (int index = 0; index < (Utils.IsSelfSigned(chain) ? 1 : elements.Count - 1); index++)
-                    {
+                    for (
+                        int index = 0;
+                        index < (Utils.IsSelfSigned(chain) ? 1 : elements.Count - 1);
+                        index++
+                    ) {
                         AddCertificate(elements[index].Certificate);
                     }
                     break;
@@ -76,9 +83,13 @@ namespace System.Security.Cryptography.Xml
                     chain.Build(certificate);
 
                     // Can't honor the option if we only have a partial chain.
-                    if ((chain.ChainStatus.Length > 0) &&
-                        ((chain.ChainStatus[0].Status & X509ChainStatusFlags.PartialChain) == X509ChainStatusFlags.PartialChain))
-                    {
+                    if (
+                        (chain.ChainStatus.Length > 0)
+                        && (
+                            (chain.ChainStatus[0].Status & X509ChainStatusFlags.PartialChain)
+                            == X509ChainStatusFlags.PartialChain
+                        )
+                    ) {
                         throw new CryptographicException(SR.Cryptography_Partial_Chain);
                     }
 
@@ -157,8 +168,18 @@ namespace System.Security.Cryptography.Xml
                 throw new ArgumentException(SR.Arg_EmptyOrNullString, nameof(serialNumber));
 
             BigInteger h;
-            if (!BigInteger.TryParse(serialNumber, NumberStyles.AllowHexSpecifier, NumberFormatInfo.CurrentInfo, out h))
-                throw new ArgumentException(SR.Cryptography_Xml_InvalidX509IssuerSerialNumber, nameof(serialNumber));
+            if (
+                !BigInteger.TryParse(
+                    serialNumber,
+                    NumberStyles.AllowHexSpecifier,
+                    NumberFormatInfo.CurrentInfo,
+                    out h
+                )
+            )
+                throw new ArgumentException(
+                    SR.Cryptography_Xml_InvalidX509IssuerSerialNumber,
+                    nameof(serialNumber)
+                );
 
             if (_issuerSerials == null)
                 _issuerSerials = new ArrayList();
@@ -186,10 +207,14 @@ namespace System.Security.Cryptography.Xml
         private void Clear()
         {
             _CRL = null;
-            if (_subjectKeyIds != null) _subjectKeyIds.Clear();
-            if (_subjectNames != null) _subjectNames.Clear();
-            if (_issuerSerials != null) _issuerSerials.Clear();
-            if (_certificates != null) _certificates.Clear();
+            if (_subjectKeyIds != null)
+                _subjectKeyIds.Clear();
+            if (_subjectNames != null)
+                _subjectNames.Clear();
+            if (_issuerSerials != null)
+                _issuerSerials.Clear();
+            if (_certificates != null)
+                _certificates.Clear();
         }
 
         //
@@ -205,18 +230,34 @@ namespace System.Security.Cryptography.Xml
 
         internal override XmlElement GetXml(XmlDocument xmlDocument)
         {
-            XmlElement x509DataElement = xmlDocument.CreateElement("X509Data", SignedXml.XmlDsigNamespaceUrl);
+            XmlElement x509DataElement = xmlDocument.CreateElement(
+                "X509Data",
+                SignedXml.XmlDsigNamespaceUrl
+            );
 
             if (_issuerSerials != null)
             {
                 foreach (X509IssuerSerial issuerSerial in _issuerSerials)
                 {
-                    XmlElement issuerSerialElement = xmlDocument.CreateElement("X509IssuerSerial", SignedXml.XmlDsigNamespaceUrl);
-                    XmlElement issuerNameElement = xmlDocument.CreateElement("X509IssuerName", SignedXml.XmlDsigNamespaceUrl);
-                    issuerNameElement.AppendChild(xmlDocument.CreateTextNode(issuerSerial.IssuerName));
+                    XmlElement issuerSerialElement = xmlDocument.CreateElement(
+                        "X509IssuerSerial",
+                        SignedXml.XmlDsigNamespaceUrl
+                    );
+                    XmlElement issuerNameElement = xmlDocument.CreateElement(
+                        "X509IssuerName",
+                        SignedXml.XmlDsigNamespaceUrl
+                    );
+                    issuerNameElement.AppendChild(
+                        xmlDocument.CreateTextNode(issuerSerial.IssuerName)
+                    );
                     issuerSerialElement.AppendChild(issuerNameElement);
-                    XmlElement serialNumberElement = xmlDocument.CreateElement("X509SerialNumber", SignedXml.XmlDsigNamespaceUrl);
-                    serialNumberElement.AppendChild(xmlDocument.CreateTextNode(issuerSerial.SerialNumber));
+                    XmlElement serialNumberElement = xmlDocument.CreateElement(
+                        "X509SerialNumber",
+                        SignedXml.XmlDsigNamespaceUrl
+                    );
+                    serialNumberElement.AppendChild(
+                        xmlDocument.CreateTextNode(issuerSerial.SerialNumber)
+                    );
                     issuerSerialElement.AppendChild(serialNumberElement);
                     x509DataElement.AppendChild(issuerSerialElement);
                 }
@@ -226,8 +267,13 @@ namespace System.Security.Cryptography.Xml
             {
                 foreach (byte[] subjectKeyId in _subjectKeyIds)
                 {
-                    XmlElement subjectKeyIdElement = xmlDocument.CreateElement("X509SKI", SignedXml.XmlDsigNamespaceUrl);
-                    subjectKeyIdElement.AppendChild(xmlDocument.CreateTextNode(Convert.ToBase64String(subjectKeyId)));
+                    XmlElement subjectKeyIdElement = xmlDocument.CreateElement(
+                        "X509SKI",
+                        SignedXml.XmlDsigNamespaceUrl
+                    );
+                    subjectKeyIdElement.AppendChild(
+                        xmlDocument.CreateTextNode(Convert.ToBase64String(subjectKeyId))
+                    );
                     x509DataElement.AppendChild(subjectKeyIdElement);
                 }
             }
@@ -236,7 +282,10 @@ namespace System.Security.Cryptography.Xml
             {
                 foreach (string subjectName in _subjectNames)
                 {
-                    XmlElement subjectNameElement = xmlDocument.CreateElement("X509SubjectName", SignedXml.XmlDsigNamespaceUrl);
+                    XmlElement subjectNameElement = xmlDocument.CreateElement(
+                        "X509SubjectName",
+                        SignedXml.XmlDsigNamespaceUrl
+                    );
                     subjectNameElement.AppendChild(xmlDocument.CreateTextNode(subjectName));
                     x509DataElement.AppendChild(subjectNameElement);
                 }
@@ -246,15 +295,25 @@ namespace System.Security.Cryptography.Xml
             {
                 foreach (X509Certificate certificate in _certificates)
                 {
-                    XmlElement x509Element = xmlDocument.CreateElement("X509Certificate", SignedXml.XmlDsigNamespaceUrl);
-                    x509Element.AppendChild(xmlDocument.CreateTextNode(Convert.ToBase64String(certificate.GetRawCertData())));
+                    XmlElement x509Element = xmlDocument.CreateElement(
+                        "X509Certificate",
+                        SignedXml.XmlDsigNamespaceUrl
+                    );
+                    x509Element.AppendChild(
+                        xmlDocument.CreateTextNode(
+                            Convert.ToBase64String(certificate.GetRawCertData())
+                        )
+                    );
                     x509DataElement.AppendChild(x509Element);
                 }
             }
 
             if (_CRL != null)
             {
-                XmlElement crlElement = xmlDocument.CreateElement("X509CRL", SignedXml.XmlDsigNamespaceUrl);
+                XmlElement crlElement = xmlDocument.CreateElement(
+                    "X509CRL",
+                    SignedXml.XmlDsigNamespaceUrl
+                );
                 crlElement.AppendChild(xmlDocument.CreateTextNode(Convert.ToBase64String(_CRL)));
                 x509DataElement.AppendChild(crlElement);
             }
@@ -276,23 +335,44 @@ namespace System.Security.Cryptography.Xml
             XmlNodeList x509CertificateNodes = element.SelectNodes("ds:X509Certificate", nsm);
             XmlNodeList x509CRLNodes = element.SelectNodes("ds:X509CRL", nsm);
 
-            if ((x509CRLNodes.Count == 0 && x509IssuerSerialNodes.Count == 0 && x509SKINodes.Count == 0
-                    && x509SubjectNameNodes.Count == 0 && x509CertificateNodes.Count == 0)) // Bad X509Data tag, or Empty tag
+            if (
+                (
+                    x509CRLNodes.Count == 0
+                    && x509IssuerSerialNodes.Count == 0
+                    && x509SKINodes.Count == 0
+                    && x509SubjectNameNodes.Count == 0
+                    && x509CertificateNodes.Count == 0
+                )
+            ) // Bad X509Data tag, or Empty tag
                 throw new CryptographicException(SR.Cryptography_Xml_InvalidElement, "X509Data");
 
             // Flush anything in the lists
             Clear();
 
             if (x509CRLNodes.Count != 0)
-                _CRL = Convert.FromBase64String(Utils.DiscardWhiteSpaces(x509CRLNodes.Item(0).InnerText));
+                _CRL = Convert.FromBase64String(
+                    Utils.DiscardWhiteSpaces(x509CRLNodes.Item(0).InnerText)
+                );
 
             foreach (XmlNode issuerSerialNode in x509IssuerSerialNodes)
             {
-                XmlNode x509IssuerNameNode = issuerSerialNode.SelectSingleNode("ds:X509IssuerName", nsm);
-                XmlNode x509SerialNumberNode = issuerSerialNode.SelectSingleNode("ds:X509SerialNumber", nsm);
+                XmlNode x509IssuerNameNode = issuerSerialNode.SelectSingleNode(
+                    "ds:X509IssuerName",
+                    nsm
+                );
+                XmlNode x509SerialNumberNode = issuerSerialNode.SelectSingleNode(
+                    "ds:X509SerialNumber",
+                    nsm
+                );
                 if (x509IssuerNameNode == null || x509SerialNumberNode == null)
-                    throw new CryptographicException(SR.Cryptography_Xml_InvalidElement, "IssuerSerial");
-                InternalAddIssuerSerial(x509IssuerNameNode.InnerText.Trim(), x509SerialNumberNode.InnerText.Trim());
+                    throw new CryptographicException(
+                        SR.Cryptography_Xml_InvalidElement,
+                        "IssuerSerial"
+                    );
+                InternalAddIssuerSerial(
+                    x509IssuerNameNode.InnerText.Trim(),
+                    x509SerialNumberNode.InnerText.Trim()
+                );
             }
 
             foreach (XmlNode node in x509SKINodes)
@@ -307,7 +387,11 @@ namespace System.Security.Cryptography.Xml
 
             foreach (XmlNode node in x509CertificateNodes)
             {
-                AddCertificate(new X509Certificate2(Convert.FromBase64String(Utils.DiscardWhiteSpaces(node.InnerText))));
+                AddCertificate(
+                    new X509Certificate2(
+                        Convert.FromBase64String(Utils.DiscardWhiteSpaces(node.InnerText))
+                    )
+                );
             }
         }
     }

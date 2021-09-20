@@ -44,8 +44,10 @@ namespace System.Text.Json
         /// <exception cref="ArgumentException">
         ///   <paramref name="options"/> contains unsupported options.
         /// </exception>
-        public static JsonDocument Parse(ReadOnlyMemory<byte> utf8Json, JsonDocumentOptions options = default)
-        {
+        public static JsonDocument Parse(
+            ReadOnlyMemory<byte> utf8Json,
+            JsonDocumentOptions options = default
+        ) {
             return Parse(utf8Json, options.GetReaderOptions(), null);
         }
 
@@ -74,8 +76,10 @@ namespace System.Text.Json
         /// <exception cref="ArgumentException">
         ///   <paramref name="options"/> contains unsupported options.
         /// </exception>
-        public static JsonDocument Parse(ReadOnlySequence<byte> utf8Json, JsonDocumentOptions options = default)
-        {
+        public static JsonDocument Parse(
+            ReadOnlySequence<byte> utf8Json,
+            JsonDocumentOptions options = default
+        ) {
             JsonReaderOptions readerOptions = options.GetReaderOptions();
 
             if (utf8Json.IsSingleSegment)
@@ -154,8 +158,10 @@ namespace System.Text.Json
             return ParseUnrented(owned.AsMemory(), options.GetReaderOptions());
         }
 
-        internal static JsonDocument ParseValue(ReadOnlySpan<byte> utf8Json, JsonDocumentOptions options)
-        {
+        internal static JsonDocument ParseValue(
+            ReadOnlySpan<byte> utf8Json,
+            JsonDocumentOptions options
+        ) {
             Debug.Assert(utf8Json != null);
 
             byte[] owned = new byte[utf8Json.Length];
@@ -189,8 +195,8 @@ namespace System.Text.Json
         public static Task<JsonDocument> ParseAsync(
             Stream utf8Json,
             JsonDocumentOptions options = default,
-            CancellationToken cancellationToken = default)
-        {
+            CancellationToken cancellationToken = default
+        ) {
             if (utf8Json == null)
             {
                 throw new ArgumentNullException(nameof(utf8Json));
@@ -202,9 +208,10 @@ namespace System.Text.Json
         private static async Task<JsonDocument> ParseAsyncCore(
             Stream utf8Json,
             JsonDocumentOptions options = default,
-            CancellationToken cancellationToken = default)
-        {
-            ArraySegment<byte> drained = await ReadToEndAsync(utf8Json, cancellationToken).ConfigureAwait(false);
+            CancellationToken cancellationToken = default
+        ) {
+            ArraySegment<byte> drained = await ReadToEndAsync(utf8Json, cancellationToken)
+                .ConfigureAwait(false);
             Debug.Assert(drained.Array != null);
             try
             {
@@ -238,8 +245,10 @@ namespace System.Text.Json
         /// <exception cref="ArgumentException">
         ///   <paramref name="options"/> contains unsupported options.
         /// </exception>
-        public static JsonDocument Parse(ReadOnlyMemory<char> json, JsonDocumentOptions options = default)
-        {
+        public static JsonDocument Parse(
+            ReadOnlyMemory<char> json,
+            JsonDocumentOptions options = default
+        ) {
             ReadOnlySpan<char> jsonChars = json.Span;
             int expectedByteCount = JsonReaderHelper.GetUtf8ByteCount(jsonChars);
             byte[] utf8Bytes = ArrayPool<byte>.Shared.Rent(expectedByteCount);
@@ -252,7 +261,8 @@ namespace System.Text.Json
                 return Parse(
                     utf8Bytes.AsMemory(0, actualByteCount),
                     options.GetReaderOptions(),
-                    utf8Bytes);
+                    utf8Bytes
+                );
             }
             catch
             {
@@ -263,8 +273,10 @@ namespace System.Text.Json
             }
         }
 
-        internal static JsonDocument ParseValue(ReadOnlyMemory<char> json, JsonDocumentOptions options)
-        {
+        internal static JsonDocument ParseValue(
+            ReadOnlyMemory<char> json,
+            JsonDocumentOptions options
+        ) {
             ReadOnlySpan<char> jsonChars = json.Span;
             int expectedByteCount = JsonReaderHelper.GetUtf8ByteCount(jsonChars);
             byte[] owned;
@@ -278,6 +290,7 @@ namespace System.Text.Json
                 owned = new byte[actualByteCount];
                 Buffer.BlockCopy(utf8Bytes, 0, owned, 0, actualByteCount);
             }
+
             finally
             {
                 // Holds document content, clear it before returning it.
@@ -350,8 +363,10 @@ namespace System.Text.Json
         /// <exception cref="JsonException">
         ///   A value could not be read from the reader.
         /// </exception>
-        public static bool TryParseValue(ref Utf8JsonReader reader, [NotNullWhen(true)] out JsonDocument? document)
-        {
+        public static bool TryParseValue(
+            ref Utf8JsonReader reader,
+            [NotNullWhen(true)] out JsonDocument? document
+        ) {
             return TryParseValue(ref reader, out document, shouldThrow: false, useArrayPools: true);
         }
 
@@ -392,7 +407,12 @@ namespace System.Text.Json
         /// </exception>
         public static JsonDocument ParseValue(ref Utf8JsonReader reader)
         {
-            bool ret = TryParseValue(ref reader, out JsonDocument? document, shouldThrow: true, useArrayPools: true);
+            bool ret = TryParseValue(
+                ref reader,
+                out JsonDocument? document,
+                shouldThrow: true,
+                useArrayPools: true
+            );
 
             Debug.Assert(ret, "TryParseValue returned false with shouldThrow: true.");
             Debug.Assert(document != null, "null document returned with shouldThrow: true.");
@@ -403,8 +423,8 @@ namespace System.Text.Json
             ref Utf8JsonReader reader,
             [NotNullWhen(true)] out JsonDocument? document,
             bool shouldThrow,
-            bool useArrayPools)
-        {
+            bool useArrayPools
+        ) {
             JsonReaderState state = reader.CurrentState;
             CheckSupportedOptions(state.Options, nameof(reader));
 
@@ -432,14 +452,14 @@ namespace System.Text.Json
                             {
                                 ThrowHelper.ThrowJsonReaderException(
                                     ref reader,
-                                    ExceptionResource.ExpectedJsonTokens);
+                                    ExceptionResource.ExpectedJsonTokens
+                                );
                             }
 
                             reader = restore;
                             document = null;
                             return false;
                         }
-
                         break;
                     }
                 }
@@ -458,7 +478,8 @@ namespace System.Text.Json
                             {
                                 ThrowHelper.ThrowJsonReaderException(
                                     ref reader,
-                                    ExceptionResource.ExpectedJsonTokens);
+                                    ExceptionResource.ExpectedJsonTokens
+                                );
                             }
 
                             reader = restore;
@@ -473,7 +494,8 @@ namespace System.Text.Json
                         {
                             valueSpan = reader.OriginalSpan.Slice(
                                 checked((int)startingOffset),
-                                checked((int)totalLength));
+                                checked((int)totalLength)
+                            );
                         }
                         else
                         {
@@ -481,9 +503,9 @@ namespace System.Text.Json
                         }
 
                         Debug.Assert(
-                            reader.TokenType == JsonTokenType.EndObject ||
-                            reader.TokenType == JsonTokenType.EndArray);
-
+                            reader.TokenType == JsonTokenType.EndObject
+                                || reader.TokenType == JsonTokenType.EndArray
+                        );
                         break;
                     }
 
@@ -500,7 +522,6 @@ namespace System.Text.Json
                             {
                                 valueSpan = reader.ValueSpan;
                             }
-
                             break;
                         }
 
@@ -517,7 +538,6 @@ namespace System.Text.Json
                         {
                             valueSpan = reader.ValueSpan;
                         }
-
                         break;
                     }
 
@@ -537,13 +557,19 @@ namespace System.Text.Json
 
                             Debug.Assert(
                                 readerSpan[(int)reader.TokenStartIndex] == (byte)'"',
-                                $"Calculated span starts with {readerSpan[(int)reader.TokenStartIndex]}");
+                                $"Calculated span starts with {readerSpan[(int)reader.TokenStartIndex]}"
+                            );
 
                             Debug.Assert(
-                                readerSpan[(int)reader.TokenStartIndex + payloadLength - 1] == (byte)'"',
-                                $"Calculated span ends with {readerSpan[(int)reader.TokenStartIndex + payloadLength - 1]}");
+                                readerSpan[(int)reader.TokenStartIndex + payloadLength - 1]
+                                    == (byte)'"',
+                                $"Calculated span ends with {readerSpan[(int)reader.TokenStartIndex + payloadLength - 1]}"
+                            );
 
-                            valueSpan = readerSpan.Slice((int)reader.TokenStartIndex, payloadLength);
+                            valueSpan = readerSpan.Slice(
+                                (int)reader.TokenStartIndex,
+                                payloadLength
+                            );
                         }
                         else
                         {
@@ -561,13 +587,14 @@ namespace System.Text.Json
                             valueSequence = sequence.Slice(reader.TokenStartIndex, payloadLength);
                             Debug.Assert(
                                 valueSequence.First.Span[0] == (byte)'"',
-                                $"Calculated sequence starts with {valueSequence.First.Span[0]}");
+                                $"Calculated sequence starts with {valueSequence.First.Span[0]}"
+                            );
 
                             Debug.Assert(
                                 valueSequence.ToArray()[payloadLength - 1] == (byte)'"',
-                                $"Calculated sequence ends with {valueSequence.ToArray()[payloadLength - 1]}");
+                                $"Calculated sequence ends with {valueSequence.ToArray()[payloadLength - 1]}"
+                            );
                         }
-
                         break;
                     }
                     default:
@@ -581,7 +608,8 @@ namespace System.Text.Json
                             ThrowHelper.ThrowJsonReaderException(
                                 ref reader,
                                 ExceptionResource.ExpectedStartOfValueNotFound,
-                                displayByte);
+                                displayByte
+                            );
                         }
 
                         reader = restore;
@@ -671,8 +699,8 @@ namespace System.Text.Json
         private static JsonDocument Parse(
             ReadOnlyMemory<byte> utf8Json,
             JsonReaderOptions readerOptions,
-            byte[]? extraRentedBytes)
-        {
+            byte[]? extraRentedBytes
+        ) {
             ReadOnlySpan<byte> utf8JsonSpan = utf8Json.Span;
             var database = MetadataDb.CreateRented(utf8Json.Length, convertToAlloc: false);
             var stack = new StackRowStack(JsonDocumentOptions.DefaultMaxDepth * StackRow.Size);
@@ -697,13 +725,14 @@ namespace System.Text.Json
         private static JsonDocument ParseUnrented(
             ReadOnlyMemory<byte> utf8Json,
             JsonReaderOptions readerOptions,
-            JsonTokenType tokenType = JsonTokenType.None)
-        {
+            JsonTokenType tokenType = JsonTokenType.None
+        ) {
             // These tokens should already have been processed.
             Debug.Assert(
-                tokenType != JsonTokenType.Null &&
-                tokenType != JsonTokenType.False &&
-                tokenType != JsonTokenType.True);
+                tokenType != JsonTokenType.Null
+                    && tokenType != JsonTokenType.False
+                    && tokenType != JsonTokenType.True
+            );
 
             ReadOnlySpan<byte> utf8JsonSpan = utf8Json.Span;
             MetadataDb database;
@@ -723,6 +752,7 @@ namespace System.Text.Json
                 {
                     Parse(utf8JsonSpan, readerOptions, ref database, ref stack);
                 }
+
                 finally
                 {
                     stack.Dispose();
@@ -745,7 +775,8 @@ namespace System.Text.Json
                 {
                     // Ask for 1 more than the length to avoid resizing later,
                     // which is unnecessary in the common case where the stream length doesn't change.
-                    long expectedLength = Math.Max(utf8Bom.Length, stream.Length - stream.Position) + 1;
+                    long expectedLength =
+                        Math.Max(utf8Bom.Length, stream.Length - stream.Position) + 1;
                     rented = ArrayPool<byte>.Shared.Rent(checked((int)expectedLength));
                 }
                 else
@@ -761,18 +792,16 @@ namespace System.Text.Json
                     // No need for checking for growth, the minimal rent sizes both guarantee it'll fit.
                     Debug.Assert(rented.Length >= utf8Bom.Length);
 
-                    lastRead = stream.Read(
-                        rented,
-                        written,
-                        utf8Bom.Length - written);
+                    lastRead = stream.Read(rented, written, utf8Bom.Length - written);
 
                     written += lastRead;
                 } while (lastRead > 0 && written < utf8Bom.Length);
 
                 // If we have 3 bytes, and they're the BOM, reset the write position to 0.
-                if (written == utf8Bom.Length &&
-                    utf8Bom.SequenceEqual(rented.AsSpan(0, utf8Bom.Length)))
-                {
+                if (
+                    written == utf8Bom.Length
+                    && utf8Bom.SequenceEqual(rented.AsSpan(0, utf8Bom.Length))
+                ) {
                     written = 0;
                 }
 
@@ -808,13 +837,13 @@ namespace System.Text.Json
 
         private static async
 #if BUILDING_INBOX_LIBRARY
-            ValueTask<ArraySegment<byte>>
+        ValueTask<ArraySegment<byte>>
 #else
-            Task<ArraySegment<byte>>
+        Task<
+            ArraySegment<byte>
+        >
 #endif
-            ReadToEndAsync(
-            Stream stream,
-            CancellationToken cancellationToken)
+        ReadToEndAsync(Stream stream, CancellationToken cancellationToken)
         {
             int written = 0;
             byte[]? rented = null;
@@ -828,7 +857,8 @@ namespace System.Text.Json
                 {
                     // Ask for 1 more than the length to avoid resizing later,
                     // which is unnecessary in the common case where the stream length doesn't change.
-                    long expectedLength = Math.Max(utf8BomLength, stream.Length - stream.Position) + 1;
+                    long expectedLength =
+                        Math.Max(utf8BomLength, stream.Length - stream.Position) + 1;
                     rented = ArrayPool<byte>.Shared.Rent(checked((int)expectedLength));
                 }
                 else
@@ -846,21 +876,24 @@ namespace System.Text.Json
 
                     lastRead = await stream.ReadAsync(
 #if BUILDING_INBOX_LIBRARY
-                        rented.AsMemory(written, utf8BomLength - written),
+                            rented.AsMemory(written, utf8BomLength - written),
 #else
-                        rented,
-                        written,
-                        utf8BomLength - written,
+                            rented,
+                            written,
+                            utf8BomLength - written,
 #endif
-                        cancellationToken).ConfigureAwait(false);
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
                     written += lastRead;
                 } while (lastRead > 0 && written < utf8BomLength);
 
                 // If we have 3 bytes, and they're the BOM, reset the write position to 0.
-                if (written == utf8BomLength &&
-                    JsonConstants.Utf8Bom.SequenceEqual(rented.AsSpan(0, utf8BomLength)))
-                {
+                if (
+                    written == utf8BomLength
+                    && JsonConstants.Utf8Bom.SequenceEqual(rented.AsSpan(0, utf8BomLength))
+                ) {
                     written = 0;
                 }
 
@@ -877,16 +910,17 @@ namespace System.Text.Json
 
                     lastRead = await stream.ReadAsync(
 #if BUILDING_INBOX_LIBRARY
-                        rented.AsMemory(written),
+                            rented.AsMemory(written),
 #else
-                        rented,
-                        written,
-                        rented.Length - written,
+                            rented,
+                            written,
+                            rented.Length - written,
 #endif
-                        cancellationToken).ConfigureAwait(false);
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
                     written += lastRead;
-
                 } while (lastRead > 0);
 
                 return new ArraySegment<byte>(rented, 0, written);

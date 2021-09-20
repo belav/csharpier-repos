@@ -21,8 +21,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     {
         private const int DefaultLength = 100;
 
-        private static readonly Dictionary<Type, string> _typeMapping
-            = new()
+        private static readonly Dictionary<Type, string> _typeMapping =
+            new()
             {
                 { typeof(sbyte), "varchar(4)" },
                 { typeof(byte), "varchar(3)" },
@@ -66,23 +66,25 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
 
-            return method.Name == nameof(ToString)
+            return
+                method.Name == nameof(ToString)
                 && arguments.Count == 0
                 && instance != null
                 && _typeMapping.TryGetValue(instance.Type, out var storeType)
-                    ? _sqlExpressionFactory.Function(
-                        "CONVERT",
-                        new[] { _sqlExpressionFactory.Fragment(storeType), instance },
-                        nullable: true,
-                        argumentsPropagateNullability: new[] { false, true },
-                        typeof(string))
-                    : null;
+              ? _sqlExpressionFactory.Function(
+                    "CONVERT",
+                    new[] { _sqlExpressionFactory.Fragment(storeType), instance },
+                    nullable: true,
+                    argumentsPropagateNullability: new[] { false, true },
+                    typeof(string)
+                )
+              : null;
         }
     }
 }

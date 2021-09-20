@@ -14,9 +14,9 @@ namespace System.Text.Json
     {
         // Members accessed by the serializer when deserializing.
         public const DynamicallyAccessedMemberTypes MembersAccessedOnRead =
-            DynamicallyAccessedMemberTypes.PublicConstructors |
-            DynamicallyAccessedMemberTypes.PublicProperties |
-            DynamicallyAccessedMemberTypes.PublicFields;
+            DynamicallyAccessedMemberTypes.PublicConstructors
+            | DynamicallyAccessedMemberTypes.PublicProperties
+            | DynamicallyAccessedMemberTypes.PublicFields;
 
         /// <summary>
         /// Returns the span for the given reader.
@@ -49,32 +49,35 @@ namespace System.Text.Json
         /// <paramref name="lowerBound"/> and <paramref name="upperBound"/>, inclusive.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsInRangeInclusive(uint value, uint lowerBound, uint upperBound)
-            => (value - lowerBound) <= (upperBound - lowerBound);
+        public static bool IsInRangeInclusive(uint value, uint lowerBound, uint upperBound) =>
+            (value - lowerBound) <= (upperBound - lowerBound);
 
         /// <summary>
         /// Returns <see langword="true"/> if <paramref name="value"/> is between
         /// <paramref name="lowerBound"/> and <paramref name="upperBound"/>, inclusive.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsInRangeInclusive(int value, int lowerBound, int upperBound)
-            => (uint)(value - lowerBound) <= (uint)(upperBound - lowerBound);
+        public static bool IsInRangeInclusive(int value, int lowerBound, int upperBound) =>
+            (uint)(value - lowerBound) <= (uint)(upperBound - lowerBound);
 
         /// <summary>
         /// Returns <see langword="true"/> if <paramref name="value"/> is between
         /// <paramref name="lowerBound"/> and <paramref name="upperBound"/>, inclusive.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsInRangeInclusive(long value, long lowerBound, long upperBound)
-            => (ulong)(value - lowerBound) <= (ulong)(upperBound - lowerBound);
+        public static bool IsInRangeInclusive(long value, long lowerBound, long upperBound) =>
+            (ulong)(value - lowerBound) <= (ulong)(upperBound - lowerBound);
 
         /// <summary>
         /// Returns <see langword="true"/> if <paramref name="value"/> is between
         /// <paramref name="lowerBound"/> and <paramref name="upperBound"/>, inclusive.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsInRangeInclusive(JsonTokenType value, JsonTokenType lowerBound, JsonTokenType upperBound)
-            => (value - lowerBound) <= (upperBound - lowerBound);
+        public static bool IsInRangeInclusive(
+            JsonTokenType value,
+            JsonTokenType lowerBound,
+            JsonTokenType upperBound
+        ) => (value - lowerBound) <= (upperBound - lowerBound);
 
         /// <summary>
         /// Returns <see langword="true"/> if <paramref name="value"/> is in the range [0..9].
@@ -100,17 +103,22 @@ namespace System.Text.Json
         /// <returns></returns>
         public static string Utf8GetString(ReadOnlySpan<byte> bytes)
         {
-            return Encoding.UTF8.GetString(bytes
+            return Encoding.UTF8.GetString(
+                bytes
 #if NETSTANDARD2_0 || NETFRAMEWORK
-                        .ToArray()
+                .ToArray()
 #endif
-                );
+            );
         }
 
         /// <summary>
         /// Emulates Dictionary.TryAdd on netstandard.
         /// </summary>
-        public static bool TryAdd<TKey, TValue>(Dictionary<TKey, TValue> dictionary, in TKey key, in TValue value) where TKey : notnull
+        public static bool TryAdd<TKey, TValue>(
+            Dictionary<TKey, TValue> dictionary,
+            in TKey key,
+            in TValue value
+        ) where TKey : notnull
         {
 #if NETSTANDARD2_0 || NETFRAMEWORK
             if (!dictionary.ContainsKey(key))
@@ -144,12 +152,16 @@ namespace System.Text.Json
         }
 
         public static bool IsValidNumberHandlingValue(JsonNumberHandling handling) =>
-            IsInRangeInclusive((int)handling, 0,
+            IsInRangeInclusive(
+                (int)handling,
+                0,
                 (int)(
-                JsonNumberHandling.Strict |
-                JsonNumberHandling.AllowReadingFromString |
-                JsonNumberHandling.WriteAsString |
-                JsonNumberHandling.AllowNamedFloatingPointLiterals));
+                    JsonNumberHandling.Strict
+                    | JsonNumberHandling.AllowReadingFromString
+                    | JsonNumberHandling.WriteAsString
+                    | JsonNumberHandling.AllowNamedFloatingPointLiterals
+                )
+            );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ValidateInt32MaxArrayLength(uint length)

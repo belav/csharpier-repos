@@ -83,11 +83,14 @@ public static class VectorMgdMgd
         bool returnVal;
         if (typeof(T) == typeof(float))
         {
-            returnVal = Math.Abs(((float)(object)value) - ((float)(object)expectedValue)) <= Single.Epsilon;
+            returnVal =
+                Math.Abs(((float)(object)value) - ((float)(object)expectedValue)) <= Single.Epsilon;
         }
         if (typeof(T) == typeof(double))
         {
-            returnVal = Math.Abs(((double)(object)value) - ((double)(object)expectedValue)) <= Double.Epsilon;
+            returnVal =
+                Math.Abs(((double)(object)value) - ((double)(object)expectedValue))
+                <= Double.Epsilon;
         }
         else
         {
@@ -149,11 +152,11 @@ public static class VectorMgdMgd
             public Vector64<T> v4;
         }
 
-        private HVA64_01[]  hva64_01_a;
-        private HVA64_02[]  hva64_02_a;
-        private HVA64_03[]  hva64_03_a;
-        private HVA64_04[]  hva64_04_a;
-        private HVA64_05[]  hva64_05_a;
+        private HVA64_01[] hva64_01_a;
+        private HVA64_02[] hva64_02_a;
+        private HVA64_03[] hva64_03_a;
+        private HVA64_04[] hva64_04_a;
+        private HVA64_05[] hva64_05_a;
 
         ////////////////////////////////////////
 
@@ -190,7 +193,7 @@ public static class VectorMgdMgd
             public Vector128<T> v2;
             public Vector128<T> v3;
             public Vector128<T> v4;
-       }
+        }
 
         private HVA128_01[] hva128_01_a;
         private HVA128_02[] hva128_02_a;
@@ -205,17 +208,17 @@ public static class VectorMgdMgd
             int i;
 
             i = 0;
-	    hva64_01_a = new HVA64_01[5];
+            hva64_01_a = new HVA64_01[5];
             hva64_01_a[4].v0 = Unsafe.As<T, Vector64<T>>(ref values[i]);
 
             i = 0;
-	    hva64_02_a = new HVA64_02[4];
+            hva64_02_a = new HVA64_02[4];
             hva64_02_a[3].v0 = Unsafe.As<T, Vector64<T>>(ref values[i]);
             i += Vector64<T>.Count;
             hva64_02_a[3].v1 = Unsafe.As<T, Vector64<T>>(ref values[i]);
 
             i = 0;
-	    hva64_03_a = new HVA64_03[3];
+            hva64_03_a = new HVA64_03[3];
             hva64_03_a[2].v0 = Unsafe.As<T, Vector64<T>>(ref values[i]);
             i += Vector64<T>.Count;
             hva64_03_a[2].v1 = Unsafe.As<T, Vector64<T>>(ref values[i]);
@@ -223,7 +226,7 @@ public static class VectorMgdMgd
             hva64_03_a[2].v2 = Unsafe.As<T, Vector64<T>>(ref values[i]);
 
             i = 0;
-	    hva64_04_a = new HVA64_04[2];
+            hva64_04_a = new HVA64_04[2];
             hva64_04_a[1].v0 = Unsafe.As<T, Vector64<T>>(ref values[i]);
             i += Vector64<T>.Count;
             hva64_04_a[1].v1 = Unsafe.As<T, Vector64<T>>(ref values[i]);
@@ -233,7 +236,7 @@ public static class VectorMgdMgd
             hva64_04_a[1].v3 = Unsafe.As<T, Vector64<T>>(ref values[i]);
 
             i = 0;
-	    hva64_05_a = new HVA64_05[1];
+            hva64_05_a = new HVA64_05[1];
             hva64_05_a[0].v0 = Unsafe.As<T, Vector64<T>>(ref values[i]);
             i += Vector64<T>.Count;
             hva64_05_a[0].v1 = Unsafe.As<T, Vector64<T>>(ref values[i]);
@@ -247,17 +250,17 @@ public static class VectorMgdMgd
             ////////////////////////////////////////
 
             i = 0;
-	    hva128_01_a = new HVA128_01[5];
+            hva128_01_a = new HVA128_01[5];
             hva128_01_a[4].v0 = Unsafe.As<T, Vector128<T>>(ref values[i]);
 
             i = 0;
-	    hva128_02_a = new HVA128_02[4];
+            hva128_02_a = new HVA128_02[4];
             hva128_02_a[3].v0 = Unsafe.As<T, Vector128<T>>(ref values[i]);
             i += Vector128<T>.Count;
             hva128_02_a[3].v1 = Unsafe.As<T, Vector128<T>>(ref values[i]);
 
             i = 0;
-	    hva128_03_a = new HVA128_03[3];
+            hva128_03_a = new HVA128_03[3];
             hva128_03_a[2].v0 = Unsafe.As<T, Vector128<T>>(ref values[i]);
             i += Vector128<T>.Count;
             hva128_03_a[2].v1 = Unsafe.As<T, Vector128<T>>(ref values[i]);
@@ -265,7 +268,7 @@ public static class VectorMgdMgd
             hva128_03_a[2].v2 = Unsafe.As<T, Vector128<T>>(ref values[i]);
 
             i = 0;
-	    hva128_04_a = new HVA128_04[2];
+            hva128_04_a = new HVA128_04[2];
             hva128_04_a[1].v0 = Unsafe.As<T, Vector128<T>>(ref values[i]);
             i += Vector128<T>.Count;
             hva128_04_a[1].v1 = Unsafe.As<T, Vector128<T>>(ref values[i]);
@@ -273,9 +276,9 @@ public static class VectorMgdMgd
             hva128_04_a[1].v2 = Unsafe.As<T, Vector128<T>>(ref values[i]);
             i += Vector128<T>.Count;
             hva128_04_a[1].v3 = Unsafe.As<T, Vector128<T>>(ref values[i]);
- 
+
             i = 0;
-	    hva128_05_a = new HVA128_05[1];
+            hva128_05_a = new HVA128_05[1];
             hva128_05_a[0].v0 = Unsafe.As<T, Vector128<T>>(ref values[i]);
             i += Vector128<T>.Count;
             hva128_05_a[0].v1 = Unsafe.As<T, Vector128<T>>(ref values[i]);
@@ -285,7 +288,7 @@ public static class VectorMgdMgd
             hva128_05_a[0].v3 = Unsafe.As<T, Vector128<T>>(ref values[i]);
             i += Vector128<T>.Count;
             hva128_05_a[0].v4 = Unsafe.As<T, Vector128<T>>(ref values[i]);
-       }
+        }
 
         public HVATests()
         {
@@ -303,7 +306,7 @@ public static class VectorMgdMgd
         // with values[index]
         private void checkValues(string msg, Vector64<T> v, int index)
         {
-            bool printedMsg = false;  // Print at most one message
+            bool printedMsg = false; // Print at most one message
 
             for (int i = 0; i < Vector64<T>.Count; i++)
             {
@@ -311,8 +314,13 @@ public static class VectorMgdMgd
                 {
                     if (!printedMsg)
                     {
-                        Console.WriteLine("{0}: FAILED - Vector64<T> checkValues(index = {1}, i = {2}) {3}",
-                                          msg, index, i, isReflection ? "(via reflection)" : "" );
+                        Console.WriteLine(
+                            "{0}: FAILED - Vector64<T> checkValues(index = {1}, i = {2}) {3}",
+                            msg,
+                            index,
+                            i,
+                            isReflection ? "(via reflection)" : ""
+                        );
                         printedMsg = true;
                     }
 
@@ -327,7 +335,7 @@ public static class VectorMgdMgd
         // with values[index]
         private void checkValues(string msg, Vector128<T> v, int index)
         {
-            bool printedMsg = false;  // Print at most one message
+            bool printedMsg = false; // Print at most one message
 
             for (int i = 0; i < Vector128<T>.Count; i++)
             {
@@ -335,8 +343,13 @@ public static class VectorMgdMgd
                 {
                     if (!printedMsg)
                     {
-                        Console.WriteLine("{0}: FAILED - Vector64<T> checkValues(index = {1}, i = {2}) {3}",
-                                          msg, index, i, isReflection ? "(via reflection)" : "" );
+                        Console.WriteLine(
+                            "{0}: FAILED - Vector64<T> checkValues(index = {1}, i = {2}) {3}",
+                            msg,
+                            index,
+                            i,
+                            isReflection ? "(via reflection)" : ""
+                        );
                         printedMsg = true;
                     }
 
@@ -367,7 +380,10 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] { typeof(HVA64_01) };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(nameof(HVATests<T>.test1Argument_HVA64_01), reflectionParameterTypes);
+            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
+                nameof(HVATests<T>.test1Argument_HVA64_01),
+                reflectionParameterTypes
+            );
             reflectionInvokeArgs = new object[] { hva64_01_a[4] };
         }
 
@@ -385,7 +401,10 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] { typeof(HVA64_02) };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(nameof(HVATests<T>.test1Argument_HVA64_02), reflectionParameterTypes);
+            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
+                nameof(HVATests<T>.test1Argument_HVA64_02),
+                reflectionParameterTypes
+            );
             reflectionInvokeArgs = new object[] { hva64_02_a[3] };
         }
 
@@ -404,7 +423,10 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] { typeof(HVA64_03) };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(nameof(HVATests<T>.test1Argument_HVA64_03), reflectionParameterTypes);
+            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
+                nameof(HVATests<T>.test1Argument_HVA64_03),
+                reflectionParameterTypes
+            );
             reflectionInvokeArgs = new object[] { hva64_03_a[2] };
         }
 
@@ -424,7 +446,10 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] { typeof(HVA64_04) };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(nameof(HVATests<T>.test1Argument_HVA64_04), reflectionParameterTypes);
+            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
+                nameof(HVATests<T>.test1Argument_HVA64_04),
+                reflectionParameterTypes
+            );
             reflectionInvokeArgs = new object[] { hva64_04_a[1] };
         }
 
@@ -445,7 +470,10 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] { typeof(HVA64_05) };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(nameof(HVATests<T>.test1Argument_HVA64_05), reflectionParameterTypes);
+            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
+                nameof(HVATests<T>.test1Argument_HVA64_05),
+                reflectionParameterTypes
+            );
             reflectionInvokeArgs = new object[] { hva64_05_a[0] };
         }
 
@@ -463,15 +491,18 @@ public static class VectorMgdMgd
         public void testReturn_HVA64_01()
         {
             HVA64_01 result = returnTest_HVA64_01();
-            checkValues("testReturn_HVA64_01(result.v0)",result.v0, 0);
+            checkValues("testReturn_HVA64_01(result.v0)", result.v0, 0);
         }
 
         public void Init_Reflection_Return_HVA64_01()
         {
             isReflection = true;
-            reflectionParameterTypes = new Type[] { };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(nameof(HVATests<T>.returnTest_HVA64_01), reflectionParameterTypes);
-            reflectionInvokeArgs = new object[] { };
+            reflectionParameterTypes = new Type[] {  };
+            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
+                nameof(HVATests<T>.returnTest_HVA64_01),
+                reflectionParameterTypes
+            );
+            reflectionInvokeArgs = new object[] {  };
         }
 
         public void testReflectionReturn_HVA64_01()
@@ -482,7 +513,7 @@ public static class VectorMgdMgd
 
             HVA64_01 result = (HVA64_01)objResult;
 
-            checkValues("testReflectionReturn_HVA64_01(result.v0)",result.v0, 0);
+            checkValues("testReflectionReturn_HVA64_01(result.v0)", result.v0, 0);
 
             Done_Reflection();
         }
@@ -499,16 +530,19 @@ public static class VectorMgdMgd
         public void testReturn_HVA64_02()
         {
             HVA64_02 result = returnTest_HVA64_02();
-            checkValues("testReturn_HVA64_02(result.v0)",result.v0, 0);
-            checkValues("testReturn_HVA64_02(result.v1)",result.v1, Vector64<T>.Count);
+            checkValues("testReturn_HVA64_02(result.v0)", result.v0, 0);
+            checkValues("testReturn_HVA64_02(result.v1)", result.v1, Vector64<T>.Count);
         }
 
         public void Init_Reflection_Return_HVA64_02()
         {
             isReflection = true;
-            reflectionParameterTypes = new Type[] { };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(nameof(HVATests<T>.returnTest_HVA64_02), reflectionParameterTypes);
-            reflectionInvokeArgs = new object[] { };
+            reflectionParameterTypes = new Type[] {  };
+            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
+                nameof(HVATests<T>.returnTest_HVA64_02),
+                reflectionParameterTypes
+            );
+            reflectionInvokeArgs = new object[] {  };
         }
 
         public void testReflectionReturn_HVA64_02()
@@ -519,8 +553,8 @@ public static class VectorMgdMgd
 
             HVA64_02 result = (HVA64_02)objResult;
 
-            checkValues("testReflectionReturn_HVA64_02(result.v0)",result.v0, 0);
-            checkValues("testReflectionReturn_HVA64_02(result.v1)",result.v1, Vector64<T>.Count);
+            checkValues("testReflectionReturn_HVA64_02(result.v0)", result.v0, 0);
+            checkValues("testReflectionReturn_HVA64_02(result.v1)", result.v1, Vector64<T>.Count);
 
             Done_Reflection();
         }
@@ -537,17 +571,20 @@ public static class VectorMgdMgd
         public void testReturn_HVA64_03()
         {
             HVA64_03 result = returnTest_HVA64_03();
-            checkValues("testReturn_HVA64_03(result.v0)",result.v0, 0);
-            checkValues("testReturn_HVA64_03(result.v1)",result.v1, 1 * Vector64<T>.Count);
-            checkValues("testReturn_HVA64_03(result.v2)",result.v2, 2 * Vector64<T>.Count);
+            checkValues("testReturn_HVA64_03(result.v0)", result.v0, 0);
+            checkValues("testReturn_HVA64_03(result.v1)", result.v1, 1 * Vector64<T>.Count);
+            checkValues("testReturn_HVA64_03(result.v2)", result.v2, 2 * Vector64<T>.Count);
         }
 
         public void Init_Reflection_Return_HVA64_03()
         {
             isReflection = true;
-            reflectionParameterTypes = new Type[] { };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(nameof(HVATests<T>.returnTest_HVA64_03), reflectionParameterTypes);
-            reflectionInvokeArgs = new object[] { };
+            reflectionParameterTypes = new Type[] {  };
+            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
+                nameof(HVATests<T>.returnTest_HVA64_03),
+                reflectionParameterTypes
+            );
+            reflectionInvokeArgs = new object[] {  };
         }
 
         public void testReflectionReturn_HVA64_03()
@@ -558,9 +595,17 @@ public static class VectorMgdMgd
 
             HVA64_03 result = (HVA64_03)objResult;
 
-            checkValues("testReflectionReturn_HVA64_03(result.v0)",result.v0, 0);
-            checkValues("testReflectionReturn_HVA64_03(result.v1)",result.v1, 1 * Vector64<T>.Count);
-            checkValues("testReflectionReturn_HVA64_03(result.v2)",result.v2, 2 * Vector64<T>.Count);
+            checkValues("testReflectionReturn_HVA64_03(result.v0)", result.v0, 0);
+            checkValues(
+                "testReflectionReturn_HVA64_03(result.v1)",
+                result.v1,
+                1 * Vector64<T>.Count
+            );
+            checkValues(
+                "testReflectionReturn_HVA64_03(result.v2)",
+                result.v2,
+                2 * Vector64<T>.Count
+            );
 
             Done_Reflection();
         }
@@ -577,18 +622,21 @@ public static class VectorMgdMgd
         public void testReturn_HVA64_04()
         {
             HVA64_04 result = returnTest_HVA64_04();
-            checkValues("testReturn_HVA64_04(result.v0)",result.v0, 0);
-            checkValues("testReturn_HVA64_04(result.v1)",result.v1, 1 * Vector64<T>.Count);
-            checkValues("testReturn_HVA64_04(result.v2)",result.v2, 2 * Vector64<T>.Count);
-            checkValues("testReturn_HVA64_04(result.v3)",result.v3, 3 * Vector64<T>.Count);
+            checkValues("testReturn_HVA64_04(result.v0)", result.v0, 0);
+            checkValues("testReturn_HVA64_04(result.v1)", result.v1, 1 * Vector64<T>.Count);
+            checkValues("testReturn_HVA64_04(result.v2)", result.v2, 2 * Vector64<T>.Count);
+            checkValues("testReturn_HVA64_04(result.v3)", result.v3, 3 * Vector64<T>.Count);
         }
 
         public void Init_Reflection_Return_HVA64_04()
         {
             isReflection = true;
-            reflectionParameterTypes = new Type[] { };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(nameof(HVATests<T>.returnTest_HVA64_04), reflectionParameterTypes);
-            reflectionInvokeArgs = new object[] { };
+            reflectionParameterTypes = new Type[] {  };
+            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
+                nameof(HVATests<T>.returnTest_HVA64_04),
+                reflectionParameterTypes
+            );
+            reflectionInvokeArgs = new object[] {  };
         }
 
         public void testReflectionReturn_HVA64_04()
@@ -599,10 +647,22 @@ public static class VectorMgdMgd
 
             HVA64_04 result = (HVA64_04)objResult;
 
-            checkValues("testReflectionReturn_HVA64_04(result.v0)",result.v0, 0);
-            checkValues("testReflectionReturn_HVA64_04(result.v1)",result.v1, 1 * Vector64<T>.Count);
-            checkValues("testReflectionReturn_HVA64_04(result.v2)",result.v2, 2 * Vector64<T>.Count);
-            checkValues("testReflectionReturn_HVA64_04(result.v3)",result.v3, 3 * Vector64<T>.Count);
+            checkValues("testReflectionReturn_HVA64_04(result.v0)", result.v0, 0);
+            checkValues(
+                "testReflectionReturn_HVA64_04(result.v1)",
+                result.v1,
+                1 * Vector64<T>.Count
+            );
+            checkValues(
+                "testReflectionReturn_HVA64_04(result.v2)",
+                result.v2,
+                2 * Vector64<T>.Count
+            );
+            checkValues(
+                "testReflectionReturn_HVA64_04(result.v3)",
+                result.v3,
+                3 * Vector64<T>.Count
+            );
 
             Done_Reflection();
         }
@@ -619,19 +679,22 @@ public static class VectorMgdMgd
         public void testReturn_HVA64_05()
         {
             HVA64_05 result = returnTest_HVA64_05();
-            checkValues("testReturn_HVA64_05(result.v0)",result.v0, 0);
-            checkValues("testReturn_HVA64_05(result.v1)",result.v1, 1 * Vector64<T>.Count);
-            checkValues("testReturn_HVA64_05(result.v2)",result.v2, 2 * Vector64<T>.Count);
-            checkValues("testReturn_HVA64_05(result.v3)",result.v3, 3 * Vector64<T>.Count);
-            checkValues("testReturn_HVA64_05(result.v4)",result.v4, 4 * Vector64<T>.Count);
+            checkValues("testReturn_HVA64_05(result.v0)", result.v0, 0);
+            checkValues("testReturn_HVA64_05(result.v1)", result.v1, 1 * Vector64<T>.Count);
+            checkValues("testReturn_HVA64_05(result.v2)", result.v2, 2 * Vector64<T>.Count);
+            checkValues("testReturn_HVA64_05(result.v3)", result.v3, 3 * Vector64<T>.Count);
+            checkValues("testReturn_HVA64_05(result.v4)", result.v4, 4 * Vector64<T>.Count);
         }
 
         public void Init_Reflection_Return_HVA64_05()
         {
             isReflection = true;
-            reflectionParameterTypes = new Type[] { };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(nameof(HVATests<T>.returnTest_HVA64_05), reflectionParameterTypes);
-            reflectionInvokeArgs = new object[] { };
+            reflectionParameterTypes = new Type[] {  };
+            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
+                nameof(HVATests<T>.returnTest_HVA64_05),
+                reflectionParameterTypes
+            );
+            reflectionInvokeArgs = new object[] {  };
         }
 
         public void testReflectionReturn_HVA64_05()
@@ -642,11 +705,27 @@ public static class VectorMgdMgd
 
             HVA64_05 result = (HVA64_05)objResult;
 
-            checkValues("testReflectionReturn_HVA64_05(result.v0)",result.v0, 0);
-            checkValues("testReflectionReturn_HVA64_05(result.v1)",result.v1, 1 * Vector64<T>.Count);
-            checkValues("testReflectionReturn_HVA64_05(result.v2)",result.v2, 2 * Vector64<T>.Count);
-            checkValues("testReflectionReturn_HVA64_05(result.v3)",result.v3, 3 * Vector64<T>.Count);
-            checkValues("testReflectionReturn_HVA64_05(result.v4)",result.v4, 4 * Vector64<T>.Count);
+            checkValues("testReflectionReturn_HVA64_05(result.v0)", result.v0, 0);
+            checkValues(
+                "testReflectionReturn_HVA64_05(result.v1)",
+                result.v1,
+                1 * Vector64<T>.Count
+            );
+            checkValues(
+                "testReflectionReturn_HVA64_05(result.v2)",
+                result.v2,
+                2 * Vector64<T>.Count
+            );
+            checkValues(
+                "testReflectionReturn_HVA64_05(result.v3)",
+                result.v3,
+                3 * Vector64<T>.Count
+            );
+            checkValues(
+                "testReflectionReturn_HVA64_05(result.v4)",
+                result.v4,
+                4 * Vector64<T>.Count
+            );
 
             Done_Reflection();
         }
@@ -666,7 +745,10 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] { typeof(HVA128_01) };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(nameof(HVATests<T>.test1Argument_HVA128_01), reflectionParameterTypes);
+            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
+                nameof(HVATests<T>.test1Argument_HVA128_01),
+                reflectionParameterTypes
+            );
             reflectionInvokeArgs = new object[] { hva128_01_a[4] };
         }
 
@@ -684,7 +766,10 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] { typeof(HVA128_02) };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(nameof(HVATests<T>.test1Argument_HVA128_02), reflectionParameterTypes);
+            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
+                nameof(HVATests<T>.test1Argument_HVA128_02),
+                reflectionParameterTypes
+            );
             reflectionInvokeArgs = new object[] { hva128_02_a[3] };
         }
 
@@ -703,7 +788,10 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] { typeof(HVA128_03) };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(nameof(HVATests<T>.test1Argument_HVA128_03), reflectionParameterTypes);
+            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
+                nameof(HVATests<T>.test1Argument_HVA128_03),
+                reflectionParameterTypes
+            );
             reflectionInvokeArgs = new object[] { hva128_03_a[2] };
         }
 
@@ -723,7 +811,10 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] { typeof(HVA128_04) };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(nameof(HVATests<T>.test1Argument_HVA128_04), reflectionParameterTypes);
+            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
+                nameof(HVATests<T>.test1Argument_HVA128_04),
+                reflectionParameterTypes
+            );
             reflectionInvokeArgs = new object[] { hva128_04_a[1] };
         }
 
@@ -744,7 +835,10 @@ public static class VectorMgdMgd
         {
             isReflection = true;
             reflectionParameterTypes = new Type[] { typeof(HVA128_05) };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(nameof(HVATests<T>.test1Argument_HVA128_05), reflectionParameterTypes);
+            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
+                nameof(HVATests<T>.test1Argument_HVA128_05),
+                reflectionParameterTypes
+            );
             reflectionInvokeArgs = new object[] { hva128_05_a[0] };
         }
 
@@ -760,14 +854,17 @@ public static class VectorMgdMgd
         public void testReturn_HVA128_01()
         {
             HVA128_01 result = returnTest_HVA128_01();
-            checkValues("testReturn_HVA128_01(result.v0)",result.v0, 0);
+            checkValues("testReturn_HVA128_01(result.v0)", result.v0, 0);
         }
 
         public void Init_Reflection_Return_HVA128_01()
         {
-            reflectionParameterTypes = new Type[] { };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(nameof(HVATests<T>.returnTest_HVA128_01), reflectionParameterTypes);
-            reflectionInvokeArgs = new object[] { };
+            reflectionParameterTypes = new Type[] {  };
+            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
+                nameof(HVATests<T>.returnTest_HVA128_01),
+                reflectionParameterTypes
+            );
+            reflectionInvokeArgs = new object[] {  };
         }
 
         public void testReflectionReturn_HVA128_01()
@@ -778,7 +875,7 @@ public static class VectorMgdMgd
 
             HVA128_01 result = (HVA128_01)objResult;
 
-            checkValues("testReflectionReturn_HVA128_01(result.v0)",result.v0, 0);
+            checkValues("testReflectionReturn_HVA128_01(result.v0)", result.v0, 0);
 
             Done_Reflection();
         }
@@ -795,16 +892,19 @@ public static class VectorMgdMgd
         public void testReturn_HVA128_02()
         {
             HVA128_02 result = returnTest_HVA128_02();
-            checkValues("testReturn_HVA128_02(result.v0)",result.v0, 0);
-            checkValues("testReturn_HVA128_02(result.v1)",result.v1, Vector128<T>.Count);
+            checkValues("testReturn_HVA128_02(result.v0)", result.v0, 0);
+            checkValues("testReturn_HVA128_02(result.v1)", result.v1, Vector128<T>.Count);
         }
 
         public void Init_Reflection_Return_HVA128_02()
         {
             isReflection = true;
-            reflectionParameterTypes = new Type[] { };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(nameof(HVATests<T>.returnTest_HVA128_02), reflectionParameterTypes);
-            reflectionInvokeArgs = new object[] { };
+            reflectionParameterTypes = new Type[] {  };
+            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
+                nameof(HVATests<T>.returnTest_HVA128_02),
+                reflectionParameterTypes
+            );
+            reflectionInvokeArgs = new object[] {  };
         }
 
         public void testReflectionReturn_HVA128_02()
@@ -815,8 +915,8 @@ public static class VectorMgdMgd
 
             HVA128_02 result = (HVA128_02)objResult;
 
-            checkValues("testReflectionReturn_HVA128_02(result.v0)",result.v0, 0);
-            checkValues("testReflectionReturn_HVA128_02(result.v1)",result.v1, Vector128<T>.Count);
+            checkValues("testReflectionReturn_HVA128_02(result.v0)", result.v0, 0);
+            checkValues("testReflectionReturn_HVA128_02(result.v1)", result.v1, Vector128<T>.Count);
 
             Done_Reflection();
         }
@@ -833,17 +933,20 @@ public static class VectorMgdMgd
         public void testReturn_HVA128_03()
         {
             HVA128_03 result = returnTest_HVA128_03();
-            checkValues("testReturn_HVA128_03(result.v0)",result.v0, 0);
-            checkValues("testReturn_HVA128_03(result.v1)",result.v1, 1 * Vector128<T>.Count);
-            checkValues("testReturn_HVA128_03(result.v2)",result.v2, 2 * Vector128<T>.Count);
+            checkValues("testReturn_HVA128_03(result.v0)", result.v0, 0);
+            checkValues("testReturn_HVA128_03(result.v1)", result.v1, 1 * Vector128<T>.Count);
+            checkValues("testReturn_HVA128_03(result.v2)", result.v2, 2 * Vector128<T>.Count);
         }
 
         public void Init_Reflection_Return_HVA128_03()
         {
             isReflection = true;
-            reflectionParameterTypes = new Type[] { };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(nameof(HVATests<T>.returnTest_HVA128_03), reflectionParameterTypes);
-            reflectionInvokeArgs = new object[] { };
+            reflectionParameterTypes = new Type[] {  };
+            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
+                nameof(HVATests<T>.returnTest_HVA128_03),
+                reflectionParameterTypes
+            );
+            reflectionInvokeArgs = new object[] {  };
         }
 
         public void testReflectionReturn_HVA128_03()
@@ -854,9 +957,17 @@ public static class VectorMgdMgd
 
             HVA128_03 result = (HVA128_03)objResult;
 
-            checkValues("testReflectionReturn_HVA128_03(result.v0)",result.v0, 0);
-            checkValues("testReflectionReturn_HVA128_03(result.v1)",result.v1, 1 * Vector128<T>.Count);
-            checkValues("testReflectionReturn_HVA128_03(result.v2)",result.v2, 2 * Vector128<T>.Count);
+            checkValues("testReflectionReturn_HVA128_03(result.v0)", result.v0, 0);
+            checkValues(
+                "testReflectionReturn_HVA128_03(result.v1)",
+                result.v1,
+                1 * Vector128<T>.Count
+            );
+            checkValues(
+                "testReflectionReturn_HVA128_03(result.v2)",
+                result.v2,
+                2 * Vector128<T>.Count
+            );
 
             Done_Reflection();
         }
@@ -873,18 +984,21 @@ public static class VectorMgdMgd
         public void testReturn_HVA128_04()
         {
             HVA128_04 result = returnTest_HVA128_04();
-            checkValues("testReturn_HVA128_04(result.v0)",result.v0, 0);
-            checkValues("testReturn_HVA128_04(result.v1)",result.v1, 1 * Vector128<T>.Count);
-            checkValues("testReturn_HVA128_04(result.v2)",result.v2, 2 * Vector128<T>.Count);
-            checkValues("testReturn_HVA128_04(result.v3)",result.v3, 3 * Vector128<T>.Count);
+            checkValues("testReturn_HVA128_04(result.v0)", result.v0, 0);
+            checkValues("testReturn_HVA128_04(result.v1)", result.v1, 1 * Vector128<T>.Count);
+            checkValues("testReturn_HVA128_04(result.v2)", result.v2, 2 * Vector128<T>.Count);
+            checkValues("testReturn_HVA128_04(result.v3)", result.v3, 3 * Vector128<T>.Count);
         }
 
         public void Init_Reflection_Return_HVA128_04()
         {
             isReflection = true;
-            reflectionParameterTypes = new Type[] { };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(nameof(HVATests<T>.returnTest_HVA128_04), reflectionParameterTypes);
-            reflectionInvokeArgs = new object[] { };
+            reflectionParameterTypes = new Type[] {  };
+            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
+                nameof(HVATests<T>.returnTest_HVA128_04),
+                reflectionParameterTypes
+            );
+            reflectionInvokeArgs = new object[] {  };
         }
 
         public void testReflectionReturn_HVA128_04()
@@ -895,10 +1009,22 @@ public static class VectorMgdMgd
 
             HVA128_04 result = (HVA128_04)objResult;
 
-            checkValues("testReflectionReturn_HVA128_04(result.v0)",result.v0, 0);
-            checkValues("testReflectionReturn_HVA128_04(result.v1)",result.v1, 1 * Vector128<T>.Count);
-            checkValues("testReflectionReturn_HVA128_04(result.v2)",result.v2, 2 * Vector128<T>.Count);
-            checkValues("testReflectionReturn_HVA128_04(result.v3)",result.v3, 3 * Vector128<T>.Count);
+            checkValues("testReflectionReturn_HVA128_04(result.v0)", result.v0, 0);
+            checkValues(
+                "testReflectionReturn_HVA128_04(result.v1)",
+                result.v1,
+                1 * Vector128<T>.Count
+            );
+            checkValues(
+                "testReflectionReturn_HVA128_04(result.v2)",
+                result.v2,
+                2 * Vector128<T>.Count
+            );
+            checkValues(
+                "testReflectionReturn_HVA128_04(result.v3)",
+                result.v3,
+                3 * Vector128<T>.Count
+            );
 
             Done_Reflection();
         }
@@ -915,19 +1041,22 @@ public static class VectorMgdMgd
         public void testReturn_HVA128_05()
         {
             HVA128_05 result = returnTest_HVA128_05();
-            checkValues("testReturn_HVA128_05(result.v0)",result.v0, 0);
-            checkValues("testReturn_HVA128_05(result.v1)",result.v1, 1 * Vector128<T>.Count);
-            checkValues("testReturn_HVA128_05(result.v2)",result.v2, 2 * Vector128<T>.Count);
-            checkValues("testReturn_HVA128_05(result.v3)",result.v3, 3 * Vector128<T>.Count);
-            checkValues("testReturn_HVA128_05(result.v4)",result.v4, 4 * Vector128<T>.Count);
+            checkValues("testReturn_HVA128_05(result.v0)", result.v0, 0);
+            checkValues("testReturn_HVA128_05(result.v1)", result.v1, 1 * Vector128<T>.Count);
+            checkValues("testReturn_HVA128_05(result.v2)", result.v2, 2 * Vector128<T>.Count);
+            checkValues("testReturn_HVA128_05(result.v3)", result.v3, 3 * Vector128<T>.Count);
+            checkValues("testReturn_HVA128_05(result.v4)", result.v4, 4 * Vector128<T>.Count);
         }
 
         public void Init_Reflection_Return_HVA128_05()
         {
             isReflection = true;
-            reflectionParameterTypes = new Type[] { };
-            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(nameof(HVATests<T>.returnTest_HVA128_05), reflectionParameterTypes);
-            reflectionInvokeArgs = new object[] { };
+            reflectionParameterTypes = new Type[] {  };
+            reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
+                nameof(HVATests<T>.returnTest_HVA128_05),
+                reflectionParameterTypes
+            );
+            reflectionInvokeArgs = new object[] {  };
         }
 
         public void testReflectionReturn_HVA128_05()
@@ -938,11 +1067,27 @@ public static class VectorMgdMgd
 
             HVA128_05 result = (HVA128_05)objResult;
 
-            checkValues("testReflectionReturn_HVA128_05(result.v0)",result.v0, 0);
-            checkValues("testReflectionReturn_HVA128_05(result.v1)",result.v1, 1 * Vector128<T>.Count);
-            checkValues("testReflectionReturn_HVA128_05(result.v2)",result.v2, 2 * Vector128<T>.Count);
-            checkValues("testReflectionReturn_HVA128_05(result.v3)",result.v3, 3 * Vector128<T>.Count);
-            checkValues("testReflectionReturn_HVA128_05(result.v4)",result.v4, 4 * Vector128<T>.Count);
+            checkValues("testReflectionReturn_HVA128_05(result.v0)", result.v0, 0);
+            checkValues(
+                "testReflectionReturn_HVA128_05(result.v1)",
+                result.v1,
+                1 * Vector128<T>.Count
+            );
+            checkValues(
+                "testReflectionReturn_HVA128_05(result.v2)",
+                result.v2,
+                2 * Vector128<T>.Count
+            );
+            checkValues(
+                "testReflectionReturn_HVA128_05(result.v3)",
+                result.v3,
+                3 * Vector128<T>.Count
+            );
+            checkValues(
+                "testReflectionReturn_HVA128_05(result.v4)",
+                result.v4,
+                4 * Vector128<T>.Count
+            );
 
             Done_Reflection();
         }
@@ -961,13 +1106,11 @@ public static class VectorMgdMgd
             reflectionMethodInfo.Invoke(this, reflectionInvokeArgs);
             Done_Reflection();
 
-
             test1Argument_HVA64_02(hva64_02_a[3]);
 
             Init_Reflection_Args_HVA64_02();
             reflectionMethodInfo.Invoke(this, reflectionInvokeArgs);
             Done_Reflection();
-
 
             test1Argument_HVA64_03(hva64_03_a[2]);
 
@@ -975,13 +1118,11 @@ public static class VectorMgdMgd
             reflectionMethodInfo.Invoke(this, reflectionInvokeArgs);
             Done_Reflection();
 
-
             test1Argument_HVA64_04(hva64_04_a[1]);
 
             Init_Reflection_Args_HVA64_04();
             reflectionMethodInfo.Invoke(this, reflectionInvokeArgs);
             Done_Reflection();
-
 
             test1Argument_HVA64_05(hva64_05_a[0]);
 
@@ -989,33 +1130,27 @@ public static class VectorMgdMgd
             reflectionMethodInfo.Invoke(this, reflectionInvokeArgs);
             Done_Reflection();
 
-
             // Test HVA Vector64<T> Return values
 
             testReturn_HVA64_01();
 
             testReflectionReturn_HVA64_01();
 
-
             testReturn_HVA64_02();
 
             testReflectionReturn_HVA64_02();
-
 
             testReturn_HVA64_03();
 
             testReflectionReturn_HVA64_03();
 
-
             testReturn_HVA64_04();
 
             testReflectionReturn_HVA64_04();
 
-
             testReturn_HVA64_05();
 
             testReflectionReturn_HVA64_05();
-
 
             //////  Vector128<T> tests
 
@@ -1027,13 +1162,11 @@ public static class VectorMgdMgd
             reflectionMethodInfo.Invoke(this, reflectionInvokeArgs);
             Done_Reflection();
 
-
             test1Argument_HVA128_02(hva128_02_a[3]);
 
             Init_Reflection_Args_HVA128_02();
             reflectionMethodInfo.Invoke(this, reflectionInvokeArgs);
             Done_Reflection();
-
 
             test1Argument_HVA128_03(hva128_03_a[2]);
 
@@ -1041,20 +1174,17 @@ public static class VectorMgdMgd
             reflectionMethodInfo.Invoke(this, reflectionInvokeArgs);
             Done_Reflection();
 
-
             test1Argument_HVA128_04(hva128_04_a[1]);
 
             Init_Reflection_Args_HVA128_04();
             reflectionMethodInfo.Invoke(this, reflectionInvokeArgs);
             Done_Reflection();
 
-
             test1Argument_HVA128_05(hva128_05_a[0]);
 
             Init_Reflection_Args_HVA128_05();
             reflectionMethodInfo.Invoke(this, reflectionInvokeArgs);
             Done_Reflection();
-
 
             // Test HVA Vector128<T> Return values
 
@@ -1077,7 +1207,6 @@ public static class VectorMgdMgd
 
     public static int Main(string[] args)
     {
-
         HVATests<byte> byteTests = new HVATests<byte>();
         byteTests.doTests();
 

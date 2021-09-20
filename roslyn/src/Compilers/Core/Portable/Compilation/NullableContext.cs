@@ -18,23 +18,19 @@ namespace Microsoft.CodeAnalysis
         /// Nullable warnings and annotations are explicitly turned off at this location.
         /// </summary>
         Disabled = 0,
-
         /// <summary>
         /// Nullable warnings are enabled and will be reported at this file location.
         /// </summary>
         WarningsEnabled = 1,
-
         /// <summary>
         /// Nullable annotations are enabled and will be shown when APIs defined at
         /// this location are used in other contexts.
         /// </summary>
         AnnotationsEnabled = 1 << 1,
-
         /// <summary>
         /// The nullable feature is fully enabled.
         /// </summary>
         Enabled = WarningsEnabled | AnnotationsEnabled,
-
         /// <summary>
         /// The nullable warning state is inherited from the project default.
         /// </summary>
@@ -44,7 +40,6 @@ namespace Microsoft.CodeAnalysis
         /// default setting.
         /// </remarks>
         WarningsContextInherited = 1 << 2,
-
         /// <summary>
         /// The nullable annotation state is inherited from the project default.
         /// </summary>
@@ -54,7 +49,6 @@ namespace Microsoft.CodeAnalysis
         /// default setting.
         /// </remarks>
         AnnotationsContextInherited = 1 << 3,
-
         /// <summary>
         /// The current state of both warnings and annotations are inherited from
         /// the project default.

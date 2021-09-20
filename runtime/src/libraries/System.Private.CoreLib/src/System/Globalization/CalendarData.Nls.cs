@@ -15,10 +15,16 @@ namespace System.Globalization
         {
             Debug.Assert(GlobalizationMode.UseNls);
 
-            return GlobalizationMode.Invariant ? Invariant.iTwoDigitYearMax :
-                    CallGetCalendarInfoEx(null, calendarId, CAL_ITWODIGITYEARMAX, out int twoDigitYearMax) ?
-                        twoDigitYearMax :
-                        -1;
+            return GlobalizationMode.Invariant
+              ? Invariant.iTwoDigitYearMax
+              : CallGetCalendarInfoEx(
+                    null,
+                    calendarId,
+                    CAL_ITWODIGITYEARMAX,
+                    out int twoDigitYearMax
+                )
+                  ? twoDigitYearMax
+                  : -1;
         }
 
         private static bool NlsSystemSupportsTaiwaneseCalendar()
@@ -36,19 +42,43 @@ namespace System.Globalization
         private const uint CAL_SCALNAME = 0x00000002;
         private const uint CAL_ITWODIGITYEARMAX = 0x00000030;
 
-        private static bool CallGetCalendarInfoEx(string? localeName, CalendarId calendar, uint calType, out int data)
-        {
-            return Interop.Kernel32.GetCalendarInfoEx(localeName, (uint)calendar, IntPtr.Zero, calType | CAL_RETURN_NUMBER, IntPtr.Zero, 0, out data) != 0;
+        private static bool CallGetCalendarInfoEx(
+            string? localeName,
+            CalendarId calendar,
+            uint calType,
+            out int data
+        ) {
+            return Interop.Kernel32.GetCalendarInfoEx(
+                    localeName,
+                    (uint)calendar,
+                    IntPtr.Zero,
+                    calType | CAL_RETURN_NUMBER,
+                    IntPtr.Zero,
+                    0,
+                    out data
+                ) != 0;
         }
 
-        private static unsafe bool CallGetCalendarInfoEx(string localeName, CalendarId calendar, uint calType, out string data)
-        {
+        private static unsafe bool CallGetCalendarInfoEx(
+            string localeName,
+            CalendarId calendar,
+            uint calType,
+            out string data
+        ) {
             const int BUFFER_LENGTH = 80;
 
             // The maximum size for values returned from GetCalendarInfoEx is 80 characters.
             char* buffer = stackalloc char[BUFFER_LENGTH];
 
-            int ret = Interop.Kernel32.GetCalendarInfoEx(localeName, (uint)calendar, IntPtr.Zero, calType, (IntPtr)buffer, BUFFER_LENGTH, IntPtr.Zero);
+            int ret = Interop.Kernel32.GetCalendarInfoEx(
+                localeName,
+                (uint)calendar,
+                IntPtr.Zero,
+                calType,
+                (IntPtr)buffer,
+                BUFFER_LENGTH,
+                IntPtr.Zero
+            );
             if (ret > 0)
             {
                 if (buffer[ret - 1] == '\0')
@@ -71,8 +101,12 @@ namespace System.Globalization
 
         // EnumCalendarInfoExEx callback itself.
         [UnmanagedCallersOnly]
-        private static unsafe Interop.BOOL EnumCalendarInfoCallback(char* lpCalendarInfoString, uint calendar, IntPtr pReserved, void* lParam)
-        {
+        private static unsafe Interop.BOOL EnumCalendarInfoCallback(
+            char* lpCalendarInfoString,
+            uint calendar,
+            IntPtr pReserved,
+            void* lParam
+        ) {
             ref EnumData context = ref Unsafe.As<byte, EnumData>(ref *(byte*)lParam);
             try
             {
@@ -98,14 +132,20 @@ namespace System.Globalization
         //
         public struct NlsEnumCalendarsData
         {
-            public int userOverride;   // user override value (if found)
-            public List<int> calendars;      // list of calendars found so far
+            public int userOverride; // user override value (if found)
+            public List<int> calendars; // list of calendars found so far
         }
 
         [UnmanagedCallersOnly]
-        private static unsafe Interop.BOOL EnumCalendarsCallback(char* lpCalendarInfoString, uint calendar, IntPtr reserved, void* lParam)
-        {
-            ref NlsEnumCalendarsData context = ref Unsafe.As<byte, NlsEnumCalendarsData>(ref *(byte*)lParam);
+        private static unsafe Interop.BOOL EnumCalendarsCallback(
+            char* lpCalendarInfoString,
+            uint calendar,
+            IntPtr reserved,
+            void* lParam
+        ) {
+            ref NlsEnumCalendarsData context = ref Unsafe.As<byte, NlsEnumCalendarsData>(
+                ref *(byte*)lParam
+            );
             try
             {
                 // If we had a user override, check to make sure this differs

@@ -19,8 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// <param name="conventions">The set of conventions.</param>
         public static void ApplyConventions(
             ApplicationModel applicationModel,
-            IEnumerable<IApplicationModelConvention> conventions)
-        {
+            IEnumerable<IApplicationModelConvention> conventions
+        ) {
             if (applicationModel == null)
             {
                 throw new ArgumentNullException(nameof(applicationModel));
@@ -45,9 +45,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 // ToArray is needed here to prevent issues with modifying the attributes collection
                 // while iterating it.
                 var controllerConventions =
-                    controller.Attributes
-                        .OfType<IControllerModelConvention>()
-                        .ToArray();
+                    controller.Attributes.OfType<IControllerModelConvention>().ToArray();
 
                 foreach (var controllerConvention in controllerConventions)
                 {
@@ -59,10 +57,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 {
                     // ToArray is needed here to prevent issues with modifying the attributes collection
                     // while iterating it.
-                    var actionConventions =
-                        action.Attributes
-                            .OfType<IActionModelConvention>()
-                            .ToArray();
+                    var actionConventions = action.Attributes.OfType<IActionModelConvention>()
+                        .ToArray();
 
                     foreach (var actionConvention in actionConventions)
                     {
@@ -75,16 +71,18 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                         // ToArray is needed here to prevent issues with modifying the attributes collection
                         // while iterating it.
                         var parameterConventions =
-                            parameter.Attributes
-                                .OfType<IParameterModelConvention>()
-                                .ToArray();
+                            parameter.Attributes.OfType<IParameterModelConvention>().ToArray();
 
                         foreach (var parameterConvention in parameterConventions)
                         {
                             parameterConvention.Apply(parameter);
                         }
 
-                        var parameterBaseConventions = GetConventions<IParameterModelBaseConvention>(conventions, parameter.Attributes);
+                        var parameterBaseConventions =
+                            GetConventions<IParameterModelBaseConvention>(
+                                conventions,
+                                parameter.Attributes
+                            );
                         foreach (var parameterConvention in parameterBaseConventions)
                         {
                             parameterConvention.Apply(parameter);
@@ -95,7 +93,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 var properties = controller.ControllerProperties.ToArray();
                 foreach (var property in properties)
                 {
-                    var parameterBaseConventions = GetConventions<IParameterModelBaseConvention>(conventions, property.Attributes);
+                    var parameterBaseConventions = GetConventions<IParameterModelBaseConvention>(
+                        conventions,
+                        property.Attributes
+                    );
 
                     foreach (var parameterConvention in parameterBaseConventions)
                     {
@@ -107,11 +108,12 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
         private static IEnumerable<TConvention> GetConventions<TConvention>(
             IEnumerable<IApplicationModelConvention> conventions,
-            IReadOnlyList<object> attributes)
-        {
+            IReadOnlyList<object> attributes
+        ) {
             return Enumerable.Concat(
                 conventions.OfType<TConvention>(),
-                attributes.OfType<TConvention>());
+                attributes.OfType<TConvention>()
+            );
         }
     }
 }

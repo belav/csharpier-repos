@@ -36,22 +36,19 @@ namespace Microsoft.WebMatrix.Utility
 
         string IAuthenticationModule.AuthenticationType
         {
-            get
-            {
-                return AuthenticationTypeName;
-            }
+            get { return AuthenticationTypeName; }
         }
 
         bool IAuthenticationModule.CanPreAuthenticate
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
-        Authorization IAuthenticationModule.Authenticate(string challenge, WebRequest request, ICredentials credentials)
-        {
+        Authorization IAuthenticationModule.Authenticate(
+            string challenge,
+            WebRequest request,
+            ICredentials credentials
+        ) {
             HttpWebRequest httpWebRequest = request as HttpWebRequest;
             if (httpWebRequest == null)
             {
@@ -59,16 +56,20 @@ namespace Microsoft.WebMatrix.Utility
             }
 
             // Verify that the challenge is a Basic Challenge
-            if (challenge == null || !challenge.StartsWith(AuthenticationTypeName, StringComparison.OrdinalIgnoreCase))
-            {
+            if (
+                challenge == null
+                || !challenge.StartsWith(AuthenticationTypeName, StringComparison.OrdinalIgnoreCase)
+            ) {
                 return null;
             }
 
             return Authenticate(httpWebRequest, credentials);
         }
 
-        Authorization IAuthenticationModule.PreAuthenticate(WebRequest request, ICredentials credentials)
-        {
+        Authorization IAuthenticationModule.PreAuthenticate(
+            WebRequest request,
+            ICredentials credentials
+        ) {
             HttpWebRequest httpWebRequest = request as HttpWebRequest;
 
             if (httpWebRequest == null)
@@ -87,21 +88,30 @@ namespace Microsoft.WebMatrix.Utility
             }
 
             // Get the username and password from the credentials
-            NetworkCredential nc = credentials.GetCredential(httpWebRequest.RequestUri, AuthenticationTypeName);
+            NetworkCredential nc = credentials.GetCredential(
+                httpWebRequest.RequestUri,
+                AuthenticationTypeName
+            );
             if (nc == null)
             {
                 return null;
             }
 
             ICredentialPolicy policy = AuthenticationManager.CredentialPolicy;
-            if (policy != null && !policy.ShouldSendCredential(httpWebRequest.RequestUri, httpWebRequest, nc, this))
-            {
+            if (
+                policy != null
+                && !policy.ShouldSendCredential(httpWebRequest.RequestUri, httpWebRequest, nc, this)
+            ) {
                 return null;
             }
 
             string domain = nc.Domain;
 
-            string basicTicket = (!String.IsNullOrEmpty(domain) ? (domain + "\\") : "") + nc.UserName + ":" + nc.Password;
+            string basicTicket =
+                (!String.IsNullOrEmpty(domain) ? (domain + "\\") : "")
+                + nc.UserName
+                + ":"
+                + nc.Password;
             byte[] bytes = Encoding.UTF8.GetBytes(basicTicket);
 
             string header = AuthenticationTypeName + " " + Convert.ToBase64String(bytes);

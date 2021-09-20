@@ -13,10 +13,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
     /// </summary>
     internal class CSharpLineDirectiveMap : LineDirectiveMap<DirectiveTriviaSyntax>
     {
-        public CSharpLineDirectiveMap(SyntaxTree syntaxTree)
-            : base(syntaxTree)
-        {
-        }
+        public CSharpLineDirectiveMap(SyntaxTree syntaxTree) : base(syntaxTree) { }
 
         // Add all active #line directives under trivia into the list, in source code order.
         protected override bool ShouldAddDirective(DirectiveTriviaSyntax directive)
@@ -25,8 +22,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         }
 
         // Given a directive and the previous entry, create a new entry.
-        protected override LineMappingEntry GetEntry(DirectiveTriviaSyntax directiveNode, SourceText sourceText, LineMappingEntry previous)
-        {
+        protected override LineMappingEntry GetEntry(
+            DirectiveTriviaSyntax directiveNode,
+            SourceText sourceText,
+            LineMappingEntry previous
+        ) {
             Debug.Assert(ShouldAddDirective(directiveNode));
             var directive = (LineDirectiveTriviaSyntax)directiveNode;
 
@@ -74,16 +74,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
                             state = PositionState.Remapped;
                         }
-
                         break;
                 }
             }
 
-            return new LineMappingEntry(
-                unmappedLine,
-                mappedLine,
-                mappedPathOpt,
-                state);
+            return new LineMappingEntry(unmappedLine, mappedLine, mappedPathOpt, state);
         }
 
         protected override LineMappingEntry InitializeFirstEntry()
@@ -108,9 +103,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             var entry = Entries[index];
 
             // the state should not be set to the ones used for VB only.
-            Debug.Assert(entry.State != PositionState.Unknown &&
-                         entry.State != PositionState.RemappedAfterHidden &&
-                         entry.State != PositionState.RemappedAfterUnknown);
+            Debug.Assert(
+                entry.State != PositionState.Unknown
+                    && entry.State != PositionState.RemappedAfterHidden
+                    && entry.State != PositionState.RemappedAfterUnknown
+            );
 
             switch (entry.State)
             {
@@ -135,8 +132,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             }
         }
 
-        internal override FileLinePositionSpan TranslateSpanAndVisibility(SourceText sourceText, string treeFilePath, TextSpan span, out bool isHiddenPosition)
-        {
+        internal override FileLinePositionSpan TranslateSpanAndVisibility(
+            SourceText sourceText,
+            string treeFilePath,
+            TextSpan span,
+            out bool isHiddenPosition
+        ) {
             var lines = sourceText.Lines;
             var unmappedStartPos = lines.GetLinePosition(span.Start);
             var unmappedEndPos = lines.GetLinePosition(span.End);
@@ -156,9 +157,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             var entry = FindEntry(unmappedStartPos.Line);
 
             // the state should not be set to the ones used for VB only.
-            Debug.Assert(entry.State != PositionState.Unknown &&
-                            entry.State != PositionState.RemappedAfterHidden &&
-                            entry.State != PositionState.RemappedAfterUnknown);
+            Debug.Assert(
+                entry.State != PositionState.Unknown
+                    && entry.State != PositionState.RemappedAfterHidden
+                    && entry.State != PositionState.RemappedAfterUnknown
+            );
 
             isHiddenPosition = entry.State == PositionState.Hidden;
 

@@ -10,21 +10,16 @@ namespace System.Web.Http.ApiExplorer
 {
     public class ParameterSourceController : ApiController
     {
-        public void GetCompleTypeFromUri([FromUri]ComplexType value, string name)
-        {
-        }
+        public void GetCompleTypeFromUri([FromUri] ComplexType value, string name) { }
 
-        public void PostSimpleTypeFromBody([FromBody] string name)
-        {
-        }
+        public void PostSimpleTypeFromBody([FromBody] string name) { }
 
-        public void GetCustomFromUriAttribute([MyFromUriAttribute] ComplexType value, ComplexType bodyValue)
-        {
-        }
+        public void GetCustomFromUriAttribute(
+            [MyFromUriAttribute] ComplexType value,
+            ComplexType bodyValue
+        ) { }
 
-        public void GetFromHeaderAttribute([FromHeaderAttribute] string value)
-        {
-        }
+        public void GetFromHeaderAttribute([FromHeaderAttribute] string value) { }
 
         public class ComplexType
         {
@@ -34,17 +29,22 @@ namespace System.Web.Http.ApiExplorer
 
         private class MyFromUriAttribute : ModelBinderAttribute, IUriValueProviderFactory
         {
-            public override IEnumerable<ValueProviderFactory> GetValueProviderFactories(HttpConfiguration configuration)
-            {
-                var factories = from f in base.GetValueProviderFactories(configuration) where f is IUriValueProviderFactory select f;
+            public override IEnumerable<ValueProviderFactory> GetValueProviderFactories(
+                HttpConfiguration configuration
+            ) {
+                var factories =
+                    from f in base.GetValueProviderFactories(configuration)
+                    where f is IUriValueProviderFactory
+                    select f;
                 return factories;
             }
         }
 
         private class FromHeaderAttribute : ModelBinderAttribute
         {
-            public override IEnumerable<ValueProviderFactory> GetValueProviderFactories(HttpConfiguration configuration)
-            {
+            public override IEnumerable<ValueProviderFactory> GetValueProviderFactories(
+                HttpConfiguration configuration
+            ) {
                 var factories = new ValueProviderFactory[] { new HeaderValueProvider() };
                 return factories;
             }
@@ -52,8 +52,9 @@ namespace System.Web.Http.ApiExplorer
 
         private class HeaderValueProvider : ValueProviderFactory
         {
-            public override IValueProvider GetValueProvider(Controllers.HttpActionContext actionContext)
-            {
+            public override IValueProvider GetValueProvider(
+                Controllers.HttpActionContext actionContext
+            ) {
                 throw new NotImplementedException();
             }
         }

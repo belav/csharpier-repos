@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 {
     public sealed class SectionIntermediateNode : ExtensionIntermediateNode
     {
-        public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();
+        public override IntermediateNodeCollection Children { get; } =
+            new IntermediateNodeCollection();
 
         public string SectionName { get; set; }
 

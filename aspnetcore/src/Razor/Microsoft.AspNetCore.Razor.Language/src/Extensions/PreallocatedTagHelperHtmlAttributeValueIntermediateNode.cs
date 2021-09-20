@@ -7,14 +7,14 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions
 {
-    internal sealed class PreallocatedTagHelperHtmlAttributeValueIntermediateNode : ExtensionIntermediateNode
+    internal sealed class PreallocatedTagHelperHtmlAttributeValueIntermediateNode
+        : ExtensionIntermediateNode
     {
-        public PreallocatedTagHelperHtmlAttributeValueIntermediateNode()
-        {
-        }
+        public PreallocatedTagHelperHtmlAttributeValueIntermediateNode() { }
 
-        public PreallocatedTagHelperHtmlAttributeValueIntermediateNode(DefaultTagHelperHtmlAttributeIntermediateNode htmlAttributeNode)
-        {
+        public PreallocatedTagHelperHtmlAttributeValueIntermediateNode(
+            DefaultTagHelperHtmlAttributeIntermediateNode htmlAttributeNode
+        ) {
             if (htmlAttributeNode == null)
             {
                 throw new ArgumentNullException(nameof(htmlAttributeNode));
@@ -50,7 +50,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 throw new ArgumentNullException(nameof(visitor));
             }
 
-            AcceptExtensionNode<PreallocatedTagHelperHtmlAttributeValueIntermediateNode>(this, visitor);
+            AcceptExtensionNode<PreallocatedTagHelperHtmlAttributeValueIntermediateNode>(
+                this,
+                visitor
+            );
         }
 
         public override void WriteNode(CodeTarget target, CodeRenderingContext context)

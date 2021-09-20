@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector128<Int64>>() / sizeof(Int64);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector128<Int64>>() / sizeof(Int64);
 
         public bool Succeeded { get; set; } = true;
 
@@ -67,22 +68,32 @@ namespace JIT.HardwareIntrinsics.General
             Int64 upperValue = TestLibrary.Generator.GetInt64();
             Vector64<Int64> upper = Vector64.Create(upperValue);
 
-            object result = typeof(Vector128)
-                                .GetMethod(nameof(Vector128.Create), new Type[] { typeof(Vector64<Int64>), typeof(Vector64<Int64>) })
-                                .Invoke(null, new object[] { lower, upper });
+            object result = typeof(Vector128).GetMethod(
+                    nameof(Vector128.Create),
+                    new Type[] { typeof(Vector64<Int64>), typeof(Vector64<Int64>) }
+                )
+                .Invoke(null, new object[] { lower, upper });
 
             ValidateResult((Vector128<Int64>)(result), lowerValue, upperValue);
         }
 
-        private void ValidateResult(Vector128<Int64> result, Int64 expectedLowerValue, Int64 expectedUpperValue, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Vector128<Int64> result,
+            Int64 expectedLowerValue,
+            Int64 expectedUpperValue,
+            [CallerMemberName] string method = ""
+        ) {
             Int64[] resultElements = new Int64[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Int64, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedLowerValue, expectedUpperValue, method);
         }
 
-        private void ValidateResult(Int64[] resultElements, Int64 expectedLowerValue, Int64 expectedUpperValue, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Int64[] resultElements,
+            Int64 expectedLowerValue,
+            Int64 expectedUpperValue,
+            [CallerMemberName] string method = ""
+        ) {
             bool succeeded = true;
 
             for (var i = 0; i < ElementCount / 2; i++)
@@ -105,10 +116,14 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128.Create(Int64): {method} failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128.Create(Int64): {method} failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"   lower: {expectedLowerValue}");
                 TestLibrary.TestFramework.LogInformation($"   upper: {expectedUpperValue}");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

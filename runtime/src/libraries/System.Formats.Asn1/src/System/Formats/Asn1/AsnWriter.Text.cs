@@ -36,8 +36,11 @@ namespace System.Formats.Asn1
         ///   <paramref name="tag"/>.<see cref="Asn1Tag.TagValue"/> is not correct for
         ///   the method.
         /// </exception>
-        public void WriteCharacterString(UniversalTagNumber encodingType, string value, Asn1Tag? tag = null)
-        {
+        public void WriteCharacterString(
+            UniversalTagNumber encodingType,
+            string value,
+            Asn1Tag? tag = null
+        ) {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
@@ -70,8 +73,11 @@ namespace System.Formats.Asn1
         ///   <paramref name="tag"/>.<see cref="Asn1Tag.TagValue"/> is not correct for
         ///   the method.
         /// </exception>
-        public void WriteCharacterString(UniversalTagNumber encodingType, ReadOnlySpan<char> str, Asn1Tag? tag = null)
-        {
+        public void WriteCharacterString(
+            UniversalTagNumber encodingType,
+            ReadOnlySpan<char> str,
+            Asn1Tag? tag = null
+        ) {
             CheckUniversalTag(tag, encodingType);
 
             Text.Encoding encoding = AsnCharacterStringEncodings.GetEncoding(encodingType);
@@ -79,8 +85,11 @@ namespace System.Formats.Asn1
         }
 
         // T-REC-X.690-201508 sec 8.23
-        private void WriteCharacterStringCore(Asn1Tag tag, Text.Encoding encoding, ReadOnlySpan<char> str)
-        {
+        private void WriteCharacterStringCore(
+            Asn1Tag tag,
+            Text.Encoding encoding,
+            ReadOnlySpan<char> str
+        ) {
             int size = encoding.GetByteCount(str);
 
             // T-REC-X.690-201508 sec 9.2
@@ -104,15 +113,20 @@ namespace System.Formats.Asn1
             if (written != size)
             {
                 Debug.Fail(
-                    $"Encoding produced different answer for GetByteCount ({size}) and GetBytes ({written})");
+                    $"Encoding produced different answer for GetByteCount ({size}) and GetBytes ({written})"
+                );
                 throw new InvalidOperationException();
             }
 
             _offset += size;
         }
 
-        private void WriteConstructedCerCharacterString(Asn1Tag tag, Text.Encoding encoding, ReadOnlySpan<char> str, int size)
-        {
+        private void WriteConstructedCerCharacterString(
+            Asn1Tag tag,
+            Text.Encoding encoding,
+            ReadOnlySpan<char> str,
+            int size
+        ) {
             Debug.Assert(size > AsnReader.MaxCERSegmentSize);
 
             byte[] tmp = CryptoPool.Rent(size);
@@ -121,7 +135,8 @@ namespace System.Formats.Asn1
             if (written != size)
             {
                 Debug.Fail(
-                    $"Encoding produced different answer for GetByteCount ({size}) and GetBytes ({written})");
+                    $"Encoding produced different answer for GetByteCount ({size}) and GetBytes ({written})"
+                );
                 throw new InvalidOperationException();
             }
 

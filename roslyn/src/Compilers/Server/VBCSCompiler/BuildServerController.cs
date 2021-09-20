@@ -27,8 +27,10 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         private readonly NameValueCollection _appSettings;
         private readonly ICompilerServerLogger _logger;
 
-        internal BuildServerController(NameValueCollection appSettings, ICompilerServerLogger logger)
-        {
+        internal BuildServerController(
+            NameValueCollection appSettings,
+            ICompilerServerLogger logger
+        ) {
             _appSettings = appSettings;
             _logger = logger;
         }
@@ -49,20 +51,29 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             }
 
             var cancellationTokenSource = new CancellationTokenSource();
-            Console.CancelKeyPress += (sender, e) => { cancellationTokenSource.Cancel(); };
+            Console.CancelKeyPress += (sender, e) =>
+            {
+                cancellationTokenSource.Cancel();
+            };
 
             return shutdown
-                ? RunShutdown(pipeName, cancellationToken: cancellationTokenSource.Token)
-                : RunServer(pipeName, cancellationToken: cancellationTokenSource.Token);
+              ? RunShutdown(pipeName, cancellationToken: cancellationTokenSource.Token)
+              : RunServer(pipeName, cancellationToken: cancellationTokenSource.Token);
         }
 
         internal TimeSpan? GetKeepAliveTimeout()
         {
             try
             {
-                if (int.TryParse(_appSettings[KeepAliveSettingName], NumberStyles.Integer, CultureInfo.InvariantCulture, out int keepAliveValue) &&
-                    keepAliveValue >= 0)
-                {
+                if (
+                    int.TryParse(
+                        _appSettings[KeepAliveSettingName],
+                        NumberStyles.Integer,
+                        CultureInfo.InvariantCulture,
+                        out int keepAliveValue
+                    )
+                    && keepAliveValue >= 0
+                ) {
                     if (keepAliveValue == 0)
                     {
                         // This is a one time server entry.
@@ -94,11 +105,14 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             return BuildServerConnection.WasServerMutexOpen(mutexName);
         }
 
-        internal static IClientConnectionHost CreateClientConnectionHost(string pipeName, ICompilerServerLogger logger) => new NamedPipeClientConnectionHost(pipeName, logger);
+        internal static IClientConnectionHost CreateClientConnectionHost(
+            string pipeName,
+            ICompilerServerLogger logger
+        ) => new NamedPipeClientConnectionHost(pipeName, logger);
 
         internal static ICompilerServerHost CreateCompilerServerHost(ICompilerServerLogger logger)
         {
-            // VBCSCompiler is installed in the same directory as csc.exe and vbc.exe which is also the 
+            // VBCSCompiler is installed in the same directory as csc.exe and vbc.exe which is also the
             // location of the response files.
             //
             // BaseDirectory was mistakenly marked as potentially null in 3.1
@@ -111,7 +125,13 @@ namespace Microsoft.CodeAnalysis.CompilerServer
 
         private async Task<Stream?> ConnectForShutdownAsync(string pipeName, int timeout)
         {
-            return await BuildServerConnection.TryConnectToServerAsync(pipeName, timeout, _logger, cancellationToken: default).ConfigureAwait(false);
+            return await BuildServerConnection.TryConnectToServerAsync(
+                    pipeName,
+                    timeout,
+                    _logger,
+                    cancellationToken: default
+                )
+                .ConfigureAwait(false);
         }
 
         private static string? GetDefaultPipeName()
@@ -128,8 +148,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             IClientConnectionHost? clientConnectionHost = null,
             IDiagnosticListener? listener = null,
             TimeSpan? keepAlive = null,
-            CancellationToken cancellationToken = default)
-        {
+            CancellationToken cancellationToken = default
+        ) {
             keepAlive ??= GetKeepAliveTimeout();
             listener ??= new EmptyDiagnosticListener();
             compilerServerHost ??= CreateCompilerServerHost(_logger);
@@ -140,18 +160,28 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             // exit immediately with a non-zero exit code
             var mutexName = BuildServerConnection.GetServerMutexName(pipeName);
             bool createdNew;
-            using (var serverMutex = BuildServerConnection.OpenOrCreateMutex(name: mutexName,
-                                                                             createdNew: out createdNew))
-            {
+            using (
+                var serverMutex = BuildServerConnection.OpenOrCreateMutex(
+                    name: mutexName,
+                    createdNew: out createdNew
+                )
+            ) {
                 if (!createdNew)
                 {
                     return CommonCompiler.Failed;
                 }
 
-                compilerServerHost.Logger.Log("Keep alive timeout is: {0} milliseconds.", keepAlive?.TotalMilliseconds ?? 0);
+                compilerServerHost.Logger.Log(
+                    "Keep alive timeout is: {0} milliseconds.",
+                    keepAlive?.TotalMilliseconds ?? 0
+                );
                 FatalError.Handler = FailFast.OnFatalException;
 
-                var dispatcher = new ServerDispatcher(compilerServerHost, clientConnectionHost, listener);
+                var dispatcher = new ServerDispatcher(
+                    compilerServerHost,
+                    clientConnectionHost,
+                    listener
+                );
                 dispatcher.ListenAndDispatchConnections(keepAlive, cancellationToken);
                 return CommonCompiler.Succeeded;
             }
@@ -165,17 +195,30 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             TimeSpan? keepAlive = null,
             NameValueCollection? appSettings = null,
             ICompilerServerLogger? logger = null,
-            CancellationToken cancellationToken = default)
-        {
+            CancellationToken cancellationToken = default
+        ) {
             appSettings ??= new NameValueCollection();
             logger ??= EmptyCompilerServerLogger.Instance;
             var controller = new BuildServerController(appSettings, logger);
-            return controller.RunServer(pipeName, compilerServerHost, clientConnectionHost, listener, keepAlive, cancellationToken);
+            return controller.RunServer(
+                pipeName,
+                compilerServerHost,
+                clientConnectionHost,
+                listener,
+                keepAlive,
+                cancellationToken
+            );
         }
 
-        internal int RunShutdown(string pipeName, bool waitForProcess = true, TimeSpan? timeout = null, CancellationToken cancellationToken = default)
-        {
-            return RunShutdownAsync(pipeName, waitForProcess, timeout, cancellationToken).GetAwaiter().GetResult();
+        internal int RunShutdown(
+            string pipeName,
+            bool waitForProcess = true,
+            TimeSpan? timeout = null,
+            CancellationToken cancellationToken = default
+        ) {
+            return RunShutdownAsync(pipeName, waitForProcess, timeout, cancellationToken)
+                .GetAwaiter()
+                .GetResult();
         }
 
         /// <summary>
@@ -185,26 +228,31 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         /// This function will return success if at any time in the function the server is determined to no longer
         /// be running.
         /// </summary>
-        internal async Task<int> RunShutdownAsync(string pipeName, bool waitForProcess = true, TimeSpan? timeout = null, CancellationToken cancellationToken = default)
-        {
+        internal async Task<int> RunShutdownAsync(
+            string pipeName,
+            bool waitForProcess = true,
+            TimeSpan? timeout = null,
+            CancellationToken cancellationToken = default
+        ) {
             if (WasServerRunning(pipeName) == false)
             {
-                // The server holds the mutex whenever it is running, if it's not open then the 
+                // The server holds the mutex whenever it is running, if it's not open then the
                 // server simply isn't running.
                 return CommonCompiler.Succeeded;
             }
 
             try
             {
-                var realTimeout = timeout != null
-                    ? (int)timeout.Value.TotalMilliseconds
-                    : Timeout.Infinite;
-                using var client = await ConnectForShutdownAsync(pipeName, realTimeout).ConfigureAwait(false);
+                var realTimeout =
+                    timeout != null ? (int)timeout.Value.TotalMilliseconds : Timeout.Infinite;
+                using var client = await ConnectForShutdownAsync(pipeName, realTimeout)
+                    .ConfigureAwait(false);
                 if (client is object)
                 {
                     var request = BuildRequest.CreateShutdown();
                     await request.WriteAsync(client, cancellationToken).ConfigureAwait(false);
-                    var response = await BuildResponse.ReadAsync(client, cancellationToken).ConfigureAwait(false);
+                    var response = await BuildResponse.ReadAsync(client, cancellationToken)
+                        .ConfigureAwait(false);
                     var shutdownResponse = (ShutdownBuildResponse)response;
 
                     if (waitForProcess)
@@ -229,7 +277,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                 if (WasServerRunning(pipeName) == false)
                 {
                     // If the server was in the process of shutting down when we connected then it's reasonable
-                    // for an exception to happen.  If the mutex has shutdown at this point then the server 
+                    // for an exception to happen.  If the mutex has shutdown at this point then the server
                     // is shut down.
                     return CommonCompiler.Succeeded;
                 }
@@ -238,8 +286,11 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             }
         }
 
-        internal static bool ParseCommandLine(string[] args, out string? pipeName, out bool shutdown)
-        {
+        internal static bool ParseCommandLine(
+            string[] args,
+            out string? pipeName,
+            out bool shutdown
+        ) {
             pipeName = null;
             shutdown = false;
 

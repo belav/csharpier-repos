@@ -16,14 +16,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
     /// </summary>
     internal class FormattingResult : AbstractFormattingResult
     {
-        internal FormattingResult(TreeData treeInfo, TokenStream tokenStream, TextSpan spanToFormat)
-            : base(treeInfo, tokenStream, spanToFormat)
-        {
-        }
+        internal FormattingResult(
+            TreeData treeInfo,
+            TokenStream tokenStream,
+            TextSpan spanToFormat
+        ) : base(treeInfo, tokenStream, spanToFormat) { }
 
-        protected override SyntaxNode Rewriter(Dictionary<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData> changeMap, CancellationToken cancellationToken)
-        {
-            var rewriter = new TriviaRewriter(this.TreeInfo.Root, SimpleIntervalTree.Create(new TextSpanIntervalIntrospector(), this.FormattedSpan), changeMap, cancellationToken);
+        protected override SyntaxNode Rewriter(
+            Dictionary<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData> changeMap,
+            CancellationToken cancellationToken
+        ) {
+            var rewriter = new TriviaRewriter(
+                this.TreeInfo.Root,
+                SimpleIntervalTree.Create(new TextSpanIntervalIntrospector(), this.FormattedSpan),
+                changeMap,
+                cancellationToken
+            );
             return rewriter.Transform();
         }
     }

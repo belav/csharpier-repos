@@ -18,11 +18,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 new Guid("96EE27B4-868B-4049-BA67-CBB83CE5B462"),
-                converter("96EE27B4-868B-4049-BA67-CBB83CE5B462"));
+                converter("96EE27B4-868B-4049-BA67-CBB83CE5B462")
+            );
 
-            Assert.Equal(
-                Guid.Empty,
-                converter("00000000-0000-0000-0000-000000000000"));
+            Assert.Equal(Guid.Empty, converter("00000000-0000-0000-0000-000000000000"));
 
             Assert.Equal(Guid.Empty, converter(null));
         }
@@ -34,11 +33,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Assert.Equal(
                 "96ee27b4-868b-4049-ba67-cbb83ce5b462",
-                converter(new Guid("96EE27B4-868B-4049-BA67-CBB83CE5B462")));
+                converter(new Guid("96EE27B4-868B-4049-BA67-CBB83CE5B462"))
+            );
 
-            Assert.Equal(
-                "00000000-0000-0000-0000-000000000000",
-                converter(Guid.Empty));
+            Assert.Equal("00000000-0000-0000-0000-000000000000", converter(Guid.Empty));
         }
     }
 }

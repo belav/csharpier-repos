@@ -15,13 +15,7 @@ namespace GenUnicodeProp
     /// </summary>
     internal sealed class CategoryCasingInfo : IEquatable<CategoryCasingInfo>
     {
-        private readonly (UnicodeCategory generalCategory,
-            StrongBidiCategory strongBidiCategory,
-            ushort offsetToSimpleUppercase,
-            ushort offsetToSimpleLowercase,
-            ushort offsetToSimpleTitlecase,
-            ushort offsetToSimpleCasefold,
-            bool isWhitespace) _data;
+        private readonly (UnicodeCategory generalCategory, StrongBidiCategory strongBidiCategory, ushort offsetToSimpleUppercase, ushort offsetToSimpleLowercase, ushort offsetToSimpleTitlecase, ushort offsetToSimpleCasefold, bool isWhitespace) _data;
 
         public CategoryCasingInfo(CodePoint codePoint)
         {
@@ -45,10 +39,18 @@ namespace GenUnicodeProp
 
             if (Program.IncludeCasingData)
             {
-                _data.offsetToSimpleUppercase = (ushort)(codePoint.SimpleUppercaseMapping - codePoint.Value);
-                _data.offsetToSimpleLowercase = (ushort)(codePoint.SimpleLowercaseMapping - codePoint.Value);
-                _data.offsetToSimpleTitlecase = (ushort)(codePoint.SimpleTitlecaseMapping - codePoint.Value);
-                _data.offsetToSimpleCasefold = (ushort)(codePoint.SimpleCaseFoldMapping - codePoint.Value);
+                _data.offsetToSimpleUppercase = (ushort)(
+                    codePoint.SimpleUppercaseMapping - codePoint.Value
+                );
+                _data.offsetToSimpleLowercase = (ushort)(
+                    codePoint.SimpleLowercaseMapping - codePoint.Value
+                );
+                _data.offsetToSimpleTitlecase = (ushort)(
+                    codePoint.SimpleTitlecaseMapping - codePoint.Value
+                );
+                _data.offsetToSimpleCasefold = (ushort)(
+                    codePoint.SimpleCaseFoldMapping - codePoint.Value
+                );
             }
             else
             {

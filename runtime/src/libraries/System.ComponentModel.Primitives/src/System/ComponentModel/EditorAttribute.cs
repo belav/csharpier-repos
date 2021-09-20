@@ -28,9 +28,11 @@ namespace System.ComponentModel
         /// name of the editor.
         /// </summary>
         public EditorAttribute(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] string typeName,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] string? baseTypeName)
-        {
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                string typeName,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                string? baseTypeName
+        ) {
             EditorTypeName = typeName ?? throw new ArgumentNullException(nameof(typeName));
             EditorBaseTypeName = baseTypeName;
         }
@@ -39,9 +41,11 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.EditorAttribute'/> class.
         /// </summary>
         public EditorAttribute(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] string typeName,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type baseType)
-        {
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                string typeName,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type baseType
+        ) {
             if (typeName == null)
             {
                 throw new ArgumentNullException(nameof(typeName));
@@ -59,9 +63,11 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.EditorAttribute'/> class.
         /// </summary>
         public EditorAttribute(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type baseType)
-        {
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type type,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type baseType
+        ) {
             if (type == null)
             {
                 throw new ArgumentNullException(nameof(type));

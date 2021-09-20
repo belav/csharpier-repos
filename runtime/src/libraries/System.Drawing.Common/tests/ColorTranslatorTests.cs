@@ -98,7 +98,6 @@ namespace System.Drawing.Tests
                 yield return new object[] { color, oleColor };
             }
 
-
             // These system colors are equivilent to Control, ControlLight and ControlDark.
             yield return new object[] { SystemColors.ButtonFace, unchecked((int)0x8000000F) };
             yield return new object[] { SystemColors.ButtonHighlight, unchecked((int)0x80000014) };
@@ -190,8 +189,9 @@ namespace System.Drawing.Tests
         [MemberData(nameof(FromHtml_TestData))]
         public void FromHtml_String_ReturnsExpected(string htmlColor, Color expected)
         {
-            using (new ThreadCultureChange(CultureInfo.InvariantCulture, CultureInfo.InvariantCulture))
-            {
+            using (
+                new ThreadCultureChange(CultureInfo.InvariantCulture, CultureInfo.InvariantCulture)
+            ) {
                 Assert.Equal(expected, ColorTranslator.FromHtml(htmlColor));
             }
         }
@@ -211,9 +211,12 @@ namespace System.Drawing.Tests
         [InlineData("&hG12")]
         public void FromHtml_Invalid_Throws(string htmlColor)
         {
-            using (new ThreadCultureChange(CultureInfo.InvariantCulture, CultureInfo.InvariantCulture))
-            {
-                Exception exception = AssertExtensions.Throws<ArgumentException, Exception>(() => ColorTranslator.FromHtml(htmlColor));
+            using (
+                new ThreadCultureChange(CultureInfo.InvariantCulture, CultureInfo.InvariantCulture)
+            ) {
+                Exception exception = AssertExtensions.Throws<ArgumentException, Exception>(
+                    () => ColorTranslator.FromHtml(htmlColor)
+                );
                 if (exception is ArgumentException argumentException)
                     Assert.Equal("htmlColor", argumentException.ParamName);
             }
@@ -232,8 +235,9 @@ namespace System.Drawing.Tests
         [InlineData("1,2,256", typeof(ArgumentException))]
         public void FromHtml_Invalid_Throw(string htmlColor, Type exception)
         {
-            using (new ThreadCultureChange(CultureInfo.InvariantCulture, CultureInfo.InvariantCulture))
-            {
+            using (
+                new ThreadCultureChange(CultureInfo.InvariantCulture, CultureInfo.InvariantCulture)
+            ) {
                 Assert.Throws(exception, () => ColorTranslator.FromHtml(htmlColor));
             }
         }

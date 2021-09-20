@@ -10,7 +10,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void MultipleConvertersInObjectArray()
         {
-            const string expectedJson = @"[""?"",{""TypeDiscriminator"":1,""CreditLimit"":100,""Name"":""C""},null]";
+            const string expectedJson =
+                @"[""?"",{""TypeDiscriminator"":1,""CreditLimit"":100,""Name"":""C""},null]";
 
             var options = new JsonSerializerOptions();
             options.Converters.Add(new MyBoolEnumConverter());
@@ -23,7 +24,10 @@ namespace System.Text.Json.Serialization.Tests
             MyBoolEnum myBoolEnum = MyBoolEnum.Unknown;
             MyBoolEnum? myNullBoolEnum = null;
 
-            string json = JsonSerializer.Serialize(new object[] { myBoolEnum, customer, myNullBoolEnum }, options);
+            string json = JsonSerializer.Serialize(
+                new object[] { myBoolEnum, customer, myNullBoolEnum },
+                options
+            );
             Assert.Equal(expectedJson, json);
 
             JsonElement jsonElement = JsonSerializer.Deserialize<JsonElement>(json, options);
@@ -47,28 +51,39 @@ namespace System.Text.Json.Serialization.Tests
 
             public override bool CanConvert(Type typeToConvert) => true;
 
-            public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
-            {
+            public override JsonConverter CreateConverter(
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) {
                 Options = options;
                 return new SimpleConverter();
             }
 
             public class SimpleConverter : JsonConverter<string>
             {
-                public override string Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-                {
+                public override string Read(
+                    ref Utf8JsonReader reader,
+                    Type typeToConvert,
+                    JsonSerializerOptions options
+                ) {
                     throw new NotImplementedException();
                 }
 
-                public override void Write(Utf8JsonWriter writer, string value, JsonSerializerOptions options)
-                    => writer.WriteStringValue(value);
+                public override void Write(
+                    Utf8JsonWriter writer,
+                    string value,
+                    JsonSerializerOptions options
+                ) => writer.WriteStringValue(value);
             }
         }
 
         private class ConverterReturningNull : JsonConverter<Customer>
         {
-            public override Customer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            {
+            public override Customer Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) {
                 Assert.Equal(JsonTokenType.StartObject, reader.TokenType);
 
                 bool rc = reader.Read();
@@ -79,8 +94,11 @@ namespace System.Text.Json.Serialization.Tests
                 return null;
             }
 
-            public override void Write(Utf8JsonWriter writer, Customer value, JsonSerializerOptions options)
-            {
+            public override void Write(
+                Utf8JsonWriter writer,
+                Customer value,
+                JsonSerializerOptions options
+            ) {
                 throw new NotSupportedException();
             }
         }
@@ -122,8 +140,11 @@ namespace System.Text.Json.Serialization.Tests
 
         public class ObjectBoolConverter : JsonConverter<object>
         {
-            public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            {
+            public override object Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) {
                 if (reader.TokenType == JsonTokenType.True)
                 {
                     return true;
@@ -137,8 +158,11 @@ namespace System.Text.Json.Serialization.Tests
                 throw new JsonException();
             }
 
-            public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
-            {
+            public override void Write(
+                Utf8JsonWriter writer,
+                object value,
+                JsonSerializerOptions options
+            ) {
                 throw new NotImplementedException();
             }
         }

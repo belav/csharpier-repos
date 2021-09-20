@@ -35,8 +35,12 @@ namespace Microsoft.AspNetCore.Razor.Language
             return codeDocument;
         }
 
-        public virtual RazorCodeDocument Process(RazorSourceDocument source, string fileKind, IReadOnlyList<RazorSourceDocument> importSources, IReadOnlyList<TagHelperDescriptor> tagHelpers)
-        {
+        public virtual RazorCodeDocument Process(
+            RazorSourceDocument source,
+            string fileKind,
+            IReadOnlyList<RazorSourceDocument> importSources,
+            IReadOnlyList<TagHelperDescriptor> tagHelpers
+        ) {
             throw new NotImplementedException();
         }
 
@@ -45,13 +49,21 @@ namespace Microsoft.AspNetCore.Razor.Language
             throw new NotImplementedException();
         }
 
-        public virtual RazorCodeDocument ProcessDeclarationOnly(RazorSourceDocument source, string fileKind, IReadOnlyList<RazorSourceDocument> importSources, IReadOnlyList<TagHelperDescriptor> tagHelpers)
-        {
+        public virtual RazorCodeDocument ProcessDeclarationOnly(
+            RazorSourceDocument source,
+            string fileKind,
+            IReadOnlyList<RazorSourceDocument> importSources,
+            IReadOnlyList<TagHelperDescriptor> tagHelpers
+        ) {
             throw new NotImplementedException();
         }
 
-        public virtual RazorCodeDocument ProcessDesignTime(RazorSourceDocument source, string fileKind, IReadOnlyList<RazorSourceDocument> importSources, IReadOnlyList<TagHelperDescriptor> tagHelpers)
-        {
+        public virtual RazorCodeDocument ProcessDesignTime(
+            RazorSourceDocument source,
+            string fileKind,
+            IReadOnlyList<RazorSourceDocument> importSources,
+            IReadOnlyList<TagHelperDescriptor> tagHelpers
+        ) {
             throw new NotImplementedException();
         }
 
@@ -69,28 +81,38 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         protected abstract RazorCodeDocument CreateCodeDocumentCore(RazorProjectItem projectItem);
 
-        protected abstract RazorCodeDocument CreateCodeDocumentDesignTimeCore(RazorProjectItem projectItem);
+        protected abstract RazorCodeDocument CreateCodeDocumentDesignTimeCore(
+            RazorProjectItem projectItem
+        );
 
         protected abstract void ProcessCore(RazorCodeDocument codeDocument);
 
-        internal static RazorProjectEngine CreateEmpty(Action<RazorProjectEngineBuilder> configure = null)
-        {
-            var builder = new DefaultRazorProjectEngineBuilder(RazorConfiguration.Default, RazorProjectFileSystem.Empty);
+        internal static RazorProjectEngine CreateEmpty(
+            Action<RazorProjectEngineBuilder> configure = null
+        ) {
+            var builder = new DefaultRazorProjectEngineBuilder(
+                RazorConfiguration.Default,
+                RazorProjectFileSystem.Empty
+            );
 
             configure?.Invoke(builder);
 
             return builder.Build();
         }
 
-        internal static RazorProjectEngine Create(Action<RazorProjectEngineBuilder> configure) => Create(RazorConfiguration.Default, RazorProjectFileSystem.Empty, configure);
+        internal static RazorProjectEngine Create(Action<RazorProjectEngineBuilder> configure) =>
+            Create(RazorConfiguration.Default, RazorProjectFileSystem.Empty, configure);
 
-        public static RazorProjectEngine Create(RazorConfiguration configuration, RazorProjectFileSystem fileSystem) => Create(configuration, fileSystem, configure: null);
+        public static RazorProjectEngine Create(
+            RazorConfiguration configuration,
+            RazorProjectFileSystem fileSystem
+        ) => Create(configuration, fileSystem, configure: null);
 
         public static RazorProjectEngine Create(
             RazorConfiguration configuration,
             RazorProjectFileSystem fileSystem,
-            Action<RazorProjectEngineBuilder> configure)
-        {
+            Action<RazorProjectEngineBuilder> configure
+        ) {
             if (fileSystem == null)
             {
                 throw new ArgumentNullException(nameof(fileSystem));
@@ -162,7 +184,13 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Legacy options features
             //
             // These features are obsolete as of 2.1. Our code will resolve this but not invoke them.
-            features.Add(new DefaultRazorParserOptionsFeature(designTime: false, version: RazorLanguageVersion.Version_2_0, fileKind: null));
+            features.Add(
+                new DefaultRazorParserOptionsFeature(
+                    designTime: false,
+                    version: RazorLanguageVersion.Version_2_0,
+                    fileKind: null
+                )
+            );
             features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
 
             // Syntax Tree passes
@@ -189,30 +217,38 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Default configuration
             var configurationFeature = new DefaultDocumentClassifierPassFeature();
             features.Add(configurationFeature);
-            configurationFeature.ConfigureClass.Add((document, @class) =>
-            {
-                @class.ClassName = "Template";
-                @class.Modifiers.Add("public");
-            });
+            configurationFeature.ConfigureClass.Add(
+                (document, @class) =>
+                {
+                    @class.ClassName = "Template";
+                    @class.Modifiers.Add("public");
+                }
+            );
 
-            configurationFeature.ConfigureNamespace.Add((document, @namespace) =>
-            {
-                @namespace.Content = "Razor";
-            });
+            configurationFeature.ConfigureNamespace.Add(
+                (document, @namespace) =>
+                {
+                    @namespace.Content = "Razor";
+                }
+            );
 
-            configurationFeature.ConfigureMethod.Add((document, method) =>
-            {
-                method.MethodName = "ExecuteAsync";
-                method.ReturnType = $"global::{typeof(Task).FullName}";
+            configurationFeature.ConfigureMethod.Add(
+                (document, method) =>
+                {
+                    method.MethodName = "ExecuteAsync";
+                    method.ReturnType = $"global::{typeof(Task).FullName}";
 
-                method.Modifiers.Add("public");
-                method.Modifiers.Add("async");
-                method.Modifiers.Add("override");
-            });
+                    method.Modifiers.Add("public");
+                    method.Modifiers.Add("async");
+                    method.Modifiers.Add("override");
+                }
+            );
         }
 
-        private static void AddComponentFeatures(RazorProjectEngineBuilder builder, RazorLanguageVersion razorLanguageVersion)
-        {
+        private static void AddComponentFeatures(
+            RazorProjectEngineBuilder builder,
+            RazorLanguageVersion razorLanguageVersion
+        ) {
             // Project Engine Features
             builder.Features.Add(new ComponentImportProjectFeature());
 
@@ -224,10 +260,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             // Unconditionally enable the feature for the time being until we flow the SDK with the flow version
             // into the repository.
-            ComponentTypeParamDirective.Register(
-                builder,
-                supportConstraints: true);
-                //supportConstraints: razorLanguageVersion.CompareTo(RazorLanguageVersion.Version_6_0) >= 0);
+            ComponentTypeParamDirective.Register(builder, supportConstraints: true);
+            //supportConstraints: razorLanguageVersion.CompareTo(RazorLanguageVersion.Version_6_0) >= 0);
 
             if (razorLanguageVersion.CompareTo(RazorLanguageVersion.Version_5_0) >= 0)
             {
@@ -258,8 +292,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             builder.Features.Add(new ComponentMarkupEncodingPass());
         }
 
-        private static void LoadExtensions(RazorProjectEngineBuilder builder, IReadOnlyList<RazorExtension> extensions)
-        {
+        private static void LoadExtensions(
+            RazorProjectEngineBuilder builder,
+            IReadOnlyList<RazorExtension> extensions
+        ) {
             for (var i = 0; i < extensions.Count; i++)
             {
                 // For now we only handle AssemblyExtension - which is not user-constructable. We're keeping a tight

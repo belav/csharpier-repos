@@ -21,22 +21,22 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
                 {
                     {
                         typeof(IEnumerable<string>),
-                        new [] { "value1", "value2" },
+                        new[] { "value1", "value2" },
                         typeof(DelegatingEnumerable<string, string>)
                     },
                     {
                         typeof(IEnumerable<int>),
-                        new [] { 10, 20 },
+                        new[] { 10, 20 },
                         typeof(DelegatingEnumerable<int, int>)
                     },
                     {
                         typeof(IEnumerable<Person>),
-                        new [] { new Person() { Id =10, Name = "John" } },
+                        new[] { new Person() { Id = 10, Name = "John" } },
                         typeof(DelegatingEnumerable<Person, Person>)
                     },
                     {
                         typeof(IEnumerable<SerializableError>),
-                        new [] { serializableError },
+                        new[] { serializableError },
                         typeof(DelegatingEnumerable<SerializableErrorWrapper, SerializableError>)
                     },
                 };
@@ -46,17 +46,24 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         [Theory]
         [MemberData(nameof(EnumerableOfTInterfaceData))]
         public void Creates_WrapperProvider_EnumerableOfTInterface(
-                                                                    Type declaredType,
-                                                                    object objectToBeWrapped,
-                                                                    Type expectedWrappingType)
-        {
+            Type declaredType,
+            object objectToBeWrapped,
+            Type expectedWrappingType
+        ) {
             // Arrange
             var wrapperProviderFactories = GetWrapperProviderFactories();
-            var enumerableWrapperProviderFactory = new EnumerableWrapperProviderFactory(wrapperProviderFactories);
-            var wrapperProviderContext = new WrapperProviderContext(declaredType, isSerialization: true);
+            var enumerableWrapperProviderFactory = new EnumerableWrapperProviderFactory(
+                wrapperProviderFactories
+            );
+            var wrapperProviderContext = new WrapperProviderContext(
+                declaredType,
+                isSerialization: true
+            );
 
             // Act
-            var wrapperProvider = enumerableWrapperProviderFactory.GetProvider(wrapperProviderContext);
+            var wrapperProvider = enumerableWrapperProviderFactory.GetProvider(
+                wrapperProviderContext
+            );
 
             // Assert
             Assert.NotNull(wrapperProvider);
@@ -74,22 +81,22 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
                 {
                     {
                         typeof(IEnumerable<string>),
-                        (new [] { "value1", "value2" }).AsQueryable(),
+                        (new[] { "value1", "value2" }).AsQueryable(),
                         typeof(DelegatingEnumerable<string, string>)
                     },
                     {
                         typeof(IEnumerable<int>),
-                        (new [] { 10, 20 }).AsQueryable(),
+                        (new[] { 10, 20 }).AsQueryable(),
                         typeof(DelegatingEnumerable<int, int>)
                     },
                     {
                         typeof(IEnumerable<Person>),
-                        (new [] { new Person() { Id =10, Name = "John" } }).AsQueryable(),
+                        (new[] { new Person() { Id = 10, Name = "John" } }).AsQueryable(),
                         typeof(DelegatingEnumerable<Person, Person>)
                     },
                     {
                         typeof(IEnumerable<SerializableError>),
-                        (new [] { serializableError }).AsQueryable(),
+                        (new[] { serializableError }).AsQueryable(),
                         typeof(DelegatingEnumerable<SerializableErrorWrapper, SerializableError>)
                     },
                 };
@@ -99,17 +106,24 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         [Theory]
         [MemberData(nameof(QueryableOfTInterfaceData))]
         public void Creates_WrapperProvider_QueryableOfTInterface(
-                                                                    Type declaredType,
-                                                                    object objectToBeWrapped,
-                                                                    Type expectedWrappingType)
-        {
+            Type declaredType,
+            object objectToBeWrapped,
+            Type expectedWrappingType
+        ) {
             // Arrange
             var wrapperProviderFactories = GetWrapperProviderFactories();
-            var enumerableWrapperProviderFactory = new EnumerableWrapperProviderFactory(wrapperProviderFactories);
-            var wrapperProviderContext = new WrapperProviderContext(declaredType, isSerialization: true);
+            var enumerableWrapperProviderFactory = new EnumerableWrapperProviderFactory(
+                wrapperProviderFactories
+            );
+            var wrapperProviderContext = new WrapperProviderContext(
+                declaredType,
+                isSerialization: true
+            );
 
             // Act
-            var wrapperProvider = enumerableWrapperProviderFactory.GetProvider(wrapperProviderContext);
+            var wrapperProvider = enumerableWrapperProviderFactory.GetProvider(
+                wrapperProviderContext
+            );
 
             // Assert
             Assert.NotNull(wrapperProvider);
@@ -129,22 +143,13 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
                         typeof(string), // 'string' implements IEnumerable<char>
                         "value"
                     },
-                    {
-                        typeof(List<int>),
-                        (new [] { 10, 20 }).ToList()
-                    },
+                    { typeof(List<int>), (new[] { 10, 20 }).ToList() },
                     {
                         typeof(List<Person>),
-                        (new [] { new Person() { Id =10, Name = "John" } }).ToList()
+                        (new[] { new Person() { Id = 10, Name = "John" } }).ToList()
                     },
-                    {
-                        typeof(List<SerializableError>),
-                        (new [] { serializableError }).ToList()
-                    },
-                    {
-                        typeof(PersonList),
-                        new PersonList()
-                    },
+                    { typeof(List<SerializableError>), (new[] { serializableError }).ToList() },
+                    { typeof(PersonList), new PersonList() },
                 };
             }
         }
@@ -152,16 +157,23 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         [Theory]
         [MemberData(nameof(ConcreteEnumerableOfTData))]
         public void DoesNot_CreateWrapperProvider_ForConcrete_EnumerableOfTImplementations(
-                                                                    Type declaredType,
-                                                                    object objectToBeWrapped)
-        {
+            Type declaredType,
+            object objectToBeWrapped
+        ) {
             // Arrange
             var wrapperProviderFactories = GetWrapperProviderFactories();
-            var enumerableWrapperProviderFactory = new EnumerableWrapperProviderFactory(wrapperProviderFactories);
-            var wrapperProviderContext = new WrapperProviderContext(declaredType, isSerialization: true);
+            var enumerableWrapperProviderFactory = new EnumerableWrapperProviderFactory(
+                wrapperProviderFactories
+            );
+            var wrapperProviderContext = new WrapperProviderContext(
+                declaredType,
+                isSerialization: true
+            );
 
             // Act
-            var wrapperProvider = enumerableWrapperProviderFactory.GetProvider(wrapperProviderContext);
+            var wrapperProvider = enumerableWrapperProviderFactory.GetProvider(
+                wrapperProviderContext
+            );
 
             // Assert
             Assert.Null(wrapperProvider);
@@ -170,7 +182,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         private IEnumerable<IWrapperProviderFactory> GetWrapperProviderFactories()
         {
             var wrapperProviderFactories = new List<IWrapperProviderFactory>();
-            wrapperProviderFactories.Add(new EnumerableWrapperProviderFactory(wrapperProviderFactories));
+            wrapperProviderFactories.Add(
+                new EnumerableWrapperProviderFactory(wrapperProviderFactories)
+            );
             wrapperProviderFactories.Add(new SerializableErrorWrapperProviderFactory());
 
             return wrapperProviderFactories;

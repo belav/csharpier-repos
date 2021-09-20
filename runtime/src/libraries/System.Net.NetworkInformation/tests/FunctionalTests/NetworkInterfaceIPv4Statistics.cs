@@ -20,7 +20,7 @@ namespace System.Net.NetworkInformation.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Not all APIs are supported on Linux and OSX
+        [PlatformSpecific(TestPlatforms.Windows)] // Not all APIs are supported on Linux and OSX
         public void BasicTest_GetIPv4InterfaceStatistics_Success()
         {
             // This API is not actually IPv4 specific.
@@ -33,7 +33,9 @@ namespace System.Net.NetworkInformation.Tests
                 _log.WriteLine("BytesSent: " + stats.BytesSent);
                 _log.WriteLine("IncomingPacketsDiscarded: " + stats.IncomingPacketsDiscarded);
                 _log.WriteLine("IncomingPacketsWithErrors: " + stats.IncomingPacketsWithErrors);
-                _log.WriteLine("IncomingUnknownProtocolPackets: " + stats.IncomingUnknownProtocolPackets);
+                _log.WriteLine(
+                    "IncomingUnknownProtocolPackets: " + stats.IncomingUnknownProtocolPackets
+                );
                 _log.WriteLine("NonUnicastPacketsReceived: " + stats.NonUnicastPacketsReceived);
                 _log.WriteLine("NonUnicastPacketsSent: " + stats.NonUnicastPacketsSent);
                 _log.WriteLine("OutgoingPacketsDiscarded: " + stats.OutgoingPacketsDiscarded);
@@ -44,8 +46,11 @@ namespace System.Net.NetworkInformation.Tests
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsSubsystemForLinux))] // https://github.com/dotnet/runtime/issues/20029 and https://github.com/Microsoft/WSL/issues/3561
-        [PlatformSpecific(TestPlatforms.Linux)]  // Some APIs are not supported on Windows and OSX
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsSubsystemForLinux)
+        )] // https://github.com/dotnet/runtime/issues/20029 and https://github.com/Microsoft/WSL/issues/3561
+        [PlatformSpecific(TestPlatforms.Linux)] // Some APIs are not supported on Windows and OSX
         public void BasicTest_GetIPv4InterfaceStatistics_Success_Linux()
         {
             // This API is not actually IPv4 specific.
@@ -58,7 +63,9 @@ namespace System.Net.NetworkInformation.Tests
                 _log.WriteLine("BytesSent: " + stats.BytesSent);
                 _log.WriteLine("IncomingPacketsDiscarded: " + stats.IncomingPacketsDiscarded);
                 _log.WriteLine("IncomingPacketsWithErrors: " + stats.IncomingPacketsWithErrors);
-                Assert.Throws<PlatformNotSupportedException>(() => stats.IncomingUnknownProtocolPackets);
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => stats.IncomingUnknownProtocolPackets
+                );
                 _log.WriteLine("NonUnicastPacketsReceived: " + stats.NonUnicastPacketsReceived);
                 Assert.Throws<PlatformNotSupportedException>(() => stats.NonUnicastPacketsSent);
                 _log.WriteLine("OutgoingPacketsDiscarded: " + stats.OutgoingPacketsDiscarded);
@@ -70,7 +77,7 @@ namespace System.Net.NetworkInformation.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.OSX)]  // Some APIs are not supported on OSX
+        [PlatformSpecific(TestPlatforms.OSX)] // Some APIs are not supported on OSX
         public void BasicTest_GetIPv4InterfaceStatistics_Success_OSX()
         {
             // This API is not actually IPv4 specific.
@@ -83,7 +90,9 @@ namespace System.Net.NetworkInformation.Tests
                 _log.WriteLine("BytesSent: " + stats.BytesSent);
                 _log.WriteLine("IncomingPacketsDiscarded: " + stats.IncomingPacketsDiscarded);
                 _log.WriteLine("IncomingPacketsWithErrors: " + stats.IncomingPacketsWithErrors);
-                _log.WriteLine("IncomingUnknownProtocolPackets: " + stats.IncomingUnknownProtocolPackets);
+                _log.WriteLine(
+                    "IncomingUnknownProtocolPackets: " + stats.IncomingUnknownProtocolPackets
+                );
                 _log.WriteLine("NonUnicastPacketsReceived: " + stats.NonUnicastPacketsReceived);
                 _log.WriteLine("NonUnicastPacketsSent: " + stats.NonUnicastPacketsSent);
                 Assert.Throws<PlatformNotSupportedException>(() => stats.OutgoingPacketsDiscarded);

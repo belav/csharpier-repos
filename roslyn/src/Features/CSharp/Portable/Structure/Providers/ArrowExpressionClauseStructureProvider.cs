@@ -13,21 +13,25 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
-    internal class ArrowExpressionClauseStructureProvider : AbstractSyntaxNodeStructureProvider<ArrowExpressionClauseSyntax>
+    internal class ArrowExpressionClauseStructureProvider
+        : AbstractSyntaxNodeStructureProvider<ArrowExpressionClauseSyntax>
     {
         protected override void CollectBlockSpans(
             ArrowExpressionClauseSyntax node,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             var previousToken = node.ArrowToken.GetPreviousToken();
-            spans.Add(new BlockSpan(
-                isCollapsible: true,
-                textSpan: TextSpan.FromBounds(previousToken.Span.End, node.Parent.Span.End),
-                hintSpan: node.Parent.Span,
-                type: BlockTypes.Nonstructural,
-                autoCollapse: !node.IsParentKind(SyntaxKind.LocalFunctionStatement)));
+            spans.Add(
+                new BlockSpan(
+                    isCollapsible: true,
+                    textSpan: TextSpan.FromBounds(previousToken.Span.End, node.Parent.Span.End),
+                    hintSpan: node.Parent.Span,
+                    type: BlockTypes.Nonstructural,
+                    autoCollapse: !node.IsParentKind(SyntaxKind.LocalFunctionStatement)
+                )
+            );
         }
     }
 }

@@ -27,14 +27,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
     using static SyntaxFactory;
     using static AnalyzedPattern;
 
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UsePatternCombinators), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UsePatternCombinators
+        ),
+        Shared
+    ]
     internal class CSharpUsePatternCombinatorsCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpUsePatternCombinatorsCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpUsePatternCombinatorsCodeFixProvider() { }
 
         private static SyntaxKind MapToSyntaxKind(BinaryOperatorKind kind)
         {
@@ -48,8 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             };
         }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.UsePatternCombinatorsDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.UsePatternCombinatorsDiagnosticId);
 
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
 
@@ -57,25 +65,36 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
         {
             context.RegisterCodeFix(
                 new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics.First(), c)),
-                context.Diagnostics);
+                context.Diagnostics
+            );
             return Task.CompletedTask;
         }
 
         protected override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
-        {
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        ) {
+            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             foreach (var diagnostic in diagnostics)
             {
                 var location = diagnostic.Location;
-                var expression = editor.OriginalRoot.FindNode(location.SourceSpan, getInnermostNodeForTie: true);
+                var expression = editor.OriginalRoot.FindNode(
+                    location.SourceSpan,
+                    getInnermostNodeForTie: true
+                );
                 var operation = semanticModel.GetOperation(expression, cancellationToken);
                 RoslynDebug.AssertNotNull(operation);
                 var pattern = CSharpUsePatternCombinatorsAnalyzer.Analyze(operation);
                 RoslynDebug.AssertNotNull(pattern);
-                var patternSyntax = AsPatternSyntax(pattern).WithAdditionalAnnotations(Formatter.Annotation);
-                editor.ReplaceNode(expression, IsPatternExpression((ExpressionSyntax)pattern.Target.Syntax, patternSyntax));
+                var patternSyntax = AsPatternSyntax(pattern)
+                    .WithAdditionalAnnotations(Formatter.Annotation);
+                editor.ReplaceNode(
+                    expression,
+                    IsPatternExpression((ExpressionSyntax)pattern.Target.Syntax, patternSyntax)
+                );
             }
         }
 
@@ -83,16 +102,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
         {
             return pattern switch
             {
-                Binary p => BinaryPattern(
-                    p.IsDisjunctive ? SyntaxKind.OrPattern : SyntaxKind.AndPattern,
-                    AsPatternSyntax(p.Left).Parenthesize(),
-                    Token(p.Token.LeadingTrivia, p.IsDisjunctive ? SyntaxKind.OrKeyword : SyntaxKind.AndKeyword,
-                        TriviaList(p.Token.GetAllTrailingTrivia())),
-                    AsPatternSyntax(p.Right).Parenthesize()),
+                Binary p
+                  => BinaryPattern(
+                      p.IsDisjunctive ? SyntaxKind.OrPattern : SyntaxKind.AndPattern,
+                      AsPatternSyntax(p.Left).Parenthesize(),
+                      Token(
+                          p.Token.LeadingTrivia,
+                          p.IsDisjunctive ? SyntaxKind.OrKeyword : SyntaxKind.AndKeyword,
+                          TriviaList(p.Token.GetAllTrailingTrivia())
+                      ),
+                      AsPatternSyntax(p.Right).Parenthesize()
+                  ),
                 Constant p => ConstantPattern(AsExpressionSyntax(p.ExpressionSyntax, p)),
                 Source p => p.PatternSyntax,
                 Type p => TypePattern(p.TypeSyntax),
-                Relational p => RelationalPattern(Token(MapToSyntaxKind(p.OperatorKind)), AsExpressionSyntax(p.Value, p)),
+                Relational p
+                  => RelationalPattern(
+                      Token(MapToSyntaxKind(p.OperatorKind)),
+                      AsExpressionSyntax(p.Value, p)
+                  ),
                 Not p => UnaryPattern(AsPatternSyntax(p.Pattern).Parenthesize()),
                 var p => throw ExceptionUtilities.UnexpectedValue(p)
             };
@@ -114,7 +142,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 var governingType = semanticModel.GetTypeInfo(p.Target.Syntax).Type;
                 if (governingType != null && !governingType.Equals(type))
                 {
-                    return CastExpression(governingType.GenerateTypeSyntax(), expr.Parenthesize()).WithAdditionalAnnotations(Simplifier.Annotation);
+                    return CastExpression(governingType.GenerateTypeSyntax(), expr.Parenthesize())
+                        .WithAdditionalAnnotations(Simplifier.Annotation);
                 }
             }
 
@@ -123,10 +152,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
-            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(CSharpAnalyzersResources.Use_pattern_matching, createChangedDocument)
-            {
-            }
+            public MyCodeAction(
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(CSharpAnalyzersResources.Use_pattern_matching, createChangedDocument) { }
 
             internal override CodeActionPriority Priority => CodeActionPriority.Low;
         }

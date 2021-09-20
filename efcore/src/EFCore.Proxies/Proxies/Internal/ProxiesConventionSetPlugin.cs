@@ -41,11 +41,12 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
             IProxyFactory proxyFactory,
             IDbContextOptions options,
             LazyLoaderParameterBindingFactoryDependencies lazyLoaderParameterBindingFactoryDependencies,
-            ProviderConventionSetBuilderDependencies conventionSetBuilderDependencies)
-        {
+            ProviderConventionSetBuilderDependencies conventionSetBuilderDependencies
+        ) {
             _proxyFactory = proxyFactory;
             _options = options;
-            _lazyLoaderParameterBindingFactoryDependencies = lazyLoaderParameterBindingFactoryDependencies;
+            _lazyLoaderParameterBindingFactoryDependencies =
+                lazyLoaderParameterBindingFactoryDependencies;
             _conventionSetBuilderDependencies = conventionSetBuilderDependencies;
         }
 
@@ -62,14 +63,17 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
             ConventionSet.AddAfter(
                 conventionSet.ModelInitializedConventions,
                 new ProxyChangeTrackingConvention(extension),
-                typeof(DbSetFindingConvention));
+                typeof(DbSetFindingConvention)
+            );
 
             conventionSet.ModelFinalizingConventions.Add(
                 new ProxyBindingRewriter(
                     _proxyFactory,
                     extension,
                     _lazyLoaderParameterBindingFactoryDependencies,
-                    _conventionSetBuilderDependencies));
+                    _conventionSetBuilderDependencies
+                )
+            );
 
             return conventionSet;
         }

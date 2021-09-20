@@ -55,8 +55,7 @@ namespace System.Runtime.Intrinsics
         /// <returns><paramref name="vector" /> reinterpreted as a new <see cref="Vector128{Byte}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static Vector128<byte> AsByte<T>(this Vector128<T> vector)
-            where T : struct
+        public static Vector128<byte> AsByte<T>(this Vector128<T> vector) where T : struct
         {
             return vector.As<T, byte>();
         }
@@ -67,8 +66,7 @@ namespace System.Runtime.Intrinsics
         /// <returns><paramref name="vector" /> reinterpreted as a new <see cref="Vector128{Double}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static Vector128<double> AsDouble<T>(this Vector128<T> vector)
-            where T : struct
+        public static Vector128<double> AsDouble<T>(this Vector128<T> vector) where T : struct
         {
             return vector.As<T, double>();
         }
@@ -79,8 +77,7 @@ namespace System.Runtime.Intrinsics
         /// <returns><paramref name="vector" /> reinterpreted as a new <see cref="Vector128{Int16}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static Vector128<short> AsInt16<T>(this Vector128<T> vector)
-            where T : struct
+        public static Vector128<short> AsInt16<T>(this Vector128<T> vector) where T : struct
         {
             return vector.As<T, short>();
         }
@@ -91,8 +88,7 @@ namespace System.Runtime.Intrinsics
         /// <returns><paramref name="vector" /> reinterpreted as a new <see cref="Vector128{Int32}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static Vector128<int> AsInt32<T>(this Vector128<T> vector)
-            where T : struct
+        public static Vector128<int> AsInt32<T>(this Vector128<T> vector) where T : struct
         {
             return vector.As<T, int>();
         }
@@ -103,8 +99,7 @@ namespace System.Runtime.Intrinsics
         /// <returns><paramref name="vector" /> reinterpreted as a new <see cref="Vector128{Int64}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static Vector128<long> AsInt64<T>(this Vector128<T> vector)
-            where T : struct
+        public static Vector128<long> AsInt64<T>(this Vector128<T> vector) where T : struct
         {
             return vector.As<T, long>();
         }
@@ -116,8 +111,7 @@ namespace System.Runtime.Intrinsics
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
         [CLSCompliant(false)]
-        public static Vector128<sbyte> AsSByte<T>(this Vector128<T> vector)
-            where T : struct
+        public static Vector128<sbyte> AsSByte<T>(this Vector128<T> vector) where T : struct
         {
             return vector.As<T, sbyte>();
         }
@@ -128,8 +122,7 @@ namespace System.Runtime.Intrinsics
         /// <returns><paramref name="vector" /> reinterpreted as a new <see cref="Vector128{Single}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static Vector128<float> AsSingle<T>(this Vector128<T> vector)
-            where T : struct
+        public static Vector128<float> AsSingle<T>(this Vector128<T> vector) where T : struct
         {
             return vector.As<T, float>();
         }
@@ -141,8 +134,7 @@ namespace System.Runtime.Intrinsics
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
         [CLSCompliant(false)]
-        public static Vector128<ushort> AsUInt16<T>(this Vector128<T> vector)
-            where T : struct
+        public static Vector128<ushort> AsUInt16<T>(this Vector128<T> vector) where T : struct
         {
             return vector.As<T, ushort>();
         }
@@ -154,8 +146,7 @@ namespace System.Runtime.Intrinsics
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
         [CLSCompliant(false)]
-        public static Vector128<uint> AsUInt32<T>(this Vector128<T> vector)
-            where T : struct
+        public static Vector128<uint> AsUInt32<T>(this Vector128<T> vector) where T : struct
         {
             return vector.As<T, uint>();
         }
@@ -167,8 +158,7 @@ namespace System.Runtime.Intrinsics
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
         [CLSCompliant(false)]
-        public static Vector128<ulong> AsUInt64<T>(this Vector128<T> vector)
-            where T : struct
+        public static Vector128<ulong> AsUInt64<T>(this Vector128<T> vector) where T : struct
         {
             return vector.As<T, ulong>();
         }
@@ -204,8 +194,7 @@ namespace System.Runtime.Intrinsics
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector128{T}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="value" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static Vector128<T> AsVector128<T>(this Vector<T> value)
-            where T : struct
+        public static Vector128<T> AsVector128<T>(this Vector<T> value) where T : struct
         {
             Debug.Assert(Vector<T>.Count >= Vector128<T>.Count);
             ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
@@ -243,8 +232,7 @@ namespace System.Runtime.Intrinsics
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector{T}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="value" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static Vector<T> AsVector<T>(this Vector128<T> value)
-            where T : struct
+        public static Vector<T> AsVector<T>(this Vector128<T> value) where T : struct
         {
             Debug.Assert(Vector<T>.Count >= Vector128<T>.Count);
             ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
@@ -270,25 +258,25 @@ namespace System.Runtime.Intrinsics
 
             static Vector128<byte> SoftwareFallback(byte value)
             {
-                byte* pResult = stackalloc byte[16]
-                {
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                };
+                byte* pResult =
+                    stackalloc byte[16] {
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                    };
 
                 return Unsafe.AsRef<Vector128<byte>>(pResult);
             }
@@ -310,11 +298,7 @@ namespace System.Runtime.Intrinsics
 
             static Vector128<double> SoftwareFallback(double value)
             {
-                double* pResult = stackalloc double[2]
-                {
-                    value,
-                    value,
-                };
+                double* pResult = stackalloc double[2] { value, value, };
 
                 return Unsafe.AsRef<Vector128<double>>(pResult);
             }
@@ -336,17 +320,8 @@ namespace System.Runtime.Intrinsics
 
             static Vector128<short> SoftwareFallback(short value)
             {
-                short* pResult = stackalloc short[8]
-                {
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                };
+                short* pResult =
+                    stackalloc short[8] { value, value, value, value, value, value, value, value, };
 
                 return Unsafe.AsRef<Vector128<short>>(pResult);
             }
@@ -368,13 +343,7 @@ namespace System.Runtime.Intrinsics
 
             static Vector128<int> SoftwareFallback(int value)
             {
-                int* pResult = stackalloc int[4]
-                {
-                    value,
-                    value,
-                    value,
-                    value,
-                };
+                int* pResult = stackalloc int[4] { value, value, value, value, };
 
                 return Unsafe.AsRef<Vector128<int>>(pResult);
             }
@@ -396,11 +365,7 @@ namespace System.Runtime.Intrinsics
 
             static Vector128<long> SoftwareFallback(long value)
             {
-                long* pResult = stackalloc long[2]
-                {
-                    value,
-                    value,
-                };
+                long* pResult = stackalloc long[2] { value, value, };
 
                 return Unsafe.AsRef<Vector128<long>>(pResult);
             }
@@ -423,25 +388,25 @@ namespace System.Runtime.Intrinsics
 
             static Vector128<sbyte> SoftwareFallback(sbyte value)
             {
-                sbyte* pResult = stackalloc sbyte[16]
-                {
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                };
+                sbyte* pResult =
+                    stackalloc sbyte[16] {
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                    };
 
                 return Unsafe.AsRef<Vector128<sbyte>>(pResult);
             }
@@ -463,13 +428,7 @@ namespace System.Runtime.Intrinsics
 
             static Vector128<float> SoftwareFallback(float value)
             {
-                float* pResult = stackalloc float[4]
-                {
-                    value,
-                    value,
-                    value,
-                    value,
-                };
+                float* pResult = stackalloc float[4] { value, value, value, value, };
 
                 return Unsafe.AsRef<Vector128<float>>(pResult);
             }
@@ -492,17 +451,17 @@ namespace System.Runtime.Intrinsics
 
             static Vector128<ushort> SoftwareFallback(ushort value)
             {
-                ushort* pResult = stackalloc ushort[8]
-                {
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                    value,
-                };
+                ushort* pResult =
+                    stackalloc ushort[8] {
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                        value,
+                    };
 
                 return Unsafe.AsRef<Vector128<ushort>>(pResult);
             }
@@ -525,13 +484,7 @@ namespace System.Runtime.Intrinsics
 
             static Vector128<uint> SoftwareFallback(uint value)
             {
-                uint* pResult = stackalloc uint[4]
-                {
-                    value,
-                    value,
-                    value,
-                    value,
-                };
+                uint* pResult = stackalloc uint[4] { value, value, value, value, };
 
                 return Unsafe.AsRef<Vector128<uint>>(pResult);
             }
@@ -554,11 +507,7 @@ namespace System.Runtime.Intrinsics
 
             static Vector128<ulong> SoftwareFallback(ulong value)
             {
-                ulong* pResult = stackalloc ulong[2]
-                {
-                    value,
-                    value,
-                };
+                ulong* pResult = stackalloc ulong[2] { value, value, };
 
                 return Unsafe.AsRef<Vector128<ulong>>(pResult);
             }
@@ -584,36 +533,85 @@ namespace System.Runtime.Intrinsics
         /// <remarks>On x86, this method corresponds to __m128i _mm_setr_epi8</remarks>
         /// <returns>A new <see cref="Vector128{Byte}" /> with each element initialized to corresponding specified value.</returns>
         [Intrinsic]
-        public static unsafe Vector128<byte> Create(byte e0, byte e1, byte e2, byte e3, byte e4, byte e5, byte e6, byte e7, byte e8, byte e9, byte e10, byte e11, byte e12, byte e13, byte e14, byte e15)
-        {
+        public static unsafe Vector128<byte> Create(
+            byte e0,
+            byte e1,
+            byte e2,
+            byte e3,
+            byte e4,
+            byte e5,
+            byte e6,
+            byte e7,
+            byte e8,
+            byte e9,
+            byte e10,
+            byte e11,
+            byte e12,
+            byte e13,
+            byte e14,
+            byte e15
+        ) {
             if (Sse2.IsSupported || AdvSimd.IsSupported)
             {
                 return Create(e0, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15);
             }
 
-            return SoftwareFallback(e0, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15);
+            return SoftwareFallback(
+                e0,
+                e1,
+                e2,
+                e3,
+                e4,
+                e5,
+                e6,
+                e7,
+                e8,
+                e9,
+                e10,
+                e11,
+                e12,
+                e13,
+                e14,
+                e15
+            );
 
-            static Vector128<byte> SoftwareFallback(byte e0, byte e1, byte e2, byte e3, byte e4, byte e5, byte e6, byte e7, byte e8, byte e9, byte e10, byte e11, byte e12, byte e13, byte e14, byte e15)
-            {
-                byte* pResult = stackalloc byte[16]
-                {
-                    e0,
-                    e1,
-                    e2,
-                    e3,
-                    e4,
-                    e5,
-                    e6,
-                    e7,
-                    e8,
-                    e9,
-                    e10,
-                    e11,
-                    e12,
-                    e13,
-                    e14,
-                    e15,
-                };
+            static Vector128<byte> SoftwareFallback(
+                byte e0,
+                byte e1,
+                byte e2,
+                byte e3,
+                byte e4,
+                byte e5,
+                byte e6,
+                byte e7,
+                byte e8,
+                byte e9,
+                byte e10,
+                byte e11,
+                byte e12,
+                byte e13,
+                byte e14,
+                byte e15
+            ) {
+                byte* pResult =
+                    stackalloc byte[16] {
+                        e0,
+                        e1,
+                        e2,
+                        e3,
+                        e4,
+                        e5,
+                        e6,
+                        e7,
+                        e8,
+                        e9,
+                        e10,
+                        e11,
+                        e12,
+                        e13,
+                        e14,
+                        e15,
+                    };
 
                 return Unsafe.AsRef<Vector128<byte>>(pResult);
             }
@@ -636,11 +634,7 @@ namespace System.Runtime.Intrinsics
 
             static Vector128<double> SoftwareFallback(double e0, double e1)
             {
-                double* pResult = stackalloc double[2]
-                {
-                    e0,
-                    e1,
-                };
+                double* pResult = stackalloc double[2] { e0, e1, };
 
                 return Unsafe.AsRef<Vector128<double>>(pResult);
             }
@@ -658,8 +652,16 @@ namespace System.Runtime.Intrinsics
         /// <remarks>On x86, this method corresponds to __m128i _mm_setr_epi16</remarks>
         /// <returns>A new <see cref="Vector128{Int16}" /> with each element initialized to corresponding specified value.</returns>
         [Intrinsic]
-        public static unsafe Vector128<short> Create(short e0, short e1, short e2, short e3, short e4, short e5, short e6, short e7)
-        {
+        public static unsafe Vector128<short> Create(
+            short e0,
+            short e1,
+            short e2,
+            short e3,
+            short e4,
+            short e5,
+            short e6,
+            short e7
+        ) {
             if (Sse2.IsSupported || AdvSimd.IsSupported)
             {
                 return Create(e0, e1, e2, e3, e4, e5, e6, e7);
@@ -667,19 +669,17 @@ namespace System.Runtime.Intrinsics
 
             return SoftwareFallback(e0, e1, e2, e3, e4, e5, e6, e7);
 
-            static Vector128<short> SoftwareFallback(short e0, short e1, short e2, short e3, short e4, short e5, short e6, short e7)
-            {
-                short* pResult = stackalloc short[8]
-                {
-                    e0,
-                    e1,
-                    e2,
-                    e3,
-                    e4,
-                    e5,
-                    e6,
-                    e7,
-                };
+            static Vector128<short> SoftwareFallback(
+                short e0,
+                short e1,
+                short e2,
+                short e3,
+                short e4,
+                short e5,
+                short e6,
+                short e7
+            ) {
+                short* pResult = stackalloc short[8] { e0, e1, e2, e3, e4, e5, e6, e7, };
 
                 return Unsafe.AsRef<Vector128<short>>(pResult);
             }
@@ -704,13 +704,7 @@ namespace System.Runtime.Intrinsics
 
             static Vector128<int> SoftwareFallback(int e0, int e1, int e2, int e3)
             {
-                int* pResult = stackalloc int[4]
-                {
-                    e0,
-                    e1,
-                    e2,
-                    e3,
-                };
+                int* pResult = stackalloc int[4] { e0, e1, e2, e3, };
 
                 return Unsafe.AsRef<Vector128<int>>(pResult);
             }
@@ -733,11 +727,7 @@ namespace System.Runtime.Intrinsics
 
             static Vector128<long> SoftwareFallback(long e0, long e1)
             {
-                long* pResult = stackalloc long[2]
-                {
-                    e0,
-                    e1,
-                };
+                long* pResult = stackalloc long[2] { e0, e1, };
 
                 return Unsafe.AsRef<Vector128<long>>(pResult);
             }
@@ -764,36 +754,85 @@ namespace System.Runtime.Intrinsics
         /// <returns>A new <see cref="Vector128{SByte}" /> with each element initialized to corresponding specified value.</returns>
         [Intrinsic]
         [CLSCompliant(false)]
-        public static unsafe Vector128<sbyte> Create(sbyte e0, sbyte e1, sbyte e2, sbyte e3, sbyte e4, sbyte e5, sbyte e6, sbyte e7, sbyte e8, sbyte e9, sbyte e10, sbyte e11, sbyte e12, sbyte e13, sbyte e14, sbyte e15)
-        {
+        public static unsafe Vector128<sbyte> Create(
+            sbyte e0,
+            sbyte e1,
+            sbyte e2,
+            sbyte e3,
+            sbyte e4,
+            sbyte e5,
+            sbyte e6,
+            sbyte e7,
+            sbyte e8,
+            sbyte e9,
+            sbyte e10,
+            sbyte e11,
+            sbyte e12,
+            sbyte e13,
+            sbyte e14,
+            sbyte e15
+        ) {
             if (Sse2.IsSupported || AdvSimd.IsSupported)
             {
                 return Create(e0, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15);
             }
 
-            return SoftwareFallback(e0, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15);
+            return SoftwareFallback(
+                e0,
+                e1,
+                e2,
+                e3,
+                e4,
+                e5,
+                e6,
+                e7,
+                e8,
+                e9,
+                e10,
+                e11,
+                e12,
+                e13,
+                e14,
+                e15
+            );
 
-            static Vector128<sbyte> SoftwareFallback(sbyte e0, sbyte e1, sbyte e2, sbyte e3, sbyte e4, sbyte e5, sbyte e6, sbyte e7, sbyte e8, sbyte e9, sbyte e10, sbyte e11, sbyte e12, sbyte e13, sbyte e14, sbyte e15)
-            {
-                sbyte* pResult = stackalloc sbyte[16]
-                {
-                    e0,
-                    e1,
-                    e2,
-                    e3,
-                    e4,
-                    e5,
-                    e6,
-                    e7,
-                    e8,
-                    e9,
-                    e10,
-                    e11,
-                    e12,
-                    e13,
-                    e14,
-                    e15,
-                };
+            static Vector128<sbyte> SoftwareFallback(
+                sbyte e0,
+                sbyte e1,
+                sbyte e2,
+                sbyte e3,
+                sbyte e4,
+                sbyte e5,
+                sbyte e6,
+                sbyte e7,
+                sbyte e8,
+                sbyte e9,
+                sbyte e10,
+                sbyte e11,
+                sbyte e12,
+                sbyte e13,
+                sbyte e14,
+                sbyte e15
+            ) {
+                sbyte* pResult =
+                    stackalloc sbyte[16] {
+                        e0,
+                        e1,
+                        e2,
+                        e3,
+                        e4,
+                        e5,
+                        e6,
+                        e7,
+                        e8,
+                        e9,
+                        e10,
+                        e11,
+                        e12,
+                        e13,
+                        e14,
+                        e15,
+                    };
 
                 return Unsafe.AsRef<Vector128<sbyte>>(pResult);
             }
@@ -818,13 +857,7 @@ namespace System.Runtime.Intrinsics
 
             static Vector128<float> SoftwareFallback(float e0, float e1, float e2, float e3)
             {
-                float* pResult = stackalloc float[4]
-                {
-                    e0,
-                    e1,
-                    e2,
-                    e3,
-                };
+                float* pResult = stackalloc float[4] { e0, e1, e2, e3, };
 
                 return Unsafe.AsRef<Vector128<float>>(pResult);
             }
@@ -843,8 +876,16 @@ namespace System.Runtime.Intrinsics
         /// <returns>A new <see cref="Vector128{UInt16}" /> with each element initialized to corresponding specified value.</returns>
         [Intrinsic]
         [CLSCompliant(false)]
-        public static unsafe Vector128<ushort> Create(ushort e0, ushort e1, ushort e2, ushort e3, ushort e4, ushort e5, ushort e6, ushort e7)
-        {
+        public static unsafe Vector128<ushort> Create(
+            ushort e0,
+            ushort e1,
+            ushort e2,
+            ushort e3,
+            ushort e4,
+            ushort e5,
+            ushort e6,
+            ushort e7
+        ) {
             if (Sse2.IsSupported || AdvSimd.IsSupported)
             {
                 return Create(e0, e1, e2, e3, e4, e5, e6, e7);
@@ -852,19 +893,17 @@ namespace System.Runtime.Intrinsics
 
             return SoftwareFallback(e0, e1, e2, e3, e4, e5, e6, e7);
 
-            static Vector128<ushort> SoftwareFallback(ushort e0, ushort e1, ushort e2, ushort e3, ushort e4, ushort e5, ushort e6, ushort e7)
-            {
-                ushort* pResult = stackalloc ushort[8]
-                {
-                    e0,
-                    e1,
-                    e2,
-                    e3,
-                    e4,
-                    e5,
-                    e6,
-                    e7,
-                };
+            static Vector128<ushort> SoftwareFallback(
+                ushort e0,
+                ushort e1,
+                ushort e2,
+                ushort e3,
+                ushort e4,
+                ushort e5,
+                ushort e6,
+                ushort e7
+            ) {
+                ushort* pResult = stackalloc ushort[8] { e0, e1, e2, e3, e4, e5, e6, e7, };
 
                 return Unsafe.AsRef<Vector128<ushort>>(pResult);
             }
@@ -890,13 +929,7 @@ namespace System.Runtime.Intrinsics
 
             static Vector128<uint> SoftwareFallback(uint e0, uint e1, uint e2, uint e3)
             {
-                uint* pResult = stackalloc uint[4]
-                {
-                    e0,
-                    e1,
-                    e2,
-                    e3,
-                };
+                uint* pResult = stackalloc uint[4] { e0, e1, e2, e3, };
 
                 return Unsafe.AsRef<Vector128<uint>>(pResult);
             }
@@ -920,11 +953,7 @@ namespace System.Runtime.Intrinsics
 
             static Vector128<ulong> SoftwareFallback(ulong e0, ulong e1)
             {
-                ulong* pResult = stackalloc ulong[2]
-                {
-                    e0,
-                    e1,
-                };
+                ulong* pResult = stackalloc ulong[2] { e0, e1, };
 
                 return Unsafe.AsRef<Vector128<ulong>>(pResult);
             }
@@ -948,7 +977,9 @@ namespace System.Runtime.Intrinsics
             {
                 Vector128<byte> result128 = Vector128<byte>.Zero;
 
-                ref Vector64<byte> result64 = ref Unsafe.As<Vector128<byte>, Vector64<byte>>(ref result128);
+                ref Vector64<byte> result64 = ref Unsafe.As<Vector128<byte>, Vector64<byte>>(
+                    ref result128
+                );
                 result64 = lower;
                 Unsafe.Add(ref result64, 1) = upper;
 
@@ -961,8 +992,10 @@ namespace System.Runtime.Intrinsics
         /// <param name="upper">The value that the upper 64-bits will be initialized to.</param>
         /// <returns>A new <see cref="Vector128{Double}" /> initialized from <paramref name="lower" /> and <paramref name="upper" />.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe Vector128<double> Create(Vector64<double> lower, Vector64<double> upper)
-        {
+        public static unsafe Vector128<double> Create(
+            Vector64<double> lower,
+            Vector64<double> upper
+        ) {
             if (AdvSimd.IsSupported)
             {
                 return lower.ToVector128Unsafe().WithUpper(upper);
@@ -970,11 +1003,15 @@ namespace System.Runtime.Intrinsics
 
             return SoftwareFallback(lower, upper);
 
-            static Vector128<double> SoftwareFallback (Vector64<double> lower, Vector64<double> upper)
-            {
+            static Vector128<double> SoftwareFallback(
+                Vector64<double> lower,
+                Vector64<double> upper
+            ) {
                 Vector128<double> result128 = Vector128<double>.Zero;
 
-                ref Vector64<double> result64 = ref Unsafe.As<Vector128<double>, Vector64<double>>(ref result128);
+                ref Vector64<double> result64 = ref Unsafe.As<Vector128<double>, Vector64<double>>(
+                    ref result128
+                );
                 result64 = lower;
                 Unsafe.Add(ref result64, 1) = upper;
 
@@ -1000,7 +1037,9 @@ namespace System.Runtime.Intrinsics
             {
                 Vector128<short> result128 = Vector128<short>.Zero;
 
-                ref Vector64<short> result64 = ref Unsafe.As<Vector128<short>, Vector64<short>>(ref result128);
+                ref Vector64<short> result64 = ref Unsafe.As<Vector128<short>, Vector64<short>>(
+                    ref result128
+                );
                 result64 = lower;
                 Unsafe.Add(ref result64, 1) = upper;
 
@@ -1027,7 +1066,9 @@ namespace System.Runtime.Intrinsics
             {
                 Vector128<int> result128 = Vector128<int>.Zero;
 
-                ref Vector64<int> result64 = ref Unsafe.As<Vector128<int>, Vector64<int>>(ref result128);
+                ref Vector64<int> result64 = ref Unsafe.As<Vector128<int>, Vector64<int>>(
+                    ref result128
+                );
                 result64 = lower;
                 Unsafe.Add(ref result64, 1) = upper;
 
@@ -1053,7 +1094,9 @@ namespace System.Runtime.Intrinsics
             {
                 Vector128<long> result128 = Vector128<long>.Zero;
 
-                ref Vector64<long> result64 = ref Unsafe.As<Vector128<long>, Vector64<long>>(ref result128);
+                ref Vector64<long> result64 = ref Unsafe.As<Vector128<long>, Vector64<long>>(
+                    ref result128
+                );
                 result64 = lower;
                 Unsafe.Add(ref result64, 1) = upper;
 
@@ -1080,7 +1123,9 @@ namespace System.Runtime.Intrinsics
             {
                 Vector128<sbyte> result128 = Vector128<sbyte>.Zero;
 
-                ref Vector64<sbyte> result64 = ref Unsafe.As<Vector128<sbyte>, Vector64<sbyte>>(ref result128);
+                ref Vector64<sbyte> result64 = ref Unsafe.As<Vector128<sbyte>, Vector64<sbyte>>(
+                    ref result128
+                );
                 result64 = lower;
                 Unsafe.Add(ref result64, 1) = upper;
 
@@ -1106,7 +1151,9 @@ namespace System.Runtime.Intrinsics
             {
                 Vector128<float> result128 = Vector128<float>.Zero;
 
-                ref Vector64<float> result64 = ref Unsafe.As<Vector128<float>, Vector64<float>>(ref result128);
+                ref Vector64<float> result64 = ref Unsafe.As<Vector128<float>, Vector64<float>>(
+                    ref result128
+                );
                 result64 = lower;
                 Unsafe.Add(ref result64, 1) = upper;
 
@@ -1120,8 +1167,10 @@ namespace System.Runtime.Intrinsics
         /// <returns>A new <see cref="Vector128{UInt16}" /> initialized from <paramref name="lower" /> and <paramref name="upper" />.</returns>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe Vector128<ushort> Create(Vector64<ushort> lower, Vector64<ushort> upper)
-        {
+        public static unsafe Vector128<ushort> Create(
+            Vector64<ushort> lower,
+            Vector64<ushort> upper
+        ) {
             if (AdvSimd.IsSupported)
             {
                 return lower.ToVector128Unsafe().WithUpper(upper);
@@ -1129,11 +1178,15 @@ namespace System.Runtime.Intrinsics
 
             return SoftwareFallback(lower, upper);
 
-            static Vector128<ushort> SoftwareFallback(Vector64<ushort> lower, Vector64<ushort> upper)
-            {
+            static Vector128<ushort> SoftwareFallback(
+                Vector64<ushort> lower,
+                Vector64<ushort> upper
+            ) {
                 Vector128<ushort> result128 = Vector128<ushort>.Zero;
 
-                ref Vector64<ushort> result64 = ref Unsafe.As<Vector128<ushort>, Vector64<ushort>>(ref result128);
+                ref Vector64<ushort> result64 = ref Unsafe.As<Vector128<ushort>, Vector64<ushort>>(
+                    ref result128
+                );
                 result64 = lower;
                 Unsafe.Add(ref result64, 1) = upper;
 
@@ -1161,7 +1214,9 @@ namespace System.Runtime.Intrinsics
             {
                 Vector128<uint> result128 = Vector128<uint>.Zero;
 
-                ref Vector64<uint> result64 = ref Unsafe.As<Vector128<uint>, Vector64<uint>>(ref result128);
+                ref Vector64<uint> result64 = ref Unsafe.As<Vector128<uint>, Vector64<uint>>(
+                    ref result128
+                );
                 result64 = lower;
                 Unsafe.Add(ref result64, 1) = upper;
 
@@ -1188,7 +1243,9 @@ namespace System.Runtime.Intrinsics
             {
                 Vector128<ulong> result128 = Vector128<ulong>.Zero;
 
-                ref Vector64<ulong> result64 = ref Unsafe.As<Vector128<ulong>, Vector64<ulong>>(ref result128);
+                ref Vector64<ulong> result64 = ref Unsafe.As<Vector128<ulong>, Vector64<ulong>>(
+                    ref result128
+                );
                 result64 = lower;
                 Unsafe.Add(ref result64, 1) = upper;
 
@@ -1619,8 +1676,7 @@ namespace System.Runtime.Intrinsics
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="index" /> was less than zero or greater than the number of elements.</exception>
         [Intrinsic]
-        public static T GetElement<T>(this Vector128<T> vector, int index)
-            where T : struct
+        public static T GetElement<T>(this Vector128<T> vector, int index) where T : struct
         {
             ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
 
@@ -1664,8 +1720,7 @@ namespace System.Runtime.Intrinsics
         /// <returns>The value of the lower 64-bits as a new <see cref="Vector64{T}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static Vector64<T> GetLower<T>(this Vector128<T> vector)
-            where T : struct
+        public static Vector64<T> GetLower<T>(this Vector128<T> vector) where T : struct
         {
             ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
             return Unsafe.As<Vector128<T>, Vector64<T>>(ref vector);
@@ -1704,8 +1759,7 @@ namespace System.Runtime.Intrinsics
         /// <returns>The value of the upper 64-bits as a new <see cref="Vector64{T}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static Vector64<T> GetUpper<T>(this Vector128<T> vector)
-            where T : struct
+        public static Vector64<T> GetUpper<T>(this Vector128<T> vector) where T : struct
         {
             ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
 
@@ -1747,8 +1801,7 @@ namespace System.Runtime.Intrinsics
         /// <returns>A scalar <typeparamref name="T" /> containing the value of the first element.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static T ToScalar<T>(this Vector128<T> vector)
-            where T : struct
+        public static T ToScalar<T>(this Vector128<T> vector) where T : struct
         {
             ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
             return Unsafe.As<Vector128<T>, T>(ref vector);
@@ -1760,8 +1813,7 @@ namespace System.Runtime.Intrinsics
         /// <returns>A new <see cref="Vector256{T}" /> with the lower 128-bits set to the value of <paramref name="vector" /> and the upper 128-bits initialized to zero.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="vector" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static Vector256<T> ToVector256<T>(this Vector128<T> vector)
-            where T : struct
+        public static Vector256<T> ToVector256<T>(this Vector128<T> vector) where T : struct
         {
             ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
 

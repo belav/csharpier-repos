@@ -20,10 +20,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData(long.MinValue)]
         public void MaxResponseBufferSizeInvalid(long value)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-            {
-                (new KestrelServerLimits()).MaxResponseBufferSize = value;
-            });
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                {
+                    (new KestrelServerLimits()).MaxResponseBufferSize = value;
+                }
+            );
         }
 
         [Theory]
@@ -49,10 +51,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData(0)]
         public void MaxRequestBufferSizeInvalid(int value)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-            {
-                (new KestrelServerLimits()).MaxRequestBufferSize = value;
-            });
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                {
+                    (new KestrelServerLimits()).MaxRequestBufferSize = value;
+                }
+            );
         }
 
         [Theory]
@@ -77,10 +81,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData(0)]
         public void MaxRequestLineSizeInvalid(int value)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-            {
-                (new KestrelServerLimits()).MaxRequestLineSize = value;
-            });
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                {
+                    (new KestrelServerLimits()).MaxRequestLineSize = value;
+                }
+            );
         }
 
         [Theory]
@@ -105,7 +111,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData(0)]
         public void MaxRequestHeadersTotalSizeInvalid(int value)
         {
-            var ex = Assert.Throws<ArgumentOutOfRangeException>(() => new KestrelServerLimits().MaxRequestHeadersTotalSize = value);
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(
+                () => new KestrelServerLimits().MaxRequestHeadersTotalSize = value
+            );
             Assert.StartsWith(CoreStrings.PositiveNumberRequired, ex.Message);
         }
 
@@ -131,10 +139,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData(0)]
         public void MaxRequestHeaderCountInvalid(int value)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-            {
-                (new KestrelServerLimits()).MaxRequestHeaderCount = value;
-            });
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                {
+                    (new KestrelServerLimits()).MaxRequestHeaderCount = value;
+                }
+            );
         }
 
         [Theory]
@@ -157,20 +167,31 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [MemberData(nameof(TimeoutValidData))]
         public void KeepAliveTimeoutValid(TimeSpan value)
         {
-            Assert.Equal(value, new KestrelServerLimits { KeepAliveTimeout = value }.KeepAliveTimeout);
+            Assert.Equal(
+                value,
+                new KestrelServerLimits { KeepAliveTimeout = value }.KeepAliveTimeout
+            );
         }
 
         [Fact]
         public void KeepAliveTimeoutCanBeSetToInfinite()
         {
-            Assert.Equal(TimeSpan.MaxValue, new KestrelServerLimits { KeepAliveTimeout = Timeout.InfiniteTimeSpan }.KeepAliveTimeout);
+            Assert.Equal(
+                TimeSpan.MaxValue,
+                new KestrelServerLimits
+                {
+                    KeepAliveTimeout = Timeout.InfiniteTimeSpan
+                }.KeepAliveTimeout
+            );
         }
 
         [Theory]
         [MemberData(nameof(TimeoutInvalidData))]
         public void KeepAliveTimeoutInvalid(TimeSpan value)
         {
-            var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new KestrelServerLimits { KeepAliveTimeout = value });
+            var exception = Assert.Throws<ArgumentOutOfRangeException>(
+                () => new KestrelServerLimits { KeepAliveTimeout = value }
+            );
 
             Assert.Equal("value", exception.ParamName);
             Assert.StartsWith(CoreStrings.PositiveTimeSpanRequired, exception.Message);
@@ -186,20 +207,31 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [MemberData(nameof(TimeoutValidData))]
         public void RequestHeadersTimeoutValid(TimeSpan value)
         {
-            Assert.Equal(value, new KestrelServerLimits { RequestHeadersTimeout = value }.RequestHeadersTimeout);
+            Assert.Equal(
+                value,
+                new KestrelServerLimits { RequestHeadersTimeout = value }.RequestHeadersTimeout
+            );
         }
 
         [Fact]
         public void RequestHeadersTimeoutCanBeSetToInfinite()
         {
-            Assert.Equal(TimeSpan.MaxValue, new KestrelServerLimits { RequestHeadersTimeout = Timeout.InfiniteTimeSpan }.RequestHeadersTimeout);
+            Assert.Equal(
+                TimeSpan.MaxValue,
+                new KestrelServerLimits
+                {
+                    RequestHeadersTimeout = Timeout.InfiniteTimeSpan
+                }.RequestHeadersTimeout
+            );
         }
 
         [Theory]
         [MemberData(nameof(TimeoutInvalidData))]
         public void RequestHeadersTimeoutInvalid(TimeSpan value)
         {
-            var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new KestrelServerLimits { RequestHeadersTimeout = value });
+            var exception = Assert.Throws<ArgumentOutOfRangeException>(
+                () => new KestrelServerLimits { RequestHeadersTimeout = value }
+            );
 
             Assert.Equal("value", exception.ParamName);
             Assert.StartsWith(CoreStrings.PositiveTimeSpanRequired, exception.Message);
@@ -218,10 +250,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData(long.MaxValue)]
         public void MaxConnectionsValid(long? value)
         {
-            var limits = new KestrelServerLimits
-            {
-                MaxConcurrentConnections = value
-            };
+            var limits = new KestrelServerLimits { MaxConcurrentConnections = value };
 
             Assert.Equal(value, limits.MaxConcurrentConnections);
         }
@@ -232,7 +261,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData(0)]
         public void MaxConnectionsInvalid(long value)
         {
-            var ex = Assert.Throws<ArgumentOutOfRangeException>(() => new KestrelServerLimits().MaxConcurrentConnections = value);
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(
+                () => new KestrelServerLimits().MaxConcurrentConnections = value
+            );
             Assert.StartsWith(CoreStrings.PositiveNumberOrNullRequired, ex.Message);
         }
 
@@ -243,21 +274,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData(long.MaxValue)]
         public void MaxUpgradedConnectionsValid(long? value)
         {
-            var limits = new KestrelServerLimits
-            {
-                MaxConcurrentUpgradedConnections = value
-            };
+            var limits = new KestrelServerLimits { MaxConcurrentUpgradedConnections = value };
 
             Assert.Equal(value, limits.MaxConcurrentUpgradedConnections);
         }
-
 
         [Theory]
         [InlineData(long.MinValue)]
         [InlineData(-1)]
         public void MaxUpgradedConnectionsInvalid(long value)
         {
-            var ex = Assert.Throws<ArgumentOutOfRangeException>(() => new KestrelServerLimits().MaxConcurrentUpgradedConnections = value);
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(
+                () => new KestrelServerLimits().MaxConcurrentUpgradedConnections = value
+            );
             Assert.StartsWith(CoreStrings.NonNegativeNumberOrNullRequired, ex.Message);
         }
 
@@ -275,10 +304,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData(long.MaxValue)]
         public void MaxRequestBodySizeValid(long? value)
         {
-            var limits = new KestrelServerLimits
-            {
-                MaxRequestBodySize = value
-            };
+            var limits = new KestrelServerLimits { MaxRequestBodySize = value };
 
             Assert.Equal(value, limits.MaxRequestBodySize);
         }
@@ -288,7 +314,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData(-1)]
         public void MaxRequestBodySizeInvalid(long value)
         {
-            var ex = Assert.Throws<ArgumentOutOfRangeException>(() => new KestrelServerLimits().MaxRequestBodySize = value);
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(
+                () => new KestrelServerLimits().MaxRequestBodySize = value
+            );
             Assert.StartsWith(CoreStrings.NonNegativeNumberOrNullRequired, ex.Message);
         }
 
@@ -297,7 +325,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         {
             Assert.NotNull(new KestrelServerLimits().MinRequestBodyDataRate);
             Assert.Equal(240, new KestrelServerLimits().MinRequestBodyDataRate.BytesPerSecond);
-            Assert.Equal(TimeSpan.FromSeconds(5), new KestrelServerLimits().MinRequestBodyDataRate.GracePeriod);
+            Assert.Equal(
+                TimeSpan.FromSeconds(5),
+                new KestrelServerLimits().MinRequestBodyDataRate.GracePeriod
+            );
         }
 
         [Fact]
@@ -305,7 +336,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         {
             Assert.NotNull(new KestrelServerLimits().MinResponseDataRate);
             Assert.Equal(240, new KestrelServerLimits().MinResponseDataRate.BytesPerSecond);
-            Assert.Equal(TimeSpan.FromSeconds(5), new KestrelServerLimits().MinResponseDataRate.GracePeriod);
+            Assert.Equal(
+                TimeSpan.FromSeconds(5),
+                new KestrelServerLimits().MinResponseDataRate.GracePeriod
+            );
         }
 
         [Fact]
@@ -320,7 +354,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData(-1)]
         public void Http2MaxFrameSizeInvalid(int value)
         {
-            var ex = Assert.Throws<ArgumentOutOfRangeException>(() => new KestrelServerLimits().Http2.MaxFrameSize = value);
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(
+                () => new KestrelServerLimits().Http2.MaxFrameSize = value
+            );
             Assert.Contains("A value between", ex.Message);
         }
 
@@ -335,7 +371,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData(-1)]
         public void Http2HeaderTableSizeInvalid(int value)
         {
-            var ex = Assert.Throws<ArgumentOutOfRangeException>(() => new KestrelServerLimits().Http2.HeaderTableSize = value);
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(
+                () => new KestrelServerLimits().Http2.HeaderTableSize = value
+            );
             Assert.StartsWith(CoreStrings.GreaterThanOrEqualToZeroRequired, ex.Message);
         }
 
@@ -351,21 +389,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData(0)]
         public void Http2MaxRequestHeaderFieldSizeInvalid(int value)
         {
-            var ex = Assert.Throws<ArgumentOutOfRangeException>(() => new KestrelServerLimits().Http2.MaxRequestHeaderFieldSize = value);
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(
+                () => new KestrelServerLimits().Http2.MaxRequestHeaderFieldSize = value
+            );
             Assert.StartsWith(CoreStrings.GreaterThanZeroRequired, ex.Message);
         }
 
-        public static TheoryData<TimeSpan> TimeoutValidData => new TheoryData<TimeSpan>
-        {
-            TimeSpan.FromTicks(1),
-            TimeSpan.MaxValue,
-        };
+        public static TheoryData<TimeSpan> TimeoutValidData =>
+            new TheoryData<TimeSpan> { TimeSpan.FromTicks(1), TimeSpan.MaxValue, };
 
-        public static TheoryData<TimeSpan> TimeoutInvalidData => new TheoryData<TimeSpan>
-        {
-            TimeSpan.MinValue,
-            TimeSpan.FromTicks(-1),
-            TimeSpan.Zero
-        };
+        public static TheoryData<TimeSpan> TimeoutInvalidData =>
+            new TheoryData<TimeSpan> { TimeSpan.MinValue, TimeSpan.FromTicks(-1), TimeSpan.Zero };
     }
 }

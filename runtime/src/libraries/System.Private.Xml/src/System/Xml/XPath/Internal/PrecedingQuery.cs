@@ -23,7 +23,12 @@ namespace MS.Internal.Xml.XPath
         private XPathNodeIterator? _workIterator;
         private readonly StackNav _ancestorStk;
 
-        public PrecedingQuery(Query qyInput, string name, string prefix, XPathNodeType typeTest) : base(qyInput, name, prefix, typeTest)
+        public PrecedingQuery(
+            Query qyInput,
+            string name,
+            string prefix,
+            XPathNodeType typeTest
+        ) : base(qyInput, name, prefix, typeTest)
         {
             _ancestorStk = new StackNav();
         }
@@ -57,8 +62,10 @@ namespace MS.Internal.Xml.XPath
                         last.MoveTo(input);
                     } while ((input = qyInput.Advance()) != null);
 
-                    if (last.NodeType == XPathNodeType.Attribute || last.NodeType == XPathNodeType.Namespace)
-                    {
+                    if (
+                        last.NodeType == XPathNodeType.Attribute
+                        || last.NodeType == XPathNodeType.Namespace
+                    ) {
                         last.MoveToParent();
                     }
                 }
@@ -82,7 +89,10 @@ namespace MS.Internal.Xml.XPath
                     {
                         currentNode = null;
                         _workIterator = null;
-                        Debug.Assert(qyInput.Advance() == null, "we read all qyInput.Advance() already");
+                        Debug.Assert(
+                            qyInput.Advance() == null,
+                            "we read all qyInput.Advance() already"
+                        );
                         return null;
                     }
                     continue;
@@ -97,7 +107,13 @@ namespace MS.Internal.Xml.XPath
             return null;
         }
 
-        public override XPathNodeIterator Clone() { return new PrecedingQuery(this); }
-        public override QueryProps Properties { get { return base.Properties | QueryProps.Reverse; } }
+        public override XPathNodeIterator Clone()
+        {
+            return new PrecedingQuery(this);
+        }
+        public override QueryProps Properties
+        {
+            get { return base.Properties | QueryProps.Reverse; }
+        }
     }
 }

@@ -34,8 +34,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynamic.invoke002.invoke002
 {
     public class Test
@@ -51,10 +49,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
 
             public myDel Prop
             {
-                get
-                {
-                    return new myDel(MyClass.Do);
-                }
+                get { return new myDel(MyClass.Do); }
             }
         }
 
@@ -75,8 +70,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynamic.invoke003.invoke003
 {
     public class Test
@@ -92,10 +85,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
 
             public myDel Prop
             {
-                get
-                {
-                    return new myDel(MyClass.Do);
-                }
+                get { return new myDel(MyClass.Do); }
             }
         }
 
@@ -114,7 +104,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(RuntimeErrorId.BindToVoidMethodButExpectResult, ex.Message);
+                bool ret = ErrorVerifier.Verify(
+                    RuntimeErrorId.BindToVoidMethodButExpectResult,
+                    ex.Message
+                );
                 if (ret)
                     return 0;
             }
@@ -124,8 +117,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynamic.invoke004.invoke004
 {
@@ -142,10 +133,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
 
             public myDel Prop
             {
-                get
-                {
-                    return new myDel(MyClass.Do);
-                }
+                get { return new myDel(MyClass.Do); }
             }
         }
 
@@ -165,8 +153,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynamic.invoke005.invoke005
 {
@@ -201,7 +187,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(RuntimeErrorId.BindToVoidMethodButExpectResult, ex.Message);
+                bool ret = ErrorVerifier.Verify(
+                    RuntimeErrorId.BindToVoidMethodButExpectResult,
+                    ex.Message
+                );
                 if (ret)
                     return 0;
             }
@@ -211,8 +200,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynamic.invoke006.invoke006
 {
@@ -245,8 +232,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynamic.invoke007.invoke007
 {
@@ -287,7 +272,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(RuntimeErrorId.BindPropertyFailedMethodGroup, ex.Message, "Do");
+                bool ret = ErrorVerifier.Verify(
+                    RuntimeErrorId.BindPropertyFailedMethodGroup,
+                    ex.Message,
+                    "Do"
+                );
                 if (ret)
                     return 0;
             }
@@ -297,8 +286,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynamic.invoke008.invoke008
 {
@@ -337,8 +324,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynamic.invoke009.invoke009
 {
     public class Test
@@ -354,10 +339,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
 
             public myDel Prop
             {
-                get
-                {
-                    return new myDel(MyClass.Do);
-                }
+                get { return new myDel(MyClass.Do); }
             }
         }
 
@@ -377,8 +359,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynamic.invoke010.invoke010
 {
@@ -416,8 +396,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynamic.invoke011.invoke011
 {
     // <Title> Invoking dynamic </Title>
@@ -450,7 +428,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(RuntimeErrorId.BindInvokeFailedNonDelegate, ex.Message);
+                bool ret = ErrorVerifier.Verify(
+                    RuntimeErrorId.BindInvokeFailedNonDelegate,
+                    ex.Message
+                );
                 if (ret)
                     return 0;
             }
@@ -460,8 +441,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynamic.invoke012.invoke012
 {
@@ -497,7 +476,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(RuntimeErrorId.BindInvokeFailedNonDelegate, ex.Message);
+                bool ret = ErrorVerifier.Verify(
+                    RuntimeErrorId.BindInvokeFailedNonDelegate,
+                    ex.Message
+                );
                 if (ret)
                     return 0;
             }
@@ -507,8 +489,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynamic.neginvoke001.neginvoke001
 {
@@ -541,7 +521,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, ex.Message, "Test.MyClass", "Prop");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoSuchMember,
+                    ex.Message,
+                    "Test.MyClass",
+                    "Prop"
+                );
                 if (ret)
                     return 0;
             }
@@ -551,8 +536,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynamic.neginvoke002.neginvoke002
 {
@@ -585,7 +568,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.invokeDynami
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadDelArgCount, ex.Message, "myDel", "3");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadDelArgCount,
+                    ex.Message,
+                    "myDel",
+                    "3"
+                );
                 if (ret)
                     return 0;
             }

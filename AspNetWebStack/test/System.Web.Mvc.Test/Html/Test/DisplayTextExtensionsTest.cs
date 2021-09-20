@@ -19,9 +19,7 @@ namespace System.Web.Mvc.Html.Test
 
             // Act & Assert
             // Note ArgumentNullException uses incorrect parameter name.
-            Assert.ThrowsArgumentNull(
-                () => helper.DisplayText(name: null),
-                "expression");
+            Assert.ThrowsArgumentNull(() => helper.DisplayText(name: null), "expression");
         }
 
         [Fact]
@@ -34,7 +32,8 @@ namespace System.Web.Mvc.Html.Test
             // Act & Assert
             Assert.ThrowsArgumentNull(
                 () => helper.DisplayTextFor<OverriddenToStringModel, string>(expression: null),
-                "expression");
+                "expression"
+            );
         }
 
         [Fact]
@@ -142,8 +141,11 @@ namespace System.Web.Mvc.Html.Test
 
         [Theory]
         [PropertyData("ConditionallyHtmlEncodedData", PropertyType = typeof(EncodedDataSets))]
-        public void DisplayText_HonoursHtmlEncode_IfOverridden(string text, bool htmlEncode, string expectedResult)
-        {
+        public void DisplayText_HonoursHtmlEncode_IfOverridden(
+            string text,
+            bool htmlEncode,
+            string expectedResult
+        ) {
             // Arrange
             var model = new OverriddenToStringModel(text);
             var viewData = new ViewDataDictionary<OverriddenToStringModel>(model);
@@ -159,8 +161,11 @@ namespace System.Web.Mvc.Html.Test
 
         [Theory]
         [PropertyData("ConditionallyHtmlEncodedData", PropertyType = typeof(EncodedDataSets))]
-        public void DisplayTextFor_HonoursHtmlEncode_IfOverridden(string text, bool htmlEncode, string expectedResult)
-        {
+        public void DisplayTextFor_HonoursHtmlEncode_IfOverridden(
+            string text,
+            bool htmlEncode,
+            string expectedResult
+        ) {
             // Arrange
             var model = new OverriddenToStringModel(text);
             var viewData = new ViewDataDictionary<OverriddenToStringModel>(model);
@@ -176,14 +181,13 @@ namespace System.Web.Mvc.Html.Test
 
         [Theory]
         [PropertyData("ConditionallyHtmlEncodedData", PropertyType = typeof(EncodedDataSets))]
-        public void DisplayText_HonoursHtmlEncode_ForProperty(string text, bool htmlEncode, string expectedResult)
-        {
+        public void DisplayText_HonoursHtmlEncode_ForProperty(
+            string text,
+            bool htmlEncode,
+            string expectedResult
+        ) {
             // Arrange
-            var model = new DontHtmlEncodeModel
-            {
-                Encoded = text,
-                NotEncoded = text,
-            };
+            var model = new DontHtmlEncodeModel { Encoded = text, NotEncoded = text, };
             var viewData = new ViewDataDictionary<DontHtmlEncodeModel>(model);
             var helper = MvcHelper.GetHtmlHelper(viewData);
             var propertyName = htmlEncode ? "Encoded" : "NotEncoded";
@@ -197,14 +201,13 @@ namespace System.Web.Mvc.Html.Test
 
         [Theory]
         [PropertyData("ConditionallyHtmlEncodedData", PropertyType = typeof(EncodedDataSets))]
-        public void DisplayTextFor_HonoursHtmlEncode_ForProperty(string text, bool htmlEncode, string expectedResult)
-        {
+        public void DisplayTextFor_HonoursHtmlEncode_ForProperty(
+            string text,
+            bool htmlEncode,
+            string expectedResult
+        ) {
             // Arrange
-            var model = new DontHtmlEncodeModel
-            {
-                Encoded = text,
-                NotEncoded = text,
-            };
+            var model = new DontHtmlEncodeModel { Encoded = text, NotEncoded = text, };
             var viewData = new ViewDataDictionary<DontHtmlEncodeModel>(model);
             var helper = MvcHelper.GetHtmlHelper(viewData);
 
@@ -259,10 +262,7 @@ namespace System.Web.Mvc.Html.Test
         public void DisplayText_ReturnsPropertyValue_IfNameFound()
         {
             // Arrange
-            var model = new OverriddenToStringModel("ignored text")
-            {
-                Name = "Property value",
-            };
+            var model = new OverriddenToStringModel("ignored text") { Name = "Property value", };
             var viewData = new ViewDataDictionary<OverriddenToStringModel>(model);
             var helper = MvcHelper.GetHtmlHelper(viewData);
 
@@ -277,10 +277,7 @@ namespace System.Web.Mvc.Html.Test
         public void DisplayTextFor_ReturnsPropertyValue_IfPropertyExpression()
         {
             // Arrange
-            var model = new OverriddenToStringModel("ignored text")
-            {
-                Name = "Property value",
-            };
+            var model = new OverriddenToStringModel("ignored text") { Name = "Property value", };
             var viewData = new ViewDataDictionary<OverriddenToStringModel>(model);
             var helper = MvcHelper.GetHtmlHelper(viewData);
 
@@ -295,10 +292,7 @@ namespace System.Web.Mvc.Html.Test
         public void DisplayText_ReturnsViewDataEntry()
         {
             // Arrange
-            var model = new OverriddenToStringModel("Model value")
-            {
-                Name = "Property value",
-            };
+            var model = new OverriddenToStringModel("Model value") { Name = "Property value", };
             var viewData = new ViewDataDictionary<OverriddenToStringModel>(model)
             {
                 { "Name", "View data dictionary value" },
@@ -316,10 +310,7 @@ namespace System.Web.Mvc.Html.Test
         public void DisplayTextFor_IgnoresViewDataEntry()
         {
             // Arrange
-            var model = new OverriddenToStringModel("Model value")
-            {
-                Name = "Property value",
-            };
+            var model = new OverriddenToStringModel("Model value") { Name = "Property value", };
             var viewData = new ViewDataDictionary<OverriddenToStringModel>(model)
             {
                 { "Name", "View data dictionary value" },
@@ -337,10 +328,7 @@ namespace System.Web.Mvc.Html.Test
         public void DisplayText_ReturnsModelStateEntry()
         {
             // Arrange
-            var model = new OverriddenToStringModel("Model value")
-            {
-                Name = "Property value",
-            };
+            var model = new OverriddenToStringModel("Model value") { Name = "Property value", };
             var viewData = new ViewDataDictionary<OverriddenToStringModel>(model)
             {
                 { "Name", "View data dictionary value" },
@@ -351,7 +339,8 @@ namespace System.Web.Mvc.Html.Test
             modelState.Value = new ValueProviderResult(
                 rawValue: new string[] { "Attempted name value" },
                 attemptedValue: "Attempted name value",
-                culture: CultureInfo.InvariantCulture);
+                culture: CultureInfo.InvariantCulture
+            );
             viewData.ModelState["FieldPrefix.Name"] = modelState;
 
             var helper = MvcHelper.GetHtmlHelper(viewData);
@@ -367,10 +356,7 @@ namespace System.Web.Mvc.Html.Test
         public void DisplayTextFor_IgnoresModelStateEntry()
         {
             // Arrange
-            var model = new OverriddenToStringModel("Model value")
-            {
-                Name = "Property value",
-            };
+            var model = new OverriddenToStringModel("Model value") { Name = "Property value", };
             var viewData = new ViewDataDictionary<OverriddenToStringModel>(model)
             {
                 { "Name", "View data dictionary value" },
@@ -381,7 +367,8 @@ namespace System.Web.Mvc.Html.Test
             modelState.Value = new ValueProviderResult(
                 rawValue: new string[] { "Attempted name value" },
                 attemptedValue: "Attempted name value",
-                culture: CultureInfo.InvariantCulture);
+                culture: CultureInfo.InvariantCulture
+            );
             viewData.ModelState["FieldPrefix.Name"] = modelState;
 
             var helper = MvcHelper.GetHtmlHelper(viewData);

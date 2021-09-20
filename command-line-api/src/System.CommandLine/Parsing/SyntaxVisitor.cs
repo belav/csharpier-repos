@@ -20,7 +20,6 @@ namespace System.CommandLine.Parsing
             {
                 case DirectiveNode directiveNode:
                     VisitDirectiveNode(directiveNode);
-
                     break;
 
                 case RootCommandNode rootCommandNode:
@@ -30,7 +29,6 @@ namespace System.CommandLine.Parsing
                     {
                         VisitInternal(rootCommandNode.Children[i]);
                     }
-
                     break;
 
                 case CommandNode commandNode:
@@ -40,7 +38,6 @@ namespace System.CommandLine.Parsing
                     {
                         VisitInternal(commandNode.Children[i]);
                     }
-
                     break;
 
                 case OptionNode optionNode:
@@ -50,60 +47,38 @@ namespace System.CommandLine.Parsing
                     {
                         VisitInternal(optionNode.Children[i]);
                     }
-
                     break;
 
                 case CommandArgumentNode commandArgumentNode:
                     VisitCommandArgumentNode(commandArgumentNode);
-
                     break;
 
                 case OptionArgumentNode optionArgumentNode:
                     VisitOptionArgumentNode(optionArgumentNode);
-
                     break;
 
                 default:
                     VisitUnknownNode(node);
-
                     break;
             }
         }
 
-        protected virtual void VisitCommandArgumentNode(CommandArgumentNode argumentNode)
-        {
-        }
+        protected virtual void VisitCommandArgumentNode(CommandArgumentNode argumentNode) { }
 
-        protected virtual void VisitOptionArgumentNode(OptionArgumentNode argumentNode)
-        {
-        }
+        protected virtual void VisitOptionArgumentNode(OptionArgumentNode argumentNode) { }
 
-        protected virtual void VisitOptionNode(OptionNode optionNode)
-        {
-        }
+        protected virtual void VisitOptionNode(OptionNode optionNode) { }
 
-        protected virtual void VisitRootCommandNode(RootCommandNode rootCommandNode)
-        {
-        }
+        protected virtual void VisitRootCommandNode(RootCommandNode rootCommandNode) { }
 
-        protected virtual void VisitCommandNode(CommandNode commandNode)
-        {
-        }
+        protected virtual void VisitCommandNode(CommandNode commandNode) { }
 
-        protected virtual void VisitDirectiveNode(DirectiveNode directiveNode)
-        {
-        }
+        protected virtual void VisitDirectiveNode(DirectiveNode directiveNode) { }
 
-        protected virtual void Start(SyntaxNode node)
-        {
-        }
+        protected virtual void Start(SyntaxNode node) { }
 
-        protected virtual void Stop(SyntaxNode node)
-        {
-        }
+        protected virtual void Stop(SyntaxNode node) { }
 
-        protected virtual void VisitUnknownNode(SyntaxNode node)
-        {
-        }
+        protected virtual void VisitUnknownNode(SyntaxNode node) { }
     }
 }

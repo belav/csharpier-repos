@@ -22,8 +22,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <exception cref="InvalidOperationException">
         /// If <paramref name="reportDiagnostic"/> is not one of the expected values.
         /// </exception>
-        public static DiagnosticSeverity? ToDiagnosticSeverity(this ReportDiagnostic reportDiagnostic)
-        {
+        public static DiagnosticSeverity? ToDiagnosticSeverity(
+            this ReportDiagnostic reportDiagnostic
+        ) {
             switch (reportDiagnostic)
             {
                 case ReportDiagnostic.Error:
@@ -58,8 +59,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <para>-or-</para>
         /// <para>Otherwise, returns <paramref name="reportDiagnostic"/> if it has a non-default value.</para>
         /// </returns>
-        public static ReportDiagnostic WithDefaultSeverity(this ReportDiagnostic reportDiagnostic, DiagnosticSeverity defaultSeverity)
-        {
+        public static ReportDiagnostic WithDefaultSeverity(
+            this ReportDiagnostic reportDiagnostic,
+            DiagnosticSeverity defaultSeverity
+        ) {
             if (reportDiagnostic != ReportDiagnostic.Default)
             {
                 return reportDiagnostic;
@@ -81,8 +84,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             };
         }
 
-        public static NotificationOption2 ToNotificationOption(this ReportDiagnostic reportDiagnostic, DiagnosticSeverity defaultSeverity)
-        {
+        public static NotificationOption2 ToNotificationOption(
+            this ReportDiagnostic reportDiagnostic,
+            DiagnosticSeverity defaultSeverity
+        ) {
             switch (reportDiagnostic.WithDefaultSeverity(defaultSeverity))
             {
                 case ReportDiagnostic.Error:

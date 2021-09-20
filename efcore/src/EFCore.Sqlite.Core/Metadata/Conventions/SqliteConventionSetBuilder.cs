@@ -29,10 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="relationalDependencies"> The relational dependencies for this service. </param>
         public SqliteConventionSetBuilder(
             ProviderConventionSetBuilderDependencies dependencies,
-            RelationalConventionSetBuilderDependencies relationalDependencies)
-            : base(dependencies, relationalDependencies)
-        {
-        }
+            RelationalConventionSetBuilderDependencies relationalDependencies
+        ) : base(dependencies, relationalDependencies) { }
 
         /// <summary>
         ///     <para>
@@ -66,17 +64,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             using var serviceScope = CreateServiceScope();
             using var context = serviceScope.ServiceProvider.GetRequiredService<DbContext>();
-            return new ModelBuilder(ConventionSet.CreateConventionSet(context), context.GetService<ModelDependencies>());
+            return new ModelBuilder(
+                ConventionSet.CreateConventionSet(context),
+                context.GetService<ModelDependencies>()
+            );
         }
 
         private static IServiceScope CreateServiceScope()
         {
-            var serviceProvider = new ServiceCollection()
-                .AddEntityFrameworkSqlite()
+            var serviceProvider = new ServiceCollection().AddEntityFrameworkSqlite()
                 .AddDbContext<DbContext>(
-                    (p, o) =>
-                        o.UseSqlite("Filename=_.db")
-                            .UseInternalServiceProvider(p))
+                    (p, o) => o.UseSqlite("Filename=_.db").UseInternalServiceProvider(p)
+                )
                 .BuildServiceProvider();
             return serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope();
         }

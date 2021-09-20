@@ -10,10 +10,7 @@ namespace System.Web.Http.Routing
         private IHttpRoute _route;
         private IDictionary<string, object> _values;
 
-        public HttpRouteData(IHttpRoute route)
-            : this(route, new HttpRouteValueDictionary())
-        {
-        }
+        public HttpRouteData(IHttpRoute route) : this(route, new HttpRouteValueDictionary()) { }
 
         public HttpRouteData(IHttpRoute route, HttpRouteValueDictionary values)
         {

@@ -15,9 +15,7 @@ namespace System.DirectoryServices
         private int _approximateTotal;
         private int _targetPercentage;
 
-        public DirectoryVirtualListView()
-        {
-        }
+        public DirectoryVirtualListView() { }
 
         public DirectoryVirtualListView(int afterCount)
         {
@@ -38,16 +36,24 @@ namespace System.DirectoryServices
             Target = target;
         }
 
-        public DirectoryVirtualListView(int beforeCount, int afterCount, int offset, DirectoryVirtualListViewContext? context)
-        {
+        public DirectoryVirtualListView(
+            int beforeCount,
+            int afterCount,
+            int offset,
+            DirectoryVirtualListViewContext? context
+        ) {
             BeforeCount = beforeCount;
             AfterCount = afterCount;
             Offset = offset;
             DirectoryVirtualListViewContext = context;
         }
 
-        public DirectoryVirtualListView(int beforeCount, int afterCount, string? target, DirectoryVirtualListViewContext? context)
-        {
+        public DirectoryVirtualListView(
+            int beforeCount,
+            int afterCount,
+            string? target,
+            DirectoryVirtualListViewContext? context
+        ) {
             BeforeCount = beforeCount;
             AfterCount = afterCount;
             Target = target;

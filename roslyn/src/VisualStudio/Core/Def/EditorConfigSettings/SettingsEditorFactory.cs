@@ -23,8 +23,10 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
     [Guid(SettingsEditorFactoryGuidString)]
     internal sealed class SettingsEditorFactory : IVsEditorFactory, IDisposable
     {
-        public static readonly Guid SettingsEditorFactoryGuid = new(SettingsEditorFactoryGuidString);
-        public const string SettingsEditorFactoryGuidString = "68b46364-d378-42f2-9e72-37d86c5f4468";
+        public static readonly Guid SettingsEditorFactoryGuid =
+            new(SettingsEditorFactoryGuidString);
+        public const string SettingsEditorFactoryGuidString =
+            "68b46364-d378-42f2-9e72-37d86c5f4468";
         public const string Extension = ".editorconfig";
 
         private readonly ISettingsAggregator _settingsDataProviderFactory;
@@ -37,13 +39,15 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SettingsEditorFactory(VisualStudioWorkspace workspace,
-                                     IWpfTableControlProvider controlProvider,
-                                     ITableManagerProvider tableMangerProvider,
-                                     IVsEditorAdaptersFactoryService vsEditorAdaptersFactoryService,
-                                     IThreadingContext threadingContext)
-        {
-            _settingsDataProviderFactory = workspace.Services.GetRequiredService<ISettingsAggregator>();
+        public SettingsEditorFactory(
+            VisualStudioWorkspace workspace,
+            IWpfTableControlProvider controlProvider,
+            ITableManagerProvider tableMangerProvider,
+            IVsEditorAdaptersFactoryService vsEditorAdaptersFactoryService,
+            IThreadingContext threadingContext
+        ) {
+            _settingsDataProviderFactory =
+                workspace.Services.GetRequiredService<ISettingsAggregator>();
             _workspace = workspace;
             _controlProvider = controlProvider;
             _tableMangerProvider = tableMangerProvider;
@@ -60,18 +64,19 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             }
         }
 
-        public int CreateEditorInstance(uint grfCreateDoc,
-                                        string pszMkDocument,
-                                        string pszPhysicalView,
-                                        IVsHierarchy pvHier,
-                                        uint itemid,
-                                        IntPtr punkDocDataExisting,
-                                        out IntPtr ppunkDocView,
-                                        out IntPtr ppunkDocData,
-                                        out string? pbstrEditorCaption,
-                                        out Guid pguidCmdUI,
-                                        out int pgrfCDW)
-        {
+        public int CreateEditorInstance(
+            uint grfCreateDoc,
+            string pszMkDocument,
+            string pszPhysicalView,
+            IVsHierarchy pvHier,
+            uint itemid,
+            IntPtr punkDocDataExisting,
+            out IntPtr ppunkDocView,
+            out IntPtr ppunkDocData,
+            out string? pbstrEditorCaption,
+            out Guid pguidCmdUI,
+            out int pgrfCDW
+        ) {
             // Initialize to null
             ppunkDocView = IntPtr.Zero;
             ppunkDocData = IntPtr.Zero;
@@ -89,14 +94,25 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             if (punkDocDataExisting == IntPtr.Zero)
             {
                 Assumes.NotNull(_vsServiceProvider);
-                if (_vsServiceProvider.TryGetService<SLocalRegistry, ILocalRegistry>(out var localRegistry))
-                {
+                if (
+                    _vsServiceProvider.TryGetService<SLocalRegistry, ILocalRegistry>(
+                        out var localRegistry
+                    )
+                ) {
                     var textLinesGuid = typeof(IVsTextLines).GUID;
-                    _ = localRegistry.CreateInstance(typeof(VsTextBufferClass).GUID, null, ref textLinesGuid, 1 /*CLSCTX_INPROC_SERVER*/, out var ptr);
+                    _ = localRegistry.CreateInstance(
+                        typeof(VsTextBufferClass).GUID,
+                        null,
+                        ref textLinesGuid,
+                        1 /*CLSCTX_INPROC_SERVER*/
+                        ,
+                        out var ptr
+                    );
                     try
                     {
                         textBuffer = Marshal.GetObjectForIUnknown(ptr) as IVsTextLines;
                     }
+
                     finally
                     {
                         _ = Marshal.Release(ptr); // Release RefCount from CreateInstance call
@@ -104,7 +120,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
 
                     if (textBuffer is IObjectWithSite objectWithSite)
                     {
-                        var oleServiceProvider = _vsServiceProvider.GetService<IOleServiceProvider>();
+                        var oleServiceProvider =
+                            _vsServiceProvider.GetService<IOleServiceProvider>();
                         objectWithSite.SetSite(oleServiceProvider);
                     }
                 }
@@ -124,14 +141,16 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             }
 
             // Create the editor
-            var newEditor = new SettingsEditorPane(_vsEditorAdaptersFactoryService,
-                                                   _threadingContext,
-                                                   _settingsDataProviderFactory,
-                                                   _controlProvider,
-                                                   _tableMangerProvider,
-                                                   pszMkDocument,
-                                                   textBuffer,
-                                                   _workspace);
+            var newEditor = new SettingsEditorPane(
+                _vsEditorAdaptersFactoryService,
+                _threadingContext,
+                _settingsDataProviderFactory,
+                _controlProvider,
+                _tableMangerProvider,
+                pszMkDocument,
+                textBuffer,
+                _workspace
+            );
             ppunkDocView = Marshal.GetIUnknownForObject(newEditor);
             ppunkDocData = Marshal.GetIUnknownForObject(textBuffer);
             pbstrEditorCaption = "";
@@ -148,16 +167,16 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
 
         public int MapLogicalView(ref Guid rguidLogicalView, out string? pbstrPhysicalView)
         {
-            pbstrPhysicalView = null;    // initialize out parameter
+            pbstrPhysicalView = null; // initialize out parameter
 
             // we support only a single physical view
             if (VSConstants.LOGVIEWID_Primary == rguidLogicalView)
             {
-                return VSConstants.S_OK;        // primary view uses NULL as pbstrPhysicalView
+                return VSConstants.S_OK; // primary view uses NULL as pbstrPhysicalView
             }
             else
             {
-                return VSConstants.E_NOTIMPL;   // you must return E_NOTIMPL for any unrecognized rguidLogicalView values
+                return VSConstants.E_NOTIMPL; // you must return E_NOTIMPL for any unrecognized rguidLogicalView values
             }
         }
     }

@@ -23,7 +23,9 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests
         public void DoSomeTyping()
         {
             // Arrange
-            AdditionalSyntaxTrees.Add(Parse(@"
+            AdditionalSyntaxTrees.Add(
+                Parse(
+                    @"
 using System;
 using Microsoft.AspNetCore.Components;
 
@@ -41,8 +43,11 @@ namespace Test
         public Action<string> Bind(Func<string, string> func) => throw null;
     }
 }
-"));
-            var text = @"
+"
+                )
+            );
+            var text =
+                @"
 <div>
   <MyComponent bind-Value=""myValue"" AnotherValue=""hi""/>
   <input type=""text"" bind=""@this.ModelState.Bind(x => x)"" />
@@ -65,30 +70,34 @@ namespace Test
                 }
                 catch (Exception ex)
                 {
-                    throw new XunitException($@"
+                    throw new XunitException(
+                        $@"
 Code generation failed on iteration {i} with source text:
 {text.Substring(0, i)}
 
 Exception:
 {ex}
-");
+"
+                    );
                 }
             }
         }
 
-        [Fact] // Regression test for #1068 
+        [Fact] // Regression test for #1068
         public void Regression_1068()
         {
             // Arrange
 
             // Act
-            var generated = CompileToCSharp(@"
+            var generated = CompileToCSharp(
+                @"
 <input type=""text"" bind="" />
 @functions {
     Test.ModelState ModelState { get; set; }
 }
-", throwOnFailure: false);
-
+",
+                throwOnFailure: false
+            );
             // Assert
         }
 
@@ -97,7 +106,9 @@ Exception:
         {
             // Act
             // Arrange
-            AdditionalSyntaxTrees.Add(Parse(@"
+            AdditionalSyntaxTrees.Add(
+                Parse(
+                    @"
 using System;
 using Microsoft.AspNetCore.Components;
 
@@ -115,15 +126,19 @@ namespace Test
         public Action<string> Bind(Func<string, string> func) => throw null;
     }
 }
-"));
-            var generated = CompileToCSharp(@"
+"
+                )
+            );
+            var generated = CompileToCSharp(
+                @"
   <MyComponent Value=10 Something=@for
 
   <button disabled=@form.IsSubmitting type=""submit"" class=""btn btn-primary mt-3 mr-3 has-spinner @(form.IsSubmitting ? ""active"" :"""")"" onclick=@(async () => await SaveAsync(false))>
 @functions {
     Test.ModelState ModelState { get; set; }
-}", throwOnFailure: false);
-
+}",
+                throwOnFailure: false
+            );
             // Assert - does not throw
         }
     }

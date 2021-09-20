@@ -18,18 +18,12 @@ namespace System.Security.Cryptography.X509Certificates
 
         public X509ChainElement Current
         {
-            get
-            {
-                return _chainElements[_current];
-            }
+            get { return _chainElements[_current]; }
         }
 
         object IEnumerator.Current
         {
-            get
-            {
-                return Current;
-            }
+            get { return Current; }
         }
 
         public bool MoveNext()

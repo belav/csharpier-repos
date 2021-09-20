@@ -23,8 +23,7 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var httpContext = new Mock<HttpContext>();
             var auth = new Mock<IAuthenticationService>();
-            auth
-                .Setup(c => c.SignOutAsync(httpContext.Object, null, null))
+            auth.Setup(c => c.SignOutAsync(httpContext.Object, null, null))
                 .Returns(Task.CompletedTask)
                 .Verifiable();
             httpContext.Setup(c => c.RequestServices).Returns(CreateServices(auth.Object));
@@ -34,7 +33,8 @@ namespace Microsoft.AspNetCore.Mvc
             var actionContext = new ActionContext(
                 httpContext.Object,
                 routeData,
-                new ActionDescriptor());
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -49,8 +49,7 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var httpContext = new Mock<HttpContext>();
             var auth = new Mock<IAuthenticationService>();
-            auth
-                .Setup(c => c.SignOutAsync(httpContext.Object, "", null))
+            auth.Setup(c => c.SignOutAsync(httpContext.Object, "", null))
                 .Returns(Task.CompletedTask)
                 .Verifiable();
             httpContext.Setup(c => c.RequestServices).Returns(CreateServices(auth.Object));
@@ -60,7 +59,8 @@ namespace Microsoft.AspNetCore.Mvc
             var actionContext = new ActionContext(
                 httpContext.Object,
                 routeData,
-                new ActionDescriptor());
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -76,12 +76,10 @@ namespace Microsoft.AspNetCore.Mvc
             var authProperties = new AuthenticationProperties();
             var httpContext = new Mock<HttpContext>();
             var auth = new Mock<IAuthenticationService>();
-            auth
-                .Setup(c => c.SignOutAsync(httpContext.Object, "Scheme1", authProperties))
+            auth.Setup(c => c.SignOutAsync(httpContext.Object, "Scheme1", authProperties))
                 .Returns(Task.CompletedTask)
                 .Verifiable();
-            auth
-                .Setup(c => c.SignOutAsync(httpContext.Object, "Scheme2", authProperties))
+            auth.Setup(c => c.SignOutAsync(httpContext.Object, "Scheme2", authProperties))
                 .Returns(Task.CompletedTask)
                 .Verifiable();
             httpContext.Setup(c => c.RequestServices).Returns(CreateServices(auth.Object));
@@ -91,7 +89,8 @@ namespace Microsoft.AspNetCore.Mvc
             var actionContext = new ActionContext(
                 httpContext.Object,
                 routeData,
-                new ActionDescriptor());
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -102,8 +101,7 @@ namespace Microsoft.AspNetCore.Mvc
 
         private static IServiceProvider CreateServices(IAuthenticationService auth)
         {
-            return new ServiceCollection()
-                .AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance)
+            return new ServiceCollection().AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance)
                 .AddSingleton(auth)
                 .BuildServiceProvider();
         }

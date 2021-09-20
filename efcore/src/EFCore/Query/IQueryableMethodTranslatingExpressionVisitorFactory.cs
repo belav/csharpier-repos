@@ -22,6 +22,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </summary>
         /// <param name="queryCompilationContext"> The query compilation context to use. </param>
         /// <returns> The created visitor. </returns>
-        QueryableMethodTranslatingExpressionVisitor Create(QueryCompilationContext queryCompilationContext);
+        QueryableMethodTranslatingExpressionVisitor Create(
+            QueryCompilationContext queryCompilationContext
+        );
     }
 }

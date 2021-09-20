@@ -20,8 +20,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         /// <param name="attributes">The attributes for the <see cref="ModelMetadata"/>.</param>
         public ValidationMetadataProviderContext(
             ModelMetadataIdentity key,
-            ModelAttributes attributes)
-        {
+            ModelAttributes attributes
+        ) {
             if (attributes == null)
             {
                 throw new ArgumentNullException(nameof(attributes));

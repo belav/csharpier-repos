@@ -11,7 +11,9 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Identity.InMemory.Test
 {
-    public class InMemoryUserStoreTest : UserManagerSpecificationTestBase<PocoUser, string>, IClassFixture<InMemoryUserStoreTest.Fixture>
+    public class InMemoryUserStoreTest
+        : UserManagerSpecificationTestBase<PocoUser, string>,
+          IClassFixture<InMemoryUserStoreTest.Fixture>
     {
         protected override object CreateTestContext()
         {
@@ -28,12 +30,24 @@ namespace Microsoft.AspNetCore.Identity.InMemory.Test
             user.PasswordHash = hashedPassword;
         }
 
-        protected override PocoUser CreateTestUser(string namePrefix = "", string email = "", string phoneNumber = "",
-            bool lockoutEnabled = false, DateTimeOffset? lockoutEnd = default(DateTimeOffset?), bool useNamePrefixAsUserName = false)
-        {
+        protected override PocoUser CreateTestUser(
+            string namePrefix = "",
+            string email = "",
+            string phoneNumber = "",
+            bool lockoutEnabled = false,
+            DateTimeOffset? lockoutEnd = default(DateTimeOffset?),
+            bool useNamePrefixAsUserName = false
+        ) {
             return new PocoUser
             {
-                UserName = useNamePrefixAsUserName ? namePrefix : string.Format(CultureInfo.InvariantCulture, "{0}{1}", namePrefix, Guid.NewGuid()),
+                UserName = useNamePrefixAsUserName
+                    ? namePrefix
+                    : string.Format(
+                          CultureInfo.InvariantCulture,
+                          "{0}{1}",
+                          namePrefix,
+                          Guid.NewGuid()
+                      ),
                 Email = email,
                 PhoneNumber = phoneNumber,
                 LockoutEnabled = lockoutEnabled,
@@ -41,14 +55,19 @@ namespace Microsoft.AspNetCore.Identity.InMemory.Test
             };
         }
 
-        protected override Expression<Func<PocoUser, bool>> UserNameEqualsPredicate(string userName) => u => u.UserName == userName;
+        protected override Expression<Func<PocoUser, bool>> UserNameEqualsPredicate(
+            string userName
+        ) => u => u.UserName == userName;
 
-        protected override Expression<Func<PocoUser, bool>> UserNameStartsWithPredicate(string userName) => u => u.UserName.StartsWith(userName, StringComparison.Ordinal);
+        protected override Expression<Func<PocoUser, bool>> UserNameStartsWithPredicate(
+            string userName
+        ) => u => u.UserName.StartsWith(userName, StringComparison.Ordinal);
 
         public class Fixture : IDisposable
         {
-            private readonly SqliteConnection _connection
-                = new SqliteConnection($"DataSource=:memory:");
+            private readonly SqliteConnection _connection = new SqliteConnection(
+                $"DataSource=:memory:"
+            );
 
             public Fixture()
             {

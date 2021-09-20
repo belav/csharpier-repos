@@ -21,10 +21,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="serviceProperties"> The associated <see cref="IServiceProperty" /> objects, or <see langword="null" />. </param>
         public ContextParameterBinding(
             Type contextType,
-            IPropertyBase[]? serviceProperties = null)
-            : base(contextType, contextType, serviceProperties)
-        {
-        }
+            IPropertyBase[]? serviceProperties = null
+        ) : base(contextType, contextType, serviceProperties) { }
 
         /// <summary>
         ///     Creates an expression tree representing the binding of the value of a property from a
@@ -35,19 +33,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns> The expression tree. </returns>
         public override Expression BindToParameter(
             Expression materializationExpression,
-            Expression entityTypeExpression)
-        {
+            Expression entityTypeExpression
+        ) {
             Check.NotNull(materializationExpression, nameof(materializationExpression));
             Check.NotNull(entityTypeExpression, nameof(entityTypeExpression));
 
-            var propertyExpression
-                = Expression.Property(
-                    materializationExpression,
-                    MaterializationContext.ContextProperty);
+            var propertyExpression = Expression.Property(
+                materializationExpression,
+                MaterializationContext.ContextProperty
+            );
 
             return ServiceType != typeof(DbContext)
-                ? (Expression)Expression.TypeAs(propertyExpression, ServiceType)
-                : propertyExpression;
+              ? (Expression)Expression.TypeAs(propertyExpression, ServiceType)
+              : propertyExpression;
         }
 
         /// <summary>
@@ -55,7 +53,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="consumedProperties"> The new consumed properties. </param>
         /// <returns> A copy with replaced consumed properties. </returns>
-        public override ParameterBinding With(IPropertyBase[] consumedProperties)
-            => new ContextParameterBinding(ParameterType, consumedProperties);
+        public override ParameterBinding With(IPropertyBase[] consumedProperties) =>
+            new ContextParameterBinding(ParameterType, consumedProperties);
     }
 }

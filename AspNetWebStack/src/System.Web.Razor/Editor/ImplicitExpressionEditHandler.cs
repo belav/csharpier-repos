@@ -17,9 +17,16 @@ namespace System.Web.Razor.Editor
 {
     public class ImplicitExpressionEditHandler : SpanEditHandler
     {
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "Func<T> is the recommended delegate type and requires this level of nesting.")]
-        public ImplicitExpressionEditHandler(Func<string, IEnumerable<ISymbol>> tokenizer, ISet<string> keywords, bool acceptTrailingDot)
-            : base(tokenizer)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "Func<T> is the recommended delegate type and requires this level of nesting."
+        )]
+        public ImplicitExpressionEditHandler(
+            Func<string, IEnumerable<ISymbol>> tokenizer,
+            ISet<string> keywords,
+            bool acceptTrailingDot
+        ) : base(tokenizer)
         {
             Initialize(keywords, acceptTrailingDot);
         }
@@ -29,16 +36,22 @@ namespace System.Web.Razor.Editor
 
         public override string ToString()
         {
-            return String.Format(CultureInfo.InvariantCulture, "{0};ImplicitExpression[{1}];K{2}", base.ToString(), AcceptTrailingDot ? "ATD" : "RTD", Keywords.Count);
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                "{0};ImplicitExpression[{1}];K{2}",
+                base.ToString(),
+                AcceptTrailingDot ? "ATD" : "RTD",
+                Keywords.Count
+            );
         }
 
         public override bool Equals(object obj)
         {
             ImplicitExpressionEditHandler other = obj as ImplicitExpressionEditHandler;
-            return other != null &&
-                   base.Equals(other) &&
-                   Keywords.SetEquals(other.Keywords) &&
-                   AcceptTrailingDot == other.AcceptTrailingDot;
+            return other != null
+                && base.Equals(other)
+                && Keywords.SetEquals(other.Keywords)
+                && AcceptTrailingDot == other.AcceptTrailingDot;
         }
 
         public override int GetHashCode()
@@ -46,20 +59,21 @@ namespace System.Web.Razor.Editor
             return HashCodeCombiner.Start()
                 .Add(base.GetHashCode())
                 .Add(AcceptTrailingDot)
-                .Add(Keywords)
-                .CombinedHash;
+                .Add(Keywords).CombinedHash;
         }
 
-        protected override PartialParseResult CanAcceptChange(Span target, TextChange normalizedChange)
-        {
+        protected override PartialParseResult CanAcceptChange(
+            Span target,
+            TextChange normalizedChange
+        ) {
             if (AcceptedCharacters == AcceptedCharacters.Any)
             {
                 return PartialParseResult.Rejected;
             }
 
-            // In some editors intellisense insertions are handled as "dotless commits".  If an intellisense selection is confirmed 
-            // via something like '.' a dotless commit will append a '.' and then insert the remaining intellisense selection prior 
-            // to the appended '.'.  This 'if' statement attempts to accept the intermediate steps of a dotless commit via 
+            // In some editors intellisense insertions are handled as "dotless commits".  If an intellisense selection is confirmed
+            // via something like '.' a dotless commit will append a '.' and then insert the remaining intellisense selection prior
+            // to the appended '.'.  This 'if' statement attempts to accept the intermediate steps of a dotless commit via
             // intellisense.  It will accept two cases:
             //     1. '@foo.' -> '@foobaz.'.
             //     2. '@foobaz..' -> '@foobaz.bar.'. Includes Sub-cases '@foobaz()..' -> '@foobaz().bar.' etc.
@@ -117,31 +131,35 @@ namespace System.Web.Razor.Editor
         // A dotless commit is the process of inserting a '.' with an intellisense selection.
         private static bool IsDotlessCommitInsertion(Span target, TextChange change)
         {
-            return IsNewDotlessCommitInsertion(target, change) || IsSecondaryDotlessCommitInsertion(target, change);
+            return IsNewDotlessCommitInsertion(target, change)
+                || IsSecondaryDotlessCommitInsertion(target, change);
         }
 
         // Completing 'DateTime' in intellisense with a '.' could result in: '@DateT' -> '@DateT.' -> '@DateTime.' which is accepted.
         private static bool IsNewDotlessCommitInsertion(Span target, TextChange change)
         {
-            return !IsAtEndOfSpan(target, change) &&
-                   change.NewPosition > 0 &&
-                   change.NewLength > 0 &&
-                   target.Content.Last() == '.' &&
-                   ParserHelpers.IsIdentifier(change.NewText, requireIdentifierStart: false) &&
-                   (change.OldLength == 0 || ParserHelpers.IsIdentifier(change.OldText, requireIdentifierStart: false));
+            return !IsAtEndOfSpan(target, change)
+                && change.NewPosition > 0
+                && change.NewLength > 0
+                && target.Content.Last() == '.'
+                && ParserHelpers.IsIdentifier(change.NewText, requireIdentifierStart: false)
+                && (
+                    change.OldLength == 0
+                    || ParserHelpers.IsIdentifier(change.OldText, requireIdentifierStart: false)
+                );
         }
 
         // Once a dotless commit has been performed you then have something like '@DateTime.'.  This scenario is used to detect the
-        // situation when you try to perform another dotless commit resulting in a textchange with '..'.  Completing 'DateTime.Now' 
+        // situation when you try to perform another dotless commit resulting in a textchange with '..'.  Completing 'DateTime.Now'
         // in intellisense with a '.' could result in: '@DateTime.' -> '@DateTime..' -> '@DateTime.Now.' which is accepted.
         private static bool IsSecondaryDotlessCommitInsertion(Span target, TextChange change)
         {
             // Do not need to worry about other punctuation, just looking for double '.' (after change)
-            return change.NewLength == 1 &&
-                   !String.IsNullOrEmpty(target.Content) &&
-                   target.Content.Last() == '.' &&
-                   change.NewText == "." &&
-                   change.OldLength == 0;
+            return change.NewLength == 1
+                && !String.IsNullOrEmpty(target.Content)
+                && target.Content.Last() == '.'
+                && change.NewText == "."
+                && change.OldLength == 0;
         }
 
         private bool IsAcceptableIdentifierReplacement(Span target, TextChange change)
@@ -166,12 +184,17 @@ namespace System.Web.Razor.Editor
                 // We're looking for the first symbol that contains the TextChange.
                 if (symbolEndIndex > change.OldPosition)
                 {
-                    if (symbolEndIndex >= change.OldPosition + change.OldLength && symbol.Type == CSharpSymbolType.Identifier)
-                    {
+                    if (
+                        symbolEndIndex >= change.OldPosition + change.OldLength
+                        && symbol.Type == CSharpSymbolType.Identifier
+                    ) {
                         // The symbol we're changing happens to be an identifier. Need to check if its transformed state is also one.
                         // We do this transformation logic to capture the case that the new text change happens to not be an identifier;
                         // i.e. "5". Alone, it's numeric, within an identifier it's classified as identifier.
-                        string transformedContent = change.ApplyChange(symbol.Content, symbolStartIndex);
+                        string transformedContent = change.ApplyChange(
+                            symbol.Content,
+                            symbolStartIndex
+                        );
                         IEnumerable<ISymbol> newSymbols = Tokenizer(transformedContent);
 
                         if (newSymbols.Count() != 1)
@@ -187,7 +210,6 @@ namespace System.Web.Razor.Editor
                             return true;
                         }
                     }
-
                     // Change is touching a non-identifier symbol or spans multiple symbols.
 
                     break;
@@ -199,22 +221,24 @@ namespace System.Web.Razor.Editor
 
         private static bool IsAcceptableReplace(Span target, TextChange change)
         {
-            return IsEndReplace(target, change) ||
-                   (change.IsReplace && RemainingIsWhitespace(target, change));
+            return IsEndReplace(target, change)
+                || (change.IsReplace && RemainingIsWhitespace(target, change));
         }
 
         private static bool IsAcceptableDeletion(Span target, TextChange change)
         {
-            return IsEndDeletion(target, change) ||
-                   (change.IsDelete && RemainingIsWhitespace(target, change));
+            return IsEndDeletion(target, change)
+                || (change.IsDelete && RemainingIsWhitespace(target, change));
         }
 
         // Acceptable insertions can occur at the end of a span or when a '.' is inserted within a span.
         private static bool IsAcceptableInsertion(Span target, TextChange change)
         {
-            return change.IsInsert &&
-                   (IsAcceptableEndInsertion(target, change) ||
-                   IsAcceptableInnerInsertion(target, change));
+            return change.IsInsert
+                && (
+                    IsAcceptableEndInsertion(target, change)
+                    || IsAcceptableInnerInsertion(target, change)
+                );
         }
 
         // Accepts character insertions at the end of spans.  AKA: '@foo' -> '@fooo' or '@foo' -> '@foo   ' etc.
@@ -222,13 +246,17 @@ namespace System.Web.Razor.Editor
         {
             Debug.Assert(change.IsInsert);
 
-            return IsAtEndOfSpan(target, change) ||
-                   RemainingIsWhitespace(target, change);
+            return IsAtEndOfSpan(target, change) || RemainingIsWhitespace(target, change);
         }
 
         // Accepts '.' insertions in the middle of spans. Ex: '@foo.baz.bar' -> '@foo..baz.bar'
         // This is meant to allow intellisense when editing a span.
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "target", Justification = "The 'target' parameter is used in Debug to validate that the function is called in the correct context.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "target",
+            Justification = "The 'target' parameter is used in Debug to validate that the function is called in the correct context."
+        )]
         private static bool IsAcceptableInnerInsertion(Span target, TextChange change)
         {
             Debug.Assert(change.IsInsert);
@@ -237,8 +265,7 @@ namespace System.Web.Razor.Editor
             // This case will fail if the IsAcceptableEndInsertion does not capture an end insertion correctly.
             Debug.Assert(!IsAtEndOfSpan(target, change));
 
-            return change.NewPosition > 0 &&
-                   change.NewText == ".";
+            return change.NewPosition > 0 && change.NewText == ".";
         }
 
         private static bool RemainingIsWhitespace(Span target, TextChange change)
@@ -283,7 +310,11 @@ namespace System.Web.Razor.Editor
             // What's left after deleting?
             if (previousChar == '.')
             {
-                return TryAcceptChange(target, change, PartialParseResult.Accepted | PartialParseResult.Provisional);
+                return TryAcceptChange(
+                    target,
+                    change,
+                    PartialParseResult.Accepted | PartialParseResult.Provisional
+                );
             }
             else if (ParserHelpers.IsIdentifierPart(previousChar))
             {
@@ -295,15 +326,21 @@ namespace System.Web.Razor.Editor
             }
         }
 
-        private PartialParseResult HandleInsertion(Span target, char previousChar, TextChange change)
-        {
+        private PartialParseResult HandleInsertion(
+            Span target,
+            char previousChar,
+            TextChange change
+        ) {
             // What are we inserting after?
             if (previousChar == '.')
             {
                 return HandleInsertionAfterDot(target, change);
             }
-            else if (ParserHelpers.IsIdentifierPart(previousChar) || previousChar == ')' || previousChar == ']')
-            {
+            else if (
+                ParserHelpers.IsIdentifierPart(previousChar)
+                || previousChar == ')'
+                || previousChar == ']'
+            ) {
                 return HandleInsertionAfterIdPart(target, change);
             }
             else
@@ -337,9 +374,11 @@ namespace System.Web.Razor.Editor
 
         private static bool EndsWithDot(string content)
         {
-            return (content.Length == 1 && content[0] == '.') ||
-                   (content[content.Length - 1] == '.' &&
-                    content.Take(content.Length - 1).All(ParserHelpers.IsIdentifierPart));
+            return (content.Length == 1 && content[0] == '.')
+                || (
+                    content[content.Length - 1] == '.'
+                    && content.Take(content.Length - 1).All(ParserHelpers.IsIdentifierPart)
+                );
         }
 
         private PartialParseResult HandleInsertionAfterDot(Span target, TextChange change)
@@ -352,8 +391,11 @@ namespace System.Web.Razor.Editor
             return PartialParseResult.Rejected;
         }
 
-        private PartialParseResult TryAcceptChange(Span target, TextChange change, PartialParseResult acceptResult = PartialParseResult.Accepted)
-        {
+        private PartialParseResult TryAcceptChange(
+            Span target,
+            TextChange change,
+            PartialParseResult acceptResult = PartialParseResult.Accepted
+        ) {
             string content = change.ApplyChange(target);
             if (StartsWithKeyword(content))
             {

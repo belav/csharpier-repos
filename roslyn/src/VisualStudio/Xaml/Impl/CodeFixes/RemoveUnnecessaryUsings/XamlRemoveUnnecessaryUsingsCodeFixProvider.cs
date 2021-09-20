@@ -20,15 +20,19 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Xaml.CodeFixes.RemoveUnusedUsings
 {
-    [ExportCodeFixProvider(StringConstants.XamlLanguageName, Name = PredefinedCodeFixProviderNames.RemoveUnnecessaryImports), Shared]
+    [
+        ExportCodeFixProvider(
+            StringConstants.XamlLanguageName,
+            Name = PredefinedCodeFixProviderNames.RemoveUnnecessaryImports
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.AddMissingReference)]
     internal class RemoveUnnecessaryUsingsCodeFixProvider : CodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoveUnnecessaryUsingsCodeFixProvider()
-        {
-        }
+        public RemoveUnnecessaryUsingsCodeFixProvider() { }
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
@@ -44,25 +48,25 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.CodeFixes.RemoveUnusedUsings
         public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             context.RegisterCodeFix(
-                new MyCodeAction(
-                    c => RemoveUnnecessaryImportsAsync(context.Document, c)),
-                context.Diagnostics);
+                new MyCodeAction(c => RemoveUnnecessaryImportsAsync(context.Document, c)),
+                context.Diagnostics
+            );
             return Task.CompletedTask;
         }
 
         private Task<Document> RemoveUnnecessaryImportsAsync(
-            Document document, CancellationToken cancellationToken)
-        {
+            Document document,
+            CancellationToken cancellationToken
+        ) {
             var service = document.GetLanguageService<IRemoveUnnecessaryImportsService>();
             return service.RemoveUnnecessaryImportsAsync(document, cancellationToken);
         }
 
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(Resources.RemoveUnnecessaryNamespaces, createChangedDocument)
-            {
-            }
+            public MyCodeAction(
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(Resources.RemoveUnnecessaryNamespaces, createChangedDocument) { }
         }
     }
 }

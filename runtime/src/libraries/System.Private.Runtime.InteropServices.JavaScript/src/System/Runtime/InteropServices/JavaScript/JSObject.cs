@@ -27,24 +27,26 @@ namespace System.Runtime.InteropServices.JavaScript
 
         public JSObject() : this(Interop.Runtime.New<object>(), true)
         {
-            object result = Interop.Runtime.BindCoreObject(JSHandle, Int32Handle, out int exception);
+            object result = Interop.Runtime.BindCoreObject(
+                JSHandle,
+                Int32Handle,
+                out int exception
+            );
             if (exception != 0)
                 throw new JSException(SR.Format(SR.JSObjectErrorBinding, result));
-
         }
 
-        internal JSObject(IntPtr jsHandle, bool ownsHandle) : base(jsHandle, ownsHandle)
-        { }
+        internal JSObject(IntPtr jsHandle, bool ownsHandle) : base(jsHandle, ownsHandle) { }
 
-        internal JSObject(int jsHandle, bool ownsHandle) : base((IntPtr)jsHandle, ownsHandle)
-        { }
+        internal JSObject(int jsHandle, bool ownsHandle) : base((IntPtr)jsHandle, ownsHandle) { }
 
         internal JSObject(int jsHandle, object rawObj) : base(jsHandle, false)
         {
             RawObject = rawObj;
         }
 
-        internal JSObject(int jsHandle, Delegate rawDelegate, bool ownsHandle = true) : base(jsHandle, ownsHandle)
+        internal JSObject(int jsHandle, Delegate rawDelegate, bool ownsHandle = true)
+            : base(jsHandle, ownsHandle)
         {
             WeakRawObject = new WeakReference<Delegate>(rawDelegate, trackResurrection: false);
         }
@@ -70,7 +72,12 @@ namespace System.Runtime.InteropServices.JavaScript
         /// </returns>
         public object Invoke(string method, params object?[] args)
         {
-            object res = Interop.Runtime.InvokeJSWithArgs(JSHandle, method, args, out int exception);
+            object res = Interop.Runtime.InvokeJSWithArgs(
+                JSHandle,
+                method,
+                args,
+                out int exception
+            );
             if (exception != 0)
                 throw new JSException((string)res);
             return res;
@@ -100,7 +107,11 @@ namespace System.Runtime.InteropServices.JavaScript
         /// </returns>
         public object GetObjectProperty(string name)
         {
-            object propertyValue = Interop.Runtime.GetObjectProperty(JSHandle, name, out int exception);
+            object propertyValue = Interop.Runtime.GetObjectProperty(
+                JSHandle,
+                name,
+                out int exception
+            );
             if (exception != 0)
                 throw new JSException((string)propertyValue);
             return propertyValue;
@@ -117,11 +128,24 @@ namespace System.Runtime.InteropServices.JavaScript
         /// float[], double[]) </param>
         /// <param name="createIfNotExists">Defaults to <see langword="true"/> and creates the property on the javascript object if not found, if set to <see langword="false"/> it will not create the property if it does not exist.  If the property exists, the value is updated with the provided value.</param>
         /// <param name="hasOwnProperty"></param>
-        public void SetObjectProperty(string name, object value, bool createIfNotExists = true, bool hasOwnProperty = false)
-        {
-            object setPropResult = Interop.Runtime.SetObjectProperty(JSHandle, name, value, createIfNotExists, hasOwnProperty, out int exception);
+        public void SetObjectProperty(
+            string name,
+            object value,
+            bool createIfNotExists = true,
+            bool hasOwnProperty = false
+        ) {
+            object setPropResult = Interop.Runtime.SetObjectProperty(
+                JSHandle,
+                name,
+                value,
+                createIfNotExists,
+                hasOwnProperty,
+                out int exception
+            );
             if (exception != 0)
-                throw new JSException($"Error setting {name} on (js-obj js '{JSHandle}' .NET '{Int32Handle} raw '{RawObject != null})");
+                throw new JSException(
+                    $"Error setting {name} on (js-obj js '{JSHandle}' .NET '{Int32Handle} raw '{RawObject != null})"
+                );
         }
 
         /// <summary>
@@ -152,7 +176,12 @@ namespace System.Runtime.InteropServices.JavaScript
 
         internal object? GetWrappedObject()
         {
-            return RawObject ?? (WeakRawObject is WeakReference<Delegate> wr && wr.TryGetTarget(out Delegate? d) ? d : null);
+            return RawObject
+                ?? (
+                    WeakRawObject is WeakReference<Delegate> wr && wr.TryGetTarget(out Delegate? d)
+                        ? d
+                        : null
+                );
         }
         internal void FreeHandle()
         {
@@ -164,7 +193,8 @@ namespace System.Runtime.InteropServices.JavaScript
             FreeGCHandle();
         }
 
-        public override bool Equals([NotNullWhen(true)] object? obj) => obj is JSObject other && JSHandle == other.JSHandle;
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is JSObject other && JSHandle == other.JSHandle;
 
         public override int GetHashCode() => JSHandle;
 
@@ -177,15 +207,14 @@ namespace System.Runtime.InteropServices.JavaScript
             try
             {
 #endif
-            FreeHandle();
-            ret = true;
-
+                FreeHandle();
+                ret = true;
 #if DEBUG_HANDLE
             }
             catch (Exception exception)
             {
                 Console.WriteLine($"ReleaseHandle: {exception.Message}");
-                ret = true;  // Avoid a second assert.
+                ret = true; // Avoid a second assert.
                 throw;
             }
             finally

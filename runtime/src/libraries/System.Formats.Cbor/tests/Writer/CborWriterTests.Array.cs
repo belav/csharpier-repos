@@ -12,15 +12,53 @@ namespace System.Formats.Cbor.Tests
         // Additional pairs generated using http://cbor.me/
 
         [Theory]
-        [InlineData(new object[] { }, "80")]
+        [InlineData(new object[] {  }, "80")]
         [InlineData(new object[] { 42 }, "81182a")]
         [InlineData(new object[] { 1, 2, 3 }, "83010203")]
-        [InlineData(new object[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }, "98190102030405060708090a0b0c0d0e0f101112131415161718181819")]
+        [InlineData(
+            new object[]
+            {
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25
+            },
+            "98190102030405060708090a0b0c0d0e0f101112131415161718181819"
+        )]
         [InlineData(new object[] { 1, -1, "", new byte[] { 7 } }, "840120604107")]
-        [InlineData(new object[] { "lorem", "ipsum", "dolor" }, "83656c6f72656d65697073756d65646f6c6f72")]
-        [InlineData(new object?[] { false, null, float.NaN, double.PositiveInfinity }, "84f4f6f9fe00f97c00")]
-        public static void WriteArray_SimpleValues_HappyPath(object[] values, string expectedHexEncoding)
-        {
+        [InlineData(
+            new object[] { "lorem", "ipsum", "dolor" },
+            "83656c6f72656d65697073756d65646f6c6f72"
+        )]
+        [InlineData(
+            new object?[] { false, null, float.NaN, double.PositiveInfinity },
+            "84f4f6f9fe00f97c00"
+        )]
+        public static void WriteArray_SimpleValues_HappyPath(
+            object[] values,
+            string expectedHexEncoding
+        ) {
             byte[] expectedEncoding = expectedHexEncoding.HexToByteArray();
             var writer = new CborWriter();
             Helpers.WriteArray(writer, values);
@@ -29,11 +67,23 @@ namespace System.Formats.Cbor.Tests
         }
 
         [Theory]
-        [InlineData(new object[] { new object[] { } }, "8180")]
-        [InlineData(new object[] { 1, new object[] { 2, 3 }, new object[] { 4, 5 } }, "8301820203820405")]
-        [InlineData(new object[] { "", new object[] { new object[] { }, new object[] { 1, new byte[] { 10 } } } }, "826082808201410a")]
-        public static void WriteArray_NestedValues_HappyPath(object[] values, string expectedHexEncoding)
-        {
+        [InlineData(new object[] { new object[] {  } }, "8180")]
+        [InlineData(
+            new object[] { 1, new object[] { 2, 3 }, new object[] { 4, 5 } },
+            "8301820203820405"
+        )]
+        [InlineData(
+            new object[]
+            {
+                "",
+                new object[] { new object[] {  }, new object[] { 1, new byte[] { 10 } } }
+            },
+            "826082808201410a"
+        )]
+        public static void WriteArray_NestedValues_HappyPath(
+            object[] values,
+            string expectedHexEncoding
+        ) {
             byte[] expectedEncoding = expectedHexEncoding.HexToByteArray();
             var writer = new CborWriter();
             Helpers.WriteArray(writer, values);
@@ -42,15 +92,53 @@ namespace System.Formats.Cbor.Tests
         }
 
         [Theory]
-        [InlineData(new object[] { }, "9fff")]
+        [InlineData(new object[] {  }, "9fff")]
         [InlineData(new object[] { 42 }, "9f182aff")]
         [InlineData(new object[] { 1, 2, 3 }, "9f010203ff")]
-        [InlineData(new object[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }, "9f0102030405060708090a0b0c0d0e0f101112131415161718181819ff")]
+        [InlineData(
+            new object[]
+            {
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25
+            },
+            "9f0102030405060708090a0b0c0d0e0f101112131415161718181819ff"
+        )]
         [InlineData(new object[] { 1, -1, "", new byte[] { 7 } }, "9f0120604107ff")]
-        [InlineData(new object[] { "lorem", "ipsum", "dolor" }, "9f656c6f72656d65697073756d65646f6c6f72ff")]
-        [InlineData(new object?[] { false, null, float.NaN, double.PositiveInfinity }, "9ff4f6f9fe00f97c00ff")]
-        public static void WriteArray_IndefiniteLength_NoPatching_HappyPath(object[] values, string expectedHexEncoding)
-        {
+        [InlineData(
+            new object[] { "lorem", "ipsum", "dolor" },
+            "9f656c6f72656d65697073756d65646f6c6f72ff"
+        )]
+        [InlineData(
+            new object?[] { false, null, float.NaN, double.PositiveInfinity },
+            "9ff4f6f9fe00f97c00ff"
+        )]
+        public static void WriteArray_IndefiniteLength_NoPatching_HappyPath(
+            object[] values,
+            string expectedHexEncoding
+        ) {
             byte[] expectedEncoding = expectedHexEncoding.HexToByteArray();
 
             var writer = new CborWriter(convertIndefiniteLengthEncodings: false);
@@ -61,11 +149,23 @@ namespace System.Formats.Cbor.Tests
         }
 
         [Theory]
-        [InlineData(new object[] { new object[] { } }, "9f9fffff")]
-        [InlineData(new object[] { 1, new object[] { 2, 3 }, new object[] { 4, 5 } }, "9f019f0203ff9f0405ffff")]
-        [InlineData(new object[] { "", new object[] { new object[] { }, new object[] { 1, new byte[] { 10 } } } }, "9f609f9fff9f01410affffff")]
-        public static void WriteArray_IndefiniteLength_NoPatching_NestedValues_HappyPath(object[] values, string expectedHexEncoding)
-        {
+        [InlineData(new object[] { new object[] {  } }, "9f9fffff")]
+        [InlineData(
+            new object[] { 1, new object[] { 2, 3 }, new object[] { 4, 5 } },
+            "9f019f0203ff9f0405ffff"
+        )]
+        [InlineData(
+            new object[]
+            {
+                "",
+                new object[] { new object[] {  }, new object[] { 1, new byte[] { 10 } } }
+            },
+            "9f609f9fff9f01410affffff"
+        )]
+        public static void WriteArray_IndefiniteLength_NoPatching_NestedValues_HappyPath(
+            object[] values,
+            string expectedHexEncoding
+        ) {
             byte[] expectedEncoding = expectedHexEncoding.HexToByteArray();
 
             var writer = new CborWriter(convertIndefiniteLengthEncodings: false);
@@ -76,15 +176,53 @@ namespace System.Formats.Cbor.Tests
         }
 
         [Theory]
-        [InlineData(new object[] { }, "80")]
+        [InlineData(new object[] {  }, "80")]
         [InlineData(new object[] { 42 }, "81182a")]
         [InlineData(new object[] { 1, 2, 3 }, "83010203")]
-        [InlineData(new object[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 }, "98190102030405060708090a0b0c0d0e0f101112131415161718181819")]
+        [InlineData(
+            new object[]
+            {
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25
+            },
+            "98190102030405060708090a0b0c0d0e0f101112131415161718181819"
+        )]
         [InlineData(new object[] { 1, -1, "", new byte[] { 7 } }, "840120604107")]
-        [InlineData(new object[] { "lorem", "ipsum", "dolor" }, "83656c6f72656d65697073756d65646f6c6f72")]
-        [InlineData(new object?[] { false, null, float.NaN, double.PositiveInfinity }, "84f4f6f9fe00f97c00")]
-        public static void WriteArray_IndefiniteLength_WithPatching_HappyPath(object[] values, string expectedHexEncoding)
-        {
+        [InlineData(
+            new object[] { "lorem", "ipsum", "dolor" },
+            "83656c6f72656d65697073756d65646f6c6f72"
+        )]
+        [InlineData(
+            new object?[] { false, null, float.NaN, double.PositiveInfinity },
+            "84f4f6f9fe00f97c00"
+        )]
+        public static void WriteArray_IndefiniteLength_WithPatching_HappyPath(
+            object[] values,
+            string expectedHexEncoding
+        ) {
             byte[] expectedEncoding = expectedHexEncoding.HexToByteArray();
 
             var writer = new CborWriter(convertIndefiniteLengthEncodings: true);
@@ -95,11 +233,23 @@ namespace System.Formats.Cbor.Tests
         }
 
         [Theory]
-        [InlineData(new object[] { new object[] { } }, "8180")]
-        [InlineData(new object[] { 1, new object[] { 2, 3 }, new object[] { 4, 5 } }, "8301820203820405")]
-        [InlineData(new object[] { "", new object[] { new object[] { }, new object[] { 1, new byte[] { 10 } } } }, "826082808201410a")]
-        public static void WriteArray_IndefiniteLength_WithPatching_NestedValues_HappyPath(object[] values, string expectedHexEncoding)
-        {
+        [InlineData(new object[] { new object[] {  } }, "8180")]
+        [InlineData(
+            new object[] { 1, new object[] { 2, 3 }, new object[] { 4, 5 } },
+            "8301820203820405"
+        )]
+        [InlineData(
+            new object[]
+            {
+                "",
+                new object[] { new object[] {  }, new object[] { 1, new byte[] { 10 } } }
+            },
+            "826082808201410a"
+        )]
+        public static void WriteArray_IndefiniteLength_WithPatching_NestedValues_HappyPath(
+            object[] values,
+            string expectedHexEncoding
+        ) {
             byte[] expectedEncoding = expectedHexEncoding.HexToByteArray();
 
             var writer = new CborWriter(convertIndefiniteLengthEncodings: true);
@@ -114,8 +264,9 @@ namespace System.Formats.Cbor.Tests
         [InlineData(1)]
         [InlineData(3)]
         [InlineData(10)]
-        public static void WriteArray_DefiniteLengthExceeded_ShouldThrowInvalidOperationException(int definiteLength)
-        {
+        public static void WriteArray_DefiniteLengthExceeded_ShouldThrowInvalidOperationException(
+            int definiteLength
+        ) {
             var writer = new CborWriter();
             writer.WriteStartArray(definiteLength);
             for (int i = 0; i < definiteLength; i++)
@@ -131,8 +282,9 @@ namespace System.Formats.Cbor.Tests
         [InlineData(1)]
         [InlineData(3)]
         [InlineData(10)]
-        public static void WriteArray_DefiniteLengthExceeded_WithNestedData_ShouldThrowInvalidOperationException(int definiteLength)
-        {
+        public static void WriteArray_DefiniteLengthExceeded_WithNestedData_ShouldThrowInvalidOperationException(
+            int definiteLength
+        ) {
             var writer = new CborWriter();
             writer.WriteStartArray(definiteLength);
             for (int i = 0; i < definiteLength; i++)
@@ -149,8 +301,9 @@ namespace System.Formats.Cbor.Tests
         [InlineData(1)]
         [InlineData(3)]
         [InlineData(10)]
-        public static void WriteEndArray_DefiniteLengthNotMet_ShouldThrowInvalidOperationException(int definiteLength)
-        {
+        public static void WriteEndArray_DefiniteLengthNotMet_ShouldThrowInvalidOperationException(
+            int definiteLength
+        ) {
             var writer = new CborWriter();
             writer.WriteStartArray(definiteLength);
             for (int i = 1; i < definiteLength; i++)
@@ -165,8 +318,9 @@ namespace System.Formats.Cbor.Tests
         [InlineData(1)]
         [InlineData(3)]
         [InlineData(10)]
-        public static void WriteEndArray_DefiniteLengthNotMet_WithNestedData_ShouldThrowInvalidOperationException(int definiteLength)
-        {
+        public static void WriteEndArray_DefiniteLengthNotMet_WithNestedData_ShouldThrowInvalidOperationException(
+            int definiteLength
+        ) {
             var writer = new CborWriter();
             writer.WriteStartArray(definiteLength);
             for (int i = 1; i < definiteLength; i++)
@@ -183,8 +337,9 @@ namespace System.Formats.Cbor.Tests
         [InlineData(0)]
         [InlineData(1)]
         [InlineData(3)]
-        public static void WriteEndArray_ImbalancedCall_ShouldThrowInvalidOperationException(int depth)
-        {
+        public static void WriteEndArray_ImbalancedCall_ShouldThrowInvalidOperationException(
+            int depth
+        ) {
             var writer = new CborWriter();
             for (int i = 0; i < depth; i++)
             {
@@ -198,8 +353,9 @@ namespace System.Formats.Cbor.Tests
         [InlineData(0)]
         [InlineData(1)]
         [InlineData(3)]
-        public static void WriteEndArray_AfterStartMap_ShouldThrowInvalidOperationException(int depth)
-        {
+        public static void WriteEndArray_AfterStartMap_ShouldThrowInvalidOperationException(
+            int depth
+        ) {
             var writer = new CborWriter();
 
             for (int i = 0; i < depth; i++)
@@ -221,8 +377,9 @@ namespace System.Formats.Cbor.Tests
         [Theory]
         [InlineData(CborConformanceMode.Canonical)]
         [InlineData(CborConformanceMode.Ctap2Canonical)]
-        public static void WriteStartArray_IndefiniteLength_NoPatching_UnsupportedConformance_ShouldThrowInvalidOperationException(CborConformanceMode conformanceMode)
-        {
+        public static void WriteStartArray_IndefiniteLength_NoPatching_UnsupportedConformance_ShouldThrowInvalidOperationException(
+            CborConformanceMode conformanceMode
+        ) {
             var writer = new CborWriter(conformanceMode, convertIndefiniteLengthEncodings: false);
             Assert.Throws<InvalidOperationException>(() => writer.WriteStartArray(null));
         }

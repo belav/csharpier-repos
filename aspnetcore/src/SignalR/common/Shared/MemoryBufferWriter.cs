@@ -135,8 +135,11 @@ namespace Microsoft.AspNetCore.Internal
             destination.Write(_currentSegment.AsSpan(0, _position));
         }
 
-        public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
-        {
+        public override Task CopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        ) {
             if (_completedSegments == null && _currentSegment is not null)
             {
                 // There is only one segment so write without awaiting.
@@ -267,8 +270,10 @@ namespace Microsoft.AspNetCore.Internal
 
         public override void Flush() { }
         public override Task FlushAsync(CancellationToken cancellationToken) => Task.CompletedTask;
-        public override int Read(byte[] buffer, int offset, int count) => throw new NotSupportedException();
-        public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+        public override int Read(byte[] buffer, int offset, int count) =>
+            throw new NotSupportedException();
+        public override long Seek(long offset, SeekOrigin origin) =>
+            throw new NotSupportedException();
         public override void SetLength(long value) => throw new NotSupportedException();
 
         public override void WriteByte(byte value)

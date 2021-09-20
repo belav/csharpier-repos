@@ -8,7 +8,8 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class RazorPagesWithEndpointRoutingTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.Startup>>
+    public class RazorPagesWithEndpointRoutingTest
+        : IClassFixture<MvcTestFixture<RazorPagesWebSite.Startup>>
     {
         public RazorPagesWithEndpointRoutingTest(MvcTestFixture<RazorPagesWebSite.Startup> fixture)
         {
@@ -25,7 +26,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             // Assert
             await response.AssertStatusCodeAsync(HttpStatusCode.Redirect);
-            Assert.Equal("/Login?ReturnUrl=%2FConventions%2FAuthFolder", response.Headers.Location.PathAndQuery);
+            Assert.Equal(
+                "/Login?ReturnUrl=%2FConventions%2FAuthFolder",
+                response.Headers.Location.PathAndQuery
+            );
         }
 
         [Fact]
@@ -49,7 +53,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             // Assert
             await response.AssertStatusCodeAsync(HttpStatusCode.Redirect);
-            Assert.Equal("/Login?ReturnUrl=%2FModelWithAuthFilter", response.Headers.Location.PathAndQuery);
+            Assert.Equal(
+                "/Login?ReturnUrl=%2FModelWithAuthFilter",
+                response.Headers.Location.PathAndQuery
+            );
         }
 
         [Fact]
@@ -60,7 +67,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             // Assert
             await response.AssertStatusCodeAsync(HttpStatusCode.Redirect);
-            Assert.Equal("/Login?ReturnUrl=%2FAuthorizedAction%2FIndex", response.Headers.Location.PathAndQuery);
+            Assert.Equal(
+                "/Login?ReturnUrl=%2FAuthorizedAction%2FIndex",
+                response.Headers.Location.PathAndQuery
+            );
         }
     }
 }

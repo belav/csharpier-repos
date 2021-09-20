@@ -41,8 +41,8 @@ namespace Microsoft.AspNetCore.Routing
             IInlineConstraintResolver constraintResolver,
             RouteValueDictionary? defaults,
             IDictionary<string, object>? constraints,
-            RouteValueDictionary? dataTokens)
-        {
+            RouteValueDictionary? dataTokens
+        ) {
             if (constraintResolver == null)
             {
                 throw new ArgumentNullException(nameof(constraintResolver));
@@ -64,7 +64,10 @@ namespace Microsoft.AspNetCore.Routing
             }
             catch (Exception exception)
             {
-                throw new RouteCreationException(Resources.FormatTemplateRoute_Exception(name, template), exception);
+                throw new RouteCreationException(
+                    Resources.FormatTemplateRoute_Exception(name, template),
+                    exception
+                );
             }
         }
 
@@ -135,14 +138,16 @@ namespace Microsoft.AspNetCore.Routing
                 MergeValues(context.RouteData.DataTokens, DataTokens);
             }
 
-            if (!RouteConstraintMatcher.Match(
-                Constraints,
-                context.RouteData.Values,
-                context.HttpContext,
-                this,
-                RouteDirection.IncomingRequest,
-                _constraintLogger))
-            {
+            if (
+                !RouteConstraintMatcher.Match(
+                    Constraints,
+                    context.RouteData.Values,
+                    context.HttpContext,
+                    this,
+                    RouteDirection.IncomingRequest,
+                    _constraintLogger
+                )
+            ) {
                 return Task.CompletedTask;
             }
             _logger.RequestMatchedRoute(Name!, ParsedTemplate.TemplateText!);
@@ -163,14 +168,16 @@ namespace Microsoft.AspNetCore.Routing
                 return null;
             }
 
-            if (!RouteConstraintMatcher.Match(
-                Constraints,
-                values.CombinedValues,
-                context.HttpContext,
-                this,
-                RouteDirection.UrlGeneration,
-                _constraintLogger))
-            {
+            if (
+                !RouteConstraintMatcher.Match(
+                    Constraints,
+                    values.CombinedValues,
+                    context.HttpContext,
+                    this,
+                    RouteDirection.UrlGeneration,
+                    _constraintLogger
+                )
+            ) {
                 return null;
             }
 
@@ -214,9 +221,12 @@ namespace Microsoft.AspNetCore.Routing
         protected static IDictionary<string, IRouteConstraint> GetConstraints(
             IInlineConstraintResolver inlineConstraintResolver,
             RouteTemplate parsedTemplate,
-            IDictionary<string, object>? constraints)
-        {
-            var constraintBuilder = new RouteConstraintBuilder(inlineConstraintResolver, parsedTemplate.TemplateText!);
+            IDictionary<string, object>? constraints
+        ) {
+            var constraintBuilder = new RouteConstraintBuilder(
+                inlineConstraintResolver,
+                parsedTemplate.TemplateText!
+            );
 
             if (constraints != null)
             {
@@ -235,7 +245,10 @@ namespace Microsoft.AspNetCore.Routing
 
                 foreach (var inlineConstraint in parameter.InlineConstraints)
                 {
-                    constraintBuilder.AddResolvedConstraint(parameter.Name!, inlineConstraint.Constraint);
+                    constraintBuilder.AddResolvedConstraint(
+                        parameter.Name!,
+                        inlineConstraint.Constraint
+                    );
                 }
             }
 
@@ -249,9 +262,10 @@ namespace Microsoft.AspNetCore.Routing
         /// <param name="defaults">A collection of defaults for each parameter.</param>
         protected static RouteValueDictionary GetDefaults(
             RouteTemplate parsedTemplate,
-            RouteValueDictionary? defaults)
-        {
-            var result = defaults == null ? new RouteValueDictionary() : new RouteValueDictionary(defaults);
+            RouteValueDictionary? defaults
+        ) {
+            var result =
+                defaults == null ? new RouteValueDictionary() : new RouteValueDictionary(defaults);
 
             foreach (var parameter in parsedTemplate.Parameters)
             {
@@ -261,15 +275,19 @@ namespace Microsoft.AspNetCore.Routing
                     if (!result.TryAdd(parameter.Name, parameter.DefaultValue))
                     {
                         throw new InvalidOperationException(
-                          Resources.FormatTemplateRoute_CannotHaveDefaultValueSpecifiedInlineAndExplicitly(
-                              parameter.Name));
+                            Resources.FormatTemplateRoute_CannotHaveDefaultValueSpecifiedInlineAndExplicitly(
+                                parameter.Name
+                            )
+                        );
                     }
 #else
                     if (result.ContainsKey(parameter.Name!))
                     {
                         throw new InvalidOperationException(
-                          Resources.FormatTemplateRoute_CannotHaveDefaultValueSpecifiedInlineAndExplicitly(
-                              parameter.Name));
+                            Resources.FormatTemplateRoute_CannotHaveDefaultValueSpecifiedInlineAndExplicitly(
+                                parameter.Name
+                            )
+                        );
                     }
                     else
                     {
@@ -284,8 +302,8 @@ namespace Microsoft.AspNetCore.Routing
 
         private static void MergeValues(
             RouteValueDictionary destination,
-            RouteValueDictionary values)
-        {
+            RouteValueDictionary values
+        ) {
             foreach (var kvp in values)
             {
                 // This will replace the original value for the specified key.
@@ -300,7 +318,8 @@ namespace Microsoft.AspNetCore.Routing
         {
             if (_binder == null)
             {
-                var binderFactory = context.RequestServices.GetRequiredService<TemplateBinderFactory>();
+                var binderFactory =
+                    context.RequestServices.GetRequiredService<TemplateBinderFactory>();
                 _binder = binderFactory.Create(ParsedTemplate, Defaults);
             }
         }
@@ -326,10 +345,11 @@ namespace Microsoft.AspNetCore.Routing
                     }
 
                     var factory = context.RequestServices.GetRequiredService<ILoggerFactory>();
-                    _constraintLogger = factory.CreateLogger(typeof(RouteConstraintMatcher).FullName!);
+                    _constraintLogger = factory.CreateLogger(
+                        typeof(RouteConstraintMatcher).FullName!
+                    );
                     _logger = factory.CreateLogger(typeof(RouteBase).FullName!);
                 }
-
             }
 
             Debug.Assert(_constraintLogger != null);

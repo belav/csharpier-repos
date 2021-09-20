@@ -12,7 +12,10 @@ namespace AutoMapper.UnitTests.Bug
             public int Amount { get; set; }
         }
 
-        public enum AccountKind { None }
+        public enum AccountKind
+        {
+            None
+        }
 
         class Source
         {
@@ -34,9 +37,12 @@ namespace AutoMapper.UnitTests.Bug
             public decimal UnUsedAmount { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>();
+                }
+            );
     }
 }

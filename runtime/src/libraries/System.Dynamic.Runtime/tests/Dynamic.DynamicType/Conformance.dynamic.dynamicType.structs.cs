@@ -22,11 +22,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.strcts.strc
     public class C
     {
         public S s;
-        public S prop
-        {
-            get;
-            set;
-        }
+        public S prop { get; set; }
     }
 
     public class Test
@@ -63,8 +59,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.strcts.strc
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.strcts.strct002.strct002
 {
     // <Title>Structs</Title>
@@ -84,11 +78,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.strcts.strc
     public class C<T>
     {
         public T s;
-        public T prop
-        {
-            get;
-            set;
-        }
+        public T prop { get; set; }
     }
 
     public class Test
@@ -120,8 +110,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.strcts.strc
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.strcts.strct003.strct003
 {
@@ -168,8 +156,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.strcts.strc
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.strcts.strct004.strct004
 {
     // <Title>Structs</Title>
@@ -190,7 +176,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.strcts.strc
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -208,8 +193,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.strcts.strc
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.strcts.strct005.strct005
 {

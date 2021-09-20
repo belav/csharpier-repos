@@ -43,8 +43,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IValueGeneratorSelector valueGeneratorSelector,
             IKeyPropagator keyPropagator,
             IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> logger,
-            ILoggingOptions loggingOptions)
-        {
+            ILoggingOptions loggingOptions
+        ) {
             _valueGeneratorSelector = valueGeneratorSelector;
             _keyPropagator = keyPropagator;
             _logger = logger;
@@ -89,10 +89,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             foreach (var property in entry.EntityType.GetValueGeneratingProperties())
             {
-                if (!entry.HasDefaultValue(property)
-                    || (!includePrimaryKey
-                        && property.IsPrimaryKey()))
-                {
+                if (
+                    !entry.HasDefaultValue(property)
+                    || (!includePrimaryKey && property.IsPrimaryKey())
+                ) {
                     continue;
                 }
 
@@ -103,16 +103,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                 Log(entry, property, generatedValue, temporary);
 
-                SetGeneratedValue(
-                    entry,
-                    property,
-                    generatedValue,
-                    temporary);
+                SetGeneratedValue(entry, property, generatedValue, temporary);
             }
         }
 
-        private void Log(InternalEntityEntry entry, IProperty property, object? generatedValue, bool temporary)
-        {
+        private void Log(
+            InternalEntityEntry entry,
+            IProperty property,
+            object? generatedValue,
+            bool temporary
+        ) {
             if (_loggingOptions.IsSensitiveDataLoggingEnabled)
             {
                 _logger.ValueGeneratedSensitive(entry, property, generatedValue, temporary);
@@ -132,16 +132,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual async Task GenerateAsync(
             InternalEntityEntry entry,
             bool includePrimaryKey = true,
-            CancellationToken cancellationToken = default)
-        {
+            CancellationToken cancellationToken = default
+        ) {
             var entityEntry = new EntityEntry(entry);
 
             foreach (var property in entry.EntityType.GetValueGeneratingProperties())
             {
-                if (!entry.HasDefaultValue(property)
-                    || (!includePrimaryKey
-                        && property.IsPrimaryKey()))
-                {
+                if (
+                    !entry.HasDefaultValue(property)
+                    || (!includePrimaryKey && property.IsPrimaryKey())
+                ) {
                     continue;
                 }
 
@@ -152,19 +152,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                 Log(entry, property, generatedValue, temporary);
 
-                SetGeneratedValue(
-                    entry,
-                    property,
-                    generatedValue,
-                    temporary);
+                SetGeneratedValue(entry, property, generatedValue, temporary);
             }
         }
 
-        private ValueGenerator GetValueGenerator(InternalEntityEntry entry, IProperty property)
-            => _valueGeneratorSelector.Select(
-                property, property.IsKey()
-                    ? property.DeclaringEntityType
-                    : entry.EntityType);
+        private ValueGenerator GetValueGenerator(InternalEntityEntry entry, IProperty property) =>
+            _valueGeneratorSelector.Select(
+                property,
+                property.IsKey() ? property.DeclaringEntityType : entry.EntityType
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -172,12 +168,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool MayGetTemporaryValue(IProperty property, IEntityType entityType)
-            => property.RequiresValueGenerator()
-                && _valueGeneratorSelector.Select(property, entityType).GeneratesTemporaryValues;
+        public virtual bool MayGetTemporaryValue(IProperty property, IEntityType entityType) =>
+            property.RequiresValueGenerator()
+            && _valueGeneratorSelector.Select(property, entityType).GeneratesTemporaryValues;
 
-        private static void SetGeneratedValue(InternalEntityEntry entry, IProperty property, object? generatedValue, bool isTemporary)
-        {
+        private static void SetGeneratedValue(
+            InternalEntityEntry entry,
+            IProperty property,
+            object? generatedValue,
+            bool isTemporary
+        ) {
             if (generatedValue != null)
             {
                 if (isTemporary)

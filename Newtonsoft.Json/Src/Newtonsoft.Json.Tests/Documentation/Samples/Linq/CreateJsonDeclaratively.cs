@@ -63,10 +63,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
                 new Post
                 {
                     Title = "Title!",
-                    Categories = new List<string>
-                    {
-                        "Category1"
-                    },
+                    Categories = new List<string> { "Category1" },
                     Description = "Description!",
                     Link = "Link!"
                 }
@@ -79,25 +76,32 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             #region Usage
             List<Post> posts = GetPosts();
 
-            JObject rss =
-                new JObject(
-                    new JProperty("channel",
-                        new JObject(
-                            new JProperty("title", "James Newton-King"),
-                            new JProperty("link", "http://james.newtonking.com"),
-                            new JProperty("description", "James Newton-King's blog."),
-                            new JProperty("item",
-                                new JArray(
-                                    from p in posts
-                                    orderby p.Title
-                                    select new JObject(
-                                        new JProperty("title", p.Title),
-                                        new JProperty("description", p.Description),
-                                        new JProperty("link", p.Link),
-                                        new JProperty("category",
-                                            new JArray(
-                                                from c in p.Categories
-                                                select new JValue(c)))))))));
+            JObject rss = new JObject(
+                new JProperty(
+                    "channel",
+                    new JObject(
+                        new JProperty("title", "James Newton-King"),
+                        new JProperty("link", "http://james.newtonking.com"),
+                        new JProperty("description", "James Newton-King's blog."),
+                        new JProperty(
+                            "item",
+                            new JArray(
+                                from p in posts
+                                orderby p.Title
+                                select new JObject(
+                                    new JProperty("title", p.Title),
+                                    new JProperty("description", p.Description),
+                                    new JProperty("link", p.Link),
+                                    new JProperty(
+                                        "category",
+                                        new JArray(from c in p.Categories select new JValue(c))
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
 
             Console.WriteLine(rss.ToString());
 
@@ -130,7 +134,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""channel"": {
     ""title"": ""James Newton-King"",
     ""link"": ""http://james.newtonking.com"",
@@ -146,7 +151,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
       }
     ]
   }
-}", rss.ToString());
+}",
+                rss.ToString()
+            );
         }
     }
 }

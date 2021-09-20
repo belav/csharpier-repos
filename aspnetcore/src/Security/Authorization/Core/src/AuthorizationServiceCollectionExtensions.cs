@@ -29,12 +29,39 @@ namespace Microsoft.Extensions.DependencyInjection
             // aren't included by default.
             services.AddOptions();
 
-            services.TryAdd(ServiceDescriptor.Transient<IAuthorizationService, DefaultAuthorizationService>());
-            services.TryAdd(ServiceDescriptor.Transient<IAuthorizationPolicyProvider, DefaultAuthorizationPolicyProvider>());
-            services.TryAdd(ServiceDescriptor.Transient<IAuthorizationHandlerProvider, DefaultAuthorizationHandlerProvider>());
-            services.TryAdd(ServiceDescriptor.Transient<IAuthorizationEvaluator, DefaultAuthorizationEvaluator>());
-            services.TryAdd(ServiceDescriptor.Transient<IAuthorizationHandlerContextFactory, DefaultAuthorizationHandlerContextFactory>());
-            services.TryAddEnumerable(ServiceDescriptor.Transient<IAuthorizationHandler, PassThroughAuthorizationHandler>());
+            services.TryAdd(
+                ServiceDescriptor.Transient<IAuthorizationService, DefaultAuthorizationService>()
+            );
+            services.TryAdd(
+                ServiceDescriptor.Transient<
+                    IAuthorizationPolicyProvider,
+                    DefaultAuthorizationPolicyProvider
+                >()
+            );
+            services.TryAdd(
+                ServiceDescriptor.Transient<
+                    IAuthorizationHandlerProvider,
+                    DefaultAuthorizationHandlerProvider
+                >()
+            );
+            services.TryAdd(
+                ServiceDescriptor.Transient<
+                    IAuthorizationEvaluator,
+                    DefaultAuthorizationEvaluator
+                >()
+            );
+            services.TryAdd(
+                ServiceDescriptor.Transient<
+                    IAuthorizationHandlerContextFactory,
+                    DefaultAuthorizationHandlerContextFactory
+                >()
+            );
+            services.TryAddEnumerable(
+                ServiceDescriptor.Transient<
+                    IAuthorizationHandler,
+                    PassThroughAuthorizationHandler
+                >()
+            );
             return services;
         }
 
@@ -44,8 +71,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
         /// <param name="configure">An action delegate to configure the provided <see cref="AuthorizationOptions"/>.</param>
         /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
-        public static IServiceCollection AddAuthorizationCore(this IServiceCollection services, Action<AuthorizationOptions> configure)
-        {
+        public static IServiceCollection AddAuthorizationCore(
+            this IServiceCollection services,
+            Action<AuthorizationOptions> configure
+        ) {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));

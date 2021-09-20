@@ -6,14 +6,9 @@ namespace Microsoft.AspNetCore.Certificates.Generation
 {
     internal class UnixCertificateManager : CertificateManager
     {
-        public UnixCertificateManager()
-        {
-        }
+        public UnixCertificateManager() { }
 
-        internal UnixCertificateManager(string subject, int version)
-            : base(subject, version)
-        {
-        }
+        internal UnixCertificateManager(string subject, int version) : base(subject, version) { }
 
         public override bool IsTrusted(X509Certificate2 certificate) => false;
 
@@ -21,7 +16,11 @@ namespace Microsoft.AspNetCore.Certificates.Generation
         {
             var export = certificate.Export(X509ContentType.Pkcs12, "");
             certificate.Dispose();
-            certificate = new X509Certificate2(export, "", X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable);
+            certificate = new X509Certificate2(
+                export,
+                "",
+                X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable
+            );
             Array.Clear(export, 0, export.Length);
 
             using (var store = new X509Store(StoreName.My, StoreLocation.CurrentUser))
@@ -29,13 +28,16 @@ namespace Microsoft.AspNetCore.Certificates.Generation
                 store.Open(OpenFlags.ReadWrite);
                 store.Add(certificate);
                 store.Close();
-            };
+            }
+            ;
 
             return certificate;
         }
 
-        internal override CheckCertificateStateResult CheckCertificateState(X509Certificate2 candidate, bool interactive)
-        {
+        internal override CheckCertificateStateResult CheckCertificateState(
+            X509Certificate2 candidate,
+            bool interactive
+        ) {
             // Return true as we don't perform any check.
             return new CheckCertificateStateResult(true, null);
         }
@@ -48,16 +50,25 @@ namespace Microsoft.AspNetCore.Certificates.Generation
         protected override bool IsExportable(X509Certificate2 c) => true;
 
         protected override void TrustCertificateCore(X509Certificate2 certificate) =>
-            throw new InvalidOperationException("Trusting the certificate is not supported on linux");
+            throw new InvalidOperationException(
+                "Trusting the certificate is not supported on linux"
+            );
 
         protected override void RemoveCertificateFromTrustedRoots(X509Certificate2 certificate)
         {
             // No-op here as is benign
         }
 
-        protected override IList<X509Certificate2> GetCertificatesToRemove(StoreName storeName, StoreLocation storeLocation)
-        {
-            return ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: false, requireExportable: false);
+        protected override IList<X509Certificate2> GetCertificatesToRemove(
+            StoreName storeName,
+            StoreLocation storeLocation
+        ) {
+            return ListCertificates(
+                StoreName.My,
+                StoreLocation.CurrentUser,
+                isValid: false,
+                requireExportable: false
+            );
         }
     }
 }

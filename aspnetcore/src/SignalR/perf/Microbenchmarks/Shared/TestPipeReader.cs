@@ -18,13 +18,9 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks.Shared
             ReadResults = new List<ValueTask<ReadResult>>();
         }
 
-        public override void AdvanceTo(SequencePosition consumed)
-        {
-        }
+        public override void AdvanceTo(SequencePosition consumed) { }
 
-        public override void AdvanceTo(SequencePosition consumed, SequencePosition examined)
-        {
-        }
+        public override void AdvanceTo(SequencePosition consumed, SequencePosition examined) { }
 
         public override void CancelPendingRead()
         {
@@ -36,8 +32,9 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks.Shared
             throw new NotImplementedException();
         }
 
-        public override ValueTask<ReadResult> ReadAsync(CancellationToken cancellationToken = new CancellationToken())
-        {
+        public override ValueTask<ReadResult> ReadAsync(
+            CancellationToken cancellationToken = new CancellationToken()
+        ) {
             if (ReadResults.Count == 0)
             {
                 return new ValueTask<ReadResult>(new ReadResult(default, false, true));

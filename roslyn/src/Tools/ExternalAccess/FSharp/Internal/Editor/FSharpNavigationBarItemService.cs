@@ -32,40 +32,75 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public FSharpNavigationBarItemService(
             IThreadingContext threadingContext,
-            IFSharpNavigationBarItemService service)
-        {
+            IFSharpNavigationBarItemService service
+        ) {
             _threadingContext = threadingContext;
             _service = service;
         }
 
-        public async Task<IList<NavigationBarItem>?> GetItemsAsync(Document document, CancellationToken cancellationToken)
-        {
-            var items = await _service.GetItemsAsync(document, cancellationToken).ConfigureAwait(false);
+        public async Task<IList<NavigationBarItem>?> GetItemsAsync(
+            Document document,
+            CancellationToken cancellationToken
+        ) {
+            var items = await _service.GetItemsAsync(document, cancellationToken)
+                .ConfigureAwait(false);
             return items?.Select(x => ConvertToNavigationBarItem(x)).ToList();
         }
 
-        public void NavigateToItem(Document document, NavigationBarItem item, ITextView view, CancellationToken cancellationToken)
-            => throw new NotSupportedException($"Caller should call {nameof(NavigateToItemAsync)} instead");
+        public void NavigateToItem(
+            Document document,
+            NavigationBarItem item,
+            ITextView view,
+            CancellationToken cancellationToken
+        ) =>
+            throw new NotSupportedException(
+                $"Caller should call {nameof(NavigateToItemAsync)} instead"
+            );
 
-        public async Task NavigateToItemAsync(Document document, NavigationBarItem item, ITextView view, CancellationToken cancellationToken)
-        {
+        public async Task NavigateToItemAsync(
+            Document document,
+            NavigationBarItem item,
+            ITextView view,
+            CancellationToken cancellationToken
+        ) {
             // The logic here was ported from FSharp's implementation. The main reason was to avoid shimming INotificationService.
             if (!item.Spans.IsEmpty)
             {
                 var span = item.Spans.First();
                 var workspace = document.Project.Solution.Workspace;
-                var navigationService = workspace.Services.GetRequiredService<IFSharpDocumentNavigationService>();
+                var navigationService =
+                    workspace.Services.GetRequiredService<IFSharpDocumentNavigationService>();
 
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
-                if (navigationService.CanNavigateToPosition(workspace, document.Id, span.Start, virtualSpace: 0, cancellationToken))
-                {
-                    navigationService.TryNavigateToPosition(workspace, document.Id, span.Start, virtualSpace: 0, options: null, cancellationToken);
+                if (
+                    navigationService.CanNavigateToPosition(
+                        workspace,
+                        document.Id,
+                        span.Start,
+                        virtualSpace: 0,
+                        cancellationToken
+                    )
+                ) {
+                    navigationService.TryNavigateToPosition(
+                        workspace,
+                        document.Id,
+                        span.Start,
+                        virtualSpace: 0,
+                        options: null,
+                        cancellationToken
+                    );
                 }
                 else
                 {
-                    var notificationService = workspace.Services.GetRequiredService<INotificationService>();
-                    notificationService.SendNotification(EditorFeaturesResources.The_definition_of_the_object_is_hidden, severity: NotificationSeverity.Error);
+                    var notificationService =
+                        workspace.Services.GetRequiredService<INotificationService>();
+                    notificationService.SendNotification(
+                        EditorFeaturesResources.The_definition_of_the_object_is_hidden,
+                        severity: NotificationSeverity.Error
+                    );
                 }
             }
         }
@@ -77,7 +112,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
 
         private static NavigationBarItem ConvertToNavigationBarItem(FSharpNavigationBarItem item)
         {
-            var childItems = item.ChildItems ?? SpecializedCollections.EmptyList<FSharpNavigationBarItem>();
+            var childItems =
+                item.ChildItems ?? SpecializedCollections.EmptyList<FSharpNavigationBarItem>();
 
             return new InternalNavigationBarItem(
                 item.Text,
@@ -86,15 +122,21 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
                 childItems.SelectAsArray(x => ConvertToNavigationBarItem(x)),
                 item.Indent,
                 item.Bolded,
-                item.Grayed);
+                item.Grayed
+            );
         }
 
         private class InternalNavigationBarItem : NavigationBarItem
         {
-            public InternalNavigationBarItem(string text, Glyph glyph, ImmutableArray<TextSpan> spans, ImmutableArray<NavigationBarItem> childItems, int indent, bool bolded, bool grayed)
-                : base(text, glyph, spans, childItems, indent, bolded, grayed)
-            {
-            }
+            public InternalNavigationBarItem(
+                string text,
+                Glyph glyph,
+                ImmutableArray<TextSpan> spans,
+                ImmutableArray<NavigationBarItem> childItems,
+                int indent,
+                bool bolded,
+                bool grayed
+            ) : base(text, glyph, spans, childItems, indent, bolded, grayed) { }
         }
     }
 }

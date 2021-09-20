@@ -24,7 +24,9 @@ namespace System.Web.Http
             return WebUtility.UrlEncode(str);
 #else
             byte[] bytes = Encoding.UTF8.GetBytes(str);
-            return Encoding.ASCII.GetString(UrlEncode(bytes, 0, bytes.Length, alwaysCreateNewReturnValue: false));
+            return Encoding.ASCII.GetString(
+                UrlEncode(bytes, 0, bytes.Length, alwaysCreateNewReturnValue: false)
+            );
 #endif
         }
 
@@ -43,13 +45,17 @@ namespace System.Web.Http
         }
 
 #if !NETFX_CORE
-        private static byte[] UrlEncode(byte[] bytes, int offset, int count, bool alwaysCreateNewReturnValue)
-        {
+        private static byte[] UrlEncode(
+            byte[] bytes,
+            int offset,
+            int count,
+            bool alwaysCreateNewReturnValue
+        ) {
             byte[] encoded = UrlEncode(bytes, offset, count);
 
             return (alwaysCreateNewReturnValue && (encoded != null) && (encoded == bytes))
-                ? (byte[])encoded.Clone()
-                : encoded;
+              ? (byte[])encoded.Clone()
+              : encoded;
         }
 
         private static byte[] UrlEncode(byte[] bytes, int offset, int count)
@@ -155,10 +161,9 @@ namespace System.Web.Http
 
         private static int HexToInt(char h)
         {
-            return (h >= '0' && h <= '9') ? h - '0' :
-            (h >= 'a' && h <= 'f') ? h - 'a' + 10 :
-            (h >= 'A' && h <= 'F') ? h - 'A' + 10 :
-            -1;
+            return (h >= '0' && h <= '9')
+              ? h - '0'
+              : (h >= 'a' && h <= 'f') ? h - 'a' + 10 : (h >= 'A' && h <= 'F') ? h - 'A' + 10 : -1;
         }
 
         private static char IntToHex(int n)
@@ -232,7 +237,13 @@ namespace System.Web.Http
             {
                 if (_numBytes > 0)
                 {
-                    _numChars += _encoding.GetChars(_byteBuffer, 0, _numBytes, _charBuffer, _numChars);
+                    _numChars += _encoding.GetChars(
+                        _byteBuffer,
+                        0,
+                        _numBytes,
+                        _charBuffer,
+                        _numChars
+                    );
                     _numBytes = 0;
                 }
             }

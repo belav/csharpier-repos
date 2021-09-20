@@ -10,8 +10,7 @@ namespace System.Reflection.Context.Projection
     // Recursively 'projects' any assemblies, modules, types and members returned by a given method
     internal class ProjectingMethodInfo : DelegatingMethodInfo, IProjectable
     {
-        public ProjectingMethodInfo(MethodInfo method, Projector projector)
-            : base(method)
+        public ProjectingMethodInfo(MethodInfo method, Projector projector) : base(method)
         {
             Debug.Assert(null != projector);
 
@@ -73,7 +72,10 @@ namespace System.Reflection.Context.Projection
 
         public override IList<CustomAttributeData> GetCustomAttributesData()
         {
-            return Projector.Project(base.GetCustomAttributesData(), Projector.ProjectCustomAttributeData);
+            return Projector.Project(
+                base.GetCustomAttributesData(),
+                Projector.ProjectCustomAttributeData
+            );
         }
 
         public override bool IsDefined(Type attributeType, bool inherit)
@@ -105,7 +107,9 @@ namespace System.Reflection.Context.Projection
 
         public override MethodInfo MakeGenericMethod(params Type[] typeArguments)
         {
-            return Projector.ProjectMethod(base.MakeGenericMethod(Projector.Unproject(typeArguments)));
+            return Projector.ProjectMethod(
+                base.MakeGenericMethod(Projector.Unproject(typeArguments))
+            );
         }
 
         public override Delegate CreateDelegate(Type delegateType)
@@ -122,9 +126,9 @@ namespace System.Reflection.Context.Projection
         {
             var other = o as ProjectingMethodInfo;
 
-            return other != null &&
-                   Projector == other.Projector &&
-                   UnderlyingMethod.Equals(other.UnderlyingMethod);
+            return other != null
+                && Projector == other.Projector
+                && UnderlyingMethod.Equals(other.UnderlyingMethod);
         }
 
         public override int GetHashCode()

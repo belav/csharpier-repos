@@ -8,7 +8,11 @@ using Xunit;
 
 namespace System.IO.Pipes.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/49568", typeof(PlatformDetection), nameof(PlatformDetection.IsMacOsAppleSilicon))]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/49568",
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsMacOsAppleSilicon)
+    )]
     public class AnonymousPipeTest_CrossProcess
     {
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -16,10 +20,25 @@ namespace System.IO.Pipes.Tests
         {
             // Create two anonymous pipes, one for each direction of communication.
             // Then spawn another process to communicate with.
-            using (var outbound = new AnonymousPipeServerStream(PipeDirection.Out, HandleInheritability.Inheritable))
-            using (var inbound = new AnonymousPipeServerStream(PipeDirection.In, HandleInheritability.Inheritable))
-            using (var remote = RemoteExecutor.Invoke(new Action<string, string>(ChildFunc), outbound.GetClientHandleAsString(), inbound.GetClientHandleAsString()))
-            {
+            using (
+                var outbound = new AnonymousPipeServerStream(
+                    PipeDirection.Out,
+                    HandleInheritability.Inheritable
+                )
+            )
+            using (
+                var inbound = new AnonymousPipeServerStream(
+                    PipeDirection.In,
+                    HandleInheritability.Inheritable
+                )
+            )
+            using (
+                var remote = RemoteExecutor.Invoke(
+                    new Action<string, string>(ChildFunc),
+                    outbound.GetClientHandleAsString(),
+                    inbound.GetClientHandleAsString()
+                )
+            ) {
                 // Close our local copies of the handles now that we've passed them of to the other process
                 outbound.DisposeLocalCopyOfClientHandle();
                 inbound.DisposeLocalCopyOfClientHandle();
@@ -52,9 +71,18 @@ namespace System.IO.Pipes.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void ServerClosesPipe_ClientReceivesEof()
         {
-            using (var pipe = new AnonymousPipeServerStream(PipeDirection.Out, HandleInheritability.Inheritable))
-            using (var remote = RemoteExecutor.Invoke(new Action<string>(ChildFunc), pipe.GetClientHandleAsString()))
-            {
+            using (
+                var pipe = new AnonymousPipeServerStream(
+                    PipeDirection.Out,
+                    HandleInheritability.Inheritable
+                )
+            )
+            using (
+                var remote = RemoteExecutor.Invoke(
+                    new Action<string>(ChildFunc),
+                    pipe.GetClientHandleAsString()
+                )
+            ) {
                 pipe.DisposeLocalCopyOfClientHandle();
                 pipe.Write(new byte[] { 1, 2, 3, 4, 5 }, 0, 5);
 
@@ -79,9 +107,19 @@ namespace System.IO.Pipes.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void ClientClosesPipe_ServerReceivesEof()
         {
-            using (var pipe = new AnonymousPipeServerStream(PipeDirection.In, HandleInheritability.Inheritable))
-            using (var remote = RemoteExecutor.Invoke(new Action<string>(ChildFunc), pipe.GetClientHandleAsString(), new RemoteInvokeOptions { CheckExitCode = false }))
-            {
+            using (
+                var pipe = new AnonymousPipeServerStream(
+                    PipeDirection.In,
+                    HandleInheritability.Inheritable
+                )
+            )
+            using (
+                var remote = RemoteExecutor.Invoke(
+                    new Action<string>(ChildFunc),
+                    pipe.GetClientHandleAsString(),
+                    new RemoteInvokeOptions { CheckExitCode = false }
+                )
+            ) {
                 pipe.DisposeLocalCopyOfClientHandle();
 
                 for (int i = 1; i <= 5; i++)

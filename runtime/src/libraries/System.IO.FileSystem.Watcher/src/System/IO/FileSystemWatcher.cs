@@ -26,7 +26,8 @@ namespace System.IO
         private string _directory;
 
         // The watch filter for the API call.
-        private const NotifyFilters c_defaultNotifyFilters = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName;
+        private const NotifyFilters c_defaultNotifyFilters =
+            NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName;
         private NotifyFilters _notifyFilters = c_defaultNotifyFilters;
 
         // Flag to watch subtree of this directory
@@ -51,14 +52,16 @@ namespace System.IO
         private RenamedEventHandler? _onRenamedHandler;
         private ErrorEventHandler? _onErrorHandler;
 
-        private const int c_notifyFiltersValidMask = (int)(NotifyFilters.Attributes |
-                                                           NotifyFilters.CreationTime |
-                                                           NotifyFilters.DirectoryName |
-                                                           NotifyFilters.FileName |
-                                                           NotifyFilters.LastAccess |
-                                                           NotifyFilters.LastWrite |
-                                                           NotifyFilters.Security |
-                                                           NotifyFilters.Size);
+        private const int c_notifyFiltersValidMask = (int)(
+            NotifyFilters.Attributes
+            | NotifyFilters.CreationTime
+            | NotifyFilters.DirectoryName
+            | NotifyFilters.FileName
+            | NotifyFilters.LastAccess
+            | NotifyFilters.LastWrite
+            | NotifyFilters.Security
+            | NotifyFilters.Size
+        );
 
 #if DEBUG
         static FileSystemWatcher()
@@ -66,7 +69,10 @@ namespace System.IO
             int s_notifyFiltersValidMask = 0;
             foreach (int enumValue in Enum.GetValues(typeof(NotifyFilters)))
                 s_notifyFiltersValidMask |= enumValue;
-            Debug.Assert(c_notifyFiltersValidMask == s_notifyFiltersValidMask, "The NotifyFilters enum has changed. The c_notifyFiltersValidMask must be updated to reflect the values of the NotifyFilters enum.");
+            Debug.Assert(
+                c_notifyFiltersValidMask == s_notifyFiltersValidMask,
+                "The NotifyFilters enum has changed. The c_notifyFiltersValidMask must be updated to reflect the values of the NotifyFilters enum."
+            );
         }
 #endif
 
@@ -104,14 +110,18 @@ namespace System.IO
         /// </devdoc>
         public NotifyFilters NotifyFilter
         {
-            get
-            {
-                return _notifyFilters;
-            }
+            get { return _notifyFilters; }
             set
             {
                 if (((int)value & ~c_notifyFiltersValidMask) != 0)
-                    throw new ArgumentException(SR.Format(SR.InvalidEnumArgument, nameof(value), (int)value, nameof(NotifyFilters)));
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.InvalidEnumArgument,
+                            nameof(value),
+                            (int)value,
+                            nameof(NotifyFilters)
+                        )
+                    );
 
                 if (_notifyFilters != value)
                 {
@@ -129,10 +139,7 @@ namespace System.IO
         /// </devdoc>
         public bool EnableRaisingEvents
         {
-            get
-            {
-                return _enabled;
-            }
+            get { return _enabled; }
             set
             {
                 if (_enabled == value)
@@ -163,10 +170,7 @@ namespace System.IO
         /// </devdoc>
         public string Filter
         {
-            get
-            {
-                return Filters.Count == 0 ? "*" : Filters[0];
-            }
+            get { return Filters.Count == 0 ? "*" : Filters[0]; }
             set
             {
                 Filters.Clear();
@@ -179,10 +183,7 @@ namespace System.IO
         /// </devdoc>
         public bool IncludeSubdirectories
         {
-            get
-            {
-                return _includeSubdirectories;
-            }
+            get { return _includeSubdirectories; }
             set
             {
                 if (_includeSubdirectories != value)
@@ -199,10 +200,7 @@ namespace System.IO
         /// </devdoc>
         public int InternalBufferSize
         {
-            get
-            {
-                return (int)_internalBufferSize;
-            }
+            get { return (int)_internalBufferSize; }
             set
             {
                 if (_internalBufferSize != value)
@@ -231,31 +229,38 @@ namespace System.IO
             }
             catch (OutOfMemoryException)
             {
-                throw new OutOfMemoryException(SR.Format(SR.BufferSizeTooLarge, _internalBufferSize));
+                throw new OutOfMemoryException(
+                    SR.Format(SR.BufferSizeTooLarge, _internalBufferSize)
+                );
             }
         }
 
         /// <devdoc>
         ///    Gets or sets the path of the directory to watch.
         /// </devdoc>
-        [Editor("System.Diagnostics.Design.FSWPathEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-                "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+        [Editor(
+            "System.Diagnostics.Design.FSWPathEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        )]
         public string Path
         {
-            get
-            {
-                return _directory;
-            }
+            get { return _directory; }
             set
             {
                 value = (value == null) ? string.Empty : value;
                 if (!string.Equals(_directory, value, PathInternal.StringComparison))
                 {
                     if (value.Length == 0)
-                        throw new ArgumentException(SR.Format(SR.InvalidDirName, value), nameof(Path));
+                        throw new ArgumentException(
+                            SR.Format(SR.InvalidDirName, value),
+                            nameof(Path)
+                        );
 
                     if (!Directory.Exists(value))
-                        throw new ArgumentException(SR.Format(SR.InvalidDirName_NotExists, value), nameof(Path));
+                        throw new ArgumentException(
+                            SR.Format(SR.InvalidDirName_NotExists, value),
+                            nameof(Path)
+                        );
 
                     _directory = value;
                     Restart();
@@ -268,14 +273,8 @@ namespace System.IO
         /// </devdoc>
         public event FileSystemEventHandler? Changed
         {
-            add
-            {
-                _onChangedHandler += value;
-            }
-            remove
-            {
-                _onChangedHandler -= value;
-            }
+            add { _onChangedHandler += value; }
+            remove { _onChangedHandler -= value; }
         }
 
         /// <devdoc>
@@ -283,14 +282,8 @@ namespace System.IO
         /// </devdoc>
         public event FileSystemEventHandler? Created
         {
-            add
-            {
-                _onCreatedHandler += value;
-            }
-            remove
-            {
-                _onCreatedHandler -= value;
-            }
+            add { _onCreatedHandler += value; }
+            remove { _onCreatedHandler -= value; }
         }
 
         /// <devdoc>
@@ -298,14 +291,8 @@ namespace System.IO
         /// </devdoc>
         public event FileSystemEventHandler? Deleted
         {
-            add
-            {
-                _onDeletedHandler += value;
-            }
-            remove
-            {
-                _onDeletedHandler -= value;
-            }
+            add { _onDeletedHandler += value; }
+            remove { _onDeletedHandler -= value; }
         }
 
         /// <devdoc>
@@ -313,14 +300,8 @@ namespace System.IO
         /// </devdoc>
         public event ErrorEventHandler? Error
         {
-            add
-            {
-                _onErrorHandler += value;
-            }
-            remove
-            {
-                _onErrorHandler -= value;
-            }
+            add { _onErrorHandler += value; }
+            remove { _onErrorHandler -= value; }
         }
 
         /// <devdoc>
@@ -329,14 +310,8 @@ namespace System.IO
         /// </devdoc>
         public event RenamedEventHandler? Renamed
         {
-            add
-            {
-                _onRenamedHandler += value;
-            }
-            remove
-            {
-                _onRenamedHandler -= value;
-            }
+            add { _onRenamedHandler += value; }
+            remove { _onRenamedHandler -= value; }
         }
 
         protected override void Dispose(bool disposing)
@@ -361,6 +336,7 @@ namespace System.IO
                     FinalizeDispose();
                 }
             }
+
             finally
             {
                 _disposed = true;
@@ -378,7 +354,10 @@ namespace System.IO
                 throw new ArgumentException(SR.Format(SR.InvalidDirName, path), nameof(path));
 
             if (!Directory.Exists(path))
-                throw new ArgumentException(SR.Format(SR.InvalidDirName_NotExists, path), nameof(path));
+                throw new ArgumentException(
+                    SR.Format(SR.InvalidDirName_NotExists, path),
+                    nameof(path)
+                );
         }
 
         /// <summary>
@@ -396,7 +375,13 @@ namespace System.IO
 
             foreach (string filter in filters)
             {
-                if (FileSystemName.MatchesSimpleExpression(filter, name, ignoreCase: !PathInternal.IsCaseSensitive))
+                if (
+                    FileSystemName.MatchesSimpleExpression(
+                        filter,
+                        name,
+                        ignoreCase: !PathInternal.IsCaseSensitive
+                    )
+                )
                     return true;
             }
 
@@ -408,21 +393,37 @@ namespace System.IO
         /// </summary>
         private void NotifyInternalBufferOverflowEvent()
         {
-            _onErrorHandler?.Invoke(this, new ErrorEventArgs(
-                    new InternalBufferOverflowException(SR.Format(SR.FSW_BufferOverflow, _directory))));
+            _onErrorHandler?.Invoke(
+                this,
+                new ErrorEventArgs(
+                    new InternalBufferOverflowException(
+                        SR.Format(SR.FSW_BufferOverflow, _directory)
+                    )
+                )
+            );
         }
 
         /// <summary>
         /// Raises the event to each handler in the list.
         /// </summary>
-        private void NotifyRenameEventArgs(WatcherChangeTypes action, ReadOnlySpan<char> name, ReadOnlySpan<char> oldName)
-        {
+        private void NotifyRenameEventArgs(
+            WatcherChangeTypes action,
+            ReadOnlySpan<char> name,
+            ReadOnlySpan<char> oldName
+        ) {
             // filter if there's no handler or neither new name or old name match a specified pattern
             RenamedEventHandler? handler = _onRenamedHandler;
-            if (handler != null &&
-                (MatchPattern(name) || MatchPattern(oldName)))
+            if (handler != null && (MatchPattern(name) || MatchPattern(oldName)))
             {
-                handler(this, new RenamedEventArgs(action, _directory, name.IsEmpty ? null : name.ToString(), oldName.IsEmpty ? null : oldName.ToString()));
+                handler(
+                    this,
+                    new RenamedEventArgs(
+                        action,
+                        _directory,
+                        name.IsEmpty ? null : name.ToString(),
+                        oldName.IsEmpty ? null : oldName.ToString()
+                    )
+                );
             }
         }
 
@@ -445,13 +446,22 @@ namespace System.IO
         /// <summary>
         /// Raises the event to each handler in the list.
         /// </summary>
-        private void NotifyFileSystemEventArgs(WatcherChangeTypes changeType, ReadOnlySpan<char> name)
-        {
+        private void NotifyFileSystemEventArgs(
+            WatcherChangeTypes changeType,
+            ReadOnlySpan<char> name
+        ) {
             FileSystemEventHandler? handler = GetHandler(changeType);
 
             if (handler != null && MatchPattern(name.IsEmpty ? _directory : name))
             {
-                handler(this, new FileSystemEventArgs(changeType, _directory, name.IsEmpty ? null : name.ToString()));
+                handler(
+                    this,
+                    new FileSystemEventArgs(
+                        changeType,
+                        _directory,
+                        name.IsEmpty ? null : name.ToString()
+                    )
+                );
             }
         }
 
@@ -550,13 +560,28 @@ namespace System.IO
 
             // Register the event handlers based on what events are desired.  The full framework
             // doesn't register for the Error event, so this doesn't either.
-            if ((changeType & (WatcherChangeTypes.Created | WatcherChangeTypes.Deleted | WatcherChangeTypes.Changed)) != 0)
-            {
+            if (
+                (
+                    changeType
+                    & (
+                        WatcherChangeTypes.Created
+                        | WatcherChangeTypes.Deleted
+                        | WatcherChangeTypes.Changed
+                    )
+                ) != 0
+            ) {
                 fseh = (s, e) =>
                 {
                     if ((e.ChangeType & changeType) != 0)
                     {
-                        tcs.TrySetResult(new WaitForChangedResult(e.ChangeType, e.Name, oldName: null, timedOut: false));
+                        tcs.TrySetResult(
+                            new WaitForChangedResult(
+                                e.ChangeType,
+                                e.Name,
+                                oldName: null,
+                                timedOut: false
+                            )
+                        );
                     }
                 };
                 if ((changeType & WatcherChangeTypes.Created) != 0)
@@ -572,7 +597,14 @@ namespace System.IO
                 {
                     if ((e.ChangeType & changeType) != 0)
                     {
-                        tcs.TrySetResult(new WaitForChangedResult(e.ChangeType, e.Name, e.OldName, timedOut: false));
+                        tcs.TrySetResult(
+                            new WaitForChangedResult(
+                                e.ChangeType,
+                                e.Name,
+                                e.OldName,
+                                timedOut: false
+                            )
+                        );
                     }
                 };
                 Renamed += reh;
@@ -593,6 +625,7 @@ namespace System.IO
                 // Reset the enabled state to what it was.
                 EnableRaisingEvents = wasEnabled;
             }
+
             finally
             {
                 // Unregister the event handlers.
@@ -612,9 +645,9 @@ namespace System.IO
             }
 
             // Return the results.
-            return tcs.Task.IsCompletedSuccessfully ?
-                tcs.Task.Result :
-                WaitForChangedResult.TimedOutResult;
+            return tcs.Task.IsCompletedSuccessfully
+              ? tcs.Task.Result
+              : WaitForChangedResult.TimedOutResult;
         }
 
         /// <devdoc>
@@ -640,10 +673,7 @@ namespace System.IO
 
         public override ISite? Site
         {
-            get
-            {
-                return base.Site;
-            }
+            get { return base.Site; }
             set
             {
                 base.Site = value;
@@ -680,9 +710,7 @@ namespace System.IO
 
         private sealed class NormalizedFilterCollection : Collection<string>
         {
-            internal NormalizedFilterCollection() : base(new ImmutableStringList())
-            {
-            }
+            internal NormalizedFilterCollection() : base(new ImmutableStringList()) { }
 
             protected override void InsertItem(int index, string item)
             {
@@ -739,9 +767,11 @@ namespace System.IO
 
                 public bool Contains(string item) => Array.IndexOf(Items, item) != -1;
 
-                public void CopyTo(string[] array, int arrayIndex) => Items.CopyTo(array, arrayIndex);
+                public void CopyTo(string[] array, int arrayIndex) =>
+                    Items.CopyTo(array, arrayIndex);
 
-                public IEnumerator<string> GetEnumerator() => ((IEnumerable<string>)Items).GetEnumerator();
+                public IEnumerator<string> GetEnumerator() =>
+                    ((IEnumerable<string>)Items).GetEnumerator();
 
                 public int IndexOf(string item) => Array.IndexOf(Items, item);
 

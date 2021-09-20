@@ -37,8 +37,12 @@ namespace System.Composition.Hosting.Core
         /// <param name="site">A marker used to identify the individual dependency among
         /// those on the dependent part.</param>
         /// <param name="contract">The contract required by the dependency.</param>
-        public static CompositionDependency Satisfied(CompositionContract contract, ExportDescriptorPromise target, bool isPrerequisite, object site)
-        {
+        public static CompositionDependency Satisfied(
+            CompositionContract contract,
+            ExportDescriptorPromise target,
+            bool isPrerequisite,
+            object site
+        ) {
             if (contract == null)
             {
                 throw new ArgumentNullException(nameof(contract));
@@ -87,8 +91,11 @@ namespace System.Composition.Hosting.Core
         /// those on the dependent part.</param>
         /// <param name="targets">The targets found when expecting only one.</param>
         /// <param name="contract">The contract required by the dependency.</param>
-        public static CompositionDependency Oversupplied(CompositionContract contract, IEnumerable<ExportDescriptorPromise> targets, object site)
-        {
+        public static CompositionDependency Oversupplied(
+            CompositionContract contract,
+            IEnumerable<ExportDescriptorPromise> targets,
+            object site
+        ) {
             if (contract == null)
             {
                 throw new ArgumentNullException(nameof(contract));
@@ -107,8 +114,12 @@ namespace System.Composition.Hosting.Core
             return new CompositionDependency(contract, targets, site);
         }
 
-        private CompositionDependency(CompositionContract contract, ExportDescriptorPromise target, bool isPrerequisite, object site)
-        {
+        private CompositionDependency(
+            CompositionContract contract,
+            ExportDescriptorPromise target,
+            bool isPrerequisite,
+            object site
+        ) {
             _target = target;
             _isPrerequisite = isPrerequisite;
             _site = site;
@@ -121,8 +132,11 @@ namespace System.Composition.Hosting.Core
             _site = site;
         }
 
-        private CompositionDependency(CompositionContract contract, IEnumerable<ExportDescriptorPromise> targets, object site)
-        {
+        private CompositionDependency(
+            CompositionContract contract,
+            IEnumerable<ExportDescriptorPromise> targets,
+            object site
+        ) {
             _oversuppliedTargets = targets.ToArray();
             _site = site;
             _contract = contract;
@@ -132,25 +146,37 @@ namespace System.Composition.Hosting.Core
         /// The export descriptor promise from another part
         /// that this part is dependent on.
         /// </summary>
-        public ExportDescriptorPromise Target { get { return _target; } }
+        public ExportDescriptorPromise Target
+        {
+            get { return _target; }
+        }
 
         /// <summary>
         /// True if the dependency is a prerequisite
         /// that must be satisfied before any exports can be retrieved from the dependent
         /// part; otherwise, false.
         /// </summary>
-        public bool IsPrerequisite { get { return _isPrerequisite; } }
+        public bool IsPrerequisite
+        {
+            get { return _isPrerequisite; }
+        }
 
         /// <summary>
         /// A marker used to identify the individual dependency among
         /// those on the dependent part.
         /// </summary>
-        public object Site { get { return _site; } }
+        public object Site
+        {
+            get { return _site; }
+        }
 
         /// <summary>
         /// The contract required by the dependency.
         /// </summary>
-        public CompositionContract Contract { get { return _contract; } }
+        public CompositionContract Contract
+        {
+            get { return _contract; }
+        }
 
         /// <summary>
         /// Creates a human-readable explanation of the dependency.
@@ -164,7 +190,10 @@ namespace System.Composition.Hosting.Core
             return SR.Format(SR.Dependency_ToStringFormat, Site, Target.Contract, Target.Origin);
         }
 
-        internal bool IsError { get { return _target == null; } }
+        internal bool IsError
+        {
+            get { return _target == null; }
+        }
 
         internal void DescribeError(StringBuilder message)
         {
@@ -172,7 +201,11 @@ namespace System.Composition.Hosting.Core
 
             if (_oversuppliedTargets != null)
             {
-                var list = Formatters.ReadableList(_oversuppliedTargets.Select(t => SR.Format(SR.Dependency_QuoteParameter, t.Origin)));
+                var list = Formatters.ReadableList(
+                    _oversuppliedTargets.Select(
+                        t => SR.Format(SR.Dependency_QuoteParameter, t.Origin)
+                    )
+                );
                 message.AppendFormat(SR.Dependency_TooManyExports, Contract, list);
             }
             else

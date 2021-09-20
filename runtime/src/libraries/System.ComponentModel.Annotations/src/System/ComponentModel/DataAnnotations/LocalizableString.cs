@@ -129,9 +129,11 @@ namespace System.ComponentModel.DataAnnotations
                     var badlyConfigured = false;
 
                     // Make sure we found the property and it's the correct type, and that the type itself is public
-                    if (!_resourceType.IsVisible || property == null ||
-                        property.PropertyType != typeof(string))
-                    {
+                    if (
+                        !_resourceType.IsVisible
+                        || property == null
+                        || property.PropertyType != typeof(string)
+                    ) {
                         badlyConfigured = true;
                     }
                     else
@@ -149,8 +151,16 @@ namespace System.ComponentModel.DataAnnotations
                     // If the property is not configured properly, then throw a missing member exception
                     if (badlyConfigured)
                     {
-                        string exceptionMessage = SR.Format(SR.LocalizableString_LocalizationFailed, _propertyName, _resourceType.FullName, _propertyValue);
-                        _cachedResult = () => { throw new InvalidOperationException(exceptionMessage); };
+                        string exceptionMessage = SR.Format(
+                            SR.LocalizableString_LocalizationFailed,
+                            _propertyName,
+                            _resourceType.FullName,
+                            _propertyValue
+                        );
+                        _cachedResult = () =>
+                        {
+                            throw new InvalidOperationException(exceptionMessage);
+                        };
                     }
                     else
                     {

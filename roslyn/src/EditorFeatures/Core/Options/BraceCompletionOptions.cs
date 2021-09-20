@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.Options
     internal static class BraceCompletionOptions
     {
         // This is serialized by the Visual Studio-specific LanguageSettingsPersister
-        public static readonly PerLanguageOption<bool> Enable = new(nameof(BraceCompletionOptions), nameof(Enable), defaultValue: true);
+        public static readonly PerLanguageOption<bool> Enable =
+            new(nameof(BraceCompletionOptions), nameof(Enable), defaultValue: true);
     }
 
     [ExportOptionProvider, Shared]
@@ -22,11 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.Options
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public BraceCompletionOptionsProvider()
-        {
-        }
+        public BraceCompletionOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            BraceCompletionOptions.Enable);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(BraceCompletionOptions.Enable);
     }
 }

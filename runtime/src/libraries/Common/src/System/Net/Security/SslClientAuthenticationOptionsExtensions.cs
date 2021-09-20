@@ -12,12 +12,16 @@ namespace System.Net.Security
 {
     internal static class SslClientAuthenticationOptionsExtensions
     {
-        public static SslClientAuthenticationOptions ShallowClone(this SslClientAuthenticationOptions options)
-        {
+        public static SslClientAuthenticationOptions ShallowClone(
+            this SslClientAuthenticationOptions options
+        ) {
             var clone = new SslClientAuthenticationOptions()
             {
                 AllowRenegotiation = options.AllowRenegotiation,
-                ApplicationProtocols = options.ApplicationProtocols != null ? new List<SslApplicationProtocol>(options.ApplicationProtocols) : null,
+                ApplicationProtocols =
+                    options.ApplicationProtocols != null
+                        ? new List<SslApplicationProtocol>(options.ApplicationProtocols)
+                        : null,
                 CertificateRevocationCheckMode = options.CertificateRevocationCheckMode,
                 CipherSuitesPolicy = options.CipherSuitesPolicy,
                 ClientCertificates = options.ClientCertificates,
@@ -30,15 +34,21 @@ namespace System.Net.Security
 
 #if DEBUG
             // Try to detect if a property gets added that we're not copying correctly.
-            foreach (PropertyInfo pi in typeof(SslClientAuthenticationOptions).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
-            {
+            foreach (
+                PropertyInfo pi in typeof(SslClientAuthenticationOptions).GetProperties(
+                    BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly
+                )
+            ) {
                 object? origValue = pi.GetValue(options);
                 object? cloneValue = pi.GetValue(clone);
 
                 if (origValue is IEnumerable origEnumerable)
                 {
                     IEnumerable? cloneEnumerable = cloneValue as IEnumerable;
-                    Debug.Assert(cloneEnumerable != null, $"{pi.Name}. Expected enumerable cloned value.");
+                    Debug.Assert(
+                        cloneEnumerable != null,
+                        $"{pi.Name}. Expected enumerable cloned value."
+                    );
 
                     IEnumerator e1 = origEnumerable.GetEnumerator();
                     try
@@ -48,16 +58,24 @@ namespace System.Net.Security
                         {
                             while (e1.MoveNext())
                             {
-                                Debug.Assert(e2.MoveNext(), $"{pi.Name}. Cloned enumerator too short.");
-                                Debug.Assert(Equals(e1.Current, e2.Current), $"{pi.Name}. Cloned enumerator's values don't match.");
+                                Debug.Assert(
+                                    e2.MoveNext(),
+                                    $"{pi.Name}. Cloned enumerator too short."
+                                );
+                                Debug.Assert(
+                                    Equals(e1.Current, e2.Current),
+                                    $"{pi.Name}. Cloned enumerator's values don't match."
+                                );
                             }
                             Debug.Assert(!e2.MoveNext(), $"{pi.Name}. Cloned enumerator too long.");
                         }
+
                         finally
                         {
                             (e2 as IDisposable)?.Dispose();
                         }
                     }
+
                     finally
                     {
                         (e1 as IDisposable)?.Dispose();
@@ -65,7 +83,10 @@ namespace System.Net.Security
                 }
                 else
                 {
-                    Debug.Assert(Equals(origValue, cloneValue), $"{pi.Name}. Expected: {origValue}, Actual: {cloneValue}");
+                    Debug.Assert(
+                        Equals(origValue, cloneValue),
+                        $"{pi.Name}. Expected: {origValue}, Actual: {cloneValue}"
+                    );
                 }
             }
 #endif

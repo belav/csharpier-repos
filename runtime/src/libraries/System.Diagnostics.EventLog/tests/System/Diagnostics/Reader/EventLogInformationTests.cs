@@ -14,9 +14,12 @@ namespace System.Diagnostics.Tests
         [InlineData(false)]
         public void GetLogInformation_NullLogName_Throws(bool usingDefaultCtor)
         {
-            using (var session = usingDefaultCtor ? new EventLogSession() : new EventLogSession(null))
-            {
-                Assert.Throws<ArgumentNullException>(() => session.GetLogInformation(null, PathType.LogName));
+            using (
+                var session = usingDefaultCtor ? new EventLogSession() : new EventLogSession(null)
+            ) {
+                Assert.Throws<ArgumentNullException>(
+                    () => session.GetLogInformation(null, PathType.LogName)
+                );
             }
         }
 
@@ -39,7 +42,10 @@ namespace System.Diagnostics.Tests
 
                 using (configuration)
                 {
-                    EventLogInformation logInfo = session.GetLogInformation(configuration.LogName, PathType.LogName);
+                    EventLogInformation logInfo = session.GetLogInformation(
+                        configuration.LogName,
+                        PathType.LogName
+                    );
 
                     Assert.Equal(logInfo.CreationTime, logInfo.CreationTime);
                     Assert.Equal(logInfo.LastAccessTime, logInfo.LastAccessTime);

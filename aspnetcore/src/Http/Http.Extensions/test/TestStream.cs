@@ -41,15 +41,19 @@ namespace Microsoft.AspNetCore.Http.Extensions.Tests
             throw new NotImplementedException();
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
-        {
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        ) {
             var tcs = new TaskCompletionSource<int>();
             cancellationToken.Register(s => ((TaskCompletionSource<int>)s).SetCanceled(), tcs);
             return new ValueTask<int>(tcs.Task);
         }
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
-        {
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        ) {
             var tcs = new TaskCompletionSource<int>();
             cancellationToken.Register(s => ((TaskCompletionSource<int>)s).SetCanceled(), tcs);
             return new ValueTask(tcs.Task);

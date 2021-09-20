@@ -32,11 +32,8 @@ namespace Microsoft.EntityFrameworkCore
         ///     </para>
         /// </summary>
         /// <param name="context"> The context on which the operations will be invoked. </param>
-        public SqlServerRetryingExecutionStrategy(
-            DbContext context)
-            : this(context, DefaultMaxRetryCount)
-        {
-        }
+        public SqlServerRetryingExecutionStrategy(DbContext context)
+            : this(context, DefaultMaxRetryCount) { }
 
         /// <summary>
         ///     <para>
@@ -48,10 +45,8 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="dependencies"> Parameter object containing service dependencies. </param>
         public SqlServerRetryingExecutionStrategy(
-            ExecutionStrategyDependencies dependencies)
-            : this(dependencies, DefaultMaxRetryCount)
-        {
-        }
+            ExecutionStrategyDependencies dependencies
+        ) : this(dependencies, DefaultMaxRetryCount) { }
 
         /// <summary>
         ///     <para>
@@ -63,12 +58,8 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="context"> The context on which the operations will be invoked. </param>
         /// <param name="maxRetryCount"> The maximum number of retry attempts. </param>
-        public SqlServerRetryingExecutionStrategy(
-            DbContext context,
-            int maxRetryCount)
-            : this(context, maxRetryCount, DefaultMaxDelay, errorNumbersToAdd: null)
-        {
-        }
+        public SqlServerRetryingExecutionStrategy(DbContext context, int maxRetryCount)
+            : this(context, maxRetryCount, DefaultMaxDelay, errorNumbersToAdd: null) { }
 
         /// <summary>
         ///     <para>
@@ -82,10 +73,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="maxRetryCount"> The maximum number of retry attempts. </param>
         public SqlServerRetryingExecutionStrategy(
             ExecutionStrategyDependencies dependencies,
-            int maxRetryCount)
-            : this(dependencies, maxRetryCount, DefaultMaxDelay, errorNumbersToAdd: null)
-        {
-        }
+            int maxRetryCount
+        ) : this(dependencies, maxRetryCount, DefaultMaxDelay, errorNumbersToAdd: null) { }
 
         /// <summary>
         ///     Creates a new instance of <see cref="SqlServerRetryingExecutionStrategy" />.
@@ -98,12 +87,9 @@ namespace Microsoft.EntityFrameworkCore
             DbContext context,
             int maxRetryCount,
             TimeSpan maxRetryDelay,
-            ICollection<int>? errorNumbersToAdd)
-            : base(
-                context,
-                maxRetryCount,
-                maxRetryDelay)
-            => _additionalErrorNumbers = errorNumbersToAdd;
+            ICollection<int>? errorNumbersToAdd
+        ) : base(context, maxRetryCount, maxRetryDelay) =>
+            _additionalErrorNumbers = errorNumbersToAdd;
 
         /// <summary>
         ///     Creates a new instance of <see cref="SqlServerRetryingExecutionStrategy" />.
@@ -116,9 +102,9 @@ namespace Microsoft.EntityFrameworkCore
             ExecutionStrategyDependencies dependencies,
             int maxRetryCount,
             TimeSpan maxRetryDelay,
-            ICollection<int>? errorNumbersToAdd)
-            : base(dependencies, maxRetryCount, maxRetryDelay)
-            => _additionalErrorNumbers = errorNumbersToAdd;
+            ICollection<int>? errorNumbersToAdd
+        ) : base(dependencies, maxRetryCount, maxRetryDelay) =>
+            _additionalErrorNumbers = errorNumbersToAdd;
 
         /// <summary>
         ///     Determines whether the specified exception represents a transient failure that can be
@@ -130,8 +116,7 @@ namespace Microsoft.EntityFrameworkCore
         /// </returns>
         protected override bool ShouldRetryOn(Exception? exception)
         {
-            if (_additionalErrorNumbers != null
-                && exception is SqlException sqlException)
+            if (_additionalErrorNumbers != null && exception is SqlException sqlException)
             {
                 foreach (SqlError err in sqlException.Errors)
                 {
@@ -162,8 +147,8 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             return CallOnWrappedException(lastException, IsMemoryOptimizedError)
-                ? TimeSpan.FromMilliseconds(baseDelay.Value.TotalSeconds)
-                : baseDelay;
+              ? TimeSpan.FromMilliseconds(baseDelay.Value.TotalSeconds)
+              : baseDelay;
         }
 
         private static bool IsMemoryOptimizedError(Exception? exception)

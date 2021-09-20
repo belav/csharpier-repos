@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Threading.Tasks;
@@ -89,8 +89,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
         [Theory]
         [InlineData("/S%mple", "/S%mple")]
         [InlineData("/S\\imple", "/S\\imple")] // surrogate pair
-        public virtual async Task Match_SingleLiteralSegment_PercentEncoded(string template, string path)
-        {
+        public virtual async Task Match_SingleLiteralSegment_PercentEncoded(
+            string template,
+            string path
+        ) {
             // Arrange
             var (matcher, endpoint) = CreateMatcher(template);
             var httpContext = CreateContext(path);
@@ -282,10 +284,24 @@ namespace Microsoft.AspNetCore.Routing.Matching
         [InlineData("/{a}/{b}", "/54/73", new string[] { "a", "b" }, new string[] { "54", "73", })]
         [InlineData("/a/{b}/c", "/a/b/c", new string[] { "b", }, new string[] { "b", })]
         [InlineData("/a/{b}/c/", "/a/b/c", new string[] { "b", }, new string[] { "b", })]
-        [InlineData("/{a}/b/{c}", "/54/b/c", new string[] { "a", "c", }, new string[] { "54", "c", })]
-        [InlineData("/{a}/{b}/{c}", "/54/b/c", new string[] { "a", "b", "c", }, new string[] { "54", "b", "c", })]
-        public virtual async Task Match_MultipleParameters(string template, string path, string[] keys, string[] values)
-        {
+        [InlineData(
+            "/{a}/b/{c}",
+            "/54/b/c",
+            new string[] { "a", "c", },
+            new string[] { "54", "c", }
+        )]
+        [InlineData(
+            "/{a}/{b}/{c}",
+            "/54/b/c",
+            new string[] { "a", "b", "c", },
+            new string[] { "54", "b", "c", }
+        )]
+        public virtual async Task Match_MultipleParameters(
+            string template,
+            string path,
+            string[] keys,
+            string[] values
+        ) {
             // Arrange
             var (matcher, endpoint) = CreateMatcher(template);
             var httpContext = CreateContext(path);

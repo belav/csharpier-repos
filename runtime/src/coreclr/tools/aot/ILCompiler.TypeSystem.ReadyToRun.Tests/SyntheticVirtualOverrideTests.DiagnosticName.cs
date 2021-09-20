@@ -9,7 +9,6 @@ using Internal.TypeSystem;
 
 using Xunit;
 
-
 namespace TypeSystemTests
 {
     public partial class SyntheticVirtualOverrideTests
@@ -18,10 +17,7 @@ namespace TypeSystemTests
         {
             public override string DiagnosticName
             {
-                get
-                {
-                    return _name;
-                }
+                get { return _name; }
             }
         }
     }

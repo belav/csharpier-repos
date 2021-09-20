@@ -83,13 +83,17 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
             // Act 2
-            var redirectResponse = await Client.SendAsync(GetRequest("/TempData/GetTempDataAndRedirect", response));
+            var redirectResponse = await Client.SendAsync(
+                GetRequest("/TempData/GetTempDataAndRedirect", response)
+            );
 
             // Assert 2
             Assert.Equal(HttpStatusCode.Redirect, redirectResponse.StatusCode);
 
             // Act 3
-            response = await Client.SendAsync(GetRequest(redirectResponse.Headers.Location.ToString(), response));
+            response = await Client.SendAsync(
+                GetRequest(redirectResponse.Headers.Location.ToString(), response)
+            );
 
             // Assert 3
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -114,7 +118,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
             // Act 2
-            var peekResponse = await Client.SendAsync(GetRequest("/TempData/PeekTempData", response));
+            var peekResponse = await Client.SendAsync(
+                GetRequest("/TempData/PeekTempData", response)
+            );
 
             // Assert 2
             Assert.Equal(HttpStatusCode.OK, peekResponse.StatusCode);
@@ -154,7 +160,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(HttpStatusCode.Redirect, redirectResponse.StatusCode);
 
             // Act 2
-            var response = await Client.SendAsync(GetRequest(redirectResponse.Headers.Location.ToString(), redirectResponse));
+            var response = await Client.SendAsync(
+                GetRequest(redirectResponse.Headers.Location.ToString(), redirectResponse)
+            );
 
             // Assert 2
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -193,7 +201,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
             // Act 2
-            response = await Client.SendAsync(GetRequest("/TempData/GetTempDataSetInActionResult", response));
+            response = await Client.SendAsync(
+                GetRequest("/TempData/GetTempDataSetInActionResult", response)
+            );
 
             // Assert 2
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -201,7 +211,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal("Michael", body);
 
             // Act 3
-            response = await Client.SendAsync(GetRequest("/TempData/GetTempDataSetInActionResult", response));
+            response = await Client.SendAsync(
+                GetRequest("/TempData/GetTempDataSetInActionResult", response)
+            );
 
             // Assert 3
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
@@ -216,7 +228,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             // Assert
             Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
             var responseBody = await response.Content.ReadAsStringAsync();
-            Assert.Contains("Exception from action UnhandledExceptionAndSettingTempData", responseBody);
+            Assert.Contains(
+                "Exception from action UnhandledExceptionAndSettingTempData",
+                responseBody
+            );
 
             // Arrange & Act
             response = await Client.GetAsync("/TempData/UnhandledExceptionAndGetTempData");
@@ -229,7 +244,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task SaveTempDataFilter_DoesNotSaveTempData_OnHandledExceptions()
         {
             // Arrange & Act
-            var response = await Client.GetAsync("/TempData/UnhandledExceptionAndSettingTempData?handleException=true");
+            var response = await Client.GetAsync(
+                "/TempData/UnhandledExceptionAndSettingTempData?handleException=true"
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -253,7 +270,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 {
                     if (cookie.Expires == null || cookie.Expires >= DateTimeOffset.UtcNow)
                     {
-                        request.Headers.Add("Cookie", new CookieHeaderValue(cookie.Name, cookie.Value).ToString());
+                        request.Headers.Add(
+                            "Cookie",
+                            new CookieHeaderValue(cookie.Name, cookie.Value).ToString()
+                        );
                     }
                 }
             }

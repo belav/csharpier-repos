@@ -18,8 +18,11 @@ namespace MiddlewareAnaysisSample
             services.AddMiddlewareAnalysis();
         }
 
-        public void Configure(IApplicationBuilder app, ILoggerFactory factory, DiagnosticListener diagnosticListener)
-        {
+        public void Configure(
+            IApplicationBuilder app,
+            ILoggerFactory factory,
+            DiagnosticListener diagnosticListener
+        ) {
             // Listen for middleware events and log them to the console.
             var listener = new TestDiagnosticListener();
             diagnosticListener.SubscribeWithAdapter(listener);
@@ -30,72 +33,101 @@ namespace MiddlewareAnaysisSample
             app.UseDeveloperExceptionPage();
 
             // Anonymous method inline middleware
-            app.Use((context, next) =>
-            {
-                // No-op
-                return next();
-            });
-
-            app.Map("/map", subApp =>
-            {
-                subApp.Run(context =>
+            app.Use(
+                (context, next) =>
                 {
-                    return context.Response.WriteAsync("Hello World");
-                });
-            });
+                    // No-op
+                    return next();
+                }
+            );
+
+            app.Map(
+                "/map",
+                subApp =>
+                {
+                    subApp.Run(
+                        context =>
+                        {
+                            return context.Response.WriteAsync("Hello World");
+                        }
+                    );
+                }
+            );
 
             // Low level anonymous method inline middleware, named Diagnostics.Middleware.Analysis.Startup+<>c by default
-            app.Use(next =>
-            {
-                return context =>
+            app.Use(
+                next =>
                 {
-                    return next(context);
-                };
-            });
+                    return context =>
+                    {
+                        return next(context);
+                    };
+                }
+            );
 
-            app.Map("/throw", throwApp =>
-            {
-                throwApp.Run(context => { throw new Exception("Application Exception"); });
-            });
+            app.Map(
+                "/throw",
+                throwApp =>
+                {
+                    throwApp.Run(
+                        context =>
+                        {
+                            throw new Exception("Application Exception");
+                        }
+                    );
+                }
+            );
 
             // The home page.
             app.Properties["analysis.NextMiddlewareName"] = "HomePage";
-            app.Use(async (context, next) =>
-            {
-                if (context.Request.Path == "/")
+            app.Use(
+                async (context, next) =>
                 {
-                    context.Response.ContentType = "text/html";
-                    await context.Response.WriteAsync("<html><body>Welcome to the sample<br><br>\r\n");
-                    await context.Response.WriteAsync("Click here to take a side branch: <a href=\"/map/foo\">Map</a><br>\r\n");
-                    await context.Response.WriteAsync("Click here to throw an exception: <a href=\"/throw\">Throw</a><br>\r\n");
-                    await context.Response.WriteAsync("Click here to for a 404: <a href=\"/404\">404</a><br>\r\n");
-                    await context.Response.WriteAsync("</body></html>\r\n");
-                    return;
+                    if (context.Request.Path == "/")
+                    {
+                        context.Response.ContentType = "text/html";
+                        await context.Response.WriteAsync(
+                            "<html><body>Welcome to the sample<br><br>\r\n"
+                        );
+                        await context.Response.WriteAsync(
+                            "Click here to take a side branch: <a href=\"/map/foo\">Map</a><br>\r\n"
+                        );
+                        await context.Response.WriteAsync(
+                            "Click here to throw an exception: <a href=\"/throw\">Throw</a><br>\r\n"
+                        );
+                        await context.Response.WriteAsync(
+                            "Click here to for a 404: <a href=\"/404\">404</a><br>\r\n"
+                        );
+                        await context.Response.WriteAsync("</body></html>\r\n");
+                        return;
+                    }
+                    else
+                    {
+                        await next();
+                    }
                 }
-                else
-                {
-                    await next();
-                }
-            });
-
+            );
             // Note there's always a default 404 middleware at the end of the pipeline.
         }
 
         public static Task Main(string[] args)
         {
-            var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .ConfigureLogging((_, factory) =>
+            var host = new HostBuilder().ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        factory.AddConsole();
-                        factory.AddFilter("Console", level => level >= LogLevel.Debug);
-                    })
-                    .UseKestrel()
-                    .UseIISIntegration()
-                    .UseStartup<Startup>();
-                }).Build();
+                        webHostBuilder.ConfigureLogging(
+                                (_, factory) =>
+                                {
+                                    factory.AddConsole();
+                                    factory.AddFilter("Console", level => level >= LogLevel.Debug);
+                                }
+                            )
+                            .UseKestrel()
+                            .UseIISIntegration()
+                            .UseStartup<Startup>();
+                    }
+                )
+                .Build();
 
             return host.RunAsync();
         }

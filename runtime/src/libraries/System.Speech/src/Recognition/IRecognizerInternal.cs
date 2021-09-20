@@ -17,7 +17,6 @@ namespace System.Speech.Recognition
         Grammar GetGrammarFromId(ulong id);
 
         void SetDictationContext(Grammar grammar, string precedingText, string subsequentText);
-
         #endregion
     }
 }

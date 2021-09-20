@@ -18,10 +18,15 @@ namespace ILVerify
         internal readonly IResolver _resolver;
 
         private RuntimeInterfacesAlgorithm _arrayOfTRuntimeInterfacesAlgorithm;
-        private MetadataRuntimeInterfacesAlgorithm _metadataRuntimeInterfacesAlgorithm = new MetadataRuntimeInterfacesAlgorithm();
-        private MetadataVirtualMethodAlgorithm _metadataVirtualMethodAlgorithm = new MetadataVirtualMethodAlgorithm();
+        private MetadataRuntimeInterfacesAlgorithm _metadataRuntimeInterfacesAlgorithm =
+            new MetadataRuntimeInterfacesAlgorithm();
+        private MetadataVirtualMethodAlgorithm _metadataVirtualMethodAlgorithm =
+            new MetadataVirtualMethodAlgorithm();
 
-        private readonly Dictionary<PEReader, EcmaModule> _modulesCache = new Dictionary<PEReader, EcmaModule>();
+        private readonly Dictionary<PEReader, EcmaModule> _modulesCache = new Dictionary<
+            PEReader,
+            EcmaModule
+        >();
 
         public ILVerifyTypeSystemContext(IResolver resolver)
         {
@@ -35,23 +40,37 @@ namespace ILVerify
             return ResolveAssemblyOrNetmodule(simpleName, simpleName, null, throwIfNotFound);
         }
 
-        internal override ModuleDesc ResolveModule(IAssemblyDesc referencingModule, string fileName, bool throwIfNotFound = true)
-        {
+        internal override ModuleDesc ResolveModule(
+            IAssemblyDesc referencingModule,
+            string fileName,
+            bool throwIfNotFound = true
+        ) {
             // Referenced modules are stored without their extension (see CommandLineHelpers.cs), so we have to drop
             // the extension here as well to find a match.
             string simpleName = Path.GetFileNameWithoutExtension(fileName);
             // The referencing module is not getting verified currently.
             // However, netmodules are resolved in the context of assembly, not in the global context.
-            EcmaModule module = ResolveAssemblyOrNetmodule(simpleName, fileName, referencingModule as IAssemblyDesc, throwIfNotFound);
+            EcmaModule module = ResolveAssemblyOrNetmodule(
+                simpleName,
+                fileName,
+                referencingModule as IAssemblyDesc,
+                throwIfNotFound
+            );
             if (module.MetadataReader.IsAssembly)
             {
-                throw new VerifierException($"The module '{fileName}' is not expected to be an assembly");
+                throw new VerifierException(
+                    $"The module '{fileName}' is not expected to be an assembly"
+                );
             }
             return module;
         }
 
-        private EcmaModule ResolveAssemblyOrNetmodule(string simpleName, string verificationName, IAssemblyDesc containingAssembly, bool throwIfNotFound)
-        {
+        private EcmaModule ResolveAssemblyOrNetmodule(
+            string simpleName,
+            string verificationName,
+            IAssemblyDesc containingAssembly,
+            bool throwIfNotFound
+        ) {
             PEReader peReader = _resolver.Resolve(simpleName);
             if (peReader == null && throwIfNotFound)
             {
@@ -72,21 +91,27 @@ namespace ILVerify
             string actualSimpleName = metadataReader.GetString(nameHandle);
             if (!actualSimpleName.Equals(simpleName, StringComparison.OrdinalIgnoreCase))
             {
-                throw new VerifierException($"Actual PE name '{actualSimpleName}' does not match provided name '{simpleName}'");
+                throw new VerifierException(
+                    $"Actual PE name '{actualSimpleName}' does not match provided name '{simpleName}'"
+                );
             }
         }
 
-        protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForNonPointerArrayType(ArrayType type)
-        {
+        protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForNonPointerArrayType(
+            ArrayType type
+        ) {
             if (_arrayOfTRuntimeInterfacesAlgorithm == null)
             {
-                _arrayOfTRuntimeInterfacesAlgorithm = new SimpleArrayOfTRuntimeInterfacesAlgorithm(SystemModule);
+                _arrayOfTRuntimeInterfacesAlgorithm = new SimpleArrayOfTRuntimeInterfacesAlgorithm(
+                    SystemModule
+                );
             }
             return _arrayOfTRuntimeInterfacesAlgorithm;
         }
 
-        protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForDefType(DefType type)
-        {
+        protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForDefType(
+            DefType type
+        ) {
             return _metadataRuntimeInterfacesAlgorithm;
         }
 
@@ -106,7 +131,9 @@ namespace ILVerify
             {
                 if (containingAssembly != null && existingModule.Assembly != containingAssembly)
                 {
-                    throw new VerifierException($"Containing assembly for module '{existingModule}' must be '{containingAssembly}'");
+                    throw new VerifierException(
+                        $"Containing assembly for module '{existingModule}' must be '{containingAssembly}'"
+                    );
                 }
                 return existingModule;
             }

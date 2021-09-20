@@ -27,8 +27,8 @@ namespace Microsoft.CodeAnalysis.Host.Mef
 
         private readonly CompositionContext _compositionContext;
 
-        public MefHostServices(CompositionContext compositionContext)
-            => _compositionContext = compositionContext;
+        public MefHostServices(CompositionContext compositionContext) =>
+            _compositionContext = compositionContext;
 
         public static MefHostServices Create(CompositionContext compositionContext)
         {
@@ -52,18 +52,24 @@ namespace Microsoft.CodeAnalysis.Host.Mef
                 return s_creationHook(assemblies);
             }
 
-            var compositionConfiguration = new ContainerConfiguration().WithAssemblies(assemblies.Distinct());
+            var compositionConfiguration = new ContainerConfiguration().WithAssemblies(
+                assemblies.Distinct()
+            );
             var container = compositionConfiguration.CreateContainer();
             return new MefHostServices(container);
         }
 
-        protected internal override HostWorkspaceServices CreateWorkspaceServices(Workspace workspace)
-            => new MefWorkspaceServices(this, workspace);
+        protected internal override HostWorkspaceServices CreateWorkspaceServices(
+            Workspace workspace
+        ) => new MefWorkspaceServices(this, workspace);
 
-        IEnumerable<Lazy<TExtension>> IMefHostExportProvider.GetExports<TExtension>()
-            => _compositionContext.GetExports<TExtension>().Select(e => new Lazy<TExtension>(() => e));
+        IEnumerable<Lazy<TExtension>> IMefHostExportProvider.GetExports<TExtension>() =>
+            _compositionContext.GetExports<TExtension>().Select(e => new Lazy<TExtension>(() => e));
 
-        IEnumerable<Lazy<TExtension, TMetadata>> IMefHostExportProvider.GetExports<TExtension, TMetadata>()
+        IEnumerable<Lazy<TExtension, TMetadata>> IMefHostExportProvider.GetExports<
+            TExtension,
+            TMetadata
+        >()
         {
             var importer = new WithMetadataImporter<TExtension, TMetadata>();
             _compositionContext.SatisfyImports(importer);
@@ -100,7 +106,10 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             {
                 if (s_defaultAssemblies.IsDefault)
                 {
-                    ImmutableInterlocked.InterlockedInitialize(ref s_defaultAssemblies, LoadDefaultAssemblies());
+                    ImmutableInterlocked.InterlockedInitialize(
+                        ref s_defaultAssemblies,
+                        LoadDefaultAssemblies()
+                    );
                 }
 
                 return s_defaultAssemblies;
@@ -110,14 +119,14 @@ namespace Microsoft.CodeAnalysis.Host.Mef
         // Used to build a MEF composition using the main workspaces assemblies and the known VisualBasic/CSharp workspace assemblies.
         // updated: includes feature assemblies since they now have public API's.
         private static readonly string[] s_defaultAssemblyNames = new string[]
-            {
-                "Microsoft.CodeAnalysis.Workspaces",
-                "Microsoft.CodeAnalysis.CSharp.Workspaces",
-                "Microsoft.CodeAnalysis.VisualBasic.Workspaces",
-                "Microsoft.CodeAnalysis.Features",
-                "Microsoft.CodeAnalysis.CSharp.Features",
-                "Microsoft.CodeAnalysis.VisualBasic.Features"
-            };
+        {
+            "Microsoft.CodeAnalysis.Workspaces",
+            "Microsoft.CodeAnalysis.CSharp.Workspaces",
+            "Microsoft.CodeAnalysis.VisualBasic.Workspaces",
+            "Microsoft.CodeAnalysis.Features",
+            "Microsoft.CodeAnalysis.CSharp.Features",
+            "Microsoft.CodeAnalysis.VisualBasic.Features"
+        };
 
         internal static bool IsDefaultAssembly(Assembly assembly)
         {
@@ -125,8 +134,8 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             return s_defaultAssemblyNames.Contains(name);
         }
 
-        private static ImmutableArray<Assembly> LoadDefaultAssemblies()
-            => MefHostServicesHelpers.LoadNearbyAssemblies(s_defaultAssemblyNames);
+        private static ImmutableArray<Assembly> LoadDefaultAssemblies() =>
+            MefHostServicesHelpers.LoadNearbyAssemblies(s_defaultAssemblyNames);
 
         #endregion
 

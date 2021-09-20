@@ -15,9 +15,7 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks.Shared
 
         public bool ForceAsync { get; set; }
 
-        public override void Advance(int bytes)
-        {
-        }
+        public override void Advance(int bytes) { }
 
         public override Memory<byte> GetMemory(int sizeHint = 0)
         {
@@ -39,8 +37,9 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks.Shared
             throw new NotImplementedException();
         }
 
-        public override ValueTask<FlushResult> FlushAsync(CancellationToken cancellationToken = new CancellationToken())
-        {
+        public override ValueTask<FlushResult> FlushAsync(
+            CancellationToken cancellationToken = new CancellationToken()
+        ) {
             if (!ForceAsync)
             {
                 return default;

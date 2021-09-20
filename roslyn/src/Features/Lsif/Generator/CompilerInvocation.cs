@@ -23,8 +23,12 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
         public string ProjectFilePath { get; }
         public OptionSet Options { get; }
 
-        public CompilerInvocation(Compilation compilation, HostLanguageServices languageServices, string projectFilePath, OptionSet options)
-        {
+        public CompilerInvocation(
+            Compilation compilation,
+            HostLanguageServices languageServices,
+            string projectFilePath,
+            OptionSet options
+        ) {
             Compilation = compilation;
             LanguageServices = languageServices;
             ProjectFilePath = projectFilePath;
@@ -33,7 +37,9 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
 
         public static async Task<CompilerInvocation> CreateFromJsonAsync(string jsonContents)
         {
-            var invocationInfo = JsonConvert.DeserializeObject<CompilerInvocationInfo>(jsonContents);
+            var invocationInfo = JsonConvert.DeserializeObject<CompilerInvocationInfo>(
+                jsonContents
+            );
 
             // We will use a Workspace to simplify the creation of the compilation, but will be careful not to return the Workspace instance from this class.
             // We will still provide the language services which are used by the generator itself, but we don't tie it to a Workspace object so we can
@@ -45,7 +51,11 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
 
             var mapPath = GetPathMapper(invocationInfo);
 
-            var splitCommandLine = CommandLineParser.SplitCommandLineIntoArguments(invocationInfo.Arguments, removeHashComments: false).ToList();
+            var splitCommandLine = CommandLineParser.SplitCommandLineIntoArguments(
+                    invocationInfo.Arguments,
+                    removeHashComments: false
+                )
+                .ToList();
 
             // Unfortunately for us there are a few paths that get directly read by the command line parse which we need to remap,
             // such as /ruleset files. So let's go through and process them now.
@@ -57,9 +67,10 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                 {
                     var rulesetPath = splitCommandLine[i].Substring(RuleSetSwitch.Length);
 
-                    var quoted = rulesetPath.Length > 2 &&
-                        rulesetPath.StartsWith("\"", StringComparison.Ordinal) &&
-                        rulesetPath.EndsWith("\"", StringComparison.Ordinal);
+                    var quoted =
+                        rulesetPath.Length > 2
+                        && rulesetPath.StartsWith("\"", StringComparison.Ordinal)
+                        && rulesetPath.EndsWith("\"", StringComparison.Ordinal);
 
                     if (quoted)
                     {
@@ -77,34 +88,58 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                 }
             }
 
-            var commandLineParserService = languageServices.GetRequiredService<ICommandLineParserService>();
-            var parsedCommandLine = commandLineParserService.Parse(splitCommandLine, Path.GetDirectoryName(invocationInfo.ProjectFilePath), isInteractive: false, sdkDirectory: null);
+            var commandLineParserService =
+                languageServices.GetRequiredService<ICommandLineParserService>();
+            var parsedCommandLine = commandLineParserService.Parse(
+                splitCommandLine,
+                Path.GetDirectoryName(invocationInfo.ProjectFilePath),
+                isInteractive: false,
+                sdkDirectory: null
+            );
 
             var analyzerLoader = new DefaultAnalyzerAssemblyLoader();
 
             var projectId = ProjectId.CreateNewId(invocationInfo.ProjectFilePath);
 
             var projectInfo = ProjectInfo.Create(
-                projectId,
-                VersionStamp.Default,
-                name: Path.GetFileNameWithoutExtension(invocationInfo.ProjectFilePath),
-                assemblyName: parsedCommandLine.CompilationName!,
-                language: languageName,
-                filePath: invocationInfo.ProjectFilePath,
-                outputFilePath: parsedCommandLine.OutputFileName,
-                parsedCommandLine.CompilationOptions,
-                parsedCommandLine.ParseOptions,
-                parsedCommandLine.SourceFiles.Select(s => CreateDocumentInfo(unmappedPath: s.Path)),
-                metadataReferences: parsedCommandLine.MetadataReferences.Select(r => MetadataReference.CreateFromFile(mapPath(r.Reference), r.Properties)),
-                additionalDocuments: parsedCommandLine.AdditionalFiles.Select(f => CreateDocumentInfo(unmappedPath: f.Path)),
-                analyzerReferences: parsedCommandLine.AnalyzerReferences.Select(r => new AnalyzerFileReference(r.FilePath, analyzerLoader)))
-                .WithAnalyzerConfigDocuments(parsedCommandLine.AnalyzerConfigPaths.Select(CreateDocumentInfo));
+                    projectId,
+                    VersionStamp.Default,
+                    name: Path.GetFileNameWithoutExtension(invocationInfo.ProjectFilePath),
+                    assemblyName: parsedCommandLine.CompilationName!,
+                    language: languageName,
+                    filePath: invocationInfo.ProjectFilePath,
+                    outputFilePath: parsedCommandLine.OutputFileName,
+                    parsedCommandLine.CompilationOptions,
+                    parsedCommandLine.ParseOptions,
+                    parsedCommandLine.SourceFiles.Select(
+                        s => CreateDocumentInfo(unmappedPath: s.Path)
+                    ),
+                    metadataReferences: parsedCommandLine.MetadataReferences.Select(
+                        r => MetadataReference.CreateFromFile(mapPath(r.Reference), r.Properties)
+                    ),
+                    additionalDocuments: parsedCommandLine.AdditionalFiles.Select(
+                        f => CreateDocumentInfo(unmappedPath: f.Path)
+                    ),
+                    analyzerReferences: parsedCommandLine.AnalyzerReferences.Select(
+                        r => new AnalyzerFileReference(r.FilePath, analyzerLoader)
+                    )
+                )
+                .WithAnalyzerConfigDocuments(
+                    parsedCommandLine.AnalyzerConfigPaths.Select(CreateDocumentInfo)
+                );
 
             workspace.AddProject(projectInfo);
 
-            var compilation = await workspace.CurrentSolution.GetProject(projectId)!.GetRequiredCompilationAsync(CancellationToken.None);
+            var compilation = await workspace.CurrentSolution.GetProject(
+                projectId
+            )!.GetRequiredCompilationAsync(CancellationToken.None);
 
-            return new CompilerInvocation(compilation, languageServices, invocationInfo.ProjectFilePath, workspace.CurrentSolution.Options);
+            return new CompilerInvocation(
+                compilation,
+                languageServices,
+                invocationInfo.ProjectFilePath,
+                workspace.CurrentSolution.Options
+            );
 
             // Local methods:
             DocumentInfo CreateDocumentInfo(string unmappedPath)
@@ -114,7 +149,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                     DocumentId.CreateNewId(projectId, mappedPath),
                     name: mappedPath,
                     filePath: mappedPath,
-                    loader: new FileTextLoader(mappedPath, parsedCommandLine.Encoding));
+                    loader: new FileTextLoader(mappedPath, parsedCommandLine.Encoding)
+                );
             }
         }
 
@@ -124,7 +160,10 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             {
                 "csc" => LanguageNames.CSharp,
                 "vbc" => LanguageNames.VisualBasic,
-                _ => throw new NotSupportedException($"Tool '{invocationInfo.Tool}' is not supported."),
+                _
+                  => throw new NotSupportedException(
+                      $"Tool '{invocationInfo.Tool}' is not supported."
+                  ),
             };
         }
 
@@ -149,21 +188,35 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                 foreach (var potentialPathMapping in invocationInfo.PathMappings)
                 {
                     // If it's just a file name being mapped, just a direct map
-                    if (unmappedPath.Equals(potentialPathMapping.From, StringComparison.OrdinalIgnoreCase))
-                    {
+                    if (
+                        unmappedPath.Equals(
+                            potentialPathMapping.From,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    ) {
                         return potentialPathMapping.To;
                     }
 
                     // Map arbitrary contents under subdirectories
-                    var fromWithDirectorySuffix = AddDirectorySuffixIfMissing(potentialPathMapping.From);
+                    var fromWithDirectorySuffix = AddDirectorySuffixIfMissing(
+                        potentialPathMapping.From
+                    );
 
-                    if (unmappedPath.StartsWith(fromWithDirectorySuffix, StringComparison.OrdinalIgnoreCase))
-                    {
+                    if (
+                        unmappedPath.StartsWith(
+                            fromWithDirectorySuffix,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    ) {
                         // Trim off any leading \, which would happen if you have a path like C:\Directory\\File.cs with a double slash, and happen to be
                         // mapping C:\Directory somewhere.
-                        var relativePath = unmappedPath.Substring(fromWithDirectorySuffix.Length).TrimStart('\\');
+                        var relativePath = unmappedPath.Substring(fromWithDirectorySuffix.Length)
+                            .TrimStart('\\');
 
-                        return Path.Combine(AddDirectorySuffixIfMissing(potentialPathMapping.To), relativePath);
+                        return Path.Combine(
+                            AddDirectorySuffixIfMissing(potentialPathMapping.To),
+                            relativePath
+                        );
                     }
                 }
 
@@ -196,7 +249,6 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                 public string From { get; set; }
                 public string To { get; set; }
             }
-
 #nullable disable
         }
     }

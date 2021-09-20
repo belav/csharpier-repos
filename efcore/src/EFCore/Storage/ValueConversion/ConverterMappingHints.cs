@@ -26,8 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             int? precision = null,
             int? scale = null,
             bool? unicode = null,
-            Func<IProperty, IEntityType, ValueGenerator>? valueGeneratorFactory = null)
-        {
+            Func<IProperty, IEntityType, ValueGenerator>? valueGeneratorFactory = null
+        ) {
             Size = size;
             Precision = precision;
             Scale = scale;
@@ -41,15 +41,16 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// </summary>
         /// <param name="hints"> The hints to add. </param>
         /// <returns> The combined hints. </returns>
-        public virtual ConverterMappingHints With(ConverterMappingHints? hints)
-            => hints == null
+        public virtual ConverterMappingHints With(ConverterMappingHints? hints) =>
+            hints == null
                 ? this
                 : new ConverterMappingHints(
-                    hints.Size ?? Size,
-                    hints.Precision ?? Precision,
-                    hints.Scale ?? Scale,
-                    hints.IsUnicode ?? IsUnicode,
-                    hints.ValueGeneratorFactory ?? ValueGeneratorFactory);
+                      hints.Size ?? Size,
+                      hints.Precision ?? Precision,
+                      hints.Scale ?? Scale,
+                      hints.IsUnicode ?? IsUnicode,
+                      hints.ValueGeneratorFactory ?? ValueGeneratorFactory
+                  );
 
         /// <summary>
         ///     The suggested size of the mapped data type.

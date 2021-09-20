@@ -60,8 +60,10 @@ namespace System.Collections.Generic.Tests
 
     // Other cases: IComparable<T>, IComparable, and both
     public class GenericComparableComparersTests : ComparersGenericTests<GenericComparable> { }
-    public class NonGenericComparableComparersTests : ComparersGenericTests<NonGenericComparable> { }
-    public class BadlyBehavingComparableComparersTests : ComparersGenericTests<BadlyBehavingComparable> { }
+    public class NonGenericComparableComparersTests
+        : ComparersGenericTests<NonGenericComparable> { }
+    public class BadlyBehavingComparableComparersTests
+        : ComparersGenericTests<BadlyBehavingComparable> { }
 
     // IEquatable<T>
     public class EquatableComparersTests : ComparersGenericTests<Equatable> { }

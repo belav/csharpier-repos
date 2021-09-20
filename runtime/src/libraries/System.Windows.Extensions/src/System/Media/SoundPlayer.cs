@@ -72,7 +72,11 @@ namespace System.Media
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(LoadTimeout), value, SR.SoundAPILoadTimeout);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(LoadTimeout),
+                        value,
+                        SR.SoundAPILoadTimeout
+                    );
                 }
 
                 _loadTimeout = value;
@@ -222,13 +226,21 @@ namespace System.Media
                 IsLoadCompleted = true;
 
                 ValidateSoundFile(localPath);
-                Interop.WinMM.PlaySound(localPath, IntPtr.Zero, Interop.WinMM.SND_NODEFAULT | flags);
+                Interop.WinMM.PlaySound(
+                    localPath,
+                    IntPtr.Zero,
+                    Interop.WinMM.SND_NODEFAULT | flags
+                );
             }
             else
             {
                 LoadSync();
                 ValidateSoundData(_streamData);
-                Interop.WinMM.PlaySound(_streamData, IntPtr.Zero, Interop.WinMM.SND_MEMORY | Interop.WinMM.SND_NODEFAULT | flags);
+                Interop.WinMM.PlaySound(
+                    _streamData,
+                    IntPtr.Zero,
+                    Interop.WinMM.SND_MEMORY | Interop.WinMM.SND_NODEFAULT | flags
+                );
             }
         }
 
@@ -425,38 +437,20 @@ namespace System.Media
 
         public event AsyncCompletedEventHandler LoadCompleted
         {
-            add
-            {
-                Events.AddHandler(s_eventLoadCompleted, value);
-            }
-            remove
-            {
-                Events.RemoveHandler(s_eventLoadCompleted, value);
-            }
+            add { Events.AddHandler(s_eventLoadCompleted, value); }
+            remove { Events.RemoveHandler(s_eventLoadCompleted, value); }
         }
 
         public event EventHandler SoundLocationChanged
         {
-            add
-            {
-                Events.AddHandler(s_eventSoundLocationChanged, value);
-            }
-            remove
-            {
-                Events.RemoveHandler(s_eventSoundLocationChanged, value);
-            }
+            add { Events.AddHandler(s_eventSoundLocationChanged, value); }
+            remove { Events.RemoveHandler(s_eventSoundLocationChanged, value); }
         }
 
         public event EventHandler StreamChanged
         {
-            add
-            {
-                Events.AddHandler(s_eventStreamChanged, value);
-            }
-            remove
-            {
-                Events.RemoveHandler(s_eventStreamChanged, value);
-            }
+            add { Events.AddHandler(s_eventStreamChanged, value); }
+            remove { Events.RemoveHandler(s_eventStreamChanged, value); }
         }
 
         protected virtual void OnLoadCompleted(AsyncCompletedEventArgs e)
@@ -486,14 +480,19 @@ namespace System.Media
 #pragma warning restore SYSLIB0014
                     using (cancellationToken.Register(r => ((WebRequest)r).Abort(), webRequest))
                     {
-                        WebResponse webResponse = await webRequest.GetResponseAsync().ConfigureAwait(false);
+                        WebResponse webResponse = await webRequest.GetResponseAsync()
+                            .ConfigureAwait(false);
                         _stream = webResponse.GetResponseStream();
                     }
                 }
 
                 _streamData = new byte[BlockSize];
 
-                int readBytes = await _stream.ReadAsync(_streamData.AsMemory(_currentPos, BlockSize), cancellationToken).ConfigureAwait(false);
+                int readBytes = await _stream.ReadAsync(
+                        _streamData.AsMemory(_currentPos, BlockSize),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 int totalBytes = readBytes;
 
                 while (readBytes > 0)
@@ -505,7 +504,11 @@ namespace System.Media
                         Array.Copy(_streamData, newData, _streamData.Length);
                         _streamData = newData;
                     }
-                    readBytes = await _stream.ReadAsync(_streamData.AsMemory(_currentPos, BlockSize), cancellationToken).ConfigureAwait(false);
+                    readBytes = await _stream.ReadAsync(
+                            _streamData.AsMemory(_currentPos, BlockSize),
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     totalBytes += readBytes;
                 }
 
@@ -522,16 +525,21 @@ namespace System.Media
             if (!_doesLoadAppearSynchronous)
             {
                 // Post notification back to the UI thread.
-                AsyncCompletedEventArgs ea = _lastLoadException is OperationCanceledException ?
-                    new AsyncCompletedEventArgs(null, cancelled: true, null) :
-                    new AsyncCompletedEventArgs(_lastLoadException, cancelled: false, null);
+                AsyncCompletedEventArgs ea =
+                    _lastLoadException is OperationCanceledException
+                        ? new AsyncCompletedEventArgs(null, cancelled: true, null)
+                        : new AsyncCompletedEventArgs(_lastLoadException, cancelled: false, null);
                 _asyncOperation.PostOperationCompleted(_loadAsyncOperationCompleted, ea);
             }
         }
 
         private unsafe void ValidateSoundFile(string fileName)
         {
-            IntPtr hMIO = Interop.WinMM.mmioOpen(fileName, IntPtr.Zero, Interop.WinMM.MMIO_READ | Interop.WinMM.MMIO_ALLOCBUF);
+            IntPtr hMIO = Interop.WinMM.mmioOpen(
+                fileName,
+                IntPtr.Zero,
+                Interop.WinMM.MMIO_READ | Interop.WinMM.MMIO_ALLOCBUF
+            );
             if (hMIO == IntPtr.Zero)
             {
                 throw new FileNotFoundException(SR.SoundAPIFileDoesNotExist, _soundLocation);
@@ -547,7 +555,9 @@ namespace System.Media
                 var ck = new Interop.WinMM.MMCKINFO();
                 if (Interop.WinMM.mmioDescend(hMIO, ckRIFF, null, Interop.WinMM.MMIO_FINDRIFF) != 0)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.SoundAPIInvalidWaveFile, _soundLocation));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.SoundAPIInvalidWaveFile, _soundLocation)
+                    );
                 }
 
                 while (Interop.WinMM.mmioDescend(hMIO, ck, ckRIFF, 0) == 0)
@@ -571,7 +581,9 @@ namespace System.Media
                             var data = new byte[dw];
                             if (Interop.WinMM.mmioRead(hMIO, data, dw) != dw)
                             {
-                                throw new InvalidOperationException(SR.Format(SR.SoundAPIReadError, _soundLocation));
+                                throw new InvalidOperationException(
+                                    SR.Format(SR.SoundAPIReadError, _soundLocation)
+                                );
                             }
 
                             fixed (byte* pdata = data)
@@ -591,14 +603,15 @@ namespace System.Media
                 {
                     throw new InvalidOperationException(SR.SoundAPIInvalidWaveHeader);
                 }
-                if (waveFormat.wFormatTag != Interop.WinMM.WAVE_FORMAT_PCM &&
-                    waveFormat.wFormatTag != Interop.WinMM.WAVE_FORMAT_ADPCM &&
-                    waveFormat.wFormatTag != Interop.WinMM.WAVE_FORMAT_IEEE_FLOAT)
-                {
+                if (
+                    waveFormat.wFormatTag != Interop.WinMM.WAVE_FORMAT_PCM
+                    && waveFormat.wFormatTag != Interop.WinMM.WAVE_FORMAT_ADPCM
+                    && waveFormat.wFormatTag != Interop.WinMM.WAVE_FORMAT_IEEE_FLOAT
+                ) {
                     throw new InvalidOperationException(SR.SoundAPIFormatNotSupported);
                 }
-
             }
+
             finally
             {
                 if (hMIO != IntPtr.Zero)
@@ -635,11 +648,20 @@ namespace System.Media
             int len = data.Length;
             while (!fmtChunkFound && position < len - 8)
             {
-                if (data[position] == (byte)'f' && data[position + 1] == (byte)'m' && data[position + 2] == (byte)'t' && data[position + 3] == (byte)' ')
-                {
+                if (
+                    data[position] == (byte)'f'
+                    && data[position + 1] == (byte)'m'
+                    && data[position + 2] == (byte)'t'
+                    && data[position + 3] == (byte)' '
+                ) {
                     // fmt chunk
                     fmtChunkFound = true;
-                    int chunkSize = BytesToInt(data[position + 7], data[position + 6], data[position + 5], data[position + 4]);
+                    int chunkSize = BytesToInt(
+                        data[position + 7],
+                        data[position + 6],
+                        data[position + 5],
+                        data[position + 4]
+                    );
 
                     // get the cbSize from the WAVEFORMATEX
                     int sizeOfWAVEFORMAT = 16;
@@ -655,8 +677,10 @@ namespace System.Media
                             throw new InvalidOperationException(SR.SoundAPIInvalidWaveHeader);
                         }
 
-                        short cbSize = BytesToInt16(data[position + 8 + sizeOfWAVEFORMATEX - 1],
-                                                    data[position + 8 + sizeOfWAVEFORMATEX - 2]);
+                        short cbSize = BytesToInt16(
+                            data[position + 8 + sizeOfWAVEFORMATEX - 1],
+                            data[position + 8 + sizeOfWAVEFORMATEX - 2]
+                        );
                         if (cbSize + sizeOfWAVEFORMATEX != chunkSize)
                         {
                             throw new InvalidOperationException(SR.SoundAPIInvalidWaveHeader);
@@ -674,7 +698,14 @@ namespace System.Media
                 }
                 else
                 {
-                    position += 8 + BytesToInt(data[position + 7], data[position + 6], data[position + 5], data[position + 4]);
+                    position +=
+                        8
+                        + BytesToInt(
+                            data[position + 7],
+                            data[position + 6],
+                            data[position + 5],
+                            data[position + 4]
+                        );
                 }
             }
 
@@ -683,10 +714,11 @@ namespace System.Media
                 throw new InvalidOperationException(SR.SoundAPIInvalidWaveHeader);
             }
 
-            if (wFormatTag != Interop.WinMM.WAVE_FORMAT_PCM &&
-                wFormatTag != Interop.WinMM.WAVE_FORMAT_ADPCM &&
-                wFormatTag != Interop.WinMM.WAVE_FORMAT_IEEE_FLOAT)
-            {
+            if (
+                wFormatTag != Interop.WinMM.WAVE_FORMAT_PCM
+                && wFormatTag != Interop.WinMM.WAVE_FORMAT_ADPCM
+                && wFormatTag != Interop.WinMM.WAVE_FORMAT_IEEE_FLOAT
+            ) {
                 throw new InvalidOperationException(SR.SoundAPIFormatNotSupported);
             }
         }

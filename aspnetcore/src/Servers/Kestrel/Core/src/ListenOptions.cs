@@ -23,8 +23,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
     {
         internal static readonly HttpProtocols DefaultHttpProtocols = HttpProtocols.Http1AndHttp2;
 
-        internal readonly List<Func<ConnectionDelegate, ConnectionDelegate>> _middleware = new List<Func<ConnectionDelegate, ConnectionDelegate>>();
-        internal readonly List<Func<MultiplexedConnectionDelegate, MultiplexedConnectionDelegate>> _multiplexedMiddleware = new List<Func<MultiplexedConnectionDelegate, MultiplexedConnectionDelegate>>();
+        internal readonly List<Func<ConnectionDelegate, ConnectionDelegate>> _middleware = new List<
+            Func<ConnectionDelegate, ConnectionDelegate>
+        >();
+        internal readonly List<
+            Func<MultiplexedConnectionDelegate, MultiplexedConnectionDelegate>
+        > _multiplexedMiddleware = new List<
+            Func<MultiplexedConnectionDelegate, MultiplexedConnectionDelegate>
+        >();
 
         internal ListenOptions(EndPoint endPoint)
         {
@@ -36,10 +42,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             EndPoint = new UnixDomainSocketEndPoint(socketPath);
         }
 
-        internal ListenOptions(ulong fileHandle)
-            : this(fileHandle, FileHandleType.Auto)
-        {
-        }
+        internal ListenOptions(ulong fileHandle) : this(fileHandle, FileHandleType.Auto) { }
 
         internal ListenOptions(ulong fileHandle, FileHandleType handleType)
         {
@@ -92,10 +95,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
 
         internal string Scheme
         {
-            get
-            {
-                return IsTls ? HttpProtocol.SchemeHttps : HttpProtocol.SchemeHttp;
-            }
+            get { return IsTls ? HttpProtocol.SchemeHttps : HttpProtocol.SchemeHttp; }
         }
 
         internal bool IsTls { get; set; }
@@ -135,8 +135,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             return this;
         }
 
-        IMultiplexedConnectionBuilder IMultiplexedConnectionBuilder.Use(Func<MultiplexedConnectionDelegate, MultiplexedConnectionDelegate> middleware)
-        {
+        IMultiplexedConnectionBuilder IMultiplexedConnectionBuilder.Use(
+            Func<MultiplexedConnectionDelegate, MultiplexedConnectionDelegate> middleware
+        ) {
             _multiplexedMiddleware.Add(middleware);
             return this;
         }
@@ -177,9 +178,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             return app;
         }
 
-        internal virtual async Task BindAsync(AddressBindContext context, CancellationToken cancellationToken)
-        {
-            await AddressBinder.BindEndpointAsync(this, context, cancellationToken).ConfigureAwait(false);
+        internal virtual async Task BindAsync(
+            AddressBindContext context,
+            CancellationToken cancellationToken
+        ) {
+            await AddressBinder.BindEndpointAsync(this, context, cancellationToken)
+                .ConfigureAwait(false);
             context.Addresses.Add(GetDisplayName());
         }
     }

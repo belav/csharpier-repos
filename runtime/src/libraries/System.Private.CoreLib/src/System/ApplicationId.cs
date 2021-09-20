@@ -10,12 +10,21 @@ namespace System
     {
         private readonly byte[] _publicKeyToken;
 
-        public ApplicationId(byte[] publicKeyToken, string name, Version version, string? processorArchitecture, string? culture)
-        {
-            if (name == null) throw new ArgumentNullException(nameof(name));
-            if (name.Length == 0) throw new ArgumentException(SR.Argument_EmptyApplicationName);
-            if (version == null) throw new ArgumentNullException(nameof(version));
-            if (publicKeyToken == null) throw new ArgumentNullException(nameof(publicKeyToken));
+        public ApplicationId(
+            byte[] publicKeyToken,
+            string name,
+            Version version,
+            string? processorArchitecture,
+            string? culture
+        ) {
+            if (name == null)
+                throw new ArgumentNullException(nameof(name));
+            if (name.Length == 0)
+                throw new ArgumentException(SR.Argument_EmptyApplicationName);
+            if (version == null)
+                throw new ArgumentNullException(nameof(version));
+            if (publicKeyToken == null)
+                throw new ArgumentNullException(nameof(publicKeyToken));
 
             _publicKeyToken = (byte[])publicKeyToken.Clone();
             Name = name;
@@ -34,7 +43,8 @@ namespace System
 
         public byte[] PublicKeyToken => (byte[])_publicKeyToken.Clone();
 
-        public ApplicationId Copy() => new ApplicationId(_publicKeyToken, Name, Version, ProcessorArchitecture, Culture);
+        public ApplicationId Copy() =>
+            new ApplicationId(_publicKeyToken, Name, Version, ProcessorArchitecture, Culture);
 
         public override string ToString()
         {
@@ -68,7 +78,12 @@ namespace System
         {
             for (int i = 0; i < sArray.Length; i++)
             {
-                HexConverter.ToCharsBuffer(sArray[i], stringBuilder.AppendSpan(2), 0, HexConverter.Casing.Upper);
+                HexConverter.ToCharsBuffer(
+                    sArray[i],
+                    stringBuilder.AppendSpan(2),
+                    0,
+                    HexConverter.Casing.Upper
+                );
             }
         }
 
@@ -78,10 +93,14 @@ namespace System
             if (other == null)
                 return false;
 
-            if (!(Equals(Name, other.Name) &&
-                  Equals(Version, other.Version) &&
-                  Equals(ProcessorArchitecture, other.ProcessorArchitecture) &&
-                  Equals(Culture, other.Culture)))
+            if (
+                !(
+                    Equals(Name, other.Name)
+                    && Equals(Version, other.Version)
+                    && Equals(ProcessorArchitecture, other.ProcessorArchitecture)
+                    && Equals(Culture, other.Culture)
+                )
+            )
                 return false;
 
             if (_publicKeyToken.Length != other._publicKeyToken.Length)

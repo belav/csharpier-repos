@@ -6,7 +6,9 @@ using System.ComponentModel.Composition.Primitives;
 
 namespace System.ComponentModel.Composition.ReflectionModel
 {
-    internal abstract class ReflectionImportDefinition : ContractBasedImportDefinition, ICompositionElement
+    internal abstract class ReflectionImportDefinition
+        : ContractBasedImportDefinition,
+          ICompositionElement
     {
         private readonly ICompositionElement? _origin;
 
@@ -19,9 +21,17 @@ namespace System.ComponentModel.Composition.ReflectionModel
             bool isPrerequisite,
             CreationPolicy requiredCreationPolicy,
             IDictionary<string, object?> metadata,
-            ICompositionElement? origin)
-            : base(contractName, requiredTypeIdentity, requiredMetadata, cardinality, isRecomposable, isPrerequisite, requiredCreationPolicy, metadata)
-        {
+            ICompositionElement? origin
+        ) : base(
+            contractName,
+            requiredTypeIdentity,
+            requiredMetadata,
+            cardinality,
+            isRecomposable,
+            isPrerequisite,
+            requiredCreationPolicy,
+            metadata
+        ) {
             _origin = origin;
         }
 

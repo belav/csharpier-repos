@@ -44,7 +44,10 @@ namespace System.Collections.Concurrent
         {
             // Validate the length
             Debug.Assert(boundedLength >= 2, $"Must be >= 2, got {boundedLength}");
-            Debug.Assert((boundedLength & (boundedLength - 1)) == 0, $"Must be a power of 2, got {boundedLength}");
+            Debug.Assert(
+                (boundedLength & (boundedLength - 1)) == 0,
+                $"Must be a power of 2, got {boundedLength}"
+            );
 
             // Initialize the slots and the mask.  The mask is used as a way of quickly doing "% _slots.Length",
             // instead letting us do "& _slotsMask".
@@ -130,8 +133,13 @@ namespace System.Collections.Concurrent
                     // but before the Volatile.Write, enqueuers trying to enqueue into this slot would
                     // spin indefinitely.  If this implementation is ever used on such a platform, this
                     // if block should be wrapped in a finally / prepared region.
-                    if (Interlocked.CompareExchange(ref _headAndTail.Head, currentHead + 1, currentHead) == currentHead)
-                    {
+                    if (
+                        Interlocked.CompareExchange(
+                            ref _headAndTail.Head,
+                            currentHead + 1,
+                            currentHead
+                        ) == currentHead
+                    ) {
                         // Successfully reserved the slot.  Note that after the above CompareExchange, other threads
                         // trying to dequeue from this slot will end up spinning until we do the subsequent Write.
                         item = slots[slotsIndex].Item!;
@@ -141,11 +149,13 @@ namespace System.Collections.Concurrent
                             // enumerations, peeking, ToArray, etc.  And we don't update the sequence number,
                             // so that an enqueuer will see it as full and be forced to move to a new segment.
                             slots[slotsIndex].Item = default;
-                            Volatile.Write(ref slots[slotsIndex].SequenceNumber, currentHead + slots.Length);
+                            Volatile.Write(
+                                ref slots[slotsIndex].SequenceNumber,
+                                currentHead + slots.Length
+                            );
                         }
                         return true;
                     }
-
                     // The head was already advanced by another thread. A newer head has already been observed and the next
                     // iteration would make forward progress, so there's no need to spin-wait before trying again.
                 }
@@ -160,8 +170,10 @@ namespace System.Collections.Concurrent
                     // empty or if we're just waiting for items in flight or after this one to become available.
                     bool frozen = _frozenForEnqueues;
                     int currentTail = Volatile.Read(ref _headAndTail.Tail);
-                    if (currentTail - currentHead <= 0 || (frozen && (currentTail - FreezeOffset - currentHead <= 0)))
-                    {
+                    if (
+                        currentTail - currentHead <= 0
+                        || (frozen && (currentTail - FreezeOffset - currentHead <= 0))
+                    ) {
                         item = default;
                         return false;
                     }
@@ -229,8 +241,10 @@ namespace System.Collections.Concurrent
                     // empty or if we're just waiting for items in flight or after this one to become available.
                     bool frozen = _frozenForEnqueues;
                     int currentTail = Volatile.Read(ref _headAndTail.Tail);
-                    if (currentTail - currentHead <= 0 || (frozen && (currentTail - FreezeOffset - currentHead <= 0)))
-                    {
+                    if (
+                        currentTail - currentHead <= 0
+                        || (frozen && (currentTail - FreezeOffset - currentHead <= 0))
+                    ) {
                         result = default;
                         return false;
                     }
@@ -285,15 +299,19 @@ namespace System.Collections.Concurrent
                     // but before the Volatile.Write, other threads will spin trying to access this slot.
                     // If this implementation is ever used on such a platform, this if block should be
                     // wrapped in a finally / prepared region.
-                    if (Interlocked.CompareExchange(ref _headAndTail.Tail, currentTail + 1, currentTail) == currentTail)
-                    {
+                    if (
+                        Interlocked.CompareExchange(
+                            ref _headAndTail.Tail,
+                            currentTail + 1,
+                            currentTail
+                        ) == currentTail
+                    ) {
                         // Successfully reserved the slot.  Note that after the above CompareExchange, other threads
                         // trying to return will end up spinning until we do the subsequent Write.
                         slots[slotsIndex].Item = item;
                         Volatile.Write(ref slots[slotsIndex].SequenceNumber, currentTail + 1);
                         return true;
                     }
-
                     // The tail was already advanced by another thread. A newer tail has already been observed and the next
                     // iteration would make forward progress, so there's no need to spin-wait before trying again.
                 }
@@ -334,7 +352,9 @@ namespace System.Collections.Concurrent
     [StructLayout(LayoutKind.Explicit, Size = 3 * Internal.PaddingHelpers.CACHE_LINE_SIZE)] // padding before/between/after fields
     internal struct PaddedHeadAndTail
     {
-        [FieldOffset(1 * Internal.PaddingHelpers.CACHE_LINE_SIZE)] public int Head;
-        [FieldOffset(2 * Internal.PaddingHelpers.CACHE_LINE_SIZE)] public int Tail;
+        [FieldOffset(1 * Internal.PaddingHelpers.CACHE_LINE_SIZE)]
+        public int Head;
+        [FieldOffset(2 * Internal.PaddingHelpers.CACHE_LINE_SIZE)]
+        public int Tail;
     }
 }

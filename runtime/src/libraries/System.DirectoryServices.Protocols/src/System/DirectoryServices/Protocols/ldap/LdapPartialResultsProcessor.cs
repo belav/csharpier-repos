@@ -114,8 +114,13 @@ namespace System.DirectoryServices.Protocols
                 else if (asyncResult._callback != null && asyncResult._partialCallback)
                 {
                     // The user specified a callback to be called even when partial results become available.
-                    if (asyncResult._response != null && (asyncResult._response.Entries.Count > 0 || asyncResult._response.References.Count > 0))
-                    {
+                    if (
+                        asyncResult._response != null
+                        && (
+                            asyncResult._response.Entries.Count > 0
+                            || asyncResult._response.References.Count > 0
+                        )
+                    ) {
                         tmpCallback = asyncResult._callback;
                     }
                 }
@@ -136,7 +141,14 @@ namespace System.DirectoryServices.Protocols
 
             try
             {
-                ValueTask<DirectoryResponse> vt = connection.ConstructResponseAsync(asyncResult._messageID, LdapOperation.LdapSearch, resultType, asyncResult._requestTimeout, false, sync: true);
+                ValueTask<DirectoryResponse> vt = connection.ConstructResponseAsync(
+                    asyncResult._messageID,
+                    LdapOperation.LdapSearch,
+                    resultType,
+                    asyncResult._requestTimeout,
+                    false,
+                    sync: true
+                );
                 Debug.Assert(vt.IsCompleted);
                 SearchResponse response = (SearchResponse)vt.GetAwaiter().GetResult();
 
@@ -144,15 +156,20 @@ namespace System.DirectoryServices.Protocols
                 if (response == null)
                 {
                     // Only when request time out has not yet expiered.
-                    if ((asyncResult._startTime.Ticks + asyncResult._requestTimeout.Ticks) > DateTime.Now.Ticks)
-                    {
+                    if (
+                        (asyncResult._startTime.Ticks + asyncResult._requestTimeout.Ticks)
+                        > DateTime.Now.Ticks
+                    ) {
                         // This is expected, just the client does not have the result yet .
                         return;
                     }
                     else
                     {
                         // time out, now we need to throw proper exception
-                        throw new LdapException((int)LdapError.TimeOut, LdapErrorMappings.MapResultCode((int)LdapError.TimeOut));
+                        throw new LdapException(
+                            (int)LdapError.TimeOut,
+                            LdapErrorMappings.MapResultCode((int)LdapError.TimeOut)
+                        );
                     }
                 }
 
@@ -206,7 +223,9 @@ namespace System.DirectoryServices.Protocols
                         {
                             for (int i = 0; i < asyncResult._response.References.Count; i++)
                             {
-                                ldapException.PartialResults.Add(asyncResult._response.References[i]);
+                                ldapException.PartialResults.Add(
+                                    asyncResult._response.References[i]
+                                );
                             }
                         }
                     }
@@ -217,7 +236,10 @@ namespace System.DirectoryServices.Protocols
                 asyncResult._resultStatus = ResultsStatus.Done;
 
                 // Need to abandon this request.
-                LdapPal.CancelDirectoryAsyncOperation(connection._ldapHandle, asyncResult._messageID);
+                LdapPal.CancelDirectoryAsyncOperation(
+                    connection._ldapHandle,
+                    asyncResult._messageID
+                );
             }
         }
 
@@ -338,8 +360,10 @@ namespace System.DirectoryServices.Protocols
         private readonly ManualResetEvent _workThreadWaitHandle;
         private readonly LdapPartialResultsProcessor _processor;
 
-        internal PartialResultsRetriever(ManualResetEvent eventHandle, LdapPartialResultsProcessor processor)
-        {
+        internal PartialResultsRetriever(
+            ManualResetEvent eventHandle,
+            LdapPartialResultsProcessor processor
+        ) {
             _workThreadWaitHandle = eventHandle;
             _processor = processor;
 

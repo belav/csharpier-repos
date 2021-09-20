@@ -13,7 +13,12 @@ using System.Text;
 
 internal static class MinimizeUtil
 {
-    internal record FilePathInfo(string RelativeDirectory, string Directory, string RelativePath, string FullPath);
+    internal record FilePathInfo(
+        string RelativeDirectory,
+        string Directory,
+        string RelativePath,
+        string FullPath
+    );
 
     internal static void Run(string sourceDirectory, string destinationDirectory, bool isUnix)
     {
@@ -23,7 +28,9 @@ internal static class MinimizeUtil
 
         // https://github.com/dotnet/roslyn/issues/49486
         // we should avoid copying the files under Resources.
-        Directory.CreateDirectory(Path.Combine(destinationDirectory, "src/Workspaces/MSBuildTest/Resources"));
+        Directory.CreateDirectory(
+            Path.Combine(destinationDirectory, "src/Workspaces/MSBuildTest/Resources")
+        );
         var individualFiles = new[]
         {
             "global.json",
@@ -53,31 +60,50 @@ internal static class MinimizeUtil
         //  2. Hard link all other files into destination directory
         Dictionary<Guid, List<FilePathInfo>> initialWalk()
         {
-            IEnumerable<string> directories = new[] {
-                Path.Combine(sourceDirectory, "eng")
-            };
+            IEnumerable<string> directories = new[] { Path.Combine(sourceDirectory, "eng") };
             var artifactsDir = Path.Combine(sourceDirectory, "artifacts/bin");
-            directories = directories.Concat(Directory.EnumerateDirectories(artifactsDir, "*.UnitTests"));
-            directories = directories.Concat(Directory.EnumerateDirectories(artifactsDir, "RunTests"));
+            directories = directories.Concat(
+                Directory.EnumerateDirectories(artifactsDir, "*.UnitTests")
+            );
+            directories = directories.Concat(
+                Directory.EnumerateDirectories(artifactsDir, "RunTests")
+            );
 
             var idToFilePathMap = directories.AsParallel()
-                .SelectMany(unitDirPath => walkDirectory(unitDirPath, sourceDirectory, destinationDirectory))
+                .SelectMany(
+                    unitDirPath => walkDirectory(unitDirPath, sourceDirectory, destinationDirectory)
+                )
                 .GroupBy(pair => pair.mvid)
                 .ToDictionary(
                     group => group.Key,
-                    group => group.Select(pair => pair.pathInfo).ToList());
+                    group => group.Select(pair => pair.pathInfo).ToList()
+                );
 
             return idToFilePathMap;
         }
 
-        static IEnumerable<(Guid mvid, FilePathInfo pathInfo)> walkDirectory(string unitDirPath, string sourceDirectory, string destinationDirectory)
-        {
+        static IEnumerable<(Guid mvid, FilePathInfo pathInfo)> walkDirectory(
+            string unitDirPath,
+            string sourceDirectory,
+            string destinationDirectory
+        ) {
             string? lastOutputDirectory = null;
-            foreach (var sourceFilePath in Directory.EnumerateFiles(unitDirPath, "*", SearchOption.AllDirectories))
-            {
+            foreach (
+                var sourceFilePath in Directory.EnumerateFiles(
+                    unitDirPath,
+                    "*",
+                    SearchOption.AllDirectories
+                )
+            ) {
                 var currentDirName = Path.GetDirectoryName(sourceFilePath)!;
-                var currentRelativeDirectory = Path.GetRelativePath(sourceDirectory, currentDirName);
-                var currentOutputDirectory = Path.Combine(destinationDirectory, currentRelativeDirectory);
+                var currentRelativeDirectory = Path.GetRelativePath(
+                    sourceDirectory,
+                    currentDirName
+                );
+                var currentOutputDirectory = Path.Combine(
+                    destinationDirectory,
+                    currentRelativeDirectory
+                );
                 if (currentOutputDirectory != lastOutputDirectory)
                 {
                     Directory.CreateDirectory(currentOutputDirectory);
@@ -85,13 +111,16 @@ internal static class MinimizeUtil
                 }
                 var fileName = Path.GetFileName(sourceFilePath);
 
-                if (fileName.EndsWith(".dll", StringComparison.Ordinal) && TryGetMvid(sourceFilePath, out var mvid))
-                {
+                if (
+                    fileName.EndsWith(".dll", StringComparison.Ordinal)
+                    && TryGetMvid(sourceFilePath, out var mvid)
+                ) {
                     var filePathInfo = new FilePathInfo(
                         RelativeDirectory: currentRelativeDirectory,
                         Directory: currentDirName,
                         RelativePath: Path.Combine(currentRelativeDirectory, fileName),
-                        FullPath: sourceFilePath);
+                        FullPath: sourceFilePath
+                    );
                     yield return (mvid, filePathInfo);
                 }
                 else
@@ -127,8 +156,7 @@ internal static class MinimizeUtil
         void writeHydrateFile()
         {
             var fileList = new List<string>();
-            var grouping = idToFilePathMap
-                .Where(x => x.Value.Count > 1)
+            var grouping = idToFilePathMap.Where(x => x.Value.Count > 1)
                 .SelectMany(pair => pair.Value.Select(fp => (Id: pair.Key, FilePath: fp)))
                 .GroupBy(fp => getGroupDirectory(fp.FilePath.RelativeDirectory));
 
@@ -137,7 +165,9 @@ internal static class MinimizeUtil
             if (isUnix)
             {
                 writeUnixHeaderContent(rehydrateAllBuilder);
-                rehydrateAllBuilder.AppendLine("export HELIX_CORRELATION_PAYLOAD=$scriptroot/.duplicate");
+                rehydrateAllBuilder.AppendLine(
+                    "export HELIX_CORRELATION_PAYLOAD=$scriptroot/.duplicate"
+                );
             }
             else
             {
@@ -153,23 +183,35 @@ internal static class MinimizeUtil
                 {
                     filename = "rehydrate.sh";
                     writeUnixRehydrateContent(builder, group);
-                    rehydrateAllBuilder.AppendLine(@"bash """ + Path.Combine("$scriptroot", group.Key, "rehydrate.sh") + @"""");
+                    rehydrateAllBuilder.AppendLine(
+                        @"bash """ + Path.Combine("$scriptroot", group.Key, "rehydrate.sh") + @""""
+                    );
                 }
                 else
                 {
                     filename = "rehydrate.cmd";
                     writeWindowsRehydrateContent(builder, group);
-                    rehydrateAllBuilder.AppendLine("call " + Path.Combine("%~dp0", group.Key, "rehydrate.cmd"));
+                    rehydrateAllBuilder.AppendLine(
+                        "call " + Path.Combine("%~dp0", group.Key, "rehydrate.cmd")
+                    );
                 }
 
-                File.WriteAllText(Path.Combine(destinationDirectory, group.Key, filename), builder.ToString());
+                File.WriteAllText(
+                    Path.Combine(destinationDirectory, group.Key, filename),
+                    builder.ToString()
+                );
             }
 
             string rehydrateAllFilename = isUnix ? "rehydrate-all.sh" : "rehydrate-all.cmd";
-            File.WriteAllText(Path.Combine(destinationDirectory, rehydrateAllFilename), rehydrateAllBuilder.ToString());
+            File.WriteAllText(
+                Path.Combine(destinationDirectory, rehydrateAllFilename),
+                rehydrateAllBuilder.ToString()
+            );
 
-            static void writeWindowsRehydrateContent(StringBuilder builder, IGrouping<string, (Guid Id, FilePathInfo FilePath)> group)
-            {
+            static void writeWindowsRehydrateContent(
+                StringBuilder builder,
+                IGrouping<string, (Guid Id, FilePathInfo FilePath)> group
+            ) {
                 builder.AppendLine("@echo off");
                 var count = 0;
                 foreach (var tuple in group)
@@ -180,12 +222,14 @@ internal static class MinimizeUtil
                     {
                         builder.AppendLine($@"mkdir %~dp0\{directory} 2> nul");
                     }
-                    builder.AppendLine($@"
+                    builder.AppendLine(
+                        $@"
 mklink /h %~dp0\{destFileName} %HELIX_CORRELATION_PAYLOAD%\{source} > nul
 if %errorlevel% neq 0 (
     echo Cmd failed: mklink /h %~dp0\{destFileName} %HELIX_CORRELATION_PAYLOAD%\{source}
     exit /b 1
-)");
+)"
+                    );
                     count++;
                     if (count % 1_000 == 0)
                     {
@@ -197,7 +241,8 @@ if %errorlevel% neq 0 (
 
             static void writeUnixHeaderContent(StringBuilder builder)
             {
-                builder.AppendLine(@"#!/bin/bash
+                builder.AppendLine(
+                    @"#!/bin/bash
 
 source=""${BASH_SOURCE[0]}""
 
@@ -210,11 +255,14 @@ source=""$(readlink ""$source"")""
 [[ $source != /* ]] && source=""$scriptroot/$source""
 done
 scriptroot=""$( cd -P ""$( dirname ""$source"" )"" && pwd )""
-");
+"
+                );
             }
 
-            static void writeUnixRehydrateContent(StringBuilder builder, IGrouping<string, (Guid Id, FilePathInfo FilePath)> group)
-            {
+            static void writeUnixRehydrateContent(
+                StringBuilder builder,
+                IGrouping<string, (Guid Id, FilePathInfo FilePath)> group
+            ) {
                 writeUnixHeaderContent(builder);
 
                 var count = 0;
@@ -226,7 +274,9 @@ scriptroot=""$( cd -P ""$( dirname ""$source"" )"" && pwd )""
                     {
                         builder.AppendLine($@"mkdir -p ""$scriptroot/{directory}""");
                     }
-                    builder.AppendLine($@"ln ""$HELIX_CORRELATION_PAYLOAD/{source}"" ""$scriptroot/{destFilePath}"" || exit $?");
+                    builder.AppendLine(
+                        $@"ln ""$HELIX_CORRELATION_PAYLOAD/{source}"" ""$scriptroot/{destFilePath}"" || exit $?"
+                    );
 
                     count++;
                     if (count % 1_000 == 0)
@@ -247,14 +297,19 @@ scriptroot=""$( cd -P ""$( dirname ""$source"" )"" && pwd )""
                 // artifacts/TestProject/Debug/net472
 
                 var groupDirectory = relativePath;
-                while (Path.GetFileName(Path.GetDirectoryName(groupDirectory)) is not (null or "Debug" or "Release"))
+                while (
+                    Path.GetFileName(Path.GetDirectoryName(groupDirectory))
+                        is not (null or "Debug" or "Release")
+                )
                     groupDirectory = Path.GetDirectoryName(groupDirectory);
 
                 if (groupDirectory is null)
                 {
                     // So far, this scenario doesn't seem to happen.
                     // If it *did* happen, we'd want to know, but it isn't necessarily a problem.
-                    Console.WriteLine("Directory not grouped under configuration/TFM: " + relativePath);
+                    Console.WriteLine(
+                        "Directory not grouped under configuration/TFM: " + relativePath
+                    );
                     return relativePath;
                 }
 
@@ -271,7 +326,9 @@ scriptroot=""$( cd -P ""$( dirname ""$source"" )"" && pwd )""
             if (!success)
             {
                 // for debugging: https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes
-                throw new IOException($"Failed to create hard link from {existingFileName} to {fileName} with exception 0x{Marshal.GetLastWin32Error():X}");
+                throw new IOException(
+                    $"Failed to create hard link from {existingFileName} to {fileName} with exception 0x{Marshal.GetLastWin32Error():X}"
+                );
             }
         }
         else
@@ -279,13 +336,19 @@ scriptroot=""$( cd -P ""$( dirname ""$source"" )"" && pwd )""
             var result = link(existingFileName, fileName);
             if (result != 0)
             {
-                throw new IOException($"Failed to create hard link from {existingFileName} to {fileName} with error code {Marshal.GetLastWin32Error()}");
+                throw new IOException(
+                    $"Failed to create hard link from {existingFileName} to {fileName} with error code {Marshal.GetLastWin32Error()}"
+                );
             }
         }
 
         // https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-createhardlinkw
         [DllImport("Kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        static extern bool CreateHardLink(string lpFileName, string lpExistingFileName, IntPtr lpSecurityAttributes);
+        static extern bool CreateHardLink(
+            string lpFileName,
+            string lpExistingFileName,
+            IntPtr lpSecurityAttributes
+        );
 
         // https://man7.org/linux/man-pages/man2/link.2.html
         [DllImport("libc", SetLastError = true)]

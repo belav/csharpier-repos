@@ -15,6 +15,7 @@ internal static partial class Interop
             int dwDataLen,
             SafeKeyHandle hPubKey,
             int dwFlags,
-            out SafeKeyHandle phKey);
+            out SafeKeyHandle phKey
+        );
     }
 }

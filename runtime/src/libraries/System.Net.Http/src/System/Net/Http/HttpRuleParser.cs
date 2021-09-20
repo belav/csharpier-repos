@@ -244,8 +244,12 @@ namespace System.Net.Http
             return current - startIndex;
         }
 
-        internal static int GetHostLength(string input, int startIndex, bool allowToken, out string? host)
-        {
+        internal static int GetHostLength(
+            string input,
+            int startIndex,
+            bool allowToken,
+            out string? host
+        ) {
             Debug.Assert(input != null);
             Debug.Assert(startIndex >= 0);
 
@@ -294,20 +298,29 @@ namespace System.Net.Http
             return length;
         }
 
-        internal static HttpParseResult GetCommentLength(string input, int startIndex, out int length)
-        {
+        internal static HttpParseResult GetCommentLength(
+            string input,
+            int startIndex,
+            out int length
+        ) {
             return GetExpressionLength(input, startIndex, '(', ')', true, 1, out length);
         }
 
-        internal static HttpParseResult GetQuotedStringLength(string input, int startIndex, out int length)
-        {
+        internal static HttpParseResult GetQuotedStringLength(
+            string input,
+            int startIndex,
+            out int length
+        ) {
             return GetExpressionLength(input, startIndex, '"', '"', false, 1, out length);
         }
 
         // quoted-pair = "\" CHAR
         // CHAR = <any US-ASCII character (octets 0 - 127)>
-        internal static HttpParseResult GetQuotedPairLength(string input, int startIndex, out int length)
-        {
+        internal static HttpParseResult GetQuotedPairLength(
+            string input,
+            int startIndex,
+            out int length
+        ) {
             Debug.Assert(input != null);
             Debug.Assert((startIndex >= 0) && (startIndex < input.Length));
 
@@ -341,9 +354,15 @@ namespace System.Net.Http
         // "(((((comment)))))". If we wouldn't define a limit an attacker could send a comment with hundreds of nested
         // comments, resulting in a stack overflow exception. In addition having more than 1 nested comment (if any)
         // is unusual.
-        private static HttpParseResult GetExpressionLength(string input, int startIndex, char openChar,
-            char closeChar, bool supportsNesting, int nestedCount, out int length)
-        {
+        private static HttpParseResult GetExpressionLength(
+            string input,
+            int startIndex,
+            char openChar,
+            char closeChar,
+            bool supportsNesting,
+            int nestedCount,
+            out int length
+        ) {
             Debug.Assert(input != null);
             Debug.Assert((startIndex >= 0) && (startIndex < input.Length));
 
@@ -360,9 +379,13 @@ namespace System.Net.Http
                 // Only check whether we have a quoted char, if we have at least 3 characters left to read (i.e.
                 // quoted char + closing char). Otherwise the closing char may be considered part of the quoted char.
                 int quotedPairLength = 0;
-                if ((current + 2 < input.Length) &&
-                    (GetQuotedPairLength(input, current, out quotedPairLength) == HttpParseResult.Parsed))
-                {
+                if (
+                    (current + 2 < input.Length)
+                    && (
+                        GetQuotedPairLength(input, current, out quotedPairLength)
+                        == HttpParseResult.Parsed
+                    )
+                ) {
                     // We ignore invalid quoted-pairs. Invalid quoted-pairs may mean that it looked like a quoted pair,
                     // but we actually have a quoted-string: e.g. "\\u00FC" ('\' followed by a char >127 - quoted-pair only
                     // allows ASCII chars after '\'; qdtext allows both '\' and >127 chars).
@@ -380,8 +403,15 @@ namespace System.Net.Http
                     }
 
                     int nestedLength = 0;
-                    HttpParseResult nestedResult = GetExpressionLength(input, current, openChar, closeChar,
-                        supportsNesting, nestedCount + 1, out nestedLength);
+                    HttpParseResult nestedResult = GetExpressionLength(
+                        input,
+                        current,
+                        openChar,
+                        closeChar,
+                        supportsNesting,
+                        nestedCount + 1,
+                        out nestedLength
+                    );
 
                     switch (nestedResult)
                     {
@@ -390,9 +420,11 @@ namespace System.Net.Http
                             break;
 
                         case HttpParseResult.NotParsed:
-                            Debug.Fail("'NotParsed' is unexpected: We started nested expression " +
-                                "parsing, because we found the open-char. So either it's a valid nested " +
-                                "expression or it has invalid format.");
+                            Debug.Fail(
+                                "'NotParsed' is unexpected: We started nested expression "
+                                    + "parsing, because we found the open-char. So either it's a valid nested "
+                                    + "expression or it has invalid format."
+                            );
                             break;
 
                         case HttpParseResult.InvalidFormat:
@@ -403,7 +435,6 @@ namespace System.Net.Http
                             Debug.Fail("Unknown enum result: " + nestedResult);
                             break;
                     }
-
                     // after nested call we continue with parsing
                     continue;
                 }

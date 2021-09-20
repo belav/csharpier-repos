@@ -30,8 +30,14 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
 
         public GcTransition() { }
 
-        public GcTransition(int codeOffset, int slotId, bool isLive, int chunkId, GcSlotTable slotTable, Machine machine)
-        {
+        public GcTransition(
+            int codeOffset,
+            int slotId,
+            bool isLive,
+            int chunkId,
+            GcSlotTable slotTable,
+            Machine machine
+        ) {
             CodeOffset = codeOffset;
             SlotId = slotId;
             IsLive = isLive;

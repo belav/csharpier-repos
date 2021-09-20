@@ -19,7 +19,7 @@ class X<T> : I<T>
 
 class T
 {
-    static int F(I<string> i) 
+    static int F(I<string> i)
     {
         return i.A("A");
     }

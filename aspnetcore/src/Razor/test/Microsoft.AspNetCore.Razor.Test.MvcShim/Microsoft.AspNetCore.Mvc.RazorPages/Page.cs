@@ -12,21 +12,15 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
 
         public virtual RedirectResult Redirect(string url) => throw new NotImplementedException();
 
-        public override void EnsureRenderedBodyOrSections()
-        {
+        public override void EnsureRenderedBodyOrSections() { }
 
-        }
+        public override void BeginContext(int position, int length, bool isLiteral) { }
 
-        public override void BeginContext(int position, int length, bool isLiteral)
-        {
-        }
-
-        public override void EndContext()
-        {
-        }
+        public override void EndContext() { }
 
         public virtual bool TryValidateModel(object model) => throw new NotImplementedException();
 
-        public virtual bool TryValidateModel(object model, string prefix) => throw new NotImplementedException();
+        public virtual bool TryValidateModel(object model, string prefix) =>
+            throw new NotImplementedException();
     }
 }

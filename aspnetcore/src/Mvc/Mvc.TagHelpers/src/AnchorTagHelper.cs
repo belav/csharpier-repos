@@ -135,7 +135,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         /// <summary>
         /// Additional parameters for the route.
         /// </summary>
-        [HtmlAttributeName(RouteValuesDictionaryName, DictionaryAttributePrefix = RouteValuesPrefix)]
+        [HtmlAttributeName(
+            RouteValuesDictionaryName,
+            DictionaryAttributePrefix = RouteValuesPrefix
+        )]
         public IDictionary<string, string> RouteValues
         {
             get
@@ -147,10 +150,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
                 return _routeValues;
             }
-            set
-            {
-                _routeValues = value;
-            }
+            set { _routeValues = value; }
         }
 
         /// <summary>
@@ -177,17 +177,18 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             // If "href" is already set, it means the user is attempting to use a normal anchor.
             if (output.Attributes.ContainsName(Href))
             {
-                if (Action != null ||
-                    Controller != null ||
-                    Area != null ||
-                    Page != null ||
-                    PageHandler != null ||
-                    Route != null ||
-                    Protocol != null ||
-                    Host != null ||
-                    Fragment != null ||
-                    (_routeValues != null && _routeValues.Count > 0))
-                {
+                if (
+                    Action != null
+                    || Controller != null
+                    || Area != null
+                    || Page != null
+                    || PageHandler != null
+                    || Route != null
+                    || Protocol != null
+                    || Host != null
+                    || Fragment != null
+                    || (_routeValues != null && _routeValues.Count > 0)
+                ) {
                     // User specified an href and one of the bound attributes; can't determine the href attribute.
                     throw new InvalidOperationException(
                         Resources.FormatAnchorTagHelper_CannotOverrideHref(
@@ -202,7 +203,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                             HostAttributeName,
                             FragmentAttributeName,
                             PageAttributeName,
-                            PageHandlerAttributeName));
+                            PageHandlerAttributeName
+                        )
+                    );
                 }
 
                 return;
@@ -219,7 +222,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     Resources.FormatCannotDetermineAttributeFor(Href, "<a>"),
                     RouteAttributeName,
                     ControllerAttributeName + ", " + ActionAttributeName,
-                    PageAttributeName + ", " + PageHandlerAttributeName);
+                    PageAttributeName + ", " + PageHandlerAttributeName
+                );
 
                 throw new InvalidOperationException(message);
             }
@@ -252,7 +256,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     hostname: Host,
                     fragment: Fragment,
                     routeValues: routeValues,
-                    htmlAttributes: null);
+                    htmlAttributes: null
+                );
             }
             else if (routeLink)
             {
@@ -264,20 +269,22 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     hostName: Host,
                     fragment: Fragment,
                     routeValues: routeValues,
-                    htmlAttributes: null);
+                    htmlAttributes: null
+                );
             }
             else
             {
                 tagBuilder = Generator.GenerateActionLink(
-                   ViewContext,
-                   linkText: string.Empty,
-                   actionName: Action,
-                   controllerName: Controller,
-                   protocol: Protocol,
-                   hostname: Host,
-                   fragment: Fragment,
-                   routeValues: routeValues,
-                   htmlAttributes: null);
+                    ViewContext,
+                    linkText: string.Empty,
+                    actionName: Action,
+                    controllerName: Controller,
+                    protocol: Protocol,
+                    hostname: Host,
+                    fragment: Fragment,
+                    routeValues: routeValues,
+                    htmlAttributes: null
+                );
             }
 
             output.MergeAttributes(tagBuilder);

@@ -6,11 +6,11 @@ public struct myDateTime : IEquatable<myDateTime>
     public UInt64 dateData;
     public override string ToString()
     {
-         return "myDateTime";
+        return "myDateTime";
     }
     public bool Equals(myDateTime d)
     {
-         return dateData == d.dateData;
+        return dateData == d.dateData;
     }
     public void InstanceMethod()
     {

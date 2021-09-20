@@ -81,7 +81,6 @@ namespace System.Xml
         EndElement = 1,
         Comment = 2,
         Array = 3,
-
         MinAttribute = Array + 1,
         ShortAttribute = MinAttribute + 0,
         Attribute = MinAttribute + 1,
@@ -144,7 +143,6 @@ namespace System.Xml
         PrefixAttributeY = PrefixAttributeX + 1,
         PrefixAttributeZ = PrefixAttributeY + 1,
         MaxAttribute = PrefixAttributeZ,
-
         MinElement = MaxAttribute + 1,
         ShortElement = MinElement,
         Element = MinElement + 1,
@@ -203,7 +201,6 @@ namespace System.Xml
         PrefixElementY = PrefixElementX + 1,
         PrefixElementZ = PrefixElementY + 1,
         MaxElement = PrefixElementZ,
-
         // MinorVersion = MaxElement + 1, // Reserved (Not supported)
 
         MinText = 0x80, // Must be even
@@ -238,7 +235,6 @@ namespace System.Xml
         UnicodeChars16Text = MinText + 28 * 2,
         UnicodeChars32Text = MinText + 29 * 2,
         QNameDictionaryText = MinText + 30 * 2,
-
         ZeroTextWithEndElement = ZeroText + 1,
         OneTextWithEndElement = OneText + 1,
         FalseTextWithEndElement = FalseText + 1,

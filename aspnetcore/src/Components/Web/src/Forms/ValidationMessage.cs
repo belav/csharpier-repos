@@ -21,14 +21,17 @@ namespace Microsoft.AspNetCore.Components.Forms
         /// <summary>
         /// Gets or sets a collection of additional attributes that will be applied to the created <c>div</c> element.
         /// </summary>
-        [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
 
-        [CascadingParameter] EditContext CurrentEditContext { get; set; } = default!;
+        [CascadingParameter]
+        EditContext CurrentEditContext { get; set; } = default!;
 
         /// <summary>
         /// Specifies the field for which validation messages should be displayed.
         /// </summary>
-        [Parameter] public Expression<Func<TValue>>? For { get; set; }
+        [Parameter]
+        public Expression<Func<TValue>>? For { get; set; }
 
         /// <summary>`
         /// Constructs an instance of <see cref="ValidationMessage{TValue}"/>.
@@ -43,15 +46,18 @@ namespace Microsoft.AspNetCore.Components.Forms
         {
             if (CurrentEditContext == null)
             {
-                throw new InvalidOperationException($"{GetType()} requires a cascading parameter " +
-                    $"of type {nameof(EditContext)}. For example, you can use {GetType()} inside " +
-                    $"an {nameof(EditForm)}.");
+                throw new InvalidOperationException(
+                    $"{GetType()} requires a cascading parameter "
+                        + $"of type {nameof(EditContext)}. For example, you can use {GetType()} inside "
+                        + $"an {nameof(EditForm)}."
+                );
             }
 
             if (For == null) // Not possible except if you manually specify T
             {
-                throw new InvalidOperationException($"{GetType()} requires a value for the " +
-                    $"{nameof(For)} parameter.");
+                throw new InvalidOperationException(
+                    $"{GetType()} requires a value for the " + $"{nameof(For)} parameter."
+                );
             }
             else if (For != _previousFieldAccessor)
             {
@@ -84,9 +90,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         /// Called to dispose this instance.
         /// </summary>
         /// <param name="disposing"><see langword="true"/> if called within <see cref="IDisposable.Dispose"/>.</param>
-        protected virtual void Dispose(bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
 
         void IDisposable.Dispose()
         {

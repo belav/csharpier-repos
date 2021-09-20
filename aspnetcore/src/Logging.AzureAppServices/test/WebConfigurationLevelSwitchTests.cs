@@ -19,13 +19,15 @@ namespace Microsoft.Extensions.Logging.AzureAppServices.Test
         public void AddsRuleWithCorrectLevel(string levelValue, LogLevel expectedLevel)
         {
             var configuration = new ConfigurationBuilder().AddInMemoryCollection(
-                new[]
-                {
-                    new KeyValuePair<string, string>("levelKey", levelValue),
-                })
+                    new[] { new KeyValuePair<string, string>("levelKey", levelValue), }
+                )
                 .Build();
 
-            var levelSwitcher = new ConfigurationBasedLevelSwitcher(configuration, typeof(TestFileLoggerProvider), "levelKey");
+            var levelSwitcher = new ConfigurationBasedLevelSwitcher(
+                configuration,
+                typeof(TestFileLoggerProvider),
+                "levelKey"
+            );
 
             var filterConfiguration = new LoggerFilterOptions();
             levelSwitcher.Configure(filterConfiguration);

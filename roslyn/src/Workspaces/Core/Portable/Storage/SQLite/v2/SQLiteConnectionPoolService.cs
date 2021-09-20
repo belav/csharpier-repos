@@ -31,13 +31,14 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         /// <remarks>
         /// Access to this field is synchronized through <see cref="_gate"/>.
         /// </remarks>
-        private readonly Dictionary<string, ReferenceCountedDisposable<SQLiteConnectionPool>> _connectionPools = new();
+        private readonly Dictionary<
+            string,
+            ReferenceCountedDisposable<SQLiteConnectionPool>
+        > _connectionPools = new();
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SQLiteConnectionPoolService()
-        {
-        }
+        public SQLiteConnectionPoolService() { }
 
         /// <summary>
         /// Use a <see cref="ConcurrentExclusiveSchedulerPair"/> to simulate a reader-writer lock.
@@ -78,8 +79,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             string databaseFilePath,
             IPersistentStorageFaultInjector? faultInjector,
             Action<SqlConnection, CancellationToken> initializer,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             lock (_gate)
             {
                 if (_connectionPools.TryGetValue(databaseFilePath, out var pool))
@@ -97,7 +98,13 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 try
                 {
                     pool = new ReferenceCountedDisposable<SQLiteConnectionPool>(
-                        new SQLiteConnectionPool(this, faultInjector, databaseFilePath, ownershipLock));
+                        new SQLiteConnectionPool(
+                            this,
+                            faultInjector,
+                            databaseFilePath,
+                            ownershipLock
+                        )
+                    );
 
                     pool.Target.Initialize(initializer, cancellationToken);
 
@@ -105,7 +112,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                     _connectionPools.Add(databaseFilePath, pool);
                     return pool.TryAddReference() ?? throw ExceptionUtilities.Unreachable;
                 }
-                catch (Exception ex) when (FatalError.ReportAndCatchUnlessCanceled(ex, cancellationToken))
+                catch (Exception ex)
+                    when (FatalError.ReportAndCatchUnlessCanceled(ex, cancellationToken))
                 {
                     if (pool is not null)
                     {
@@ -130,18 +138,24 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         /// </summary>
         private static IDisposable? TryGetDatabaseOwnership(string databaseFilePath)
         {
-            return IOUtilities.PerformIO<IDisposable?>(() =>
-            {
-                // make sure directory exist first.
-                EnsureDirectory(databaseFilePath);
+            return IOUtilities.PerformIO<IDisposable?>(
+                () =>
+                {
+                    // make sure directory exist first.
+                    EnsureDirectory(databaseFilePath);
 
-                var directoryName = Path.GetDirectoryName(databaseFilePath);
-                Contract.ThrowIfNull(directoryName);
+                    var directoryName = Path.GetDirectoryName(databaseFilePath);
+                    Contract.ThrowIfNull(directoryName);
 
-                return File.Open(
-                    Path.Combine(directoryName, LockFile),
-                    FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
-            }, defaultValue: null);
+                    return File.Open(
+                        Path.Combine(directoryName, LockFile),
+                        FileMode.OpenOrCreate,
+                        FileAccess.ReadWrite,
+                        FileShare.None
+                    );
+                },
+                defaultValue: null
+            );
         }
 
         private static void EnsureDirectory(string databaseFilePath)

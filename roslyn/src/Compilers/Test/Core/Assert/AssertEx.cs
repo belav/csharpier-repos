@@ -32,13 +32,17 @@ namespace Roslyn.Test.Utilities
 
         private class AssertEqualityComparer<T> : IEqualityComparer<T>
         {
-            private static readonly IEqualityComparer<T> s_instance = new AssertEqualityComparer<T>();
+            private static readonly IEqualityComparer<T> s_instance =
+                new AssertEqualityComparer<T>();
 
             private static bool CanBeNull()
             {
                 var type = typeof(T);
-                return !type.GetTypeInfo().IsValueType ||
-                    (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>));
+                return !type.GetTypeInfo().IsValueType
+                    || (
+                        type.GetTypeInfo().IsGenericType
+                        && type.GetGenericTypeDefinition() == typeof(Nullable<>)
+                    );
             }
 
             public static bool IsNull(T @object)
@@ -127,8 +131,12 @@ namespace Roslyn.Test.Utilities
 
         #endregion
 
-        public static void AreEqual<T>(T expected, T actual, string message = null, IEqualityComparer<T> comparer = null)
-        {
+        public static void AreEqual<T>(
+            T expected,
+            T actual,
+            string message = null,
+            IEqualityComparer<T> comparer = null
+        ) {
             if (ReferenceEquals(expected, actual))
             {
                 return;
@@ -144,20 +152,33 @@ namespace Roslyn.Test.Utilities
             }
             else
             {
-                if (!(comparer != null ?
-                    comparer.Equals(expected, actual) :
-                    AssertEqualityComparer<T>.Equals(expected, actual)))
-                {
-                    Fail("Expected and actual were different.\r\n" +
-                         "Expected:\r\n" + expected + "\r\n" +
-                         "Actual:\r\n" + actual + "\r\n" +
-                         message);
+                if (
+                    !(
+                        comparer != null
+                            ? comparer.Equals(expected, actual)
+                            : AssertEqualityComparer<T>.Equals(expected, actual)
+                    )
+                ) {
+                    Fail(
+                        "Expected and actual were different.\r\n"
+                            + "Expected:\r\n"
+                            + expected
+                            + "\r\n"
+                            + "Actual:\r\n"
+                            + actual
+                            + "\r\n"
+                            + message
+                    );
                 }
             }
         }
 
-        public static void Equal<T>(ImmutableArray<T> expected, IEnumerable<T> actual, IEqualityComparer<T> comparer = null, string message = null)
-        {
+        public static void Equal<T>(
+            ImmutableArray<T> expected,
+            IEnumerable<T> actual,
+            IEqualityComparer<T> comparer = null,
+            string message = null
+        ) {
             if (actual == null || expected.IsDefault)
             {
                 Assert.True((actual == null) == expected.IsDefault, message);
@@ -168,8 +189,13 @@ namespace Roslyn.Test.Utilities
             }
         }
 
-        public static void Equal<T>(IEnumerable<T> expected, ImmutableArray<T> actual, IEqualityComparer<T> comparer = null, string message = null, string itemSeparator = null)
-        {
+        public static void Equal<T>(
+            IEnumerable<T> expected,
+            ImmutableArray<T> actual,
+            IEqualityComparer<T> comparer = null,
+            string message = null,
+            string itemSeparator = null
+        ) {
             if (expected == null || actual.IsDefault)
             {
                 Assert.True((expected == null) == actual.IsDefault, message);
@@ -180,8 +206,13 @@ namespace Roslyn.Test.Utilities
             }
         }
 
-        public static void Equal<T>(ImmutableArray<T> expected, ImmutableArray<T> actual, IEqualityComparer<T> comparer = null, string message = null, string itemSeparator = null)
-        {
+        public static void Equal<T>(
+            ImmutableArray<T> expected,
+            ImmutableArray<T> actual,
+            IEqualityComparer<T> comparer = null,
+            string message = null,
+            string itemSeparator = null
+        ) {
             Equal(expected, (IEnumerable<T>)actual, comparer, message, itemSeparator);
         }
 
@@ -210,8 +241,8 @@ namespace Roslyn.Test.Utilities
             string itemSeparator = null,
             Func<T, string> itemInspector = null,
             string expectedValueSourcePath = null,
-            int expectedValueSourceLine = 0)
-        {
+            int expectedValueSourceLine = 0
+        ) {
             if (expected == null)
             {
                 Assert.Null(actual);
@@ -226,7 +257,15 @@ namespace Roslyn.Test.Utilities
                 return;
             }
 
-            string assertMessage = GetAssertMessage(expected, actual, comparer, itemInspector, itemSeparator, expectedValueSourcePath, expectedValueSourceLine);
+            string assertMessage = GetAssertMessage(
+                expected,
+                actual,
+                comparer,
+                itemInspector,
+                itemSeparator,
+                expectedValueSourcePath,
+                expectedValueSourceLine
+            );
 
             if (message != null)
             {
@@ -254,8 +293,9 @@ namespace Roslyn.Test.Utilities
             var messageBuilder = new StringBuilder();
             messageBuilder.AppendLine(
                 string.IsNullOrEmpty(message)
-                    ? "Actual and expected values differ. Expected shown in baseline of diff:"
-                    : message);
+                  ? "Actual and expected values differ. Expected shown in baseline of diff:"
+                  : message
+            );
 
             foreach (var line in diff.Lines)
             {
@@ -278,9 +318,14 @@ namespace Roslyn.Test.Utilities
             Assert.True(false, messageBuilder.ToString());
         }
 
-        public static void NotEqual<T>(IEnumerable<T> expected, IEnumerable<T> actual, IEqualityComparer<T> comparer = null, string message = null,
-            string itemSeparator = null, Func<T, string> itemInspector = null)
-        {
+        public static void NotEqual<T>(
+            IEnumerable<T> expected,
+            IEnumerable<T> actual,
+            IEqualityComparer<T> comparer = null,
+            string message = null,
+            string itemSeparator = null,
+            Func<T, string> itemInspector = null
+        ) {
             if (ReferenceEquals(expected, actual))
             {
                 Fail("expected and actual references are identical\r\n" + message);
@@ -296,8 +341,11 @@ namespace Roslyn.Test.Utilities
             }
         }
 
-        private static bool SequenceEqual<T>(IEnumerable<T> expected, IEnumerable<T> actual, IEqualityComparer<T> comparer = null)
-        {
+        private static bool SequenceEqual<T>(
+            IEnumerable<T> expected,
+            IEnumerable<T> actual,
+            IEqualityComparer<T> comparer = null
+        ) {
             if (ReferenceEquals(expected, actual))
             {
                 return true;
@@ -324,8 +372,13 @@ namespace Roslyn.Test.Utilities
                 var value1 = enumerator1.Current;
                 var value2 = enumerator2.Current;
 
-                if (!(comparer != null ? comparer.Equals(value1, value2) : AssertEqualityComparer<T>.Equals(value1, value2)))
-                {
+                if (
+                    !(
+                        comparer != null
+                            ? comparer.Equals(value1, value2)
+                            : AssertEqualityComparer<T>.Equals(value1, value2)
+                    )
+                ) {
                     return false;
                 }
             }
@@ -333,8 +386,14 @@ namespace Roslyn.Test.Utilities
             return true;
         }
 
-        public static void SetEqual(IEnumerable<string> expected, IEnumerable<string> actual, IEqualityComparer<string> comparer = null, string message = null, string itemSeparator = "\r\n", Func<string, string> itemInspector = null)
-        {
+        public static void SetEqual(
+            IEnumerable<string> expected,
+            IEnumerable<string> actual,
+            IEqualityComparer<string> comparer = null,
+            string message = null,
+            string itemSeparator = "\r\n",
+            Func<string, string> itemInspector = null
+        ) {
             var indexes = new Dictionary<string, int>(comparer);
             int counter = 0;
             foreach (var expectedItem in expected)
@@ -345,7 +404,14 @@ namespace Roslyn.Test.Utilities
                 }
             }
 
-            SetEqual<string>(expected, actual.OrderBy(e => getIndex(e)), comparer, message, itemSeparator, itemInspector);
+            SetEqual<string>(
+                expected,
+                actual.OrderBy(e => getIndex(e)),
+                comparer,
+                message,
+                itemSeparator,
+                itemInspector
+            );
 
             int getIndex(string item)
             {
@@ -383,7 +449,8 @@ namespace Roslyn.Test.Utilities
                 // Get the length of both.  If either is 0, return
                 // the length of the other, since that number of insertions
                 // would be required.
-                int n = first.Length, m = second.Length;
+                int n = first.Length,
+                    m = second.Length;
                 if (n == 0)
                     return m;
                 if (m == 0)
@@ -392,7 +459,8 @@ namespace Roslyn.Test.Utilities
                 // Rather than maintain an entire matrix (which would require O(n*m) space),
                 // just store the current row and the next row, each of which has a length m+1,
                 // so just O(m) space. Initialize the current row.
-                int curRow = 0, nextRow = 1;
+                int curRow = 0,
+                    nextRow = 1;
                 int[][] rows = new int[][] { new int[m + 1], new int[m + 1] };
                 for (int j = 0; j <= m; ++j)
                     rows[curRow][j] = j;
@@ -406,7 +474,8 @@ namespace Roslyn.Test.Utilities
                     {
                         int dist1 = rows[curRow][j] + 1;
                         int dist2 = rows[nextRow][j - 1] + 1;
-                        int dist3 = rows[curRow][j - 1] + (first[i - 1].Equals(second[j - 1]) ? 0 : 1);
+                        int dist3 =
+                            rows[curRow][j - 1] + (first[i - 1].Equals(second[j - 1]) ? 0 : 1);
                         rows[nextRow][j] = Math.Min(dist1, Math.Min(dist2, dist3));
                     }
 
@@ -428,8 +497,14 @@ namespace Roslyn.Test.Utilities
             }
         }
 
-        public static void SetEqual<T>(IEnumerable<T> expected, IEnumerable<T> actual, IEqualityComparer<T> comparer = null, string message = null, string itemSeparator = "\r\n", Func<T, string> itemInspector = null)
-        {
+        public static void SetEqual<T>(
+            IEnumerable<T> expected,
+            IEnumerable<T> actual,
+            IEqualityComparer<T> comparer = null,
+            string message = null,
+            string itemSeparator = "\r\n",
+            Func<T, string> itemInspector = null
+        ) {
             var expectedSet = new HashSet<T>(expected, comparer);
             var result = expected.Count() == actual.Count() && expectedSet.SetEquals(actual);
             if (!result)
@@ -438,22 +513,26 @@ namespace Roslyn.Test.Utilities
                 {
                     message = GetAssertMessage(
                         ToString(expected, itemSeparator, itemInspector),
-                        ToString(actual, itemSeparator, itemInspector));
+                        ToString(actual, itemSeparator, itemInspector)
+                    );
                 }
 
                 Assert.True(result, message);
             }
         }
 
-        public static void SetEqual<T>(T[] expected, T[] actual)
-            => SetEqual((IEnumerable<T>)actual, expected);
+        public static void SetEqual<T>(T[] expected, T[] actual) =>
+            SetEqual((IEnumerable<T>)actual, expected);
 
         public static void SetEqual<T>(IEnumerable<T> actual, params T[] expected)
         {
             var expectedSet = new HashSet<T>(expected);
             if (!expectedSet.SetEquals(actual))
             {
-                var message = GetAssertMessage(ToString(expected, ",\r\n", itemInspector: withQuotes), ToString(actual, ",\r\n", itemInspector: withQuotes));
+                var message = GetAssertMessage(
+                    ToString(expected, ",\r\n", itemInspector: withQuotes),
+                    ToString(actual, ",\r\n", itemInspector: withQuotes)
+                );
                 Assert.True(false, message);
             }
 
@@ -465,17 +544,24 @@ namespace Roslyn.Test.Utilities
             var none = !actual.Any(predicate);
             if (!none)
             {
-                Assert.True(none, string.Format(
-                    "Unexpected item found among existing items: {0}\nExisting items: {1}",
-                    ToString(actual.First(predicate)),
-                    ToString(actual)));
+                Assert.True(
+                    none,
+                    string.Format(
+                        "Unexpected item found among existing items: {0}\nExisting items: {1}",
+                        ToString(actual.First(predicate)),
+                        ToString(actual)
+                    )
+                );
             }
         }
 
         public static void Any<T>(IEnumerable<T> actual, Func<T, bool> predicate)
         {
             var any = actual.Any(predicate);
-            Assert.True(any, string.Format("No expected item was found.\nExisting items: {0}", ToString(actual)));
+            Assert.True(
+                any,
+                string.Format("No expected item was found.\nExisting items: {0}", ToString(actual))
+            );
         }
 
         public static void All<T>(IEnumerable<T> actual, Func<T, bool> predicate)
@@ -483,9 +569,13 @@ namespace Roslyn.Test.Utilities
             var all = actual.All(predicate);
             if (!all)
             {
-                Assert.True(all, string.Format(
-                    "Not all items satisfy condition:\n{0}",
-                    ToString(actual.Where(i => !predicate(i)))));
+                Assert.True(
+                    all,
+                    string.Format(
+                        "Not all items satisfy condition:\n{0}",
+                        ToString(actual.Where(i => !predicate(i)))
+                    )
+                );
             }
         }
 
@@ -494,8 +584,11 @@ namespace Roslyn.Test.Utilities
             return Convert.ToString(o);
         }
 
-        public static string ToString<T>(IEnumerable<T> list, string separator = ", ", Func<T, string> itemInspector = null)
-        {
+        public static string ToString<T>(
+            IEnumerable<T> list,
+            string separator = ", ",
+            Func<T, string> itemInspector = null
+        ) {
             if (itemInspector == null)
             {
                 itemInspector = i => Convert.ToString(i);
@@ -525,14 +618,23 @@ namespace Roslyn.Test.Utilities
             string actual,
             bool escapeQuotes = true,
             [CallerFilePath] string expectedValueSourcePath = null,
-            [CallerLineNumber] int expectedValueSourceLine = 0)
-        {
+            [CallerLineNumber] int expectedValueSourceLine = 0
+        ) {
             var normalizedExpected = NormalizeWhitespace(expected);
             var normalizedActual = NormalizeWhitespace(actual);
 
             if (normalizedExpected != normalizedActual)
             {
-                Assert.True(false, GetAssertMessage(expected, actual, escapeQuotes, expectedValueSourcePath, expectedValueSourceLine));
+                Assert.True(
+                    false,
+                    GetAssertMessage(
+                        expected,
+                        actual,
+                        escapeQuotes,
+                        expectedValueSourcePath,
+                        expectedValueSourceLine
+                    )
+                );
             }
         }
 
@@ -562,15 +664,19 @@ namespace Roslyn.Test.Utilities
             }
         }
 
-        public static void AssertContainsToleratingWhitespaceDifferences(string expectedSubString, string actualString)
-        {
+        public static void AssertContainsToleratingWhitespaceDifferences(
+            string expectedSubString,
+            string actualString
+        ) {
             expectedSubString = NormalizeWhitespace(expectedSubString);
             actualString = NormalizeWhitespace(actualString);
             Assert.Contains(expectedSubString, actualString, StringComparison.Ordinal);
         }
 
-        public static void AssertStartsWithToleratingWhitespaceDifferences(string expectedSubString, string actualString)
-        {
+        public static void AssertStartsWithToleratingWhitespaceDifferences(
+            string expectedSubString,
+            string actualString
+        ) {
             expectedSubString = NormalizeWhitespace(expectedSubString);
             actualString = NormalizeWhitespace(actualString);
             Assert.StartsWith(expectedSubString, actualString, StringComparison.Ordinal);
@@ -597,18 +703,45 @@ namespace Roslyn.Test.Utilities
             return output.ToString();
         }
 
-        public static string GetAssertMessage(string expected, string actual, bool escapeQuotes = false, string expectedValueSourcePath = null, int expectedValueSourceLine = 0)
-        {
-            return GetAssertMessage(DiffUtil.Lines(expected), DiffUtil.Lines(actual), escapeQuotes, expectedValueSourcePath, expectedValueSourceLine);
+        public static string GetAssertMessage(
+            string expected,
+            string actual,
+            bool escapeQuotes = false,
+            string expectedValueSourcePath = null,
+            int expectedValueSourceLine = 0
+        ) {
+            return GetAssertMessage(
+                DiffUtil.Lines(expected),
+                DiffUtil.Lines(actual),
+                escapeQuotes,
+                expectedValueSourcePath,
+                expectedValueSourceLine
+            );
         }
 
-        public static string GetAssertMessage<T>(IEnumerable<T> expected, IEnumerable<T> actual, bool escapeQuotes, string expectedValueSourcePath = null, int expectedValueSourceLine = 0)
-        {
-            Func<T, string> itemInspector = escapeQuotes ? new Func<T, string>(t => t.ToString().Replace("\"", "\"\"")) : null;
-            return GetAssertMessage(expected, actual, itemInspector: itemInspector, itemSeparator: "\r\n", expectedValueSourcePath: expectedValueSourcePath, expectedValueSourceLine: expectedValueSourceLine);
+        public static string GetAssertMessage<T>(
+            IEnumerable<T> expected,
+            IEnumerable<T> actual,
+            bool escapeQuotes,
+            string expectedValueSourcePath = null,
+            int expectedValueSourceLine = 0
+        ) {
+            Func<T, string> itemInspector = escapeQuotes
+                ? new Func<T, string>(t => t.ToString().Replace("\"", "\"\""))
+                : null;
+            return GetAssertMessage(
+                expected,
+                actual,
+                itemInspector: itemInspector,
+                itemSeparator: "\r\n",
+                expectedValueSourcePath: expectedValueSourcePath,
+                expectedValueSourceLine: expectedValueSourceLine
+            );
         }
 
-        private static readonly string s_diffToolPath = Environment.GetEnvironmentVariable("ROSLYN_DIFFTOOL");
+        private static readonly string s_diffToolPath = Environment.GetEnvironmentVariable(
+            "ROSLYN_DIFFTOOL"
+        );
 
         public static string GetAssertMessage<T>(
             IEnumerable<T> expected,
@@ -617,8 +750,8 @@ namespace Roslyn.Test.Utilities
             Func<T, string> itemInspector = null,
             string itemSeparator = null,
             string expectedValueSourcePath = null,
-            int expectedValueSourceLine = 0)
-        {
+            int expectedValueSourceLine = 0
+        ) {
             if (itemInspector == null)
             {
                 if (typeof(T) == typeof(byte))
@@ -627,7 +760,9 @@ namespace Roslyn.Test.Utilities
                 }
                 else
                 {
-                    itemInspector = new Func<T, string>(obj => (obj != null) ? obj.ToString() : "<null>");
+                    itemInspector = new Func<T, string>(
+                        obj => (obj != null) ? obj.ToString() : "<null>"
+                    );
                 }
             }
 
@@ -643,7 +778,10 @@ namespace Roslyn.Test.Utilities
                 }
             }
 
-            var expectedString = string.Join(itemSeparator, expected.Take(10).Select(itemInspector));
+            var expectedString = string.Join(
+                itemSeparator,
+                expected.Take(10).Select(itemInspector)
+            );
             var actualString = string.Join(itemSeparator, actual.Select(itemInspector));
 
             var message = new StringBuilder();
@@ -657,27 +795,45 @@ namespace Roslyn.Test.Utilities
             message.AppendLine("Actual:");
             message.AppendLine(actualString);
             message.AppendLine("Differences:");
-            message.AppendLine(DiffUtil.DiffReport(expected, actual, itemSeparator, comparer, itemInspector));
+            message.AppendLine(
+                DiffUtil.DiffReport(expected, actual, itemSeparator, comparer, itemInspector)
+            );
 
-            if (TryGenerateExpectedSourceFileAndGetDiffLink(actualString, expected.Count(), expectedValueSourcePath, expectedValueSourceLine, out var link))
-            {
+            if (
+                TryGenerateExpectedSourceFileAndGetDiffLink(
+                    actualString,
+                    expected.Count(),
+                    expectedValueSourcePath,
+                    expectedValueSourceLine,
+                    out var link
+                )
+            ) {
                 message.AppendLine(link);
             }
 
             return message.ToString();
         }
 
-        internal static bool TryGenerateExpectedSourceFileAndGetDiffLink(string actualString, int expectedLineCount, string expectedValueSourcePath, int expectedValueSourceLine, out string link)
-        {
+        internal static bool TryGenerateExpectedSourceFileAndGetDiffLink(
+            string actualString,
+            int expectedLineCount,
+            string expectedValueSourcePath,
+            int expectedValueSourceLine,
+            out string link
+        ) {
             // add a link to a .cmd file that opens a diff tool:
-            if (DiffToolAvailable && expectedValueSourcePath != null && expectedValueSourceLine != 0)
-            {
+            if (
+                DiffToolAvailable && expectedValueSourcePath != null && expectedValueSourceLine != 0
+            ) {
                 var actualFile = Path.GetTempFileName();
                 var testFileLines = File.ReadAllLines(expectedValueSourcePath);
 
                 File.WriteAllLines(actualFile, testFileLines.Take(expectedValueSourceLine));
                 File.AppendAllText(actualFile, actualString);
-                File.AppendAllLines(actualFile, testFileLines.Skip(expectedValueSourceLine + expectedLineCount));
+                File.AppendAllLines(
+                    actualFile,
+                    testFileLines.Skip(expectedValueSourceLine + expectedLineCount)
+                );
 
                 link = MakeDiffToolLink(actualFile, expectedValueSourcePath);
 
@@ -693,7 +849,15 @@ namespace Roslyn.Test.Utilities
         internal static string MakeDiffToolLink(string actualFilePath, string expectedFilePath)
         {
             var compareCmd = Path.GetTempFileName() + ".cmd";
-            File.WriteAllText(compareCmd, string.Format("\"{0}\" \"{1}\" \"{2}\"", s_diffToolPath, actualFilePath, expectedFilePath));
+            File.WriteAllText(
+                compareCmd,
+                string.Format(
+                    "\"{0}\" \"{1}\" \"{2}\"",
+                    s_diffToolPath,
+                    actualFilePath,
+                    expectedFilePath
+                )
+            );
 
             return "file://" + compareCmd;
         }
@@ -704,7 +868,9 @@ namespace Roslyn.Test.Utilities
             var list = items.ToList();
             if (list.Count != 0)
             {
-                Fail($"Expected 0 items but found {list.Count}: {message}\r\nItems:\r\n    {string.Join("\r\n    ", list)}");
+                Fail(
+                    $"Expected 0 items but found {list.Count}: {message}\r\nItems:\r\n    {string.Join("\r\n    ", list)}"
+                );
             }
         }
 
@@ -716,8 +882,14 @@ namespace Roslyn.Test.Utilities
             public int GetHashCode(string str) => str.Trim().GetHashCode();
         }
 
-        public static void AssertLinesEqual(string expected, string actual, string message, string expectedValueSourcePath, int expectedValueSourceLine, bool escapeQuotes)
-        {
+        public static void AssertLinesEqual(
+            string expected,
+            string actual,
+            string message,
+            string expectedValueSourcePath,
+            int expectedValueSourceLine,
+            bool escapeQuotes
+        ) {
             IEnumerable<string> GetLines(string str) =>
                 str.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -726,19 +898,35 @@ namespace Roslyn.Test.Utilities
                 GetLines(actual),
                 comparer: LineComparer.Instance,
                 message: message,
-                itemInspector: escapeQuotes ? new Func<string, string>(line => line.Replace("\"", "\"\"")) : null,
+                itemInspector: escapeQuotes
+                  ? new Func<string, string>(line => line.Replace("\"", "\"\""))
+                  : null,
                 itemSeparator: Environment.NewLine,
                 expectedValueSourcePath: expectedValueSourcePath,
-                expectedValueSourceLine: expectedValueSourceLine);
+                expectedValueSourceLine: expectedValueSourceLine
+            );
         }
 
         public static void Equal(bool[,] expected, Func<int, int, bool> getResult, int size)
         {
-            Equal<bool>(expected, getResult, (b1, b2) => b1 == b2, b => b ? "true" : "false", "{0,-6:G}", size);
+            Equal<bool>(
+                expected,
+                getResult,
+                (b1, b2) => b1 == b2,
+                b => b ? "true" : "false",
+                "{0,-6:G}",
+                size
+            );
         }
 
-        public static void Equal<T>(T[,] expected, Func<int, int, T> getResult, Func<T, T, bool> valuesEqual, Func<T, string> printValue, string format, int size)
-        {
+        public static void Equal<T>(
+            T[,] expected,
+            Func<int, int, T> getResult,
+            Func<T, T, bool> valuesEqual,
+            Func<T, string> printValue,
+            string format,
+            int size
+        ) {
             bool mismatch = false;
             for (int i = 0; i < size; i++)
             {
@@ -785,7 +973,6 @@ namespace Roslyn.Test.Utilities
             Assert.NotNull(value);
             Debug.Assert(value is object);
         }
-
 #nullable disable
     }
 }

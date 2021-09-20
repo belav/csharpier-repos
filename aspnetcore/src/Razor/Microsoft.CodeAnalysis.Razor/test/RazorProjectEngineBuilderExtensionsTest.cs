@@ -17,13 +17,17 @@ namespace Microsoft.CodeAnalysis.Razor
             var csharpLanguageVersion = CSharp.LanguageVersion.Latest;
 
             // Act
-            var projectEngine = RazorProjectEngine.Create(builder =>
-            {
-                builder.SetCSharpLanguageVersion(csharpLanguageVersion);
-            });
+            var projectEngine = RazorProjectEngine.Create(
+                builder =>
+                {
+                    builder.SetCSharpLanguageVersion(csharpLanguageVersion);
+                }
+            );
 
             // Assert
-            var feature = projectEngine.EngineFeatures.OfType<ConfigureParserForCSharpVersionFeature>().FirstOrDefault();
+            var feature =
+                projectEngine.EngineFeatures.OfType<ConfigureParserForCSharpVersionFeature>()
+                    .FirstOrDefault();
             Assert.NotNull(feature);
             Assert.NotEqual(csharpLanguageVersion, feature.CSharpLanguageVersion);
         }

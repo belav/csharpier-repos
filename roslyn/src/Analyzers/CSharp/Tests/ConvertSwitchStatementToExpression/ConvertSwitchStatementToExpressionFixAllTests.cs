@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
 {
     using VerifyCS = CSharpCodeFixVerifier<
         ConvertSwitchStatementToExpressionDiagnosticAnalyzer,
-        ConvertSwitchStatementToExpressionCodeFixProvider>;
+        ConvertSwitchStatementToExpressionCodeFixProvider
+    >;
 
     public class ConvertSwitchStatementToExpressionFixAllTests
     {
@@ -21,7 +22,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         public async Task TestNested_01()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class Program
+                @"class Program
 {
     int M(int i, int j)
     {
@@ -103,7 +104,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     int M(int i, int j)
     {
@@ -160,13 +161,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
             _ => throw null,
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertSwitchStatementToExpression)]
         public async Task TestNested_02()
         {
-            var input = @"class Program
+            var input =
+                @"class Program
 {
     System.Func<int> M(int i, int j)
     {
@@ -185,7 +188,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         }
     }
 }";
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     System.Func<int> M(int i, int j)
     {
@@ -219,7 +223,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
         public async Task TestNested_03()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -250,7 +254,7 @@ class Program
         return value;
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -271,14 +275,15 @@ class Program
         };
         return value;
     }
-}");
+}"
+            );
         }
         [WorkItem(44572, "https://github.com/dotnet/roslyn/issues/44572")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertSwitchStatementToExpression)]
         public async Task TestImplicitConversion()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -296,7 +301,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -313,7 +318,8 @@ class C
             _ => false,
         };
     }
-}");
+}"
+            );
         }
     }
 }

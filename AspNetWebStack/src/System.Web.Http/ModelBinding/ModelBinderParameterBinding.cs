@@ -21,10 +21,11 @@ namespace System.Web.Http.ModelBinding
         private readonly ValueProviderFactory[] _valueProviderFactories;
         private readonly IModelBinder _binder;
 
-        public ModelBinderParameterBinding(HttpParameterDescriptor descriptor,
+        public ModelBinderParameterBinding(
+            HttpParameterDescriptor descriptor,
             IModelBinder modelBinder,
-            IEnumerable<ValueProviderFactory> valueProviderFactories)
-            : base(descriptor)
+            IEnumerable<ValueProviderFactory> valueProviderFactories
+        ) : base(descriptor)
         {
             if (modelBinder == null)
             {
@@ -49,8 +50,11 @@ namespace System.Web.Http.ModelBinding
             get { return _binder; }
         }
 
-        public override Task ExecuteBindingAsync(ModelMetadataProvider metadataProvider, HttpActionContext actionContext, CancellationToken cancellationToken)
-        {
+        public override Task ExecuteBindingAsync(
+            ModelMetadataProvider metadataProvider,
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken
+        ) {
             ModelBindingContext ctx = GetModelBindingContext(metadataProvider, actionContext);
 
             bool haveResult = _binder.BindModel(actionContext, ctx);
@@ -60,14 +64,19 @@ namespace System.Web.Http.ModelBinding
             return TaskHelpers.Completed();
         }
 
-        private ModelBindingContext GetModelBindingContext(ModelMetadataProvider metadataProvider, HttpActionContext actionContext)
-        {
+        private ModelBindingContext GetModelBindingContext(
+            ModelMetadataProvider metadataProvider,
+            HttpActionContext actionContext
+        ) {
             string name = Descriptor.ParameterName;
             Type type = Descriptor.ParameterType;
 
             string prefix = Descriptor.Prefix;
 
-            IValueProvider vp = CompositeValueProviderFactory.GetValueProvider(actionContext, _valueProviderFactories);
+            IValueProvider vp = CompositeValueProviderFactory.GetValueProvider(
+                actionContext,
+                _valueProviderFactories
+            );
 
             ModelBindingContext ctx = new ModelBindingContext()
             {

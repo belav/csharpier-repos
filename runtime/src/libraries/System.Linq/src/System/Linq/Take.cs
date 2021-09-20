@@ -8,16 +8,16 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        public static IEnumerable<TSource> Take<TSource>(this IEnumerable<TSource> source, int count)
-        {
+        public static IEnumerable<TSource> Take<TSource>(
+            this IEnumerable<TSource> source,
+            int count
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
             }
 
-            return count <= 0 ?
-                Empty<TSource>() :
-                TakeIterator<TSource>(source, count);
+            return count <= 0 ? Empty<TSource>() : TakeIterator<TSource>(source, count);
         }
 
         /// <summary>Returns a specified range of contiguous elements from a sequence.</summary>
@@ -28,8 +28,10 @@ namespace System.Linq
         ///   <paramref name="source" /> is <see langword="null" />.
         /// </exception>
         /// <returns>An <see cref="IEnumerable{T}" /> that contains the specified <paramref name="range" /> of elements from the <paramref name="source" /> sequence.</returns>
-        public static IEnumerable<TSource> Take<TSource>(this IEnumerable<TSource> source, Range range)
-        {
+        public static IEnumerable<TSource> Take<TSource>(
+            this IEnumerable<TSource> source,
+            Range range
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -54,20 +56,33 @@ namespace System.Linq
             else if (!isEndIndexFromEnd)
             {
                 return startIndex >= endIndex
-                    ? Empty<TSource>()
-                    : TakeRangeIterator(source, startIndex, endIndex);
+                  ? Empty<TSource>()
+                  : TakeRangeIterator(source, startIndex, endIndex);
             }
 
-            return TakeRangeFromEndIterator(source, isStartIndexFromEnd, startIndex, isEndIndexFromEnd, endIndex);
+            return TakeRangeFromEndIterator(
+                source,
+                isStartIndexFromEnd,
+                startIndex,
+                isEndIndexFromEnd,
+                endIndex
+            );
         }
 
-        private static IEnumerable<TSource> TakeRangeFromEndIterator<TSource>(IEnumerable<TSource> source, bool isStartIndexFromEnd, int startIndex, bool isEndIndexFromEnd, int endIndex)
-        {
+        private static IEnumerable<TSource> TakeRangeFromEndIterator<TSource>(
+            IEnumerable<TSource> source,
+            bool isStartIndexFromEnd,
+            int startIndex,
+            bool isEndIndexFromEnd,
+            int endIndex
+        ) {
             Debug.Assert(source != null);
             Debug.Assert(isStartIndexFromEnd || isEndIndexFromEnd);
-            Debug.Assert(isStartIndexFromEnd
-                ? startIndex > 0 && (!isEndIndexFromEnd || startIndex > endIndex)
-                : startIndex >= 0 && (isEndIndexFromEnd || startIndex < endIndex));
+            Debug.Assert(
+                isStartIndexFromEnd
+                  ? startIndex > 0 && (!isEndIndexFromEnd || startIndex > endIndex)
+                  : startIndex >= 0 && (isEndIndexFromEnd || startIndex < endIndex)
+            );
 
             // Attempt to extract the count of the source enumerator,
             // in order to convert fromEnd indices to regular indices.
@@ -119,7 +134,10 @@ namespace System.Linq
                             {
                                 queue.Dequeue();
                                 queue.Enqueue(e.Current);
-                                checked { ++count; }
+                                checked
+                                {
+                                    ++count;
+                                }
                             } while (e.MoveNext());
                             break;
                         }
@@ -162,7 +180,6 @@ namespace System.Linq
                                 queue.Enqueue(e.Current);
                                 yield return queue.Dequeue();
                             } while (e.MoveNext());
-
                             break;
                         }
                         else
@@ -180,8 +197,10 @@ namespace System.Linq
                 Math.Min(count, isEndIndexFromEnd ? count - endIndex : endIndex);
         }
 
-        public static IEnumerable<TSource> TakeWhile<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
-        {
+        public static IEnumerable<TSource> TakeWhile<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, bool> predicate
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -195,8 +214,10 @@ namespace System.Linq
             return TakeWhileIterator(source, predicate);
         }
 
-        private static IEnumerable<TSource> TakeWhileIterator<TSource>(IEnumerable<TSource> source, Func<TSource, bool> predicate)
-        {
+        private static IEnumerable<TSource> TakeWhileIterator<TSource>(
+            IEnumerable<TSource> source,
+            Func<TSource, bool> predicate
+        ) {
             foreach (TSource element in source)
             {
                 if (!predicate(element))
@@ -208,8 +229,10 @@ namespace System.Linq
             }
         }
 
-        public static IEnumerable<TSource> TakeWhile<TSource>(this IEnumerable<TSource> source, Func<TSource, int, bool> predicate)
-        {
+        public static IEnumerable<TSource> TakeWhile<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, int, bool> predicate
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -223,8 +246,10 @@ namespace System.Linq
             return TakeWhileIterator(source, predicate);
         }
 
-        private static IEnumerable<TSource> TakeWhileIterator<TSource>(IEnumerable<TSource> source, Func<TSource, int, bool> predicate)
-        {
+        private static IEnumerable<TSource> TakeWhileIterator<TSource>(
+            IEnumerable<TSource> source,
+            Func<TSource, int, bool> predicate
+        ) {
             int index = -1;
             foreach (TSource element in source)
             {
@@ -242,18 +267,24 @@ namespace System.Linq
             }
         }
 
-        public static IEnumerable<TSource> TakeLast<TSource>(this IEnumerable<TSource> source, int count)
-        {
+        public static IEnumerable<TSource> TakeLast<TSource>(
+            this IEnumerable<TSource> source,
+            int count
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
             }
 
-            return count <= 0 ?
-                Empty<TSource>() :
-                TakeRangeFromEndIterator(source,
-                    isStartIndexFromEnd: true, startIndex: count,
-                    isEndIndexFromEnd: true, endIndex: 0);
+            return count <= 0
+              ? Empty<TSource>()
+              : TakeRangeFromEndIterator(
+                    source,
+                    isStartIndexFromEnd: true,
+                    startIndex: count,
+                    isEndIndexFromEnd: true,
+                    endIndex: 0
+                );
         }
     }
 }

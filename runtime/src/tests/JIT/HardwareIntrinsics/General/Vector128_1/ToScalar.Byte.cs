@@ -53,7 +53,24 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetByte();
             }
 
-            Vector128<Byte> value = Vector128.Create(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15]);
+            Vector128<Byte> value = Vector128.Create(
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                values[6],
+                values[7],
+                values[8],
+                values[9],
+                values[10],
+                values[11],
+                values[12],
+                values[13],
+                values[14],
+                values[15]
+            );
 
             Byte result = value.ToScalar();
             ValidateResult(result, values);
@@ -70,22 +87,45 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetByte();
             }
 
-            Vector128<Byte> value = Vector128.Create(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15]);
+            Vector128<Byte> value = Vector128.Create(
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                values[6],
+                values[7],
+                values[8],
+                values[9],
+                values[10],
+                values[11],
+                values[12],
+                values[13],
+                values[14],
+                values[15]
+            );
 
-            object result = typeof(Vector128)
-                                .GetMethod(nameof(Vector128.ToScalar))
-                                .MakeGenericMethod(typeof(Byte))
-                                .Invoke(null, new object[] { value });
+            object result = typeof(Vector128).GetMethod(nameof(Vector128.ToScalar))
+                .MakeGenericMethod(typeof(Byte))
+                .Invoke(null, new object[] { value });
 
             ValidateResult((Byte)(result), values);
         }
 
-        private void ValidateResult(Byte result, Byte[] values, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Byte result,
+            Byte[] values,
+            [CallerMemberName] string method = ""
+        ) {
             if (result != values[0])
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<Byte>.ToScalar(): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  values: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<Byte>.ToScalar(): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  values: ({string.Join(", ", values)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

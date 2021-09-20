@@ -14,9 +14,13 @@ namespace System.Net.Quic.Tests
         {
             return new SslServerAuthenticationOptions()
             {
-                ApplicationProtocols = new List<SslApplicationProtocol>() { new SslApplicationProtocol("quictest") },
+                ApplicationProtocols = new List<SslApplicationProtocol>()
+                {
+                    new SslApplicationProtocol("quictest")
+                },
                 // TODO: use a cert. MsQuic currently only allows certs that are trusted.
-                ServerCertificate = System.Net.Test.Common.Configuration.Certificates.GetServerCertificate()
+                ServerCertificate =
+                    System.Net.Test.Common.Configuration.Certificates.GetServerCertificate()
             };
         }
 
@@ -24,14 +28,24 @@ namespace System.Net.Quic.Tests
         {
             return new SslClientAuthenticationOptions()
             {
-                ApplicationProtocols = new List<SslApplicationProtocol>() { new SslApplicationProtocol("quictest") },
-                RemoteCertificateValidationCallback = (sender, certificate, chain, errors) => { return true; }
+                ApplicationProtocols = new List<SslApplicationProtocol>()
+                {
+                    new SslApplicationProtocol("quictest")
+                },
+                RemoteCertificateValidationCallback = (sender, certificate, chain, errors) =>
+                {
+                    return true;
+                }
             };
         }
 
         internal QuicConnection CreateQuicConnection(IPEndPoint endpoint)
         {
-            return new QuicConnection(QuicImplementationProviders.MsQuic, endpoint, GetSslClientAuthenticationOptions());
+            return new QuicConnection(
+                QuicImplementationProviders.MsQuic,
+                endpoint,
+                GetSslClientAuthenticationOptions()
+            );
         }
 
         internal QuicListener CreateQuicListener()
@@ -41,28 +55,42 @@ namespace System.Net.Quic.Tests
 
         internal QuicListener CreateQuicListener(IPEndPoint endpoint)
         {
-            QuicListener listener = new QuicListener(QuicImplementationProviders.MsQuic, endpoint, GetSslServerAuthenticationOptions());
+            QuicListener listener = new QuicListener(
+                QuicImplementationProviders.MsQuic,
+                endpoint,
+                GetSslServerAuthenticationOptions()
+            );
             listener.Start();
             return listener;
         }
 
-        internal async Task RunClientServer(Func<QuicConnection, Task> clientFunction, Func<QuicConnection, Task> serverFunction, int millisecondsTimeout = 10_000)
-        {
+        internal async Task RunClientServer(
+            Func<QuicConnection, Task> clientFunction,
+            Func<QuicConnection, Task> serverFunction,
+            int millisecondsTimeout = 10_000
+        ) {
             using QuicListener listener = CreateQuicListener();
 
             await new[]
             {
-                Task.Run(async () =>
-                {
-                    using QuicConnection serverConnection = await listener.AcceptConnectionAsync();
-                    await serverFunction(serverConnection);
-                }),
-                Task.Run(async () =>
-                {
-                    using QuicConnection clientConnection = CreateQuicConnection(listener.ListenEndPoint);
-                    await clientConnection.ConnectAsync();
-                    await clientFunction(clientConnection);
-                })
+                Task.Run(
+                    async () =>
+                    {
+                        using QuicConnection serverConnection =
+                            await listener.AcceptConnectionAsync();
+                        await serverFunction(serverConnection);
+                    }
+                ),
+                Task.Run(
+                    async () =>
+                    {
+                        using QuicConnection clientConnection = CreateQuicConnection(
+                            listener.ListenEndPoint
+                        );
+                        await clientConnection.ConnectAsync();
+                        await clientFunction(clientConnection);
+                    }
+                )
             }.WhenAllOrAnyFailed(millisecondsTimeout);
         }
     }

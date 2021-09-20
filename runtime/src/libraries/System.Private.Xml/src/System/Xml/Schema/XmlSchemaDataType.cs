@@ -17,9 +17,16 @@ namespace System.Xml.Schema
 
         public abstract XmlTokenizedType TokenizedType { get; }
 
-        public abstract object ParseValue(string s, XmlNameTable? nameTable, IXmlNamespaceResolver? nsmgr);
+        public abstract object ParseValue(
+            string s,
+            XmlNameTable? nameTable,
+            IXmlNamespaceResolver? nsmgr
+        );
 
-        public virtual XmlSchemaDatatypeVariety Variety { get { return XmlSchemaDatatypeVariety.Atomic; } }
+        public virtual XmlSchemaDatatypeVariety Variety
+        {
+            get { return XmlSchemaDatatypeVariety.Atomic; }
+        }
 
         internal XmlSchemaDatatype() { }
 
@@ -36,8 +43,11 @@ namespace System.Xml.Schema
             return ValueConverter.ChangeType(value, targetType);
         }
 
-        public virtual object ChangeType(object value, Type targetType, IXmlNamespaceResolver namespaceResolver)
-        {
+        public virtual object ChangeType(
+            object value,
+            Type targetType,
+            IXmlNamespaceResolver namespaceResolver
+        ) {
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
@@ -53,7 +63,10 @@ namespace System.Xml.Schema
             return ValueConverter.ChangeType(value, targetType, namespaceResolver);
         }
 
-        public virtual XmlTypeCode TypeCode { get { return XmlTypeCode.None; } }
+        public virtual XmlTypeCode TypeCode
+        {
+            get { return XmlTypeCode.None; }
+        }
 
         public virtual bool IsDerivedFrom(XmlSchemaDatatype datatype)
         {
@@ -70,21 +83,43 @@ namespace System.Xml.Schema
 
         internal abstract int Compare(object value1, object value2);
 
-        internal abstract object ParseValue(string s, XmlNameTable? nameTable, IXmlNamespaceResolver? nsmgr, bool createAtomicValue);
+        internal abstract object ParseValue(
+            string s,
+            XmlNameTable? nameTable,
+            IXmlNamespaceResolver? nsmgr,
+            bool createAtomicValue
+        );
 
-        internal abstract Exception? TryParseValue(string s, XmlNameTable? nameTable, IXmlNamespaceResolver? nsmgr, out object? typedValue);
+        internal abstract Exception? TryParseValue(
+            string s,
+            XmlNameTable? nameTable,
+            IXmlNamespaceResolver? nsmgr,
+            out object? typedValue
+        );
 
-        internal abstract Exception? TryParseValue(object value, XmlNameTable? nameTable, IXmlNamespaceResolver? namespaceResolver, out object? typedValue);
+        internal abstract Exception? TryParseValue(
+            object value,
+            XmlNameTable? nameTable,
+            IXmlNamespaceResolver? namespaceResolver,
+            out object? typedValue
+        );
 
         internal abstract FacetsChecker FacetsChecker { get; }
 
         internal abstract XmlSchemaWhiteSpace BuiltInWhitespaceFacet { get; }
 
-        internal abstract XmlSchemaDatatype DeriveByRestriction(XmlSchemaObjectCollection facets, XmlNameTable nameTable, XmlSchemaType schemaType);
+        internal abstract XmlSchemaDatatype DeriveByRestriction(
+            XmlSchemaObjectCollection facets,
+            XmlNameTable nameTable,
+            XmlSchemaType schemaType
+        );
 
         internal abstract XmlSchemaDatatype DeriveByList(XmlSchemaType? schemaType);
 
-        internal abstract void VerifySchemaValid(XmlSchemaObjectTable notations, XmlSchemaObject caller);
+        internal abstract void VerifySchemaValid(
+            XmlSchemaObjectTable notations,
+            XmlSchemaObject caller
+        );
 
         internal abstract bool IsEqual(object o1, object o2);
 
@@ -206,7 +241,9 @@ namespace System.Xml.Schema
                         cur = enumerator.Current!;
                         if (cur is IFormattable)
                         {
-                            bldr.Append(((IFormattable)cur).ToString("", CultureInfo.InvariantCulture));
+                            bldr.Append(
+                                ((IFormattable)cur).ToString("", CultureInfo.InvariantCulture)
+                            );
                         }
                         else
                         {
@@ -243,13 +280,18 @@ namespace System.Xml.Schema
             return DatatypeImplementation.FromXdrName(name);
         }
 
-        internal static XmlSchemaDatatype DeriveByUnion(XmlSchemaSimpleType[] types, XmlSchemaType schemaType)
-        {
+        internal static XmlSchemaDatatype DeriveByUnion(
+            XmlSchemaSimpleType[] types,
+            XmlSchemaType schemaType
+        ) {
             return DatatypeImplementation.DeriveByUnion(types, schemaType);
         }
 
-        internal static string XdrCanonizeUri(string uri, XmlNameTable nameTable, SchemaNames schemaNames)
-        {
+        internal static string XdrCanonizeUri(
+            string uri,
+            XmlNameTable nameTable,
+            SchemaNames schemaNames
+        ) {
             string canonicalUri;
             int offset = 5;
             bool convert = false;
@@ -266,7 +308,12 @@ namespace System.Xml.Schema
 
             if (convert)
             {
-                canonicalUri = nameTable.Add(string.Concat(uri.AsSpan(0, offset), uri.Substring(offset, uri.Length - offset).ToUpperInvariant()));
+                canonicalUri = nameTable.Add(
+                    string.Concat(
+                        uri.AsSpan(0, offset),
+                        uri.Substring(offset, uri.Length - offset).ToUpperInvariant()
+                    )
+                );
             }
             else
             {
@@ -274,10 +321,9 @@ namespace System.Xml.Schema
             }
 
             if (
-                Ref.Equal(schemaNames.NsDataTypeAlias, canonicalUri) ||
-                Ref.Equal(schemaNames.NsDataTypeOld, canonicalUri)
-            )
-            {
+                Ref.Equal(schemaNames.NsDataTypeAlias, canonicalUri)
+                || Ref.Equal(schemaNames.NsDataTypeOld, canonicalUri)
+            ) {
                 canonicalUri = schemaNames.NsDataType;
             }
             else if (Ref.Equal(schemaNames.NsXdrAlias, canonicalUri))

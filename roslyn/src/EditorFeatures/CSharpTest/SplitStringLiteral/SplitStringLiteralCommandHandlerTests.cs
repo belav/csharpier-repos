@@ -41,12 +41,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitStringLiteral
             Action callback,
             bool verifyUndo = true,
             IndentStyle indentStyle = IndentStyle.Smart,
-            bool useTabs = false)
-        {
+            bool useTabs = false
+        ) {
             using var workspace = TestWorkspace.CreateCSharp(inputMarkup);
-            workspace.TryApplyChanges(workspace.CurrentSolution.WithOptions(workspace.Options
-                .WithChangedOption(SmartIndent, LanguageNames.CSharp, indentStyle)
-                .WithChangedOption(UseTabs, LanguageNames.CSharp, useTabs)));
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution.WithOptions(
+                    workspace.Options.WithChangedOption(
+                            SmartIndent,
+                            LanguageNames.CSharp,
+                            indentStyle
+                        )
+                        .WithChangedOption(UseTabs, LanguageNames.CSharp, useTabs)
+                )
+            );
 
             if (useTabs && expectedOutputMarkup != null)
             {
@@ -67,20 +74,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitStringLiteral
             view.SetMultiSelection(snapshotSpans);
 
             var undoHistoryRegistry = workspace.GetService<ITextUndoHistoryRegistry>();
-            var commandHandler = workspace.ExportProvider.GetCommandHandler<SplitStringLiteralCommandHandler>(nameof(SplitStringLiteralCommandHandler));
+            var commandHandler =
+                workspace.ExportProvider.GetCommandHandler<SplitStringLiteralCommandHandler>(
+                    nameof(SplitStringLiteralCommandHandler)
+                );
 
-            if (!commandHandler.ExecuteCommand(new ReturnKeyCommandArgs(view, view.TextBuffer), TestCommandExecutionContext.Create()))
-            {
+            if (
+                !commandHandler.ExecuteCommand(
+                    new ReturnKeyCommandArgs(view, view.TextBuffer),
+                    TestCommandExecutionContext.Create()
+                )
+            ) {
                 callback();
             }
 
             if (expectedOutputMarkup != null)
             {
-                MarkupTestFile.GetSpans(expectedOutputMarkup,
-                    out var expectedOutput, out ImmutableArray<TextSpan> expectedSpans);
+                MarkupTestFile.GetSpans(
+                    expectedOutputMarkup,
+                    out var expectedOutput,
+                    out ImmutableArray<TextSpan> expectedSpans
+                );
 
                 Assert.Equal(expectedOutput, view.TextBuffer.CurrentSnapshot.AsText().ToString());
-                Assert.Equal(expectedSpans.First().Start, view.Caret.Position.BufferPosition.Position);
+                Assert.Equal(
+                    expectedSpans.First().Start,
+                    view.Caret.Position.BufferPosition.Position
+                );
 
                 if (verifyUndo)
                 {
@@ -90,7 +110,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitStringLiteral
 
                     var currentSnapshot = document.GetTextBuffer().CurrentSnapshot;
                     Assert.Equal(originalSnapshot.GetText(), currentSnapshot.GetText());
-                    Assert.Equal(originalSelections.First().Start, view.Caret.Position.BufferPosition.Position);
+                    Assert.Equal(
+                        originalSelections.First().Start,
+                        view.Caret.Position.BufferPosition.Position
+                    );
                 }
             }
         }
@@ -102,28 +125,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitStringLiteral
         /// failure.
         /// </summary>
         private static void TestHandled(
-            string inputMarkup, string expectedOutputMarkup,
-            bool verifyUndo = true, IndentStyle indentStyle = IndentStyle.Smart,
-            bool useTabs = false)
-        {
+            string inputMarkup,
+            string expectedOutputMarkup,
+            bool verifyUndo = true,
+            IndentStyle indentStyle = IndentStyle.Smart,
+            bool useTabs = false
+        ) {
             TestWorker(
-                inputMarkup, expectedOutputMarkup,
+                inputMarkup,
+                expectedOutputMarkup,
                 callback: () =>
                 {
                     Assert.True(false, "Should not reach here.");
                 },
-                verifyUndo, indentStyle, useTabs);
+                verifyUndo,
+                indentStyle,
+                useTabs
+            );
         }
 
         private static void TestNotHandled(string inputMarkup)
         {
             var notHandled = false;
             TestWorker(
-                inputMarkup, null,
+                inputMarkup,
+                null,
                 callback: () =>
                 {
                     notHandled = true;
-                });
+                }
+            );
 
             Assert.True(notHandled);
         }
@@ -132,156 +163,168 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitStringLiteral
         public void TestMissingBeforeString()
         {
             TestNotHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = [||]"""";
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
         public void TestMissingBeforeInterpolatedString()
         {
             TestNotHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = [||]$"""";
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
         public void TestMissingAfterString_1()
         {
             TestNotHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = """"[||];
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
         public void TestMissingAfterString_2()
         {
             TestNotHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = """" [||];
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
         public void TestMissingAfterString_3()
         {
             TestNotHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = """"[||]
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
         public void TestMissingAfterString_4()
         {
             TestNotHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = """" [||]
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
         public void TestMissingAfterInterpolatedString_1()
         {
             TestNotHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = $""""[||];
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
         public void TestMissingAfterInterpolatedString_2()
         {
             TestNotHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = $"""" [||];
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
         public void TestMissingAfterInterpolatedString_3()
         {
             TestNotHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = $""""[||]
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
         public void TestMissingAfterInterpolatedString_4()
         {
             TestNotHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = $"""" [||]
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
         public void TestMissingInVerbatimString()
         {
             TestNotHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = @""a[||]b"";
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
         public void TestMissingInInterpolatedVerbatimString()
         {
             TestNotHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = $@""a[||]b"";
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
@@ -290,14 +333,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitStringLiteral
             // Do not verifyUndo because of https://github.com/dotnet/roslyn/issues/28033
             // When that issue is fixed, we can reenable verifyUndo
             TestHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = ""[||]"";
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -305,7 +348,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitStringLiteral
             ""[||]"";
     }
 }",
-            verifyUndo: false);
+                verifyUndo: false
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
@@ -314,14 +358,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitStringLiteral
             // Do not verifyUndo because of https://github.com/dotnet/roslyn/issues/28033
             // When that issue is fixed, we can reenable verifyUndo
             TestHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = ""[||]"";
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -329,8 +373,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitStringLiteral
         ""[||]"";
     }
 }",
-            verifyUndo: false,
-            IndentStyle.Block);
+                verifyUndo: false,
+                IndentStyle.Block
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
@@ -339,14 +384,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitStringLiteral
             // Do not verifyUndo because of https://github.com/dotnet/roslyn/issues/28033
             // When that issue is fixed, we can reenable verifyUndo
             TestHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = ""[||]"";
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -354,194 +399,207 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitStringLiteral
 ""[||]"";
     }
 }",
-            verifyUndo: false,
-            IndentStyle.None);
+                verifyUndo: false,
+                IndentStyle.None
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
         public void TestInEmptyInterpolatedString()
         {
             TestHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = $""[||]"";
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         var v = $"""" +
             $""[||]"";
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
         public void TestInEmptyInterpolatedString_BlockIndent()
         {
             TestHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = $""[||]"";
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         var v = $"""" +
         $""[||]"";
     }
-}", indentStyle: IndentStyle.Block);
+}",
+                indentStyle: IndentStyle.Block
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
         public void TestInEmptyInterpolatedString_NoneIndent()
         {
             TestHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = $""[||]"";
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         var v = $"""" +
 $""[||]"";
     }
-}", indentStyle: IndentStyle.None);
+}",
+                indentStyle: IndentStyle.None
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
         public void TestSimpleString1()
         {
             TestHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = ""now is [||]the time"";
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         var v = ""now is "" +
             ""[||]the time"";
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
         public void TestInterpolatedString1()
         {
             TestHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = $""now is [||]the { 1 + 2 } time for { 3 + 4 } all good men"";
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         var v = $""now is "" +
             $""[||]the { 1 + 2 } time for { 3 + 4 } all good men"";
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
         public void TestInterpolatedString2()
         {
             TestHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = $""now is the [||]{ 1 + 2 } time for { 3 + 4 } all good men"";
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         var v = $""now is the "" +
             $""[||]{ 1 + 2 } time for { 3 + 4 } all good men"";
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
         public void TestInterpolatedString3()
         {
             TestHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = $""now is the { 1 + 2 }[||] time for { 3 + 4 } all good men"";
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         var v = $""now is the { 1 + 2 }"" +
             $""[||] time for { 3 + 4 } all good men"";
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
         public void TestMissingInInterpolation1()
         {
             TestNotHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = $""now is the {[||] 1 + 2 } time for { 3 + 4 } all good men"";
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
         public void TestMissingInInterpolation2()
         {
             TestNotHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = $""now is the { 1 + 2 [||]} time for { 3 + 4 } all good men"";
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.SplitStringLiteral)]
         public void TestSelection()
         {
             TestNotHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = ""now is [|the|] time"";
     }
-}");
+}"
+            );
         }
 
         [WorkItem(20258, "https://github.com/dotnet/roslyn/issues/20258")]
@@ -551,7 +609,7 @@ $""[||]"";
             // Do not verifyUndo because of https://github.com/dotnet/roslyn/issues/28033
             // When that issue is fixed, we can reenable verifyUndo
             TestHandled(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -564,7 +622,7 @@ $""[||]"";
             ""string3"";
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -578,7 +636,8 @@ $""[||]"";
             ""string3"";
     }
 }",
-            verifyUndo: false);
+                verifyUndo: false
+            );
         }
 
         [WorkItem(20258, "https://github.com/dotnet/roslyn/issues/20258")]
@@ -588,7 +647,7 @@ $""[||]"";
             // Do not verifyUndo because of https://github.com/dotnet/roslyn/issues/28033
             // When that issue is fixed, we can reenable verifyUndo
             TestHandled(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -601,7 +660,7 @@ $""[||]"";
             ""string3"";
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -615,7 +674,8 @@ $""[||]"";
             ""string3"";
     }
 }",
-            verifyUndo: false);
+                verifyUndo: false
+            );
         }
 
         [WorkItem(20258, "https://github.com/dotnet/roslyn/issues/20258")]
@@ -625,7 +685,7 @@ $""[||]"";
             // Do not verifyUndo because of https://github.com/dotnet/roslyn/issues/28033
             // When that issue is fixed, we can reenable verifyUndo
             TestHandled(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -638,7 +698,7 @@ $""[||]"";
             ""string3"";
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -652,7 +712,8 @@ $""[||]"";
             ""string3"";
     }
 }",
-            verifyUndo: false);
+                verifyUndo: false
+            );
         }
 
         [WorkItem(20258, "https://github.com/dotnet/roslyn/issues/20258")]
@@ -662,7 +723,7 @@ $""[||]"";
             // Do not verifyUndo because of https://github.com/dotnet/roslyn/issues/28033
             // When that issue is fixed, we can reenable verifyUndo
             TestHandled(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -675,7 +736,7 @@ $""[||]"";
             ""string3"";
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -689,7 +750,8 @@ $""[||]"";
             ""string3"";
     }
 }",
-            verifyUndo: false);
+                verifyUndo: false
+            );
         }
 
         [WorkItem(20258, "https://github.com/dotnet/roslyn/issues/20258")]
@@ -699,7 +761,7 @@ $""[||]"";
             // Do not verifyUndo because of https://github.com/dotnet/roslyn/issues/28033
             // When that issue is fixed, we can reenable verifyUndo
             TestHandled(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -712,7 +774,7 @@ $""[||]"";
             ""string3"";
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -726,7 +788,8 @@ $""[||]"";
             ""string3"";
     }
 }",
-            verifyUndo: false);
+                verifyUndo: false
+            );
         }
 
         [WorkItem(20258, "https://github.com/dotnet/roslyn/issues/20258")]
@@ -736,7 +799,7 @@ $""[||]"";
             // Do not verifyUndo because of https://github.com/dotnet/roslyn/issues/28033
             // When that issue is fixed, we can reenable verifyUndo
             TestHandled(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -749,7 +812,7 @@ $""[||]"";
             ""string3[||]"";
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -763,7 +826,8 @@ $""[||]"";
             ""[||]"";
     }
 }",
-            verifyUndo: false);
+                verifyUndo: false
+            );
         }
 
         [WorkItem(39040, "https://github.com/dotnet/roslyn/issues/39040")]
@@ -771,14 +835,14 @@ $""[||]"";
         public void TestMultiCaretSingleLine()
         {
             TestHandled(
-@"class C
+                @"class C
 {
     void M()
     {
         var v = ""now is [||]the ti[||]me"";
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -786,7 +850,8 @@ $""[||]"";
             ""[||]the ti"" +
             ""[||]me"";
     }
-}");
+}"
+            );
         }
 
         [WorkItem(39040, "https://github.com/dotnet/roslyn/issues/39040")]
@@ -794,7 +859,7 @@ $""[||]"";
         public void TestMultiCaretMultiLines()
         {
             TestHandled(
-@"class C
+                @"class C
 {
     string s = ""hello w[||]orld"";
 
@@ -803,7 +868,7 @@ $""[||]"";
         var v = ""now is [||]the ti[||]me"";
     }
 }",
-@"class C
+                @"class C
 {
     string s = ""hello w"" +
         ""[||]orld"";
@@ -814,7 +879,8 @@ $""[||]"";
             ""[||]the ti"" +
             ""[||]me"";
     }
-}");
+}"
+            );
         }
 
         [WorkItem(39040, "https://github.com/dotnet/roslyn/issues/39040")]
@@ -822,7 +888,7 @@ $""[||]"";
         public void TestMultiCaretInterpolatedString()
         {
             TestHandled(
-@"class C
+                @"class C
 {
     string s = ""hello w[||]orld"";
 
@@ -832,7 +898,7 @@ $""[||]"";
         var s = $""H[||]ello {location}!"";
     }
 }",
-@"class C
+                @"class C
 {
     string s = ""hello w"" +
         ""[||]orld"";
@@ -843,7 +909,8 @@ $""[||]"";
         var s = $""H"" +
             $""[||]ello {location}!"";
     }
-}");
+}"
+            );
         }
 
         [WorkItem(40277, "https://github.com/dotnet/roslyn/issues/40277")]
@@ -851,14 +918,14 @@ $""[||]"";
         public void TestInStringWithKeepTabsEnabled1()
         {
             TestHandled(
-@"class C
+                @"class C
 {
 	void M()
 	{
 		var s = ""Hello [||]world"";
 	}
 }",
-@"class C
+                @"class C
 {
 	void M()
 	{
@@ -866,7 +933,8 @@ $""[||]"";
 			""[||]world"";
 	}
 }",
-            useTabs: true);
+                useTabs: true
+            );
         }
 
         [WorkItem(40277, "https://github.com/dotnet/roslyn/issues/40277")]
@@ -874,7 +942,7 @@ $""[||]"";
         public void TestInStringWithKeepTabsEnabled2()
         {
             TestHandled(
-@"class C
+                @"class C
 {
 	void M()
 	{
@@ -882,7 +950,7 @@ $""[||]"";
 			""there [||]world"";
 	}
 }",
-@"class C
+                @"class C
 {
 	void M()
 	{
@@ -891,7 +959,8 @@ $""[||]"";
 			""[||]world"";
 	}
 }",
-            useTabs: true);
+                useTabs: true
+            );
         }
     }
 }

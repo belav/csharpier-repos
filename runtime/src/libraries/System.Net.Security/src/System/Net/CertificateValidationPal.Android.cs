@@ -15,10 +15,10 @@ namespace System.Net
             X509Certificate2? remoteCertificate,
             bool checkCertName,
             bool isServer,
-            string? hostName)
-        {
+            string? hostName
+        ) {
             if (remoteCertificate == null)
-                return  SslPolicyErrors.RemoteCertificateNotAvailable;
+                return SslPolicyErrors.RemoteCertificateNotAvailable;
 
             SslPolicyErrors errors = chain.Build(remoteCertificate)
                 ? SslPolicyErrors.None
@@ -28,8 +28,9 @@ namespace System.Net
             {
                 System.Diagnostics.Debug.Assert(hostName != null);
                 SafeDeleteSslContext sslContext = (SafeDeleteSslContext)securityContext;
-                if (!Interop.AndroidCrypto.SSLStreamVerifyHostname(sslContext.SslContext, hostName!))
-                {
+                if (
+                    !Interop.AndroidCrypto.SSLStreamVerifyHostname(sslContext.SslContext, hostName!)
+                ) {
                     errors |= SslPolicyErrors.RemoteCertificateNameMismatch;
                 }
             }
@@ -47,8 +48,8 @@ namespace System.Net
 
         internal static X509Certificate2? GetRemoteCertificate(
             SafeDeleteContext? securityContext,
-            out X509Certificate2Collection? remoteCertificateStore)
-        {
+            out X509Certificate2Collection? remoteCertificateStore
+        ) {
             if (securityContext == null)
             {
                 remoteCertificateStore = null;
@@ -61,8 +62,8 @@ namespace System.Net
 
         private static X509Certificate2? GetRemoteCertificate(
             SafeDeleteContext securityContext,
-            X509Certificate2Collection? remoteCertificateStore)
-        {
+            X509Certificate2Collection? remoteCertificateStore
+        ) {
             if (securityContext == null)
                 return null;
 
@@ -74,8 +75,11 @@ namespace System.Net
             if (remoteCertificateStore == null)
             {
                 // Constructing a new X509Certificate2 adds a global reference to the pointer, so we dispose this handle
-                using (SafeX509Handle handle = Interop.AndroidCrypto.SSLStreamGetPeerCertificate(sslContext))
-                {
+                using (
+                    SafeX509Handle handle = Interop.AndroidCrypto.SSLStreamGetPeerCertificate(
+                        sslContext
+                    )
+                ) {
                     if (!handle.IsInvalid)
                     {
                         cert = new X509Certificate2(handle.DangerousGetHandle());
@@ -95,10 +99,11 @@ namespace System.Net
                         // Constructing a new X509Certificate2 adds a global reference to the pointer, so we dispose this handle
                         using (var handle = new SafeX509Handle(ptr))
                         {
-                            remoteCertificateStore.Add(new X509Certificate2(handle.DangerousGetHandle()));
+                            remoteCertificateStore.Add(
+                                new X509Certificate2(handle.DangerousGetHandle())
+                            );
                         }
                     }
-
                 }
             }
 

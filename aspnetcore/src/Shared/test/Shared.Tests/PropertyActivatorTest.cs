@@ -23,7 +23,8 @@ namespace Microsoft.Extensions.Internal
                 {
                     invokedWith = val;
                     return val;
-                });
+                }
+            );
 
             // Act
             activator.Activate(instance, 123);
@@ -60,8 +61,9 @@ namespace Microsoft.Extensions.Internal
             var propertiesToActivate = PropertyActivator<int>.GetPropertiesToActivate(
                 type: typeof(TestClass),
                 activateAttributeType: typeof(TestActivateAttribute),
-                createActivateInfo:
-                (propertyInfo) => new PropertyActivator<int>(propertyInfo, valueAccessor: (val) => val + 1));
+                createActivateInfo: (propertyInfo) =>
+                    new PropertyActivator<int>(propertyInfo, valueAccessor: (val) => val + 1)
+            );
 
             // Assert
             Assert.Collection(
@@ -69,7 +71,8 @@ namespace Microsoft.Extensions.Internal
                 (activator) =>
                 {
                     Assert.Equal(expectedPropertyInfo, activator.PropertyInfo);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -84,8 +87,12 @@ namespace Microsoft.Extensions.Internal
             var propertiesToActivate = PropertyActivator<int>.GetPropertiesToActivate(
                 type: typeof(TestClass),
                 activateAttributeType: typeof(TestActivateAttribute),
-                createActivateInfo:
-                (propertyInfo) => new PropertyActivator<int>(expectedPropertyInfo, valueAccessor: (val) => val + 1));
+                createActivateInfo: (propertyInfo) =>
+                    new PropertyActivator<int>(
+                        expectedPropertyInfo,
+                        valueAccessor: (val) => val + 1
+                    )
+            );
 
             // Assert
             Assert.Collection(
@@ -93,7 +100,8 @@ namespace Microsoft.Extensions.Internal
                 (activator) =>
                 {
                     Assert.Equal(expectedPropertyInfo, activator.PropertyInfo);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -108,7 +116,9 @@ namespace Microsoft.Extensions.Internal
             var propertiesToActivate = PropertyActivator<int>.GetPropertiesToActivate(
                 typeof(TestClassWithPropertyVisiblity),
                 typeof(TestActivateAttribute),
-                (propertyInfo) => new PropertyActivator<int>(propertyInfo, valueAccessor: (val) => val));
+                (propertyInfo) =>
+                    new PropertyActivator<int>(propertyInfo, valueAccessor: (val) => val)
+            );
 
             // Assert
             Assert.Single(propertiesToActivate);
@@ -126,8 +136,10 @@ namespace Microsoft.Extensions.Internal
             var propertiesToActivate = PropertyActivator<int>.GetPropertiesToActivate(
                 typeof(TestClassWithPropertyVisiblity),
                 typeof(TestActivateAttribute),
-                (propertyInfo) => new PropertyActivator<int>(propertyInfo, valueAccessor: (val) => val),
-                includeNonPublic: true);
+                (propertyInfo) =>
+                    new PropertyActivator<int>(propertyInfo, valueAccessor: (val) => val),
+                includeNonPublic: true
+            );
 
             // Assert
             Assert.Equal(5, propertiesToActivate.Length);
@@ -146,10 +158,7 @@ namespace Microsoft.Extensions.Internal
             [TestActivate]
             public int this[int something] // Not activatable
             {
-                get
-                {
-                    return 0;
-                }
+                get { return 0; }
             }
 
             [TestActivate]
@@ -168,7 +177,7 @@ namespace Microsoft.Extensions.Internal
             internal int Internal { get; set; }
 
             [TestActivate]
-            protected internal int ProtectedInternal {get; set; }
+            protected internal int ProtectedInternal { get; set; }
 
             [TestActivate]
             private int Private { get; set; }

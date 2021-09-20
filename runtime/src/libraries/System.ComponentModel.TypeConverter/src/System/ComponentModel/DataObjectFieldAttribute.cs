@@ -10,20 +10,20 @@ namespace System.ComponentModel
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class DataObjectFieldAttribute : Attribute
     {
-        public DataObjectFieldAttribute(bool primaryKey) : this(primaryKey, false, false, -1)
-        {
-        }
+        public DataObjectFieldAttribute(bool primaryKey) : this(primaryKey, false, false, -1) { }
 
-        public DataObjectFieldAttribute(bool primaryKey, bool isIdentity) : this(primaryKey, isIdentity, false, -1)
-        {
-        }
+        public DataObjectFieldAttribute(bool primaryKey, bool isIdentity)
+            : this(primaryKey, isIdentity, false, -1) { }
 
-        public DataObjectFieldAttribute(bool primaryKey, bool isIdentity, bool isNullable) : this(primaryKey, isIdentity, isNullable, -1)
-        {
-        }
+        public DataObjectFieldAttribute(bool primaryKey, bool isIdentity, bool isNullable)
+            : this(primaryKey, isIdentity, isNullable, -1) { }
 
-        public DataObjectFieldAttribute(bool primaryKey, bool isIdentity, bool isNullable, int length)
-        {
+        public DataObjectFieldAttribute(
+            bool primaryKey,
+            bool isIdentity,
+            bool isNullable,
+            int length
+        ) {
             PrimaryKey = primaryKey;
             IsIdentity = isIdentity;
             IsNullable = isNullable;
@@ -45,11 +45,11 @@ namespace System.ComponentModel
                 return true;
             }
 
-            return (obj is DataObjectFieldAttribute other) &&
-                (other.IsIdentity == IsIdentity) &&
-                (other.IsNullable == IsNullable) &&
-                (other.Length == Length) &&
-                (other.PrimaryKey == PrimaryKey);
+            return (obj is DataObjectFieldAttribute other)
+                && (other.IsIdentity == IsIdentity)
+                && (other.IsNullable == IsNullable)
+                && (other.Length == Length)
+                && (other.PrimaryKey == PrimaryKey);
         }
 
         public override int GetHashCode() => base.GetHashCode();

@@ -32,8 +32,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         /// <param name="rcw">The RCW created in the original context.</param>
         public RCWForCurrentContext(T rcw)
         {
-            // To improve performance we create a new RCW for the current context so we get 
-            // the caching behavior of the marshaled pointer. 
+            // To improve performance we create a new RCW for the current context so we get
+            // the caching behavior of the marshaled pointer.
             // See RCW::GetComIPForMethodTableFromCache in ndp\clr\src\VM\RuntimeCallableWrapper.cpp
             IntPtr iunknownPtr = Marshal.GetIUnknownForObject(rcw);
             Object? objInCurrentCtx = null;
@@ -42,12 +42,16 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             {
                 objInCurrentCtx = Marshal.GetObjectForIUnknown(iunknownPtr);
             }
+
             finally
             {
                 Marshal.Release(iunknownPtr);
             }
 
-            Debug.Assert(objInCurrentCtx != null, "Unable to marshal COM Object to the current context (apartment). This will hurt performance.");
+            Debug.Assert(
+                objInCurrentCtx != null,
+                "Unable to marshal COM Object to the current context (apartment). This will hurt performance."
+            );
 
             // If we failed to create the new RCW we default to returning the original RCW.
             if (objInCurrentCtx == null)
@@ -109,13 +113,15 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         {
             try
             {
-                if (null != _rcwForCurrentCtx &&
-                    _shouldReleaseRCW &&
-                    Marshal.IsComObject(_rcwForCurrentCtx))
-                {
+                if (
+                    null != _rcwForCurrentCtx
+                    && _shouldReleaseRCW
+                    && Marshal.IsComObject(_rcwForCurrentCtx)
+                ) {
                     Marshal.ReleaseComObject(_rcwForCurrentCtx);
                 }
             }
+
             finally
             {
                 _rcwForCurrentCtx = null;

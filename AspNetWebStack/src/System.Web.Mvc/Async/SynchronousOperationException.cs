@@ -11,23 +11,16 @@ namespace System.Web.Mvc.Async
     [Serializable]
     public sealed class SynchronousOperationException : HttpException
     {
-        public SynchronousOperationException()
-        {
-        }
+        public SynchronousOperationException() { }
 
-        private SynchronousOperationException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+        private SynchronousOperationException(
+            SerializationInfo info,
+            StreamingContext context
+        ) : base(info, context) { }
 
-        public SynchronousOperationException(string message)
-            : base(message)
-        {
-        }
+        public SynchronousOperationException(string message) : base(message) { }
 
         public SynchronousOperationException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
     }
 }

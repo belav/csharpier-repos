@@ -32,9 +32,13 @@ namespace System.Web.Mvc.Test
         {
             // Act & Assert
             Assert.ThrowsArgumentOutOfRange(
-                delegate { new EmptyActionFilterAttribute() { Order = -2 }; },
+                delegate
+                {
+                    new EmptyActionFilterAttribute() { Order = -2 };
+                },
                 "value",
-                "Order must be greater than or equal to -1.");
+                "Order must be greater than or equal to -1."
+            );
         }
 
         private class EmptyActionFilterAttribute : ActionFilterAttribute

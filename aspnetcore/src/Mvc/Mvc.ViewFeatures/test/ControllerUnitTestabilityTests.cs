@@ -401,7 +401,12 @@ namespace Microsoft.AspNetCore.Mvc
             var value = new { Value = "Value_1" };
 
             // Act
-            var result = controller.CreatedAtAction_Action(actionName, controllerName, routeValues, value);
+            var result = controller.CreatedAtAction_Action(
+                actionName,
+                controllerName,
+                routeValues,
+                value
+            );
 
             // Assert
             Assert.NotNull(result);
@@ -440,7 +445,12 @@ namespace Microsoft.AspNetCore.Mvc
             var value = new { Value = "Value_1" };
 
             // Act
-            var result = controller.AcceptedAtAction_Action(actionName, controllerName, routeValues, value);
+            var result = controller.AcceptedAtAction_Action(
+                actionName,
+                controllerName,
+                routeValues,
+                value
+            );
 
             // Assert
             Assert.NotNull(result);
@@ -511,7 +521,11 @@ namespace Microsoft.AspNetCore.Mvc
             var routeValues = new Dictionary<string, object>() { { "route", "sample" } };
 
             // Act
-            var result = controller.RedirectToAction_Action(actionName, controllerName, routeValues);
+            var result = controller.RedirectToAction_Action(
+                actionName,
+                controllerName,
+                routeValues
+            );
 
             // Assert
             Assert.NotNull(result);
@@ -632,7 +646,10 @@ namespace Microsoft.AspNetCore.Mvc
             Assert.Equal(controller1.ModelState, controller1.ViewData.ModelState);
 
             Assert.Equal(controller1.ControllerContext.ModelState, controller2.ModelState);
-            Assert.Equal(controller1.ControllerContext.ModelState, controller2.ControllerContext.ModelState);
+            Assert.Equal(
+                controller1.ControllerContext.ModelState,
+                controller2.ControllerContext.ModelState
+            );
             Assert.Equal(controller1.ControllerContext.ModelState, controller2.ViewData.ModelState);
         }
 
@@ -673,7 +690,10 @@ namespace Microsoft.AspNetCore.Mvc
             var controller = new TestabilityController();
 
             // Act
-            var result = controller.ViewComponent(typeof(TagCloudViewComponent), new { Arg1 = "Hi", Arg2 = "There" });
+            var result = controller.ViewComponent(
+                typeof(TagCloudViewComponent),
+                new { Arg1 = "Hi", Arg2 = "There" }
+            );
 
             // Assert
             Assert.NotNull(result);
@@ -711,7 +731,9 @@ namespace Microsoft.AspNetCore.Mvc
 
             // Assert
             var badRequest = Assert.IsType<ObjectResult>(result);
-            var validationProblemDetails = Assert.IsType<ValidationProblemDetails>(badRequest.Value);
+            var validationProblemDetails = Assert.IsType<ValidationProblemDetails>(
+                badRequest.Value
+            );
             Assert.Equal(detail, validationProblemDetails.Detail);
             var error = Assert.Single(validationProblemDetails.Errors);
             Assert.Equal("some-key", error.Key);
@@ -722,11 +744,7 @@ namespace Microsoft.AspNetCore.Mvc
         {
             get
             {
-                yield return new object[]
-                {
-                    null,
-                    null
-                };
+                yield return new object[] { null, null };
 
                 yield return new object[]
                 {
@@ -748,8 +766,11 @@ namespace Microsoft.AspNetCore.Mvc
                 return PartialView(viewName, data);
             }
 
-            public IActionResult Content_Action(string content, string contentType, Encoding encoding)
-            {
+            public IActionResult Content_Action(
+                string content,
+                string contentType,
+                Encoding encoding
+            ) {
                 return Content(content, contentType, encoding);
             }
 
@@ -763,14 +784,20 @@ namespace Microsoft.AspNetCore.Mvc
                 return Accepted(uri, data);
             }
 
-            public IActionResult FileContent_Action(string content, string contentType, string fileName)
-            {
+            public IActionResult FileContent_Action(
+                string content,
+                string contentType,
+                string fileName
+            ) {
                 var contentArray = Encoding.UTF8.GetBytes(content);
                 return File(contentArray, contentType, fileName);
             }
 
-            public IActionResult FileStream_Action(string content, string contentType, string fileName)
-            {
+            public IActionResult FileStream_Action(
+                string content,
+                string contentType,
+                string fileName
+            ) {
                 var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(content));
                 return File(memoryStream, contentType, fileName);
             }
@@ -780,8 +807,10 @@ namespace Microsoft.AspNetCore.Mvc
                 return Json(data);
             }
 
-            public IActionResult JsonWithSerializerSettings_Action(object data, object serializerSettings)
-            {
+            public IActionResult JsonWithSerializerSettings_Action(
+                object data,
+                object serializerSettings
+            ) {
                 return Json(data, serializerSettings);
             }
 
@@ -790,8 +819,11 @@ namespace Microsoft.AspNetCore.Mvc
                 return Redirect(url);
             }
 
-            public IActionResult RedirectToAction_Action(string actionName, string controllerName, object routeValues)
-            {
+            public IActionResult RedirectToAction_Action(
+                string actionName,
+                string controllerName,
+                object routeValues
+            ) {
                 return RedirectToAction(actionName, controllerName, routeValues);
             }
 
@@ -800,23 +832,37 @@ namespace Microsoft.AspNetCore.Mvc
                 return RedirectToRoute(routeName, routeValues);
             }
 
-            public IActionResult CreatedAtAction_Action(string actionName, string controllerName, object routeValues, object value)
-            {
+            public IActionResult CreatedAtAction_Action(
+                string actionName,
+                string controllerName,
+                object routeValues,
+                object value
+            ) {
                 return CreatedAtAction(actionName, controllerName, routeValues, value);
             }
 
-            public IActionResult CreatedAtRoute_Action(string routeName, object routeValues, object value)
-            {
+            public IActionResult CreatedAtRoute_Action(
+                string routeName,
+                object routeValues,
+                object value
+            ) {
                 return CreatedAtRoute(routeName, routeValues, value);
             }
 
-            public IActionResult AcceptedAtAction_Action(string actionName, string controllerName, object routeValues, object value)
-            {
+            public IActionResult AcceptedAtAction_Action(
+                string actionName,
+                string controllerName,
+                object routeValues,
+                object value
+            ) {
                 return AcceptedAtAction(actionName, controllerName, routeValues, value);
             }
 
-            public IActionResult AcceptedAtRoute_Action(string routeName, object routeValues, object value)
-            {
+            public IActionResult AcceptedAtRoute_Action(
+                string routeName,
+                object routeValues,
+                object value
+            ) {
                 return AcceptedAtRoute(routeName, routeValues, value);
             }
 

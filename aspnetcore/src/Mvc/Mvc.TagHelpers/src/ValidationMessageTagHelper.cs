@@ -70,12 +70,14 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 // Assume data-valmsg-for value is non-empty if attribute is present at all. Should align with name of
                 // another tag helper e.g. an <input/> and those tag helpers bind Name.
                 IDictionary<string, object> htmlAttributes = null;
-                if (string.IsNullOrEmpty(For.Name) &&
-                    string.IsNullOrEmpty(ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix) &&
-                    output.Attributes.ContainsName(DataValidationForAttributeName))
-                {
-                    htmlAttributes = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-                    {
+                if (
+                    string.IsNullOrEmpty(For.Name)
+                    && string.IsNullOrEmpty(ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix)
+                    && output.Attributes.ContainsName(DataValidationForAttributeName)
+                ) {
+                    htmlAttributes = new Dictionary<string, object>(
+                        StringComparer.OrdinalIgnoreCase
+                    ) {
                         { DataValidationForAttributeName, "-non-empty-value-" },
                     };
                 }
@@ -99,7 +101,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     For.Name,
                     message: message,
                     tag: null,
-                    htmlAttributes: htmlAttributes);
+                    htmlAttributes: htmlAttributes
+                );
 
                 if (tagBuilder != null)
                 {

@@ -13,7 +13,6 @@ namespace Microsoft.CodeAnalysis
         /// The PE file is an assembly.
         /// </summary>
         Assembly = 0,
-
         /// <summary>
         /// The PE file is a module.
         /// </summary>

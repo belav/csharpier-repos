@@ -20,11 +20,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task FormCollectionModelBinder_ValidType_BindSuccessful()
         {
             // Arrange
-            var formCollection = new FormCollection(new Dictionary<string, StringValues>
-            {
-                { "field1", "value1" },
-                { "field2", "value2" }
-            });
+            var formCollection = new FormCollection(
+                new Dictionary<string, StringValues>
+                {
+                    { "field1", "value1" },
+                    { "field2", "value2" }
+                }
+            );
             var httpContext = GetMockHttpContext(formCollection);
             var bindingContext = GetBindingContext(typeof(IFormCollection), httpContext);
             var binder = new FormCollectionModelBinder(NullLoggerFactory.Instance);
@@ -59,8 +61,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             Assert.Empty(form);
         }
 
-        private static HttpContext GetMockHttpContext(IFormCollection formCollection, bool hasForm = true)
-        {
+        private static HttpContext GetMockHttpContext(
+            IFormCollection formCollection,
+            bool hasForm = true
+        ) {
             var httpContext = new Mock<HttpContext>();
             httpContext.Setup(h => h.Request.ReadFormAsync(It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(formCollection));
@@ -68,15 +72,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             return httpContext.Object;
         }
 
-        private static DefaultModelBindingContext GetBindingContext(Type modelType, HttpContext httpContext)
-        {
+        private static DefaultModelBindingContext GetBindingContext(
+            Type modelType,
+            HttpContext httpContext
+        ) {
             var metadataProvider = new EmptyModelMetadataProvider();
             var bindingContext = new DefaultModelBindingContext
             {
-                ActionContext = new ActionContext()
-                {
-                    HttpContext = httpContext,
-                },
+                ActionContext = new ActionContext() { HttpContext = httpContext, },
                 ModelMetadata = metadataProvider.GetMetadataForType(modelType),
                 ModelName = "file",
                 ValidationState = new ValidationStateDictionary(),

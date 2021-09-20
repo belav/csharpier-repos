@@ -13,8 +13,11 @@ namespace Microsoft.AspNetCore.Razor.Language
         private readonly RazorSourceLineCollection _lines;
         private byte[] _checksum;
 
-        public StringSourceDocument(string content, Encoding encoding, RazorSourceDocumentProperties properties)
-        {
+        public StringSourceDocument(
+            string content,
+            Encoding encoding,
+            RazorSourceDocumentProperties properties
+        ) {
             if (content == null)
             {
                 throw new ArgumentNullException(nameof(content));
@@ -43,15 +46,19 @@ namespace Microsoft.AspNetCore.Razor.Language
         public override Encoding Encoding { get; }
 
         public override string FilePath { get; }
-        
+
         public override int Length => _content.Length;
 
         public override RazorSourceLineCollection Lines => _lines;
 
         public override string RelativePath { get; }
 
-        public override void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count)
-        {
+        public override void CopyTo(
+            int sourceIndex,
+            char[] destination,
+            int destinationIndex,
+            int count
+        ) {
             if (destination == null)
             {
                 throw new ArgumentNullException(nameof(destination));
@@ -67,8 +74,11 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentOutOfRangeException(nameof(destinationIndex));
             }
 
-            if (count < 0 || count > Length - sourceIndex || count > destination.Length - destinationIndex)
-            {
+            if (
+                count < 0
+                || count > Length - sourceIndex
+                || count > destination.Length - destinationIndex
+            ) {
                 throw new ArgumentOutOfRangeException(nameof(count));
             }
 

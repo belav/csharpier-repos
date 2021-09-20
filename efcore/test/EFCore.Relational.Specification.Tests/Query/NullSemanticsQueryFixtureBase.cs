@@ -10,26 +10,27 @@ using Xunit;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public abstract class NullSemanticsQueryFixtureBase : SharedStoreFixtureBase<NullSemanticsContext>, IQueryFixtureBase
+    public abstract class NullSemanticsQueryFixtureBase
+        : SharedStoreFixtureBase<NullSemanticsContext>,
+          IQueryFixtureBase
     {
-        public Func<DbContext> GetContextCreator()
-            => () => CreateContext();
+        public Func<DbContext> GetContextCreator() => () => CreateContext();
 
-        public virtual ISetSource GetExpectedData()
-            => new NullSemanticsData();
+        public virtual ISetSource GetExpectedData() => new NullSemanticsData();
 
-        public IReadOnlyDictionary<Type, object> GetEntitySorters()
-            => new Dictionary<Type, Func<object, object>>
+        public IReadOnlyDictionary<Type, object> GetEntitySorters() =>
+            new Dictionary<Type, Func<object, object>>
             {
                 { typeof(NullSemanticsEntity1), e => ((NullSemanticsEntity1)e)?.Id },
                 { typeof(NullSemanticsEntity2), e => ((NullSemanticsEntity2)e)?.Id }
             }.ToDictionary(e => e.Key, e => (object)e.Value);
 
-        public IReadOnlyDictionary<Type, object> GetEntityAsserters()
-            => new Dictionary<Type, Action<object, object>>
+        public IReadOnlyDictionary<Type, object> GetEntityAsserters() =>
+            new Dictionary<Type, Action<object, object>>
             {
                 {
-                    typeof(NullSemanticsEntity1), (e, a) =>
+                    typeof(NullSemanticsEntity1),
+                    (e, a) =>
                     {
                         Assert.Equal(e == null, a == null);
                         if (a != null)
@@ -60,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     }
                 },
                 {
-                    typeof(NullSemanticsEntity2), (e, a) =>
+                    typeof(NullSemanticsEntity2),
+                    (e, a) =>
                     {
                         Assert.Equal(e == null, a == null);
                         if (a != null)
@@ -94,11 +96,9 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         protected override string StoreName { get; } = "NullSemanticsQueryTest";
 
-        public new RelationalTestStore TestStore
-            => (RelationalTestStore)base.TestStore;
+        public new RelationalTestStore TestStore => (RelationalTestStore)base.TestStore;
 
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
         public override NullSemanticsContext CreateContext()
         {
@@ -107,8 +107,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             return context;
         }
 
-        protected override void Seed(NullSemanticsContext context)
-            => NullSemanticsContext.Seed(context);
+        protected override void Seed(NullSemanticsContext context) =>
+            NullSemanticsContext.Seed(context);
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {

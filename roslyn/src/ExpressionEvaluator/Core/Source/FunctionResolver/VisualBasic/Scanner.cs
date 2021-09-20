@@ -19,7 +19,6 @@ namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
             Dot = '.',
             Comma = ',',
             QuestionMark = '?',
-
             Start = char.MaxValue + 1,
             End,
             Identifier,
@@ -33,8 +32,11 @@ namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
             internal readonly string Text;
             internal readonly SyntaxKind KeywordKind;
 
-            internal Token(TokenKind kind, string text = null, SyntaxKind keywordKind = SyntaxKind.None)
-            {
+            internal Token(
+                TokenKind kind,
+                string text = null,
+                SyntaxKind keywordKind = SyntaxKind.None
+            ) {
                 Kind = kind;
                 Text = text;
                 KeywordKind = keywordKind;
@@ -42,9 +44,7 @@ namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
 
             private string GetDebuggerDisplay()
             {
-                return (Text == null) ?
-                    Kind.ToString() :
-                    $"{Kind}: \"{Text}\"";
+                return (Text == null) ? Kind.ToString() : $"{Kind}: \"{Text}\"";
             }
         }
 
@@ -127,11 +127,15 @@ namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
             private int ScanIdentifier()
             {
                 int length = _text.Length - _offset;
-                if (length > 0 && UnicodeCharacterUtilities.IsIdentifierStartCharacter(_text[_offset]))
-                {
+                if (
+                    length > 0
+                    && UnicodeCharacterUtilities.IsIdentifierStartCharacter(_text[_offset])
+                ) {
                     int n = 1;
-                    while (n < length && UnicodeCharacterUtilities.IsIdentifierPartCharacter(_text[_offset + n]))
-                    {
+                    while (
+                        n < length
+                        && UnicodeCharacterUtilities.IsIdentifierPartCharacter(_text[_offset + n])
+                    ) {
                         n++;
                     }
                     return n;

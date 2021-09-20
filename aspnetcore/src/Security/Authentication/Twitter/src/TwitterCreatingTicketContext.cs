@@ -35,8 +35,8 @@ namespace Microsoft.AspNetCore.Authentication.Twitter
             string screenName,
             string accessToken,
             string accessTokenSecret,
-            JsonElement user)
-            : base(context, scheme, options)
+            JsonElement user
+        ) : base(context, scheme, options)
         {
             UserId = userId;
             ScreenName = screenName;

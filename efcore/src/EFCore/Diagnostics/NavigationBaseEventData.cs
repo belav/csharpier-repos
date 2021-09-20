@@ -21,8 +21,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         public NavigationBaseEventData(
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,
-            IReadOnlyNavigationBase navigationBase)
-            : base(eventDefinition, messageGenerator)
+            IReadOnlyNavigationBase navigationBase
+        ) : base(eventDefinition, messageGenerator)
         {
             NavigationBase = navigationBase;
         }
@@ -32,7 +32,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// </summary>
         public virtual IReadOnlyNavigationBase NavigationBase { get; }
 
-        INavigationBase INavigationBaseEventData.NavigationBase
-            => (INavigationBase)NavigationBase;
+        INavigationBase INavigationBaseEventData.NavigationBase => (INavigationBase)NavigationBase;
     }
 }

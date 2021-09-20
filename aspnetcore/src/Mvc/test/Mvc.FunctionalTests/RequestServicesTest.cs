@@ -8,12 +8,12 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class RequestServicesTest : RequestServicesTestBase<BasicWebSite.StartupWithoutEndpointRouting>
+    public class RequestServicesTest
+        : RequestServicesTestBase<BasicWebSite.StartupWithoutEndpointRouting>
     {
-        public RequestServicesTest(MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture)
-            : base(fixture)
-        {
-        }
+        public RequestServicesTest(
+            MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture
+        ) : base(fixture) { }
 
         [Fact]
         public async override Task HasEndpointMatch()

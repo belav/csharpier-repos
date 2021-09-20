@@ -26,10 +26,7 @@ namespace System.Net.NetworkInformation
 
         public int Ttl
         {
-            get
-            {
-                return _ttl;
-            }
+            get { return _ttl; }
             set
             {
                 if (value <= 0)
@@ -44,10 +41,7 @@ namespace System.Net.NetworkInformation
 
         public bool DontFragment
         {
-            get
-            {
-                return _dontFragment;
-            }
+            get { return _dontFragment; }
             set
             {
                 // Useful for discovering MTU.

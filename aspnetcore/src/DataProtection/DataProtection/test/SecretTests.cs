@@ -16,14 +16,19 @@ namespace Microsoft.AspNetCore.DataProtection
             ExceptionAssert.ThrowsArgument(
                 testCode: () => new Secret(default(ArraySegment<byte>)),
                 paramName: "array",
-                exceptionMessage: null);
+                exceptionMessage: null
+            );
         }
 
         [Fact]
         public void Ctor_ArraySegment_Success()
         {
             // Arrange
-            var input = new ArraySegment<byte>(new byte[] { 0x10, 0x20, 0x30, 0x40, 0x50, 0x60 }, 1, 3);
+            var input = new ArraySegment<byte>(
+                new byte[] { 0x10, 0x20, 0x30, 0x40, 0x50, 0x60 },
+                1,
+                3
+            );
 
             // Act
             var secret = new Secret(input);
@@ -92,7 +97,8 @@ namespace Microsoft.AspNetCore.DataProtection
             // Act & assert
             ExceptionAssert.ThrowsArgumentNull(
                 testCode: () => new Secret(null, 0),
-                paramName: "secret");
+                paramName: "secret"
+            );
         }
 
         [Fact]
@@ -106,7 +112,8 @@ namespace Microsoft.AspNetCore.DataProtection
                     new Secret(&dummy, -1);
                 },
                 paramName: "secretLength",
-                exceptionMessage: Resources.Common_ValueMustBeNonNegative);
+                exceptionMessage: Resources.Common_ValueMustBeNonNegative
+            );
         }
 
         [Fact]
@@ -206,7 +213,8 @@ namespace Microsoft.AspNetCore.DataProtection
             ExceptionAssert.ThrowsArgument(
                 testCode: () => secret.WriteSecretIntoBuffer(new ArraySegment<byte>(new byte[100])),
                 paramName: "buffer",
-                exceptionMessage: Resources.FormatCommon_BufferIncorrectlySized(100, 16));
+                exceptionMessage: Resources.FormatCommon_BufferIncorrectlySized(100, 16)
+            );
         }
 
         [Fact]
@@ -218,7 +226,8 @@ namespace Microsoft.AspNetCore.DataProtection
 
             // Act & assert
             Assert.Throws<ObjectDisposedException>(
-                testCode: () => secret.WriteSecretIntoBuffer(new ArraySegment<byte>(new byte[16])));
+                testCode: () => secret.WriteSecretIntoBuffer(new ArraySegment<byte>(new byte[16]))
+            );
         }
 
         [Fact]
@@ -230,7 +239,8 @@ namespace Microsoft.AspNetCore.DataProtection
             // Act & assert
             ExceptionAssert.ThrowsArgumentNull(
                 testCode: () => secret.WriteSecretIntoBuffer(null, 100),
-                paramName: "buffer");
+                paramName: "buffer"
+            );
         }
 
         [Fact]
@@ -247,7 +257,8 @@ namespace Microsoft.AspNetCore.DataProtection
                     secret.WriteSecretIntoBuffer(pBuffer, 100);
                 },
                 paramName: "bufferLength",
-                exceptionMessage: Resources.FormatCommon_BufferIncorrectlySized(100, 16));
+                exceptionMessage: Resources.FormatCommon_BufferIncorrectlySized(100, 16)
+            );
         }
 
         [Fact]
@@ -263,7 +274,8 @@ namespace Microsoft.AspNetCore.DataProtection
                 {
                     byte* pBuffer = stackalloc byte[16];
                     secret.WriteSecretIntoBuffer(pBuffer, 16);
-                });
+                }
+            );
         }
     }
 }

@@ -80,16 +80,17 @@ namespace SlowPathELTTests
         public int x3;
         public double d3;
 
-        public LargeStruct(int x0, 
-                           double d0,
-                           int x1,
-                           double d1,
-                           int x2,
-                           double d2,
-                           int x3,
-                           double d3)
-        {
-            this. x0 = x0;
+        public LargeStruct(
+            int x0,
+            double d0,
+            int x1,
+            double d1,
+            int x2,
+            double d2,
+            int x3,
+            double d3
+        ) {
+            this.x0 = x0;
             this.d0 = d0;
             this.x1 = x1;
             this.d1 = d1;
@@ -109,15 +110,23 @@ namespace SlowPathELTTests
     {
         public static int RunTest()
         {
-            Console.WriteLine($"SimpleArgsFunc returned {SimpleArgsFunc(-123, -4.3f, "Hello, test!")}");
+            Console.WriteLine(
+                $"SimpleArgsFunc returned {SimpleArgsFunc(-123, -4.3f, "Hello, test!")}"
+            );
 
             Console.WriteLine($"MixedStructFunc returned {MixedStructFunc(new MixedStruct(1, 1))}");
 
-            Console.WriteLine($"LargeStructFunc returned {LargeStructFunc(new LargeStruct(0, 0, 1, 1, 2, 2, 3, 3))}");
+            Console.WriteLine(
+                $"LargeStructFunc returned {LargeStructFunc(new LargeStruct(0, 0, 1, 1, 2, 2, 3, 3))}"
+            );
 
-            Console.WriteLine($"IntegerStructFunc returned {IntegerStructFunc(new IntegerStruct(14, 256))}");
+            Console.WriteLine(
+                $"IntegerStructFunc returned {IntegerStructFunc(new IntegerStruct(14, 256))}"
+            );
 
-            Console.WriteLine($"FloatingPointStructFunc returned {FloatingPointStructFunc(new FloatingPointStruct(13.0, 145.2))}");
+            Console.WriteLine(
+                $"FloatingPointStructFunc returned {FloatingPointStructFunc(new FloatingPointStruct(13.0, 145.2))}"
+            );
 
             Console.WriteLine($"DoubleRetFunc returned {DoubleRetFunc()}");
 

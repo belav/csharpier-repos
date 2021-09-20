@@ -9,11 +9,15 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class RazorPagesViewSearchTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting>>
+    public class RazorPagesViewSearchTest
+        : IClassFixture<MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting>>
     {
-        public RazorPagesViewSearchTest(MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting> fixture)
-        {
-            var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        public RazorPagesViewSearchTest(
+            MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting> fixture
+        ) {
+            var factory =
+                fixture.Factories.FirstOrDefault()
+                ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
             Client = factory.CreateDefaultClient();
         }
 
@@ -26,27 +30,33 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task Page_CanFindPartial_InCurrentDirectory()
         {
             // Arrange & Act
-            var content = await Client.GetStringAsync("http://localhost/Pages/ViewSearch?partial=_Sibling");
+            var content = await Client.GetStringAsync(
+                "http://localhost/Pages/ViewSearch?partial=_Sibling"
+            );
 
             // Assert
             Assert.Equal("Hello from sibling", content.Trim());
         }
-        
+
         [Fact]
         public async Task Page_CanFindPartial_InParentDirectory()
         {
             // Arrange & Act
-            var content = await Client.GetStringAsync("http://localhost/Pages/ViewSearch?partial=_Parent");
+            var content = await Client.GetStringAsync(
+                "http://localhost/Pages/ViewSearch?partial=_Parent"
+            );
 
             // Assert
             Assert.Equal("Hello from parent", content.Trim());
         }
-        
+
         [Fact]
         public async Task Page_CanFindPartial_InRootDirectory()
         {
             // Arrange & Act
-            var content = await Client.GetStringAsync("http://localhost/Pages/ViewSearch?partial=_Root");
+            var content = await Client.GetStringAsync(
+                "http://localhost/Pages/ViewSearch?partial=_Root"
+            );
 
             // Assert
             Assert.Equal("Hello from root", content.Trim());
@@ -56,7 +66,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task Page_CanFindPartial_InViewsSharedDirectory()
         {
             // Arrange & Act
-            var content = await Client.GetStringAsync("http://localhost/Pages/ViewSearch?partial=_Shared");
+            var content = await Client.GetStringAsync(
+                "http://localhost/Pages/ViewSearch?partial=_Shared"
+            );
 
             // Assert
             Assert.Equal("Hello from shared", content.Trim());

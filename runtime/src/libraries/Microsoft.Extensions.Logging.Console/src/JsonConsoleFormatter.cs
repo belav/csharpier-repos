@@ -18,14 +18,17 @@ namespace Microsoft.Extensions.Logging.Console
         private IDisposable _optionsReloadToken;
 
         public JsonConsoleFormatter(IOptionsMonitor<JsonConsoleFormatterOptions> options)
-            : base (ConsoleFormatterNames.Json)
+            : base(ConsoleFormatterNames.Json)
         {
             ReloadLoggerOptions(options.CurrentValue);
             _optionsReloadToken = options.OnChange(ReloadLoggerOptions);
         }
 
-        public override void Write<TState>(in LogEntry<TState> logEntry, IExternalScopeProvider scopeProvider, TextWriter textWriter)
-        {
+        public override void Write<TState>(
+            in LogEntry<TState> logEntry,
+            IExternalScopeProvider scopeProvider,
+            TextWriter textWriter
+        ) {
             string message = logEntry.Formatter(logEntry.State, logEntry.Exception);
             if (logEntry.Exception == null && message == null)
             {
@@ -44,7 +47,9 @@ namespace Microsoft.Extensions.Logging.Console
                     var timestampFormat = FormatterOptions.TimestampFormat;
                     if (timestampFormat != null)
                     {
-                        DateTimeOffset dateTimeOffset = FormatterOptions.UseUtcTimestamp ? DateTimeOffset.UtcNow : DateTimeOffset.Now;
+                        DateTimeOffset dateTimeOffset = FormatterOptions.UseUtcTimestamp
+                            ? DateTimeOffset.UtcNow
+                            : DateTimeOffset.Now;
                         writer.WriteString("Timestamp", dateTimeOffset.ToString(timestampFormat));
                     }
                     writer.WriteNumber(nameof(logEntry.EventId), eventId);
@@ -66,8 +71,10 @@ namespace Microsoft.Extensions.Logging.Console
                     {
                         writer.WriteStartObject(nameof(logEntry.State));
                         writer.WriteString("Message", logEntry.State.ToString());
-                        if (logEntry.State is IReadOnlyCollection<KeyValuePair<string, object>> stateProperties)
-                        {
+                        if (
+                            logEntry.State
+                            is IReadOnlyCollection<KeyValuePair<string, object>> stateProperties
+                        ) {
                             foreach (KeyValuePair<string, object> item in stateProperties)
                             {
                                 WriteItem(writer, item);
@@ -102,28 +109,33 @@ namespace Microsoft.Extensions.Logging.Console
             };
         }
 
-        private void WriteScopeInformation(Utf8JsonWriter writer, IExternalScopeProvider scopeProvider)
-        {
+        private void WriteScopeInformation(
+            Utf8JsonWriter writer,
+            IExternalScopeProvider scopeProvider
+        ) {
             if (FormatterOptions.IncludeScopes && scopeProvider != null)
             {
                 writer.WriteStartArray("Scopes");
-                scopeProvider.ForEachScope((scope, state) =>
-                {
-                    if (scope is IEnumerable<KeyValuePair<string, object>> scopeItems)
+                scopeProvider.ForEachScope(
+                    (scope, state) =>
                     {
-                        state.WriteStartObject();
-                        state.WriteString("Message", scope.ToString());
-                        foreach (KeyValuePair<string, object> item in scopeItems)
+                        if (scope is IEnumerable<KeyValuePair<string, object>> scopeItems)
                         {
-                            WriteItem(state, item);
+                            state.WriteStartObject();
+                            state.WriteString("Message", scope.ToString());
+                            foreach (KeyValuePair<string, object> item in scopeItems)
+                            {
+                                WriteItem(state, item);
+                            }
+                            state.WriteEndObject();
                         }
-                        state.WriteEndObject();
-                    }
-                    else
-                    {
-                        state.WriteStringValue(ToInvariantString(scope));
-                    }
-                }, writer);
+                        else
+                        {
+                            state.WriteStringValue(ToInvariantString(scope));
+                        }
+                    },
+                    writer
+                );
                 writer.WriteEndArray();
             }
         }
@@ -185,7 +197,8 @@ namespace Microsoft.Extensions.Logging.Console
             }
         }
 
-        private static string ToInvariantString(object obj) => Convert.ToString(obj, CultureInfo.InvariantCulture);
+        private static string ToInvariantString(object obj) =>
+            Convert.ToString(obj, CultureInfo.InvariantCulture);
 
         internal JsonConsoleFormatterOptions FormatterOptions { get; set; }
 

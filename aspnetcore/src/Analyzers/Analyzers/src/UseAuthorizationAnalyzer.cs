@@ -20,18 +20,24 @@ namespace Microsoft.AspNetCore.Analyzers
         public void AnalyzeSymbol(SymbolAnalysisContext context)
         {
             Debug.Assert(context.Symbol.Kind == SymbolKind.NamedType);
-            Debug.Assert(StartupFacts.IsStartupClass(_context.StartupSymbols, (INamedTypeSymbol)context.Symbol));
+            Debug.Assert(
+                StartupFacts.IsStartupClass(
+                    _context.StartupSymbols,
+                    (INamedTypeSymbol)context.Symbol
+                )
+            );
 
             var type = (INamedTypeSymbol)context.Symbol;
 
-            foreach (var middlewareAnalysis in _context.GetRelatedAnalyses<MiddlewareAnalysis>(type))
-            {
+            foreach (
+                var middlewareAnalysis in _context.GetRelatedAnalyses<MiddlewareAnalysis>(type)
+            ) {
                 MiddlewareItem? useAuthorizationItem = default;
                 MiddlewareItem? useRoutingItem = default;
                 MiddlewareItem? useEndpoint = default;
 
                 var length = middlewareAnalysis.Middleware.Length;
-                for (var i = length - 1; i >= 0; i-- )
+                for (var i = length - 1; i >= 0; i--)
                 {
                     var middlewareItem = middlewareAnalysis.Middleware[i];
                     var middleware = middlewareItem.UseMethod.Name;
@@ -47,10 +53,13 @@ namespace Microsoft.AspNetCore.Analyzers
                             //  app.UseRouting();
                             //  app.UseEndpoints(...);
 
-                            context.ReportDiagnostic(Diagnostic.Create(
-                                StartupAnalyzer.Diagnostics.IncorrectlyConfiguredAuthorizationMiddleware,
-                                middlewareItem.Operation.Syntax.GetLocation(),
-                                middlewareItem.UseMethod.Name));
+                            context.ReportDiagnostic(
+                                Diagnostic.Create(
+                                    StartupAnalyzer.Diagnostics.IncorrectlyConfiguredAuthorizationMiddleware,
+                                    middlewareItem.Operation.Syntax.GetLocation(),
+                                    middlewareItem.UseMethod.Name
+                                )
+                            );
                         }
 
                         useAuthorizationItem = middlewareItem;
@@ -67,10 +76,13 @@ namespace Microsoft.AspNetCore.Analyzers
                             //  app.UseAuthorization();
                             //
 
-                            context.ReportDiagnostic(Diagnostic.Create(
-                                StartupAnalyzer.Diagnostics.IncorrectlyConfiguredAuthorizationMiddleware,
-                                useAuthorizationItem.Operation.Syntax.GetLocation(),
-                                middlewareItem.UseMethod.Name));
+                            context.ReportDiagnostic(
+                                Diagnostic.Create(
+                                    StartupAnalyzer.Diagnostics.IncorrectlyConfiguredAuthorizationMiddleware,
+                                    useAuthorizationItem.Operation.Syntax.GetLocation(),
+                                    middlewareItem.UseMethod.Name
+                                )
+                            );
                         }
 
                         useEndpoint = middlewareItem;

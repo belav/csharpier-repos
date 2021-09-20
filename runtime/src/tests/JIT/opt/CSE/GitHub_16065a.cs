@@ -16,10 +16,12 @@ namespace GitHub_16065a
             this.LeadingDimension = leadingDimension;
         }
 
-        public int GetIndex(int row, int column) 
-            => this.Offset + row + this.LeadingDimension * column;
+        public int GetIndex(int row, int column) =>
+            this.Offset + row + this.LeadingDimension * column;
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImpl(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         public ArraySlice Diagonal(int index)
         {
             int offset = (index > 0) ? GetIndex(0, index) : GetIndex(-index, 0);

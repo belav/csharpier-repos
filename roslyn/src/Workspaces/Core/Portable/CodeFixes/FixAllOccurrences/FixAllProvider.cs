@@ -24,16 +24,17 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         /// (b) <see cref="FixAllScope.Project"/> and
         /// (c) <see cref="FixAllScope.Solution"/>
         /// </summary>
-        public virtual IEnumerable<FixAllScope> GetSupportedFixAllScopes()
-            => ImmutableArray.Create(FixAllScope.Document, FixAllScope.Project, FixAllScope.Solution);
+        public virtual IEnumerable<FixAllScope> GetSupportedFixAllScopes() =>
+            ImmutableArray.Create(FixAllScope.Document, FixAllScope.Project, FixAllScope.Solution);
 
         /// <summary>
         /// Gets the diagnostic IDs for which fix all occurrences is supported.
         /// By default, it returns <see cref="CodeFixProvider.FixableDiagnosticIds"/> for the given <paramref name="originalCodeFixProvider"/>.
         /// </summary>
         /// <param name="originalCodeFixProvider">Original code fix provider that returned this fix all provider from <see cref="CodeFixProvider.GetFixAllProvider"/> method.</param>
-        public virtual IEnumerable<string> GetSupportedFixAllDiagnosticIds(CodeFixProvider originalCodeFixProvider)
-            => originalCodeFixProvider.FixableDiagnosticIds;
+        public virtual IEnumerable<string> GetSupportedFixAllDiagnosticIds(
+            CodeFixProvider originalCodeFixProvider
+        ) => originalCodeFixProvider.FixableDiagnosticIds;
 
         /// <summary>
         /// Gets fix all occurrences fix for the given fixAllContext.
@@ -51,8 +52,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         /// of it (like attributes), or changes to the <see cref="Project"/> or <see cref="Solution"/> it points at
         /// will be considered.
         /// </param>
-        public static FixAllProvider Create(Func<FixAllContext, Document, ImmutableArray<Diagnostic>, Task<Document?>> fixAllAsync)
-        {
+        public static FixAllProvider Create(
+            Func<FixAllContext, Document, ImmutableArray<Diagnostic>, Task<Document?>> fixAllAsync
+        ) {
             if (fixAllAsync == null)
                 throw new ArgumentNullException(nameof(fixAllAsync));
 
@@ -61,15 +63,29 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
         private class CallbackDocumentBasedFixAllProvider : DocumentBasedFixAllProvider
         {
-            private readonly Func<FixAllContext, Document, ImmutableArray<Diagnostic>, Task<Document?>> _fixAllAsync;
+            private readonly Func<
+                FixAllContext,
+                Document,
+                ImmutableArray<Diagnostic>,
+                Task<Document?>
+            > _fixAllAsync;
 
-            public CallbackDocumentBasedFixAllProvider(Func<FixAllContext, Document, ImmutableArray<Diagnostic>, Task<Document?>> fixAllAsync)
-            {
+            public CallbackDocumentBasedFixAllProvider(
+                Func<
+                    FixAllContext,
+                    Document,
+                    ImmutableArray<Diagnostic>,
+                    Task<Document?>
+                > fixAllAsync
+            ) {
                 _fixAllAsync = fixAllAsync;
             }
 
-            protected override Task<Document?> FixAllAsync(FixAllContext context, Document document, ImmutableArray<Diagnostic> diagnostics)
-                => _fixAllAsync(context, document, diagnostics);
+            protected override Task<Document?> FixAllAsync(
+                FixAllContext context,
+                Document document,
+                ImmutableArray<Diagnostic> diagnostics
+            ) => _fixAllAsync(context, document, diagnostics);
         }
     }
 }

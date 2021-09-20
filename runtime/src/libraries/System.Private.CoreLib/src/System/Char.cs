@@ -21,8 +21,15 @@ namespace System
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
-    public readonly struct Char : IComparable, IComparable<char>, IEquatable<char>, IConvertible, ISpanFormattable
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
+    public readonly struct Char
+        : IComparable,
+          IComparable<char>,
+          IEquatable<char>,
+          IConvertible,
+          ISpanFormattable
     {
         //
         // Member Variables
@@ -47,26 +54,267 @@ namespace System
         // - 0x40 bit if set means 'is uppercase letter'
         // - 0x20 bit if set means 'is lowercase letter'
         // - bottom 5 bits are the UnicodeCategory of the character
-        private static ReadOnlySpan<byte> Latin1CharInfo => new byte[]
-        {
-        //  0     1     2     3     4     5     6     7     8     9     A     B     C     D     E     F
-            0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x8E, 0x8E, 0x8E, 0x8E, 0x8E, 0x0E, 0x0E, // U+0000..U+000F
-            0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, // U+0010..U+001F
-            0x8B, 0x18, 0x18, 0x18, 0x1A, 0x18, 0x18, 0x18, 0x14, 0x15, 0x18, 0x19, 0x18, 0x13, 0x18, 0x18, // U+0020..U+002F
-            0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x18, 0x18, 0x19, 0x19, 0x19, 0x18, // U+0030..U+003F
-            0x18, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, // U+0040..U+004F
-            0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x14, 0x18, 0x15, 0x1B, 0x12, // U+0050..U+005F
-            0x1B, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, // U+0060..U+006F
-            0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x14, 0x19, 0x15, 0x19, 0x0E, // U+0070..U+007F
-            0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x8E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, // U+0080..U+008F
-            0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, // U+0090..U+009F
-            0x8B, 0x18, 0x1A, 0x1A, 0x1A, 0x1A, 0x1C, 0x18, 0x1B, 0x1C, 0x04, 0x16, 0x19, 0x0F, 0x1C, 0x1B, // U+00A0..U+00AF
-            0x1C, 0x19, 0x0A, 0x0A, 0x1B, 0x21, 0x18, 0x18, 0x1B, 0x0A, 0x04, 0x17, 0x0A, 0x0A, 0x0A, 0x18, // U+00B0..U+00BF
-            0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, // U+00C0..U+00CF
-            0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x19, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x21, // U+00D0..U+00DF
-            0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, // U+00E0..U+00EF
-            0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x19, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, // U+00F0..U+00FF
-        };
+        private static ReadOnlySpan<byte> Latin1CharInfo =>
+            new byte[]
+            {
+                //  0     1     2     3     4     5     6     7     8     9     A     B     C     D     E     F
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x8E,
+                0x8E,
+                0x8E,
+                0x8E,
+                0x8E,
+                0x0E,
+                0x0E, // U+0000..U+000F
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E, // U+0010..U+001F
+                0x8B,
+                0x18,
+                0x18,
+                0x18,
+                0x1A,
+                0x18,
+                0x18,
+                0x18,
+                0x14,
+                0x15,
+                0x18,
+                0x19,
+                0x18,
+                0x13,
+                0x18,
+                0x18, // U+0020..U+002F
+                0x08,
+                0x08,
+                0x08,
+                0x08,
+                0x08,
+                0x08,
+                0x08,
+                0x08,
+                0x08,
+                0x08,
+                0x18,
+                0x18,
+                0x19,
+                0x19,
+                0x19,
+                0x18, // U+0030..U+003F
+                0x18,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40, // U+0040..U+004F
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x14,
+                0x18,
+                0x15,
+                0x1B,
+                0x12, // U+0050..U+005F
+                0x1B,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21, // U+0060..U+006F
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x14,
+                0x19,
+                0x15,
+                0x19,
+                0x0E, // U+0070..U+007F
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x8E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E, // U+0080..U+008F
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E, // U+0090..U+009F
+                0x8B,
+                0x18,
+                0x1A,
+                0x1A,
+                0x1A,
+                0x1A,
+                0x1C,
+                0x18,
+                0x1B,
+                0x1C,
+                0x04,
+                0x16,
+                0x19,
+                0x0F,
+                0x1C,
+                0x1B, // U+00A0..U+00AF
+                0x1C,
+                0x19,
+                0x0A,
+                0x0A,
+                0x1B,
+                0x21,
+                0x18,
+                0x18,
+                0x1B,
+                0x0A,
+                0x04,
+                0x17,
+                0x0A,
+                0x0A,
+                0x0A,
+                0x18, // U+00B0..U+00BF
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40, // U+00C0..U+00CF
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x19,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x21, // U+00D0..U+00DF
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21, // U+00E0..U+00EF
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x19,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21, // U+00F0..U+00FF
+            };
 
         // Return true for all characters below or equal U+00ff, which is ASCII + Latin-1 Supplement.
         private static bool IsLatin1(char c) => (uint)c < (uint)Latin1CharInfo.Length;
@@ -166,8 +414,12 @@ namespace System
         // Provides a string representation of a character.
         public static string ToString(char c) => string.CreateFromChar(c);
 
-        bool ISpanFormattable.TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
-        {
+        bool ISpanFormattable.TryFormat(
+            Span<char> destination,
+            out int charsWritten,
+            ReadOnlySpan<char> format,
+            IFormatProvider? provider
+        ) {
             if (!destination.IsEmpty)
             {
                 destination[0] = m_value;
@@ -179,7 +431,8 @@ namespace System
             return false;
         }
 
-        string IFormattable.ToString(string? format, IFormatProvider? formatProvider) => ToString(m_value);
+        string IFormattable.ToString(string? format, IFormatProvider? formatProvider) =>
+            ToString(m_value);
 
         public static char Parse(string s)
         {
@@ -227,9 +480,14 @@ namespace System
             return CharUnicodeInfo.GetUnicodeCategory(c) == UnicodeCategory.DecimalDigitNumber;
         }
 
-        internal static bool IsInRange(char c, char min, char max) => (uint)(c - min) <= (uint)(max - min);
+        internal static bool IsInRange(char c, char min, char max) =>
+            (uint)(c - min) <= (uint)(max - min);
 
-        private static bool IsInRange(UnicodeCategory c, UnicodeCategory min, UnicodeCategory max) => (uint)(c - min) <= (uint)(max - min);
+        private static bool IsInRange(
+            UnicodeCategory c,
+            UnicodeCategory min,
+            UnicodeCategory max
+        ) => (uint)(c - min) <= (uint)(max - min);
 
         /*=================================CheckLetter=====================================
         ** Check if the specified UnicodeCategory belongs to the letter categories.
@@ -306,7 +564,11 @@ namespace System
 
         internal static bool CheckPunctuation(UnicodeCategory uc)
         {
-            return IsInRange(uc, UnicodeCategory.ConnectorPunctuation, UnicodeCategory.OtherPunctuation);
+            return IsInRange(
+                uc,
+                UnicodeCategory.ConnectorPunctuation,
+                UnicodeCategory.OtherPunctuation
+            );
         }
 
         /*================================IsPunctuation=================================
@@ -523,7 +785,8 @@ namespace System
                 return IsInRange(c, '0', '9');
             }
 
-            return CharUnicodeInfo.GetUnicodeCategoryInternal(s, index) == UnicodeCategory.DecimalDigitNumber;
+            return CharUnicodeInfo.GetUnicodeCategoryInternal(s, index)
+                == UnicodeCategory.DecimalDigitNumber;
         }
 
         public static bool IsLetter(string s, int index)
@@ -585,7 +848,8 @@ namespace System
                 return (Latin1CharInfo[c] & IsLowerCaseLetterFlag) != 0;
             }
 
-            return CharUnicodeInfo.GetUnicodeCategoryInternal(s, index) == UnicodeCategory.LowercaseLetter;
+            return CharUnicodeInfo.GetUnicodeCategoryInternal(s, index)
+                == UnicodeCategory.LowercaseLetter;
         }
 
         /*=================================CheckNumber=====================================
@@ -669,7 +933,11 @@ namespace System
 
         internal static bool CheckSeparator(UnicodeCategory uc)
         {
-            return IsInRange(uc, UnicodeCategory.SpaceSeparator, UnicodeCategory.ParagraphSeparator);
+            return IsInRange(
+                uc,
+                UnicodeCategory.SpaceSeparator,
+                UnicodeCategory.ParagraphSeparator
+            );
         }
 
         private static bool IsSeparatorLatin1(char c)
@@ -710,7 +978,11 @@ namespace System
 
         public static bool IsSurrogate(char c)
         {
-            return IsInRange(c, CharUnicodeInfo.HIGH_SURROGATE_START, CharUnicodeInfo.LOW_SURROGATE_END);
+            return IsInRange(
+                c,
+                CharUnicodeInfo.HIGH_SURROGATE_START,
+                CharUnicodeInfo.LOW_SURROGATE_END
+            );
         }
 
         public static bool IsSurrogate(string s, int index)
@@ -782,7 +1054,8 @@ namespace System
                 return (Latin1CharInfo[c] & IsUpperCaseLetterFlag) != 0;
             }
 
-            return CharUnicodeInfo.GetUnicodeCategoryInternal(s, index) == UnicodeCategory.UppercaseLetter;
+            return CharUnicodeInfo.GetUnicodeCategoryInternal(s, index)
+                == UnicodeCategory.UppercaseLetter;
         }
 
         public static bool IsWhiteSpace(string s, int index)
@@ -854,7 +1127,11 @@ namespace System
          ==============================================================================*/
         public static bool IsHighSurrogate(char c)
         {
-            return IsInRange(c, CharUnicodeInfo.HIGH_SURROGATE_START, CharUnicodeInfo.HIGH_SURROGATE_END);
+            return IsInRange(
+                c,
+                CharUnicodeInfo.HIGH_SURROGATE_START,
+                CharUnicodeInfo.HIGH_SURROGATE_END
+            );
         }
 
         public static bool IsHighSurrogate(string s, int index)
@@ -876,7 +1153,11 @@ namespace System
          ==============================================================================*/
         public static bool IsLowSurrogate(char c)
         {
-            return IsInRange(c, CharUnicodeInfo.LOW_SURROGATE_START, CharUnicodeInfo.LOW_SURROGATE_END);
+            return IsInRange(
+                c,
+                CharUnicodeInfo.LOW_SURROGATE_START,
+                CharUnicodeInfo.LOW_SURROGATE_END
+            );
         }
 
         public static bool IsLowSurrogate(string s, int index)
@@ -924,7 +1205,8 @@ namespace System
 
             uint highSurrogateOffset = (uint)highSurrogate - CharUnicodeInfo.HIGH_SURROGATE_START;
             uint lowSurrogateOffset = (uint)lowSurrogate - CharUnicodeInfo.LOW_SURROGATE_START;
-            return (highSurrogateOffset | lowSurrogateOffset) <= CharUnicodeInfo.HIGH_SURROGATE_RANGE;
+            return (highSurrogateOffset | lowSurrogateOffset)
+                <= CharUnicodeInfo.HIGH_SURROGATE_RANGE;
         }
 
         internal const int UNICODE_PLANE00_END = 0x00ffff;
@@ -942,7 +1224,10 @@ namespace System
         {
             if (!UnicodeUtility.IsValidUnicodeScalar((uint)utf32))
             {
-                throw new ArgumentOutOfRangeException(nameof(utf32), SR.ArgumentOutOfRange_InvalidUTF32);
+                throw new ArgumentOutOfRangeException(
+                    nameof(utf32),
+                    SR.ArgumentOutOfRange_InvalidUTF32
+                );
             }
 
             return Rune.UnsafeCreate((uint)utf32).ToString();
@@ -970,7 +1255,9 @@ namespace System
             }
 
             // The 0x40u << 10 below is to account for uuuuu = wwww + 1 in the surrogate encoding.
-            return ((int)highSurrogateOffset << 10) + (lowSurrogate - CharUnicodeInfo.LOW_SURROGATE_START) + (0x40 << 10);
+            return ((int)highSurrogateOffset << 10)
+                + (lowSurrogate - CharUnicodeInfo.LOW_SURROGATE_START)
+                + (0x40 << 10);
         }
 
         [StackTraceHidden]
@@ -984,13 +1271,15 @@ namespace System
             {
                 throw new ArgumentOutOfRangeException(
                     paramName: "highSurrogate",
-                    message: SR.ArgumentOutOfRange_InvalidHighSurrogate);
+                    message: SR.ArgumentOutOfRange_InvalidHighSurrogate
+                );
             }
             else
             {
                 throw new ArgumentOutOfRangeException(
                     paramName: "lowSurrogate",
-                    message: SR.ArgumentOutOfRange_InvalidLowSurrogate);
+                    message: SR.ArgumentOutOfRange_InvalidLowSurrogate
+                );
             }
         }
 
@@ -1031,19 +1320,28 @@ namespace System
                         }
                         else
                         {
-                            throw new ArgumentException(SR.Format(SR.Argument_InvalidHighSurrogate, index), nameof(s));
+                            throw new ArgumentException(
+                                SR.Format(SR.Argument_InvalidHighSurrogate, index),
+                                nameof(s)
+                            );
                         }
                     }
                     else
                     {
                         // Found a high surrogate at the end of the string.
-                        throw new ArgumentException(SR.Format(SR.Argument_InvalidHighSurrogate, index), nameof(s));
+                        throw new ArgumentException(
+                            SR.Format(SR.Argument_InvalidHighSurrogate, index),
+                            nameof(s)
+                        );
                     }
                 }
                 else
                 {
                     // Find a low surrogate at the character pointed by index.
-                    throw new ArgumentException(SR.Format(SR.Argument_InvalidLowSurrogate, index), nameof(s));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_InvalidLowSurrogate, index),
+                        nameof(s)
+                    );
                 }
             }
             // Not a high-surrogate or low-surrogate. Genereate the UTF32 value for the BMP characters.

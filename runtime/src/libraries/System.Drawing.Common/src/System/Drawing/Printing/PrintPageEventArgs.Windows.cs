@@ -20,12 +20,15 @@ namespace System.Drawing.Printing
         // Apply page settings to the printer.
         internal bool CopySettingsToDevMode = true;
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref='PrintPageEventArgs'/> class.
         /// </summary>
-        public PrintPageEventArgs(Graphics? graphics, Rectangle marginBounds, Rectangle pageBounds, PageSettings pageSettings)
-        {
+        public PrintPageEventArgs(
+            Graphics? graphics,
+            Rectangle marginBounds,
+            Rectangle pageBounds,
+            PageSettings pageSettings
+        ) {
             _graphics = graphics; // may be null, see PrintController
             _marginBounds = marginBounds;
             _pageBounds = pageBounds;
@@ -46,10 +49,7 @@ namespace System.Drawing.Printing
         /// </summary>
         public Graphics? Graphics
         {
-            get
-            {
-                return _graphics;
-            }
+            get { return _graphics; }
         }
 
         /// <summary>
@@ -66,10 +66,7 @@ namespace System.Drawing.Printing
         /// </summary>
         public Rectangle MarginBounds
         {
-            get
-            {
-                return _marginBounds;
-            }
+            get { return _marginBounds; }
         }
 
         /// <summary>
@@ -77,10 +74,7 @@ namespace System.Drawing.Printing
         /// </summary>
         public Rectangle PageBounds
         {
-            get
-            {
-                return _pageBounds;
-            }
+            get { return _pageBounds; }
         }
 
         /// <summary>
@@ -88,10 +82,7 @@ namespace System.Drawing.Printing
         /// </summary>
         public PageSettings PageSettings
         {
-            get
-            {
-                return _pageSettings;
-            }
+            get { return _pageSettings; }
         }
 
         /// <summary>

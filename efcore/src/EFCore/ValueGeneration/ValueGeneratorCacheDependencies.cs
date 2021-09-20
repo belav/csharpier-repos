@@ -51,8 +51,6 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
         ///     </para>
         /// </summary>
         [EntityFrameworkInternal]
-        public ValueGeneratorCacheDependencies()
-        {
-        }
+        public ValueGeneratorCacheDependencies() { }
     }
 }

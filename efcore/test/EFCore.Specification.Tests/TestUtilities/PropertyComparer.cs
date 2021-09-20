@@ -8,7 +8,9 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities
 {
-    public class PropertyComparer : IEqualityComparer<IReadOnlyProperty>, IComparer<IReadOnlyProperty>
+    public class PropertyComparer
+        : IEqualityComparer<IReadOnlyProperty>,
+          IComparer<IReadOnlyProperty>
     {
         private readonly bool _compareAnnotations;
 
@@ -17,8 +19,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             _compareAnnotations = compareAnnotations;
         }
 
-        public int Compare(IReadOnlyProperty x, IReadOnlyProperty y)
-            => StringComparer.Ordinal.Compare(x.Name, y.Name);
+        public int Compare(IReadOnlyProperty x, IReadOnlyProperty y) =>
+            StringComparer.Ordinal.Compare(x.Name, y.Name);
 
         public bool Equals(IReadOnlyProperty x, IReadOnlyProperty y)
         {
@@ -28,8 +30,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             }
 
             return y == null
-                ? false
-                : x.Name == y.Name
+              ? false
+              : x.Name == y.Name
                 && x.ClrType == y.ClrType
                 && x.IsShadowProperty() == y.IsShadowProperty()
                 && x.IsNullable == y.IsNullable
@@ -37,10 +39,13 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 && x.ValueGenerated == y.ValueGenerated
                 && x.GetBeforeSaveBehavior() == y.GetBeforeSaveBehavior()
                 && x.GetAfterSaveBehavior() == y.GetAfterSaveBehavior()
-                && (!_compareAnnotations || x.GetAnnotations().SequenceEqual(y.GetAnnotations(), AnnotationComparer.Instance));
+                && (
+                    !_compareAnnotations
+                    || x.GetAnnotations()
+                        .SequenceEqual(y.GetAnnotations(), AnnotationComparer.Instance)
+                );
         }
 
-        public int GetHashCode(IReadOnlyProperty obj)
-            => obj.Name.GetHashCode();
+        public int GetHashCode(IReadOnlyProperty obj) => obj.Name.GetHashCode();
     }
 }

@@ -127,7 +127,7 @@ unsafe class Program
         succeeded &= TestVector128();
         succeeded &= TestVector256();
 
-        // Test custom data types with explicit size/packing 
+        // Test custom data types with explicit size/packing
         succeeded &= TestMyVector64();
         succeeded &= TestMyVector128();
         succeeded &= TestMyVector256();
@@ -286,8 +286,10 @@ unsafe class Program
     {
         bool succeeded = true;
 
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || (RuntimeInformation.ProcessArchitecture != Architecture.X86))
-        {
+        if (
+            RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            || (RuntimeInformation.ProcessArchitecture != Architecture.X86)
+        ) {
             succeeded &= Test<DefaultLayoutDefaultPacking<double>>(
                 expectedSize: 16,
                 expectedOffsetByte: 0,
@@ -505,8 +507,10 @@ unsafe class Program
     {
         bool succeeded = true;
 
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || (RuntimeInformation.ProcessArchitecture != Architecture.X86))
-        {
+        if (
+            RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            || (RuntimeInformation.ProcessArchitecture != Architecture.X86)
+        ) {
             succeeded &= Test<DefaultLayoutDefaultPacking<long>>(
                 expectedSize: 16,
                 expectedOffsetByte: 0,
@@ -918,8 +922,10 @@ unsafe class Program
     {
         bool succeeded = true;
 
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || (RuntimeInformation.ProcessArchitecture != Architecture.X86))
-        {
+        if (
+            RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            || (RuntimeInformation.ProcessArchitecture != Architecture.X86)
+        ) {
             succeeded &= Test<DefaultLayoutDefaultPacking<ulong>>(
                 expectedSize: 16,
                 expectedOffsetByte: 0,
@@ -1140,25 +1146,25 @@ unsafe class Program
             expectedOffsetByte: 0,
             expectedOffsetValue: 8
         );
-        
+
         succeeded &= Test<SequentialLayoutDefaultPacking<Vector64<byte>>>(
             expectedSize: 16,
             expectedOffsetByte: 0,
             expectedOffsetValue: 8
         );
-        
+
         succeeded &= Test<SequentialLayoutMinPacking<Vector64<byte>>>(
             expectedSize: 9,
             expectedOffsetByte: 0,
             expectedOffsetValue: 1
         );
-        
+
         succeeded &= Test<SequentialLayoutMaxPacking<Vector64<byte>>>(
             expectedSize: 16,
             expectedOffsetByte: 0,
             expectedOffsetValue: 8
         );
-        
+
         if (RuntimeInformation.ProcessArchitecture != Architecture.X86)
         {
             succeeded &= Test<AutoLayoutDefaultPacking<Vector64<byte>>>(
@@ -1166,13 +1172,13 @@ unsafe class Program
                 expectedOffsetByte: 0,
                 expectedOffsetValue: 8
             );
-        
+
             succeeded &= Test<AutoLayoutMinPacking<Vector64<byte>>>(
                 expectedSize: 16,
                 expectedOffsetByte: 0,
                 expectedOffsetValue: 8
             );
-        
+
             succeeded &= Test<AutoLayoutMaxPacking<Vector64<byte>>>(
                 expectedSize: 16,
                 expectedOffsetByte: 0,
@@ -1186,13 +1192,13 @@ unsafe class Program
                 expectedOffsetByte: 0,
                 expectedOffsetValue: 4
             );
-        
+
             succeeded &= Test<AutoLayoutMinPacking<Vector64<byte>>>(
                 expectedSize: 12,
                 expectedOffsetByte: 0,
                 expectedOffsetValue: 4
             );
-        
+
             succeeded &= Test<AutoLayoutMaxPacking<Vector64<byte>>>(
                 expectedSize: 12,
                 expectedOffsetByte: 0,
@@ -1428,25 +1434,25 @@ unsafe class Program
             expectedOffsetByte: 0,
             expectedOffsetValue: 1
         );
-        
+
         succeeded &= Test<SequentialLayoutDefaultPacking<MyVector64<byte>>>(
             expectedSize: 9,
             expectedOffsetByte: 0,
             expectedOffsetValue: 1
         );
-        
+
         succeeded &= Test<SequentialLayoutMinPacking<MyVector64<byte>>>(
             expectedSize: 9,
             expectedOffsetByte: 0,
             expectedOffsetValue: 1
         );
-        
+
         succeeded &= Test<SequentialLayoutMaxPacking<MyVector64<byte>>>(
             expectedSize: 9,
             expectedOffsetByte: 0,
             expectedOffsetValue: 1
         );
-        
+
         if (Environment.Is64BitProcess)
         {
             succeeded &= Test<AutoLayoutDefaultPacking<MyVector64<byte>>>(
@@ -1454,13 +1460,13 @@ unsafe class Program
                 expectedOffsetByte: 0,
                 expectedOffsetValue: 8
             );
-        
+
             succeeded &= Test<AutoLayoutMinPacking<MyVector64<byte>>>(
                 expectedSize: 16,
                 expectedOffsetByte: 0,
                 expectedOffsetValue: 8
             );
-        
+
             succeeded &= Test<AutoLayoutMaxPacking<MyVector64<byte>>>(
                 expectedSize: 16,
                 expectedOffsetByte: 0,
@@ -1474,13 +1480,13 @@ unsafe class Program
                 expectedOffsetByte: 0,
                 expectedOffsetValue: 4
             );
-        
+
             succeeded &= Test<AutoLayoutMinPacking<MyVector64<byte>>>(
                 expectedSize: 12,
                 expectedOffsetByte: 0,
                 expectedOffsetValue: 4
             );
-        
+
             succeeded &= Test<AutoLayoutMaxPacking<MyVector64<byte>>>(
                 expectedSize: 12,
                 expectedOffsetByte: 0,
@@ -1635,7 +1641,8 @@ unsafe class Program
         return succeeded;
     }
 
-    static bool Test<T>(int expectedSize, int expectedOffsetByte, int expectedOffsetValue) where T : ITestStructure
+    static bool Test<T>(int expectedSize, int expectedOffsetByte, int expectedOffsetValue)
+        where T : ITestStructure
     {
         bool succeeded = true;
         var testStructure = default(T);

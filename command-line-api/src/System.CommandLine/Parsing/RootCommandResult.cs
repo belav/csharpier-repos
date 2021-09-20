@@ -11,11 +11,7 @@ namespace System.CommandLine.Parsing
         private Dictionary<ICommand, CommandResult>? _allCommandResults;
         private Dictionary<IOption, OptionResult>? _allOptionResults;
 
-        public RootCommandResult(
-            ICommand command,
-            Token token) : base(command, token)
-        {
-        }
+        public RootCommandResult(ICommand command, Token token) : base(command, token) { }
 
         internal override RootCommandResult Root => this;
 
@@ -94,7 +90,9 @@ namespace System.CommandLine.Parsing
                     break;
 
                 default:
-                    throw new ArgumentException($"Unsupported {nameof(SymbolResult)} type: {result.GetType()}");
+                    throw new ArgumentException(
+                        $"Unsupported {nameof(SymbolResult)} type: {result.GetType()}"
+                    );
             }
         }
 
@@ -107,7 +105,7 @@ namespace System.CommandLine.Parsing
                 return _allArgumentResults!.Values;
             }
         }
-        
+
         internal IReadOnlyCollection<OptionResult> AllOptionResults
         {
             get

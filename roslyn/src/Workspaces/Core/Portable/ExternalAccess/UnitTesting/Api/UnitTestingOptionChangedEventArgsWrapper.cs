@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
     {
         internal OptionChangedEventArgs UnderlyingObject { get; }
 
-        public UnitTestingOptionChangedEventArgsWrapper(OptionChangedEventArgs underlyingObject)
-            => UnderlyingObject = underlyingObject ?? throw new ArgumentNullException(nameof(underlyingObject));
+        public UnitTestingOptionChangedEventArgsWrapper(OptionChangedEventArgs underlyingObject) =>
+            UnderlyingObject =
+                underlyingObject ?? throw new ArgumentNullException(nameof(underlyingObject));
     }
 }

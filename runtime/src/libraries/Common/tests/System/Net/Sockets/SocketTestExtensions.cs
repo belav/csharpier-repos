@@ -38,19 +38,31 @@ namespace System.Net.Sockets.Tests
             }
         }
 
-        public static (Socket client, Socket server) CreateConnectedSocketPair(bool ipv6 = false, bool dualModeClient = false)
-        {
+        public static (Socket client, Socket server) CreateConnectedSocketPair(
+            bool ipv6 = false,
+            bool dualModeClient = false
+        ) {
             IPAddress serverAddress = ipv6 ? IPAddress.IPv6Loopback : IPAddress.Loopback;
 
-            using Socket listener = new Socket(serverAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            using Socket listener = new Socket(
+                serverAddress.AddressFamily,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
             listener.Bind(new IPEndPoint(serverAddress, 0));
             listener.Listen(1);
 
             IPEndPoint connectTo = (IPEndPoint)listener.LocalEndPoint;
-            if (dualModeClient) connectTo = new IPEndPoint(connectTo.Address.MapToIPv6(), connectTo.Port);
+            if (dualModeClient)
+                connectTo = new IPEndPoint(connectTo.Address.MapToIPv6(), connectTo.Port);
 
-            Socket client = new Socket(connectTo.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            if (dualModeClient) client.DualMode = true;
+            Socket client = new Socket(
+                connectTo.AddressFamily,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
+            if (dualModeClient)
+                client.DualMode = true;
             client.Connect(connectTo);
             Socket server = listener.Accept();
 
@@ -59,8 +71,11 @@ namespace System.Net.Sockets.Tests
 
         // Tries to connect within the provided timeout interval
         // Useful to speed up "can not connect" assertions on Windows
-        public static bool TryConnect(this Socket socket, EndPoint remoteEndpoint, int millisecondsTimeout)
-        {
+        public static bool TryConnect(
+            this Socket socket,
+            EndPoint remoteEndpoint,
+            int millisecondsTimeout
+        ) {
             var mre = new ManualResetEventSlim(false);
             using var sea = new SocketAsyncEventArgs()
             {

@@ -8,17 +8,20 @@ namespace System.Runtime.InteropServices.Tests
 {
     public class StringMarshalingTests
     {
-        private readonly String[] TestStrings = new String[] {
-                                    "", //Empty String
-                                    "Test String",
-                                    "A", //Single character string
-                                    string.Concat(Enumerable.Repeat("This is a very long string as it repeats itself. ", 13)),
-                                    "This \n is \n a \n multiline \n string",
-                                    "This \0 is \0 a \0 string \0 with \0 nulls",
-                                    "\0string",
-                                    "string\0",
-                                    "\0\0\0\0\0\0\0\0"
-                                    };
+        private readonly String[] TestStrings = new String[]
+        {
+            "", //Empty String
+            "Test String",
+            "A", //Single character string
+            string.Concat(
+                Enumerable.Repeat("This is a very long string as it repeats itself. ", 13)
+            ),
+            "This \n is \n a \n multiline \n string",
+            "This \0 is \0 a \0 string \0 with \0 nulls",
+            "\0string",
+            "string\0",
+            "\0\0\0\0\0\0\0\0"
+        };
 
         [Fact]
         public void StringToBStrToString()
@@ -31,6 +34,7 @@ namespace System.Runtime.InteropServices.Tests
                     String str = Marshal.PtrToStringBSTR(ptr);
                     Assert.Equal(ts, str);
                 }
+
                 finally
                 {
                     Marshal.FreeBSTR(ptr);
@@ -58,6 +62,7 @@ namespace System.Runtime.InteropServices.Tests
                         Assert.Equal(ts.Substring(0, ts.Length - 1), str2);
                     }
                 }
+
                 finally
                 {
                     Marshal.FreeCoTaskMem(AnsiStr);
@@ -85,6 +90,7 @@ namespace System.Runtime.InteropServices.Tests
                         Assert.Equal(ts.Substring(0, ts.Length - 1), str2);
                     }
                 }
+
                 finally
                 {
                     Marshal.FreeCoTaskMem(UniStr);
@@ -112,6 +118,7 @@ namespace System.Runtime.InteropServices.Tests
                         Assert.Equal(ts.Substring(0, ts.Length - 1), str2);
                     }
                 }
+
                 finally
                 {
                     Marshal.FreeHGlobal(AnsiStr);
@@ -139,12 +146,12 @@ namespace System.Runtime.InteropServices.Tests
                         Assert.Equal(ts.Substring(0, ts.Length - 1), str2);
                     }
                 }
+
                 finally
                 {
                     Marshal.FreeHGlobal(UniStr);
                 }
             }
-
         }
 
 #if NETCOREAPP
@@ -165,10 +172,14 @@ namespace System.Runtime.InteropServices.Tests
                     Assert.Equal(srcString, retString);
                     if (srcString.Length > 0)
                     {
-                        string retString2 = Marshal.PtrToStringUTF8(ptrString, srcString.Length - 1);
+                        string retString2 = Marshal.PtrToStringUTF8(
+                            ptrString,
+                            srcString.Length - 1
+                        );
                         Assert.Equal(srcString.Substring(0, srcString.Length - 1), retString2);
                     }
                 }
+
                 finally
                 {
                     Marshal.FreeCoTaskMem(ptrString);

@@ -15,23 +15,26 @@ namespace BasicWebSite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication()
-                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("Api", _ => { });
+                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(
+                    "Api",
+                    _ => { }
+                );
 
-            services
-                .AddMvc()
-                .AddNewtonsoftJson();
+            services.AddMvc().AddNewtonsoftJson();
 
-            services.Configure<ApiBehaviorOptions>(options =>
-            {
-                options.InvalidModelStateResponseFactory = context =>
+            services.Configure<ApiBehaviorOptions>(
+                options =>
                 {
-                    var result = new BadRequestObjectResult(context.ModelState);
-                    result.ContentTypes.Clear();
-                    result.ContentTypes.Add("application/vnd.error+json");
+                    options.InvalidModelStateResponseFactory = context =>
+                    {
+                        var result = new BadRequestObjectResult(context.ModelState);
+                        result.ContentTypes.Clear();
+                        result.ContentTypes.Add("application/vnd.error+json");
 
-                    return result;
-                };
-            });
+                        return result;
+                    };
+                }
+            );
 
             services.ConfigureBaseWebSiteAuthPolicies();
 
@@ -44,10 +47,12 @@ namespace BasicWebSite
             app.UseDeveloperExceptionPage();
 
             app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapControllers();
+                }
+            );
         }
     }
 }

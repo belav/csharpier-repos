@@ -98,8 +98,8 @@ namespace System.Formats.Asn1.Tests.Writer
         public void VerifyWriteOctetString_PrimitiveOrConstructed(
             AsnEncodingRules ruleSet,
             int payloadLength,
-            bool expectConstructed)
-        {
+            bool expectConstructed
+        ) {
             byte[] data = new byte[payloadLength];
 
             Asn1Tag[] tagsToTry =
@@ -144,11 +144,13 @@ namespace System.Formats.Asn1.Tests.Writer
 
             AssertExtensions.Throws<ArgumentException>(
                 "tag",
-                () => writer.WriteOctetString(ReadOnlySpan<byte>.Empty, Asn1Tag.Null));
+                () => writer.WriteOctetString(ReadOnlySpan<byte>.Empty, Asn1Tag.Null)
+            );
 
             AssertExtensions.Throws<ArgumentException>(
                 "tag",
-                () => writer.WriteOctetString(new byte[1], Asn1Tag.Null));
+                () => writer.WriteOctetString(new byte[1], Asn1Tag.Null)
+            );
         }
     }
 }

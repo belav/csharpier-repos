@@ -28,16 +28,28 @@ namespace System.Text.RegularExpressions.Tests
                 return;
             }
 
-            s_regexCode = typeof(Regex).GetField("_code", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            s_regexCode = typeof(Regex).GetField(
+                "_code",
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+            );
             Assert.NotNull(s_regexCode);
 
-            s_regexCodeCodes = s_regexCode.FieldType.GetField("Codes", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            s_regexCodeCodes = s_regexCode.FieldType.GetField(
+                "Codes",
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+            );
             Assert.NotNull(s_regexCodeCodes);
 
-            s_regexCodeTree = s_regexCode.FieldType.GetField("Tree", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            s_regexCodeTree = s_regexCode.FieldType.GetField(
+                "Tree",
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+            );
             Assert.NotNull(s_regexCodeTree);
 
-            s_regexCodeTreeMinRequiredLength = s_regexCodeTree.FieldType.GetField("MinRequiredLength", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            s_regexCodeTreeMinRequiredLength = s_regexCodeTree.FieldType.GetField(
+                "MinRequiredLength",
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+            );
             Assert.NotNull(s_regexCodeTreeMinRequiredLength);
         }
 
@@ -72,7 +84,10 @@ namespace System.Text.RegularExpressions.Tests
         }
 
         [Theory]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Many of these optimizations don't exist in .NET Framework.")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "Many of these optimizations don't exist in .NET Framework."
+        )]
         // Two greedy one loops
         [InlineData("a*a*", "a*")]
         [InlineData("(a*a*)", "(a*)")]
@@ -326,7 +341,10 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData("[^\n]*?", ".*?")]
         // Large loop patterns
         [InlineData("a*a*a*a*a*a*a*b*b*?a+a*", "a*b*b*?a+")]
-        [InlineData("a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "a{0,30}aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
+        [InlineData(
+            "a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "a{0,30}aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        )]
         // Group elimination
         [InlineData("(?:(?:(?:(?:(?:(?:a*))))))", "a*")]
         // Nested loops
@@ -357,8 +375,14 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData("this|this", "this")]
         [InlineData("this|this|this", "this")]
         [InlineData("hello there|hello again|hello|hello|hello|hello", "hello(?: there| again|)")]
-        [InlineData("hello there|hello again|hello|hello|hello|hello|hello world", "hello(?: there| again|| world)")]
-        [InlineData("hello there|hello again|hello|hello|hello|hello|hello world|hello", "hello(?: there| again|| world)")]
+        [InlineData(
+            "hello there|hello again|hello|hello|hello|hello|hello world",
+            "hello(?: there| again|| world)"
+        )]
+        [InlineData(
+            "hello there|hello again|hello|hello|hello|hello|hello world|hello",
+            "hello(?: there| again|| world)"
+        )]
         [InlineData("abcd(?:(?i:e)|(?i:f))", "abcd(?i:[ef])")]
         [InlineData("(?i:abcde)|(?i:abcdf)", "(?i:abcd[ef])")]
         [InlineData("xyz(?:(?i:abcde)|(?i:abcdf))", "xyz(?i:abcd[ef])")]
@@ -392,15 +416,24 @@ namespace System.Text.RegularExpressions.Tests
                 throw new Xunit.Sdk.EqualException(result2, result1);
             }
 
-            Assert.NotEqual(GetRegexCodes(new Regex(pattern1, RegexOptions.RightToLeft)), GetRegexCodes(new Regex(pattern2)));
+            Assert.NotEqual(
+                GetRegexCodes(new Regex(pattern1, RegexOptions.RightToLeft)),
+                GetRegexCodes(new Regex(pattern2))
+            );
             if (!pattern1.Contains("?i:") && !pattern2.Contains("?i:"))
             {
-                Assert.NotEqual(GetRegexCodes(new Regex(pattern1, RegexOptions.IgnoreCase)), GetRegexCodes(new Regex(pattern2)));
+                Assert.NotEqual(
+                    GetRegexCodes(new Regex(pattern1, RegexOptions.IgnoreCase)),
+                    GetRegexCodes(new Regex(pattern2))
+                );
             }
         }
 
         [Theory]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Many of these optimizations don't exist in .NET Framework.")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "Many of these optimizations don't exist in .NET Framework."
+        )]
         // Not coalescing loops
         [InlineData("aa", "a{2}")]
         [InlineData("a[^a]", "a{2}")]
@@ -497,10 +530,22 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData(@"(a{1073741824}){2}", 2147483647)]
         [InlineData(@"a{1073741824}b{1073741824}", 2147483647)]
         // we stop computing after a certain depth; if that logic changes in the future, these tests can be updated
-        [InlineData(@"((((((((((((((((((((((((((((((ab|cd+)|ef+)|gh+)|ij+)|kl+)|mn+)|op+)|qr+)|st+)|uv+)|wx+)|yz+)|01+)|23+)|45+)|67+)|89+)|AB+)|CD+)|EF+)|GH+)|IJ+)|KL+)|MN+)|OP+)|QR+)|ST+)|UV+)|WX+)|YZ)", 0)]
-        [InlineData(@"(YZ+|(WX+|(UV+|(ST+|(QR+|(OP+|(MN+|(KL+|(IJ+|(GH+|(EF+|(CD+|(AB+|(89+|(67+|(45+|(23+|(01+|(yz+|(wx+|(uv+|(st+|(qr+|(op+|(mn+|(kl+|(ij+|(gh+|(ef+|(de+|(a|bc+)))))))))))))))))))))))))))))))", 0)]
-        [InlineData(@"a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(ab|cd+)|ef+)|gh+)|ij+)|kl+)|mn+)|op+)|qr+)|st+)|uv+)|wx+)|yz+)|01+)|23+)|45+)|67+)|89+)|AB+)|CD+)|EF+)|GH+)|IJ+)|KL+)|MN+)|OP+)|QR+)|ST+)|UV+)|WX+)|YZ+)", 3)]
-        [InlineData(@"(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((a)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))", 0)]
+        [InlineData(
+            @"((((((((((((((((((((((((((((((ab|cd+)|ef+)|gh+)|ij+)|kl+)|mn+)|op+)|qr+)|st+)|uv+)|wx+)|yz+)|01+)|23+)|45+)|67+)|89+)|AB+)|CD+)|EF+)|GH+)|IJ+)|KL+)|MN+)|OP+)|QR+)|ST+)|UV+)|WX+)|YZ)",
+            0
+        )]
+        [InlineData(
+            @"(YZ+|(WX+|(UV+|(ST+|(QR+|(OP+|(MN+|(KL+|(IJ+|(GH+|(EF+|(CD+|(AB+|(89+|(67+|(45+|(23+|(01+|(yz+|(wx+|(uv+|(st+|(qr+|(op+|(mn+|(kl+|(ij+|(gh+|(ef+|(de+|(a|bc+)))))))))))))))))))))))))))))))",
+            0
+        )]
+        [InlineData(
+            @"a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(ab|cd+)|ef+)|gh+)|ij+)|kl+)|mn+)|op+)|qr+)|st+)|uv+)|wx+)|yz+)|01+)|23+)|45+)|67+)|89+)|AB+)|CD+)|EF+)|GH+)|IJ+)|KL+)|MN+)|OP+)|QR+)|ST+)|UV+)|WX+)|YZ+)",
+            3
+        )]
+        [InlineData(
+            @"(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((a)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))",
+            0
+        )]
         public void MinRequiredLengthIsCorrect(string pattern, int expectedLength)
         {
             var r = new Regex(pattern);

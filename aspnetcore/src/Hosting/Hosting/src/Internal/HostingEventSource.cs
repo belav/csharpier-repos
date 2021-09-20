@@ -21,17 +21,11 @@ namespace Microsoft.AspNetCore.Hosting
         private long _currentRequests;
         private long _failedRequests;
 
-        internal HostingEventSource()
-            : this("Microsoft.AspNetCore.Hosting")
-        {
-
-        }
+        internal HostingEventSource() : this("Microsoft.AspNetCore.Hosting") { }
 
         // Used for testing
         internal HostingEventSource(string eventSourceName)
-            : base(eventSourceName, EventSourceSettings.EtwManifestEventFormat)
-        {
-        }
+            : base(eventSourceName, EventSourceSettings.EtwManifestEventFormat) { }
 
         // NOTE
         // - The 'Start' and 'Stop' suffixes on the following event names have special meaning in EventSource. They
@@ -87,24 +81,36 @@ namespace Microsoft.AspNetCore.Hosting
                 // This is the convention for initializing counters in the RuntimeEventSource (lazily on the first enable command).
                 // They aren't disabled afterwards...
 
-                _requestsPerSecondCounter ??= new IncrementingPollingCounter("requests-per-second", this, () => Volatile.Read(ref _totalRequests))
-                {
+                _requestsPerSecondCounter ??= new IncrementingPollingCounter(
+                    "requests-per-second",
+                    this,
+                    () => Volatile.Read(ref _totalRequests)
+                ) {
                     DisplayName = "Request Rate",
                     DisplayRateTimeScale = TimeSpan.FromSeconds(1)
                 };
 
-                _totalRequestsCounter ??= new PollingCounter("total-requests", this, () => Volatile.Read(ref _totalRequests))
-                {
+                _totalRequestsCounter ??= new PollingCounter(
+                    "total-requests",
+                    this,
+                    () => Volatile.Read(ref _totalRequests)
+                ) {
                     DisplayName = "Total Requests",
                 };
 
-                _currentRequestsCounter ??= new PollingCounter("current-requests", this, () => Volatile.Read(ref _currentRequests))
-                {
+                _currentRequestsCounter ??= new PollingCounter(
+                    "current-requests",
+                    this,
+                    () => Volatile.Read(ref _currentRequests)
+                ) {
                     DisplayName = "Current Requests"
                 };
 
-                _failedRequestsCounter ??= new PollingCounter("failed-requests", this, () => Volatile.Read(ref _failedRequests))
-                {
+                _failedRequestsCounter ??= new PollingCounter(
+                    "failed-requests",
+                    this,
+                    () => Volatile.Read(ref _failedRequests)
+                ) {
                     DisplayName = "Failed Requests"
                 };
             }

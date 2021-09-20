@@ -18,24 +18,125 @@ namespace System.Data
         internal ExpressionNode[]? _arguments;
         private readonly TypeLimiter? _capturedLimiter;
 
-        private static readonly Function[] s_funcs = new Function[] {
-            new Function("Abs", FunctionId.Abs, typeof(object), true, false, 1, typeof(object), null, null),
-            new Function("IIf", FunctionId.Iif, typeof(object), false, false, 3, typeof(object), typeof(object), typeof(object)),
+        private static readonly Function[] s_funcs = new Function[]
+        {
+            new Function(
+                "Abs",
+                FunctionId.Abs,
+                typeof(object),
+                true,
+                false,
+                1,
+                typeof(object),
+                null,
+                null
+            ),
+            new Function(
+                "IIf",
+                FunctionId.Iif,
+                typeof(object),
+                false,
+                false,
+                3,
+                typeof(object),
+                typeof(object),
+                typeof(object)
+            ),
             new Function("In", FunctionId.In, typeof(bool), false, true, 1, null, null, null),
-            new Function("IsNull", FunctionId.IsNull, typeof(object), false, false, 2, typeof(object), typeof(object), null),
-            new Function("Len", FunctionId.Len, typeof(int), true, false, 1, typeof(string), null, null),
-            new Function("Substring", FunctionId.Substring, typeof(string), true, false, 3, typeof(string), typeof(int), typeof(int)),
-            new Function("Trim", FunctionId.Trim, typeof(string), true, false, 1, typeof(string), null, null),
+            new Function(
+                "IsNull",
+                FunctionId.IsNull,
+                typeof(object),
+                false,
+                false,
+                2,
+                typeof(object),
+                typeof(object),
+                null
+            ),
+            new Function(
+                "Len",
+                FunctionId.Len,
+                typeof(int),
+                true,
+                false,
+                1,
+                typeof(string),
+                null,
+                null
+            ),
+            new Function(
+                "Substring",
+                FunctionId.Substring,
+                typeof(string),
+                true,
+                false,
+                3,
+                typeof(string),
+                typeof(int),
+                typeof(int)
+            ),
+            new Function(
+                "Trim",
+                FunctionId.Trim,
+                typeof(string),
+                true,
+                false,
+                1,
+                typeof(string),
+                null,
+                null
+            ),
             // convert
-            new Function("Convert", FunctionId.Convert, typeof(object), false, true, 1, typeof(object), null, null),
-            new Function("DateTimeOffset", FunctionId.DateTimeOffset, typeof(DateTimeOffset), false, true, 3, typeof(DateTime), typeof(int), typeof(int)),
+            new Function(
+                "Convert",
+                FunctionId.Convert,
+                typeof(object),
+                false,
+                true,
+                1,
+                typeof(object),
+                null,
+                null
+            ),
+            new Function(
+                "DateTimeOffset",
+                FunctionId.DateTimeOffset,
+                typeof(DateTimeOffset),
+                false,
+                true,
+                3,
+                typeof(DateTime),
+                typeof(int),
+                typeof(int)
+            ),
             // store aggregates here
             new Function("Max", FunctionId.Max, typeof(object), false, false, 1, null, null, null),
             new Function("Min", FunctionId.Min, typeof(object), false, false, 1, null, null, null),
             new Function("Sum", FunctionId.Sum, typeof(object), false, false, 1, null, null, null),
-            new Function("Count", FunctionId.Count, typeof(object), false, false, 1, null, null, null),
+            new Function(
+                "Count",
+                FunctionId.Count,
+                typeof(object),
+                false,
+                false,
+                1,
+                null,
+                null,
+                null
+            ),
             new Function("Var", FunctionId.Var, typeof(object), false, false, 1, null, null, null),
-            new Function("StDev", FunctionId.StDev, typeof(object), false, false, 1, null, null, null),
+            new Function(
+                "StDev",
+                FunctionId.StDev,
+                typeof(object),
+                false,
+                false,
+                1,
+                null,
+                null,
+                null
+            ),
             new Function("Avg", FunctionId.Avg, typeof(object), false, false, 1, null, null, null),
         };
 
@@ -65,7 +166,10 @@ namespace System.Data
 
         internal void AddArgument(ExpressionNode argument)
         {
-            if (!s_funcs[_info]._isVariantArgumentList && _argumentCount >= s_funcs[_info]._argumentCount)
+            if (
+                !s_funcs[_info]._isVariantArgumentList
+                && _argumentCount >= s_funcs[_info]._argumentCount
+            )
                 throw ExprException.FunctionArgumentCount(_name);
 
             if (_arguments == null)
@@ -121,7 +225,11 @@ namespace System.Data
 
             object[] argumentValues = new object[_argumentCount];
 
-            Debug.Assert(_argumentCount == s_funcs[_info]._argumentCount || s_funcs[_info]._isVariantArgumentList, "Invalid argument argumentCount.");
+            Debug.Assert(
+                _argumentCount == s_funcs[_info]._argumentCount
+                    || s_funcs[_info]._isVariantArgumentList,
+                "Invalid argument argumentCount."
+            );
 
             // special case of the Convert function
             if (s_funcs[_info]._id == FunctionId.Convert)
@@ -140,8 +248,10 @@ namespace System.Data
 
                     if (s_funcs[_info]._isValidateArguments)
                     {
-                        if ((argumentValues[i] == DBNull.Value) || (typeof(object) == s_funcs[_info]._parameters[i]))
-                        {
+                        if (
+                            (argumentValues[i] == DBNull.Value)
+                            || (typeof(object) == s_funcs[_info]._parameters[i])
+                        ) {
                             // currently all supported functions with IsValidateArguments set to true
                             // NOTE: for IIF and ISNULL IsValidateArguments set to false
                             return DBNull.Value;
@@ -151,20 +261,40 @@ namespace System.Data
                         {
                             // We are allowing conversions in one very specific case: int, int64,...'nice' numeric to numeric..
 
-                            if (s_funcs[_info]._parameters[i] == typeof(int) && ExpressionNode.IsInteger(DataStorage.GetStorageType(argumentValues[i].GetType())))
-                            {
-                                argumentValues[i] = Convert.ToInt32(argumentValues[i], FormatProvider);
+                            if (
+                                s_funcs[_info]._parameters[i] == typeof(int)
+                                && ExpressionNode.IsInteger(
+                                    DataStorage.GetStorageType(argumentValues[i].GetType())
+                                )
+                            ) {
+                                argumentValues[i] = Convert.ToInt32(
+                                    argumentValues[i],
+                                    FormatProvider
+                                );
                             }
-                            else if ((s_funcs[_info]._id == FunctionId.Trim) || (s_funcs[_info]._id == FunctionId.Substring) || (s_funcs[_info]._id == FunctionId.Len))
-                            {
-                                if ((typeof(string) != (argumentValues[i].GetType())) && (typeof(SqlString) != (argumentValues[i].GetType())))
-                                {
-                                    throw ExprException.ArgumentType(s_funcs[_info]._name, i + 1, s_funcs[_info]._parameters[i]!);
+                            else if (
+                                (s_funcs[_info]._id == FunctionId.Trim)
+                                || (s_funcs[_info]._id == FunctionId.Substring)
+                                || (s_funcs[_info]._id == FunctionId.Len)
+                            ) {
+                                if (
+                                    (typeof(string) != (argumentValues[i].GetType()))
+                                    && (typeof(SqlString) != (argumentValues[i].GetType()))
+                                ) {
+                                    throw ExprException.ArgumentType(
+                                        s_funcs[_info]._name,
+                                        i + 1,
+                                        s_funcs[_info]._parameters[i]!
+                                    );
                                 }
                             }
                             else
                             {
-                                throw ExprException.ArgumentType(s_funcs[_info]._name, i + 1, s_funcs[_info]._parameters[i]!);
+                                throw ExprException.ArgumentType(
+                                    s_funcs[_info]._name,
+                                    i + 1,
+                                    s_funcs[_info]._parameters[i]!
+                                );
                             }
                         }
                     }
@@ -191,7 +321,7 @@ namespace System.Data
                 constant = constant && _arguments![i].IsConstant();
             }
 
-            Debug.Assert(_info > -1, "All function nodes should be bound at this point.");  // default info is -1, it means if not bounded, it should be -1, not 0!!
+            Debug.Assert(_info > -1, "All function nodes should be bound at this point."); // default info is -1, it means if not bounded, it should be -1, not 0!!
 
             return (constant);
         }
@@ -304,13 +434,23 @@ namespace System.Data
             return dataType;
         }
 
-        private object EvalFunction(FunctionId id, object[] argumentValues, DataRow? row, DataRowVersion version)
-        {
+        private object EvalFunction(
+            FunctionId id,
+            object[] argumentValues,
+            DataRow? row,
+            DataRowVersion version
+        ) {
             StorageType storageType;
             switch (id)
             {
                 case FunctionId.Abs:
-                    Debug.Assert(_argumentCount == 1, "Invalid argument argumentCount for " + s_funcs[_info]._name + " : " + _argumentCount.ToString(FormatProvider));
+                    Debug.Assert(
+                        _argumentCount == 1,
+                        "Invalid argument argumentCount for "
+                            + s_funcs[_info]._name
+                            + " : "
+                            + _argumentCount.ToString(FormatProvider)
+                    );
 
                     storageType = DataStorage.GetStorageType(argumentValues[0].GetType());
                     if (ExpressionNode.IsInteger(storageType))
@@ -321,7 +461,13 @@ namespace System.Data
                     throw ExprException.ArgumentTypeInteger(s_funcs[_info]._name, 1);
 
                 case FunctionId.cBool:
-                    Debug.Assert(_argumentCount == 1, "Invalid argument argumentCount for " + s_funcs[_info]._name + " : " + _argumentCount.ToString(FormatProvider));
+                    Debug.Assert(
+                        _argumentCount == 1,
+                        "Invalid argument argumentCount for "
+                            + s_funcs[_info]._name
+                            + " : "
+                            + _argumentCount.ToString(FormatProvider)
+                    );
 
                     storageType = DataStorage.GetStorageType(argumentValues[0].GetType());
                     return storageType switch
@@ -330,31 +476,74 @@ namespace System.Data
                         StorageType.Int32 => ((int)argumentValues[0] != 0),
                         StorageType.Double => ((double)argumentValues[0] != 0.0),
                         StorageType.String => bool.Parse((string)argumentValues[0]),
-                        _ => throw ExprException.DatatypeConvertion(argumentValues[0].GetType(), typeof(bool)),
+                        _
+                          => throw ExprException.DatatypeConvertion(
+                              argumentValues[0].GetType(),
+                              typeof(bool)
+                          ),
                     };
                 case FunctionId.cInt:
-                    Debug.Assert(_argumentCount == 1, "Invalid argument argumentCount for " + s_funcs[_info]._name + " : " + _argumentCount.ToString(FormatProvider));
+                    Debug.Assert(
+                        _argumentCount == 1,
+                        "Invalid argument argumentCount for "
+                            + s_funcs[_info]._name
+                            + " : "
+                            + _argumentCount.ToString(FormatProvider)
+                    );
                     return Convert.ToInt32(argumentValues[0], FormatProvider);
 
                 case FunctionId.cDate:
-                    Debug.Assert(_argumentCount == 1, "Invalid argument argumentCount for " + s_funcs[_info]._name + " : " + _argumentCount.ToString(FormatProvider));
+                    Debug.Assert(
+                        _argumentCount == 1,
+                        "Invalid argument argumentCount for "
+                            + s_funcs[_info]._name
+                            + " : "
+                            + _argumentCount.ToString(FormatProvider)
+                    );
                     return Convert.ToDateTime(argumentValues[0], FormatProvider);
 
                 case FunctionId.cDbl:
-                    Debug.Assert(_argumentCount == 1, "Invalid argument argumentCount for " + s_funcs[_info]._name + " : " + _argumentCount.ToString(FormatProvider));
+                    Debug.Assert(
+                        _argumentCount == 1,
+                        "Invalid argument argumentCount for "
+                            + s_funcs[_info]._name
+                            + " : "
+                            + _argumentCount.ToString(FormatProvider)
+                    );
                     return Convert.ToDouble(argumentValues[0], FormatProvider);
 
                 case FunctionId.cStr:
-                    Debug.Assert(_argumentCount == 1, "Invalid argument argumentCount for " + s_funcs[_info]._name + " : " + _argumentCount.ToString(FormatProvider));
+                    Debug.Assert(
+                        _argumentCount == 1,
+                        "Invalid argument argumentCount for "
+                            + s_funcs[_info]._name
+                            + " : "
+                            + _argumentCount.ToString(FormatProvider)
+                    );
                     return Convert.ToString(argumentValues[0], FormatProvider)!;
 
                 case FunctionId.Charindex:
-                    Debug.Assert(_argumentCount == 2, "Invalid argument argumentCount for " + s_funcs[_info]._name + " : " + _argumentCount.ToString(FormatProvider));
+                    Debug.Assert(
+                        _argumentCount == 2,
+                        "Invalid argument argumentCount for "
+                            + s_funcs[_info]._name
+                            + " : "
+                            + _argumentCount.ToString(FormatProvider)
+                    );
 
-                    Debug.Assert(argumentValues[0] is string, "Invalid argument type for " + s_funcs[_info]._name);
-                    Debug.Assert(argumentValues[1] is string, "Invalid argument type for " + s_funcs[_info]._name);
+                    Debug.Assert(
+                        argumentValues[0] is string,
+                        "Invalid argument type for " + s_funcs[_info]._name
+                    );
+                    Debug.Assert(
+                        argumentValues[1] is string,
+                        "Invalid argument type for " + s_funcs[_info]._name
+                    );
 
-                    if (DataStorage.IsObjectNull(argumentValues[0]) || DataStorage.IsObjectNull(argumentValues[1]))
+                    if (
+                        DataStorage.IsObjectNull(argumentValues[0])
+                        || DataStorage.IsObjectNull(argumentValues[1])
+                    )
                         return DBNull.Value;
 
                     if (argumentValues[0] is SqlString)
@@ -363,10 +552,16 @@ namespace System.Data
                     if (argumentValues[1] is SqlString)
                         argumentValues[1] = ((SqlString)argumentValues[1]).Value;
 
-                    return ((string)argumentValues[1]).IndexOf((string)argumentValues[0], StringComparison.Ordinal);
+                    return ((string)argumentValues[1]).IndexOf(
+                        (string)argumentValues[0],
+                        StringComparison.Ordinal
+                    );
 
                 case FunctionId.Iif:
-                    Debug.Assert(_argumentCount == 3, "Invalid argument argumentCount: " + _argumentCount.ToString(FormatProvider));
+                    Debug.Assert(
+                        _argumentCount == 3,
+                        "Invalid argument argumentCount: " + _argumentCount.ToString(FormatProvider)
+                    );
 
                     object first = _arguments![0].Eval(row, version);
 
@@ -393,8 +588,17 @@ namespace System.Data
                         return argumentValues[0];
 
                 case FunctionId.Len:
-                    Debug.Assert(_argumentCount == 1, "Invalid argument argumentCount for " + s_funcs[_info]._name + " : " + _argumentCount.ToString(FormatProvider));
-                    Debug.Assert((argumentValues[0] is string) || (argumentValues[0] is SqlString), "Invalid argument type for " + s_funcs[_info]._name);
+                    Debug.Assert(
+                        _argumentCount == 1,
+                        "Invalid argument argumentCount for "
+                            + s_funcs[_info]._name
+                            + " : "
+                            + _argumentCount.ToString(FormatProvider)
+                    );
+                    Debug.Assert(
+                        (argumentValues[0] is string) || (argumentValues[0] is SqlString),
+                        "Invalid argument type for " + s_funcs[_info]._name
+                    );
 
                     if (argumentValues[0] is SqlString)
                     {
@@ -410,12 +614,32 @@ namespace System.Data
 
                     return ((string)argumentValues[0]).Length;
 
-
                 case FunctionId.Substring:
-                    Debug.Assert(_argumentCount == 3, "Invalid argument argumentCount: " + _argumentCount.ToString(FormatProvider));
-                    Debug.Assert((argumentValues[0] is string) || (argumentValues[0] is SqlString), "Invalid first argument " + argumentValues[0].GetType().FullName + " in " + s_funcs[_info]._name);
-                    Debug.Assert(argumentValues[1] is int, "Invalid second argument " + argumentValues[1].GetType().FullName + " in " + s_funcs[_info]._name);
-                    Debug.Assert(argumentValues[2] is int, "Invalid third argument " + argumentValues[2].GetType().FullName + " in " + s_funcs[_info]._name);
+                    Debug.Assert(
+                        _argumentCount == 3,
+                        "Invalid argument argumentCount: " + _argumentCount.ToString(FormatProvider)
+                    );
+                    Debug.Assert(
+                        (argumentValues[0] is string) || (argumentValues[0] is SqlString),
+                        "Invalid first argument "
+                            + argumentValues[0].GetType().FullName
+                            + " in "
+                            + s_funcs[_info]._name
+                    );
+                    Debug.Assert(
+                        argumentValues[1] is int,
+                        "Invalid second argument "
+                            + argumentValues[1].GetType().FullName
+                            + " in "
+                            + s_funcs[_info]._name
+                    );
+                    Debug.Assert(
+                        argumentValues[2] is int,
+                        "Invalid third argument "
+                            + argumentValues[2].GetType().FullName
+                            + " in "
+                            + s_funcs[_info]._name
+                    );
 
                     // work around the differences in .NET and VBA implementation of the Substring function
                     // 1. The <index> Argument is 0-based in .NET, and 1-based in VBA
@@ -453,18 +677,27 @@ namespace System.Data
                     return ((string)argumentValues[0]).Substring(start, length);
 
                 case FunctionId.Trim:
-                    {
-                        Debug.Assert(_argumentCount == 1, "Invalid argument argumentCount for " + s_funcs[_info]._name + " : " + _argumentCount.ToString(FormatProvider));
-                        Debug.Assert((argumentValues[0] is string) || (argumentValues[0] is SqlString), "Invalid argument type for " + s_funcs[_info]._name);
+                {
+                    Debug.Assert(
+                        _argumentCount == 1,
+                        "Invalid argument argumentCount for "
+                            + s_funcs[_info]._name
+                            + " : "
+                            + _argumentCount.ToString(FormatProvider)
+                    );
+                    Debug.Assert(
+                        (argumentValues[0] is string) || (argumentValues[0] is SqlString),
+                        "Invalid argument type for " + s_funcs[_info]._name
+                    );
 
-                        if (DataStorage.IsObjectNull(argumentValues[0]))
-                            return DBNull.Value;
+                    if (DataStorage.IsObjectNull(argumentValues[0]))
+                        return DBNull.Value;
 
-                        if (argumentValues[0] is SqlString)
-                            argumentValues[0] = ((SqlString)argumentValues[0]).Value;
+                    if (argumentValues[0] is SqlString)
+                        argumentValues[0] = ((SqlString)argumentValues[0]).Value;
 
-                        return (((string)argumentValues[0]).Trim());
-                    }
+                    return (((string)argumentValues[0]).Trim());
+                }
 
                 case FunctionId.Convert:
                     if (_argumentCount != 2)
@@ -483,7 +716,10 @@ namespace System.Data
                     {
                         if (storageType == StorageType.String)
                         {
-                            return SqlConvert.ConvertStringToDateTimeOffset((string)argumentValues[0], FormatProvider);
+                            return SqlConvert.ConvertStringToDateTimeOffset(
+                                (string)argumentValues[0],
+                                FormatProvider
+                            );
                         }
                     }
 
@@ -492,19 +728,51 @@ namespace System.Data
                         if ((mytype == StorageType.Guid) && (storageType == StorageType.String))
                             return new Guid((string)argumentValues[0]);
 
-                        if (ExpressionNode.IsFloatSql(storageType) && ExpressionNode.IsIntegerSql(mytype))
-                        {
+                        if (
+                            ExpressionNode.IsFloatSql(storageType)
+                            && ExpressionNode.IsIntegerSql(mytype)
+                        ) {
                             if (StorageType.Single == storageType)
                             {
-                                return SqlConvert.ChangeType2((float)SqlConvert.ChangeType2(argumentValues[0], StorageType.Single, typeof(float), FormatProvider), mytype, type, FormatProvider);
+                                return SqlConvert.ChangeType2(
+                                    (float)SqlConvert.ChangeType2(
+                                        argumentValues[0],
+                                        StorageType.Single,
+                                        typeof(float),
+                                        FormatProvider
+                                    ),
+                                    mytype,
+                                    type,
+                                    FormatProvider
+                                );
                             }
                             else if (StorageType.Double == storageType)
                             {
-                                return SqlConvert.ChangeType2((double)SqlConvert.ChangeType2(argumentValues[0], StorageType.Double, typeof(double), FormatProvider), mytype, type, FormatProvider);
+                                return SqlConvert.ChangeType2(
+                                    (double)SqlConvert.ChangeType2(
+                                        argumentValues[0],
+                                        StorageType.Double,
+                                        typeof(double),
+                                        FormatProvider
+                                    ),
+                                    mytype,
+                                    type,
+                                    FormatProvider
+                                );
                             }
                             else if (StorageType.Decimal == storageType)
                             {
-                                return SqlConvert.ChangeType2((decimal)SqlConvert.ChangeType2(argumentValues[0], StorageType.Decimal, typeof(decimal), FormatProvider), mytype, type, FormatProvider);
+                                return SqlConvert.ChangeType2(
+                                    (decimal)SqlConvert.ChangeType2(
+                                        argumentValues[0],
+                                        StorageType.Decimal,
+                                        typeof(decimal),
+                                        FormatProvider
+                                    ),
+                                    mytype,
+                                    type,
+                                    FormatProvider
+                                );
                             }
                         }
 
@@ -512,17 +780,29 @@ namespace System.Data
                         // If there was a type limiter scope on the stack at the time this Convert function was created,
                         // we must manually re-enter the Serialization Guard scope.
 
-                        DeserializationToken deserializationToken = (_capturedLimiter != null) ? SerializationInfo.StartDeserialization() : default;
+                        DeserializationToken deserializationToken =
+                            (_capturedLimiter != null)
+                                ? SerializationInfo.StartDeserialization()
+                                : default;
                         using (deserializationToken)
                         {
-                            return SqlConvert.ChangeType2(argumentValues[0], mytype, type, FormatProvider);
+                            return SqlConvert.ChangeType2(
+                                argumentValues[0],
+                                mytype,
+                                type,
+                                FormatProvider
+                            );
                         }
                     }
 
                     return argumentValues[0];
 
                 case FunctionId.DateTimeOffset:
-                    if (argumentValues[0] == DBNull.Value || argumentValues[1] == DBNull.Value || argumentValues[2] == DBNull.Value)
+                    if (
+                        argumentValues[0] == DBNull.Value
+                        || argumentValues[1] == DBNull.Value
+                        || argumentValues[2] == DBNull.Value
+                    )
                         return DBNull.Value;
                     switch (((DateTime)argumentValues[0]).Kind)
                     {
@@ -533,12 +813,15 @@ namespace System.Data
                             }
                             break;
                         case DateTimeKind.Local:
-                            if (DateTimeOffset.Now.Offset.Hours != (int)argumentValues[1] && DateTimeOffset.Now.Offset.Minutes != (int)argumentValues[2])
-                            {
+                            if (
+                                DateTimeOffset.Now.Offset.Hours != (int)argumentValues[1]
+                                && DateTimeOffset.Now.Offset.Minutes != (int)argumentValues[2]
+                            ) {
                                 throw ExprException.MismatchKindandTimeSpan();
                             }
                             break;
-                        case DateTimeKind.Unspecified: break;
+                        case DateTimeKind.Unspecified:
+                            break;
                     }
                     if ((int)argumentValues[1] < -14 || (int)argumentValues[1] > 14)
                         throw ExprException.InvalidHoursArgument();
@@ -550,7 +833,10 @@ namespace System.Data
                     if ((int)argumentValues[1] == -14 && (int)argumentValues[2] < 0)
                         throw ExprException.InvalidTimeZoneRange();
 
-                    return new DateTimeOffset((DateTime)argumentValues[0], new TimeSpan((int)argumentValues[1], (int)argumentValues[2], 0));
+                    return new DateTimeOffset(
+                        (DateTime)argumentValues[0],
+                        new TimeSpan((int)argumentValues[1], (int)argumentValues[2], 0)
+                    );
 
                 default:
                     throw ExprException.UndefinedFunction(s_funcs[_info]._name);
@@ -573,13 +859,14 @@ namespace System.Data
         {
             get
             {
-                bool aggregate = (s_funcs[_info]._id == FunctionId.Sum) ||
-                                 (s_funcs[_info]._id == FunctionId.Avg) ||
-                                 (s_funcs[_info]._id == FunctionId.Min) ||
-                                 (s_funcs[_info]._id == FunctionId.Max) ||
-                                 (s_funcs[_info]._id == FunctionId.Count) ||
-                                 (s_funcs[_info]._id == FunctionId.StDev) ||
-                                 (s_funcs[_info]._id == FunctionId.Var);
+                bool aggregate =
+                    (s_funcs[_info]._id == FunctionId.Sum)
+                    || (s_funcs[_info]._id == FunctionId.Avg)
+                    || (s_funcs[_info]._id == FunctionId.Min)
+                    || (s_funcs[_info]._id == FunctionId.Max)
+                    || (s_funcs[_info]._id == FunctionId.Count)
+                    || (s_funcs[_info]._id == FunctionId.StDev)
+                    || (s_funcs[_info]._id == FunctionId.Var);
                 return aggregate;
             }
         }
@@ -646,8 +933,8 @@ namespace System.Data
         Min = 32,
         Max = 33,
         Count = 34,
-        StDev = 35,  // Statistical standard deviation
-        Var = 37,    // Statistical variance
+        StDev = 35, // Statistical standard deviation
+        Var = 37, // Statistical variance
         DateTimeOffset = 38,
     }
 
@@ -671,9 +958,17 @@ namespace System.Data
             _argumentCount = 0;
         }
 
-        internal Function(string name, FunctionId id, Type result, bool IsValidateArguments,
-                          bool IsVariantArgumentList, int argumentCount, Type? a1, Type? a2, Type? a3)
-        {
+        internal Function(
+            string name,
+            FunctionId id,
+            Type result,
+            bool IsValidateArguments,
+            bool IsVariantArgumentList,
+            int argumentCount,
+            Type? a1,
+            Type? a2,
+            Type? a3
+        ) {
             _name = name;
             _id = id;
             _result = result;
@@ -689,7 +984,8 @@ namespace System.Data
                 _parameters[2] = a3;
         }
 
-        internal static string[] s_functionName = new string[] {
+        internal static string[] s_functionName = new string[]
+        {
             "Unknown",
             "Ascii",
             "Char",

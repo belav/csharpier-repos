@@ -14,7 +14,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
     //
     // Does not preserve insignificant details of the HTML, like tag closing style
     // or quote style.
-    internal class ComponentMarkupBlockPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
+    internal class ComponentMarkupBlockPass
+        : ComponentIntermediateNodePassBase,
+          IRazorOptimizationPass
     {
         // Runs LATE because we want to destroy structure.
         //
@@ -24,8 +26,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
         protected override void ExecuteCore(
             RazorCodeDocument codeDocument,
-            DocumentIntermediateNode documentNode)
-        {
+            DocumentIntermediateNode documentNode
+        ) {
             if (!IsComponentDocument(documentNode))
             {
                 return;
@@ -69,8 +71,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 while (start - 1 >= 0)
                 {
                     var candidate = reference.Parent.Children[start - 1];
-                    if (trees.Count == 0 || !ReferenceEquals(trees[trees.Count - 1].Node, candidate))
-                    {
+                    if (
+                        trees.Count == 0 || !ReferenceEquals(trees[trees.Count - 1].Node, candidate)
+                    ) {
                         // This means the we're out of nodes, or the left sibling is not in the list.
                         break;
                     }
@@ -102,10 +105,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     length--;
                 }
 
-                reference.Parent.Children.Insert(start, new MarkupBlockIntermediateNode()
-                {
-                    Content = rewriteVisitor.Builder.ToString(),
-                });
+                reference.Parent.Children.Insert(
+                    start,
+                    new MarkupBlockIntermediateNode()
+                    {
+                        Content = rewriteVisitor.Builder.ToString(),
+                    }
+                );
 
                 rewriteVisitor.Builder.Clear();
             }
@@ -126,7 +132,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
         {
             private bool _foundNonHtml;
 
-            public List<IntermediateNodeReference> Trees { get; } = new List<IntermediateNodeReference>();
+            public List<IntermediateNodeReference> Trees { get; } =
+                new List<IntermediateNodeReference>();
 
             public override void VisitDefault(IntermediateNode node)
             {
@@ -162,9 +169,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     // We only care about option tags that are nested under a select tag.
                     foreach (var ancestor in Ancestors)
                     {
-                        if (ancestor is MarkupElementIntermediateNode element &&
-                            string.Equals("select", element.TagName, StringComparison.OrdinalIgnoreCase))
-                        {
+                        if (
+                            ancestor is MarkupElementIntermediateNode element
+                            && string.Equals(
+                                "select",
+                                element.TagName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        ) {
                             _foundNonHtml = true;
                             break;
                         }
@@ -219,7 +231,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     // Treat node with errors as non-HTML
                     _foundNonHtml = true;
                 }
-                
+
                 // Visit Children
                 base.VisitDefault(node);
 

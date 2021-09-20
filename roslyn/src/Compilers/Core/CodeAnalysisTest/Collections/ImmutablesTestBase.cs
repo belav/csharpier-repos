@@ -41,8 +41,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             }
         }
 
-        internal static void CollectionAssertAreEquivalent<T>(ICollection<T> expected, ICollection<T> actual)
-        {
+        internal static void CollectionAssertAreEquivalent<T>(
+            ICollection<T> expected,
+            ICollection<T> actual
+        ) {
             Assert.Equal(expected.Count, actual.Count);
             foreach (var value in expected)
             {
@@ -50,12 +52,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             }
         }
 
-        protected static bool IsSame<TKey, TValue>(IImmutableDictionary<TKey, TValue> first, IImmutableDictionary<TKey, TValue> second)
-            where TKey : notnull
+        protected static bool IsSame<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> first,
+            IImmutableDictionary<TKey, TValue> second
+        ) where TKey : notnull
         {
-            if (first is ImmutableSegmentedDictionary<TKey, TValue> firstSegmented
-                && second is ImmutableSegmentedDictionary<TKey, TValue> secondSegmented)
-            {
+            if (
+                first is ImmutableSegmentedDictionary<TKey, TValue> firstSegmented
+                && second is ImmutableSegmentedDictionary<TKey, TValue> secondSegmented
+            ) {
                 return firstSegmented == secondSegmented;
             }
             else if (first.GetType() != second.GetType())
@@ -65,7 +70,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             }
             else if (first.GetType().IsValueType)
             {
-                throw new NotSupportedException($"Unable to compare '{first.GetType()}' for identity.");
+                throw new NotSupportedException(
+                    $"Unable to compare '{first.GetType()}' for identity."
+                );
             }
 
             return first == second;
@@ -102,8 +109,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             return new DeferredToString(() => ToString(sequence));
         }
 
-        protected static void ManuallyEnumerateTest<T>(IList<T> expectedResults, IEnumerator<T> enumerator)
-        {
+        protected static void ManuallyEnumerateTest<T>(
+            IList<T> expectedResults,
+            IEnumerator<T> enumerator
+        ) {
             T[] manualArray = new T[expectedResults.Count];
             int i = 0;
 
@@ -145,8 +154,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 do
                 {
                     input = random.NextDouble();
-                }
-                while (!ensureUniqueness.Add(input));
+                } while (!ensureUniqueness.Add(input));
                 inputs[i] = input;
             }
 

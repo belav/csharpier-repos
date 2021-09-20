@@ -13,10 +13,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
     {
         private class Rewriter : AbstractReductionRewriter
         {
-            public Rewriter(ObjectPool<IReductionRewriter> pool)
-                : base(pool)
-            {
-            }
+            public Rewriter(ObjectPool<IReductionRewriter> pool) : base(pool) { }
 
             public override SyntaxNode VisitParameter(ParameterSyntax node)
             {
@@ -24,16 +21,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     node,
                     newNode: base.VisitParameter(node),
                     parentNode: node.Parent,
-                    simplifier: s_simplifyParameter);
+                    simplifier: s_simplifyParameter
+                );
             }
 
-            public override SyntaxNode VisitParenthesizedLambdaExpression(ParenthesizedLambdaExpressionSyntax node)
-            {
+            public override SyntaxNode VisitParenthesizedLambdaExpression(
+                ParenthesizedLambdaExpressionSyntax node
+            ) {
                 return SimplifyNode(
                     node,
                     newNode: base.VisitParenthesizedLambdaExpression(node),
                     parentNode: node.Parent,
-                    simplifier: s_simplifyParenthesizedLambdaExpression);
+                    simplifier: s_simplifyParenthesizedLambdaExpression
+                );
             }
 
             public override SyntaxNode VisitBlock(BlockSyntax node)
@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     node,
                     newNode: base.VisitBlock(node),
                     parentNode: node.Parent,
-                    simplifier: s_simplifyBlock);
+                    simplifier: s_simplifyBlock
+                );
             }
         }
     }

@@ -21,15 +21,28 @@ namespace Microsoft.CodeAnalysis.CodeFixes
     internal static class DefaultFixAllProviderHelpers
     {
         public static async Task<CodeAction?> GetFixAsync(
-            string title, FixAllContext fixAllContext, FixAllContexts fixAllContextsAsync)
-        {
-            Contract.ThrowIfFalse(fixAllContext.Scope is FixAllScope.Document or FixAllScope.Project or FixAllScope.Solution);
+            string title,
+            FixAllContext fixAllContext,
+            FixAllContexts fixAllContextsAsync
+        ) {
+            Contract.ThrowIfFalse(
+                fixAllContext.Scope
+                    is FixAllScope.Document
+                        or FixAllScope.Project
+                        or FixAllScope.Solution
+            );
 
             var solution = fixAllContext.Scope switch
             {
-                FixAllScope.Document => await GetDocumentFixesAsync(fixAllContext, fixAllContextsAsync).ConfigureAwait(false),
-                FixAllScope.Project => await GetProjectFixesAsync(fixAllContext, fixAllContextsAsync).ConfigureAwait(false),
-                FixAllScope.Solution => await GetSolutionFixesAsync(fixAllContext, fixAllContextsAsync).ConfigureAwait(false),
+                FixAllScope.Document
+                  => await GetDocumentFixesAsync(fixAllContext, fixAllContextsAsync)
+                      .ConfigureAwait(false),
+                FixAllScope.Project
+                  => await GetProjectFixesAsync(fixAllContext, fixAllContextsAsync)
+                      .ConfigureAwait(false),
+                FixAllScope.Solution
+                  => await GetSolutionFixesAsync(fixAllContext, fixAllContextsAsync)
+                      .ConfigureAwait(false),
                 _ => throw ExceptionUtilities.UnexpectedValue(fixAllContext.Scope),
             };
 
@@ -38,20 +51,28 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
 #pragma warning disable RS0005 // Do not use generic 'CodeAction.Create' to create 'CodeAction'
 
-            return CodeAction.Create(
-                title, c => Task.FromResult(solution));
-
+            return CodeAction.Create(title, c => Task.FromResult(solution));
 #pragma warning disable RS0005 // Do not use generic 'CodeAction.Create' to create 'CodeAction'
         }
 
-        private static Task<Solution?> GetDocumentFixesAsync(FixAllContext fixAllContext, FixAllContexts fixAllContextsAsync)
-            => fixAllContextsAsync(fixAllContext, ImmutableArray.Create(fixAllContext));
+        private static Task<Solution?> GetDocumentFixesAsync(
+            FixAllContext fixAllContext,
+            FixAllContexts fixAllContextsAsync
+        ) => fixAllContextsAsync(fixAllContext, ImmutableArray.Create(fixAllContext));
 
-        private static Task<Solution?> GetProjectFixesAsync(FixAllContext fixAllContext, FixAllContexts fixAllContextsAsync)
-            => fixAllContextsAsync(fixAllContext, ImmutableArray.Create(fixAllContext.WithDocument(null)));
+        private static Task<Solution?> GetProjectFixesAsync(
+            FixAllContext fixAllContext,
+            FixAllContexts fixAllContextsAsync
+        ) =>
+            fixAllContextsAsync(
+                fixAllContext,
+                ImmutableArray.Create(fixAllContext.WithDocument(null))
+            );
 
-        private static Task<Solution?> GetSolutionFixesAsync(FixAllContext fixAllContext, FixAllContexts fixAllContextsAsync)
-        {
+        private static Task<Solution?> GetSolutionFixesAsync(
+            FixAllContext fixAllContext,
+            FixAllContexts fixAllContextsAsync
+        ) {
             var solution = fixAllContext.Solution;
             var dependencyGraph = solution.GetProjectDependencyGraph();
 
@@ -68,11 +89,17 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             // CodeFixProvider, and we can't call into providers of different languages with diagnostics from a
             // different language.
             var sortedProjects = dependencyGraph.GetTopologicallySortedProjects()
-                                                .Select(id => solution.GetRequiredProject(id))
-                                                .Where(p => p.Language == fixAllContext.Project.Language);
+                .Select(id => solution.GetRequiredProject(id))
+                .Where(p => p.Language == fixAllContext.Project.Language);
             return fixAllContextsAsync(
                 fixAllContext,
-                sortedProjects.SelectAsArray(p => fixAllContext.WithScope(FixAllScope.Project).WithProject(p).WithDocument(null)));
+                sortedProjects.SelectAsArray(
+                    p =>
+                        fixAllContext.WithScope(FixAllScope.Project)
+                            .WithProject(p)
+                            .WithDocument(null)
+                )
+            );
         }
     }
 }

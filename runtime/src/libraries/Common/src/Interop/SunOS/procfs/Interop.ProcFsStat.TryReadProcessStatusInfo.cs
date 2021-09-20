@@ -15,8 +15,15 @@ internal static partial class Interop
         /// <returns>
         /// true if the process status was read; otherwise, false.
         /// </returns>
-        [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_ReadProcessStatusInfo", SetLastError = true)]
-        private static extern unsafe bool TryReadProcessStatusInfo(int pid, ProcessStatusInfo* processStatus);
+        [DllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_ReadProcessStatusInfo",
+            SetLastError = true
+        )]
+        private static extern unsafe bool TryReadProcessStatusInfo(
+            int pid,
+            ProcessStatusInfo* processStatus
+        );
 
         internal struct ProcessStatusInfo
         {
@@ -24,8 +31,10 @@ internal static partial class Interop
             // add more fields when needed.
         }
 
-        internal static unsafe bool TryReadProcessStatusInfo(int pid, out ProcessStatusInfo statusInfo)
-        {
+        internal static unsafe bool TryReadProcessStatusInfo(
+            int pid,
+            out ProcessStatusInfo statusInfo
+        ) {
             statusInfo = default;
             fixed (ProcessStatusInfo* pStatusInfo = &statusInfo)
             {

@@ -26,7 +26,10 @@ namespace System.CommandLine.Suggest
             var testDirectoryOverride = GetEnvironmentVariable(TestDirectoryOverride);
             if (!string.IsNullOrWhiteSpace(testDirectoryOverride))
             {
-                _registrationConfigurationFilePath = Path.Combine(testDirectoryOverride, RegistrationFileName);
+                _registrationConfigurationFilePath = Path.Combine(
+                    testDirectoryOverride,
+                    RegistrationFileName
+                );
                 return;
             }
 
@@ -42,9 +45,10 @@ namespace System.CommandLine.Suggest
                 return null;
             }
 
-            if (_registrationConfigurationFilePath == null
-                || !File.Exists(_registrationConfigurationFilePath))
-            {
+            if (
+                _registrationConfigurationFilePath == null
+                || !File.Exists(_registrationConfigurationFilePath)
+            ) {
                 return null;
             }
 
@@ -53,8 +57,12 @@ namespace System.CommandLine.Suggest
             {
                 while (sr.ReadLine() is string line)
                 {
-                    if (line.StartsWith(soughtExecutable.FullName, StringComparison.OrdinalIgnoreCase))
-                    {
+                    if (
+                        line.StartsWith(
+                            soughtExecutable.FullName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    ) {
                         completionTarget = line;
                     }
                 }
@@ -73,8 +81,10 @@ namespace System.CommandLine.Suggest
         {
             var allRegistration = new List<Registration>();
 
-            if (_registrationConfigurationFilePath != null && File.Exists(_registrationConfigurationFilePath))
-            {
+            if (
+                _registrationConfigurationFilePath != null
+                && File.Exists(_registrationConfigurationFilePath)
+            ) {
                 using (var sr = new StreamReader(_registrationConfigurationFilePath, Encoding.UTF8))
                 {
                     string line;

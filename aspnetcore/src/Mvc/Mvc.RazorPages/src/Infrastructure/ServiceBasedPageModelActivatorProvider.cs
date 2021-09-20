@@ -23,10 +23,13 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var modelType = descriptor.ModelTypeInfo?.AsType();
             if (modelType == null)
             {
-                throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                    nameof(descriptor.ModelTypeInfo),
-                    nameof(descriptor)),
-                    nameof(descriptor));
+                throw new ArgumentException(
+                    Resources.FormatPropertyOfTypeCannotBeNull(
+                        nameof(descriptor.ModelTypeInfo),
+                        nameof(descriptor)
+                    ),
+                    nameof(descriptor)
+                );
             }
 
             return context =>

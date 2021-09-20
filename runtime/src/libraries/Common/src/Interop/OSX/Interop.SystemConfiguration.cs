@@ -39,7 +39,8 @@ internal static partial class Interop
             IntPtr allocator,
             CFStringRef name,
             delegate* unmanaged<SCDynamicStoreRef, CFArrayRef, IntPtr, void> callout,
-            SCDynamicStoreContext* context);
+            SCDynamicStoreContext* context
+        );
 
         /// <summary>
         /// Creates a new session used to interact with the dynamic store maintained by the System Configuration server.
@@ -53,8 +54,8 @@ internal static partial class Interop
         internal static unsafe SafeCreateHandle SCDynamicStoreCreate(
             CFStringRef name,
             delegate* unmanaged<SCDynamicStoreRef, CFArrayRef, IntPtr, void> callout,
-            SCDynamicStoreContext* context)
-        {
+            SCDynamicStoreContext* context
+        ) {
             return SCDynamicStoreCreate(IntPtr.Zero, name, callout, context);
         }
 
@@ -72,7 +73,8 @@ internal static partial class Interop
             IntPtr allocator,
             CFStringRef domain,
             CFStringRef serviceID,
-            CFStringRef entity);
+            CFStringRef entity
+        );
 
         /// <summary>
         /// Creates a dynamic store key that can be used to access the per-service network configuration information.
@@ -85,9 +87,14 @@ internal static partial class Interop
         internal static SafeCreateHandle SCDynamicStoreKeyCreateNetworkServiceEntity(
             CFStringRef domain,
             CFStringRef serviceID,
-            CFStringRef entity)
-        {
-            return SCDynamicStoreKeyCreateNetworkServiceEntity(IntPtr.Zero, domain, serviceID, entity);
+            CFStringRef entity
+        ) {
+            return SCDynamicStoreKeyCreateNetworkServiceEntity(
+                IntPtr.Zero,
+                domain,
+                serviceID,
+                entity
+            );
         }
 
         /// <summary>
@@ -103,7 +110,8 @@ internal static partial class Interop
         private static extern SafeCreateHandle SCDynamicStoreCreateRunLoopSource(
             IntPtr allocator,
             SCDynamicStoreRef store,
-            CFIndex order);
+            CFIndex order
+        );
 
         /// <summary>
         /// Creates a run loop source object that can be added to the application's run loop.
@@ -113,8 +121,10 @@ internal static partial class Interop
         /// <param name="order">The order in which the sources that are ready to be processed are handled,
         /// on platforms that support it and for source versions that support it.</param>
         /// <returns>The new run loop source object.</returns>
-        internal static SafeCreateHandle SCDynamicStoreCreateRunLoopSource(SCDynamicStoreRef store, CFIndex order)
-        {
+        internal static SafeCreateHandle SCDynamicStoreCreateRunLoopSource(
+            SCDynamicStoreRef store,
+            CFIndex order
+        ) {
             return SCDynamicStoreCreateRunLoopSource(IntPtr.Zero, store, order);
         }
 
@@ -127,6 +137,10 @@ internal static partial class Interop
         /// or IntPtr.Zero if no key patterns are to be monitored.</param>
         /// <returns>True if the set of notification keys and patterns was successfully updated; false otherwise.</returns>
         [DllImport(Libraries.SystemConfigurationLibrary)]
-        internal static extern bool SCDynamicStoreSetNotificationKeys(SCDynamicStoreRef store, CFArrayRef keys, CFArrayRef patterns);
+        internal static extern bool SCDynamicStoreSetNotificationKeys(
+            SCDynamicStoreRef store,
+            CFArrayRef keys,
+            CFArrayRef patterns
+        );
     }
 }

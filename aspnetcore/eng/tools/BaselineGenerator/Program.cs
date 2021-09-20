@@ -35,16 +35,28 @@ namespace PackageBaselineGenerator
         private readonly CommandOption _output;
         private readonly CommandOption _update;
 
-        private static readonly string[] _defaultSources = new string[] { "https://api.nuget.org/v3/index.json" };
+        private static readonly string[] _defaultSources = new string[]
+        {
+            "https://api.nuget.org/v3/index.json"
+        };
 
         public Program()
         {
             _sources = Option(
                 "-s|--package-sources <Sources>",
                 "The NuGet source(s) of packages to fetch",
-                CommandOptionType.MultipleValue);
-            _output = Option("-o|--output <OUT>", "The generated file output path", CommandOptionType.SingleValue);
-            _update = Option("-u|--update", "Regenerate the input (Baseline.xml) file.", CommandOptionType.NoValue);
+                CommandOptionType.MultipleValue
+            );
+            _output = Option(
+                "-o|--output <OUT>",
+                "The generated file output path",
+                CommandOptionType.SingleValue
+            );
+            _update = Option(
+                "-u|--update",
+                "Regenerate the input (Baseline.xml) file.",
+                CommandOptionType.NoValue
+            );
 
             Invoke = () => Run().GetAwaiter().GetResult();
         }
@@ -53,16 +65,22 @@ namespace PackageBaselineGenerator
         {
             if (_output.HasValue() && _update.HasValue())
             {
-                await Error.WriteLineAsync("'--output' and '--update' options must not be used together.");
+                await Error.WriteLineAsync(
+                    "'--output' and '--update' options must not be used together."
+                );
                 return 1;
             }
 
             var inputPath = Path.Combine(Directory.GetCurrentDirectory(), "Baseline.xml");
             var input = XDocument.Load(inputPath);
-            var sources = _sources.HasValue() ? _sources.Values.Select(s => s.TrimEnd('/')) : _defaultSources;
+            var sources = _sources.HasValue()
+                ? _sources.Values.Select(s => s.TrimEnd('/'))
+                : _defaultSources;
             var packageSources = sources.Select(s => new PackageSource(s));
             var providers = Repository.Provider.GetCoreV3(); // Get v2 and v3 API support
-            var sourceRepositories = packageSources.Select(ps => new SourceRepository(ps, providers));
+            var sourceRepositories = packageSources.Select(
+                ps => new SourceRepository(ps, providers)
+            );
             if (_update.HasValue())
             {
                 var updateResult = await RunUpdateAsync(inputPath, input, sourceRepositories);
@@ -80,8 +98,11 @@ namespace PackageBaselineGenerator
                 var packageBase = sourceRepository.PackageSource + "/package";
                 if (feedV3)
                 {
-                    var resources = await sourceRepository.GetResourceAsync<ServiceIndexResourceV3>();
-                    packageBase = resources.GetServiceEntryUri(ServiceTypes.PackageBaseAddress).ToString().TrimEnd('/');
+                    var resources =
+                        await sourceRepository.GetResourceAsync<ServiceIndexResourceV3>();
+                    packageBase = resources.GetServiceEntryUri(ServiceTypes.PackageBaseAddress)
+                        .ToString()
+                        .TrimEnd('/');
                 }
 
                 packageBases.Add((packageBase, feedV3));
@@ -91,8 +112,13 @@ namespace PackageBaselineGenerator
                 ? _output.Value()
                 : Path.Combine(Directory.GetCurrentDirectory(), "Baseline.Designer.props");
 
-            var packageCache = Environment.GetEnvironmentVariable("NUGET_PACKAGES") ??
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".nuget", "packages");
+            var packageCache =
+                Environment.GetEnvironmentVariable("NUGET_PACKAGES")
+                ?? Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+                    ".nuget",
+                    "packages"
+                );
 
             var tempDir = Path.Combine(Directory.GetCurrentDirectory(), "obj", "tmp");
             Directory.CreateDirectory(tempDir);
@@ -101,15 +127,26 @@ namespace PackageBaselineGenerator
 
             // Baseline and .NET Core versions always align in non-preview releases.
             var parsedVersion = Version.Parse(baselineVersion);
-            var defaultTarget = ((parsedVersion.Major < 5) ? "netcoreapp" : "net") +
-                $"{parsedVersion.Major}.{parsedVersion.Minor}";
+            var defaultTarget =
+                ((parsedVersion.Major < 5) ? "netcoreapp" : "net")
+                + $"{parsedVersion.Major}.{parsedVersion.Minor}";
 
             var doc = new XDocument(
-                new XComment(" Auto generated. Do not edit manually, use eng/tools/BaselineGenerator/ to recreate. "),
-                new XElement("Project",
-                    new XElement("PropertyGroup",
-                        new XElement("MSBuildAllProjects", "$(MSBuildAllProjects);$(MSBuildThisFileFullPath)"),
-                        new XElement("AspNetCoreBaselineVersion", baselineVersion))));
+                new XComment(
+                    " Auto generated. Do not edit manually, use eng/tools/BaselineGenerator/ to recreate. "
+                ),
+                new XElement(
+                    "Project",
+                    new XElement(
+                        "PropertyGroup",
+                        new XElement(
+                            "MSBuildAllProjects",
+                            "$(MSBuildAllProjects);$(MSBuildThisFileFullPath)"
+                        ),
+                        new XElement("AspNetCoreBaselineVersion", baselineVersion)
+                    )
+                )
+            );
 
             var client = new HttpClient();
             foreach (var pkg in input.Root.Descendants("Package"))
@@ -117,7 +154,12 @@ namespace PackageBaselineGenerator
                 var id = pkg.Attribute("Id").Value;
                 var version = pkg.Attribute("Version").Value;
                 var packageFileName = $"{id}.{version}.nupkg";
-                var nupkgPath = Path.Combine(packageCache, id.ToLowerInvariant(), version, packageFileName);
+                var nupkgPath = Path.Combine(
+                    packageCache,
+                    id.ToLowerInvariant(),
+                    version,
+                    packageFileName
+                );
                 if (!File.Exists(nupkgPath))
                 {
                     nupkgPath = Path.Combine(tempDir, packageFileName);
@@ -127,9 +169,9 @@ namespace PackageBaselineGenerator
                 {
                     foreach ((string packageBase, bool feedV3) in packageBases)
                     {
-                        var url = feedV3 ?
-                            $"{packageBase}/{id.ToLowerInvariant()}/{version}/{id.ToLowerInvariant()}.{version}.nupkg" :
-                            $"{packageBase}/{id}/{version}";
+                        var url = feedV3
+                            ? $"{packageBase}/{id.ToLowerInvariant()}/{version}/{id.ToLowerInvariant()}.{version}.nupkg"
+                            : $"{packageBase}/{id}/{version}";
 
                         Console.WriteLine($"Downloading {url}");
                         try
@@ -142,7 +184,8 @@ namespace PackageBaselineGenerator
                                 }
                             }
                         }
-                        catch (HttpRequestException e) when (e.StatusCode == System.Net.HttpStatusCode.NotFound)
+                        catch (HttpRequestException e)
+                            when (e.StatusCode == System.Net.HttpStatusCode.NotFound)
                         {
                             // If it's not found, continue onto the next one.
                             continue;
@@ -151,7 +194,9 @@ namespace PackageBaselineGenerator
 
                     if (!File.Exists(nupkgPath))
                     {
-                        throw new Exception($"Could not download package {id} @ {version} using any input feed");
+                        throw new Exception(
+                            $"Could not download package {id} @ {version} using any input feed"
+                        );
                     }
                 }
 
@@ -162,7 +207,8 @@ namespace PackageBaselineGenerator
                     var propertyGroup = new XElement(
                         "PropertyGroup",
                         new XAttribute("Condition", $" '$(PackageId)' == '{id}' "),
-                        new XElement("BaselinePackageVersion", version));
+                        new XElement("BaselinePackageVersion", version)
+                    );
                     doc.Root.Add(propertyGroup);
 
                     foreach (var group in reader.NuspecReader.GetDependencyGroups())
@@ -174,27 +220,37 @@ namespace PackageBaselineGenerator
                         }
 
                         // Handle changes to $(DefaultNetCoreTargetFramework) even if some projects are held back.
-                        var targetCondition = $"'$(TargetFramework)' == '{group.TargetFramework.GetShortFolderName()}'";
-                        if (string.Equals(
-                            group.TargetFramework.GetShortFolderName(),
-                            defaultTarget,
-                            StringComparison.OrdinalIgnoreCase))
-                        {
+                        var targetCondition =
+                            $"'$(TargetFramework)' == '{group.TargetFramework.GetShortFolderName()}'";
+                        if (
+                            string.Equals(
+                                group.TargetFramework.GetShortFolderName(),
+                                defaultTarget,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        ) {
                             targetCondition =
                                 $"('$(TargetFramework)' == '$(DefaultNetCoreTargetFramework)' OR '$(TargetFramework)' == '{defaultTarget}')";
                         }
 
                         var itemGroup = new XElement(
                             "ItemGroup",
-                            new XAttribute("Condition", $" '$(PackageId)' == '{id}' AND {targetCondition} "));
+                            new XAttribute(
+                                "Condition",
+                                $" '$(PackageId)' == '{id}' AND {targetCondition} "
+                            )
+                        );
                         doc.Root.Add(itemGroup);
 
                         foreach (var dependency in group.Packages)
                         {
                             itemGroup.Add(
-                                new XElement("BaselinePackageReference",
-                                new XAttribute("Include", dependency.Id),
-                                new XAttribute("Version", dependency.VersionRange.ToString())));
+                                new XElement(
+                                    "BaselinePackageReference",
+                                    new XAttribute("Include", dependency.Id),
+                                    new XAttribute("Version", dependency.VersionRange.ToString())
+                                )
+                            );
                         }
                     }
                 }
@@ -220,10 +276,13 @@ namespace PackageBaselineGenerator
         private async Task<int> RunUpdateAsync(
             string documentPath,
             XDocument document,
-            IEnumerable<SourceRepository> sourceRepositories)
-        {
-            var packageMetadataResources = await Task.WhenAll(sourceRepositories.Select(async sr =>
-                await sr.GetResourceAsync<PackageMetadataResource>()));
+            IEnumerable<SourceRepository> sourceRepositories
+        ) {
+            var packageMetadataResources = await Task.WhenAll(
+                sourceRepositories.Select(
+                    async sr => await sr.GetResourceAsync<PackageMetadataResource>()
+                )
+            );
 
             var logger = new Logger(Error, Out);
             var hasChanged = false;
@@ -235,7 +294,8 @@ namespace PackageBaselineGenerator
                     "Microsoft.AspNetCore.App.Runtime.win-x64",
                     packageMetadataResources,
                     logger,
-                    cacheContext);
+                    cacheContext
+                );
 
                 foreach (var package in document.Root.Descendants("Package"))
                 {
@@ -246,7 +306,8 @@ namespace PackageBaselineGenerator
                         id,
                         packageMetadataResources,
                         logger,
-                        cacheContext);
+                        cacheContext
+                    );
 
                     hasChanged |= attributeChanged;
                 }
@@ -290,31 +351,42 @@ namespace PackageBaselineGenerator
             string packageId,
             IEnumerable<PackageMetadataResource> packageMetadataResources,
             ILogger logger,
-            SourceCacheContext cacheContext)
-        {
+            SourceCacheContext cacheContext
+        ) {
             var currentVersion = NuGetVersion.Parse(versionAttribute.Value);
             var versionRange = new VersionRange(
                 currentVersion,
-                new FloatRange(NuGetVersionFloatBehavior.Patch, currentVersion));
+                new FloatRange(NuGetVersionFloatBehavior.Patch, currentVersion)
+            );
 
             var searchMetadatas = await Task.WhenAll(
-                packageMetadataResources.Select(async pmr => await pmr.GetMetadataAsync(
-                    packageId,
-                    includePrerelease: false,
-                    includeUnlisted: true, // Microsoft.AspNetCore.DataOrotection.Redis package is not listed.
-                    sourceCacheContext: cacheContext,
-                    log: logger,
-                    token: CancellationToken.None)));
+                packageMetadataResources.Select(
+                    async pmr =>
+                        await pmr.GetMetadataAsync(
+                            packageId,
+                            includePrerelease: false,
+                            includeUnlisted: true, // Microsoft.AspNetCore.DataOrotection.Redis package is not listed.
+                            sourceCacheContext: cacheContext,
+                            log: logger,
+                            token: CancellationToken.None
+                        )
+                )
+            );
 
             // Find the latest version among each search metadata
             NuGetVersion latestVersion = null;
             foreach (var searchMetadata in searchMetadatas)
             {
                 var potentialLatestVersion = versionRange.FindBestMatch(
-                    searchMetadata.Select(metadata => metadata.Identity.Version));
-                if (latestVersion == null ||
-                    (potentialLatestVersion != null && potentialLatestVersion.CompareTo(latestVersion) > 0))
-                {
+                    searchMetadata.Select(metadata => metadata.Identity.Version)
+                );
+                if (
+                    latestVersion == null
+                    || (
+                        potentialLatestVersion != null
+                        && potentialLatestVersion.CompareTo(latestVersion) > 0
+                    )
+                ) {
                     latestVersion = potentialLatestVersion;
                 }
             }

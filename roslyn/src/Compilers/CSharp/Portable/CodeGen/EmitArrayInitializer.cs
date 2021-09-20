@@ -20,10 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         {
             // Initialize every element
             Element,
-
             // Initialize all elements at once from a metadata blob
             Block,
-
             // Mixed case where there are some initializers that are constants and
             // there is enough of them so that it makes sense to use block initialization
             // followed by individual initialization of non-constant elements
@@ -40,8 +38,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         /// in either case it is expected that number of leaf values will match number 
         /// of elements in the array and nesting level should match the rank of the array.
         /// </summary>
-        private void EmitArrayInitializers(ArrayTypeSymbol arrayType, BoundArrayInitialization inits)
-        {
+        private void EmitArrayInitializers(
+            ArrayTypeSymbol arrayType,
+            BoundArrayInitialization inits
+        ) {
             var initExprs = inits.Initializers;
             var initializationStyle = ShouldEmitBlockInitializer(arrayType.ElementType, initExprs);
 
@@ -61,10 +61,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             }
         }
 
-        private void EmitElementInitializers(ArrayTypeSymbol arrayType,
-                                            ImmutableArray<BoundExpression> inits,
-                                            bool includeConstants)
-        {
+        private void EmitElementInitializers(
+            ArrayTypeSymbol arrayType,
+            ImmutableArray<BoundExpression> inits,
+            bool includeConstants
+        ) {
             if (!IsMultidimensionalInitializer(inits))
             {
                 EmitVectorElementInitializers(arrayType, inits, includeConstants);
@@ -75,10 +76,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             }
         }
 
-        private void EmitVectorElementInitializers(ArrayTypeSymbol arrayType,
-                    ImmutableArray<BoundExpression> inits,
-                    bool includeConstants)
-        {
+        private void EmitVectorElementInitializers(
+            ArrayTypeSymbol arrayType,
+            ImmutableArray<BoundExpression> inits,
+            bool includeConstants
+        ) {
             for (int i = 0; i < inits.Length; i++)
             {
                 var init = inits[i];
@@ -128,10 +130,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             public readonly ImmutableArray<BoundExpression> Initializers;
         }
 
-        private void EmitMultidimensionalElementInitializers(ArrayTypeSymbol arrayType,
-                                                            ImmutableArray<BoundExpression> inits,
-                                                            bool includeConstants)
-        {
+        private void EmitMultidimensionalElementInitializers(
+            ArrayTypeSymbol arrayType,
+            ImmutableArray<BoundExpression> inits,
+            bool includeConstants
+        ) {
             // Using a List for the stack instead of the framework Stack because IEnumerable from Stack is top to bottom.
             // This algorithm requires the IEnumerable to be from bottom to top. See extensions for List in CollectionExtensions.vb.
 
@@ -162,10 +165,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         ///  as at that point we would be completely done with emitting initializers 
         ///  corresponding to that index.
         /// </summary>
-        private void EmitAllElementInitializersRecursive(ArrayTypeSymbol arrayType,
-                                                         ArrayBuilder<IndexDesc> indices,
-                                                         bool includeConstants)
-        {
+        private void EmitAllElementInitializersRecursive(
+            ArrayTypeSymbol arrayType,
+            ArrayBuilder<IndexDesc> indices,
+            bool includeConstants
+        ) {
             var top = indices.Peek();
             var inits = top.Initializers;
 
@@ -174,7 +178,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 // emit initializers for the less significant indices recursively
                 for (int i = 0; i < inits.Length; i++)
                 {
-                    indices.Push(new IndexDesc(i, ((BoundArrayInitialization)inits[i]).Initializers));
+                    indices.Push(
+                        new IndexDesc(i, ((BoundArrayInitialization)inits[i]).Initializers)
+                    );
                     EmitAllElementInitializersRecursive(arrayType, indices, includeConstants);
                 }
             }
@@ -236,13 +242,19 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         {
             get
             {
-                var sustainedLowLatency = _module.Compilation.GetWellKnownTypeMember(WellKnownMember.System_Runtime_GCLatencyMode__SustainedLowLatency);
-                return sustainedLowLatency != null && sustainedLowLatency.ContainingAssembly == _module.Compilation.Assembly.CorLibrary;
+                var sustainedLowLatency = _module.Compilation.GetWellKnownTypeMember(
+                    WellKnownMember.System_Runtime_GCLatencyMode__SustainedLowLatency
+                );
+                return sustainedLowLatency != null
+                    && sustainedLowLatency.ContainingAssembly
+                        == _module.Compilation.Assembly.CorLibrary;
             }
         }
 
-        private ArrayInitializerStyle ShouldEmitBlockInitializer(TypeSymbol elementType, ImmutableArray<BoundExpression> inits)
-        {
+        private ArrayInitializerStyle ShouldEmitBlockInitializer(
+            TypeSymbol elementType,
+            ImmutableArray<BoundExpression> inits
+        ) {
             if (!_module.SupportsPrivateImplClass)
             {
                 return ArrayInitializerStyle.Element;
@@ -290,8 +302,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         /// <summary>
         /// Count of all nontrivial initializers and count of those that are constants.
         /// </summary>
-        private void InitializerCountRecursive(ImmutableArray<BoundExpression> inits, ref int initCount, ref int constInits)
-        {
+        private void InitializerCountRecursive(
+            ImmutableArray<BoundExpression> inits,
+            ref int initCount,
+            ref int constInits
+        ) {
             if (inits.Length == 0)
             {
                 return;
@@ -303,11 +318,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
                 if (asArrayInit != null)
                 {
-                    InitializerCountRecursive(asArrayInit.Initializers, ref initCount, ref constInits);
+                    InitializerCountRecursive(
+                        asArrayInit.Initializers,
+                        ref initCount,
+                        ref constInits
+                    );
                 }
                 else
                 {
-                    // NOTE: default values do not need to be initialized. 
+                    // NOTE: default values do not need to be initialized.
                     //       .NET arrays are always zero-inited.
                     if (!init.IsDefaultValue())
                     {
@@ -328,7 +347,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         private ImmutableArray<byte> GetRawData(ImmutableArray<BoundExpression> initializers)
         {
             // the initial size is a guess.
-            // there is no point to be precise here as MemoryStream always has N + 1 storage 
+            // there is no point to be precise here as MemoryStream always has N + 1 storage
             // and will need to be trimmed regardless
             var writer = new BlobBuilder(initializers.Length * 4);
 
@@ -363,15 +382,21 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         /// </summary>
         private static bool IsMultidimensionalInitializer(ImmutableArray<BoundExpression> inits)
         {
-            Debug.Assert(inits.All((init) => init.Kind != BoundKind.ArrayInitialization) ||
-                         inits.All((init) => init.Kind == BoundKind.ArrayInitialization),
-                         "all or none should be nested");
+            Debug.Assert(
+                inits.All((init) => init.Kind != BoundKind.ArrayInitialization)
+                    || inits.All((init) => init.Kind == BoundKind.ArrayInitialization),
+                "all or none should be nested"
+            );
 
             return inits.Length != 0 && inits[0].Kind == BoundKind.ArrayInitialization;
         }
 
-        private bool TryEmitReadonlySpanAsBlobWrapper(NamedTypeSymbol spanType, BoundExpression wrappedExpression, bool used, bool inPlace)
-        {
+        private bool TryEmitReadonlySpanAsBlobWrapper(
+            NamedTypeSymbol spanType,
+            BoundExpression wrappedExpression,
+            bool used,
+            bool inPlace
+        ) {
             ImmutableArray<byte> data = default;
             int elementCount = -1;
             TypeSymbol elementType = null;
@@ -381,7 +406,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 return false;
             }
 
-            var ctor = ((MethodSymbol)this._module.Compilation.GetWellKnownTypeMember(WellKnownMember.System_ReadOnlySpan_T__ctor));
+            var ctor = (
+                (MethodSymbol)this._module.Compilation.GetWellKnownTypeMember(
+                    WellKnownMember.System_ReadOnlySpan_T__ctor
+                )
+            );
             if (ctor == null)
             {
                 return false;
@@ -449,7 +478,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     _builder.EmitOpCode(ILOpCode.Newobj, stackAdjustment: -1);
                 }
 
-                EmitSymbolToken(ctor.AsMember(spanType), wrappedExpression.Syntax, optArgList: null);
+                EmitSymbolToken(
+                    ctor.AsMember(spanType),
+                    wrappedExpression.Syntax,
+                    optArgList: null
+                );
             }
 
             return true;
@@ -459,8 +492,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         ///  Returns a byte blob that matches serialized content of single array initializer.    
         ///  returns -1 if the initializer is null or not an array of literals
         /// </summary>
-        private int TryGetRawDataForArrayInit(BoundArrayInitialization initializer, out ImmutableArray<byte> data)
-        {
+        private int TryGetRawDataForArrayInit(
+            BoundArrayInitialization initializer,
+            out ImmutableArray<byte> data
+        ) {
             data = default;
 
             if (initializer == null)

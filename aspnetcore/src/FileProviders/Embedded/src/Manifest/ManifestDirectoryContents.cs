@@ -14,8 +14,11 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
         private readonly DateTimeOffset _lastModified;
         private IFileInfo[]? _entries;
 
-        public ManifestDirectoryContents(Assembly assembly, ManifestDirectory directory, DateTimeOffset lastModified)
-        {
+        public ManifestDirectoryContents(
+            Assembly assembly,
+            ManifestDirectory directory,
+            DateTimeOffset lastModified
+        ) {
             if (assembly == null)
             {
                 throw new ArgumentNullException(nameof(assembly));
@@ -41,7 +44,8 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest
         {
             return EnsureEntries().GetEnumerator();
 
-            IReadOnlyList<IFileInfo> EnsureEntries() => _entries = _entries ?? ResolveEntries().ToArray();
+            IReadOnlyList<IFileInfo> EnsureEntries() =>
+                _entries = _entries ?? ResolveEntries().ToArray();
 
             IEnumerable<IFileInfo> ResolveEntries()
             {

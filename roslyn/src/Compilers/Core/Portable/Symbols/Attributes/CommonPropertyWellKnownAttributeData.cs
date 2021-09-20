@@ -49,7 +49,6 @@ namespace Microsoft.CodeAnalysis
                 SetDataStored();
             }
         }
-
         #endregion
     }
 }

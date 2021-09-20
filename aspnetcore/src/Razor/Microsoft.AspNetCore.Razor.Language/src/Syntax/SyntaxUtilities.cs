@@ -5,8 +5,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 {
     internal static class SyntaxUtilities
     {
-        public static MarkupTextLiteralSyntax MergeTextLiterals(params MarkupTextLiteralSyntax[] literalSyntaxes)
-        {
+        public static MarkupTextLiteralSyntax MergeTextLiterals(
+            params MarkupTextLiteralSyntax[] literalSyntaxes
+        ) {
             if (literalSyntaxes == null || literalSyntaxes.Length == 0)
             {
                 return null;
@@ -38,7 +39,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             }
 
             var mergedLiteralSyntax = Syntax.InternalSyntax.SyntaxFactory.MarkupTextLiteral(
-                builder.ToList<Syntax.InternalSyntax.SyntaxToken>());
+                builder.ToList<Syntax.InternalSyntax.SyntaxToken>()
+            );
 
             return (MarkupTextLiteralSyntax)mergedLiteralSyntax.CreateRed(parent, position);
         }

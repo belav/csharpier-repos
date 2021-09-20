@@ -43,8 +43,12 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <param name="arg2">The second argument.</param>
         /// <param name="arg3">The third argument.</param>
         /// <returns>The created disposable.</returns>
-        internal static IDisposable Create<T1, T2, T3>(Action<T1, T2, T3> action, T1 arg1, T2 arg2, T3 arg3)
-        {
+        internal static IDisposable Create<T1, T2, T3>(
+            Action<T1, T2, T3> action,
+            T1 arg1,
+            T2 arg2,
+            T3 arg3
+        ) {
             Debug.Assert(action != null, "Non-null disposer action required.");
             return new Disposable<T1, T2, T3>(action, arg1, arg2, arg3);
         }
@@ -80,14 +84,16 @@ namespace System.Threading.Tasks.Dataflow.Internal
             }
 
             /// <summary>Gets whether the IDisposable has been disposed.</summary>
-            private bool Disposed { get { return _action == null; } }
+            private bool Disposed
+            {
+                get { return _action == null; }
+            }
 
             /// <summary>Invoke the action.</summary>
             void IDisposable.Dispose()
             {
                 Action<T1, T2>? toRun = _action;
-                if (toRun != null &&
-                    Interlocked.CompareExchange(ref _action, null, toRun) == toRun)
+                if (toRun != null && Interlocked.CompareExchange(ref _action, null, toRun) == toRun)
                 {
                     toRun(_arg1, _arg2);
                 }
@@ -122,14 +128,16 @@ namespace System.Threading.Tasks.Dataflow.Internal
             }
 
             /// <summary>Gets whether the IDisposable has been disposed.</summary>
-            private bool Disposed { get { return _action == null; } }
+            private bool Disposed
+            {
+                get { return _action == null; }
+            }
 
             /// <summary>Invoke the action.</summary>
             void IDisposable.Dispose()
             {
                 Action<T1, T2, T3>? toRun = _action;
-                if (toRun != null &&
-                    Interlocked.CompareExchange(ref _action, null, toRun) == toRun)
+                if (toRun != null && Interlocked.CompareExchange(ref _action, null, toRun) == toRun)
                 {
                     toRun(_arg1, _arg2, _arg3);
                 }

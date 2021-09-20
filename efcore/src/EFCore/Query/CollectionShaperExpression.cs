@@ -31,8 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             Expression projection,
             Expression innerShaper,
             INavigationBase? navigation,
-            Type elementType)
-        {
+            Type elementType
+        ) {
             Check.NotNull(projection, nameof(projection));
             Check.NotNull(innerShaper, nameof(innerShaper));
 
@@ -63,12 +63,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual Type ElementType { get; }
 
         /// <inheritdoc />
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <inheritdoc />
-        public override Type Type
-            => Navigation?.ClrType ?? typeof(List<>).MakeGenericType(ElementType);
+        public override Type Type =>
+            Navigation?.ClrType ?? typeof(List<>).MakeGenericType(ElementType);
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -90,14 +89,14 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <returns> This expression if no children changed, or an expression with the updated children. </returns>
         public virtual CollectionShaperExpression Update(
             Expression projection,
-            Expression innerShaper)
-        {
+            Expression innerShaper
+        ) {
             Check.NotNull(projection, nameof(projection));
             Check.NotNull(innerShaper, nameof(innerShaper));
 
             return projection != Projection || innerShaper != InnerShaper
-                ? new CollectionShaperExpression(projection, innerShaper, Navigation, ElementType)
-                : this;
+              ? new CollectionShaperExpression(projection, innerShaper, Navigation, ElementType)
+              : this;
         }
 
         /// <inheritdoc />

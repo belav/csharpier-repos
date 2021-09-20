@@ -13,11 +13,7 @@ namespace BasicWebSite
     {
         public void Configure(IApplicationBuilder applicationBuilder)
         {
-            var supportedCultures = new[]
-            {
-                new CultureInfo("en-US"),
-                new CultureInfo("fr")
-            };
+            var supportedCultures = new[] { new CultureInfo("en-US"), new CultureInfo("fr") };
 
             var options = new RequestLocalizationOptions()
             {
@@ -25,7 +21,10 @@ namespace BasicWebSite
                 SupportedCultures = supportedCultures,
                 SupportedUICultures = supportedCultures
             };
-            options.RequestCultureProviders = new[] { new RouteDataRequestCultureProvider() { Options = options } };
+            options.RequestCultureProviders = new[]
+            {
+                new RouteDataRequestCultureProvider() { Options = options }
+            };
 
             applicationBuilder.UseRequestLocalization(options);
         }

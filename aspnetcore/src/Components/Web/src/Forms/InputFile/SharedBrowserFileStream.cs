@@ -17,17 +17,29 @@ namespace Microsoft.AspNetCore.Components.Forms
 
         private readonly ElementReference _inputFileElement;
 
-        public SharedBrowserFileStream(IJSRuntime jsRuntime, IJSUnmarshalledRuntime jsUnmarshalledRuntime, ElementReference inputFileElement, BrowserFile file)
-            : base(file)
+        public SharedBrowserFileStream(
+            IJSRuntime jsRuntime,
+            IJSUnmarshalledRuntime jsUnmarshalledRuntime,
+            ElementReference inputFileElement,
+            BrowserFile file
+        ) : base(file)
         {
             _jsRuntime = jsRuntime;
             _jsUnmarshalledRuntime = jsUnmarshalledRuntime;
             _inputFileElement = inputFileElement;
         }
 
-        protected override async ValueTask<int> CopyFileDataIntoBuffer(long sourceOffset, Memory<byte> destination, CancellationToken cancellationToken)
-        {
-            await _jsRuntime.InvokeVoidAsync(InputFileInterop.EnsureArrayBufferReadyForSharedMemoryInterop, cancellationToken, _inputFileElement, File.Id);
+        protected override async ValueTask<int> CopyFileDataIntoBuffer(
+            long sourceOffset,
+            Memory<byte> destination,
+            CancellationToken cancellationToken
+        ) {
+            await _jsRuntime.InvokeVoidAsync(
+                InputFileInterop.EnsureArrayBufferReadyForSharedMemoryInterop,
+                cancellationToken,
+                _inputFileElement,
+                File.Id
+            );
 
             var readRequest = new ReadRequest
             {
@@ -36,8 +48,12 @@ namespace Microsoft.AspNetCore.Components.Forms
                 SourceOffset = sourceOffset
             };
 
-            if (MemoryMarshal.TryGetArray(destination, out ArraySegment<byte> destinationArraySegment))
-            {
+            if (
+                MemoryMarshal.TryGetArray(
+                    destination,
+                    out ArraySegment<byte> destinationArraySegment
+                )
+            ) {
                 readRequest.Destination = destinationArraySegment.Array!;
                 readRequest.DestinationOffset = destinationArraySegment.Offset;
                 readRequest.MaxBytes = destinationArraySegment.Count;
@@ -52,7 +68,10 @@ namespace Microsoft.AspNetCore.Components.Forms
                 destination.CopyTo(new Memory<byte>(readRequest.Destination));
             }
 
-            return _jsUnmarshalledRuntime.InvokeUnmarshalled<ReadRequest, int>(InputFileInterop.ReadFileDataSharedMemory, readRequest);
+            return _jsUnmarshalledRuntime.InvokeUnmarshalled<ReadRequest, int>(
+                InputFileInterop.ReadFileDataSharedMemory,
+                readRequest
+            );
         }
     }
 }

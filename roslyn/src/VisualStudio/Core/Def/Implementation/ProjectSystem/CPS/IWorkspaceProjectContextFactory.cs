@@ -17,7 +17,14 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
     {
         /// <inheritdoc cref="CreateProjectContextAsync"/>
         [Obsolete("Use CreateProjectContextAsync instead")]
-        IWorkspaceProjectContext CreateProjectContext(string languageName, string projectUniqueName, string projectFilePath, Guid projectGuid, object hierarchy, string binOutputPath);
+        IWorkspaceProjectContext CreateProjectContext(
+            string languageName,
+            string projectUniqueName,
+            string projectFilePath,
+            Guid projectGuid,
+            object hierarchy,
+            string binOutputPath
+        );
 
         /// <summary>
         /// Creates and initializes a new Workspace project and returns a <see
@@ -31,6 +38,14 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
         /// <param name="projectGuid">Project guid.</param>
         /// <param name="hierarchy">Obsolete. The argument is ignored.</param>
         /// <param name="binOutputPath">Initial project binary output path.</param>
-        Task<IWorkspaceProjectContext> CreateProjectContextAsync(string languageName, string projectUniqueName, string projectFilePath, Guid projectGuid, object hierarchy, string binOutputPath, CancellationToken cancellationToken);
+        Task<IWorkspaceProjectContext> CreateProjectContextAsync(
+            string languageName,
+            string projectUniqueName,
+            string projectFilePath,
+            Guid projectGuid,
+            object hierarchy,
+            string binOutputPath,
+            CancellationToken cancellationToken
+        );
     }
 }

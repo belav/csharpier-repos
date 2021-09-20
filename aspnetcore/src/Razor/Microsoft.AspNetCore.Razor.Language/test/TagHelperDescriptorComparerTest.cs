@@ -13,34 +13,35 @@ namespace Microsoft.AspNetCore.Razor.Language
 {
     public class TagHelperDescriptorComparerTest
     {
-        private static readonly TestFile TagHelpersTestFile = TestFile.Create("TestFiles/taghelpers.json", typeof(TagHelperDescriptorComparerTest));
+        private static readonly TestFile TagHelpersTestFile = TestFile.Create(
+            "TestFiles/taghelpers.json",
+            typeof(TagHelperDescriptorComparerTest)
+        );
 
         [Fact]
         public void GetHashCode_SameTagHelperDescriptors_HashCodeMatches()
         {
             // Arrange
             var descriptor1 = CreateTagHelperDescriptor(
-                    tagName: "input",
-                    typeName: "InputTagHelper",
-                    assemblyName: "TestAssembly",
-                    attributes: new Action<BoundAttributeDescriptorBuilder>[]
-                    {
-                        builder => builder
-                            .Name("value")
-                            .PropertyName("FooProp")
-                            .TypeName("System.String"),
-                    });
+                tagName: "input",
+                typeName: "InputTagHelper",
+                assemblyName: "TestAssembly",
+                attributes: new Action<BoundAttributeDescriptorBuilder>[]
+                {
+                    builder =>
+                        builder.Name("value").PropertyName("FooProp").TypeName("System.String"),
+                }
+            );
             var descriptor2 = CreateTagHelperDescriptor(
-                    tagName: "input",
-                    typeName: "InputTagHelper",
-                    assemblyName: "TestAssembly",
-                    attributes: new Action<BoundAttributeDescriptorBuilder>[]
-                    {
-                        builder => builder
-                            .Name("value")
-                            .PropertyName("FooProp")
-                            .TypeName("System.String"),
-                    });
+                tagName: "input",
+                typeName: "InputTagHelper",
+                assemblyName: "TestAssembly",
+                attributes: new Action<BoundAttributeDescriptorBuilder>[]
+                {
+                    builder =>
+                        builder.Name("value").PropertyName("FooProp").TypeName("System.String"),
+                }
+            );
 
             // Act
             var hashCode1 = descriptor1.GetHashCode();
@@ -55,29 +56,27 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             // Arrange
             var descriptorName = CreateTagHelperDescriptor(
-                    tagName: "input",
-                    typeName: "InputTagHelper",
-                    assemblyName: "TestAssembly",
-                    tagMatchingRuleName: "Input",
-                    attributes: new Action<BoundAttributeDescriptorBuilder>[]
-                    {
-                        builder => builder
-                            .Name("value")
-                            .PropertyName("FooProp")
-                            .TypeName("System.String"),
-                    });
+                tagName: "input",
+                typeName: "InputTagHelper",
+                assemblyName: "TestAssembly",
+                tagMatchingRuleName: "Input",
+                attributes: new Action<BoundAttributeDescriptorBuilder>[]
+                {
+                    builder =>
+                        builder.Name("value").PropertyName("FooProp").TypeName("System.String"),
+                }
+            );
             var descriptorFQN = CreateTagHelperDescriptor(
-                    tagName: "input",
-                    typeName: "InputTagHelper",
-                    assemblyName: "TestAssembly",
-                    tagMatchingRuleName: "Microsoft.AspNetCore.Components.Forms.Input",
-                    attributes: new Action<BoundAttributeDescriptorBuilder>[]
-                    {
-                        builder => builder
-                            .Name("value")
-                            .PropertyName("FooProp")
-                            .TypeName("System.String"),
-                    });
+                tagName: "input",
+                typeName: "InputTagHelper",
+                assemblyName: "TestAssembly",
+                tagMatchingRuleName: "Microsoft.AspNetCore.Components.Forms.Input",
+                attributes: new Action<BoundAttributeDescriptorBuilder>[]
+                {
+                    builder =>
+                        builder.Name("value").PropertyName("FooProp").TypeName("System.String"),
+                }
+            );
 
             // Act
             var hashCodeName = descriptorName.GetHashCode();
@@ -92,29 +91,29 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             // Arrange
             var counterTagHelper = CreateTagHelperDescriptor(
-                    tagName: "Counter",
-                    typeName: "CounterTagHelper",
-                    assemblyName: "Components.Component",
-                    tagMatchingRuleName: "Input",
-                    attributes: new Action<BoundAttributeDescriptorBuilder>[]
-                    {
-                        builder => builder
-                            .Name("IncrementBy")
+                tagName: "Counter",
+                typeName: "CounterTagHelper",
+                assemblyName: "Components.Component",
+                tagMatchingRuleName: "Input",
+                attributes: new Action<BoundAttributeDescriptorBuilder>[]
+                {
+                    builder =>
+                        builder.Name("IncrementBy")
                             .PropertyName("IncrementBy")
                             .TypeName("System.Int32"),
-                    });
+                }
+            );
             var inputTagHelper = CreateTagHelperDescriptor(
-                    tagName: "input",
-                    typeName: "InputTagHelper",
-                    assemblyName: "TestAssembly",
-                    tagMatchingRuleName: "Microsoft.AspNetCore.Components.Forms.Input",
-                    attributes: new Action<BoundAttributeDescriptorBuilder>[]
-                    {
-                        builder => builder
-                            .Name("value")
-                            .PropertyName("FooProp")
-                            .TypeName("System.String"),
-                    });
+                tagName: "input",
+                typeName: "InputTagHelper",
+                assemblyName: "TestAssembly",
+                tagMatchingRuleName: "Microsoft.AspNetCore.Components.Forms.Input",
+                attributes: new Action<BoundAttributeDescriptorBuilder>[]
+                {
+                    builder =>
+                        builder.Name("value").PropertyName("FooProp").TypeName("System.String"),
+                }
+            );
 
             // Act
             var hashCodeCounter = counterTagHelper.GetHashCode();
@@ -166,9 +165,11 @@ namespace Microsoft.AspNetCore.Razor.Language
             string typeName,
             string assemblyName,
             string tagMatchingRuleName = null,
-            IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null)
-        {
-            var builder = TagHelperDescriptorBuilder.Create(typeName, assemblyName) as DefaultTagHelperDescriptorBuilder;
+            IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null
+        ) {
+            var builder =
+                TagHelperDescriptorBuilder.Create(typeName, assemblyName)
+                as DefaultTagHelperDescriptorBuilder;
             builder.TypeName(typeName);
 
             if (attributes != null)
@@ -179,7 +180,9 @@ namespace Microsoft.AspNetCore.Razor.Language
                 }
             }
 
-            builder.TagMatchingRuleDescriptor(ruleBuilder => ruleBuilder.RequireTagName(tagMatchingRuleName ?? tagName));
+            builder.TagMatchingRuleDescriptor(
+                ruleBuilder => ruleBuilder.RequireTagName(tagMatchingRuleName ?? tagName)
+            );
 
             var descriptor = builder.Build();
 

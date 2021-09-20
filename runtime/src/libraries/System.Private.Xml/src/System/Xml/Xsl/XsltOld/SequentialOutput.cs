@@ -47,11 +47,37 @@ namespace System.Xml.Xsl.XsltOld
 
         private const string s_EndOfLine = "\r\n";
 
-        private static readonly char[] s_TextValueFind = new char[] { s_Ampersand, s_GreaterThan, s_LessThan };
-        private static readonly string[] s_TextValueReplace = new string[] { s_EnAmpersand, s_EnGreaterThan, s_EnLessThan };
+        private static readonly char[] s_TextValueFind = new char[]
+        {
+            s_Ampersand,
+            s_GreaterThan,
+            s_LessThan
+        };
+        private static readonly string[] s_TextValueReplace = new string[]
+        {
+            s_EnAmpersand,
+            s_EnGreaterThan,
+            s_EnLessThan
+        };
 
-        private static readonly char[] s_XmlAttributeValueFind = new char[] { s_Ampersand, s_GreaterThan, s_LessThan, s_Quote, s_NewLine, s_Return };
-        private static readonly string[] s_XmlAttributeValueReplace = new string[] { s_EnAmpersand, s_EnGreaterThan, s_EnLessThan, s_EnQuote, s_EnNewLine, s_EnReturn };
+        private static readonly char[] s_XmlAttributeValueFind = new char[]
+        {
+            s_Ampersand,
+            s_GreaterThan,
+            s_LessThan,
+            s_Quote,
+            s_NewLine,
+            s_Return
+        };
+        private static readonly string[] s_XmlAttributeValueReplace = new string[]
+        {
+            s_EnAmpersand,
+            s_EnGreaterThan,
+            s_EnLessThan,
+            s_EnQuote,
+            s_EnNewLine,
+            s_EnReturn
+        };
 
         // Instance members
         private readonly Processor _processor;
@@ -82,7 +108,8 @@ namespace System.Xml.Xsl.XsltOld
             _isHtmlOutput = _output.Method == XsltOutput.OutputMethod.Html;
             _cdataElements = _output.CDataElements;
             _indentOutput = _output.Indent;
-            _outputDoctype = _output.DoctypeSystem != null || (_isHtmlOutput && _output.DoctypePublic != null);
+            _outputDoctype =
+                _output.DoctypeSystem != null || (_isHtmlOutput && _output.DoctypePublic != null);
             _outputXmlDecl = _isXmlOutput && !_output.OmitXmlDeclaration && !_omitXmlDeclCalled;
         }
 
@@ -126,12 +153,7 @@ namespace System.Xml.Xsl.XsltOld
             {
                 if (mainNode.Depth == 0)
                 {
-                    if (
-                        _secondRoot && (
-                            _output.DoctypeSystem != null ||
-                            _output.Standalone
-                        )
-                    )
+                    if (_secondRoot && (_output.DoctypeSystem != null || _output.Standalone))
                     {
                         throw XsltException.Create(SR.Xslt_MultipleRoots);
                     }
@@ -145,8 +167,13 @@ namespace System.Xml.Xsl.XsltOld
                 _outputDoctype = false;
             }
 
-            if (_cdataElements != null && _cdataElements.Contains(new XmlQualifiedName(mainNode.LocalName, mainNode.NamespaceURI)) && _isXmlOutput)
-            {
+            if (
+                _cdataElements != null
+                && _cdataElements.Contains(
+                    new XmlQualifiedName(mainNode.LocalName, mainNode.NamespaceURI)
+                )
+                && _isXmlOutput
+            ) {
                 record.Manager.CurrentElementScope.ToCData = true;
             }
 
@@ -156,10 +183,12 @@ namespace System.Xml.Xsl.XsltOld
 
             WriteAttributes(record.AttributeList, record.AttributeCount, htmlProps);
 
-
             if (mainNode.IsEmptyTag)
             {
-                Debug.Assert(!_isHtmlOutput || mainNode.Prefix != null, "Html can't have abbreviated elements");
+                Debug.Assert(
+                    !_isHtmlOutput || mainNode.Prefix != null,
+                    "Html can't have abbreviated elements"
+                );
                 Write(s_SlashGreaterThan);
             }
             else
@@ -210,7 +239,10 @@ namespace System.Xml.Xsl.XsltOld
                 if (text == null)
                 { // disableEscaping marker
                     i++;
-                    Debug.Assert(i < node.TextInfoCount, "disableEscaping marker can't be last TextInfo record");
+                    Debug.Assert(
+                        i < node.TextInfoCount,
+                        "disableEscaping marker can't be last TextInfo record"
+                    );
                     Write(node.TextInfo[i]);
                 }
                 else
@@ -229,8 +261,14 @@ namespace System.Xml.Xsl.XsltOld
 
         private void WriteDoctype(BuilderInfo mainNode)
         {
-            Debug.Assert(_outputDoctype == true, "It supposed to check this condition before actual call");
-            Debug.Assert(_output.DoctypeSystem != null || (_isHtmlOutput && _output.DoctypePublic != null), "We set outputDoctype == true only if");
+            Debug.Assert(
+                _outputDoctype == true,
+                "It supposed to check this condition before actual call"
+            );
+            Debug.Assert(
+                _output.DoctypeSystem != null || (_isHtmlOutput && _output.DoctypePublic != null),
+                "We set outputDoctype == true only if"
+            );
             Indent(0);
             Write(s_DocType);
             if (_isXmlOutput)
@@ -264,8 +302,14 @@ namespace System.Xml.Xsl.XsltOld
 
         private void WriteXmlDeclaration()
         {
-            Debug.Assert(_outputXmlDecl == true, "It supposed to check this condition before actual call");
-            Debug.Assert(_isXmlOutput && !_output.OmitXmlDeclaration, "We set outputXmlDecl == true only if");
+            Debug.Assert(
+                _outputXmlDecl == true,
+                "It supposed to check this condition before actual call"
+            );
+            Debug.Assert(
+                _isXmlOutput && !_output.OmitXmlDeclaration,
+                "We set outputXmlDecl == true only if"
+            );
             _outputXmlDecl = false;
 
             Indent(0);
@@ -364,8 +408,10 @@ namespace System.Xml.Xsl.XsltOld
             switch (node.NodeType)
             {
                 case XmlNodeType.Element:
-                    if (node.NamespaceURI.Length == 0 && string.Equals("html", node.LocalName, StringComparison.OrdinalIgnoreCase))
-                    {
+                    if (
+                        node.NamespaceURI.Length == 0
+                        && string.Equals("html", node.LocalName, StringComparison.OrdinalIgnoreCase)
+                    ) {
                         method = XsltOutput.OutputMethod.Html;
                     }
                     break;
@@ -616,7 +662,12 @@ namespace System.Xml.Xsl.XsltOld
                             for (int j = 0; j < bytes; j++)
                             {
                                 Write("%");
-                                Write(((uint)_byteBuffer![j]).ToString("X2", CultureInfo.InvariantCulture));
+                                Write(
+                                    ((uint)_byteBuffer![j]).ToString(
+                                        "X2",
+                                        CultureInfo.InvariantCulture
+                                    )
+                                );
                             }
                         }
                         else
@@ -693,7 +744,8 @@ namespace System.Xml.Xsl.XsltOld
                 Debug.Assert(list[attrib] is BuilderInfo);
                 BuilderInfo attribute = (BuilderInfo)list[attrib]!;
                 string attrValue = attribute.Value;
-                bool abr = false, uri = false;
+                bool abr = false,
+                    uri = false;
                 {
                     if (htmlElementsProps != null && attribute.Prefix.Length == 0)
                     {
@@ -705,16 +757,25 @@ namespace System.Xml.Xsl.XsltOld
                         if (htmlAttrProps != null)
                         {
                             abr = htmlElementsProps.AbrParent && htmlAttrProps.Abr;
-                            uri = htmlElementsProps.UriParent && (htmlAttrProps.Uri ||
-                                  htmlElementsProps.NameParent && htmlAttrProps.Name
-                            );
+                            uri =
+                                htmlElementsProps.UriParent
+                                && (
+                                    htmlAttrProps.Uri
+                                    || htmlElementsProps.NameParent && htmlAttrProps.Name
+                                );
                         }
                     }
                 }
                 Write(s_Space);
                 WriteName(attribute.Prefix, attribute.LocalName);
-                if (abr && string.Equals(attribute.LocalName, attrValue, StringComparison.OrdinalIgnoreCase))
-                {
+                if (
+                    abr
+                    && string.Equals(
+                        attribute.LocalName,
+                        attrValue,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                ) {
                     // Since the name of the attribute = the value of the attribute,
                     // this is a boolean attribute whose value should be suppressed
                     continue;
@@ -752,7 +813,7 @@ namespace System.Xml.Xsl.XsltOld
                 {
                     _firstLine = false;
                 }
-                return;    // preven leading CRLF
+                return; // preven leading CRLF
             }
             Write(s_EndOfLine);
             for (int i = 2 * depth; 0 < i; i--)

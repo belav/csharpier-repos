@@ -19,13 +19,23 @@ internal static partial class Interop
         internal static extern void SslCtxDestroy(IntPtr ctx);
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslCtxSetAlpnProtos")]
-        internal static extern int SslCtxSetAlpnProtos(SafeSslContextHandle ctx, IntPtr protos, int len);
+        internal static extern int SslCtxSetAlpnProtos(
+            SafeSslContextHandle ctx,
+            IntPtr protos,
+            int len
+        );
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslCtxSetAlpnSelectCb")]
-        internal static extern unsafe void SslCtxSetAlpnSelectCb(SafeSslContextHandle ctx, delegate* unmanaged<IntPtr, byte**, byte*, byte*, uint, IntPtr, int> callback, IntPtr arg);
+        internal static extern unsafe void SslCtxSetAlpnSelectCb(
+            SafeSslContextHandle ctx,
+            delegate* unmanaged<IntPtr, byte**, byte*, byte*, uint, IntPtr, int> callback,
+            IntPtr arg
+        );
 
-        internal static unsafe int SslCtxSetAlpnProtos(SafeSslContextHandle ctx, List<SslApplicationProtocol> protocols)
-        {
+        internal static unsafe int SslCtxSetAlpnProtos(
+            SafeSslContextHandle ctx,
+            List<SslApplicationProtocol> protocols
+        ) {
             byte[] buffer = ConvertAlpnProtocolListToByteArray(protocols);
             fixed (byte* b = buffer)
             {
@@ -33,14 +43,18 @@ internal static partial class Interop
             }
         }
 
-        internal static byte[] ConvertAlpnProtocolListToByteArray(List<SslApplicationProtocol> applicationProtocols)
-        {
+        internal static byte[] ConvertAlpnProtocolListToByteArray(
+            List<SslApplicationProtocol> applicationProtocols
+        ) {
             int protocolSize = 0;
             foreach (SslApplicationProtocol protocol in applicationProtocols)
             {
                 if (protocol.Protocol.Length == 0 || protocol.Protocol.Length > byte.MaxValue)
                 {
-                    throw new ArgumentException(SR.net_ssl_app_protocols_invalid, nameof(applicationProtocols));
+                    throw new ArgumentException(
+                        SR.net_ssl_app_protocols_invalid,
+                        nameof(applicationProtocols)
+                    );
                 }
 
                 protocolSize += protocol.Protocol.Length + 1;
@@ -64,15 +78,9 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeSslContextHandle : SafeHandle
     {
-        public SafeSslContextHandle()
-            : base(IntPtr.Zero, true)
-        {
-        }
+        public SafeSslContextHandle() : base(IntPtr.Zero, true) { }
 
-        internal SafeSslContextHandle(IntPtr handle, bool ownsHandle)
-            : base(handle, ownsHandle)
-        {
-        }
+        internal SafeSslContextHandle(IntPtr handle, bool ownsHandle) : base(handle, ownsHandle) { }
 
         public override bool IsInvalid
         {

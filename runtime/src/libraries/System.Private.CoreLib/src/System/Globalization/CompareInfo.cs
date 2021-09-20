@@ -17,18 +17,29 @@ namespace System.Globalization
     /// This class implements a set of methods for comparing strings.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed partial class CompareInfo : IDeserializationCallback
     {
         // Mask used to check if IndexOf()/LastIndexOf()/IsPrefix()/IsPostfix() has the right flags.
-        private const CompareOptions ValidIndexMaskOffFlags =
-            ~(CompareOptions.IgnoreCase | CompareOptions.IgnoreSymbols | CompareOptions.IgnoreNonSpace |
-              CompareOptions.IgnoreWidth | CompareOptions.IgnoreKanaType);
+        private const CompareOptions ValidIndexMaskOffFlags = ~(
+            CompareOptions.IgnoreCase
+            | CompareOptions.IgnoreSymbols
+            | CompareOptions.IgnoreNonSpace
+            | CompareOptions.IgnoreWidth
+            | CompareOptions.IgnoreKanaType
+        );
 
         // Mask used to check if Compare() / GetHashCode(string) / GetSortKey has the right flags.
-        private const CompareOptions ValidCompareMaskOffFlags =
-            ~(CompareOptions.IgnoreCase | CompareOptions.IgnoreSymbols | CompareOptions.IgnoreNonSpace |
-              CompareOptions.IgnoreWidth | CompareOptions.IgnoreKanaType | CompareOptions.StringSort);
+        private const CompareOptions ValidCompareMaskOffFlags = ~(
+            CompareOptions.IgnoreCase
+            | CompareOptions.IgnoreSymbols
+            | CompareOptions.IgnoreNonSpace
+            | CompareOptions.IgnoreWidth
+            | CompareOptions.IgnoreKanaType
+            | CompareOptions.StringSort
+        );
 
         // Cache the invariant CompareInfo
         internal static readonly CompareInfo Invariant = CultureInfo.InvariantCulture.CompareInfo;
@@ -38,7 +49,7 @@ namespace System.Globalization
         // The interesting part is that since haw-US doesn't have its own sort, it has to point at another
         // locale, which is what SCOMPAREINFO does.
         [OptionalField(VersionAdded = 2)]
-        private string m_name;  // The name used to construct this CompareInfo. Do not rename (binary serialization)
+        private string m_name; // The name used to construct this CompareInfo. Do not rename (binary serialization)
 
         [NonSerialized]
         private IntPtr _sortHandle;
@@ -108,7 +119,10 @@ namespace System.Globalization
         {
             if (CultureData.IsCustomCultureId(culture))
             {
-                throw new ArgumentException(SR.Argument_CustomCultureCannotBePassedByNumber, nameof(culture));
+                throw new ArgumentException(
+                    SR.Argument_CustomCultureCannotBePassedByNumber,
+                    nameof(culture)
+                );
             }
 
             return CultureInfo.GetCultureInfo(culture).CompareInfo;
@@ -233,7 +247,10 @@ namespace System.Globalization
         {
             // This is merely for serialization compatibility with Whidbey/Orcas, it can go away when we don't want that compat any more.
             culture = CultureInfo.GetCultureInfo(Name).LCID; // This is the lcid of the constructing culture (still have to dereference to get target sort)
-            Debug.Assert(m_name != null, "CompareInfo.OnSerializing - expected m_name to be set already");
+            Debug.Assert(
+                m_name != null,
+                "CompareInfo.OnSerializing - expected m_name to be set already"
+            );
         }
 
         /// <summary>
@@ -291,7 +308,7 @@ namespace System.Globalization
 
             return Compare(string1.AsSpan(), string2.AsSpan(), options);
 
-        CheckOptionsAndReturn:
+            CheckOptionsAndReturn:
 
             // If we're short-circuiting the globalization logic, we still need to check that
             // the provided options were valid.
@@ -302,9 +319,14 @@ namespace System.Globalization
 
         internal int CompareOptionIgnoreCase(ReadOnlySpan<char> string1, ReadOnlySpan<char> string2)
         {
-            return GlobalizationMode.Invariant ?
-                Ordinal.CompareIgnoreCaseInvariantMode(ref MemoryMarshal.GetReference(string1), string1.Length, ref MemoryMarshal.GetReference(string2), string2.Length) :
-                CompareStringCore(string1, string2, CompareOptions.IgnoreCase);
+            return GlobalizationMode.Invariant
+              ? Ordinal.CompareIgnoreCaseInvariantMode(
+                    ref MemoryMarshal.GetReference(string1),
+                    string1.Length,
+                    ref MemoryMarshal.GetReference(string2),
+                    string2.Length
+                )
+              : CompareStringCore(string1, string2, CompareOptions.IgnoreCase);
         }
 
         /// <summary>
@@ -314,15 +336,41 @@ namespace System.Globalization
         /// string1 is less than string2, and a number greater than 0 if
         /// string1 is greater than string2.
         /// </summary>
-        public int Compare(string? string1, int offset1, int length1, string? string2, int offset2, int length2)
-        {
-            return Compare(string1, offset1, length1, string2, offset2, length2, CompareOptions.None);
+        public int Compare(
+            string? string1,
+            int offset1,
+            int length1,
+            string? string2,
+            int offset2,
+            int length2
+        ) {
+            return Compare(
+                string1,
+                offset1,
+                length1,
+                string2,
+                offset2,
+                length2,
+                CompareOptions.None
+            );
         }
 
-        public int Compare(string? string1, int offset1, string? string2, int offset2, CompareOptions options)
-        {
-            return Compare(string1, offset1, string1 == null ? 0 : string1.Length - offset1,
-                           string2, offset2, string2 == null ? 0 : string2.Length - offset2, options);
+        public int Compare(
+            string? string1,
+            int offset1,
+            string? string2,
+            int offset2,
+            CompareOptions options
+        ) {
+            return Compare(
+                string1,
+                offset1,
+                string1 == null ? 0 : string1.Length - offset1,
+                string2,
+                offset2,
+                string2 == null ? 0 : string2.Length - offset2,
+                options
+            );
         }
 
         public int Compare(string? string1, int offset1, string? string2, int offset2)
@@ -330,8 +378,15 @@ namespace System.Globalization
             return Compare(string1, offset1, string2, offset2, CompareOptions.None);
         }
 
-        public int Compare(string? string1, int offset1, int length1, string? string2, int offset2, int length2, CompareOptions options)
-        {
+        public int Compare(
+            string? string1,
+            int offset1,
+            int length1,
+            string? string2,
+            int offset2,
+            int length2,
+            CompareOptions options
+        ) {
             ReadOnlySpan<char> span1 = default;
             ReadOnlySpan<char> span2 = default;
 
@@ -385,7 +440,7 @@ namespace System.Globalization
 
             return Compare(span1, span2, options);
 
-        CheckOptionsAndReturn:
+            CheckOptionsAndReturn:
 
             // If we're short-circuiting the globalization logic, we still need to check that
             // the provided options were valid.
@@ -393,28 +448,40 @@ namespace System.Globalization
             CheckCompareOptionsForCompare(options);
             return retVal;
 
-        BoundsCheckError:
+            BoundsCheckError:
 
             // We know a bounds check error occurred. Now we just need to figure
             // out the correct error message to surface.
 
             if (length1 < 0 || length2 < 0)
             {
-                throw new ArgumentOutOfRangeException((length1 < 0) ? nameof(length1) : nameof(length2), SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    (length1 < 0) ? nameof(length1) : nameof(length2),
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
             }
 
             if (offset1 < 0 || offset2 < 0)
             {
-                throw new ArgumentOutOfRangeException((offset1 < 0) ? nameof(offset1) : nameof(offset2), SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    (offset1 < 0) ? nameof(offset1) : nameof(offset2),
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
             }
 
             if (offset1 > (string1 == null ? 0 : string1.Length) - length1)
             {
-                throw new ArgumentOutOfRangeException(nameof(string1), SR.ArgumentOutOfRange_OffsetLength);
+                throw new ArgumentOutOfRangeException(
+                    nameof(string1),
+                    SR.ArgumentOutOfRange_OffsetLength
+                );
             }
 
             Debug.Assert(offset2 > (string2 == null ? 0 : string2.Length) - length2);
-            throw new ArgumentOutOfRangeException(nameof(string2), SR.ArgumentOutOfRange_OffsetLength);
+            throw new ArgumentOutOfRangeException(
+                nameof(string2),
+                SR.ArgumentOutOfRange_OffsetLength
+            );
         }
 
         /// <summary>
@@ -431,8 +498,11 @@ namespace System.Globalization
         /// <exception cref="ArgumentException">
         /// <paramref name="options"/> contains an unsupported combination of flags.
         /// </exception>
-        public int Compare(ReadOnlySpan<char> string1, ReadOnlySpan<char> string2, CompareOptions options = CompareOptions.None)
-        {
+        public int Compare(
+            ReadOnlySpan<char> string1,
+            ReadOnlySpan<char> string2,
+            CompareOptions options = CompareOptions.None
+        ) {
             if (string1 == string2) // referential equality + length
             {
                 CheckCompareOptionsForCompare(options);
@@ -455,7 +525,12 @@ namespace System.Globalization
                     return string1.SequenceCompareTo(string2);
                 }
 
-                return Ordinal.CompareStringIgnoreCase(ref MemoryMarshal.GetReference(string1), string1.Length, ref MemoryMarshal.GetReference(string2), string2.Length);
+                return Ordinal.CompareStringIgnoreCase(
+                    ref MemoryMarshal.GetReference(string1),
+                    string1.Length,
+                    ref MemoryMarshal.GetReference(string2),
+                    string2.Length
+                );
             }
             else
             {
@@ -469,7 +544,12 @@ namespace System.Globalization
 
                 if (options == CompareOptions.OrdinalIgnoreCase)
                 {
-                    return Ordinal.CompareStringIgnoreCase(ref MemoryMarshal.GetReference(string1), string1.Length, ref MemoryMarshal.GetReference(string2), string2.Length);
+                    return Ordinal.CompareStringIgnoreCase(
+                        ref MemoryMarshal.GetReference(string1),
+                        string1.Length,
+                        ref MemoryMarshal.GetReference(string2),
+                        string2.Length
+                    );
                 }
 
                 ThrowCompareOptionsCheckFailed(options);
@@ -489,8 +569,9 @@ namespace System.Globalization
 
             if ((options & ValidCompareMaskOffFlags) != 0)
             {
-                if (options != CompareOptions.Ordinal && options != CompareOptions.OrdinalIgnoreCase)
-                {
+                if (
+                    options != CompareOptions.Ordinal && options != CompareOptions.OrdinalIgnoreCase
+                ) {
                     ThrowCompareOptionsCheckFailed(options);
                 }
             }
@@ -502,13 +583,20 @@ namespace System.Globalization
         {
             throw new ArgumentException(
                 paramName: nameof(options),
-                message: ((options & CompareOptions.Ordinal) != 0) ? SR.Argument_CompareOptionOrdinal : SR.Argument_InvalidFlag);
+                message: ((options & CompareOptions.Ordinal) != 0)
+                  ? SR.Argument_CompareOptionOrdinal
+                  : SR.Argument_InvalidFlag
+            );
         }
 
-        private unsafe int CompareStringCore(ReadOnlySpan<char> string1, ReadOnlySpan<char> string2, CompareOptions options) =>
-            GlobalizationMode.UseNls ?
-                NlsCompareString(string1, string2, options) :
-                IcuCompareString(string1, string2, options);
+        private unsafe int CompareStringCore(
+            ReadOnlySpan<char> string1,
+            ReadOnlySpan<char> string2,
+            CompareOptions options
+        ) =>
+            GlobalizationMode.UseNls
+                ? NlsCompareString(string1, string2, options)
+                : IcuCompareString(string1, string2, options);
 
         /// <summary>
         /// Determines whether prefix is a prefix of string.  If prefix equals
@@ -541,8 +629,11 @@ namespace System.Globalization
         /// <exception cref="ArgumentException">
         /// <paramref name="options"/> contains an unsupported combination of flags.
         /// </exception>
-        public unsafe bool IsPrefix(ReadOnlySpan<char> source, ReadOnlySpan<char> prefix, CompareOptions options = CompareOptions.None)
-        {
+        public unsafe bool IsPrefix(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> prefix,
+            CompareOptions options = CompareOptions.None
+        ) {
             // The empty string is trivially a prefix of every other string. For compat with
             // earlier versions of the Framework we'll early-exit here before validating the
             // 'options' argument.
@@ -613,12 +704,19 @@ namespace System.Globalization
         /// take a <paramref name="matchLength"/> argument. Call this overload only if you require
         /// the match length information.
         /// </remarks>
-        public unsafe bool IsPrefix(ReadOnlySpan<char> source, ReadOnlySpan<char> prefix, CompareOptions options, out int matchLength)
-        {
+        public unsafe bool IsPrefix(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> prefix,
+            CompareOptions options,
+            out int matchLength
+        ) {
             bool matched;
 
-            if (GlobalizationMode.Invariant || prefix.IsEmpty || (options & ValidIndexMaskOffFlags) != 0)
-            {
+            if (
+                GlobalizationMode.Invariant
+                || prefix.IsEmpty
+                || (options & ValidIndexMaskOffFlags) != 0
+            ) {
                 // Non-linguistic (ordinal) comparison requested, or options are invalid.
                 // Delegate to other overload, which validates options and throws on failure.
                 // If success, non-linguistic matches will always preserve prefix length.
@@ -638,10 +736,15 @@ namespace System.Globalization
             return matched;
         }
 
-        private unsafe bool StartsWithCore(ReadOnlySpan<char> source, ReadOnlySpan<char> prefix, CompareOptions options, int* matchLengthPtr) =>
-            GlobalizationMode.UseNls ?
-                NlsStartsWith(source, prefix, options, matchLengthPtr) :
-                IcuStartsWith(source, prefix, options, matchLengthPtr);
+        private unsafe bool StartsWithCore(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> prefix,
+            CompareOptions options,
+            int* matchLengthPtr
+        ) =>
+            GlobalizationMode.UseNls
+                ? NlsStartsWith(source, prefix, options, matchLengthPtr)
+                : IcuStartsWith(source, prefix, options, matchLengthPtr);
 
         public bool IsPrefix(string source, string prefix)
         {
@@ -679,8 +782,11 @@ namespace System.Globalization
         /// <exception cref="ArgumentException">
         /// <paramref name="options"/> contains an unsupported combination of flags.
         /// </exception>
-        public unsafe bool IsSuffix(ReadOnlySpan<char> source, ReadOnlySpan<char> suffix, CompareOptions options = CompareOptions.None)
-        {
+        public unsafe bool IsSuffix(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> suffix,
+            CompareOptions options = CompareOptions.None
+        ) {
             // The empty string is trivially a suffix of every other string. For compat with
             // earlier versions of the Framework we'll early-exit here before validating the
             // 'options' argument.
@@ -751,12 +857,19 @@ namespace System.Globalization
         /// take a <paramref name="matchLength"/> argument. Call this overload only if you require
         /// the match length information.
         /// </remarks>
-        public unsafe bool IsSuffix(ReadOnlySpan<char> source, ReadOnlySpan<char> suffix, CompareOptions options, out int matchLength)
-        {
+        public unsafe bool IsSuffix(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> suffix,
+            CompareOptions options,
+            out int matchLength
+        ) {
             bool matched;
 
-            if (GlobalizationMode.Invariant || suffix.IsEmpty || (options & ValidIndexMaskOffFlags) != 0)
-            {
+            if (
+                GlobalizationMode.Invariant
+                || suffix.IsEmpty
+                || (options & ValidIndexMaskOffFlags) != 0
+            ) {
                 // Non-linguistic (ordinal) comparison requested, or options are invalid.
                 // Delegate to other overload, which validates options and throws on failure.
                 // If success, non-linguistic matches will always preserve prefix length.
@@ -781,10 +894,15 @@ namespace System.Globalization
             return IsSuffix(source, suffix, CompareOptions.None);
         }
 
-        private unsafe bool EndsWithCore(ReadOnlySpan<char> source, ReadOnlySpan<char> suffix, CompareOptions options, int* matchLengthPtr) =>
-            GlobalizationMode.UseNls ?
-                NlsEndsWith(source, suffix, options, matchLengthPtr) :
-                IcuEndsWith(source, suffix, options, matchLengthPtr);
+        private unsafe bool EndsWithCore(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> suffix,
+            CompareOptions options,
+            int* matchLengthPtr
+        ) =>
+            GlobalizationMode.UseNls
+                ? NlsEndsWith(source, suffix, options, matchLengthPtr)
+                : IcuEndsWith(source, suffix, options, matchLengthPtr);
 
         /// <summary>
         /// Returns the first index where value is found in string.  The
@@ -846,7 +964,6 @@ namespace System.Globalization
             }
 
             return IndexOf(source, value, startIndex, source.Length - startIndex, options);
-
         }
 
         public int IndexOf(string source, string value, int startIndex, CompareOptions options)
@@ -869,8 +986,13 @@ namespace System.Globalization
             return IndexOf(source, value, startIndex, count, CompareOptions.None);
         }
 
-        public unsafe int IndexOf(string source, char value, int startIndex, int count, CompareOptions options)
-        {
+        public unsafe int IndexOf(
+            string source,
+            char value,
+            int startIndex,
+            int count,
+            CompareOptions options
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -883,15 +1005,25 @@ namespace System.Globalization
 
                 if ((uint)startIndex > (uint)source.Length)
                 {
-                    ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startIndex, ExceptionResource.ArgumentOutOfRange_Index);
+                    ThrowHelper.ThrowArgumentOutOfRangeException(
+                        ExceptionArgument.startIndex,
+                        ExceptionResource.ArgumentOutOfRange_Index
+                    );
                 }
                 else
                 {
-                    ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_Count);
+                    ThrowHelper.ThrowArgumentOutOfRangeException(
+                        ExceptionArgument.count,
+                        ExceptionResource.ArgumentOutOfRange_Count
+                    );
                 }
             }
 
-            int result = IndexOf(sourceSpan, MemoryMarshal.CreateReadOnlySpan(ref value, 1), options);
+            int result = IndexOf(
+                sourceSpan,
+                MemoryMarshal.CreateReadOnlySpan(ref value, 1),
+                options
+            );
             if (result >= 0)
             {
                 result += startIndex;
@@ -899,8 +1031,13 @@ namespace System.Globalization
             return result;
         }
 
-        public unsafe int IndexOf(string source, string value, int startIndex, int count, CompareOptions options)
-        {
+        public unsafe int IndexOf(
+            string source,
+            string value,
+            int startIndex,
+            int count,
+            CompareOptions options
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -917,11 +1054,17 @@ namespace System.Globalization
 
                 if ((uint)startIndex > (uint)source.Length)
                 {
-                    ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startIndex, ExceptionResource.ArgumentOutOfRange_Index);
+                    ThrowHelper.ThrowArgumentOutOfRangeException(
+                        ExceptionArgument.startIndex,
+                        ExceptionResource.ArgumentOutOfRange_Index
+                    );
                 }
                 else
                 {
-                    ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_Count);
+                    ThrowHelper.ThrowArgumentOutOfRangeException(
+                        ExceptionArgument.count,
+                        ExceptionResource.ArgumentOutOfRange_Count
+                    );
                 }
             }
 
@@ -946,8 +1089,11 @@ namespace System.Globalization
         /// <exception cref="ArgumentException">
         /// <paramref name="options"/> contains an unsupported combination of flags.
         /// </exception>
-        public unsafe int IndexOf(ReadOnlySpan<char> source, ReadOnlySpan<char> value, CompareOptions options = CompareOptions.None)
-        {
+        public unsafe int IndexOf(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> value,
+            CompareOptions options = CompareOptions.None
+        ) {
             if ((options & ValidIndexMaskOffFlags) == 0)
             {
                 // Common case: caller is attempting to perform a linguistic search.
@@ -962,7 +1108,13 @@ namespace System.Globalization
                     }
                     else
                     {
-                        return IndexOfCore(source, value, options, matchLengthPtr: null, fromBeginning: true);
+                        return IndexOfCore(
+                            source,
+                            value,
+                            options,
+                            matchLengthPtr: null,
+                            fromBeginning: true
+                        );
                     }
                 }
 
@@ -988,7 +1140,10 @@ namespace System.Globalization
                     return Ordinal.IndexOfOrdinalIgnoreCase(source, value);
                 }
 
-                ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_InvalidFlag, ExceptionArgument.options);
+                ThrowHelper.ThrowArgumentException(
+                    ExceptionResource.Argument_InvalidFlag,
+                    ExceptionArgument.options
+                );
 
                 return -1; // make the compiler happy;
             }
@@ -1016,8 +1171,12 @@ namespace System.Globalization
         /// take a <paramref name="matchLength"/> argument. Call this overload only if you require
         /// the match length information.
         /// </remarks>
-        public unsafe int IndexOf(ReadOnlySpan<char> source, ReadOnlySpan<char> value, CompareOptions options, out int matchLength)
-        {
+        public unsafe int IndexOf(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> value,
+            CompareOptions options,
+            out int matchLength
+        ) {
             int tempMatchLength;
             int retVal = IndexOf(source, value, &tempMatchLength, options, fromBeginning: true);
             matchLength = tempMatchLength;
@@ -1037,8 +1196,11 @@ namespace System.Globalization
         /// <exception cref="ArgumentException">
         /// <paramref name="options"/> contains an unsupported combination of flags.
         /// </exception>
-        public int IndexOf(ReadOnlySpan<char> source, Rune value, CompareOptions options = CompareOptions.None)
-        {
+        public int IndexOf(
+            ReadOnlySpan<char> source,
+            Rune value,
+            CompareOptions options = CompareOptions.None
+        ) {
             Span<char> valueAsUtf16 = stackalloc char[Rune.MaxUtf16CharsPerRune];
             int charCount = value.EncodeToUtf16(valueAsUtf16);
             return IndexOf(source, valueAsUtf16.Slice(0, charCount), options);
@@ -1049,8 +1211,13 @@ namespace System.Globalization
         /// Caller needs to ensure <paramref name="matchLengthPtr"/> is non-null and points
         /// to a valid address. This method will validate <paramref name="options"/>.
         /// </summary>
-        private unsafe int IndexOf(ReadOnlySpan<char> source, ReadOnlySpan<char> value, int* matchLengthPtr, CompareOptions options, bool fromBeginning)
-        {
+        private unsafe int IndexOf(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> value,
+            int* matchLengthPtr,
+            CompareOptions options,
+            bool fromBeginning
+        ) {
             Debug.Assert(matchLengthPtr != null);
             *matchLengthPtr = 0;
 
@@ -1081,7 +1248,9 @@ namespace System.Globalization
                 }
                 else
                 {
-                    retVal = fromBeginning ? Ordinal.IndexOfOrdinalIgnoreCase(source, value) : Ordinal.LastIndexOfOrdinalIgnoreCase(source, value);
+                    retVal = fromBeginning
+                        ? Ordinal.IndexOfOrdinalIgnoreCase(source, value)
+                        : Ordinal.LastIndexOfOrdinalIgnoreCase(source, value);
                 }
             }
             else
@@ -1095,11 +1264,16 @@ namespace System.Globalization
                 }
                 else if (options == CompareOptions.OrdinalIgnoreCase)
                 {
-                    retVal = fromBeginning ? Ordinal.IndexOfOrdinalIgnoreCase(source, value) : Ordinal.LastIndexOfOrdinalIgnoreCase(source, value);
+                    retVal = fromBeginning
+                        ? Ordinal.IndexOfOrdinalIgnoreCase(source, value)
+                        : Ordinal.LastIndexOfOrdinalIgnoreCase(source, value);
                 }
                 else
                 {
-                    ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_InvalidFlag, ExceptionArgument.options);
+                    ThrowHelper.ThrowArgumentException(
+                        ExceptionResource.Argument_InvalidFlag,
+                        ExceptionArgument.options
+                    );
                 }
             }
 
@@ -1114,10 +1288,16 @@ namespace System.Globalization
             return retVal;
         }
 
-        private unsafe int IndexOfCore(ReadOnlySpan<char> source, ReadOnlySpan<char> target, CompareOptions options, int* matchLengthPtr, bool fromBeginning) =>
-            GlobalizationMode.UseNls ?
-                NlsIndexOfCore(source, target, options, matchLengthPtr, fromBeginning) :
-                IcuIndexOfCore(source, target, options, matchLengthPtr, fromBeginning);
+        private unsafe int IndexOfCore(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> target,
+            CompareOptions options,
+            int* matchLengthPtr,
+            bool fromBeginning
+        ) =>
+            GlobalizationMode.UseNls
+                ? NlsIndexOfCore(source, target, options, matchLengthPtr, fromBeginning)
+                : IcuIndexOfCore(source, target, options, matchLengthPtr, fromBeginning);
 
         /// <summary>
         /// Returns the last index where value is found in string.  The
@@ -1191,14 +1371,19 @@ namespace System.Globalization
             return LastIndexOf(source, value, startIndex, count, CompareOptions.None);
         }
 
-        public int LastIndexOf(string source, char value, int startIndex, int count, CompareOptions options)
-        {
+        public int LastIndexOf(
+            string source,
+            char value,
+            int startIndex,
+            int count,
+            CompareOptions options
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
             }
 
-        TryAgain:
+            TryAgain:
 
             // Previous versions of the Framework special-cased empty 'source' to allow startIndex = -1 or startIndex = 0,
             // ignoring 'count' and short-circuiting the entire operation. We'll silently fix up the 'count' parameter
@@ -1228,7 +1413,10 @@ namespace System.Globalization
                 }
                 else
                 {
-                    ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startIndex, ExceptionResource.ArgumentOutOfRange_Index);
+                    ThrowHelper.ThrowArgumentOutOfRangeException(
+                        ExceptionArgument.startIndex,
+                        ExceptionResource.ArgumentOutOfRange_Index
+                    );
                 }
             }
 
@@ -1239,7 +1427,11 @@ namespace System.Globalization
                 ThrowHelper.ThrowCountArgumentOutOfRange_ArgumentOutOfRange_Count();
             }
 
-            int retVal = LastIndexOf(sourceSpan, MemoryMarshal.CreateReadOnlySpan(ref value, 1), options);
+            int retVal = LastIndexOf(
+                sourceSpan,
+                MemoryMarshal.CreateReadOnlySpan(ref value, 1),
+                options
+            );
             if (retVal >= 0)
             {
                 retVal += startIndex;
@@ -1247,8 +1439,13 @@ namespace System.Globalization
             return retVal;
         }
 
-        public int LastIndexOf(string source, string value, int startIndex, int count, CompareOptions options)
-        {
+        public int LastIndexOf(
+            string source,
+            string value,
+            int startIndex,
+            int count,
+            CompareOptions options
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -1258,7 +1455,7 @@ namespace System.Globalization
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.value);
             }
 
-        TryAgain:
+            TryAgain:
 
             // Previous versions of the Framework special-cased empty 'source' to allow startIndex = -1 or startIndex = 0,
             // ignoring 'count' and short-circuiting the entire operation. We'll silently fix up the 'count' parameter
@@ -1288,7 +1485,10 @@ namespace System.Globalization
                 }
                 else
                 {
-                    ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startIndex, ExceptionResource.ArgumentOutOfRange_Index);
+                    ThrowHelper.ThrowArgumentOutOfRangeException(
+                        ExceptionArgument.startIndex,
+                        ExceptionResource.ArgumentOutOfRange_Index
+                    );
                 }
             }
 
@@ -1320,8 +1520,11 @@ namespace System.Globalization
         /// <exception cref="ArgumentException">
         /// <paramref name="options"/> contains an unsupported combination of flags.
         /// </exception>
-        public unsafe int LastIndexOf(ReadOnlySpan<char> source, ReadOnlySpan<char> value, CompareOptions options = CompareOptions.None)
-        {
+        public unsafe int LastIndexOf(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> value,
+            CompareOptions options = CompareOptions.None
+        ) {
             if ((options & ValidIndexMaskOffFlags) == 0)
             {
                 // Common case: caller is attempting to perform a linguistic search.
@@ -1336,7 +1539,13 @@ namespace System.Globalization
                     }
                     else
                     {
-                        return IndexOfCore(source, value, options, matchLengthPtr: null, fromBeginning: false);
+                        return IndexOfCore(
+                            source,
+                            value,
+                            options,
+                            matchLengthPtr: null,
+                            fromBeginning: false
+                        );
                     }
                 }
 
@@ -1362,7 +1571,10 @@ namespace System.Globalization
                     return Ordinal.LastIndexOfOrdinalIgnoreCase(source, value);
                 }
 
-                throw new ArgumentException(paramName: nameof(options), message: SR.Argument_InvalidFlag);
+                throw new ArgumentException(
+                    paramName: nameof(options),
+                    message: SR.Argument_InvalidFlag
+                );
             }
         }
 
@@ -1388,8 +1600,12 @@ namespace System.Globalization
         /// take a <paramref name="matchLength"/> argument. Call this overload only if you require
         /// the match length information.
         /// </remarks>
-        public unsafe int LastIndexOf(ReadOnlySpan<char> source, ReadOnlySpan<char> value, CompareOptions options, out int matchLength)
-        {
+        public unsafe int LastIndexOf(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> value,
+            CompareOptions options,
+            out int matchLength
+        ) {
             int tempMatchLength;
             int retVal = IndexOf(source, value, &tempMatchLength, options, fromBeginning: false);
             matchLength = tempMatchLength;
@@ -1409,8 +1625,11 @@ namespace System.Globalization
         /// <exception cref="ArgumentException">
         /// <paramref name="options"/> contains an unsupported combination of flags.
         /// </exception>
-        public unsafe int LastIndexOf(ReadOnlySpan<char> source, Rune value, CompareOptions options = CompareOptions.None)
-        {
+        public unsafe int LastIndexOf(
+            ReadOnlySpan<char> source,
+            Rune value,
+            CompareOptions options = CompareOptions.None
+        ) {
             Span<char> valueAsUtf16 = stackalloc char[Rune.MaxUtf16CharsPerRune];
             int charCount = value.EncodeToUtf16(valueAsUtf16);
             return LastIndexOf(source, valueAsUtf16.Slice(0, charCount), options);
@@ -1440,9 +1659,9 @@ namespace System.Globalization
         }
 
         private SortKey CreateSortKeyCore(string source, CompareOptions options) =>
-            GlobalizationMode.UseNls ?
-                NlsCreateSortKey(source, options) :
-                IcuCreateSortKey(source, options);
+            GlobalizationMode.UseNls
+                ? NlsCreateSortKey(source, options)
+                : IcuCreateSortKey(source, options);
 
         /// <summary>
         /// Computes a sort key over the specified input.
@@ -1461,11 +1680,17 @@ namespace System.Globalization
         /// or <paramref name="source"/> cannot be processed using the desired <see cref="CompareOptions"/>
         /// under the current <see cref="CompareInfo"/>.
         /// </exception>
-        public int GetSortKey(ReadOnlySpan<char> source, Span<byte> destination, CompareOptions options = CompareOptions.None)
-        {
+        public int GetSortKey(
+            ReadOnlySpan<char> source,
+            Span<byte> destination,
+            CompareOptions options = CompareOptions.None
+        ) {
             if ((options & ValidCompareMaskOffFlags) != 0)
             {
-                ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_InvalidFlag, ExceptionArgument.options);
+                ThrowHelper.ThrowArgumentException(
+                    ExceptionResource.Argument_InvalidFlag,
+                    ExceptionArgument.options
+                );
             }
 
             if (GlobalizationMode.Invariant)
@@ -1478,10 +1703,14 @@ namespace System.Globalization
             }
         }
 
-        private int GetSortKeyCore(ReadOnlySpan<char> source, Span<byte> destination, CompareOptions options) =>
-           GlobalizationMode.UseNls ?
-               NlsGetSortKey(source, destination, options) :
-               IcuGetSortKey(source, destination, options);
+        private int GetSortKeyCore(
+            ReadOnlySpan<char> source,
+            Span<byte> destination,
+            CompareOptions options
+        ) =>
+            GlobalizationMode.UseNls
+                ? NlsGetSortKey(source, destination, options)
+                : IcuGetSortKey(source, destination, options);
 
         /// <summary>
         /// Returns the length (in bytes) of the sort key that would be produced from the specified input.
@@ -1494,11 +1723,16 @@ namespace System.Globalization
         /// or <paramref name="source"/> cannot be processed using the desired <see cref="CompareOptions"/>
         /// under the current <see cref="CompareInfo"/>.
         /// </exception>
-        public int GetSortKeyLength(ReadOnlySpan<char> source, CompareOptions options = CompareOptions.None)
-        {
+        public int GetSortKeyLength(
+            ReadOnlySpan<char> source,
+            CompareOptions options = CompareOptions.None
+        ) {
             if ((options & ValidCompareMaskOffFlags) != 0)
             {
-                ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_InvalidFlag, ExceptionArgument.options);
+                ThrowHelper.ThrowArgumentException(
+                    ExceptionResource.Argument_InvalidFlag,
+                    ExceptionArgument.options
+                );
             }
 
             if (GlobalizationMode.Invariant)
@@ -1512,14 +1746,13 @@ namespace System.Globalization
         }
 
         private int GetSortKeyLengthCore(ReadOnlySpan<char> source, CompareOptions options) =>
-          GlobalizationMode.UseNls ?
-              NlsGetSortKeyLength(source, options) :
-              IcuGetSortKeyLength(source, options);
+            GlobalizationMode.UseNls
+                ? NlsGetSortKeyLength(source, options)
+                : IcuGetSortKeyLength(source, options);
 
         public override bool Equals([NotNullWhen(true)] object? value)
         {
-            return value is CompareInfo otherCompareInfo
-                && Name == otherCompareInfo.Name;
+            return value is CompareInfo otherCompareInfo && Name == otherCompareInfo.Name;
         }
 
         public override int GetHashCode() => Name.GetHashCode();
@@ -1584,10 +1817,13 @@ namespace System.Globalization
             }
         }
 
-        private unsafe int GetHashCodeOfStringCore(ReadOnlySpan<char> source, CompareOptions options) =>
-            GlobalizationMode.UseNls ?
-                NlsGetHashCodeOfString(source, options) :
-                IcuGetHashCodeOfString(source, options);
+        private unsafe int GetHashCodeOfStringCore(
+            ReadOnlySpan<char> source,
+            CompareOptions options
+        ) =>
+            GlobalizationMode.UseNls
+                ? NlsGetHashCodeOfString(source, options)
+                : IcuGetHashCodeOfString(source, options);
 
         public override string ToString() => "CompareInfo - " + Name;
 
@@ -1599,15 +1835,29 @@ namespace System.Globalization
                 {
                     if (GlobalizationMode.Invariant)
                     {
-                        m_SortVersion = new SortVersion(0, CultureInfo.LOCALE_INVARIANT, new Guid(0, 0, 0, 0, 0, 0, 0,
-                                                                        (byte)(CultureInfo.LOCALE_INVARIANT >> 24),
-                                                                        (byte)((CultureInfo.LOCALE_INVARIANT & 0x00FF0000) >> 16),
-                                                                        (byte)((CultureInfo.LOCALE_INVARIANT & 0x0000FF00) >> 8),
-                                                                        (byte)(CultureInfo.LOCALE_INVARIANT & 0xFF)));
+                        m_SortVersion = new SortVersion(
+                            0,
+                            CultureInfo.LOCALE_INVARIANT,
+                            new Guid(
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                (byte)(CultureInfo.LOCALE_INVARIANT >> 24),
+                                (byte)((CultureInfo.LOCALE_INVARIANT & 0x00FF0000) >> 16),
+                                (byte)((CultureInfo.LOCALE_INVARIANT & 0x0000FF00) >> 8),
+                                (byte)(CultureInfo.LOCALE_INVARIANT & 0xFF)
+                            )
+                        );
                     }
                     else
                     {
-                        m_SortVersion = GlobalizationMode.UseNls ? NlsGetSortVersion() : IcuGetSortVersion();
+                        m_SortVersion = GlobalizationMode.UseNls
+                            ? NlsGetSortVersion()
+                            : IcuGetSortVersion();
                     }
                 }
 

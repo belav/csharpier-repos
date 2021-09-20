@@ -11,10 +11,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     internal sealed class FindReferencesSearchOptions
     {
         public static readonly FindReferencesSearchOptions Default =
-            new(associatePropertyReferencesWithSpecificAccessor: false,
+            new(
+                associatePropertyReferencesWithSpecificAccessor: false,
                 cascade: true,
                 @explicit: true,
-                unidirectionalHierarchyCascade: false);
+                unidirectionalHierarchyCascade: false
+            );
 
         /// <summary>
         /// When searching for property, associate specific references we find to the relevant
@@ -78,9 +80,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             bool associatePropertyReferencesWithSpecificAccessor,
             bool cascade,
             bool @explicit,
-            bool unidirectionalHierarchyCascade)
-        {
-            AssociatePropertyReferencesWithSpecificAccessor = associatePropertyReferencesWithSpecificAccessor;
+            bool unidirectionalHierarchyCascade
+        ) {
+            AssociatePropertyReferencesWithSpecificAccessor =
+                associatePropertyReferencesWithSpecificAccessor;
             Cascade = cascade;
             Explicit = @explicit;
             UnidirectionalHierarchyCascade = unidirectionalHierarchyCascade;
@@ -90,18 +93,25 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Optional<bool> associatePropertyReferencesWithSpecificAccessor = default,
             Optional<bool> cascade = default,
             Optional<bool> @explicit = default,
-            Optional<bool> unidirectionalHierarchyCascade = default)
-        {
-            var newAssociatePropertyReferencesWithSpecificAccessor = associatePropertyReferencesWithSpecificAccessor.HasValue ? associatePropertyReferencesWithSpecificAccessor.Value : AssociatePropertyReferencesWithSpecificAccessor;
+            Optional<bool> unidirectionalHierarchyCascade = default
+        ) {
+            var newAssociatePropertyReferencesWithSpecificAccessor =
+                associatePropertyReferencesWithSpecificAccessor.HasValue
+                    ? associatePropertyReferencesWithSpecificAccessor.Value
+                    : AssociatePropertyReferencesWithSpecificAccessor;
             var newCascade = cascade.HasValue ? cascade.Value : Cascade;
             var newExplicit = @explicit.HasValue ? @explicit.Value : Explicit;
-            var newUnidirectionalHierarchyCascade = unidirectionalHierarchyCascade.HasValue ? unidirectionalHierarchyCascade.Value : UnidirectionalHierarchyCascade;
+            var newUnidirectionalHierarchyCascade = unidirectionalHierarchyCascade.HasValue
+                ? unidirectionalHierarchyCascade.Value
+                : UnidirectionalHierarchyCascade;
 
-            if (newAssociatePropertyReferencesWithSpecificAccessor == AssociatePropertyReferencesWithSpecificAccessor &&
-                newCascade == Cascade &&
-                newExplicit == Explicit &&
-                newUnidirectionalHierarchyCascade == UnidirectionalHierarchyCascade)
-            {
+            if (
+                newAssociatePropertyReferencesWithSpecificAccessor
+                    == AssociatePropertyReferencesWithSpecificAccessor
+                && newCascade == Cascade
+                && newExplicit == Explicit
+                && newUnidirectionalHierarchyCascade == UnidirectionalHierarchyCascade
+            ) {
                 return this;
             }
 
@@ -109,7 +119,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 newAssociatePropertyReferencesWithSpecificAccessor,
                 newCascade,
                 newExplicit,
-                newUnidirectionalHierarchyCascade);
+                newUnidirectionalHierarchyCascade
+            );
         }
 
         /// <summary>
@@ -120,8 +131,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// inheritance hierarchy unidirectionally so that we only see potential references that could actually reach
         /// this particular member.
         /// </summary>
-        public static FindReferencesSearchOptions GetFeatureOptionsForStartingSymbol(ISymbol symbol)
-            => Default.With(associatePropertyReferencesWithSpecificAccessor: symbol.IsPropertyAccessor(),
-                            unidirectionalHierarchyCascade: true);
+        public static FindReferencesSearchOptions GetFeatureOptionsForStartingSymbol(
+            ISymbol symbol
+        ) =>
+            Default.With(
+                associatePropertyReferencesWithSpecificAccessor: symbol.IsPropertyAccessor(),
+                unidirectionalHierarchyCascade: true
+            );
     }
 }

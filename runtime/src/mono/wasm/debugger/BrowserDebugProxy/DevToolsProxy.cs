@@ -15,12 +15,14 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.WebAssembly.Diagnostics
 {
-
     internal class DevToolsProxy
     {
         private TaskCompletionSource<bool> side_exception = new TaskCompletionSource<bool>();
         private TaskCompletionSource client_initiated_close = new TaskCompletionSource();
-        private Dictionary<MessageId, TaskCompletionSource<Result>> pending_cmds = new Dictionary<MessageId, TaskCompletionSource<Result>>();
+        private Dictionary<MessageId, TaskCompletionSource<Result>> pending_cmds = new Dictionary<
+            MessageId,
+            TaskCompletionSource<Result>
+        >();
         private ClientWebSocket browser;
         private WebSocket ide;
         private int next_cmd_id;
@@ -34,13 +36,21 @@ namespace Microsoft.WebAssembly.Diagnostics
             logger = loggerFactory.CreateLogger<DevToolsProxy>();
         }
 
-        protected virtual Task<bool> AcceptEvent(SessionId sessionId, string method, JObject args, CancellationToken token)
-        {
+        protected virtual Task<bool> AcceptEvent(
+            SessionId sessionId,
+            string method,
+            JObject args,
+            CancellationToken token
+        ) {
             return Task.FromResult(false);
         }
 
-        protected virtual Task<bool> AcceptCommand(MessageId id, string method, JObject args, CancellationToken token)
-        {
+        protected virtual Task<bool> AcceptCommand(
+            MessageId id,
+            string method,
+            JObject args,
+            CancellationToken token
+        ) {
             return Task.FromResult(false);
         }
 
@@ -50,7 +60,6 @@ namespace Microsoft.WebAssembly.Diagnostics
             var mem = new MemoryStream();
             while (true)
             {
-
                 if (socket.State != WebSocketState.Open)
                 {
                     Log("error", $"DevToolsProxy: Socket is no longer open.");
@@ -58,7 +67,10 @@ namespace Microsoft.WebAssembly.Diagnostics
                     return null;
                 }
 
-                WebSocketReceiveResult result = await socket.ReceiveAsync(new ArraySegment<byte>(buff), token);
+                WebSocketReceiveResult result = await socket.ReceiveAsync(
+                    new ArraySegment<byte>(buff),
+                    token
+                );
                 if (result.MessageType == WebSocketMessageType.Close)
                 {
                     client_initiated_close.TrySetResult();
@@ -98,8 +110,12 @@ namespace Microsoft.WebAssembly.Diagnostics
                 pending_ops.Add(task);
         }
 
-        private async Task OnEvent(SessionId sessionId, string method, JObject args, CancellationToken token)
-        {
+        private async Task OnEvent(
+            SessionId sessionId,
+            string method,
+            JObject args,
+            CancellationToken token
+        ) {
             try
             {
                 if (!await AcceptEvent(sessionId, method, args, token))
@@ -114,8 +130,12 @@ namespace Microsoft.WebAssembly.Diagnostics
             }
         }
 
-        private async Task OnCommand(MessageId id, string method, JObject args, CancellationToken token)
-        {
+        private async Task OnCommand(
+            MessageId id,
+            string method,
+            JObject args,
+            CancellationToken token
+        ) {
             try
             {
                 if (!await AcceptCommand(id, method, args, token))
@@ -139,7 +159,11 @@ namespace Microsoft.WebAssembly.Diagnostics
                 task.SetResult(result);
                 return;
             }
-            logger.LogError("Cannot respond to command: {id} with result: {result} - command is not pending", id, result);
+            logger.LogError(
+                "Cannot respond to command: {id} with result: {result} - command is not pending",
+                id,
+                result
+            );
         }
 
         private void ProcessBrowserMessage(string msg, CancellationToken token)
@@ -151,7 +175,14 @@ namespace Microsoft.WebAssembly.Diagnostics
             Log("protocol", $"browser: {msg}");
 
             if (res["id"] == null)
-                pending_ops.Add(OnEvent(res.ToObject<SessionId>(), res["method"].Value<string>(), res["params"] as JObject, token));
+                pending_ops.Add(
+                    OnEvent(
+                        res.ToObject<SessionId>(),
+                        res["method"].Value<string>(),
+                        res["params"] as JObject,
+                        token
+                    )
+                );
             else
                 OnResponse(res.ToObject<MessageId>(), Result.FromJson(res));
         }
@@ -163,29 +194,31 @@ namespace Microsoft.WebAssembly.Diagnostics
             {
                 var res = JObject.Parse(msg);
                 var id = res.ToObject<MessageId>();
-                pending_ops.Add(OnCommand(
-                    id,
-                    res["method"].Value<string>(),
-                    res["params"] as JObject, token));
+                pending_ops.Add(
+                    OnCommand(id, res["method"].Value<string>(), res["params"] as JObject, token)
+                );
             }
         }
 
-        internal async Task<Result> SendCommand(SessionId id, string method, JObject args, CancellationToken token)
-        {
+        internal async Task<Result> SendCommand(
+            SessionId id,
+            string method,
+            JObject args,
+            CancellationToken token
+        ) {
             //Log ("verbose", $"sending command {method}: {args}");
             return await SendCommandInternal(id, method, args, token);
         }
 
-        private Task<Result> SendCommandInternal(SessionId sessionId, string method, JObject args, CancellationToken token)
-        {
+        private Task<Result> SendCommandInternal(
+            SessionId sessionId,
+            string method,
+            JObject args,
+            CancellationToken token
+        ) {
             int id = Interlocked.Increment(ref next_cmd_id);
 
-            var o = JObject.FromObject(new
-            {
-                id,
-                method,
-                @params = args
-            });
+            var o = JObject.FromObject(new { id, method, @params = args });
             if (sessionId.sessionId != null)
                 o["sessionId"] = sessionId.sessionId;
             var tcs = new TaskCompletionSource<Result>();
@@ -198,19 +231,23 @@ namespace Microsoft.WebAssembly.Diagnostics
             return tcs.Task;
         }
 
-        public void SendEvent(SessionId sessionId, string method, JObject args, CancellationToken token)
-        {
+        public void SendEvent(
+            SessionId sessionId,
+            string method,
+            JObject args,
+            CancellationToken token
+        ) {
             //Log ("verbose", $"sending event {method}: {args}");
             SendEventInternal(sessionId, method, args, token);
         }
 
-        private void SendEventInternal(SessionId sessionId, string method, JObject args, CancellationToken token)
-        {
-            var o = JObject.FromObject(new
-            {
-                method,
-                @params = args
-            });
+        private void SendEventInternal(
+            SessionId sessionId,
+            string method,
+            JObject args,
+            CancellationToken token
+        ) {
+            var o = JObject.FromObject(new { method, @params = args });
             if (sessionId.sessionId != null)
                 o["sessionId"] = sessionId.sessionId;
 
@@ -262,9 +299,11 @@ namespace Microsoft.WebAssembly.Diagnostics
                             if (client_initiated_close.Task.IsCompleted)
                             {
                                 await client_initiated_close.Task.ConfigureAwait(false);
-                                Log("verbose", $"DevToolsProxy: Client initiated close from {browserUri}");
+                                Log(
+                                    "verbose",
+                                    $"DevToolsProxy: Client initiated close from {browserUri}"
+                                );
                                 x.Cancel();
-
                                 break;
                             }
 
@@ -290,7 +329,9 @@ namespace Microsoft.WebAssembly.Diagnostics
                             else if (task == pending_ops[2])
                             {
                                 bool res = ((Task<bool>)task).Result;
-                                throw new Exception("side task must always complete with an exception, what's going on???");
+                                throw new Exception(
+                                    "side task must always complete with an exception, what's going on???"
+                                );
                             }
                             else
                             {

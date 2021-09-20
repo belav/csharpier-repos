@@ -16,7 +16,8 @@ namespace System.Net
 
         private static unsafe int GetIPv6AddressSize()
         {
-            int ipv6AddressSize, unused;
+            int ipv6AddressSize,
+                unused;
             Interop.Error err = Interop.Sys.GetIPSocketAddressSizes(&unused, &ipv6AddressSize);
             Debug.Assert(err == Interop.Error.SUCCESS, $"Unexpected err: {err}");
             return ipv6AddressSize;
@@ -24,7 +25,8 @@ namespace System.Net
 
         private static unsafe int GetIPv4AddressSize()
         {
-            int ipv4AddressSize, unused;
+            int ipv4AddressSize,
+                unused;
             Interop.Error err = Interop.Sys.GetIPSocketAddressSizes(&ipv4AddressSize, &unused);
             Debug.Assert(err == Interop.Error.SUCCESS, $"Unexpected err: {err}");
             return ipv4AddressSize;
@@ -116,14 +118,23 @@ namespace System.Net
             return ipAddress;
         }
 
-        public static unsafe void GetIPv6Address(ReadOnlySpan<byte> buffer, Span<byte> address, out uint scope)
-        {
+        public static unsafe void GetIPv6Address(
+            ReadOnlySpan<byte> buffer,
+            Span<byte> address,
+            out uint scope
+        ) {
             uint localScope;
             Interop.Error err;
-            fixed (byte* rawAddress = &MemoryMarshal.GetReference(buffer))
-            fixed (byte* ipAddress = &MemoryMarshal.GetReference(address))
-            {
-                err = Interop.Sys.GetIPv6Address(rawAddress, buffer.Length, ipAddress, address.Length, &localScope);
+            fixed (byte* rawAddress = &MemoryMarshal.GetReference(buffer))fixed (
+                byte* ipAddress = &MemoryMarshal.GetReference(address)
+            ) {
+                err = Interop.Sys.GetIPv6Address(
+                    rawAddress,
+                    buffer.Length,
+                    ipAddress,
+                    address.Length,
+                    &localScope
+                );
             }
 
             ThrowOnFailure(err);
@@ -155,12 +166,22 @@ namespace System.Net
             }
         }
 
-        public static unsafe void SetIPv6Address(byte[] buffer, byte* address, int addressLength, uint scope)
-        {
+        public static unsafe void SetIPv6Address(
+            byte[] buffer,
+            byte* address,
+            int addressLength,
+            uint scope
+        ) {
             Interop.Error err;
             fixed (byte* rawAddress = buffer)
             {
-                err = Interop.Sys.SetIPv6Address(rawAddress, buffer.Length, address, addressLength, scope);
+                err = Interop.Sys.SetIPv6Address(
+                    rawAddress,
+                    buffer.Length,
+                    address,
+                    addressLength,
+                    scope
+                );
             }
 
             ThrowOnFailure(err);

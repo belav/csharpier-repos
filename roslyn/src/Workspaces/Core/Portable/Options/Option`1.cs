@@ -31,34 +31,56 @@ namespace Microsoft.CodeAnalysis.Options
         public ImmutableArray<OptionStorageLocation> StorageLocations { get; }
 
         [Obsolete("Use a constructor that specifies an explicit default value.")]
-        public Option(string feature, string name)
-            : this(feature, name, default!)
+        public Option(string feature, string name) : this(feature, name, default!)
         {
             // This constructor forwards to the next one; it exists to maintain source-level compatibility with older callers.
         }
 
         public Option(string feature, string name, T defaultValue)
-            : this(feature, name, defaultValue, storageLocations: Array.Empty<OptionStorageLocation>())
-        {
-        }
+            : this(
+                feature,
+                name,
+                defaultValue,
+                storageLocations: Array.Empty<OptionStorageLocation>()
+            ) { }
 
-        public Option(string feature, string name, T defaultValue, params OptionStorageLocation[] storageLocations)
-            : this(feature, group: OptionGroup.Default, name, defaultValue, storageLocations)
-        {
-        }
+        public Option(
+            string feature,
+            string name,
+            T defaultValue,
+            params OptionStorageLocation[] storageLocations
+        ) : this(feature, group: OptionGroup.Default, name, defaultValue, storageLocations) { }
 
-        internal Option(string feature, OptionGroup group, string name, T defaultValue, params OptionStorageLocation[] storageLocations)
-            : this(feature, group, name, defaultValue, storageLocations.ToImmutableArray())
-        {
-        }
+        internal Option(
+            string feature,
+            OptionGroup group,
+            string name,
+            T defaultValue,
+            params OptionStorageLocation[] storageLocations
+        ) : this(feature, group, name, defaultValue, storageLocations.ToImmutableArray()) { }
 
-        internal Option(string feature, OptionGroup group, string name, T defaultValue, ImmutableArray<OptionStorageLocation> storageLocations)
-            : this(new OptionDefinition(feature, group, name, defaultValue, typeof(T), isPerLanguage: false), storageLocations)
-        {
-        }
+        internal Option(
+            string feature,
+            OptionGroup group,
+            string name,
+            T defaultValue,
+            ImmutableArray<OptionStorageLocation> storageLocations
+        ) : this(
+            new OptionDefinition(
+                feature,
+                group,
+                name,
+                defaultValue,
+                typeof(T),
+                isPerLanguage: false
+            ),
+            storageLocations
+        ) { }
 
-        internal Option(OptionDefinition optionDefinition, ImmutableArray<OptionStorageLocation> storageLocations)
-        {
+        internal Option(
+            OptionDefinition optionDefinition,
+            ImmutableArray<OptionStorageLocation> storageLocations
+        ) {
             _optionDefinition = optionDefinition;
             this.StorageLocations = storageLocations;
         }
@@ -89,7 +111,6 @@ namespace Microsoft.CodeAnalysis.Options
             return _optionDefinition == other?.OptionDefinition;
         }
 
-        public static implicit operator OptionKey(Option<T> option)
-            => new(option);
+        public static implicit operator OptionKey(Option<T> option) => new(option);
     }
 }

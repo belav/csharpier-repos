@@ -15,14 +15,21 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     public class DebugDirectoryNode : ObjectNode, ISymbolDefinitionNode
     {
         const int ImageDebugDirectorySize =
-            sizeof(int) +   // Characteristics
-            sizeof(int) +   // TimeDateStamp
-            sizeof(short) + // MajorVersion:
-            sizeof(short) + // MinorVersion
-            sizeof(int) +   // Type
-            sizeof(int) +   // SizeOfData:
-            sizeof(int) +   // AddressOfRawData:
-            sizeof(int);    // PointerToRawData
+            sizeof(int)
+            + // Characteristics
+            sizeof(int)
+            + // TimeDateStamp
+            sizeof(short)
+            + // MajorVersion:
+            sizeof(short)
+            + // MinorVersion
+            sizeof(int)
+            + // Type
+            sizeof(int)
+            + // SizeOfData:
+            sizeof(int)
+            + // AddressOfRawData:
+            sizeof(int); // PointerToRawData
 
         private EcmaModule _module;
         private NativeDebugDirectoryEntryNode _nativeEntry;
@@ -52,7 +59,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public int Offset => 0;
 
-        public int Size => (GetNumDebugDirectoryEntriesInModule() + 1 + (_insertDeterministicEntry ? 1 : 0)) * ImageDebugDirectorySize;
+        public int Size =>
+            (GetNumDebugDirectoryEntriesInModule() + 1 + (_insertDeterministicEntry ? 1 : 0))
+            * ImageDebugDirectorySize;
 
         public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
@@ -66,7 +75,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             sb.Append($"__DebugDirectory_{directoryName}");
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         int GetNumDebugDirectoryEntriesInModule()
         {
@@ -83,7 +93,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             builder.RequireInitialPointerAlignment();
             builder.AddSymbol(this);
 
-            ImmutableArray<DebugDirectoryEntry> entries = default(ImmutableArray<DebugDirectoryEntry>);
+            ImmutableArray<DebugDirectoryEntry> entries =
+                default(ImmutableArray<DebugDirectoryEntry>);
             if (_module != null)
                 entries = _module.PEReader.ReadDebugDirectory();
 
@@ -93,7 +104,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             {
                 var entry = _nativeEntry;
 
-                builder.EmitUInt(0 /* Characteristics */);
+                builder.EmitUInt(
+                    0 /* Characteristics */
+                );
                 if (numEntries > 0)
                 {
                     builder.EmitUInt(entries[0].Stamp);
@@ -107,7 +120,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 // Make sure the "is portable pdb" indicator (MinorVersion == 0x504d) is clear
                 // for the NGen debug directory entry since this debug directory can be copied
                 // from an existing entry which could be a portable pdb.
-                builder.EmitUShort(0 /* MinorVersion */);
+                builder.EmitUShort(
+                    0 /* MinorVersion */
+                );
                 builder.EmitInt((int)DebugDirectoryEntryType.CodeView);
                 builder.EmitInt(entry.Size);
                 builder.EmitReloc(entry, RelocType.IMAGE_REL_BASED_ADDR32NB);
@@ -117,7 +132,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             // If generating a composite image, emit the deterministic marker
             if (_insertDeterministicEntry)
             {
-                builder.EmitUInt(0 /* Characteristics */);
+                builder.EmitUInt(
+                    0 /* Characteristics */
+                );
                 builder.EmitUInt(0);
                 builder.EmitUShort(0);
                 builder.EmitUShort(0);
@@ -130,7 +147,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             // Second, copy existing entries from input module
             for (int i = 0; i < numEntries; i++)
             {
-                builder.EmitUInt(0 /* Characteristics */);
+                builder.EmitUInt(
+                    0 /* Characteristics */
+                );
                 builder.EmitUInt(entries[i].Stamp);
                 builder.EmitUShort(entries[i].MajorVersion);
                 builder.EmitUShort(entries[i].MinorVersion);
@@ -143,8 +162,14 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 }
                 else
                 {
-                    builder.EmitReloc(factory.DebugDirectoryEntry(_module, i), RelocType.IMAGE_REL_BASED_ADDR32NB);
-                    builder.EmitReloc(factory.DebugDirectoryEntry(_module, i), RelocType.IMAGE_REL_FILE_ABSOLUTE);
+                    builder.EmitReloc(
+                        factory.DebugDirectoryEntry(_module, i),
+                        RelocType.IMAGE_REL_BASED_ADDR32NB
+                    );
+                    builder.EmitReloc(
+                        factory.DebugDirectoryEntry(_module, i),
+                        RelocType.IMAGE_REL_FILE_ABSOLUTE
+                    );
                 }
             }
 

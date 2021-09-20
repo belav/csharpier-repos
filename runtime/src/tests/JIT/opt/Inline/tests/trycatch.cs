@@ -19,8 +19,7 @@ namespace JitInliningTest
                 {
                     _prop = value;
                 }
-                catch
-                { }
+                catch { }
             }
         }
     }

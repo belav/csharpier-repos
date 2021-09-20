@@ -20,13 +20,15 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
     /// </summary>
     public class WsFederationOptions : RemoteAuthenticationOptions
     {
-        private ICollection<ISecurityTokenValidator> _securityTokenHandlers = new Collection<ISecurityTokenValidator>()
-        {
-            new Saml2SecurityTokenHandler(),
-            new SamlSecurityTokenHandler(),
-            new JwtSecurityTokenHandler()
-        };
-        private TokenValidationParameters _tokenValidationParameters = new TokenValidationParameters();
+        private ICollection<ISecurityTokenValidator> _securityTokenHandlers =
+            new Collection<ISecurityTokenValidator>()
+            {
+                new Saml2SecurityTokenHandler(),
+                new SamlSecurityTokenHandler(),
+                new JwtSecurityTokenHandler()
+            };
+        private TokenValidationParameters _tokenValidationParameters =
+            new TokenValidationParameters();
 
         /// <summary>
         /// Initializes a new <see cref="WsFederationOptions"/>
@@ -50,8 +52,10 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
 
             if (ConfigurationManager == null)
             {
-                throw new InvalidOperationException($"Provide {nameof(MetadataAddress)}, "
-                + $"{nameof(Configuration)}, or {nameof(ConfigurationManager)} to {nameof(WsFederationOptions)}");
+                throw new InvalidOperationException(
+                    $"Provide {nameof(MetadataAddress)}, "
+                        + $"{nameof(Configuration)}, or {nameof(ConfigurationManager)} to {nameof(WsFederationOptions)}"
+                );
             }
         }
 
@@ -70,7 +74,8 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
         /// Responsible for retrieving, caching, and refreshing the configuration from metadata.
         /// If not provided, then one will be created using the MetadataAddress and Backchannel properties.
         /// </summary>
-        public IConfigurationManager<WsFederationConfiguration> ConfigurationManager { get; set; } = default!;
+        public IConfigurationManager<WsFederationConfiguration> ConfigurationManager { get; set; } =
+            default!;
 
         /// <summary>
         /// Gets or sets if a metadata refresh should be attempted after a SecurityTokenSignatureKeyNotFoundException. This allows for automatic
@@ -100,13 +105,11 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
         /// </summary>
         public ICollection<ISecurityTokenValidator> SecurityTokenHandlers
         {
-            get
-            {
-                return _securityTokenHandlers;
-            }
+            get { return _securityTokenHandlers; }
             set
             {
-                _securityTokenHandlers = value ?? throw new ArgumentNullException(nameof(SecurityTokenHandlers));
+                _securityTokenHandlers =
+                    value ?? throw new ArgumentNullException(nameof(SecurityTokenHandlers));
             }
         }
 
@@ -121,13 +124,11 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
         /// <exception cref="ArgumentNullException"> if 'TokenValidationParameters' is null.</exception>
         public TokenValidationParameters TokenValidationParameters
         {
-            get
-            {
-                return _tokenValidationParameters;
-            }
+            get { return _tokenValidationParameters; }
             set
             {
-                _tokenValidationParameters = value ?? throw new ArgumentNullException(nameof(TokenValidationParameters));
+                _tokenValidationParameters =
+                    value ?? throw new ArgumentNullException(nameof(TokenValidationParameters));
             }
         }
 
@@ -142,7 +143,7 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
         /// If none is specified then the value from the Wreply field is used.
         /// </summary>
         public string? SignOutWreply { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the 'wtrealm'.
         /// </summary>
@@ -177,7 +178,7 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
         /// is not set.
         /// </summary>
         public string? SignOutScheme { get; set; }
-        
+
         /// <summary>
         /// SaveTokens is not supported in WsFederation
         /// </summary>

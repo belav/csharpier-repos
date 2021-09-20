@@ -22,17 +22,17 @@ class ThreadStartGen
     public static int Main(string[] args)
     {
         // check args
-        if(args.Length != 1)
+        if (args.Length != 1)
         {
             Console.WriteLine("USAGE: ThreadStartInt <int>|min|max\n");
             return -1;
         }
 
         // check for max or min
-        if(args[0].ToLower() == "max")
+        if (args[0].ToLower() == "max")
             iSet = Int32.MaxValue;
-        else if(args[0].ToLower() == "min")
-            iSet = Int32.MinValue;       
+        else if (args[0].ToLower() == "min")
+            iSet = Int32.MinValue;
         else
             iSet = Convert.ToInt32(args[0]);
 

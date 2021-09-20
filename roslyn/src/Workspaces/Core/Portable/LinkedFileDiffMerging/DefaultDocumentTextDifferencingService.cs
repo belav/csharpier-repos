@@ -18,17 +18,33 @@ namespace Microsoft.CodeAnalysis
     internal class DefaultDocumentTextDifferencingService : IDocumentTextDifferencingService
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Incorrectly used in production code: https://github.com/dotnet/roslyn/issues/42839")]
-        public DefaultDocumentTextDifferencingService()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Incorrectly used in production code: https://github.com/dotnet/roslyn/issues/42839"
+        )]
+        public DefaultDocumentTextDifferencingService() { }
 
-        public Task<ImmutableArray<TextChange>> GetTextChangesAsync(Document oldDocument, Document newDocument, CancellationToken cancellationToken)
-            => GetTextChangesAsync(oldDocument, newDocument, TextDifferenceTypes.Word, cancellationToken);
+        public Task<ImmutableArray<TextChange>> GetTextChangesAsync(
+            Document oldDocument,
+            Document newDocument,
+            CancellationToken cancellationToken
+        ) =>
+            GetTextChangesAsync(
+                oldDocument,
+                newDocument,
+                TextDifferenceTypes.Word,
+                cancellationToken
+            );
 
-        public async Task<ImmutableArray<TextChange>> GetTextChangesAsync(Document oldDocument, Document newDocument, TextDifferenceTypes preferredDifferenceType, CancellationToken cancellationToken)
-        {
-            var changes = await newDocument.GetTextChangesAsync(oldDocument, cancellationToken).ConfigureAwait(false);
+        public async Task<ImmutableArray<TextChange>> GetTextChangesAsync(
+            Document oldDocument,
+            Document newDocument,
+            TextDifferenceTypes preferredDifferenceType,
+            CancellationToken cancellationToken
+        ) {
+            var changes = await newDocument.GetTextChangesAsync(oldDocument, cancellationToken)
+                .ConfigureAwait(false);
             return changes.ToImmutableArray();
         }
     }

@@ -58,8 +58,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             IEntityMaterializerSource entityMaterializerSource,
             ITypeMappingSource typeMappingSource,
             IMemoryCache memoryCache,
-            ICoreSingletonOptions coreSingletonOptions)
-        {
+            ICoreSingletonOptions coreSingletonOptions
+        ) {
             Check.NotNull(entityMaterializerSource, nameof(entityMaterializerSource));
             Check.NotNull(typeMappingSource, nameof(typeMappingSource));
             Check.NotNull(memoryCache, nameof(memoryCache));

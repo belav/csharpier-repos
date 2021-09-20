@@ -13,9 +13,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.SignatureHelp
         public FSharpSignatureHelpTriggerReason TriggerReason { get; }
         public char? TriggerCharacter { get; }
 
-        internal FSharpSignatureHelpTriggerInfo(FSharpSignatureHelpTriggerReason triggerReason, char? triggerCharacter = null)
-        {
-            Contract.ThrowIfTrue(triggerReason == FSharpSignatureHelpTriggerReason.TypeCharCommand && triggerCharacter == null);
+        internal FSharpSignatureHelpTriggerInfo(
+            FSharpSignatureHelpTriggerReason triggerReason,
+            char? triggerCharacter = null
+        ) {
+            Contract.ThrowIfTrue(
+                triggerReason == FSharpSignatureHelpTriggerReason.TypeCharCommand
+                    && triggerCharacter == null
+            );
             this.TriggerReason = triggerReason;
             this.TriggerCharacter = triggerCharacter;
         }

@@ -27,8 +27,11 @@ namespace Microsoft.AspNetCore.Http
         /// <param name="headers">The <see cref="IHeaderDictionary"/> to use.</param>
         /// <param name="key">The header name.</param>
         /// <param name="values">The header values.</param>
-        public static void AppendCommaSeparatedValues(this IHeaderDictionary headers, string key, params string[] values)
-        {
+        public static void AppendCommaSeparatedValues(
+            this IHeaderDictionary headers,
+            string key,
+            params string[] values
+        ) {
             ParsingHelpers.AppendHeaderJoined(headers, key, values);
         }
 
@@ -50,8 +53,11 @@ namespace Microsoft.AspNetCore.Http
         /// <param name="headers">The <see cref="IHeaderDictionary"/> to use.</param>
         /// <param name="key">The header name.</param>
         /// <param name="values">The header values.</param>
-        public static void SetCommaSeparatedValues(this IHeaderDictionary headers, string key, params string[] values)
-        {
+        public static void SetCommaSeparatedValues(
+            this IHeaderDictionary headers,
+            string key,
+            params string[] values
+        ) {
             ParsingHelpers.SetHeaderJoined(headers, key, values);
         }
     }

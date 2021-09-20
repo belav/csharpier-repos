@@ -28,14 +28,23 @@ namespace AutoMapper.UnitTests.Bug
             public int Value { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>();
+                }
+            );
 
         protected override void Because_of()
         {
-            _source = new[,] { { _e, _e, new Source(2) },  { _e, new Source(11), _e }, { new Source(20), _e, _e }, {_e, _e, _e } };
+            _source = new[,]
+            {
+                { _e, _e, new Source(2) },
+                { _e, new Source(11), _e },
+                { new Source(20), _e, _e },
+                { _e, _e, _e }
+            };
             _destination = Mapper.Map<Destination[,]>(_source);
         }
 
@@ -58,13 +67,13 @@ namespace AutoMapper.UnitTests.Bug
         MultidimensionalArrayFiller _filler;
         protected override void Establish_context()
         {
-            _source = new int[4,3];
+            _source = new int[4, 3];
             _filler = new MultidimensionalArrayFiller(_source);
         }
 
         protected override void Because_of()
         {
-            for(int index = 0; index < _source.Length; index++)
+            for (int index = 0; index < _source.Length; index++)
             {
                 _filler.NewValue(index);
             }
@@ -74,7 +83,7 @@ namespace AutoMapper.UnitTests.Bug
         public void Should_set_values_in_array()
         {
             int index = 0;
-            foreach(var value in _source)
+            foreach (var value in _source)
             {
                 value.ShouldBe(index);
                 index++;

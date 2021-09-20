@@ -33,8 +33,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             ParameterBinder parameterBinder,
             IModelMetadataProvider modelMetadataProvider,
             IModelBinderFactory modelBinderFactory,
-            IOptions<MvcOptions> mvcOptions)
-        {
+            IOptions<MvcOptions> mvcOptions
+        ) {
             _pageFactoryProvider = pageFactoryProvider;
             _modelFactoryProvider = modelFactoryProvider;
             _modelBinderFactory = modelBinderFactory;
@@ -45,8 +45,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             _mvcOptions = mvcOptions.Value;
         }
 
-        public (PageActionInvokerCacheEntry cacheEntry, IFilterMetadata[] filters) GetCachedResult(ActionContext actionContext)
-        {
+        public (PageActionInvokerCacheEntry cacheEntry, IFilterMetadata[] filters) GetCachedResult(
+            ActionContext actionContext
+        ) {
             var actionDescriptor = actionContext.ActionDescriptor as PageActionDescriptor;
 
             var compiledPageActionDescriptor = actionDescriptor.CompiledPageDescriptor;
@@ -59,9 +60,15 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             if (cacheEntry is null)
             {
                 actionContext.ActionDescriptor = compiledPageActionDescriptor;
-                var filterFactoryResult = FilterFactory.GetAllFilters(_filterProviders, actionContext);
+                var filterFactoryResult = FilterFactory.GetAllFilters(
+                    _filterProviders,
+                    actionContext
+                );
                 filters = filterFactoryResult.Filters;
-                cacheEntry = CreateCacheEntry(compiledPageActionDescriptor, filterFactoryResult.CacheableFilters);
+                cacheEntry = CreateCacheEntry(
+                    compiledPageActionDescriptor,
+                    filterFactoryResult.CacheableFilters
+                );
                 compiledPageActionDescriptor.CacheEntry = cacheEntry;
             }
             else
@@ -69,7 +76,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 filters = FilterFactory.CreateUncachedFilters(
                     _filterProviders,
                     actionContext,
-                    cacheEntry.CacheableFilters);
+                    cacheEntry.CacheableFilters
+                );
             }
 
             return (cacheEntry, filters);
@@ -77,24 +85,31 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
         private PageActionInvokerCacheEntry CreateCacheEntry(
             CompiledPageActionDescriptor compiledActionDescriptor,
-            FilterItem[] cachedFilters)
-        {
-            var viewDataFactory = ViewDataDictionaryFactory.CreateFactory(compiledActionDescriptor.DeclaredModelTypeInfo);
+            FilterItem[] cachedFilters
+        ) {
+            var viewDataFactory = ViewDataDictionaryFactory.CreateFactory(
+                compiledActionDescriptor.DeclaredModelTypeInfo
+            );
 
             var pageFactory = _pageFactoryProvider.CreatePageFactory(compiledActionDescriptor);
-            var pageDisposer = _pageFactoryProvider.CreateAsyncPageDisposer(compiledActionDescriptor);
+            var pageDisposer = _pageFactoryProvider.CreateAsyncPageDisposer(
+                compiledActionDescriptor
+            );
             var propertyBinder = PageBinderFactory.CreatePropertyBinder(
                 _parameterBinder,
                 _modelMetadataProvider,
                 _modelBinderFactory,
-                compiledActionDescriptor);
+                compiledActionDescriptor
+            );
 
             Func<PageContext, object> modelFactory = null;
             Func<PageContext, object, ValueTask> modelReleaser = null;
             if (compiledActionDescriptor.ModelTypeInfo != compiledActionDescriptor.PageTypeInfo)
             {
                 modelFactory = _modelFactoryProvider.CreateModelFactory(compiledActionDescriptor);
-                modelReleaser = _modelFactoryProvider.CreateAsyncModelDisposer(compiledActionDescriptor);
+                modelReleaser = _modelFactoryProvider.CreateAsyncModelDisposer(
+                    compiledActionDescriptor
+                );
             }
 
             var viewStartFactories = GetViewStartFactories(compiledActionDescriptor);
@@ -113,12 +128,14 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 handlerExecutors,
                 handlerBinders,
                 viewStartFactories,
-                cachedFilters);
+                cachedFilters
+            );
         }
 
         // Internal for testing.
-        internal List<Func<IRazorPage>> GetViewStartFactories(CompiledPageActionDescriptor descriptor)
-        {
+        internal List<Func<IRazorPage>> GetViewStartFactories(
+            CompiledPageActionDescriptor descriptor
+        ) {
             var viewStartFactories = new List<Func<IRazorPage>>();
             // Always pick up all _ViewStarts, including the ones outside the Pages root.
             foreach (var filePath in RazorFileHierarchy.GetViewStartPaths(descriptor.RelativePath))
@@ -133,10 +150,13 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             return viewStartFactories;
         }
 
-        private static PageHandlerExecutorDelegate[] GetHandlerExecutors(CompiledPageActionDescriptor actionDescriptor)
-        {
-            if (actionDescriptor.HandlerMethods == null || actionDescriptor.HandlerMethods.Count == 0)
-            {
+        private static PageHandlerExecutorDelegate[] GetHandlerExecutors(
+            CompiledPageActionDescriptor actionDescriptor
+        ) {
+            if (
+                actionDescriptor.HandlerMethods == null
+                || actionDescriptor.HandlerMethods.Count == 0
+            ) {
                 return Array.Empty<PageHandlerExecutorDelegate>();
             }
 
@@ -150,10 +170,13 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             return results;
         }
 
-        private PageHandlerBinderDelegate[] GetHandlerBinders(CompiledPageActionDescriptor actionDescriptor)
-        {
-            if (actionDescriptor.HandlerMethods == null || actionDescriptor.HandlerMethods.Count == 0)
-            {
+        private PageHandlerBinderDelegate[] GetHandlerBinders(
+            CompiledPageActionDescriptor actionDescriptor
+        ) {
+            if (
+                actionDescriptor.HandlerMethods == null
+                || actionDescriptor.HandlerMethods.Count == 0
+            ) {
                 return Array.Empty<PageHandlerBinderDelegate>();
             }
 
@@ -167,7 +190,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                     _modelBinderFactory,
                     actionDescriptor,
                     actionDescriptor.HandlerMethods[i],
-                    _mvcOptions);
+                    _mvcOptions
+                );
             }
 
             return results;

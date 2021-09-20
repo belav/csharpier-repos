@@ -14,13 +14,15 @@ namespace Components.TestServer.Controllers
             if (culture != null)
             {
                 HttpContext.Response.Cookies.Append(
-                    CookieRequestCultureProvider.DefaultCookieName, 
-                    CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)));
+                    CookieRequestCultureProvider.DefaultCookieName,
+                    CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture))
+                );
             }
 
             var htmlEncoder = HtmlEncoder.Default;
-            var html = $"<h1>Culture has been changed to {htmlEncoder.Encode(culture)}</h1>" +
-                $"<a class='return-from-culture-setter' href='{htmlEncoder.Encode(redirectUri)}'>Return to previous page</a>";
+            var html =
+                $"<h1>Culture has been changed to {htmlEncoder.Encode(culture)}</h1>"
+                + $"<a class='return-from-culture-setter' href='{htmlEncoder.Encode(redirectUri)}'>Return to previous page</a>";
             return Content(html, "text/html");
         }
     }

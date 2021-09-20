@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         public delegate TValue CreateValueCallback(TKey key);
     }".Replace("<", "&lt;").Replace(">", "&gt;");
 
-            var workspaceXml = @$"
+            var workspaceXml =
+                @$"
 <Workspace>
     <Project Language=""C#"">
         <CompilationOptions Nullable=""Enable""/>
@@ -61,7 +62,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             var method = type.GetMembers("GetValue").OfType<IMethodSymbol>().Single();
             var callbackParamater = method.Parameters[1];
             var parameterType = callbackParamater.Type;
-            Assert.Equal("global::ConditionalWeakTableTest<TKey!, TValue!>.CreateValueCallback!", parameterType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat.WithMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier)));
+            Assert.Equal(
+                "global::ConditionalWeakTableTest<TKey!, TValue!>.CreateValueCallback!",
+                parameterType.ToDisplayString(
+                    SymbolDisplayFormat.FullyQualifiedFormat.WithMiscellaneousOptions(
+                        SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
+                    )
+                )
+            );
 
             var symbolKey = SymbolKey.Create(method);
             var resolved = symbolKey.Resolve(compilation).Symbol;
@@ -87,14 +95,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
                 var solution = workspace.CurrentSolution;
 
                 var bodyProject = solution.Projects.Single(p => p.AssemblyName == "BodyProject");
-                var referenceProject = solution.Projects.Single(p => p.AssemblyName == "ReferenceProject");
+                var referenceProject = solution.Projects.Single(
+                    p => p.AssemblyName == "ReferenceProject"
+                );
 
-                var (bodyCompilation, referenceCompilation) = await GetCompilationsAsync(bodyProject, referenceProject);
-                var (bodyLocalSymbol, referenceAssemblySymbol) = await GetSymbolsAsync(bodyCompilation, referenceCompilation);
+                var (bodyCompilation, referenceCompilation) = await GetCompilationsAsync(
+                    bodyProject,
+                    referenceProject
+                );
+                var (bodyLocalSymbol, referenceAssemblySymbol) = await GetSymbolsAsync(
+                    bodyCompilation,
+                    referenceCompilation
+                );
 
-                var (bodyLocalProjectId, referenceAssemblyProjectId) = GetOriginatingProjectIds(solution, bodyLocalSymbol, referenceAssemblySymbol);
+                var (bodyLocalProjectId, referenceAssemblyProjectId) = GetOriginatingProjectIds(
+                    solution,
+                    bodyLocalSymbol,
+                    referenceAssemblySymbol
+                );
 
-                Assert.True(bodyProject.Id == bodyLocalProjectId, $"Expected {bodyProject.Id} == {bodyLocalProjectId}. {i}");
+                Assert.True(
+                    bodyProject.Id == bodyLocalProjectId,
+                    $"Expected {bodyProject.Id} == {bodyLocalProjectId}. {i}"
+                );
                 Assert.Equal(referenceProject.Id, referenceAssemblyProjectId);
             }
 
@@ -102,7 +125,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
 
             TestWorkspace GetWorkspace()
             {
-                var bodyProject = @"
+                var bodyProject =
+                    @"
     <Project Language=""C#"" AssemblyName=""BodyProject"" CommonReferences=""true"">
         <Document>
 class Program
@@ -114,7 +138,8 @@ class Program
 }
         </Document>
     </Project>";
-                var referenceProject = @"
+                var referenceProject =
+                    @"
     <Project Language=""C#"" AssemblyName=""ReferenceProject"" CommonReferences=""true"">
         <ProjectReference>BodyProject</ProjectReference>
         <Document>
@@ -124,28 +149,39 @@ class Program
                 // Randomize the order of the projects in the workspace.
                 if (random.Next() % 2 == 0)
                 {
-                    return TestWorkspace.CreateWorkspace(XElement.Parse($@"
+                    return TestWorkspace.CreateWorkspace(
+                        XElement.Parse(
+                            $@"
 <Workspace>
     {bodyProject}
     {referenceProject}
 </Workspace>
-"));
+"
+                        )
+                    );
                 }
                 else
                 {
-                    return TestWorkspace.CreateWorkspace(XElement.Parse($@"
+                    return TestWorkspace.CreateWorkspace(
+                        XElement.Parse(
+                            $@"
 <Workspace>
     {referenceProject}
     {bodyProject}
 </Workspace>
-"));
+"
+                        )
+                    );
                 }
             }
 
-            async Task<(Compilation bodyCompilation, Compilation referenceCompilation)> GetCompilationsAsync(Project bodyProject, Project referenceProject)
-            {
+            async Task<(Compilation bodyCompilation, Compilation referenceCompilation)> GetCompilationsAsync(
+                Project bodyProject,
+                Project referenceProject
+            ) {
                 // Randomize the order that we get compilations (and thus populate our internal caches).
-                Compilation bodyCompilation, referenceCompilation;
+                Compilation bodyCompilation,
+                    referenceCompilation;
                 if (random.Next() % 2 == 0)
                 {
                     bodyCompilation = await bodyProject.GetCompilationAsync();
@@ -160,10 +196,13 @@ class Program
                 return (bodyCompilation, referenceCompilation);
             }
 
-            async Task<(ISymbol bodyLocalSymbol, ISymbol referenceAssemblySymbol)> GetSymbolsAsync(Compilation bodyCompilation, Compilation referenceCompilation)
-            {
+            async Task<(ISymbol bodyLocalSymbol, ISymbol referenceAssemblySymbol)> GetSymbolsAsync(
+                Compilation bodyCompilation,
+                Compilation referenceCompilation
+            ) {
                 // Randomize the order that we get symbols from each project.
-                ISymbol bodyLocalSymbol, referenceAssemblySymbol;
+                ISymbol bodyLocalSymbol,
+                    referenceAssemblySymbol;
                 if (random.Next() % 2 == 0)
                 {
                     bodyLocalSymbol = await GetBodyLocalSymbol(bodyCompilation);
@@ -184,7 +223,9 @@ class Program
                 var semanticModel = bodyCompilation.GetSemanticModel(tree);
 
                 var root = await tree.GetRootAsync();
-                var varDecl = root.DescendantNodesAndSelf().OfType<VariableDeclaratorSyntax>().Single();
+                var varDecl = root.DescendantNodesAndSelf()
+                    .OfType<VariableDeclaratorSyntax>()
+                    .Single();
 
                 var local = (ILocalSymbol)semanticModel.GetDeclaredSymbol(varDecl);
                 Assert.NotNull(local);
@@ -192,18 +233,26 @@ class Program
                 return local;
             }
 
-            (ProjectId bodyLocalProjectId, ProjectId referenceAssemblyProjectId) GetOriginatingProjectIds(Solution solution, ISymbol bodyLocalSymbol, ISymbol referenceAssemblySymbol)
-            {
+            (ProjectId bodyLocalProjectId, ProjectId referenceAssemblyProjectId) GetOriginatingProjectIds(
+                Solution solution,
+                ISymbol bodyLocalSymbol,
+                ISymbol referenceAssemblySymbol
+            ) {
                 // Randomize the order that we get try to get the originating project for the symbol.
-                ProjectId bodyLocalProjectId, referenceAssemblyProjectId;
+                ProjectId bodyLocalProjectId,
+                    referenceAssemblyProjectId;
                 if (random.Next() % 2 == 0)
                 {
                     bodyLocalProjectId = solution.GetOriginatingProjectId(bodyLocalSymbol);
-                    referenceAssemblyProjectId = solution.GetOriginatingProjectId(referenceAssemblySymbol);
+                    referenceAssemblyProjectId = solution.GetOriginatingProjectId(
+                        referenceAssemblySymbol
+                    );
                 }
                 else
                 {
-                    referenceAssemblyProjectId = solution.GetOriginatingProjectId(referenceAssemblySymbol);
+                    referenceAssemblyProjectId = solution.GetOriginatingProjectId(
+                        referenceAssemblySymbol
+                    );
                     bodyLocalProjectId = solution.GetOriginatingProjectId(bodyLocalSymbol);
                 }
 

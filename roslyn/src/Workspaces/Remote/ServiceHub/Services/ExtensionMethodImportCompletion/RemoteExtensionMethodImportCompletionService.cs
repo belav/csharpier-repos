@@ -16,18 +16,20 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed class RemoteExtensionMethodImportCompletionService : BrokeredServiceBase, IRemoteExtensionMethodImportCompletionService
+    internal sealed class RemoteExtensionMethodImportCompletionService
+        : BrokeredServiceBase,
+          IRemoteExtensionMethodImportCompletionService
     {
         internal sealed class Factory : FactoryBase<IRemoteExtensionMethodImportCompletionService>
         {
-            protected override IRemoteExtensionMethodImportCompletionService CreateService(in ServiceConstructionArguments arguments)
-                => new RemoteExtensionMethodImportCompletionService(arguments);
+            protected override IRemoteExtensionMethodImportCompletionService CreateService(
+                in ServiceConstructionArguments arguments
+            ) => new RemoteExtensionMethodImportCompletionService(arguments);
         }
 
-        public RemoteExtensionMethodImportCompletionService(in ServiceConstructionArguments arguments)
-            : base(arguments)
-        {
-        }
+        public RemoteExtensionMethodImportCompletionService(
+            in ServiceConstructionArguments arguments
+        ) : base(arguments) { }
 
         public ValueTask<SerializableUnimportedExtensionMethods> GetUnimportedExtensionMethodsAsync(
             PinnedSolutionInfo solutionInfo,
@@ -37,29 +39,66 @@ namespace Microsoft.CodeAnalysis.Remote
             ImmutableArray<string> namespaceInScope,
             ImmutableArray<string> targetTypesSymbolKeyData,
             bool forceIndexCreation,
-            CancellationToken cancellationToken)
-        {
-            return RunServiceAsync(async cancellationToken =>
-            {
-                var solution = await GetSolutionAsync(solutionInfo, cancellationToken).ConfigureAwait(false);
-                var document = solution.GetDocument(documentId)!;
-                var compilation = await document.Project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
-                var symbol = SymbolKey.ResolveString(receiverTypeSymbolKeyData, compilation, cancellationToken: cancellationToken).GetAnySymbol();
-
-                if (symbol is ITypeSymbol receiverTypeSymbol)
+            CancellationToken cancellationToken
+        ) {
+            return RunServiceAsync(
+                async cancellationToken =>
                 {
-                    var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-                    var namespaceInScopeSet = new HashSet<string>(namespaceInScope, syntaxFacts.StringComparer);
-                    var targetTypes = targetTypesSymbolKeyData
-                            .Select(symbolKey => SymbolKey.ResolveString(symbolKey, compilation, cancellationToken: cancellationToken).GetAnySymbol() as ITypeSymbol)
-                            .WhereNotNull().ToImmutableArray();
+                    var solution = await GetSolutionAsync(solutionInfo, cancellationToken)
+                        .ConfigureAwait(false);
+                    var document = solution.GetDocument(documentId)!;
+                    var compilation = await document.Project.GetRequiredCompilationAsync(
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
+                    var symbol = SymbolKey.ResolveString(
+                            receiverTypeSymbolKeyData,
+                            compilation,
+                            cancellationToken: cancellationToken
+                        )
+                        .GetAnySymbol();
 
-                    return await ExtensionMethodImportCompletionHelper.GetUnimportedExtensionMethodsInCurrentProcessAsync(
-                        document, position, receiverTypeSymbol, namespaceInScopeSet, targetTypes, forceIndexCreation, cancellationToken).ConfigureAwait(false);
-                }
+                    if (symbol is ITypeSymbol receiverTypeSymbol)
+                    {
+                        var syntaxFacts =
+                            document.GetRequiredLanguageService<ISyntaxFactsService>();
+                        var namespaceInScopeSet = new HashSet<string>(
+                            namespaceInScope,
+                            syntaxFacts.StringComparer
+                        );
+                        var targetTypes = targetTypesSymbolKeyData.Select(
+                                symbolKey =>
+                                    SymbolKey.ResolveString(
+                                            symbolKey,
+                                            compilation,
+                                            cancellationToken: cancellationToken
+                                        )
+                                        .GetAnySymbol() as ITypeSymbol
+                            )
+                            .WhereNotNull()
+                            .ToImmutableArray();
 
-                return new SerializableUnimportedExtensionMethods(ImmutableArray<SerializableImportCompletionItem>.Empty, isPartialResult: false, getSymbolsTicks: 0, createItemsTicks: 0);
-            }, cancellationToken);
+                        return await ExtensionMethodImportCompletionHelper.GetUnimportedExtensionMethodsInCurrentProcessAsync(
+                                document,
+                                position,
+                                receiverTypeSymbol,
+                                namespaceInScopeSet,
+                                targetTypes,
+                                forceIndexCreation,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
+                    }
+
+                    return new SerializableUnimportedExtensionMethods(
+                        ImmutableArray<SerializableImportCompletionItem>.Empty,
+                        isPartialResult: false,
+                        getSymbolsTicks: 0,
+                        createItemsTicks: 0
+                    );
+                },
+                cancellationToken
+            );
         }
     }
 }

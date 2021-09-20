@@ -10,14 +10,15 @@ namespace Microsoft.CodeAnalysis
 {
     internal readonly struct GeneratorDriverState
     {
-        internal GeneratorDriverState(ParseOptions parseOptions,
-                                      AnalyzerConfigOptionsProvider optionsProvider,
-                                      ImmutableArray<ISourceGenerator> generators,
-                                      ImmutableArray<AdditionalText> additionalTexts,
-                                      ImmutableArray<GeneratorState> generatorStates,
-                                      ImmutableArray<PendingEdit> edits,
-                                      bool editsFailed)
-        {
+        internal GeneratorDriverState(
+            ParseOptions parseOptions,
+            AnalyzerConfigOptionsProvider optionsProvider,
+            ImmutableArray<ISourceGenerator> generators,
+            ImmutableArray<AdditionalText> additionalTexts,
+            ImmutableArray<GeneratorState> generatorStates,
+            ImmutableArray<PendingEdit> edits,
+            bool editsFailed
+        ) {
             Generators = generators;
             GeneratorStates = generatorStates;
             AdditionalTexts = additionalTexts;
@@ -77,8 +78,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<GeneratorState>? generatorStates = null,
             ImmutableArray<AdditionalText>? additionalTexts = null,
             ImmutableArray<PendingEdit>? edits = null,
-            bool? editsFailed = null)
-        {
+            bool? editsFailed = null
+        ) {
             return new GeneratorDriverState(
                 this.ParseOptions,
                 this.OptionsProvider,
@@ -87,7 +88,7 @@ namespace Microsoft.CodeAnalysis
                 generatorStates ?? this.GeneratorStates,
                 edits ?? this.Edits,
                 editsFailed ?? this.EditsFailed
-                );
+            );
         }
     }
 }

@@ -15,8 +15,11 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             return string.IsNullOrEmpty(metadataValue) ? null : metadataValue;
         }
 
-        public static bool GetBoolean(this ITaskItem taskItem, string metadataName, bool defaultValue = false)
-        {
+        public static bool GetBoolean(
+            this ITaskItem taskItem,
+            string metadataName,
+            bool defaultValue = false
+        ) {
             bool result = false;
             var metadataValue = taskItem.GetMetadata(metadataName);
             if (!bool.TryParse(metadataValue, out result))
@@ -31,7 +34,9 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
             var metadataValue = taskItem.GetMetadata(metadataName)?.Trim();
             if (!string.IsNullOrEmpty(metadataValue))
             {
-                return metadataValue.Split(';').Where(v => !string.IsNullOrEmpty(v.Trim())).ToArray();
+                return metadataValue.Split(';')
+                    .Where(v => !string.IsNullOrEmpty(v.Trim()))
+                    .ToArray();
             }
 
             return Enumerable.Empty<string>();
@@ -41,6 +46,5 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
         {
             return source ?? Enumerable.Empty<T>();
         }
-
     }
 }

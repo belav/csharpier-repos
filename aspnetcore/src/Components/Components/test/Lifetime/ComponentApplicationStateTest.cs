@@ -15,7 +15,10 @@ namespace Microsoft.AspNetCore.Components
         public void InitializeExistingState_SetupsState()
         {
             // Arrange
-            var applicationState = new ComponentApplicationState(new Dictionary<string, byte[]>(), new List<ComponentApplicationState.OnPersistingCallback>());
+            var applicationState = new ComponentApplicationState(
+                new Dictionary<string, byte[]>(),
+                new List<ComponentApplicationState.OnPersistingCallback>()
+            );
             var existingState = new Dictionary<string, byte[]>
             {
                 ["MyState"] = new byte[] { 1, 2, 3, 4 }
@@ -33,7 +36,10 @@ namespace Microsoft.AspNetCore.Components
         public void InitializeExistingState_ThrowsIfAlreadyInitialized()
         {
             // Arrange
-            var applicationState = new ComponentApplicationState(new Dictionary<string, byte[]>(), new List<ComponentApplicationState.OnPersistingCallback>());
+            var applicationState = new ComponentApplicationState(
+                new Dictionary<string, byte[]>(),
+                new List<ComponentApplicationState.OnPersistingCallback>()
+            );
             var existingState = new Dictionary<string, byte[]>
             {
                 ["MyState"] = new byte[] { 1, 2, 3, 4 }
@@ -42,14 +48,19 @@ namespace Microsoft.AspNetCore.Components
             applicationState.InitializeExistingState(existingState);
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => applicationState.InitializeExistingState(existingState));
+            Assert.Throws<InvalidOperationException>(
+                () => applicationState.InitializeExistingState(existingState)
+            );
         }
 
         [Fact]
         public void TryRetrieveState_ReturnsStateWhenItExists()
         {
             // Arrange
-            var applicationState = new ComponentApplicationState(new Dictionary<string, byte[]>(), new List<ComponentApplicationState.OnPersistingCallback>());
+            var applicationState = new ComponentApplicationState(
+                new Dictionary<string, byte[]>(),
+                new List<ComponentApplicationState.OnPersistingCallback>()
+            );
             var existingState = new Dictionary<string, byte[]>
             {
                 ["MyState"] = new byte[] { 1, 2, 3, 4 }
@@ -69,7 +80,10 @@ namespace Microsoft.AspNetCore.Components
         {
             // Arrange
             var currentState = new Dictionary<string, byte[]>();
-            var applicationState = new ComponentApplicationState(currentState, new List<ComponentApplicationState.OnPersistingCallback>());
+            var applicationState = new ComponentApplicationState(
+                currentState,
+                new List<ComponentApplicationState.OnPersistingCallback>()
+            );
             var myState = new byte[] { 1, 2, 3, 4 };
 
             // Act
@@ -85,13 +99,18 @@ namespace Microsoft.AspNetCore.Components
         {
             // Arrange
             var currentState = new Dictionary<string, byte[]>();
-            var applicationState = new ComponentApplicationState(currentState, new List<ComponentApplicationState.OnPersistingCallback>());
+            var applicationState = new ComponentApplicationState(
+                currentState,
+                new List<ComponentApplicationState.OnPersistingCallback>()
+            );
             var myState = new byte[] { 1, 2, 3, 4 };
 
             applicationState.PersistState("MyState", myState);
 
             // Act & Assert
-            Assert.Throws<ArgumentException>(() => applicationState.PersistState("MyState", myState));
+            Assert.Throws<ArgumentException>(
+                () => applicationState.PersistState("MyState", myState)
+            );
         }
 
         [Fact]
@@ -99,7 +118,10 @@ namespace Microsoft.AspNetCore.Components
         {
             // Arrange
             var currentState = new Dictionary<string, byte[]>();
-            var applicationState = new ComponentApplicationState(currentState, new List<ComponentApplicationState.OnPersistingCallback>());
+            var applicationState = new ComponentApplicationState(
+                currentState,
+                new List<ComponentApplicationState.OnPersistingCallback>()
+            );
             var myState = new byte[] { 1, 2, 3, 4 };
 
             // Act
@@ -115,10 +137,13 @@ namespace Microsoft.AspNetCore.Components
         {
             // Arrange
             var currentState = new Dictionary<string, byte[]>();
-            var applicationState = new ComponentApplicationState(currentState, new List<ComponentApplicationState.OnPersistingCallback>());
+            var applicationState = new ComponentApplicationState(
+                currentState,
+                new List<ComponentApplicationState.OnPersistingCallback>()
+            );
 
             // Act
-            applicationState.PersistAsJson<byte []>("MyState", null);
+            applicationState.PersistAsJson<byte[]>("MyState", null);
 
             // Assert
             Assert.True(currentState.TryGetValue("MyState", out var stored));
@@ -132,12 +157,15 @@ namespace Microsoft.AspNetCore.Components
             var myState = new byte[] { 1, 2, 3, 4 };
             var serialized = JsonSerializer.SerializeToUtf8Bytes(myState);
             var existingState = new Dictionary<string, byte[]>() { ["MyState"] = serialized };
-            var applicationState = new ComponentApplicationState(new Dictionary<string, byte[]>(), new List<ComponentApplicationState.OnPersistingCallback>());
+            var applicationState = new ComponentApplicationState(
+                new Dictionary<string, byte[]>(),
+                new List<ComponentApplicationState.OnPersistingCallback>()
+            );
 
             applicationState.InitializeExistingState(existingState);
 
             // Act
-            Assert.True(applicationState.TryTakeAsJson<byte []>("MyState", out var stored));
+            Assert.True(applicationState.TryTakeAsJson<byte[]>("MyState", out var stored));
 
             // Assert
             Assert.Equal(myState, stored);
@@ -148,9 +176,12 @@ namespace Microsoft.AspNetCore.Components
         public void TryRetrieveFromJson_NullValue()
         {
             // Arrange
-            var serialized = JsonSerializer.SerializeToUtf8Bytes<byte []>(null);
+            var serialized = JsonSerializer.SerializeToUtf8Bytes<byte[]>(null);
             var existingState = new Dictionary<string, byte[]>() { ["MyState"] = serialized };
-            var applicationState = new ComponentApplicationState(new Dictionary<string, byte[]>(), new List<ComponentApplicationState.OnPersistingCallback>());
+            var applicationState = new ComponentApplicationState(
+                new Dictionary<string, byte[]>(),
+                new List<ComponentApplicationState.OnPersistingCallback>()
+            );
 
             applicationState.InitializeExistingState(existingState);
 

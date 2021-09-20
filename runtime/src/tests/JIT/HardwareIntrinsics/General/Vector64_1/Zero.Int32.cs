@@ -55,10 +55,12 @@ namespace JIT.HardwareIntrinsics.General
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
-            object result = typeof(Vector64<Int32>)
-                                .GetProperty(nameof(Vector64<Int32>.Zero), new Type[] { })
-                                .GetGetMethod()
-                                .Invoke(null, new object[] { });
+            object result = typeof(Vector64<Int32>).GetProperty(
+                    nameof(Vector64<Int32>.Zero),
+                    new Type[] {  }
+                )
+                .GetGetMethod()
+                .Invoke(null, new object[] {  });
 
             ValidateResult((Vector64<Int32>)(result));
         }
@@ -73,7 +75,7 @@ namespace JIT.HardwareIntrinsics.General
         private void ValidateResult(Int32[] resultElements, [CallerMemberName] string method = "")
         {
             bool succeeded = true;
-        
+
             for (var i = 0; i < ElementCount; i++)
             {
                 if (resultElements[i] != 0)
@@ -86,7 +88,9 @@ namespace JIT.HardwareIntrinsics.General
             if (!succeeded)
             {
                 TestLibrary.TestFramework.LogInformation($"Vector64.Zero(Int32): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

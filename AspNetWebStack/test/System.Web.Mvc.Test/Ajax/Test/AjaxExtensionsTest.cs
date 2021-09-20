@@ -28,8 +28,19 @@ namespace System.Web.Mvc.Ajax.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { MvcHtmlString actionLink = ajaxHelper.ActionLink(String.Empty, String.Empty, null, null, null, null); },
-                "linkText");
+                delegate
+                {
+                    MvcHtmlString actionLink = ajaxHelper.ActionLink(
+                        String.Empty,
+                        String.Empty,
+                        null,
+                        null,
+                        null,
+                        null
+                    );
+                },
+                "linkText"
+            );
         }
 
         [Fact]
@@ -40,8 +51,18 @@ namespace System.Web.Mvc.Ajax.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { MvcHtmlString actionLink = ajaxHelper.RouteLink(String.Empty, String.Empty, null, null, null); },
-                "linkText");
+                delegate
+                {
+                    MvcHtmlString actionLink = ajaxHelper.RouteLink(
+                        String.Empty,
+                        String.Empty,
+                        null,
+                        null,
+                        null
+                    );
+                },
+                "linkText"
+            );
         }
 
         // Form context setup and cleanup
@@ -92,8 +113,12 @@ namespace System.Web.Mvc.Ajax.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { ajaxHelper.GlobalizationScript(null); },
-                "cultureInfo");
+                delegate
+                {
+                    ajaxHelper.GlobalizationScript(null);
+                },
+                "cultureInfo"
+            );
         }
 
         [Fact]
@@ -112,8 +137,12 @@ namespace System.Web.Mvc.Ajax.Test
                 MvcHtmlString globalizationScript = ajaxHelper.GlobalizationScript();
 
                 // Assert
-                Assert.Equal(@"<script src=""~/Scripts/Globalization/en-GB.js"" type=""text/javascript""></script>", globalizationScript.ToHtmlString());
+                Assert.Equal(
+                    @"<script src=""~/Scripts/Globalization/en-GB.js"" type=""text/javascript""></script>",
+                    globalizationScript.ToHtmlString()
+                );
             }
+
             finally
             {
                 Thread.CurrentThread.CurrentCulture = currentCulture;
@@ -133,11 +162,17 @@ namespace System.Web.Mvc.Ajax.Test
                 Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-GB");
 
                 // Act
-                MvcHtmlString globalizationScript = ajaxHelper.GlobalizationScript(CultureInfo.GetCultureInfo("en-CA"));
+                MvcHtmlString globalizationScript = ajaxHelper.GlobalizationScript(
+                    CultureInfo.GetCultureInfo("en-CA")
+                );
 
                 // Assert
-                Assert.Equal(@"<script src=""~/Scripts/Globalization/en-CA.js"" type=""text/javascript""></script>", globalizationScript.ToHtmlString());
+                Assert.Equal(
+                    @"<script src=""~/Scripts/Globalization/en-CA.js"" type=""text/javascript""></script>",
+                    globalizationScript.ToHtmlString()
+                );
             }
+
             finally
             {
                 Thread.CurrentThread.CurrentCulture = currentCulture;
@@ -149,12 +184,17 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             Mock<CultureInfo> xssCulture = new Mock<CultureInfo>("en-US");
-            xssCulture.Setup(culture => culture.Name).Returns("evil.example.com/<script>alert('XSS!')</script>");
+            xssCulture.Setup(culture => culture.Name)
+                .Returns("evil.example.com/<script>alert('XSS!')</script>");
             string globalizationPath = "~/Scripts&Globalization";
-            string expectedScriptTag = @"<script src=""~/Scripts&amp;Globalization/evil.example.com%2f%3cscript%3ealert(%27XSS!%27)%3c%2fscript%3e.js"" type=""text/javascript""></script>";
+            string expectedScriptTag =
+                @"<script src=""~/Scripts&amp;Globalization/evil.example.com%2f%3cscript%3ealert(%27XSS!%27)%3c%2fscript%3e.js"" type=""text/javascript""></script>";
 
             // Act
-            MvcHtmlString globalizationScript = AjaxExtensions.GlobalizationScriptHelper(globalizationPath, xssCulture.Object);
+            MvcHtmlString globalizationScript = AjaxExtensions.GlobalizationScriptHelper(
+                globalizationPath,
+                xssCulture.Object
+            );
 
             // Assert
             Assert.Equal(expectedScriptTag, globalizationScript.ToHtmlString());
@@ -174,7 +214,10 @@ namespace System.Web.Mvc.Ajax.Test
             MvcHtmlString globalizationScript = ajaxHelper.GlobalizationScript(xssCulture.Object);
 
             // Assert
-            Assert.Equal(@"<script src=""~/Scripts/Globalization/.js"" type=""text/javascript""></script>", globalizationScript.ToHtmlString());
+            Assert.Equal(
+                @"<script src=""~/Scripts/Globalization/.js"" type=""text/javascript""></script>",
+                globalizationScript.ToHtmlString()
+            );
         }
 
         // ActionLink (traditional JavaScript)
@@ -189,7 +232,12 @@ namespace System.Web.Mvc.Ajax.Test
             MvcHtmlString actionLink = ajaxHelper.ActionLink("linkText", null, new AjaxOptions());
 
             // Assert
-            Assert.Equal(@"<a href=""" + MvcHelper.AppPathModifier + @"/app/home/oldaction"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">linkText</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/home/oldaction"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">linkText</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -202,7 +250,12 @@ namespace System.Web.Mvc.Ajax.Test
             MvcHtmlString actionLink = ajaxHelper.ActionLink("linkText", null, new AjaxOptions());
 
             // Assert
-            Assert.Equal(@"<a data-ajax=""true"" href=""" + MvcHelper.AppPathModifier + @"/app/home/oldaction"">linkText</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a data-ajax=""true"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/home/oldaction"">linkText</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -215,7 +268,12 @@ namespace System.Web.Mvc.Ajax.Test
             MvcHtmlString actionLink = ajaxHelper.ActionLink("linkText", null, null);
 
             // Assert
-            Assert.Equal(@"<a href=""" + MvcHelper.AppPathModifier + @"/app/home/oldaction"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">linkText</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/home/oldaction"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">linkText</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -228,7 +286,12 @@ namespace System.Web.Mvc.Ajax.Test
             MvcHtmlString actionLink = ajaxHelper.ActionLink("linkText", null, null);
 
             // Assert
-            Assert.Equal(@"<a data-ajax=""true"" href=""" + MvcHelper.AppPathModifier + @"/app/home/oldaction"">linkText</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a data-ajax=""true"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/home/oldaction"">linkText</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -238,10 +301,19 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: false);
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.ActionLink("linkText", "Action", new AjaxOptions());
+            MvcHtmlString actionLink = ajaxHelper.ActionLink(
+                "linkText",
+                "Action",
+                new AjaxOptions()
+            );
 
             // Assert
-            Assert.Equal(@"<a href=""" + MvcHelper.AppPathModifier + @"/app/home/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">linkText</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/home/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">linkText</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -251,10 +323,19 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: true);
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.ActionLink("linkText", "Action", new AjaxOptions());
+            MvcHtmlString actionLink = ajaxHelper.ActionLink(
+                "linkText",
+                "Action",
+                new AjaxOptions()
+            );
 
             // Assert
-            Assert.Equal(@"<a data-ajax=""true"" href=""" + MvcHelper.AppPathModifier + @"/app/home/Action"">linkText</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a data-ajax=""true"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/home/Action"">linkText</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -269,7 +350,12 @@ namespace System.Web.Mvc.Ajax.Test
             MvcHtmlString actionLink = helper.ActionLink("Some Text", "Action", values, options);
 
             // Assert
-            Assert.Equal(@"<a href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -284,7 +370,12 @@ namespace System.Web.Mvc.Ajax.Test
             MvcHtmlString actionLink = helper.ActionLink("Some Text", "Action", values, options);
 
             // Assert
-            Assert.Equal(@"<a data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -297,10 +388,21 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = helper.ActionLink("Some Text", "Action", values, options, htmlAttributes);
+            MvcHtmlString actionLink = helper.ActionLink(
+                "Some Text",
+                "Action",
+                values,
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" foo=""bar"" foo-bar=""baz_quux"" href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" foo=""bar"" foo-bar=""baz_quux"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -313,10 +415,21 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = helper.ActionLink("Some Text", "Action", values, options, htmlAttributes);
+            MvcHtmlString actionLink = helper.ActionLink(
+                "Some Text",
+                "Action",
+                values,
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo-bar=""baz_quux"" href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo-bar=""baz_quux"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -335,7 +448,12 @@ namespace System.Web.Mvc.Ajax.Test
             MvcHtmlString actionLink = helper.ActionLink("Some Text", "Action", values, options);
 
             // Assert
-            Assert.Equal(@"<a href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -354,7 +472,12 @@ namespace System.Web.Mvc.Ajax.Test
             MvcHtmlString actionLink = helper.ActionLink("Some Text", "Action", values, options);
 
             // Assert
-            Assert.Equal(@"<a data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -375,10 +498,21 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = helper.ActionLink("Some Text", "Action", values, options, htmlAttributes);
+            MvcHtmlString actionLink = helper.ActionLink(
+                "Some Text",
+                "Action",
+                values,
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" foo=""bar"" foo_bar=""baz_quux"" href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" foo=""bar"" foo_bar=""baz_quux"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -399,10 +533,21 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = helper.ActionLink("Some Text", "Action", values, options, htmlAttributes);
+            MvcHtmlString actionLink = helper.ActionLink(
+                "Some Text",
+                "Action",
+                values,
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo_bar=""baz_quux"" href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo_bar=""baz_quux"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -412,10 +557,20 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: false);
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.ActionLink("linkText", "Action", "Controller", new AjaxOptions());
+            MvcHtmlString actionLink = ajaxHelper.ActionLink(
+                "linkText",
+                "Action",
+                "Controller",
+                new AjaxOptions()
+            );
 
             // Assert
-            Assert.Equal(@"<a href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">linkText</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">linkText</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -425,10 +580,20 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: true);
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.ActionLink("linkText", "Action", "Controller", new AjaxOptions());
+            MvcHtmlString actionLink = ajaxHelper.ActionLink(
+                "linkText",
+                "Action",
+                "Controller",
+                new AjaxOptions()
+            );
 
             // Assert
-            Assert.Equal(@"<a data-ajax=""true"" href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"">linkText</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a data-ajax=""true"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"">linkText</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -440,10 +605,21 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = helper.ActionLink("Some Text", "Action", "Controller", values, options);
+            MvcHtmlString actionLink = helper.ActionLink(
+                "Some Text",
+                "Action",
+                "Controller",
+                values,
+                options
+            );
 
             // Assert
-            Assert.Equal(@"<a href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action/5"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action/5"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -455,10 +631,21 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = helper.ActionLink("Some Text", "Action", "Controller", values, options);
+            MvcHtmlString actionLink = helper.ActionLink(
+                "Some Text",
+                "Action",
+                "Controller",
+                values,
+                options
+            );
 
             // Assert
-            Assert.Equal(@"<a data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action/5"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action/5"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -471,10 +658,22 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = helper.ActionLink("Some Text", "Action", "Controller", values, options, htmlAttributes);
+            MvcHtmlString actionLink = helper.ActionLink(
+                "Some Text",
+                "Action",
+                "Controller",
+                values,
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" foo=""bar"" foo-bar=""baz_quux"" href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action/5"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" foo=""bar"" foo-bar=""baz_quux"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action/5"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -487,10 +686,22 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = helper.ActionLink("Some Text", "Action", "Controller", values, options, htmlAttributes);
+            MvcHtmlString actionLink = helper.ActionLink(
+                "Some Text",
+                "Action",
+                "Controller",
+                values,
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo-bar=""baz_quux"" href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action/5"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo-bar=""baz_quux"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action/5"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -498,17 +709,25 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper helper = GetAjaxHelper(unobtrusiveJavaScript: false);
-            RouteValueDictionary values = new RouteValueDictionary
-            {
-                { "id", 5 }
-            };
+            RouteValueDictionary values = new RouteValueDictionary { { "id", 5 } };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = helper.ActionLink("Some Text", "Action", "Controller", values, options);
+            MvcHtmlString actionLink = helper.ActionLink(
+                "Some Text",
+                "Action",
+                "Controller",
+                values,
+                options
+            );
 
             // Assert
-            Assert.Equal(@"<a href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action/5"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action/5"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -516,17 +735,25 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper helper = GetAjaxHelper(unobtrusiveJavaScript: true);
-            RouteValueDictionary values = new RouteValueDictionary
-            {
-                { "id", 5 }
-            };
+            RouteValueDictionary values = new RouteValueDictionary { { "id", 5 } };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = helper.ActionLink("Some Text", "Action", "Controller", values, options);
+            MvcHtmlString actionLink = helper.ActionLink(
+                "Some Text",
+                "Action",
+                "Controller",
+                values,
+                options
+            );
 
             // Assert
-            Assert.Equal(@"<a data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action/5"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action/5"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -534,10 +761,7 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper helper = GetAjaxHelper(unobtrusiveJavaScript: false);
-            RouteValueDictionary values = new RouteValueDictionary
-            {
-                { "id", 5 }
-            };
+            RouteValueDictionary values = new RouteValueDictionary { { "id", 5 } };
             Dictionary<string, object> htmlAttributes = new Dictionary<string, object>
             {
                 { "foo", "bar" },
@@ -547,10 +771,22 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = helper.ActionLink("Some Text", "Action", "Controller", values, options, htmlAttributes);
+            MvcHtmlString actionLink = helper.ActionLink(
+                "Some Text",
+                "Action",
+                "Controller",
+                values,
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" foo=""bar"" foo_bar=""baz_quux"" href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action/5"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" foo=""bar"" foo_bar=""baz_quux"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action/5"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -558,10 +794,7 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper helper = GetAjaxHelper(unobtrusiveJavaScript: true);
-            RouteValueDictionary values = new RouteValueDictionary
-            {
-                { "id", 5 }
-            };
+            RouteValueDictionary values = new RouteValueDictionary { { "id", 5 } };
             Dictionary<string, object> htmlAttributes = new Dictionary<string, object>
             {
                 { "foo", "bar" },
@@ -571,10 +804,22 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = helper.ActionLink("Some Text", "Action", "Controller", values, options, htmlAttributes);
+            MvcHtmlString actionLink = helper.ActionLink(
+                "Some Text",
+                "Action",
+                "Controller",
+                values,
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo_bar=""baz_quux"" href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action/5"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo_bar=""baz_quux"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action/5"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -584,10 +829,20 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: false);
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.ActionLink("linkText", "Action", "Controller", new AjaxOptions { UpdateTargetId = "some-id" });
+            MvcHtmlString actionLink = ajaxHelper.ActionLink(
+                "linkText",
+                "Action",
+                "Controller",
+                new AjaxOptions { UpdateTargetId = "some-id" }
+            );
 
             // Assert
-            Assert.Equal(@"<a href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;some-id&#39; });"">linkText</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;some-id&#39; });"">linkText</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -598,10 +853,20 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "some-id" };
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.ActionLink("linkText", "Action", "Controller", options);
+            MvcHtmlString actionLink = ajaxHelper.ActionLink(
+                "linkText",
+                "Action",
+                "Controller",
+                options
+            );
 
             // Assert
-            Assert.Equal(@"<a data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#some-id"" href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"">linkText</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#some-id"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"">linkText</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -611,11 +876,25 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: false);
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.ActionLink("linkText", "Action", "Controller",
-                                                             null, null, null, null, new AjaxOptions { UpdateTargetId = "some-id" }, null);
+            MvcHtmlString actionLink = ajaxHelper.ActionLink(
+                "linkText",
+                "Action",
+                "Controller",
+                null,
+                null,
+                null,
+                null,
+                new AjaxOptions { UpdateTargetId = "some-id" },
+                null
+            );
 
             // Assert
-            Assert.Equal(@"<a href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;some-id&#39; });"">linkText</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;some-id&#39; });"">linkText</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -625,11 +904,25 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: true);
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.ActionLink("linkText", "Action", "Controller",
-                                                             null, null, null, null, new AjaxOptions { UpdateTargetId = "some-id" }, null);
+            MvcHtmlString actionLink = ajaxHelper.ActionLink(
+                "linkText",
+                "Action",
+                "Controller",
+                null,
+                null,
+                null,
+                null,
+                new AjaxOptions { UpdateTargetId = "some-id" },
+                null
+            );
 
             // Assert
-            Assert.Equal(@"<a data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#some-id"" href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"">linkText</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#some-id"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"">linkText</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -639,10 +932,25 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: false);
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.ActionLink("linkText", "Action", "Controller", "https", null, null, null, new AjaxOptions { UpdateTargetId = "some-id" }, null);
+            MvcHtmlString actionLink = ajaxHelper.ActionLink(
+                "linkText",
+                "Action",
+                "Controller",
+                "https",
+                null,
+                null,
+                null,
+                new AjaxOptions { UpdateTargetId = "some-id" },
+                null
+            );
 
             // Assert
-            Assert.Equal(@"<a href=""https://foo.bar.baz" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;some-id&#39; });"">linkText</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a href=""https://foo.bar.baz"
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;some-id&#39; });"">linkText</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -652,10 +960,25 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: true);
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.ActionLink("linkText", "Action", "Controller", "https", null, null, null, new AjaxOptions { UpdateTargetId = "some-id" }, null);
+            MvcHtmlString actionLink = ajaxHelper.ActionLink(
+                "linkText",
+                "Action",
+                "Controller",
+                "https",
+                null,
+                null,
+                null,
+                new AjaxOptions { UpdateTargetId = "some-id" },
+                null
+            );
 
             // Assert
-            Assert.Equal(@"<a data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#some-id"" href=""https://foo.bar.baz" + MvcHelper.AppPathModifier + @"/app/Controller/Action"">linkText</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#some-id"" href=""https://foo.bar.baz"
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"">linkText</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         // RouteLink
@@ -667,10 +990,19 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: false);
 
             // Act
-            MvcHtmlString routeLink = ajaxHelper.RouteLink("Some Text", new RouteValueDictionary(), null);
+            MvcHtmlString routeLink = ajaxHelper.RouteLink(
+                "Some Text",
+                new RouteValueDictionary(),
+                null
+            );
 
             // Assert
-            Assert.Equal(@"<a href=""" + MvcHelper.AppPathModifier + @"/app/home/oldaction"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">Some Text</a>", routeLink.ToHtmlString());
+            Assert.Equal(
+                @"<a href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/home/oldaction"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">Some Text</a>",
+                routeLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -680,10 +1012,19 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: true);
 
             // Act
-            MvcHtmlString routeLink = ajaxHelper.RouteLink("Some Text", new RouteValueDictionary(), null);
+            MvcHtmlString routeLink = ajaxHelper.RouteLink(
+                "Some Text",
+                new RouteValueDictionary(),
+                null
+            );
 
             // Assert
-            Assert.Equal(@"<a data-ajax=""true"" href=""" + MvcHelper.AppPathModifier + @"/app/home/oldaction"">Some Text</a>", routeLink.ToHtmlString());
+            Assert.Equal(
+                @"<a data-ajax=""true"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/home/oldaction"">Some Text</a>",
+                routeLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -691,18 +1032,19 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper helper = GetAjaxHelper(unobtrusiveJavaScript: false);
-            object values = new
-            {
-                action = "Action",
-                controller = "Controller"
-            };
+            object values = new { action = "Action", controller = "Controller" };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
             MvcHtmlString routeLink = helper.RouteLink("Some Text", values, options);
 
             // Assert
-            Assert.Equal(@"<a href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>", routeLink.ToHtmlString());
+            Assert.Equal(
+                @"<a href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>",
+                routeLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -710,18 +1052,19 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper helper = GetAjaxHelper(unobtrusiveJavaScript: true);
-            object values = new
-            {
-                action = "Action",
-                controller = "Controller"
-            };
+            object values = new { action = "Action", controller = "Controller" };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
             MvcHtmlString routeLink = helper.RouteLink("Some Text", values, options);
 
             // Assert
-            Assert.Equal(@"<a data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"">Some Text</a>", routeLink.ToHtmlString());
+            Assert.Equal(
+                @"<a data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"">Some Text</a>",
+                routeLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -729,24 +1072,25 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper helper = GetAjaxHelper(unobtrusiveJavaScript: false);
-            object htmlAttributes = new
-            {
-                foo = "bar",
-                baz = "quux",
-                foo_bar = "baz_quux"
-            };
-            object values = new
-            {
-                action = "Action",
-                controller = "Controller"
-            };
+            object htmlAttributes = new { foo = "bar", baz = "quux", foo_bar = "baz_quux" };
+            object values = new { action = "Action", controller = "Controller" };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = helper.RouteLink("Some Text", values, options, htmlAttributes);
+            MvcHtmlString actionLink = helper.RouteLink(
+                "Some Text",
+                values,
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" foo=""bar"" foo-bar=""baz_quux"" href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" foo=""bar"" foo-bar=""baz_quux"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -754,24 +1098,25 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper helper = GetAjaxHelper(unobtrusiveJavaScript: true);
-            object htmlAttributes = new
-            {
-                foo = "bar",
-                baz = "quux",
-                foo_bar = "baz_quux"
-            };
-            object values = new
-            {
-                action = "Action",
-                controller = "Controller"
-            };
+            object htmlAttributes = new { foo = "bar", baz = "quux", foo_bar = "baz_quux" };
+            object values = new { action = "Action", controller = "Controller" };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = helper.RouteLink("Some Text", values, options, htmlAttributes);
+            MvcHtmlString actionLink = helper.RouteLink(
+                "Some Text",
+                values,
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo-bar=""baz_quux"" href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo-bar=""baz_quux"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -791,7 +1136,12 @@ namespace System.Web.Mvc.Ajax.Test
             MvcHtmlString actionLink = helper.RouteLink("Some Text", values, options);
 
             // Assert
-            Assert.Equal(@"<a href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -811,7 +1161,12 @@ namespace System.Web.Mvc.Ajax.Test
             MvcHtmlString actionLink = helper.RouteLink("Some Text", values, options);
 
             // Assert
-            Assert.Equal(@"<a data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -833,10 +1188,20 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = helper.RouteLink("Some Text", values, options, htmlAttributes);
+            MvcHtmlString actionLink = helper.RouteLink(
+                "Some Text",
+                values,
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" foo=""bar"" foo_bar=""baz_quux"" href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" foo=""bar"" foo_bar=""baz_quux"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -858,10 +1223,20 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = helper.RouteLink("Some Text", values, options, htmlAttributes);
+            MvcHtmlString actionLink = helper.RouteLink(
+                "Some Text",
+                values,
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo_bar=""baz_quux"" href=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo_bar=""baz_quux"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -871,10 +1246,19 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: false);
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.RouteLink("linkText", "namedroute", new AjaxOptions());
+            MvcHtmlString actionLink = ajaxHelper.RouteLink(
+                "linkText",
+                "namedroute",
+                new AjaxOptions()
+            );
 
             // Assert
-            Assert.Equal(@"<a href=""" + MvcHelper.AppPathModifier + @"/app/named/home/oldaction"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">linkText</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/home/oldaction"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">linkText</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -884,10 +1268,19 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: true);
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.RouteLink("linkText", "namedroute", new AjaxOptions());
+            MvcHtmlString actionLink = ajaxHelper.RouteLink(
+                "linkText",
+                "namedroute",
+                new AjaxOptions()
+            );
 
             // Assert
-            Assert.Equal(@"<a data-ajax=""true"" href=""" + MvcHelper.AppPathModifier + @"/app/named/home/oldaction"">linkText</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a data-ajax=""true"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/home/oldaction"">linkText</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -895,19 +1288,24 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: false);
-            object htmlAttributes = new
-            {
-                foo = "bar",
-                baz = "quux",
-                foo_bar = "baz_quux"
-            };
+            object htmlAttributes = new { foo = "bar", baz = "quux", foo_bar = "baz_quux" };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.RouteLink("Some Text", "namedroute", options, htmlAttributes);
+            MvcHtmlString actionLink = ajaxHelper.RouteLink(
+                "Some Text",
+                "namedroute",
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" foo=""bar"" foo-bar=""baz_quux"" href=""" + MvcHelper.AppPathModifier + @"/app/named/home/oldaction"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" foo=""bar"" foo-bar=""baz_quux"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/home/oldaction"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -915,19 +1313,24 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: true);
-            object htmlAttributes = new
-            {
-                foo = "bar",
-                baz = "quux",
-                foo_bar = "baz_quux"
-            };
+            object htmlAttributes = new { foo = "bar", baz = "quux", foo_bar = "baz_quux" };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.RouteLink("Some Text", "namedroute", options, htmlAttributes);
+            MvcHtmlString actionLink = ajaxHelper.RouteLink(
+                "Some Text",
+                "namedroute",
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo-bar=""baz_quux"" href=""" + MvcHelper.AppPathModifier + @"/app/named/home/oldaction"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo-bar=""baz_quux"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/home/oldaction"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -935,14 +1338,29 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: false);
-            Dictionary<string, object> htmlAttributes = new Dictionary<string, object> { { "foo", "bar" }, { "baz", "quux" }, { "foo_bar", "baz_quux" } };
+            Dictionary<string, object> htmlAttributes = new Dictionary<string, object>
+            {
+                { "foo", "bar" },
+                { "baz", "quux" },
+                { "foo_bar", "baz_quux" }
+            };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.RouteLink("Some Text", "namedroute", options, htmlAttributes);
+            MvcHtmlString actionLink = ajaxHelper.RouteLink(
+                "Some Text",
+                "namedroute",
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" foo=""bar"" foo_bar=""baz_quux"" href=""" + MvcHelper.AppPathModifier + @"/app/named/home/oldaction"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" foo=""bar"" foo_bar=""baz_quux"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/home/oldaction"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -950,14 +1368,29 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: true);
-            Dictionary<string, object> htmlAttributes = new Dictionary<string, object> { { "foo", "bar" }, { "baz", "quux" }, { "foo_bar", "baz_quux" } };
+            Dictionary<string, object> htmlAttributes = new Dictionary<string, object>
+            {
+                { "foo", "bar" },
+                { "baz", "quux" },
+                { "foo_bar", "baz_quux" }
+            };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.RouteLink("Some Text", "namedroute", options, htmlAttributes);
+            MvcHtmlString actionLink = ajaxHelper.RouteLink(
+                "Some Text",
+                "namedroute",
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo_bar=""baz_quux"" href=""" + MvcHelper.AppPathModifier + @"/app/named/home/oldaction"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo_bar=""baz_quux"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/home/oldaction"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -965,17 +1398,23 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: false);
-            object values = new
-            {
-                action = "Action",
-                controller = "Controller"
-            };
+            object values = new { action = "Action", controller = "Controller" };
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.RouteLink("linkText", "namedroute", values, new AjaxOptions());
+            MvcHtmlString actionLink = ajaxHelper.RouteLink(
+                "linkText",
+                "namedroute",
+                values,
+                new AjaxOptions()
+            );
 
             // Assert
-            Assert.Equal(@"<a href=""" + MvcHelper.AppPathModifier + @"/app/named/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">linkText</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">linkText</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -983,17 +1422,23 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: true);
-            object values = new
-            {
-                action = "Action",
-                controller = "Controller"
-            };
+            object values = new { action = "Action", controller = "Controller" };
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.RouteLink("linkText", "namedroute", values, new AjaxOptions());
+            MvcHtmlString actionLink = ajaxHelper.RouteLink(
+                "linkText",
+                "namedroute",
+                values,
+                new AjaxOptions()
+            );
 
             // Assert
-            Assert.Equal(@"<a data-ajax=""true"" href=""" + MvcHelper.AppPathModifier + @"/app/named/Controller/Action"">linkText</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a data-ajax=""true"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/Controller/Action"">linkText</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1001,25 +1446,27 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: false);
-            object values = new
-            {
-                action = "Action",
-                controller = "Controller"
-            };
+            object values = new { action = "Action", controller = "Controller" };
 
-            object htmlAttributes = new
-            {
-                foo = "bar",
-                baz = "quux",
-                foo_bar = "baz_quux"
-            };
+            object htmlAttributes = new { foo = "bar", baz = "quux", foo_bar = "baz_quux" };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.RouteLink("Some Text", "namedroute", values, options, htmlAttributes);
+            MvcHtmlString actionLink = ajaxHelper.RouteLink(
+                "Some Text",
+                "namedroute",
+                values,
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" foo=""bar"" foo-bar=""baz_quux"" href=""" + MvcHelper.AppPathModifier + @"/app/named/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" foo=""bar"" foo-bar=""baz_quux"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1027,25 +1474,27 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: true);
-            object values = new
-            {
-                action = "Action",
-                controller = "Controller"
-            };
+            object values = new { action = "Action", controller = "Controller" };
 
-            object htmlAttributes = new
-            {
-                foo = "bar",
-                baz = "quux",
-                foo_bar = "baz_quux"
-            };
+            object htmlAttributes = new { foo = "bar", baz = "quux", foo_bar = "baz_quux" };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.RouteLink("Some Text", "namedroute", values, options, htmlAttributes);
+            MvcHtmlString actionLink = ajaxHelper.RouteLink(
+                "Some Text",
+                "namedroute",
+                values,
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo-bar=""baz_quux"" href=""" + MvcHelper.AppPathModifier + @"/app/named/Controller/Action"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo-bar=""baz_quux"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/Controller/Action"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1060,10 +1509,20 @@ namespace System.Web.Mvc.Ajax.Test
             };
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.RouteLink("linkText", "namedroute", values, new AjaxOptions());
+            MvcHtmlString actionLink = ajaxHelper.RouteLink(
+                "linkText",
+                "namedroute",
+                values,
+                new AjaxOptions()
+            );
 
             // Assert
-            Assert.Equal(@"<a href=""" + MvcHelper.AppPathModifier + @"/app/named/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">linkText</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">linkText</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1078,10 +1537,20 @@ namespace System.Web.Mvc.Ajax.Test
             };
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.RouteLink("linkText", "namedroute", values, new AjaxOptions());
+            MvcHtmlString actionLink = ajaxHelper.RouteLink(
+                "linkText",
+                "namedroute",
+                values,
+                new AjaxOptions()
+            );
 
             // Assert
-            Assert.Equal(@"<a data-ajax=""true"" href=""" + MvcHelper.AppPathModifier + @"/app/named/Controller/Action"">linkText</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a data-ajax=""true"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/Controller/Action"">linkText</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1095,14 +1564,30 @@ namespace System.Web.Mvc.Ajax.Test
                 { "action", "Action" }
             };
 
-            Dictionary<string, object> htmlAttributes = new Dictionary<string, object> { { "foo", "bar" }, { "baz", "quux" }, { "foo_bar", "baz_quux" } };
+            Dictionary<string, object> htmlAttributes = new Dictionary<string, object>
+            {
+                { "foo", "bar" },
+                { "baz", "quux" },
+                { "foo_bar", "baz_quux" }
+            };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.RouteLink("Some Text", "namedroute", values, options, htmlAttributes);
+            MvcHtmlString actionLink = ajaxHelper.RouteLink(
+                "Some Text",
+                "namedroute",
+                values,
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" foo=""bar"" foo_bar=""baz_quux"" href=""" + MvcHelper.AppPathModifier + @"/app/named/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" foo=""bar"" foo_bar=""baz_quux"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/Controller/Action"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1116,14 +1601,30 @@ namespace System.Web.Mvc.Ajax.Test
                 { "action", "Action" }
             };
 
-            Dictionary<string, object> htmlAttributes = new Dictionary<string, object> { { "foo", "bar" }, { "baz", "quux" }, { "foo_bar", "baz_quux" } };
+            Dictionary<string, object> htmlAttributes = new Dictionary<string, object>
+            {
+                { "foo", "bar" },
+                { "baz", "quux" },
+                { "foo_bar", "baz_quux" }
+            };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.RouteLink("Some Text", "namedroute", values, options, htmlAttributes);
+            MvcHtmlString actionLink = ajaxHelper.RouteLink(
+                "Some Text",
+                "namedroute",
+                values,
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo_bar=""baz_quux"" href=""" + MvcHelper.AppPathModifier + @"/app/named/Controller/Action"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo_bar=""baz_quux"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/Controller/Action"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1131,14 +1632,30 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: false);
-            Dictionary<string, object> htmlAttributes = new Dictionary<string, object> { { "foo", "bar" }, { "baz", "quux" }, { "foo_bar", "baz_quux" } };
+            Dictionary<string, object> htmlAttributes = new Dictionary<string, object>
+            {
+                { "foo", "bar" },
+                { "baz", "quux" },
+                { "foo_bar", "baz_quux" }
+            };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.RouteLink("Some Text", "namedroute", null, options, htmlAttributes);
+            MvcHtmlString actionLink = ajaxHelper.RouteLink(
+                "Some Text",
+                "namedroute",
+                null,
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" foo=""bar"" foo_bar=""baz_quux"" href=""" + MvcHelper.AppPathModifier + @"/app/named/home/oldaction"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" foo=""bar"" foo_bar=""baz_quux"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/home/oldaction"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1146,14 +1663,30 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: true);
-            Dictionary<string, object> htmlAttributes = new Dictionary<string, object> { { "foo", "bar" }, { "baz", "quux" }, { "foo_bar", "baz_quux" } };
+            Dictionary<string, object> htmlAttributes = new Dictionary<string, object>
+            {
+                { "foo", "bar" },
+                { "baz", "quux" },
+                { "foo_bar", "baz_quux" }
+            };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.RouteLink("Some Text", "namedroute", null, options, htmlAttributes);
+            MvcHtmlString actionLink = ajaxHelper.RouteLink(
+                "Some Text",
+                "namedroute",
+                null,
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo_bar=""baz_quux"" href=""" + MvcHelper.AppPathModifier + @"/app/named/home/oldaction"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo_bar=""baz_quux"" href="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/home/oldaction"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1161,14 +1694,33 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: false);
-            Dictionary<string, object> htmlAttributes = new Dictionary<string, object> { { "foo", "bar" }, { "baz", "quux" }, { "foo_bar", "baz_quux" } };
+            Dictionary<string, object> htmlAttributes = new Dictionary<string, object>
+            {
+                { "foo", "bar" },
+                { "baz", "quux" },
+                { "foo_bar", "baz_quux" }
+            };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.RouteLink("Some Text", "namedroute", null, "baz.bar.foo", null, null, options, htmlAttributes);
+            MvcHtmlString actionLink = ajaxHelper.RouteLink(
+                "Some Text",
+                "namedroute",
+                null,
+                "baz.bar.foo",
+                null,
+                null,
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" foo=""bar"" foo_bar=""baz_quux"" href=""http://baz.bar.foo" + MvcHelper.AppPathModifier + @"/app/named/home/oldaction"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" foo=""bar"" foo_bar=""baz_quux"" href=""http://baz.bar.foo"
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/home/oldaction"" onclick=""Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;update-div&#39; });"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -1176,14 +1728,33 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: true);
-            Dictionary<string, object> htmlAttributes = new Dictionary<string, object> { { "foo", "bar" }, { "baz", "quux" }, { "foo_bar", "baz_quux" } };
+            Dictionary<string, object> htmlAttributes = new Dictionary<string, object>
+            {
+                { "foo", "bar" },
+                { "baz", "quux" },
+                { "foo_bar", "baz_quux" }
+            };
             AjaxOptions options = new AjaxOptions { UpdateTargetId = "update-div" };
 
             // Act
-            MvcHtmlString actionLink = ajaxHelper.RouteLink("Some Text", "namedroute", null, "baz.bar.foo", null, null, options, htmlAttributes);
+            MvcHtmlString actionLink = ajaxHelper.RouteLink(
+                "Some Text",
+                "namedroute",
+                null,
+                "baz.bar.foo",
+                null,
+                null,
+                options,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo_bar=""baz_quux"" href=""http://baz.bar.foo" + MvcHelper.AppPathModifier + @"/app/named/home/oldaction"">Some Text</a>", actionLink.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""quux"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#update-div"" foo=""bar"" foo_bar=""baz_quux"" href=""http://baz.bar.foo"
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/home/oldaction"">Some Text</a>",
+                actionLink.ToHtmlString()
+            );
         }
 
         // BeginForm
@@ -1200,7 +1771,10 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm(null);
 
             // Assert
-            Assert.Equal(@"<form action=""/rawUrl"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">", writer.ToString());
+            Assert.Equal(
+                @"<form action=""/rawUrl"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1215,7 +1789,10 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm(null);
 
             // Assert
-            Assert.Equal(@"<form action=""/rawUrl"" data-ajax=""true"" method=""post"">", writer.ToString());
+            Assert.Equal(
+                @"<form action=""/rawUrl"" data-ajax=""true"" method=""post"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1231,7 +1808,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm(null, ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/home/oldaction"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/home/oldaction"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1247,7 +1829,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm(null, ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/home/oldaction"" data-ajax=""true"" method=""post"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/home/oldaction"" data-ajax=""true"" method=""post"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1263,7 +1850,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm("Action", "Controller", null);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1279,7 +1871,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm("Action", "Controller", null);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" data-ajax=""true"" method=""post"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" data-ajax=""true"" method=""post"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1295,7 +1892,10 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm(ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""/rawUrl"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">", writer.ToString());
+            Assert.Equal(
+                @"<form action=""/rawUrl"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1311,7 +1911,10 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm(ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""/rawUrl"" data-ajax=""true"" method=""post"">", writer.ToString());
+            Assert.Equal(
+                @"<form action=""/rawUrl"" data-ajax=""true"" method=""post"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1327,7 +1930,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm("Action", ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/home/Action"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/home/Action"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1343,7 +1951,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm("Action", ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/home/Action"" data-ajax=""true"" method=""post"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/home/Action"" data-ajax=""true"" method=""post"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1360,7 +1973,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm("Action", values, ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1377,7 +1995,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm("Action", values, ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" data-ajax=""true"" method=""post"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" data-ajax=""true"" method=""post"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1395,7 +2018,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm("Action", values, ajaxOptions, htmlAttributes);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" foo-bar=""baz_quux"" method=""get"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;some-id&#39; });"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" foo-bar=""baz_quux"" method=""get"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;some-id&#39; });"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1413,7 +2041,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm("Action", values, ajaxOptions, htmlAttributes);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#some-id"" foo-bar=""baz_quux"" method=""get"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#some-id"" foo-bar=""baz_quux"" method=""get"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1433,7 +2066,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm("Action", values, ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1453,7 +2091,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm("Action", values, ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" data-ajax=""true"" method=""post"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" data-ajax=""true"" method=""post"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1478,7 +2121,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm("Action", values, ajaxOptions, htmlAttributes);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" foo_bar=""baz_quux"" method=""get"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;some-id&#39; });"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" foo_bar=""baz_quux"" method=""get"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;some-id&#39; });"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1503,7 +2151,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm("Action", values, ajaxOptions, htmlAttributes);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#some-id"" foo_bar=""baz_quux"" method=""get"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#some-id"" foo_bar=""baz_quux"" method=""get"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1519,7 +2172,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm("Action", "Controller", ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1535,7 +2193,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm("Action", "Controller", ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" data-ajax=""true"" method=""post"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" data-ajax=""true"" method=""post"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1552,7 +2215,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm("Action", "Controller", values, ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action/5"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action/5"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1569,7 +2237,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm("Action", "Controller", values, ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action/5"" data-ajax=""true"" method=""post"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action/5"" data-ajax=""true"" method=""post"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1584,10 +2257,21 @@ namespace System.Web.Mvc.Ajax.Test
             ajaxHelper.ViewContext.Writer = writer;
 
             // Act
-            IDisposable form = ajaxHelper.BeginForm("Action", "Controller", values, ajaxOptions, htmlAttributes);
+            IDisposable form = ajaxHelper.BeginForm(
+                "Action",
+                "Controller",
+                values,
+                ajaxOptions,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action/5"" foo-bar=""baz_quux"" method=""get"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action/5"" foo-bar=""baz_quux"" method=""get"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1602,10 +2286,21 @@ namespace System.Web.Mvc.Ajax.Test
             ajaxHelper.ViewContext.Writer = writer;
 
             // Act
-            IDisposable form = ajaxHelper.BeginForm("Action", "Controller", values, ajaxOptions, htmlAttributes);
+            IDisposable form = ajaxHelper.BeginForm(
+                "Action",
+                "Controller",
+                values,
+                ajaxOptions,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action/5"" data-ajax=""true"" foo-bar=""baz_quux"" method=""get"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action/5"" data-ajax=""true"" foo-bar=""baz_quux"" method=""get"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1614,10 +2309,7 @@ namespace System.Web.Mvc.Ajax.Test
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: false);
             AjaxOptions ajaxOptions = new AjaxOptions();
-            RouteValueDictionary values = new RouteValueDictionary
-            {
-                { "id", 5 }
-            };
+            RouteValueDictionary values = new RouteValueDictionary { { "id", 5 } };
             StringWriter writer = new StringWriter();
             ajaxHelper.ViewContext.Writer = writer;
 
@@ -1625,7 +2317,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm("Action", "Controller", values, ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action/5"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action/5"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1634,10 +2331,7 @@ namespace System.Web.Mvc.Ajax.Test
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: true);
             AjaxOptions ajaxOptions = new AjaxOptions();
-            RouteValueDictionary values = new RouteValueDictionary
-            {
-                { "id", 5 }
-            };
+            RouteValueDictionary values = new RouteValueDictionary { { "id", 5 } };
             StringWriter writer = new StringWriter();
             ajaxHelper.ViewContext.Writer = writer;
 
@@ -1645,7 +2339,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm("Action", "Controller", values, ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action/5"" data-ajax=""true"" method=""post"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action/5"" data-ajax=""true"" method=""post"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1654,10 +2353,7 @@ namespace System.Web.Mvc.Ajax.Test
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: false);
             AjaxOptions ajaxOptions = new AjaxOptions();
-            RouteValueDictionary values = new RouteValueDictionary
-            {
-                { "id", 5 }
-            };
+            RouteValueDictionary values = new RouteValueDictionary { { "id", 5 } };
             Dictionary<string, object> htmlAttributes = new Dictionary<string, object>
             {
                 { "method", "get" },
@@ -1667,10 +2363,21 @@ namespace System.Web.Mvc.Ajax.Test
             ajaxHelper.ViewContext.Writer = writer;
 
             // Act
-            IDisposable form = ajaxHelper.BeginForm("Action", "Controller", values, ajaxOptions, htmlAttributes);
+            IDisposable form = ajaxHelper.BeginForm(
+                "Action",
+                "Controller",
+                values,
+                ajaxOptions,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action/5"" foo_bar=""baz_quux"" method=""get"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action/5"" foo_bar=""baz_quux"" method=""get"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1679,10 +2386,7 @@ namespace System.Web.Mvc.Ajax.Test
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: true);
             AjaxOptions ajaxOptions = new AjaxOptions();
-            RouteValueDictionary values = new RouteValueDictionary
-            {
-                { "id", 5 }
-            };
+            RouteValueDictionary values = new RouteValueDictionary { { "id", 5 } };
             Dictionary<string, object> htmlAttributes = new Dictionary<string, object>
             {
                 { "method", "get" },
@@ -1692,10 +2396,21 @@ namespace System.Web.Mvc.Ajax.Test
             ajaxHelper.ViewContext.Writer = writer;
 
             // Act
-            IDisposable form = ajaxHelper.BeginForm("Action", "Controller", values, ajaxOptions, htmlAttributes);
+            IDisposable form = ajaxHelper.BeginForm(
+                "Action",
+                "Controller",
+                values,
+                ajaxOptions,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action/5"" data-ajax=""true"" foo_bar=""baz_quux"" method=""get"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action/5"" data-ajax=""true"" foo_bar=""baz_quux"" method=""get"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1711,7 +2426,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm("Action", "Controller", ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;some-id&#39; });"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;some-id&#39; });"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1727,7 +2447,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginForm("Action", "Controller", ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/Controller/Action"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#some-id"" method=""post"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/Controller/Action"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#some-id"" method=""post"">",
+                writer.ToString()
+            );
         }
 
         // BeginRouteForm
@@ -1745,7 +2470,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginRouteForm("namedroute", ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/named/home/oldaction"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/home/oldaction"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1761,7 +2491,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginRouteForm("namedroute", ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/named/home/oldaction"" data-ajax=""true"" method=""post"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/home/oldaction"" data-ajax=""true"" method=""post"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1778,7 +2513,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginRouteForm("namedroute", null, ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/named/home/oldaction"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/home/oldaction"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1795,7 +2535,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginRouteForm("namedroute", null, ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/named/home/oldaction"" data-ajax=""true"" method=""post"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/home/oldaction"" data-ajax=""true"" method=""post"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1809,10 +2554,20 @@ namespace System.Web.Mvc.Ajax.Test
             ajaxHelper.ViewContext.Writer = writer;
 
             // Act
-            IDisposable form = ajaxHelper.BeginRouteForm("namedroute", null, ajaxOptions, htmlAttributes);
+            IDisposable form = ajaxHelper.BeginRouteForm(
+                "namedroute",
+                null,
+                ajaxOptions,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/named/home/oldaction"" foo-bar=""baz_quux"" method=""get"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;some-id&#39; });"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/home/oldaction"" foo-bar=""baz_quux"" method=""get"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;some-id&#39; });"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1826,10 +2581,20 @@ namespace System.Web.Mvc.Ajax.Test
             ajaxHelper.ViewContext.Writer = writer;
 
             // Act
-            IDisposable form = ajaxHelper.BeginRouteForm("namedroute", null, ajaxOptions, htmlAttributes);
+            IDisposable form = ajaxHelper.BeginRouteForm(
+                "namedroute",
+                null,
+                ajaxOptions,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/named/home/oldaction"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#some-id"" foo-bar=""baz_quux"" method=""get"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/home/oldaction"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#some-id"" foo-bar=""baz_quux"" method=""get"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1839,7 +2604,11 @@ namespace System.Web.Mvc.Ajax.Test
 
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: false);
-            ajaxHelper.RouteCollection.MapRoute("MyRouteName", "any/url", new { controller = "Charlie" });
+            ajaxHelper.RouteCollection.MapRoute(
+                "MyRouteName",
+                "any/url",
+                new { controller = "Charlie" }
+            );
             StringWriter writer = new StringWriter();
             ajaxHelper.ViewContext.Writer = writer;
 
@@ -1847,7 +2616,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginRouteForm("MyRouteName", new AjaxOptions());
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/any/url"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/any/url"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1857,7 +2631,11 @@ namespace System.Web.Mvc.Ajax.Test
 
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: true);
-            ajaxHelper.RouteCollection.MapRoute("MyRouteName", "any/url", new { controller = "Charlie" });
+            ajaxHelper.RouteCollection.MapRoute(
+                "MyRouteName",
+                "any/url",
+                new { controller = "Charlie" }
+            );
             StringWriter writer = new StringWriter();
             ajaxHelper.ViewContext.Writer = writer;
 
@@ -1865,7 +2643,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginRouteForm("MyRouteName", new AjaxOptions());
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/any/url"" data-ajax=""true"" method=""post"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/any/url"" data-ajax=""true"" method=""post"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1882,7 +2665,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginRouteForm("namedroute", values, ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/named/home/oldaction"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/home/oldaction"" method=""post"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace });"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1899,7 +2687,12 @@ namespace System.Web.Mvc.Ajax.Test
             IDisposable form = ajaxHelper.BeginRouteForm("namedroute", values, ajaxOptions);
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/named/home/oldaction"" data-ajax=""true"" method=""post"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/home/oldaction"" data-ajax=""true"" method=""post"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1907,17 +2700,31 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: false);
-            Dictionary<string, object> htmlAttributes = new Dictionary<string, object> { { "method", "get" }, { "foo_bar", "baz_quux" } };
+            Dictionary<string, object> htmlAttributes = new Dictionary<string, object>
+            {
+                { "method", "get" },
+                { "foo_bar", "baz_quux" }
+            };
             AjaxOptions ajaxOptions = new AjaxOptions { UpdateTargetId = "some-id" };
             RouteValueDictionary values = new RouteValueDictionary();
             StringWriter writer = new StringWriter();
             ajaxHelper.ViewContext.Writer = writer;
 
             // Act
-            IDisposable form = ajaxHelper.BeginRouteForm("namedroute", values, ajaxOptions, htmlAttributes);
+            IDisposable form = ajaxHelper.BeginRouteForm(
+                "namedroute",
+                values,
+                ajaxOptions,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/named/home/oldaction"" foo_bar=""baz_quux"" method=""get"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;some-id&#39; });"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/home/oldaction"" foo_bar=""baz_quux"" method=""get"" onclick=""Sys.Mvc.AsyncForm.handleClick(this, new Sys.UI.DomEvent(event));"" onsubmit=""Sys.Mvc.AsyncForm.handleSubmit(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: &#39;some-id&#39; });"">",
+                writer.ToString()
+            );
         }
 
         [Fact]
@@ -1925,17 +2732,31 @@ namespace System.Web.Mvc.Ajax.Test
         {
             // Arrange
             AjaxHelper ajaxHelper = GetAjaxHelper(unobtrusiveJavaScript: true);
-            Dictionary<string, object> htmlAttributes = new Dictionary<string, object> { { "method", "get" }, { "foo_bar", "baz_quux" } };
+            Dictionary<string, object> htmlAttributes = new Dictionary<string, object>
+            {
+                { "method", "get" },
+                { "foo_bar", "baz_quux" }
+            };
             AjaxOptions ajaxOptions = new AjaxOptions { UpdateTargetId = "some-id" };
             RouteValueDictionary values = new RouteValueDictionary();
             StringWriter writer = new StringWriter();
             ajaxHelper.ViewContext.Writer = writer;
 
             // Act
-            IDisposable form = ajaxHelper.BeginRouteForm("namedroute", values, ajaxOptions, htmlAttributes);
+            IDisposable form = ajaxHelper.BeginRouteForm(
+                "namedroute",
+                values,
+                ajaxOptions,
+                htmlAttributes
+            );
 
             // Assert
-            Assert.Equal(@"<form action=""" + MvcHelper.AppPathModifier + @"/app/named/home/oldaction"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#some-id"" foo_bar=""baz_quux"" method=""get"">", writer.ToString());
+            Assert.Equal(
+                @"<form action="""
+                    + MvcHelper.AppPathModifier
+                    + @"/app/named/home/oldaction"" data-ajax=""true"" data-ajax-mode=""replace"" data-ajax-update=""#some-id"" foo_bar=""baz_quux"" method=""get"">",
+                writer.ToString()
+            );
         }
 
         // Helpers
@@ -1949,7 +2770,8 @@ namespace System.Web.Mvc.Ajax.Test
             mockRequest.Setup(o => o.ApplicationPath).Returns("/app/");
 
             var mockResponse = new Mock<HttpResponseBase>();
-            mockResponse.Setup(o => o.ApplyAppPathModifier(It.IsAny<string>())).Returns<string>(r => MvcHelper.AppPathModifier + r);
+            mockResponse.Setup(o => o.ApplyAppPathModifier(It.IsAny<string>()))
+                .Returns<string>(r => MvcHelper.AppPathModifier + r);
 
             var mockHttpContext = new Mock<HttpContextBase>();
             mockHttpContext.Setup(o => o.Request).Returns(mockRequest.Object);
@@ -1959,7 +2781,11 @@ namespace System.Web.Mvc.Ajax.Test
 
             var routes = new RouteCollection();
             routes.MapRoute("default", "{controller}/{action}/{id}", new { id = "defaultid" });
-            routes.MapRoute("namedroute", "named/{controller}/{action}/{id}", new { id = "defaultid" });
+            routes.MapRoute(
+                "namedroute",
+                "named/{controller}/{action}/{id}",
+                new { id = "defaultid" }
+            );
 
             var routeData = new RouteData();
             routeData.Values.Add("controller", "home");

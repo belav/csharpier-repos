@@ -8,7 +8,7 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
 {
     /// <summary>
     /// Context object passed to the ICookieAuthenticationEvents method SignedIn.
-    /// </summary>    
+    /// </summary>
     public class CookieSignedInContext : PrincipalContext<CookieAuthenticationOptions>
     {
         /// <summary>
@@ -24,8 +24,8 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
             AuthenticationScheme scheme,
             ClaimsPrincipal principal,
             AuthenticationProperties? properties,
-            CookieAuthenticationOptions options)
-            : base(context, scheme, options, properties)
+            CookieAuthenticationOptions options
+        ) : base(context, scheme, options, properties)
         {
             Principal = principal;
         }

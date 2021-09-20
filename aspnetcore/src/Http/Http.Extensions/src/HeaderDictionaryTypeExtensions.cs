@@ -77,8 +77,11 @@ namespace Microsoft.AspNetCore.Http
             }
         }
 
-        internal static void SetList<T>(this IHeaderDictionary headers, string name, IList<T>? values)
-        {
+        internal static void SetList<T>(
+            this IHeaderDictionary headers,
+            string name,
+            IList<T>? values
+        ) {
             if (headers == null)
             {
                 throw new ArgumentNullException(nameof(headers));
@@ -115,8 +118,11 @@ namespace Microsoft.AspNetCore.Http
         /// <param name="Headers">The <see cref="IHeaderDictionary"/>.</param>
         /// <param name="name">The header name.</param>
         /// <param name="values">The values to append.</param>
-        public static void AppendList<T>(this IHeaderDictionary Headers, string name, IList<T> values)
-        {
+        public static void AppendList<T>(
+            this IHeaderDictionary Headers,
+            string name,
+            IList<T> values
+        ) {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
@@ -146,8 +152,11 @@ namespace Microsoft.AspNetCore.Http
             }
         }
 
-        internal static void SetDate(this IHeaderDictionary headers, string name, DateTimeOffset? value)
-        {
+        internal static void SetDate(
+            this IHeaderDictionary headers,
+            string name,
+            DateTimeOffset? value
+        ) {
             if (headers == null)
             {
                 throw new ArgumentNullException(nameof(headers));
@@ -170,24 +179,156 @@ namespace Microsoft.AspNetCore.Http
 
         private static IDictionary<Type, object> KnownParsers = new Dictionary<Type, object>()
         {
-            { typeof(CacheControlHeaderValue), new Func<string, CacheControlHeaderValue?>(value => { return CacheControlHeaderValue.TryParse(value, out var result) ? result : null; }) },
-            { typeof(ContentDispositionHeaderValue), new Func<string, ContentDispositionHeaderValue?>(value => { return ContentDispositionHeaderValue.TryParse(value, out var result) ? result : null; }) },
-            { typeof(ContentRangeHeaderValue), new Func<string, ContentRangeHeaderValue?>(value => { return ContentRangeHeaderValue.TryParse(value, out var result) ? result : null; }) },
-            { typeof(MediaTypeHeaderValue), new Func<string, MediaTypeHeaderValue?>(value => { return MediaTypeHeaderValue.TryParse(value, out var result) ? result : null; }) },
-            { typeof(RangeConditionHeaderValue), new Func<string, RangeConditionHeaderValue?>(value => { return RangeConditionHeaderValue.TryParse(value, out var result) ? result : null; }) },
-            { typeof(RangeHeaderValue), new Func<string, RangeHeaderValue?>(value => { return RangeHeaderValue.TryParse(value, out var result) ? result : null; }) },
-            { typeof(EntityTagHeaderValue), new Func<string, EntityTagHeaderValue?>(value => { return EntityTagHeaderValue.TryParse(value, out var result) ? result : null; }) },
-            { typeof(DateTimeOffset?), new Func<string, DateTimeOffset?>(value => { return HeaderUtilities.TryParseDate(value, out var result) ? result : null; }) },
-            { typeof(long?), new Func<string, long?>(value => { return HeaderUtilities.TryParseNonNegativeInt64(value, out var result) ? result : null; }) },
+            {
+                typeof(CacheControlHeaderValue),
+                new Func<string, CacheControlHeaderValue?>(
+                    value =>
+                    {
+                        return CacheControlHeaderValue.TryParse(value, out var result)
+                          ? result
+                          : null;
+                    }
+                )
+            },
+            {
+                typeof(ContentDispositionHeaderValue),
+                new Func<string, ContentDispositionHeaderValue?>(
+                    value =>
+                    {
+                        return ContentDispositionHeaderValue.TryParse(value, out var result)
+                          ? result
+                          : null;
+                    }
+                )
+            },
+            {
+                typeof(ContentRangeHeaderValue),
+                new Func<string, ContentRangeHeaderValue?>(
+                    value =>
+                    {
+                        return ContentRangeHeaderValue.TryParse(value, out var result)
+                          ? result
+                          : null;
+                    }
+                )
+            },
+            {
+                typeof(MediaTypeHeaderValue),
+                new Func<string, MediaTypeHeaderValue?>(
+                    value =>
+                    {
+                        return MediaTypeHeaderValue.TryParse(value, out var result) ? result : null;
+                    }
+                )
+            },
+            {
+                typeof(RangeConditionHeaderValue),
+                new Func<string, RangeConditionHeaderValue?>(
+                    value =>
+                    {
+                        return RangeConditionHeaderValue.TryParse(value, out var result)
+                          ? result
+                          : null;
+                    }
+                )
+            },
+            {
+                typeof(RangeHeaderValue),
+                new Func<string, RangeHeaderValue?>(
+                    value =>
+                    {
+                        return RangeHeaderValue.TryParse(value, out var result) ? result : null;
+                    }
+                )
+            },
+            {
+                typeof(EntityTagHeaderValue),
+                new Func<string, EntityTagHeaderValue?>(
+                    value =>
+                    {
+                        return EntityTagHeaderValue.TryParse(value, out var result) ? result : null;
+                    }
+                )
+            },
+            {
+                typeof(DateTimeOffset?),
+                new Func<string, DateTimeOffset?>(
+                    value =>
+                    {
+                        return HeaderUtilities.TryParseDate(value, out var result) ? result : null;
+                    }
+                )
+            },
+            {
+                typeof(long?),
+                new Func<string, long?>(
+                    value =>
+                    {
+                        return HeaderUtilities.TryParseNonNegativeInt64(value, out var result)
+                          ? result
+                          : null;
+                    }
+                )
+            },
         };
 
         private static IDictionary<Type, object> KnownListParsers = new Dictionary<Type, object>()
         {
-            { typeof(MediaTypeHeaderValue), new Func<IList<string>, IList<MediaTypeHeaderValue>>(value => { return MediaTypeHeaderValue.TryParseList(value, out var result) ? result : Array.Empty<MediaTypeHeaderValue>(); })  },
-            { typeof(StringWithQualityHeaderValue), new Func<IList<string>, IList<StringWithQualityHeaderValue>>(value => { return StringWithQualityHeaderValue.TryParseList(value, out var result) ? result : Array.Empty<StringWithQualityHeaderValue>(); })  },
-            { typeof(CookieHeaderValue), new Func<IList<string>, IList<CookieHeaderValue>>(value => { return CookieHeaderValue.TryParseList(value, out var result) ? result : Array.Empty<CookieHeaderValue>(); })  },
-            { typeof(EntityTagHeaderValue), new Func<IList<string>, IList<EntityTagHeaderValue>>(value => { return EntityTagHeaderValue.TryParseList(value, out var result) ? result : Array.Empty<EntityTagHeaderValue>(); })  },
-            { typeof(SetCookieHeaderValue), new Func<IList<string>, IList<SetCookieHeaderValue>>(value => { return SetCookieHeaderValue.TryParseList(value, out var result) ? result : Array.Empty<SetCookieHeaderValue>(); })  },
+            {
+                typeof(MediaTypeHeaderValue),
+                new Func<IList<string>, IList<MediaTypeHeaderValue>>(
+                    value =>
+                    {
+                        return MediaTypeHeaderValue.TryParseList(value, out var result)
+                          ? result
+                          : Array.Empty<MediaTypeHeaderValue>();
+                    }
+                )
+            },
+            {
+                typeof(StringWithQualityHeaderValue),
+                new Func<IList<string>, IList<StringWithQualityHeaderValue>>(
+                    value =>
+                    {
+                        return StringWithQualityHeaderValue.TryParseList(value, out var result)
+                          ? result
+                          : Array.Empty<StringWithQualityHeaderValue>();
+                    }
+                )
+            },
+            {
+                typeof(CookieHeaderValue),
+                new Func<IList<string>, IList<CookieHeaderValue>>(
+                    value =>
+                    {
+                        return CookieHeaderValue.TryParseList(value, out var result)
+                          ? result
+                          : Array.Empty<CookieHeaderValue>();
+                    }
+                )
+            },
+            {
+                typeof(EntityTagHeaderValue),
+                new Func<IList<string>, IList<EntityTagHeaderValue>>(
+                    value =>
+                    {
+                        return EntityTagHeaderValue.TryParseList(value, out var result)
+                          ? result
+                          : Array.Empty<EntityTagHeaderValue>();
+                    }
+                )
+            },
+            {
+                typeof(SetCookieHeaderValue),
+                new Func<IList<string>, IList<SetCookieHeaderValue>>(
+                    value =>
+                    {
+                        return SetCookieHeaderValue.TryParseList(value, out var result)
+                          ? result
+                          : Array.Empty<SetCookieHeaderValue>();
+                    }
+                )
+            },
         };
 
         internal static T? Get<T>(this IHeaderDictionary headers, string name)
@@ -241,26 +382,32 @@ namespace Microsoft.AspNetCore.Http
             // TODO: Cache the reflected type for later? Only if success?
             var type = typeof(T);
             var method = type.GetMethods(BindingFlags.Public | BindingFlags.Static)
-                .FirstOrDefault(methodInfo =>
-                {
-                    if (string.Equals("TryParse", methodInfo.Name, StringComparison.Ordinal)
-                        && methodInfo.ReturnParameter.ParameterType.Equals(typeof(bool)))
+                .FirstOrDefault(
+                    methodInfo =>
                     {
-                        var methodParams = methodInfo.GetParameters();
-                        return methodParams.Length == 2
-                            && methodParams[0].ParameterType.Equals(typeof(string))
-                            && methodParams[1].IsOut
-                            && methodParams[1].ParameterType.Equals(type.MakeByRefType());
+                        if (
+                            string.Equals("TryParse", methodInfo.Name, StringComparison.Ordinal)
+                            && methodInfo.ReturnParameter.ParameterType.Equals(typeof(bool))
+                        ) {
+                            var methodParams = methodInfo.GetParameters();
+                            return methodParams.Length == 2
+                                && methodParams[0].ParameterType.Equals(typeof(string))
+                                && methodParams[1].IsOut
+                                && methodParams[1].ParameterType.Equals(type.MakeByRefType());
+                        }
+                        return false;
                     }
-                    return false;
-                });
+                );
 
             if (method == null)
             {
-                throw new NotSupportedException(string.Format(
-                    CultureInfo.CurrentCulture,
-                    "The given type '{0}' does not have a TryParse method with the required signature 'public static bool TryParse(string, out {0}).",
-                    nameof(T)));
+                throw new NotSupportedException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        "The given type '{0}' does not have a TryParse method with the required signature 'public static bool TryParse(string, out {0}).",
+                        nameof(T)
+                    )
+                );
             }
 
             var parameters = new object?[] { value, null };
@@ -277,26 +424,34 @@ namespace Microsoft.AspNetCore.Http
             // TODO: Cache the reflected type for later? Only if success?
             var type = typeof(T);
             var method = type.GetMethods(BindingFlags.Public | BindingFlags.Static)
-                .FirstOrDefault(methodInfo =>
-                {
-                    if (string.Equals("TryParseList", methodInfo.Name, StringComparison.Ordinal)
-                        && methodInfo.ReturnParameter.ParameterType.Equals(typeof(Boolean)))
+                .FirstOrDefault(
+                    methodInfo =>
                     {
-                        var methodParams = methodInfo.GetParameters();
-                        return methodParams.Length == 2
-                            && methodParams[0].ParameterType.Equals(typeof(IList<string>))
-                            && methodParams[1].IsOut
-                            && methodParams[1].ParameterType.Equals(typeof(IList<T>).MakeByRefType());
+                        if (
+                            string.Equals("TryParseList", methodInfo.Name, StringComparison.Ordinal)
+                            && methodInfo.ReturnParameter.ParameterType.Equals(typeof(Boolean))
+                        ) {
+                            var methodParams = methodInfo.GetParameters();
+                            return methodParams.Length == 2
+                                && methodParams[0].ParameterType.Equals(typeof(IList<string>))
+                                && methodParams[1].IsOut
+                                && methodParams[1].ParameterType.Equals(
+                                    typeof(IList<T>).MakeByRefType()
+                                );
+                        }
+                        return false;
                     }
-                    return false;
-                });
+                );
 
             if (method == null)
             {
-                throw new NotSupportedException(string.Format(
-                    CultureInfo.CurrentCulture,
-                    "The given type '{0}' does not have a TryParseList method with the required signature 'public static bool TryParseList(IList<string>, out IList<{0}>).",
-                    nameof(T)));
+                throw new NotSupportedException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        "The given type '{0}' does not have a TryParseList method with the required signature 'public static bool TryParseList(IList<string>, out IList<{0}>).",
+                        nameof(T)
+                    )
+                );
             }
 
             var parameters = new object?[] { values, null };

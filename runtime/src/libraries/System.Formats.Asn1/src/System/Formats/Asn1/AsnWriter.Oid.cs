@@ -119,6 +119,7 @@ namespace System.Formats.Asn1
                 Buffer.BlockCopy(tmp, 0, _buffer, _offset, tmpOffset);
                 _offset += tmpOffset;
             }
+
             finally
             {
                 CryptoPool.Return(tmp, tmpOffset);
@@ -196,8 +197,7 @@ namespace System.Formats.Asn1
                 unencoded >>= 7;
                 dest[idx] = curByte;
                 idx++;
-            }
-            while (unencoded != BigInteger.Zero);
+            } while (unencoded != BigInteger.Zero);
 
             Reverse(dest.Slice(0, idx));
             return idx;

@@ -54,8 +54,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         [EntityFrameworkInternal]
         public RelationalTypeMappingSourceDependencies(
-            IEnumerable<IRelationalTypeMappingSourcePlugin> plugins)
-        {
+            IEnumerable<IRelationalTypeMappingSourcePlugin> plugins
+        ) {
             Check.NotNull(plugins, nameof(plugins));
 
             Plugins = plugins;

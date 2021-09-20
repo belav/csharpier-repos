@@ -8,13 +8,19 @@ namespace System.Buffers.Text
     /// </summary>
     public static partial class Utf8Formatter
     {
-        private static bool TryFormatUInt64D(ulong value, byte precision, Span<byte> destination, bool insertNegationSign, out int bytesWritten)
-        {
+        private static bool TryFormatUInt64D(
+            ulong value,
+            byte precision,
+            Span<byte> destination,
+            bool insertNegationSign,
+            out int bytesWritten
+        ) {
             // Calculate the actual digit count and the number of padding zeroes requested.
             // From all of this we can get the required buffer length.
 
             int digitCount = FormattingHelpers.CountDigits(value);
-            int leadingZeroCount = ((precision == StandardFormat.NoPrecision) ? 0 : (int)precision) - digitCount;
+            int leadingZeroCount =
+                ((precision == StandardFormat.NoPrecision) ? 0 : (int)precision) - digitCount;
             if (leadingZeroCount < 0)
             {
                 leadingZeroCount = 0;

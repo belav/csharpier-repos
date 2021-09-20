@@ -74,7 +74,8 @@ namespace System.IO
             s_userProductDirectory = Path.Combine(
                 userHomeDirectory,
                 TopLevelHiddenDirectory,
-                SecondLevelDirectory);
+                SecondLevelDirectory
+            );
         }
 
         /// <summary>Gets the current user's home directory.</summary>
@@ -86,7 +87,6 @@ namespace System.IO
             string? userHomeDirectory = Environment.GetEnvironmentVariable("HOME");
             if (!string.IsNullOrEmpty(userHomeDirectory))
                 return userHomeDirectory;
-
             // In initialization conditions, however, the "HOME" environment variable may
             // not yet be set. For such cases, consult with the password entry.
             unsafe
@@ -110,7 +110,13 @@ namespace System.IO
                     byte[] heapBuf = new byte[lastBufLen];
                     fixed (byte* buf = &heapBuf[0])
                     {
-                        if (TryGetHomeDirectoryFromPasswd(buf, heapBuf.Length, out userHomeDirectory))
+                        if (
+                            TryGetHomeDirectoryFromPasswd(
+                                buf,
+                                heapBuf.Length,
+                                out userHomeDirectory
+                            )
+                        )
                             return userHomeDirectory;
                     }
                 }
@@ -122,8 +128,11 @@ namespace System.IO
         /// <param name="bufLen">The length of <paramref name="buf"/>.</param>
         /// <param name="path">The resulting path; null if the user didn't have an entry.</param>
         /// <returns>true if the call was successful (path may still be null); false is a larger buffer is needed.</returns>
-        private static unsafe bool TryGetHomeDirectoryFromPasswd(byte* buf, int bufLen, out string? path)
-        {
+        private static unsafe bool TryGetHomeDirectoryFromPasswd(
+            byte* buf,
+            int bufLen,
+            out string? path
+        ) {
             // Call getpwuid_r to get the passwd struct
             Interop.Sys.Passwd passwd;
             int error = Interop.Sys.GetPwUidR(Interop.Sys.GetEUid(), out passwd, buf, bufLen);

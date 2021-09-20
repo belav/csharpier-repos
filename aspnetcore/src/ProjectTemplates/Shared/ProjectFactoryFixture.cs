@@ -14,7 +14,10 @@ namespace Templates.Test.Helpers
 {
     public class ProjectFactoryFixture : IDisposable
     {
-        private readonly ConcurrentDictionary<string, Project> _projects = new ConcurrentDictionary<string, Project>();
+        private readonly ConcurrentDictionary<string, Project> _projects = new ConcurrentDictionary<
+            string,
+            Project
+        >();
 
         public IMessageSink DiagnosticsMessageSink { get; }
 
@@ -49,15 +52,19 @@ namespace Templates.Test.Helpers
                     project.TemplateOutputDir = Path.Combine(basePath, project.ProjectName);
                     return project;
                 },
-                output);
+                output
+            );
         }
 
         private static string GetTemplateFolderBasePath(Assembly assembly) =>
             (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HELIX_DIR")))
-            ? assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
-                .Single(a => a.Key == "TestTemplateCreationFolder")
-                .Value
-            : Path.Combine(Environment.GetEnvironmentVariable("HELIX_DIR"), "Templates", "BaseFolder");
+                ? assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                      .Single(a => a.Key == "TestTemplateCreationFolder").Value
+                : Path.Combine(
+                      Environment.GetEnvironmentVariable("HELIX_DIR"),
+                      "Templates",
+                      "BaseFolder"
+                  );
 
         public void Dispose()
         {

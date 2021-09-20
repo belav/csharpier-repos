@@ -17,7 +17,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, IConventionCheckConstraint, ICheckConstraint
+    public class CheckConstraint
+        : ConventionAnnotatable,
+          IMutableCheckConstraint,
+          IConventionCheckConstraint,
+          ICheckConstraint
     {
         private ConfigurationSource _configurationSource;
 
@@ -31,8 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IMutableEntityType entityType,
             string name,
             string sql,
-            ConfigurationSource configurationSource)
-        {
+            ConfigurationSource configurationSource
+        ) {
             Check.NotNull(entityType, nameof(entityType));
             Check.NotEmpty(name, nameof(name));
             Check.NotEmpty(sql, nameof(sql));
@@ -46,12 +50,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (dataDictionary == null)
             {
                 dataDictionary = new Dictionary<string, ICheckConstraint>();
-                ((IMutableEntityType)EntityType).SetOrRemoveAnnotation(RelationalAnnotationNames.CheckConstraints, dataDictionary);
+                ((IMutableEntityType)EntityType).SetOrRemoveAnnotation(
+                    RelationalAnnotationNames.CheckConstraints,
+                    dataDictionary
+                );
             }
 
             if (dataDictionary.ContainsKey(Name))
             {
-                throw new InvalidOperationException(RelationalStrings.DuplicateCheckConstraint(Name, EntityType.DisplayName()));
+                throw new InvalidOperationException(
+                    RelationalStrings.DuplicateCheckConstraint(Name, EntityType.DisplayName())
+                );
             }
 
             EnsureMutable();
@@ -65,11 +74,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static IEnumerable<ICheckConstraint> GetCheckConstraints(IReadOnlyEntityType entityType)
-        {
+        public static IEnumerable<ICheckConstraint> GetCheckConstraints(
+            IReadOnlyEntityType entityType
+        ) {
             Check.NotNull(entityType, nameof(entityType));
 
-            return GetConstraintsDictionary(entityType)?.Values ?? Enumerable.Empty<ICheckConstraint>();
+            return GetConstraintsDictionary(entityType)?.Values
+                ?? Enumerable.Empty<ICheckConstraint>();
         }
 
         /// <summary>
@@ -80,15 +91,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public static ICheckConstraint? FindCheckConstraint(
             IReadOnlyEntityType entityType,
-            string name)
-        {
+            string name
+        ) {
             var dataDictionary = GetConstraintsDictionary(entityType);
 
             return dataDictionary == null
-                ? null
-                : dataDictionary.TryGetValue(name, out var checkConstraint)
-                    ? checkConstraint
-                    : null;
+              ? null
+              : dataDictionary.TryGetValue(name, out var checkConstraint) ? checkConstraint : null;
         }
 
         /// <summary>
@@ -99,12 +108,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public static CheckConstraint? RemoveCheckConstraint(
             IMutableEntityType entityType,
-            string name)
-        {
+            string name
+        ) {
             var dataDictionary = GetConstraintsDictionary(entityType);
 
-            if (dataDictionary != null
-                && dataDictionary.TryGetValue(name, out var constraint))
+            if (dataDictionary != null && dataDictionary.TryGetValue(name, out var constraint))
             {
                 var checkConstraint = (CheckConstraint)constraint;
                 checkConstraint.EnsureMutable();
@@ -151,8 +159,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual ConfigurationSource GetConfigurationSource()
-            => _configurationSource;
+        public virtual ConfigurationSource GetConfigurationSource() => _configurationSource;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -165,8 +172,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _configurationSource = configurationSource.Max(_configurationSource);
         }
 
-        private static Dictionary<string, ICheckConstraint>? GetConstraintsDictionary(IReadOnlyEntityType entityType)
-            => (Dictionary<string, ICheckConstraint>?)entityType[RelationalAnnotationNames.CheckConstraints];
+        private static Dictionary<string, ICheckConstraint>? GetConstraintsDictionary(
+            IReadOnlyEntityType entityType
+        ) =>
+            (Dictionary<string, ICheckConstraint>?)entityType[
+                RelationalAnnotationNames.CheckConstraints
+            ];
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -174,8 +185,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override string ToString()
-            => ((ICheckConstraint)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+        public override string ToString() =>
+            ((ICheckConstraint)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

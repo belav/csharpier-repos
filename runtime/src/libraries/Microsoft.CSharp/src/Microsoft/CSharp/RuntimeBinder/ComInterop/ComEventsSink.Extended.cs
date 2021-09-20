@@ -32,7 +32,10 @@ namespace System.Runtime.InteropServices
             }
             else
             {
-                method.AddDelegate(new SplatCallSite.InvokeDelegate(new SplatCallSite(func).Invoke), wrapArgs: true);
+                method.AddDelegate(
+                    new SplatCallSite.InvokeDelegate(new SplatCallSite(func).Invoke),
+                    wrapArgs: true
+                );
             }
         }
 
@@ -55,7 +58,9 @@ namespace System.Runtime.InteropServices
                 // to the func handler we want to remove. This will be
                 // easy since we Target property of the delegate object
                 // is a ComEventCallContext object.
-                sinkEntry.RemoveDelegates(d => d.Target is SplatCallSite callContext && callContext._callable.Equals(func));
+                sinkEntry.RemoveDelegates(
+                    d => d.Target is SplatCallSite callContext && callContext._callable.Equals(func)
+                );
             }
 
             // If the delegates chain is empty - we can remove
@@ -70,9 +75,15 @@ namespace System.Runtime.InteropServices
             }
         }
 
-        public static ComEventsSink FromRuntimeCallableWrapper(object rcw, Guid sourceIid, bool createIfNotFound)
-        {
-            List<ComEventsSink> comEventSinks = ComEventSinksContainer.FromRuntimeCallableWrapper(rcw, createIfNotFound);
+        public static ComEventsSink FromRuntimeCallableWrapper(
+            object rcw,
+            Guid sourceIid,
+            bool createIfNotFound
+        ) {
+            List<ComEventsSink> comEventSinks = ComEventSinksContainer.FromRuntimeCallableWrapper(
+                rcw,
+                createIfNotFound
+            );
             if (comEventSinks == null)
             {
                 return null;

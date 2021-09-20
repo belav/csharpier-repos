@@ -59,8 +59,11 @@ namespace Newtonsoft.Json.Utilities
             bufferPool?.Return(buffer);
         }
 
-        public static char[] EnsureBufferSize(IArrayPool<char>? bufferPool, int size, char[]? buffer)
-        {
+        public static char[] EnsureBufferSize(
+            IArrayPool<char>? bufferPool,
+            int size,
+            char[]? buffer
+        ) {
             if (bufferPool == null)
             {
                 return new char[size];
@@ -85,10 +88,7 @@ namespace Newtonsoft.Json.Utilities
 
         static JavaScriptUtils()
         {
-            IList<char> escapeChars = new List<char>
-            {
-                '\n', '\r', '\t', '\\', '\f', '\b',
-            };
+            IList<char> escapeChars = new List<char> { '\n', '\r', '\t', '\\', '\f', '\b', };
             for (int i = 0; i < ' '; i++)
             {
                 escapeChars.Add((char)i);
@@ -110,8 +110,10 @@ namespace Newtonsoft.Json.Utilities
 
         private const string EscapedUnicodeText = "!";
 
-        public static bool[] GetCharEscapeFlags(StringEscapeHandling stringEscapeHandling, char quoteChar)
-        {
+        public static bool[] GetCharEscapeFlags(
+            StringEscapeHandling stringEscapeHandling,
+            char quoteChar
+        ) {
             if (stringEscapeHandling == StringEscapeHandling.EscapeHtml)
             {
                 return HtmlCharEscapeFlags;
@@ -144,9 +146,16 @@ namespace Newtonsoft.Json.Utilities
             return false;
         }
 
-        public static void WriteEscapedJavaScriptString(TextWriter writer, string? s, char delimiter, bool appendDelimiters,
-            bool[] charEscapeFlags, StringEscapeHandling stringEscapeHandling, IArrayPool<char>? bufferPool, ref char[]? writeBuffer)
-        {
+        public static void WriteEscapedJavaScriptString(
+            TextWriter writer,
+            string? s,
+            char delimiter,
+            bool appendDelimiters,
+            bool[] charEscapeFlags,
+            StringEscapeHandling stringEscapeHandling,
+            IArrayPool<char>? bufferPool,
+            ref char[]? writeBuffer
+        ) {
             // leading delimiter
             if (appendDelimiters)
             {
@@ -166,7 +175,11 @@ namespace Newtonsoft.Json.Utilities
                     {
                         if (writeBuffer == null || writeBuffer.Length < lastWritePosition)
                         {
-                            writeBuffer = BufferUtils.EnsureBufferSize(bufferPool, lastWritePosition, writeBuffer);
+                            writeBuffer = BufferUtils.EnsureBufferSize(
+                                bufferPool,
+                                lastWritePosition,
+                                writeBuffer
+                            );
                         }
 
                         // write unchanged chars at start of text.
@@ -216,21 +229,33 @@ namespace Newtonsoft.Json.Utilities
                                 escapedValue = @"\u2029";
                                 break;
                             default:
-                                if (c < charEscapeFlags.Length || stringEscapeHandling == StringEscapeHandling.EscapeNonAscii)
-                                {
-                                    if (c == '\'' && stringEscapeHandling != StringEscapeHandling.EscapeHtml)
-                                    {
+                                if (
+                                    c < charEscapeFlags.Length
+                                    || stringEscapeHandling == StringEscapeHandling.EscapeNonAscii
+                                ) {
+                                    if (
+                                        c == '\''
+                                        && stringEscapeHandling != StringEscapeHandling.EscapeHtml
+                                    ) {
                                         escapedValue = @"\'";
                                     }
-                                    else if (c == '"' && stringEscapeHandling != StringEscapeHandling.EscapeHtml)
-                                    {
+                                    else if (
+                                        c == '"'
+                                        && stringEscapeHandling != StringEscapeHandling.EscapeHtml
+                                    ) {
                                         escapedValue = @"\""";
                                     }
                                     else
                                     {
-                                        if (writeBuffer == null || writeBuffer.Length < UnicodeTextLength)
-                                        {
-                                            writeBuffer = BufferUtils.EnsureBufferSize(bufferPool, UnicodeTextLength, writeBuffer);
+                                        if (
+                                            writeBuffer == null
+                                            || writeBuffer.Length < UnicodeTextLength
+                                        ) {
+                                            writeBuffer = BufferUtils.EnsureBufferSize(
+                                                bufferPool,
+                                                UnicodeTextLength,
+                                                writeBuffer
+                                            );
                                         }
 
                                         StringUtils.ToCharAsUnicode(c, writeBuffer!);
@@ -251,11 +276,17 @@ namespace Newtonsoft.Json.Utilities
                             continue;
                         }
 
-                        bool isEscapedUnicodeText = string.Equals(escapedValue, EscapedUnicodeText, StringComparison.Ordinal);
+                        bool isEscapedUnicodeText = string.Equals(
+                            escapedValue,
+                            EscapedUnicodeText,
+                            StringComparison.Ordinal
+                        );
 
                         if (i > lastWritePosition)
                         {
-                            length = i - lastWritePosition + ((isEscapedUnicodeText) ? UnicodeTextLength : 0);
+                            length =
+                                i - lastWritePosition
+                                + ((isEscapedUnicodeText) ? UnicodeTextLength : 0);
                             int start = (isEscapedUnicodeText) ? UnicodeTextLength : 0;
 
                             if (writeBuffer == null || writeBuffer.Length < length)
@@ -266,7 +297,10 @@ namespace Newtonsoft.Json.Utilities
                                 // copy it over when creating new buffer
                                 if (isEscapedUnicodeText)
                                 {
-                                    MiscellaneousUtils.Assert(writeBuffer != null, "Write buffer should never be null because it is set when the escaped unicode text is encountered.");
+                                    MiscellaneousUtils.Assert(
+                                        writeBuffer != null,
+                                        "Write buffer should never be null because it is set when the escaped unicode text is encountered."
+                                    );
 
                                     Array.Copy(writeBuffer, newBuffer, UnicodeTextLength);
                                 }
@@ -299,7 +333,11 @@ namespace Newtonsoft.Json.Utilities
                     {
                         if (writeBuffer == null || writeBuffer.Length < length)
                         {
-                            writeBuffer = BufferUtils.EnsureBufferSize(bufferPool, length, writeBuffer);
+                            writeBuffer = BufferUtils.EnsureBufferSize(
+                                bufferPool,
+                                length,
+                                writeBuffer
+                            );
                         }
 
                         s.CopyTo(lastWritePosition, writeBuffer, 0, length);
@@ -317,20 +355,36 @@ namespace Newtonsoft.Json.Utilities
             }
         }
 
-        public static string ToEscapedJavaScriptString(string? value, char delimiter, bool appendDelimiters, StringEscapeHandling stringEscapeHandling)
-        {
+        public static string ToEscapedJavaScriptString(
+            string? value,
+            char delimiter,
+            bool appendDelimiters,
+            StringEscapeHandling stringEscapeHandling
+        ) {
             bool[] charEscapeFlags = GetCharEscapeFlags(stringEscapeHandling, delimiter);
 
             using (StringWriter w = StringUtils.CreateStringWriter(value?.Length ?? 16))
             {
                 char[]? buffer = null;
-                WriteEscapedJavaScriptString(w, value, delimiter, appendDelimiters, charEscapeFlags, stringEscapeHandling, null, ref buffer);
+                WriteEscapedJavaScriptString(
+                    w,
+                    value,
+                    delimiter,
+                    appendDelimiters,
+                    charEscapeFlags,
+                    stringEscapeHandling,
+                    null,
+                    ref buffer
+                );
                 return w.ToString();
             }
         }
-        
-        private static int FirstCharToEscape(string s, bool[] charEscapeFlags, StringEscapeHandling stringEscapeHandling)
-        {
+
+        private static int FirstCharToEscape(
+            string s,
+            bool[] charEscapeFlags,
+            StringEscapeHandling stringEscapeHandling
+        ) {
             for (int i = 0; i != s.Length; i++)
             {
                 char c = s[i];
@@ -362,8 +416,17 @@ namespace Newtonsoft.Json.Utilities
         }
 
 #if HAVE_ASYNC
-        public static Task WriteEscapedJavaScriptStringAsync(TextWriter writer, string s, char delimiter, bool appendDelimiters, bool[] charEscapeFlags, StringEscapeHandling stringEscapeHandling, JsonTextWriter client, char[] writeBuffer, CancellationToken cancellationToken = default)
-        {
+        public static Task WriteEscapedJavaScriptStringAsync(
+            TextWriter writer,
+            string s,
+            char delimiter,
+            bool appendDelimiters,
+            bool[] charEscapeFlags,
+            StringEscapeHandling stringEscapeHandling,
+            JsonTextWriter client,
+            char[] writeBuffer,
+            CancellationToken cancellationToken = default
+        ) {
             if (cancellationToken.IsCancellationRequested)
             {
                 return cancellationToken.FromCanceled();
@@ -371,7 +434,16 @@ namespace Newtonsoft.Json.Utilities
 
             if (appendDelimiters)
             {
-                return WriteEscapedJavaScriptStringWithDelimitersAsync(writer, s, delimiter, charEscapeFlags, stringEscapeHandling, client, writeBuffer, cancellationToken);
+                return WriteEscapedJavaScriptStringWithDelimitersAsync(
+                    writer,
+                    s,
+                    delimiter,
+                    charEscapeFlags,
+                    stringEscapeHandling,
+                    client,
+                    writeBuffer,
+                    cancellationToken
+                );
             }
 
             if (StringUtils.IsNullOrEmpty(s))
@@ -379,21 +451,54 @@ namespace Newtonsoft.Json.Utilities
                 return cancellationToken.CancelIfRequestedAsync() ?? AsyncUtils.CompletedTask;
             }
 
-            return WriteEscapedJavaScriptStringWithoutDelimitersAsync(writer, s, charEscapeFlags, stringEscapeHandling, client, writeBuffer, cancellationToken);
+            return WriteEscapedJavaScriptStringWithoutDelimitersAsync(
+                writer,
+                s,
+                charEscapeFlags,
+                stringEscapeHandling,
+                client,
+                writeBuffer,
+                cancellationToken
+            );
         }
 
-        private static Task WriteEscapedJavaScriptStringWithDelimitersAsync(TextWriter writer, string s, char delimiter,
-            bool[] charEscapeFlags, StringEscapeHandling stringEscapeHandling, JsonTextWriter client, char[] writeBuffer, CancellationToken cancellationToken)
-        {
+        private static Task WriteEscapedJavaScriptStringWithDelimitersAsync(
+            TextWriter writer,
+            string s,
+            char delimiter,
+            bool[] charEscapeFlags,
+            StringEscapeHandling stringEscapeHandling,
+            JsonTextWriter client,
+            char[] writeBuffer,
+            CancellationToken cancellationToken
+        ) {
             Task task = writer.WriteAsync(delimiter, cancellationToken);
             if (!task.IsCompletedSucessfully())
             {
-                return WriteEscapedJavaScriptStringWithDelimitersAsync(task, writer, s, delimiter, charEscapeFlags, stringEscapeHandling, client, writeBuffer, cancellationToken);
+                return WriteEscapedJavaScriptStringWithDelimitersAsync(
+                    task,
+                    writer,
+                    s,
+                    delimiter,
+                    charEscapeFlags,
+                    stringEscapeHandling,
+                    client,
+                    writeBuffer,
+                    cancellationToken
+                );
             }
 
             if (!StringUtils.IsNullOrEmpty(s))
             {
-                task = WriteEscapedJavaScriptStringWithoutDelimitersAsync(writer, s, charEscapeFlags, stringEscapeHandling, client, writeBuffer, cancellationToken);
+                task = WriteEscapedJavaScriptStringWithoutDelimitersAsync(
+                    writer,
+                    s,
+                    charEscapeFlags,
+                    stringEscapeHandling,
+                    client,
+                    writeBuffer,
+                    cancellationToken
+                );
                 if (task.IsCompletedSucessfully())
                 {
                     return writer.WriteAsync(delimiter, cancellationToken);
@@ -401,43 +506,82 @@ namespace Newtonsoft.Json.Utilities
             }
 
             return WriteCharAsync(task, writer, delimiter, cancellationToken);
-            
         }
 
-        private static async Task WriteEscapedJavaScriptStringWithDelimitersAsync(Task task, TextWriter writer, string s, char delimiter,
-            bool[] charEscapeFlags, StringEscapeHandling stringEscapeHandling, JsonTextWriter client, char[] writeBuffer, CancellationToken cancellationToken)
-        {
+        private static async Task WriteEscapedJavaScriptStringWithDelimitersAsync(
+            Task task,
+            TextWriter writer,
+            string s,
+            char delimiter,
+            bool[] charEscapeFlags,
+            StringEscapeHandling stringEscapeHandling,
+            JsonTextWriter client,
+            char[] writeBuffer,
+            CancellationToken cancellationToken
+        ) {
             await task.ConfigureAwait(false);
 
             if (!StringUtils.IsNullOrEmpty(s))
             {
-                await WriteEscapedJavaScriptStringWithoutDelimitersAsync(writer, s, charEscapeFlags, stringEscapeHandling, client, writeBuffer, cancellationToken).ConfigureAwait(false);
+                await WriteEscapedJavaScriptStringWithoutDelimitersAsync(
+                        writer,
+                        s,
+                        charEscapeFlags,
+                        stringEscapeHandling,
+                        client,
+                        writeBuffer,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             await writer.WriteAsync(delimiter).ConfigureAwait(false);
         }
 
-        public static async Task WriteCharAsync(Task task, TextWriter writer, char c, CancellationToken cancellationToken)
-        {
+        public static async Task WriteCharAsync(
+            Task task,
+            TextWriter writer,
+            char c,
+            CancellationToken cancellationToken
+        ) {
             await task.ConfigureAwait(false);
             await writer.WriteAsync(c, cancellationToken).ConfigureAwait(false);
         }
 
         private static Task WriteEscapedJavaScriptStringWithoutDelimitersAsync(
-            TextWriter writer, string s, bool[] charEscapeFlags, StringEscapeHandling stringEscapeHandling,
-            JsonTextWriter client, char[] writeBuffer, CancellationToken cancellationToken)
-        {
+            TextWriter writer,
+            string s,
+            bool[] charEscapeFlags,
+            StringEscapeHandling stringEscapeHandling,
+            JsonTextWriter client,
+            char[] writeBuffer,
+            CancellationToken cancellationToken
+        ) {
             int i = FirstCharToEscape(s, charEscapeFlags, stringEscapeHandling);
             return i == -1
-                ? writer.WriteAsync(s, cancellationToken)
-                : WriteDefinitelyEscapedJavaScriptStringWithoutDelimitersAsync(writer, s, i, charEscapeFlags, stringEscapeHandling, client, writeBuffer, cancellationToken);
+              ? writer.WriteAsync(s, cancellationToken)
+              : WriteDefinitelyEscapedJavaScriptStringWithoutDelimitersAsync(
+                    writer,
+                    s,
+                    i,
+                    charEscapeFlags,
+                    stringEscapeHandling,
+                    client,
+                    writeBuffer,
+                    cancellationToken
+                );
         }
 
         private static async Task WriteDefinitelyEscapedJavaScriptStringWithoutDelimitersAsync(
-            TextWriter writer, string s, int lastWritePosition, bool[] charEscapeFlags,
-            StringEscapeHandling stringEscapeHandling, JsonTextWriter client, char[] writeBuffer,
-            CancellationToken cancellationToken)
-        {
+            TextWriter writer,
+            string s,
+            int lastWritePosition,
+            bool[] charEscapeFlags,
+            StringEscapeHandling stringEscapeHandling,
+            JsonTextWriter client,
+            char[] writeBuffer,
+            CancellationToken cancellationToken
+        ) {
             if (writeBuffer == null || writeBuffer.Length < lastWritePosition)
             {
                 writeBuffer = client.EnsureWriteBuffer(lastWritePosition, UnicodeTextLength);
@@ -448,7 +592,8 @@ namespace Newtonsoft.Json.Utilities
                 s.CopyTo(0, writeBuffer, 0, lastWritePosition);
 
                 // write unchanged chars at start of text.
-                await writer.WriteAsync(writeBuffer, 0, lastWritePosition, cancellationToken).ConfigureAwait(false);
+                await writer.WriteAsync(writeBuffer, 0, lastWritePosition, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             int length;
@@ -494,14 +639,18 @@ namespace Newtonsoft.Json.Utilities
                         escapedValue = @"\u2029";
                         break;
                     default:
-                        if (c < charEscapeFlags.Length || stringEscapeHandling == StringEscapeHandling.EscapeNonAscii)
-                        {
-                            if (c == '\'' && stringEscapeHandling != StringEscapeHandling.EscapeHtml)
-                            {
+                        if (
+                            c < charEscapeFlags.Length
+                            || stringEscapeHandling == StringEscapeHandling.EscapeNonAscii
+                        ) {
+                            if (
+                                c == '\'' && stringEscapeHandling != StringEscapeHandling.EscapeHtml
+                            ) {
                                 escapedValue = @"\'";
                             }
-                            else if (c == '"' && stringEscapeHandling != StringEscapeHandling.EscapeHtml)
-                            {
+                            else if (
+                                c == '"' && stringEscapeHandling != StringEscapeHandling.EscapeHtml
+                            ) {
                                 escapedValue = @"\""";
                             }
                             else
@@ -536,7 +685,8 @@ namespace Newtonsoft.Json.Utilities
                     s.CopyTo(lastWritePosition, writeBuffer, start, length - start);
 
                     // write unchanged chars before writing escaped text
-                    await writer.WriteAsync(writeBuffer, start, length - start, cancellationToken).ConfigureAwait(false);
+                    await writer.WriteAsync(writeBuffer, start, length - start, cancellationToken)
+                        .ConfigureAwait(false);
                 }
 
                 lastWritePosition = i + 1;
@@ -546,7 +696,8 @@ namespace Newtonsoft.Json.Utilities
                 }
                 else
                 {
-                    await writer.WriteAsync(writeBuffer, 0, UnicodeTextLength, cancellationToken).ConfigureAwait(false);
+                    await writer.WriteAsync(writeBuffer, 0, UnicodeTextLength, cancellationToken)
+                        .ConfigureAwait(false);
                     isEscapedUnicodeText = false;
                 }
             }
@@ -563,13 +714,17 @@ namespace Newtonsoft.Json.Utilities
                 s.CopyTo(lastWritePosition, writeBuffer, 0, length);
 
                 // write remaining text
-                await writer.WriteAsync(writeBuffer, 0, length, cancellationToken).ConfigureAwait(false);
+                await writer.WriteAsync(writeBuffer, 0, length, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
 #endif
 
-        public static bool TryGetDateFromConstructorJson(JsonReader reader, out DateTime dateTime, [NotNullWhen(false)]out string? errorMessage)
-        {
+        public static bool TryGetDateFromConstructorJson(
+            JsonReader reader,
+            out DateTime dateTime,
+            [NotNullWhen(false)] out string? errorMessage
+        ) {
             dateTime = default;
             errorMessage = null;
 
@@ -585,11 +740,7 @@ namespace Newtonsoft.Json.Utilities
             else if (t2 != null)
             {
                 // Only create a list when there is more than one argument
-                List<long> dateArgs = new List<long>
-                {
-                    t1.Value,
-                    t2.Value
-                };
+                List<long> dateArgs = new List<long> { t1.Value, t2.Value };
                 while (true)
                 {
                     if (!TryGetDateConstructorValue(reader, out long? integer, out errorMessage))
@@ -618,8 +769,15 @@ namespace Newtonsoft.Json.Utilities
                     dateArgs.Add(0);
                 }
 
-                dateTime = new DateTime((int)dateArgs[0], (int)dateArgs[1] + 1, dateArgs[2] == 0 ? 1 : (int)dateArgs[2],
-                    (int)dateArgs[3], (int)dateArgs[4], (int)dateArgs[5], (int)dateArgs[6]);
+                dateTime = new DateTime(
+                    (int)dateArgs[0],
+                    (int)dateArgs[1] + 1,
+                    dateArgs[2] == 0 ? 1 : (int)dateArgs[2],
+                    (int)dateArgs[3],
+                    (int)dateArgs[4],
+                    (int)dateArgs[5],
+                    (int)dateArgs[6]
+                );
             }
             else
             {
@@ -629,8 +787,11 @@ namespace Newtonsoft.Json.Utilities
             return true;
         }
 
-        private static bool TryGetDateConstructorValue(JsonReader reader, out long? integer, [NotNullWhen(false)] out string? errorMessage)
-        {
+        private static bool TryGetDateConstructorValue(
+            JsonReader reader,
+            out long? integer,
+            [NotNullWhen(false)] out string? errorMessage
+        ) {
             integer = null;
             errorMessage = null;
 
@@ -645,7 +806,9 @@ namespace Newtonsoft.Json.Utilities
             }
             if (reader.TokenType != JsonToken.Integer)
             {
-                errorMessage = "Unexpected token when reading date constructor. Expected Integer, got " + reader.TokenType;
+                errorMessage =
+                    "Unexpected token when reading date constructor. Expected Integer, got "
+                    + reader.TokenType;
                 return false;
             }
 

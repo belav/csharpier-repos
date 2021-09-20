@@ -75,13 +75,14 @@ namespace Microsoft.AspNetCore.BenchmarkDotNet.Runner
             {
                 // Compat: support the old style of passing a config that is used by our build system.
                 SuppressConsole();
-                AspNetCoreBenchmarkAttribute.ConfigName = AspNetCoreBenchmarkAttribute.NamedConfiguration.Validation;
+                AspNetCoreBenchmarkAttribute.ConfigName =
+                    AspNetCoreBenchmarkAttribute.NamedConfiguration.Validation;
                 args = argsList.ToArray();
                 return;
             }
 
             var index = argsList.IndexOf("--config");
-            if (index >= 0 && index < argsList.Count -1)
+            if (index >= 0 && index < argsList.Count - 1)
             {
                 AspNetCoreBenchmarkAttribute.ConfigName = argsList[index + 1];
                 argsList.RemoveAt(index + 1);
@@ -92,9 +93,12 @@ namespace Microsoft.AspNetCore.BenchmarkDotNet.Runner
 
             if (Debugger.IsAttached)
             {
-                Console.WriteLine("Using the debug config since you are debugging. I hope that's OK!");
+                Console.WriteLine(
+                    "Using the debug config since you are debugging. I hope that's OK!"
+                );
                 Console.WriteLine("Specify a configuration with --config <name> to override");
-                AspNetCoreBenchmarkAttribute.ConfigName = AspNetCoreBenchmarkAttribute.NamedConfiguration.Debug;
+                AspNetCoreBenchmarkAttribute.ConfigName =
+                    AspNetCoreBenchmarkAttribute.NamedConfiguration.Debug;
                 return;
             }
         }

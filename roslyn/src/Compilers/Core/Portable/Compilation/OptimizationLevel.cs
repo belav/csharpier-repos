@@ -27,7 +27,6 @@ namespace Microsoft.CodeAnalysis
         /// </para>
         /// </remarks>
         Debug = 0,
-
         /// <summary>
         /// Enables all optimizations, debugging experience might be degraded.
         /// </summary>
@@ -48,10 +47,14 @@ namespace Microsoft.CodeAnalysis
 
     internal static class OptimizationLevelFacts
     {
-        internal static (OptimizationLevel OptimizationLevel, bool DebugPlus) DefaultValues => (OptimizationLevel.Debug, false);
+        internal static (OptimizationLevel OptimizationLevel, bool DebugPlus) DefaultValues =>
+            (OptimizationLevel.Debug, false);
 
-        public static string ToPdbSerializedString(this OptimizationLevel optimization, bool debugPlusMode)
-            => (optimization, debugPlusMode) switch
+        public static string ToPdbSerializedString(
+            this OptimizationLevel optimization,
+            bool debugPlusMode
+        ) =>
+            (optimization, debugPlusMode) switch
             {
                 (OptimizationLevel.Release, true) => "release-debug-plus",
                 (OptimizationLevel.Release, false) => "release",
@@ -60,8 +63,11 @@ namespace Microsoft.CodeAnalysis
                 _ => throw ExceptionUtilities.UnexpectedValue(optimization)
             };
 
-        public static bool TryParsePdbSerializedString(string value, out OptimizationLevel optimizationLevel, out bool debugPlusMode)
-        {
+        public static bool TryParsePdbSerializedString(
+            string value,
+            out OptimizationLevel optimizationLevel,
+            out bool debugPlusMode
+        ) {
             switch (value)
             {
                 case "release-debug-plus":

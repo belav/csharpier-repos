@@ -25,8 +25,12 @@ namespace Microsoft.Cci
         }
 
         // typeDefinitionToken is token returned by GetMethodProps or GetNestedClassProps
-        public bool TryGetTypeDefinitionInfo(int typeDefinitionToken, out string namespaceName, out string typeName, out TypeAttributes attributes)
-        {
+        public bool TryGetTypeDefinitionInfo(
+            int typeDefinitionToken,
+            out string namespaceName,
+            out string typeName,
+            out TypeAttributes attributes
+        ) {
             if (typeDefinitionToken == 0)
             {
                 namespaceName = null;
@@ -35,7 +39,7 @@ namespace Microsoft.Cci
                 return false;
             }
 
-            // The typeDef name should be fully qualified 
+            // The typeDef name should be fully qualified
             ITypeDefinition t = _writer.GetTypeDefinition(typeDefinitionToken);
             if (_lastTypeDef == typeDefinitionToken)
             {
@@ -66,11 +70,16 @@ namespace Microsoft.Cci
         }
 
         // methodDefinitionToken is the token passed to OpenMethod. The token is remembered until the corresponding CloseMethod, which passes it to TryGetMethodInfo.
-        public bool TryGetMethodInfo(int methodDefinitionToken, out string methodName, out int declaringTypeToken)
-        {
+        public bool TryGetMethodInfo(
+            int methodDefinitionToken,
+            out string methodName,
+            out int declaringTypeToken
+        ) {
             IMethodDefinition m = _writer.GetMethodDefinition(methodDefinitionToken);
             methodName = m.Name;
-            declaringTypeToken = MetadataTokens.GetToken(_writer.GetTypeHandle(m.GetContainingType(_writer.Context)));
+            declaringTypeToken = MetadataTokens.GetToken(
+                _writer.GetTypeHandle(m.GetContainingType(_writer.Context))
+            );
             return true;
         }
 
@@ -83,7 +92,9 @@ namespace Microsoft.Cci
                 return false;
             }
 
-            enclosingTypeToken = MetadataTokens.GetToken(_writer.GetTypeHandle(nt.GetContainingType(_writer.Context)));
+            enclosingTypeToken = MetadataTokens.GetToken(
+                _writer.GetTypeHandle(nt.GetContainingType(_writer.Context))
+            );
             return true;
         }
     }

@@ -21,8 +21,12 @@ namespace Microsoft.AspNetCore.Http
         /// <param name="destination">The stream to which the contents of the current stream will be copied.</param>
         /// <param name="count">The count of bytes to be copied.</param>
         /// <param name="cancel">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
-        public static Task CopyToAsync(Stream source, Stream destination, long? count, CancellationToken cancel)
-        {
+        public static Task CopyToAsync(
+            Stream source,
+            Stream destination,
+            long? count,
+            CancellationToken cancel
+        ) {
             return CopyToAsync(source, destination, count, DefaultBufferSize, cancel);
         }
 
@@ -33,8 +37,13 @@ namespace Microsoft.AspNetCore.Http
         /// <param name="count">The count of bytes to be copied.</param>
         /// <param name="bufferSize">The size, in bytes, of the buffer. This value must be greater than zero. The default size is 4096.</param>
         /// <param name="cancel">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
-        public static async Task CopyToAsync(Stream source, Stream destination, long? count, int bufferSize, CancellationToken cancel)
-        {
+        public static async Task CopyToAsync(
+            Stream source,
+            Stream destination,
+            long? count,
+            int bufferSize,
+            CancellationToken cancel
+        ) {
             long? bytesRemaining = count;
 
             var buffer = ArrayPool<byte>.Shared.Rent(bufferSize);
@@ -58,7 +67,10 @@ namespace Microsoft.AspNetCore.Http
                     int readLength = buffer.Length;
                     if (bytesRemaining.HasValue)
                     {
-                        readLength = (int)Math.Min(bytesRemaining.GetValueOrDefault(), (long)readLength);
+                        readLength = (int)Math.Min(
+                            bytesRemaining.GetValueOrDefault(),
+                            (long)readLength
+                        );
                     }
                     int read = await source.ReadAsync(buffer, 0, readLength, cancel);
 
@@ -78,6 +90,7 @@ namespace Microsoft.AspNetCore.Http
                     await destination.WriteAsync(buffer, 0, read, cancel);
                 }
             }
+
             finally
             {
                 ArrayPool<byte>.Shared.Return(buffer);

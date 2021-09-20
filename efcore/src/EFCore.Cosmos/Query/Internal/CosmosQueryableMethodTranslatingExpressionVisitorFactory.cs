@@ -20,7 +20,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
     ///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
     ///     </para>
     /// </summary>
-    public class CosmosQueryableMethodTranslatingExpressionVisitorFactory : IQueryableMethodTranslatingExpressionVisitorFactory
+    public class CosmosQueryableMethodTranslatingExpressionVisitorFactory
+        : IQueryableMethodTranslatingExpressionVisitorFactory
     {
         private readonly QueryableMethodTranslatingExpressionVisitorDependencies _dependencies;
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -37,8 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             QueryableMethodTranslatingExpressionVisitorDependencies dependencies,
             ISqlExpressionFactory sqlExpressionFactory,
             IMemberTranslatorProvider memberTranslatorProvider,
-            IMethodCallTranslatorProvider methodCallTranslatorProvider)
-        {
+            IMethodCallTranslatorProvider methodCallTranslatorProvider
+        ) {
             _dependencies = dependencies;
             _sqlExpressionFactory = sqlExpressionFactory;
             _memberTranslatorProvider = memberTranslatorProvider;
@@ -51,8 +52,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual QueryableMethodTranslatingExpressionVisitor Create(QueryCompilationContext queryCompilationContext)
-        {
+        public virtual QueryableMethodTranslatingExpressionVisitor Create(
+            QueryCompilationContext queryCompilationContext
+        ) {
             Check.NotNull(queryCompilationContext, nameof(queryCompilationContext));
 
             return new CosmosQueryableMethodTranslatingExpressionVisitor(
@@ -60,7 +62,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 queryCompilationContext,
                 _sqlExpressionFactory,
                 _memberTranslatorProvider,
-                _methodCallTranslatorProvider);
+                _methodCallTranslatorProvider
+            );
         }
     }
 }

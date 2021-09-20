@@ -311,18 +311,22 @@ namespace System.Threading.Tests
             int count = 0;
             for (int i = 0; i < 1000; i++)
             {
-                threads.Add(Task.Run(() =>
-                {
-                    for (int j = 0; j < 1000; j++)
-                    {
-                        var cookie = asymmetricLock.Enter();
-                        count++;
-                        cookie.Exit();
-                    }
-                }));
+                threads.Add(
+                    Task.Run(
+                        () =>
+                        {
+                            for (int j = 0; j < 1000; j++)
+                            {
+                                var cookie = asymmetricLock.Enter();
+                                count++;
+                                cookie.Exit();
+                            }
+                        }
+                    )
+                );
             }
             Task.WaitAll(threads.ToArray());
-            Assert.Equal(1000*1000, count);
+            Assert.Equal(1000 * 1000, count);
         }
 
         // Taking this lock on the same thread repeatedly is very fast because it has no interlocked operations.

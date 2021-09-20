@@ -15,13 +15,17 @@ namespace Microsoft.AspNetCore.Internal
         /// <param name="destination">The byte span where unescaped url path is copied to.</param>
         /// <param name="isFormEncoding">Whether we are doing form encoding or not.</param>
         /// <returns>The length of the byte sequence of the unescaped url path.</returns>
-        public static int DecodeRequestLine(ReadOnlySpan<byte> source, Span<byte> destination, bool isFormEncoding)
-        {
+        public static int DecodeRequestLine(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            bool isFormEncoding
+        ) {
             if (destination.Length < source.Length)
             {
                 throw new ArgumentException(
                     "Length of the destination byte span is less then the source.",
-                    nameof(destination));
+                    nameof(destination)
+                );
             }
 
             // This requires the destination span to be larger or equal to source span
@@ -93,8 +97,12 @@ namespace Microsoft.AspNetCore.Internal
         /// <param name="destinationIndex">The place to write to</param>
         /// <param name="buffer">The byte array</param>
         /// <param name="isFormEncoding">Whether we are doing form encodoing</param>
-        private static bool DecodeCore(ref int sourceIndex, ref int destinationIndex, Span<byte> buffer, bool isFormEncoding)
-        {
+        private static bool DecodeCore(
+            ref int sourceIndex,
+            ref int destinationIndex,
+            Span<byte> buffer,
+            bool isFormEncoding
+        ) {
             // preserves the original head. if the percent-encodings cannot be interpreted as sequence of UTF-8 octets,
             // bytes from this till the last scanned one will be copied to the memory pointed by writer.
             var byte1 = UnescapePercentEncoding(ref sourceIndex, buffer, isFormEncoding);
@@ -115,7 +123,9 @@ namespace Microsoft.AspNetCore.Internal
                 return true;
             }
 
-            int byte2 = 0, byte3 = 0, byte4 = 0;
+            int byte2 = 0,
+                byte3 = 0,
+                byte4 = 0;
 
             // anticipate more bytes
             var currentDecodeBits = 0;
@@ -259,8 +269,11 @@ namespace Microsoft.AspNetCore.Internal
         /// <param name="buffer">The byte array</param>
         /// <param name="isFormEncoding">Whether we are decoding a form or not. Will escape '/' if we are doing form encoding</param>
         /// <returns>The unescaped byte if success. Otherwise return -1.</returns>
-        private static int UnescapePercentEncoding(ref int scan, Span<byte> buffer, bool isFormEncoding)
-        {
+        private static int UnescapePercentEncoding(
+            ref int scan,
+            Span<byte> buffer,
+            bool isFormEncoding
+        ) {
             if (buffer[scan++] != '%')
             {
                 return -1;
@@ -289,7 +302,6 @@ namespace Microsoft.AspNetCore.Internal
             return (value1 << 4) + value2;
         }
 
-
         /// <summary>
         /// Read the next char and convert it into hexadecimal value.
         ///
@@ -307,9 +319,10 @@ namespace Microsoft.AspNetCore.Internal
             }
 
             var value = buffer[scan++];
-            var isHead = ((value >= '0') && (value <= '9')) ||
-                         ((value >= 'A') && (value <= 'F')) ||
-                         ((value >= 'a') && (value <= 'f'));
+            var isHead =
+                ((value >= '0') && (value <= '9'))
+                || ((value >= 'A') && (value <= 'F'))
+                || ((value >= 'a') && (value <= 'f'));
 
             if (!isHead)
             {

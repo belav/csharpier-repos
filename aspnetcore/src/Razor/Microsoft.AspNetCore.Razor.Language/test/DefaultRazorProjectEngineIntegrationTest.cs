@@ -16,7 +16,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var projectItem = new TestRazorProjectItem("Index.cshtml");
 
-            var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty);
+            var projectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                TestRazorProjectFileSystem.Empty
+            );
 
             // Act
             var codeDocument = projectEngine.Process(projectItem);
@@ -37,7 +40,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var projectItem = new TestRazorProjectItem("Index.cshtml");
 
-            var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty);
+            var projectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                TestRazorProjectFileSystem.Empty
+            );
 
             // Act
             var codeDocument = projectEngine.ProcessDesignTime(projectItem);
@@ -58,16 +64,21 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var projectItem = new TestRazorProjectItem("Index.cshtml");
 
-            var testImport = Mock.Of<RazorProjectItem>(i => i.Read() == new MemoryStream() && i.FilePath == "testvalue" && i.Exists == true);
+            var testImport = Mock.Of<RazorProjectItem>(
+                i => i.Read() == new MemoryStream() && i.FilePath == "testvalue" && i.Exists == true
+            );
             var importFeature = new Mock<IImportProjectFeature>();
-            importFeature
-                .Setup(feature => feature.GetImports(It.IsAny<RazorProjectItem>()))
+            importFeature.Setup(feature => feature.GetImports(It.IsAny<RazorProjectItem>()))
                 .Returns(new[] { testImport });
 
-            var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty, builder =>
-            {
-                builder.SetImportFeature(importFeature.Object);
-            });
+            var projectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                TestRazorProjectFileSystem.Empty,
+                builder =>
+                {
+                    builder.SetImportFeature(importFeature.Object);
+                }
+            );
 
             // Act
             var codeDocument = projectEngine.Process(projectItem);
@@ -83,31 +94,41 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var projectItem = new TestRazorProjectItem("Index.cshtml");
 
-            var testImport1 = Mock.Of<RazorProjectItem>(i => i.Read() == new MemoryStream() && i.FilePath == "testvalue1" && i.Exists == true);
+            var testImport1 = Mock.Of<RazorProjectItem>(
+                i =>
+                    i.Read() == new MemoryStream() && i.FilePath == "testvalue1" && i.Exists == true
+            );
             var importFeature1 = new Mock<IImportProjectFeature>();
-            importFeature1
-                .Setup(feature => feature.GetImports(It.IsAny<RazorProjectItem>()))
+            importFeature1.Setup(feature => feature.GetImports(It.IsAny<RazorProjectItem>()))
                 .Returns(new[] { testImport1 });
 
-            var testImport2 = Mock.Of<RazorProjectItem>(i => i.Read() == new MemoryStream() && i.FilePath == "testvalue2" && i.Exists == true);
+            var testImport2 = Mock.Of<RazorProjectItem>(
+                i =>
+                    i.Read() == new MemoryStream() && i.FilePath == "testvalue2" && i.Exists == true
+            );
             var importFeature2 = new Mock<IImportProjectFeature>();
-            importFeature2
-                .Setup(feature => feature.GetImports(It.IsAny<RazorProjectItem>()))
+            importFeature2.Setup(feature => feature.GetImports(It.IsAny<RazorProjectItem>()))
                 .Returns(new[] { testImport2 });
 
-            var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty, builder =>
-            {
-                builder.Features.Add(importFeature1.Object);
-                builder.Features.Add(importFeature2.Object);
-            });
+            var projectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                TestRazorProjectFileSystem.Empty,
+                builder =>
+                {
+                    builder.Features.Add(importFeature1.Object);
+                    builder.Features.Add(importFeature2.Object);
+                }
+            );
 
             // Act
             var codeDocument = projectEngine.Process(projectItem);
 
             // Assert
-            Assert.Collection(codeDocument.Imports,
+            Assert.Collection(
+                codeDocument.Imports,
                 i => Assert.Equal("testvalue1", i.FilePath),
-                i => Assert.Equal("testvalue2", i.FilePath));
+                i => Assert.Equal("testvalue2", i.FilePath)
+            );
         }
 
         [Fact]
@@ -115,7 +136,10 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             // Arrange
             var projectItem = new TestRazorProjectItem("Index.cshtml");
-            var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty);
+            var projectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                TestRazorProjectFileSystem.Empty
+            );
 
             // Act
             var codeDocument = projectEngine.Process(projectItem);
@@ -139,10 +163,18 @@ namespace Microsoft.AspNetCore.Razor.Language
                 TagHelperDescriptorBuilder.Create("Test2TagHelper", "TestAssembly").Build(),
             };
 
-            var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty);
+            var projectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                TestRazorProjectFileSystem.Empty
+            );
 
             // Act
-            var codeDocument = projectEngine.Process(RazorSourceDocument.ReadFrom(projectItem), "test", expectedImports, expectedTagHelpers);
+            var codeDocument = projectEngine.Process(
+                RazorSourceDocument.ReadFrom(projectItem),
+                "test",
+                expectedImports,
+                expectedTagHelpers
+            );
 
             // Assert
             var tagHelpers = codeDocument.GetTagHelpers();
@@ -156,10 +188,18 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var projectItem = new TestRazorProjectItem("Index.cshtml");
 
-            var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty);
+            var projectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                TestRazorProjectFileSystem.Empty
+            );
 
             // Act
-            var codeDocument = projectEngine.Process(RazorSourceDocument.ReadFrom(projectItem), "test", Array.Empty<RazorSourceDocument>(), tagHelpers: null);
+            var codeDocument = projectEngine.Process(
+                RazorSourceDocument.ReadFrom(projectItem),
+                "test",
+                Array.Empty<RazorSourceDocument>(),
+                tagHelpers: null
+            );
 
             // Assert
             var actual = codeDocument.GetFileKind();
@@ -172,10 +212,18 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var projectItem = new TestRazorProjectItem("Index.cshtml");
 
-            var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty);
+            var projectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                TestRazorProjectFileSystem.Empty
+            );
 
             // Act
-            var codeDocument = projectEngine.Process(RazorSourceDocument.ReadFrom(projectItem), "test", Array.Empty<RazorSourceDocument>(), tagHelpers: null);
+            var codeDocument = projectEngine.Process(
+                RazorSourceDocument.ReadFrom(projectItem),
+                "test",
+                Array.Empty<RazorSourceDocument>(),
+                tagHelpers: null
+            );
 
             // Assert
             var tagHelpers = codeDocument.GetTagHelpers();
@@ -188,7 +236,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var projectItem = new TestRazorProjectItem("Index.cshtml");
 
-            var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty);
+            var projectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                TestRazorProjectFileSystem.Empty
+            );
 
             // Act
             var codeDocument = projectEngine.Process(projectItem);
@@ -204,7 +255,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var projectItem = new TestRazorProjectItem("Index.cshtml");
 
-            var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty);
+            var projectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                TestRazorProjectFileSystem.Empty
+            );
 
             // Act
             var codeDocument = projectEngine.Process(projectItem);
@@ -220,7 +274,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var projectItem = new TestRazorProjectItem("Index.razor");
 
-            var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty);
+            var projectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                TestRazorProjectFileSystem.Empty
+            );
 
             // Act
             var codeDocument = projectEngine.Process(projectItem);
@@ -236,10 +293,18 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var projectItem = new TestRazorProjectItem("Index.cshtml");
 
-            var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty);
+            var projectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                TestRazorProjectFileSystem.Empty
+            );
 
             // Act
-            var codeDocument = projectEngine.Process(RazorSourceDocument.ReadFrom(projectItem), "test", importSources: null, tagHelpers: null);
+            var codeDocument = projectEngine.Process(
+                RazorSourceDocument.ReadFrom(projectItem),
+                "test",
+                importSources: null,
+                tagHelpers: null
+            );
 
             // Assert
             Assert.Empty(codeDocument.Imports);
@@ -258,10 +323,18 @@ namespace Microsoft.AspNetCore.Razor.Language
                 TagHelperDescriptorBuilder.Create("Test2TagHelper", "TestAssembly").Build(),
             };
 
-            var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty);
+            var projectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                TestRazorProjectFileSystem.Empty
+            );
 
             // Act
-            var codeDocument = projectEngine.ProcessDesignTime(RazorSourceDocument.ReadFrom(projectItem), "test", expectedImports, expectedTagHelpers);
+            var codeDocument = projectEngine.ProcessDesignTime(
+                RazorSourceDocument.ReadFrom(projectItem),
+                "test",
+                expectedImports,
+                expectedTagHelpers
+            );
 
             // Assert
             var tagHelpers = codeDocument.GetTagHelpers();
@@ -275,10 +348,18 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var projectItem = new TestRazorProjectItem("Index.cshtml");
 
-            var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty);
+            var projectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                TestRazorProjectFileSystem.Empty
+            );
 
             // Act
-            var codeDocument = projectEngine.ProcessDesignTime(RazorSourceDocument.ReadFrom(projectItem), "test", Array.Empty<RazorSourceDocument>(), tagHelpers: null);
+            var codeDocument = projectEngine.ProcessDesignTime(
+                RazorSourceDocument.ReadFrom(projectItem),
+                "test",
+                Array.Empty<RazorSourceDocument>(),
+                tagHelpers: null
+            );
 
             // Assert
             var tagHelpers = codeDocument.GetTagHelpers();
@@ -291,7 +372,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var projectItem = new TestRazorProjectItem("Index.cshtml");
 
-            var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty);
+            var projectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                TestRazorProjectFileSystem.Empty
+            );
 
             // Act
             var codeDocument = projectEngine.ProcessDesignTime(projectItem);
@@ -307,7 +391,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var projectItem = new TestRazorProjectItem("Index.razor");
 
-            var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty);
+            var projectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                TestRazorProjectFileSystem.Empty
+            );
 
             // Act
             var codeDocument = projectEngine.ProcessDesignTime(projectItem);
@@ -323,7 +410,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var projectItem = new TestRazorProjectItem("Index.cshtml");
 
-            var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty);
+            var projectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                TestRazorProjectFileSystem.Empty
+            );
 
             // Act
             var codeDocument = projectEngine.ProcessDesignTime(projectItem);
@@ -339,10 +429,18 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var projectItem = new TestRazorProjectItem("Index.cshtml");
 
-            var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, TestRazorProjectFileSystem.Empty);
+            var projectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                TestRazorProjectFileSystem.Empty
+            );
 
             // Act
-            var codeDocument = projectEngine.ProcessDesignTime(RazorSourceDocument.ReadFrom(projectItem), "test", importSources: null, tagHelpers: null);
+            var codeDocument = projectEngine.ProcessDesignTime(
+                RazorSourceDocument.ReadFrom(projectItem),
+                "test",
+                importSources: null,
+                tagHelpers: null
+            );
 
             // Assert
             Assert.Empty(codeDocument.Imports);

@@ -31,8 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             string migrationSubNamespace,
             string snapshotCode,
             string snapshotName,
-            string snapshotSubNamespace)
-        {
+            string snapshotSubNamespace
+        ) {
             Check.NotEmpty(fileExtension, nameof(fileExtension));
             Check.NotEmpty(migrationCode, nameof(migrationCode));
             Check.NotEmpty(migrationId, nameof(migrationId));

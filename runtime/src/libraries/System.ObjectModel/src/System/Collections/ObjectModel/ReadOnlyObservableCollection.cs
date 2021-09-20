@@ -15,8 +15,13 @@ namespace System.Collections.ObjectModel
     [Serializable]
     [DebuggerTypeProxy(typeof(CollectionDebugView<>))]
     [DebuggerDisplay("Count = {Count}")]
-    [TypeForwardedFrom("WindowsBase, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
-    public class ReadOnlyObservableCollection<T> : ReadOnlyCollection<T>, INotifyCollectionChanged, INotifyPropertyChanged
+    [TypeForwardedFrom(
+        "WindowsBase, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
+    public class ReadOnlyObservableCollection<T>
+        : ReadOnlyCollection<T>,
+          INotifyCollectionChanged,
+          INotifyPropertyChanged
     {
         /// <summary>
         /// Initializes a new instance of ReadOnlyObservableCollection that
@@ -24,8 +29,11 @@ namespace System.Collections.ObjectModel
         /// </summary>
         public ReadOnlyObservableCollection(ObservableCollection<T> list) : base(list)
         {
-            ((INotifyCollectionChanged)Items).CollectionChanged += new NotifyCollectionChangedEventHandler(HandleCollectionChanged);
-            ((INotifyPropertyChanged)Items).PropertyChanged += new PropertyChangedEventHandler(HandlePropertyChanged);
+            ((INotifyCollectionChanged)Items).CollectionChanged +=
+                new NotifyCollectionChangedEventHandler(HandleCollectionChanged);
+            ((INotifyPropertyChanged)Items).PropertyChanged += new PropertyChangedEventHandler(
+                HandlePropertyChanged
+            );
         }
 
         /// <summary>

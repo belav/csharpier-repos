@@ -11,8 +11,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static class ObjectWriterExtensions
     {
-        public static void WriteArray<T>(this ObjectWriter writer, ImmutableArray<T> values, Action<ObjectWriter, T> write)
-        {
+        public static void WriteArray<T>(
+            this ObjectWriter writer,
+            ImmutableArray<T> values,
+            Action<ObjectWriter, T> write
+        ) {
             writer.WriteInt32(values.Length);
             foreach (var val in values)
                 write(writer, val);
@@ -21,8 +24,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
     internal static class ObjectReaderExtensions
     {
-        public static ImmutableArray<T> ReadArray<T>(this ObjectReader reader, Func<ObjectReader, T> read)
-        {
+        public static ImmutableArray<T> ReadArray<T>(
+            this ObjectReader reader,
+            Func<ObjectReader, T> read
+        ) {
             var length = reader.ReadInt32();
             using var _ = ArrayBuilder<T>.GetInstance(length, out var builder);
 

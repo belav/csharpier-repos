@@ -8,9 +8,7 @@ using System.Linq;
 
 namespace System.CommandLine
 {
-    public class Option :
-        IdentifierSymbol,
-        IOption
+    public class Option : IdentifierSymbol, IOption
     {
         private string? _implicitName;
         private protected readonly HashSet<string> _unprefixedAliases = new HashSet<string>();
@@ -20,23 +18,18 @@ namespace System.CommandLine
             string? description = null,
             Type? argumentType = null,
             Func<object?>? getDefaultValue = null,
-            IArgumentArity? arity = null)
-            : this(new[] { alias }, description, argumentType, getDefaultValue, arity)
-        { }
+            IArgumentArity? arity = null
+        ) : this(new[] { alias }, description, argumentType, getDefaultValue, arity) { }
 
         public Option(
             string[] aliases,
             string? description = null,
             Type? argumentType = null,
             Func<object?>? getDefaultValue = null,
-            IArgumentArity? arity = null)
-            : this(aliases, description, CreateArgument(argumentType, getDefaultValue, arity))
-        { }
+            IArgumentArity? arity = null
+        ) : this(aliases, description, CreateArgument(argumentType, getDefaultValue, arity)) { }
 
-        internal Option(
-            string[] aliases,
-            string? description,
-            Argument? argument)
+        internal Option(string[] aliases, string? description, Argument? argument)
             : base(description)
         {
             if (aliases is null)
@@ -46,7 +39,10 @@ namespace System.CommandLine
 
             if (aliases.Length == 0)
             {
-                throw new ArgumentException("An option must have at least one alias.", nameof(aliases));
+                throw new ArgumentException(
+                    "An option must have at least one alias.",
+                    nameof(aliases)
+                );
             }
 
             for (var i = 0; i < aliases.Length; i++)
@@ -61,11 +57,12 @@ namespace System.CommandLine
             }
         }
 
-        private static Argument? CreateArgument(Type? argumentType, Func<object?>? getDefaultValue, IArgumentArity? arity)
-        {
-            if (argumentType is null &&
-                getDefaultValue is null &&
-                arity is null)
+        private static Argument? CreateArgument(
+            Type? argumentType,
+            Func<object?>? getDefaultValue,
+            IArgumentArity? arity
+        ) {
+            if (argumentType is null && getDefaultValue is null && arity is null)
             {
                 return null;
             }
@@ -98,7 +95,10 @@ namespace System.CommandLine
                         return none;
 
                     default:
-                        DebugAssert.ThrowIf(Children.Arguments.Count > 1, $"Unexpected number of option arguments: {Children.Arguments.Count}");
+                        DebugAssert.ThrowIf(
+                            Children.Arguments.Count > 1,
+                            $"Unexpected number of option arguments: {Children.Arguments.Count}"
+                        );
                         return Children.Arguments[0];
                 }
             }
@@ -111,7 +111,7 @@ namespace System.CommandLine
             set => Argument.Name = value;
         }
 
-        internal bool DisallowBinding { get; set; } 
+        internal bool DisallowBinding { get; set; }
 
         public override string Name
         {
@@ -128,7 +128,8 @@ namespace System.CommandLine
             }
         }
 
-        internal List<ValidateSymbol<OptionResult>> Validators { get; } = new List<ValidateSymbol<OptionResult>>();
+        internal List<ValidateSymbol<OptionResult>> Validators { get; } =
+            new List<ValidateSymbol<OptionResult>>();
 
         public void AddAlias(string alias) => AddAliasInner(alias);
 
@@ -145,7 +146,8 @@ namespace System.CommandLine
 
         public void AddValidator(ValidateSymbol<OptionResult> validate) => Validators.Add(validate);
 
-        public bool HasAliasIgnorePrefix(string alias) => _unprefixedAliases.Contains(alias.RemovePrefix());
+        public bool HasAliasIgnorePrefix(string alias) =>
+            _unprefixedAliases.Contains(alias.RemovePrefix());
 
         private protected override void RemoveAlias(string alias)
         {
@@ -169,9 +171,6 @@ namespace System.CommandLine
         object? IValueDescriptor.GetDefaultValue() => Argument.GetDefaultValue();
 
         private protected override string DefaultName =>
-            _implicitName ??= Aliases
-                              .OrderBy(a => a.Length)
-                              .Last()
-                              .RemovePrefix();
+            _implicitName ??= Aliases.OrderBy(a => a.Length).Last().RemovePrefix();
     }
 }

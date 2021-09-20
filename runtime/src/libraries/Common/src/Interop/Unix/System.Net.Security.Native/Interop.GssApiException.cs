@@ -24,9 +24,7 @@ internal static partial class Interop
                 get { return _minorStatus; }
             }
 
-            public GssApiException(string message) : base(message)
-            {
-            }
+            public GssApiException(string message) : base(message) { }
 
             public GssApiException(Status majorStatus, Status minorStatus)
                 : base(GetGssApiDisplayStatus(majorStatus, minorStatus, null))
@@ -42,23 +40,42 @@ internal static partial class Interop
                 _minorStatus = minorStatus;
             }
 
-            private static string GetGssApiDisplayStatus(Status majorStatus, Status minorStatus, string? helpText)
-            {
+            private static string GetGssApiDisplayStatus(
+                Status majorStatus,
+                Status minorStatus,
+                string? helpText
+            ) {
                 string? majorError = GetGssApiDisplayStatus(majorStatus, isMinor: false);
                 string errorMessage;
 
                 if (minorStatus != Status.GSS_S_COMPLETE)
                 {
                     string? minorError = GetGssApiDisplayStatus(minorStatus, isMinor: true);
-                    errorMessage = (majorError != null && minorError != null) ?
-                        SR.Format(SR.net_gssapi_operation_failed_detailed, majorError, minorError) :
-                        SR.Format(SR.net_gssapi_operation_failed, majorStatus.ToString("x"), minorStatus.ToString("x"));
+                    errorMessage =
+                        (majorError != null && minorError != null)
+                            ? SR.Format(
+                                  SR.net_gssapi_operation_failed_detailed,
+                                  majorError,
+                                  minorError
+                              )
+                            : SR.Format(
+                                  SR.net_gssapi_operation_failed,
+                                  majorStatus.ToString("x"),
+                                  minorStatus.ToString("x")
+                              );
                 }
                 else
                 {
-                    errorMessage = (majorError != null) ?
-                        SR.Format(SR.net_gssapi_operation_failed_detailed_majoronly, majorError) :
-                        SR.Format(SR.net_gssapi_operation_failed_majoronly, majorStatus.ToString("x"));
+                    errorMessage =
+                        (majorError != null)
+                            ? SR.Format(
+                                  SR.net_gssapi_operation_failed_detailed_majoronly,
+                                  majorError
+                              )
+                            : SR.Format(
+                                  SR.net_gssapi_operation_failed_majoronly,
+                                  majorStatus.ToString("x")
+                              );
                 }
 
                 if (!string.IsNullOrEmpty(helpText))
@@ -76,11 +93,14 @@ internal static partial class Interop
                 try
                 {
                     Interop.NetSecurityNative.Status minStat;
-                    Interop.NetSecurityNative.Status displayCallStatus = isMinor ?
-                        DisplayMinorStatus(out minStat, status, ref displayBuffer):
-                        DisplayMajorStatus(out minStat, status, ref displayBuffer);
-                    return (Status.GSS_S_COMPLETE != displayCallStatus) ? null : Marshal.PtrToStringAnsi(displayBuffer._data);
+                    Interop.NetSecurityNative.Status displayCallStatus = isMinor
+                        ? DisplayMinorStatus(out minStat, status, ref displayBuffer)
+                        : DisplayMajorStatus(out minStat, status, ref displayBuffer);
+                    return (Status.GSS_S_COMPLETE != displayCallStatus)
+                      ? null
+                      : Marshal.PtrToStringAnsi(displayBuffer._data);
                 }
+
                 finally
                 {
                     displayBuffer.Dispose();

@@ -23,7 +23,9 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             {
                 if (usedTags.TryGetValue(tag, out string? existing))
                 {
-                    throw new InvalidOperationException($"Tag '{tag}' is in use by both '{existing}' and '{fieldName}'");
+                    throw new InvalidOperationException(
+                        $"Tag '{tag}' is in use by both '{existing}' and '{fieldName}'"
+                    );
                 }
 
                 usedTags.Add(tag, fieldName);
@@ -43,7 +45,6 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
                 if (wroteValue)
                     throw new CryptographicException();
 
-
                 writer.PushSequence(new Asn1Tag(TagClass.ContextSpecific, 0));
                 for (int i = 0; i < FullName.Length; i++)
                 {
@@ -61,9 +62,16 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
 
                 // Validator for tag constraint for NameRelativeToCRLIssuer
                 {
-                    if (!Asn1Tag.TryDecode(NameRelativeToCRLIssuer.Value.Span, out Asn1Tag validateTag, out _) ||
-                        !validateTag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 1)))
-                    {
+                    if (
+                        !Asn1Tag.TryDecode(
+                            NameRelativeToCRLIssuer.Value.Span,
+                            out Asn1Tag validateTag,
+                            out _
+                        )
+                        || !validateTag.HasSameClassAndValue(
+                            new Asn1Tag(TagClass.ContextSpecific, 1)
+                        )
+                    ) {
                         throw new CryptographicException();
                     }
                 }
@@ -85,8 +93,10 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             }
         }
 
-        internal static DistributionPointNameAsn Decode(ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
-        {
+        internal static DistributionPointNameAsn Decode(
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        ) {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -101,8 +111,11 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out DistributionPointNameAsn decoded)
-        {
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out DistributionPointNameAsn decoded
+        ) {
             try
             {
                 DecodeCore(ref reader, rebind, out decoded);
@@ -113,8 +126,11 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out DistributionPointNameAsn decoded)
-        {
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out DistributionPointNameAsn decoded
+        ) {
             decoded = default;
             Asn1Tag tag = reader.PeekTag();
             AsnValueReader collectionReader;
@@ -124,27 +140,33 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
 
             if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 0)))
             {
-
                 // Decode SEQUENCE OF for FullName
                 {
-                    collectionReader = reader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 0));
+                    collectionReader = reader.ReadSequence(
+                        new Asn1Tag(TagClass.ContextSpecific, 0)
+                    );
                     var tmpList = new List<System.Security.Cryptography.Asn1.GeneralNameAsn>();
                     System.Security.Cryptography.Asn1.GeneralNameAsn tmpItem;
 
                     while (collectionReader.HasData)
                     {
-                        System.Security.Cryptography.Asn1.GeneralNameAsn.Decode(ref collectionReader, rebind, out tmpItem);
+                        System.Security.Cryptography.Asn1.GeneralNameAsn.Decode(
+                            ref collectionReader,
+                            rebind,
+                            out tmpItem
+                        );
                         tmpList.Add(tmpItem);
                     }
 
                     decoded.FullName = tmpList.ToArray();
                 }
-
             }
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 1)))
             {
                 tmpSpan = reader.ReadEncodedValue();
-                decoded.NameRelativeToCRLIssuer = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
+                decoded.NameRelativeToCRLIssuer = rebindSpan.Overlaps(tmpSpan, out offset)
+                    ? rebind.Slice(offset, tmpSpan.Length)
+                    : tmpSpan.ToArray();
             }
             else
             {

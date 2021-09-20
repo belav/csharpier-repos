@@ -8,8 +8,10 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 {
     internal static class ServiceCollectionContainerBuilderTestExtensions
     {
-        public static ServiceProvider BuildServiceProvider(this IServiceCollection services, ServiceProviderMode mode)
-        {
+        public static ServiceProvider BuildServiceProvider(
+            this IServiceCollection services,
+            ServiceProviderMode mode
+        ) {
             if (mode == ServiceProviderMode.Default)
             {
                 return services.BuildServiceProvider();

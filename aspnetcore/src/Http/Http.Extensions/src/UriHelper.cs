@@ -17,7 +17,10 @@ namespace Microsoft.AspNetCore.Http.Extensions
         private const char Hash = '#';
         private const char QuestionMark = '?';
         private static readonly string SchemeDelimiter = Uri.SchemeDelimiter;
-        private static readonly SpanAction<char, (string scheme, string host, string pathBase, string path, string query, string fragment)> InitializeAbsoluteUriStringSpanAction = new(InitializeAbsoluteUriString);
+        private static readonly SpanAction<
+            char,
+            (string scheme, string host, string pathBase, string path, string query, string fragment)
+        > InitializeAbsoluteUriStringSpanAction = new(InitializeAbsoluteUriString);
 
         /// <summary>
         /// Combines the given URI components into a string that is properly encoded for use in HTTP headers.
@@ -31,9 +34,10 @@ namespace Microsoft.AspNetCore.Http.Extensions
             PathString pathBase = new PathString(),
             PathString path = new PathString(),
             QueryString query = new QueryString(),
-            FragmentString fragment = new FragmentString())
-        {
-            string combinePath = (pathBase.HasValue || path.HasValue) ? (pathBase + path).ToString() : "/";
+            FragmentString fragment = new FragmentString()
+        ) {
+            string combinePath =
+                (pathBase.HasValue || path.HasValue) ? (pathBase + path).ToString() : "/";
             return combinePath + query.ToString() + fragment.ToString();
         }
 
@@ -54,8 +58,8 @@ namespace Microsoft.AspNetCore.Http.Extensions
             PathString pathBase = new PathString(),
             PathString path = new PathString(),
             QueryString query = new QueryString(),
-            FragmentString fragment = new FragmentString())
-        {
+            FragmentString fragment = new FragmentString()
+        ) {
             if (scheme == null)
             {
                 throw new ArgumentNullException(nameof(scheme));
@@ -69,13 +73,13 @@ namespace Microsoft.AspNetCore.Http.Extensions
 
             // PERF: Calculate string length to allocate correct buffer size for string.Create.
             var length =
-                scheme.Length +
-                Uri.SchemeDelimiter.Length +
-                hostText.Length +
-                pathBaseText.Length +
-                pathText.Length +
-                queryText.Length +
-                fragmentText.Length;
+                scheme.Length
+                + Uri.SchemeDelimiter.Length
+                + hostText.Length
+                + pathBaseText.Length
+                + pathText.Length
+                + queryText.Length
+                + fragmentText.Length;
 
             if (string.IsNullOrEmpty(pathBaseText) && string.IsNullOrEmpty(pathText))
             {
@@ -90,7 +94,11 @@ namespace Microsoft.AspNetCore.Http.Extensions
                 length--;
             }
 
-            return string.Create(length, (scheme, hostText, pathBaseText, pathText, queryText, fragmentText), InitializeAbsoluteUriStringSpanAction);
+            return string.Create(
+                length,
+                (scheme, hostText, pathBaseText, pathText, queryText, fragmentText),
+                InitializeAbsoluteUriStringSpanAction
+            );
         }
 
         /// <summary>
@@ -108,8 +116,8 @@ namespace Microsoft.AspNetCore.Http.Extensions
             out HostString host,
             out PathString path,
             out QueryString query,
-            out FragmentString fragment)
-        {
+            out FragmentString fragment
+        ) {
             if (uri == null)
             {
                 throw new ArgumentNullException(nameof(uri));
@@ -140,7 +148,9 @@ namespace Microsoft.AspNetCore.Http.Extensions
 
             if ((searchIndex = uri.IndexOf(QuestionMark, startIndex)) >= 0 && searchIndex < limit)
             {
-                query = QueryString.FromUriComponent(uri.Substring(searchIndex, limit - searchIndex));
+                query = QueryString.FromUriComponent(
+                    uri.Substring(searchIndex, limit - searchIndex)
+                );
                 limit = searchIndex;
             }
 
@@ -173,11 +183,15 @@ namespace Microsoft.AspNetCore.Http.Extensions
                     host: HostString.FromUriComponent(uri),
                     pathBase: PathString.FromUriComponent(uri),
                     query: QueryString.FromUriComponent(uri),
-                    fragment: FragmentString.FromUriComponent(uri));
+                    fragment: FragmentString.FromUriComponent(uri)
+                );
             }
             else
             {
-                return uri.GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped);
+                return uri.GetComponents(
+                    UriComponents.SerializationInfoString,
+                    UriFormat.UriEscaped
+                );
             }
         }
 
@@ -189,7 +203,13 @@ namespace Microsoft.AspNetCore.Http.Extensions
         /// <returns>The encoded string version of the URL from <paramref name="request"/>.</returns>
         public static string GetEncodedUrl(this HttpRequest request)
         {
-            return BuildAbsolute(request.Scheme, request.Host, request.PathBase, request.Path, request.QueryString);
+            return BuildAbsolute(
+                request.Scheme,
+                request.Host,
+                request.PathBase,
+                request.Path,
+                request.QueryString
+            );
         }
         /// <summary>
         /// Returns the relative URI.
@@ -217,11 +237,15 @@ namespace Microsoft.AspNetCore.Http.Extensions
             var queryString = request.QueryString.Value ?? string.Empty;
 
             // PERF: Calculate string length to allocate correct buffer size for StringBuilder.
-            var length = scheme.Length + SchemeDelimiter.Length + host.Length
-                + pathBase.Length + path.Length + queryString.Length;
+            var length =
+                scheme.Length
+                + SchemeDelimiter.Length
+                + host.Length
+                + pathBase.Length
+                + path.Length
+                + queryString.Length;
 
-            return new StringBuilder(length)
-                .Append(scheme)
+            return new StringBuilder(length).Append(scheme)
                 .Append(SchemeDelimiter)
                 .Append(host)
                 .Append(pathBase)
@@ -249,8 +273,10 @@ namespace Microsoft.AspNetCore.Http.Extensions
         /// </summary>
         /// <param name="buffer">The URI <see cref="string"/>'s <see cref="char"/> buffer.</param>
         /// <param name="uriParts">The URI parts.</param>
-        private static void InitializeAbsoluteUriString(Span<char> buffer, (string scheme, string host, string pathBase, string path, string query, string fragment) uriParts)
-        {
+        private static void InitializeAbsoluteUriString(
+            Span<char> buffer,
+            (string scheme, string host, string pathBase, string path, string query, string fragment) uriParts
+        ) {
             var index = 0;
 
             var pathBaseSpan = uriParts.pathBase.AsSpan();

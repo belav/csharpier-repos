@@ -39,8 +39,8 @@ namespace BasicApi.Controllers
 
         public TokenController(
             IOptionsSnapshot<JwtBearerOptions> options,
-            SigningCredentials credentials)
-        {
+            SigningCredentials credentials
+        ) {
             _options = options.Get(JwtBearerDefaults.AuthenticationScheme);
             _credentials = credentials;
         }
@@ -55,7 +55,8 @@ namespace BasicApi.Controllers
                 return new StatusCodeResult(StatusCodes.Status403Forbidden);
             }
 
-            var handler = _options.SecurityTokenValidators.OfType<JwtSecurityTokenHandler>().First();
+            var handler = _options.SecurityTokenValidators.OfType<JwtSecurityTokenHandler>()
+                .First();
             var tokenDescriptor = new SecurityTokenDescriptor()
             {
                 Issuer = _options.TokenValidationParameters.ValidIssuer,
@@ -68,7 +69,8 @@ namespace BasicApi.Controllers
                 issuer: _options.TokenValidationParameters.ValidIssuer,
                 audience: _options.TokenValidationParameters.ValidAudience,
                 signingCredentials: _credentials,
-                subject: identity);
+                subject: identity
+            );
 
             var token = handler.WriteToken(securityToken);
             return Content(token);

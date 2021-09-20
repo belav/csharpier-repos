@@ -45,8 +45,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
 
         //private int _unflushedBytes;
 
-        public Http3FrameWriter(PipeWriter output, ConnectionContext connectionContext, ITimeoutControl timeoutControl, MinDataRate? minResponseDataRate, string connectionId, MemoryPool<byte> memoryPool, IKestrelTrace log, IStreamIdFeature streamIdFeature)
-        {
+        public Http3FrameWriter(
+            PipeWriter output,
+            ConnectionContext connectionContext,
+            ITimeoutControl timeoutControl,
+            MinDataRate? minResponseDataRate,
+            string connectionId,
+            MemoryPool<byte> memoryPool,
+            IKestrelTrace log,
+            IStreamIdFeature streamIdFeature
+        ) {
             _outputWriter = output;
             _connectionContext = connectionContext;
             _timeoutControl = timeoutControl;
@@ -84,7 +92,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             // - One encoded length int for setting size
             // - 1 byte for setting type
             // - settings length
-            var buffer = _outputWriter.GetSpan(settingsLength + VariableLengthIntegerHelper.MaximumEncodedLength + 1);
+            var buffer = _outputWriter.GetSpan(
+                settingsLength + VariableLengthIntegerHelper.MaximumEncodedLength + 1
+            );
 
             // Length start at 1 for type
             var totalLength = 1;
@@ -94,7 +104,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             buffer = buffer[1..];
 
             // Write settings length
-            var settingsBytesWritten = VariableLengthIntegerHelper.WriteInteger(buffer, settingsLength);
+            var settingsBytesWritten = VariableLengthIntegerHelper.WriteInteger(
+                buffer,
+                settingsLength
+            );
             buffer = buffer.Slice(settingsBytesWritten);
 
             totalLength += settingsBytesWritten + settingsLength;
@@ -123,10 +136,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
         {
             foreach (var setting in settings)
             {
-                var parameterLength = VariableLengthIntegerHelper.WriteInteger(destination, (long)setting.Parameter);
+                var parameterLength = VariableLengthIntegerHelper.WriteInteger(
+                    destination,
+                    (long)setting.Parameter
+                );
                 destination = destination.Slice(parameterLength);
 
-                var valueLength = VariableLengthIntegerHelper.WriteInteger(destination, (long)setting.Value);
+                var valueLength = VariableLengthIntegerHelper.WriteInteger(
+                    destination,
+                    (long)setting.Value
+                );
                 destination = destination.Slice(valueLength);
             }
         }
@@ -201,7 +220,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
 
                     dataLength -= dataPayloadLength;
                     remainingData = remainingData.Slice(dataPayloadLength);
-
                 } while (dataLength > dataPayloadLength);
 
                 _outgoingFrame.Length = (int)dataLength;
@@ -270,7 +288,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                 {
                     _outgoingFrame.PrepareHeaders();
                     var buffer = _headerEncodingBuffer.AsSpan();
-                    var done = _qpackEncoder.BeginEncode(EnumerateHeaders(headers), buffer, out var payloadLength);
+                    var done = _qpackEncoder.BeginEncode(
+                        EnumerateHeaders(headers),
+                        buffer,
+                        out var payloadLength
+                    );
                     FinishWritingHeaders(payloadLength, done);
                 }
                 catch (QPackEncodingException)
@@ -291,8 +313,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             return _flusher.FlushAsync(_minResponseDataRate, bytesWritten);
         }
 
-        public ValueTask<FlushResult> FlushAsync(IHttpOutputAborter? outputAborter, CancellationToken cancellationToken)
-        {
+        public ValueTask<FlushResult> FlushAsync(
+            IHttpOutputAborter? outputAborter,
+            CancellationToken cancellationToken
+        ) {
             lock (_writeLock)
             {
                 if (_completed)
@@ -303,7 +327,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                 var bytesWritten = _unflushedBytes;
                 _unflushedBytes = 0;
 
-                return _flusher.FlushAsync(_minResponseDataRate, bytesWritten, outputAborter, cancellationToken);
+                return _flusher.FlushAsync(
+                    _minResponseDataRate,
+                    bytesWritten,
+                    outputAborter,
+                    cancellationToken
+                );
             }
         }
 
@@ -320,7 +349,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                 {
                     _outgoingFrame.PrepareHeaders();
                     var buffer = _headerEncodingBuffer.AsSpan();
-                    var done = _qpackEncoder.BeginEncode(statusCode, EnumerateHeaders(headers), buffer, out var payloadLength);
+                    var done = _qpackEncoder.BeginEncode(
+                        statusCode,
+                        EnumerateHeaders(headers),
+                        buffer,
+                        out var payloadLength
+                    );
                     FinishWritingHeaders(payloadLength, done);
                 }
                 catch (QPackEncodingException hex)
@@ -386,8 +420,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             }
         }
 
-        private static IEnumerable<KeyValuePair<string, string>> EnumerateHeaders(IHeaderDictionary headers)
-        {
+        private static IEnumerable<KeyValuePair<string, string>> EnumerateHeaders(
+            IHeaderDictionary headers
+        ) {
             foreach (var header in headers)
             {
                 foreach (var value in header.Value)

@@ -20,17 +20,100 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
 {
-    internal abstract partial class Http3Stream : HttpProtocol, IHttpHeadersHandler, IThreadPoolWorkItem, ITimeoutHandler, IRequestProcessor
+    internal abstract partial class Http3Stream
+        : HttpProtocol,
+          IHttpHeadersHandler,
+          IThreadPoolWorkItem,
+          ITimeoutHandler,
+          IRequestProcessor
     {
-        private static ReadOnlySpan<byte> AuthorityBytes => new byte[10] { (byte)':', (byte)'a', (byte)'u', (byte)'t', (byte)'h', (byte)'o', (byte)'r', (byte)'i', (byte)'t', (byte)'y' };
-        private static ReadOnlySpan<byte> MethodBytes => new byte[7] { (byte)':', (byte)'m', (byte)'e', (byte)'t', (byte)'h', (byte)'o', (byte)'d' };
-        private static ReadOnlySpan<byte> PathBytes => new byte[5] { (byte)':', (byte)'p', (byte)'a', (byte)'t', (byte)'h' };
-        private static ReadOnlySpan<byte> SchemeBytes => new byte[7] { (byte)':', (byte)'s', (byte)'c', (byte)'h', (byte)'e', (byte)'m', (byte)'e' };
-        private static ReadOnlySpan<byte> StatusBytes => new byte[7] { (byte)':', (byte)'s', (byte)'t', (byte)'a', (byte)'t', (byte)'u', (byte)'s' };
-        private static ReadOnlySpan<byte> ConnectionBytes => new byte[10] { (byte)'c', (byte)'o', (byte)'n', (byte)'n', (byte)'e', (byte)'c', (byte)'t', (byte)'i', (byte)'o', (byte)'n' };
+        private static ReadOnlySpan<byte> AuthorityBytes =>
+            new byte[10]
+            {
+                (byte)':',
+                (byte)'a',
+                (byte)'u',
+                (byte)'t',
+                (byte)'h',
+                (byte)'o',
+                (byte)'r',
+                (byte)'i',
+                (byte)'t',
+                (byte)'y'
+            };
+        private static ReadOnlySpan<byte> MethodBytes =>
+            new byte[7]
+            {
+                (byte)':',
+                (byte)'m',
+                (byte)'e',
+                (byte)'t',
+                (byte)'h',
+                (byte)'o',
+                (byte)'d'
+            };
+        private static ReadOnlySpan<byte> PathBytes =>
+            new byte[5] { (byte)':', (byte)'p', (byte)'a', (byte)'t', (byte)'h' };
+        private static ReadOnlySpan<byte> SchemeBytes =>
+            new byte[7]
+            {
+                (byte)':',
+                (byte)'s',
+                (byte)'c',
+                (byte)'h',
+                (byte)'e',
+                (byte)'m',
+                (byte)'e'
+            };
+        private static ReadOnlySpan<byte> StatusBytes =>
+            new byte[7]
+            {
+                (byte)':',
+                (byte)'s',
+                (byte)'t',
+                (byte)'a',
+                (byte)'t',
+                (byte)'u',
+                (byte)'s'
+            };
+        private static ReadOnlySpan<byte> ConnectionBytes =>
+            new byte[10]
+            {
+                (byte)'c',
+                (byte)'o',
+                (byte)'n',
+                (byte)'n',
+                (byte)'e',
+                (byte)'c',
+                (byte)'t',
+                (byte)'i',
+                (byte)'o',
+                (byte)'n'
+            };
         private static ReadOnlySpan<byte> TeBytes => new byte[2] { (byte)'t', (byte)'e' };
-        private static ReadOnlySpan<byte> TrailersBytes => new byte[8] { (byte)'t', (byte)'r', (byte)'a', (byte)'i', (byte)'l', (byte)'e', (byte)'r', (byte)'s' };
-        private static ReadOnlySpan<byte> ConnectBytes => new byte[7] { (byte)'C', (byte)'O', (byte)'N', (byte)'N', (byte)'E', (byte)'C', (byte)'T' };
+        private static ReadOnlySpan<byte> TrailersBytes =>
+            new byte[8]
+            {
+                (byte)'t',
+                (byte)'r',
+                (byte)'a',
+                (byte)'i',
+                (byte)'l',
+                (byte)'e',
+                (byte)'r',
+                (byte)'s'
+            };
+        private static ReadOnlySpan<byte> ConnectBytes =>
+            new byte[7]
+            {
+                (byte)'C',
+                (byte)'O',
+                (byte)'N',
+                (byte)'N',
+                (byte)'E',
+                (byte)'C',
+                (byte)'T'
+            };
 
         private readonly Http3FrameWriter _frameWriter;
         private readonly Http3OutputProducer _http3Output;
@@ -72,7 +155,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                 context.ConnectionId,
                 context.MemoryPool,
                 context.ServiceContext.Log,
-                _streamIdFeature);
+                _streamIdFeature
+            );
 
             // ResponseHeaders aren't set, kind of ugly that we need to reset.
             Reset();
@@ -81,10 +165,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                 _frameWriter,
                 context.MemoryPool,
                 this,
-                context.ServiceContext.Log);
+                context.ServiceContext.Log
+            );
             RequestBodyPipe = CreateRequestBodyPipe(64 * 1024); // windowSize?
             Output = _http3Output;
-            QPackDecoder = new QPackDecoder(_context.ServiceContext.ServerOptions.Limits.Http3.MaxRequestHeaderFieldSize);
+            QPackDecoder = new QPackDecoder(
+                _context.ServiceContext.ServerOptions.Limits.Http3.MaxRequestHeaderFieldSize
+            );
         }
 
         public long? InputRemaining { get; internal set; }
@@ -125,7 +212,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
         protected override void OnErrorAfterResponseStarted()
         {
             // We can no longer change the response, send a Reset instead.
-            var abortReason = new ConnectionAbortedException(CoreStrings.Http3StreamErrorAfterHeaders);
+            var abortReason = new ConnectionAbortedException(
+                CoreStrings.Http3StreamErrorAfterHeaders
+            );
             Abort(abortReason, Http3ErrorCode.InternalError);
         }
 
@@ -169,7 +258,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             }
             catch (InvalidOperationException)
             {
-                throw new Http3StreamErrorException(CoreStrings.BadRequest_MalformedRequestInvalidHeaders, Http3ErrorCode.ProtocolError);
+                throw new Http3StreamErrorException(
+                    CoreStrings.BadRequest_MalformedRequestInvalidHeaders,
+                    Http3ErrorCode.ProtocolError
+                );
             }
         }
 
@@ -196,13 +288,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                     // All pseudo-header fields MUST appear in the header block before regular header fields.
                     // Any request or response that contains a pseudo-header field that appears in a header
                     // block after a regular header field MUST be treated as malformed (Section 8.1.2.6).
-                    throw new Http3StreamErrorException(CoreStrings.Http2ErrorPseudoHeaderFieldAfterRegularHeaders, Http3ErrorCode.ProtocolError);
+                    throw new Http3StreamErrorException(
+                        CoreStrings.Http2ErrorPseudoHeaderFieldAfterRegularHeaders,
+                        Http3ErrorCode.ProtocolError
+                    );
                 }
 
                 if (_requestHeaderParsingState == RequestHeaderParsingState.Trailers)
                 {
                     // Pseudo-header fields MUST NOT appear in trailers.
-                    throw new Http3StreamErrorException(CoreStrings.Http2ErrorTrailersContainPseudoHeaderField, Http3ErrorCode.ProtocolError);
+                    throw new Http3StreamErrorException(
+                        CoreStrings.Http2ErrorTrailersContainPseudoHeaderField,
+                        Http3ErrorCode.ProtocolError
+                    );
                 }
 
                 _requestHeaderParsingState = RequestHeaderParsingState.PseudoHeaderFields;
@@ -211,21 +309,30 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                 {
                     // Endpoints MUST treat a request or response that contains undefined or invalid pseudo-header
                     // fields as malformed (Section 8.1.2.6).
-                    throw new Http3StreamErrorException(CoreStrings.Http2ErrorUnknownPseudoHeaderField, Http3ErrorCode.ProtocolError);
+                    throw new Http3StreamErrorException(
+                        CoreStrings.Http2ErrorUnknownPseudoHeaderField,
+                        Http3ErrorCode.ProtocolError
+                    );
                 }
 
                 if (headerField == PseudoHeaderFields.Status)
                 {
                     // Pseudo-header fields defined for requests MUST NOT appear in responses; pseudo-header fields
                     // defined for responses MUST NOT appear in requests.
-                    throw new Http3StreamErrorException(CoreStrings.Http2ErrorResponsePseudoHeaderField, Http3ErrorCode.ProtocolError);
+                    throw new Http3StreamErrorException(
+                        CoreStrings.Http2ErrorResponsePseudoHeaderField,
+                        Http3ErrorCode.ProtocolError
+                    );
                 }
 
                 if ((_parsedPseudoHeaderFields & headerField) == headerField)
                 {
                     // http://httpwg.org/specs/rfc7540.html#rfc.section.8.1.2.3
                     // All HTTP/2 requests MUST include exactly one valid value for the :method, :scheme, and :path pseudo-header fields
-                    throw new Http3StreamErrorException(CoreStrings.Http2ErrorDuplicatePseudoHeaderField, Http3ErrorCode.ProtocolError);
+                    throw new Http3StreamErrorException(
+                        CoreStrings.Http2ErrorDuplicatePseudoHeaderField,
+                        Http3ErrorCode.ProtocolError
+                    );
                 }
 
                 if (headerField == PseudoHeaderFields.Method)
@@ -242,7 +349,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
 
             if (IsConnectionSpecificHeaderField(name, value))
             {
-                throw new Http3StreamErrorException(CoreStrings.Http2ErrorConnectionSpecificHeaderField, Http3ErrorCode.ProtocolError);
+                throw new Http3StreamErrorException(
+                    CoreStrings.Http2ErrorConnectionSpecificHeaderField,
+                    Http3ErrorCode.ProtocolError
+                );
             }
 
             // http://httpwg.org/specs/rfc7540.html#rfc.section.8.1.2
@@ -253,18 +363,26 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                 {
                     if (_requestHeaderParsingState == RequestHeaderParsingState.Trailers)
                     {
-                        throw new Http3StreamErrorException(CoreStrings.Http2ErrorTrailerNameUppercase, Http3ErrorCode.ProtocolError);
+                        throw new Http3StreamErrorException(
+                            CoreStrings.Http2ErrorTrailerNameUppercase,
+                            Http3ErrorCode.ProtocolError
+                        );
                     }
                     else
                     {
-                        throw new Http3StreamErrorException(CoreStrings.Http2ErrorHeaderNameUppercase, Http3ErrorCode.ProtocolError);
+                        throw new Http3StreamErrorException(
+                            CoreStrings.Http2ErrorHeaderNameUppercase,
+                            Http3ErrorCode.ProtocolError
+                        );
                     }
                 }
             }
         }
 
-        private bool IsPseudoHeaderField(ReadOnlySpan<byte> name, out PseudoHeaderFields headerField)
-        {
+        private bool IsPseudoHeaderField(
+            ReadOnlySpan<byte> name,
+            out PseudoHeaderFields headerField
+        ) {
             headerField = PseudoHeaderFields.None;
 
             if (name.IsEmpty || name[0] != (byte)':')
@@ -300,29 +418,50 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             return true;
         }
 
-        private static bool IsConnectionSpecificHeaderField(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
-        {
-            return name.SequenceEqual(ConnectionBytes) || (name.SequenceEqual(TeBytes) && !value.SequenceEqual(TrailersBytes));
+        private static bool IsConnectionSpecificHeaderField(
+            ReadOnlySpan<byte> name,
+            ReadOnlySpan<byte> value
+        ) {
+            return name.SequenceEqual(ConnectionBytes)
+                || (name.SequenceEqual(TeBytes) && !value.SequenceEqual(TrailersBytes));
         }
 
         public void HandleReadDataRateTimeout()
         {
             Debug.Assert(Limits.MinRequestBodyDataRate != null);
 
-            Log.RequestBodyMinimumDataRateNotSatisfied(ConnectionId, null, Limits.MinRequestBodyDataRate.BytesPerSecond);
-            Abort(new ConnectionAbortedException(CoreStrings.BadRequest_RequestBodyTimeout), Http3ErrorCode.RequestRejected);
+            Log.RequestBodyMinimumDataRateNotSatisfied(
+                ConnectionId,
+                null,
+                Limits.MinRequestBodyDataRate.BytesPerSecond
+            );
+            Abort(
+                new ConnectionAbortedException(CoreStrings.BadRequest_RequestBodyTimeout),
+                Http3ErrorCode.RequestRejected
+            );
         }
 
         public void HandleRequestHeadersTimeout()
         {
-            Log.ConnectionBadRequest(ConnectionId, KestrelBadHttpRequestException.GetException(RequestRejectionReason.RequestHeadersTimeout));
-            Abort(new ConnectionAbortedException(CoreStrings.BadRequest_RequestHeadersTimeout), Http3ErrorCode.RequestRejected);
+            Log.ConnectionBadRequest(
+                ConnectionId,
+                KestrelBadHttpRequestException.GetException(
+                    RequestRejectionReason.RequestHeadersTimeout
+                )
+            );
+            Abort(
+                new ConnectionAbortedException(CoreStrings.BadRequest_RequestHeadersTimeout),
+                Http3ErrorCode.RequestRejected
+            );
         }
 
         public void OnInputOrOutputCompleted()
         {
             TryClose();
-            Abort(new ConnectionAbortedException(CoreStrings.ConnectionAbortedByClient), Http3ErrorCode.NoError);
+            Abort(
+                new ConnectionAbortedException(CoreStrings.ConnectionAbortedByClient),
+                Http3ErrorCode.NoError
+            );
         }
 
         protected override void OnRequestProcessingEnded()
@@ -342,7 +481,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             return false;
         }
 
-        public async Task ProcessRequestAsync<TContext>(IHttpApplication<TContext> application) where TContext : notnull
+        public async Task ProcessRequestAsync<TContext>(IHttpApplication<TContext> application)
+            where TContext : notnull
         {
             Exception? error = null;
 
@@ -359,12 +499,25 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                     {
                         if (!readableBuffer.IsEmpty)
                         {
-                            while (Http3FrameReader.TryReadFrame(ref readableBuffer, _incomingFrame, out var framePayload))
-                            {
-                                Log.Http3FrameReceived(ConnectionId, _streamIdFeature.StreamId, _incomingFrame);
+                            while (
+                                Http3FrameReader.TryReadFrame(
+                                    ref readableBuffer,
+                                    _incomingFrame,
+                                    out var framePayload
+                                )
+                            ) {
+                                Log.Http3FrameReceived(
+                                    ConnectionId,
+                                    _streamIdFeature.StreamId,
+                                    _incomingFrame
+                                );
 
                                 consumed = examined = framePayload.End;
-                                await ProcessHttp3Stream(application, framePayload, result.IsCompleted && readableBuffer.IsEmpty);
+                                await ProcessHttp3Stream(
+                                    application,
+                                    framePayload,
+                                    result.IsCompleted && readableBuffer.IsEmpty
+                                );
                             }
                         }
 
@@ -393,8 +546,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                 _errorCodeFeature.Error = (long)ex.ErrorCode;
 
                 Log.Http3ConnectionError(_http3Connection.ConnectionId, ex);
-                _http3Connection.Abort(new ConnectionAbortedException(ex.Message, ex), ex.ErrorCode);
-
+                _http3Connection.Abort(
+                    new ConnectionAbortedException(ex.Message, ex),
+                    ex.ErrorCode
+                );
                 // TODO: HTTP/3 stream will be aborted by connection. Check this is correct.
             }
             catch (Exception ex)
@@ -404,7 +559,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             }
             finally
             {
-                var streamError = error as ConnectionAbortedException
+                var streamError =
+                    error as ConnectionAbortedException
                     ?? new ConnectionAbortedException("The stream has completed.", error!);
 
                 await Input.CompleteAsync();
@@ -440,7 +596,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                 // https://tools.ietf.org/html/rfc7540#section-8.1.2.6
                 if (InputRemaining.Value != 0)
                 {
-                    throw new Http3StreamErrorException(CoreStrings.Http3StreamErrorLessDataThanLength, Http3ErrorCode.ProtocolError);
+                    throw new Http3StreamErrorException(
+                        CoreStrings.Http3StreamErrorLessDataThanLength,
+                        Http3ErrorCode.ProtocolError
+                    );
                 }
             }
 
@@ -448,7 +607,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             return RequestBodyPipe.Writer.CompleteAsync();
         }
 
-        private Task ProcessHttp3Stream<TContext>(IHttpApplication<TContext> application, in ReadOnlySequence<byte> payload, bool isCompleted) where TContext : notnull
+        private Task ProcessHttp3Stream<TContext>(
+            IHttpApplication<TContext> application,
+            in ReadOnlySequence<byte> payload,
+            bool isCompleted
+        ) where TContext : notnull
         {
             switch (_incomingFrame.Type)
             {
@@ -462,10 +625,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                 case Http3FrameType.MaxPushId:
                     // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-7.2.4
                     // These frames need to be on a control stream
-                    throw new Http3ConnectionErrorException(CoreStrings.FormatHttp3ErrorUnsupportedFrameOnRequestStream(_incomingFrame.FormattedType), Http3ErrorCode.UnexpectedFrame);
+                    throw new Http3ConnectionErrorException(
+                        CoreStrings.FormatHttp3ErrorUnsupportedFrameOnRequestStream(
+                            _incomingFrame.FormattedType
+                        ),
+                        Http3ErrorCode.UnexpectedFrame
+                    );
                 case Http3FrameType.PushPromise:
                     // The server should never receive push promise
-                    throw new Http3ConnectionErrorException(CoreStrings.FormatHttp3ErrorUnsupportedFrameOnServer(_incomingFrame.FormattedType), Http3ErrorCode.UnexpectedFrame);
+                    throw new Http3ConnectionErrorException(
+                        CoreStrings.FormatHttp3ErrorUnsupportedFrameOnServer(
+                            _incomingFrame.FormattedType
+                        ),
+                        Http3ErrorCode.UnexpectedFrame
+                    );
                 default:
                     return ProcessUnknownFrameAsync();
             }
@@ -478,13 +651,22 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             return Task.CompletedTask;
         }
 
-        private async Task ProcessHeadersFrameAsync<TContext>(IHttpApplication<TContext> application, ReadOnlySequence<byte> payload, bool isCompleted) where TContext : notnull
+        private async Task ProcessHeadersFrameAsync<TContext>(
+            IHttpApplication<TContext> application,
+            ReadOnlySequence<byte> payload,
+            bool isCompleted
+        ) where TContext : notnull
         {
             // HEADERS frame after trailing headers is invalid.
             // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-4.1
             if (_requestHeaderParsingState == RequestHeaderParsingState.Trailers)
             {
-                throw new Http3ConnectionErrorException(CoreStrings.FormatHttp3StreamErrorFrameReceivedAfterTrailers(Http3Formatting.ToFormattedType(Http3FrameType.Headers)), Http3ErrorCode.UnexpectedFrame);
+                throw new Http3ConnectionErrorException(
+                    CoreStrings.FormatHttp3StreamErrorFrameReceivedAfterTrailers(
+                        Http3Formatting.ToFormattedType(Http3FrameType.Headers)
+                    ),
+                    Http3ErrorCode.UnexpectedFrame
+                );
             }
 
             if (_requestHeaderParsingState == RequestHeaderParsingState.Headers)
@@ -532,14 +714,21 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-4.1
             if (_requestHeaderParsingState == RequestHeaderParsingState.Ready)
             {
-                throw new Http3ConnectionErrorException(CoreStrings.Http3StreamErrorDataReceivedBeforeHeaders, Http3ErrorCode.UnexpectedFrame);
+                throw new Http3ConnectionErrorException(
+                    CoreStrings.Http3StreamErrorDataReceivedBeforeHeaders,
+                    Http3ErrorCode.UnexpectedFrame
+                );
             }
 
             // DATA frame after trailing headers is invalid.
             // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-4.1
             if (_requestHeaderParsingState == RequestHeaderParsingState.Trailers)
             {
-                var message = CoreStrings.FormatHttp3StreamErrorFrameReceivedAfterTrailers(CoreStrings.FormatHttp3StreamErrorFrameReceivedAfterTrailers(Http3Formatting.ToFormattedType(Http3FrameType.Data)));
+                var message = CoreStrings.FormatHttp3StreamErrorFrameReceivedAfterTrailers(
+                    CoreStrings.FormatHttp3StreamErrorFrameReceivedAfterTrailers(
+                        Http3Formatting.ToFormattedType(Http3FrameType.Data)
+                    )
+                );
                 throw new Http3ConnectionErrorException(message, Http3ErrorCode.UnexpectedFrame);
             }
 
@@ -548,7 +737,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                 // https://tools.ietf.org/html/rfc7540#section-8.1.2.6
                 if (payload.Length > InputRemaining.Value)
                 {
-                    throw new Http3StreamErrorException(CoreStrings.Http3StreamErrorMoreDataThanLength, Http3ErrorCode.ProtocolError);
+                    throw new Http3StreamErrorException(
+                        CoreStrings.Http3StreamErrorMoreDataThanLength,
+                        Http3ErrorCode.ProtocolError
+                    );
                 }
 
                 InputRemaining -= payload.Length;
@@ -563,22 +755,26 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             return RequestBodyPipe.Writer.FlushAsync().AsTask();
         }
 
-        public void StopProcessingNextRequest()
-            => StopProcessingNextRequest(serverInitiated: true);
+        public void StopProcessingNextRequest() => StopProcessingNextRequest(serverInitiated: true);
 
         public void StopProcessingNextRequest(bool serverInitiated)
         {
-            var initiator = serverInitiated ? GracefulCloseInitiator.Server : GracefulCloseInitiator.Client;
+            var initiator = serverInitiated
+                ? GracefulCloseInitiator.Server
+                : GracefulCloseInitiator.Client;
 
-            if (Interlocked.CompareExchange(ref _gracefulCloseInitiator, initiator, GracefulCloseInitiator.None) == GracefulCloseInitiator.None)
-            {
+            if (
+                Interlocked.CompareExchange(
+                    ref _gracefulCloseInitiator,
+                    initiator,
+                    GracefulCloseInitiator.None
+                ) == GracefulCloseInitiator.None
+            ) {
                 Input.CancelPendingRead();
             }
         }
 
-        public void Tick(DateTimeOffset now)
-        {
-        }
+        public void Tick(DateTimeOffset now) { }
 
         protected override void OnReset()
         {
@@ -588,7 +784,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             _currentIHttpResetFeature = this;
         }
 
-        protected override void ApplicationAbort() => ApplicationAbort(new ConnectionAbortedException(CoreStrings.ConnectionAbortedByApplication), Http3ErrorCode.InternalError);
+        protected override void ApplicationAbort() =>
+            ApplicationAbort(
+                new ConnectionAbortedException(CoreStrings.ConnectionAbortedByApplication),
+                Http3ErrorCode.InternalError
+            );
 
         private void ApplicationAbort(ConnectionAbortedException abortReason, Http3ErrorCode error)
         {
@@ -601,9 +801,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             return ConnectionId;
         }
 
-        protected override MessageBody CreateMessageBody()
-            => Http3MessageBody.For(this);
-
+        protected override MessageBody CreateMessageBody() => Http3MessageBody.For(this);
 
         protected override bool TryParseRequest(ReadResult result, out bool endConnection)
         {
@@ -628,9 +826,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             // CONNECT - :scheme and :path must be excluded
             if (Method == Http.HttpMethod.Connect)
             {
-                if (!string.IsNullOrEmpty(RequestHeaders[HeaderNames.Scheme]) || !string.IsNullOrEmpty(RequestHeaders[HeaderNames.Path]))
-                {
-                    Abort(new ConnectionAbortedException(CoreStrings.Http3ErrorConnectMustNotSendSchemeOrPath), Http3ErrorCode.ProtocolError);
+                if (
+                    !string.IsNullOrEmpty(RequestHeaders[HeaderNames.Scheme])
+                    || !string.IsNullOrEmpty(RequestHeaders[HeaderNames.Path])
+                ) {
+                    Abort(
+                        new ConnectionAbortedException(
+                            CoreStrings.Http3ErrorConnectMustNotSendSchemeOrPath
+                        ),
+                        Http3ErrorCode.ProtocolError
+                    );
                     return false;
                 }
 
@@ -647,9 +852,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             // - That said, we shouldn't allow arbitrary values or use them to populate Request.Scheme, right?
             // - For now we'll restrict it to http/s and require it match the transport.
             // - We'll need to find some concrete scenarios to warrant unblocking this.
-            if (!string.Equals(RequestHeaders[HeaderNames.Scheme], Scheme, StringComparison.OrdinalIgnoreCase))
-            {
-                var str = CoreStrings.FormatHttp3StreamErrorSchemeMismatch(RequestHeaders[HeaderNames.Scheme], Scheme);
+            if (
+                !string.Equals(
+                    RequestHeaders[HeaderNames.Scheme],
+                    Scheme,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            ) {
+                var str = CoreStrings.FormatHttp3StreamErrorSchemeMismatch(
+                    RequestHeaders[HeaderNames.Scheme],
+                    Scheme
+                );
                 Abort(new ConnectionAbortedException(str), Http3ErrorCode.ProtocolError);
                 return false;
             }
@@ -675,10 +888,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             }
 
             // Approximate MaxRequestLineSize by totaling the required pseudo header field lengths.
-            var requestLineLength = _methodText!.Length + Scheme!.Length + hostText.Length + path.Length;
+            var requestLineLength =
+                _methodText!.Length + Scheme!.Length + hostText.Length + path.Length;
             if (requestLineLength > ServerOptions.Limits.MaxRequestLineSize)
             {
-                Abort(new ConnectionAbortedException(CoreStrings.BadRequest_RequestLineTooLong), Http3ErrorCode.ProtocolError);
+                Abort(
+                    new ConnectionAbortedException(CoreStrings.BadRequest_RequestLineTooLong),
+                    Http3ErrorCode.ProtocolError
+                );
                 return false;
             }
 
@@ -690,7 +907,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             return TryValidatePath(pathSegment);
         }
 
-
         private bool TryValidateMethod()
         {
             // :method
@@ -699,7 +915,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
 
             if (Method == Http.HttpMethod.None)
             {
-                Abort(new ConnectionAbortedException(CoreStrings.FormatHttp3ErrorMethodInvalid(_methodText)), Http3ErrorCode.ProtocolError);
+                Abort(
+                    new ConnectionAbortedException(
+                        CoreStrings.FormatHttp3ErrorMethodInvalid(_methodText)
+                    ),
+                    Http3ErrorCode.ProtocolError
+                );
                 return false;
             }
 
@@ -707,7 +928,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             {
                 if (HttpCharacters.IndexOfInvalidTokenChar(_methodText) >= 0)
                 {
-                    Abort(new ConnectionAbortedException(CoreStrings.FormatHttp3ErrorMethodInvalid(_methodText)), Http3ErrorCode.ProtocolError);
+                    Abort(
+                        new ConnectionAbortedException(
+                            CoreStrings.FormatHttp3ErrorMethodInvalid(_methodText)
+                        ),
+                        Http3ErrorCode.ProtocolError
+                    );
                     return false;
                 }
             }
@@ -747,7 +973,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             if (host.Count > 1 || !HttpUtilities.IsHostHeaderValid(hostText))
             {
                 // RST replaces 400
-                Abort(new ConnectionAbortedException(CoreStrings.FormatBadRequest_InvalidHostHeader_Detail(hostText)), Http3ErrorCode.ProtocolError);
+                Abort(
+                    new ConnectionAbortedException(
+                        CoreStrings.FormatBadRequest_InvalidHostHeader_Detail(hostText)
+                    ),
+                    Http3ErrorCode.ProtocolError
+                );
                 return false;
             }
 
@@ -759,7 +990,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
             // Must start with a leading slash
             if (pathSegment.Length == 0 || pathSegment[0] != '/')
             {
-                Abort(new ConnectionAbortedException(CoreStrings.FormatHttp3StreamErrorPathInvalid(RawTarget)), Http3ErrorCode.ProtocolError);
+                Abort(
+                    new ConnectionAbortedException(
+                        CoreStrings.FormatHttp3StreamErrorPathInvalid(RawTarget)
+                    ),
+                    Http3ErrorCode.ProtocolError
+                );
                 return false;
             }
 
@@ -776,13 +1012,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                 const int MaxPathBufferStackAllocSize = 256;
 
                 // The decoder operates only on raw bytes
-                Span<byte> pathBuffer = pathSegment.Length <= MaxPathBufferStackAllocSize
-                    // A constant size plus slice generates better code
-                    // https://github.com/dotnet/aspnetcore/pull/19273#discussion_r383159929
-                    ? stackalloc byte[MaxPathBufferStackAllocSize].Slice(0, pathSegment.Length)
-                    // TODO - Consider pool here for less than 4096
-                    // https://github.com/dotnet/aspnetcore/pull/19273#discussion_r383604184
-                    : new byte[pathSegment.Length];
+                Span<byte> pathBuffer =
+                    pathSegment.Length <= MaxPathBufferStackAllocSize
+                        // A constant size plus slice generates better code
+                        // https://github.com/dotnet/aspnetcore/pull/19273#discussion_r383159929
+                        ? stackalloc byte[MaxPathBufferStackAllocSize].Slice(0, pathSegment.Length)
+                        // TODO - Consider pool here for less than 4096
+                        // https://github.com/dotnet/aspnetcore/pull/19273#discussion_r383604184
+                        : new byte[pathSegment.Length];
 
                 for (var i = 0; i < pathSegment.Length; i++)
                 {
@@ -792,30 +1029,41 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                     pathBuffer[i] = (byte)ch;
                 }
 
-                Path = PathNormalizer.DecodePath(pathBuffer, pathEncoded, RawTarget!, QueryString!.Length);
+                Path = PathNormalizer.DecodePath(
+                    pathBuffer,
+                    pathEncoded,
+                    RawTarget!,
+                    QueryString!.Length
+                );
 
                 return true;
             }
             catch (InvalidOperationException)
             {
-                Abort(new ConnectionAbortedException(CoreStrings.FormatHttp3StreamErrorPathInvalid(RawTarget)), Http3ErrorCode.ProtocolError);
+                Abort(
+                    new ConnectionAbortedException(
+                        CoreStrings.FormatHttp3StreamErrorPathInvalid(RawTarget)
+                    ),
+                    Http3ErrorCode.ProtocolError
+                );
                 return false;
             }
         }
 
-        private Pipe CreateRequestBodyPipe(uint windowSize)
-            => new Pipe(new PipeOptions
-            (
-                pool: _context.MemoryPool,
-                readerScheduler: ServiceContext.Scheduler,
-                writerScheduler: PipeScheduler.Inline,
-                // Never pause within the window range. Flow control will prevent more data from being added.
-                // See the assert in OnDataAsync.
-                pauseWriterThreshold: windowSize + 1,
-                resumeWriterThreshold: windowSize + 1,
-                useSynchronizationContext: false,
-                minimumSegmentSize: _context.MemoryPool.GetMinimumSegmentSize()
-            ));
+        private Pipe CreateRequestBodyPipe(uint windowSize) =>
+            new Pipe(
+                new PipeOptions(
+                    pool: _context.MemoryPool,
+                    readerScheduler: ServiceContext.Scheduler,
+                    writerScheduler: PipeScheduler.Inline,
+                    // Never pause within the window range. Flow control will prevent more data from being added.
+                    // See the assert in OnDataAsync.
+                    pauseWriterThreshold: windowSize + 1,
+                    resumeWriterThreshold: windowSize + 1,
+                    useSynchronizationContext: false,
+                    minimumSegmentSize: _context.MemoryPool.GetMinimumSegmentSize()
+                )
+            );
 
         /// <summary>
         /// Used to kick off the request processing loop by derived classes.

@@ -22,13 +22,18 @@ namespace System.IO.Enumeration
         private readonly EnumerationOptions _options;
         private readonly string _directory;
 
-        public FileSystemEnumerable(string directory, FindTransform transform, EnumerationOptions? options = null)
-            : this(directory, transform, options, isNormalized: false)
-        {
-        }
+        public FileSystemEnumerable(
+            string directory,
+            FindTransform transform,
+            EnumerationOptions? options = null
+        ) : this(directory, transform, options, isNormalized: false) { }
 
-        internal FileSystemEnumerable(string directory, FindTransform transform, EnumerationOptions? options, bool isNormalized)
-        {
+        internal FileSystemEnumerable(
+            string directory,
+            FindTransform transform,
+            EnumerationOptions? options,
+            bool isNormalized
+        ) {
             _directory = directory ?? throw new ArgumentNullException(nameof(directory));
             _transform = transform ?? throw new ArgumentNullException(nameof(transform));
             _options = options ?? EnumerationOptions.Default;
@@ -43,7 +48,8 @@ namespace System.IO.Enumeration
 
         public IEnumerator<TResult> GetEnumerator()
         {
-            return Interlocked.Exchange(ref _enumerator, null) ?? new DelegateEnumerator(this, isNormalized: false);
+            return Interlocked.Exchange(ref _enumerator, null)
+                ?? new DelegateEnumerator(this, isNormalized: false);
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -62,17 +68,20 @@ namespace System.IO.Enumeration
         {
             private readonly FileSystemEnumerable<TResult> _enumerable;
 
-            public DelegateEnumerator(FileSystemEnumerable<TResult> enumerable, bool isNormalized)
-                : base(enumerable._directory, isNormalized, enumerable._options)
+            public DelegateEnumerator(
+                FileSystemEnumerable<TResult> enumerable,
+                bool isNormalized
+            ) : base(enumerable._directory, isNormalized, enumerable._options)
             {
                 _enumerable = enumerable;
             }
 
-            protected override TResult TransformEntry(ref FileSystemEntry entry) => _enumerable._transform(ref entry);
-            protected override bool ShouldRecurseIntoEntry(ref FileSystemEntry entry)
-                => _enumerable.ShouldRecursePredicate?.Invoke(ref entry) ?? true;
-            protected override bool ShouldIncludeEntry(ref FileSystemEntry entry)
-                => _enumerable.ShouldIncludePredicate?.Invoke(ref entry) ?? true;
+            protected override TResult TransformEntry(ref FileSystemEntry entry) =>
+                _enumerable._transform(ref entry);
+            protected override bool ShouldRecurseIntoEntry(ref FileSystemEntry entry) =>
+                _enumerable.ShouldRecursePredicate?.Invoke(ref entry) ?? true;
+            protected override bool ShouldIncludeEntry(ref FileSystemEntry entry) =>
+                _enumerable.ShouldIncludePredicate?.Invoke(ref entry) ?? true;
         }
     }
 }

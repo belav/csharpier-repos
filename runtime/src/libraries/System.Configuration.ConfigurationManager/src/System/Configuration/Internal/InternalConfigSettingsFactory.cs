@@ -7,8 +7,10 @@ namespace System.Configuration.Internal
     {
         private InternalConfigSettingsFactory() { }
 
-        void IInternalConfigSettingsFactory.SetConfigurationSystem(IInternalConfigSystem configSystem, bool initComplete)
-        {
+        void IInternalConfigSettingsFactory.SetConfigurationSystem(
+            IInternalConfigSystem configSystem,
+            bool initComplete
+        ) {
             ConfigurationManager.SetConfigurationSystem(configSystem, initComplete);
         }
 

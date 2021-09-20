@@ -27,7 +27,8 @@ namespace Microsoft.EntityFrameworkCore
                 typeof(InMemoryEventId),
                 typeof(InMemoryLoggerExtensions),
                 new InMemoryLoggingDefinitions(),
-                fakeFactories);
+                fakeFactories
+            );
         }
     }
 }

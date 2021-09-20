@@ -10,12 +10,10 @@ namespace System.Reflection.PortableExecutable
         /// By default the stream is disposed when <see cref="PEReader"/> is disposed and sections of the PE image are read lazily.
         /// </summary>
         Default = 0,
-
         /// <summary>
         /// Keep the stream open when the <see cref="PEReader"/> is disposed.
         /// </summary>
         LeaveOpen = 1,
-
         /// <summary>
         /// Reads metadata section into memory right away.
         /// </summary>
@@ -26,7 +24,6 @@ namespace System.Reflection.PortableExecutable
         /// <see cref="PEReader"/> closes the stream automatically by the time the constructor returns unless <see cref="LeaveOpen"/> is specified.
         /// </remarks>
         PrefetchMetadata = 1 << 1,
-
         /// <summary>
         /// Reads the entire image into memory right away.
         /// </summary>
@@ -34,7 +31,6 @@ namespace System.Reflection.PortableExecutable
         /// <see cref="PEReader"/> closes the stream automatically by the time the constructor returns unless <see cref="LeaveOpen"/> is specified.
         /// </remarks>
         PrefetchEntireImage = 1 << 2,
-
         /// <summary>
         /// Indicates that the underlying PE image has been loaded into memory by the OS loader.
         /// </summary>
@@ -45,7 +41,15 @@ namespace System.Reflection.PortableExecutable
     {
         public static bool IsValid(this PEStreamOptions options)
         {
-            return (options & ~(PEStreamOptions.LeaveOpen | PEStreamOptions.PrefetchEntireImage | PEStreamOptions.PrefetchMetadata | PEStreamOptions.IsLoadedImage)) == 0;
+            return (
+                    options
+                    & ~(
+                        PEStreamOptions.LeaveOpen
+                        | PEStreamOptions.PrefetchEntireImage
+                        | PEStreamOptions.PrefetchMetadata
+                        | PEStreamOptions.IsLoadedImage
+                    )
+                ) == 0;
         }
     }
 }

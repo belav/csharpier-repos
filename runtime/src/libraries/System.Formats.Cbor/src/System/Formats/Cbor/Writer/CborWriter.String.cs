@@ -79,9 +79,16 @@ namespace System.Formats.Cbor
         /// </remarks>
         public void WriteStartIndefiniteLengthByteString()
         {
-            if (!ConvertIndefiniteLengthEncodings && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode))
-            {
-                throw new InvalidOperationException(SR.Format(SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported, ConformanceMode));
+            if (
+                !ConvertIndefiniteLengthEncodings
+                && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode)
+            ) {
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported,
+                        ConformanceMode
+                    )
+                );
             }
 
             if (ConvertIndefiniteLengthEncodings)
@@ -93,7 +100,9 @@ namespace System.Formats.Cbor
             }
 
             EnsureWriteCapacity(1);
-            WriteInitialByte(new CborInitialByte(CborMajorType.ByteString, CborAdditionalInfo.IndefiniteLength));
+            WriteInitialByte(
+                new CborInitialByte(CborMajorType.ByteString, CborAdditionalInfo.IndefiniteLength)
+            );
             PushDataItem(CborMajorType.ByteString, definiteLength: null);
         }
 
@@ -192,9 +201,16 @@ namespace System.Formats.Cbor
         /// </remarks>
         public void WriteStartIndefiniteLengthTextString()
         {
-            if (!ConvertIndefiniteLengthEncodings && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode))
-            {
-                throw new InvalidOperationException(SR.Format(SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported, ConformanceMode));
+            if (
+                !ConvertIndefiniteLengthEncodings
+                && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode)
+            ) {
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported,
+                        ConformanceMode
+                    )
+                );
             }
 
             if (ConvertIndefiniteLengthEncodings)
@@ -206,7 +222,9 @@ namespace System.Formats.Cbor
             }
 
             EnsureWriteCapacity(1);
-            WriteInitialByte(new CborInitialByte(CborMajorType.TextString, CborAdditionalInfo.IndefiniteLength));
+            WriteInitialByte(
+                new CborInitialByte(CborMajorType.TextString, CborAdditionalInfo.IndefiniteLength)
+            );
             PushDataItem(CborMajorType.TextString, definiteLength: null);
         }
 

@@ -14,14 +14,18 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ReadSimpleStruct()
         {
-            SimpleTestStruct obj = JsonSerializer.Deserialize<SimpleTestStruct>(SimpleTestStruct.s_json);
+            SimpleTestStruct obj = JsonSerializer.Deserialize<SimpleTestStruct>(
+                SimpleTestStruct.s_json
+            );
             obj.Verify();
         }
 
         [Fact]
         public static void ReadSimpleClass()
         {
-            SimpleTestClass obj = JsonSerializer.Deserialize<SimpleTestClass>(SimpleTestClass.s_json);
+            SimpleTestClass obj = JsonSerializer.Deserialize<SimpleTestClass>(
+                SimpleTestClass.s_json
+            );
             obj.Verify();
         }
 
@@ -37,25 +41,36 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData("// Leading Comment\n", "")]
         [InlineData("/* Multi\nLine\nComment */ ", "")]
         [InlineData("/* Multi\nLine\nComment */ ", "\t// trailing comment\n ")]
-        public static void ReadSimpleClassIgnoresLeadingOrTrailingTrivia(string leadingTrivia, string trailingTrivia)
-        {
+        public static void ReadSimpleClassIgnoresLeadingOrTrailingTrivia(
+            string leadingTrivia,
+            string trailingTrivia
+        ) {
             var options = new JsonSerializerOptions();
             options.ReadCommentHandling = JsonCommentHandling.Skip;
 
-            SimpleTestClass obj = JsonSerializer.Deserialize<SimpleTestClass>(leadingTrivia + SimpleTestClass.s_json + trailingTrivia, options);
+            SimpleTestClass obj = JsonSerializer.Deserialize<SimpleTestClass>(
+                leadingTrivia + SimpleTestClass.s_json + trailingTrivia,
+                options
+            );
             obj.Verify();
         }
 
         [Fact]
         public static void ReadSimpleClassWithObject()
         {
-            SimpleTestClassWithSimpleObject obj = JsonSerializer.Deserialize<SimpleTestClassWithSimpleObject>(SimpleTestClassWithSimpleObject.s_json);
+            SimpleTestClassWithSimpleObject obj =
+                JsonSerializer.Deserialize<SimpleTestClassWithSimpleObject>(
+                    SimpleTestClassWithSimpleObject.s_json
+                );
             obj.Verify();
             string reserialized = JsonSerializer.Serialize(obj);
 
             // Properties in the exported json will be in the order that they were reflected, doing a quick check to see that
             // we end up with the same length (i.e. same amount of data) to start.
-            Assert.Equal(SimpleTestClassWithSimpleObject.s_json.StripWhitespace().Length, reserialized.Length);
+            Assert.Equal(
+                SimpleTestClassWithSimpleObject.s_json.StripWhitespace().Length,
+                reserialized.Length
+            );
 
             // Shoving it back through the parser should validate round tripping.
             obj = JsonSerializer.Deserialize<SimpleTestClassWithSimpleObject>(reserialized);
@@ -69,15 +84,25 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData("// Leading Comment\n", "")]
         [InlineData("/* Multi\nLine\nComment */ ", "")]
         [InlineData("/* Multi\nLine\nComment */ ", "\t// trailing comment\n ")]
-        public static void ReadClassWithCommentsThrowsIfDisallowed(string leadingTrivia, string trailingTrivia)
-        {
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<ClassWithComplexObjects>(leadingTrivia + ClassWithComplexObjects.s_json + trailingTrivia));
+        public static void ReadClassWithCommentsThrowsIfDisallowed(
+            string leadingTrivia,
+            string trailingTrivia
+        ) {
+            Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithComplexObjects>(
+                        leadingTrivia + ClassWithComplexObjects.s_json + trailingTrivia
+                    )
+            );
         }
 
         [Fact]
         public static void ReadSimpleClassWithObjectArray()
         {
-            SimpleTestClassWithObjectArrays obj = JsonSerializer.Deserialize<SimpleTestClassWithObjectArrays>(SimpleTestClassWithObjectArrays.s_json);
+            SimpleTestClassWithObjectArrays obj =
+                JsonSerializer.Deserialize<SimpleTestClassWithObjectArrays>(
+                    SimpleTestClassWithObjectArrays.s_json
+                );
             obj.Verify();
             string reserialized = JsonSerializer.Serialize(obj);
 
@@ -131,13 +156,18 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ReadClassWithComplexObjects()
         {
-            ClassWithComplexObjects obj = JsonSerializer.Deserialize<ClassWithComplexObjects>(ClassWithComplexObjects.s_json);
+            ClassWithComplexObjects obj = JsonSerializer.Deserialize<ClassWithComplexObjects>(
+                ClassWithComplexObjects.s_json
+            );
             obj.Verify();
             string reserialized = JsonSerializer.Serialize(obj);
 
             // Properties in the exported json will be in the order that they were reflected, doing a quick check to see that
             // we end up with the same length (i.e. same amount of data) to start.
-            Assert.Equal(ClassWithComplexObjects.s_json.StripWhitespace().Length, reserialized.Length);
+            Assert.Equal(
+                ClassWithComplexObjects.s_json.StripWhitespace().Length,
+                reserialized.Length
+            );
 
             // Shoving it back through the parser should validate round tripping.
             obj = JsonSerializer.Deserialize<ClassWithComplexObjects>(reserialized);
@@ -156,12 +186,17 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData("// Leading Comment\n", "")]
         [InlineData("/* Multi\nLine\nComment */ ", "")]
         [InlineData("/* Multi\nLine\nComment */ ", "\t// trailing comment\n ")]
-        public static void ReadComplexClassIgnoresLeadingOrTrailingTrivia(string leadingTrivia, string trailingTrivia)
-        {
+        public static void ReadComplexClassIgnoresLeadingOrTrailingTrivia(
+            string leadingTrivia,
+            string trailingTrivia
+        ) {
             var options = new JsonSerializerOptions();
             options.ReadCommentHandling = JsonCommentHandling.Skip;
 
-            ClassWithComplexObjects obj = JsonSerializer.Deserialize<ClassWithComplexObjects>(leadingTrivia + ClassWithComplexObjects.s_json + trailingTrivia, options);
+            ClassWithComplexObjects obj = JsonSerializer.Deserialize<ClassWithComplexObjects>(
+                leadingTrivia + ClassWithComplexObjects.s_json + trailingTrivia,
+                options
+            );
             obj.Verify();
         }
 
@@ -171,7 +206,11 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions();
             options.ReadCommentHandling = JsonCommentHandling.Skip;
 
-            TestClassWithNestedObjectCommentsOuter obj = JsonSerializer.Deserialize<TestClassWithNestedObjectCommentsOuter>(TestClassWithNestedObjectCommentsOuter.s_data, options);
+            TestClassWithNestedObjectCommentsOuter obj =
+                JsonSerializer.Deserialize<TestClassWithNestedObjectCommentsOuter>(
+                    TestClassWithNestedObjectCommentsOuter.s_data,
+                    options
+                );
             obj.Verify();
         }
 
@@ -216,12 +255,37 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ReadObjectFail_ReferenceTypeMissingPublicParameterlessConstructor()
         {
-            Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<ClassWithInternalParameterlessCtor>(@"{""Name"":""Name!""}"));
-            Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<ClassWithPrivateParameterlessCtor>(@"{""Name"":""Name!""}"));
-            Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<CollectionWithoutPublicParameterlessCtor>(@"[""foo"", 1, false]"));
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithInternalParameterlessCtor>(
+                        @"{""Name"":""Name!""}"
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithPrivateParameterlessCtor>(
+                        @"{""Name"":""Name!""}"
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    JsonSerializer.Deserialize<CollectionWithoutPublicParameterlessCtor>(
+                        @"[""foo"", 1, false]"
+                    )
+            );
 
-            Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<GenericClassWithProtectedInternalCtor<string>>("{\"Result\":null}"));
-            Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<ConcreteDerivedClassWithNoPublicDefaultCtor>("{\"ErrorString\":\"oops\"}"));
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    JsonSerializer.Deserialize<GenericClassWithProtectedInternalCtor<string>>(
+                        "{\"Result\":null}"
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    JsonSerializer.Deserialize<ConcreteDerivedClassWithNoPublicDefaultCtor>(
+                        "{\"ErrorString\":\"oops\"}"
+                    )
+            );
         }
 
         private class PublicParameterizedConstructorTestClass
@@ -235,7 +299,8 @@ namespace System.Text.Json.Serialization.Tests
 
             public string Name { get; }
 
-            public static PublicParameterizedConstructorTestClass Instance { get; } = new PublicParameterizedConstructorTestClass(42);
+            public static PublicParameterizedConstructorTestClass Instance { get; } =
+                new PublicParameterizedConstructorTestClass(42);
         }
 
         private class ClassWithInternalParameterlessCtor
@@ -252,7 +317,8 @@ namespace System.Text.Json.Serialization.Tests
 
             public string Name { get; set; }
 
-            public static ClassWithInternalParameterlessCtor Instance { get; } = new ClassWithInternalParameterlessCtor("InstancePropertyInternal");
+            public static ClassWithInternalParameterlessCtor Instance { get; } =
+                new ClassWithInternalParameterlessCtor("InstancePropertyInternal");
         }
 
         private class ClassWithPrivateParameterlessCtor
@@ -269,7 +335,8 @@ namespace System.Text.Json.Serialization.Tests
 
             public string Name { get; set; }
 
-            public static ClassWithPrivateParameterlessCtor Instance { get; } = new ClassWithPrivateParameterlessCtor("InstancePropertyPrivate");
+            public static ClassWithPrivateParameterlessCtor Instance { get; } =
+                new ClassWithPrivateParameterlessCtor("InstancePropertyPrivate");
         }
 
         private class CollectionWithoutPublicParameterlessCtor : IList
@@ -278,7 +345,9 @@ namespace System.Text.Json.Serialization.Tests
 
             internal CollectionWithoutPublicParameterlessCtor()
             {
-                Debug.Fail("The JsonSerializer should not be calling non-public ctors, by default.");
+                Debug.Fail(
+                    "The JsonSerializer should not be calling non-public ctors, by default."
+                );
             }
 
             public CollectionWithoutPublicParameterlessCtor(List<object> list)
@@ -286,7 +355,11 @@ namespace System.Text.Json.Serialization.Tests
                 _list = list;
             }
 
-            public object this[int index] { get => _list[index]; set => _list[index] = value; }
+            public object this[int index]
+            {
+                get => _list[index];
+                set => _list[index] = value;
+            }
 
             public bool IsFixedSize => throw new NotImplementedException();
 
@@ -353,7 +426,8 @@ namespace System.Text.Json.Serialization.Tests
             }
         }
 
-        private sealed class ConcreteDerivedClassWithNoPublicDefaultCtor : GenericClassWithProtectedInternalCtor<string>
+        private sealed class ConcreteDerivedClassWithNoPublicDefaultCtor
+            : GenericClassWithProtectedInternalCtor<string>
         {
             public string ErrorString { get; set; }
 
@@ -362,15 +436,21 @@ namespace System.Text.Json.Serialization.Tests
                 ErrorString = error;
             }
 
-            public static ConcreteDerivedClassWithNoPublicDefaultCtor Ok() => new ConcreteDerivedClassWithNoPublicDefaultCtor("ok");
-            public static GenericClassWithProtectedInternalCtor<T> Ok<T>() => new GenericClassWithProtectedInternalCtor<T>();
-            public static ConcreteDerivedClassWithNoPublicDefaultCtor Error(string error) => new ConcreteDerivedClassWithNoPublicDefaultCtor(error);
+            public static ConcreteDerivedClassWithNoPublicDefaultCtor Ok() =>
+                new ConcreteDerivedClassWithNoPublicDefaultCtor("ok");
+            public static GenericClassWithProtectedInternalCtor<T> Ok<T>() =>
+                new GenericClassWithProtectedInternalCtor<T>();
+            public static ConcreteDerivedClassWithNoPublicDefaultCtor Error(string error) =>
+                new ConcreteDerivedClassWithNoPublicDefaultCtor(error);
         }
 
         [Fact]
         public static void ReadClassWithStringToPrimitiveDictionary()
         {
-            TestClassWithStringToPrimitiveDictionary obj = JsonSerializer.Deserialize<TestClassWithStringToPrimitiveDictionary>(TestClassWithStringToPrimitiveDictionary.s_data);
+            TestClassWithStringToPrimitiveDictionary obj =
+                JsonSerializer.Deserialize<TestClassWithStringToPrimitiveDictionary>(
+                    TestClassWithStringToPrimitiveDictionary.s_data
+                );
             obj.Verify();
         }
 
@@ -388,11 +468,12 @@ namespace System.Text.Json.Serialization.Tests
         public static void ReadConversionFails()
         {
             byte[] data = Encoding.UTF8.GetBytes(
-                @"{" +
-                    @"""Children"":[" +
-                        @"{""MyProperty"":""StringButShouldBeInt""}" +
-                    @"]" +
-                @"}");
+                @"{"
+                    + @"""Children"":["
+                    + @"{""MyProperty"":""StringButShouldBeInt""}"
+                    + @"]"
+                    + @"}"
+            );
 
             bool exceptionThrown = false;
 
@@ -414,7 +495,9 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ReadObject_PublicIndexer()
         {
-            Indexer indexer = JsonSerializer.Deserialize<Indexer>(@"{""NonIndexerProp"":""Value""}");
+            Indexer indexer = JsonSerializer.Deserialize<Indexer>(
+                @"{""NonIndexerProp"":""Value""}"
+            );
             Assert.Equal("Value", indexer.NonIndexerProp);
             Assert.Equal(-1, indexer[0]);
         }
@@ -426,7 +509,8 @@ namespace System.Text.Json.Serialization.Tests
             testObject.Initialize();
 
             string json = JsonSerializer.Serialize(testObject, testObject.GetType());
-            SimpleStructWithSimpleClass obj = JsonSerializer.Deserialize<SimpleStructWithSimpleClass>(json);
+            SimpleStructWithSimpleClass obj =
+                JsonSerializer.Deserialize<SimpleStructWithSimpleClass>(json);
             obj.Verify();
         }
 
@@ -435,7 +519,11 @@ namespace System.Text.Json.Serialization.Tests
         {
             SimpleTestStruct testObject = new SimpleTestStruct();
             testObject.Initialize();
-            testObject.MySimpleTestClass = new SimpleTestClass { MyString = "Hello", MyDouble = 3.14 };
+            testObject.MySimpleTestClass = new SimpleTestClass
+            {
+                MyString = "Hello",
+                MyDouble = 3.14
+            };
 
             string json = JsonSerializer.Serialize(testObject);
             SimpleTestStruct parsedObject = JsonSerializer.Deserialize<SimpleTestStruct>(json);
@@ -449,7 +537,12 @@ namespace System.Text.Json.Serialization.Tests
         {
             SimpleTestClass testObject = new SimpleTestClass();
             testObject.Initialize();
-            testObject.MySimpleTestStruct = new SimpleTestStruct { MyInt64 = 64, MyString = "Hello", MyInt32Array = new int[] { 32 } };
+            testObject.MySimpleTestStruct = new SimpleTestStruct
+            {
+                MyInt64 = 64,
+                MyString = "Hello",
+                MyInt32Array = new int[] { 32 }
+            };
 
             string json = JsonSerializer.Serialize(testObject);
             SimpleTestClass parsedObject = JsonSerializer.Deserialize<SimpleTestClass>(json);
@@ -462,18 +555,22 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void OuterClassHavingPropertiesDefinedAfterClassWithDictionaryTest()
         {
-            OuterClassHavingPropertiesDefinedAfterClassWithDictionary testObject = new OuterClassHavingPropertiesDefinedAfterClassWithDictionary
-            {
-                MyInt = 10,
-                MyIntArray = new int[] { 3 },
-                MyDouble = 3.14,
-                MyList = new List<string> { "Hello" },
-                MyString = "World",
-                MyInnerTestClass = new SimpleClassWithDictionary { MyInt = 2 }
-            };
+            OuterClassHavingPropertiesDefinedAfterClassWithDictionary testObject =
+                new OuterClassHavingPropertiesDefinedAfterClassWithDictionary
+                {
+                    MyInt = 10,
+                    MyIntArray = new int[] { 3 },
+                    MyDouble = 3.14,
+                    MyList = new List<string> { "Hello" },
+                    MyString = "World",
+                    MyInnerTestClass = new SimpleClassWithDictionary { MyInt = 2 }
+                };
             string json = JsonSerializer.Serialize(testObject);
 
-            OuterClassHavingPropertiesDefinedAfterClassWithDictionary parsedObject = JsonSerializer.Deserialize<OuterClassHavingPropertiesDefinedAfterClassWithDictionary>(json);
+            OuterClassHavingPropertiesDefinedAfterClassWithDictionary parsedObject =
+                JsonSerializer.Deserialize<OuterClassHavingPropertiesDefinedAfterClassWithDictionary>(
+                    json
+                );
 
             Assert.Equal(3.14, parsedObject.MyDouble);
             Assert.Equal(10, parsedObject.MyInt);
@@ -486,7 +583,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ReadStructWithSimpleClassArrayValueTest()
         {
-            string json = "{\"MySimpleTestClass\":{\"MyInt32Array\":[1],\"MyStringToStringDict\":null,\"MyStringToStringIDict\":null},\"MyInt32Array\":[2]}";
+            string json =
+                "{\"MySimpleTestClass\":{\"MyInt32Array\":[1],\"MyStringToStringDict\":null,\"MyStringToStringIDict\":null},\"MyInt32Array\":[2]}";
             SimpleTestStruct parsedObject = JsonSerializer.Deserialize<SimpleTestStruct>(json);
 
             Assert.Equal(1, parsedObject.MySimpleTestClass.MyInt32Array[0]);
@@ -502,20 +600,24 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [Theory]
-        [InlineData(@"{
+        [InlineData(
+            @"{
                 ""SkippedChild"": {},
                 ""ParsedChild"": {""MyInt16"":18},
                 ""UnmatchedProp"": null,
                 ""AnotherSkippedChild"": {""DrainProp1"":{}, ""DrainProp2"":{""SubProp"":0}},
                 ""AnotherSkippedChild"": {},
-                ""AnotherParsedChild"": {""MyInt16"":20}}")]
-        [InlineData(@"{
+                ""AnotherParsedChild"": {""MyInt16"":20}}"
+        )]
+        [InlineData(
+            @"{
                 ""SkippedChild"": null,
                 ""ParsedChild"": {""MyInt16"":18},
                 ""UnmatchedProp"": null,
                 ""AnotherSkippedChild"": {""DrainProp1"":{}, ""DrainProp2"":{""SubProp"":0}},
                 ""AnotherSkippedChild"": null,
-                ""AnotherParsedChild"": {""MyInt16"":20}}")]
+                ""AnotherParsedChild"": {""MyInt16"":20}}"
+        )]
         public static void ClassWithNoSetterAndValidProperty(string json)
         {
             ClassWithNoSetter parsedObject = JsonSerializer.Deserialize<ClassWithNoSetter>(json);
@@ -557,7 +659,8 @@ namespace System.Text.Json.Serialization.Tests
         public static void ClassWithMixingSkippedTypes()
         {
             // Tests that the parser picks back up after skipping/draining ignored elements. Complex version.
-            string json = @"{
+            string json =
+                @"{
                 ""SkippedDictionary"": {},
                 ""ParsedClass"": {""MyInt16"":18},
                 ""SkippedList"": [18,20],
@@ -575,7 +678,8 @@ namespace System.Text.Json.Serialization.Tests
                 ""UnmatchedDictionary"": {""DrainProp1"":{}, ""DrainProp2"":{""SubProp"":0}}                
             }";
 
-            ClassMixingSkippedTypes parsedObject = JsonSerializer.Deserialize<ClassMixingSkippedTypes>(json);
+            ClassMixingSkippedTypes parsedObject =
+                JsonSerializer.Deserialize<ClassMixingSkippedTypes>(json);
 
             Assert.Null(parsedObject.SkippedDictionary);
 
@@ -619,7 +723,9 @@ namespace System.Text.Json.Serialization.Tests
 
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<POCO>(json));
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<POCO>(jsonBytes));
-            Assert.Throws<JsonException>(() => JsonSerializer.DeserializeAsync<POCO>(new MemoryStream(jsonBytes)).Result);
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.DeserializeAsync<POCO>(new MemoryStream(jsonBytes)).Result
+            );
 
             // Using a reader directly doesn't throw since it stops once POCO is read.
             Utf8JsonReader reader = new Utf8JsonReader(jsonBytes);
@@ -642,7 +748,9 @@ namespace System.Text.Json.Serialization.Tests
 
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<POCO>(json));
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<POCO>(jsonBytes));
-            Assert.Throws<JsonException>(() => JsonSerializer.DeserializeAsync<POCO>(new MemoryStream(jsonBytes)).Result);
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.DeserializeAsync<POCO>(new MemoryStream(jsonBytes)).Result
+            );
 
             // Using a reader directly throws since it can't read full object.
             Utf8JsonReader reader = new Utf8JsonReader(jsonBytes);

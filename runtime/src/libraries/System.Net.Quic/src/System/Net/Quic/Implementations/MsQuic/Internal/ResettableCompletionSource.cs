@@ -34,8 +34,12 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             return _valueTaskSource.GetStatus(token);
         }
 
-        public void OnCompleted(Action<object?> continuation, object? state, short token, ValueTaskSourceOnCompletedFlags flags)
-        {
+        public void OnCompleted(
+            Action<object?> continuation,
+            object? state,
+            short token,
+            ValueTaskSourceOnCompletedFlags flags
+        ) {
             _valueTaskSource.OnCompleted(continuation, state, token, flags);
         }
 
@@ -56,6 +60,7 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             {
                 return _valueTaskSource.GetResult(token);
             }
+
             finally
             {
                 if (isValid)
@@ -72,6 +77,7 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             {
                 _valueTaskSource.GetResult(token);
             }
+
             finally
             {
                 if (isValid)
@@ -81,4 +87,4 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             }
         }
     }
- }
+}

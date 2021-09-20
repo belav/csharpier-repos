@@ -22,12 +22,21 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             TypeDeclarationSyntax destination,
             IMethodSymbol method,
             CodeGenerationOptions options,
-            IList<bool> availableIndices)
-        {
+            IList<bool> availableIndices
+        ) {
             var methodDeclaration = GenerateOperatorDeclaration(
-                method, options, destination?.SyntaxTree.Options ?? options.ParseOptions);
+                method,
+                options,
+                destination?.SyntaxTree.Options ?? options.ParseOptions
+            );
 
-            var members = Insert(destination.Members, methodDeclaration, options, availableIndices, after: LastOperator);
+            var members = Insert(
+                destination.Members,
+                methodDeclaration,
+                options,
+                availableIndices,
+                after: LastOperator
+            );
 
             return AddMembersTo(destination, members);
         }
@@ -35,9 +44,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         internal static OperatorDeclarationSyntax GenerateOperatorDeclaration(
             IMethodSymbol method,
             CodeGenerationOptions options,
-            ParseOptions parseOptions)
-        {
-            var reusableSyntax = GetReuseableSyntaxNodeForSymbol<OperatorDeclarationSyntax>(method, options);
+            ParseOptions parseOptions
+        ) {
+            var reusableSyntax = GetReuseableSyntaxNodeForSymbol<OperatorDeclarationSyntax>(
+                method,
+                options
+            );
             if (reusableSyntax != null)
             {
                 return reusableSyntax;
@@ -46,23 +58,35 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             var declaration = GenerateOperatorDeclarationWorker(method, options, parseOptions);
             declaration = UseExpressionBodyIfDesired(options, declaration, parseOptions);
 
-            return AddAnnotationsTo(method,
-                ConditionallyAddDocumentationCommentTo(declaration, method, options));
+            return AddAnnotationsTo(
+                method,
+                ConditionallyAddDocumentationCommentTo(declaration, method, options)
+            );
         }
 
         private static OperatorDeclarationSyntax UseExpressionBodyIfDesired(
-            CodeGenerationOptions options, OperatorDeclarationSyntax declaration, ParseOptions parseOptions)
-        {
+            CodeGenerationOptions options,
+            OperatorDeclarationSyntax declaration,
+            ParseOptions parseOptions
+        ) {
             if (declaration.ExpressionBody == null)
             {
-                var expressionBodyPreference = options.Options.GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedOperators).Value;
-                if (declaration.Body.TryConvertToArrowExpressionBody(
-                        declaration.Kind(), parseOptions, expressionBodyPreference,
-                        out var expressionBody, out var semicolonToken))
-                {
+                var expressionBodyPreference =
+                    options.Options.GetOption(
+                        CSharpCodeStyleOptions.PreferExpressionBodiedOperators
+                    ).Value;
+                if (
+                    declaration.Body.TryConvertToArrowExpressionBody(
+                        declaration.Kind(),
+                        parseOptions,
+                        expressionBodyPreference,
+                        out var expressionBody,
+                        out var semicolonToken
+                    )
+                ) {
                     return declaration.WithBody(null)
-                                      .WithExpressionBody(expressionBody)
-                                      .WithSemicolonToken(semicolonToken);
+                        .WithExpressionBody(expressionBody)
+                        .WithSemicolonToken(semicolonToken);
                 }
             }
 
@@ -72,27 +96,43 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static OperatorDeclarationSyntax GenerateOperatorDeclarationWorker(
             IMethodSymbol method,
             CodeGenerationOptions options,
-            ParseOptions parseOptions)
-        {
+            ParseOptions parseOptions
+        ) {
             var hasNoBody = !options.GenerateMethodBodies || method.IsExtern;
 
             var operatorSyntaxKind = SyntaxFacts.GetOperatorKind(method.MetadataName);
             if (operatorSyntaxKind == SyntaxKind.None)
             {
-                throw new ArgumentException(string.Format(WorkspacesResources.Cannot_generate_code_for_unsupported_operator_0, method.Name), nameof(method));
+                throw new ArgumentException(
+                    string.Format(
+                        WorkspacesResources.Cannot_generate_code_for_unsupported_operator_0,
+                        method.Name
+                    ),
+                    nameof(method)
+                );
             }
 
             var operatorToken = SyntaxFactory.Token(operatorSyntaxKind);
 
             var operatorDecl = SyntaxFactory.OperatorDeclaration(
-                attributeLists: AttributeGenerator.GenerateAttributeLists(method.GetAttributes(), options),
+                attributeLists: AttributeGenerator.GenerateAttributeLists(
+                    method.GetAttributes(),
+                    options
+                ),
                 modifiers: GenerateModifiers(),
                 returnType: method.ReturnType.GenerateTypeSyntax(),
                 operatorKeyword: SyntaxFactory.Token(SyntaxKind.OperatorKeyword),
                 operatorToken: operatorToken,
-                parameterList: ParameterGenerator.GenerateParameterList(method.Parameters, isExplicit: false, options: options),
+                parameterList: ParameterGenerator.GenerateParameterList(
+                    method.Parameters,
+                    isExplicit: false,
+                    options: options
+                ),
                 body: hasNoBody ? null : StatementGenerator.GenerateBlock(method),
-                semicolonToken: hasNoBody ? SyntaxFactory.Token(SyntaxKind.SemicolonToken) : new SyntaxToken());
+                semicolonToken: hasNoBody
+                  ? SyntaxFactory.Token(SyntaxKind.SemicolonToken)
+                  : new SyntaxToken()
+            );
 
             operatorDecl = UseExpressionBodyIfDesired(options, operatorDecl, parseOptions);
             return operatorDecl;
@@ -102,7 +142,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         {
             return SyntaxFactory.TokenList(
                 SyntaxFactory.Token(SyntaxKind.PublicKeyword),
-                SyntaxFactory.Token(SyntaxKind.StaticKeyword));
+                SyntaxFactory.Token(SyntaxKind.StaticKeyword)
+            );
         }
     }
 }

@@ -13,11 +13,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
     [DiagnosticAnalyzer(InternalLanguageNames.TypeScript)]
     internal sealed class VSTypeScriptProjectDiagnosticAnalyzer : ProjectDiagnosticAnalyzer
     {
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray<DiagnosticDescriptor>.Empty;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            ImmutableArray<DiagnosticDescriptor>.Empty;
 
-        public override Task<ImmutableArray<Diagnostic>> AnalyzeProjectAsync(Project project, CancellationToken cancellationToken)
-        {
-            var analyzer = project.LanguageServices.GetRequiredService<VSTypeScriptDiagnosticAnalyzerLanguageService>().Implementation;
+        public override Task<ImmutableArray<Diagnostic>> AnalyzeProjectAsync(
+            Project project,
+            CancellationToken cancellationToken
+        ) {
+            var analyzer =
+                project.LanguageServices.GetRequiredService<VSTypeScriptDiagnosticAnalyzerLanguageService>().Implementation;
             if (analyzer == null)
             {
                 return SpecializedTasks.EmptyImmutableArray<Diagnostic>();

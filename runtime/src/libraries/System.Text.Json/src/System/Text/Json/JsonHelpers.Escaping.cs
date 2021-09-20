@@ -11,8 +11,10 @@ namespace System.Text.Json
     internal static partial class JsonHelpers
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static byte[] GetEscapedPropertyNameSection(ReadOnlySpan<byte> utf8Value, JavaScriptEncoder? encoder)
-        {
+        public static byte[] GetEscapedPropertyNameSection(
+            ReadOnlySpan<byte> utf8Value,
+            JavaScriptEncoder? encoder
+        ) {
             int idx = JsonWriterHelper.NeedsEscaping(utf8Value, encoder);
 
             if (idx != -1)
@@ -28,20 +30,32 @@ namespace System.Text.Json
         public static byte[] EscapeValue(
             ReadOnlySpan<byte> utf8Value,
             int firstEscapeIndexVal,
-            JavaScriptEncoder? encoder)
-        {
-            Debug.Assert(int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= utf8Value.Length);
+            JavaScriptEncoder? encoder
+        ) {
+            Debug.Assert(
+                int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= utf8Value.Length
+            );
             Debug.Assert(firstEscapeIndexVal >= 0 && firstEscapeIndexVal < utf8Value.Length);
 
             byte[]? valueArray = null;
 
-            int length = JsonWriterHelper.GetMaxEscapedLength(utf8Value.Length, firstEscapeIndexVal);
+            int length = JsonWriterHelper.GetMaxEscapedLength(
+                utf8Value.Length,
+                firstEscapeIndexVal
+            );
 
-            Span<byte> escapedValue = length <= JsonConstants.StackallocThreshold ?
-                stackalloc byte[length] :
-                (valueArray = ArrayPool<byte>.Shared.Rent(length));
+            Span<byte> escapedValue =
+                length <= JsonConstants.StackallocThreshold
+                    ? stackalloc byte[length]
+                    : (valueArray = ArrayPool<byte>.Shared.Rent(length));
 
-            JsonWriterHelper.EscapeString(utf8Value, escapedValue, firstEscapeIndexVal, encoder, out int written);
+            JsonWriterHelper.EscapeString(
+                utf8Value,
+                escapedValue,
+                firstEscapeIndexVal,
+                encoder,
+                out int written
+            );
 
             byte[] escapedString = escapedValue.Slice(0, written).ToArray();
 
@@ -56,20 +70,32 @@ namespace System.Text.Json
         private static byte[] GetEscapedPropertyNameSection(
             ReadOnlySpan<byte> utf8Value,
             int firstEscapeIndexVal,
-            JavaScriptEncoder? encoder)
-        {
-            Debug.Assert(int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= utf8Value.Length);
+            JavaScriptEncoder? encoder
+        ) {
+            Debug.Assert(
+                int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= utf8Value.Length
+            );
             Debug.Assert(firstEscapeIndexVal >= 0 && firstEscapeIndexVal < utf8Value.Length);
 
             byte[]? valueArray = null;
 
-            int length = JsonWriterHelper.GetMaxEscapedLength(utf8Value.Length, firstEscapeIndexVal);
+            int length = JsonWriterHelper.GetMaxEscapedLength(
+                utf8Value.Length,
+                firstEscapeIndexVal
+            );
 
-            Span<byte> escapedValue = length <= JsonConstants.StackallocThreshold ?
-                stackalloc byte[length] :
-                (valueArray = ArrayPool<byte>.Shared.Rent(length));
+            Span<byte> escapedValue =
+                length <= JsonConstants.StackallocThreshold
+                    ? stackalloc byte[length]
+                    : (valueArray = ArrayPool<byte>.Shared.Rent(length));
 
-            JsonWriterHelper.EscapeString(utf8Value, escapedValue, firstEscapeIndexVal, encoder, out int written);
+            JsonWriterHelper.EscapeString(
+                utf8Value,
+                escapedValue,
+                firstEscapeIndexVal,
+                encoder,
+                out int written
+            );
 
             byte[] propertySection = GetPropertyNameSection(escapedValue.Slice(0, written));
 

@@ -18,8 +18,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     /// </summary>
     public class CollateTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _methodInfo
-            = typeof(RelationalDbFunctionsExtensions).GetRequiredMethod(nameof(RelationalDbFunctionsExtensions.Collate));
+        private static readonly MethodInfo _methodInfo =
+            typeof(RelationalDbFunctionsExtensions).GetRequiredMethod(
+                nameof(RelationalDbFunctionsExtensions.Collate)
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -31,18 +33,19 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
 
-            return method.IsGenericMethod
+            return
+                method.IsGenericMethod
                 && Equals(method.GetGenericMethodDefinition(), _methodInfo)
                 && arguments[2] is SqlConstantExpression constantExpression
                 && constantExpression.Value is string collation
-                    ? new CollateExpression(arguments[1], collation)
-                    : null;
+              ? new CollateExpression(arguments[1], collation)
+              : null;
         }
     }
 }

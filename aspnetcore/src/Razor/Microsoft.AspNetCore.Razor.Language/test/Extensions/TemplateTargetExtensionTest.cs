@@ -15,16 +15,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             // Arrange
             var node = new TemplateIntermediateNode()
             {
-                Children =
-                {
-                    new CSharpExpressionIntermediateNode()
-                }
+                Children = { new CSharpExpressionIntermediateNode() }
             };
             var extension = new TemplateTargetExtension()
             {
                 TemplateTypeName = "global::TestTemplate"
             };
-            
+
             var nodeWriter = new RuntimeNodeWriter()
             {
                 PushWriterMethod = "TestPushWriter",
@@ -37,7 +34,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             extension.WriteTemplate(context, node);
 
             // Assert
-            var expected = @"item => new global::TestTemplate(async(__razor_template_writer) => {
+            var expected =
+                @"item => new global::TestTemplate(async(__razor_template_writer) => {
     TestPushWriter(__razor_template_writer);
     Render Children
     TestPopWriter();

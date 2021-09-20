@@ -10,14 +10,25 @@ namespace Microsoft.AspNetCore.Server.HttpSys
     {
         private static class Log
         {
-            private static readonly Action<ILogger, Exception?> _abortError =
-                LoggerMessage.Define(LogLevel.Debug, LoggerEventIds.AbortError, "Abort");
+            private static readonly Action<ILogger, Exception?> _abortError = LoggerMessage.Define(
+                LogLevel.Debug,
+                LoggerEventIds.AbortError,
+                "Abort"
+            );
 
             private static readonly Action<ILogger, Exception?> _channelBindingNeedsHttps =
-                LoggerMessage.Define(LogLevel.Debug, LoggerEventIds.ChannelBindingNeedsHttps, "TryGetChannelBinding; Channel binding requires HTTPS.");
+                LoggerMessage.Define(
+                    LogLevel.Debug,
+                    LoggerEventIds.ChannelBindingNeedsHttps,
+                    "TryGetChannelBinding; Channel binding requires HTTPS."
+                );
 
             private static readonly Action<ILogger, Exception?> _channelBindingRetrieved =
-                LoggerMessage.Define(LogLevel.Debug, LoggerEventIds.ChannelBindingRetrieved, "Channel binding retrieved.");
+                LoggerMessage.Define(
+                    LogLevel.Debug,
+                    LoggerEventIds.ChannelBindingRetrieved,
+                    "Channel binding retrieved."
+                );
 
             public static void AbortError(ILogger logger, Exception exception)
             {

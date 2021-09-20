@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         private readonly ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>> _existingTags;
 
         internal IEnumerable<DocumentSnapshotSpan> _spansTagged;
-        internal ImmutableArray<ITagSpan<TTag>>.Builder tagSpans = ImmutableArray.CreateBuilder<ITagSpan<TTag>>();
+        internal ImmutableArray<ITagSpan<TTag>>.Builder tagSpans = ImmutableArray.CreateBuilder<
+            ITagSpan<TTag>
+        >();
 
         public ImmutableArray<DocumentSnapshotSpan> SpansToTag { get; }
         public SnapshotPoint? CaretPosition { get; }
@@ -48,14 +50,19 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
         // For testing only.
         internal TaggerContext(
-            Document document, ITextSnapshot snapshot,
+            Document document,
+            ITextSnapshot snapshot,
             SnapshotPoint? caretPosition = null,
             TextChangeRange? textChangeRange = null,
-            CancellationToken cancellationToken = default)
-            : this(state: null, ImmutableArray.Create(new DocumentSnapshotSpan(document, snapshot.GetFullSpan())),
-                   caretPosition, textChangeRange, existingTags: null, cancellationToken)
-        {
-        }
+            CancellationToken cancellationToken = default
+        ) : this(
+            state: null,
+            ImmutableArray.Create(new DocumentSnapshotSpan(document, snapshot.GetFullSpan())),
+            caretPosition,
+            textChangeRange,
+            existingTags: null,
+            cancellationToken
+        ) { }
 
         internal TaggerContext(
             object state,
@@ -63,8 +70,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             SnapshotPoint? caretPosition,
             TextChangeRange? textChangeRange,
             ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>> existingTags,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             this.State = state;
             this.SpansToTag = spansToTag;
             this.CaretPosition = caretPosition;
@@ -75,11 +82,9 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             _existingTags = existingTags;
         }
 
-        public void AddTag(ITagSpan<TTag> tag)
-            => tagSpans.Add(tag);
+        public void AddTag(ITagSpan<TTag> tag) => tagSpans.Add(tag);
 
-        public void ClearTags()
-            => tagSpans.Clear();
+        public void ClearTags() => tagSpans.Clear();
 
         /// <summary>
         /// Used to allow taggers to indicate what spans were actually tagged.  This is useful 
@@ -87,15 +92,19 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         /// of a document is tagged then the tagger infrastructure will keep previously computed
         /// tags from before and after the sub-span and merge them with the newly produced tags.
         /// </summary>
-        public void SetSpansTagged(IEnumerable<DocumentSnapshotSpan> spansTagged)
-            => this._spansTagged = spansTagged ?? throw new ArgumentNullException(nameof(spansTagged));
+        public void SetSpansTagged(IEnumerable<DocumentSnapshotSpan> spansTagged) =>
+            this._spansTagged = spansTagged ?? throw new ArgumentNullException(nameof(spansTagged));
 
         public IEnumerable<ITagSpan<TTag>> GetExistingContainingTags(SnapshotPoint point)
         {
-            if (_existingTags != null && _existingTags.TryGetValue(point.Snapshot.TextBuffer, out var tree))
-            {
-                return tree.GetIntersectingSpans(new SnapshotSpan(point.Snapshot, new Span(point, 0)))
-                           .Where(s => s.Span.Contains(point));
+            if (
+                _existingTags != null
+                && _existingTags.TryGetValue(point.Snapshot.TextBuffer, out var tree)
+            ) {
+                return tree.GetIntersectingSpans(
+                        new SnapshotSpan(point.Snapshot, new Span(point, 0))
+                    )
+                    .Where(s => s.Span.Contains(point));
             }
 
             return SpecializedCollections.EmptyEnumerable<ITagSpan<TTag>>();

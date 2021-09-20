@@ -147,13 +147,62 @@ namespace System.Net.Security
             }
         }
 
-        public delegate bool HelloExtensionCallback(ref TlsFrameInfo info, ExtensionType type, ReadOnlySpan<byte> extensionsData);
+        public delegate bool HelloExtensionCallback(
+            ref TlsFrameInfo info,
+            ExtensionType type,
+            ReadOnlySpan<byte> extensionsData
+        );
 
-        private static byte[] s_protocolMismatch13 = new byte[] { (byte)TlsContentType.Alert, 3, 4, 0, 2, 2, 70 };
-        private static byte[] s_protocolMismatch12 = new byte[] { (byte)TlsContentType.Alert, 3, 3, 0, 2, 2, 70 };
-        private static byte[] s_protocolMismatch11 = new byte[] { (byte)TlsContentType.Alert, 3, 2, 0, 2, 2, 70 };
-        private static byte[] s_protocolMismatch10 = new byte[] { (byte)TlsContentType.Alert, 3, 1, 0, 2, 2, 70 };
-        private static byte[] s_protocolMismatch30 = new byte[] { (byte)TlsContentType.Alert, 3, 0, 0, 2, 2, 40 };
+        private static byte[] s_protocolMismatch13 = new byte[]
+        {
+            (byte)TlsContentType.Alert,
+            3,
+            4,
+            0,
+            2,
+            2,
+            70
+        };
+        private static byte[] s_protocolMismatch12 = new byte[]
+        {
+            (byte)TlsContentType.Alert,
+            3,
+            3,
+            0,
+            2,
+            2,
+            70
+        };
+        private static byte[] s_protocolMismatch11 = new byte[]
+        {
+            (byte)TlsContentType.Alert,
+            3,
+            2,
+            0,
+            2,
+            2,
+            70
+        };
+        private static byte[] s_protocolMismatch10 = new byte[]
+        {
+            (byte)TlsContentType.Alert,
+            3,
+            1,
+            0,
+            2,
+            2,
+            70
+        };
+        private static byte[] s_protocolMismatch30 = new byte[]
+        {
+            (byte)TlsContentType.Alert,
+            3,
+            0,
+            0,
+            2,
+            2,
+            40
+        };
 
         private const int UInt24Size = 3;
         private const int RandomSize = 32;
@@ -163,8 +212,15 @@ namespace System.Net.Security
         private const int ProtocolVersionTlsMajorValue = 3;
 
         // Per spec "AllowUnassigned flag MUST be set". See comment above DecodeString() for more details.
-        private static readonly IdnMapping s_idnMapping = new IdnMapping() { AllowUnassigned = true };
-        private static readonly Encoding s_encoding = Encoding.GetEncoding("utf-8", new EncoderExceptionFallback(), new DecoderExceptionFallback());
+        private static readonly IdnMapping s_idnMapping = new IdnMapping()
+        {
+            AllowUnassigned = true
+        };
+        private static readonly Encoding s_encoding = Encoding.GetEncoding(
+            "utf-8",
+            new EncoderExceptionFallback(),
+            new DecoderExceptionFallback()
+        );
 
         public static bool TryGetFrameHeader(ReadOnlySpan<byte> frame, ref TlsFrameHeader header)
         {
@@ -202,7 +258,7 @@ namespace System.Net.Security
         {
             if (frame.Length < 5 || frame[1] < 3)
             {
-                return - 1;
+                return -1;
             }
 
             return ((frame[3] << 8) | frame[4]) + HeaderSize;
@@ -214,8 +270,12 @@ namespace System.Net.Security
         // It is OK to call it again if more data becomes available.
         // It is also possible to limit what information is processed.
         // If callback delegate is provided, it will be called on ALL extensions.
-        public static bool TryGetFrameInfo(ReadOnlySpan<byte> frame, ref TlsFrameInfo info, ProcessingOptions options = ProcessingOptions.All, HelloExtensionCallback? callback = null)
-        {
+        public static bool TryGetFrameInfo(
+            ReadOnlySpan<byte> frame,
+            ref TlsFrameInfo info,
+            ProcessingOptions options = ProcessingOptions.All,
+            HelloExtensionCallback? callback = null
+        ) {
             const int HandshakeTypeOffset = 5;
             if (frame.Length < HeaderSize)
             {
@@ -251,9 +311,13 @@ namespace System.Net.Security
             // Check if we have full frame.
             bool isComplete = frame.Length >= HeaderSize + info.Header.Length;
 
-            if (((int)info.Header.Version >= (int)SslProtocols.Tls) &&
-                (info.HandshakeType == TlsHandshakeType.ClientHello || info.HandshakeType == TlsHandshakeType.ServerHello))
-            {
+            if (
+                ((int)info.Header.Version >= (int)SslProtocols.Tls)
+                && (
+                    info.HandshakeType == TlsHandshakeType.ClientHello
+                    || info.HandshakeType == TlsHandshakeType.ServerHello
+                )
+            ) {
                 if (!TryParseHelloFrame(frame.Slice(HeaderSize), ref info, options, callback))
                 {
                     isComplete = false;
@@ -277,8 +341,11 @@ namespace System.Net.Security
         }
 
         // This function will parse TLS Alert message and it will return alert level and description.
-        public static bool TryGetAlertInfo(ReadOnlySpan<byte> frame, ref TlsAlertLevel level, ref TlsAlertDescription description)
-        {
+        public static bool TryGetAlertInfo(
+            ReadOnlySpan<byte> frame,
+            ref TlsAlertLevel level,
+            ref TlsAlertDescription description
+        ) {
             if (frame.Length < 7 || frame[0] != (byte)TlsContentType.Alert)
             {
                 return false;
@@ -312,7 +379,16 @@ namespace System.Net.Security
             else if ((int)version > (int)SslProtocols.Tls)
             {
                 // Create TLS1.2 alert
-                byte[] buffer = new byte[] { (byte)TlsContentType.Alert, 3, 3, 0, 2, 2, (byte)reason };
+                byte[] buffer = new byte[]
+                {
+                    (byte)TlsContentType.Alert,
+                    3,
+                    3,
+                    0,
+                    2,
+                    2,
+                    (byte)reason
+                };
                 switch (version)
                 {
                     case SslProtocols.Tls13:
@@ -332,8 +408,12 @@ namespace System.Net.Security
             return Array.Empty<byte>();
         }
 
-        private static bool TryParseHelloFrame(ReadOnlySpan<byte> sslHandshake, ref TlsFrameInfo info, ProcessingOptions options, HelloExtensionCallback? callback)
-        {
+        private static bool TryParseHelloFrame(
+            ReadOnlySpan<byte> sslHandshake,
+            ref TlsFrameInfo info,
+            ProcessingOptions options,
+            HelloExtensionCallback? callback
+        ) {
             // https://tools.ietf.org/html/rfc6101#section-5.6
             // struct {
             //     HandshakeType msg_type;    /* handshake type */
@@ -349,10 +429,15 @@ namespace System.Net.Security
             const int HelloLengthOffset = HandshakeTypeOffset + sizeof(TlsHandshakeType);
             const int HelloOffset = HelloLengthOffset + UInt24Size;
 
-            if (sslHandshake.Length < HelloOffset ||
-                ((TlsHandshakeType)sslHandshake[HandshakeTypeOffset] != TlsHandshakeType.ClientHello &&
-                 (TlsHandshakeType)sslHandshake[HandshakeTypeOffset] != TlsHandshakeType.ServerHello))
-            {
+            if (
+                sslHandshake.Length < HelloOffset
+                || (
+                    (TlsHandshakeType)sslHandshake[HandshakeTypeOffset]
+                        != TlsHandshakeType.ClientHello
+                    && (TlsHandshakeType)sslHandshake[HandshakeTypeOffset]
+                        != TlsHandshakeType.ServerHello
+                )
+            ) {
                 return false;
             }
 
@@ -367,16 +452,23 @@ namespace System.Net.Security
             // ProtocolVersion may be different from frame header.
             if (helloData[ProtocolVersionMajorOffset] == ProtocolVersionTlsMajorValue)
             {
-                info.SupportedVersions |= TlsMinorVersionToProtocol(helloData[ProtocolVersionMinorOffset]);
+                info.SupportedVersions |= TlsMinorVersionToProtocol(
+                    helloData[ProtocolVersionMinorOffset]
+                );
             }
 
-            return (TlsHandshakeType)sslHandshake[HandshakeTypeOffset] == TlsHandshakeType.ClientHello ?
-                        TryParseClientHello(helloData.Slice(0, helloLength), ref info, options, callback) :
-                        TryParseServerHello(helloData.Slice(0, helloLength), ref info, options, callback);
+            return
+                (TlsHandshakeType)sslHandshake[HandshakeTypeOffset] == TlsHandshakeType.ClientHello
+              ? TryParseClientHello(helloData.Slice(0, helloLength), ref info, options, callback)
+              : TryParseServerHello(helloData.Slice(0, helloLength), ref info, options, callback);
         }
 
-        private static bool TryParseClientHello(ReadOnlySpan<byte> clientHello, ref TlsFrameInfo info, ProcessingOptions options, HelloExtensionCallback? callback)
-        {
+        private static bool TryParseClientHello(
+            ReadOnlySpan<byte> clientHello,
+            ref TlsFrameInfo info,
+            ProcessingOptions options,
+            HelloExtensionCallback? callback
+        ) {
             // Basic structure: https://tools.ietf.org/html/rfc6101#section-5.6.1.2
             // Extended structure: https://tools.ietf.org/html/rfc3546#section-2.1
             // struct {
@@ -416,8 +508,12 @@ namespace System.Net.Security
             return TryParseHelloExtensions(p, ref info, options, callback);
         }
 
-        private static bool TryParseServerHello(ReadOnlySpan<byte> serverHello, ref TlsFrameInfo info, ProcessingOptions options, HelloExtensionCallback? callback)
-        {
+        private static bool TryParseServerHello(
+            ReadOnlySpan<byte> serverHello,
+            ref TlsFrameInfo info,
+            ProcessingOptions options,
+            HelloExtensionCallback? callback
+        ) {
             // Basic structure: https://tools.ietf.org/html/rfc6101#section-5.6.1.3
             // Extended structure: https://tools.ietf.org/html/rfc3546#section-2.2
             // struct {
@@ -455,14 +551,20 @@ namespace System.Net.Security
         }
 
         // This is common for ClientHello and ServerHello.
-        private static bool TryParseHelloExtensions(ReadOnlySpan<byte> extensions, ref TlsFrameInfo info, ProcessingOptions options, HelloExtensionCallback? callback)
-        {
+        private static bool TryParseHelloExtensions(
+            ReadOnlySpan<byte> extensions,
+            ref TlsFrameInfo info,
+            ProcessingOptions options,
+            HelloExtensionCallback? callback
+        ) {
             const int ExtensionHeader = 4;
             bool isComplete = true;
 
             while (extensions.Length >= ExtensionHeader)
             {
-                ExtensionType extensionType = (ExtensionType)BinaryPrimitives.ReadUInt16BigEndian(extensions);
+                ExtensionType extensionType = (ExtensionType)BinaryPrimitives.ReadUInt16BigEndian(
+                    extensions
+                );
                 extensions = SkipBytes(extensions, sizeof(ushort));
 
                 ushort extensionLength = BinaryPrimitives.ReadUInt16BigEndian(extensions);
@@ -475,9 +577,13 @@ namespace System.Net.Security
 
                 ReadOnlySpan<byte> extensionData = extensions.Slice(0, extensionLength);
 
-                if (extensionType == ExtensionType.ServerName && (options == ProcessingOptions.All ||
-                   (options & ProcessingOptions.ServerName) == ProcessingOptions.ServerName))
-                {
+                if (
+                    extensionType == ExtensionType.ServerName
+                    && (
+                        options == ProcessingOptions.All
+                        || (options & ProcessingOptions.ServerName) == ProcessingOptions.ServerName
+                    )
+                ) {
                     if (!TryGetSniFromServerNameList(extensionData, out string? sni))
                     {
                         return false;
@@ -485,21 +591,38 @@ namespace System.Net.Security
 
                     info.TargetName = sni!;
                 }
-                else if (extensionType == ExtensionType.SupportedVersions && (options == ProcessingOptions.All ||
-                          (options & ProcessingOptions.Versions) == ProcessingOptions.Versions))
-                {
-                    if (!TryGetSupportedVersionsFromExtension(extensionData, out SslProtocols versions))
-                    {
+                else if (
+                    extensionType == ExtensionType.SupportedVersions
+                    && (
+                        options == ProcessingOptions.All
+                        || (options & ProcessingOptions.Versions) == ProcessingOptions.Versions
+                    )
+                ) {
+                    if (
+                        !TryGetSupportedVersionsFromExtension(
+                            extensionData,
+                            out SslProtocols versions
+                        )
+                    ) {
                         return false;
                     }
 
                     info.SupportedVersions |= versions;
                 }
-                else if (extensionType == ExtensionType.ApplicationProtocols && (options == ProcessingOptions.All ||
-                          (options & ProcessingOptions.ApplicationProtocol) == ProcessingOptions.ApplicationProtocol))
-                {
-                    if (!TryGetApplicationProtocolsFromExtension(extensionData, out ApplicationProtocolInfo alpn))
-                    {
+                else if (
+                    extensionType == ExtensionType.ApplicationProtocols
+                    && (
+                        options == ProcessingOptions.All
+                        || (options & ProcessingOptions.ApplicationProtocol)
+                            == ProcessingOptions.ApplicationProtocol
+                    )
+                ) {
+                    if (
+                        !TryGetApplicationProtocolsFromExtension(
+                            extensionData,
+                            out ApplicationProtocolInfo alpn
+                        )
+                    ) {
                         return false;
                     }
 
@@ -513,8 +636,10 @@ namespace System.Net.Security
             return isComplete;
         }
 
-        private static bool TryGetSniFromServerNameList(ReadOnlySpan<byte> serverNameListExtension, out string? sni)
-        {
+        private static bool TryGetSniFromServerNameList(
+            ReadOnlySpan<byte> serverNameListExtension,
+            out string? sni
+        ) {
             // https://tools.ietf.org/html/rfc3546#section-3.1
             // struct {
             //     ServerName server_name_list<1..2^16-1>
@@ -528,7 +653,9 @@ namespace System.Net.Security
                 return false;
             }
 
-            int serverNameListLength = BinaryPrimitives.ReadUInt16BigEndian(serverNameListExtension);
+            int serverNameListLength = BinaryPrimitives.ReadUInt16BigEndian(
+                serverNameListExtension
+            );
             ReadOnlySpan<byte> serverNameList = serverNameListExtension.Slice(ServerNameListOffset);
 
             if (serverNameListLength != serverNameList.Length)
@@ -572,8 +699,10 @@ namespace System.Net.Security
             return GetSniFromHostNameStruct(hostNameStruct, out invalid);
         }
 
-        private static string? GetSniFromHostNameStruct(ReadOnlySpan<byte> hostNameStruct, out bool invalid)
-        {
+        private static string? GetSniFromHostNameStruct(
+            ReadOnlySpan<byte> hostNameStruct,
+            out bool invalid
+        ) {
             // https://tools.ietf.org/html/rfc3546#section-3.1
             // HostName is an opaque type (length of sufficient size for max data length is prepended)
             const int HostNameLengthOffset = 0;
@@ -591,8 +720,10 @@ namespace System.Net.Security
             return DecodeString(hostName);
         }
 
-        private static bool TryGetSupportedVersionsFromExtension(ReadOnlySpan<byte> extensionData, out SslProtocols protocols)
-        {
+        private static bool TryGetSupportedVersionsFromExtension(
+            ReadOnlySpan<byte> extensionData,
+            out SslProtocols protocols
+        ) {
             // https://tools.ietf.org/html/rfc8446#section-4.2.1
             // struct {
             // select(Handshake.msg_type) {
@@ -621,7 +752,9 @@ namespace System.Net.Security
             {
                 if (extensionData[ProtocolVersionMajorOffset] == ProtocolVersionTlsMajorValue)
                 {
-                    protocols |= TlsMinorVersionToProtocol(extensionData[ProtocolVersionMinorOffset]);
+                    protocols |= TlsMinorVersionToProtocol(
+                        extensionData[ProtocolVersionMinorOffset]
+                    );
                 }
 
                 extensionData = extensionData.Slice(VersionLength);
@@ -630,8 +763,10 @@ namespace System.Net.Security
             return true;
         }
 
-        private static bool TryGetApplicationProtocolsFromExtension(ReadOnlySpan<byte> extensionData, out ApplicationProtocolInfo alpn)
-        {
+        private static bool TryGetApplicationProtocolsFromExtension(
+            ReadOnlySpan<byte> extensionData,
+            out ApplicationProtocolInfo alpn
+        ) {
             // https://tools.ietf.org/html/rfc7301#section-3.1
             // opaque ProtocolName<1..2 ^ 8 - 1 >;
             //
@@ -676,9 +811,10 @@ namespace System.Net.Security
                         alpn |= ApplicationProtocolInfo.Other;
                     }
                 }
-                else if (protocolLength == SslApplicationProtocol.Http11.Protocol.Length &&
-                         protocol.SequenceEqual(SslApplicationProtocol.Http11.Protocol.Span))
-                {
+                else if (
+                    protocolLength == SslApplicationProtocol.Http11.Protocol.Length
+                    && protocol.SequenceEqual(SslApplicationProtocol.Http11.Protocol.Span)
+                ) {
                     alpn |= ApplicationProtocolInfo.Http11;
                 }
                 else
@@ -751,9 +887,13 @@ namespace System.Net.Security
             return (bytes[0] << 16) | (bytes[1] << 8) | bytes[2];
         }
 
-        private static ReadOnlySpan<byte> SkipBytes(ReadOnlySpan<byte> bytes, int numberOfBytesToSkip)
-        {
-            return (numberOfBytesToSkip < bytes.Length) ? bytes.Slice(numberOfBytesToSkip) : ReadOnlySpan<byte>.Empty;
+        private static ReadOnlySpan<byte> SkipBytes(
+            ReadOnlySpan<byte> bytes,
+            int numberOfBytesToSkip
+        ) {
+            return (numberOfBytesToSkip < bytes.Length)
+              ? bytes.Slice(numberOfBytesToSkip)
+              : ReadOnlySpan<byte>.Empty;
         }
 
         // Opaque type is of structure:

@@ -63,7 +63,10 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <param name="principalEntry"> The principal entry. </param>
         /// <param name="foreignKey"> The foreign key that defines the relationship. </param>
         /// <returns> The dependents. </returns>
-        IEnumerable<IUpdateEntry> GetDependents(IUpdateEntry principalEntry, IForeignKey foreignKey);
+        IEnumerable<IUpdateEntry> GetDependents(
+            IUpdateEntry principalEntry,
+            IForeignKey foreignKey
+        );
 
         /// <summary>
         ///     Finds the tracked entity for the given key values.

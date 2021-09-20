@@ -17,11 +17,11 @@ internal class LocallocTest
         ulong local1 = Global.INITIAL_VALUE;
         ulong local2 = local1 + 1;
 #if LOCALLOC_SMALL
-		Int32* intArray1 = stackalloc Int32[1];
-		s_locallocSize = 1;
+        Int32* intArray1 = stackalloc Int32[1];
+        s_locallocSize = 1;
 #elif LOCALLOC_LARGE
-		Int32* intArray1 = stackalloc Int32[0x1000];
-		s_locallocSize = 0x1000;
+        Int32* intArray1 = stackalloc Int32[0x1000];
+        s_locallocSize = 0x1000;
 #else
 
         Int32* intArray1 = stackalloc Int32[Global.stackAllocSize];
@@ -33,9 +33,7 @@ internal class LocallocTest
             unwindTest1();
             return 1;
         }
-        catch
-        {
-        }
+        catch { }
         if (s_testFailed)
             return 1;
 
@@ -58,9 +56,9 @@ internal class LocallocTest
     public unsafe static void unwindTest1()
     {
 #if LOCALLOC_SMALL
-		Int32* intArray2 = stackalloc Int32[1];
+        Int32* intArray2 = stackalloc Int32[1];
 #elif LOCALLOC_LARGE
-		Int32* intArray2 = stackalloc Int32[0x1000];
+        Int32* intArray2 = stackalloc Int32[0x1000];
 #else
         Int32* intArray2 = stackalloc Int32[Global.stackAllocSize];
 #endif
@@ -71,6 +69,7 @@ internal class LocallocTest
             LocallocTest testObj = new LocallocTest();
             testObj.unwindTest2(1, 2, 3, 4, 5, 6, 7, 8, 9);
         }
+
         finally
         {
             Console.WriteLine("finally block in unwindTest1.\n");
@@ -82,12 +81,21 @@ internal class LocallocTest
         return;
     }
 
-    private unsafe void unwindTest2(int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9)
-    {
+    private unsafe void unwindTest2(
+        int i1,
+        int i2,
+        int i3,
+        int i4,
+        int i5,
+        int i6,
+        int i7,
+        int i8,
+        int i9
+    ) {
 #if LOCALLOC_SMALL
-		Int32* intArray3 = stackalloc Int32[1];
+        Int32* intArray3 = stackalloc Int32[1];
 #elif LOCALLOC_LARGE
-		Int32* intArray3 = stackalloc Int32[0x1000];
+        Int32* intArray3 = stackalloc Int32[0x1000];
 #else
         Int32* intArray3 = stackalloc Int32[Global.stackAllocSize];
 #endif
@@ -96,6 +104,7 @@ internal class LocallocTest
         {
             throw new Exception("Test Exception");
         }
+
         finally
         {
             Console.WriteLine("finally block in unwindTest2.\n");

@@ -10,25 +10,31 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class SystemTextJsonOutputFormatterTest : JsonOutputFormatterTestBase<FormatterWebSite.StartupWithJsonFormatter>
+    public class SystemTextJsonOutputFormatterTest
+        : JsonOutputFormatterTestBase<FormatterWebSite.StartupWithJsonFormatter>
     {
-        public SystemTextJsonOutputFormatterTest(MvcTestFixture<FormatterWebSite.StartupWithJsonFormatter> fixture)
-            : base(fixture)
-        {
-        }
+        public SystemTextJsonOutputFormatterTest(
+            MvcTestFixture<FormatterWebSite.StartupWithJsonFormatter> fixture
+        ) : base(fixture) { }
 
         [Fact]
-        public override Task SerializableErrorIsReturnedInExpectedFormat() => base.SerializableErrorIsReturnedInExpectedFormat();
+        public override Task SerializableErrorIsReturnedInExpectedFormat() =>
+            base.SerializableErrorIsReturnedInExpectedFormat();
 
         [Fact]
         public override async Task Formatting_StringValueWithUnicodeContent()
         {
             // Act
-            var response = await Client.GetAsync($"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.StringWithUnicodeResult)}");
+            var response = await Client.GetAsync(
+                $"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.StringWithUnicodeResult)}"
+            );
 
             // Assert
             await response.AssertStatusCodeAsync(HttpStatusCode.OK);
-            Assert.Equal("\"Hello Mr. \\uD83E\\uDD8A\"", await response.Content.ReadAsStringAsync());
+            Assert.Equal(
+                "\"Hello Mr. \\uD83E\\uDD8A\"",
+                await response.Content.ReadAsStringAsync()
+            );
         }
 
         [Fact]
@@ -38,16 +44,24 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             static void ConfigureServices(IServiceCollection serviceCollection)
             {
                 serviceCollection.AddControllers()
-                    .AddJsonOptions(o => o.JsonSerializerOptions.Encoder = JavaScriptEncoder.Default);
+                    .AddJsonOptions(
+                        o => o.JsonSerializerOptions.Encoder = JavaScriptEncoder.Default
+                    );
             }
-            var client = Factory.WithWebHostBuilder(c => c.ConfigureServices(ConfigureServices)).CreateClient();
+            var client = Factory.WithWebHostBuilder(c => c.ConfigureServices(ConfigureServices))
+                .CreateClient();
 
             // Act
-            var response = await client.GetAsync($"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.StringWithNonAsciiContent)}");
+            var response = await client.GetAsync(
+                $"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.StringWithNonAsciiContent)}"
+            );
 
             // Assert
             await response.AssertStatusCodeAsync(HttpStatusCode.OK);
-            Assert.Equal("\"Une b\\u00EAte de cirque\"", await response.Content.ReadAsStringAsync());
+            Assert.Equal(
+                "\"Une b\\u00EAte de cirque\"",
+                await response.Content.ReadAsStringAsync()
+            );
         }
 
         [Fact]

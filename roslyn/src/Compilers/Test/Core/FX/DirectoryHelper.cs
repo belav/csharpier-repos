@@ -20,7 +20,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         {
             if (!Directory.Exists(path))
             {
-                throw new ArgumentException("Directory '" + path + "' does not exist.", nameof(path));
+                throw new ArgumentException(
+                    "Directory '" + path + "' does not exist.",
+                    nameof(path)
+                );
             }
 
             _rootPath = path;
@@ -36,7 +39,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             var files = new List<string>();
             foreach (var pattern in searchPatterns)
             {
-                files.AddRange(Directory.GetFiles(directoryPath, pattern, SearchOption.TopDirectoryOnly));
+                files.AddRange(
+                    Directory.GetFiles(directoryPath, pattern, SearchOption.TopDirectoryOnly)
+                );
             }
 
             foreach (var f in files)

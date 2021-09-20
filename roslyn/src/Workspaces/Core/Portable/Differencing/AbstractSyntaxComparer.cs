@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.Differencing
         private readonly IEnumerable<SyntaxNode>? _oldRootChildren;
         private readonly IEnumerable<SyntaxNode>? _newRootChildren;
 
-        // This comparer can operate in two modes: 
+        // This comparer can operate in two modes:
         // * Top level syntax, which looks at member declarations, but doesn't look inside method bodies etc.
         // * Statement syntax, which looks into member bodies and descends through all statements and expressions
         // This flag is used where there needs to be a disctinction made between how these are treated
@@ -34,8 +34,8 @@ namespace Microsoft.CodeAnalysis.Differencing
             SyntaxNode? newRoot,
             IEnumerable<SyntaxNode>? oldRootChildren,
             IEnumerable<SyntaxNode>? newRootChildren,
-            bool compareStatementSyntax)
-        {
+            bool compareStatementSyntax
+        ) {
             _compareStatementSyntax = compareStatementSyntax;
 
             _oldRoot = oldRoot;
@@ -44,22 +44,29 @@ namespace Microsoft.CodeAnalysis.Differencing
             _newRootChildren = newRootChildren;
         }
 
-        protected internal sealed override bool TreesEqual(SyntaxNode oldNode, SyntaxNode newNode)
-            => oldNode.SyntaxTree == newNode.SyntaxTree;
+        protected internal sealed override bool TreesEqual(
+            SyntaxNode oldNode,
+            SyntaxNode newNode
+        ) => oldNode.SyntaxTree == newNode.SyntaxTree;
 
-        protected internal sealed override TextSpan GetSpan(SyntaxNode node)
-            => node.Span;
+        protected internal sealed override TextSpan GetSpan(SyntaxNode node) => node.Span;
 
         /// <summary>
         /// Calculates distance of two nodes based on their significant parts.
         /// Returns false if the nodes don't have any significant parts and should be compared as a whole.
         /// </summary>
-        protected abstract bool TryComputeWeightedDistance(SyntaxNode oldNode, SyntaxNode newNode, out double distance);
+        protected abstract bool TryComputeWeightedDistance(
+            SyntaxNode oldNode,
+            SyntaxNode newNode,
+            out double distance
+        );
 
         protected abstract bool IsLambdaBodyStatementOrExpression(SyntaxNode node);
 
-        protected internal override bool TryGetParent(SyntaxNode node, [NotNullWhen(true)] out SyntaxNode? parent)
-        {
+        protected internal override bool TryGetParent(
+            SyntaxNode node,
+            [NotNullWhen(true)] out SyntaxNode? parent
+        ) {
             if (node == _oldRoot || node == _newRoot)
             {
                 parent = null;
@@ -115,13 +122,18 @@ namespace Microsoft.CodeAnalysis.Differencing
                 }
             }
         }
-        private bool DescendIntoChildren(SyntaxNode node)
-            => !IsLambdaBodyStatementOrExpression(node) && !HasLabel(node);
+        private bool DescendIntoChildren(SyntaxNode node) =>
+            !IsLambdaBodyStatementOrExpression(node) && !HasLabel(node);
 
         protected internal sealed override IEnumerable<SyntaxNode> GetDescendants(SyntaxNode node)
         {
-            var rootChildren = (node == _oldRoot) ? _oldRootChildren : (node == _newRoot) ? _newRootChildren : null;
-            return (rootChildren != null) ? EnumerateDescendants(rootChildren) : EnumerateDescendants(node);
+            var rootChildren =
+                (node == _oldRoot)
+                    ? _oldRootChildren
+                    : (node == _newRoot) ? _newRootChildren : null;
+            return (rootChildren != null)
+              ? EnumerateDescendants(rootChildren)
+              : EnumerateDescendants(node);
         }
 
         private IEnumerable<SyntaxNode> EnumerateDescendants(IEnumerable<SyntaxNode> nodes)
@@ -145,10 +157,12 @@ namespace Microsoft.CodeAnalysis.Differencing
 
         private IEnumerable<SyntaxNode> EnumerateDescendants(SyntaxNode node)
         {
-            foreach (var descendant in node.DescendantNodesAndTokens(
-                descendIntoChildren: child => ShouldEnumerateChildren(child),
-                descendIntoTrivia: false))
-            {
+            foreach (
+                var descendant in node.DescendantNodesAndTokens(
+                    descendIntoChildren: child => ShouldEnumerateChildren(child),
+                    descendIntoTrivia: false
+                )
+            ) {
                 var descendantNode = descendant.AsNode();
                 if (descendantNode != null && HasLabel(descendantNode))
                 {
@@ -194,13 +208,12 @@ namespace Microsoft.CodeAnalysis.Differencing
             return !isLeaf;
         }
 
-        internal bool HasLabel(SyntaxNode node)
-            => Classify(node.RawKind, node, out _) != IgnoredNode;
+        internal bool HasLabel(SyntaxNode node) =>
+            Classify(node.RawKind, node, out _) != IgnoredNode;
 
         internal abstract int Classify(int kind, SyntaxNode? node, out bool isLeaf);
 
-        protected internal override int GetLabel(SyntaxNode node)
-            => Classify(node.RawKind, node, out _);
-
+        protected internal override int GetLabel(SyntaxNode node) =>
+            Classify(node.RawKind, node, out _);
     }
 }

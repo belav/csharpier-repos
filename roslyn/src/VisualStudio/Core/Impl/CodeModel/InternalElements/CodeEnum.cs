@@ -17,8 +17,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
-        {
+            int? nodeKind
+        ) {
             var element = new CodeEnum(state, fileCodeModel, nodeKey, nodeKind);
             var result = (EnvDTE.CodeEnum)ComAggregate.CreateAggregatedObject(element);
 
@@ -31,8 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
-        {
+            string name
+        ) {
             var element = new CodeEnum(state, fileCodeModel, nodeKind, name);
             return (EnvDTE.CodeEnum)ComAggregate.CreateAggregatedObject(element);
         }
@@ -41,19 +41,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
-            : base(state, fileCodeModel, nodeKey, nodeKind)
-        {
-        }
+            int? nodeKind
+        ) : base(state, fileCodeModel, nodeKey, nodeKind) { }
 
         private CodeEnum(
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
-            : base(state, fileCodeModel, nodeKind, name)
-        {
-        }
+            string name
+        ) : base(state, fileCodeModel, nodeKind, name) { }
 
         public override EnvDTE.vsCMElement Kind
         {
@@ -62,10 +58,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         public EnvDTE.CodeVariable AddMember(string name, object value, object position)
         {
-            return FileCodeModel.EnsureEditor(() =>
-            {
-                return FileCodeModel.AddEnumMember(LookupNode(), name, value, position);
-            });
+            return FileCodeModel.EnsureEditor(
+                () =>
+                {
+                    return FileCodeModel.AddEnumMember(LookupNode(), name, value, position);
+                }
+            );
         }
     }
 }

@@ -17,10 +17,15 @@ namespace Microsoft.CodeAnalysis.Completion
 {
     internal abstract class CommonCompletionProvider : CompletionProvider
     {
-        private static readonly CompletionItemRules s_suggestionItemRules = CompletionItemRules.Create(enterKeyRule: EnterKeyRule.Never);
+        private static readonly CompletionItemRules s_suggestionItemRules =
+            CompletionItemRules.Create(enterKeyRule: EnterKeyRule.Never);
 
-        public override bool ShouldTriggerCompletion(SourceText text, int position, CompletionTrigger trigger, OptionSet options)
-        {
+        public override bool ShouldTriggerCompletion(
+            SourceText text,
+            int position,
+            CompletionTrigger trigger,
+            OptionSet options
+        ) {
             switch (trigger.Kind)
             {
                 case CompletionTriggerKind.Insertion when position > 0:
@@ -31,36 +36,61 @@ namespace Microsoft.CodeAnalysis.Completion
             }
         }
 
-        public virtual bool IsInsertionTrigger(SourceText text, int insertedCharacterPosition, OptionSet options)
-            => false;
+        public virtual bool IsInsertionTrigger(
+            SourceText text,
+            int insertedCharacterPosition,
+            OptionSet options
+        ) => false;
 
         public override async Task<CompletionDescription?> GetDescriptionAsync(
-            Document document, CompletionItem item, CancellationToken cancellationToken)
-        {
+            Document document,
+            CompletionItem item,
+            CancellationToken cancellationToken
+        ) {
             // Get the actual description provided by whatever subclass we are.
-            // Then, if we would commit text that could be expanded as a snippet, 
+            // Then, if we would commit text that could be expanded as a snippet,
             // put that information in the description so that the user knows.
-            var description = await GetDescriptionWorkerAsync(document, item, cancellationToken).ConfigureAwait(false);
-            var parts = await TryAddSnippetInvocationPartAsync(document, item, description.TaggedParts, cancellationToken).ConfigureAwait(false);
+            var description = await GetDescriptionWorkerAsync(document, item, cancellationToken)
+                .ConfigureAwait(false);
+            var parts = await TryAddSnippetInvocationPartAsync(
+                    document,
+                    item,
+                    description.TaggedParts,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return description.WithTaggedParts(parts);
         }
 
         private async Task<ImmutableArray<TaggedText>> TryAddSnippetInvocationPartAsync(
-            Document document, CompletionItem item,
-            ImmutableArray<TaggedText> parts, CancellationToken cancellationToken)
-        {
+            Document document,
+            CompletionItem item,
+            ImmutableArray<TaggedText> parts,
+            CancellationToken cancellationToken
+        ) {
             var languageServices = document.Project.LanguageServices;
             var snippetService = languageServices.GetService<ISnippetInfoService>();
             if (snippetService != null)
             {
-                var change = await GetTextChangeAsync(document, item, ch: '\t', cancellationToken: cancellationToken).ConfigureAwait(false) ??
-                    new TextChange(item.Span, item.DisplayText);
+                var change =
+                    await GetTextChangeAsync(
+                            document,
+                            item,
+                            ch: '\t',
+                            cancellationToken: cancellationToken
+                        )
+                        .ConfigureAwait(false) ?? new TextChange(item.Span, item.DisplayText);
                 var insertionText = change.NewText;
 
-                if (snippetService != null && snippetService.SnippetShortcutExists_NonBlocking(insertionText))
-                {
-                    var note = string.Format(FeaturesResources.Note_colon_Tab_twice_to_insert_the_0_snippet, insertionText);
+                if (
+                    snippetService != null
+                    && snippetService.SnippetShortcutExists_NonBlocking(insertionText)
+                ) {
+                    var note = string.Format(
+                        FeaturesResources.Note_colon_Tab_twice_to_insert_the_0_snippet,
+                        insertionText
+                    );
 
                     if (parts.Any())
                     {
@@ -75,33 +105,52 @@ namespace Microsoft.CodeAnalysis.Completion
         }
 
         protected virtual Task<CompletionDescription> GetDescriptionWorkerAsync(
-            Document document, CompletionItem item, CancellationToken cancellationToken)
-        {
+            Document document,
+            CompletionItem item,
+            CancellationToken cancellationToken
+        ) {
             return CommonCompletionItem.HasDescription(item)
-                ? Task.FromResult(CommonCompletionItem.GetDescription(item))
-                : Task.FromResult(CompletionDescription.Empty);
+              ? Task.FromResult(CommonCompletionItem.GetDescription(item))
+              : Task.FromResult(CompletionDescription.Empty);
         }
 
-        public override async Task<CompletionChange> GetChangeAsync(Document document, CompletionItem item, char? commitKey = null, CancellationToken cancellationToken = default)
-        {
-            var change = (await GetTextChangeAsync(document, item, commitKey, cancellationToken).ConfigureAwait(false))
-                ?? new TextChange(item.Span, item.DisplayText);
+        public override async Task<CompletionChange> GetChangeAsync(
+            Document document,
+            CompletionItem item,
+            char? commitKey = null,
+            CancellationToken cancellationToken = default
+        ) {
+            var change =
+                (
+                    await GetTextChangeAsync(document, item, commitKey, cancellationToken)
+                        .ConfigureAwait(false)
+                ) ?? new TextChange(item.Span, item.DisplayText);
             return CompletionChange.Create(change);
         }
 
-        public virtual Task<TextChange?> GetTextChangeAsync(Document document, CompletionItem selectedItem, char? ch, CancellationToken cancellationToken)
-            => GetTextChangeAsync(selectedItem, ch, cancellationToken);
+        public virtual Task<TextChange?> GetTextChangeAsync(
+            Document document,
+            CompletionItem selectedItem,
+            char? ch,
+            CancellationToken cancellationToken
+        ) => GetTextChangeAsync(selectedItem, ch, cancellationToken);
 
-        protected virtual Task<TextChange?> GetTextChangeAsync(CompletionItem selectedItem, char? ch, CancellationToken cancellationToken)
-            => SpecializedTasks.Default<TextChange?>();
+        protected virtual Task<TextChange?> GetTextChangeAsync(
+            CompletionItem selectedItem,
+            char? ch,
+            CancellationToken cancellationToken
+        ) => SpecializedTasks.Default<TextChange?>();
 
-        protected static CompletionItem CreateSuggestionModeItem(string? displayText, string? description)
-        {
+        protected static CompletionItem CreateSuggestionModeItem(
+            string? displayText,
+            string? description
+        ) {
             return CommonCompletionItem.Create(
                 displayText: displayText ?? string.Empty,
                 displayTextSuffix: "",
                 description: description == null ? default : description.ToSymbolDisplayParts(),
-                rules: s_suggestionItemRules);
+                rules: s_suggestionItemRules
+            );
         }
     }
 }

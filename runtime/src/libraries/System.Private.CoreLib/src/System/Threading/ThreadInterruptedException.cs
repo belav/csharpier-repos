@@ -9,22 +9,23 @@ namespace System.Threading
     /// An exception class to indicate that the thread was interrupted from a waiting state.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class ThreadInterruptedException : SystemException
     {
-        public ThreadInterruptedException() : base(
+        public ThreadInterruptedException()
+            : base(
 #if CORECLR
-            GetMessageFromNativeResources(ExceptionMessageKind.ThreadInterrupted)
+                GetMessageFromNativeResources(ExceptionMessageKind.ThreadInterrupted)
 #else
-            SR.Threading_ThreadInterrupted
+                SR.Threading_ThreadInterrupted
 #endif
-            )
-        {
+            ) {
             HResult = HResults.COR_E_THREADINTERRUPTED;
         }
 
-        public ThreadInterruptedException(string? message)
-            : base(message)
+        public ThreadInterruptedException(string? message) : base(message)
         {
             HResult = HResults.COR_E_THREADINTERRUPTED;
         }
@@ -35,8 +36,9 @@ namespace System.Threading
             HResult = HResults.COR_E_THREADINTERRUPTED;
         }
 
-        protected ThreadInterruptedException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected ThreadInterruptedException(
+            SerializationInfo info,
+            StreamingContext context
+        ) : base(info, context) { }
     }
 }

@@ -9,9 +9,13 @@ internal static partial class Interop
     {
         [DllImport(Libraries.Kernel32)]
         internal static extern unsafe int MultiByteToWideChar(
-            uint CodePage, uint dwFlags,
-            byte* lpMultiByteStr, int cbMultiByte,
-            char* lpWideCharStr, int cchWideChar);
+            uint CodePage,
+            uint dwFlags,
+            byte* lpMultiByteStr,
+            int cbMultiByte,
+            char* lpWideCharStr,
+            int cchWideChar
+        );
 
         internal const uint MB_PRECOMPOSED = 0x00000001;
     }

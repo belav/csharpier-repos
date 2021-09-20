@@ -19,8 +19,9 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteObjectToStringTranslator : IMethodCallTranslator
     {
-        private static readonly HashSet<Type> _typeMapping = new()
-        {
+        private static readonly HashSet<Type> _typeMapping =
+            new()
+            {
                 typeof(bool),
                 typeof(byte),
                 typeof(byte[]),
@@ -48,8 +49,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public SqliteObjectToStringTranslator(ISqlExpressionFactory sqlExpressionFactory)
-            => _sqlExpressionFactory = sqlExpressionFactory;
+        public SqliteObjectToStringTranslator(ISqlExpressionFactory sqlExpressionFactory) =>
+            _sqlExpressionFactory = sqlExpressionFactory;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -61,17 +62,18 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
 
-            return method.Name == nameof(ToString)
+            return
+                method.Name == nameof(ToString)
                 && arguments.Count == 0
                 && instance != null
                 && _typeMapping.Contains(instance.Type)
-                    ? _sqlExpressionFactory.Convert(instance, typeof(string))
-                    : null;
+              ? _sqlExpressionFactory.Convert(instance, typeof(string))
+              : null;
         }
     }
 }

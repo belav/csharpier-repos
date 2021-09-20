@@ -10,9 +10,8 @@ namespace Wasm.Authentication.Server.Data
     {
         public ApplicationDbContext(
             DbContextOptions options,
-            IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
-        {
-        }
+            IOptions<OperationalStoreOptions> operationalStoreOptions
+        ) : base(options, operationalStoreOptions) { }
 
         public DbSet<UserPreference> UserPreferences { get; set; }
 
@@ -22,12 +21,9 @@ namespace Wasm.Authentication.Server.Data
 
             builder.Entity<ApplicationUser>().HasOne(u => u.UserPreference);
 
-            builder.Entity<UserPreference>()
-                .Property(u => u.Id).ValueGeneratedOnAdd();
+            builder.Entity<UserPreference>().Property(u => u.Id).ValueGeneratedOnAdd();
 
-            builder.Entity<UserPreference>()
-                .HasKey(p => p.Id);
-
+            builder.Entity<UserPreference>().HasKey(p => p.Id);
         }
     }
 }

@@ -30,7 +30,8 @@ namespace Microsoft.AspNetCore.Components.Forms
         /// <summary>
         /// Gets or sets a collection of additional attributes that will be applied to the created <c>form</c> element.
         /// </summary>
-        [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
 
         /// <summary>
         /// Supplies the edit context explicitly. If using this parameter, do not
@@ -53,12 +54,14 @@ namespace Microsoft.AspNetCore.Components.Forms
         /// be constructed for this model. If using this parameter, do not also supply
         /// a value for <see cref="EditContext"/>.
         /// </summary>
-        [Parameter] public object? Model { get; set; }
+        [Parameter]
+        public object? Model { get; set; }
 
         /// <summary>
         /// Specifies the content to be rendered inside this <see cref="EditForm"/>.
         /// </summary>
-        [Parameter] public RenderFragment<EditContext>? ChildContent { get; set; }
+        [Parameter]
+        public RenderFragment<EditContext>? ChildContent { get; set; }
 
         /// <summary>
         /// A callback that will be invoked when the form is submitted.
@@ -66,32 +69,39 @@ namespace Microsoft.AspNetCore.Components.Forms
         /// If using this parameter, you are responsible for triggering any validation
         /// manually, e.g., by calling <see cref="EditContext.Validate"/>.
         /// </summary>
-        [Parameter] public EventCallback<EditContext> OnSubmit { get; set; }
+        [Parameter]
+        public EventCallback<EditContext> OnSubmit { get; set; }
 
         /// <summary>
         /// A callback that will be invoked when the form is submitted and the
         /// <see cref="EditContext"/> is determined to be valid.
         /// </summary>
-        [Parameter] public EventCallback<EditContext> OnValidSubmit { get; set; }
+        [Parameter]
+        public EventCallback<EditContext> OnValidSubmit { get; set; }
 
         /// <summary>
         /// A callback that will be invoked when the form is submitted and the
         /// <see cref="EditContext"/> is determined to be invalid.
         /// </summary>
-        [Parameter] public EventCallback<EditContext> OnInvalidSubmit { get; set; }
+        [Parameter]
+        public EventCallback<EditContext> OnInvalidSubmit { get; set; }
 
         /// <inheritdoc />
         protected override void OnParametersSet()
         {
             if (_hasSetEditContextExplicitly && Model != null)
             {
-                throw new InvalidOperationException($"{nameof(EditForm)} requires a {nameof(Model)} " +
-                    $"parameter, or an {nameof(EditContext)} parameter, but not both.");
+                throw new InvalidOperationException(
+                    $"{nameof(EditForm)} requires a {nameof(Model)} "
+                        + $"parameter, or an {nameof(EditContext)} parameter, but not both."
+                );
             }
             else if (!_hasSetEditContextExplicitly && Model == null)
             {
-                throw new InvalidOperationException($"{nameof(EditForm)} requires either a {nameof(Model)} " +
-                    $"parameter, or an {nameof(EditContext)} parameter, please provide one of these.");
+                throw new InvalidOperationException(
+                    $"{nameof(EditForm)} requires either a {nameof(Model)} "
+                        + $"parameter, or an {nameof(EditContext)} parameter, please provide one of these."
+                );
             }
 
             // If you're using OnSubmit, it becomes your responsibility to trigger validation manually
@@ -100,8 +110,10 @@ namespace Microsoft.AspNetCore.Components.Forms
             // OnValidSubmit/OnInvalidSubmit handlers.
             if (OnSubmit.HasDelegate && (OnValidSubmit.HasDelegate || OnInvalidSubmit.HasDelegate))
             {
-                throw new InvalidOperationException($"When supplying an {nameof(OnSubmit)} parameter to " +
-                    $"{nameof(EditForm)}, do not also supply {nameof(OnValidSubmit)} or {nameof(OnInvalidSubmit)}.");
+                throw new InvalidOperationException(
+                    $"When supplying an {nameof(OnSubmit)} parameter to "
+                        + $"{nameof(EditForm)}, do not also supply {nameof(OnValidSubmit)} or {nameof(OnInvalidSubmit)}."
+                );
             }
 
             // Update _editContext if we don't have one yet, or if they are supplying a

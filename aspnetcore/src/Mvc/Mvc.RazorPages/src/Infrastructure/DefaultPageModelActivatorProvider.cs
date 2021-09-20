@@ -18,8 +18,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         private readonly Func<PageContext, object, ValueTask> _syncAsyncDisposer = SyncDisposeAsync;
 
         /// <inheritdoc />
-        public virtual Func<PageContext, object> CreateActivator(CompiledPageActionDescriptor actionDescriptor)
-        {
+        public virtual Func<PageContext, object> CreateActivator(
+            CompiledPageActionDescriptor actionDescriptor
+        ) {
             if (actionDescriptor == null)
             {
                 throw new ArgumentNullException(nameof(actionDescriptor));
@@ -28,18 +29,22 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var modelTypeInfo = actionDescriptor.ModelTypeInfo?.AsType();
             if (modelTypeInfo == null)
             {
-                throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                    nameof(actionDescriptor.ModelTypeInfo),
-                    nameof(actionDescriptor)),
-                    nameof(actionDescriptor));
+                throw new ArgumentException(
+                    Resources.FormatPropertyOfTypeCannotBeNull(
+                        nameof(actionDescriptor.ModelTypeInfo),
+                        nameof(actionDescriptor)
+                    ),
+                    nameof(actionDescriptor)
+                );
             }
 
             var factory = ActivatorUtilities.CreateFactory(modelTypeInfo, Type.EmptyTypes);
             return (context) => factory(context.HttpContext.RequestServices, Array.Empty<object>());
         }
 
-        public virtual Action<PageContext, object> CreateReleaser(CompiledPageActionDescriptor actionDescriptor)
-        {
+        public virtual Action<PageContext, object> CreateReleaser(
+            CompiledPageActionDescriptor actionDescriptor
+        ) {
             if (actionDescriptor == null)
             {
                 throw new ArgumentNullException(nameof(actionDescriptor));
@@ -53,15 +58,18 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             return null;
         }
 
-        public virtual Func<PageContext, object, ValueTask> CreateAsyncReleaser(CompiledPageActionDescriptor actionDescriptor)
-        {
+        public virtual Func<PageContext, object, ValueTask> CreateAsyncReleaser(
+            CompiledPageActionDescriptor actionDescriptor
+        ) {
             if (actionDescriptor == null)
             {
                 throw new ArgumentNullException(nameof(actionDescriptor));
             }
 
-            if (typeof(IAsyncDisposable).GetTypeInfo().IsAssignableFrom(actionDescriptor.ModelTypeInfo))
-            {
+            if (
+                typeof(IAsyncDisposable).GetTypeInfo()
+                    .IsAssignableFrom(actionDescriptor.ModelTypeInfo)
+            ) {
                 return _asyncDisposer;
             }
 

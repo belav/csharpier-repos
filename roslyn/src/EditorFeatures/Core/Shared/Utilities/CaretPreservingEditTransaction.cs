@@ -19,32 +19,45 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
             string description,
             ITextView textView,
             ITextUndoHistoryRegistry undoHistoryRegistry,
-            IEditorOperationsFactoryService editorOperationsFactoryService)
-            : this(description, undoHistoryRegistry.GetHistory(textView.TextBuffer), editorOperationsFactoryService.GetEditorOperations(textView))
-        {
-        }
+            IEditorOperationsFactoryService editorOperationsFactoryService
+        ) : this(
+            description,
+            undoHistoryRegistry.GetHistory(textView.TextBuffer),
+            editorOperationsFactoryService.GetEditorOperations(textView)
+        ) { }
 
-        public CaretPreservingEditTransaction(string description, ITextUndoHistory? undoHistory, IEditorOperations editorOperations)
-        {
+        public CaretPreservingEditTransaction(
+            string description,
+            ITextUndoHistory? undoHistory,
+            IEditorOperations editorOperations
+        ) {
             _editorOperations = editorOperations;
             _undoHistory = undoHistory;
             _active = true;
 
             if (_undoHistory != null)
             {
-                _transaction = new HACK_TextUndoTransactionThatRollsBackProperly(_undoHistory.CreateTransaction(description));
+                _transaction = new HACK_TextUndoTransactionThatRollsBackProperly(
+                    _undoHistory.CreateTransaction(description)
+                );
                 _editorOperations.AddBeforeTextBufferChangePrimitive();
             }
         }
 
-        public static CaretPreservingEditTransaction? TryCreate(string description,
+        public static CaretPreservingEditTransaction? TryCreate(
+            string description,
             ITextView textView,
             ITextUndoHistoryRegistry undoHistoryRegistry,
-            IEditorOperationsFactoryService editorOperationsFactoryService)
-        {
+            IEditorOperationsFactoryService editorOperationsFactoryService
+        ) {
             if (undoHistoryRegistry.TryGetHistory(textView.TextBuffer, out _))
             {
-                return new CaretPreservingEditTransaction(description, textView, undoHistoryRegistry, editorOperationsFactoryService);
+                return new CaretPreservingEditTransaction(
+                    description,
+                    textView,
+                    undoHistoryRegistry,
+                    editorOperationsFactoryService
+                );
             }
 
             return null;
@@ -54,7 +67,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
         {
             if (!_active)
             {
-                throw new InvalidOperationException(EditorFeaturesResources.The_transaction_is_already_complete);
+                throw new InvalidOperationException(
+                    EditorFeaturesResources.The_transaction_is_already_complete
+                );
             }
 
             _editorOperations.AddAfterTextBufferChangePrimitive();
@@ -70,7 +85,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
         {
             if (!_active)
             {
-                throw new InvalidOperationException(EditorFeaturesResources.The_transaction_is_already_complete);
+                throw new InvalidOperationException(
+                    EditorFeaturesResources.The_transaction_is_already_complete
+                );
             }
 
             if (_transaction != null)
@@ -92,11 +109,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
 
         public IMergeTextUndoTransactionPolicy? MergePolicy
         {
-            get
-            {
-                return _transaction?.MergePolicy;
-            }
-
+            get { return _transaction?.MergePolicy; }
             set
             {
                 if (_transaction != null)

@@ -19,14 +19,15 @@ namespace Microsoft.AspNetCore.Routing.Matching
             int exitDestination,
             Dictionary<string, int>? destinations,
             int corsPreflightExitDestination,
-            Dictionary<string, int>? corsPreflightDestinations)
-        {
+            Dictionary<string, int>? corsPreflightDestinations
+        ) {
             _exitDestination = exitDestination;
             _destinations = destinations;
             _corsPreflightExitDestination = corsPreflightExitDestination;
             _corsPreflightDestinations = corsPreflightDestinations;
 
-            _supportsCorsPreflight = _corsPreflightDestinations != null && _corsPreflightDestinations.Count > 0;
+            _supportsCorsPreflight =
+                _corsPreflightDestinations != null && _corsPreflightDestinations.Count > 0;
         }
 
         public override int GetDestination(HttpContext httpContext)
@@ -34,15 +35,25 @@ namespace Microsoft.AspNetCore.Routing.Matching
             int destination;
 
             var httpMethod = httpContext.Request.Method;
-            if (_supportsCorsPreflight && HttpMethodMatcherPolicy.IsCorsPreflightRequest(httpContext, httpMethod, out var accessControlRequestMethod))
-            {
-                return _corsPreflightDestinations!.TryGetValue(accessControlRequestMethod, out destination)
-                    ? destination
-                    : _corsPreflightExitDestination;
+            if (
+                _supportsCorsPreflight
+                && HttpMethodMatcherPolicy.IsCorsPreflightRequest(
+                    httpContext,
+                    httpMethod,
+                    out var accessControlRequestMethod
+                )
+            ) {
+                return _corsPreflightDestinations!.TryGetValue(
+                    accessControlRequestMethod,
+                    out destination
+                )
+                  ? destination
+                  : _corsPreflightExitDestination;
             }
 
-            return _destinations != null &&
-                _destinations.TryGetValue(httpMethod, out destination) ? destination : _exitDestination;
+            return _destinations != null && _destinations.TryGetValue(httpMethod, out destination)
+              ? destination
+              : _exitDestination;
         }
     }
 }

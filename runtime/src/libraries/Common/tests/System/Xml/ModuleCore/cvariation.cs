@@ -18,10 +18,7 @@ namespace OLEDB.Test.ModuleCore
         //Data
         private TestFunc _pfunc = null;
         //Constructor
-        public CVariation(CTestCase testcase)
-            : this(testcase, null)
-        {
-        }
+        public CVariation(CTestCase testcase) : this(testcase, null) { }
 
         public CVariation(CTestCase testcase, string desc)
             : this(testcase, desc, "Variation_" + (testcase.GetVariationCount() + 1))
@@ -31,24 +28,21 @@ namespace OLEDB.Test.ModuleCore
             //it creates Variation_X, where X is the next variation for this test case...
         }
 
-        public CVariation(CTestCase testcase, string desc, string function)
-            : base(function, desc)
+        public CVariation(CTestCase testcase, string desc, string function) : base(function, desc)
         {
             //Note: The parent automatically gets setup on AddVariation so we don't
             //really need to pass in the test case, left here for backward compatibility
             //of inherited drivers.
         }
 
-        public CVariation(CTestCase testcase, string desc, TestFunc function)
-            : base(null, desc)
+        public CVariation(CTestCase testcase, string desc, TestFunc function) : base(null, desc)
         {
             //Note: The parent automatically gets setup on AddVariation so we don't
             //really need to pass in the test case, left here for backward compatibility
             //of inherited drivers.
             _pfunc = function;
         }
-        public CVariation(TestFunc func)
-            : base(null, null)
+        public CVariation(TestFunc func) : base(null, null)
         {
             _pfunc = func;
         }

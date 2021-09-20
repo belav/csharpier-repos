@@ -10,42 +10,78 @@ namespace JIT.HardwareIntrinsics.Arm
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
-                ["FusedMultiplySubtractBySelectedScalar.Vector128.Single.Vector128.Single.3"] = FusedMultiplySubtractBySelectedScalar_Vector128_Single_Vector128_Single_3,
-                ["FusedMultiplySubtractScalarBySelectedScalar.Vector64.Double.Vector128.Double.1"] = FusedMultiplySubtractScalarBySelectedScalar_Vector64_Double_Vector128_Double_1,
-                ["FusedMultiplySubtractScalarBySelectedScalar.Vector64.Single.Vector64.Single.1"] = FusedMultiplySubtractScalarBySelectedScalar_Vector64_Single_Vector64_Single_1,
-                ["FusedMultiplySubtractScalarBySelectedScalar.Vector64.Single.Vector128.Single.3"] = FusedMultiplySubtractScalarBySelectedScalar_Vector64_Single_Vector128_Single_3,
-                ["InsertSelectedScalar.Vector64.Byte.7.Vector64.Byte.7"] = InsertSelectedScalar_Vector64_Byte_7_Vector64_Byte_7,
-                ["InsertSelectedScalar.Vector64.Byte.7.Vector128.Byte.15"] = InsertSelectedScalar_Vector64_Byte_7_Vector128_Byte_15,
-                ["InsertSelectedScalar.Vector64.Int16.3.Vector64.Int16.3"] = InsertSelectedScalar_Vector64_Int16_3_Vector64_Int16_3,
-                ["InsertSelectedScalar.Vector64.Int16.3.Vector128.Int16.7"] = InsertSelectedScalar_Vector64_Int16_3_Vector128_Int16_7,
-                ["InsertSelectedScalar.Vector64.Int32.1.Vector64.Int32.1"] = InsertSelectedScalar_Vector64_Int32_1_Vector64_Int32_1,
-                ["InsertSelectedScalar.Vector64.Int32.1.Vector128.Int32.3"] = InsertSelectedScalar_Vector64_Int32_1_Vector128_Int32_3,
-                ["InsertSelectedScalar.Vector64.SByte.7.Vector64.SByte.7"] = InsertSelectedScalar_Vector64_SByte_7_Vector64_SByte_7,
-                ["InsertSelectedScalar.Vector64.SByte.7.Vector128.SByte.15"] = InsertSelectedScalar_Vector64_SByte_7_Vector128_SByte_15,
-                ["InsertSelectedScalar.Vector64.Single.1.Vector64.Single.1"] = InsertSelectedScalar_Vector64_Single_1_Vector64_Single_1,
-                ["InsertSelectedScalar.Vector64.Single.1.Vector128.Single.3"] = InsertSelectedScalar_Vector64_Single_1_Vector128_Single_3,
-                ["InsertSelectedScalar.Vector64.UInt16.3.Vector64.UInt16.3"] = InsertSelectedScalar_Vector64_UInt16_3_Vector64_UInt16_3,
-                ["InsertSelectedScalar.Vector64.UInt16.3.Vector128.UInt16.7"] = InsertSelectedScalar_Vector64_UInt16_3_Vector128_UInt16_7,
-                ["InsertSelectedScalar.Vector64.UInt32.1.Vector64.UInt32.1"] = InsertSelectedScalar_Vector64_UInt32_1_Vector64_UInt32_1,
-                ["InsertSelectedScalar.Vector64.UInt32.1.Vector128.UInt32.3"] = InsertSelectedScalar_Vector64_UInt32_1_Vector128_UInt32_3,
-                ["InsertSelectedScalar.Vector128.Byte.15.Vector64.Byte.7"] = InsertSelectedScalar_Vector128_Byte_15_Vector64_Byte_7,
-                ["InsertSelectedScalar.Vector128.Byte.15.Vector128.Byte.15"] = InsertSelectedScalar_Vector128_Byte_15_Vector128_Byte_15,
-                ["InsertSelectedScalar.Vector128.Double.1.Vector128.Double.1"] = InsertSelectedScalar_Vector128_Double_1_Vector128_Double_1,
-                ["InsertSelectedScalar.Vector128.Int16.7.Vector64.Int16.3"] = InsertSelectedScalar_Vector128_Int16_7_Vector64_Int16_3,
-                ["InsertSelectedScalar.Vector128.Int16.7.Vector128.Int16.7"] = InsertSelectedScalar_Vector128_Int16_7_Vector128_Int16_7,
-                ["InsertSelectedScalar.Vector128.Int32.3.Vector64.Int32.1"] = InsertSelectedScalar_Vector128_Int32_3_Vector64_Int32_1,
-                ["InsertSelectedScalar.Vector128.Int32.3.Vector128.Int32.3"] = InsertSelectedScalar_Vector128_Int32_3_Vector128_Int32_3,
-                ["InsertSelectedScalar.Vector128.Int64.1.Vector128.Int64.1"] = InsertSelectedScalar_Vector128_Int64_1_Vector128_Int64_1,
-                ["InsertSelectedScalar.Vector128.SByte.15.Vector64.SByte.7"] = InsertSelectedScalar_Vector128_SByte_15_Vector64_SByte_7,
-                ["InsertSelectedScalar.Vector128.SByte.15.Vector128.SByte.15"] = InsertSelectedScalar_Vector128_SByte_15_Vector128_SByte_15,
-                ["InsertSelectedScalar.Vector128.Single.3.Vector64.Single.1"] = InsertSelectedScalar_Vector128_Single_3_Vector64_Single_1,
-                ["InsertSelectedScalar.Vector128.Single.3.Vector128.Single.3"] = InsertSelectedScalar_Vector128_Single_3_Vector128_Single_3,
-                ["InsertSelectedScalar.Vector128.UInt16.7.Vector64.UInt16.3"] = InsertSelectedScalar_Vector128_UInt16_7_Vector64_UInt16_3,
-                ["InsertSelectedScalar.Vector128.UInt16.7.Vector128.UInt16.7"] = InsertSelectedScalar_Vector128_UInt16_7_Vector128_UInt16_7,
-                ["InsertSelectedScalar.Vector128.UInt32.3.Vector64.UInt32.1"] = InsertSelectedScalar_Vector128_UInt32_3_Vector64_UInt32_1,
-                ["InsertSelectedScalar.Vector128.UInt32.3.Vector128.UInt32.3"] = InsertSelectedScalar_Vector128_UInt32_3_Vector128_UInt32_3,
-                ["InsertSelectedScalar.Vector128.UInt64.1.Vector128.UInt64.1"] = InsertSelectedScalar_Vector128_UInt64_1_Vector128_UInt64_1,
+            TestList = new Dictionary<string, Action>()
+            {
+                ["FusedMultiplySubtractBySelectedScalar.Vector128.Single.Vector128.Single.3"] =
+                    FusedMultiplySubtractBySelectedScalar_Vector128_Single_Vector128_Single_3,
+                ["FusedMultiplySubtractScalarBySelectedScalar.Vector64.Double.Vector128.Double.1"] =
+                    FusedMultiplySubtractScalarBySelectedScalar_Vector64_Double_Vector128_Double_1,
+                ["FusedMultiplySubtractScalarBySelectedScalar.Vector64.Single.Vector64.Single.1"] =
+                    FusedMultiplySubtractScalarBySelectedScalar_Vector64_Single_Vector64_Single_1,
+                ["FusedMultiplySubtractScalarBySelectedScalar.Vector64.Single.Vector128.Single.3"] =
+                    FusedMultiplySubtractScalarBySelectedScalar_Vector64_Single_Vector128_Single_3,
+                ["InsertSelectedScalar.Vector64.Byte.7.Vector64.Byte.7"] =
+                    InsertSelectedScalar_Vector64_Byte_7_Vector64_Byte_7,
+                ["InsertSelectedScalar.Vector64.Byte.7.Vector128.Byte.15"] =
+                    InsertSelectedScalar_Vector64_Byte_7_Vector128_Byte_15,
+                ["InsertSelectedScalar.Vector64.Int16.3.Vector64.Int16.3"] =
+                    InsertSelectedScalar_Vector64_Int16_3_Vector64_Int16_3,
+                ["InsertSelectedScalar.Vector64.Int16.3.Vector128.Int16.7"] =
+                    InsertSelectedScalar_Vector64_Int16_3_Vector128_Int16_7,
+                ["InsertSelectedScalar.Vector64.Int32.1.Vector64.Int32.1"] =
+                    InsertSelectedScalar_Vector64_Int32_1_Vector64_Int32_1,
+                ["InsertSelectedScalar.Vector64.Int32.1.Vector128.Int32.3"] =
+                    InsertSelectedScalar_Vector64_Int32_1_Vector128_Int32_3,
+                ["InsertSelectedScalar.Vector64.SByte.7.Vector64.SByte.7"] =
+                    InsertSelectedScalar_Vector64_SByte_7_Vector64_SByte_7,
+                ["InsertSelectedScalar.Vector64.SByte.7.Vector128.SByte.15"] =
+                    InsertSelectedScalar_Vector64_SByte_7_Vector128_SByte_15,
+                ["InsertSelectedScalar.Vector64.Single.1.Vector64.Single.1"] =
+                    InsertSelectedScalar_Vector64_Single_1_Vector64_Single_1,
+                ["InsertSelectedScalar.Vector64.Single.1.Vector128.Single.3"] =
+                    InsertSelectedScalar_Vector64_Single_1_Vector128_Single_3,
+                ["InsertSelectedScalar.Vector64.UInt16.3.Vector64.UInt16.3"] =
+                    InsertSelectedScalar_Vector64_UInt16_3_Vector64_UInt16_3,
+                ["InsertSelectedScalar.Vector64.UInt16.3.Vector128.UInt16.7"] =
+                    InsertSelectedScalar_Vector64_UInt16_3_Vector128_UInt16_7,
+                ["InsertSelectedScalar.Vector64.UInt32.1.Vector64.UInt32.1"] =
+                    InsertSelectedScalar_Vector64_UInt32_1_Vector64_UInt32_1,
+                ["InsertSelectedScalar.Vector64.UInt32.1.Vector128.UInt32.3"] =
+                    InsertSelectedScalar_Vector64_UInt32_1_Vector128_UInt32_3,
+                ["InsertSelectedScalar.Vector128.Byte.15.Vector64.Byte.7"] =
+                    InsertSelectedScalar_Vector128_Byte_15_Vector64_Byte_7,
+                ["InsertSelectedScalar.Vector128.Byte.15.Vector128.Byte.15"] =
+                    InsertSelectedScalar_Vector128_Byte_15_Vector128_Byte_15,
+                ["InsertSelectedScalar.Vector128.Double.1.Vector128.Double.1"] =
+                    InsertSelectedScalar_Vector128_Double_1_Vector128_Double_1,
+                ["InsertSelectedScalar.Vector128.Int16.7.Vector64.Int16.3"] =
+                    InsertSelectedScalar_Vector128_Int16_7_Vector64_Int16_3,
+                ["InsertSelectedScalar.Vector128.Int16.7.Vector128.Int16.7"] =
+                    InsertSelectedScalar_Vector128_Int16_7_Vector128_Int16_7,
+                ["InsertSelectedScalar.Vector128.Int32.3.Vector64.Int32.1"] =
+                    InsertSelectedScalar_Vector128_Int32_3_Vector64_Int32_1,
+                ["InsertSelectedScalar.Vector128.Int32.3.Vector128.Int32.3"] =
+                    InsertSelectedScalar_Vector128_Int32_3_Vector128_Int32_3,
+                ["InsertSelectedScalar.Vector128.Int64.1.Vector128.Int64.1"] =
+                    InsertSelectedScalar_Vector128_Int64_1_Vector128_Int64_1,
+                ["InsertSelectedScalar.Vector128.SByte.15.Vector64.SByte.7"] =
+                    InsertSelectedScalar_Vector128_SByte_15_Vector64_SByte_7,
+                ["InsertSelectedScalar.Vector128.SByte.15.Vector128.SByte.15"] =
+                    InsertSelectedScalar_Vector128_SByte_15_Vector128_SByte_15,
+                ["InsertSelectedScalar.Vector128.Single.3.Vector64.Single.1"] =
+                    InsertSelectedScalar_Vector128_Single_3_Vector64_Single_1,
+                ["InsertSelectedScalar.Vector128.Single.3.Vector128.Single.3"] =
+                    InsertSelectedScalar_Vector128_Single_3_Vector128_Single_3,
+                ["InsertSelectedScalar.Vector128.UInt16.7.Vector64.UInt16.3"] =
+                    InsertSelectedScalar_Vector128_UInt16_7_Vector64_UInt16_3,
+                ["InsertSelectedScalar.Vector128.UInt16.7.Vector128.UInt16.7"] =
+                    InsertSelectedScalar_Vector128_UInt16_7_Vector128_UInt16_7,
+                ["InsertSelectedScalar.Vector128.UInt32.3.Vector64.UInt32.1"] =
+                    InsertSelectedScalar_Vector128_UInt32_3_Vector64_UInt32_1,
+                ["InsertSelectedScalar.Vector128.UInt32.3.Vector128.UInt32.3"] =
+                    InsertSelectedScalar_Vector128_UInt32_3_Vector128_UInt32_3,
+                ["InsertSelectedScalar.Vector128.UInt64.1.Vector128.UInt64.1"] =
+                    InsertSelectedScalar_Vector128_UInt64_1_Vector128_UInt64_1,
                 ["LoadAndReplicateToVector128.Double"] = LoadAndReplicateToVector128_Double,
                 ["LoadAndReplicateToVector128.Int64"] = LoadAndReplicateToVector128_Int64,
                 ["LoadAndReplicateToVector128.UInt64"] = LoadAndReplicateToVector128_UInt64,
@@ -66,8 +102,10 @@ namespace JIT.HardwareIntrinsics.Arm
                 ["MaxNumberPairwise.Vector64.Single"] = MaxNumberPairwise_Vector64_Single,
                 ["MaxNumberPairwise.Vector128.Double"] = MaxNumberPairwise_Vector128_Double,
                 ["MaxNumberPairwise.Vector128.Single"] = MaxNumberPairwise_Vector128_Single,
-                ["MaxNumberPairwiseScalar.Vector64.Single"] = MaxNumberPairwiseScalar_Vector64_Single,
-                ["MaxNumberPairwiseScalar.Vector128.Double"] = MaxNumberPairwiseScalar_Vector128_Double,
+                ["MaxNumberPairwiseScalar.Vector64.Single"] =
+                    MaxNumberPairwiseScalar_Vector64_Single,
+                ["MaxNumberPairwiseScalar.Vector128.Double"] =
+                    MaxNumberPairwiseScalar_Vector128_Double,
                 ["MaxPairwise.Vector128.Byte"] = MaxPairwise_Vector128_Byte,
                 ["MaxPairwise.Vector128.Double"] = MaxPairwise_Vector128_Double,
                 ["MaxPairwise.Vector128.Int16"] = MaxPairwise_Vector128_Int16,
@@ -97,8 +135,10 @@ namespace JIT.HardwareIntrinsics.Arm
                 ["MinNumberPairwise.Vector64.Single"] = MinNumberPairwise_Vector64_Single,
                 ["MinNumberPairwise.Vector128.Double"] = MinNumberPairwise_Vector128_Double,
                 ["MinNumberPairwise.Vector128.Single"] = MinNumberPairwise_Vector128_Single,
-                ["MinNumberPairwiseScalar.Vector64.Single"] = MinNumberPairwiseScalar_Vector64_Single,
-                ["MinNumberPairwiseScalar.Vector128.Double"] = MinNumberPairwiseScalar_Vector128_Double,
+                ["MinNumberPairwiseScalar.Vector64.Single"] =
+                    MinNumberPairwiseScalar_Vector64_Single,
+                ["MinNumberPairwiseScalar.Vector128.Double"] =
+                    MinNumberPairwiseScalar_Vector128_Double,
                 ["MinPairwise.Vector128.Byte"] = MinPairwise_Vector128_Byte,
                 ["MinPairwise.Vector128.Double"] = MinPairwise_Vector128_Double,
                 ["MinPairwise.Vector128.Int16"] = MinPairwise_Vector128_Int16,

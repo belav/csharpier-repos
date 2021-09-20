@@ -12,7 +12,6 @@ namespace Internal.TypeSystem
     public enum WellKnownType
     {
         Unknown,
-
         // Primitive types are first - keep in sync with type flags
         Void,
         Boolean,
@@ -29,22 +28,17 @@ namespace Internal.TypeSystem
         UIntPtr,
         Single,
         Double,
-
         ValueType,
         Enum,
         Nullable,
-
         Object,
         String,
         Array,
         MulticastDelegate,
-
         RuntimeTypeHandle,
         RuntimeMethodHandle,
         RuntimeFieldHandle,
-
         Exception,
-
         TypedReference,
         ByReferenceOfT,
     }

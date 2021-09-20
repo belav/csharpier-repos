@@ -19,8 +19,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.BinaryExpression
 {
     internal partial class AbstractBinaryExpressionWrapper<TBinaryExpressionSyntax>
     {
-        private class BinaryExpressionCodeActionComputer :
-            AbstractCodeActionComputer<AbstractBinaryExpressionWrapper<TBinaryExpressionSyntax>>
+        private class BinaryExpressionCodeActionComputer
+            : AbstractCodeActionComputer<AbstractBinaryExpressionWrapper<TBinaryExpressionSyntax>>
         {
             private readonly ImmutableArray<SyntaxNodeOrToken> _exprsAndOperators;
             private readonly OperatorPlacementWhenWrappingPreference _preference;
@@ -51,37 +51,59 @@ namespace Microsoft.CodeAnalysis.Wrapping.BinaryExpression
                 DocumentOptionSet options,
                 TBinaryExpressionSyntax binaryExpression,
                 ImmutableArray<SyntaxNodeOrToken> exprsAndOperators,
-                CancellationToken cancellationToken)
-                : base(service, document, originalSourceText, options, cancellationToken)
+                CancellationToken cancellationToken
+            ) : base(service, document, originalSourceText, options, cancellationToken)
             {
                 _exprsAndOperators = exprsAndOperators;
                 _preference = options.GetOption(CodeStyleOptions2.OperatorPlacementWhenWrapping);
 
                 var generator = SyntaxGenerator.GetGenerator(document);
 
-                _newlineBeforeOperatorTrivia = service.GetNewLineBeforeOperatorTrivia(NewLineTrivia);
+                _newlineBeforeOperatorTrivia = service.GetNewLineBeforeOperatorTrivia(
+                    NewLineTrivia
+                );
 
-                _indentAndAlignTrivia = new SyntaxTriviaList(generator.Whitespace(
-                    OriginalSourceText.GetOffset(binaryExpression.Span.Start)
-                                      .CreateIndentationString(UseTabs, TabSize)));
+                _indentAndAlignTrivia = new SyntaxTriviaList(
+                    generator.Whitespace(
+                        OriginalSourceText.GetOffset(binaryExpression.Span.Start)
+                            .CreateIndentationString(UseTabs, TabSize)
+                    )
+                );
 
-                _smartIndentTrivia = new SyntaxTriviaList(generator.Whitespace(
-                    GetSmartIndentationAfter(_exprsAndOperators[1])));
+                _smartIndentTrivia = new SyntaxTriviaList(
+                    generator.Whitespace(GetSmartIndentationAfter(_exprsAndOperators[1]))
+                );
             }
 
-            protected override async Task<ImmutableArray<WrappingGroup>> ComputeWrappingGroupsAsync()
-                => ImmutableArray.Create(new WrappingGroup(
-                    isInlinable: true, ImmutableArray.Create(
-                        await GetWrapCodeActionAsync(align: false).ConfigureAwait(false),
-                        await GetWrapCodeActionAsync(align: true).ConfigureAwait(false),
-                        await GetUnwrapCodeActionAsync().ConfigureAwait(false))));
+            protected override async Task<
+                ImmutableArray<WrappingGroup>
+            > ComputeWrappingGroupsAsync() =>
+                ImmutableArray.Create(
+                    new WrappingGroup(
+                        isInlinable: true,
+                        ImmutableArray.Create(
+                            await GetWrapCodeActionAsync(align: false).ConfigureAwait(false),
+                            await GetWrapCodeActionAsync(align: true).ConfigureAwait(false),
+                            await GetUnwrapCodeActionAsync().ConfigureAwait(false)
+                        )
+                    )
+                );
 
-            private Task<WrapItemsAction> GetWrapCodeActionAsync(bool align)
-                => TryCreateCodeActionAsync(GetWrapEdits(align), FeaturesResources.Wrapping,
-                        align ? FeaturesResources.Wrap_and_align_expression : FeaturesResources.Wrap_expression);
+            private Task<WrapItemsAction> GetWrapCodeActionAsync(bool align) =>
+                TryCreateCodeActionAsync(
+                    GetWrapEdits(align),
+                    FeaturesResources.Wrapping,
+                    align
+                      ? FeaturesResources.Wrap_and_align_expression
+                      : FeaturesResources.Wrap_expression
+                );
 
-            private Task<WrapItemsAction> GetUnwrapCodeActionAsync()
-                => TryCreateCodeActionAsync(GetUnwrapEdits(), FeaturesResources.Wrapping, FeaturesResources.Unwrap_expression);
+            private Task<WrapItemsAction> GetUnwrapCodeActionAsync() =>
+                TryCreateCodeActionAsync(
+                    GetUnwrapEdits(),
+                    FeaturesResources.Wrapping,
+                    FeaturesResources.Unwrap_expression
+                );
 
             private ImmutableArray<Edit> GetWrapEdits(bool align)
             {
@@ -96,23 +118,36 @@ namespace Microsoft.CodeAnalysis.Wrapping.BinaryExpression
 
                     if (_preference == OperatorPlacementWhenWrappingPreference.BeginningOfLine)
                     {
-                        // convert: 
+                        // convert:
                         //      (a == b) && (c == d) to
                         //
                         //      (a == b)
                         //      && (c == d)
-                        result.Add(Edit.UpdateBetween(left, _newlineBeforeOperatorTrivia, indentationTrivia, opToken));
-                        result.Add(Edit.UpdateBetween(opToken, SingleWhitespaceTrivia, NoTrivia, right));
+                        result.Add(
+                            Edit.UpdateBetween(
+                                left,
+                                _newlineBeforeOperatorTrivia,
+                                indentationTrivia,
+                                opToken
+                            )
+                        );
+                        result.Add(
+                            Edit.UpdateBetween(opToken, SingleWhitespaceTrivia, NoTrivia, right)
+                        );
                     }
                     else
                     {
-                        // convert: 
+                        // convert:
                         //      (a == b) && (c == d) to
                         //
                         //      (a == b) &&
                         //      (c == d)
-                        result.Add(Edit.UpdateBetween(left, SingleWhitespaceTrivia, NoTrivia, opToken));
-                        result.Add(Edit.UpdateBetween(opToken, NewLineTrivia, indentationTrivia, right));
+                        result.Add(
+                            Edit.UpdateBetween(left, SingleWhitespaceTrivia, NoTrivia, opToken)
+                        );
+                        result.Add(
+                            Edit.UpdateBetween(opToken, NewLineTrivia, indentationTrivia, right)
+                        );
                     }
                 }
 
@@ -125,9 +160,14 @@ namespace Microsoft.CodeAnalysis.Wrapping.BinaryExpression
 
                 for (var i = 0; i < _exprsAndOperators.Length - 1; i++)
                 {
-                    result.Add(Edit.UpdateBetween(
-                        _exprsAndOperators[i], SingleWhitespaceTrivia,
-                        NoTrivia, _exprsAndOperators[i + 1]));
+                    result.Add(
+                        Edit.UpdateBetween(
+                            _exprsAndOperators[i],
+                            SingleWhitespaceTrivia,
+                            NoTrivia,
+                            _exprsAndOperators[i + 1]
+                        )
+                    );
                 }
 
                 return result.ToImmutable();

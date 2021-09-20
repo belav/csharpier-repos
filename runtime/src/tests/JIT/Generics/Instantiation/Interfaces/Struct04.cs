@@ -21,7 +21,6 @@ public class RefY2<T, U> { }
 public class RefX3<T, U, V> { }
 public class RefY3<T, U, V> { }
 
-
 public interface IGen<T>
 {
     void _Init(T fld1);
@@ -62,7 +61,6 @@ public struct GenDouble : IGenSub<double>
         Fld1 = fld1;
     }
 
-
     public bool InstVerify(System.Type t1)
     {
         bool result = true;
@@ -85,7 +83,6 @@ public struct GenString : IGenSub<String>
     {
         Fld1 = fld1;
     }
-
 
     public bool InstVerify(System.Type t1)
     {
@@ -133,7 +130,6 @@ public struct GenGuid : IGenSub<Guid>
         Fld1 = fld1;
     }
 
-
     public bool InstVerify(System.Type t1)
     {
         bool result = true;
@@ -156,7 +152,6 @@ public struct GenConstructedReference : IGenSub<RefX1<int>>
     {
         Fld1 = fld1;
     }
-
 
     public bool InstVerify(System.Type t1)
     {
@@ -181,7 +176,6 @@ public struct GenConstructedValue : IGenSub<ValX1<string>>
         Fld1 = fld1;
     }
 
-
     public bool InstVerify(System.Type t1)
     {
         bool result = true;
@@ -195,7 +189,6 @@ public struct GenConstructedValue : IGenSub<ValX1<string>>
         return result;
     }
 }
-
 
 public struct Gen1DIntArray : IGenSub<int[]>
 {
@@ -229,7 +222,6 @@ public struct Gen2DStringArray : IGenSub<string[,]>
         Fld1 = fld1;
     }
 
-
     public bool InstVerify(System.Type t1)
     {
         bool result = true;
@@ -253,7 +245,6 @@ public struct GenJaggedObjectArray : IGenSub<object[][]>
         Fld1 = fld1;
     }
 
-
     public bool InstVerify(System.Type t1)
     {
         bool result = true;
@@ -268,7 +259,6 @@ public struct GenJaggedObjectArray : IGenSub<object[][]>
     }
 }
 
-
 public struct Test
 {
     public static int counter = 0;
@@ -281,7 +271,6 @@ public struct Test
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
@@ -337,5 +326,4 @@ public struct Test
             return 1;
         }
     }
-
 }

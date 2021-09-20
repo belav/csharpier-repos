@@ -125,7 +125,6 @@ namespace System.IO.Tests
             var baseInfo = GetCharArrayStream();
             var sr = baseInfo.Item2;
 
-
             for (int i = 0; i < baseInfo.Item1.Length; i++)
             {
                 int tmp = sr.Read();
@@ -273,7 +272,6 @@ namespace System.IO.Tests
 
             string valueString = new string(baseInfo.Item1);
 
-
             var data = sr.ReadLine();
             Assert.Equal(valueString.Substring(0, valueString.IndexOf('\r')), data);
 
@@ -333,7 +331,6 @@ namespace System.IO.Tests
 
             sr = new StreamReader(ms, Encoding.Unicode);
             Assert.Equal(Encoding.Unicode, sr.CurrentEncoding);
-
         }
 
         [Theory]
@@ -341,8 +338,11 @@ namespace System.IO.Tests
         [InlineData(10)]
         public async Task Read_EmptySpan_ReadsNothing(int length)
         {
-            using (var r = new StreamReader(new MemoryStream(Enumerable.Repeat((byte)'s', length).ToArray())))
-            {
+            using (
+                var r = new StreamReader(
+                    new MemoryStream(Enumerable.Repeat((byte)'s', length).ToArray())
+                )
+            ) {
                 Assert.Equal(0, r.Read(Span<char>.Empty));
                 Assert.Equal(0, r.ReadBlock(Span<char>.Empty));
                 Assert.Equal(0, await r.ReadAsync(Memory<char>.Empty));
@@ -367,8 +367,14 @@ namespace System.IO.Tests
             var result = new char[data.Length];
             Span<char> dst = result;
 
-            using (var sr = new StreamReader(new MemoryStream(data.Select(i => (byte)i).ToArray()), Encoding.ASCII, false, bufferSize))
-            {
+            using (
+                var sr = new StreamReader(
+                    new MemoryStream(data.Select(i => (byte)i).ToArray()),
+                    Encoding.ASCII,
+                    false,
+                    bufferSize
+                )
+            ) {
                 while (dst.Length > 0)
                 {
                     int toRead = Math.Min(readLength, dst.Length);
@@ -398,8 +404,14 @@ namespace System.IO.Tests
             var result = new char[data.Length];
             Span<char> dst = result;
 
-            using (var sr = new StreamReader(new MemoryStream(data.Select(i => (byte)i).ToArray()), Encoding.ASCII, false, bufferSize))
-            {
+            using (
+                var sr = new StreamReader(
+                    new MemoryStream(data.Select(i => (byte)i).ToArray()),
+                    Encoding.ASCII,
+                    false,
+                    bufferSize
+                )
+            ) {
                 while (dst.Length > 0)
                 {
                     int toRead = Math.Min(readLength, dst.Length);
@@ -417,8 +429,11 @@ namespace System.IO.Tests
         [InlineData(1, 100, 101)]
         [InlineData(100, 50, 1)]
         [InlineData(100, 50, 101)]
-        public async Task ReadAsync_ReadsExpectedData(int readLength, int totalLength, int bufferSize)
-        {
+        public async Task ReadAsync_ReadsExpectedData(
+            int readLength,
+            int totalLength,
+            int bufferSize
+        ) {
             var data = new char[totalLength];
             var r = new Random(42);
             for (int i = 0; i < data.Length; i++)
@@ -429,8 +444,14 @@ namespace System.IO.Tests
             var result = new char[data.Length];
             Memory<char> dst = result;
 
-            using (var sr = new StreamReader(new MemoryStream(data.Select(i => (byte)i).ToArray()), Encoding.ASCII, false, bufferSize))
-            {
+            using (
+                var sr = new StreamReader(
+                    new MemoryStream(data.Select(i => (byte)i).ToArray()),
+                    Encoding.ASCII,
+                    false,
+                    bufferSize
+                )
+            ) {
                 while (dst.Length > 0)
                 {
                     int toRead = Math.Min(readLength, dst.Length);
@@ -448,8 +469,11 @@ namespace System.IO.Tests
         [InlineData(1, 100, 101)]
         [InlineData(100, 50, 1)]
         [InlineData(100, 50, 101)]
-        public async Task ReadBlockAsync_ReadsExpectedData(int readLength, int totalLength, int bufferSize)
-        {
+        public async Task ReadBlockAsync_ReadsExpectedData(
+            int readLength,
+            int totalLength,
+            int bufferSize
+        ) {
             var data = new char[totalLength];
             var r = new Random(42);
             for (int i = 0; i < data.Length; i++)
@@ -460,8 +484,14 @@ namespace System.IO.Tests
             var result = new char[data.Length];
             Memory<char> dst = result;
 
-            using (var sr = new StreamReader(new MemoryStream(data.Select(i => (byte)i).ToArray()), Encoding.ASCII, false, bufferSize))
-            {
+            using (
+                var sr = new StreamReader(
+                    new MemoryStream(data.Select(i => (byte)i).ToArray()),
+                    Encoding.ASCII,
+                    false,
+                    bufferSize
+                )
+            ) {
                 while (dst.Length > 0)
                 {
                     int toRead = Math.Min(readLength, dst.Length);
@@ -481,7 +511,8 @@ namespace System.IO.Tests
             var ms = new MemoryStream(Encoding.UTF8.GetBytes(data));
             var s = new DelegateStream(
                 canReadFunc: () => true,
-                readFunc: (buffer, offset, count) => ms.Read(buffer, offset, 1)); // do actual reads a byte at a time
+                readFunc: (buffer, offset, count) => ms.Read(buffer, offset, 1)
+            ); // do actual reads a byte at a time
             using (var r = new StreamReader(s, Encoding.UTF8, false, 2))
             {
                 var result = new char[data.Length];
@@ -497,7 +528,9 @@ namespace System.IO.Tests
             var ms = new MemoryStream(Encoding.UTF8.GetBytes(data));
             var s = new DelegateStream(
                 canReadFunc: () => true,
-                readAsyncFunc: (buffer, offset, count, cancellationToken) => ms.ReadAsync(buffer, offset, 1)); // do actual reads a byte at a time
+                readAsyncFunc: (buffer, offset, count, cancellationToken) =>
+                    ms.ReadAsync(buffer, offset, 1)
+            ); // do actual reads a byte at a time
             using (var r = new StreamReader(s, Encoding.UTF8, false, 2))
             {
                 var result = new char[data.Length];
@@ -507,7 +540,12 @@ namespace System.IO.Tests
         }
 
         [Theory]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34583", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34583",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [InlineData(0, false)]
         [InlineData(0, true)]
         [InlineData(1, false)]
@@ -523,12 +561,27 @@ namespace System.IO.Tests
             };
 
             string pipeName = Guid.NewGuid().ToString("N");
-            using (var serverStream = new NamedPipeServerStream(pipeName, PipeDirection.Out, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous))
-            using (var clientStream = new NamedPipeClientStream(".", pipeName, PipeDirection.In, PipeOptions.Asynchronous))
-            {
+            using (
+                var serverStream = new NamedPipeServerStream(
+                    pipeName,
+                    PipeDirection.Out,
+                    1,
+                    PipeTransmissionMode.Byte,
+                    PipeOptions.Asynchronous
+                )
+            )
+            using (
+                var clientStream = new NamedPipeClientStream(
+                    ".",
+                    pipeName,
+                    PipeDirection.In,
+                    PipeOptions.Asynchronous
+                )
+            ) {
                 await Task.WhenAll(
                     serverStream.WaitForConnectionAsync(),
-                    clientStream.ConnectAsync());
+                    clientStream.ConnectAsync()
+                );
 
                 using (var sr = new StreamReader(clientStream))
                 {
@@ -559,8 +612,12 @@ namespace System.IO.Tests
 
             Assert.Throws<ObjectDisposedException>(() => sr.Read(Span<char>.Empty));
             Assert.Throws<ObjectDisposedException>(() => sr.ReadBlock(Span<char>.Empty));
-            await Assert.ThrowsAsync<ObjectDisposedException>(() => sr.ReadAsync(Memory<char>.Empty).AsTask());
-            await Assert.ThrowsAsync<ObjectDisposedException>(() => sr.ReadBlockAsync(Memory<char>.Empty).AsTask());
+            await Assert.ThrowsAsync<ObjectDisposedException>(
+                () => sr.ReadAsync(Memory<char>.Empty).AsTask()
+            );
+            await Assert.ThrowsAsync<ObjectDisposedException>(
+                () => sr.ReadBlockAsync(Memory<char>.Empty).AsTask()
+            );
         }
 
         [Fact]
@@ -607,16 +664,25 @@ namespace System.IO.Tests
             using (var tempStream = new MemoryStream(ByteOrderMaskUtf16_BE))
             {
                 // check disabled BOM, default encoding
-                using (var sr = new StreamReader(new MemoryStream(ByteOrderMaskUtf7), detectEncodingFromByteOrderMarks: false))
-                {
+                using (
+                    var sr = new StreamReader(
+                        new MemoryStream(ByteOrderMaskUtf7),
+                        detectEncodingFromByteOrderMarks: false
+                    )
+                ) {
                     sr.Read();
                     Assert.Equal(Encoding.UTF8, sr.CurrentEncoding);
                 }
 
                 // check disabled BOM, default enconding and leaveOpen
                 tempStream.Seek(0, SeekOrigin.Begin);
-                using (var sr = new StreamReader(tempStream, detectEncodingFromByteOrderMarks: false, leaveOpen: true))
-                {
+                using (
+                    var sr = new StreamReader(
+                        tempStream,
+                        detectEncodingFromByteOrderMarks: false,
+                        leaveOpen: true
+                    )
+                ) {
                     sr.Read();
                     Assert.Equal(Encoding.UTF8, sr.CurrentEncoding);
                 }
@@ -624,8 +690,9 @@ namespace System.IO.Tests
 
                 // check enabled BOM and leaveOpen
                 tempStream.Seek(0, SeekOrigin.Begin);
-                using (var sr = new StreamReader(tempStream, detectEncodingFromByteOrderMarks: true))
-                {
+                using (
+                    var sr = new StreamReader(tempStream, detectEncodingFromByteOrderMarks: true)
+                ) {
                     sr.Read();
                     Assert.Equal(Encoding.BigEndianUnicode, sr.CurrentEncoding);
                 }

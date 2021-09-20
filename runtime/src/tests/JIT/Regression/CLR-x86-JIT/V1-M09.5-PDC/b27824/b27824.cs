@@ -9,7 +9,10 @@ namespace Test
     class AA
     {
         static AA[] m_axForward3;
-        static void GoToEnd() { throw new Exception(); }
+        static void GoToEnd()
+        {
+            throw new Exception();
+        }
 
         public static int Main()
         {
@@ -33,15 +36,10 @@ namespace Test
                     }
                 } while (local2[2]);
 
-                do
-                {
-
-                } while (true);
+                do { } while (true);
                 GC.Collect();
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
             return 100;
         }
     }

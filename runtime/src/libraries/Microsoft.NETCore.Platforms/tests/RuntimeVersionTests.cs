@@ -219,7 +219,6 @@ namespace Microsoft.NETCore.Platforms.BuildTasks.Tests
             yield return new object[] { "1.02.03.04" };
         }
 
-
         [MemberData(nameof(ValidVersions))]
         [Theory]
         public static void RoundTripToString(string expected)
@@ -228,6 +227,5 @@ namespace Microsoft.NETCore.Platforms.BuildTasks.Tests
             string actual = version.ToString();
             Assert.Equal(expected, actual);
         }
-
     }
 }

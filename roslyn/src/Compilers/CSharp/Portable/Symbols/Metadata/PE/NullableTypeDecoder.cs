@@ -22,8 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             EntityHandle targetSymbolToken,
             PEModuleSymbol containingModule,
             Symbol accessSymbol,
-            Symbol nullableContext)
-        {
+            Symbol nullableContext
+        ) {
             Debug.Assert(metadataType.HasType);
             Debug.Assert(accessSymbol.IsDefinition);
             Debug.Assert((object)accessSymbol.ContainingModule == containingModule);
@@ -35,8 +35,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             byte defaultTransformFlag;
             ImmutableArray<byte> nullableTransformFlags;
-            if (!containingModule.Module.HasNullableAttribute(targetSymbolToken, out defaultTransformFlag, out nullableTransformFlags))
-            {
+            if (
+                !containingModule.Module.HasNullableAttribute(
+                    targetSymbolToken,
+                    out defaultTransformFlag,
+                    out nullableTransformFlags
+                )
+            ) {
                 byte? value = nullableContext.GetNullableContextValue();
                 if (value == null)
                 {
@@ -53,8 +58,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             return TransformType(metadataType, defaultTransformFlag, nullableTransformFlags);
         }
 
-        internal static TypeWithAnnotations TransformType(TypeWithAnnotations metadataType, byte defaultTransformFlag, ImmutableArray<byte> nullableTransformFlags)
-        {
+        internal static TypeWithAnnotations TransformType(
+            TypeWithAnnotations metadataType,
+            byte defaultTransformFlag,
+            ImmutableArray<byte> nullableTransformFlags
+        ) {
             if (nullableTransformFlags.IsDefault && defaultTransformFlag == 0)
             {
                 return metadataType;
@@ -62,9 +70,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             int position = 0;
             TypeWithAnnotations result;
-            if (metadataType.ApplyNullableTransforms(defaultTransformFlag, nullableTransformFlags, ref position, out result) &&
-                (nullableTransformFlags.IsDefault || position == nullableTransformFlags.Length))
-            {
+            if (
+                metadataType.ApplyNullableTransforms(
+                    defaultTransformFlag,
+                    nullableTransformFlags,
+                    ref position,
+                    out result
+                ) && (nullableTransformFlags.IsDefault || position == nullableTransformFlags.Length)
+            ) {
                 return result;
             }
 

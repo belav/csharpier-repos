@@ -13,7 +13,12 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
     internal interface IRemoteDocumentHighlightsService
     {
         ValueTask<ImmutableArray<SerializableDocumentHighlights>> GetDocumentHighlightsAsync(
-            PinnedSolutionInfo solutionInfo, DocumentId documentId, int position, ImmutableArray<DocumentId> documentIdsToSearch, CancellationToken cancellationToken);
+            PinnedSolutionInfo solutionInfo,
+            DocumentId documentId,
+            int position,
+            ImmutableArray<DocumentId> documentIdsToSearch,
+            CancellationToken cancellationToken
+        );
     }
 
     [DataContract]
@@ -25,16 +30,18 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
         [DataMember(Order = 1)]
         public readonly ImmutableArray<HighlightSpan> HighlightSpans;
 
-        public SerializableDocumentHighlights(DocumentId documentId, ImmutableArray<HighlightSpan> highlightSpans)
-        {
+        public SerializableDocumentHighlights(
+            DocumentId documentId,
+            ImmutableArray<HighlightSpan> highlightSpans
+        ) {
             DocumentId = documentId;
             HighlightSpans = highlightSpans;
         }
 
-        public DocumentHighlights Rehydrate(Solution solution)
-            => new(solution.GetDocument(DocumentId), HighlightSpans);
+        public DocumentHighlights Rehydrate(Solution solution) =>
+            new(solution.GetDocument(DocumentId), HighlightSpans);
 
-        public static SerializableDocumentHighlights Dehydrate(DocumentHighlights highlights)
-            => new(highlights.Document.Id, highlights.HighlightSpans);
+        public static SerializableDocumentHighlights Dehydrate(DocumentHighlights highlights) =>
+            new(highlights.Document.Id, highlights.HighlightSpans);
     }
 }

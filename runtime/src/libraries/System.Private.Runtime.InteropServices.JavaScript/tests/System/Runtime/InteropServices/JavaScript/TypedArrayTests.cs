@@ -272,7 +272,10 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public static void TypedArrayTypeUint8ClampedArray()
         {
-            Assert.Equal(TypedArrayTypeCode.Uint8ClampedArray, new Uint8ClampedArray().GetTypedArrayType());
+            Assert.Equal(
+                TypedArrayTypeCode.Uint8ClampedArray,
+                new Uint8ClampedArray().GetTypedArrayType()
+            );
         }
 
         [Fact]

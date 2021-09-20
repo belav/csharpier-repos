@@ -15,12 +15,19 @@ namespace System.Web.Http
             string routeSuffix,
             HttpRequestMessage request,
             Func<HttpResponseMessage, Task> assert,
-            Action<HttpConfiguration> configurer = null)
-        {
+            Action<HttpConfiguration> configurer = null
+        ) {
             // Arrange
-            HttpConfiguration config = new HttpConfiguration() { IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always };
+            HttpConfiguration config = new HttpConfiguration()
+            {
+                IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always
+            };
 
-            config.Routes.MapHttpRoute("Default", "{controller}" + routeSuffix, new { controller = controllerName });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}" + routeSuffix,
+                new { controller = controllerName }
+            );
             if (configurer != null)
             {
                 configurer(config);
@@ -36,6 +43,7 @@ namespace System.Web.Http
                 // Assert
                 await assert(response);
             }
+
             finally
             {
                 request.Dispose();

@@ -59,8 +59,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
         [InlineData("/foo.cshtml", "/foo/bar.cshtml")]
         [InlineData("c:\\foo.cshtml", "d:\\foo\\bar.cshtml")]
         [InlineData("c:\\foo\\bar\\bleh.cshtml", "c:\\foo\\baz\\bleh.cshtml")]
-        public void GetNamespace_ForNonRelatedFiles_UsesNamespaceVerbatim(string source, string imports)
-        {
+        public void GetNamespace_ForNonRelatedFiles_UsesNamespaceVerbatim(
+            string source,
+            string imports
+        ) {
             // Arrange
             var node = new DirectiveIntermediateNode()
             {
@@ -88,8 +90,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
         [InlineData("c:\\foo\\bar\\baz.cshtml", "c:\\_ViewImports.cshtml", "Base.foo.bar")]
         [InlineData("c:\\foo\\bar\\baz.cshtml", "c:\\foo\\_ViewImports.cshtml", "Base.bar")]
         [InlineData("c:\\Foo\\bar\\baz.cshtml", "c:\\foo\\_ViewImports.cshtml", "Base.bar")]
-        public void GetNamespace_ForRelatedFiles_ComputesNamespaceWithSuffix(string source, string imports, string expected)
-        {
+        public void GetNamespace_ForRelatedFiles_ComputesNamespaceWithSuffix(
+            string source,
+            string imports,
+            string expected
+        ) {
             // Arrange
             var node = new DirectiveIntermediateNode()
             {
@@ -114,12 +119,16 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             var document = new DocumentIntermediateNode();
             var builder = IntermediateNodeBuilder.Create(document);
 
-            builder.Push(new DirectiveIntermediateNode()
-            {
-                Directive = NamespaceDirective.Directive,
-                Source = new SourceSpan("/Account/_ViewImports.cshtml", 0, 0, 0, 0),
-            });
-            builder.Add(new DirectiveTokenIntermediateNode() { Content = "WebApplication.Account" });
+            builder.Push(
+                new DirectiveIntermediateNode()
+                {
+                    Directive = NamespaceDirective.Directive,
+                    Source = new SourceSpan("/Account/_ViewImports.cshtml", 0, 0, 0, 0),
+                }
+            );
+            builder.Add(
+                new DirectiveTokenIntermediateNode() { Content = "WebApplication.Account" }
+            );
             builder.Pop();
 
             var @namespace = new NamespaceDeclarationIntermediateNode() { Content = "default" };
@@ -127,10 +136,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
 
             var @class = new ClassDeclarationIntermediateNode() { ClassName = "default" };
             builder.Add(@class);
-            
+
             document.DocumentKind = RazorPageDocumentClassifierPass.RazorPageDocumentKind;
 
-            var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml"));
+            var codeDocument = RazorCodeDocument.Create(
+                RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml")
+            );
 
             var pass = new NamespaceDirective.Pass();
             pass.Engine = Mock.Of<RazorEngine>();
@@ -152,21 +163,27 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             var builder = IntermediateNodeBuilder.Create(document);
 
             // This will be ignored.
-            builder.Push(new DirectiveIntermediateNode()
-            {
-                Directive = NamespaceDirective.Directive,
-                Source = new SourceSpan("/Account/_ViewImports.cshtml", 0, 0, 0, 0),
-            });
+            builder.Push(
+                new DirectiveIntermediateNode()
+                {
+                    Directive = NamespaceDirective.Directive,
+                    Source = new SourceSpan("/Account/_ViewImports.cshtml", 0, 0, 0, 0),
+                }
+            );
             builder.Add(new DirectiveTokenIntermediateNode() { Content = "ignored" });
             builder.Pop();
 
             // This will be used.
-            builder.Push(new DirectiveIntermediateNode()
-            {
-                Directive = NamespaceDirective.Directive,
-                Source = new SourceSpan("/Account/Manage/AddUser.cshtml", 0, 0, 0, 0),
-            });
-            builder.Add(new DirectiveTokenIntermediateNode() { Content = "WebApplication.Account.Manage" });
+            builder.Push(
+                new DirectiveIntermediateNode()
+                {
+                    Directive = NamespaceDirective.Directive,
+                    Source = new SourceSpan("/Account/Manage/AddUser.cshtml", 0, 0, 0, 0),
+                }
+            );
+            builder.Add(
+                new DirectiveTokenIntermediateNode() { Content = "WebApplication.Account.Manage" }
+            );
             builder.Pop();
 
             var @namespace = new NamespaceDeclarationIntermediateNode() { Content = "default" };
@@ -174,10 +191,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
 
             var @class = new ClassDeclarationIntermediateNode() { ClassName = "default" };
             builder.Add(@class);
-            
+
             document.DocumentKind = RazorPageDocumentClassifierPass.RazorPageDocumentKind;
 
-            var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml"));
+            var codeDocument = RazorCodeDocument.Create(
+                RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml")
+            );
 
             var pass = new NamespaceDirective.Pass();
             pass.Engine = Mock.Of<RazorEngine>();
@@ -199,12 +218,16 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             var document = new DocumentIntermediateNode();
             var builder = IntermediateNodeBuilder.Create(document);
 
-            builder.Push(new DirectiveIntermediateNode()
-            {
-                Directive = NamespaceDirective.Directive,
-                Source = new SourceSpan("/Account/_ViewImports.cshtml", 0, 0, 0, 0),
-            });
-            builder.Add(new DirectiveTokenIntermediateNode() { Content = "WebApplication.Account" });
+            builder.Push(
+                new DirectiveIntermediateNode()
+                {
+                    Directive = NamespaceDirective.Directive,
+                    Source = new SourceSpan("/Account/_ViewImports.cshtml", 0, 0, 0, 0),
+                }
+            );
+            builder.Add(
+                new DirectiveTokenIntermediateNode() { Content = "WebApplication.Account" }
+            );
             builder.Pop();
 
             var @namespace = new NamespaceDeclarationIntermediateNode() { Content = "default" };
@@ -215,7 +238,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
 
             document.DocumentKind = RazorPageDocumentClassifierPass.RazorPageDocumentKind;
 
-            var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("ignored", "/Account/Manage-Info/Add+User.cshtml"));
+            var codeDocument = RazorCodeDocument.Create(
+                RazorSourceDocument.Create("ignored", "/Account/Manage-Info/Add+User.cshtml")
+            );
 
             var pass = new NamespaceDirective.Pass();
             pass.Engine = Mock.Of<RazorEngine>();
@@ -237,21 +262,27 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             var builder = IntermediateNodeBuilder.Create(document);
 
             // This will be ignored.
-            builder.Push(new DirectiveIntermediateNode()
-            {
-                Directive = NamespaceDirective.Directive,
-                Source = new SourceSpan("/Account/_ViewImports.cshtml", 0, 0, 0, 0),
-            });
+            builder.Push(
+                new DirectiveIntermediateNode()
+                {
+                    Directive = NamespaceDirective.Directive,
+                    Source = new SourceSpan("/Account/_ViewImports.cshtml", 0, 0, 0, 0),
+                }
+            );
             builder.Add(new DirectiveTokenIntermediateNode() { Content = "ignored" });
             builder.Pop();
 
             // This will be used.
-            builder.Push(new DirectiveIntermediateNode()
-            {
-                Directive = NamespaceDirective.Directive,
-                Source = new SourceSpan("/Account/Manage/AddUser.cshtml", 0, 0, 0, 0),
-            });
-            builder.Add(new DirectiveTokenIntermediateNode() { Content = "WebApplication.Account.Manage" });
+            builder.Push(
+                new DirectiveIntermediateNode()
+                {
+                    Directive = NamespaceDirective.Directive,
+                    Source = new SourceSpan("/Account/Manage/AddUser.cshtml", 0, 0, 0, 0),
+                }
+            );
+            builder.Add(
+                new DirectiveTokenIntermediateNode() { Content = "WebApplication.Account.Manage" }
+            );
             builder.Pop();
 
             var @namespace = new NamespaceDeclarationIntermediateNode() { Content = "default" };
@@ -259,10 +290,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
 
             var @class = new ClassDeclarationIntermediateNode() { ClassName = "default" };
             builder.Add(@class);
-            
+
             document.DocumentKind = MvcViewDocumentClassifierPass.MvcViewDocumentKind;
 
-            var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml"));
+            var codeDocument = RazorCodeDocument.Create(
+                RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml")
+            );
 
             var pass = new NamespaceDirective.Pass();
             pass.Engine = Mock.Of<RazorEngine>();
@@ -284,12 +317,16 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             var document = new DocumentIntermediateNode();
             var builder = IntermediateNodeBuilder.Create(document);
 
-            builder.Push(new DirectiveIntermediateNode()
-            {
-                Directive = NamespaceDirective.Directive,
-                Source = new SourceSpan(null, 0, 0, 0, 0),
-            });
-            builder.Add(new DirectiveTokenIntermediateNode() { Content = "WebApplication.Account" });
+            builder.Push(
+                new DirectiveIntermediateNode()
+                {
+                    Directive = NamespaceDirective.Directive,
+                    Source = new SourceSpan(null, 0, 0, 0, 0),
+                }
+            );
+            builder.Add(
+                new DirectiveTokenIntermediateNode() { Content = "WebApplication.Account" }
+            );
             builder.Pop();
 
             var @namespace = new NamespaceDeclarationIntermediateNode() { Content = "default" };
@@ -297,10 +334,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
 
             var @class = new ClassDeclarationIntermediateNode() { ClassName = "default" };
             builder.Add(@class);
-            
+
             document.DocumentKind = RazorPageDocumentClassifierPass.RazorPageDocumentKind;
 
-            var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml"));
+            var codeDocument = RazorCodeDocument.Create(
+                RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml")
+            );
 
             var pass = new NamespaceDirective.Pass();
             pass.Engine = Mock.Of<RazorEngine>();
@@ -320,12 +359,16 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
             var document = new DocumentIntermediateNode();
             var builder = IntermediateNodeBuilder.Create(document);
 
-            builder.Push(new DirectiveIntermediateNode()
-            {
-                Directive = NamespaceDirective.Directive,
-                Source = new SourceSpan(null, 0, 0, 0, 0),
-            });
-            builder.Add(new DirectiveTokenIntermediateNode() { Content = "WebApplication.Account" });
+            builder.Push(
+                new DirectiveIntermediateNode()
+                {
+                    Directive = NamespaceDirective.Directive,
+                    Source = new SourceSpan(null, 0, 0, 0, 0),
+                }
+            );
+            builder.Add(
+                new DirectiveTokenIntermediateNode() { Content = "WebApplication.Account" }
+            );
             builder.Pop();
 
             var @namespace = new NamespaceDeclarationIntermediateNode() { Content = "default" };
@@ -333,10 +376,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X
 
             var @class = new ClassDeclarationIntermediateNode() { ClassName = "default" };
             builder.Add(@class);
-            
+
             document.DocumentKind = null;
 
-            var codeDocument = RazorCodeDocument.Create(RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml"));
+            var codeDocument = RazorCodeDocument.Create(
+                RazorSourceDocument.Create("ignored", "/Account/Manage/AddUser.cshtml")
+            );
 
             var pass = new NamespaceDirective.Pass();
             pass.Engine = Mock.Of<RazorEngine>();

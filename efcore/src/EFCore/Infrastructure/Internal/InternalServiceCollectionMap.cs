@@ -18,7 +18,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
     /// </summary>
     public class InternalServiceCollectionMap : IInternalServiceCollectionMap
     {
-        private readonly IDictionary<Type, IList<int>> _serviceMap = new Dictionary<Type, IList<int>>();
+        private readonly IDictionary<Type, IList<int>> _serviceMap = new Dictionary<
+            Type,
+            IList<int>
+        >();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -81,8 +84,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IInternalServiceCollectionMap AddDependencySingleton<TDependencies>()
-            => AddDependency(typeof(TDependencies), ServiceLifetime.Singleton);
+        public virtual IInternalServiceCollectionMap AddDependencySingleton<TDependencies>() =>
+            AddDependency(typeof(TDependencies), ServiceLifetime.Singleton);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -90,8 +93,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IInternalServiceCollectionMap AddDependencyScoped<TDependencies>()
-            => AddDependency(typeof(TDependencies), ServiceLifetime.Scoped);
+        public virtual IInternalServiceCollectionMap AddDependencyScoped<TDependencies>() =>
+            AddDependency(typeof(TDependencies), ServiceLifetime.Scoped);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -99,17 +102,24 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IInternalServiceCollectionMap AddDependency(Type serviceType, ServiceLifetime lifetime)
-        {
+        public virtual IInternalServiceCollectionMap AddDependency(
+            Type serviceType,
+            ServiceLifetime lifetime
+        ) {
             var indexes = GetOrCreateDescriptorIndexes(serviceType);
             if (!indexes.Any())
             {
-                AddNewDescriptor(indexes, new ServiceDescriptor(serviceType, serviceType, lifetime));
+                AddNewDescriptor(
+                    indexes,
+                    new ServiceDescriptor(serviceType, serviceType, lifetime)
+                );
             }
-            else if (indexes.Count > 1
-                || ServiceCollection[indexes[0]].ImplementationType != serviceType)
-            {
-                throw new InvalidOperationException(CoreStrings.BadDependencyRegistration(serviceType.Name));
+            else if (
+                indexes.Count > 1 || ServiceCollection[indexes[0]].ImplementationType != serviceType
+            ) {
+                throw new InvalidOperationException(
+                    CoreStrings.BadDependencyRegistration(serviceType.Name)
+                );
             }
 
             return this;
@@ -149,18 +159,26 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
 
                     if (implementationType != null)
                     {
-                        var implementationIndexes = GetOrCreateDescriptorIndexes(implementationType);
+                        var implementationIndexes = GetOrCreateDescriptorIndexes(
+                            implementationType
+                        );
                         if (!implementationIndexes.Any())
                         {
                             AddNewDescriptor(
                                 implementationIndexes,
-                                new ServiceDescriptor(implementationType, implementationType, lifetime));
+                                new ServiceDescriptor(
+                                    implementationType,
+                                    implementationType,
+                                    lifetime
+                                )
+                            );
                         }
 
                         var injectedDescriptor = new ServiceDescriptor(
                             typeof(TService),
                             p => InjectServices(p, implementationType),
-                            lifetime);
+                            lifetime
+                        );
 
                         ServiceCollection[index] = injectedDescriptor;
                     }
@@ -169,7 +187,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
                         var injectedDescriptor = new ServiceDescriptor(
                             typeof(TService),
                             p => InjectServices(p, descriptor.ImplementationFactory),
-                            lifetime);
+                            lifetime
+                        );
 
                         ServiceCollection[index] = injectedDescriptor;
                     }
@@ -179,7 +198,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
                             typeof(TService),
                             // TODO: What should we do here? Can annotate InjectServices to accept null, but then it has to return it too...
                             p => InjectServices(p, descriptor.ImplementationInstance!),
-                            lifetime);
+                            lifetime
+                        );
 
                         ServiceCollection[index] = injectedDescriptor;
                     }
@@ -205,8 +225,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
             return service;
         }
 
-        private static object InjectServices(IServiceProvider serviceProvider, Func<IServiceProvider, object> implementationFactory)
-        {
+        private static object InjectServices(
+            IServiceProvider serviceProvider,
+            Func<IServiceProvider, object> implementationFactory
+        ) {
             var service = implementationFactory(serviceProvider);
 
             (service as IPatchServiceInjectionSite)?.InjectServices(serviceProvider);

@@ -17,15 +17,36 @@ namespace System.Net.Http
         private byte[]? _http3EncodedBytes;
         private int _hashcode;
 
-        private static readonly HttpMethod s_getMethod = new HttpMethod("GET", http3StaticTableIndex: H3StaticTable.MethodGet);
-        private static readonly HttpMethod s_putMethod = new HttpMethod("PUT", http3StaticTableIndex: H3StaticTable.MethodPut);
-        private static readonly HttpMethod s_postMethod = new HttpMethod("POST", http3StaticTableIndex: H3StaticTable.MethodPost);
-        private static readonly HttpMethod s_deleteMethod = new HttpMethod("DELETE", http3StaticTableIndex: H3StaticTable.MethodDelete);
-        private static readonly HttpMethod s_headMethod = new HttpMethod("HEAD", http3StaticTableIndex: H3StaticTable.MethodHead);
-        private static readonly HttpMethod s_optionsMethod = new HttpMethod("OPTIONS", http3StaticTableIndex: H3StaticTable.MethodOptions);
+        private static readonly HttpMethod s_getMethod = new HttpMethod(
+            "GET",
+            http3StaticTableIndex: H3StaticTable.MethodGet
+        );
+        private static readonly HttpMethod s_putMethod = new HttpMethod(
+            "PUT",
+            http3StaticTableIndex: H3StaticTable.MethodPut
+        );
+        private static readonly HttpMethod s_postMethod = new HttpMethod(
+            "POST",
+            http3StaticTableIndex: H3StaticTable.MethodPost
+        );
+        private static readonly HttpMethod s_deleteMethod = new HttpMethod(
+            "DELETE",
+            http3StaticTableIndex: H3StaticTable.MethodDelete
+        );
+        private static readonly HttpMethod s_headMethod = new HttpMethod(
+            "HEAD",
+            http3StaticTableIndex: H3StaticTable.MethodHead
+        );
+        private static readonly HttpMethod s_optionsMethod = new HttpMethod(
+            "OPTIONS",
+            http3StaticTableIndex: H3StaticTable.MethodOptions
+        );
         private static readonly HttpMethod s_traceMethod = new HttpMethod("TRACE", -1);
         private static readonly HttpMethod s_patchMethod = new HttpMethod("PATCH", -1);
-        private static readonly HttpMethod s_connectMethod = new HttpMethod("CONNECT", http3StaticTableIndex: H3StaticTable.MethodConnect);
+        private static readonly HttpMethod s_connectMethod = new HttpMethod(
+            "CONNECT",
+            http3StaticTableIndex: H3StaticTable.MethodConnect
+        );
 
         public static HttpMethod Get
         {
@@ -82,12 +103,21 @@ namespace System.Net.Http
 
         internal byte[] Http3EncodedBytes
         {
-            get {
+            get
+            {
                 byte[]? http3EncodedBytes = Volatile.Read(ref _http3EncodedBytes);
-                if (http3EncodedBytes is null) {
-                    Volatile.Write (ref _http3EncodedBytes, http3EncodedBytes = _http3Index is int index && index >= 0 ?
-                        QPackEncoder.EncodeStaticIndexedHeaderFieldToArray(index) :
-                        QPackEncoder.EncodeLiteralHeaderFieldWithStaticNameReferenceToArray(H3StaticTable.MethodGet, _method));
+                if (http3EncodedBytes is null)
+                {
+                    Volatile.Write(
+                        ref _http3EncodedBytes,
+                        http3EncodedBytes =
+                            _http3Index is int index && index >= 0
+                                ? QPackEncoder.EncodeStaticIndexedHeaderFieldToArray(index)
+                                : QPackEncoder.EncodeLiteralHeaderFieldWithStaticNameReferenceToArray(
+                                      H3StaticTable.MethodGet,
+                                      _method
+                                  )
+                    );
                 }
 
                 return http3EncodedBytes;
@@ -157,9 +187,9 @@ namespace System.Net.Http
 
         public static bool operator ==(HttpMethod? left, HttpMethod? right)
         {
-            return left is null || right is null ?
-                ReferenceEquals(left, right) :
-                left.Equals(right);
+            return left is null || right is null
+              ? ReferenceEquals(left, right)
+              : left.Equals(right);
         }
 
         public static bool operator !=(HttpMethod? left, HttpMethod? right)
@@ -189,18 +219,25 @@ namespace System.Net.Http
                     'g' => s_getMethod,
                     'h' => s_headMethod,
                     'o' => s_optionsMethod,
-                    'p' => method._method.Length switch
-                    {
-                        3 => s_putMethod,
-                        4 => s_postMethod,
-                        _ => s_patchMethod,
-                    },
+                    'p'
+                      => method._method.Length switch
+                      {
+                          3 => s_putMethod,
+                          4 => s_postMethod,
+                          _ => s_patchMethod,
+                      },
                     't' => s_traceMethod,
                     _ => null,
                 };
 
-                if (match is not null && string.Equals(method._method, match._method, StringComparison.OrdinalIgnoreCase))
-                {
+                if (
+                    match is not null
+                    && string.Equals(
+                        method._method,
+                        match._method,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                ) {
                     return match;
                 }
             }
@@ -215,8 +252,11 @@ namespace System.Net.Http
                 // Normalize before calling this
                 Debug.Assert(ReferenceEquals(this, Normalize(this)));
 
-                return !ReferenceEquals(this, HttpMethod.Get) && !ReferenceEquals(this, HttpMethod.Head) && !ReferenceEquals(this, HttpMethod.Connect) &&
-                       !ReferenceEquals(this, HttpMethod.Options) && !ReferenceEquals(this, HttpMethod.Delete);
+                return !ReferenceEquals(this, HttpMethod.Get)
+                    && !ReferenceEquals(this, HttpMethod.Head)
+                    && !ReferenceEquals(this, HttpMethod.Connect)
+                    && !ReferenceEquals(this, HttpMethod.Options)
+                    && !ReferenceEquals(this, HttpMethod.Delete);
             }
         }
     }

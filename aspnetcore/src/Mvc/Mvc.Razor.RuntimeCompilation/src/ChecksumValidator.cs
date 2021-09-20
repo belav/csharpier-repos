@@ -23,7 +23,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             // Other files (view imports) may or may not have existed at the time of compilation,
             // so we may not have checksums for them.
             var checksums = item.GetChecksumMetadata();
-            return checksums.Any(c => string.Equals(item.Identifier, c.Identifier, StringComparison.OrdinalIgnoreCase));
+            return checksums.Any(
+                c =>
+                    string.Equals(item.Identifier, c.Identifier, StringComparison.OrdinalIgnoreCase)
+            );
         }
 
         // Validates that we can use an existing precompiled view by comparing checksums with files on
@@ -50,8 +53,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             //
             // The presence of the main file with the same content is a very strong signal that you're in a
             // development scenario.
-            var primaryChecksum = checksums
-                .FirstOrDefault(c => string.Equals(item.Identifier, c.Identifier, StringComparison.OrdinalIgnoreCase));
+            var primaryChecksum = checksums.FirstOrDefault(
+                c =>
+                    string.Equals(item.Identifier, c.Identifier, StringComparison.OrdinalIgnoreCase)
+            );
             if (primaryChecksum == null)
             {
                 // No primary checksum, assume valid.
@@ -66,9 +71,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             }
 
             var sourceDocument = RazorSourceDocument.ReadFrom(projectItem);
-            if (!string.Equals(sourceDocument.GetChecksumAlgorithm(), primaryChecksum.ChecksumAlgorithm) ||
-                !ChecksumsEqual(primaryChecksum.Checksum, sourceDocument.GetChecksum()))
-            {
+            if (
+                !string.Equals(
+                    sourceDocument.GetChecksumAlgorithm(),
+                    primaryChecksum.ChecksumAlgorithm
+                ) || !ChecksumsEqual(primaryChecksum.Checksum, sourceDocument.GetChecksum())
+            ) {
                 // Main file exists, but checksums not equal.
                 return false;
             }
@@ -76,8 +84,13 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             for (var i = 0; i < checksums.Count; i++)
             {
                 var checksum = checksums[i];
-                if (string.Equals(item.Identifier, checksum.Identifier, StringComparison.OrdinalIgnoreCase))
-                {
+                if (
+                    string.Equals(
+                        item.Identifier,
+                        checksum.Identifier,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                ) {
                     // Ignore primary checksum on this pass.
                     continue;
                 }
@@ -90,9 +103,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                 }
 
                 sourceDocument = RazorSourceDocument.ReadFrom(importItem);
-                if (!string.Equals(sourceDocument.GetChecksumAlgorithm(), checksum.ChecksumAlgorithm) ||
-                    !ChecksumsEqual(checksum.Checksum, sourceDocument.GetChecksum()))
-                {
+                if (
+                    !string.Equals(
+                        sourceDocument.GetChecksumAlgorithm(),
+                        checksum.ChecksumAlgorithm
+                    ) || !ChecksumsEqual(checksum.Checksum, sourceDocument.GetChecksum())
+                ) {
                     // Import file exists, but checksums not equal.
                     return false;
                 }

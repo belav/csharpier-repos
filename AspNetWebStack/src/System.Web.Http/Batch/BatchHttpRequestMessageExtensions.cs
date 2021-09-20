@@ -34,8 +34,10 @@ namespace System.Web.Http.Batch
         /// </summary>
         /// <param name="subRequest">The sub-request.</param>
         /// <param name="batchRequest">The batch request that contains the properties to copy.</param>
-        public static void CopyBatchRequestProperties(this HttpRequestMessage subRequest, HttpRequestMessage batchRequest)
-        {
+        public static void CopyBatchRequestProperties(
+            this HttpRequestMessage subRequest,
+            HttpRequestMessage batchRequest
+        ) {
             if (subRequest == null)
             {
                 throw new ArgumentNullException("subRequest");
@@ -57,8 +59,9 @@ namespace System.Web.Http.Batch
 
             if (originalContext != null)
             {
-                BatchHttpRequestContext subRequestContext = new BatchHttpRequestContext(originalContext)
-                {
+                BatchHttpRequestContext subRequestContext = new BatchHttpRequestContext(
+                    originalContext
+                ) {
                     Url = new UrlHelper(subRequest)
                 };
 

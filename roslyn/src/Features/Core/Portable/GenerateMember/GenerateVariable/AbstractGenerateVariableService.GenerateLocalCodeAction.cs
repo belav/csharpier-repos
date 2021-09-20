@@ -16,7 +16,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 {
-    internal partial class AbstractGenerateVariableService<TService, TSimpleNameSyntax, TExpressionSyntax>
+    internal partial class AbstractGenerateVariableService<
+        TService,
+        TSimpleNameSyntax,
+        TExpressionSyntax
+    >
     {
         private class GenerateLocalCodeAction : CodeAction
         {
@@ -37,14 +41,13 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 {
                     var text = FeaturesResources.Generate_local_0;
 
-                    return string.Format(
-                        text,
-                        _state.IdentifierToken.ValueText);
+                    return string.Format(text, _state.IdentifierToken.ValueText);
                 }
             }
 
-            protected override async Task<Document> GetChangedDocumentAsync(CancellationToken cancellationToken)
-            {
+            protected override async Task<Document> GetChangedDocumentAsync(
+                CancellationToken cancellationToken
+            ) {
                 var newRoot = await GetNewRootAsync(cancellationToken).ConfigureAwait(false);
                 var newDocument = _document.WithSyntaxRoot(newRoot);
 
@@ -53,11 +56,21 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 
             private async Task<SyntaxNode> GetNewRootAsync(CancellationToken cancellationToken)
             {
-                var semanticModel = await _document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-                var documentOptions = await _document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
+                var semanticModel = await _document.GetSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var documentOptions = await _document.GetOptionsAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
-                if (_service.TryConvertToLocalDeclaration(_state.LocalType, _state.IdentifierToken, documentOptions, semanticModel, cancellationToken, out var newRoot))
-                {
+                if (
+                    _service.TryConvertToLocalDeclaration(
+                        _state.LocalType,
+                        _state.IdentifierToken,
+                        documentOptions,
+                        semanticModel,
+                        cancellationToken,
+                        out var newRoot
+                    )
+                ) {
                     return newRoot;
                 }
 
@@ -67,7 +80,11 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                     : syntaxFactory.DefaultExpression(_state.LocalType);
 
                 var type = _state.LocalType;
-                var localStatement = syntaxFactory.LocalDeclarationStatement(type, _state.IdentifierToken.ValueText, initializer);
+                var localStatement = syntaxFactory.LocalDeclarationStatement(
+                    type,
+                    _state.IdentifierToken.ValueText,
+                    initializer
+                );
                 localStatement = localStatement.WithAdditionalAnnotations(Formatter.Annotation);
 
                 var codeGenService = _document.GetLanguageService<ICodeGenerationService>();
@@ -76,8 +93,11 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 return codeGenService.AddStatements(
                     root,
                     SpecializedCollections.SingletonEnumerable(localStatement),
-                    options: new CodeGenerationOptions(beforeThisLocation: _state.IdentifierToken.GetLocation()),
-                    cancellationToken: cancellationToken);
+                    options: new CodeGenerationOptions(
+                        beforeThisLocation: _state.IdentifierToken.GetLocation()
+                    ),
+                    cancellationToken: cancellationToken
+                );
             }
         }
     }

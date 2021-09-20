@@ -28,12 +28,15 @@ namespace ServerComparison.FunctionalTests
         // NGinx's default min size is 20 bytes
         private static readonly string HelloWorldBody = "Hello World;" + new string('a', 20);
 
-        public ResponseCompressionTests(ITestOutputHelper output) : base(output)
-        {
-        }
+        public ResponseCompressionTests(ITestOutputHelper output) : base(output) { }
 
-        public static TestMatrix NoCompressionTestVariants
-            => TestMatrix.ForServers(ServerType.IISExpress, ServerType.Kestrel, ServerType.Nginx,  ServerType.HttpSys)
+        public static TestMatrix NoCompressionTestVariants =>
+            TestMatrix.ForServers(
+                    ServerType.IISExpress,
+                    ServerType.Kestrel,
+                    ServerType.Nginx,
+                    ServerType.HttpSys
+                )
                 .WithTfms(Tfm.Default)
                 .WithAllHostingModels();
 
@@ -44,8 +47,8 @@ namespace ServerComparison.FunctionalTests
             return ResponseCompression(variant, CheckNoCompressionAsync, hostCompression: false);
         }
 
-        public static TestMatrix HostCompressionTestVariants
-            => TestMatrix.ForServers(ServerType.IISExpress, ServerType.Nginx)
+        public static TestMatrix HostCompressionTestVariants =>
+            TestMatrix.ForServers(ServerType.IISExpress, ServerType.Nginx)
                 .WithTfms(Tfm.Default)
                 .WithAllHostingModels();
 
@@ -56,8 +59,8 @@ namespace ServerComparison.FunctionalTests
             return ResponseCompression(variant, CheckHostCompressionAsync, hostCompression: true);
         }
 
-        public static TestMatrix AppCompressionTestVariants
-            => TestMatrix.ForServers(ServerType.IISExpress, ServerType.Kestrel, ServerType.HttpSys) // No pass-through compression for nginx
+        public static TestMatrix AppCompressionTestVariants =>
+            TestMatrix.ForServers(ServerType.IISExpress, ServerType.Kestrel, ServerType.HttpSys) // No pass-through compression for nginx
                 .WithTfms(Tfm.Default)
                 .WithAllHostingModels();
 
@@ -68,8 +71,13 @@ namespace ServerComparison.FunctionalTests
             return ResponseCompression(variant, CheckAppCompressionAsync, hostCompression: false);
         }
 
-        public static TestMatrix HostAndAppCompressionTestVariants
-            => TestMatrix.ForServers(ServerType.IISExpress, ServerType.Kestrel, ServerType.Nginx, ServerType.HttpSys)
+        public static TestMatrix HostAndAppCompressionTestVariants =>
+            TestMatrix.ForServers(
+                    ServerType.IISExpress,
+                    ServerType.Kestrel,
+                    ServerType.Nginx,
+                    ServerType.HttpSys
+                )
                 .WithTfms(Tfm.Default)
                 .WithAllHostingModels();
 
@@ -80,16 +88,21 @@ namespace ServerComparison.FunctionalTests
             return ResponseCompression(variant, CheckAppCompressionAsync, hostCompression: true);
         }
 
-        private async Task ResponseCompression(TestVariant variant,
+        private async Task ResponseCompression(
+            TestVariant variant,
             Func<HttpClient, ILogger, Task> scenario,
             bool hostCompression,
-            [CallerMemberName] string testName = null)
-        {
-            testName = $"{testName}_{variant.Server}_{variant.Tfm}_{variant.Architecture}_{variant.ApplicationType}";
-            using (StartLog(out var loggerFactory,
-                variant.Server == ServerType.Nginx ? LogLevel.Trace : LogLevel.Debug, // https://github.com/aspnet/ServerTests/issues/144
-                testName))
-            {
+            [CallerMemberName] string testName = null
+        ) {
+            testName =
+                $"{testName}_{variant.Server}_{variant.Tfm}_{variant.Architecture}_{variant.ApplicationType}";
+            using (
+                StartLog(
+                    out var loggerFactory,
+                    variant.Server == ServerType.Nginx ? LogLevel.Trace : LogLevel.Debug, // https://github.com/aspnet/ServerTests/issues/144
+                    testName
+                )
+            ) {
                 var logger = loggerFactory.CreateLogger("ResponseCompression");
 
                 var deploymentParameters = new DeploymentParameters(variant)
@@ -108,40 +121,50 @@ namespace ServerComparison.FunctionalTests
                 {
                     var iisDeploymentParameters = new IISDeploymentParameters(deploymentParameters);
                     iisDeploymentParameters.ServerConfigActionList.Add(
-                        (element, _) => {
-                            var compressionElement = element
-                                .RequiredElement("system.webServer")
+                        (element, _) =>
+                        {
+                            var compressionElement = element.RequiredElement("system.webServer")
                                 .RequiredElement("httpCompression");
 
-                            compressionElement
-                                .RequiredElement("dynamicTypes")
+                            compressionElement.RequiredElement("dynamicTypes")
                                 .Elements()
                                 .SkipLast(1)
                                 .Remove();
 
-                            compressionElement
-                                .RequiredElement("staticTypes")
+                            compressionElement.RequiredElement("staticTypes")
                                 .Elements()
                                 .SkipLast(1)
                                 .Remove();
                             // last element in both dynamicTypes and staticTypes disables compression
                             // <add mimeType="*/*" enabled="false" />
-                        });
+                        }
+                    );
                     deploymentParameters = iisDeploymentParameters;
                 }
 
-                using (var deployer = IISApplicationDeployerFactory.Create(deploymentParameters, loggerFactory))
-                {
+                using (
+                    var deployer = IISApplicationDeployerFactory.Create(
+                        deploymentParameters,
+                        loggerFactory
+                    )
+                ) {
                     var deploymentResult = await deployer.DeployAsync();
-                    var httpClientHandler = new HttpClientHandler() { AutomaticDecompression = DecompressionMethods.None };
+                    var httpClientHandler = new HttpClientHandler()
+                    {
+                        AutomaticDecompression = DecompressionMethods.None
+                    };
                     Assert.True(httpClientHandler.SupportsAutomaticDecompression);
                     var httpClient = deploymentResult.CreateHttpClient(httpClientHandler);
 
                     // Request to base address and check if various parts of the body are rendered & measure the cold startup time.
-                    var response = await RetryHelper.RetryRequest(() =>
-                    {
-                        return httpClient.GetAsync(string.Empty);
-                    }, logger, deploymentResult.HostShutdownToken);
+                    var response = await RetryHelper.RetryRequest(
+                        () =>
+                        {
+                            return httpClient.GetAsync(string.Empty);
+                        },
+                        logger,
+                        deploymentResult.HostShutdownToken
+                    );
 
                     var responseText = await response.Content.ReadAsStringAsync();
                     try
@@ -170,7 +193,10 @@ namespace ServerComparison.FunctionalTests
             try
             {
                 Assert.Equal(HelloWorldBody, responseText);
-                Assert.Equal(HelloWorldBody.Length.ToString(CultureInfo.InvariantCulture), GetContentLength(response));
+                Assert.Equal(
+                    HelloWorldBody.Length.ToString(CultureInfo.InvariantCulture),
+                    GetContentLength(response)
+                );
                 Assert.Equal(0, response.Content.Headers.ContentEncoding.Count);
             }
             catch (XunitException)
@@ -191,8 +217,11 @@ namespace ServerComparison.FunctionalTests
             return CheckCompressionAsync(client, "AppCompression", logger);
         }
 
-        private static async Task CheckCompressionAsync(HttpClient client, string url, ILogger logger)
-        {
+        private static async Task CheckCompressionAsync(
+            HttpClient client,
+            string url,
+            ILogger logger
+        ) {
             // Manage the compression manually because HttpClient removes the Content-Encoding header when decompressing.
             logger.LogInformation($"Testing /{url}");
             var request = new HttpRequestMessage(HttpMethod.Get, url);
@@ -217,7 +246,9 @@ namespace ServerComparison.FunctionalTests
         private static string GetContentLength(HttpResponseMessage response)
         {
             // Don't use response.Content.Headers.ContentLength, it will dynamically calculate the value if it can.
-            return response.Content.Headers.TryGetValues(HeaderNames.ContentLength, out var values) ? values.FirstOrDefault() : null;
+            return response.Content.Headers.TryGetValues(HeaderNames.ContentLength, out var values)
+              ? values.FirstOrDefault()
+              : null;
         }
 
         private static async Task<string> ReadCompressedAsStringAsync(HttpContent content)

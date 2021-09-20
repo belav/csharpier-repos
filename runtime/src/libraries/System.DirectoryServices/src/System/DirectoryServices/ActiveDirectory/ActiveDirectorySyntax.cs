@@ -74,17 +74,23 @@ namespace System.DirectoryServices.ActiveDirectory
         public bool Equals(Syntax syntax)
         {
             bool result = true;
-            if ((!syntax.attributeSyntax.Equals(this.attributeSyntax))
-                || (syntax.oMSyntax != this.oMSyntax))
-            {
+            if (
+                (!syntax.attributeSyntax.Equals(this.attributeSyntax))
+                || (syntax.oMSyntax != this.oMSyntax)
+            ) {
                 result = false;
             }
             else
             {
-                if (((this.oMObjectClass != null) && (syntax.oMObjectClass == null))
+                if (
+                    ((this.oMObjectClass != null) && (syntax.oMObjectClass == null))
                     || ((this.oMObjectClass == null) && (syntax.oMObjectClass != null))
-                    || ((this.oMObjectClass != null) && (syntax.oMObjectClass != null) && (!this.oMObjectClass.Equals(syntax.oMObjectClass))))
-                {
+                    || (
+                        (this.oMObjectClass != null)
+                        && (syntax.oMObjectClass != null)
+                        && (!this.oMObjectClass.Equals(syntax.oMObjectClass))
+                    )
+                ) {
                     result = false;
                 }
             }

@@ -18,15 +18,8 @@ public class Property
 
     public int Item
     {
-        get
-        {
-            return m_data;
-        }
-
-        set
-        {
-            m_data = value;
-        }
+        get { return m_data; }
+        set { m_data = value; }
     }
 }
 

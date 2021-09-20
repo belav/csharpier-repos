@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // Provides an abstraction over platform specific calling conventions (specifically, the calling convention
-// utilized by the JIT on that platform). The caller enumerates each argument of a signature in turn, and is 
+// utilized by the JIT on that platform). The caller enumerates each argument of a signature in turn, and is
 // provided with information mapping that argument into registers and/or stack locations.
 
 using System;
@@ -24,9 +24,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     return X86TransitionBlock.Instance;
 
                 case TargetArchitecture.X64:
-                    return target.OperatingSystem == TargetOS.Windows ?
-                        X64WindowsTransitionBlock.Instance :
-                        X64UnixTransitionBlock.Instance;
+                    return target.OperatingSystem == TargetOS.Windows
+                      ? X64WindowsTransitionBlock.Instance
+                      : X64UnixTransitionBlock.Instance;
 
                 case TargetArchitecture.ARM:
                     if (target.Abi == TargetAbi.CoreRTArmel)
@@ -108,7 +108,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         /// <summary>
         /// Default implementation of ThisOffset; X86TransitionBlock provides a slightly different implementation.
         /// </summary>
-        public virtual int ThisOffset { get { return OffsetOfArgumentRegisters;  } }
+        public virtual int ThisOffset
+        {
+            get { return OffsetOfArgumentRegisters; }
+        }
 
         /// <summary>
         /// Recalculate pos in GC ref map to actual offset. This is the default implementation for all architectures
@@ -164,8 +167,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         /// </param>
         /// <param name="typ">parameter type</param>
         /// <param name="thArgType">Exact type info is used to check struct enregistration</param>
-        public bool IsArgumentInRegister(ref int pNumRegistersUsed, CorElementType typ, TypeHandle thArgType)
-        {
+        public bool IsArgumentInRegister(
+            ref int pNumRegistersUsed,
+            CorElementType typ,
+            TypeHandle thArgType
+        ) {
             Debug.Assert(IsX86);
 
             //        LIMITED_METHOD_CONTRACT;
@@ -195,19 +201,19 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         return true;
 #if PROJECTN
                     case CorElementType.ELEMENT_TYPE_VALUETYPE:
+                    {
+                        // On ProjectN valuetypes of integral size are passed enregistered
+                        int structSize = TypeHandle.GetElemSize(typ, thArgType);
+                        switch (structSize)
                         {
-                            // On ProjectN valuetypes of integral size are passed enregistered
-                            int structSize = TypeHandle.GetElemSize(typ, thArgType);
-                            switch (structSize)
-                            {
-                                case 1:
-                                case 2:
-                                case 4:
-                                    pNumRegistersUsed++;
-                                    return true;
-                            }
-                            break;
+                            case 1:
+                            case 2:
+                            case 4:
+                                pNumRegistersUsed++;
+                                return true;
                         }
+                        break;
+                    }
 #elif READYTORUN
                     case CorElementType.ELEMENT_TYPE_VALUETYPE:
                         if (IsTrivialPointerSizedStruct(thArgType))
@@ -246,8 +252,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 typeOfEmbeddedField = field.FieldType;
             }
 
-            if ((typeOfEmbeddedField != null) && ((typeOfEmbeddedField.IsValueType) || (typeOfEmbeddedField.IsPointer)))
-            {
+            if (
+                (typeOfEmbeddedField != null)
+                && ((typeOfEmbeddedField.IsValueType) || (typeOfEmbeddedField.IsPointer))
+            ) {
                 switch (typeOfEmbeddedField.UnderlyingType.Category)
                 {
                     case TypeFlags.IntPtr:
@@ -300,8 +308,13 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             return size > EnregisteredParamTypeMaxSize;
         }
 
-        public void ComputeReturnValueTreatment(CorElementType type, TypeHandle thRetType, bool isVarArgMethod, out bool usesRetBuffer, out uint fpReturnSize)
-        {
+        public void ComputeReturnValueTreatment(
+            CorElementType type,
+            TypeHandle thRetType,
+            bool isVarArgMethod,
+            out bool usesRetBuffer,
+            out uint fpReturnSize
+        ) {
             usesRetBuffer = false;
             fpReturnSize = 0;
 
@@ -325,20 +338,26 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     break;
 
                 case CorElementType.ELEMENT_TYPE_VALUETYPE:
+
                     {
                         Debug.Assert(!thRetType.IsNull() && thRetType.IsValueType());
 
                         if ((Architecture == TargetArchitecture.X64) && IsX64UnixABI)
                         {
                             SYSTEMV_AMD64_CORINFO_STRUCT_REG_PASSING_DESCRIPTOR descriptor;
-                            SystemVStructClassificator.GetSystemVAmd64PassStructInRegisterDescriptor(thRetType.GetRuntimeTypeHandle(), out descriptor);
+                            SystemVStructClassificator.GetSystemVAmd64PassStructInRegisterDescriptor(
+                                thRetType.GetRuntimeTypeHandle(),
+                                out descriptor
+                            );
 
                             if (descriptor.passedInRegisters)
                             {
                                 if (descriptor.eightByteCount == 1)
                                 {
-                                    if (descriptor.eightByteClassifications0 == SystemVClassificationType.SystemVClassificationTypeSSE)
-                                    {
+                                    if (
+                                        descriptor.eightByteClassifications0
+                                        == SystemVClassificationType.SystemVClassificationTypeSSE
+                                    ) {
                                         // Structs occupying just one eightbyte are treated as int / double
                                         fpReturnSize = sizeof(double);
                                     }
@@ -348,17 +367,20 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                                     // Size of the struct is 16 bytes
                                     fpReturnSize = 16;
                                     // The lowest two bits of the size encode the order of the int and SSE fields
-                                    if (descriptor.eightByteClassifications0 == SystemVClassificationType.SystemVClassificationTypeSSE)
-                                    {
+                                    if (
+                                        descriptor.eightByteClassifications0
+                                        == SystemVClassificationType.SystemVClassificationTypeSSE
+                                    ) {
                                         fpReturnSize += 1;
                                     }
 
-                                    if (descriptor.eightByteClassifications0 == SystemVClassificationType.SystemVClassificationTypeSSE)
-                                    {
+                                    if (
+                                        descriptor.eightByteClassifications0
+                                        == SystemVClassificationType.SystemVClassificationTypeSSE
+                                    ) {
                                         fpReturnSize += 2;
                                     }
                                 }
-
                                 break;
                             }
                         }
@@ -416,7 +438,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             public override int NumArgumentRegisters => 2;
             public override int NumCalleeSavedRegisters => 4;
             // Argument registers, callee-save registers, return address
-            public override int SizeOfTransitionBlock => SizeOfArgumentRegisters + SizeOfCalleeSavedRegisters + PointerSize;
+            public override int SizeOfTransitionBlock =>
+                SizeOfArgumentRegisters + SizeOfCalleeSavedRegisters + PointerSize;
             public override int OffsetOfArgumentRegisters => 0;
             // CALLDESCR_FPARGREGS is not set for X86
             public override int OffsetOfFloatArgumentRegisters => 0;
@@ -429,7 +452,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             {
                 if (pos < NumArgumentRegisters)
                 {
-                    return OffsetOfArgumentRegisters + SizeOfArgumentRegisters - (pos + 1) * PointerSize;
+                    return OffsetOfArgumentRegisters + SizeOfArgumentRegisters
+                        - (pos + 1) * PointerSize;
                 }
                 else
                 {
@@ -474,7 +498,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 return IsArgPassedByRef(size);
             }
 
-            public override int GetRetBuffArgOffset(bool hasThis) => OffsetOfArgumentRegisters + (hasThis ? PointerSize : 0);
+            public override int GetRetBuffArgOffset(bool hasThis) =>
+                OffsetOfArgumentRegisters + (hasThis ? PointerSize : 0);
         }
 
         private sealed class X64WindowsTransitionBlock : X64TransitionBlock
@@ -488,7 +513,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             // Callee-saved registers, return address
             public override int SizeOfTransitionBlock => SizeOfCalleeSavedRegisters + PointerSize;
             public override int OffsetOfArgumentRegisters => SizeOfTransitionBlock;
-            // CALLDESCR_FPARGREGS is not set for Amd64 on 
+            // CALLDESCR_FPARGREGS is not set for Amd64 on
             public override int OffsetOfFloatArgumentRegisters => 0;
             public override int EnregisteredParamTypeMaxSize => 8;
             public override int EnregisteredReturnTypeIntegerMaxSize => 8;
@@ -507,9 +532,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             // R12, R13, R14, R15, RBX, RBP
             public override int NumCalleeSavedRegisters => 6;
             // Argument registers, callee-saved registers, return address
-            public override int SizeOfTransitionBlock => SizeOfArgumentRegisters + SizeOfCalleeSavedRegisters + PointerSize;
+            public override int SizeOfTransitionBlock =>
+                SizeOfArgumentRegisters + SizeOfCalleeSavedRegisters + PointerSize;
             public override int OffsetOfArgumentRegisters => 0;
-            public override int OffsetOfFloatArgumentRegisters => SizeOfM128A * NUM_FLOAT_ARGUMENT_REGISTERS;
+            public override int OffsetOfFloatArgumentRegisters =>
+                SizeOfM128A * NUM_FLOAT_ARGUMENT_REGISTERS;
             public override int EnregisteredParamTypeMaxSize => 16;
             public override int EnregisteredReturnTypeIntegerMaxSize => 16;
             public override bool IsArgPassedByRef(TypeHandle th) => false;
@@ -526,10 +553,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             // R4, R5, R6, R7, R8, R9, R10, R11, R14
             public sealed override int NumCalleeSavedRegisters => 9;
             // Callee-saves, argument registers
-            public sealed override int SizeOfTransitionBlock => SizeOfCalleeSavedRegisters + SizeOfArgumentRegisters;
+            public sealed override int SizeOfTransitionBlock =>
+                SizeOfCalleeSavedRegisters + SizeOfArgumentRegisters;
             public sealed override int OffsetOfArgumentRegisters => SizeOfCalleeSavedRegisters;
             // D0..D7
-            public sealed override int OffsetOfFloatArgumentRegisters => 8 * sizeof(double) + PointerSize;
+            public sealed override int OffsetOfFloatArgumentRegisters =>
+                8 * sizeof(double) + PointerSize;
             public sealed override int EnregisteredParamTypeMaxSize => 0;
             public sealed override int EnregisteredReturnTypeIntegerMaxSize => 4;
 
@@ -537,7 +566,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             public sealed override bool IsArgPassedByRef(TypeHandle th) => false;
 
-            public sealed override int GetRetBuffArgOffset(bool hasThis) => OffsetOfArgumentRegisters + (hasThis ? PointerSize : 0);
+            public sealed override int GetRetBuffArgOffset(bool hasThis) =>
+                OffsetOfArgumentRegisters + (hasThis ? PointerSize : 0);
         }
 
         private class Arm32ElTransitionBlock : Arm32TransitionBlock
@@ -559,8 +589,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             // X29, X30, X19, X20, X21, X22, X23, X24, X25, X26, X27, X28
             public override int NumCalleeSavedRegisters => 12;
             // Callee-saves, padding, m_x8RetBuffReg, argument registers
-            public override int SizeOfTransitionBlock => SizeOfCalleeSavedRegisters + 2 * PointerSize + SizeOfArgumentRegisters;
-            public override int OffsetOfArgumentRegisters => SizeOfCalleeSavedRegisters + 2 * PointerSize;
+            public override int SizeOfTransitionBlock =>
+                SizeOfCalleeSavedRegisters + 2 * PointerSize + SizeOfArgumentRegisters;
+            public override int OffsetOfArgumentRegisters =>
+                SizeOfCalleeSavedRegisters + 2 * PointerSize;
             private int OffsetOfX8Register => OffsetOfArgumentRegisters - PointerSize;
             public override int OffsetOfFirstGCRefMapSlot => OffsetOfX8Register;
 
@@ -575,7 +607,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 Debug.Assert(th.IsValueType());
 
                 // Composites greater than 16 bytes are passed by reference
-                return (th.GetSize() > EnregisteredParamTypeMaxSize) && !th.IsHomogeneousAggregate();
+                return (th.GetSize() > EnregisteredParamTypeMaxSize)
+                    && !th.IsHomogeneousAggregate();
             }
 
             public override int GetRetBuffArgOffset(bool hasThis) => OffsetOfX8Register;

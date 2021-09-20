@@ -10,12 +10,11 @@ using Xunit;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NorthwindODataQueryTests : ODataQueryTestBase, IClassFixture<NorthwindODataQueryTestFixture>
+    public class NorthwindODataQueryTests
+        : ODataQueryTestBase,
+          IClassFixture<NorthwindODataQueryTestFixture>
     {
-        public NorthwindODataQueryTests(NorthwindODataQueryTestFixture fixture)
-            : base(fixture)
-        {
-        }
+        public NorthwindODataQueryTests(NorthwindODataQueryTestFixture fixture) : base(fixture) { }
 
         [ConditionalFact]
         public async Task Basic_query_customers()
@@ -50,7 +49,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalFact]
         public async Task Query_for_alfki_expand_orders()
         {
-            var requestUri = string.Format(@"{0}/odata/Customers?$filter=CustomerID eq 'ALFKI'&$expand=Orders", BaseAddress);
+            var requestUri = string.Format(
+                @"{0}/odata/Customers?$filter=CustomerID eq 'ALFKI'&$expand=Orders",
+                BaseAddress
+            );
             var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
             var response = await Client.SendAsync(request);
 

@@ -13,8 +13,7 @@ namespace Microsoft.AspNetCore.Http
         /// </summary>
         /// <param name="message">The message to associate with this exception.</param>
         /// <param name="statusCode">The HTTP status code to associate with this exception.</param>
-        public BadHttpRequestException(string message, int statusCode)
-            : base(message)
+        public BadHttpRequestException(string message, int statusCode) : base(message)
         {
             StatusCode = statusCode;
         }
@@ -23,8 +22,7 @@ namespace Microsoft.AspNetCore.Http
         /// Initializes a new instance of the <see cref="BadHttpRequestException"/> class with the <see cref="StatusCode"/> set to 400 Bad Request.
         /// </summary>
         /// <param name="message">The message to associate with this exception</param>
-        public BadHttpRequestException(string message)
-            : base(message)
+        public BadHttpRequestException(string message) : base(message)
         {
             StatusCode = StatusCodes.Status400BadRequest;
         }
@@ -35,8 +33,11 @@ namespace Microsoft.AspNetCore.Http
         /// <param name="message">The message to associate with this exception.</param>
         /// <param name="statusCode">The HTTP status code to associate with this exception.</param>
         /// <param name="innerException">The inner exception to associate with this exception</param>
-        public BadHttpRequestException(string message, int statusCode, Exception innerException)
-            : base(message, innerException)
+        public BadHttpRequestException(
+            string message,
+            int statusCode,
+            Exception innerException
+        ) : base(message, innerException)
         {
             StatusCode = statusCode;
         }

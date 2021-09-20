@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
     /// 2. Name Style
     /// 3. Naming Rule (points to Symbol Specification IDs)
     /// </summary>
-    internal sealed class NamingStylePreferences : IEquatable<NamingStylePreferences>, IObjectWritable
+    internal sealed class NamingStylePreferences
+        : IEquatable<NamingStylePreferences>,
+          IObjectWritable
     {
         static NamingStylePreferences()
         {
@@ -39,8 +41,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         internal NamingStylePreferences(
             ImmutableArray<SymbolSpecification> symbolSpecifications,
             ImmutableArray<NamingStyle> namingStyles,
-            ImmutableArray<SerializableNamingRule> namingRules)
-        {
+            ImmutableArray<SerializableNamingRule> namingRules
+        ) {
             SymbolSpecifications = symbolSpecifications;
             NamingStyles = namingStyles;
             NamingRules = namingRules;
@@ -48,28 +50,34 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             _lazyRules = new Lazy<NamingStyleRules>(CreateRules, isThreadSafe: true);
         }
 
-        public static NamingStylePreferences Default => FromXElement(XElement.Parse(DefaultNamingPreferencesString));
+        public static NamingStylePreferences Default =>
+            FromXElement(XElement.Parse(DefaultNamingPreferencesString));
 
         public static string DefaultNamingPreferencesString => _defaultNamingPreferencesString;
 
-        internal NamingStyle GetNamingStyle(Guid namingStyleID)
-            => NamingStyles.Single(s => s.ID == namingStyleID);
+        internal NamingStyle GetNamingStyle(Guid namingStyleID) =>
+            NamingStyles.Single(s => s.ID == namingStyleID);
 
-        internal SymbolSpecification GetSymbolSpecification(Guid symbolSpecificationID)
-            => SymbolSpecifications.Single(s => s.ID == symbolSpecificationID);
+        internal SymbolSpecification GetSymbolSpecification(Guid symbolSpecificationID) =>
+            SymbolSpecifications.Single(s => s.ID == symbolSpecificationID);
 
         public NamingStyleRules Rules => _lazyRules.Value;
 
-        public NamingStyleRules CreateRules()
-            => new(NamingRules.Select(r => r.GetRule(this)).ToImmutableArray());
+        public NamingStyleRules CreateRules() =>
+            new(NamingRules.Select(r => r.GetRule(this)).ToImmutableArray());
 
         internal XElement CreateXElement()
         {
-            return new XElement("NamingPreferencesInfo",
+            return new XElement(
+                "NamingPreferencesInfo",
                 new XAttribute("SerializationVersion", s_serializationVersion),
-                new XElement(nameof(SymbolSpecifications), SymbolSpecifications.Select(s => s.CreateXElement())),
+                new XElement(
+                    nameof(SymbolSpecifications),
+                    SymbolSpecifications.Select(s => s.CreateXElement())
+                ),
                 new XElement(nameof(NamingStyles), NamingStyles.Select(n => n.CreateXElement())),
-                new XElement(nameof(NamingRules), NamingRules.Select(n => n.CreateXElement())));
+                new XElement(nameof(NamingRules), NamingRules.Select(n => n.CreateXElement()))
+            );
         }
 
         internal static NamingStylePreferences FromXElement(XElement element)
@@ -77,12 +85,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             element = GetUpgradedSerializationIfNecessary(element);
 
             return new NamingStylePreferences(
-                element.Element(nameof(SymbolSpecifications)).Elements(nameof(SymbolSpecification))
-                       .Select(SymbolSpecification.FromXElement).ToImmutableArray(),
-                element.Element(nameof(NamingStyles)).Elements(nameof(NamingStyle))
-                       .Select(NamingStyle.FromXElement).ToImmutableArray(),
-                element.Element(nameof(NamingRules)).Elements(nameof(SerializableNamingRule))
-                       .Select(SerializableNamingRule.FromXElement).ToImmutableArray());
+                element.Element(nameof(SymbolSpecifications))
+                    .Elements(nameof(SymbolSpecification))
+                    .Select(SymbolSpecification.FromXElement)
+                    .ToImmutableArray(),
+                element.Element(nameof(NamingStyles))
+                    .Elements(nameof(NamingStyle))
+                    .Select(NamingStyle.FromXElement)
+                    .ToImmutableArray(),
+                element.Element(nameof(NamingRules))
+                    .Elements(nameof(SerializableNamingRule))
+                    .Select(SerializableNamingRule.FromXElement)
+                    .ToImmutableArray()
+            );
         }
 
         public bool ShouldReuseInSerialization => false;
@@ -99,11 +114,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             return new NamingStylePreferences(
                 reader.ReadArray(r => SymbolSpecification.ReadFrom(r)),
                 reader.ReadArray(r => NamingStyle.ReadFrom(r)),
-                reader.ReadArray(r => SerializableNamingRule.ReadFrom(r)));
+                reader.ReadArray(r => SerializableNamingRule.ReadFrom(r))
+            );
         }
 
-        public override bool Equals(object obj)
-            => Equals(obj as NamingStylePreferences);
+        public override bool Equals(object obj) => Equals(obj as NamingStylePreferences);
 
         public bool Equals(NamingStylePreferences other)
         {
@@ -129,17 +144,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             return left.Equals(right);
         }
 
-        public static bool operator !=(NamingStylePreferences left, NamingStylePreferences right)
-            => !(left == right);
+        public static bool operator !=(NamingStylePreferences left, NamingStylePreferences right) =>
+            !(left == right);
 
         public override int GetHashCode()
         {
-            return Hash.Combine(Hash.CombineValues(SymbolSpecifications),
-                Hash.Combine(Hash.CombineValues(NamingStyles),
-                    Hash.CombineValues(NamingRules)));
+            return Hash.Combine(
+                Hash.CombineValues(SymbolSpecifications),
+                Hash.Combine(Hash.CombineValues(NamingStyles), Hash.CombineValues(NamingRules))
+            );
         }
 
-        private static readonly string _defaultNamingPreferencesString = $@"
+        private static readonly string _defaultNamingPreferencesString =
+            $@"
 <NamingPreferencesInfo SerializationVersion=""{s_serializationVersion}"">
   <SymbolSpecifications>
     <SymbolSpecification ID=""5c545a62-b14d-460a-88d8-e936c0a39316"" Name=""{CompilerExtensionsResources.Class}"">
@@ -388,7 +405,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 
         private static XElement GetUpgradedSerializationIfNecessary(XElement rootElement)
         {
-            var serializationVersion = int.Parse(rootElement.Attribute("SerializationVersion").Value);
+            var serializationVersion = int.Parse(
+                rootElement.Attribute("SerializationVersion").Value
+            );
 
             if (serializationVersion == 4)
             {
@@ -400,18 +419,21 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             // The next one should check serializationVersion == 5 and update it to 6.
             // It is also important to create a new roaming location in NamingStyleOptions.NamingPreferences
             // so that we never store the new format in an older version.
-            Debug.Assert(s_serializationVersion == 5, "After increasing the serialization version, add an upgrade path here.");
+            Debug.Assert(
+                s_serializationVersion == 5,
+                "After increasing the serialization version, add an upgrade path here."
+            );
 
             return serializationVersion == s_serializationVersion
-                ? rootElement
-                : XElement.Parse(DefaultNamingPreferencesString);
+              ? rootElement
+              : XElement.Parse(DefaultNamingPreferencesString);
         }
 
         private static void UpgradeSerialization_4To5(XElement rootElement)
         {
-            var methodElements = rootElement
-                .Descendants()
-                .Where(e => e.Name.LocalName == "SymbolKind" && e.Value == "Method").ToList();
+            var methodElements = rootElement.Descendants()
+                .Where(e => e.Name.LocalName == "SymbolKind" && e.Value == "Method")
+                .ToList();
 
             foreach (var element in methodElements)
             {

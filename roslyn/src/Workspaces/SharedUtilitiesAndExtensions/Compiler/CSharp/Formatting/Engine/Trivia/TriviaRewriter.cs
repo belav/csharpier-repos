@@ -29,8 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             SyntaxNode node,
             SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector> spanToFormat,
             Dictionary<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData> map,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             Contract.ThrowIfNull(node);
             Contract.ThrowIfNull(map);
 
@@ -44,18 +44,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             PreprocessTriviaListMap(map, cancellationToken);
         }
 
-        public SyntaxNode Transform()
-            => Visit(_node);
+        public SyntaxNode Transform() => Visit(_node);
 
         private void PreprocessTriviaListMap(
             Dictionary<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData> map,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             foreach (var pair in map)
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var (trailingTrivia, leadingTrivia) = GetTrailingAndLeadingTrivia(pair, cancellationToken);
+                var (trailingTrivia, leadingTrivia) = GetTrailingAndLeadingTrivia(
+                    pair,
+                    cancellationToken
+                );
 
                 if (pair.Key.Item1.RawKind != 0)
                 {
@@ -70,13 +72,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         }
 
         private (SyntaxTriviaList trailingTrivia, SyntaxTriviaList leadingTrivia) GetTrailingAndLeadingTrivia(
-            KeyValuePair<ValueTuple<SyntaxToken, SyntaxToken>,
-            TriviaData> pair,
-            CancellationToken cancellationToken)
-        {
+            KeyValuePair<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData> pair,
+            CancellationToken cancellationToken
+        ) {
             if (pair.Key.Item1.RawKind == 0)
             {
-                return (default(SyntaxTriviaList), GetLeadingTriviaAtBeginningOfTree(pair.Key, pair.Value, cancellationToken));
+                return (
+                    default(SyntaxTriviaList),
+                    GetLeadingTriviaAtBeginningOfTree(pair.Key, pair.Value, cancellationToken)
+                );
             }
 
             if (pair.Value is TriviaDataWithList csharpTriviaData)
@@ -84,8 +88,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 var triviaList = csharpTriviaData.GetTriviaList(cancellationToken);
                 var index = GetFirstEndOfLineIndexOrRightBeforeComment(triviaList);
 
-                return (TriviaHelpers.CreateTriviaListFromTo(triviaList, 0, index),
-                        TriviaHelpers.CreateTriviaListFromTo(triviaList, index + 1, triviaList.Count - 1));
+                return (
+                    TriviaHelpers.CreateTriviaListFromTo(triviaList, 0, index),
+                    TriviaHelpers.CreateTriviaListFromTo(
+                        triviaList,
+                        index + 1,
+                        triviaList.Count - 1
+                    )
+                );
             }
 
             // whitespace trivia case such as spaces/tabs/new lines
@@ -137,8 +147,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private SyntaxTriviaList GetLeadingTriviaAtBeginningOfTree(
             ValueTuple<SyntaxToken, SyntaxToken> pair,
             TriviaData triviaData,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             if (triviaData is TriviaDataWithList csharpTriviaData)
             {
                 return csharpTriviaData.GetTriviaList(cancellationToken);
@@ -208,7 +218,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             return token;
         }
 
-        private static SyntaxToken CreateNewToken(SyntaxTriviaList leadingTrivia, SyntaxToken token, SyntaxTriviaList trailingTrivia)
-            => token.With(leadingTrivia, trailingTrivia);
+        private static SyntaxToken CreateNewToken(
+            SyntaxTriviaList leadingTrivia,
+            SyntaxToken token,
+            SyntaxTriviaList trailingTrivia
+        ) => token.With(leadingTrivia, trailingTrivia);
     }
 }

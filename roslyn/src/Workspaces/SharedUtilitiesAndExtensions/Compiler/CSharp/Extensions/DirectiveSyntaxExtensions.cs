@@ -14,8 +14,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
     internal static partial class DirectiveSyntaxExtensions
     {
-        private static readonly ConditionalWeakTable<SyntaxNode, DirectiveInfo> s_rootToDirectiveInfo =
-            new();
+        private static readonly ConditionalWeakTable<
+            SyntaxNode,
+            DirectiveInfo
+        > s_rootToDirectiveInfo = new();
 
         private static SyntaxNode GetAbsoluteRoot(this SyntaxNode node)
         {
@@ -34,28 +36,46 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             return node;
         }
 
-        private static DirectiveInfo GetDirectiveInfo(SyntaxNode node, CancellationToken cancellationToken)
-        {
+        private static DirectiveInfo GetDirectiveInfo(
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        ) {
             var root = node.GetAbsoluteRoot();
-            var info = s_rootToDirectiveInfo.GetValue(root, r =>
-            {
-                var directiveMap = new Dictionary<DirectiveTriviaSyntax, DirectiveTriviaSyntax>(
-                    DirectiveSyntaxEqualityComparer.Instance);
-                var conditionalMap = new Dictionary<DirectiveTriviaSyntax, IReadOnlyList<DirectiveTriviaSyntax>>(
-                    DirectiveSyntaxEqualityComparer.Instance);
+            var info = s_rootToDirectiveInfo.GetValue(
+                root,
+                r =>
+                {
+                    var directiveMap = new Dictionary<DirectiveTriviaSyntax, DirectiveTriviaSyntax>(
+                        DirectiveSyntaxEqualityComparer.Instance
+                    );
+                    var conditionalMap = new Dictionary<
+                        DirectiveTriviaSyntax,
+                        IReadOnlyList<DirectiveTriviaSyntax>
+                    >(DirectiveSyntaxEqualityComparer.Instance);
 
-                var walker = new DirectiveWalker(directiveMap, conditionalMap, cancellationToken);
-                walker.Visit(r);
-                walker.Finish();
+                    var walker = new DirectiveWalker(
+                        directiveMap,
+                        conditionalMap,
+                        cancellationToken
+                    );
+                    walker.Visit(r);
+                    walker.Finish();
 
-                return new DirectiveInfo(directiveMap, conditionalMap, inactiveRegionLines: null);
-            });
+                    return new DirectiveInfo(
+                        directiveMap,
+                        conditionalMap,
+                        inactiveRegionLines: null
+                    );
+                }
+            );
 
             return info;
         }
 
-        internal static DirectiveTriviaSyntax GetMatchingDirective(this DirectiveTriviaSyntax directive, CancellationToken cancellationToken)
-        {
+        internal static DirectiveTriviaSyntax GetMatchingDirective(
+            this DirectiveTriviaSyntax directive,
+            CancellationToken cancellationToken
+        ) {
             if (directive == null)
             {
                 throw new ArgumentNullException(nameof(directive));
@@ -67,14 +87,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             return result;
         }
 
-        internal static IReadOnlyList<DirectiveTriviaSyntax> GetMatchingConditionalDirectives(this DirectiveTriviaSyntax directive, CancellationToken cancellationToken)
-        {
+        internal static IReadOnlyList<DirectiveTriviaSyntax> GetMatchingConditionalDirectives(
+            this DirectiveTriviaSyntax directive,
+            CancellationToken cancellationToken
+        ) {
             if (directive == null)
             {
                 throw new ArgumentNullException(nameof(directive));
             }
 
-            var directiveConditionalMap = GetDirectiveInfo(directive, cancellationToken).ConditionalMap;
+            var directiveConditionalMap =
+                GetDirectiveInfo(directive, cancellationToken).ConditionalMap;
             directiveConditionalMap.TryGetValue(directive, out var result);
 
             return result;

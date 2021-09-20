@@ -40,18 +40,32 @@ namespace Newtonsoft.Json.Tests.Utilities
     public class ConvertUtilsTests : TestFixtureBase
     {
 #if HAS_CUSTOM_DOUBLE_PARSE
-        private void AssertDoubleTryParse(string s, ParseResult expectedResult, double? expectedValue)
-        {
+        private void AssertDoubleTryParse(
+            string s,
+            ParseResult expectedResult,
+            double? expectedValue
+        ) {
             double d;
             char[] c = s.ToCharArray();
             ParseResult result = ConvertUtils.DoubleTryParse(c, 0, c.Length, out d);
 
             double d2;
-            bool result2 = double.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out d2)
+            bool result2 =
+                double.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out d2)
                 && !s.StartsWith(".")
                 && !s.EndsWith(".")
-                && !(s.StartsWith("0") && s.Length > 1 && !s.StartsWith("0.") && !s.StartsWith("0e", StringComparison.OrdinalIgnoreCase))
-                && !(s.StartsWith("-0") && s.Length > 2 && !s.StartsWith("-0.") && !s.StartsWith("-0e", StringComparison.OrdinalIgnoreCase))
+                && !(
+                    s.StartsWith("0")
+                    && s.Length > 1
+                    && !s.StartsWith("0.")
+                    && !s.StartsWith("0e", StringComparison.OrdinalIgnoreCase)
+                )
+                && !(
+                    s.StartsWith("-0")
+                    && s.Length > 2
+                    && !s.StartsWith("-0.")
+                    && !s.StartsWith("-0e", StringComparison.OrdinalIgnoreCase)
+                )
                 && s.IndexOf(".e", StringComparison.OrdinalIgnoreCase) == -1;
 
             Assert.AreEqual(expectedResult, result);
@@ -63,7 +77,11 @@ namespace Newtonsoft.Json.Tests.Utilities
 
                 Assert.AreEqual(expectedValue.Value, d, "Input string: " + s);
 
-                Assert.AreEqual(expectedValue.Value, d2, "DoubleTryParse result is not equal to double.Parse. Input string: " + s);
+                Assert.AreEqual(
+                    expectedValue.Value,
+                    d2,
+                    "DoubleTryParse result is not equal to double.Parse. Input string: " + s
+                );
             }
         }
 
@@ -126,8 +144,16 @@ namespace Newtonsoft.Json.Tests.Utilities
             AssertDoubleTryParse("1E--23", ParseResult.Invalid, null);
             AssertDoubleTryParse("E23", ParseResult.Invalid, null);
 
-            AssertDoubleTryParse("4.94065645841247E-324", ParseResult.Success, 4.94065645841247E-324);
-            AssertDoubleTryParse("4.94065645841247E-342", ParseResult.Success, 4.94065645841247E-342);
+            AssertDoubleTryParse(
+                "4.94065645841247E-324",
+                ParseResult.Success,
+                4.94065645841247E-324
+            );
+            AssertDoubleTryParse(
+                "4.94065645841247E-342",
+                ParseResult.Success,
+                4.94065645841247E-342
+            );
             AssertDoubleTryParse("4.94065645841247E-555", ParseResult.Success, 0);
 
             AssertDoubleTryParse("1.7976931348623157E+308", ParseResult.Success, double.MaxValue);
@@ -146,7 +172,11 @@ namespace Newtonsoft.Json.Tests.Utilities
         {
             AssertDoubleTryParse("4.94065645841247e-324", ParseResult.Success, double.Epsilon);
 
-            AssertDoubleTryParse("4.9406564584124654E-324", ParseResult.Success, 4.9406564584124654E-324);
+            AssertDoubleTryParse(
+                "4.9406564584124654E-324",
+                ParseResult.Success,
+                4.9406564584124654E-324
+            );
             AssertDoubleTryParse("4.9406564584124654E-325", ParseResult.Success, 0);
             AssertDoubleTryParse("4.94065645841247E-460", ParseResult.Success, 0);
             AssertDoubleTryParse("4.94065645841247E-461", ParseResult.Success, 0);
@@ -160,18 +190,32 @@ namespace Newtonsoft.Json.Tests.Utilities
         }
 #endif
 
-        private void AssertDecimalTryParse(string s, ParseResult expectedResult, decimal? expectedValue)
-        {
+        private void AssertDecimalTryParse(
+            string s,
+            ParseResult expectedResult,
+            decimal? expectedValue
+        ) {
             decimal d;
             char[] c = s.ToCharArray();
             ParseResult result = ConvertUtils.DecimalTryParse(c, 0, c.Length, out d);
 
             decimal d2;
-            bool result2 = decimal.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out d2)
+            bool result2 =
+                decimal.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out d2)
                 && !s.StartsWith(".")
                 && !s.EndsWith(".")
-                && !(s.StartsWith("0") && s.Length > 1 && !s.StartsWith("0.") && !s.StartsWith("0e", StringComparison.OrdinalIgnoreCase))
-                && !(s.StartsWith("-0") && s.Length > 2 && !s.StartsWith("-0.") && !s.StartsWith("-0e", StringComparison.OrdinalIgnoreCase))
+                && !(
+                    s.StartsWith("0")
+                    && s.Length > 1
+                    && !s.StartsWith("0.")
+                    && !s.StartsWith("0e", StringComparison.OrdinalIgnoreCase)
+                )
+                && !(
+                    s.StartsWith("-0")
+                    && s.Length > 2
+                    && !s.StartsWith("-0.")
+                    && !s.StartsWith("-0e", StringComparison.OrdinalIgnoreCase)
+                )
                 && s.IndexOf(".e", StringComparison.OrdinalIgnoreCase) == -1;
 
             Assert.AreEqual(expectedResult, result);
@@ -183,7 +227,11 @@ namespace Newtonsoft.Json.Tests.Utilities
 
                 Assert.AreEqual(expectedValue.Value, d, "Input string: " + s);
 
-                Assert.AreEqual(expectedValue.Value, d2, "DecimalTryParse result is not equal to decimal.Parse. Input string: " + s);
+                Assert.AreEqual(
+                    expectedValue.Value,
+                    d2,
+                    "DecimalTryParse result is not equal to decimal.Parse. Input string: " + s
+                );
 
                 Assert.AreEqual(expectedValue.Value.ToString(), d.ToString());
             }
@@ -203,23 +251,79 @@ namespace Newtonsoft.Json.Tests.Utilities
             AssertDecimalTryParse("1000.000000000000", ParseResult.Success, 1000.000000000000M);
             AssertDecimalTryParse("87.50", ParseResult.Success, 87.50M);
 
-            AssertDecimalTryParse("1.2345678901234567890123456789", ParseResult.Success, 1.2345678901234567890123456789M);
-            AssertDecimalTryParse("1.0000000000000000000000000001", ParseResult.Success, 1.0000000000000000000000000001M);
-            AssertDecimalTryParse("-1.0000000000000000000000000001", ParseResult.Success, -1.0000000000000000000000000001M);
+            AssertDecimalTryParse(
+                "1.2345678901234567890123456789",
+                ParseResult.Success,
+                1.2345678901234567890123456789M
+            );
+            AssertDecimalTryParse(
+                "1.0000000000000000000000000001",
+                ParseResult.Success,
+                1.0000000000000000000000000001M
+            );
+            AssertDecimalTryParse(
+                "-1.0000000000000000000000000001",
+                ParseResult.Success,
+                -1.0000000000000000000000000001M
+            );
 
-            AssertDecimalTryParse(decimal.MaxValue.ToString(CultureInfo.InvariantCulture), ParseResult.Success, decimal.MaxValue);
-            AssertDecimalTryParse(decimal.MinValue.ToString(CultureInfo.InvariantCulture), ParseResult.Success, decimal.MinValue);
+            AssertDecimalTryParse(
+                decimal.MaxValue.ToString(CultureInfo.InvariantCulture),
+                ParseResult.Success,
+                decimal.MaxValue
+            );
+            AssertDecimalTryParse(
+                decimal.MinValue.ToString(CultureInfo.InvariantCulture),
+                ParseResult.Success,
+                decimal.MinValue
+            );
 
-            AssertDecimalTryParse("12345678901234567890123456789", ParseResult.Success, 12345678901234567890123456789M);
-            AssertDecimalTryParse("12345678901234567890123456789.4", ParseResult.Success, 12345678901234567890123456789M);
-            AssertDecimalTryParse("12345678901234567890123456789.5", ParseResult.Success, 12345678901234567890123456790M);
-            AssertDecimalTryParse("-12345678901234567890123456789", ParseResult.Success, -12345678901234567890123456789M);
-            AssertDecimalTryParse("-12345678901234567890123456789.4", ParseResult.Success, -12345678901234567890123456789M);
-            AssertDecimalTryParse("-12345678901234567890123456789.5", ParseResult.Success, -12345678901234567890123456790M);
+            AssertDecimalTryParse(
+                "12345678901234567890123456789",
+                ParseResult.Success,
+                12345678901234567890123456789M
+            );
+            AssertDecimalTryParse(
+                "12345678901234567890123456789.4",
+                ParseResult.Success,
+                12345678901234567890123456789M
+            );
+            AssertDecimalTryParse(
+                "12345678901234567890123456789.5",
+                ParseResult.Success,
+                12345678901234567890123456790M
+            );
+            AssertDecimalTryParse(
+                "-12345678901234567890123456789",
+                ParseResult.Success,
+                -12345678901234567890123456789M
+            );
+            AssertDecimalTryParse(
+                "-12345678901234567890123456789.4",
+                ParseResult.Success,
+                -12345678901234567890123456789M
+            );
+            AssertDecimalTryParse(
+                "-12345678901234567890123456789.5",
+                ParseResult.Success,
+                -12345678901234567890123456790M
+            );
 
-            AssertDecimalTryParse("1.2345678901234567890123456789e-25", ParseResult.Success, 0.0000000000000000000000001235M);
-            AssertDecimalTryParse("1.2345678901234567890123456789e-26", ParseResult.Success, 0.0000000000000000000000000123M);
-            AssertDecimalTryParse("1.2345678901234567890123456789e-28", ParseResult.Success, 0.0000000000000000000000000001M);
+            AssertDecimalTryParse(
+                "1.2345678901234567890123456789e-25",
+                ParseResult.Success,
+                0.0000000000000000000000001235M
+            );
+            AssertDecimalTryParse(
+                "1.2345678901234567890123456789e-26",
+                ParseResult.Success,
+                0.0000000000000000000000000123M
+            );
+            AssertDecimalTryParse(
+                "1.2345678901234567890123456789e-28",
+                ParseResult.Success,
+                0.0000000000000000000000000001M
+            );
             AssertDecimalTryParse("1.2345678901234567890123456789e-29", ParseResult.Success, 0M);
 
 #if !(NET20 || NET35)
@@ -228,7 +332,11 @@ namespace Newtonsoft.Json.Tests.Utilities
 
             for (decimal i = -100; i < 100; i += 0.1m)
             {
-                AssertDecimalTryParse(i.ToString(CultureInfo.InvariantCulture), ParseResult.Success, i);
+                AssertDecimalTryParse(
+                    i.ToString(CultureInfo.InvariantCulture),
+                    ParseResult.Success,
+                    i
+                );
             }
 
             AssertDecimalTryParse("1E+29", ParseResult.Overflow, null);
@@ -333,7 +441,10 @@ namespace Newtonsoft.Json.Tests.Utilities
             {
                 for (int k = 2; k < 10; k++)
                 {
-                    string t = j.ToString(CultureInfo.InvariantCulture) + k.ToString(CultureInfo.InvariantCulture) + "47483647";
+                    string t =
+                        j.ToString(CultureInfo.InvariantCulture)
+                        + k.ToString(CultureInfo.InvariantCulture)
+                        + "47483647";
 
                     c = t.ToCharArray();
                     result = ConvertUtils.Int32TryParse(c, 0, c.Length, out i);
@@ -346,7 +457,11 @@ namespace Newtonsoft.Json.Tests.Utilities
             {
                 for (int k = 2; k < 10; k++)
                 {
-                    string t = "-" + j.ToString(CultureInfo.InvariantCulture) + k.ToString(CultureInfo.InvariantCulture) + "47483648";
+                    string t =
+                        "-"
+                        + j.ToString(CultureInfo.InvariantCulture)
+                        + k.ToString(CultureInfo.InvariantCulture)
+                        + "47483648";
 
                     c = t.ToCharArray();
                     result = ConvertUtils.Int32TryParse(c, 0, c.Length, out i);

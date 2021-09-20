@@ -31,9 +31,7 @@ namespace Microsoft.AspNetCore.Builder
                 throw new ArgumentNullException(nameof(app));
             }
 
-            return app.UseMvc(routes =>
-            {
-            });
+            return app.UseMvc(routes => { });
         }
 
         /// <summary>
@@ -50,12 +48,15 @@ namespace Microsoft.AspNetCore.Builder
                 throw new ArgumentNullException(nameof(app));
             }
 
-            return app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            return app.UseMvc(
+                routes =>
+                {
+                    routes.MapRoute(
+                        name: "default",
+                        template: "{controller=Home}/{action=Index}/{id?}"
+                    );
+                }
+            );
         }
 
         /// <summary>
@@ -66,8 +67,8 @@ namespace Microsoft.AspNetCore.Builder
         /// <returns>A reference to this instance after the operation has completed.</returns>
         public static IApplicationBuilder UseMvc(
             this IApplicationBuilder app,
-            Action<IRouteBuilder> configureRoutes)
-        {
+            Action<IRouteBuilder> configureRoutes
+        ) {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
@@ -85,9 +86,9 @@ namespace Microsoft.AspNetCore.Builder
             if (options.Value.EnableEndpointRouting)
             {
                 var message =
-                    "Endpoint Routing does not support 'IApplicationBuilder.UseMvc(...)'. To use " +
-                    "'IApplicationBuilder.UseMvc' set 'MvcOptions.EnableEndpointRouting = false' inside " +
-                    "'ConfigureServices(...).";
+                    "Endpoint Routing does not support 'IApplicationBuilder.UseMvc(...)'. To use "
+                    + "'IApplicationBuilder.UseMvc' set 'MvcOptions.EnableEndpointRouting = false' inside "
+                    + "'ConfigureServices(...).";
                 throw new InvalidOperationException(message);
             }
 
@@ -98,7 +99,10 @@ namespace Microsoft.AspNetCore.Builder
 
             configureRoutes(routes);
 
-            routes.Routes.Insert(0, AttributeRouting.CreateAttributeMegaRoute(app.ApplicationServices));
+            routes.Routes.Insert(
+                0,
+                AttributeRouting.CreateAttributeMegaRoute(app.ApplicationServices)
+            );
 
             return app.UseRouter(routes.Build());
         }
@@ -135,10 +139,13 @@ namespace Microsoft.AspNetCore.Builder
             // We use the MvcMarkerService to make sure if all the services were added.
             if (app.ApplicationServices.GetService(typeof(MvcMarkerService)) == null)
             {
-                throw new InvalidOperationException(Resources.FormatUnableToFindServices(
-                    nameof(IServiceCollection),
-                    "AddMvc",
-                    "ConfigureServices(...)"));
+                throw new InvalidOperationException(
+                    Resources.FormatUnableToFindServices(
+                        nameof(IServiceCollection),
+                        "AddMvc",
+                        "ConfigureServices(...)"
+                    )
+                );
             }
         }
     }

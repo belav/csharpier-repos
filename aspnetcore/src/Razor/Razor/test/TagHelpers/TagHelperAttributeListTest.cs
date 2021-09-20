@@ -14,12 +14,13 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         [Theory]
         [MemberData(
             nameof(ReadOnlyTagHelperAttributeListTest.IntIndexerData),
-            MemberType = typeof(ReadOnlyTagHelperAttributeListTest))]
+            MemberType = typeof(ReadOnlyTagHelperAttributeListTest)
+        )]
         public void IntIndexer_GetsExpectedAttribute(
             IEnumerable<TagHelperAttribute> initialAttributes,
             int indexToLookup,
-            TagHelperAttribute expectedAttribute)
-        {
+            TagHelperAttribute expectedAttribute
+        ) {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -27,7 +28,11 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             var attribute = attributes[indexToLookup];
 
             // Assert
-            Assert.Equal(expectedAttribute, attribute, CaseSensitiveTagHelperAttributeComparer.Default);
+            Assert.Equal(
+                expectedAttribute,
+                attribute,
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
         }
 
         public static TheoryData IntIndexerSetData
@@ -43,14 +48,20 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
                     IEnumerable<TagHelperAttribute>, // initialAttributes
                     int, // indexToSet
                     TagHelperAttribute, // setValue
-                    IEnumerable<TagHelperAttribute>> // expectedAttributes
+                    IEnumerable<TagHelperAttribute>
+                > // expectedAttributes
                 {
                     { new[] { first }, 0, set, new[] { set } },
                     { new[] { first, second }, 0, set, new[] { set, second } },
                     { new[] { first, second }, 1, set, new[] { first, set } },
-                    { new[] { first, second, third}, 1, set, new[] { first, set, third } },
+                    { new[] { first, second, third }, 1, set, new[] { first, set, third } },
                     { new[] { first, second, third }, 2, set, new[] { first, second, set } },
-                    { new[] { first, first, second, third}, 1, set, new[] { first, set, second, third } },
+                    {
+                        new[] { first, first, second, third },
+                        1,
+                        set,
+                        new[] { first, set, second, third }
+                    },
                 };
             }
         }
@@ -61,8 +72,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             IEnumerable<TagHelperAttribute> initialAttributes,
             int indexToSet,
             TagHelperAttribute setValue,
-            IEnumerable<TagHelperAttribute> expectedAttributes)
-        {
+            IEnumerable<TagHelperAttribute> expectedAttributes
+        ) {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -70,55 +81,64 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             attributes[indexToSet] = setValue;
 
             // Assert
-            Assert.Equal(expectedAttributes, attributes, CaseSensitiveTagHelperAttributeComparer.Default);
+            Assert.Equal(
+                expectedAttributes,
+                attributes,
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
         }
 
         [Theory]
         [MemberData(
             nameof(ReadOnlyTagHelperAttributeListTest.IntIndexerThrowData),
-            MemberType = typeof(ReadOnlyTagHelperAttributeListTest))]
+            MemberType = typeof(ReadOnlyTagHelperAttributeListTest)
+        )]
         public void IntIndexer_Getter_ThrowsIfIndexInvalid(int index)
         {
             // Arrange
-            var attributes = new TagHelperAttributeList(new[]
-                {
-                    new TagHelperAttribute("A", "AV"),
-                    new TagHelperAttribute("B", "BV")
-                });
+            var attributes = new TagHelperAttributeList(
+                new[] { new TagHelperAttribute("A", "AV"), new TagHelperAttribute("B", "BV") }
+            );
 
             // Act & Assert
-            var exception = Assert.Throws<ArgumentOutOfRangeException>("index", () => attributes[index]);
+            var exception = Assert.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => attributes[index]
+            );
         }
 
         [Theory]
         [MemberData(
             nameof(ReadOnlyTagHelperAttributeListTest.IntIndexerThrowData),
-            MemberType = typeof(ReadOnlyTagHelperAttributeListTest))]
+            MemberType = typeof(ReadOnlyTagHelperAttributeListTest)
+        )]
         public void IntIndexer_Setter_ThrowsIfIndexInvalid(int index)
         {
             // Arrange
-            var attributes = new TagHelperAttributeList(new[]
-            {
-                new TagHelperAttribute("A", "AV"),
-                new TagHelperAttribute("B", "BV")
-            });
+            var attributes = new TagHelperAttributeList(
+                new[] { new TagHelperAttribute("A", "AV"), new TagHelperAttribute("B", "BV") }
+            );
 
             // Act & Assert
-            var exception = Assert.Throws<ArgumentOutOfRangeException>("index", () =>
-            {
-                attributes[index] = new TagHelperAttribute("C", "CV");
-            });
+            var exception = Assert.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () =>
+                {
+                    attributes[index] = new TagHelperAttribute("C", "CV");
+                }
+            );
         }
 
         [Theory]
         [MemberData(
             nameof(ReadOnlyTagHelperAttributeListTest.StringIndexerData),
-            MemberType = typeof(ReadOnlyTagHelperAttributeListTest))]
+            MemberType = typeof(ReadOnlyTagHelperAttributeListTest)
+        )]
         public void StringIndexer_GetsExpectedAttribute(
             IEnumerable<TagHelperAttribute> initialAttributes,
             string nameToLookup,
-            TagHelperAttribute expectedAttribute)
-        {
+            TagHelperAttribute expectedAttribute
+        ) {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -126,7 +146,11 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             var attribute = attributes[nameToLookup];
 
             // Assert
-            Assert.Equal(expectedAttribute, attribute, CaseSensitiveTagHelperAttributeComparer.Default);
+            Assert.Equal(
+                expectedAttribute,
+                attribute,
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
         }
 
         public static TheoryData StringIndexerSetData
@@ -151,7 +175,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
                     IEnumerable<TagHelperAttribute>, // initialAttributes
                     string, // keyToSet
                     object, // setValue
-                    IEnumerable<TagHelperAttribute>> // expectedAttributes
+                    IEnumerable<TagHelperAttribute>
+                > // expectedAttributes
                 {
                     { new[] { A }, "AName", ASet1.Value, new[] { ASet1 } },
                     { new[] { A }, "AnAmE", ASet2.Value, new[] { ASet2 } },
@@ -166,7 +191,6 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
                     { Enumerable.Empty<TagHelperAttribute>(), "Set", set.Value, new[] { set } },
                     { new[] { B }, "Set", set.Value, new[] { B, set } },
                     { new[] { A, B }, "Set", set.Value, new[] { A, B, set } },
-
                     // Multiple elements same name
                     { new[] { A, B, A2, C }, "AName", ASet1.Value, new[] { ASet1, B, C } },
                     { new[] { A, B, A2, C }, "AnAmE", ASet2.Value, new[] { ASet2, B, C } },
@@ -187,8 +211,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             IEnumerable<TagHelperAttribute> initialAttributes,
             string keyToSet,
             object setValue,
-            IEnumerable<TagHelperAttribute> expectedAttributes)
-        {
+            IEnumerable<TagHelperAttribute> expectedAttributes
+        ) {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -196,24 +220,29 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             attributes.SetAttribute(keyToSet, setValue);
 
             // Assert
-            Assert.Equal(expectedAttributes, attributes, CaseSensitiveTagHelperAttributeComparer.Default);
+            Assert.Equal(
+                expectedAttributes,
+                attributes,
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
         }
 
         [Fact]
         public void StringIndexer_Setter_ThrowsIfIndexInvalid()
         {
             // Arrange
-            var attributes = new TagHelperAttributeList(new[]
-            {
-                new TagHelperAttribute("A", "AV"),
-                new TagHelperAttribute("B", "BV")
-            });
+            var attributes = new TagHelperAttributeList(
+                new[] { new TagHelperAttribute("A", "AV"), new TagHelperAttribute("B", "BV") }
+            );
 
             // Act & Assert
-            var exception = Assert.Throws<ArgumentOutOfRangeException>("index", () =>
-            {
-                attributes[2] = new TagHelperAttribute("C", "CV");
-            });
+            var exception = Assert.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () =>
+                {
+                    attributes[2] = new TagHelperAttribute("C", "CV");
+                }
+            );
         }
 
         [Fact]
@@ -240,7 +269,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
                 return new TheoryData<
                     IEnumerable<TagHelperAttribute>, // initialAttributes
                     TagHelperAttribute, // attributeToAdd
-                    IEnumerable<TagHelperAttribute>> // expectedAttributes
+                    IEnumerable<TagHelperAttribute>
+                > // expectedAttributes
                 {
                     { Enumerable.Empty<TagHelperAttribute>(), A, new[] { A } },
                     { new[] { A }, B, new[] { A, B } },
@@ -254,8 +284,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         public void Add_AppendsAttributes(
             IEnumerable<TagHelperAttribute> initialAttributes,
             TagHelperAttribute attributeToAdd,
-            IEnumerable<TagHelperAttribute> expectedAttributes)
-        {
+            IEnumerable<TagHelperAttribute> expectedAttributes
+        ) {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -263,7 +293,11 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             attributes.Add(attributeToAdd);
 
             // Assert
-            Assert.Equal(expectedAttributes, attributes, CaseSensitiveTagHelperAttributeComparer.Default);
+            Assert.Equal(
+                expectedAttributes,
+                attributes,
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
         }
 
         public static TheoryData InsertData
@@ -278,7 +312,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
                     IEnumerable<TagHelperAttribute>, // initialAttributes
                     TagHelperAttribute, // attributeToAdd
                     int, // locationToInsert
-                    IEnumerable<TagHelperAttribute>> // expectedAttributes
+                    IEnumerable<TagHelperAttribute>
+                > // expectedAttributes
                 {
                     { Enumerable.Empty<TagHelperAttribute>(), A, 0, new[] { A } },
                     { new[] { A }, B, 1, new[] { A, B } },
@@ -298,8 +333,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             IEnumerable<TagHelperAttribute> initialAttributes,
             TagHelperAttribute attributeToAdd,
             int locationToInsert,
-            IEnumerable<TagHelperAttribute> expectedAttributes)
-        {
+            IEnumerable<TagHelperAttribute> expectedAttributes
+        ) {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -307,7 +342,11 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             attributes.Insert(locationToInsert, attributeToAdd);
 
             // Assert
-            Assert.Equal(expectedAttributes, attributes, CaseSensitiveTagHelperAttributeComparer.Default);
+            Assert.Equal(
+                expectedAttributes,
+                attributes,
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
         }
 
         [Fact]
@@ -315,15 +354,14 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         {
             // Arrange
             var attributes = new TagHelperAttributeList(
-                new[]
-                {
-                    new TagHelperAttribute("a", "av"),
-                    new TagHelperAttribute("b", "bv"),
-                });
+                new[] { new TagHelperAttribute("a", "av"), new TagHelperAttribute("b", "bv"), }
+            );
 
             // Act & Assert
-            var exception = Assert.Throws<ArgumentOutOfRangeException>("index",
-                () => attributes.Insert(3, new TagHelperAttribute("c", "cb")));
+            var exception = Assert.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => attributes.Insert(3, new TagHelperAttribute("c", "cb"))
+            );
         }
 
         public static TheoryData CopyToData
@@ -338,7 +376,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
                     IEnumerable<TagHelperAttribute>, // initialAttributes
                     TagHelperAttribute[], // attributesToCopy
                     int, // locationToCopy
-                    IEnumerable<TagHelperAttribute>> // expectedAttributes
+                    IEnumerable<TagHelperAttribute>
+                > // expectedAttributes
                 {
                     { Enumerable.Empty<TagHelperAttribute>(), new[] { A }, 0, new[] { A } },
                     { Enumerable.Empty<TagHelperAttribute>(), new[] { A, B }, 0, new[] { A, B } },
@@ -362,8 +401,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             IEnumerable<TagHelperAttribute> initialAttributes,
             TagHelperAttribute[] attributesToCopy,
             int locationToCopy,
-            IEnumerable<TagHelperAttribute> expectedAttributes)
-        {
+            IEnumerable<TagHelperAttribute> expectedAttributes
+        ) {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
             var attributeDestination = new TagHelperAttribute[expectedAttributes.Count()];
@@ -373,7 +412,11 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             attributesToCopy.CopyTo(attributeDestination, locationToCopy);
 
             // Assert
-            Assert.Equal(expectedAttributes, attributeDestination, CaseSensitiveTagHelperAttributeComparer.Default);
+            Assert.Equal(
+                expectedAttributes,
+                attributeDestination,
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
         }
 
         public static TheoryData RemoveAllData
@@ -390,7 +433,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
                     IEnumerable<TagHelperAttribute>, // initialAttributes
                     string, // keyToRemove
                     IEnumerable<TagHelperAttribute>, // expectedAttributes
-                    bool> // expectedRemoval
+                    bool
+                > // expectedRemoval
                 {
                     { new[] { A }, "AName", Enumerable.Empty<TagHelperAttribute>(), true },
                     { new[] { A }, "AnAmE", Enumerable.Empty<TagHelperAttribute>(), true },
@@ -402,7 +446,6 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
                     { new[] { A, B, C }, "bname", new[] { A, C }, true },
                     { new[] { A, B, C }, "CName", new[] { A, B }, true },
                     { new[] { A, B, C }, "cnamE", new[] { A, B }, true },
-
                     // Multiple elements same name
                     { new[] { A, B, A2, C }, "AName", new[] { B, C }, true },
                     { new[] { A, B, A2, C }, "aname", new[] { B, C }, true },
@@ -412,9 +455,13 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
                     { new[] { A3, A }, "aname", Enumerable.Empty<TagHelperAttribute>(), true },
                     { new[] { A, A2, A3 }, "AName", Enumerable.Empty<TagHelperAttribute>(), true },
                     { new[] { C, B, A3, A }, "AName", new[] { C, B }, true },
-
                     // No removal expected lookups
-                    { Enumerable.Empty<TagHelperAttribute>(), "_0_", Enumerable.Empty<TagHelperAttribute>(), false },
+                    {
+                        Enumerable.Empty<TagHelperAttribute>(),
+                        "_0_",
+                        Enumerable.Empty<TagHelperAttribute>(),
+                        false
+                    },
                     { new[] { A }, "_AName_", new[] { A }, false },
                     { new[] { A }, "completely different", new[] { A }, false },
                     { new[] { A, B }, "_AName_", new[] { A, B }, false },
@@ -424,7 +471,12 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
                     { new[] { A, A2, B, C }, "_cnamE_", new[] { A, A2, B, C }, false },
                     { new[] { A, A2, B, C }, "completely different", new[] { A, A2, B, C }, false },
                     { new[] { A, A2, A3, B, C }, "_cnamE_", new[] { A, A2, A3, B, C }, false },
-                    { new[] { A, A2, A3, B, C }, "completely different", new[] { A, A2, A3, B, C }, false },
+                    {
+                        new[] { A, A2, A3, B, C },
+                        "completely different",
+                        new[] { A, A2, A3, B, C },
+                        false
+                    },
                 };
             }
         }
@@ -435,8 +487,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             IEnumerable<TagHelperAttribute> initialAttributes,
             string keyToRemove,
             IEnumerable<TagHelperAttribute> expectedAttributes,
-            bool expectedRemoval)
-        {
+            bool expectedRemoval
+        ) {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -445,7 +497,11 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
 
             // Assert
             Assert.Equal(expectedRemoval, removed);
-            Assert.Equal(expectedAttributes, attributes, CaseSensitiveTagHelperAttributeComparer.Default);
+            Assert.Equal(
+                expectedAttributes,
+                attributes,
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
         }
 
         public static TheoryData RemoveData
@@ -463,7 +519,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
                     IEnumerable<TagHelperAttribute>, // initialAttributes
                     TagHelperAttribute, // attributeToRemove
                     IEnumerable<TagHelperAttribute>, // expectedAttributes
-                    bool> // expectedResult
+                    bool
+                > // expectedResult
                 {
                     { new[] { A }, A, empty, true },
                     { new[] { A }, new TagHelperAttribute("AnAmE", "av"), empty, true },
@@ -472,32 +529,115 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
                     { new[] { A, B }, B, new[] { A }, true },
                     { new[] { A, B }, new TagHelperAttribute("BnAmE", "bv"), new[] { A }, true },
                     { new[] { A, B, C }, B, new[] { A, C }, true },
-                    { new[] { A, B, C }, new TagHelperAttribute("bname", "bv"), new[] { A, C }, true },
+                    {
+                        new[] { A, B, C },
+                        new TagHelperAttribute("bname", "bv"),
+                        new[] { A, C },
+                        true
+                    },
                     { new[] { A, B, C }, C, new[] { A, B }, true },
-                    { new[] { A, B, C }, new TagHelperAttribute("cnamE", "cv"), new[] { A, B }, true },
-
+                    {
+                        new[] { A, B, C },
+                        new TagHelperAttribute("cnamE", "cv"),
+                        new[] { A, B },
+                        true
+                    },
                     // Multiple elements same name
                     { new[] { A, B, A2, C }, A, new[] { B, A2, C }, true },
-                    { new[] { A, B, A2, C }, new TagHelperAttribute("aname", "av"), new[] { B, A2, C }, true },
-                    { new[] { B, A2, A }, new TagHelperAttribute("aname", "av"), new[] { B, A }, true },
+                    {
+                        new[] { A, B, A2, C },
+                        new TagHelperAttribute("aname", "av"),
+                        new[] { B, A2, C },
+                        true
+                    },
+                    {
+                        new[] { B, A2, A },
+                        new TagHelperAttribute("aname", "av"),
+                        new[] { B, A },
+                        true
+                    },
                     { new[] { B, A2, A, C }, A, new[] { B, A, C }, true },
                     { new[] { A, A3 }, A3, new[] { A3 }, true },
                     { new[] { A3, A }, new TagHelperAttribute("aname", "av"), new[] { A }, true },
-                    { new[] { A, A2, A3 }, new TagHelperAttribute("AName", "av"), new[] { A2, A3 }, true },
-                    { new[] { C, B, A3, A }, new TagHelperAttribute("AName", "av"), new[] { C, B, A }, true },
-
+                    {
+                        new[] { A, A2, A3 },
+                        new TagHelperAttribute("AName", "av"),
+                        new[] { A2, A3 },
+                        true
+                    },
+                    {
+                        new[] { C, B, A3, A },
+                        new TagHelperAttribute("AName", "av"),
+                        new[] { C, B, A },
+                        true
+                    },
                     // Null expected lookups
-                    { Enumerable.Empty<TagHelperAttribute>(), new TagHelperAttribute("DoesNotExist", "_0_"), Enumerable.Empty<TagHelperAttribute>(), false },
-                    { new[] { A }, new TagHelperAttribute("DoesNotExist", "_AName_"), new[] { A }, false },
-                    { new[] { A }, new TagHelperAttribute("DoesNotExist", "completely different"), new[] { A }, false },
-                    { new[] { A, B }, new TagHelperAttribute("DoesNotExist", "_AName_"), new[] { A, B }, false },
-                    { new[] { A, B }, new TagHelperAttribute("DoesNotExist", "completely different"), new[] { A, B }, false },
-                    { new[] { A, B, C }, new TagHelperAttribute("DoesNotExist", "_BName_"), new[] { A, B, C }, false },
-                    { new[] { A, B, C }, new TagHelperAttribute("DoesNotExist", "completely different"), new[] { A, B, C }, false },
-                    { new[] { A, A2, B, C }, new TagHelperAttribute("DoesNotExist", "_cnamE_"), new[] { A, A2, B, C }, false },
-                    { new[] { A, A2, B, C }, new TagHelperAttribute("DoesNotExist", "completely different"), new[] { A, A2, B, C }, false },
-                    { new[] { A, A2, A3, B, C }, new TagHelperAttribute("DoesNotExist", "_cnamE_"), new[] { A, A2, A3, B, C }, false },
-                    { new[] { A, A2, A3, B, C }, new TagHelperAttribute("DoesNotExist", "completely different"), new[] { A, A2, A3, B, C }, false },
+                    {
+                        Enumerable.Empty<TagHelperAttribute>(),
+                        new TagHelperAttribute("DoesNotExist", "_0_"),
+                        Enumerable.Empty<TagHelperAttribute>(),
+                        false
+                    },
+                    {
+                        new[] { A },
+                        new TagHelperAttribute("DoesNotExist", "_AName_"),
+                        new[] { A },
+                        false
+                    },
+                    {
+                        new[] { A },
+                        new TagHelperAttribute("DoesNotExist", "completely different"),
+                        new[] { A },
+                        false
+                    },
+                    {
+                        new[] { A, B },
+                        new TagHelperAttribute("DoesNotExist", "_AName_"),
+                        new[] { A, B },
+                        false
+                    },
+                    {
+                        new[] { A, B },
+                        new TagHelperAttribute("DoesNotExist", "completely different"),
+                        new[] { A, B },
+                        false
+                    },
+                    {
+                        new[] { A, B, C },
+                        new TagHelperAttribute("DoesNotExist", "_BName_"),
+                        new[] { A, B, C },
+                        false
+                    },
+                    {
+                        new[] { A, B, C },
+                        new TagHelperAttribute("DoesNotExist", "completely different"),
+                        new[] { A, B, C },
+                        false
+                    },
+                    {
+                        new[] { A, A2, B, C },
+                        new TagHelperAttribute("DoesNotExist", "_cnamE_"),
+                        new[] { A, A2, B, C },
+                        false
+                    },
+                    {
+                        new[] { A, A2, B, C },
+                        new TagHelperAttribute("DoesNotExist", "completely different"),
+                        new[] { A, A2, B, C },
+                        false
+                    },
+                    {
+                        new[] { A, A2, A3, B, C },
+                        new TagHelperAttribute("DoesNotExist", "_cnamE_"),
+                        new[] { A, A2, A3, B, C },
+                        false
+                    },
+                    {
+                        new[] { A, A2, A3, B, C },
+                        new TagHelperAttribute("DoesNotExist", "completely different"),
+                        new[] { A, A2, A3, B, C },
+                        false
+                    },
                 };
             }
         }
@@ -508,8 +648,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             IEnumerable<TagHelperAttribute> initialAttributes,
             TagHelperAttribute attributeToRemove,
             IEnumerable<TagHelperAttribute> expectedAttributes,
-            bool expectedResult)
-        {
+            bool expectedResult
+        ) {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -518,7 +658,11 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
 
             // Assert
             Assert.Equal(expectedResult, result);
-            Assert.Equal(expectedAttributes, attributes, CaseSensitiveTagHelperAttributeComparer.Default);
+            Assert.Equal(
+                expectedAttributes,
+                attributes,
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
         }
 
         public static TheoryData RemoveAtData
@@ -532,7 +676,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
                 return new TheoryData<
                     IEnumerable<TagHelperAttribute>, // initialAttributes
                     int, // locationToRemove
-                    IEnumerable<TagHelperAttribute>> // expectedAttributes
+                    IEnumerable<TagHelperAttribute>
+                > // expectedAttributes
                 {
                     { new[] { A }, 0, Enumerable.Empty<TagHelperAttribute>() },
                     { new[] { A, B }, 0, new[] { B } },
@@ -551,8 +696,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         public void RemoveAt_RemovesAttributeAtSpecifiedIndex(
             IEnumerable<TagHelperAttribute> initialAttributes,
             int locationToRemove,
-            IEnumerable<TagHelperAttribute> expectedAttributes)
-        {
+            IEnumerable<TagHelperAttribute> expectedAttributes
+        ) {
             // Arrange
             var attributes = new TagHelperAttributeList(initialAttributes);
 
@@ -560,7 +705,11 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             attributes.RemoveAt(locationToRemove);
 
             // Assert
-            Assert.Equal(expectedAttributes, attributes, CaseSensitiveTagHelperAttributeComparer.Default);
+            Assert.Equal(
+                expectedAttributes,
+                attributes,
+                CaseSensitiveTagHelperAttributeComparer.Default
+            );
         }
 
         [Fact]
@@ -568,15 +717,14 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         {
             // Arrange
             var attributes = new TagHelperAttributeList(
-                new[]
-                {
-                    new TagHelperAttribute("a", "av"),
-                    new TagHelperAttribute("b", "bv"),
-                });
+                new[] { new TagHelperAttribute("a", "av"), new TagHelperAttribute("b", "bv"), }
+            );
 
             // Act & Assert
-            var exception = Assert.Throws<ArgumentOutOfRangeException>("index",
-                () => attributes.RemoveAt(3));
+            var exception = Assert.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => attributes.RemoveAt(3)
+            );
         }
 
         [Fact]
@@ -584,11 +732,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         {
             // Arrange
             var attributes = new TagHelperAttributeList(
-                new[]
-                {
-                    new TagHelperAttribute("a", "av"),
-                    new TagHelperAttribute("b", "bv"),
-                });
+                new[] { new TagHelperAttribute("a", "av"), new TagHelperAttribute("b", "bv"), }
+            );
 
             // Act
             attributes.Clear();

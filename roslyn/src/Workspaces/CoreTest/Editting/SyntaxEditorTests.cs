@@ -19,10 +19,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Editing
     {
         private Workspace _emptyWorkspace;
 
-        private Workspace EmptyWorkspace
-            => _emptyWorkspace ?? (_emptyWorkspace = new AdhocWorkspace());
+        private Workspace EmptyWorkspace =>
+            _emptyWorkspace ?? (_emptyWorkspace = new AdhocWorkspace());
 
-        private void VerifySyntax<TSyntax>(SyntaxNode node, string expectedText) where TSyntax : SyntaxNode
+        private void VerifySyntax<TSyntax>(SyntaxNode node, string expectedText)
+            where TSyntax : SyntaxNode
         {
             Assert.IsAssignableFrom<TSyntax>(node);
             var formatted = Formatter.Format(node, EmptyWorkspace);
@@ -30,13 +31,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Editing
             Assert.Equal(expectedText, actualText);
         }
 
-        private SyntaxEditor GetEditor(SyntaxNode root)
-            => new SyntaxEditor(root, EmptyWorkspace);
+        private SyntaxEditor GetEditor(SyntaxNode root) => new SyntaxEditor(root, EmptyWorkspace);
 
         [Fact]
         public void TestReplaceNode()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public int X;
@@ -47,7 +48,14 @@ public class C
 
             var editor = GetEditor(cu);
             var fieldX = editor.Generator.GetMembers(cls)[0];
-            editor.ReplaceNode(fieldX, editor.Generator.FieldDeclaration("Y", editor.Generator.TypeExpression(SpecialType.System_String), Accessibility.Public));
+            editor.ReplaceNode(
+                fieldX,
+                editor.Generator.FieldDeclaration(
+                    "Y",
+                    editor.Generator.TypeExpression(SpecialType.System_String),
+                    Accessibility.Public
+                )
+            );
             var newRoot = editor.GetChangedRoot();
 
             VerifySyntax<CompilationUnitSyntax>(
@@ -56,13 +64,15 @@ public class C
 public class C
 {
     public string Y;
-}");
+}"
+            );
         }
 
         [Fact]
         public void TestRemoveNode()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public int X;
@@ -81,13 +91,15 @@ public class C
                 @"
 public class C
 {
-}");
+}"
+            );
         }
 
         [Fact]
         public void TestInsertAfter()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public int X;
@@ -98,7 +110,14 @@ public class C
 
             var editor = GetEditor(cu);
             var fieldX = editor.Generator.GetMembers(cls)[0];
-            editor.InsertAfter(fieldX, editor.Generator.FieldDeclaration("Y", editor.Generator.TypeExpression(SpecialType.System_String), Accessibility.Public));
+            editor.InsertAfter(
+                fieldX,
+                editor.Generator.FieldDeclaration(
+                    "Y",
+                    editor.Generator.TypeExpression(SpecialType.System_String),
+                    Accessibility.Public
+                )
+            );
             var newRoot = editor.GetChangedRoot();
 
             VerifySyntax<CompilationUnitSyntax>(
@@ -108,13 +127,15 @@ public class C
 {
     public int X;
     public string Y;
-}");
+}"
+            );
         }
 
         [Fact]
         public void TestInsertBefore()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public int X;
@@ -125,7 +146,14 @@ public class C
 
             var editor = GetEditor(cu);
             var fieldX = editor.Generator.GetMembers(cls)[0];
-            editor.InsertBefore(fieldX, editor.Generator.FieldDeclaration("Y", editor.Generator.TypeExpression(SpecialType.System_String), Accessibility.Public));
+            editor.InsertBefore(
+                fieldX,
+                editor.Generator.FieldDeclaration(
+                    "Y",
+                    editor.Generator.TypeExpression(SpecialType.System_String),
+                    Accessibility.Public
+                )
+            );
             var newRoot = editor.GetChangedRoot();
 
             VerifySyntax<CompilationUnitSyntax>(
@@ -135,36 +163,50 @@ public class C
 {
     public string Y;
     public int X;
-}");
+}"
+            );
         }
 
         [Fact]
         public void TestReplaceWithTracking()
         {
             // ReplaceNode overload #1
-            TestReplaceWithTrackingCore((SyntaxNode node, SyntaxNode newNode, SyntaxEditor editor) =>
-            {
-                editor.ReplaceNode(node, newNode);
-            });
+            TestReplaceWithTrackingCore(
+                (SyntaxNode node, SyntaxNode newNode, SyntaxEditor editor) =>
+                {
+                    editor.ReplaceNode(node, newNode);
+                }
+            );
 
             // ReplaceNode overload #2
-            TestReplaceWithTrackingCore((SyntaxNode node, SyntaxNode newNode, SyntaxEditor editor) =>
-            {
-                editor.ReplaceNode(node, computeReplacement: (originalNode, generator) => newNode);
-            });
+            TestReplaceWithTrackingCore(
+                (SyntaxNode node, SyntaxNode newNode, SyntaxEditor editor) =>
+                {
+                    editor.ReplaceNode(
+                        node,
+                        computeReplacement: (originalNode, generator) => newNode
+                    );
+                }
+            );
 
             // ReplaceNode overload #3
-            TestReplaceWithTrackingCore((SyntaxNode node, SyntaxNode newNode, SyntaxEditor editor) =>
-            {
-                editor.ReplaceNode(node,
-                     computeReplacement: (originalNode, generator, argument) => newNode,
-                     argument: (object)null);
-            });
+            TestReplaceWithTrackingCore(
+                (SyntaxNode node, SyntaxNode newNode, SyntaxEditor editor) =>
+                {
+                    editor.ReplaceNode(
+                        node,
+                        computeReplacement: (originalNode, generator, argument) => newNode,
+                        argument: (object)null
+                    );
+                }
+            );
         }
 
-        private void TestReplaceWithTrackingCore(Action<SyntaxNode, SyntaxNode, SyntaxEditor> replaceNodeWithTracking)
-        {
-            var code = @"
+        private void TestReplaceWithTrackingCore(
+            Action<SyntaxNode, SyntaxNode, SyntaxEditor> replaceNodeWithTracking
+        ) {
+            var code =
+                @"
 public class C
 {
     public int X;
@@ -175,7 +217,11 @@ public class C
 
             var editor = GetEditor(cu);
             var fieldX = editor.Generator.GetMembers(cls)[0];
-            var newFieldY = editor.Generator.FieldDeclaration("Y", editor.Generator.TypeExpression(SpecialType.System_String), Accessibility.Public);
+            var newFieldY = editor.Generator.FieldDeclaration(
+                "Y",
+                editor.Generator.TypeExpression(SpecialType.System_String),
+                Accessibility.Public
+            );
             replaceNodeWithTracking(fieldX, newFieldY, editor);
 
             var newRoot = editor.GetChangedRoot();
@@ -185,7 +231,8 @@ public class C
 public class C
 {
     public string Y;
-}");
+}"
+            );
             var newFieldYType = newFieldY.DescendantNodes().Single(n => n.ToString() == "string");
             var newType = editor.Generator.TypeExpression(SpecialType.System_Char);
             replaceNodeWithTracking(newFieldYType, newType, editor);
@@ -197,7 +244,8 @@ public class C
 public class C
 {
     public char Y;
-}");
+}"
+            );
 
             editor.RemoveNode(newFieldY);
 
@@ -207,13 +255,15 @@ public class C
                 @"
 public class C
 {
-}");
+}"
+            );
         }
 
         [Fact]
         public void TestReplaceWithTracking_02()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public int X;
@@ -230,7 +280,11 @@ public class C
             var fieldX2 = editor.Generator.GetMembers(cls)[1];
             var fieldX3 = editor.Generator.GetMembers(cls)[2];
 
-            var newFieldY = editor.Generator.FieldDeclaration("Y", editor.Generator.TypeExpression(SpecialType.System_String), Accessibility.Public);
+            var newFieldY = editor.Generator.FieldDeclaration(
+                "Y",
+                editor.Generator.TypeExpression(SpecialType.System_String),
+                Accessibility.Public
+            );
             editor.ReplaceNode(fieldX, newFieldY);
 
             var newRoot = editor.GetChangedRoot();
@@ -242,7 +296,8 @@ public class C
     public string Y;
     public string X2;
     public char X3;
-}");
+}"
+            );
             var newFieldYType = newFieldY.DescendantNodes().Single(n => n.ToString() == "string");
             var newType = editor.Generator.TypeExpression(SpecialType.System_Char);
             editor.ReplaceNode(newFieldYType, newType);
@@ -256,9 +311,14 @@ public class C
     public char Y;
     public string X2;
     public char X3;
-}");
+}"
+            );
 
-            var newFieldY2 = editor.Generator.FieldDeclaration("Y2", editor.Generator.TypeExpression(SpecialType.System_Boolean), Accessibility.Private);
+            var newFieldY2 = editor.Generator.FieldDeclaration(
+                "Y2",
+                editor.Generator.TypeExpression(SpecialType.System_Boolean),
+                Accessibility.Private
+            );
             editor.ReplaceNode(fieldX2, newFieldY2);
 
             newRoot = editor.GetChangedRoot();
@@ -270,9 +330,14 @@ public class C
     public char Y;
     private bool Y2;
     public char X3;
-}");
+}"
+            );
 
-            var newFieldZ = editor.Generator.FieldDeclaration("Z", editor.Generator.TypeExpression(SpecialType.System_Boolean), Accessibility.Public);
+            var newFieldZ = editor.Generator.FieldDeclaration(
+                "Z",
+                editor.Generator.TypeExpression(SpecialType.System_Boolean),
+                Accessibility.Public
+            );
             editor.ReplaceNode(newFieldY, newFieldZ);
 
             newRoot = editor.GetChangedRoot();
@@ -284,7 +349,8 @@ public class C
     public bool Z;
     private bool Y2;
     public char X3;
-}");
+}"
+            );
 
             var originalFieldX3Type = fieldX3.DescendantNodes().Single(n => n.ToString() == "char");
             newType = editor.Generator.TypeExpression(SpecialType.System_Boolean);
@@ -299,7 +365,8 @@ public class C
     public bool Z;
     private bool Y2;
     public bool X3;
-}");
+}"
+            );
 
             editor.RemoveNode(newFieldY2);
             editor.RemoveNode(fieldX3);
@@ -311,28 +378,35 @@ public class C
 public class C
 {
     public bool Z;
-}");
+}"
+            );
         }
 
         [Fact]
         public void TestInsertAfterWithTracking()
         {
             // InsertAfter overload #1
-            TestInsertAfterWithTrackingCore((SyntaxNode node, SyntaxNode newNode, SyntaxEditor editor) =>
-            {
-                editor.InsertAfter(node, newNode);
-            });
+            TestInsertAfterWithTrackingCore(
+                (SyntaxNode node, SyntaxNode newNode, SyntaxEditor editor) =>
+                {
+                    editor.InsertAfter(node, newNode);
+                }
+            );
 
             // InsertAfter overload #2
-            TestInsertAfterWithTrackingCore((SyntaxNode node, SyntaxNode newNode, SyntaxEditor editor) =>
-            {
-                editor.InsertAfter(node, new[] { newNode });
-            });
+            TestInsertAfterWithTrackingCore(
+                (SyntaxNode node, SyntaxNode newNode, SyntaxEditor editor) =>
+                {
+                    editor.InsertAfter(node, new[] { newNode });
+                }
+            );
         }
 
-        private void TestInsertAfterWithTrackingCore(Action<SyntaxNode, SyntaxNode, SyntaxEditor> insertAfterWithTracking)
-        {
-            var code = @"
+        private void TestInsertAfterWithTrackingCore(
+            Action<SyntaxNode, SyntaxNode, SyntaxEditor> insertAfterWithTracking
+        ) {
+            var code =
+                @"
 public class C
 {
     public int X;
@@ -343,7 +417,11 @@ public class C
 
             var editor = GetEditor(cu);
             var fieldX = editor.Generator.GetMembers(cls)[0];
-            var newFieldY = editor.Generator.FieldDeclaration("Y", editor.Generator.TypeExpression(SpecialType.System_String), Accessibility.Public);
+            var newFieldY = editor.Generator.FieldDeclaration(
+                "Y",
+                editor.Generator.TypeExpression(SpecialType.System_String),
+                Accessibility.Public
+            );
             insertAfterWithTracking(fieldX, newFieldY, editor);
 
             var newRoot = editor.GetChangedRoot();
@@ -354,9 +432,14 @@ public class C
 {
     public int X;
     public string Y;
-}");
+}"
+            );
 
-            var newFieldZ = editor.Generator.FieldDeclaration("Z", editor.Generator.TypeExpression(SpecialType.System_String), Accessibility.Public);
+            var newFieldZ = editor.Generator.FieldDeclaration(
+                "Z",
+                editor.Generator.TypeExpression(SpecialType.System_String),
+                Accessibility.Public
+            );
             editor.ReplaceNode(newFieldY, newFieldZ);
 
             newRoot = editor.GetChangedRoot();
@@ -367,28 +450,35 @@ public class C
 {
     public int X;
     public string Z;
-}");
+}"
+            );
         }
 
         [Fact]
         public void TestInsertBeforeWithTracking()
         {
             // InsertBefore overload #1
-            TestInsertBeforeWithTrackingCore((SyntaxNode node, SyntaxNode newNode, SyntaxEditor editor) =>
-            {
-                editor.InsertBefore(node, newNode);
-            });
+            TestInsertBeforeWithTrackingCore(
+                (SyntaxNode node, SyntaxNode newNode, SyntaxEditor editor) =>
+                {
+                    editor.InsertBefore(node, newNode);
+                }
+            );
 
             // InsertBefore overload #2
-            TestInsertBeforeWithTrackingCore((SyntaxNode node, SyntaxNode newNode, SyntaxEditor editor) =>
-            {
-                editor.InsertBefore(node, new[] { newNode });
-            });
+            TestInsertBeforeWithTrackingCore(
+                (SyntaxNode node, SyntaxNode newNode, SyntaxEditor editor) =>
+                {
+                    editor.InsertBefore(node, new[] { newNode });
+                }
+            );
         }
 
-        private void TestInsertBeforeWithTrackingCore(Action<SyntaxNode, SyntaxNode, SyntaxEditor> insertBeforeWithTracking)
-        {
-            var code = @"
+        private void TestInsertBeforeWithTrackingCore(
+            Action<SyntaxNode, SyntaxNode, SyntaxEditor> insertBeforeWithTracking
+        ) {
+            var code =
+                @"
 public class C
 {
     public int X;
@@ -399,7 +489,11 @@ public class C
 
             var editor = GetEditor(cu);
             var fieldX = editor.Generator.GetMembers(cls)[0];
-            var newFieldY = editor.Generator.FieldDeclaration("Y", editor.Generator.TypeExpression(SpecialType.System_String), Accessibility.Public);
+            var newFieldY = editor.Generator.FieldDeclaration(
+                "Y",
+                editor.Generator.TypeExpression(SpecialType.System_String),
+                Accessibility.Public
+            );
             insertBeforeWithTracking(fieldX, newFieldY, editor);
 
             var newRoot = editor.GetChangedRoot();
@@ -410,9 +504,14 @@ public class C
 {
     public string Y;
     public int X;
-}");
+}"
+            );
 
-            var newFieldZ = editor.Generator.FieldDeclaration("Z", editor.Generator.TypeExpression(SpecialType.System_String), Accessibility.Public);
+            var newFieldZ = editor.Generator.FieldDeclaration(
+                "Z",
+                editor.Generator.TypeExpression(SpecialType.System_String),
+                Accessibility.Public
+            );
             editor.ReplaceNode(newFieldY, newFieldZ);
 
             newRoot = editor.GetChangedRoot();
@@ -423,13 +522,15 @@ public class C
 {
     public string Z;
     public int X;
-}");
+}"
+            );
         }
 
         [Fact]
         public void TestTrackNode()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public int X;
@@ -450,7 +551,8 @@ public class C
         [Fact]
         public void TestMultipleEdits()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public int X;
@@ -461,8 +563,22 @@ public class C
 
             var editor = GetEditor(cu);
             var fieldX = editor.Generator.GetMembers(cls)[0];
-            editor.InsertAfter(fieldX, editor.Generator.FieldDeclaration("Y", editor.Generator.TypeExpression(SpecialType.System_String), Accessibility.Public));
-            editor.InsertBefore(fieldX, editor.Generator.FieldDeclaration("Z", editor.Generator.TypeExpression(SpecialType.System_Object), Accessibility.Public));
+            editor.InsertAfter(
+                fieldX,
+                editor.Generator.FieldDeclaration(
+                    "Y",
+                    editor.Generator.TypeExpression(SpecialType.System_String),
+                    Accessibility.Public
+                )
+            );
+            editor.InsertBefore(
+                fieldX,
+                editor.Generator.FieldDeclaration(
+                    "Z",
+                    editor.Generator.TypeExpression(SpecialType.System_Object),
+                    Accessibility.Public
+                )
+            );
             editor.RemoveNode(fieldX);
             var newRoot = editor.GetChangedRoot();
 
@@ -473,7 +589,8 @@ public class C
 {
     public object Z;
     public string Y;
-}");
+}"
+            );
         }
     }
 }

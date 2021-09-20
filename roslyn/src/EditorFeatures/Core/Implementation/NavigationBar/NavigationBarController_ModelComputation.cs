@@ -47,30 +47,37 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             var cancellationToken = _modelTaskCancellationSource.Token;
 
             // Enqueue a new computation for the model
-            var asyncToken = _asyncListener.BeginAsyncOperation(GetType().Name + ".StartModelUpdateTask");
-            _modelTask = ComputeModelAfterDelayAsync(_modelTask, textSnapshot, modelUpdateDelay, cancellationToken);
+            var asyncToken = _asyncListener.BeginAsyncOperation(
+                GetType().Name + ".StartModelUpdateTask"
+            );
+            _modelTask = ComputeModelAfterDelayAsync(
+                _modelTask,
+                textSnapshot,
+                modelUpdateDelay,
+                cancellationToken
+            );
             _modelTask.CompletesAsyncOperation(asyncToken);
 
             StartSelectedItemUpdateTask(delay: 0);
         }
 
         private static async Task<NavigationBarModel> ComputeModelAfterDelayAsync(
-            Task<NavigationBarModel> modelTask, ITextSnapshot textSnapshot, int modelUpdateDelay, CancellationToken cancellationToken)
-        {
+            Task<NavigationBarModel> modelTask,
+            ITextSnapshot textSnapshot,
+            int modelUpdateDelay,
+            CancellationToken cancellationToken
+        ) {
             var previousModel = await modelTask.ConfigureAwait(false);
             if (!cancellationToken.IsCancellationRequested)
             {
                 try
                 {
                     await Task.Delay(modelUpdateDelay, cancellationToken).ConfigureAwait(false);
-                    return await ComputeModelAsync(previousModel, textSnapshot, cancellationToken).ConfigureAwait(false);
+                    return await ComputeModelAsync(previousModel, textSnapshot, cancellationToken)
+                        .ConfigureAwait(false);
                 }
-                catch (OperationCanceledException)
-                {
-                }
-                catch (Exception e) when (FatalError.ReportAndCatch(e))
-                {
-                }
+                catch (OperationCanceledException) { }
+                catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
             }
 
             // If we canceled, then just return along whatever we have computed so far.  Note: this means the
@@ -83,15 +90,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
         /// Computes a model for the given snapshot.
         /// </summary>
         private static async Task<NavigationBarModel> ComputeModelAsync(
-            NavigationBarModel lastCompletedModel, ITextSnapshot snapshot, CancellationToken cancellationToken)
-        {
+            NavigationBarModel lastCompletedModel,
+            ITextSnapshot snapshot,
+            CancellationToken cancellationToken
+        ) {
             // When computing items just get the partial semantics workspace.  This will ensure we can get data for this
             // file, and hopefully have enough loaded to get data for other files in the case of partial types.  In the
             // event the other files aren't available, then partial-type information won't be correct.  That's ok though
             // as this is just something that happens during solution load and will pass once that is over.  By using
             // partial semantics, we can ensure we don't spend an inordinate amount of time computing and using full
             // compilation data (like skeleton assemblies).
-            var document = snapshot.AsText().GetDocumentWithFrozenPartialSemantics(cancellationToken);
+            var document = snapshot.AsText()
+                .GetDocumentWithFrozenPartialSemantics(cancellationToken);
             if (document == null)
                 return null;
 
@@ -103,28 +113,46 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
                 // the model should be only updated here
                 if (lastCompletedModel != null)
                 {
-                    var semanticVersion = await document.Project.GetDependentSemanticVersionAsync(CancellationToken.None).ConfigureAwait(false);
-                    if (lastCompletedModel.SemanticVersionStamp == semanticVersion && SpanStillValid(lastCompletedModel, snapshot, cancellationToken))
-                    {
+                    var semanticVersion = await document.Project.GetDependentSemanticVersionAsync(
+                            CancellationToken.None
+                        )
+                        .ConfigureAwait(false);
+                    if (
+                        lastCompletedModel.SemanticVersionStamp == semanticVersion
+                        && SpanStillValid(lastCompletedModel, snapshot, cancellationToken)
+                    ) {
                         // it looks like we can re-use previous model
                         return lastCompletedModel;
                     }
                 }
 
-                using (Logger.LogBlock(FunctionId.NavigationBar_ComputeModelAsync, cancellationToken))
-                {
-                    var items = await languageService.GetItemsAsync(document, cancellationToken).ConfigureAwait(false);
+                using (
+                    Logger.LogBlock(FunctionId.NavigationBar_ComputeModelAsync, cancellationToken)
+                ) {
+                    var items = await languageService.GetItemsAsync(document, cancellationToken)
+                        .ConfigureAwait(false);
                     if (items != null)
                     {
                         items.Do(i => i.InitializeTrackingSpans(snapshot));
-                        var version = await document.Project.GetDependentSemanticVersionAsync(cancellationToken).ConfigureAwait(false);
+                        var version = await document.Project.GetDependentSemanticVersionAsync(
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
 
-                        return new NavigationBarModel(items.ToImmutableArray(), version, languageService);
+                        return new NavigationBarModel(
+                            items.ToImmutableArray(),
+                            version,
+                            languageService
+                        );
                     }
                 }
             }
 
-            return new NavigationBarModel(ImmutableArray<NavigationBarItem>.Empty, new VersionStamp(), null);
+            return new NavigationBarModel(
+                ImmutableArray<NavigationBarItem>.Empty,
+                new VersionStamp(),
+                null
+            );
         }
 
         /// <summary>
@@ -144,8 +172,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             _selectedItemInfoTaskCancellationSource = new CancellationTokenSource();
             var cancellationToken = _selectedItemInfoTaskCancellationSource.Token;
 
-            var asyncToken = _asyncListener.BeginAsyncOperation(GetType().Name + ".StartSelectedItemUpdateTask");
-            var selectedItemInfoTask = DetermineSelectedItemInfoAsync(_modelTask, delay, subjectBufferCaretPosition.Value, cancellationToken);
+            var asyncToken = _asyncListener.BeginAsyncOperation(
+                GetType().Name + ".StartSelectedItemUpdateTask"
+            );
+            var selectedItemInfoTask = DetermineSelectedItemInfoAsync(
+                _modelTask,
+                delay,
+                subjectBufferCaretPosition.Value,
+                cancellationToken
+            );
             selectedItemInfoTask.CompletesAsyncOperation(asyncToken);
         }
 
@@ -153,8 +188,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             Task<NavigationBarModel> lastModelTask,
             int delay,
             SnapshotPoint caretPosition,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             // First wait the delay before doing any other work.  That way if we get canceled due to other events (like
             // the user moving around), we don't end up doing anything, and the next task can take over.
             await Task.Delay(delay, cancellationToken).ConfigureAwait(false);
@@ -163,7 +198,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             if (cancellationToken.IsCancellationRequested)
                 return;
 
-            var currentSelectedItem = ComputeSelectedTypeAndMember(lastModel, caretPosition, cancellationToken);
+            var currentSelectedItem = ComputeSelectedTypeAndMember(
+                lastModel,
+                caretPosition,
+                cancellationToken
+            );
 
             await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -177,9 +216,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             PushSelectedItemsToPresenter(currentSelectedItem);
         }
 
-        internal static NavigationBarSelectedTypeAndMember ComputeSelectedTypeAndMember(NavigationBarModel model, SnapshotPoint caretPosition, CancellationToken cancellationToken)
-        {
-            var (item, gray) = GetMatchingItem(model.Types, caretPosition, model.ItemService, cancellationToken);
+        internal static NavigationBarSelectedTypeAndMember ComputeSelectedTypeAndMember(
+            NavigationBarModel model,
+            SnapshotPoint caretPosition,
+            CancellationToken cancellationToken
+        ) {
+            var (item, gray) = GetMatchingItem(
+                model.Types,
+                caretPosition,
+                model.ItemService,
+                cancellationToken
+            );
 
             if (item == null)
             {
@@ -187,9 +234,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
                 return new NavigationBarSelectedTypeAndMember(null, null);
             }
 
-            var rightItem = GetMatchingItem(item.ChildItems, caretPosition, model.ItemService, cancellationToken);
+            var rightItem = GetMatchingItem(
+                item.ChildItems,
+                caretPosition,
+                model.ItemService,
+                cancellationToken
+            );
 
-            return new NavigationBarSelectedTypeAndMember(item, gray, rightItem.item, rightItem.gray);
+            return new NavigationBarSelectedTypeAndMember(
+                item,
+                gray,
+                rightItem.item,
+                rightItem.gray
+            );
         }
 
         /// <summary>
@@ -197,7 +254,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
         /// positioned after the cursor.
         /// </summary>
         /// <returns>A tuple of the matching item, and if it should be shown grayed.</returns>
-        private static (T item, bool gray) GetMatchingItem<T>(IEnumerable<T> items, SnapshotPoint point, INavigationBarItemService itemsService, CancellationToken cancellationToken) where T : NavigationBarItem
+        private static (T item, bool gray) GetMatchingItem<T>(
+            IEnumerable<T> items,
+            SnapshotPoint point,
+            INavigationBarItemService itemsService,
+            CancellationToken cancellationToken
+        ) where T : NavigationBarItem
         {
             T exactItem = null;
             var exactItemStart = 0;
@@ -249,13 +311,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             }
         }
 
-        private static bool SpanStillValid(NavigationBarModel model, ITextSnapshot snapshot, CancellationToken cancellationToken)
-        {
-            // even if semantic version is same, portion of text could have been copied & pasted with 
+        private static bool SpanStillValid(
+            NavigationBarModel model,
+            ITextSnapshot snapshot,
+            CancellationToken cancellationToken
+        ) {
+            // even if semantic version is same, portion of text could have been copied & pasted with
             // exact same top level content.
             // go through spans to see whether this happened.
-            // 
-            // paying cost of moving spans forward shouldn't be matter since we need to pay that 
+            //
+            // paying cost of moving spans forward shouldn't be matter since we need to pay that
             // price soon or later to figure out selected item.
             foreach (var type in model.Types)
             {

@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
         TIfStatementSyntax,
         TExpressionSyntax,
         TIsExpressionSyntax,
-        TPatternSyntax>
+        TPatternSyntax
+    >
         where TIfStatementSyntax : SyntaxNode
         where TExpressionSyntax : SyntaxNode
         where TIsExpressionSyntax : SyntaxNode
@@ -27,8 +28,11 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             public readonly IOperation Body;
             public readonly SyntaxNode SyntaxToRemove;
 
-            public AnalyzedSwitchSection(ImmutableArray<AnalyzedSwitchLabel> labels, IOperation body, SyntaxNode syntaxToRemove)
-            {
+            public AnalyzedSwitchSection(
+                ImmutableArray<AnalyzedSwitchLabel> labels,
+                IOperation body,
+                SyntaxNode syntaxToRemove
+            ) {
                 Labels = labels;
                 Body = body;
                 SyntaxToRemove = syntaxToRemove;
@@ -44,8 +48,10 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             public readonly AnalyzedPattern Pattern;
             public readonly ImmutableArray<TExpressionSyntax> Guards;
 
-            public AnalyzedSwitchLabel(AnalyzedPattern pattern, ImmutableArray<TExpressionSyntax> guards)
-            {
+            public AnalyzedSwitchLabel(
+                AnalyzedPattern pattern,
+                ImmutableArray<TExpressionSyntax> guards
+            ) {
                 Pattern = pattern;
                 Guards = guards;
             }
@@ -56,9 +62,7 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
         /// </summary>
         internal abstract class AnalyzedPattern
         {
-            private AnalyzedPattern()
-            {
-            }
+            private AnalyzedPattern() { }
 
             /// <summary>
             /// Represents a type-pattern, constructed from is-expression
@@ -67,8 +71,7 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             {
                 public readonly TIsExpressionSyntax IsExpressionSyntax;
 
-                public Type(TIsExpressionSyntax expression)
-                    => IsExpressionSyntax = expression;
+                public Type(TIsExpressionSyntax expression) => IsExpressionSyntax = expression;
             }
 
             /// <summary>
@@ -78,8 +81,7 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             {
                 public readonly TPatternSyntax PatternSyntax;
 
-                public Source(TPatternSyntax patternSyntax)
-                    => PatternSyntax = patternSyntax;
+                public Source(TPatternSyntax patternSyntax) => PatternSyntax = patternSyntax;
             }
 
             /// <summary>
@@ -89,8 +91,7 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             {
                 public readonly TExpressionSyntax ExpressionSyntax;
 
-                public Constant(TExpressionSyntax expression)
-                    => ExpressionSyntax = expression;
+                public Constant(TExpressionSyntax expression) => ExpressionSyntax = expression;
             }
 
             /// <summary>

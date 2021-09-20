@@ -31,7 +31,6 @@ using Xunit;
 
 namespace System.Drawing.Printing.Tests
 {
-
     public class PageSettingsTests
     {
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]

@@ -9,8 +9,12 @@ namespace Microsoft.AspNetCore.Analyzers
     {
         public StartupSymbols(Compilation compilation)
         {
-            IApplicationBuilder = compilation.GetTypeByMetadataName(SymbolNames.IApplicationBuilder.MetadataName);
-            IServiceCollection = compilation.GetTypeByMetadataName(SymbolNames.IServiceCollection.MetadataName);
+            IApplicationBuilder = compilation.GetTypeByMetadataName(
+                SymbolNames.IApplicationBuilder.MetadataName
+            );
+            IServiceCollection = compilation.GetTypeByMetadataName(
+                SymbolNames.IServiceCollection.MetadataName
+            );
             MvcOptions = compilation.GetTypeByMetadataName(SymbolNames.MvcOptions.MetadataName);
         }
 

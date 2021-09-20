@@ -12,7 +12,13 @@ using Microsoft.CodeAnalysis.Shared.TestHooks;
 
 namespace Microsoft.CodeAnalysis.Notification
 {
-    [ExportWorkspaceServiceFactory(typeof(IGlobalOperationNotificationService), ServiceLayer.Default), Shared]
+    [
+        ExportWorkspaceServiceFactory(
+            typeof(IGlobalOperationNotificationService),
+            ServiceLayer.Default
+        ),
+        Shared
+    ]
     internal class GlobalOperationNotificationServiceFactory : IWorkspaceServiceFactory
     {
         private readonly IAsynchronousOperationListener _listener;
@@ -20,13 +26,14 @@ namespace Microsoft.CodeAnalysis.Notification
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public GlobalOperationNotificationServiceFactory(IAsynchronousOperationListenerProvider listenerProvider)
-        {
+        public GlobalOperationNotificationServiceFactory(
+            IAsynchronousOperationListenerProvider listenerProvider
+        ) {
             _listener = listenerProvider.GetListener(FeatureAttribute.GlobalOperation);
             _singleton = new GlobalOperationNotificationService(_listener);
         }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => _singleton;
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            _singleton;
     }
 }

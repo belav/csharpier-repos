@@ -14,6 +14,8 @@ namespace Microsoft.CodeAnalysis.Host
         /// <summary>
         /// Creates a new workspace service. 
         /// </summary>
-        protected internal abstract HostWorkspaceServices CreateWorkspaceServices(Workspace workspace);
+        protected internal abstract HostWorkspaceServices CreateWorkspaceServices(
+            Workspace workspace
+        );
     }
 }

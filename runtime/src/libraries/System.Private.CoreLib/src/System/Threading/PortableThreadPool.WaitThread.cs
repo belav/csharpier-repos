@@ -15,8 +15,10 @@ namespace System.Threading
         private RegisteredWaitHandle _registeredWaitHandle;
         private bool _timedOut;
 
-        public CompleteWaitThreadPoolWorkItem(RegisteredWaitHandle registeredWaitHandle, bool timedOut)
-        {
+        public CompleteWaitThreadPoolWorkItem(
+            RegisteredWaitHandle registeredWaitHandle,
+            bool timedOut
+        ) {
             _registeredWaitHandle = registeredWaitHandle;
             _timedOut = timedOut;
         }
@@ -68,6 +70,7 @@ namespace System.Threading
                 prev.Next.Thread.RegisterWaitHandle(handle);
                 return;
             }
+
             finally
             {
                 _waitThreadLock.Release();
@@ -100,6 +103,7 @@ namespace System.Threading
                 }
                 RemoveWaitThread(thread);
             }
+
             finally
             {
                 _waitThreadLock.Release();
@@ -128,7 +132,10 @@ namespace System.Threading
                 current = current.Next;
             } while (current != null && current.Thread != thread);
 
-            Debug.Assert(current != null, "The wait thread to remove was not found in the list of thread pool wait threads.");
+            Debug.Assert(
+                current != null,
+                "The wait thread to remove was not found in the list of thread pool wait threads."
+            );
 
             if (current != null)
             {
@@ -152,14 +159,18 @@ namespace System.Threading
             /// <summary>
             /// The wait handles registered on this wait thread.
             /// </summary>
-            private readonly RegisteredWaitHandle[] _registeredWaits = new RegisteredWaitHandle[WaitHandle.MaxWaitHandles - 1];
+            private readonly RegisteredWaitHandle[] _registeredWaits = new RegisteredWaitHandle[
+                WaitHandle.MaxWaitHandles - 1
+            ];
             /// <summary>
             /// The raw wait handles to wait on.
             /// </summary>
             /// <remarks>
             /// The zeroth element of this array is always <see cref="_changeHandlesEvent"/>.
             /// </remarks>
-            private readonly SafeWaitHandle[] _waitHandles = new SafeWaitHandle[WaitHandle.MaxWaitHandles];
+            private readonly SafeWaitHandle[] _waitHandles = new SafeWaitHandle[
+                WaitHandle.MaxWaitHandles
+            ];
             /// <summary>
             /// The number of user-registered waits on this wait thread.
             /// </summary>
@@ -168,7 +179,9 @@ namespace System.Threading
             /// <summary>
             /// A list of removals of wait handles that are waiting for the wait thread to process.
             /// </summary>
-            private readonly RegisteredWaitHandle?[] _pendingRemoves = new RegisteredWaitHandle[WaitHandle.MaxWaitHandles - 1];
+            private readonly RegisteredWaitHandle?[] _pendingRemoves = new RegisteredWaitHandle[
+                WaitHandle.MaxWaitHandles - 1
+            ];
             /// <summary>
             /// The number of pending removals.
             /// </summary>
@@ -227,7 +240,10 @@ namespace System.Threading
                                 continue;
                             }
 
-                            int handleTimeoutDurationMs = Math.Max(0, registeredWait.TimeoutTimeMs - currentTimeMs);
+                            int handleTimeoutDurationMs = Math.Max(
+                                0,
+                                registeredWait.TimeoutTimeMs - currentTimeMs
+                            );
 
                             if (timeoutDurationMs == Timeout.Infinite)
                             {
@@ -235,7 +251,10 @@ namespace System.Threading
                             }
                             else
                             {
-                                timeoutDurationMs = Math.Min(handleTimeoutDurationMs, timeoutDurationMs);
+                                timeoutDurationMs = Math.Min(
+                                    handleTimeoutDurationMs,
+                                    timeoutDurationMs
+                                );
                             }
 
                             if (timeoutDurationMs == 0)
@@ -245,11 +264,15 @@ namespace System.Threading
                         }
                     }
 
-                    int signaledHandleIndex = WaitHandle.WaitAny(new ReadOnlySpan<SafeWaitHandle>(_waitHandles, 0, numUserWaits + 1), timeoutDurationMs);
+                    int signaledHandleIndex = WaitHandle.WaitAny(
+                        new ReadOnlySpan<SafeWaitHandle>(_waitHandles, 0, numUserWaits + 1),
+                        timeoutDurationMs
+                    );
 
-                    if (signaledHandleIndex >= WaitHandle.WaitAbandoned &&
-                        signaledHandleIndex < WaitHandle.WaitAbandoned + 1 + numUserWaits)
-                    {
+                    if (
+                        signaledHandleIndex >= WaitHandle.WaitAbandoned
+                        && signaledHandleIndex < WaitHandle.WaitAbandoned + 1 + numUserWaits
+                    ) {
                         // For compatibility, treat an abandoned mutex wait result as a success and ignore the abandonment
                         Debug.Assert(signaledHandleIndex != WaitHandle.WaitAbandoned); // the first wait handle is an event
                         signaledHandleIndex += WaitHandle.WaitSuccess - WaitHandle.WaitAbandoned;
@@ -262,7 +285,9 @@ namespace System.Threading
 
                     if (signaledHandleIndex != WaitHandle.WaitTimeout)
                     {
-                        RegisteredWaitHandle signaledHandle = _registeredWaits[signaledHandleIndex - 1];
+                        RegisteredWaitHandle signaledHandle = _registeredWaits[
+                            signaledHandleIndex - 1
+                        ];
                         Debug.Assert(signaledHandle != null);
                         QueueWaitCompletion(signaledHandle, false);
                         continue;
@@ -278,8 +303,10 @@ namespace System.Threading
                     {
                         RegisteredWaitHandle registeredHandle = _registeredWaits[i];
                         Debug.Assert(registeredHandle != null);
-                        if (!registeredHandle.IsInfiniteTimeout && currentTimeMs - registeredHandle.TimeoutTimeMs >= 0)
-                        {
+                        if (
+                            !registeredHandle.IsInfiniteTimeout
+                            && currentTimeMs - registeredHandle.TimeoutTimeMs >= 0
+                        ) {
                             QueueWaitCompletion(registeredHandle, true);
                         }
                     }
@@ -300,7 +327,10 @@ namespace System.Threading
                     Debug.Assert(_numPendingRemoves <= _pendingRemoves.Length);
                     Debug.Assert(_numUserWaits >= 0);
                     Debug.Assert(_numUserWaits <= _registeredWaits.Length);
-                    Debug.Assert(_numPendingRemoves <= _numUserWaits, $"Num removals {_numPendingRemoves} should be less than or equal to num user waits {_numUserWaits}");
+                    Debug.Assert(
+                        _numPendingRemoves <= _numUserWaits,
+                        $"Num removals {_numPendingRemoves} should be less than or equal to num user waits {_numUserWaits}"
+                    );
 
                     if (_numPendingRemoves == 0 || _numUserWaits == 0)
                     {
@@ -316,8 +346,7 @@ namespace System.Threading
                         int numUserWaits = _numUserWaits;
                         int j = 0;
                         for (; j < numUserWaits && waitHandleToRemove != _registeredWaits[j]; j++)
-                        {
-                        }
+                        { }
                         Debug.Assert(j < numUserWaits);
 
                         waitHandleToRemove.OnRemoveWait();
@@ -332,13 +361,25 @@ namespace System.Threading
 
                             int removeAt = j;
                             int count = numUserWaits;
-                            Array.Copy(_registeredWaits, removeAt + 1, _registeredWaits, removeAt, count - (removeAt + 1));
+                            Array.Copy(
+                                _registeredWaits,
+                                removeAt + 1,
+                                _registeredWaits,
+                                removeAt,
+                                count - (removeAt + 1)
+                            );
                             _registeredWaits[count - 1] = null!;
 
                             // Corresponding elements in the wait handles array are shifted up by one
                             removeAt++;
                             count++;
-                            Array.Copy(_waitHandles, removeAt + 1, _waitHandles, removeAt, count - (removeAt + 1));
+                            Array.Copy(
+                                _waitHandles,
+                                removeAt + 1,
+                                _waitHandles,
+                                removeAt,
+                                count - (removeAt + 1)
+                            );
                             _waitHandles[count - 1] = null!;
                         }
                         else
@@ -355,10 +396,13 @@ namespace System.Threading
                     }
                     _numPendingRemoves = 0;
 
-                    Debug.Assert(originalNumUserWaits - originalNumPendingRemoves == _numUserWaits,
-                        $"{originalNumUserWaits} - {originalNumPendingRemoves} == {_numUserWaits}");
+                    Debug.Assert(
+                        originalNumUserWaits - originalNumPendingRemoves == _numUserWaits,
+                        $"{originalNumUserWaits} - {originalNumPendingRemoves} == {_numUserWaits}"
+                    );
                     return _numUserWaits; // return the value taken inside the lock for the caller
                 }
+
                 finally
                 {
                     threadPoolInstance._waitThreadLock.Release();
@@ -384,7 +428,9 @@ namespace System.Threading
                     UnregisterWait(registeredHandle, blocking: false); // We shouldn't block the wait thread on the unregistration.
                 }
 
-                ThreadPool.UnsafeQueueWaitCompletion(new CompleteWaitThreadPoolWorkItem(registeredHandle, timedOut));
+                ThreadPool.UnsafeQueueWaitCompletion(
+                    new CompleteWaitThreadPoolWorkItem(registeredHandle, timedOut)
+                );
             }
 
             /// <summary>
@@ -453,6 +499,7 @@ namespace System.Threading
                         pendingRemoval = true;
                     }
                 }
+
                 finally
                 {
                     threadPoolInstance._waitThreadLock.Release();

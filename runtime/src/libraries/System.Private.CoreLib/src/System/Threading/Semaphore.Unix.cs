@@ -10,11 +10,17 @@ namespace System.Threading
 {
     public sealed partial class Semaphore
     {
-        private void CreateSemaphoreCore(int initialCount, int maximumCount, string? name, out bool createdNew)
-        {
+        private void CreateSemaphoreCore(
+            int initialCount,
+            int maximumCount,
+            string? name,
+            out bool createdNew
+        ) {
             if (name != null)
             {
-                throw new PlatformNotSupportedException(SR.PlatformNotSupported_NamedSynchronizationPrimitives);
+                throw new PlatformNotSupportedException(
+                    SR.PlatformNotSupported_NamedSynchronizationPrimitives
+                );
             }
 
             SafeWaitHandle = WaitSubsystem.NewSemaphore(initialCount, maximumCount);
@@ -23,7 +29,9 @@ namespace System.Threading
 
         private static OpenExistingResult OpenExistingWorker(string name, out Semaphore? result)
         {
-            throw new PlatformNotSupportedException(SR.PlatformNotSupported_NamedSynchronizationPrimitives);
+            throw new PlatformNotSupportedException(
+                SR.PlatformNotSupported_NamedSynchronizationPrimitives
+            );
         }
 
         private int ReleaseCore(int releaseCount)
@@ -39,8 +47,12 @@ namespace System.Threading
             waitHandle.DangerousAddRef();
             try
             {
-                return WaitSubsystem.ReleaseSemaphore(waitHandle.DangerousGetHandle(), releaseCount);
+                return WaitSubsystem.ReleaseSemaphore(
+                    waitHandle.DangerousGetHandle(),
+                    releaseCount
+                );
             }
+
             finally
             {
                 waitHandle.DangerousRelease();

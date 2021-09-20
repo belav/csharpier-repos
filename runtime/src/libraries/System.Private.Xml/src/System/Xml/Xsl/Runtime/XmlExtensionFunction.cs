@@ -31,9 +31,13 @@ namespace System.Xml.Xsl.Runtime
             string name,
             string namespaceUri,
             int numArgs,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] Type objectType,
-            BindingFlags flags)
-        {
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.NonPublicMethods
+            )]
+                Type objectType,
+            BindingFlags flags
+        ) {
             XmlExtensionFunction func;
 
             if (_funcCached == null)
@@ -60,26 +64,27 @@ namespace System.Xml.Xsl.Runtime
     /// </summary>
     internal sealed class XmlExtensionFunction
     {
-        private string _namespaceUri;                // Extension object identifier
-        private string _name;                        // Name of this method
-        private int _numArgs;                        // Argument count
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
-        private Type _objectType;                    // Type of the object which will be searched for matching methods
-        private BindingFlags _flags;                 // Modifiers that were used to search for a matching signature
-        private int _hashCode;                       // Pre-computed hashcode
+        private string _namespaceUri; // Extension object identifier
+        private string _name; // Name of this method
+        private int _numArgs; // Argument count
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.NonPublicMethods
+        )]
+        private Type _objectType; // Type of the object which will be searched for matching methods
+        private BindingFlags _flags; // Modifiers that were used to search for a matching signature
+        private int _hashCode; // Pre-computed hashcode
 
-        private MethodInfo _meth;                    // MethodInfo for extension function
-        private Type[] _argClrTypes;                 // Type array for extension function arguments
-        private Type _retClrType;                    // Type for extension function return value
-        private XmlQueryType[] _argXmlTypes;         // XmlQueryType array for extension function arguments
-        private XmlQueryType _retXmlType;            // XmlQueryType for extension function return value
+        private MethodInfo _meth; // MethodInfo for extension function
+        private Type[] _argClrTypes; // Type array for extension function arguments
+        private Type _retClrType; // Type for extension function return value
+        private XmlQueryType[] _argXmlTypes; // XmlQueryType array for extension function arguments
+        private XmlQueryType _retXmlType; // XmlQueryType for extension function return value
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        public XmlExtensionFunction()
-        {
-        }
+        public XmlExtensionFunction() { }
 
         /// <summary>
         /// Constructor (directly binds to passed MethodInfo).
@@ -94,16 +99,34 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Constructor.
         /// </summary>
-        public XmlExtensionFunction(string name, string namespaceUri, int numArgs, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods | DynamicallyAccessedMemberTypes.PublicMethods)] Type objectType, BindingFlags flags)
-        {
+        public XmlExtensionFunction(
+            string name,
+            string namespaceUri,
+            int numArgs,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.NonPublicMethods
+                    | DynamicallyAccessedMemberTypes.PublicMethods
+            )]
+                Type objectType,
+            BindingFlags flags
+        ) {
             Init(name, namespaceUri, numArgs, objectType, flags);
         }
 
         /// <summary>
         /// Initialize, but do not bind.
         /// </summary>
-        public void Init(string name, string namespaceUri, int numArgs, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods | DynamicallyAccessedMemberTypes.PublicMethods)] Type objectType, BindingFlags flags)
-        {
+        public void Init(
+            string name,
+            string namespaceUri,
+            int numArgs,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.NonPublicMethods
+                    | DynamicallyAccessedMemberTypes.PublicMethods
+            )]
+                Type objectType,
+            BindingFlags flags
+        ) {
             _name = name;
             _namespaceUri = namespaceUri;
             _numArgs = numArgs;
@@ -116,7 +139,8 @@ namespace System.Xml.Xsl.Runtime
             _retXmlType = null;
 
             // Compute hash code so that it is not recomputed each time GetHashCode() is called
-            _hashCode = namespaceUri.GetHashCode() ^ name.GetHashCode() ^ ((int)flags << 16) ^ (int)numArgs;
+            _hashCode =
+                namespaceUri.GetHashCode() ^ name.GetHashCode() ^ ((int)flags << 16) ^ (int)numArgs;
         }
 
         /// <summary>
@@ -168,13 +192,17 @@ namespace System.Xml.Xsl.Runtime
         {
             MethodInfo[] methods = _objectType.GetMethods(_flags);
             bool ignoreCase = (_flags & BindingFlags.IgnoreCase) != 0;
-            StringComparison comparison = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+            StringComparison comparison = ignoreCase
+                ? StringComparison.OrdinalIgnoreCase
+                : StringComparison.Ordinal;
 
             // Find method in object type
             foreach (MethodInfo methSearch in methods)
             {
-                if (methSearch.Name.Equals(_name, comparison) && (_numArgs == -1 || methSearch.GetParameters().Length == _numArgs))
-                {
+                if (
+                    methSearch.Name.Equals(_name, comparison)
+                    && (_numArgs == -1 || methSearch.GetParameters().Length == _numArgs)
+                ) {
                     // Binding to generic methods will never succeed
                     if (!methSearch.IsGenericMethodDefinition)
                         return true;
@@ -192,15 +220,24 @@ namespace System.Xml.Xsl.Runtime
             MethodInfo[] methods = _objectType.GetMethods(_flags);
             MethodInfo methMatch = null;
             bool ignoreCase = (_flags & BindingFlags.IgnoreCase) != 0;
-            StringComparison comparison = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+            StringComparison comparison = ignoreCase
+                ? StringComparison.OrdinalIgnoreCase
+                : StringComparison.Ordinal;
 
             // Find method in object type
             foreach (MethodInfo methSearch in methods)
             {
-                if (methSearch.Name.Equals(_name, comparison) && (_numArgs == -1 || methSearch.GetParameters().Length == _numArgs))
-                {
+                if (
+                    methSearch.Name.Equals(_name, comparison)
+                    && (_numArgs == -1 || methSearch.GetParameters().Length == _numArgs)
+                ) {
                     if (methMatch != null)
-                        throw new XslTransformException(/*[XT_037]*/SR.XmlIl_AmbiguousExtensionMethod, _namespaceUri, _name, _numArgs.ToString(CultureInfo.InvariantCulture));
+                        throw new XslTransformException( /*[XT_037]*/
+                            SR.XmlIl_AmbiguousExtensionMethod,
+                            _namespaceUri,
+                            _name,
+                            _numArgs.ToString(CultureInfo.InvariantCulture)
+                        );
 
                     methMatch = methSearch;
                 }
@@ -211,14 +248,30 @@ namespace System.Xml.Xsl.Runtime
                 methods = _objectType.GetMethods(_flags | BindingFlags.NonPublic);
                 foreach (MethodInfo methSearch in methods)
                 {
-                    if (methSearch.Name.Equals(_name, comparison) && methSearch.GetParameters().Length == _numArgs)
-                        throw new XslTransformException(/*[XT_038]*/SR.XmlIl_NonPublicExtensionMethod, _namespaceUri, _name);
+                    if (
+                        methSearch.Name.Equals(_name, comparison)
+                        && methSearch.GetParameters().Length == _numArgs
+                    )
+                        throw new XslTransformException( /*[XT_038]*/
+                            SR.XmlIl_NonPublicExtensionMethod,
+                            _namespaceUri,
+                            _name
+                        );
                 }
-                throw new XslTransformException(/*[XT_039]*/SR.XmlIl_NoExtensionMethod, _namespaceUri, _name, _numArgs.ToString(CultureInfo.InvariantCulture));
+                throw new XslTransformException( /*[XT_039]*/
+                    SR.XmlIl_NoExtensionMethod,
+                    _namespaceUri,
+                    _name,
+                    _numArgs.ToString(CultureInfo.InvariantCulture)
+                );
             }
 
             if (methMatch.IsGenericMethodDefinition)
-                throw new XslTransformException(/*[XT_040]*/SR.XmlIl_GenericExtensionMethod, _namespaceUri, _name);
+                throw new XslTransformException( /*[XT_040]*/
+                    SR.XmlIl_GenericExtensionMethod,
+                    _namespaceUri,
+                    _name
+                );
 
             Debug.Assert(methMatch.ContainsGenericParameters == false);
 
@@ -281,7 +334,10 @@ namespace System.Xml.Xsl.Runtime
         public object Invoke(object extObj, object[] args)
         {
             Debug.Assert(_meth != null, "Must call Bind() before calling Invoke.");
-            Debug.Assert(args.Length == _argClrTypes.Length, "Mismatched number of actual and formal arguments.");
+            Debug.Assert(
+                args.Length == _argClrTypes.Length,
+                "Mismatched number of actual and formal arguments."
+            );
 
             try
             {
@@ -310,8 +366,14 @@ namespace System.Xml.Xsl.Runtime
             Debug.Assert(that != null);
 
             // Compare name, argument count, object type, and binding flags
-            return (_hashCode == that._hashCode && _name == that._name && _namespaceUri == that._namespaceUri &&
-                    _numArgs == that._numArgs && _objectType == that._objectType && _flags == that._flags);
+            return (
+                _hashCode == that._hashCode
+                && _name == that._name
+                && _namespaceUri == that._namespaceUri
+                && _numArgs == that._numArgs
+                && _objectType == that._objectType
+                && _flags == that._flags
+            );
         }
 
         /// <summary>
@@ -332,7 +394,11 @@ namespace System.Xml.Xsl.Runtime
                 return Enum.GetUnderlyingType(clrType);
 
             if (clrType.IsByRef)
-                throw new XslTransformException(/*[XT_050]*/SR.XmlIl_ByRefType, _namespaceUri, _name);
+                throw new XslTransformException( /*[XT_050]*/
+                    SR.XmlIl_ByRefType,
+                    _namespaceUri,
+                    _name
+                );
 
             return clrType;
         }

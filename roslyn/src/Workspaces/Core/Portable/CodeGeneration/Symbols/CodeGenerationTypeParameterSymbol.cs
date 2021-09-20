@@ -8,7 +8,9 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.CodeGeneration
 {
-    internal class CodeGenerationTypeParameterSymbol : CodeGenerationTypeSymbol, ITypeParameterSymbol
+    internal class CodeGenerationTypeParameterSymbol
+        : CodeGenerationTypeSymbol,
+          ITypeParameterSymbol
     {
         public VarianceKind Variance { get; }
         public ImmutableArray<ITypeSymbol> ConstraintTypes { get; internal set; }
@@ -31,9 +33,17 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             bool hasValueConstraint,
             bool hasUnmanagedConstraint,
             bool hasNotNullConstraint,
-            int ordinal)
-            : base(containingType?.ContainingAssembly, containingType, attributes, Accessibility.NotApplicable, default, name, SpecialType.None, nullableAnnotation)
-        {
+            int ordinal
+        ) : base(
+            containingType?.ContainingAssembly,
+            containingType,
+            attributes,
+            Accessibility.NotApplicable,
+            default,
+            name,
+            SpecialType.None,
+            nullableAnnotation
+        ) {
             this.Variance = varianceKind;
             this.ConstraintTypes = constraintTypes;
             this.Ordinal = ordinal;
@@ -44,12 +54,23 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             this.HasNotNullConstraint = hasNotNullConstraint;
         }
 
-        protected override CodeGenerationTypeSymbol CloneWithNullableAnnotation(NullableAnnotation nullableAnnotation)
-        {
+        protected override CodeGenerationTypeSymbol CloneWithNullableAnnotation(
+            NullableAnnotation nullableAnnotation
+        ) {
             return new CodeGenerationTypeParameterSymbol(
-                this.ContainingType, this.GetAttributes(), this.Variance, this.Name, nullableAnnotation,
-                this.ConstraintTypes, this.HasConstructorConstraint, this.HasReferenceTypeConstraint,
-                this.HasValueTypeConstraint, this.HasUnmanagedTypeConstraint, this.HasNotNullConstraint, this.Ordinal);
+                this.ContainingType,
+                this.GetAttributes(),
+                this.Variance,
+                this.Name,
+                nullableAnnotation,
+                this.ConstraintTypes,
+                this.HasConstructorConstraint,
+                this.HasReferenceTypeConstraint,
+                this.HasValueTypeConstraint,
+                this.HasUnmanagedTypeConstraint,
+                this.HasNotNullConstraint,
+                this.Ordinal
+            );
         }
 
         public new ITypeParameterSymbol OriginalDefinition => this;
@@ -58,11 +79,10 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         public override SymbolKind Kind => SymbolKind.TypeParameter;
 
-        public override void Accept(SymbolVisitor visitor)
-            => visitor.VisitTypeParameter(this);
+        public override void Accept(SymbolVisitor visitor) => visitor.VisitTypeParameter(this);
 
-        public override TResult Accept<TResult>(SymbolVisitor<TResult> visitor)
-            => visitor.VisitTypeParameter(this);
+        public override TResult Accept<TResult>(SymbolVisitor<TResult> visitor) =>
+            visitor.VisitTypeParameter(this);
 
         public override TypeKind TypeKind => TypeKind.TypeParameter;
 
@@ -71,29 +91,25 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             get
             {
                 return this.DeclaringMethod != null
-                    ? TypeParameterKind.Method
-                    : TypeParameterKind.Type;
+                  ? TypeParameterKind.Method
+                  : TypeParameterKind.Type;
             }
         }
 
         public IMethodSymbol DeclaringMethod
         {
-            get
-            {
-                return this.ContainingSymbol as IMethodSymbol;
-            }
+            get { return this.ContainingSymbol as IMethodSymbol; }
         }
 
         public INamedTypeSymbol DeclaringType
         {
-            get
-            {
-                return this.ContainingSymbol as INamedTypeSymbol;
-            }
+            get { return this.ContainingSymbol as INamedTypeSymbol; }
         }
 
-        public NullableAnnotation ReferenceTypeConstraintNullableAnnotation => throw new System.NotImplementedException();
+        public NullableAnnotation ReferenceTypeConstraintNullableAnnotation =>
+            throw new System.NotImplementedException();
 
-        public ImmutableArray<NullableAnnotation> ConstraintNullableAnnotations => ConstraintTypes.SelectAsArray(t => t.NullableAnnotation);
+        public ImmutableArray<NullableAnnotation> ConstraintNullableAnnotations =>
+            ConstraintTypes.SelectAsArray(t => t.NullableAnnotation);
     }
 }

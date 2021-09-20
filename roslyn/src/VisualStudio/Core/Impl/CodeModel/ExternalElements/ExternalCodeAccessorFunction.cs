@@ -15,24 +15,36 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE.CodeFunction))]
-    public sealed class ExternalCodeAccessorFunction : AbstractExternalCodeMember, EnvDTE.CodeFunction
+    public sealed class ExternalCodeAccessorFunction
+        : AbstractExternalCodeMember,
+          EnvDTE.CodeFunction
     {
-        internal static EnvDTE.CodeFunction Create(CodeModelState state, ProjectId projectId, IMethodSymbol symbol, AbstractExternalCodeMember parent)
-        {
+        internal static EnvDTE.CodeFunction Create(
+            CodeModelState state,
+            ProjectId projectId,
+            IMethodSymbol symbol,
+            AbstractExternalCodeMember parent
+        ) {
             var element = new ExternalCodeAccessorFunction(state, projectId, symbol, parent);
             return (EnvDTE.CodeFunction)ComAggregate.CreateAggregatedObject(element);
         }
 
         private readonly ParentHandle<AbstractExternalCodeMember> _parentHandle;
 
-        private ExternalCodeAccessorFunction(CodeModelState state, ProjectId projectId, IMethodSymbol symbol, AbstractExternalCodeMember parent)
-            : base(state, projectId, symbol)
+        private ExternalCodeAccessorFunction(
+            CodeModelState state,
+            ProjectId projectId,
+            IMethodSymbol symbol,
+            AbstractExternalCodeMember parent
+        ) : base(state, projectId, symbol)
         {
-            Debug.Assert(symbol.MethodKind == MethodKind.EventAdd ||
-                         symbol.MethodKind == MethodKind.EventRaise ||
-                         symbol.MethodKind == MethodKind.EventRemove ||
-                         symbol.MethodKind == MethodKind.PropertyGet ||
-                         symbol.MethodKind == MethodKind.PropertySet);
+            Debug.Assert(
+                symbol.MethodKind == MethodKind.EventAdd
+                    || symbol.MethodKind == MethodKind.EventRaise
+                    || symbol.MethodKind == MethodKind.EventRemove
+                    || symbol.MethodKind == MethodKind.PropertyGet
+                    || symbol.MethodKind == MethodKind.PropertySet
+            );
 
             _parentHandle = new ParentHandle<AbstractExternalCodeMember>(parent);
         }
@@ -45,37 +57,29 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
         private bool IsPropertyAccessor()
         {
             var methodKind = MethodSymbol.MethodKind;
-            return methodKind == MethodKind.PropertyGet
-                || methodKind == MethodKind.PropertySet;
+            return methodKind == MethodKind.PropertyGet || methodKind == MethodKind.PropertySet;
         }
 
-        protected override EnvDTE.vsCMAccess GetAccess()
-            => _parentHandle.Value.Access;
+        protected override EnvDTE.vsCMAccess GetAccess() => _parentHandle.Value.Access;
 
         protected override bool GetCanOverride()
         {
             return IsPropertyAccessor()
-                ? ((ExternalCodeProperty)_parentHandle.Value).CanOverride
-                : ((ExternalCodeEvent)_parentHandle.Value).CanOverride;
+              ? ((ExternalCodeProperty)_parentHandle.Value).CanOverride
+              : ((ExternalCodeEvent)_parentHandle.Value).CanOverride;
         }
 
-        protected override string GetDocComment()
-            => string.Empty;
+        protected override string GetDocComment() => string.Empty;
 
-        protected override string GetFullName()
-            => _parentHandle.Value.FullName;
+        protected override string GetFullName() => _parentHandle.Value.FullName;
 
-        protected override bool GetIsShared()
-            => _parentHandle.Value.IsShared;
+        protected override bool GetIsShared() => _parentHandle.Value.IsShared;
 
-        protected override bool GetMustImplement()
-            => _parentHandle.Value.MustImplement;
+        protected override bool GetMustImplement() => _parentHandle.Value.MustImplement;
 
-        protected override string GetName()
-            => _parentHandle.Value.Name;
+        protected override string GetName() => _parentHandle.Value.Name;
 
-        protected override object GetParent()
-            => _parentHandle.Value;
+        protected override object GetParent() => _parentHandle.Value;
 
         public override EnvDTE.vsCMElement Kind
         {
@@ -117,15 +121,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 
         public EnvDTE.CodeTypeRef Type
         {
-            get
-            {
-                return ((ExternalCodeProperty)_parentHandle.Value).Type;
-            }
-
-            set
-            {
-                throw Exceptions.ThrowEFail();
-            }
+            get { return ((ExternalCodeProperty)_parentHandle.Value).Type; }
+            set { throw Exceptions.ThrowEFail(); }
         }
     }
 }

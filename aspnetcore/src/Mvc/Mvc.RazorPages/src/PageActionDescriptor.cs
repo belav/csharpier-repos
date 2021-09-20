@@ -18,9 +18,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         /// <summary>
         /// Initializes a new instance of <see cref="PageActionDescriptor"/>.
         /// </summary>
-        public PageActionDescriptor()
-        {
-        }
+        public PageActionDescriptor() { }
 
         /// <summary>
         /// A copy constructor for <see cref="PageActionDescriptor"/>.
@@ -79,7 +77,6 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
 
                 return base.DisplayName;
             }
-
             set
             {
                 if (value == null)
@@ -91,6 +88,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             }
         }
 
-        private string DebuggerDisplayString => $"{nameof(ViewEnginePath)} = {ViewEnginePath}, {nameof(RelativePath)} = {RelativePath}";
+        private string DebuggerDisplayString =>
+            $"{nameof(ViewEnginePath)} = {ViewEnginePath}, {nameof(RelativePath)} = {RelativePath}";
     }
 }

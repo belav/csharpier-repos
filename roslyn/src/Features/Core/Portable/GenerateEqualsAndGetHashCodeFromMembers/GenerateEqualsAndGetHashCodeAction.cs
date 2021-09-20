@@ -40,8 +40,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                 bool generateEquals,
                 bool generateGetHashCode,
                 bool implementIEquatable,
-                bool generateOperators)
-            {
+                bool generateOperators
+            ) {
                 _document = document;
                 _typeDeclaration = typeDeclaration;
                 _containingType = containingType;
@@ -54,25 +54,39 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
 
             public override string EquivalenceKey => Title;
 
-            protected override async Task<Document> GetChangedDocumentAsync(CancellationToken cancellationToken)
-            {
+            protected override async Task<Document> GetChangedDocumentAsync(
+                CancellationToken cancellationToken
+            ) {
                 using var _ = ArrayBuilder<IMethodSymbol>.GetInstance(out var methods);
 
                 if (_generateEquals)
                 {
-                    methods.Add(await CreateEqualsMethodAsync(cancellationToken).ConfigureAwait(false));
+                    methods.Add(
+                        await CreateEqualsMethodAsync(cancellationToken).ConfigureAwait(false)
+                    );
                 }
 
-                var constructedTypeToImplement = await GetConstructedTypeToImplementAsync(cancellationToken).ConfigureAwait(false);
+                var constructedTypeToImplement = await GetConstructedTypeToImplementAsync(
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (constructedTypeToImplement is object)
                 {
-                    methods.Add(await CreateIEquatableEqualsMethodAsync(constructedTypeToImplement, cancellationToken).ConfigureAwait((bool)false));
+                    methods.Add(
+                        await CreateIEquatableEqualsMethodAsync(
+                                constructedTypeToImplement,
+                                cancellationToken
+                            )
+                            .ConfigureAwait((bool)false)
+                    );
                 }
 
                 if (_generateGetHashCode)
                 {
-                    methods.Add(await CreateGetHashCodeMethodAsync(cancellationToken).ConfigureAwait(false));
+                    methods.Add(
+                        await CreateGetHashCodeMethodAsync(cancellationToken).ConfigureAwait(false)
+                    );
                 }
 
                 if (_generateOperators)
@@ -80,88 +94,137 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                     await AddOperatorsAsync(methods, cancellationToken).ConfigureAwait(false);
                 }
 
-                var options = await _document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
+                var options = await _document.GetOptionsAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var newTypeDeclaration = CodeGenerator.AddMemberDeclarations(
-                    _typeDeclaration, methods, _document.Project.Solution.Workspace,
-                    new CodeGenerationOptions(options: options));
+                    _typeDeclaration,
+                    methods,
+                    _document.Project.Solution.Workspace,
+                    new CodeGenerationOptions(options: options)
+                );
 
                 if (constructedTypeToImplement is object)
                 {
                     var generator = _document.GetRequiredLanguageService<SyntaxGenerator>();
 
-                    newTypeDeclaration = generator.AddInterfaceType(newTypeDeclaration,
-                        generator.TypeExpression(constructedTypeToImplement));
+                    newTypeDeclaration = generator.AddInterfaceType(
+                        newTypeDeclaration,
+                        generator.TypeExpression(constructedTypeToImplement)
+                    );
                 }
 
                 var newDocument = await UpdateDocumentAndAddImportsAsync(
-                    _typeDeclaration, newTypeDeclaration, cancellationToken).ConfigureAwait(false);
+                        _typeDeclaration,
+                        newTypeDeclaration,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
-                var service = _document.GetRequiredLanguageService<IGenerateEqualsAndGetHashCodeService>();
+                var service =
+                    _document.GetRequiredLanguageService<IGenerateEqualsAndGetHashCodeService>();
                 var formattedDocument = await service.FormatDocumentAsync(
-                    newDocument, cancellationToken).ConfigureAwait(false);
+                        newDocument,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 return formattedDocument;
             }
 
-            private async Task<INamedTypeSymbol?> GetConstructedTypeToImplementAsync(CancellationToken cancellationToken)
-            {
+            private async Task<INamedTypeSymbol?> GetConstructedTypeToImplementAsync(
+                CancellationToken cancellationToken
+            ) {
                 if (!_implementIEquatable)
                     return null;
 
-                var semanticModel = await _document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-                var equatableType = semanticModel.Compilation.GetTypeByMetadataName(typeof(IEquatable<>).FullName!);
+                var semanticModel = await _document.GetRequiredSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var equatableType = semanticModel.Compilation.GetTypeByMetadataName(
+                    typeof(IEquatable<>).FullName!
+                );
                 if (equatableType == null)
                     return null;
 
                 var useNullableTypeArgument =
                     !_containingType.IsValueType
-                    && semanticModel.GetNullableContext(_typeDeclaration.SpanStart).AnnotationsEnabled();
+                    && semanticModel.GetNullableContext(_typeDeclaration.SpanStart)
+                        .AnnotationsEnabled();
 
                 return useNullableTypeArgument
-                    ? equatableType.Construct(_containingType.WithNullableAnnotation(NullableAnnotation.Annotated))
-                    : equatableType.Construct(_containingType);
+                  ? equatableType.Construct(
+                        _containingType.WithNullableAnnotation(NullableAnnotation.Annotated)
+                    )
+                  : equatableType.Construct(_containingType);
             }
 
-            private async Task<Document> UpdateDocumentAndAddImportsAsync(SyntaxNode oldType, SyntaxNode newType, CancellationToken cancellationToken)
-            {
-                var oldRoot = await _document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-                var newDocument = _document.WithSyntaxRoot(
-                    oldRoot.ReplaceNode(oldType, newType));
+            private async Task<Document> UpdateDocumentAndAddImportsAsync(
+                SyntaxNode oldType,
+                SyntaxNode newType,
+                CancellationToken cancellationToken
+            ) {
+                var oldRoot = await _document.GetRequiredSyntaxRootAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var newDocument = _document.WithSyntaxRoot(oldRoot.ReplaceNode(oldType, newType));
                 newDocument = await ImportAdder.AddImportsFromSymbolAnnotationAsync(
-                    newDocument,
-                    cancellationToken: cancellationToken).ConfigureAwait(false);
+                        newDocument,
+                        cancellationToken: cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 return newDocument;
             }
 
-            private async Task AddOperatorsAsync(ArrayBuilder<IMethodSymbol> members, CancellationToken cancellationToken)
-            {
-                var compilation = await _document.Project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
+            private async Task AddOperatorsAsync(
+                ArrayBuilder<IMethodSymbol> members,
+                CancellationToken cancellationToken
+            ) {
+                var compilation = await _document.Project.GetRequiredCompilationAsync(
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 var generator = _document.GetRequiredLanguageService<SyntaxGenerator>();
 
                 // add nullable annotation to the parameter reference type, so that (in)equality operator implementations allow comparison against null
                 var parameters = ImmutableArray.Create(
-                    CodeGenerationSymbolFactory.CreateParameterSymbol(_containingType.IsValueType ? _containingType : _containingType.WithNullableAnnotation(NullableAnnotation.Annotated), LeftName),
-                    CodeGenerationSymbolFactory.CreateParameterSymbol(_containingType.IsValueType ? _containingType : _containingType.WithNullableAnnotation(NullableAnnotation.Annotated), RightName));
+                    CodeGenerationSymbolFactory.CreateParameterSymbol(
+                        _containingType.IsValueType
+                          ? _containingType
+                          : _containingType.WithNullableAnnotation(NullableAnnotation.Annotated),
+                        LeftName
+                    ),
+                    CodeGenerationSymbolFactory.CreateParameterSymbol(
+                        _containingType.IsValueType
+                          ? _containingType
+                          : _containingType.WithNullableAnnotation(NullableAnnotation.Annotated),
+                        RightName
+                    )
+                );
 
                 members.Add(CreateEqualityOperator(compilation, generator, parameters));
                 members.Add(CreateInequalityOperator(compilation, generator, parameters));
             }
 
-            private IMethodSymbol CreateEqualityOperator(Compilation compilation, SyntaxGenerator generator, ImmutableArray<IParameterSymbol> parameters)
-            {
+            private IMethodSymbol CreateEqualityOperator(
+                Compilation compilation,
+                SyntaxGenerator generator,
+                ImmutableArray<IParameterSymbol> parameters
+            ) {
                 var expression = _containingType.IsValueType
                     ? generator.InvocationExpression(
-                        generator.MemberAccessExpression(
-                            generator.IdentifierName(LeftName),
-                            generator.IdentifierName(EqualsName)),
-                        generator.IdentifierName(RightName))
+                          generator.MemberAccessExpression(
+                              generator.IdentifierName(LeftName),
+                              generator.IdentifierName(EqualsName)
+                          ),
+                          generator.IdentifierName(RightName)
+                      )
                     : generator.InvocationExpression(
-                        generator.MemberAccessExpression(
-                            generator.GetDefaultEqualityComparer(compilation, _containingType),
-                            generator.IdentifierName(EqualsName)),
-                        generator.IdentifierName(LeftName),
-                        generator.IdentifierName(RightName));
+                          generator.MemberAccessExpression(
+                              generator.GetDefaultEqualityComparer(compilation, _containingType),
+                              generator.IdentifierName(EqualsName)
+                          ),
+                          generator.IdentifierName(LeftName),
+                          generator.IdentifierName(RightName)
+                      );
 
                 return CodeGenerationSymbolFactory.CreateOperatorSymbol(
                     default,
@@ -170,15 +233,21 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                     compilation.GetSpecialType(SpecialType.System_Boolean),
                     CodeGenerationOperatorKind.Equality,
                     parameters,
-                    ImmutableArray.Create(generator.ReturnStatement(expression)));
+                    ImmutableArray.Create(generator.ReturnStatement(expression))
+                );
             }
 
-            private static IMethodSymbol CreateInequalityOperator(Compilation compilation, SyntaxGenerator generator, ImmutableArray<IParameterSymbol> parameters)
-            {
+            private static IMethodSymbol CreateInequalityOperator(
+                Compilation compilation,
+                SyntaxGenerator generator,
+                ImmutableArray<IParameterSymbol> parameters
+            ) {
                 var expression = generator.LogicalNotExpression(
                     generator.ValueEqualsExpression(
                         generator.IdentifierName(LeftName),
-                        generator.IdentifierName(RightName)));
+                        generator.IdentifierName(RightName)
+                    )
+                );
 
                 return CodeGenerationSymbolFactory.CreateOperatorSymbol(
                     default,
@@ -187,35 +256,61 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                     compilation.GetSpecialType(SpecialType.System_Boolean),
                     CodeGenerationOperatorKind.Inequality,
                     parameters,
-                    ImmutableArray.Create(generator.ReturnStatement(expression)));
+                    ImmutableArray.Create(generator.ReturnStatement(expression))
+                );
             }
 
-            private Task<IMethodSymbol> CreateGetHashCodeMethodAsync(CancellationToken cancellationToken)
-            {
-                var service = _document.GetRequiredLanguageService<IGenerateEqualsAndGetHashCodeService>();
-                return service.GenerateGetHashCodeMethodAsync(_document, _containingType, _selectedMembers, cancellationToken);
+            private Task<IMethodSymbol> CreateGetHashCodeMethodAsync(
+                CancellationToken cancellationToken
+            ) {
+                var service =
+                    _document.GetRequiredLanguageService<IGenerateEqualsAndGetHashCodeService>();
+                return service.GenerateGetHashCodeMethodAsync(
+                    _document,
+                    _containingType,
+                    _selectedMembers,
+                    cancellationToken
+                );
             }
 
             private Task<IMethodSymbol> CreateEqualsMethodAsync(CancellationToken cancellationToken)
             {
-                var service = _document.GetRequiredLanguageService<IGenerateEqualsAndGetHashCodeService>();
+                var service =
+                    _document.GetRequiredLanguageService<IGenerateEqualsAndGetHashCodeService>();
                 return _implementIEquatable
-                    ? service.GenerateEqualsMethodThroughIEquatableEqualsAsync(_document, _containingType, cancellationToken)
-                    : service.GenerateEqualsMethodAsync(_document, _containingType, _selectedMembers, cancellationToken);
+                  ? service.GenerateEqualsMethodThroughIEquatableEqualsAsync(
+                        _document,
+                        _containingType,
+                        cancellationToken
+                    )
+                  : service.GenerateEqualsMethodAsync(
+                        _document,
+                        _containingType,
+                        _selectedMembers,
+                        cancellationToken
+                    );
             }
 
-            private async Task<IMethodSymbol> CreateIEquatableEqualsMethodAsync(INamedTypeSymbol constructedEquatableType, CancellationToken cancellationToken)
-            {
-                var service = _document.GetRequiredLanguageService<IGenerateEqualsAndGetHashCodeService>();
+            private async Task<IMethodSymbol> CreateIEquatableEqualsMethodAsync(
+                INamedTypeSymbol constructedEquatableType,
+                CancellationToken cancellationToken
+            ) {
+                var service =
+                    _document.GetRequiredLanguageService<IGenerateEqualsAndGetHashCodeService>();
                 return await service.GenerateIEquatableEqualsMethodAsync(
-                    _document, _containingType, _selectedMembers, constructedEquatableType, cancellationToken).ConfigureAwait(false);
+                        _document,
+                        _containingType,
+                        _selectedMembers,
+                        constructedEquatableType,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
-            public override string Title
-                => GetTitle(_generateEquals, _generateGetHashCode);
+            public override string Title => GetTitle(_generateEquals, _generateGetHashCode);
 
-            internal static string GetTitle(bool generateEquals, bool generateGetHashCode)
-                => generateEquals
+            internal static string GetTitle(bool generateEquals, bool generateGetHashCode) =>
+                generateEquals
                     ? generateGetHashCode
                         ? FeaturesResources.Generate_Equals_and_GetHashCode
                         : FeaturesResources.Generate_Equals_object

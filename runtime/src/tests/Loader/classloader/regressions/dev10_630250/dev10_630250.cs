@@ -3,24 +3,28 @@
 
 using System;
 
-public interface I<W> 
-{ 
-    string Method(); 
+public interface I<W>
+{
+    string Method();
 }
-public class MyBase<U, V> : I<U> 
-{ 
+public class MyBase<U, V> : I<U>
+{
     string I<U>.Method()
-    { return "MyBase.Method()"; } 
+    {
+        return "MyBase.Method()";
+    }
 }
-public class MyClass<T> : MyBase<string, T>, I<T> 
-{ 
+public class MyClass<T> : MyBase<string, T>, I<T>
+{
     string I<T>.Method()
-    { return "MyClass.Method()"; }
+    {
+        return "MyClass.Method()";
+    }
 }
 
 class Test
 {
-    public static int Main() 
+    public static int Main()
     {
         MyClass<string> s1 = new MyClass<string>();
         MyClass<object> s2 = new MyClass<object>();

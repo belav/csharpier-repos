@@ -27,7 +27,11 @@ namespace FormatterWebSite.Controllers
 
         public JsonFormatterController(ArrayPool<char> charPool)
         {
-            _indentingFormatter = new NewtonsoftJsonOutputFormatter(_indentedSettings, charPool, new MvcOptions());
+            _indentingFormatter = new NewtonsoftJsonOutputFormatter(
+                _indentedSettings,
+                charPool,
+                new MvcOptions()
+            );
         }
 
         public IActionResult ReturnsIndentedJson()
@@ -36,7 +40,8 @@ namespace FormatterWebSite.Controllers
             {
                 Id = 1,
                 Alias = "john",
-                description = "This is long so we can test large objects " + new string('a', 1024 * 65),
+                description =
+                    "This is long so we can test large objects " + new string('a', 1024 * 65),
                 Designation = "Administrator",
                 Name = "John Williams"
             };
@@ -76,7 +81,9 @@ namespace FormatterWebSite.Controllers
         }
 
         [HttpPost]
-        public ActionResult<SimpleRecordModel> RoundtripRecordType([FromBody] SimpleRecordModel model) => model;
+        public ActionResult<SimpleRecordModel> RoundtripRecordType(
+            [FromBody] SimpleRecordModel model
+        ) => model;
 
         public class SimpleModel
         {
@@ -90,19 +97,15 @@ namespace FormatterWebSite.Controllers
         public record SimpleRecordModel(int Id, string Name, string StreetName);
 
         public record SimpleModelWithValidation(
-            [Range(1, 100)]
-            int Id,
-
-            [Required]
-            [StringLength(8, MinimumLength = 2)]
-            string Name,
-
-            [Required]
-            string StreetName);
+            [Range(1, 100)] int Id,
+            [Required] [StringLength(8, MinimumLength = 2)] string Name,
+            [Required] string StreetName
+        );
 
         [HttpPost]
-        public ActionResult<SimpleModelWithValidation> RoundtripModelWithValidation([FromBody] SimpleModelWithValidation model)
-        {
+        public ActionResult<SimpleModelWithValidation> RoundtripModelWithValidation(
+            [FromBody] SimpleModelWithValidation model
+        ) {
             if (!ModelState.IsValid)
                 return ValidationProblem();
             return model;

@@ -15,14 +15,18 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         internal Func<RunRequest, CancellationToken, BuildResponse> RunCompilation { get; }
         public ICompilerServerLogger Logger { get; }
 
-        internal TestableCompilerServerHost(Func<RunRequest, CancellationToken, BuildResponse> runCompilation = null, ICompilerServerLogger logger = null)
-        {
+        internal TestableCompilerServerHost(
+            Func<RunRequest, CancellationToken, BuildResponse> runCompilation = null,
+            ICompilerServerLogger logger = null
+        ) {
             RunCompilation = runCompilation;
             Logger = logger ?? EmptyCompilerServerLogger.Instance;
         }
 
-        BuildResponse ICompilerServerHost.RunCompilation(in RunRequest request, CancellationToken cancellationToken)
-        {
+        BuildResponse ICompilerServerHost.RunCompilation(
+            in RunRequest request,
+            CancellationToken cancellationToken
+        ) {
             return RunCompilation(request, cancellationToken);
         }
     }

@@ -68,7 +68,9 @@ namespace Microsoft.CodeAnalysis
             }
             catch (Exception e)
             {
-                throw new InvalidRuleSetException(string.Format(CodeAnalysisResources.InvalidRuleSetInclude, path, e.Message));
+                throw new InvalidRuleSetException(
+                    string.Format(CodeAnalysisResources.InvalidRuleSetInclude, path, e.Message)
+                );
             }
 
             return ruleSet;
@@ -117,7 +119,10 @@ namespace Microsoft.CodeAnalysis
                 else if (!string.IsNullOrEmpty(parentRulesetPath))
                 {
                     // Otherwise, try to find the include file relative to the parent ruleset.
-                    includePath = PathUtilities.CombinePathsUnchecked(Path.GetDirectoryName(parentRulesetPath) ?? "", includePath);
+                    includePath = PathUtilities.CombinePathsUnchecked(
+                        Path.GetDirectoryName(parentRulesetPath) ?? "",
+                        includePath
+                    );
                     if (File.Exists(includePath))
                     {
                         return includePath;

@@ -33,8 +33,10 @@ namespace Microsoft.AspNetCore.Authorization.Policy
         /// <param name="policy">The <see cref="AuthorizationPolicy"/>.</param>
         /// <param name="context">The <see cref="HttpContext"/>.</param>
         /// <returns><see cref="AuthenticateResult.Success"/> unless all schemes specified by <see cref="AuthorizationPolicy.AuthenticationSchemes"/> failed to authenticate.  </returns>
-        public virtual async Task<AuthenticateResult> AuthenticateAsync(AuthorizationPolicy policy, HttpContext context)
-        {
+        public virtual async Task<AuthenticateResult> AuthenticateAsync(
+            AuthorizationPolicy policy,
+            HttpContext context
+        ) {
             if (policy.AuthenticationSchemes != null && policy.AuthenticationSchemes.Count > 0)
             {
                 ClaimsPrincipal? newPrincipal = null;
@@ -43,14 +45,22 @@ namespace Microsoft.AspNetCore.Authorization.Policy
                     var result = await context.AuthenticateAsync(scheme);
                     if (result != null && result.Succeeded)
                     {
-                        newPrincipal = SecurityHelper.MergeUserPrincipal(newPrincipal, result.Principal);
+                        newPrincipal = SecurityHelper.MergeUserPrincipal(
+                            newPrincipal,
+                            result.Principal
+                        );
                     }
                 }
 
                 if (newPrincipal != null)
                 {
                     context.User = newPrincipal;
-                    return AuthenticateResult.Success(new AuthenticationTicket(newPrincipal, string.Join(";", policy.AuthenticationSchemes)));
+                    return AuthenticateResult.Success(
+                        new AuthenticationTicket(
+                            newPrincipal,
+                            string.Join(";", policy.AuthenticationSchemes)
+                        )
+                    );
                 }
                 else
                 {
@@ -60,8 +70,8 @@ namespace Microsoft.AspNetCore.Authorization.Policy
             }
 
             return (context.User?.Identity?.IsAuthenticated ?? false)
-                ? AuthenticateResult.Success(new AuthenticationTicket(context.User, "context.User"))
-                : AuthenticateResult.NoResult();
+              ? AuthenticateResult.Success(new AuthenticationTicket(context.User, "context.User"))
+              : AuthenticateResult.NoResult();
         }
 
         /// <summary>
@@ -77,8 +87,12 @@ namespace Microsoft.AspNetCore.Authorization.Policy
         /// <returns>Returns <see cref="PolicyAuthorizationResult.Success"/> if authorization succeeds.
         /// Otherwise returns <see cref="PolicyAuthorizationResult.Forbid(AuthorizationFailure)"/> if <see cref="AuthenticateResult.Succeeded"/>, otherwise
         /// returns  <see cref="PolicyAuthorizationResult.Challenge"/></returns>
-        public virtual async Task<PolicyAuthorizationResult> AuthorizeAsync(AuthorizationPolicy policy, AuthenticateResult authenticationResult, HttpContext context, object? resource)
-        {
+        public virtual async Task<PolicyAuthorizationResult> AuthorizeAsync(
+            AuthorizationPolicy policy,
+            AuthenticateResult authenticationResult,
+            HttpContext context,
+            object? resource
+        ) {
             if (policy == null)
             {
                 throw new ArgumentNullException(nameof(policy));
@@ -92,8 +106,8 @@ namespace Microsoft.AspNetCore.Authorization.Policy
 
             // If authentication was successful, return forbidden, otherwise challenge
             return (authenticationResult.Succeeded)
-                ? PolicyAuthorizationResult.Forbid(result.Failure)
-                : PolicyAuthorizationResult.Challenge();
+              ? PolicyAuthorizationResult.Forbid(result.Failure)
+              : PolicyAuthorizationResult.Challenge();
         }
     }
 }

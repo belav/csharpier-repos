@@ -22,7 +22,10 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void GetIDispatchForObject_NullObject_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("o", () => Marshal.GetIDispatchForObject(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "o",
+                () => Marshal.GetIDispatchForObject(null)
+            );
         }
 
         [Fact]

@@ -12,10 +12,25 @@ using Microsoft.CodeAnalysis.Internal.Log;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
 {
-    internal abstract partial class AbstractGenerateDeconstructMethodService<TService, TSimpleNameSyntax, TExpressionSyntax, TInvocationExpressionSyntax> :
-        AbstractGenerateParameterizedMemberService<TService, TSimpleNameSyntax, TExpressionSyntax, TInvocationExpressionSyntax>,
-        IGenerateDeconstructMemberService
-        where TService : AbstractGenerateDeconstructMethodService<TService, TSimpleNameSyntax, TExpressionSyntax, TInvocationExpressionSyntax>
+    internal abstract partial class AbstractGenerateDeconstructMethodService<
+        TService,
+        TSimpleNameSyntax,
+        TExpressionSyntax,
+        TInvocationExpressionSyntax
+    >
+        : AbstractGenerateParameterizedMemberService<
+              TService,
+              TSimpleNameSyntax,
+              TExpressionSyntax,
+              TInvocationExpressionSyntax
+          >,
+          IGenerateDeconstructMemberService
+        where TService : AbstractGenerateDeconstructMethodService<
+                TService,
+                TSimpleNameSyntax,
+                TExpressionSyntax,
+                TInvocationExpressionSyntax
+            >
         where TSimpleNameSyntax : TExpressionSyntax
         where TExpressionSyntax : SyntaxNode
         where TInvocationExpressionSyntax : TExpressionSyntax
@@ -24,16 +39,32 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             Document document,
             SyntaxNode leftSide,
             INamedTypeSymbol typeToGenerateIn,
-            CancellationToken cancellationToken)
-        {
-            using (Logger.LogBlock(FunctionId.Refactoring_GenerateMember_GenerateMethod, cancellationToken))
-            {
-                var semanticDocument = await SemanticDocument.CreateAsync(document, cancellationToken).ConfigureAwait(false);
+            CancellationToken cancellationToken
+        ) {
+            using (
+                Logger.LogBlock(
+                    FunctionId.Refactoring_GenerateMember_GenerateMethod,
+                    cancellationToken
+                )
+            ) {
+                var semanticDocument = await SemanticDocument.CreateAsync(
+                        document,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 var state = await State.GenerateDeconstructMethodStateAsync(
-                    (TService)this, semanticDocument, leftSide, typeToGenerateIn, cancellationToken).ConfigureAwait(false);
+                        (TService)this,
+                        semanticDocument,
+                        leftSide,
+                        typeToGenerateIn,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
-                return state != null ? await GetActionsAsync(document, state, cancellationToken).ConfigureAwait(false) : ImmutableArray<CodeAction>.Empty;
+                return state != null
+                  ? await GetActionsAsync(document, state, cancellationToken).ConfigureAwait(false)
+                  : ImmutableArray<CodeAction>.Empty;
             }
         }
     }

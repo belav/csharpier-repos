@@ -29,69 +29,144 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public MockDiagnosticService()
-        {
-        }
+        public MockDiagnosticService() { }
 
         [Obsolete]
-        public ImmutableArray<DiagnosticData> GetDiagnostics(Workspace workspace, ProjectId? projectId, DocumentId? documentId, object? id, bool includeSuppressedDiagnostics, CancellationToken cancellationToken)
-            => GetPushDiagnosticsAsync(workspace, projectId, documentId, id, includeSuppressedDiagnostics, InternalDiagnosticsOptions.NormalDiagnosticMode, cancellationToken).AsTask().WaitAndGetResult_CanCallOnBackground(cancellationToken);
+        public ImmutableArray<DiagnosticData> GetDiagnostics(
+            Workspace workspace,
+            ProjectId? projectId,
+            DocumentId? documentId,
+            object? id,
+            bool includeSuppressedDiagnostics,
+            CancellationToken cancellationToken
+        ) =>
+            GetPushDiagnosticsAsync(
+                    workspace,
+                    projectId,
+                    documentId,
+                    id,
+                    includeSuppressedDiagnostics,
+                    InternalDiagnosticsOptions.NormalDiagnosticMode,
+                    cancellationToken
+                )
+                .AsTask()
+                .WaitAndGetResult_CanCallOnBackground(cancellationToken);
 
-        public ValueTask<ImmutableArray<DiagnosticData>> GetPullDiagnosticsAsync(Workspace workspace, ProjectId? projectId, DocumentId? documentId, object? id, bool includeSuppressedDiagnostics, Option2<DiagnosticMode> diagnosticMode, CancellationToken cancellationToken)
-        {
-            return new ValueTask<ImmutableArray<DiagnosticData>>(GetDiagnostics(workspace, projectId, documentId));
+        public ValueTask<ImmutableArray<DiagnosticData>> GetPullDiagnosticsAsync(
+            Workspace workspace,
+            ProjectId? projectId,
+            DocumentId? documentId,
+            object? id,
+            bool includeSuppressedDiagnostics,
+            Option2<DiagnosticMode> diagnosticMode,
+            CancellationToken cancellationToken
+        ) {
+            return new ValueTask<ImmutableArray<DiagnosticData>>(
+                GetDiagnostics(workspace, projectId, documentId)
+            );
         }
 
-        public ValueTask<ImmutableArray<DiagnosticData>> GetPushDiagnosticsAsync(Workspace workspace, ProjectId? projectId, DocumentId? documentId, object? id, bool includeSuppressedDiagnostics, Option2<DiagnosticMode> diagnosticMode, CancellationToken cancellationToken)
-        {
-            return new ValueTask<ImmutableArray<DiagnosticData>>(GetDiagnostics(workspace, projectId, documentId));
+        public ValueTask<ImmutableArray<DiagnosticData>> GetPushDiagnosticsAsync(
+            Workspace workspace,
+            ProjectId? projectId,
+            DocumentId? documentId,
+            object? id,
+            bool includeSuppressedDiagnostics,
+            Option2<DiagnosticMode> diagnosticMode,
+            CancellationToken cancellationToken
+        ) {
+            return new ValueTask<ImmutableArray<DiagnosticData>>(
+                GetDiagnostics(workspace, projectId, documentId)
+            );
         }
 
-        private ImmutableArray<DiagnosticData> GetDiagnostics(Workspace workspace, ProjectId? projectId, DocumentId? documentId)
-        {
-            Assert.Equal(projectId, GetProjectId(workspace));
-            Assert.Equal(documentId, GetDocumentId(workspace));
-
-            return _diagnostic == null ? ImmutableArray<DiagnosticData>.Empty : ImmutableArray.Create(_diagnostic);
-        }
-
-        public ImmutableArray<DiagnosticBucket> GetPullDiagnosticBuckets(Workspace workspace, ProjectId? projectId, DocumentId? documentId, Option2<DiagnosticMode> diagnosticMode, CancellationToken cancellationToken)
-        {
-            return GetDiagnosticBuckets(workspace, projectId, documentId);
-        }
-
-        public ImmutableArray<DiagnosticBucket> GetPushDiagnosticBuckets(Workspace workspace, ProjectId? projectId, DocumentId? documentId, Option2<DiagnosticMode> diagnosticMode, CancellationToken cancellationToken)
-        {
-            return GetDiagnosticBuckets(workspace, projectId, documentId);
-        }
-
-        private ImmutableArray<DiagnosticBucket> GetDiagnosticBuckets(Workspace workspace, ProjectId? projectId, DocumentId? documentId)
-        {
+        private ImmutableArray<DiagnosticData> GetDiagnostics(
+            Workspace workspace,
+            ProjectId? projectId,
+            DocumentId? documentId
+        ) {
             Assert.Equal(projectId, GetProjectId(workspace));
             Assert.Equal(documentId, GetDocumentId(workspace));
 
             return _diagnostic == null
-                ? ImmutableArray<DiagnosticBucket>.Empty
-                : ImmutableArray.Create(new DiagnosticBucket(this, workspace, GetProjectId(workspace), GetDocumentId(workspace)));
+              ? ImmutableArray<DiagnosticData>.Empty
+              : ImmutableArray.Create(_diagnostic);
+        }
+
+        public ImmutableArray<DiagnosticBucket> GetPullDiagnosticBuckets(
+            Workspace workspace,
+            ProjectId? projectId,
+            DocumentId? documentId,
+            Option2<DiagnosticMode> diagnosticMode,
+            CancellationToken cancellationToken
+        ) {
+            return GetDiagnosticBuckets(workspace, projectId, documentId);
+        }
+
+        public ImmutableArray<DiagnosticBucket> GetPushDiagnosticBuckets(
+            Workspace workspace,
+            ProjectId? projectId,
+            DocumentId? documentId,
+            Option2<DiagnosticMode> diagnosticMode,
+            CancellationToken cancellationToken
+        ) {
+            return GetDiagnosticBuckets(workspace, projectId, documentId);
+        }
+
+        private ImmutableArray<DiagnosticBucket> GetDiagnosticBuckets(
+            Workspace workspace,
+            ProjectId? projectId,
+            DocumentId? documentId
+        ) {
+            Assert.Equal(projectId, GetProjectId(workspace));
+            Assert.Equal(documentId, GetDocumentId(workspace));
+
+            return _diagnostic == null
+              ? ImmutableArray<DiagnosticBucket>.Empty
+              : ImmutableArray.Create(
+                    new DiagnosticBucket(
+                        this,
+                        workspace,
+                        GetProjectId(workspace),
+                        GetDocumentId(workspace)
+                    )
+                );
         }
 
         internal void CreateDiagnosticAndFireEvents(Workspace workspace, Location location)
         {
             var document = workspace.CurrentSolution.Projects.Single().Documents.Single();
-            _diagnostic = DiagnosticData.Create(Diagnostic.Create(DiagnosticId, "MockCategory", "MockMessage", DiagnosticSeverity.Error, DiagnosticSeverity.Error, isEnabledByDefault: true, warningLevel: 0,
-                location: location),
-                document);
+            _diagnostic = DiagnosticData.Create(
+                Diagnostic.Create(
+                    DiagnosticId,
+                    "MockCategory",
+                    "MockMessage",
+                    DiagnosticSeverity.Error,
+                    DiagnosticSeverity.Error,
+                    isEnabledByDefault: true,
+                    warningLevel: 0,
+                    location: location
+                ),
+                document
+            );
 
-            DiagnosticsUpdated?.Invoke(this, DiagnosticsUpdatedArgs.DiagnosticsCreated(
-                this, workspace, workspace.CurrentSolution,
-                GetProjectId(workspace), GetDocumentId(workspace),
-                ImmutableArray.Create(_diagnostic)));
+            DiagnosticsUpdated?.Invoke(
+                this,
+                DiagnosticsUpdatedArgs.DiagnosticsCreated(
+                    this,
+                    workspace,
+                    workspace.CurrentSolution,
+                    GetProjectId(workspace),
+                    GetDocumentId(workspace),
+                    ImmutableArray.Create(_diagnostic)
+                )
+            );
         }
 
-        private static DocumentId GetDocumentId(Workspace workspace)
-            => workspace.CurrentSolution.Projects.Single().Documents.Single().Id;
+        private static DocumentId GetDocumentId(Workspace workspace) =>
+            workspace.CurrentSolution.Projects.Single().Documents.Single().Id;
 
-        private static ProjectId GetProjectId(Workspace workspace)
-            => workspace.CurrentSolution.Projects.Single().Id;
+        private static ProjectId GetProjectId(Workspace workspace) =>
+            workspace.CurrentSolution.Projects.Single().Id;
     }
 }

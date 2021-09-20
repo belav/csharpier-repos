@@ -9,10 +9,13 @@ using Xunit;
 
 namespace Microsoft.CSharp.RuntimeBinder.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/49568", typeof(PlatformDetection), nameof(PlatformDetection.IsMacOsAppleSilicon))]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/49568",
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsMacOsAppleSilicon)
+    )]
     public class DefaultParameterTests
     {
-
 #pragma warning disable 618
         public class MarshalAsMethods
         {
@@ -29,7 +32,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             public object Error([Optional, MarshalAs(UnmanagedType.Error)] object val) => val;
 
-            public object FunctionPtr([Optional, MarshalAs(UnmanagedType.FunctionPtr)] object val) => val;
+            public object FunctionPtr(
+                [Optional, MarshalAs(UnmanagedType.FunctionPtr)] object val
+            ) => val;
 
             public object HString([Optional, MarshalAs(UnmanagedType.HString)] object val) => val;
 
@@ -41,11 +46,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             public object I8([Optional, MarshalAs(UnmanagedType.I8)] object val) => val;
 
-            public object IDispatch([Optional, MarshalAs(UnmanagedType.IDispatch)] object val) => val;
+            public object IDispatch([Optional, MarshalAs(UnmanagedType.IDispatch)] object val) =>
+                val;
 
-            public object IInspectable([Optional, MarshalAs(UnmanagedType.IInspectable)] object val) => val;
+            public object IInspectable(
+                [Optional, MarshalAs(UnmanagedType.IInspectable)] object val
+            ) => val;
 
-            public object Interface([Optional, MarshalAs(UnmanagedType.Interface)] object val) => val;
+            public object Interface([Optional, MarshalAs(UnmanagedType.Interface)] object val) =>
+                val;
 
             public object IUnknown([Optional, MarshalAs(UnmanagedType.IUnknown)] object val) => val;
 
@@ -63,7 +72,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             public object R8([Optional, MarshalAs(UnmanagedType.R8)] object val) => val;
 
-            public object SafeArray([Optional, MarshalAs(UnmanagedType.SafeArray)] object val) => val;
+            public object SafeArray([Optional, MarshalAs(UnmanagedType.SafeArray)] object val) =>
+                val;
 
             public object Struct([Optional, MarshalAs(UnmanagedType.Struct)] object val) => val;
 
@@ -81,11 +91,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             public object U8([Optional, MarshalAs(UnmanagedType.U8)] object val) => val;
 
-            public object VariantBool([Optional, MarshalAs(UnmanagedType.VariantBool)] object val) => val;
+            public object VariantBool(
+                [Optional, MarshalAs(UnmanagedType.VariantBool)] object val
+            ) => val;
 
-            public object VBByRefStr([Optional, MarshalAs(UnmanagedType.VBByRefStr)] object val) => val;
+            public object VBByRefStr([Optional, MarshalAs(UnmanagedType.VBByRefStr)] object val) =>
+                val;
 
-            public object UndefinedType([Optional, MarshalAs((UnmanagedType)2000)] object val) => val;
+            public object UndefinedType([Optional, MarshalAs((UnmanagedType)2000)] object val) =>
+                val;
         }
 #pragma warning restore 618
 
@@ -131,7 +145,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
         public class TypeWithDefaults
         {
-            public DateTime GetDate([Optional, DateTimeConstant(630823790456780000)] DateTime value) => value;
+            public DateTime GetDate(
+                [Optional, DateTimeConstant(630823790456780000)] DateTime value
+            ) => value;
 
             public decimal GetDecimal(decimal value = 12.3m) => value;
 
@@ -163,10 +179,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             public Uri GetURI(Uri value = null) => value;
 
-            public StringComparison GetEnum(StringComparison value = StringComparison.InvariantCulture) => value;
+            public StringComparison GetEnum(
+                StringComparison value = StringComparison.InvariantCulture
+            ) => value;
 
-            public KeyValuePair<int, string> GetStruct(KeyValuePair<int, string> value = default) => value;
-
+            public KeyValuePair<int, string> GetStruct(KeyValuePair<int, string> value = default) =>
+                value;
         }
 
         public class TypeWithOptionalsWithoutDefaults
@@ -205,7 +223,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             public StringComparison GetEnum([Optional] StringComparison value) => value;
 
-            public KeyValuePair<int, string> GetStruct([Optional] KeyValuePair<int, string> value) => value;
+            public KeyValuePair<int, string> GetStruct(
+                [Optional] KeyValuePair<int, string> value
+            ) => value;
         }
 
         [Fact]
@@ -213,7 +233,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             dynamic d = new TypeWithDefaults();
             Assert.Equal(new DateTime(2000, 1, 2, 3, 4, 5, 678), d.GetDate());
-            Assert.Equal(new DateTime(9876, 5, 4, 3, 2, 1), d.GetDate(new DateTime(9876, 5, 4, 3, 2, 1)));
+            Assert.Equal(
+                new DateTime(9876, 5, 4, 3, 2, 1),
+                d.GetDate(new DateTime(9876, 5, 4, 3, 2, 1))
+            );
         }
 
         [Fact]
@@ -342,9 +365,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             dynamic d = new TypeWithDefaults();
             Assert.Equal(StringComparison.InvariantCulture, d.GetEnum());
-            Assert.Equal(StringComparison.OrdinalIgnoreCase, d.GetEnum(StringComparison.OrdinalIgnoreCase));
+            Assert.Equal(
+                StringComparison.OrdinalIgnoreCase,
+                d.GetEnum(StringComparison.OrdinalIgnoreCase)
+            );
         }
-
 
         [Fact]
         public void DefaultStruct()
@@ -363,7 +388,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             dynamic d = new TypeWithOptionalsWithoutDefaults();
             Assert.Equal(default(DateTime), d.GetDate());
-            Assert.Equal(new DateTime(9876, 5, 4, 3, 2, 1), d.GetDate(new DateTime(9876, 5, 4, 3, 2, 1)));
+            Assert.Equal(
+                new DateTime(9876, 5, 4, 3, 2, 1),
+                d.GetDate(new DateTime(9876, 5, 4, 3, 2, 1))
+            );
         }
 
         [Fact]
@@ -492,7 +520,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             dynamic d = new TypeWithOptionalsWithoutDefaults();
             Assert.Equal(default(StringComparison), d.GetEnum());
-            Assert.Equal(StringComparison.OrdinalIgnoreCase, d.GetEnum(StringComparison.OrdinalIgnoreCase));
+            Assert.Equal(
+                StringComparison.OrdinalIgnoreCase,
+                d.GetEnum(StringComparison.OrdinalIgnoreCase)
+            );
         }
 
         [Fact]

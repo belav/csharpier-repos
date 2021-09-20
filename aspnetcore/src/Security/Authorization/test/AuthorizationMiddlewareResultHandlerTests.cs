@@ -23,7 +23,12 @@ namespace Microsoft.AspNetCore.Authorization.Test
             var policyAuthorizationResult = PolicyAuthorizationResult.Success();
             var handler = CreateAuthorizationMiddlewareResultHandler();
 
-            await handler.HandleAsync(requestDelegate.Object, httpContext, policy, policyAuthorizationResult);
+            await handler.HandleAsync(
+                requestDelegate.Object,
+                httpContext,
+                policy,
+                policyAuthorizationResult
+            );
 
             requestDelegate.Verify(next => next(It.IsAny<HttpContext>()), Times.Once);
         }
@@ -37,7 +42,12 @@ namespace Microsoft.AspNetCore.Authorization.Test
             var policyAuthorizationResult = PolicyAuthorizationResult.Challenge();
             var handler = CreateAuthorizationMiddlewareResultHandler();
 
-            await handler.HandleAsync(requestDelegate.Object, httpContext, policy, policyAuthorizationResult);
+            await handler.HandleAsync(
+                requestDelegate.Object,
+                httpContext,
+                policy,
+                policyAuthorizationResult
+            );
 
             requestDelegate.Verify(next => next(It.IsAny<HttpContext>()), Times.Never);
         }
@@ -51,7 +61,12 @@ namespace Microsoft.AspNetCore.Authorization.Test
             var policyAuthorizationResult = PolicyAuthorizationResult.Forbid();
             var handler = CreateAuthorizationMiddlewareResultHandler();
 
-            await handler.HandleAsync(requestDelegate.Object, httpContext, policy, policyAuthorizationResult);
+            await handler.HandleAsync(
+                requestDelegate.Object,
+                httpContext,
+                policy,
+                policyAuthorizationResult
+            );
 
             requestDelegate.Verify(next => next(It.IsAny<HttpContext>()), Times.Never);
         }
@@ -65,19 +80,35 @@ namespace Microsoft.AspNetCore.Authorization.Test
             var firstScheme = Guid.NewGuid().ToString();
             var secondScheme = Guid.NewGuid().ToString();
             var thirdScheme = Guid.NewGuid().ToString();
-            var policy = new AuthorizationPolicyBuilder()
-                .RequireAuthenticatedUser()
+            var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser()
                 .AddAuthenticationSchemes(firstScheme, secondScheme, thirdScheme)
                 .Build();
             var policyAuthorizationResult = PolicyAuthorizationResult.Challenge();
             var handler = CreateAuthorizationMiddlewareResultHandler();
 
-            await handler.HandleAsync(requestDelegate.Object, httpContext, policy, policyAuthorizationResult);
+            await handler.HandleAsync(
+                requestDelegate.Object,
+                httpContext,
+                policy,
+                policyAuthorizationResult
+            );
 
-            authenticationServiceMock.Verify(service => service.ChallengeAsync(httpContext, It.IsAny<string>(), null), Times.Exactly(3));
-            authenticationServiceMock.Verify(service => service.ChallengeAsync(httpContext, firstScheme, null), Times.Once);
-            authenticationServiceMock.Verify(service => service.ChallengeAsync(httpContext, secondScheme, null), Times.Once);
-            authenticationServiceMock.Verify(service => service.ChallengeAsync(httpContext, thirdScheme, null), Times.Once);
+            authenticationServiceMock.Verify(
+                service => service.ChallengeAsync(httpContext, It.IsAny<string>(), null),
+                Times.Exactly(3)
+            );
+            authenticationServiceMock.Verify(
+                service => service.ChallengeAsync(httpContext, firstScheme, null),
+                Times.Once
+            );
+            authenticationServiceMock.Verify(
+                service => service.ChallengeAsync(httpContext, secondScheme, null),
+                Times.Once
+            );
+            authenticationServiceMock.Verify(
+                service => service.ChallengeAsync(httpContext, thirdScheme, null),
+                Times.Once
+            );
         }
 
         [Fact]
@@ -90,9 +121,17 @@ namespace Microsoft.AspNetCore.Authorization.Test
             var policyAuthorizationResult = PolicyAuthorizationResult.Challenge();
             var handler = CreateAuthorizationMiddlewareResultHandler();
 
-            await handler.HandleAsync(requestDelegate.Object, httpContext, policy, policyAuthorizationResult);
+            await handler.HandleAsync(
+                requestDelegate.Object,
+                httpContext,
+                policy,
+                policyAuthorizationResult
+            );
 
-            authenticationServiceMock.Verify(service => service.ChallengeAsync(httpContext, null, null), Times.Once);
+            authenticationServiceMock.Verify(
+                service => service.ChallengeAsync(httpContext, null, null),
+                Times.Once
+            );
         }
 
         [Fact]
@@ -104,19 +143,35 @@ namespace Microsoft.AspNetCore.Authorization.Test
             var firstScheme = Guid.NewGuid().ToString();
             var secondScheme = Guid.NewGuid().ToString();
             var thirdScheme = Guid.NewGuid().ToString();
-            var policy = new AuthorizationPolicyBuilder()
-                .RequireAuthenticatedUser()
+            var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser()
                 .AddAuthenticationSchemes(firstScheme, secondScheme, thirdScheme)
                 .Build();
             var policyAuthorizationResult = PolicyAuthorizationResult.Forbid();
             var handler = CreateAuthorizationMiddlewareResultHandler();
 
-            await handler.HandleAsync(requestDelegate.Object, httpContext, policy, policyAuthorizationResult);
+            await handler.HandleAsync(
+                requestDelegate.Object,
+                httpContext,
+                policy,
+                policyAuthorizationResult
+            );
 
-            authenticationServiceMock.Verify(service => service.ForbidAsync(httpContext, It.IsAny<string>(), null), Times.Exactly(3));
-            authenticationServiceMock.Verify(service => service.ForbidAsync(httpContext, firstScheme, null), Times.Once);
-            authenticationServiceMock.Verify(service => service.ForbidAsync(httpContext, secondScheme, null), Times.Once);
-            authenticationServiceMock.Verify(service => service.ForbidAsync(httpContext, thirdScheme, null), Times.Once);
+            authenticationServiceMock.Verify(
+                service => service.ForbidAsync(httpContext, It.IsAny<string>(), null),
+                Times.Exactly(3)
+            );
+            authenticationServiceMock.Verify(
+                service => service.ForbidAsync(httpContext, firstScheme, null),
+                Times.Once
+            );
+            authenticationServiceMock.Verify(
+                service => service.ForbidAsync(httpContext, secondScheme, null),
+                Times.Once
+            );
+            authenticationServiceMock.Verify(
+                service => service.ForbidAsync(httpContext, thirdScheme, null),
+                Times.Once
+            );
         }
 
         [Fact]
@@ -129,22 +184,33 @@ namespace Microsoft.AspNetCore.Authorization.Test
             var policyAuthorizationResult = PolicyAuthorizationResult.Forbid();
             var handler = CreateAuthorizationMiddlewareResultHandler();
 
-            await handler.HandleAsync(requestDelegate.Object, httpContext, policy, policyAuthorizationResult);
+            await handler.HandleAsync(
+                requestDelegate.Object,
+                httpContext,
+                policy,
+                policyAuthorizationResult
+            );
 
-            authenticationServiceMock.Verify(service => service.ForbidAsync(httpContext, null, null), Times.Once);
+            authenticationServiceMock.Verify(
+                service => service.ForbidAsync(httpContext, null, null),
+                Times.Once
+            );
         }
 
         private HttpContext CreateHttpContext(IAuthenticationService authenticationService = null)
         {
             var services = new ServiceCollection();
 
-            services.AddTransient(provider => authenticationService ?? new Mock<IAuthenticationService>().Object);
+            services.AddTransient(
+                provider => authenticationService ?? new Mock<IAuthenticationService>().Object
+            );
 
             var serviceProvider = services.BuildServiceProvider();
 
             return new DefaultHttpContext { RequestServices = serviceProvider };
         }
 
-        private AuthorizationMiddlewareResultHandler CreateAuthorizationMiddlewareResultHandler() => new AuthorizationMiddlewareResultHandler();
+        private AuthorizationMiddlewareResultHandler CreateAuthorizationMiddlewareResultHandler() =>
+            new AuthorizationMiddlewareResultHandler();
     }
 }

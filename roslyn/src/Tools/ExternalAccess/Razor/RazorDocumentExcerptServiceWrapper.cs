@@ -15,27 +15,46 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
     {
         private readonly IRazorDocumentExcerptService _razorDocumentExcerptService;
 
-        public RazorDocumentExcerptServiceWrapper(IRazorDocumentExcerptService razorDocumentExcerptService)
-        {
-            _razorDocumentExcerptService = razorDocumentExcerptService ?? throw new ArgumentNullException(nameof(razorDocumentExcerptService));
+        public RazorDocumentExcerptServiceWrapper(
+            IRazorDocumentExcerptService razorDocumentExcerptService
+        ) {
+            _razorDocumentExcerptService =
+                razorDocumentExcerptService
+                ?? throw new ArgumentNullException(nameof(razorDocumentExcerptService));
         }
 
-        public async Task<ExcerptResult?> TryExcerptAsync(Document document, TextSpan span, ExcerptMode mode, CancellationToken cancellationToken)
-        {
+        public async Task<ExcerptResult?> TryExcerptAsync(
+            Document document,
+            TextSpan span,
+            ExcerptMode mode,
+            CancellationToken cancellationToken
+        ) {
             var razorMode = mode switch
             {
                 ExcerptMode.SingleLine => RazorExcerptMode.SingleLine,
                 ExcerptMode.Tooltip => RazorExcerptMode.Tooltip,
                 _ => throw new InvalidEnumArgumentException($"Unsupported enum type {mode}."),
             };
-            var nullableRazorExcerpt = await _razorDocumentExcerptService.TryExcerptAsync(document, span, razorMode, cancellationToken).ConfigureAwait(false);
+            var nullableRazorExcerpt = await _razorDocumentExcerptService.TryExcerptAsync(
+                    document,
+                    span,
+                    razorMode,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (nullableRazorExcerpt == null)
             {
                 return null;
             }
 
             var razorExcerpt = nullableRazorExcerpt.Value;
-            var roslynExcerpt = new ExcerptResult(razorExcerpt.Content, razorExcerpt.MappedSpan, razorExcerpt.ClassifiedSpans, razorExcerpt.Document, razorExcerpt.Span);
+            var roslynExcerpt = new ExcerptResult(
+                razorExcerpt.Content,
+                razorExcerpt.MappedSpan,
+                razorExcerpt.ClassifiedSpans,
+                razorExcerpt.Document,
+                razorExcerpt.Span
+            );
             return roslynExcerpt;
         }
     }

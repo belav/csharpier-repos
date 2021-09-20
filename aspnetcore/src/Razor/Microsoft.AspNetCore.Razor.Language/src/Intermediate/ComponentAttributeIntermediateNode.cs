@@ -8,12 +8,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 {
     public sealed class ComponentAttributeIntermediateNode : IntermediateNode
     {
-        public ComponentAttributeIntermediateNode()
-        {
-        }
+        public ComponentAttributeIntermediateNode() { }
 
-        public ComponentAttributeIntermediateNode(TagHelperHtmlAttributeIntermediateNode attributeNode)
-        {
+        public ComponentAttributeIntermediateNode(
+            TagHelperHtmlAttributeIntermediateNode attributeNode
+        ) {
             if (attributeNode == null)
             {
                 throw new ArgumentNullException(nameof(attributeNode));
@@ -49,7 +48,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             PropertyName = propertyNode.BoundAttribute.GetPropertyName();
             Source = propertyNode.Source;
             TagHelper = propertyNode.TagHelper;
-            TypeName = propertyNode.BoundAttribute.IsWeaklyTyped() ? null : propertyNode.BoundAttribute.TypeName;
+            TypeName = propertyNode.BoundAttribute.IsWeaklyTyped()
+                ? null
+                : propertyNode.BoundAttribute.TypeName;
 
             for (var i = 0; i < propertyNode.Children.Count; i++)
             {
@@ -62,8 +63,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             }
         }
 
-        public ComponentAttributeIntermediateNode(TagHelperDirectiveAttributeIntermediateNode directiveAttributeNode)
-        {
+        public ComponentAttributeIntermediateNode(
+            TagHelperDirectiveAttributeIntermediateNode directiveAttributeNode
+        ) {
             if (directiveAttributeNode == null)
             {
                 throw new ArgumentNullException(nameof(directiveAttributeNode));
@@ -75,7 +77,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             PropertyName = directiveAttributeNode.BoundAttribute.GetPropertyName();
             Source = directiveAttributeNode.Source;
             TagHelper = directiveAttributeNode.TagHelper;
-            TypeName = directiveAttributeNode.BoundAttribute.IsWeaklyTyped() ? null : directiveAttributeNode.BoundAttribute.TypeName;
+            TypeName = directiveAttributeNode.BoundAttribute.IsWeaklyTyped()
+                ? null
+                : directiveAttributeNode.BoundAttribute.TypeName;
 
             for (var i = 0; i < directiveAttributeNode.Children.Count; i++)
             {
@@ -88,8 +92,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             }
         }
 
-        public ComponentAttributeIntermediateNode(TagHelperDirectiveAttributeParameterIntermediateNode directiveAttributeParameterNode)
-        {
+        public ComponentAttributeIntermediateNode(
+            TagHelperDirectiveAttributeParameterIntermediateNode directiveAttributeParameterNode
+        ) {
             if (directiveAttributeParameterNode == null)
             {
                 throw new ArgumentNullException(nameof(directiveAttributeParameterNode));
@@ -98,7 +103,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             AttributeName = directiveAttributeParameterNode.AttributeNameWithoutParameter;
             AttributeStructure = directiveAttributeParameterNode.AttributeStructure;
             BoundAttribute = directiveAttributeParameterNode.BoundAttribute;
-            PropertyName = directiveAttributeParameterNode.BoundAttributeParameter.GetPropertyName();
+            PropertyName =
+                directiveAttributeParameterNode.BoundAttributeParameter.GetPropertyName();
             Source = directiveAttributeParameterNode.Source;
             TagHelper = directiveAttributeParameterNode.TagHelper;
             TypeName = directiveAttributeParameterNode.BoundAttributeParameter.TypeName;
@@ -114,10 +120,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             }
         }
 
-        public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();
+        public override IntermediateNodeCollection Children { get; } =
+            new IntermediateNodeCollection();
 
         public string AttributeName { get; set; }
-        
+
         public AttributeStructure AttributeStructure { get; set; }
 
         public BoundAttributeDescriptor BoundAttribute { get; set; }
@@ -146,7 +153,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             {
                 throw new ArgumentNullException(nameof(formatter));
             }
-            
+
             formatter.WriteContent(AttributeName);
 
             formatter.WriteProperty(nameof(AttributeName), AttributeName);
@@ -166,26 +173,41 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
             if (BoundAttribute == null || !BoundAttribute.IsEventCallbackProperty())
             {
-                throw new InvalidOperationException("This attribute is not an EventCallback attribute.");
+                throw new InvalidOperationException(
+                    "This attribute is not an EventCallback attribute."
+                );
             }
 
-            if (string.Equals(TypeName, ComponentsApi.EventCallback.FullTypeName, StringComparison.Ordinal))
-            {
+            if (
+                string.Equals(
+                    TypeName,
+                    ComponentsApi.EventCallback.FullTypeName,
+                    StringComparison.Ordinal
+                )
+            ) {
                 // Non-Generic
                 argument = null;
                 return false;
             }
 
-            if (TypeName != null && 
-                TypeName.Length > ComponentsApi.EventCallback.FullTypeName.Length + "<>".Length &&
-                TypeName.StartsWith(ComponentsApi.EventCallback.FullTypeName, StringComparison.Ordinal) &&
-                TypeName[ComponentsApi.EventCallback.FullTypeName.Length] == '<' &&
-                TypeName[TypeName.Length - 1] == '>')
-            {
+            if (
+                TypeName != null
+                && TypeName.Length > ComponentsApi.EventCallback.FullTypeName.Length + "<>".Length
+                && TypeName.StartsWith(
+                    ComponentsApi.EventCallback.FullTypeName,
+                    StringComparison.Ordinal
+                )
+                && TypeName[ComponentsApi.EventCallback.FullTypeName.Length] == '<'
+                && TypeName[TypeName.Length - 1] == '>'
+            ) {
                 // OK this is promising.
                 //
                 // Chop off leading `...EventCallback<` and let the length so the ending `>` is cut off as well.
-                argument = TypeName.Substring(ComponentsApi.EventCallback.FullTypeName.Length + 1, TypeName.Length - (ComponentsApi.EventCallback.FullTypeName.Length + "<>".Length));
+                argument = TypeName.Substring(
+                    ComponentsApi.EventCallback.FullTypeName.Length + 1,
+                    TypeName.Length
+                        - (ComponentsApi.EventCallback.FullTypeName.Length + "<>".Length)
+                );
                 return true;
             }
 

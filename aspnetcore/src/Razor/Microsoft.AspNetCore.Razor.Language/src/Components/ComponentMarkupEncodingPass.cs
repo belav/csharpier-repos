@@ -9,13 +9,17 @@ using Microsoft.AspNetCore.Razor.Language.Legacy;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components
 {
-    internal class ComponentMarkupEncodingPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
+    internal class ComponentMarkupEncodingPass
+        : ComponentIntermediateNodePassBase,
+          IRazorOptimizationPass
     {
         // Runs after ComponentMarkupBlockPass
         public override int Order => ComponentMarkupDiagnosticPass.DefaultOrder + 20;
 
-        protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
-        {
+        protected override void ExecuteCore(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        ) {
             if (!IsComponentDocument(documentNode))
             {
                 return;
@@ -45,15 +49,21 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
             private static readonly char[] EncodedCharacters = new[] { '\r', '\n', '\t' };
 
-            private readonly Dictionary<string, string> _seenEntities = new Dictionary<string, string>(StringComparer.Ordinal);
+            private readonly Dictionary<string, string> _seenEntities = new Dictionary<
+                string,
+                string
+            >(StringComparer.Ordinal);
 
             public override void VisitHtml(HtmlContentIntermediateNode node)
             {
                 for (var i = 0; i < node.Children.Count; i++)
                 {
                     var child = node.Children[i];
-                    if (!(child is IntermediateToken token) || !token.IsHtml || string.IsNullOrEmpty(token.Content))
-                    {
+                    if (
+                        !(child is IntermediateToken token)
+                        || !token.IsHtml
+                        || string.IsNullOrEmpty(token.Content)
+                    ) {
                         // We only care about Html tokens.
                         continue;
                     }
@@ -76,8 +86,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 for (var i = 0; i < node.Children.Count; i++)
                 {
                     var child = node.Children[i];
-                    if (!(child is IntermediateToken token) || !token.IsHtml || string.IsNullOrEmpty(token.Content))
-                    {
+                    if (
+                        !(child is IntermediateToken token)
+                        || !token.IsHtml
+                        || string.IsNullOrEmpty(token.Content)
+                    ) {
                         // We only care about Html tokens.
                         continue;
                     }
@@ -98,8 +111,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 for (var i = 0; i < node.Children.Count; i++)
                 {
                     var child = node.Children[i];
-                    if (!(child is IntermediateToken token) || !token.IsHtml || string.IsNullOrEmpty(token.Content))
-                    {
+                    if (
+                        !(child is IntermediateToken token)
+                        || !token.IsHtml
+                        || string.IsNullOrEmpty(token.Content)
+                    ) {
                         // We only care about Html tokens.
                         continue;
                     }
@@ -147,8 +163,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 return true;
             }
 
-            private bool TryGetHtmlEntity(string content, int position, out string entity, out string replacement)
-            {
+            private bool TryGetHtmlEntity(
+                string content,
+                int position,
+                out string entity,
+                out string replacement
+            ) {
                 // We're at '&'. Check if it is the start of an HTML entity.
                 entity = null;
                 replacement = null;
@@ -164,7 +184,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                     {
                         endPosition = i;
                     }
-
                     break;
                 }
 
@@ -191,8 +210,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                             }
                         }
 
-                        if (ParserHelpers.HtmlEntityCodePoints.TryGetValue(codePoint, out replacement))
-                        {
+                        if (
+                            ParserHelpers.HtmlEntityCodePoints.TryGetValue(
+                                codePoint,
+                                out replacement
+                            )
+                        ) {
                             // This is a known html entity unicode codepoint.
                             return true;
                         }

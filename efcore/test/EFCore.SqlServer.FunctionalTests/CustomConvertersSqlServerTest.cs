@@ -10,7 +10,8 @@ using Xunit;
 namespace Microsoft.EntityFrameworkCore
 {
     [SqlServerCondition(SqlServerCondition.IsNotSqlAzure)]
-    public class CustomConvertersSqlServerTest : CustomConvertersTestBase<CustomConvertersSqlServerTest.CustomConvertersSqlServerFixture>
+    public class CustomConvertersSqlServerTest
+        : CustomConvertersTestBase<CustomConvertersSqlServerTest.CustomConvertersSqlServerFixture>
     {
         public CustomConvertersSqlServerTest(CustomConvertersSqlServerFixture fixture)
             : base(fixture)
@@ -23,9 +24,13 @@ namespace Microsoft.EntityFrameworkCore
         {
             var actual = BuiltInDataTypesSqlServerTest.QueryForColumnTypes(
                 CreateContext(),
-                nameof(ObjectBackedDataTypes), nameof(NullableBackedDataTypes), nameof(NonNullableBackedDataTypes));
+                nameof(ObjectBackedDataTypes),
+                nameof(NullableBackedDataTypes),
+                nameof(NonNullableBackedDataTypes)
+            );
 
-            const string expected = @"Animal.Id ---> [int] [Precision = 10 Scale = 0]
+            const string expected =
+                @"Animal.Id ---> [int] [Precision = 10 Scale = 0]
 AnimalDetails.AnimalId ---> [nullable int] [Precision = 10 Scale = 0]
 AnimalDetails.BoolField ---> [int] [Precision = 10 Scale = 0]
 AnimalDetails.Id ---> [int] [Precision = 10 Scale = 0]
@@ -215,7 +220,8 @@ User.Id ---> [uniqueidentifier]
 SELECT [b].[Url]
 FROM [Blog] AS [b]
 INNER JOIN [Post] AS [p] ON (([b].[BlogId] = [p].[BlogId]) AND ([b].[IsVisible] = N'Y')) AND ([b].[BlogId] = @__blogId_0)
-WHERE [b].[IsVisible] = N'Y'");
+WHERE [b].[IsVisible] = N'Y'"
+            );
         }
 
         [ConditionalFact]
@@ -229,7 +235,8 @@ WHERE [b].[IsVisible] = N'Y'");
 SELECT [b].[Url]
 FROM [Blog] AS [b]
 LEFT JOIN [Post] AS [p] ON (([b].[BlogId] = [p].[BlogId]) AND ([b].[IsVisible] = N'Y')) AND ([b].[BlogId] = @__blogId_0)
-WHERE [b].[IsVisible] = N'Y'");
+WHERE [b].[IsVisible] = N'Y'"
+            );
         }
 
         [ConditionalFact]
@@ -240,7 +247,8 @@ WHERE [b].[IsVisible] = N'Y'");
             AssertSql(
                 @"SELECT [b].[BlogId], [b].[Discriminator], [b].[IndexerVisible], [b].[IsVisible], [b].[Url], [b].[RssUrl]
 FROM [Blog] AS [b]
-WHERE [b].[IsVisible] = N'Y'");
+WHERE [b].[IsVisible] = N'Y'"
+            );
         }
 
         [ConditionalFact]
@@ -251,7 +259,8 @@ WHERE [b].[IsVisible] = N'Y'");
             AssertSql(
                 @"SELECT [b].[BlogId], [b].[Discriminator], [b].[IndexerVisible], [b].[IsVisible], [b].[Url], [b].[RssUrl]
 FROM [Blog] AS [b]
-WHERE [b].[IsVisible] = N'N'");
+WHERE [b].[IsVisible] = N'N'"
+            );
         }
 
         public override void Where_bool_gets_converted_to_equality_when_value_conversion_is_used_using_EFProperty()
@@ -261,7 +270,8 @@ WHERE [b].[IsVisible] = N'N'");
             AssertSql(
                 @"SELECT [b].[BlogId], [b].[Discriminator], [b].[IndexerVisible], [b].[IsVisible], [b].[Url], [b].[RssUrl]
 FROM [Blog] AS [b]
-WHERE [b].[IsVisible] = N'Y'");
+WHERE [b].[IsVisible] = N'Y'"
+            );
         }
 
         public override void Where_bool_gets_converted_to_equality_when_value_conversion_is_used_using_indexer()
@@ -271,7 +281,8 @@ WHERE [b].[IsVisible] = N'Y'");
             AssertSql(
                 @"SELECT [b].[BlogId], [b].[Discriminator], [b].[IndexerVisible], [b].[IsVisible], [b].[Url], [b].[RssUrl]
 FROM [Blog] AS [b]
-WHERE [b].[IndexerVisible] = N'Nay'");
+WHERE [b].[IndexerVisible] = N'Nay'"
+            );
         }
 
         public override void Object_to_string_conversion()
@@ -286,52 +297,46 @@ WHERE [b].[IndexerVisible] = N'Nay'");
             AssertSql(
                 @"SELECT [b].[Id], [b].[Value]
 FROM [Book] AS [b]
-WHERE [b].[Id] = 1");
+WHERE [b].[Id] = 1"
+            );
         }
 
-        private void AssertSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+        private void AssertSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
         public class CustomConvertersSqlServerFixture : CustomConvertersFixtureBase
         {
-            public override bool StrictEquality
-                => true;
+            public override bool StrictEquality => true;
 
-            public override bool SupportsAnsi
-                => true;
+            public override bool SupportsAnsi => true;
 
-            public override bool SupportsUnicodeToAnsiConversion
-                => true;
+            public override bool SupportsUnicodeToAnsiConversion => true;
 
-            public override bool SupportsLargeStringComparisons
-                => true;
+            public override bool SupportsLargeStringComparisons => true;
 
-            protected override ITestStoreFactory TestStoreFactory
-                => SqlServerTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqlServerTestStoreFactory.Instance;
 
-            public TestSqlLoggerFactory TestSqlLoggerFactory
-                => (TestSqlLoggerFactory)ListLoggerFactory;
+            public TestSqlLoggerFactory TestSqlLoggerFactory =>
+                (TestSqlLoggerFactory)ListLoggerFactory;
 
-            public override bool SupportsBinaryKeys
-                => true;
+            public override bool SupportsBinaryKeys => true;
 
-            public override bool SupportsDecimalComparisons
-                => true;
+            public override bool SupportsDecimalComparisons => true;
 
-            public override DateTime DefaultDateTime
-                => new();
+            public override DateTime DefaultDateTime => new();
 
-            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-                => base
-                    .AddOptions(builder)
-                    .ConfigureWarnings(
-                        c => c.Log(SqlServerEventId.DecimalTypeDefaultWarning));
+            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+                base.AddOptions(builder)
+                    .ConfigureWarnings(c => c.Log(SqlServerEventId.DecimalTypeDefaultWarning));
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {
                 base.OnModelCreating(modelBuilder, context);
 
-                modelBuilder.Entity<BuiltInDataTypes>().Property(e => e.TestBoolean).IsFixedLength();
+                modelBuilder.Entity<BuiltInDataTypes>()
+                    .Property(e => e.TestBoolean)
+                    .IsFixedLength();
             }
         }
     }

@@ -42,8 +42,12 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
             return _core.GetStatus(token);
         }
 
-        public void OnCompleted(Action<object?> continuation, object? state, short token, ValueTaskSourceOnCompletedFlags flags)
-        {
+        public void OnCompleted(
+            Action<object?> continuation,
+            object? state,
+            short token,
+            ValueTaskSourceOnCompletedFlags flags
+        ) {
             _core.OnCompleted(continuation, state, token, flags);
         }
     }

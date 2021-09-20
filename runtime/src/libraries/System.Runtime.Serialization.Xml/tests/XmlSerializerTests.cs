@@ -9,7 +9,6 @@ using Xunit;
 
 public static class XmlSerializerTests
 {
-
     public const string FakeNS = "http://example.com/XmlSerializerTests";
 
     [Fact]
@@ -62,5 +61,4 @@ public static class XmlSerializerTests
         [XmlElement("second", Namespace = XmlSerializerTests.FakeNS)]
         public SecondClass Second;
     }
-
 }

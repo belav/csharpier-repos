@@ -81,13 +81,15 @@ namespace Microsoft.AspNetCore.Http.Features
         /// be combined. Form sections that exceed this limit will throw an <see cref="InvalidDataException"/>
         /// when parsed.
         /// </summary>
-        public int MultipartHeadersCountLimit { get; set; } = MultipartReader.DefaultHeadersCountLimit;
+        public int MultipartHeadersCountLimit { get; set; } =
+            MultipartReader.DefaultHeadersCountLimit;
 
         /// <summary>
         /// A limit for the total length of the header keys and values in each multipart section.
         /// Form sections that exceed this limit will throw an <see cref="InvalidDataException"/> when parsed.
         /// </summary>
-        public int MultipartHeadersLengthLimit { get; set; } = MultipartReader.DefaultHeadersLengthLimit;
+        public int MultipartHeadersLengthLimit { get; set; } =
+            MultipartReader.DefaultHeadersLengthLimit;
 
         /// <summary>
         /// A limit for the length of each multipart body. Forms sections that exceed this limit will throw an

@@ -19,7 +19,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests.Fakes
         public CustomStruct CustomStructValue { get; }
         public CustomStruct CustomStructDefault { get; }
 
-        public ClassWithServiceAndOptionalArgsCtorWithStructs(IFakeService fake,
+        public ClassWithServiceAndOptionalArgsCtorWithStructs(
+            IFakeService fake,
             DateTime dateTime = new DateTime(),
             DateTime dateTimeDefault = default(DateTime),
             TimeSpan timeSpan = new TimeSpan(),
@@ -30,8 +31,7 @@ namespace Microsoft.Extensions.DependencyInjection.Tests.Fakes
             Guid guidDefault = default(Guid),
             CustomStruct customStruct = new CustomStruct(),
             CustomStruct customStructDefault = default(CustomStruct)
-        )
-        {
+        ) {
             DateTime = dateTime;
             DateTimeDefault = dateTimeDefault;
             TimeSpan = timeSpan;

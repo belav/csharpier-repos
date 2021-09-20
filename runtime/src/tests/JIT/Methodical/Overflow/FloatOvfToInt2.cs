@@ -208,22 +208,34 @@ internal class FloatOvfToInt
     public static int TestValuesFloatLong()
     {
         float bigf = 100000000000000000000000000000.0f;
-        if (FloatToLong(bigf) != FloatToLongInline(bigf)) return 101;
-        if (FloatToUlong(bigf) != FloatToUlongInline(bigf)) return 102;
-        if (FloatToLong(-bigf) != FloatToLongInline(-bigf)) return 103;
-        if (FloatToUlong(-bigf) != FloatToUlongInline(-bigf)) return 104;
+        if (FloatToLong(bigf) != FloatToLongInline(bigf))
+            return 101;
+        if (FloatToUlong(bigf) != FloatToUlongInline(bigf))
+            return 102;
+        if (FloatToLong(-bigf) != FloatToLongInline(-bigf))
+            return 103;
+        if (FloatToUlong(-bigf) != FloatToUlongInline(-bigf))
+            return 104;
 
         bigf = 987654321001234567899876543210.0f;
-        if (FloatToLong(bigf) != FloatToLongInline(bigf)) return 101;
-        if (FloatToUlong(bigf) != FloatToUlongInline(bigf)) return 102;
-        if (FloatToLong(-bigf) != FloatToLongInline(-bigf)) return 103;
-        if (FloatToUlong(-bigf) != FloatToUlongInline(-bigf)) return 104;
+        if (FloatToLong(bigf) != FloatToLongInline(bigf))
+            return 101;
+        if (FloatToUlong(bigf) != FloatToUlongInline(bigf))
+            return 102;
+        if (FloatToLong(-bigf) != FloatToLongInline(-bigf))
+            return 103;
+        if (FloatToUlong(-bigf) != FloatToUlongInline(-bigf))
+            return 104;
 
         bigf = 254783961024896571038054632179.0f;
-        if (FloatToLong(bigf) != FloatToLongInline(bigf)) return 101;
-        if (FloatToUlong(bigf) != FloatToUlongInline(bigf)) return 102;
-        if (FloatToLong(-bigf) != FloatToLongInline(-bigf)) return 103;
-        if (FloatToUlong(-bigf) != FloatToUlongInline(-bigf)) return 104;
+        if (FloatToLong(bigf) != FloatToLongInline(bigf))
+            return 101;
+        if (FloatToUlong(bigf) != FloatToUlongInline(bigf))
+            return 102;
+        if (FloatToLong(-bigf) != FloatToLongInline(-bigf))
+            return 103;
+        if (FloatToUlong(-bigf) != FloatToUlongInline(-bigf))
+            return 104;
 
         return 100;
     }
@@ -231,22 +243,34 @@ internal class FloatOvfToInt
     public static int TestValuesFloatInt()
     {
         float bigf = 100000000000000000000000000000.0f;
-        if (FloatToInt(bigf) != FloatToIntInline(bigf)) return 111;
-        if (FloatToUint(bigf) != FloatToUintInline(bigf)) return 112;
-        if (FloatToInt(-bigf) != FloatToIntInline(-bigf)) return 113;
-        if (FloatToUint(-bigf) != FloatToUintInline(-bigf)) return 114;
+        if (FloatToInt(bigf) != FloatToIntInline(bigf))
+            return 111;
+        if (FloatToUint(bigf) != FloatToUintInline(bigf))
+            return 112;
+        if (FloatToInt(-bigf) != FloatToIntInline(-bigf))
+            return 113;
+        if (FloatToUint(-bigf) != FloatToUintInline(-bigf))
+            return 114;
 
         bigf = 987654321001234567899876543210.0f;
-        if (FloatToInt(bigf) != FloatToIntInline(bigf)) return 111;
-        if (FloatToUint(bigf) != FloatToUintInline(bigf)) return 112;
-        if (FloatToInt(-bigf) != FloatToIntInline(-bigf)) return 113;
-        if (FloatToUint(-bigf) != FloatToUintInline(-bigf)) return 114;
+        if (FloatToInt(bigf) != FloatToIntInline(bigf))
+            return 111;
+        if (FloatToUint(bigf) != FloatToUintInline(bigf))
+            return 112;
+        if (FloatToInt(-bigf) != FloatToIntInline(-bigf))
+            return 113;
+        if (FloatToUint(-bigf) != FloatToUintInline(-bigf))
+            return 114;
 
         bigf = 254783961024896571038054632179.0f;
-        if (FloatToInt(bigf) != FloatToIntInline(bigf)) return 111;
-        if (FloatToUint(bigf) != FloatToUintInline(bigf)) return 112;
-        if (FloatToInt(-bigf) != FloatToIntInline(-bigf)) return 113;
-        if (FloatToUint(-bigf) != FloatToUintInline(-bigf)) return 114;
+        if (FloatToInt(bigf) != FloatToIntInline(bigf))
+            return 111;
+        if (FloatToUint(bigf) != FloatToUintInline(bigf))
+            return 112;
+        if (FloatToInt(-bigf) != FloatToIntInline(-bigf))
+            return 113;
+        if (FloatToUint(-bigf) != FloatToUintInline(-bigf))
+            return 114;
 
         return 100;
     }
@@ -254,22 +278,34 @@ internal class FloatOvfToInt
     public static int TestValuesFloatShort()
     {
         float bigf = 100000000000000000000000000000.0f;
-        if (FloatToShort(bigf) != FloatToShortInline(bigf)) return 121;
-        if (FloatToUshort(bigf) != FloatToUshortInline(bigf)) return 122;
-        if (FloatToShort(-bigf) != FloatToShortInline(-bigf)) return 123;
-        if (FloatToUshort(-bigf) != FloatToUshortInline(-bigf)) return 124;
+        if (FloatToShort(bigf) != FloatToShortInline(bigf))
+            return 121;
+        if (FloatToUshort(bigf) != FloatToUshortInline(bigf))
+            return 122;
+        if (FloatToShort(-bigf) != FloatToShortInline(-bigf))
+            return 123;
+        if (FloatToUshort(-bigf) != FloatToUshortInline(-bigf))
+            return 124;
 
         bigf = 987654321001234567899876543210.0f;
-        if (FloatToShort(bigf) != FloatToShortInline(bigf)) return 121;
-        if (FloatToUshort(bigf) != FloatToUshortInline(bigf)) return 122;
-        if (FloatToShort(-bigf) != FloatToShortInline(-bigf)) return 123;
-        if (FloatToUshort(-bigf) != FloatToUshortInline(-bigf)) return 124;
+        if (FloatToShort(bigf) != FloatToShortInline(bigf))
+            return 121;
+        if (FloatToUshort(bigf) != FloatToUshortInline(bigf))
+            return 122;
+        if (FloatToShort(-bigf) != FloatToShortInline(-bigf))
+            return 123;
+        if (FloatToUshort(-bigf) != FloatToUshortInline(-bigf))
+            return 124;
 
         bigf = 254783961024896571038054632179.0f;
-        if (FloatToShort(bigf) != FloatToShortInline(bigf)) return 121;
-        if (FloatToUshort(bigf) != FloatToUshortInline(bigf)) return 122;
-        if (FloatToShort(-bigf) != FloatToShortInline(-bigf)) return 123;
-        if (FloatToUshort(-bigf) != FloatToUshortInline(-bigf)) return 124;
+        if (FloatToShort(bigf) != FloatToShortInline(bigf))
+            return 121;
+        if (FloatToUshort(bigf) != FloatToUshortInline(bigf))
+            return 122;
+        if (FloatToShort(-bigf) != FloatToShortInline(-bigf))
+            return 123;
+        if (FloatToUshort(-bigf) != FloatToUshortInline(-bigf))
+            return 124;
 
         return 100;
     }
@@ -277,22 +313,34 @@ internal class FloatOvfToInt
     public static int TestValuesFloatByte()
     {
         float bigf = 100000000000000000000000000000.0f;
-        if (FloatToSbyte(bigf) != FloatToSbyteInline(bigf)) return 141;
-        if (FloatToByte(bigf) != FloatToByteInline(bigf)) return 142;
-        if (FloatToSbyte(-bigf) != FloatToSbyteInline(-bigf)) return 143;
-        if (FloatToByte(-bigf) != FloatToByteInline(-bigf)) return 144;
+        if (FloatToSbyte(bigf) != FloatToSbyteInline(bigf))
+            return 141;
+        if (FloatToByte(bigf) != FloatToByteInline(bigf))
+            return 142;
+        if (FloatToSbyte(-bigf) != FloatToSbyteInline(-bigf))
+            return 143;
+        if (FloatToByte(-bigf) != FloatToByteInline(-bigf))
+            return 144;
 
         bigf = 987654321001234567899876543210.0f;
-        if (FloatToSbyte(bigf) != FloatToSbyteInline(bigf)) return 141;
-        if (FloatToByte(bigf) != FloatToByteInline(bigf)) return 142;
-        if (FloatToSbyte(-bigf) != FloatToSbyteInline(-bigf)) return 143;
-        if (FloatToByte(-bigf) != FloatToByteInline(-bigf)) return 144;
+        if (FloatToSbyte(bigf) != FloatToSbyteInline(bigf))
+            return 141;
+        if (FloatToByte(bigf) != FloatToByteInline(bigf))
+            return 142;
+        if (FloatToSbyte(-bigf) != FloatToSbyteInline(-bigf))
+            return 143;
+        if (FloatToByte(-bigf) != FloatToByteInline(-bigf))
+            return 144;
 
         bigf = 254783961024896571038054632179.0f;
-        if (FloatToSbyte(bigf) != FloatToSbyteInline(bigf)) return 141;
-        if (FloatToByte(bigf) != FloatToByteInline(bigf)) return 142;
-        if (FloatToSbyte(-bigf) != FloatToSbyteInline(-bigf)) return 143;
-        if (FloatToByte(-bigf) != FloatToByteInline(-bigf)) return 144;
+        if (FloatToSbyte(bigf) != FloatToSbyteInline(bigf))
+            return 141;
+        if (FloatToByte(bigf) != FloatToByteInline(bigf))
+            return 142;
+        if (FloatToSbyte(-bigf) != FloatToSbyteInline(-bigf))
+            return 143;
+        if (FloatToByte(-bigf) != FloatToByteInline(-bigf))
+            return 144;
 
         return 100;
     }
@@ -300,22 +348,34 @@ internal class FloatOvfToInt
     public static int TestValuesDoubleLong()
     {
         double bigd = 100000000000000000000000000000.0;
-        if (DoubleToLong(bigd) != DoubleToLongInline(bigd)) return 201;
-        if (DoubleToUlong(bigd) != DoubleToUlongInline(bigd)) return 202;
-        if (DoubleToLong(-bigd) != DoubleToLongInline(-bigd)) return 203;
-        if (DoubleToUlong(-bigd) != DoubleToUlongInline(-bigd)) return 204;
+        if (DoubleToLong(bigd) != DoubleToLongInline(bigd))
+            return 201;
+        if (DoubleToUlong(bigd) != DoubleToUlongInline(bigd))
+            return 202;
+        if (DoubleToLong(-bigd) != DoubleToLongInline(-bigd))
+            return 203;
+        if (DoubleToUlong(-bigd) != DoubleToUlongInline(-bigd))
+            return 204;
 
         bigd = 987654321001234567899876543210.0;
-        if (DoubleToLong(bigd) != DoubleToLongInline(bigd)) return 201;
-        if (DoubleToUlong(bigd) != DoubleToUlongInline(bigd)) return 202;
-        if (DoubleToLong(-bigd) != DoubleToLongInline(-bigd)) return 203;
-        if (DoubleToUlong(-bigd) != DoubleToUlongInline(-bigd)) return 204;
+        if (DoubleToLong(bigd) != DoubleToLongInline(bigd))
+            return 201;
+        if (DoubleToUlong(bigd) != DoubleToUlongInline(bigd))
+            return 202;
+        if (DoubleToLong(-bigd) != DoubleToLongInline(-bigd))
+            return 203;
+        if (DoubleToUlong(-bigd) != DoubleToUlongInline(-bigd))
+            return 204;
 
         bigd = 254783961024896571038054632179.0;
-        if (DoubleToLong(bigd) != DoubleToLongInline(bigd)) return 201;
-        if (DoubleToUlong(bigd) != DoubleToUlongInline(bigd)) return 202;
-        if (DoubleToLong(-bigd) != DoubleToLongInline(-bigd)) return 203;
-        if (DoubleToUlong(-bigd) != DoubleToUlongInline(-bigd)) return 204;
+        if (DoubleToLong(bigd) != DoubleToLongInline(bigd))
+            return 201;
+        if (DoubleToUlong(bigd) != DoubleToUlongInline(bigd))
+            return 202;
+        if (DoubleToLong(-bigd) != DoubleToLongInline(-bigd))
+            return 203;
+        if (DoubleToUlong(-bigd) != DoubleToUlongInline(-bigd))
+            return 204;
 
         return 100;
     }
@@ -323,22 +383,34 @@ internal class FloatOvfToInt
     public static int TestValuesDoubleInt()
     {
         double bigd = 100000000000000000000000000000.0;
-        if (DoubleToInt(bigd) != DoubleToIntInline(bigd)) return 211;
-        if (DoubleToUint(bigd) != DoubleToUintInline(bigd)) return 212;
-        if (DoubleToInt(-bigd) != DoubleToIntInline(-bigd)) return 213;
-        if (DoubleToUint(-bigd) != DoubleToUintInline(-bigd)) return 214;
+        if (DoubleToInt(bigd) != DoubleToIntInline(bigd))
+            return 211;
+        if (DoubleToUint(bigd) != DoubleToUintInline(bigd))
+            return 212;
+        if (DoubleToInt(-bigd) != DoubleToIntInline(-bigd))
+            return 213;
+        if (DoubleToUint(-bigd) != DoubleToUintInline(-bigd))
+            return 214;
 
         bigd = 987654321001234567899876543210.0;
-        if (DoubleToInt(bigd) != DoubleToIntInline(bigd)) return 211;
-        if (DoubleToUint(bigd) != DoubleToUintInline(bigd)) return 212;
-        if (DoubleToInt(-bigd) != DoubleToIntInline(-bigd)) return 213;
-        if (DoubleToUint(-bigd) != DoubleToUintInline(-bigd)) return 214;
+        if (DoubleToInt(bigd) != DoubleToIntInline(bigd))
+            return 211;
+        if (DoubleToUint(bigd) != DoubleToUintInline(bigd))
+            return 212;
+        if (DoubleToInt(-bigd) != DoubleToIntInline(-bigd))
+            return 213;
+        if (DoubleToUint(-bigd) != DoubleToUintInline(-bigd))
+            return 214;
 
         bigd = 254783961024896571038054632179.0;
-        if (DoubleToInt(bigd) != DoubleToIntInline(bigd)) return 211;
-        if (DoubleToUint(bigd) != DoubleToUintInline(bigd)) return 212;
-        if (DoubleToInt(-bigd) != DoubleToIntInline(-bigd)) return 213;
-        if (DoubleToUint(-bigd) != DoubleToUintInline(-bigd)) return 214;
+        if (DoubleToInt(bigd) != DoubleToIntInline(bigd))
+            return 211;
+        if (DoubleToUint(bigd) != DoubleToUintInline(bigd))
+            return 212;
+        if (DoubleToInt(-bigd) != DoubleToIntInline(-bigd))
+            return 213;
+        if (DoubleToUint(-bigd) != DoubleToUintInline(-bigd))
+            return 214;
 
         return 100;
     }
@@ -346,22 +418,34 @@ internal class FloatOvfToInt
     public static int TestValuesDoubleShort()
     {
         double bigd = 100000000000000000000000000000.0;
-        if (DoubleToShort(bigd) != DoubleToShortInline(bigd)) return 221;
-        if (DoubleToUshort(bigd) != DoubleToUshortInline(bigd)) return 222;
-        if (DoubleToShort(-bigd) != DoubleToShortInline(-bigd)) return 223;
-        if (DoubleToUshort(-bigd) != DoubleToUshortInline(-bigd)) return 224;
+        if (DoubleToShort(bigd) != DoubleToShortInline(bigd))
+            return 221;
+        if (DoubleToUshort(bigd) != DoubleToUshortInline(bigd))
+            return 222;
+        if (DoubleToShort(-bigd) != DoubleToShortInline(-bigd))
+            return 223;
+        if (DoubleToUshort(-bigd) != DoubleToUshortInline(-bigd))
+            return 224;
 
         bigd = 987654321001234567899876543210.0;
-        if (DoubleToShort(bigd) != DoubleToShortInline(bigd)) return 221;
-        if (DoubleToUshort(bigd) != DoubleToUshortInline(bigd)) return 222;
-        if (DoubleToShort(-bigd) != DoubleToShortInline(-bigd)) return 223;
-        if (DoubleToUshort(-bigd) != DoubleToUshortInline(-bigd)) return 224;
+        if (DoubleToShort(bigd) != DoubleToShortInline(bigd))
+            return 221;
+        if (DoubleToUshort(bigd) != DoubleToUshortInline(bigd))
+            return 222;
+        if (DoubleToShort(-bigd) != DoubleToShortInline(-bigd))
+            return 223;
+        if (DoubleToUshort(-bigd) != DoubleToUshortInline(-bigd))
+            return 224;
 
         bigd = 254783961024896571038054632179.0;
-        if (DoubleToShort(bigd) != DoubleToShortInline(bigd)) return 221;
-        if (DoubleToUshort(bigd) != DoubleToUshortInline(bigd)) return 222;
-        if (DoubleToShort(-bigd) != DoubleToShortInline(-bigd)) return 223;
-        if (DoubleToUshort(-bigd) != DoubleToUshortInline(-bigd)) return 224;
+        if (DoubleToShort(bigd) != DoubleToShortInline(bigd))
+            return 221;
+        if (DoubleToUshort(bigd) != DoubleToUshortInline(bigd))
+            return 222;
+        if (DoubleToShort(-bigd) != DoubleToShortInline(-bigd))
+            return 223;
+        if (DoubleToUshort(-bigd) != DoubleToUshortInline(-bigd))
+            return 224;
 
         return 100;
     }
@@ -369,37 +453,65 @@ internal class FloatOvfToInt
     public static int TestValuesDoubleByte()
     {
         double bigd = 100000000000000000000000000000.0;
-        if (DoubleToSbyte(bigd) != DoubleToSbyteInline(bigd)) return 241;
-        if (DoubleToByte(bigd) != DoubleToByteInline(bigd)) return 242;
-        if (DoubleToSbyte(-bigd) != DoubleToSbyteInline(-bigd)) return 243;
-        if (DoubleToByte(-bigd) != DoubleToByteInline(-bigd)) return 244;
+        if (DoubleToSbyte(bigd) != DoubleToSbyteInline(bigd))
+            return 241;
+        if (DoubleToByte(bigd) != DoubleToByteInline(bigd))
+            return 242;
+        if (DoubleToSbyte(-bigd) != DoubleToSbyteInline(-bigd))
+            return 243;
+        if (DoubleToByte(-bigd) != DoubleToByteInline(-bigd))
+            return 244;
 
         bigd = 987654321001234567899876543210.0;
-        if (DoubleToSbyte(bigd) != DoubleToSbyteInline(bigd)) return 241;
-        if (DoubleToByte(bigd) != DoubleToByteInline(bigd)) return 242;
-        if (DoubleToSbyte(-bigd) != DoubleToSbyteInline(-bigd)) return 243;
-        if (DoubleToByte(-bigd) != DoubleToByteInline(-bigd)) return 244;
+        if (DoubleToSbyte(bigd) != DoubleToSbyteInline(bigd))
+            return 241;
+        if (DoubleToByte(bigd) != DoubleToByteInline(bigd))
+            return 242;
+        if (DoubleToSbyte(-bigd) != DoubleToSbyteInline(-bigd))
+            return 243;
+        if (DoubleToByte(-bigd) != DoubleToByteInline(-bigd))
+            return 244;
 
         bigd = 254783961024896571038054632179.0;
-        if (DoubleToSbyte(bigd) != DoubleToSbyteInline(bigd)) return 241;
-        if (DoubleToByte(bigd) != DoubleToByteInline(bigd)) return 242;
-        if (DoubleToSbyte(-bigd) != DoubleToSbyteInline(-bigd)) return 243;
-        if (DoubleToByte(-bigd) != DoubleToByteInline(-bigd)) return 244;
+        if (DoubleToSbyte(bigd) != DoubleToSbyteInline(bigd))
+            return 241;
+        if (DoubleToByte(bigd) != DoubleToByteInline(bigd))
+            return 242;
+        if (DoubleToSbyte(-bigd) != DoubleToSbyteInline(-bigd))
+            return 243;
+        if (DoubleToByte(-bigd) != DoubleToByteInline(-bigd))
+            return 244;
 
         return 100;
     }
 
     public static int TestValues()
     {
-        int res = TestValuesFloatLong(); if (res != 100) return res;
-        res = TestValuesFloatInt(); if (res != 100) return res;
-        res = TestValuesFloatShort(); if (res != 100) return res;
-        res = TestValuesFloatByte(); if (res != 100) return res;
+        int res = TestValuesFloatLong();
+        if (res != 100)
+            return res;
+        res = TestValuesFloatInt();
+        if (res != 100)
+            return res;
+        res = TestValuesFloatShort();
+        if (res != 100)
+            return res;
+        res = TestValuesFloatByte();
+        if (res != 100)
+            return res;
 
-        res = TestValuesDoubleLong(); if (res != 100) return res;
-        res = TestValuesDoubleInt(); if (res != 100) return res;
-        res = TestValuesDoubleShort(); if (res != 100) return res;
-        res = TestValuesDoubleByte(); if (res != 100) return res;
+        res = TestValuesDoubleLong();
+        if (res != 100)
+            return res;
+        res = TestValuesDoubleInt();
+        if (res != 100)
+            return res;
+        res = TestValuesDoubleShort();
+        if (res != 100)
+            return res;
+        res = TestValuesDoubleByte();
+        if (res != 100)
+            return res;
 
         return res;
     }

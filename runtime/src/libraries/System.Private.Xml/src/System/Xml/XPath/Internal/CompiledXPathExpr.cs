@@ -43,7 +43,10 @@ namespace MS.Internal.Xml.XPath
 
         public virtual void CheckErrors()
         {
-            Debug.Assert(_query != null, "In case of error in XPath we create ErrorXPathExpression");
+            Debug.Assert(
+                _query != null,
+                "In case of error in XPath we create ErrorXPathExpression"
+            );
         }
 
         public override void AddSort(object expr, IComparer comparer)
@@ -76,8 +79,13 @@ namespace MS.Internal.Xml.XPath
             sortQuery.AddSort(evalExpr, comparer);
         }
 
-        public override void AddSort(object expr, XmlSortOrder order, XmlCaseOrder caseOrder, string lang, XmlDataType dataType)
-        {
+        public override void AddSort(
+            object expr,
+            XmlSortOrder order,
+            XmlCaseOrder caseOrder,
+            string lang,
+            XmlDataType dataType
+        ) {
             AddSort(expr, new XPathComparerHelper(order, caseOrder, lang, dataType));
         }
 
@@ -107,14 +115,19 @@ namespace MS.Internal.Xml.XPath
             _needContext = false;
         }
 
-        public override XPathResultType ReturnType { get { return _query.StaticType; } }
+        public override XPathResultType ReturnType
+        {
+            get { return _query.StaticType; }
+        }
 
         private sealed class UndefinedXsltContext : XsltContext
         {
             private readonly IXmlNamespaceResolver _nsResolver;
 
-            public UndefinedXsltContext(IXmlNamespaceResolver nsResolver) : base(/*dummy*/false)
-            {
+            public UndefinedXsltContext(IXmlNamespaceResolver nsResolver)
+                : base( /*dummy*/
+                    false
+                ) {
                 _nsResolver = nsResolver;
             }
             //----- Namespace support -----
@@ -141,12 +154,21 @@ namespace MS.Internal.Xml.XPath
             {
                 throw XPathException.Create(SR.Xp_UndefinedXsltContext);
             }
-            public override IXsltContextFunction ResolveFunction(string prefix, string name, XPathResultType[] ArgTypes)
-            {
+            public override IXsltContextFunction ResolveFunction(
+                string prefix,
+                string name,
+                XPathResultType[] ArgTypes
+            ) {
                 throw XPathException.Create(SR.Xp_UndefinedXsltContext);
             }
-            public override bool Whitespace { get { return false; } }
-            public override bool PreserveWhitespace(XPathNavigator node) { return false; }
+            public override bool Whitespace
+            {
+                get { return false; }
+            }
+            public override bool PreserveWhitespace(XPathNavigator node)
+            {
+                return false;
+            }
             public override int CompareDocument(string baseUri, string nextbaseUri)
             {
                 return string.CompareOrdinal(baseUri, nextbaseUri);
@@ -161,8 +183,12 @@ namespace MS.Internal.Xml.XPath
         private readonly CultureInfo _cinfo;
         private readonly XmlDataType _dataType;
 
-        public XPathComparerHelper(XmlSortOrder order, XmlCaseOrder caseOrder, string? lang, XmlDataType dataType)
-        {
+        public XPathComparerHelper(
+            XmlSortOrder order,
+            XmlCaseOrder caseOrder,
+            string? lang,
+            XmlDataType dataType
+        ) {
             if (lang == null)
             {
                 _cinfo = CultureInfo.CurrentCulture;
@@ -175,7 +201,7 @@ namespace MS.Internal.Xml.XPath
                 }
                 catch (System.ArgumentException)
                 {
-                    throw;  // Throwing an XsltException would be a breaking change
+                    throw; // Throwing an XsltException would be a breaking change
                 }
             }
 
@@ -203,7 +229,13 @@ namespace MS.Internal.Xml.XPath
                 case XmlDataType.Text:
                     string? s1 = Convert.ToString(x, _cinfo);
                     string? s2 = Convert.ToString(y, _cinfo);
-                    int result = _cinfo.CompareInfo.Compare(s1, s2, _caseOrder != XmlCaseOrder.None ? CompareOptions.IgnoreCase : CompareOptions.None);
+                    int result = _cinfo.CompareInfo.Compare(
+                        s1,
+                        s2,
+                        _caseOrder != XmlCaseOrder.None
+                          ? CompareOptions.IgnoreCase
+                          : CompareOptions.None
+                    );
 
                     if (result != 0 || _caseOrder == XmlCaseOrder.None)
                         return (_order == XmlSortOrder.Ascending) ? result : -result;

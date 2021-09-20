@@ -26,9 +26,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             ICommandHandlerServiceFactory commandHandlerServiceFactory,
             ITextBuffer subjectBuffer,
             IOleCommandTarget nextCommandTarget,
-            IVsEditorAdaptersFactoryService editorAdaptersFactoryService)
-            : base(wpfTextView, subjectBuffer, nextCommandTarget, languageService.Package.ComponentModel)
-        {
-        }
+            IVsEditorAdaptersFactoryService editorAdaptersFactoryService
+        ) : base(
+            wpfTextView,
+            subjectBuffer,
+            nextCommandTarget,
+            languageService.Package.ComponentModel
+        ) { }
     }
 }

@@ -12,17 +12,30 @@ unsafe partial class GenericsNative
     public static extern IComInterface<double> GetIComInterfaceD();
 
     [DllImport(nameof(GenericsNative), EntryPoint = "GetIComInterfaceOut")]
-    public static extern void GetIComInterfaceDOut([MarshalAs(UnmanagedType.Interface)] out IComInterface<double> value);
+    public static extern void GetIComInterfaceDOut(
+        [MarshalAs(UnmanagedType.Interface)] out IComInterface<double> value
+    );
 
     [DllImport(nameof(GenericsNative), EntryPoint = "GetIComInterfacePtr")]
     [return: MarshalAs(UnmanagedType.Interface)]
     public static extern ref readonly IComInterface<double> GetIComInterfaceDRef();
 
     [DllImport(nameof(GenericsNative), EntryPoint = "GetIComInterfaces")]
-    public static extern void GetIComInterfaceDs([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.Interface, SizeParamIndex = 1)] IComInterface<double>[] pValues, int count);
+    public static extern void GetIComInterfaceDs(
+        [MarshalAs(
+            UnmanagedType.LPArray,
+            ArraySubType = UnmanagedType.Interface,
+            SizeParamIndex = 1
+        )]
+            IComInterface<double>[] pValues,
+        int count
+    );
 
     [DllImport(nameof(GenericsNative), EntryPoint = "GetIComInterfaces")]
-    public static extern void GetIComInterfaceDs([MarshalAs(UnmanagedType.Interface)] ref IComInterface<double> pValues, int count);
+    public static extern void GetIComInterfaceDs(
+        [MarshalAs(UnmanagedType.Interface)] ref IComInterface<double> pValues,
+        int count
+    );
 }
 
 unsafe partial class GenericsTest
@@ -31,14 +44,21 @@ unsafe partial class GenericsTest
     {
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetIComInterfaceD());
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetIComInterfaceDOut(out GenericsNative.IComInterface<double> value2));
+        Assert.Throws<MarshalDirectiveException>(
+            () =>
+                GenericsNative.GetIComInterfaceDOut(out GenericsNative.IComInterface<double> value2)
+        );
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetIComInterfaceDRef());
 
         GenericsNative.IComInterface<double>[] values = new GenericsNative.IComInterface<double>[3];
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetIComInterfaceDs(values, values.Length));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.GetIComInterfaceDs(values, values.Length)
+        );
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetIComInterfaceDs(ref values[0], values.Length));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.GetIComInterfaceDs(ref values[0], values.Length)
+        );
     }
 }

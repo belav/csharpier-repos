@@ -17,8 +17,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AnalyzerNodeSetup(AnalyzerItemsTracker analyzerTracker, AnalyzersCommandHandler analyzerCommandHandler)
-        {
+        public AnalyzerNodeSetup(
+            AnalyzerItemsTracker analyzerTracker,
+            AnalyzersCommandHandler analyzerCommandHandler
+        ) {
             _analyzerTracker = analyzerTracker;
             _analyzerCommandHandler = analyzerCommandHandler;
         }
@@ -26,7 +28,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         public void Initialize(IServiceProvider serviceProvider)
         {
             _analyzerTracker.Register();
-            _analyzerCommandHandler.Initialize((IMenuCommandService)serviceProvider.GetService(typeof(IMenuCommandService)));
+            _analyzerCommandHandler.Initialize(
+                (IMenuCommandService)serviceProvider.GetService(typeof(IMenuCommandService))
+            );
         }
 
         public void Unregister()

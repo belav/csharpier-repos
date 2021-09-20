@@ -29,8 +29,10 @@ namespace Microsoft.AspNetCore.ResponseCompression
         /// </summary>
         /// <param name="services">Services to use when instantiating compression providers.</param>
         /// <param name="options">The options for this instance.</param>
-        public ResponseCompressionProvider(IServiceProvider services, IOptions<ResponseCompressionOptions> options)
-        {
+        public ResponseCompressionProvider(
+            IServiceProvider services,
+            IOptions<ResponseCompressionOptions> options
+        ) {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -93,8 +95,10 @@ namespace Microsoft.AspNetCore.ResponseCompression
                 return null;
             }
 
-            if (!StringWithQualityHeaderValue.TryParseList(accept, out var encodings) || encodings.Count == 0)
-            {
+            if (
+                !StringWithQualityHeaderValue.TryParseList(accept, out var encodings)
+                || encodings.Count == 0
+            ) {
                 _logger.NoAcceptEncoding();
                 return null;
             }
@@ -115,9 +119,16 @@ namespace Microsoft.AspNetCore.ResponseCompression
                 {
                     var provider = _providers[i];
 
-                    if (StringSegment.Equals(provider.EncodingName, encodingName, StringComparison.OrdinalIgnoreCase))
-                    {
-                        candidates.Add(new ProviderCandidate(provider.EncodingName, quality, i, provider));
+                    if (
+                        StringSegment.Equals(
+                            provider.EncodingName,
+                            encodingName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    ) {
+                        candidates.Add(
+                            new ProviderCandidate(provider.EncodingName, quality, i, provider)
+                        );
                     }
                 }
 
@@ -129,17 +140,30 @@ namespace Microsoft.AspNetCore.ResponseCompression
                         var provider = _providers[i];
 
                         // Any provider is a candidate.
-                        candidates.Add(new ProviderCandidate(provider.EncodingName, quality, i, provider));
+                        candidates.Add(
+                            new ProviderCandidate(provider.EncodingName, quality, i, provider)
+                        );
                     }
-
                     break;
                 }
 
-                if (StringSegment.Equals("identity", encodingName, StringComparison.OrdinalIgnoreCase))
-                {
+                if (
+                    StringSegment.Equals(
+                        "identity",
+                        encodingName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                ) {
                     // We add 'identity' to the list of "candidates" with a very low priority and no provider.
                     // This will allow it to be ordered based on its quality (and priority) later in the method.
-                    candidates.Add(new ProviderCandidate(encodingName.Value, quality, priority: int.MaxValue, provider: null));
+                    candidates.Add(
+                        new ProviderCandidate(
+                            encodingName.Value,
+                            quality,
+                            priority: int.MaxValue,
+                            provider: null
+                        )
+                    );
                 }
             }
 
@@ -150,10 +174,10 @@ namespace Microsoft.AspNetCore.ResponseCompression
             }
             else
             {
-                selectedProvider = candidates
-                    .OrderByDescending(x => x.Quality)
-                    .ThenBy(x => x.Priority)
-                    .First().Provider;
+                selectedProvider =
+                    candidates.OrderByDescending(x => x.Quality)
+                        .ThenBy(x => x.Priority)
+                        .First().Provider;
             }
 
             if (selectedProvider == null)
@@ -170,13 +194,18 @@ namespace Microsoft.AspNetCore.ResponseCompression
         /// <inheritdoc />
         public virtual bool ShouldCompressResponse(HttpContext context)
         {
-            var httpsMode = context.Features.Get<IHttpsCompressionFeature>()?.Mode ?? HttpsCompressionMode.Default;
+            var httpsMode =
+                context.Features.Get<IHttpsCompressionFeature>()?.Mode
+                ?? HttpsCompressionMode.Default;
 
             // Check if the app has opted into or out of compression over HTTPS
-            if (context.Request.IsHttps
-                && (httpsMode == HttpsCompressionMode.DoNotCompress
-                    || !(_enableForHttps || httpsMode == HttpsCompressionMode.Compress)))
-            {
+            if (
+                context.Request.IsHttps
+                && (
+                    httpsMode == HttpsCompressionMode.DoNotCompress
+                    || !(_enableForHttps || httpsMode == HttpsCompressionMode.Compress)
+                )
+            ) {
                 _logger.NoCompressionForHttps();
                 return false;
             }
@@ -209,13 +238,14 @@ namespace Microsoft.AspNetCore.ResponseCompression
                 mimeType = mimeType.Trim();
             }
 
-            var shouldCompress = ShouldCompressExact(mimeType) //check exact match type/subtype
+            var shouldCompress =
+                ShouldCompressExact(mimeType) //check exact match type/subtype
                 ?? ShouldCompressPartial(mimeType) //check partial match type/*
                 ?? _mimeTypes.Contains("*/*"); //check wildcard */*
 
             if (shouldCompress)
             {
-                _logger.ShouldCompressResponse();  // Trace, there will be more logs
+                _logger.ShouldCompressResponse(); // Trace, there will be more logs
                 return true;
             }
 
@@ -267,8 +297,12 @@ namespace Microsoft.AspNetCore.ResponseCompression
 
         private readonly struct ProviderCandidate : IEquatable<ProviderCandidate>
         {
-            public ProviderCandidate(string encodingName, double quality, int priority, ICompressionProvider? provider)
-            {
+            public ProviderCandidate(
+                string encodingName,
+                double quality,
+                int priority,
+                ICompressionProvider? provider
+            ) {
                 EncodingName = encodingName;
                 Quality = quality;
                 Priority = priority;
@@ -285,7 +319,11 @@ namespace Microsoft.AspNetCore.ResponseCompression
 
             public bool Equals(ProviderCandidate other)
             {
-                return string.Equals(EncodingName, other.EncodingName, StringComparison.OrdinalIgnoreCase);
+                return string.Equals(
+                    EncodingName,
+                    other.EncodingName,
+                    StringComparison.OrdinalIgnoreCase
+                );
             }
 
             public override bool Equals(object? obj)

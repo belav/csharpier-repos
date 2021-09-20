@@ -19,8 +19,8 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             IntermediateNodeWriter nodeWriter,
             RazorCodeDocument codeDocument,
             DocumentIntermediateNode documentNode,
-            RazorCodeGenerationOptions options)
-        {
+            RazorCodeGenerationOptions options
+        ) {
             if (codeWriter == null)
             {
                 throw new ArgumentNullException(nameof(codeWriter));
@@ -118,9 +118,14 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                 return;
             }
 
-            if (SourceDocument.FilePath != null &&
-                !string.Equals(SourceDocument.FilePath, node.Source.Value.FilePath, StringComparison.OrdinalIgnoreCase))
-            {
+            if (
+                SourceDocument.FilePath != null
+                && !string.Equals(
+                    SourceDocument.FilePath,
+                    node.Source.Value.FilePath,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            ) {
                 // We don't want to generate line mappings for imports.
                 return;
             }

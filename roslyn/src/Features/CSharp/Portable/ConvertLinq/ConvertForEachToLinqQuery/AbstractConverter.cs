@@ -22,10 +22,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
     {
         public ForEachInfo<ForEachStatementSyntax, StatementSyntax> ForEachInfo { get; }
 
-        public AbstractConverter(ForEachInfo<ForEachStatementSyntax, StatementSyntax> forEachInfo)
-            => ForEachInfo = forEachInfo;
+        public AbstractConverter(
+            ForEachInfo<ForEachStatementSyntax, StatementSyntax> forEachInfo
+        ) => ForEachInfo = forEachInfo;
 
-        public abstract void Convert(SyntaxEditor editor, bool convertToQuery, CancellationToken cancellationToken);
+        public abstract void Convert(
+            SyntaxEditor editor,
+            bool convertToQuery,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Creates a query expression or a linq invocation expression.
@@ -39,11 +44,19 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             ExpressionSyntax selectExpression,
             IEnumerable<SyntaxToken> leadingTokensForSelect,
             IEnumerable<SyntaxToken> trailingTokensForSelect,
-            bool convertToQuery)
-        {
+            bool convertToQuery
+        ) {
             return convertToQuery
-                ? CreateQueryExpression(selectExpression, leadingTokensForSelect, trailingTokensForSelect)
-                : (ExpressionSyntax)CreateLinqInvocationOrSimpleExpression(selectExpression, leadingTokensForSelect, trailingTokensForSelect);
+              ? CreateQueryExpression(
+                    selectExpression,
+                    leadingTokensForSelect,
+                    trailingTokensForSelect
+                )
+              : (ExpressionSyntax)CreateLinqInvocationOrSimpleExpression(
+                    selectExpression,
+                    leadingTokensForSelect,
+                    trailingTokensForSelect
+                );
         }
 
         /// <summary>
@@ -56,15 +69,29 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
         private QueryExpressionSyntax CreateQueryExpression(
             ExpressionSyntax selectExpression,
             IEnumerable<SyntaxToken> leadingTokensForSelect,
-            IEnumerable<SyntaxToken> trailingTokensForSelect)
-            => SyntaxFactory.QueryExpression(
-                CreateFromClause(ForEachInfo.ForEachStatement, ForEachInfo.LeadingTokens.GetTrivia(), Enumerable.Empty<SyntaxTrivia>()),
-                SyntaxFactory.QueryBody(
-                    SyntaxFactory.List(ForEachInfo.ConvertingExtendedNodes.Select(node => CreateQueryClause(node))),
-                    SyntaxFactory.SelectClause(selectExpression)
-                        .WithCommentsFrom(leadingTokensForSelect, ForEachInfo.TrailingTokens.Concat(trailingTokensForSelect)),
-                    continuation: null)) // The current coverage of foreach statements to support does not need to use query continuations.                                                                                                           
-            .WithAdditionalAnnotations(Formatter.Annotation);
+            IEnumerable<SyntaxToken> trailingTokensForSelect
+        ) =>
+            SyntaxFactory.QueryExpression(
+                    CreateFromClause(
+                        ForEachInfo.ForEachStatement,
+                        ForEachInfo.LeadingTokens.GetTrivia(),
+                        Enumerable.Empty<SyntaxTrivia>()
+                    ),
+                    SyntaxFactory.QueryBody(
+                        SyntaxFactory.List(
+                            ForEachInfo.ConvertingExtendedNodes.Select(
+                                node => CreateQueryClause(node)
+                            )
+                        ),
+                        SyntaxFactory.SelectClause(selectExpression)
+                            .WithCommentsFrom(
+                                leadingTokensForSelect,
+                                ForEachInfo.TrailingTokens.Concat(trailingTokensForSelect)
+                            ),
+                        continuation: null
+                    )
+                ) // The current coverage of foreach statements to support does not need to use query continuations.
+                .WithAdditionalAnnotations(Formatter.Annotation);
 
         private static QueryClauseSyntax CreateQueryClause(ExtendedSyntaxNode node)
         {
@@ -73,22 +100,34 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                 case SyntaxKind.VariableDeclarator:
                     var variable = (VariableDeclaratorSyntax)node.Node;
                     return SyntaxFactory.LetClause(
-                                SyntaxFactory.Token(SyntaxKind.LetKeyword),
-                                variable.Identifier,
-                                variable.Initializer.EqualsToken,
-                                variable.Initializer.Value)
-                            .WithCommentsFrom(node.ExtraLeadingComments, node.ExtraTrailingComments);
+                            SyntaxFactory.Token(SyntaxKind.LetKeyword),
+                            variable.Identifier,
+                            variable.Initializer.EqualsToken,
+                            variable.Initializer.Value
+                        )
+                        .WithCommentsFrom(node.ExtraLeadingComments, node.ExtraTrailingComments);
 
                 case SyntaxKind.ForEachStatement:
-                    return CreateFromClause((ForEachStatementSyntax)node.Node, node.ExtraLeadingComments, node.ExtraTrailingComments);
+                    return CreateFromClause(
+                        (ForEachStatementSyntax)node.Node,
+                        node.ExtraLeadingComments,
+                        node.ExtraTrailingComments
+                    );
 
                 case SyntaxKind.IfStatement:
                     var ifStatement = (IfStatementSyntax)node.Node;
                     return SyntaxFactory.WhereClause(
-                                SyntaxFactory.Token(SyntaxKind.WhereKeyword)
-                                    .WithCommentsFrom(ifStatement.IfKeyword.LeadingTrivia, ifStatement.IfKeyword.TrailingTrivia),
-                                ifStatement.Condition.WithCommentsFrom(ifStatement.OpenParenToken, ifStatement.CloseParenToken))
-                            .WithCommentsFrom(node.ExtraLeadingComments, node.ExtraTrailingComments);
+                            SyntaxFactory.Token(SyntaxKind.WhereKeyword)
+                                .WithCommentsFrom(
+                                    ifStatement.IfKeyword.LeadingTrivia,
+                                    ifStatement.IfKeyword.TrailingTrivia
+                                ),
+                            ifStatement.Condition.WithCommentsFrom(
+                                ifStatement.OpenParenToken,
+                                ifStatement.CloseParenToken
+                            )
+                        )
+                        .WithCommentsFrom(node.ExtraLeadingComments, node.ExtraTrailingComments);
             }
 
             throw ExceptionUtilities.Unreachable;
@@ -97,23 +136,33 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
         private static FromClauseSyntax CreateFromClause(
             ForEachStatementSyntax forEachStatement,
             IEnumerable<SyntaxTrivia> extraLeadingTrivia,
-            IEnumerable<SyntaxTrivia> extraTrailingTrivia)
-            => SyntaxFactory.FromClause(
+            IEnumerable<SyntaxTrivia> extraTrailingTrivia
+        ) =>
+            SyntaxFactory.FromClause(
                     fromKeyword: SyntaxFactory.Token(SyntaxKind.FromKeyword)
-                                    .WithCommentsFrom(
-                                        forEachStatement.ForEachKeyword.LeadingTrivia,
-                                        forEachStatement.ForEachKeyword.TrailingTrivia,
-                                        forEachStatement.OpenParenToken)
-                                    .KeepCommentsAndAddElasticMarkers(),
+                        .WithCommentsFrom(
+                            forEachStatement.ForEachKeyword.LeadingTrivia,
+                            forEachStatement.ForEachKeyword.TrailingTrivia,
+                            forEachStatement.OpenParenToken
+                        )
+                        .KeepCommentsAndAddElasticMarkers(),
                     type: forEachStatement.Type.IsVar ? null : forEachStatement.Type,
-                    identifier: forEachStatement.Type.IsVar ?
-                                forEachStatement.Identifier.WithPrependedLeadingTrivia(
-                                    SyntaxNodeOrTokenExtensions.GetTrivia(forEachStatement.Type.GetFirstToken())
-                                    .FilterComments(addElasticMarker: false)) :
-                                forEachStatement.Identifier,
+                    identifier: forEachStatement.Type.IsVar
+                      ? forEachStatement.Identifier.WithPrependedLeadingTrivia(
+                            SyntaxNodeOrTokenExtensions.GetTrivia(
+                                    forEachStatement.Type.GetFirstToken()
+                                )
+                                .FilterComments(addElasticMarker: false)
+                        )
+                      : forEachStatement.Identifier,
                     inKeyword: forEachStatement.InKeyword.KeepCommentsAndAddElasticMarkers(),
-                    expression: forEachStatement.Expression)
-                        .WithCommentsFrom(extraLeadingTrivia, extraTrailingTrivia, forEachStatement.CloseParenToken);
+                    expression: forEachStatement.Expression
+                )
+                .WithCommentsFrom(
+                    extraLeadingTrivia,
+                    extraTrailingTrivia,
+                    forEachStatement.CloseParenToken
+                );
 
         /// <summary>
         /// Creates a linq invocation expression.
@@ -125,19 +174,23 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
         private ExpressionSyntax CreateLinqInvocationOrSimpleExpression(
             ExpressionSyntax selectExpression,
             IEnumerable<SyntaxToken> leadingTokensForSelect,
-            IEnumerable<SyntaxToken> trailingTokensForSelect)
-        {
+            IEnumerable<SyntaxToken> trailingTokensForSelect
+        ) {
             var foreachStatement = ForEachInfo.ForEachStatement;
-            selectExpression = selectExpression.WithCommentsFrom(leadingTokensForSelect, ForEachInfo.TrailingTokens.Concat(trailingTokensForSelect));
+            selectExpression = selectExpression.WithCommentsFrom(
+                leadingTokensForSelect,
+                ForEachInfo.TrailingTokens.Concat(trailingTokensForSelect)
+            );
             var currentExtendedNodeIndex = 0;
 
             return CreateLinqInvocationOrSimpleExpression(
-                foreachStatement,
-                receiverForInvocation: foreachStatement.Expression,
-                selectExpression: selectExpression,
-                leadingCommentsTrivia: ForEachInfo.LeadingTokens.GetTrivia(),
-                trailingCommentsTrivia: Enumerable.Empty<SyntaxTrivia>(),
-                currentExtendedNodeIndex: ref currentExtendedNodeIndex)
+                    foreachStatement,
+                    receiverForInvocation: foreachStatement.Expression,
+                    selectExpression: selectExpression,
+                    leadingCommentsTrivia: ForEachInfo.LeadingTokens.GetTrivia(),
+                    trailingCommentsTrivia: Enumerable.Empty<SyntaxTrivia>(),
+                    currentExtendedNodeIndex: ref currentExtendedNodeIndex
+                )
                 .WithAdditionalAnnotations(Formatter.Annotation);
         }
 
@@ -147,9 +200,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             IEnumerable<SyntaxTrivia> leadingCommentsTrivia,
             IEnumerable<SyntaxTrivia> trailingCommentsTrivia,
             ExpressionSyntax selectExpression,
-            ref int currentExtendedNodeIndex)
-        {
-            leadingCommentsTrivia = forEachStatement.ForEachKeyword.GetAllTrivia().Concat(leadingCommentsTrivia);
+            ref int currentExtendedNodeIndex
+        ) {
+            leadingCommentsTrivia = forEachStatement.ForEachKeyword.GetAllTrivia()
+                .Concat(leadingCommentsTrivia);
 
             // Recursively create linq invocations, possibly updating the receiver (Where invocations), to get the inner expression for
             // the lambda body for the linq invocation to be created for this foreach statement. For example:
@@ -164,15 +218,30 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             //   c1.SelectMany(n1 => c2.Where(n2 => n1 > n2).Select(n2 => n1 + n2))
             //
             var hasForEachChild = false;
-            var lambdaBody = CreateLinqInvocationForExtendedNode(selectExpression, ref currentExtendedNodeIndex, ref receiverForInvocation, ref hasForEachChild);
+            var lambdaBody = CreateLinqInvocationForExtendedNode(
+                selectExpression,
+                ref currentExtendedNodeIndex,
+                ref receiverForInvocation,
+                ref hasForEachChild
+            );
             var lambda = SyntaxFactory.SimpleLambdaExpression(
-                SyntaxFactory.Parameter(
-                    forEachStatement.Identifier.WithPrependedLeadingTrivia(
-                    SyntaxNodeOrTokenExtensions.GetTrivia(forEachStatement.Type.GetFirstToken())
-                        .FilterComments(addElasticMarker: false))),
-                lambdaBody)
-                .WithCommentsFrom(leadingCommentsTrivia, trailingCommentsTrivia,
-                    forEachStatement.OpenParenToken, forEachStatement.InKeyword, forEachStatement.CloseParenToken);
+                    SyntaxFactory.Parameter(
+                        forEachStatement.Identifier.WithPrependedLeadingTrivia(
+                            SyntaxNodeOrTokenExtensions.GetTrivia(
+                                    forEachStatement.Type.GetFirstToken()
+                                )
+                                .FilterComments(addElasticMarker: false)
+                        )
+                    ),
+                    lambdaBody
+                )
+                .WithCommentsFrom(
+                    leadingCommentsTrivia,
+                    trailingCommentsTrivia,
+                    forEachStatement.OpenParenToken,
+                    forEachStatement.InKeyword,
+                    forEachStatement.CloseParenToken
+                );
 
             // Create Select or SelectMany linq invocation for this foreach statement. For example:
             //
@@ -186,13 +255,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             //   c1.SelectMany(n1 => ...
             //
 
-            var invokedMethodName = !hasForEachChild ? nameof(Enumerable.Select) : nameof(Enumerable.SelectMany);
+            var invokedMethodName = !hasForEachChild
+                ? nameof(Enumerable.Select)
+                : nameof(Enumerable.SelectMany);
 
             // Avoid `.Select(x => x)`
-            if (invokedMethodName == nameof(Enumerable.Select) &&
-                lambdaBody is IdentifierNameSyntax identifier &&
-                identifier.Identifier.ValueText == forEachStatement.Identifier.ValueText)
-            {
+            if (
+                invokedMethodName == nameof(Enumerable.Select)
+                && lambdaBody is IdentifierNameSyntax identifier
+                && identifier.Identifier.ValueText == forEachStatement.Identifier.ValueText
+            ) {
                 // Because we're dropping the lambda, any comments associated with it need to be preserved.
 
                 var droppedTrivia = new List<SyntaxTrivia>();
@@ -208,9 +280,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                 SyntaxFactory.MemberAccessExpression(
                     SyntaxKind.SimpleMemberAccessExpression,
                     receiverForInvocation.Parenthesize(),
-                    SyntaxFactory.IdentifierName(invokedMethodName)),
-                SyntaxFactory.ArgumentList(SyntaxFactory.SingletonSeparatedList(
-                    SyntaxFactory.Argument(lambda))));
+                    SyntaxFactory.IdentifierName(invokedMethodName)
+                ),
+                SyntaxFactory.ArgumentList(
+                    SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Argument(lambda))
+                )
+            );
         }
 
         /// <summary>
@@ -225,8 +300,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             ExpressionSyntax selectExpression,
             ref int extendedNodeIndex,
             ref ExpressionSyntax receiver,
-            ref bool hasForEachChild)
-        {
+            ref bool hasForEachChild
+        ) {
             // Check if we have converted all the descendant foreach/if statements.
             // If so, we return the select expression.
             if (extendedNodeIndex == ForEachInfo.ConvertingExtendedNodes.Length)
@@ -258,7 +333,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                         selectExpression: selectExpression,
                         leadingCommentsTrivia: node.ExtraLeadingComments,
                         trailingCommentsTrivia: node.ExtraTrailingComments,
-                        currentExtendedNodeIndex: ref extendedNodeIndex);
+                        currentExtendedNodeIndex: ref extendedNodeIndex
+                    );
 
                 // Nested If statement is converted into a Where method invocation on the current receiver. For example:
                 //
@@ -273,23 +349,43 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                 case SyntaxKind.IfStatement:
                     var ifStatement = (IfStatementSyntax)node.Node;
                     var parentForEachStatement = ifStatement.GetAncestor<ForEachStatementSyntax>();
-                    var lambdaParameter = SyntaxFactory.Parameter(SyntaxFactory.Identifier(parentForEachStatement.Identifier.ValueText));
+                    var lambdaParameter = SyntaxFactory.Parameter(
+                        SyntaxFactory.Identifier(parentForEachStatement.Identifier.ValueText)
+                    );
                     var lambda = SyntaxFactory.SimpleLambdaExpression(
-                        SyntaxFactory.Parameter(
-                            SyntaxFactory.Identifier(parentForEachStatement.Identifier.ValueText)),
-                        ifStatement.Condition.WithCommentsFrom(ifStatement.OpenParenToken, ifStatement.CloseParenToken))
-                        .WithCommentsFrom(ifStatement.IfKeyword.GetAllTrivia().Concat(node.ExtraLeadingComments), node.ExtraTrailingComments);
+                            SyntaxFactory.Parameter(
+                                SyntaxFactory.Identifier(
+                                    parentForEachStatement.Identifier.ValueText
+                                )
+                            ),
+                            ifStatement.Condition.WithCommentsFrom(
+                                ifStatement.OpenParenToken,
+                                ifStatement.CloseParenToken
+                            )
+                        )
+                        .WithCommentsFrom(
+                            ifStatement.IfKeyword.GetAllTrivia().Concat(node.ExtraLeadingComments),
+                            node.ExtraTrailingComments
+                        );
 
                     receiver = SyntaxFactory.InvocationExpression(
                         SyntaxFactory.MemberAccessExpression(
                             SyntaxKind.SimpleMemberAccessExpression,
                             receiver.Parenthesize(),
-                            SyntaxFactory.IdentifierName(nameof(Enumerable.Where))),
-                        SyntaxFactory.ArgumentList(SyntaxFactory.SingletonSeparatedList(
-                            SyntaxFactory.Argument(lambda))));
+                            SyntaxFactory.IdentifierName(nameof(Enumerable.Where))
+                        ),
+                        SyntaxFactory.ArgumentList(
+                            SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Argument(lambda))
+                        )
+                    );
 
                     ++extendedNodeIndex;
-                    return CreateLinqInvocationForExtendedNode(selectExpression, ref extendedNodeIndex, ref receiver, ref hasForEachChild);
+                    return CreateLinqInvocationForExtendedNode(
+                        selectExpression,
+                        ref extendedNodeIndex,
+                        ref receiver,
+                        ref hasForEachChild
+                    );
             }
 
             throw ExceptionUtilities.Unreachable;

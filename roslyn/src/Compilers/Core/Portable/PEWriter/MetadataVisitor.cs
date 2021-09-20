@@ -36,9 +36,7 @@ namespace Microsoft.Cci
             }
         }
 
-        public virtual void Visit(IAssemblyReference assemblyReference)
-        {
-        }
+        public virtual void Visit(IAssemblyReference assemblyReference) { }
 
         public void Visit(IEnumerable<ICustomAttribute> customAttributes)
         {
@@ -50,7 +48,10 @@ namespace Microsoft.Cci
 
         public virtual void Visit(ICustomAttribute customAttribute)
         {
-            IMethodReference constructor = customAttribute.Constructor(Context, reportDiagnostics: false);
+            IMethodReference constructor = customAttribute.Constructor(
+                Context,
+                reportDiagnostics: false
+            );
             if (constructor is null)
             {
                 return;
@@ -102,7 +103,10 @@ namespace Microsoft.Cci
             var marshalling = fieldDefinition.MarshallingInformation;
 
             Debug.Assert((constant != null) == fieldDefinition.IsCompileTimeConstant);
-            Debug.Assert((marshalling != null || !fieldDefinition.MarshallingDescriptor.IsDefaultOrEmpty) == fieldDefinition.IsMarshalledExplicitly);
+            Debug.Assert(
+                (marshalling != null || !fieldDefinition.MarshallingDescriptor.IsDefaultOrEmpty)
+                    == fieldDefinition.IsMarshalledExplicitly
+            );
 
             if (constant != null)
             {
@@ -111,7 +115,7 @@ namespace Microsoft.Cci
 
             if (marshalling != null)
             {
-                // Note, we are not visiting MarshallingDescriptor. It is used only for 
+                // Note, we are not visiting MarshallingDescriptor. It is used only for
                 // NoPia embedded/local types and VB Dev11 simply copies the bits without
                 // cracking them.
                 this.Visit(marshalling);
@@ -133,13 +137,11 @@ namespace Microsoft.Cci
             }
         }
 
-        public virtual void Visit(IFileReference fileReference)
-        {
-        }
+        public virtual void Visit(IFileReference fileReference) { }
 
-        public virtual void Visit(IGenericMethodInstanceReference genericMethodInstanceReference)
-        {
-        }
+        public virtual void Visit(
+            IGenericMethodInstanceReference genericMethodInstanceReference
+        ) { }
 
         public void Visit(IEnumerable<IGenericMethodParameter> genericParameters)
         {
@@ -149,13 +151,11 @@ namespace Microsoft.Cci
             }
         }
 
-        public virtual void Visit(IGenericMethodParameter genericMethodParameter)
-        {
-        }
+        public virtual void Visit(IGenericMethodParameter genericMethodParameter) { }
 
-        public virtual void Visit(IGenericMethodParameterReference genericMethodParameterReference)
-        {
-        }
+        public virtual void Visit(
+            IGenericMethodParameterReference genericMethodParameterReference
+        ) { }
 
         public virtual void Visit(IGenericParameter genericParameter)
         {
@@ -175,13 +175,9 @@ namespace Microsoft.Cci
             }
         }
 
-        public virtual void Visit(IGenericTypeParameter genericTypeParameter)
-        {
-        }
+        public virtual void Visit(IGenericTypeParameter genericTypeParameter) { }
 
-        public virtual void Visit(IGenericTypeParameterReference genericTypeParameterReference)
-        {
-        }
+        public virtual void Visit(IGenericTypeParameterReference genericTypeParameterReference) { }
 
         public virtual void Visit(IGlobalFieldDefinition globalFieldDefinition)
         {
@@ -212,9 +208,7 @@ namespace Microsoft.Cci
             throw ExceptionUtilities.Unreachable;
         }
 
-        public virtual void Visit(MetadataConstant constant)
-        {
-        }
+        public virtual void Visit(MetadataConstant constant) { }
 
         public virtual void Visit(MetadataCreateArray createArray)
         {
@@ -325,7 +319,8 @@ namespace Microsoft.Cci
 
         public virtual void Visit(IMethodReference methodReference)
         {
-            IGenericMethodInstanceReference? genericMethodInstanceReference = methodReference.AsGenericMethodInstanceReference;
+            IGenericMethodInstanceReference? genericMethodInstanceReference =
+                methodReference.AsGenericMethodInstanceReference;
             if (genericMethodInstanceReference != null)
             {
                 this.Visit(genericMethodInstanceReference);
@@ -352,9 +347,7 @@ namespace Microsoft.Cci
             }
         }
 
-        public virtual void Visit(IModuleReference moduleReference)
-        {
-        }
+        public virtual void Visit(IModuleReference moduleReference) { }
 
         public void Visit(IEnumerable<INamedTypeDefinition> types)
         {
@@ -364,13 +357,9 @@ namespace Microsoft.Cci
             }
         }
 
-        public virtual void Visit(INamespaceTypeDefinition namespaceTypeDefinition)
-        {
-        }
+        public virtual void Visit(INamespaceTypeDefinition namespaceTypeDefinition) { }
 
-        public virtual void Visit(INamespaceTypeReference namespaceTypeReference)
-        {
-        }
+        public virtual void Visit(INamespaceTypeReference namespaceTypeReference) { }
 
         public void VisitNestedTypes(IEnumerable<INamedTypeDefinition> nestedTypes)
         {
@@ -380,9 +369,7 @@ namespace Microsoft.Cci
             }
         }
 
-        public virtual void Visit(INestedTypeDefinition nestedTypeDefinition)
-        {
-        }
+        public virtual void Visit(INestedTypeDefinition nestedTypeDefinition) { }
 
         public virtual void Visit(INestedTypeReference nestedTypeReference)
         {
@@ -418,7 +405,10 @@ namespace Microsoft.Cci
         {
             var marshalling = parameterDefinition.MarshallingInformation;
 
-            Debug.Assert((marshalling != null || !parameterDefinition.MarshallingDescriptor.IsDefaultOrEmpty) == parameterDefinition.IsMarshalledExplicitly);
+            Debug.Assert(
+                (marshalling != null || !parameterDefinition.MarshallingDescriptor.IsDefaultOrEmpty)
+                    == parameterDefinition.IsMarshalledExplicitly
+            );
 
             this.Visit(parameterDefinition.GetAttributes(Context));
             this.Visit(parameterDefinition.RefCustomModifiers);
@@ -432,7 +422,7 @@ namespace Microsoft.Cci
 
             if (marshalling != null)
             {
-                // Note, we are not visiting MarshallingDescriptor. It is used only for 
+                // Note, we are not visiting MarshallingDescriptor. It is used only for
                 // NoPia embedded/local types and VB Dev11 simply copies the bits without
                 // cracking them.
                 this.Visit(marshalling);
@@ -443,8 +433,9 @@ namespace Microsoft.Cci
 
         public void Visit(ImmutableArray<IParameterTypeInformation> parameterTypeInformations)
         {
-            foreach (IParameterTypeInformation parameterTypeInformation in parameterTypeInformations)
-            {
+            foreach (
+                IParameterTypeInformation parameterTypeInformation in parameterTypeInformations
+            ) {
                 this.Visit(parameterTypeInformation);
             }
         }
@@ -456,9 +447,7 @@ namespace Microsoft.Cci
             this.Visit(parameterTypeInformation.GetType(Context));
         }
 
-        public virtual void Visit(IPlatformInvokeInformation platformInvokeInformation)
-        {
-        }
+        public virtual void Visit(IPlatformInvokeInformation platformInvokeInformation) { }
 
         public virtual void Visit(IPointerTypeReference pointerTypeReference)
         {
@@ -499,9 +488,7 @@ namespace Microsoft.Cci
             }
         }
 
-        public virtual void Visit(ManagedResource resource)
-        {
-        }
+        public virtual void Visit(ManagedResource resource) { }
 
         public virtual void Visit(SecurityAttribute securityAttribute)
         {
@@ -587,14 +574,16 @@ namespace Microsoft.Cci
         /// <param name="typeReference">A reference to a type definition. Note that a type definition can serve as a reference to itself.</param>
         protected void DispatchAsReference(ITypeReference typeReference)
         {
-            INamespaceTypeReference? namespaceTypeReference = typeReference.AsNamespaceTypeReference;
+            INamespaceTypeReference? namespaceTypeReference =
+                typeReference.AsNamespaceTypeReference;
             if (namespaceTypeReference != null)
             {
                 this.Visit(namespaceTypeReference);
                 return;
             }
 
-            IGenericTypeInstanceReference? genericTypeInstanceReference = typeReference.AsGenericTypeInstanceReference;
+            IGenericTypeInstanceReference? genericTypeInstanceReference =
+                typeReference.AsGenericTypeInstanceReference;
             if (genericTypeInstanceReference != null)
             {
                 this.Visit(genericTypeInstanceReference);
@@ -615,14 +604,16 @@ namespace Microsoft.Cci
                 return;
             }
 
-            IGenericTypeParameterReference? genericTypeParameterReference = typeReference.AsGenericTypeParameterReference;
+            IGenericTypeParameterReference? genericTypeParameterReference =
+                typeReference.AsGenericTypeParameterReference;
             if (genericTypeParameterReference != null)
             {
                 this.Visit(genericTypeParameterReference);
                 return;
             }
 
-            IGenericMethodParameterReference? genericMethodParameterReference = typeReference.AsGenericMethodParameterReference;
+            IGenericMethodParameterReference? genericMethodParameterReference =
+                typeReference.AsGenericMethodParameterReference;
             if (genericMethodParameterReference != null)
             {
                 this.Visit(genericMethodParameterReference);
@@ -636,7 +627,8 @@ namespace Microsoft.Cci
                 return;
             }
 
-            IFunctionPointerTypeReference? functionPointerTypeReference = typeReference as IFunctionPointerTypeReference;
+            IFunctionPointerTypeReference? functionPointerTypeReference =
+                typeReference as IFunctionPointerTypeReference;
             if (functionPointerTypeReference != null)
             {
                 this.Visit(functionPointerTypeReference);
@@ -687,9 +679,7 @@ namespace Microsoft.Cci
             }
         }
 
-        public virtual void Visit(IWin32Resource win32Resource)
-        {
-        }
+        public virtual void Visit(IWin32Resource win32Resource) { }
     }
 }
 

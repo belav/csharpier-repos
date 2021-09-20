@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -51,7 +51,10 @@ namespace Microsoft.AspNetCore.Mvc
             Assert.True(result.WasWriteFileCalled);
 
             Assert.Equal("application/my-type", httpContext.Response.Headers["Content-Type"]);
-            Assert.Equal(@"attachment; filename=""some\\file""; filename*=UTF-8''some%5Cfile", httpContext.Response.Headers["Content-Disposition"]);
+            Assert.Equal(
+                @"attachment; filename=""some\\file""; filename*=UTF-8''some%5Cfile",
+                httpContext.Response.Headers["Content-Disposition"]
+            );
         }
 
         [Fact]
@@ -72,16 +75,19 @@ namespace Microsoft.AspNetCore.Mvc
             // Assert
             Assert.True(result.WasWriteFileCalled);
             Assert.Equal("application/my-type", httpContext.Response.Headers["Content-Type"]);
-            Assert.Equal(@"attachment; filename=""ABCXYZabcxyz012789!@#$%^&*()-=_+.:~_""; filename*=UTF-8''ABCXYZabcxyz012789!%40#$%25^&%2A%28%29-%3D_+.%3A~%CE%94",
-                httpContext.Response.Headers["Content-Disposition"]);
+            Assert.Equal(
+                @"attachment; filename=""ABCXYZabcxyz012789!@#$%^&*()-=_+.:~_""; filename*=UTF-8''ABCXYZabcxyz012789!%40#$%25^&%2A%28%29-%3D_+.%3A~%CE%94",
+                httpContext.Response.Headers["Content-Disposition"]
+            );
         }
 
         [Fact]
         public async Task ExecuteResultAsync_DoesNotSetContentDisposition_IfNotSpecified()
         {
             // Arrange
-            var provider = new ServiceCollection()
-                .AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance)
+            var provider = new ServiceCollection().AddSingleton<ILoggerFactory>(
+                    NullLoggerFactory.Instance
+                )
                 .AddSingleton<EmptyFileResultExecutor>()
                 .BuildServiceProvider();
 
@@ -119,7 +125,10 @@ namespace Microsoft.AspNetCore.Mvc
             // Assert
             Assert.True(result.WasWriteFileCalled);
             Assert.Equal("application/my-type", httpContext.Response.ContentType);
-            Assert.Equal("attachment; filename=filename.ext; filename*=UTF-8''filename.ext", httpContext.Response.Headers["Content-Disposition"]);
+            Assert.Equal(
+                "attachment; filename=filename.ext; filename*=UTF-8''filename.ext",
+                httpContext.Response.Headers["Content-Disposition"]
+            );
         }
 
         [Fact]
@@ -132,7 +141,9 @@ namespace Microsoft.AspNetCore.Mvc
             var result = new EmptyFileResult("application/my-type");
 
             // Act & Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(() => result.ExecuteResultAsync(actionContext));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => result.ExecuteResultAsync(actionContext)
+            );
         }
 
         public static TheoryData<string, string> ContentDispositionData
@@ -155,7 +166,6 @@ namespace Microsoft.AspNetCore.Mvc
                     { "^", "attachment; filename=^; filename*=UTF-8''^" },
                     { "`", "attachment; filename=`; filename*=UTF-8''`" },
                     { "|", "attachment; filename=|; filename*=UTF-8''|" },
-
                     // Values that need to be quoted
                     { ": :", "attachment; filename=\": :\"; filename*=UTF-8''%3A%20%3A" },
                     { "(", "attachment; filename=\"(\"; filename*=UTF-8''%28" },
@@ -175,20 +185,23 @@ namespace Microsoft.AspNetCore.Mvc
                     { "}", "attachment; filename=\"}\"; filename*=UTF-8''%7D" },
                     { " ", "attachment; filename=\" \"; filename*=UTF-8''%20" },
                     { "a b", "attachment; filename=\"a b\"; filename*=UTF-8''a%20b" },
-
                     // Values that need to be escaped
                     { "\"", "attachment; filename=\"\\\"\"; filename*=UTF-8''%22" },
                     { "\\", "attachment; filename=\"\\\\\"; filename*=UTF-8''%5C" },
-
                     // Values that need to be specially encoded (Base64, see rfc2047)
                     { "a\tb", "attachment; filename=a_b; filename*=UTF-8''a%09b" },
                     { "a\nb", "attachment; filename=a_b; filename*=UTF-8''a%0Ab" },
-
                     // Values with non unicode characters
-                    { "résumé.txt", "attachment; filename=r_sum_.txt; filename*=UTF-8''r%C3%A9sum%C3%A9.txt" },
+                    {
+                        "résumé.txt",
+                        "attachment; filename=r_sum_.txt; filename*=UTF-8''r%C3%A9sum%C3%A9.txt"
+                    },
                     { "Δ", "attachment; filename=_; filename*=UTF-8''%CE%94" },
                     { "Δ\t", "attachment; filename=__; filename*=UTF-8''%CE%94%09" },
-                    { "ABCXYZabcxyz012789!@#$%^&*()-=_+.:~Δ", @"attachment; filename=""ABCXYZabcxyz012789!@#$%^&*()-=_+.:~_""; filename*=UTF-8''ABCXYZabcxyz012789!%40#$%25^&%2A%28%29-%3D_+.%3A~%CE%94" },
+                    {
+                        "ABCXYZabcxyz012789!@#$%^&*()-=_+.:~Δ",
+                        @"attachment; filename=""ABCXYZabcxyz012789!@#$%^&*()-=_+.:~_""; filename*=UTF-8''ABCXYZabcxyz012789!%40#$%25^&%2A%28%29-%3D_+.%3A~%CE%94"
+                    },
                 };
             }
         }
@@ -200,10 +213,16 @@ namespace Microsoft.AspNetCore.Mvc
                 var data = new TheoryData<string, string>();
                 for (var i = 0; i < 32; i++)
                 {
-                    data.Add(char.ConvertFromUtf32(i), $"attachment; filename=_; filename*=UTF-8''%{i:X2}");
+                    data.Add(
+                        char.ConvertFromUtf32(i),
+                        $"attachment; filename=_; filename*=UTF-8''%{i:X2}"
+                    );
                 }
 
-                data.Add(char.ConvertFromUtf32(127), $"attachment; filename=\"{char.ConvertFromUtf32(127)}\"; filename*=UTF-8''%7F");
+                data.Add(
+                    char.ConvertFromUtf32(127),
+                    $"attachment; filename=\"{char.ConvertFromUtf32(127)}\"; filename*=UTF-8''%7F"
+                );
 
                 return data;
             }
@@ -212,8 +231,10 @@ namespace Microsoft.AspNetCore.Mvc
         [Theory]
         [MemberData(nameof(ContentDispositionData))]
         [MemberData(nameof(ContentDispositionControlCharactersData))]
-        public void GetHeaderValue_Produces_Correct_ContentDisposition(string input, string expectedOutput)
-        {
+        public void GetHeaderValue_Produces_Correct_ContentDisposition(
+            string input,
+            string expectedOutput
+        ) {
             // Arrange & Act
             var cd = new ContentDispositionHeaderValue("attachment");
             cd.SetHttpFileName(input);
@@ -245,36 +266,44 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData("\"Etag\"", null, false, null)]
         [InlineData(null, "\"NotEtag\"", true, "\"Etag\"")]
         [InlineData(null, "\"NotEtag\"", false, "\"Etag\"")]
-        public void GetPreconditionState_ShouldProcess(string ifMatch, string ifNoneMatch, bool isWeak, string ifRange)
-        {
+        public void GetPreconditionState_ShouldProcess(
+            string ifMatch,
+            string ifNoneMatch,
+            bool isWeak,
+            string ifRange
+        ) {
             // Arrange
             var actionContext = new ActionContext();
             var httpContext = new DefaultHttpContext();
             httpContext.Request.Method = HttpMethods.Get;
             var httpRequestHeaders = httpContext.Request.GetTypedHeaders();
             var lastModified = DateTimeOffset.MinValue;
-            lastModified = new DateTimeOffset(lastModified.Year, lastModified.Month, lastModified.Day, lastModified.Hour, lastModified.Minute, lastModified.Second, TimeSpan.FromSeconds(0));
+            lastModified = new DateTimeOffset(
+                lastModified.Year,
+                lastModified.Month,
+                lastModified.Day,
+                lastModified.Hour,
+                lastModified.Minute,
+                lastModified.Second,
+                TimeSpan.FromSeconds(0)
+            );
             var etag = new EntityTagHeaderValue("\"Etag\"");
-            httpRequestHeaders.IfMatch = ifMatch == null ? null : new[]
-            {
-                new EntityTagHeaderValue(ifMatch),
-            };
+            httpRequestHeaders.IfMatch =
+                ifMatch == null ? null : new[] { new EntityTagHeaderValue(ifMatch), };
 
-            httpRequestHeaders.IfNoneMatch = ifNoneMatch == null ? null : new[]
-            {
-                new EntityTagHeaderValue(ifNoneMatch, isWeak),
-            };
-            httpRequestHeaders.IfRange = ifRange == null ? null : new RangeConditionHeaderValue(ifRange);
+            httpRequestHeaders.IfNoneMatch =
+                ifNoneMatch == null
+                    ? null
+                    : new[] { new EntityTagHeaderValue(ifNoneMatch, isWeak), };
+            httpRequestHeaders.IfRange =
+                ifRange == null ? null : new RangeConditionHeaderValue(ifRange);
             httpRequestHeaders.IfUnmodifiedSince = lastModified;
             httpRequestHeaders.IfModifiedSince = DateTimeOffset.MinValue.AddDays(1);
             actionContext.HttpContext = httpContext;
             var fileResult = (new Mock<FileResultExecutorBase>(NullLogger.Instance)).Object;
 
             // Act
-            var state = fileResult.GetPreconditionState(
-                httpRequestHeaders,
-                lastModified,
-                etag);
+            var state = fileResult.GetPreconditionState(httpRequestHeaders, lastModified, etag);
 
             // Assert
             Assert.Equal(FileResultExecutorBase.PreconditionState.ShouldProcess, state);
@@ -286,8 +315,11 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData("\"Etag\"", "\"Etag\"", true)]
         [InlineData("\"Etag\"", "\"Etag\"", false)]
         [InlineData(null, null, false)]
-        public void GetPreconditionState_ShouldNotProcess_PreconditionFailed(string ifMatch, string ifNoneMatch, bool isWeak)
-        {
+        public void GetPreconditionState_ShouldNotProcess_PreconditionFailed(
+            string ifMatch,
+            string ifNoneMatch,
+            bool isWeak
+        ) {
             // Arrange
             var actionContext = new ActionContext();
             var httpContext = new DefaultHttpContext();
@@ -295,25 +327,20 @@ namespace Microsoft.AspNetCore.Mvc
             var httpRequestHeaders = httpContext.Request.GetTypedHeaders();
             var lastModified = DateTimeOffset.MinValue.AddDays(1);
             var etag = new EntityTagHeaderValue("\"Etag\"");
-            httpRequestHeaders.IfMatch = ifMatch == null ? null : new[]
-            {
-                new EntityTagHeaderValue(ifMatch),
-            };
+            httpRequestHeaders.IfMatch =
+                ifMatch == null ? null : new[] { new EntityTagHeaderValue(ifMatch), };
 
-            httpRequestHeaders.IfNoneMatch = ifNoneMatch == null ? null : new[]
-            {
-                new EntityTagHeaderValue(ifNoneMatch, isWeak),
-            };
+            httpRequestHeaders.IfNoneMatch =
+                ifNoneMatch == null
+                    ? null
+                    : new[] { new EntityTagHeaderValue(ifNoneMatch, isWeak), };
             httpRequestHeaders.IfUnmodifiedSince = DateTimeOffset.MinValue;
             httpRequestHeaders.IfModifiedSince = DateTimeOffset.MinValue.AddDays(2);
             actionContext.HttpContext = httpContext;
             var fileResult = (new Mock<FileResultExecutorBase>(NullLogger.Instance)).Object;
 
             // Act
-            var state = fileResult.GetPreconditionState(
-                httpRequestHeaders,
-                lastModified,
-                etag);
+            var state = fileResult.GetPreconditionState(httpRequestHeaders, lastModified, etag);
 
             // Assert
             Assert.Equal(FileResultExecutorBase.PreconditionState.PreconditionFailed, state);
@@ -323,34 +350,40 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData(null, "\"Etag\"", true)]
         [InlineData(null, "\"Etag\"", false)]
         [InlineData(null, null, false)]
-        public void GetPreconditionState_ShouldNotProcess_NotModified(string ifMatch, string ifNoneMatch, bool isWeak)
-        {
+        public void GetPreconditionState_ShouldNotProcess_NotModified(
+            string ifMatch,
+            string ifNoneMatch,
+            bool isWeak
+        ) {
             // Arrange
             var actionContext = new ActionContext();
             var httpContext = new DefaultHttpContext();
             httpContext.Request.Method = HttpMethods.Get;
             var httpRequestHeaders = httpContext.Request.GetTypedHeaders();
             var lastModified = DateTimeOffset.MinValue;
-            lastModified = new DateTimeOffset(lastModified.Year, lastModified.Month, lastModified.Day, lastModified.Hour, lastModified.Minute, lastModified.Second, TimeSpan.FromSeconds(0));
+            lastModified = new DateTimeOffset(
+                lastModified.Year,
+                lastModified.Month,
+                lastModified.Day,
+                lastModified.Hour,
+                lastModified.Minute,
+                lastModified.Second,
+                TimeSpan.FromSeconds(0)
+            );
             var etag = new EntityTagHeaderValue("\"Etag\"");
-            httpRequestHeaders.IfMatch = ifMatch == null ? null : new[]
-            {
-                new EntityTagHeaderValue(ifMatch),
-            };
+            httpRequestHeaders.IfMatch =
+                ifMatch == null ? null : new[] { new EntityTagHeaderValue(ifMatch), };
 
-            httpRequestHeaders.IfNoneMatch = ifNoneMatch == null ? null : new[]
-            {
-                new EntityTagHeaderValue(ifNoneMatch, isWeak),
-            };
+            httpRequestHeaders.IfNoneMatch =
+                ifNoneMatch == null
+                    ? null
+                    : new[] { new EntityTagHeaderValue(ifNoneMatch, isWeak), };
             httpRequestHeaders.IfModifiedSince = lastModified;
             actionContext.HttpContext = httpContext;
             var fileResult = (new Mock<FileResultExecutorBase>(NullLogger.Instance)).Object;
 
             // Act
-            var state = fileResult.GetPreconditionState(
-                httpRequestHeaders,
-                lastModified,
-                etag);
+            var state = fileResult.GetPreconditionState(httpRequestHeaders, lastModified, etag);
 
             // Assert
             Assert.Equal(FileResultExecutorBase.PreconditionState.NotModified, state);
@@ -367,7 +400,15 @@ namespace Microsoft.AspNetCore.Mvc
             httpContext.Request.Method = HttpMethods.Get;
             var httpRequestHeaders = httpContext.Request.GetTypedHeaders();
             var lastModified = DateTimeOffset.MinValue;
-            lastModified = new DateTimeOffset(lastModified.Year, lastModified.Month, lastModified.Day, lastModified.Hour, lastModified.Minute, lastModified.Second, TimeSpan.FromSeconds(0));
+            lastModified = new DateTimeOffset(
+                lastModified.Year,
+                lastModified.Month,
+                lastModified.Day,
+                lastModified.Hour,
+                lastModified.Minute,
+                lastModified.Second,
+                TimeSpan.FromSeconds(0)
+            );
             var etag = new EntityTagHeaderValue("\"Etag\"");
             httpRequestHeaders.IfRange = new RangeConditionHeaderValue(ifRangeString);
             httpRequestHeaders.IfModifiedSince = lastModified;
@@ -375,10 +416,7 @@ namespace Microsoft.AspNetCore.Mvc
             var fileResult = (new Mock<FileResultExecutorBase>(NullLogger.Instance)).Object;
 
             // Act
-            var ifRangeIsValid = fileResult.IfRangeValid(
-                httpRequestHeaders,
-                lastModified,
-                etag);
+            var ifRangeIsValid = fileResult.IfRangeValid(httpRequestHeaders, lastModified, etag);
 
             // Assert
             Assert.Equal(expected, ifRangeIsValid);
@@ -403,11 +441,13 @@ namespace Microsoft.AspNetCore.Mvc
         [MemberData(nameof(LastModifiedDateData))]
         public async Task IfModifiedSinceComparison_OnlyUsesWholeSeconds(
             DateTimeOffset ifModifiedSince,
-            int expectedStatusCode)
-        {
+            int expectedStatusCode
+        ) {
             // Arrange
             var httpContext = GetHttpContext();
-            httpContext.Request.Headers[HeaderNames.IfModifiedSince] = HeaderUtilities.FormatDate(ifModifiedSince);
+            httpContext.Request.Headers[HeaderNames.IfModifiedSince] = HeaderUtilities.FormatDate(
+                ifModifiedSince
+            );
             var actionContext = CreateActionContext(httpContext);
             // Represents 4/9/2018 11:24:22 AM +00:00
             // Ticks rounded down to seconds: 636588698620000000
@@ -441,11 +481,15 @@ namespace Microsoft.AspNetCore.Mvc
 
         [Theory]
         [MemberData(nameof(IfUnmodifiedSinceDateData))]
-        public async Task IfUnmodifiedSinceComparison_OnlyUsesWholeSeconds(DateTimeOffset ifUnmodifiedSince, int expectedStatusCode)
-        {
+        public async Task IfUnmodifiedSinceComparison_OnlyUsesWholeSeconds(
+            DateTimeOffset ifUnmodifiedSince,
+            int expectedStatusCode
+        ) {
             // Arrange
             var httpContext = GetHttpContext();
-            httpContext.Request.Headers[HeaderNames.IfUnmodifiedSince] = HeaderUtilities.FormatDate(ifUnmodifiedSince);
+            httpContext.Request.Headers[HeaderNames.IfUnmodifiedSince] = HeaderUtilities.FormatDate(
+                ifUnmodifiedSince
+            );
             var actionContext = CreateActionContext(httpContext);
             // Represents 4/9/2018 11:24:22 AM +00:00
             // Ticks rounded down to seconds: 636588698620000000
@@ -489,19 +533,14 @@ namespace Microsoft.AspNetCore.Mvc
         {
             public bool WasWriteFileCalled;
 
-            public EmptyFileResult()
-                : base("application/octet")
-            {
-            }
+            public EmptyFileResult() : base("application/octet") { }
 
-            public EmptyFileResult(string contentType)
-                : base(contentType)
-            {
-            }
+            public EmptyFileResult(string contentType) : base(contentType) { }
 
             public override Task ExecuteResultAsync(ActionContext context)
             {
-                var executor = context.HttpContext.RequestServices.GetRequiredService<EmptyFileResultExecutor>();
+                var executor =
+                    context.HttpContext.RequestServices.GetRequiredService<EmptyFileResultExecutor>();
                 return executor.ExecuteAsync(context, this);
             }
         }
@@ -509,9 +548,7 @@ namespace Microsoft.AspNetCore.Mvc
         private class EmptyFileResultExecutor : FileResultExecutorBase
         {
             public EmptyFileResultExecutor(ILoggerFactory loggerFactory)
-                : base(CreateLogger<EmptyFileResultExecutor>(loggerFactory))
-            {
-            }
+                : base(CreateLogger<EmptyFileResultExecutor>(loggerFactory)) { }
 
             public Task ExecuteAsync(ActionContext context, EmptyFileResult result)
             {
@@ -520,7 +557,8 @@ namespace Microsoft.AspNetCore.Mvc
                     result,
                     fileLength: 0L,
                     enableRangeProcessing: true,
-                    lastModified: result.LastModified);
+                    lastModified: result.LastModified
+                );
                 result.WasWriteFileCalled = true;
                 return Task.FromResult(0);
             }

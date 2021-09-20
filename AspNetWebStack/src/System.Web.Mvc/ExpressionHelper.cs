@@ -15,10 +15,9 @@ namespace System.Web.Mvc
     {
         public static string GetExpressionText(string expression)
         {
-            return
-                String.Equals(expression, "model", StringComparison.OrdinalIgnoreCase)
-                    ? String.Empty // If it's exactly "model", then give them an empty string, to replicate the lambda behavior
-                    : expression;
+            return String.Equals(expression, "model", StringComparison.OrdinalIgnoreCase)
+              ? String.Empty // If it's exactly "model", then give them an empty string, to replicate the lambda behavior
+              : expression;
         }
 
         public static string GetExpressionText(LambdaExpression expression)
@@ -42,7 +41,9 @@ namespace System.Web.Mvc
                     nameParts.Push(
                         GetIndexerInvocation(
                             methodExpression.Arguments.Single(),
-                            expression.Parameters.ToArray()));
+                            expression.Parameters.ToArray()
+                        )
+                    );
 
                     part = methodExpression.Object;
                 }
@@ -53,7 +54,9 @@ namespace System.Web.Mvc
                     nameParts.Push(
                         GetIndexerInvocation(
                             binaryExpression.Right,
-                            expression.Parameters.ToArray()));
+                            expression.Parameters.ToArray()
+                        )
+                    );
 
                     part = binaryExpression.Left;
                 }
@@ -81,7 +84,6 @@ namespace System.Web.Mvc
                     // string onto the stack and stop evaluating. The extra empty string makes sure that
                     // we don't accidentally cut off too much of m => m.Model.
                     nameParts.Push(String.Empty);
-
                     // Exit loop. Have the entire name because the parameter cannot be used as an indexer; always the
                     // leftmost expression node.
                     break;
@@ -94,8 +96,10 @@ namespace System.Web.Mvc
             }
 
             // If parts start with "model", then strip that part away.
-            if (nameParts.Count > 0 && String.Equals(nameParts.Peek(), ".model", StringComparison.OrdinalIgnoreCase))
-            {
+            if (
+                nameParts.Count > 0
+                && String.Equals(nameParts.Peek(), ".model", StringComparison.OrdinalIgnoreCase)
+            ) {
                 nameParts.Pop();
             }
 
@@ -107,11 +111,16 @@ namespace System.Web.Mvc
             return String.Empty;
         }
 
-        private static string GetIndexerInvocation(Expression expression, ParameterExpression[] parameters)
-        {
+        private static string GetIndexerInvocation(
+            Expression expression,
+            ParameterExpression[] parameters
+        ) {
             Expression converted = Expression.Convert(expression, typeof(object));
             ParameterExpression fakeParameter = Expression.Parameter(typeof(object), null);
-            Expression<Func<object, object>> lambda = Expression.Lambda<Func<object, object>>(converted, fakeParameter);
+            Expression<Func<object, object>> lambda = Expression.Lambda<Func<object, object>>(
+                converted,
+                fakeParameter
+            );
             Func<object, object> func;
 
             try
@@ -125,8 +134,10 @@ namespace System.Web.Mvc
                         CultureInfo.CurrentCulture,
                         MvcResources.ExpressionHelper_InvalidIndexerExpression,
                         expression,
-                        parameters[0].Name),
-                    ex);
+                        parameters[0].Name
+                    ),
+                    ex
+                );
             }
 
             return "[" + Convert.ToString(func(null), CultureInfo.InvariantCulture) + "]";
@@ -140,9 +151,7 @@ namespace System.Web.Mvc
                 return false;
             }
 
-            return methodExpression.Method
-                .DeclaringType
-                .GetDefaultMembers()
+            return methodExpression.Method.DeclaringType.GetDefaultMembers()
                 .OfType<PropertyInfo>()
                 .Any(p => p.GetGetMethod() == methodExpression.Method);
         }

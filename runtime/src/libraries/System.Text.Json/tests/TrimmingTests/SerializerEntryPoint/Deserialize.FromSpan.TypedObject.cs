@@ -24,7 +24,10 @@ namespace SerializerTrimmingTest
             }
 
             json = @"{""X"":1,""Y"":2}";
-            MyClassWithParameterizedCtor obj = JsonSerializer.Deserialize<MyClassWithParameterizedCtor>(Encoding.UTF8.GetBytes(json));
+            MyClassWithParameterizedCtor obj =
+                JsonSerializer.Deserialize<MyClassWithParameterizedCtor>(
+                    Encoding.UTF8.GetBytes(json)
+                );
             if (obj == null)
             {
                 return -1;

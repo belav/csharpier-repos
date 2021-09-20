@@ -30,29 +30,45 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioDefinitionsAndReferencesFactory(SVsServiceProvider serviceProvider)
-            => _serviceProvider = serviceProvider;
+        public VisualStudioDefinitionsAndReferencesFactory(SVsServiceProvider serviceProvider) =>
+            _serviceProvider = serviceProvider;
 
         public override DefinitionItem? GetThirdPartyDefinitionItem(
-            Solution solution, DefinitionItem definitionItem, CancellationToken cancellationToken)
-        {
-            var symbolNavigationService = solution.Workspace.Services.GetRequiredService<ISymbolNavigationService>();
-            if (!symbolNavigationService.WouldNavigateToSymbol(
-                    definitionItem, solution, cancellationToken,
-                    out var filePath, out var lineNumber, out var charOffset))
-            {
+            Solution solution,
+            DefinitionItem definitionItem,
+            CancellationToken cancellationToken
+        ) {
+            var symbolNavigationService =
+                solution.Workspace.Services.GetRequiredService<ISymbolNavigationService>();
+            if (
+                !symbolNavigationService.WouldNavigateToSymbol(
+                    definitionItem,
+                    solution,
+                    cancellationToken,
+                    out var filePath,
+                    out var lineNumber,
+                    out var charOffset
+                )
+            ) {
                 return null;
             }
 
             var displayParts = GetDisplayParts(filePath, lineNumber, charOffset);
             return new ExternalDefinitionItem(
-                definitionItem.Tags, displayParts,
-                _serviceProvider, filePath, lineNumber, charOffset);
+                definitionItem.Tags,
+                displayParts,
+                _serviceProvider,
+                filePath,
+                lineNumber,
+                charOffset
+            );
         }
 
         private ImmutableArray<TaggedText> GetDisplayParts(
-            string filePath, int lineNumber, int charOffset)
-        {
+            string filePath,
+            int lineNumber,
+            int charOffset
+        ) {
             var sourceLine = GetSourceLine(filePath, lineNumber).Trim(' ', '\t');
 
             // Put the line in 1-based for the presentation of this item.
@@ -64,11 +80,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
         private string GetSourceLine(string filePath, int lineNumber)
         {
             using var invisibleEditor = new InvisibleEditor(
-                _serviceProvider, filePath, hierarchy: null, needsSave: false, needsUndoDisabled: false);
+                _serviceProvider,
+                filePath,
+                hierarchy: null,
+                needsSave: false,
+                needsUndoDisabled: false
+            );
             var vsTextLines = invisibleEditor.VsTextLines;
-            if (vsTextLines.GetLengthOfLine(lineNumber, out var lineLength) == VSConstants.S_OK &&
-                vsTextLines.GetLineText(lineNumber, 0, lineNumber, lineLength, out var lineText) == VSConstants.S_OK)
-            {
+            if (
+                vsTextLines.GetLengthOfLine(lineNumber, out var lineLength) == VSConstants.S_OK
+                && vsTextLines.GetLineText(lineNumber, 0, lineNumber, lineLength, out var lineText)
+                    == VSConstants.S_OK
+            ) {
                 return lineText;
             }
 
@@ -90,33 +113,51 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
                 IServiceProvider serviceProvider,
                 string filePath,
                 int lineNumber,
-                int charOffset)
-                : base(tags, displayParts, ImmutableArray<TaggedText>.Empty,
-                       originationParts: default,
-                       sourceSpans: default,
-                       properties: null,
-                       displayableProperties: null,
-                       displayIfNoReferences: true)
-            {
+                int charOffset
+            ) : base(
+                tags,
+                displayParts,
+                ImmutableArray<TaggedText>.Empty,
+                originationParts: default,
+                sourceSpans: default,
+                properties: null,
+                displayableProperties: null,
+                displayIfNoReferences: true
+            ) {
                 _serviceProvider = serviceProvider;
                 _filePath = filePath;
                 _lineNumber = lineNumber;
                 _charOffset = charOffset;
             }
 
-            public override bool CanNavigateTo(Workspace workspace, CancellationToken cancellationToken) => true;
+            public override bool CanNavigateTo(
+                Workspace workspace,
+                CancellationToken cancellationToken
+            ) => true;
 
-            public override bool TryNavigateTo(Workspace workspace, bool showInPreviewTab, bool activateTab, CancellationToken cancellationToken)
-                => TryOpenFile() && TryNavigateToPosition();
+            public override bool TryNavigateTo(
+                Workspace workspace,
+                bool showInPreviewTab,
+                bool activateTab,
+                CancellationToken cancellationToken
+            ) => TryOpenFile() && TryNavigateToPosition();
 
             private bool TryOpenFile()
             {
-                var shellOpenDocument = (IVsUIShellOpenDocument)_serviceProvider.GetService(typeof(SVsUIShellOpenDocument));
+                var shellOpenDocument = (IVsUIShellOpenDocument)_serviceProvider.GetService(
+                    typeof(SVsUIShellOpenDocument)
+                );
                 var textViewGuid = VSConstants.LOGVIEWID.TextView_guid;
-                if (shellOpenDocument.OpenDocumentViaProject(
-                        _filePath, ref textViewGuid, out _,
-                        out _, out _, out var frame) == VSConstants.S_OK)
-                {
+                if (
+                    shellOpenDocument.OpenDocumentViaProject(
+                        _filePath,
+                        ref textViewGuid,
+                        out _,
+                        out _,
+                        out _,
+                        out var frame
+                    ) == VSConstants.S_OK
+                ) {
                     frame.Show();
                     return true;
                 }
@@ -126,10 +167,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
 
             private bool TryNavigateToPosition()
             {
-                var docTable = (IVsRunningDocumentTable)_serviceProvider.GetService(typeof(SVsRunningDocumentTable));
-                if (docTable.FindAndLockDocument((uint)_VSRDTFLAGS.RDT_NoLock, _filePath,
-                        out _, out _, out var bufferPtr, out _) != VSConstants.S_OK)
-                {
+                var docTable = (IVsRunningDocumentTable)_serviceProvider.GetService(
+                    typeof(SVsRunningDocumentTable)
+                );
+                if (
+                    docTable.FindAndLockDocument(
+                        (uint)_VSRDTFLAGS.RDT_NoLock,
+                        _filePath,
+                        out _,
+                        out _,
+                        out var bufferPtr,
+                        out _
+                    ) != VSConstants.S_OK
+                ) {
                     return false;
                 }
 
@@ -140,17 +190,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
                         return false;
                     }
 
-                    var textManager = (IVsTextManager)_serviceProvider.GetService(typeof(SVsTextManager));
+                    var textManager = (IVsTextManager)_serviceProvider.GetService(
+                        typeof(SVsTextManager)
+                    );
                     if (textManager == null)
                     {
                         return false;
                     }
 
                     return textManager.NavigateToLineAndColumn(
-                        lines, VSConstants.LOGVIEWID.TextView_guid,
-                        _lineNumber, _charOffset,
-                        _lineNumber, _charOffset) == VSConstants.S_OK;
+                            lines,
+                            VSConstants.LOGVIEWID.TextView_guid,
+                            _lineNumber,
+                            _charOffset,
+                            _lineNumber,
+                            _charOffset
+                        ) == VSConstants.S_OK;
                 }
+
                 finally
                 {
                     if (bufferPtr != IntPtr.Zero)

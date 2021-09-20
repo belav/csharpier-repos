@@ -23,11 +23,12 @@ class Program
         TypedClientC clientC = provider.GetRequiredService<TypedClientC>();
         ITypedClientD clientD = provider.GetRequiredService<ITypedClientD>();
 
-        if (clientA == null ||
-            !(clientB is TypedClientB) ||
-            clientC == null ||
-            !(clientD is TypedClientD))
-        {
+        if (
+            clientA == null
+            || !(clientB is TypedClientB)
+            || clientC == null
+            || !(clientD is TypedClientD)
+        ) {
             return -1;
         }
 

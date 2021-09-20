@@ -8,15 +8,17 @@ namespace System.Collections.Immutable.Tests
 {
     internal static partial class TestExtensionsMethods
     {
-        internal static IDictionary<TKey, TValue> ToReadOnlyDictionary<TKey, TValue>(this IImmutableDictionary<TKey, TValue> dictionary)
-        {
+        internal static IDictionary<TKey, TValue> ToReadOnlyDictionary<TKey, TValue>(
+            this IImmutableDictionary<TKey, TValue> dictionary
+        ) {
             Requires.NotNull(dictionary, nameof(dictionary));
 
             return (IDictionary<TKey, TValue>)dictionary;
         }
 
-        internal static IDictionary<TKey, TValue> ToBuilder<TKey, TValue>(this IImmutableDictionary<TKey, TValue> dictionary)
-        {
+        internal static IDictionary<TKey, TValue> ToBuilder<TKey, TValue>(
+            this IImmutableDictionary<TKey, TValue> dictionary
+        ) {
             Requires.NotNull(dictionary, nameof(dictionary));
 
             var hashDictionary = dictionary as ImmutableDictionary<TKey, TValue>;
@@ -72,7 +74,9 @@ namespace System.Collections.Immutable.Tests
         internal static void VerifyHeightIsWithinTolerance(this IBinaryTree node, int? count = null)
         {
             // http://en.wikipedia.org/wiki/AVL_tree
-            double heightMustBeLessThan = Math.Log(2, s_GoldenRatio) * Math.Log(Math.Sqrt(5) * ((count ?? node.Count) + 2), 2) - 2;
+            double heightMustBeLessThan =
+                Math.Log(2, s_GoldenRatio) * Math.Log(Math.Sqrt(5) * ((count ?? node.Count) + 2), 2)
+                - 2;
             Assert.True(node.Height < heightMustBeLessThan);
         }
     }

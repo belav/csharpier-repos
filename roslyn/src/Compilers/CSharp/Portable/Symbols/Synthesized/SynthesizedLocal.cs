@@ -43,8 +43,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             [CallerLineNumber] int createdAtLineNumber = 0,
             [CallerFilePath] string createdAtFilePath = null
 #endif
-            )
-        {
+        ) {
             Debug.Assert(!type.IsVoidType());
             Debug.Assert(!kind.IsLongLived() || syntaxOpt != null);
             Debug.Assert(refKind != RefKind.Out);
@@ -55,7 +54,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             _syntaxOpt = syntaxOpt;
             _isPinned = isPinned;
             _refKind = refKind;
-
 #if DEBUG
             _createdAtLineNumber = createdAtLineNumber;
             _createdAtFilePath = createdAtFilePath;
@@ -67,15 +65,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return _syntaxOpt; }
         }
 
-        internal override LocalSymbol WithSynthesizedLocalKindAndSyntax(SynthesizedLocalKind kind, SyntaxNode syntax)
-        {
+        internal override LocalSymbol WithSynthesizedLocalKindAndSyntax(
+            SynthesizedLocalKind kind,
+            SyntaxNode syntax
+        ) {
             return new SynthesizedLocal(
                 _containingMethodOpt,
                 _type,
                 kind,
                 syntax,
                 _isPinned,
-                _refKind);
+                _refKind
+            );
         }
 
         public override RefKind RefKind
@@ -125,12 +126,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override ImmutableArray<Location> Locations
         {
-            get { return (_syntaxOpt == null) ? ImmutableArray<Location>.Empty : ImmutableArray.Create(_syntaxOpt.GetLocation()); }
+            get
+            {
+                return (_syntaxOpt == null)
+                  ? ImmutableArray<Location>.Empty
+                  : ImmutableArray.Create(_syntaxOpt.GetLocation());
+            }
         }
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
-            get { return (_syntaxOpt == null) ? ImmutableArray<SyntaxReference>.Empty : ImmutableArray.Create(_syntaxOpt.GetReference()); }
+            get
+            {
+                return (_syntaxOpt == null)
+                  ? ImmutableArray<SyntaxReference>.Empty
+                  : ImmutableArray.Create(_syntaxOpt.GetReference());
+            }
         }
 
         internal override SyntaxNode GetDeclaratorSyntax()
@@ -166,13 +177,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         internal override uint RefEscapeScope => throw ExceptionUtilities.Unreachable;
 
-        internal override ConstantValue GetConstantValue(SyntaxNode node, LocalSymbol inProgress, BindingDiagnosticBag diagnostics)
-        {
+        internal override ConstantValue GetConstantValue(
+            SyntaxNode node,
+            LocalSymbol inProgress,
+            BindingDiagnosticBag diagnostics
+        ) {
             return null;
         }
 
-        internal override ImmutableBindingDiagnostic<AssemblySymbol> GetConstantValueDiagnostics(BoundExpression boundInitValue)
-        {
+        internal override ImmutableBindingDiagnostic<AssemblySymbol> GetConstantValueDiagnostics(
+            BoundExpression boundInitValue
+        ) {
             return ImmutableBindingDiagnostic<AssemblySymbol>.Empty;
         }
 

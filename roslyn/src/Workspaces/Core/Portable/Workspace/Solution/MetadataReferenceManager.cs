@@ -11,19 +11,25 @@ namespace Microsoft.CodeAnalysis
 {
     internal class MetadataReferenceManager
     {
-        private static readonly ConditionalWeakTable<ProjectState, WeakReference<Compilation>> s_compilationReferenceMap =
-            new();
+        private static readonly ConditionalWeakTable<
+            ProjectState,
+            WeakReference<Compilation>
+        > s_compilationReferenceMap = new();
 
-        private static readonly ConditionalWeakTable<ProjectState, WeakReference<Compilation>>.CreateValueCallback s_createValue =
-            k => new WeakReference<Compilation>(null);
+        private static readonly ConditionalWeakTable<
+            ProjectState,
+            WeakReference<Compilation>
+        >.CreateValueCallback s_createValue = k => new WeakReference<Compilation>(null);
 
         private static readonly object s_guard = new();
 
-        // Hand out the same compilation reference for everyone who asks.  Use 
+        // Hand out the same compilation reference for everyone who asks.  Use
         // WeakReference<Compilation> so that if no-one is using the MetadataReference,
         // it can be collected.
-        internal static Compilation GetCompilationForMetadataReference(ProjectState projectState, Compilation compilation)
-        {
+        internal static Compilation GetCompilationForMetadataReference(
+            ProjectState projectState,
+            Compilation compilation
+        ) {
             var weakReference = s_compilationReferenceMap.GetValue(projectState, s_createValue);
             Compilation reference;
             lock (s_guard)
@@ -38,10 +44,13 @@ namespace Microsoft.CodeAnalysis
             return reference;
         }
 
-        internal static bool TryGetCompilationForMetadataReference(ProjectState projectState, out Compilation referenceCompilation)
-        {
+        internal static bool TryGetCompilationForMetadataReference(
+            ProjectState projectState,
+            out Compilation referenceCompilation
+        ) {
             referenceCompilation = null;
-            return s_compilationReferenceMap.TryGetValue(projectState, out var weakReference) && weakReference.TryGetTarget(out referenceCompilation);
+            return s_compilationReferenceMap.TryGetValue(projectState, out var weakReference)
+                && weakReference.TryGetTarget(out referenceCompilation);
         }
     }
 }

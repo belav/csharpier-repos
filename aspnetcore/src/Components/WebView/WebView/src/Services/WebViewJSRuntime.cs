@@ -14,8 +14,8 @@ namespace Microsoft.AspNetCore.Components.WebView.Services
         {
             ElementReferenceContext = new WebElementReferenceContext(this);
             JsonSerializerOptions.Converters.Add(
-                new ElementReferenceJsonConverter(
-                    new WebElementReferenceContext(this)));
+                new ElementReferenceJsonConverter(new WebElementReferenceContext(this))
+            );
         }
 
         public void AttachToWebView(IpcSender ipcSender)
@@ -25,16 +25,27 @@ namespace Microsoft.AspNetCore.Components.WebView.Services
 
         public JsonSerializerOptions ReadJsonSerializerOptions() => JsonSerializerOptions;
 
-        protected override void BeginInvokeJS(long taskId, string identifier, string argsJson, JSCallResultType resultType, long targetInstanceId)
-        {
+        protected override void BeginInvokeJS(
+            long taskId,
+            string identifier,
+            string argsJson,
+            JSCallResultType resultType,
+            long targetInstanceId
+        ) {
             _ipcSender.BeginInvokeJS(taskId, identifier, argsJson, resultType, targetInstanceId);
         }
 
-        protected override void EndInvokeDotNet(DotNetInvocationInfo invocationInfo, in DotNetInvocationResult invocationResult)
-        {
+        protected override void EndInvokeDotNet(
+            DotNetInvocationInfo invocationInfo,
+            in DotNetInvocationResult invocationResult
+        ) {
             if (!invocationResult.Success)
             {
-                EndInvokeDotNetCore(invocationInfo.CallId, success: false, invocationResult.Exception.ToString());
+                EndInvokeDotNetCore(
+                    invocationInfo.CallId,
+                    success: false,
+                    invocationResult.Exception.ToString()
+                );
             }
             else
             {
@@ -43,7 +54,11 @@ namespace Microsoft.AspNetCore.Components.WebView.Services
 
             void EndInvokeDotNetCore(string callId, bool success, object resultOrError)
             {
-                _ipcSender.EndInvokeDotNet(callId, success, JsonSerializer.Serialize(resultOrError, JsonSerializerOptions));
+                _ipcSender.EndInvokeDotNet(
+                    callId,
+                    success,
+                    JsonSerializer.Serialize(resultOrError, JsonSerializerOptions)
+                );
             }
         }
     }

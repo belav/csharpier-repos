@@ -40,10 +40,10 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
     // Ensure roslyn comes after LSP to allow them to provide results.
     // https://github.com/dotnet/roslyn/issues/42338
     [Order(After = "LSP SignatureHelpCommandHandler")]
-    internal class SignatureHelpBeforeCompletionCommandHandler :
-        AbstractSignatureHelpCommandHandler,
-        IChainedCommandHandler<TypeCharCommandArgs>,
-        IChainedCommandHandler<InvokeSignatureHelpCommandArgs>
+    internal class SignatureHelpBeforeCompletionCommandHandler
+        : AbstractSignatureHelpCommandHandler,
+          IChainedCommandHandler<TypeCharCommandArgs>,
+          IChainedCommandHandler<InvokeSignatureHelpCommandArgs>
     {
         public string DisplayName => EditorFeaturesResources.Signature_Help;
 
@@ -51,13 +51,13 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public SignatureHelpBeforeCompletionCommandHandler(
             IThreadingContext threadingContext,
-            SignatureHelpControllerProvider controllerProvider)
-            : base(threadingContext, controllerProvider)
-        {
-        }
+            SignatureHelpControllerProvider controllerProvider
+        ) : base(threadingContext, controllerProvider) { }
 
-        private bool TryGetControllerCommandHandler<TCommandArgs>(TCommandArgs args, out ICommandHandler commandHandler)
-            where TCommandArgs : EditorCommandArgs
+        private bool TryGetControllerCommandHandler<TCommandArgs>(
+            TCommandArgs args,
+            out ICommandHandler commandHandler
+        ) where TCommandArgs : EditorCommandArgs
         {
             AssertIsForeground();
             if (!TryGetController(args, out var controller))
@@ -72,20 +72,20 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
 
         private CommandState GetCommandStateWorker<TCommandArgs>(
             TCommandArgs args,
-            Func<CommandState> nextHandler)
-            where TCommandArgs : EditorCommandArgs
+            Func<CommandState> nextHandler
+        ) where TCommandArgs : EditorCommandArgs
         {
             AssertIsForeground();
             return TryGetControllerCommandHandler(args, out var commandHandler)
-                ? commandHandler.GetCommandState(args, nextHandler)
-                : nextHandler();
+              ? commandHandler.GetCommandState(args, nextHandler)
+              : nextHandler();
         }
 
         private void ExecuteCommandWorker<TCommandArgs>(
             TCommandArgs args,
             Action nextHandler,
-            CommandExecutionContext context)
-            where TCommandArgs : EditorCommandArgs
+            CommandExecutionContext context
+        ) where TCommandArgs : EditorCommandArgs
         {
             AssertIsForeground();
             if (!TryGetControllerCommandHandler(args, out var commandHandler))
@@ -98,26 +98,36 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
             }
         }
 
-        CommandState IChainedCommandHandler<TypeCharCommandArgs>.GetCommandState(TypeCharCommandArgs args, Func<CommandState> nextHandler)
-        {
+        CommandState IChainedCommandHandler<TypeCharCommandArgs>.GetCommandState(
+            TypeCharCommandArgs args,
+            Func<CommandState> nextHandler
+        ) {
             AssertIsForeground();
             return GetCommandStateWorker(args, nextHandler);
         }
 
-        void IChainedCommandHandler<TypeCharCommandArgs>.ExecuteCommand(TypeCharCommandArgs args, Action nextHandler, CommandExecutionContext context)
-        {
+        void IChainedCommandHandler<TypeCharCommandArgs>.ExecuteCommand(
+            TypeCharCommandArgs args,
+            Action nextHandler,
+            CommandExecutionContext context
+        ) {
             AssertIsForeground();
             ExecuteCommandWorker(args, nextHandler, context);
         }
 
-        CommandState IChainedCommandHandler<InvokeSignatureHelpCommandArgs>.GetCommandState(InvokeSignatureHelpCommandArgs args, Func<CommandState> nextHandler)
-        {
+        CommandState IChainedCommandHandler<InvokeSignatureHelpCommandArgs>.GetCommandState(
+            InvokeSignatureHelpCommandArgs args,
+            Func<CommandState> nextHandler
+        ) {
             AssertIsForeground();
             return CommandState.Available;
         }
 
-        void IChainedCommandHandler<InvokeSignatureHelpCommandArgs>.ExecuteCommand(InvokeSignatureHelpCommandArgs args, Action nextHandler, CommandExecutionContext context)
-        {
+        void IChainedCommandHandler<InvokeSignatureHelpCommandArgs>.ExecuteCommand(
+            InvokeSignatureHelpCommandArgs args,
+            Action nextHandler,
+            CommandExecutionContext context
+        ) {
             AssertIsForeground();
             ExecuteCommandWorker(args, nextHandler, context);
         }

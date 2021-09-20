@@ -17,13 +17,18 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.Common
         // a recently assigned port instead of incrementing, which causes flaky tests with AddressInUse
         // exceptions.  This method should only be used when the application itself cannot use
         // dynamic port "0" (e.g. IISExpress).  Most functional tests using raw Kestrel
-        // (with status messages enabled) should directly bind to dynamic port "0" and scrape 
+        // (with status messages enabled) should directly bind to dynamic port "0" and scrape
         // the assigned port from the status message, which should be 100% reliable since the port
         // is bound once and never released.
         public static int GetNextPort()
         {
-            using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                var socket = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 socket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 return ((IPEndPoint)socket.LocalEndPoint).Port;
             }
@@ -35,8 +40,13 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.Common
         public static int GetNextSSLPort()
         {
             var next = 44300;
-            using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            {
+            using (
+                var socket = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            ) {
                 while (true)
                 {
                     try

@@ -24,7 +24,12 @@ namespace System.Xml
         private DataRow? _row;
         private ElementState _state;
 
-        internal XmlBoundElement(string prefix, string localName, string namespaceURI, XmlDocument doc) : base(prefix, localName, namespaceURI, doc)
+        internal XmlBoundElement(
+            string prefix,
+            string localName,
+            string namespaceURI,
+            XmlDocument doc
+        ) : base(prefix, localName, namespaceURI, doc)
         {
             _state = ElementState.None;
         }
@@ -229,6 +234,7 @@ namespace System.Xml
                 // Clone should create a XmlBoundElement node
                 Debug.Assert(element is XmlBoundElement);
             }
+
             finally
             {
                 doc.AutoFoliationState = oldAutoFoliationState;
@@ -245,6 +251,7 @@ namespace System.Xml
                 dp.AddPointer();
                 WriteBoundElementContentTo(dp, w);
             }
+
             finally
             {
                 dp.SetNoLongerUse();
@@ -259,6 +266,7 @@ namespace System.Xml
                 dp.AddPointer();
                 WriteRootBoundElementTo(dp, w);
             }
+
             finally
             {
                 dp.SetNoLongerUse();
@@ -289,7 +297,12 @@ namespace System.Xml
 
             if (!bHasXSI && doc._bLoadFromDataSet && doc._bHasXSINIL)
             {
-                w.WriteAttributeString("xmlns", "xsi", "http://www.w3.org/2000/xmlns/", Keywords.XSINS);
+                w.WriteAttributeString(
+                    "xmlns",
+                    "xsi",
+                    "http://www.w3.org/2000/xmlns/",
+                    Keywords.XSINS
+                );
             }
 
             WriteBoundElementContentTo(dp, w);
@@ -340,8 +353,7 @@ namespace System.Xml
                 do
                 {
                     WriteTo(dp, w);
-                }
-                while (dp.MoveToNextSibling());
+                } while (dp.MoveToNextSibling());
 
                 dp.MoveToParent();
             }
@@ -361,8 +373,7 @@ namespace System.Xml
                             do
                             {
                                 WriteTo(dp, w);
-                            }
-                            while (dp.MoveToNextSibling());
+                            } while (dp.MoveToNextSibling());
 
                             dp.MoveToParent();
                         }

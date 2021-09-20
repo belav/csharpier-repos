@@ -18,8 +18,9 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="list">The list of <see cref="IApplicationModelConvention"/>s.</param>
         /// <typeparam name="TApplicationModelConvention">The type to remove.</typeparam>
-        public static void RemoveType<TApplicationModelConvention>(this IList<IApplicationModelConvention> list)
-            where TApplicationModelConvention : IApplicationModelConvention
+        public static void RemoveType<TApplicationModelConvention>(
+            this IList<IApplicationModelConvention> list
+        ) where TApplicationModelConvention : IApplicationModelConvention
         {
             if (list == null)
             {
@@ -65,8 +66,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// added.</param>
         public static void Add(
             this IList<IApplicationModelConvention> conventions,
-            IControllerModelConvention controllerModelConvention)
-        {
+            IControllerModelConvention controllerModelConvention
+        ) {
             if (conventions == null)
             {
                 throw new ArgumentNullException(nameof(conventions));
@@ -89,8 +90,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// added.</param>
         public static void Add(
             this IList<IApplicationModelConvention> conventions,
-            IActionModelConvention actionModelConvention)
-        {
+            IActionModelConvention actionModelConvention
+        ) {
             if (conventions == null)
             {
                 throw new ArgumentNullException(nameof(conventions));
@@ -113,8 +114,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// added.</param>
         public static void Add(
             this IList<IApplicationModelConvention> conventions,
-            IParameterModelConvention parameterModelConvention)
-        {
+            IParameterModelConvention parameterModelConvention
+        ) {
             if (conventions == null)
             {
                 throw new ArgumentNullException(nameof(conventions));
@@ -137,8 +138,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// added.</param>
         public static void Add(
             this IList<IApplicationModelConvention> conventions,
-            IParameterModelBaseConvention parameterModelConvention)
-        {
+            IParameterModelBaseConvention parameterModelConvention
+        ) {
             if (conventions == null)
             {
                 throw new ArgumentNullException(nameof(conventions));
@@ -156,8 +157,9 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             private readonly IParameterModelConvention _parameterModelConvention;
 
-            public ParameterApplicationModelConvention(IParameterModelConvention parameterModelConvention)
-            {
+            public ParameterApplicationModelConvention(
+                IParameterModelConvention parameterModelConvention
+            ) {
                 _parameterModelConvention = parameterModelConvention;
             }
 
@@ -187,13 +189,15 @@ namespace Microsoft.Extensions.DependencyInjection
             }
         }
 
-        private class ParameterBaseApplicationModelConvention :
-            IApplicationModelConvention, IParameterModelBaseConvention
+        private class ParameterBaseApplicationModelConvention
+            : IApplicationModelConvention,
+              IParameterModelBaseConvention
         {
             private readonly IParameterModelBaseConvention _parameterBaseModelConvention;
 
-            public ParameterBaseApplicationModelConvention(IParameterModelBaseConvention parameterModelBaseConvention)
-            {
+            public ParameterBaseApplicationModelConvention(
+                IParameterModelBaseConvention parameterModelBaseConvention
+            ) {
                 _parameterBaseModelConvention = parameterModelBaseConvention;
             }
 
@@ -257,8 +261,9 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             private readonly IControllerModelConvention _controllerModelConvention;
 
-            public ControllerApplicationModelConvention(IControllerModelConvention controllerConvention)
-            {
+            public ControllerApplicationModelConvention(
+                IControllerModelConvention controllerConvention
+            ) {
                 if (controllerConvention == null)
                 {
                     throw new ArgumentNullException(nameof(controllerConvention));

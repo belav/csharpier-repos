@@ -21,7 +21,6 @@ using System.Runtime.CompilerServices;
 
 namespace BigFrames
 {
-
     [StructLayout(LayoutKind.Explicit)]
     public struct Struct4096 // One page
     {

@@ -13,13 +13,29 @@ namespace System.Web.Mvc
 {
     public class RazorView : BuildManagerCompiledView
     {
-        public RazorView(ControllerContext controllerContext, string viewPath, string layoutPath, bool runViewStartPages, IEnumerable<string> viewStartFileExtensions)
-            : this(controllerContext, viewPath, layoutPath, runViewStartPages, viewStartFileExtensions, null)
-        {
-        }
+        public RazorView(
+            ControllerContext controllerContext,
+            string viewPath,
+            string layoutPath,
+            bool runViewStartPages,
+            IEnumerable<string> viewStartFileExtensions
+        ) : this(
+            controllerContext,
+            viewPath,
+            layoutPath,
+            runViewStartPages,
+            viewStartFileExtensions,
+            null
+        ) { }
 
-        public RazorView(ControllerContext controllerContext, string viewPath, string layoutPath, bool runViewStartPages, IEnumerable<string> viewStartFileExtensions, IViewPageActivator viewPageActivator)
-            : base(controllerContext, viewPath, viewPageActivator)
+        public RazorView(
+            ControllerContext controllerContext,
+            string viewPath,
+            string layoutPath,
+            bool runViewStartPages,
+            IEnumerable<string> viewStartFileExtensions,
+            IViewPageActivator viewPageActivator
+        ) : base(controllerContext, viewPath, viewPageActivator)
         {
             LayoutPath = layoutPath ?? String.Empty;
             RunViewStartPages = runViewStartPages;
@@ -39,8 +55,11 @@ namespace System.Web.Mvc
 
         public IEnumerable<string> ViewStartFileExtensions { get; private set; }
 
-        protected override void RenderView(ViewContext viewContext, TextWriter writer, object instance)
-        {
+        protected override void RenderView(
+            ViewContext viewContext,
+            TextWriter writer,
+            object instance
+        ) {
             if (writer == null)
             {
                 throw new ArgumentNullException("writer");
@@ -53,7 +72,9 @@ namespace System.Web.Mvc
                     String.Format(
                         CultureInfo.CurrentCulture,
                         MvcResources.CshtmlView_WrongViewBase,
-                        ViewPath));
+                        ViewPath
+                    )
+                );
             }
 
             // An overriden master layout might have been specified when the ViewActionResult got returned.
@@ -77,9 +98,17 @@ namespace System.Web.Mvc
             WebPageRenderingBase startPage = null;
             if (RunViewStartPages)
             {
-                startPage = StartPageLookup(webViewPage, RazorViewEngine.ViewStartFileName, ViewStartFileExtensions);
+                startPage = StartPageLookup(
+                    webViewPage,
+                    RazorViewEngine.ViewStartFileName,
+                    ViewStartFileExtensions
+                );
             }
-            webViewPage.ExecutePageHierarchy(new WebPageContext(context: viewContext.HttpContext, page: null, model: null), writer, startPage);
+            webViewPage.ExecutePageHierarchy(
+                new WebPageContext(context: viewContext.HttpContext, page: null, model: null),
+                writer,
+                startPage
+            );
         }
     }
 }

@@ -20,7 +20,9 @@ namespace System.IO.Pipes
         {
             if (_isAsync)
             {
-                return ReadAsync(buffer, offset, count, CancellationToken.None).GetAwaiter().GetResult();
+                return ReadAsync(buffer, offset, count, CancellationToken.None)
+                    .GetAwaiter()
+                    .GetResult();
             }
 
             ValidateBufferArguments(buffer, offset, count);
@@ -49,8 +51,12 @@ namespace System.IO.Pipes
             return ReadCore(buffer);
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             ValidateBufferArguments(buffer, offset, count);
             if (!CanRead)
             {
@@ -75,11 +81,14 @@ namespace System.IO.Pipes
                 return Task.FromResult(0);
             }
 
-            return ReadAsyncCore(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
+            return ReadAsyncCore(new Memory<byte>(buffer, offset, count), cancellationToken)
+                .AsTask();
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             if (!_isAsync)
             {
                 return base.ReadAsync(buffer, cancellationToken);
@@ -106,10 +115,19 @@ namespace System.IO.Pipes
             return ReadAsyncCore(buffer, cancellationToken);
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
-        {
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) {
             if (_isAsync)
-                return TaskToApm.Begin(ReadAsync(buffer, offset, count, CancellationToken.None), callback, state);
+                return TaskToApm.Begin(
+                    ReadAsync(buffer, offset, count, CancellationToken.None),
+                    callback,
+                    state
+                );
             else
                 return base.BeginRead(buffer, offset, count, callback, state);
         }
@@ -157,8 +175,12 @@ namespace System.IO.Pipes
             WriteCore(buffer);
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             ValidateBufferArguments(buffer, offset, count);
             if (!CanWrite)
             {
@@ -182,11 +204,16 @@ namespace System.IO.Pipes
                 return Task.CompletedTask;
             }
 
-            return WriteAsyncCore(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken);
+            return WriteAsyncCore(
+                new ReadOnlyMemory<byte>(buffer, offset, count),
+                cancellationToken
+            );
         }
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             if (!_isAsync)
             {
                 return base.WriteAsync(buffer, cancellationToken);
@@ -212,10 +239,19 @@ namespace System.IO.Pipes
             return new ValueTask(WriteAsyncCore(buffer, cancellationToken));
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
-        {
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) {
             if (_isAsync)
-                return TaskToApm.Begin(WriteAsync(buffer, offset, count, CancellationToken.None), callback, state);
+                return TaskToApm.Begin(
+                    WriteAsync(buffer, offset, count, CancellationToken.None),
+                    callback,
+                    state
+                );
             else
                 return base.BeginWrite(buffer, offset, count, callback, state);
         }
@@ -231,9 +267,17 @@ namespace System.IO.Pipes
         internal static string GetPipePath(string serverName, string pipeName)
         {
             string normalizedPipePath = Path.GetFullPath(@"\\" + serverName + @"\pipe\" + pipeName);
-            if (string.Equals(normalizedPipePath, @"\\.\pipe\" + AnonymousPipeName, StringComparison.OrdinalIgnoreCase))
-            {
-                throw new ArgumentOutOfRangeException(nameof(pipeName), SR.ArgumentOutOfRange_AnonymousReserved);
+            if (
+                string.Equals(
+                    normalizedPipePath,
+                    @"\\.\pipe\" + AnonymousPipeName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            ) {
+                throw new ArgumentOutOfRangeException(
+                    nameof(pipeName),
+                    SR.ArgumentOutOfRange_AnonymousReserved
+                );
             }
             return normalizedPipePath;
         }
@@ -243,8 +287,10 @@ namespace System.IO.Pipes
         internal void ValidateHandleIsPipe(SafePipeHandle safePipeHandle)
         {
             // Check that this handle is infact a handle to a pipe.
-            if (Interop.Kernel32.GetFileType(safePipeHandle) != Interop.Kernel32.FileTypes.FILE_TYPE_PIPE)
-            {
+            if (
+                Interop.Kernel32.GetFileType(safePipeHandle)
+                != Interop.Kernel32.FileTypes.FILE_TYPE_PIPE
+            ) {
                 throw new IOException(SR.IO_InvalidPipeHandle);
             }
         }
@@ -274,9 +320,10 @@ namespace System.IO.Pipes
             if (r == -1)
             {
                 // If the other side has broken the connection, set state to Broken and return 0
-                if (errorCode == Interop.Errors.ERROR_BROKEN_PIPE ||
-                    errorCode == Interop.Errors.ERROR_PIPE_NOT_CONNECTED)
-                {
+                if (
+                    errorCode == Interop.Errors.ERROR_BROKEN_PIPE
+                    || errorCode == Interop.Errors.ERROR_PIPE_NOT_CONNECTED
+                ) {
                     State = PipeState.Broken;
                     r = 0;
                 }
@@ -292,8 +339,10 @@ namespace System.IO.Pipes
             return r;
         }
 
-        private ValueTask<int> ReadAsyncCore(Memory<byte> buffer, CancellationToken cancellationToken)
-        {
+        private ValueTask<int> ReadAsyncCore(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken
+        ) {
             var completionSource = new ReadWriteCompletionSource(this, buffer, isWrite: false);
 
             // Queue an async ReadFile operation and pass in a packed overlapped
@@ -301,7 +350,12 @@ namespace System.IO.Pipes
             int r;
             unsafe
             {
-                r = ReadFileNative(_handle!, buffer.Span, completionSource.Overlapped, out errorCode);
+                r = ReadFileNative(
+                    _handle!,
+                    buffer.Span,
+                    completionSource.Overlapped,
+                    out errorCode
+                );
             }
 
             // ReadFile, the OS version, will return 0 on failure, but this ReadFileNative wrapper
@@ -322,7 +376,6 @@ namespace System.IO.Pipes
                     case Interop.Errors.ERROR_BROKEN_PIPE:
                     case Interop.Errors.ERROR_PIPE_NOT_CONNECTED:
                         State = PipeState.Broken;
-
                         unsafe
                         {
                             // Clear the overlapped status bit for this special case. Failure to do so looks
@@ -358,8 +411,10 @@ namespace System.IO.Pipes
             Debug.Assert(r >= 0, "PipeStream's WriteCore is likely broken.");
         }
 
-        private Task WriteAsyncCore(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken)
-        {
+        private Task WriteAsyncCore(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken
+        ) {
             var completionSource = new ReadWriteCompletionSource(this, buffer, isWrite: true);
             int errorCode = 0;
 
@@ -367,7 +422,12 @@ namespace System.IO.Pipes
             int r;
             unsafe
             {
-                r = WriteFileNative(_handle!, buffer.Span, completionSource.Overlapped, out errorCode);
+                r = WriteFileNative(
+                    _handle!,
+                    buffer.Span,
+                    completionSource.Overlapped,
+                    out errorCode
+                );
             }
 
             // WriteFile, the OS version, will return 0 on failure, but this WriteFileNative
@@ -481,8 +541,9 @@ namespace System.IO.Pipes
                 {
                     outBufferSize = _outBufferSize;
                 }
-                else if (!Interop.Kernel32.GetNamedPipeInfo(_handle!, null, &outBufferSize, null, null))
-                {
+                else if (
+                    !Interop.Kernel32.GetNamedPipeInfo(_handle!, null, &outBufferSize, null, null)
+                ) {
                     throw WinIOError(Marshal.GetLastWin32Error());
                 }
 
@@ -511,14 +572,22 @@ namespace System.IO.Pipes
                 CheckPipePropertyOperations();
                 if (value < PipeTransmissionMode.Byte || value > PipeTransmissionMode.Message)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.ArgumentOutOfRange_TransmissionModeByteOrMsg);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.ArgumentOutOfRange_TransmissionModeByteOrMsg
+                    );
                 }
-
                 unsafe
                 {
                     int pipeReadType = (int)value << 1;
-                    if (!Interop.Kernel32.SetNamedPipeHandleState(_handle!, &pipeReadType, IntPtr.Zero, IntPtr.Zero))
-                    {
+                    if (
+                        !Interop.Kernel32.SetNamedPipeHandleState(
+                            _handle!,
+                            &pipeReadType,
+                            IntPtr.Zero,
+                            IntPtr.Zero
+                        )
+                    ) {
                         throw WinIOError(Marshal.GetLastWin32Error());
                     }
                     else
@@ -529,10 +598,17 @@ namespace System.IO.Pipes
             }
         }
 
-        private unsafe int ReadFileNative(SafePipeHandle handle, Span<byte> buffer, NativeOverlapped* overlapped, out int errorCode)
-        {
+        private unsafe int ReadFileNative(
+            SafePipeHandle handle,
+            Span<byte> buffer,
+            NativeOverlapped* overlapped,
+            out int errorCode
+        ) {
             DebugAssertHandleValid(handle);
-            Debug.Assert((_isAsync && overlapped != null) || (!_isAsync && overlapped == null), "Async IO parameter screwup in call to ReadFileNative.");
+            Debug.Assert(
+                (_isAsync && overlapped != null) || (!_isAsync && overlapped == null),
+                "Async IO parameter screwup in call to ReadFileNative."
+            );
 
             // Note that async callers check to avoid calling this first, so they can call user's callback.
             if (buffer.Length == 0)
@@ -546,18 +622,22 @@ namespace System.IO.Pipes
 
             fixed (byte* p = &MemoryMarshal.GetReference(buffer))
             {
-                r = _isAsync ?
-                    Interop.Kernel32.ReadFile(handle, p, buffer.Length, IntPtr.Zero, overlapped) :
-                    Interop.Kernel32.ReadFile(handle, p, buffer.Length, out numBytesRead, IntPtr.Zero);
+                r = _isAsync
+                    ? Interop.Kernel32.ReadFile(handle, p, buffer.Length, IntPtr.Zero, overlapped)
+                    : Interop.Kernel32.ReadFile(
+                          handle,
+                          p,
+                          buffer.Length,
+                          out numBytesRead,
+                          IntPtr.Zero
+                      );
             }
 
             if (r == 0)
             {
                 // In message mode, the ReadFile can inform us that there is more data to come.
                 errorCode = Marshal.GetLastWin32Error();
-                return errorCode == Interop.Errors.ERROR_MORE_DATA ?
-                    numBytesRead :
-                    -1;
+                return errorCode == Interop.Errors.ERROR_MORE_DATA ? numBytesRead : -1;
             }
             else
             {
@@ -566,10 +646,17 @@ namespace System.IO.Pipes
             }
         }
 
-        private unsafe int WriteFileNative(SafePipeHandle handle, ReadOnlySpan<byte> buffer, NativeOverlapped* overlapped, out int errorCode)
-        {
+        private unsafe int WriteFileNative(
+            SafePipeHandle handle,
+            ReadOnlySpan<byte> buffer,
+            NativeOverlapped* overlapped,
+            out int errorCode
+        ) {
             DebugAssertHandleValid(handle);
-            Debug.Assert((_isAsync && overlapped != null) || (!_isAsync && overlapped == null), "Async IO parameter screwup in call to WriteFileNative.");
+            Debug.Assert(
+                (_isAsync && overlapped != null) || (!_isAsync && overlapped == null),
+                "Async IO parameter screwup in call to WriteFileNative."
+            );
 
             // Note that async callers check to avoid calling this first, so they can call user's callback.
             if (buffer.Length == 0)
@@ -583,9 +670,15 @@ namespace System.IO.Pipes
 
             fixed (byte* p = &MemoryMarshal.GetReference(buffer))
             {
-                r = _isAsync ?
-                    Interop.Kernel32.WriteFile(handle, p, buffer.Length, IntPtr.Zero, overlapped) :
-                    Interop.Kernel32.WriteFile(handle, p, buffer.Length, out numBytesWritten, IntPtr.Zero);
+                r = _isAsync
+                    ? Interop.Kernel32.WriteFile(handle, p, buffer.Length, IntPtr.Zero, overlapped)
+                    : Interop.Kernel32.WriteFile(
+                          handle,
+                          p,
+                          buffer.Length,
+                          out numBytesWritten,
+                          IntPtr.Zero
+                      );
             }
 
             if (r == 0)
@@ -600,19 +693,26 @@ namespace System.IO.Pipes
             }
         }
 
-        internal static unsafe Interop.Kernel32.SECURITY_ATTRIBUTES GetSecAttrs(HandleInheritability inheritability)
-        {
+        internal static unsafe Interop.Kernel32.SECURITY_ATTRIBUTES GetSecAttrs(
+            HandleInheritability inheritability
+        ) {
             Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = new Interop.Kernel32.SECURITY_ATTRIBUTES
             {
                 nLength = (uint)sizeof(Interop.Kernel32.SECURITY_ATTRIBUTES),
-                bInheritHandle = ((inheritability & HandleInheritability.Inheritable) != 0) ? Interop.BOOL.TRUE : Interop.BOOL.FALSE
+                bInheritHandle =
+                    ((inheritability & HandleInheritability.Inheritable) != 0)
+                        ? Interop.BOOL.TRUE
+                        : Interop.BOOL.FALSE
             };
 
             return secAttrs;
         }
 
-        internal static unsafe Interop.Kernel32.SECURITY_ATTRIBUTES GetSecAttrs(HandleInheritability inheritability, PipeSecurity? pipeSecurity, ref GCHandle pinningHandle)
-        {
+        internal static unsafe Interop.Kernel32.SECURITY_ATTRIBUTES GetSecAttrs(
+            HandleInheritability inheritability,
+            PipeSecurity? pipeSecurity,
+            ref GCHandle pinningHandle
+        ) {
             Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = GetSecAttrs(inheritability);
 
             if (pipeSecurity != null)
@@ -628,16 +728,23 @@ namespace System.IO.Pipes
             return secAttrs;
         }
 
-
-
         /// <summary>
         /// Determine pipe read mode from Win32
         /// </summary>
         private unsafe void UpdateReadMode()
         {
             uint flags;
-            if (!Interop.Kernel32.GetNamedPipeHandleStateW(SafePipeHandle, &flags, null, null, null, null, 0))
-            {
+            if (
+                !Interop.Kernel32.GetNamedPipeHandleStateW(
+                    SafePipeHandle,
+                    &flags,
+                    null,
+                    null,
+                    null,
+                    null,
+                    0
+                )
+            ) {
                 throw WinIOError(Marshal.GetLastWin32Error());
             }
 
@@ -664,7 +771,10 @@ namespace System.IO.Pipes
                 case Interop.Errors.ERROR_NO_DATA:
                     // Other side has broken the connection
                     _state = PipeState.Broken;
-                    return new IOException(SR.IO_PipeBroken, Win32Marshal.MakeHRFromErrorCode(errorCode));
+                    return new IOException(
+                        SR.IO_PipeBroken,
+                        Win32Marshal.MakeHRFromErrorCode(errorCode)
+                    );
 
                 case Interop.Errors.ERROR_HANDLE_EOF:
                     return Error.GetEndOfFile();

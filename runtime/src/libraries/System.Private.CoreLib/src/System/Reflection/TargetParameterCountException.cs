@@ -6,17 +6,17 @@ using System.Runtime.Serialization;
 namespace System.Reflection
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class TargetParameterCountException : ApplicationException
     {
-        public TargetParameterCountException()
-            : base(SR.Arg_TargetParameterCountException)
+        public TargetParameterCountException() : base(SR.Arg_TargetParameterCountException)
         {
             HResult = HResults.COR_E_TARGETPARAMCOUNT;
         }
 
-        public TargetParameterCountException(string? message)
-            : base(message)
+        public TargetParameterCountException(string? message) : base(message)
         {
             HResult = HResults.COR_E_TARGETPARAMCOUNT;
         }
@@ -27,9 +27,9 @@ namespace System.Reflection
             HResult = HResults.COR_E_TARGETPARAMCOUNT;
         }
 
-        private TargetParameterCountException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+        private TargetParameterCountException(
+            SerializationInfo info,
+            StreamingContext context
+        ) : base(info, context) { }
     }
 }

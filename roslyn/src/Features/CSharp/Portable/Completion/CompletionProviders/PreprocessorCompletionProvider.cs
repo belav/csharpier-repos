@@ -20,13 +20,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PreprocessorCompletionProvider()
-        {
-        }
+        public PreprocessorCompletionProvider() { }
 
-        public override bool IsInsertionTrigger(SourceText text, int characterPosition, OptionSet options)
-            => CompletionUtilities.IsTriggerCharacter(text, characterPosition, options);
+        public override bool IsInsertionTrigger(
+            SourceText text,
+            int characterPosition,
+            OptionSet options
+        ) => CompletionUtilities.IsTriggerCharacter(text, characterPosition, options);
 
-        public override ImmutableHashSet<char> TriggerCharacters { get; } = CompletionUtilities.CommonTriggerCharacters;
+        public override ImmutableHashSet<char> TriggerCharacters { get; } =
+            CompletionUtilities.CommonTriggerCharacters;
     }
 }

@@ -12,7 +12,11 @@ namespace Microsoft.CodeAnalysis
 {
     public struct SymbolInfo : IEquatable<SymbolInfo>
     {
-        internal static readonly SymbolInfo None = new SymbolInfo(null, ImmutableArray<ISymbol>.Empty, CandidateReason.None);
+        internal static readonly SymbolInfo None = new SymbolInfo(
+            null,
+            ImmutableArray<ISymbol>.Empty,
+            CandidateReason.None
+        );
 
         private ImmutableArray<ISymbol> _candidateSymbols;
 
@@ -33,10 +37,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public ImmutableArray<ISymbol> CandidateSymbols
         {
-            get
-            {
-                return _candidateSymbols.NullToEmpty();
-            }
+            get { return _candidateSymbols.NullToEmpty(); }
         }
 
         internal ImmutableArray<ISymbol> GetAllSymbols()
@@ -59,32 +60,40 @@ namespace Microsoft.CodeAnalysis
         public CandidateReason CandidateReason { get; }
 
         internal SymbolInfo(ISymbol symbol)
-            : this(symbol, ImmutableArray<ISymbol>.Empty, CandidateReason.None)
-        {
-        }
+            : this(symbol, ImmutableArray<ISymbol>.Empty, CandidateReason.None) { }
 
         internal SymbolInfo(ISymbol symbol, CandidateReason reason)
-            : this(symbol, ImmutableArray<ISymbol>.Empty, reason)
-        {
-        }
+            : this(symbol, ImmutableArray<ISymbol>.Empty, reason) { }
 
-        internal SymbolInfo(ImmutableArray<ISymbol> candidateSymbols, CandidateReason candidateReason)
-            : this(null, candidateSymbols, candidateReason)
-        {
-        }
+        internal SymbolInfo(
+            ImmutableArray<ISymbol> candidateSymbols,
+            CandidateReason candidateReason
+        ) : this(null, candidateSymbols, candidateReason) { }
 
-        internal SymbolInfo(ISymbol? symbol, ImmutableArray<ISymbol> candidateSymbols, CandidateReason candidateReason)
-            : this()
+        internal SymbolInfo(
+            ISymbol? symbol,
+            ImmutableArray<ISymbol> candidateSymbols,
+            CandidateReason candidateReason
+        ) : this()
         {
             this.Symbol = symbol;
-            _candidateSymbols = candidateSymbols.IsDefault ? ImmutableArray.Create<ISymbol>() : candidateSymbols;
+            _candidateSymbols = candidateSymbols.IsDefault
+                ? ImmutableArray.Create<ISymbol>()
+                : candidateSymbols;
 
 #if DEBUG
             const NamespaceKind NamespaceKindNamespaceGroup = (NamespaceKind)0;
-            Debug.Assert(symbol is null || symbol.Kind != SymbolKind.Namespace || ((INamespaceSymbol)symbol).NamespaceKind != NamespaceKindNamespaceGroup);
+            Debug.Assert(
+                symbol is null
+                    || symbol.Kind != SymbolKind.Namespace
+                    || ((INamespaceSymbol)symbol).NamespaceKind != NamespaceKindNamespaceGroup
+            );
             foreach (var item in _candidateSymbols)
             {
-                Debug.Assert(item.Kind != SymbolKind.Namespace || ((INamespaceSymbol)item).NamespaceKind != NamespaceKindNamespaceGroup);
+                Debug.Assert(
+                    item.Kind != SymbolKind.Namespace
+                        || ((INamespaceSymbol)item).NamespaceKind != NamespaceKindNamespaceGroup
+                );
             }
 #endif
 
@@ -98,28 +107,29 @@ namespace Microsoft.CodeAnalysis
 
         public bool Equals(SymbolInfo other)
         {
-            if (!object.Equals(this.Symbol, other.Symbol) ||
-                _candidateSymbols.IsDefault != other._candidateSymbols.IsDefault ||
-                this.CandidateReason != other.CandidateReason)
-            {
+            if (
+                !object.Equals(this.Symbol, other.Symbol)
+                || _candidateSymbols.IsDefault != other._candidateSymbols.IsDefault
+                || this.CandidateReason != other.CandidateReason
+            ) {
                 return false;
             }
 
-            return _candidateSymbols.IsDefault || _candidateSymbols.SequenceEqual(other._candidateSymbols);
+            return _candidateSymbols.IsDefault
+                || _candidateSymbols.SequenceEqual(other._candidateSymbols);
         }
 
         public override int GetHashCode()
         {
-            return Hash.Combine(this.Symbol, Hash.Combine(Hash.CombineValues(_candidateSymbols, 4), (int)this.CandidateReason));
+            return Hash.Combine(
+                this.Symbol,
+                Hash.Combine(Hash.CombineValues(_candidateSymbols, 4), (int)this.CandidateReason)
+            );
         }
 
         internal bool IsEmpty
         {
-            get
-            {
-                return this.Symbol == null
-                    && this.CandidateSymbols.Length == 0;
-            }
+            get { return this.Symbol == null && this.CandidateSymbols.Length == 0; }
         }
     }
 }

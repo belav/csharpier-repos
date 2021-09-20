@@ -144,7 +144,6 @@ namespace System.Net.Http.HPack
 
                 default:
                     return statusCode.ToString(CultureInfo.InvariantCulture);
-
             }
         }
     }

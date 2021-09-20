@@ -26,8 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public SourceLabelSymbol(
             MethodSymbol containingMethod,
             SyntaxNodeOrToken identifierNodeOrToken,
-            ConstantValue? switchCaseLabelConstant = null)
-        {
+            ConstantValue? switchCaseLabelConstant = null
+        ) {
             Debug.Assert(identifierNodeOrToken.IsToken || identifierNodeOrToken.IsNode);
             _containingMethod = containingMethod;
             _identifierNodeOrToken = identifierNodeOrToken;
@@ -36,11 +36,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override string Name
         {
-            get
-            {
-                return _lazyName ??
-                    (_lazyName = MakeLabelName());
-            }
+            get { return _lazyName ?? (_lazyName = MakeLabelName()); }
         }
 
         private string MakeLabelName()
@@ -67,8 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public SourceLabelSymbol(
             MethodSymbol containingMethod,
-            ConstantValue switchCaseLabelConstant)
-        {
+            ConstantValue switchCaseLabelConstant
+        ) {
             _containingMethod = containingMethod;
             _identifierNodeOrToken = default(SyntaxToken);
             _switchCaseLabelConstant = switchCaseLabelConstant;
@@ -79,8 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 return _identifierNodeOrToken.IsToken && _identifierNodeOrToken.Parent == null
-                    ? ImmutableArray<Location>.Empty
-                    : ImmutableArray.Create<Location>(_identifierNodeOrToken.GetLocation()!);
+                  ? ImmutableArray<Location>.Empty
+                  : ImmutableArray.Create<Location>(_identifierNodeOrToken.GetLocation()!);
             }
         }
 
@@ -93,31 +89,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (_identifierNodeOrToken.IsToken)
                 {
                     if (_identifierNodeOrToken.Parent != null)
-                        node = _identifierNodeOrToken.Parent.FirstAncestorOrSelf<LabeledStatementSyntax>();
+                        node =
+                            _identifierNodeOrToken.Parent.FirstAncestorOrSelf<LabeledStatementSyntax>();
                 }
                 else
                 {
-                    node = _identifierNodeOrToken.AsNode()!.FirstAncestorOrSelf<SwitchLabelSyntax>();
+                    node =
+                        _identifierNodeOrToken.AsNode()!.FirstAncestorOrSelf<SwitchLabelSyntax>();
                 }
 
-                return node == null ? ImmutableArray<SyntaxReference>.Empty : ImmutableArray.Create<SyntaxReference>(node.GetReference());
+                return node == null
+                  ? ImmutableArray<SyntaxReference>.Empty
+                  : ImmutableArray.Create<SyntaxReference>(node.GetReference());
             }
         }
 
         public override MethodSymbol ContainingMethod
         {
-            get
-            {
-                return _containingMethod;
-            }
+            get { return _containingMethod; }
         }
 
         public override Symbol ContainingSymbol
         {
-            get
-            {
-                return _containingMethod;
-            }
+            get { return _containingMethod; }
         }
 
         // Get the identifier node or token that defined this label symbol. This is useful for robustly
@@ -125,10 +119,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         // of duplicates.
         internal override SyntaxNodeOrToken IdentifierNodeOrToken
         {
-            get
-            {
-                return _identifierNodeOrToken;
-            }
+            get { return _identifierNodeOrToken; }
         }
 
         /// <summary>
@@ -137,10 +128,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public ConstantValue? SwitchCaseLabelConstant
         {
-            get
-            {
-                return _switchCaseLabelConstant;
-            }
+            get { return _switchCaseLabelConstant; }
         }
 
         public override bool Equals(Symbol? obj, TypeCompareKind compareKind)

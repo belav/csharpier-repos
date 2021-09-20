@@ -29,8 +29,11 @@ namespace System.Web.Helpers.AntiXsrf
             };
         }
 
-        public AntiForgeryToken GenerateFormToken(HttpContextBase httpContext, IIdentity identity, AntiForgeryToken cookieToken)
-        {
+        public AntiForgeryToken GenerateFormToken(
+            HttpContextBase httpContext,
+            IIdentity identity,
+            AntiForgeryToken cookieToken
+        ) {
             Contract.Assert(IsCookieTokenValid(cookieToken));
 
             AntiForgeryToken formToken = new AntiForgeryToken()
@@ -60,17 +63,25 @@ namespace System.Web.Helpers.AntiXsrf
             // populate AdditionalData
             if (_config.AdditionalDataProvider != null)
             {
-                formToken.AdditionalData = _config.AdditionalDataProvider.GetAdditionalData(httpContext);
+                formToken.AdditionalData = _config.AdditionalDataProvider.GetAdditionalData(
+                    httpContext
+                );
             }
 
-            if (requireAuthenticatedUserHeuristicChecks
+            if (
+                requireAuthenticatedUserHeuristicChecks
                 && String.IsNullOrEmpty(formToken.Username)
                 && formToken.ClaimUid == null
-                && String.IsNullOrEmpty(formToken.AdditionalData))
-            {
+                && String.IsNullOrEmpty(formToken.AdditionalData)
+            ) {
                 // Application says user is authenticated, but we have no identifier for the user.
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture,
-                    WebPageResources.TokenValidator_AuthenticatedUserWithoutUsername, identity.GetType()));
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        WebPageResources.TokenValidator_AuthenticatedUserWithoutUsername,
+                        identity.GetType()
+                    )
+                );
             }
 
             return formToken;
@@ -81,8 +92,12 @@ namespace System.Web.Helpers.AntiXsrf
             return (cookieToken != null && cookieToken.IsSessionToken);
         }
 
-        public void ValidateTokens(HttpContextBase httpContext, IIdentity identity, AntiForgeryToken sessionToken, AntiForgeryToken fieldToken)
-        {
+        public void ValidateTokens(
+            HttpContextBase httpContext,
+            IIdentity identity,
+            AntiForgeryToken sessionToken,
+            AntiForgeryToken fieldToken
+        ) {
             // Were the tokens even present at all?
             if (sessionToken == null)
             {
@@ -90,13 +105,18 @@ namespace System.Web.Helpers.AntiXsrf
             }
             if (fieldToken == null)
             {
-                throw HttpAntiForgeryException.CreateFormFieldMissingException(_config.FormFieldName);
+                throw HttpAntiForgeryException.CreateFormFieldMissingException(
+                    _config.FormFieldName
+                );
             }
 
             // Do the tokens have the correct format?
             if (!sessionToken.IsSessionToken || fieldToken.IsSessionToken)
             {
-                throw HttpAntiForgeryException.CreateTokensSwappedException(_config.CookieName, _config.FormFieldName);
+                throw HttpAntiForgeryException.CreateTokensSwappedException(
+                    _config.CookieName,
+                    _config.FormFieldName
+                );
             }
 
             // Are the security tokens embedded in each incoming token identical?
@@ -120,12 +140,23 @@ namespace System.Web.Helpers.AntiXsrf
 
             // OpenID and other similar authentication schemes use URIs for the username.
             // These should be treated as case-sensitive.
-            bool useCaseSensitiveUsernameComparison = currentUsername.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
+            bool useCaseSensitiveUsernameComparison =
+                currentUsername.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
                 || currentUsername.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
 
-            if (!String.Equals(fieldToken.Username, currentUsername, (useCaseSensitiveUsernameComparison) ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase))
-            {
-                throw HttpAntiForgeryException.CreateUsernameMismatchException(fieldToken.Username, currentUsername);
+            if (
+                !String.Equals(
+                    fieldToken.Username,
+                    currentUsername,
+                    (useCaseSensitiveUsernameComparison)
+                      ? StringComparison.Ordinal
+                      : StringComparison.OrdinalIgnoreCase
+                )
+            ) {
+                throw HttpAntiForgeryException.CreateUsernameMismatchException(
+                    fieldToken.Username,
+                    currentUsername
+                );
             }
             if (!Equals(fieldToken.ClaimUid, currentClaimUid))
             {
@@ -133,8 +164,13 @@ namespace System.Web.Helpers.AntiXsrf
             }
 
             // Is the AdditionalData valid?
-            if (_config.AdditionalDataProvider != null && !_config.AdditionalDataProvider.ValidateAdditionalData(httpContext, fieldToken.AdditionalData))
-            {
+            if (
+                _config.AdditionalDataProvider != null
+                && !_config.AdditionalDataProvider.ValidateAdditionalData(
+                    httpContext,
+                    fieldToken.AdditionalData
+                )
+            ) {
                 throw HttpAntiForgeryException.CreateAdditionalDataCheckFailedException();
             }
         }

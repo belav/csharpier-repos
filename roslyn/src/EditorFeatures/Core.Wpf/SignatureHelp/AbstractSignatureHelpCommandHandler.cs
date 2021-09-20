@@ -13,15 +13,14 @@ using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
 
 namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
 {
-    internal abstract class AbstractSignatureHelpCommandHandler :
-        ForegroundThreadAffinitizedObject
+    internal abstract class AbstractSignatureHelpCommandHandler : ForegroundThreadAffinitizedObject
     {
         private readonly SignatureHelpControllerProvider _controllerProvider;
 
         public AbstractSignatureHelpCommandHandler(
             IThreadingContext threadingContext,
-            SignatureHelpControllerProvider controllerProvider)
-            : base(threadingContext)
+            SignatureHelpControllerProvider controllerProvider
+        ) : base(threadingContext)
         {
             _controllerProvider = controllerProvider;
         }
@@ -32,8 +31,10 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
 
             // If args is `InvokeSignatureHelpCommandArgs` then sig help was explicitly invoked by the user and should
             // be shown whether or not the option is set.
-            if (!(args is InvokeSignatureHelpCommandArgs) && !args.SubjectBuffer.GetFeatureOnOffOption(SignatureHelpOptions.ShowSignatureHelp))
-            {
+            if (
+                !(args is InvokeSignatureHelpCommandArgs)
+                && !args.SubjectBuffer.GetFeatureOnOffOption(SignatureHelpOptions.ShowSignatureHelp)
+            ) {
                 controller = null;
                 return false;
             }

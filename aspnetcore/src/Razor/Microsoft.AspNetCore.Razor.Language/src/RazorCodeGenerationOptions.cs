@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 suppressMetadataAttributes: false,
                 suppressPrimaryMethodBody: false,
                 suppressNullabilityEnforcement: false,
-                omitMinimizedComponentAttributeValues: false);
+                omitMinimizedComponentAttributeValues: false
+            );
         }
 
         public static RazorCodeGenerationOptions CreateDesignTimeDefault()
@@ -32,11 +33,13 @@ namespace Microsoft.AspNetCore.Razor.Language
                 suppressMetadataAttributes: true,
                 suppressPrimaryMethodBody: false,
                 suppressNullabilityEnforcement: false,
-                omitMinimizedComponentAttributeValues: false);
+                omitMinimizedComponentAttributeValues: false
+            );
         }
 
-        public static RazorCodeGenerationOptions Create(Action<RazorCodeGenerationOptionsBuilder> configure)
-        {
+        public static RazorCodeGenerationOptions Create(
+            Action<RazorCodeGenerationOptionsBuilder> configure
+        ) {
             if (configure == null)
             {
                 throw new ArgumentNullException(nameof(configure));
@@ -49,8 +52,9 @@ namespace Microsoft.AspNetCore.Razor.Language
             return options;
         }
 
-        public static RazorCodeGenerationOptions CreateDesignTime(Action<RazorCodeGenerationOptionsBuilder> configure)
-        {
+        public static RazorCodeGenerationOptions CreateDesignTime(
+            Action<RazorCodeGenerationOptionsBuilder> configure
+        ) {
             if (configure == null)
             {
                 throw new ArgumentNullException(nameof(configure));

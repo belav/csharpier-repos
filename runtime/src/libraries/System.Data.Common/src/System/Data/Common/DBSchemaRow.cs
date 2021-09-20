@@ -12,8 +12,10 @@ namespace System.Data.Common
         private readonly DbSchemaTable _schemaTable;
         private readonly DataRow _dataRow;
 
-        internal static DbSchemaRow[] GetSortedSchemaRows(DataTable dataTable, bool returnProviderSpecificTypes)
-        {
+        internal static DbSchemaRow[] GetSortedSchemaRows(
+            DataTable dataTable,
+            bool returnProviderSpecificTypes
+        ) {
             DataColumn? sortindex = dataTable.Columns[SchemaMappingUnsortedIndex];
             if (null == sortindex)
             {
@@ -24,10 +26,14 @@ namespace System.Data.Common
             for (int i = 0; i < count; ++i)
             {
                 dataTable.Rows[i][sortindex] = i;
-            };
+            }
+            ;
             DbSchemaTable schemaTable = new DbSchemaTable(dataTable, returnProviderSpecificTypes);
 
-            const DataViewRowState rowStates = DataViewRowState.Unchanged | DataViewRowState.Added | DataViewRowState.ModifiedCurrent;
+            const DataViewRowState rowStates =
+                DataViewRowState.Unchanged
+                | DataViewRowState.Added
+                | DataViewRowState.ModifiedCurrent;
             DataRow[] dataRows = dataTable.Select(null, "ColumnOrdinal ASC", rowStates);
             Debug.Assert(null != dataRows, "GetSchemaRows: unexpected null dataRows");
 
@@ -48,10 +54,7 @@ namespace System.Data.Common
 
         internal DataRow DataRow
         {
-            get
-            {
-                return _dataRow;
-            }
+            get { return _dataRow; }
         }
 
         internal string ColumnName
@@ -113,7 +116,6 @@ namespace System.Data.Common
                 return string.Empty;
             }
         }
-
 
         internal string BaseCatalogName
         {
@@ -325,10 +327,7 @@ namespace System.Data.Common
 
         internal int UnsortedIndex
         {
-            get
-            {
-                return (int)_dataRow[_schemaTable.UnsortedIndex!, DataRowVersion.Default];
-            }
+            get { return (int)_dataRow[_schemaTable.UnsortedIndex!, DataRowVersion.Default]; }
         }
     }
 }

@@ -42,13 +42,15 @@ namespace Microsoft.JSInterop
 
             // Act
             // Showing we can pass the DotNetObject either as top-level args or nested
-            var syncResult = runtime.Invoke<DotNetObjectReference<object>>("test identifier",
+            var syncResult = runtime.Invoke<DotNetObjectReference<object>>(
+                "test identifier",
                 DotNetObjectReference.Create(obj1),
                 new Dictionary<string, object>
                 {
-                    { "obj2",  DotNetObjectReference.Create(obj2) },
-                    { "obj3",  DotNetObjectReference.Create(obj3) },
-                });
+                    { "obj2", DotNetObjectReference.Create(obj2) },
+                    { "obj3", DotNetObjectReference.Create(obj3) },
+                }
+            );
 
             // Assert: Handles null result string
             Assert.Null(syncResult);
@@ -56,7 +58,10 @@ namespace Microsoft.JSInterop
             // Assert: Serialized as expected
             var call = runtime.InvokeCalls.Single();
             Assert.Equal("test identifier", call.Identifier);
-            Assert.Equal("[{\"__dotNetObject\":1},{\"obj2\":{\"__dotNetObject\":2},\"obj3\":{\"__dotNetObject\":3}}]", call.ArgsJson);
+            Assert.Equal(
+                "[{\"__dotNetObject\":1},{\"obj2\":{\"__dotNetObject\":2},\"obj3\":{\"__dotNetObject\":3}}]",
+                call.ArgsJson
+            );
 
             // Assert: Objects were tracked
             Assert.Same(obj1, runtime.GetObjectReference(1).Value);
@@ -80,7 +85,8 @@ namespace Microsoft.JSInterop
                 "test identifier",
                 DotNetObjectReference.Create(obj1),
                 "some other arg",
-                DotNetObjectReference.Create(obj2))!;
+                DotNetObjectReference.Create(obj2)
+            )!;
             var call = runtime.InvokeCalls.Single();
 
             // Assert
@@ -99,8 +105,12 @@ namespace Microsoft.JSInterop
 
             public string? NextResultJson { get; set; }
 
-            protected override string? InvokeJS(string identifier, string? argsJson, JSCallResultType resultType, long targetInstanceId)
-            {
+            protected override string? InvokeJS(
+                string identifier,
+                string? argsJson,
+                JSCallResultType resultType,
+                long targetInstanceId
+            ) {
                 InvokeCalls.Add(new InvokeArgs { Identifier = identifier, ArgsJson = argsJson });
                 return NextResultJson;
             }
@@ -111,11 +121,18 @@ namespace Microsoft.JSInterop
                 public string? ArgsJson { get; set; }
             }
 
-            protected override void BeginInvokeJS(long asyncHandle, string identifier, string? argsJson, JSCallResultType resultType, long targetInstanceId)
-                => throw new NotImplementedException("This test only covers sync calls");
+            protected override void BeginInvokeJS(
+                long asyncHandle,
+                string identifier,
+                string? argsJson,
+                JSCallResultType resultType,
+                long targetInstanceId
+            ) => throw new NotImplementedException("This test only covers sync calls");
 
-            protected internal override void EndInvokeDotNet(DotNetInvocationInfo invocationInfo, in DotNetInvocationResult invocationResult)
-                => throw new NotImplementedException("This test only covers sync calls");
+            protected internal override void EndInvokeDotNet(
+                DotNetInvocationInfo invocationInfo,
+                in DotNetInvocationResult invocationResult
+            ) => throw new NotImplementedException("This test only covers sync calls");
         }
     }
 }

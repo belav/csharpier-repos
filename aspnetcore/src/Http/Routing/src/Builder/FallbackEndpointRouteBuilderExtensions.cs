@@ -36,8 +36,10 @@ namespace Microsoft.AspNetCore.Builder
         /// <c>{*path:nonfile}</c>. The order of the registered endpoint will be <c>int.MaxValue</c>.
         /// </para>
         /// </remarks>
-        public static IEndpointConventionBuilder MapFallback(this IEndpointRouteBuilder endpoints, RequestDelegate requestDelegate)
-        {
+        public static IEndpointConventionBuilder MapFallback(
+            this IEndpointRouteBuilder endpoints,
+            RequestDelegate requestDelegate
+        ) {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));
@@ -75,8 +77,8 @@ namespace Microsoft.AspNetCore.Builder
         public static IEndpointConventionBuilder MapFallback(
             this IEndpointRouteBuilder endpoints,
             string pattern,
-            RequestDelegate requestDelegate)
-        {
+            RequestDelegate requestDelegate
+        ) {
             if (endpoints == null)
             {
                 throw new ArgumentNullException(nameof(endpoints));

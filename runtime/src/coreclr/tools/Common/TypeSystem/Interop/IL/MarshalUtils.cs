@@ -19,13 +19,16 @@ namespace Internal.TypeSystem.Interop
             }
 
             DefType baseType = type.BaseType;
-            bool hasNonTrivialParent = baseType != null
+            bool hasNonTrivialParent =
+                baseType != null
                 && !baseType.IsWellKnownType(WellKnownType.Object)
                 && !baseType.IsWellKnownType(WellKnownType.ValueType);
 
             // Type is blittable only if parent is also blittable and is not empty.
-            if (hasNonTrivialParent && (!IsBlittableType(baseType) || baseType.IsZeroSizedReferenceType))
-            {
+            if (
+                hasNonTrivialParent
+                && (!IsBlittableType(baseType) || baseType.IsZeroSizedReferenceType)
+            ) {
                 return false;
             }
 
@@ -45,19 +48,21 @@ namespace Internal.TypeSystem.Interop
 
                 MarshallerKind marshallerKind = MarshalHelpers.GetMarshallerKind(
                     field.FieldType,
-                    parameterIndex : null,
+                    parameterIndex: null,
                     customModifierData: null,
                     field.GetMarshalAsDescriptor(),
                     isReturn: false,
                     isAnsi: mdType.PInvokeStringFormat == PInvokeStringFormat.AnsiClass,
                     MarshallerType.Field,
-                    elementMarshallerKind: out var _);
+                    elementMarshallerKind: out var _
+                );
 
-                if (marshallerKind != MarshallerKind.Enum
+                if (
+                    marshallerKind != MarshallerKind.Enum
                     && marshallerKind != MarshallerKind.BlittableValue
                     && marshallerKind != MarshallerKind.BlittableStruct
-                    && marshallerKind != MarshallerKind.UnicodeChar)
-                {
+                    && marshallerKind != MarshallerKind.UnicodeChar
+                ) {
                     return false;
                 }
             }

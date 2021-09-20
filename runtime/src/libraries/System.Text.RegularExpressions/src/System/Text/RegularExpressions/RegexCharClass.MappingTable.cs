@@ -35,10 +35,10 @@ namespace System.Text.RegularExpressions
             contained in the union of [a, b] and L([a, b]).
         ***************************************************************************/
 
-        internal const int LowercaseSet = 0;    // Set to arg.
-        internal const int LowercaseAdd = 1;    // Add arg.
-        internal const int LowercaseBor = 2;    // Bitwise or with 1.
-        internal const int LowercaseBad = 3;    // Bitwise and with 1 and add original.
+        internal const int LowercaseSet = 0; // Set to arg.
+        internal const int LowercaseAdd = 1; // Add arg.
+        internal const int LowercaseBor = 2; // Bitwise or with 1.
+        internal const int LowercaseBad = 3; // Bitwise and with 1 and add original.
 
         internal static readonly LowerCaseMapping[] s_lcTable = new LowerCaseMapping[]
         {

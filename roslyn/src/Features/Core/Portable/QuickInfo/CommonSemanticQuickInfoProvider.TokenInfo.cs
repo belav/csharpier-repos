@@ -23,8 +23,11 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             /// </summary>
             public readonly NullableFlowState NullableFlowState;
 
-            public TokenInformation(ImmutableArray<ISymbol> symbols, bool showAwaitReturn = false, NullableFlowState nullableFlowState = NullableFlowState.None)
-            {
+            public TokenInformation(
+                ImmutableArray<ISymbol> symbols,
+                bool showAwaitReturn = false,
+                NullableFlowState nullableFlowState = NullableFlowState.None
+            ) {
                 Symbols = symbols;
                 ShowAwaitReturn = showAwaitReturn;
                 NullableFlowState = nullableFlowState;

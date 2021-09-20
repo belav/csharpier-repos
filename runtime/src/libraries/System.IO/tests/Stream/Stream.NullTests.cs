@@ -162,7 +162,8 @@ namespace System.IO.Tests
         [MemberData(nameof(NullStream_ReadWriteData))]
         public void TestNullStream_ReadSpan(byte[] buffer, int offset, int count)
         {
-            if (buffer == null) return;
+            if (buffer == null)
+                return;
 
             byte[] copy = buffer.ToArray();
             Stream source = Stream.Null;
@@ -177,7 +178,8 @@ namespace System.IO.Tests
         [MemberData(nameof(NullStream_ReadWriteData))]
         public void TestNullStream_WriteSpan(byte[] buffer, int offset, int count)
         {
-            if (buffer == null) return;
+            if (buffer == null)
+                return;
 
             byte[] copy = buffer.ToArray();
             Stream source = Stream.Null;

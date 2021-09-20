@@ -44,8 +44,8 @@ namespace Microsoft.Cci
             bool deterministic,
             bool emitTestCoverageData,
             bool hasPdbStream,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             var builder = new MetadataBuilder();
             MetadataBuilder? debugBuilderOpt;
             switch (context.Module.DebugInformationFormat)
@@ -63,12 +63,24 @@ namespace Microsoft.Cci
                     break;
             }
 
-            var dynamicAnalysisDataWriterOpt = emitTestCoverageData ?
-                new DynamicAnalysisDataWriter(context.Module.DebugDocumentCount, context.Module.HintNumberOfMethodDefinitions) :
-                null;
+            var dynamicAnalysisDataWriterOpt = emitTestCoverageData
+                ? new DynamicAnalysisDataWriter(
+                      context.Module.DebugDocumentCount,
+                      context.Module.HintNumberOfMethodDefinitions
+                  )
+                : null;
 
-            return new FullMetadataWriter(context, builder, debugBuilderOpt, dynamicAnalysisDataWriterOpt, messageProvider, metadataOnly, deterministic,
-                emitTestCoverageData, cancellationToken);
+            return new FullMetadataWriter(
+                context,
+                builder,
+                debugBuilderOpt,
+                dynamicAnalysisDataWriterOpt,
+                messageProvider,
+                metadataOnly,
+                deterministic,
+                emitTestCoverageData,
+                cancellationToken
+            );
         }
 
         private FullMetadataWriter(
@@ -80,10 +92,18 @@ namespace Microsoft.Cci
             bool metadataOnly,
             bool deterministic,
             bool emitTestCoverageData,
-            CancellationToken cancellationToken)
-            : base(builder, debugBuilderOpt, dynamicAnalysisDataWriterOpt, context, messageProvider, metadataOnly, deterministic,
-                  emitTestCoverageData, cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) : base(
+            builder,
+            debugBuilderOpt,
+            dynamicAnalysisDataWriterOpt,
+            context,
+            messageProvider,
+            metadataOnly,
+            deterministic,
+            emitTestCoverageData,
+            cancellationToken
+        ) {
             // EDMAURER make some intelligent guesses for the initial sizes of these things.
             int numMethods = this.module.HintNumberOfMethodDefinitions;
             int numTypeDefsGuess = numMethods / 6;
@@ -98,16 +118,35 @@ namespace Microsoft.Cci
             _parameterDefs = new DefinitionIndex<IParameterDefinition>(numMethods);
             _genericParameters = new DefinitionIndex<IGenericParameter>(0);
 
-            _fieldDefIndex = new Dictionary<ITypeDefinition, int>(numTypeDefsGuess, ReferenceEqualityComparer.Instance);
-            _methodDefIndex = new Dictionary<ITypeDefinition, int>(numTypeDefsGuess, ReferenceEqualityComparer.Instance);
-            _parameterListIndex = new Dictionary<IMethodDefinition, int>(numMethods, ReferenceEqualityComparer.Instance);
+            _fieldDefIndex = new Dictionary<ITypeDefinition, int>(
+                numTypeDefsGuess,
+                ReferenceEqualityComparer.Instance
+            );
+            _methodDefIndex = new Dictionary<ITypeDefinition, int>(
+                numTypeDefsGuess,
+                ReferenceEqualityComparer.Instance
+            );
+            _parameterListIndex = new Dictionary<IMethodDefinition, int>(
+                numMethods,
+                ReferenceEqualityComparer.Instance
+            );
 
             _assemblyRefIndex = new HeapOrReferenceIndex<AssemblyIdentity>(this);
             _moduleRefIndex = new HeapOrReferenceIndex<string>(this);
-            _memberRefIndex = new InstanceAndStructuralReferenceIndex<ITypeMemberReference>(this, new MemberRefComparer(this));
-            _methodSpecIndex = new InstanceAndStructuralReferenceIndex<IGenericMethodInstanceReference>(this, new MethodSpecComparer(this));
+            _memberRefIndex = new InstanceAndStructuralReferenceIndex<ITypeMemberReference>(
+                this,
+                new MemberRefComparer(this)
+            );
+            _methodSpecIndex =
+                new InstanceAndStructuralReferenceIndex<IGenericMethodInstanceReference>(
+                    this,
+                    new MethodSpecComparer(this)
+                );
             _typeRefIndex = new TypeReferenceIndex(this);
-            _typeSpecIndex = new InstanceAndStructuralReferenceIndex<ITypeReference>(this, new TypeSpecComparer(this));
+            _typeSpecIndex = new InstanceAndStructuralReferenceIndex<ITypeReference>(
+                this,
+                new TypeSpecComparer(this)
+            );
             _standAloneSignatureIndex = new HeapOrReferenceIndex<BlobHandle>(this);
         }
 
@@ -126,8 +165,10 @@ namespace Microsoft.Cci
             get { return Guid.Empty; }
         }
 
-        protected override bool TryGetTypeDefinitionHandle(ITypeDefinition def, out TypeDefinitionHandle handle)
-        {
+        protected override bool TryGetTypeDefinitionHandle(
+            ITypeDefinition def,
+            out TypeDefinitionHandle handle
+        ) {
             int index;
             bool result = _typeDefs.TryGetValue(def, out index);
             handle = MetadataTokens.TypeDefinitionHandle(index);
@@ -169,8 +210,10 @@ namespace Microsoft.Cci
             return _fieldDefs.Rows;
         }
 
-        protected override bool TryGetMethodDefinitionHandle(IMethodDefinition def, out MethodDefinitionHandle handle)
-        {
+        protected override bool TryGetMethodDefinitionHandle(
+            IMethodDefinition def,
+            out MethodDefinitionHandle handle
+        ) {
             int index;
             bool result = _methodDefs.TryGetValue(def, out index);
             handle = MetadataTokens.MethodDefinitionHandle(index);
@@ -217,13 +260,15 @@ namespace Microsoft.Cci
             return _genericParameters.Rows;
         }
 
-        protected override FieldDefinitionHandle GetFirstFieldDefinitionHandle(INamedTypeDefinition typeDef)
-        {
+        protected override FieldDefinitionHandle GetFirstFieldDefinitionHandle(
+            INamedTypeDefinition typeDef
+        ) {
             return MetadataTokens.FieldDefinitionHandle(_fieldDefIndex[typeDef]);
         }
 
-        protected override MethodDefinitionHandle GetFirstMethodDefinitionHandle(INamedTypeDefinition typeDef)
-        {
+        protected override MethodDefinitionHandle GetFirstMethodDefinitionHandle(
+            INamedTypeDefinition typeDef
+        ) {
             return MetadataTokens.MethodDefinitionHandle(_methodDefIndex[typeDef]);
         }
 
@@ -232,9 +277,12 @@ namespace Microsoft.Cci
             return MetadataTokens.ParameterHandle(_parameterListIndex[methodDef]);
         }
 
-        protected override AssemblyReferenceHandle GetOrAddAssemblyReferenceHandle(IAssemblyReference reference)
-        {
-            return MetadataTokens.AssemblyReferenceHandle(_assemblyRefIndex.GetOrAdd(reference.Identity));
+        protected override AssemblyReferenceHandle GetOrAddAssemblyReferenceHandle(
+            IAssemblyReference reference
+        ) {
+            return MetadataTokens.AssemblyReferenceHandle(
+                _assemblyRefIndex.GetOrAdd(reference.Identity)
+            );
         }
 
         protected override IReadOnlyList<AssemblyIdentity> GetAssemblyRefs()
@@ -252,8 +300,9 @@ namespace Microsoft.Cci
             return _moduleRefIndex.Rows;
         }
 
-        protected override MemberReferenceHandle GetOrAddMemberReferenceHandle(ITypeMemberReference reference)
-        {
+        protected override MemberReferenceHandle GetOrAddMemberReferenceHandle(
+            ITypeMemberReference reference
+        ) {
             return MetadataTokens.MemberReferenceHandle(_memberRefIndex.GetOrAdd(reference));
         }
 
@@ -262,8 +311,9 @@ namespace Microsoft.Cci
             return _memberRefIndex.Rows;
         }
 
-        protected override MethodSpecificationHandle GetOrAddMethodSpecificationHandle(IGenericMethodInstanceReference reference)
-        {
+        protected override MethodSpecificationHandle GetOrAddMethodSpecificationHandle(
+            IGenericMethodInstanceReference reference
+        ) {
             return MetadataTokens.MethodSpecificationHandle(_methodSpecIndex.GetOrAdd(reference));
         }
 
@@ -274,8 +324,10 @@ namespace Microsoft.Cci
 
         protected override int GreatestMethodDefIndex => _methodDefs.NextRowId;
 
-        protected override bool TryGetTypeReferenceHandle(ITypeReference reference, out TypeReferenceHandle handle)
-        {
+        protected override bool TryGetTypeReferenceHandle(
+            ITypeReference reference,
+            out TypeReferenceHandle handle
+        ) {
             int index;
             bool result = _typeRefIndex.TryGetValue(reference, out index);
             handle = MetadataTokens.TypeReferenceHandle(index);
@@ -292,8 +344,9 @@ namespace Microsoft.Cci
             return _typeRefIndex.Rows;
         }
 
-        protected override TypeSpecificationHandle GetOrAddTypeSpecificationHandle(ITypeReference reference)
-        {
+        protected override TypeSpecificationHandle GetOrAddTypeSpecificationHandle(
+            ITypeReference reference
+        ) {
             return MetadataTokens.TypeSpecificationHandle(_typeSpecIndex.GetOrAdd(reference));
         }
 
@@ -302,9 +355,12 @@ namespace Microsoft.Cci
             return _typeSpecIndex.Rows;
         }
 
-        protected override StandaloneSignatureHandle GetOrAddStandaloneSignatureHandle(BlobHandle blobIndex)
-        {
-            return MetadataTokens.StandaloneSignatureHandle(_standAloneSignatureIndex.GetOrAdd(blobIndex));
+        protected override StandaloneSignatureHandle GetOrAddStandaloneSignatureHandle(
+            BlobHandle blobIndex
+        ) {
+            return MetadataTokens.StandaloneSignatureHandle(
+                _standAloneSignatureIndex.GetOrAdd(blobIndex)
+            );
         }
 
         protected override IReadOnlyList<BlobHandle> GetStandaloneSignatureBlobHandles()
@@ -324,19 +380,12 @@ namespace Microsoft.Cci
 
         private sealed class FullReferenceIndexer : ReferenceIndexer
         {
-            internal FullReferenceIndexer(MetadataWriter metadataWriter)
-                : base(metadataWriter)
-            {
-            }
+            internal FullReferenceIndexer(MetadataWriter metadataWriter) : base(metadataWriter) { }
         }
 
-        protected override void PopulateEncLogTableRows(ImmutableArray<int> rowCounts)
-        {
-        }
+        protected override void PopulateEncLogTableRows(ImmutableArray<int> rowCounts) { }
 
-        protected override void PopulateEncMapTableRows(ImmutableArray<int> rowCounts)
-        {
-        }
+        protected override void PopulateEncMapTableRows(ImmutableArray<int> rowCounts) { }
 
         protected override void PopulateEventMapTableRows()
         {
@@ -352,7 +401,8 @@ namespace Microsoft.Cci
 
                 metadata.AddEventMap(
                     declaringType: GetTypeDefinitionHandle(lastParent),
-                    eventList: GetEventDefinitionHandle(eventDef));
+                    eventList: GetEventDefinitionHandle(eventDef)
+                );
             }
         }
 
@@ -370,7 +420,8 @@ namespace Microsoft.Cci
 
                 metadata.AddPropertyMap(
                     declaringType: GetTypeDefinitionHandle(lastParent),
-                    propertyList: GetPropertyDefIndex(propertyDef));
+                    propertyList: GetPropertyDefIndex(propertyDef)
+                );
             }
         }
 
@@ -378,7 +429,9 @@ namespace Microsoft.Cci
         {
             _typeDefs.Add(typeDef);
 
-            IEnumerable<IGenericTypeParameter> typeParameters = this.GetConsolidatedTypeParameters(typeDef);
+            IEnumerable<IGenericTypeParameter> typeParameters = this.GetConsolidatedTypeParameters(
+                typeDef
+            );
             if (typeParameters != null)
             {
                 foreach (IGenericTypeParameter genericParameter in typeParameters)
@@ -387,8 +440,11 @@ namespace Microsoft.Cci
                 }
             }
 
-            foreach (MethodImplementation methodImplementation in typeDef.GetExplicitImplementationOverrides(Context))
-            {
+            foreach (
+                MethodImplementation methodImplementation in typeDef.GetExplicitImplementationOverrides(
+                    Context
+                )
+            ) {
                 this.methodImplList.Add(methodImplementation);
             }
 

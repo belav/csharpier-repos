@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Routing
 {
     internal sealed class EndpointRoutingMiddleware
     {
-        private const string DiagnosticsEndpointMatchedKey = "Microsoft.AspNetCore.Routing.EndpointMatched";
+        private const string DiagnosticsEndpointMatchedKey =
+            "Microsoft.AspNetCore.Routing.EndpointMatched";
 
         private readonly MatcherFactory _matcherFactory;
         private readonly ILogger _logger;
@@ -29,16 +30,18 @@ namespace Microsoft.AspNetCore.Routing
             ILogger<EndpointRoutingMiddleware> logger,
             IEndpointRouteBuilder endpointRouteBuilder,
             DiagnosticListener diagnosticListener,
-            RequestDelegate next)
-        {
+            RequestDelegate next
+        ) {
             if (endpointRouteBuilder == null)
             {
                 throw new ArgumentNullException(nameof(endpointRouteBuilder));
             }
 
-            _matcherFactory = matcherFactory ?? throw new ArgumentNullException(nameof(matcherFactory));
+            _matcherFactory =
+                matcherFactory ?? throw new ArgumentNullException(nameof(matcherFactory));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _diagnosticListener = diagnosticListener ?? throw new ArgumentNullException(nameof(diagnosticListener));
+            _diagnosticListener =
+                diagnosticListener ?? throw new ArgumentNullException(nameof(diagnosticListener));
             _next = next ?? throw new ArgumentNullException(nameof(next));
 
             _endpointDataSource = new CompositeEndpointDataSource(endpointRouteBuilder.DataSources);
@@ -71,19 +74,24 @@ namespace Microsoft.AspNetCore.Routing
             return SetRoutingAndContinue(httpContext);
 
             // Awaited fallbacks for when the Tasks do not synchronously complete
-            static async Task AwaitMatcher(EndpointRoutingMiddleware middleware, HttpContext httpContext, Task<Matcher> matcherTask)
-            {
+            static async Task AwaitMatcher(
+                EndpointRoutingMiddleware middleware,
+                HttpContext httpContext,
+                Task<Matcher> matcherTask
+            ) {
                 var matcher = await matcherTask;
                 await matcher.MatchAsync(httpContext);
                 await middleware.SetRoutingAndContinue(httpContext);
             }
 
-            static async Task AwaitMatch(EndpointRoutingMiddleware middleware, HttpContext httpContext, Task matchTask)
-            {
+            static async Task AwaitMatch(
+                EndpointRoutingMiddleware middleware,
+                HttpContext httpContext,
+                Task matchTask
+            ) {
                 await matchTask;
                 await middleware.SetRoutingAndContinue(httpContext);
             }
-
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -98,8 +106,10 @@ namespace Microsoft.AspNetCore.Routing
             else
             {
                 // Raise an event if the route matched
-                if (_diagnosticListener.IsEnabled() && _diagnosticListener.IsEnabled(DiagnosticsEndpointMatchedKey))
-                {
+                if (
+                    _diagnosticListener.IsEnabled()
+                    && _diagnosticListener.IsEnabled(DiagnosticsEndpointMatchedKey)
+                ) {
                     // We're just going to send the HttpContext since it has all of the relevant information
                     _diagnosticListener.Write(DiagnosticsEndpointMatchedKey, httpContext);
                 }
@@ -129,8 +139,14 @@ namespace Microsoft.AspNetCore.Routing
 
         private Task<Matcher> InitializeCoreAsync()
         {
-            var initialization = new TaskCompletionSource<Matcher>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var initializationTask = Interlocked.CompareExchange(ref _initializationTask, initialization.Task, null);
+            var initialization = new TaskCompletionSource<Matcher>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var initializationTask = Interlocked.CompareExchange(
+                ref _initializationTask,
+                initialization.Task,
+                null
+            );
             if (initializationTask != null)
             {
                 // This thread lost the race, join the existing task.
@@ -168,20 +184,25 @@ namespace Microsoft.AspNetCore.Routing
 #nullable disable
         private static class Log
         {
-            private static readonly Action<ILogger, string, Exception> _matchSuccess = LoggerMessage.Define<string>(
-                LogLevel.Debug,
-                new EventId(1, "MatchSuccess"),
-                "Request matched endpoint '{EndpointName}'");
+            private static readonly Action<ILogger, string, Exception> _matchSuccess =
+                LoggerMessage.Define<string>(
+                    LogLevel.Debug,
+                    new EventId(1, "MatchSuccess"),
+                    "Request matched endpoint '{EndpointName}'"
+                );
 
             private static readonly Action<ILogger, Exception> _matchFailure = LoggerMessage.Define(
                 LogLevel.Debug,
                 new EventId(2, "MatchFailure"),
-                "Request did not match any endpoints");
+                "Request did not match any endpoints"
+            );
 
-            private static readonly Action<ILogger, string, Exception> _matchingSkipped = LoggerMessage.Define<string>(
-                LogLevel.Debug,
-                new EventId(3, "MatchingSkipped"),
-                "Endpoint '{EndpointName}' already set, skipping route matching.");
+            private static readonly Action<ILogger, string, Exception> _matchingSkipped =
+                LoggerMessage.Define<string>(
+                    LogLevel.Debug,
+                    new EventId(3, "MatchingSkipped"),
+                    "Endpoint '{EndpointName}' already set, skipping route matching."
+                );
 
             public static void MatchSuccess(ILogger logger, Endpoint endpoint)
             {

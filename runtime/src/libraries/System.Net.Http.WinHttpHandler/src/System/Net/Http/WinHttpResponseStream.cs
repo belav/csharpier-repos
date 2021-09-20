@@ -20,8 +20,11 @@ namespace System.Net.Http
         private SafeWinHttpHandle _requestHandle;
         private bool _readTrailingHeaders;
 
-        internal WinHttpResponseStream(SafeWinHttpHandle requestHandle, WinHttpRequestState state, HttpResponseMessage responseMessage)
-        {
+        internal WinHttpResponseStream(
+            SafeWinHttpHandle requestHandle,
+            WinHttpRequestState state,
+            HttpResponseMessage responseMessage
+        ) {
             _state = state;
             _responseMessage = responseMessage;
             _requestHandle = requestHandle;
@@ -29,26 +32,17 @@ namespace System.Net.Http
 
         public override bool CanRead
         {
-            get
-            {
-                return !_disposed;
-            }
+            get { return !_disposed; }
         }
 
         public override bool CanSeek
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool CanWrite
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override long Length
@@ -67,7 +61,6 @@ namespace System.Net.Http
                 CheckDisposed();
                 throw new NotSupportedException();
             }
-
             set
             {
                 CheckDisposed();
@@ -82,13 +75,16 @@ namespace System.Net.Http
 
         public override Task FlushAsync(CancellationToken cancellationToken)
         {
-            return cancellationToken.IsCancellationRequested ?
-                Task.FromCanceled(cancellationToken) :
-                Task.CompletedTask;
+            return cancellationToken.IsCancellationRequested
+              ? Task.FromCanceled(cancellationToken)
+              : Task.CompletedTask;
         }
 
-        public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
-        {
+        public override Task CopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        ) {
             // Validate arguments as would base CopyToAsync
             StreamHelpers.ValidateCopyToArgs(this, destination, bufferSize);
 
@@ -105,13 +101,23 @@ namespace System.Net.Http
             }
 
             // Check out a buffer and start the copy
-            return CopyToAsyncCore(destination, ArrayPool<byte>.Shared.Rent(bufferSize), cancellationToken);
+            return CopyToAsyncCore(
+                destination,
+                ArrayPool<byte>.Shared.Rent(bufferSize),
+                cancellationToken
+            );
         }
 
-        private async Task CopyToAsyncCore(Stream destination, byte[] buffer, CancellationToken cancellationToken)
-        {
+        private async Task CopyToAsyncCore(
+            Stream destination,
+            byte[] buffer,
+            CancellationToken cancellationToken
+        ) {
             _state.PinReceiveBuffer(buffer);
-            CancellationTokenRegistration ctr = cancellationToken.Register(s => ((WinHttpResponseStream)s).CancelPendingResponseStreamReadOperation(), this);
+            CancellationTokenRegistration ctr = cancellationToken.Register(
+                s => ((WinHttpResponseStream)s).CancelPendingResponseStreamReadOperation(),
+                this
+            );
             _state.AsyncReadInProgress = true;
             try
             {
@@ -123,7 +129,12 @@ namespace System.Net.Http
                     {
                         if (!Interop.WinHttp.WinHttpQueryDataAvailable(_requestHandle, IntPtr.Zero))
                         {
-                            throw new IOException(SR.net_http_io_read, WinHttpException.CreateExceptionUsingLastError(nameof(Interop.WinHttp.WinHttpQueryDataAvailable)));
+                            throw new IOException(
+                                SR.net_http_io_read,
+                                WinHttpException.CreateExceptionUsingLastError(
+                                    nameof(Interop.WinHttp.WinHttpQueryDataAvailable)
+                                )
+                            );
                         }
                     }
                     int bytesAvailable = await _state.LifecycleAwaitable;
@@ -138,9 +149,20 @@ namespace System.Net.Http
                     cancellationToken.ThrowIfCancellationRequested();
                     lock (_state.Lock)
                     {
-                        if (!Interop.WinHttp.WinHttpReadData(_requestHandle, Marshal.UnsafeAddrOfPinnedArrayElement(buffer, 0), (uint)Math.Min(bytesAvailable, buffer.Length), IntPtr.Zero))
-                        {
-                            throw new IOException(SR.net_http_io_read, WinHttpException.CreateExceptionUsingLastError(nameof(Interop.WinHttp.WinHttpReadData)));
+                        if (
+                            !Interop.WinHttp.WinHttpReadData(
+                                _requestHandle,
+                                Marshal.UnsafeAddrOfPinnedArrayElement(buffer, 0),
+                                (uint)Math.Min(bytesAvailable, buffer.Length),
+                                IntPtr.Zero
+                            )
+                        ) {
+                            throw new IOException(
+                                SR.net_http_io_read,
+                                WinHttpException.CreateExceptionUsingLastError(
+                                    nameof(Interop.WinHttp.WinHttpReadData)
+                                )
+                            );
                         }
                     }
                     int bytesRead = await _state.LifecycleAwaitable;
@@ -153,25 +175,31 @@ namespace System.Net.Http
 
                     // Write that data out to the output stream
 #if NETSTANDARD2_1
-                    await destination.WriteAsync(buffer.AsMemory(0, bytesRead), cancellationToken).ConfigureAwait(false);
+                    await destination.WriteAsync(buffer.AsMemory(0, bytesRead), cancellationToken)
+                        .ConfigureAwait(false);
 #else
-                    await destination.WriteAsync(buffer, 0, bytesRead, cancellationToken).ConfigureAwait(false);
+                    await destination.WriteAsync(buffer, 0, bytesRead, cancellationToken)
+                        .ConfigureAwait(false);
 #endif
                 }
             }
+
             finally
             {
                 _state.AsyncReadInProgress = false;
                 ctr.Dispose();
                 ArrayPool<byte>.Shared.Return(buffer);
             }
-
             // Leaving buffer pinned as it is in ReadAsync.  It'll get unpinned when another read
             // request is made with a different buffer or when the state is cleared.
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken token)
-        {
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken token
+        ) {
             if (buffer == null)
             {
                 throw new ArgumentNullException(nameof(buffer));
@@ -207,21 +235,37 @@ namespace System.Net.Http
             return ReadAsyncCore(buffer, offset, count, token);
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state) =>
-            TaskToApm.Begin(ReadAsync(buffer, offset, count, CancellationToken.None), callback, state);
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) =>
+            TaskToApm.Begin(
+                ReadAsync(buffer, offset, count, CancellationToken.None),
+                callback,
+                state
+            );
 
-        public override int EndRead(IAsyncResult asyncResult) =>
-            TaskToApm.End<int>(asyncResult);
+        public override int EndRead(IAsyncResult asyncResult) => TaskToApm.End<int>(asyncResult);
 
-        private async Task<int> ReadAsyncCore(byte[] buffer, int offset, int count, CancellationToken token)
-        {
+        private async Task<int> ReadAsyncCore(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken token
+        ) {
             if (count == 0)
             {
                 return 0;
             }
 
             _state.PinReceiveBuffer(buffer);
-            var ctr = token.Register(s => ((WinHttpResponseStream)s).CancelPendingResponseStreamReadOperation(), this);
+            var ctr = token.Register(
+                s => ((WinHttpResponseStream)s).CancelPendingResponseStreamReadOperation(),
+                this
+            );
             _state.AsyncReadInProgress = true;
             try
             {
@@ -230,7 +274,12 @@ namespace System.Net.Http
                     Debug.Assert(!_requestHandle.IsInvalid);
                     if (!Interop.WinHttp.WinHttpQueryDataAvailable(_requestHandle, IntPtr.Zero))
                     {
-                        throw new IOException(SR.net_http_io_read, WinHttpException.CreateExceptionUsingLastError(nameof(Interop.WinHttp.WinHttpQueryDataAvailable)));
+                        throw new IOException(
+                            SR.net_http_io_read,
+                            WinHttpException.CreateExceptionUsingLastError(
+                                nameof(Interop.WinHttp.WinHttpQueryDataAvailable)
+                            )
+                        );
                     }
                 }
 
@@ -239,13 +288,20 @@ namespace System.Net.Http
                 lock (_state.Lock)
                 {
                     Debug.Assert(!_requestHandle.IsInvalid);
-                    if (!Interop.WinHttp.WinHttpReadData(
-                        _requestHandle,
-                        Marshal.UnsafeAddrOfPinnedArrayElement(buffer, offset),
-                        (uint)Math.Min(bytesAvailable, count),
-                        IntPtr.Zero))
-                    {
-                        throw new IOException(SR.net_http_io_read, WinHttpException.CreateExceptionUsingLastError(nameof(Interop.WinHttp.WinHttpReadData)));
+                    if (
+                        !Interop.WinHttp.WinHttpReadData(
+                            _requestHandle,
+                            Marshal.UnsafeAddrOfPinnedArrayElement(buffer, offset),
+                            (uint)Math.Min(bytesAvailable, count),
+                            IntPtr.Zero
+                        )
+                    ) {
+                        throw new IOException(
+                            SR.net_http_io_read,
+                            WinHttpException.CreateExceptionUsingLastError(
+                                nameof(Interop.WinHttp.WinHttpReadData)
+                            )
+                        );
                     }
                 }
 
@@ -258,6 +314,7 @@ namespace System.Net.Http
 
                 return bytesRead;
             }
+
             finally
             {
                 _state.AsyncReadInProgress = false;
@@ -271,22 +328,33 @@ namespace System.Net.Http
             // 1. WINHTTP_QUERY_FLAG_TRAILERS is supported by the OS
             // 2. HTTP/2 or later (WINHTTP_QUERY_FLAG_TRAILERS does not work with HTTP/1.1)
             // 3. Response trailers not already loaded
-            if (!WinHttpTrailersHelper.OsSupportsTrailers || _responseMessage.Version < WinHttpHandler.HttpVersion20 || _readTrailingHeaders)
-            {
+            if (
+                !WinHttpTrailersHelper.OsSupportsTrailers
+                || _responseMessage.Version < WinHttpHandler.HttpVersion20
+                || _readTrailingHeaders
+            ) {
                 return;
             }
 
             _readTrailingHeaders = true;
 
-            var bufferLength = WinHttpResponseParser.GetResponseHeaderCharBufferLength(_requestHandle, isTrailingHeaders: true);
+            var bufferLength = WinHttpResponseParser.GetResponseHeaderCharBufferLength(
+                _requestHandle,
+                isTrailingHeaders: true
+            );
 
             if (bufferLength != 0)
             {
                 char[] trailersBuffer = ArrayPool<char>.Shared.Rent(bufferLength);
                 try
                 {
-                    WinHttpResponseParser.ParseResponseTrailers(_requestHandle, _responseMessage, trailersBuffer);
+                    WinHttpResponseParser.ParseResponseTrailers(
+                        _requestHandle,
+                        _responseMessage,
+                        trailersBuffer
+                    );
                 }
+
                 finally
                 {
                     ArrayPool<char>.Shared.Return(trailersBuffer);
@@ -296,7 +364,9 @@ namespace System.Net.Http
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-            return ReadAsync(buffer, offset, count, CancellationToken.None).GetAwaiter().GetResult();
+            return ReadAsync(buffer, offset, count, CancellationToken.None)
+                .GetAwaiter()
+                .GetResult();
         }
 
         public override long Seek(long offset, SeekOrigin origin)
@@ -357,9 +427,11 @@ namespace System.Net.Http
             {
                 if (_state.AsyncReadInProgress)
                 {
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info("before dispose");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info("before dispose");
                     _requestHandle?.Dispose(); // null check necessary to handle race condition between stream disposal and cancellation
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info("after dispose");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info("after dispose");
                 }
             }
         }

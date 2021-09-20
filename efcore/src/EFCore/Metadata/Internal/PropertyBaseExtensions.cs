@@ -22,8 +22,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static int GetShadowIndex(this IPropertyBase propertyBase)
-            => ((IRuntimePropertyBase)propertyBase).GetShadowIndex();
+        public static int GetShadowIndex(this IPropertyBase propertyBase) =>
+            ((IRuntimePropertyBase)propertyBase).GetShadowIndex();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -31,8 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static int GetStoreGeneratedIndex(this IPropertyBase propertyBase)
-            => ((IRuntimePropertyBase)propertyBase).GetStoreGeneratedIndex();
+        public static int GetStoreGeneratedIndex(this IPropertyBase propertyBase) =>
+            ((IRuntimePropertyBase)propertyBase).GetStoreGeneratedIndex();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -40,8 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static int GetRelationshipIndex(this IPropertyBase propertyBase)
-            => ((IRuntimePropertyBase)propertyBase).GetRelationshipIndex();
+        public static int GetRelationshipIndex(this IPropertyBase propertyBase) =>
+            ((IRuntimePropertyBase)propertyBase).GetRelationshipIndex();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -49,8 +49,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static int GetOriginalValueIndex(this IPropertyBase propertyBase)
-            => ((IRuntimePropertyBase)propertyBase).GetOriginalValueIndex();
+        public static int GetOriginalValueIndex(this IPropertyBase propertyBase) =>
+            ((IRuntimePropertyBase)propertyBase).GetOriginalValueIndex();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -58,8 +58,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static PropertyIndexes GetPropertyIndexes(this IPropertyBase propertyBase)
-            => ((IRuntimePropertyBase)propertyBase).PropertyIndexes;
+        public static PropertyIndexes GetPropertyIndexes(this IPropertyBase propertyBase) =>
+            ((IRuntimePropertyBase)propertyBase).PropertyIndexes;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -67,8 +67,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static PropertyAccessors GetPropertyAccessors(this IPropertyBase propertyBase)
-            => ((IRuntimePropertyBase)propertyBase).Accessors;
+        public static PropertyAccessors GetPropertyAccessors(this IPropertyBase propertyBase) =>
+            ((IRuntimePropertyBase)propertyBase).Accessors;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -76,8 +76,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static bool IsShadowProperty(this PropertyBase propertyBase)
-            => ((IReadOnlyPropertyBase)propertyBase).IsShadowProperty();
+        public static bool IsShadowProperty(this PropertyBase propertyBase) =>
+            ((IReadOnlyPropertyBase)propertyBase).IsShadowProperty();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -85,8 +85,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public static bool IsIndexerProperty(this PropertyBase propertyBase)
-            => ((IReadOnlyPropertyBase)propertyBase).IsIndexerProperty();
+        public static bool IsIndexerProperty(this PropertyBase propertyBase) =>
+            ((IReadOnlyPropertyBase)propertyBase).IsIndexerProperty();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -97,8 +97,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         // Note: only use this to find the property/field that defines the property in the model. Use
         // GetMemberInfo to get the property/field to use, which may be different.
         public static MemberInfo? GetIdentifyingMemberInfo(
-            this IReadOnlyPropertyBase propertyBase)
-            => propertyBase.PropertyInfo ?? (MemberInfo?)propertyBase.FieldInfo;
+            this IReadOnlyPropertyBase propertyBase
+        ) => propertyBase.PropertyInfo ?? (MemberInfo?)propertyBase.FieldInfo;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -111,8 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             bool forConstruction,
             bool forSet,
             out MemberInfo? memberInfo,
-            out string? errorMessage)
-        {
+            out string? errorMessage
+        ) {
             memberInfo = null;
             errorMessage = null;
 
@@ -130,9 +130,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             if (forConstruction)
             {
-                if (mode == PropertyAccessMode.Field
-                    || mode == PropertyAccessMode.FieldDuringConstruction)
-                {
+                if (
+                    mode == PropertyAccessMode.Field
+                    || mode == PropertyAccessMode.FieldDuringConstruction
+                ) {
                     if (hasField)
                     {
                         memberInfo = fieldInfo;
@@ -162,15 +163,24 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     }
 
                     errorMessage = hasGetter
-                        ? CoreStrings.NoSetter(propertyBase.Name, propertyBase.DeclaringType.DisplayName(), nameof(PropertyAccessMode))
-                        : CoreStrings.NoProperty(fieldInfo?.Name, propertyBase.DeclaringType.DisplayName(), nameof(PropertyAccessMode));
+                        ? CoreStrings.NoSetter(
+                              propertyBase.Name,
+                              propertyBase.DeclaringType.DisplayName(),
+                              nameof(PropertyAccessMode)
+                          )
+                        : CoreStrings.NoProperty(
+                              fieldInfo?.Name,
+                              propertyBase.DeclaringType.DisplayName(),
+                              nameof(PropertyAccessMode)
+                          );
 
                     return false;
                 }
 
-                if (mode == PropertyAccessMode.PreferField
-                    || mode == PropertyAccessMode.PreferFieldDuringConstruction)
-                {
+                if (
+                    mode == PropertyAccessMode.PreferField
+                    || mode == PropertyAccessMode.PreferFieldDuringConstruction
+                ) {
                     if (hasField)
                     {
                         memberInfo = fieldInfo;
@@ -204,7 +214,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     return true;
                 }
 
-                errorMessage = CoreStrings.NoFieldOrSetter(propertyBase.Name, propertyBase.DeclaringType.DisplayName());
+                errorMessage = CoreStrings.NoFieldOrSetter(
+                    propertyBase.Name,
+                    propertyBase.DeclaringType.DisplayName()
+                );
                 return false;
             }
 
@@ -241,8 +254,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     }
 
                     errorMessage = hasGetter
-                        ? CoreStrings.NoSetter(propertyBase.Name, propertyBase.DeclaringType.DisplayName(), nameof(PropertyAccessMode))
-                        : CoreStrings.NoProperty(fieldInfo?.Name, propertyBase.DeclaringType.DisplayName(), nameof(PropertyAccessMode));
+                        ? CoreStrings.NoSetter(
+                              propertyBase.Name,
+                              propertyBase.DeclaringType.DisplayName(),
+                              nameof(PropertyAccessMode)
+                          )
+                        : CoreStrings.NoProperty(
+                              fieldInfo?.Name,
+                              propertyBase.DeclaringType.DisplayName(),
+                              nameof(PropertyAccessMode)
+                          );
 
                     return false;
                 }
@@ -262,10 +283,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     }
                 }
 
-                if (mode == PropertyAccessMode.PreferProperty
+                if (
+                    mode == PropertyAccessMode.PreferProperty
                     || mode == PropertyAccessMode.FieldDuringConstruction
-                    || mode == PropertyAccessMode.PreferFieldDuringConstruction)
-                {
+                    || mode == PropertyAccessMode.PreferFieldDuringConstruction
+                ) {
                     if (hasSetter)
                     {
                         memberInfo = setterProperty;
@@ -284,7 +306,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     return true;
                 }
 
-                errorMessage = CoreStrings.NoFieldOrSetter(propertyBase.Name, propertyBase.DeclaringType.DisplayName());
+                errorMessage = CoreStrings.NoFieldOrSetter(
+                    propertyBase.Name,
+                    propertyBase.DeclaringType.DisplayName()
+                );
                 return false;
             }
 
@@ -310,8 +335,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
 
                 errorMessage = hasSetter
-                    ? CoreStrings.NoGetter(propertyBase.Name, propertyBase.DeclaringType.DisplayName(), nameof(PropertyAccessMode))
-                    : CoreStrings.NoProperty(fieldInfo?.Name, propertyBase.DeclaringType.DisplayName(), nameof(PropertyAccessMode));
+                    ? CoreStrings.NoGetter(
+                          propertyBase.Name,
+                          propertyBase.DeclaringType.DisplayName(),
+                          nameof(PropertyAccessMode)
+                      )
+                    : CoreStrings.NoProperty(
+                          fieldInfo?.Name,
+                          propertyBase.DeclaringType.DisplayName(),
+                          nameof(PropertyAccessMode)
+                      );
 
                 return false;
             }
@@ -331,10 +364,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
             }
 
-            if (mode == PropertyAccessMode.PreferProperty
+            if (
+                mode == PropertyAccessMode.PreferProperty
                 || mode == PropertyAccessMode.FieldDuringConstruction
-                || mode == PropertyAccessMode.PreferFieldDuringConstruction)
-            {
+                || mode == PropertyAccessMode.PreferFieldDuringConstruction
+            ) {
                 if (hasGetter)
                 {
                     memberInfo = getterProperty;
@@ -348,21 +382,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 }
             }
 
-            errorMessage = CoreStrings.NoFieldOrGetter(propertyBase.Name, propertyBase.DeclaringType.DisplayName());
+            errorMessage = CoreStrings.NoFieldOrGetter(
+                propertyBase.Name,
+                propertyBase.DeclaringType.DisplayName()
+            );
             return false;
         }
 
         private static string GetNoFieldErrorMessage(IPropertyBase propertyBase)
         {
             var constructorBinding = ((EntityType)propertyBase.DeclaringType).ConstructorBinding;
-            return constructorBinding?.ParameterBindings
-                    .OfType<ServiceParameterBinding>()
-                    .Any(b => b.ServiceType == typeof(ILazyLoader))
-                == true
-                    ? CoreStrings.NoBackingFieldLazyLoading(
-                        propertyBase.Name, propertyBase.DeclaringType.DisplayName())
-                    : CoreStrings.NoBackingField(
-                        propertyBase.Name, propertyBase.DeclaringType.DisplayName(), nameof(PropertyAccessMode));
+            return
+                constructorBinding?.ParameterBindings.OfType<ServiceParameterBinding>()
+                    .Any(b => b.ServiceType == typeof(ILazyLoader)) == true
+              ? CoreStrings.NoBackingFieldLazyLoading(
+                    propertyBase.Name,
+                    propertyBase.DeclaringType.DisplayName()
+                )
+              : CoreStrings.NoBackingField(
+                    propertyBase.Name,
+                    propertyBase.DeclaringType.DisplayName(),
+                    nameof(PropertyAccessMode)
+                );
         }
     }
 }

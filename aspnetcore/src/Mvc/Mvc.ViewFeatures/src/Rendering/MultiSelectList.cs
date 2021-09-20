@@ -24,8 +24,7 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         /// Initialize a new instance of <see cref="MultiSelectList"/>.
         /// </summary>
         /// <param name="items">The items.</param>
-        public MultiSelectList(IEnumerable items)
-            : this(items, selectedValues: null)
+        public MultiSelectList(IEnumerable items) : this(items, selectedValues: null)
         {
             if (items == null)
             {
@@ -53,8 +52,11 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         /// <param name="items">The items.</param>
         /// <param name="dataValueField">The data value field.</param>
         /// <param name="dataTextField">The data text field.</param>
-        public MultiSelectList(IEnumerable items, string dataValueField, string dataTextField)
-            : this(items, dataValueField, dataTextField, selectedValues: null)
+        public MultiSelectList(
+            IEnumerable items,
+            string dataValueField,
+            string dataTextField
+        ) : this(items, dataValueField, dataTextField, selectedValues: null)
         {
             if (items == null)
             {
@@ -73,8 +75,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             IEnumerable items,
             string dataValueField,
             string dataTextField,
-            IEnumerable selectedValues)
-            : this(items, dataValueField, dataTextField, selectedValues, dataGroupField: null)
+            IEnumerable selectedValues
+        ) : this(items, dataValueField, dataTextField, selectedValues, dataGroupField: null)
         {
             if (items == null)
             {
@@ -100,8 +102,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             string dataValueField,
             string dataTextField,
             IEnumerable selectedValues,
-            string dataGroupField)
-        {
+            string dataGroupField
+        ) {
             if (items == null)
             {
                 throw new ArgumentNullException(nameof(items));
@@ -157,9 +159,9 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
 
         private IList<SelectListItem> GetListItems()
         {
-            return (!string.IsNullOrEmpty(DataValueField)) ?
-                GetListItemsWithValueField() :
-                GetListItemsWithoutValueField();
+            return (!string.IsNullOrEmpty(DataValueField))
+              ? GetListItemsWithValueField()
+              : GetListItemsWithoutValueField();
         }
 
         private IList<SelectListItem> GetListItemsWithValueField()
@@ -268,7 +270,6 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             return GetEnumerator();
         }
-
         #endregion
     }
 }

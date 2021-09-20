@@ -16,13 +16,17 @@ namespace Microsoft.AspNetCore.TestHost
         private readonly ApplicationWrapper _application;
         private readonly bool _preserveExecutionContext;
         private readonly HttpContext _httpContext;
-        
-        private readonly TaskCompletionSource<HttpContext> _responseTcs = new TaskCompletionSource<HttpContext>(TaskCreationOptions.RunContinuationsAsynchronously);
+
+        private readonly TaskCompletionSource<HttpContext> _responseTcs =
+            new TaskCompletionSource<HttpContext>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
         private readonly ResponseBodyReaderStream _responseReaderStream;
         private readonly ResponseBodyPipeWriter _responsePipeWriter;
         private readonly ResponseFeature _responseFeature;
         private readonly RequestLifetimeFeature _requestLifetimeFeature;
-        private readonly ResponseTrailersFeature _responseTrailersFeature = new ResponseTrailersFeature();
+        private readonly ResponseTrailersFeature _responseTrailersFeature =
+            new ResponseTrailersFeature();
         private bool _pipelineFinished;
         private bool _returningResponse;
         private object? _testContext;
@@ -31,8 +35,11 @@ namespace Microsoft.AspNetCore.TestHost
         private Action<HttpContext>? _responseReadCompleteCallback;
         private Task? _sendRequestStreamTask;
 
-        internal HttpContextBuilder(ApplicationWrapper application, bool allowSynchronousIO, bool preserveExecutionContext)
-        {
+        internal HttpContextBuilder(
+            ApplicationWrapper application,
+            bool allowSynchronousIO,
+            bool preserveExecutionContext
+        ) {
             _application = application ?? throw new ArgumentNullException(nameof(application));
             AllowSynchronousIO = allowSynchronousIO;
             _preserveExecutionContext = preserveExecutionContext;
@@ -47,9 +54,19 @@ namespace Microsoft.AspNetCore.TestHost
             _requestPipe = new Pipe();
 
             var responsePipe = new Pipe();
-            _responseReaderStream = new ResponseBodyReaderStream(responsePipe, ClientInitiatedAbort, () => _responseReadCompleteCallback?.Invoke(_httpContext));
-            _responsePipeWriter = new ResponseBodyPipeWriter(responsePipe, ReturnResponseMessageAsync);
-            _responseFeature.Body = new ResponseBodyWriterStream(_responsePipeWriter, () => AllowSynchronousIO);
+            _responseReaderStream = new ResponseBodyReaderStream(
+                responsePipe,
+                ClientInitiatedAbort,
+                () => _responseReadCompleteCallback?.Invoke(_httpContext)
+            );
+            _responsePipeWriter = new ResponseBodyPipeWriter(
+                responsePipe,
+                ReturnResponseMessageAsync
+            );
+            _responseFeature.Body = new ResponseBodyWriterStream(
+                _responsePipeWriter,
+                () => AllowSynchronousIO
+            );
             _responseFeature.BodyWriter = _responsePipeWriter;
 
             _httpContext.Features.Set<IHttpBodyControlFeature>(this);
@@ -81,8 +98,9 @@ namespace Microsoft.AspNetCore.TestHost
             _sendRequestStreamTask = sendRequestStream(_requestPipe.Writer);
         }
 
-        internal void RegisterResponseReadCompleteCallback(Action<HttpContext> responseReadCompleteCallback)
-        {
+        internal void RegisterResponseReadCompleteCallback(
+            Action<HttpContext> responseReadCompleteCallback
+        ) {
             _responseReadCompleteCallback = responseReadCompleteCallback;
         }
 
@@ -128,7 +146,6 @@ namespace Microsoft.AspNetCore.TestHost
                     {
                         // Writer was already completed in send request callback.
                         await _requestPipe.Reader.CompleteAsync();
-
                         // Don't wait for request to drain. It could block indefinitely. In a real server
                         // we would wait for a timeout and then kill the socket.
                         // Potential future improvement: add logging that the request timed out
@@ -154,10 +171,13 @@ namespace Microsoft.AspNetCore.TestHost
             }
             else
             {
-                ThreadPool.UnsafeQueueUserWorkItem(_ =>
-                {
-                    _ = RunRequestAsync();
-                }, null);
+                ThreadPool.UnsafeQueueUserWorkItem(
+                    _ =>
+                    {
+                        _ = RunRequestAsync();
+                    },
+                    null
+                );
             }
 
             return _responseTcs.Task;
@@ -188,7 +208,10 @@ namespace Microsoft.AspNetCore.TestHost
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException("An error occurred when completing the request. Request delegate may have finished while there is a pending read of the request body.", ex);
+                throw new InvalidOperationException(
+                    "An error occurred when completing the request. Request delegate may have finished while there is a pending read of the request body.",
+                    ex
+                );
             }
         }
 
@@ -235,7 +258,9 @@ namespace Microsoft.AspNetCore.TestHost
                     Body = _responseReaderStream
                 };
                 newFeatures.Set<IHttpResponseFeature>(clientResponseFeature);
-                newFeatures.Set<IHttpResponseBodyFeature>(new StreamResponseBodyFeature(_responseReaderStream));
+                newFeatures.Set<IHttpResponseBodyFeature>(
+                    new StreamResponseBodyFeature(_responseReaderStream)
+                );
                 _responseTcs.TrySetResult(new DefaultHttpContext(newFeatures));
             }
         }

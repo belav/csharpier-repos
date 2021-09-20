@@ -36,8 +36,12 @@ namespace System
         //
         // Assumption is the caller will check on the resulting name length
         // Remarks:  MUST NOT be used unless all input indexes are verified and trusted.
-        public static unsafe bool IsValid(char* name, int start, ref int returnedEnd, bool notImplicitFile)
-        {
+        public static unsafe bool IsValid(
+            char* name,
+            int start,
+            ref int returnedEnd,
+            bool notImplicitFile
+        ) {
             int end = returnedEnd;
 
             if (start == end)
@@ -49,8 +53,11 @@ namespace System
             int i = start;
             for (; i < end; ++i)
             {
-                if (name[i] == '/' || name[i] == '\\' || (notImplicitFile && (name[i] == ':' || name[i] == '?' || name[i] == '#')))
-                {
+                if (
+                    name[i] == '/'
+                    || name[i] == '\\'
+                    || (notImplicitFile && (name[i] == ':' || name[i] == '?' || name[i] == '#'))
+                ) {
                     end = i;
                     break;
                 }
@@ -76,8 +83,11 @@ namespace System
 
             for (; i < end; ++i)
             {
-                if (name[i] == '/' || name[i] == '\\' || (notImplicitFile && (name[i] == ':' || name[i] == '?' || name[i] == '#')))
-                {
+                if (
+                    name[i] == '/'
+                    || name[i] == '\\'
+                    || (notImplicitFile && (name[i] == ':' || name[i] == '?' || name[i] == '#'))
+                ) {
                     end = i;
                     break;
                 }

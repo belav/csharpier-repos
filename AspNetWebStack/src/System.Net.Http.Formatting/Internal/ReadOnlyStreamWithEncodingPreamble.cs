@@ -137,14 +137,22 @@ namespace System.Net.Http.Internal
             }
             else
             {
-                _remainingBytes = new ArraySegment<byte>(remainingArray, remainingOffset + result, remainingCount - result);
+                _remainingBytes = new ArraySegment<byte>(
+                    remainingArray,
+                    remainingOffset + result,
+                    remainingCount - result
+                );
             }
 
             return result;
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             if (_remainingBytes.Array == null)
             {
                 return _innerStream.ReadAsync(buffer, offset, count, cancellationToken);

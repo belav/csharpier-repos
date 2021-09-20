@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             var provider = new ControllerFactoryProvider(
                 Mock.Of<IControllerActivatorProvider>(),
                 factory.Object,
-                Enumerable.Empty<IControllerPropertyActivator>());
+                Enumerable.Empty<IControllerPropertyActivator>()
+            );
             var descriptor = new ControllerActionDescriptor
             {
                 ControllerTypeInfo = typeof(object).GetTypeInfo(),
@@ -50,7 +51,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             var provider = new ControllerFactoryProvider(
                 Mock.Of<IControllerActivatorProvider>(),
                 factory.Object,
-                Enumerable.Empty<IControllerPropertyActivator>());
+                Enumerable.Empty<IControllerPropertyActivator>()
+            );
             var descriptor = new ControllerActionDescriptor
             {
                 ControllerTypeInfo = typeof(object).GetTypeInfo(),
@@ -75,7 +77,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             var provider = new ControllerFactoryProvider(
                 Mock.Of<IControllerActivatorProvider>(),
                 factory.Object,
-                Enumerable.Empty<IControllerPropertyActivator>());
+                Enumerable.Empty<IControllerPropertyActivator>()
+            );
             var descriptor = new ControllerActionDescriptor
             {
                 ControllerTypeInfo = typeof(object).GetTypeInfo(),
@@ -98,26 +101,35 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             var expectedController = new TestController();
             var factory = new DefaultControllerFactory(
                 Mock.Of<IControllerActivator>(),
-                Enumerable.Empty<IControllerPropertyActivator>());
+                Enumerable.Empty<IControllerPropertyActivator>()
+            );
             var activatorProvider = new Mock<IControllerActivatorProvider>();
             activatorProvider.Setup(p => p.CreateActivator(It.IsAny<ControllerActionDescriptor>()))
                 .Returns(_ => expectedController)
                 .Verifiable();
 
             var propertyActivator1 = new Mock<IControllerPropertyActivator>();
-            propertyActivator1.Setup(p => p.GetActivatorDelegate(It.IsAny<ControllerActionDescriptor>()))
-                .Returns((context, controllerObject) =>
-                {
-                    ((TestController)controllerObject).ActivatedValue1 = expectedProperty1;
-                })
+            propertyActivator1.Setup(
+                    p => p.GetActivatorDelegate(It.IsAny<ControllerActionDescriptor>())
+                )
+                .Returns(
+                    (context, controllerObject) =>
+                    {
+                        ((TestController)controllerObject).ActivatedValue1 = expectedProperty1;
+                    }
+                )
                 .Verifiable();
 
             var propertyActivator2 = new Mock<IControllerPropertyActivator>();
-            propertyActivator2.Setup(p => p.GetActivatorDelegate(It.IsAny<ControllerActionDescriptor>()))
-                .Returns((context, controllerObject) =>
-                {
-                    ((TestController)controllerObject).ActivatedValue2 = expectedProperty2;
-                })
+            propertyActivator2.Setup(
+                    p => p.GetActivatorDelegate(It.IsAny<ControllerActionDescriptor>())
+                )
+                .Returns(
+                    (context, controllerObject) =>
+                    {
+                        ((TestController)controllerObject).ActivatedValue2 = expectedProperty2;
+                    }
+                )
                 .Verifiable();
 
             var propertyActivators = new[]
@@ -128,7 +140,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             var provider = new ControllerFactoryProvider(
                 activatorProvider.Object,
                 factory,
-                propertyActivators);
+                propertyActivators
+            );
             var descriptor = new ControllerActionDescriptor
             {
                 ControllerTypeInfo = typeof(TestController).GetTypeInfo(),
@@ -155,7 +168,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             var controller = new object();
             var factory = new DefaultControllerFactory(
                 Mock.Of<IControllerActivator>(),
-                Enumerable.Empty<IControllerPropertyActivator>());
+                Enumerable.Empty<IControllerPropertyActivator>()
+            );
             Action<ControllerContext, object> expected = (_, __) => { };
             var activatorProvider = new Mock<IControllerActivatorProvider>();
             activatorProvider.Setup(p => p.CreateReleaser(It.IsAny<ControllerActionDescriptor>()))
@@ -164,7 +178,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             var provider = new ControllerFactoryProvider(
                 activatorProvider.Object,
                 factory,
-                Enumerable.Empty<IControllerPropertyActivator>());
+                Enumerable.Empty<IControllerPropertyActivator>()
+            );
             var descriptor = new ControllerActionDescriptor
             {
                 ControllerTypeInfo = typeof(object).GetTypeInfo(),

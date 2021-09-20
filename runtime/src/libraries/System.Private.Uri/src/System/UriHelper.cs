@@ -11,7 +11,10 @@ namespace System
     internal static class UriHelper
     {
         internal static readonly Encoding s_noFallbackCharUTF8 = Encoding.GetEncoding(
-            Encoding.UTF8.CodePage, new EncoderReplacementFallback(""), new DecoderReplacementFallback(""));
+            Encoding.UTF8.CodePage,
+            new EncoderReplacementFallback(""),
+            new DecoderReplacementFallback("")
+        );
 
         // http://host/Path/Path/File?Query is the base of
         //      - http://host/Path/Path/File/ ...    (those "File" words may be different in semantic but anyway)
@@ -33,9 +36,13 @@ namespace System
         // ASSUMES that strings like http://host/Path/Path/MoreDir/../../  have been canonicalized before going to this method.
         // ASSUMES that back slashes already have been converted if applicable.
         //
-        internal static unsafe bool TestForSubPath(char* selfPtr, int selfLength, char* otherPtr, int otherLength,
-            bool ignoreCase)
-        {
+        internal static unsafe bool TestForSubPath(
+            char* selfPtr,
+            int selfLength,
+            char* otherPtr,
+            int otherLength,
+            bool ignoreCase
+        ) {
             int i = 0;
             char chSelf;
             char chOther;
@@ -112,8 +119,11 @@ namespace System
 
         internal static string EscapeString(
             string stringToEscape, // same name as public API
-            bool checkExistingEscaped, ReadOnlySpan<bool> unreserved, char forceEscape1 = '\0', char forceEscape2 = '\0')
-        {
+            bool checkExistingEscaped,
+            ReadOnlySpan<bool> unreserved,
+            char forceEscape1 = '\0',
+            char forceEscape2 = '\0'
+        ) {
             if (stringToEscape is null)
             {
                 throw new ArgumentNullException(nameof(stringToEscape));
@@ -140,10 +150,14 @@ namespace System
             }
 
             // If the whole string is made up of ASCII unreserved chars, just return it.
-            Debug.Assert(!noEscape['%'], "Need to treat % specially; it should be part of any escaped set");
+            Debug.Assert(
+                !noEscape['%'],
+                "Need to treat % specially; it should be part of any escaped set"
+            );
             int i = 0;
             char c;
-            for (; i < stringToEscape.Length && (c = stringToEscape[i]) <= 0x7F && noEscape[c]; i++) ;
+            for (; i < stringToEscape.Length && (c = stringToEscape[i]) <= 0x7F && noEscape[c]; i++)
+                ;
             if (i == stringToEscape.Length)
             {
                 return stringToEscape;
@@ -154,13 +168,22 @@ namespace System
             // escape the rest, and return the result as a string.
             var vsb = new ValueStringBuilder(stackalloc char[Uri.StackallocThreshold]);
             vsb.Append(stringToEscape.AsSpan(0, i));
-            EscapeStringToBuilder(stringToEscape.AsSpan(i), ref vsb, noEscape, checkExistingEscaped);
+            EscapeStringToBuilder(
+                stringToEscape.AsSpan(i),
+                ref vsb,
+                noEscape,
+                checkExistingEscaped
+            );
             return vsb.ToString();
         }
 
-        internal static unsafe void EscapeString(ReadOnlySpan<char> stringToEscape, ref ValueStringBuilder dest,
-            bool checkExistingEscaped, char forceEscape1 = '\0', char forceEscape2 = '\0')
-        {
+        internal static unsafe void EscapeString(
+            ReadOnlySpan<char> stringToEscape,
+            ref ValueStringBuilder dest,
+            bool checkExistingEscaped,
+            char forceEscape1 = '\0',
+            char forceEscape2 = '\0'
+        ) {
             // Get the table of characters that do not need to be escaped.
             ReadOnlySpan<bool> noEscape = stackalloc bool[0];
             if ((forceEscape1 | forceEscape2) == 0)
@@ -179,10 +202,14 @@ namespace System
             // If the whole string is made up of ASCII unreserved chars, take a fast pasth.  Per the contract, if
             // dest is null, just return it.  If it's not null, copy everything to it and update destPos accordingly;
             // if that requires resizing it, do so.
-            Debug.Assert(!noEscape['%'], "Need to treat % specially in case checkExistingEscaped is true");
+            Debug.Assert(
+                !noEscape['%'],
+                "Need to treat % specially in case checkExistingEscaped is true"
+            );
             int i = 0;
             char c;
-            for (; i < stringToEscape.Length && (c = stringToEscape[i]) <= 0x7F && noEscape[c]; i++) ;
+            for (; i < stringToEscape.Length && (c = stringToEscape[i]) <= 0x7F && noEscape[c]; i++)
+                ;
             if (i == stringToEscape.Length)
             {
                 dest.Append(stringToEscape);
@@ -193,16 +220,26 @@ namespace System
 
                 // CS8350 & CS8352: We can't pass `noEscape` and `dest` as arguments together as that could leak the scope of the above stackalloc
                 // As a workaround, re-create the Span in a way that avoids analysis
-                ReadOnlySpan<bool> noEscapeCopy = MemoryMarshal.CreateReadOnlySpan(ref MemoryMarshal.GetReference(noEscape), noEscape.Length);
+                ReadOnlySpan<bool> noEscapeCopy = MemoryMarshal.CreateReadOnlySpan(
+                    ref MemoryMarshal.GetReference(noEscape),
+                    noEscape.Length
+                );
 
-                EscapeStringToBuilder(stringToEscape.Slice(i), ref dest, noEscapeCopy, checkExistingEscaped);
+                EscapeStringToBuilder(
+                    stringToEscape.Slice(i),
+                    ref dest,
+                    noEscapeCopy,
+                    checkExistingEscaped
+                );
             }
         }
 
         private static void EscapeStringToBuilder(
-            ReadOnlySpan<char> stringToEscape, ref ValueStringBuilder vsb,
-            ReadOnlySpan<bool> noEscape, bool checkExistingEscaped)
-        {
+            ReadOnlySpan<char> stringToEscape,
+            ref ValueStringBuilder vsb,
+            ReadOnlySpan<bool> noEscape,
+            bool checkExistingEscaped
+        ) {
             // Allocate enough stack space to hold any Rune's UTF8 encoding.
             Span<byte> utf8Bytes = stackalloc byte[4];
 
@@ -219,7 +256,12 @@ namespace System
                     foreach (byte b in utf8Bytes.Slice(0, bytesWritten))
                     {
                         vsb.Append('%');
-                        HexConverter.ToCharsBuffer(b, vsb.AppendSpan(2), 0, HexConverter.Casing.Upper);
+                        HexConverter.ToCharsBuffer(
+                            b,
+                            vsb.AppendSpan(2),
+                            0,
+                            HexConverter.Casing.Upper
+                        );
                     }
                     continue;
                 }
@@ -265,24 +307,64 @@ namespace System
             }
         }
 
-        internal static unsafe char[] UnescapeString(string input, int start, int end, char[] dest,
-            ref int destPosition, char rsvd1, char rsvd2, char rsvd3, UnescapeMode unescapeMode, UriParser? syntax,
-            bool isQuery)
-        {
+        internal static unsafe char[] UnescapeString(
+            string input,
+            int start,
+            int end,
+            char[] dest,
+            ref int destPosition,
+            char rsvd1,
+            char rsvd2,
+            char rsvd3,
+            UnescapeMode unescapeMode,
+            UriParser? syntax,
+            bool isQuery
+        ) {
             fixed (char* pStr = input)
             {
-                return UnescapeString(pStr, start, end, dest, ref destPosition, rsvd1, rsvd2, rsvd3, unescapeMode,
-                    syntax, isQuery);
+                return UnescapeString(
+                    pStr,
+                    start,
+                    end,
+                    dest,
+                    ref destPosition,
+                    rsvd1,
+                    rsvd2,
+                    rsvd3,
+                    unescapeMode,
+                    syntax,
+                    isQuery
+                );
             }
         }
 
-        internal static unsafe char[] UnescapeString(char* pStr, int start, int end, char[] dest, ref int destPosition,
-            char rsvd1, char rsvd2, char rsvd3, UnescapeMode unescapeMode, UriParser? syntax, bool isQuery)
-        {
+        internal static unsafe char[] UnescapeString(
+            char* pStr,
+            int start,
+            int end,
+            char[] dest,
+            ref int destPosition,
+            char rsvd1,
+            char rsvd2,
+            char rsvd3,
+            UnescapeMode unescapeMode,
+            UriParser? syntax,
+            bool isQuery
+        ) {
             ValueStringBuilder vsb = new ValueStringBuilder(dest.Length);
             vsb.Append(dest.AsSpan(0, destPosition));
-            UnescapeString(pStr, start, end, ref vsb, rsvd1, rsvd2, rsvd3, unescapeMode,
-                    syntax, isQuery);
+            UnescapeString(
+                pStr,
+                start,
+                end,
+                ref vsb,
+                rsvd1,
+                rsvd2,
+                rsvd3,
+                unescapeMode,
+                syntax,
+                isQuery
+            );
 
             if (vsb.Length > dest.Length)
             {
@@ -308,25 +390,72 @@ namespace System
         // - It is a RARE case when Unescape actually needs escaping some characters mentioned above.
         //   For this reason it returns a char[] that is usually the same ref as the input "dest" value.
         //
-        internal static unsafe void UnescapeString(string input, int start, int end, ref ValueStringBuilder dest,
-            char rsvd1, char rsvd2, char rsvd3, UnescapeMode unescapeMode, UriParser? syntax, bool isQuery)
-        {
+        internal static unsafe void UnescapeString(
+            string input,
+            int start,
+            int end,
+            ref ValueStringBuilder dest,
+            char rsvd1,
+            char rsvd2,
+            char rsvd3,
+            UnescapeMode unescapeMode,
+            UriParser? syntax,
+            bool isQuery
+        ) {
             fixed (char* pStr = input)
             {
-                UnescapeString(pStr, start, end, ref dest, rsvd1, rsvd2, rsvd3, unescapeMode, syntax, isQuery);
+                UnescapeString(
+                    pStr,
+                    start,
+                    end,
+                    ref dest,
+                    rsvd1,
+                    rsvd2,
+                    rsvd3,
+                    unescapeMode,
+                    syntax,
+                    isQuery
+                );
             }
         }
-        internal static unsafe void UnescapeString(ReadOnlySpan<char> input, ref ValueStringBuilder dest,
-           char rsvd1, char rsvd2, char rsvd3, UnescapeMode unescapeMode, UriParser? syntax, bool isQuery)
-        {
+        internal static unsafe void UnescapeString(
+            ReadOnlySpan<char> input,
+            ref ValueStringBuilder dest,
+            char rsvd1,
+            char rsvd2,
+            char rsvd3,
+            UnescapeMode unescapeMode,
+            UriParser? syntax,
+            bool isQuery
+        ) {
             fixed (char* pStr = &MemoryMarshal.GetReference(input))
             {
-                UnescapeString(pStr, 0, input.Length, ref dest, rsvd1, rsvd2, rsvd3, unescapeMode, syntax, isQuery);
+                UnescapeString(
+                    pStr,
+                    0,
+                    input.Length,
+                    ref dest,
+                    rsvd1,
+                    rsvd2,
+                    rsvd3,
+                    unescapeMode,
+                    syntax,
+                    isQuery
+                );
             }
         }
-        internal static unsafe void UnescapeString(char* pStr, int start, int end, ref ValueStringBuilder dest,
-            char rsvd1, char rsvd2, char rsvd3, UnescapeMode unescapeMode, UriParser? syntax, bool isQuery)
-        {
+        internal static unsafe void UnescapeString(
+            char* pStr,
+            int start,
+            int end,
+            ref ValueStringBuilder dest,
+            char rsvd1,
+            char rsvd2,
+            char rsvd3,
+            UnescapeMode unescapeMode,
+            UriParser? syntax,
+            bool isQuery
+        ) {
             if ((unescapeMode & UnescapeMode.EscapeUnescape) == UnescapeMode.CopyOnly)
             {
                 dest.Append(pStr + start, end - start);
@@ -334,10 +463,11 @@ namespace System
             }
 
             bool escapeReserved = false;
-            bool iriParsing = Uri.IriParsingStatic(syntax)
-                                && ((unescapeMode & UnescapeMode.EscapeUnescape) == UnescapeMode.EscapeUnescape);
+            bool iriParsing =
+                Uri.IriParsingStatic(syntax)
+                && ((unescapeMode & UnescapeMode.EscapeUnescape) == UnescapeMode.EscapeUnescape);
 
-            for (int next = start; next < end; )
+            for (int next = start; next < end;)
             {
                 char ch = (char)0;
 
@@ -372,7 +502,7 @@ namespace System
                                 if ((unescapeMode & UnescapeMode.Escape) != 0)
                                     escapeReserved = true;
                                 else
-                                    continue;   // we should throw instead but since v1.0 would just print '%'
+                                    continue; // we should throw instead but since v1.0 would just print '%'
                             }
                             // Do not unescape '%' itself unless full unescape is requested
                             else if (ch == '%')
@@ -387,14 +517,20 @@ namespace System
                                 continue;
                             }
                             // Do not unescape a dangerous char unless it's V1ToStringFlags mode
-                            else if ((unescapeMode & UnescapeMode.V1ToStringFlag) == 0 && IsNotSafeForUnescape(ch))
-                            {
+                            else if (
+                                (unescapeMode & UnescapeMode.V1ToStringFlag) == 0
+                                && IsNotSafeForUnescape(ch)
+                            ) {
                                 next += 2;
                                 continue;
                             }
-                            else if (iriParsing && ((ch <= '\x9F' && IsNotSafeForUnescape(ch)) ||
-                                                    (ch > '\x9F' && !IriHelper.CheckIriUnicodeRange(ch, isQuery))))
-                            {
+                            else if (
+                                iriParsing
+                                && (
+                                    (ch <= '\x9F' && IsNotSafeForUnescape(ch))
+                                    || (ch > '\x9F' && !IriHelper.CheckIriUnicodeRange(ch, isQuery))
+                                )
+                            ) {
                                 // check if unenscaping gives a char outside iri range
                                 // if it does then keep it escaped
                                 next += 2;
@@ -420,9 +556,10 @@ namespace System
                         // escape (escapeReserved==true) or otherwise unescape the sequence
                         break;
                     }
-                    else if ((unescapeMode & (UnescapeMode.Unescape | UnescapeMode.UnescapeAll))
-                        == (UnescapeMode.Unescape | UnescapeMode.UnescapeAll))
-                    {
+                    else if (
+                        (unescapeMode & (UnescapeMode.Unescape | UnescapeMode.UnescapeAll))
+                        == (UnescapeMode.Unescape | UnescapeMode.UnescapeAll)
+                    ) {
                         continue;
                     }
                     else if ((unescapeMode & UnescapeMode.Escape) != 0)
@@ -434,9 +571,10 @@ namespace System
                             escapeReserved = true;
                             break;
                         }
-                        else if ((unescapeMode & UnescapeMode.V1ToStringFlag) == 0
-                            && (ch <= '\x1F' || (ch >= '\x7F' && ch <= '\x9F')))
-                        {
+                        else if (
+                            (unescapeMode & UnescapeMode.V1ToStringFlag) == 0
+                            && (ch <= '\x1F' || (ch >= '\x7F' && ch <= '\x9F'))
+                        ) {
                             // found an unescaped reserved character -> escape it
                             escapeReserved = true;
                             break;
@@ -464,12 +602,14 @@ namespace System
                     else
                     {
                         // Unicode
-                        int charactersRead = PercentEncodingHelper.UnescapePercentEncodedUTF8Sequence(
-                            pStr + next,
-                            end - next,
-                            ref dest,
-                            isQuery,
-                            iriParsing);
+                        int charactersRead =
+                            PercentEncodingHelper.UnescapePercentEncodedUTF8Sequence(
+                                pStr + next,
+                                end - next,
+                                ref dest,
+                                isQuery,
+                                iriParsing
+                            );
 
                         Debug.Assert(charactersRead > 0);
                         next += charactersRead;
@@ -533,40 +673,290 @@ namespace System
 
         // "Reserved" and "Unreserved" characters are based on RFC 3986.
 
-        internal static ReadOnlySpan<bool> UnreservedReservedTable => new bool[0x80]
-        {
-            // true for all ASCII letters and digits, as well as the RFC3986 reserved characters, unreserved characters, and hash
-            false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-            false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-            false, true,  false, true,  true,  false, true,  true,  true,  true,  true,  true,  true,  true,  true,  true,
-            true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  false, true,  false, true,
-            true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,
-            true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  false, true,  false, true,
-            false, true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,
-            true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  false, false, false, true,  false,
-        };
+        internal static ReadOnlySpan<bool> UnreservedReservedTable =>
+            new bool[0x80]
+            {
+                // true for all ASCII letters and digits, as well as the RFC3986 reserved characters, unreserved characters, and hash
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                false,
+                true,
+                true,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                true,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                true,
+                false,
+                true,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                true,
+                false,
+            };
 
         internal static bool IsUnreserved(int c) => c < 0x80 && UnreservedTable[c];
 
-        internal static ReadOnlySpan<bool> UnreservedTable => new bool[0x80]
-        {
-            // true for all ASCII letters and digits, as well as the RFC3986 unreserved marks '-', '_', '.', and '~'
-            false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-            false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,
-            false, false, false, false, false, false, false, false, false, false, false, false, false, true,  true,  false,
-            true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  false, false, false, false, false, false,
-            false, true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,
-            true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  false, false, false, false, true,
-            false, true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,
-            true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  false, false, false, true,  false,
-        };
+        internal static ReadOnlySpan<bool> UnreservedTable =>
+            new bool[0x80]
+            {
+                // true for all ASCII letters and digits, as well as the RFC3986 unreserved marks '-', '_', '.', and '~'
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                true,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                true,
+                false,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                true,
+                false,
+            };
 
         //
         // Is this a gen delim char from RFC 3986
         //
         internal static bool IsGenDelim(char ch)
         {
-            return (ch == ':' || ch == '/' || ch == '?' || ch == '#' || ch == '[' || ch == ']' || ch == '@');
+            return (
+                ch == ':'
+                || ch == '/'
+                || ch == '?'
+                || ch == '#'
+                || ch == '['
+                || ch == ']'
+                || ch == '@'
+            );
         }
 
         internal static readonly char[] s_WSchars = new char[] { ' ', '\n', '\r', '\t' };
@@ -580,8 +970,7 @@ namespace System
             (((uint)character - 'A') & ~0x20) < 26;
 
         internal static bool IsAsciiLetterOrDigit(char character) =>
-            ((((uint)character - 'A') & ~0x20) < 26) ||
-            (((uint)character - '0') < 10);
+            ((((uint)character - 'A') & ~0x20) < 26) || (((uint)character - '0') < 10);
 
         internal static bool IsHexDigit(char character) => HexConverter.IsHexChar(character);
 
@@ -590,16 +979,24 @@ namespace System
         //
         internal static bool IsBidiControlCharacter(char ch)
         {
-            return (ch == '\u200E' /*LRM*/ || ch == '\u200F' /*RLM*/ || ch == '\u202A' /*LRE*/ ||
-                    ch == '\u202B' /*RLE*/ || ch == '\u202C' /*PDF*/ || ch == '\u202D' /*LRO*/ ||
-                    ch == '\u202E' /*RLO*/);
+            return (
+                ch == '\u200E' /*LRM*/
+                || ch == '\u200F' /*RLM*/
+                || ch == '\u202A' /*LRE*/
+                || ch == '\u202B' /*RLE*/
+                || ch == '\u202C' /*PDF*/
+                || ch == '\u202D' /*LRO*/
+                || ch == '\u202E' /*RLO*/
+            );
         }
 
         //
         // Strip Bidirectional control characters from this string
         //
-        internal static unsafe string StripBidiControlCharacters(ReadOnlySpan<char> strToClean, string? backingString = null)
-        {
+        internal static unsafe string StripBidiControlCharacters(
+            ReadOnlySpan<char> strToClean,
+            string? backingString = null
+        ) {
             Debug.Assert(backingString is null || strToClean.Length == backingString.Length);
 
             int charsToRemove = 0;
@@ -623,19 +1020,28 @@ namespace System
 
             fixed (char* pStrToClean = &MemoryMarshal.GetReference(strToClean))
             {
-                return string.Create(strToClean.Length - charsToRemove, (StrToClean: (IntPtr)pStrToClean, strToClean.Length), (buffer, state) =>
-                {
-                    var strToClean = new ReadOnlySpan<char>((char*)state.StrToClean, state.Length);
-                    int destIndex = 0;
-                    foreach (char c in strToClean)
+                return string.Create(
+                    strToClean.Length - charsToRemove,
+                    (StrToClean: (IntPtr)pStrToClean, strToClean.Length),
+                    (buffer, state) =>
                     {
-                        if ((uint)(c - '\u200E') > ('\u202E' - '\u200E') || !IsBidiControlCharacter(c))
+                        var strToClean = new ReadOnlySpan<char>(
+                            (char*)state.StrToClean,
+                            state.Length
+                        );
+                        int destIndex = 0;
+                        foreach (char c in strToClean)
                         {
-                            buffer[destIndex++] = c;
+                            if (
+                                (uint)(c - '\u200E') > ('\u202E' - '\u200E')
+                                || !IsBidiControlCharacter(c)
+                            ) {
+                                buffer[destIndex++] = c;
+                            }
                         }
+                        Debug.Assert(buffer.Length == destIndex);
                     }
-                    Debug.Assert(buffer.Length == destIndex);
-                });
+                );
             }
         }
     }

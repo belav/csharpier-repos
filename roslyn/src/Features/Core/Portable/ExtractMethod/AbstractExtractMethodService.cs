@@ -11,28 +11,38 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.ExtractMethod
 {
-    internal abstract class AbstractExtractMethodService<TValidator, TExtractor, TResult> : IExtractMethodService
+    internal abstract class AbstractExtractMethodService<TValidator, TExtractor, TResult>
+        : IExtractMethodService
         where TValidator : SelectionValidator
         where TExtractor : MethodExtractor
         where TResult : SelectionResult
     {
-        protected abstract TValidator CreateSelectionValidator(SemanticDocument document, TextSpan textSpan, OptionSet options);
-        protected abstract TExtractor CreateMethodExtractor(TResult selectionResult, bool localFunction);
+        protected abstract TValidator CreateSelectionValidator(
+            SemanticDocument document,
+            TextSpan textSpan,
+            OptionSet options
+        );
+        protected abstract TExtractor CreateMethodExtractor(
+            TResult selectionResult,
+            bool localFunction
+        );
 
         public async Task<ExtractMethodResult> ExtractMethodAsync(
             Document document,
             TextSpan textSpan,
             bool localFunction,
             OptionSet options,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             options ??= await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
 
-            var semanticDocument = await SemanticDocument.CreateAsync(document, cancellationToken).ConfigureAwait(false);
+            var semanticDocument = await SemanticDocument.CreateAsync(document, cancellationToken)
+                .ConfigureAwait(false);
 
             var validator = CreateSelectionValidator(semanticDocument, textSpan, options);
 
-            var selectionResult = await validator.GetValidSelectionAsync(cancellationToken).ConfigureAwait(false);
+            var selectionResult = await validator.GetValidSelectionAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (!selectionResult.ContainsValidContext)
             {
                 return new FailedExtractMethodResult(selectionResult.Status);

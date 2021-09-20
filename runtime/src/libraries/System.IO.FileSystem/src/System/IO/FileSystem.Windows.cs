@@ -29,8 +29,15 @@ namespace System.IO
                 {
                     // For a number of error codes (sharing violation, path not found, etc) we don't know if the problem was with
                     // the source or dest file.  Try reading the source file.
-                    using (SafeFileHandle handle = Interop.Kernel32.CreateFile(sourceFullPath, Interop.Kernel32.GenericOperations.GENERIC_READ, FileShare.Read, FileMode.Open, 0))
-                    {
+                    using (
+                        SafeFileHandle handle = Interop.Kernel32.CreateFile(
+                            sourceFullPath,
+                            Interop.Kernel32.GenericOperations.GENERIC_READ,
+                            FileShare.Read,
+                            FileMode.Open,
+                            0
+                        )
+                    ) {
                         if (handle.IsInvalid)
                             fileName = sourceFullPath;
                     }
@@ -38,7 +45,10 @@ namespace System.IO
                     if (errorCode == Interop.Errors.ERROR_ACCESS_DENIED)
                     {
                         if (DirectoryExists(destFullPath))
-                            throw new IOException(SR.Format(SR.Arg_FileIsDirectory_Name, destFullPath), Interop.Errors.ERROR_ACCESS_DENIED);
+                            throw new IOException(
+                                SR.Format(SR.Arg_FileIsDirectory_Name, destFullPath),
+                                Interop.Errors.ERROR_ACCESS_DENIED
+                            );
                     }
                 }
 
@@ -46,12 +56,24 @@ namespace System.IO
             }
         }
 
-        public static void ReplaceFile(string sourceFullPath, string destFullPath, string? destBackupFullPath, bool ignoreMetadataErrors)
-        {
+        public static void ReplaceFile(
+            string sourceFullPath,
+            string destFullPath,
+            string? destBackupFullPath,
+            bool ignoreMetadataErrors
+        ) {
             int flags = ignoreMetadataErrors ? Interop.Kernel32.REPLACEFILE_IGNORE_MERGE_ERRORS : 0;
 
-            if (!Interop.Kernel32.ReplaceFile(destFullPath, sourceFullPath, destBackupFullPath, flags, IntPtr.Zero, IntPtr.Zero))
-            {
+            if (
+                !Interop.Kernel32.ReplaceFile(
+                    destFullPath,
+                    sourceFullPath,
+                    destBackupFullPath,
+                    flags,
+                    IntPtr.Zero,
+                    IntPtr.Zero
+                )
+            ) {
                 throw Win32Marshal.GetExceptionForWin32Error(Marshal.GetLastWin32Error());
             }
         }
@@ -91,9 +113,9 @@ namespace System.IO
 
         public static FileSystemInfo GetFileSystemInfo(string fullPath, bool asDirectory)
         {
-            return asDirectory ?
-                (FileSystemInfo)new DirectoryInfo(fullPath, null) :
-                (FileSystemInfo)new FileInfo(fullPath, null);
+            return asDirectory
+              ? (FileSystemInfo)new DirectoryInfo(fullPath, null)
+              : (FileSystemInfo)new FileInfo(fullPath, null);
         }
 
         public static DateTimeOffset GetLastAccessTime(string fullPath)
@@ -123,14 +145,23 @@ namespace System.IO
                 int errorCode = Marshal.GetLastWin32Error();
 
                 if (errorCode == Interop.Errors.ERROR_FILE_NOT_FOUND)
-                    throw Win32Marshal.GetExceptionForWin32Error(Interop.Errors.ERROR_PATH_NOT_FOUND, sourceFullPath);
+                    throw Win32Marshal.GetExceptionForWin32Error(
+                        Interop.Errors.ERROR_PATH_NOT_FOUND,
+                        sourceFullPath
+                    );
 
                 if (errorCode == Interop.Errors.ERROR_ALREADY_EXISTS)
-                    throw Win32Marshal.GetExceptionForWin32Error(Interop.Errors.ERROR_ALREADY_EXISTS, destFullPath);
+                    throw Win32Marshal.GetExceptionForWin32Error(
+                        Interop.Errors.ERROR_ALREADY_EXISTS,
+                        destFullPath
+                    );
 
                 // This check was originally put in for Win9x (unfortunately without special casing it to be for Win9x only). We can't change the NT codepath now for backcomp reasons.
                 if (errorCode == Interop.Errors.ERROR_ACCESS_DENIED) // WinNT throws IOException. This check is for Win9x. We can't change it for backcomp.
-                    throw new IOException(SR.Format(SR.UnauthorizedAccess_IODenied_Path, sourceFullPath), Win32Marshal.MakeHRFromErrorCode(errorCode));
+                    throw new IOException(
+                        SR.Format(SR.UnauthorizedAccess_IODenied_Path, sourceFullPath),
+                        Win32Marshal.MakeHRFromErrorCode(errorCode)
+                    );
 
                 throw Win32Marshal.GetExceptionForWin32Error(errorCode);
             }
@@ -158,7 +189,8 @@ namespace System.IO
                 Interop.Kernel32.GenericOperations.GENERIC_WRITE,
                 FileShare.ReadWrite | FileShare.Delete,
                 FileMode.Open,
-                asDirectory ? Interop.Kernel32.FileOperations.FILE_FLAG_BACKUP_SEMANTICS : 0);
+                asDirectory ? Interop.Kernel32.FileOperations.FILE_FLAG_BACKUP_SEMANTICS : 0
+            );
 
             if (handle.IsInvalid)
             {
@@ -167,7 +199,11 @@ namespace System.IO
                 // NT5 oddity - when trying to open "C:\" as a File,
                 // we usually get ERROR_PATH_NOT_FOUND from the OS.  We should
                 // probably be consistent w/ every other directory.
-                if (!asDirectory && errorCode == Interop.Errors.ERROR_PATH_NOT_FOUND && fullPath.Equals(Directory.GetDirectoryRoot(fullPath)))
+                if (
+                    !asDirectory
+                    && errorCode == Interop.Errors.ERROR_PATH_NOT_FOUND
+                    && fullPath.Equals(Directory.GetDirectoryRoot(fullPath))
+                )
                     errorCode = Interop.Errors.ERROR_ACCESS_DENIED;
 
                 throw Win32Marshal.GetExceptionForWin32Error(errorCode, fullPath);
@@ -199,10 +235,16 @@ namespace System.IO
             RemoveDirectoryRecursive(fullPath, ref findData, topLevel: true);
         }
 
-        private static void GetFindData(string fullPath, ref Interop.Kernel32.WIN32_FIND_DATA findData)
-        {
-            using (SafeFindHandle handle = Interop.Kernel32.FindFirstFile(Path.TrimEndingDirectorySeparator(fullPath), ref findData))
-            {
+        private static void GetFindData(
+            string fullPath,
+            ref Interop.Kernel32.WIN32_FIND_DATA findData
+        ) {
+            using (
+                SafeFindHandle handle = Interop.Kernel32.FindFirstFile(
+                    Path.TrimEndingDirectorySeparator(fullPath),
+                    ref findData
+                )
+            ) {
                 if (handle.IsInvalid)
                 {
                     int errorCode = Marshal.GetLastWin32Error();
@@ -230,37 +272,56 @@ namespace System.IO
                 && (data.dwReserved0 & 0x20000000) != 0; // IsReparseTagNameSurrogate
         }
 
-        private static void RemoveDirectoryRecursive(string fullPath, ref Interop.Kernel32.WIN32_FIND_DATA findData, bool topLevel)
-        {
+        private static void RemoveDirectoryRecursive(
+            string fullPath,
+            ref Interop.Kernel32.WIN32_FIND_DATA findData,
+            bool topLevel
+        ) {
             int errorCode;
             Exception? exception = null;
 
-            using (SafeFindHandle handle = Interop.Kernel32.FindFirstFile(Path.Join(fullPath, "*"), ref findData))
-            {
+            using (
+                SafeFindHandle handle = Interop.Kernel32.FindFirstFile(
+                    Path.Join(fullPath, "*"),
+                    ref findData
+                )
+            ) {
                 if (handle.IsInvalid)
                     throw Win32Marshal.GetExceptionForLastWin32Error(fullPath);
 
                 do
                 {
-                    if ((findData.dwFileAttributes & Interop.Kernel32.FileAttributes.FILE_ATTRIBUTE_DIRECTORY) == 0)
-                    {
+                    if (
+                        (
+                            findData.dwFileAttributes
+                            & Interop.Kernel32.FileAttributes.FILE_ATTRIBUTE_DIRECTORY
+                        ) == 0
+                    ) {
                         // File
                         string fileName = findData.cFileName.GetStringFromFixedBuffer();
-                        if (!Interop.Kernel32.DeleteFile(Path.Combine(fullPath, fileName)) && exception == null)
-                        {
+                        if (
+                            !Interop.Kernel32.DeleteFile(Path.Combine(fullPath, fileName))
+                            && exception == null
+                        ) {
                             errorCode = Marshal.GetLastWin32Error();
 
                             // We don't care if something else deleted the file first
                             if (errorCode != Interop.Errors.ERROR_FILE_NOT_FOUND)
                             {
-                                exception = Win32Marshal.GetExceptionForWin32Error(errorCode, fileName);
+                                exception = Win32Marshal.GetExceptionForWin32Error(
+                                    errorCode,
+                                    fileName
+                                );
                             }
                         }
                     }
                     else
                     {
                         // Directory, skip ".", "..".
-                        if (findData.cFileName.FixedBufferEqualsString(".") || findData.cFileName.FixedBufferEqualsString(".."))
+                        if (
+                            findData.cFileName.FixedBufferEqualsString(".")
+                            || findData.cFileName.FixedBufferEqualsString("..")
+                        )
                             continue;
 
                         string fileName = findData.cFileName.GetStringFromFixedBuffer();
@@ -273,7 +334,8 @@ namespace System.IO
                                 RemoveDirectoryRecursive(
                                     Path.Combine(fullPath, fileName),
                                     findData: ref findData,
-                                    topLevel: false);
+                                    topLevel: false
+                                );
                             }
                             catch (Exception e)
                             {
@@ -285,29 +347,46 @@ namespace System.IO
                         {
                             // Name surrogate reparse point, don't recurse, simply remove the directory.
                             // If a mount point, we have to delete the mount point first.
-                            if (findData.dwReserved0 == Interop.Kernel32.IOReparseOptions.IO_REPARSE_TAG_MOUNT_POINT)
-                            {
+                            if (
+                                findData.dwReserved0
+                                == Interop.Kernel32.IOReparseOptions.IO_REPARSE_TAG_MOUNT_POINT
+                            ) {
                                 // Mount point. Unmount using full path plus a trailing '\'.
                                 // (Note: This doesn't remove the underlying directory)
-                                string mountPoint = Path.Join(fullPath, fileName, PathInternal.DirectorySeparatorCharAsString);
-                                if (!Interop.Kernel32.DeleteVolumeMountPoint(mountPoint) && exception == null)
-                                {
+                                string mountPoint = Path.Join(
+                                    fullPath,
+                                    fileName,
+                                    PathInternal.DirectorySeparatorCharAsString
+                                );
+                                if (
+                                    !Interop.Kernel32.DeleteVolumeMountPoint(mountPoint)
+                                    && exception == null
+                                ) {
                                     errorCode = Marshal.GetLastWin32Error();
-                                    if (errorCode != Interop.Errors.ERROR_SUCCESS &&
-                                        errorCode != Interop.Errors.ERROR_PATH_NOT_FOUND)
-                                    {
-                                        exception = Win32Marshal.GetExceptionForWin32Error(errorCode, fileName);
+                                    if (
+                                        errorCode != Interop.Errors.ERROR_SUCCESS
+                                        && errorCode != Interop.Errors.ERROR_PATH_NOT_FOUND
+                                    ) {
+                                        exception = Win32Marshal.GetExceptionForWin32Error(
+                                            errorCode,
+                                            fileName
+                                        );
                                     }
                                 }
                             }
 
                             // Note that RemoveDirectory on a symbolic link will remove the link itself.
-                            if (!Interop.Kernel32.RemoveDirectory(Path.Combine(fullPath, fileName)) && exception == null)
-                            {
+                            if (
+                                !Interop.Kernel32.RemoveDirectory(Path.Combine(fullPath, fileName))
+                                && exception == null
+                            ) {
                                 errorCode = Marshal.GetLastWin32Error();
                                 if (errorCode != Interop.Errors.ERROR_PATH_NOT_FOUND)
                                 {
-                                    exception = Win32Marshal.GetExceptionForWin32Error(errorCode, fileName);
+                                    exception = Win32Marshal.GetExceptionForWin32Error(
+                                        errorCode,
+                                        fileName
+                                    );
                                 }
                             }
                         }
@@ -318,7 +397,10 @@ namespace System.IO
                     throw exception;
 
                 errorCode = Marshal.GetLastWin32Error();
-                if (errorCode != Interop.Errors.ERROR_SUCCESS && errorCode != Interop.Errors.ERROR_NO_MORE_FILES)
+                if (
+                    errorCode != Interop.Errors.ERROR_SUCCESS
+                    && errorCode != Interop.Errors.ERROR_NO_MORE_FILES
+                )
                     throw Win32Marshal.GetExceptionForWin32Error(errorCode, fullPath);
             }
 
@@ -328,8 +410,11 @@ namespace System.IO
             RemoveDirectoryInternal(fullPath, topLevel: topLevel, allowDirectoryNotEmpty: true);
         }
 
-        private static void RemoveDirectoryInternal(string fullPath, bool topLevel, bool allowDirectoryNotEmpty = false)
-        {
+        private static void RemoveDirectoryInternal(
+            string fullPath,
+            bool topLevel,
+            bool allowDirectoryNotEmpty = false
+        ) {
             if (!Interop.Kernel32.RemoveDirectory(fullPath))
             {
                 int errorCode = Marshal.GetLastWin32Error();
@@ -350,7 +435,9 @@ namespace System.IO
                         break;
                     case Interop.Errors.ERROR_ACCESS_DENIED:
                         // This conversion was originally put in for Win9x. Keeping for compatibility.
-                        throw new IOException(SR.Format(SR.UnauthorizedAccess_IODenied_Path, fullPath));
+                        throw new IOException(
+                            SR.Format(SR.UnauthorizedAccess_IODenied_Path, fullPath)
+                        );
                 }
 
                 throw Win32Marshal.GetExceptionForWin32Error(errorCode, fullPath);
@@ -376,8 +463,8 @@ namespace System.IO
             long lastAccessTime = -1,
             long lastWriteTime = -1,
             long changeTime = -1,
-            uint fileAttributes = 0)
-        {
+            uint fileAttributes = 0
+        ) {
             using (SafeFileHandle handle = OpenHandle(fullPath, asDirectory))
             {
                 var basicInfo = new Interop.Kernel32.FILE_BASIC_INFO()
@@ -389,23 +476,37 @@ namespace System.IO
                     FileAttributes = fileAttributes
                 };
 
-                if (!Interop.Kernel32.SetFileInformationByHandle(handle, Interop.Kernel32.FileBasicInfo, &basicInfo, (uint)sizeof(Interop.Kernel32.FILE_BASIC_INFO)))
-                {
+                if (
+                    !Interop.Kernel32.SetFileInformationByHandle(
+                        handle,
+                        Interop.Kernel32.FileBasicInfo,
+                        &basicInfo,
+                        (uint)sizeof(Interop.Kernel32.FILE_BASIC_INFO)
+                    )
+                ) {
                     throw Win32Marshal.GetExceptionForLastWin32Error(fullPath);
                 }
             }
         }
 
-        public static void SetCreationTime(string fullPath, DateTimeOffset time, bool asDirectory)
-           => SetFileTime(fullPath, asDirectory, creationTime: time.ToFileTime());
+        public static void SetCreationTime(
+            string fullPath,
+            DateTimeOffset time,
+            bool asDirectory
+        ) => SetFileTime(fullPath, asDirectory, creationTime: time.ToFileTime());
 
-        public static void SetLastAccessTime(string fullPath, DateTimeOffset time, bool asDirectory)
-           => SetFileTime(fullPath, asDirectory, lastAccessTime: time.ToFileTime());
+        public static void SetLastAccessTime(
+            string fullPath,
+            DateTimeOffset time,
+            bool asDirectory
+        ) => SetFileTime(fullPath, asDirectory, lastAccessTime: time.ToFileTime());
 
-        public static void SetLastWriteTime(string fullPath, DateTimeOffset time, bool asDirectory)
-           => SetFileTime(fullPath, asDirectory, lastWriteTime: time.ToFileTime());
+        public static void SetLastWriteTime(
+            string fullPath,
+            DateTimeOffset time,
+            bool asDirectory
+        ) => SetFileTime(fullPath, asDirectory, lastWriteTime: time.ToFileTime());
 
-        public static string[] GetLogicalDrives()
-            => DriveInfoInternal.GetLogicalDrives();
+        public static string[] GetLogicalDrives() => DriveInfoInternal.GetLogicalDrives();
     }
 }

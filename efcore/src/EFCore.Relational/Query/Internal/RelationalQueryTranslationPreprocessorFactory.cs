@@ -19,7 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     ///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
     ///     </para>
     /// </summary>
-    public class RelationalQueryTranslationPreprocessorFactory : IQueryTranslationPreprocessorFactory
+    public class RelationalQueryTranslationPreprocessorFactory
+        : IQueryTranslationPreprocessorFactory
     {
         private readonly QueryTranslationPreprocessorDependencies _dependencies;
         private readonly RelationalQueryTranslationPreprocessorDependencies _relationalDependencies;
@@ -32,8 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// </summary>
         public RelationalQueryTranslationPreprocessorFactory(
             QueryTranslationPreprocessorDependencies dependencies,
-            RelationalQueryTranslationPreprocessorDependencies relationalDependencies)
-        {
+            RelationalQueryTranslationPreprocessorDependencies relationalDependencies
+        ) {
             _dependencies = dependencies;
             _relationalDependencies = relationalDependencies;
         }
@@ -44,11 +45,16 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual QueryTranslationPreprocessor Create(QueryCompilationContext queryCompilationContext)
-        {
+        public virtual QueryTranslationPreprocessor Create(
+            QueryCompilationContext queryCompilationContext
+        ) {
             Check.NotNull(queryCompilationContext, nameof(queryCompilationContext));
 
-            return new RelationalQueryTranslationPreprocessor(_dependencies, _relationalDependencies, queryCompilationContext);
+            return new RelationalQueryTranslationPreprocessor(
+                _dependencies,
+                _relationalDependencies,
+                queryCompilationContext
+            );
         }
     }
 }

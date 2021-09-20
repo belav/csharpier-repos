@@ -35,8 +35,12 @@ namespace System.Net.Http
                 // If the OWIN context is not available, try to create by upgrading an OWIN environment property
                 // instead.
                 IDictionary<string, object> environment;
-                if (request.Properties.TryGetValue<IDictionary<string, object>>(OwinEnvironmentKey, out environment))
-                {
+                if (
+                    request.Properties.TryGetValue<IDictionary<string, object>>(
+                        OwinEnvironmentKey,
+                        out environment
+                    )
+                ) {
                     context = new OwinContext(environment);
                     SetOwinContext(request, context);
                     request.Properties.Remove(OwinEnvironmentKey);
@@ -70,8 +74,9 @@ namespace System.Net.Http
         /// <returns>
         /// The OWIN environment for the specified request, if available; otherwise <see langword="null"/>.
         /// </returns>
-        public static IDictionary<string, object> GetOwinEnvironment(this HttpRequestMessage request)
-        {
+        public static IDictionary<string, object> GetOwinEnvironment(
+            this HttpRequestMessage request
+        ) {
             IOwinContext context = GetOwinContext(request);
 
             if (context == null)
@@ -85,13 +90,16 @@ namespace System.Net.Http
         /// <summary>Sets the OWIN environment for the specified request.</summary>
         /// <param name="request">The HTTP request message.</param>
         /// <param name="environment">The OWIN environment to set.</param>
-        public static void SetOwinEnvironment(this HttpRequestMessage request, IDictionary<string, object> environment)
-        {
+        public static void SetOwinEnvironment(
+            this HttpRequestMessage request,
+            IDictionary<string, object> environment
+        ) {
             SetOwinContext(request, new OwinContext(environment));
         }
 
-        internal static IAuthenticationManager GetAuthenticationManager(this HttpRequestMessage request)
-        {
+        internal static IAuthenticationManager GetAuthenticationManager(
+            this HttpRequestMessage request
+        ) {
             IOwinContext context = GetOwinContext(request);
 
             if (context == null)

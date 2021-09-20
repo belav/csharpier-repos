@@ -20,9 +20,7 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         private IISDeploymentResult _deploymentResult;
         private readonly Action<IISDeploymentParameters> _configure;
 
-        public IISTestSiteFixture() : this(_ => { })
-        {
-        }
+        public IISTestSiteFixture() : this(_ => { }) { }
 
         public IISDeploymentParameters DeploymentParameters { get; }
 
@@ -43,7 +41,9 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                 TargetFramework = Tfm.Default,
                 HostingModel = HostingModel.InProcess,
                 PublishApplicationBeforeDeployment = true,
-                ApplicationPublisher = new PublishedApplicationPublisher(Helpers.GetInProcessTestSitesName()),
+                ApplicationPublisher = new PublishedApplicationPublisher(
+                    Helpers.GetInProcessTestSitesName()
+                ),
                 ServerType = DeployerSelector.ServerType
             };
         }
@@ -72,7 +72,9 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         {
             if (_forwardingProvider.LoggerFactory != null)
             {
-                throw new InvalidOperationException("Test instance is already attached to this fixture");
+                throw new InvalidOperationException(
+                    "Test instance is already attached to this fixture"
+                );
             }
 
             _forwardingProvider.LoggerFactory = test.LoggerFactory;
@@ -153,8 +155,13 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             public ILogger Logger { get; set; }
             public string Name { get; set; }
 
-            public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
-            {
+            public void Log<TState>(
+                LogLevel logLevel,
+                EventId eventId,
+                TState state,
+                Exception exception,
+                Func<TState, Exception, string> formatter
+            ) {
                 Logger?.Log(logLevel, eventId, state, exception, formatter);
             }
 
@@ -163,5 +170,4 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             public IDisposable BeginScope<TState>(TState state) => Logger?.BeginScope(state);
         }
     }
-
 }

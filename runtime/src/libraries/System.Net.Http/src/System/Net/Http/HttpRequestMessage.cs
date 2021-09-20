@@ -132,10 +132,7 @@ namespace System.Net.Http
 
         public HttpRequestOptions Options => _options ??= new HttpRequestOptions();
 
-        public HttpRequestMessage()
-            : this(HttpMethod.Get, (Uri?)null)
-        {
-        }
+        public HttpRequestMessage() : this(HttpMethod.Get, (Uri?)null) { }
 
         public HttpRequestMessage(HttpMethod method, Uri? requestUri)
         {
@@ -187,8 +184,11 @@ namespace System.Net.Http
             {
                 throw new ArgumentNullException(nameof(method));
             }
-            if ((requestUri != null) && (requestUri.IsAbsoluteUri) && (!HttpUtilities.IsHttpUri(requestUri)))
-            {
+            if (
+                (requestUri != null)
+                && (requestUri.IsAbsoluteUri)
+                && (!HttpUtilities.IsHttpUri(requestUri))
+            ) {
                 throw new ArgumentException(HttpUtilities.InvalidUriMessage, nameof(requestUri));
             }
 

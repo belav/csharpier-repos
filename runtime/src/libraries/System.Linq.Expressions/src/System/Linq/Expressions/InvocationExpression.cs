@@ -53,8 +53,10 @@ namespace System.Linq.Expressions
         /// <param name="expression">The <see cref="Expression"/> property of the result.</param>
         /// <param name="arguments">The <see cref="Arguments"/> property of the result.</param>
         /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-        public InvocationExpression Update(Expression expression, IEnumerable<Expression>? arguments)
-        {
+        public InvocationExpression Update(
+            Expression expression,
+            IEnumerable<Expression>? arguments
+        ) {
             if (expression == Expression && arguments != null)
             {
                 if (ExpressionUtils.SameElements(ref arguments, Arguments))
@@ -89,10 +91,7 @@ namespace System.Linq.Expressions
         [ExcludeFromCodeCoverage(Justification = "Unreachable")]
         public virtual int ArgumentCount
         {
-            get
-            {
-                throw ContractUtils.Unreachable;
-            }
+            get { throw ContractUtils.Unreachable; }
         }
 
         /// <summary>
@@ -114,8 +113,8 @@ namespace System.Linq.Expressions
             get
             {
                 return (Expression.NodeType == ExpressionType.Quote)
-                    ? (LambdaExpression)((UnaryExpression)Expression).Operand
-                    : (Expression as LambdaExpression);
+                  ? (LambdaExpression)((UnaryExpression)Expression).Operand
+                  : (Expression as LambdaExpression);
             }
         }
     }
@@ -126,8 +125,11 @@ namespace System.Linq.Expressions
     {
         private IReadOnlyList<Expression> _arguments;
 
-        public InvocationExpressionN(Expression lambda, IReadOnlyList<Expression> arguments, Type returnType)
-            : base(lambda, returnType)
+        public InvocationExpressionN(
+            Expression lambda,
+            IReadOnlyList<Expression> arguments,
+            Type returnType
+        ) : base(lambda, returnType)
         {
             _arguments = arguments;
         }
@@ -152,10 +154,8 @@ namespace System.Linq.Expressions
 
     internal sealed class InvocationExpression0 : InvocationExpression
     {
-        public InvocationExpression0(Expression lambda, Type returnType)
-            : base(lambda, returnType)
-        {
-        }
+        public InvocationExpression0(Expression lambda, Type returnType) : base(lambda, returnType)
+        { }
 
         internal override ReadOnlyCollection<Expression> GetOrMakeArguments()
         {
@@ -180,7 +180,7 @@ namespace System.Linq.Expressions
 
     internal sealed class InvocationExpression1 : InvocationExpression
     {
-        private object _arg0;       // storage for the 1st argument or a read-only collection.  See IArgumentProvider
+        private object _arg0; // storage for the 1st argument or a read-only collection.  See IArgumentProvider
 
         public InvocationExpression1(Expression lambda, Type returnType, Expression arg0)
             : base(lambda, returnType)
@@ -217,11 +217,15 @@ namespace System.Linq.Expressions
 
     internal sealed class InvocationExpression2 : InvocationExpression
     {
-        private object _arg0;               // storage for the 1st argument or a read-only collection.  See IArgumentProvider
-        private readonly Expression _arg1;  // storage for the 2nd argument
+        private object _arg0; // storage for the 1st argument or a read-only collection.  See IArgumentProvider
+        private readonly Expression _arg1; // storage for the 2nd argument
 
-        public InvocationExpression2(Expression lambda, Type returnType, Expression arg0, Expression arg1)
-            : base(lambda, returnType)
+        public InvocationExpression2(
+            Expression lambda,
+            Type returnType,
+            Expression arg0,
+            Expression arg1
+        ) : base(lambda, returnType)
         {
             _arg0 = arg0;
             _arg1 = arg1;
@@ -251,18 +255,27 @@ namespace System.Linq.Expressions
             {
                 return Expression.Invoke(lambda, arguments[0], arguments[1]);
             }
-            return Expression.Invoke(lambda, ExpressionUtils.ReturnObject<Expression>(_arg0), _arg1);
+            return Expression.Invoke(
+                lambda,
+                ExpressionUtils.ReturnObject<Expression>(_arg0),
+                _arg1
+            );
         }
     }
 
     internal sealed class InvocationExpression3 : InvocationExpression
     {
-        private object _arg0;               // storage for the 1st argument or a read-only collection.  See IArgumentProvider
-        private readonly Expression _arg1;  // storage for the 2nd argument
-        private readonly Expression _arg2;  // storage for the 3rd argument
+        private object _arg0; // storage for the 1st argument or a read-only collection.  See IArgumentProvider
+        private readonly Expression _arg1; // storage for the 2nd argument
+        private readonly Expression _arg2; // storage for the 3rd argument
 
-        public InvocationExpression3(Expression lambda, Type returnType, Expression arg0, Expression arg1, Expression arg2)
-            : base(lambda, returnType)
+        public InvocationExpression3(
+            Expression lambda,
+            Type returnType,
+            Expression arg0,
+            Expression arg1,
+            Expression arg2
+        ) : base(lambda, returnType)
         {
             _arg0 = arg0;
             _arg1 = arg1;
@@ -294,19 +307,30 @@ namespace System.Linq.Expressions
             {
                 return Expression.Invoke(lambda, arguments[0], arguments[1], arguments[2]);
             }
-            return Expression.Invoke(lambda, ExpressionUtils.ReturnObject<Expression>(_arg0), _arg1, _arg2);
+            return Expression.Invoke(
+                lambda,
+                ExpressionUtils.ReturnObject<Expression>(_arg0),
+                _arg1,
+                _arg2
+            );
         }
     }
 
     internal sealed class InvocationExpression4 : InvocationExpression
     {
-        private object _arg0;               // storage for the 1st argument or a read-only collection.  See IArgumentProvider
-        private readonly Expression _arg1;  // storage for the 2nd argument
-        private readonly Expression _arg2;  // storage for the 3rd argument
-        private readonly Expression _arg3;  // storage for the 4th argument
+        private object _arg0; // storage for the 1st argument or a read-only collection.  See IArgumentProvider
+        private readonly Expression _arg1; // storage for the 2nd argument
+        private readonly Expression _arg2; // storage for the 3rd argument
+        private readonly Expression _arg3; // storage for the 4th argument
 
-        public InvocationExpression4(Expression lambda, Type returnType, Expression arg0, Expression arg1, Expression arg2, Expression arg3)
-            : base(lambda, returnType)
+        public InvocationExpression4(
+            Expression lambda,
+            Type returnType,
+            Expression arg0,
+            Expression arg1,
+            Expression arg2,
+            Expression arg3
+        ) : base(lambda, returnType)
         {
             _arg0 = arg0;
             _arg1 = arg1;
@@ -338,22 +362,41 @@ namespace System.Linq.Expressions
 
             if (arguments != null)
             {
-                return Expression.Invoke(lambda, arguments[0], arguments[1], arguments[2], arguments[3]);
+                return Expression.Invoke(
+                    lambda,
+                    arguments[0],
+                    arguments[1],
+                    arguments[2],
+                    arguments[3]
+                );
             }
-            return Expression.Invoke(lambda, ExpressionUtils.ReturnObject<Expression>(_arg0), _arg1, _arg2, _arg3);
+            return Expression.Invoke(
+                lambda,
+                ExpressionUtils.ReturnObject<Expression>(_arg0),
+                _arg1,
+                _arg2,
+                _arg3
+            );
         }
     }
 
     internal sealed class InvocationExpression5 : InvocationExpression
     {
-        private object _arg0;               // storage for the 1st argument or a read-only collection.  See IArgumentProvider
-        private readonly Expression _arg1;  // storage for the 2nd argument
-        private readonly Expression _arg2;  // storage for the 3rd argument
-        private readonly Expression _arg3;  // storage for the 4th argument
-        private readonly Expression _arg4;  // storage for the 5th argument
+        private object _arg0; // storage for the 1st argument or a read-only collection.  See IArgumentProvider
+        private readonly Expression _arg1; // storage for the 2nd argument
+        private readonly Expression _arg2; // storage for the 3rd argument
+        private readonly Expression _arg3; // storage for the 4th argument
+        private readonly Expression _arg4; // storage for the 5th argument
 
-        public InvocationExpression5(Expression lambda, Type returnType, Expression arg0, Expression arg1, Expression arg2, Expression arg3, Expression arg4)
-            : base(lambda, returnType)
+        public InvocationExpression5(
+            Expression lambda,
+            Type returnType,
+            Expression arg0,
+            Expression arg1,
+            Expression arg2,
+            Expression arg3,
+            Expression arg4
+        ) : base(lambda, returnType)
         {
             _arg0 = arg0;
             _arg1 = arg1;
@@ -387,9 +430,23 @@ namespace System.Linq.Expressions
 
             if (arguments != null)
             {
-                return Expression.Invoke(lambda, arguments[0], arguments[1], arguments[2], arguments[3], arguments[4]);
+                return Expression.Invoke(
+                    lambda,
+                    arguments[0],
+                    arguments[1],
+                    arguments[2],
+                    arguments[3],
+                    arguments[4]
+                );
             }
-            return Expression.Invoke(lambda, ExpressionUtils.ReturnObject<Expression>(_arg0), _arg1, _arg2, _arg3, _arg4);
+            return Expression.Invoke(
+                lambda,
+                ExpressionUtils.ReturnObject<Expression>(_arg0),
+                _arg1,
+                _arg2,
+                _arg3,
+                _arg4
+            );
         }
     }
 
@@ -463,7 +520,14 @@ namespace System.Linq.Expressions
 
             ValidateArgumentCount(method, ExpressionType.Invoke, 1, pis);
 
-            arg0 = ValidateOneArgument(method, ExpressionType.Invoke, arg0, pis[0], nameof(expression), nameof(arg0));
+            arg0 = ValidateOneArgument(
+                method,
+                ExpressionType.Invoke,
+                arg0,
+                pis[0],
+                nameof(expression),
+                nameof(arg0)
+            );
 
             return new InvocationExpression1(expression, method.ReturnType, arg0);
         }
@@ -492,8 +556,11 @@ namespace System.Linq.Expressions
         /// <paramref name="expression"/>.Type does not represent a delegate type or an <see cref="Expression{TDelegate}"/>.-or-The <see cref="Expression.Type"/> property of an argument expression is not assignable to the type of the corresponding parameter of the delegate represented by <paramref name="expression"/>.</exception>
         /// <exception cref="InvalidOperationException">
         /// The number of arguments does not contain match the number of parameters for the delegate represented by <paramref name="expression"/>.</exception>
-        internal static InvocationExpression Invoke(Expression expression, Expression arg0, Expression arg1)
-        {
+        internal static InvocationExpression Invoke(
+            Expression expression,
+            Expression arg0,
+            Expression arg1
+        ) {
             // NB: This method is marked as non-public to avoid public API additions at this point.
             ExpressionUtils.RequiresCanRead(expression, nameof(expression));
 
@@ -503,8 +570,22 @@ namespace System.Linq.Expressions
 
             ValidateArgumentCount(method, ExpressionType.Invoke, 2, pis);
 
-            arg0 = ValidateOneArgument(method, ExpressionType.Invoke, arg0, pis[0], nameof(expression), nameof(arg0));
-            arg1 = ValidateOneArgument(method, ExpressionType.Invoke, arg1, pis[1], nameof(expression), nameof(arg1));
+            arg0 = ValidateOneArgument(
+                method,
+                ExpressionType.Invoke,
+                arg0,
+                pis[0],
+                nameof(expression),
+                nameof(arg0)
+            );
+            arg1 = ValidateOneArgument(
+                method,
+                ExpressionType.Invoke,
+                arg1,
+                pis[1],
+                nameof(expression),
+                nameof(arg1)
+            );
 
             return new InvocationExpression2(expression, method.ReturnType, arg0, arg1);
         }
@@ -536,8 +617,12 @@ namespace System.Linq.Expressions
         /// <paramref name="expression"/>.Type does not represent a delegate type or an <see cref="Expression{TDelegate}"/>.-or-The <see cref="Expression.Type"/> property of an argument expression is not assignable to the type of the corresponding parameter of the delegate represented by <paramref name="expression"/>.</exception>
         /// <exception cref="InvalidOperationException">
         /// The number of arguments does not contain match the number of parameters for the delegate represented by <paramref name="expression"/>.</exception>
-        internal static InvocationExpression Invoke(Expression expression, Expression arg0, Expression arg1, Expression arg2)
-        {
+        internal static InvocationExpression Invoke(
+            Expression expression,
+            Expression arg0,
+            Expression arg1,
+            Expression arg2
+        ) {
             // NB: This method is marked as non-public to avoid public API additions at this point.
 
             ExpressionUtils.RequiresCanRead(expression, nameof(expression));
@@ -548,9 +633,30 @@ namespace System.Linq.Expressions
 
             ValidateArgumentCount(method, ExpressionType.Invoke, 3, pis);
 
-            arg0 = ValidateOneArgument(method, ExpressionType.Invoke, arg0, pis[0], nameof(expression), nameof(arg0));
-            arg1 = ValidateOneArgument(method, ExpressionType.Invoke, arg1, pis[1], nameof(expression), nameof(arg1));
-            arg2 = ValidateOneArgument(method, ExpressionType.Invoke, arg2, pis[2], nameof(expression), nameof(arg2));
+            arg0 = ValidateOneArgument(
+                method,
+                ExpressionType.Invoke,
+                arg0,
+                pis[0],
+                nameof(expression),
+                nameof(arg0)
+            );
+            arg1 = ValidateOneArgument(
+                method,
+                ExpressionType.Invoke,
+                arg1,
+                pis[1],
+                nameof(expression),
+                nameof(arg1)
+            );
+            arg2 = ValidateOneArgument(
+                method,
+                ExpressionType.Invoke,
+                arg2,
+                pis[2],
+                nameof(expression),
+                nameof(arg2)
+            );
 
             return new InvocationExpression3(expression, method.ReturnType, arg0, arg1, arg2);
         }
@@ -585,8 +691,13 @@ namespace System.Linq.Expressions
         /// <paramref name="expression"/>.Type does not represent a delegate type or an <see cref="Expression{TDelegate}"/>.-or-The <see cref="Expression.Type"/> property of an argument expression is not assignable to the type of the corresponding parameter of the delegate represented by <paramref name="expression"/>.</exception>
         /// <exception cref="InvalidOperationException">
         /// The number of arguments does not contain match the number of parameters for the delegate represented by <paramref name="expression"/>.</exception>
-        internal static InvocationExpression Invoke(Expression expression, Expression arg0, Expression arg1, Expression arg2, Expression arg3)
-        {
+        internal static InvocationExpression Invoke(
+            Expression expression,
+            Expression arg0,
+            Expression arg1,
+            Expression arg2,
+            Expression arg3
+        ) {
             // NB: This method is marked as non-public to avoid public API additions at this point.
 
             ExpressionUtils.RequiresCanRead(expression, nameof(expression));
@@ -597,10 +708,38 @@ namespace System.Linq.Expressions
 
             ValidateArgumentCount(method, ExpressionType.Invoke, 4, pis);
 
-            arg0 = ValidateOneArgument(method, ExpressionType.Invoke, arg0, pis[0], nameof(expression), nameof(arg0));
-            arg1 = ValidateOneArgument(method, ExpressionType.Invoke, arg1, pis[1], nameof(expression), nameof(arg1));
-            arg2 = ValidateOneArgument(method, ExpressionType.Invoke, arg2, pis[2], nameof(expression), nameof(arg2));
-            arg3 = ValidateOneArgument(method, ExpressionType.Invoke, arg3, pis[3], nameof(expression), nameof(arg3));
+            arg0 = ValidateOneArgument(
+                method,
+                ExpressionType.Invoke,
+                arg0,
+                pis[0],
+                nameof(expression),
+                nameof(arg0)
+            );
+            arg1 = ValidateOneArgument(
+                method,
+                ExpressionType.Invoke,
+                arg1,
+                pis[1],
+                nameof(expression),
+                nameof(arg1)
+            );
+            arg2 = ValidateOneArgument(
+                method,
+                ExpressionType.Invoke,
+                arg2,
+                pis[2],
+                nameof(expression),
+                nameof(arg2)
+            );
+            arg3 = ValidateOneArgument(
+                method,
+                ExpressionType.Invoke,
+                arg3,
+                pis[3],
+                nameof(expression),
+                nameof(arg3)
+            );
 
             return new InvocationExpression4(expression, method.ReturnType, arg0, arg1, arg2, arg3);
         }
@@ -638,8 +777,14 @@ namespace System.Linq.Expressions
         /// <paramref name="expression"/>.Type does not represent a delegate type or an <see cref="Expression{TDelegate}"/>.-or-The <see cref="Expression.Type"/> property of an argument expression is not assignable to the type of the corresponding parameter of the delegate represented by <paramref name="expression"/>.</exception>
         /// <exception cref="InvalidOperationException">
         /// The number of arguments does not contain match the number of parameters for the delegate represented by <paramref name="expression"/>.</exception>
-        internal static InvocationExpression Invoke(Expression expression, Expression arg0, Expression arg1, Expression arg2, Expression arg3, Expression arg4)
-        {
+        internal static InvocationExpression Invoke(
+            Expression expression,
+            Expression arg0,
+            Expression arg1,
+            Expression arg2,
+            Expression arg3,
+            Expression arg4
+        ) {
             // NB: This method is marked as non-public to avoid public API additions at this point.
 
             ExpressionUtils.RequiresCanRead(expression, nameof(expression));
@@ -650,13 +795,56 @@ namespace System.Linq.Expressions
 
             ValidateArgumentCount(method, ExpressionType.Invoke, 5, pis);
 
-            arg0 = ValidateOneArgument(method, ExpressionType.Invoke, arg0, pis[0], nameof(expression), nameof(arg0));
-            arg1 = ValidateOneArgument(method, ExpressionType.Invoke, arg1, pis[1], nameof(expression), nameof(arg1));
-            arg2 = ValidateOneArgument(method, ExpressionType.Invoke, arg2, pis[2], nameof(expression), nameof(arg2));
-            arg3 = ValidateOneArgument(method, ExpressionType.Invoke, arg3, pis[3], nameof(expression), nameof(arg3));
-            arg4 = ValidateOneArgument(method, ExpressionType.Invoke, arg4, pis[4], nameof(expression), nameof(arg4));
+            arg0 = ValidateOneArgument(
+                method,
+                ExpressionType.Invoke,
+                arg0,
+                pis[0],
+                nameof(expression),
+                nameof(arg0)
+            );
+            arg1 = ValidateOneArgument(
+                method,
+                ExpressionType.Invoke,
+                arg1,
+                pis[1],
+                nameof(expression),
+                nameof(arg1)
+            );
+            arg2 = ValidateOneArgument(
+                method,
+                ExpressionType.Invoke,
+                arg2,
+                pis[2],
+                nameof(expression),
+                nameof(arg2)
+            );
+            arg3 = ValidateOneArgument(
+                method,
+                ExpressionType.Invoke,
+                arg3,
+                pis[3],
+                nameof(expression),
+                nameof(arg3)
+            );
+            arg4 = ValidateOneArgument(
+                method,
+                ExpressionType.Invoke,
+                arg4,
+                pis[4],
+                nameof(expression),
+                nameof(arg4)
+            );
 
-            return new InvocationExpression5(expression, method.ReturnType, arg0, arg1, arg2, arg3, arg4);
+            return new InvocationExpression5(
+                expression,
+                method.ReturnType,
+                arg0,
+                arg1,
+                arg2,
+                arg3,
+                arg4
+            );
         }
 
         /// <summary>
@@ -681,8 +869,10 @@ namespace System.Linq.Expressions
         /// <paramref name="expression"/>.Type does not represent a delegate type or an <see cref="Expression{TDelegate}"/>.-or-The <see cref="Expression.Type"/> property of an element of <paramref name="arguments"/> is not assignable to the type of the corresponding parameter of the delegate represented by <paramref name="expression"/>.</exception>
         /// <exception cref="InvalidOperationException">
         /// <paramref name="arguments"/> does not contain the same number of elements as the list of parameters for the delegate represented by <paramref name="expression"/>.</exception>
-        public static InvocationExpression Invoke(Expression expression, params Expression[]? arguments)
-        {
+        public static InvocationExpression Invoke(
+            Expression expression,
+            params Expression[]? arguments
+        ) {
             return Invoke(expression, (IEnumerable<Expression>?)arguments);
         }
 
@@ -708,9 +898,12 @@ namespace System.Linq.Expressions
         /// <paramref name="expression"/>.Type does not represent a delegate type or an <see cref="Expression{TDelegate}"/>.-or-The <see cref="Expression.Type"/> property of an element of <paramref name="arguments"/> is not assignable to the type of the corresponding parameter of the delegate represented by <paramref name="expression"/>.</exception>
         /// <exception cref="InvalidOperationException">
         /// <paramref name="arguments"/> does not contain the same number of elements as the list of parameters for the delegate represented by <paramref name="expression"/>.</exception>
-        public static InvocationExpression Invoke(Expression expression, IEnumerable<Expression>? arguments)
-        {
-            IReadOnlyList<Expression> argumentList = arguments as IReadOnlyList<Expression> ?? arguments.ToReadOnly();
+        public static InvocationExpression Invoke(
+            Expression expression,
+            IEnumerable<Expression>? arguments
+        ) {
+            IReadOnlyList<Expression> argumentList =
+                arguments as IReadOnlyList<Expression> ?? arguments.ToReadOnly();
 
             switch (argumentList.Count)
             {
@@ -723,9 +916,22 @@ namespace System.Linq.Expressions
                 case 3:
                     return Invoke(expression, argumentList[0], argumentList[1], argumentList[2]);
                 case 4:
-                    return Invoke(expression, argumentList[0], argumentList[1], argumentList[2], argumentList[3]);
+                    return Invoke(
+                        expression,
+                        argumentList[0],
+                        argumentList[1],
+                        argumentList[2],
+                        argumentList[3]
+                    );
                 case 5:
-                    return Invoke(expression, argumentList[0], argumentList[1], argumentList[2], argumentList[3], argumentList[4]);
+                    return Invoke(
+                        expression,
+                        argumentList[0],
+                        argumentList[1],
+                        argumentList[2],
+                        argumentList[3],
+                        argumentList[4]
+                    );
             }
 
             ExpressionUtils.RequiresCanRead(expression, nameof(expression));

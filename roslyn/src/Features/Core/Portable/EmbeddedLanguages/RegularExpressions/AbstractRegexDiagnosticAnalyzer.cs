@@ -17,27 +17,37 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
     /// <summary>
     /// Analyzer that reports diagnostics in strings that we know are regex text.
     /// </summary>
-    internal abstract class AbstractRegexDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal abstract class AbstractRegexDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public const string DiagnosticId = "RE0001";
 
         private readonly EmbeddedLanguageInfo _info;
 
         protected AbstractRegexDiagnosticAnalyzer(EmbeddedLanguageInfo info)
-            : base(DiagnosticId,
-                   EnforceOnBuildValues.Regex,
-                   RegularExpressionsOptions.ReportInvalidRegexPatterns,
-                   new LocalizableResourceString(nameof(FeaturesResources.Regex_issue_0), FeaturesResources.ResourceManager, typeof(FeaturesResources)),
-                   new LocalizableResourceString(nameof(FeaturesResources.Regex_issue_0), FeaturesResources.ResourceManager, typeof(FeaturesResources)))
-        {
+            : base(
+                DiagnosticId,
+                EnforceOnBuildValues.Regex,
+                RegularExpressionsOptions.ReportInvalidRegexPatterns,
+                new LocalizableResourceString(
+                    nameof(FeaturesResources.Regex_issue_0),
+                    FeaturesResources.ResourceManager,
+                    typeof(FeaturesResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(FeaturesResources.Regex_issue_0),
+                    FeaturesResources.ResourceManager,
+                    typeof(FeaturesResources)
+                )
+            ) {
             _info = info;
         }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSemanticModelAction(Analyze);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSemanticModelAction(Analyze);
 
         public void Analyze(SemanticModelAnalysisContext context)
         {
@@ -45,7 +55,10 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
             var syntaxTree = semanticModel.SyntaxTree;
             var cancellationToken = context.CancellationToken;
 
-            var option = context.GetOption(RegularExpressionsOptions.ReportInvalidRegexPatterns, syntaxTree.Options.Language);
+            var option = context.GetOption(
+                RegularExpressionsOptions.ReportInvalidRegexPatterns,
+                syntaxTree.Options.Language
+            );
             if (!option)
             {
                 return;
@@ -82,23 +95,32 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
         }
 
         private void AnalyzeToken(
-            SemanticModelAnalysisContext context, RegexPatternDetector detector,
-            SyntaxToken token, CancellationToken cancellationToken)
-        {
+            SemanticModelAnalysisContext context,
+            RegexPatternDetector detector,
+            SyntaxToken token,
+            CancellationToken cancellationToken
+        ) {
             if (token.RawKind == _info.StringLiteralTokenKind)
             {
-                var tree = detector.TryParseRegexPattern(token, context.SemanticModel, cancellationToken);
+                var tree = detector.TryParseRegexPattern(
+                    token,
+                    context.SemanticModel,
+                    cancellationToken
+                );
                 if (tree != null)
                 {
                     foreach (var diag in tree.Diagnostics)
                     {
-                        context.ReportDiagnostic(DiagnosticHelper.Create(
-                            Descriptor,
-                            Location.Create(context.SemanticModel.SyntaxTree, diag.Span),
-                            ReportDiagnostic.Warn,
-                            additionalLocations: null,
-                            properties: null,
-                            diag.Message));
+                        context.ReportDiagnostic(
+                            DiagnosticHelper.Create(
+                                Descriptor,
+                                Location.Create(context.SemanticModel.SyntaxTree, diag.Span),
+                                ReportDiagnostic.Warn,
+                                additionalLocations: null,
+                                properties: null,
+                                diag.Message
+                            )
+                        );
                     }
                 }
             }

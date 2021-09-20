@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Components.Forms
     /// <summary>
     /// An input component used for selecting a value from a group of choices.
     /// </summary>
-    public class InputRadio<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue> : ComponentBase
+    public class InputRadio<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue>
+        : ComponentBase
     {
         /// <summary>
         /// Gets context for this <see cref="InputRadio{TValue}"/>.
@@ -23,7 +24,8 @@ namespace Microsoft.AspNetCore.Components.Forms
         /// <summary>
         /// Gets or sets a collection of additional attributes that will be applied to the input element.
         /// </summary>
-        [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)]
+        public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
 
         /// <summary>
         /// Gets or sets the value of this input.
@@ -34,16 +36,19 @@ namespace Microsoft.AspNetCore.Components.Forms
         /// <summary>
         /// Gets or sets the name of the parent input radio group.
         /// </summary>
-        [Parameter] public string? Name { get; set; }
+        [Parameter]
+        public string? Name { get; set; }
 
-        [CascadingParameter] private InputRadioContext? CascadedContext { get; set; }
+        [CascadingParameter]
+        private InputRadioContext? CascadedContext { get; set; }
 
         private string GetCssClass(string fieldClass)
         {
-            if (AdditionalAttributes != null &&
-                AdditionalAttributes.TryGetValue("class", out var @class) &&
-                !string.IsNullOrEmpty(Convert.ToString(@class, CultureInfo.InvariantCulture)))
-            {
+            if (
+                AdditionalAttributes != null
+                && AdditionalAttributes.TryGetValue("class", out var @class)
+                && !string.IsNullOrEmpty(Convert.ToString(@class, CultureInfo.InvariantCulture))
+            ) {
                 return $"{@class} {fieldClass}";
             }
 
@@ -53,12 +58,16 @@ namespace Microsoft.AspNetCore.Components.Forms
         /// <inheritdoc />
         protected override void OnParametersSet()
         {
-            Context = string.IsNullOrEmpty(Name) ? CascadedContext : CascadedContext?.FindContextInAncestors(Name);
+            Context = string.IsNullOrEmpty(Name)
+                ? CascadedContext
+                : CascadedContext?.FindContextInAncestors(Name);
 
             if (Context == null)
             {
-                throw new InvalidOperationException($"{GetType()} must have an ancestor {typeof(InputRadioGroup<TValue>)} " +
-                    $"with a matching 'Name' property, if specified.");
+                throw new InvalidOperationException(
+                    $"{GetType()} must have an ancestor {typeof(InputRadioGroup<TValue>)} "
+                        + $"with a matching 'Name' property, if specified."
+                );
             }
         }
 

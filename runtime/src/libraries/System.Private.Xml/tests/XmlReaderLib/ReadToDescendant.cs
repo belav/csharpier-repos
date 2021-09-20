@@ -15,7 +15,8 @@ namespace System.Xml.Tests
     public abstract partial class TCReadToDescendant : TCXMLReaderBaseGeneral
     {
         #region XMLSTR
-        private string _xmlStr = @"<?xml version='1.0'?>
+        private string _xmlStr =
+            @"<?xml version='1.0'?>
                                                     <root><!--Comment-->
                                                         <elem><!-- Comment -->
                                                             <child1 att='1'><?pi target?>
@@ -98,7 +99,8 @@ namespace System.Xml.Tests
                         CError.WriteIgnore(DataReader.ReadInnerXml() + "\n");
                         return TEST_FAIL;
                     }
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Close();
                     return TEST_PASS;
 
@@ -112,7 +114,8 @@ namespace System.Xml.Tests
                             return TEST_FAIL;
                         }
                     }
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Close();
                     return TEST_PASS;
 
@@ -126,7 +129,8 @@ namespace System.Xml.Tests
                             return TEST_FAIL;
                         }
                     }
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Close();
                     return TEST_PASS;
                 default:
@@ -145,12 +149,10 @@ namespace System.Xml.Tests
             {
                 mnw.PutPattern("E/");
                 count++;
-            }
-            while (mnw.GetNodes().Length < 4096);
+            } while (mnw.GetNodes().Length < 4096);
             mnw.PutText("<a/>");
             mnw.Finish();
             CError.WriteIgnore(mnw.GetNodes() + "\n");
-
 
             ReloadSource(new StringReader(mnw.GetNodes()));
             DataReader.PositionOnElement("ELEMENT_1");
@@ -160,7 +162,8 @@ namespace System.Xml.Tests
             CError.Compare(DataReader.Depth, count, "Depth is not correct");
             CError.Compare(DataReader.NodeType, XmlNodeType.Element, "Nodetype is not correct");
 
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             DataReader.Close();
 
             return TEST_PASS;
@@ -189,7 +192,8 @@ namespace System.Xml.Tests
             CError.Compare(DataReader.Depth, 65536, "Depth is not correct");
             CError.Compare(DataReader.NodeType, XmlNodeType.Element, "Nodetype is not correct");
 
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             DataReader.Close();
 
             return TEST_PASS;
@@ -217,9 +221,14 @@ namespace System.Xml.Tests
                         CError.WriteLine("Positioned on wrong element");
                         return TEST_FAIL;
                     }
-                    CError.Compare(DataReader.ReadToDescendant("elem"), false, "There are no more descendants");
+                    CError.Compare(
+                        DataReader.ReadToDescendant("elem"),
+                        false,
+                        "There are no more descendants"
+                    );
                     CError.Compare(DataReader.NodeType, XmlNodeType.EndElement, "Wrong node type");
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Close();
 
                     return TEST_PASS;
@@ -234,9 +243,14 @@ namespace System.Xml.Tests
                             return TEST_FAIL;
                         }
                     }
-                    CError.Compare(DataReader.ReadToDescendant("elem", "elem"), false, "There are no more descendants");
+                    CError.Compare(
+                        DataReader.ReadToDescendant("elem", "elem"),
+                        false,
+                        "There are no more descendants"
+                    );
                     CError.Compare(DataReader.NodeType, XmlNodeType.EndElement, "Wrong node type");
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Close();
 
                     return TEST_PASS;
@@ -251,9 +265,14 @@ namespace System.Xml.Tests
                             return TEST_FAIL;
                         }
                     }
-                    CError.Compare(DataReader.ReadToDescendant("e:elem"), false, "There are no more descendants");
+                    CError.Compare(
+                        DataReader.ReadToDescendant("e:elem"),
+                        false,
+                        "There are no more descendants"
+                    );
                     CError.Compare(DataReader.NodeType, XmlNodeType.EndElement, "Wrong node type");
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Close();
 
                     return TEST_PASS;
@@ -269,34 +288,55 @@ namespace System.Xml.Tests
             ReloadSource(new StringReader(_xmlStr));
             DataReader.PositionOnElement("elem");
 
-            CError.Compare(DataReader.ReadToDescendant("abc"), false, "Reader returned true for an invalid name");
+            CError.Compare(
+                DataReader.ReadToDescendant("abc"),
+                false,
+                "Reader returned true for an invalid name"
+            );
             CError.Compare(DataReader.NodeType, XmlNodeType.EndElement, "Wrong node type");
 
             DataReader.Read();
-            CError.Compare(DataReader.ReadToDescendant("abc", "elem"), false, "reader returned true for an invalid name,ns combination");
+            CError.Compare(
+                DataReader.ReadToDescendant("abc", "elem"),
+                false,
+                "reader returned true for an invalid name,ns combination"
+            );
 
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             DataReader.Close();
 
             return TEST_PASS;
         }
 
-        [Variation("Positioning on a level and try to find the name which is on a level higher", Pri = 1)]
+        [Variation(
+            "Positioning on a level and try to find the name which is on a level higher",
+            Pri = 1
+        )]
         public int v5()
         {
             ReloadSource(new StringReader(_xmlStr));
             DataReader.PositionOnElement("child3");
 
-            CError.Compare(DataReader.ReadToDescendant("child1"), false, "Reader returned true for an invalid name");
+            CError.Compare(
+                DataReader.ReadToDescendant("child1"),
+                false,
+                "Reader returned true for an invalid name"
+            );
             CError.Compare(DataReader.NodeType, XmlNodeType.Element, "Wrong node type");
             CError.Compare(DataReader.LocalName, "child3", "Wrong name");
 
             DataReader.PositionOnElement("child3");
 
-            CError.Compare(DataReader.ReadToDescendant("child2", "child2"), false, "Reader returned true for an invalid name,ns");
+            CError.Compare(
+                DataReader.ReadToDescendant("child2", "child2"),
+                false,
+                "Reader returned true for an invalid name,ns"
+            );
             CError.Compare(DataReader.NodeType, XmlNodeType.Element, "Wrong node type for name,ns");
 
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             DataReader.Close();
 
             return TEST_PASS;
@@ -317,13 +357,17 @@ namespace System.Xml.Tests
             DataReader.Read();
             CError.Compare(DataReader.NodeType, XmlNodeType.Text, "Not on Element");
 
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             DataReader.Close();
 
             return TEST_PASS;
         }
 
-        [Variation("Read to Descendant on one level and again to level below it, with namespace", Pri = 1)]
+        [Variation(
+            "Read to Descendant on one level and again to level below it, with namespace",
+            Pri = 1
+        )]
         public int v7()
         {
             ReloadSource(new StringReader(_xmlStr));
@@ -331,20 +375,36 @@ namespace System.Xml.Tests
 
             CError.Compare(DataReader.ReadToDescendant("elem", "elem"), true, "Cant find elem");
             CError.Compare(DataReader.ReadToDescendant("child1", "elem"), true, "Cant find child1");
-            CError.Compare(DataReader.ReadToDescendant("child2", "child2"), true, "Cant find child2");
-            CError.Compare(DataReader.ReadToDescendant("child3", "child2"), true, "Cant find child3");
-            CError.Compare(DataReader.ReadToDescendant("child4", "child2"), false, "Shouldn't find child4");
+            CError.Compare(
+                DataReader.ReadToDescendant("child2", "child2"),
+                true,
+                "Cant find child2"
+            );
+            CError.Compare(
+                DataReader.ReadToDescendant("child3", "child2"),
+                true,
+                "Cant find child3"
+            );
+            CError.Compare(
+                DataReader.ReadToDescendant("child4", "child2"),
+                false,
+                "Shouldn't find child4"
+            );
             CError.Compare(DataReader.NodeType, XmlNodeType.Element, "Not on EndElement");
             DataReader.Read();
             CError.Compare(DataReader.NodeType, XmlNodeType.Text, "Not on Element");
 
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             DataReader.Close();
 
             return TEST_PASS;
         }
 
-        [Variation("Read to Descendant on one level and again to level below it, with prefix", Pri = 1)]
+        [Variation(
+            "Read to Descendant on one level and again to level below it, with prefix",
+            Pri = 1
+        )]
         public int v8()
         {
             ReloadSource(new StringReader(_xmlStr));
@@ -359,7 +419,8 @@ namespace System.Xml.Tests
             DataReader.Read();
             CError.Compare(DataReader.NodeType, XmlNodeType.Text, "Not on Element");
 
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             DataReader.Close();
 
             return TEST_PASS;
@@ -375,7 +436,8 @@ namespace System.Xml.Tests
             CError.Compare(DataReader.ReadToDescendant("child3"), true, "Read fails child3");
             CError.Compare(DataReader.ReadToNextSibling("child4"), true, "Read fails child4");
 
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             DataReader.Close();
 
             return TEST_PASS;
@@ -388,10 +450,19 @@ namespace System.Xml.Tests
             DataReader.PositionOnElement("root");
 
             CError.Compare(DataReader.ReadToDescendant("elem", "elem"), true, "Read fails elem");
-            CError.Compare(DataReader.ReadToDescendant("child3", "child2"), true, "Read fails child3");
-            CError.Compare(DataReader.ReadToNextSibling("child4", "child2"), true, "Read fails child4");
+            CError.Compare(
+                DataReader.ReadToDescendant("child3", "child2"),
+                true,
+                "Read fails child3"
+            );
+            CError.Compare(
+                DataReader.ReadToNextSibling("child4", "child2"),
+                true,
+                "Read fails child4"
+            );
 
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             DataReader.Close();
 
             return TEST_PASS;
@@ -407,7 +478,8 @@ namespace System.Xml.Tests
             CError.Compare(DataReader.ReadToDescendant("e:child3"), true, "Read fails child3");
             CError.Compare(DataReader.ReadToNextSibling("e:child4"), true, "Read fails child4");
 
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             DataReader.Close();
 
             return TEST_PASS;
@@ -431,7 +503,11 @@ namespace System.Xml.Tests
                     {
                         while (DataReader.MoveToNextAttribute())
                         {
-                            CError.Compare(DataReader.ReadToDescendant("abc"), false, "Fails on attribute node");
+                            CError.Compare(
+                                DataReader.ReadToDescendant("abc"),
+                                false,
+                                "Fails on attribute node"
+                            );
                         }
                     }
                 }
@@ -454,7 +530,11 @@ namespace System.Xml.Tests
             ReloadSource(new StringReader(_xmlStr));
             DataReader.PositionOnElement("root");
 
-            CError.Compare(DataReader.ReadToDescendant("child2", "child2"), true, "Fails on attribute node");
+            CError.Compare(
+                DataReader.ReadToDescendant("child2", "child2"),
+                true,
+                "Fails on attribute node"
+            );
 
             DataReader.Close();
             return TEST_PASS;
@@ -486,7 +566,8 @@ namespace System.Xml.Tests
                 CError.WriteLine("Caught for single param");
             }
 
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             DataReader.Close();
 
             return TEST_PASS;
@@ -495,7 +576,11 @@ namespace System.Xml.Tests
         [Variation("Different names, same uri works correctly", Pri = 2)]
         public int v17()
         {
-            ReloadSource(new StringReader("<root><child1 xmlns='foo'/>blah<child1 xmlns='bar'>blah</child1></root>"));
+            ReloadSource(
+                new StringReader(
+                    "<root><child1 xmlns='foo'/>blah<child1 xmlns='bar'>blah</child1></root>"
+                )
+            );
             DataReader.Read();
             if (IsBinaryReader())
                 DataReader.Read();
@@ -503,12 +588,12 @@ namespace System.Xml.Tests
             DataReader.ReadToDescendant("child1", "bar");
             CError.Compare(DataReader.IsEmptyElement, false, "Not on the correct node");
 
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             DataReader.Close();
 
             return TEST_PASS;
         }
-
 
         //[Variation("On Root Node", Pri = 0, Params = new object[] { "NNS" })]
         //[Variation("On Root Node", Pri = 0, Params = new object[] { "DNS" })]
@@ -529,7 +614,8 @@ namespace System.Xml.Tests
                         CError.WriteIgnore(DataReader.ReadInnerXml() + "\n");
                         return TEST_FAIL;
                     }
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Close();
                     return TEST_PASS;
 
@@ -543,7 +629,8 @@ namespace System.Xml.Tests
                             return TEST_FAIL;
                         }
                     }
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Close();
                     return TEST_PASS;
 
@@ -557,7 +644,8 @@ namespace System.Xml.Tests
                             return TEST_FAIL;
                         }
                     }
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Close();
                     return TEST_PASS;
                 default:
@@ -565,7 +653,10 @@ namespace System.Xml.Tests
             }
         }
 
-        [Variation("Assertion failed when call XmlReader.ReadToDescendant() for non-existing node", Pri = 1)]
+        [Variation(
+            "Assertion failed when call XmlReader.ReadToDescendant() for non-existing node",
+            Pri = 1
+        )]
         public int v19()
         {
             ReloadSource(new StringReader("<a>b</a>"));

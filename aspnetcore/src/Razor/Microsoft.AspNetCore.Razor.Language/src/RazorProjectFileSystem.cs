@@ -18,7 +18,10 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             if (string.IsNullOrEmpty(rootDirectoryPath))
             {
-                throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(rootDirectoryPath));
+                throw new ArgumentException(
+                    Resources.ArgumentCannotBeNullOrEmpty,
+                    nameof(rootDirectoryPath)
+                );
             }
 
             return new DefaultRazorProjectFileSystem(rootDirectoryPath);

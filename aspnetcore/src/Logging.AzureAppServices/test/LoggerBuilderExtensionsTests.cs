@@ -41,29 +41,53 @@ namespace Microsoft.Extensions.Logging.AzureAppServices.Test
         public void BuilderExtensionAddsConfigurationChangeTokenSource()
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddLogging(builder => builder.AddConfiguration(new ConfigurationBuilder().Build()));
+            serviceCollection.AddLogging(
+                builder => builder.AddConfiguration(new ConfigurationBuilder().Build())
+            );
 
             // Tracking for main configuration
-            Assert.Equal(1, serviceCollection.Count(d => d.ServiceType == typeof(IOptionsChangeTokenSource<LoggerFilterOptions>)));
+            Assert.Equal(
+                1,
+                serviceCollection.Count(
+                    d => d.ServiceType == typeof(IOptionsChangeTokenSource<LoggerFilterOptions>)
+                )
+            );
 
             serviceCollection.AddLogging(builder => builder.AddAzureWebAppDiagnostics(_appContext));
 
             // Make sure we add another config change token for azure diagnostic configuration
-            Assert.Equal(2, serviceCollection.Count(d => d.ServiceType == typeof(IOptionsChangeTokenSource<LoggerFilterOptions>)));
+            Assert.Equal(
+                2,
+                serviceCollection.Count(
+                    d => d.ServiceType == typeof(IOptionsChangeTokenSource<LoggerFilterOptions>)
+                )
+            );
         }
 
         [Fact]
         public void BuilderExtensionAddsIConfigureOptions()
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddLogging(builder => builder.AddConfiguration(new ConfigurationBuilder().Build()));
+            serviceCollection.AddLogging(
+                builder => builder.AddConfiguration(new ConfigurationBuilder().Build())
+            );
 
             // Tracking for main configuration
-            Assert.Equal(2, serviceCollection.Count(d => d.ServiceType == typeof(IConfigureOptions<LoggerFilterOptions>)));
+            Assert.Equal(
+                2,
+                serviceCollection.Count(
+                    d => d.ServiceType == typeof(IConfigureOptions<LoggerFilterOptions>)
+                )
+            );
 
             serviceCollection.AddLogging(builder => builder.AddAzureWebAppDiagnostics(_appContext));
 
-            Assert.Equal(4, serviceCollection.Count(d => d.ServiceType == typeof(IConfigureOptions<LoggerFilterOptions>)));
+            Assert.Equal(
+                4,
+                serviceCollection.Count(
+                    d => d.ServiceType == typeof(IConfigureOptions<LoggerFilterOptions>)
+                )
+            );
         }
 
         [Fact]

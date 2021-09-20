@@ -24,29 +24,24 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         /// <param name="storeType"> The name of the database type. </param>
         /// <param name="dbType"> The <see cref="DbType" /> to be used. </param>
-        public FloatTypeMapping(
-            string storeType,
-            DbType? dbType = null)
-            : base(storeType, typeof(float), dbType)
-        {
-        }
+        public FloatTypeMapping(string storeType, DbType? dbType = null)
+            : base(storeType, typeof(float), dbType) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="FloatTypeMapping" /> class.
         /// </summary>
         /// <param name="parameters"> Parameter object for <see cref="RelationalTypeMapping" />. </param>
-        protected FloatTypeMapping(RelationalTypeMappingParameters parameters)
-            : base(parameters)
-        {
-        }
+        protected FloatTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
+        { }
 
         /// <summary>
         ///     Creates a copy of this mapping.
         /// </summary>
         /// <param name="parameters"> The parameters for this mapping. </param>
         /// <returns> The newly created mapping. </returns>
-        protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-            => new FloatTypeMapping(parameters);
+        protected override RelationalTypeMapping Clone(
+            RelationalTypeMappingParameters parameters
+        ) => new FloatTypeMapping(parameters);
 
         /// <summary>
         ///     Generates the SQL representation of a literal value.
@@ -55,7 +50,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns>
         ///     The generated string.
         /// </returns>
-        protected override string GenerateNonNullSqlLiteral(object value)
-            => Convert.ToSingle(value).ToString("R", CultureInfo.InvariantCulture);
+        protected override string GenerateNonNullSqlLiteral(object value) =>
+            Convert.ToSingle(value).ToString("R", CultureInfo.InvariantCulture);
     }
 }

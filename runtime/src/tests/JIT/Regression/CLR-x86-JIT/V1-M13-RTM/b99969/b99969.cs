@@ -14,7 +14,8 @@ internal class Test
 
     private static void DoSpoof()
     {
-        while (!s_target._bDoSpoof) ;
+        while (!s_target._bDoSpoof)
+            ;
         s_target.i = 80000000;
         s_target._bSpoof = true;
     }
@@ -40,7 +41,6 @@ internal class Test
         _bSpoof = false;
         _bDoSpoof = false;
 
-
         int result = arr[i];
 
         result += arr[i];
@@ -48,7 +48,8 @@ internal class Test
         _bDoSpoof = true;
         result += arr[i];
 
-        while (_bSpoof == false) ;
+        while (_bSpoof == false)
+            ;
 
         result += arr[i];
 

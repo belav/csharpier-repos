@@ -17,54 +17,73 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 {
     internal abstract class FixSomeCodeAction : CodeAction
     {
-        private static readonly HashSet<string> s_predefinedCodeFixProviderNames = GetPredefinedCodeFixProviderNames();
+        private static readonly HashSet<string> s_predefinedCodeFixProviderNames =
+            GetPredefinedCodeFixProviderNames();
 
         internal readonly FixAllState FixAllState;
         private bool _showPreviewChangesDialog;
 
-        internal FixSomeCodeAction(
-            FixAllState fixAllState, bool showPreviewChangesDialog)
+        internal FixSomeCodeAction(FixAllState fixAllState, bool showPreviewChangesDialog)
         {
             FixAllState = fixAllState;
             _showPreviewChangesDialog = showPreviewChangesDialog;
         }
 
-        protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(CancellationToken cancellationToken)
-            => await ComputeOperationsAsync(new ProgressTracker(), cancellationToken).ConfigureAwait(false);
+        protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
+            CancellationToken cancellationToken
+        ) =>
+            await ComputeOperationsAsync(new ProgressTracker(), cancellationToken)
+                .ConfigureAwait(false);
 
         internal override Task<ImmutableArray<CodeActionOperation>> ComputeOperationsAsync(
-            IProgressTracker progressTracker, CancellationToken cancellationToken)
-        {
+            IProgressTracker progressTracker,
+            CancellationToken cancellationToken
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
-            FixAllLogger.LogState(FixAllState, IsInternalCodeFixProvider(FixAllState.CodeFixProvider));
+            FixAllLogger.LogState(
+                FixAllState,
+                IsInternalCodeFixProvider(FixAllState.CodeFixProvider)
+            );
 
-            var service = FixAllState.Project.Solution.Workspace.Services.GetService<IFixAllGetFixesService>();
+            var service =
+                FixAllState.Project.Solution.Workspace.Services.GetService<IFixAllGetFixesService>();
 
             var fixAllContext = new FixAllContext(FixAllState, progressTracker, cancellationToken);
             if (progressTracker != null)
-                progressTracker.Description = FixAllContextHelper.GetDefaultFixAllTitle(fixAllContext);
+                progressTracker.Description = FixAllContextHelper.GetDefaultFixAllTitle(
+                    fixAllContext
+                );
 
             return service.GetFixAllOperationsAsync(fixAllContext, _showPreviewChangesDialog);
         }
 
         internal sealed override Task<Solution> GetChangedSolutionAsync(
-            IProgressTracker progressTracker, CancellationToken cancellationToken)
-        {
+            IProgressTracker progressTracker,
+            CancellationToken cancellationToken
+        ) {
             cancellationToken.ThrowIfCancellationRequested();
-            FixAllLogger.LogState(FixAllState, IsInternalCodeFixProvider(FixAllState.CodeFixProvider));
+            FixAllLogger.LogState(
+                FixAllState,
+                IsInternalCodeFixProvider(FixAllState.CodeFixProvider)
+            );
 
-            var service = FixAllState.Project.Solution.Workspace.Services.GetService<IFixAllGetFixesService>();
+            var service =
+                FixAllState.Project.Solution.Workspace.Services.GetService<IFixAllGetFixesService>();
 
             var fixAllContext = new FixAllContext(FixAllState, progressTracker, cancellationToken);
             if (progressTracker != null)
-                progressTracker.Description = FixAllContextHelper.GetDefaultFixAllTitle(fixAllContext);
+                progressTracker.Description = FixAllContextHelper.GetDefaultFixAllTitle(
+                    fixAllContext
+                );
 
             return service.GetFixAllChangedSolutionAsync(fixAllContext);
         }
 
         private static bool IsInternalCodeFixProvider(CodeFixProvider fixer)
         {
-            var exportAttributes = fixer.GetType().GetTypeInfo().GetCustomAttributes(typeof(ExportCodeFixProviderAttribute), false);
+            var exportAttributes = fixer.GetType()
+                .GetTypeInfo()
+                .GetCustomAttributes(typeof(ExportCodeFixProviderAttribute), false);
             if (exportAttributes?.Any() == true)
             {
                 var exportAttribute = (ExportCodeFixProviderAttribute)exportAttributes.First();
@@ -90,21 +109,20 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             return names;
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new(this);
+        internal TestAccessor GetTestAccessor() => new(this);
 
         internal readonly struct TestAccessor
         {
             private readonly FixSomeCodeAction _fixSomeCodeAction;
 
-            internal TestAccessor(FixSomeCodeAction fixSomeCodeAction)
-                => _fixSomeCodeAction = fixSomeCodeAction;
+            internal TestAccessor(FixSomeCodeAction fixSomeCodeAction) =>
+                _fixSomeCodeAction = fixSomeCodeAction;
 
             /// <summary>
             /// Gets a reference to <see cref="_showPreviewChangesDialog"/>, which can be read or written by test code.
             /// </summary>
-            public ref bool ShowPreviewChangesDialog
-                => ref _fixSomeCodeAction._showPreviewChangesDialog;
+            public ref bool ShowPreviewChangesDialog =>
+                ref _fixSomeCodeAction._showPreviewChangesDialog;
         }
     }
 }

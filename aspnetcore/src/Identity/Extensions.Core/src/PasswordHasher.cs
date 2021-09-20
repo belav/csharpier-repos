@@ -54,12 +54,16 @@ namespace Microsoft.AspNetCore.Identity
                     _iterCount = options.IterationCount;
                     if (_iterCount < 1)
                     {
-                        throw new InvalidOperationException(Resources.InvalidPasswordHasherIterationCount);
+                        throw new InvalidOperationException(
+                            Resources.InvalidPasswordHasherIterationCount
+                        );
                     }
                     break;
 
                 default:
-                    throw new InvalidOperationException(Resources.InvalidPasswordHasherCompatibilityMode);
+                    throw new InvalidOperationException(
+                        Resources.InvalidPasswordHasherCompatibilityMode
+                    );
             }
 
             _rng = options.Rng;
@@ -120,7 +124,13 @@ namespace Microsoft.AspNetCore.Identity
             // Produce a version 2 (see comment above) text hash.
             byte[] salt = new byte[SaltSize];
             rng.GetBytes(salt);
-            byte[] subkey = KeyDerivation.Pbkdf2(password, salt, Pbkdf2Prf, Pbkdf2IterCount, Pbkdf2SubkeyLength);
+            byte[] subkey = KeyDerivation.Pbkdf2(
+                password,
+                salt,
+                Pbkdf2Prf,
+                Pbkdf2IterCount,
+                Pbkdf2SubkeyLength
+            );
 
             var outputBytes = new byte[1 + SaltSize + Pbkdf2SubkeyLength];
             outputBytes[0] = 0x00; // format marker
@@ -131,15 +141,24 @@ namespace Microsoft.AspNetCore.Identity
 
         private byte[] HashPasswordV3(string password, RandomNumberGenerator rng)
         {
-            return HashPasswordV3(password, rng,
+            return HashPasswordV3(
+                password,
+                rng,
                 prf: KeyDerivationPrf.HMACSHA256,
                 iterCount: _iterCount,
                 saltSize: 128 / 8,
-                numBytesRequested: 256 / 8);
+                numBytesRequested: 256 / 8
+            );
         }
 
-        private static byte[] HashPasswordV3(string password, RandomNumberGenerator rng, KeyDerivationPrf prf, int iterCount, int saltSize, int numBytesRequested)
-        {
+        private static byte[] HashPasswordV3(
+            string password,
+            RandomNumberGenerator rng,
+            KeyDerivationPrf prf,
+            int iterCount,
+            int saltSize,
+            int numBytesRequested
+        ) {
             // Produce a version 3 (see comment above) text hash.
             byte[] salt = new byte[saltSize];
             rng.GetBytes(salt);
@@ -171,8 +190,11 @@ namespace Microsoft.AspNetCore.Identity
         /// <param name="providedPassword">The password supplied for comparison.</param>
         /// <returns>A <see cref="PasswordVerificationResult"/> indicating the result of a password hash comparison.</returns>
         /// <remarks>Implementations of this method should be time consistent.</remarks>
-        public virtual PasswordVerificationResult VerifyHashedPassword(TUser user, string hashedPassword, string providedPassword)
-        {
+        public virtual PasswordVerificationResult VerifyHashedPassword(
+            TUser user,
+            string hashedPassword,
+            string providedPassword
+        ) {
             if (hashedPassword == null)
             {
                 throw new ArgumentNullException(nameof(hashedPassword));
@@ -196,8 +218,8 @@ namespace Microsoft.AspNetCore.Identity
                     {
                         // This is an old password hash format - the caller needs to rehash if we're not running in an older compat mode.
                         return (_compatibilityMode == PasswordHasherCompatibilityMode.IdentityV3)
-                            ? PasswordVerificationResult.SuccessRehashNeeded
-                            : PasswordVerificationResult.Success;
+                          ? PasswordVerificationResult.SuccessRehashNeeded
+                          : PasswordVerificationResult.Success;
                     }
                     else
                     {
@@ -206,12 +228,17 @@ namespace Microsoft.AspNetCore.Identity
 
                 case 0x01:
                     int embeddedIterCount;
-                    if (VerifyHashedPasswordV3(decodedHashedPassword, providedPassword, out embeddedIterCount))
-                    {
+                    if (
+                        VerifyHashedPasswordV3(
+                            decodedHashedPassword,
+                            providedPassword,
+                            out embeddedIterCount
+                        )
+                    ) {
                         // If this hasher was configured with a higher iteration count, change the entry now.
                         return (embeddedIterCount < _iterCount)
-                            ? PasswordVerificationResult.SuccessRehashNeeded
-                            : PasswordVerificationResult.Success;
+                          ? PasswordVerificationResult.SuccessRehashNeeded
+                          : PasswordVerificationResult.Success;
                     }
                     else
                     {
@@ -240,10 +267,22 @@ namespace Microsoft.AspNetCore.Identity
             Buffer.BlockCopy(hashedPassword, 1, salt, 0, salt.Length);
 
             byte[] expectedSubkey = new byte[Pbkdf2SubkeyLength];
-            Buffer.BlockCopy(hashedPassword, 1 + salt.Length, expectedSubkey, 0, expectedSubkey.Length);
+            Buffer.BlockCopy(
+                hashedPassword,
+                1 + salt.Length,
+                expectedSubkey,
+                0,
+                expectedSubkey.Length
+            );
 
             // Hash the incoming password and verify it
-            byte[] actualSubkey = KeyDerivation.Pbkdf2(password, salt, Pbkdf2Prf, Pbkdf2IterCount, Pbkdf2SubkeyLength);
+            byte[] actualSubkey = KeyDerivation.Pbkdf2(
+                password,
+                salt,
+                Pbkdf2Prf,
+                Pbkdf2IterCount,
+                Pbkdf2SubkeyLength
+            );
 #if NETSTANDARD2_0 || NET461
             return ByteArraysEqual(actualSubkey, expectedSubkey);
 #elif NETCOREAPP
@@ -253,8 +292,11 @@ namespace Microsoft.AspNetCore.Identity
 #endif
         }
 
-        private static bool VerifyHashedPasswordV3(byte[] hashedPassword, string password, out int iterCount)
-        {
+        private static bool VerifyHashedPasswordV3(
+            byte[] hashedPassword,
+            string password,
+            out int iterCount
+        ) {
             iterCount = default(int);
 
             try
@@ -279,10 +321,22 @@ namespace Microsoft.AspNetCore.Identity
                     return false;
                 }
                 byte[] expectedSubkey = new byte[subkeyLength];
-                Buffer.BlockCopy(hashedPassword, 13 + salt.Length, expectedSubkey, 0, expectedSubkey.Length);
+                Buffer.BlockCopy(
+                    hashedPassword,
+                    13 + salt.Length,
+                    expectedSubkey,
+                    0,
+                    expectedSubkey.Length
+                );
 
                 // Hash the incoming password and verify it
-                byte[] actualSubkey = KeyDerivation.Pbkdf2(password, salt, prf, iterCount, subkeyLength);
+                byte[] actualSubkey = KeyDerivation.Pbkdf2(
+                    password,
+                    salt,
+                    prf,
+                    iterCount,
+                    subkeyLength
+                );
 #if NETSTANDARD2_0 || NET461
                 return ByteArraysEqual(actualSubkey, expectedSubkey);
 #elif NETCOREAPP

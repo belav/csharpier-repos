@@ -24,7 +24,6 @@ public struct AA
     }
 }
 
-
 public class App
 {
     public static AA m_xStatic1 = new AA();

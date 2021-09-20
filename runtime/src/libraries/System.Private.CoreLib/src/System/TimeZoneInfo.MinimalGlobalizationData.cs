@@ -5,8 +5,13 @@ namespace System
 {
     public sealed partial class TimeZoneInfo
     {
-        private static void TryPopulateTimeZoneDisplayNamesFromGlobalizationData(string timeZoneId, TimeSpan baseUtcOffset, ref string? standardDisplayName, ref string? daylightDisplayName, ref string? displayName)
-        {
+        private static void TryPopulateTimeZoneDisplayNamesFromGlobalizationData(
+            string timeZoneId,
+            TimeSpan baseUtcOffset,
+            ref string? standardDisplayName,
+            ref string? daylightDisplayName,
+            ref string? displayName
+        ) {
             // Do nothing. We'll use the fallback values already set.
         }
 
@@ -29,14 +34,21 @@ namespace System
             return null;
         }
 
-        private static unsafe bool TryConvertIanaIdToWindowsId(string ianaId, bool allocate, out string? windowsId)
-        {
+        private static unsafe bool TryConvertIanaIdToWindowsId(
+            string ianaId,
+            bool allocate,
+            out string? windowsId
+        ) {
             windowsId = null;
             return false;
         }
 
-        private static unsafe bool TryConvertWindowsIdToIanaId(string windowsId, string? region, bool allocate,  out string? ianaId)
-        {
+        private static unsafe bool TryConvertWindowsIdToIanaId(
+            string windowsId,
+            string? region,
+            bool allocate,
+            out string? ianaId
+        ) {
             ianaId = null;
             return false;
         }

@@ -9,7 +9,8 @@ namespace Microsoft.CodeAnalysis.Razor
 {
     internal abstract class AssemblyIdentityEqualityComparer : IEqualityComparer<AssemblyIdentity>
     {
-        public static readonly AssemblyIdentityEqualityComparer NameAndVersion = new NameAndVersionEqualityComparer();
+        public static readonly AssemblyIdentityEqualityComparer NameAndVersion =
+            new NameAndVersionEqualityComparer();
 
         public abstract bool Equals(AssemblyIdentity x, AssemblyIdentity y);
 
@@ -29,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Razor
                 }
                 else
                 {
-                    return string.Equals(x.Name, y.Name, StringComparison.OrdinalIgnoreCase) && object.Equals(x.Version, y.Version);
+                    return string.Equals(x.Name, y.Name, StringComparison.OrdinalIgnoreCase)
+                        && object.Equals(x.Version, y.Version);
                 }
             }
 

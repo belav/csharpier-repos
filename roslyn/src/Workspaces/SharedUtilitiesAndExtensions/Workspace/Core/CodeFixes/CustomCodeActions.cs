@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
             public SimpleCodeAction(
                 string title,
                 string? equivalenceKey = null,
-                IEnumerable<string>? customTags = null)
-            {
+                IEnumerable<string>? customTags = null
+            ) {
                 Title = title;
                 EquivalenceKey = equivalenceKey;
 
@@ -38,14 +38,15 @@ namespace Microsoft.CodeAnalysis.CodeActions
                 string title,
                 Func<CancellationToken, Task<Document>> createChangedDocument,
                 string? equivalenceKey = null,
-                IEnumerable<string>? customTags = null)
-                : base(title, equivalenceKey, customTags)
+                IEnumerable<string>? customTags = null
+            ) : base(title, equivalenceKey, customTags)
             {
                 _createChangedDocument = createChangedDocument;
             }
 
-            protected sealed override Task<Document> GetChangedDocumentAsync(CancellationToken cancellationToken)
-                => _createChangedDocument(cancellationToken);
+            protected sealed override Task<Document> GetChangedDocumentAsync(
+                CancellationToken cancellationToken
+            ) => _createChangedDocument(cancellationToken);
         }
 
         internal class SolutionChangeAction : SimpleCodeAction
@@ -56,14 +57,15 @@ namespace Microsoft.CodeAnalysis.CodeActions
                 string title,
                 Func<CancellationToken, Task<Solution>> createChangedSolution,
                 string? equivalenceKey = null,
-                IEnumerable<string>? customTags = null)
-                : base(title, equivalenceKey, customTags)
+                IEnumerable<string>? customTags = null
+            ) : base(title, equivalenceKey, customTags)
             {
                 _createChangedSolution = createChangedSolution;
             }
 
-            protected sealed override Task<Solution?> GetChangedSolutionAsync(CancellationToken cancellationToken)
-                => _createChangedSolution(cancellationToken).AsNullable();
+            protected sealed override Task<Solution?> GetChangedSolutionAsync(
+                CancellationToken cancellationToken
+            ) => _createChangedSolution(cancellationToken).AsNullable();
         }
     }
 }

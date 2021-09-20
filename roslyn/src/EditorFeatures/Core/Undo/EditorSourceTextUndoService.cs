@@ -24,11 +24,13 @@ namespace Microsoft.CodeAnalysis.Editor.Undo
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EditorSourceTextUndoService(ITextUndoHistoryRegistry undoHistoryRegistry)
-            => _undoHistoryRegistry = undoHistoryRegistry;
+        public EditorSourceTextUndoService(ITextUndoHistoryRegistry undoHistoryRegistry) =>
+            _undoHistoryRegistry = undoHistoryRegistry;
 
-        public ISourceTextUndoTransaction RegisterUndoTransaction(SourceText sourceText, string description)
-        {
+        public ISourceTextUndoTransaction RegisterUndoTransaction(
+            SourceText sourceText,
+            string description
+        ) {
             if (sourceText != null && !string.IsNullOrWhiteSpace(description))
             {
                 var transaction = new SourceTextUndoTransaction(this, sourceText, description);
@@ -73,8 +75,11 @@ namespace Microsoft.CodeAnalysis.Editor.Undo
 
             private ITextUndoTransaction _transaction;
 
-            public SourceTextUndoTransaction(ISourceTextUndoService service, SourceText sourceText, string description)
-            {
+            public SourceTextUndoTransaction(
+                ISourceTextUndoService service,
+                SourceText sourceText,
+                string description
+            ) {
                 _service = service;
                 SourceText = sourceText;
                 Description = description;
@@ -84,7 +89,9 @@ namespace Microsoft.CodeAnalysis.Editor.Undo
             {
                 if (undoHistory != null)
                 {
-                    _transaction = new HACK_TextUndoTransactionThatRollsBackProperly(undoHistory.CreateTransaction(Description));
+                    _transaction = new HACK_TextUndoTransactionThatRollsBackProperly(
+                        undoHistory.CreateTransaction(Description)
+                    );
                     return true;
                 }
 

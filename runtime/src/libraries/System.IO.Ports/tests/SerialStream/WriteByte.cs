@@ -53,9 +53,12 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void InBreak()
         {
-            using (var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            {
-                Debug.WriteLine("Verifying WriteByte throws InvalidOperationException while in a Break");
+            using (
+                var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
+            ) {
+                Debug.WriteLine(
+                    "Verifying WriteByte throws InvalidOperationException while in a Break"
+                );
                 com1.Open();
                 com1.BreakState = true;
 
@@ -68,14 +71,20 @@ namespace System.IO.Ports.Tests
 
         private void VerifyWrite(Encoding encoding, int numWrites)
         {
-            using (var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
-            {
+            using (
+                var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
+            )
+            using (
+                var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
+            ) {
                 var rndGen = new Random(-55);
                 var buffer = new byte[numWrites];
 
-                Debug.WriteLine("Verifying calling write method {0} timees with endocing={1}", numWrites,
-                    encoding.EncodingName);
+                Debug.WriteLine(
+                    "Verifying calling write method {0} timees with endocing={1}",
+                    numWrites,
+                    encoding.EncodingName
+                );
 
                 com1.Encoding = encoding;
                 com2.Encoding = encoding;
@@ -128,7 +137,11 @@ namespace System.IO.Ports.Tests
                 index++;
                 if (buffer.Length - index != com2.BytesToRead)
                 {
-                    Fail("ERROR!!!: Expected BytesToRead={0} actual={1}", buffer.Length - index, com2.BytesToRead);
+                    Fail(
+                        "ERROR!!!: Expected BytesToRead={0} actual={1}",
+                        buffer.Length - index,
+                        com2.BytesToRead
+                    );
                 }
             }
 

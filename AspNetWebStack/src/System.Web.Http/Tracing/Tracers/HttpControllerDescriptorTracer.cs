@@ -15,15 +15,19 @@ namespace System.Web.Http.Tracing.Tracers
     /// <summary>
     /// Tracer for <see cref=" HttpControllerDescriptor"/>
     /// </summary>
-    internal class HttpControllerDescriptorTracer : HttpControllerDescriptor, IDecorator<HttpControllerDescriptor>
+    internal class HttpControllerDescriptorTracer
+        : HttpControllerDescriptor,
+          IDecorator<HttpControllerDescriptor>
     {
         private const string CreateControllerMethodName = "CreateController";
 
         private readonly HttpControllerDescriptor _innerDescriptor;
         private readonly ITraceWriter _traceWriter;
 
-        public HttpControllerDescriptorTracer(HttpControllerDescriptor innerDescriptor, ITraceWriter traceWriter)
-        {
+        public HttpControllerDescriptorTracer(
+            HttpControllerDescriptor innerDescriptor,
+            ITraceWriter traceWriter
+        ) {
             Contract.Assert(innerDescriptor != null);
             Contract.Assert(traceWriter != null);
 
@@ -42,10 +46,7 @@ namespace System.Web.Http.Tracing.Tracers
 
         public override ConcurrentDictionary<object, object> Properties
         {
-            get
-            {
-                return _innerDescriptor.Properties;
-            }
+            get { return _innerDescriptor.Properties; }
         }
 
         public override Collection<T> GetCustomAttributes<T>()
@@ -63,7 +64,11 @@ namespace System.Web.Http.Tracing.Tracers
             return _innerDescriptor.GetFilters();
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "This object is returned back to the caller")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "This object is returned back to the caller"
+        )]
         public override IHttpController CreateController(HttpRequestMessage request)
         {
             IHttpController controller = null;
@@ -81,11 +86,13 @@ namespace System.Web.Http.Tracing.Tracers
                 },
                 endTrace: (tr) =>
                 {
-                    tr.Message = controller == null
-                                        ? SRResources.TraceNoneObjectMessage
-                                        : HttpControllerTracer.ActualControllerType(controller).FullName;
+                    tr.Message =
+                        controller == null
+                            ? SRResources.TraceNoneObjectMessage
+                            : HttpControllerTracer.ActualControllerType(controller).FullName;
                 },
-                errorTrace: null);
+                errorTrace: null
+            );
 
             if (controller != null && !(controller is HttpControllerTracer))
             {

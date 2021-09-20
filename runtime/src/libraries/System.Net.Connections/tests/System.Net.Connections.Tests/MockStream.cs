@@ -22,11 +22,16 @@ namespace System.Net.Connections.Tests
 
         public override long Length => throw new NotImplementedException();
 
-        public override long Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override long Position
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing) DisposeAsync().AsTask().GetAwaiter().GetResult();
+            if (disposing)
+                DisposeAsync().AsTask().GetAwaiter().GetResult();
         }
 
         public override ValueTask DisposeAsync()
@@ -49,18 +54,29 @@ namespace System.Net.Connections.Tests
             return ReadAsync(buffer, offset, count).GetAwaiter().GetResult();
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             return ReadAsync(buffer.AsMemory(offset, count), cancellationToken).AsTask();
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
-        {
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        ) {
             return OnReadAsync(buffer, cancellationToken);
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
-        {
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        ) {
             return TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
         }
 
@@ -84,18 +100,29 @@ namespace System.Net.Connections.Tests
             WriteAsync(buffer, offset, count).GetAwaiter().GetResult();
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             return WriteAsync(buffer.AsMemory(offset, count), cancellationToken).AsTask();
         }
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
-        {
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        ) {
             return OnWriteAsync(buffer, cancellationToken);
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
-        {
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        ) {
             return TaskToApm.Begin(WriteAsync(buffer, offset, count), callback, state);
         }
 

@@ -14,7 +14,7 @@ namespace ILVerify
         private MetadataType[] _genericRuntimeInterfaces;
         private ModuleDesc _systemModule;
 
-        private static readonly string[] s_genericRuntimeInterfacesNames = 
+        private static readonly string[] s_genericRuntimeInterfacesNames =
         {
             "IEnumerable`1",
             "ICollection`1",
@@ -28,17 +28,23 @@ namespace ILVerify
             _systemModule = systemModule;
 
             // initialize interfaces
-            _arrayRuntimeInterfaces = _systemModule.GetType("System", "Array")?.RuntimeInterfaces 
+            _arrayRuntimeInterfaces =
+                _systemModule.GetType("System", "Array")?.RuntimeInterfaces
                 ?? Array.Empty<DefType>();
 
             _genericRuntimeInterfaces = new MetadataType[s_genericRuntimeInterfacesNames.Length];
             int count = 0;
             for (int i = 0; i < s_genericRuntimeInterfacesNames.Length; ++i)
             {
-                MetadataType runtimeInterface =_systemModule.GetType("System.Collections.Generic", s_genericRuntimeInterfacesNames[i], NotFoundBehavior.ReturnNull);
+                MetadataType runtimeInterface = _systemModule.GetType(
+                    "System.Collections.Generic",
+                    s_genericRuntimeInterfacesNames[i],
+                    NotFoundBehavior.ReturnNull
+                );
                 if (runtimeInterface != null)
                     _genericRuntimeInterfaces[count++] = runtimeInterface;
-            };
+            }
+            ;
             Array.Resize(ref _genericRuntimeInterfaces, count);
         }
 
@@ -49,7 +55,9 @@ namespace ILVerify
             Debug.Assert(arrayType.IsSzArray);
 
             // first copy runtime interfaces from System.Array
-            var result = new DefType[_arrayRuntimeInterfaces.Length + _genericRuntimeInterfaces.Length];
+            var result = new DefType[
+                _arrayRuntimeInterfaces.Length + _genericRuntimeInterfaces.Length
+            ];
             Array.Copy(_arrayRuntimeInterfaces, result, _arrayRuntimeInterfaces.Length);
 
             // then copy instantiated generic interfaces

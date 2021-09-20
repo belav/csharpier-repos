@@ -30,87 +30,107 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public SearchConditionConvertingExpressionVisitor(
-            ISqlExpressionFactory sqlExpressionFactory)
-        {
+            ISqlExpressionFactory sqlExpressionFactory
+        ) {
             _sqlExpressionFactory = sqlExpressionFactory;
         }
 
-        private SqlExpression ApplyConversion(SqlExpression sqlExpression, bool condition)
-            => _isSearchCondition
+        private SqlExpression ApplyConversion(SqlExpression sqlExpression, bool condition) =>
+            _isSearchCondition
                 ? ConvertToSearchCondition(sqlExpression, condition)
                 : ConvertToValue(sqlExpression, condition);
 
-        private SqlExpression ConvertToSearchCondition(SqlExpression sqlExpression, bool condition)
-            => condition
-                ? sqlExpression
-                : BuildCompareToExpression(sqlExpression);
+        private SqlExpression ConvertToSearchCondition(
+            SqlExpression sqlExpression,
+            bool condition
+        ) => condition ? sqlExpression : BuildCompareToExpression(sqlExpression);
 
         private SqlExpression ConvertToValue(SqlExpression sqlExpression, bool condition)
         {
             return condition
-                ? _sqlExpressionFactory.Case(
+              ? _sqlExpressionFactory.Case(
                     new[]
                     {
                         new CaseWhenClause(
                             SimplifyNegatedBinary(sqlExpression),
-                            _sqlExpressionFactory.ApplyDefaultTypeMapping(_sqlExpressionFactory.Constant(true)))
+                            _sqlExpressionFactory.ApplyDefaultTypeMapping(
+                                _sqlExpressionFactory.Constant(true)
+                            )
+                        )
                     },
-                    _sqlExpressionFactory.Constant(false))
-                : sqlExpression;
+                    _sqlExpressionFactory.Constant(false)
+                )
+              : sqlExpression;
         }
 
-        private SqlExpression BuildCompareToExpression(SqlExpression sqlExpression)
-            => sqlExpression is SqlConstantExpression sqlConstantExpression
-                && sqlConstantExpression.Value is bool boolValue
-                    ? _sqlExpressionFactory.Equal(
-                        boolValue
-                            ? _sqlExpressionFactory.Constant(1)
-                            : _sqlExpressionFactory.Constant(0),
-                        _sqlExpressionFactory.Constant(1))
-                    : _sqlExpressionFactory.Equal(
-                        sqlExpression,
-                        _sqlExpressionFactory.Constant(true));
-
+        private SqlExpression BuildCompareToExpression(SqlExpression sqlExpression) =>
+            sqlExpression is SqlConstantExpression sqlConstantExpression
+            && sqlConstantExpression.Value is bool boolValue
+                ? _sqlExpressionFactory.Equal(
+                      boolValue
+                        ? _sqlExpressionFactory.Constant(1)
+                        : _sqlExpressionFactory.Constant(0),
+                      _sqlExpressionFactory.Constant(1)
+                  )
+                : _sqlExpressionFactory.Equal(sqlExpression, _sqlExpressionFactory.Constant(true));
 
         private SqlExpression SimplifyNegatedBinary(SqlExpression sqlExpression)
         {
-            if (sqlExpression is SqlUnaryExpression sqlUnaryExpression
+            if (
+                sqlExpression is SqlUnaryExpression sqlUnaryExpression
                 && sqlUnaryExpression.OperatorType == ExpressionType.Not
                 && sqlUnaryExpression.Type == typeof(bool)
                 && sqlUnaryExpression.Operand is SqlBinaryExpression sqlBinaryOperand
-                && (sqlBinaryOperand.OperatorType == ExpressionType.Equal || sqlBinaryOperand.OperatorType == ExpressionType.NotEqual))
-            {
-                if (sqlBinaryOperand.Left.Type == typeof(bool)
+                && (
+                    sqlBinaryOperand.OperatorType == ExpressionType.Equal
+                    || sqlBinaryOperand.OperatorType == ExpressionType.NotEqual
+                )
+            ) {
+                if (
+                    sqlBinaryOperand.Left.Type == typeof(bool)
                     && sqlBinaryOperand.Right.Type == typeof(bool)
-                    && (sqlBinaryOperand.Left is SqlConstantExpression
-                        || sqlBinaryOperand.Right is SqlConstantExpression))
-                {
-                    var constant = sqlBinaryOperand.Left as SqlConstantExpression ?? (SqlConstantExpression)sqlBinaryOperand.Right;
+                    && (
+                        sqlBinaryOperand.Left is SqlConstantExpression
+                        || sqlBinaryOperand.Right is SqlConstantExpression
+                    )
+                ) {
+                    var constant =
+                        sqlBinaryOperand.Left as SqlConstantExpression
+                        ?? (SqlConstantExpression)sqlBinaryOperand.Right;
                     if (sqlBinaryOperand.Left is SqlConstantExpression)
                     {
                         return _sqlExpressionFactory.MakeBinary(
                             ExpressionType.Equal,
-                            _sqlExpressionFactory.Constant(!(bool)constant.Value!, constant.TypeMapping),
+                            _sqlExpressionFactory.Constant(
+                                !(bool)constant.Value!,
+                                constant.TypeMapping
+                            ),
                             sqlBinaryOperand.Right,
-                            sqlBinaryOperand.TypeMapping)!;
+                            sqlBinaryOperand.TypeMapping
+                        )!;
                     }
                     else
                     {
                         return _sqlExpressionFactory.MakeBinary(
                             ExpressionType.Equal,
                             sqlBinaryOperand.Left,
-                            _sqlExpressionFactory.Constant(!(bool)constant.Value!, constant.TypeMapping),
-                            sqlBinaryOperand.TypeMapping)!;
+                            _sqlExpressionFactory.Constant(
+                                !(bool)constant.Value!,
+                                constant.TypeMapping
+                            ),
+                            sqlBinaryOperand.TypeMapping
+                        )!;
                     }
                 }
 
                 return _sqlExpressionFactory.MakeBinary(
-                        sqlBinaryOperand.OperatorType == ExpressionType.Equal
-                            ? ExpressionType.NotEqual
-                            : ExpressionType.Equal,
-                        sqlBinaryOperand.Left,
-                        sqlBinaryOperand.Right,
-                        sqlBinaryOperand.TypeMapping)!;
+                    sqlBinaryOperand.OperatorType == ExpressionType.Equal
+                      ? ExpressionType.NotEqual
+                      : ExpressionType.Equal,
+                    sqlBinaryOperand.Left,
+                    sqlBinaryOperand.Right,
+                    sqlBinaryOperand.TypeMapping
+                )!;
             }
 
             return sqlExpression;
@@ -146,7 +166,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 
             _isSearchCondition = parentSearchCondition;
 
-            return ApplyConversion(caseExpression.Update(operand, whenClauses, elseResult), condition: false);
+            return ApplyConversion(
+                caseExpression.Update(operand, whenClauses, elseResult),
+                condition: false
+            );
         }
 
         /// <summary>
@@ -267,7 +290,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             var escapeChar = (SqlExpression?)Visit(likeExpression.EscapeChar);
             _isSearchCondition = parentSearchCondition;
 
-            return ApplyConversion(likeExpression.Update(match, pattern, escapeChar), condition: true);
+            return ApplyConversion(
+                likeExpression.Update(match, pattern, escapeChar),
+                condition: true
+            );
         }
 
         /// <summary>
@@ -335,9 +361,17 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             _isSearchCondition = parentSearchCondition;
 
             return changed
-                ? selectExpression.Update(
-                    projections, tables, predicate, groupBy, havingExpression, orderings, limit, offset)
-                : selectExpression;
+              ? selectExpression.Update(
+                    projections,
+                    tables,
+                    predicate,
+                    groupBy,
+                    havingExpression,
+                    orderings,
+                    limit,
+                    offset
+                )
+              : selectExpression;
         }
 
         /// <summary>
@@ -370,7 +404,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             _isSearchCondition = parentIsSearchCondition;
 
             sqlBinaryExpression = sqlBinaryExpression.Update(newLeft, newRight);
-            var condition = sqlBinaryExpression.OperatorType == ExpressionType.AndAlso
+            var condition =
+                sqlBinaryExpression.OperatorType == ExpressionType.AndAlso
                 || sqlBinaryExpression.OperatorType == ExpressionType.OrElse
                 || sqlBinaryExpression.OperatorType == ExpressionType.Equal
                 || sqlBinaryExpression.OperatorType == ExpressionType.NotEqual
@@ -396,8 +431,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             bool resultCondition;
             switch (sqlUnaryExpression.OperatorType)
             {
-                case ExpressionType.Not
-                    when sqlUnaryExpression.Type == typeof(bool):
+                case ExpressionType.Not when sqlUnaryExpression.Type == typeof(bool):
                 {
                     _isSearchCondition = true;
                     resultCondition = true;
@@ -422,8 +456,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     break;
 
                 default:
-                    throw new InvalidOperationException(RelationalStrings.UnsupportedOperatorForSqlExpression(
-                        sqlUnaryExpression.OperatorType, typeof(SqlUnaryExpression)));
+                    throw new InvalidOperationException(
+                        RelationalStrings.UnsupportedOperatorForSqlExpression(
+                            sqlUnaryExpression.OperatorType,
+                            typeof(SqlUnaryExpression)
+                        )
+                    );
             }
 
             var operand = (SqlExpression)Visit(sqlUnaryExpression.Operand);
@@ -431,9 +469,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             _isSearchCondition = parentSearchCondition;
 
             return SimplifyNegatedBinary(
-                ApplyConversion(
-                    sqlUnaryExpression.Update(operand),
-                    condition: resultCondition));
+                ApplyConversion(sqlUnaryExpression.Update(operand), condition: resultCondition)
+            );
         }
 
         /// <summary>
@@ -488,7 +525,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             _isSearchCondition = parentSearchCondition;
             var newFunction = sqlFunctionExpression.Update(instance, arguments);
 
-            var condition = sqlFunctionExpression.Name == "FREETEXT" || sqlFunctionExpression.Name == "CONTAINS";
+            var condition =
+                sqlFunctionExpression.Name == "FREETEXT"
+                || sqlFunctionExpression.Name == "CONTAINS";
 
             return ApplyConversion(newFunction, condition);
         }
@@ -499,8 +538,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override Expression VisitTableValuedFunction(TableValuedFunctionExpression tableValuedFunctionExpression)
-        {
+        protected override Expression VisitTableValuedFunction(
+            TableValuedFunctionExpression tableValuedFunctionExpression
+        ) {
             Check.NotNull(tableValuedFunctionExpression, nameof(tableValuedFunctionExpression));
 
             var parentSearchCondition = _isSearchCondition;
@@ -522,8 +562,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override Expression VisitSqlParameter(SqlParameterExpression sqlParameterExpression)
-        {
+        protected override Expression VisitSqlParameter(
+            SqlParameterExpression sqlParameterExpression
+        ) {
             Check.NotNull(sqlParameterExpression, nameof(sqlParameterExpression));
 
             return ApplyConversion(sqlParameterExpression, condition: false);
@@ -672,8 +713,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override Expression VisitScalarSubquery(ScalarSubqueryExpression scalarSubqueryExpression)
-        {
+        protected override Expression VisitScalarSubquery(
+            ScalarSubqueryExpression scalarSubqueryExpression
+        ) {
             Check.NotNull(scalarSubqueryExpression, nameof(scalarSubqueryExpression));
 
             var parentSearchCondition = _isSearchCondition;
@@ -714,7 +756,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 
             _isSearchCondition = parentSearchCondition;
 
-            return ApplyConversion(rowNumberExpression.Update(partitions, orderings), condition: false);
+            return ApplyConversion(
+                rowNumberExpression.Update(partitions, orderings),
+                condition: false
+            );
         }
 
         /// <summary>

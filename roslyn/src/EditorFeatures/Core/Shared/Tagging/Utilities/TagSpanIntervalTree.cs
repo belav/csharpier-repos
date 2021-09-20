@@ -24,10 +24,11 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
         private readonly ITextBuffer _textBuffer;
         private readonly SpanTrackingMode _spanTrackingMode;
 
-        public TagSpanIntervalTree(ITextBuffer textBuffer,
+        public TagSpanIntervalTree(
+            ITextBuffer textBuffer,
             SpanTrackingMode trackingMode,
-            IEnumerable<ITagSpan<TTag>>? values = null)
-        {
+            IEnumerable<ITagSpan<TTag>>? values = null
+        ) {
             _textBuffer = textBuffer;
             _spanTrackingMode = trackingMode;
 
@@ -47,7 +48,11 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
             Debug.Assert(snapshot.TextBuffer == _textBuffer);
 
             var introspector = new IntervalIntrospector(snapshot);
-            var intersectingIntervals = _tree.GetIntervalsThatIntersectWith(snapshotSpan.Start, snapshotSpan.Length, introspector);
+            var intersectingIntervals = _tree.GetIntervalsThatIntersectWith(
+                snapshotSpan.Start,
+                snapshotSpan.Length,
+                introspector
+            );
 
             List<ITagSpan<TTag>>? result = null;
             foreach (var tagNode in intersectingIntervals)
@@ -59,22 +64,24 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
             return result ?? SpecializedCollections.EmptyList<ITagSpan<TTag>>();
         }
 
-        public IEnumerable<ITagSpan<TTag>> GetSpans(ITextSnapshot snapshot)
-            => _tree.Select(tn => new TagSpan<TTag>(tn.Span.GetSpan(snapshot), tn.Tag));
+        public IEnumerable<ITagSpan<TTag>> GetSpans(ITextSnapshot snapshot) =>
+            _tree.Select(tn => new TagSpan<TTag>(tn.Span.GetSpan(snapshot), tn.Tag));
 
-        public bool IsEmpty()
-            => _tree.IsEmpty();
+        public bool IsEmpty() => _tree.IsEmpty();
 
-        public IEnumerable<ITagSpan<TTag>> GetIntersectingTagSpans(NormalizedSnapshotSpanCollection requestedSpans)
-        {
+        public IEnumerable<ITagSpan<TTag>> GetIntersectingTagSpans(
+            NormalizedSnapshotSpanCollection requestedSpans
+        ) {
             var result = GetIntersectingTagSpansWorker(requestedSpans);
             DebugVerifyTags(requestedSpans, result);
             return result;
         }
 
         [Conditional("DEBUG")]
-        private static void DebugVerifyTags(NormalizedSnapshotSpanCollection requestedSpans, IEnumerable<ITagSpan<TTag>> tags)
-        {
+        private static void DebugVerifyTags(
+            NormalizedSnapshotSpanCollection requestedSpans,
+            IEnumerable<ITagSpan<TTag>> tags
+        ) {
             if (tags == null)
             {
                 return;
@@ -91,21 +98,23 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
             }
         }
 
-        private IEnumerable<ITagSpan<TTag>> GetIntersectingTagSpansWorker(NormalizedSnapshotSpanCollection requestedSpans)
-        {
+        private IEnumerable<ITagSpan<TTag>> GetIntersectingTagSpansWorker(
+            NormalizedSnapshotSpanCollection requestedSpans
+        ) {
             const int MaxNumberOfRequestedSpans = 100;
 
             // Special case the case where there is only one requested span.  In that case, we don't
             // need to allocate any intermediate collections
             return requestedSpans.Count == 1
-                ? GetIntersectingSpans(requestedSpans[0])
-                : requestedSpans.Count < MaxNumberOfRequestedSpans
-                    ? GetTagsForSmallNumberOfSpans(requestedSpans)
-                    : GetTagsForLargeNumberOfSpans(requestedSpans);
+              ? GetIntersectingSpans(requestedSpans[0])
+              : requestedSpans.Count < MaxNumberOfRequestedSpans
+                  ? GetTagsForSmallNumberOfSpans(requestedSpans)
+                  : GetTagsForLargeNumberOfSpans(requestedSpans);
         }
 
-        private IEnumerable<ITagSpan<TTag>> GetTagsForSmallNumberOfSpans(NormalizedSnapshotSpanCollection requestedSpans)
-        {
+        private IEnumerable<ITagSpan<TTag>> GetTagsForSmallNumberOfSpans(
+            NormalizedSnapshotSpanCollection requestedSpans
+        ) {
             var result = new List<ITagSpan<TTag>>();
 
             foreach (var s in requestedSpans)
@@ -116,12 +125,16 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
             return result;
         }
 
-        private IEnumerable<ITagSpan<TTag>> GetTagsForLargeNumberOfSpans(NormalizedSnapshotSpanCollection requestedSpans)
-        {
+        private IEnumerable<ITagSpan<TTag>> GetTagsForLargeNumberOfSpans(
+            NormalizedSnapshotSpanCollection requestedSpans
+        ) {
             // we are asked with bunch of spans. rather than asking same question again and again, ask once with big span
-            // which will return superset of what we want. and then filter them out in O(m+n) cost. 
+            // which will return superset of what we want. and then filter them out in O(m+n) cost.
             // m == number of requested spans, n = number of returned spans
-            var mergedSpan = new SnapshotSpan(requestedSpans[0].Start, requestedSpans[requestedSpans.Count - 1].End);
+            var mergedSpan = new SnapshotSpan(
+                requestedSpans[0].Start,
+                requestedSpans[requestedSpans.Count - 1].End
+            );
             var result = GetIntersectingSpans(mergedSpan);
 
             var requestIndex = 0;
@@ -175,6 +188,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
 
                 return hashSet;
             }
+
             finally
             {
                 enumerator.Dispose();

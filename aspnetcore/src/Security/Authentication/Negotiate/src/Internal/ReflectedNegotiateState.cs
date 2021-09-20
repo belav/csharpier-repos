@@ -33,56 +33,98 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         static ReflectedNegotiateState()
         {
             var secAssembly = typeof(AuthenticationException).Assembly;
-            var ntAuthType = secAssembly.GetType("System.Net.NTAuthentication", throwOnError: true)!;
-            _constructor = ntAuthType.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance).First();
-            _getOutgoingBlob = ntAuthType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).Where(info =>
-                info.Name.Equals("GetOutgoingBlob") && info.GetParameters().Count() == 3).Single();
-            _isCompleted = ntAuthType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).Where(info =>
-                info.Name.Equals("get_IsCompleted")).Single();
-            _protocol = ntAuthType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).Where(info =>
-                info.Name.Equals("get_ProtocolName")).Single();
-            _closeContext = ntAuthType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).Where(info =>
-                info.Name.Equals("CloseContext")).Single();
+            var ntAuthType = secAssembly.GetType(
+                "System.Net.NTAuthentication",
+                throwOnError: true
+            )!;
+            _constructor = ntAuthType.GetConstructors(
+                    BindingFlags.NonPublic | BindingFlags.Instance
+                )
+                .First();
+            _getOutgoingBlob = ntAuthType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
+                .Where(
+                    info => info.Name.Equals("GetOutgoingBlob") && info.GetParameters().Count() == 3
+                )
+                .Single();
+            _isCompleted = ntAuthType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
+                .Where(info => info.Name.Equals("get_IsCompleted"))
+                .Single();
+            _protocol = ntAuthType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
+                .Where(info => info.Name.Equals("get_ProtocolName"))
+                .Single();
+            _closeContext = ntAuthType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
+                .Where(info => info.Name.Equals("CloseContext"))
+                .Single();
 
-            var securityStatusType = secAssembly.GetType("System.Net.SecurityStatusPal", throwOnError: true)!;
+            var securityStatusType = secAssembly.GetType(
+                "System.Net.SecurityStatusPal",
+                throwOnError: true
+            )!;
             _statusCode = securityStatusType.GetField("ErrorCode")!;
             _statusException = securityStatusType.GetField("Exception")!;
 
             if (!OperatingSystem.IsWindows())
             {
                 var interopType = secAssembly.GetType("Interop", throwOnError: true)!;
-                var netNativeType = interopType.GetNestedType("NetSecurityNative", BindingFlags.NonPublic | BindingFlags.Static)!;
-                _gssExceptionType = netNativeType.GetNestedType("GssApiException", BindingFlags.NonPublic)!;
-                _gssMinorStatus = _gssExceptionType.GetField("_minorStatus", BindingFlags.Instance | BindingFlags.NonPublic)!;
+                var netNativeType = interopType.GetNestedType(
+                    "NetSecurityNative",
+                    BindingFlags.NonPublic | BindingFlags.Static
+                )!;
+                _gssExceptionType = netNativeType.GetNestedType(
+                    "GssApiException",
+                    BindingFlags.NonPublic
+                )!;
+                _gssMinorStatus = _gssExceptionType.GetField(
+                    "_minorStatus",
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                )!;
             }
 
-            var negoStreamPalType = secAssembly.GetType("System.Net.Security.NegotiateStreamPal", throwOnError: true)!;
-            _getIdentity = negoStreamPalType.GetMethods(BindingFlags.NonPublic | BindingFlags.Static).Where(info =>
-                info.Name.Equals("GetIdentity")).Single();
-            _getException = negoStreamPalType.GetMethods(BindingFlags.NonPublic | BindingFlags.Static).Where(info =>
-                info.Name.Equals("CreateExceptionFromError")).Single();
+            var negoStreamPalType = secAssembly.GetType(
+                "System.Net.Security.NegotiateStreamPal",
+                throwOnError: true
+            )!;
+            _getIdentity = negoStreamPalType.GetMethods(
+                    BindingFlags.NonPublic | BindingFlags.Static
+                )
+                .Where(info => info.Name.Equals("GetIdentity"))
+                .Single();
+            _getException = negoStreamPalType.GetMethods(
+                    BindingFlags.NonPublic | BindingFlags.Static
+                )
+                .Where(info => info.Name.Equals("CreateExceptionFromError"))
+                .Single();
         }
 
         public ReflectedNegotiateState()
         {
             // internal NTAuthentication(bool isServer, string package, NetworkCredential credential, string spn, ContextFlagsPal requestedContextFlags, ChannelBinding channelBinding)
             var credential = CredentialCache.DefaultCredentials;
-            _instance = _constructor.Invoke(new object?[] { true, "Negotiate", credential, null, 0, null });
+            _instance = _constructor.Invoke(
+                new object?[] { true, "Negotiate", credential, null, 0, null }
+            );
         }
 
         // Copied rather than reflected to remove the IsCompleted -> CloseContext check.
         // The client doesn't need the context once auth is complete, but the server does.
         // I'm not sure why it auto-closes for the client given that the client closes it just a few lines later.
         // https://github.com/dotnet/corefx/blob/a3ab91e10045bb298f48c1d1f9bd5b0782a8ac46/src/System.Net.Http/src/System/Net/Http/SocketsHttpHandler/AuthenticationHelper.NtAuth.cs#L134
-        public string? GetOutgoingBlob(string incomingBlob, out BlobErrorType status, out Exception? error)
-        {
+        public string? GetOutgoingBlob(
+            string incomingBlob,
+            out BlobErrorType status,
+            out Exception? error
+        ) {
             byte[]? decodedIncomingBlob = null;
             if (incomingBlob != null && incomingBlob.Length > 0)
             {
                 decodedIncomingBlob = Convert.FromBase64String(incomingBlob);
             }
 
-            byte[] decodedOutgoingBlob = GetOutgoingBlob(decodedIncomingBlob, out status, out error);
+            byte[] decodedOutgoingBlob = GetOutgoingBlob(
+                decodedIncomingBlob,
+                out status,
+                out error
+            );
 
             string? outgoingBlob = null;
             if (decodedOutgoingBlob != null && decodedOutgoingBlob.Length > 0)
@@ -93,8 +135,11 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
             return outgoingBlob;
         }
 
-        private byte[] GetOutgoingBlob(byte[]? incomingBlob, out BlobErrorType status, out Exception? error)
-        {
+        private byte[] GetOutgoingBlob(
+            byte[]? incomingBlob,
+            out BlobErrorType status,
+            out Exception? error
+        ) {
             try
             {
                 // byte[] GetOutgoingBlob(byte[] incomingBlob, bool throwOnError, out SecurityStatusPal statusCode)
@@ -103,16 +148,19 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
 
                 var securityStatus = parameters[2];
                 // TODO: Update after corefx changes
-                error = (Exception?)(_statusException.GetValue(securityStatus)
-                    ?? _getException.Invoke(null, new[] { securityStatus }));
+                error = (Exception?)(
+                    _statusException.GetValue(securityStatus)
+                    ?? _getException.Invoke(null, new[] { securityStatus })
+                );
                 var errorCode = (SecurityStatusPalErrorCode)_statusCode.GetValue(securityStatus)!;
 
                 // TODO: Remove after corefx changes
                 // The linux implementation always uses InternalError;
-                if (errorCode == SecurityStatusPalErrorCode.InternalError
+                if (
+                    errorCode == SecurityStatusPalErrorCode.InternalError
                     && !OperatingSystem.IsWindows()
-                    && _gssExceptionType!.IsInstanceOfType(error))
-                {
+                    && _gssExceptionType!.IsInstanceOfType(error)
+                ) {
                     var majorStatus = (uint)error.HResult;
                     var minorStatus = (uint)_gssMinorStatus!.GetValue(error)!;
 
@@ -122,13 +170,17 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
                         errorCode = SecurityStatusPalErrorCode.UnknownCredentials;
                     }
 
-                    error = new Exception($"An authentication exception occurred (0x{majorStatus:X}/0x{minorStatus:X}).", error);
+                    error = new Exception(
+                        $"An authentication exception occurred (0x{majorStatus:X}/0x{minorStatus:X}).",
+                        error
+                    );
                 }
 
-                if (errorCode == SecurityStatusPalErrorCode.OK
+                if (
+                    errorCode == SecurityStatusPalErrorCode.OK
                     || errorCode == SecurityStatusPalErrorCode.ContinueNeeded
-                    || errorCode == SecurityStatusPalErrorCode.CompleteNeeded)
-                {
+                    || errorCode == SecurityStatusPalErrorCode.CompleteNeeded
+                ) {
                     status = BlobErrorType.None;
                 }
                 else if (IsCredentialError(errorCode))
@@ -166,7 +218,10 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
 
         public IIdentity GetIdentity()
         {
-            return (IIdentity)_getIdentity.Invoke(obj: null, parameters: new object[] { _instance })!;
+            return (IIdentity)_getIdentity.Invoke(
+                obj: null,
+                parameters: new object[] { _instance }
+            )!;
         }
 
         public void Dispose()
@@ -176,33 +231,33 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
 
         private bool IsCredentialError(SecurityStatusPalErrorCode error)
         {
-            return error == SecurityStatusPalErrorCode.LogonDenied ||
-                error == SecurityStatusPalErrorCode.UnknownCredentials ||
-                error == SecurityStatusPalErrorCode.NoImpersonation ||
-                error == SecurityStatusPalErrorCode.NoAuthenticatingAuthority ||
-                error == SecurityStatusPalErrorCode.UntrustedRoot ||
-                error == SecurityStatusPalErrorCode.CertExpired ||
-                error == SecurityStatusPalErrorCode.SmartcardLogonRequired ||
-                error == SecurityStatusPalErrorCode.BadBinding;
+            return error == SecurityStatusPalErrorCode.LogonDenied
+                || error == SecurityStatusPalErrorCode.UnknownCredentials
+                || error == SecurityStatusPalErrorCode.NoImpersonation
+                || error == SecurityStatusPalErrorCode.NoAuthenticatingAuthority
+                || error == SecurityStatusPalErrorCode.UntrustedRoot
+                || error == SecurityStatusPalErrorCode.CertExpired
+                || error == SecurityStatusPalErrorCode.SmartcardLogonRequired
+                || error == SecurityStatusPalErrorCode.BadBinding;
         }
 
         private bool IsClientError(SecurityStatusPalErrorCode error)
         {
-            return error == SecurityStatusPalErrorCode.InvalidToken ||
-                error == SecurityStatusPalErrorCode.CannotPack ||
-                error == SecurityStatusPalErrorCode.QopNotSupported ||
-                error == SecurityStatusPalErrorCode.NoCredentials ||
-                error == SecurityStatusPalErrorCode.MessageAltered ||
-                error == SecurityStatusPalErrorCode.OutOfSequence ||
-                error == SecurityStatusPalErrorCode.IncompleteMessage ||
-                error == SecurityStatusPalErrorCode.IncompleteCredentials ||
-                error == SecurityStatusPalErrorCode.WrongPrincipal ||
-                error == SecurityStatusPalErrorCode.TimeSkew ||
-                error == SecurityStatusPalErrorCode.IllegalMessage ||
-                error == SecurityStatusPalErrorCode.CertUnknown ||
-                error == SecurityStatusPalErrorCode.AlgorithmMismatch ||
-                error == SecurityStatusPalErrorCode.SecurityQosFailed ||
-                error == SecurityStatusPalErrorCode.UnsupportedPreauth;
+            return error == SecurityStatusPalErrorCode.InvalidToken
+                || error == SecurityStatusPalErrorCode.CannotPack
+                || error == SecurityStatusPalErrorCode.QopNotSupported
+                || error == SecurityStatusPalErrorCode.NoCredentials
+                || error == SecurityStatusPalErrorCode.MessageAltered
+                || error == SecurityStatusPalErrorCode.OutOfSequence
+                || error == SecurityStatusPalErrorCode.IncompleteMessage
+                || error == SecurityStatusPalErrorCode.IncompleteCredentials
+                || error == SecurityStatusPalErrorCode.WrongPrincipal
+                || error == SecurityStatusPalErrorCode.TimeSkew
+                || error == SecurityStatusPalErrorCode.IllegalMessage
+                || error == SecurityStatusPalErrorCode.CertUnknown
+                || error == SecurityStatusPalErrorCode.AlgorithmMismatch
+                || error == SecurityStatusPalErrorCode.SecurityQosFailed
+                || error == SecurityStatusPalErrorCode.UnsupportedPreauth;
         }
     }
 }

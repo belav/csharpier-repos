@@ -24,10 +24,12 @@ namespace System.Runtime.InteropServices
         }
 
         [Obsolete("GetRuntimeInterfaceAsIntPtr(Guid, Guid) is no longer supported.")]
-        public static IntPtr GetRuntimeInterfaceAsIntPtr(Guid clsid, Guid riid) => throw new PlatformNotSupportedException();
+        public static IntPtr GetRuntimeInterfaceAsIntPtr(Guid clsid, Guid riid) =>
+            throw new PlatformNotSupportedException();
 
         [Obsolete("GetRuntimeInterfaceAsObject(Guid, Guid) is no longer supported.")]
-        public static object GetRuntimeInterfaceAsObject(Guid clsid, Guid riid) => throw new PlatformNotSupportedException();
+        public static object GetRuntimeInterfaceAsObject(Guid clsid, Guid riid) =>
+            throw new PlatformNotSupportedException();
 
         public static string GetSystemVersion() => typeof(object).Assembly.ImageRuntimeVersion;
     }

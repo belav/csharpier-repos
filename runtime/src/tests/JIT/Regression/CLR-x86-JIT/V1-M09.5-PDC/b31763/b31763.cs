@@ -14,9 +14,7 @@ namespace Test
         {
             while (param4 != 0.0d)
             {
-                do
-                {
-                } while ((object)m_fForward1 != param2);
+                do { } while ((object)m_fForward1 != param2);
             }
         }
         static int Main()
@@ -26,9 +24,7 @@ namespace Test
                 AA aa = null;
                 Method2(null, ref aa.m_dField2);
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
             return 100;
         }
     }

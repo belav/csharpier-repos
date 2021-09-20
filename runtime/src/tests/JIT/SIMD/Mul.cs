@@ -10,14 +10,14 @@ namespace VectorMathTests
     {
         static int Main(string[] args)
         {
-			Point a = new Point(10, 50);
-			Point b = new Point(10, 10);
+            Point a = new Point(10, 50);
+            Point b = new Point(10, 10);
             Point c = a * b;
-			if (((int)c.X) == 100)
-			{
-				return 100;
-			}
-			return 0;
+            if (((int)c.X) == 100)
+            {
+                return 100;
+            }
+            return 0;
         }
     }
 }

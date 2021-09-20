@@ -23,10 +23,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
     public class MigrationsInfrastructureSqlServerTest
         : MigrationsInfrastructureTestBase<MigrationsInfrastructureSqlServerTest.MigrationsInfrastructureSqlServerFixture>
     {
-        public MigrationsInfrastructureSqlServerTest(MigrationsInfrastructureSqlServerFixture fixture)
-            : base(fixture)
-        {
-        }
+        public MigrationsInfrastructureSqlServerTest(
+            MigrationsInfrastructureSqlServerFixture fixture
+        ) : base(fixture) { }
 
         public override void Can_generate_migration_from_initial_database_to_initial()
         {
@@ -45,7 +44,8 @@ GO
 
 ",
                 Sql,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         public override void Can_generate_no_migration_script()
@@ -65,7 +65,8 @@ GO
 
 ",
                 Sql,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         public override void Can_generate_up_scripts()
@@ -131,7 +132,8 @@ GO
 
 ",
                 Sql,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         public override void Can_generate_up_scripts_noTransactions()
@@ -179,7 +181,8 @@ GO
 
 ",
                 Sql,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         public override void Can_generate_one_up_script()
@@ -202,7 +205,8 @@ GO
 
 ",
                 Sql,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         public override void Can_generate_up_script_using_names()
@@ -225,7 +229,8 @@ GO
 
 ",
                 Sql,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         public override void Can_generate_idempotent_up_scripts()
@@ -312,7 +317,8 @@ GO
 
 ",
                 Sql,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         public override void Can_generate_idempotent_up_scripts_noTransactions()
@@ -381,7 +387,8 @@ GO
 
 ",
                 Sql,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         public override void Can_generate_down_scripts()
@@ -417,7 +424,8 @@ GO
 
 ",
                 Sql,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         public override void Can_generate_idempotent_down_scripts()
@@ -465,7 +473,8 @@ GO
 
 ",
                 Sql,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         public override void Can_generate_one_down_script()
@@ -488,7 +497,8 @@ GO
 
 ",
                 Sql,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         public override void Can_generate_down_script_using_names()
@@ -511,7 +521,8 @@ GO
 
 ",
                 Sql,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         public override void Can_get_active_provider()
@@ -526,8 +537,11 @@ GO
         {
             using var context = new BloggingContext(
                 Fixture.TestStore.AddProviderOptions(
-                    new DbContextOptionsBuilder().EnableServiceProviderCaching(false)).Options);
-            var creator = (SqlServerDatabaseCreator)context.GetService<IRelationalDatabaseCreator>();
+                    new DbContextOptionsBuilder().EnableServiceProviderCaching(false)
+                ).Options
+            );
+            var creator =
+                (SqlServerDatabaseCreator)context.GetService<IRelationalDatabaseCreator>();
             creator.RetryTimeout = TimeSpan.FromMinutes(10);
 
             await context.Database.MigrateAsync();
@@ -537,10 +551,7 @@ GO
 
         private class BloggingContext : DbContext
         {
-            public BloggingContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public BloggingContext(DbContextOptions options) : base(options) { }
 
             // ReSharper disable once UnusedMember.Local
             public DbSet<Blog> Blogs { get; set; }
@@ -560,9 +571,7 @@ GO
         [Migration("00000000000000_Empty")]
         public class EmptyMigration : Migration
         {
-            protected override void Up(MigrationBuilder migrationBuilder)
-            {
-            }
+            protected override void Up(MigrationBuilder migrationBuilder) { }
         }
 
         public override void Can_diff_against_2_2_model()
@@ -576,17 +585,23 @@ GO
             protected override void BuildModel(ModelBuilder modelBuilder)
             {
 #pragma warning disable 612, 618
-                modelBuilder
-                    .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                modelBuilder.HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                     .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    .HasAnnotation(
+                        "SqlServer:ValueGenerationStrategy",
+                        SqlServerValueGenerationStrategy.IdentityColumn
+                    );
 
                 modelBuilder.Entity(
-                    "ModelSnapshot22.Blog", b =>
+                    "ModelSnapshot22.Blog",
+                    b =>
                     {
                         b.Property<int>("Id")
                             .ValueGeneratedOnAdd()
-                            .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                            .HasAnnotation(
+                                "SqlServer:ValueGenerationStrategy",
+                                SqlServerValueGenerationStrategy.IdentityColumn
+                            );
 
                         b.Property<string>("Name");
 
@@ -594,16 +609,20 @@ GO
 
                         b.ToTable("Blogs");
 
-                        b.HasData(
-                            new { Id = 1, Name = "HalfADonkey" });
-                    });
+                        b.HasData(new { Id = 1, Name = "HalfADonkey" });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "ModelSnapshot22.Post", b =>
+                    "ModelSnapshot22.Post",
+                    b =>
                     {
                         b.Property<int>("Id")
                             .ValueGeneratedOnAdd()
-                            .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                            .HasAnnotation(
+                                "SqlServer:ValueGenerationStrategy",
+                                SqlServerValueGenerationStrategy.IdentityColumn
+                            );
 
                         b.Property<int?>("BlogId");
 
@@ -618,15 +637,18 @@ GO
                         b.HasIndex("BlogId");
 
                         b.ToTable("Post");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "ModelSnapshot22.Post", b =>
+                    "ModelSnapshot22.Post",
+                    b =>
                     {
                         b.HasOne("ModelSnapshot22.Blog", "Blog")
                             .WithMany("Posts")
                             .HasForeignKey("BlogId");
-                    });
+                    }
+                );
 #pragma warning restore 612, 618
             }
         }
@@ -642,25 +664,24 @@ GO
             protected override void BuildModel(ModelBuilder modelBuilder)
             {
 #pragma warning disable 612, 618
-                modelBuilder
-                    .HasAnnotation("ProductVersion", "2.1.0")
+                modelBuilder.HasAnnotation("ProductVersion", "2.1.0")
                     .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    .HasAnnotation(
+                        "SqlServer:ValueGenerationStrategy",
+                        SqlServerValueGenerationStrategy.IdentityColumn
+                    );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityRole",
+                    b =>
                     {
-                        b.Property<string>("Id")
-                            .ValueGeneratedOnAdd();
+                        b.Property<string>("Id").ValueGeneratedOnAdd();
 
-                        b.Property<string>("ConcurrencyStamp")
-                            .IsConcurrencyToken();
+                        b.Property<string>("ConcurrencyStamp").IsConcurrencyToken();
 
-                        b.Property<string>("Name")
-                            .HasMaxLength(256);
+                        b.Property<string>("Name").HasMaxLength(256);
 
-                        b.Property<string>("NormalizedName")
-                            .HasMaxLength(256);
+                        b.Property<string>("NormalizedName").HasMaxLength(256);
 
                         b.HasKey("Id");
 
@@ -670,42 +691,45 @@ GO
                             .HasFilter("[NormalizedName] IS NOT NULL");
 
                         b.ToTable("AspNetRoles");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>",
+                    b =>
                     {
                         b.Property<int>("Id")
                             .ValueGeneratedOnAdd()
-                            .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                            .HasAnnotation(
+                                "SqlServer:ValueGenerationStrategy",
+                                SqlServerValueGenerationStrategy.IdentityColumn
+                            );
 
                         b.Property<string>("ClaimType");
 
                         b.Property<string>("ClaimValue");
 
-                        b.Property<string>("RoleId")
-                            .IsRequired();
+                        b.Property<string>("RoleId").IsRequired();
 
                         b.HasKey("Id");
 
                         b.HasIndex("RoleId");
 
                         b.ToTable("AspNetRoleClaims");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUser",
+                    b =>
                     {
-                        b.Property<string>("Id")
-                            .ValueGeneratedOnAdd();
+                        b.Property<string>("Id").ValueGeneratedOnAdd();
 
                         b.Property<int>("AccessFailedCount");
 
-                        b.Property<string>("ConcurrencyStamp")
-                            .IsConcurrencyToken();
+                        b.Property<string>("ConcurrencyStamp").IsConcurrencyToken();
 
-                        b.Property<string>("Email")
-                            .HasMaxLength(256);
+                        b.Property<string>("Email").HasMaxLength(256);
 
                         b.Property<bool>("EmailConfirmed");
 
@@ -713,11 +737,9 @@ GO
 
                         b.Property<DateTimeOffset?>("LockoutEnd");
 
-                        b.Property<string>("NormalizedEmail")
-                            .HasMaxLength(256);
+                        b.Property<string>("NormalizedEmail").HasMaxLength(256);
 
-                        b.Property<string>("NormalizedUserName")
-                            .HasMaxLength(256);
+                        b.Property<string>("NormalizedUserName").HasMaxLength(256);
 
                         b.Property<string>("PasswordHash");
 
@@ -729,13 +751,11 @@ GO
 
                         b.Property<bool>("TwoFactorEnabled");
 
-                        b.Property<string>("UserName")
-                            .HasMaxLength(256);
+                        b.Property<string>("UserName").HasMaxLength(256);
 
                         b.HasKey("Id");
 
-                        b.HasIndex("NormalizedEmail")
-                            .HasName("EmailIndex");
+                        b.HasIndex("NormalizedEmail").HasName("EmailIndex");
 
                         b.HasIndex("NormalizedUserName")
                             .IsUnique()
@@ -743,52 +763,57 @@ GO
                             .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                         b.ToTable("AspNetUsers");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserClaim<string>",
+                    b =>
                     {
                         b.Property<int>("Id")
                             .ValueGeneratedOnAdd()
-                            .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                            .HasAnnotation(
+                                "SqlServer:ValueGenerationStrategy",
+                                SqlServerValueGenerationStrategy.IdentityColumn
+                            );
 
                         b.Property<string>("ClaimType");
 
                         b.Property<string>("ClaimValue");
 
-                        b.Property<string>("UserId")
-                            .IsRequired();
+                        b.Property<string>("UserId").IsRequired();
 
                         b.HasKey("Id");
 
                         b.HasIndex("UserId");
 
                         b.ToTable("AspNetUserClaims");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserLogin<string>",
+                    b =>
                     {
-                        b.Property<string>("LoginProvider")
-                            .HasMaxLength(128);
+                        b.Property<string>("LoginProvider").HasMaxLength(128);
 
-                        b.Property<string>("ProviderKey")
-                            .HasMaxLength(128);
+                        b.Property<string>("ProviderKey").HasMaxLength(128);
 
                         b.Property<string>("ProviderDisplayName");
 
-                        b.Property<string>("UserId")
-                            .IsRequired();
+                        b.Property<string>("UserId").IsRequired();
 
                         b.HasKey("LoginProvider", "ProviderKey");
 
                         b.HasIndex("UserId");
 
                         b.ToTable("AspNetUserLogins");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserRole<string>",
+                    b =>
                     {
                         b.Property<string>("UserId");
 
@@ -799,55 +824,63 @@ GO
                         b.HasIndex("RoleId");
 
                         b.ToTable("AspNetUserRoles");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserToken<string>",
+                    b =>
                     {
                         b.Property<string>("UserId");
 
-                        b.Property<string>("LoginProvider")
-                            .HasMaxLength(128);
+                        b.Property<string>("LoginProvider").HasMaxLength(128);
 
-                        b.Property<string>("Name")
-                            .HasMaxLength(128);
+                        b.Property<string>("Name").HasMaxLength(128);
 
                         b.Property<string>("Value");
 
                         b.HasKey("UserId", "LoginProvider", "Name");
 
                         b.ToTable("AspNetUserTokens");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>",
+                    b =>
                     {
                         b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
                             .WithMany()
                             .HasForeignKey("RoleId")
                             .OnDelete(DeleteBehavior.Cascade);
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserClaim<string>",
+                    b =>
                     {
                         b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                             .WithMany()
                             .HasForeignKey("UserId")
                             .OnDelete(DeleteBehavior.Cascade);
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserLogin<string>",
+                    b =>
                     {
                         b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                             .WithMany()
                             .HasForeignKey("UserId")
                             .OnDelete(DeleteBehavior.Cascade);
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserRole<string>",
+                    b =>
                     {
                         b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
                             .WithMany()
@@ -858,16 +891,19 @@ GO
                             .WithMany()
                             .HasForeignKey("UserId")
                             .OnDelete(DeleteBehavior.Cascade);
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserToken<string>",
+                    b =>
                     {
                         b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                             .WithMany()
                             .HasForeignKey("UserId")
                             .OnDelete(DeleteBehavior.Cascade);
-                    });
+                    }
+                );
 #pragma warning restore 612, 618
             }
         }
@@ -883,25 +919,24 @@ GO
             protected override void BuildModel(ModelBuilder modelBuilder)
             {
 #pragma warning disable 612, 618
-                modelBuilder
-                    .HasAnnotation("ProductVersion", "2.2.0-preview1")
+                modelBuilder.HasAnnotation("ProductVersion", "2.2.0-preview1")
                     .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    .HasAnnotation(
+                        "SqlServer:ValueGenerationStrategy",
+                        SqlServerValueGenerationStrategy.IdentityColumn
+                    );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityRole",
+                    b =>
                     {
-                        b.Property<string>("Id")
-                            .ValueGeneratedOnAdd();
+                        b.Property<string>("Id").ValueGeneratedOnAdd();
 
-                        b.Property<string>("ConcurrencyStamp")
-                            .IsConcurrencyToken();
+                        b.Property<string>("ConcurrencyStamp").IsConcurrencyToken();
 
-                        b.Property<string>("Name")
-                            .HasMaxLength(256);
+                        b.Property<string>("Name").HasMaxLength(256);
 
-                        b.Property<string>("NormalizedName")
-                            .HasMaxLength(256);
+                        b.Property<string>("NormalizedName").HasMaxLength(256);
 
                         b.HasKey("Id");
 
@@ -911,42 +946,45 @@ GO
                             .HasFilter("[NormalizedName] IS NOT NULL");
 
                         b.ToTable("AspNetRoles");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>",
+                    b =>
                     {
                         b.Property<int>("Id")
                             .ValueGeneratedOnAdd()
-                            .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                            .HasAnnotation(
+                                "SqlServer:ValueGenerationStrategy",
+                                SqlServerValueGenerationStrategy.IdentityColumn
+                            );
 
                         b.Property<string>("ClaimType");
 
                         b.Property<string>("ClaimValue");
 
-                        b.Property<string>("RoleId")
-                            .IsRequired();
+                        b.Property<string>("RoleId").IsRequired();
 
                         b.HasKey("Id");
 
                         b.HasIndex("RoleId");
 
                         b.ToTable("AspNetRoleClaims");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUser",
+                    b =>
                     {
-                        b.Property<string>("Id")
-                            .ValueGeneratedOnAdd();
+                        b.Property<string>("Id").ValueGeneratedOnAdd();
 
                         b.Property<int>("AccessFailedCount");
 
-                        b.Property<string>("ConcurrencyStamp")
-                            .IsConcurrencyToken();
+                        b.Property<string>("ConcurrencyStamp").IsConcurrencyToken();
 
-                        b.Property<string>("Email")
-                            .HasMaxLength(256);
+                        b.Property<string>("Email").HasMaxLength(256);
 
                         b.Property<bool>("EmailConfirmed");
 
@@ -954,11 +992,9 @@ GO
 
                         b.Property<DateTimeOffset?>("LockoutEnd");
 
-                        b.Property<string>("NormalizedEmail")
-                            .HasMaxLength(256);
+                        b.Property<string>("NormalizedEmail").HasMaxLength(256);
 
-                        b.Property<string>("NormalizedUserName")
-                            .HasMaxLength(256);
+                        b.Property<string>("NormalizedUserName").HasMaxLength(256);
 
                         b.Property<string>("PasswordHash");
 
@@ -970,13 +1006,11 @@ GO
 
                         b.Property<bool>("TwoFactorEnabled");
 
-                        b.Property<string>("UserName")
-                            .HasMaxLength(256);
+                        b.Property<string>("UserName").HasMaxLength(256);
 
                         b.HasKey("Id");
 
-                        b.HasIndex("NormalizedEmail")
-                            .HasName("EmailIndex");
+                        b.HasIndex("NormalizedEmail").HasName("EmailIndex");
 
                         b.HasIndex("NormalizedUserName")
                             .IsUnique()
@@ -984,52 +1018,57 @@ GO
                             .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                         b.ToTable("AspNetUsers");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserClaim<string>",
+                    b =>
                     {
                         b.Property<int>("Id")
                             .ValueGeneratedOnAdd()
-                            .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                            .HasAnnotation(
+                                "SqlServer:ValueGenerationStrategy",
+                                SqlServerValueGenerationStrategy.IdentityColumn
+                            );
 
                         b.Property<string>("ClaimType");
 
                         b.Property<string>("ClaimValue");
 
-                        b.Property<string>("UserId")
-                            .IsRequired();
+                        b.Property<string>("UserId").IsRequired();
 
                         b.HasKey("Id");
 
                         b.HasIndex("UserId");
 
                         b.ToTable("AspNetUserClaims");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserLogin<string>",
+                    b =>
                     {
-                        b.Property<string>("LoginProvider")
-                            .HasMaxLength(128);
+                        b.Property<string>("LoginProvider").HasMaxLength(128);
 
-                        b.Property<string>("ProviderKey")
-                            .HasMaxLength(128);
+                        b.Property<string>("ProviderKey").HasMaxLength(128);
 
                         b.Property<string>("ProviderDisplayName");
 
-                        b.Property<string>("UserId")
-                            .IsRequired();
+                        b.Property<string>("UserId").IsRequired();
 
                         b.HasKey("LoginProvider", "ProviderKey");
 
                         b.HasIndex("UserId");
 
                         b.ToTable("AspNetUserLogins");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserRole<string>",
+                    b =>
                     {
                         b.Property<string>("UserId");
 
@@ -1040,55 +1079,63 @@ GO
                         b.HasIndex("RoleId");
 
                         b.ToTable("AspNetUserRoles");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserToken<string>",
+                    b =>
                     {
                         b.Property<string>("UserId");
 
-                        b.Property<string>("LoginProvider")
-                            .HasMaxLength(128);
+                        b.Property<string>("LoginProvider").HasMaxLength(128);
 
-                        b.Property<string>("Name")
-                            .HasMaxLength(128);
+                        b.Property<string>("Name").HasMaxLength(128);
 
                         b.Property<string>("Value");
 
                         b.HasKey("UserId", "LoginProvider", "Name");
 
                         b.ToTable("AspNetUserTokens");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>",
+                    b =>
                     {
                         b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
                             .WithMany()
                             .HasForeignKey("RoleId")
                             .OnDelete(DeleteBehavior.Cascade);
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserClaim<string>",
+                    b =>
                     {
                         b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                             .WithMany()
                             .HasForeignKey("UserId")
                             .OnDelete(DeleteBehavior.Cascade);
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserLogin<string>",
+                    b =>
                     {
                         b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                             .WithMany()
                             .HasForeignKey("UserId")
                             .OnDelete(DeleteBehavior.Cascade);
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserRole<string>",
+                    b =>
                     {
                         b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
                             .WithMany()
@@ -1099,16 +1146,19 @@ GO
                             .WithMany()
                             .HasForeignKey("UserId")
                             .OnDelete(DeleteBehavior.Cascade);
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserToken<string>",
+                    b =>
                     {
                         b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                             .WithMany()
                             .HasForeignKey("UserId")
                             .OnDelete(DeleteBehavior.Cascade);
-                    });
+                    }
+                );
 #pragma warning restore 612, 618
             }
         }
@@ -1124,24 +1174,24 @@ GO
             protected override void BuildModel(ModelBuilder modelBuilder)
             {
 #pragma warning disable 612, 618
-                modelBuilder
-                    .HasAnnotation("ProductVersion", "3.0.0")
+                modelBuilder.HasAnnotation("ProductVersion", "3.0.0")
                     .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    .HasAnnotation(
+                        "SqlServer:ValueGenerationStrategy",
+                        SqlServerValueGenerationStrategy.IdentityColumn
+                    );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityRole",
+                    b =>
                     {
-                        b.Property<string>("Id")
-                            .HasColumnType("nvarchar(450)");
+                        b.Property<string>("Id").HasColumnType("nvarchar(450)");
 
                         b.Property<string>("ConcurrencyStamp")
                             .IsConcurrencyToken()
                             .HasColumnType("nvarchar(max)");
 
-                        b.Property<string>("Name")
-                            .HasColumnType("nvarchar(256)")
-                            .HasMaxLength(256);
+                        b.Property<string>("Name").HasColumnType("nvarchar(256)").HasMaxLength(256);
 
                         b.Property<string>("NormalizedName")
                             .HasColumnType("nvarchar(256)")
@@ -1155,41 +1205,42 @@ GO
                             .HasFilter("[NormalizedName] IS NOT NULL");
 
                         b.ToTable("AspNetRoles");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>",
+                    b =>
                     {
                         b.Property<int>("Id")
                             .ValueGeneratedOnAdd()
                             .HasColumnType("int")
-                            .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                            .HasAnnotation(
+                                "SqlServer:ValueGenerationStrategy",
+                                SqlServerValueGenerationStrategy.IdentityColumn
+                            );
 
-                        b.Property<string>("ClaimType")
-                            .HasColumnType("nvarchar(max)");
+                        b.Property<string>("ClaimType").HasColumnType("nvarchar(max)");
 
-                        b.Property<string>("ClaimValue")
-                            .HasColumnType("nvarchar(max)");
+                        b.Property<string>("ClaimValue").HasColumnType("nvarchar(max)");
 
-                        b.Property<string>("RoleId")
-                            .IsRequired()
-                            .HasColumnType("nvarchar(450)");
+                        b.Property<string>("RoleId").IsRequired().HasColumnType("nvarchar(450)");
 
                         b.HasKey("Id");
 
                         b.HasIndex("RoleId");
 
                         b.ToTable("AspNetRoleClaims");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUser",
+                    b =>
                     {
-                        b.Property<string>("Id")
-                            .HasColumnType("nvarchar(450)");
+                        b.Property<string>("Id").HasColumnType("nvarchar(450)");
 
-                        b.Property<int>("AccessFailedCount")
-                            .HasColumnType("int");
+                        b.Property<int>("AccessFailedCount").HasColumnType("int");
 
                         b.Property<string>("ConcurrencyStamp")
                             .IsConcurrencyToken()
@@ -1199,14 +1250,11 @@ GO
                             .HasColumnType("nvarchar(256)")
                             .HasMaxLength(256);
 
-                        b.Property<bool>("EmailConfirmed")
-                            .HasColumnType("bit");
+                        b.Property<bool>("EmailConfirmed").HasColumnType("bit");
 
-                        b.Property<bool>("LockoutEnabled")
-                            .HasColumnType("bit");
+                        b.Property<bool>("LockoutEnabled").HasColumnType("bit");
 
-                        b.Property<DateTimeOffset?>("LockoutEnd")
-                            .HasColumnType("datetimeoffset");
+                        b.Property<DateTimeOffset?>("LockoutEnd").HasColumnType("datetimeoffset");
 
                         b.Property<string>("NormalizedEmail")
                             .HasColumnType("nvarchar(256)")
@@ -1216,20 +1264,15 @@ GO
                             .HasColumnType("nvarchar(256)")
                             .HasMaxLength(256);
 
-                        b.Property<string>("PasswordHash")
-                            .HasColumnType("nvarchar(max)");
+                        b.Property<string>("PasswordHash").HasColumnType("nvarchar(max)");
 
-                        b.Property<string>("PhoneNumber")
-                            .HasColumnType("nvarchar(max)");
+                        b.Property<string>("PhoneNumber").HasColumnType("nvarchar(max)");
 
-                        b.Property<bool>("PhoneNumberConfirmed")
-                            .HasColumnType("bit");
+                        b.Property<bool>("PhoneNumberConfirmed").HasColumnType("bit");
 
-                        b.Property<string>("SecurityStamp")
-                            .HasColumnType("nvarchar(max)");
+                        b.Property<string>("SecurityStamp").HasColumnType("nvarchar(max)");
 
-                        b.Property<bool>("TwoFactorEnabled")
-                            .HasColumnType("bit");
+                        b.Property<bool>("TwoFactorEnabled").HasColumnType("bit");
 
                         b.Property<string>("UserName")
                             .HasColumnType("nvarchar(256)")
@@ -1237,8 +1280,7 @@ GO
 
                         b.HasKey("Id");
 
-                        b.HasIndex("NormalizedEmail")
-                            .HasName("EmailIndex");
+                        b.HasIndex("NormalizedEmail").HasName("EmailIndex");
 
                         b.HasIndex("NormalizedUserName")
                             .IsUnique()
@@ -1246,35 +1288,38 @@ GO
                             .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                         b.ToTable("AspNetUsers");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserClaim<string>",
+                    b =>
                     {
                         b.Property<int>("Id")
                             .ValueGeneratedOnAdd()
                             .HasColumnType("int")
-                            .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                            .HasAnnotation(
+                                "SqlServer:ValueGenerationStrategy",
+                                SqlServerValueGenerationStrategy.IdentityColumn
+                            );
 
-                        b.Property<string>("ClaimType")
-                            .HasColumnType("nvarchar(max)");
+                        b.Property<string>("ClaimType").HasColumnType("nvarchar(max)");
 
-                        b.Property<string>("ClaimValue")
-                            .HasColumnType("nvarchar(max)");
+                        b.Property<string>("ClaimValue").HasColumnType("nvarchar(max)");
 
-                        b.Property<string>("UserId")
-                            .IsRequired()
-                            .HasColumnType("nvarchar(450)");
+                        b.Property<string>("UserId").IsRequired().HasColumnType("nvarchar(450)");
 
                         b.HasKey("Id");
 
                         b.HasIndex("UserId");
 
                         b.ToTable("AspNetUserClaims");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserLogin<string>",
+                    b =>
                     {
                         b.Property<string>("LoginProvider")
                             .HasColumnType("nvarchar(128)")
@@ -1284,90 +1329,93 @@ GO
                             .HasColumnType("nvarchar(128)")
                             .HasMaxLength(128);
 
-                        b.Property<string>("ProviderDisplayName")
-                            .HasColumnType("nvarchar(max)");
+                        b.Property<string>("ProviderDisplayName").HasColumnType("nvarchar(max)");
 
-                        b.Property<string>("UserId")
-                            .IsRequired()
-                            .HasColumnType("nvarchar(450)");
+                        b.Property<string>("UserId").IsRequired().HasColumnType("nvarchar(450)");
 
                         b.HasKey("LoginProvider", "ProviderKey");
 
                         b.HasIndex("UserId");
 
                         b.ToTable("AspNetUserLogins");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserRole<string>",
+                    b =>
                     {
-                        b.Property<string>("UserId")
-                            .HasColumnType("nvarchar(450)");
+                        b.Property<string>("UserId").HasColumnType("nvarchar(450)");
 
-                        b.Property<string>("RoleId")
-                            .HasColumnType("nvarchar(450)");
+                        b.Property<string>("RoleId").HasColumnType("nvarchar(450)");
 
                         b.HasKey("UserId", "RoleId");
 
                         b.HasIndex("RoleId");
 
                         b.ToTable("AspNetUserRoles");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserToken<string>",
+                    b =>
                     {
-                        b.Property<string>("UserId")
-                            .HasColumnType("nvarchar(450)");
+                        b.Property<string>("UserId").HasColumnType("nvarchar(450)");
 
                         b.Property<string>("LoginProvider")
                             .HasColumnType("nvarchar(128)")
                             .HasMaxLength(128);
 
-                        b.Property<string>("Name")
-                            .HasColumnType("nvarchar(128)")
-                            .HasMaxLength(128);
+                        b.Property<string>("Name").HasColumnType("nvarchar(128)").HasMaxLength(128);
 
-                        b.Property<string>("Value")
-                            .HasColumnType("nvarchar(max)");
+                        b.Property<string>("Value").HasColumnType("nvarchar(max)");
 
                         b.HasKey("UserId", "LoginProvider", "Name");
 
                         b.ToTable("AspNetUserTokens");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>",
+                    b =>
                     {
                         b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                             .WithMany()
                             .HasForeignKey("RoleId")
                             .OnDelete(DeleteBehavior.Cascade)
                             .IsRequired();
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserClaim<string>",
+                    b =>
                     {
                         b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                             .WithMany()
                             .HasForeignKey("UserId")
                             .OnDelete(DeleteBehavior.Cascade)
                             .IsRequired();
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserLogin<string>",
+                    b =>
                     {
                         b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                             .WithMany()
                             .HasForeignKey("UserId")
                             .OnDelete(DeleteBehavior.Cascade)
                             .IsRequired();
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserRole<string>",
+                    b =>
                     {
                         b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                             .WithMany()
@@ -1380,25 +1428,28 @@ GO
                             .HasForeignKey("UserId")
                             .OnDelete(DeleteBehavior.Cascade)
                             .IsRequired();
-                    });
+                    }
+                );
 
                 modelBuilder.Entity(
-                    "Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                    "Microsoft.AspNetCore.Identity.IdentityUserToken<string>",
+                    b =>
                     {
                         b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                             .WithMany()
                             .HasForeignKey("UserId")
                             .OnDelete(DeleteBehavior.Cascade)
                             .IsRequired();
-                    });
+                    }
+                );
 #pragma warning restore 612, 618
             }
         }
 
         public class MigrationsInfrastructureSqlServerFixture : MigrationsInfrastructureFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => SqlServerTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqlServerTestStoreFactory.Instance;
 
             public override async Task InitializeAsync()
             {
@@ -1406,15 +1457,16 @@ GO
                 await ((SqlServerTestStore)TestStore).ExecuteNonQueryAsync(
                     @"USE master
 IF EXISTS(select * from sys.databases where name='TransactionSuppressed')
-DROP DATABASE TransactionSuppressed");
+DROP DATABASE TransactionSuppressed"
+                );
             }
 
             public override MigrationsContext CreateContext()
             {
-                var options = AddOptions(TestStore.AddProviderOptions(new DbContextOptionsBuilder()))
-                    .UseSqlServer(TestStore.ConnectionString, b => b.ApplyConfiguration())
-                    .UseInternalServiceProvider(ServiceProvider)
-                    .Options;
+                var options =
+                    AddOptions(TestStore.AddProviderOptions(new DbContextOptionsBuilder()))
+                        .UseSqlServer(TestStore.ConnectionString, b => b.ApplyConfiguration())
+                        .UseInternalServiceProvider(ServiceProvider).Options;
                 return new MigrationsContext(options);
             }
         }
@@ -1443,15 +1495,16 @@ namespace ModelSnapshot22
 
     public class BloggingContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Test;ConnectRetryCount=0");
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseSqlServer(
+                @"Server=(localdb)\mssqllocaldb;Database=Test;ConnectRetryCount=0"
+            );
 
         public DbSet<Blog> Blogs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Blog>().HasData(
-                new Blog { Id = 1, Name = "HalfADonkey" });
+            modelBuilder.Entity<Blog>().HasData(new Blog { Id = 1, Name = "HalfADonkey" });
         }
     }
 }
@@ -1460,8 +1513,10 @@ namespace Identity30.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Test;ConnectRetryCount=0");
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseSqlServer(
+                @"Server=(localdb)\mssqllocaldb;Database=Test;ConnectRetryCount=0"
+            );
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -1470,47 +1525,56 @@ namespace Identity30.Data
             builder.Entity<IdentityUser>(
                 b =>
                 {
-                    b.HasIndex(u => u.NormalizedUserName).HasDatabaseName("UserNameIndex").IsUnique();
+                    b.HasIndex(u => u.NormalizedUserName)
+                        .HasDatabaseName("UserNameIndex")
+                        .IsUnique();
                     b.HasIndex(u => u.NormalizedEmail).HasDatabaseName("EmailIndex");
                     b.ToTable("AspNetUsers");
-                });
+                }
+            );
 
             builder.Entity<IdentityUserClaim<string>>(
                 b =>
                 {
                     b.ToTable("AspNetUserClaims");
-                });
+                }
+            );
 
             builder.Entity<IdentityUserLogin<string>>(
                 b =>
                 {
                     b.ToTable("AspNetUserLogins");
-                });
+                }
+            );
 
             builder.Entity<IdentityUserToken<string>>(
                 b =>
                 {
                     b.ToTable("AspNetUserTokens");
-                });
+                }
+            );
 
             builder.Entity<IdentityRole>(
                 b =>
                 {
                     b.HasIndex(r => r.NormalizedName).HasDatabaseName("RoleNameIndex").IsUnique();
                     b.ToTable("AspNetRoles");
-                });
+                }
+            );
 
             builder.Entity<IdentityRoleClaim<string>>(
                 b =>
                 {
                     b.ToTable("AspNetRoleClaims");
-                });
+                }
+            );
 
             builder.Entity<IdentityUserRole<string>>(
                 b =>
                 {
                     b.ToTable("AspNetUserRoles");
-                });
+                }
+            );
         }
     }
 }

@@ -23,10 +23,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal
 
         public override DirectoryInfoBase ParentDirectory
         {
-            get
-            {
-                return _parent;
-            }
+            get { return _parent; }
         }
     }
 }

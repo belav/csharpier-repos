@@ -14,7 +14,7 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         public IServiceCollection Services { get; }
-        
+
         public IHealthChecksBuilder Add(HealthCheckRegistration registration)
         {
             if (registration == null)
@@ -22,10 +22,12 @@ namespace Microsoft.Extensions.DependencyInjection
                 throw new ArgumentNullException(nameof(registration));
             }
 
-            Services.Configure<HealthCheckServiceOptions>(options =>
-            {
-                options.Registrations.Add(registration);
-            });
+            Services.Configure<HealthCheckServiceOptions>(
+                options =>
+                {
+                    options.Registrations.Add(registration);
+                }
+            );
 
             return this;
         }

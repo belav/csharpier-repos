@@ -12,12 +12,11 @@ namespace System.CommandLine.Builder
 {
     public class CommandLineBuilder : CommandBuilder
     {
-        private readonly List<(InvocationMiddleware middleware, int order)> _middlewareList = new List<(InvocationMiddleware middleware, int order)>();
+        private readonly List<(InvocationMiddleware middleware, int order)> _middlewareList =
+            new List<(InvocationMiddleware middleware, int order)>();
 
         public CommandLineBuilder(Command? rootCommand = null)
-            : base(rootCommand ?? new RootCommand())
-        {
-        }
+            : base(rootCommand ?? new RootCommand()) { }
 
         public bool EnableDirectives { get; set; } = true;
 
@@ -44,28 +43,26 @@ namespace System.CommandLine.Builder
                     validationMessages: ValidationMessages,
                     responseFileHandling: ResponseFileHandling,
                     middlewarePipeline: _middlewareList.OrderBy(m => m.order)
-                                                       .Select(m => m.middleware)
-                                                       .ToArray(),
+                        .Select(m => m.middleware)
+                        .ToArray(),
                     helpBuilderFactory: HelpBuilderFactory,
-                    configureHelp: ConfigureHelp));
+                    configureHelp: ConfigureHelp
+                )
+            );
 
             Command.ImplicitParser = parser;
 
             return parser;
         }
 
-        internal void AddMiddleware(
-            InvocationMiddleware middleware,
-            MiddlewareOrder order)
+        internal void AddMiddleware(InvocationMiddleware middleware, MiddlewareOrder order)
         {
-            _middlewareList.Add((middleware, (int) order));
+            _middlewareList.Add((middleware, (int)order));
         }
 
-        internal void AddMiddleware(
-            InvocationMiddleware middleware,
-            MiddlewareOrderInternal order)
+        internal void AddMiddleware(InvocationMiddleware middleware, MiddlewareOrderInternal order)
         {
-            _middlewareList.Add((middleware, (int) order));
+            _middlewareList.Add((middleware, (int)order));
         }
     }
 }

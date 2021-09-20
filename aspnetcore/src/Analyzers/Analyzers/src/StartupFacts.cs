@@ -30,8 +30,10 @@ namespace Microsoft.AspNetCore.Analyzers
             var members = type.GetMembers();
             for (var i = 0; i < members.Length; i++)
             {
-                if (members[i] is IMethodSymbol method && (IsConfigureServices(symbols, method) || IsConfigure(symbols, method)))
-                {
+                if (
+                    members[i] is IMethodSymbol method
+                    && (IsConfigureServices(symbols, method) || IsConfigure(symbols, method))
+                ) {
                     return true;
                 }
             }
@@ -62,10 +64,17 @@ namespace Microsoft.AspNetCore.Analyzers
                 return false;
             }
 
-            if (symbol.Name == null ||
-                !symbol.Name.StartsWith(SymbolNames.ConfigureServicesMethodPrefix, StringComparison.OrdinalIgnoreCase) ||
-                !symbol.Name.EndsWith(SymbolNames.ConfigureServicesMethodSuffix, StringComparison.OrdinalIgnoreCase))
-            {
+            if (
+                symbol.Name == null
+                || !symbol.Name.StartsWith(
+                    SymbolNames.ConfigureServicesMethodPrefix,
+                    StringComparison.OrdinalIgnoreCase
+                )
+                || !symbol.Name.EndsWith(
+                    SymbolNames.ConfigureServicesMethodSuffix,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            ) {
                 return false;
             }
 
@@ -74,7 +83,10 @@ namespace Microsoft.AspNetCore.Analyzers
                 return false;
             }
 
-            return SymbolEqualityComparer.Default.Equals(symbol.Parameters[0].Type, symbols.IServiceCollection);
+            return SymbolEqualityComparer.Default.Equals(
+                symbol.Parameters[0].Type,
+                symbols.IServiceCollection
+            );
         }
 
         // Based on StartupLoader. The philosophy is that we want to do analysis only on things
@@ -100,17 +112,25 @@ namespace Microsoft.AspNetCore.Analyzers
                 return false;
             }
 
-            if (symbol.Name == null ||
-                !symbol.Name.StartsWith(SymbolNames.ConfigureMethodPrefix, StringComparison.OrdinalIgnoreCase))
-            {
+            if (
+                symbol.Name == null
+                || !symbol.Name.StartsWith(
+                    SymbolNames.ConfigureMethodPrefix,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            ) {
                 return false;
             }
 
             // IApplicationBuilder can appear in any parameter, but must appear.
             for (var i = 0; i < symbol.Parameters.Length; i++)
             {
-                if (SymbolEqualityComparer.Default.Equals(symbol.Parameters[i].Type, symbols.IApplicationBuilder))
-                {
+                if (
+                    SymbolEqualityComparer.Default.Equals(
+                        symbol.Parameters[i].Type,
+                        symbols.IApplicationBuilder
+                    )
+                ) {
                     return true;
                 }
             }
@@ -125,7 +145,7 @@ namespace Microsoft.AspNetCore.Analyzers
         //
         // To be slightly less brittle, we don't look at the exact symbols and instead just look
         // at method names in here. We're NOT worried about false negatives, because all of these
-        // cases contain words like SignalR or Hub. 
+        // cases contain words like SignalR or Hub.
         public static bool IsSignalRConfigureMethodGesture(IMethodSymbol symbol)
         {
             if (symbol == null)
@@ -135,10 +155,23 @@ namespace Microsoft.AspNetCore.Analyzers
 
             // UseSignalR has been removed in 5.0, but we should probably still check for it in this analyzer in case the user
             // installs it into a pre-5.0 app.
-            if (string.Equals(symbol.Name, SymbolNames.SignalRAppBuilderExtensions.UseSignalRMethodName, StringComparison.Ordinal) ||
-                string.Equals(symbol.Name, SymbolNames.HubEndpointRouteBuilderExtensions.MapHubMethodName, StringComparison.Ordinal) ||
-                string.Equals(symbol.Name, SymbolNames.ComponentEndpointRouteBuilderExtensions.MapBlazorHubMethodName, StringComparison.Ordinal))
-            {
+            if (
+                string.Equals(
+                    symbol.Name,
+                    SymbolNames.SignalRAppBuilderExtensions.UseSignalRMethodName,
+                    StringComparison.Ordinal
+                )
+                || string.Equals(
+                    symbol.Name,
+                    SymbolNames.HubEndpointRouteBuilderExtensions.MapHubMethodName,
+                    StringComparison.Ordinal
+                )
+                || string.Equals(
+                    symbol.Name,
+                    SymbolNames.ComponentEndpointRouteBuilderExtensions.MapBlazorHubMethodName,
+                    StringComparison.Ordinal
+                )
+            ) {
                 return true;
             }
 

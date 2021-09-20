@@ -13,7 +13,10 @@ namespace System.Drawing.Drawing2D
         public GraphicsPathIterator(GraphicsPath? path)
         {
             IntPtr nativeIter = IntPtr.Zero;
-            int status = Gdip.GdipCreatePathIter(out nativeIter, new HandleRef(path, (path == null) ? IntPtr.Zero : path._nativePath));
+            int status = Gdip.GdipCreatePathIter(
+                out nativeIter,
+                new HandleRef(path, (path == null) ? IntPtr.Zero : path._nativePath)
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -34,11 +37,17 @@ namespace System.Drawing.Drawing2D
                 try
                 {
 #if DEBUG
-                    int status = !Gdip.Initialized ? Gdip.Ok :
+                    int status = !Gdip.Initialized
+                        ? Gdip.Ok
+                        :
 #endif
-                    Gdip.GdipDeletePathIter(new HandleRef(this, nativeIter));
+                          Gdip.GdipDeletePathIter(new HandleRef(this, nativeIter));
 #if DEBUG
-                    Debug.Assert(status == Gdip.Ok, "GDI+ returned an error status: " + status.ToString(CultureInfo.InvariantCulture));
+                    Debug.Assert(
+                        status == Gdip.Ok,
+                        "GDI+ returned an error status: "
+                            + status.ToString(CultureInfo.InvariantCulture)
+                    );
 #endif
                 }
                 catch (Exception ex)
@@ -61,8 +70,13 @@ namespace System.Drawing.Drawing2D
 
         public int NextSubpath(out int startIndex, out int endIndex, out bool isClosed)
         {
-            int status = Gdip.GdipPathIterNextSubpath(new HandleRef(this, nativeIter), out int resultCount,
-                        out int tempStart, out int tempEnd, out isClosed);
+            int status = Gdip.GdipPathIterNextSubpath(
+                new HandleRef(this, nativeIter),
+                out int resultCount,
+                out int tempStart,
+                out int tempEnd,
+                out isClosed
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -77,8 +91,12 @@ namespace System.Drawing.Drawing2D
 
         public int NextSubpath(GraphicsPath path, out bool isClosed)
         {
-            int status = Gdip.GdipPathIterNextSubpathPath(new HandleRef(this, nativeIter), out int resultCount,
-                        new HandleRef(path, (path == null) ? IntPtr.Zero : path._nativePath), out isClosed);
+            int status = Gdip.GdipPathIterNextSubpathPath(
+                new HandleRef(this, nativeIter),
+                out int resultCount,
+                new HandleRef(path, (path == null) ? IntPtr.Zero : path._nativePath),
+                out isClosed
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -88,8 +106,13 @@ namespace System.Drawing.Drawing2D
 
         public int NextPathType(out byte pathType, out int startIndex, out int endIndex)
         {
-            int status = Gdip.GdipPathIterNextPathType(new HandleRef(this, nativeIter), out int resultCount,
-                        out pathType, out startIndex, out endIndex);
+            int status = Gdip.GdipPathIterNextPathType(
+                new HandleRef(this, nativeIter),
+                out int resultCount,
+                out pathType,
+                out startIndex,
+                out endIndex
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -99,8 +122,12 @@ namespace System.Drawing.Drawing2D
 
         public int NextMarker(out int startIndex, out int endIndex)
         {
-            int status = Gdip.GdipPathIterNextMarker(new HandleRef(this, nativeIter), out int resultCount,
-                        out startIndex, out endIndex);
+            int status = Gdip.GdipPathIterNextMarker(
+                new HandleRef(this, nativeIter),
+                out int resultCount,
+                out startIndex,
+                out endIndex
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -110,8 +137,11 @@ namespace System.Drawing.Drawing2D
 
         public int NextMarker(GraphicsPath path)
         {
-            int status = Gdip.GdipPathIterNextMarkerPath(new HandleRef(this, nativeIter), out int resultCount,
-                        new HandleRef(path, (path == null) ? IntPtr.Zero : path._nativePath));
+            int status = Gdip.GdipPathIterNextMarkerPath(
+                new HandleRef(this, nativeIter),
+                out int resultCount,
+                new HandleRef(path, (path == null) ? IntPtr.Zero : path._nativePath)
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -123,7 +153,10 @@ namespace System.Drawing.Drawing2D
         {
             get
             {
-                int status = Gdip.GdipPathIterGetCount(new HandleRef(this, nativeIter), out int resultCount);
+                int status = Gdip.GdipPathIterGetCount(
+                    new HandleRef(this, nativeIter),
+                    out int resultCount
+                );
 
                 if (status != Gdip.Ok)
                     throw Gdip.StatusException(status);
@@ -136,7 +169,10 @@ namespace System.Drawing.Drawing2D
         {
             get
             {
-                int status = Gdip.GdipPathIterGetSubpathCount(new HandleRef(this, nativeIter), out int resultCount);
+                int status = Gdip.GdipPathIterGetSubpathCount(
+                    new HandleRef(this, nativeIter),
+                    out int resultCount
+                );
 
                 if (status != Gdip.Ok)
                     throw Gdip.StatusException(status);
@@ -147,7 +183,10 @@ namespace System.Drawing.Drawing2D
 
         public bool HasCurve()
         {
-            int status = Gdip.GdipPathIterHasCurve(new HandleRef(this, nativeIter), out bool hasCurve);
+            int status = Gdip.GdipPathIterHasCurve(
+                new HandleRef(this, nativeIter),
+                out bool hasCurve
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -171,15 +210,15 @@ namespace System.Drawing.Drawing2D
             if (points.Length == 0)
                 return 0;
 
-            fixed (PointF* p = points)
-            fixed (byte* t = types)
+            fixed (PointF* p = points)fixed (byte* t = types)
             {
                 int status = Gdip.GdipPathIterEnumerate(
                     new HandleRef(this, nativeIter),
                     out int resultCount,
                     p,
                     t,
-                    points.Length);
+                    points.Length
+                );
 
                 if (status != Gdip.Ok)
                 {
@@ -190,13 +229,16 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        public unsafe int CopyData(ref PointF[] points, ref byte[] types, int startIndex, int endIndex)
-        {
+        public unsafe int CopyData(
+            ref PointF[] points,
+            ref byte[] types,
+            int startIndex,
+            int endIndex
+        ) {
             if ((points.Length != types.Length) || (endIndex - startIndex + 1 > points.Length))
                 throw Gdip.StatusException(Gdip.InvalidParameter);
 
-            fixed (PointF* p = points)
-            fixed (byte* t = types)
+            fixed (PointF* p = points)fixed (byte* t = types)
             {
                 int status = Gdip.GdipPathIterCopyData(
                     new HandleRef(this, nativeIter),
@@ -204,7 +246,8 @@ namespace System.Drawing.Drawing2D
                     p,
                     t,
                     startIndex,
-                    endIndex);
+                    endIndex
+                );
 
                 if (status != Gdip.Ok)
                 {

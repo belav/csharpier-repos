@@ -62,15 +62,24 @@ namespace System.Reflection.Emit
         internal bool finished;
 
         [DynamicDependency(nameof(paramModOpt))] // Automatically keeps all previous fields too due to StructLayout
-        internal ConstructorBuilder(TypeBuilder tb, MethodAttributes attributes, CallingConventions callingConvention, Type[]? parameterTypes, Type[][]? paramModReq, Type[][]? paramModOpt)
-        {
+        internal ConstructorBuilder(
+            TypeBuilder tb,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type[]? parameterTypes,
+            Type[][]? paramModReq,
+            Type[][]? paramModOpt
+        ) {
             attrs = attributes | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName;
             call_conv = callingConvention;
             if (parameterTypes != null)
             {
                 for (int i = 0; i < parameterTypes.Length; ++i)
                     if (parameterTypes[i] == null)
-                        throw new ArgumentException("Elements of the parameterTypes array cannot be null", nameof(parameterTypes));
+                        throw new ArgumentException(
+                            "Elements of the parameterTypes array cannot be null",
+                            nameof(parameterTypes)
+                        );
 
                 this.parameters = new Type[parameterTypes.Length];
                 Array.Copy(parameterTypes, this.parameters, parameterTypes.Length);
@@ -86,30 +95,18 @@ namespace System.Reflection.Emit
         // FIXME:
         public override CallingConventions CallingConvention
         {
-            get
-            {
-                return call_conv;
-            }
+            get { return call_conv; }
         }
 
         public bool InitLocals
         {
-            get
-            {
-                return init_locals;
-            }
-            set
-            {
-                init_locals = value;
-            }
+            get { return init_locals; }
+            set { init_locals = value; }
         }
 
         internal TypeBuilder TypeBuilder
         {
-            get
-            {
-                return type;
-            }
+            get { return type; }
         }
 
         public override MethodImplAttributes GetMethodImplementationFlags()
@@ -150,20 +147,32 @@ namespace System.Reflection.Emit
             return parameters![pos];
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-            Justification = "Linker doesn't analyze RuntimeResolve but it's an identity function")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2075:UnrecognizedReflectionPattern",
+            Justification = "Linker doesn't analyze RuntimeResolve but it's an identity function"
+        )]
         internal MethodBase RuntimeResolve()
         {
             return type.RuntimeResolve().GetConstructor(this);
         }
 
-        public override object Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
-        {
+        public override object Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        ) {
             throw not_supported();
         }
 
-        public override object Invoke(BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
-        {
+        public override object Invoke(
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        ) {
             throw not_supported();
         }
 
@@ -171,54 +180,44 @@ namespace System.Reflection.Emit
 
         public override RuntimeMethodHandle MethodHandle
         {
-            get
-            {
-                throw not_supported();
-            }
+            get { throw not_supported(); }
         }
 
         public override MethodAttributes Attributes
         {
-            get
-            {
-                return attrs;
-            }
+            get { return attrs; }
         }
 
         public override Type ReflectedType
         {
-            get
-            {
-                return type;
-            }
+            get { return type; }
         }
 
         public override Type DeclaringType
         {
-            get
-            {
-                return type;
-            }
+            get { return type; }
         }
 
         public override string Name
         {
             get
             {
-                return (attrs & MethodAttributes.Static) != 0 ? TypeConstructorName : ConstructorName;
+                return (attrs & MethodAttributes.Static) != 0
+                  ? TypeConstructorName
+                  : ConstructorName;
             }
         }
 
         public string Signature
         {
-            get
-            {
-                return "constructor signature";
-            }
+            get { return "constructor signature"; }
         }
 
-        public ParameterBuilder DefineParameter(int iSequence, ParameterAttributes attributes, string? strParamName)
-        {
+        public ParameterBuilder DefineParameter(
+            int iSequence,
+            ParameterAttributes attributes,
+            string? strParamName
+        ) {
             // The 0th ParameterBuilder does not correspond to an
             // actual parameter, but .NETFramework lets you define
             // it anyway. It is not useful.
@@ -259,9 +258,23 @@ namespace System.Reflection.Emit
                 throw new InvalidOperationException();
             if (ilgen != null)
                 return ilgen;
-            if (!(((attrs & (MethodAttributes.Abstract | MethodAttributes.PinvokeImpl)) == 0) && ((iattrs & (MethodImplAttributes.Runtime | MethodImplAttributes.InternalCall)) == 0)))
+            if (
+                !(
+                    ((attrs & (MethodAttributes.Abstract | MethodAttributes.PinvokeImpl)) == 0)
+                    && (
+                        (
+                            iattrs
+                            & (MethodImplAttributes.Runtime | MethodImplAttributes.InternalCall)
+                        ) == 0
+                    )
+                )
+            )
                 throw new InvalidOperationException();
-            ilgen = new ILGenerator(type.Module, ((ModuleBuilder)type.Module).GetTokenGenerator(), streamSize);
+            ilgen = new ILGenerator(
+                type.Module,
+                ((ModuleBuilder)type.Module).GetTokenGenerator(),
+                streamSize
+            );
             return ilgen;
         }
 
@@ -320,10 +333,7 @@ namespace System.Reflection.Emit
 
         public override Module Module
         {
-            get
-            {
-                return GetModule();
-            }
+            get { return GetModule(); }
         }
 
         public override string ToString()
@@ -333,14 +343,25 @@ namespace System.Reflection.Emit
 
         internal void fixup()
         {
-            if (((attrs & (MethodAttributes.Abstract | MethodAttributes.PinvokeImpl)) == 0) && ((iattrs & (MethodImplAttributes.Runtime | MethodImplAttributes.InternalCall)) == 0))
-            {
+            if (
+                ((attrs & (MethodAttributes.Abstract | MethodAttributes.PinvokeImpl)) == 0)
+                && (
+                    (iattrs & (MethodImplAttributes.Runtime | MethodImplAttributes.InternalCall))
+                    == 0
+                )
+            ) {
                 if ((ilgen == null) || (ilgen.ILOffset == 0))
-                    throw new InvalidOperationException("Method '" + Name + "' does not have a method body.");
+                    throw new InvalidOperationException(
+                        "Method '" + Name + "' does not have a method body."
+                    );
             }
-            if (IsStatic &&
-                ((call_conv & CallingConventions.VarArgs) != 0 ||
-                 (call_conv & CallingConventions.HasThis) != 0))
+            if (
+                IsStatic
+                && (
+                    (call_conv & CallingConventions.VarArgs) != 0
+                    || (call_conv & CallingConventions.HasThis) != 0
+                )
+            )
                 throw new TypeLoadException();
             if (ilgen != null)
                 ilgen.label_fixup(this);
@@ -385,7 +406,9 @@ namespace System.Reflection.Emit
 
         private static Exception not_supported()
         {
-            return new NotSupportedException("The invoked member is not supported in a dynamic module.");
+            return new NotSupportedException(
+                "The invoked member is not supported in a dynamic module."
+            );
         }
 
         private static Exception not_after_created()

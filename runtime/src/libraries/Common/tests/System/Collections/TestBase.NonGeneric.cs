@@ -44,7 +44,6 @@ namespace System.Collections.Tests
             Remove = 8,
             Clear = 16
         }
-
         #endregion
     }
 }

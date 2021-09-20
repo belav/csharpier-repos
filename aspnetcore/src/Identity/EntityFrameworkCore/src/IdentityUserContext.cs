@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
     /// Base class for the Entity Framework database context used for identity.
     /// </summary>
     /// <typeparam name="TUser">The type of the user objects.</typeparam>
-    public class IdentityUserContext<TUser> : IdentityUserContext<TUser, string> where TUser : IdentityUser
+    public class IdentityUserContext<TUser> : IdentityUserContext<TUser, string>
+        where TUser : IdentityUser
     {
         /// <summary>
         /// Initializes a new instance of <see cref="IdentityUserContext{TUser}"/>.
@@ -34,7 +35,14 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
     /// </summary>
     /// <typeparam name="TUser">The type of user objects.</typeparam>
     /// <typeparam name="TKey">The type of the primary key for users and roles.</typeparam>
-    public class IdentityUserContext<TUser, TKey> : IdentityUserContext<TUser, TKey, IdentityUserClaim<TKey>, IdentityUserLogin<TKey>, IdentityUserToken<TKey>>
+    public class IdentityUserContext<TUser, TKey>
+        : IdentityUserContext<
+              TUser,
+              TKey,
+              IdentityUserClaim<TKey>,
+              IdentityUserLogin<TKey>,
+              IdentityUserToken<TKey>
+          >
         where TUser : IdentityUser<TKey>
         where TKey : IEquatable<TKey>
     {
@@ -58,7 +66,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
     /// <typeparam name="TUserClaim">The type of the user claim object.</typeparam>
     /// <typeparam name="TUserLogin">The type of the user login object.</typeparam>
     /// <typeparam name="TUserToken">The type of the user token object.</typeparam>
-    public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, TUserToken> : DbContext
+    public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, TUserToken>
+        : DbContext
         where TUser : IdentityUser<TKey>
         where TKey : IEquatable<TKey>
         where TUserClaim : IdentityUserClaim<TKey>
@@ -96,16 +105,17 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
         /// </summary>
         public virtual DbSet<TUserToken> UserTokens { get; set; }
 
-        private StoreOptions GetStoreOptions() => this.GetService<IDbContextOptions>()
-                            .Extensions.OfType<CoreOptionsExtension>()
-                            .FirstOrDefault()?.ApplicationServiceProvider
-                            ?.GetService<IOptions<IdentityOptions>>()
-                            ?.Value?.Stores;
+        private StoreOptions GetStoreOptions() =>
+            this.GetService<IDbContextOptions>()
+                .Extensions.OfType<CoreOptionsExtension>()
+                .FirstOrDefault()?.ApplicationServiceProvider?.GetService<
+                IOptions<IdentityOptions>
+            >()?.Value?.Stores;
 
         private class PersonalDataConverter : ValueConverter<string, string>
         {
-            public PersonalDataConverter(IPersonalDataProtector protector) : base(s => protector.Protect(s), s => protector.Unprotect(s), default)
-            { }
+            public PersonalDataConverter(IPersonalDataProtector protector)
+                : base(s => protector.Protect(s), s => protector.Unprotect(s), default) { }
         }
 
         /// <summary>
@@ -121,84 +131,112 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore
             var encryptPersonalData = storeOptions?.ProtectPersonalData ?? false;
             PersonalDataConverter converter = null;
 
-            builder.Entity<TUser>(b =>
-            {
-                b.HasKey(u => u.Id);
-                b.HasIndex(u => u.NormalizedUserName).HasDatabaseName("UserNameIndex").IsUnique();
-                b.HasIndex(u => u.NormalizedEmail).HasDatabaseName("EmailIndex");
-                b.ToTable("AspNetUsers");
-                b.Property(u => u.ConcurrencyStamp).IsConcurrencyToken();
-
-                b.Property(u => u.UserName).HasMaxLength(256);
-                b.Property(u => u.NormalizedUserName).HasMaxLength(256);
-                b.Property(u => u.Email).HasMaxLength(256);
-                b.Property(u => u.NormalizedEmail).HasMaxLength(256);
-
-                if (encryptPersonalData)
+            builder.Entity<TUser>(
+                b =>
                 {
-                    converter = new PersonalDataConverter(this.GetService<IPersonalDataProtector>());
-                    var personalDataProps = typeof(TUser).GetProperties().Where(
-                                    prop => Attribute.IsDefined(prop, typeof(ProtectedPersonalDataAttribute)));
-                    foreach (var p in personalDataProps)
+                    b.HasKey(u => u.Id);
+                    b.HasIndex(u => u.NormalizedUserName)
+                        .HasDatabaseName("UserNameIndex")
+                        .IsUnique();
+                    b.HasIndex(u => u.NormalizedEmail).HasDatabaseName("EmailIndex");
+                    b.ToTable("AspNetUsers");
+                    b.Property(u => u.ConcurrencyStamp).IsConcurrencyToken();
+
+                    b.Property(u => u.UserName).HasMaxLength(256);
+                    b.Property(u => u.NormalizedUserName).HasMaxLength(256);
+                    b.Property(u => u.Email).HasMaxLength(256);
+                    b.Property(u => u.NormalizedEmail).HasMaxLength(256);
+
+                    if (encryptPersonalData)
                     {
-                        if (p.PropertyType != typeof(string))
+                        converter = new PersonalDataConverter(
+                            this.GetService<IPersonalDataProtector>()
+                        );
+                        var personalDataProps = typeof(TUser).GetProperties()
+                            .Where(
+                                prop =>
+                                    Attribute.IsDefined(
+                                        prop,
+                                        typeof(ProtectedPersonalDataAttribute)
+                                    )
+                            );
+                        foreach (var p in personalDataProps)
                         {
-                            throw new InvalidOperationException(Resources.CanOnlyProtectStrings);
+                            if (p.PropertyType != typeof(string))
+                            {
+                                throw new InvalidOperationException(
+                                    Resources.CanOnlyProtectStrings
+                                );
+                            }
+                            b.Property(typeof(string), p.Name).HasConversion(converter);
                         }
-                        b.Property(typeof(string), p.Name).HasConversion(converter);
                     }
+
+                    b.HasMany<TUserClaim>().WithOne().HasForeignKey(uc => uc.UserId).IsRequired();
+                    b.HasMany<TUserLogin>().WithOne().HasForeignKey(ul => ul.UserId).IsRequired();
+                    b.HasMany<TUserToken>().WithOne().HasForeignKey(ut => ut.UserId).IsRequired();
                 }
+            );
 
-                b.HasMany<TUserClaim>().WithOne().HasForeignKey(uc => uc.UserId).IsRequired();
-                b.HasMany<TUserLogin>().WithOne().HasForeignKey(ul => ul.UserId).IsRequired();
-                b.HasMany<TUserToken>().WithOne().HasForeignKey(ut => ut.UserId).IsRequired();
-            });
-
-            builder.Entity<TUserClaim>(b =>
-            {
-                b.HasKey(uc => uc.Id);
-                b.ToTable("AspNetUserClaims");
-            });
-
-            builder.Entity<TUserLogin>(b =>
-            {
-                b.HasKey(l => new { l.LoginProvider, l.ProviderKey });
-
-                if (maxKeyLength > 0)
+            builder.Entity<TUserClaim>(
+                b =>
                 {
-                    b.Property(l => l.LoginProvider).HasMaxLength(maxKeyLength);
-                    b.Property(l => l.ProviderKey).HasMaxLength(maxKeyLength);
+                    b.HasKey(uc => uc.Id);
+                    b.ToTable("AspNetUserClaims");
                 }
+            );
 
-                b.ToTable("AspNetUserLogins");
-            });
-
-            builder.Entity<TUserToken>(b =>
-            {
-                b.HasKey(t => new { t.UserId, t.LoginProvider, t.Name });
-
-                if (maxKeyLength > 0)
+            builder.Entity<TUserLogin>(
+                b =>
                 {
-                    b.Property(t => t.LoginProvider).HasMaxLength(maxKeyLength);
-                    b.Property(t => t.Name).HasMaxLength(maxKeyLength);
-                }
+                    b.HasKey(l => new { l.LoginProvider, l.ProviderKey });
 
-                if (encryptPersonalData)
-                {
-                    var tokenProps = typeof(TUserToken).GetProperties().Where(
-                                    prop => Attribute.IsDefined(prop, typeof(ProtectedPersonalDataAttribute)));
-                    foreach (var p in tokenProps)
+                    if (maxKeyLength > 0)
                     {
-                        if (p.PropertyType != typeof(string))
-                        {
-                            throw new InvalidOperationException(Resources.CanOnlyProtectStrings);
-                        }
-                        b.Property(typeof(string), p.Name).HasConversion(converter);
+                        b.Property(l => l.LoginProvider).HasMaxLength(maxKeyLength);
+                        b.Property(l => l.ProviderKey).HasMaxLength(maxKeyLength);
                     }
-                }
 
-                b.ToTable("AspNetUserTokens");
-            });
+                    b.ToTable("AspNetUserLogins");
+                }
+            );
+
+            builder.Entity<TUserToken>(
+                b =>
+                {
+                    b.HasKey(t => new { t.UserId, t.LoginProvider, t.Name });
+
+                    if (maxKeyLength > 0)
+                    {
+                        b.Property(t => t.LoginProvider).HasMaxLength(maxKeyLength);
+                        b.Property(t => t.Name).HasMaxLength(maxKeyLength);
+                    }
+
+                    if (encryptPersonalData)
+                    {
+                        var tokenProps = typeof(TUserToken).GetProperties()
+                            .Where(
+                                prop =>
+                                    Attribute.IsDefined(
+                                        prop,
+                                        typeof(ProtectedPersonalDataAttribute)
+                                    )
+                            );
+                        foreach (var p in tokenProps)
+                        {
+                            if (p.PropertyType != typeof(string))
+                            {
+                                throw new InvalidOperationException(
+                                    Resources.CanOnlyProtectStrings
+                                );
+                            }
+                            b.Property(typeof(string), p.Name).HasConversion(converter);
+                        }
+                    }
+
+                    b.ToTable("AspNetUserTokens");
+                }
+            );
         }
     }
 }

@@ -33,9 +33,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// </summary>
         [EntityFrameworkInternal]
         public CollectionEntry(InternalEntityEntry internalEntry, string name)
-            : base(internalEntry, name)
-        {
-        }
+            : base(internalEntry, name) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -45,16 +43,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// </summary>
         [EntityFrameworkInternal]
         public CollectionEntry(InternalEntityEntry internalEntry, INavigation navigation)
-            : base(internalEntry, navigation)
-        {
-        }
+            : base(internalEntry, navigation) { }
 
         /// <summary>
         ///     The <see cref="EntityEntry{TEntity}" /> to which this member belongs.
         /// </summary>
         /// <value> An entry for the entity that owns this member. </value>
-        public new virtual EntityEntry<TEntity> EntityEntry
-            => new(InternalEntry);
+        public new virtual EntityEntry<TEntity> EntityEntry => new(InternalEntry);
 
         /// <summary>
         ///     Gets or sets the value currently assigned to this property. If the current value is set using this property,
@@ -92,9 +87,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public new virtual EntityEntry<TRelatedEntity>? FindEntry(object entity)
         {
             var entry = GetInternalTargetEntry(entity);
-            return entry == null
-                ? null
-                : new EntityEntry<TRelatedEntity>(entry);
+            return entry == null ? null : new EntityEntry<TRelatedEntity>(entry);
         }
     }
 }

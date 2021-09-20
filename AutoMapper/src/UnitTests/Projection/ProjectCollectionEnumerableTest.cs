@@ -1,5 +1,5 @@
-﻿﻿using Shouldly;
-﻿using Xunit;
+﻿using Shouldly;
+using Xunit;
 
 namespace AutoMapper.UnitTests.Projection
 {
@@ -17,17 +17,22 @@ namespace AutoMapper.UnitTests.Projection
 
         public ProjectCollectionEnumerableTest()
         {
-            _config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateProjection<Address, AddressDto>();
-                cfg.CreateProjection<Customer, CustomerDto>();
-            });
+            _config = new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<Address, AddressDto>();
+                    cfg.CreateProjection<Customer, CustomerDto>();
+                }
+            );
         }
 
         [Fact]
         public void ProjectWithAssignedCollectionSourceProperty()
         {
-            var customer = new Customer { Addresses = new List<Address> { new Address(Street1), new Address(Street2) } };
+            var customer = new Customer
+            {
+                Addresses = new List<Address> { new Address(Street1), new Address(Street2) }
+            };
             var customers = new[] { customer }.AsQueryable();
 
             var mapped = customers.ProjectTo<CustomerDto>(_config).SingleOrDefault();

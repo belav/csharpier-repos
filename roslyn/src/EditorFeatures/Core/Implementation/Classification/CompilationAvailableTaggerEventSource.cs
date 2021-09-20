@@ -41,8 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             TaggerDelay delay,
             IThreadingContext threadingContext,
             IAsynchronousOperationListener asyncListener,
-            params ITaggerEventSource[] eventSources)
-        {
+            params ITaggerEventSource[] eventSources
+        ) {
             _subjectBuffer = subjectBuffer;
             _delay = delay;
             _asyncListener = asyncListener;
@@ -84,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             // First, notify anyone listening to us that something definitely changed.
             this.Changed?.Invoke(this, args);
 
-            var document = _subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                _subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
                 return;
 
@@ -95,14 +96,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             // piece of work in the future to do so.  Do this after a delay so we can appropriately throttle ourselves
             // if we hear about a flurry of notifications.
             _workQueue.CancelCurrentWork();
-            _workQueue.EnqueueBackgroundTask(async c =>
+            _workQueue.EnqueueBackgroundTask(
+                async c =>
                 {
                     await document.Project.GetCompilationAsync(c).ConfigureAwait(false);
                     this.Changed?.Invoke(this, new TaggerEventArgs(_delay));
                 },
                 $"{nameof(CompilationAvailableTaggerEventSource)}.{nameof(OnEventSourceChanged)}",
                 500,
-                _workQueue.CancellationToken);
+                _workQueue.CancellationToken
+            );
         }
     }
 }

@@ -20,25 +20,40 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             CSharpParseOptions parseOptions,
             bool preferSimpleDefaultExpression,
             SemanticModel semanticModel,
-            CancellationToken cancellationToken)
-        {
-            if (parseOptions.LanguageVersion < LanguageVersion.CSharp7_1 ||
-                !preferSimpleDefaultExpression)
-            {
+            CancellationToken cancellationToken
+        ) {
+            if (
+                parseOptions.LanguageVersion < LanguageVersion.CSharp7_1
+                || !preferSimpleDefaultExpression
+            ) {
                 return false;
             }
 
             // Using the speculation analyzer can be slow.  Check for common cases first before
             // trying the expensive path.
-            return CanReplaceWithDefaultLiteralFast(defaultExpression, semanticModel, cancellationToken) ??
-                   CanReplaceWithDefaultLiteralSlow(defaultExpression, semanticModel, cancellationToken);
+            return CanReplaceWithDefaultLiteralFast(
+                    defaultExpression,
+                    semanticModel,
+                    cancellationToken
+                )
+                ?? CanReplaceWithDefaultLiteralSlow(
+                    defaultExpression,
+                    semanticModel,
+                    cancellationToken
+                );
         }
 
         private static bool? CanReplaceWithDefaultLiteralFast(
-            DefaultExpressionSyntax defaultExpression, SemanticModel semanticModel, CancellationToken cancellationToken)
-        {
-            if (defaultExpression.IsParentKind(SyntaxKind.EqualsValueClause, out EqualsValueClauseSyntax equalsValueClause))
-            {
+            DefaultExpressionSyntax defaultExpression,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        ) {
+            if (
+                defaultExpression.IsParentKind(
+                    SyntaxKind.EqualsValueClause,
+                    out EqualsValueClauseSyntax equalsValueClause
+                )
+            ) {
                 var typeSyntax = GetTypeSyntax(equalsValueClause);
 
                 if (typeSyntax != null)
@@ -50,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     }
 
                     var entityType = semanticModel.GetTypeInfo(typeSyntax, cancellationToken).Type;
-                    var defaultType = semanticModel.GetTypeInfo(defaultExpression.Type, cancellationToken).Type;
+                    var defaultType =
+                        semanticModel.GetTypeInfo(defaultExpression.Type, cancellationToken).Type;
 
                     if (entityType != null && entityType.Equals(defaultType))
                     {
@@ -66,13 +82,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         private static TypeSyntax GetTypeSyntax(EqualsValueClauseSyntax equalsValueClause)
         {
-            if (equalsValueClause.IsParentKind(SyntaxKind.VariableDeclarator) &&
-                equalsValueClause.Parent.IsParentKind(SyntaxKind.VariableDeclaration, out VariableDeclarationSyntax declaration))
-            {
+            if (
+                equalsValueClause.IsParentKind(SyntaxKind.VariableDeclarator)
+                && equalsValueClause.Parent.IsParentKind(
+                    SyntaxKind.VariableDeclaration,
+                    out VariableDeclarationSyntax declaration
+                )
+            ) {
                 return declaration.Type;
             }
-            else if (equalsValueClause.IsParentKind(SyntaxKind.Parameter, out ParameterSyntax parameter))
-            {
+            else if (
+                equalsValueClause.IsParentKind(SyntaxKind.Parameter, out ParameterSyntax parameter)
+            ) {
                 return parameter.Type;
             }
 
@@ -80,13 +101,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         }
 
         private static bool CanReplaceWithDefaultLiteralSlow(
-            DefaultExpressionSyntax defaultExpression, SemanticModel semanticModel, CancellationToken cancellationToken)
-        {
+            DefaultExpressionSyntax defaultExpression,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        ) {
             var speculationAnalyzer = new SpeculationAnalyzer(
-                defaultExpression, s_defaultLiteralExpression, semanticModel,
+                defaultExpression,
+                s_defaultLiteralExpression,
+                semanticModel,
                 cancellationToken,
                 skipVerificationForReplacedNode: false,
-                failOnOverloadResolutionFailuresInOriginalCode: true);
+                failOnOverloadResolutionFailuresInOriginalCode: true
+            );
 
             return !speculationAnalyzer.ReplacementChangesSemantics();
         }

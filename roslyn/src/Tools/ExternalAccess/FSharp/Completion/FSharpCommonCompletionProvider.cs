@@ -11,8 +11,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Completion
 {
     internal static class FSharpCommonCompletionProvider
     {
-        public static CompletionProvider Create(IFSharpCommonCompletionProvider fsharpCommonCompletionProvider)
-        {
+        public static CompletionProvider Create(
+            IFSharpCommonCompletionProvider fsharpCommonCompletionProvider
+        ) {
             return new FSharpInternalCommonCompletionProvider(fsharpCommonCompletionProvider);
         }
     }

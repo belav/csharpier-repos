@@ -17,7 +17,10 @@ namespace Microsoft.AspNetCore.Testing
         {
             // Use a random DateTimeOffset to ensure tests that incorrectly use the current DateTimeOffset fail always instead of only rarely.
             // Pick a date between the min DateTimeOffset and a day before the max DateTimeOffset so there's room to advance the clock.
-            _utcNowTicks = NextLong(DateTimeOffset.MinValue.Ticks, DateTimeOffset.MaxValue.Ticks - TimeSpan.FromDays(1).Ticks);
+            _utcNowTicks = NextLong(
+                DateTimeOffset.MinValue.Ticks,
+                DateTimeOffset.MaxValue.Ticks - TimeSpan.FromDays(1).Ticks
+            );
         }
 
         public DateTimeOffset UtcNow
@@ -27,10 +30,7 @@ namespace Microsoft.AspNetCore.Testing
                 UtcNowCalled++;
                 return new DateTimeOffset(Interlocked.Read(ref _utcNowTicks), TimeSpan.Zero);
             }
-            set
-            {
-                Interlocked.Exchange(ref _utcNowTicks, value.Ticks);
-            }
+            set { Interlocked.Exchange(ref _utcNowTicks, value.Ticks); }
         }
 
         public long UtcNowTicks => UtcNow.Ticks;

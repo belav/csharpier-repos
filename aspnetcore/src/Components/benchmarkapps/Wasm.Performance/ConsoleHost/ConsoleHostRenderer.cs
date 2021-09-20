@@ -12,10 +12,10 @@ namespace Wasm.Performance.ConsoleHost
 {
     internal class ConsoleHostRenderer : Renderer
     {
-        public ConsoleHostRenderer(IServiceProvider serviceProvider, ILoggerFactory loggerFactory)
-            : base(serviceProvider, loggerFactory)
-        {
-        }
+        public ConsoleHostRenderer(
+            IServiceProvider serviceProvider,
+            ILoggerFactory loggerFactory
+        ) : base(serviceProvider, loggerFactory) { }
 
         public override Dispatcher Dispatcher { get; } = new NullDispatcher();
 
@@ -32,10 +32,10 @@ namespace Wasm.Performance.ConsoleHost
         }
 
         // Expose some protected APIs publicly
-        public new int AssignRootComponentId(IComponent component)
-            => base.AssignRootComponentId(component);
+        public new int AssignRootComponentId(IComponent component) =>
+            base.AssignRootComponentId(component);
 
-        public new Task RenderRootComponentAsync(int componentId)
-            => base.RenderRootComponentAsync(componentId);
+        public new Task RenderRootComponentAsync(int componentId) =>
+            base.RenderRootComponentAsync(componentId);
     }
 }

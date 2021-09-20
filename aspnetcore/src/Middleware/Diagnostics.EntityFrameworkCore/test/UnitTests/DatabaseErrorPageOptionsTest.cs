@@ -21,7 +21,7 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
         {
             var options = new DatabaseErrorPageOptions();
             options.MigrationsEndPointPath = "/test";
-            
+
             Assert.Equal("/test", options.MigrationsEndPointPath);
         }
     }

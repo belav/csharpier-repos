@@ -18,7 +18,10 @@ namespace System.Web.Mvc
 {
     public class DefaultControllerFactory : IControllerFactory
     {
-        private static readonly ConcurrentDictionary<Type, SessionStateBehavior> _sessionStateCache = new ConcurrentDictionary<Type, SessionStateBehavior>();
+        private static readonly ConcurrentDictionary<
+            Type,
+            SessionStateBehavior
+        > _sessionStateCache = new ConcurrentDictionary<Type, SessionStateBehavior>();
         private static ControllerTypeCache _staticControllerTypeCache = new ControllerTypeCache();
         private IBuildManager _buildManager;
         private IResolver<IControllerActivator> _activatorResolver;
@@ -26,28 +29,29 @@ namespace System.Web.Mvc
         private ControllerBuilder _controllerBuilder;
         private ControllerTypeCache _instanceControllerTypeCache;
 
-        public DefaultControllerFactory()
-            : this(null, null, null)
-        {
-        }
+        public DefaultControllerFactory() : this(null, null, null) { }
 
         public DefaultControllerFactory(IControllerActivator controllerActivator)
-            : this(controllerActivator, null, null)
-        {
-        }
+            : this(controllerActivator, null, null) { }
 
-        internal DefaultControllerFactory(IControllerActivator controllerActivator, IResolver<IControllerActivator> activatorResolver, IDependencyResolver dependencyResolver)
-        {
+        internal DefaultControllerFactory(
+            IControllerActivator controllerActivator,
+            IResolver<IControllerActivator> activatorResolver,
+            IDependencyResolver dependencyResolver
+        ) {
             if (controllerActivator != null)
             {
                 _controllerActivator = controllerActivator;
             }
             else
             {
-                _activatorResolver = activatorResolver ?? new SingleServiceResolver<IControllerActivator>(
-                                                              () => null,
-                                                              new DefaultControllerActivator(dependencyResolver),
-                                                              "DefaultControllerFactory constructor");
+                _activatorResolver =
+                    activatorResolver
+                    ?? new SingleServiceResolver<IControllerActivator>(
+                        () => null,
+                        new DefaultControllerActivator(dependencyResolver),
+                        "DefaultControllerFactory constructor"
+                    );
             }
         }
 
@@ -89,8 +93,11 @@ namespace System.Web.Mvc
             set { _instanceControllerTypeCache = value; }
         }
 
-        internal static InvalidOperationException CreateAmbiguousControllerException(RouteBase route, string controllerName, ICollection<Type> matchingTypes)
-        {
+        internal static InvalidOperationException CreateAmbiguousControllerException(
+            RouteBase route,
+            string controllerName,
+            ICollection<Type> matchingTypes
+        ) {
             // we need to generate an exception containing all the controller types
             StringBuilder typeList = new StringBuilder();
             foreach (Type matchedType in matchingTypes)
@@ -103,20 +110,32 @@ namespace System.Web.Mvc
             Route castRoute = route as Route;
             if (castRoute != null)
             {
-                errorText = String.Format(CultureInfo.CurrentCulture, MvcResources.DefaultControllerFactory_ControllerNameAmbiguous_WithRouteUrl,
-                                          controllerName, castRoute.Url, typeList, Environment.NewLine);
+                errorText = String.Format(
+                    CultureInfo.CurrentCulture,
+                    MvcResources.DefaultControllerFactory_ControllerNameAmbiguous_WithRouteUrl,
+                    controllerName,
+                    castRoute.Url,
+                    typeList,
+                    Environment.NewLine
+                );
             }
             else
             {
-                errorText = String.Format(CultureInfo.CurrentCulture, MvcResources.DefaultControllerFactory_ControllerNameAmbiguous_WithoutRouteUrl,
-                                          controllerName, typeList, Environment.NewLine);
+                errorText = String.Format(
+                    CultureInfo.CurrentCulture,
+                    MvcResources.DefaultControllerFactory_ControllerNameAmbiguous_WithoutRouteUrl,
+                    controllerName,
+                    typeList,
+                    Environment.NewLine
+                );
             }
 
             return new InvalidOperationException(errorText);
         }
 
-        private static InvalidOperationException CreateDirectRouteAmbiguousControllerException(ICollection<Type> matchingTypes)
-        {
+        private static InvalidOperationException CreateDirectRouteAmbiguousControllerException(
+            ICollection<Type> matchingTypes
+        ) {
             // we need to generate an exception containing all the controller types
             StringBuilder typeList = new StringBuilder();
             foreach (Type matchedType in matchingTypes)
@@ -129,21 +148,28 @@ namespace System.Web.Mvc
                 CultureInfo.CurrentCulture,
                 MvcResources.DefaultControllerFactory_DirectRouteAmbiguous,
                 typeList,
-                Environment.NewLine);
+                Environment.NewLine
+            );
 
             return new InvalidOperationException(errorText);
         }
 
-        public virtual IController CreateController(RequestContext requestContext, string controllerName)
-        {
+        public virtual IController CreateController(
+            RequestContext requestContext,
+            string controllerName
+        ) {
             if (requestContext == null)
             {
                 throw new ArgumentNullException("requestContext");
             }
 
-            if (String.IsNullOrEmpty(controllerName) &&
-                (requestContext.RouteData == null || !requestContext.RouteData.HasDirectRouteMatch()))
-            {
+            if (
+                String.IsNullOrEmpty(controllerName)
+                && (
+                    requestContext.RouteData == null
+                    || !requestContext.RouteData.HasDirectRouteMatch()
+                )
+            ) {
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "controllerName");
             }
 
@@ -152,19 +178,24 @@ namespace System.Web.Mvc
             return controller;
         }
 
-        protected internal virtual IController GetControllerInstance(RequestContext requestContext, Type controllerType)
-        {
+        protected internal virtual IController GetControllerInstance(
+            RequestContext requestContext,
+            Type controllerType
+        ) {
             if (requestContext == null)
             {
                 throw new ArgumentNullException("requestContext");
             }
             if (controllerType == null)
             {
-                throw new HttpException(404,
-                                        String.Format(
-                                            CultureInfo.CurrentCulture,
-                                            MvcResources.DefaultControllerFactory_NoControllerFound,
-                                            requestContext.HttpContext.Request.Path));
+                throw new HttpException(
+                    404,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        MvcResources.DefaultControllerFactory_NoControllerFound,
+                        requestContext.HttpContext.Request.Path
+                    )
+                );
             }
             if (!typeof(IController).IsAssignableFrom(controllerType))
             {
@@ -172,15 +203,19 @@ namespace System.Web.Mvc
                     String.Format(
                         CultureInfo.CurrentCulture,
                         MvcResources.DefaultControllerFactory_TypeDoesNotSubclassControllerBase,
-                        controllerType),
-                    "controllerType");
+                        controllerType
+                    ),
+                    "controllerType"
+                );
             }
 
             return ControllerActivator.Create(requestContext, controllerType);
         }
 
-        protected internal virtual SessionStateBehavior GetControllerSessionBehavior(RequestContext requestContext, Type controllerType)
-        {
+        protected internal virtual SessionStateBehavior GetControllerSessionBehavior(
+            RequestContext requestContext,
+            Type controllerType
+        ) {
             if (controllerType == null)
             {
                 return SessionStateBehavior.Default;
@@ -190,24 +225,34 @@ namespace System.Web.Mvc
                 controllerType,
                 type =>
                 {
-                    var attr = type.GetCustomAttributes(typeof(SessionStateAttribute), inherit: true)
+                    var attr = type.GetCustomAttributes(
+                            typeof(SessionStateAttribute),
+                            inherit: true
+                        )
                         .OfType<SessionStateAttribute>()
                         .FirstOrDefault();
 
                     return (attr != null) ? attr.Behavior : SessionStateBehavior.Default;
-                });
+                }
+            );
         }
 
-        protected internal virtual Type GetControllerType(RequestContext requestContext, string controllerName)
-        {
+        protected internal virtual Type GetControllerType(
+            RequestContext requestContext,
+            string controllerName
+        ) {
             if (requestContext == null)
             {
                 throw new ArgumentNullException("requestContext");
             }
 
-            if (String.IsNullOrEmpty(controllerName) &&
-                (requestContext.RouteData == null || !requestContext.RouteData.HasDirectRouteMatch()))
-            {
+            if (
+                String.IsNullOrEmpty(controllerName)
+                && (
+                    requestContext.RouteData == null
+                    || !requestContext.RouteData.HasDirectRouteMatch()
+                )
+            ) {
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "controllerName");
             }
 
@@ -220,17 +265,33 @@ namespace System.Web.Mvc
             // first search in the current route's namespace collection
             object routeNamespacesObj;
             Type match;
-            if (routeData != null && routeData.DataTokens.TryGetValue(RouteDataTokenKeys.Namespaces, out routeNamespacesObj))
-            {
+            if (
+                routeData != null
+                && routeData.DataTokens.TryGetValue(
+                    RouteDataTokenKeys.Namespaces,
+                    out routeNamespacesObj
+                )
+            ) {
                 IEnumerable<string> routeNamespaces = routeNamespacesObj as IEnumerable<string>;
                 if (routeNamespaces != null && routeNamespaces.Any())
                 {
-                    HashSet<string> namespaceHash = new HashSet<string>(routeNamespaces, StringComparer.OrdinalIgnoreCase);
-                    match = GetControllerTypeWithinNamespaces(routeData.Route, controllerName, namespaceHash);
+                    HashSet<string> namespaceHash = new HashSet<string>(
+                        routeNamespaces,
+                        StringComparer.OrdinalIgnoreCase
+                    );
+                    match = GetControllerTypeWithinNamespaces(
+                        routeData.Route,
+                        controllerName,
+                        namespaceHash
+                    );
 
                     // the UseNamespaceFallback key might not exist, in which case its value is implicitly "true"
-                    if (match != null || false.Equals(routeData.DataTokens[RouteDataTokenKeys.UseNamespaceFallback]))
-                    {
+                    if (
+                        match != null
+                        || false.Equals(
+                            routeData.DataTokens[RouteDataTokenKeys.UseNamespaceFallback]
+                        )
+                    ) {
                         // got a match or the route requested we stop looking
                         return match;
                     }
@@ -241,7 +302,10 @@ namespace System.Web.Mvc
             RouteBase route = routeData == null ? null : routeData.Route;
             if (ControllerBuilder.DefaultNamespaces.Count > 0)
             {
-                HashSet<string> namespaceDefaults = new HashSet<string>(ControllerBuilder.DefaultNamespaces, StringComparer.OrdinalIgnoreCase);
+                HashSet<string> namespaceDefaults = new HashSet<string>(
+                    ControllerBuilder.DefaultNamespaces,
+                    StringComparer.OrdinalIgnoreCase
+                );
                 match = GetControllerTypeWithinNamespaces(route, controllerName, namespaceDefaults);
                 if (match != null)
                 {
@@ -250,7 +314,11 @@ namespace System.Web.Mvc
             }
 
             // if all else fails, search every namespace
-            return GetControllerTypeWithinNamespaces(route, controllerName, null /* namespaces */);
+            return GetControllerTypeWithinNamespaces(
+                route,
+                controllerName,
+                null /* namespaces */
+            );
         }
 
         private static Type GetControllerTypeFromDirectRoute(RouteData routeData)
@@ -267,9 +335,11 @@ namespace System.Web.Mvc
                     Type controllerType = directRouteData.GetTargetControllerType();
                     if (controllerType == null)
                     {
-                        // We don't expect this to happen, but it could happen if some code messes with the 
-                        // route data tokens and removes the key we're looking for. 
-                        throw new InvalidOperationException(MvcResources.DirectRoute_MissingControllerType);
+                        // We don't expect this to happen, but it could happen if some code messes with the
+                        // route data tokens and removes the key we're looking for.
+                        throw new InvalidOperationException(
+                            MvcResources.DirectRoute_MissingControllerType
+                        );
                     }
 
                     if (!controllerTypes.Contains(controllerType))
@@ -296,12 +366,18 @@ namespace System.Web.Mvc
             }
         }
 
-        private Type GetControllerTypeWithinNamespaces(RouteBase route, string controllerName, HashSet<string> namespaces)
-        {
+        private Type GetControllerTypeWithinNamespaces(
+            RouteBase route,
+            string controllerName,
+            HashSet<string> namespaces
+        ) {
             // Once the master list of controllers has been created we can quickly index into it
             ControllerTypeCache.EnsureInitialized(BuildManager);
 
-            ICollection<Type> matchingTypes = ControllerTypeCache.GetControllerTypes(controllerName, namespaces);
+            ICollection<Type> matchingTypes = ControllerTypeCache.GetControllerTypes(
+                controllerName,
+                namespaces
+            );
             switch (matchingTypes.Count)
             {
                 case 0:
@@ -333,8 +409,10 @@ namespace System.Web.Mvc
             return ControllerTypeCache.GetControllerTypes();
         }
 
-        SessionStateBehavior IControllerFactory.GetControllerSessionBehavior(RequestContext requestContext, string controllerName)
-        {
+        SessionStateBehavior IControllerFactory.GetControllerSessionBehavior(
+            RequestContext requestContext,
+            string controllerName
+        ) {
             if (requestContext == null)
             {
                 throw new ArgumentNullException("requestContext");
@@ -352,10 +430,7 @@ namespace System.Web.Mvc
         {
             private Func<IDependencyResolver> _resolverThunk;
 
-            public DefaultControllerActivator()
-                : this(null)
-            {
-            }
+            public DefaultControllerActivator() : this(null) { }
 
             public DefaultControllerActivator(IDependencyResolver resolver)
             {
@@ -373,7 +448,10 @@ namespace System.Web.Mvc
             {
                 try
                 {
-                    return (IController)(_resolverThunk().GetService(controllerType) ?? Activator.CreateInstance(controllerType));
+                    return (IController)(
+                        _resolverThunk().GetService(controllerType)
+                        ?? Activator.CreateInstance(controllerType)
+                    );
                 }
                 catch (Exception ex)
                 {
@@ -381,8 +459,10 @@ namespace System.Web.Mvc
                         String.Format(
                             CultureInfo.CurrentCulture,
                             MvcResources.DefaultControllerFactory_ErrorCreatingController,
-                            controllerType),
-                        ex);
+                            controllerType
+                        ),
+                        ex
+                    );
                 }
             }
         }

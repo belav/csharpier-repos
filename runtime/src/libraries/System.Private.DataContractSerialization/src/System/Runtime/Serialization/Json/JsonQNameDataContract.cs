@@ -14,16 +14,18 @@ namespace System.Runtime.Serialization.Json
     {
         [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
         public JsonQNameDataContract(QNameDataContract traditionalQNameDataContract)
-            : base(traditionalQNameDataContract)
-        {
-        }
+            : base(traditionalQNameDataContract) { }
 
         [RequiresUnreferencedCode(DataContractJsonSerializer.SerializerTrimmerWarning)]
-        public override object? ReadJsonValueCore(XmlReaderDelegator jsonReader, XmlObjectSerializerReadContextComplexJson? context)
-        {
+        public override object? ReadJsonValueCore(
+            XmlReaderDelegator jsonReader,
+            XmlObjectSerializerReadContextComplexJson? context
+        ) {
             if (context == null)
             {
-                return TryReadNullAtTopLevel(jsonReader) ? null : jsonReader.ReadElementContentAsQName();
+                return TryReadNullAtTopLevel(jsonReader)
+                  ? null
+                  : jsonReader.ReadElementContentAsQName();
             }
             else
             {

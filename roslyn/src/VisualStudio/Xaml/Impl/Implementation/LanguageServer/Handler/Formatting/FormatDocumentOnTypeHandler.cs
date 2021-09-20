@@ -21,23 +21,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 {
     [ExportLspRequestHandlerProvider(StringConstants.XamlLanguageName), Shared]
     [ProvidesMethod(Methods.TextDocumentOnTypeFormattingName)]
-    internal class FormatDocumentOnTypeHandler : AbstractStatelessRequestHandler<DocumentOnTypeFormattingParams, TextEdit[]>
+    internal class FormatDocumentOnTypeHandler
+        : AbstractStatelessRequestHandler<DocumentOnTypeFormattingParams, TextEdit[]>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FormatDocumentOnTypeHandler()
-        {
-        }
+        public FormatDocumentOnTypeHandler() { }
 
         public override string Method => Methods.TextDocumentOnTypeFormattingName;
 
         public override bool MutatesSolutionState => false;
         public override bool RequiresLSPSolution => true;
 
-        public override TextDocumentIdentifier? GetTextDocumentIdentifier(DocumentOnTypeFormattingParams request) => request.TextDocument;
+        public override TextDocumentIdentifier? GetTextDocumentIdentifier(
+            DocumentOnTypeFormattingParams request
+        ) => request.TextDocument;
 
-        public override async Task<TextEdit[]> HandleRequestAsync(DocumentOnTypeFormattingParams request, RequestContext context, CancellationToken cancellationToken)
-        {
+        public override async Task<TextEdit[]> HandleRequestAsync(
+            DocumentOnTypeFormattingParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        ) {
             var edits = new ArrayBuilder<TextEdit>();
             if (string.IsNullOrEmpty(request.Character))
             {
@@ -45,16 +49,37 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             }
 
             var document = context.Document;
-            var formattingService = document?.Project.LanguageServices.GetService<IXamlFormattingService>();
+            var formattingService =
+                document?.Project.LanguageServices.GetService<IXamlFormattingService>();
             if (document != null && formattingService != null)
             {
-                var position = await document.GetPositionFromLinePositionAsync(ProtocolConversions.PositionToLinePosition(request.Position), cancellationToken).ConfigureAwait(false);
-                var options = new XamlFormattingOptions { InsertSpaces = request.Options.InsertSpaces, TabSize = request.Options.TabSize, OtherOptions = request.Options.OtherOptions };
-                var textChanges = await formattingService.GetFormattingChangesAsync(document, options, request.Character[0], position, cancellationToken).ConfigureAwait(false);
+                var position = await document.GetPositionFromLinePositionAsync(
+                        ProtocolConversions.PositionToLinePosition(request.Position),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                var options = new XamlFormattingOptions
+                {
+                    InsertSpaces = request.Options.InsertSpaces,
+                    TabSize = request.Options.TabSize,
+                    OtherOptions = request.Options.OtherOptions
+                };
+                var textChanges = await formattingService.GetFormattingChangesAsync(
+                        document,
+                        options,
+                        request.Character[0],
+                        position,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (textChanges != null)
                 {
                     var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-                    edits.AddRange(textChanges.Select(change => ProtocolConversions.TextChangeToTextEdit(change, text)));
+                    edits.AddRange(
+                        textChanges.Select(
+                            change => ProtocolConversions.TextChangeToTextEdit(change, text)
+                        )
+                    );
                 }
             }
 

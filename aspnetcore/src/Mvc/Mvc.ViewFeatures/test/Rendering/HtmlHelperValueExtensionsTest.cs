@@ -72,7 +72,9 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             {
                 return string.Format(
                     CultureInfo.InvariantCulture,
-                    "{{ SomeProperty = {0} }}", SomeProperty ?? "(null)");
+                    "{{ SomeProperty = {0} }}",
+                    SomeProperty ?? "(null)"
+                );
             }
         }
     }

@@ -14,8 +14,11 @@ namespace System.IO.Pipes
         private bool _isMessageComplete;
         private int _numBytes; // number of buffer read OR written
 
-        internal ReadWriteCompletionSource(PipeStream stream, ReadOnlyMemory<byte> bufferToPin, bool isWrite)
-            : base(stream._threadPoolBinding!, bufferToPin)
+        internal ReadWriteCompletionSource(
+            PipeStream stream,
+            ReadOnlyMemory<byte> bufferToPin,
+            bool isWrite
+        ) : base(stream._threadPoolBinding!, bufferToPin)
         {
             _pipeStream = stream;
             _isWrite = isWrite;
@@ -64,6 +67,8 @@ namespace System.IO.Pipes
         }
 
         protected override void HandleError(int errorCode) =>
-            TrySetException(ExceptionDispatchInfo.SetCurrentStackTrace(_pipeStream.WinIOError(errorCode)));
+            TrySetException(
+                ExceptionDispatchInfo.SetCurrentStackTrace(_pipeStream.WinIOError(errorCode))
+            );
     }
 }

@@ -10,8 +10,10 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 {
     internal class DefaultPageModelFactoryProvider : IPageModelFactoryProvider
     {
-        private static readonly Func<PropertyInfo, PropertyActivator<PageContext>> _createActivateInfo =
-            CreateActivateInfo;
+        private static readonly Func<
+            PropertyInfo,
+            PropertyActivator<PageContext>
+        > _createActivateInfo = CreateActivateInfo;
         private readonly IPageModelActivatorProvider _modelActivator;
 
         public DefaultPageModelFactoryProvider(IPageModelActivatorProvider modelActivator)
@@ -33,10 +35,11 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             var modelActivator = _modelActivator.CreateActivator(descriptor);
             var propertyActivator = PropertyActivator<PageContext>.GetPropertiesToActivate(
-                    descriptor.ModelTypeInfo.AsType(),
-                    typeof(PageContextAttribute),
-                    _createActivateInfo,
-                    includeNonPublic: false);
+                descriptor.ModelTypeInfo.AsType(),
+                typeof(PageContextAttribute),
+                _createActivateInfo,
+                includeNonPublic: false
+            );
 
             return pageContext =>
             {
@@ -50,8 +53,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             };
         }
 
-        public Action<PageContext, object> CreateModelDisposer(CompiledPageActionDescriptor descriptor)
-        {
+        public Action<PageContext, object> CreateModelDisposer(
+            CompiledPageActionDescriptor descriptor
+        ) {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));
@@ -65,8 +69,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             return _modelActivator.CreateReleaser(descriptor);
         }
 
-        public Func<PageContext, object, ValueTask> CreateAsyncModelDisposer(CompiledPageActionDescriptor descriptor)
-        {
+        public Func<PageContext, object, ValueTask> CreateAsyncModelDisposer(
+            CompiledPageActionDescriptor descriptor
+        ) {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));

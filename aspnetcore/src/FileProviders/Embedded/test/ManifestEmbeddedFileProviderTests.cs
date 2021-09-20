@@ -16,10 +16,13 @@ namespace Microsoft.Extensions.FileProviders
         {
             // Arrange
             var assembly = new TestAssembly(
-                TestEntry.Directory("unused",
+                TestEntry.Directory(
+                    "unused",
                     TestEntry.File("jquery.validate.js"),
                     TestEntry.File("jquery.min.js"),
-                    TestEntry.File("site.css")));
+                    TestEntry.File("site.css")
+                )
+            );
 
             // Act
             var provider = new ManifestEmbeddedFileProvider(assembly);
@@ -52,17 +55,24 @@ namespace Microsoft.Extensions.FileProviders
         {
             // Arrange
             var assembly = new TestAssembly(
-                TestEntry.Directory("unused",
-                    TestEntry.Directory("wwwroot",
+                TestEntry.Directory(
+                    "unused",
+                    TestEntry.Directory(
+                        "wwwroot",
                         TestEntry.File("jquery.validate.js"),
                         TestEntry.File("jquery.min.js"),
-                        TestEntry.File("site.css"))));
+                        TestEntry.File("site.css")
+                    )
+                )
+            );
 
             // Act
             var provider = new ManifestEmbeddedFileProvider(assembly);
 
             // Assert
-            var jqueryValidate = provider.GetFileInfo(Path.Combine("wwwroot", "jquery.validate.js"));
+            var jqueryValidate = provider.GetFileInfo(
+                Path.Combine("wwwroot", "jquery.validate.js")
+            );
             Assert.True(jqueryValidate.Exists);
             Assert.False(jqueryValidate.IsDirectory);
             Assert.Equal("jquery.validate.js", jqueryValidate.Name);
@@ -89,11 +99,16 @@ namespace Microsoft.Extensions.FileProviders
         {
             // Arrange
             var assembly = new TestAssembly(
-                TestEntry.Directory("unused",
-                    TestEntry.Directory("wwwroot",
+                TestEntry.Directory(
+                    "unused",
+                    TestEntry.Directory(
+                        "wwwroot",
                         TestEntry.File("jquery.validate.js"),
                         TestEntry.File("jquery.min.js"),
-                        TestEntry.File("site.css"))));
+                        TestEntry.File("site.css")
+                    )
+                )
+            );
 
             var provider = new ManifestEmbeddedFileProvider(assembly);
 
@@ -109,11 +124,16 @@ namespace Microsoft.Extensions.FileProviders
         {
             // Arrange
             var assembly = new TestAssembly(
-                TestEntry.Directory("unused",
-                    TestEntry.Directory("wwwroot",
+                TestEntry.Directory(
+                    "unused",
+                    TestEntry.Directory(
+                        "wwwroot",
                         TestEntry.File("jquery.validate.js"),
                         TestEntry.File("jquery.min.js"),
-                        TestEntry.File("site.css"))));
+                        TestEntry.File("site.css")
+                    )
+                )
+            );
 
             var provider = new ManifestEmbeddedFileProvider(assembly);
 
@@ -129,11 +149,16 @@ namespace Microsoft.Extensions.FileProviders
         {
             // Arrange
             var assembly = new TestAssembly(
-                TestEntry.Directory("unused",
-                    TestEntry.Directory("wwwroot",
+                TestEntry.Directory(
+                    "unused",
+                    TestEntry.Directory(
+                        "wwwroot",
                         TestEntry.File("jquery.validate.js"),
                         TestEntry.File("jquery.min.js"),
-                        TestEntry.File("site.css"))));
+                        TestEntry.File("site.css")
+                    )
+                )
+            );
 
             var provider = new ManifestEmbeddedFileProvider(assembly);
 
@@ -151,11 +176,16 @@ namespace Microsoft.Extensions.FileProviders
         {
             // Arrange
             var assembly = new TestAssembly(
-                TestEntry.Directory("unused",
-                    TestEntry.Directory("wwwroot",
+                TestEntry.Directory(
+                    "unused",
+                    TestEntry.Directory(
+                        "wwwroot",
                         TestEntry.File("jquery.validate.js"),
                         TestEntry.File("jquery.min.js"),
-                        TestEntry.File("site.css"))));
+                        TestEntry.File("site.css")
+                    )
+                )
+            );
 
             // Act
             var provider = new ManifestEmbeddedFileProvider(assembly);
@@ -174,17 +204,24 @@ namespace Microsoft.Extensions.FileProviders
         {
             // Arrange
             var assembly = new TestAssembly(
-                TestEntry.Directory("unused",
-                    TestEntry.Directory("wwwroot",
+                TestEntry.Directory(
+                    "unused",
+                    TestEntry.Directory(
+                        "wwwroot",
                         TestEntry.File("jquery.validate.js"),
                         TestEntry.File("jquery.min.js"),
-                        TestEntry.File("site.css"))));
+                        TestEntry.File("site.css")
+                    )
+                )
+            );
 
             // Act
             var provider = new ManifestEmbeddedFileProvider(assembly);
 
             // Assert
-            var jqueryValidate = provider.GetFileInfo(Path.Combine(".", "wwwroot", "jquery.validate.js"));
+            var jqueryValidate = provider.GetFileInfo(
+                Path.Combine(".", "wwwroot", "jquery.validate.js")
+            );
             Assert.True(jqueryValidate.Exists);
             Assert.False(jqueryValidate.IsDirectory);
             Assert.Equal("jquery.validate.js", jqueryValidate.Name);
@@ -197,17 +234,24 @@ namespace Microsoft.Extensions.FileProviders
         {
             // Arrange
             var assembly = new TestAssembly(
-                TestEntry.Directory("unused",
-                    TestEntry.Directory("wwwroot",
+                TestEntry.Directory(
+                    "unused",
+                    TestEntry.Directory(
+                        "wwwroot",
                         TestEntry.File("jquery.validate.js"),
                         TestEntry.File("jquery.min.js"),
-                        TestEntry.File("site.css"))));
+                        TestEntry.File("site.css")
+                    )
+                )
+            );
 
             // Act
             var provider = new ManifestEmbeddedFileProvider(assembly);
 
             // Assert
-            var jqueryValidate = provider.GetFileInfo(Path.Combine("..", "wwwroot", "jquery.validate.js"));
+            var jqueryValidate = provider.GetFileInfo(
+                Path.Combine("..", "wwwroot", "jquery.validate.js")
+            );
             Assert.IsType<NotFoundFileInfo>(jqueryValidate);
         }
 
@@ -222,11 +266,16 @@ namespace Microsoft.Extensions.FileProviders
         {
             // Arrange
             var assembly = new TestAssembly(
-                TestEntry.Directory("unused",
-                    TestEntry.Directory("wwwroot",
+                TestEntry.Directory(
+                    "unused",
+                    TestEntry.Directory(
+                        "wwwroot",
                         TestEntry.File("jquery.validate.js"),
                         TestEntry.File("jquery.min.js"),
-                        TestEntry.File("site.css"))));
+                        TestEntry.File("site.css")
+                    )
+                )
+            );
 
             // Act
             var provider = new ManifestEmbeddedFileProvider(assembly);
@@ -242,11 +291,16 @@ namespace Microsoft.Extensions.FileProviders
         {
             // Arrange
             var assembly = new TestAssembly(
-                TestEntry.Directory("unused",
-                    TestEntry.Directory("wwwroot",
+                TestEntry.Directory(
+                    "unused",
+                    TestEntry.Directory(
+                        "wwwroot",
                         TestEntry.File("jquery.validate.js"),
                         TestEntry.File("jquery.min.js"),
-                        TestEntry.File("site.css"))));
+                        TestEntry.File("site.css")
+                    )
+                )
+            );
 
             var provider = new ManifestEmbeddedFileProvider(assembly);
 
@@ -269,18 +323,20 @@ namespace Microsoft.Extensions.FileProviders
         {
             // Arrange
             var assembly = new TestAssembly(
-                TestEntry.Directory("unused",
-                    TestEntry.Directory("wwwroot",
+                TestEntry.Directory(
+                    "unused",
+                    TestEntry.Directory(
+                        "wwwroot",
                         TestEntry.File("jquery.validate.js"),
                         TestEntry.File("jquery.min.js"),
-                        TestEntry.File("site.css"))));
+                        TestEntry.File("site.css")
+                    )
+                )
+            );
 
             var provider = new ManifestEmbeddedFileProvider(assembly);
 
-            var expectedContents = new[]
-            {
-                CreateTestFileInfo("wwwroot", isDirectory: true)
-            };
+            var expectedContents = new[] { CreateTestFileInfo("wwwroot", isDirectory: true) };
 
             // Act
             var contents = provider.GetDirectoryContents(".").ToArray();
@@ -294,9 +350,12 @@ namespace Microsoft.Extensions.FileProviders
         {
             // Arrange
             var assembly = new TestAssembly(
-                TestEntry.Directory("unused",
+                TestEntry.Directory(
+                    "unused",
                     TestEntry.Directory("wwwroot"),
-                    TestEntry.File("site.css")));
+                    TestEntry.File("site.css")
+                )
+            );
 
             var provider = new ManifestEmbeddedFileProvider(assembly);
 
@@ -318,9 +377,12 @@ namespace Microsoft.Extensions.FileProviders
         {
             // Arrange
             var assembly = new TestAssembly(
-                TestEntry.Directory("unused",
+                TestEntry.Directory(
+                    "unused",
                     TestEntry.Directory("wwwroot"),
-                    TestEntry.File("site.css")));
+                    TestEntry.File("site.css")
+                )
+            );
 
             var provider = new ManifestEmbeddedFileProvider(assembly);
 
@@ -336,9 +398,12 @@ namespace Microsoft.Extensions.FileProviders
         {
             // Arrange
             var assembly = new TestAssembly(
-                TestEntry.Directory("unused",
+                TestEntry.Directory(
+                    "unused",
                     TestEntry.Directory("wwwroot"),
-                    TestEntry.File("site.css")));
+                    TestEntry.File("site.css")
+                )
+            );
 
             var provider = new ManifestEmbeddedFileProvider(assembly);
 
@@ -356,15 +421,21 @@ namespace Microsoft.Extensions.FileProviders
         [InlineData("wwwro<t")]
         [InlineData("wwwro>t")]
         [InlineData("wwwro\0t")]
-        public void GetDirectoryContents_ReturnsNotFoundDirectoryContents_ForPathsWithInvalidCharacters(string path)
-        {
+        public void GetDirectoryContents_ReturnsNotFoundDirectoryContents_ForPathsWithInvalidCharacters(
+            string path
+        ) {
             // Arrange
             var assembly = new TestAssembly(
-                TestEntry.Directory("unused",
-                    TestEntry.Directory("wwwroot",
+                TestEntry.Directory(
+                    "unused",
+                    TestEntry.Directory(
+                        "wwwroot",
                         TestEntry.File("jquery.validate.js"),
                         TestEntry.File("jquery.min.js"),
-                        TestEntry.File("site.css"))));
+                        TestEntry.File("site.css")
+                    )
+                )
+            );
 
             // Act
             var provider = new ManifestEmbeddedFileProvider(assembly);
@@ -379,13 +450,19 @@ namespace Microsoft.Extensions.FileProviders
         {
             // Arrange
             var assembly = new TestAssembly(
-                TestEntry.Directory("unused",
-                    TestEntry.Directory("wwwroot",
-                        TestEntry.File("jquery.validate.js")),
-                    TestEntry.File("site.css")));
+                TestEntry.Directory(
+                    "unused",
+                    TestEntry.Directory("wwwroot", TestEntry.File("jquery.validate.js")),
+                    TestEntry.File("site.css")
+                )
+            );
 
             var provider = new ManifestEmbeddedFileProvider(assembly);
-            var scopedProvider = new ManifestEmbeddedFileProvider(assembly, provider.Manifest.Scope("wwwroot"), DateTimeOffset.UtcNow);
+            var scopedProvider = new ManifestEmbeddedFileProvider(
+                assembly,
+                provider.Manifest.Scope("wwwroot"),
+                DateTimeOffset.UtcNow
+            );
 
             // Act
             var jqueryValidate = scopedProvider.GetFileInfo("jquery.validate.js");
@@ -395,7 +472,7 @@ namespace Microsoft.Extensions.FileProviders
             Assert.False(jqueryValidate.IsDirectory);
             Assert.Equal("jquery.validate.js", jqueryValidate.Name);
             Assert.Null(jqueryValidate.PhysicalPath);
-            Assert.Equal(0, jqueryValidate.Length);          
+            Assert.Equal(0, jqueryValidate.Length);
         }
 
         [Theory]
@@ -407,13 +484,19 @@ namespace Microsoft.Extensions.FileProviders
         {
             // Arrange
             var assembly = new TestAssembly(
-                TestEntry.Directory("unused",
-                    TestEntry.Directory("wwwroot",
-                        TestEntry.File("jquery.validate.js")),
-                    TestEntry.File("site.css")));
+                TestEntry.Directory(
+                    "unused",
+                    TestEntry.Directory("wwwroot", TestEntry.File("jquery.validate.js")),
+                    TestEntry.File("site.css")
+                )
+            );
 
             var provider = new ManifestEmbeddedFileProvider(assembly);
-            var scopedProvider = new ManifestEmbeddedFileProvider(assembly, provider.Manifest.Scope("wwwroot"), DateTimeOffset.UtcNow);
+            var scopedProvider = new ManifestEmbeddedFileProvider(
+                assembly,
+                provider.Manifest.Scope("wwwroot"),
+                DateTimeOffset.UtcNow
+            );
 
             // Act
             var jqueryValidate = scopedProvider.GetFileInfo(path);

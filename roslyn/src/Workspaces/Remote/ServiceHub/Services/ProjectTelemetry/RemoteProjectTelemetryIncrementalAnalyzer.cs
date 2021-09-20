@@ -18,10 +18,13 @@ namespace Microsoft.CodeAnalysis.Remote
         private readonly RemoteCallback<IRemoteProjectTelemetryService.ICallback> _callback;
         private readonly RemoteServiceCallbackId _callbackId;
         private readonly object _gate = new object();
-        private readonly Dictionary<ProjectId, ProjectTelemetryData> _projectToData = new Dictionary<ProjectId, ProjectTelemetryData>();
+        private readonly Dictionary<ProjectId, ProjectTelemetryData> _projectToData =
+            new Dictionary<ProjectId, ProjectTelemetryData>();
 
-        public RemoteProjectTelemetryIncrementalAnalyzer(RemoteCallback<IRemoteProjectTelemetryService.ICallback> callback, RemoteServiceCallbackId callbackId)
-        {
+        public RemoteProjectTelemetryIncrementalAnalyzer(
+            RemoteCallback<IRemoteProjectTelemetryService.ICallback> callback,
+            RemoteServiceCallbackId callbackId
+        ) {
             _callback = callback;
             _callbackId = callbackId;
         }
@@ -33,8 +36,12 @@ namespace Microsoft.CodeAnalysis.Remote
         /// Only sends data to the telemetry service when one of the collected data points changes, 
         /// not necessarily every time this code is called.
         /// </remarks>
-        public override async Task AnalyzeProjectAsync(Project project, bool semanticsChanged, InvocationReasons reasons, CancellationToken cancellationToken)
-        {
+        public override async Task AnalyzeProjectAsync(
+            Project project,
+            bool semanticsChanged,
+            InvocationReasons reasons,
+            CancellationToken cancellationToken
+        ) {
             if (!semanticsChanged)
                 return;
 
@@ -53,13 +60,15 @@ namespace Microsoft.CodeAnalysis.Remote
                 projectReferencesCount: projectReferencesCount,
                 metadataReferencesCount: metadataReferencesCount,
                 documentsCount: documentsCount,
-                additionalDocumentsCount: additionalDocumentsCount);
+                additionalDocumentsCount: additionalDocumentsCount
+            );
 
             lock (_gate)
             {
-                if (_projectToData.TryGetValue(projectId, out var existingInfo) &&
-                    existingInfo.Equals(info))
-                {
+                if (
+                    _projectToData.TryGetValue(projectId, out var existingInfo)
+                    && existingInfo.Equals(info)
+                ) {
                     // already have reported this.  No need to notify VS.
                     return;
                 }
@@ -68,12 +77,21 @@ namespace Microsoft.CodeAnalysis.Remote
             }
 
             await _callback.InvokeAsync(
-                (callback, cancellationToken) => callback.ReportProjectTelemetryDataAsync(_callbackId, info, cancellationToken),
-                cancellationToken).ConfigureAwait(false);
+                    (callback, cancellationToken) =>
+                        callback.ReportProjectTelemetryDataAsync(
+                            _callbackId,
+                            info,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
-        public override Task RemoveProjectAsync(ProjectId projectId, CancellationToken cancellationToken)
-        {
+        public override Task RemoveProjectAsync(
+            ProjectId projectId,
+            CancellationToken cancellationToken
+        ) {
             lock (_gate)
             {
                 _projectToData.Remove(projectId);

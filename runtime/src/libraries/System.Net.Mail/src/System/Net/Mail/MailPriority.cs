@@ -38,9 +38,7 @@ namespace System.Net.Mail
 
         #region Constructors
 
-        internal Message()
-        {
-        }
+        internal Message() { }
 
         internal Message(string from, string to) : this()
         {
@@ -51,17 +49,22 @@ namespace System.Net.Mail
                 throw new ArgumentNullException(nameof(to));
 
             if (from.Length == 0)
-                throw new ArgumentException(SR.Format(SR.net_emptystringcall, nameof(from)), nameof(from));
+                throw new ArgumentException(
+                    SR.Format(SR.net_emptystringcall, nameof(from)),
+                    nameof(from)
+                );
 
             if (to.Length == 0)
-                throw new ArgumentException(SR.Format(SR.net_emptystringcall, nameof(to)), nameof(to));
+                throw new ArgumentException(
+                    SR.Format(SR.net_emptystringcall, nameof(to)),
+                    nameof(to)
+                );
 
             _from = new MailAddress(from);
             MailAddressCollection collection = new MailAddressCollection();
             collection.Add(to);
             _to = collection;
         }
-
 
         internal Message(MailAddress from, MailAddress to) : this()
         {
@@ -75,23 +78,14 @@ namespace System.Net.Mail
 
         public MailPriority Priority
         {
-            get
-            {
-                return (((int)_priority == -1) ? MailPriority.Normal : _priority);
-            }
-            set
-            {
-                _priority = value;
-            }
+            get { return (((int)_priority == -1) ? MailPriority.Normal : _priority); }
+            set { _priority = value; }
         }
 
         [DisallowNull]
         internal MailAddress? From
         {
-            get
-            {
-                return _from;
-            }
+            get { return _from; }
             set
             {
                 if (value == null)
@@ -102,30 +96,16 @@ namespace System.Net.Mail
             }
         }
 
-
         internal MailAddress? Sender
         {
-            get
-            {
-                return _sender;
-            }
-            set
-            {
-                _sender = value;
-            }
+            get { return _sender; }
+            set { _sender = value; }
         }
-
 
         internal MailAddress? ReplyTo
         {
-            get
-            {
-                return _replyTo;
-            }
-            set
-            {
-                _replyTo = value;
-            }
+            get { return _replyTo; }
+            set { _replyTo = value; }
         }
 
         internal MailAddressCollection ReplyToList => _replyToList ??= new MailAddressCollection();
@@ -136,13 +116,9 @@ namespace System.Net.Mail
 
         internal MailAddressCollection CC => _cc ??= new MailAddressCollection();
 
-
         internal string? Subject
         {
-            get
-            {
-                return _subject;
-            }
+            get { return _subject; }
             set
             {
                 Encoding? inputEncoding = null;
@@ -151,7 +127,8 @@ namespace System.Net.Mail
                     // extract the encoding from =?encoding?BorQ?blablalba?=
                     inputEncoding = MimeBasePart.DecodeEncoding(value);
                 }
-                catch (ArgumentException) { };
+                catch (ArgumentException) { }
+                ;
 
                 if (inputEncoding != null && value != null)
                 {
@@ -184,14 +161,8 @@ namespace System.Net.Mail
 
         internal Encoding? SubjectEncoding
         {
-            get
-            {
-                return _subjectEncoding;
-            }
-            set
-            {
-                _subjectEncoding = value;
-            }
+            get { return _subjectEncoding; }
+            set { _subjectEncoding = value; }
         }
 
         internal HeaderCollection Headers
@@ -201,7 +172,8 @@ namespace System.Net.Mail
                 if (_headers == null)
                 {
                     _headers = new HeaderCollection();
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Associate(this, _headers);
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Associate(this, _headers);
                 }
 
                 return _headers;
@@ -210,14 +182,8 @@ namespace System.Net.Mail
 
         internal Encoding? HeadersEncoding
         {
-            get
-            {
-                return _headersEncoding;
-            }
-            set
-            {
-                _headersEncoding = value;
-            }
+            get { return _headersEncoding; }
+            set { _headersEncoding = value; }
         }
 
         internal HeaderCollection EnvelopeHeaders
@@ -227,7 +193,8 @@ namespace System.Net.Mail
                 if (_envelopeHeaders == null)
                 {
                     _envelopeHeaders = new HeaderCollection();
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Associate(this, _envelopeHeaders);
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Associate(this, _envelopeHeaders);
                 }
 
                 return _envelopeHeaders;
@@ -237,10 +204,7 @@ namespace System.Net.Mail
         [DisallowNull]
         internal MimeBasePart? Content
         {
-            get
-            {
-                return _content;
-            }
+            get { return _content; }
             set
             {
                 if (value == null)
@@ -289,9 +253,13 @@ namespace System.Net.Mail
             internal BaseWriter _writer;
         }
 
-        internal IAsyncResult BeginSend(BaseWriter writer, bool sendEnvelope, bool allowUnicode,
-            AsyncCallback? callback, object? state)
-        {
+        internal IAsyncResult BeginSend(
+            BaseWriter writer,
+            bool sendEnvelope,
+            bool allowUnicode,
+            AsyncCallback? callback,
+            object? state
+        ) {
             PrepareHeaders(sendEnvelope, allowUnicode);
             writer.WriteHeaders(Headers, allowUnicode);
 
@@ -302,7 +270,10 @@ namespace System.Net.Mail
             else
             {
                 LazyAsyncResult result = new LazyAsyncResult(this, state, callback);
-                IAsyncResult newResult = writer.BeginGetContentStream(EmptySendCallback, new EmptySendContext(writer, result));
+                IAsyncResult newResult = writer.BeginGetContentStream(
+                    EmptySendCallback,
+                    new EmptySendContext(writer, result)
+                );
                 if (newResult.CompletedSynchronously)
                 {
                     writer.EndGetContentStream(newResult).Close();
@@ -334,7 +305,9 @@ namespace System.Net.Mail
 
                 if (castedAsyncResult.EndCalled)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.net_io_invalidendcall, nameof(EndSend)));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.net_io_invalidendcall, nameof(EndSend))
+                    );
                 }
 
                 castedAsyncResult.InternalWaitForCompletion();
@@ -381,7 +354,10 @@ namespace System.Net.Mail
             if (!IsHeaderSet(xSenderHeader))
             {
                 MailAddress sender = Sender ?? From!;
-                EnvelopeHeaders.InternalSet(xSenderHeader, sender.Encode(xSenderHeader.Length, allowUnicode));
+                EnvelopeHeaders.InternalSet(
+                    xSenderHeader,
+                    sender.Encode(xSenderHeader.Length, allowUnicode)
+                );
             }
 
             string headerName = MailHeaderInfo.GetString(MailHeaderID.XReceiver)!;
@@ -389,15 +365,24 @@ namespace System.Net.Mail
 
             foreach (MailAddress address in To)
             {
-                EnvelopeHeaders.InternalAdd(headerName, address.Encode(headerName.Length, allowUnicode));
+                EnvelopeHeaders.InternalAdd(
+                    headerName,
+                    address.Encode(headerName.Length, allowUnicode)
+                );
             }
             foreach (MailAddress address in CC)
             {
-                EnvelopeHeaders.InternalAdd(headerName, address.Encode(headerName.Length, allowUnicode));
+                EnvelopeHeaders.InternalAdd(
+                    headerName,
+                    address.Encode(headerName.Length, allowUnicode)
+                );
             }
             foreach (MailAddress address in Bcc)
             {
-                EnvelopeHeaders.InternalAdd(headerName, address.Encode(headerName.Length, allowUnicode));
+                EnvelopeHeaders.InternalAdd(
+                    headerName,
+                    address.Encode(headerName.Length, allowUnicode)
+                );
             }
         }
 
@@ -457,7 +442,10 @@ namespace System.Net.Mail
             }
             else if (ReplyToList.Count > 0)
             {
-                Headers.InternalAdd(headerName, ReplyToList.Encode(headerName.Length, allowUnicode));
+                Headers.InternalAdd(
+                    headerName,
+                    ReplyToList.Encode(headerName.Length, allowUnicode)
+                );
             }
             else
             {
@@ -486,8 +474,10 @@ namespace System.Net.Mail
                 Headers.Remove(MailHeaderInfo.GetString(MailHeaderID.Importance)!);
             }
 
-            Headers.InternalAdd(MailHeaderInfo.GetString(MailHeaderID.Date)!,
-                MailBnfHelper.GetDateTimeString(DateTime.Now, null)!);
+            Headers.InternalAdd(
+                MailHeaderInfo.GetString(MailHeaderID.Date)!,
+                MailBnfHelper.GetDateTimeString(DateTime.Now, null)!
+            );
 
             headerName = MailHeaderInfo.GetString(MailHeaderID.Subject)!;
             if (!string.IsNullOrEmpty(_subject))
@@ -498,10 +488,15 @@ namespace System.Net.Mail
                 }
                 else
                 {
-                    Headers.InternalAdd(headerName,
-                        MimeBasePart.EncodeHeaderValue(_subject, _subjectEncoding,
-                        MimeBasePart.ShouldUseBase64Encoding(_subjectEncoding),
-                        headerName.Length));
+                    Headers.InternalAdd(
+                        headerName,
+                        MimeBasePart.EncodeHeaderValue(
+                            _subject,
+                            _subjectEncoding,
+                            MimeBasePart.ShouldUseBase64Encoding(_subjectEncoding),
+                            headerName.Length
+                        )
+                    );
                 }
             }
             else
@@ -536,18 +531,24 @@ namespace System.Net.Mail
                 for (int j = 0; j < values.Length; j++)
                 {
                     //encode if we need to
-                    if (MimeBasePart.IsAscii(values[j], false)
-                         || (allowUnicode && MailHeaderInfo.AllowsUnicode(headerName) // EAI
-                            && !MailBnfHelper.HasCROrLF(values[j])))
-                    {
+                    if (
+                        MimeBasePart.IsAscii(values[j], false)
+                        || (
+                            allowUnicode
+                            && MailHeaderInfo.AllowsUnicode(headerName) // EAI
+                            && !MailBnfHelper.HasCROrLF(values[j])
+                        )
+                    ) {
                         encodedValue = values[j];
                     }
                     else
                     {
-                        encodedValue = MimeBasePart.EncodeHeaderValue(values[j],
-                                                        _headersEncoding,
-                                                        MimeBasePart.ShouldUseBase64Encoding(_headersEncoding),
-                                                        headerName.Length);
+                        encodedValue = MimeBasePart.EncodeHeaderValue(
+                            values[j],
+                            _headersEncoding,
+                            MimeBasePart.ShouldUseBase64Encoding(_headersEncoding),
+                            headerName.Length
+                        );
                     }
 
                     //potentially there are multiple values per key
@@ -571,14 +572,18 @@ namespace System.Net.Mail
         {
             for (int i = 0; i < Headers.Count; i++)
             {
-                if (string.Equals(Headers.GetKey(i), headerName, StringComparison.InvariantCultureIgnoreCase))
-                {
+                if (
+                    string.Equals(
+                        Headers.GetKey(i),
+                        headerName,
+                        StringComparison.InvariantCultureIgnoreCase
+                    )
+                ) {
                     return true;
                 }
             }
             return false;
         }
-
         #endregion Sending
     }
 }

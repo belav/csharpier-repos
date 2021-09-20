@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Hover
         public async Task TestGetHoverAsync()
         {
             var markup =
-@"class A
+                @"class A
 {
     /// <summary>
     /// A great method
@@ -35,16 +35,20 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Hover
             using var testLspServer = CreateTestLspServer(markup, out var locations);
             var expectedLocation = locations["caret"].Single();
 
-            var results = await RunGetHoverAsync(testLspServer, expectedLocation).ConfigureAwait(false);
+            var results = await RunGetHoverAsync(testLspServer, expectedLocation)
+                .ConfigureAwait(false);
 
-            VerifyContent(results, $"string A.Method(int i)|A great method|{FeaturesResources.Returns_colon}|  |a string");
+            VerifyContent(
+                results,
+                $"string A.Method(int i)|A great method|{FeaturesResources.Returns_colon}|  |a string"
+            );
         }
 
         [Fact]
         public async Task TestGetHoverAsync_WithExceptions()
         {
             var markup =
-@"class A
+                @"class A
 {
     /// <summary>
     /// A great method
@@ -59,15 +63,19 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Hover
             using var testLspServer = CreateTestLspServer(markup, out var locations);
             var expectedLocation = locations["caret"].Single();
 
-            var results = await RunGetHoverAsync(testLspServer, expectedLocation).ConfigureAwait(false);
-            VerifyContent(results, $"string A.Method(int i)|A great method|{FeaturesResources.Exceptions_colon}|  System.NullReferenceException");
+            var results = await RunGetHoverAsync(testLspServer, expectedLocation)
+                .ConfigureAwait(false);
+            VerifyContent(
+                results,
+                $"string A.Method(int i)|A great method|{FeaturesResources.Exceptions_colon}|  System.NullReferenceException"
+            );
         }
 
         [Fact]
         public async Task TestGetHoverAsync_WithRemarks()
         {
             var markup =
-@"class A
+                @"class A
 {
     /// <summary>
     /// A great method
@@ -82,7 +90,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Hover
             using var testLspServer = CreateTestLspServer(markup, out var locations);
             var expectedLocation = locations["caret"].Single();
 
-            var results = await RunGetHoverAsync(testLspServer, expectedLocation).ConfigureAwait(false);
+            var results = await RunGetHoverAsync(testLspServer, expectedLocation)
+                .ConfigureAwait(false);
             VerifyContent(results, "string A.Method(int i)|A great method|Remarks are cool too.");
         }
 
@@ -90,7 +99,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Hover
         public async Task TestGetHoverAsync_WithList()
         {
             var markup =
-@"class A
+                @"class A
 {
     /// <summary>
     /// A great method
@@ -110,7 +119,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Hover
             using var testLspServer = CreateTestLspServer(markup, out var locations);
             var expectedLocation = locations["caret"].Single();
 
-            var results = await RunGetHoverAsync(testLspServer, expectedLocation).ConfigureAwait(false);
+            var results = await RunGetHoverAsync(testLspServer, expectedLocation)
+                .ConfigureAwait(false);
             VerifyContent(results, "string A.Method(int i)|A great method|• |Item 1.|• |Item 2.");
         }
 
@@ -118,7 +128,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Hover
         public async Task TestGetHoverAsync_InvalidLocation()
         {
             var markup =
-@"class A
+                @"class A
 {
     /// <summary>
     /// A great method
@@ -132,7 +142,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Hover
 }";
             using var testLspServer = CreateTestLspServer(markup, out var locations);
 
-            var results = await RunGetHoverAsync(testLspServer, locations["caret"].Single()).ConfigureAwait(false);
+            var results = await RunGetHoverAsync(testLspServer, locations["caret"].Single())
+                .ConfigureAwait(false);
             Assert.Null(results);
         }
 
@@ -142,7 +153,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Hover
         [Fact]
         public async Task TestGetHoverWithProjectContexts()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 #if NET472
@@ -170,7 +182,7 @@ class Program
 }";
 
             var workspaceXml =
-$@"<Workspace>
+                $@"<Workspace>
     <Project Language=""C#"" CommonReferences=""true"" AssemblyName=""Net472"" PreprocessorSymbols=""NET472"">
         <Document FilePath=""C:\C.cs""><![CDATA[${source}]]></Document>
     </Project>
@@ -186,29 +198,58 @@ $@"<Workspace>
             {
                 var result = await RunGetHoverAsync(testLspServer, location, project.Id);
 
-                var expectedConstant = project.Name == "Net472" ? "Target in net472" : "Target in netcoreapp3.1";
-                VerifyContent(result, $"({FeaturesResources.constant}) string WithConstant.Target = \"{expectedConstant}\"");
+                var expectedConstant =
+                    project.Name == "Net472" ? "Target in net472" : "Target in netcoreapp3.1";
+                VerifyContent(
+                    result,
+                    $"({FeaturesResources.constant}) string WithConstant.Target = \"{expectedConstant}\""
+                );
             }
         }
 
-        private static async Task<LSP.VSHover> RunGetHoverAsync(TestLspServer testLspServer, LSP.Location caret, ProjectId projectContext = null)
-        {
-            return (LSP.VSHover)await testLspServer.ExecuteRequestAsync<LSP.TextDocumentPositionParams, LSP.Hover>(LSP.Methods.TextDocumentHoverName,
-                           CreateTextDocumentPositionParams(caret, projectContext), new LSP.ClientCapabilities(), null, CancellationToken.None);
+        private static async Task<LSP.VSHover> RunGetHoverAsync(
+            TestLspServer testLspServer,
+            LSP.Location caret,
+            ProjectId projectContext = null
+        ) {
+            return (LSP.VSHover)await testLspServer.ExecuteRequestAsync<
+                LSP.TextDocumentPositionParams,
+                LSP.Hover
+            >(
+                LSP.Methods.TextDocumentHoverName,
+                CreateTextDocumentPositionParams(caret, projectContext),
+                new LSP.ClientCapabilities(),
+                null,
+                CancellationToken.None
+            );
         }
 
         private void VerifyContent(LSP.VSHover result, string expectedContent)
         {
             var containerElement = (ContainerElement)result.RawContent;
-            using var _ = ArrayBuilder<ClassifiedTextElement>.GetInstance(out var classifiedTextElements);
+            using var _ = ArrayBuilder<ClassifiedTextElement>.GetInstance(
+                out var classifiedTextElements
+            );
             GetClassifiedTextElements(containerElement, classifiedTextElements);
-            Assert.False(classifiedTextElements.SelectMany(classifiedTextElements => classifiedTextElements.Runs).Any(run => run.NavigationAction != null));
-            var content = string.Join("|", classifiedTextElements.Select(cte => string.Join(string.Empty, cte.Runs.Select(ctr => ctr.Text))));
+            Assert.False(
+                classifiedTextElements.SelectMany(
+                        classifiedTextElements => classifiedTextElements.Runs
+                    )
+                    .Any(run => run.NavigationAction != null)
+            );
+            var content = string.Join(
+                "|",
+                classifiedTextElements.Select(
+                    cte => string.Join(string.Empty, cte.Runs.Select(ctr => ctr.Text))
+                )
+            );
             Assert.Equal(expectedContent, content);
         }
 
-        private void GetClassifiedTextElements(ContainerElement container, ArrayBuilder<ClassifiedTextElement> classifiedTextElements)
-        {
+        private void GetClassifiedTextElements(
+            ContainerElement container,
+            ArrayBuilder<ClassifiedTextElement> classifiedTextElements
+        ) {
             foreach (var element in container.Elements)
             {
                 if (element is ClassifiedTextElement classifiedTextElement)

@@ -40,32 +40,31 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public void Process_HrefDefaultsToTagHelperOutputHrefAttributeAddedByOtherTagHelper(
             string href,
             string hrefOutput,
-            string expectedHrefPrefix)
-        {
+            string expectedHrefPrefix
+        ) {
             // Arrange
             var allAttributes = new TagHelperAttributeList(
                 new TagHelperAttributeList
                 {
                     { "rel", new HtmlString("stylesheet") },
                     { "asp-append-version", true },
-                });
+                }
+            );
             var context = MakeTagHelperContext(allAttributes);
             var outputAttributes = new TagHelperAttributeList
-                {
-                    { "rel", new HtmlString("stylesheet") },
-                    { "href", hrefOutput },
-                };
+            {
+                { "rel", new HtmlString("stylesheet") },
+                { "href", hrefOutput },
+            };
             var output = MakeTagHelperOutput("link", outputAttributes);
             var urlHelper = new Mock<IUrlHelper>();
 
             // Ensure expanded path does not look like an absolute path on Linux, avoiding
             // https://github.com/aspnet/External/issues/21
-            urlHelper
-                .Setup(urlhelper => urlhelper.Content(It.IsAny<string>()))
+            urlHelper.Setup(urlhelper => urlhelper.Content(It.IsAny<string>()))
                 .Returns(new Func<string, string>(url => url.Replace("~/", "virtualRoot/")));
             var urlHelperFactory = new Mock<IUrlHelperFactory>();
-            urlHelperFactory
-                .Setup(f => f.GetUrlHelper(It.IsAny<ActionContext>()))
+            urlHelperFactory.Setup(f => f.GetUrlHelper(It.IsAny<ActionContext>()))
                 .Returns(urlHelper.Object);
 
             var helper = GetHelper(urlHelperFactory: urlHelperFactory.Object);
@@ -79,7 +78,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             Assert.Equal(
                 expectedHrefPrefix + "?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk",
                 (string)output.Attributes["href"].Value,
-                StringComparer.Ordinal);
+                StringComparer.Ordinal
+            );
         }
 
         public static TheoryData MultiAttributeSameNameData
@@ -89,13 +89,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 // outputAttributes
                 return new TheoryData<TagHelperAttributeList>
                 {
-                    {
-                        new TagHelperAttributeList
-                        {
-                            { "hello", "world" },
-                            { "hello", "world2" }
-                        }
-                    },
+                    { new TagHelperAttributeList { { "hello", "world" }, { "hello", "world2" } } },
                     {
                         new TagHelperAttributeList
                         {
@@ -104,13 +98,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                             { "hello", "world3" }
                         }
                     },
-                    {
-                        new TagHelperAttributeList
-                        {
-                            { "HelLO", "world" },
-                            { "HELLO", "world2" }
-                        }
-                    },
+                    { new TagHelperAttributeList { { "HelLO", "world" }, { "HELLO", "world2" } } },
                     {
                         new TagHelperAttributeList
                         {
@@ -119,21 +107,16 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                             { "hello", "world3" }
                         }
                     },
-                    {
-                        new TagHelperAttributeList
-                        {
-                            { "HeLlO", "world" },
-                            { "hello", "world2" }
-                        }
-                    },
+                    { new TagHelperAttributeList { { "HeLlO", "world" }, { "hello", "world2" } } },
                 };
             }
         }
 
         [Theory]
         [MemberData(nameof(MultiAttributeSameNameData))]
-        public void HandlesMultipleAttributesSameNameCorrectly(TagHelperAttributeList outputAttributes)
-        {
+        public void HandlesMultipleAttributesSameNameCorrectly(
+            TagHelperAttributeList outputAttributes
+        ) {
             // Arrange
             var allAttributes = new TagHelperAttributeList(
                 outputAttributes.Concat(
@@ -145,14 +128,15 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                         { "asp-fallback-test-class", "hidden" },
                         { "asp-fallback-test-property", "visibility" },
                         { "asp-fallback-test-value", "hidden" },
-                    }));
+                    }
+                )
+            );
             var context = MakeTagHelperContext(allAttributes);
             var combinedOutputAttributes = new TagHelperAttributeList(
                 outputAttributes.Concat(
-                    new[]
-                    {
-                        new TagHelperAttribute("rel", new HtmlString("stylesheet"))
-                    }));
+                    new[] { new TagHelperAttribute("rel", new HtmlString("stylesheet")) }
+                )
+            );
             var output = MakeTagHelperOutput("link", combinedOutputAttributes);
 
             var helper = GetHelper();
@@ -299,16 +283,19 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         [MemberData(nameof(RunsWhenRequiredAttributesArePresent_Data))]
         public void RunsWhenRequiredAttributesArePresent(
             TagHelperAttributeList attributes,
-            Action<LinkTagHelper> setProperties)
-        {
+            Action<LinkTagHelper> setProperties
+        ) {
             // Arrange
             var context = MakeTagHelperContext(attributes);
             var output = MakeTagHelperOutput("link");
             var globbingUrlBuilder = new Mock<GlobbingUrlBuilder>(
                 new TestFileProvider(),
                 Mock.Of<IMemoryCache>(),
-                PathString.Empty);
-            globbingUrlBuilder.Setup(g => g.BuildUrlList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+                PathString.Empty
+            );
+            globbingUrlBuilder.Setup(
+                    g => g.BuildUrlList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())
+                )
                 .Returns(new[] { "/common.css" });
 
             var helper = GetHelper();
@@ -387,16 +374,19 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         [MemberData(nameof(RunsWhenRequiredAttributesArePresent_NoHref_Data))]
         public void RunsWhenRequiredAttributesArePresent_NoHref(
             TagHelperAttributeList attributes,
-            Action<LinkTagHelper> setProperties)
-        {
+            Action<LinkTagHelper> setProperties
+        ) {
             // Arrange
             var context = MakeTagHelperContext(attributes);
             var output = MakeTagHelperOutput("link");
             var globbingUrlBuilder = new Mock<GlobbingUrlBuilder>(
                 new TestFileProvider(),
                 Mock.Of<IMemoryCache>(),
-                PathString.Empty);
-            globbingUrlBuilder.Setup(g => g.BuildUrlList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+                PathString.Empty
+            );
+            globbingUrlBuilder.Setup(
+                    g => g.BuildUrlList(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())
+                )
                 .Returns(new[] { "/common.css" });
 
             var helper = GetHelper();
@@ -427,13 +417,16 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     { "asp-fallback-test-class", "hidden" },
                     { "asp-fallback-test-property", "visibility" },
                     { "asp-fallback-test-value", "hidden" },
-                });
-            var output = MakeTagHelperOutput("link",
+                }
+            );
+            var output = MakeTagHelperOutput(
+                "link",
                 attributes: new TagHelperAttributeList
                 {
                     { "rel", new HtmlString("stylesheet") },
                     { "data-extra", new HtmlString("something") },
-                });
+                }
+            );
 
             var helper = GetHelper();
             helper.FallbackHref = "test.css";
@@ -530,8 +523,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         [MemberData(nameof(DoesNotRunWhenARequiredAttributeIsMissing_Data))]
         public void DoesNotRunWhenARequiredAttributeIsMissing(
             TagHelperAttributeList attributes,
-            Action<LinkTagHelper> setProperties)
-        {
+            Action<LinkTagHelper> setProperties
+        ) {
             // Arrange
             var context = MakeTagHelperContext(attributes);
             var output = MakeTagHelperOutput("link");
@@ -572,23 +565,26 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public void RendersLinkTagsForGlobbedHrefResults()
         {
             // Arrange
-            var expectedContent = "<link rel=\"stylesheet\" href=\"HtmlEncode[[/css/site.css]]\" />" +
-                "<link rel=\"stylesheet\" href=\"HtmlEncode[[/base.css]]\" />";
+            var expectedContent =
+                "<link rel=\"stylesheet\" href=\"HtmlEncode[[/css/site.css]]\" />"
+                + "<link rel=\"stylesheet\" href=\"HtmlEncode[[/base.css]]\" />";
             var context = MakeTagHelperContext(
                 attributes: new TagHelperAttributeList
                 {
                     { "rel", new HtmlString("stylesheet") },
                     { "href", "/css/site.css" },
                     { "asp-href-include", "**/*.css" },
-                });
-            var output = MakeTagHelperOutput("link", attributes: new TagHelperAttributeList
-            {
-                { "rel", new HtmlString("stylesheet") },
-            });
+                }
+            );
+            var output = MakeTagHelperOutput(
+                "link",
+                attributes: new TagHelperAttributeList { { "rel", new HtmlString("stylesheet") }, }
+            );
             var globbingUrlBuilder = new Mock<GlobbingUrlBuilder>(
                 new TestFileProvider(),
                 Mock.Of<IMemoryCache>(),
-                PathString.Empty);
+                PathString.Empty
+            );
             globbingUrlBuilder.Setup(g => g.BuildUrlList(null, "**/*.css", null))
                 .Returns(new[] { "/base.css" });
 
@@ -613,23 +609,26 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public void RendersLinkTagsForGlobbedHrefResults_UsesInvariantCulture()
         {
             // Arrange
-            var expectedContent = "<link rel=\"stylesheet\" href=\"HtmlEncode[[/css/site.css]]\" />" +
-                "<link rel=\"stylesheet\" href=\"HtmlEncode[[/base.css]]\" />";
+            var expectedContent =
+                "<link rel=\"stylesheet\" href=\"HtmlEncode[[/css/site.css]]\" />"
+                + "<link rel=\"stylesheet\" href=\"HtmlEncode[[/base.css]]\" />";
             var context = MakeTagHelperContext(
                 attributes: new TagHelperAttributeList
                 {
                     { "rel", new ConvertToStyleSheet() },
                     { "href", "/css/site.css" },
                     { "asp-href-include", "**/*.css" },
-                });
-            var output = MakeTagHelperOutput("link", attributes: new TagHelperAttributeList
-            {
-                { "rel", new HtmlString("stylesheet") },
-            });
+                }
+            );
+            var output = MakeTagHelperOutput(
+                "link",
+                attributes: new TagHelperAttributeList { { "rel", new HtmlString("stylesheet") }, }
+            );
             var globbingUrlBuilder = new Mock<GlobbingUrlBuilder>(
                 new TestFileProvider(),
                 Mock.Of<IMemoryCache>(),
-                PathString.Empty);
+                PathString.Empty
+            );
             globbingUrlBuilder.Setup(g => g.BuildUrlList(null, "**/*.css", null))
                 .Returns(new[] { "/base.css" });
 
@@ -654,12 +653,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         {
             // Arrange
             var expectedContent =
-                "<link encoded='contains \"quotes\"' href=\"HtmlEncode[[/css/site.css]]\" " +
-                "literal=\"HtmlEncode[[all HTML encoded]]\" " +
-                "mixed='HtmlEncode[[HTML encoded]] and contains \"quotes\"' />" +
-                "<link encoded='contains \"quotes\"' href=\"HtmlEncode[[/base.css]]\" " +
-                "literal=\"HtmlEncode[[all HTML encoded]]\" " +
-                "mixed='HtmlEncode[[HTML encoded]] and contains \"quotes\"' />";
+                "<link encoded='contains \"quotes\"' href=\"HtmlEncode[[/css/site.css]]\" "
+                + "literal=\"HtmlEncode[[all HTML encoded]]\" "
+                + "mixed='HtmlEncode[[HTML encoded]] and contains \"quotes\"' />"
+                + "<link encoded='contains \"quotes\"' href=\"HtmlEncode[[/base.css]]\" "
+                + "literal=\"HtmlEncode[[all HTML encoded]]\" "
+                + "mixed='HtmlEncode[[HTML encoded]] and contains \"quotes\"' />";
             var mixed = new DefaultTagHelperContent();
             mixed.Append("HTML encoded");
             mixed.AppendHtml(" and contains \"quotes\"");
@@ -667,23 +666,42 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 attributes: new TagHelperAttributeList
                 {
                     { "asp-href-include", "**/*.css" },
-                    { new TagHelperAttribute("encoded", new HtmlString("contains \"quotes\""), HtmlAttributeValueStyle.SingleQuotes) },
+                    {
+                        new TagHelperAttribute(
+                            "encoded",
+                            new HtmlString("contains \"quotes\""),
+                            HtmlAttributeValueStyle.SingleQuotes
+                        )
+                    },
                     { "href", "/css/site.css" },
                     { "literal", "all HTML encoded" },
-                    { new TagHelperAttribute("mixed", mixed, HtmlAttributeValueStyle.SingleQuotes) },
-                });
+                    {
+                        new TagHelperAttribute("mixed", mixed, HtmlAttributeValueStyle.SingleQuotes)
+                    },
+                }
+            );
             var output = MakeTagHelperOutput(
                 "link",
                 attributes: new TagHelperAttributeList
                 {
-                    { new TagHelperAttribute("encoded", new HtmlString("contains \"quotes\""), HtmlAttributeValueStyle.SingleQuotes) },
+                    {
+                        new TagHelperAttribute(
+                            "encoded",
+                            new HtmlString("contains \"quotes\""),
+                            HtmlAttributeValueStyle.SingleQuotes
+                        )
+                    },
                     { "literal", "all HTML encoded" },
-                    { new TagHelperAttribute("mixed", mixed, HtmlAttributeValueStyle.SingleQuotes) },
-                });
+                    {
+                        new TagHelperAttribute("mixed", mixed, HtmlAttributeValueStyle.SingleQuotes)
+                    },
+                }
+            );
             var globbingUrlBuilder = new Mock<GlobbingUrlBuilder>(
                 new TestFileProvider(),
                 Mock.Of<IMemoryCache>(),
-                PathString.Empty);
+                PathString.Empty
+            );
             globbingUrlBuilder.Setup(g => g.BuildUrlList(null, "**/*.css", null))
                 .Returns(new[] { "/base.css" });
 
@@ -712,11 +730,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     { "rel", new HtmlString("stylesheet") },
                     { "href", "/css/site.css" },
                     { "asp-append-version", "true" }
-                });
-            var output = MakeTagHelperOutput("link", attributes: new TagHelperAttributeList
-            {
-                { "rel", new HtmlString("stylesheet") },
-            });
+                }
+            );
+            var output = MakeTagHelperOutput(
+                "link",
+                attributes: new TagHelperAttributeList { { "rel", new HtmlString("stylesheet") }, }
+            );
 
             var helper = GetHelper();
 
@@ -728,7 +747,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             // Assert
             Assert.Equal("link", output.TagName);
-            Assert.Equal("/css/site.css?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk", output.Attributes["href"].Value);
+            Assert.Equal(
+                "/css/site.css?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk",
+                output.Attributes["href"].Value
+            );
         }
 
         [Fact]
@@ -741,11 +763,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     { "rel", new HtmlString("stylesheet") },
                     { "href", "/bar/css/site.css" },
                     { "asp-append-version", "true" },
-                });
-            var output = MakeTagHelperOutput("link", attributes: new TagHelperAttributeList
-            {
-                { "rel", new HtmlString("stylesheet") },
-            });
+                }
+            );
+            var output = MakeTagHelperOutput(
+                "link",
+                attributes: new TagHelperAttributeList { { "rel", new HtmlString("stylesheet") }, }
+            );
             var viewContext = MakeViewContext("/bar");
 
             var helper = GetHelper();
@@ -758,21 +781,25 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             // Assert
             Assert.Equal("link", output.TagName);
-            Assert.Equal("/bar/css/site.css?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk", output.Attributes["href"].Value);
+            Assert.Equal(
+                "/bar/css/site.css?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk",
+                output.Attributes["href"].Value
+            );
         }
 
         [Fact]
         public void RenderLinkTags_FallbackHref_WithFileVersion()
         {
             // Arrange
-            var expectedPostElement = Environment.NewLine +
-                "<meta name=\"x-stylesheet-fallback-test\" content=\"\" class=\"hidden\" /><script>!function" +
-                "(a,b,c,d){var e,f=document,g=f.getElementsByTagName(\"SCRIPT\"),h=g[g.length-1]." +
-                "previousElementSibling,i=f.defaultView&&f.defaultView.getComputedStyle?f.defaultView." +
-                "getComputedStyle(h):h.currentStyle;if(i&&i[a]!==b)for(e=0;e<c.length;e++)f.write('<link " +
-                "href=\"'+c[e]+'\" '+d+\"/>\")}(\"JavaScriptEncode[[visibility]]\",\"JavaScriptEncode[[hidden]]\"" +
-                ",[\"JavaScriptEncode[[HtmlEncode[[/fallback.css?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk]]]]\"]," +
-                " \"JavaScriptEncode[[rel=\"stylesheet\" ]]\");</script>";
+            var expectedPostElement =
+                Environment.NewLine
+                + "<meta name=\"x-stylesheet-fallback-test\" content=\"\" class=\"hidden\" /><script>!function"
+                + "(a,b,c,d){var e,f=document,g=f.getElementsByTagName(\"SCRIPT\"),h=g[g.length-1]."
+                + "previousElementSibling,i=f.defaultView&&f.defaultView.getComputedStyle?f.defaultView."
+                + "getComputedStyle(h):h.currentStyle;if(i&&i[a]!==b)for(e=0;e<c.length;e++)f.write('<link "
+                + "href=\"'+c[e]+'\" '+d+\"/>\")}(\"JavaScriptEncode[[visibility]]\",\"JavaScriptEncode[[hidden]]\""
+                + ",[\"JavaScriptEncode[[HtmlEncode[[/fallback.css?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk]]]]\"],"
+                + " \"JavaScriptEncode[[rel=\"stylesheet\" ]]\");</script>";
             var context = MakeTagHelperContext(
                 attributes: new TagHelperAttributeList
                 {
@@ -783,17 +810,17 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     { "asp-fallback-test-value", "hidden" },
                     { "href", "/css/site.css" },
                     { "rel", new HtmlString("stylesheet") },
-                });
+                }
+            );
             var output = MakeTagHelperOutput(
                 "link",
-                attributes: new TagHelperAttributeList
-                {
-                    { "rel", new HtmlString("stylesheet") },
-                });
+                attributes: new TagHelperAttributeList { { "rel", new HtmlString("stylesheet") }, }
+            );
             var globbingUrlBuilder = new Mock<GlobbingUrlBuilder>(
                 new TestFileProvider(),
                 Mock.Of<IMemoryCache>(),
-                PathString.Empty);
+                PathString.Empty
+            );
             globbingUrlBuilder.Setup(g => g.BuildUrlList(null, "**/fallback.css", null))
                 .Returns(new[] { "/fallback.css" });
 
@@ -811,7 +838,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             // Assert
             Assert.Equal("link", output.TagName);
-            Assert.Equal("/css/site.css?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk", output.Attributes["href"].Value);
+            Assert.Equal(
+                "/css/site.css?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk",
+                output.Attributes["href"].Value
+            );
             Assert.Equal(expectedPostElement, output.PostElement.GetContent());
         }
 
@@ -819,20 +849,21 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public void RenderLinkTags_FallbackHref_WithFileVersion_EncodesAsExpected()
         {
             // Arrange
-            var expectedContent = "<link encoded=\"contains \"quotes\"\" " +
-                "href=\"HtmlEncode[[/css/site.css?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk]]\" " +
-                "literal=\"HtmlEncode[[all HTML encoded]]\" " +
-                "mixed=\"HtmlEncode[[HTML encoded]] and contains \"quotes\"\" rel=\"stylesheet\" />" +
-                Environment.NewLine +
-                "<meta name=\"x-stylesheet-fallback-test\" content=\"\" class=\"HtmlEncode[[hidden]]\" /><script>" +
-                "!function(a,b,c,d){var e,f=document,g=f.getElementsByTagName(\"SCRIPT\"),h=g[g.length-1]." +
-                "previousElementSibling,i=f.defaultView&&f.defaultView.getComputedStyle?f.defaultView." +
-                "getComputedStyle(h):h.currentStyle;if(i&&i[a]!==b)for(e=0;e<c.length;e++)f.write('<link " +
-                "href=\"'+c[e]+'\" '+d+\"/>\")}(\"JavaScriptEncode[[visibility]]\",\"JavaScriptEncode[[hidden]]\"," +
-                "[\"JavaScriptEncode[[HtmlEncode[[/fallback.css?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk]]]]\"], " +
-                "\"JavaScriptEncode[[encoded=\"contains \"quotes\"\" literal=\"HtmlEncode[[all HTML encoded]]\" " +
-                "mixed=\"HtmlEncode[[HTML encoded]] and contains \"quotes\"\" rel=\"stylesheet\" ]]\");" +
-                "</script>";
+            var expectedContent =
+                "<link encoded=\"contains \"quotes\"\" "
+                + "href=\"HtmlEncode[[/css/site.css?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk]]\" "
+                + "literal=\"HtmlEncode[[all HTML encoded]]\" "
+                + "mixed=\"HtmlEncode[[HTML encoded]] and contains \"quotes\"\" rel=\"stylesheet\" />"
+                + Environment.NewLine
+                + "<meta name=\"x-stylesheet-fallback-test\" content=\"\" class=\"HtmlEncode[[hidden]]\" /><script>"
+                + "!function(a,b,c,d){var e,f=document,g=f.getElementsByTagName(\"SCRIPT\"),h=g[g.length-1]."
+                + "previousElementSibling,i=f.defaultView&&f.defaultView.getComputedStyle?f.defaultView."
+                + "getComputedStyle(h):h.currentStyle;if(i&&i[a]!==b)for(e=0;e<c.length;e++)f.write('<link "
+                + "href=\"'+c[e]+'\" '+d+\"/>\")}(\"JavaScriptEncode[[visibility]]\",\"JavaScriptEncode[[hidden]]\","
+                + "[\"JavaScriptEncode[[HtmlEncode[[/fallback.css?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk]]]]\"], "
+                + "\"JavaScriptEncode[[encoded=\"contains \"quotes\"\" literal=\"HtmlEncode[[all HTML encoded]]\" "
+                + "mixed=\"HtmlEncode[[HTML encoded]] and contains \"quotes\"\" rel=\"stylesheet\" ]]\");"
+                + "</script>";
             var mixed = new DefaultTagHelperContent();
             mixed.Append("HTML encoded");
             mixed.AppendHtml(" and contains \"quotes\"");
@@ -849,7 +880,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     { "literal", "all HTML encoded" },
                     { "mixed", mixed },
                     { "rel", new HtmlString("stylesheet") },
-                });
+                }
+            );
             var output = MakeTagHelperOutput(
                 "link",
                 attributes: new TagHelperAttributeList
@@ -858,11 +890,13 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     { "literal", "all HTML encoded" },
                     { "mixed", mixed },
                     { "rel", new HtmlString("stylesheet") },
-                });
+                }
+            );
             var globbingUrlBuilder = new Mock<GlobbingUrlBuilder>(
                 new TestFileProvider(),
                 Mock.Of<IMemoryCache>(),
-                PathString.Empty);
+                PathString.Empty
+            );
             globbingUrlBuilder.Setup(g => g.BuildUrlList(null, "**/fallback.css", null))
                 .Returns(new[] { "/fallback.css" });
 
@@ -881,7 +915,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             // Assert
             Assert.Equal("link", output.TagName);
-            Assert.Equal("/css/site.css?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk", output.Attributes["href"].Value);
+            Assert.Equal(
+                "/css/site.css?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk",
+                output.Attributes["href"].Value
+            );
             var content = HtmlContentUtilities.HtmlContentToString(output, new HtmlTestEncoder());
             Assert.Equal(expectedContent, content);
         }
@@ -897,15 +934,17 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     { "href", "/css/site.css" },
                     { "asp-href-include", "**/*.css" },
                     { "asp-append-version", "true" },
-                });
-            var output = MakeTagHelperOutput("link", attributes: new TagHelperAttributeList
-            {
-                { "rel", new HtmlString("stylesheet") },
-            });
+                }
+            );
+            var output = MakeTagHelperOutput(
+                "link",
+                attributes: new TagHelperAttributeList { { "rel", new HtmlString("stylesheet") }, }
+            );
             var globbingUrlBuilder = new Mock<GlobbingUrlBuilder>(
                 new TestFileProvider(),
                 Mock.Of<IMemoryCache>(),
-                PathString.Empty);
+                PathString.Empty
+            );
             globbingUrlBuilder.Setup(g => g.BuildUrlList(null, "**/*.css", null))
                 .Returns(new[] { "/base.css" });
 
@@ -921,24 +960,34 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             // Assert
             Assert.Equal("link", output.TagName);
-            Assert.Equal("/css/site.css?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk", output.Attributes["href"].Value);
-            var content = HtmlContentUtilities.HtmlContentToString(output.PostElement, new HtmlTestEncoder());
+            Assert.Equal(
+                "/css/site.css?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk",
+                output.Attributes["href"].Value
+            );
+            var content = HtmlContentUtilities.HtmlContentToString(
+                output.PostElement,
+                new HtmlTestEncoder()
+            );
             Assert.Equal(
                 "<link rel=\"stylesheet\" href=\"HtmlEncode[[/base.css?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk]]\" />",
-                content);
+                content
+            );
         }
 
         private static LinkTagHelper GetHelper(
             IWebHostEnvironment hostingEnvironment = null,
             IUrlHelperFactory urlHelperFactory = null,
-            ViewContext viewContext = null)
-        {
+            ViewContext viewContext = null
+        ) {
             hostingEnvironment = hostingEnvironment ?? MakeHostingEnvironment();
             urlHelperFactory = urlHelperFactory ?? MakeUrlHelperFactory();
             viewContext = viewContext ?? MakeViewContext();
 
             var memoryCacheProvider = new TagHelperMemoryCacheProvider();
-            var fileVersionProvider = new DefaultFileVersionProvider(hostingEnvironment, memoryCacheProvider);
+            var fileVersionProvider = new DefaultFileVersionProvider(
+                hostingEnvironment,
+                memoryCacheProvider
+            );
 
             return new LinkTagHelper(
                 hostingEnvironment,
@@ -946,15 +995,19 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 fileVersionProvider,
                 new HtmlTestEncoder(),
                 new JavaScriptTestEncoder(),
-                urlHelperFactory)
-            {
+                urlHelperFactory
+            ) {
                 ViewContext = viewContext,
             };
         }
 
         private static ViewContext MakeViewContext(string requestPathBase = null)
         {
-            var actionContext = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new ActionDescriptor()
+            );
             if (requestPathBase != null)
             {
                 actionContext.HttpContext.Request.PathBase = new PathString(requestPathBase);
@@ -968,32 +1021,37 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 viewData,
                 Mock.Of<ITempDataDictionary>(),
                 TextWriter.Null,
-                new HtmlHelperOptions());
+                new HtmlHelperOptions()
+            );
 
             return viewContext;
         }
 
-        private static TagHelperContext MakeTagHelperContext(TagHelperAttributeList attributes = null)
-        {
+        private static TagHelperContext MakeTagHelperContext(
+            TagHelperAttributeList attributes = null
+        ) {
             attributes = attributes ?? new TagHelperAttributeList();
 
             return new TagHelperContext(
                 tagName: "link",
                 allAttributes: attributes,
                 items: new Dictionary<object, object>(),
-                uniqueId: Guid.NewGuid().ToString("N"));
+                uniqueId: Guid.NewGuid().ToString("N")
+            );
         }
 
-        private static TagHelperOutput MakeTagHelperOutput(string tagName, TagHelperAttributeList attributes = null)
-        {
+        private static TagHelperOutput MakeTagHelperOutput(
+            string tagName,
+            TagHelperAttributeList attributes = null
+        ) {
             attributes = attributes ?? new TagHelperAttributeList();
 
             return new TagHelperOutput(
                 tagName,
                 attributes,
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                    new DefaultTagHelperContent()))
-            {
+                getChildContentAsync: (useCachedResult, encoder) =>
+                    Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            ) {
                 TagMode = TagMode.SelfClosing,
             };
         }
@@ -1005,8 +1063,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 .Returns(Enumerable.Empty<IFileInfo>().GetEnumerator());
             var mockFile = new Mock<IFileInfo>();
             mockFile.SetupGet(f => f.Exists).Returns(true);
-            mockFile
-                .Setup(m => m.CreateReadStream())
+            mockFile.Setup(m => m.CreateReadStream())
                 .Returns(() => new MemoryStream(Encoding.UTF8.GetBytes("Hello World!")));
             var mockFileProvider = new Mock<IFileProvider>();
             mockFileProvider.Setup(fp => fp.GetDirectoryContents(It.IsAny<string>()))
@@ -1025,12 +1082,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         {
             var urlHelper = new Mock<IUrlHelper>();
 
-            urlHelper
-                .Setup(helper => helper.Content(It.IsAny<string>()))
+            urlHelper.Setup(helper => helper.Content(It.IsAny<string>()))
                 .Returns(new Func<string, string>(url => url));
             var urlHelperFactory = new Mock<IUrlHelperFactory>();
-            urlHelperFactory
-                .Setup(f => f.GetUrlHelper(It.IsAny<ActionContext>()))
+            urlHelperFactory.Setup(f => f.GetUrlHelper(It.IsAny<ActionContext>()))
                 .Returns(urlHelper.Object);
 
             return urlHelperFactory.Object;

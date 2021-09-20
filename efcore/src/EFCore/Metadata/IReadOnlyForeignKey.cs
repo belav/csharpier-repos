@@ -83,9 +83,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Gets the skip navigations using this foreign key.
         /// </summary>
         /// <returns> The skip navigations using this foreign key. </returns>
-        IEnumerable<IReadOnlySkipNavigation> GetReferencingSkipNavigations()
-            => PrincipalEntityType.GetSkipNavigations().Where(n => !n.IsOnDependent && n.ForeignKey == this)
-                .Concat(DeclaringEntityType.GetSkipNavigations().Where(n => n.IsOnDependent && n.ForeignKey == this));
+        IEnumerable<IReadOnlySkipNavigation> GetReferencingSkipNavigations() =>
+            PrincipalEntityType.GetSkipNavigations()
+                .Where(n => !n.IsOnDependent && n.ForeignKey == this)
+                .Concat(
+                    DeclaringEntityType.GetSkipNavigations()
+                        .Where(n => n.IsOnDependent && n.ForeignKey == this)
+                );
 
         /// <summary>
         ///     Gets the entity type related to the given one.
@@ -94,19 +98,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns> The entity type related to the given one. </returns>
         IReadOnlyEntityType GetRelatedEntityType(IReadOnlyEntityType entityType)
         {
-            if (DeclaringEntityType != entityType
-                && PrincipalEntityType != entityType)
+            if (DeclaringEntityType != entityType && PrincipalEntityType != entityType)
             {
                 throw new InvalidOperationException(
                     CoreStrings.EntityTypeNotInRelationshipStrict(
                         entityType.DisplayName(),
                         DeclaringEntityType.DisplayName(),
-                        PrincipalEntityType.DisplayName()));
+                        PrincipalEntityType.DisplayName()
+                    )
+                );
             }
 
-            return DeclaringEntityType == entityType
-                ? PrincipalEntityType
-                : DeclaringEntityType;
+            return DeclaringEntityType == entityType ? PrincipalEntityType : DeclaringEntityType;
         }
 
         /// <summary>
@@ -118,8 +121,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns>
         ///     A navigation associated with this foreign key or <see langword="null" />.
         /// </returns>
-        IReadOnlyNavigation? GetNavigation(bool pointsToPrincipal)
-            => pointsToPrincipal ? DependentToPrincipal : PrincipalToDependent;
+        IReadOnlyNavigation? GetNavigation(bool pointsToPrincipal) =>
+            pointsToPrincipal ? DependentToPrincipal : PrincipalToDependent;
 
         /// <summary>
         ///     Returns a value indicating whether the foreign key is defined on the primary key and pointing to the same primary key.
@@ -128,8 +131,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         bool IsBaseLinking()
         {
             var primaryKey = DeclaringEntityType.FindPrimaryKey();
-            return primaryKey == PrincipalKey
-                && Properties.SequenceEqual(primaryKey.Properties);
+            return primaryKey == PrincipalKey && Properties.SequenceEqual(primaryKey.Properties);
         }
 
         /// <summary>
@@ -144,8 +146,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="options"> Options for generating the string. </param>
         /// <param name="indent"> The number of indent spaces to use before each new line. </param>
         /// <returns> A human-readable representation. </returns>
-        string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
-        {
+        string ToDebugString(
+            MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+            int indent = 0
+        ) {
             var builder = new StringBuilder();
             var indentString = new string(' ', indent);
 
@@ -157,8 +161,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 builder.Append("ForeignKey: ");
             }
 
-            builder
-                .Append(DeclaringEntityType.DisplayName())
+            builder.Append(DeclaringEntityType.DisplayName())
                 .Append(" ")
                 .Append(Properties.Format())
                 .Append(" -> ")
@@ -188,9 +191,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
             if (DeleteBehavior != DeleteBehavior.NoAction)
             {
-                builder
-                    .Append(" ")
-                    .Append(DeleteBehavior);
+                builder.Append(" ").Append(DeleteBehavior);
             }
 
             if (!singleLine && (options & MetadataDebugStringOptions.IncludeAnnotations) != 0)

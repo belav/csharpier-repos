@@ -10,8 +10,12 @@ namespace Microsoft.AspNetCore.WebSockets.Test
         public DuplexStream ServerStream { get; }
         public DuplexStream ClientStream { get; }
 
-        public WebSocketPair(DuplexStream serverStream, DuplexStream clientStream, WebSocket clientSocket, WebSocket serverSocket)
-        {
+        public WebSocketPair(
+            DuplexStream serverStream,
+            DuplexStream clientStream,
+            WebSocket clientSocket,
+            WebSocket serverSocket
+        ) {
             ClientStream = clientStream;
             ServerStream = serverStream;
             ClientSocket = clientSocket;
@@ -27,8 +31,19 @@ namespace Microsoft.AspNetCore.WebSockets.Test
             return new WebSocketPair(
                 serverStream,
                 clientStream,
-                clientSocket: WebSocket.CreateFromStream(clientStream, isServer: false, subProtocol: null, keepAliveInterval: TimeSpan.FromMinutes(2)),
-                serverSocket: WebSocket.CreateFromStream(serverStream, isServer: true, subProtocol: null, keepAliveInterval: TimeSpan.FromMinutes(2)));
+                clientSocket: WebSocket.CreateFromStream(
+                    clientStream,
+                    isServer: false,
+                    subProtocol: null,
+                    keepAliveInterval: TimeSpan.FromMinutes(2)
+                ),
+                serverSocket: WebSocket.CreateFromStream(
+                    serverStream,
+                    isServer: true,
+                    subProtocol: null,
+                    keepAliveInterval: TimeSpan.FromMinutes(2)
+                )
+            );
         }
     }
 }

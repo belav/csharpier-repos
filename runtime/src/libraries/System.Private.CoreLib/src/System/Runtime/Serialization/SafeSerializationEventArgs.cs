@@ -8,9 +8,7 @@ namespace System.Runtime.Serialization
     {
         private SafeSerializationEventArgs() { }
 
-        public void AddSerializedState(ISafeSerializationData serializedState)
-        {
-        }
+        public void AddSerializedState(ISafeSerializationData serializedState) { }
 
         public StreamingContext StreamingContext { get; }
     }

@@ -63,9 +63,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             return formatter.ToString();
         }
 
-
-        public virtual void FormatNode(IntermediateNodeFormatter formatter)
-        {
-        }
+        public virtual void FormatNode(IntermediateNodeFormatter formatter) { }
     }
 }

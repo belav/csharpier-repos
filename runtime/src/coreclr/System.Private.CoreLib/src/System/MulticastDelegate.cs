@@ -26,16 +26,15 @@ namespace System
         //    compiler generated code (This must match the constructor
         //    in Delegate
         [RequiresUnreferencedCode("The target method might be removed")]
-        protected MulticastDelegate(object target, string method) : base(target, method)
-        {
-        }
+        protected MulticastDelegate(object target, string method) : base(target, method) { }
 
         // This constructor is called from a class to generate a
         // delegate based upon a static method name and the Type object
         // for the class defining the method.
-        protected MulticastDelegate([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target, string method) : base(target, method)
-        {
-        }
+        protected MulticastDelegate(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target,
+            string method
+        ) : base(target, method) { }
 
         internal bool IsUnmanagedFunctionPtr()
         {
@@ -44,7 +43,9 @@ namespace System
 
         internal bool InvocationListLogicallyNull()
         {
-            return (_invocationList == null) || (_invocationList is LoaderAllocator) || (_invocationList is System.Reflection.Emit.DynamicResolver);
+            return (_invocationList == null)
+                || (_invocationList is LoaderAllocator)
+                || (_invocationList is System.Reflection.Emit.DynamicResolver);
         }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -66,7 +67,10 @@ namespace System
             // Since this is a MulticastDelegate and we know
             // the types are the same, obj should also be a
             // MulticastDelegate
-            Debug.Assert(obj is MulticastDelegate, "Shouldn't have failed here since we already checked the types are the same!");
+            Debug.Assert(
+                obj is MulticastDelegate,
+                "Shouldn't have failed here since we already checked the types are the same!"
+            );
             MulticastDelegate d = Unsafe.As<MulticastDelegate>(obj);
 
             if (_invocationCount != (IntPtr)0)
@@ -103,7 +107,10 @@ namespace System
                     }
                     else
                     {
-                        Debug.Assert(_invocationList is object[], "empty invocation list on multicast delegate");
+                        Debug.Assert(
+                            _invocationList is object[],
+                            "empty invocation list on multicast delegate"
+                        );
                         return InvocationListEquals(d);
                     }
                 }
@@ -156,7 +163,11 @@ namespace System
 
         private static bool TrySetSlot(object?[] a, int index, object o)
         {
-            if (a[index] == null && System.Threading.Interlocked.CompareExchange<object?>(ref a[index], o, null) == null)
+            if (
+                a[index] == null
+                && System.Threading.Interlocked.CompareExchange<object?>(ref a[index], o, null)
+                    == null
+            )
                 return true;
 
             // The slot may be already set because we have added and removed the same method before.
@@ -166,18 +177,22 @@ namespace System
                 MulticastDelegate d = (MulticastDelegate)o;
                 MulticastDelegate dd = (MulticastDelegate)ai;
 
-                if (dd._methodPtr == d._methodPtr &&
-                    dd._target == d._target &&
-                    dd._methodPtrAux == d._methodPtrAux)
-                {
+                if (
+                    dd._methodPtr == d._methodPtr
+                    && dd._target == d._target
+                    && dd._methodPtrAux == d._methodPtrAux
+                ) {
                     return true;
                 }
             }
             return false;
         }
 
-        private MulticastDelegate NewMulticastDelegate(object[] invocationList, int invocationCount, bool thisIsMultiCastAlready)
-        {
+        private MulticastDelegate NewMulticastDelegate(
+            object[] invocationList,
+            int invocationCount,
+            bool thisIsMultiCastAlready
+        ) {
             // First, allocate a new multicast delegate just like this one, i.e. same type as the this object
             MulticastDelegate result = (MulticastDelegate)InternalAllocLike(this);
 
@@ -200,8 +215,10 @@ namespace System
             return result;
         }
 
-        internal MulticastDelegate NewMulticastDelegate(object[] invocationList, int invocationCount)
-        {
+        internal MulticastDelegate NewMulticastDelegate(
+            object[] invocationList,
+            int invocationCount
+        ) {
             return NewMulticastDelegate(invocationList, invocationCount, false);
         }
 
@@ -209,7 +226,10 @@ namespace System
         {
             if (_invocationCount != (IntPtr)0)
             {
-                Debug.Assert(!IsUnmanagedFunctionPtr(), "dynamic method and unmanaged fntptr delegate combined");
+                Debug.Assert(
+                    !IsUnmanagedFunctionPtr(),
+                    "dynamic method and unmanaged fntptr delegate combined"
+                );
                 // must be a secure/wrapper one, unwrap and save
                 MulticastDelegate d = ((MulticastDelegate?)_invocationList)!;
                 d._methodBase = dynamicMethod;
@@ -304,8 +324,12 @@ namespace System
             }
         }
 
-        private object[] DeleteFromInvocationList(object[] invocationList, int invocationCount, int deleteIndex, int deleteCount)
-        {
+        private object[] DeleteFromInvocationList(
+            object[] invocationList,
+            int invocationCount,
+            int deleteIndex,
+            int deleteCount
+        ) {
             Debug.Assert(_invocationList is object[]);
             object[] thisInvocationList = (object[])_invocationList;
             int allocCount = thisInvocationList.Length;
@@ -369,7 +393,12 @@ namespace System
                             }
                             else
                             {
-                                object[] list = DeleteFromInvocationList(invocationList, invocationCount, i, 1);
+                                object[] list = DeleteFromInvocationList(
+                                    invocationList,
+                                    invocationCount,
+                                    i,
+                                    1
+                                );
                                 return NewMulticastDelegate(list, invocationCount - 1, true);
                             }
                         }
@@ -384,8 +413,14 @@ namespace System
                     int vInvocationCount = (int)v._invocationCount;
                     for (int i = invocationCount - vInvocationCount; i >= 0; i--)
                     {
-                        if (EqualInvocationLists(invocationList, (v._invocationList as object[])!, i, vInvocationCount))
-                        {
+                        if (
+                            EqualInvocationLists(
+                                invocationList,
+                                (v._invocationList as object[])!,
+                                i,
+                                vInvocationCount
+                            )
+                        ) {
                             if (invocationCount - vInvocationCount == 0)
                             {
                                 // Special case - no values left
@@ -398,8 +433,17 @@ namespace System
                             }
                             else
                             {
-                                object[] list = DeleteFromInvocationList(invocationList, invocationCount, i, vInvocationCount);
-                                return NewMulticastDelegate(list, invocationCount - vInvocationCount, true);
+                                object[] list = DeleteFromInvocationList(
+                                    invocationList,
+                                    invocationCount,
+                                    i,
+                                    vInvocationCount
+                                );
+                                return NewMulticastDelegate(
+                                    list,
+                                    invocationCount - vInvocationCount,
+                                    true
+                                );
                             }
                         }
                     }
@@ -465,7 +509,8 @@ namespace System
         public sealed override int GetHashCode()
         {
             if (IsUnmanagedFunctionPtr())
-                return ValueType.GetHashCodeOfPtr(_methodPtr) ^ ValueType.GetHashCodeOfPtr(_methodPtrAux);
+                return ValueType.GetHashCodeOfPtr(_methodPtr)
+                    ^ ValueType.GetHashCodeOfPtr(_methodPtrAux);
 
             if (_invocationCount != (IntPtr)0)
             {
@@ -550,8 +595,10 @@ namespace System
                     RuntimeType declaringType = RuntimeMethodHandle.GetDeclaringType(method);
 
                     // need a proper declaring type instance method on a generic type
-                    if (RuntimeTypeHandle.IsGenericTypeDefinition(declaringType) || RuntimeTypeHandle.HasInstantiation(declaringType))
-                    {
+                    if (
+                        RuntimeTypeHandle.IsGenericTypeDefinition(declaringType)
+                        || RuntimeTypeHandle.HasInstantiation(declaringType)
+                    ) {
                         // we are returning the 'Invoke' method of this delegate so use this.GetType() for the exact type
                         RuntimeType reflectedType = (RuntimeType)GetType();
                         declaringType = reflectedType;
@@ -619,8 +666,12 @@ namespace System
         }
 
         [System.Diagnostics.DebuggerNonUserCode]
-        private void CtorCollectibleOpened(object target, IntPtr methodPtr, IntPtr shuffleThunk, IntPtr gchandle)
-        {
+        private void CtorCollectibleOpened(
+            object target,
+            IntPtr methodPtr,
+            IntPtr shuffleThunk,
+            IntPtr gchandle
+        ) {
             this._target = this;
             this._methodPtr = shuffleThunk;
             this._methodPtrAux = methodPtr;
@@ -628,8 +679,12 @@ namespace System
         }
 
         [System.Diagnostics.DebuggerNonUserCode]
-        private void CtorCollectibleVirtualDispatch(object target, IntPtr methodPtr, IntPtr shuffleThunk, IntPtr gchandle)
-        {
+        private void CtorCollectibleVirtualDispatch(
+            object target,
+            IntPtr methodPtr,
+            IntPtr shuffleThunk,
+            IntPtr gchandle
+        ) {
             this._target = this;
             this._methodPtr = shuffleThunk;
             this._methodPtrAux = GetCallStub(methodPtr);

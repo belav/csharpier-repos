@@ -14,5 +14,4 @@ namespace FormatterWebSite
         [MinLength(2)]
         public byte[] ByteArrayProperty { get; set; }
     }
-
 }

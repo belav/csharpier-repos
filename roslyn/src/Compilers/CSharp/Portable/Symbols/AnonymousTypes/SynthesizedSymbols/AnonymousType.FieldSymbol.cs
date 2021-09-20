@@ -27,8 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 _property = property;
             }
 
-            internal override TypeWithAnnotations GetFieldType(ConsList<FieldSymbol> fieldsBeingBound)
-            {
+            internal override TypeWithAnnotations GetFieldType(
+                ConsList<FieldSymbol> fieldsBeingBound
+            ) {
                 return _property.TypeWithAnnotations;
             }
 
@@ -37,8 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { return GeneratedNames.MakeAnonymousTypeBackingFieldName(_property.Name); }
             }
 
-            public override FlowAnalysisAnnotations FlowAnalysisAnnotations
-                => FlowAnalysisAnnotations.None;
+            public override FlowAnalysisAnnotations FlowAnalysisAnnotations =>
+                FlowAnalysisAnnotations.None;
 
             internal override bool HasSpecialName
             {
@@ -67,10 +68,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             public override Symbol AssociatedSymbol
             {
-                get
-                {
-                    return _property;
-                }
+                get { return _property; }
             }
 
             public override bool IsReadOnly
@@ -93,8 +91,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { return null; }
             }
 
-            internal override ConstantValue GetConstantValue(ConstantFieldsInProgress inProgress, bool earlyDecodingWellKnownAttributes)
-            {
+            internal override ConstantValue GetConstantValue(
+                ConstantFieldsInProgress inProgress,
+                bool earlyDecodingWellKnownAttributes
+            ) {
                 return null;
             }
 
@@ -105,10 +105,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             public override NamedTypeSymbol ContainingType
             {
-                get
-                {
-                    return _property.ContainingType;
-                }
+                get { return _property.ContainingType; }
             }
 
             public override ImmutableArray<Location> Locations
@@ -118,10 +115,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
             {
-                get
-                {
-                    return ImmutableArray<SyntaxReference>.Empty;
-                }
+                get { return ImmutableArray<SyntaxReference>.Empty; }
             }
 
             public override Accessibility DeclaredAccessibility
@@ -139,16 +133,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { return true; }
             }
 
-            internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
-            {
+            internal override void AddSynthesizedAttributes(
+                PEModuleBuilder moduleBuilder,
+                ref ArrayBuilder<SynthesizedAttributeData> attributes
+            ) {
                 base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
-                AnonymousTypeManager manager = ((AnonymousTypeTemplateSymbol)this.ContainingSymbol).Manager;
+                AnonymousTypeManager manager =
+                    ((AnonymousTypeTemplateSymbol)this.ContainingSymbol).Manager;
 
-                AddSynthesizedAttribute(ref attributes, manager.Compilation.TrySynthesizeAttribute(
-                    WellKnownMember.System_Diagnostics_DebuggerBrowsableAttribute__ctor,
-                    ImmutableArray.Create(
-                        new TypedConstant(manager.System_Diagnostics_DebuggerBrowsableState, TypedConstantKind.Enum, DebuggerBrowsableState.Never))));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    manager.Compilation.TrySynthesizeAttribute(
+                        WellKnownMember.System_Diagnostics_DebuggerBrowsableAttribute__ctor,
+                        ImmutableArray.Create(
+                            new TypedConstant(
+                                manager.System_Diagnostics_DebuggerBrowsableState,
+                                TypedConstantKind.Enum,
+                                DebuggerBrowsableState.Never
+                            )
+                        )
+                    )
+                );
             }
         }
     }

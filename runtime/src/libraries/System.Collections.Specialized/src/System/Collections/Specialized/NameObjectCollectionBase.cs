@@ -21,7 +21,10 @@ namespace System.Collections.Specialized
     ///    and <see cref='object' qualify='true'/> values that can be accessed either with the hash code of
     ///    the key or with the index.</para>
     /// </devdoc>
-    public abstract class NameObjectCollectionBase : ICollection, ISerializable, IDeserializationCallback
+    public abstract class NameObjectCollectionBase
+        : ICollection,
+          ISerializable,
+          IDeserializationCallback
     {
         private bool _readOnly;
         private ArrayList _entriesArray;
@@ -31,15 +34,14 @@ namespace System.Collections.Specialized
         private KeysCollection? _keys;
         private int _version;
 
-        private static readonly StringComparer s_defaultComparer = CultureInfo.InvariantCulture.CompareInfo.GetStringComparer(CompareOptions.IgnoreCase);
+        private static readonly StringComparer s_defaultComparer =
+            CultureInfo.InvariantCulture.CompareInfo.GetStringComparer(CompareOptions.IgnoreCase);
 
         /// <devdoc>
         /// <para> Creates an empty <see cref='System.Collections.Specialized.NameObjectCollectionBase'/> instance with the default initial capacity and using the default case-insensitive hash
         ///    code provider and the default case-insensitive comparer.</para>
         /// </devdoc>
-        protected NameObjectCollectionBase() : this(s_defaultComparer)
-        {
-        }
+        protected NameObjectCollectionBase() : this(s_defaultComparer) { }
 
         protected NameObjectCollectionBase(IEqualityComparer? equalityComparer)
         {
@@ -47,7 +49,10 @@ namespace System.Collections.Specialized
             Reset();
         }
 
-        protected NameObjectCollectionBase(int capacity, IEqualityComparer? equalityComparer) : this(equalityComparer)
+        protected NameObjectCollectionBase(
+            int capacity,
+            IEqualityComparer? equalityComparer
+        ) : this(equalityComparer)
         {
             Reset(capacity);
         }
@@ -60,8 +65,11 @@ namespace System.Collections.Specialized
         }
 
         [Obsolete("Please use NameObjectCollectionBase(Int32, IEqualityComparer) instead.")]
-        protected NameObjectCollectionBase(int capacity, IHashCodeProvider? hashProvider, IComparer? comparer)
-        {
+        protected NameObjectCollectionBase(
+            int capacity,
+            IHashCodeProvider? hashProvider,
+            IComparer? comparer
+        ) {
             _keyComparer = new CompatibleComparer(hashProvider, comparer);
             Reset(capacity);
         }
@@ -126,16 +134,9 @@ namespace System.Collections.Specialized
 
         internal IEqualityComparer Comparer
         {
-            get
-            {
-                return _keyComparer;
-            }
-            set
-            {
-                _keyComparer = value;
-            }
+            get { return _keyComparer; }
+            set { _keyComparer = value; }
         }
-
 
         /// <devdoc>
         /// <para>Gets or sets a value indicating whether the <see cref='System.Collections.Specialized.NameObjectCollectionBase'/> instance is read-only.</para>
@@ -152,7 +153,7 @@ namespace System.Collections.Specialized
         /// </devdoc>
         protected bool BaseHasKeys()
         {
-            return (_entriesTable.Count > 0);  // any entries with keys?
+            return (_entriesTable.Count > 0); // any entries with keys?
         }
 
         //
@@ -289,7 +290,7 @@ namespace System.Collections.Specialized
             if (_readOnly)
                 throw new NotSupportedException(SR.CollectionReadOnly);
 
-            NameObjectEntry?  entry = FindEntry(name);
+            NameObjectEntry? entry = FindEntry(name);
             if (entry != null)
             {
                 entry.Value = value;
@@ -311,7 +312,7 @@ namespace System.Collections.Specialized
         /// </devdoc>
         protected object? BaseGet(int index)
         {
-            NameObjectEntry entry = (NameObjectEntry)_entriesArray[index]!;   // no null entry added to the array
+            NameObjectEntry entry = (NameObjectEntry)_entriesArray[index]!; // no null entry added to the array
             return entry.Value;
         }
 
@@ -357,10 +358,7 @@ namespace System.Collections.Specialized
         /// </devdoc>
         public virtual int Count
         {
-            get
-            {
-                return _entriesArray.Count;
-            }
+            get { return _entriesArray.Count; }
         }
 
         void ICollection.CopyTo(Array array, int index)
@@ -377,7 +375,11 @@ namespace System.Collections.Specialized
 
             if (index < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), index, SR.ArgumentOutOfRange_NeedNonNegNum_Index);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    index,
+                    SR.ArgumentOutOfRange_NeedNonNegNum_Index
+                );
             }
 
             if (array.Length - index < _entriesArray.Count)
@@ -573,10 +575,7 @@ namespace System.Collections.Specialized
             /// </devdoc>
             public string? this[int index]
             {
-                get
-                {
-                    return Get(index);
-                }
+                get { return Get(index); }
             }
 
             // ICollection implementation
@@ -595,10 +594,7 @@ namespace System.Collections.Specialized
             /// </devdoc>
             public int Count
             {
-                get
-                {
-                    return _coll.Count;
-                }
+                get { return _coll.Count; }
             }
 
             void ICollection.CopyTo(Array array, int index)
@@ -615,7 +611,11 @@ namespace System.Collections.Specialized
 
                 if (index < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(index), index, SR.ArgumentOutOfRange_NeedNonNegNum_Index);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(index),
+                        index,
+                        SR.ArgumentOutOfRange_NeedNonNegNum_Index
+                    );
                 }
 
                 if (array.Length - index < _coll.Count)
@@ -631,7 +631,6 @@ namespace System.Collections.Specialized
             {
                 get { return ((ICollection)_coll).SyncRoot; }
             }
-
 
             bool ICollection.IsSynchronized
             {

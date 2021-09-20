@@ -76,31 +76,35 @@ namespace Microsoft.AspNetCore.Razor.Language
             IRazorEnginePhase[] phases = null;
 
             // Act
-            var engine = RazorEngine.Create(builder =>
-            {
-                builder.Features.Clear();
-                builder.Phases.Clear();
+            var engine = RazorEngine.Create(
+                builder =>
+                {
+                    builder.Features.Clear();
+                    builder.Phases.Clear();
 
-                builder.Features.Add(Mock.Of<IRazorEngineFeature>());
-                builder.Features.Add(Mock.Of<IRazorEngineFeature>());
+                    builder.Features.Add(Mock.Of<IRazorEngineFeature>());
+                    builder.Features.Add(Mock.Of<IRazorEngineFeature>());
 
-                builder.Phases.Add(Mock.Of<IRazorEnginePhase>());
-                builder.Phases.Add(Mock.Of<IRazorEnginePhase>());
+                    builder.Phases.Add(Mock.Of<IRazorEnginePhase>());
+                    builder.Phases.Add(Mock.Of<IRazorEnginePhase>());
 
-                features = builder.Features.ToArray();
-                phases = builder.Phases.ToArray();
-            });
+                    features = builder.Features.ToArray();
+                    phases = builder.Phases.ToArray();
+                }
+            );
 
             // Assert
             Assert.Collection(
                 engine.Features,
                 f => Assert.Same(features[0], f),
-                f => Assert.Same(features[1], f));
+                f => Assert.Same(features[1], f)
+            );
 
             Assert.Collection(
                 engine.Phases,
                 p => Assert.Same(phases[0], p),
-                p => Assert.Same(phases[1], p));
+                p => Assert.Same(phases[1], p)
+            );
         }
 
         [Fact]
@@ -111,31 +115,35 @@ namespace Microsoft.AspNetCore.Razor.Language
             IRazorEnginePhase[] phases = null;
 
             // Act
-            var engine = RazorEngine.CreateDesignTime(builder =>
-            {
-                builder.Features.Clear();
-                builder.Phases.Clear();
+            var engine = RazorEngine.CreateDesignTime(
+                builder =>
+                {
+                    builder.Features.Clear();
+                    builder.Phases.Clear();
 
-                builder.Features.Add(Mock.Of<IRazorEngineFeature>());
-                builder.Features.Add(Mock.Of<IRazorEngineFeature>());
+                    builder.Features.Add(Mock.Of<IRazorEngineFeature>());
+                    builder.Features.Add(Mock.Of<IRazorEngineFeature>());
 
-                builder.Phases.Add(Mock.Of<IRazorEnginePhase>());
-                builder.Phases.Add(Mock.Of<IRazorEnginePhase>());
+                    builder.Phases.Add(Mock.Of<IRazorEnginePhase>());
+                    builder.Phases.Add(Mock.Of<IRazorEnginePhase>());
 
-                features = builder.Features.ToArray();
-                phases = builder.Phases.ToArray();
-            });
+                    features = builder.Features.ToArray();
+                    phases = builder.Phases.ToArray();
+                }
+            );
 
             // Assert
             Assert.Collection(
                 engine.Features,
                 f => Assert.Same(features[0], f),
-                f => Assert.Same(features[1], f));
+                f => Assert.Same(features[1], f)
+            );
 
             Assert.Collection(
                 engine.Phases,
                 p => Assert.Same(phases[0], p),
-                p => Assert.Same(phases[1], p));
+                p => Assert.Same(phases[1], p)
+            );
         }
 
         private static void AssertDefaultRuntimeTargetExtensions(RazorEngine engine)
@@ -147,7 +155,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 feature.TargetExtensions,
                 extension => Assert.IsType<MetadataAttributeTargetExtension>(extension),
                 extension => Assert.IsType<DefaultTagHelperTargetExtension>(extension),
-                extension => Assert.IsType<PreallocatedAttributeTargetExtension>(extension));
+                extension => Assert.IsType<PreallocatedAttributeTargetExtension>(extension)
+            );
         }
 
         private static void AssertDefaultRuntimeFeatures(IEnumerable<IRazorEngineFeature> features)
@@ -166,7 +175,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 feature => Assert.IsType<DefaultDocumentClassifierPassFeature>(feature),
                 feature => Assert.IsType<DefaultRazorParserOptionsFeature>(feature),
                 feature => Assert.IsType<DefaultRazorCodeGenerationOptionsFeature>(feature),
-                feature => Assert.IsType<PreallocatedTagHelperAttributeOptimizationPass>(feature));
+                feature => Assert.IsType<PreallocatedTagHelperAttributeOptimizationPass>(feature)
+            );
         }
 
         private static void AssertDefaultRuntimePhases(IReadOnlyList<IRazorEnginePhase> phases)
@@ -180,7 +190,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 phase => Assert.IsType<DefaultRazorDocumentClassifierPhase>(phase),
                 phase => Assert.IsType<DefaultRazorDirectiveClassifierPhase>(phase),
                 phase => Assert.IsType<DefaultRazorOptimizationPhase>(phase),
-                phase => Assert.IsType<DefaultRazorCSharpLoweringPhase>(phase));
+                phase => Assert.IsType<DefaultRazorCSharpLoweringPhase>(phase)
+            );
         }
 
         private static void AssertDefaultDesignTimeTargetExtensions(RazorEngine engine)
@@ -192,11 +203,13 @@ namespace Microsoft.AspNetCore.Razor.Language
                 feature.TargetExtensions,
                 extension => Assert.IsType<MetadataAttributeTargetExtension>(extension),
                 extension => Assert.IsType<DefaultTagHelperTargetExtension>(extension),
-                extension => Assert.IsType<DesignTimeDirectiveTargetExtension>(extension));
+                extension => Assert.IsType<DesignTimeDirectiveTargetExtension>(extension)
+            );
         }
 
-        private static void AssertDefaultDesignTimeFeatures(IEnumerable<IRazorEngineFeature> features)
-        {
+        private static void AssertDefaultDesignTimeFeatures(
+            IEnumerable<IRazorEngineFeature> features
+        ) {
             Assert.Collection(
                 features,
                 feature => Assert.IsType<DefaultRazorDirectiveFeature>(feature),
@@ -212,7 +225,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 feature => Assert.IsType<DefaultRazorParserOptionsFeature>(feature),
                 feature => Assert.IsType<DefaultRazorCodeGenerationOptionsFeature>(feature),
                 feature => Assert.IsType<SuppressChecksumOptionsFeature>(feature),
-                feature => Assert.IsType<DesignTimeDirectivePass>(feature));
+                feature => Assert.IsType<DesignTimeDirectivePass>(feature)
+            );
         }
 
         private static void AssertDefaultDesignTimePhases(IReadOnlyList<IRazorEnginePhase> phases)
@@ -226,7 +240,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 phase => Assert.IsType<DefaultRazorDocumentClassifierPhase>(phase),
                 phase => Assert.IsType<DefaultRazorDirectiveClassifierPhase>(phase),
                 phase => Assert.IsType<DefaultRazorOptimizationPhase>(phase),
-                phase => Assert.IsType<DefaultRazorCSharpLoweringPhase>(phase));
+                phase => Assert.IsType<DefaultRazorCSharpLoweringPhase>(phase)
+            );
         }
     }
 #pragma warning restore CS0618 // Type or member is obsolete

@@ -11,7 +11,9 @@ internal class pow0
     public static int Main()
     {
         bool pass = true;
-        double x, y, z;
+        double x,
+            y,
+            z;
         double n;
 
         y = 0;

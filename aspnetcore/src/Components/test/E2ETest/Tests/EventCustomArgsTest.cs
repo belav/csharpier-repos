@@ -19,10 +19,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public EventCustomArgsTest(
             BrowserFixture browserFixture,
             ToggleExecutionModeServerFixture<Program> serverFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, serverFixture, output)
-        {
-        }
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture, output) { }
 
         protected override void InitializeAsyncCore()
         {
@@ -38,7 +36,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             // registered with the Razor compiler but no way to register them with the runtime, so
             // you could only receive empty eventargs.
             Browser.Exists(By.Id("trigger-testevent-directly")).Click();
-            Browser.Equal("Received testevent with args '{ MyProp=null }'", () => GetLogLines().Single());
+            Browser.Equal(
+                "Received testevent with args '{ MyProp=null }'",
+                () => GetLogLines().Single()
+            );
         }
 
         [Fact]
@@ -46,13 +47,17 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         {
             Browser.Exists(By.Id("register-testevent-with-no-createventargs")).Click();
             Browser.FindElement(By.Id("trigger-testevent-directly")).Click();
-            Browser.Equal("Received testevent with args '{ MyProp=null }'", () => GetLogLines().Single());
+            Browser.Equal(
+                "Received testevent with args '{ MyProp=null }'",
+                () => GetLogLines().Single()
+            );
         }
 
         [Fact]
         public void CanRegisterCustomEventAfterRender_WithCreateEventArgsReturningNull()
         {
-            Browser.Exists(By.Id("register-testevent-with-createventargs-that-returns-null")).Click();
+            Browser.Exists(By.Id("register-testevent-with-createventargs-that-returns-null"))
+                .Click();
             Browser.FindElement(By.Id("trigger-testevent-directly")).Click();
             Browser.Equal("Received testevent with args 'null'", () => GetLogLines().Single());
         }
@@ -60,9 +65,13 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         [Fact]
         public void CanRegisterCustomEventAfterRender_WithCreateEventArgsReturningData()
         {
-            Browser.Exists(By.Id("register-testevent-with-createventargs-that-supplies-args")).Click();
+            Browser.Exists(By.Id("register-testevent-with-createventargs-that-supplies-args"))
+                .Click();
             Browser.FindElement(By.Id("trigger-testevent-directly")).Click();
-            Browser.Equal("Received testevent with args '{ MyProp=Native event target ID=test-event-target-child }'", () => GetLogLines().Single());
+            Browser.Equal(
+                "Received testevent with args '{ MyProp=Native event target ID=test-event-target-child }'",
+                () => GetLogLines().Single()
+            );
         }
 
         [Fact]
@@ -72,13 +81,16 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             Browser.FindElement(By.Id("register-custom-keydown")).Click();
             SendKeysSequentially(input, "ab");
 
-            Browser.Equal(new[]
-            {
-                "Received native keydown event",
-                "You pressed: a",
-                "Received native keydown event",
-                "You pressed: b",
-            }, GetLogLines);
+            Browser.Equal(
+                new[]
+                {
+                    "Received native keydown event",
+                    "You pressed: a",
+                    "Received native keydown event",
+                    "You pressed: b",
+                },
+                GetLogLines
+            );
 
             Assert.Equal("ab", input.GetAttribute("value"));
         }
@@ -91,13 +103,16 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             Browser.FindElement(By.Id("custom-keydown-prevent-default")).Click();
             SendKeysSequentially(input, "ab");
 
-            Browser.Equal(new[]
-            {
-                "Received native keydown event",
-                "You pressed: a",
-                "Received native keydown event",
-                "You pressed: b",
-            }, GetLogLines);
+            Browser.Equal(
+                new[]
+                {
+                    "Received native keydown event",
+                    "You pressed: a",
+                    "Received native keydown event",
+                    "You pressed: b",
+                },
+                GetLogLines
+            );
 
             // Check it was actually preventDefault-ed
             Assert.Equal("", input.GetAttribute("value"));
@@ -112,16 +127,19 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             Browser.FindElement(By.Id("custom-keydown-stop-propagation")).Click();
             SendKeysSequentially(input, "ab");
 
-            Browser.Equal(new[]
-            {
-                // The native event still bubbles up to its listener on an ancestor, and
-                // other aliased events still receive it, but the stopPropagation-ed
-                // variant does not
-                "Received native keydown event",
-                "Yet another aliased event received: a",
-                "Received native keydown event",
-                "Yet another aliased event received: b",
-            }, GetLogLines);
+            Browser.Equal(
+                new[]
+                {
+                    // The native event still bubbles up to its listener on an ancestor, and
+                    // other aliased events still receive it, but the stopPropagation-ed
+                    // variant does not
+                    "Received native keydown event",
+                    "Yet another aliased event received: a",
+                    "Received native keydown event",
+                    "Yet another aliased event received: b",
+                },
+                GetLogLines
+            );
 
             Assert.Equal("ab", input.GetAttribute("value"));
         }
@@ -134,15 +152,18 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             Browser.FindElement(By.Id("register-yet-another-keydown")).Click();
             SendKeysSequentially(input, "ab");
 
-            Browser.Equal(new[]
-            {
-                "Received native keydown event",
-                "You pressed: a",
-                "Yet another aliased event received: a",
-                "Received native keydown event",
-                "You pressed: b",
-                "Yet another aliased event received: b",
-            }, GetLogLines);
+            Browser.Equal(
+                new[]
+                {
+                    "Received native keydown event",
+                    "You pressed: a",
+                    "Yet another aliased event received: a",
+                    "Received native keydown event",
+                    "You pressed: b",
+                    "Yet another aliased event received: b",
+                },
+                GetLogLines
+            );
 
             Assert.Equal("ab", input.GetAttribute("value"));
         }
@@ -154,8 +175,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             // but there's no regular listener for mouseover in the application at this point
             Browser.Exists(By.Id("register-custom-mouseover")).Click();
 
-            new Actions(Browser)
-                .MoveToElement(Browser.FindElement(By.Id("test-event-target-child")))
+            new Actions(Browser).MoveToElement(
+                    Browser.FindElement(By.Id("test-event-target-child"))
+                )
                 .Perform();
 
             // Nonetheless, the custom event is still received
@@ -167,7 +189,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         {
             Browser.Exists(By.Id("register-sendjsobject")).Click();
             Browser.FindElement(By.Id("trigger-sendjsobject-event-directly")).Click();
-            Browser.Equal("Event with IJSObjectReference received: Hello!", () => GetLogLines().Single());
+            Browser.Equal(
+                "Event with IJSObjectReference received: Hello!",
+                () => GetLogLines().Single()
+            );
         }
 
         void SendKeysSequentially(IWebElement target, string text)
@@ -178,10 +203,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             }
         }
 
-        private string[] GetLogLines()
-            => Browser.Exists(By.Id("test-log"))
-            .GetAttribute("value")
-            .Replace("\r\n", "\n")
-            .Split('\n', StringSplitOptions.RemoveEmptyEntries);
+        private string[] GetLogLines() =>
+            Browser.Exists(By.Id("test-log"))
+                .GetAttribute("value")
+                .Replace("\r\n", "\n")
+                .Split('\n', StringSplitOptions.RemoveEmptyEntries);
     }
 }

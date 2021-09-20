@@ -5,17 +5,15 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 
 namespace Microsoft.EntityFrameworkCore
 {
-    public class FieldsOnlyLoadSqliteTest : FieldsOnlyLoadTestBase<FieldsOnlyLoadSqliteTest.FieldsOnlyLoadSqliteFixture>
+    public class FieldsOnlyLoadSqliteTest
+        : FieldsOnlyLoadTestBase<FieldsOnlyLoadSqliteTest.FieldsOnlyLoadSqliteFixture>
     {
-        public FieldsOnlyLoadSqliteTest(FieldsOnlyLoadSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+        public FieldsOnlyLoadSqliteTest(FieldsOnlyLoadSqliteFixture fixture) : base(fixture) { }
 
         public class FieldsOnlyLoadSqliteFixture : FieldsOnlyLoadFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => SqliteTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqliteTestStoreFactory.Instance;
         }
     }
 }

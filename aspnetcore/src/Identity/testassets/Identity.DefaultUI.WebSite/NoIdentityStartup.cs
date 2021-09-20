@@ -24,18 +24,22 @@ namespace Identity.DefaultUI.WebSite
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-            });
+            services.Configure<CookiePolicyOptions>(
+                options =>
+                {
+                    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                    options.CheckConsentNeeded = context => true;
+                }
+            );
 
             services.AddMvc()
-                .AddRazorPagesOptions(options =>
-                {
-                    options.Conventions.AuthorizeFolder("/Areas/Identity/Pages/Account/Manage");
-                    options.Conventions.AuthorizePage("/Areas/Identity/Pages/Account/Logout");
-                })
+                .AddRazorPagesOptions(
+                    options =>
+                    {
+                        options.Conventions.AuthorizeFolder("/Areas/Identity/Pages/Account/Manage");
+                        options.Conventions.AuthorizePage("/Areas/Identity/Pages/Account/Logout");
+                    }
+                )
                 .AddNewtonsoftJson();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
@@ -44,7 +48,7 @@ namespace Identity.DefaultUI.WebSite
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            StartupBase<IdentityUser,IdentityDbContext>.DisableFilePolling(env);
+            StartupBase<IdentityUser, IdentityDbContext>.DisableFilePolling(env);
 
             if (env.IsDevelopment())
             {
@@ -66,10 +70,12 @@ namespace Identity.DefaultUI.WebSite
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapDefaultControllerRoute();
+                }
+            );
         }
     }
 }

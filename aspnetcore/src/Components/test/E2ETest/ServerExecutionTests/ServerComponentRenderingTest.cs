@@ -18,10 +18,11 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
 
     public class ServerComponentRenderingTest : ComponentRenderingTest
     {
-        public ServerComponentRenderingTest(BrowserFixture browserFixture, ToggleExecutionModeServerFixture<Program> serverFixture, ITestOutputHelper output)
-            : base(browserFixture, serverFixture.WithServerExecution(), output)
-        {
-        }
+        public ServerComponentRenderingTest(
+            BrowserFixture browserFixture,
+            ToggleExecutionModeServerFixture<Program> serverFixture,
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture.WithServerExecution(), output) { }
 
         [Fact]
         public void ThrowsIfRenderIsRequestedOutsideSyncContext()
@@ -33,12 +34,13 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
 
             Browser.Contains(
                 $"{typeof(InvalidOperationException).FullName}: The current thread is not associated with the Dispatcher. Use InvokeAsync() to switch execution to the Dispatcher when triggering rendering or component state.",
-                () => result.Text);
+                () => result.Text
+            );
         }
 
         [Fact]
         [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/19413")]
-        public override void CanDispatchAsyncWorkToSyncContext()
-            => base.CanDispatchAsyncWorkToSyncContext();
+        public override void CanDispatchAsyncWorkToSyncContext() =>
+            base.CanDispatchAsyncWorkToSyncContext();
     }
 }

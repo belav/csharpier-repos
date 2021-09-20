@@ -22,8 +22,7 @@ namespace System.UnitTesting
         /// <summary>
         ///     Verifies that the specified action throws an exception of type <typeparam name="T"/>.
         /// </summary>
-        public static T Throws<T>(Action action)
-            where T : Exception
+        public static T Throws<T>(Action action) where T : Exception
         {
             return Throws<T>(RetryMode.Retry, action, (Action<T, int>)null);
         }
@@ -33,10 +32,14 @@ namespace System.UnitTesting
         /// </summary>
         public static ObjectDisposedException ThrowsDisposed(object instance, Action action)
         {
-            var exception = Throws<ObjectDisposedException>(RetryMode.Retry, action, (actual, retryCount) =>
-            {
-                AssertObjectDisposed(instance, actual, retryCount);
-            });
+            var exception = Throws<ObjectDisposedException>(
+                RetryMode.Retry,
+                action,
+                (actual, retryCount) =>
+                {
+                    AssertObjectDisposed(instance, actual, retryCount);
+                }
+            );
 
             return exception;
         }
@@ -48,15 +51,19 @@ namespace System.UnitTesting
         public static T Throws<T>(RetryMode retry, Action action, Action<T, int> validator)
             where T : Exception
         {
-            var exception = (T)Run(retry, action, (actual, retryCount) =>
-            {
-                AssertIsExactInstanceOf(typeof(T), actual, retryCount);
-
-                if (validator != null)
+            var exception = (T)Run(
+                retry,
+                action,
+                (actual, retryCount) =>
                 {
-                    validator((T)actual, retryCount);
+                    AssertIsExactInstanceOf(typeof(T), actual, retryCount);
+
+                    if (validator != null)
+                    {
+                        validator((T)actual, retryCount);
+                    }
                 }
-            });
+            );
 
             return exception;
         }
@@ -65,8 +72,7 @@ namespace System.UnitTesting
         ///     Verifies that the specified action throws an exception of type <typeparam name="T"/>,
         ///     indicating whether to retry.
         /// </summary>
-        public static T Throws<T>(RetryMode retry, Action action)
-            where T : Exception
+        public static T Throws<T>(RetryMode retry, Action action) where T : Exception
         {
             return Throws<T>(retry, action, (Action<T, int>)null);
         }
@@ -84,21 +90,32 @@ namespace System.UnitTesting
         ///     Verifies that the specified action throws the specified exception,
         ///     indicating whether to retry and running the specified validator.
         /// </summary>
-        public static void Throws(Exception expected, RetryMode retry, Action action, Action<Exception, int> validator)
-        {
-            Run(retry, action, (actual, retryCount) =>
-            {
-                Assert.Same(expected, actual);
-
-                if (validator != null)
+        public static void Throws(
+            Exception expected,
+            RetryMode retry,
+            Action action,
+            Action<Exception, int> validator
+        ) {
+            Run(
+                retry,
+                action,
+                (actual, retryCount) =>
                 {
-                    validator(actual, retryCount);
+                    Assert.Same(expected, actual);
+
+                    if (validator != null)
+                    {
+                        validator(actual, retryCount);
+                    }
                 }
-            });
+            );
         }
 
-        private static Exception Run(RetryMode retry, Action action, Action<Exception, int> validator)
-        {
+        private static Exception Run(
+            RetryMode retry,
+            Action action,
+            Action<Exception, int> validator
+        ) {
             Exception exception = null;
 
             for (int i = -1; i < (int)retry; i++)
@@ -124,15 +141,21 @@ namespace System.UnitTesting
             }
         }
 
-        private static void AssertObjectDisposed(object instance, ObjectDisposedException actual, int retryCount)
-        {
+        private static void AssertObjectDisposed(
+            object instance,
+            ObjectDisposedException actual,
+            int retryCount
+        ) {
             string objectName = instance.GetType().FullName;
 
             Assert.Equal(objectName, actual.ObjectName);
         }
 
-        private static void AssertIsExactInstanceOf(Type expectedType, Exception actual, int retryCount)
-        {
+        private static void AssertIsExactInstanceOf(
+            Type expectedType,
+            Exception actual,
+            int retryCount
+        ) {
             if (actual == null)
                 throw new NotImplementedException();
 

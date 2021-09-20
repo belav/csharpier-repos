@@ -41,9 +41,17 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             DebugInformationFormat format = 0,
             PdbValidationOptions options = PdbValidationOptions.Default,
             [CallerLineNumber] int expectedValueSourceLine = 0,
-            [CallerFilePath] string expectedValueSourcePath = null)
-        {
-            verifier.Compilation.VerifyPdb(expectedPdb, embeddedTexts, debugEntryPoint, format, options, expectedValueSourceLine, expectedValueSourcePath);
+            [CallerFilePath] string expectedValueSourcePath = null
+        ) {
+            verifier.Compilation.VerifyPdb(
+                expectedPdb,
+                embeddedTexts,
+                debugEntryPoint,
+                format,
+                options,
+                expectedValueSourceLine,
+                expectedValueSourcePath
+            );
             return verifier;
         }
 
@@ -55,9 +63,17 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             DebugInformationFormat format = 0,
             PdbValidationOptions options = PdbValidationOptions.Default,
             [CallerLineNumber] int expectedValueSourceLine = 0,
-            [CallerFilePath] string expectedValueSourcePath = null)
-        {
-            verifier.Compilation.VerifyPdb(expectedPdb, embeddedTexts, debugEntryPoint, format, options, expectedValueSourceLine, expectedValueSourcePath);
+            [CallerFilePath] string expectedValueSourcePath = null
+        ) {
+            verifier.Compilation.VerifyPdb(
+                expectedPdb,
+                embeddedTexts,
+                debugEntryPoint,
+                format,
+                options,
+                expectedValueSourceLine,
+                expectedValueSourcePath
+            );
             return verifier;
         }
 
@@ -70,9 +86,18 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             DebugInformationFormat format = 0,
             PdbValidationOptions options = PdbValidationOptions.Default,
             [CallerLineNumber] int expectedValueSourceLine = 0,
-            [CallerFilePath] string expectedValueSourcePath = null)
-        {
-            verifier.Compilation.VerifyPdb(qualifiedMethodName, expectedPdb, embeddedTexts, debugEntryPoint, format, options, expectedValueSourceLine, expectedValueSourcePath);
+            [CallerFilePath] string expectedValueSourcePath = null
+        ) {
+            verifier.Compilation.VerifyPdb(
+                qualifiedMethodName,
+                expectedPdb,
+                embeddedTexts,
+                debugEntryPoint,
+                format,
+                options,
+                expectedValueSourceLine,
+                expectedValueSourcePath
+            );
             return verifier;
         }
 
@@ -85,19 +110,34 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             DebugInformationFormat format = 0,
             PdbValidationOptions options = PdbValidationOptions.Default,
             [CallerLineNumber] int expectedValueSourceLine = 0,
-            [CallerFilePath] string expectedValueSourcePath = null)
-        {
-            verifier.Compilation.VerifyPdb(qualifiedMethodName, expectedPdb, embeddedTexts, debugEntryPoint, format, options, expectedValueSourceLine, expectedValueSourcePath);
+            [CallerFilePath] string expectedValueSourcePath = null
+        ) {
+            verifier.Compilation.VerifyPdb(
+                qualifiedMethodName,
+                expectedPdb,
+                embeddedTexts,
+                debugEntryPoint,
+                format,
+                options,
+                expectedValueSourceLine,
+                expectedValueSourcePath
+            );
             return verifier;
         }
 
-        public static void VerifyPdb(this CompilationDifference diff, IEnumerable<MethodDefinitionHandle> methodHandles, string expectedPdb)
-        {
+        public static void VerifyPdb(
+            this CompilationDifference diff,
+            IEnumerable<MethodDefinitionHandle> methodHandles,
+            string expectedPdb
+        ) {
             VerifyPdb(diff, methodHandles.Select(h => MetadataTokens.GetToken(h)), expectedPdb);
         }
 
-        public static void VerifyPdb(this CompilationDifference diff, IEnumerable<MethodDefinitionHandle> methodHandles, XElement expectedPdb)
-        {
+        public static void VerifyPdb(
+            this CompilationDifference diff,
+            IEnumerable<MethodDefinitionHandle> methodHandles,
+            XElement expectedPdb
+        ) {
             VerifyPdb(diff, methodHandles.Select(h => MetadataTokens.GetToken(h)), expectedPdb);
         }
 
@@ -107,9 +147,17 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string expectedPdb,
             DebugInformationFormat format = DebugInformationFormat.Pdb,
             [CallerLineNumber] int expectedValueSourceLine = 0,
-            [CallerFilePath] string expectedValueSourcePath = null)
-        {
-            VerifyPdb(diff, methodTokens, expectedPdb, format, expectedValueSourceLine, expectedValueSourcePath, expectedIsXmlLiteral: false);
+            [CallerFilePath] string expectedValueSourcePath = null
+        ) {
+            VerifyPdb(
+                diff,
+                methodTokens,
+                expectedPdb,
+                format,
+                expectedValueSourceLine,
+                expectedValueSourcePath,
+                expectedIsXmlLiteral: false
+            );
         }
 
         public static void VerifyPdb(
@@ -118,9 +166,17 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             XElement expectedPdb,
             DebugInformationFormat format = DebugInformationFormat.Pdb,
             [CallerLineNumber] int expectedValueSourceLine = 0,
-            [CallerFilePath] string expectedValueSourcePath = null)
-        {
-            VerifyPdb(diff, methodTokens, expectedPdb.ToString(), format, expectedValueSourceLine, expectedValueSourcePath, expectedIsXmlLiteral: true);
+            [CallerFilePath] string expectedValueSourcePath = null
+        ) {
+            VerifyPdb(
+                diff,
+                methodTokens,
+                expectedPdb.ToString(),
+                format,
+                expectedValueSourceLine,
+                expectedValueSourcePath,
+                expectedIsXmlLiteral: true
+            );
         }
 
         private static void VerifyPdb(
@@ -130,13 +186,21 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             DebugInformationFormat format,
             int expectedValueSourceLine,
             string expectedValueSourcePath,
-            bool expectedIsXmlLiteral)
-        {
+            bool expectedIsXmlLiteral
+        ) {
             Assert.NotEqual(default(DebugInformationFormat), format);
             Assert.NotEqual(DebugInformationFormat.Embedded, format);
 
-            string actualPdb = PdbToXmlConverter.DeltaPdbToXml(new ImmutableMemoryStream(diff.PdbDelta), methodTokens);
-            var (actual, expected) = AdjustToPdbFormat(actualPdb, expectedPdb, actualIsPortable: diff.NextGeneration.InitialBaseline.HasPortablePdb, actualIsConverted: false);
+            string actualPdb = PdbToXmlConverter.DeltaPdbToXml(
+                new ImmutableMemoryStream(diff.PdbDelta),
+                methodTokens
+            );
+            var (actual, expected) = AdjustToPdbFormat(
+                actualPdb,
+                expectedPdb,
+                actualIsPortable: diff.NextGeneration.InitialBaseline.HasPortablePdb,
+                actualIsConverted: false
+            );
 
             AssertEx.AssertLinesEqual(
                 expected,
@@ -144,7 +208,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 $"PDB format: {format}{Environment.NewLine}",
                 expectedValueSourcePath,
                 expectedValueSourceLine,
-                escapeQuotes: !expectedIsXmlLiteral);
+                escapeQuotes: !expectedIsXmlLiteral
+            );
         }
 
         public static void VerifyPdb(
@@ -155,9 +220,19 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             DebugInformationFormat format = 0,
             PdbValidationOptions options = PdbValidationOptions.Default,
             [CallerLineNumber] int expectedValueSourceLine = 0,
-            [CallerFilePath] string expectedValueSourcePath = null)
-        {
-            VerifyPdb(compilation, "", expectedPdb, embeddedTexts, debugEntryPoint, format, options, expectedValueSourceLine, expectedValueSourcePath);
+            [CallerFilePath] string expectedValueSourcePath = null
+        ) {
+            VerifyPdb(
+                compilation,
+                "",
+                expectedPdb,
+                embeddedTexts,
+                debugEntryPoint,
+                format,
+                options,
+                expectedValueSourceLine,
+                expectedValueSourcePath
+            );
         }
 
         public static void VerifyPdb(
@@ -169,8 +244,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             DebugInformationFormat format = 0,
             PdbValidationOptions options = PdbValidationOptions.Default,
             [CallerLineNumber] int expectedValueSourceLine = 0,
-            [CallerFilePath] string expectedValueSourcePath = null)
-        {
+            [CallerFilePath] string expectedValueSourcePath = null
+        ) {
             VerifyPdbImpl(
                 compilation,
                 embeddedTexts,
@@ -181,7 +256,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 options,
                 expectedValueSourceLine,
                 expectedValueSourcePath,
-                expectedIsXmlLiteral: false);
+                expectedIsXmlLiteral: false
+            );
         }
 
         public static void VerifyPdb(
@@ -192,9 +268,19 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             DebugInformationFormat format = 0,
             PdbValidationOptions options = PdbValidationOptions.Default,
             [CallerLineNumber] int expectedValueSourceLine = 0,
-            [CallerFilePath] string expectedValueSourcePath = null)
-        {
-            VerifyPdb(compilation, "", expectedPdb, embeddedTexts, debugEntryPoint, format, options, expectedValueSourceLine, expectedValueSourcePath);
+            [CallerFilePath] string expectedValueSourcePath = null
+        ) {
+            VerifyPdb(
+                compilation,
+                "",
+                expectedPdb,
+                embeddedTexts,
+                debugEntryPoint,
+                format,
+                options,
+                expectedValueSourceLine,
+                expectedValueSourcePath
+            );
         }
 
         public static void VerifyPdb(
@@ -206,8 +292,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             DebugInformationFormat format = 0,
             PdbValidationOptions options = PdbValidationOptions.Default,
             [CallerLineNumber] int expectedValueSourceLine = 0,
-            [CallerFilePath] string expectedValueSourcePath = null)
-        {
+            [CallerFilePath] string expectedValueSourcePath = null
+        ) {
             VerifyPdbImpl(
                 compilation,
                 embeddedTexts,
@@ -218,7 +304,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 options,
                 expectedValueSourceLine,
                 expectedValueSourcePath,
-                expectedIsXmlLiteral: true);
+                expectedIsXmlLiteral: true
+            );
         }
 
         private static void VerifyPdbImpl(
@@ -231,11 +318,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             PdbValidationOptions options,
             int expectedValueSourceLine,
             string expectedValueSourcePath,
-            bool expectedIsXmlLiteral)
-        {
+            bool expectedIsXmlLiteral
+        ) {
             Assert.NotEqual(DebugInformationFormat.Embedded, format);
 
-            bool testWindowsPdb = (format == 0 || format == DebugInformationFormat.Pdb) && ExecutionConditionUtil.IsWindows;
+            bool testWindowsPdb =
+                (format == 0 || format == DebugInformationFormat.Pdb)
+                && ExecutionConditionUtil.IsWindows;
             bool testPortablePdb = format == 0 || format == DebugInformationFormat.PortablePdb;
             bool testConversion = (options & PdbValidationOptions.SkipConversionValidation) == 0;
             var pdbToXmlOptions = options.ToPdbToXmlOptions();
@@ -254,13 +343,38 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             {
                 var peStream = new MemoryStream();
                 var pdbStream = new MemoryStream();
-                EmitWithPdb(peStream, pdbStream, compilation, debugEntryPoint, embeddedTexts, isPortable);
+                EmitWithPdb(
+                    peStream,
+                    pdbStream,
+                    compilation,
+                    debugEntryPoint,
+                    embeddedTexts,
+                    isPortable
+                );
 
-                VerifyPdbMatchesExpectedXml(peStream, pdbStream, qualifiedMethodName, pdbToXmlOptions, expectedPdb, expectedValueSourceLine, expectedValueSourcePath, expectedIsXmlLiteral, isPortable);
+                VerifyPdbMatchesExpectedXml(
+                    peStream,
+                    pdbStream,
+                    qualifiedMethodName,
+                    pdbToXmlOptions,
+                    expectedPdb,
+                    expectedValueSourceLine,
+                    expectedValueSourcePath,
+                    expectedIsXmlLiteral,
+                    isPortable
+                );
 
                 if (testConversion && testOtherFormat)
                 {
-                    VerifyConvertedPdbMatchesExpectedXml(peStream, pdbStream, qualifiedMethodName, expectedPdb, pdbToXmlOptions, expectedIsXmlLiteral, isPortable);
+                    VerifyConvertedPdbMatchesExpectedXml(
+                        peStream,
+                        pdbStream,
+                        qualifiedMethodName,
+                        expectedPdb,
+                        pdbToXmlOptions,
+                        expectedIsXmlLiteral,
+                        isPortable
+                    );
                 }
             }
         }
@@ -274,12 +388,25 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             int expectedValueSourceLine,
             string expectedValueSourcePath,
             bool expectedIsXmlLiteral,
-            bool isPortable)
-        {
+            bool isPortable
+        ) {
             peStream.Position = 0;
             pdbStream.Position = 0;
-            var actualPdb = XElement.Parse(PdbToXmlConverter.ToXml(pdbStream, peStream, pdbToXmlOptions, methodName: qualifiedMethodName)).ToString();
-            var (actual, expected) = AdjustToPdbFormat(actualPdb, expectedPdb, actualIsPortable: isPortable, actualIsConverted: false);
+            var actualPdb = XElement.Parse(
+                    PdbToXmlConverter.ToXml(
+                        pdbStream,
+                        peStream,
+                        pdbToXmlOptions,
+                        methodName: qualifiedMethodName
+                    )
+                )
+                .ToString();
+            var (actual, expected) = AdjustToPdbFormat(
+                actualPdb,
+                expectedPdb,
+                actualIsPortable: isPortable,
+                actualIsConverted: false
+            );
 
             AssertEx.AssertLinesEqual(
                 expected,
@@ -287,7 +414,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 $"PDB format: {(isPortable ? "Portable" : "Windows")}{Environment.NewLine}",
                 expectedValueSourcePath,
                 expectedValueSourceLine,
-                escapeQuotes: !expectedIsXmlLiteral);
+                escapeQuotes: !expectedIsXmlLiteral
+            );
         }
 
         private static void VerifyConvertedPdbMatchesExpectedXml(
@@ -297,30 +425,55 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string expectedPdb,
             PdbToXmlOptions pdbToXmlOptions,
             bool expectedIsXmlLiteral,
-            bool originalIsPortable)
-        {
+            bool originalIsPortable
+        ) {
             var pdbStreamConverted = new MemoryStream();
-            var converter = new PdbConverter(diagnostic => Assert.True(false, diagnostic.ToString()));
+            var converter = new PdbConverter(
+                diagnostic => Assert.True(false, diagnostic.ToString())
+            );
 
             peStreamOriginal.Position = 0;
             pdbStreamOriginal.Position = 0;
 
             if (originalIsPortable)
             {
-                converter.ConvertPortableToWindows(peStreamOriginal, pdbStreamOriginal, pdbStreamConverted);
+                converter.ConvertPortableToWindows(
+                    peStreamOriginal,
+                    pdbStreamOriginal,
+                    pdbStreamConverted
+                );
             }
             else
             {
-                converter.ConvertWindowsToPortable(peStreamOriginal, pdbStreamOriginal, pdbStreamConverted);
+                converter.ConvertWindowsToPortable(
+                    peStreamOriginal,
+                    pdbStreamOriginal,
+                    pdbStreamConverted
+                );
             }
 
             pdbStreamConverted.Position = 0;
             peStreamOriginal.Position = 0;
 
-            var actualConverted = AdjustForConversionArtifacts(XElement.Parse(PdbToXmlConverter.ToXml(pdbStreamConverted, peStreamOriginal, pdbToXmlOptions, methodName: qualifiedMethodName)).ToString());
+            var actualConverted = AdjustForConversionArtifacts(
+                XElement.Parse(
+                        PdbToXmlConverter.ToXml(
+                            pdbStreamConverted,
+                            peStreamOriginal,
+                            pdbToXmlOptions,
+                            methodName: qualifiedMethodName
+                        )
+                    )
+                    .ToString()
+            );
             var adjustedExpected = AdjustForConversionArtifacts(expectedPdb);
 
-            var (actual, expected) = AdjustToPdbFormat(actualConverted, adjustedExpected, actualIsPortable: !originalIsPortable, actualIsConverted: true);
+            var (actual, expected) = AdjustToPdbFormat(
+                actualConverted,
+                adjustedExpected,
+                actualIsPortable: !originalIsPortable,
+                actualIsConverted: true
+            );
 
             AssertEx.AssertLinesEqual(
                 expected,
@@ -328,7 +481,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 $"PDB format: {(originalIsPortable ? "Windows" : "Portable")} converted from {(originalIsPortable ? "Portable" : "Windows")}{Environment.NewLine}",
                 expectedValueSourcePath: null,
                 expectedValueSourceLine: 0,
-                escapeQuotes: !expectedIsXmlLiteral);
+                escapeQuotes: !expectedIsXmlLiteral
+            );
         }
 
         private static string AdjustForConversionArtifacts(string pdb)
@@ -366,8 +520,12 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             return xml.ToString();
         }
 
-        internal static (string Actual, string Expected) AdjustToPdbFormat(string actualPdb, string expectedPdb, bool actualIsPortable, bool actualIsConverted)
-        {
+        internal static (string Actual, string Expected) AdjustToPdbFormat(
+            string actualPdb,
+            string expectedPdb,
+            bool actualIsPortable,
+            bool actualIsConverted
+        ) {
             var actualXml = XElement.Parse(actualPdb);
             var expectedXml = XElement.Parse(expectedPdb);
 
@@ -375,7 +533,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             {
                 // Windows SymWriter doesn't serialize empty scopes.
                 // In Portable PDB each method with a body (even with no locals) has a scope that points to the imports. Such scope appears as empty
-                // in the current XML representation. 
+                // in the current XML representation.
                 RemoveEmptyScopes(actualXml);
 
                 // Remove elements that are never present in Portable PDB.
@@ -414,62 +572,85 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         private static void RemoveEmptyCustomDebugInfo(XElement pdb)
         {
-            RemoveElements(from e in pdb.DescendantsAndSelf()
-                           where e.Name == "customDebugInfo" && !e.HasElements
-                           select e);
+            RemoveElements(
+                from e in pdb.DescendantsAndSelf()
+                where e.Name == "customDebugInfo" && !e.HasElements
+                select e
+            );
         }
 
         private static void RemoveEmptyScopes(XElement pdb)
         {
-            while (RemoveElements(from e in pdb.DescendantsAndSelf()
-                                  where e.Name == "scope" && !e.HasElements
-                                  select e))
+            while (
+                RemoveElements(
+                    from e in pdb.DescendantsAndSelf()
+                    where e.Name == "scope" && !e.HasElements
+                    select e
+                )
+            )
                 ;
         }
 
         private static void RemoveEmptySequencePoints(XElement pdb)
         {
-            RemoveElements(from e in pdb.DescendantsAndSelf()
-                           where e.Name == "sequencePoints" && !e.HasElements
-                           select e);
+            RemoveElements(
+                from e in pdb.DescendantsAndSelf()
+                where e.Name == "sequencePoints" && !e.HasElements
+                select e
+            );
         }
 
         private static void RemoveEmptyMethods(XElement pdb)
         {
-            RemoveElements(from e in pdb.DescendantsAndSelf()
-                           where e.Name == "method" && !e.HasElements
-                           select e);
+            RemoveElements(
+                from e in pdb.DescendantsAndSelf()
+                where e.Name == "method" && !e.HasElements
+                select e
+            );
         }
 
         private static void RemoveNonPortableElements(XElement expectedNativePdb)
         {
             // The following elements are never present in Portable PDB.
-            RemoveElements(from e in expectedNativePdb.DescendantsAndSelf()
-                           where e.Name == "forwardIterator" ||
-                                 e.Name == "forwardToModule" ||
-                                 e.Name == "forward" ||
-                                 e.Name == "tupleElementNames" ||
-                                 e.Name == "dynamicLocals" ||
-                                 e.Name == "using" ||
-                                 e.Name == "currentnamespace" ||
-                                 e.Name == "defaultnamespace" ||
-                                 e.Name == "importsforward" ||
-                                 e.Name == "xmlnamespace" ||
-                                 e.Name == "alias" ||
-                                 e.Name == "namespace" ||
-                                 e.Name == "type" ||
-                                 e.Name == "extern" ||
-                                 e.Name == "externinfo" ||
-                                 e.Name == "defunct" ||
-                                 e.Name == "local" && e.Attributes().Any(a => a.Name.LocalName == "name" && a.Value.StartsWith("$VB$ResumableLocal_"))
-                           select e);
+            RemoveElements(
+                from e in expectedNativePdb.DescendantsAndSelf()
+                where
+                    e.Name == "forwardIterator"
+                    || e.Name == "forwardToModule"
+                    || e.Name == "forward"
+                    || e.Name == "tupleElementNames"
+                    || e.Name == "dynamicLocals"
+                    || e.Name == "using"
+                    || e.Name == "currentnamespace"
+                    || e.Name == "defaultnamespace"
+                    || e.Name == "importsforward"
+                    || e.Name == "xmlnamespace"
+                    || e.Name == "alias"
+                    || e.Name == "namespace"
+                    || e.Name == "type"
+                    || e.Name == "extern"
+                    || e.Name == "externinfo"
+                    || e.Name == "defunct"
+                    || e.Name == "local"
+                        && e.Attributes()
+                            .Any(
+                                a =>
+                                    a.Name.LocalName == "name"
+                                    && a.Value.StartsWith("$VB$ResumableLocal_")
+                            )
+                select e
+            );
         }
 
-        private static void RemoveElementsWithSpecifiedFormat(XElement expectedNativePdb, string format)
-        {
-            RemoveElements(from e in expectedNativePdb.DescendantsAndSelf()
-                           where e.Attributes().Any(a => a.Name.LocalName == "format" && a.Value == format)
-                           select e);
+        private static void RemoveElementsWithSpecifiedFormat(
+            XElement expectedNativePdb,
+            string format
+        ) {
+            RemoveElements(
+                from e in expectedNativePdb.DescendantsAndSelf()
+                where e.Attributes().Any(a => a.Name.LocalName == "format" && a.Value == format)
+                select e
+            );
         }
 
         private static void RemoveFormatAttributes(XElement pdb)
@@ -486,30 +667,51 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             IMethodSymbol debugEntryPoint = null,
             PdbValidationOptions options = PdbValidationOptions.Default,
             string qualifiedMethodName = "",
-            bool portable = true)
-        {
+            bool portable = true
+        ) {
             var peStream = new MemoryStream();
             var pdbStream = new MemoryStream();
             EmitWithPdb(peStream, pdbStream, compilation, debugEntryPoint, embeddedTexts, portable);
 
             pdbStream.Position = 0;
             peStream.Position = 0;
-            return PdbToXmlConverter.ToXml(pdbStream, peStream, options.ToPdbToXmlOptions(), methodName: qualifiedMethodName);
+            return PdbToXmlConverter.ToXml(
+                pdbStream,
+                peStream,
+                options.ToPdbToXmlOptions(),
+                methodName: qualifiedMethodName
+            );
         }
 
-        private static void EmitWithPdb(MemoryStream peStream, MemoryStream pdbStream, Compilation compilation, IMethodSymbol debugEntryPoint, IEnumerable<EmbeddedText> embeddedTexts, bool portable)
-        {
-            var emitOptions = EmitOptions.Default.WithDebugInformationFormat(portable ? DebugInformationFormat.PortablePdb : DebugInformationFormat.Pdb);
+        private static void EmitWithPdb(
+            MemoryStream peStream,
+            MemoryStream pdbStream,
+            Compilation compilation,
+            IMethodSymbol debugEntryPoint,
+            IEnumerable<EmbeddedText> embeddedTexts,
+            bool portable
+        ) {
+            var emitOptions = EmitOptions.Default.WithDebugInformationFormat(
+                portable ? DebugInformationFormat.PortablePdb : DebugInformationFormat.Pdb
+            );
 
             var result = compilation.Emit(
                 peStream,
                 pdbStream,
                 debugEntryPoint: debugEntryPoint,
                 options: emitOptions,
-                embeddedTexts: embeddedTexts);
+                embeddedTexts: embeddedTexts
+            );
 
             result.Diagnostics.Where(d => d.Severity == DiagnosticSeverity.Error).Verify();
-            ValidateDebugDirectory(peStream, portable ? pdbStream : null, compilation.AssemblyName + ".pdb", emitOptions.PdbChecksumAlgorithm, hasEmbeddedPdb: false, isDeterministic: compilation.IsEmitDeterministic);
+            ValidateDebugDirectory(
+                peStream,
+                portable ? pdbStream : null,
+                compilation.AssemblyName + ".pdb",
+                emitOptions.PdbChecksumAlgorithm,
+                hasEmbeddedPdb: false,
+                isDeterministic: compilation.IsEmitDeterministic
+            );
         }
 
         public static unsafe byte[] GetSourceLinkData(Stream pdbStream)
@@ -519,7 +721,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             var symReader = SymReaderFactory.CreateReader(pdbStream);
             try
             {
-                Marshal.ThrowExceptionForHR(symReader.GetSourceServerData(out byte* data, out int size));
+                Marshal.ThrowExceptionForHR(
+                    symReader.GetSourceServerData(out byte* data, out int size)
+                );
                 if (size == 0)
                 {
                     return Array.Empty<byte>();
@@ -529,14 +733,21 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 Marshal.Copy((IntPtr)data, result, 0, result.Length);
                 return result;
             }
+
             finally
             {
                 symReader.Dispose();
             }
         }
 
-        public static void ValidateDebugDirectory(Stream peStream, Stream portablePdbStreamOpt, string pdbPath, HashAlgorithmName hashAlgorithm, bool hasEmbeddedPdb, bool isDeterministic)
-        {
+        public static void ValidateDebugDirectory(
+            Stream peStream,
+            Stream portablePdbStreamOpt,
+            string pdbPath,
+            HashAlgorithmName hashAlgorithm,
+            bool hasEmbeddedPdb,
+            bool isDeterministic
+        ) {
             peStream.Position = 0;
 
             var peReader = new PEReader(peStream);
@@ -552,7 +763,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             Assert.Equal(1, codeViewData.Age);
             Assert.Equal(pdbPath, codeViewData.Path);
 
-            // CodeView data: 
+            // CodeView data:
             //  4B "RSDS"
             // 16B Guid
             //  4B Age
@@ -572,8 +783,12 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             {
                 portablePdbStreamOpt.Position = 0;
 
-                using (var provider = MetadataReaderProvider.FromPortablePdbStream(portablePdbStreamOpt, MetadataStreamOptions.LeaveOpen))
-                {
+                using (
+                    var provider = MetadataReaderProvider.FromPortablePdbStream(
+                        portablePdbStreamOpt,
+                        MetadataStreamOptions.LeaveOpen
+                    )
+                ) {
                     var pdbReader = provider.GetMetadataReader();
                     ValidatePortablePdbId(pdbReader, codeViewEntry.Stamp, codeViewData.Guid);
                 }
@@ -585,7 +800,6 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
                 var pdbChecksumData = peReader.ReadPdbChecksumDebugDirectoryData(entry);
                 Assert.Equal(hashAlgorithm.Name, pdbChecksumData.AlgorithmName);
-
                 // TODO: validate hash
             }
 
@@ -606,35 +820,66 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 var entry = entries[entryIndex++];
                 using (var provider = peReader.ReadEmbeddedPortablePdbDebugDirectoryData(entry))
                 {
-                    ValidatePortablePdbId(provider.GetMetadataReader(), codeViewEntry.Stamp, codeViewData.Guid);
+                    ValidatePortablePdbId(
+                        provider.GetMetadataReader(),
+                        codeViewEntry.Stamp,
+                        codeViewData.Guid
+                    );
                 }
             }
 
             Assert.Equal(entries.Length, entryIndex);
         }
 
-        private static unsafe void ValidatePortablePdbId(MetadataReader pdbReader, uint stampInDebugDirectory, Guid guidInDebugDirectory)
-        {
+        private static unsafe void ValidatePortablePdbId(
+            MetadataReader pdbReader,
+            uint stampInDebugDirectory,
+            Guid guidInDebugDirectory
+        ) {
             var expectedId = new BlobContentId(guidInDebugDirectory, stampInDebugDirectory);
             var actualId = new BlobContentId(pdbReader.DebugMetadataHeader.Id);
             Assert.Equal(expectedId, actualId);
         }
 
-        internal static void VerifyPdbLambdasAndClosures(this Compilation compilation, SourceWithMarkedNodes source)
-        {
+        internal static void VerifyPdbLambdasAndClosures(
+            this Compilation compilation,
+            SourceWithMarkedNodes source
+        ) {
             var pdb = GetPdbXml(compilation);
             var pdbXml = XElement.Parse(pdb);
 
             // We need to get the method start index from the input source, as its not in the PDB
             var methodStartTags = source.MarkedSpans.WhereAsArray(s => s.TagName == "M");
-            Assert.True(methodStartTags.Length == 1, "There must be one and only one method start tag per test input.");
+            Assert.True(
+                methodStartTags.Length == 1,
+                "There must be one and only one method start tag per test input."
+            );
             var methodStart = methodStartTags[0].MatchedSpan.Start;
 
             // Calculate the expected tags for closures
-            var expectedTags = pdbXml.DescendantsAndSelf("closure").Select((c, i) => new { Tag = $"<C:{i}>", StartIndex = methodStart + int.Parse(c.Attribute("offset").Value) }).ToList();
+            var expectedTags = pdbXml.DescendantsAndSelf("closure")
+                .Select(
+                    (c, i) =>
+                        new
+                        {
+                            Tag = $"<C:{i}>",
+                            StartIndex = methodStart + int.Parse(c.Attribute("offset").Value)
+                        }
+                )
+                .ToList();
 
             // Add the expected tags for lambdas
-            expectedTags.AddRange(pdbXml.DescendantsAndSelf("lambda").Select((c, i) => new { Tag = $"<L:{i}.{int.Parse(c.Attribute("closure").Value)}>", StartIndex = methodStart + int.Parse(c.Attribute("offset").Value) }));
+            expectedTags.AddRange(
+                pdbXml.DescendantsAndSelf("lambda")
+                    .Select(
+                        (c, i) =>
+                            new
+                            {
+                                Tag = $"<L:{i}.{int.Parse(c.Attribute("closure").Value)}>",
+                                StartIndex = methodStart + int.Parse(c.Attribute("offset").Value)
+                            }
+                    )
+            );
 
             // Order by start index so they line up nicely
             expectedTags.Sort((x, y) => x.StartIndex.CompareTo(y.StartIndex));

@@ -12,16 +12,15 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace Microsoft.CodeAnalysis.Editor.Tagging
 {
-    internal abstract class AsynchronousTaggerProvider<TTag> : AbstractAsynchronousTaggerProvider<TTag>, ITaggerProvider
-        where TTag : ITag
+    internal abstract class AsynchronousTaggerProvider<TTag>
+        : AbstractAsynchronousTaggerProvider<TTag>,
+          ITaggerProvider where TTag : ITag
     {
         protected AsynchronousTaggerProvider(
             IThreadingContext threadingContext,
             IAsynchronousOperationListener asyncListener,
-            IForegroundNotificationService notificationService)
-                : base(threadingContext, asyncListener, notificationService)
-        {
-        }
+            IForegroundNotificationService notificationService
+        ) : base(threadingContext, asyncListener, notificationService) { }
 
         public IAccurateTagger<T> CreateTagger<T>(ITextBuffer subjectBuffer) where T : ITag
         {
@@ -33,7 +32,6 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             return this.CreateTaggerWorker<T>(null, subjectBuffer);
         }
 
-        ITagger<T> ITaggerProvider.CreateTagger<T>(ITextBuffer buffer)
-            => CreateTagger<T>(buffer);
+        ITagger<T> ITaggerProvider.CreateTagger<T>(ITextBuffer buffer) => CreateTagger<T>(buffer);
     }
 }

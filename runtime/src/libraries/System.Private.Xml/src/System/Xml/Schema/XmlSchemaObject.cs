@@ -64,7 +64,11 @@ namespace System.Xml.Schema
         [XmlIgnore]
         internal virtual string? IdAttribute
         {
-            get { Debug.Fail("Should not use base property"); return null; }
+            get
+            {
+                Debug.Fail("Should not use base property");
+                return null;
+            }
             set { Debug.Fail("Should not use base property"); }
         }
 
@@ -74,21 +78,19 @@ namespace System.Xml.Schema
         [XmlIgnore]
         internal virtual string? NameAttribute
         {
-            get { Debug.Fail("Should not use base property"); return null; }
+            get
+            {
+                Debug.Fail("Should not use base property");
+                return null;
+            }
             set { Debug.Fail("Should not use base property"); }
         }
 
         [XmlIgnore]
         internal bool IsProcessing
         {
-            get
-            {
-                return _isProcessing;
-            }
-            set
-            {
-                _isProcessing = value;
-            }
+            get { return _isProcessing; }
+            set { _isProcessing = value; }
         }
 
         internal virtual XmlSchemaObject Clone()

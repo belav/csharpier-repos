@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.Routing.Tree;
 
 namespace Microsoft.AspNetCore.Routing
 {
-    internal sealed class RouteValuesAddressScheme : IEndpointAddressScheme<RouteValuesAddress>, IDisposable
+    internal sealed class RouteValuesAddressScheme
+        : IEndpointAddressScheme<RouteValuesAddress>,
+          IDisposable
     {
         private readonly DataSourceDependentCache<StateEntry> _cache;
 
@@ -35,7 +37,8 @@ namespace Microsoft.AspNetCore.Routing
             {
                 matchResults = state.AllMatchesLinkGenerationTree.GetMatches(
                     address.ExplicitValues,
-                    address.AmbientValues);
+                    address.AmbientValues
+                );
             }
             else if (state.NamedMatches.TryGetValue(address.RouteName, out var namedMatchResults))
             {
@@ -63,8 +66,10 @@ namespace Microsoft.AspNetCore.Routing
             return Array.Empty<Endpoint>();
         }
 
-        private static IEnumerable<Endpoint> GetEndpoints(IList<OutboundMatchResult> matchResults, int matchCount)
-        {
+        private static IEnumerable<Endpoint> GetEndpoints(
+            IList<OutboundMatchResult> matchResults,
+            int matchCount
+        ) {
             for (var i = 0; i < matchCount; i++)
             {
                 yield return (RouteEndpoint)matchResults[i].Match.Entry.Data;
@@ -74,7 +79,9 @@ namespace Microsoft.AspNetCore.Routing
         private StateEntry Initialize(IReadOnlyList<Endpoint> endpoints)
         {
             var allOutboundMatches = new List<OutboundMatch>();
-            var namedOutboundMatchResults = new Dictionary<string, List<OutboundMatchResult>>(StringComparer.OrdinalIgnoreCase);
+            var namedOutboundMatchResults = new Dictionary<string, List<OutboundMatchResult>>(
+                StringComparer.OrdinalIgnoreCase
+            );
 
             // Decision tree is built using the 'required values' of actions.
             // - When generating a url using route values, decision tree checks the explicitly supplied route values +
@@ -107,15 +114,18 @@ namespace Microsoft.AspNetCore.Routing
                     continue;
                 }
 
-                if (endpoint.Metadata.GetMetadata<ISuppressLinkGenerationMetadata>()?.SuppressLinkGeneration == true)
-                {
+                if (
+                    endpoint.Metadata.GetMetadata<ISuppressLinkGenerationMetadata>()?.SuppressLinkGeneration
+                    == true
+                ) {
                     continue;
                 }
 
                 var entry = CreateOutboundRouteEntry(
                     routeEndpoint,
                     routeEndpoint.RoutePattern.RequiredValues,
-                    metadata?.RouteName);
+                    metadata?.RouteName
+                );
 
                 var outboundMatch = new OutboundMatch() { Entry = entry };
                 allOutboundMatches.Add(outboundMatch);
@@ -136,14 +146,15 @@ namespace Microsoft.AspNetCore.Routing
             return new StateEntry(
                 allOutboundMatches,
                 new LinkGenerationDecisionTree(allOutboundMatches),
-                namedOutboundMatchResults);
+                namedOutboundMatchResults
+            );
         }
 
         private OutboundRouteEntry CreateOutboundRouteEntry(
             RouteEndpoint endpoint,
             IReadOnlyDictionary<string, object?> requiredValues,
-            string? routeName)
-        {
+            string? routeName
+        ) {
             var entry = new OutboundRouteEntry()
             {
                 Handler = NullRouter.Instance,
@@ -173,8 +184,8 @@ namespace Microsoft.AspNetCore.Routing
             public StateEntry(
                 List<OutboundMatch> allMatches,
                 LinkGenerationDecisionTree allMatchesLinkGenerationTree,
-                Dictionary<string, List<OutboundMatchResult>> namedMatches)
-            {
+                Dictionary<string, List<OutboundMatchResult>> namedMatches
+            ) {
                 AllMatches = allMatches;
                 AllMatchesLinkGenerationTree = allMatchesLinkGenerationTree;
                 NamedMatches = namedMatches;

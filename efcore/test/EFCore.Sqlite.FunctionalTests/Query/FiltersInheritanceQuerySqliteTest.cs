@@ -3,11 +3,11 @@
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class FiltersInheritanceQuerySqliteTest : FiltersInheritanceQueryTestBase<FiltersInheritanceQuerySqliteFixture>
+    public class FiltersInheritanceQuerySqliteTest
+        : FiltersInheritanceQueryTestBase<FiltersInheritanceQuerySqliteFixture>
     {
-        public FiltersInheritanceQuerySqliteTest(FiltersInheritanceQuerySqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+        public FiltersInheritanceQuerySqliteTest(
+            FiltersInheritanceQuerySqliteFixture fixture
+        ) : base(fixture) { }
     }
 }

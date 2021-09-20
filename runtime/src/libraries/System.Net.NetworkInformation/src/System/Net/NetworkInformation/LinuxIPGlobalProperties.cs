@@ -7,17 +7,26 @@ namespace System.Net.NetworkInformation
     {
         public override TcpConnectionInformation[] GetActiveTcpConnections()
         {
-            return StringParsingHelpers.ParseActiveTcpConnectionsFromFiles(NetworkFiles.Tcp4ConnectionsFile, NetworkFiles.Tcp6ConnectionsFile);
+            return StringParsingHelpers.ParseActiveTcpConnectionsFromFiles(
+                NetworkFiles.Tcp4ConnectionsFile,
+                NetworkFiles.Tcp6ConnectionsFile
+            );
         }
 
         public override IPEndPoint[] GetActiveTcpListeners()
         {
-            return StringParsingHelpers.ParseActiveTcpListenersFromFiles(NetworkFiles.Tcp4ConnectionsFile, NetworkFiles.Tcp6ConnectionsFile);
+            return StringParsingHelpers.ParseActiveTcpListenersFromFiles(
+                NetworkFiles.Tcp4ConnectionsFile,
+                NetworkFiles.Tcp6ConnectionsFile
+            );
         }
 
         public override IPEndPoint[] GetActiveUdpListeners()
         {
-            return StringParsingHelpers.ParseActiveUdpListenersFromFiles(NetworkFiles.Udp4ConnectionsFile, NetworkFiles.Udp6ConnectionsFile);
+            return StringParsingHelpers.ParseActiveUdpListenersFromFiles(
+                NetworkFiles.Udp4ConnectionsFile,
+                NetworkFiles.Udp6ConnectionsFile
+            );
         }
 
         public override IcmpV4Statistics GetIcmpV4Statistics()

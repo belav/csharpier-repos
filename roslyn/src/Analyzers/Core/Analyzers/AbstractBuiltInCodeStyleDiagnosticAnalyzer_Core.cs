@@ -7,7 +7,9 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CodeStyle
 {
-    internal abstract partial class AbstractBuiltInCodeStyleDiagnosticAnalyzer : DiagnosticAnalyzer, IBuiltInAnalyzer
+    internal abstract partial class AbstractBuiltInCodeStyleDiagnosticAnalyzer
+        : DiagnosticAnalyzer,
+          IBuiltInAnalyzer
     {
         protected readonly string? DescriptorId;
 
@@ -22,21 +24,29 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             LocalizableString title,
             LocalizableString? messageFormat,
             bool isUnnecessary,
-            bool configurable)
-        {
+            bool configurable
+        ) {
             DescriptorId = descriptorId;
             _localizableTitle = title;
             _localizableMessageFormat = messageFormat ?? title;
 
-            Descriptor = CreateDescriptorWithId(DescriptorId, enforceOnBuild, _localizableTitle, _localizableMessageFormat, isUnnecessary: isUnnecessary, isConfigurable: configurable);
+            Descriptor = CreateDescriptorWithId(
+                DescriptorId,
+                enforceOnBuild,
+                _localizableTitle,
+                _localizableMessageFormat,
+                isUnnecessary: isUnnecessary,
+                isConfigurable: configurable
+            );
             SupportedDiagnostics = ImmutableArray.Create(Descriptor);
         }
 
         /// <summary>
         /// Constructor for a code style analyzer with a multiple diagnostic descriptors such that all the descriptors have no unique code style option to configure the descriptors.
         /// </summary>
-        protected AbstractBuiltInCodeStyleDiagnosticAnalyzer(ImmutableArray<DiagnosticDescriptor> supportedDiagnostics)
-        {
+        protected AbstractBuiltInCodeStyleDiagnosticAnalyzer(
+            ImmutableArray<DiagnosticDescriptor> supportedDiagnostics
+        ) {
             SupportedDiagnostics = supportedDiagnostics;
 
             Descriptor = SupportedDiagnostics[0];
@@ -53,16 +63,25 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             LocalizableString messageFormat,
             bool isUnnecessary = false,
             bool isConfigurable = true,
-            LocalizableString? description = null)
+            LocalizableString? description = null
+        )
 #pragma warning disable RS0030 // Do not used banned APIs
-            => new(
-                    id, title, messageFormat,
-                    DiagnosticCategory.Style,
-                    DiagnosticSeverity.Hidden,
-                    isEnabledByDefault: true,
-                    description: description,
-                    helpLinkUri: DiagnosticHelper.GetHelpLinkForDiagnosticId(id),
-                    customTags: DiagnosticCustomTags.Create(isUnnecessary, isConfigurable, enforceOnBuild));
+            =>
+            new(
+                id,
+                title,
+                messageFormat,
+                DiagnosticCategory.Style,
+                DiagnosticSeverity.Hidden,
+                isEnabledByDefault: true,
+                description: description,
+                helpLinkUri: DiagnosticHelper.GetHelpLinkForDiagnosticId(id),
+                customTags: DiagnosticCustomTags.Create(
+                    isUnnecessary,
+                    isConfigurable,
+                    enforceOnBuild
+                )
+            );
 #pragma warning restore RS0030 // Do not used banned APIs
 
         public sealed override void Initialize(AnalysisContext context)

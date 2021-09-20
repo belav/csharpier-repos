@@ -34,10 +34,7 @@ namespace System.Data.Odbc
 
         internal OdbcConnectionHandle? ConnectionHandle
         {
-            get
-            {
-                return _connectionHandle;
-            }
+            get { return _connectionHandle; }
             set
             {
                 Debug.Assert(null == _connectionHandle, "reopening a connection?");
@@ -46,30 +43,23 @@ namespace System.Data.Odbc
         }
 
         [AllowNull]
-        [Editor("Microsoft.VSDesigner.Data.Odbc.Design.OdbcConnectionStringEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-                "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+        [Editor(
+            "Microsoft.VSDesigner.Data.Odbc.Design.OdbcConnectionStringEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        )]
         public override string ConnectionString
         {
-            get
-            {
-                return ConnectionString_Get();
-            }
-            set
-            {
-                ConnectionString_Set(value);
-            }
+            get { return ConnectionString_Get(); }
+            set { ConnectionString_Set(value); }
         }
 
         [
-        DefaultValue(ADP.DefaultConnectionTimeout),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            DefaultValue(ADP.DefaultConnectionTimeout),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
         ]
         public new int ConnectionTimeout
         {
-            get
-            {
-                return _connectionTimeout;
-            }
+            get { return _connectionTimeout; }
             set
             {
                 if (value < 0)
@@ -80,9 +70,7 @@ namespace System.Data.Odbc
             }
         }
 
-        [
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),]
         public override string Database
         {
             get
@@ -100,10 +88,7 @@ namespace System.Data.Odbc
             }
         }
 
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),]
         public override string DataSource
         {
             get
@@ -119,53 +104,38 @@ namespace System.Data.Odbc
             }
         }
 
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),]
         public override string ServerVersion
         {
-            get
-            {
-                return InnerConnection.ServerVersion;
-            }
+            get { return InnerConnection.ServerVersion; }
         }
 
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),]
         public override ConnectionState State
         {
-            get
-            {
-                return InnerConnection.State;
-            }
+            get { return InnerConnection.State; }
         }
 
         internal OdbcConnectionPoolGroupProviderInfo ProviderInfo
         {
             get
             {
-                Debug.Assert(null != this.PoolGroup, "PoolGroup must never be null when accessing ProviderInfo");
+                Debug.Assert(
+                    null != this.PoolGroup,
+                    "PoolGroup must never be null when accessing ProviderInfo"
+                );
                 return (OdbcConnectionPoolGroupProviderInfo)this.PoolGroup.ProviderInfo!;
             }
         }
 
         internal ConnectionState InternalState
         {
-            get
-            {
-                return this.State;
-            }
+            get { return this.State; }
         }
 
         internal bool IsOpen
         {
-            get
-            {
-                return (InnerConnection is OdbcConnectionOpen);
-            }
+            get { return (InnerConnection is OdbcConnectionOpen); }
         }
 
         internal OdbcTransaction? LocalTransaction
@@ -179,7 +149,6 @@ namespace System.Data.Odbc
                 }
                 return result;
             }
-
             set
             {
                 _weakTransaction = null;
@@ -191,10 +160,7 @@ namespace System.Data.Odbc
             }
         }
 
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),]
         public string Driver
         {
             get
@@ -203,7 +169,9 @@ namespace System.Data.Odbc
                 {
                     if (ProviderInfo.DriverName == null)
                     {
-                        ProviderInfo.DriverName = GetInfoStringUnhandled(ODBC32.SQL_INFO.DRIVER_NAME)!;
+                        ProviderInfo.DriverName = GetInfoStringUnhandled(
+                            ODBC32.SQL_INFO.DRIVER_NAME
+                        )!;
                     }
                     return ProviderInfo.DriverName;
                 }
@@ -217,13 +185,21 @@ namespace System.Data.Odbc
             {
                 if (ProviderInfo.DriverVersion == null)
                 {
-                    ProviderInfo.DriverVersion = GetInfoStringUnhandled(ODBC32.SQL_INFO.DRIVER_ODBC_VER);
+                    ProviderInfo.DriverVersion = GetInfoStringUnhandled(
+                        ODBC32.SQL_INFO.DRIVER_ODBC_VER
+                    );
                     // protected against null and index out of range. Number cannot be bigger than 99
-                    if (ProviderInfo.DriverVersion != null && ProviderInfo.DriverVersion.Length >= 2)
-                    {
+                    if (
+                        ProviderInfo.DriverVersion != null && ProviderInfo.DriverVersion.Length >= 2
+                    ) {
                         try
-                        {   // mdac 89269: driver may return malformatted string
-                            ProviderInfo.IsV3Driver = (int.Parse(ProviderInfo.DriverVersion.Substring(0, 2), CultureInfo.InvariantCulture) >= 3);
+                        { // mdac 89269: driver may return malformatted string
+                            ProviderInfo.IsV3Driver = (
+                                int.Parse(
+                                    ProviderInfo.DriverVersion.Substring(0, 2),
+                                    CultureInfo.InvariantCulture
+                                ) >= 3
+                            );
                         }
                         catch (System.FormatException e)
                         {
@@ -242,14 +218,8 @@ namespace System.Data.Odbc
 
         public event OdbcInfoMessageEventHandler? InfoMessage
         {
-            add
-            {
-                _infoMessageEventHandler += value;
-            }
-            remove
-            {
-                _infoMessageEventHandler -= value;
-            }
+            add { _infoMessageEventHandler += value; }
+            remove { _infoMessageEventHandler -= value; }
         }
 
         internal char EscapeChar(string method)
@@ -260,7 +230,8 @@ namespace System.Data.Odbc
                 string escapeCharString;
                 escapeCharString = GetInfoStringUnhandled(ODBC32.SQL_INFO.SEARCH_PATTERN_ESCAPE)!;
                 Debug.Assert((escapeCharString.Length <= 1), "Can't handle multichar quotes");
-                ProviderInfo.EscapeChar = (escapeCharString.Length == 1) ? escapeCharString[0] : QuoteChar(method)[0];
+                ProviderInfo.EscapeChar =
+                    (escapeCharString.Length == 1) ? escapeCharString[0] : QuoteChar(method)[0];
             }
             return ProviderInfo.EscapeChar;
         }
@@ -324,7 +295,10 @@ namespace System.Data.Odbc
             {
                 if (!ProviderInfo.NoConnectionDead)
                 {
-                    int isDead = GetConnectAttr(ODBC32.SQL_ATTR.CONNECTION_DEAD, ODBC32.HANDLER.IGNORE);
+                    int isDead = GetConnectAttr(
+                        ODBC32.SQL_ATTR.CONNECTION_DEAD,
+                        ODBC32.HANDLER.IGNORE
+                    );
                     if (ODBC32.SQL_CD_TRUE == isDead)
                     {
                         Close();
@@ -373,8 +347,9 @@ namespace System.Data.Odbc
             }
         }
 
-        private void DisposeMe(bool disposing)
-        { // MDAC 65459
+        private void DisposeMe(
+            bool disposing
+        ) { // MDAC 65459
         }
 
         internal string GetConnectAttrString(ODBC32.SQL_ATTR attribute)
@@ -385,17 +360,29 @@ namespace System.Data.Odbc
             OdbcConnectionHandle? connectionHandle = ConnectionHandle;
             if (null != connectionHandle)
             {
-                ODBC32.RetCode retcode = connectionHandle.GetConnectionAttribute(attribute, buffer, out cbActual);
+                ODBC32.RetCode retcode = connectionHandle.GetConnectionAttribute(
+                    attribute,
+                    buffer,
+                    out cbActual
+                );
                 if (buffer.Length + 2 <= cbActual)
                 {
                     // 2 bytes for unicode null-termination character
                     // retry with cbActual because original buffer was too small
                     buffer = new byte[cbActual + 2];
-                    retcode = connectionHandle.GetConnectionAttribute(attribute, buffer, out cbActual);
+                    retcode = connectionHandle.GetConnectionAttribute(
+                        attribute,
+                        buffer,
+                        out cbActual
+                    );
                 }
-                if ((ODBC32.RetCode.SUCCESS == retcode) || (ODBC32.RetCode.SUCCESS_WITH_INFO == retcode))
-                {
-                    value = (BitConverter.IsLittleEndian ? Encoding.Unicode : Encoding.BigEndianUnicode).GetString(buffer, 0, Math.Min(cbActual, buffer.Length));
+                if (
+                    (ODBC32.RetCode.SUCCESS == retcode)
+                    || (ODBC32.RetCode.SUCCESS_WITH_INFO == retcode)
+                ) {
+                    value = (
+                        BitConverter.IsLittleEndian ? Encoding.Unicode : Encoding.BigEndianUnicode
+                    ).GetString(buffer, 0, Math.Min(cbActual, buffer.Length));
                 }
                 else if (retcode == ODBC32.RetCode.ERROR)
                 {
@@ -418,10 +405,16 @@ namespace System.Data.Odbc
             OdbcConnectionHandle? connectionHandle = ConnectionHandle;
             if (null != connectionHandle)
             {
-                ODBC32.RetCode retcode = connectionHandle.GetConnectionAttribute(attribute, buffer, out cbActual);
+                ODBC32.RetCode retcode = connectionHandle.GetConnectionAttribute(
+                    attribute,
+                    buffer,
+                    out cbActual
+                );
 
-                if ((ODBC32.RetCode.SUCCESS == retcode) || (ODBC32.RetCode.SUCCESS_WITH_INFO == retcode))
-                {
+                if (
+                    (ODBC32.RetCode.SUCCESS == retcode)
+                    || (ODBC32.RetCode.SUCCESS_WITH_INFO == retcode)
+                ) {
                     retval = BitConverter.ToInt32(buffer, 0);
                 }
                 else
@@ -496,9 +489,12 @@ namespace System.Data.Odbc
                     buffer = new byte[cbActual + 2];
                     retcode = connectionHandle.GetInfo2(info, buffer, out cbActual);
                 }
-                if (retcode == ODBC32.RetCode.SUCCESS || retcode == ODBC32.RetCode.SUCCESS_WITH_INFO)
-                {
-                    value = (BitConverter.IsLittleEndian ? Encoding.Unicode : Encoding.BigEndianUnicode).GetString(buffer, 0, Math.Min(cbActual, buffer.Length));
+                if (
+                    retcode == ODBC32.RetCode.SUCCESS || retcode == ODBC32.RetCode.SUCCESS_WITH_INFO
+                ) {
+                    value = (
+                        BitConverter.IsLittleEndian ? Encoding.Unicode : Encoding.BigEndianUnicode
+                    ).GetString(buffer, 0, Math.Min(cbActual, buffer.Length));
                 }
                 else if (handleError)
                 {
@@ -515,31 +511,37 @@ namespace System.Data.Odbc
         // non-throwing HandleError
         internal Exception? HandleErrorNoThrow(OdbcHandle hrHandle, ODBC32.RetCode retcode)
         {
-            Debug.Assert(retcode != ODBC32.RetCode.INVALID_HANDLE, "retcode must never be ODBC32.RetCode.INVALID_HANDLE");
+            Debug.Assert(
+                retcode != ODBC32.RetCode.INVALID_HANDLE,
+                "retcode must never be ODBC32.RetCode.INVALID_HANDLE"
+            );
 
             switch (retcode)
             {
                 case ODBC32.RetCode.SUCCESS:
                     break;
                 case ODBC32.RetCode.SUCCESS_WITH_INFO:
+                {
+                    //Optimize to only create the event objects and obtain error info if
+                    //the user is really interested in retriveing the events...
+                    if (_infoMessageEventHandler != null)
                     {
-                        //Optimize to only create the event objects and obtain error info if
-                        //the user is really interested in retriveing the events...
-                        if (_infoMessageEventHandler != null)
-                        {
-                            OdbcErrorCollection errors = ODBC32.GetDiagErrors(null, hrHandle, retcode);
-                            errors.SetSource(this.Driver);
-                            OnInfoMessage(new OdbcInfoMessageEventArgs(errors));
-                        }
-                        break;
+                        OdbcErrorCollection errors = ODBC32.GetDiagErrors(null, hrHandle, retcode);
+                        errors.SetSource(this.Driver);
+                        OnInfoMessage(new OdbcInfoMessageEventArgs(errors));
                     }
+                    break;
+                }
                 default:
-                    OdbcException e = OdbcException.CreateException(ODBC32.GetDiagErrors(null, hrHandle, retcode), retcode);
+                    OdbcException e = OdbcException.CreateException(
+                        ODBC32.GetDiagErrors(null, hrHandle, retcode),
+                        retcode
+                    );
                     if (e != null)
                     {
                         e.Errors.SetSource(this.Driver);
                     }
-                    ConnectionIsAlive(e);        // this will close and throw if the connection is dead
+                    ConnectionIsAlive(e); // this will close and throw if the connection is dead
                     return e;
             }
             return null;
@@ -566,9 +568,12 @@ namespace System.Data.Odbc
             {
                 InnerConnection.OpenConnection(this, ConnectionFactory);
             }
-            catch (DllNotFoundException e) when (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            catch (DllNotFoundException e)
+                when (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                throw new DllNotFoundException(SR.Odbc_UnixOdbcNotFound + Environment.NewLine + e.Message);
+                throw new DllNotFoundException(
+                    SR.Odbc_UnixOdbcNotFound + Environment.NewLine + e.Message
+                );
             }
 
             // SQLBUDT #276132 - need to manually enlist in some cases, because
@@ -663,25 +668,25 @@ namespace System.Data.Odbc
             switch (sqltype)
             {
                 case ODBC32.SQL_TYPE.NUMERIC:
-                    {
-                        sqlcvt = ODBC32.SQL_CVT.NUMERIC;
-                        break;
-                    }
+                {
+                    sqlcvt = ODBC32.SQL_CVT.NUMERIC;
+                    break;
+                }
                 case ODBC32.SQL_TYPE.WCHAR:
-                    {
-                        sqlcvt = ODBC32.SQL_CVT.WCHAR;
-                        break;
-                    }
+                {
+                    sqlcvt = ODBC32.SQL_CVT.WCHAR;
+                    break;
+                }
                 case ODBC32.SQL_TYPE.WVARCHAR:
-                    {
-                        sqlcvt = ODBC32.SQL_CVT.WVARCHAR;
-                        break;
-                    }
+                {
+                    sqlcvt = ODBC32.SQL_CVT.WVARCHAR;
+                    break;
+                }
                 case ODBC32.SQL_TYPE.WLONGVARCHAR:
-                    {
-                        sqlcvt = ODBC32.SQL_CVT.WLONGVARCHAR;
-                        break;
-                    }
+                {
+                    sqlcvt = ODBC32.SQL_CVT.WLONGVARCHAR;
+                    break;
+                }
                 default:
                     // other types are irrelevant at this time
                     return;
@@ -697,15 +702,15 @@ namespace System.Data.Odbc
             switch (sqltype)
             {
                 case ODBC32.SQL_TYPE.NUMERIC:
-                    {
-                        sqlcvt = ODBC32.SQL_CVT.NUMERIC;
-                        break;
-                    }
+                {
+                    sqlcvt = ODBC32.SQL_CVT.NUMERIC;
+                    break;
+                }
                 case ODBC32.SQL_TYPE.DECIMAL:
-                    {
-                        sqlcvt = ODBC32.SQL_CVT.DECIMAL;
-                        break;
-                    }
+                {
+                    sqlcvt = ODBC32.SQL_CVT.DECIMAL;
+                    break;
+                }
                 default:
                     // other types are irrelevant at this time
                     return;
@@ -788,7 +793,9 @@ namespace System.Data.Odbc
             }
             else
             {
-                Debug.Fail("GetFunctions called and ConnectionHandle is null (connection is disposed?)");
+                Debug.Fail(
+                    "GetFunctions called and ConnectionHandle is null (connection is disposed?)"
+                );
                 throw ODBC.ConnectionClosed();
             }
 
@@ -815,29 +822,29 @@ namespace System.Data.Odbc
             switch (sqltype)
             {
                 case ODBC32.SQL_TYPE.NUMERIC:
-                    {
-                        sqlconvert = ODBC32.SQL_CONVERT.NUMERIC;
-                        sqlcvt = ODBC32.SQL_CVT.NUMERIC;
-                        break;
-                    }
+                {
+                    sqlconvert = ODBC32.SQL_CONVERT.NUMERIC;
+                    sqlcvt = ODBC32.SQL_CVT.NUMERIC;
+                    break;
+                }
                 case ODBC32.SQL_TYPE.WCHAR:
-                    {
-                        sqlconvert = ODBC32.SQL_CONVERT.CHAR;
-                        sqlcvt = ODBC32.SQL_CVT.WCHAR;
-                        break;
-                    }
+                {
+                    sqlconvert = ODBC32.SQL_CONVERT.CHAR;
+                    sqlcvt = ODBC32.SQL_CVT.WCHAR;
+                    break;
+                }
                 case ODBC32.SQL_TYPE.WVARCHAR:
-                    {
-                        sqlconvert = ODBC32.SQL_CONVERT.VARCHAR;
-                        sqlcvt = ODBC32.SQL_CVT.WVARCHAR;
-                        break;
-                    }
+                {
+                    sqlconvert = ODBC32.SQL_CONVERT.VARCHAR;
+                    sqlcvt = ODBC32.SQL_CVT.WVARCHAR;
+                    break;
+                }
                 case ODBC32.SQL_TYPE.WLONGVARCHAR:
-                    {
-                        sqlconvert = ODBC32.SQL_CONVERT.LONGVARCHAR;
-                        sqlcvt = ODBC32.SQL_CVT.WLONGVARCHAR;
-                        break;
-                    }
+                {
+                    sqlconvert = ODBC32.SQL_CONVERT.LONGVARCHAR;
+                    sqlcvt = ODBC32.SQL_CVT.WLONGVARCHAR;
+                    break;
+                }
                 default:
                     Debug.Fail("Testing that sqltype is currently not supported");
                     return false;
@@ -866,15 +873,15 @@ namespace System.Data.Odbc
             switch (sqltype)
             {
                 case ODBC32.SQL_TYPE.NUMERIC:
-                    {
-                        sqlcvt = ODBC32.SQL_CVT.NUMERIC;
-                        break;
-                    }
+                {
+                    sqlcvt = ODBC32.SQL_CVT.NUMERIC;
+                    break;
+                }
                 case ODBC32.SQL_TYPE.DECIMAL:
-                    {
-                        sqlcvt = ODBC32.SQL_CVT.DECIMAL;
-                        break;
-                    }
+                {
+                    sqlcvt = ODBC32.SQL_CVT.DECIMAL;
+                    break;
+                }
                 default:
                     Debug.Fail("Testing that sqltype is currently not supported");
                     return false;
@@ -921,7 +928,8 @@ namespace System.Data.Odbc
                     throw ODBC.NotSupportedIsolationLevel(isolevel);
                 default:
                     throw ADP.InvalidIsolationLevel(isolevel);
-            };
+            }
+            ;
 
             //Start the transaction
             OdbcConnectionHandle connectionHandle = ConnectionHandle!;
@@ -952,7 +960,11 @@ namespace System.Data.Odbc
 
             //Set the database
             OdbcConnectionHandle connectionHandle = ConnectionHandle!;
-            ODBC32.RetCode retcode = connectionHandle.SetConnectionAttribute3(ODBC32.SQL_ATTR.CURRENT_CATALOG, value, checked((int)value.Length * 2));
+            ODBC32.RetCode retcode = connectionHandle.SetConnectionAttribute3(
+                ODBC32.SQL_ATTR.CURRENT_CATALOG,
+                value,
+                checked((int)value.Length * 2)
+            );
 
             if (retcode != ODBC32.RetCode.SUCCESS)
             {

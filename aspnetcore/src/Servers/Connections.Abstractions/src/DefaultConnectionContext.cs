@@ -16,24 +16,23 @@ namespace Microsoft.AspNetCore.Connections
     /// <summary>
     /// The default implementation for the <see cref="ConnectionContext"/>.
     /// </summary>
-    public class DefaultConnectionContext : ConnectionContext,
-                                            IConnectionIdFeature,
-                                            IConnectionItemsFeature,
-                                            IConnectionTransportFeature,
-                                            IConnectionUserFeature,
-                                            IConnectionLifetimeFeature,
-                                            IConnectionEndPointFeature
+    public class DefaultConnectionContext
+        : ConnectionContext,
+          IConnectionIdFeature,
+          IConnectionItemsFeature,
+          IConnectionTransportFeature,
+          IConnectionUserFeature,
+          IConnectionLifetimeFeature,
+          IConnectionEndPointFeature
     {
-        private CancellationTokenSource _connectionClosedTokenSource = new CancellationTokenSource();
+        private CancellationTokenSource _connectionClosedTokenSource =
+            new CancellationTokenSource();
 
         /// <summary>
         /// Creates the <see cref="DefaultConnectionContext"/> without Pipes to avoid upfront allocations.
         /// The caller is expected to set the <see cref="Transport"/> and <see cref="Application"/> pipes manually.
         /// </summary>
-        public DefaultConnectionContext() :
-            this(Guid.NewGuid().ToString())
-        {
-        }
+        public DefaultConnectionContext() : this(Guid.NewGuid().ToString()) { }
 
         /// <summary>
         /// Creates the <see cref="DefaultConnectionContext"/> without Pipes to avoid upfront allocations.
@@ -55,15 +54,17 @@ namespace Microsoft.AspNetCore.Connections
             ConnectionClosed = _connectionClosedTokenSource.Token;
         }
 
-
         /// <summary>
         /// Creates the DefaultConnectionContext with the given <paramref name="transport"/> and <paramref name="application"/> pipes.
         /// </summary>
         /// <param name="id">The <see cref="ConnectionId"/>.</param>
         /// <param name="transport">The <see cref="Transport"/>.</param>
         /// <param name="application">The <see cref="Application"/>.</param>
-        public DefaultConnectionContext(string id, IDuplexPipe transport, IDuplexPipe application)
-            : this(id)
+        public DefaultConnectionContext(
+            string id,
+            IDuplexPipe transport,
+            IDuplexPipe application
+        ) : this(id)
         {
             Transport = transport;
             Application = application;
@@ -99,7 +100,10 @@ namespace Microsoft.AspNetCore.Connections
         /// <inheritdoc />
         public override void Abort(ConnectionAbortedException abortReason)
         {
-            ThreadPool.UnsafeQueueUserWorkItem(cts => ((CancellationTokenSource)cts!).Cancel(), _connectionClosedTokenSource);
+            ThreadPool.UnsafeQueueUserWorkItem(
+                cts => ((CancellationTokenSource)cts!).Cancel(),
+                _connectionClosedTokenSource
+            );
         }
 
         /// <inheritdoc />

@@ -34,44 +34,80 @@ namespace Microsoft.EntityFrameworkCore.Design
         public static IServiceCollection AddEntityFrameworkDesignTimeServices(
             this IServiceCollection services,
             IOperationReporter? reporter = null,
-            Func<IServiceProvider>? applicationServiceProviderAccessor = null)
-        {
+            Func<IServiceProvider>? applicationServiceProviderAccessor = null
+        ) {
             if (reporter == null)
             {
                 reporter = new OperationReporter(handler: null);
             }
 
-            new EntityFrameworkRelationalDesignServicesBuilder(services)
-                .TryAddProviderSpecificServices(services => services
-                    .TryAddSingleton<CSharpMigrationOperationGeneratorDependencies, CSharpMigrationOperationGeneratorDependencies>()
-                    .TryAddSingleton<CSharpMigrationsGeneratorDependencies, CSharpMigrationsGeneratorDependencies>()
-                    .TryAddSingleton<CSharpSnapshotGeneratorDependencies, CSharpSnapshotGeneratorDependencies>()
-                    .TryAddSingleton<ICandidateNamingService, CandidateNamingService>()
-                    .TryAddSingleton<ICSharpDbContextGenerator, CSharpDbContextGenerator>()
-                    .TryAddSingleton<ICSharpEntityTypeGenerator, CSharpEntityTypeGenerator>()
-                    .TryAddSingleton<ICSharpHelper, CSharpHelper>()
-                    .TryAddSingleton<ICSharpMigrationOperationGenerator, CSharpMigrationOperationGenerator>()
-                    .TryAddSingleton<ICSharpSnapshotGenerator, CSharpSnapshotGenerator>()
-                    .TryAddSingleton<ICSharpUtilities, CSharpUtilities>()
-                    .TryAddSingleton(reporter)
-                    .TryAddSingleton<IMigrationsCodeGenerator, CSharpMigrationsGenerator>()
-                    .TryAddSingleton<IMigrationsCodeGeneratorSelector, MigrationsCodeGeneratorSelector>()
-                    .TryAddSingleton<IModelCodeGenerator, CSharpModelGenerator>()
-                    .TryAddSingleton<IModelCodeGeneratorSelector, ModelCodeGeneratorSelector>()
-                    .TryAddSingleton<INamedConnectionStringResolver>(
-                        new DesignTimeConnectionStringResolver(applicationServiceProviderAccessor))
-                    .TryAddSingleton<IPluralizer, HumanizerPluralizer>()
-                    .TryAddSingleton<IReverseEngineerScaffolder, ReverseEngineerScaffolder>()
-                    .TryAddSingleton<IScaffoldingModelFactory, RelationalScaffoldingModelFactory>()
-                    .TryAddSingleton<IScaffoldingTypeMapper, ScaffoldingTypeMapper>()
-                    .TryAddSingleton<MigrationsCodeGeneratorDependencies, MigrationsCodeGeneratorDependencies>()
-                    .TryAddSingleton<ModelCodeGeneratorDependencies, ModelCodeGeneratorDependencies>()
-                    .TryAddScoped<MigrationsScaffolderDependencies, MigrationsScaffolderDependencies>()
-                    .TryAddScoped<IMigrationsScaffolder, MigrationsScaffolder>()
-                    .TryAddScoped<ISnapshotModelProcessor, SnapshotModelProcessor>());
+            new EntityFrameworkRelationalDesignServicesBuilder(
+                services
+            ).TryAddProviderSpecificServices(
+                services =>
+                    services.TryAddSingleton<
+                        CSharpMigrationOperationGeneratorDependencies,
+                        CSharpMigrationOperationGeneratorDependencies
+                    >()
+                        .TryAddSingleton<
+                            CSharpMigrationsGeneratorDependencies,
+                            CSharpMigrationsGeneratorDependencies
+                        >()
+                        .TryAddSingleton<
+                            CSharpSnapshotGeneratorDependencies,
+                            CSharpSnapshotGeneratorDependencies
+                        >()
+                        .TryAddSingleton<ICandidateNamingService, CandidateNamingService>()
+                        .TryAddSingleton<ICSharpDbContextGenerator, CSharpDbContextGenerator>()
+                        .TryAddSingleton<ICSharpEntityTypeGenerator, CSharpEntityTypeGenerator>()
+                        .TryAddSingleton<ICSharpHelper, CSharpHelper>()
+                        .TryAddSingleton<
+                            ICSharpMigrationOperationGenerator,
+                            CSharpMigrationOperationGenerator
+                        >()
+                        .TryAddSingleton<ICSharpSnapshotGenerator, CSharpSnapshotGenerator>()
+                        .TryAddSingleton<ICSharpUtilities, CSharpUtilities>()
+                        .TryAddSingleton(reporter)
+                        .TryAddSingleton<IMigrationsCodeGenerator, CSharpMigrationsGenerator>()
+                        .TryAddSingleton<
+                            IMigrationsCodeGeneratorSelector,
+                            MigrationsCodeGeneratorSelector
+                        >()
+                        .TryAddSingleton<IModelCodeGenerator, CSharpModelGenerator>()
+                        .TryAddSingleton<IModelCodeGeneratorSelector, ModelCodeGeneratorSelector>()
+                        .TryAddSingleton<INamedConnectionStringResolver>(
+                            new DesignTimeConnectionStringResolver(
+                                applicationServiceProviderAccessor
+                            )
+                        )
+                        .TryAddSingleton<IPluralizer, HumanizerPluralizer>()
+                        .TryAddSingleton<IReverseEngineerScaffolder, ReverseEngineerScaffolder>()
+                        .TryAddSingleton<
+                            IScaffoldingModelFactory,
+                            RelationalScaffoldingModelFactory
+                        >()
+                        .TryAddSingleton<IScaffoldingTypeMapper, ScaffoldingTypeMapper>()
+                        .TryAddSingleton<
+                            MigrationsCodeGeneratorDependencies,
+                            MigrationsCodeGeneratorDependencies
+                        >()
+                        .TryAddSingleton<
+                            ModelCodeGeneratorDependencies,
+                            ModelCodeGeneratorDependencies
+                        >()
+                        .TryAddScoped<
+                            MigrationsScaffolderDependencies,
+                            MigrationsScaffolderDependencies
+                        >()
+                        .TryAddScoped<IMigrationsScaffolder, MigrationsScaffolder>()
+                        .TryAddScoped<ISnapshotModelProcessor, SnapshotModelProcessor>()
+            );
 
-            return services
-                    .AddLogging(b => b.SetMinimumLevel(LogLevel.Debug).AddProvider(new OperationLoggerProvider(reporter)));
+            return services.AddLogging(
+                b =>
+                    b.SetMinimumLevel(LogLevel.Debug)
+                        .AddProvider(new OperationLoggerProvider(reporter))
+            );
         }
 
         /// <summary>
@@ -82,10 +118,11 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <returns> The <paramref name="services" />. This enables chaining additional method calls. </returns>
         public static IServiceCollection AddDbContextDesignTimeServices(
             this IServiceCollection services,
-            DbContext context)
-        {
-            new EntityFrameworkRelationalServicesBuilder(services)
-                .TryAdd(context.GetService<IDatabaseProvider>())
+            DbContext context
+        ) {
+            new EntityFrameworkRelationalServicesBuilder(services).TryAdd(
+                    context.GetService<IDatabaseProvider>()
+                )
                 .TryAdd(_ => context.GetService<IMigrationsIdGenerator>())
                 .TryAdd(_ => context.GetService<IRelationalTypeMappingSource>())
                 .TryAdd(_ => context.GetService<IModelRuntimeInitializer>())

@@ -52,12 +52,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations
         {
             Check.DebugAssert(
                 Columns.Length == Values.GetLength(1),
-                $"The number of values doesn't match the number of keys (${Columns.Length})");
+                $"The number of values doesn't match the number of keys (${Columns.Length})"
+            );
 
             var table = model?.GetRelationalModel().FindTable(Table, Schema);
-            var properties = table != null
-                ? MigrationsModelDiffer.GetMappedProperties(table, Columns)
-                : null;
+            var properties =
+                table != null ? MigrationsModelDiffer.GetMappedProperties(table, Columns) : null;
 
             for (var i = 0; i < Values.GetLength(0); i++)
             {
@@ -65,12 +65,25 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations
                 for (var j = 0; j < Columns.Length; j++)
                 {
                     modifications[j] = new ColumnModification(
-                        Columns[j], originalValue: null, value: Values[i, j], property: properties?[j],
-                        columnType: ColumnTypes?[j], isRead: false, isWrite: true, isKey: true, isCondition: false,
-                        sensitiveLoggingEnabled: false);
+                        Columns[j],
+                        originalValue: null,
+                        value: Values[i, j],
+                        property: properties?[j],
+                        columnType: ColumnTypes?[j],
+                        isRead: false,
+                        isWrite: true,
+                        isKey: true,
+                        isCondition: false,
+                        sensitiveLoggingEnabled: false
+                    );
                 }
 
-                yield return new ModificationCommand(Table, Schema, modifications, sensitiveLoggingEnabled: false);
+                yield return new ModificationCommand(
+                    Table,
+                    Schema,
+                    modifications,
+                    sensitiveLoggingEnabled: false
+                );
             }
         }
     }

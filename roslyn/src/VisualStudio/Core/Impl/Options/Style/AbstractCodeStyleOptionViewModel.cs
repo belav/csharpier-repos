@@ -52,8 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             AbstractOptionPreviewViewModel info,
             string groupName,
             List<CodeStylePreference> preferences = null,
-            List<NotificationOptionViewModel> notificationPreferences = null)
-        {
+            List<NotificationOptionViewModel> notificationPreferences = null
+        ) {
             Info = info;
             Option = option;
             Description = description;
@@ -68,8 +68,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             return new List<NotificationOptionViewModel>
             {
                 new NotificationOptionViewModel(NotificationOption.Silent, KnownMonikers.None),
-                new NotificationOptionViewModel(NotificationOption.Suggestion, KnownMonikers.StatusInformation),
-                new NotificationOptionViewModel(NotificationOption.Warning, KnownMonikers.StatusWarning),
+                new NotificationOptionViewModel(
+                    NotificationOption.Suggestion,
+                    KnownMonikers.StatusInformation
+                ),
+                new NotificationOptionViewModel(
+                    NotificationOption.Warning,
+                    KnownMonikers.StatusWarning
+                ),
                 new NotificationOptionViewModel(NotificationOption.Error, KnownMonikers.StatusError)
             };
         }

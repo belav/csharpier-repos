@@ -17,8 +17,8 @@ namespace Microsoft.AspNetCore.Hosting.FunctionalTests
     {
         public WebHostBuilderTests(ITestOutputHelper output) : base(output) { }
 
-        public static TestMatrix TestVariants => TestMatrix.ForServers(ServerType.Kestrel)
-                .WithTfms(Tfm.Default);
+        public static TestMatrix TestVariants =>
+            TestMatrix.ForServers(ServerType.Kestrel).WithTfms(Tfm.Default);
 
         [ConditionalTheory]
         [MemberData(nameof(TestVariants))]
@@ -26,11 +26,18 @@ namespace Microsoft.AspNetCore.Hosting.FunctionalTests
         {
             using (StartLog(out var loggerFactory))
             {
-                var logger = loggerFactory.CreateLogger(nameof(InjectedStartup_DefaultApplicationNameIsEntryAssembly));
+                var logger = loggerFactory.CreateLogger(
+                    nameof(InjectedStartup_DefaultApplicationNameIsEntryAssembly)
+                );
 
                 // https://github.com/dotnet/aspnetcore/issues/8247
 #pragma warning disable 0618
-                var applicationPath = Path.Combine(TestPathUtilities.GetSolutionRootDirectory("Hosting"), "test", "testassets", "IStartupInjectionAssemblyName");
+                var applicationPath = Path.Combine(
+                    TestPathUtilities.GetSolutionRootDirectory("Hosting"),
+                    "test",
+                    "testassets",
+                    "IStartupInjectionAssemblyName"
+                );
 #pragma warning restore 0618
 
                 var deploymentParameters = new DeploymentParameters(variant)
@@ -41,7 +48,9 @@ namespace Microsoft.AspNetCore.Hosting.FunctionalTests
 
                 using (var deployer = new SelfHostDeployer(deploymentParameters, loggerFactory))
                 {
-                    var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                    var tcs = new TaskCompletionSource(
+                        TaskCreationOptions.RunContinuationsAsynchronously
+                    );
                     var output = string.Empty;
 
                     deployer.ProcessOutputListener = (data) =>
@@ -61,7 +70,10 @@ namespace Microsoft.AspNetCore.Hosting.FunctionalTests
                     }
                     catch (TimeoutException ex)
                     {
-                        throw new InvalidOperationException("Timeout while waiting for output from host process.", ex);
+                        throw new InvalidOperationException(
+                            "Timeout while waiting for output from host process.",
+                            ex
+                        );
                     }
 
                     output = output.Trim('\n');

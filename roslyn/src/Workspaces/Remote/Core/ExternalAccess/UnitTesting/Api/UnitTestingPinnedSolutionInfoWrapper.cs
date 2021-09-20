@@ -13,10 +13,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         [DataMember(Order = 0)]
         internal readonly PinnedSolutionInfo UnderlyingObject;
 
-        public UnitTestingPinnedSolutionInfoWrapper(PinnedSolutionInfo underlyingObject)
-            => UnderlyingObject = underlyingObject;
+        public UnitTestingPinnedSolutionInfoWrapper(PinnedSolutionInfo underlyingObject) =>
+            UnderlyingObject = underlyingObject;
 
-        public static implicit operator UnitTestingPinnedSolutionInfoWrapper(PinnedSolutionInfo info)
-            => new(info);
+        public static implicit operator UnitTestingPinnedSolutionInfoWrapper(
+            PinnedSolutionInfo info
+        ) => new(info);
     }
 }

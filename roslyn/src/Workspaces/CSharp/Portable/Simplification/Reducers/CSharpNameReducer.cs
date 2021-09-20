@@ -18,29 +18,39 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 {
     internal partial class CSharpNameReducer : AbstractCSharpReducer
     {
-        private static readonly ObjectPool<IReductionRewriter> s_pool = new(
-            () => new Rewriter(s_pool));
+        private static readonly ObjectPool<IReductionRewriter> s_pool =
+            new(() => new Rewriter(s_pool));
 
-        public CSharpNameReducer() : base(s_pool)
-        {
-        }
+        public CSharpNameReducer() : base(s_pool) { }
 
-        private static readonly Func<SyntaxNode, SemanticModel, OptionSet, CancellationToken, SyntaxNode> s_simplifyName = SimplifyName;
+        private static readonly Func<
+            SyntaxNode,
+            SemanticModel,
+            OptionSet,
+            CancellationToken,
+            SyntaxNode
+        > s_simplifyName = SimplifyName;
 
         private static SyntaxNode SimplifyName(
             SyntaxNode node,
             SemanticModel semanticModel,
             OptionSet optionSet,
-            CancellationToken cancellationToken)
-        {
+            CancellationToken cancellationToken
+        ) {
             SyntaxNode replacementNode;
 
             if (node.IsKind(SyntaxKind.QualifiedCref, out QualifiedCrefSyntax crefSyntax))
             {
-                if (!QualifiedCrefSimplifier.Instance.TrySimplify(
-                        crefSyntax, semanticModel, optionSet,
-                        out var crefReplacement, out _, cancellationToken))
-                {
+                if (
+                    !QualifiedCrefSimplifier.Instance.TrySimplify(
+                        crefSyntax,
+                        semanticModel,
+                        optionSet,
+                        out var crefReplacement,
+                        out _,
+                        cancellationToken
+                    )
+                ) {
                     return node;
                 }
 
@@ -49,15 +59,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             else
             {
                 var expressionSyntax = (ExpressionSyntax)node;
-                if (!ExpressionSimplifier.Instance.TrySimplify(expressionSyntax, semanticModel, optionSet, out var expressionReplacement, out _, cancellationToken))
-                {
+                if (
+                    !ExpressionSimplifier.Instance.TrySimplify(
+                        expressionSyntax,
+                        semanticModel,
+                        optionSet,
+                        out var expressionReplacement,
+                        out _,
+                        cancellationToken
+                    )
+                ) {
                     return node;
                 }
 
                 replacementNode = expressionReplacement;
             }
 
-            node = node.CopyAnnotationsTo(replacementNode).WithAdditionalAnnotations(Formatter.Annotation);
+            node = node.CopyAnnotationsTo(replacementNode)
+                .WithAdditionalAnnotations(Formatter.Annotation);
             return node.WithoutAnnotations(Simplifier.Annotation);
         }
     }

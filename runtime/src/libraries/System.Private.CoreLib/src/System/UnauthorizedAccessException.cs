@@ -19,29 +19,29 @@ namespace System
     // The UnauthorizedAccessException is thrown when access errors
     // occur from IO or other OS methods.
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class UnauthorizedAccessException : SystemException
     {
-        public UnauthorizedAccessException()
-            : base(SR.Arg_UnauthorizedAccessException)
+        public UnauthorizedAccessException() : base(SR.Arg_UnauthorizedAccessException)
         {
             HResult = HResults.COR_E_UNAUTHORIZEDACCESS;
         }
 
-        public UnauthorizedAccessException(string? message)
-            : base(message)
+        public UnauthorizedAccessException(string? message) : base(message)
         {
             HResult = HResults.COR_E_UNAUTHORIZEDACCESS;
         }
 
-        public UnauthorizedAccessException(string? message, Exception? inner)
-            : base(message, inner)
+        public UnauthorizedAccessException(string? message, Exception? inner) : base(message, inner)
         {
             HResult = HResults.COR_E_UNAUTHORIZEDACCESS;
         }
 
-        protected UnauthorizedAccessException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected UnauthorizedAccessException(
+            SerializationInfo info,
+            StreamingContext context
+        ) : base(info, context) { }
     }
 }

@@ -15,7 +15,8 @@ namespace BasicWebSite.Controllers
         static JsonResultWithNewtonsoftJsonController()
         {
             _customSerializerSettings = JsonSerializerSettingsProvider.CreateSerializerSettings();
-            _customSerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            _customSerializerSettings.ContractResolver =
+                new CamelCasePropertyNamesContractResolver();
         }
 
         public JsonResult Plain()

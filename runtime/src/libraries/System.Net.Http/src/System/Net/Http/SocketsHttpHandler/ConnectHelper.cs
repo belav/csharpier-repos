@@ -22,31 +22,76 @@ namespace System.Net.Http
         /// </summary>
         internal sealed class CertificateCallbackMapper
         {
-            public readonly Func<HttpRequestMessage, X509Certificate2?, X509Chain?, SslPolicyErrors, bool> FromHttpClientHandler;
+            public readonly Func<
+                HttpRequestMessage,
+                X509Certificate2?,
+                X509Chain?,
+                SslPolicyErrors,
+                bool
+            > FromHttpClientHandler;
             public readonly RemoteCertificateValidationCallback ForSocketsHttpHandler;
 
-            public CertificateCallbackMapper(Func<HttpRequestMessage, X509Certificate2?, X509Chain?, SslPolicyErrors, bool> fromHttpClientHandler)
-            {
+            public CertificateCallbackMapper(
+                Func<
+                    HttpRequestMessage,
+                    X509Certificate2?,
+                    X509Chain?,
+                    SslPolicyErrors,
+                    bool
+                > fromHttpClientHandler
+            ) {
                 FromHttpClientHandler = fromHttpClientHandler;
-                ForSocketsHttpHandler = (object sender, X509Certificate? certificate, X509Chain? chain, SslPolicyErrors sslPolicyErrors) =>
-                    FromHttpClientHandler((HttpRequestMessage)sender, certificate as X509Certificate2, chain, sslPolicyErrors);
+                ForSocketsHttpHandler = (
+                    object sender,
+                    X509Certificate? certificate,
+                    X509Chain? chain,
+                    SslPolicyErrors sslPolicyErrors
+                ) =>
+                    FromHttpClientHandler(
+                        (HttpRequestMessage)sender,
+                        certificate as X509Certificate2,
+                        chain,
+                        sslPolicyErrors
+                    );
             }
         }
 
-        public static ValueTask<SslStream> EstablishSslConnectionAsync(SslClientAuthenticationOptions sslOptions, HttpRequestMessage request, bool async, Stream stream, CancellationToken cancellationToken)
-        {
+        public static ValueTask<SslStream> EstablishSslConnectionAsync(
+            SslClientAuthenticationOptions sslOptions,
+            HttpRequestMessage request,
+            bool async,
+            Stream stream,
+            CancellationToken cancellationToken
+        ) {
             // If there's a cert validation callback, and if it came from HttpClientHandler,
             // wrap the original delegate in order to change the sender to be the request message (expected by HttpClientHandler's delegate).
-            RemoteCertificateValidationCallback? callback = sslOptions.RemoteCertificateValidationCallback;
+            RemoteCertificateValidationCallback? callback =
+                sslOptions.RemoteCertificateValidationCallback;
             if (callback != null && callback.Target is CertificateCallbackMapper mapper)
             {
                 sslOptions = sslOptions.ShallowClone(); // Clone as we're about to mutate it and don't want to affect the cached copy
-                Func<HttpRequestMessage, X509Certificate2?, X509Chain?, SslPolicyErrors, bool> localFromHttpClientHandler = mapper.FromHttpClientHandler;
+                Func<
+                    HttpRequestMessage,
+                    X509Certificate2?,
+                    X509Chain?,
+                    SslPolicyErrors,
+                    bool
+                > localFromHttpClientHandler = mapper.FromHttpClientHandler;
                 HttpRequestMessage localRequest = request;
-                sslOptions.RemoteCertificateValidationCallback = (object sender, X509Certificate? certificate, X509Chain? chain, SslPolicyErrors sslPolicyErrors) =>
+                sslOptions.RemoteCertificateValidationCallback = (
+                    object sender,
+                    X509Certificate? certificate,
+                    X509Chain? chain,
+                    SslPolicyErrors sslPolicyErrors
+                ) =>
                 {
                     Debug.Assert(localRequest != null);
-                    bool result = localFromHttpClientHandler(localRequest, certificate as X509Certificate2, chain, sslPolicyErrors);
+                    bool result = localFromHttpClientHandler(
+                        localRequest,
+                        certificate as X509Certificate2,
+                        chain,
+                        sslPolicyErrors
+                    );
                     localRequest = null!; // ensure the SslOptions and this callback don't keep the first HttpRequestMessage alive indefinitely
                     return result;
                 };
@@ -56,20 +101,26 @@ namespace System.Net.Http
             return EstablishSslConnectionAsyncCore(async, stream, sslOptions, cancellationToken);
         }
 
-        private static async ValueTask<SslStream> EstablishSslConnectionAsyncCore(bool async, Stream stream, SslClientAuthenticationOptions sslOptions, CancellationToken cancellationToken)
-        {
+        private static async ValueTask<SslStream> EstablishSslConnectionAsyncCore(
+            bool async,
+            Stream stream,
+            SslClientAuthenticationOptions sslOptions,
+            CancellationToken cancellationToken
+        ) {
             SslStream sslStream = new SslStream(stream);
 
             try
             {
                 if (async)
                 {
-                    await sslStream.AuthenticateAsClientAsync(sslOptions, cancellationToken).ConfigureAwait(false);
+                    await sslStream.AuthenticateAsClientAsync(sslOptions, cancellationToken)
+                        .ConfigureAwait(false);
                 }
                 else
                 {
-                    using (cancellationToken.UnsafeRegister(static s => ((Stream)s!).Dispose(), stream))
-                    {
+                    using (
+                        cancellationToken.UnsafeRegister(static s => ((Stream)s!).Dispose(), stream)
+                    ) {
                         sslStream.AuthenticateAsClient(sslOptions);
                     }
                 }
@@ -105,9 +156,17 @@ namespace System.Net.Http
         [SupportedOSPlatform("windows")]
         [SupportedOSPlatform("linux")]
         [SupportedOSPlatform("macos")]
-        public static async ValueTask<QuicConnection> ConnectQuicAsync(QuicImplementationProvider quicImplementationProvider, DnsEndPoint endPoint, SslClientAuthenticationOptions? clientAuthenticationOptions, CancellationToken cancellationToken)
-        {
-            QuicConnection con = new QuicConnection(quicImplementationProvider, endPoint, clientAuthenticationOptions);
+        public static async ValueTask<QuicConnection> ConnectQuicAsync(
+            QuicImplementationProvider quicImplementationProvider,
+            DnsEndPoint endPoint,
+            SslClientAuthenticationOptions? clientAuthenticationOptions,
+            CancellationToken cancellationToken
+        ) {
+            QuicConnection con = new QuicConnection(
+                quicImplementationProvider,
+                endPoint,
+                clientAuthenticationOptions
+            );
             try
             {
                 await con.ConnectAsync(cancellationToken).ConfigureAwait(false);
@@ -120,11 +179,22 @@ namespace System.Net.Http
             }
         }
 
-        internal static Exception CreateWrappedException(Exception error, string host, int port, CancellationToken cancellationToken)
-        {
-            return CancellationHelper.ShouldWrapInOperationCanceledException(error, cancellationToken) ?
-                CancellationHelper.CreateOperationCanceledException(error, cancellationToken) :
-                new HttpRequestException($"{error.Message} ({host}:{port})", error, RequestRetryType.RetryOnNextProxy);
+        internal static Exception CreateWrappedException(
+            Exception error,
+            string host,
+            int port,
+            CancellationToken cancellationToken
+        ) {
+            return CancellationHelper.ShouldWrapInOperationCanceledException(
+                error,
+                cancellationToken
+            )
+              ? CancellationHelper.CreateOperationCanceledException(error, cancellationToken)
+              : new HttpRequestException(
+                    $"{error.Message} ({host}:{port})",
+                    error,
+                    RequestRetryType.RetryOnNextProxy
+                );
         }
     }
 }

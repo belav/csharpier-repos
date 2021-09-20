@@ -21,20 +21,39 @@ namespace System.IO.Pipes
         private int _outBufferSize;
         private HandleInheritability _inheritability;
 
-        private void Create(string pipeName, PipeDirection direction, int maxNumberOfServerInstances,
-                PipeTransmissionMode transmissionMode, PipeOptions options, int inBufferSize, int outBufferSize,
-                HandleInheritability inheritability)
-        {
+        private void Create(
+            string pipeName,
+            PipeDirection direction,
+            int maxNumberOfServerInstances,
+            PipeTransmissionMode transmissionMode,
+            PipeOptions options,
+            int inBufferSize,
+            int outBufferSize,
+            HandleInheritability inheritability
+        ) {
             Debug.Assert(pipeName != null && pipeName.Length != 0, "fullPipeName is null or empty");
-            Debug.Assert(direction >= PipeDirection.In && direction <= PipeDirection.InOut, "invalid pipe direction");
+            Debug.Assert(
+                direction >= PipeDirection.In && direction <= PipeDirection.InOut,
+                "invalid pipe direction"
+            );
             Debug.Assert(inBufferSize >= 0, "inBufferSize is negative");
             Debug.Assert(outBufferSize >= 0, "outBufferSize is negative");
-            Debug.Assert((maxNumberOfServerInstances >= 1) || (maxNumberOfServerInstances == MaxAllowedServerInstances), "maxNumberOfServerInstances is invalid");
-            Debug.Assert(transmissionMode >= PipeTransmissionMode.Byte && transmissionMode <= PipeTransmissionMode.Message, "transmissionMode is out of range");
+            Debug.Assert(
+                (maxNumberOfServerInstances >= 1)
+                    || (maxNumberOfServerInstances == MaxAllowedServerInstances),
+                "maxNumberOfServerInstances is invalid"
+            );
+            Debug.Assert(
+                transmissionMode >= PipeTransmissionMode.Byte
+                    && transmissionMode <= PipeTransmissionMode.Message,
+                "transmissionMode is out of range"
+            );
 
             if (transmissionMode == PipeTransmissionMode.Message)
             {
-                throw new PlatformNotSupportedException(SR.PlatformNotSupported_MessageTransmissionMode);
+                throw new PlatformNotSupportedException(
+                    SR.PlatformNotSupported_MessageTransmissionMode
+                );
             }
 
             // We don't have a good way to enforce maxNumberOfServerInstances across processes; we only factor it in
@@ -42,7 +61,10 @@ namespace System.IO.Pipes
             // in that the second process to come along and create a stream will find the pipe already in existence and will fail.
             _instance = SharedServer.Get(
                 GetPipePath(".", pipeName),
-                (maxNumberOfServerInstances == MaxAllowedServerInstances) ? int.MaxValue : maxNumberOfServerInstances);
+                (maxNumberOfServerInstances == MaxAllowedServerInstances)
+                  ? int.MaxValue
+                  : maxNumberOfServerInstances
+            );
 
             _direction = direction;
             _options = options;
@@ -73,12 +95,14 @@ namespace System.IO.Pipes
                 throw new InvalidOperationException(SR.InvalidOperation_PipeAlreadyConnected);
             }
 
-            return cancellationToken.IsCancellationRequested ?
-                Task.FromCanceled(cancellationToken) :
-                WaitForConnectionAsyncCore();
+            return cancellationToken.IsCancellationRequested
+              ? Task.FromCanceled(cancellationToken)
+              : WaitForConnectionAsyncCore();
 
             async Task WaitForConnectionAsyncCore() =>
-               HandleAcceptedSocket(await _instance!.ListeningSocket.AcceptAsync().ConfigureAwait(false));
+                HandleAcceptedSocket(
+                    await _instance!.ListeningSocket.AcceptAsync().ConfigureAwait(false)
+                );
         }
 
         private void HandleAcceptedSocket(Socket acceptedSocket)
@@ -99,11 +123,24 @@ namespace System.IO.Pipes
 
                     if (serverEUID != peerID)
                     {
-                        throw new UnauthorizedAccessException(SR.Format(SR.UnauthorizedAccess_ClientIsNotCurrentUser, peerID, serverEUID));
+                        throw new UnauthorizedAccessException(
+                            SR.Format(
+                                SR.UnauthorizedAccess_ClientIsNotCurrentUser,
+                                peerID,
+                                serverEUID
+                            )
+                        );
                     }
                 }
 
-                ConfigureSocket(acceptedSocket, serverHandle, _direction, _inBufferSize, _outBufferSize, _inheritability);
+                ConfigureSocket(
+                    acceptedSocket,
+                    serverHandle,
+                    _direction,
+                    _inBufferSize,
+                    _outBufferSize,
+                    _inheritability
+                );
             }
             catch
             {
@@ -112,7 +149,11 @@ namespace System.IO.Pipes
                 throw;
             }
 
-            InitializeHandle(serverHandle, isExposed: false, isAsync: (_options & PipeOptions.Asynchronous) != 0);
+            InitializeHandle(
+                serverHandle,
+                isExposed: false,
+                isAsync: (_options & PipeOptions.Asynchronous) != 0
+            );
             State = PipeState.Connected;
         }
 
@@ -154,7 +195,8 @@ namespace System.IO.Pipes
             get
             {
                 CheckPipePropertyOperations();
-                if (!CanRead) throw new NotSupportedException(SR.NotSupported_UnreadableStream);
+                if (!CanRead)
+                    throw new NotSupportedException(SR.NotSupported_UnreadableStream);
                 return InternalHandle?.PipeSocket.ReceiveBufferSize ?? _inBufferSize;
             }
         }
@@ -164,7 +206,8 @@ namespace System.IO.Pipes
             get
             {
                 CheckPipePropertyOperations();
-                if (!CanWrite) throw new NotSupportedException(SR.NotSupported_UnwritableStream);
+                if (!CanWrite)
+                    throw new NotSupportedException(SR.NotSupported_UnwritableStream);
                 return InternalHandle?.PipeSocket.SendBufferSize ?? _outBufferSize;
             }
         }
@@ -198,6 +241,7 @@ namespace System.IO.Pipes
             {
                 impersonationWorker();
             }
+
             finally
             {
                 // set the userid of the current (server) process back to its original value
@@ -209,7 +253,10 @@ namespace System.IO.Pipes
         private sealed class SharedServer
         {
             /// <summary>Path to shared instance mapping.</summary>
-            private static readonly Dictionary<string, SharedServer> s_servers = new Dictionary<string, SharedServer>();
+            private static readonly Dictionary<string, SharedServer> s_servers = new Dictionary<
+                string,
+                SharedServer
+            >();
 
             /// <summary>The pipe name for this instance.</summary>
             internal string PipeName { get; }
@@ -242,7 +289,9 @@ namespace System.IO.Pipes
                         }
                         else if (server._currentCount == maxCount)
                         {
-                            throw new UnauthorizedAccessException(SR.Format(SR.UnauthorizedAccess_IODenied_Path, path));
+                            throw new UnauthorizedAccessException(
+                                SR.Format(SR.UnauthorizedAccess_IODenied_Path, path)
+                            );
                         }
                     }
                     else
@@ -252,7 +301,9 @@ namespace System.IO.Pipes
                         s_servers.Add(path, server);
                     }
 
-                    Debug.Assert(server._currentCount >= 0 && server._currentCount < server._maxCount);
+                    Debug.Assert(
+                        server._currentCount >= 0 && server._currentCount < server._maxCount
+                    );
                     server._currentCount++;
                     return server;
                 }
@@ -291,7 +342,11 @@ namespace System.IO.Pipes
                 Interop.Sys.Unlink(path); // ignore any failures
 
                 // Start listening for connections on the path.
-                var socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
+                var socket = new Socket(
+                    AddressFamily.Unix,
+                    SocketType.Stream,
+                    ProtocolType.Unspecified
+                );
                 try
                 {
                     socket.Bind(new UnixDomainSocketEndPoint(path));

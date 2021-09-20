@@ -33,14 +33,19 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         /// </summary>
         public SnapshotModelProcessor(
             IOperationReporter operationReporter,
-            IModelRuntimeInitializer modelRuntimeInitializer)
-        {
+            IModelRuntimeInitializer modelRuntimeInitializer
+        ) {
             _operationReporter = operationReporter;
             _relationalNames = new HashSet<string>(
-                typeof(RelationalAnnotationNames)
-                    .GetRuntimeFields()
+                typeof(RelationalAnnotationNames).GetRuntimeFields()
                     .Where(p => p.Name != nameof(RelationalAnnotationNames.Prefix))
-                    .Select(p => ((string)p.GetValue(null)!).Substring(RelationalAnnotationNames.Prefix.Length - 1)));
+                    .Select(
+                        p =>
+                            ((string)p.GetValue(null)!).Substring(
+                                RelationalAnnotationNames.Prefix.Length - 1
+                            )
+                    )
+            );
             _modelRuntimeInitializer = modelRuntimeInitializer;
         }
 
@@ -84,7 +89,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 model = mutableModel.FinalizeModel();
             }
 
-            return _modelRuntimeInitializer.Initialize((IModel)model, designTime: true, validationLogger: null);
+            return _modelRuntimeInitializer.Initialize(
+                (IModel)model,
+                designTime: true,
+                validationLogger: null
+            );
         }
 
         private void ProcessCollection(IEnumerable<IReadOnlyAnnotatable> metadata, string version)
@@ -99,20 +108,24 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         {
             ProcessElement((IReadOnlyAnnotatable)entityType, version);
 
-            if ((version.StartsWith("2.0", StringComparison.Ordinal)
-                    || version.StartsWith("2.1", StringComparison.Ordinal))
+            if (
+                (
+                    version.StartsWith("2.0", StringComparison.Ordinal)
+                    || version.StartsWith("2.1", StringComparison.Ordinal)
+                )
                 && entityType is IMutableEntityType mutableEntityType
-                && !entityType.IsOwned())
-            {
+                && !entityType.IsOwned()
+            ) {
                 UpdateOwnedTypes(mutableEntityType);
             }
         }
 
         private void ProcessElement(IReadOnlyAnnotatable? metadata, string version)
         {
-            if (version.StartsWith("1.", StringComparison.Ordinal)
-                && metadata is IMutableAnnotatable mutableMetadata)
-            {
+            if (
+                version.StartsWith("1.", StringComparison.Ordinal)
+                && metadata is IMutableAnnotatable mutableMetadata
+            ) {
                 foreach (var annotation in mutableMetadata.GetAnnotations().ToList())
                 {
                     var colon = annotation.Name.IndexOf(':');
@@ -132,7 +145,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                             else if (!Equals(duplicate.Value, annotation.Value))
                             {
                                 _operationReporter.WriteWarning(
-                                    DesignStrings.MultipleAnnotationConflict(stripped.Substring(1)));
+                                    DesignStrings.MultipleAnnotationConflict(stripped.Substring(1))
+                                );
                             }
                         }
                     }
@@ -142,17 +156,25 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
         private void UpdateSequences(IReadOnlyModel model, string version)
         {
-            if ((!version.StartsWith("1.", StringComparison.Ordinal)
+            if (
+                (
+                    !version.StartsWith("1.", StringComparison.Ordinal)
                     && !version.StartsWith("2.", StringComparison.Ordinal)
-                    && !version.StartsWith("3.", StringComparison.Ordinal))
-                || !(model is IMutableModel mutableModel))
-            {
+                    && !version.StartsWith("3.", StringComparison.Ordinal)
+                ) || !(model is IMutableModel mutableModel)
+            ) {
                 return;
             }
 
             var sequences = model.GetAnnotations()
 #pragma warning disable CS0618 // Type or member is obsolete
-                .Where(a => a.Name.StartsWith(RelationalAnnotationNames.SequencePrefix, StringComparison.Ordinal))
+                .Where(
+                    a =>
+                        a.Name.StartsWith(
+                            RelationalAnnotationNames.SequencePrefix,
+                            StringComparison.Ordinal
+                        )
+                )
                 .Select(a => new Sequence(model, a.Name));
 #pragma warning restore CS0618 // Type or member is obsolete
 
@@ -170,7 +192,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
         private void UpdateOwnedTypes(IMutableEntityType entityType)
         {
-            var ownerships = entityType.GetDeclaredReferencingForeignKeys().Where(fk => fk.IsOwnership && fk.IsUnique)
+            var ownerships = entityType.GetDeclaredReferencingForeignKeys()
+                .Where(fk => fk.IsOwnership && fk.IsUnique)
                 .ToList();
             foreach (var ownership in ownerships)
             {
@@ -181,19 +204,23 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 {
                     ownership.SetProperties(
                         ownership.Properties,
-                        ownership.PrincipalEntityType.FindPrimaryKey()!);
+                        ownership.PrincipalEntityType.FindPrimaryKey()!
+                    );
 
-                    if (oldPrincipalKey is IConventionKey conventionKey
-                        && conventionKey.GetConfigurationSource() == ConfigurationSource.Convention)
-                    {
+                    if (
+                        oldPrincipalKey is IConventionKey conventionKey
+                        && conventionKey.GetConfigurationSource() == ConfigurationSource.Convention
+                    ) {
                         oldPrincipalKey.DeclaringEntityType.RemoveKey(oldPrincipalKey);
                     }
 
                     foreach (var oldProperty in oldPrincipalKey.Properties)
                     {
-                        if (oldProperty is IConventionProperty conventionProperty
-                            && conventionProperty.GetConfigurationSource() == ConfigurationSource.Convention)
-                        {
+                        if (
+                            oldProperty is IConventionProperty conventionProperty
+                            && conventionProperty.GetConfigurationSource()
+                                == ConfigurationSource.Convention
+                        ) {
                             oldProperty.DeclaringEntityType.RemoveProperty(oldProperty);
                         }
                     }

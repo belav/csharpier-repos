@@ -67,8 +67,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
             IKeyValueIndexFactorySource keyValueIndexFactorySource,
             ILoggingOptions loggingOptions,
             IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger,
-            IDbContextOptions options)
-        {
+            IDbContextOptions options
+        ) {
             ModificationCommandBatchFactory = modificationCommandBatchFactory;
             ParameterNameGeneratorFactory = parameterNameGeneratorFactory;
             ModificationCommandComparer = modificationCommandComparer;

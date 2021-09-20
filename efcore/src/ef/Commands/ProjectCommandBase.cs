@@ -29,10 +29,16 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
             command.AllowArgumentSeparator = true;
 
             _assembly = command.Option("-a|--assembly <PATH>", Resources.AssemblyDescription);
-            _startupAssembly = command.Option("-s|--startup-assembly <PATH>", Resources.StartupAssemblyDescription);
+            _startupAssembly = command.Option(
+                "-s|--startup-assembly <PATH>",
+                Resources.StartupAssemblyDescription
+            );
             _dataDir = command.Option("--data-dir <PATH>", Resources.DataDirDescription);
             _projectDir = command.Option("--project-dir <PATH>", Resources.ProjectDirDescription);
-            _rootNamespace = command.Option("--root-namespace <NAMESPACE>", Resources.RootNamespaceDescription);
+            _rootNamespace = command.Option(
+                "--root-namespace <NAMESPACE>",
+                Resources.RootNamespaceDescription
+            );
             _language = command.Option("--language <LANGUAGE>", Resources.LanguageDescription);
             WorkingDir = command.Option("--working-dir <PATH>", Resources.WorkingDirDescription);
 
@@ -63,30 +69,35 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
                         _dataDir!.Value(),
                         _rootNamespace!.Value(),
                         _language!.Value(),
-                        remainingArguments);
+                        remainingArguments
+                    );
                 }
                 catch (MissingMethodException) // NB: Thrown with EF Core 3.1
                 {
-                    var configurationFile = (_startupAssembly!.Value() ?? _assembly!.Value()!) + ".config";
+                    var configurationFile =
+                        (_startupAssembly!.Value() ?? _assembly!.Value()!) + ".config";
                     if (File.Exists(configurationFile))
                     {
                         AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", configurationFile);
                         try
                         {
-                            typeof(ConfigurationManager)
-                                .GetField("s_initState", BindingFlags.Static | BindingFlags.NonPublic)
+                            typeof(ConfigurationManager).GetField(
+                                    "s_initState",
+                                    BindingFlags.Static | BindingFlags.NonPublic
+                                )
                                 .SetValue(null, 0);
-                            typeof(ConfigurationManager)
-                                .GetField("s_configSystem", BindingFlags.Static | BindingFlags.NonPublic)
+                            typeof(ConfigurationManager).GetField(
+                                    "s_configSystem",
+                                    BindingFlags.Static | BindingFlags.NonPublic
+                                )
                                 .SetValue(null, null);
-                            typeof(ConfigurationManager).Assembly
-                                .GetType("System.Configuration.ClientConfigPaths")
+                            typeof(ConfigurationManager).Assembly.GetType(
+                                    "System.Configuration.ClientConfigPaths"
+                                )
                                 .GetField("s_current", BindingFlags.Static | BindingFlags.NonPublic)
                                 .SetValue(null, null);
                         }
-                        catch
-                        {
-                        }
+                        catch { }
                     }
                 }
 #elif !NETCOREAPP2_0
@@ -99,17 +110,25 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
                     _dataDir!.Value(),
                     _rootNamespace!.Value(),
                     _language!.Value(),
-                    remainingArguments);
+                    remainingArguments
+                );
             }
             catch (FileNotFoundException ex)
                 when (ex.FileName != null
-                    && new AssemblyName(ex.FileName).Name == OperationExecutorBase.DesignAssemblyName)
+                    && new AssemblyName(ex.FileName).Name
+                        == OperationExecutorBase.DesignAssemblyName
+                )
             {
                 throw new CommandException(
                     Resources.DesignNotFound(
                         Path.GetFileNameWithoutExtension(
-                            _startupAssembly!.HasValue() ? _startupAssembly.Value() : _assembly!.Value())),
-                    ex);
+                            _startupAssembly!.HasValue()
+                              ? _startupAssembly.Value()
+                              : _assembly!.Value()
+                        )
+                    ),
+                    ex
+                );
             }
         }
     }

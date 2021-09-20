@@ -13,7 +13,7 @@ namespace Profiler.Tests
         [DllImport("Profiler")]
         public static extern void DoPInvoke(int i);
 
-        public static int RunTest(String[] args) 
+        public static int RunTest(String[] args)
         {
             DoPInvoke(13);
 
@@ -27,9 +27,11 @@ namespace Profiler.Tests
                 return RunTest(args);
             }
 
-            return ProfilerTestRunner.Run(profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
-                                          testName: "Transitions",
-                                          profilerClsid: TransitionsGuid);
+            return ProfilerTestRunner.Run(
+                profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
+                testName: "Transitions",
+                profilerClsid: TransitionsGuid
+            );
         }
     }
 }

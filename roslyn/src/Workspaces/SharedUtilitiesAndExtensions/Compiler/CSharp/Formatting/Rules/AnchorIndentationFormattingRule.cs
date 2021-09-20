@@ -12,12 +12,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
     {
         internal const string Name = "CSharp Anchor Indentation Formatting Rule";
 
-        public override void AddAnchorIndentationOperations(List<AnchorIndentationOperation> list, SyntaxNode node, in NextAnchorIndentationOperationAction nextOperation)
-        {
+        public override void AddAnchorIndentationOperations(
+            List<AnchorIndentationOperation> list,
+            SyntaxNode node,
+            in NextAnchorIndentationOperationAction nextOperation
+        ) {
             nextOperation.Invoke();
 
-            if (node.IsKind(SyntaxKind.SimpleLambdaExpression) || node.IsKind(SyntaxKind.ParenthesizedLambdaExpression))
-            {
+            if (
+                node.IsKind(SyntaxKind.SimpleLambdaExpression)
+                || node.IsKind(SyntaxKind.ParenthesizedLambdaExpression)
+            ) {
                 AddAnchorIndentationOperation(list, node);
                 return;
             }
@@ -39,9 +44,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 }
                 else
                 {
-                    AddAnchorIndentationOperation(list,
+                    AddAnchorIndentationOperation(
+                        list,
                         block.Parent.GetFirstToken(includeZeroWidth: true),
-                        block.GetLastToken(includeZeroWidth: true));
+                        block.GetLastToken(includeZeroWidth: true)
+                    );
                     return;
                 }
             }
@@ -86,7 +93,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             }
         }
 
-        private static void AddAnchorIndentationOperation(List<AnchorIndentationOperation> list, SyntaxNode node)
-            => AddAnchorIndentationOperation(list, node.GetFirstToken(includeZeroWidth: true), node.GetLastToken(includeZeroWidth: true));
+        private static void AddAnchorIndentationOperation(
+            List<AnchorIndentationOperation> list,
+            SyntaxNode node
+        ) =>
+            AddAnchorIndentationOperation(
+                list,
+                node.GetFirstToken(includeZeroWidth: true),
+                node.GetLastToken(includeZeroWidth: true)
+            );
     }
 }

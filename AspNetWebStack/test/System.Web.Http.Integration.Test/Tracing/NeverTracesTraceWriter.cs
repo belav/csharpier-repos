@@ -17,8 +17,12 @@ namespace System.Web.Http.Tracing
     /// </para>
     public class NeverTracesTraceWriter : ITestTraceWriter
     {
-        public void Trace(HttpRequestMessage request, string category, TraceLevel level, Action<TraceRecord> traceAction)
-        {
+        public void Trace(
+            HttpRequestMessage request,
+            string category,
+            TraceLevel level,
+            Action<TraceRecord> traceAction
+        ) {
             DidReceiveTraceRequests = true;
         }
 
@@ -29,8 +33,6 @@ namespace System.Web.Http.Tracing
 
         public bool DidReceiveTraceRequests { get; set; }
 
-        public void Finish()
-        {
-        }
+        public void Finish() { }
     }
 }

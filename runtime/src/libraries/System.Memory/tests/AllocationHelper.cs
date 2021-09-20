@@ -44,6 +44,7 @@ namespace System.SpanTests
                 Marshal.FreeHGlobal(memory);
                 memory = IntPtr.Zero;
             }
+
             finally
             {
                 s_memoryLock.ReleaseMutex();

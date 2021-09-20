@@ -39,31 +39,32 @@ namespace Newtonsoft.Json.Tests.Benchmarks
 
         static JsonTextReaderBenchmarks()
         {
-            FloatArrayJson = new JArray(Enumerable.Range(0, 5000).Select(i => i * 1.1m)).ToString(Formatting.None);
+            FloatArrayJson = new JArray(Enumerable.Range(0, 5000).Select(i => i * 1.1m)).ToString(
+                Formatting.None
+            );
         }
 
         [Benchmark]
         public void ReadLargeJson()
         {
-            using (StreamReader fs = System.IO.File.OpenText(TestFixtureBase.ResolvePath("large.json")))
+            using (
+                StreamReader fs = System.IO.File.OpenText(TestFixtureBase.ResolvePath("large.json"))
+            )
             using (JsonTextReader jsonTextReader = new JsonTextReader(fs))
             {
-                while (jsonTextReader.Read())
-                {
-                }
+                while (jsonTextReader.Read()) { }
             }
         }
 
         [Benchmark]
         public void ReadAsDecimal()
         {
-            using (JsonTextReader jsonTextReader = new JsonTextReader(new StringReader(FloatArrayJson)))
-            {
+            using (
+                JsonTextReader jsonTextReader = new JsonTextReader(new StringReader(FloatArrayJson))
+            ) {
                 jsonTextReader.Read();
 
-                while (jsonTextReader.ReadAsDecimal() != null)
-                {
-                }
+                while (jsonTextReader.ReadAsDecimal() != null) { }
             }
         }
     }

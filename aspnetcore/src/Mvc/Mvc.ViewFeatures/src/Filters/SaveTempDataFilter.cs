@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
     /// </summary>
     internal class SaveTempDataFilter : IResourceFilter, IResultFilter
     {
-        private static readonly Func<object, Task> OnStartingCallback = (state) => OnStarting((HttpContext)state);
+        private static readonly Func<object, Task> OnStartingCallback = (state) =>
+            OnStarting((HttpContext)state);
         // Internal for unit testing
         internal static readonly object SaveTempDataFilterContextKey = new object();
 
@@ -46,7 +47,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             {
                 context.HttpContext.Response.OnStarting(
                     callback: OnStartingCallback,
-                    state: context.HttpContext);
+                    state: context.HttpContext
+                );
             }
         }
 
@@ -72,7 +74,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
                 result: null,
                 factory: saveTempDataContext.TempDataDictionaryFactory,
                 filters: saveTempDataContext.Filters,
-                httpContext: httpContext);
+                httpContext: httpContext
+            );
 
             return Task.CompletedTask;
         }
@@ -95,9 +98,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         }
 
         /// <inheritdoc />
-        public void OnResultExecuting(ResultExecutingContext context)
-        {
-        }
+        public void OnResultExecuting(ResultExecutingContext context) { }
 
         /// <inheritdoc />
         public void OnResultExecuted(ResultExecutedContext context)
@@ -131,8 +132,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             IActionResult result,
             ITempDataDictionaryFactory factory,
             IList<IFilterMetadata> filters,
-            HttpContext httpContext)
-        {
+            HttpContext httpContext
+        ) {
             var tempData = factory.GetTempData(httpContext);
 
             for (var i = 0; i < filters.Count; i++)

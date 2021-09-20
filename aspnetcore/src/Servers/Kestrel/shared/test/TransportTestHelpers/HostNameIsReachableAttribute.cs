@@ -24,9 +24,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
             }
         }
 
-        public string SkipReason => _hostname != null
-            ? $"Test cannot run when network is unreachable. Socket exception: '{_error}'"
-            : "Could not determine hostname for current test machine";
+        public string SkipReason =>
+            _hostname != null
+                ? $"Test cannot run when network is unreachable. Socket exception: '{_error}'"
+                : "Could not determine hostname for current test machine";
 
         private async Task<bool> HostNameIsReachable()
         {
@@ -40,13 +41,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                 var timeoutTask = Task.Delay(1000);
                 if (await Task.WhenAny(ConnectToHost(_hostname, 80), timeoutTask) == timeoutTask)
                 {
-                    _error = "Attempt to establish a connection took over a second without success or failure.";
+                    _error =
+                        "Attempt to establish a connection took over a second without success or failure.";
                     return false;
                 }
             }
-            catch (SocketException ex) when (
-                ex.SocketErrorCode == SocketError.NetworkUnreachable
-                || ex.SocketErrorCode == SocketError.HostNotFound)
+            catch (SocketException ex)
+                when (ex.SocketErrorCode == SocketError.NetworkUnreachable
+                    || ex.SocketErrorCode == SocketError.HostNotFound
+                )
             {
                 _error = ex.Message;
                 return false;
@@ -61,7 +64,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
 
         public static async Task<Socket> ConnectToHost(string hostName, int port)
         {
-            var tcs = new TaskCompletionSource<Socket>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var tcs = new TaskCompletionSource<Socket>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             var socketArgs = new SocketAsyncEventArgs();
             socketArgs.RemoteEndPoint = new DnsEndPoint(hostName, port);

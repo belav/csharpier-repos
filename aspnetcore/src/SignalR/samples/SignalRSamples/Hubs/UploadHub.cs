@@ -16,7 +16,6 @@ namespace SignalRSamples.Hubs
 {
     public class UploadHub : Hub
     {
-
         public string Echo(string word)
         {
             return "Echo: " + word;
@@ -41,13 +40,15 @@ namespace SignalRSamples.Hubs
             return sb.ToString();
         }
 
-        public async Task<string> ScoreTracker(ChannelReader<int> player1, ChannelReader<int> player2)
-        {
+        public async Task<string> ScoreTracker(
+            ChannelReader<int> player1,
+            ChannelReader<int> player2
+        ) {
             var p1score = await Loop(player1);
             var p2score = await Loop(player2);
 
             var winner = p1score > p2score ? "p1" : "p2";
-            return $"{winner} wins with a total of {Math.Max(p1score, p2score)} points to {Math.Min(p1score, p2score)}"; 
+            return $"{winner} wins with a total of {Math.Max(p1score, p2score)} points to {Math.Min(p1score, p2score)}";
 
             async Task<int> Loop(ChannelReader<int> reader)
             {
@@ -70,19 +71,20 @@ namespace SignalRSamples.Hubs
         {
             var output = Channel.CreateUnbounded<string>();
 
-            _ = Task.Run(async () =>
-            {
-                while (await source.WaitToReadAsync())
+            _ = Task.Run(
+                async () =>
                 {
-                    while (source.TryRead(out var item))
+                    while (await source.WaitToReadAsync())
                     {
-                        Debug.WriteLine($"Echoing '{item}'.");
-                        await output.Writer.WriteAsync("echo:" + item);
+                        while (source.TryRead(out var item))
+                        {
+                            Debug.WriteLine($"Echoing '{item}'.");
+                            await output.Writer.WriteAsync("echo:" + item);
+                        }
                     }
+                    output.Writer.Complete();
                 }
-                output.Writer.Complete();
-
-            });
+            );
 
             return output.Reader;
         }

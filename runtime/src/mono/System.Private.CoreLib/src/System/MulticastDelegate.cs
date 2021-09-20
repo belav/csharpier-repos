@@ -14,15 +14,12 @@ namespace System
         private Delegate[]? delegates;
 
         [RequiresUnreferencedCode("The target method might be removed")]
-        protected MulticastDelegate(object target, string method)
-            : base(target, method)
-        {
-        }
+        protected MulticastDelegate(object target, string method) : base(target, method) { }
 
-        protected MulticastDelegate([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target, string method)
-            : base(target, method)
-        {
-        }
+        protected MulticastDelegate(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target,
+            string method
+        ) : base(target, method) { }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -38,7 +35,8 @@ namespace System
             else
             {
                 object? r;
-                int i = 0, len = delegates.Length;
+                int i = 0,
+                    len = delegates.Length;
                 do
                 {
                     r = delegates[i].DynamicInvoke(args);
@@ -162,7 +160,13 @@ namespace System
                 ret.delegates = new Delegate[delegates.Length + other.delegates.Length];
 
                 Array.Copy(delegates, 0, ret.delegates, 0, delegates.Length);
-                Array.Copy(other.delegates, 0, ret.delegates, delegates.Length, other.delegates.Length);
+                Array.Copy(
+                    other.delegates,
+                    0,
+                    ret.delegates,
+                    delegates.Length,
+                    other.delegates.Length
+                );
             }
 
             return ret;
@@ -262,7 +266,13 @@ namespace System
                 ret.delegates = new Delegate[delegates.Length - other.delegates.Length];
 
                 Array.Copy(delegates, ret.delegates, idx);
-                Array.Copy(delegates, idx + other.delegates.Length, ret.delegates, idx, delegates.Length - idx - other.delegates.Length);
+                Array.Copy(
+                    delegates,
+                    idx + other.delegates.Length,
+                    ret.delegates,
+                    idx,
+                    delegates.Length - idx - other.delegates.Length
+                );
 
                 return ret;
             }
@@ -286,7 +296,9 @@ namespace System
 
         internal override object? GetTarget()
         {
-            return delegates?.Length > 0 ? delegates[delegates.Length - 1].GetTarget() : base.GetTarget();
+            return delegates?.Length > 0
+              ? delegates[delegates.Length - 1].GetTarget()
+              : base.GetTarget();
         }
     }
 }

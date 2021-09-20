@@ -11,10 +11,14 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal
 {
     internal class SetCommand
     {
-        public static void Configure(CommandLineApplication command, CommandLineOptions options, IConsole console)
-        {
+        public static void Configure(
+            CommandLineApplication command,
+            CommandLineOptions options,
+            IConsole console
+        ) {
             command.Description = "Sets the user secret to the specified value";
-            command.ExtendedHelpText = @"
+            command.ExtendedHelpText =
+                @"
 Additional Info:
   This command will also handle piped input. Piped input is expected to be a valid JSON format.
 
@@ -33,27 +37,35 @@ Examples:
             var nameArg = command.Argument("[name]", "Name of the secret");
             var valueArg = command.Argument("[value]", "Value of the secret");
 
-            command.OnExecute(() =>
-            {
-                if (console.IsInputRedirected && nameArg.Value == null)
+            command.OnExecute(
+                () =>
                 {
-                    options.Command = new FromStdInStrategy();
-                }
-                else
-                {
-                    if (string.IsNullOrEmpty(nameArg.Value))
+                    if (console.IsInputRedirected && nameArg.Value == null)
                     {
-                        throw new CommandParsingException(command, Resources.FormatError_MissingArgument("name"));
+                        options.Command = new FromStdInStrategy();
                     }
-
-                    if (valueArg.Value == null)
+                    else
                     {
-                        throw new CommandParsingException(command, Resources.FormatError_MissingArgument("value"));
-                    }
+                        if (string.IsNullOrEmpty(nameArg.Value))
+                        {
+                            throw new CommandParsingException(
+                                command,
+                                Resources.FormatError_MissingArgument("name")
+                            );
+                        }
 
-                    options.Command = new ForOneValueStrategy(nameArg.Value, valueArg.Value);
+                        if (valueArg.Value == null)
+                        {
+                            throw new CommandParsingException(
+                                command,
+                                Resources.FormatError_MissingArgument("value")
+                            );
+                        }
+
+                        options.Command = new ForOneValueStrategy(nameArg.Value, valueArg.Value);
+                    }
                 }
-            });
+            );
         }
 
         public class FromStdInStrategy : ICommand
@@ -78,7 +90,9 @@ Examples:
                     context.SecretStore.Set(k.Key, k.Value);
                 }
 
-                context.Reporter.Output(Resources.FormatMessage_Saved_Secrets(provider.CurrentData.Count));
+                context.Reporter.Output(
+                    Resources.FormatMessage_Saved_Secrets(provider.CurrentData.Count)
+                );
 
                 context.SecretStore.Save();
             }

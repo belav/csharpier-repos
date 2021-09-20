@@ -8,8 +8,10 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        public static IEnumerable<TSource> Skip<TSource>(this IEnumerable<TSource> source, int count)
-        {
+        public static IEnumerable<TSource> Skip<TSource>(
+            this IEnumerable<TSource> source,
+            int count
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -34,8 +36,10 @@ namespace System.Linq
             return SkipIterator(source, count);
         }
 
-        public static IEnumerable<TSource> SkipWhile<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
-        {
+        public static IEnumerable<TSource> SkipWhile<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, bool> predicate
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -49,8 +53,10 @@ namespace System.Linq
             return SkipWhileIterator(source, predicate);
         }
 
-        private static IEnumerable<TSource> SkipWhileIterator<TSource>(IEnumerable<TSource> source, Func<TSource, bool> predicate)
-        {
+        private static IEnumerable<TSource> SkipWhileIterator<TSource>(
+            IEnumerable<TSource> source,
+            Func<TSource, bool> predicate
+        ) {
             using (IEnumerator<TSource> e = source.GetEnumerator())
             {
                 while (e.MoveNext())
@@ -70,8 +76,10 @@ namespace System.Linq
             }
         }
 
-        public static IEnumerable<TSource> SkipWhile<TSource>(this IEnumerable<TSource> source, Func<TSource, int, bool> predicate)
-        {
+        public static IEnumerable<TSource> SkipWhile<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, int, bool> predicate
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
@@ -85,8 +93,10 @@ namespace System.Linq
             return SkipWhileIterator(source, predicate);
         }
 
-        private static IEnumerable<TSource> SkipWhileIterator<TSource>(IEnumerable<TSource> source, Func<TSource, int, bool> predicate)
-        {
+        private static IEnumerable<TSource> SkipWhileIterator<TSource>(
+            IEnumerable<TSource> source,
+            Func<TSource, int, bool> predicate
+        ) {
             using (IEnumerator<TSource> e = source.GetEnumerator())
             {
                 int index = -1;
@@ -112,18 +122,24 @@ namespace System.Linq
             }
         }
 
-        public static IEnumerable<TSource> SkipLast<TSource>(this IEnumerable<TSource> source, int count)
-        {
+        public static IEnumerable<TSource> SkipLast<TSource>(
+            this IEnumerable<TSource> source,
+            int count
+        ) {
             if (source == null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.source);
             }
 
-            return count <= 0 ?
-                source.Skip(0) :
-                TakeRangeFromEndIterator(source,
-                    isStartIndexFromEnd: false, startIndex: 0,
-                    isEndIndexFromEnd: true, endIndex: count);
+            return count <= 0
+              ? source.Skip(0)
+              : TakeRangeFromEndIterator(
+                    source,
+                    isStartIndexFromEnd: false,
+                    startIndex: 0,
+                    isEndIndexFromEnd: true,
+                    endIndex: count
+                );
         }
     }
 }

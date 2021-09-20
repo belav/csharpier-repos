@@ -20,8 +20,9 @@ namespace Microsoft.AspNetCore.Rewrite.UrlMatches
         public IntegerMatch(string value, IntegerOperationType operation)
         {
             int compValue;
-            if (!int.TryParse(value, NumberStyles.None, CultureInfo.InvariantCulture, out compValue))
-            {
+            if (
+                !int.TryParse(value, NumberStyles.None, CultureInfo.InvariantCulture, out compValue)
+            ) {
                 throw new FormatException(Resources.Error_IntegerMatch_FormatExceptionMessage);
             }
             _value = compValue;
@@ -31,25 +32,38 @@ namespace Microsoft.AspNetCore.Rewrite.UrlMatches
         public override MatchResults Evaluate(string input, RewriteContext context)
         {
             int compValue;
-            if (!int.TryParse(input, NumberStyles.None, CultureInfo.InvariantCulture, out compValue))
-            {
+            if (
+                !int.TryParse(input, NumberStyles.None, CultureInfo.InvariantCulture, out compValue)
+            ) {
                 return MatchResults.EmptyFailure;
             }
 
             switch (_operation)
             {
                 case IntegerOperationType.Equal:
-                    return compValue == _value ? MatchResults.EmptySuccess : MatchResults.EmptyFailure;
+                    return compValue == _value
+                      ? MatchResults.EmptySuccess
+                      : MatchResults.EmptyFailure;
                 case IntegerOperationType.Greater:
-                    return compValue > _value ? MatchResults.EmptySuccess : MatchResults.EmptyFailure;
+                    return compValue > _value
+                      ? MatchResults.EmptySuccess
+                      : MatchResults.EmptyFailure;
                 case IntegerOperationType.GreaterEqual:
-                    return compValue >= _value ? MatchResults.EmptySuccess : MatchResults.EmptyFailure;
+                    return compValue >= _value
+                      ? MatchResults.EmptySuccess
+                      : MatchResults.EmptyFailure;
                 case IntegerOperationType.Less:
-                    return compValue < _value ? MatchResults.EmptySuccess : MatchResults.EmptyFailure;
+                    return compValue < _value
+                      ? MatchResults.EmptySuccess
+                      : MatchResults.EmptyFailure;
                 case IntegerOperationType.LessEqual:
-                    return compValue <= _value ? MatchResults.EmptySuccess : MatchResults.EmptyFailure;
+                    return compValue <= _value
+                      ? MatchResults.EmptySuccess
+                      : MatchResults.EmptyFailure;
                 case IntegerOperationType.NotEqual:
-                    return compValue != _value ? MatchResults.EmptySuccess : MatchResults.EmptyFailure;
+                    return compValue != _value
+                      ? MatchResults.EmptySuccess
+                      : MatchResults.EmptyFailure;
                 default:
                     throw new ArgumentOutOfRangeException("operation"); // Will never be thrown
             }

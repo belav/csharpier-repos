@@ -20,9 +20,7 @@ namespace System.Net.Sockets
         private AddressFamily _family = AddressFamily.InterNetwork;
 
         // Initializes a new instance of the System.Net.Sockets.UdpClientclass.
-        public UdpClient() : this(AddressFamily.InterNetwork)
-        {
-        }
+        public UdpClient() : this(AddressFamily.InterNetwork) { }
 
         // Initializes a new instance of the System.Net.Sockets.UdpClientclass.
         public UdpClient(AddressFamily family)
@@ -30,7 +28,10 @@ namespace System.Net.Sockets
             // Validate the address family.
             if (family != AddressFamily.InterNetwork && family != AddressFamily.InterNetworkV6)
             {
-                throw new ArgumentException(SR.Format(SR.net_protocol_invalid_family, "UDP"), nameof(family));
+                throw new ArgumentException(
+                    SR.Format(SR.net_protocol_invalid_family, "UDP"),
+                    nameof(family)
+                );
             }
 
             _family = family;
@@ -44,9 +45,7 @@ namespace System.Net.Sockets
         // NOTE: We should obsolete this. This also breaks IPv6-only scenarios.
         // But fixing it has many complications that we have decided not
         // to fix it and instead obsolete it later.
-        public UdpClient(int port) : this(port, AddressFamily.InterNetwork)
-        {
-        }
+        public UdpClient(int port) : this(port, AddressFamily.InterNetwork) { }
 
         // Creates a new instance of the UdpClient class that communicates on the
         // specified port number.
@@ -61,7 +60,10 @@ namespace System.Net.Sockets
             // Validate the address family.
             if (family != AddressFamily.InterNetwork && family != AddressFamily.InterNetworkV6)
             {
-                throw new ArgumentException(SR.Format(SR.net_protocol_invalid_family, "UDP"), nameof(family));
+                throw new ArgumentException(
+                    SR.Format(SR.net_protocol_invalid_family, "UDP"),
+                    nameof(family)
+                );
             }
 
             IPEndPoint localEP;
@@ -103,100 +105,57 @@ namespace System.Net.Sockets
         // Used by the class to indicate that a connection to a remote host has been made.
         protected bool Active
         {
-            get
-            {
-                return _active;
-            }
-            set
-            {
-                _active = value;
-            }
+            get { return _active; }
+            set { _active = value; }
         }
 
         public int Available
         {
-            get
-            {
-                return _clientSocket.Available;
-            }
+            get { return _clientSocket.Available; }
         }
 
         public Socket Client
         {
-            get
-            {
-                return _clientSocket;
-            }
-            set
-            {
-                _clientSocket = value;
-            }
+            get { return _clientSocket; }
+            set { _clientSocket = value; }
         }
 
         public short Ttl
         {
-            get
-            {
-                return _clientSocket.Ttl;
-            }
-            set
-            {
-                _clientSocket.Ttl = value;
-            }
+            get { return _clientSocket.Ttl; }
+            set { _clientSocket.Ttl = value; }
         }
 
         public bool DontFragment
         {
-            get
-            {
-                return _clientSocket.DontFragment;
-            }
-            set
-            {
-                _clientSocket.DontFragment = value;
-            }
+            get { return _clientSocket.DontFragment; }
+            set { _clientSocket.DontFragment = value; }
         }
 
         public bool MulticastLoopback
         {
-            get
-            {
-                return _clientSocket.MulticastLoopback;
-            }
-            set
-            {
-                _clientSocket.MulticastLoopback = value;
-            }
+            get { return _clientSocket.MulticastLoopback; }
+            set { _clientSocket.MulticastLoopback = value; }
         }
 
         public bool EnableBroadcast
         {
-            get
-            {
-                return _clientSocket.EnableBroadcast;
-            }
-            set
-            {
-                _clientSocket.EnableBroadcast = value;
-            }
+            get { return _clientSocket.EnableBroadcast; }
+            set { _clientSocket.EnableBroadcast = value; }
         }
 
         public bool ExclusiveAddressUse
         {
-            get
-            {
-                return _clientSocket.ExclusiveAddressUse;
-            }
-            set
-            {
-                _clientSocket.ExclusiveAddressUse = value;
-            }
+            get { return _clientSocket.ExclusiveAddressUse; }
+            set { _clientSocket.ExclusiveAddressUse = value; }
         }
 
         [SupportedOSPlatform("windows")]
         public void AllowNatTraversal(bool allowed)
         {
-            _clientSocket.SetIPProtectionLevel(allowed ? IPProtectionLevel.Unrestricted : IPProtectionLevel.EdgeRestricted);
+            _clientSocket.SetIPProtectionLevel(
+                allowed ? IPProtectionLevel.Unrestricted : IPProtectionLevel.EdgeRestricted
+            );
         }
 
         private bool _disposed;
@@ -226,7 +185,8 @@ namespace System.Net.Sockets
         {
             if (disposing)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this);
 
                 // The only resource we need to free is the network stream, since this
                 // is based on the client socket, closing the stream will cause us
@@ -266,7 +226,11 @@ namespace System.Net.Sockets
                 // We need to set the Broadcast socket option.
                 // Note that once we set the option on the Socket we never reset it.
                 _isBroadcast = true;
-                _clientSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
+                _clientSocket.SetSocketOption(
+                    SocketOptionLevel.Socket,
+                    SocketOptionName.Broadcast,
+                    1
+                );
             }
         }
 
@@ -283,24 +247,54 @@ namespace System.Net.Sockets
             }
         }
 
-        public IAsyncResult BeginSend(byte[] datagram, int bytes, AsyncCallback? requestCallback, object? state) =>
-            BeginSend(datagram, bytes, null, requestCallback, state);
+        public IAsyncResult BeginSend(
+            byte[] datagram,
+            int bytes,
+            AsyncCallback? requestCallback,
+            object? state
+        ) => BeginSend(datagram, bytes, null, requestCallback, state);
 
-        public IAsyncResult BeginSend(byte[] datagram, int bytes, string? hostname, int port, AsyncCallback? requestCallback, object? state) =>
-            BeginSend(datagram, bytes, GetEndpoint(hostname, port), requestCallback, state);
+        public IAsyncResult BeginSend(
+            byte[] datagram,
+            int bytes,
+            string? hostname,
+            int port,
+            AsyncCallback? requestCallback,
+            object? state
+        ) => BeginSend(datagram, bytes, GetEndpoint(hostname, port), requestCallback, state);
 
-        public IAsyncResult BeginSend(byte[] datagram, int bytes, IPEndPoint? endPoint, AsyncCallback? requestCallback, object? state)
-        {
+        public IAsyncResult BeginSend(
+            byte[] datagram,
+            int bytes,
+            IPEndPoint? endPoint,
+            AsyncCallback? requestCallback,
+            object? state
+        ) {
             ValidateDatagram(datagram, bytes, endPoint);
 
             if (endPoint is null)
             {
-                return _clientSocket.BeginSend(datagram, 0, bytes, SocketFlags.None, requestCallback, state);
+                return _clientSocket.BeginSend(
+                    datagram,
+                    0,
+                    bytes,
+                    SocketFlags.None,
+                    requestCallback,
+                    state
+                );
             }
             else
             {
                 CheckForBroadcast(endPoint.Address);
-                return _clientSocket.BeginSendTo(datagram, 0, bytes, SocketFlags.None, endPoint, requestCallback, state);
+                return _clientSocket.BeginSendTo(
+                    datagram,
+                    0,
+                    bytes,
+                    SocketFlags.None,
+                    endPoint,
+                    requestCallback,
+                    state
+                );
             }
         }
 
@@ -308,9 +302,9 @@ namespace System.Net.Sockets
         {
             ThrowIfDisposed();
 
-            return _active ?
-                _clientSocket.EndSend(asyncResult) :
-                _clientSocket.EndSendTo(asyncResult);
+            return _active
+              ? _clientSocket.EndSend(asyncResult)
+              : _clientSocket.EndSendTo(asyncResult);
         }
 
         private void ValidateDatagram(byte[] datagram, int bytes, IPEndPoint? endPoint)
@@ -348,9 +342,11 @@ namespace System.Net.Sockets
                 IPAddress[] addresses = Dns.GetHostAddresses(hostname);
 
                 int i = 0;
-                for (; i < addresses.Length && !IsAddressFamilyCompatible(addresses[i].AddressFamily); i++)
-                {
-                }
+                for (
+                    ;
+                    i < addresses.Length && !IsAddressFamilyCompatible(addresses[i].AddressFamily);
+                    i++
+                ) { }
 
                 if (addresses.Length == 0 || i == addresses.Length)
                 {
@@ -382,7 +378,15 @@ namespace System.Net.Sockets
                 tempRemoteEP = IPEndPointStatics.IPv6Any;
             }
 
-            return _clientSocket.BeginReceiveFrom(_buffer, 0, MaxUDPSize, SocketFlags.None, ref tempRemoteEP, requestCallback, state);
+            return _clientSocket.BeginReceiveFrom(
+                _buffer,
+                0,
+                MaxUDPSize,
+                SocketFlags.None,
+                ref tempRemoteEP,
+                requestCallback,
+                state
+            );
         }
 
         public byte[] EndReceive(IAsyncResult asyncResult, ref IPEndPoint? remoteEP)
@@ -431,7 +435,10 @@ namespace System.Net.Sockets
             // as such we keep the compatibility explicit between IP stack versions
             if (multicastAddr.AddressFamily != _family)
             {
-                throw new ArgumentException(SR.Format(SR.net_protocol_invalid_multicast_family, "UDP"), nameof(multicastAddr));
+                throw new ArgumentException(
+                    SR.Format(SR.net_protocol_invalid_multicast_family, "UDP"),
+                    nameof(multicastAddr)
+                );
             }
 
             if (_family == AddressFamily.InterNetwork)
@@ -441,7 +448,8 @@ namespace System.Net.Sockets
                 _clientSocket.SetSocketOption(
                     SocketOptionLevel.IP,
                     SocketOptionName.AddMembership,
-                    mcOpt);
+                    mcOpt
+                );
             }
             else
             {
@@ -450,7 +458,8 @@ namespace System.Net.Sockets
                 _clientSocket.SetSocketOption(
                     SocketOptionLevel.IPv6,
                     SocketOptionName.AddMembership,
-                    mcOpt);
+                    mcOpt
+                );
             }
         }
 
@@ -467,9 +476,10 @@ namespace System.Net.Sockets
             MulticastOption mcOpt = new MulticastOption(multicastAddr, localAddress);
 
             _clientSocket.SetSocketOption(
-               SocketOptionLevel.IP,
-               SocketOptionName.AddMembership,
-               mcOpt);
+                SocketOptionLevel.IP,
+                SocketOptionName.AddMembership,
+                mcOpt
+            );
         }
 
         // Joins an IPv6 multicast address group.
@@ -500,7 +510,8 @@ namespace System.Net.Sockets
             _clientSocket.SetSocketOption(
                 SocketOptionLevel.IPv6,
                 SocketOptionName.AddMembership,
-                mcOpt);
+                mcOpt
+            );
         }
 
         // Joins a multicast address group with the specified time to live (TTL).
@@ -523,9 +534,12 @@ namespace System.Net.Sockets
 
             // Set Time To Live (TTL).
             _clientSocket.SetSocketOption(
-                (_family == AddressFamily.InterNetwork) ? SocketOptionLevel.IP : SocketOptionLevel.IPv6,
+                (_family == AddressFamily.InterNetwork)
+                  ? SocketOptionLevel.IP
+                  : SocketOptionLevel.IPv6,
                 SocketOptionName.MulticastTimeToLive,
-                timeToLive);
+                timeToLive
+            );
         }
 
         // Leaves a multicast address group.
@@ -543,7 +557,10 @@ namespace System.Net.Sockets
             //               must also check for address family compatibility.
             if (multicastAddr.AddressFamily != _family)
             {
-                throw new ArgumentException(SR.Format(SR.net_protocol_invalid_multicast_family, "UDP"), nameof(multicastAddr));
+                throw new ArgumentException(
+                    SR.Format(SR.net_protocol_invalid_multicast_family, "UDP"),
+                    nameof(multicastAddr)
+                );
             }
 
             if (_family == AddressFamily.InterNetwork)
@@ -553,7 +570,8 @@ namespace System.Net.Sockets
                 _clientSocket.SetSocketOption(
                     SocketOptionLevel.IP,
                     SocketOptionName.DropMembership,
-                    mcOpt);
+                    mcOpt
+                );
             }
             else
             {
@@ -562,7 +580,8 @@ namespace System.Net.Sockets
                 _clientSocket.SetSocketOption(
                     SocketOptionLevel.IPv6,
                     SocketOptionName.DropMembership,
-                    mcOpt);
+                    mcOpt
+                );
             }
         }
 
@@ -594,11 +613,11 @@ namespace System.Net.Sockets
             _clientSocket.SetSocketOption(
                 SocketOptionLevel.IPv6,
                 SocketOptionName.DropMembership,
-                mcOpt);
+                mcOpt
+            );
         }
 
-        public Task<int> SendAsync(byte[] datagram, int bytes) =>
-            SendAsync(datagram, bytes, null);
+        public Task<int> SendAsync(byte[] datagram, int bytes) => SendAsync(datagram, bytes, null);
 
         public Task<int> SendAsync(byte[] datagram, int bytes, string? hostname, int port) =>
             SendAsync(datagram, bytes, GetEndpoint(hostname, port));
@@ -609,12 +628,19 @@ namespace System.Net.Sockets
 
             if (endPoint is null)
             {
-                return _clientSocket.SendAsync(new ArraySegment<byte>(datagram, 0, bytes), SocketFlags.None);
+                return _clientSocket.SendAsync(
+                    new ArraySegment<byte>(datagram, 0, bytes),
+                    SocketFlags.None
+                );
             }
             else
             {
                 CheckForBroadcast(endPoint.Address);
-                return _clientSocket.SendToAsync(new ArraySegment<byte>(datagram, 0, bytes), SocketFlags.None, endPoint);
+                return _clientSocket.SendToAsync(
+                    new ArraySegment<byte>(datagram, 0, bytes),
+                    SocketFlags.None,
+                    endPoint
+                );
             }
         }
 
@@ -622,18 +648,24 @@ namespace System.Net.Sockets
         {
             ThrowIfDisposed();
 
-            return WaitAndWrap(_clientSocket.ReceiveFromAsync(
-                new ArraySegment<byte>(_buffer, 0, MaxUDPSize),
-                SocketFlags.None,
-                _family == AddressFamily.InterNetwork ? IPEndPointStatics.Any : IPEndPointStatics.IPv6Any));
+            return WaitAndWrap(
+                _clientSocket.ReceiveFromAsync(
+                    new ArraySegment<byte>(_buffer, 0, MaxUDPSize),
+                    SocketFlags.None,
+                    _family == AddressFamily.InterNetwork
+                      ? IPEndPointStatics.Any
+                      : IPEndPointStatics.IPv6Any
+                )
+            );
 
             async Task<UdpReceiveResult> WaitAndWrap(Task<SocketReceiveFromResult> task)
             {
                 SocketReceiveFromResult result = await task.ConfigureAwait(false);
 
-                byte[] buffer = result.ReceivedBytes < MaxUDPSize ?
-                    _buffer.AsSpan(0, result.ReceivedBytes).ToArray() :
-                    _buffer;
+                byte[] buffer =
+                    result.ReceivedBytes < MaxUDPSize
+                        ? _buffer.AsSpan(0, result.ReceivedBytes).ToArray()
+                        : _buffer;
 
                 return new UdpReceiveResult(buffer, (IPEndPoint)result.RemoteEndPoint);
             }
@@ -699,14 +731,21 @@ namespace System.Net.Sockets
                 {
                     if (Socket.OSSupportsIPv4)
                     {
-                        ipv4Socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                        ipv4Socket = new Socket(
+                            AddressFamily.InterNetwork,
+                            SocketType.Dgram,
+                            ProtocolType.Udp
+                        );
                     }
                     if (Socket.OSSupportsIPv6)
                     {
-                        ipv6Socket = new Socket(AddressFamily.InterNetworkV6, SocketType.Dgram, ProtocolType.Udp);
+                        ipv6Socket = new Socket(
+                            AddressFamily.InterNetworkV6,
+                            SocketType.Dgram,
+                            ProtocolType.Udp
+                        );
                     }
                 }
-
 
                 foreach (IPAddress address in addresses)
                 {
@@ -717,8 +756,10 @@ namespace System.Net.Sockets
                             // We came via the <hostname,port> constructor. Set the
                             // address family appropriately, create the socket and
                             // try to connect.
-                            if (address.AddressFamily == AddressFamily.InterNetwork && ipv4Socket != null)
-                            {
+                            if (
+                                address.AddressFamily == AddressFamily.InterNetwork
+                                && ipv4Socket != null
+                            ) {
                                 ipv4Socket.Connect(address, port);
                                 _clientSocket = ipv4Socket;
                                 if (ipv6Socket != null)
@@ -735,7 +776,6 @@ namespace System.Net.Sockets
                                     ipv4Socket.Close();
                                 }
                             }
-
 
                             _family = address.AddressFamily;
                             _active = true;
@@ -759,7 +799,6 @@ namespace System.Net.Sockets
                     }
                 }
             }
-
             catch (Exception ex)
             {
                 if (ExceptionCheck.IsFatal(ex))
@@ -853,7 +892,6 @@ namespace System.Net.Sockets
             int received = Client.ReceiveFrom(_buffer, MaxUDPSize, 0, ref tempRemoteEP);
             remoteEP = (IPEndPoint)tempRemoteEP;
 
-
             // because we don't return the actual length, we need to ensure the returned buffer
             // has the appropriate length.
 
@@ -865,7 +903,6 @@ namespace System.Net.Sockets
             }
             return _buffer;
         }
-
 
         // Sends a UDP datagram to the host at the remote end point.
         public int Send(byte[] dgram, int bytes, IPEndPoint? endPoint)
@@ -892,7 +929,6 @@ namespace System.Net.Sockets
             return Client.SendTo(dgram, 0, bytes, SocketFlags.None, endPoint);
         }
 
-
         // Sends a UDP datagram to the specified port on the specified remote host.
         public int Send(byte[] dgram, int bytes, string? hostname, int port)
         {
@@ -916,8 +952,11 @@ namespace System.Net.Sockets
             IPAddress[] addresses = Dns.GetHostAddresses(hostname);
 
             int i = 0;
-            for (; i < addresses.Length && !IsAddressFamilyCompatible(addresses[i].AddressFamily); i++)
-            {
+            for (
+                ;
+                i < addresses.Length && !IsAddressFamilyCompatible(addresses[i].AddressFamily);
+                i++
+            ) {
                 ; // just count the addresses
             }
 
@@ -930,7 +969,6 @@ namespace System.Net.Sockets
             IPEndPoint ipEndPoint = new IPEndPoint(addresses[i], port);
             return Client.SendTo(dgram, 0, bytes, SocketFlags.None, ipEndPoint);
         }
-
 
         // Sends a UDP datagram to a remote host.
         public int Send(byte[] dgram, int bytes)
@@ -957,7 +995,8 @@ namespace System.Net.Sockets
                 ThrowObjectDisposedException();
             }
 
-            void ThrowObjectDisposedException() => throw new ObjectDisposedException(GetType().FullName);
+            void ThrowObjectDisposedException() =>
+                throw new ObjectDisposedException(GetType().FullName);
         }
     }
 }

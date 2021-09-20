@@ -21,28 +21,38 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
 
         public string? ConfirmationMessage { get; }
 
-        public ChangeSignatureCodeActionOperation(Solution changedSolution, string? confirmationMessage)
-        {
-            ChangedSolution = changedSolution ?? throw new ArgumentNullException(nameof(changedSolution));
+        public ChangeSignatureCodeActionOperation(
+            Solution changedSolution,
+            string? confirmationMessage
+        ) {
+            ChangedSolution =
+                changedSolution ?? throw new ArgumentNullException(nameof(changedSolution));
             ConfirmationMessage = confirmationMessage;
         }
 
         internal override bool ApplyDuringTests => true;
 
-        public override void Apply(Workspace workspace, CancellationToken cancellationToken)
-            => this.TryApply(workspace, new ProgressTracker(), cancellationToken);
+        public override void Apply(Workspace workspace, CancellationToken cancellationToken) =>
+            this.TryApply(workspace, new ProgressTracker(), cancellationToken);
 
         /// <summary>
         /// Show the confirmation message, if available, before attempting to apply the changes.
         /// </summary>
         internal override bool TryApply(
-            Workspace workspace, IProgressTracker progressTracker, CancellationToken cancellationToken)
-        {
+            Workspace workspace,
+            IProgressTracker progressTracker,
+            CancellationToken cancellationToken
+        ) {
             if (ConfirmationMessage != null)
             {
-                var notificationService = workspace.Services.GetRequiredService<INotificationService>();
-                if (!notificationService.ConfirmMessageBox(ConfirmationMessage, severity: NotificationSeverity.Warning))
-                {
+                var notificationService =
+                    workspace.Services.GetRequiredService<INotificationService>();
+                if (
+                    !notificationService.ConfirmMessageBox(
+                        ConfirmationMessage,
+                        severity: NotificationSeverity.Warning
+                    )
+                ) {
                     return false;
                 }
             }

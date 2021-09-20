@@ -22,30 +22,42 @@ namespace Microsoft.CodeAnalysis.AddImport
         {
             public ProjectSymbolReferenceCodeAction(
                 Document originalDocument,
-                AddImportFixData fixData)
-                : base(originalDocument, fixData)
+                AddImportFixData fixData
+            ) : base(originalDocument, fixData)
             {
                 Contract.ThrowIfFalse(fixData.Kind == AddImportFixKind.ProjectSymbol);
             }
 
-            private bool ShouldAddProjectReference()
-                => FixData.ProjectReferenceToAdd != null && FixData.ProjectReferenceToAdd != OriginalDocument.Project.Id;
+            private bool ShouldAddProjectReference() =>
+                FixData.ProjectReferenceToAdd != null
+                && FixData.ProjectReferenceToAdd != OriginalDocument.Project.Id;
 
-            protected override Task<CodeActionOperation?> UpdateProjectAsync(Project project, bool isPreview, CancellationToken cancellationToken)
-            {
+            protected override Task<CodeActionOperation?> UpdateProjectAsync(
+                Project project,
+                bool isPreview,
+                CancellationToken cancellationToken
+            ) {
                 if (!ShouldAddProjectReference())
                 {
                     return SpecializedTasks.Null<CodeActionOperation>();
                 }
 
-                var projectWithAddedReference = project.AddProjectReference(new ProjectReference(FixData.ProjectReferenceToAdd));
+                var projectWithAddedReference = project.AddProjectReference(
+                    new ProjectReference(FixData.ProjectReferenceToAdd)
+                );
                 var applyOperation = new ApplyChangesOperation(projectWithAddedReference.Solution);
                 if (isPreview)
                 {
                     return Task.FromResult<CodeActionOperation?>(applyOperation);
                 }
 
-                return Task.FromResult<CodeActionOperation?>(new AddProjectReferenceCodeActionOperation(OriginalDocument.Project.Id, FixData.ProjectReferenceToAdd, applyOperation));
+                return Task.FromResult<CodeActionOperation?>(
+                    new AddProjectReferenceCodeActionOperation(
+                        OriginalDocument.Project.Id,
+                        FixData.ProjectReferenceToAdd,
+                        applyOperation
+                    )
+                );
             }
 
             private sealed class AddProjectReferenceCodeActionOperation : CodeActionOperation
@@ -54,8 +66,11 @@ namespace Microsoft.CodeAnalysis.AddImport
                 private readonly ProjectId _referencedProject;
                 private readonly ApplyChangesOperation _applyOperation;
 
-                public AddProjectReferenceCodeActionOperation(ProjectId referencingProject, ProjectId referencedProject, ApplyChangesOperation applyOperation)
-                {
+                public AddProjectReferenceCodeActionOperation(
+                    ProjectId referencingProject,
+                    ProjectId referencedProject,
+                    ApplyChangesOperation applyOperation
+                ) {
                     _referencingProject = referencingProject;
                     _referencedProject = referencedProject;
                     _applyOperation = applyOperation;
@@ -71,8 +86,11 @@ namespace Microsoft.CodeAnalysis.AddImport
                     _applyOperation.Apply(workspace, cancellationToken);
                 }
 
-                internal override bool TryApply(Workspace workspace, IProgressTracker progressTracker, CancellationToken cancellationToken)
-                {
+                internal override bool TryApply(
+                    Workspace workspace,
+                    IProgressTracker progressTracker,
+                    CancellationToken cancellationToken
+                ) {
                     if (!CanApply(workspace))
                         return false;
 
@@ -81,7 +99,10 @@ namespace Microsoft.CodeAnalysis.AddImport
 
                 private bool CanApply(Workspace workspace)
                 {
-                    return workspace.CanAddProjectReference(_referencingProject, _referencedProject);
+                    return workspace.CanAddProjectReference(
+                        _referencingProject,
+                        _referencedProject
+                    );
                 }
             }
         }

@@ -16,7 +16,8 @@ namespace System.Runtime.Serialization.Json
     {
         private const int MaxTextChunk = 2048;
 
-        private static ReadOnlySpan<byte> CharTypes => new byte[256] // rely on C# compiler optimization to eliminate allocation
+        private static ReadOnlySpan<byte> CharTypes =>
+            new byte[256] // rely on C# compiler optimization to eliminate allocation
             {
                 CharType.None, //   0 (.)
                 CharType.None, //   1 (.)
@@ -294,10 +295,7 @@ namespace System.Runtime.Serialization.Json
 
         public override bool CanCanonicalize
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override string Value
@@ -316,7 +314,9 @@ namespace System.Runtime.Serialization.Json
         {
             get
             {
-                return (this.Node.NodeType == XmlNodeType.Attribute || this.Node is XmlAttributeTextNode);
+                return (
+                    this.Node.NodeType == XmlNodeType.Attribute || this.Node is XmlAttributeTextNode
+                );
             }
         }
 
@@ -330,11 +330,7 @@ namespace System.Runtime.Serialization.Json
 
         private bool IsReadingComplexText
         {
-            get
-            {
-                return ((!this.Node.IsAtomicValue) &&
-                    (this.Node.NodeType == XmlNodeType.Text));
-            }
+            get { return ((!this.Node.IsAtomicValue) && (this.Node.NodeType == XmlNodeType.Text)); }
         }
 
         protected override void Dispose(bool disposing)
@@ -383,8 +379,10 @@ namespace System.Runtime.Serialization.Json
             return base.GetAttribute(name);
         }
 
-        public override string? GetAttribute(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
-        {
+        public override string? GetAttribute(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        ) {
             if (XmlDictionaryString.GetString(localName) != JsonGlobals.typeString)
             {
                 return UnescapeJsonString(base.GetAttribute(localName, namespaceUri));
@@ -428,8 +426,9 @@ namespace System.Runtime.Serialization.Json
 
                 if (TryGetByte(out ch))
                 {
-                    if (_charactersToSkipOnNextRead[0] == ch || _charactersToSkipOnNextRead[1] == ch)
-                    {
+                    if (
+                        _charactersToSkipOnNextRead[0] == ch || _charactersToSkipOnNextRead[1] == ch
+                    ) {
                         BufferReader.SkipByte();
                         _charactersToSkipOnNextRead[0] = 0;
                         _charactersToSkipOnNextRead[1] = 0;
@@ -487,8 +486,12 @@ namespace System.Runtime.Serialization.Json
                         }
                         break;
                     case JsonComplexTextMode.None:
-                        XmlExceptionHelper.ThrowXmlException(this,
-                            new XmlException(SR.Format(SR.JsonEncounteredUnexpectedCharacter, (char)ch)));
+                        XmlExceptionHelper.ThrowXmlException(
+                            this,
+                            new XmlException(
+                                SR.Format(SR.JsonEncounteredUnexpectedCharacter, (char)ch)
+                            )
+                        );
                         break;
                 }
             }
@@ -537,16 +540,19 @@ namespace System.Runtime.Serialization.Json
                 {
                     SkipWhitespaceInBufferReader();
                     ch = BufferReader.GetByte();
-                    if ((ch == JsonGlobals.MemberSeparatorByte) ||
-                        (ch == JsonGlobals.EndObjectByte))
-                    {
+                    if (
+                        (ch == JsonGlobals.MemberSeparatorByte) || (ch == JsonGlobals.EndObjectByte)
+                    ) {
                         BufferReader.SkipByte();
                     }
                     else
                     {
-                        XmlExceptionHelper.ThrowXmlException(this,
-                            new XmlException(SR.Format(SR.JsonEncounteredUnexpectedCharacter,
-                            (char)ch)));
+                        XmlExceptionHelper.ThrowXmlException(
+                            this,
+                            new XmlException(
+                                SR.Format(SR.JsonEncounteredUnexpectedCharacter, (char)ch)
+                            )
+                        );
                     }
                     _expectingFirstElementInNonPrimitiveChild = false;
                 }
@@ -585,29 +591,45 @@ namespace System.Runtime.Serialization.Json
                 }
                 else
                 {
-                    XmlExceptionHelper.ThrowXmlException(this,
-                        new XmlException(SR.Format(SR.JsonEncounteredUnexpectedCharacter,
-                        JsonGlobals.QuoteChar)));
+                    XmlExceptionHelper.ThrowXmlException(
+                        this,
+                        new XmlException(
+                            SR.Format(SR.JsonEncounteredUnexpectedCharacter, JsonGlobals.QuoteChar)
+                        )
+                    );
                 }
             }
             else if (ch == (byte)'f')
             {
                 int offset;
                 byte[] buffer = BufferReader.GetBuffer(5, out offset);
-                if (buffer[offset + 1] != (byte)'a' ||
-                    buffer[offset + 2] != (byte)'l' ||
-                    buffer[offset + 3] != (byte)'s' ||
-                    buffer[offset + 4] != (byte)'e')
-                {
-                    XmlExceptionHelper.ThrowTokenExpected(this, "false", Encoding.UTF8.GetString(buffer, offset, 5));
+                if (
+                    buffer[offset + 1] != (byte)'a'
+                    || buffer[offset + 2] != (byte)'l'
+                    || buffer[offset + 3] != (byte)'s'
+                    || buffer[offset + 4] != (byte)'e'
+                ) {
+                    XmlExceptionHelper.ThrowTokenExpected(
+                        this,
+                        "false",
+                        Encoding.UTF8.GetString(buffer, offset, 5)
+                    );
                 }
                 BufferReader.Advance(5);
 
                 if (TryGetByte(out ch))
                 {
-                    if (!IsWhitespace(ch) && ch != JsonGlobals.MemberSeparatorByte && ch != JsonGlobals.EndObjectChar && ch != JsonGlobals.EndCollectionByte)
-                    {
-                        XmlExceptionHelper.ThrowTokenExpected(this, "false", Encoding.UTF8.GetString(buffer, offset, 4) + (char)ch);
+                    if (
+                        !IsWhitespace(ch)
+                        && ch != JsonGlobals.MemberSeparatorByte
+                        && ch != JsonGlobals.EndObjectChar
+                        && ch != JsonGlobals.EndCollectionByte
+                    ) {
+                        XmlExceptionHelper.ThrowTokenExpected(
+                            this,
+                            "false",
+                            Encoding.UTF8.GetString(buffer, offset, 4) + (char)ch
+                        );
                     }
                 }
                 MoveToAtomicText().Value.SetValue(ValueHandleType.UTF8, offset, 5);
@@ -616,19 +638,32 @@ namespace System.Runtime.Serialization.Json
             {
                 int offset;
                 byte[] buffer = BufferReader.GetBuffer(4, out offset);
-                if (buffer[offset + 1] != (byte)'r' ||
-                    buffer[offset + 2] != (byte)'u' ||
-                    buffer[offset + 3] != (byte)'e')
-                {
-                    XmlExceptionHelper.ThrowTokenExpected(this, "true", Encoding.UTF8.GetString(buffer, offset, 4));
+                if (
+                    buffer[offset + 1] != (byte)'r'
+                    || buffer[offset + 2] != (byte)'u'
+                    || buffer[offset + 3] != (byte)'e'
+                ) {
+                    XmlExceptionHelper.ThrowTokenExpected(
+                        this,
+                        "true",
+                        Encoding.UTF8.GetString(buffer, offset, 4)
+                    );
                 }
                 BufferReader.Advance(4);
 
                 if (TryGetByte(out ch))
                 {
-                    if (!IsWhitespace(ch) && ch != JsonGlobals.MemberSeparatorByte && ch != JsonGlobals.EndObjectChar && ch != JsonGlobals.EndCollectionByte)
-                    {
-                        XmlExceptionHelper.ThrowTokenExpected(this, "true", Encoding.UTF8.GetString(buffer, offset, 4) + (char)ch);
+                    if (
+                        !IsWhitespace(ch)
+                        && ch != JsonGlobals.MemberSeparatorByte
+                        && ch != JsonGlobals.EndObjectChar
+                        && ch != JsonGlobals.EndCollectionByte
+                    ) {
+                        XmlExceptionHelper.ThrowTokenExpected(
+                            this,
+                            "true",
+                            Encoding.UTF8.GetString(buffer, offset, 4) + (char)ch
+                        );
                     }
                 }
                 MoveToAtomicText().Value.SetValue(ValueHandleType.UTF8, offset, 4);
@@ -637,11 +672,16 @@ namespace System.Runtime.Serialization.Json
             {
                 int offset;
                 byte[] buffer = BufferReader.GetBuffer(4, out offset);
-                if (buffer[offset + 1] != (byte)'u' ||
-                    buffer[offset + 2] != (byte)'l' ||
-                    buffer[offset + 3] != (byte)'l')
-                {
-                    XmlExceptionHelper.ThrowTokenExpected(this, "null", Encoding.UTF8.GetString(buffer, offset, 4));
+                if (
+                    buffer[offset + 1] != (byte)'u'
+                    || buffer[offset + 2] != (byte)'l'
+                    || buffer[offset + 3] != (byte)'l'
+                ) {
+                    XmlExceptionHelper.ThrowTokenExpected(
+                        this,
+                        "null",
+                        Encoding.UTF8.GetString(buffer, offset, 4)
+                    );
                 }
                 BufferReader.Advance(4);
                 SkipWhitespaceInBufferReader();
@@ -654,7 +694,11 @@ namespace System.Runtime.Serialization.Json
                     }
                     else if (ch != JsonGlobals.EndCollectionByte)
                     {
-                        XmlExceptionHelper.ThrowTokenExpected(this, "null", Encoding.UTF8.GetString(buffer, offset, 4) + (char)ch);
+                        XmlExceptionHelper.ThrowTokenExpected(
+                            this,
+                            "null",
+                            Encoding.UTF8.GetString(buffer, offset, 4) + (char)ch
+                        );
                     }
                 }
                 else
@@ -664,17 +708,20 @@ namespace System.Runtime.Serialization.Json
                 }
                 MoveToEndElement();
             }
-            else if ((ch == (byte)'-') ||
-                (((byte)'0' <= ch) && (ch <= (byte)'9')) ||
-                (ch == (byte)'I') ||
-                (ch == (byte)'N'))
-            {
+            else if (
+                (ch == (byte)'-')
+                || (((byte)'0' <= ch) && (ch <= (byte)'9'))
+                || (ch == (byte)'I')
+                || (ch == (byte)'N')
+            ) {
                 ReadNumericalText();
             }
             else
             {
-                XmlExceptionHelper.ThrowXmlException(this,
-                    new XmlException(SR.Format(SR.JsonEncounteredUnexpectedCharacter, (char)ch)));
+                XmlExceptionHelper.ThrowXmlException(
+                    this,
+                    new XmlException(SR.Format(SR.JsonEncounteredUnexpectedCharacter, (char)ch))
+                );
             }
 
             return true;
@@ -737,11 +784,17 @@ namespace System.Runtime.Serialization.Json
                 }
                 if (offset < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(offset),
+                        SR.ValueMustBeNonNegative
+                    );
                 }
                 if (offset > buffer.Length)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(offset), SR.Format(SR.OffsetExceedsBufferSize, buffer.Length));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(offset),
+                        SR.Format(SR.OffsetExceedsBufferSize, buffer.Length)
+                    );
                 }
                 if (count < 0)
                 {
@@ -749,7 +802,10 @@ namespace System.Runtime.Serialization.Json
                 }
                 if (count > buffer.Length - offset)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(count), SR.Format(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(count),
+                        SR.Format(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset)
+                    );
                 }
 
                 return 0;
@@ -768,11 +824,17 @@ namespace System.Runtime.Serialization.Json
                 }
                 if (offset < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(offset),
+                        SR.ValueMustBeNonNegative
+                    );
                 }
                 if (offset > chars.Length)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(offset), SR.Format(SR.OffsetExceedsBufferSize, chars.Length));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(offset),
+                        SR.Format(SR.OffsetExceedsBufferSize, chars.Length)
+                    );
                 }
                 if (count < 0)
                 {
@@ -780,7 +842,10 @@ namespace System.Runtime.Serialization.Json
                 }
                 if (count > chars.Length - offset)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(count), SR.Format(SR.SizeExceedsRemainingBufferSpace, chars.Length - offset));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(count),
+                        SR.Format(SR.SizeExceedsRemainingBufferSpace, chars.Length - offset)
+                    );
                 }
                 int actual;
 
@@ -804,9 +869,14 @@ namespace System.Runtime.Serialization.Json
             return base.ReadValueChunk(chars, offset, count);
         }
 
-        public void SetInput(byte[] buffer, int offset, int count, Encoding? encoding, XmlDictionaryReaderQuotas quotas,
-            OnXmlDictionaryReaderClose? onClose)
-        {
+        public void SetInput(
+            byte[] buffer,
+            int offset,
+            int count,
+            Encoding? encoding,
+            XmlDictionaryReaderQuotas quotas,
+            OnXmlDictionaryReaderClose? onClose
+        ) {
             if (buffer == null)
             {
                 throw new ArgumentNullException(nameof(buffer));
@@ -817,7 +887,10 @@ namespace System.Runtime.Serialization.Json
             }
             if (offset > buffer.Length)
             {
-                throw new ArgumentOutOfRangeException(nameof(offset), SR.Format(SR.JsonOffsetExceedsBufferSize, buffer.Length));
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    SR.Format(SR.JsonOffsetExceedsBufferSize, buffer.Length)
+                );
             }
             if (count < 0)
             {
@@ -825,19 +898,30 @@ namespace System.Runtime.Serialization.Json
             }
             if (count > buffer.Length - offset)
             {
-                throw new ArgumentOutOfRangeException(nameof(count), SR.Format(SR.JsonSizeExceedsRemainingBufferSpace, buffer.Length - offset));
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.Format(SR.JsonSizeExceedsRemainingBufferSpace, buffer.Length - offset)
+                );
             }
             MoveToInitial(quotas, onClose);
 
-            ArraySegment<byte> seg = JsonEncodingStreamWrapper.ProcessBuffer(buffer, offset, count, encoding);
+            ArraySegment<byte> seg = JsonEncodingStreamWrapper.ProcessBuffer(
+                buffer,
+                offset,
+                count,
+                encoding
+            );
             BufferReader.SetBuffer(seg.Array!, seg.Offset, seg.Count, null, null);
             _buffered = true;
             ResetState();
         }
 
-        public void SetInput(Stream stream, Encoding? encoding, XmlDictionaryReaderQuotas quotas,
-            OnXmlDictionaryReaderClose? onClose)
-        {
+        public void SetInput(
+            Stream stream,
+            Encoding? encoding,
+            XmlDictionaryReaderQuotas quotas,
+            OnXmlDictionaryReaderClose? onClose
+        ) {
             if (stream == null)
             {
                 throw new ArgumentNullException(nameof(stream));
@@ -851,8 +935,11 @@ namespace System.Runtime.Serialization.Json
             ResetState();
         }
 
-        public override void StartCanonicalization(Stream stream, bool includeComments, string[]? inclusivePrefixes)
-        {
+        public override void StartCanonicalization(
+            Stream stream,
+            bool includeComments,
+            string[]? inclusivePrefixes
+        ) {
             throw new NotSupportedException();
         }
 
@@ -868,7 +955,10 @@ namespace System.Runtime.Serialization.Json
             }
             if (offset > array.Length)
             {
-                throw new ArgumentOutOfRangeException(nameof(offset), SR.Format(SR.OffsetExceedsBufferSize, array.Length));
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    SR.Format(SR.OffsetExceedsBufferSize, array.Length)
+                );
             }
             if (count < 0)
             {
@@ -876,7 +966,10 @@ namespace System.Runtime.Serialization.Json
             }
             if (count > array.Length - offset)
             {
-                throw new ArgumentOutOfRangeException(nameof(count), SR.Format(SR.SizeExceedsRemainingBufferSpace, array.Length - offset));
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.Format(SR.SizeExceedsRemainingBufferSpace, array.Length - offset)
+                );
             }
         }
 
@@ -923,9 +1016,12 @@ namespace System.Runtime.Serialization.Json
             while (offset < offsetMax)
             {
                 byte ch = buffer[offset];
-                if (ch == JsonGlobals.MemberSeparatorByte || ch == JsonGlobals.EndObjectByte || ch == JsonGlobals.EndCollectionByte
-                    || IsWhitespace(ch))
-                {
+                if (
+                    ch == JsonGlobals.MemberSeparatorByte
+                    || ch == JsonGlobals.EndObjectByte
+                    || ch == JsonGlobals.EndCollectionByte
+                    || IsWhitespace(ch)
+                ) {
                     break;
                 }
                 offset++;
@@ -933,8 +1029,12 @@ namespace System.Runtime.Serialization.Json
             return offset - beginOffset;
         }
 
-        private static int ComputeQuotedTextLengthUntilEndQuote(byte[] buffer, int offset, int offsetMax, out bool escaped)
-        {
+        private static int ComputeQuotedTextLengthUntilEndQuote(
+            byte[] buffer,
+            int offset,
+            int offsetMax,
+            out bool escaped
+        ) {
             // Assumes that for quoted text "someText", the first " has been consumed.
             // For original text "someText", buffer passed in is someText".
             // This method returns return 8 for someText" (s, o, m, e, T, e, x, t).
@@ -963,7 +1063,6 @@ namespace System.Runtime.Serialization.Json
 
             return offset - beginOffset;
         }
-
 
         // From JSON spec:
         // ws = *(
@@ -1090,8 +1189,10 @@ namespace System.Runtime.Serialization.Json
             base.MoveToEndElement();
         }
 
-        private void MoveToInitial(XmlDictionaryReaderQuotas quotas, OnXmlDictionaryReaderClose? onClose)
-        {
+        private void MoveToInitial(
+            XmlDictionaryReaderQuotas quotas,
+            OnXmlDictionaryReaderClose? onClose
+        ) {
             MoveToInitial(quotas);
             _maxBytesPerRead = quotas.MaxBytesPerRead;
             _onReaderClose = onClose;
@@ -1115,7 +1216,10 @@ namespace System.Runtime.Serialization.Json
             } while (_complexTextMode == JsonComplexTextMode.QuotedText);
 
             int actualOffset = BufferReader.Offset - 1; //  -1 to ignore " at end of local name
-            elementNode.LocalName.SetValue(elementNode.NameOffset, actualOffset - elementNode.NameOffset);
+            elementNode.LocalName.SetValue(
+                elementNode.NameOffset,
+                actualOffset - elementNode.NameOffset
+            );
             elementNode.NameLength = actualOffset - elementNode.NameOffset;
             elementNode.Namespace.Uri.SetValue(elementNode.NameOffset, 0);
             elementNode.Prefix.SetValue(PrefixHandleType.Empty);
@@ -1130,11 +1234,16 @@ namespace System.Runtime.Serialization.Json
             }
             else
             {
-                for (int i = 0, offset = elementNode.NameOffset; i < elementNode.NameLength; i++, offset++)
-                {
+                for (
+                    int i = 0, offset = elementNode.NameOffset;
+                    i < elementNode.NameLength;
+                    i++, offset++
+                ) {
                     currentCharacter = (int)BufferReader.GetByte(offset);
-                    if ((CharTypes[currentCharacter] & CharType.Name) == 0 || currentCharacter >= 0x80)
-                    {
+                    if (
+                        (CharTypes[currentCharacter] & CharType.Name) == 0
+                        || currentCharacter >= 0x80
+                    ) {
                         SetJsonNameWithMapping(elementNode);
                         break;
                     }
@@ -1161,7 +1270,6 @@ namespace System.Runtime.Serialization.Json
                 SkipWhitespaceInBufferReader();
                 SkipExpectedByteInBufferReader(JsonGlobals.NameValueSeparatorByte);
                 SkipWhitespaceInBufferReader();
-
 
                 if (BufferReader.GetByte() == JsonGlobals.ObjectByte)
                 {
@@ -1217,8 +1325,12 @@ namespace System.Runtime.Serialization.Json
                     }
                     else
                     {
-                        XmlExceptionHelper.ThrowXmlException(this,
-                            new XmlException(SR.Format(SR.JsonEncounteredUnexpectedCharacter, (char)nextByte)));
+                        XmlExceptionHelper.ThrowXmlException(
+                            this,
+                            new XmlException(
+                                SR.Format(SR.JsonEncounteredUnexpectedCharacter, (char)nextByte)
+                            )
+                        );
                     }
                     break;
                 case JsonGlobals.CollectionByte:
@@ -1227,17 +1339,22 @@ namespace System.Runtime.Serialization.Json
                     EnterJsonScope(JsonNodeType.Collection);
                     break;
                 default:
-                    if (nextByte == '-' ||
-                        (nextByte <= '9' && nextByte >= '0') ||
-                        nextByte == 'N' ||
-                        nextByte == 'I')
-                    {
+                    if (
+                        nextByte == '-'
+                        || (nextByte <= '9' && nextByte >= '0')
+                        || nextByte == 'N'
+                        || nextByte == 'I'
+                    ) {
                         attribute.Value.SetConstantValue(ValueHandleConstStringType.Number);
                     }
                     else
                     {
-                        XmlExceptionHelper.ThrowXmlException(this,
-                            new XmlException(SR.Format(SR.JsonEncounteredUnexpectedCharacter, (char)nextByte)));
+                        XmlExceptionHelper.ThrowXmlException(
+                            this,
+                            new XmlException(
+                                SR.Format(SR.JsonEncounteredUnexpectedCharacter, (char)nextByte)
+                            )
+                        );
                     }
                     break;
             }
@@ -1268,8 +1385,12 @@ namespace System.Runtime.Serialization.Json
                         char lowChar = ParseChar(bufferAsString, NumberStyles.HexNumber);
                         if (!char.IsLowSurrogate(lowChar))
                         {
-                            XmlExceptionHelper.ThrowXmlException(this,
-                                new XmlException(SR.Format(SR.XmlInvalidLowSurrogate, bufferAsString)));
+                            XmlExceptionHelper.ThrowXmlException(
+                                this,
+                                new XmlException(
+                                    SR.Format(SR.XmlInvalidLowSurrogate, bufferAsString)
+                                )
+                            );
                         }
                         charValue = new SurrogateChar(lowChar, (char)charValue).Char;
                     }
@@ -1318,8 +1439,12 @@ namespace System.Runtime.Serialization.Json
                         // Do nothing. These are the actual unescaped values.
                         break;
                     default:
-                        XmlExceptionHelper.ThrowXmlException(this,
-                            new XmlException(SR.Format(SR.JsonEncounteredUnexpectedCharacter, (char)ch)));
+                        XmlExceptionHelper.ThrowXmlException(
+                            this,
+                            new XmlException(
+                                SR.Format(SR.JsonEncounteredUnexpectedCharacter, (char)ch)
+                            )
+                        );
                         break;
                 }
                 BufferReader.SkipByte();
@@ -1411,13 +1536,23 @@ namespace System.Runtime.Serialization.Json
             if (_buffered)
             {
                 buffer = BufferReader.GetBuffer(out offset, out offsetMax);
-                length = ComputeQuotedTextLengthUntilEndQuote(buffer, offset, offsetMax, out escaped);
+                length = ComputeQuotedTextLengthUntilEndQuote(
+                    buffer,
+                    offset,
+                    offsetMax,
+                    out escaped
+                );
                 endReached = offset < offsetMax - length;
             }
             else
             {
                 buffer = BufferReader.GetBuffer(MaxTextChunk, out offset, out offsetMax);
-                length = ComputeQuotedTextLengthUntilEndQuote(buffer, offset, offsetMax, out escaped);
+                length = ComputeQuotedTextLengthUntilEndQuote(
+                    buffer,
+                    offset,
+                    offsetMax,
+                    out escaped
+                );
                 endReached = offset < offsetMax - length;
                 length = BreakText(buffer, offset, length);
             }
@@ -1480,15 +1615,16 @@ namespace System.Runtime.Serialization.Json
             byte[] buffer = BufferReader.GetBuffer(8, out offset, out offsetMax);
             if (offset + 8 <= offsetMax)
             {
-                if (buffer[offset + 0] == (byte)'\"' &&
-                    buffer[offset + 1] == (byte)'_' &&
-                    buffer[offset + 2] == (byte)'_' &&
-                    buffer[offset + 3] == (byte)'t' &&
-                    buffer[offset + 4] == (byte)'y' &&
-                    buffer[offset + 5] == (byte)'p' &&
-                    buffer[offset + 6] == (byte)'e' &&
-                    buffer[offset + 7] == (byte)'\"')
-                {
+                if (
+                    buffer[offset + 0] == (byte)'\"'
+                    && buffer[offset + 1] == (byte)'_'
+                    && buffer[offset + 2] == (byte)'_'
+                    && buffer[offset + 3] == (byte)'t'
+                    && buffer[offset + 4] == (byte)'y'
+                    && buffer[offset + 5] == (byte)'p'
+                    && buffer[offset + 6] == (byte)'e'
+                    && buffer[offset + 7] == (byte)'\"'
+                ) {
                     XmlAttributeNode attribute = AddAttribute();
 
                     attribute.LocalName.SetValue(offset + 1, 6);
@@ -1520,7 +1656,11 @@ namespace System.Runtime.Serialization.Json
                         }
                     } while (_complexTextMode == JsonComplexTextMode.QuotedText);
 
-                    attribute.Value.SetValue(ValueHandleType.UTF8, offset, BufferReader.Offset - 1 - offset);
+                    attribute.Value.SetValue(
+                        ValueHandleType.UTF8,
+                        offset,
+                        BufferReader.Offset - 1 - offset
+                    );
 
                     SkipWhitespaceInBufferReader();
 
@@ -1566,7 +1706,11 @@ namespace System.Runtime.Serialization.Json
             attribute.LocalName.SetConstantValue(StringHandleConstStringType.Item);
             attribute.Namespace.Uri.SetValue(0, 0);
             attribute.Prefix.SetValue(PrefixHandleType.Empty);
-            attribute.Value.SetValue(ValueHandleType.UTF8, elementNode.NameOffset, elementNode.NameLength);
+            attribute.Value.SetValue(
+                ValueHandleType.UTF8,
+                elementNode.NameOffset,
+                elementNode.NameLength
+            );
 
             elementNode.NameLength = 0;
             elementNode.Prefix.SetValue(PrefixHandleType.A);
@@ -1578,7 +1722,11 @@ namespace System.Runtime.Serialization.Json
         {
             if (BufferReader.GetByte() != characterToSkip)
             {
-                XmlExceptionHelper.ThrowTokenExpected(this, ((char)characterToSkip).ToString(), (char)BufferReader.GetByte());
+                XmlExceptionHelper.ThrowTokenExpected(
+                    this,
+                    ((char)characterToSkip).ToString(),
+                    (char)BufferReader.GetByte()
+                );
             }
             BufferReader.SkipByte();
         }
@@ -1594,7 +1742,8 @@ namespace System.Runtime.Serialization.Json
 
         private bool TryGetByte(out byte ch)
         {
-            int offset, offsetMax;
+            int offset,
+                offsetMax;
             byte[] buffer = BufferReader.GetBuffer(1, out offset, out offsetMax);
 
             if (offset < offsetMax)
@@ -1618,7 +1767,8 @@ namespace System.Runtime.Serialization.Json
             }
 
             StringBuilder? sb = null;
-            int startIndex = 0, count = 0;
+            int startIndex = 0,
+                count = 0;
             for (int i = 0; i < val.Length; i++)
             {
                 if (val[i] == '\\')
@@ -1629,10 +1779,18 @@ namespace System.Runtime.Serialization.Json
                         sb = new StringBuilder();
                     }
                     sb.Append(val, startIndex, count);
-                    Fx.Assert(i < val.Length, "Found that an '\' was the last character in a string. ReadServerTypeAttriute validates that the escape sequence is valid when it calls ReadQuotedText and ReadEscapedCharacter");
+                    Fx.Assert(
+                        i < val.Length,
+                        "Found that an '\' was the last character in a string. ReadServerTypeAttriute validates that the escape sequence is valid when it calls ReadQuotedText and ReadEscapedCharacter"
+                    );
                     if (i >= val.Length)
                     {
-                        XmlExceptionHelper.ThrowXmlException(this, new XmlException(SR.Format(SR.JsonEncounteredUnexpectedCharacter, val[i])));
+                        XmlExceptionHelper.ThrowXmlException(
+                            this,
+                            new XmlException(
+                                SR.Format(SR.JsonEncounteredUnexpectedCharacter, val[i])
+                            )
+                        );
                     }
                     switch (val[i])
                     {
@@ -1660,8 +1818,12 @@ namespace System.Runtime.Serialization.Json
                         case 'u':
                             if ((i + 3) >= val.Length)
                             {
-                                XmlExceptionHelper.ThrowXmlException(this,
-                                    new XmlException(SR.Format(SR.JsonEncounteredUnexpectedCharacter, val[i])));
+                                XmlExceptionHelper.ThrowXmlException(
+                                    this,
+                                    new XmlException(
+                                        SR.Format(SR.JsonEncounteredUnexpectedCharacter, val[i])
+                                    )
+                                );
                             }
                             sb.Append(ParseChar(val.Substring(i + 1, 4), NumberStyles.HexNumber));
                             i += 4;
@@ -1689,7 +1851,11 @@ namespace System.Runtime.Serialization.Json
 
         protected override XmlSigningNodeWriter CreateSigningNodeWriter()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.Format(SR.JsonMethodNotSupported, "CreateSigningNodeWriter")));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(
+                    SR.Format(SR.JsonMethodNotSupported, "CreateSigningNodeWriter")
+                )
+            );
         }
 
         private static class CharType

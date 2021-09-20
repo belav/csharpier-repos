@@ -53,8 +53,9 @@ namespace Roslyn.Utilities
     /// even in concurrent execution.</para>
     /// </remarks>
     /// <typeparam name="T">The type of disposable object.</typeparam>
-    internal sealed class ReferenceCountedDisposable<T> : IReferenceCountedDisposable<T>, IDisposable
-        where T : class, IDisposable
+    internal sealed class ReferenceCountedDisposable<T>
+        : IReferenceCountedDisposable<T>,
+          IDisposable where T : class, IDisposable
     {
         /// <summary>
         /// The target of this reference. This value is initialized to a non-<see langword="null"/> value in the
@@ -90,10 +91,7 @@ namespace Roslyn.Utilities
         /// <exception cref="ArgumentNullException">
         /// If <paramref name="instance"/> is <see langword="null"/>.
         /// </exception>
-        public ReferenceCountedDisposable(T instance)
-            : this(instance, new StrongBox<int>(1))
-        {
-        }
+        public ReferenceCountedDisposable(T instance) : this(instance, new StrongBox<int>(1)) { }
 
         private ReferenceCountedDisposable(T instance, StrongBox<int> referenceCount)
         {
@@ -115,7 +113,8 @@ namespace Roslyn.Utilities
         /// it returns after any code invokes <see cref="Dispose"/>.</para>
         /// </remarks>
         /// <value>The target object.</value>
-        public T Target => _instance ?? throw new ObjectDisposedException(nameof(ReferenceCountedDisposable<T>));
+        public T Target =>
+            _instance ?? throw new ObjectDisposedException(nameof(ReferenceCountedDisposable<T>));
 
         /// <summary>
         /// Increments the reference count for the disposable object, and returns a new disposable reference to it.
@@ -127,18 +126,20 @@ namespace Roslyn.Utilities
         /// <returns>A new <see cref="ReferenceCountedDisposable{T}"/> pointing to the same underlying object, if it
         /// has not yet been disposed; otherwise, <see langword="null"/> if this reference to the underlying object
         /// has already been disposed.</returns>
-        public ReferenceCountedDisposable<T>? TryAddReference()
-            => TryAddReferenceImpl(_instance, _boxedReferenceCount);
+        public ReferenceCountedDisposable<T>? TryAddReference() =>
+            TryAddReferenceImpl(_instance, _boxedReferenceCount);
 
-        IReferenceCountedDisposable<T>? IReferenceCountedDisposable<T>.TryAddReference()
-            => TryAddReference();
+        IReferenceCountedDisposable<T>? IReferenceCountedDisposable<T>.TryAddReference() =>
+            TryAddReference();
 
         /// <summary>
         /// Provides the implementation for <see cref="TryAddReference"/> and
         /// <see cref="WeakReference.TryAddReference"/>.
         /// </summary>
-        private static ReferenceCountedDisposable<T>? TryAddReferenceImpl(T? target, StrongBox<int> referenceCount)
-        {
+        private static ReferenceCountedDisposable<T>? TryAddReferenceImpl(
+            T? target,
+            StrongBox<int> referenceCount
+        ) {
             lock (referenceCount)
             {
                 if (referenceCount.Value == 0)
@@ -153,7 +154,6 @@ namespace Roslyn.Utilities
                     // reference to the target
                     return null;
                 }
-
                 checked
                 {
                     referenceCount.Value++;
@@ -231,8 +231,7 @@ namespace Roslyn.Utilities
             private readonly WeakReference<T>? _weakInstance;
             private readonly StrongBox<int>? _boxedReferenceCount;
 
-            public WeakReference(ReferenceCountedDisposable<T> reference)
-                : this()
+            public WeakReference(ReferenceCountedDisposable<T> reference) : this()
             {
                 if (reference == null)
                 {

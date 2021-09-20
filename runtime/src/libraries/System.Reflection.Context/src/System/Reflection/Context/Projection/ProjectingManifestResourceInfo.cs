@@ -11,8 +11,10 @@ namespace System.Reflection.Context.Projection
     {
         private readonly Projector _projector;
 
-        public ProjectingManifestResourceInfo(ManifestResourceInfo resource, Projector projector)
-            : base(resource)
+        public ProjectingManifestResourceInfo(
+            ManifestResourceInfo resource,
+            Projector projector
+        ) : base(resource)
         {
             Debug.Assert(null != projector);
 

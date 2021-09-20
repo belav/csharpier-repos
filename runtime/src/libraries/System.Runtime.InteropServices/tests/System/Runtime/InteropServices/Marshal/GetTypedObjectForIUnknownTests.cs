@@ -21,7 +21,10 @@ namespace System.Runtime.InteropServices.Tests
             yield return new NonGenericStruct();
             yield return Int32Enum.Value1;
 
-            MethodInfo method = typeof(GetTypedObjectForIUnknownTests).GetMethod(nameof(NonGenericMethod), BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo method = typeof(GetTypedObjectForIUnknownTests).GetMethod(
+                nameof(NonGenericMethod),
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             Delegate d = method.CreateDelegate(typeof(NonGenericDelegate));
             yield return d;
         }
@@ -31,7 +34,11 @@ namespace System.Runtime.InteropServices.Tests
             foreach (object o in GetTypedObjectForIUnknown_RoundtrippableType_TestData())
             {
                 yield return new object[] { o, o.GetType() };
-                yield return new object[] { o, typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0] };
+                yield return new object[]
+                {
+                    o,
+                    typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0]
+                };
                 yield return new object[] { o, typeof(int).MakeByRefType() };
 
                 Type baseType = o.GetType().BaseType;
@@ -60,7 +67,11 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { new int[,] { { 10 } }, typeof(Array) };
 
             yield return new object[] { new KeyValuePair<string, int>("key", 10), typeof(object) };
-            yield return new object[] { new KeyValuePair<string, int>("key", 10), typeof(ValueType) };
+            yield return new object[]
+            {
+                new KeyValuePair<string, int>("key", 10),
+                typeof(ValueType)
+            };
         }
 
         [Theory]
@@ -73,6 +84,7 @@ namespace System.Runtime.InteropServices.Tests
             {
                 Assert.Equal(o, Marshal.GetTypedObjectForIUnknown(ptr, type));
             }
+
             finally
             {
                 Marshal.Release(ptr);
@@ -83,14 +95,19 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void GetTypedObjectForIUnknown_Unix_ThrowsPlatformNotSupportedException()
         {
-            Assert.Throws<PlatformNotSupportedException>(() => Marshal.GetTypedObjectForIUnknown(IntPtr.Zero, typeof(int)));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Marshal.GetTypedObjectForIUnknown(IntPtr.Zero, typeof(int))
+            );
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void GetTypedObjectForIUnknown_ZeroUnknown_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("pUnk", () => Marshal.GetTypedObjectForIUnknown(IntPtr.Zero, typeof(int)));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "pUnk",
+                () => Marshal.GetTypedObjectForIUnknown(IntPtr.Zero, typeof(int))
+            );
         }
 
         [Fact]
@@ -100,8 +117,12 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr iUnknown = Marshal.GetIUnknownForObject(new object());
             try
             {
-                AssertExtensions.Throws<ArgumentNullException>("t", () => Marshal.GetTypedObjectForIUnknown(iUnknown, null));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "t",
+                    () => Marshal.GetTypedObjectForIUnknown(iUnknown, null)
+                );
             }
+
             finally
             {
                 Marshal.Release(iUnknown);
@@ -116,7 +137,10 @@ namespace System.Runtime.InteropServices.Tests
 
             yield return new object[] { typeof(GenericClass<>) };
 
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.Run);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.Run
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
             yield return new object[] { typeBuilder };
@@ -130,8 +154,12 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr ptr = Marshal.GetIUnknownForObject(new object());
             try
             {
-                AssertExtensions.Throws<ArgumentException>("t", () => Marshal.GetTypedObjectForIUnknown(ptr, type));
+                AssertExtensions.Throws<ArgumentException>(
+                    "t",
+                    () => Marshal.GetTypedObjectForIUnknown(ptr, type)
+                );
             }
+
             finally
             {
                 Marshal.Release(ptr);
@@ -151,7 +179,10 @@ namespace System.Runtime.InteropServices.Tests
 
             yield return new object[] { new object(), typeof(int).MakePointerType() };
 
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.RunAndCollect);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.RunAndCollect
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
             Type collectibleType = typeBuilder.CreateType();
@@ -161,13 +192,18 @@ namespace System.Runtime.InteropServices.Tests
         [Theory]
         [MemberData(nameof(GetTypedObjectForIUnknownType_UncastableObject_TestData))]
         [PlatformSpecific(TestPlatforms.Windows)]
-        public void GetTypedObjectForIUnknown_UncastableObject_ThrowsInvalidCastException(object o, Type type)
-        {
+        public void GetTypedObjectForIUnknown_UncastableObject_ThrowsInvalidCastException(
+            object o,
+            Type type
+        ) {
             IntPtr ptr = Marshal.GetIUnknownForObject(o);
             try
             {
-                Assert.Throws<InvalidCastException>(() => Marshal.GetTypedObjectForIUnknown(ptr, type));
+                Assert.Throws<InvalidCastException>(
+                    () => Marshal.GetTypedObjectForIUnknown(ptr, type)
+                );
             }
+
             finally
             {
                 Marshal.Release(ptr);
@@ -189,8 +225,11 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr ptr = Marshal.GetIUnknownForObject(o);
             try
             {
-                Assert.Throws<BadImageFormatException>(() => Marshal.GetTypedObjectForIUnknown(ptr, o.GetType()));
+                Assert.Throws<BadImageFormatException>(
+                    () => Marshal.GetTypedObjectForIUnknown(ptr, o.GetType())
+                );
             }
+
             finally
             {
                 Marshal.Release(ptr);
@@ -203,6 +242,10 @@ namespace System.Runtime.InteropServices.Tests
         private static void NonGenericMethod(int i) { }
         public delegate void NonGenericDelegate(int i);
 
-        public enum Int32Enum : int { Value1, Value2 }
+        public enum Int32Enum : int
+        {
+            Value1,
+            Value2
+        }
     }
 }

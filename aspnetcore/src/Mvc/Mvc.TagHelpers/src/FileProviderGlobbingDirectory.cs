@@ -19,8 +19,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public FileProviderGlobbingDirectory(
             IFileProvider fileProvider,
             IFileInfo fileInfo,
-            FileProviderGlobbingDirectory parent)
-        {
+            FileProviderGlobbingDirectory parent
+        ) {
             if (fileProvider == null)
             {
                 throw new ArgumentNullException(nameof(fileProvider));
@@ -78,7 +78,11 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
         public override DirectoryInfoBase GetDirectory(string path)
         {
-            return new FileProviderGlobbingDirectory(_fileProvider, _fileProvider.GetFileInfo(path), this);
+            return new FileProviderGlobbingDirectory(
+                _fileProvider,
+                _fileProvider.GetFileInfo(path),
+                this
+            );
         }
 
         public override FileInfoBase GetFile(string path)

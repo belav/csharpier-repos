@@ -16,7 +16,8 @@ namespace CustomEncryptorSample
 
         public CustomXmlDecryptor(IServiceProvider services)
         {
-            _logger = services.GetRequiredService<ILoggerFactory>().CreateLogger<CustomXmlDecryptor>();
+            _logger = services.GetRequiredService<ILoggerFactory>()
+                .CreateLogger<CustomXmlDecryptor>();
         }
 
         public XElement Decrypt(XElement encryptedElement)

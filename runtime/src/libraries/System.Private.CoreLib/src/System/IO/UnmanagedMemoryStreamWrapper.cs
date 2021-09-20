@@ -40,6 +40,7 @@ namespace System.IO
                 if (disposing)
                     _unmanagedStream.Dispose();
             }
+
             finally
             {
                 base.Dispose(disposing);
@@ -137,15 +138,20 @@ namespace System.IO
             base.SetLength(value);
         }
 
-
-        public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
-        {
+        public override Task CopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        ) {
             // The parameter checks must be in sync with the base version:
             if (destination == null)
                 throw new ArgumentNullException(nameof(destination));
 
             if (bufferSize <= 0)
-                throw new ArgumentOutOfRangeException(nameof(bufferSize), SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(bufferSize),
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
 
             if (!CanRead && !CanWrite)
                 ThrowHelper.ThrowObjectDisposedException_StreamClosed(null);
@@ -162,32 +168,41 @@ namespace System.IO
             return _unmanagedStream.CopyToAsync(destination, bufferSize, cancellationToken);
         }
 
-
         public override Task FlushAsync(CancellationToken cancellationToken)
         {
             return _unmanagedStream.FlushAsync(cancellationToken);
         }
 
-
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             return _unmanagedStream.ReadAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
-        {
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        ) {
             return _unmanagedStream.ReadAsync(buffer, cancellationToken);
         }
 
-
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             return _unmanagedStream.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
-        {
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        ) {
             return _unmanagedStream.WriteAsync(buffer, cancellationToken);
         }
-    }  // class UnmanagedMemoryStreamWrapper
-}  // namespace
+    } // class UnmanagedMemoryStreamWrapper
+} // namespace

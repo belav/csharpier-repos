@@ -18,8 +18,10 @@ namespace ILCompiler.DependencyAnalysis
         public ObjectAndOffsetSymbolNode StartSymbol => _startSymbol;
         public ObjectAndOffsetSymbolNode EndSymbol => _endSymbol;
 
-        protected EmbeddedDataContainerNode(string startSymbolMangledName, string endSymbolMangledName)
-        {
+        protected EmbeddedDataContainerNode(
+            string startSymbolMangledName,
+            string endSymbolMangledName
+        ) {
             _startSymbolMangledName = startSymbolMangledName;
             _startSymbol = new ObjectAndOffsetSymbolNode(this, 0, startSymbolMangledName, true);
             _endSymbol = new ObjectAndOffsetSymbolNode(this, 0, endSymbolMangledName, true);
@@ -29,7 +31,9 @@ namespace ILCompiler.DependencyAnalysis
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
-            return _startSymbolMangledName.CompareTo(((EmbeddedDataContainerNode)other)._startSymbolMangledName);
+            return _startSymbolMangledName.CompareTo(
+                ((EmbeddedDataContainerNode)other)._startSymbolMangledName
+            );
         }
     }
 }

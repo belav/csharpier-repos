@@ -32,8 +32,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal
         {
             var c = _continuation;
 
-            if (c != null || (c = Interlocked.CompareExchange(ref _continuation, _continuationCompleted, null)) != null)
-            {
+            if (
+                c != null
+                || (
+                    c = Interlocked.CompareExchange(ref _continuation, _continuationCompleted, null)
+                ) != null
+            ) {
                 var continuationState = UserToken;
                 UserToken = null;
                 _continuation = _continuationCompleted; // in case someone's polling IsCompleted
@@ -66,15 +70,25 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal
 
         public ValueTaskSourceStatus GetStatus(short token)
         {
-            return !ReferenceEquals(_continuation, _continuationCompleted) ? ValueTaskSourceStatus.Pending :
-                    SocketError == SocketError.Success ? ValueTaskSourceStatus.Succeeded :
-                    ValueTaskSourceStatus.Faulted;
+            return !ReferenceEquals(_continuation, _continuationCompleted)
+              ? ValueTaskSourceStatus.Pending
+              : SocketError == SocketError.Success
+                  ? ValueTaskSourceStatus.Succeeded
+                  : ValueTaskSourceStatus.Faulted;
         }
 
-        public void OnCompleted(Action<object?> continuation, object? state, short token, ValueTaskSourceOnCompletedFlags flags)
-        {
+        public void OnCompleted(
+            Action<object?> continuation,
+            object? state,
+            short token,
+            ValueTaskSourceOnCompletedFlags flags
+        ) {
             UserToken = state;
-            var prevContinuation = Interlocked.CompareExchange(ref _continuation, continuation, null);
+            var prevContinuation = Interlocked.CompareExchange(
+                ref _continuation,
+                continuation,
+                null
+            );
             if (ReferenceEquals(prevContinuation, _continuationCompleted))
             {
                 UserToken = null;

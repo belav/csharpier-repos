@@ -19,8 +19,11 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteRandomTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _methodInfo = typeof(DbFunctionsExtensions).GetRequiredMethod(
-            nameof(DbFunctionsExtensions.Random), typeof(DbFunctions));
+        private static readonly MethodInfo _methodInfo =
+            typeof(DbFunctionsExtensions).GetRequiredMethod(
+                nameof(DbFunctionsExtensions.Random),
+                typeof(DbFunctions)
+            );
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -45,15 +48,15 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
 
             // Issue #15586: Query: TypeCompatibility chart for inference.
             return _methodInfo.Equals(method)
-                ? _sqlExpressionFactory.Function(
+              ? _sqlExpressionFactory.Function(
                     "abs",
                     new SqlExpression[]
                     {
@@ -63,13 +66,16 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                                 Array.Empty<SqlExpression>(),
                                 nullable: false,
                                 argumentsPropagateNullability: Array.Empty<bool>(),
-                                method.ReturnType),
-                            _sqlExpressionFactory.Constant(9223372036854780000.0))
+                                method.ReturnType
+                            ),
+                            _sqlExpressionFactory.Constant(9223372036854780000.0)
+                        )
                     },
                     nullable: false,
                     argumentsPropagateNullability: Array.Empty<bool>(),
-                    method.ReturnType)
-                : null;
+                    method.ReturnType
+                )
+              : null;
         }
     }
 }

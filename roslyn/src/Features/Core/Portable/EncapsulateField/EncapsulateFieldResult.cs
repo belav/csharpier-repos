@@ -17,14 +17,17 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
         public readonly Glyph Glyph;
         private readonly AsyncLazy<Solution> _lazySolution;
 
-        public EncapsulateFieldResult(string name, Glyph glyph, Func<CancellationToken, Task<Solution>> getSolutionAsync)
-        {
+        public EncapsulateFieldResult(
+            string name,
+            Glyph glyph,
+            Func<CancellationToken, Task<Solution>> getSolutionAsync
+        ) {
             Name = name;
             Glyph = glyph;
             _lazySolution = new AsyncLazy<Solution>(getSolutionAsync, cacheResult: true);
         }
 
-        public Task<Solution> GetSolutionAsync(CancellationToken cancellationToken)
-            => _lazySolution.GetValueAsync(cancellationToken);
+        public Task<Solution> GetSolutionAsync(CancellationToken cancellationToken) =>
+            _lazySolution.GetValueAsync(cancellationToken);
     }
 }

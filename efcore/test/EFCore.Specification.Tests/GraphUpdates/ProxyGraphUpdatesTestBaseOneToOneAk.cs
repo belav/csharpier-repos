@@ -27,10 +27,18 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true)]
         [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false)]
         [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true)]
-        public virtual void Save_changed_optional_one_to_one_with_alternate_key(ChangeMechanism changeMechanism, bool useExistingEntities)
-        {
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            false
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            true
+        )]
+        public virtual void Save_changed_optional_one_to_one_with_alternate_key(
+            ChangeMechanism changeMechanism,
+            bool useExistingEntities
+        ) {
             OptionalSingleAk2 new2 = null;
             OptionalSingleAk2Derived new2d = null;
             OptionalSingleAk2MoreDerived new2dd = null;
@@ -49,9 +57,15 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    new2 = context.CreateProxy<OptionalSingleAk2>(e => e.AlternateId = Guid.NewGuid());
-                    new2d = context.CreateProxy<OptionalSingleAk2Derived>(e => e.AlternateId = Guid.NewGuid());
-                    new2dd = context.CreateProxy<OptionalSingleAk2MoreDerived>(e => e.AlternateId = Guid.NewGuid());
+                    new2 = context.CreateProxy<OptionalSingleAk2>(
+                        e => e.AlternateId = Guid.NewGuid()
+                    );
+                    new2d = context.CreateProxy<OptionalSingleAk2Derived>(
+                        e => e.AlternateId = Guid.NewGuid()
+                    );
+                    new2dd = context.CreateProxy<OptionalSingleAk2MoreDerived>(
+                        e => e.AlternateId = Guid.NewGuid()
+                    );
                     new2c = context.CreateProxy<OptionalSingleComposite2>();
                     new1 = context.CreateProxy<OptionalSingleAk1>(
                         e =>
@@ -59,19 +73,22 @@ namespace Microsoft.EntityFrameworkCore
                             e.AlternateId = Guid.NewGuid();
                             e.Single = new2;
                             e.SingleComposite = new2c;
-                        });
+                        }
+                    );
                     new1d = context.CreateProxy<OptionalSingleAk1Derived>(
                         e =>
                         {
                             e.AlternateId = Guid.NewGuid();
                             e.Single = new2d;
-                        });
+                        }
+                    );
                     new1dd = context.CreateProxy<OptionalSingleAk1MoreDerived>(
                         e =>
                         {
                             e.AlternateId = Guid.NewGuid();
                             e.Single = new2dd;
-                        });
+                        }
+                    );
 
                     if (useExistingEntities)
                     {
@@ -110,12 +127,17 @@ namespace Microsoft.EntityFrameworkCore
                     if (useExistingEntities)
                     {
                         new1 = context.Set<OptionalSingleAk1>().Single(e => e.Id == new1.Id);
-                        new1d = (OptionalSingleAk1Derived)context.Set<OptionalSingleAk1>().Single(e => e.Id == new1d.Id);
-                        new1dd = (OptionalSingleAk1MoreDerived)context.Set<OptionalSingleAk1>().Single(e => e.Id == new1dd.Id);
+                        new1d = (OptionalSingleAk1Derived)context.Set<OptionalSingleAk1>()
+                            .Single(e => e.Id == new1d.Id);
+                        new1dd = (OptionalSingleAk1MoreDerived)context.Set<OptionalSingleAk1>()
+                            .Single(e => e.Id == new1dd.Id);
                         new2 = context.Set<OptionalSingleAk2>().Single(e => e.Id == new2.Id);
-                        new2c = context.Set<OptionalSingleComposite2>().Single(e => e.Id == new2c.Id);
-                        new2d = (OptionalSingleAk2Derived)context.Set<OptionalSingleAk2>().Single(e => e.Id == new2d.Id);
-                        new2dd = (OptionalSingleAk2MoreDerived)context.Set<OptionalSingleAk2>().Single(e => e.Id == new2dd.Id);
+                        new2c = context.Set<OptionalSingleComposite2>()
+                            .Single(e => e.Id == new2c.Id);
+                        new2d = (OptionalSingleAk2Derived)context.Set<OptionalSingleAk2>()
+                            .Single(e => e.Id == new2d.Id);
+                        new2dd = (OptionalSingleAk2MoreDerived)context.Set<OptionalSingleAk2>()
+                            .Single(e => e.Id == new2dd.Id);
                     }
                     else
                     {
@@ -191,7 +213,8 @@ namespace Microsoft.EntityFrameworkCore
                     var loaded2 = context.Set<OptionalSingleAk2>().Single(e => e.Id == old2.Id);
                     var loaded2d = context.Set<OptionalSingleAk2>().Single(e => e.Id == old2d.Id);
                     var loaded2dd = context.Set<OptionalSingleAk2>().Single(e => e.Id == old2dd.Id);
-                    var loaded2c = context.Set<OptionalSingleComposite2>().Single(e => e.Id == old2c.Id);
+                    var loaded2c = context.Set<OptionalSingleComposite2>()
+                        .Single(e => e.Id == old2c.Id);
 
                     Assert.Null(loaded1.Root);
                     Assert.Null(loaded1d.Root);
@@ -208,7 +231,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(loaded1.AlternateId, loaded2c.ParentAlternateId);
                     Assert.Equal(loaded1d.AlternateId, loaded2d.BackId);
                     Assert.Equal(loaded1dd.AlternateId, loaded2dd.BackId);
-                });
+                }
+            );
         }
 
         [ConditionalFact]
@@ -232,9 +256,15 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    new2 = context.CreateProxy<OptionalSingleAk2>(e => e.AlternateId = Guid.NewGuid());
-                    new2d = context.CreateProxy<OptionalSingleAk2Derived>(e => e.AlternateId = Guid.NewGuid());
-                    new2dd = context.CreateProxy<OptionalSingleAk2MoreDerived>(e => e.AlternateId = Guid.NewGuid());
+                    new2 = context.CreateProxy<OptionalSingleAk2>(
+                        e => e.AlternateId = Guid.NewGuid()
+                    );
+                    new2d = context.CreateProxy<OptionalSingleAk2Derived>(
+                        e => e.AlternateId = Guid.NewGuid()
+                    );
+                    new2dd = context.CreateProxy<OptionalSingleAk2MoreDerived>(
+                        e => e.AlternateId = Guid.NewGuid()
+                    );
                     new2c = context.CreateProxy<OptionalSingleComposite2>();
                     new1 = context.CreateProxy<OptionalSingleAk1>(
                         e =>
@@ -242,19 +272,22 @@ namespace Microsoft.EntityFrameworkCore
                             e.AlternateId = Guid.NewGuid();
                             e.Single = new2;
                             e.SingleComposite = new2c;
-                        });
+                        }
+                    );
                     new1d = context.CreateProxy<OptionalSingleAk1Derived>(
                         e =>
                         {
                             e.AlternateId = Guid.NewGuid();
                             e.Single = new2d;
-                        });
+                        }
+                    );
                     new1dd = context.CreateProxy<OptionalSingleAk1MoreDerived>(
                         e =>
                         {
                             e.AlternateId = Guid.NewGuid();
                             e.Single = new2dd;
-                        });
+                        }
+                    );
 
                     var root = LoadRoot(context);
 
@@ -286,12 +319,18 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         UseTransaction(context2.Database, context.Database.CurrentTransaction);
                         var root2 = context2.Set<Root>()
-                            .Include(e => e.OptionalChildrenAk).ThenInclude(e => e.Children)
-                            .Include(e => e.OptionalChildrenAk).ThenInclude(e => e.CompositeChildren)
-                            .Include(e => e.OptionalSingleAk).ThenInclude(e => e.Single)
-                            .Include(e => e.OptionalSingleAk).ThenInclude(e => e.SingleComposite)
-                            .Include(e => e.OptionalSingleAkDerived).ThenInclude(e => e.Single)
-                            .Include(e => e.OptionalSingleAkMoreDerived).ThenInclude(e => e.Single)
+                            .Include(e => e.OptionalChildrenAk)
+                            .ThenInclude(e => e.Children)
+                            .Include(e => e.OptionalChildrenAk)
+                            .ThenInclude(e => e.CompositeChildren)
+                            .Include(e => e.OptionalSingleAk)
+                            .ThenInclude(e => e.Single)
+                            .Include(e => e.OptionalSingleAk)
+                            .ThenInclude(e => e.SingleComposite)
+                            .Include(e => e.OptionalSingleAkDerived)
+                            .ThenInclude(e => e.Single)
+                            .Include(e => e.OptionalSingleAkMoreDerived)
+                            .ThenInclude(e => e.Single)
                             .Single(IsTheRoot);
 
                         context2.AddRange(new1, new1d, new1dd, new2, new2d, new2dd, new2c);
@@ -303,12 +342,16 @@ namespace Microsoft.EntityFrameworkCore
                     }
 
                     new1 = context.Set<OptionalSingleAk1>().Single(e => e.Id == new1.Id);
-                    new1d = (OptionalSingleAk1Derived)context.Set<OptionalSingleAk1>().Single(e => e.Id == new1d.Id);
-                    new1dd = (OptionalSingleAk1MoreDerived)context.Set<OptionalSingleAk1>().Single(e => e.Id == new1dd.Id);
+                    new1d = (OptionalSingleAk1Derived)context.Set<OptionalSingleAk1>()
+                        .Single(e => e.Id == new1d.Id);
+                    new1dd = (OptionalSingleAk1MoreDerived)context.Set<OptionalSingleAk1>()
+                        .Single(e => e.Id == new1dd.Id);
                     new2 = context.Set<OptionalSingleAk2>().Single(e => e.Id == new2.Id);
                     new2c = context.Set<OptionalSingleComposite2>().Single(e => e.Id == new2c.Id);
-                    new2d = (OptionalSingleAk2Derived)context.Set<OptionalSingleAk2>().Single(e => e.Id == new2d.Id);
-                    new2dd = (OptionalSingleAk2MoreDerived)context.Set<OptionalSingleAk2>().Single(e => e.Id == new2dd.Id);
+                    new2d = (OptionalSingleAk2Derived)context.Set<OptionalSingleAk2>()
+                        .Single(e => e.Id == new2d.Id);
+                    new2dd = (OptionalSingleAk2MoreDerived)context.Set<OptionalSingleAk2>()
+                        .Single(e => e.Id == new2dd.Id);
 
                     Assert.Equal(root.AlternateId, new1.RootId);
                     Assert.Equal(root.AlternateId, new1d.DerivedRootId);
@@ -386,7 +429,8 @@ namespace Microsoft.EntityFrameworkCore
                     var loaded2 = context.Set<OptionalSingleAk2>().Single(e => e.Id == old2.Id);
                     var loaded2d = context.Set<OptionalSingleAk2>().Single(e => e.Id == old2d.Id);
                     var loaded2dd = context.Set<OptionalSingleAk2>().Single(e => e.Id == old2dd.Id);
-                    var loaded2c = context.Set<OptionalSingleComposite2>().Single(e => e.Id == old2c.Id);
+                    var loaded2c = context.Set<OptionalSingleComposite2>()
+                        .Single(e => e.Id == old2c.Id);
 
                     Assert.Null(loaded1.Root);
                     Assert.Null(loaded1d.Root);
@@ -403,7 +447,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(loaded1.AlternateId, loaded2c.ParentAlternateId);
                     Assert.Equal(loaded1d.AlternateId, loaded2d.BackId);
                     Assert.Equal(loaded1dd.AlternateId, loaded2dd.BackId);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -415,8 +460,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), true)]
         public virtual void Save_required_one_to_one_changed_by_reference_with_alternate_key(
             ChangeMechanism changeMechanism,
-            bool useExistingEntities)
-        {
+            bool useExistingEntities
+        ) {
             RequiredSingleAk2 new2 = null;
             RequiredSingleComposite2 new2c = null;
             RequiredSingleAk1 new1 = null;
@@ -429,7 +474,9 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    new2 = context.CreateProxy<RequiredSingleAk2>(e => e.AlternateId = Guid.NewGuid());
+                    new2 = context.CreateProxy<RequiredSingleAk2>(
+                        e => e.AlternateId = Guid.NewGuid()
+                    );
                     new2c = context.CreateProxy<RequiredSingleComposite2>();
                     new1 = context.CreateProxy<RequiredSingleAk1>(
                         e =>
@@ -437,13 +484,15 @@ namespace Microsoft.EntityFrameworkCore
                             e.AlternateId = Guid.NewGuid();
                             e.Single = new2;
                             e.SingleComposite = new2c;
-                        });
+                        }
+                    );
                     newRoot = context.CreateProxy<Root>(
                         e =>
                         {
                             e.AlternateId = Guid.NewGuid();
                             e.RequiredSingleAk = new1;
-                        });
+                        }
+                    );
 
                     if (useExistingEntities)
                     {
@@ -475,7 +524,8 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         new1 = context.Set<RequiredSingleAk1>().Single(e => e.Id == new1.Id);
                         new2 = context.Set<RequiredSingleAk2>().Single(e => e.Id == new2.Id);
-                        new2c = context.Set<RequiredSingleComposite2>().Single(e => e.Id == new2c.Id);
+                        new2c = context.Set<RequiredSingleComposite2>()
+                            .Single(e => e.Id == new2c.Id);
                     }
                     else
                     {
@@ -524,8 +574,11 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.False(context.Set<RequiredSingleAk1>().Any(e => e.Id == old1.Id));
                     Assert.False(context.Set<RequiredSingleAk2>().Any(e => e.Id == old2.Id));
-                    Assert.False(context.Set<RequiredSingleComposite2>().Any(e => e.Id == old2c.Id));
-                });
+                    Assert.False(
+                        context.Set<RequiredSingleComposite2>().Any(e => e.Id == old2c.Id)
+                    );
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -541,12 +594,18 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true)]
         [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false)]
         [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true)]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            false
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            true
+        )]
         public virtual void Save_required_non_PK_one_to_one_changed_by_reference_with_alternate_key(
             ChangeMechanism changeMechanism,
-            bool useExistingEntities)
-        {
+            bool useExistingEntities
+        ) {
             RequiredNonPkSingleAk2 new2 = null;
             RequiredNonPkSingleAk2Derived new2d = null;
             RequiredNonPkSingleAk2MoreDerived new2dd = null;
@@ -564,22 +623,30 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    new2 = context.CreateProxy<RequiredNonPkSingleAk2>(e => e.AlternateId = Guid.NewGuid());
-                    new2d = context.CreateProxy<RequiredNonPkSingleAk2Derived>(e => e.AlternateId = Guid.NewGuid());
-                    new2dd = context.CreateProxy<RequiredNonPkSingleAk2MoreDerived>(e => e.AlternateId = Guid.NewGuid());
+                    new2 = context.CreateProxy<RequiredNonPkSingleAk2>(
+                        e => e.AlternateId = Guid.NewGuid()
+                    );
+                    new2d = context.CreateProxy<RequiredNonPkSingleAk2Derived>(
+                        e => e.AlternateId = Guid.NewGuid()
+                    );
+                    new2dd = context.CreateProxy<RequiredNonPkSingleAk2MoreDerived>(
+                        e => e.AlternateId = Guid.NewGuid()
+                    );
                     new1 = context.CreateProxy<RequiredNonPkSingleAk1>(
                         e =>
                         {
                             e.AlternateId = Guid.NewGuid();
                             e.Single = new2;
-                        });
+                        }
+                    );
                     new1d = context.CreateProxy<RequiredNonPkSingleAk1Derived>(
                         e =>
                         {
                             e.AlternateId = Guid.NewGuid();
                             e.Single = new2d;
                             e.Root = context.CreateProxy<Root>();
-                        });
+                        }
+                    );
                     new1dd = context.CreateProxy<RequiredNonPkSingleAk1MoreDerived>(
                         e =>
                         {
@@ -587,7 +654,8 @@ namespace Microsoft.EntityFrameworkCore
                             e.Single = new2dd;
                             e.Root = context.CreateProxy<Root>();
                             e.DerivedRoot = context.CreateProxy<Root>();
-                        });
+                        }
+                    );
                     newRoot = context.CreateProxy<Root>(
                         e =>
                         {
@@ -595,7 +663,8 @@ namespace Microsoft.EntityFrameworkCore
                             e.RequiredNonPkSingleAk = new1;
                             e.RequiredNonPkSingleAkDerived = new1d;
                             e.RequiredNonPkSingleAkMoreDerived = new1dd;
-                        });
+                        }
+                    );
 
                     if (useExistingEntities)
                     {
@@ -611,7 +680,9 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         context.Entry(root).Reference(e => e.RequiredNonPkSingleAk).Load();
                         context.Entry(root).Reference(e => e.RequiredNonPkSingleAkDerived).Load();
-                        context.Entry(root).Reference(e => e.RequiredNonPkSingleAkMoreDerived).Load();
+                        context.Entry(root)
+                            .Reference(e => e.RequiredNonPkSingleAkMoreDerived)
+                            .Load();
                     }
 
                     old1 = root.RequiredNonPkSingleAk;
@@ -630,7 +701,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     old2 = root.RequiredNonPkSingleAk.Single;
                     old2d = (RequiredNonPkSingleAk2Derived)root.RequiredNonPkSingleAkDerived.Single;
-                    old2dd = (RequiredNonPkSingleAk2MoreDerived)root.RequiredNonPkSingleAkMoreDerived.Single;
+                    old2dd =
+                        (RequiredNonPkSingleAk2MoreDerived)root.RequiredNonPkSingleAkMoreDerived.Single;
 
                     context.Set<RequiredNonPkSingleAk1>().Remove(old1d);
                     context.Set<RequiredNonPkSingleAk1>().Remove(old1dd);
@@ -638,11 +710,17 @@ namespace Microsoft.EntityFrameworkCore
                     if (useExistingEntities)
                     {
                         new1 = context.Set<RequiredNonPkSingleAk1>().Single(e => e.Id == new1.Id);
-                        new1d = (RequiredNonPkSingleAk1Derived)context.Set<RequiredNonPkSingleAk1>().Single(e => e.Id == new1d.Id);
-                        new1dd = (RequiredNonPkSingleAk1MoreDerived)context.Set<RequiredNonPkSingleAk1>().Single(e => e.Id == new1dd.Id);
+                        new1d = (RequiredNonPkSingleAk1Derived)context.Set<RequiredNonPkSingleAk1>()
+                            .Single(e => e.Id == new1d.Id);
+                        new1dd =
+                            (RequiredNonPkSingleAk1MoreDerived)context.Set<RequiredNonPkSingleAk1>()
+                                .Single(e => e.Id == new1dd.Id);
                         new2 = context.Set<RequiredNonPkSingleAk2>().Single(e => e.Id == new2.Id);
-                        new2d = (RequiredNonPkSingleAk2Derived)context.Set<RequiredNonPkSingleAk2>().Single(e => e.Id == new2d.Id);
-                        new2dd = (RequiredNonPkSingleAk2MoreDerived)context.Set<RequiredNonPkSingleAk2>().Single(e => e.Id == new2dd.Id);
+                        new2d = (RequiredNonPkSingleAk2Derived)context.Set<RequiredNonPkSingleAk2>()
+                            .Single(e => e.Id == new2d.Id);
+                        new2dd =
+                            (RequiredNonPkSingleAk2MoreDerived)context.Set<RequiredNonPkSingleAk2>()
+                                .Single(e => e.Id == new2dd.Id);
 
                         new1d.RootId = old1d.RootId;
                         new1dd.RootId = old1dd.RootId;
@@ -716,7 +794,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.False(context.Set<RequiredNonPkSingleAk2>().Any(e => e.Id == old2.Id));
                     Assert.False(context.Set<RequiredNonPkSingleAk2>().Any(e => e.Id == old2d.Id));
                     Assert.False(context.Set<RequiredNonPkSingleAk2>().Any(e => e.Id == old2dd.Id));
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -726,9 +805,12 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent))]
         [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk))]
         [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent))]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk))]
-        public virtual void Sever_optional_one_to_one_with_alternate_key(ChangeMechanism changeMechanism)
-        {
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk)
+        )]
+        public virtual void Sever_optional_one_to_one_with_alternate_key(
+            ChangeMechanism changeMechanism
+        ) {
             Root root = null;
             OptionalSingleAk1 old1 = null;
             OptionalSingleAk2 old2 = null;
@@ -793,7 +875,8 @@ namespace Microsoft.EntityFrameworkCore
 
                         var loaded1 = context.Set<OptionalSingleAk1>().Single(e => e.Id == old1.Id);
                         var loaded2 = context.Set<OptionalSingleAk2>().Single(e => e.Id == old2.Id);
-                        var loaded2c = context.Set<OptionalSingleComposite2>().Single(e => e.Id == old2c.Id);
+                        var loaded2c = context.Set<OptionalSingleComposite2>()
+                            .Single(e => e.Id == old2c.Id);
 
                         Assert.Null(loaded1.Root);
                         Assert.Same(loaded1, loaded2.Back);
@@ -803,15 +886,17 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.Equal(loaded1.Id, loaded2c.BackId);
                         Assert.Equal(loaded1.AlternateId, loaded2c.ParentAlternateId);
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
         [InlineData((int)ChangeMechanism.Dependent)]
         [InlineData((int)ChangeMechanism.Principal)]
         [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent))]
-        public virtual void Sever_required_one_to_one_with_alternate_key(ChangeMechanism changeMechanism)
-        {
+        public virtual void Sever_required_one_to_one_with_alternate_key(
+            ChangeMechanism changeMechanism
+        ) {
             Root root = null;
             RequiredSingleAk1 old1 = null;
             RequiredSingleAk2 old2 = null;
@@ -873,16 +958,20 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.False(context.Set<RequiredSingleAk1>().Any(e => e.Id == old1.Id));
                     Assert.False(context.Set<RequiredSingleAk2>().Any(e => e.Id == old2.Id));
-                    Assert.False(context.Set<RequiredSingleComposite2>().Any(e => e.Id == old2c.Id));
-                });
+                    Assert.False(
+                        context.Set<RequiredSingleComposite2>().Any(e => e.Id == old2c.Id)
+                    );
+                }
+            );
         }
 
         [ConditionalTheory]
         [InlineData((int)ChangeMechanism.Dependent)]
         [InlineData((int)ChangeMechanism.Principal)]
         [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent))]
-        public virtual void Sever_required_non_PK_one_to_one_with_alternate_key(ChangeMechanism changeMechanism)
-        {
+        public virtual void Sever_required_non_PK_one_to_one_with_alternate_key(
+            ChangeMechanism changeMechanism
+        ) {
             Root root = null;
             RequiredNonPkSingleAk1 old1 = null;
             RequiredNonPkSingleAk2 old2 = null;
@@ -926,7 +1015,9 @@ namespace Microsoft.EntityFrameworkCore
                         context.ChangeTracker.DetectChanges();
                     }
 
-                    Assert.False(context.Entry(root).Reference(e => e.RequiredNonPkSingleAk).IsLoaded);
+                    Assert.False(
+                        context.Entry(root).Reference(e => e.RequiredNonPkSingleAk).IsLoaded
+                    );
                     Assert.False(context.Entry(old1).Reference(e => e.Root).IsLoaded);
                     Assert.True(context.ChangeTracker.HasChanges());
 
@@ -944,7 +1035,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.False(context.Set<RequiredNonPkSingleAk1>().Any(e => e.Id == old1.Id));
                     Assert.False(context.Set<RequiredNonPkSingleAk2>().Any(e => e.Id == old2.Id));
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -960,10 +1052,18 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true)]
         [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false)]
         [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true)]
-        public virtual void Reparent_optional_one_to_one_with_alternate_key(ChangeMechanism changeMechanism, bool useExistingRoot)
-        {
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            false
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            true
+        )]
+        public virtual void Reparent_optional_one_to_one_with_alternate_key(
+            ChangeMechanism changeMechanism,
+            bool useExistingRoot
+        ) {
             Root newRoot = null;
             Root root;
             OptionalSingleAk1 old1 = null;
@@ -985,7 +1085,9 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     root = LoadRoot(context);
 
-                    context.Entry(newRoot).State = useExistingRoot ? EntityState.Unchanged : EntityState.Added;
+                    context.Entry(newRoot).State = useExistingRoot
+                        ? EntityState.Unchanged
+                        : EntityState.Added;
 
                     if (!DoesLazyLoading)
                     {
@@ -1041,7 +1143,8 @@ namespace Microsoft.EntityFrameworkCore
                     newRoot = context.Set<Root>().Single(e => e.Id == newRoot.Id);
                     var loaded1 = context.Set<OptionalSingleAk1>().Single(e => e.Id == old1.Id);
                     var loaded2 = context.Set<OptionalSingleAk2>().Single(e => e.Id == old2.Id);
-                    var loaded2c = context.Set<OptionalSingleComposite2>().Single(e => e.Id == old2c.Id);
+                    var loaded2c = context.Set<OptionalSingleComposite2>()
+                        .Single(e => e.Id == old2c.Id);
 
                     Assert.Same(newRoot, loaded1.Root);
                     Assert.Same(loaded1, loaded2.Back);
@@ -1050,7 +1153,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(loaded1.AlternateId, loaded2.BackId);
                     Assert.Equal(loaded1.Id, loaded2c.BackId);
                     Assert.Equal(loaded1.AlternateId, loaded2c.ParentAlternateId);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -1066,10 +1170,18 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true)]
         [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false)]
         [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true)]
-        public virtual void Reparent_required_one_to_one_with_alternate_key(ChangeMechanism changeMechanism, bool useExistingRoot)
-        {
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            false
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            true
+        )]
+        public virtual void Reparent_required_one_to_one_with_alternate_key(
+            ChangeMechanism changeMechanism,
+            bool useExistingRoot
+        ) {
             Root newRoot = null;
             Root root;
             RequiredSingleAk1 old1 = null;
@@ -1091,7 +1203,9 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     root = LoadRoot(context);
 
-                    context.Entry(newRoot).State = useExistingRoot ? EntityState.Unchanged : EntityState.Added;
+                    context.Entry(newRoot).State = useExistingRoot
+                        ? EntityState.Unchanged
+                        : EntityState.Added;
 
                     if (!DoesLazyLoading)
                     {
@@ -1147,7 +1261,8 @@ namespace Microsoft.EntityFrameworkCore
                     newRoot = context.Set<Root>().Single(e => e.Id == newRoot.Id);
                     var loaded1 = context.Set<RequiredSingleAk1>().Single(e => e.Id == old1.Id);
                     var loaded2 = context.Set<RequiredSingleAk2>().Single(e => e.Id == old2.Id);
-                    var loaded2c = context.Set<RequiredSingleComposite2>().Single(e => e.Id == old2c.Id);
+                    var loaded2c = context.Set<RequiredSingleComposite2>()
+                        .Single(e => e.Id == old2c.Id);
 
                     Assert.Same(newRoot, loaded1.Root);
                     Assert.Same(loaded1, loaded2.Back);
@@ -1156,7 +1271,8 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(loaded1.AlternateId, loaded2.BackId);
                     Assert.Equal(loaded1.Id, loaded2c.BackId);
                     Assert.Equal(loaded1.AlternateId, loaded2c.BackAlternateId);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -1172,10 +1288,18 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true)]
         [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false)]
         [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true)]
-        public virtual void Reparent_required_non_PK_one_to_one_with_alternate_key(ChangeMechanism changeMechanism, bool useExistingRoot)
-        {
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            false
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            true
+        )]
+        public virtual void Reparent_required_non_PK_one_to_one_with_alternate_key(
+            ChangeMechanism changeMechanism,
+            bool useExistingRoot
+        ) {
             Root newRoot = null;
             Root root;
             RequiredNonPkSingleAk1 old1 = null;
@@ -1196,7 +1320,9 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     root = LoadRoot(context);
 
-                    context.Entry(newRoot).State = useExistingRoot ? EntityState.Unchanged : EntityState.Added;
+                    context.Entry(newRoot).State = useExistingRoot
+                        ? EntityState.Unchanged
+                        : EntityState.Added;
 
                     if (!DoesLazyLoading)
                     {
@@ -1245,14 +1371,17 @@ namespace Microsoft.EntityFrameworkCore
                     var loadedRoot = LoadRoot(context);
 
                     newRoot = context.Set<Root>().Single(e => e.Id == newRoot.Id);
-                    var loaded1 = context.Set<RequiredNonPkSingleAk1>().Single(e => e.Id == old1.Id);
-                    var loaded2 = context.Set<RequiredNonPkSingleAk2>().Single(e => e.Id == old2.Id);
+                    var loaded1 = context.Set<RequiredNonPkSingleAk1>()
+                        .Single(e => e.Id == old1.Id);
+                    var loaded2 = context.Set<RequiredNonPkSingleAk2>()
+                        .Single(e => e.Id == old2.Id);
 
                     Assert.Same(newRoot, loaded1.Root);
                     Assert.Same(loaded1, loaded2.Back);
                     Assert.Equal(newRoot.AlternateId, loaded1.RootId);
                     Assert.Equal(loaded1.AlternateId, loaded2.BackId);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -1267,8 +1396,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
         public virtual void Optional_one_to_one_with_alternate_key_are_orphaned(
             CascadeTiming cascadeDeleteTiming,
-            CascadeTiming deleteOrphansTiming)
-        {
+            CascadeTiming deleteOrphansTiming
+        ) {
             var removedId = 0;
             var orphanedId = 0;
             var orphanedIdC = 0;
@@ -1315,8 +1444,14 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Null(root.OptionalSingleAk);
 
                     Assert.Empty(context.Set<OptionalSingleAk1>().Where(e => e.Id == removedId));
-                    Assert.Equal(1, context.Set<OptionalSingleAk2>().Count(e => e.Id == orphanedId));
-                    Assert.Equal(1, context.Set<OptionalSingleComposite2>().Count(e => e.Id == orphanedIdC));
+                    Assert.Equal(
+                        1,
+                        context.Set<OptionalSingleAk2>().Count(e => e.Id == orphanedId)
+                    );
+                    Assert.Equal(
+                        1,
+                        context.Set<OptionalSingleComposite2>().Count(e => e.Id == orphanedIdC)
+                    );
 
                     Assert.Same(root, removed.Root);
                     Assert.Same(orphaned, removed.Single);
@@ -1333,9 +1468,16 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Null(root.OptionalSingleAk);
 
                     Assert.Empty(context.Set<OptionalSingleAk1>().Where(e => e.Id == removedId));
-                    Assert.Equal(1, context.Set<OptionalSingleAk2>().Count(e => e.Id == orphanedId));
-                    Assert.Equal(1, context.Set<OptionalSingleComposite2>().Count(e => e.Id == orphanedIdC));
-                });
+                    Assert.Equal(
+                        1,
+                        context.Set<OptionalSingleAk2>().Count(e => e.Id == orphanedId)
+                    );
+                    Assert.Equal(
+                        1,
+                        context.Set<OptionalSingleComposite2>().Count(e => e.Id == orphanedIdC)
+                    );
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -1350,8 +1492,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
         public virtual void Required_one_to_one_with_alternate_key_are_cascade_deleted(
             CascadeTiming cascadeDeleteTiming,
-            CascadeTiming deleteOrphansTiming)
-        {
+            CascadeTiming deleteOrphansTiming
+        ) {
             var removedId = 0;
             var orphanedId = 0;
             var orphanedIdC = 0;
@@ -1403,9 +1545,15 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.Null(root.RequiredSingleAk);
 
-                        Assert.Empty(context.Set<RequiredSingleAk1>().Where(e => e.Id == removedId));
-                        Assert.Empty(context.Set<RequiredSingleAk2>().Where(e => e.Id == orphanedId));
-                        Assert.Empty(context.Set<RequiredSingleComposite2>().Where(e => e.Id == orphanedIdC));
+                        Assert.Empty(
+                            context.Set<RequiredSingleAk1>().Where(e => e.Id == removedId)
+                        );
+                        Assert.Empty(
+                            context.Set<RequiredSingleAk2>().Where(e => e.Id == orphanedId)
+                        );
+                        Assert.Empty(
+                            context.Set<RequiredSingleComposite2>().Where(e => e.Id == orphanedIdC)
+                        );
 
                         Assert.Same(root, removed.Root);
                         Assert.Same(orphaned, removed.Single);
@@ -1424,11 +1572,18 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.Null(root.RequiredSingleAk);
 
-                        Assert.Empty(context.Set<RequiredSingleAk1>().Where(e => e.Id == removedId));
-                        Assert.Empty(context.Set<RequiredSingleAk2>().Where(e => e.Id == orphanedId));
-                        Assert.Empty(context.Set<RequiredSingleComposite2>().Where(e => e.Id == orphanedIdC));
+                        Assert.Empty(
+                            context.Set<RequiredSingleAk1>().Where(e => e.Id == removedId)
+                        );
+                        Assert.Empty(
+                            context.Set<RequiredSingleAk2>().Where(e => e.Id == orphanedId)
+                        );
+                        Assert.Empty(
+                            context.Set<RequiredSingleComposite2>().Where(e => e.Id == orphanedIdC)
+                        );
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -1443,8 +1598,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
         public virtual void Required_non_PK_one_to_one_with_alternate_key_are_cascade_deleted(
             CascadeTiming cascadeDeleteTiming,
-            CascadeTiming deleteOrphansTiming)
-        {
+            CascadeTiming deleteOrphansTiming
+        ) {
             var removedId = 0;
             var orphanedId = 0;
 
@@ -1491,8 +1646,12 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.Null(root.RequiredNonPkSingleAk);
 
-                        Assert.Empty(context.Set<RequiredNonPkSingleAk1>().Where(e => e.Id == removedId));
-                        Assert.Empty(context.Set<RequiredNonPkSingleAk2>().Where(e => e.Id == orphanedId));
+                        Assert.Empty(
+                            context.Set<RequiredNonPkSingleAk1>().Where(e => e.Id == removedId)
+                        );
+                        Assert.Empty(
+                            context.Set<RequiredNonPkSingleAk2>().Where(e => e.Id == orphanedId)
+                        );
 
                         Assert.Same(root, removed.Root);
                         Assert.Same(orphaned, removed.Single);
@@ -1511,10 +1670,15 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.Null(root.RequiredNonPkSingleAk);
 
-                        Assert.Empty(context.Set<RequiredNonPkSingleAk1>().Where(e => e.Id == removedId));
-                        Assert.Empty(context.Set<RequiredNonPkSingleAk2>().Where(e => e.Id == orphanedId));
+                        Assert.Empty(
+                            context.Set<RequiredNonPkSingleAk1>().Where(e => e.Id == removedId)
+                        );
+                        Assert.Empty(
+                            context.Set<RequiredNonPkSingleAk2>().Where(e => e.Id == orphanedId)
+                        );
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -1529,8 +1693,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
         public virtual void Required_one_to_one_with_alternate_key_are_cascade_deleted_in_store(
             CascadeTiming cascadeDeleteTiming,
-            CascadeTiming deleteOrphansTiming)
-        {
+            CascadeTiming deleteOrphansTiming
+        ) {
             var removedId = 0;
             var orphanedId = 0;
             var orphanedIdC = 0;
@@ -1562,7 +1726,9 @@ namespace Microsoft.EntityFrameworkCore
                     context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming;
                     context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
 
-                    var root = context.Set<Root>().Include(e => e.RequiredSingleAk).Single(IsTheRoot);
+                    var root = context.Set<Root>()
+                        .Include(e => e.RequiredSingleAk)
+                        .Single(IsTheRoot);
 
                     var removed = root.RequiredSingleAk;
 
@@ -1591,9 +1757,15 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.Null(root.RequiredSingleAk);
 
-                        Assert.Empty(context.Set<RequiredSingleAk1>().Where(e => e.Id == removedId));
-                        Assert.Empty(context.Set<RequiredSingleAk2>().Where(e => e.Id == orphanedId));
-                        Assert.Empty(context.Set<RequiredSingleComposite2>().Where(e => e.Id == orphanedIdC));
+                        Assert.Empty(
+                            context.Set<RequiredSingleAk1>().Where(e => e.Id == removedId)
+                        );
+                        Assert.Empty(
+                            context.Set<RequiredSingleAk2>().Where(e => e.Id == orphanedId)
+                        );
+                        Assert.Empty(
+                            context.Set<RequiredSingleComposite2>().Where(e => e.Id == orphanedIdC)
+                        );
 
                         Assert.Same(root, removed.Root);
                         Assert.Same(orphaned, removed.Single);
@@ -1612,11 +1784,18 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.Null(root.RequiredSingleAk);
 
-                        Assert.Empty(context.Set<RequiredSingleAk1>().Where(e => e.Id == removedId));
-                        Assert.Empty(context.Set<RequiredSingleAk2>().Where(e => e.Id == orphanedId));
-                        Assert.Empty(context.Set<RequiredSingleComposite2>().Where(e => e.Id == orphanedIdC));
+                        Assert.Empty(
+                            context.Set<RequiredSingleAk1>().Where(e => e.Id == removedId)
+                        );
+                        Assert.Empty(
+                            context.Set<RequiredSingleAk2>().Where(e => e.Id == orphanedId)
+                        );
+                        Assert.Empty(
+                            context.Set<RequiredSingleComposite2>().Where(e => e.Id == orphanedIdC)
+                        );
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -1631,8 +1810,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
         public virtual void Required_non_PK_one_to_one_with_alternate_key_are_cascade_deleted_in_store(
             CascadeTiming cascadeDeleteTiming,
-            CascadeTiming deleteOrphansTiming)
-        {
+            CascadeTiming deleteOrphansTiming
+        ) {
             var removedId = 0;
             var orphanedId = 0;
 
@@ -1661,7 +1840,9 @@ namespace Microsoft.EntityFrameworkCore
                     context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming;
                     context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
 
-                    var root = context.Set<Root>().Include(e => e.RequiredNonPkSingleAk).Single(IsTheRoot);
+                    var root = context.Set<Root>()
+                        .Include(e => e.RequiredNonPkSingleAk)
+                        .Single(IsTheRoot);
 
                     var removed = root.RequiredNonPkSingleAk;
 
@@ -1690,8 +1871,12 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.Null(root.RequiredNonPkSingleAk);
 
-                        Assert.Empty(context.Set<RequiredNonPkSingleAk1>().Where(e => e.Id == removedId));
-                        Assert.Empty(context.Set<RequiredNonPkSingleAk2>().Where(e => e.Id == orphanedId));
+                        Assert.Empty(
+                            context.Set<RequiredNonPkSingleAk1>().Where(e => e.Id == removedId)
+                        );
+                        Assert.Empty(
+                            context.Set<RequiredNonPkSingleAk2>().Where(e => e.Id == orphanedId)
+                        );
 
                         Assert.Same(root, removed.Root);
                         Assert.Same(orphaned, removed.Single);
@@ -1710,10 +1895,15 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.Null(root.RequiredNonPkSingleAk);
 
-                        Assert.Empty(context.Set<RequiredNonPkSingleAk1>().Where(e => e.Id == removedId));
-                        Assert.Empty(context.Set<RequiredNonPkSingleAk2>().Where(e => e.Id == orphanedId));
+                        Assert.Empty(
+                            context.Set<RequiredNonPkSingleAk1>().Where(e => e.Id == removedId)
+                        );
+                        Assert.Empty(
+                            context.Set<RequiredNonPkSingleAk2>().Where(e => e.Id == orphanedId)
+                        );
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -1728,8 +1918,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
         public virtual void Optional_one_to_one_with_alternate_key_are_orphaned_in_store(
             CascadeTiming cascadeDeleteTiming,
-            CascadeTiming deleteOrphansTiming)
-        {
+            CascadeTiming deleteOrphansTiming
+        ) {
             var removedId = 0;
             var orphanedId = 0;
             var orphanedIdC = 0;
@@ -1761,7 +1951,9 @@ namespace Microsoft.EntityFrameworkCore
                     context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming;
                     context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
 
-                    var root = context.Set<Root>().Include(e => e.OptionalSingleAk).Single(IsTheRoot);
+                    var root = context.Set<Root>()
+                        .Include(e => e.OptionalSingleAk)
+                        .Single(IsTheRoot);
 
                     var removed = root.OptionalSingleAk;
 
@@ -1776,7 +1968,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     // Cannot have SET NULL action in the store because one of the FK columns
                     // is not nullable, so need to do this on the EF side.
-                    context.Set<OptionalSingleComposite2>().Single(e => e.Id == orphanedIdC).BackId = null;
+                    context.Set<OptionalSingleComposite2>()
+                        .Single(e => e.Id == orphanedIdC).BackId = null;
 
                     Assert.True(context.ChangeTracker.HasChanges());
 
@@ -1789,8 +1982,13 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Null(root.OptionalSingleAk);
 
                     Assert.Empty(context.Set<OptionalSingleAk1>().Where(e => e.Id == removedId));
-                    Assert.Null(context.Set<OptionalSingleAk2>().Single(e => e.Id == orphanedId).BackId);
-                    Assert.Null(context.Set<OptionalSingleComposite2>().Single(e => e.Id == orphanedIdC).BackId);
+                    Assert.Null(
+                        context.Set<OptionalSingleAk2>().Single(e => e.Id == orphanedId).BackId
+                    );
+                    Assert.Null(
+                        context.Set<OptionalSingleComposite2>()
+                            .Single(e => e.Id == orphanedIdC).BackId
+                    );
 
                     Assert.Same(root, removed.Root);
                     Assert.Same(orphaned, removed.Single);
@@ -1807,9 +2005,15 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Null(root.OptionalSingleAk);
 
                     Assert.Empty(context.Set<OptionalSingleAk1>().Where(e => e.Id == removedId));
-                    Assert.Null(context.Set<OptionalSingleAk2>().Single(e => e.Id == orphanedId).BackId);
-                    Assert.Null(context.Set<OptionalSingleComposite2>().Single(e => e.Id == orphanedIdC).BackId);
-                });
+                    Assert.Null(
+                        context.Set<OptionalSingleAk2>().Single(e => e.Id == orphanedId).BackId
+                    );
+                    Assert.Null(
+                        context.Set<OptionalSingleComposite2>()
+                            .Single(e => e.Id == orphanedIdC).BackId
+                    );
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -1824,8 +2028,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
         public virtual void Optional_one_to_one_with_alternate_key_are_orphaned_starting_detached(
             CascadeTiming cascadeDeleteTiming,
-            CascadeTiming deleteOrphansTiming)
-        {
+            CascadeTiming deleteOrphansTiming
+        ) {
             var removedId = 0;
             var orphanedId = 0;
             var orphanedIdC = 0;
@@ -1868,9 +2072,10 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal(EntityState.Deleted, context.Entry(removed).State);
 
-                    var expectedState = cascadeDeleteTiming == CascadeTiming.Immediate
-                        ? EntityState.Modified
-                        : EntityState.Unchanged;
+                    var expectedState =
+                        cascadeDeleteTiming == CascadeTiming.Immediate
+                            ? EntityState.Modified
+                            : EntityState.Unchanged;
 
                     Assert.Equal(expectedState, context.Entry(orphaned).State);
                     Assert.Equal(expectedState, context.Entry(orphanedC).State);
@@ -1900,9 +2105,16 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Null(root.OptionalSingleAk);
 
                     Assert.Empty(context.Set<OptionalSingleAk1>().Where(e => e.Id == removedId));
-                    Assert.Equal(1, context.Set<OptionalSingleAk2>().Count(e => e.Id == orphanedId));
-                    Assert.Equal(1, context.Set<OptionalSingleComposite2>().Count(e => e.Id == orphanedIdC));
-                });
+                    Assert.Equal(
+                        1,
+                        context.Set<OptionalSingleAk2>().Count(e => e.Id == orphanedId)
+                    );
+                    Assert.Equal(
+                        1,
+                        context.Set<OptionalSingleComposite2>().Count(e => e.Id == orphanedIdC)
+                    );
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -1917,8 +2129,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
         public virtual void Required_one_to_one_with_alternate_key_are_cascade_deleted_starting_detached(
             CascadeTiming cascadeDeleteTiming,
-            CascadeTiming deleteOrphansTiming)
-        {
+            CascadeTiming deleteOrphansTiming
+        ) {
             var removedId = 0;
             var orphanedId = 0;
             var orphanedIdC = 0;
@@ -1961,9 +2173,10 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal(EntityState.Deleted, context.Entry(removed).State);
 
-                    var expectedState = cascadeDeleteTiming == CascadeTiming.Immediate
-                        ? EntityState.Deleted
-                        : EntityState.Unchanged;
+                    var expectedState =
+                        cascadeDeleteTiming == CascadeTiming.Immediate
+                            ? EntityState.Deleted
+                            : EntityState.Unchanged;
 
                     Assert.Equal(expectedState, context.Entry(orphaned).State);
                     Assert.Equal(expectedState, context.Entry(orphanedC).State);
@@ -2001,11 +2214,18 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.Null(root.RequiredSingleAk);
 
-                        Assert.Empty(context.Set<RequiredSingleAk1>().Where(e => e.Id == removedId));
-                        Assert.Empty(context.Set<RequiredSingleAk2>().Where(e => e.Id == orphanedId));
-                        Assert.Empty(context.Set<RequiredSingleComposite2>().Where(e => e.Id == orphanedIdC));
+                        Assert.Empty(
+                            context.Set<RequiredSingleAk1>().Where(e => e.Id == removedId)
+                        );
+                        Assert.Empty(
+                            context.Set<RequiredSingleAk2>().Where(e => e.Id == orphanedId)
+                        );
+                        Assert.Empty(
+                            context.Set<RequiredSingleComposite2>().Where(e => e.Id == orphanedIdC)
+                        );
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -2020,8 +2240,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
         public virtual void Required_non_PK_one_to_one_with_alternate_key_are_cascade_deleted_starting_detached(
             CascadeTiming cascadeDeleteTiming,
-            CascadeTiming deleteOrphansTiming)
-        {
+            CascadeTiming deleteOrphansTiming
+        ) {
             var removedId = 0;
             var orphanedId = 0;
             Root root = null;
@@ -2059,9 +2279,10 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal(EntityState.Deleted, context.Entry(removed).State);
 
-                    var expectedState = cascadeDeleteTiming == CascadeTiming.Immediate
-                        ? EntityState.Deleted
-                        : EntityState.Unchanged;
+                    var expectedState =
+                        cascadeDeleteTiming == CascadeTiming.Immediate
+                            ? EntityState.Deleted
+                            : EntityState.Unchanged;
 
                     Assert.Equal(expectedState, context.Entry(orphaned).State);
 
@@ -2097,10 +2318,15 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.Null(root.RequiredNonPkSingleAk);
 
-                        Assert.Empty(context.Set<RequiredNonPkSingleAk1>().Where(e => e.Id == removedId));
-                        Assert.Empty(context.Set<RequiredNonPkSingleAk2>().Where(e => e.Id == orphanedId));
+                        Assert.Empty(
+                            context.Set<RequiredNonPkSingleAk1>().Where(e => e.Id == removedId)
+                        );
+                        Assert.Empty(
+                            context.Set<RequiredNonPkSingleAk2>().Where(e => e.Id == orphanedId)
+                        );
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -2115,8 +2341,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
         public virtual void Required_one_to_one_with_alternate_key_are_cascade_detached_when_Added(
             CascadeTiming cascadeDeleteTiming,
-            CascadeTiming deleteOrphansTiming)
-        {
+            CascadeTiming deleteOrphansTiming
+        ) {
             var removedId = 0;
             var orphanedId = 0;
             var orphanedIdC = 0;
@@ -2159,9 +2385,10 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal(EntityState.Deleted, context.Entry(removed).State);
 
-                    var expectedState = cascadeDeleteTiming == CascadeTiming.Immediate
-                        ? EntityState.Detached
-                        : EntityState.Added;
+                    var expectedState =
+                        cascadeDeleteTiming == CascadeTiming.Immediate
+                            ? EntityState.Detached
+                            : EntityState.Added;
 
                     Assert.Equal(expectedState, context.Entry(orphaned).State);
                     Assert.Equal(expectedState, context.Entry(orphanedC).State);
@@ -2199,11 +2426,18 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.Null(root.RequiredSingleAk);
 
-                        Assert.Empty(context.Set<RequiredSingleAk1>().Where(e => e.Id == removedId));
-                        Assert.Empty(context.Set<RequiredSingleAk2>().Where(e => e.Id == orphanedId));
-                        Assert.Empty(context.Set<RequiredSingleComposite2>().Where(e => e.Id == orphanedIdC));
+                        Assert.Empty(
+                            context.Set<RequiredSingleAk1>().Where(e => e.Id == removedId)
+                        );
+                        Assert.Empty(
+                            context.Set<RequiredSingleAk2>().Where(e => e.Id == orphanedId)
+                        );
+                        Assert.Empty(
+                            context.Set<RequiredSingleComposite2>().Where(e => e.Id == orphanedIdC)
+                        );
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -2218,8 +2452,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
         public virtual void Required_non_PK_one_to_one_with_alternate_key_are_cascade_detached_when_Added(
             CascadeTiming cascadeDeleteTiming,
-            CascadeTiming deleteOrphansTiming)
-        {
+            CascadeTiming deleteOrphansTiming
+        ) {
             var removedId = 0;
             var orphanedId = 0;
 
@@ -2256,9 +2490,10 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal(EntityState.Deleted, context.Entry(removed).State);
 
-                    var expectedState = cascadeDeleteTiming == CascadeTiming.Immediate
-                        ? EntityState.Detached
-                        : EntityState.Added;
+                    var expectedState =
+                        cascadeDeleteTiming == CascadeTiming.Immediate
+                            ? EntityState.Detached
+                            : EntityState.Added;
 
                     Assert.Equal(expectedState, context.Entry(orphaned).State);
 
@@ -2294,10 +2529,15 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.Null(root.RequiredNonPkSingleAk);
 
-                        Assert.Empty(context.Set<RequiredNonPkSingleAk1>().Where(e => e.Id == removedId));
-                        Assert.Empty(context.Set<RequiredNonPkSingleAk2>().Where(e => e.Id == orphanedId));
+                        Assert.Empty(
+                            context.Set<RequiredNonPkSingleAk1>().Where(e => e.Id == removedId)
+                        );
+                        Assert.Empty(
+                            context.Set<RequiredNonPkSingleAk2>().Where(e => e.Id == orphanedId)
+                        );
                     }
-                });
+                }
+            );
         }
     }
 }

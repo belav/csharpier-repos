@@ -39,8 +39,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             int exitDestination,
             (string text, int destination)[] entries,
             bool? vectorize,
-            JumpTable fallback)
-        {
+            JumpTable fallback
+        ) {
             _defaultDestination = defaultDestination;
             _exitDestination = exitDestination;
             _entries = entries;
@@ -54,7 +54,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
         {
             return _getDestination(path, segment);
         }
-        
+
         // Used when we haven't yet initialized the IL trie. We defer compilation of the IL for startup
         // performance.
         private int FallbackGetDestination(string path, PathSegment segment)
@@ -65,7 +65,12 @@ namespace Microsoft.AspNetCore.Routing.Matching
             }
 
             // We only hit this code path if the IL delegate is still initializing.
-            LazyInitializer.EnsureInitialized(ref _task, ref _initializing, ref _lock, InitializeILDelegateAsync);
+            LazyInitializer.EnsureInitialized(
+                ref _task,
+                ref _initializing,
+                ref _lock,
+                InitializeILDelegateAsync
+            );
 
             return _fallback.GetDestination(path, segment);
         }
@@ -74,16 +79,23 @@ namespace Microsoft.AspNetCore.Routing.Matching
         internal async Task InitializeILDelegateAsync()
         {
             // Offload the creation of the IL delegate to the thread pool.
-            await Task.Run(() =>
-            {
-                InitializeILDelegate();
-            });
+            await Task.Run(
+                () =>
+                {
+                    InitializeILDelegate();
+                }
+            );
         }
 
         // Internal for testing
         internal void InitializeILDelegate()
         {
-            var generated = ILEmitTrieFactory.Create(_defaultDestination, _exitDestination, _entries, _vectorize);
+            var generated = ILEmitTrieFactory.Create(
+                _defaultDestination,
+                _exitDestination,
+                _entries,
+                _vectorize
+            );
             _getDestination = (string path, PathSegment segment) =>
             {
                 if (segment.Length == 0)

@@ -28,10 +28,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
         public static string SpecificationHeader => ServicesVSResources.Specification;
         public static string RequiredStyleHeader => ServicesVSResources.Required_Style;
         public static string SeverityHeader => ServicesVSResources.Severity;
-        public static string ExplanatoryText => ServicesVSResources.For_a_given_symbol_only_the_topmost_rule_with_a_matching_Specification_will_be_applied_Violation_of_that_rules_Required_Style_will_be_reported_at_the_chosen_Severity_level;
+        public static string ExplanatoryText =>
+            ServicesVSResources.For_a_given_symbol_only_the_topmost_rule_with_a_matching_Specification_will_be_applied_Violation_of_that_rules_Required_Style_will_be_reported_at_the_chosen_Severity_level;
         public static string AddRuleAutomationText => ServicesVSResources.Add_a_naming_rule;
         public static string RemoveAutomationText => ServicesVSResources.Remove_naming_rule;
-        public static string SymbolSpecificationAutomationText => ServicesVSResources.Symbol_Specification;
+        public static string SymbolSpecificationAutomationText =>
+            ServicesVSResources.Symbol_Specification;
         public static string NamingStyleAutomationText => ServicesVSResources.Naming_Style;
         public static string SeverityAutomationText => ServicesVSResources.Severity;
 
@@ -42,13 +44,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
         private readonly NotificationOptionViewModel[] _notifications = new[]
         {
             new NotificationOptionViewModel(NotificationOption.Silent, KnownMonikers.None),
-            new NotificationOptionViewModel(NotificationOption.Suggestion, KnownMonikers.StatusInformation),
-            new NotificationOptionViewModel(NotificationOption.Warning, KnownMonikers.StatusWarning),
+            new NotificationOptionViewModel(
+                NotificationOption.Suggestion,
+                KnownMonikers.StatusInformation
+            ),
+            new NotificationOptionViewModel(
+                NotificationOption.Warning,
+                KnownMonikers.StatusWarning
+            ),
             new NotificationOptionViewModel(NotificationOption.Error, KnownMonikers.StatusError)
         };
 
-        internal NamingStyleOptionPageControl(OptionStore optionStore, INotificationService notificationService, string languageName)
-            : base(optionStore)
+        internal NamingStyleOptionPageControl(
+            OptionStore optionStore,
+            INotificationService notificationService,
+            string languageName
+        ) : base(optionStore)
         {
             _languageName = languageName;
             _notificationService = notificationService;
@@ -61,18 +72,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
         {
             return new NamingStyleOptionPageViewModel.NamingRuleViewModel()
             {
-                Specifications = new ObservableCollection<SymbolSpecification>(_viewModel.Specifications),
-                NamingStyles = new ObservableCollection<MutableNamingStyle>(_viewModel.NamingStyles),
+                Specifications = new ObservableCollection<SymbolSpecification>(
+                    _viewModel.Specifications
+                ),
+                NamingStyles = new ObservableCollection<MutableNamingStyle>(
+                    _viewModel.NamingStyles
+                ),
                 NotificationPreferences = _notifications
             };
         }
 
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-            => _viewModel.AddItem(CreateItemWithNoSelections());
+        private void AddButton_Click(object sender, RoutedEventArgs e) =>
+            _viewModel.AddItem(CreateItemWithNoSelections());
 
         private void ManageSpecificationsButton_Click(object sender, RoutedEventArgs e)
         {
-            var viewModel = new ManageSymbolSpecificationsDialogViewModel(_viewModel.Specifications, _viewModel.CodeStyleItems.ToList(), _languageName, _notificationService);
+            var viewModel = new ManageSymbolSpecificationsDialogViewModel(
+                _viewModel.Specifications,
+                _viewModel.CodeStyleItems.ToList(),
+                _languageName,
+                _notificationService
+            );
             var dialog = new ManageNamingStylesInfoDialog(viewModel);
             if (dialog.ShowModal().Value == true)
             {
@@ -82,7 +102,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
 
         private void ManageStylesButton_Click(object sender, RoutedEventArgs e)
         {
-            var viewModel = new ManageNamingStylesDialogViewModel(_viewModel.NamingStyles, _viewModel.CodeStyleItems.ToList(), _notificationService);
+            var viewModel = new ManageNamingStylesDialogViewModel(
+                _viewModel.NamingStyles,
+                _viewModel.CodeStyleItems.ToList(),
+                _notificationService
+            );
             var dialog = new ManageNamingStylesInfoDialog(viewModel);
             if (dialog.ShowModal().Value == true)
             {
@@ -123,10 +147,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
         {
             if (CodeStyleMembers.SelectedIndex >= 0)
             {
-                if (!(CodeStyleMembers.ItemContainerGenerator.ContainerFromIndex(CodeStyleMembers.SelectedIndex) is DataGridRow row))
-                {
+                if (
+                    !(
+                        CodeStyleMembers.ItemContainerGenerator.ContainerFromIndex(
+                            CodeStyleMembers.SelectedIndex
+                        )
+                        is DataGridRow row
+                    )
+                ) {
                     CodeStyleMembers.ScrollIntoView(CodeStyleMembers.SelectedItem);
-                    row = CodeStyleMembers.ItemContainerGenerator.ContainerFromIndex(CodeStyleMembers.SelectedIndex) as DataGridRow;
+                    row =
+                        CodeStyleMembers.ItemContainerGenerator.ContainerFromIndex(
+                            CodeStyleMembers.SelectedIndex
+                        ) as DataGridRow;
                 }
 
                 if (row != null)
@@ -176,7 +209,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
             var info = new NamingStylePreferences(
                 symbolSpecifications.ToImmutableAndFree(),
                 namingStyles.ToImmutableAndFree(),
-                namingRules.ToImmutableAndFree());
+                namingRules.ToImmutableAndFree()
+            );
 
             OptionStore.SetOption(NamingStyleOptions.NamingPreferences, _languageName, info);
         }
@@ -185,7 +219,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
         {
             base.OnLoad();
 
-            var preferences = OptionStore.GetOption(NamingStyleOptions.NamingPreferences, _languageName);
+            var preferences = OptionStore.GetOption(
+                NamingStyleOptions.NamingPreferences,
+                _languageName
+            );
             if (preferences == null)
             {
                 return;
@@ -195,10 +232,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
             DataContext = _viewModel;
         }
 
-        internal bool ContainsErrors()
-            => _viewModel.CodeStyleItems.Any(i => !i.IsComplete());
+        internal bool ContainsErrors() => _viewModel.CodeStyleItems.Any(i => !i.IsComplete());
 
-        private void CodeStyleMembers_SelectionChanged(object sender, SelectionChangedEventArgs e)
-            => _viewModel.SelectedIndex = CodeStyleMembers.SelectedIndex;
+        private void CodeStyleMembers_SelectionChanged(
+            object sender,
+            SelectionChangedEventArgs e
+        ) => _viewModel.SelectedIndex = CodeStyleMembers.SelectedIndex;
     }
 }

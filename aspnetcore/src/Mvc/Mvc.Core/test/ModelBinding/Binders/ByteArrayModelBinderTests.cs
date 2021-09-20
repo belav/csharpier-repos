@@ -16,10 +16,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task BindModelSetsModelToNullOnNullOrEmptyString(string value)
         {
             // Arrange
-            var valueProvider = new SimpleValueProvider()
-            {
-                { "foo", value }
-            };
+            var valueProvider = new SimpleValueProvider() { { "foo", value } };
 
             var bindingContext = GetBindingContext(valueProvider, typeof(byte[]));
             var binder = new ByteArrayModelBinder(NullLoggerFactory.Instance);
@@ -40,10 +37,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task BindModel()
         {
             // Arrange
-            var valueProvider = new SimpleValueProvider()
-            {
-                { "foo", "Fys1" }
-            };
+            var valueProvider = new SimpleValueProvider() { { "foo", "Fys1" } };
 
             var bindingContext = GetBindingContext(valueProvider, typeof(byte[]));
             var binder = new ByteArrayModelBinder(NullLoggerFactory.Instance);
@@ -63,10 +57,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             // Arrange
             var expected = "The value '\"Fys1\"' is not valid.";
 
-            var valueProvider = new SimpleValueProvider()
-            {
-                { "foo", "\"Fys1\"" }
-            };
+            var valueProvider = new SimpleValueProvider() { { "foo", "\"Fys1\"" } };
 
             var bindingContext = GetBindingContext(valueProvider, typeof(byte[]));
             var binder = new ByteArrayModelBinder(NullLoggerFactory.Instance);
@@ -85,10 +76,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         public async Task BindModel_ReturnsWithIsModelSetFalse_WhenValueNotFound()
         {
             // Arrange
-            var valueProvider = new SimpleValueProvider()
-            {
-                { "someName", "" }
-            };
+            var valueProvider = new SimpleValueProvider() { { "someName", "" } };
 
             var bindingContext = GetBindingContext(valueProvider, typeof(byte[]));
             var binder = new ByteArrayModelBinder(NullLoggerFactory.Instance);
@@ -103,8 +91,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             Assert.Empty(bindingContext.ModelState); // No submitted data for "foo".
         }
 
-        private static DefaultModelBindingContext GetBindingContext(IValueProvider valueProvider, Type modelType)
-        {
+        private static DefaultModelBindingContext GetBindingContext(
+            IValueProvider valueProvider,
+            Type modelType
+        ) {
             var metadataProvider = new EmptyModelMetadataProvider();
             var bindingContext = new DefaultModelBindingContext
             {

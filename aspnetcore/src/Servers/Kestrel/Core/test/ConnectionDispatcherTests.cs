@@ -29,18 +29,25 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             var connection = new Mock<DefaultConnectionContext> { CallBase = true }.Object;
             connection.ConnectionClosed = new CancellationToken(canceled: true);
-            var transportConnectionManager = new TransportConnectionManager(serviceContext.ConnectionManager);
-            var kestrelConnection = new KestrelConnection<ConnectionContext>(0, serviceContext, transportConnectionManager, _ => tcs.Task, connection, serviceContext.Log);
+            var transportConnectionManager = new TransportConnectionManager(
+                serviceContext.ConnectionManager
+            );
+            var kestrelConnection = new KestrelConnection<ConnectionContext>(
+                0,
+                serviceContext,
+                transportConnectionManager,
+                _ => tcs.Task,
+                connection,
+                serviceContext.Log
+            );
             transportConnectionManager.AddConnection(0, kestrelConnection);
 
             var task = kestrelConnection.ExecuteAsync();
 
             // The scope should be created
-            var scopeObjects = ((TestKestrelTrace)serviceContext.Log)
-                                    .Logger
-                                    .Scopes
-                                    .OfType<IReadOnlyList<KeyValuePair<string, object>>>()
-                                    .ToList();
+            var scopeObjects = ((TestKestrelTrace)serviceContext.Log).Logger.Scopes.OfType<
+                IReadOnlyList<KeyValuePair<string, object>>
+            >().ToList();
 
             Assert.Single(scopeObjects);
             var pairs = scopeObjects[0].ToDictionary(p => p.Key, p => p.Value);
@@ -62,7 +69,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var logger = ((TestKestrelTrace)serviceContext.Log).Logger;
             logger.ThrowOnCriticalErrors = false;
 
-            var dispatcher = new ConnectionDispatcher<ConnectionContext>(serviceContext, _ => Task.CompletedTask, new TransportConnectionManager(serviceContext.ConnectionManager));
+            var dispatcher = new ConnectionDispatcher<ConnectionContext>(
+                serviceContext,
+                _ => Task.CompletedTask,
+                new TransportConnectionManager(serviceContext.ConnectionManager)
+            );
 
             await dispatcher.StartAcceptingConnections(new ThrowingListener());
 
@@ -80,15 +91,32 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             var connection = new Mock<DefaultConnectionContext> { CallBase = true }.Object;
             connection.ConnectionClosed = new CancellationToken(canceled: true);
-            var transportConnectionManager = new TransportConnectionManager(serviceContext.ConnectionManager);
-            var kestrelConnection = new KestrelConnection<ConnectionContext>(0, serviceContext, transportConnectionManager, _ => Task.CompletedTask, connection, serviceContext.Log);
+            var transportConnectionManager = new TransportConnectionManager(
+                serviceContext.ConnectionManager
+            );
+            var kestrelConnection = new KestrelConnection<ConnectionContext>(
+                0,
+                serviceContext,
+                transportConnectionManager,
+                _ => Task.CompletedTask,
+                connection,
+                serviceContext.Log
+            );
             transportConnectionManager.AddConnection(0, kestrelConnection);
-            var completeFeature = kestrelConnection.TransportConnection.Features.Get<IConnectionCompleteFeature>();
+            var completeFeature =
+                kestrelConnection.TransportConnection.Features.Get<IConnectionCompleteFeature>();
 
             Assert.NotNull(completeFeature);
             object stateObject = new object();
             object callbackState = null;
-            completeFeature.OnCompleted(state => { callbackState = state; return Task.CompletedTask; }, stateObject);
+            completeFeature.OnCompleted(
+                state =>
+                {
+                    callbackState = state;
+                    return Task.CompletedTask;
+                },
+                stateObject
+            );
 
             await kestrelConnection.ExecuteAsync();
 
@@ -102,30 +130,51 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var logger = ((TestKestrelTrace)serviceContext.Log).Logger;
             var connection = new Mock<DefaultConnectionContext> { CallBase = true }.Object;
             connection.ConnectionClosed = new CancellationToken(canceled: true);
-            var transportConnectionManager = new TransportConnectionManager(serviceContext.ConnectionManager);
-            var kestrelConnection = new KestrelConnection<ConnectionContext>(0, serviceContext, transportConnectionManager, _ => Task.CompletedTask, connection, serviceContext.Log);
+            var transportConnectionManager = new TransportConnectionManager(
+                serviceContext.ConnectionManager
+            );
+            var kestrelConnection = new KestrelConnection<ConnectionContext>(
+                0,
+                serviceContext,
+                transportConnectionManager,
+                _ => Task.CompletedTask,
+                connection,
+                serviceContext.Log
+            );
             transportConnectionManager.AddConnection(0, kestrelConnection);
-            var completeFeature = kestrelConnection.TransportConnection.Features.Get<IConnectionCompleteFeature>();
+            var completeFeature =
+                kestrelConnection.TransportConnection.Features.Get<IConnectionCompleteFeature>();
 
             Assert.NotNull(completeFeature);
             object stateObject = new object();
             object callbackState = null;
-            completeFeature.OnCompleted(state => { callbackState = state; throw new InvalidTimeZoneException(); }, stateObject);
+            completeFeature.OnCompleted(
+                state =>
+                {
+                    callbackState = state;
+                    throw new InvalidTimeZoneException();
+                },
+                stateObject
+            );
 
             await kestrelConnection.ExecuteAsync();
 
             Assert.Equal(stateObject, callbackState);
             var errors = logger.Messages.Where(e => e.LogLevel >= LogLevel.Error).ToArray();
             Assert.Single(errors);
-            Assert.Equal("An error occurred running an IConnectionCompleteFeature.OnCompleted callback.", errors[0].Message);
+            Assert.Equal(
+                "An error occurred running an IConnectionCompleteFeature.OnCompleted callback.",
+                errors[0].Message
+            );
         }
 
         private class ThrowingListener : IConnectionListener<ConnectionContext>
         {
             public EndPoint EndPoint { get; set; }
 
-            public ValueTask<ConnectionContext> AcceptAsync(CancellationToken cancellationToken = default)
-            {
+            public ValueTask<ConnectionContext> AcceptAsync(
+                CancellationToken cancellationToken = default
+            ) {
                 throw new InvalidOperationException("Unexpected error listening");
             }
 

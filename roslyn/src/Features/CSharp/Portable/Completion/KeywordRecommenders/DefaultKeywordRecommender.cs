@@ -12,19 +12,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class DefaultKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public DefaultKeywordRecommender()
-            : base(SyntaxKind.DefaultKeyword, isValidInPreprocessorContext: true)
-        {
-        }
+            : base(SyntaxKind.DefaultKeyword, isValidInPreprocessorContext: true) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-        {
-            return
-                IsValidPreProcessorContext(context) ||
-                context.IsStatementContext ||
-                context.IsGlobalStatementContext ||
-                context.IsAnyExpressionContext ||
-                context.TargetToken.IsSwitchLabelContext() ||
-                context.SyntaxTree.IsTypeParameterConstraintStartContext(position, context.LeftToken);
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) {
+            return IsValidPreProcessorContext(context)
+                || context.IsStatementContext
+                || context.IsGlobalStatementContext
+                || context.IsAnyExpressionContext
+                || context.TargetToken.IsSwitchLabelContext()
+                || context.SyntaxTree.IsTypeParameterConstraintStartContext(
+                    position,
+                    context.LeftToken
+                );
         }
 
         private static bool IsValidPreProcessorContext(CSharpSyntaxContext context)
@@ -38,9 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             var previousToken1 = context.TargetToken;
             var previousToken2 = previousToken1.GetPreviousToken(includeSkipped: true);
 
-            return
-                previousToken1.Kind() == SyntaxKind.LineKeyword &&
-                previousToken2.Kind() == SyntaxKind.HashToken;
+            return previousToken1.Kind() == SyntaxKind.LineKeyword
+                && previousToken2.Kind() == SyntaxKind.HashToken;
         }
     }
 }

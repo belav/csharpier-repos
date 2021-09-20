@@ -28,8 +28,10 @@ namespace Microsoft.AspNetCore.JsonPatch.Operations
         [InlineData("invalid", OperationType.Invalid)]
         [InlineData("coppy", OperationType.Invalid)]
         [InlineData("notvalid", OperationType.Invalid)]
-        public void InvalidOperationType_SetsOperationTypeInvalid(string op, OperationType operationType)
-        {
+        public void InvalidOperationType_SetsOperationTypeInvalid(
+            string op,
+            OperationType operationType
+        ) {
             // Arrange
             var operationBase = new OperationBase();
             operationBase.op = op;

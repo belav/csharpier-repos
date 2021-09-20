@@ -28,8 +28,8 @@ namespace Microsoft.AspNetCore.Routing
         /// <param name="displayName">The display name (for use in error messages).</param>
         public RouteConstraintBuilder(
             IInlineConstraintResolver inlineConstraintResolver,
-            string displayName)
-        {
+            string displayName
+        ) {
             if (inlineConstraintResolver == null)
             {
                 throw new ArgumentNullException(nameof(inlineConstraintResolver));
@@ -43,7 +43,9 @@ namespace Microsoft.AspNetCore.Routing
             _inlineConstraintResolver = inlineConstraintResolver;
             _displayName = displayName;
 
-            _constraints = new Dictionary<string, List<IRouteConstraint>>(StringComparer.OrdinalIgnoreCase);
+            _constraints = new Dictionary<string, List<IRouteConstraint>>(
+                StringComparer.OrdinalIgnoreCase
+            );
             _optionalParameters = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         }
 
@@ -53,7 +55,9 @@ namespace Microsoft.AspNetCore.Routing
         /// <returns>An <see cref="IDictionary{String, IRouteConstraint}"/> of the constraints.</returns>
         public IDictionary<string, IRouteConstraint> Build()
         {
-            var constraints = new Dictionary<string, IRouteConstraint>(StringComparer.OrdinalIgnoreCase);
+            var constraints = new Dictionary<string, IRouteConstraint>(
+                StringComparer.OrdinalIgnoreCase
+            );
             foreach (var kvp in _constraints)
             {
                 IRouteConstraint constraint;
@@ -116,7 +120,9 @@ namespace Microsoft.AspNetCore.Routing
                             key,
                             value,
                             _displayName,
-                            typeof(IRouteConstraint)));
+                            typeof(IRouteConstraint)
+                        )
+                    );
                 }
 
                 var constraintsRegEx = "^(" + regexPattern + ")$";
@@ -156,7 +162,9 @@ namespace Microsoft.AspNetCore.Routing
                         key,
                         constraintText,
                         _displayName,
-                        _inlineConstraintResolver.GetType().Name));
+                        _inlineConstraintResolver.GetType().Name
+                    )
+                );
             }
             else if (constraint == NullRouteConstraint.Instance)
             {

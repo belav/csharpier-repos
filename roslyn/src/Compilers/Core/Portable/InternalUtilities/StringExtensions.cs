@@ -44,12 +44,18 @@ namespace Roslyn.Utilities
 
         public static bool LooksLikeInterfaceName(this string name)
         {
-            return name.Length >= 3 && name[0] == 'I' && char.IsUpper(name[1]) && char.IsLower(name[2]);
+            return name.Length >= 3
+                && name[0] == 'I'
+                && char.IsUpper(name[1])
+                && char.IsLower(name[2]);
         }
 
         public static bool LooksLikeTypeParameterName(this string name)
         {
-            return name.Length >= 3 && name[0] == 'T' && char.IsUpper(name[1]) && char.IsLower(name[2]);
+            return name.Length >= 3
+                && name[0] == 'T'
+                && char.IsUpper(name[1])
+                && char.IsLower(name[2]);
         }
 
         private static readonly Func<char, char> s_toLower = char.ToLower;
@@ -58,15 +64,13 @@ namespace Roslyn.Utilities
         [return: NotNullIfNotNull(parameterName: "shortName")]
         public static string? ToPascalCase(
             this string? shortName,
-            bool trimLeadingTypePrefix = true)
-        {
+            bool trimLeadingTypePrefix = true
+        ) {
             return ConvertCase(shortName, trimLeadingTypePrefix, s_toUpper);
         }
 
         [return: NotNullIfNotNull(parameterName: "shortName")]
-        public static string? ToCamelCase(
-            this string? shortName,
-            bool trimLeadingTypePrefix = true)
+        public static string? ToCamelCase(this string? shortName, bool trimLeadingTypePrefix = true)
         {
             return ConvertCase(shortName, trimLeadingTypePrefix, s_toLower);
         }
@@ -75,14 +79,18 @@ namespace Roslyn.Utilities
         private static string? ConvertCase(
             this string? shortName,
             bool trimLeadingTypePrefix,
-            Func<char, char> convert)
-        {
+            Func<char, char> convert
+        ) {
             // Special case the common .NET pattern of "IGoo" as a type name.  In this case we
-            // want to generate "goo" as the parameter name.  
+            // want to generate "goo" as the parameter name.
             if (!RoslynString.IsNullOrEmpty(shortName))
             {
-                if (trimLeadingTypePrefix && (shortName.LooksLikeInterfaceName() || shortName.LooksLikeTypeParameterName()))
-                {
+                if (
+                    trimLeadingTypePrefix
+                    && (
+                        shortName.LooksLikeInterfaceName() || shortName.LooksLikeTypeParameterName()
+                    )
+                ) {
                     return convert(shortName[1]) + shortName.Substring(2);
                 }
 
@@ -103,8 +111,9 @@ namespace Roslyn.Utilities
         /// <summary>
         /// Checks if the given name is a sequence of valid CLR names separated by a dot.
         /// </summary>
-        internal static bool IsValidClrNamespaceName([NotNullWhen(returnValue: true)] this string? name)
-        {
+        internal static bool IsValidClrNamespaceName(
+            [NotNullWhen(returnValue: true)] this string? name
+        ) {
             if (RoslynString.IsNullOrEmpty(name))
             {
                 return false;
@@ -126,9 +135,7 @@ namespace Roslyn.Utilities
 
         private const string AttributeSuffix = "Attribute";
 
-        internal static string GetWithSingleAttributeSuffix(
-            this string name,
-            bool isCaseSensitive)
+        internal static string GetWithSingleAttributeSuffix(this string name, bool isCaseSensitive)
         {
             string? cleaned = name;
             while ((cleaned = GetWithoutAttributeSuffix(cleaned, isCaseSensitive)) != null)
@@ -141,23 +148,23 @@ namespace Roslyn.Utilities
 
         internal static bool TryGetWithoutAttributeSuffix(
             this string name,
-            [NotNullWhen(returnValue: true)] out string? result)
-        {
+            [NotNullWhen(returnValue: true)] out string? result
+        ) {
             return TryGetWithoutAttributeSuffix(name, isCaseSensitive: true, result: out result);
         }
 
-        internal static string? GetWithoutAttributeSuffix(
-            this string name,
-            bool isCaseSensitive)
+        internal static string? GetWithoutAttributeSuffix(this string name, bool isCaseSensitive)
         {
-            return TryGetWithoutAttributeSuffix(name, isCaseSensitive, out var result) ? result : null;
+            return TryGetWithoutAttributeSuffix(name, isCaseSensitive, out var result)
+              ? result
+              : null;
         }
 
         internal static bool TryGetWithoutAttributeSuffix(
             this string name,
             bool isCaseSensitive,
-            [NotNullWhen(returnValue: true)] out string? result)
-        {
+            [NotNullWhen(returnValue: true)] out string? result
+        ) {
             if (name.HasAttributeSuffix(isCaseSensitive))
             {
                 result = name.Substring(0, name.Length - AttributeSuffix.Length);
@@ -170,8 +177,11 @@ namespace Roslyn.Utilities
 
         internal static bool HasAttributeSuffix(this string name, bool isCaseSensitive)
         {
-            var comparison = isCaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase;
-            return name.Length > AttributeSuffix.Length && name.EndsWith(AttributeSuffix, comparison);
+            var comparison = isCaseSensitive
+                ? StringComparison.Ordinal
+                : StringComparison.OrdinalIgnoreCase;
+            return name.Length > AttributeSuffix.Length
+                && name.EndsWith(AttributeSuffix, comparison);
         }
 
         internal static bool IsValidUnicodeString(this string str)
@@ -226,8 +236,11 @@ namespace Roslyn.Utilities
             }
         }
 
-        internal static int IndexOfBalancedParenthesis(this string str, int openingOffset, char closing)
-        {
+        internal static int IndexOfBalancedParenthesis(
+            this string str,
+            int openingOffset,
+            char closing
+        ) {
             char opening = str[openingOffset];
 
             int depth = 1;
@@ -251,19 +264,19 @@ namespace Roslyn.Utilities
             return -1;
         }
 
-        // String isn't IEnumerable<char> in the current Portable profile. 
+        // String isn't IEnumerable<char> in the current Portable profile.
         internal static char First(this string arg)
         {
             return arg[0];
         }
 
-        // String isn't IEnumerable<char> in the current Portable profile. 
+        // String isn't IEnumerable<char> in the current Portable profile.
         internal static char Last(this string arg)
         {
             return arg[arg.Length - 1];
         }
 
-        // String isn't IEnumerable<char> in the current Portable profile. 
+        // String isn't IEnumerable<char> in the current Portable profile.
         internal static bool All(this string arg, Predicate<char> predicate)
         {
             foreach (char c in arg)
@@ -280,9 +293,11 @@ namespace Roslyn.Utilities
         public static int GetCaseInsensitivePrefixLength(this string string1, string string2)
         {
             int x = 0;
-            while (x < string1.Length && x < string2.Length &&
-                   char.ToUpper(string1[x]) == char.ToUpper(string2[x]))
-            {
+            while (
+                x < string1.Length
+                && x < string2.Length
+                && char.ToUpper(string1[x]) == char.ToUpper(string2[x])
+            ) {
                 x++;
             }
 
@@ -292,8 +307,7 @@ namespace Roslyn.Utilities
         public static int GetCaseSensitivePrefixLength(this string string1, string string2)
         {
             int x = 0;
-            while (x < string1.Length && x < string2.Length &&
-                   string1[x] == string2[x])
+            while (x < string1.Length && x < string2.Length && string1[x] == string2[x])
             {
                 x++;
             }

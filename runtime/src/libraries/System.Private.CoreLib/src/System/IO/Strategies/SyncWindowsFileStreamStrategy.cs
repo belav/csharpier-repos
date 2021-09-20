@@ -11,14 +11,19 @@ namespace System.IO.Strategies
 {
     internal sealed class SyncWindowsFileStreamStrategy : WindowsFileStreamStrategy
     {
-        internal SyncWindowsFileStreamStrategy(SafeFileHandle handle, FileAccess access, FileShare share) : base(handle, access, share)
-        {
-        }
+        internal SyncWindowsFileStreamStrategy(
+            SafeFileHandle handle,
+            FileAccess access,
+            FileShare share
+        ) : base(handle, access, share) { }
 
-        internal SyncWindowsFileStreamStrategy(string path, FileMode mode, FileAccess access, FileShare share, FileOptions options)
-            : base(path, mode, access, share, options)
-        {
-        }
+        internal SyncWindowsFileStreamStrategy(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            FileOptions options
+        ) : base(path, mode, access, share, options) { }
 
         internal override bool IsAsync => false;
 
@@ -36,32 +41,57 @@ namespace System.IO.Strategies
                 ThrowHelper.ThrowArgumentException_HandleNotSync(nameof(handle));
         }
 
-        public override int Read(byte[] buffer, int offset, int count) => ReadSpan(new Span<byte>(buffer, offset, count));
+        public override int Read(byte[] buffer, int offset, int count) =>
+            ReadSpan(new Span<byte>(buffer, offset, count));
 
         public override int Read(Span<byte> buffer) => ReadSpan(buffer);
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             // If we weren't opened for asynchronous I/O, we still call to the base implementation so that
             // Read is invoked asynchronously.  But we can do so using the base Stream's internal helper
             // that bypasses delegating to BeginRead, since we already know this is FileStream rather
             // than something derived from it and what our BeginRead implementation is going to do.
-            return (Task<int>)BeginReadInternal(buffer, offset, count, null, null, serializeAsynchronously: true, apm: false);
+            return (Task<int>)BeginReadInternal(
+                buffer,
+                offset,
+                count,
+                null,
+                null,
+                serializeAsynchronously: true,
+                apm: false
+            );
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
-        {
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        ) {
             // If we weren't opened for asynchronous I/O, we still call to the base implementation so that
             // Read is invoked asynchronously.  But if we have a byte[], we can do so using the base Stream's
             // internal helper that bypasses delegating to BeginRead, since we already know this is FileStream
             // rather than something derived from it and what our BeginRead implementation is going to do.
-            return MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> segment) ?
-                new ValueTask<int>((Task<int>)BeginReadInternal(segment.Array!, segment.Offset, segment.Count, null, null, serializeAsynchronously: true, apm: false)) :
-                base.ReadAsync(buffer, cancellationToken);
+            return MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> segment)
+              ? new ValueTask<int>(
+                    (Task<int>)BeginReadInternal(
+                        segment.Array!,
+                        segment.Offset,
+                        segment.Count,
+                        null,
+                        null,
+                        serializeAsynchronously: true,
+                        apm: false
+                    )
+                )
+              : base.ReadAsync(buffer, cancellationToken);
         }
 
-        public override void Write(byte[] buffer, int offset, int count)
-            => WriteSpan(new ReadOnlySpan<byte>(buffer, offset, count));
+        public override void Write(byte[] buffer, int offset, int count) =>
+            WriteSpan(new ReadOnlySpan<byte>(buffer, offset, count));
 
         public override void Write(ReadOnlySpan<byte> buffer)
         {
@@ -73,24 +103,48 @@ namespace System.IO.Strategies
             WriteSpan(buffer);
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        {
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) {
             // If we weren't opened for asynchronous I/O, we still call to the base implementation so that
             // Write is invoked asynchronously.  But we can do so using the base Stream's internal helper
             // that bypasses delegating to BeginWrite, since we already know this is FileStream rather
             // than something derived from it and what our BeginWrite implementation is going to do.
-            return (Task)BeginWriteInternal(buffer, offset, count, null, null, serializeAsynchronously: true, apm: false);
+            return (Task)BeginWriteInternal(
+                buffer,
+                offset,
+                count,
+                null,
+                null,
+                serializeAsynchronously: true,
+                apm: false
+            );
         }
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
-        {
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        ) {
             // If we weren't opened for asynchronous I/O, we still call to the base implementation so that
             // Write is invoked asynchronously.  But if we have a byte[], we can do so using the base Stream's
             // internal helper that bypasses delegating to BeginWrite, since we already know this is FileStream
             // rather than something derived from it and what our BeginWrite implementation is going to do.
-            return MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> segment) ?
-                new ValueTask((Task)BeginWriteInternal(segment.Array!, segment.Offset, segment.Count, null, null, serializeAsynchronously: true, apm: false)) :
-                base.WriteAsync(buffer, cancellationToken);
+            return MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> segment)
+              ? new ValueTask(
+                    (Task)BeginWriteInternal(
+                        segment.Array!,
+                        segment.Offset,
+                        segment.Count,
+                        null,
+                        null,
+                        serializeAsynchronously: true,
+                        apm: false
+                    )
+                )
+              : base.WriteAsync(buffer, cancellationToken);
         }
 
         public override Task FlushAsync(CancellationToken cancellationToken) => Task.CompletedTask; // no buffering = nothing to flush
@@ -105,7 +159,13 @@ namespace System.IO.Strategies
             Debug.Assert(!_fileHandle.IsClosed, "!_handle.IsClosed");
 
             NativeOverlapped nativeOverlapped = GetNativeOverlappedForCurrentPosition();
-            int r = FileStreamHelpers.ReadFileNative(_fileHandle, destination, true, &nativeOverlapped, out int errorCode);
+            int r = FileStreamHelpers.ReadFileNative(
+                _fileHandle,
+                destination,
+                true,
+                &nativeOverlapped,
+                out int errorCode
+            );
 
             if (r == -1)
             {
@@ -138,7 +198,13 @@ namespace System.IO.Strategies
             Debug.Assert(!_fileHandle.IsClosed, "!_handle.IsClosed");
 
             NativeOverlapped nativeOverlapped = GetNativeOverlappedForCurrentPosition();
-            int r = FileStreamHelpers.WriteFileNative(_fileHandle, source, true, &nativeOverlapped, out int errorCode);
+            int r = FileStreamHelpers.WriteFileNative(
+                _fileHandle,
+                source,
+                true,
+                &nativeOverlapped,
+                out int errorCode
+            );
 
             if (r == -1)
             {

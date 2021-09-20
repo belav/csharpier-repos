@@ -14,8 +14,11 @@ public class TimeOut
     [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser.")]
     public static void OpenStandardXXX_WriteTimeOut()
     {
-        using (Stream standardOut = Console.OpenStandardOutput(), standardIn = Console.OpenStandardInput(), standardError = Console.OpenStandardError())
-        {
+        using (
+            Stream standardOut = Console.OpenStandardOutput(),
+                standardIn = Console.OpenStandardInput(),
+                standardError = Console.OpenStandardError()
+        ) {
             Assert.Throws<InvalidOperationException>(() => standardOut.WriteTimeout);
             Assert.Throws<InvalidOperationException>(() => standardIn.WriteTimeout);
             Assert.Throws<InvalidOperationException>(() => standardError.WriteTimeout);
@@ -30,8 +33,11 @@ public class TimeOut
     [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser.")]
     public static void OpenStandardXXX_ReadTimeOut()
     {
-        using (Stream standardOut = Console.OpenStandardOutput(), standardIn = Console.OpenStandardInput(), standardError = Console.OpenStandardError())
-        {
+        using (
+            Stream standardOut = Console.OpenStandardOutput(),
+                standardIn = Console.OpenStandardInput(),
+                standardError = Console.OpenStandardError()
+        ) {
             Assert.Throws<InvalidOperationException>(() => standardOut.ReadTimeout);
             Assert.Throws<InvalidOperationException>(() => standardIn.ReadTimeout);
             Assert.Throws<InvalidOperationException>(() => standardError.ReadTimeout);
@@ -46,8 +52,11 @@ public class TimeOut
     [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser.")]
     public static void OpenStandardXXX_CanTimeOut()
     {
-        using (Stream standardOut = Console.OpenStandardOutput(), standardIn = Console.OpenStandardInput(), standardError = Console.OpenStandardError())
-        {
+        using (
+            Stream standardOut = Console.OpenStandardOutput(),
+                standardIn = Console.OpenStandardInput(),
+                standardError = Console.OpenStandardError()
+        ) {
             Assert.False(standardOut.CanTimeout);
             Assert.False(standardIn.CanTimeout);
             Assert.False(standardError.CanTimeout);

@@ -126,8 +126,11 @@ namespace JIT.HardwareIntrinsics.Arm
             {
                 int sizeOfinArray1 = inArray1.Length * Unsafe.SizeOf<UInt16>();
                 int sizeOfoutArray = outArray.Length * Unsafe.SizeOf<UInt16>();
-                if ((alignment != 16 && alignment != 8) || (alignment * 2) < sizeOfinArray1 || (alignment * 2) < sizeOfoutArray)
-                {
+                if (
+                    (alignment != 16 && alignment != 8)
+                    || (alignment * 2) < sizeOfinArray1
+                    || (alignment * 2) < sizeOfoutArray
+                ) {
                     throw new ArgumentException("Invalid value of alignment");
                 }
 
@@ -139,11 +142,17 @@ namespace JIT.HardwareIntrinsics.Arm
 
                 this.alignment = (ulong)alignment;
 
-                Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArray1Ptr), ref Unsafe.As<UInt16, byte>(ref inArray1[0]), (uint)sizeOfinArray1);
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.AsRef<byte>(inArray1Ptr),
+                    ref Unsafe.As<UInt16, byte>(ref inArray1[0]),
+                    (uint)sizeOfinArray1
+                );
             }
 
-            public void* inArray1Ptr => Align((byte*)(inHandle1.AddrOfPinnedObject().ToPointer()), alignment);
-            public void* outArrayPtr => Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* inArray1Ptr =>
+                Align((byte*)(inHandle1.AddrOfPinnedObject().ToPointer()), alignment);
+            public void* outArrayPtr =>
+                Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
 
             public void Dispose()
             {
@@ -166,16 +175,24 @@ namespace JIT.HardwareIntrinsics.Arm
             {
                 var testStruct = new TestStruct();
 
-                for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetUInt16(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<UInt16>, byte>(ref testStruct._fld1), ref Unsafe.As<UInt16, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<UInt16>>());
+                for (var i = 0; i < Op1ElementCount; i++)
+                {
+                    _data1[i] = TestLibrary.Generator.GetUInt16();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector128<UInt16>, byte>(ref testStruct._fld1),
+                    ref Unsafe.As<UInt16, byte>(ref _data1[0]),
+                    (uint)Unsafe.SizeOf<Vector128<UInt16>>()
+                );
 
                 testStruct._fld3 = TestLibrary.Generator.GetUInt16();
 
                 return testStruct;
             }
 
-            public void RunStructFldScenario(LoadAndInsertTest__LoadAndInsertScalar_Vector128_UInt16_7 testClass)
-            {
+            public void RunStructFldScenario(
+                LoadAndInsertTest__LoadAndInsertScalar_Vector128_UInt16_7 testClass
+            ) {
                 fixed (UInt16* pFld3 = &_fld3)
                 {
                     var result = AdvSimd.LoadAndInsertScalar(_fld1, 7, pFld3);
@@ -186,10 +203,10 @@ namespace JIT.HardwareIntrinsics.Arm
                 testClass.ValidateResult(_fld1, _fld3, testClass._dataTable.outArrayPtr);
             }
 
-            public void RunStructFldScenario_Load(LoadAndInsertTest__LoadAndInsertScalar_Vector128_UInt16_7 testClass)
-            {
-                fixed (Vector128<UInt16>* pFld1 = &_fld1)
-                fixed (UInt16* pFld3 = &_fld3)
+            public void RunStructFldScenario_Load(
+                LoadAndInsertTest__LoadAndInsertScalar_Vector128_UInt16_7 testClass
+            ) {
+                fixed (Vector128<UInt16>* pFld1 = &_fld1)fixed (UInt16* pFld3 = &_fld3)
                 {
                     var result = AdvSimd.LoadAndInsertScalar(
                         AdvSimd.LoadVector128((UInt16*)pFld1),
@@ -205,8 +222,10 @@ namespace JIT.HardwareIntrinsics.Arm
 
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int Op1ElementCount = Unsafe.SizeOf<Vector128<UInt16>>() / sizeof(UInt16);
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector128<UInt16>>() / sizeof(UInt16);
+        private static readonly int Op1ElementCount =
+            Unsafe.SizeOf<Vector128<UInt16>>() / sizeof(UInt16);
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector128<UInt16>>() / sizeof(UInt16);
         private static readonly byte ElementIndex = 7;
 
         private static UInt16[] _data1 = new UInt16[Op1ElementCount];
@@ -221,8 +240,15 @@ namespace JIT.HardwareIntrinsics.Arm
 
         static LoadAndInsertTest__LoadAndInsertScalar_Vector128_UInt16_7()
         {
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetUInt16(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<UInt16>, byte>(ref _clsVar1), ref Unsafe.As<UInt16, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<UInt16>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetUInt16();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<UInt16>, byte>(ref _clsVar1),
+                ref Unsafe.As<UInt16, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector128<UInt16>>()
+            );
 
             _clsVar3 = TestLibrary.Generator.GetUInt16();
         }
@@ -231,12 +257,22 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             Succeeded = true;
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetUInt16(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<UInt16>, byte>(ref _fld1), ref Unsafe.As<UInt16, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<UInt16>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetUInt16();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<UInt16>, byte>(ref _fld1),
+                ref Unsafe.As<UInt16, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector128<UInt16>>()
+            );
 
             _fld3 = TestLibrary.Generator.GetUInt16();
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetUInt16(); }
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetUInt16();
+            }
             _dataTable = new DataTable(_data1, new UInt16[RetElementCount], LargestVectorSize);
         }
 
@@ -282,12 +318,19 @@ namespace JIT.HardwareIntrinsics.Arm
 
             UInt16 op3 = TestLibrary.Generator.GetUInt16();
 
-            var result = typeof(AdvSimd).GetMethod(nameof(AdvSimd.LoadAndInsertScalar), new Type[] { typeof(Vector128<UInt16>), typeof(byte), typeof(UInt16*) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.Read<Vector128<UInt16>>(_dataTable.inArray1Ptr),
-                                        ElementIndex,
-                                        Pointer.Box(&op3, typeof(UInt16*))
-                                     });
+            var result = typeof(AdvSimd).GetMethod(
+                    nameof(AdvSimd.LoadAndInsertScalar),
+                    new Type[] { typeof(Vector128<UInt16>), typeof(byte), typeof(UInt16*) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.Read<Vector128<UInt16>>(_dataTable.inArray1Ptr),
+                        ElementIndex,
+                        Pointer.Box(&op3, typeof(UInt16*))
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<UInt16>)(result));
             ValidateResult(_dataTable.inArray1Ptr, op3, _dataTable.outArrayPtr);
@@ -299,12 +342,19 @@ namespace JIT.HardwareIntrinsics.Arm
 
             UInt16 op3 = TestLibrary.Generator.GetUInt16();
 
-            var result = typeof(AdvSimd).GetMethod(nameof(AdvSimd.LoadAndInsertScalar), new Type[] { typeof(Vector128<UInt16>), typeof(byte), typeof(UInt16*) })
-                                     .Invoke(null, new object[] {
-                                        AdvSimd.LoadVector128((UInt16*)(_dataTable.inArray1Ptr)),
-                                        ElementIndex,
-                                        Pointer.Box(&op3, typeof(UInt16*))
-                                     });
+            var result = typeof(AdvSimd).GetMethod(
+                    nameof(AdvSimd.LoadAndInsertScalar),
+                    new Type[] { typeof(Vector128<UInt16>), typeof(byte), typeof(UInt16*) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        AdvSimd.LoadVector128((UInt16*)(_dataTable.inArray1Ptr)),
+                        ElementIndex,
+                        Pointer.Box(&op3, typeof(UInt16*))
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<UInt16>)(result));
             ValidateResult(_dataTable.inArray1Ptr, op3, _dataTable.outArrayPtr);
@@ -316,11 +366,7 @@ namespace JIT.HardwareIntrinsics.Arm
 
             fixed (UInt16* pClsVar3 = &_clsVar3)
             {
-                var result = AdvSimd.LoadAndInsertScalar(
-                    _clsVar1,
-                    7,
-                    pClsVar3
-                );
+                var result = AdvSimd.LoadAndInsertScalar(_clsVar1, 7, pClsVar3);
                 Unsafe.Write(_dataTable.outArrayPtr, result);
             }
             ValidateResult(_clsVar1, _clsVar3, _dataTable.outArrayPtr);
@@ -330,8 +376,7 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario_Load));
 
-            fixed (Vector128<UInt16>* pClsVar1 = &_clsVar1)
-            fixed (UInt16* pClsVar3 = &_clsVar3)
+            fixed (Vector128<UInt16>* pClsVar1 = &_clsVar1)fixed (UInt16* pClsVar3 = &_clsVar3)
             {
                 var result = AdvSimd.LoadAndInsertScalar(
                     AdvSimd.LoadVector128((UInt16*)pClsVar1),
@@ -389,8 +434,7 @@ namespace JIT.HardwareIntrinsics.Arm
 
             var test = new LoadAndInsertTest__LoadAndInsertScalar_Vector128_UInt16_7();
 
-            fixed (Vector128<UInt16>* pFld1 = &test._fld1)
-            fixed (UInt16* pFld3 = &test._fld3)
+            fixed (Vector128<UInt16>* pFld1 = &test._fld1)fixed (UInt16* pFld3 = &test._fld3)
             {
                 var result = AdvSimd.LoadAndInsertScalar(
                     AdvSimd.LoadVector128((UInt16*)pFld1),
@@ -421,8 +465,7 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassFldScenario_Load));
 
-            fixed (Vector128<UInt16>* pFld1 = &_fld1)
-            fixed (UInt16* pFld3 = &_fld3)
+            fixed (Vector128<UInt16>* pFld1 = &_fld1)fixed (UInt16* pFld3 = &_fld3)
             {
                 var result = AdvSimd.LoadAndInsertScalar(
                     AdvSimd.LoadVector128((UInt16*)pFld1),
@@ -498,30 +541,54 @@ namespace JIT.HardwareIntrinsics.Arm
             }
         }
 
-        private void ValidateResult(Vector128<UInt16> op1, UInt16 op3, void* result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Vector128<UInt16> op1,
+            UInt16 op3,
+            void* result,
+            [CallerMemberName] string method = ""
+        ) {
             UInt16[] inArray1 = new UInt16[Op1ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
 
             Unsafe.WriteUnaligned(ref Unsafe.As<UInt16, byte>(ref inArray1[0]), op1);
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<UInt16, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector128<UInt16>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<UInt16, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector128<UInt16>>()
+            );
 
             ValidateResult(inArray1, op3, outArray, method);
         }
 
-        private void ValidateResult(void* op1, UInt16 op3, void* result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            void* op1,
+            UInt16 op3,
+            void* result,
+            [CallerMemberName] string method = ""
+        ) {
             UInt16[] inArray1 = new UInt16[Op1ElementCount];
             UInt16[] outArray = new UInt16[RetElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<UInt16, byte>(ref inArray1[0]), ref Unsafe.AsRef<byte>(op1), (uint)Unsafe.SizeOf<Vector128<UInt16>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<UInt16, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector128<UInt16>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<UInt16, byte>(ref inArray1[0]),
+                ref Unsafe.AsRef<byte>(op1),
+                (uint)Unsafe.SizeOf<Vector128<UInt16>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<UInt16, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector128<UInt16>>()
+            );
 
             ValidateResult(inArray1, op3, outArray, method);
         }
 
-        private void ValidateResult(UInt16[] firstOp, UInt16 thirdOp, UInt16[] result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            UInt16[] firstOp,
+            UInt16 thirdOp,
+            UInt16[] result,
+            [CallerMemberName] string method = ""
+        ) {
             bool succeeded = true;
 
             for (var i = 0; i < RetElementCount; i++)
@@ -535,10 +602,16 @@ namespace JIT.HardwareIntrinsics.Arm
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(AdvSimd)}.{nameof(AdvSimd.LoadAndInsertScalar)}<UInt16>(Vector128<UInt16>, 7, UInt16*): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($" firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(AdvSimd)}.{nameof(AdvSimd.LoadAndInsertScalar)}<UInt16>(Vector128<UInt16>, 7, UInt16*): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $" firstOp: ({string.Join(", ", firstOp)})"
+                );
                 TestLibrary.TestFramework.LogInformation($" thirdOp: {thirdOp}");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

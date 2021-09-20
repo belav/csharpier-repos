@@ -13,17 +13,21 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class PageAsyncDisposalTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting>>
+    public class PageAsyncDisposalTest
+        : IClassFixture<MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting>>
     {
-        public PageAsyncDisposalTest(MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting> fixture)
-        {
-            Factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        public PageAsyncDisposalTest(
+            MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting> fixture
+        ) {
+            Factory =
+                fixture.Factories.FirstOrDefault()
+                ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
             Client = Factory.CreateDefaultClient();
         }
 
         private static void ConfigureWebHostBuilder(IWebHostBuilder builder) =>
             builder.UseStartup<RazorPagesWebSite.StartupWithoutEndpointRouting>()
-            .ConfigureServices(s => s.AddSingleton<RazorPagesWebSite.PageTestDisposeAsync>());
+                .ConfigureServices(s => s.AddSingleton<RazorPagesWebSite.PageTestDisposeAsync>());
 
         public WebApplicationFactory<RazorPagesWebSite.StartupWithoutEndpointRouting> Factory { get; }
 

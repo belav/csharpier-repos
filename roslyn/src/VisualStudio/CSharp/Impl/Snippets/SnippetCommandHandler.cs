@@ -34,26 +34,40 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
     [ContentType(Microsoft.CodeAnalysis.Editor.ContentTypeNames.CSharpContentType)]
     [Name("CSharp Snippets")]
     [Order(After = PredefinedCompletionNames.CompletionCommandHandler)]
-    [Order(After = Microsoft.CodeAnalysis.Editor.PredefinedCommandHandlerNames.SignatureHelpAfterCompletion)]
+    [Order(
+        After = Microsoft.CodeAnalysis.Editor.PredefinedCommandHandlerNames.SignatureHelpAfterCompletion
+    )]
     [Order(Before = Microsoft.CodeAnalysis.Editor.PredefinedCommandHandlerNames.AutomaticLineEnder)]
-    internal sealed class SnippetCommandHandler :
-        AbstractSnippetCommandHandler,
-        ICommandHandler<SurroundWithCommandArgs>,
-        IChainedCommandHandler<TypeCharCommandArgs>
+    internal sealed class SnippetCommandHandler
+        : AbstractSnippetCommandHandler,
+          ICommandHandler<SurroundWithCommandArgs>,
+          IChainedCommandHandler<TypeCharCommandArgs>
     {
-        private readonly ImmutableArray<Lazy<ArgumentProvider, OrderableLanguageMetadata>> _argumentProviders;
+        private readonly ImmutableArray<
+            Lazy<ArgumentProvider, OrderableLanguageMetadata>
+        > _argumentProviders;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public SnippetCommandHandler(
             IThreadingContext threadingContext,
             SignatureHelpControllerProvider signatureHelpControllerProvider,
             IEditorCommandHandlerServiceFactory editorCommandHandlerServiceFactory,
             IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
             SVsServiceProvider serviceProvider,
-            [ImportMany] IEnumerable<Lazy<ArgumentProvider, OrderableLanguageMetadata>> argumentProviders)
-            : base(threadingContext, signatureHelpControllerProvider, editorCommandHandlerServiceFactory, editorAdaptersFactoryService, serviceProvider)
-        {
+            [ImportMany]
+                IEnumerable<Lazy<ArgumentProvider, OrderableLanguageMetadata>> argumentProviders
+        ) : base(
+            threadingContext,
+            signatureHelpControllerProvider,
+            editorCommandHandlerServiceFactory,
+            editorAdaptersFactoryService,
+            serviceProvider
+        ) {
             _argumentProviders = argumentProviders.ToImmutableArray();
         }
 
@@ -91,19 +105,28 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             return CommandState.Available;
         }
 
-        public CommandState GetCommandState(TypeCharCommandArgs args, Func<CommandState> nextCommandHandler)
-        {
+        public CommandState GetCommandState(
+            TypeCharCommandArgs args,
+            Func<CommandState> nextCommandHandler
+        ) {
             return nextCommandHandler();
         }
 
-        public void ExecuteCommand(TypeCharCommandArgs args, Action nextCommandHandler, CommandExecutionContext executionContext)
-        {
+        public void ExecuteCommand(
+            TypeCharCommandArgs args,
+            Action nextCommandHandler,
+            CommandExecutionContext executionContext
+        ) {
             AssertIsForeground();
-            if (args.TypedChar == ';'
+            if (
+                args.TypedChar == ';'
                 && AreSnippetsEnabled(args)
-                && args.TextView.Properties.TryGetProperty(typeof(AbstractSnippetExpansionClient), out AbstractSnippetExpansionClient snippetExpansionClient)
-                && snippetExpansionClient.IsFullMethodCallSnippet)
-            {
+                && args.TextView.Properties.TryGetProperty(
+                    typeof(AbstractSnippetExpansionClient),
+                    out AbstractSnippetExpansionClient snippetExpansionClient
+                )
+                && snippetExpansionClient.IsFullMethodCallSnippet
+            ) {
                 // Commit the snippet. Leave the caret in place, but clear the selection. Subsequent handlers in the
                 // chain will handle the remaining Complete Statement (';' insertion) operations only if there is no
                 // active selection.
@@ -114,19 +137,40 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             nextCommandHandler();
         }
 
-        protected override AbstractSnippetExpansionClient GetSnippetExpansionClient(ITextView textView, ITextBuffer subjectBuffer)
-        {
-            if (!textView.Properties.TryGetProperty(typeof(AbstractSnippetExpansionClient), out AbstractSnippetExpansionClient expansionClient))
-            {
-                expansionClient = new SnippetExpansionClient(ThreadingContext, Guids.CSharpLanguageServiceId, textView, subjectBuffer, SignatureHelpControllerProvider, EditorCommandHandlerServiceFactory, EditorAdaptersFactoryService, _argumentProviders);
-                textView.Properties.AddProperty(typeof(AbstractSnippetExpansionClient), expansionClient);
+        protected override AbstractSnippetExpansionClient GetSnippetExpansionClient(
+            ITextView textView,
+            ITextBuffer subjectBuffer
+        ) {
+            if (
+                !textView.Properties.TryGetProperty(
+                    typeof(AbstractSnippetExpansionClient),
+                    out AbstractSnippetExpansionClient expansionClient
+                )
+            ) {
+                expansionClient = new SnippetExpansionClient(
+                    ThreadingContext,
+                    Guids.CSharpLanguageServiceId,
+                    textView,
+                    subjectBuffer,
+                    SignatureHelpControllerProvider,
+                    EditorCommandHandlerServiceFactory,
+                    EditorAdaptersFactoryService,
+                    _argumentProviders
+                );
+                textView.Properties.AddProperty(
+                    typeof(AbstractSnippetExpansionClient),
+                    expansionClient
+                );
             }
 
             return expansionClient;
         }
 
-        protected override bool TryInvokeInsertionUI(ITextView textView, ITextBuffer subjectBuffer, bool surroundWith = false)
-        {
+        protected override bool TryInvokeInsertionUI(
+            ITextView textView,
+            ITextBuffer subjectBuffer,
+            bool surroundWith = false
+        ) {
             if (!TryGetExpansionManager(out var expansionManager))
             {
                 return false;
@@ -136,24 +180,32 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
                 EditorAdaptersFactoryService.GetViewAdapter(textView),
                 GetSnippetExpansionClient(textView, subjectBuffer),
                 Guids.CSharpLanguageServiceId,
-                bstrTypes: surroundWith ? new[] { "SurroundsWith" } : new[] { "Expansion", "SurroundsWith" },
+                bstrTypes: surroundWith
+                  ? new[] { "SurroundsWith" }
+                  : new[] { "Expansion", "SurroundsWith" },
                 iCountTypes: surroundWith ? 1 : 2,
                 fIncludeNULLType: 1,
                 bstrKinds: null,
                 iCountKinds: 0,
                 fIncludeNULLKind: 0,
-                bstrPrefixText: surroundWith ? CSharpVSResources.Surround_With : CSharpVSResources.Insert_Snippet,
-                bstrCompletionChar: null);
+                bstrPrefixText: surroundWith
+                  ? CSharpVSResources.Surround_With
+                  : CSharpVSResources.Insert_Snippet,
+                bstrCompletionChar: null
+            );
 
             return true;
         }
 
-        protected override bool IsSnippetExpansionContext(Document document, int startPosition, CancellationToken cancellationToken)
-        {
+        protected override bool IsSnippetExpansionContext(
+            Document document,
+            int startPosition,
+            CancellationToken cancellationToken
+        ) {
             var syntaxTree = document.GetSyntaxTreeSynchronously(cancellationToken);
 
-            return !syntaxTree.IsEntirelyWithinStringOrCharLiteral(startPosition, cancellationToken) &&
-                !syntaxTree.IsEntirelyWithinComment(startPosition, cancellationToken);
+            return !syntaxTree.IsEntirelyWithinStringOrCharLiteral(startPosition, cancellationToken)
+                && !syntaxTree.IsEntirelyWithinComment(startPosition, cancellationToken);
         }
     }
 }

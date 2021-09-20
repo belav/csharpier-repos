@@ -56,7 +56,9 @@ namespace System.IO.Tests
         [Fact]
         public void NullEncoding()
         {
-            Assert.Throws<ArgumentNullException>(() => File.AppendAllText(GetTestFilePath(), "Text", null));
+            Assert.Throws<ArgumentNullException>(
+                () => File.AppendAllText(GetTestFilePath(), "Text", null)
+            );
         }
     }
 
@@ -89,7 +91,9 @@ namespace System.IO.Tests
         [Fact]
         public void NullEncoding()
         {
-            Assert.Throws<ArgumentNullException>(() => File.AppendAllLines(GetTestFilePath(), new string[] { "Text" }, null));
+            Assert.Throws<ArgumentNullException>(
+                () => File.AppendAllLines(GetTestFilePath(), new string[] { "Text" }, null)
+            );
         }
     }
 }

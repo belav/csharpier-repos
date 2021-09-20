@@ -30,8 +30,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         public static IHtmlContent Serialize(
             this IJsonHelper jsonHelper,
             object value,
-            JsonSerializerSettings serializerSettings)
-        {
+            JsonSerializerSettings serializerSettings
+        ) {
             if (jsonHelper == null)
             {
                 throw new ArgumentNullException(nameof(jsonHelper));
@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
                     nameof(jsonHelper),
                     nameof(IJsonHelper),
                     typeof(JsonHelperExtensions).Assembly.GetName().Name,
-                    nameof(NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson));
+                    nameof(NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson)
+                );
 
                 throw new ArgumentException(message, nameof(jsonHelper));
             }

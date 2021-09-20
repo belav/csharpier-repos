@@ -28,9 +28,20 @@ namespace System.Web.Http.WebHost.Routing
         /// </summary>
         internal const string HttpRouteKey = "httproute";
 
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "0#", Justification = "Matches the base class's parameter names.")]
-        public HttpWebRoute(string url, RouteValueDictionary defaults, RouteValueDictionary constraints, RouteValueDictionary dataTokens, IRouteHandler routeHandler, IHttpRoute httpRoute)
-            : base(url, defaults, constraints, dataTokens, routeHandler)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "0#",
+            Justification = "Matches the base class's parameter names."
+        )]
+        public HttpWebRoute(
+            string url,
+            RouteValueDictionary defaults,
+            RouteValueDictionary constraints,
+            RouteValueDictionary dataTokens,
+            IRouteHandler routeHandler,
+            IHttpRoute httpRoute
+        ) : base(url, defaults, constraints, dataTokens, routeHandler)
         {
             if (httpRoute == null)
             {
@@ -45,10 +56,15 @@ namespace System.Web.Http.WebHost.Routing
         /// </summary>
         public IHttpRoute HttpRoute { get; private set; }
 
-        protected override bool ProcessConstraint(HttpContextBase httpContext, object constraint, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
-        {
+        protected override bool ProcessConstraint(
+            HttpContextBase httpContext,
+            object constraint,
+            string parameterName,
+            RouteValueDictionary values,
+            RouteDirection routeDirection
+        ) {
             // The base class will validate that a constraint is either a string or IRoutingConstraint inside its
-            // ProcessConstraint method. We're doing the validation up front here because we also support 
+            // ProcessConstraint method. We're doing the validation up front here because we also support
             // IHttpRouteConstraint and we want the error message to reflect all three valid possibilities.
             ValidateConstraint(HttpRoute.RouteTemplate, parameterName, constraint);
 
@@ -56,14 +72,29 @@ namespace System.Web.Http.WebHost.Routing
             if (httpRouteConstraint != null)
             {
                 HttpRequestMessage request = httpContext.GetOrCreateHttpRequestMessage();
-                return httpRouteConstraint.Match(request, HttpRoute, parameterName, values, ConvertRouteDirection(routeDirection));
+                return httpRouteConstraint.Match(
+                    request,
+                    HttpRoute,
+                    parameterName,
+                    values,
+                    ConvertRouteDirection(routeDirection)
+                );
             }
 
-            return base.ProcessConstraint(httpContext, constraint, parameterName, values, routeDirection);
+            return base.ProcessConstraint(
+                httpContext,
+                constraint,
+                parameterName,
+                values,
+                routeDirection
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "Top-level catch block for unhandled routing exceptions.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Top-level catch block for unhandled routing exceptions."
+        )]
         public override RouteData GetRouteData(HttpContextBase httpContext)
         {
             try
@@ -76,7 +107,10 @@ namespace System.Web.Http.WebHost.Routing
                 {
                     // if user passed us a custom IHttpRoute, then we should invoke their function instead of the base
                     HttpRequestMessage request = httpContext.GetOrCreateHttpRequestMessage();
-                    IHttpRouteData data = HttpRoute.GetRouteData(httpContext.Request.ApplicationPath, request);
+                    IHttpRouteData data = HttpRoute.GetRouteData(
+                        httpContext.Request.ApplicationPath,
+                        request
+                    );
                     return data == null ? null : data.ToRouteData();
                 }
             }
@@ -90,8 +124,10 @@ namespace System.Web.Http.WebHost.Routing
             }
         }
 
-        public override VirtualPathData GetVirtualPath(RequestContext requestContext, RouteValueDictionary values)
-        {
+        public override VirtualPathData GetVirtualPath(
+            RequestContext requestContext,
+            RouteValueDictionary values
+        ) {
             // Only perform URL generation if the "httproute" key was specified. This allows these
             // routes to be ignored when a regular MVC app tries to generate URLs. Without this special
             // key an HTTP route used for Web API would normally take over almost all the routes in a
@@ -110,20 +146,25 @@ namespace System.Web.Http.WebHost.Routing
             else
             {
                 // if user passed us a custom IHttpRoute, then we should invoke their function instead of the base
-                HttpRequestMessage request = requestContext.HttpContext.GetOrCreateHttpRequestMessage();
+                HttpRequestMessage request =
+                    requestContext.HttpContext.GetOrCreateHttpRequestMessage();
                 IHttpVirtualPathData virtualPathData = HttpRoute.GetVirtualPath(request, values);
 
-                return virtualPathData == null ? null : new VirtualPathData(this, virtualPathData.VirtualPath);
+                return virtualPathData == null
+                  ? null
+                  : new VirtualPathData(this, virtualPathData.VirtualPath);
             }
         }
 
-        private static RouteValueDictionary GetRouteDictionaryWithoutHttpRouteKey(IDictionary<string, object> routeValues)
-        {
+        private static RouteValueDictionary GetRouteDictionaryWithoutHttpRouteKey(
+            IDictionary<string, object> routeValues
+        ) {
             var newRouteValues = new RouteValueDictionary();
             foreach (var routeValue in routeValues)
             {
-                if (!String.Equals(routeValue.Key, HttpRouteKey, StringComparison.OrdinalIgnoreCase))
-                {
+                if (
+                    !String.Equals(routeValue.Key, HttpRouteKey, StringComparison.OrdinalIgnoreCase)
+                ) {
                     newRouteValues.Add(routeValue.Key, routeValue.Value);
                 }
             }
@@ -142,14 +183,21 @@ namespace System.Web.Http.WebHost.Routing
                 return HttpRouteDirection.UriGeneration;
             }
 
-            throw Error.InvalidEnumArgument("routeDirection", (int)routeDirection, typeof(RouteDirection));
+            throw Error.InvalidEnumArgument(
+                "routeDirection",
+                (int)routeDirection,
+                typeof(RouteDirection)
+            );
         }
 
         // Validates that this constraint is of a type that HttpWebRoute can process. This is not valid to
-        // call when a route inherits from HttpWebRoute - as the derived class can handle any types of 
+        // call when a route inherits from HttpWebRoute - as the derived class can handle any types of
         // constraints it wants to support.
-        internal static void ValidateConstraint(string routeTemplate, string name, object constraint)
-        {
+        internal static void ValidateConstraint(
+            string routeTemplate,
+            string name,
+            object constraint
+        ) {
             if (constraint is IHttpRouteConstraint)
             {
                 return;
@@ -170,14 +218,17 @@ namespace System.Web.Http.WebHost.Routing
             throw CreateInvalidConstraintTypeException(routeTemplate, name);
         }
 
-        private static Exception CreateInvalidConstraintTypeException(string routeTemplate, string name)
-        {
+        private static Exception CreateInvalidConstraintTypeException(
+            string routeTemplate,
+            string name
+        ) {
             return Error.InvalidOperation(
                 SRResources.Route_ValidationMustBeStringOrCustomConstraint,
                 name,
                 routeTemplate,
                 typeof(IHttpRouteConstraint).FullName,
-                typeof(IRouteConstraint).FullName);
+                typeof(IRouteConstraint).FullName
+            );
         }
     }
 }

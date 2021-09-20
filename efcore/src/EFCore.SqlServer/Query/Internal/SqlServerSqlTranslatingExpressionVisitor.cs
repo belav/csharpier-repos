@@ -15,20 +15,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExpressionVisitor
+    public class SqlServerSqlTranslatingExpressionVisitor
+        : RelationalSqlTranslatingExpressionVisitor
     {
-        private static readonly HashSet<string?> _dateTimeDataTypes
-            = new()
-            {
-                "time",
-                "date",
-                "datetime",
-                "datetime2",
-                "datetimeoffset"
-            };
+        private static readonly HashSet<string?> _dateTimeDataTypes =
+            new() { "time", "date", "datetime", "datetime2", "datetimeoffset" };
 
-        private static readonly HashSet<ExpressionType> _arithmeticOperatorTypes
-            = new()
+        private static readonly HashSet<ExpressionType> _arithmeticOperatorTypes =
+            new()
             {
                 ExpressionType.Add,
                 ExpressionType.Subtract,
@@ -46,10 +40,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         public SqlServerSqlTranslatingExpressionVisitor(
             RelationalSqlTranslatingExpressionVisitorDependencies dependencies,
             QueryCompilationContext queryCompilationContext,
-            QueryableMethodTranslatingExpressionVisitor queryableMethodTranslatingExpressionVisitor)
-            : base(dependencies, queryCompilationContext, queryableMethodTranslatingExpressionVisitor)
-        {
-        }
+            QueryableMethodTranslatingExpressionVisitor queryableMethodTranslatingExpressionVisitor
+        ) : base(dependencies, queryCompilationContext, queryableMethodTranslatingExpressionVisitor)
+        { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -61,14 +54,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         {
             Check.NotNull(binaryExpression, nameof(binaryExpression));
 
-            if (binaryExpression.NodeType == ExpressionType.ArrayIndex
-                && binaryExpression.Left.Type == typeof(byte[]))
-            {
+            if (
+                binaryExpression.NodeType == ExpressionType.ArrayIndex
+                && binaryExpression.Left.Type == typeof(byte[])
+            ) {
                 var left = Visit(binaryExpression.Left);
                 var right = Visit(binaryExpression.Right);
 
-                if (left is SqlExpression leftSql
-                    && right is SqlExpression rightSql)
+                if (left is SqlExpression leftSql && right is SqlExpression rightSql)
                 {
                     return Dependencies.SqlExpressionFactory.Convert(
                         Dependencies.SqlExpressionFactory.Function(
@@ -77,25 +70,32 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                             {
                                 leftSql,
                                 Dependencies.SqlExpressionFactory.Add(
-                                    Dependencies.SqlExpressionFactory.ApplyDefaultTypeMapping(rightSql),
-                                    Dependencies.SqlExpressionFactory.Constant(1)),
+                                    Dependencies.SqlExpressionFactory.ApplyDefaultTypeMapping(
+                                        rightSql
+                                    ),
+                                    Dependencies.SqlExpressionFactory.Constant(1)
+                                ),
                                 Dependencies.SqlExpressionFactory.Constant(1)
                             },
                             nullable: true,
                             argumentsPropagateNullability: new[] { true, true, true },
-                            typeof(byte[])),
-                        binaryExpression.Type);
+                            typeof(byte[])
+                        ),
+                        binaryExpression.Type
+                    );
                 }
             }
 
             return !(base.VisitBinary(binaryExpression) is SqlExpression visitedExpression)
-                ? QueryCompilationContext.NotTranslatedExpression
-                : visitedExpression is SqlBinaryExpression sqlBinary
-                    && _arithmeticOperatorTypes.Contains(sqlBinary.OperatorType)
-                    && (_dateTimeDataTypes.Contains(GetProviderType(sqlBinary.Left))
-                        || _dateTimeDataTypes.Contains(GetProviderType(sqlBinary.Right)))
-                        ? QueryCompilationContext.NotTranslatedExpression
-                        : visitedExpression;
+              ? QueryCompilationContext.NotTranslatedExpression
+              : visitedExpression is SqlBinaryExpression sqlBinary
+                && _arithmeticOperatorTypes.Contains(sqlBinary.OperatorType)
+                && (
+                    _dateTimeDataTypes.Contains(GetProviderType(sqlBinary.Left))
+                    || _dateTimeDataTypes.Contains(GetProviderType(sqlBinary.Right))
+                )
+                  ? QueryCompilationContext.NotTranslatedExpression
+                  : visitedExpression;
         }
 
         /// <summary>
@@ -106,25 +106,32 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         protected override Expression VisitUnary(UnaryExpression unaryExpression)
         {
-            if (unaryExpression.NodeType == ExpressionType.ArrayLength
-                && unaryExpression.Operand.Type == typeof(byte[]))
-            {
+            if (
+                unaryExpression.NodeType == ExpressionType.ArrayLength
+                && unaryExpression.Operand.Type == typeof(byte[])
+            ) {
                 if (!(base.Visit(unaryExpression.Operand) is SqlExpression sqlExpression))
                 {
                     return QueryCompilationContext.NotTranslatedExpression;
                 }
 
-                var isBinaryMaxDataType = GetProviderType(sqlExpression) == "varbinary(max)" || sqlExpression is SqlParameterExpression;
+                var isBinaryMaxDataType =
+                    GetProviderType(sqlExpression) == "varbinary(max)"
+                    || sqlExpression is SqlParameterExpression;
                 var dataLengthSqlFunction = Dependencies.SqlExpressionFactory.Function(
                     "DATALENGTH",
                     new[] { sqlExpression },
                     nullable: true,
                     argumentsPropagateNullability: new[] { true },
-                    isBinaryMaxDataType ? typeof(long) : typeof(int));
+                    isBinaryMaxDataType ? typeof(long) : typeof(int)
+                );
 
                 return isBinaryMaxDataType
-                    ? (Expression)Dependencies.SqlExpressionFactory.Convert(dataLengthSqlFunction, typeof(int))
-                    : dataLengthSqlFunction;
+                  ? (Expression)Dependencies.SqlExpressionFactory.Convert(
+                        dataLengthSqlFunction,
+                        typeof(int)
+                    )
+                  : dataLengthSqlFunction;
             }
 
             return base.VisitUnary(unaryExpression);
@@ -146,10 +153,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     new[] { sqlExpression },
                     nullable: false,
                     argumentsPropagateNullability: new[] { false },
-                    typeof(long)));
+                    typeof(long)
+                )
+            );
         }
 
-        private static string? GetProviderType(SqlExpression expression)
-            => expression.TypeMapping?.StoreType;
+        private static string? GetProviderType(SqlExpression expression) =>
+            expression.TypeMapping?.StoreType;
     }
 }

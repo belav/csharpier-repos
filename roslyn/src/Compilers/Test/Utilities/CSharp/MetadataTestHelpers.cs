@@ -30,21 +30,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         internal static AssemblySymbol[] GetSymbolsForReferences(params MetadataReference[] mrefs)
         {
-            return GetSymbolsForReferences(compilations: null, bytes: null, mrefs: mrefs, options: null);
+            return GetSymbolsForReferences(
+                compilations: null,
+                bytes: null,
+                mrefs: mrefs,
+                options: null
+            );
         }
 
-        internal static AssemblySymbol[] GetSymbolsForReferences(MetadataReference[] mrefs, Compilation[] compilations)
-        {
+        internal static AssemblySymbol[] GetSymbolsForReferences(
+            MetadataReference[] mrefs,
+            Compilation[] compilations
+        ) {
             return GetSymbolsForReferences(
-                mrefs: mrefs.Concat(compilations.Select(c => c.ToMetadataReference())).ToArray());
+                mrefs: mrefs.Concat(compilations.Select(c => c.ToMetadataReference())).ToArray()
+            );
         }
 
         internal static AssemblySymbol[] GetSymbolsForReferences(
             CSharpCompilation[] compilations = null,
             byte[][] bytes = null,
             MetadataReference[] mrefs = null,
-            CSharpCompilationOptions options = null)
-        {
+            CSharpCompilationOptions options = null
+        ) {
             var refs = new List<MetadataReference>();
 
             if (compilations != null)
@@ -68,7 +76,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 refs.AddRange(mrefs);
             }
 
-            var tc1 = CSharpCompilation.Create(assemblyName: "Dummy", options: options ?? TestOptions.ReleaseDll, syntaxTrees: new SyntaxTree[0], references: refs);
+            var tc1 = CSharpCompilation.Create(
+                assemblyName: "Dummy",
+                options: options ?? TestOptions.ReleaseDll,
+                syntaxTrees: new SyntaxTree[0],
+                references: refs
+            );
 
             return (from @ref in refs select tc1.GetReferencedAssemblySymbol(@ref)).ToArray();
         }

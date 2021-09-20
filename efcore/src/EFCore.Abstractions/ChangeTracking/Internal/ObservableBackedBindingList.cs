@@ -35,9 +35,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         {
             _observableCollection = observableCollection;
 
-            Check.DebugAssert(_observableCollection is INotifyCollectionChanged, "_observableCollection is not INotifyCollectionChanged");
+            Check.DebugAssert(
+                _observableCollection is INotifyCollectionChanged,
+                "_observableCollection is not INotifyCollectionChanged"
+            );
 
-            ((INotifyCollectionChanged)observableCollection).CollectionChanged += ObservableCollectionChanged;
+            ((INotifyCollectionChanged)observableCollection).CollectionChanged +=
+                ObservableCollectionChanged;
         }
 
         /// <summary>
@@ -61,9 +65,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         public override void CancelNew(int itemIndex)
         {
-            if (itemIndex >= 0
-                && itemIndex < Count
-                && Equals(base[itemIndex], _addNewInstance))
+            if (itemIndex >= 0 && itemIndex < Count && Equals(base[itemIndex], _addNewInstance))
             {
                 _cancelNewInstance = _addNewInstance;
                 _addNewInstance = default;
@@ -97,9 +99,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         public override void EndNew(int itemIndex)
         {
-            if (itemIndex >= 0
-                && itemIndex < Count
-                && Equals(base[itemIndex], _addNewInstance))
+            if (itemIndex >= 0 && itemIndex < Count && Equals(base[itemIndex], _addNewInstance))
             {
                 AddToObservableCollection(_addNewInstance!);
                 _addNewInstance = default;
@@ -118,9 +118,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         protected override void InsertItem(int index, T item)
         {
             base.InsertItem(index, item);
-            if (!_addingNewInstance
-                && index >= 0
-                && index <= Count)
+            if (!_addingNewInstance && index >= 0 && index <= Count)
             {
                 AddToObservableCollection(item);
             }
@@ -134,9 +132,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         protected override void RemoveItem(int index)
         {
-            if (index >= 0
-                && index < Count
-                && Equals(base[index], _cancelNewInstance))
+            if (index >= 0 && index < Count && Equals(base[index], _cancelNewInstance))
             {
                 _cancelNewInstance = default;
             }
@@ -159,8 +155,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var entity = base[index];
             base.SetItem(index, item);
 
-            if (index >= 0
-                && index < Count)
+            if (index >= 0 && index < Count)
             {
                 // Check to see if the user is trying to set an item that is currently being added via AddNew
                 // If so then the list should not continue the AddNew; but instead add the item
@@ -192,30 +187,32 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     // to prevent that.
                     _inCollectionChanged = true;
 
-                    if (e.Action
-                        == NotifyCollectionChangedAction.Reset)
+                    if (e.Action == NotifyCollectionChangedAction.Reset)
                     {
                         Clear();
                     }
 
-                    if (e.Action == NotifyCollectionChangedAction.Remove
-                        || e.Action == NotifyCollectionChangedAction.Replace)
-                    {
+                    if (
+                        e.Action == NotifyCollectionChangedAction.Remove
+                        || e.Action == NotifyCollectionChangedAction.Replace
+                    ) {
                         foreach (T entity in e.OldItems!)
                         {
                             Remove(entity);
                         }
                     }
 
-                    if (e.Action == NotifyCollectionChangedAction.Add
-                        || e.Action == NotifyCollectionChangedAction.Replace)
-                    {
+                    if (
+                        e.Action == NotifyCollectionChangedAction.Add
+                        || e.Action == NotifyCollectionChangedAction.Replace
+                    ) {
                         foreach (T entity in e.NewItems!)
                         {
                             Add(entity);
                         }
                     }
                 }
+
                 finally
                 {
                     _inCollectionChanged = false;
@@ -241,6 +238,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     _changingObservableCollection = true;
                     _observableCollection.Add(item);
                 }
+
                 finally
                 {
                     _changingObservableCollection = false;
@@ -266,6 +264,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     _changingObservableCollection = true;
                     _observableCollection.Remove(item);
                 }
+
                 finally
                 {
                     _changingObservableCollection = false;

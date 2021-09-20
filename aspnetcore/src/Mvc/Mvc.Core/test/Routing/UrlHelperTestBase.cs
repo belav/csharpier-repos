@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -24,8 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void Content_ReturnsContentPath_WhenItDoesNotStartWithToken(
             string appRoot,
             string contentPath,
-            string expectedPath)
-        {
+            string expectedPath
+        ) {
             // Arrange
             var urlHelper = CreateUrlHelper(appRoot);
 
@@ -47,8 +47,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void Content_ReturnsAppRelativePath_WhenItStartsWithToken(
             string appRoot,
             string contentPath,
-            string expectedPath)
-        {
+            string expectedPath
+        ) {
             // Arrange
             var urlHelper = CreateUrlHelper(appRoot);
 
@@ -145,7 +145,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void IsLocalUrl_RejectsUrlsOnTheSameHost(string url)
         {
             // Arrange
-            var helper = CreateUrlHelper(appRoot: string.Empty, host: "www.mysite.com", protocol: null);
+            var helper = CreateUrlHelper(
+                appRoot: string.Empty,
+                host: "www.mysite.com",
+                protocol: null
+            );
 
             // Act
             var result = helper.IsLocalUrl(url);
@@ -160,7 +164,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void IsLocalUrl_RejectsUrlsOnLocalHost(string url)
         {
             // Arrange
-            var helper = CreateUrlHelper(appRoot: string.Empty, host: "www.mysite.com", protocol: null);
+            var helper = CreateUrlHelper(
+                appRoot: string.Empty,
+                host: "www.mysite.com",
+                protocol: null
+            );
 
             // Act
             var result = helper.IsLocalUrl(url);
@@ -174,7 +182,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void IsLocalUrl_RejectsUrlsOnTheSameHostButDifferentScheme(string url)
         {
             // Arrange
-            var helper = CreateUrlHelper(appRoot: string.Empty, host: "www.mysite.com", protocol: null);
+            var helper = CreateUrlHelper(
+                appRoot: string.Empty,
+                host: "www.mysite.com",
+                protocol: null
+            );
 
             // Act
             var result = helper.IsLocalUrl(url);
@@ -191,7 +203,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void IsLocalUrl_RejectsUrlsOnDifferentHost(string url)
         {
             // Arrange
-            var helper = CreateUrlHelper(appRoot: string.Empty, host: "www.mysite.com", protocol: null);
+            var helper = CreateUrlHelper(
+                appRoot: string.Empty,
+                host: "www.mysite.com",
+                protocol: null
+            );
 
             // Act
             var result = helper.IsLocalUrl(url);
@@ -209,7 +225,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void IsLocalUrl_RejectsUrlsWithTooManySchemeSeparatorCharacters(string url)
         {
             // Arrange
-            var helper = CreateUrlHelper(appRoot: string.Empty, host: "www.mysite.com", protocol: null);
+            var helper = CreateUrlHelper(
+                appRoot: string.Empty,
+                host: "www.mysite.com",
+                protocol: null
+            );
 
             // Act
             var result = helper.IsLocalUrl(url);
@@ -228,7 +248,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void IsLocalUrl_RejectsUrlsWithMissingSchemeName(string url)
         {
             // Arrange
-            var helper = CreateUrlHelper(appRoot: string.Empty, host: "www.mysite.com", protocol: null);
+            var helper = CreateUrlHelper(
+                appRoot: string.Empty,
+                host: "www.mysite.com",
+                protocol: null
+            );
 
             // Act
             var result = helper.IsLocalUrl(url);
@@ -245,7 +269,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void IsLocalUrl_RejectsInvalidUrls(string url)
         {
             // Arrange
-            var helper = CreateUrlHelper(appRoot: string.Empty, host: "www.mysite.com", protocol: null);
+            var helper = CreateUrlHelper(
+                appRoot: string.Empty,
+                host: "www.mysite.com",
+                protocol: null
+            );
 
             // Act
             var result = helper.IsLocalUrl(url);
@@ -264,7 +292,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void IsLocalUrl_RejectsTokenUrlsWithMissingSchemeName(string url)
         {
             // Arrange
-            var helper = CreateUrlHelper(appRoot: string.Empty, host: "www.mysite.com", protocol: null);
+            var helper = CreateUrlHelper(
+                appRoot: string.Empty,
+                host: "www.mysite.com",
+                protocol: null
+            );
 
             // Act
             var result = helper.IsLocalUrl(url);
@@ -279,7 +311,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void IsLocalUrl_RejectsInvalidTokenUrls(string url)
         {
             // Arrange
-            var helper = CreateUrlHelper(appRoot: string.Empty, host: "www.mysite.com", protocol: null);
+            var helper = CreateUrlHelper(
+                appRoot: string.Empty,
+                host: "www.mysite.com",
+                protocol: null
+            );
 
             // Act
             var result = helper.IsLocalUrl(url);
@@ -297,7 +333,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void IsLocalUrl_RejectsUrlWithNewLineAtStart(string url)
         {
             // Arrange
-            var helper = CreateUrlHelper(appRoot: string.Empty, host: "www.mysite.com", protocol: null);
+            var helper = CreateUrlHelper(
+                appRoot: string.Empty,
+                host: "www.mysite.com",
+                protocol: null
+            );
 
             // Act
             var result = helper.IsLocalUrl(url);
@@ -316,7 +356,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void IsLocalUrl_RejectsUrlWithControlCharacters(string url)
         {
             // Arrange
-            var helper = CreateUrlHelper(appRoot: string.Empty, host: "www.mysite.com", protocol: null);
+            var helper = CreateUrlHelper(
+                appRoot: string.Empty,
+                host: "www.mysite.com",
+                protocol: null
+            );
 
             // Act
             var result = helper.IsLocalUrl(url);
@@ -334,12 +378,9 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // Act
             var url = urlHelper.RouteUrl(
                 values: new RouteValueDictionary(
-                new
-                {
-                    Action = "newaction",
-                    Controller = "home2",
-                    id = "someid"
-                }));
+                    new { Action = "newaction", Controller = "home2", id = "someid" }
+                )
+            );
 
             // Assert
             Assert.Equal("/app/home2/newaction/someid", url);
@@ -355,14 +396,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var url = urlHelper.RouteUrl(
                 routeName: "namedroute",
                 values: new RouteValueDictionary(
-                new
-                {
-                    Action = "newaction",
-                    Controller = "home2",
-                    id = "someid"
-                }),
+                    new { Action = "newaction", Controller = "home2", id = "someid" }
+                ),
                 protocol: "http",
-                host: string.Empty);
+                host: string.Empty
+            );
 
             // Assert
             Assert.Equal("http://localhost/app/named/home2/newaction/someid", url);
@@ -378,14 +416,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var url = urlHelper.RouteUrl(
                 routeName: "namedroute",
                 values: new RouteValueDictionary(
-                new
-                {
-                    Action = "newaction",
-                    Controller = "home2",
-                    id = "someid"
-                }),
+                    new { Action = "newaction", Controller = "home2", id = "someid" }
+                ),
                 protocol: string.Empty,
-                host: "foo.bar.com");
+                host: "foo.bar.com"
+            );
 
             // Assert
             Assert.Equal("http://foo.bar.com/app/named/home2/newaction/someid", url);
@@ -401,14 +436,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var url = urlHelper.RouteUrl(
                 routeName: "namedroute",
                 values: new RouteValueDictionary(
-                new
-                {
-                    Action = "newaction",
-                    Controller = "home2",
-                    id = "someid"
-                }),
+                    new { Action = "newaction", Controller = "home2", id = "someid" }
+                ),
                 protocol: null,
-                host: "foo.bar.com");
+                host: "foo.bar.com"
+            );
 
             // Assert
             Assert.Equal("http://foo.bar.com/app/named/home2/newaction/someid", url);
@@ -424,14 +456,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var url = urlHelper.RouteUrl(
                 routeName: "namedroute",
                 values: new RouteValueDictionary(
-                new
-                {
-                    Action = "newaction",
-                    Controller = "home2",
-                    id = "someid"
-                }),
+                    new { Action = "newaction", Controller = "home2", id = "someid" }
+                ),
                 protocol: null,
-                host: null);
+                host: null
+            );
 
             // Assert
             Assert.Equal("/app/named/home2/newaction/someid", url);
@@ -444,7 +473,9 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var urlHelper = CreateUrlHelperWithDefaultRoutes();
 
             // Act
-            var url = urlHelper.RouteUrl(new { Action = "newaction", Controller = "home2", id = "someid" });
+            var url = urlHelper.RouteUrl(
+                new { Action = "newaction", Controller = "home2", id = "someid" }
+            );
 
             // Assert
             Assert.Equal("/app/home2/newaction/someid", url);
@@ -459,13 +490,9 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // Act
             var url = urlHelper.RouteUrl(
                 routeName: "namedroute",
-                values: new
-                {
-                    Action = "newaction",
-                    Controller = "home2",
-                    id = "someid"
-                },
-                protocol: "https");
+                values: new { Action = "newaction", Controller = "home2", id = "someid" },
+                protocol: "https"
+            );
 
             // Assert
             Assert.Equal("https://localhost/app/named/home2/newaction/someid", url);
@@ -480,14 +507,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // Act
             var url = urlHelper.RouteUrl(
                 routeName: "namedroute",
-                values: new
-                {
-                    Action = "newaction",
-                    Controller = "home2",
-                    id = "someid"
-                },
+                values: new { Action = "newaction", Controller = "home2", id = "someid" },
                 protocol: "https",
-                host: "pingüino");
+                host: "pingüino"
+            );
 
             // Assert
             Assert.Equal("https://pingüino/app/named/home2/newaction/someid", url);
@@ -500,9 +523,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var urlHelper = CreateUrlHelperWithDefaultRoutes();
 
             // Act
-            var url = urlHelper.RouteUrl(
-                routeName: "OrdersApi",
-                values: new { id = "500" });
+            var url = urlHelper.RouteUrl(routeName: "OrdersApi", values: new { id = "500" });
 
             // Assert
             Assert.Equal("/app/api/orders/500", url);
@@ -515,9 +536,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var urlHelper = CreateUrlHelperWithDefaultRoutes();
 
             // Act
-            var url = urlHelper.RouteUrl(
-                routeName: "OrdersApi",
-                values: new { });
+            var url = urlHelper.RouteUrl(routeName: "OrdersApi", values: new {  });
 
             // Assert
             Assert.Null(url);
@@ -533,12 +552,9 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var url = urlHelper.RouteUrl(
                 routeName: "namedroute",
                 values: new RouteValueDictionary(
-                new
-                {
-                    Action = "newaction",
-                    Controller = "home2",
-                    id = "someid"
-                }));
+                    new { Action = "newaction", Controller = "home2", id = "someid" }
+                )
+            );
 
             // Assert
             Assert.Equal("/app/named/home2/newaction/someid", url);
@@ -553,12 +569,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // Act
             var url = urlHelper.RouteUrl(
                 routeName: "namedroute",
-                values: new
-                {
-                    Action = "newaction",
-                    Controller = "home2",
-                    id = "someid"
-                });
+                values: new { Action = "newaction", Controller = "home2", id = "someid" }
+            );
 
             // Assert
             Assert.Equal("/app/named/home2/newaction/someid", url);
@@ -573,12 +585,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var routeContext = new UrlRouteContext()
             {
                 RouteName = "namedroute",
-                Values = new
-                {
-                    Action = "newaction",
-                    Controller = "home2",
-                    id = "someid"
-                },
+                Values = new { Action = "newaction", Controller = "home2", id = "someid" },
                 Fragment = "somefragment",
                 Host = "remotetown",
                 Protocol = "ftp"
@@ -600,15 +607,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // Act
             var url = urlHelper.RouteUrl(
                 routeName: "namedroute",
-                values: new
-                {
-                    Action = "newaction",
-                    Controller = "home2",
-                    id = "someid"
-                },
+                values: new { Action = "newaction", Controller = "home2", id = "someid" },
                 fragment: "somefragment",
                 host: "remotetown",
-                protocol: "https");
+                protocol: "https"
+            );
 
             // Assert
             Assert.Equal("https://remotetown/app/named/home2/newaction/someid#somefragment", url);
@@ -629,10 +632,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             dictionary["isprint"] = isprint;
 
             // Act
-            var url = urlHelper.Action(
-                action: "contact",
-                controller: "home",
-                values: dictionary);
+            var url = urlHelper.Action(action: "contact", controller: "home", values: dictionary);
 
             // Assert
             Assert.Equal(2, dictionary.Count);
@@ -653,7 +653,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 controller: "home",
                 values: null,
                 protocol: "http",
-                host: "pingüino");
+                host: "pingüino"
+            );
 
             // Assert
             Assert.Equal("http://pingüino/app/home/contact", url);
@@ -723,7 +724,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 values: null,
                 protocol: "https",
                 host: "remotelyhost",
-                fragment: "somefragment");
+                fragment: "somefragment"
+            );
 
             // Assert
             Assert.Equal("https://remotelyhost/app/home3/contact#somefragment", url);
@@ -738,12 +740,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // Act
             var url = urlHelper.Link(
                 "namedroute",
-                new
-                {
-                    Action = "newaction",
-                    Controller = "home",
-                    id = "someid"
-                });
+                new { Action = "newaction", Controller = "home", id = "someid" }
+            );
 
             // Assert
             Assert.Equal("http://localhost/app/named/home/newaction/someid", url);
@@ -758,12 +756,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // Act
             var url = urlHelper.Link(
                 null,
-                new
-                {
-                    Action = "newaction",
-                    Controller = "home",
-                    id = "someid"
-                });
+                new { Action = "newaction", Controller = "home", id = "someid" }
+            );
 
             // Assert
             Assert.Equal("http://localhost/app/home/newaction/someid", url);
@@ -778,7 +772,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 host: null,
                 protocol: null,
                 routeName: "MyRouteName",
-                template: "any/url");
+                template: "any/url"
+            );
 
             // Act
             var url = urlHelper.RouteUrl("MyRouteName");
@@ -796,7 +791,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 host: null,
                 protocol: null,
                 routeName: "MyRouteName",
-                template: "any/url");
+                template: "any/url"
+            );
 
             // Act
             var url = urlHelper.Link("MyRouteName", null);
@@ -814,17 +810,14 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 "myhost",
                 "https",
                 routeName: "MyRouteName",
-                template: "any/url");
+                template: "any/url"
+            );
 
             // Act
             var url = urlHelper.Link(
                 "namedroute",
-                new
-                {
-                    Action = "newaction",
-                    Controller = "home",
-                    id = "someid"
-                });
+                new { Action = "newaction", Controller = "home", id = "someid" }
+            );
 
             // Assert
             Assert.Equal("https://myhost/named/home/newaction/someid", url);
@@ -869,7 +862,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
             // Assert
             Assert.NotNull(urlHelper);
-            Assert.Same(urlHelper, actionContext.HttpContext.Items[typeof(IUrlHelper)] as IUrlHelper);
+            Assert.Same(
+                urlHelper,
+                actionContext.HttpContext.Items[typeof(IUrlHelper)] as IUrlHelper
+            );
         }
 
         [Fact]
@@ -878,10 +874,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // Arrange
             var httpContext = new Mock<HttpContext>();
             httpContext.SetupGet(h => h.Features).Returns(new FeatureCollection());
-            var mockItems = new Dictionary<object, object>
-            {
-                { typeof(IUrlHelper), null }
-            };
+            var mockItems = new Dictionary<object, object> { { typeof(IUrlHelper), null } };
             httpContext.Setup(h => h.Items).Returns(mockItems);
 
             var actionContext = CreateActionContext(httpContext.Object);
@@ -892,7 +885,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
             // Assert
             Assert.NotNull(urlHelper);
-            Assert.Same(urlHelper, actionContext.HttpContext.Items[typeof(IUrlHelper)] as IUrlHelper);
+            Assert.Same(
+                urlHelper,
+                actionContext.HttpContext.Items[typeof(IUrlHelper)] as IUrlHelper
+            );
         }
 
         // Regression test for aspnet/Mvc#2859
@@ -906,7 +902,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 protocol: null,
                 "default",
                 "{first}/{controller}/{action}",
-                new { second = "default", controller = "default", action = "default" });
+                new { second = "default", controller = "default", action = "default" }
+            );
 
             var routeData = urlHelper.ActionContext.RouteData;
             routeData.Values.Add("first", "a");
@@ -936,7 +933,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 protocol: null,
                 "default",
                 "{first}/{second}/{controller}/{action}",
-                new { second = "default", controller = "default", action = "default" });
+                new { second = "default", controller = "default", action = "default" }
+            );
 
             var routeData = urlHelper.ActionContext.RouteData;
             routeData.Values.Add("first", "a");
@@ -969,7 +967,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 protocol: null,
                 "default",
                 "{first}/{controller}/{action}",
-                new { second = "default", controller = "default", action = "default" });
+                new { second = "default", controller = "default", action = "default" }
+            );
 
             var routeData = urlHelper.ActionContext.RouteData;
             routeData.Values.Add("first", "a");
@@ -981,7 +980,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // In this test the 'first' route value has changed, meaning that *normally* the
             // 'controller' value could not be used. However 'controller' and 'action' are treated
             // specially by UrlHelper.
-            var url = urlHelper.Action(action: null, values: new { first = "b", action = "Checkout" });
+            var url = urlHelper.Action(
+                action: null,
+                values: new { first = "b", action = "Checkout" }
+            );
 
             // Assert
             Assert.NotNull(url);
@@ -1005,17 +1007,22 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         public void NoRouter_ErrorsWithFriendlyErrorMessage()
         {
             // Arrange
-            var urlHelper = new UrlHelper(new ActionContext
-            {
-                RouteData = new RouteData(new RouteValueDictionary()),
-                HttpContext = new DefaultHttpContext()
-            });
+            var urlHelper = new UrlHelper(
+                new ActionContext
+                {
+                    RouteData = new RouteData(new RouteValueDictionary()),
+                    HttpContext = new DefaultHttpContext()
+                }
+            );
 
             // Act
-            var ex = Assert.Throws<InvalidOperationException>(() => urlHelper.ActionLink("contact", "home"));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => urlHelper.ActionLink("contact", "home")
+            );
 
             // Assert
-            var expectedMessage = "Could not find an IRouter associated with the ActionContext. "
+            var expectedMessage =
+                "Could not find an IRouter associated with the ActionContext. "
                 + "If your application is using endpoint routing then you can get a IUrlHelperFactory with "
                 + "dependency injection and use it to create a UrlHelper, or use Microsoft.AspNetCore.Routing.LinkGenerator.";
 
@@ -1029,14 +1036,16 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         protected abstract IUrlHelper CreateUrlHelperWithDefaultRoutes(
             string appRoot,
             string host,
-            string protocol);
+            string protocol
+        );
 
         protected abstract IUrlHelper CreateUrlHelperWithDefaultRoutes(
             string appRoot,
             string host,
             string protocol,
             string routeName,
-            string template);
+            string template
+        );
 
         protected abstract IUrlHelper CreateUrlHelper(
             string appRoot,
@@ -1044,7 +1053,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             string protocol,
             string routeName,
             string template,
-            object defaults);
+            object defaults
+        );
 
         protected virtual IUrlHelper CreateUrlHelper(string appRoot, string host, string protocol)
         {
@@ -1054,12 +1064,18 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             var services = CreateServices();
             var httpContext = CreateHttpContext(services, appRoot, host, protocol);
 
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
             return CreateUrlHelper(actionContext);
         }
 
-        protected virtual ActionContext CreateActionContext(HttpContext httpContext, RouteData routeData = null)
-        {
+        protected virtual ActionContext CreateActionContext(
+            HttpContext httpContext,
+            RouteData routeData = null
+        ) {
             routeData = routeData ?? new RouteData();
             return new ActionContext(httpContext, routeData, new ActionDescriptor());
         }
@@ -1068,8 +1084,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             IServiceProvider services,
             string appRoot,
             string host,
-            string protocol)
-        {
+            string protocol
+        ) {
             appRoot = string.IsNullOrEmpty(appRoot) ? string.Empty : appRoot;
             host = string.IsNullOrEmpty(host) ? "localhost" : host;
 
@@ -1087,8 +1103,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             services.AddOptions();
             services.AddLogging();
             services.AddRouting();
-            services
-                .AddSingleton<UrlEncoder>(UrlEncoder.Default);
+            services.AddSingleton<UrlEncoder>(UrlEncoder.Default);
             return services;
         }
 

@@ -15,14 +15,17 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X
 
         protected override string DocumentKind => MvcViewDocumentKind;
 
-        protected override bool IsMatch(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode) => true;
+        protected override bool IsMatch(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        ) => true;
 
         protected override void OnDocumentStructureCreated(
-            RazorCodeDocument codeDocument, 
-            NamespaceDeclarationIntermediateNode @namespace, 
-            ClassDeclarationIntermediateNode @class, 
-            MethodDeclarationIntermediateNode method)
-        {
+            RazorCodeDocument codeDocument,
+            NamespaceDeclarationIntermediateNode @namespace,
+            ClassDeclarationIntermediateNode @class,
+            MethodDeclarationIntermediateNode method
+        ) {
             base.OnDocumentStructureCreated(codeDocument, @namespace, @class, method);
 
             @namespace.Content = "AspNetCore";

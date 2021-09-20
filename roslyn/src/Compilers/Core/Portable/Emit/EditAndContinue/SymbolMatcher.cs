@@ -20,17 +20,20 @@ namespace Microsoft.CodeAnalysis.Emit
         public ISymbolInternal? MapDefinitionOrNamespace(ISymbolInternal symbol)
         {
             var adapter = symbol.GetCciAdapter();
-            return (adapter is Cci.IDefinition definition) ?
-                MapDefinition(definition)?.GetInternalSymbol() :
-                MapNamespace((Cci.INamespace)adapter)?.GetInternalSymbol();
+            return (adapter is Cci.IDefinition definition)
+              ? MapDefinition(definition)?.GetInternalSymbol()
+              : MapNamespace((Cci.INamespace)adapter)?.GetInternalSymbol();
         }
 
         public EmitBaseline MapBaselineToCompilation(
             EmitBaseline baseline,
             Compilation targetCompilation,
             CommonPEModuleBuilder targetModuleBuilder,
-            ImmutableDictionary<ISymbolInternal, ImmutableArray<ISymbolInternal>> mappedSynthesizedMembers)
-        {
+            ImmutableDictionary<
+                ISymbolInternal,
+                ImmutableArray<ISymbolInternal>
+            > mappedSynthesizedMembers
+        ) {
             // Map all definitions to this compilation.
             var typesAdded = MapDefinitions(baseline.TypesAdded);
             var eventsAdded = MapDefinitions(baseline.EventsAdded);
@@ -60,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Emit
                 synthesizedMembers: mappedSynthesizedMembers,
                 addedOrChangedMethods: MapAddedOrChangedMethods(baseline.AddedOrChangedMethods),
                 debugInformationProvider: baseline.DebugInformationProvider,
-                localSignatureProvider: baseline.LocalSignatureProvider);
+                localSignatureProvider: baseline.LocalSignatureProvider
+            );
         }
 
         private IReadOnlyDictionary<K, V> MapDefinitions<K, V>(IReadOnlyDictionary<K, V> items)
@@ -83,8 +87,9 @@ namespace Microsoft.CodeAnalysis.Emit
             return result;
         }
 
-        private IReadOnlyDictionary<int, AddedOrChangedMethodInfo> MapAddedOrChangedMethods(IReadOnlyDictionary<int, AddedOrChangedMethodInfo> addedOrChangedMethods)
-        {
+        private IReadOnlyDictionary<int, AddedOrChangedMethodInfo> MapAddedOrChangedMethods(
+            IReadOnlyDictionary<int, AddedOrChangedMethodInfo> addedOrChangedMethods
+        ) {
             var result = new Dictionary<int, AddedOrChangedMethodInfo>();
 
             foreach (var pair in addedOrChangedMethods)
@@ -95,8 +100,9 @@ namespace Microsoft.CodeAnalysis.Emit
             return result;
         }
 
-        private IReadOnlyDictionary<AnonymousTypeKey, AnonymousTypeValue> MapAnonymousTypes(IReadOnlyDictionary<AnonymousTypeKey, AnonymousTypeValue> anonymousTypeMap)
-        {
+        private IReadOnlyDictionary<AnonymousTypeKey, AnonymousTypeValue> MapAnonymousTypes(
+            IReadOnlyDictionary<AnonymousTypeKey, AnonymousTypeValue> anonymousTypeMap
+        ) {
             var result = new Dictionary<AnonymousTypeKey, AnonymousTypeValue>();
 
             foreach (var pair in anonymousTypeMap)
@@ -125,10 +131,13 @@ namespace Microsoft.CodeAnalysis.Emit
         /// Then the resulting collection shall have the following entries:
         /// {S' -> {A', B', C, D}, U -> {G, H}, T -> {E, F}}
         /// </remarks>
-        internal ImmutableDictionary<ISymbolInternal, ImmutableArray<ISymbolInternal>> MapSynthesizedMembers(
+        internal ImmutableDictionary<
+            ISymbolInternal,
+            ImmutableArray<ISymbolInternal>
+        > MapSynthesizedMembers(
             ImmutableDictionary<ISymbolInternal, ImmutableArray<ISymbolInternal>> previousMembers,
-            ImmutableDictionary<ISymbolInternal, ImmutableArray<ISymbolInternal>> newMembers)
-        {
+            ImmutableDictionary<ISymbolInternal, ImmutableArray<ISymbolInternal>> newMembers
+        ) {
             // Note: we can't just return previous members if there are no new members, since we still need to map the symbols to the new compilation.
 
             if (previousMembers.Count == 0)
@@ -136,7 +145,10 @@ namespace Microsoft.CodeAnalysis.Emit
                 return newMembers;
             }
 
-            var synthesizedMembersBuilder = ImmutableDictionary.CreateBuilder<ISymbolInternal, ImmutableArray<ISymbolInternal>>();
+            var synthesizedMembersBuilder = ImmutableDictionary.CreateBuilder<
+                ISymbolInternal,
+                ImmutableArray<ISymbolInternal>
+            >();
 
             synthesizedMembersBuilder.AddRange(newMembers);
 
@@ -148,7 +160,7 @@ namespace Microsoft.CodeAnalysis.Emit
                 var mappedContainer = MapDefinitionOrNamespace(previousContainer);
                 if (mappedContainer == null)
                 {
-                    // No update to any member of the container type.  
+                    // No update to any member of the container type.
                     synthesizedMembersBuilder.Add(previousContainer, members);
                     continue;
                 }
@@ -171,7 +183,7 @@ namespace Microsoft.CodeAnalysis.Emit
                     if (mappedMember != null)
                     {
                         // If the matcher found a member in the current compilation corresponding to previous memberDef,
-                        // then the member has to be synthesized and produced as a result of a method update 
+                        // then the member has to be synthesized and produced as a result of a method update
                         // and thus already contained in newSynthesizedMembers.
                         Debug.Assert(newSynthesizedMembers.Contains(mappedMember));
                     }

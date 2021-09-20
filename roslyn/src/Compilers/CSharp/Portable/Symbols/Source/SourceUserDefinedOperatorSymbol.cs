@@ -18,14 +18,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SourceMemberContainerTypeSymbol containingType,
             OperatorDeclarationSyntax syntax,
             bool isNullableAnalysisEnabled,
-            BindingDiagnosticBag diagnostics)
-        {
+            BindingDiagnosticBag diagnostics
+        ) {
             var location = syntax.OperatorToken.GetLocation();
 
             string name = OperatorFacts.OperatorNameFromDeclaration(syntax);
 
             return new SourceUserDefinedOperatorSymbol(
-                containingType, name, location, syntax, isNullableAnalysisEnabled, diagnostics);
+                containingType,
+                name,
+                location,
+                syntax,
+                isNullableAnalysisEnabled,
+                diagnostics
+            );
         }
 
         // NOTE: no need to call WithUnsafeRegionIfNecessary, since the signature
@@ -37,26 +43,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Location location,
             OperatorDeclarationSyntax syntax,
             bool isNullableAnalysisEnabled,
-            BindingDiagnosticBag diagnostics) :
-            base(
-                MethodKind.UserDefinedOperator,
-                name,
-                containingType,
-                location,
-                syntax,
-                MakeDeclarationModifiers(syntax, location, diagnostics),
-                hasBody: syntax.HasAnyBody(),
-                isExpressionBodied: syntax.Body == null && syntax.ExpressionBody != null,
-                isIterator: SyntaxFacts.HasYieldOperations(syntax.Body),
-                isNullableAnalysisEnabled: isNullableAnalysisEnabled,
-                diagnostics)
-        {
-            CheckForBlockAndExpressionBody(
-                syntax.Body, syntax.ExpressionBody, syntax, diagnostics);
+            BindingDiagnosticBag diagnostics
+        ) : base(
+            MethodKind.UserDefinedOperator,
+            name,
+            containingType,
+            location,
+            syntax,
+            MakeDeclarationModifiers(syntax, location, diagnostics),
+            hasBody: syntax.HasAnyBody(),
+            isExpressionBodied: syntax.Body == null && syntax.ExpressionBody != null,
+            isIterator: SyntaxFacts.HasYieldOperations(syntax.Body),
+            isNullableAnalysisEnabled: isNullableAnalysisEnabled,
+            diagnostics
+        ) {
+            CheckForBlockAndExpressionBody(syntax.Body, syntax.ExpressionBody, syntax, diagnostics);
 
-            if (name != WellKnownMemberNames.EqualityOperatorName && name != WellKnownMemberNames.InequalityOperatorName)
-            {
-                CheckFeatureAvailabilityAndRuntimeSupport(syntax, location, hasBody: syntax.Body != null || syntax.ExpressionBody != null, diagnostics: diagnostics);
+            if (
+                name != WellKnownMemberNames.EqualityOperatorName
+                && name != WellKnownMemberNames.InequalityOperatorName
+            ) {
+                CheckFeatureAvailabilityAndRuntimeSupport(
+                    syntax,
+                    location,
+                    hasBody: syntax.Body != null || syntax.ExpressionBody != null,
+                    diagnostics: diagnostics
+                );
             }
         }
 
@@ -73,10 +85,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected override Location ReturnTypeLocation
         {
-            get
-            {
-                return GetSyntax().ReturnType.Location;
-            }
+            get { return GetSyntax().ReturnType.Location; }
         }
 
         internal override bool GenerateDebugInfo
@@ -84,15 +93,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return true; }
         }
 
-        internal sealed override OneOrMany<SyntaxList<AttributeListSyntax>> GetAttributeDeclarations()
+        internal sealed override OneOrMany<
+            SyntaxList<AttributeListSyntax>
+        > GetAttributeDeclarations()
         {
             return OneOrMany.Create(this.GetSyntax().AttributeLists);
         }
 
-        protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics)
-        {
+        protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindReturnType(
+            BindingDiagnosticBag diagnostics
+        ) {
             OperatorDeclarationSyntax declarationSyntax = GetSyntax();
-            return MakeParametersAndBindReturnType(declarationSyntax, declarationSyntax.ReturnType, diagnostics);
+            return MakeParametersAndBindReturnType(
+                declarationSyntax,
+                declarationSyntax.ReturnType,
+                diagnostics
+            );
         }
     }
 }

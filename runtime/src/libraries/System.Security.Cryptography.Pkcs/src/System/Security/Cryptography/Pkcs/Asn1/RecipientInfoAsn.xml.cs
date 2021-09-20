@@ -22,7 +22,9 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             {
                 if (usedTags.TryGetValue(tag, out string? existing))
                 {
-                    throw new InvalidOperationException($"Tag '{tag}' is in use by both '{existing}' and '{fieldName}'");
+                    throw new InvalidOperationException(
+                        $"Tag '{tag}' is in use by both '{existing}' and '{fieldName}'"
+                    );
                 }
 
                 usedTags.Add(tag, fieldName);
@@ -61,8 +63,10 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        internal static RecipientInfoAsn Decode(ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
-        {
+        internal static RecipientInfoAsn Decode(
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        ) {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -77,8 +81,11 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out RecipientInfoAsn decoded)
-        {
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out RecipientInfoAsn decoded
+        ) {
             try
             {
                 DecodeCore(ref reader, rebind, out decoded);
@@ -89,24 +96,34 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out RecipientInfoAsn decoded)
-        {
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out RecipientInfoAsn decoded
+        ) {
             decoded = default;
             Asn1Tag tag = reader.PeekTag();
 
             if (tag.HasSameClassAndValue(Asn1Tag.Sequence))
             {
                 System.Security.Cryptography.Pkcs.Asn1.KeyTransRecipientInfoAsn tmpKtri;
-                System.Security.Cryptography.Pkcs.Asn1.KeyTransRecipientInfoAsn.Decode(ref reader, rebind, out tmpKtri);
+                System.Security.Cryptography.Pkcs.Asn1.KeyTransRecipientInfoAsn.Decode(
+                    ref reader,
+                    rebind,
+                    out tmpKtri
+                );
                 decoded.Ktri = tmpKtri;
-
             }
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 1)))
             {
                 System.Security.Cryptography.Pkcs.Asn1.KeyAgreeRecipientInfoAsn tmpKari;
-                System.Security.Cryptography.Pkcs.Asn1.KeyAgreeRecipientInfoAsn.Decode(ref reader, new Asn1Tag(TagClass.ContextSpecific, 1), rebind, out tmpKari);
+                System.Security.Cryptography.Pkcs.Asn1.KeyAgreeRecipientInfoAsn.Decode(
+                    ref reader,
+                    new Asn1Tag(TagClass.ContextSpecific, 1),
+                    rebind,
+                    out tmpKari
+                );
                 decoded.Kari = tmpKari;
-
             }
             else
             {

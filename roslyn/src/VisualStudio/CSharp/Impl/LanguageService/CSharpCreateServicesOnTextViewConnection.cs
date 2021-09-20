@@ -20,13 +20,14 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
     [Export(typeof(IWpfTextViewConnectionListener))]
     [ContentType(ContentTypeNames.CSharpContentType)]
     [TextViewRole(PredefinedTextViewRoles.Interactive)]
-    internal class CSharpCreateServicesOnTextViewConnection : AbstractCreateServicesOnTextViewConnection
+    internal class CSharpCreateServicesOnTextViewConnection
+        : AbstractCreateServicesOnTextViewConnection
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpCreateServicesOnTextViewConnection([ImportMany] IEnumerable<Lazy<ILanguageService, LanguageServiceMetadata>> languageServices)
-            : base(languageServices, LanguageNames.CSharp)
-        {
-        }
+        public CSharpCreateServicesOnTextViewConnection(
+            [ImportMany]
+                IEnumerable<Lazy<ILanguageService, LanguageServiceMetadata>> languageServices
+        ) : base(languageServices, LanguageNames.CSharp) { }
     }
 }

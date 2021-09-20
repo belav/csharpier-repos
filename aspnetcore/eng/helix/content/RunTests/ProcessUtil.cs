@@ -30,7 +30,10 @@ namespace RunTests
             }
 
             var process = Process.GetCurrentProcess();
-            var dumpFilePath = Path.Combine(dumpDirectoryPath, $"{process.ProcessName}-{process.Id}.dmp");
+            var dumpFilePath = Path.Combine(
+                dumpDirectoryPath,
+                $"{process.ProcessName}-{process.Id}.dmp"
+            );
 
             return CaptureDumpAsync(process.Id, dumpFilePath);
         }
@@ -45,7 +48,10 @@ namespace RunTests
             }
 
             var process = Process.GetProcessById(pid);
-            var dumpFilePath = Path.Combine(dumpDirectoryPath, $"{process.ProcessName}.{process.Id}.dmp");
+            var dumpFilePath = Path.Combine(
+                dumpDirectoryPath,
+                $"{process.ProcessName}.{process.Id}.dmp"
+            );
 
             return CaptureDumpAsync(process.Id, dumpFilePath);
         }
@@ -59,7 +65,10 @@ namespace RunTests
                 return Task.CompletedTask;
             }
 
-            return RunAsync($"{Environment.GetEnvironmentVariable("HELIX_WORKITEM_ROOT")}/dotnet-dump", $"collect -p {pid} -o \"{dumpFilePath}\"");
+            return RunAsync(
+                $"{Environment.GetEnvironmentVariable("HELIX_WORKITEM_ROOT")}/dotnet-dump",
+                $"collect -p {pid} -o \"{dumpFilePath}\""
+            );
         }
 
         public static async Task<ProcessResult> RunAsync(
@@ -72,8 +81,8 @@ namespace RunTests
             Action<string>? outputDataReceived = null,
             Action<string>? errorDataReceived = null,
             Action<int>? onStart = null,
-            CancellationToken cancellationToken = default)
-        {
+            CancellationToken cancellationToken = default
+        ) {
             Console.WriteLine($"Running '{filename} {arguments}'");
             using var process = new Process()
             {
@@ -89,7 +98,6 @@ namespace RunTests
                 EnableRaisingEvents = true
             };
 
-
             if (workingDirectory != null)
             {
                 process.StartInfo.WorkingDirectory = workingDirectory;
@@ -100,7 +108,10 @@ namespace RunTests
             if (dumpDirectoryPath != null)
             {
                 process.StartInfo.EnvironmentVariables["COMPlus_DbgEnableMiniDump"] = "1";
-                process.StartInfo.EnvironmentVariables["COMPlus_DbgMiniDumpName"] = Path.Combine(dumpDirectoryPath, $"{Path.GetFileName(filename)}.%d.dmp");
+                process.StartInfo.EnvironmentVariables["COMPlus_DbgMiniDumpName"] = Path.Combine(
+                    dumpDirectoryPath,
+                    $"{Path.GetFileName(filename)}.%d.dmp"
+                );
             }
 
             if (environmentVariables != null)
@@ -147,14 +158,26 @@ namespace RunTests
 
             process.Exited += (_, e) =>
             {
-                Console.WriteLine($"'{process.StartInfo.FileName} {process.StartInfo.Arguments}' completed with exit code '{process.ExitCode}'");
+                Console.WriteLine(
+                    $"'{process.StartInfo.FileName} {process.StartInfo.Arguments}' completed with exit code '{process.ExitCode}'"
+                );
                 if (throwOnError && process.ExitCode != 0)
                 {
-                    processLifetimeTask.TrySetException(new InvalidOperationException($"Command {filename} {arguments} returned exit code {process.ExitCode} output: {outputBuilder.ToString()}"));
+                    processLifetimeTask.TrySetException(
+                        new InvalidOperationException(
+                            $"Command {filename} {arguments} returned exit code {process.ExitCode} output: {outputBuilder.ToString()}"
+                        )
+                    );
                 }
                 else
                 {
-                    processLifetimeTask.TrySetResult(new ProcessResult(outputBuilder.ToString(), errorBuilder.ToString(), process.ExitCode));
+                    processLifetimeTask.TrySetResult(
+                        new ProcessResult(
+                            outputBuilder.ToString(),
+                            errorBuilder.ToString(),
+                            process.ExitCode
+                        )
+                    );
                 }
             };
 
@@ -173,7 +196,10 @@ namespace RunTests
             {
                 if (dumpDirectoryPath != null)
                 {
-                    var dumpFilePath = Path.Combine(dumpDirectoryPath, $"{Path.GetFileName(filename)}.{process.Id}.dmp");
+                    var dumpFilePath = Path.Combine(
+                        dumpDirectoryPath,
+                        $"{Path.GetFileName(filename)}.{process.Id}.dmp"
+                    );
                     // Capture a process dump if the dumpDirectory is set
                     await CaptureDumpAsync(process.Id, dumpFilePath);
                 }
@@ -184,7 +210,10 @@ namespace RunTests
 
                     var cancel = new CancellationTokenSource();
 
-                    await Task.WhenAny(processLifetimeTask.Task, Task.Delay(TimeSpan.FromSeconds(5), cancel.Token));
+                    await Task.WhenAny(
+                        processLifetimeTask.Task,
+                        Task.Delay(TimeSpan.FromSeconds(5), cancel.Token)
+                    );
 
                     cancel.Cancel();
                 }

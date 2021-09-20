@@ -23,8 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public RelationshipSnapshot(
             InternalForeignKeyBuilder relationship,
             EntityType.Snapshot? ownedEntityTypeSnapshot,
-            List<(SkipNavigation, ConfigurationSource)>? referencingSkipNavigations)
-        {
+            List<(SkipNavigation, ConfigurationSource)>? referencingSkipNavigations
+        ) {
             Relationship = relationship;
             OwnedEntityTypeSnapshot = ownedEntityTypeSnapshot;
             ReferencingSkipNavigations = referencingSkipNavigations;
@@ -36,7 +36,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual InternalForeignKeyBuilder Relationship { [DebuggerStepThrough] get; }
+        public virtual InternalForeignKeyBuilder Relationship
+        {
+            [DebuggerStepThrough]
+            get;
+        }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -44,7 +48,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual EntityType.Snapshot? OwnedEntityTypeSnapshot { [DebuggerStepThrough] get; }
+        public virtual EntityType.Snapshot? OwnedEntityTypeSnapshot
+        {
+            [DebuggerStepThrough]
+            get;
+        }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -54,7 +62,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual List<(SkipNavigation SkipNavigation, ConfigurationSource ForeignKeyConfigurationSource)>? ReferencingSkipNavigations
         {
-            [DebuggerStepThrough] get;
+            [DebuggerStepThrough]
+            get;
         }
 
         /// <summary>
@@ -63,15 +72,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual InternalForeignKeyBuilder? Attach(InternalEntityTypeBuilder? entityTypeBuilder = null)
-        {
+        public virtual InternalForeignKeyBuilder? Attach(
+            InternalEntityTypeBuilder? entityTypeBuilder = null
+        ) {
             entityTypeBuilder ??= Relationship.Metadata.DeclaringEntityType.Builder;
 
             var newRelationship = Relationship.Attach(entityTypeBuilder);
             if (newRelationship != null)
             {
                 OwnedEntityTypeSnapshot?.Attach(
-                    newRelationship.Metadata.ResolveOtherEntityType(entityTypeBuilder.Metadata).Builder);
+                    newRelationship.Metadata.ResolveOtherEntityType(
+                        entityTypeBuilder.Metadata
+                    ).Builder
+                );
 
                 if (ReferencingSkipNavigations != null)
                 {
@@ -87,7 +100,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         }
 
                         skipNavigation?.Builder.HasForeignKey(
-                            newRelationship.Metadata, referencingNavigationTuple.ForeignKeyConfigurationSource);
+                            newRelationship.Metadata,
+                            referencingNavigationTuple.ForeignKeyConfigurationSource
+                        );
                     }
                 }
             }

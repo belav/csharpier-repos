@@ -26,9 +26,17 @@ namespace Microsoft.AspNetCore.Builder
             this IRouteBuilder routeBuilder,
             string name,
             string areaName,
-            string? template)
-        {
-            MapAreaRoute(routeBuilder, name, areaName, template, defaults: null, constraints: null, dataTokens: null);
+            string? template
+        ) {
+            MapAreaRoute(
+                routeBuilder,
+                name,
+                areaName,
+                template,
+                defaults: null,
+                constraints: null,
+                dataTokens: null
+            );
             return routeBuilder;
         }
 
@@ -51,9 +59,17 @@ namespace Microsoft.AspNetCore.Builder
             string name,
             string areaName,
             string? template,
-            object? defaults)
-        {
-            MapAreaRoute(routeBuilder, name, areaName, template, defaults, constraints: null, dataTokens: null);
+            object? defaults
+        ) {
+            MapAreaRoute(
+                routeBuilder,
+                name,
+                areaName,
+                template,
+                defaults,
+                constraints: null,
+                dataTokens: null
+            );
             return routeBuilder;
         }
 
@@ -81,9 +97,17 @@ namespace Microsoft.AspNetCore.Builder
             string areaName,
             string? template,
             object? defaults,
-            object? constraints)
-        {
-            MapAreaRoute(routeBuilder, name, areaName, template, defaults, constraints, dataTokens: null);
+            object? constraints
+        ) {
+            MapAreaRoute(
+                routeBuilder,
+                name,
+                areaName,
+                template,
+                defaults,
+                constraints,
+                dataTokens: null
+            );
             return routeBuilder;
         }
 
@@ -116,8 +140,8 @@ namespace Microsoft.AspNetCore.Builder
             string? template,
             object? defaults,
             object? constraints,
-            object? dataTokens)
-        {
+            object? dataTokens
+        ) {
             if (routeBuilder == null)
             {
                 throw new ArgumentNullException(nameof(routeBuilder));
@@ -125,16 +149,26 @@ namespace Microsoft.AspNetCore.Builder
 
             if (string.IsNullOrEmpty(areaName))
             {
-                throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(areaName));
+                throw new ArgumentException(
+                    Resources.ArgumentCannotBeNullOrEmpty,
+                    nameof(areaName)
+                );
             }
 
             var defaultsDictionary = new RouteValueDictionary(defaults);
             defaultsDictionary["area"] = defaultsDictionary["area"] ?? areaName;
 
             var constraintsDictionary = new RouteValueDictionary(constraints);
-            constraintsDictionary["area"] = constraintsDictionary["area"] ?? new StringRouteConstraint(areaName);
+            constraintsDictionary["area"] =
+                constraintsDictionary["area"] ?? new StringRouteConstraint(areaName);
 
-            routeBuilder.MapRoute(name, template, defaultsDictionary, constraintsDictionary, dataTokens);
+            routeBuilder.MapRoute(
+                name,
+                template,
+                defaultsDictionary,
+                constraintsDictionary,
+                dataTokens
+            );
             return routeBuilder;
         }
     }

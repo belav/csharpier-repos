@@ -75,7 +75,6 @@ namespace Microsoft.AspNetCore.Routing
                     throw new IndexOutOfRangeException();
                 }
 
-
                 var currentSegmentIndex = 0;
                 var currentSegmentStart = 1;
 
@@ -85,7 +84,11 @@ namespace Microsoft.AspNetCore.Routing
                 {
                     if (currentSegmentIndex++ == index)
                     {
-                        return new StringSegment(_path, currentSegmentStart, delimiterIndex - currentSegmentStart);
+                        return new StringSegment(
+                            _path,
+                            currentSegmentStart,
+                            delimiterIndex - currentSegmentStart
+                        );
                     }
                     else
                     {
@@ -95,11 +98,15 @@ namespace Microsoft.AspNetCore.Routing
                 }
 
                 // If we get here we're at the end of the string. The implementation of .Count should protect us
-                // from these cases. 
+                // from these cases.
                 Debug.Assert(_path[_path.Length - 1] != '/');
                 Debug.Assert(currentSegmentIndex == index);
 
-                return new StringSegment(_path, currentSegmentStart, _path.Length - currentSegmentStart);
+                return new StringSegment(
+                    _path,
+                    currentSegmentStart,
+                    _path.Length - currentSegmentStart
+                );
             }
         }
 
@@ -135,23 +142,15 @@ namespace Microsoft.AspNetCore.Routing
 
             public StringSegment Current
             {
-                get
-                {
-                    return new StringSegment(_path, _index, _length);
-                }
+                get { return new StringSegment(_path, _index, _length); }
             }
 
             object IEnumerator.Current
             {
-                get
-                {
-                    return Current;
-                }
+                get { return Current; }
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public bool MoveNext()
             {

@@ -19,7 +19,6 @@ namespace Microsoft.AspNetCore.Razor.Language
             return directory?.EnumerateItems() ?? Enumerable.Empty<RazorProjectItem>();
         }
 
-
         public override RazorProjectItem GetItem(string path)
         {
             return GetItem(path, fileKind: null);
@@ -62,7 +61,10 @@ namespace Microsoft.AspNetCore.Razor.Language
                 var filePath = fileNode.Path;
                 if (!filePath.StartsWith(Path, StringComparison.OrdinalIgnoreCase))
                 {
-                    var message = Resources.FormatVirtualFileSystem_FileDoesNotBelongToDirectory(fileNode.Path, Path);
+                    var message = Resources.FormatVirtualFileSystem_FileDoesNotBelongToDirectory(
+                        fileNode.Path,
+                        Path
+                    );
                     throw new InvalidOperationException(message);
                 }
 
@@ -77,7 +79,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             {
                 if (!path.StartsWith(Path, StringComparison.OrdinalIgnoreCase))
                 {
-                    var message = Resources.FormatVirtualFileSystem_FileDoesNotBelongToDirectory(path, Path);
+                    var message = Resources.FormatVirtualFileSystem_FileDoesNotBelongToDirectory(
+                        path,
+                        Path
+                    );
                     throw new InvalidOperationException(message);
                 }
 
@@ -104,7 +109,9 @@ namespace Microsoft.AspNetCore.Razor.Language
             {
                 if (!path.StartsWith(Path, StringComparison.OrdinalIgnoreCase))
                 {
-                    throw new InvalidOperationException(Resources.FormatVirtualFileSystem_FileDoesNotBelongToDirectory(path, Path));
+                    throw new InvalidOperationException(
+                        Resources.FormatVirtualFileSystem_FileDoesNotBelongToDirectory(path, Path)
+                    );
                 }
 
                 var directoryPath = GetDirectoryPath(path);
@@ -122,8 +129,16 @@ namespace Microsoft.AspNetCore.Razor.Language
                     // path, filePath -> /Views/Home/Index.cshtml
                     // directory.Path -> /Views/Home/
                     // We only need to match the file name portion since we've already matched the directory segment.
-                    if (string.Compare(path, directoryLength, filePath, directoryLength, path.Length - directoryLength, StringComparison.OrdinalIgnoreCase) == 0)
-                    {
+                    if (
+                        string.Compare(
+                            path,
+                            directoryLength,
+                            filePath,
+                            directoryLength,
+                            path.Length - directoryLength,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    ) {
                         return file.ProjectItem;
                     }
                 }
@@ -146,8 +161,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             private static DirectoryNode GetOrAddDirectory(
                 DirectoryNode directory,
                 string path,
-                bool createIfNotExists = false)
-            {
+                bool createIfNotExists = false
+            ) {
                 Debug.Assert(!string.IsNullOrEmpty(path));
                 if (path[path.Length - 1] != '/')
                 {
@@ -155,8 +170,9 @@ namespace Microsoft.AspNetCore.Razor.Language
                 }
 
                 int index;
-                while ((index = path.IndexOf('/', directory.Path.Length)) != -1 && index != path.Length)
-                {
+                while (
+                    (index = path.IndexOf('/', directory.Path.Length)) != -1 && index != path.Length
+                ) {
                     var subDirectory = FindSubDirectory(directory, path);
 
                     if (subDirectory == null)
@@ -179,8 +195,10 @@ namespace Microsoft.AspNetCore.Razor.Language
                 return directory;
             }
 
-            private static DirectoryNode FindSubDirectory(DirectoryNode parentDirectory, string path)
-            {
+            private static DirectoryNode FindSubDirectory(
+                DirectoryNode parentDirectory,
+                string path
+            ) {
                 for (var i = 0; i < parentDirectory.Directories.Count; i++)
                 {
                     // ParentDirectory.Path -> /Views/Home/
@@ -193,8 +211,16 @@ namespace Microsoft.AspNetCore.Razor.Language
                     var startIndex = parentDirectory.Path.Length;
                     var directoryNameLength = directoryPath.Length - startIndex;
 
-                    if (string.Compare(path, startIndex, directoryPath, startIndex, directoryPath.Length - startIndex, StringComparison.OrdinalIgnoreCase) == 0)
-                    {
+                    if (
+                        string.Compare(
+                            path,
+                            startIndex,
+                            directoryPath,
+                            startIndex,
+                            directoryPath.Length - startIndex,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    ) {
                         return currentDirectory;
                     }
                 }

@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -31,7 +31,13 @@ namespace Microsoft.AspNetCore.Mvc
             Assert.Null(authContext.Result);
         }
 
-        public static TheoryData<string, string, string, string, string> RedirectToHttpEndpointTestData
+        public static TheoryData<
+            string,
+            string,
+            string,
+            string,
+            string
+        > RedirectToHttpEndpointTestData
         {
             get
             {
@@ -42,14 +48,23 @@ namespace Microsoft.AspNetCore.Mvc
                     { "localhost:5000", null, null, null, "https://localhost" },
                     { "localhost", "/pathbase", null, null, "https://localhost/pathbase" },
                     { "localhost", "/pathbase", "/path", null, "https://localhost/pathbase/path" },
-                    { "localhost", "/pathbase", "/path", "?foo=bar", "https://localhost/pathbase/path?foo=bar" },
-
+                    {
+                        "localhost",
+                        "/pathbase",
+                        "/path",
+                        "?foo=bar",
+                        "https://localhost/pathbase/path?foo=bar"
+                    },
                     // Encode some special characters on the URL.
                     { "localhost", "/path?base", null, null, "https://localhost/path%3Fbase" },
                     { "localhost", null, "/pa?th", null, "https://localhost/pa%3Fth" },
-
-                    { "localhost", "/", null, "?foo=bar%2Fbaz", "https://localhost/?foo=bar%2Fbaz" },
-
+                    {
+                        "localhost",
+                        "/",
+                        null,
+                        "?foo=bar%2Fbaz",
+                        "https://localhost/?foo=bar%2Fbaz"
+                    },
                     // URLs with punycode
                     // 本地主機 is "localhost" in chinese traditional, "xn--tiq21tzznx7c" is the
                     // punycode representation.
@@ -65,8 +80,8 @@ namespace Microsoft.AspNetCore.Mvc
             string pathBase,
             string path,
             string queryString,
-            string expectedUrl)
-        {
+            string expectedUrl
+        ) {
             // Arrange
             var requestContext = new DefaultHttpContext();
             requestContext.RequestServices = CreateServices();
@@ -108,8 +123,9 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData("PUT")]
         [InlineData("PATCH")]
         [InlineData("DELETE")]
-        public void OnAuthorization_SignalsBadRequestStatusCode_ForNonHttpsAndNonGetRequests(string method)
-        {
+        public void OnAuthorization_SignalsBadRequestStatusCode_ForNonHttpsAndNonGetRequests(
+            string method
+        ) {
             // Arrange
             var requestContext = new DefaultHttpContext();
             requestContext.RequestServices = CreateServices();
@@ -156,16 +172,28 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData("http://本地主機:5000", null, "https://xn--tiq21tzznx7c/")]
         [InlineData("http://localhost", 44380, "https://localhost:44380/")]
         [InlineData("http://localhost:5000", 44380, "https://localhost:44380/")]
-        [InlineData("http://[2001:db8:a0b:12f0::1]", 44380, "https://[2001:db8:a0b:12f0::1]:44380/")]
-        [InlineData("http://[2001:db8:a0b:12f0::1]:5000", 44380, "https://[2001:db8:a0b:12f0::1]:44380/")]
+        [InlineData(
+            "http://[2001:db8:a0b:12f0::1]",
+            44380,
+            "https://[2001:db8:a0b:12f0::1]:44380/"
+        )]
+        [InlineData(
+            "http://[2001:db8:a0b:12f0::1]:5000",
+            44380,
+            "https://[2001:db8:a0b:12f0::1]:44380/"
+        )]
         [InlineData("http://localhost:5000/path", 44380, "https://localhost:44380/path")]
-        [InlineData("http://localhost:5000/path?foo=bar", 44380, "https://localhost:44380/path?foo=bar")]
+        [InlineData(
+            "http://localhost:5000/path?foo=bar",
+            44380,
+            "https://localhost:44380/path?foo=bar"
+        )]
         [InlineData("http://本地主機:5000", 44380, "https://xn--tiq21tzznx7c:44380/")]
         public void OnAuthorization_RedirectsToHttpsEndpoint_ForCustomSslPort(
             string url,
             int? sslPort,
-            string expectedUrl)
-        {
+            string expectedUrl
+        ) {
             // Arrange
             var options = Options.Create(new MvcOptions());
             var uri = new Uri(url);
@@ -196,19 +224,22 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData(null, false)]
         [InlineData(true, false)]
         [InlineData(false, true)]
-        public void OnAuthorization_RedirectsToHttpsEndpoint_WithSpecifiedStatusCodeAndRequireHttpsPermanentOption(bool? permanent, bool requireHttpsPermanent)
-        {
+        public void OnAuthorization_RedirectsToHttpsEndpoint_WithSpecifiedStatusCodeAndRequireHttpsPermanentOption(
+            bool? permanent,
+            bool requireHttpsPermanent
+        ) {
             var requestContext = new DefaultHttpContext();
             requestContext.RequestServices = CreateServices(null, requireHttpsPermanent);
             requestContext.Request.Scheme = "http";
             requestContext.Request.Method = "GET";
-            
+
             var authContext = CreateAuthorizationContext(requestContext);
             var attr = new RequireHttpsAttribute();
             if (permanent.HasValue)
             {
-                attr.Permanent = permanent.Value; 
-            };
+                attr.Permanent = permanent.Value;
+            }
+            ;
 
             // Act
             attr.OnAuthorization(authContext);
@@ -232,8 +263,10 @@ namespace Microsoft.AspNetCore.Mvc
             return new AuthorizationFilterContext(actionContext, new IFilterMetadata[0]);
         }
 
-        private static IServiceProvider CreateServices(int? sslPort = null, bool requireHttpsPermanent = false)
-        {
+        private static IServiceProvider CreateServices(
+            int? sslPort = null,
+            bool requireHttpsPermanent = false
+        ) {
             var options = Options.Create(new MvcOptions());
             options.Value.SslPort = sslPort;
             options.Value.RequireHttpsPermanent = requireHttpsPermanent;

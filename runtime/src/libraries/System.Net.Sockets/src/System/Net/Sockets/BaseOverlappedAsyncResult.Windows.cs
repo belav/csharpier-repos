@@ -16,13 +16,19 @@ namespace System.Net.Sockets
         private SafeNativeOverlapped? _nativeOverlapped;
 
         // The WinNT Completion Port callback.
-        private static readonly unsafe IOCompletionCallback s_ioCallback = new IOCompletionCallback(CompletionPortCallback);
+        private static readonly unsafe IOCompletionCallback s_ioCallback = new IOCompletionCallback(
+            CompletionPortCallback
+        );
 
-        internal BaseOverlappedAsyncResult(Socket socket, object? asyncState, AsyncCallback? asyncCallback)
-            : base(socket, asyncState, asyncCallback)
+        internal BaseOverlappedAsyncResult(
+            Socket socket,
+            object? asyncState,
+            AsyncCallback? asyncCallback
+        ) : base(socket, asyncState, asyncCallback)
         {
             _cleanupCount = 1;
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, socket);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, socket);
         }
 
         // SetUnmanagedStructures
@@ -47,24 +53,44 @@ namespace System.Net.Sockets
             }
 
             ThreadPoolBoundHandle boundHandle = s.GetOrAllocateThreadPoolBoundHandle();
-
             unsafe
             {
                 Debug.Assert(OperatingSystem.IsWindows());
-                NativeOverlapped* overlapped = boundHandle.AllocateNativeOverlapped(s_ioCallback, this, objectsToPin);
+                NativeOverlapped* overlapped = boundHandle.AllocateNativeOverlapped(
+                    s_ioCallback,
+                    this,
+                    objectsToPin
+                );
                 _nativeOverlapped = new SafeNativeOverlapped(s.SafeHandle, overlapped);
             }
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"{boundHandle}::AllocateNativeOverlapped. return={_nativeOverlapped}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    $"{boundHandle}::AllocateNativeOverlapped. return={_nativeOverlapped}"
+                );
         }
 
-        private static unsafe void CompletionPortCallback(uint errorCode, uint numBytes, NativeOverlapped* nativeOverlapped)
-        {
+        private static unsafe void CompletionPortCallback(
+            uint errorCode,
+            uint numBytes,
+            NativeOverlapped* nativeOverlapped
+        ) {
             Debug.Assert(OperatingSystem.IsWindows());
-            BaseOverlappedAsyncResult asyncResult = (BaseOverlappedAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
+            BaseOverlappedAsyncResult asyncResult =
+                (BaseOverlappedAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(
+                    nativeOverlapped
+                )!;
 
-            Debug.Assert(!asyncResult.InternalPeekCompleted, $"asyncResult.IsCompleted: {asyncResult}");
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(null, $"errorCode:{errorCode} numBytes:{numBytes} nativeOverlapped:{(IntPtr)nativeOverlapped}");
+            Debug.Assert(
+                !asyncResult.InternalPeekCompleted,
+                $"asyncResult.IsCompleted: {asyncResult}"
+            );
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    null,
+                    $"errorCode:{errorCode} numBytes:{numBytes} nativeOverlapped:{(IntPtr)nativeOverlapped}"
+                );
 
             // Complete the IO and invoke the user's callback.
             SocketError socketError = (SocketError)errorCode;
@@ -98,8 +124,12 @@ namespace System.Net.Sockets
                             nativeOverlapped,
                             out numBytes,
                             false,
-                            out ignore);
-                        Debug.Assert(!success, $"Unexpectedly succeeded. errorCode:{errorCode} numBytes:{numBytes}");
+                            out ignore
+                        );
+                        Debug.Assert(
+                            !success,
+                            $"Unexpectedly succeeded. errorCode:{errorCode} numBytes:{numBytes}"
+                        );
                         if (!success)
                         {
                             socketError = SocketPal.GetLastSocketError();
@@ -126,7 +156,8 @@ namespace System.Net.Sockets
             InvokeCallback(result);
         }
 
-        internal unsafe NativeOverlapped* DangerousOverlappedPointer => (NativeOverlapped*)_nativeOverlapped!.DangerousGetHandle();
+        internal unsafe NativeOverlapped* DangerousOverlappedPointer =>
+            (NativeOverlapped*)_nativeOverlapped!.DangerousGetHandle();
 
         // Check the result of the overlapped operation.
         // Handle synchronous success by completing the asyncResult here.

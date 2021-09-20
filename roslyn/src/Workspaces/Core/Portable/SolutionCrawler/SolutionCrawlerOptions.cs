@@ -12,28 +12,44 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         /// <summary>
         /// Option to turn configure background analysis scope.
         /// </summary>
-        public static readonly PerLanguageOption2<BackgroundAnalysisScope> BackgroundAnalysisScopeOption = new(
-            nameof(SolutionCrawlerOptions), nameof(BackgroundAnalysisScopeOption), defaultValue: BackgroundAnalysisScope.Default,
-            storageLocations: new RoamingProfileStorageLocation($"TextEditor.%LANGUAGE%.Specific.BackgroundAnalysisScopeOption"));
+        public static readonly PerLanguageOption2<BackgroundAnalysisScope> BackgroundAnalysisScopeOption =
+            new(
+                nameof(SolutionCrawlerOptions),
+                nameof(BackgroundAnalysisScopeOption),
+                defaultValue: BackgroundAnalysisScope.Default,
+                storageLocations: new RoamingProfileStorageLocation(
+                    $"TextEditor.%LANGUAGE%.Specific.BackgroundAnalysisScopeOption"
+                )
+            );
 
         /// <summary>
         /// This option is used by TypeScript and F#.
         /// </summary>
-        [Obsolete("Currently used by F# - should move to the new option SolutionCrawlerOptions.BackgroundAnalysisScopeOption")]
-        internal static readonly PerLanguageOption<bool?> ClosedFileDiagnostic = new(
-            "ServiceFeaturesOnOff", "Closed File Diagnostic", defaultValue: null,
-            storageLocations: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.Closed File Diagnostic"));
+        [Obsolete(
+            "Currently used by F# - should move to the new option SolutionCrawlerOptions.BackgroundAnalysisScopeOption"
+        )]
+        internal static readonly PerLanguageOption<bool?> ClosedFileDiagnostic =
+            new(
+                "ServiceFeaturesOnOff",
+                "Closed File Diagnostic",
+                defaultValue: null,
+                storageLocations: new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.Closed File Diagnostic"
+                )
+            );
 
         /// <summary>
         /// Enables forced <see cref="BackgroundAnalysisScope.Minimal"/> scope when low VM is detected to improve performance.
         /// </summary>
         public static bool LowMemoryForcedMinimalBackgroundAnalysis = false;
 
-        public static BackgroundAnalysisScope GetBackgroundAnalysisScope(Project project)
-            => GetBackgroundAnalysisScope(project.Solution.Options, project.Language);
+        public static BackgroundAnalysisScope GetBackgroundAnalysisScope(Project project) =>
+            GetBackgroundAnalysisScope(project.Solution.Options, project.Language);
 
-        public static BackgroundAnalysisScope GetBackgroundAnalysisScope(OptionSet options, string language)
-        {
+        public static BackgroundAnalysisScope GetBackgroundAnalysisScope(
+            OptionSet options,
+            string language
+        ) {
             if (LowMemoryForcedMinimalBackgroundAnalysis)
             {
                 return BackgroundAnalysisScope.Minimal;

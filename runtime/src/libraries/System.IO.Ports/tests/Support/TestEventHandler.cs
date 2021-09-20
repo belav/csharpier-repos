@@ -119,11 +119,17 @@ namespace Legacy.Support
             {
                 sw.Start();
                 long remaining;
-                while ((remaining = (maxMilliseconds - sw.ElapsedMilliseconds)) > 0 && NumEventsHandled < totalNumberOfEvents)
-                {
+                while (
+                    (remaining = (maxMilliseconds - sw.ElapsedMilliseconds)) > 0
+                    && NumEventsHandled < totalNumberOfEvents
+                ) {
                     Monitor.Wait(_lock, (int)remaining);
                 }
-                Debug.Print("WaitForEvent: Events handled {0}/{1}", NumEventsHandled, totalNumberOfEvents);
+                Debug.Print(
+                    "WaitForEvent: Events handled {0}/{1}",
+                    NumEventsHandled,
+                    totalNumberOfEvents
+                );
                 return totalNumberOfEvents <= NumEventsHandled;
             }
         }
@@ -137,15 +143,26 @@ namespace Legacy.Support
             {
                 for (int i = 0; i < _eventTypes.Count; i++)
                 {
-                    if (Equals(eventType, _eventTypes[i]) && bytesToRead <= _bytesToRead[i] && _sources[i] == _com)
-                    {
-                        Debug.Print("Validate - found {0} at {1} {2}", eventType, i, string.Join(",", _eventTypes));
+                    if (
+                        Equals(eventType, _eventTypes[i])
+                        && bytesToRead <= _bytesToRead[i]
+                        && _sources[i] == _com
+                    ) {
+                        Debug.Print(
+                            "Validate - found {0} at {1} {2}",
+                            eventType,
+                            i,
+                            string.Join(",", _eventTypes)
+                        );
                         RemoveAt(i);
                         return;
                     }
                 }
             }
-            Assert.True(false, $"Failed to validate event type {eventType}. Received: {string.Join(", ", _eventTypes)}");
+            Assert.True(
+                false,
+                $"Failed to validate event type {eventType}. Received: {string.Join(", ", _eventTypes)}"
+            );
         }
 
         public int NumberOfOccurrencesOfType(T eventType)

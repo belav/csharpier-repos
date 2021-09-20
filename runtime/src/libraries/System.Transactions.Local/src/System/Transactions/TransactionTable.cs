@@ -20,9 +20,7 @@ namespace System.Transactions
         private const int MAX_SPIN_COUNT = 100;
         private const int SLEEP_TIME = 500;
 
-        public CheapUnfairReaderWriterLock()
-        {
-        }
+        public CheapUnfairReaderWriterLock() { }
 
         private object SyncRoot
         {
@@ -44,7 +42,11 @@ namespace System.Transactions
             {
                 if (_writerFinishedEvent == null)
                 {
-                    Interlocked.CompareExchange(ref _writerFinishedEvent, new ManualResetEvent(true), null);
+                    Interlocked.CompareExchange(
+                        ref _writerFinishedEvent,
+                        new ManualResetEvent(true),
+                        null
+                    );
                 }
                 return (ManualResetEvent)_writerFinishedEvent;
             }
@@ -68,8 +70,7 @@ namespace System.Transactions
                 }
 
                 Interlocked.Decrement(ref _readersIn);
-            }
-            while (true);
+            } while (true);
 
             return readerIndex;
         }
@@ -94,8 +95,7 @@ namespace System.Transactions
                 {
                     Thread.Sleep(SLEEP_TIME);
                 }
-            }
-            while (ReadersPresent);
+            } while (ReadersPresent);
         }
 
         public void ExitReadLock()
@@ -110,13 +110,13 @@ namespace System.Transactions
                 _writerPresent = false;
                 WriterFinishedEvent.Set();
             }
+
             finally
             {
                 Monitor.Exit(SyncRoot);
             }
         }
     }
-
 
     // This transaction table implementation uses an array of lists to avoid contention.  The list for a
     // transaction is decided by its hashcode.
@@ -146,7 +146,12 @@ namespace System.Transactions
         internal TransactionTable()
         {
             // Create a timer that is initially disabled by specifing an Infinite time to the first interval
-            _timer = new Timer(new TimerCallback(ThreadTimer), null, Timeout.Infinite, _timerInterval);
+            _timer = new Timer(
+                new TimerCallback(ThreadTimer),
+                null,
+                Timeout.Infinite,
+                _timerInterval
+            );
 
             // Note that the timer is disabled
             _timerEnabled = false;
@@ -165,7 +170,6 @@ namespace System.Transactions
             _rwLock = new CheapUnfairReaderWriterLock();
         }
 
-
         // Calculate the maximum number of ticks for which this transaction should live
         internal long TimeoutTicks(TimeSpan timeout)
         {
@@ -174,8 +178,11 @@ namespace System.Transactions
                 // Note: At the current setting of approximately 2 ticks per second this timer will
                 //       wrap in approximately 2^64/2/60/60/24/365=292,471,208,677.5360162195585996
                 //       (nearly 300 billion) years.
-                long timeoutTicks = ((timeout.Ticks / TimeSpan.TicksPerMillisecond) >>
-                        TransactionTable.timerInternalExponent) + _ticks;
+                long timeoutTicks =
+                    (
+                        (timeout.Ticks / TimeSpan.TicksPerMillisecond)
+                        >> TransactionTable.timerInternalExponent
+                    ) + _ticks;
                 // The increment of 2 is necessary to account for the half-second that is
                 // lost due to the right-shift truncation and also for the half-second
                 // that might be lost because the transaction's AbsoluteTimeout is
@@ -193,13 +200,11 @@ namespace System.Transactions
             }
         }
 
-
         // Absolute timeout
         internal TimeSpan RecalcTimeout(InternalTransaction tx)
         {
             return TimeSpan.FromMilliseconds((tx.AbsoluteTimeout - _ticks) * _timerInterval);
         }
-
 
         // Creation time
         private long CurrentTime
@@ -216,7 +221,6 @@ namespace System.Transactions
                 }
             }
         }
-
 
         // Add a transaction to the table.  Transactions are added to the end of the list in sorted order based on their
         // absolute timeout.
@@ -240,7 +244,7 @@ namespace System.Transactions
                                 TraceSourceType.TraceSourceLtm,
                                 SR.UnexpectedTimerFailure,
                                 null
-                                );
+                            );
                         }
                         _lastTimerTime = DateTime.UtcNow.Ticks;
                         _timerEnabled = true;
@@ -250,6 +254,7 @@ namespace System.Transactions
 
                 AddIter(txNew);
             }
+
             finally
             {
                 _rwLock.ExitReadLock();
@@ -257,7 +262,6 @@ namespace System.Transactions
 
             return readerIndex;
         }
-
 
         private void AddIter(InternalTransaction txNew)
         {
@@ -303,13 +307,15 @@ namespace System.Transactions
                         WeakReference newSetWeak = new WeakReference(newBucketSet);
 
                         WeakReference? oldNextSetWeak = (WeakReference?)Interlocked.CompareExchange(
-                            ref currentBucketSet.nextSetWeak, newSetWeak, nextSetWeak);
+                            ref currentBucketSet.nextSetWeak,
+                            newSetWeak,
+                            nextSetWeak
+                        );
                         if (oldNextSetWeak == nextSetWeak)
                         {
                             // Ladies and Gentlemen we have a winner.
                             newBucketSet.prevSet = currentBucketSet;
                         }
-
                         // Note that at this point we don't update currentBucketSet.  On the next loop
                         // iteration we should be able to pick up where we left off.
                     }
@@ -318,8 +324,7 @@ namespace System.Transactions
                         lastBucketSet = currentBucketSet;
                         currentBucketSet = nextBucketSet;
                     }
-                }
-                while (currentBucketSet.AbsoluteTimeout > txNew.AbsoluteTimeout);
+                } while (currentBucketSet.AbsoluteTimeout > txNew.AbsoluteTimeout);
 
                 if (currentBucketSet.AbsoluteTimeout != txNew.AbsoluteTimeout)
                 {
@@ -332,7 +337,10 @@ namespace System.Transactions
                     Debug.Assert(lastBucketSet != null);
                     newBucketSet.nextSetWeak = lastBucketSet.nextSetWeak;
                     WeakReference? oldNextSetWeak = (WeakReference?)Interlocked.CompareExchange(
-                        ref lastBucketSet.nextSetWeak, newSetWeak, newBucketSet.nextSetWeak);
+                        ref lastBucketSet.nextSetWeak,
+                        newSetWeak,
+                        newBucketSet.nextSetWeak
+                    );
                     if (oldNextSetWeak == newBucketSet.nextSetWeak)
                     {
                         // Ladies and Gentlemen we have a winner.
@@ -360,7 +368,6 @@ namespace System.Transactions
                     // first trip thru the loop.
                     currentBucketSet = lastBucketSet;
                     lastBucketSet = null;
-
                     // The outer loop will iterate and pick up where we left off.
                 }
             }
@@ -371,7 +378,6 @@ namespace System.Transactions
             currentBucketSet.Add(txNew);
         }
 
-
         // Remove a transaction from the table.
         internal void Remove(InternalTransaction tx)
         {
@@ -379,7 +385,6 @@ namespace System.Transactions
             tx._tableBucket.Remove(tx);
             tx._tableBucket = null;
         }
-
 
         // Process a timer event
         private void ThreadTimer(object? state)
@@ -451,13 +456,14 @@ namespace System.Transactions
                                 TraceSourceType.TraceSourceLtm,
                                 SR.UnexpectedTimerFailure,
                                 null
-                                );
+                            );
                         }
                         _timerEnabled = false;
 
                         return;
                     }
                 }
+
                 finally
                 {
                     _rwLock.ExitWriteLock();
@@ -486,8 +492,7 @@ namespace System.Transactions
                     }
                     lastBucketSet = currentBucketSet;
                     currentBucketSet = nextBucketSet;
-                }
-                while (currentBucketSet.AbsoluteTimeout > _ticks);
+                } while (currentBucketSet.AbsoluteTimeout > _ticks);
 
                 //
                 // Pinch off the list at this point making sure it is still the correct set.
@@ -499,8 +504,11 @@ namespace System.Transactions
                 // expires, the thread will walk the list again, find the appropriate BucketSet to pinch off, and
                 // then time out the transactions. This means that it is possible for a transaction to live a bit longer,
                 // but not much.
-                WeakReference? abortingSetsWeak =
-                    (WeakReference?)Interlocked.CompareExchange(ref lastBucketSet.nextSetWeak, null, nextWeakSet);
+                WeakReference? abortingSetsWeak = (WeakReference?)Interlocked.CompareExchange(
+                    ref lastBucketSet.nextSetWeak,
+                    null,
+                    nextWeakSet
+                );
 
                 if (abortingSetsWeak == nextWeakSet)
                 {
@@ -522,20 +530,16 @@ namespace System.Transactions
                             abortingBucketSets.TimeoutTransactions();
                             abortingSetsWeak = (WeakReference?)abortingBucketSets.nextSetWeak;
                         }
-                    }
-                    while (abortingBucketSets != null);
-
+                    } while (abortingBucketSets != null);
                     // That's all we needed to do.
                     break;
                 }
 
                 // We missed pulling the right transactions off.  Loop back up and try again.
                 currentBucketSet = lastBucketSet;
-            }
-            while (true);
+            } while (true);
         }
     }
-
 
     internal sealed class BucketSet
     {
@@ -556,21 +560,16 @@ namespace System.Transactions
             _absoluteTimeout = absoluteTimeout;
         }
 
-
         internal long AbsoluteTimeout
         {
-            get
-            {
-                return _absoluteTimeout;
-            }
+            get { return _absoluteTimeout; }
         }
-
 
         internal void Add(InternalTransaction newTx)
         {
-            while (!headBucket.Add(newTx)) ;
+            while (!headBucket.Add(newTx))
+                ;
         }
-
 
         internal void TimeoutTransactions()
         {
@@ -589,11 +588,9 @@ namespace System.Transactions
                 {
                     currentBucket = null;
                 }
-            }
-            while (currentBucket != null);
+            } while (currentBucket != null);
         }
     }
-
 
     internal sealed class Bucket
     {
@@ -615,7 +612,6 @@ namespace System.Transactions
             _owningSet = owningSet;
         }
 
-
         internal bool Add(InternalTransaction tx)
         {
             int currentIndex = Interlocked.Increment(ref _index);
@@ -624,7 +620,7 @@ namespace System.Transactions
                 tx._tableBucket = this;
                 tx._bucketIndex = currentIndex;
                 Interlocked.MemoryBarrier(); // This data must be written before the transaction
-                                             // could be timed out.
+                // could be timed out.
                 _transactions[currentIndex] = tx;
 
                 if (_timedOut)
@@ -640,7 +636,11 @@ namespace System.Transactions
                 Bucket newBucket = new Bucket(_owningSet);
                 newBucket.nextBucketWeak = new WeakReference(this);
 
-                Bucket oldBucket = Interlocked.CompareExchange(ref _owningSet.headBucket, newBucket, this);
+                Bucket oldBucket = Interlocked.CompareExchange(
+                    ref _owningSet.headBucket,
+                    newBucket,
+                    this
+                );
                 if (oldBucket == this)
                 {
                     // ladies and gentlemen we have a winner.
@@ -652,12 +652,10 @@ namespace System.Transactions
             return true;
         }
 
-
         internal void Remove(InternalTransaction tx)
         {
             _transactions[tx._bucketIndex] = null;
         }
-
 
         internal void TimeoutTransactions()
         {

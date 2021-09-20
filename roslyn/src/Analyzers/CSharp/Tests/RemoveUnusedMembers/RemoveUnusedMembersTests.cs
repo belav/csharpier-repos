@@ -16,20 +16,26 @@ using Roslyn.Test.Utilities;
 using Xunit;
 using VerifyCS = Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions.CSharpCodeFixVerifier<
     Microsoft.CodeAnalysis.CSharp.RemoveUnusedMembers.CSharpRemoveUnusedMembersDiagnosticAnalyzer,
-    Microsoft.CodeAnalysis.CSharp.RemoveUnusedMembers.CSharpRemoveUnusedMembersCodeFixProvider>;
+    Microsoft.CodeAnalysis.CSharp.RemoveUnusedMembers.CSharpRemoveUnusedMembersCodeFixProvider
+>;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedMembers
 {
     public class RemoveUnusedMembersTests
     {
-        [Theory, CombinatorialData, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
-        public void TestStandardProperty(AnalyzerProperty property)
-            => VerifyCS.VerifyStandardProperty(property);
+        [
+            Theory,
+            CombinatorialData,
+            Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)
+        ]
+        public void TestStandardProperty(AnalyzerProperty property) =>
+            VerifyCS.VerifyStandardProperty(property);
 
         [Fact, WorkItem(31582, "https://github.com/dotnet/roslyn/issues/31582")]
         public async Task FieldReadViaSuppression()
         {
-            var code = @"
+            var code =
+                @"
 #nullable enable
 class MyClass
 {
@@ -51,7 +57,8 @@ class MyClass
         [InlineData("private protected")]
         public async Task NonPrivateField(string accessibility)
         {
-            var code = $@"class MyClass
+            var code =
+                $@"class MyClass
 {{
     {accessibility} int _goo;
 }}";
@@ -67,7 +74,8 @@ class MyClass
         [InlineData("private protected")]
         public async Task NonPrivateFieldWithConstantInitializer(string accessibility)
         {
-            var code = $@"class MyClass
+            var code =
+                $@"class MyClass
 {{
     {accessibility} int _goo = 0;
 }}";
@@ -83,7 +91,8 @@ class MyClass
         [InlineData("private protected")]
         public async Task NonPrivateFieldWithNonConstantInitializer(string accessibility)
         {
-            var code = $@"class MyClass
+            var code =
+                $@"class MyClass
 {{
     {accessibility} int _goo = _goo2;
     private static readonly int _goo2 = 0;
@@ -100,7 +109,8 @@ class MyClass
         [InlineData("private protected")]
         public async Task NonPrivateMethod(string accessibility)
         {
-            var code = $@"class MyClass
+            var code =
+                $@"class MyClass
 {{
     {accessibility} void M() {{ }}
 }}";
@@ -116,7 +126,8 @@ class MyClass
         [InlineData("private protected")]
         public async Task NonPrivateProperty(string accessibility)
         {
-            var code = $@"class MyClass
+            var code =
+                $@"class MyClass
 {{
     {accessibility} int P {{ get; }}
 }}";
@@ -132,7 +143,8 @@ class MyClass
         [InlineData("private protected")]
         public async Task NonPrivateIndexer(string accessibility)
         {
-            var code = $@"class MyClass
+            var code =
+                $@"class MyClass
 {{
     {accessibility}
     int this[int arg] {{ get {{ return 0; }} set {{ }} }}
@@ -149,7 +161,8 @@ class MyClass
         [InlineData("private protected")]
         public async Task NonPrivateEvent(string accessibility)
         {
-            var code = $@"using System;
+            var code =
+                $@"using System;
 
 class MyClass
 {{
@@ -163,59 +176,64 @@ class MyClass
         public async Task FieldIsUnused()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|];
 }",
-@"class MyClass
+                @"class MyClass
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task MethodIsUnused()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|M|]() => 0;
 }",
-@"class MyClass
+                @"class MyClass
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task GenericMethodIsUnused()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|M|]<T>() => 0;
 }",
-@"class MyClass
+                @"class MyClass
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task MethodInGenericTypeIsUnused()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass<T>
+                @"class MyClass<T>
 {
     private int [|M|]() => 0;
 }",
-@"class MyClass<T>
+                @"class MyClass<T>
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task InstanceConstructorIsUnused_NoArguments()
         {
             // We only flag constructors with arguments.
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private MyClass() { }
 }";
@@ -227,19 +245,21 @@ class MyClass
         public async Task InstanceConstructorIsUnused_WithArguments()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     private [|MyClass|](int i) { }
 }",
-@"class MyClass
+                @"class MyClass
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task StaticConstructorIsNotFlagged()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     static MyClass() { }
 }";
@@ -250,7 +270,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task DestructorIsNotFlagged()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     ~MyClass() { }
 }";
@@ -262,45 +283,49 @@ class MyClass
         public async Task PropertyIsUnused()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|P|] { get; set; }
 }",
-@"class MyClass
+                @"class MyClass
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task IndexerIsUnused()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|this|][int x] { get { return 0; } set { } }
 }",
-@"class MyClass
+                @"class MyClass
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task EventIsUnused()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     private event System.EventHandler [|e|];
 }",
-@"class MyClass
+                @"class MyClass
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task EntryPointMethodNotFlagged()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private static void Main() { }
 }";
@@ -311,7 +336,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task EntryPointMethodNotFlagged_02()
         {
-            var code = @"using System.Threading.Tasks;
+            var code =
+                @"using System.Threading.Tasks;
 
 class MyClass
 {
@@ -324,7 +350,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task EntryPointMethodNotFlagged_03()
         {
-            var code = @"using System.Threading.Tasks;
+            var code =
+                @"using System.Threading.Tasks;
 
 class MyClass
 {
@@ -337,7 +364,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task EntryPointMethodNotFlagged_04()
         {
-            var code = @"using System.Threading.Tasks;
+            var code =
+                @"using System.Threading.Tasks;
 
 class MyClass
 {
@@ -351,7 +379,8 @@ class MyClass
         [WorkItem(31572, "https://github.com/dotnet/roslyn/issues/31572")]
         public async Task EntryPointMethodNotFlagged_05()
         {
-            var code = @"using System.Threading.Tasks;
+            var code =
+                @"using System.Threading.Tasks;
 
 class MyClass
 {
@@ -364,7 +393,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task EntryPointMethodNotFlagged_06()
         {
-            var code = @"
+            var code =
+                @"
 return 0;
 ";
 
@@ -384,20 +414,15 @@ return 0;
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task EntryPointMethodNotFlagged_07()
         {
-            var code = @"
+            var code =
+                @"
 return 0;
 ";
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources = { code, code },
-                },
-                FixedState =
-                {
-                    Sources = { code, code },
-                },
+                TestState = { Sources = { code, code }, },
+                FixedState = { Sources = { code, code }, },
                 ExpectedDiagnostics =
                 {
                     // /0/Test0.cs(2,1): error CS8805: Program using top-level statements must be an executable.
@@ -412,17 +437,14 @@ return 0;
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task EntryPointMethodNotFlagged_08()
         {
-            var code = @"
+            var code =
+                @"
 return 0;
 ";
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources = { code },
-                    OutputKind = OutputKind.ConsoleApplication,
-                },
+                TestState = { Sources = { code }, OutputKind = OutputKind.ConsoleApplication, },
                 FixedCode = code,
                 LanguageVersion = LanguageVersion.CSharp9,
             }.RunAsync();
@@ -431,7 +453,8 @@ return 0;
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task EntryPointMethodNotFlagged_09()
         {
-            var code = @"
+            var code =
+                @"
 return 0;
 ";
 
@@ -442,10 +465,7 @@ return 0;
                     Sources = { code, code },
                     OutputKind = OutputKind.ConsoleApplication,
                 },
-                FixedState =
-                {
-                    Sources = { code, code },
-                },
+                FixedState = { Sources = { code, code }, },
                 ExpectedDiagnostics =
                 {
                     // /0/Test1.cs(2,1): error CS8802: Only one compilation unit can have top-level statements.
@@ -459,112 +479,121 @@ return 0;
         public async Task FieldIsUnused_ReadOnly()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     private readonly int [|_goo|];
 }",
-@"class MyClass
+                @"class MyClass
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task PropertyIsUnused_ReadOnly()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|P|] { get; }
 }",
-@"class MyClass
+                @"class MyClass
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task EventIsUnused_ReadOnly()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     // error CS0106: The modifier 'readonly' is not valid for this item
     private readonly event System.EventHandler {|CS0106:[|E|]|};
 }",
-@"class MyClass
+                @"class MyClass
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsUnused_Static()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     private static int [|_goo|];
 }",
-@"class MyClass
+                @"class MyClass
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task MethodIsUnused_Static()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     private static void [|M|]() { }
 }",
-@"class MyClass
+                @"class MyClass
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task PropertyIsUnused_Static()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     private static int [|P|] { get { return 0; } }
 }",
-@"class MyClass
+                @"class MyClass
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task IndexerIsUnused_Static()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     // error CS0106: The modifier 'static' is not valid for this item
     private static int {|CS0106:[|this|]|}[int x] { get { return 0; } set { } }
 }",
-@"class MyClass
+                @"class MyClass
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task EventIsUnused_Static()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     private static event System.EventHandler [|e1|];
 }",
-@"class MyClass
+                @"class MyClass
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task MethodIsUnused_Extern()
         {
-            var code = @"using System.Runtime.InteropServices;
+            var code =
+                @"using System.Runtime.InteropServices;
 
 class C
 {
@@ -578,7 +607,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task MethodIsUnused_Abstract()
         {
-            var code = @"abstract class C
+            var code =
+                @"abstract class C
 {
     protected abstract void M();
 }";
@@ -589,7 +619,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task MethodIsUnused_InterfaceMethod()
         {
-            var code = @"interface I
+            var code =
+                @"interface I
 {
     void M();
 }";
@@ -600,7 +631,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task MethodIsUnused_ExplicitInterfaceImplementation()
         {
-            var code = @"interface I
+            var code =
+                @"interface I
 {
     void M();
 }
@@ -616,7 +648,8 @@ class C : I
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task PropertyIsUnused_ExplicitInterfaceImplementation()
         {
-            var code = @"interface I
+            var code =
+                @"interface I
 {
     int P { get; set; }
 }
@@ -633,7 +666,8 @@ class C : I
         [WorkItem(30965, "https://github.com/dotnet/roslyn/issues/30965")]
         public async Task EventIsUnused_ExplicitInterfaceImplementation()
         {
-            var code = @"interface I
+            var code =
+                @"interface I
 {
     event System.Action E;
 }
@@ -655,20 +689,22 @@ class C : I
         public async Task WriteOnlyProperty_NotWritten()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class C
+                @"class C
 {
     int [|P|] { set { } }
 }",
-@"class C
+                @"class C
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         [WorkItem(30894, "https://github.com/dotnet/roslyn/issues/30894")]
         public async Task WriteOnlyProperty_Written()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     int P { set { } }
     public void M(int i) => P = i;
@@ -681,19 +717,21 @@ class C : I
         public async Task FieldIsUnused_Const()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     private const int [|_goo|] = 0;
 }",
-@"class MyClass
+                @"class MyClass
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsRead_ExpressionBody()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int _goo;
     public int M() => _goo;
@@ -705,7 +743,8 @@ class C : I
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsRead_BlockBody()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int _goo;
     public int M() { return _goo; }
@@ -717,7 +756,8 @@ class C : I
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsRead_ExpressionLambda()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class MyClass
 {
     private int _goo;
@@ -733,7 +773,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsRead_BlockLambda()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class MyClass
 {
     private int _goo;
@@ -749,7 +790,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsRead_Delegate()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class MyClass
 {
     private int _goo;
@@ -765,7 +807,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsRead_ExpressionBodyLocalFunction()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int _goo;
     public int M()
@@ -781,7 +824,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsRead_BlockBodyLocalFunction()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int _goo;
     public int M()
@@ -797,7 +841,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsRead_Accessor()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int _goo;
     public int Goo
@@ -815,7 +860,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsRead_Deconstruction()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int _goo;
     public void M(int x)
@@ -830,7 +876,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsRead_DifferentInstance()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int _goo;
     public int M() => new MyClass()._goo;
@@ -842,7 +889,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsRead_ObjectInitializer()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     public int F;
@@ -859,7 +907,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsRead_ThisInstance()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int _goo;
     public int M() => this._goo;
@@ -871,7 +920,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsRead_Attribute()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private const string _goo = """";
 
@@ -885,7 +935,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task MethodIsInvoked()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int M1() => 0;
     public int M2() => M1();
@@ -897,7 +948,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task MethodIsAddressTaken()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int M1() => 0;
     public void M2()
@@ -912,7 +964,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task GenericMethodIsInvoked_ExplicitTypeArguments()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int M1<T>() => 0;
     public int M2() => M1<int>();
@@ -924,7 +977,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task GenericMethodIsInvoked_ImplicitTypeArguments()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private T M1<T>(T t) => t;
     public int M2() => M1(0);
@@ -936,7 +990,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task MethodInGenericTypeIsInvoked_NoTypeArguments()
         {
-            var code = @"class MyClass<T>
+            var code =
+                @"class MyClass<T>
 {
     private int M1() => 0;
     public int M2() => M1();
@@ -948,7 +1003,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task MethodInGenericTypeIsInvoked_NonConstructedType()
         {
-            var code = @"class MyClass<T>
+            var code =
+                @"class MyClass<T>
 {
     private int M1() => 0;
     public int M2(MyClass<T> m) => m.M1();
@@ -960,7 +1016,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task MethodInGenericTypeIsInvoked_ConstructedType()
         {
-            var code = @"class MyClass<T>
+            var code =
+                @"class MyClass<T>
 {
     private int M1() => 0;
     public int M2(MyClass<int> m) => m.M1();
@@ -972,7 +1029,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task InstanceConstructorIsUsed_NoArguments()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private MyClass() { }
     public static readonly MyClass Instance = new MyClass();
@@ -984,7 +1042,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task InstanceConstructorIsUsed_WithArguments()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private MyClass(int i) { }
     public static readonly MyClass Instance = new MyClass(0);
@@ -996,7 +1055,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task PropertyIsRead()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int P => 0;
     public int M() => P;
@@ -1008,7 +1068,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task IndexerIsRead()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int this[int x] { get { return 0; } set { } }
     public int M(int x) => this[x];
@@ -1020,7 +1081,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task EventIsRead()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class MyClass
 {
@@ -1034,7 +1096,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task EventIsSubscribed()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class MyClass
 {
@@ -1055,7 +1118,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task EventIsRaised()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class MyClass
 {
@@ -1074,7 +1138,8 @@ class MyClass
         [WorkItem(32488, "https://github.com/dotnet/roslyn/issues/32488")]
         public async Task FieldInNameOf()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int _goo;
     public string _goo2 = nameof(_goo);
@@ -1087,7 +1152,8 @@ class MyClass
         [WorkItem(33765, "https://github.com/dotnet/roslyn/issues/33765")]
         public async Task GenericFieldInNameOf()
         {
-            var code = @"class MyClass<T>
+            var code =
+                @"class MyClass<T>
 {
     private T _goo;
     public string _goo2 = nameof(MyClass<int>._goo);
@@ -1101,7 +1167,8 @@ class MyClass
         [WorkItem(31581, "https://github.com/dotnet/roslyn/issues/31581")]
         public async Task MethodInNameOf()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private void M() { }
     private string _goo = nameof(M);
@@ -1114,7 +1181,8 @@ class MyClass
         [WorkItem(33765, "https://github.com/dotnet/roslyn/issues/33765")]
         public async Task GenericMethodInNameOf()
         {
-            var code = @"class MyClass<T>
+            var code =
+                @"class MyClass<T>
 {
     private void M() { }
     private string _goo2 = nameof(MyClass<int>.M);
@@ -1128,7 +1196,8 @@ class MyClass
         [WorkItem(31581, "https://github.com/dotnet/roslyn/issues/31581")]
         public async Task PropertyInNameOf()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int P { get; }
     public string _goo = nameof(P);
@@ -1141,7 +1210,8 @@ class MyClass
         [WorkItem(32522, "https://github.com/dotnet/roslyn/issues/32522")]
         public async Task TestDynamicInvocation()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private void M(dynamic d) { }
     public void M2(dynamic d) => M(d);
@@ -1154,7 +1224,8 @@ class MyClass
         [WorkItem(32522, "https://github.com/dotnet/roslyn/issues/32522")]
         public async Task TestDynamicObjectCreation()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private MyClass(int i) { }
     public static MyClass Create(dynamic d) => new MyClass(d);
@@ -1167,7 +1238,8 @@ class MyClass
         [WorkItem(32522, "https://github.com/dotnet/roslyn/issues/32522")]
         public async Task TestDynamicIndexerAccess()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int[] _list;
     private int this[int index] => _list[index];
@@ -1180,7 +1252,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldInDocComment()
         {
-            var code = @"
+            var code =
+                @"
 /// <summary>
 /// <see cref=""C._goo""/>
 /// </summary>
@@ -1195,7 +1268,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldInDocComment_02()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     /// <summary>
@@ -1210,7 +1284,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldInDocComment_03()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     /// <summary>
@@ -1227,7 +1302,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsOnlyWritten()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int {|IDE0052:_goo|};
     public void M()
@@ -1244,7 +1320,7 @@ class C
         public async Task PropertyIsOnlyWritten()
         {
             var source =
-@"class MyClass
+                @"class MyClass
 {
     private int {|#0:P|} { get; set; }
     public void M()
@@ -1253,8 +1329,14 @@ class C
     }
 }";
 
-            var descriptor = new CSharpRemoveUnusedMembersDiagnosticAnalyzer().SupportedDiagnostics.First(x => x.Id == "IDE0052");
-            var expectedMessage = string.Format(AnalyzersResources.Private_property_0_can_be_converted_to_a_method_as_its_get_accessor_is_never_invoked, "MyClass.P");
+            var descriptor =
+                new CSharpRemoveUnusedMembersDiagnosticAnalyzer().SupportedDiagnostics.First(
+                    x => x.Id == "IDE0052"
+                );
+            var expectedMessage = string.Format(
+                AnalyzersResources.Private_property_0_can_be_converted_to_a_method_as_its_get_accessor_is_never_invoked,
+                "MyClass.P"
+            );
 
             await new VerifyCS.Test
             {
@@ -1271,7 +1353,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task IndexerIsOnlyWritten()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int {|IDE0052:this|}[int x] { get { return 0; } set { } }
     public void M(int x, int y)
@@ -1286,7 +1369,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task EventIsOnlyWritten()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private event System.EventHandler e { add { } remove { } }
     public void M()
@@ -1302,7 +1386,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsOnlyInitialized_NonConstant()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int {|IDE0052:_goo|} = M();
     public static int M() => 0;
@@ -1314,7 +1399,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsOnlyWritten_Deconstruction()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int {|IDE0052:_goo|};
     public void M()
@@ -1330,7 +1416,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsOnlyWritten_ObjectInitializer()
         {
-            var code = @"
+            var code =
+                @"
 class MyClass
 {
     private int {|IDE0052:_goo|};
@@ -1343,7 +1430,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsOnlyWritten_InProperty()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int {|IDE0052:_goo|};
     public int Goo
@@ -1359,7 +1447,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsReadAndWritten()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int _goo;
     public void M()
@@ -1375,7 +1464,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task PropertyIsReadAndWritten()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int P { get; set; }
     public void M()
@@ -1391,7 +1481,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task IndexerIsReadAndWritten()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int this[int x] { get { return 0; } set { } }
     public void M(int x)
@@ -1407,7 +1498,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsReadAndWritten_InProperty()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int _goo;
     public int Goo
@@ -1424,7 +1516,8 @@ class MyClass
         [WorkItem(30397, "https://github.com/dotnet/roslyn/issues/30397")]
         public async Task FieldIsIncrementedAndValueUsed()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int _goo;
     public int M1() => ++_goo;
@@ -1437,7 +1530,8 @@ class MyClass
         [WorkItem(30397, "https://github.com/dotnet/roslyn/issues/30397")]
         public async Task FieldIsIncrementedAndValueUsed_02()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int _goo;
     public int M1() { return ++_goo; }
@@ -1449,7 +1543,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsIncrementedAndValueDropped()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int {|IDE0052:_goo|};
     public void M1() => ++_goo;
@@ -1461,7 +1556,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsIncrementedAndValueDropped_02()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int {|IDE0052:_goo|};
     public void M1() { ++_goo; }
@@ -1473,7 +1569,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task PropertyIsIncrementedAndValueUsed()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int P { get; set; }
     public int M1() => ++P;
@@ -1485,7 +1582,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task PropertyIsIncrementedAndValueDropped()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int {|IDE0052:P|} { get; set; }
     public void M1() { ++P; }
@@ -1497,7 +1595,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task IndexerIsIncrementedAndValueUsed()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int this[int x] { get { return 0; } set { } }
     public int M1(int x) => ++this[x];
@@ -1509,7 +1608,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task IndexerIsIncrementedAndValueDropped()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int {|IDE0052:this|}[int x] { get { return 0; } set { } }
     public void M1(int x) => ++this[x];
@@ -1521,7 +1621,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsTargetOfCompoundAssignmentAndValueUsed()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int _goo;
     public int M1(int x) => _goo += x;
@@ -1533,7 +1634,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsTargetOfCompoundAssignmentAndValueUsed_02()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int _goo;
     public int M1(int x) { return _goo += x; }
@@ -1545,7 +1647,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsTargetOfCompoundAssignmentAndValueDropped()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int {|IDE0052:_goo|};
     public void M1(int x) => _goo += x;
@@ -1557,7 +1660,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsTargetOfCompoundAssignmentAndValueDropped_02()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int {|IDE0052:_goo|};
     public void M1(int x) { _goo += x; }
@@ -1569,7 +1673,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task PropertyIsTargetOfCompoundAssignmentAndValueUsed()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int P { get; set; }
     public int M1(int x) => P += x;
@@ -1581,7 +1686,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task PropertyIsTargetOfCompoundAssignmentAndValueDropped()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int {|IDE0052:P|} { get; set; }
     public void M1(int x) { P += x; }
@@ -1593,7 +1699,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task IndexerIsTargetOfCompoundAssignmentAndValueUsed()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int this[int x] { get { return 0; } set { } }
     public int M1(int x, int y) => this[x] += y;
@@ -1605,7 +1712,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task IndexerIsTargetOfCompoundAssignmentAndValueDropped()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int {|IDE0052:this|}[int x] { get { return 0; } set { } }
     public void M1(int x, int y) => this[x] += y;
@@ -1617,7 +1725,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsTargetOfAssignmentAndParenthesized()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int {|IDE0052:_goo|};
     public void M1(int x) => (_goo) = x;
@@ -1629,7 +1738,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsTargetOfAssignmentAndHasImplicitConversion()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int {|IDE0052:_goo|};
     public static implicit operator int(MyClass c) => 0;
@@ -1642,7 +1752,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsArg()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int _goo;
     public int M1() => M2(_goo);
@@ -1655,7 +1766,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsInArg()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int _goo;
     public int M1() => M2(_goo);
@@ -1668,7 +1780,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsRefArg()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int _goo;
     public int M1() => M2(ref _goo);
@@ -1681,7 +1794,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsOutArg()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int {|IDE0052:_goo|};
     public int M1() => M2(out _goo);
@@ -1694,7 +1808,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task MethodIsArg()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int M() => 0;
     public int M1() => M2(M);
@@ -1707,7 +1822,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task PropertyIsArg()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int P => 0;
     public int M1() => M2(P);
@@ -1720,7 +1836,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task IndexerIsArg()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int this[int x] { get { return 0; } set { } }
     public int M1(int x) => M2(this[x]);
@@ -1733,7 +1850,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task EventIsArg()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class MyClass
 {
@@ -1749,13 +1867,14 @@ class MyClass
         public async Task MultipleFields_AllUnused()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|] = 0, [|_bar|] = 0;
 }",
-@"class MyClass
+                @"class MyClass
 {
-}");
+}"
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
@@ -1763,28 +1882,27 @@ class MyClass
         public async Task MultipleFields_AllUnused_FixOne(
             [CombinatorialValues("[|_goo|]", "[|_goo|] = 0")] string firstField,
             [CombinatorialValues("[|_bar|]", "[|_bar|] = 2")] string secondField,
-            [CombinatorialValues(0, 1)] int diagnosticIndex)
-        {
-            var source = $@"class MyClass
+            [CombinatorialValues(0, 1)] int diagnosticIndex
+        ) {
+            var source =
+                $@"class MyClass
 {{
     private int {firstField}, {secondField};
 }}";
-            var fixedSource = $@"class MyClass
+            var fixedSource =
+                $@"class MyClass
 {{
     private int {(diagnosticIndex == 0 ? secondField : firstField)};
 }}";
-            var batchFixedSource = @"class MyClass
+            var batchFixedSource =
+                @"class MyClass
 {
 }";
 
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState =
-                {
-                    Sources = { fixedSource },
-                    MarkupHandling = MarkupMode.Allow,
-                },
+                FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow, },
                 BatchFixedCode = batchFixedSource,
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
                 DiagnosticSelector = fixableDiagnostics => fixableDiagnostics[diagnosticIndex],
@@ -1795,38 +1913,41 @@ class MyClass
         public async Task MultipleFields_SomeUnused()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|] = 0, _bar = 0;
     public int M() => _bar;
 }",
-@"class MyClass
+                @"class MyClass
 {
     private int _bar = 0;
     public int M() => _bar;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task MultipleFields_SomeUnused_02()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int _goo = 0, [|_bar|] = 0;
     public int M() => _goo;
 }",
-@"class MyClass
+                @"class MyClass
 {
     private int _goo = 0;
     public int M() => _goo;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsRead_InNestedType()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int _goo;
 
@@ -1842,7 +1963,8 @@ class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task MethodIsInvoked_InNestedType()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int M1() => 0;
 
@@ -1859,25 +1981,27 @@ class MyClass
         public async Task FieldOfNestedTypeIsUnused()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     class NestedType
     {
         private int [|_goo|];
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     class NestedType
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldOfNestedTypeIsRead()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     class NestedType
     {
@@ -1894,19 +2018,21 @@ class MyClass
         public async Task FieldIsUnused_PartialClass()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"partial class MyClass
+                @"partial class MyClass
 {
     private int [|_goo|];
 }",
-@"partial class MyClass
+                @"partial class MyClass
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsRead_PartialClass()
         {
-            var code = @"partial class MyClass
+            var code =
+                @"partial class MyClass
 {
     private int _goo;
 }
@@ -1921,11 +2047,13 @@ partial class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsRead_PartialClass_DifferentFile()
         {
-            var source1 = @"partial class MyClass
+            var source1 =
+                @"partial class MyClass
 {
     private int _goo;
 }";
-            var source2 = @"partial class MyClass
+            var source2 =
+                @"partial class MyClass
 {
     public int M() => _goo;
 }";
@@ -1940,11 +2068,13 @@ partial class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsOnlyWritten_PartialClass_DifferentFile()
         {
-            var source1 = @"partial class MyClass
+            var source1 =
+                @"partial class MyClass
 {
     private int {|IDE0052:_goo|};
 }";
-            var source2 = @"partial class MyClass
+            var source2 =
+                @"partial class MyClass
 {
     public void M() { _goo = 0; }
 }";
@@ -1959,7 +2089,8 @@ partial class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsRead_InParens()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int _goo;
     public int M() => (_goo);
@@ -1971,7 +2102,8 @@ partial class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsWritten_InParens()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int {|IDE0052:_goo|};
     public void M() { (_goo) = 1; }
@@ -1983,7 +2115,8 @@ partial class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsWritten_InParens_02()
         {
-            var code = @"class MyClass
+            var code =
+                @"class MyClass
 {
     private int {|IDE0052:_goo|};
     public int M() => (_goo) = 1;
@@ -1995,7 +2128,8 @@ partial class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsRead_InDeconstruction_InParens()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     private int i;
 
@@ -2012,7 +2146,7 @@ partial class MyClass
         public async Task FieldInTypeWithGeneratedCode()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class C
+                @"class C
 {
     private int [|i|];
 
@@ -2023,7 +2157,7 @@ partial class MyClass
     {
     }
 }",
-@"class C
+                @"class C
 {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("""", """")]
     private int j;
@@ -2031,13 +2165,15 @@ partial class MyClass
     public void M()
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsGeneratedCode()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("""", """")]
     private int i;
@@ -2053,7 +2189,8 @@ partial class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldUsedInGeneratedCode()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     private int i;
 
@@ -2067,7 +2204,8 @@ partial class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsUnusedInType_SyntaxError()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     private int i;
 
@@ -2080,7 +2218,8 @@ partial class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FieldIsUnusedInType_SemanticError()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     private int i;
 
@@ -2095,7 +2234,7 @@ partial class MyClass
         public async Task FieldIsUnusedInType_SemanticErrorInDifferentType()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class C
+                @"class C
 {
     private int [|i|];
 }
@@ -2105,7 +2244,7 @@ class C2
     // 'ii' is undefined.
     public int M() => {|CS0103:ii|};
 }",
-@"class C
+                @"class C
 {
 }
 
@@ -2113,13 +2252,15 @@ class C2
 {
     // 'ii' is undefined.
     public int M() => {|CS0103:ii|};
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task StructLayoutAttribute_ExplicitLayout()
         {
-            var code = @"using System.Runtime.InteropServices;
+            var code =
+                @"using System.Runtime.InteropServices;
 
 [StructLayoutAttribute(LayoutKind.Explicit)]
 class C
@@ -2137,7 +2278,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task StructLayoutAttribute_SequentialLayout()
         {
-            var code = @"using System.Runtime.InteropServices;
+            var code =
+                @"using System.Runtime.InteropServices;
 
 [StructLayoutAttribute(LayoutKind.Sequential)]
 struct S
@@ -2152,7 +2294,8 @@ struct S
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task DebuggerDisplayAttribute_OnType_ReferencesField()
         {
-            var code = @"[System.Diagnostics.DebuggerDisplayAttribute(""{s}"")]
+            var code =
+                @"[System.Diagnostics.DebuggerDisplayAttribute(""{s}"")]
 class C
 {
     private string s;
@@ -2164,7 +2307,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task DebuggerDisplayAttribute_OnType_ReferencesMethod()
         {
-            var code = @"[System.Diagnostics.DebuggerDisplayAttribute(""{GetString()}"")]
+            var code =
+                @"[System.Diagnostics.DebuggerDisplayAttribute(""{GetString()}"")]
 class C
 {
     private string GetString() => """";
@@ -2176,7 +2320,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task DebuggerDisplayAttribute_OnType_ReferencesProperty()
         {
-            var code = @"[System.Diagnostics.DebuggerDisplayAttribute(""{MyString}"")]
+            var code =
+                @"[System.Diagnostics.DebuggerDisplayAttribute(""{MyString}"")]
 class C
 {
     private string MyString => """";
@@ -2188,7 +2333,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task DebuggerDisplayAttribute_OnField_ReferencesField()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     private string s;
 
@@ -2202,7 +2348,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task DebuggerDisplayAttribute_OnProperty_ReferencesMethod()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     private string GetString() => """";
 
@@ -2216,7 +2363,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task DebuggerDisplayAttribute_OnProperty_ReferencesProperty()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     private string MyString { get { return """"; } }
 
@@ -2230,7 +2378,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task DebuggerDisplayAttribute_OnNestedTypeMember_ReferencesField()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     private static string s;
 
@@ -2248,7 +2397,8 @@ class C
         [WorkItem(30886, "https://github.com/dotnet/roslyn/issues/30886")]
         public async Task SerializableConstructor_TypeImplementsISerializable()
         {
-            var code = @"using System.Runtime.Serialization;
+            var code =
+                @"using System.Runtime.Serialization;
 
 class C : ISerializable
 {
@@ -2272,7 +2422,8 @@ class C : ISerializable
         [WorkItem(30886, "https://github.com/dotnet/roslyn/issues/30886")]
         public async Task SerializableConstructor_BaseTypeImplementsISerializable()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Runtime.Serialization;
 
 class C : Exception 
@@ -2303,7 +2454,8 @@ class C : Exception
         [InlineData(@"[System.Runtime.InteropServices.ComUnregisterFunctionAttribute]")]
         public async Task MethodsWithSpecialAttributes(string attribute)
         {
-            var code = $@"class C
+            var code =
+                $@"class C
 {{
     {attribute}
     private void M()
@@ -2318,7 +2470,8 @@ class C : Exception
         [WorkItem(30887, "https://github.com/dotnet/roslyn/issues/30887")]
         public async Task ShouldSerializePropertyMethod()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     private bool ShouldSerializeData()
     {
@@ -2335,7 +2488,8 @@ class C : Exception
         [WorkItem(38491, "https://github.com/dotnet/roslyn/issues/38491")]
         public async Task ResetPropertyMethod()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     private void ResetData()
     {
@@ -2352,7 +2506,8 @@ class C : Exception
         [WorkItem(30377, "https://github.com/dotnet/roslyn/issues/30377")]
         public async Task EventHandlerMethod()
         {
-            var code = $@"using System;
+            var code =
+                $@"using System;
 
 class C
 {{
@@ -2368,7 +2523,8 @@ class C
         [WorkItem(32727, "https://github.com/dotnet/roslyn/issues/32727")]
         public async Task NestedStructLayoutTypeWithReference()
         {
-            var code = @"using System.Runtime.InteropServices;
+            var code =
+                @"using System.Runtime.InteropServices;
 
 class Program
 {
@@ -2389,7 +2545,7 @@ class Program
         public async Task FixAllFields_Document()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|_goo|] = 0, [|_bar|];
     private int [|_x|] = 0, [|_y|], _z = 0;
@@ -2397,19 +2553,20 @@ class Program
 
     public int Method() => _z;
 }",
-@"class MyClass
+                @"class MyClass
 {
     private int _z = 0;
 
     public int Method() => _z;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FixAllMethods_Document()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|M1|]() => 0;
     private void [|M2|]() { }
@@ -2419,35 +2576,37 @@ class Program
         private void [|M4|]() { }
     }
 }",
-@"class MyClass
+                @"class MyClass
 {
     private class NestedClass
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FixAllProperties_Document()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"class MyClass
+                @"class MyClass
 {
     private int [|P1|] => 0;
     private int [|P2|] { get; set; }
     private int [|P3|] { get { return 0; } set { } }
     private int [|this|][int i] { get { return 0; } }
 }",
-@"class MyClass
+                @"class MyClass
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FixAllEvents_Document()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System;
+                @"using System;
 
 class MyClass
 {
@@ -2464,7 +2623,7 @@ class MyClass
         EventHandler handler = E2;
     }
 }",
-@"using System;
+                @"using System;
 
 class MyClass
 {
@@ -2474,13 +2633,15 @@ class MyClass
     {
         EventHandler handler = E2;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task FixAllMembers_Project()
         {
-            var source1 = @"
+            var source1 =
+                @"
 using System;
 
 partial class MyClass
@@ -2496,7 +2657,8 @@ class MyClass2
 {
     private void [|M2|]() { }
 }";
-            var source2 = @"
+            var source2 =
+                @"
 partial class MyClass
 {
     private void [|M3|]() { }
@@ -2507,7 +2669,8 @@ static class MyClass3
 {
     private static void [|M5|]() { }
 }";
-            var fixedSource1 = @"
+            var fixedSource1 =
+                @"
 using System;
 
 partial class MyClass
@@ -2518,7 +2681,8 @@ partial class MyClass
 class MyClass2
 {
 }";
-            var fixedSource2 = @"
+            var fixedSource2 =
+                @"
 partial class MyClass
 {
     public int M4() => f2;
@@ -2539,13 +2703,15 @@ static class MyClass3
         [WorkItem(32702, "https://github.com/dotnet/roslyn/issues/32702")]
         public async Task UsedExtensionMethod_ReferencedFromPartialMethod()
         {
-            var source1 = @"
+            var source1 =
+                @"
 static partial class B
 {
     public static void Entry() => PartialMethod();
     static partial void PartialMethod();
 }";
-            var source2 = @"
+            var source2 =
+                @"
 static partial class B
 {
     static partial void PartialMethod()
@@ -2566,13 +2732,15 @@ static partial class B
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedMembers)]
         public async Task UsedExtensionMethod_ReferencedFromExtendedPartialMethod()
         {
-            var source1 = @"
+            var source1 =
+                @"
 static partial class B
 {
     public static void Entry() => PartialMethod();
     public static partial void PartialMethod();
 }";
-            var source2 = @"
+            var source2 =
+                @"
 static partial class B
 {
     public static partial void PartialMethod()
@@ -2594,7 +2762,8 @@ static partial class B
         [Fact, WorkItem(32842, "https://github.com/dotnet/roslyn/issues/32842")]
         public async Task FieldIsRead_NullCoalesceAssignment()
         {
-            var code = @"
+            var code =
+                @"
 public class MyClass
 {
     private MyClass _field;
@@ -2607,7 +2776,8 @@ public class MyClass
         [Fact, WorkItem(32842, "https://github.com/dotnet/roslyn/issues/32842")]
         public async Task FieldIsNotRead_NullCoalesceAssignment()
         {
-            var code = @"
+            var code =
+                @"
 public class MyClass
 {
     private MyClass {|IDE0052:_field|};
@@ -2621,7 +2791,8 @@ public class MyClass
         [WorkItem(37213, "https://github.com/dotnet/roslyn/issues/37213")]
         public async Task UsedPrivateExtensionMethod()
         {
-            var code = @"public static class B
+            var code =
+                @"public static class B
 {
     public static void PublicExtensionMethod(this string s) => s.PrivateExtensionMethod();
     private static void PrivateExtensionMethod(this string s) { }

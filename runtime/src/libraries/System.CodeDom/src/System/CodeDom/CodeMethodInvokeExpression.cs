@@ -9,14 +9,19 @@ namespace System.CodeDom
 
         public CodeMethodInvokeExpression() { }
 
-        public CodeMethodInvokeExpression(CodeMethodReferenceExpression method, params CodeExpression[] parameters)
-        {
+        public CodeMethodInvokeExpression(
+            CodeMethodReferenceExpression method,
+            params CodeExpression[] parameters
+        ) {
             _method = method;
             Parameters.AddRange(parameters);
         }
 
-        public CodeMethodInvokeExpression(CodeExpression targetObject, string methodName, params CodeExpression[] parameters)
-        {
+        public CodeMethodInvokeExpression(
+            CodeExpression targetObject,
+            string methodName,
+            params CodeExpression[] parameters
+        ) {
             _method = new CodeMethodReferenceExpression(targetObject, methodName);
             Parameters.AddRange(parameters);
         }

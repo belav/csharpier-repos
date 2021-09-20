@@ -23,13 +23,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SwitchStatementHighlighter()
-        {
-        }
+        public SwitchStatementHighlighter() { }
 
         protected override void AddHighlights(
-            SwitchStatementSyntax switchStatement, List<TextSpan> spans, CancellationToken cancellationToken)
-        {
+            SwitchStatementSyntax switchStatement,
+            List<TextSpan> spans,
+            CancellationToken cancellationToken
+        ) {
             spans.Add(switchStatement.SwitchKeyword.Span);
 
             foreach (var switchSection in switchStatement.Sections)
@@ -40,7 +40,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
                     spans.Add(EmptySpan(label.ColonToken.Span.End));
                 }
 
-                HighlightRelatedKeywords(switchSection, spans, highlightBreaks: true, highlightGotos: true);
+                HighlightRelatedKeywords(
+                    switchSection,
+                    spans,
+                    highlightBreaks: true,
+                    highlightGotos: true
+                );
             }
         }
 
@@ -48,9 +53,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
         /// Finds all breaks and continues that are a child of this node, and adds the appropriate spans to the spans
         /// list.
         /// </summary>
-        private void HighlightRelatedKeywords(SyntaxNode node, List<TextSpan> spans,
-            bool highlightBreaks, bool highlightGotos)
-        {
+        private void HighlightRelatedKeywords(
+            SyntaxNode node,
+            List<TextSpan> spans,
+            bool highlightBreaks,
+            bool highlightGotos
+        ) {
             Debug.Assert(highlightBreaks || highlightGotos);
 
             if (highlightBreaks && node is BreakStatementSyntax breakStatement)
@@ -63,9 +71,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
                 // We only want to highlight 'goto case' and 'goto default', not plain old goto statements,
                 // but if the label is missing, we do highlight 'goto' assuming it's more likely that
                 // the user is in the middle of typing 'goto case' or 'goto default'.
-                if (gotoStatement.IsKind(SyntaxKind.GotoCaseStatement, SyntaxKind.GotoDefaultStatement) ||
-                    gotoStatement.Expression.IsMissing)
-                {
+                if (
+                    gotoStatement.IsKind(
+                        SyntaxKind.GotoCaseStatement,
+                        SyntaxKind.GotoDefaultStatement
+                    ) || gotoStatement.Expression.IsMissing
+                ) {
                     var start = gotoStatement.GotoKeyword.SpanStart;
                     var end = !gotoStatement.CaseOrDefaultKeyword.IsKind(SyntaxKind.None)
                         ? gotoStatement.CaseOrDefaultKeyword.Span.End
@@ -84,12 +95,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
 
                     var child = childNodeOrToken.AsNode();
                     var highlightBreaksForChild = highlightBreaks && !child.IsBreakableConstruct();
-                    var highlightGotosForChild = highlightGotos && !child.IsKind(SyntaxKind.SwitchStatement);
+                    var highlightGotosForChild =
+                        highlightGotos && !child.IsKind(SyntaxKind.SwitchStatement);
 
                     // Only recurse if we have anything to do
                     if (highlightBreaksForChild || highlightGotosForChild)
                     {
-                        HighlightRelatedKeywords(child, spans, highlightBreaksForChild, highlightGotosForChild);
+                        HighlightRelatedKeywords(
+                            child,
+                            spans,
+                            highlightBreaksForChild,
+                            highlightGotosForChild
+                        );
                     }
                 }
             }

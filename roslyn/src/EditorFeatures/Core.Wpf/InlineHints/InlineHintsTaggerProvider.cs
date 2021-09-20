@@ -44,8 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             IThreadingContext threadingContext,
             IToolTipService toolTipService,
             ClassificationTypeMap typeMap,
-            Lazy<IStreamingFindUsagesPresenter> streamingFindUsagesPresenter)
-        {
+            Lazy<IStreamingFindUsagesPresenter> streamingFindUsagesPresenter
+        ) {
             _viewTagAggregatorFactoryService = viewTagAggregatorFactoryService;
             this.ClassificationFormatMapService = classificationFormatMapService;
             this.ClassificationTypeRegistryService = classificationTypeRegistryService;
@@ -62,8 +62,10 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 return null;
             }
 
-            var tagAggregator = _viewTagAggregatorFactoryService.CreateTagAggregator<InlineHintDataTag>(textView);
-            return new InlineHintsTagger(this, (IWpfTextView)textView, buffer, tagAggregator) as ITagger<T>;
+            var tagAggregator =
+                _viewTagAggregatorFactoryService.CreateTagAggregator<InlineHintDataTag>(textView);
+            return new InlineHintsTagger(this, (IWpfTextView)textView, buffer, tagAggregator)
+                as ITagger<T>;
         }
     }
 }

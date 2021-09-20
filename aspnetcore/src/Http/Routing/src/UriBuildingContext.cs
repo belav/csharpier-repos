@@ -40,7 +40,7 @@ namespace Microsoft.AspNetCore.Routing
             BufferState = SegmentState.Beginning;
             UriState = SegmentState.Beginning;
         }
-        
+
         public bool LowercaseUrls { get; set; }
 
         public bool LowercaseQueryStrings { get; set; }
@@ -320,7 +320,12 @@ namespace Microsoft.AspNetCore.Routing
 
         private string DebuggerToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "{{Accepted: '{0}' Buffered: '{1}'}}", _path, string.Join("", _buffer));
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "{{Accepted: '{0}' Buffered: '{1}'}}",
+                _path,
+                string.Join("", _buffer)
+            );
         }
 
         private readonly struct BufferValue

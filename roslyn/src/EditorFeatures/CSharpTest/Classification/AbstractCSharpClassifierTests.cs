@@ -15,25 +15,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
 {
     public abstract class AbstractCSharpClassifierTests : AbstractClassifierTests
     {
-        protected static TestWorkspace CreateWorkspace(string code, ParseOptions options, TestHost testHost)
-        {
+        protected static TestWorkspace CreateWorkspace(
+            string code,
+            ParseOptions options,
+            TestHost testHost
+        ) {
             var composition = EditorTestCompositions.EditorFeatures.WithTestHostParts(testHost);
-            return TestWorkspace.CreateCSharp(code, parseOptions: options, composition: composition);
+            return TestWorkspace.CreateCSharp(
+                code,
+                parseOptions: options,
+                composition: composition
+            );
         }
 
-        protected override async Task DefaultTestAsync(string code, string allCode, TestHost testHost, FormattedClassification[] expected)
-        {
+        protected override async Task DefaultTestAsync(
+            string code,
+            string allCode,
+            TestHost testHost,
+            FormattedClassification[] expected
+        ) {
             await TestAsync(code, allCode, testHost, parseOptions: null, expected);
             await TestAsync(code, allCode, testHost, parseOptions: Options.Script, expected);
         }
 
         protected override string WrapInClass(string className, string code) =>
-$@"class {className} {{
+            $@"class {className} {{
     {code}
 }}";
 
         protected override string WrapInExpression(string code) =>
-$@"class C {{
+            $@"class C {{
     void M() {{
         var q =
             {code}
@@ -41,14 +52,14 @@ $@"class C {{
 }}";
 
         protected override string WrapInMethod(string className, string methodName, string code) =>
-$@"class {className} {{
+            $@"class {className} {{
     void {methodName}() {{
         {code}
     }}
 }}";
 
         protected override string WrapInNamespace(string code) =>
-$@"namespace N {{
+            $@"namespace N {{
     {code}
 }}";
     }

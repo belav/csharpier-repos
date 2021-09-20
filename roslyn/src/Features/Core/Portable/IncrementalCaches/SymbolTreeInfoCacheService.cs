@@ -23,8 +23,8 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
 
             public SymbolTreeInfoCacheService(
                 ConcurrentDictionary<ProjectId, SymbolTreeInfo> projectIdToInfo,
-                ConcurrentDictionary<MetadataId, MetadataInfo> metadataIdToInfo)
-            {
+                ConcurrentDictionary<MetadataId, MetadataInfo> metadataIdToInfo
+            ) {
                 _projectIdToInfo = projectIdToInfo;
                 _metadataIdToInfo = metadataIdToInfo;
             }
@@ -32,18 +32,23 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
             public async ValueTask<SymbolTreeInfo> TryGetMetadataSymbolTreeInfoAsync(
                 Solution solution,
                 PortableExecutableReference reference,
-                CancellationToken cancellationToken)
-            {
+                CancellationToken cancellationToken
+            ) {
                 var metadataId = SymbolTreeInfo.GetMetadataIdNoThrow(reference);
                 if (metadataId == null)
                     return null;
 
-                var checksum = SymbolTreeInfo.GetMetadataChecksum(solution, reference, cancellationToken);
+                var checksum = SymbolTreeInfo.GetMetadataChecksum(
+                    solution,
+                    reference,
+                    cancellationToken
+                );
 
                 // See if the last value produced matches what the caller is asking for.  If so, return that.
-                if (_metadataIdToInfo.TryGetValue(metadataId, out var metadataInfo) &&
-                    metadataInfo.SymbolTreeInfo.Checksum == checksum)
-                {
+                if (
+                    _metadataIdToInfo.TryGetValue(metadataId, out var metadataInfo)
+                    && metadataInfo.SymbolTreeInfo.Checksum == checksum
+                ) {
                     return metadataInfo.SymbolTreeInfo;
                 }
 
@@ -51,18 +56,30 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
                 // Note: pass 'loadOnly' so we only attempt to load from disk, not to actually
                 // try to create the metadata.
                 var info = await SymbolTreeInfo.GetInfoForMetadataReferenceAsync(
-                    solution, reference, checksum, loadOnly: true, cancellationToken).ConfigureAwait(false);
+                        solution,
+                        reference,
+                        checksum,
+                        loadOnly: true,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 return info;
             }
 
             public async Task<SymbolTreeInfo> TryGetSourceSymbolTreeInfoAsync(
-                Project project, CancellationToken cancellationToken)
-            {
+                Project project,
+                CancellationToken cancellationToken
+            ) {
                 // See if the last value produced matches what the caller is asking for.  If so, return that.
-                var checksum = await SymbolTreeInfo.GetSourceSymbolsChecksumAsync(project, cancellationToken).ConfigureAwait(false);
-                if (_projectIdToInfo.TryGetValue(project.Id, out var projectInfo) &&
-                    projectInfo.Checksum == checksum)
-                {
+                var checksum = await SymbolTreeInfo.GetSourceSymbolsChecksumAsync(
+                        project,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                if (
+                    _projectIdToInfo.TryGetValue(project.Id, out var projectInfo)
+                    && projectInfo.Checksum == checksum
+                ) {
                     return projectInfo;
                 }
 
@@ -70,7 +87,12 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
                 // Note: pass 'loadOnly' so we only attempt to load from disk, not to actually
                 // try to create the index.
                 var info = await SymbolTreeInfo.GetInfoForSourceAssemblyAsync(
-                    project, checksum, loadOnly: true, cancellationToken).ConfigureAwait(false);
+                        project,
+                        checksum,
+                        loadOnly: true,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 return info;
             }
         }

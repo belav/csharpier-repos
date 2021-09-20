@@ -14,11 +14,13 @@ namespace System.Threading.Channels
     {
         /// <summary>Sentinel object used in a field to indicate the operation is available for use.</summary>
         protected static readonly Action<object?> s_availableSentinel = AvailableSentinel; // named method to help with debugging
-        private static void AvailableSentinel(object? s) => Debug.Fail($"{nameof(AsyncOperation)}.{nameof(AvailableSentinel)} invoked with {s}");
+        private static void AvailableSentinel(object? s) =>
+            Debug.Fail($"{nameof(AsyncOperation)}.{nameof(AvailableSentinel)} invoked with {s}");
 
         /// <summary>Sentinel object used in a field to indicate the operation has completed</summary>
         protected static readonly Action<object?> s_completedSentinel = CompletedSentinel; // named method to help with debugging
-        private static void CompletedSentinel(object? s) => Debug.Fail($"{nameof(AsyncOperation)}.{nameof(CompletedSentinel)} invoked with {s}");
+        private static void CompletedSentinel(object? s) =>
+            Debug.Fail($"{nameof(AsyncOperation)}.{nameof(CompletedSentinel)} invoked with {s}");
 
         /// <summary>Throws an exception indicating that the operation's result was accessed before the operation completed.</summary>
         protected static void ThrowIncompleteOperationException() =>
@@ -35,7 +37,10 @@ namespace System.Threading.Channels
 
     /// <summary>The representation of an asynchronous operation that has a result value.</summary>
     /// <typeparam name="TResult">Specifies the type of the result.  May be <see cref="VoidResult"/>.</typeparam>
-    internal partial class AsyncOperation<TResult> : AsyncOperation, IValueTaskSource, IValueTaskSource<TResult>
+    internal partial class AsyncOperation<TResult>
+        : AsyncOperation,
+          IValueTaskSource,
+          IValueTaskSource<TResult>
     {
         /// <summary>Registration with a provided cancellation token.</summary>
         private readonly CancellationTokenRegistration _registration;
@@ -80,8 +85,11 @@ namespace System.Threading.Channels
         /// <param name="runContinuationsAsynchronously">true if continuations should be forced to run asynchronously; otherwise, false.</param>
         /// <param name="cancellationToken">The cancellation token used to cancel the operation.</param>
         /// <param name="pooled">Whether this instance is pooled and reused.</param>
-        public AsyncOperation(bool runContinuationsAsynchronously, CancellationToken cancellationToken = default, bool pooled = false)
-        {
+        public AsyncOperation(
+            bool runContinuationsAsynchronously,
+            CancellationToken cancellationToken = default,
+            bool pooled = false
+        ) {
             _continuation = pooled ? s_availableSentinel : null;
             _pooled = pooled;
             _runContinuationsAsynchronously = runContinuationsAsynchronously;
@@ -89,11 +97,15 @@ namespace System.Threading.Channels
             {
                 Debug.Assert(!_pooled, "Cancelable operations can't be pooled");
                 CancellationToken = cancellationToken;
-                _registration = UnsafeRegister(cancellationToken, static s =>
-                {
-                    var thisRef = (AsyncOperation<TResult>)s!;
-                    thisRef.TrySetCanceled(thisRef.CancellationToken);
-                }, this);
+                _registration = UnsafeRegister(
+                    cancellationToken,
+                    static s =>
+                    {
+                        var thisRef = (AsyncOperation<TResult>)s!;
+                        thisRef.TrySetCanceled(thisRef.CancellationToken);
+                    },
+                    this
+                );
             }
         }
 
@@ -115,11 +127,13 @@ namespace System.Threading.Channels
                 ThrowIncorrectCurrentIdException();
             }
 
-            return
-                !IsCompleted ? ValueTaskSourceStatus.Pending :
-                _error == null ? ValueTaskSourceStatus.Succeeded :
-                _error.SourceException is OperationCanceledException ? ValueTaskSourceStatus.Canceled :
-                ValueTaskSourceStatus.Faulted;
+            return !IsCompleted
+              ? ValueTaskSourceStatus.Pending
+              : _error == null
+                  ? ValueTaskSourceStatus.Succeeded
+                  : _error.SourceException is OperationCanceledException
+                      ? ValueTaskSourceStatus.Canceled
+                      : ValueTaskSourceStatus.Faulted;
         }
 
         /// <summary>Gets whether the operation has completed.</summary>
@@ -182,8 +196,12 @@ namespace System.Threading.Channels
         public bool TryOwnAndReset()
         {
             Debug.Assert(_pooled, "Should only be used for pooled objects");
-            if (ReferenceEquals(Interlocked.CompareExchange(ref _continuation, null, s_availableSentinel), s_availableSentinel))
-            {
+            if (
+                ReferenceEquals(
+                    Interlocked.CompareExchange(ref _continuation, null, s_availableSentinel),
+                    s_availableSentinel
+                )
+            ) {
                 _continuationState = null;
                 _result = default;
                 _error = null;
@@ -200,8 +218,12 @@ namespace System.Threading.Channels
         /// <param name="state">The state to pass to the callback.</param>
         /// <param name="token">The current token that must match <see cref="_currentId"/>.</param>
         /// <param name="flags">Flags that influence the behavior of the callback.</param>
-        public void OnCompleted(Action<object?> continuation, object? state, short token, ValueTaskSourceOnCompletedFlags flags)
-        {
+        public void OnCompleted(
+            Action<object?> continuation,
+            object? state,
+            short token,
+            ValueTaskSourceOnCompletedFlags flags
+        ) {
             if (_currentId != token)
             {
                 ThrowIncorrectCurrentIdException();
@@ -251,7 +273,11 @@ namespace System.Threading.Channels
             // that means the operation has already completed, and we must invoke the callback, but because we're still
             // inside the awaiter's OnCompleted method and we want to avoid possible stack dives, we must invoke
             // the continuation asynchronously rather than synchronously.
-            Action<object?>? prevContinuation = Interlocked.CompareExchange(ref _continuation, continuation, null);
+            Action<object?>? prevContinuation = Interlocked.CompareExchange(
+                ref _continuation,
+                continuation,
+                null
+            );
             if (prevContinuation != null)
             {
                 // If the set failed because there's already a delegate in _continuation, but that delegate is
@@ -260,7 +286,10 @@ namespace System.Threading.Channels
                 Debug.Assert(IsCompleted, $"Expected IsCompleted");
                 if (!ReferenceEquals(prevContinuation, s_completedSentinel))
                 {
-                    Debug.Assert(prevContinuation != s_availableSentinel, "Continuation was the available sentinel.");
+                    Debug.Assert(
+                        prevContinuation != s_availableSentinel,
+                        "Continuation was the available sentinel."
+                    );
                     ThrowMultipleContinuations();
                 }
 
@@ -280,16 +309,25 @@ namespace System.Threading.Channels
                 }
                 else if (sc != null)
                 {
-                    sc.Post(static s =>
-                    {
-                        var t = (KeyValuePair<Action<object?>, object?>)s!;
-                        t.Key(t.Value);
-                    }, new KeyValuePair<Action<object?>, object?>(continuation, state));
+                    sc.Post(
+                        static s =>
+                        {
+                            var t = (KeyValuePair<Action<object?>, object?>)s!;
+                            t.Key(t.Value);
+                        },
+                        new KeyValuePair<Action<object?>, object?>(continuation, state)
+                    );
                 }
                 else
                 {
                     Debug.Assert(ts != null);
-                    Task.Factory.StartNew(continuation, state, CancellationToken.None, TaskCreationOptions.DenyChildAttach, ts);
+                    Task.Factory.StartNew(
+                        continuation,
+                        state,
+                        CancellationToken.None,
+                        TaskCreationOptions.DenyChildAttach,
+                        ts
+                    );
                 }
             }
         }
@@ -359,7 +397,9 @@ namespace System.Threading.Channels
         {
             if (TryReserveCompletionIfCancelable())
             {
-                _error = ExceptionDispatchInfo.Capture(new OperationCanceledException(cancellationToken));
+                _error = ExceptionDispatchInfo.Capture(
+                    new OperationCanceledException(cancellationToken)
+                );
                 SignalCompletion();
                 return true;
             }
@@ -374,16 +414,24 @@ namespace System.Threading.Channels
         /// from Initialized to CompletionReserved.
         /// </remarks>
         private bool TryReserveCompletionIfCancelable() =>
-            !CancellationToken.CanBeCanceled ||
-            Interlocked.CompareExchange(ref _completionReserved, 1, 0) == 0;
+            !CancellationToken.CanBeCanceled
+            || Interlocked.CompareExchange(ref _completionReserved, 1, 0) == 0;
 
         /// <summary>Signals to a registered continuation that the operation has now completed.</summary>
         private void SignalCompletion()
         {
-            if (_continuation != null || Interlocked.CompareExchange(ref _continuation, s_completedSentinel, null) != null)
-            {
-                Debug.Assert(_continuation != s_completedSentinel, $"The continuation was the completion sentinel.");
-                Debug.Assert(_continuation != s_availableSentinel, $"The continuation was the available sentinel.");
+            if (
+                _continuation != null
+                || Interlocked.CompareExchange(ref _continuation, s_completedSentinel, null) != null
+            ) {
+                Debug.Assert(
+                    _continuation != s_completedSentinel,
+                    $"The continuation was the completion sentinel."
+                );
+                Debug.Assert(
+                    _continuation != s_availableSentinel,
+                    $"The continuation was the available sentinel."
+                );
 
                 if (_schedulingContext == null)
                 {
@@ -402,7 +450,11 @@ namespace System.Threading.Channels
                     // Otherwise fall through to invoke it synchronously.
                     if (_runContinuationsAsynchronously || sc != SynchronizationContext.Current)
                     {
-                        sc.Post(static s => ((AsyncOperation<TResult>)s!).SetCompletionAndInvokeContinuation(), this);
+                        sc.Post(
+                            static s =>
+                                ((AsyncOperation<TResult>)s!).SetCompletionAndInvokeContinuation(),
+                            this
+                        );
                         return;
                     }
                 }
@@ -415,8 +467,14 @@ namespace System.Threading.Channels
                     Debug.Assert(ts != null, "Expected a TaskScheduler");
                     if (_runContinuationsAsynchronously || ts != TaskScheduler.Current)
                     {
-                        Task.Factory.StartNew(static s => ((AsyncOperation<TResult>)s!).SetCompletionAndInvokeContinuation(), this,
-                            CancellationToken.None, TaskCreationOptions.DenyChildAttach, ts);
+                        Task.Factory.StartNew(
+                            static s =>
+                                ((AsyncOperation<TResult>)s!).SetCompletionAndInvokeContinuation(),
+                            this,
+                            CancellationToken.None,
+                            TaskCreationOptions.DenyChildAttach,
+                            ts
+                        );
                         return;
                     }
                 }
@@ -436,13 +494,17 @@ namespace System.Threading.Channels
             }
             else
             {
-                ExecutionContext.Run(_executionContext, static s =>
-                {
-                    var thisRef = (AsyncOperation<TResult>)s!;
-                    Action<object?> c = thisRef._continuation!;
-                    thisRef._continuation = s_completedSentinel;
-                    c(thisRef._continuationState);
-                }, this);
+                ExecutionContext.Run(
+                    _executionContext,
+                    static s =>
+                    {
+                        var thisRef = (AsyncOperation<TResult>)s!;
+                        Action<object?> c = thisRef._continuation!;
+                        thisRef._continuation = s_completedSentinel;
+                        c(thisRef._continuationState);
+                    },
+                    this
+                );
             }
         }
     }
@@ -455,10 +517,11 @@ namespace System.Threading.Channels
         /// <param name="runContinuationsAsynchronously">true if continuations should be forced to run asynchronously; otherwise, false.</param>
         /// <param name="cancellationToken">The cancellation token used to cancel the operation.</param>
         /// <param name="pooled">Whether this instance is pooled and reused.</param>
-        public VoidAsyncOperationWithData(bool runContinuationsAsynchronously, CancellationToken cancellationToken = default, bool pooled = false) :
-            base(runContinuationsAsynchronously, cancellationToken, pooled)
-        {
-        }
+        public VoidAsyncOperationWithData(
+            bool runContinuationsAsynchronously,
+            CancellationToken cancellationToken = default,
+            bool pooled = false
+        ) : base(runContinuationsAsynchronously, cancellationToken, pooled) { }
 
         /// <summary>The item being written.</summary>
         public TData? Item { get; set; }

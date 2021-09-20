@@ -19,15 +19,26 @@ namespace RoutingWebSite.Controllers
         // supports this.
         [HttpGet]
         [HttpPost]
-        [Route("/[controller]/[action]/{path?}", Name = "EndpointNameController_LinkToAttributeRouted")]
+        [Route(
+            "/[controller]/[action]/{path?}",
+            Name = "EndpointNameController_LinkToAttributeRouted"
+        )]
         public string LinkToAttributeRouted()
         {
-            return _generator.GetPathByName(HttpContext, "EndpointNameController_LinkToAttributeRouted", values: null);
+            return _generator.GetPathByName(
+                HttpContext,
+                "EndpointNameController_LinkToAttributeRouted",
+                values: null
+            );
         }
 
         public string LinkToConventionalRouted()
         {
-            return _generator.GetPathByName(HttpContext, "RouteWithOptionalSegment", new { controller = "EndpointName", action = nameof(LinkToConventionalRouted), });
+            return _generator.GetPathByName(
+                HttpContext,
+                "RouteWithOptionalSegment",
+                new { controller = "EndpointName", action = nameof(LinkToConventionalRouted), }
+            );
         }
     }
 }

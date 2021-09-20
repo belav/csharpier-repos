@@ -33,8 +33,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal string Dump() => TreeDumper.DumpCompact(DumpCore());
 #endif
 
-        private TupleBinaryOperatorInfo(TypeSymbol? leftConvertedTypeOpt, TypeSymbol? rightConvertedTypeOpt)
-        {
+        private TupleBinaryOperatorInfo(
+            TypeSymbol? leftConvertedTypeOpt,
+            TypeSymbol? rightConvertedTypeOpt
+        ) {
             LeftConvertedTypeOpt = leftConvertedTypeOpt;
             RightConvertedTypeOpt = rightConvertedTypeOpt;
         }
@@ -55,7 +57,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 TypeSymbol? rightConvertedTypeOpt,
                 BinaryOperatorKind kind,
                 MethodSymbol? methodSymbolOpt,
-                Conversion conversionForBool, UnaryOperatorSignature boolOperator) : base(leftConvertedTypeOpt, rightConvertedTypeOpt)
+                Conversion conversionForBool,
+                UnaryOperatorSignature boolOperator
+            ) : base(leftConvertedTypeOpt, rightConvertedTypeOpt)
             {
                 Kind = kind;
                 MethodSymbolOpt = methodSymbolOpt;
@@ -65,11 +69,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(Kind.IsUserDefined() == (MethodSymbolOpt is { }));
             }
 
-            internal override TupleBinaryOperatorInfoKind InfoKind
-                => TupleBinaryOperatorInfoKind.Single;
+            internal override TupleBinaryOperatorInfoKind InfoKind =>
+                TupleBinaryOperatorInfoKind.Single;
 
-            public override string ToString()
-                => $"binaryOperatorKind: {Kind}";
+            public override string ToString() => $"binaryOperatorKind: {Kind}";
 
 #if DEBUG
             internal override TreeDumperNode DumpCore()
@@ -77,10 +80,28 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var sub = new List<TreeDumperNode>();
                 if (MethodSymbolOpt is { })
                 {
-                    sub.Add(new TreeDumperNode("methodSymbolOpt", MethodSymbolOpt.ToDisplayString(), null));
+                    sub.Add(
+                        new TreeDumperNode(
+                            "methodSymbolOpt",
+                            MethodSymbolOpt.ToDisplayString(),
+                            null
+                        )
+                    );
                 }
-                sub.Add(new TreeDumperNode("leftConversion", LeftConvertedTypeOpt?.ToDisplayString(), null));
-                sub.Add(new TreeDumperNode("rightConversion", RightConvertedTypeOpt?.ToDisplayString(), null));
+                sub.Add(
+                    new TreeDumperNode(
+                        "leftConversion",
+                        LeftConvertedTypeOpt?.ToDisplayString(),
+                        null
+                    )
+                );
+                sub.Add(
+                    new TreeDumperNode(
+                        "rightConversion",
+                        RightConvertedTypeOpt?.ToDisplayString(),
+                        null
+                    )
+                );
 
                 return new TreeDumperNode("nested", Kind, sub);
             }
@@ -94,29 +115,45 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             internal readonly ImmutableArray<TupleBinaryOperatorInfo> Operators;
 
-            internal static readonly Multiple ErrorInstance =
-                new Multiple(operators: ImmutableArray<TupleBinaryOperatorInfo>.Empty, leftConvertedTypeOpt: null, rightConvertedTypeOpt: null);
+            internal static readonly Multiple ErrorInstance = new Multiple(
+                operators: ImmutableArray<TupleBinaryOperatorInfo>.Empty,
+                leftConvertedTypeOpt: null,
+                rightConvertedTypeOpt: null
+            );
 
-            internal Multiple(ImmutableArray<TupleBinaryOperatorInfo> operators, TypeSymbol? leftConvertedTypeOpt, TypeSymbol? rightConvertedTypeOpt)
-                : base(leftConvertedTypeOpt, rightConvertedTypeOpt)
+            internal Multiple(
+                ImmutableArray<TupleBinaryOperatorInfo> operators,
+                TypeSymbol? leftConvertedTypeOpt,
+                TypeSymbol? rightConvertedTypeOpt
+            ) : base(leftConvertedTypeOpt, rightConvertedTypeOpt)
             {
-                Debug.Assert(leftConvertedTypeOpt is null || leftConvertedTypeOpt.StrippedType().IsTupleType);
-                Debug.Assert(rightConvertedTypeOpt is null || rightConvertedTypeOpt.StrippedType().IsTupleType);
+                Debug.Assert(
+                    leftConvertedTypeOpt is null || leftConvertedTypeOpt.StrippedType().IsTupleType
+                );
+                Debug.Assert(
+                    rightConvertedTypeOpt is null
+                        || rightConvertedTypeOpt.StrippedType().IsTupleType
+                );
                 Debug.Assert(!operators.IsDefault);
                 Debug.Assert(operators.IsEmpty || operators.Length > 1); // an empty array is used for error cases, otherwise tuples must have cardinality > 1
 
                 Operators = operators;
             }
 
-            internal override TupleBinaryOperatorInfoKind InfoKind
-                => TupleBinaryOperatorInfoKind.Multiple;
+            internal override TupleBinaryOperatorInfoKind InfoKind =>
+                TupleBinaryOperatorInfoKind.Multiple;
 
 #if DEBUG
             internal override TreeDumperNode DumpCore()
             {
                 var sub = new List<TreeDumperNode>();
-                sub.Add(new TreeDumperNode($"nestedOperators[{Operators.Length}]", null,
-                    Operators.SelectAsArray(c => c.DumpCore())));
+                sub.Add(
+                    new TreeDumperNode(
+                        $"nestedOperators[{Operators.Length}]",
+                        null,
+                        Operators.SelectAsArray(c => c.DumpCore())
+                    )
+                );
 
                 return new TreeDumperNode("nested", null, sub);
             }
@@ -137,8 +174,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Kind = kind;
             }
 
-            internal override TupleBinaryOperatorInfoKind InfoKind
-                => TupleBinaryOperatorInfoKind.NullNull;
+            internal override TupleBinaryOperatorInfoKind InfoKind =>
+                TupleBinaryOperatorInfoKind.NullNull;
 
 #if DEBUG
             internal override TreeDumperNode DumpCore()

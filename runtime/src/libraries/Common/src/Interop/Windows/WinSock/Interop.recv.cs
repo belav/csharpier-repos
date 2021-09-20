@@ -14,6 +14,7 @@ internal static partial class Interop
             SafeSocketHandle socketHandle,
             [In] byte* pinnedBuffer,
             [In] int len,
-            [In] SocketFlags socketFlags);
+            [In] SocketFlags socketFlags
+        );
     }
 }

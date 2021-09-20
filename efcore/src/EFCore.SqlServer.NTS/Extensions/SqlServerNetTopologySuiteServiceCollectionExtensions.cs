@@ -23,17 +23,29 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="serviceCollection"> The <see cref="IServiceCollection" /> to add services to. </param>
         /// <returns> The same service collection so that multiple calls can be chained. </returns>
         public static IServiceCollection AddEntityFrameworkSqlServerNetTopologySuite(
-            this IServiceCollection serviceCollection)
-        {
+            this IServiceCollection serviceCollection
+        ) {
             Check.NotNull(serviceCollection, nameof(serviceCollection));
 
             serviceCollection.TryAddSingleton(NtsGeometryServices.Instance);
 
-            new EntityFrameworkRelationalServicesBuilder(serviceCollection)
-                .TryAddProviderSpecificServices(
-                    x => x.TryAddSingletonEnumerable<IRelationalTypeMappingSourcePlugin, SqlServerNetTopologySuiteTypeMappingSourcePlugin>()
-                        .TryAddSingletonEnumerable<IMethodCallTranslatorPlugin, SqlServerNetTopologySuiteMethodCallTranslatorPlugin>()
-                        .TryAddSingletonEnumerable<IMemberTranslatorPlugin, SqlServerNetTopologySuiteMemberTranslatorPlugin>());
+            new EntityFrameworkRelationalServicesBuilder(
+                serviceCollection
+            ).TryAddProviderSpecificServices(
+                x =>
+                    x.TryAddSingletonEnumerable<
+                        IRelationalTypeMappingSourcePlugin,
+                        SqlServerNetTopologySuiteTypeMappingSourcePlugin
+                    >()
+                        .TryAddSingletonEnumerable<
+                            IMethodCallTranslatorPlugin,
+                            SqlServerNetTopologySuiteMethodCallTranslatorPlugin
+                        >()
+                        .TryAddSingletonEnumerable<
+                            IMemberTranslatorPlugin,
+                            SqlServerNetTopologySuiteMemberTranslatorPlugin
+                        >()
+            );
 
             return serviceCollection;
         }

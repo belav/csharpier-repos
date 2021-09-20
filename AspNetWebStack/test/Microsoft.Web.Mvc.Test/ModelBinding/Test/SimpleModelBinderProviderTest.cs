@@ -16,7 +16,15 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new SimpleModelBinderProvider(typeof(object), (Func<IExtensibleModelBinder>)null); }, "modelBinderFactory");
+                delegate
+                {
+                    new SimpleModelBinderProvider(
+                        typeof(object),
+                        (Func<IExtensibleModelBinder>)null
+                    );
+                },
+                "modelBinderFactory"
+            );
         }
 
         [Fact]
@@ -24,7 +32,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new SimpleModelBinderProvider(null, () => null); }, "modelType");
+                delegate
+                {
+                    new SimpleModelBinderProvider(null, () => null);
+                },
+                "modelType"
+            );
         }
 
         [Fact]
@@ -32,7 +45,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new SimpleModelBinderProvider(typeof(object), (IExtensibleModelBinder)null); }, "modelBinder");
+                delegate
+                {
+                    new SimpleModelBinderProvider(typeof(object), (IExtensibleModelBinder)null);
+                },
+                "modelBinder"
+            );
         }
 
         [Fact]
@@ -40,15 +58,22 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new SimpleModelBinderProvider(null, new Mock<IExtensibleModelBinder>().Object); }, "modelType");
+                delegate
+                {
+                    new SimpleModelBinderProvider(null, new Mock<IExtensibleModelBinder>().Object);
+                },
+                "modelType"
+            );
         }
 
         [Fact]
         public void GetBinder_TypeDoesNotMatch_ReturnsNull()
         {
             // Arrange
-            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(typeof(string), new Mock<IExtensibleModelBinder>().Object)
-            {
+            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(
+                typeof(string),
+                new Mock<IExtensibleModelBinder>().Object
+            ) {
                 SuppressPrefixCheck = true
             };
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(object));
@@ -65,7 +90,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Arrange
             IExtensibleModelBinder binderInstance = new Mock<IExtensibleModelBinder>().Object;
-            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(typeof(string), binderInstance);
+            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(
+                typeof(string),
+                binderInstance
+            );
 
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(string));
             bindingContext.ValueProvider = new SimpleValueProvider();
@@ -89,8 +117,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 return theBinderInstance;
             };
 
-            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(typeof(string), factory)
-            {
+            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(
+                typeof(string),
+                factory
+            ) {
                 SuppressPrefixCheck = true
             };
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(string));
@@ -109,8 +139,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Arrange
             IExtensibleModelBinder theBinderInstance = new Mock<IExtensibleModelBinder>().Object;
-            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(typeof(string), theBinderInstance)
-            {
+            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(
+                typeof(string),
+                theBinderInstance
+            ) {
                 SuppressPrefixCheck = true
             };
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(string));
@@ -126,18 +158,29 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void GetBinderThrowsIfBindingContextIsNull()
         {
             // Arrange
-            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(typeof(string), new Mock<IExtensibleModelBinder>().Object);
+            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(
+                typeof(string),
+                new Mock<IExtensibleModelBinder>().Object
+            );
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { provider.GetBinder(null, null); }, "bindingContext");
+                delegate
+                {
+                    provider.GetBinder(null, null);
+                },
+                "bindingContext"
+            );
         }
 
         [Fact]
         public void ModelTypeProperty()
         {
             // Arrange
-            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(typeof(string), new Mock<IExtensibleModelBinder>().Object);
+            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(
+                typeof(string),
+                new Mock<IExtensibleModelBinder>().Object
+            );
 
             // Act & assert
             Assert.Equal(typeof(string), provider.ModelType);
@@ -147,7 +190,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             return new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(() => null, modelType)
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    () => null,
+                    modelType
+                )
             };
         }
     }

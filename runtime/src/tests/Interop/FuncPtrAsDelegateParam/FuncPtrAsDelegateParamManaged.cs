@@ -23,7 +23,10 @@ public class Test
     {
         if (-1 != func())
         {
-            TestFramework.LogError("01","The Return Value(TestMethod_ReversePInvoke_Cdecl) is wrong");
+            TestFramework.LogError(
+                "01",
+                "The Return Value(TestMethod_ReversePInvoke_Cdecl) is wrong"
+            );
         }
         return 678;
     }
@@ -37,9 +40,9 @@ public class Test
         if (!DoCallBack_Cdecl(new Cdeclcaller(TestMethod_ReversePInvoke_Cdecl)))
         {
             breturn = false;
-            TestFramework.LogError("04","The Return value(DoCallBack_Cdecl) is wrong");
+            TestFramework.LogError("04", "The Return value(DoCallBack_Cdecl) is wrong");
         }
-        
-        return breturn ? 100: 101;
+
+        return breturn ? 100 : 101;
     }
 }

@@ -41,7 +41,9 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var validatorProvider = TestModelValidatorProvider.CreateDefaultProvider();
 
-            var metadata = metadataProvider.GetMetadataForType(typeof(ModelValidatorAttributeOnClass));
+            var metadata = metadataProvider.GetMetadataForType(
+                typeof(ModelValidatorAttributeOnClass)
+            );
             var context = new ModelValidatorProviderContext(metadata, GetValidatorItems(metadata));
 
             // Act
@@ -51,7 +53,9 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var validatorItems = context.Results;
 
             var validatorItem = Assert.Single(validatorItems);
-            var customModelValidator = Assert.IsType<CustomModelValidatorAttribute>(validatorItem.Validator);
+            var customModelValidator = Assert.IsType<CustomModelValidatorAttribute>(
+                validatorItem.Validator
+            );
             Assert.Equal("Class", customModelValidator.Tag);
         }
 
@@ -64,7 +68,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
             var metadata = metadataProvider.GetMetadataForProperty(
                 typeof(ModelValidatorAttributeOnProperty),
-                nameof(ModelValidatorAttributeOnProperty.Property));
+                nameof(ModelValidatorAttributeOnProperty.Property)
+            );
             var context = new ModelValidatorProviderContext(metadata, GetValidatorItems(metadata));
 
             // Act
@@ -73,7 +78,9 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Assert
             var validatorItems = context.Results;
 
-            var validatorItem = Assert.IsType<CustomModelValidatorAttribute>(Assert.Single(validatorItems).Validator);
+            var validatorItem = Assert.IsType<CustomModelValidatorAttribute>(
+                Assert.Single(validatorItems).Validator
+            );
             Assert.Equal("Property", validatorItem.Tag);
         }
 
@@ -86,7 +93,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
             var metadata = metadataProvider.GetMetadataForProperty(
                 typeof(ModelValidatorAttributeOnPropertyAndClass),
-                nameof(ModelValidatorAttributeOnPropertyAndClass.Property));
+                nameof(ModelValidatorAttributeOnPropertyAndClass.Property)
+            );
             var context = new ModelValidatorProviderContext(metadata, GetValidatorItems(metadata));
 
             // Act
@@ -96,8 +104,14 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var validatorItems = context.Results;
 
             Assert.Equal(2, validatorItems.Count);
-            Assert.Single(validatorItems, v => Assert.IsType<CustomModelValidatorAttribute>(v.Validator).Tag == "Class");
-            Assert.Single(validatorItems, v => Assert.IsType<CustomModelValidatorAttribute>(v.Validator).Tag == "Property");
+            Assert.Single(
+                validatorItems,
+                v => Assert.IsType<CustomModelValidatorAttribute>(v.Validator).Tag == "Class"
+            );
+            Assert.Single(
+                validatorItems,
+                v => Assert.IsType<CustomModelValidatorAttribute>(v.Validator).Tag == "Property"
+            );
         }
 
         // RangeAttribute is an example of a ValidationAttribute with it's own adapter type.
@@ -110,8 +124,12 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
             var metadata = metadataProvider.GetMetadataForProperty(
                 typeof(RangeAttributeOnProperty),
-                nameof(RangeAttributeOnProperty.Property));
-            var context = new ClientValidatorProviderContext(metadata, GetClientValidatorItems(metadata));
+                nameof(RangeAttributeOnProperty.Property)
+            );
+            var context = new ClientValidatorProviderContext(
+                metadata,
+                GetClientValidatorItems(metadata)
+            );
 
             // Act
             validatorProvider.CreateValidators(context);
@@ -133,8 +151,12 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
             var metadata = metadataProvider.GetMetadataForProperty(
                 typeof(CustomValidationAttributeOnProperty),
-                nameof(CustomValidationAttributeOnProperty.Property));
-            var context = new ClientValidatorProviderContext(metadata, GetClientValidatorItems(metadata));
+                nameof(CustomValidationAttributeOnProperty.Property)
+            );
+            var context = new ClientValidatorProviderContext(
+                metadata,
+                GetClientValidatorItems(metadata)
+            );
 
             // Act
             validatorProvider.CreateValidators(context);
@@ -142,7 +164,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Assert
             var validatorItems = context.Results;
 
-             Assert.IsType<CustomValidationAttribute>(Assert.Single(validatorItems).Validator);
+            Assert.IsType<CustomValidationAttribute>(Assert.Single(validatorItems).Validator);
         }
 
         [Fact]
@@ -154,8 +176,12 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
             var metadata = metadataProvider.GetMetadataForProperty(
                 typeof(ProductViewModel),
-                nameof(ProductViewModel.Id));
-            var context = new ClientValidatorProviderContext(metadata, GetClientValidatorItems(metadata));
+                nameof(ProductViewModel.Id)
+            );
+            var context = new ClientValidatorProviderContext(
+                metadata,
+                GetClientValidatorItems(metadata)
+            );
 
             // Act
             validatorProvider.CreateValidators(context);
@@ -177,8 +203,12 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
             var metadata = metadataProvider.GetMetadataForProperty(
                 typeof(ProductViewModel),
-                nameof(ProductViewModel.Name));
-            var context = new ClientValidatorProviderContext(metadata, GetClientValidatorItems(metadata));
+                nameof(ProductViewModel.Name)
+            );
+            var context = new ClientValidatorProviderContext(
+                metadata,
+                GetClientValidatorItems(metadata)
+            );
 
             // Act
             validatorProvider.CreateValidators(context);
@@ -244,9 +274,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
         private class CustomValidationAttribute : Attribute, IClientModelValidator
         {
-            public void AddValidation(ClientModelValidationContext context)
-            {
-            }
+            public void AddValidation(ClientModelValidationContext context) { }
         }
 
         private class CustomValidationAttributeOnProperty

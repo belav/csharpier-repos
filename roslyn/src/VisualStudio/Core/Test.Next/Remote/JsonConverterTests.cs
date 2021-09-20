@@ -24,7 +24,10 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         [Fact, Trait(Traits.Feature, Traits.Features.RemoteHost)]
         public void TestChecksum()
         {
-            var checksum = Checksum.Create(WellKnownSynchronizationKind.Null, ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray()));
+            var checksum = Checksum.Create(
+                WellKnownSynchronizationKind.Null,
+                ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray())
+            );
             VerifyJsonSerialization(checksum);
         }
 
@@ -55,7 +58,9 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         [Fact, Trait(Traits.Feature, Traits.Features.RemoteHost)]
         public void TestDocumentId()
         {
-            VerifyJsonSerialization(DocumentId.CreateNewId(ProjectId.CreateNewId("project"), "document"));
+            VerifyJsonSerialization(
+                DocumentId.CreateNewId(ProjectId.CreateNewId("project"), "document")
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.RemoteHost)]
@@ -70,25 +75,30 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                 documentSpan: new TextSpan(0, 1),
                 documentAnalysisKind: AnalysisKind.Syntax,
                 projectId: projectId,
-                analyzerIds: new[] { "analyzer1", "analyzer2" });
+                analyzerIds: new[] { "analyzer1", "analyzer2" }
+            );
 
-            VerifyJsonSerialization(arguments, (x, y) =>
-            {
-                if (x.ReportSuppressedDiagnostics == y.ReportSuppressedDiagnostics &&
-                    x.LogPerformanceInfo == y.LogPerformanceInfo &&
-                    x.GetTelemetryInfo == y.GetTelemetryInfo &&
-                    x.DocumentId == y.DocumentId &&
-                    x.DocumentSpan == y.DocumentSpan &&
-                    x.DocumentAnalysisKind == y.DocumentAnalysisKind &&
-                    x.ProjectId == y.ProjectId &&
-                    x.AnalyzerIds.Length == y.AnalyzerIds.Length &&
-                    x.AnalyzerIds.Except(y.AnalyzerIds).Count() == 0)
+            VerifyJsonSerialization(
+                arguments,
+                (x, y) =>
                 {
-                    return 0;
-                }
+                    if (
+                        x.ReportSuppressedDiagnostics == y.ReportSuppressedDiagnostics
+                        && x.LogPerformanceInfo == y.LogPerformanceInfo
+                        && x.GetTelemetryInfo == y.GetTelemetryInfo
+                        && x.DocumentId == y.DocumentId
+                        && x.DocumentSpan == y.DocumentSpan
+                        && x.DocumentAnalysisKind == y.DocumentAnalysisKind
+                        && x.ProjectId == y.ProjectId
+                        && x.AnalyzerIds.Length == y.AnalyzerIds.Length
+                        && x.AnalyzerIds.Except(y.AnalyzerIds).Count() == 0
+                    ) {
+                        return 0;
+                    }
 
-                return 1;
-            });
+                    return 1;
+                }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.RemoteHost)]
@@ -112,48 +122,88 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
         [Fact, Trait(Traits.Feature, Traits.Features.RemoteHost)]
         public void TestTodoComment()
         {
-            VerifyJsonSerialization(new TodoComment(new TodoCommentDescriptor("Test", 1), "Message", 10));
+            VerifyJsonSerialization(
+                new TodoComment(new TodoCommentDescriptor("Test", 1), "Message", 10)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.RemoteHost)]
         public void TestTodoCommentDescriptorImmutableArray()
         {
-            VerifyJsonSerialization(ImmutableArray.Create(new TodoCommentDescriptor("Test", 0), new TodoCommentDescriptor("Test1", 1)), (x, y) =>
-            {
-                return x.SequenceEqual(y) ? 0 : 1;
-            });
+            VerifyJsonSerialization(
+                ImmutableArray.Create(
+                    new TodoCommentDescriptor("Test", 0),
+                    new TodoCommentDescriptor("Test1", 1)
+                ),
+                (x, y) =>
+                {
+                    return x.SequenceEqual(y) ? 0 : 1;
+                }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.RemoteHost)]
         public void TestTodoCommentList()
         {
-            VerifyJsonSerialization(new[] {
-                new TodoComment(new TodoCommentDescriptor("Test1", 1), "Message1", 10),
-                new TodoComment(new TodoCommentDescriptor("Test2", 2), "Message2", 20)}.ToList(), (x, y) =>
+            VerifyJsonSerialization(
+                new[]
+                {
+                    new TodoComment(new TodoCommentDescriptor("Test1", 1), "Message1", 10),
+                    new TodoComment(new TodoCommentDescriptor("Test2", 2), "Message2", 20)
+                }.ToList(),
+                (x, y) =>
                 {
                     return x.SequenceEqual(y) ? 0 : 1;
-                });
+                }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.RemoteHost)]
         public void TestPinnedSolutionInfo()
         {
-            var checksum = Checksum.Create(WellKnownSynchronizationKind.Null, ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray()));
-            VerifyJsonSerialization(new PinnedSolutionInfo(scopeId: 10, fromPrimaryBranch: false, workspaceVersion: 100, solutionChecksum: checksum), (x, y) =>
-            {
-                return (x.ScopeId == y.ScopeId &&
-                        x.FromPrimaryBranch == y.FromPrimaryBranch &&
-                        x.WorkspaceVersion == y.WorkspaceVersion &&
-                        x.SolutionChecksum == y.SolutionChecksum) ? 0 : 1;
-            });
+            var checksum = Checksum.Create(
+                WellKnownSynchronizationKind.Null,
+                ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray())
+            );
+            VerifyJsonSerialization(
+                new PinnedSolutionInfo(
+                    scopeId: 10,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: 100,
+                    solutionChecksum: checksum
+                ),
+                (x, y) =>
+                {
+                    return (
+                        x.ScopeId == y.ScopeId
+                        && x.FromPrimaryBranch == y.FromPrimaryBranch
+                        && x.WorkspaceVersion == y.WorkspaceVersion
+                        && x.SolutionChecksum == y.SolutionChecksum
+                    )
+                      ? 0
+                      : 1;
+                }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.RemoteHost)]
         public void TestAnalyzerPerformanceInfo()
         {
             VerifyJsonSerialization(
-                new AnalyzerPerformanceInfo("testAnalyzer", builtIn: false, timeSpan: TimeSpan.FromMilliseconds(12345)),
-                (x, y) => (x.AnalyzerId == y.AnalyzerId && x.BuiltIn == y.BuiltIn && x.TimeSpan == y.TimeSpan) ? 0 : 1);
+                new AnalyzerPerformanceInfo(
+                    "testAnalyzer",
+                    builtIn: false,
+                    timeSpan: TimeSpan.FromMilliseconds(12345)
+                ),
+                (x, y) =>
+                    (
+                        x.AnalyzerId == y.AnalyzerId
+                        && x.BuiltIn == y.BuiltIn
+                        && x.TimeSpan == y.TimeSpan
+                    )
+                        ? 0
+                        : 1
+            );
         }
 
         private static void VerifyJsonSerialization<T>(T value, Comparison<T> equality = null)

@@ -11,7 +11,10 @@ namespace Test
         private AA _self = null;
         public char mm = 'Q';
 
-        public AA() { _self = this; }
+        public AA()
+        {
+            _self = this;
+        }
 
         ~AA()
         {

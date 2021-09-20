@@ -16,11 +16,13 @@ namespace Microsoft.CodeAnalysis.Options
         public static string Generate(
             ImmutableArray<(string feature, ImmutableArray<IOption> options)> groupedOptions,
             OptionSet optionSet,
-            string language)
-        {
+            string language
+        ) {
             var editorconfig = new StringBuilder();
 
-            editorconfig.AppendLine($"# {WorkspacesResources.Remove_the_line_below_if_you_want_to_inherit_dot_editorconfig_settings_from_higher_directories}");
+            editorconfig.AppendLine(
+                $"# {WorkspacesResources.Remove_the_line_below_if_you_want_to_inherit_dot_editorconfig_settings_from_higher_directories}"
+            );
             editorconfig.AppendLine("root = true");
             editorconfig.AppendLine();
 
@@ -42,25 +44,41 @@ namespace Microsoft.CodeAnalysis.Options
                 AppendOptionsToEditorConfig(optionSet, feature, options, language, editorconfig);
             }
 
-            var namingStylePreferences = optionSet.GetOption(NamingStyleOptions.NamingPreferences, language);
-            AppendNamingStylePreferencesToEditorConfig(namingStylePreferences, language, editorconfig);
+            var namingStylePreferences = optionSet.GetOption(
+                NamingStyleOptions.NamingPreferences,
+                language
+            );
+            AppendNamingStylePreferencesToEditorConfig(
+                namingStylePreferences,
+                language,
+                editorconfig
+            );
 
             return editorconfig.ToString();
         }
 
-        private static void AppendOptionsToEditorConfig(OptionSet optionSet, string feature, ImmutableArray<IOption> options, string language, StringBuilder editorconfig)
-        {
+        private static void AppendOptionsToEditorConfig(
+            OptionSet optionSet,
+            string feature,
+            ImmutableArray<IOption> options,
+            string language,
+            StringBuilder editorconfig
+        ) {
             editorconfig.AppendLine($"#### {feature} ####");
             editorconfig.AppendLine();
 
-            foreach (var optionGrouping in options
-                                           .Where(o => o.StorageLocations.Any(l => l is IEditorConfigStorageLocation2))
-                                           .GroupBy(o => (o as IOptionWithGroup)?.Group ?? OptionGroup.Default)
-                                           .OrderBy(g => g.Key.Priority))
-            {
+            foreach (
+                var optionGrouping in options.Where(
+                        o => o.StorageLocations.Any(l => l is IEditorConfigStorageLocation2)
+                    )
+                    .GroupBy(o => (o as IOptionWithGroup)?.Group ?? OptionGroup.Default)
+                    .OrderBy(g => g.Key.Priority)
+            ) {
                 editorconfig.AppendLine($"# {optionGrouping.Key.Description}");
 
-                var optionsAndEditorConfigLocations = optionGrouping.Select(o => (o, o.StorageLocations.OfType<IEditorConfigStorageLocation2>().First()));
+                var optionsAndEditorConfigLocations = optionGrouping.Select(
+                    o => (o, o.StorageLocations.OfType<IEditorConfigStorageLocation2>().First())
+                );
                 var uniqueEntries = new SortedSet<string>();
                 foreach ((var option, var editorConfigLocation) in optionsAndEditorConfigLocations)
                 {
@@ -76,11 +94,16 @@ namespace Microsoft.CodeAnalysis.Options
                 editorconfig.AppendLine();
             }
 
-            string GetEditorConfigString(IOption option, IEditorConfigStorageLocation2 editorConfigLocation)
-            {
+            string GetEditorConfigString(
+                IOption option,
+                IEditorConfigStorageLocation2 editorConfigLocation
+            ) {
                 var optionKey = new OptionKey(option, option.IsPerLanguage ? language : null);
                 var value = optionSet.GetOption(optionKey);
-                var editorConfigString = editorConfigLocation.GetEditorConfigString(value, optionSet);
+                var editorConfigString = editorConfigLocation.GetEditorConfigString(
+                    value,
+                    optionSet
+                );
                 Debug.Assert(!string.IsNullOrEmpty(editorConfigString));
                 return editorConfigString;
             }

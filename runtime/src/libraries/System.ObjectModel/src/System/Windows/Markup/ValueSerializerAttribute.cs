@@ -12,8 +12,19 @@ namespace System.Windows.Markup
     /// with an attached property by placing the attribute on the static accessor for the
     /// attached property.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct | AttributeTargets.Enum | AttributeTargets.Property | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-    [TypeForwardedFrom("WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Interface
+            | AttributeTargets.Struct
+            | AttributeTargets.Enum
+            | AttributeTargets.Property
+            | AttributeTargets.Method,
+        AllowMultiple = false,
+        Inherited = true
+    )]
+    [TypeForwardedFrom(
+        "WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public sealed class ValueSerializerAttribute : Attribute
     {
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
@@ -25,8 +36,10 @@ namespace System.Windows.Markup
         /// Constructor for the ValueSerializerAttribute
         /// </summary>
         /// <param name="valueSerializerType">Type of the value serializer being associated with a type or property</param>
-        public ValueSerializerAttribute([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type valueSerializerType)
-        {
+        public ValueSerializerAttribute(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type valueSerializerType
+        ) {
             _valueSerializerType = valueSerializerType;
         }
 
@@ -34,8 +47,10 @@ namespace System.Windows.Markup
         /// Constructor for the ValueSerializerAttribute
         /// </summary>
         /// <param name="valueSerializerTypeName">Fully qualified type name of the value serializer being associated with a type or property</param>
-        public ValueSerializerAttribute([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] string valueSerializerTypeName)
-        {
+        public ValueSerializerAttribute(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                string valueSerializerTypeName
+        ) {
             _valueSerializerTypeName = valueSerializerTypeName;
         }
 

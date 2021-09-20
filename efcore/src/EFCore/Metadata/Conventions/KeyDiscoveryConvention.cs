@@ -26,17 +26,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///         is configured using the foreign key properties with an extra property that matches the naming convention above.
     ///     </para>
     /// </summary>
-    public class KeyDiscoveryConvention :
-        IEntityTypeAddedConvention,
-        IPropertyAddedConvention,
-        IKeyRemovedConvention,
-        IEntityTypeBaseTypeChangedConvention,
-        IForeignKeyAddedConvention,
-        IForeignKeyRemovedConvention,
-        IForeignKeyPropertiesChangedConvention,
-        IForeignKeyUniquenessChangedConvention,
-        IForeignKeyOwnershipChangedConvention,
-        ISkipNavigationForeignKeyChangedConvention
+    public class KeyDiscoveryConvention
+        : IEntityTypeAddedConvention,
+          IPropertyAddedConvention,
+          IKeyRemovedConvention,
+          IEntityTypeBaseTypeChangedConvention,
+          IForeignKeyAddedConvention,
+          IForeignKeyRemovedConvention,
+          IForeignKeyPropertiesChangedConvention,
+          IForeignKeyUniquenessChangedConvention,
+          IForeignKeyOwnershipChangedConvention,
+          ISkipNavigationForeignKeyChangedConvention
     {
         private const string KeySuffix = "Id";
 
@@ -58,20 +58,25 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         ///     Discovers primary key candidates and configures the primary key if found.
         /// </summary>
         /// <param name="entityTypeBuilder"> The entity type builder. </param>
-        protected virtual void TryConfigurePrimaryKey(IConventionEntityTypeBuilder entityTypeBuilder)
-        {
+        protected virtual void TryConfigurePrimaryKey(
+            IConventionEntityTypeBuilder entityTypeBuilder
+        ) {
             var entityType = entityTypeBuilder.Metadata;
-            if (entityType.BaseType != null
-                || (entityType.IsKeyless && entityType.GetIsKeylessConfigurationSource() != ConfigurationSource.Convention)
-                || !entityTypeBuilder.CanSetPrimaryKey(null))
-            {
+            if (
+                entityType.BaseType != null
+                || (
+                    entityType.IsKeyless
+                    && entityType.GetIsKeylessConfigurationSource()
+                        != ConfigurationSource.Convention
+                )
+                || !entityTypeBuilder.CanSetPrimaryKey(null)
+            ) {
                 return;
             }
 
             List<IConventionProperty>? keyProperties = null;
             var ownership = entityType.FindOwnership();
-            if (ownership != null
-                && ownership.DeclaringEntityType != entityType)
+            if (ownership != null && ownership.DeclaringEntityType != entityType)
             {
                 ownership = null;
             }
@@ -83,29 +88,41 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             if (keyProperties == null)
             {
-                var candidateProperties = entityType.GetProperties().Where(
-                    p => !p.IsImplicitlyCreated()
-                        || !ConfigurationSource.Convention.Overrides(p.GetConfigurationSource()));
+                var candidateProperties = entityType.GetProperties()
+                    .Where(
+                        p =>
+                            !p.IsImplicitlyCreated()
+                            || !ConfigurationSource.Convention.Overrides(p.GetConfigurationSource())
+                    );
                 keyProperties = DiscoverKeyProperties(entityType, candidateProperties).ToList();
                 if (keyProperties.Count > 1)
                 {
-                    Dependencies.Logger.MultiplePrimaryKeyCandidates(keyProperties[0], keyProperties[1]);
+                    Dependencies.Logger.MultiplePrimaryKeyCandidates(
+                        keyProperties[0],
+                        keyProperties[1]
+                    );
                     return;
                 }
             }
 
             if (ownership?.IsUnique == false)
             {
-                if (keyProperties.Count == 0
-                    || ownership.Properties.Contains(keyProperties.First()))
-                {
+                if (
+                    keyProperties.Count == 0 || ownership.Properties.Contains(keyProperties.First())
+                ) {
                     var primaryKey = entityType.FindPrimaryKey();
                     var shadowProperty = primaryKey?.Properties.Last();
-                    if (shadowProperty == null
+                    if (
+                        shadowProperty == null
                         || primaryKey!.Properties.Count == 1
-                        || ownership.Properties.Contains(shadowProperty))
-                    {
-                        shadowProperty = entityTypeBuilder.CreateUniqueProperty(typeof(int), "Id", required: true)!.Metadata;
+                        || ownership.Properties.Contains(shadowProperty)
+                    ) {
+                        shadowProperty =
+                            entityTypeBuilder.CreateUniqueProperty(
+                                typeof(int),
+                                "Id",
+                                required: true
+                            )!.Metadata;
                     }
 
                     keyProperties.Clear();
@@ -121,10 +138,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             if (keyProperties.Count == 0)
             {
                 var manyToManyForeignKeys = entityType.GetForeignKeys()
-                    .Where(fk => fk.GetReferencingSkipNavigations().Any(n => n.IsCollection)).ToList();
-                if (manyToManyForeignKeys.Count == 2
-                    && !manyToManyForeignKeys.Any(fk => fk.PrincipalEntityType == entityType))
-                {
+                    .Where(fk => fk.GetReferencingSkipNavigations().Any(n => n.IsCollection))
+                    .ToList();
+                if (
+                    manyToManyForeignKeys.Count == 2
+                    && !manyToManyForeignKeys.Any(fk => fk.PrincipalEntityType == entityType)
+                ) {
                     keyProperties.AddRange(manyToManyForeignKeys.SelectMany(fk => fk.Properties));
                 }
             }
@@ -157,9 +176,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="entityType"> The entity type being configured. </param>
         protected virtual void ProcessKeyProperties(
             IList<IConventionProperty> keyProperties,
-            IConventionEntityType entityType)
-        {
-        }
+            IConventionEntityType entityType
+        ) { }
 
         /// <summary>
         ///     Returns the properties that should be used for the primary key.
@@ -169,19 +187,23 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <returns> The properties that should be used for the primary key. </returns>
         public static IEnumerable<IConventionProperty> DiscoverKeyProperties(
             IConventionEntityType entityType,
-            IEnumerable<IConventionProperty> candidateProperties)
-        {
+            IEnumerable<IConventionProperty> candidateProperties
+        ) {
             Check.NotNull(entityType, nameof(entityType));
 
             // ReSharper disable PossibleMultipleEnumeration
-            var keyProperties = candidateProperties.Where(p => string.Equals(p.Name, KeySuffix, StringComparison.OrdinalIgnoreCase));
+            var keyProperties = candidateProperties.Where(
+                p => string.Equals(p.Name, KeySuffix, StringComparison.OrdinalIgnoreCase)
+            );
             if (!keyProperties.Any())
             {
                 var entityTypeName = entityType.ShortName();
                 keyProperties = candidateProperties.Where(
-                    p => p.Name.Length == entityTypeName.Length + KeySuffix.Length
+                    p =>
+                        p.Name.Length == entityTypeName.Length + KeySuffix.Length
                         && p.Name.StartsWith(entityTypeName, StringComparison.OrdinalIgnoreCase)
-                        && p.Name.EndsWith(KeySuffix, StringComparison.OrdinalIgnoreCase));
+                        && p.Name.EndsWith(KeySuffix, StringComparison.OrdinalIgnoreCase)
+                );
             }
 
             return keyProperties;
@@ -191,16 +213,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessEntityTypeAdded(
             IConventionEntityTypeBuilder entityTypeBuilder,
-            IConventionContext<IConventionEntityTypeBuilder> context)
-            => TryConfigurePrimaryKey(entityTypeBuilder);
+            IConventionContext<IConventionEntityTypeBuilder> context
+        ) => TryConfigurePrimaryKey(entityTypeBuilder);
 
         /// <inheritdoc />
         public virtual void ProcessEntityTypeBaseTypeChanged(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionEntityType? newBaseType,
             IConventionEntityType? oldBaseType,
-            IConventionContext<IConventionEntityType> context)
-        {
+            IConventionContext<IConventionEntityType> context
+        ) {
             if (entityTypeBuilder.Metadata.BaseType != newBaseType)
             {
                 return;
@@ -212,8 +234,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessPropertyAdded(
             IConventionPropertyBuilder propertyBuilder,
-            IConventionContext<IConventionPropertyBuilder> context)
-        {
+            IConventionContext<IConventionPropertyBuilder> context
+        ) {
             TryConfigurePrimaryKey(propertyBuilder.Metadata.DeclaringEntityType.Builder);
         }
 
@@ -221,8 +243,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessKeyRemoved(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionKey key,
-            IConventionContext<IConventionKey> context)
-        {
+            IConventionContext<IConventionKey> context
+        ) {
             if (entityTypeBuilder.Metadata.FindPrimaryKey() == null)
             {
                 TryConfigurePrimaryKey(entityTypeBuilder);
@@ -232,8 +254,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessForeignKeyAdded(
             IConventionForeignKeyBuilder relationshipBuilder,
-            IConventionContext<IConventionForeignKeyBuilder> context)
-        {
+            IConventionContext<IConventionForeignKeyBuilder> context
+        ) {
             if (relationshipBuilder.Metadata.IsOwnership)
             {
                 TryConfigurePrimaryKey(relationshipBuilder.Metadata.DeclaringEntityType.Builder);
@@ -245,13 +267,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionForeignKeyBuilder relationshipBuilder,
             IReadOnlyList<IConventionProperty> oldDependentProperties,
             IConventionKey oldPrincipalKey,
-            IConventionContext<IReadOnlyList<IConventionProperty>> context)
-        {
+            IConventionContext<IReadOnlyList<IConventionProperty>> context
+        ) {
             var foreignKey = relationshipBuilder.Metadata;
-            if (foreignKey.IsOwnership
+            if (
+                foreignKey.IsOwnership
                 && !foreignKey.Properties.SequenceEqual(oldDependentProperties)
-                && relationshipBuilder.Metadata.IsInModel)
-            {
+                && relationshipBuilder.Metadata.IsInModel
+            ) {
                 TryConfigurePrimaryKey(foreignKey.DeclaringEntityType.Builder);
             }
         }
@@ -259,8 +282,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessForeignKeyOwnershipChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
-            IConventionContext<bool?> context)
-        {
+            IConventionContext<bool?> context
+        ) {
             TryConfigurePrimaryKey(relationshipBuilder.Metadata.DeclaringEntityType.Builder);
         }
 
@@ -268,8 +291,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessForeignKeyRemoved(
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionForeignKey foreignKey,
-            IConventionContext<IConventionForeignKey> context)
-        {
+            IConventionContext<IConventionForeignKey> context
+        ) {
             if (foreignKey.IsOwnership)
             {
                 TryConfigurePrimaryKey(entityTypeBuilder);
@@ -279,8 +302,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessForeignKeyUniquenessChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
-            IConventionContext<bool?> context)
-        {
+            IConventionContext<bool?> context
+        ) {
             if (relationshipBuilder.Metadata.IsOwnership)
             {
                 TryConfigurePrimaryKey(relationshipBuilder.Metadata.DeclaringEntityType.Builder);
@@ -292,11 +315,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionSkipNavigationBuilder skipNavigationBuilder,
             IConventionForeignKey? foreignKey,
             IConventionForeignKey? oldForeignKey,
-            IConventionContext<IConventionForeignKey> context)
-        {
-            var joinEntityTypeBuilder = skipNavigationBuilder.Metadata.ForeignKey?.DeclaringEntityType.Builder;
-            if (joinEntityTypeBuilder != null
-                && skipNavigationBuilder.Metadata.IsCollection)
+            IConventionContext<IConventionForeignKey> context
+        ) {
+            var joinEntityTypeBuilder =
+                skipNavigationBuilder.Metadata.ForeignKey?.DeclaringEntityType.Builder;
+            if (joinEntityTypeBuilder != null && skipNavigationBuilder.Metadata.IsCollection)
             {
                 TryConfigurePrimaryKey(joinEntityTypeBuilder);
             }

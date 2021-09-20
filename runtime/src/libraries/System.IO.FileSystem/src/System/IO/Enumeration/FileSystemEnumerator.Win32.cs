@@ -18,7 +18,11 @@ namespace System.IO.Enumeration
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private unsafe bool GetData()
         {
-            Debug.Assert(_directoryHandle != (IntPtr)(-1) && _directoryHandle != IntPtr.Zero && !_lastEntryFound);
+            Debug.Assert(
+                _directoryHandle != (IntPtr)(-1)
+                    && _directoryHandle != IntPtr.Zero
+                    && !_lastEntryFound
+            );
 
             int status = Interop.NtDll.NtQueryDirectoryFile(
                 FileHandle: _directoryHandle,
@@ -31,7 +35,8 @@ namespace System.IO.Enumeration
                 FileInformationClass: Interop.NtDll.FILE_INFORMATION_CLASS.FileFullDirectoryInformation,
                 ReturnSingleEntry: Interop.BOOLEAN.FALSE,
                 FileName: null,
-                RestartScan: Interop.BOOLEAN.FALSE);
+                RestartScan: Interop.BOOLEAN.FALSE
+            );
 
             switch ((uint)status)
             {
@@ -49,8 +54,10 @@ namespace System.IO.Enumeration
                     int error = (int)Interop.NtDll.RtlNtStatusToDosError(status);
 
                     // Note that there are many NT status codes that convert to ERROR_ACCESS_DENIED.
-                    if ((error == Interop.Errors.ERROR_ACCESS_DENIED && _options.IgnoreInaccessible) || ContinueOnError(error))
-                    {
+                    if (
+                        (error == Interop.Errors.ERROR_ACCESS_DENIED && _options.IgnoreInaccessible)
+                        || ContinueOnError(error)
+                    ) {
                         DirectoryFinished();
                         return false;
                     }
@@ -58,15 +65,20 @@ namespace System.IO.Enumeration
             }
         }
 
-        private unsafe IntPtr CreateRelativeDirectoryHandle(ReadOnlySpan<char> relativePath, string fullPath)
-        {
+        private unsafe IntPtr CreateRelativeDirectoryHandle(
+            ReadOnlySpan<char> relativePath,
+            string fullPath
+        ) {
             (int status, IntPtr handle) = Interop.NtDll.CreateFile(
                 relativePath,
                 _directoryHandle,
                 Interop.NtDll.CreateDisposition.FILE_OPEN,
-                Interop.NtDll.DesiredAccess.FILE_LIST_DIRECTORY | Interop.NtDll.DesiredAccess.SYNCHRONIZE,
-                createOptions: Interop.NtDll.CreateOptions.FILE_SYNCHRONOUS_IO_NONALERT | Interop.NtDll.CreateOptions.FILE_DIRECTORY_FILE
-                    | Interop.NtDll.CreateOptions.FILE_OPEN_FOR_BACKUP_INTENT);
+                Interop.NtDll.DesiredAccess.FILE_LIST_DIRECTORY
+                    | Interop.NtDll.DesiredAccess.SYNCHRONIZE,
+                createOptions: Interop.NtDll.CreateOptions.FILE_SYNCHRONOUS_IO_NONALERT
+                    | Interop.NtDll.CreateOptions.FILE_DIRECTORY_FILE
+                    | Interop.NtDll.CreateOptions.FILE_OPEN_FOR_BACKUP_INTENT
+            );
 
             switch ((uint)status)
             {

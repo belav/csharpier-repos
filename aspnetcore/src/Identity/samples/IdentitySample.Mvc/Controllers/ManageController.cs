@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 
 namespace IdentitySamples.Controllers
 {
-
     [Authorize]
     public class ManageController : Controller
     {
@@ -21,12 +20,12 @@ namespace IdentitySamples.Controllers
         private readonly ILogger _logger;
 
         public ManageController(
-        UserManager<ApplicationUser> userManager,
-        SignInManager<ApplicationUser> signInManager,
-        IEmailSender emailSender,
-        ISmsSender smsSender,
-        ILoggerFactory loggerFactory)
-        {
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            IEmailSender emailSender,
+            ISmsSender smsSender,
+            ILoggerFactory loggerFactory
+        ) {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -40,13 +39,19 @@ namespace IdentitySamples.Controllers
         public async Task<IActionResult> Index(ManageMessageId? message = null)
         {
             ViewData["StatusMessage"] =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
-                : "";
+                message == ManageMessageId.ChangePasswordSuccess
+                    ? "Your password has been changed."
+                    : message == ManageMessageId.SetPasswordSuccess
+                        ? "Your password has been set."
+                        : message == ManageMessageId.SetTwoFactorSuccess
+                            ? "Your two-factor authentication provider has been set."
+                            : message == ManageMessageId.Error
+                                ? "An error has occurred."
+                                : message == ManageMessageId.AddPhoneSuccess
+                                    ? "Your phone number was added."
+                                    : message == ManageMessageId.RemovePhoneSuccess
+                                        ? "Your phone number was removed."
+                                        : "";
 
             var user = await GetCurrentUserAsync();
             var model = new IndexViewModel
@@ -71,7 +76,11 @@ namespace IdentitySamples.Controllers
             var user = await GetCurrentUserAsync();
             if (user != null)
             {
-                var result = await _userManager.RemoveLoginAsync(user, account.LoginProvider, account.ProviderKey);
+                var result = await _userManager.RemoveLoginAsync(
+                    user,
+                    account.LoginProvider,
+                    account.ProviderKey
+                );
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
@@ -100,9 +109,15 @@ namespace IdentitySamples.Controllers
             }
             // Generate the token and send it
             var user = await GetCurrentUserAsync();
-            var code = await _userManager.GenerateChangePhoneNumberTokenAsync(user, model.PhoneNumber);
+            var code = await _userManager.GenerateChangePhoneNumberTokenAsync(
+                user,
+                model.PhoneNumber
+            );
             await _smsSender.SendSmsAsync(model.PhoneNumber, "Your security code is: " + code);
-            return RedirectToAction(nameof(VerifyPhoneNumber), new { PhoneNumber = model.PhoneNumber });
+            return RedirectToAction(
+                nameof(VerifyPhoneNumber),
+                new { PhoneNumber = model.PhoneNumber }
+            );
         }
 
         //
@@ -131,7 +146,10 @@ namespace IdentitySamples.Controllers
             {
                 var codes = await _userManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 5);
                 _logger.LogInformation(1, "User generated new recovery code.");
-                return View("DisplayRecoveryCodes", new DisplayRecoveryCodesViewModel { Codes = codes });
+                return View(
+                    "DisplayRecoveryCodes",
+                    new DisplayRecoveryCodesViewModel { Codes = codes }
+                );
             }
             return View("Error");
         }
@@ -173,9 +191,14 @@ namespace IdentitySamples.Controllers
         [HttpGet]
         public async Task<IActionResult> VerifyPhoneNumber(string phoneNumber)
         {
-            var code = await _userManager.GenerateChangePhoneNumberTokenAsync(await GetCurrentUserAsync(), phoneNumber);
+            var code = await _userManager.GenerateChangePhoneNumberTokenAsync(
+                await GetCurrentUserAsync(),
+                phoneNumber
+            );
             // Send an SMS to verify the phone number
-            return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
+            return phoneNumber == null
+              ? View("Error")
+              : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
         }
 
         //
@@ -191,11 +214,18 @@ namespace IdentitySamples.Controllers
             var user = await GetCurrentUserAsync();
             if (user != null)
             {
-                var result = await _userManager.ChangePhoneNumberAsync(user, model.PhoneNumber, model.Code);
+                var result = await _userManager.ChangePhoneNumberAsync(
+                    user,
+                    model.PhoneNumber,
+                    model.Code
+                );
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.AddPhoneSuccess });
+                    return RedirectToAction(
+                        nameof(Index),
+                        new { Message = ManageMessageId.AddPhoneSuccess }
+                    );
                 }
             }
             // If we got this far, something failed, redisplay the form
@@ -216,7 +246,10 @@ namespace IdentitySamples.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.RemovePhoneSuccess });
+                    return RedirectToAction(
+                        nameof(Index),
+                        new { Message = ManageMessageId.RemovePhoneSuccess }
+                    );
                 }
             }
             return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
@@ -243,12 +276,19 @@ namespace IdentitySamples.Controllers
             var user = await GetCurrentUserAsync();
             if (user != null)
             {
-                var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                var result = await _userManager.ChangePasswordAsync(
+                    user,
+                    model.OldPassword,
+                    model.NewPassword
+                );
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User changed their password successfully.");
-                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.ChangePasswordSuccess });
+                    return RedirectToAction(
+                        nameof(Index),
+                        new { Message = ManageMessageId.ChangePasswordSuccess }
+                    );
                 }
                 AddErrors(result);
                 return View(model);
@@ -282,7 +322,10 @@ namespace IdentitySamples.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.SetPasswordSuccess });
+                    return RedirectToAction(
+                        nameof(Index),
+                        new { Message = ManageMessageId.SetPasswordSuccess }
+                    );
                 }
                 AddErrors(result);
                 return View(model);
@@ -295,10 +338,11 @@ namespace IdentitySamples.Controllers
         public async Task<IActionResult> ManageLogins(ManageMessageId? message = null)
         {
             ViewData["StatusMessage"] =
-                message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
-                : message == ManageMessageId.AddLoginSuccess ? "The external login was added."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : "";
+                message == ManageMessageId.RemoveLoginSuccess
+                    ? "The external login was removed."
+                    : message == ManageMessageId.AddLoginSuccess
+                        ? "The external login was added."
+                        : message == ManageMessageId.Error ? "An error has occurred." : "";
             var user = await GetCurrentUserAsync();
             if (user == null)
             {
@@ -306,13 +350,14 @@ namespace IdentitySamples.Controllers
             }
             var userLogins = await _userManager.GetLoginsAsync(user);
             var schemes = await _signInManager.GetExternalAuthenticationSchemesAsync();
-            var otherLogins = schemes.Where(auth => userLogins.All(ul => auth.Name != ul.LoginProvider)).ToList();
+            var otherLogins = schemes.Where(
+                    auth => userLogins.All(ul => auth.Name != ul.LoginProvider)
+                )
+                .ToList();
             ViewData["ShowRemoveButton"] = user.PasswordHash != null || userLogins.Count > 1;
-            return View(new ManageLoginsViewModel
-            {
-                CurrentLogins = userLogins,
-                OtherLogins = otherLogins
-            });
+            return View(
+                new ManageLoginsViewModel { CurrentLogins = userLogins, OtherLogins = otherLogins }
+            );
         }
 
         //
@@ -323,7 +368,11 @@ namespace IdentitySamples.Controllers
         {
             // Request a redirect to the external login provider to link a login for the current user
             var redirectUrl = Url.Action("LinkLoginCallback", "Manage");
-            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl, _userManager.GetUserId(User));
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties(
+                provider,
+                redirectUrl,
+                _userManager.GetUserId(User)
+            );
             return Challenge(properties, provider);
         }
 
@@ -337,13 +386,20 @@ namespace IdentitySamples.Controllers
             {
                 return View("Error");
             }
-            var info = await _signInManager.GetExternalLoginInfoAsync(await _userManager.GetUserIdAsync(user));
+            var info = await _signInManager.GetExternalLoginInfoAsync(
+                await _userManager.GetUserIdAsync(user)
+            );
             if (info == null)
             {
-                return RedirectToAction(nameof(ManageLogins), new { Message = ManageMessageId.Error });
+                return RedirectToAction(
+                    nameof(ManageLogins),
+                    new { Message = ManageMessageId.Error }
+                );
             }
             var result = await _userManager.AddLoginAsync(user, info);
-            var message = result.Succeeded ? ManageMessageId.AddLoginSuccess : ManageMessageId.Error;
+            var message = result.Succeeded
+                ? ManageMessageId.AddLoginSuccess
+                : ManageMessageId.Error;
             return RedirectToAction(nameof(ManageLogins), new { Message = message });
         }
 
@@ -373,7 +429,6 @@ namespace IdentitySamples.Controllers
         {
             return _userManager.GetUserAsync(HttpContext.User);
         }
-
         #endregion
     }
 }

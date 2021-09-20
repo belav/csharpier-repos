@@ -23,11 +23,12 @@ namespace Microsoft.AspNetCore.HeaderPropagation.Tests
 
             Configuration = new HeaderPropagationMessageHandlerOptions();
 
-            var headerPropagationMessageHandler =
-                new HeaderPropagationMessageHandler(Configuration, State)
-                {
-                    InnerHandler = Handler
-                };
+            var headerPropagationMessageHandler = new HeaderPropagationMessageHandler(
+                Configuration,
+                State
+            ) {
+                InnerHandler = Handler
+            };
 
             Client = new HttpClient(headerPropagationMessageHandler)
             {
@@ -77,11 +78,16 @@ namespace Microsoft.AspNetCore.HeaderPropagation.Tests
             State.Headers.Add("Content-Type", "test");
 
             // Act
-            await Client.SendAsync(new HttpRequestMessage() { Content = new StringContent("test") });
+            await Client.SendAsync(
+                new HttpRequestMessage() { Content = new StringContent("test") }
+            );
 
             // Assert
             Assert.True(Handler.Content.Headers.Contains("Content-Type"));
-            Assert.Equal(new[] { "text/plain; charset=utf-8" }, Handler.Content.Headers.GetValues("Content-Type"));
+            Assert.Equal(
+                new[] { "text/plain; charset=utf-8" },
+                Handler.Content.Headers.GetValues("Content-Type")
+            );
         }
 
         [Fact]
@@ -91,7 +97,9 @@ namespace Microsoft.AspNetCore.HeaderPropagation.Tests
             State.Headers.Add("Content-Language", "test");
 
             // Act
-            await Client.SendAsync(new HttpRequestMessage() { Content = new StringContent("test") });
+            await Client.SendAsync(
+                new HttpRequestMessage() { Content = new StringContent("test") }
+            );
 
             // Assert
             Assert.True(Handler.Content.Headers.Contains("Content-Language"));
@@ -105,11 +113,16 @@ namespace Microsoft.AspNetCore.HeaderPropagation.Tests
             State.Headers.Add("Content-Language", new[] { "one", "two" });
 
             // Act
-            await Client.SendAsync(new HttpRequestMessage() { Content = new StringContent("test") });
+            await Client.SendAsync(
+                new HttpRequestMessage() { Content = new StringContent("test") }
+            );
 
             // Assert
             Assert.True(Handler.Content.Headers.Contains("Content-Language"));
-            Assert.Equal(new[] { "one", "two" }, Handler.Content.Headers.GetValues("Content-Language"));
+            Assert.Equal(
+                new[] { "one", "two" },
+                Handler.Content.Headers.GetValues("Content-Language")
+            );
         }
 
         [Fact]
@@ -192,9 +205,10 @@ namespace Microsoft.AspNetCore.HeaderPropagation.Tests
         [InlineData("", new[] { "" })]
         [InlineData(null, new[] { "" })]
         [InlineData("42", new[] { "42" })]
-        public async Task HeaderInState_HeaderAlreadyInOutgoingRequest_DoesNotOverrideIt(string outgoingValue,
-            string[] expectedValues)
-        {
+        public async Task HeaderInState_HeaderAlreadyInOutgoingRequest_DoesNotOverrideIt(
+            string outgoingValue,
+            string[] expectedValues
+        ) {
             // Arrange
             State.Headers.Add("inout", "test");
             Configuration.Headers.Add("inout");
@@ -266,9 +280,10 @@ namespace Microsoft.AspNetCore.HeaderPropagation.Tests
             public HttpHeaders Headers { get; private set; }
             public HttpContent Content { get; private set; }
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
-                CancellationToken cancellationToken)
-            {
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            ) {
                 Headers = request.Headers;
                 Content = request.Content;
                 return Task.FromResult(new HttpResponseMessage());

@@ -22,13 +22,13 @@ namespace System.Transactions
             set { _isolationLevel = value; }
         }
 
-        public override int GetHashCode() => base.GetHashCode();  // Don't have anything better to do.
+        public override int GetHashCode() => base.GetHashCode(); // Don't have anything better to do.
 
-        public override bool Equals([NotNullWhen(true)] object? obj) => obj is TransactionOptions transactionOptions && Equals(transactionOptions);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is TransactionOptions transactionOptions && Equals(transactionOptions);
 
         private bool Equals(TransactionOptions other) =>
-            _timeout == other._timeout &&
-            _isolationLevel == other._isolationLevel;
+            _timeout == other._timeout && _isolationLevel == other._isolationLevel;
 
         public static bool operator ==(TransactionOptions x, TransactionOptions y) => x.Equals(y);
 

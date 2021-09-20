@@ -12,13 +12,21 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
     {
         internal static void TryWriteActivityLogToFile(string filePath)
         {
-            var vsAppDataDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft", "VisualStudio");
+            var vsAppDataDirectory = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "Microsoft",
+                "VisualStudio"
+            );
             if (!Directory.Exists(vsAppDataDirectory))
                 return;
 
             var content = new StringBuilder();
-            foreach (var folder in Directory.GetDirectories(vsAppDataDirectory, $"{Settings.Default.VsProductVersion}*{Settings.Default.VsRootSuffix}"))
-            {
+            foreach (
+                var folder in Directory.GetDirectories(
+                    vsAppDataDirectory,
+                    $"{Settings.Default.VsProductVersion}*{Settings.Default.VsRootSuffix}"
+                )
+            ) {
                 var activityLog = Path.Combine(folder, "ActivityLog.xml");
                 if (File.Exists(activityLog))
                 {

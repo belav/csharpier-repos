@@ -13,7 +13,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         {
             // Arrange
             var numbers = new[] { 10, 20 };
-            var delegatingEnumerable = new DelegatingEnumerable<int, int>(numbers, elementWrapperProvider: null);
+            var delegatingEnumerable = new DelegatingEnumerable<int, int>(
+                numbers,
+                elementWrapperProvider: null
+            );
 
             // Act and Assert
             Assert.Equal(numbers, delegatingEnumerable);
@@ -23,8 +26,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         public void DoesNotThrowOn_EmptyCollections_NonWrappableElementTypes()
         {
             // Arrange
-            var numbers = new int[] { };
-            var delegatingEnumerable = new DelegatingEnumerable<int, int>(numbers, elementWrapperProvider: null);
+            var numbers = new int[] {  };
+            var delegatingEnumerable = new DelegatingEnumerable<int, int>(
+                numbers,
+                elementWrapperProvider: null
+            );
 
             // Act and Assert
             Assert.Empty(delegatingEnumerable);
@@ -39,9 +45,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             var error2 = new SerializableError();
             error2.Add("key1", "key1-error");
             var errors = new[] { error1, error2 };
-            var delegatingEnumerable = new DelegatingEnumerable<SerializableErrorWrapper, SerializableError>(
-                                                    errors,
-                                                    new SerializableErrorWrapperProvider());
+            var delegatingEnumerable = new DelegatingEnumerable<
+                SerializableErrorWrapper,
+                SerializableError
+            >(errors, new SerializableErrorWrapperProvider());
 
             // Act and Assert
             Assert.Equal(errors.Length, delegatingEnumerable.Count());
@@ -60,9 +67,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         public void DoesNotThrowOn_EmptyCollections_WrappableElementTypes()
         {
             // Arrange
-            var errors = new SerializableError[] { };
-            var delegatingEnumerable = new DelegatingEnumerable<SerializableErrorWrapper, SerializableError>(
-                                                    errors, new SerializableErrorWrapperProvider());
+            var errors = new SerializableError[] {  };
+            var delegatingEnumerable = new DelegatingEnumerable<
+                SerializableErrorWrapper,
+                SerializableError
+            >(errors, new SerializableErrorWrapperProvider());
 
             // Act and Assert
             Assert.Empty(delegatingEnumerable);

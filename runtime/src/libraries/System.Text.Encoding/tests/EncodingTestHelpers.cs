@@ -7,8 +7,13 @@ namespace System.Text.Tests
 {
     public static class EncodingHelpers
     {
-        public static void Encode(Encoding encoding, string chars, int index, int count, byte[] expected)
-        {
+        public static void Encode(
+            Encoding encoding,
+            string chars,
+            int index,
+            int count,
+            byte[] expected
+        ) {
             GetByteCount(encoding, chars, index, count, expected.Length);
             GetBytes(encoding, chars, index, count, expected);
 
@@ -16,8 +21,13 @@ namespace System.Text.Tests
             GetBytes_NetCoreApp(encoding, chars, index, count, expected);
         }
 
-        private static unsafe void GetByteCount(Encoding encoding, string chars, int index, int count, int expected)
-        {
+        private static unsafe void GetByteCount(
+            Encoding encoding,
+            string chars,
+            int index,
+            int count,
+            int expected
+        ) {
             char[] charArray = chars.ToCharArray();
             if (index == 0 && count == chars.Length)
             {
@@ -36,15 +46,28 @@ namespace System.Text.Tests
             }
         }
 
-        private static void GetBytes(Encoding encoding, string source, int index, int count, byte[] expectedBytes)
-        {
+        private static void GetBytes(
+            Encoding encoding,
+            string source,
+            int index,
+            int count,
+            byte[] expectedBytes
+        ) {
             byte[] fullArray = new byte[expectedBytes.Length + 4];
             for (int i = 0; i < fullArray.Length; i++)
             {
                 fullArray[i] = (byte)i;
             }
 
-            VerifyGetBytes(encoding, source, index, count, new byte[expectedBytes.Length], 0, expectedBytes);
+            VerifyGetBytes(
+                encoding,
+                source,
+                index,
+                count,
+                new byte[expectedBytes.Length],
+                0,
+                expectedBytes
+            );
             VerifyGetBytes(encoding, source, index, count, fullArray, 2, expectedBytes);
 
             if (count == 0)
@@ -56,36 +79,59 @@ namespace System.Text.Tests
 
         public static bool IsLatin1(this Encoding encoding)
         {
-            return encoding != null
-                && encoding.CodePage == 28591; // hardcoded Latin-1 code page
+            return encoding != null && encoding.CodePage == 28591; // hardcoded Latin-1 code page
         }
 
         public static bool IsLatin1BestFitFallback(this EncoderFallback fallback)
         {
             // We rely on the type name because the type itself isn't public.
 
-            return fallback != null
-                && fallback.GetType().Name == "EncoderLatin1BestFitFallback";
+            return fallback != null && fallback.GetType().Name == "EncoderLatin1BestFitFallback";
         }
 
-        private static unsafe void VerifyGetBytes(Encoding encoding, string source, int index, int count, byte[] bytes, int byteIndex, byte[] expectedBytes)
-        {
+        private static unsafe void VerifyGetBytes(
+            Encoding encoding,
+            string source,
+            int index,
+            int count,
+            byte[] bytes,
+            int byteIndex,
+            byte[] expectedBytes
+        ) {
             byte[] originalBytes = (byte[])bytes.Clone();
 
             if (index == 0 && count == source.Length)
             {
                 // Use GetBytes(string)
                 byte[] stringResultBasic = encoding.GetBytes(source);
-                VerifyGetBytes(stringResultBasic, 0, stringResultBasic.Length, originalBytes, expectedBytes);
+                VerifyGetBytes(
+                    stringResultBasic,
+                    0,
+                    stringResultBasic.Length,
+                    originalBytes,
+                    expectedBytes
+                );
 
                 // Use GetBytes(char[])
                 byte[] charArrayResultBasic = encoding.GetBytes(source.ToCharArray());
-                VerifyGetBytes(charArrayResultBasic, 0, charArrayResultBasic.Length, originalBytes, expectedBytes);
+                VerifyGetBytes(
+                    charArrayResultBasic,
+                    0,
+                    charArrayResultBasic.Length,
+                    originalBytes,
+                    expectedBytes
+                );
             }
 
             // Use GetBytes(char[], int, int)
             byte[] charArrayResultAdvanced = encoding.GetBytes(source.ToCharArray(), index, count);
-            VerifyGetBytes(charArrayResultAdvanced, 0, charArrayResultAdvanced.Length, originalBytes, expectedBytes);
+            VerifyGetBytes(
+                charArrayResultAdvanced,
+                0,
+                charArrayResultAdvanced.Length,
+                originalBytes,
+                expectedBytes
+            );
 
             // Use GetBytes(string, int, int, byte[], int)
             byte[] stringBytes = (byte[])bytes.Clone();
@@ -95,26 +141,53 @@ namespace System.Text.Tests
 
             // Use GetBytes(char[], int, int, byte[], int)
             byte[] charArrayBytes = (byte[])bytes.Clone();
-            int charArrayByteCount = encoding.GetBytes(source.ToCharArray(), index, count, charArrayBytes, byteIndex);
-            VerifyGetBytes(charArrayBytes, byteIndex, charArrayByteCount, originalBytes, expectedBytes);
+            int charArrayByteCount = encoding.GetBytes(
+                source.ToCharArray(),
+                index,
+                count,
+                charArrayBytes,
+                byteIndex
+            );
+            VerifyGetBytes(
+                charArrayBytes,
+                byteIndex,
+                charArrayByteCount,
+                originalBytes,
+                expectedBytes
+            );
             Assert.Equal(expectedBytes.Length, charArrayByteCount);
 
             // Use GetBytes(char*, int, byte*, int) - only works for non-null/non-empty char* or byte*
             if (expectedBytes.Length > 0)
             {
                 byte[] charPointerBytes = (byte[])bytes.Clone();
-                fixed (char* pChars = source.ToCharArray())
-                fixed (byte* pBytes = charPointerBytes)
+                fixed (char* pChars = source.ToCharArray())fixed (byte* pBytes = charPointerBytes)
                 {
-                    int charPointerByteCount = encoding.GetBytes(pChars + index, count, pBytes + byteIndex, charPointerBytes.Length - byteIndex);
+                    int charPointerByteCount = encoding.GetBytes(
+                        pChars + index,
+                        count,
+                        pBytes + byteIndex,
+                        charPointerBytes.Length - byteIndex
+                    );
                     Assert.Equal(expectedBytes.Length, charPointerByteCount);
                 }
-                VerifyGetBytes(charPointerBytes, byteIndex, charArrayByteCount, originalBytes, expectedBytes);
+                VerifyGetBytes(
+                    charPointerBytes,
+                    byteIndex,
+                    charArrayByteCount,
+                    originalBytes,
+                    expectedBytes
+                );
             }
         }
 
-        private static void VerifyGetBytes(byte[] bytes, int byteIndex, int byteCount, byte[] originalBytes, byte[] expectedBytes)
-        {
+        private static void VerifyGetBytes(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            byte[] originalBytes,
+            byte[] expectedBytes
+        ) {
             for (int i = 0; i < byteIndex; i++)
             {
                 // Bytes outside the range should be ignored
@@ -131,8 +204,13 @@ namespace System.Text.Tests
             }
         }
 
-        public static void Decode(Encoding encoding, byte[] bytes, int index, int count, string expected)
-        {
+        public static void Decode(
+            Encoding encoding,
+            byte[] bytes,
+            int index,
+            int count,
+            string expected
+        ) {
             GetCharCount(encoding, bytes, index, count, expected.Length);
             GetChars(encoding, bytes, index, count, expected.ToCharArray());
             GetString(encoding, bytes, index, count, expected);
@@ -141,8 +219,13 @@ namespace System.Text.Tests
             GetString_NetCoreApp(encoding, bytes, index, count, expected);
         }
 
-        private static unsafe void GetCharCount(Encoding encoding, byte[] bytes, int index, int count, int expected)
-        {
+        private static unsafe void GetCharCount(
+            Encoding encoding,
+            byte[] bytes,
+            int index,
+            int count,
+            int expected
+        ) {
             if (index == 0 && count == bytes.Length)
             {
                 // Use GetCharCount(byte[])
@@ -161,15 +244,28 @@ namespace System.Text.Tests
             }
         }
 
-        private static void GetChars(Encoding encoding, byte[] bytes, int index, int count, char[] expectedChars)
-        {
+        private static void GetChars(
+            Encoding encoding,
+            byte[] bytes,
+            int index,
+            int count,
+            char[] expectedChars
+        ) {
             char[] fullArray = new char[expectedChars.Length + 4];
             for (int i = 0; i < fullArray.Length; i++)
             {
                 fullArray[i] = (char)i;
             }
 
-            VerifyGetChars(encoding, bytes, index, count, new char[expectedChars.Length], 0, expectedChars);
+            VerifyGetChars(
+                encoding,
+                bytes,
+                index,
+                count,
+                new char[expectedChars.Length],
+                0,
+                expectedChars
+            );
             VerifyGetChars(encoding, bytes, index, count, fullArray, 2, expectedChars);
 
             if (count == 0)
@@ -179,8 +275,15 @@ namespace System.Text.Tests
             }
         }
 
-        private static unsafe void VerifyGetChars(Encoding encoding, byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex, char[] expectedChars)
-        {
+        private static unsafe void VerifyGetChars(
+            Encoding encoding,
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex,
+            char[] expectedChars
+        ) {
             char[] originalChars = (char[])chars.Clone();
 
             // Use GetChars(byte[])
@@ -204,20 +307,43 @@ namespace System.Text.Tests
             if (expectedChars.Length > 0)
             {
                 char[] bytePointerChars = (char[])chars.Clone();
-                fixed (byte* pBytes = bytes)
-                fixed (char* pChars = bytePointerChars)
+                fixed (byte* pBytes = bytes)fixed (char* pChars = bytePointerChars)
                 {
-                    int charPointerCount = encoding.GetChars(pBytes + byteIndex, byteCount, pChars + charIndex, bytePointerChars.Length - charIndex);
+                    int charPointerCount = encoding.GetChars(
+                        pBytes + byteIndex,
+                        byteCount,
+                        pChars + charIndex,
+                        bytePointerChars.Length - charIndex
+                    );
                     Assert.Equal(expectedChars.Length, charPointerCount);
                 }
-                VerifyGetChars(bytePointerChars, charIndex, charCount, originalChars, expectedChars);
+                VerifyGetChars(
+                    bytePointerChars,
+                    charIndex,
+                    charCount,
+                    originalChars,
+                    expectedChars
+                );
             }
 
-            VerifyGetChars_NetCoreApp(encoding, bytes, byteIndex, byteCount, chars, charIndex, expectedChars);
+            VerifyGetChars_NetCoreApp(
+                encoding,
+                bytes,
+                byteIndex,
+                byteCount,
+                chars,
+                charIndex,
+                expectedChars
+            );
         }
 
-        private static void VerifyGetChars(char[] chars, int charIndex, int charCount, char[] originalChars, char[] expectedChars)
-        {
+        private static void VerifyGetChars(
+            char[] chars,
+            int charIndex,
+            int charCount,
+            char[] originalChars,
+            char[] expectedChars
+        ) {
             for (int i = 0; i < charIndex; i++)
             {
                 // Chars outside the range should be ignored
@@ -234,8 +360,13 @@ namespace System.Text.Tests
             }
         }
 
-        private static void GetString(Encoding encoding, byte[] bytes, int index, int count, string expected)
-        {
+        private static void GetString(
+            Encoding encoding,
+            byte[] bytes,
+            int index,
+            int count,
+            string expected
+        ) {
             if (index == 0 && count == bytes.Length)
             {
                 // Use GetString(byte[])
@@ -245,8 +376,13 @@ namespace System.Text.Tests
             Assert.Equal(expected, encoding.GetString(bytes, index, count));
         }
 
-        static void GetByteCount_NetCoreApp(Encoding encoding, string chars, int index, int count, int expected)
-        {
+        static void GetByteCount_NetCoreApp(
+            Encoding encoding,
+            string chars,
+            int index,
+            int count,
+            int expected
+        ) {
             // Use GetByteCount(string, int, int)
             Assert.Equal(expected, encoding.GetByteCount(chars, index, count));
 
@@ -257,47 +393,96 @@ namespace System.Text.Tests
                 Assert.Equal(expected, encoding.GetByteCount(ReadOnlySpan<char>.Empty));
         }
 
-        static void GetBytes_NetCoreApp(Encoding encoding, string chars, int index, int count, byte[] expected)
-        {
+        static void GetBytes_NetCoreApp(
+            Encoding encoding,
+            string chars,
+            int index,
+            int count,
+            byte[] expected
+        ) {
             // Use GetBytes(string, int, int)
             byte[] stringResultAdvanced = encoding.GetBytes(chars, index, count);
-            VerifyGetBytes(stringResultAdvanced, 0, stringResultAdvanced.Length, new byte[expected.Length], expected);
+            VerifyGetBytes(
+                stringResultAdvanced,
+                0,
+                stringResultAdvanced.Length,
+                new byte[expected.Length],
+                expected
+            );
 
             // Use GetBytes(ReadOnlySpan<char>, Span<byte>)
             Array.Clear(stringResultAdvanced, 0, stringResultAdvanced.Length);
-            Assert.Equal(expected.Length, encoding.GetBytes(chars.AsSpan(index, count), (Span<byte>)stringResultAdvanced));
-            VerifyGetBytes(stringResultAdvanced, 0, stringResultAdvanced.Length, new byte[expected.Length], expected);
+            Assert.Equal(
+                expected.Length,
+                encoding.GetBytes(chars.AsSpan(index, count), (Span<byte>)stringResultAdvanced)
+            );
+            VerifyGetBytes(
+                stringResultAdvanced,
+                0,
+                stringResultAdvanced.Length,
+                new byte[expected.Length],
+                expected
+            );
 
             if (count == 0)
-                Assert.Equal(expected.Length, encoding.GetBytes(ReadOnlySpan<char>.Empty, (Span<byte>)stringResultAdvanced));
+                Assert.Equal(
+                    expected.Length,
+                    encoding.GetBytes(ReadOnlySpan<char>.Empty, (Span<byte>)stringResultAdvanced)
+                );
         }
 
-        static void GetCharCount_NetCoreApp(Encoding encoding, byte[] bytes, int index, int count, int expected)
-        {
+        static void GetCharCount_NetCoreApp(
+            Encoding encoding,
+            byte[] bytes,
+            int index,
+            int count,
+            int expected
+        ) {
             // Use GetCharCount(ReadOnlySpan<byte>)
-            Assert.Equal(expected, encoding.GetCharCount(new ReadOnlySpan<byte>(bytes, index, count)));
+            Assert.Equal(
+                expected,
+                encoding.GetCharCount(new ReadOnlySpan<byte>(bytes, index, count))
+            );
 
             if (count == 0)
                 Assert.Equal(expected, encoding.GetCharCount(ReadOnlySpan<byte>.Empty));
         }
 
-        static void VerifyGetChars_NetCoreApp(Encoding encoding, byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex, char[] expectedChars)
-        {
+        static void VerifyGetChars_NetCoreApp(
+            Encoding encoding,
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex,
+            char[] expectedChars
+        ) {
             // Use GetChars(ReadOnlySpan<byte>, Span<char>)
             char[] byteChars = (char[])chars.Clone();
-            int charCount = encoding.GetChars(new ReadOnlySpan<byte>(bytes, byteIndex, byteCount), new Span<char>(byteChars).Slice(charIndex));
+            int charCount = encoding.GetChars(
+                new ReadOnlySpan<byte>(bytes, byteIndex, byteCount),
+                new Span<char>(byteChars).Slice(charIndex)
+            );
             VerifyGetChars(byteChars, charIndex, charCount, (char[])chars.Clone(), expectedChars);
             Assert.Equal(expectedChars.Length, charCount);
 
             if (byteCount == 0)
             {
-                charCount = encoding.GetChars(ReadOnlySpan<byte>.Empty, new Span<char>(byteChars).Slice(charIndex));
+                charCount = encoding.GetChars(
+                    ReadOnlySpan<byte>.Empty,
+                    new Span<char>(byteChars).Slice(charIndex)
+                );
                 Assert.Equal(expectedChars.Length, charCount);
             }
         }
 
-        static void GetString_NetCoreApp(Encoding encoding, byte[] bytes, int index, int count, string expected)
-        {
+        static void GetString_NetCoreApp(
+            Encoding encoding,
+            byte[] bytes,
+            int index,
+            int count,
+            string expected
+        ) {
             // Use GetString(ReadOnlySpan<byte>)
             Assert.Equal(expected, encoding.GetString(new ReadOnlySpan<byte>(bytes, index, count)));
 

@@ -20,8 +20,12 @@ namespace System.Net.Http
         /// <param name="destination">The destination stream to which to copy.</param>
         /// <param name="bufferSize">The size of the buffer to allocate if one needs to be allocated. If zero, use the default buffer size.</param>
         /// <param name="disposeSource">Whether to dispose of the source stream after the copy has finished successfully.</param>
-        public static void Copy(Stream source, Stream destination, int bufferSize, bool disposeSource)
-        {
+        public static void Copy(
+            Stream source,
+            Stream destination,
+            int bufferSize,
+            bool disposeSource
+        ) {
             Debug.Assert(source != null);
             Debug.Assert(destination != null);
             Debug.Assert(bufferSize >= 0);
@@ -47,17 +51,23 @@ namespace System.Net.Http
         /// <param name="bufferSize">The size of the buffer to allocate if one needs to be allocated. If zero, use the default buffer size.</param>
         /// <param name="disposeSource">Whether to dispose of the source stream after the copy has finished successfully.</param>
         /// <param name="cancellationToken">CancellationToken used to cancel the copy operation.</param>
-        public static Task CopyAsync(Stream source, Stream destination, int bufferSize, bool disposeSource, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        public static Task CopyAsync(
+            Stream source,
+            Stream destination,
+            int bufferSize,
+            bool disposeSource,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             Debug.Assert(source != null);
             Debug.Assert(destination != null);
             Debug.Assert(bufferSize >= 0);
 
             try
             {
-                Task copyTask = bufferSize == 0 ?
-                    source.CopyToAsync(destination, cancellationToken) :
-                    source.CopyToAsync(destination, bufferSize, cancellationToken);
+                Task copyTask =
+                    bufferSize == 0
+                        ? source.CopyToAsync(destination, cancellationToken)
+                        : source.CopyToAsync(destination, bufferSize, cancellationToken);
 
                 if (!disposeSource)
                 {
@@ -102,7 +112,8 @@ namespace System.Net.Http
             catch (Exception e)
             {
                 // Dispose() should never throw, but since we're on an async codepath, make sure to catch the exception.
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(null, e);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(null, e);
             }
         }
     }

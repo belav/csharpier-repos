@@ -18,9 +18,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// <summary>
         /// Creates a new <see cref="BindingInfo"/>.
         /// </summary>
-        public BindingInfo()
-        {
-        }
+        public BindingInfo() { }
 
         /// <summary>
         /// Creates a copy of a <see cref="BindingInfo"/>.
@@ -69,8 +67,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                     throw new ArgumentException(
                         Resources.FormatBinderType_MustBeIModelBinder(
                             value.FullName,
-                            typeof(IModelBinder).FullName),
-                        nameof(value));
+                            typeof(IModelBinder).FullName
+                        ),
+                        nameof(value)
+                    );
                 }
 
                 _binderType = value;
@@ -152,7 +152,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             else if (propertyFilterProviders.Length > 1)
             {
                 isBindingInfoPresent = true;
-                bindingInfo.PropertyFilterProvider = new CompositePropertyFilterProvider(propertyFilterProviders);
+                bindingInfo.PropertyFilterProvider = new CompositePropertyFilterProvider(
+                    propertyFilterProviders
+                );
             }
 
             // RequestPredicate
@@ -166,8 +168,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 }
             }
 
-            foreach (var configureEmptyBodyBehavior in attributes.OfType<IConfigureEmptyBodyBehavior>())
-            {
+            foreach (
+                var configureEmptyBodyBehavior in attributes.OfType<IConfigureEmptyBodyBehavior>()
+            ) {
                 isBindingInfoPresent = true;
                 bindingInfo.EmptyBodyBehavior = configureEmptyBodyBehavior.EmptyBodyBehavior;
                 break;
@@ -182,8 +185,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// <param name="attributes">A collection of attributes which are used to construct <see cref="BindingInfo"/>.</param>
         /// <param name="modelMetadata">The <see cref="ModelMetadata"/>.</param>
         /// <returns>A new instance of <see cref="BindingInfo"/> if any binding metadata was discovered; otherwise or <see langword="null"/>.</returns>
-        public static BindingInfo? GetBindingInfo(IEnumerable<object> attributes, ModelMetadata modelMetadata)
-        {
+        public static BindingInfo? GetBindingInfo(
+            IEnumerable<object> attributes,
+            ModelMetadata modelMetadata
+        ) {
             if (attributes == null)
             {
                 throw new ArgumentNullException(nameof(attributes));
@@ -248,7 +253,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
                 PropertyFilterProvider = modelMetadata.PropertyFilterProvider;
             }
 
-            // There isn't a ModelMetadata feature to configure AllowEmptyInputInBodyModelBinding, 
+            // There isn't a ModelMetadata feature to configure AllowEmptyInputInBodyModelBinding,
             // so nothing to infer from it.
 
             return isBindingInfoPresent;
@@ -267,8 +272,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
 
             private Func<ModelMetadata, bool> CreatePropertyFilter()
             {
-                var propertyFilters = _providers
-                    .Select(p => p.PropertyFilter)
+                var propertyFilters = _providers.Select(p => p.PropertyFilter)
                     .Where(p => p != null);
 
                 return (m) =>

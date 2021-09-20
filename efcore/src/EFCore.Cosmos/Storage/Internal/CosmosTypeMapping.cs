@@ -25,15 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         public CosmosTypeMapping(
             Type clrType,
             ValueComparer? comparer = null,
-            ValueComparer? keyComparer = null)
-            : base(
-                new CoreTypeMappingParameters(
-                    clrType,
-                    converter: null,
-                    comparer,
-                    keyComparer))
-        {
-        }
+            ValueComparer? keyComparer = null
+        ) : base(new CoreTypeMappingParameters(clrType, converter: null, comparer, keyComparer)) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -41,10 +34,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected CosmosTypeMapping(CoreTypeMappingParameters parameters)
-            : base(parameters)
-        {
-        }
+        protected CosmosTypeMapping(CoreTypeMappingParameters parameters) : base(parameters) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -52,7 +42,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override CoreTypeMapping Clone(ValueConverter? converter)
-            => new CosmosTypeMapping(Parameters.WithComposedConverter(converter));
+        public override CoreTypeMapping Clone(ValueConverter? converter) =>
+            new CosmosTypeMapping(Parameters.WithComposedConverter(converter));
     }
 }

@@ -12,8 +12,10 @@ namespace Microsoft.CodeAnalysis.Host
 {
     internal static class ITemporaryStreamStorageExtensions
     {
-        public static void WriteAllLines(this ITemporaryStreamStorage storage, ImmutableArray<string> values)
-        {
+        public static void WriteAllLines(
+            this ITemporaryStreamStorage storage,
+            ImmutableArray<string> values
+        ) {
             using var stream = SerializableBytes.CreateWritableStream();
             using var writer = new StreamWriter(stream);
 

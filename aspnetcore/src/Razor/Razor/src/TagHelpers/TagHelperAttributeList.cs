@@ -14,10 +14,7 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         /// <summary>
         /// Instantiates a new instance of <see cref="TagHelperAttributeList"/> with an empty collection.
         /// </summary>
-        public TagHelperAttributeList()
-            : base()
-        {
-        }
+        public TagHelperAttributeList() : base() { }
 
         /// <summary>
         /// Instantiates a new instance of <see cref="TagHelperAttributeList"/> with the specified
@@ -25,7 +22,7 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         /// </summary>
         /// <param name="attributes">The collection to wrap.</param>
         public TagHelperAttributeList(IEnumerable<TagHelperAttribute> attributes)
-            : base (new List<TagHelperAttribute>(attributes))
+            : base(new List<TagHelperAttribute>(attributes))
         {
             if (attributes == null)
             {
@@ -38,8 +35,7 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         /// <paramref name="attributes"/>.
         /// </summary>
         /// <param name="attributes">The collection to wrap.</param>
-        public TagHelperAttributeList(List<TagHelperAttribute> attributes)
-            : base(attributes)
+        public TagHelperAttributeList(List<TagHelperAttribute> attributes) : base(attributes)
         {
             if (attributes == null)
             {
@@ -53,10 +49,7 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         /// </remarks>
         public new TagHelperAttribute this[int index]
         {
-            get
-            {
-                return base[index];
-            }
+            get { return base[index]; }
             set
             {
                 if (value == null)

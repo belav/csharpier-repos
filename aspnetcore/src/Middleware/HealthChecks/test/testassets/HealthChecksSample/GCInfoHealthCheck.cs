@@ -21,18 +21,21 @@ namespace HealthChecksSample
             string name,
             HealthStatus? failureStatus = null,
             IEnumerable<string> tags = null,
-            long? thresholdInBytes = null)
-        {
+            long? thresholdInBytes = null
+        ) {
             // Register a check of type GCInfo
             builder.AddCheck<GCInfoHealthCheck>(name, failureStatus ?? HealthStatus.Degraded, tags);
 
             // Configure named options to pass the threshold into the check.
             if (thresholdInBytes.HasValue)
             {
-                builder.Services.Configure<GCInfoOptions>(name, options =>
-                {
-                    options.Threshold = thresholdInBytes.Value;
-                });
+                builder.Services.Configure<GCInfoOptions>(
+                    name,
+                    options =>
+                    {
+                        options.Threshold = thresholdInBytes.Value;
+                    }
+                );
             }
 
             return builder;
@@ -48,8 +51,10 @@ namespace HealthChecksSample
             _options = options;
         }
 
-        public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default(CancellationToken))
-        {
+        public Task<HealthCheckResult> CheckHealthAsync(
+            HealthCheckContext context,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) {
             var options = _options.Get(context.Registration.Name);
 
             // This example will report degraded status if the application is using
@@ -69,12 +74,18 @@ namespace HealthChecksSample
             //
             // Using context.Registration.FailureStatus means that the application developer can configure
             // how they want failures to appear.
-            var result = allocated >= options.Threshold ? context.Registration.FailureStatus : HealthStatus.Healthy;
+            var result =
+                allocated >= options.Threshold
+                    ? context.Registration.FailureStatus
+                    : HealthStatus.Healthy;
 
-            return Task.FromResult(new HealthCheckResult(
-                result,
-                description: "reports degraded status if allocated bytes >= 1gb",
-                data: data));
+            return Task.FromResult(
+                new HealthCheckResult(
+                    result,
+                    description: "reports degraded status if allocated bytes >= 1gb",
+                    data: data
+                )
+            );
         }
     }
 

@@ -15,11 +15,17 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
     public class ControllerActivatorProvider : IControllerActivatorProvider
     {
         private static readonly Action<ControllerContext, object> _dispose = Dispose;
-        private static readonly Func<ControllerContext, object, ValueTask> _disposeAsync = DisposeAsync;
-        private static readonly Func<ControllerContext, object, ValueTask> _syncDisposeAsync = SyncDisposeAsync;
+        private static readonly Func<ControllerContext, object, ValueTask> _disposeAsync =
+            DisposeAsync;
+        private static readonly Func<ControllerContext, object, ValueTask> _syncDisposeAsync =
+            SyncDisposeAsync;
         private readonly Func<ControllerContext, object>? _controllerActivatorCreate;
         private readonly Action<ControllerContext, object>? _controllerActivatorRelease;
-        private readonly Func<ControllerContext, object, ValueTask>? _controllerActivatorReleaseAsync;
+        private readonly Func<
+            ControllerContext,
+            object,
+            ValueTask
+        >? _controllerActivatorReleaseAsync;
 
         /// <summary>
         /// Initializes a new instance of <see cref="ControllerActivatorProvider"/>.
@@ -42,8 +48,9 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         }
 
         /// <inheritdoc/>
-        public Func<ControllerContext, object> CreateActivator(ControllerActionDescriptor descriptor)
-        {
+        public Func<ControllerContext, object> CreateActivator(
+            ControllerActionDescriptor descriptor
+        ) {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));
@@ -52,10 +59,13 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             var controllerType = descriptor.ControllerTypeInfo?.AsType();
             if (controllerType == null)
             {
-                throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                    nameof(descriptor.ControllerTypeInfo),
-                    nameof(descriptor)),
-                    nameof(descriptor));
+                throw new ArgumentException(
+                    Resources.FormatPropertyOfTypeCannotBeNull(
+                        nameof(descriptor.ControllerTypeInfo),
+                        nameof(descriptor)
+                    ),
+                    nameof(descriptor)
+                );
             }
 
             if (_controllerActivatorCreate != null)
@@ -64,12 +74,14 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             }
 
             var typeActivator = ActivatorUtilities.CreateFactory(controllerType, Type.EmptyTypes);
-            return controllerContext => typeActivator(controllerContext.HttpContext.RequestServices, arguments: null);
+            return controllerContext =>
+                typeActivator(controllerContext.HttpContext.RequestServices, arguments: null);
         }
 
         /// <inheritdoc/>
-        public Action<ControllerContext, object>? CreateReleaser(ControllerActionDescriptor descriptor)
-        {
+        public Action<ControllerContext, object>? CreateReleaser(
+            ControllerActionDescriptor descriptor
+        ) {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));
@@ -89,8 +101,9 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         }
 
         /// <inheritdoc/>
-        public Func<ControllerContext, object, ValueTask>? CreateAsyncReleaser(ControllerActionDescriptor descriptor)
-        {
+        public Func<ControllerContext, object, ValueTask>? CreateAsyncReleaser(
+            ControllerActionDescriptor descriptor
+        ) {
             if (descriptor == null)
             {
                 throw new ArgumentNullException(nameof(descriptor));
@@ -101,8 +114,10 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
                 return _controllerActivatorReleaseAsync;
             }
 
-            if (typeof(IAsyncDisposable).GetTypeInfo().IsAssignableFrom(descriptor.ControllerTypeInfo))
-            {
+            if (
+                typeof(IAsyncDisposable).GetTypeInfo()
+                    .IsAssignableFrom(descriptor.ControllerTypeInfo)
+            ) {
                 return _disposeAsync;
             }
 

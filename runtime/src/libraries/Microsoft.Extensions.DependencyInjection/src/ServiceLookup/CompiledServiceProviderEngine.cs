@@ -14,8 +14,9 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         public ExpressionResolverBuilder ResolverBuilder { get; }
 #endif
 
-        public CompiledServiceProviderEngine(IEnumerable<ServiceDescriptor> serviceDescriptors)
-            : base(serviceDescriptors)
+        public CompiledServiceProviderEngine(
+            IEnumerable<ServiceDescriptor> serviceDescriptors
+        ) : base(serviceDescriptors)
         {
 #if IL_EMIT
             ResolverBuilder = new ILEmitResolverBuilder(RuntimeResolver, this, Root);
@@ -24,9 +25,12 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 #endif
         }
 
-        protected override Func<ServiceProviderEngineScope, object> RealizeService(ServiceCallSite callSite)
-        {
-            Func<ServiceProviderEngineScope, object> realizedService = ResolverBuilder.Build(callSite);
+        protected override Func<ServiceProviderEngineScope, object> RealizeService(
+            ServiceCallSite callSite
+        ) {
+            Func<ServiceProviderEngineScope, object> realizedService = ResolverBuilder.Build(
+                callSite
+            );
             RealizedServices[callSite.ServiceType] = realizedService;
             return realizedService;
         }

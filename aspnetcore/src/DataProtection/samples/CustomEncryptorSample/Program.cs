@@ -14,13 +14,15 @@ namespace CustomEncryptorSample
         public static void Main(string[] args)
         {
             var keysFolder = Path.Combine(Directory.GetCurrentDirectory(), "temp-keys");
-            using (var services = new ServiceCollection()
-                .AddLogging(o => o.AddConsole().SetMinimumLevel(LogLevel.Debug))
-                .AddDataProtection()
-                .PersistKeysToFileSystem(new DirectoryInfo(keysFolder))
-                .UseXmlEncryptor(s => new CustomXmlEncryptor(s))
-                .Services.BuildServiceProvider())
-            {
+            using (
+                var services = new ServiceCollection().AddLogging(
+                        o => o.AddConsole().SetMinimumLevel(LogLevel.Debug)
+                    )
+                    .AddDataProtection()
+                    .PersistKeysToFileSystem(new DirectoryInfo(keysFolder))
+                    .UseXmlEncryptor(s => new CustomXmlEncryptor(s))
+                    .Services.BuildServiceProvider()
+            ) {
                 var protector = services.GetDataProtector("SamplePurpose");
 
                 // protect the payload

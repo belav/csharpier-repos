@@ -15,8 +15,12 @@ namespace System.Web.Razor.Tokenizer.Symbols
         CInt,
         Const,
         CSng,
-
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Lng", Justification = "This is a VB Keyword. Note: Excluded here because it is a specific case")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Lng",
+            Justification = "This is a VB Keyword. Note: Excluded here because it is a specific case"
+        )]
         CULng,
         Declare,
         DirectCast,
@@ -36,8 +40,12 @@ namespace System.Web.Razor.Tokenizer.Symbols
         As,
         ByVal,
         CBool,
-
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Dbl", Justification = "This is a VB Keyword. Note: Excluded here because it is a specific case")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Dbl",
+            Justification = "This is a VB Keyword. Note: Excluded here because it is a specific case"
+        )]
         CDbl,
         Class,
         Continue,
@@ -62,8 +70,12 @@ namespace System.Web.Razor.Tokenizer.Symbols
         Call,
         CByte,
         CDec,
-
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Lng", Justification = "This is a VB Keyword. Note: Excluded here because it is a specific case")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Lng",
+            Justification = "This is a VB Keyword. Note: Excluded here because it is a specific case"
+        )]
         CLng,
         CSByte,
         CType,

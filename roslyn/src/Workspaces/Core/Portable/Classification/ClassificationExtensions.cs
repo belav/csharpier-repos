@@ -6,10 +6,13 @@ namespace Microsoft.CodeAnalysis.Classification
 {
     internal static class ClassificationExtensions
     {
-        public static string? GetClassification(this ITypeSymbol type)
-            => type.TypeKind switch
+        public static string? GetClassification(this ITypeSymbol type) =>
+            type.TypeKind switch
             {
-                TypeKind.Class => type.IsRecord ? ClassificationTypeNames.RecordClassName : ClassificationTypeNames.ClassName,
+                TypeKind.Class
+                  => type.IsRecord
+                      ? ClassificationTypeNames.RecordClassName
+                      : ClassificationTypeNames.ClassName,
                 TypeKind.Module => ClassificationTypeNames.ModuleName,
                 TypeKind.Struct => ClassificationTypeNames.StructName,
                 TypeKind.Interface => ClassificationTypeNames.InterfaceName,

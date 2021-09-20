@@ -20,13 +20,21 @@ namespace System.CodeDom.Tests
         public static IEnumerable<object[]> Ctor_CodeExpression_String_CodeExpression_TestData()
         {
             yield return new object[] { null, null, null };
-            yield return new object[] { new CodePrimitiveExpression("Value1"), "EventName", new CodePrimitiveExpression("Value2") };
+            yield return new object[]
+            {
+                new CodePrimitiveExpression("Value1"),
+                "EventName",
+                new CodePrimitiveExpression("Value2")
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_CodeExpression_String_CodeExpression_TestData))]
-        public void Ctor_CodeExpression_String_CodeExpression(CodeExpression targetObject, string eventName, CodeExpression listener)
-        {
+        public void Ctor_CodeExpression_String_CodeExpression(
+            CodeExpression targetObject,
+            string eventName,
+            CodeExpression listener
+        ) {
             var removeEvent = new CodeRemoveEventStatement(targetObject, eventName, listener);
             Assert.Equal(targetObject, removeEvent.Event.TargetObject);
             Assert.Equal(eventName ?? string.Empty, removeEvent.Event.EventName);
@@ -37,28 +45,51 @@ namespace System.CodeDom.Tests
         {
             yield return new object[] { null, null };
             yield return new object[] { new CodeEventReferenceExpression(null, null), null };
-            yield return new object[] { new CodeEventReferenceExpression(new CodePrimitiveExpression("Value1"), "EventName"), new CodePrimitiveExpression("Value2") };
+            yield return new object[]
+            {
+                new CodeEventReferenceExpression(
+                    new CodePrimitiveExpression("Value1"),
+                    "EventName"
+                ),
+                new CodePrimitiveExpression("Value2")
+            };
         }
 
         [Theory]
         [MemberData(nameof(CodeEventReferenceExpression_CodeExpression_TestData))]
-        public void Ctor_CodeEventReferenceExpression_CodeExpression(CodeEventReferenceExpression eventExpresion, CodeExpression listener)
-        {
+        public void Ctor_CodeEventReferenceExpression_CodeExpression(
+            CodeEventReferenceExpression eventExpresion,
+            CodeExpression listener
+        ) {
             var removeEvent = new CodeRemoveEventStatement(eventExpresion, listener);
-            Assert.Equal((eventExpresion ?? new CodeEventReferenceExpression()).TargetObject, removeEvent.Event.TargetObject);
-            Assert.Equal((eventExpresion ?? new CodeEventReferenceExpression()).EventName, removeEvent.Event.EventName);
+            Assert.Equal(
+                (eventExpresion ?? new CodeEventReferenceExpression()).TargetObject,
+                removeEvent.Event.TargetObject
+            );
+            Assert.Equal(
+                (eventExpresion ?? new CodeEventReferenceExpression()).EventName,
+                removeEvent.Event.EventName
+            );
             Assert.Equal(listener, removeEvent.Listener);
         }
 
         [Theory]
         [MemberData(nameof(CodeEventReferenceExpression_CodeExpression_TestData))]
-        public void Event_Set_Get_ReturnsExpected(CodeEventReferenceExpression value, CodeExpression listener)
-        {
+        public void Event_Set_Get_ReturnsExpected(
+            CodeEventReferenceExpression value,
+            CodeExpression listener
+        ) {
             _ = listener;
             var removeEvent = new CodeRemoveEventStatement();
             removeEvent.Event = value;
-            Assert.Equal((value ?? new CodeEventReferenceExpression()).TargetObject, removeEvent.Event.TargetObject);
-            Assert.Equal((value ?? new CodeEventReferenceExpression()).EventName, removeEvent.Event.EventName);
+            Assert.Equal(
+                (value ?? new CodeEventReferenceExpression()).TargetObject,
+                removeEvent.Event.TargetObject
+            );
+            Assert.Equal(
+                (value ?? new CodeEventReferenceExpression()).EventName,
+                removeEvent.Event.EventName
+            );
         }
 
         [Theory]

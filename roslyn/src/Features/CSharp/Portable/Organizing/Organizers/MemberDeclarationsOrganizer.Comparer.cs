@@ -76,12 +76,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
                     return -1;
                 }
 
-                if (xOuterOrdering == OuterOrdering.Fields || yOuterOrdering == OuterOrdering.Fields)
-                {
-                    // Fields with initializers can't be reordered relative to 
+                if (
+                    xOuterOrdering == OuterOrdering.Fields || yOuterOrdering == OuterOrdering.Fields
+                ) {
+                    // Fields with initializers can't be reordered relative to
                     // themselves due to ordering issues.
-                    var xHasInitializer = ((FieldDeclarationSyntax)x).Declaration.Variables.Any(v => v.Initializer != null);
-                    var yHasInitializer = ((FieldDeclarationSyntax)y).Declaration.Variables.Any(v => v.Initializer != null);
+                    var xHasInitializer = ((FieldDeclarationSyntax)x).Declaration.Variables.Any(
+                        v => v.Initializer != null
+                    );
+                    var yHasInitializer = ((FieldDeclarationSyntax)y).Declaration.Variables.Any(
+                        v => v.Initializer != null
+                    );
                     if (xHasInitializer && yHasInitializer)
                     {
                         return 0;
@@ -123,8 +128,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
                 {
                     return Accessibility.Public;
                 }
-                else if (xModifiers.Any(t => t.Kind() == SyntaxKind.ProtectedKeyword) && xModifiers.Any(t => t.Kind() == SyntaxKind.InternalKeyword))
-                {
+                else if (
+                    xModifiers.Any(t => t.Kind() == SyntaxKind.ProtectedKeyword)
+                    && xModifiers.Any(t => t.Kind() == SyntaxKind.InternalKeyword)
+                ) {
                     return Accessibility.ProtectedOrInternal;
                 }
                 else if (xModifiers.Any(t => t.Kind() == SyntaxKind.InternalKeyword))

@@ -53,6 +53,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         /// Used by attribute routing to apply action constraints and disambiguate between multiple candidates.
         /// </para>
         /// </remarks>
-        ActionDescriptor? SelectBestCandidate(RouteContext context, IReadOnlyList<ActionDescriptor> candidates);
+        ActionDescriptor? SelectBestCandidate(
+            RouteContext context,
+            IReadOnlyList<ActionDescriptor> candidates
+        );
     }
 }

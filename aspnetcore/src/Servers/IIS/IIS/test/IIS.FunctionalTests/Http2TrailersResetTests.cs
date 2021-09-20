@@ -39,12 +39,13 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
         public IISTestSiteFixture Fixture { get; }
 
-
         [ConditionalFact]
         [MinimumOSVersion(OperatingSystems.Windows, WindowsVersionForTrailers)]
         public async Task ResponseTrailers_HTTP2_TrailersAvailable()
         {
-            var response = await SendRequestAsync(Fixture.Client.BaseAddress.ToString() + "ResponseTrailers_HTTP2_TrailersAvailable");
+            var response = await SendRequestAsync(
+                Fixture.Client.BaseAddress.ToString() + "ResponseTrailers_HTTP2_TrailersAvailable"
+            );
 
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpVersion.Version20, response.Version);
@@ -55,7 +56,10 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [MinimumOSVersion(OperatingSystems.Windows, WindowsVersionForTrailers)]
         public async Task ResponseTrailers_ProhibitedTrailers_Blocked()
         {
-            var response = await SendRequestAsync(Fixture.Client.BaseAddress.ToString() + "ResponseTrailers_ProhibitedTrailers_Blocked");
+            var response = await SendRequestAsync(
+                Fixture.Client.BaseAddress.ToString()
+                    + "ResponseTrailers_ProhibitedTrailers_Blocked"
+            );
 
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpVersion.Version20, response.Version);
@@ -66,25 +70,35 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [MinimumOSVersion(OperatingSystems.Windows, WindowsVersionForTrailers)]
         public async Task ResponseTrailers_NoBody_TrailersSent()
         {
-            var response = await SendRequestAsync(Fixture.Client.BaseAddress.ToString() + "ResponseTrailers_NoBody_TrailersSent");
+            var response = await SendRequestAsync(
+                Fixture.Client.BaseAddress.ToString() + "ResponseTrailers_NoBody_TrailersSent"
+            );
 
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpVersion.Version20, response.Version);
             Assert.NotEmpty(response.TrailingHeaders);
-            Assert.Equal("TrailerValue", response.TrailingHeaders.GetValues("TrailerName").Single());
+            Assert.Equal(
+                "TrailerValue",
+                response.TrailingHeaders.GetValues("TrailerName").Single()
+            );
         }
 
         [ConditionalFact]
         [MinimumOSVersion(OperatingSystems.Windows, WindowsVersionForTrailers)]
         public async Task ResponseTrailers_WithBody_TrailersSent()
         {
-            var response = await SendRequestAsync(Fixture.Client.BaseAddress.ToString() + "ResponseTrailers_WithBody_TrailersSent");
+            var response = await SendRequestAsync(
+                Fixture.Client.BaseAddress.ToString() + "ResponseTrailers_WithBody_TrailersSent"
+            );
 
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpVersion.Version20, response.Version);
             Assert.Equal("Hello World", await response.Content.ReadAsStringAsync());
             Assert.NotEmpty(response.TrailingHeaders);
-            Assert.Equal("Trailer Value", response.TrailingHeaders.GetValues("TrailerName").Single());
+            Assert.Equal(
+                "Trailer Value",
+                response.TrailingHeaders.GetValues("TrailerName").Single()
+            );
         }
 
         [ConditionalFact]
@@ -93,13 +107,19 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         {
             var body = "Hello World";
 
-            var response = await SendRequestAsync(Fixture.Client.BaseAddress.ToString() + "ResponseTrailers_WithContentLengthBody_TrailersSent");
+            var response = await SendRequestAsync(
+                Fixture.Client.BaseAddress.ToString()
+                    + "ResponseTrailers_WithContentLengthBody_TrailersSent"
+            );
 
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpVersion.Version20, response.Version);
             Assert.Equal(body, await response.Content.ReadAsStringAsync());
             Assert.NotEmpty(response.TrailingHeaders);
-            Assert.Equal("Trailer Value", response.TrailingHeaders.GetValues("TrailerName").Single());
+            Assert.Equal(
+                "Trailer Value",
+                response.TrailingHeaders.GetValues("TrailerName").Single()
+            );
         }
 
         [ConditionalFact]
@@ -108,16 +128,31 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         {
             var body = "Hello World";
 
-            var response = await SendRequestAsync(Fixture.Client.BaseAddress.ToString() + "ResponseTrailers_WithTrailersBeforeContentLengthBody_TrailersSent");
+            var response = await SendRequestAsync(
+                Fixture.Client.BaseAddress.ToString()
+                    + "ResponseTrailers_WithTrailersBeforeContentLengthBody_TrailersSent"
+            );
 
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpVersion.Version20, response.Version);
             // Avoid HttpContent's automatic content-length calculation.
-            Assert.True(response.Content.Headers.TryGetValues(HeaderNames.ContentLength, out var contentLength), HeaderNames.ContentLength);
-            Assert.Equal((2 * body.Length).ToString(CultureInfo.InvariantCulture), contentLength.First());
+            Assert.True(
+                response.Content.Headers.TryGetValues(
+                    HeaderNames.ContentLength,
+                    out var contentLength
+                ),
+                HeaderNames.ContentLength
+            );
+            Assert.Equal(
+                (2 * body.Length).ToString(CultureInfo.InvariantCulture),
+                contentLength.First()
+            );
             Assert.Equal(body + body, await response.Content.ReadAsStringAsync());
             Assert.NotEmpty(response.TrailingHeaders);
-            Assert.Equal("Trailer Value", response.TrailingHeaders.GetValues("TrailerName").Single());
+            Assert.Equal(
+                "Trailer Value",
+                response.TrailingHeaders.GetValues("TrailerName").Single()
+            );
         }
 
         [ConditionalFact]
@@ -126,30 +161,48 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         {
             var body = "Hello World";
 
-            var response = await SendRequestAsync(Fixture.Client.BaseAddress.ToString() + "ResponseTrailers_WithContentLengthBodyAndDeclared_TrailersSent");
+            var response = await SendRequestAsync(
+                Fixture.Client.BaseAddress.ToString()
+                    + "ResponseTrailers_WithContentLengthBodyAndDeclared_TrailersSent"
+            );
 
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpVersion.Version20, response.Version);
             // Avoid HttpContent's automatic content-length calculation.
-            Assert.True(response.Content.Headers.TryGetValues(HeaderNames.ContentLength, out var contentLength), HeaderNames.ContentLength);
+            Assert.True(
+                response.Content.Headers.TryGetValues(
+                    HeaderNames.ContentLength,
+                    out var contentLength
+                ),
+                HeaderNames.ContentLength
+            );
             Assert.Equal(body.Length.ToString(CultureInfo.InvariantCulture), contentLength.First());
             Assert.Equal("TrailerName", response.Headers.Trailer.Single());
             Assert.Equal(body, await response.Content.ReadAsStringAsync());
             Assert.NotEmpty(response.TrailingHeaders);
-            Assert.Equal("Trailer Value", response.TrailingHeaders.GetValues("TrailerName").Single());
+            Assert.Equal(
+                "Trailer Value",
+                response.TrailingHeaders.GetValues("TrailerName").Single()
+            );
         }
 
         [ConditionalFact]
         [MinimumOSVersion(OperatingSystems.Windows, WindowsVersionForTrailers)]
         public async Task ResponseTrailers_MultipleValues_SentAsSeparateHeaders()
         {
-            var response = await SendRequestAsync(Fixture.Client.BaseAddress.ToString() + "ResponseTrailers_MultipleValues_SentAsSeparateHeaders");
+            var response = await SendRequestAsync(
+                Fixture.Client.BaseAddress.ToString()
+                    + "ResponseTrailers_MultipleValues_SentAsSeparateHeaders"
+            );
 
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpVersion.Version20, response.Version);
             Assert.NotEmpty(response.TrailingHeaders);
 
-            Assert.Equal(new[] { "TrailerValue0", "TrailerValue1" }, response.TrailingHeaders.GetValues("TrailerName"));
+            Assert.Equal(
+                new[] { "TrailerValue0", "TrailerValue1" },
+                response.TrailingHeaders.GetValues("TrailerName")
+            );
         }
 
         [ConditionalFact]
@@ -158,13 +211,22 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         {
             // The app func for CompleteAsync will not finish until CompleteAsync_Completed is sent.
             // This verifies that the response is sent to the client with CompleteAsync
-            var response = await SendRequestAsync(Fixture.Client.BaseAddress.ToString() + "ResponseTrailers_CompleteAsyncNoBody_TrailersSent");
+            var response = await SendRequestAsync(
+                Fixture.Client.BaseAddress.ToString()
+                    + "ResponseTrailers_CompleteAsyncNoBody_TrailersSent"
+            );
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpVersion.Version20, response.Version);
             Assert.NotEmpty(response.TrailingHeaders);
-            Assert.Equal("TrailerValue", response.TrailingHeaders.GetValues("TrailerName").Single());
+            Assert.Equal(
+                "TrailerValue",
+                response.TrailingHeaders.GetValues("TrailerName").Single()
+            );
 
-            var response2 = await SendRequestAsync(Fixture.Client.BaseAddress.ToString() + "ResponseTrailers_CompleteAsyncNoBody_TrailersSent_Completed");
+            var response2 = await SendRequestAsync(
+                Fixture.Client.BaseAddress.ToString()
+                    + "ResponseTrailers_CompleteAsyncNoBody_TrailersSent_Completed"
+            );
             Assert.True(response2.IsSuccessStatusCode);
         }
 
@@ -174,14 +236,23 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         {
             // The app func for CompleteAsync will not finish until CompleteAsync_Completed is sent.
             // This verifies that the response is sent to the client with CompleteAsync
-            var response = await SendRequestAsync(Fixture.Client.BaseAddress.ToString() + "ResponseTrailers_CompleteAsyncWithBody_TrailersSent");
+            var response = await SendRequestAsync(
+                Fixture.Client.BaseAddress.ToString()
+                    + "ResponseTrailers_CompleteAsyncWithBody_TrailersSent"
+            );
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpVersion.Version20, response.Version);
             Assert.Equal("Hello World", await response.Content.ReadAsStringAsync());
             Assert.NotEmpty(response.TrailingHeaders);
-            Assert.Equal("Trailer Value", response.TrailingHeaders.GetValues("TrailerName").Single());
+            Assert.Equal(
+                "Trailer Value",
+                response.TrailingHeaders.GetValues("TrailerName").Single()
+            );
 
-            var response2 = await SendRequestAsync(Fixture.Client.BaseAddress.ToString() + "ResponseTrailers_CompleteAsyncWithBody_TrailersSent_Completed");
+            var response2 = await SendRequestAsync(
+                Fixture.Client.BaseAddress.ToString()
+                    + "ResponseTrailers_CompleteAsyncWithBody_TrailersSent_Completed"
+            );
             Assert.True(response2.IsSuccessStatusCode);
         }
 
@@ -190,27 +261,43 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [MinimumOSVersion(OperatingSystems.Windows, WindowsVersionForTrailers)]
         public async Task AppException_AfterHeaders_ResetInternalError()
         {
-            await new HostBuilder()
-                .UseHttp2Cat(Fixture.Client.BaseAddress.AbsoluteUri, async h2Connection =>
-                {
-                    await h2Connection.InitializeConnectionAsync();
-
-                    h2Connection.Logger.LogInformation("Initialized http2 connection. Starting stream 1.");
-
-                    await h2Connection.StartStreamAsync(1, GetHeaders("/AppException_AfterHeaders_ResetInternalError"), endStream: true);
-
-                    await h2Connection.ReceiveHeadersAsync(1, decodedHeaders =>
+            await new HostBuilder().UseHttp2Cat(
+                    Fixture.Client.BaseAddress.AbsoluteUri,
+                    async h2Connection =>
                     {
-                        Assert.Equal("200", decodedHeaders[HeaderNames.Status]);
-                    });
+                        await h2Connection.InitializeConnectionAsync();
 
-                    var frame = await h2Connection.ReceiveFrameAsync();
+                        h2Connection.Logger.LogInformation(
+                            "Initialized http2 connection. Starting stream 1."
+                        );
 
-                    Http2Utilities.VerifyResetFrame(frame, expectedStreamId: 1, Http2ErrorCode.INTERNAL_ERROR);
+                        await h2Connection.StartStreamAsync(
+                            1,
+                            GetHeaders("/AppException_AfterHeaders_ResetInternalError"),
+                            endStream: true
+                        );
 
-                    h2Connection.Logger.LogInformation("Connection stopped.");
-                })
-                .Build().RunAsync();
+                        await h2Connection.ReceiveHeadersAsync(
+                            1,
+                            decodedHeaders =>
+                            {
+                                Assert.Equal("200", decodedHeaders[HeaderNames.Status]);
+                            }
+                        );
+
+                        var frame = await h2Connection.ReceiveFrameAsync();
+
+                        Http2Utilities.VerifyResetFrame(
+                            frame,
+                            expectedStreamId: 1,
+                            Http2ErrorCode.INTERNAL_ERROR
+                        );
+
+                        h2Connection.Logger.LogInformation("Connection stopped.");
+                    }
+                )
+                .Build()
+                .RunAsync();
         }
 
         [ConditionalFact]
@@ -218,26 +305,41 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [MinimumOSVersion(OperatingSystems.Windows, WindowsVersionForTrailers)]
         public async Task Reset_BeforeResponse_Resets()
         {
-            await new HostBuilder()
-                .UseHttp2Cat(Fixture.Client.BaseAddress.AbsoluteUri, async h2Connection =>
-                {
-                    await h2Connection.InitializeConnectionAsync();
+            await new HostBuilder().UseHttp2Cat(
+                    Fixture.Client.BaseAddress.AbsoluteUri,
+                    async h2Connection =>
+                    {
+                        await h2Connection.InitializeConnectionAsync();
 
-                    h2Connection.Logger.LogInformation("Initialized http2 connection. Starting stream 1.");
+                        h2Connection.Logger.LogInformation(
+                            "Initialized http2 connection. Starting stream 1."
+                        );
 
-                    await h2Connection.StartStreamAsync(1, GetHeaders("/Reset_BeforeResponse_Resets"), endStream: true);
+                        await h2Connection.StartStreamAsync(
+                            1,
+                            GetHeaders("/Reset_BeforeResponse_Resets"),
+                            endStream: true
+                        );
 
-                    var resetFrame = await h2Connection.ReceiveFrameAsync();
-                    Http2Utilities.VerifyResetFrame(resetFrame, expectedStreamId: 1, expectedErrorCode: (Http2ErrorCode)1111);
+                        var resetFrame = await h2Connection.ReceiveFrameAsync();
+                        Http2Utilities.VerifyResetFrame(
+                            resetFrame,
+                            expectedStreamId: 1,
+                            expectedErrorCode: (Http2ErrorCode)1111
+                        );
 
-                    // Any app errors?
-                    var client = CreateClient();
-                    var response = await client.GetAsync(Fixture.Client.BaseAddress + "/Reset_BeforeResponse_Resets_Complete");
-                    Assert.True(response.IsSuccessStatusCode);
+                        // Any app errors?
+                        var client = CreateClient();
+                        var response = await client.GetAsync(
+                            Fixture.Client.BaseAddress + "/Reset_BeforeResponse_Resets_Complete"
+                        );
+                        Assert.True(response.IsSuccessStatusCode);
 
-                    h2Connection.Logger.LogInformation("Connection stopped.");
-                })
-                .Build().RunAsync();
+                        h2Connection.Logger.LogInformation("Connection stopped.");
+                    }
+                )
+                .Build()
+                .RunAsync();
         }
 
         [ConditionalFact]
@@ -245,26 +347,42 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [MinimumOSVersion(OperatingSystems.Windows, WindowsVersionForTrailers)]
         public async Task Reset_BeforeResponse_Zero_Resets()
         {
-            await new HostBuilder()
-                .UseHttp2Cat(Fixture.Client.BaseAddress.AbsoluteUri, async h2Connection =>
-                {
-                    await h2Connection.InitializeConnectionAsync();
+            await new HostBuilder().UseHttp2Cat(
+                    Fixture.Client.BaseAddress.AbsoluteUri,
+                    async h2Connection =>
+                    {
+                        await h2Connection.InitializeConnectionAsync();
 
-                    h2Connection.Logger.LogInformation("Initialized http2 connection. Starting stream 1.");
+                        h2Connection.Logger.LogInformation(
+                            "Initialized http2 connection. Starting stream 1."
+                        );
 
-                    await h2Connection.StartStreamAsync(1, GetHeaders("/Reset_BeforeResponse_Zero_Resets"), endStream: true);
+                        await h2Connection.StartStreamAsync(
+                            1,
+                            GetHeaders("/Reset_BeforeResponse_Zero_Resets"),
+                            endStream: true
+                        );
 
-                    var resetFrame = await h2Connection.ReceiveFrameAsync();
-                    Http2Utilities.VerifyResetFrame(resetFrame, expectedStreamId: 1, expectedErrorCode: (Http2ErrorCode)0);
+                        var resetFrame = await h2Connection.ReceiveFrameAsync();
+                        Http2Utilities.VerifyResetFrame(
+                            resetFrame,
+                            expectedStreamId: 1,
+                            expectedErrorCode: (Http2ErrorCode)0
+                        );
 
-                    // Any app errors?
-                    var client = CreateClient();
-                    var response = await client.GetAsync(Fixture.Client.BaseAddress + "/Reset_BeforeResponse_Zero_Resets_Complete");
-                    Assert.True(response.IsSuccessStatusCode);
+                        // Any app errors?
+                        var client = CreateClient();
+                        var response = await client.GetAsync(
+                            Fixture.Client.BaseAddress
+                                + "/Reset_BeforeResponse_Zero_Resets_Complete"
+                        );
+                        Assert.True(response.IsSuccessStatusCode);
 
-                    h2Connection.Logger.LogInformation("Connection stopped.");
-                })
-                .Build().RunAsync();
+                        h2Connection.Logger.LogInformation("Connection stopped.");
+                    }
+                )
+                .Build()
+                .RunAsync();
         }
 
         [ConditionalFact]
@@ -272,31 +390,50 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [MinimumOSVersion(OperatingSystems.Windows, WindowsVersionForTrailers)]
         public async Task Reset_AfterResponseHeaders_Resets()
         {
-            await new HostBuilder()
-                .UseHttp2Cat(Fixture.Client.BaseAddress.AbsoluteUri, async h2Connection =>
-                {
-                    await h2Connection.InitializeConnectionAsync();
-
-                    h2Connection.Logger.LogInformation("Initialized http2 connection. Starting stream 1.");
-
-                    await h2Connection.StartStreamAsync(1, GetHeaders("/Reset_AfterResponseHeaders_Resets"), endStream: true);
-
-                    // Any app errors?
-                    var client = CreateClient();
-                    var response = await client.GetAsync(Fixture.Client.BaseAddress + "/Reset_AfterResponseHeaders_Resets_Complete");
-                    Assert.True(response.IsSuccessStatusCode);
-
-                    await h2Connection.ReceiveHeadersAsync(1, decodedHeaders =>
+            await new HostBuilder().UseHttp2Cat(
+                    Fixture.Client.BaseAddress.AbsoluteUri,
+                    async h2Connection =>
                     {
-                        Assert.Equal("200", decodedHeaders[HeaderNames.Status]);
-                    });
+                        await h2Connection.InitializeConnectionAsync();
 
-                    var resetFrame = await h2Connection.ReceiveFrameAsync();
-                    Http2Utilities.VerifyResetFrame(resetFrame, expectedStreamId: 1, expectedErrorCode: (Http2ErrorCode)1111);
+                        h2Connection.Logger.LogInformation(
+                            "Initialized http2 connection. Starting stream 1."
+                        );
 
-                    h2Connection.Logger.LogInformation("Connection stopped.");
-                })
-                .Build().RunAsync();
+                        await h2Connection.StartStreamAsync(
+                            1,
+                            GetHeaders("/Reset_AfterResponseHeaders_Resets"),
+                            endStream: true
+                        );
+
+                        // Any app errors?
+                        var client = CreateClient();
+                        var response = await client.GetAsync(
+                            Fixture.Client.BaseAddress
+                                + "/Reset_AfterResponseHeaders_Resets_Complete"
+                        );
+                        Assert.True(response.IsSuccessStatusCode);
+
+                        await h2Connection.ReceiveHeadersAsync(
+                            1,
+                            decodedHeaders =>
+                            {
+                                Assert.Equal("200", decodedHeaders[HeaderNames.Status]);
+                            }
+                        );
+
+                        var resetFrame = await h2Connection.ReceiveFrameAsync();
+                        Http2Utilities.VerifyResetFrame(
+                            resetFrame,
+                            expectedStreamId: 1,
+                            expectedErrorCode: (Http2ErrorCode)1111
+                        );
+
+                        h2Connection.Logger.LogInformation("Connection stopped.");
+                    }
+                )
+                .Build()
+                .RunAsync();
         }
 
         [ConditionalFact]
@@ -304,61 +441,98 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [MinimumOSVersion(OperatingSystems.Windows, WindowsVersionForTrailers)]
         public async Task Reset_DuringResponseBody_Resets()
         {
-            await new HostBuilder()
-                .UseHttp2Cat(Fixture.Client.BaseAddress.AbsoluteUri, async h2Connection =>
-                {
-                    await h2Connection.InitializeConnectionAsync();
-
-                    h2Connection.Logger.LogInformation("Initialized http2 connection. Starting stream 1.");
-
-                    await h2Connection.StartStreamAsync(1, GetHeaders("/Reset_DuringResponseBody_Resets"), endStream: true);
-
-                    // This is currently flaky, can either receive header or reset at this point
-                    var headerOrResetFrame = await h2Connection.ReceiveFrameAsync();
-                    Assert.True(headerOrResetFrame.Type == Http2FrameType.HEADERS || headerOrResetFrame.Type == Http2FrameType.RST_STREAM);
-
-                    if (headerOrResetFrame.Type == Http2FrameType.HEADERS)
+            await new HostBuilder().UseHttp2Cat(
+                    Fixture.Client.BaseAddress.AbsoluteUri,
+                    async h2Connection =>
                     {
-                        var dataFrame = await h2Connection.ReceiveFrameAsync();
-                        Http2Utilities.VerifyDataFrame(dataFrame, 1, endOfStream: false, length: 11);
+                        await h2Connection.InitializeConnectionAsync();
 
-                        var resetFrame = await h2Connection.ReceiveFrameAsync();
-                        Http2Utilities.VerifyResetFrame(resetFrame, expectedStreamId: 1, expectedErrorCode: (Http2ErrorCode)1111);
-                    }
-                    else
-                    {
-                        Http2Utilities.VerifyResetFrame(headerOrResetFrame, expectedStreamId: 1, expectedErrorCode: (Http2ErrorCode)1111);
-                    }
+                        h2Connection.Logger.LogInformation(
+                            "Initialized http2 connection. Starting stream 1."
+                        );
 
-                    h2Connection.Logger.LogInformation("Connection stopped.");
-                })
-                .Build().RunAsync();
+                        await h2Connection.StartStreamAsync(
+                            1,
+                            GetHeaders("/Reset_DuringResponseBody_Resets"),
+                            endStream: true
+                        );
+
+                        // This is currently flaky, can either receive header or reset at this point
+                        var headerOrResetFrame = await h2Connection.ReceiveFrameAsync();
+                        Assert.True(
+                            headerOrResetFrame.Type == Http2FrameType.HEADERS
+                                || headerOrResetFrame.Type == Http2FrameType.RST_STREAM
+                        );
+
+                        if (headerOrResetFrame.Type == Http2FrameType.HEADERS)
+                        {
+                            var dataFrame = await h2Connection.ReceiveFrameAsync();
+                            Http2Utilities.VerifyDataFrame(
+                                dataFrame,
+                                1,
+                                endOfStream: false,
+                                length: 11
+                            );
+
+                            var resetFrame = await h2Connection.ReceiveFrameAsync();
+                            Http2Utilities.VerifyResetFrame(
+                                resetFrame,
+                                expectedStreamId: 1,
+                                expectedErrorCode: (Http2ErrorCode)1111
+                            );
+                        }
+                        else
+                        {
+                            Http2Utilities.VerifyResetFrame(
+                                headerOrResetFrame,
+                                expectedStreamId: 1,
+                                expectedErrorCode: (Http2ErrorCode)1111
+                            );
+                        }
+
+                        h2Connection.Logger.LogInformation("Connection stopped.");
+                    }
+                )
+                .Build()
+                .RunAsync();
         }
-
 
         [ConditionalFact]
         [RequiresNewHandler]
         [MinimumOSVersion(OperatingSystems.Windows, WindowsVersionForTrailers)]
         public async Task Reset_BeforeRequestBody_Resets()
         {
-            await new HostBuilder()
-                .UseHttp2Cat(Fixture.Client.BaseAddress.AbsoluteUri, async h2Connection =>
-                {
-                    await h2Connection.InitializeConnectionAsync();
+            await new HostBuilder().UseHttp2Cat(
+                    Fixture.Client.BaseAddress.AbsoluteUri,
+                    async h2Connection =>
+                    {
+                        await h2Connection.InitializeConnectionAsync();
 
-                    h2Connection.Logger.LogInformation("Initialized http2 connection. Starting stream 1.");
+                        h2Connection.Logger.LogInformation(
+                            "Initialized http2 connection. Starting stream 1."
+                        );
 
-                    await h2Connection.StartStreamAsync(1, GetPostHeaders("/Reset_BeforeRequestBody_Resets"), endStream: false);
+                        await h2Connection.StartStreamAsync(
+                            1,
+                            GetPostHeaders("/Reset_BeforeRequestBody_Resets"),
+                            endStream: false
+                        );
 
-                    // Any app errors?
-                    //Assert.Equal(0, await appResult.Task.DefaultTimeout());
+                        // Any app errors?
+                        //Assert.Equal(0, await appResult.Task.DefaultTimeout());
 
-                    var resetFrame = await h2Connection.ReceiveFrameAsync();
-                    Http2Utilities.VerifyResetFrame(resetFrame, expectedStreamId: 1, expectedErrorCode: (Http2ErrorCode)1111);
+                        var resetFrame = await h2Connection.ReceiveFrameAsync();
+                        Http2Utilities.VerifyResetFrame(
+                            resetFrame,
+                            expectedStreamId: 1,
+                            expectedErrorCode: (Http2ErrorCode)1111
+                        );
 
-                    h2Connection.Logger.LogInformation("Connection stopped.");
-                })
-                .Build().RunAsync();
+                        h2Connection.Logger.LogInformation("Connection stopped.");
+                    }
+                )
+                .Build()
+                .RunAsync();
         }
 
         [ConditionalFact]
@@ -366,85 +540,131 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         [MinimumOSVersion(OperatingSystems.Windows, WindowsVersionForTrailers)]
         public async Task Reset_DuringRequestBody_Resets()
         {
-            await new HostBuilder()
-                .UseHttp2Cat(Fixture.Client.BaseAddress.AbsoluteUri, async h2Connection =>
-                {
-                    await h2Connection.InitializeConnectionAsync();
+            await new HostBuilder().UseHttp2Cat(
+                    Fixture.Client.BaseAddress.AbsoluteUri,
+                    async h2Connection =>
+                    {
+                        await h2Connection.InitializeConnectionAsync();
 
-                    h2Connection.Logger.LogInformation("Initialized http2 connection. Starting stream 1.");
+                        h2Connection.Logger.LogInformation(
+                            "Initialized http2 connection. Starting stream 1."
+                        );
 
-                    await h2Connection.StartStreamAsync(1, GetPostHeaders("/Reset_DuringRequestBody_Resets"), endStream: false);
-                    await h2Connection.SendDataAsync(1, new byte[10], endStream: false);
+                        await h2Connection.StartStreamAsync(
+                            1,
+                            GetPostHeaders("/Reset_DuringRequestBody_Resets"),
+                            endStream: false
+                        );
+                        await h2Connection.SendDataAsync(1, new byte[10], endStream: false);
 
-                    // Any app errors?
-                    //Assert.Equal(0, await appResult.Task.DefaultTimeout());
+                        // Any app errors?
+                        //Assert.Equal(0, await appResult.Task.DefaultTimeout());
 
-                    var resetFrame = await h2Connection.ReceiveFrameAsync();
-                    Http2Utilities.VerifyResetFrame(resetFrame, expectedStreamId: 1, expectedErrorCode: (Http2ErrorCode)1111);
+                        var resetFrame = await h2Connection.ReceiveFrameAsync();
+                        Http2Utilities.VerifyResetFrame(
+                            resetFrame,
+                            expectedStreamId: 1,
+                            expectedErrorCode: (Http2ErrorCode)1111
+                        );
 
-                    h2Connection.Logger.LogInformation("Connection stopped.");
-                })
-                .Build().RunAsync();
+                        h2Connection.Logger.LogInformation("Connection stopped.");
+                    }
+                )
+                .Build()
+                .RunAsync();
         }
 
         [ConditionalFact]
         [MinimumOSVersion(OperatingSystems.Windows, WindowsVersionForTrailers)]
         public async Task Reset_AfterCompleteAsync_NoReset()
         {
-            await new HostBuilder()
-                .UseHttp2Cat(Fixture.Client.BaseAddress.AbsoluteUri, async h2Connection =>
-                {
-                    await h2Connection.InitializeConnectionAsync();
-
-                    h2Connection.Logger.LogInformation("Initialized http2 connection. Starting stream 1.");
-
-                    await h2Connection.StartStreamAsync(1, GetHeaders("/Reset_AfterCompleteAsync_NoReset"), endStream: true);
-
-                    await h2Connection.ReceiveHeadersAsync(1, decodedHeaders =>
+            await new HostBuilder().UseHttp2Cat(
+                    Fixture.Client.BaseAddress.AbsoluteUri,
+                    async h2Connection =>
                     {
-                        Assert.Equal("200", decodedHeaders[HeaderNames.Status]);
-                    });
+                        await h2Connection.InitializeConnectionAsync();
 
-                    var dataFrame = await h2Connection.ReceiveFrameAsync();
-                    Http2Utilities.VerifyDataFrame(dataFrame, 1, endOfStream: false, length: 11);
+                        h2Connection.Logger.LogInformation(
+                            "Initialized http2 connection. Starting stream 1."
+                        );
 
-                    dataFrame = await h2Connection.ReceiveFrameAsync();
-                    Http2Utilities.VerifyDataFrame(dataFrame, 1, endOfStream: true, length: 0);
+                        await h2Connection.StartStreamAsync(
+                            1,
+                            GetHeaders("/Reset_AfterCompleteAsync_NoReset"),
+                            endStream: true
+                        );
 
-                    h2Connection.Logger.LogInformation("Connection stopped.");
-                })
-                .Build().RunAsync();
+                        await h2Connection.ReceiveHeadersAsync(
+                            1,
+                            decodedHeaders =>
+                            {
+                                Assert.Equal("200", decodedHeaders[HeaderNames.Status]);
+                            }
+                        );
+
+                        var dataFrame = await h2Connection.ReceiveFrameAsync();
+                        Http2Utilities.VerifyDataFrame(
+                            dataFrame,
+                            1,
+                            endOfStream: false,
+                            length: 11
+                        );
+
+                        dataFrame = await h2Connection.ReceiveFrameAsync();
+                        Http2Utilities.VerifyDataFrame(dataFrame, 1, endOfStream: true, length: 0);
+
+                        h2Connection.Logger.LogInformation("Connection stopped.");
+                    }
+                )
+                .Build()
+                .RunAsync();
         }
 
         [ConditionalFact]
         [MinimumOSVersion(OperatingSystems.Windows, WindowsVersionForTrailers)]
         public async Task Reset_CompleteAsyncDuringRequestBody_Resets()
         {
-            await new HostBuilder()
-                .UseHttp2Cat(Fixture.Client.BaseAddress.AbsoluteUri, async h2Connection =>
-                {
-                    await h2Connection.InitializeConnectionAsync();
-
-                    h2Connection.Logger.LogInformation("Initialized http2 connection. Starting stream 1.");
-
-                    await h2Connection.StartStreamAsync(1, GetPostHeaders("/Reset_CompleteAsyncDuringRequestBody_Resets"), endStream: false);
-                    await h2Connection.SendDataAsync(1, new byte[10], endStream: false);
-
-                    await h2Connection.ReceiveHeadersAsync(1, decodedHeaders =>
+            await new HostBuilder().UseHttp2Cat(
+                    Fixture.Client.BaseAddress.AbsoluteUri,
+                    async h2Connection =>
                     {
-                        Assert.Equal("200", decodedHeaders[HeaderNames.Status]);
-                    });
+                        await h2Connection.InitializeConnectionAsync();
 
-                    var dataFrame = await h2Connection.ReceiveFrameAsync();
+                        h2Connection.Logger.LogInformation(
+                            "Initialized http2 connection. Starting stream 1."
+                        );
 
-                    Http2Utilities.VerifyDataFrame(dataFrame, 1, endOfStream: true, length: 0);
+                        await h2Connection.StartStreamAsync(
+                            1,
+                            GetPostHeaders("/Reset_CompleteAsyncDuringRequestBody_Resets"),
+                            endStream: false
+                        );
+                        await h2Connection.SendDataAsync(1, new byte[10], endStream: false);
 
-                    var resetFrame = await h2Connection.ReceiveFrameAsync();
-                    Http2Utilities.VerifyResetFrame(resetFrame, expectedStreamId: 1, expectedErrorCode: Http2ErrorCode.NO_ERROR);
+                        await h2Connection.ReceiveHeadersAsync(
+                            1,
+                            decodedHeaders =>
+                            {
+                                Assert.Equal("200", decodedHeaders[HeaderNames.Status]);
+                            }
+                        );
 
-                    h2Connection.Logger.LogInformation("Connection stopped.");
-                })
-                .Build().RunAsync();
+                        var dataFrame = await h2Connection.ReceiveFrameAsync();
+
+                        Http2Utilities.VerifyDataFrame(dataFrame, 1, endOfStream: true, length: 0);
+
+                        var resetFrame = await h2Connection.ReceiveFrameAsync();
+                        Http2Utilities.VerifyResetFrame(
+                            resetFrame,
+                            expectedStreamId: 1,
+                            expectedErrorCode: Http2ErrorCode.NO_ERROR
+                        );
+
+                        h2Connection.Logger.LogInformation("Connection stopped.");
+                    }
+                )
+                .Build()
+                .RunAsync();
         }
 
         private static List<KeyValuePair<string, string>> GetHeaders(string path)
@@ -469,7 +689,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         {
             var handler = new HttpClientHandler();
             handler.MaxResponseHeadersLength = 128;
-            handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+            handler.ServerCertificateCustomValidationCallback =
+                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
             var client = new HttpClient(handler);
             return client;
         }
@@ -478,7 +699,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
         {
             var handler = new HttpClientHandler();
             handler.MaxResponseHeadersLength = 128;
-            handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+            handler.ServerCertificateCustomValidationCallback =
+                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
             using var client = new HttpClient(handler);
             client.DefaultRequestVersion = http2 ? HttpVersion.Version20 : HttpVersion.Version11;
             return await client.GetAsync(uri);
@@ -489,8 +711,14 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
             new KeyValuePair<string, string>(HeaderNames.Scheme, "https"),
             new KeyValuePair<string, string>(HeaderNames.Authority, "localhost:443"),
-            new KeyValuePair<string, string>("user-agent", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0"),
-            new KeyValuePair<string, string>("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"),
+            new KeyValuePair<string, string>(
+                "user-agent",
+                "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0"
+            ),
+            new KeyValuePair<string, string>(
+                "accept",
+                "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+            ),
             new KeyValuePair<string, string>("accept-language", "en-US,en;q=0.5"),
             new KeyValuePair<string, string>("accept-encoding", "gzip, deflate, br"),
             new KeyValuePair<string, string>("upgrade-insecure-requests", "1"),

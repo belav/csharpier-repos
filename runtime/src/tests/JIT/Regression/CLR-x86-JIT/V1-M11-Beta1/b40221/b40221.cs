@@ -20,7 +20,10 @@ namespace Test
             {
                 Func();
             }
-            catch (Exception) { return -1; }
+            catch (Exception)
+            {
+                return -1;
+            }
             return 100;
         }
     }

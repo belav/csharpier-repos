@@ -19,7 +19,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     /// </summary>
     public class SqlServerNewGuidTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _methodInfo = typeof(Guid).GetRequiredRuntimeMethod(nameof(Guid.NewGuid), Array.Empty<Type>());
+        private static readonly MethodInfo _methodInfo = typeof(Guid).GetRequiredRuntimeMethod(
+            nameof(Guid.NewGuid),
+            Array.Empty<Type>()
+        );
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
         /// <summary>
@@ -43,20 +46,21 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
             Check.NotNull(logger, nameof(logger));
 
             return _methodInfo.Equals(method)
-                ? _sqlExpressionFactory.Function(
+              ? _sqlExpressionFactory.Function(
                     "NEWID",
                     Array.Empty<SqlExpression>(),
                     nullable: false,
                     argumentsPropagateNullability: Array.Empty<bool>(),
-                    method.ReturnType)
-                : null;
+                    method.ReturnType
+                )
+              : null;
         }
     }
 }

@@ -14,7 +14,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
     /// </summary>
     internal class UvWriteReq : UvRequest
     {
-        private static readonly LibuvFunctions.uv_write_cb _uv_write_cb = (IntPtr ptr, int status) => UvWriteCb(ptr, status);
+        private static readonly LibuvFunctions.uv_write_cb _uv_write_cb = (
+            IntPtr ptr,
+            int status
+        ) => UvWriteCb(ptr, status);
 
         private IntPtr _bufs;
 
@@ -26,9 +29,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         private List<GCHandle> _pins = new List<GCHandle>(BUFFER_COUNT + 1);
         private List<MemoryHandle> _handles = new List<MemoryHandle>(BUFFER_COUNT + 1);
 
-        public UvWriteReq(ILibuvTrace logger) : base(logger)
-        {
-        }
+        public UvWriteReq(ILibuvTrace logger) : base(logger) { }
 
         public override void Init(LibuvThread thread)
         {
@@ -41,21 +42,22 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
         {
             var requestSize = loop.Libuv.req_size(LibuvFunctions.RequestType.WRITE);
             var bufferSize = Marshal.SizeOf<LibuvFunctions.uv_buf_t>() * BUFFER_COUNT;
-            CreateMemory(
-                loop.Libuv,
-                loop.ThreadId,
-                requestSize + bufferSize);
+            CreateMemory(loop.Libuv, loop.ThreadId, requestSize + bufferSize);
             _bufs = handle + requestSize;
         }
 
-        public LibuvAwaitable<UvWriteReq> WriteAsync(UvStreamHandle handle, in ReadOnlySequence<byte> buffer)
-        {
+        public LibuvAwaitable<UvWriteReq> WriteAsync(
+            UvStreamHandle handle,
+            in ReadOnlySequence<byte> buffer
+        ) {
             Write(handle, buffer, LibuvAwaitable<UvWriteReq>.Callback, _awaitable);
             return _awaitable;
         }
 
-        public LibuvAwaitable<UvWriteReq> WriteAsync(UvStreamHandle handle, ArraySegment<ArraySegment<byte>> bufs)
-        {
+        public LibuvAwaitable<UvWriteReq> WriteAsync(
+            UvStreamHandle handle,
+            ArraySegment<ArraySegment<byte>> bufs
+        ) {
             Write(handle, bufs, LibuvAwaitable<UvWriteReq>.Callback, _awaitable);
             return _awaitable;
         }
@@ -64,8 +66,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             UvStreamHandle handle,
             in ReadOnlySequence<byte> buffer,
             Action<UvWriteReq, int, UvException, object> callback,
-            object state)
-        {
+            object state
+        ) {
             try
             {
                 var nBuffers = 0;
@@ -98,9 +100,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
                     _handles.Add(memoryHandle);
 
                     // Fast path for single buffer
-                    pBuffers[0] = Libuv.buf_init(
-                            (IntPtr)memoryHandle.Pointer,
-                            memory.Length);
+                    pBuffers[0] = Libuv.buf_init((IntPtr)memoryHandle.Pointer, memory.Length);
                 }
                 else
                 {
@@ -114,7 +114,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
                         // create and pin each segment being written
                         pBuffers[index] = Libuv.buf_init(
                             (IntPtr)memoryHandle.Pointer,
-                            memory.Length);
+                            memory.Length
+                        );
                         index++;
                     }
                 }
@@ -136,9 +137,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             UvStreamHandle handle,
             ArraySegment<ArraySegment<byte>> bufs,
             Action<UvWriteReq, int, UvException, object> callback,
-            object state)
-        {
-            WriteArraySegmentInternal(handle, bufs, sendHandle: null, callback: callback, state: state);
+            object state
+        ) {
+            WriteArraySegmentInternal(
+                handle,
+                bufs,
+                sendHandle: null,
+                callback: callback,
+                state: state
+            );
         }
 
         public void Write2(
@@ -146,8 +153,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             ArraySegment<ArraySegment<byte>> bufs,
             UvStreamHandle sendHandle,
             Action<UvWriteReq, int, UvException, object> callback,
-            object state)
-        {
+            object state
+        ) {
             WriteArraySegmentInternal(handle, bufs, sendHandle, callback, state);
         }
 
@@ -156,8 +163,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             ArraySegment<ArraySegment<byte>> bufs,
             UvStreamHandle sendHandle,
             Action<UvWriteReq, int, UvException, object> callback,
-            object state)
-        {
+            object state
+        ) {
             try
             {
                 var pBuffers = (LibuvFunctions.uv_buf_t*)_bufs;
@@ -180,7 +187,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
                     _pins.Add(gcHandle);
                     pBuffers[index] = Libuv.buf_init(
                         gcHandle.AddrOfPinnedObject() + buf.Offset,
-                        buf.Count);
+                        buf.Count
+                    );
                 }
 
                 _callback = callback;

@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         TSomeCompositeEntityBase,
         TCompositeSecondDependent,
         TKContext,
-        TKSnapContext>
+        TKSnapContext
+    >
         where TSomeEntity : class, new()
         where TSomeSimpleEntityBase : class, new()
         where TSomeDependentEntity : class, new()
@@ -56,7 +57,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(
                 CoreStrings.ValueCannotBeNull("Id", "SomeSimpleEntityBase", "int"),
                 Assert.Throws<InvalidOperationException>(
-                    () => entry.SetStoreGeneratedValue(keyProperty, null)).Message);
+                    () => entry.SetStoreGeneratedValue(keyProperty, null)
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -77,8 +80,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [ConditionalTheory]
         [InlineData(false)]
         [InlineData(true)]
-        public virtual void Changing_state_to_Unknown_causes_entity_to_stop_tracking(bool useTempValue)
-        {
+        public virtual void Changing_state_to_Unknown_causes_entity_to_stop_tracking(
+            bool useTempValue
+        ) {
             using var context = new TKContext();
             var entry1 = context.Entry(new TSomeEntity()).GetInfrastructure();
             var keyProperty = entry1.EntityType.FindProperty("Id");
@@ -184,15 +188,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.Equal(
                 CoreStrings.KeyReadOnly("Id", "SomeEntity"),
                 Assert.Throws<InvalidOperationException>(
-                    () => entry.SetPropertyModified(keyProperty)).Message);
+                    () => entry.SetPropertyModified(keyProperty)
+                ).Message
+            );
 
             Assert.Equal(EntityState.Unchanged, entry.EntityState);
             Assert.False(entry.IsModified(keyProperty));
 
             Assert.Equal(
                 CoreStrings.KeyReadOnly("Id", "SomeEntity"),
-                Assert.Throws<InvalidOperationException>(
-                    () => entry[keyProperty] = 2).Message);
+                Assert.Throws<InvalidOperationException>(() => entry[keyProperty] = 2).Message
+            );
 
             Assert.Equal(EntityState.Unchanged, entry.EntityState);
             Assert.False(entry.IsModified(keyProperty));
@@ -245,7 +251,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             Assert.False(entry.IsModified(nonKeyProperty));
 
             // Can't change the key...
-            Assert.Throws<InvalidOperationException>(() => entry.SetTemporaryValue(keyProperty, -1));
+            Assert.Throws<InvalidOperationException>(
+                () => entry.SetTemporaryValue(keyProperty, -1)
+            );
             entry.SetTemporaryValue(nonKeyProperty, "Temp");
 
             Assert.True(entry.HasTemporaryValue(keyProperty));
@@ -276,7 +284,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             Assert.Equal(
                 CoreStrings.TempValuePersists("Id", "SomeEntity", targetState.ToString()),
-                Assert.Throws<InvalidOperationException>(() => entry.SetEntityState(targetState)).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => entry.SetEntityState(targetState)
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -406,7 +417,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             entry[fkProperty] = 79;
 
-            var keyValue = entry.GetRelationshipSnapshotValue(entityType.GetForeignKeys().Single().Properties.Single());
+            var keyValue = entry.GetRelationshipSnapshotValue(
+                entityType.GetForeignKeys().Single().Properties.Single()
+            );
             Assert.Equal(79, keyValue);
         }
 
@@ -428,7 +441,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             entry[fkProperty] = 77;
 
-            var keyValue = entry.GetRelationshipSnapshotValue(entityType.GetForeignKeys().Single().Properties.Single());
+            var keyValue = entry.GetRelationshipSnapshotValue(
+                entityType.GetForeignKeys().Single().Properties.Single()
+            );
             Assert.Equal(78, keyValue);
         }
 
@@ -482,11 +497,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             Assert.Equal(
                 new object[] { 77, "SomeEntity", 1, "Magic Tree House" },
-                CreateValueBuffer(entry));
+                CreateValueBuffer(entry)
+            );
         }
 
-        private static object[] CreateValueBuffer(IUpdateEntry entry)
-            => entry.EntityType.GetProperties().Select(entry.GetCurrentValue).ToArray();
+        private static object[] CreateValueBuffer(IUpdateEntry entry) =>
+            entry.EntityType.GetProperties().Select(entry.GetCurrentValue).ToArray();
 
         protected void AllOriginalValuesTest(object entity)
         {
@@ -520,8 +536,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         }
 
         [ConditionalFact]
-        public virtual void Required_original_values_can_be_accessed_for_entity_that_does_no_notification()
-            => OriginalValuesTest(new TSomeEntity());
+        public virtual void Required_original_values_can_be_accessed_for_entity_that_does_no_notification() =>
+            OriginalValuesTest(new TSomeEntity());
 
         protected void OriginalValuesTest(object entity)
         {
@@ -547,8 +563,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         }
 
         [ConditionalFact]
-        public virtual void Required_original_values_can_be_accessed_generically_for_entity_that_does_no_notification()
-            => GenericOriginalValuesTest(new TSomeEntity());
+        public virtual void Required_original_values_can_be_accessed_generically_for_entity_that_does_no_notification() =>
+            GenericOriginalValuesTest(new TSomeEntity());
 
         protected void GenericOriginalValuesTest(object entity)
         {
@@ -576,8 +592,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         }
 
         [ConditionalFact]
-        public virtual void Null_original_values_are_handled_for_entity_that_does_no_notification()
-            => NullOriginalValuesTest(new TSomeEntity());
+        public virtual void Null_original_values_are_handled_for_entity_that_does_no_notification() =>
+            NullOriginalValuesTest(new TSomeEntity());
 
         protected void NullOriginalValuesTest(object entity)
         {
@@ -609,8 +625,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         }
 
         [ConditionalFact]
-        public virtual void Null_original_values_are_handled_generically_for_entity_that_does_no_notification()
-            => GenericNullOriginalValuesTest(new TSomeEntity());
+        public virtual void Null_original_values_are_handled_generically_for_entity_that_does_no_notification() =>
+            GenericNullOriginalValuesTest(new TSomeEntity());
 
         protected void GenericNullOriginalValuesTest(object entity)
         {
@@ -642,8 +658,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         }
 
         [ConditionalFact]
-        public virtual void Setting_property_using_state_entry_always_marks_as_modified_no_notifications()
-            => SetPropertyInternalEntityEntryTest(new TSomeEntity());
+        public virtual void Setting_property_using_state_entry_always_marks_as_modified_no_notifications() =>
+            SetPropertyInternalEntityEntryTest(new TSomeEntity());
 
         protected void SetPropertyInternalEntityEntryTest(object entity)
         {
@@ -706,16 +722,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         }
 
         [ConditionalFact]
-        public void All_original_values_can_be_accessed_for_entity_that_does_no_notification()
-            => AllOriginalValuesTest(new TSomeEntity());
+        public void All_original_values_can_be_accessed_for_entity_that_does_no_notification() =>
+            AllOriginalValuesTest(new TSomeEntity());
 
         [ConditionalFact]
-        public virtual void AcceptChanges_does_nothing_for_unchanged_entities()
-            => AcceptChangesNoop(EntityState.Unchanged);
+        public virtual void AcceptChanges_does_nothing_for_unchanged_entities() =>
+            AcceptChangesNoop(EntityState.Unchanged);
 
         [ConditionalFact]
-        public virtual void AcceptChanges_does_nothing_for_unknown_entities()
-            => AcceptChangesNoop(EntityState.Detached);
+        public virtual void AcceptChanges_does_nothing_for_unknown_entities() =>
+            AcceptChangesNoop(EntityState.Detached);
 
         private void AcceptChangesNoop(EntityState entityState)
         {
@@ -881,8 +897,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
         public class KContext : DbContext
         {
-            protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+            protected internal override void OnConfiguring(
+                DbContextOptionsBuilder optionsBuilder
+            ) => optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 
             protected internal override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -893,9 +910,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         b.HasKey("Id");
                         b.Property<int>("NonId").ValueGeneratedOnAdd();
                         b.HasAlternateKey("NonId");
-                    });
+                    }
+                );
 
-                modelBuilder.Entity<TSomeEntity>().Property<string>("Name").IsConcurrencyToken().ValueGeneratedOnAdd();
+                modelBuilder.Entity<TSomeEntity>()
+                    .Property<string>("Name")
+                    .IsConcurrencyToken()
+                    .ValueGeneratedOnAdd();
 
                 modelBuilder.Entity<TSomeCompositeEntityBase>(
                     b =>
@@ -903,15 +924,20 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         b.Property<int>("Id1");
                         b.Property<string>("Id2");
                         b.HasKey("Id1", "Id2");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<TSomeDependentEntity>(
                     b =>
                     {
                         b.Property<int>("SomeEntityId");
                         b.HasOne<TSomeEntity>().WithMany().HasForeignKey("SomeEntityId");
-                        b.Property<int>("JustAProperty").HasValueGenerator((p, e) => new InMemoryIntegerValueGenerator<int>(p.GetIndex()));
-                    });
+                        b.Property<int>("JustAProperty")
+                            .HasValueGenerator(
+                                (p, e) => new InMemoryIntegerValueGenerator<int>(p.GetIndex())
+                            );
+                    }
+                );
 
                 modelBuilder.Entity<TSomeMoreDependentEntity>(
                     b =>
@@ -919,7 +945,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         b.Property<int>("Fk11");
                         b.Property<string>("Fk2");
                         b.HasOne<TSomeDependentEntity>().WithMany().HasForeignKey("Fk1", "Fk2");
-                    });
+                    }
+                );
             }
         }
 
@@ -935,17 +962,18 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                             .WithOne(e => (TFirstDependent)e.First)
                             .HasForeignKey<TSecondDependent>("Id")
                             .OnDelete(DeleteBehavior.Cascade);
-                    });
+                    }
+                );
 
-                modelBuilder
-                    .Entity<TRoot>(
-                        b =>
-                        {
-                            b.Property<int>("Id").ValueGeneratedNever();
-                            b.HasOne(e => (TFirstDependent)e.First)
-                                .WithOne(e => (TRoot)e.Root)
-                                .HasForeignKey<TFirstDependent>("Id");
-                        });
+                modelBuilder.Entity<TRoot>(
+                    b =>
+                    {
+                        b.Property<int>("Id").ValueGeneratedNever();
+                        b.HasOne(e => (TFirstDependent)e.First)
+                            .WithOne(e => (TRoot)e.Root)
+                            .HasForeignKey<TFirstDependent>("Id");
+                    }
+                );
 
                 modelBuilder.Entity<TCompositeRoot>(
                     b =>
@@ -953,7 +981,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         b.Property<int>("Id1");
                         b.Property<string>("Id2");
                         b.HasKey("Id1", "Id2");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<TCompositeFirstDependent>(
                     b =>
@@ -963,7 +992,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         b.Property<int>("RootId1");
                         b.Property<string>("RootId2");
                         b.HasKey("Id1", "Id2");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<TCompositeSecondDependent>(
                     b =>
@@ -973,7 +1003,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         b.Property<int>("Id1");
                         b.Property<string>("Id2");
                         b.HasKey("Id1", "Id2");
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<TCompositeRoot>(
                     b =>
@@ -982,7 +1013,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                             .WithOne(e => (TCompositeRoot)e.Root)
                             .HasForeignKey<TCompositeFirstDependent>("RootId1", "RootId2")
                             .IsRequired(false);
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<TCompositeFirstDependent>(
                     b =>
@@ -991,7 +1023,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                             .WithOne(e => (TCompositeFirstDependent)e.First)
                             .HasForeignKey<TCompositeSecondDependent>("FirstId1", "FirstId2")
                             .IsRequired(false);
-                    });
+                    }
+                );
             }
         }
 
@@ -1011,7 +1044,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                             .WithOne(e => (TCompositeRoot)e.Root)
                             .HasForeignKey<TCompositeFirstDependent>("RootId1", "RootId2")
                             .IsRequired();
-                    });
+                    }
+                );
 
                 modelBuilder.Entity<TCompositeFirstDependent>(
                     b =>
@@ -1020,7 +1054,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                             .WithOne(e => (TCompositeFirstDependent)e.First)
                             .HasForeignKey<TCompositeSecondDependent>("FirstId1", "FirstId2")
                             .IsRequired();
-                    });
+                    }
+                );
             }
         }
 
@@ -1035,7 +1070,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         b.HasKey("Id");
                         b.Property<string>("Name").IsConcurrencyToken();
                         b.HasChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot);
-                    });
+                    }
+                );
             }
         }
     }

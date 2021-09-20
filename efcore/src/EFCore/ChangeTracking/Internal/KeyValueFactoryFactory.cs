@@ -23,8 +23,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public virtual IPrincipalKeyValueFactory<TKey> Create<TKey>(IKey key)
-            where TKey : notnull
-            => key.Properties.Count == 1
+            where TKey : notnull =>
+            key.Properties.Count == 1
                 ? CreateSimpleFactory<TKey>(key)
                 : (IPrincipalKeyValueFactory<TKey>)CreateCompositeFactory(key);
 
@@ -32,7 +32,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             where TKey : notnull
         {
             var dependentFactory = new DependentKeyValueFactoryFactory();
-            var principalKeyValueFactory = new SimplePrincipalKeyValueFactory<TKey>(key.Properties.Single());
+            var principalKeyValueFactory = new SimplePrincipalKeyValueFactory<TKey>(
+                key.Properties.Single()
+            );
 
             foreach (var foreignKey in key.GetReferencingForeignKeys())
             {
@@ -41,7 +43,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 SetFactories(
                     foreignKey,
                     dependentKeyValueFactory,
-                    () => new DependentsMap<TKey>(foreignKey, principalKeyValueFactory, dependentKeyValueFactory));
+                    () =>
+                        new DependentsMap<TKey>(
+                            foreignKey,
+                            principalKeyValueFactory,
+                            dependentKeyValueFactory
+                        )
+                );
             }
 
             return principalKeyValueFactory;
@@ -59,7 +67,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 SetFactories(
                     foreignKey,
                     dependentKeyValueFactory,
-                    () => new DependentsMap<object[]>(foreignKey, principalKeyValueFactory, dependentKeyValueFactory));
+                    () =>
+                        new DependentsMap<object[]>(
+                            foreignKey,
+                            principalKeyValueFactory,
+                            dependentKeyValueFactory
+                        )
+                );
             }
 
             return principalKeyValueFactory;
@@ -68,8 +82,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         private static void SetFactories(
             IForeignKey foreignKey,
             object dependentKeyValueFactory,
-            Func<IDependentsMap> dependentsMapFactory)
-        {
+            Func<IDependentsMap> dependentsMapFactory
+        ) {
             var concreteForeignKey = (IRuntimeForeignKey)foreignKey;
 
             concreteForeignKey.DependentKeyValueFactory = dependentKeyValueFactory;

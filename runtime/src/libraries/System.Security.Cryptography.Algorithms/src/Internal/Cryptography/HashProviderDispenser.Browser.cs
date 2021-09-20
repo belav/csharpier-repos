@@ -21,22 +21,31 @@ namespace Internal.Cryptography
                 case HashAlgorithmNames.SHA512:
                     return new SHAHashProvider(hashAlgorithmId);
             }
-            throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId));
+            throw new CryptographicException(
+                SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId)
+            );
         }
 
         public static class OneShotHashProvider
         {
-            public static int HashData(string hashAlgorithmId, ReadOnlySpan<byte> source, Span<byte> destination)
-            {
+            public static int HashData(
+                string hashAlgorithmId,
+                ReadOnlySpan<byte> source,
+                Span<byte> destination
+            ) {
                 HashProvider provider = HashProviderDispenser.CreateHashProvider(hashAlgorithmId);
                 provider.AppendHashData(source);
                 return provider.FinalizeHashAndReset(destination);
             }
         }
 
-        public static unsafe HashProvider CreateMacProvider(string hashAlgorithmId, ReadOnlySpan<byte> key)
-        {
-            throw new PlatformNotSupportedException(SR.SystemSecurityCryptographyAlgorithms_PlatformNotSupported);
+        public static unsafe HashProvider CreateMacProvider(
+            string hashAlgorithmId,
+            ReadOnlySpan<byte> key
+        ) {
+            throw new PlatformNotSupportedException(
+                SR.SystemSecurityCryptographyAlgorithms_PlatformNotSupported
+            );
         }
     }
 }

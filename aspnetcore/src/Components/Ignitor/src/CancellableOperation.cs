@@ -14,7 +14,9 @@ namespace Ignitor
         {
             Timeout = timeout;
 
-            Completion = new TaskCompletionSource<TResult>(TaskCreationOptions.RunContinuationsAsynchronously);
+            Completion = new TaskCompletionSource<TResult>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             Completion.Task.ContinueWith(
                 (task, state) =>
                 {
@@ -22,13 +24,16 @@ namespace Ignitor
                     operation.Dispose();
                 },
                 this,
-                TaskContinuationOptions.ExecuteSynchronously); // We need to execute synchronously to clean-up before anything else continues
-
+                TaskContinuationOptions.ExecuteSynchronously
+            ); // We need to execute synchronously to clean-up before anything else continues
 
             Cancellation = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
-            if (Timeout != null && Timeout != System.Threading.Timeout.InfiniteTimeSpan && Timeout != TimeSpan.MaxValue)
-            {
+            if (
+                Timeout != null
+                && Timeout != System.Threading.Timeout.InfiniteTimeSpan
+                && Timeout != TimeSpan.MaxValue
+            ) {
                 Cancellation.CancelAfter(Timeout.Value);
             }
 
@@ -44,11 +49,14 @@ namespace Ignitor
                         return;
                     }
 
-                    operation.Completion.TrySetException(new TimeoutException($"The operation timed out after {Timeout}."));
+                    operation.Completion.TrySetException(
+                        new TimeoutException($"The operation timed out after {Timeout}.")
+                    );
                     operation.Cancellation?.Dispose();
                     operation.CancellationRegistration.Dispose();
                 },
-                this);
+                this
+            );
         }
 
         public TimeSpan? Timeout { get; }

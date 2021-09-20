@@ -12,17 +12,22 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
 {
     internal class RemoteErrorBoundaryLogger : IErrorBoundaryLogger
     {
-        private static readonly Action<ILogger, string, Exception> _exceptionCaughtByErrorBoundary = LoggerMessage.Define<string>(
-            LogLevel.Warning,
-            100,
-            "Unhandled exception rendering component: {Message}");
+        private static readonly Action<ILogger, string, Exception> _exceptionCaughtByErrorBoundary =
+            LoggerMessage.Define<string>(
+                LogLevel.Warning,
+                100,
+                "Unhandled exception rendering component: {Message}"
+            );
 
         private readonly ILogger _logger;
         private readonly IJSRuntime _jsRuntime;
         private readonly CircuitOptions _options;
 
-        public RemoteErrorBoundaryLogger(ILogger<ErrorBoundary> logger, IJSRuntime jsRuntime, IOptions<CircuitOptions> options)
-        {
+        public RemoteErrorBoundaryLogger(
+            ILogger<ErrorBoundary> logger,
+            IJSRuntime jsRuntime,
+            IOptions<CircuitOptions> options
+        ) {
             _logger = logger;
             _jsRuntime = jsRuntime;
             _options = options.Value;

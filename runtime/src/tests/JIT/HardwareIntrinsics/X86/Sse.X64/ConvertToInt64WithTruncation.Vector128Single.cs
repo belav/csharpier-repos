@@ -20,7 +20,8 @@ namespace JIT.HardwareIntrinsics.X86
     {
         private static void ConvertToInt64WithTruncationVector128Single()
         {
-            var test = new SimdScalarUnaryOpConvertTest__ConvertToInt64WithTruncationVector128Single();
+            var test =
+                new SimdScalarUnaryOpConvertTest__ConvertToInt64WithTruncationVector128Single();
 
             if (test.IsSupported)
             {
@@ -98,14 +99,22 @@ namespace JIT.HardwareIntrinsics.X86
             {
                 var testStruct = new TestStruct();
 
-                for (var i = 0; i < Op1ElementCount; i++) { _data[i] = TestLibrary.Generator.GetSingle(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Single>, byte>(ref testStruct._fld), ref Unsafe.As<Single, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector128<Single>>());
+                for (var i = 0; i < Op1ElementCount; i++)
+                {
+                    _data[i] = TestLibrary.Generator.GetSingle();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector128<Single>, byte>(ref testStruct._fld),
+                    ref Unsafe.As<Single, byte>(ref _data[0]),
+                    (uint)Unsafe.SizeOf<Vector128<Single>>()
+                );
 
                 return testStruct;
             }
 
-            public void RunStructFldScenario(SimdScalarUnaryOpConvertTest__ConvertToInt64WithTruncationVector128Single testClass)
-            {
+            public void RunStructFldScenario(
+                SimdScalarUnaryOpConvertTest__ConvertToInt64WithTruncationVector128Single testClass
+            ) {
                 var result = Sse.X64.ConvertToInt64WithTruncation(_fld);
                 testClass.ValidateResult(_fld, result);
             }
@@ -113,7 +122,8 @@ namespace JIT.HardwareIntrinsics.X86
 
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int Op1ElementCount = Unsafe.SizeOf<Vector128<Single>>() / sizeof(Single);
+        private static readonly int Op1ElementCount =
+            Unsafe.SizeOf<Vector128<Single>>() / sizeof(Single);
 
         private static Single[] _data = new Single[Op1ElementCount];
 
@@ -125,18 +135,35 @@ namespace JIT.HardwareIntrinsics.X86
 
         static SimdScalarUnaryOpConvertTest__ConvertToInt64WithTruncationVector128Single()
         {
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = TestLibrary.Generator.GetSingle(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Single>, byte>(ref _clsVar), ref Unsafe.As<Single, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector128<Single>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = TestLibrary.Generator.GetSingle();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Single>, byte>(ref _clsVar),
+                ref Unsafe.As<Single, byte>(ref _data[0]),
+                (uint)Unsafe.SizeOf<Vector128<Single>>()
+            );
         }
 
         public SimdScalarUnaryOpConvertTest__ConvertToInt64WithTruncationVector128Single()
         {
             Succeeded = true;
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = TestLibrary.Generator.GetSingle(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Single>, byte>(ref _fld), ref Unsafe.As<Single, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector128<Single>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = TestLibrary.Generator.GetSingle();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Single>, byte>(ref _fld),
+                ref Unsafe.As<Single, byte>(ref _data[0]),
+                (uint)Unsafe.SizeOf<Vector128<Single>>()
+            );
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = TestLibrary.Generator.GetSingle(); }
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = TestLibrary.Generator.GetSingle();
+            }
             _dataTable = new SimdScalarUnaryOpTest__DataTable<Single>(_data, LargestVectorSize);
         }
 
@@ -181,10 +208,14 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Sse.X64).GetMethod(nameof(Sse.X64.ConvertToInt64WithTruncation), new Type[] { typeof(Vector128<Single>) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.Read<Vector128<Single>>(_dataTable.inArrayPtr)
-                                     });
+            var result = typeof(Sse.X64).GetMethod(
+                    nameof(Sse.X64.ConvertToInt64WithTruncation),
+                    new Type[] { typeof(Vector128<Single>) }
+                )
+                .Invoke(
+                    null,
+                    new object[] { Unsafe.Read<Vector128<Single>>(_dataTable.inArrayPtr) }
+                );
 
             ValidateResult(_dataTable.inArrayPtr, (Int64)(result));
         }
@@ -193,10 +224,11 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Sse.X64).GetMethod(nameof(Sse.X64.ConvertToInt64WithTruncation), new Type[] { typeof(Vector128<Single>) })
-                                     .Invoke(null, new object[] {
-                                        Sse.LoadVector128((Single*)(_dataTable.inArrayPtr))
-                                     });
+            var result = typeof(Sse.X64).GetMethod(
+                    nameof(Sse.X64.ConvertToInt64WithTruncation),
+                    new Type[] { typeof(Vector128<Single>) }
+                )
+                .Invoke(null, new object[] { Sse.LoadVector128((Single*)(_dataTable.inArrayPtr)) });
 
             ValidateResult(_dataTable.inArrayPtr, (Int64)(result));
         }
@@ -205,10 +237,14 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Sse.X64).GetMethod(nameof(Sse.X64.ConvertToInt64WithTruncation), new Type[] { typeof(Vector128<Single>) })
-                                     .Invoke(null, new object[] {
-                                        Sse.LoadAlignedVector128((Single*)(_dataTable.inArrayPtr))
-                                     });
+            var result = typeof(Sse.X64).GetMethod(
+                    nameof(Sse.X64.ConvertToInt64WithTruncation),
+                    new Type[] { typeof(Vector128<Single>) }
+                )
+                .Invoke(
+                    null,
+                    new object[] { Sse.LoadAlignedVector128((Single*)(_dataTable.inArrayPtr)) }
+                );
 
             ValidateResult(_dataTable.inArrayPtr, (Int64)(result));
         }
@@ -217,9 +253,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = Sse.X64.ConvertToInt64WithTruncation(
-                _clsVar
-            );
+            var result = Sse.X64.ConvertToInt64WithTruncation(_clsVar);
 
             ValidateResult(_clsVar, result);
         }
@@ -258,7 +292,8 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClassLclFldScenario));
 
-            var test = new SimdScalarUnaryOpConvertTest__ConvertToInt64WithTruncationVector128Single();
+            var test =
+                new SimdScalarUnaryOpConvertTest__ConvertToInt64WithTruncationVector128Single();
             var result = Sse.X64.ConvertToInt64WithTruncation(test._fld);
 
             ValidateResult(test._fld, result);
@@ -312,33 +347,50 @@ namespace JIT.HardwareIntrinsics.X86
             }
         }
 
-        private void ValidateResult(Vector128<Single> firstOp, Int64 result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Vector128<Single> firstOp,
+            Int64 result,
+            [CallerMemberName] string method = ""
+        ) {
             Single[] inArray = new Single[Op1ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Single, byte>(ref inArray[0]), firstOp);
             ValidateResult(inArray, result, method);
         }
 
-        private void ValidateResult(void* firstOp, Int64 result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            void* firstOp,
+            Int64 result,
+            [CallerMemberName] string method = ""
+        ) {
             Single[] inArray = new Single[Op1ElementCount];
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Single, byte>(ref inArray[0]), ref Unsafe.AsRef<byte>(firstOp), (uint)Unsafe.SizeOf<Vector128<Single>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Single, byte>(ref inArray[0]),
+                ref Unsafe.AsRef<byte>(firstOp),
+                (uint)Unsafe.SizeOf<Vector128<Single>>()
+            );
             ValidateResult(inArray, result, method);
         }
 
-        private void ValidateResult(Single[] firstOp, Int64 result, [CallerMemberName] string method = "")
-        {
+        private void ValidateResult(
+            Single[] firstOp,
+            Int64 result,
+            [CallerMemberName] string method = ""
+        ) {
             bool succeeded = true;
 
-            if ((long) firstOp[0] != result)
+            if ((long)firstOp[0] != result)
             {
                 succeeded = false;
             }
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Sse.X64)}.{nameof(Sse.X64.ConvertToInt64WithTruncation)}<Int64>(Vector128<Single>): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Sse.X64)}.{nameof(Sse.X64.ConvertToInt64WithTruncation)}<Int64>(Vector128<Single>): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  firstOp: ({string.Join(", ", firstOp)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"   result: result");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

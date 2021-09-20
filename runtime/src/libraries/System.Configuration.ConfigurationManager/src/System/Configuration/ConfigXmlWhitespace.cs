@@ -11,8 +11,12 @@ namespace System.Configuration
         private string _filename;
         private int _line;
 
-        public ConfigXmlWhitespace(string filename, int line, string comment, XmlDocument doc)
-            : base(comment, doc)
+        public ConfigXmlWhitespace(
+            string filename,
+            int line,
+            string comment,
+            XmlDocument doc
+        ) : base(comment, doc)
         {
             _line = line;
             _filename = filename;

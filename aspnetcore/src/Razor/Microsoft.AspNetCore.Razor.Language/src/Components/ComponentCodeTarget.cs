@@ -11,20 +11,25 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
     {
         private readonly RazorCodeGenerationOptions _options;
 
-        public ComponentCodeTarget(RazorCodeGenerationOptions options, IEnumerable<ICodeTargetExtension> extensions)
-        {
+        public ComponentCodeTarget(
+            RazorCodeGenerationOptions options,
+            IEnumerable<ICodeTargetExtension> extensions
+        ) {
             _options = options;
 
             // Components provide some built-in target extensions that don't apply to
             // legacy documents.
-            Extensions = new[] { new ComponentTemplateTargetExtension(), }.Concat(extensions).ToArray();
+            Extensions = new[] { new ComponentTemplateTargetExtension(), }.Concat(extensions)
+                .ToArray();
         }
 
         public ICodeTargetExtension[] Extensions { get; }
 
         public override IntermediateNodeWriter CreateNodeWriter()
         {
-            return _options.DesignTime ? (IntermediateNodeWriter)new ComponentDesignTimeNodeWriter() : new ComponentRuntimeNodeWriter();
+            return _options.DesignTime
+              ? (IntermediateNodeWriter)new ComponentDesignTimeNodeWriter()
+              : new ComponentRuntimeNodeWriter();
         }
 
         public override TExtension GetExtension<TExtension>()

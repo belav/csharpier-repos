@@ -88,8 +88,13 @@ namespace System.Reflection.Context.Delegation
             return UnderlyingProperty.GetValue(obj, index);
         }
 
-        public override object GetValue(object obj, BindingFlags invokeAttr, Binder binder, object[] index, CultureInfo culture)
-        {
+        public override object GetValue(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] index,
+            CultureInfo culture
+        ) {
             return UnderlyingProperty.GetValue(obj, invokeAttr, binder, index, culture);
         }
 
@@ -98,8 +103,14 @@ namespace System.Reflection.Context.Delegation
             UnderlyingProperty.SetValue(obj, value, index);
         }
 
-        public override void SetValue(object obj, object value, BindingFlags invokeAttr, Binder binder, object[] index, CultureInfo culture)
-        {
+        public override void SetValue(
+            object obj,
+            object value,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] index,
+            CultureInfo culture
+        ) {
             UnderlyingProperty.SetValue(obj, value, invokeAttr, binder, index, culture);
         }
 

@@ -17,14 +17,27 @@ namespace System.Linq.Expressions.Tests
 
     public sealed class ExceptionInfo
     {
-        private static readonly Type s_tyExceptionInfo = Type.GetType("System.Reflection.Emit.__ExceptionInfo", throwOnError: true);
-        private static readonly MethodInfo s_miGetStartAddress = GetMethodInfo(nameof(GetStartAddress));
+        private static readonly Type s_tyExceptionInfo = Type.GetType(
+            "System.Reflection.Emit.__ExceptionInfo",
+            throwOnError: true
+        );
+        private static readonly MethodInfo s_miGetStartAddress = GetMethodInfo(
+            nameof(GetStartAddress)
+        );
         private static readonly MethodInfo s_miGetEndAddress = GetMethodInfo(nameof(GetEndAddress));
-        private static readonly MethodInfo s_miGetNumberOfCatches = GetMethodInfo(nameof(GetNumberOfCatches));
-        private static readonly MethodInfo s_miGetCatchAddresses = GetMethodInfo(nameof(GetCatchAddresses));
-        private static readonly MethodInfo s_miGetCatchEndAddresses = GetMethodInfo(nameof(GetCatchEndAddresses));
+        private static readonly MethodInfo s_miGetNumberOfCatches = GetMethodInfo(
+            nameof(GetNumberOfCatches)
+        );
+        private static readonly MethodInfo s_miGetCatchAddresses = GetMethodInfo(
+            nameof(GetCatchAddresses)
+        );
+        private static readonly MethodInfo s_miGetCatchEndAddresses = GetMethodInfo(
+            nameof(GetCatchEndAddresses)
+        );
         private static readonly MethodInfo s_miGetCatchClass = GetMethodInfo(nameof(GetCatchClass));
-        private static readonly MethodInfo s_miGetExceptionTypes = GetMethodInfo(nameof(GetExceptionTypes));
+        private static readonly MethodInfo s_miGetExceptionTypes = GetMethodInfo(
+            nameof(GetExceptionTypes)
+        );
 
         public int GetStartAddress() => Invoke<int>(s_miGetStartAddress);
         public int GetEndAddress() => Invoke<int>(s_miGetEndAddress);
@@ -55,7 +68,12 @@ namespace System.Linq.Expressions.Tests
 
                 for (var i = 0; i < n; i++)
                 {
-                    Handlers[i] = new HandlerInfo(handlerStart[i], handlerEnd[i], catchType[i], types[i]);
+                    Handlers[i] = new HandlerInfo(
+                        handlerStart[i],
+                        handlerEnd[i],
+                        catchType[i],
+                        types[i]
+                    );
                 }
             }
             else
@@ -68,8 +86,10 @@ namespace System.Linq.Expressions.Tests
         public int EndAddress { get; }
         public HandlerInfo[] Handlers { get; }
 
-        private static MethodInfo GetMethodInfo(string name) => s_tyExceptionInfo.GetMethodAssert(name);
-        private T Invoke<T>(MethodInfo method, params object[] args) => (T)method.Invoke(_exceptionInfo, args);
+        private static MethodInfo GetMethodInfo(string name) =>
+            s_tyExceptionInfo.GetMethodAssert(name);
+        private T Invoke<T>(MethodInfo method, params object[] args) =>
+            (T)method.Invoke(_exceptionInfo, args);
     }
 
     public sealed class HandlerInfo

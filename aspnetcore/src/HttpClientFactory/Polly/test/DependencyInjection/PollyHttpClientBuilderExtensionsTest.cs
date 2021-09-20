@@ -24,7 +24,9 @@ namespace Microsoft.Extensions.DependencyInjection
             PrimaryHandler = new FaultyMessageHandler();
 
             NoOpPolicy = Policy.NoOpAsync<HttpResponseMessage>();
-            RetryPolicy = Policy.Handle<OverflowException>().OrResult<HttpResponseMessage>(r => false).RetryAsync();
+            RetryPolicy = Policy.Handle<OverflowException>()
+                .OrResult<HttpResponseMessage>(r => false)
+                .RetryAsync();
         }
 
         private FaultyMessageHandler PrimaryHandler { get; }
@@ -43,13 +45,18 @@ namespace Microsoft.Extensions.DependencyInjection
             HttpMessageHandlerBuilder builder = null;
 
             // Act1
-            serviceCollection.AddHttpClient("example.com", c => c.BaseAddress = new Uri("http://example.com"))
+            serviceCollection.AddHttpClient(
+                    "example.com",
+                    c => c.BaseAddress = new Uri("http://example.com")
+                )
                 .AddPolicyHandler(RetryPolicy)
-                .ConfigureHttpMessageHandlerBuilder(b =>
-                {
-                    b.PrimaryHandler = PrimaryHandler;
-                    builder = b;
-                });
+                .ConfigureHttpMessageHandlerBuilder(
+                    b =>
+                    {
+                        b.PrimaryHandler = PrimaryHandler;
+                        builder = b;
+                    }
+                );
 
             var services = serviceCollection.BuildServiceProvider();
             var factory = services.GetRequiredService<IHttpClientFactory>();
@@ -64,7 +71,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.AdditionalHandlers,
                 h => Assert.IsType<LoggingScopeHttpMessageHandler>(h),
                 h => Assert.IsType<PolicyHttpMessageHandler>(h),
-                h => Assert.IsType<LoggingHttpMessageHandler>(h));
+                h => Assert.IsType<LoggingHttpMessageHandler>(h)
+            );
 
             // Act 3
             var response = await client.SendAsync(new HttpRequestMessage());
@@ -81,13 +89,20 @@ namespace Microsoft.Extensions.DependencyInjection
             HttpMessageHandlerBuilder builder = null;
 
             // Act1
-            serviceCollection.AddHttpClient("example.com", c => c.BaseAddress = new Uri("http://example.com"))
-                .AddPolicyHandler((req) => req.RequestUri.AbsolutePath == "/" ? RetryPolicy : NoOpPolicy)
-                .ConfigureHttpMessageHandlerBuilder(b =>
-                {
-                    b.PrimaryHandler = PrimaryHandler;
-                    builder = b;
-                });
+            serviceCollection.AddHttpClient(
+                    "example.com",
+                    c => c.BaseAddress = new Uri("http://example.com")
+                )
+                .AddPolicyHandler(
+                    (req) => req.RequestUri.AbsolutePath == "/" ? RetryPolicy : NoOpPolicy
+                )
+                .ConfigureHttpMessageHandlerBuilder(
+                    b =>
+                    {
+                        b.PrimaryHandler = PrimaryHandler;
+                        builder = b;
+                    }
+                );
 
             var services = serviceCollection.BuildServiceProvider();
             var factory = services.GetRequiredService<IHttpClientFactory>();
@@ -102,7 +117,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.AdditionalHandlers,
                 h => Assert.IsType<LoggingScopeHttpMessageHandler>(h),
                 h => Assert.IsType<PolicyHttpMessageHandler>(h),
-                h => Assert.IsType<LoggingHttpMessageHandler>(h));
+                h => Assert.IsType<LoggingHttpMessageHandler>(h)
+            );
 
             // Act 3
             var response = await client.SendAsync(new HttpRequestMessage());
@@ -111,7 +127,9 @@ namespace Microsoft.Extensions.DependencyInjection
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
 
             // Act 4
-            await Assert.ThrowsAsync<OverflowException>(() => client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/throw")));
+            await Assert.ThrowsAsync<OverflowException>(
+                () => client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/throw"))
+            );
         }
 
         [Fact]
@@ -122,13 +140,20 @@ namespace Microsoft.Extensions.DependencyInjection
             HttpMessageHandlerBuilder builder = null;
 
             // Act1
-            serviceCollection.AddHttpClient("example.com", c => c.BaseAddress = new Uri("http://example.com"))
-                .AddPolicyHandler((req) => req.RequestUri.AbsolutePath == "/" ? RetryPolicy : NoOpPolicy)
-                .ConfigureHttpMessageHandlerBuilder(b =>
-                {
-                    b.PrimaryHandler = PrimaryHandler;
-                    builder = b;
-                });
+            serviceCollection.AddHttpClient(
+                    "example.com",
+                    c => c.BaseAddress = new Uri("http://example.com")
+                )
+                .AddPolicyHandler(
+                    (req) => req.RequestUri.AbsolutePath == "/" ? RetryPolicy : NoOpPolicy
+                )
+                .ConfigureHttpMessageHandlerBuilder(
+                    b =>
+                    {
+                        b.PrimaryHandler = PrimaryHandler;
+                        builder = b;
+                    }
+                );
 
             var services = serviceCollection.BuildServiceProvider();
             var factory = services.GetRequiredService<IHttpClientFactory>();
@@ -143,7 +168,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.AdditionalHandlers,
                 h => Assert.IsType<LoggingScopeHttpMessageHandler>(h),
                 h => Assert.IsType<PolicyHttpMessageHandler>(h),
-                h => Assert.IsType<LoggingHttpMessageHandler>(h));
+                h => Assert.IsType<LoggingHttpMessageHandler>(h)
+            );
 
             // Act 3
             var response = await client.SendAsync(new HttpRequestMessage());
@@ -152,7 +178,9 @@ namespace Microsoft.Extensions.DependencyInjection
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
 
             // Act 4
-            await Assert.ThrowsAsync<OverflowException>(() => client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/throw")));
+            await Assert.ThrowsAsync<OverflowException>(
+                () => client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/throw"))
+            );
         }
 
         [Fact]
@@ -166,14 +194,19 @@ namespace Microsoft.Extensions.DependencyInjection
             HttpMessageHandlerBuilder builder = null;
 
             // Act1
-            serviceCollection.AddHttpClient("example.com", c => c.BaseAddress = new Uri("http://example.com"))
+            serviceCollection.AddHttpClient(
+                    "example.com",
+                    c => c.BaseAddress = new Uri("http://example.com")
+                )
                 .AddPolicyHandlerFromRegistry("retry")
-                .ConfigureHttpMessageHandlerBuilder(b =>
-                {
-                    b.PrimaryHandler = PrimaryHandler;
+                .ConfigureHttpMessageHandlerBuilder(
+                    b =>
+                    {
+                        b.PrimaryHandler = PrimaryHandler;
 
-                    builder = b;
-                });
+                        builder = b;
+                    }
+                );
 
             var services = serviceCollection.BuildServiceProvider();
             var factory = services.GetRequiredService<IHttpClientFactory>();
@@ -188,7 +221,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.AdditionalHandlers,
                 h => Assert.IsType<LoggingScopeHttpMessageHandler>(h),
                 h => Assert.IsType<PolicyHttpMessageHandler>(h),
-                h => Assert.IsType<LoggingHttpMessageHandler>(h));
+                h => Assert.IsType<LoggingHttpMessageHandler>(h)
+            );
 
             // Act 3
             var response = await client.SendAsync(new HttpRequestMessage());
@@ -209,18 +243,25 @@ namespace Microsoft.Extensions.DependencyInjection
             HttpMessageHandlerBuilder builder = null;
 
             // Act1
-            serviceCollection.AddHttpClient("example.com", c => c.BaseAddress = new Uri("http://example.com"))
-                .AddPolicyHandlerFromRegistry((reg, req) =>
-                {
-                    return req.RequestUri.AbsolutePath == "/" ?
-                        reg.Get<IAsyncPolicy<HttpResponseMessage>>("retry") :
-                        reg.Get<IAsyncPolicy<HttpResponseMessage>>("noop");
-                })
-                .ConfigureHttpMessageHandlerBuilder(b =>
-                {
-                    b.PrimaryHandler = PrimaryHandler;
-                    builder = b;
-                });
+            serviceCollection.AddHttpClient(
+                    "example.com",
+                    c => c.BaseAddress = new Uri("http://example.com")
+                )
+                .AddPolicyHandlerFromRegistry(
+                    (reg, req) =>
+                    {
+                        return req.RequestUri.AbsolutePath == "/"
+                          ? reg.Get<IAsyncPolicy<HttpResponseMessage>>("retry")
+                          : reg.Get<IAsyncPolicy<HttpResponseMessage>>("noop");
+                    }
+                )
+                .ConfigureHttpMessageHandlerBuilder(
+                    b =>
+                    {
+                        b.PrimaryHandler = PrimaryHandler;
+                        builder = b;
+                    }
+                );
 
             var services = serviceCollection.BuildServiceProvider();
             var factory = services.GetRequiredService<IHttpClientFactory>();
@@ -235,7 +276,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.AdditionalHandlers,
                 h => Assert.IsType<LoggingScopeHttpMessageHandler>(h),
                 h => Assert.IsType<PolicyHttpMessageHandler>(h),
-                h => Assert.IsType<LoggingHttpMessageHandler>(h));
+                h => Assert.IsType<LoggingHttpMessageHandler>(h)
+            );
 
             // Act 3
             var response = await client.SendAsync(new HttpRequestMessage());
@@ -244,7 +286,9 @@ namespace Microsoft.Extensions.DependencyInjection
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
 
             // Act 4
-            await Assert.ThrowsAsync<OverflowException>(() => client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/throw")));
+            await Assert.ThrowsAsync<OverflowException>(
+                () => client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/throw"))
+            );
         }
 
         [Theory]
@@ -253,8 +297,9 @@ namespace Microsoft.Extensions.DependencyInjection
         [InlineData((HttpStatusCode)501)]
         [InlineData((HttpStatusCode)502)]
         [InlineData((HttpStatusCode)503)]
-        public async Task AddTransientHttpErrorPolicy_AddsPolicyHandler_HandlesStatusCode(HttpStatusCode statusCode)
-        {
+        public async Task AddTransientHttpErrorPolicy_AddsPolicyHandler_HandlesStatusCode(
+            HttpStatusCode statusCode
+        ) {
             // Arrange
             using var handler = new SequenceMessageHandler()
             {
@@ -270,13 +315,18 @@ namespace Microsoft.Extensions.DependencyInjection
             HttpMessageHandlerBuilder builder = null;
 
             // Act1
-            serviceCollection.AddHttpClient("example.com", c => c.BaseAddress = new Uri("http://example.com"))
+            serviceCollection.AddHttpClient(
+                    "example.com",
+                    c => c.BaseAddress = new Uri("http://example.com")
+                )
                 .AddTransientHttpErrorPolicy(b => b.RetryAsync(5))
-                .ConfigureHttpMessageHandlerBuilder(b =>
-                {
-                    b.PrimaryHandler = handler;
-                    builder = b;
-                });
+                .ConfigureHttpMessageHandlerBuilder(
+                    b =>
+                    {
+                        b.PrimaryHandler = handler;
+                        builder = b;
+                    }
+                );
 
             var services = serviceCollection.BuildServiceProvider();
             var factory = services.GetRequiredService<IHttpClientFactory>();
@@ -291,7 +341,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.AdditionalHandlers,
                 h => Assert.IsType<LoggingScopeHttpMessageHandler>(h),
                 h => Assert.IsType<PolicyHttpMessageHandler>(h),
-                h => Assert.IsType<LoggingHttpMessageHandler>(h));
+                h => Assert.IsType<LoggingHttpMessageHandler>(h)
+            );
 
             // Act 3
             var response = await client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/"));
@@ -308,7 +359,10 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 Responses =
                 {
-                    (req) => { throw new HttpRequestException("testing..."); },
+                    (req) =>
+                    {
+                        throw new HttpRequestException("testing...");
+                    },
                     (req) => new HttpResponseMessage(HttpStatusCode.OK),
                 },
             };
@@ -318,13 +372,18 @@ namespace Microsoft.Extensions.DependencyInjection
             HttpMessageHandlerBuilder builder = null;
 
             // Act1
-            serviceCollection.AddHttpClient("example.com", c => c.BaseAddress = new Uri("http://example.com"))
+            serviceCollection.AddHttpClient(
+                    "example.com",
+                    c => c.BaseAddress = new Uri("http://example.com")
+                )
                 .AddTransientHttpErrorPolicy(b => b.RetryAsync(5))
-                .ConfigureHttpMessageHandlerBuilder(b =>
-                {
-                    b.PrimaryHandler = handler;
-                    builder = b;
-                });
+                .ConfigureHttpMessageHandlerBuilder(
+                    b =>
+                    {
+                        b.PrimaryHandler = handler;
+                        builder = b;
+                    }
+                );
 
             var services = serviceCollection.BuildServiceProvider();
             var factory = services.GetRequiredService<IHttpClientFactory>();
@@ -339,7 +398,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.AdditionalHandlers,
                 h => Assert.IsType<LoggingScopeHttpMessageHandler>(h),
                 h => Assert.IsType<PolicyHttpMessageHandler>(h),
-                h => Assert.IsType<LoggingHttpMessageHandler>(h));
+                h => Assert.IsType<LoggingHttpMessageHandler>(h)
+            );
 
             // Act 3
             var response = await client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/"));
@@ -358,20 +418,22 @@ namespace Microsoft.Extensions.DependencyInjection
             // Act1
             serviceCollection.AddHttpClient("Service")
                 .AddPolicyHandler(
-                (sp, req, key) =>
-                {
-                    return RetryPolicy;
-                },
-                (r) =>
-                {
-                    return r.RequestUri.Host;
-                }
+                    (sp, req, key) =>
+                    {
+                        return RetryPolicy;
+                    },
+                    (r) =>
+                    {
+                        return r.RequestUri.Host;
+                    }
                 )
-                .ConfigureHttpMessageHandlerBuilder(b =>
-                {
-                    b.PrimaryHandler = PrimaryHandler;
-                    builder = b;
-                });
+                .ConfigureHttpMessageHandlerBuilder(
+                    b =>
+                    {
+                        b.PrimaryHandler = PrimaryHandler;
+                        builder = b;
+                    }
+                );
 
             var services = serviceCollection.BuildServiceProvider();
             var factory = services.GetRequiredService<IHttpClientFactory>();
@@ -385,7 +447,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.AdditionalHandlers,
                 h => Assert.IsType<LoggingScopeHttpMessageHandler>(h),
                 h => Assert.IsType<PolicyHttpMessageHandler>(h),
-                h => Assert.IsType<LoggingHttpMessageHandler>(h));
+                h => Assert.IsType<LoggingHttpMessageHandler>(h)
+            );
 
             // Act 3
             var request = new HttpRequestMessage(HttpMethod.Get, "http://host1/Service1/");
@@ -419,33 +482,38 @@ namespace Microsoft.Extensions.DependencyInjection
         [Fact]
         public async Task AddPolicyHandlerFromRegistry_WithConfigureDelegate_AddsPolicyHandler()
         {
-            var options = new PollyPolicyOptions()
-            {
-                PolicyName = "retrypolicy"
-            };
+            var options = new PollyPolicyOptions() { PolicyName = "retrypolicy" };
 
             var serviceCollection = new ServiceCollection();
 
             serviceCollection.AddSingleton(options);
 
-            serviceCollection.AddPolicyRegistry((serviceProvider, registry) =>
-            {
-                string policyName = serviceProvider.GetRequiredService<PollyPolicyOptions>().PolicyName;
+            serviceCollection.AddPolicyRegistry(
+                (serviceProvider, registry) =>
+                {
+                    string policyName =
+                        serviceProvider.GetRequiredService<PollyPolicyOptions>().PolicyName;
 
-                registry.Add<IAsyncPolicy<HttpResponseMessage>>(policyName, RetryPolicy);
-            });
+                    registry.Add<IAsyncPolicy<HttpResponseMessage>>(policyName, RetryPolicy);
+                }
+            );
 
             HttpMessageHandlerBuilder builder = null;
 
             // Act1
-            serviceCollection.AddHttpClient("example.com", c => c.BaseAddress = new Uri("http://example.com"))
+            serviceCollection.AddHttpClient(
+                    "example.com",
+                    c => c.BaseAddress = new Uri("http://example.com")
+                )
                 .AddPolicyHandlerFromRegistry(options.PolicyName)
-                .ConfigureHttpMessageHandlerBuilder(b =>
-                {
-                    b.PrimaryHandler = PrimaryHandler;
+                .ConfigureHttpMessageHandlerBuilder(
+                    b =>
+                    {
+                        b.PrimaryHandler = PrimaryHandler;
 
-                    builder = b;
-                });
+                        builder = b;
+                    }
+                );
 
             var services = serviceCollection.BuildServiceProvider();
             var factory = services.GetRequiredService<IHttpClientFactory>();
@@ -460,7 +528,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 builder.AdditionalHandlers,
                 h => Assert.IsType<LoggingScopeHttpMessageHandler>(h),
                 h => Assert.IsType<PolicyHttpMessageHandler>(h),
-                h => Assert.IsType<LoggingHttpMessageHandler>(h));
+                h => Assert.IsType<LoggingHttpMessageHandler>(h)
+            );
 
             // Act 3
             var response = await client.SendAsync(new HttpRequestMessage());
@@ -509,10 +578,11 @@ namespace Microsoft.Extensions.DependencyInjection
             var serviceCollection = new ServiceCollection();
 
             // Act
-            serviceCollection.AddPolicyRegistry((serviceProvider, registry) =>
-            {
-                // No-op
-            });
+            serviceCollection.AddPolicyRegistry(
+                (serviceProvider, registry) => {
+                    // No-op
+                }
+            );
 
             var services = serviceCollection.BuildServiceProvider();
             var registry = services.GetService<IPolicyRegistry<string>>();
@@ -530,8 +600,10 @@ namespace Microsoft.Extensions.DependencyInjection
 
             public Func<Exception> CreateException { get; set; } = () => new OverflowException();
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-            {
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            ) {
                 if (CallCount++ % 2 == 0)
                 {
                     throw CreateException();
@@ -547,10 +619,13 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             public int CallCount { get; private set; }
 
-            public List<Func<HttpRequestMessage, HttpResponseMessage>> Responses { get; } = new List<Func<HttpRequestMessage, HttpResponseMessage>>();
+            public List<Func<HttpRequestMessage, HttpResponseMessage>> Responses { get; } =
+                new List<Func<HttpRequestMessage, HttpResponseMessage>>();
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-            {
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            ) {
                 var func = Responses[CallCount++ % Responses.Count];
                 return Task.FromResult(func(request));
             }

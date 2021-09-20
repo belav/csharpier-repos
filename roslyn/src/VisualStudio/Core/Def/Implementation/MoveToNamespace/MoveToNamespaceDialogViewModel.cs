@@ -21,19 +21,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveToNamespace
             string defaultNamespace,
             ImmutableArray<string> availableNamespaces,
             ISyntaxFacts syntaxFacts,
-            ImmutableArray<string> namespaceHistory)
-        {
+            ImmutableArray<string> namespaceHistory
+        ) {
             _syntaxFacts = syntaxFacts ?? throw new ArgumentNullException(nameof(syntaxFacts));
             _namespaceName = defaultNamespace;
             AvailableNamespaces = namespaceHistory.Select(n => new NamespaceItem(true, n))
-                .Concat(availableNamespaces.Except(namespaceHistory).Select(n => new NamespaceItem(false, n)))
+                .Concat(
+                    availableNamespaces.Except(namespaceHistory)
+                        .Select(n => new NamespaceItem(false, n))
+                )
                 .ToImmutableArray();
 
             PropertyChanged += MoveToNamespaceDialogViewModel_PropertyChanged;
         }
 
-        private void MoveToNamespaceDialogViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
+        private void MoveToNamespaceDialogViewModel_PropertyChanged(
+            object sender,
+            PropertyChangedEventArgs e
+        ) {
             switch (e.PropertyName)
             {
                 case nameof(NamespaceName):
@@ -133,6 +138,5 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveToNamespace
                 nameof(NamespaceName) => Error,
                 _ => string.Empty
             };
-
     }
 }

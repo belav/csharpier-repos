@@ -31,12 +31,18 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             public StateData(int propertyCount, int navigationCount)
             {
-                var bitsNumber = Math.Max(propertyCount, navigationCount) * BitsForPropertyFlags + BitsForAdditionalState - 1;
+                var bitsNumber =
+                    Math.Max(propertyCount, navigationCount) * BitsForPropertyFlags
+                    + BitsForAdditionalState
+                    - 1;
                 _bits = new int[(bitsNumber / BitsPerInt) + 1];
             }
 
-            public void FlagAllProperties(int propertyCount, PropertyFlag propertyFlag, bool flagged)
-            {
+            public void FlagAllProperties(
+                int propertyCount,
+                PropertyFlag propertyFlag,
+                bool flagged
+            ) {
                 for (var i = 0; i < _bits.Length; i++)
                 {
                     if (flagged)
@@ -58,14 +64,21 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             public bool IsPropertyFlagged(int propertyIndex, PropertyFlag propertyFlag)
             {
-                propertyIndex = propertyIndex * BitsForPropertyFlags + (int)propertyFlag + BitsForAdditionalState;
+                propertyIndex =
+                    propertyIndex * BitsForPropertyFlags
+                    + (int)propertyFlag
+                    + BitsForAdditionalState;
 
-                return (_bits[propertyIndex / BitsPerInt] & (1 << (propertyIndex % BitsPerInt))) != 0;
+                return (_bits[propertyIndex / BitsPerInt] & (1 << (propertyIndex % BitsPerInt)))
+                    != 0;
             }
 
             public void FlagProperty(int propertyIndex, PropertyFlag propertyFlag, bool isFlagged)
             {
-                propertyIndex = propertyIndex * BitsForPropertyFlags + (int)propertyFlag + BitsForAdditionalState;
+                propertyIndex =
+                    propertyIndex * BitsForPropertyFlags
+                    + (int)propertyFlag
+                    + BitsForAdditionalState;
 
                 if (isFlagged)
                 {
@@ -110,7 +123,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 if (i == _bits.Length - 1)
                 {
                     var overlay = PropertyFlagMask << (int)propertyFlag;
-                    var shift = (propertyCount * BitsForPropertyFlags + BitsForAdditionalState) % BitsPerInt;
+                    var shift =
+                        (propertyCount * BitsForPropertyFlags + BitsForAdditionalState)
+                        % BitsPerInt;
                     overlay = shift != 0 ? overlay << shift : 0;
                     mask &= ~overlay;
                 }

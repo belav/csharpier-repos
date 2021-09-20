@@ -26,17 +26,17 @@ namespace System.Text.RegularExpressions.Tests
                 char c = (char)i;
                 switch (CharUnicodeInfo.GetUnicodeCategory(c))
                 {
-                    case UnicodeCategory.UppercaseLetter:        //Lu
-                    case UnicodeCategory.LowercaseLetter:        //Li
-                    case UnicodeCategory.TitlecaseLetter:        // Lt
-                    case UnicodeCategory.ModifierLetter:         // Lm
-                    case UnicodeCategory.OtherLetter:            // Lo
-                    case UnicodeCategory.DecimalDigitNumber:     // Nd
-                                                                 //                    case UnicodeCategory.LetterNumber:           // ??
-                                                                 //                    case UnicodeCategory.OtherNumber:            // ??
+                    case UnicodeCategory.UppercaseLetter: //Lu
+                    case UnicodeCategory.LowercaseLetter: //Li
+                    case UnicodeCategory.TitlecaseLetter: // Lt
+                    case UnicodeCategory.ModifierLetter: // Lm
+                    case UnicodeCategory.OtherLetter: // Lo
+                    case UnicodeCategory.DecimalDigitNumber: // Nd
+                    //                    case UnicodeCategory.LetterNumber:           // ??
+                    //                    case UnicodeCategory.OtherNumber:            // ??
                     case UnicodeCategory.NonSpacingMark:
                     //                    case UnicodeCategory.SpacingCombiningMark:   // Mc
-                    case UnicodeCategory.ConnectorPunctuation:   // Pc
+                    case UnicodeCategory.ConnectorPunctuation: // Pc
                         validChars.Add(c);
                         break;
                     default:
@@ -172,7 +172,6 @@ namespace System.Text.RegularExpressions.Tests
 
                 string input = builder1.ToString();
                 Match match = regex.Match(input);
-
 
                 Assert.Equal(builder2.ToString(), match.Value);
                 Assert.Equal(0, match.Index);

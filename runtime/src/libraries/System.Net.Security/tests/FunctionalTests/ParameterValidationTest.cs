@@ -13,27 +13,43 @@ namespace System.Net.Security.Tests
     {
         // The following method is invoked by the RemoteCertificateValidationDelegate.
         public bool AllowAnyServerCertificate(
-              object sender,
-              X509Certificate certificate,
-              X509Chain chain,
-              SslPolicyErrors sslPolicyErrors)
-        {
-            return true;  // allow everything
+            object sender,
+            X509Certificate certificate,
+            X509Chain chain,
+            SslPolicyErrors sslPolicyErrors
+        ) {
+            return true; // allow everything
         }
 
         [Fact]
         public async Task SslStreamConstructor_BadEncryptionPolicy_ThrowException()
         {
-            using (var _remoteServer = new DummyTcpServer(
-                new IPEndPoint(IPAddress.Loopback, 0), EncryptionPolicy.RequireEncryption))
+            using (
+                var _remoteServer = new DummyTcpServer(
+                    new IPEndPoint(IPAddress.Loopback, 0),
+                    EncryptionPolicy.RequireEncryption
+                )
+            )
             using (var client = new TcpClient())
             {
-                await client.ConnectAsync(_remoteServer.RemoteEndPoint.Address, _remoteServer.RemoteEndPoint.Port);
+                await client.ConnectAsync(
+                    _remoteServer.RemoteEndPoint.Address,
+                    _remoteServer.RemoteEndPoint.Port
+                );
 
-                AssertExtensions.Throws<ArgumentException>("encryptionPolicy", () =>
-                {
-                    SslStream sslStream = new SslStream(client.GetStream(), false, AllowAnyServerCertificate, null, (EncryptionPolicy)100);
-                });
+                AssertExtensions.Throws<ArgumentException>(
+                    "encryptionPolicy",
+                    () =>
+                    {
+                        SslStream sslStream = new SslStream(
+                            client.GetStream(),
+                            false,
+                            AllowAnyServerCertificate,
+                            null,
+                            (EncryptionPolicy)100
+                        );
+                    }
+                );
             }
         }
     }

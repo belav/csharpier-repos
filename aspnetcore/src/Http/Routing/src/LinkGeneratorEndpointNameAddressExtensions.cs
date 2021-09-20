@@ -28,7 +28,11 @@ namespace Microsoft.AspNetCore.Routing
         /// names from <c>RouteOptions</c>.
         /// </param>
         /// <returns>A URI with an absolute path, or <c>null</c>.</returns>
-        [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+        [SuppressMessage(
+            "ApiDesign",
+            "RS0026:Do not add multiple public overloads with optional parameters",
+            Justification = "Required to maintain compatibility"
+        )]
         public static string? GetPathByName(
             this LinkGenerator generator,
             HttpContext httpContext,
@@ -36,8 +40,8 @@ namespace Microsoft.AspNetCore.Routing
             object? values,
             PathString? pathBase = default,
             FragmentString fragment = default,
-            LinkOptions? options = default)
-        {
+            LinkOptions? options = default
+        ) {
             if (generator == null)
             {
                 throw new ArgumentNullException(nameof(generator));
@@ -60,7 +64,8 @@ namespace Microsoft.AspNetCore.Routing
                 ambientValues: null,
                 pathBase,
                 fragment,
-                options);
+                options
+            );
         }
 
         /// <summary>
@@ -76,15 +81,19 @@ namespace Microsoft.AspNetCore.Routing
         /// names from <c>RouteOptions</c>.
         /// </param>
         /// <returns>A URI with an absolute path, or <c>null</c>.</returns>
-        [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+        [SuppressMessage(
+            "ApiDesign",
+            "RS0026:Do not add multiple public overloads with optional parameters",
+            Justification = "Required to maintain compatibility"
+        )]
         public static string? GetPathByName(
             this LinkGenerator generator,
             string endpointName,
             object? values,
             PathString pathBase = default,
             FragmentString fragment = default,
-            LinkOptions? options = default)
-        {
+            LinkOptions? options = default
+        ) {
             if (generator == null)
             {
                 throw new ArgumentNullException(nameof(generator));
@@ -95,7 +104,13 @@ namespace Microsoft.AspNetCore.Routing
                 throw new ArgumentNullException(nameof(endpointName));
             }
 
-            return generator.GetPathByAddress<string>(endpointName, new RouteValueDictionary(values), pathBase, fragment, options);
+            return generator.GetPathByAddress<string>(
+                endpointName,
+                new RouteValueDictionary(values),
+                pathBase,
+                fragment,
+                options
+            );
         }
 
         /// <summary>
@@ -129,7 +144,11 @@ namespace Microsoft.AspNetCore.Routing
         /// your deployment environment.
         /// </para>
         /// </remarks>
-        [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+        [SuppressMessage(
+            "ApiDesign",
+            "RS0026:Do not add multiple public overloads with optional parameters",
+            Justification = "Required to maintain compatibility"
+        )]
         public static string? GetUriByName(
             this LinkGenerator generator,
             HttpContext httpContext,
@@ -139,8 +158,8 @@ namespace Microsoft.AspNetCore.Routing
             HostString? host = default,
             PathString? pathBase = default,
             FragmentString fragment = default,
-            LinkOptions? options = default)
-        {
+            LinkOptions? options = default
+        ) {
             if (generator == null)
             {
                 throw new ArgumentNullException(nameof(generator));
@@ -165,7 +184,8 @@ namespace Microsoft.AspNetCore.Routing
                 host,
                 pathBase,
                 fragment,
-                options);
+                options
+            );
         }
 
         /// <summary>
@@ -194,7 +214,11 @@ namespace Microsoft.AspNetCore.Routing
         /// your deployment environment.
         /// </para>
         /// </remarks>
-        [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+        [SuppressMessage(
+            "ApiDesign",
+            "RS0026:Do not add multiple public overloads with optional parameters",
+            Justification = "Required to maintain compatibility"
+        )]
         public static string? GetUriByName(
             this LinkGenerator generator,
             string endpointName,
@@ -203,8 +227,8 @@ namespace Microsoft.AspNetCore.Routing
             HostString host,
             PathString pathBase = default,
             FragmentString fragment = default,
-            LinkOptions? options = default)
-        {
+            LinkOptions? options = default
+        ) {
             if (generator == null)
             {
                 throw new ArgumentNullException(nameof(generator));
@@ -225,7 +249,15 @@ namespace Microsoft.AspNetCore.Routing
                 throw new ArgumentException("A host must be provided.", nameof(host));
             }
 
-            return generator.GetUriByAddress<string>(endpointName, new RouteValueDictionary(values), scheme, host, pathBase, fragment, options);
+            return generator.GetUriByAddress<string>(
+                endpointName,
+                new RouteValueDictionary(values),
+                scheme,
+                host,
+                pathBase,
+                fragment,
+                options
+            );
         }
     }
 }

@@ -34,8 +34,10 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="headers">The response headers</param>
         /// <param name="cookies">The cookie values to add to the response.</param>
-        public static void AddCookies(this HttpResponseHeaders headers, IEnumerable<CookieHeaderValue> cookies)
-        {
+        public static void AddCookies(
+            this HttpResponseHeaders headers,
+            IEnumerable<CookieHeaderValue> cookies
+        ) {
             if (headers == null)
             {
                 throw Error.ArgumentNull("headers");

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(5419, "https://github.com/dotnet/roslyn/issues/5419")]
         public void EnumBinaryOps()
         {
-            string source = @"
+            string source =
+                @"
     [Flags]
     internal enum TestEnum
     {
@@ -43,7 +44,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var tree = compilation.SyntaxTrees.Single();
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var orNodes = tree.GetRoot().DescendantNodes().OfType<BinaryExpressionSyntax>().ToArray();
+            var orNodes = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<BinaryExpressionSyntax>()
+                .ToArray();
             Assert.Equal(2, orNodes.Length);
 
             var insideEnumDefinition = semanticModel.GetSymbolInfo(orNodes[0]);
@@ -54,15 +58,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             Assert.NotEqual(insideEnumDefinition, insideMethodBody);
 
-            Assert.Equal("System.Int32 System.Int32.op_BitwiseOr(System.Int32 left, System.Int32 right)", insideEnumDefinition.Symbol.ToTestDisplayString());
-            Assert.Equal("TestEnum TestEnum.op_BitwiseOr(TestEnum left, TestEnum right)", insideMethodBody.Symbol.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32 System.Int32.op_BitwiseOr(System.Int32 left, System.Int32 right)",
+                insideEnumDefinition.Symbol.ToTestDisplayString()
+            );
+            Assert.Equal(
+                "TestEnum TestEnum.op_BitwiseOr(TestEnum left, TestEnum right)",
+                insideMethodBody.Symbol.ToTestDisplayString()
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void EnumBinaryOps_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 [Flags]
@@ -84,7 +95,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBinaryOperation (BinaryOperatorKind.Or) (OperationKind.Binary, Type: TestEnum, Constant: 6) (Syntax: 'TestEnum.Fi ... .Visibility')
   Left: 
     IFieldReferenceOperation: TestEnum.FilePath (Static) (OperationKind.FieldReference, Type: TestEnum, Constant: 2) (Syntax: 'TestEnum.FilePath')
@@ -97,7 +109,11 @@ IBinaryOperation (BinaryOperatorKind.Or) (OperationKind.Binary, Type: TestEnum, 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact, WorkItem(543895, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543895")]
@@ -105,9 +121,10 @@ IBinaryOperation (BinaryOperatorKind.Or) (OperationKind.Binary, Type: TestEnum, 
         {
             // Due to a long-standing bug, the native compiler allows underlying-enum with the same
             // semantics as enum-underlying. (That is, the math is done in the underlying type and
-            // then cast back to the enum type.) 
+            // then cast back to the enum type.)
 
-            string source = @"
+            string source =
+                @"
 using System;
 public enum E { Zero, One, Two };
 class Test
@@ -128,7 +145,8 @@ class Test
             CompileAndVerify(source: source, expectedOutput: "TwoZero");
         }
 
-        private const string StructWithUserDefinedBooleanOperators = @"
+        private const string StructWithUserDefinedBooleanOperators =
+            @"
 struct S
 {
     private int num;
@@ -176,7 +194,8 @@ struct S
         [Fact]
         public void TestUserDefinedLogicalOperators()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -261,7 +280,8 @@ class C
 
 " + StructWithUserDefinedBooleanOperators;
 
-            string output = @"0:f
+            string output =
+                @"0:f
 0:f
 0:f
 0:f
@@ -339,7 +359,8 @@ class C
         [Fact]
         public void TestUserDefinedLogicalOperators2()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -423,7 +444,8 @@ class C
 }
 " + StructWithUserDefinedBooleanOperators;
 
-            string output = @"
+            string output =
+                @"
 00000001-
 01010111-
 00010101-
@@ -439,7 +461,8 @@ class C
         [Fact]
         public void TestOperatorTrue()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 struct S
 {
@@ -516,7 +539,8 @@ class C
         [Fact]
         public void TestOperatorTrue_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 struct S
 {
@@ -539,7 +563,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (2 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IConditionalOperation (OperationKind.Conditional, Type: null) (Syntax: 'if (zero) ... Write('b');')
     Condition: 
@@ -589,13 +614,18 @@ IBlockOperation (2 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void TestUnaryOperatorOverloading()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 struct S
 {
@@ -644,7 +674,8 @@ class C
         [Fact]
         public void TestUnaryOperatorOverloading_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 struct S
 {
@@ -672,7 +703,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (5 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'Console.Write(+a);')
     Expression: 
@@ -758,14 +790,19 @@ IBlockOperation (5 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestIncrementOperatorOverloading_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 struct S
 {
@@ -792,7 +829,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (4 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'Console.Write(++a);')
     Expression: 
@@ -857,14 +895,19 @@ IBlockOperation (4 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestIncrementOperatorOverloading_Checked_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 struct S
 {
@@ -894,7 +937,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IBlockOperation (4 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
     IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'Console.Write(++a);')
@@ -960,14 +1004,19 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestIncrementOperator_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -980,7 +1029,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (4 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'Console.Write(++a);')
     Expression: 
@@ -1033,14 +1083,19 @@ IBlockOperation (4 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestIncrementOperator_Checked_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -1056,7 +1111,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IBlockOperation (4 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
     IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'Console.Write(++a);')
@@ -1110,13 +1166,18 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void TestBinaryOperatorOverloading()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 struct S
 {
@@ -1168,7 +1229,8 @@ class C
             h ^ i == j != k < l > m <= o >= p);
     }
 }";
-            string output = @"(((((a>>10)+(b<<20))-(((c*d)/e)%f))&g)|(h^((i==j)!=((((k<l)>m)<=o)>=p))))";
+            string output =
+                @"(((((a>>10)+(b<<20))-(((c*d)/e)%f))&g)|(h^((i==j)!=((((k<l)>m)<=o)>=p))))";
 
             CompileAndVerify(source: source, expectedOutput: output);
         }
@@ -1177,7 +1239,8 @@ class C
         [Fact]
         public void TestBinaryOperatorOverloading_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 struct S
 {
@@ -1230,7 +1293,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBinaryOperation (BinaryOperatorKind.Or) (OperatorMethod: S S.op_BitwiseOr(S x, S y)) (OperationKind.Binary, Type: S) (Syntax: '(a >> 10) + ... m <= o >= p')
   Left: 
     IBinaryOperation (BinaryOperatorKind.And) (OperatorMethod: S S.op_BitwiseAnd(S x, S y)) (OperationKind.Binary, Type: S) (Syntax: '(a >> 10) + ... / e % f & g')
@@ -1297,23 +1361,33 @@ IBinaryOperation (BinaryOperatorKind.Or) (OperatorMethod: S S.op_BitwiseOr(S x, 
               Right: 
                 ILocalReferenceOperation: p (OperationKind.LocalReference, Type: S) (Syntax: 'p')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0660: 'S' defines operator == or operator != but does not override Object.Equals(object o)
                 // struct S
-                Diagnostic(ErrorCode.WRN_EqualityOpWithoutEquals, "S").WithArguments("S").WithLocation(3, 8),
+                Diagnostic(ErrorCode.WRN_EqualityOpWithoutEquals, "S")
+                    .WithArguments("S")
+                    .WithLocation(3, 8),
                 // CS0661: 'S' defines operator == or operator != but does not override Object.GetHashCode()
                 // struct S
-                Diagnostic(ErrorCode.WRN_EqualityOpWithoutGetHashCode, "S").WithArguments("S").WithLocation(3, 8)
+                Diagnostic(ErrorCode.WRN_EqualityOpWithoutGetHashCode, "S")
+                    .WithArguments("S")
+                    .WithLocation(3, 8)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact, WorkItem(657084, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/657084")]
         [CompilerTrait(CompilerFeature.IOperation)]
         public void DuplicateOperatorInSubclass()
         {
-            string source = @"
+            string source =
+                @"
 class B
 {
     public static B operator +(C c, B b) { return null; }
@@ -1332,7 +1406,8 @@ class Test
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBinaryOperation (BinaryOperatorKind.Add) (OperationKind.Binary, Type: ?, IsInvalid) (Syntax: 'new C() + new B()')
   Left: 
     IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation, Type: C, IsInvalid) (Syntax: 'new C()')
@@ -1345,19 +1420,27 @@ IBinaryOperation (BinaryOperatorKind.Add) (OperationKind.Binary, Type: ?, IsInva
       Initializer: 
         null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0034: Operator '+' is ambiguous on operands of type 'C' and 'B'
                 //         B b = /*<bind>*/new C() + new B()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "new C() + new B()").WithArguments("+", "C", "B").WithLocation(16, 25)
+                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "new C() + new B()")
+                    .WithArguments("+", "C", "B")
+                    .WithLocation(16, 25)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact, WorkItem(624274, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/624274")]
         public void TestBinaryOperatorOverloading_Enums_Dynamic_Unambiguous()
         {
-            string source = @"
+            string source =
+                @"
 #pragma warning disable 219 // The variable is assigned but its value is never used
 
 using System.Collections.Generic;
@@ -1417,7 +1500,8 @@ class C<T>
         [CompilerTrait(CompilerFeature.IOperation)]
         public void TestBinaryOperatorOverloading_Enums_Dynamic_Ambiguous()
         {
-            string source = @"
+            string source =
+                @"
 #pragma warning disable 219 // The variable is assigned but its value is never used
 
 class C<T>
@@ -1432,20 +1516,29 @@ class C<T>
     }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
-                // (10,19): error CS0034: Operator '&' is ambiguous on operands of type 'C<dynamic>.E' and 'C<object>.E'
-                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "C<dynamic>.E.A & C<object>.E.A").WithArguments("&", "C<dynamic>.E", "C<object>.E"),
-                // (11,18): error CS0034: Operator '|' is ambiguous on operands of type 'C<dynamic>.E' and 'C<object>.E'
-                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "C<dynamic>.E.A | C<object>.E.A").WithArguments("|", "C<dynamic>.E", "C<object>.E"),
-                // (12,19): error CS0034: Operator '^' is ambiguous on operands of type 'C<dynamic>.E' and 'C<object>.E'
-                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "C<dynamic>.E.A ^ C<object>.E.A").WithArguments("^", "C<dynamic>.E", "C<object>.E"));
+            CreateCompilationWithMscorlib40AndSystemCore(source)
+                .VerifyDiagnostics(
+                    // (10,19): error CS0034: Operator '&' is ambiguous on operands of type 'C<dynamic>.E' and 'C<object>.E'
+                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "C<dynamic>.E.A & C<object>.E.A")
+                        .WithArguments("&", "C<dynamic>.E", "C<object>.E"),
+                    // (11,18): error CS0034: Operator '|' is ambiguous on operands of type 'C<dynamic>.E' and 'C<object>.E'
+                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "C<dynamic>.E.A | C<object>.E.A")
+                        .WithArguments("|", "C<dynamic>.E", "C<object>.E"),
+                    // (12,19): error CS0034: Operator '^' is ambiguous on operands of type 'C<dynamic>.E' and 'C<object>.E'
+                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "C<dynamic>.E.A ^ C<object>.E.A")
+                        .WithArguments("^", "C<dynamic>.E", "C<object>.E")
+                );
         }
 
         [Fact]
-        [WorkItem(624270, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/624270"), WorkItem(624274, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/624274")]
+        [
+            WorkItem(624270, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/624270"),
+            WorkItem(624274, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/624274")
+        ]
         public void TestBinaryOperatorOverloading_Delegates_Dynamic_Unambiguous()
         {
-            string source = @"
+            string source =
+                @"
 #pragma warning disable 219 // The variable is assigned but its value is never used
 
 class C<T>
@@ -1479,7 +1572,8 @@ class C<T>
         [Fact]
         public void TestBinaryOperatorOverloading_UserDefined_Dynamic_Unambiguous()
         {
-            string source = @"
+            string source =
+                @"
 class D<T>
 {
     public class C
@@ -1498,7 +1592,8 @@ class X
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBinaryOperation (BinaryOperatorKind.Add) (OperatorMethod: System.Int32 D<System.Object>.C.op_Addition(D<System.Object>.C x, D<System.Object>.C y)) (OperationKind.Binary, Type: System.Int32) (Syntax: 'x + y')
   Left: 
     ILocalReferenceOperation: x (OperationKind.LocalReference, Type: D<System.Object>.C) (Syntax: 'x')
@@ -1508,18 +1603,23 @@ IBinaryOperation (BinaryOperatorKind.Add) (OperatorMethod: System.Int32 D<System
       Operand: 
         ILocalReferenceOperation: y (OperationKind.LocalReference, Type: D<dynamic>.C) (Syntax: 'y')
 ";
-            // Dev11 reports error CS0121: The call is ambiguous between the following methods or properties: 
+            // Dev11 reports error CS0121: The call is ambiguous between the following methods or properties:
             // 'D<object>.C.operator+(D<object>.C, D<object>.C)' and 'D<dynamic>.C.operator +(D<dynamic>.C, D<dynamic>.C)'
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         [CompilerTrait(CompilerFeature.IOperation)]
         public void TestBinaryOperatorOverloading_UserDefined_Dynamic_Ambiguous()
         {
-            string source = @"
+            string source =
+                @"
 class D<T>
 {
     public class C
@@ -1538,27 +1638,39 @@ class X
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBinaryOperation (BinaryOperatorKind.Add) (OperationKind.Binary, Type: ?, IsInvalid) (Syntax: 'x + y')
   Left: 
     ILocalReferenceOperation: x (OperationKind.LocalReference, Type: D<System.Object>.C, IsInvalid) (Syntax: 'x')
   Right: 
     ILocalReferenceOperation: y (OperationKind.LocalReference, Type: D<dynamic>.C, IsInvalid) (Syntax: 'y')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0034: Operator '+' is ambiguous on operands of type 'D<object>.C' and 'D<dynamic>.C'
                 //         var z = /*<bind>*/x + y/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "x + y").WithArguments("+", "D<object>.C", "D<dynamic>.C").WithLocation(16, 27)
+                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "x + y")
+                    .WithArguments("+", "D<object>.C", "D<dynamic>.C")
+                    .WithLocation(16, 27)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
-        [WorkItem(624270, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/624270"), WorkItem(624274, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/624274")]
+        [
+            WorkItem(624270, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/624270"),
+            WorkItem(624274, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/624274")
+        ]
         public void TestBinaryOperatorOverloading_Delegates_Dynamic_Ambiguous()
         {
-            string source = @"
+            string source =
+                @"
 #pragma warning disable 219 // The variable is assigned but its value is never used
 
 class C<T>
@@ -1585,30 +1697,76 @@ class C<T>
     }      
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
-                // (17,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<object>.A<object, object>'
-                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 + d2").WithArguments("+", "C<dynamic>.A<object, object>", "C<object>.A<object, object>"),
-                // (18,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<dynamic>.A<object, dynamic>'
-                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 + d3").WithArguments("+", "C<dynamic>.A<object, object>", "C<dynamic>.A<object, dynamic>"),
-                // (19,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<object>.A<dynamic, object>'
-                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 + d4").WithArguments("+", "C<dynamic>.A<object, object>", "C<object>.A<dynamic, object>"),
-                // (20,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<object>.A<object, object>' and 'C<dynamic>.A<object, dynamic>'
-                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d2 + d3").WithArguments("+", "C<object>.A<object, object>", "C<dynamic>.A<object, dynamic>"),
-                // (22,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<object>.A<object, object>'
-                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 - d2").WithArguments("-", "C<dynamic>.A<object, object>", "C<object>.A<object, object>"),
-                // (23,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<dynamic>.A<object, dynamic>'
-                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 - d3").WithArguments("-", "C<dynamic>.A<object, object>", "C<dynamic>.A<object, dynamic>"),
-                // (24,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<object>.A<dynamic, object>'
-                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 - d4").WithArguments("-", "C<dynamic>.A<object, object>", "C<object>.A<dynamic, object>"),
-                // (25,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<object>.A<object, object>' and 'C<dynamic>.A<object, dynamic>'
-                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d2 - d3").WithArguments("-", "C<object>.A<object, object>", "C<dynamic>.A<object, dynamic>"));
+            CreateCompilationWithMscorlib40AndSystemCore(source)
+                .VerifyDiagnostics(
+                    // (17,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<object>.A<object, object>'
+                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 + d2")
+                        .WithArguments(
+                            "+",
+                            "C<dynamic>.A<object, object>",
+                            "C<object>.A<object, object>"
+                        ),
+                    // (18,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<dynamic>.A<object, dynamic>'
+                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 + d3")
+                        .WithArguments(
+                            "+",
+                            "C<dynamic>.A<object, object>",
+                            "C<dynamic>.A<object, dynamic>"
+                        ),
+                    // (19,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<object>.A<dynamic, object>'
+                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 + d4")
+                        .WithArguments(
+                            "+",
+                            "C<dynamic>.A<object, object>",
+                            "C<object>.A<dynamic, object>"
+                        ),
+                    // (20,20): error CS0034: Operator '+' is ambiguous on operands of type 'C<object>.A<object, object>' and 'C<dynamic>.A<object, dynamic>'
+                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d2 + d3")
+                        .WithArguments(
+                            "+",
+                            "C<object>.A<object, object>",
+                            "C<dynamic>.A<object, dynamic>"
+                        ),
+                    // (22,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<object>.A<object, object>'
+                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 - d2")
+                        .WithArguments(
+                            "-",
+                            "C<dynamic>.A<object, object>",
+                            "C<object>.A<object, object>"
+                        ),
+                    // (23,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<dynamic>.A<object, dynamic>'
+                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 - d3")
+                        .WithArguments(
+                            "-",
+                            "C<dynamic>.A<object, object>",
+                            "C<dynamic>.A<object, dynamic>"
+                        ),
+                    // (24,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<dynamic>.A<object, object>' and 'C<object>.A<dynamic, object>'
+                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d1 - d4")
+                        .WithArguments(
+                            "-",
+                            "C<dynamic>.A<object, object>",
+                            "C<object>.A<dynamic, object>"
+                        ),
+                    // (25,20): error CS0034: Operator '-' is ambiguous on operands of type 'C<object>.A<object, object>' and 'C<dynamic>.A<object, dynamic>'
+                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "d2 - d3")
+                        .WithArguments(
+                            "-",
+                            "C<object>.A<object, object>",
+                            "C<dynamic>.A<object, dynamic>"
+                        )
+                );
         }
 
         [Fact]
-        [WorkItem(624270, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/624270"), WorkItem(624274, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/624274")]
+        [
+            WorkItem(624270, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/624270"),
+            WorkItem(624274, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/624274")
+        ]
         public void TestBinaryOperatorOverloading_Delegates_Dynamic_Ambiguous_Inference()
         {
-            string source = @"
+            string source =
+                @"
 using System;
  
 class Program
@@ -1625,15 +1783,22 @@ class Program
 ";
             // Dev11 considers Action<object> == Action<dynamic> ambiguous and thus chooses Goo(Func<Action<object>, IComparable>) overload.
 
-            CreateCompilationWithMscorlib40AndSystemCore(source).VerifyDiagnostics(
-                // (9,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Goo(System.Func<System.Action<object>, System.IComparable>)' and 'Program.Goo(System.Func<System.Action<dynamic>, System.IConvertible>)'
-                Diagnostic(ErrorCode.ERR_AmbigCall, "Goo").WithArguments("Program.Goo(System.Func<System.Action<object>, System.IComparable>)", "Program.Goo(System.Func<System.Action<dynamic>, System.IConvertible>)"));
+            CreateCompilationWithMscorlib40AndSystemCore(source)
+                .VerifyDiagnostics(
+                    // (9,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Goo(System.Func<System.Action<object>, System.IComparable>)' and 'Program.Goo(System.Func<System.Action<dynamic>, System.IConvertible>)'
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "Goo")
+                        .WithArguments(
+                            "Program.Goo(System.Func<System.Action<object>, System.IComparable>)",
+                            "Program.Goo(System.Func<System.Action<dynamic>, System.IConvertible>)"
+                        )
+                );
         }
 
         [Fact]
         public void TestBinaryOperatorOverloading_Pointers_Dynamic()
         {
-            string source = @"
+            string source =
+                @"
 #pragma warning disable 219 // The variable is assigned but its value is never used
 
 using System.Collections.Generic;
@@ -1682,13 +1847,18 @@ unsafe class C<T>
 }
 ";
             // Dev11 reports "error CS0034: Operator '-' is ambiguous on operands ... and ..." for all ptr - ptr
-            CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics();
+            CreateCompilationWithMscorlib40AndSystemCore(
+                    source,
+                    options: TestOptions.UnsafeReleaseDll
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         public void TestOverloadResolutionTiebreakers()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 struct S
 {
@@ -1758,7 +1928,8 @@ class C
         [Fact]
         public void TestOverloadResolutionTiebreakers_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 struct S
 {
@@ -1816,7 +1987,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (3 statements, 3 locals) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   Locals: Local_1: System.Int32 x
     Local_2: System.Int32? q
@@ -1932,22 +2104,32 @@ IBlockOperation (3 statements, 3 locals) (OperationKind.Block, Type: null) (Synt
       Initializer: 
         null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0458: The result of the expression is always 'null' of type 'int?'
                 //         int? q = new Q<int>?() + new int?(); //-LiftedUserDefinedAddition
-                Diagnostic(ErrorCode.WRN_AlwaysNull, "new Q<int>?() + new int?()").WithArguments("int?").WithLocation(37, 18),
+                Diagnostic(ErrorCode.WRN_AlwaysNull, "new Q<int>?() + new int?()")
+                    .WithArguments("int?")
+                    .WithLocation(37, 18),
                 // CS1061: 'S' does not contain a definition for 'str' and no extension method 'str' accepting a first argument of type 'S' could be found (are you missing a using directive or an assembly reference?)
                 //     public override string ToString() { return this.str; }
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "str").WithArguments("S", "str").WithLocation(11, 53)
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "str")
+                    .WithArguments("S", "str")
+                    .WithLocation(11, 53)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void TestUserDefinedCompoundAssignment()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 struct S
 {
@@ -2002,7 +2184,8 @@ class C
         [Fact]
         public void TestUserDefinedCompoundAssignment_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 struct S
 {
@@ -2039,7 +2222,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (10 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'a += b;')
     Expression: 
@@ -2134,14 +2318,19 @@ IBlockOperation (10 statements) (OperationKind.Block, Type: null) (Syntax: '{ ..
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestUserDefinedCompoundAssignment_Checked_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 struct S
 {
@@ -2178,7 +2367,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (10 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'a += b;')
     Expression: 
@@ -2273,14 +2463,19 @@ IBlockOperation (10 statements) (OperationKind.Block, Type: null) (Syntax: '{ ..
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestCompoundAssignment_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M(int a, int b, int c, int d, int e, int f, int g, int h, int i)
@@ -2298,7 +2493,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (10 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'a += b;')
     Expression: 
@@ -2393,14 +2589,19 @@ IBlockOperation (10 statements) (OperationKind.Block, Type: null) (Syntax: '{ ..
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(21723, "https://github.com/dotnet/roslyn/issues/21723")]
         public void TestCompoundLiftedAssignment_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M(int a, int? b)
@@ -2409,7 +2610,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ICompoundAssignmentOperation (BinaryOperatorKind.Add, IsLifted) (OperationKind.CompoundAssignment, Type: System.Int32, IsInvalid) (Syntax: 'a += b')
   InConversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
   OutConversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
@@ -2418,20 +2620,28 @@ ICompoundAssignmentOperation (BinaryOperatorKind.Add, IsLifted) (OperationKind.C
   Right: 
     IParameterReferenceOperation: b (OperationKind.ParameterReference, Type: System.Int32?, IsInvalid) (Syntax: 'b')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0266: Cannot implicitly convert type 'int?' to 'int'. An explicit conversion exists (are you missing a cast?)
                 //         /*<bind>*/a += b/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "a += b").WithArguments("int?", "int").WithLocation(6, 19)
+                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "a += b")
+                    .WithArguments("int?", "int")
+                    .WithLocation(6, 19)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestCompoundAssignment_Checked_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M(int a, int b, int c, int d, int e, int f, int g, int h, int i)
@@ -2452,7 +2662,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IBlockOperation (10 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
     IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'a += b;')
@@ -2548,14 +2759,19 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestCompoundAssignment_Unchecked_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M(int a, int b, int c, int d, int e, int f, int g, int h, int i)
@@ -2576,7 +2792,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IBlockOperation (10 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
     IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'a += b;')
@@ -2672,13 +2889,18 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void TestUserDefinedBinaryOperatorOverloadResolution()
         {
-            TestOperatorKinds(@"
+            TestOperatorKinds(
+                @"
 using System;
 struct S
 {
@@ -2735,13 +2957,15 @@ class C
 // UNDONE: More tests
 
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void TestUserDefinedUnaryOperatorOverloadResolution()
         {
-            TestOperatorKinds(@"
+            TestOperatorKinds(
+                @"
 using System;
 struct S
 {
@@ -2785,14 +3009,16 @@ class C
         s1--; //-UserDefinedPostfixDecrement
         s2--; //-UserDefinedPostfixDecrement
     }
-}");
+}"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestUserDefinedUnaryOperatorOverloadResolution_IOperation()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 struct S
 {
@@ -2833,7 +3059,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (14 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'i1 = +s1;')
     Expression: 
@@ -2941,19 +3168,25 @@ IBlockOperation (14 statements) (OperationKind.Block, Type: null) (Syntax: '{ ..
         Target: 
           IParameterReferenceOperation: s2 (OperationKind.ParameterReference, Type: S?) (Syntax: 's2')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0448: The return type for ++ or -- operator must match the parameter type or be derived from the parameter type
                 //     public static S operator --(S? s) { return (S)s; }
                 Diagnostic(ErrorCode.ERR_BadIncDecRetType, "--").WithLocation(10, 30)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void TestUnaryOperatorOverloadingErrors()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
 // UNDONE: Write tests for the rest of them
@@ -2969,31 +3202,46 @@ class C
             compilation.VerifyDiagnostics(
                 // (7,12): error CS0023: Operator '!' cannot be applied to operand of type 'int'
                 //         if(!1) {}
-                Diagnostic(ErrorCode.ERR_BadUnaryOp, "!1").WithArguments("!", "int").WithLocation(7, 12),
+                Diagnostic(ErrorCode.ERR_BadUnaryOp, "!1")
+                    .WithArguments("!", "int")
+                    .WithLocation(7, 12),
                 // (8,9): error CS0023: Operator '++' cannot be applied to operand of type 'bool'
                 //         b++;
-                Diagnostic(ErrorCode.ERR_BadUnaryOp, "b++").WithArguments("++", "bool").WithLocation(8, 9),
+                Diagnostic(ErrorCode.ERR_BadUnaryOp, "b++")
+                    .WithArguments("++", "bool")
+                    .WithLocation(8, 9),
                 // (9,9): error CS0103: The name 'error' does not exist in the current context
                 //         error++;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "error").WithArguments("error").WithLocation(9, 9)
-                );
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "error")
+                    .WithArguments("error")
+                    .WithLocation(9, 9)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var negOne = tree.GetRoot().DescendantNodes().OfType<PrefixUnaryExpressionSyntax>().Single();
+            var negOne = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<PrefixUnaryExpressionSyntax>()
+                .Single();
             Assert.Equal("!1", negOne.ToString());
             var type1 = model.GetTypeInfo(negOne).Type;
             Assert.Equal("?", type1.ToTestDisplayString());
             Assert.True(type1.IsErrorType());
 
-            var boolPlusPlus = tree.GetRoot().DescendantNodes().OfType<PostfixUnaryExpressionSyntax>().ElementAt(0);
+            var boolPlusPlus = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<PostfixUnaryExpressionSyntax>()
+                .ElementAt(0);
             Assert.Equal("b++", boolPlusPlus.ToString());
             var type2 = model.GetTypeInfo(boolPlusPlus).Type;
             Assert.Equal("?", type2.ToTestDisplayString());
             Assert.True(type2.IsErrorType());
 
-            var errorPlusPlus = tree.GetRoot().DescendantNodes().OfType<PostfixUnaryExpressionSyntax>().ElementAt(1);
+            var errorPlusPlus = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<PostfixUnaryExpressionSyntax>()
+                .ElementAt(1);
             Assert.Equal("error++", errorPlusPlus.ToString());
             var type3 = model.GetTypeInfo(errorPlusPlus).Type;
             Assert.Equal("?", type3.ToTestDisplayString());
@@ -3015,10 +3263,11 @@ class C
             // Roslyn produces the more accurate error; this is an ambiguity.
             //
             // Comparing string and exception is not ambiguous; the only applicable operator
-            // is the reference equality operator, and it requires that its operand types be 
+            // is the reference equality operator, and it requires that its operand types be
             // convertible to each other.
 
-            string source = @"
+            string source =
+                @"
 class C 
 { 
     bool N() { return false; }
@@ -3034,22 +3283,28 @@ class C
         bool b3 = (object)s1 == ex1; // legal!
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-// (11,21): error CS0034: Operator '+' is ambiguous on operands of type 'long' and 'ulong'
-//         object o1 = i64 + ui64; // CS0034
-Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "i64 + ui64").WithArguments("+", "long", "ulong"),
-// (12,19): error CS0034: Operator '==' is ambiguous on operands of type 'long' and 'ulong'
-//         bool b1 = i64 == ui64;  // CS0034
-Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "i64 == ui64").WithArguments("==", "long", "ulong"),
-// (13,19): error CS0019: Operator '==' cannot be applied to operands of type 'string' and 'System.Exception'
-//         bool b2 = s1 == ex1;    // CS0019
-Diagnostic(ErrorCode.ERR_BadBinaryOps, "s1 == ex1").WithArguments("==", "string", "System.Exception"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (11,21): error CS0034: Operator '+' is ambiguous on operands of type 'long' and 'ulong'
+                    //         object o1 = i64 + ui64; // CS0034
+                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "i64 + ui64")
+                        .WithArguments("+", "long", "ulong"),
+                    // (12,19): error CS0034: Operator '==' is ambiguous on operands of type 'long' and 'ulong'
+                    //         bool b1 = i64 == ui64;  // CS0034
+                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "i64 == ui64")
+                        .WithArguments("==", "long", "ulong"),
+                    // (13,19): error CS0019: Operator '==' cannot be applied to operands of type 'string' and 'System.Exception'
+                    //         bool b2 = s1 == ex1;    // CS0019
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "s1 == ex1")
+                        .WithArguments("==", "string", "System.Exception")
+                );
         }
 
         [Fact]
         public void TestCompoundOperatorErrors()
         {
-            var source = @"
+            var source =
+                @"
 class C 
 { 
     // UNDONE: Add more error cases
@@ -3092,19 +3347,29 @@ class C
 
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (17,9): error CS0200: Property or indexer 'C.ReadOnly' cannot be assigned to -- it is read only
-                //         c.ReadOnly += 1;
-                Diagnostic(ErrorCode.ERR_AssgReadonlyProp, "c.ReadOnly").WithArguments("C.ReadOnly").WithLocation(17, 9),
-                // (18,9): error CS0154: The property or indexer 'C.WriteOnly' cannot be used in this context because it lacks the get accessor
-                //         c.WriteOnly += 1;
-                Diagnostic(ErrorCode.ERR_PropertyLacksGet, "c.WriteOnly").WithArguments("C.WriteOnly").WithLocation(18, 9),
-                // (34,9): error CS0266: Cannot implicitly convert type 'long' to 'int'. An explicit conversion exists (are you missing a cast?)
-                //         i32 += i64;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i32 += i64").WithArguments("long", "int").WithLocation(34, 9),
-                // (39,9): error CS0266: Cannot implicitly convert type 'C' to 'C.D'. An explicit conversion exists (are you missing a cast?)
-                //         d += c;
-                Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "d += c").WithArguments("C", "C.D").WithLocation(39, 9));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (17,9): error CS0200: Property or indexer 'C.ReadOnly' cannot be assigned to -- it is read only
+                    //         c.ReadOnly += 1;
+                    Diagnostic(ErrorCode.ERR_AssgReadonlyProp, "c.ReadOnly")
+                        .WithArguments("C.ReadOnly")
+                        .WithLocation(17, 9),
+                    // (18,9): error CS0154: The property or indexer 'C.WriteOnly' cannot be used in this context because it lacks the get accessor
+                    //         c.WriteOnly += 1;
+                    Diagnostic(ErrorCode.ERR_PropertyLacksGet, "c.WriteOnly")
+                        .WithArguments("C.WriteOnly")
+                        .WithLocation(18, 9),
+                    // (34,9): error CS0266: Cannot implicitly convert type 'long' to 'int'. An explicit conversion exists (are you missing a cast?)
+                    //         i32 += i64;
+                    Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i32 += i64")
+                        .WithArguments("long", "int")
+                        .WithLocation(34, 9),
+                    // (39,9): error CS0266: Cannot implicitly convert type 'C' to 'C.D'. An explicit conversion exists (are you missing a cast?)
+                    //         d += c;
+                    Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "d += c")
+                        .WithArguments("C", "C.D")
+                        .WithLocation(39, 9)
+                );
         }
 
         [Fact]
@@ -3163,7 +3428,7 @@ class C
         public void TestConstantOperatorOverloadResolution()
         {
             string code =
-@"class C
+                @"class C
 {
     static void F(object o) { }
     static void M()
@@ -3190,26 +3455,41 @@ class C
             TestOperatorKinds(code);
         }
 
-        private void TestBoundTree(string source, System.Func<IEnumerable<KeyValuePair<TreeDumperNode, TreeDumperNode>>, IEnumerable<string>> query)
-        {
+        private void TestBoundTree(
+            string source,
+            System.Func<
+                IEnumerable<KeyValuePair<TreeDumperNode, TreeDumperNode>>,
+                IEnumerable<string>
+            > query
+        ) {
             // The mechanism of this test is: we build the bound tree for the code passed in and then extract
             // from it the nodes that describe the operators. We then compare the description of
             // the operators given to the comment that follows the use of the operator.
 
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
-            var method = (SourceMemberMethodSymbol)compilation.GlobalNamespace.GetTypeMembers("C").Single().GetMembers("M").Single();
+            var method = (SourceMemberMethodSymbol)compilation.GlobalNamespace.GetTypeMembers("C")
+                .Single()
+                .GetMembers("M")
+                .Single();
             var diagnostics = new DiagnosticBag();
-            var block = MethodCompiler.BindMethodBody(method, new TypeCompilationState(method.ContainingType, compilation, null), new BindingDiagnosticBag(diagnostics));
+            var block = MethodCompiler.BindMethodBody(
+                method,
+                new TypeCompilationState(method.ContainingType, compilation, null),
+                new BindingDiagnosticBag(diagnostics)
+            );
             var tree = BoundTreeDumperNodeProducer.MakeTree(block);
-            var results = string.Join("\n",
-                query(tree.PreorderTraversal())
-                .ToArray());
+            var results = string.Join("\n", query(tree.PreorderTraversal()).ToArray());
 
-            var expected = string.Join("\n", source
-                .Split(new[] { Environment.NewLine }, System.StringSplitOptions.RemoveEmptyEntries)
-                .Where(x => x.Contains("//-"))
-                .Select(x => x.Substring(x.IndexOf("//-", StringComparison.Ordinal) + 3).Trim())
-                .ToArray());
+            var expected = string.Join(
+                "\n",
+                source.Split(
+                        new[] { Environment.NewLine },
+                        System.StringSplitOptions.RemoveEmptyEntries
+                    )
+                    .Where(x => x.Contains("//-"))
+                    .Select(x => x.Substring(x.IndexOf("//-", StringComparison.Ordinal) + 3).Trim())
+                    .ToArray()
+            );
 
             Assert.Equal(expected, results);
         }
@@ -3220,36 +3500,62 @@ class C
             // from it the nodes that describe the operators. We then compare the description of
             // the operators given to the comment that follows the use of the operator.
 
-            TestBoundTree(source, edges =>
-                from edge in edges
-                let node = edge.Value
-                where node.Text == "operatorKind"
-                where node.Value != null
-                select node.Value.ToString());
+            TestBoundTree(
+                source,
+                edges =>
+                    from edge in edges
+                    let node = edge.Value
+                    where node.Text == "operatorKind"
+                    where node.Value != null
+                    select node.Value.ToString()
+            );
         }
 
         private void TestCompoundAssignment(string source)
         {
-            TestBoundTree(source, edges =>
-                from edge in edges
-                let node = edge.Value
-                where node != null && (node.Text == "eventAssignmentOperator" || node.Text == "compoundAssignmentOperator")
-                select string.Join(" ", from child in node.Children
-                                        where child.Text == "@operator" ||
-                                              child.Text == "isAddition" ||
-                                              child.Text == "isDynamic" ||
-                                              child.Text == "leftConversion" ||
-                                              child.Text == "finalConversion"
-                                        select child.Text + ": " + (child.Text == "@operator" ? ((BinaryOperatorSignature)child.Value).Kind.ToString() : child.Value.ToString())));
+            TestBoundTree(
+                source,
+                edges =>
+                    from edge in edges
+                    let node = edge.Value
+                    where
+                        node != null
+                        && (
+                            node.Text == "eventAssignmentOperator"
+                            || node.Text == "compoundAssignmentOperator"
+                        )
+                    select string.Join(
+                        " ",
+                        from child in node.Children
+                        where
+                            child.Text == "@operator"
+                            || child.Text == "isAddition"
+                            || child.Text == "isDynamic"
+                            || child.Text == "leftConversion"
+                            || child.Text == "finalConversion"
+                        select child.Text
+                            + ": "
+                            + (
+                                child.Text == "@operator"
+                                    ? ((BinaryOperatorSignature)child.Value).Kind.ToString()
+                                    : child.Value.ToString()
+                            )
+                    )
+            );
         }
 
         private void TestTypes(string source)
         {
-            TestBoundTree(source, edges =>
-                from edge in edges
-                let node = edge.Value
-                where node.Text == "type"
-                select edge.Key.Text + ": " + (node.Value != null ? node.Value.ToString() : "<null>"));
+            TestBoundTree(
+                source,
+                edges =>
+                    from edge in edges
+                    let node = edge.Value
+                    where node.Text == "type"
+                    select edge.Key.Text
+                        + ": "
+                        + (node.Value != null ? node.Value.ToString() : "<null>")
+            );
         }
 
         private static string FormatTypeArgumentList(ImmutableArray<TypeWithAnnotations>? arguments)
@@ -3274,13 +3580,17 @@ class C
 
         private void TestDynamicMemberAccessCore(string source)
         {
-            TestBoundTree(source, edges =>
-                from edge in edges
-                let node = edge.Value
-                where node.Text == "dynamicMemberAccess"
-                let name = node["name"]
-                let typeArguments = node["typeArgumentsOpt"].Value as ImmutableArray<TypeWithAnnotations>?
-                select name.Value.ToString() + FormatTypeArgumentList(typeArguments));
+            TestBoundTree(
+                source,
+                edges =>
+                    from edge in edges
+                    let node = edge.Value
+                    where node.Text == "dynamicMemberAccess"
+                    let name = node["name"]
+                    let typeArguments = node["typeArgumentsOpt"].Value
+                        as ImmutableArray<TypeWithAnnotations>?
+                    select name.Value.ToString() + FormatTypeArgumentList(typeArguments)
+            );
         }
 
         private static string GenerateTest(string template, string op, string opkind)
@@ -3291,7 +3601,8 @@ class C
         }
 
         #region "Constant String"
-        private const string Prefix = @"
+        private const string Prefix =
+            @"
 class C 
 { 
     enum E { }
@@ -3344,13 +3655,16 @@ class C
         N(
 ";
 
-        private const string Postfix = @"
+        private const string Postfix =
+            @"
         );
     }
 }
 ";
 
-        private const string EnumAddition = Prefix + @"
+        private const string EnumAddition =
+            Prefix
+            + @"
 i + e,          //-UnderlyingAndEnumAddition
 i + ne,         //-LiftedUnderlyingAndEnumAddition
 e + i,          //-EnumAndUnderlyingAddition
@@ -3358,17 +3672,26 @@ e + ni,         //-LiftedEnumAndUnderlyingAddition
 ni + e,         //-LiftedUnderlyingAndEnumAddition
 ni + ne,        //-LiftedUnderlyingAndEnumAddition
 ne + i,         //-LiftedEnumAndUnderlyingAddition
-ne + ni         //-LiftedEnumAndUnderlyingAddition" + Postfix;
+ne + ni         //-LiftedEnumAndUnderlyingAddition"
+            + Postfix;
 
-        private const string DelegateAddition = Prefix + @"
-        d1 + d2 //-DelegateCombination" + Postfix;
+        private const string DelegateAddition =
+            Prefix
+            + @"
+        d1 + d2 //-DelegateCombination"
+            + Postfix;
 
-        private const string StringAddition = Prefix + @"
+        private const string StringAddition =
+            Prefix
+            + @"
         s1 + s1, //-StringConcatenation
         s1 + o1, //-StringAndObjectConcatenation
-        i1 + s1  //-ObjectAndStringConcatenation" + Postfix;
+        i1 + s1  //-ObjectAndStringConcatenation"
+            + Postfix;
 
-        private const string ArithmeticTemplate = Prefix + @"
+        private const string ArithmeticTemplate =
+            Prefix
+            + @"
 chr OPERATOR chr,                   //-IntKIND
 chr OPERATOR i16,                   //-IntKIND
 chr OPERATOR i32,                   //-IntKIND
@@ -3787,9 +4110,12 @@ ndec OPERATOR nu32,                  //-LiftedDecimalKIND
 ndec OPERATOR nu64,                  //-LiftedDecimalKIND
 // ndec OPERATOR nr32,   (none applicable)
 // ndec OPERATOR nr64,  (none applicable)
-ndec OPERATOR ndec                    //-LiftedDecimalKIND" + Postfix;
+ndec OPERATOR ndec                    //-LiftedDecimalKIND"
+            + Postfix;
 
-        private const string EnumSubtraction = Prefix + @"
+        private const string EnumSubtraction =
+            Prefix
+            + @"
 e - e,      //-EnumSubtraction
 e - ne,     //-LiftedEnumSubtraction
 e - i,      //-EnumAndUnderlyingSubtraction
@@ -3797,11 +4123,14 @@ e - ni,     //-LiftedEnumAndUnderlyingSubtraction
 ne - e,     //-LiftedEnumSubtraction
 ne - ne,    //-LiftedEnumSubtraction
 ne - i,     //-LiftedEnumAndUnderlyingSubtraction
-ne - ni     //-LiftedEnumAndUnderlyingSubtraction" + Postfix;
+ne - ni     //-LiftedEnumAndUnderlyingSubtraction"
+            + Postfix;
 
         private const string DelegateSubtraction = Prefix + "d1 - d2 //-DelegateRemoval" + Postfix;
 
-        private const string ShiftTemplate = Prefix + @"
+        private const string ShiftTemplate =
+            Prefix
+            + @"
 chr OPERATOR chr,                   //-IntKIND
 chr OPERATOR i16,                   //-IntKIND
 chr OPERATOR i32,                   //-IntKIND
@@ -3927,9 +4256,12 @@ nu64 OPERATOR nchr,                  //-LiftedULongKIND
 nu64 OPERATOR ni16,                  //-LiftedULongKIND
 nu64 OPERATOR ni32,                  //-LiftedULongKIND
 nu64 OPERATOR nu16                   //-LiftedULongKIND
-" + Postfix;
+"
+            + Postfix;
 
-        private const string LogicTemplate = Prefix + @"
+        private const string LogicTemplate =
+            Prefix
+            + @"
 bln OPERATOR bln,                   //-BoolKIND
 bln OPERATOR nbln,                  //-LiftedBoolKIND
 
@@ -4145,20 +4477,29 @@ nu64 OPERATOR nchr,                   //-LiftedULongKIND
 nu64 OPERATOR nu16,                  //-LiftedULongKIND
 nu64 OPERATOR nu32,                  //-LiftedULongKIND
 nu64 OPERATOR nu64                  //-LiftedULongKIND
-" + Postfix;
+"
+            + Postfix;
 
         //built-in operator only works for bools (not even lifted bools)
-        private const string ShortCircuitTemplate = Prefix + @"
+        private const string ShortCircuitTemplate =
+            Prefix
+            + @"
 bln OPERATOR bln,                   //-LogicalBoolKIND
-" + Postfix;
+"
+            + Postfix;
 
-        private const string EnumLogicTemplate = Prefix + @"
+        private const string EnumLogicTemplate =
+            Prefix
+            + @"
 e OPERATOR e,          //-EnumKIND
 e OPERATOR ne,         //-LiftedEnumKIND
 ne OPERATOR e,         //-LiftedEnumKIND
-ne OPERATOR ne         //-LiftedEnumKIND" + Postfix;
+ne OPERATOR ne         //-LiftedEnumKIND"
+            + Postfix;
 
-        private const string ComparisonTemplate = Prefix + @"
+        private const string ComparisonTemplate =
+            Prefix
+            + @"
 chr OPERATOR chr,                   //-IntKIND
 chr OPERATOR i16,                   //-IntKIND
 chr OPERATOR i32,                   //-IntKIND
@@ -4578,9 +4919,12 @@ ndec OPERATOR nu64,                  //-LiftedDecimalKIND
 // ndec OPERATOR nr32,   (none applicable)
 // ndec OPERATOR nr64,  (none applicable)
 ndec OPERATOR ndec                    //-LiftedDecimalKIND
-" + Postfix;
+"
+            + Postfix;
 
-        private const string EqualityTemplate = Prefix + @"
+        private const string EqualityTemplate =
+            Prefix
+            + @"
 e1 OPERATOR e2, //-EnumKIND
 e1 OPERATOR o2, //-KIND
 d1 OPERATOR d2, //-DelegateKIND
@@ -4590,9 +4934,12 @@ s1 OPERATOR o2, //-ObjectKIND
 o1 OPERATOR e2, //-KIND
 o1 OPERATOR d2, //-ObjectKIND
 o1 OPERATOR s2, //-ObjectKIND
-o1 OPERATOR o2  //-ObjectKIND" + Postfix;
+o1 OPERATOR o2  //-ObjectKIND"
+            + Postfix;
 
-        private const string PostfixIncrementTemplate = Prefix + @"
+        private const string PostfixIncrementTemplate =
+            Prefix
+            + @"
 e   OPERATOR, //-EnumKIND
 chr OPERATOR, //-CharKIND
 i08 OPERATOR, //-SByteKIND
@@ -4619,9 +4966,12 @@ nu64 OPERATOR, //-LiftedULongKIND
 nr32 OPERATOR, //-LiftedFloatKIND
 nr64 OPERATOR, //-LiftedDoubleKIND
 ndec OPERATOR  //-LiftedDecimalKIND
-" + Postfix;
+"
+            + Postfix;
 
-        private const string PrefixIncrementTemplate = Prefix + @"
+        private const string PrefixIncrementTemplate =
+            Prefix
+            + @"
 OPERATOR e   , //-EnumKIND
 OPERATOR chr , //-CharKIND
 OPERATOR i08 , //-SByteKIND
@@ -4647,9 +4997,12 @@ OPERATOR nu32 , //-LiftedUIntKIND
 OPERATOR nu64 , //-LiftedULongKIND
 OPERATOR nr32 , //-LiftedFloatKIND
 OPERATOR nr64 , //-LiftedDoubleKIND
-OPERATOR ndec   //-LiftedDecimalKIND" + Postfix;
+OPERATOR ndec   //-LiftedDecimalKIND"
+            + Postfix;
 
-        private const string UnaryPlus = Prefix + @"
+        private const string UnaryPlus =
+            Prefix
+            + @"
 + chr, //-IntUnaryPlus
 + i08, //-IntUnaryPlus
 + i16, //-IntUnaryPlus
@@ -4673,10 +5026,12 @@ OPERATOR ndec   //-LiftedDecimalKIND" + Postfix;
 + nu64, //-LiftedULongUnaryPlus
 + nr32, //-LiftedFloatUnaryPlus
 + nr64, //-LiftedDoubleUnaryPlus
-+ ndec  //-LiftedDecimalUnaryPlus" + Postfix;
++ ndec  //-LiftedDecimalUnaryPlus"
+            + Postfix;
 
-
-        private const string UnaryMinus = Prefix + @"
+        private const string UnaryMinus =
+            Prefix
+            + @"
 - chr, //-IntUnaryMinus
 - i08, //-IntUnaryMinus
 - i16, //-IntUnaryMinus
@@ -4698,14 +5053,19 @@ OPERATOR ndec   //-LiftedDecimalKIND" + Postfix;
 - nu32, //-LiftedLongUnaryMinus
 - nr32, //-LiftedFloatUnaryMinus
 - nr64, //-LiftedDoubleUnaryMinus
-- ndec  //-LiftedDecimalUnaryMinus" + Postfix;
+- ndec  //-LiftedDecimalUnaryMinus"
+            + Postfix;
 
-        private const string LogicalNegation = Prefix + @"
+        private const string LogicalNegation =
+            Prefix
+            + @"
 ! bln, //-BoolLogicalNegation
-! nbln //-LiftedBoolLogicalNegation" + Postfix;
+! nbln //-LiftedBoolLogicalNegation"
+            + Postfix;
 
-
-        private const string BitwiseComplement = Prefix + @"
+        private const string BitwiseComplement =
+            Prefix
+            + @"
 ~ e,   //-EnumBitwiseComplement
 ~ chr, //-IntBitwiseComplement
 ~ i08, //-IntBitwiseComplement
@@ -4728,14 +5088,16 @@ OPERATOR ndec   //-LiftedDecimalKIND" + Postfix;
 ~ nu64 //-LiftedULongBitwiseComplement
 );
     }
-}" + Postfix;
+}"
+            + Postfix;
 
         #endregion
 
         [Fact, WorkItem(527598, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527598")]
         public void UserDefinedOperatorOnPointerType()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 unsafe struct A
 {
     public static implicit operator int*(A x) { return null; }
@@ -4747,14 +5109,18 @@ unsafe struct A
         var z = x - y; // Dev11 generates CS0019...should compile
     }
 }
-", options: TestOptions.UnsafeReleaseDll).VerifyDiagnostics();
+",
+                    options: TestOptions.UnsafeReleaseDll
+                )
+                .VerifyDiagnostics();
             // add better verification once this is implemented
         }
 
         [Fact]
         public void TestNullCoalesce_Dynamic()
         {
-            var source = @"
+            var source =
+                @"
 // a ?? b
 
 public class E : D { } 
@@ -4815,7 +5181,8 @@ public class C
         [Fact]
         public void TestNullCoalesceWithMethodGroup()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 static class Program
@@ -4826,15 +5193,19 @@ static class Program
     }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "Main ?? Main").WithArguments("??", "method group", "method group"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "Main ?? Main")
+                        .WithArguments("??", "method group", "method group")
+                );
         }
 
         [WorkItem(541149, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541149")]
         [Fact]
         public void TestNullCoalesceWithLambda()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 static class Program
@@ -4846,15 +5217,19 @@ static class Program
     }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "a ?? (() => { })").WithArguments("??", "System.Action<int>", "lambda expression"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "a ?? (() => { })")
+                        .WithArguments("??", "System.Action<int>", "lambda expression")
+                );
         }
 
         [WorkItem(541148, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541148")]
         [Fact]
         public void TestNullCoalesceWithConstNonNullExpression()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 static class Program
@@ -4875,7 +5250,8 @@ static class Program
         [Fact]
         public void TestNullCoalesceWithInvalidUserDefinedConversions_01()
         {
-            var source = @"
+            var source =
+                @"
 class B
 {
     static void Main()
@@ -4902,17 +5278,26 @@ class A
     }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (8,22): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
-                //         var c = a ?? b;
-                Diagnostic(ErrorCode.ERR_AmbigUDConv, "b").WithArguments("B.implicit operator A(B)", "A.implicit operator A(B)", "B", "A"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (8,22): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
+                    //         var c = a ?? b;
+                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "b")
+                        .WithArguments(
+                            "B.implicit operator A(B)",
+                            "A.implicit operator A(B)",
+                            "B",
+                            "A"
+                        )
+                );
         }
 
         [WorkItem(545631, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545631")]
         [Fact]
         public void TestNullCoalesceWithInvalidUserDefinedConversions_02()
         {
-            var source = @"
+            var source =
+                @"
 struct B
 {
     static void Main()
@@ -4939,17 +5324,26 @@ struct A
     }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (8,22): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
-                //         var c = a ?? b;
-                Diagnostic(ErrorCode.ERR_AmbigUDConv, "b").WithArguments("B.implicit operator A(B)", "A.implicit operator A(B)", "B", "A"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (8,22): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
+                    //         var c = a ?? b;
+                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "b")
+                        .WithArguments(
+                            "B.implicit operator A(B)",
+                            "A.implicit operator A(B)",
+                            "B",
+                            "A"
+                        )
+                );
         }
 
         [WorkItem(545631, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545631")]
         [Fact]
         public void TestNullCoalesceWithInvalidUserDefinedConversions_03()
         {
-            var source = @"
+            var source =
+                @"
 struct B
 {
     static void Main()
@@ -4973,17 +5367,26 @@ struct A
     }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (8,18): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
-                //         var c2 = b2 ?? a2;
-                Diagnostic(ErrorCode.ERR_AmbigUDConv, "b2").WithArguments("B.implicit operator A(B)", "A.implicit operator A(B)", "B", "A"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (8,18): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
+                    //         var c2 = b2 ?? a2;
+                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "b2")
+                        .WithArguments(
+                            "B.implicit operator A(B)",
+                            "A.implicit operator A(B)",
+                            "B",
+                            "A"
+                        )
+                );
         }
 
         [WorkItem(541343, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541343")]
         [Fact]
         public void TestAsOperator_Bug8014()
         {
-            var source = @"
+            var source =
+                @"
 using System;
  
 class Program
@@ -5001,7 +5404,8 @@ class Program
         [Fact]
         public void TestAsOperatorWithImplicitConversion()
         {
-            var source = @"
+            var source =
+                @"
 using System;
  
 class Program
@@ -5020,7 +5424,8 @@ class Program
         [Fact]
         public void TestDefaultOperator_ConstantDateTime()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 namespace N2
 {
@@ -5043,7 +5448,8 @@ namespace N2
         public void TestDefaultOperator_Dynamic()
         {
             // "default(dynamic)" has constant value null.
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class X
@@ -5054,10 +5460,15 @@ public class X
         Console.Write(obj == null);
     }
 }";
-            var comp = CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp, expectedOutput: "True"); ;
+            var comp = CreateCompilationWithMscorlib40AndSystemCore(
+                source,
+                options: TestOptions.ReleaseExe
+            );
+            CompileAndVerify(comp, expectedOutput: "True");
+            ;
 
-            source = @"
+            source =
+                @"
 using System;
 
 public class C<T> { }
@@ -5082,9 +5493,9 @@ public class X
             comp = CreateCompilationWithMscorlib40AndSystemCore(source);
             comp.VerifyDiagnostics();
 
-
             // "default(dynamic)" has type dynamic
-            source = @"
+            source =
+                @"
 public class X
 {
     public X(object param = default(dynamic)) {}
@@ -5093,14 +5504,17 @@ public class X
             comp.VerifyDiagnostics(
                 // (4,21): error CS1750: A value of type 'dynamic' cannot be used as a default parameter because there are no standard conversions to type 'object'
                 //     public X(object param = default(dynamic)) {}
-                Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "param").WithArguments("dynamic", "object"));
+                Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "param")
+                    .WithArguments("dynamic", "object")
+            );
         }
 
         [WorkItem(537876, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537876")]
         [Fact]
         public void TestEnumOrAssign()
         {
-            var source = @"
+            var source =
+                @"
 enum F
 {
    A,
@@ -5124,7 +5538,8 @@ class Program
         [Fact]
         public void TestEnumLogicalWithLiteralZero_9042()
         {
-            var source = @"
+            var source =
+                @"
 enum F { A }
 class Program
 {
@@ -5148,7 +5563,8 @@ class Program
         [Fact]
         public void TestEnumCompoundAddition_9043()
         {
-            var source = @"
+            var source =
+                @"
 enum F { A, B }
 class Program
 {
@@ -5167,7 +5583,8 @@ class Program
         [Fact]
         public void TestStringCompoundAddition_9146()
         {
-            var source = @"
+            var source =
+                @"
 class Test
 {
     public static void Main()
@@ -5185,7 +5602,8 @@ class Test
         [Fact]
         public void TestOpTrueInBooleanExpression()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     struct C
@@ -5238,7 +5656,8 @@ class Program
         public void TestOpTrueInBooleanExpressionError()
         {
             // operator true does not lift to nullable.
-            var source = @"
+            var source =
+                @"
 class Program
 {
     struct C
@@ -5260,12 +5679,13 @@ class Program
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
                 // (14,13): error CS0029: Cannot implicitly convert type 'Program.C?' to 'bool'
-                //         if (c) 
+                //         if (c)
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "c").WithArguments("Program.C?", "bool"),
                 // (6,20): warning CS0649: Field 'Program.C.x' is never assigned to, and will always have its default value 0
                 //         public int x;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "x").WithArguments("Program.C.x", "0")
-                );
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "x")
+                    .WithArguments("Program.C.x", "0")
+            );
         }
 
         [WorkItem(543294, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543294")]
@@ -5273,7 +5693,7 @@ class Program
         public void TestAsOperatorWithTypeParameter()
         {
             // SPEC:    Furthermore, at least one of the following must be true, or otherwise a compile-time error occurs:
-            // SPEC:    - An identity (�6.1.1), implicit nullable (�6.1.4), implicit reference (�6.1.6), boxing (�6.1.7), 
+            // SPEC:    - An identity (�6.1.1), implicit nullable (�6.1.4), implicit reference (�6.1.6), boxing (�6.1.7),
             // SPEC:        explicit nullable (�6.2.3), explicit reference (�6.2.4), or unboxing (�6.2.5) conversion exists
             // SPEC:        from E to T.
             // SPEC:    - The type of E or T is an open type.
@@ -5283,7 +5703,8 @@ class Program
             // SPEC VIOLATION:  "The type of E or T is an open type" is true, but type of E is void type, i.e. T is an open type.
             // SPEC VIOLATION:  Dev10 compiler correctly generates an error for this case and we will maintain compatibility.
 
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -5303,14 +5724,17 @@ class Program
             comp.VerifyDiagnostics(
                 // (13,20): error CS0039: Cannot convert type 'void' to 'T' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion
                 //         object o = Main() as T;
-                Diagnostic(ErrorCode.ERR_NoExplicitBuiltinConv, "Main() as T").WithArguments("void", "T"));
+                Diagnostic(ErrorCode.ERR_NoExplicitBuiltinConv, "Main() as T")
+                    .WithArguments("void", "T")
+            );
         }
 
         [WorkItem(543294, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543294")]
         [Fact()]
         public void TestIsOperatorWithTypeParameter_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -5337,14 +5761,16 @@ class Program
             comp.VerifyDiagnostics(
                 // (13,18): warning CS0184: The given expression is never of the provided ('T') type
                 //         bool b = Main() is T;
-                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "Main() is T").WithArguments("T"));
+                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "Main() is T").WithArguments("T")
+            );
         }
 
         [Fact]
         [WorkItem(34679, "https://github.com/dotnet/roslyn/issues/34679")]
         public void TestIsOperatorWithTypeParameter_02()
         {
-            var source = @"
+            var source =
+                @"
 class A<T>
 {
     public virtual void M1<S>(S x) where S : T { }
@@ -5391,18 +5817,21 @@ class C : A<int?>
 ";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
             comp.VerifyDiagnostics();
-            CompileAndVerify(comp, expectedOutput:
-@"M1 else
+            CompileAndVerify(
+                comp,
+                expectedOutput: @"M1 else
 Test else
 M1 if
-Test if");
+Test if"
+            );
         }
 
         [WorkItem(844635, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/844635")]
         [Fact()]
         public void TestIsOperatorWithGenericContainingType()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     static void Goo<T>(
@@ -5444,34 +5873,51 @@ class Outer<T>
     public enum E { }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (16,13): warning CS0184: The given expression is never of the provided ('Outer<long>.C') type
-                //         b = c2 is Outer<long>.C;    // Always false.
-                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "c2 is Outer<long>.C").WithArguments("Outer<long>.C").WithLocation(16, 13),
-                // (18,13): warning CS0183: The given expression is always of the provided ('Outer<T>.S') type
-                //         b = s1 is Outer<T>.S;       // Always true.
-                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "s1 is Outer<T>.S").WithArguments("Outer<T>.S").WithLocation(18, 13),
-                // (23,13): warning CS0183: The given expression is always of the provided ('Outer<int>.S') type
-                //         b = s2 is Outer<int>.S;     // Always true.
-                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "s2 is Outer<int>.S").WithArguments("Outer<int>.S").WithLocation(23, 13),
-                // (24,13): warning CS0184: The given expression is never of the provided ('Outer<long>.S') type
-                //         b = s2 is Outer<long>.S;    // Always false.
-                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "s2 is Outer<long>.S").WithArguments("Outer<long>.S").WithLocation(24, 13),
-                // (26,13): warning CS0183: The given expression is always of the provided ('Outer<T>.E') type
-                //         b = e1 is Outer<T>.E;       // Always true.
-                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e1 is Outer<T>.E").WithArguments("Outer<T>.E").WithLocation(26, 13),
-                // (31,13): warning CS0183: The given expression is always of the provided ('Outer<int>.E') type
-                //         b = e2 is Outer<int>.E;     // Always true.
-                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e2 is Outer<int>.E").WithArguments("Outer<int>.E").WithLocation(31, 13),
-                // (32,13): warning CS0184: The given expression is never of the provided ('Outer<long>.E') type
-                //         b = e2 is Outer<long>.E;    // Always false.
-                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "e2 is Outer<long>.E").WithArguments("Outer<long>.E").WithLocation(32, 13));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (16,13): warning CS0184: The given expression is never of the provided ('Outer<long>.C') type
+                    //         b = c2 is Outer<long>.C;    // Always false.
+                    Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "c2 is Outer<long>.C")
+                        .WithArguments("Outer<long>.C")
+                        .WithLocation(16, 13),
+                    // (18,13): warning CS0183: The given expression is always of the provided ('Outer<T>.S') type
+                    //         b = s1 is Outer<T>.S;       // Always true.
+                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "s1 is Outer<T>.S")
+                        .WithArguments("Outer<T>.S")
+                        .WithLocation(18, 13),
+                    // (23,13): warning CS0183: The given expression is always of the provided ('Outer<int>.S') type
+                    //         b = s2 is Outer<int>.S;     // Always true.
+                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "s2 is Outer<int>.S")
+                        .WithArguments("Outer<int>.S")
+                        .WithLocation(23, 13),
+                    // (24,13): warning CS0184: The given expression is never of the provided ('Outer<long>.S') type
+                    //         b = s2 is Outer<long>.S;    // Always false.
+                    Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "s2 is Outer<long>.S")
+                        .WithArguments("Outer<long>.S")
+                        .WithLocation(24, 13),
+                    // (26,13): warning CS0183: The given expression is always of the provided ('Outer<T>.E') type
+                    //         b = e1 is Outer<T>.E;       // Always true.
+                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e1 is Outer<T>.E")
+                        .WithArguments("Outer<T>.E")
+                        .WithLocation(26, 13),
+                    // (31,13): warning CS0183: The given expression is always of the provided ('Outer<int>.E') type
+                    //         b = e2 is Outer<int>.E;     // Always true.
+                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e2 is Outer<int>.E")
+                        .WithArguments("Outer<int>.E")
+                        .WithLocation(31, 13),
+                    // (32,13): warning CS0184: The given expression is never of the provided ('Outer<long>.E') type
+                    //         b = e2 is Outer<long>.E;    // Always false.
+                    Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "e2 is Outer<long>.E")
+                        .WithArguments("Outer<long>.E")
+                        .WithLocation(32, 13)
+                );
         }
 
         [Fact]
         public void TestIsOperatorWithGenericClassAndValueType()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     static bool Goo<T>(C<T> c)
@@ -5481,10 +5927,13 @@ class Program
 }
 class C<T> { }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (6,16): warning CS0184: The given expression is never of the provided ('int') type
-                //         return c is int;   // always false
-                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "c is int").WithArguments("int").WithLocation(6, 16)
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (6,16): warning CS0184: The given expression is never of the provided ('int') type
+                    //         return c is int;   // always false
+                    Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "c is int")
+                        .WithArguments("int")
+                        .WithLocation(6, 16)
                 );
         }
 
@@ -5492,7 +5941,8 @@ class C<T> { }
         [Fact()]
         public void TestIsOperatorWithTypesThatCannotUnify()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     static void Goo<T>(Outer<T>.S s1, Outer<T[]>.S s2)
@@ -5512,17 +5962,22 @@ class Outer<T>
     public struct S { }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (11,13): warning CS0183: The given expression is always of the provided ('Outer<T[]>.S') type
-                //         b = s2 is Outer<T[]>.S;     // Always true.
-                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "s2 is Outer<T[]>.S").WithArguments("Outer<T[]>.S").WithLocation(11, 13));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (11,13): warning CS0183: The given expression is always of the provided ('Outer<T[]>.S') type
+                    //         b = s2 is Outer<T[]>.S;     // Always true.
+                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "s2 is Outer<T[]>.S")
+                        .WithArguments("Outer<T[]>.S")
+                        .WithLocation(11, 13)
+                );
         }
 
         [WorkItem(844635, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/844635")]
         [Fact()]
         public void TestIsOperatorWithSpecialTypes()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -5563,59 +6018,90 @@ class Outer<T>
     public enum E { }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (11,13): warning CS0183: The given expression is always of the provided ('System.Enum') type
-                //         b = e1 is Enum; // Always true.
-                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e1 is Enum").WithArguments("System.Enum").WithLocation(11, 13),
-                // (12,13): warning CS0183: The given expression is always of the provided ('System.Enum') type
-                //         b = e2 is Enum; // Always true.
-                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e2 is Enum").WithArguments("System.Enum").WithLocation(12, 13),
-                // (13,13): warning CS0184: The given expression is never of the provided ('System.Enum') type
-                //         b = 0 is Enum;  // Always false.
-                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "0 is Enum").WithArguments("System.Enum").WithLocation(13, 13),
-                // (14,13): warning CS0184: The given expression is never of the provided ('System.Enum') type
-                //         b = i is Enum;  // Always false.
-                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "i is Enum").WithArguments("System.Enum").WithLocation(14, 13),
-
-                // (19,13): warning CS0183: The given expression is always of the provided ('System.ValueType') type
-                //         b = e1 is ValueType; // Always true.
-                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e1 is ValueType").WithArguments("System.ValueType").WithLocation(19, 13),
-                // (20,13): warning CS0183: The given expression is always of the provided ('System.ValueType') type
-                //         b = e2 is ValueType; // Always true.
-                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e2 is ValueType").WithArguments("System.ValueType").WithLocation(20, 13),
-                // (21,13): warning CS0183: The given expression is always of the provided ('System.ValueType') type
-                //         b = 0 is ValueType;  // Always true.
-                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "0 is ValueType").WithArguments("System.ValueType").WithLocation(21, 13),
-                // (22,13): warning CS0183: The given expression is always of the provided ('System.ValueType') type
-                //         b = i is ValueType;  // Always true.
-                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "i is ValueType").WithArguments("System.ValueType").WithLocation(22, 13),
-                // (25,13): warning CS0183: The given expression is always of the provided ('System.ValueType') type
-                //         b = ts is ValueType; // Always true.
-                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "ts is ValueType").WithArguments("System.ValueType").WithLocation(25, 13),
-
-                // (27,13): warning CS0183: The given expression is always of the provided ('object') type
-                //         b = e1 is Object; // Always true.
-                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e1 is Object").WithArguments("object").WithLocation(27, 13),
-                // (28,13): warning CS0183: The given expression is always of the provided ('object') type
-                //         b = e2 is Object; // Always true.
-                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e2 is Object").WithArguments("object").WithLocation(28, 13),
-                // (29,13): warning CS0183: The given expression is always of the provided ('object') type
-                //         b = 0 is Object;  // Always true.
-                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "0 is Object").WithArguments("object").WithLocation(29, 13),
-                // (30,13): warning CS0183: The given expression is always of the provided ('object') type
-                //         b = i is Object;  // Always true.
-                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "i is Object").WithArguments("object").WithLocation(30, 13),
-                // (33,13): warning CS0183: The given expression is always of the provided ('object') type
-                //         b = ts is Object; // Always true.
-                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "ts is Object").WithArguments("object").WithLocation(33, 13));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (11,13): warning CS0183: The given expression is always of the provided ('System.Enum') type
+                    //         b = e1 is Enum; // Always true.
+                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e1 is Enum")
+                        .WithArguments("System.Enum")
+                        .WithLocation(11, 13),
+                    // (12,13): warning CS0183: The given expression is always of the provided ('System.Enum') type
+                    //         b = e2 is Enum; // Always true.
+                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e2 is Enum")
+                        .WithArguments("System.Enum")
+                        .WithLocation(12, 13),
+                    // (13,13): warning CS0184: The given expression is never of the provided ('System.Enum') type
+                    //         b = 0 is Enum;  // Always false.
+                    Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "0 is Enum")
+                        .WithArguments("System.Enum")
+                        .WithLocation(13, 13),
+                    // (14,13): warning CS0184: The given expression is never of the provided ('System.Enum') type
+                    //         b = i is Enum;  // Always false.
+                    Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "i is Enum")
+                        .WithArguments("System.Enum")
+                        .WithLocation(14, 13),
+                    // (19,13): warning CS0183: The given expression is always of the provided ('System.ValueType') type
+                    //         b = e1 is ValueType; // Always true.
+                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e1 is ValueType")
+                        .WithArguments("System.ValueType")
+                        .WithLocation(19, 13),
+                    // (20,13): warning CS0183: The given expression is always of the provided ('System.ValueType') type
+                    //         b = e2 is ValueType; // Always true.
+                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e2 is ValueType")
+                        .WithArguments("System.ValueType")
+                        .WithLocation(20, 13),
+                    // (21,13): warning CS0183: The given expression is always of the provided ('System.ValueType') type
+                    //         b = 0 is ValueType;  // Always true.
+                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "0 is ValueType")
+                        .WithArguments("System.ValueType")
+                        .WithLocation(21, 13),
+                    // (22,13): warning CS0183: The given expression is always of the provided ('System.ValueType') type
+                    //         b = i is ValueType;  // Always true.
+                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "i is ValueType")
+                        .WithArguments("System.ValueType")
+                        .WithLocation(22, 13),
+                    // (25,13): warning CS0183: The given expression is always of the provided ('System.ValueType') type
+                    //         b = ts is ValueType; // Always true.
+                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "ts is ValueType")
+                        .WithArguments("System.ValueType")
+                        .WithLocation(25, 13),
+                    // (27,13): warning CS0183: The given expression is always of the provided ('object') type
+                    //         b = e1 is Object; // Always true.
+                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e1 is Object")
+                        .WithArguments("object")
+                        .WithLocation(27, 13),
+                    // (28,13): warning CS0183: The given expression is always of the provided ('object') type
+                    //         b = e2 is Object; // Always true.
+                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "e2 is Object")
+                        .WithArguments("object")
+                        .WithLocation(28, 13),
+                    // (29,13): warning CS0183: The given expression is always of the provided ('object') type
+                    //         b = 0 is Object;  // Always true.
+                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "0 is Object")
+                        .WithArguments("object")
+                        .WithLocation(29, 13),
+                    // (30,13): warning CS0183: The given expression is always of the provided ('object') type
+                    //         b = i is Object;  // Always true.
+                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "i is Object")
+                        .WithArguments("object")
+                        .WithLocation(30, 13),
+                    // (33,13): warning CS0183: The given expression is always of the provided ('object') type
+                    //         b = ts is Object; // Always true.
+                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "ts is Object")
+                        .WithArguments("object")
+                        .WithLocation(33, 13)
+                );
         }
 
-        [WorkItem(543294, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543294"), WorkItem(546655, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546655")]
+        [
+            WorkItem(543294, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543294"),
+            WorkItem(546655, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546655")
+        ]
         [Fact()]
         public void TestAsOperator_SpecErrorCase()
         {
             // SPEC:    Furthermore, at least one of the following must be true, or otherwise a compile-time error occurs:
-            // SPEC:    - An identity (�6.1.1), implicit nullable (�6.1.4), implicit reference (�6.1.6), boxing (�6.1.7), 
+            // SPEC:    - An identity (�6.1.1), implicit nullable (�6.1.4), implicit reference (�6.1.6), boxing (�6.1.7),
             // SPEC:        explicit nullable (�6.2.3), explicit reference (�6.2.4), or unboxing (�6.2.5) conversion exists
             // SPEC:        from E to T.
             // SPEC:    - The type of E or T is an open type.
@@ -5627,7 +6113,8 @@ class Outer<T>
             // SPEC VIOLATION:  boxing conversion. It will be one of those at runtime, but at compile time
             // SPEC VIOLATION:  we do not know which, and therefore cannot classify it as any of those.
 
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -5654,7 +6141,8 @@ class Program
         [Fact()]
         public void TestIsOperatorWithTypeParameter_Bug16461()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class G<T>
@@ -5679,15 +6167,19 @@ class Test
     }
 }
 ";
-            var comp = CompileAndVerify(source, expectedOutput: @"False
-False");
+            var comp = CompileAndVerify(
+                source,
+                expectedOutput: @"False
+False"
+            );
             comp.VerifyDiagnostics();
         }
 
         [Fact()]
         public void TestIsAsOperator_UserDefinedConversionsNotAllowed()
         {
-            var source = @"
+            var source =
+                @"
 // conversion.cs
 
 class Goo { public Goo(Bar b){} }
@@ -5737,13 +6229,15 @@ class Test
             comp.VerifyDiagnostics(
                 // (37,21): error CS0039: Cannot convert type 'Bar' to 'Goo' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion
                 //         object a1 = numeral as Goo;
-                Diagnostic(ErrorCode.ERR_NoExplicitBuiltinConv, "numeral as Goo").WithArguments("Bar", "Goo"),
+                Diagnostic(ErrorCode.ERR_NoExplicitBuiltinConv, "numeral as Goo")
+                    .WithArguments("Bar", "Goo"),
                 // (38,21): error CS0077: The as operator must be used with a reference type or nullable type ('Bar' is a non-nullable value type)
                 //         object a2 = 1 as Bar;
                 Diagnostic(ErrorCode.ERR_AsMustHaveReferenceType, "1 as Bar").WithArguments("Bar"),
                 // (39,21): error CS0039: Cannot convert type 'Bar' to 'Goo2' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion
                 //         object a3 = numeral as Goo2;
-                Diagnostic(ErrorCode.ERR_NoExplicitBuiltinConv, "numeral as Goo2").WithArguments("Bar", "Goo2"),
+                Diagnostic(ErrorCode.ERR_NoExplicitBuiltinConv, "numeral as Goo2")
+                    .WithArguments("Bar", "Goo2"),
                 // (41,19): warning CS0184: The given expression is never of the provided ('Goo') type
                 //         bool b1 = numeral is Goo;
                 Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "numeral is Goo").WithArguments("Goo"),
@@ -5752,14 +6246,16 @@ class Test
                 Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "1 is Bar").WithArguments("Bar"),
                 // (43,19): warning CS0184: The given expression is never of the provided ('Goo2') type
                 //         bool b3 = numeral is Goo2;
-                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "numeral is Goo2").WithArguments("Goo2"));
+                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "numeral is Goo2").WithArguments("Goo2")
+            );
         }
 
         [WorkItem(543455, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543455")]
         [Fact()]
         public void CS0184WRN_IsAlwaysFalse_Generic()
         {
-            var text = @"
+            var text =
+                @"
 public class GenC<T> : GenI<T> where T : struct
 {
     public bool Test(T t)
@@ -5781,15 +6277,18 @@ public class C
 }
 ";
 
-            CreateCompilation(text).VerifyDiagnostics(
-                                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "t is C").WithArguments("C"));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "t is C").WithArguments("C")
+                );
         }
 
         [WorkItem(547011, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/547011")]
         [Fact()]
         public void CS0184WRN_IsAlwaysFalse_IntPtr()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 public enum E
 {
   First
@@ -5806,13 +6305,17 @@ public class Base
 }
 ";
 
-            CreateCompilation(text).VerifyDiagnostics(
-                // (12,27): warning CS0184: The given expression is never of the provided ('System.IntPtr') type
-                //         Console.WriteLine(e is IntPtr);
-                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "e is IntPtr").WithArguments("System.IntPtr"),
-                // (13,27): error CS0077: The as operator must be used with a reference type or nullable type ('System.IntPtr' is a non-nullable value type)
-                //         Console.WriteLine(e as IntPtr);
-                Diagnostic(ErrorCode.ERR_AsMustHaveReferenceType, "e as IntPtr").WithArguments("System.IntPtr"));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (12,27): warning CS0184: The given expression is never of the provided ('System.IntPtr') type
+                    //         Console.WriteLine(e is IntPtr);
+                    Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "e is IntPtr")
+                        .WithArguments("System.IntPtr"),
+                    // (13,27): error CS0077: The as operator must be used with a reference type or nullable type ('System.IntPtr' is a non-nullable value type)
+                    //         Console.WriteLine(e as IntPtr);
+                    Diagnostic(ErrorCode.ERR_AsMustHaveReferenceType, "e as IntPtr")
+                        .WithArguments("System.IntPtr")
+                );
         }
 
         [WorkItem(543443, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543443")]
@@ -5820,7 +6323,7 @@ public class Base
         public void ParamsOperators()
         {
             var text =
-@"class X
+                @"class X
 {
    public static bool operator >(X a, params int[] b)
     {
@@ -5832,12 +6335,13 @@ public class Base
         return false;
     }
 }";
-            CreateCompilation(text).VerifyDiagnostics(
-                // (3,39): error CS1670: params is not valid in this context public static bool operator >(X a, params int[] b)
-                Diagnostic(ErrorCode.ERR_IllegalParams, "params"),
-                // (8,40): error CS1670: params is not valid in this context
-                //     public static bool operator <(X a, params int[] b)
-                Diagnostic(ErrorCode.ERR_IllegalParams, "params")
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (3,39): error CS1670: params is not valid in this context public static bool operator >(X a, params int[] b)
+                    Diagnostic(ErrorCode.ERR_IllegalParams, "params"),
+                    // (8,40): error CS1670: params is not valid in this context
+                    //     public static bool operator <(X a, params int[] b)
+                    Diagnostic(ErrorCode.ERR_IllegalParams, "params")
                 );
         }
 
@@ -5846,7 +6350,7 @@ public class Base
         public void TestNullCoalesce_UserDefinedConversions()
         {
             var text =
-@"class B
+                @"class B
 {
     static void Main()
     {
@@ -5871,7 +6375,7 @@ class A
         public void TestAsOperator_UserDefinedConversions()
         {
             var text =
-@"using System;
+                @"using System;
  
 class C<T>
 {
@@ -5890,7 +6394,7 @@ class C<T>
         public void TestIsOperator_UserDefinedConversions()
         {
             var text =
-@"using System;
+                @"using System;
  
 class C<T>
 {
@@ -5909,7 +6413,7 @@ class C<T>
         public void TestEqualityOperator_NullableStructs()
         {
             string source1 =
-@"
+                @"
 public struct NonGenericStruct { }
 public struct GenericStruct<T> { }
 
@@ -5943,7 +6447,8 @@ public class Test
     }
 }";
 
-            string source2 = @"
+            string source2 =
+                @"
 struct S 
 {
   public static bool operator ==(S? x, decimal? y) { return false; }
@@ -5964,10 +6469,13 @@ struct S
 
 ";
             CompileAndVerify(source1, expectedOutput: "1");
-            CreateCompilation(source2).VerifyDiagnostics(
-// (16,9): error CS0034: Operator '==' is ambiguous on operands of type 'S?' and '<null>'
-//     if (s == null) s = default(S);
-Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "s == null").WithArguments("==", "S?", "<null>"));
+            CreateCompilation(source2)
+                .VerifyDiagnostics(
+                    // (16,9): error CS0034: Operator '==' is ambiguous on operands of type 'S?' and '<null>'
+                    //     if (s == null) s = default(S);
+                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "s == null")
+                        .WithArguments("==", "S?", "<null>")
+                );
         }
 
         [WorkItem(543432, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543432")]
@@ -5975,7 +6483,7 @@ Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "s == null").WithArguments("==", "S?", 
         public void NoNewForOperators()
         {
             var text =
-@"class A
+                @"class A
 {
     public static implicit operator A(D x)
     {
@@ -5997,7 +6505,7 @@ class D {}";
         public void ERR_NoImplicitConvCast_UserDefinedConversions()
         {
             var text =
-@"class A
+                @"class A
 {
     public static A operator ++(A x)
     {
@@ -6014,13 +6522,17 @@ class B : A
     }
 }
 ";
-            CreateCompilation(text).VerifyDiagnostics(Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "b++").WithArguments("A", "B"));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "b++").WithArguments("A", "B")
+                );
         }
 
         [Fact, WorkItem(30668, "https://github.com/dotnet/roslyn/issues/30668")]
         public void TestTupleOperatorIncrement()
         {
-            var text = @"
+            var text =
+                @"
 namespace System
 {
     struct ValueTuple<T1, T2>
@@ -6038,7 +6550,8 @@ namespace System
         [Fact, WorkItem(30668, "https://github.com/dotnet/roslyn/issues/30668")]
         public void TestTupleOperatorConvert()
         {
-            var text = @"
+            var text =
+                @"
 namespace System
 {
     struct ValueTuple<T1, T2>
@@ -6050,16 +6563,20 @@ namespace System
     }
 }
 ";
-            CreateCompilation(text).VerifyDiagnostics(
-                // (6,41): error CS0555: User-defined operator cannot take an object of the enclosing type and convert to an object of the enclosing type
-                //         public static explicit operator (T1 fst, T2 snd)((T1 one, T2 two) s)
-                Diagnostic(ErrorCode.ERR_IdentityConversion, "(T1 fst, T2 snd)").WithLocation(6, 41));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (6,41): error CS0555: User-defined operator cannot take an object of the enclosing type and convert to an object of the enclosing type
+                    //         public static explicit operator (T1 fst, T2 snd)((T1 one, T2 two) s)
+                    Diagnostic(ErrorCode.ERR_IdentityConversion, "(T1 fst, T2 snd)")
+                        .WithLocation(6, 41)
+                );
         }
 
         [Fact, WorkItem(30668, "https://github.com/dotnet/roslyn/issues/30668")]
         public void TestTupleOperatorConvertToBaseType()
         {
-            var text = @"
+            var text =
+                @"
 namespace System
 {
     struct ValueTuple<T1, T2>
@@ -6071,16 +6588,23 @@ namespace System
     }
 }
 ";
-            CreateCompilation(text).GetDiagnostics().Where(d => d.Severity == DiagnosticSeverity.Error).Verify(
+            CreateCompilation(text)
+                .GetDiagnostics()
+                .Where(d => d.Severity == DiagnosticSeverity.Error)
+                .Verify(
                     // (6,41): error CS0553: '(T1, T2).explicit operator ValueType((T1, T2))': user-defined conversions to or from a base type are not allowed
                     //         public static explicit operator ValueType(ValueTuple<T1, T2> s)
-                    Diagnostic(ErrorCode.ERR_ConversionWithBase, "ValueType").WithArguments("(T1, T2).explicit operator System.ValueType((T1, T2))").WithLocation(6, 41));
+                    Diagnostic(ErrorCode.ERR_ConversionWithBase, "ValueType")
+                        .WithArguments("(T1, T2).explicit operator System.ValueType((T1, T2))")
+                        .WithLocation(6, 41)
+                );
         }
 
         [Fact, WorkItem(30668, "https://github.com/dotnet/roslyn/issues/30668")]
         public void TestTupleBinaryOperator()
         {
-            var text = @"
+            var text =
+                @"
 namespace System
 {
     struct ValueTuple<T1, T2>
@@ -6092,7 +6616,10 @@ namespace System
     }
 }
 ";
-            CreateCompilation(text).GetDiagnostics().Where(d => d.Severity == DiagnosticSeverity.Error).Verify();
+            CreateCompilation(text)
+                .GetDiagnostics()
+                .Where(d => d.Severity == DiagnosticSeverity.Error)
+                .Verify();
         }
 
         [WorkItem(543431, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543431")]
@@ -6100,7 +6627,7 @@ namespace System
         public void TestEqualityOperator_DelegateTypes_01()
         {
             string source =
-@"
+                @"
 using System;
  
 class C
@@ -6125,7 +6652,8 @@ class D
     }
 }
 ";
-            string expectedOutput = @"True
+            string expectedOutput =
+                @"True
 False";
             CompileAndVerify(source, expectedOutput: expectedOutput);
         }
@@ -6135,7 +6663,7 @@ False";
         public void TestEqualityOperator_DelegateTypes_02()
         {
             string source =
-@"
+                @"
 using System;
  
 class C
@@ -6161,13 +6689,17 @@ class D
 }
 ";
 
-            CreateCompilation(source).VerifyDiagnostics(
-                // (21,27): error CS0019: Operator '==' cannot be applied to operands of type 'System.Func<int>' and 'D'
-                //         Console.WriteLine((Func<int>)(C)null == (D)null);
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "(Func<int>)(C)null == (D)null").WithArguments("==", "System.Func<int>", "D"),
-                // (22,27): error CS0019: Operator '==' cannot be applied to operands of type 'System.Func<int>' and 'System.Action'
-                //         Console.WriteLine((Func<int>)(C)null == (Action)(D)null);
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "(Func<int>)(C)null == (Action)(D)null").WithArguments("==", "System.Func<int>", "System.Action"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (21,27): error CS0019: Operator '==' cannot be applied to operands of type 'System.Func<int>' and 'D'
+                    //         Console.WriteLine((Func<int>)(C)null == (D)null);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "(Func<int>)(C)null == (D)null")
+                        .WithArguments("==", "System.Func<int>", "D"),
+                    // (22,27): error CS0019: Operator '==' cannot be applied to operands of type 'System.Func<int>' and 'System.Action'
+                    //         Console.WriteLine((Func<int>)(C)null == (Action)(D)null);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "(Func<int>)(C)null == (Action)(D)null")
+                        .WithArguments("==", "System.Func<int>", "System.Action")
+                );
         }
 
         [WorkItem(543431, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543431")]
@@ -6175,7 +6707,7 @@ class D
         public void TestEqualityOperator_DelegateTypes_03_Ambiguous()
         {
             string source =
-@"
+                @"
 using System;
  
 class C
@@ -6206,13 +6738,17 @@ class D
 }
 ";
 
-            CreateCompilation(source).VerifyDiagnostics(
-                // (26,27): error CS0019: Operator '==' cannot be applied to operands of type 'C' and 'D'
-                //         Console.WriteLine((C)null == (D)null);
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "(C)null == (D)null").WithArguments("==", "C", "D"),
-                // (27,27): error CS0019: Operator '!=' cannot be applied to operands of type 'C' and 'D'
-                //         Console.WriteLine((C)null != (D)null);
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "(C)null != (D)null").WithArguments("!=", "C", "D"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (26,27): error CS0019: Operator '==' cannot be applied to operands of type 'C' and 'D'
+                    //         Console.WriteLine((C)null == (D)null);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "(C)null == (D)null")
+                        .WithArguments("==", "C", "D"),
+                    // (27,27): error CS0019: Operator '!=' cannot be applied to operands of type 'C' and 'D'
+                    //         Console.WriteLine((C)null != (D)null);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "(C)null != (D)null")
+                        .WithArguments("!=", "C", "D")
+                );
         }
 
         [WorkItem(543431, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543431")]
@@ -6220,7 +6756,7 @@ class D
         public void TestEqualityOperator_DelegateTypes_04_BaseTypes()
         {
             string source =
-@"
+                @"
 using System;
 
 class A
@@ -6249,7 +6785,8 @@ class D
     }
 }
 ";
-            string expectedOutput = @"True
+            string expectedOutput =
+                @"True
 False";
             CompileAndVerify(source, expectedOutput: expectedOutput);
         }
@@ -6259,7 +6796,7 @@ False";
         public void TestEqualityOperator_NullableDecimal()
         {
             string source =
-@"
+                @"
 public class Test
 {
     public static bool Goo(decimal? deq)
@@ -6280,7 +6817,7 @@ public class Test
         public void TypeParameterConstraintToGenericType()
         {
             string source =
-@"
+                @"
 public class Gen<T>
 {
 	public T t;
@@ -6313,7 +6850,7 @@ public class ConstrainedTestContext<T,U> where T : Gen<U>
         public void LiftedUserDefinedUnaryOperator()
         {
             string source =
-@"
+                @"
 struct S
 {
     public static int operator +(S s) { return 1; }
@@ -6334,7 +6871,7 @@ struct S
         public void TestDefaultOperatorEnumConstantValue()
         {
             string source =
-@"
+                @"
 enum X { F = 0 };
 class C
 {
@@ -6351,7 +6888,8 @@ class C
         [Fact]
         public void OperatorHiding1()
         {
-            string source = @"
+            string source =
+                @"
 class Base1
 {
     public static Base1 operator +(Base1 b, Derived1 d) { return b; }
@@ -6368,7 +6906,8 @@ class Derived1 : Base1
         [Fact]
         public void OperatorHiding2()
         {
-            string source = @"
+            string source =
+                @"
 class Base2
 {
     public static Base2 op_Addition(Base2 b, Derived2 d) { return b; }
@@ -6385,7 +6924,8 @@ class Derived2 : Base2
         [Fact]
         public void OperatorHiding3()
         {
-            string source = @"
+            string source =
+                @"
 class Base3
 {
     public static Base3 operator +(Base3 b, Derived3 d) { return b; }
@@ -6402,7 +6942,8 @@ class Derived3 : Base3
         [Fact]
         public void OperatorHiding4()
         {
-            string source = @"
+            string source =
+                @"
 class Base4
 {
     public static Base4 op_Addition(Base4 b, Derived4 d) { return b; }
@@ -6413,16 +6954,23 @@ class Derived4 : Base4
     public static Base4 op_Addition(Base4 b, Derived4 d) { return b; }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (9,25): warning CS0108: 'Derived4.op_Addition(Base4, Derived4)' hides inherited member 'Base4.op_Addition(Base4, Derived4)'. Use the new keyword if hiding was intended.
-                //     public static Base4 op_Addition(Base4 b, Derived4 d) { return b; }
-                Diagnostic(ErrorCode.WRN_NewRequired, "op_Addition").WithArguments("Derived4.op_Addition(Base4, Derived4)", "Base4.op_Addition(Base4, Derived4)"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (9,25): warning CS0108: 'Derived4.op_Addition(Base4, Derived4)' hides inherited member 'Base4.op_Addition(Base4, Derived4)'. Use the new keyword if hiding was intended.
+                    //     public static Base4 op_Addition(Base4 b, Derived4 d) { return b; }
+                    Diagnostic(ErrorCode.WRN_NewRequired, "op_Addition")
+                        .WithArguments(
+                            "Derived4.op_Addition(Base4, Derived4)",
+                            "Base4.op_Addition(Base4, Derived4)"
+                        )
+                );
         }
 
         [Fact]
         public void ConversionHiding1()
         {
-            string source = @"
+            string source =
+                @"
 class Base1
 {
     public static implicit operator string(Base1 b) { return null; }
@@ -6433,16 +6981,19 @@ class Derived1 : Base1
     public static implicit operator string(Base1 b) { return null; } // CS0556, but not CS0108
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (9,37): error CS0556: User-defined conversion must convert to or from the enclosing type
-                //     public static implicit operator string(Base1 b) { return null; }
-                Diagnostic(ErrorCode.ERR_ConversionNotInvolvingContainedType, "string"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (9,37): error CS0556: User-defined conversion must convert to or from the enclosing type
+                    //     public static implicit operator string(Base1 b) { return null; }
+                    Diagnostic(ErrorCode.ERR_ConversionNotInvolvingContainedType, "string")
+                );
         }
 
         [Fact]
         public void ConversionHiding2()
         {
-            string source = @"
+            string source =
+                @"
 class Base2
 {
     public static string op_Explicit(Derived2 d) { return null; }
@@ -6459,7 +7010,8 @@ class Derived2 : Base2
         [Fact]
         public void ConversionHiding3()
         {
-            string source = @"
+            string source =
+                @"
 class Base3
 {
     public static implicit operator string(Base3 b) { return null; }
@@ -6476,7 +7028,8 @@ class Derived3 : Base3
         [Fact]
         public void ConversionHiding4()
         {
-            string source = @"
+            string source =
+                @"
 class Base4
 {
     public static string op_Explicit(Base4 b) { return null; }
@@ -6487,16 +7040,20 @@ class Derived4 : Base4
     public static string op_Explicit(Base4 b) { return null; }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (9,26): warning CS0108: 'Derived4.op_Explicit(Base4)' hides inherited member 'Base4.op_Explicit(Base4)'. Use the new keyword if hiding was intended.
-                //     public static string op_Explicit(Base4 b) { return null; }
-                Diagnostic(ErrorCode.WRN_NewRequired, "op_Explicit").WithArguments("Derived4.op_Explicit(Base4)", "Base4.op_Explicit(Base4)"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (9,26): warning CS0108: 'Derived4.op_Explicit(Base4)' hides inherited member 'Base4.op_Explicit(Base4)'. Use the new keyword if hiding was intended.
+                    //     public static string op_Explicit(Base4 b) { return null; }
+                    Diagnostic(ErrorCode.WRN_NewRequired, "op_Explicit")
+                        .WithArguments("Derived4.op_Explicit(Base4)", "Base4.op_Explicit(Base4)")
+                );
         }
 
         [Fact]
         public void ClassesWithOperatorNames()
         {
-            string source = @"
+            string source =
+                @"
 class op_Increment
 {
 	public static op_Increment operator ++ (op_Increment c) { return null; }
@@ -6562,58 +7119,75 @@ class op_UnsignedRightShift
 		
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (4,38): error CS0542: 'op_Increment': member names cannot be the same as their enclosing type
-                // 	public static op_Increment operator ++ (op_Increment c) { return null; }
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "++").WithArguments("op_Increment"),
-                // (8,38): error CS0542: 'op_Decrement': member names cannot be the same as their enclosing type
-                // 	public static op_Decrement operator -- (op_Decrement c) { return null; }
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "--").WithArguments("op_Decrement"),
-                // (12,29): error CS0542: 'op_UnaryPlus': member names cannot be the same as their enclosing type
-                // 	public static int operator + (op_UnaryPlus c) { return 0; }
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "+").WithArguments("op_UnaryPlus"),
-                // (16,39): error CS0542: 'op_UnaryNegation': member names cannot be the same as their enclosing type
-                // 	public static int operator - (op_UnaryNegation c) { return 0; }
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "-").WithArguments("op_UnaryNegation"),
-                // (20,29): error CS0542: 'op_OnesComplement': member names cannot be the same as their enclosing type
-                // 	public static int operator ~ (op_OnesComplement c) { return 0; }
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "~").WithArguments("op_OnesComplement"),
-                // (24,29): error CS0542: 'op_Addition': member names cannot be the same as their enclosing type
-                // 	public static int operator + (op_Addition c, int i) { return 0; }
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "+").WithArguments("op_Addition"),
-                // (28,29): error CS0542: 'op_Subtraction': member names cannot be the same as their enclosing type
-                // 	public static int operator - (op_Subtraction c, int i) { return 0; }
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "-").WithArguments("op_Subtraction"),
-                // (32,29): error CS0542: 'op_Multiply': member names cannot be the same as their enclosing type
-                // 	public static int operator * (op_Multiply c, int i) { return 0; }
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "*").WithArguments("op_Multiply"),
-                // (36,29): error CS0542: 'op_Division': member names cannot be the same as their enclosing type
-                // 	public static int operator / (op_Division c, int i) { return 0; }
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "/").WithArguments("op_Division"),
-                // (40,29): error CS0542: 'op_Modulus': member names cannot be the same as their enclosing type
-                // 	public static int operator % (op_Modulus c, int i) { return 0; }
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "%").WithArguments("op_Modulus"),
-                // (44,29): error CS0542: 'op_ExclusiveOr': member names cannot be the same as their enclosing type
-                // 	public static int operator ^ (op_ExclusiveOr c, int i) { return 0; }
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "^").WithArguments("op_ExclusiveOr"),
-                // (48,29): error CS0542: 'op_BitwiseAnd': member names cannot be the same as their enclosing type
-                // 	public static int operator & (op_BitwiseAnd c, int i) { return 0; }
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "&").WithArguments("op_BitwiseAnd"),
-                // (52,29): error CS0542: 'op_BitwiseOr': member names cannot be the same as their enclosing type
-                // 	public static int operator | (op_BitwiseOr c, int i) { return 0; }
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "|").WithArguments("op_BitwiseOr"),
-                // (56,30): error CS0542: 'op_LeftShift': member names cannot be the same as their enclosing type
-                // 	public static long operator <<  (op_LeftShift c, int i) { return 0; }
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "<<").WithArguments("op_LeftShift"),
-                // (60,30): error CS0542: 'op_RightShift': member names cannot be the same as their enclosing type
-                // 	public static long operator >>  (op_RightShift c, int i) { return 0; }
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, ">>").WithArguments("op_RightShift"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (4,38): error CS0542: 'op_Increment': member names cannot be the same as their enclosing type
+                    // 	public static op_Increment operator ++ (op_Increment c) { return null; }
+                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "++")
+                        .WithArguments("op_Increment"),
+                    // (8,38): error CS0542: 'op_Decrement': member names cannot be the same as their enclosing type
+                    // 	public static op_Decrement operator -- (op_Decrement c) { return null; }
+                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "--")
+                        .WithArguments("op_Decrement"),
+                    // (12,29): error CS0542: 'op_UnaryPlus': member names cannot be the same as their enclosing type
+                    // 	public static int operator + (op_UnaryPlus c) { return 0; }
+                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "+")
+                        .WithArguments("op_UnaryPlus"),
+                    // (16,39): error CS0542: 'op_UnaryNegation': member names cannot be the same as their enclosing type
+                    // 	public static int operator - (op_UnaryNegation c) { return 0; }
+                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "-")
+                        .WithArguments("op_UnaryNegation"),
+                    // (20,29): error CS0542: 'op_OnesComplement': member names cannot be the same as their enclosing type
+                    // 	public static int operator ~ (op_OnesComplement c) { return 0; }
+                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "~")
+                        .WithArguments("op_OnesComplement"),
+                    // (24,29): error CS0542: 'op_Addition': member names cannot be the same as their enclosing type
+                    // 	public static int operator + (op_Addition c, int i) { return 0; }
+                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "+")
+                        .WithArguments("op_Addition"),
+                    // (28,29): error CS0542: 'op_Subtraction': member names cannot be the same as their enclosing type
+                    // 	public static int operator - (op_Subtraction c, int i) { return 0; }
+                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "-")
+                        .WithArguments("op_Subtraction"),
+                    // (32,29): error CS0542: 'op_Multiply': member names cannot be the same as their enclosing type
+                    // 	public static int operator * (op_Multiply c, int i) { return 0; }
+                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "*")
+                        .WithArguments("op_Multiply"),
+                    // (36,29): error CS0542: 'op_Division': member names cannot be the same as their enclosing type
+                    // 	public static int operator / (op_Division c, int i) { return 0; }
+                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "/")
+                        .WithArguments("op_Division"),
+                    // (40,29): error CS0542: 'op_Modulus': member names cannot be the same as their enclosing type
+                    // 	public static int operator % (op_Modulus c, int i) { return 0; }
+                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "%").WithArguments("op_Modulus"),
+                    // (44,29): error CS0542: 'op_ExclusiveOr': member names cannot be the same as their enclosing type
+                    // 	public static int operator ^ (op_ExclusiveOr c, int i) { return 0; }
+                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "^")
+                        .WithArguments("op_ExclusiveOr"),
+                    // (48,29): error CS0542: 'op_BitwiseAnd': member names cannot be the same as their enclosing type
+                    // 	public static int operator & (op_BitwiseAnd c, int i) { return 0; }
+                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "&")
+                        .WithArguments("op_BitwiseAnd"),
+                    // (52,29): error CS0542: 'op_BitwiseOr': member names cannot be the same as their enclosing type
+                    // 	public static int operator | (op_BitwiseOr c, int i) { return 0; }
+                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "|")
+                        .WithArguments("op_BitwiseOr"),
+                    // (56,30): error CS0542: 'op_LeftShift': member names cannot be the same as their enclosing type
+                    // 	public static long operator <<  (op_LeftShift c, int i) { return 0; }
+                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "<<")
+                        .WithArguments("op_LeftShift"),
+                    // (60,30): error CS0542: 'op_RightShift': member names cannot be the same as their enclosing type
+                    // 	public static long operator >>  (op_RightShift c, int i) { return 0; }
+                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, ">>")
+                        .WithArguments("op_RightShift")
+                );
         }
 
         [Fact]
         public void ClassesWithConversionNames()
         {
-            string source = @"
+            string source =
+                @"
 class op_Explicit
 {
     public static explicit operator op_Explicit(int x) { return null; }
@@ -6624,19 +7198,24 @@ class op_Implicit
     public static implicit operator op_Implicit(int x) { return null; }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (4,37): error CS0542: 'op_Explicit': member names cannot be the same as their enclosing type
-                //     public static explicit operator op_Explicit(int x) { return null; }
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "op_Explicit").WithArguments("op_Explicit"),
-                // (9,37): error CS0542: 'op_Implicit': member names cannot be the same as their enclosing type
-                //     public static implicit operator op_Implicit(int x) { return null; }
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "op_Implicit").WithArguments("op_Implicit"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (4,37): error CS0542: 'op_Explicit': member names cannot be the same as their enclosing type
+                    //     public static explicit operator op_Explicit(int x) { return null; }
+                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "op_Explicit")
+                        .WithArguments("op_Explicit"),
+                    // (9,37): error CS0542: 'op_Implicit': member names cannot be the same as their enclosing type
+                    //     public static implicit operator op_Implicit(int x) { return null; }
+                    Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "op_Implicit")
+                        .WithArguments("op_Implicit")
+                );
         }
 
         [Fact, WorkItem(546771, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546771")]
         public void TestIsNullable_Bug16777()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
   enum E { }
@@ -6659,7 +7238,7 @@ class Program
         public void CompoundOperatorWithThisOnLeft()
         {
             string source =
-@"using System;
+                @"using System;
 public struct Value
 {
     int value;
@@ -6699,7 +7278,8 @@ public struct Value
         [Fact]
         public void LiftedUserDefinedEquality1()
         {
-            string source = @"
+            string source =
+                @"
 struct S1
 {
     // Interesting
@@ -6728,8 +7308,16 @@ class Program
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
 
-            var expectedOperator = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("S1").GetMembers(WellKnownMemberNames.EqualityOperatorName).
-                OfType<MethodSymbol>().Single(m => m.ParameterTypesWithAnnotations[0].Equals(m.ParameterTypesWithAnnotations[1], TypeCompareKind.ConsiderEverything));
+            var expectedOperator = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("S1")
+                .GetMembers(WellKnownMemberNames.EqualityOperatorName)
+                .OfType<MethodSymbol>()
+                .Single(
+                    m =>
+                        m.ParameterTypesWithAnnotations[0].Equals(
+                            m.ParameterTypesWithAnnotations[1],
+                            TypeCompareKind.ConsiderEverything
+                        )
+                );
 
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
@@ -6744,7 +7332,8 @@ class Program
         [Fact]
         public void LiftedUserDefinedEquality2()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 struct S1
@@ -6775,17 +7364,21 @@ class Program
 }
 ";
             // CONSIDER: This is a little silly, since that method will never be called.
-            CreateCompilation(source).VerifyDiagnostics(
-                // (27,16): warning CS0618: 'S1.operator ==(S1, S1)' is obsolete: 'A'
-                //         return s1 == null;
-                Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "s1 == null").WithArguments("S1.operator ==(S1, S1)", "A"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (27,16): warning CS0618: 'S1.operator ==(S1, S1)' is obsolete: 'A'
+                    //         return s1 == null;
+                    Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "s1 == null")
+                        .WithArguments("S1.operator ==(S1, S1)", "A")
+                );
         }
 
         [WorkItem(631414, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/631414")]
         [Fact]
         public void LiftedUserDefinedEquality3()
         {
-            string source = @"
+            string source =
+                @"
 struct S1
 {
     // Interesting
@@ -6810,17 +7403,21 @@ class Program
 }
 ";
             // CONSIDER: There is no reason not to allow this, but dev11 doesn't.
-            CreateCompilation(source).VerifyDiagnostics(
-                // (21,16): error CS0019: Operator '==' cannot be applied to operands of type 'S1?' and 'S2?'
-                //         return s1 == s2;
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "s1 == s2").WithArguments("==", "S1?", "S2?"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (21,16): error CS0019: Operator '==' cannot be applied to operands of type 'S1?' and 'S2?'
+                    //         return s1 == s2;
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "s1 == s2")
+                        .WithArguments("==", "S1?", "S2?")
+                );
         }
 
         [WorkItem(656739, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/656739")]
         [Fact]
         public void AmbiguousLogicalOrConversion()
         {
-            string source = @"
+            string source =
+                @"
 class InputParameter
 {
     public static implicit operator bool(InputParameter inputParameter)
@@ -6855,15 +7452,22 @@ class Program
             Assert.Equal("i2", syntax.Identifier.ValueText);
 
             var info = model.GetTypeInfo(syntax);
-            Assert.Equal(comp.GlobalNamespace.GetMember<NamedTypeSymbol>("InputParameter"), info.Type.GetSymbol());
-            Assert.Equal(comp.GetSpecialType(SpecialType.System_Boolean), info.ConvertedType.GetSymbol());
+            Assert.Equal(
+                comp.GlobalNamespace.GetMember<NamedTypeSymbol>("InputParameter"),
+                info.Type.GetSymbol()
+            );
+            Assert.Equal(
+                comp.GetSpecialType(SpecialType.System_Boolean),
+                info.ConvertedType.GetSymbol()
+            );
         }
 
         [WorkItem(656739, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/656739")]
         [Fact]
         public void AmbiguousOrConversion()
         {
-            string source = @"
+            string source =
+                @"
 class InputParameter
 {
     public static implicit operator bool(InputParameter inputParameter)
@@ -6887,17 +7491,21 @@ class Program
     }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (21,18): error CS0034: Operator '|' is ambiguous on operands of type 'InputParameter' and 'InputParameter'
-                //         bool b = i1 | i2;
-                Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "i1 | i2").WithArguments("|", "InputParameter", "InputParameter"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (21,18): error CS0034: Operator '|' is ambiguous on operands of type 'InputParameter' and 'InputParameter'
+                    //         bool b = i1 | i2;
+                    Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "i1 | i2")
+                        .WithArguments("|", "InputParameter", "InputParameter")
+                );
         }
 
         [WorkItem(656739, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/656739")]
         [Fact]
         public void DynamicAmbiguousLogicalOrConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class InputParameter
@@ -6926,15 +7534,19 @@ class Program
 }
 ";
             var comp = CreateCompilation(source, new[] { CSharpRef }, TestOptions.ReleaseExe);
-            CompileAndVerify(comp, expectedOutput: @"A
-A");
+            CompileAndVerify(
+                comp,
+                expectedOutput: @"A
+A"
+            );
         }
 
         [WorkItem(656739, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/656739")]
         [ConditionalFact(typeof(DesktopOnly))]
         public void DynamicAmbiguousOrConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class InputParameter
@@ -6973,15 +7585,18 @@ class Program
 }
 ";
             var comp = CreateCompilation(source, new[] { CSharpRef }, TestOptions.ReleaseExe);
-            CompileAndVerifyException<Microsoft.CSharp.RuntimeBinder.RuntimeBinderException>(comp,
-                "Operator '|' is ambiguous on operands of type 'InputParameter' and 'InputParameter'");
+            CompileAndVerifyException<Microsoft.CSharp.RuntimeBinder.RuntimeBinderException>(
+                comp,
+                "Operator '|' is ambiguous on operands of type 'InputParameter' and 'InputParameter'"
+            );
         }
 
         [WorkItem(656739, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/656739")]
         [Fact]
         public void UnambiguousLogicalOrConversion1()
         {
-            string source = @"
+            string source =
+                @"
 class InputParameter
 {
     public static implicit operator bool(InputParameter inputParameter)
@@ -7010,15 +7625,22 @@ class Program
             Assert.Equal("i2", syntax.Identifier.ValueText);
 
             var info = model.GetTypeInfo(syntax);
-            Assert.Equal(comp.GlobalNamespace.GetMember<NamedTypeSymbol>("InputParameter").GetPublicSymbol(), info.Type);
-            Assert.Equal(comp.GetSpecialType(SpecialType.System_Boolean).GetPublicSymbol(), info.ConvertedType);
+            Assert.Equal(
+                comp.GlobalNamespace.GetMember<NamedTypeSymbol>("InputParameter").GetPublicSymbol(),
+                info.Type
+            );
+            Assert.Equal(
+                comp.GetSpecialType(SpecialType.System_Boolean).GetPublicSymbol(),
+                info.ConvertedType
+            );
         }
 
         [WorkItem(656739, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/656739")]
         [Fact]
         public void UnambiguousLogicalOrConversion2()
         {
-            string source = @"
+            string source =
+                @"
 class InputParameter
 {
     public static implicit operator int(InputParameter inputParameter)
@@ -7037,17 +7659,21 @@ class Program
     }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (16,18): error CS0019: Operator '||' cannot be applied to operands of type 'InputParameter' and 'InputParameter'
-                //         bool b = i1 || i2;
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "i1 || i2").WithArguments("||", "InputParameter", "InputParameter"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (16,18): error CS0019: Operator '||' cannot be applied to operands of type 'InputParameter' and 'InputParameter'
+                    //         bool b = i1 || i2;
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "i1 || i2")
+                        .WithArguments("||", "InputParameter", "InputParameter")
+                );
         }
 
         [WorkItem(665002, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/665002")]
         [Fact]
         public void DedupingLiftedUserDefinedOperators()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 public class RubyTime
 {
@@ -7081,7 +7707,7 @@ public class RubyTime
         public void BinaryOperators_EasyOut()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static T F<T>() => throw null;
     static void Main()
@@ -7125,13 +7751,16 @@ public class RubyTime
 
             var tree = comp.SyntaxTrees[0];
             var syntax = tree.GetRoot();
-            var methodBody = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Last().Body;
+            var methodBody =
+                tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Last().Body;
             var model = (CSharpSemanticModel)comp.GetSemanticModel(tree);
             var binder = model.GetEnclosingBinder(methodBody.SpanStart);
             var diagnostics = DiagnosticBag.GetInstance();
             var block = binder.BindEmbeddedBlock(methodBody, diagnostics);
             diagnostics.Free();
-            var exprs = block.Statements.SelectAsArray(stmt => ((BoundExpressionStatement)stmt).Expression);
+            var exprs = block.Statements.SelectAsArray(
+                stmt => ((BoundExpressionStatement)stmt).Expression
+            );
             Assert.Equal(32, exprs.Length);
 
             var operators = new[]
@@ -7160,25 +7789,53 @@ public class RubyTime
                 {
                     foreach (var right in exprs)
                     {
-                        var signature1 = getBinaryOperator(binder, op, left, right, useEasyOut: true);
-                        var signature2 = getBinaryOperator(binder, op, left, right, useEasyOut: false);
+                        var signature1 = getBinaryOperator(
+                            binder,
+                            op,
+                            left,
+                            right,
+                            useEasyOut: true
+                        );
+                        var signature2 = getBinaryOperator(
+                            binder,
+                            op,
+                            left,
+                            right,
+                            useEasyOut: false
+                        );
                         Assert.Equal(signature1, signature2);
                     }
                 }
             }
 
-            static BinaryOperatorKind getBinaryOperator(Binder binder, BinaryOperatorKind kind, BoundExpression left, BoundExpression right, bool useEasyOut)
-            {
+            static BinaryOperatorKind getBinaryOperator(
+                Binder binder,
+                BinaryOperatorKind kind,
+                BoundExpression left,
+                BoundExpression right,
+                bool useEasyOut
+            ) {
                 var overloadResolution = new OverloadResolution(binder);
                 var result = BinaryOperatorOverloadResolutionResult.GetInstance();
                 if (useEasyOut)
                 {
-                    overloadResolution.BinaryOperatorOverloadResolution_EasyOut(kind, left, right, result);
+                    overloadResolution.BinaryOperatorOverloadResolution_EasyOut(
+                        kind,
+                        left,
+                        right,
+                        result
+                    );
                 }
                 else
                 {
                     var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-                    overloadResolution.BinaryOperatorOverloadResolution_NoEasyOut(kind, left, right, result, ref discardedUseSiteInfo);
+                    overloadResolution.BinaryOperatorOverloadResolution_NoEasyOut(
+                        kind,
+                        left,
+                        right,
+                        result,
+                        ref discardedUseSiteInfo
+                    );
                 }
                 var signature = result.Best.Signature.Kind;
                 result.Free();
@@ -7191,21 +7848,20 @@ public class RubyTime
         {
             UnaryOperatorKind[] operators =
             {
-            UnaryOperatorKind.PostfixIncrement,
-            UnaryOperatorKind.PostfixDecrement,
-            UnaryOperatorKind.PrefixIncrement,
-            UnaryOperatorKind.PrefixDecrement,
-            UnaryOperatorKind.UnaryPlus,
-            UnaryOperatorKind.UnaryMinus,
-            UnaryOperatorKind.LogicalNegation,
-            UnaryOperatorKind.BitwiseComplement
+                UnaryOperatorKind.PostfixIncrement,
+                UnaryOperatorKind.PostfixDecrement,
+                UnaryOperatorKind.PrefixIncrement,
+                UnaryOperatorKind.PrefixDecrement,
+                UnaryOperatorKind.UnaryPlus,
+                UnaryOperatorKind.UnaryMinus,
+                UnaryOperatorKind.LogicalNegation,
+                UnaryOperatorKind.BitwiseComplement
             };
 
-            string[] opTokens = {"++","--","++","--",
-                                 "+","-","!","~"};
+            string[] opTokens = { "++", "--", "++", "--", "+", "-", "!", "~" };
 
             string[] typeNames =
-                {
+            {
                 "System.Object",
                 "System.String",
                 "System.Double",
@@ -7227,62 +7883,67 @@ public class RubyTime
                 "System.Guid",
                 "dynamic",
                 "byte*"
-                };
+            };
 
             var builder = new System.Text.StringBuilder();
             int n = 0;
 
-            builder.Append(
-"class Module1\n" +
-"{\n");
+            builder.Append("class Module1\n" + "{\n");
 
             foreach (var arg1 in typeNames)
             {
                 n += 1;
-                builder.AppendFormat(
-"void Test{1}({0} x1, System.Nullable<{0}> x2)\n", arg1, n);
-                builder.Append(
-"{\n");
+                builder.AppendFormat("void Test{1}({0} x1, System.Nullable<{0}> x2)\n", arg1, n);
+                builder.Append("{\n");
 
                 for (int k = 0; k < operators.Length; k++)
                 {
-                    if (operators[k] == UnaryOperatorKind.PostfixDecrement || operators[k] == UnaryOperatorKind.PostfixIncrement)
-                    {
+                    if (
+                        operators[k] == UnaryOperatorKind.PostfixDecrement
+                        || operators[k] == UnaryOperatorKind.PostfixIncrement
+                    ) {
                         builder.AppendFormat(
-    "    var z{0}_1 = x1 {1};\n" +
-    "    var z{0}_2 = x2 {1};\n" +
-    "    if (x1 {1}) {{}}\n" +
-    "    if (x2 {1}) {{}}\n",
-                                             k, opTokens[k]);
+                            "    var z{0}_1 = x1 {1};\n"
+                                + "    var z{0}_2 = x2 {1};\n"
+                                + "    if (x1 {1}) {{}}\n"
+                                + "    if (x2 {1}) {{}}\n",
+                            k,
+                            opTokens[k]
+                        );
                     }
                     else
                     {
                         builder.AppendFormat(
-    "    var z{0}_1 = {1} x1;\n" +
-    "    var z{0}_2 = {1} x2;\n" +
-    "    if ({1} x1) {{}}\n" +
-    "    if ({1} x2) {{}}\n",
-                                             k, opTokens[k]);
+                            "    var z{0}_1 = {1} x1;\n"
+                                + "    var z{0}_2 = {1} x2;\n"
+                                + "    if ({1} x1) {{}}\n"
+                                + "    if ({1} x2) {{}}\n",
+                            k,
+                            opTokens[k]
+                        );
                     }
                 }
 
-                builder.Append(
-"}\n");
+                builder.Append("}\n");
             }
 
-            builder.Append(
-"}\n");
+            builder.Append("}\n");
 
             var source = builder.ToString();
 
-            var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll.WithOverflowChecks(true));
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseDll.WithOverflowChecks(true)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var nodes = (from node in tree.GetRoot().DescendantNodes()
-                         select ((ExpressionSyntax)(node as PrefixUnaryExpressionSyntax)) ?? node as PostfixUnaryExpressionSyntax).
-                         Where(node => (object)node != null).ToArray();
+            var nodes = (
+                from node in tree.GetRoot().DescendantNodes()
+                select ((ExpressionSyntax)(node as PrefixUnaryExpressionSyntax))
+                    ?? node as PostfixUnaryExpressionSyntax
+            ).Where(node => (object)node != null).ToArray();
 
             n = 0;
             for (int name = 0; name < typeNames.Length; name++)
@@ -7291,7 +7952,9 @@ public class RubyTime
 
                 if (name == typeNames.Length - 1)
                 {
-                    type = compilation.CreatePointerTypeSymbol(compilation.GetSpecialType(SpecialType.System_Byte));
+                    type = compilation.CreatePointerTypeSymbol(
+                        compilation.GetSpecialType(SpecialType.System_Byte)
+                    );
                 }
                 else if (name == typeNames.Length - 2)
                 {
@@ -7312,7 +7975,8 @@ public class RubyTime
                         nodes[n],
                         nodes[n + 1],
                         nodes[n + 2],
-                        nodes[n + 3]);
+                        nodes[n + 3]
+                    );
                     n += 4;
                 }
             }
@@ -7329,10 +7993,12 @@ public class RubyTime
             ExpressionSyntax node2,
             ExpressionSyntax node3,
             ExpressionSyntax node4
-        )
-        {
+        ) {
             SymbolInfo info1 = semanticModel.GetSymbolInfo(node1);
-            Assert.Equal(type.IsDynamic() ? CandidateReason.LateBound : CandidateReason.None, info1.CandidateReason);
+            Assert.Equal(
+                type.IsDynamic() ? CandidateReason.LateBound : CandidateReason.None,
+                info1.CandidateReason
+            );
             Assert.Equal(0, info1.CandidateSymbols.Length);
 
             var symbol1 = (IMethodSymbol)info1.Symbol;
@@ -7348,17 +8014,23 @@ public class RubyTime
                 Assert.Equal(symbol1.GetHashCode(), symbol3.GetHashCode());
 
                 Assert.Equal(symbol1.Parameters[0], symbol3.Parameters[0]);
-                Assert.Equal(symbol1.Parameters[0].GetHashCode(), symbol3.Parameters[0].GetHashCode());
+                Assert.Equal(
+                    symbol1.Parameters[0].GetHashCode(),
+                    symbol3.Parameters[0].GetHashCode()
+                );
             }
 
             Assert.Equal(symbol2, symbol4);
 
             TypeSymbol underlying = type;
 
-            if (op == UnaryOperatorKind.BitwiseComplement ||
-                op == UnaryOperatorKind.PrefixDecrement || op == UnaryOperatorKind.PrefixIncrement ||
-                op == UnaryOperatorKind.PostfixDecrement || op == UnaryOperatorKind.PostfixIncrement)
-            {
+            if (
+                op == UnaryOperatorKind.BitwiseComplement
+                || op == UnaryOperatorKind.PrefixDecrement
+                || op == UnaryOperatorKind.PrefixIncrement
+                || op == UnaryOperatorKind.PostfixDecrement
+                || op == UnaryOperatorKind.PostfixIncrement
+            ) {
                 underlying = type.EnumUnderlyingTypeOrSelf();
             }
 
@@ -7369,13 +8041,26 @@ public class RubyTime
             {
                 if (type.IsDynamic())
                 {
-                    signature = new UnaryOperatorSignature(op | UnaryOperatorKind.Dynamic, type, type);
+                    signature = new UnaryOperatorSignature(
+                        op | UnaryOperatorKind.Dynamic,
+                        type,
+                        type
+                    );
                 }
-                else if (type.IsPointerType() &&
-                    (op == UnaryOperatorKind.PrefixDecrement || op == UnaryOperatorKind.PrefixIncrement ||
-                        op == UnaryOperatorKind.PostfixDecrement || op == UnaryOperatorKind.PostfixIncrement))
-                {
-                    signature = new UnaryOperatorSignature(op | UnaryOperatorKind.Pointer, type, type);
+                else if (
+                    type.IsPointerType()
+                    && (
+                        op == UnaryOperatorKind.PrefixDecrement
+                        || op == UnaryOperatorKind.PrefixIncrement
+                        || op == UnaryOperatorKind.PostfixDecrement
+                        || op == UnaryOperatorKind.PostfixIncrement
+                    )
+                ) {
+                    signature = new UnaryOperatorSignature(
+                        op | UnaryOperatorKind.Pointer,
+                        type,
+                        type
+                    );
                 }
                 else
                 {
@@ -7410,11 +8095,15 @@ public class RubyTime
                 returnName = containerName;
             }
 
-            Assert.Equal(String.Format("{2} {0}.{1}({0} value)",
-                                       containerName,
-                                       OperatorFacts.UnaryOperatorNameFromOperatorKind(op),
-                                       returnName),
-                         symbol1.ToTestDisplayString());
+            Assert.Equal(
+                String.Format(
+                    "{2} {0}.{1}({0} value)",
+                    containerName,
+                    OperatorFacts.UnaryOperatorNameFromOperatorKind(op),
+                    returnName
+                ),
+                symbol1.ToTestDisplayString()
+            );
 
             Assert.Equal(MethodKind.BuiltinOperator, symbol1.MethodKind);
             Assert.True(symbol1.IsImplicitlyDeclared);
@@ -7424,16 +8113,24 @@ public class RubyTime
             switch (op)
             {
                 case UnaryOperatorKind.UnaryMinus:
-                    expectChecked = (type.IsDynamic() || symbol1.ContainingType.EnumUnderlyingTypeOrSelf().SpecialType.IsIntegralType());
+                    expectChecked = (
+                        type.IsDynamic()
+                        || symbol1.ContainingType.EnumUnderlyingTypeOrSelf()
+                            .SpecialType.IsIntegralType()
+                    );
                     break;
 
                 case UnaryOperatorKind.PrefixDecrement:
                 case UnaryOperatorKind.PrefixIncrement:
                 case UnaryOperatorKind.PostfixDecrement:
                 case UnaryOperatorKind.PostfixIncrement:
-                    expectChecked = (type.IsDynamic() || type.IsPointerType() ||
-                                     symbol1.ContainingType.EnumUnderlyingTypeOrSelf().SpecialType.IsIntegralType() ||
-                                     symbol1.ContainingType.SpecialType == SpecialType.System_Char);
+                    expectChecked = (
+                        type.IsDynamic()
+                        || type.IsPointerType()
+                        || symbol1.ContainingType.EnumUnderlyingTypeOrSelf()
+                            .SpecialType.IsIntegralType()
+                        || symbol1.ContainingType.SpecialType == SpecialType.System_Char
+                    );
                     break;
 
                 default:
@@ -7482,7 +8179,7 @@ public class RubyTime
         public void CheckedUnaryIntrinsicSymbols()
         {
             var source =
-@"
+                @"
 class Module1
 {
     void Test(int x)
@@ -7492,18 +8189,26 @@ class Module1
     }
 }";
 
-            var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll.WithOverflowChecks(false));
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseDll.WithOverflowChecks(false)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var nodes = (from node in tree.GetRoot().DescendantNodes()
-                         select ((ExpressionSyntax)(node as PrefixUnaryExpressionSyntax)) ?? node as PostfixUnaryExpressionSyntax).
-                         Where(node => (object)node != null).ToArray();
+            var nodes = (
+                from node in tree.GetRoot().DescendantNodes()
+                select ((ExpressionSyntax)(node as PrefixUnaryExpressionSyntax))
+                    ?? node as PostfixUnaryExpressionSyntax
+            ).Where(node => (object)node != null).ToArray();
 
             Assert.Equal(2, nodes.Length);
 
-            var symbols1 = (from node1 in nodes select (IMethodSymbol)semanticModel.GetSymbolInfo(node1).Symbol).ToArray();
+            var symbols1 = (
+                from node1 in nodes
+                select (IMethodSymbol)semanticModel.GetSymbolInfo(node1).Symbol
+            ).ToArray();
             foreach (var symbol1 in symbols1)
             {
                 Assert.False(symbol1.IsCheckedBuiltin);
@@ -7512,7 +8217,10 @@ class Module1
             compilation = compilation.WithOptions(TestOptions.ReleaseDll.WithOverflowChecks(true));
             semanticModel = compilation.GetSemanticModel(tree);
 
-            var symbols2 = (from node2 in nodes select (IMethodSymbol)semanticModel.GetSymbolInfo(node2).Symbol).ToArray();
+            var symbols2 = (
+                from node2 in nodes
+                select (IMethodSymbol)semanticModel.GetSymbolInfo(node2).Symbol
+            ).ToArray();
             foreach (var symbol2 in symbols2)
             {
                 Assert.True(symbol2.IsCheckedBuiltin);
@@ -7524,91 +8232,93 @@ class Module1
             }
         }
 
-        [ConditionalFact(typeof(ClrOnly), typeof(NoIOperationValidation), Reason = "https://github.com/mono/mono/issues/10917")]
+        [ConditionalFact(
+            typeof(ClrOnly),
+            typeof(NoIOperationValidation),
+            Reason = "https://github.com/mono/mono/issues/10917"
+        )]
         public void BinaryIntrinsicSymbols1()
         {
             BinaryOperatorKind[] operators =
-                        {
-                        BinaryOperatorKind.Addition,
-                        BinaryOperatorKind.Subtraction,
-                        BinaryOperatorKind.Multiplication,
-                        BinaryOperatorKind.Division,
-                        BinaryOperatorKind.Remainder,
-                        BinaryOperatorKind.Equal,
-                        BinaryOperatorKind.NotEqual,
-                        BinaryOperatorKind.LessThanOrEqual,
-                        BinaryOperatorKind.GreaterThanOrEqual,
-                        BinaryOperatorKind.LessThan,
-                        BinaryOperatorKind.GreaterThan,
-                        BinaryOperatorKind.LeftShift,
-                        BinaryOperatorKind.RightShift,
-                        BinaryOperatorKind.Xor,
-                        BinaryOperatorKind.Or,
-                        BinaryOperatorKind.And,
-                        BinaryOperatorKind.LogicalOr,
-                        BinaryOperatorKind.LogicalAnd
-                        };
+            {
+                BinaryOperatorKind.Addition,
+                BinaryOperatorKind.Subtraction,
+                BinaryOperatorKind.Multiplication,
+                BinaryOperatorKind.Division,
+                BinaryOperatorKind.Remainder,
+                BinaryOperatorKind.Equal,
+                BinaryOperatorKind.NotEqual,
+                BinaryOperatorKind.LessThanOrEqual,
+                BinaryOperatorKind.GreaterThanOrEqual,
+                BinaryOperatorKind.LessThan,
+                BinaryOperatorKind.GreaterThan,
+                BinaryOperatorKind.LeftShift,
+                BinaryOperatorKind.RightShift,
+                BinaryOperatorKind.Xor,
+                BinaryOperatorKind.Or,
+                BinaryOperatorKind.And,
+                BinaryOperatorKind.LogicalOr,
+                BinaryOperatorKind.LogicalAnd
+            };
 
-            string[] opTokens = {
-                                 "+",
-                                 "-",
-                                 "*",
-                                 "/",
-                                 "%",
-                                 "==",
-                                 "!=",
-                                 "<=",
-                                 ">=",
-                                 "<",
-                                 ">",
-                                 "<<",
-                                 ">>",
-                                 "^",
-                                 "|",
-                                 "&",
-                                 "||",
-                                 "&&"};
+            string[] opTokens =
+            {
+                "+",
+                "-",
+                "*",
+                "/",
+                "%",
+                "==",
+                "!=",
+                "<=",
+                ">=",
+                "<",
+                ">",
+                "<<",
+                ">>",
+                "^",
+                "|",
+                "&",
+                "||",
+                "&&"
+            };
 
             string[] typeNames =
-                            {
-                            "System.Object",
-                            "System.String",
-                            "System.Double",
-                            "System.SByte",
-                            "System.Int16",
-                            "System.Int32",
-                            "System.Int64",
-                            "System.Decimal",
-                            "System.Single",
-                            "System.Byte",
-                            "System.UInt16",
-                            "System.UInt32",
-                            "System.UInt64",
-                            "System.Boolean",
-                            "System.Char",
-                            "System.DateTime",
-                            "System.TypeCode",
-                            "System.StringComparison",
-                            "System.Guid",
-                            "System.Delegate",
-                            "System.Action",
-                            "System.AppDomainInitializer",
-                            "System.ValueType",
-                            "TestStructure",
-                            "Module1",
-                            "dynamic",
-                            "byte*",
-                            "sbyte*"
-                            };
+            {
+                "System.Object",
+                "System.String",
+                "System.Double",
+                "System.SByte",
+                "System.Int16",
+                "System.Int32",
+                "System.Int64",
+                "System.Decimal",
+                "System.Single",
+                "System.Byte",
+                "System.UInt16",
+                "System.UInt32",
+                "System.UInt64",
+                "System.Boolean",
+                "System.Char",
+                "System.DateTime",
+                "System.TypeCode",
+                "System.StringComparison",
+                "System.Guid",
+                "System.Delegate",
+                "System.Action",
+                "System.AppDomainInitializer",
+                "System.ValueType",
+                "TestStructure",
+                "Module1",
+                "dynamic",
+                "byte*",
+                "sbyte*"
+            };
 
             var builder = new System.Text.StringBuilder();
             int n = 0;
 
-            builder.Append(
-"struct TestStructure\n" +
-"{}\n" +
-"class Module1\n" +
-"{\n");
+            builder.Append("struct TestStructure\n" + "{}\n" + "class Module1\n" + "{\n");
 
             foreach (var arg1 in typeNames)
             {
@@ -7616,34 +8326,42 @@ class Module1
                 {
                     n += 1;
                     builder.AppendFormat(
-"void Test{2}({0} x1, {1} y1, System.Nullable<{0}> x2, System.Nullable<{1}> y2)\n" +
-"{{\n", arg1, arg2, n);
+                        "void Test{2}({0} x1, {1} y1, System.Nullable<{0}> x2, System.Nullable<{1}> y2)\n"
+                            + "{{\n",
+                        arg1,
+                        arg2,
+                        n
+                    );
 
                     for (int k = 0; k < opTokens.Length; k++)
                     {
                         builder.AppendFormat(
-"    var z{0}_1 = x1 {1} y1;\n" +
-"    var z{0}_2 = x2 {1} y2;\n" +
-"    var z{0}_3 = x2 {1} y1;\n" +
-"    var z{0}_4 = x1 {1} y2;\n" +
-"    if (x1 {1} y1) {{}}\n" +
-"    if (x2 {1} y2) {{}}\n" +
-"    if (x2 {1} y1) {{}}\n" +
-"    if (x1 {1} y2) {{}}\n",
-                                                k, opTokens[k]);
+                            "    var z{0}_1 = x1 {1} y1;\n"
+                                + "    var z{0}_2 = x2 {1} y2;\n"
+                                + "    var z{0}_3 = x2 {1} y1;\n"
+                                + "    var z{0}_4 = x1 {1} y2;\n"
+                                + "    if (x1 {1} y1) {{}}\n"
+                                + "    if (x2 {1} y2) {{}}\n"
+                                + "    if (x2 {1} y1) {{}}\n"
+                                + "    if (x1 {1} y2) {{}}\n",
+                            k,
+                            opTokens[k]
+                        );
                     }
 
-                    builder.Append(
-"}\n");
+                    builder.Append("}\n");
                 }
             }
 
-            builder.Append(
-"}\n");
+            builder.Append("}\n");
 
             var source = builder.ToString();
 
-            var compilation = CreateCompilation(source, targetFramework: TargetFramework.Mscorlib45Extended, options: TestOptions.ReleaseDll.WithOverflowChecks(true));
+            var compilation = CreateCompilation(
+                source,
+                targetFramework: TargetFramework.Mscorlib45Extended,
+                options: TestOptions.ReleaseDll.WithOverflowChecks(true)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var semanticModel = compilation.GetSemanticModel(tree);
@@ -7659,14 +8377,19 @@ class Module1
             types[types.Length - 3] = compilation.DynamicType;
 
             Assert.Null(types[types.Length - 2]);
-            types[types.Length - 2] = compilation.CreatePointerTypeSymbol(compilation.GetSpecialType(SpecialType.System_Byte));
+            types[types.Length - 2] = compilation.CreatePointerTypeSymbol(
+                compilation.GetSpecialType(SpecialType.System_Byte)
+            );
 
             Assert.Null(types[types.Length - 1]);
-            types[types.Length - 1] = compilation.CreatePointerTypeSymbol(compilation.GetSpecialType(SpecialType.System_SByte));
+            types[types.Length - 1] = compilation.CreatePointerTypeSymbol(
+                compilation.GetSpecialType(SpecialType.System_SByte)
+            );
 
-            var nodes = (from node in tree.GetRoot().DescendantNodes()
-                         select (node as BinaryExpressionSyntax)).
-                         Where(node => (object)node != null).ToArray();
+            var nodes = (
+                from node in tree.GetRoot().DescendantNodes()
+                select (node as BinaryExpressionSyntax)
+            ).Where(node => (object)node != null).ToArray();
 
             n = 0;
             foreach (var leftType in types)
@@ -7688,7 +8411,8 @@ class Module1
                             nodes[n + 4],
                             nodes[n + 5],
                             nodes[n + 6],
-                            nodes[n + 7]);
+                            nodes[n + 7]
+                        );
                         n += 8;
                     }
                 }
@@ -7702,71 +8426,57 @@ class Module1
         public void BinaryIntrinsicSymbols2()
         {
             BinaryOperatorKind[] operators =
-                        {
-                        BinaryOperatorKind.Addition,
-                        BinaryOperatorKind.Subtraction,
-                        BinaryOperatorKind.Multiplication,
-                        BinaryOperatorKind.Division,
-                        BinaryOperatorKind.Remainder,
-                        BinaryOperatorKind.LeftShift,
-                        BinaryOperatorKind.RightShift,
-                        BinaryOperatorKind.Xor,
-                        BinaryOperatorKind.Or,
-                        BinaryOperatorKind.And
-                        };
+            {
+                BinaryOperatorKind.Addition,
+                BinaryOperatorKind.Subtraction,
+                BinaryOperatorKind.Multiplication,
+                BinaryOperatorKind.Division,
+                BinaryOperatorKind.Remainder,
+                BinaryOperatorKind.LeftShift,
+                BinaryOperatorKind.RightShift,
+                BinaryOperatorKind.Xor,
+                BinaryOperatorKind.Or,
+                BinaryOperatorKind.And
+            };
 
-            string[] opTokens = {
-                                 "+=",
-                                 "-=",
-                                 "*=",
-                                 "/=",
-                                 "%=",
-                                 "<<=",
-                                 ">>=",
-                                 "^=",
-                                 "|=",
-                                 "&="};
+            string[] opTokens = { "+=", "-=", "*=", "/=", "%=", "<<=", ">>=", "^=", "|=", "&=" };
 
             string[] typeNames =
-                            {
-                            "System.Object",
-                            "System.String",
-                            "System.Double",
-                            "System.SByte",
-                            "System.Int16",
-                            "System.Int32",
-                            "System.Int64",
-                            "System.Decimal",
-                            "System.Single",
-                            "System.Byte",
-                            "System.UInt16",
-                            "System.UInt32",
-                            "System.UInt64",
-                            "System.Boolean",
-                            "System.Char",
-                            "System.DateTime",
-                            "System.TypeCode",
-                            "System.StringComparison",
-                            "System.Guid",
-                            "System.Delegate",
-                            "System.Action",
-                            "System.AppDomainInitializer",
-                            "System.ValueType",
-                            "TestStructure",
-                            "Module1",
-                            "dynamic",
-                            "byte*",
-                            "sbyte*"
-                            };
+            {
+                "System.Object",
+                "System.String",
+                "System.Double",
+                "System.SByte",
+                "System.Int16",
+                "System.Int32",
+                "System.Int64",
+                "System.Decimal",
+                "System.Single",
+                "System.Byte",
+                "System.UInt16",
+                "System.UInt32",
+                "System.UInt64",
+                "System.Boolean",
+                "System.Char",
+                "System.DateTime",
+                "System.TypeCode",
+                "System.StringComparison",
+                "System.Guid",
+                "System.Delegate",
+                "System.Action",
+                "System.AppDomainInitializer",
+                "System.ValueType",
+                "TestStructure",
+                "Module1",
+                "dynamic",
+                "byte*",
+                "sbyte*"
+            };
 
             var builder = new System.Text.StringBuilder();
             int n = 0;
 
-            builder.Append(
-"struct TestStructure\n" +
-"{}\n" +
-"class Module1\n" +
-"{\n");
+            builder.Append("struct TestStructure\n" + "{}\n" + "class Module1\n" + "{\n");
 
             foreach (var arg1 in typeNames)
             {
@@ -7774,34 +8484,42 @@ class Module1
                 {
                     n += 1;
                     builder.AppendFormat(
-"void Test{2}({0} x1, {1} y1, System.Nullable<{0}> x2, System.Nullable<{1}> y2)\n" +
-"{{\n", arg1, arg2, n);
+                        "void Test{2}({0} x1, {1} y1, System.Nullable<{0}> x2, System.Nullable<{1}> y2)\n"
+                            + "{{\n",
+                        arg1,
+                        arg2,
+                        n
+                    );
 
                     for (int k = 0; k < opTokens.Length; k++)
                     {
                         builder.AppendFormat(
-"    x1 {1} y1;\n" +
-"    x2 {1} y2;\n" +
-"    x2 {1} y1;\n" +
-"    x1 {1} y2;\n" +
-"    if (x1 {1} y1) {{}}\n" +
-"    if (x2 {1} y2) {{}}\n" +
-"    if (x2 {1} y1) {{}}\n" +
-"    if (x1 {1} y2) {{}}\n",
-                                                k, opTokens[k]);
+                            "    x1 {1} y1;\n"
+                                + "    x2 {1} y2;\n"
+                                + "    x2 {1} y1;\n"
+                                + "    x1 {1} y2;\n"
+                                + "    if (x1 {1} y1) {{}}\n"
+                                + "    if (x2 {1} y2) {{}}\n"
+                                + "    if (x2 {1} y1) {{}}\n"
+                                + "    if (x1 {1} y2) {{}}\n",
+                            k,
+                            opTokens[k]
+                        );
                     }
 
-                    builder.Append(
-"}\n");
+                    builder.Append("}\n");
                 }
             }
 
-            builder.Append(
-"}\n");
+            builder.Append("}\n");
 
             var source = builder.ToString();
 
-            var compilation = CreateCompilation(source, targetFramework: TargetFramework.Mscorlib40Extended, options: TestOptions.ReleaseDll.WithOverflowChecks(true));
+            var compilation = CreateCompilation(
+                source,
+                targetFramework: TargetFramework.Mscorlib40Extended,
+                options: TestOptions.ReleaseDll.WithOverflowChecks(true)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var semanticModel = compilation.GetSemanticModel(tree);
@@ -7817,14 +8535,19 @@ class Module1
             types[types.Length - 3] = compilation.DynamicType;
 
             Assert.Null(types[types.Length - 2]);
-            types[types.Length - 2] = compilation.CreatePointerTypeSymbol(compilation.GetSpecialType(SpecialType.System_Byte));
+            types[types.Length - 2] = compilation.CreatePointerTypeSymbol(
+                compilation.GetSpecialType(SpecialType.System_Byte)
+            );
 
             Assert.Null(types[types.Length - 1]);
-            types[types.Length - 1] = compilation.CreatePointerTypeSymbol(compilation.GetSpecialType(SpecialType.System_SByte));
+            types[types.Length - 1] = compilation.CreatePointerTypeSymbol(
+                compilation.GetSpecialType(SpecialType.System_SByte)
+            );
 
-            var nodes = (from node in tree.GetRoot().DescendantNodes()
-                         select (node as AssignmentExpressionSyntax)).
-                         Where(node => (object)node != null).ToArray();
+            var nodes = (
+                from node in tree.GetRoot().DescendantNodes()
+                select (node as AssignmentExpressionSyntax)
+            ).Where(node => (object)node != null).ToArray();
 
             n = 0;
             foreach (var leftType in types)
@@ -7846,7 +8569,8 @@ class Module1
                             nodes[n + 4],
                             nodes[n + 5],
                             nodes[n + 6],
-                            nodes[n + 7]);
+                            nodes[n + 7]
+                        );
                         n += 8;
                     }
                 }
@@ -7869,8 +8593,7 @@ class Module1
             ExpressionSyntax node6,
             ExpressionSyntax node7,
             ExpressionSyntax node8
-        )
-        {
+        ) {
             SymbolInfo info1 = semanticModel.GetSymbolInfo(node1);
             HashSet<DiagnosticInfo> useSiteDiagnostics = null;
 
@@ -7880,7 +8603,10 @@ class Module1
                 {
                     if (leftType.IsDynamic() || rightType.IsDynamic())
                     {
-                        Assert.True(CandidateReason.LateBound == info1.CandidateReason || CandidateReason.None == info1.CandidateReason);
+                        Assert.True(
+                            CandidateReason.LateBound == info1.CandidateReason
+                                || CandidateReason.None == info1.CandidateReason
+                        );
                     }
                     else
                     {
@@ -7898,7 +8624,12 @@ class Module1
             }
             else
             {
-                Assert.Equal(leftType.IsDynamic() || rightType.IsDynamic() ? CandidateReason.LateBound : CandidateReason.None, info1.CandidateReason);
+                Assert.Equal(
+                    leftType.IsDynamic() || rightType.IsDynamic()
+                      ? CandidateReason.LateBound
+                      : CandidateReason.None,
+                    info1.CandidateReason
+                );
                 Assert.Equal(0, info1.CandidateSymbols.Length);
             }
 
@@ -7924,7 +8655,10 @@ class Module1
                 for (int i = 0; i < 2; i++)
                 {
                     Assert.Equal(symbol1.Parameters[i], symbol5.Parameters[i]);
-                    Assert.Equal(symbol1.Parameters[i].GetHashCode(), symbol5.Parameters[i].GetHashCode());
+                    Assert.Equal(
+                        symbol1.Parameters[i].GetHashCode(),
+                        symbol5.Parameters[i].GetHashCode()
+                    );
                 }
 
                 Assert.NotEqual(symbol1.Parameters[0], symbol5.Parameters[1]);
@@ -7941,138 +8675,303 @@ class Module1
                     return;
             }
 
-
-            BinaryOperatorKind result = OverloadResolution.BinopEasyOut.OpKind(op, leftType, rightType);
+            BinaryOperatorKind result = OverloadResolution.BinopEasyOut.OpKind(
+                op,
+                leftType,
+                rightType
+            );
             BinaryOperatorSignature signature;
             bool isDynamic = (leftType.IsDynamic() || rightType.IsDynamic());
 
             if (result == BinaryOperatorKind.Error)
             {
-                if (leftType.IsDynamic() && !rightType.IsPointerType() && !rightType.IsRestrictedType())
-                {
-                    signature = new BinaryOperatorSignature(op | BinaryOperatorKind.Dynamic, leftType, rightType, leftType);
+                if (
+                    leftType.IsDynamic()
+                    && !rightType.IsPointerType()
+                    && !rightType.IsRestrictedType()
+                ) {
+                    signature = new BinaryOperatorSignature(
+                        op | BinaryOperatorKind.Dynamic,
+                        leftType,
+                        rightType,
+                        leftType
+                    );
                 }
-                else if (rightType.IsDynamic() && !leftType.IsPointerType() && !leftType.IsRestrictedType())
-                {
-                    signature = new BinaryOperatorSignature(op | BinaryOperatorKind.Dynamic, leftType, rightType, rightType);
+                else if (
+                    rightType.IsDynamic()
+                    && !leftType.IsPointerType()
+                    && !leftType.IsRestrictedType()
+                ) {
+                    signature = new BinaryOperatorSignature(
+                        op | BinaryOperatorKind.Dynamic,
+                        leftType,
+                        rightType,
+                        rightType
+                    );
                 }
-                else if ((op == BinaryOperatorKind.Equal || op == BinaryOperatorKind.NotEqual) &&
-                    leftType.IsReferenceType && rightType.IsReferenceType &&
-                    (TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2) || compilation.Conversions.ClassifyConversionFromType(leftType, rightType, ref useSiteDiagnostics).IsReference))
-                {
+                else if (
+                    (op == BinaryOperatorKind.Equal || op == BinaryOperatorKind.NotEqual)
+                    && leftType.IsReferenceType
+                    && rightType.IsReferenceType
+                    && (
+                        TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2)
+                        || compilation.Conversions.ClassifyConversionFromType(
+                            leftType,
+                            rightType,
+                            ref useSiteDiagnostics
+                        ).IsReference
+                    )
+                ) {
                     if (leftType.IsDelegateType() && rightType.IsDelegateType())
                     {
                         Assert.Equal(leftType, rightType);
-                        signature = new BinaryOperatorSignature(op | BinaryOperatorKind.Delegate,
+                        signature = new BinaryOperatorSignature(
+                            op | BinaryOperatorKind.Delegate,
                             leftType, // TODO: this feels like a spec violation
                             leftType, // TODO: this feels like a spec violation
-                            compilation.GetSpecialType(SpecialType.System_Boolean));
+                            compilation.GetSpecialType(SpecialType.System_Boolean)
+                        );
                     }
-                    else if (leftType.SpecialType == SpecialType.System_Delegate && rightType.SpecialType == SpecialType.System_Delegate)
-                    {
-                        signature = new BinaryOperatorSignature(op | BinaryOperatorKind.Delegate,
-                            compilation.GetSpecialType(SpecialType.System_Delegate), compilation.GetSpecialType(SpecialType.System_Delegate),
-                            compilation.GetSpecialType(SpecialType.System_Boolean));
+                    else if (
+                        leftType.SpecialType == SpecialType.System_Delegate
+                        && rightType.SpecialType == SpecialType.System_Delegate
+                    ) {
+                        signature = new BinaryOperatorSignature(
+                            op | BinaryOperatorKind.Delegate,
+                            compilation.GetSpecialType(SpecialType.System_Delegate),
+                            compilation.GetSpecialType(SpecialType.System_Delegate),
+                            compilation.GetSpecialType(SpecialType.System_Boolean)
+                        );
                     }
                     else
                     {
-                        signature = new BinaryOperatorSignature(op | BinaryOperatorKind.Object, compilation.ObjectType, compilation.ObjectType,
-                            compilation.GetSpecialType(SpecialType.System_Boolean));
+                        signature = new BinaryOperatorSignature(
+                            op | BinaryOperatorKind.Object,
+                            compilation.ObjectType,
+                            compilation.ObjectType,
+                            compilation.GetSpecialType(SpecialType.System_Boolean)
+                        );
                     }
                 }
-                else if (op == BinaryOperatorKind.Addition &&
-                    ((leftType.IsStringType() && !rightType.IsPointerType()) || (!leftType.IsPointerType() && rightType.IsStringType())))
-                {
+                else if (
+                    op == BinaryOperatorKind.Addition
+                    && (
+                        (leftType.IsStringType() && !rightType.IsPointerType())
+                        || (!leftType.IsPointerType() && rightType.IsStringType())
+                    )
+                ) {
                     Assert.False(leftType.IsStringType() && rightType.IsStringType());
 
                     if (leftType.IsStringType())
                     {
-                        signature = new BinaryOperatorSignature(op | BinaryOperatorKind.String, leftType, compilation.ObjectType, leftType);
+                        signature = new BinaryOperatorSignature(
+                            op | BinaryOperatorKind.String,
+                            leftType,
+                            compilation.ObjectType,
+                            leftType
+                        );
                     }
                     else
                     {
                         Assert.True(rightType.IsStringType());
-                        signature = new BinaryOperatorSignature(op | BinaryOperatorKind.String, compilation.ObjectType, rightType, rightType);
+                        signature = new BinaryOperatorSignature(
+                            op | BinaryOperatorKind.String,
+                            compilation.ObjectType,
+                            rightType,
+                            rightType
+                        );
                     }
                 }
-                else if (op == BinaryOperatorKind.Addition &&
-                    (((leftType.IsIntegralType() || leftType.IsCharType()) && rightType.IsPointerType()) ||
-                    (leftType.IsPointerType() && (rightType.IsIntegralType() || rightType.IsCharType()))))
-                {
+                else if (
+                    op == BinaryOperatorKind.Addition
+                    && (
+                        (
+                            (leftType.IsIntegralType() || leftType.IsCharType())
+                            && rightType.IsPointerType()
+                        )
+                        || (
+                            leftType.IsPointerType()
+                            && (rightType.IsIntegralType() || rightType.IsCharType())
+                        )
+                    )
+                ) {
                     if (leftType.IsPointerType())
                     {
-                        signature = new BinaryOperatorSignature(op | BinaryOperatorKind.Pointer, leftType, symbol1.Parameters[1].Type.GetSymbol(), leftType);
+                        signature = new BinaryOperatorSignature(
+                            op | BinaryOperatorKind.Pointer,
+                            leftType,
+                            symbol1.Parameters[1].Type.GetSymbol(),
+                            leftType
+                        );
                         Assert.True(symbol1.Parameters[1].Type.GetSymbol().IsIntegralType());
                     }
                     else
                     {
-                        signature = new BinaryOperatorSignature(op | BinaryOperatorKind.Pointer, symbol1.Parameters[0].Type.GetSymbol(), rightType, rightType);
+                        signature = new BinaryOperatorSignature(
+                            op | BinaryOperatorKind.Pointer,
+                            symbol1.Parameters[0].Type.GetSymbol(),
+                            rightType,
+                            rightType
+                        );
                         Assert.True(symbol1.Parameters[0].Type.GetSymbol().IsIntegralType());
                     }
                 }
-                else if (op == BinaryOperatorKind.Subtraction &&
-                    (leftType.IsPointerType() && (rightType.IsIntegralType() || rightType.IsCharType())))
-                {
-                    signature = new BinaryOperatorSignature(op | BinaryOperatorKind.String, leftType, symbol1.Parameters[1].Type.GetSymbol(), leftType);
+                else if (
+                    op == BinaryOperatorKind.Subtraction
+                    && (
+                        leftType.IsPointerType()
+                        && (rightType.IsIntegralType() || rightType.IsCharType())
+                    )
+                ) {
+                    signature = new BinaryOperatorSignature(
+                        op | BinaryOperatorKind.String,
+                        leftType,
+                        symbol1.Parameters[1].Type.GetSymbol(),
+                        leftType
+                    );
                     Assert.True(symbol1.Parameters[1].Type.GetSymbol().IsIntegralType());
                 }
-                else if (op == BinaryOperatorKind.Subtraction && leftType.IsPointerType() && TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2))
-                {
-                    signature = new BinaryOperatorSignature(op | BinaryOperatorKind.Pointer, leftType, rightType, compilation.GetSpecialType(SpecialType.System_Int64));
+                else if (
+                    op == BinaryOperatorKind.Subtraction
+                    && leftType.IsPointerType()
+                    && TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2)
+                ) {
+                    signature = new BinaryOperatorSignature(
+                        op | BinaryOperatorKind.Pointer,
+                        leftType,
+                        rightType,
+                        compilation.GetSpecialType(SpecialType.System_Int64)
+                    );
                 }
-                else if ((op == BinaryOperatorKind.Addition || op == BinaryOperatorKind.Subtraction) &&
-                    leftType.IsEnumType() && (rightType.IsIntegralType() || rightType.IsCharType()) &&
-                    (result = OverloadResolution.BinopEasyOut.OpKind(op, leftType.EnumUnderlyingTypeOrSelf(), rightType)) != BinaryOperatorKind.Error &&
-                    TypeSymbol.Equals((signature = compilation.builtInOperators.GetSignature(result)).RightType, leftType.EnumUnderlyingTypeOrSelf(), TypeCompareKind.ConsiderEverything2))
-                {
-                    signature = new BinaryOperatorSignature(signature.Kind | BinaryOperatorKind.EnumAndUnderlying, leftType, signature.RightType, leftType);
+                else if (
+                    (op == BinaryOperatorKind.Addition || op == BinaryOperatorKind.Subtraction)
+                    && leftType.IsEnumType()
+                    && (rightType.IsIntegralType() || rightType.IsCharType())
+                    && (
+                        result = OverloadResolution.BinopEasyOut.OpKind(
+                            op,
+                            leftType.EnumUnderlyingTypeOrSelf(),
+                            rightType
+                        )
+                    ) != BinaryOperatorKind.Error
+                    && TypeSymbol.Equals(
+                        (signature = compilation.builtInOperators.GetSignature(result)).RightType,
+                        leftType.EnumUnderlyingTypeOrSelf(),
+                        TypeCompareKind.ConsiderEverything2
+                    )
+                ) {
+                    signature = new BinaryOperatorSignature(
+                        signature.Kind | BinaryOperatorKind.EnumAndUnderlying,
+                        leftType,
+                        signature.RightType,
+                        leftType
+                    );
                 }
-                else if ((op == BinaryOperatorKind.Addition || op == BinaryOperatorKind.Subtraction) &&
-                    rightType.IsEnumType() && (leftType.IsIntegralType() || leftType.IsCharType()) &&
-                    (result = OverloadResolution.BinopEasyOut.OpKind(op, leftType, rightType.EnumUnderlyingTypeOrSelf())) != BinaryOperatorKind.Error &&
-                    TypeSymbol.Equals((signature = compilation.builtInOperators.GetSignature(result)).LeftType, rightType.EnumUnderlyingTypeOrSelf(), TypeCompareKind.ConsiderEverything2))
-                {
-                    signature = new BinaryOperatorSignature(signature.Kind | BinaryOperatorKind.EnumAndUnderlying, signature.LeftType, rightType, rightType);
+                else if (
+                    (op == BinaryOperatorKind.Addition || op == BinaryOperatorKind.Subtraction)
+                    && rightType.IsEnumType()
+                    && (leftType.IsIntegralType() || leftType.IsCharType())
+                    && (
+                        result = OverloadResolution.BinopEasyOut.OpKind(
+                            op,
+                            leftType,
+                            rightType.EnumUnderlyingTypeOrSelf()
+                        )
+                    ) != BinaryOperatorKind.Error
+                    && TypeSymbol.Equals(
+                        (signature = compilation.builtInOperators.GetSignature(result)).LeftType,
+                        rightType.EnumUnderlyingTypeOrSelf(),
+                        TypeCompareKind.ConsiderEverything2
+                    )
+                ) {
+                    signature = new BinaryOperatorSignature(
+                        signature.Kind | BinaryOperatorKind.EnumAndUnderlying,
+                        signature.LeftType,
+                        rightType,
+                        rightType
+                    );
                 }
-                else if (op == BinaryOperatorKind.Subtraction &&
-                    leftType.IsEnumType() && TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2))
-                {
-                    signature = new BinaryOperatorSignature(op | BinaryOperatorKind.Enum, leftType, rightType, leftType.EnumUnderlyingTypeOrSelf());
+                else if (
+                    op == BinaryOperatorKind.Subtraction
+                    && leftType.IsEnumType()
+                    && TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2)
+                ) {
+                    signature = new BinaryOperatorSignature(
+                        op | BinaryOperatorKind.Enum,
+                        leftType,
+                        rightType,
+                        leftType.EnumUnderlyingTypeOrSelf()
+                    );
                 }
-                else if ((op == BinaryOperatorKind.Equal ||
-                          op == BinaryOperatorKind.NotEqual ||
-                          op == BinaryOperatorKind.LessThan ||
-                          op == BinaryOperatorKind.LessThanOrEqual ||
-                          op == BinaryOperatorKind.GreaterThan ||
-                          op == BinaryOperatorKind.GreaterThanOrEqual) &&
-                    leftType.IsEnumType() && TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2))
-                {
-                    signature = new BinaryOperatorSignature(op | BinaryOperatorKind.Enum, leftType, rightType, compilation.GetSpecialType(SpecialType.System_Boolean));
+                else if (
+                    (
+                        op == BinaryOperatorKind.Equal
+                        || op == BinaryOperatorKind.NotEqual
+                        || op == BinaryOperatorKind.LessThan
+                        || op == BinaryOperatorKind.LessThanOrEqual
+                        || op == BinaryOperatorKind.GreaterThan
+                        || op == BinaryOperatorKind.GreaterThanOrEqual
+                    )
+                    && leftType.IsEnumType()
+                    && TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2)
+                ) {
+                    signature = new BinaryOperatorSignature(
+                        op | BinaryOperatorKind.Enum,
+                        leftType,
+                        rightType,
+                        compilation.GetSpecialType(SpecialType.System_Boolean)
+                    );
                 }
-                else if ((op == BinaryOperatorKind.Xor ||
-                          op == BinaryOperatorKind.And ||
-                          op == BinaryOperatorKind.Or) &&
-                    leftType.IsEnumType() && TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2))
-                {
-                    signature = new BinaryOperatorSignature(op | BinaryOperatorKind.Enum, leftType, rightType, leftType);
+                else if (
+                    (
+                        op == BinaryOperatorKind.Xor
+                        || op == BinaryOperatorKind.And
+                        || op == BinaryOperatorKind.Or
+                    )
+                    && leftType.IsEnumType()
+                    && TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2)
+                ) {
+                    signature = new BinaryOperatorSignature(
+                        op | BinaryOperatorKind.Enum,
+                        leftType,
+                        rightType,
+                        leftType
+                    );
                 }
-                else if ((op == BinaryOperatorKind.Addition || op == BinaryOperatorKind.Subtraction) &&
-                    leftType.IsDelegateType() && TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2))
-                {
-                    signature = new BinaryOperatorSignature(op | BinaryOperatorKind.Delegate, leftType, leftType, leftType);
+                else if (
+                    (op == BinaryOperatorKind.Addition || op == BinaryOperatorKind.Subtraction)
+                    && leftType.IsDelegateType()
+                    && TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2)
+                ) {
+                    signature = new BinaryOperatorSignature(
+                        op | BinaryOperatorKind.Delegate,
+                        leftType,
+                        leftType,
+                        leftType
+                    );
                 }
-                else if ((op == BinaryOperatorKind.Equal ||
-                          op == BinaryOperatorKind.NotEqual ||
-                          op == BinaryOperatorKind.LessThan ||
-                          op == BinaryOperatorKind.LessThanOrEqual ||
-                          op == BinaryOperatorKind.GreaterThan ||
-                          op == BinaryOperatorKind.GreaterThanOrEqual) &&
-                    leftType.IsPointerType() && rightType.IsPointerType())
-                {
-                    signature = new BinaryOperatorSignature(op | BinaryOperatorKind.Pointer,
-                        compilation.CreatePointerTypeSymbol(compilation.GetSpecialType(SpecialType.System_Void)),
-                        compilation.CreatePointerTypeSymbol(compilation.GetSpecialType(SpecialType.System_Void)),
-                        compilation.GetSpecialType(SpecialType.System_Boolean));
+                else if (
+                    (
+                        op == BinaryOperatorKind.Equal
+                        || op == BinaryOperatorKind.NotEqual
+                        || op == BinaryOperatorKind.LessThan
+                        || op == BinaryOperatorKind.LessThanOrEqual
+                        || op == BinaryOperatorKind.GreaterThan
+                        || op == BinaryOperatorKind.GreaterThanOrEqual
+                    )
+                    && leftType.IsPointerType()
+                    && rightType.IsPointerType()
+                ) {
+                    signature = new BinaryOperatorSignature(
+                        op | BinaryOperatorKind.Pointer,
+                        compilation.CreatePointerTypeSymbol(
+                            compilation.GetSpecialType(SpecialType.System_Void)
+                        ),
+                        compilation.CreatePointerTypeSymbol(
+                            compilation.GetSpecialType(SpecialType.System_Void)
+                        ),
+                        compilation.GetSpecialType(SpecialType.System_Boolean)
+                    );
                 }
                 else
                 {
@@ -8129,15 +9028,39 @@ class Module1
                     return;
                 }
             }
-            else if ((op == BinaryOperatorKind.Equal || op == BinaryOperatorKind.NotEqual) &&
-                !TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2) &&
-                (!leftType.IsValueType || !rightType.IsValueType ||
-                 leftType.SpecialType == SpecialType.System_Boolean || rightType.SpecialType == SpecialType.System_Boolean ||
-                 (leftType.SpecialType == SpecialType.System_Decimal && (rightType.SpecialType == SpecialType.System_Double || rightType.SpecialType == SpecialType.System_Single)) ||
-                 (rightType.SpecialType == SpecialType.System_Decimal && (leftType.SpecialType == SpecialType.System_Double || leftType.SpecialType == SpecialType.System_Single))) &&
-                (!leftType.IsReferenceType || !rightType.IsReferenceType ||
-                 !compilation.Conversions.ClassifyConversionFromType(leftType, rightType, ref useSiteDiagnostics).IsReference))
-            {
+            else if (
+                (op == BinaryOperatorKind.Equal || op == BinaryOperatorKind.NotEqual)
+                && !TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2)
+                && (
+                    !leftType.IsValueType
+                    || !rightType.IsValueType
+                    || leftType.SpecialType == SpecialType.System_Boolean
+                    || rightType.SpecialType == SpecialType.System_Boolean
+                    || (
+                        leftType.SpecialType == SpecialType.System_Decimal
+                        && (
+                            rightType.SpecialType == SpecialType.System_Double
+                            || rightType.SpecialType == SpecialType.System_Single
+                        )
+                    )
+                    || (
+                        rightType.SpecialType == SpecialType.System_Decimal
+                        && (
+                            leftType.SpecialType == SpecialType.System_Double
+                            || leftType.SpecialType == SpecialType.System_Single
+                        )
+                    )
+                )
+                && (
+                    !leftType.IsReferenceType
+                    || !rightType.IsReferenceType
+                    || !compilation.Conversions.ClassifyConversionFromType(
+                        leftType,
+                        rightType,
+                        ref useSiteDiagnostics
+                    ).IsReference
+                )
+            ) {
                 Assert.Null(symbol1);
                 Assert.Null(symbol2);
                 Assert.Null(symbol3);
@@ -8166,14 +9089,18 @@ class Module1
                 {
                     containerName = rightName;
                 }
-                else if ((leftType.IsEnumType() || leftType.IsPointerType()) && (rightType.IsIntegralType() || rightType.IsCharType()))
-                {
+                else if (
+                    (leftType.IsEnumType() || leftType.IsPointerType())
+                    && (rightType.IsIntegralType() || rightType.IsCharType())
+                ) {
                     containerName = leftType.ToTestDisplayString();
                     leftName = containerName;
                     returnName = containerName;
                 }
-                else if ((rightType.IsEnumType() || rightType.IsPointerType()) && (leftType.IsIntegralType() || leftType.IsCharType()))
-                {
+                else if (
+                    (rightType.IsEnumType() || rightType.IsPointerType())
+                    && (leftType.IsIntegralType() || leftType.IsCharType())
+                ) {
                     containerName = rightType.ToTestDisplayString();
                     rightName = containerName;
                     returnName = containerName;
@@ -8182,12 +9109,14 @@ class Module1
 
             Assert.Equal(isDynamic, signature.ReturnType.IsDynamic());
 
-            string expectedSymbol = String.Format("{4} {0}.{2}({1} left, {3} right)",
-                                       containerName,
-                                       leftName,
-                                       OperatorFacts.BinaryOperatorNameFromOperatorKind(op),
-                                       rightName,
-                                       returnName);
+            string expectedSymbol = String.Format(
+                "{4} {0}.{2}({1} left, {3} right)",
+                containerName,
+                leftName,
+                OperatorFacts.BinaryOperatorNameFromOperatorKind(op),
+                rightName,
+                returnName
+            );
             string actualSymbol = symbol1.ToTestDisplayString();
 
             Assert.Equal(expectedSymbol, actualSymbol);
@@ -8203,7 +9132,11 @@ class Module1
                 case BinaryOperatorKind.Addition:
                 case BinaryOperatorKind.Subtraction:
                 case BinaryOperatorKind.Division:
-                    isChecked = isDynamic || symbol1.ContainingSymbol.Kind == SymbolKind.PointerType || symbol1.ContainingType.EnumUnderlyingTypeOrSelf().SpecialType.IsIntegralType();
+                    isChecked =
+                        isDynamic
+                        || symbol1.ContainingSymbol.Kind == SymbolKind.PointerType
+                        || symbol1.ContainingType.EnumUnderlyingTypeOrSelf()
+                            .SpecialType.IsIntegralType();
                     break;
 
                 default:
@@ -8220,22 +9153,42 @@ class Module1
             Assert.Null(symbol1.GetSymbol().DeclaringCompilation);
             Assert.Equal(symbol1.Name, symbol1.MetadataName);
 
-            Assert.True(SymbolEqualityComparer.ConsiderEverything.Equals(symbol1.ContainingSymbol, symbol1.Parameters[0].Type) ||
-                SymbolEqualityComparer.ConsiderEverything.Equals(symbol1.ContainingSymbol, symbol1.Parameters[1].Type));
+            Assert.True(
+                SymbolEqualityComparer.ConsiderEverything.Equals(
+                    symbol1.ContainingSymbol,
+                    symbol1.Parameters[0].Type
+                )
+                    || SymbolEqualityComparer.ConsiderEverything.Equals(
+                        symbol1.ContainingSymbol,
+                        symbol1.Parameters[1].Type
+                    )
+            );
 
             int match = 0;
-            if (SymbolEqualityComparer.ConsiderEverything.Equals(symbol1.ContainingSymbol, symbol1.ReturnType))
-            {
+            if (
+                SymbolEqualityComparer.ConsiderEverything.Equals(
+                    symbol1.ContainingSymbol,
+                    symbol1.ReturnType
+                )
+            ) {
                 match++;
             }
 
-            if (SymbolEqualityComparer.ConsiderEverything.Equals(symbol1.ContainingSymbol, symbol1.Parameters[0].Type))
-            {
+            if (
+                SymbolEqualityComparer.ConsiderEverything.Equals(
+                    symbol1.ContainingSymbol,
+                    symbol1.Parameters[0].Type
+                )
+            ) {
                 match++;
             }
 
-            if (SymbolEqualityComparer.ConsiderEverything.Equals(symbol1.ContainingSymbol, symbol1.Parameters[1].Type))
-            {
+            if (
+                SymbolEqualityComparer.ConsiderEverything.Equals(
+                    symbol1.ContainingSymbol,
+                    symbol1.Parameters[1].Type
+                )
+            ) {
                 match++;
             }
 
@@ -8328,7 +9281,7 @@ class Module1
         public void BinaryIntrinsicSymbols3()
         {
             var source =
-@"
+                @"
 class Module1
 {
     void Test(object x)
@@ -8343,9 +9296,10 @@ class Module1
             var tree = compilation.SyntaxTrees.Single();
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var nodes = (from node in tree.GetRoot().DescendantNodes()
-                         select node as BinaryExpressionSyntax).
-                         Where(node => (object)node != null).ToArray();
+            var nodes = (
+                from node in tree.GetRoot().DescendantNodes()
+                select node as BinaryExpressionSyntax
+            ).Where(node => (object)node != null).ToArray();
 
             Assert.Equal(2, nodes.Length);
 
@@ -8363,7 +9317,7 @@ class Module1
         public void CheckedBinaryIntrinsicSymbols()
         {
             var source =
-@"
+                @"
 class Module1
 {
     void Test(int x, int y)
@@ -8373,16 +9327,25 @@ class Module1
     }
 }";
 
-            var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll.WithOverflowChecks(false));
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseDll.WithOverflowChecks(false)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var nodes = tree.GetRoot().DescendantNodes().Where(node => node is BinaryExpressionSyntax || node is AssignmentExpressionSyntax).ToArray();
+            var nodes = tree.GetRoot()
+                .DescendantNodes()
+                .Where(node => node is BinaryExpressionSyntax || node is AssignmentExpressionSyntax)
+                .ToArray();
 
             Assert.Equal(2, nodes.Length);
 
-            var symbols1 = (from node1 in nodes select (IMethodSymbol)semanticModel.GetSymbolInfo(node1).Symbol).ToArray();
+            var symbols1 = (
+                from node1 in nodes
+                select (IMethodSymbol)semanticModel.GetSymbolInfo(node1).Symbol
+            ).ToArray();
             foreach (var symbol1 in symbols1)
             {
                 Assert.False(symbol1.IsCheckedBuiltin);
@@ -8391,7 +9354,10 @@ class Module1
             compilation = compilation.WithOptions(TestOptions.ReleaseDll.WithOverflowChecks(true));
             semanticModel = compilation.GetSemanticModel(tree);
 
-            var symbols2 = (from node2 in nodes select (IMethodSymbol)semanticModel.GetSymbolInfo(node2).Symbol).ToArray();
+            var symbols2 = (
+                from node2 in nodes
+                select (IMethodSymbol)semanticModel.GetSymbolInfo(node2).Symbol
+            ).ToArray();
             foreach (var symbol2 in symbols2)
             {
                 Assert.True(symbol2.IsCheckedBuiltin);
@@ -8407,7 +9373,7 @@ class Module1
         public void DynamicBinaryIntrinsicSymbols()
         {
             var source =
-@"
+                @"
 class Module1
 {
     void Test(dynamic x)
@@ -8417,18 +9383,25 @@ class Module1
     }
 }";
 
-            var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll.WithOverflowChecks(false));
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseDll.WithOverflowChecks(false)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var nodes = (from node in tree.GetRoot().DescendantNodes()
-                         select node as BinaryExpressionSyntax).
-                         Where(node => (object)node != null).ToArray();
+            var nodes = (
+                from node in tree.GetRoot().DescendantNodes()
+                select node as BinaryExpressionSyntax
+            ).Where(node => (object)node != null).ToArray();
 
             Assert.Equal(2, nodes.Length);
 
-            var symbols1 = (from node1 in nodes select (IMethodSymbol)semanticModel.GetSymbolInfo(node1).Symbol).ToArray();
+            var symbols1 = (
+                from node1 in nodes
+                select (IMethodSymbol)semanticModel.GetSymbolInfo(node1).Symbol
+            ).ToArray();
             foreach (var symbol1 in symbols1)
             {
                 Assert.False(symbol1.IsCheckedBuiltin);
@@ -8439,7 +9412,10 @@ class Module1
             compilation = compilation.WithOptions(TestOptions.ReleaseDll.WithOverflowChecks(true));
             semanticModel = compilation.GetSemanticModel(tree);
 
-            var symbols2 = (from node2 in nodes select (IMethodSymbol)semanticModel.GetSymbolInfo(node2).Symbol).ToArray();
+            var symbols2 = (
+                from node2 in nodes
+                select (IMethodSymbol)semanticModel.GetSymbolInfo(node2).Symbol
+            ).ToArray();
             foreach (var symbol2 in symbols2)
             {
                 Assert.True(symbol2.IsCheckedBuiltin);
@@ -8457,7 +9433,7 @@ class Module1
         public void Bug721565()
         {
             var source =
-@"
+                @"
 class Module1
 {
     void Test(TestStr? x, int? y, TestStr? x1, int? y1)
@@ -8485,20 +9461,23 @@ struct TestStr
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
 
             compilation.VerifyDiagnostics(
-    // (17,20): error CS0019: Operator '==' cannot be applied to operands of type 'TestStr?' and 'TestStr?'
-    //         var z11 = (x == x1);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x == x1").WithArguments("==", "TestStr?", "TestStr?"),
-    // (18,20): error CS0019: Operator '!=' cannot be applied to operands of type 'TestStr?' and 'TestStr?'
-    //         var z12 = (x != x1);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x != x1").WithArguments("!=", "TestStr?", "TestStr?")
-                );
+                // (17,20): error CS0019: Operator '==' cannot be applied to operands of type 'TestStr?' and 'TestStr?'
+                //         var z11 = (x == x1);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x == x1")
+                    .WithArguments("==", "TestStr?", "TestStr?"),
+                // (18,20): error CS0019: Operator '!=' cannot be applied to operands of type 'TestStr?' and 'TestStr?'
+                //         var z12 = (x != x1);
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "x != x1")
+                    .WithArguments("!=", "TestStr?", "TestStr?")
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var semanticModel = compilation.GetSemanticModel(tree);
 
-            var nodes = (from node in tree.GetRoot().DescendantNodes()
-                         select node as BinaryExpressionSyntax).
-                         Where(node => (object)node != null).ToArray();
+            var nodes = (
+                from node in tree.GetRoot().DescendantNodes()
+                select node as BinaryExpressionSyntax
+            ).Where(node => (object)node != null).ToArray();
 
             Assert.Equal(12, nodes.Length);
 
@@ -8512,19 +9491,31 @@ struct TestStr
                     case 2:
                     case 4:
                     case 6:
-                        Assert.Equal("System.Boolean System.Object.op_Equality(System.Object left, System.Object right)", info1.Symbol.ToTestDisplayString());
+                        Assert.Equal(
+                            "System.Boolean System.Object.op_Equality(System.Object left, System.Object right)",
+                            info1.Symbol.ToTestDisplayString()
+                        );
                         break;
                     case 1:
                     case 3:
                     case 5:
                     case 7:
-                        Assert.Equal("System.Boolean System.Object.op_Inequality(System.Object left, System.Object right)", info1.Symbol.ToTestDisplayString());
+                        Assert.Equal(
+                            "System.Boolean System.Object.op_Inequality(System.Object left, System.Object right)",
+                            info1.Symbol.ToTestDisplayString()
+                        );
                         break;
                     case 8:
-                        Assert.Equal("System.Boolean System.Int32.op_Equality(System.Int32 left, System.Int32 right)", info1.Symbol.ToTestDisplayString());
+                        Assert.Equal(
+                            "System.Boolean System.Int32.op_Equality(System.Int32 left, System.Int32 right)",
+                            info1.Symbol.ToTestDisplayString()
+                        );
                         break;
                     case 9:
-                        Assert.Equal("System.Boolean System.Int32.op_Inequality(System.Int32 left, System.Int32 right)", info1.Symbol.ToTestDisplayString());
+                        Assert.Equal(
+                            "System.Boolean System.Int32.op_Inequality(System.Int32 left, System.Int32 right)",
+                            info1.Symbol.ToTestDisplayString()
+                        );
                         break;
                     case 10:
                     case 11:
@@ -8540,7 +9531,7 @@ struct TestStr
         public void IntrinsicBinaryOperatorSignature_EqualsAndGetHashCode()
         {
             var source =
-@"class C
+                @"class C
 {
     static object F(int i)
     {
@@ -8551,7 +9542,10 @@ struct TestStr
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees[0];
-            var methodDecl = tree.GetCompilationUnitRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First();
+            var methodDecl = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .First();
             var methodBody = methodDecl.Body;
             var model = (CSharpSemanticModel)compilation.GetSemanticModel(tree);
             var binder = model.GetEnclosingBinder(methodBody.SpanStart);
@@ -8569,7 +9563,16 @@ struct TestStr
             var op = visitor.FirstNode.Operator;
             Assert.Null(op.Method);
             // Equals and GetHashCode should support null Method.
-            Assert.Equal(op, new BinaryOperatorSignature(op.Kind, op.LeftType, op.RightType, op.ReturnType, op.Method));
+            Assert.Equal(
+                op,
+                new BinaryOperatorSignature(
+                    op.Kind,
+                    op.LeftType,
+                    op.RightType,
+                    op.ReturnType,
+                    op.Method
+                )
+            );
             op.GetHashCode();
         }
 
@@ -8577,7 +9580,7 @@ struct TestStr
         public void StrictEnumSubtraction()
         {
             var source1 =
-@"public enum Color { Red, Blue, Green }
+                @"public enum Color { Red, Blue, Green }
 public static class Program
 {
     public static void M<T>(T t) {}
@@ -8586,12 +9589,18 @@ public static class Program
         M(1 - Color.Red);
     }
 }";
-            CreateCompilation(source1, options: TestOptions.ReleaseDll).VerifyDiagnostics(
-                );
-            CreateCompilation(source1, options: TestOptions.ReleaseDll, parseOptions: TestOptions.Regular.WithStrictFeature()).VerifyDiagnostics(
-                // (7,11): error CS0019: Operator '-' cannot be applied to operands of type 'int' and 'Color'
-                //         M(1 - Color.Red);
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "1 - Color.Red").WithArguments("-", "int", "Color").WithLocation(7, 11)
+            CreateCompilation(source1, options: TestOptions.ReleaseDll).VerifyDiagnostics();
+            CreateCompilation(
+                    source1,
+                    options: TestOptions.ReleaseDll,
+                    parseOptions: TestOptions.Regular.WithStrictFeature()
+                )
+                .VerifyDiagnostics(
+                    // (7,11): error CS0019: Operator '-' cannot be applied to operands of type 'int' and 'Color'
+                    //         M(1 - Color.Red);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "1 - Color.Red")
+                        .WithArguments("-", "int", "Color")
+                        .WithLocation(7, 11)
                 );
         }
 
@@ -8605,7 +9614,7 @@ public static class Program
         public void UserDefinedShortCircuitingOperators_TrueAndFalseOnBaseType()
         {
             var source =
-@"class A<T>
+                @"class A<T>
 {
     public static bool operator true(A<T> o) { return true; }
     public static bool operator false(A<T> o) { return false; }
@@ -8632,8 +9641,9 @@ class P
 }";
             var verifier = CompileAndVerify(source);
             verifier.Compilation.VerifyDiagnostics();
-            verifier.VerifyIL("P.M",
-@"
+            verifier.VerifyIL(
+                "P.M",
+                @"
 {
   // Code size       53 (0x35)
   .maxstack  2
@@ -8664,7 +9674,8 @@ class P
   IL_002e:  call       ""bool A<object>.op_True(A<object>)""
   IL_0033:  pop
   IL_0034:  ret
-}");
+}"
+            );
         }
 
         /// <summary>
@@ -8676,7 +9687,7 @@ class P
         public void UserDefinedShortCircuitingOperators_TrueAndFalseOnDerivedType()
         {
             var source =
-@"class A<T>
+                @"class A<T>
 {
     public static A<T> operator |(A<T> x, A<T> y) { return x; }
 }
@@ -8705,26 +9716,34 @@ class P
             compilation.VerifyDiagnostics(
                 // (18,13): error CS0218: In order for 'B.operator &(B, B)' to be applicable as a short circuit operator, its declaring type 'B' must define operator true and operator false
                 //         if (x && y)
-                Diagnostic(ErrorCode.ERR_MustHaveOpTF, "x && y").WithArguments("B.operator &(B, B)", "B").WithLocation(18, 13),
+                Diagnostic(ErrorCode.ERR_MustHaveOpTF, "x && y")
+                    .WithArguments("B.operator &(B, B)", "B")
+                    .WithLocation(18, 13),
                 // (21,13): error CS0218: In order for 'A<object>.operator |(A<object>, A<object>)' to be applicable as a short circuit operator, its declaring type 'A<object>' must define operator true and operator false
                 //         if (x || y)
-                Diagnostic(ErrorCode.ERR_MustHaveOpTF, "x || y").WithArguments("A<object>.operator |(A<object>, A<object>)", "A<object>").WithLocation(21, 13));
+                Diagnostic(ErrorCode.ERR_MustHaveOpTF, "x || y")
+                    .WithArguments("A<object>.operator |(A<object>, A<object>)", "A<object>")
+                    .WithLocation(21, 13)
+            );
         }
 
         private sealed class EmptyRewriter : BoundTreeRewriter
         {
-            protected override BoundExpression VisitExpressionWithoutStackGuard(BoundExpression node)
-            {
+            protected override BoundExpression VisitExpressionWithoutStackGuard(
+                BoundExpression node
+            ) {
                 throw new NotImplementedException();
             }
         }
 
-        private sealed class FindCompoundAssignmentWalker : BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
+        private sealed class FindCompoundAssignmentWalker
+            : BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
         {
             internal BoundCompoundAssignmentOperator FirstNode;
 
-            public override BoundNode VisitCompoundAssignmentOperator(BoundCompoundAssignmentOperator node)
-            {
+            public override BoundNode VisitCompoundAssignmentOperator(
+                BoundCompoundAssignmentOperator node
+            ) {
                 if (FirstNode == null)
                 {
                     FirstNode = node;
@@ -8736,7 +9755,8 @@ class P
         [Fact, WorkItem(1036392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1036392")]
         public void Bug1036392_0()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main()
@@ -8755,7 +9775,8 @@ enum E : short { }
         [Fact, WorkItem(1036392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1036392")]
         public void Bug1036392_1()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main()
@@ -8787,7 +9808,8 @@ class Test
         [Fact, WorkItem(1036392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1036392")]
         public void Bug1036392_2()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main()
@@ -8819,7 +9841,8 @@ class Test
         [Fact, WorkItem(1036392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1036392")]
         public void Bug1036392_3()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main()
@@ -8842,7 +9865,8 @@ enum E : short { }";
         [Fact, WorkItem(1036392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1036392")]
         public void Bug1036392_4()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main()
@@ -8874,7 +9898,8 @@ struct Test
         [Fact, WorkItem(1036392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1036392")]
         public void Bug1036392_5()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main()
@@ -8907,7 +9932,8 @@ struct Test
         [Fact, WorkItem(1036392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1036392")]
         public void Bug1036392_6()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main()
@@ -8930,7 +9956,8 @@ enum E : short { }";
         [Fact, WorkItem(1036392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1036392")]
         public void Bug1036392_7()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -8946,13 +9973,17 @@ class Program
         System.Console.WriteLine(typeof(T));
     }
 }";
-            CompileAndVerify(source: source, expectedOutput: "System.Nullable`1[System.Base64FormattingOptions]");
+            CompileAndVerify(
+                source: source,
+                expectedOutput: "System.Nullable`1[System.Base64FormattingOptions]"
+            );
         }
 
         [Fact, WorkItem(1036392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1036392")]
         public void Bug1036392_8()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -8974,7 +10005,8 @@ class Program
         [Fact, WorkItem(1036392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1036392")]
         public void Bug1036392_9()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 enum MyEnum1 : short
@@ -9003,19 +10035,22 @@ class Program
         M((long)0 - m2);
     }
 }";
-            CompileAndVerify(source: source, expectedOutput:
-@"System.Int16
+            CompileAndVerify(
+                source: source,
+                expectedOutput: @"System.Int16
 System.Int16
 System.Int16
 System.Int32
 System.Int32
-System.Int32");
+System.Int32"
+            );
         }
 
         [Fact, WorkItem(1036392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1036392")]
         public void Bug1036392_10()
         {
-            string source = @"
+            string source =
+                @"
 enum TestEnum : short
 {
     A, B
@@ -9228,8 +10263,9 @@ class Program
         Print(0 - x);
     }
 }";
-            CompileAndVerify(source: source, expectedOutput:
-@"TestEnum
+            CompileAndVerify(
+                source: source,
+                expectedOutput: @"TestEnum
 TestEnum
 TestEnum
 TestEnum
@@ -9325,13 +10361,15 @@ System.Nullable`1[TestEnum]
 System.Nullable`1[System.Int16]
 System.Nullable`1[TestEnum]
 System.Nullable`1[System.Int16]
-");
+"
+            );
         }
 
         [Fact, WorkItem(1036392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1036392")]
         public void Bug1036392_11()
         {
-            string source = @"
+            string source =
+                @"
 enum TestEnum : short
 {
     A, B
@@ -9455,134 +10493,216 @@ class Program
     }
 }";
 
-            CreateCompilation(source).VerifyDiagnostics(
-    // (26,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'int'
-    //         Print(x - c);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - c").WithArguments("-", "TestEnum", "int").WithLocation(26, 15),
-    // (27,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
-    //         Print(x - d);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d").WithArguments("-", "TestEnum", "long").WithLocation(27, 15),
-    // (28,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'int'
-    //         Print(x - g);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - g").WithArguments("-", "TestEnum", "int").WithLocation(28, 15),
-    // (29,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
-    //         Print(x - h);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h").WithArguments("-", "TestEnum", "long").WithLocation(29, 15),
-    // (30,15): error CS0019: Operator '-' cannot be applied to operands of type 'int' and 'TestEnum'
-    //         Print(c - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "c - x").WithArguments("-", "int", "TestEnum").WithLocation(30, 15),
-    // (31,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
-    //         Print(d - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x").WithArguments("-", "long", "TestEnum").WithLocation(31, 15),
-    // (32,15): error CS0019: Operator '-' cannot be applied to operands of type 'int' and 'TestEnum'
-    //         Print(g - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "g - x").WithArguments("-", "int", "TestEnum").WithLocation(32, 15),
-    // (33,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
-    //         Print(h - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x").WithArguments("-", "long", "TestEnum").WithLocation(33, 15),
-    // (44,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'int'
-    //         Print(x - c);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - c").WithArguments("-", "TestEnum?", "int").WithLocation(44, 15),
-    // (45,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
-    //         Print(x - d);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d").WithArguments("-", "TestEnum?", "long").WithLocation(45, 15),
-    // (46,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'int'
-    //         Print(x - g);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - g").WithArguments("-", "TestEnum?", "int").WithLocation(46, 15),
-    // (47,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
-    //         Print(x - h);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h").WithArguments("-", "TestEnum?", "long").WithLocation(47, 15),
-    // (48,15): error CS0019: Operator '-' cannot be applied to operands of type 'int' and 'TestEnum?'
-    //         Print(c - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "c - x").WithArguments("-", "int", "TestEnum?").WithLocation(48, 15),
-    // (49,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
-    //         Print(d - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x").WithArguments("-", "long", "TestEnum?").WithLocation(49, 15),
-    // (50,15): error CS0019: Operator '-' cannot be applied to operands of type 'int' and 'TestEnum?'
-    //         Print(g - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "g - x").WithArguments("-", "int", "TestEnum?").WithLocation(50, 15),
-    // (51,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
-    //         Print(h - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x").WithArguments("-", "long", "TestEnum?").WithLocation(51, 15),
-    // (62,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'int?'
-    //         Print(x - c);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - c").WithArguments("-", "TestEnum", "int?").WithLocation(62, 15),
-    // (63,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long?'
-    //         Print(x - d);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d").WithArguments("-", "TestEnum", "long?").WithLocation(63, 15),
-    // (64,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'int?'
-    //         Print(x - g);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - g").WithArguments("-", "TestEnum", "int?").WithLocation(64, 15),
-    // (65,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long?'
-    //         Print(x - h);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h").WithArguments("-", "TestEnum", "long?").WithLocation(65, 15),
-    // (66,15): error CS0019: Operator '-' cannot be applied to operands of type 'int?' and 'TestEnum'
-    //         Print(c - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "c - x").WithArguments("-", "int?", "TestEnum").WithLocation(66, 15),
-    // (67,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum'
-    //         Print(d - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x").WithArguments("-", "long?", "TestEnum").WithLocation(67, 15),
-    // (68,15): error CS0019: Operator '-' cannot be applied to operands of type 'int?' and 'TestEnum'
-    //         Print(g - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "g - x").WithArguments("-", "int?", "TestEnum").WithLocation(68, 15),
-    // (69,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum'
-    //         Print(h - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x").WithArguments("-", "long?", "TestEnum").WithLocation(69, 15),
-    // (80,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'int?'
-    //         Print(x - c);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - c").WithArguments("-", "TestEnum?", "int?").WithLocation(80, 15),
-    // (81,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long?'
-    //         Print(x - d);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d").WithArguments("-", "TestEnum?", "long?").WithLocation(81, 15),
-    // (82,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'int?'
-    //         Print(x - g);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - g").WithArguments("-", "TestEnum?", "int?").WithLocation(82, 15),
-    // (83,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long?'
-    //         Print(x - h);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h").WithArguments("-", "TestEnum?", "long?").WithLocation(83, 15),
-    // (84,15): error CS0019: Operator '-' cannot be applied to operands of type 'int?' and 'TestEnum?'
-    //         Print(c - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "c - x").WithArguments("-", "int?", "TestEnum?").WithLocation(84, 15),
-    // (85,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum?'
-    //         Print(d - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x").WithArguments("-", "long?", "TestEnum?").WithLocation(85, 15),
-    // (86,15): error CS0019: Operator '-' cannot be applied to operands of type 'int?' and 'TestEnum?'
-    //         Print(g - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "g - x").WithArguments("-", "int?", "TestEnum?").WithLocation(86, 15),
-    // (87,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum?'
-    //         Print(h - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x").WithArguments("-", "long?", "TestEnum?").WithLocation(87, 15),
-    // (95,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
-    //         Print(x - d);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d").WithArguments("-", "TestEnum", "long").WithLocation(95, 15),
-    // (96,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
-    //         Print(d - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x").WithArguments("-", "long", "TestEnum").WithLocation(96, 15),
-    // (104,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
-    //         Print(x - d);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d").WithArguments("-", "TestEnum?", "long").WithLocation(104, 15),
-    // (105,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
-    //         Print(d - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x").WithArguments("-", "long", "TestEnum?").WithLocation(105, 15),
-    // (112,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
-    //         Print(x - (long)1);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - (long)1").WithArguments("-", "TestEnum", "long").WithLocation(112, 15),
-    // (113,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
-    //         Print((long)1 - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "(long)1 - x").WithArguments("-", "long", "TestEnum").WithLocation(113, 15),
-    // (120,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
-    //         Print(x - (long)1);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - (long)1").WithArguments("-", "TestEnum?", "long").WithLocation(120, 15),
-    // (121,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
-    //         Print((long)1 - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "(long)1 - x").WithArguments("-", "long", "TestEnum?").WithLocation(121, 15)
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (26,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'int'
+                    //         Print(x - c);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - c")
+                        .WithArguments("-", "TestEnum", "int")
+                        .WithLocation(26, 15),
+                    // (27,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
+                    //         Print(x - d);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                        .WithArguments("-", "TestEnum", "long")
+                        .WithLocation(27, 15),
+                    // (28,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'int'
+                    //         Print(x - g);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - g")
+                        .WithArguments("-", "TestEnum", "int")
+                        .WithLocation(28, 15),
+                    // (29,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
+                    //         Print(x - h);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
+                        .WithArguments("-", "TestEnum", "long")
+                        .WithLocation(29, 15),
+                    // (30,15): error CS0019: Operator '-' cannot be applied to operands of type 'int' and 'TestEnum'
+                    //         Print(c - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "c - x")
+                        .WithArguments("-", "int", "TestEnum")
+                        .WithLocation(30, 15),
+                    // (31,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
+                    //         Print(d - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                        .WithArguments("-", "long", "TestEnum")
+                        .WithLocation(31, 15),
+                    // (32,15): error CS0019: Operator '-' cannot be applied to operands of type 'int' and 'TestEnum'
+                    //         Print(g - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "g - x")
+                        .WithArguments("-", "int", "TestEnum")
+                        .WithLocation(32, 15),
+                    // (33,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
+                    //         Print(h - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
+                        .WithArguments("-", "long", "TestEnum")
+                        .WithLocation(33, 15),
+                    // (44,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'int'
+                    //         Print(x - c);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - c")
+                        .WithArguments("-", "TestEnum?", "int")
+                        .WithLocation(44, 15),
+                    // (45,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
+                    //         Print(x - d);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                        .WithArguments("-", "TestEnum?", "long")
+                        .WithLocation(45, 15),
+                    // (46,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'int'
+                    //         Print(x - g);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - g")
+                        .WithArguments("-", "TestEnum?", "int")
+                        .WithLocation(46, 15),
+                    // (47,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
+                    //         Print(x - h);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
+                        .WithArguments("-", "TestEnum?", "long")
+                        .WithLocation(47, 15),
+                    // (48,15): error CS0019: Operator '-' cannot be applied to operands of type 'int' and 'TestEnum?'
+                    //         Print(c - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "c - x")
+                        .WithArguments("-", "int", "TestEnum?")
+                        .WithLocation(48, 15),
+                    // (49,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
+                    //         Print(d - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                        .WithArguments("-", "long", "TestEnum?")
+                        .WithLocation(49, 15),
+                    // (50,15): error CS0019: Operator '-' cannot be applied to operands of type 'int' and 'TestEnum?'
+                    //         Print(g - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "g - x")
+                        .WithArguments("-", "int", "TestEnum?")
+                        .WithLocation(50, 15),
+                    // (51,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
+                    //         Print(h - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
+                        .WithArguments("-", "long", "TestEnum?")
+                        .WithLocation(51, 15),
+                    // (62,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'int?'
+                    //         Print(x - c);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - c")
+                        .WithArguments("-", "TestEnum", "int?")
+                        .WithLocation(62, 15),
+                    // (63,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long?'
+                    //         Print(x - d);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                        .WithArguments("-", "TestEnum", "long?")
+                        .WithLocation(63, 15),
+                    // (64,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'int?'
+                    //         Print(x - g);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - g")
+                        .WithArguments("-", "TestEnum", "int?")
+                        .WithLocation(64, 15),
+                    // (65,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long?'
+                    //         Print(x - h);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
+                        .WithArguments("-", "TestEnum", "long?")
+                        .WithLocation(65, 15),
+                    // (66,15): error CS0019: Operator '-' cannot be applied to operands of type 'int?' and 'TestEnum'
+                    //         Print(c - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "c - x")
+                        .WithArguments("-", "int?", "TestEnum")
+                        .WithLocation(66, 15),
+                    // (67,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum'
+                    //         Print(d - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                        .WithArguments("-", "long?", "TestEnum")
+                        .WithLocation(67, 15),
+                    // (68,15): error CS0019: Operator '-' cannot be applied to operands of type 'int?' and 'TestEnum'
+                    //         Print(g - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "g - x")
+                        .WithArguments("-", "int?", "TestEnum")
+                        .WithLocation(68, 15),
+                    // (69,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum'
+                    //         Print(h - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
+                        .WithArguments("-", "long?", "TestEnum")
+                        .WithLocation(69, 15),
+                    // (80,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'int?'
+                    //         Print(x - c);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - c")
+                        .WithArguments("-", "TestEnum?", "int?")
+                        .WithLocation(80, 15),
+                    // (81,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long?'
+                    //         Print(x - d);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                        .WithArguments("-", "TestEnum?", "long?")
+                        .WithLocation(81, 15),
+                    // (82,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'int?'
+                    //         Print(x - g);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - g")
+                        .WithArguments("-", "TestEnum?", "int?")
+                        .WithLocation(82, 15),
+                    // (83,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long?'
+                    //         Print(x - h);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
+                        .WithArguments("-", "TestEnum?", "long?")
+                        .WithLocation(83, 15),
+                    // (84,15): error CS0019: Operator '-' cannot be applied to operands of type 'int?' and 'TestEnum?'
+                    //         Print(c - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "c - x")
+                        .WithArguments("-", "int?", "TestEnum?")
+                        .WithLocation(84, 15),
+                    // (85,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum?'
+                    //         Print(d - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                        .WithArguments("-", "long?", "TestEnum?")
+                        .WithLocation(85, 15),
+                    // (86,15): error CS0019: Operator '-' cannot be applied to operands of type 'int?' and 'TestEnum?'
+                    //         Print(g - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "g - x")
+                        .WithArguments("-", "int?", "TestEnum?")
+                        .WithLocation(86, 15),
+                    // (87,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum?'
+                    //         Print(h - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
+                        .WithArguments("-", "long?", "TestEnum?")
+                        .WithLocation(87, 15),
+                    // (95,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
+                    //         Print(x - d);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                        .WithArguments("-", "TestEnum", "long")
+                        .WithLocation(95, 15),
+                    // (96,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
+                    //         Print(d - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                        .WithArguments("-", "long", "TestEnum")
+                        .WithLocation(96, 15),
+                    // (104,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
+                    //         Print(x - d);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                        .WithArguments("-", "TestEnum?", "long")
+                        .WithLocation(104, 15),
+                    // (105,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
+                    //         Print(d - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                        .WithArguments("-", "long", "TestEnum?")
+                        .WithLocation(105, 15),
+                    // (112,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
+                    //         Print(x - (long)1);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - (long)1")
+                        .WithArguments("-", "TestEnum", "long")
+                        .WithLocation(112, 15),
+                    // (113,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
+                    //         Print((long)1 - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "(long)1 - x")
+                        .WithArguments("-", "long", "TestEnum")
+                        .WithLocation(113, 15),
+                    // (120,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
+                    //         Print(x - (long)1);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - (long)1")
+                        .WithArguments("-", "TestEnum?", "long")
+                        .WithLocation(120, 15),
+                    // (121,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
+                    //         Print((long)1 - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "(long)1 - x")
+                        .WithArguments("-", "long", "TestEnum?")
+                        .WithLocation(121, 15)
                 );
         }
 
         [Fact, WorkItem(1036392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1036392")]
         public void Bug1036392_12()
         {
-            string source = @"
+            string source =
+                @"
 enum TestEnum : int
 {
     A, B
@@ -9775,8 +10895,9 @@ class Program
         Print(0 - x);
     }
 }";
-            CompileAndVerify(source: source, expectedOutput:
-@"TestEnum
+            CompileAndVerify(
+                source: source,
+                expectedOutput: @"TestEnum
 TestEnum
 TestEnum
 TestEnum
@@ -9856,13 +10977,15 @@ System.Nullable`1[TestEnum]
 System.Nullable`1[TestEnum]
 System.Nullable`1[TestEnum]
 System.Nullable`1[System.Int32]
-");
+"
+            );
         }
 
         [Fact, WorkItem(1036392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1036392")]
         public void Bug1036392_13()
         {
-            string source = @"
+            string source =
+                @"
 enum TestEnum : int
 {
     A, B
@@ -9962,86 +11085,136 @@ class Program
     }
 }";
 
-            CreateCompilation(source).VerifyDiagnostics(
-    // (24,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
-    //         Print(x - d);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d").WithArguments("-", "TestEnum", "long").WithLocation(24, 15),
-    // (25,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
-    //         Print(x - h);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h").WithArguments("-", "TestEnum", "long").WithLocation(25, 15),
-    // (26,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
-    //         Print(d - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x").WithArguments("-", "long", "TestEnum").WithLocation(26, 15),
-    // (27,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
-    //         Print(h - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x").WithArguments("-", "long", "TestEnum").WithLocation(27, 15),
-    // (36,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
-    //         Print(x - d);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d").WithArguments("-", "TestEnum?", "long").WithLocation(36, 15),
-    // (37,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
-    //         Print(x - h);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h").WithArguments("-", "TestEnum?", "long").WithLocation(37, 15),
-    // (38,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
-    //         Print(d - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x").WithArguments("-", "long", "TestEnum?").WithLocation(38, 15),
-    // (39,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
-    //         Print(h - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x").WithArguments("-", "long", "TestEnum?").WithLocation(39, 15),
-    // (48,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long?'
-    //         Print(x - d);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d").WithArguments("-", "TestEnum", "long?").WithLocation(48, 15),
-    // (49,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long?'
-    //         Print(x - h);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h").WithArguments("-", "TestEnum", "long?").WithLocation(49, 15),
-    // (50,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum'
-    //         Print(d - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x").WithArguments("-", "long?", "TestEnum").WithLocation(50, 15),
-    // (51,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum'
-    //         Print(h - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x").WithArguments("-", "long?", "TestEnum").WithLocation(51, 15),
-    // (60,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long?'
-    //         Print(x - d);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d").WithArguments("-", "TestEnum?", "long?").WithLocation(60, 15),
-    // (61,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long?'
-    //         Print(x - h);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h").WithArguments("-", "TestEnum?", "long?").WithLocation(61, 15),
-    // (62,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum?'
-    //         Print(d - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x").WithArguments("-", "long?", "TestEnum?").WithLocation(62, 15),
-    // (63,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum?'
-    //         Print(h - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x").WithArguments("-", "long?", "TestEnum?").WithLocation(63, 15),
-    // (71,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
-    //         Print(x - d);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d").WithArguments("-", "TestEnum", "long").WithLocation(71, 15),
-    // (72,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
-    //         Print(d - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x").WithArguments("-", "long", "TestEnum").WithLocation(72, 15),
-    // (80,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
-    //         Print(x - d);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d").WithArguments("-", "TestEnum?", "long").WithLocation(80, 15),
-    // (81,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
-    //         Print(d - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x").WithArguments("-", "long", "TestEnum?").WithLocation(81, 15),
-    // (88,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
-    //         Print(x - (long)1);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - (long)1").WithArguments("-", "TestEnum", "long").WithLocation(88, 15),
-    // (89,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
-    //         Print((long)1 - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "(long)1 - x").WithArguments("-", "long", "TestEnum").WithLocation(89, 15),
-    // (96,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
-    //         Print(x - (long)1);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - (long)1").WithArguments("-", "TestEnum?", "long").WithLocation(96, 15),
-    // (97,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
-    //         Print((long)1 - x);
-    Diagnostic(ErrorCode.ERR_BadBinaryOps, "(long)1 - x").WithArguments("-", "long", "TestEnum?").WithLocation(97, 15)
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (24,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
+                    //         Print(x - d);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                        .WithArguments("-", "TestEnum", "long")
+                        .WithLocation(24, 15),
+                    // (25,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
+                    //         Print(x - h);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
+                        .WithArguments("-", "TestEnum", "long")
+                        .WithLocation(25, 15),
+                    // (26,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
+                    //         Print(d - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                        .WithArguments("-", "long", "TestEnum")
+                        .WithLocation(26, 15),
+                    // (27,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
+                    //         Print(h - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
+                        .WithArguments("-", "long", "TestEnum")
+                        .WithLocation(27, 15),
+                    // (36,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
+                    //         Print(x - d);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                        .WithArguments("-", "TestEnum?", "long")
+                        .WithLocation(36, 15),
+                    // (37,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
+                    //         Print(x - h);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
+                        .WithArguments("-", "TestEnum?", "long")
+                        .WithLocation(37, 15),
+                    // (38,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
+                    //         Print(d - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                        .WithArguments("-", "long", "TestEnum?")
+                        .WithLocation(38, 15),
+                    // (39,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
+                    //         Print(h - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
+                        .WithArguments("-", "long", "TestEnum?")
+                        .WithLocation(39, 15),
+                    // (48,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long?'
+                    //         Print(x - d);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                        .WithArguments("-", "TestEnum", "long?")
+                        .WithLocation(48, 15),
+                    // (49,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long?'
+                    //         Print(x - h);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
+                        .WithArguments("-", "TestEnum", "long?")
+                        .WithLocation(49, 15),
+                    // (50,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum'
+                    //         Print(d - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                        .WithArguments("-", "long?", "TestEnum")
+                        .WithLocation(50, 15),
+                    // (51,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum'
+                    //         Print(h - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
+                        .WithArguments("-", "long?", "TestEnum")
+                        .WithLocation(51, 15),
+                    // (60,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long?'
+                    //         Print(x - d);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                        .WithArguments("-", "TestEnum?", "long?")
+                        .WithLocation(60, 15),
+                    // (61,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long?'
+                    //         Print(x - h);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - h")
+                        .WithArguments("-", "TestEnum?", "long?")
+                        .WithLocation(61, 15),
+                    // (62,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum?'
+                    //         Print(d - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                        .WithArguments("-", "long?", "TestEnum?")
+                        .WithLocation(62, 15),
+                    // (63,15): error CS0019: Operator '-' cannot be applied to operands of type 'long?' and 'TestEnum?'
+                    //         Print(h - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "h - x")
+                        .WithArguments("-", "long?", "TestEnum?")
+                        .WithLocation(63, 15),
+                    // (71,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
+                    //         Print(x - d);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                        .WithArguments("-", "TestEnum", "long")
+                        .WithLocation(71, 15),
+                    // (72,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
+                    //         Print(d - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                        .WithArguments("-", "long", "TestEnum")
+                        .WithLocation(72, 15),
+                    // (80,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
+                    //         Print(x - d);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - d")
+                        .WithArguments("-", "TestEnum?", "long")
+                        .WithLocation(80, 15),
+                    // (81,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
+                    //         Print(d - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d - x")
+                        .WithArguments("-", "long", "TestEnum?")
+                        .WithLocation(81, 15),
+                    // (88,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum' and 'long'
+                    //         Print(x - (long)1);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - (long)1")
+                        .WithArguments("-", "TestEnum", "long")
+                        .WithLocation(88, 15),
+                    // (89,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum'
+                    //         Print((long)1 - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "(long)1 - x")
+                        .WithArguments("-", "long", "TestEnum")
+                        .WithLocation(89, 15),
+                    // (96,15): error CS0019: Operator '-' cannot be applied to operands of type 'TestEnum?' and 'long'
+                    //         Print(x - (long)1);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "x - (long)1")
+                        .WithArguments("-", "TestEnum?", "long")
+                        .WithLocation(96, 15),
+                    // (97,15): error CS0019: Operator '-' cannot be applied to operands of type 'long' and 'TestEnum?'
+                    //         Print((long)1 - x);
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "(long)1 - x")
+                        .WithArguments("-", "long", "TestEnum?")
+                        .WithLocation(97, 15)
                 );
         }
 
         [Fact, WorkItem(1036392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1036392")]
         public void Bug1036392_14()
         {
-            string source = @"
+            string source =
+                @"
 enum TestEnum : long
 {
     A, B
@@ -10268,8 +11441,9 @@ class Program
         Print(0 - x);
     }
 }";
-            CompileAndVerify(source: source, expectedOutput:
-@"TestEnum
+            CompileAndVerify(
+                source: source,
+                expectedOutput: @"TestEnum
 TestEnum
 TestEnum
 TestEnum
@@ -10373,13 +11547,15 @@ System.Nullable`1[TestEnum]
 System.Nullable`1[System.Int64]
 System.Nullable`1[TestEnum]
 System.Nullable`1[System.Int64]
-");
+"
+            );
         }
 
         [Fact, WorkItem(1036392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1036392")]
         public void Bug1036392_15()
         {
-            string source = @"
+            string source =
+                @"
 enum TestEnumShort : short
 {}
 
@@ -10427,20 +11603,23 @@ class Program
         Print(null - x);
     }
 }";
-            CompileAndVerify(source: source, expectedOutput:
-@"System.Nullable`1[System.Int16]
+            CompileAndVerify(
+                source: source,
+                expectedOutput: @"System.Nullable`1[System.Int16]
 System.Nullable`1[System.Int16]
 System.Nullable`1[System.Int32]
 System.Nullable`1[System.Int32]
 System.Nullable`1[System.Int64]
 System.Nullable`1[System.Int64]
-");
+"
+            );
         }
 
         [Fact, WorkItem(1036392, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1036392")]
         public void Bug1036392_16()
         {
-            string source = @"
+            string source =
+                @"
 enum TestEnumShort : short
 {}
 
@@ -10488,20 +11667,23 @@ class Program
         Print(null - x);
     }
 }";
-            CompileAndVerify(source: source, expectedOutput:
-@"System.Nullable`1[System.Int16]
+            CompileAndVerify(
+                source: source,
+                expectedOutput: @"System.Nullable`1[System.Int16]
 System.Nullable`1[System.Int16]
 System.Nullable`1[System.Int32]
 System.Nullable`1[System.Int32]
 System.Nullable`1[System.Int64]
 System.Nullable`1[System.Int64]
-");
+"
+            );
         }
 
         [Fact, WorkItem(1090786, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1090786")]
         public void Bug1090786_01()
         {
-            string source = @"
+            string source =
+                @"
 class Test
 {
     static void Main()
@@ -10582,8 +11764,9 @@ class C3 : C1<int?>
     }
 }
 ";
-            var verifier = CompileAndVerify(source: source, expectedOutput:
-@"False
+            var verifier = CompileAndVerify(
+                source: source,
+                expectedOutput: @"False
 True
 True
 False
@@ -10593,10 +11776,12 @@ False
 True
 False
 False
-");
+"
+            );
 
-            verifier.VerifyIL("Test.Test0",
-@"
+            verifier.VerifyIL(
+                "Test.Test0",
+                @"
 {
    // Code size       85 (0x55)
   .maxstack  1
@@ -10628,10 +11813,12 @@ False
   IL_004e:  ldloc.1
   IL_004f:  call       ""void Test.Print<long>(long?)""
   IL_0054:  ret
-}");
+}"
+            );
 
-            verifier.VerifyIL("C1<T>.M1<S>",
-@"
+            verifier.VerifyIL(
+                "C1<T>.M1<S>",
+                @"
 {
   // Code size       22 (0x16)
   .maxstack  1
@@ -10641,10 +11828,12 @@ False
   IL_000b:  unbox.any  ""ulong?""
   IL_0010:  call       ""void Test.Print<ulong>(ulong?)""
   IL_0015:  ret
-}");
+}"
+            );
 
-            verifier.VerifyIL("C2.M1<S>",
-@"
+            verifier.VerifyIL(
+                "C2.M1<S>",
+                @"
 {
   // Code size       22 (0x16)
   .maxstack  1
@@ -10654,10 +11843,12 @@ False
   IL_000b:  unbox.any  ""ulong?""
   IL_0010:  call       ""void Test.Print<ulong>(ulong?)""
   IL_0015:  ret
-}");
+}"
+            );
 
-            verifier.VerifyIL("C3.M1<S>",
-@"
+            verifier.VerifyIL(
+                "C3.M1<S>",
+                @"
 {
   // Code size       22 (0x16)
   .maxstack  1
@@ -10667,28 +11858,38 @@ False
   IL_000b:  unbox.any  ""ulong?""
   IL_0010:  call       ""void Test.Print<ulong>(ulong?)""
   IL_0015:  ret
-}");
+}"
+            );
 
             verifier.VerifyDiagnostics(
-    // (15,15): warning CS0458: The result of the expression is always 'null' of type 'int?'
-    //         Print(((System.TypeCode)0) as int?);
-    Diagnostic(ErrorCode.WRN_AlwaysNull, "((System.TypeCode)0) as int?").WithArguments("int?").WithLocation(15, 15),
-    // (18,15): warning CS0458: The result of the expression is always 'null' of type 'long?'
-    //         Print(0 as long?);
-    Diagnostic(ErrorCode.WRN_AlwaysNull, "0 as long?").WithArguments("long?").WithLocation(18, 15),
-    // (19,15): warning CS0458: The result of the expression is always 'null' of type 'ulong?'
-    //         Print(0 as ulong?);
-    Diagnostic(ErrorCode.WRN_AlwaysNull, "0 as ulong?").WithArguments("ulong?").WithLocation(19, 15),
-    // (20,15): warning CS0458: The result of the expression is always 'null' of type 'long?'
-    //         Print(GetNullableInt() as long?);
-    Diagnostic(ErrorCode.WRN_AlwaysNull, "GetNullableInt() as long?").WithArguments("long?").WithLocation(20, 15)
-                );
+                // (15,15): warning CS0458: The result of the expression is always 'null' of type 'int?'
+                //         Print(((System.TypeCode)0) as int?);
+                Diagnostic(ErrorCode.WRN_AlwaysNull, "((System.TypeCode)0) as int?")
+                    .WithArguments("int?")
+                    .WithLocation(15, 15),
+                // (18,15): warning CS0458: The result of the expression is always 'null' of type 'long?'
+                //         Print(0 as long?);
+                Diagnostic(ErrorCode.WRN_AlwaysNull, "0 as long?")
+                    .WithArguments("long?")
+                    .WithLocation(18, 15),
+                // (19,15): warning CS0458: The result of the expression is always 'null' of type 'ulong?'
+                //         Print(0 as ulong?);
+                Diagnostic(ErrorCode.WRN_AlwaysNull, "0 as ulong?")
+                    .WithArguments("ulong?")
+                    .WithLocation(19, 15),
+                // (20,15): warning CS0458: The result of the expression is always 'null' of type 'long?'
+                //         Print(GetNullableInt() as long?);
+                Diagnostic(ErrorCode.WRN_AlwaysNull, "GetNullableInt() as long?")
+                    .WithArguments("long?")
+                    .WithLocation(20, 15)
+            );
         }
 
         [Fact, WorkItem(1090786, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1090786")]
         public void Bug1090786_02()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -10703,16 +11904,19 @@ class Program
     }
 }
 ";
-            CompileAndVerify(source: source, expectedOutput:
-@"False
+            CompileAndVerify(
+                source: source,
+                expectedOutput: @"False
 False
-");
+"
+            );
         }
 
         [Fact, WorkItem(1090786, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1090786")]
         public void Bug1090786_03()
         {
-            string source = @"
+            string source =
+                @"
 class Test
 {
     static void Main()
@@ -10743,13 +11947,16 @@ class C2
         Test.Print(((C1)null) as S);
     }
 }";
-            var verifier = CompileAndVerify(source: source, expectedOutput:
-@"False
+            var verifier = CompileAndVerify(
+                source: source,
+                expectedOutput: @"False
 False
-");
+"
+            );
 
-            verifier.VerifyIL("C2.M1<S>",
-@"
+            verifier.VerifyIL(
+                "C2.M1<S>",
+                @"
 {
   // Code size       31 (0x1f)
   .maxstack  1
@@ -10763,13 +11970,15 @@ False
   IL_0018:  ldloc.0
   IL_0019:  call       ""void Test.Print<S>(S)""
   IL_001e:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(2075, "https://github.com/dotnet/roslyn/issues/2075")]
         public void NegateALiteral()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 namespace roslynChanges
@@ -10783,16 +11992,19 @@ namespace roslynChanges
         }
     }
 }";
-            CompileAndVerify(source: source, expectedOutput:
-@"System.Int64
+            CompileAndVerify(
+                source: source,
+                expectedOutput: @"System.Int64
 System.Int32
-");
+"
+            );
         }
 
         [Fact, WorkItem(4132, "https://github.com/dotnet/roslyn/issues/4132")]
         public void Issue4132()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 namespace NullableMathRepro
@@ -10833,18 +12045,21 @@ namespace NullableMathRepro
         }
     }
 }";
-            CompileAndVerify(source: source, expectedOutput:
-@"'x' is 5
+            CompileAndVerify(
+                source: source,
+                expectedOutput: @"'x' is 5
 operator IntHolder(int i)
 operator int (IntHolder ih)
 operator IntHolder(int i)
-'y' is 5");
+'y' is 5"
+            );
         }
 
         [Fact, WorkItem(8190, "https://github.com/dotnet/roslyn/issues/8190")]
         public void Issue8190_1()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 namespace RoslynNullableStringRepro
@@ -10889,13 +12104,21 @@ namespace RoslynNullableStringRepro
     public static string operator +(NonNullableString lhs, NonNullableString rhs) => lhs.value + rhs.value;
   }
 }";
-            CompileAndVerify(source: source, expectedOutput: "abcdef" + Environment.NewLine + "abcdef" + Environment.NewLine + "abcdef");
+            CompileAndVerify(
+                source: source,
+                expectedOutput: "abcdef"
+                    + Environment.NewLine
+                    + "abcdef"
+                    + Environment.NewLine
+                    + "abcdef"
+            );
         }
 
         [Fact, WorkItem(8190, "https://github.com/dotnet/roslyn/issues/8190")]
         public void Issue8190_2()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 namespace RoslynNullableIntRepro
@@ -10940,12 +12163,16 @@ namespace RoslynNullableIntRepro
     public static int? operator +(NonNullableInt lhs, NonNullableInt rhs) { return lhs.value + rhs.value; }
   }
 }";
-            CompileAndVerify(source: source, expectedOutput: "3" + Environment.NewLine + "3" + Environment.NewLine);
+            CompileAndVerify(
+                source: source,
+                expectedOutput: "3" + Environment.NewLine + "3" + Environment.NewLine
+            );
         }
         [Fact, WorkItem(4027, "https://github.com/dotnet/roslyn/issues/4027")]
         public void NotSignExtendedOperand()
         {
-            string source = @"
+            string source =
+                @"
 class MainClass
 {
     public static void Main ()
@@ -10967,7 +12194,8 @@ class MainClass
         [WorkItem(12345, "https://github.com/dotnet/roslyn/issues/12345")]
         public void Bug12345()
         {
-            string source = @"
+            string source =
+                @"
 class EnumRepro
 {
     public static void Main()
@@ -11010,7 +12238,7 @@ public enum FlagsEnum
         public void IsWarningWithNonNullConstant()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main(string[] args)
     {
@@ -11021,9 +12249,11 @@ public enum FlagsEnum
 ";
             var compilation = CreateCompilation(source)
                 .VerifyDiagnostics(
-                // (6,17): warning CS0183: The given expression is always of the provided ('string') type
-                //         var x = d is string;
-                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "d is string").WithArguments("string").WithLocation(6, 17)
+                    // (6,17): warning CS0183: The given expression is always of the provided ('string') type
+                    //         var x = d is string;
+                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "d is string")
+                        .WithArguments("string")
+                        .WithLocation(6, 17)
                 );
         }
 
@@ -11031,7 +12261,7 @@ public enum FlagsEnum
         public void IsWarningWithTupleConversion()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     public static void Main(string[] args)
@@ -11042,17 +12272,26 @@ class Program
         if (t is ValueTuple<int, int>) { }    // goldilocks
     }
 }";
-            var compilation = CreateCompilationWithMscorlib40(source, references: new[] { ValueTupleRef, SystemRuntimeFacadeRef })
+            var compilation = CreateCompilationWithMscorlib40(
+                    source,
+                    references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
+                )
                 .VerifyDiagnostics(
-                // (7,13): warning CS0184: The given expression is never of the provided ('(long, int)') type
-                //         if (t is ValueTuple<long, int>) { }   // too big
-                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "t is ValueTuple<long, int>").WithArguments("(long, int)").WithLocation(7, 13),
-                // (8,13): warning CS0184: The given expression is never of the provided ('(short, int)') type
-                //         if (t is ValueTuple<short, int>) { }  // too small
-                Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "t is ValueTuple<short, int>").WithArguments("(short, int)").WithLocation(8, 13),
-                // (9,13): warning CS0183: The given expression is always of the provided ('(int, int)') type
-                //         if (t is ValueTuple<int, int>) { }    // goldilocks
-                Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "t is ValueTuple<int, int>").WithArguments("(int, int)").WithLocation(9, 13)
+                    // (7,13): warning CS0184: The given expression is never of the provided ('(long, int)') type
+                    //         if (t is ValueTuple<long, int>) { }   // too big
+                    Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "t is ValueTuple<long, int>")
+                        .WithArguments("(long, int)")
+                        .WithLocation(7, 13),
+                    // (8,13): warning CS0184: The given expression is never of the provided ('(short, int)') type
+                    //         if (t is ValueTuple<short, int>) { }  // too small
+                    Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "t is ValueTuple<short, int>")
+                        .WithArguments("(short, int)")
+                        .WithLocation(8, 13),
+                    // (9,13): warning CS0183: The given expression is always of the provided ('(int, int)') type
+                    //         if (t is ValueTuple<int, int>) { }    // goldilocks
+                    Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "t is ValueTuple<int, int>")
+                        .WithArguments("(int, int)")
+                        .WithLocation(9, 13)
                 );
         }
 
@@ -11060,7 +12299,7 @@ class Program
         public void TypeOfErrorUnaryOperator()
         {
             var source =
-@"
+                @"
 public class C {
     public void M2() {
         var local = !invalidExpression;
@@ -11072,11 +12311,16 @@ public class C {
             compilation.VerifyDiagnostics(
                 // (4,22): error CS0103: The name 'invalidExpression' does not exist in the current context
                 //         var local = !invalidExpression;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "invalidExpression").WithArguments("invalidExpression").WithLocation(4, 22)
-                );
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "invalidExpression")
+                    .WithArguments("invalidExpression")
+                    .WithLocation(4, 22)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
-            var negNode = tree.GetRoot().DescendantNodes().OfType<PrefixUnaryExpressionSyntax>().Single();
+            var negNode = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<PrefixUnaryExpressionSyntax>()
+                .Single();
             Assert.Equal("!invalidExpression", negNode.ToString());
 
             var type = (ITypeSymbol)compilation.GetSemanticModel(tree).GetTypeInfo(negNode).Type;
@@ -11087,7 +12331,11 @@ public class C {
         // Attempting to call `ConstantValue` on every constituent string component realizes every string, effectively
         // replicating the original O(n^2) bug that this test is demonstrating is fixed.
         [ConditionalFact(typeof(NoIOperationValidation))]
-        [WorkItem(43019, "https://github.com/dotnet/roslyn/issues/43019"), WorkItem(529600, "DevDiv"), WorkItem(7398, "https://github.com/dotnet/roslyn/issues/7398")]
+        [
+            WorkItem(43019, "https://github.com/dotnet/roslyn/issues/43019"),
+            WorkItem(529600, "DevDiv"),
+            WorkItem(7398, "https://github.com/dotnet/roslyn/issues/7398")
+        ]
         public void Bug529600()
         {
             // History of this bug:  When constant folding a long sequence of string concatentations, there is
@@ -11103,7 +12351,8 @@ public class C {
             // string concatenations, so the underlying problem had not been addressed.  Now we have revised the
             // implementation of constant folding so that it requires O(n) memory. As a consequence this test now
             // runs very quickly and does not consume gobs of memory.
-            string source = $@"
+            string source =
+                $@"
 class M
 {{
     static void Main()
@@ -11148,7 +12397,7 @@ class M
                 // (28,68): error CS8095: Length of String constant resulting from concatenation exceeds System.Int32.MaxValue.  Try splitting the string into multiple constants.
                 //                       C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 + C1 +
                 Diagnostic(ErrorCode.ERR_ConstantStringTooLong, "C1").WithLocation(28, 68)
-                );
+            );
 
             // If we realize every string constant value when each IOperation is created, then attempting to enumerate all
             // IOperations will consume O(n^2) memory. This demonstrates that these values are not eagerly created, and the
@@ -11157,7 +12406,9 @@ class M
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
 
-            var fieldInitializerOperations = tree.GetRoot().DescendantNodes().OfType<VariableDeclaratorSyntax>()
+            var fieldInitializerOperations = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<VariableDeclaratorSyntax>()
                 .Select(v => v.Initializer.Value)
                 .Select(i => model.GetOperation(i));
 
@@ -11185,7 +12436,7 @@ class M
         public void EnsureOperandsConvertedInErrorExpression_01()
         {
             string source =
-@"class C
+                @"class C
 {
     static unsafe void M(dynamic d, int* p)
     {
@@ -11193,10 +12444,13 @@ class M
     }
 }
 ";
-            CreateCompilation(source, options: TestOptions.ReleaseDll.WithAllowUnsafe(true)).VerifyDiagnostics(
-                // (5,9): error CS0019: Operator '+=' cannot be applied to operands of type 'dynamic' and 'int*'
-                //         d += p;
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "d += p").WithArguments("+=", "dynamic", "int*").WithLocation(5, 9)
+            CreateCompilation(source, options: TestOptions.ReleaseDll.WithAllowUnsafe(true))
+                .VerifyDiagnostics(
+                    // (5,9): error CS0019: Operator '+=' cannot be applied to operands of type 'dynamic' and 'int*'
+                    //         d += p;
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "d += p")
+                        .WithArguments("+=", "dynamic", "int*")
+                        .WithLocation(5, 9)
                 );
         }
     }

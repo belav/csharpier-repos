@@ -36,7 +36,8 @@ namespace System.Runtime.CompilerServices
         /// <exception cref="System.ArgumentNullException">The <paramref name="stateMachine"/> argument was null (Nothing in Visual Basic).</exception>
         [DebuggerStepThrough]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Start<TStateMachine>(ref TStateMachine stateMachine) where TStateMachine : IAsyncStateMachine =>
+        public void Start<TStateMachine>(ref TStateMachine stateMachine)
+            where TStateMachine : IAsyncStateMachine =>
             AsyncMethodBuilderCore.Start(ref stateMachine);
 
         /// <summary>Associates the builder with the state machine it represents.</summary>
@@ -54,9 +55,10 @@ namespace System.Runtime.CompilerServices
         /// <param name="awaiter">The awaiter.</param>
         /// <param name="stateMachine">The state machine.</param>
         public void AwaitOnCompleted<TAwaiter, TStateMachine>(
-            ref TAwaiter awaiter, ref TStateMachine stateMachine)
-            where TAwaiter : INotifyCompletion
-            where TStateMachine : IAsyncStateMachine =>
+            ref TAwaiter awaiter,
+            ref TStateMachine stateMachine
+        ) where TAwaiter : INotifyCompletion
+          where TStateMachine : IAsyncStateMachine =>
             _builder.AwaitOnCompleted(ref awaiter, ref stateMachine);
 
         /// <summary>
@@ -67,9 +69,10 @@ namespace System.Runtime.CompilerServices
         /// <param name="awaiter">The awaiter.</param>
         /// <param name="stateMachine">The state machine.</param>
         public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
-            ref TAwaiter awaiter, ref TStateMachine stateMachine)
-            where TAwaiter : ICriticalNotifyCompletion
-            where TStateMachine : IAsyncStateMachine =>
+            ref TAwaiter awaiter,
+            ref TStateMachine stateMachine
+        ) where TAwaiter : ICriticalNotifyCompletion
+          where TStateMachine : IAsyncStateMachine =>
             _builder.AwaitUnsafeOnCompleted(ref awaiter, ref stateMachine);
 
         /// <summary>Completes the method builder successfully.</summary>
@@ -112,8 +115,12 @@ namespace System.Runtime.CompilerServices
                 // and decrement its outstanding operation count.
                 try
                 {
-                    System.Threading.Tasks.Task.ThrowAsync(exception, targetContext: _synchronizationContext);
+                    System.Threading.Tasks.Task.ThrowAsync(
+                        exception,
+                        targetContext: _synchronizationContext
+                    );
                 }
+
                 finally
                 {
                     NotifySynchronizationContextOfCompletion();
@@ -134,7 +141,10 @@ namespace System.Runtime.CompilerServices
         /// <summary>Notifies the current synchronization context that the operation completed.</summary>
         private void NotifySynchronizationContextOfCompletion()
         {
-            Debug.Assert(_synchronizationContext != null, "Must only be used with a non-null context.");
+            Debug.Assert(
+                _synchronizationContext != null,
+                "Must only be used with a non-null context."
+            );
             try
             {
                 _synchronizationContext.OperationCompleted();

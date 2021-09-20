@@ -35,8 +35,8 @@ namespace Microsoft.AspNetCore.Internal
             HttpContext context,
             RequestHeaders requestHeaders,
             long length,
-            ILogger logger)
-        {
+            ILogger logger
+        ) {
             var rawRangeHeader = context.Request.Headers[HeaderNames.Range];
             if (StringValues.IsNullOrEmpty(rawRangeHeader))
             {
@@ -51,7 +51,7 @@ namespace Microsoft.AspNetCore.Internal
 
                 // The spec allows for multiple ranges but we choose not to support them because the client may request
                 // very strange ranges (e.g. each byte separately, overlapping ranges, etc.) that could negatively
-                // impact the server. Ignore the header and serve the response normally.               
+                // impact the server. Ignore the header and serve the response normally.
                 return (false, null);
             }
 
@@ -91,8 +91,10 @@ namespace Microsoft.AspNetCore.Internal
         }
 
         // Internal for testing
-        internal static RangeItemHeaderValue? NormalizeRange(RangeItemHeaderValue range, long length)
-        {
+        internal static RangeItemHeaderValue? NormalizeRange(
+            RangeItemHeaderValue range,
+            long length
+        ) {
             var start = range.From;
             var end = range.To;
 

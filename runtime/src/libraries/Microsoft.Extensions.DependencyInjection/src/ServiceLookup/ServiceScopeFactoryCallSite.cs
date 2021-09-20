@@ -7,9 +7,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 {
     internal sealed class ServiceScopeFactoryCallSite : ServiceCallSite
     {
-        public ServiceScopeFactoryCallSite() : base(ResultCache.None)
-        {
-        }
+        public ServiceScopeFactoryCallSite() : base(ResultCache.None) { }
 
         public override Type ServiceType { get; } = typeof(IServiceScopeFactory);
         public override Type ImplementationType { get; } = typeof(ServiceProviderEngine);

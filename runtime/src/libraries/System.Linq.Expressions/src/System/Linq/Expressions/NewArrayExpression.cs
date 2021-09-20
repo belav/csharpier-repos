@@ -21,8 +21,11 @@ namespace System.Linq.Expressions
             Type = type;
         }
 
-        internal static NewArrayExpression Make(ExpressionType nodeType, Type type, ReadOnlyCollection<Expression> expressions)
-        {
+        internal static NewArrayExpression Make(
+            ExpressionType nodeType,
+            Type type,
+            ReadOnlyCollection<Expression> expressions
+        ) {
             Debug.Assert(type.IsArray);
             if (nodeType == ExpressionType.NewArrayInit)
             {
@@ -71,18 +74,17 @@ namespace System.Linq.Expressions
             }
 
             return NodeType == ExpressionType.NewArrayInit
-                ? NewArrayInit(Type.GetElementType()!, expressions)
-                : NewArrayBounds(Type.GetElementType()!, expressions);
+              ? NewArrayInit(Type.GetElementType()!, expressions)
+              : NewArrayBounds(Type.GetElementType()!, expressions);
         }
     }
 
     internal sealed class NewArrayInitExpression : NewArrayExpression
     {
-        internal NewArrayInitExpression(Type type, ReadOnlyCollection<Expression> expressions)
-            : base(type, expressions)
-        {
-        }
-
+        internal NewArrayInitExpression(
+            Type type,
+            ReadOnlyCollection<Expression> expressions
+        ) : base(type, expressions) { }
 
         /// <summary>
         /// Returns the node type of this <see cref="Expression"/>. (Inherited from <see cref="Expression"/>.)
@@ -93,10 +95,10 @@ namespace System.Linq.Expressions
 
     internal sealed class NewArrayBoundsExpression : NewArrayExpression
     {
-        internal NewArrayBoundsExpression(Type type, ReadOnlyCollection<Expression> expressions)
-            : base(type, expressions)
-        {
-        }
+        internal NewArrayBoundsExpression(
+            Type type,
+            ReadOnlyCollection<Expression> expressions
+        ) : base(type, expressions) { }
 
         /// <summary>
         /// Returns the node type of this <see cref="Expression"/>. (Inherited from <see cref="Expression"/>.)
@@ -126,8 +128,10 @@ namespace System.Linq.Expressions
         /// <param name="type">A Type that represents the element type of the array.</param>
         /// <param name="initializers">The expressions used to create the array elements.</param>
         /// <returns>A <see cref="NewArrayExpression"/> that has the <see cref="NodeType"/> property equal to <see cref="ExpressionType.NewArrayInit"/> and the <see cref="NewArrayExpression.Expressions"/> property set to the specified value.</returns>
-        public static NewArrayExpression NewArrayInit(Type type, IEnumerable<Expression> initializers)
-        {
+        public static NewArrayExpression NewArrayInit(
+            Type type,
+            IEnumerable<Expression> initializers
+        ) {
             ContractUtils.RequiresNotNull(type, nameof(type));
             ContractUtils.RequiresNotNull(initializers, nameof(initializers));
             if (type == typeof(void))
@@ -169,7 +173,11 @@ namespace System.Linq.Expressions
                 initializerList = new TrueReadOnlyCollection<Expression>(newList);
             }
 
-            return NewArrayExpression.Make(ExpressionType.NewArrayInit, type.MakeArrayType(), initializerList);
+            return NewArrayExpression.Make(
+                ExpressionType.NewArrayInit,
+                type.MakeArrayType(),
+                initializerList
+            );
         }
 
         #endregion
@@ -208,7 +216,8 @@ namespace System.Linq.Expressions
             ReadOnlyCollection<Expression> boundsList = bounds.ToReadOnly();
 
             int dimensions = boundsList.Count;
-            if (dimensions <= 0) throw Error.BoundsCannotBeLessThanOne(nameof(bounds));
+            if (dimensions <= 0)
+                throw Error.BoundsCannotBeLessThanOne(nameof(bounds));
 
             for (int i = 0; i < dimensions; i++)
             {
@@ -234,7 +243,6 @@ namespace System.Linq.Expressions
 
             return NewArrayExpression.Make(ExpressionType.NewArrayBounds, arrayType, boundsList);
         }
-
         #endregion
     }
 }

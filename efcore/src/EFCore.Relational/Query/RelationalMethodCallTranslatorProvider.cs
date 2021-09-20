@@ -36,8 +36,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     Creates a new instance of the <see cref="RelationalMethodCallTranslatorProvider" /> class.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this class. </param>
-        public RelationalMethodCallTranslatorProvider(RelationalMethodCallTranslatorProviderDependencies dependencies)
-        {
+        public RelationalMethodCallTranslatorProvider(
+            RelationalMethodCallTranslatorProviderDependencies dependencies
+        ) {
             Check.NotNull(dependencies, nameof(dependencies));
 
             _plugins.AddRange(dependencies.Plugins.SelectMany(p => p.Translators));
@@ -57,7 +58,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     new ComparisonTranslator(sqlExpressionFactory),
                     new ByteArraySequenceEqualTranslator(sqlExpressionFactory),
                     new RandomTranslator(sqlExpressionFactory)
-                });
+                }
+            );
             _sqlExpressionFactory = sqlExpressionFactory;
         }
 
@@ -67,8 +69,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        ) {
             Check.NotNull(model, nameof(model));
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
@@ -80,25 +82,31 @@ namespace Microsoft.EntityFrameworkCore.Query
                 if (dbFunction.Translation != null)
                 {
                     return dbFunction.Translation.Invoke(
-                        arguments.Select(e => _sqlExpressionFactory.ApplyDefaultTypeMapping(e)).ToList());
+                        arguments.Select(e => _sqlExpressionFactory.ApplyDefaultTypeMapping(e))
+                            .ToList()
+                    );
                 }
 
-                var argumentsPropagateNullability = dbFunction.Parameters.Select(p => p.PropagatesNullability);
+                var argumentsPropagateNullability = dbFunction.Parameters.Select(
+                    p => p.PropagatesNullability
+                );
 
                 return dbFunction.IsBuiltIn
-                    ? _sqlExpressionFactory.Function(
+                  ? _sqlExpressionFactory.Function(
                         dbFunction.Name,
                         arguments,
                         dbFunction.IsNullable,
                         argumentsPropagateNullability,
-                        method.ReturnType.UnwrapNullableType())
-                    : _sqlExpressionFactory.Function(
+                        method.ReturnType.UnwrapNullableType()
+                    )
+                  : _sqlExpressionFactory.Function(
                         dbFunction.Schema,
                         dbFunction.Name,
                         arguments,
                         dbFunction.IsNullable,
                         argumentsPropagateNullability,
-                        method.ReturnType.UnwrapNullableType());
+                        method.ReturnType.UnwrapNullableType()
+                    );
             }
 
             return _plugins.Concat(_translators)

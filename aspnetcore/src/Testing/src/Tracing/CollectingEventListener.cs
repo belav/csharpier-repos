@@ -8,19 +8,23 @@ namespace Microsoft.AspNetCore.Testing.Tracing
 {
     public class CollectingEventListener : EventListener
     {
-        private ConcurrentQueue<EventWrittenEventArgs> _events = new ConcurrentQueue<EventWrittenEventArgs>();
+        private ConcurrentQueue<EventWrittenEventArgs> _events =
+            new ConcurrentQueue<EventWrittenEventArgs>();
 
         private object _lock = new object();
 
-        private Dictionary<string, EventSource> _existingSources = new Dictionary<string, EventSource>(StringComparer.OrdinalIgnoreCase);
+        private Dictionary<string, EventSource> _existingSources = new Dictionary<
+            string,
+            EventSource
+        >(StringComparer.OrdinalIgnoreCase);
         private HashSet<string> _requestedEventSources = new HashSet<string>();
 
         public void CollectFrom(string eventSourceName)
         {
-            lock(_lock)
+            lock (_lock)
             {
                 // Check if it's already been created
-                if(_existingSources.TryGetValue(eventSourceName, out var existingSource))
+                if (_existingSources.TryGetValue(eventSourceName, out var existingSource))
                 {
                     // It has, so just enable it now
                     CollectFrom(existingSource);
@@ -33,7 +37,8 @@ namespace Microsoft.AspNetCore.Testing.Tracing
             }
         }
 
-        public void CollectFrom(EventSource eventSource) => EnableEvents(eventSource, EventLevel.Verbose, EventKeywords.All);
+        public void CollectFrom(EventSource eventSource) =>
+            EnableEvents(eventSource, EventLevel.Verbose, EventKeywords.All);
 
         public IReadOnlyList<EventWrittenEventArgs> GetEventsWritten() => _events.ToArray();
 

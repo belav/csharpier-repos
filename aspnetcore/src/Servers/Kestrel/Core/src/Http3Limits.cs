@@ -27,7 +27,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, CoreStrings.GreaterThanZeroRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        CoreStrings.GreaterThanZeroRequired
+                    );
                 }
 
                 _headerTableSize = value;
@@ -47,7 +51,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, CoreStrings.GreaterThanZeroRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        CoreStrings.GreaterThanZeroRequired
+                    );
                 }
 
                 _maxRequestHeaderFieldSize = value;

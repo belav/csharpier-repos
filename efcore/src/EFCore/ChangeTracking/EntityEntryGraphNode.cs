@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Utilities;
 
-
 namespace Microsoft.EntityFrameworkCore.ChangeTracking
 {
     /// <summary>
@@ -35,8 +34,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public EntityEntryGraphNode(
             InternalEntityEntry entry,
             InternalEntityEntry? sourceEntry,
-            INavigationBase? inboundNavigation)
-        {
+            INavigationBase? inboundNavigation
+        ) {
             Check.NotNull(entry, nameof(entry));
 
             _entry = entry;
@@ -53,8 +52,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///         See <see cref="M:ChangeTracker.TrackGraph" /> for information on how graph nodes are used.
         ///     </para>
         /// </summary>
-        public virtual EntityEntry? SourceEntry
-            => _sourceEntry == null ? null : new EntityEntry(_sourceEntry);
+        public virtual EntityEntry? SourceEntry =>
+            _sourceEntry == null ? null : new EntityEntry(_sourceEntry);
 
         /// <summary>
         ///     <para>
@@ -74,8 +73,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///         See <see cref="M:ChangeTracker.TrackGraph" /> for information on how graph nodes are used.
         ///     </para>
         /// </summary>
-        public virtual EntityEntry Entry
-            => new(_entry);
+        public virtual EntityEntry Entry => new(_entry);
 
         /// <summary>
         ///     <para>
@@ -87,8 +85,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     </para>
         /// </summary>
         [EntityFrameworkInternal]
-        InternalEntityEntry IInfrastructure<InternalEntityEntry>.Instance
-            => _entry;
+        InternalEntityEntry IInfrastructure<InternalEntityEntry>.Instance => _entry;
 
         /// <summary>
         ///     Creates a new node for the entity that is being traversed next in the graph.
@@ -102,8 +99,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         public virtual EntityEntryGraphNode CreateNode(
             EntityEntryGraphNode currentNode,
             InternalEntityEntry internalEntityEntry,
-            INavigationBase reachedVia)
-        {
+            INavigationBase reachedVia
+        ) {
             Check.NotNull(currentNode, nameof(currentNode));
             Check.NotNull(internalEntityEntry, nameof(internalEntityEntry));
             Check.NotNull(reachedVia, nameof(reachedVia));
@@ -111,7 +108,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             return new EntityEntryGraphNode(
                 internalEntityEntry,
                 currentNode.Entry.GetInfrastructure(),
-                reachedVia);
+                reachedVia
+            );
         }
     }
 }

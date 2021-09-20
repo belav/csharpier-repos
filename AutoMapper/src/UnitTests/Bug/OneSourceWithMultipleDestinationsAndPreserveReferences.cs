@@ -20,14 +20,16 @@ namespace AutoMapper.UnitTests.Bug
             public AddressModel Address { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(mapConfig =>
-        {
-            mapConfig.CreateMap<Client, ClientModel>()
-                .ForMember(m => m.Address, opt => opt.MapFrom(x => x))
-                .PreserveReferences();
-            mapConfig.CreateMap<Client, AddressModel>()
-                .PreserveReferences();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                mapConfig =>
+                {
+                    mapConfig.CreateMap<Client, ClientModel>()
+                        .ForMember(m => m.Address, opt => opt.MapFrom(x => x))
+                        .PreserveReferences();
+                    mapConfig.CreateMap<Client, AddressModel>().PreserveReferences();
+                }
+            );
 
         protected override void Because_of()
         {

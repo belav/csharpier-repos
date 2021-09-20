@@ -28,8 +28,9 @@ namespace System.Net.Http.Functional.Tests
 
         public static IEnumerable<object[]> RemoteServersAndRedirectStatusCodes()
         {
-            foreach (Configuration.Http.RemoteServer remoteServer in Configuration.Http.RemoteServers)
-            {
+            foreach (
+                Configuration.Http.RemoteServer remoteServer in Configuration.Http.RemoteServers
+            ) {
                 yield return new object[] { remoteServer, 300 };
                 yield return new object[] { remoteServer, 301 };
                 yield return new object[] { remoteServer, 302 };
@@ -46,21 +47,48 @@ namespace System.Net.Http.Functional.Tests
                 yield return new object[] { statusCode, "GET", "GET" };
                 yield return new object[] { statusCode, "HEAD", "HEAD" };
 
-                yield return new object[] { statusCode, "POST", statusCode <= 303 ? "GET" : "POST" };
+                yield return new object[]
+                {
+                    statusCode,
+                    "POST",
+                    statusCode <= 303 ? "GET" : "POST"
+                };
 
-                yield return new object[] { statusCode, "DELETE", statusCode == 303 ? "GET" : "DELETE" };
-                yield return new object[] { statusCode, "OPTIONS", statusCode == 303 ? "GET" : "OPTIONS" };
-                yield return new object[] { statusCode, "PATCH", statusCode == 303 ? "GET" : "PATCH" };
+                yield return new object[]
+                {
+                    statusCode,
+                    "DELETE",
+                    statusCode == 303 ? "GET" : "DELETE"
+                };
+                yield return new object[]
+                {
+                    statusCode,
+                    "OPTIONS",
+                    statusCode == 303 ? "GET" : "OPTIONS"
+                };
+                yield return new object[]
+                {
+                    statusCode,
+                    "PATCH",
+                    statusCode == 303 ? "GET" : "PATCH"
+                };
                 yield return new object[] { statusCode, "PUT", statusCode == 303 ? "GET" : "PUT" };
-                yield return new object[] { statusCode, "MYCUSTOMMETHOD", statusCode == 303 ? "GET" : "MYCUSTOMMETHOD" };
+                yield return new object[]
+                {
+                    statusCode,
+                    "MYCUSTOMMETHOD",
+                    statusCode == 303 ? "GET" : "MYCUSTOMMETHOD"
+                };
             }
         }
         public HttpClientHandlerTest_AutoRedirect(ITestOutputHelper output) : base(output) { }
 
         [OuterLoop("Uses external server")]
         [Theory, MemberData(nameof(RemoteServersAndRedirectStatusCodes))]
-        public async Task GetAsync_AllowAutoRedirectFalse_RedirectFromHttpToHttp_StatusCodeRedirect(Configuration.Http.RemoteServer remoteServer, int statusCode)
-        {
+        public async Task GetAsync_AllowAutoRedirectFalse_RedirectFromHttpToHttp_StatusCodeRedirect(
+            Configuration.Http.RemoteServer remoteServer,
+            int statusCode
+        ) {
             if (statusCode == 308 && (IsWinHttpHandler && PlatformDetection.WindowsVersion < 10))
             {
                 // 308 redirects are not supported on old versions of WinHttp, or on .NET Framework.
@@ -74,7 +102,8 @@ namespace System.Net.Http.Functional.Tests
                 Uri uri = remoteServer.RedirectUriForDestinationUri(
                     statusCode: statusCode,
                     destinationUri: remoteServer.EchoUri,
-                    hops: 1);
+                    hops: 1
+                );
                 _output.WriteLine("Uri: {0}", uri);
                 using (HttpResponseMessage response = await client.GetAsync(uri))
                 {
@@ -86,8 +115,10 @@ namespace System.Net.Http.Functional.Tests
 
         [Theory, MemberData(nameof(RedirectStatusCodesOldMethodsNewMethods))]
         public async Task AllowAutoRedirect_True_ValidateNewMethodUsedOnRedirection(
-            int statusCode, string oldMethod, string newMethod)
-        {
+            int statusCode,
+            string oldMethod,
+            string newMethod
+        ) {
             if (statusCode == 308 && (IsWinHttpHandler && PlatformDetection.WindowsVersion < 10))
             {
                 // 308 redirects are not supported on old versions of WinHttp, or on .NET Framework.
@@ -97,36 +128,57 @@ namespace System.Net.Http.Functional.Tests
             HttpClientHandler handler = CreateHttpClientHandler();
             using (HttpClient client = CreateHttpClient(handler))
             {
-                await LoopbackServer.CreateServerAsync(async (origServer, origUrl) =>
-                {
-                    var request = new HttpRequestMessage(new HttpMethod(oldMethod), origUrl) { Version = UseVersion };
-
-                    Task<HttpResponseMessage> getResponseTask = client.SendAsync(TestAsync, request);
-
-                    await LoopbackServer.CreateServerAsync(async (redirServer, redirUrl) =>
+                await LoopbackServer.CreateServerAsync(
+                    async (origServer, origUrl) =>
                     {
-                        // Original URL will redirect to a different URL
-                        Task<List<string>> serverTask = origServer.AcceptConnectionSendResponseAndCloseAsync((HttpStatusCode)statusCode, $"Location: {redirUrl}\r\n");
-
-                        await Task.WhenAny(getResponseTask, serverTask);
-                        Assert.False(getResponseTask.IsCompleted, $"{getResponseTask.Status}: {getResponseTask.Exception}");
-                        await serverTask;
-
-                        // Redirected URL answers with success
-                        serverTask = redirServer.AcceptConnectionSendResponseAndCloseAsync();
-                        await TestHelper.WhenAllCompletedOrAnyFailed(getResponseTask, serverTask);
-
-                        List<string> receivedRequest = await serverTask;
-
-                        string[] statusLineParts = receivedRequest[0].Split(' ');
-
-                        using (HttpResponseMessage response = await getResponseTask)
+                        var request = new HttpRequestMessage(new HttpMethod(oldMethod), origUrl)
                         {
-                            Assert.Equal(200, (int)response.StatusCode);
-                            Assert.Equal(newMethod, statusLineParts[0]);
-                        }
-                    });
-                });
+                            Version = UseVersion
+                        };
+
+                        Task<HttpResponseMessage> getResponseTask = client.SendAsync(
+                            TestAsync,
+                            request
+                        );
+
+                        await LoopbackServer.CreateServerAsync(
+                            async (redirServer, redirUrl) =>
+                            {
+                                // Original URL will redirect to a different URL
+                                Task<List<string>> serverTask =
+                                    origServer.AcceptConnectionSendResponseAndCloseAsync(
+                                        (HttpStatusCode)statusCode,
+                                        $"Location: {redirUrl}\r\n"
+                                    );
+
+                                await Task.WhenAny(getResponseTask, serverTask);
+                                Assert.False(
+                                    getResponseTask.IsCompleted,
+                                    $"{getResponseTask.Status}: {getResponseTask.Exception}"
+                                );
+                                await serverTask;
+
+                                // Redirected URL answers with success
+                                serverTask =
+                                    redirServer.AcceptConnectionSendResponseAndCloseAsync();
+                                await TestHelper.WhenAllCompletedOrAnyFailed(
+                                    getResponseTask,
+                                    serverTask
+                                );
+
+                                List<string> receivedRequest = await serverTask;
+
+                                string[] statusLineParts = receivedRequest[0].Split(' ');
+
+                                using (HttpResponseMessage response = await getResponseTask)
+                                {
+                                    Assert.Equal(200, (int)response.StatusCode);
+                                    Assert.Equal(newMethod, statusLineParts[0]);
+                                }
+                            }
+                        );
+                    }
+                );
             }
         }
 
@@ -140,62 +192,96 @@ namespace System.Net.Http.Functional.Tests
             HttpClientHandler handler = CreateHttpClientHandler();
             using (HttpClient client = CreateHttpClient(handler))
             {
-                await LoopbackServer.CreateServerAsync(async (origServer, origUrl) =>
-                {
-                    var request = new HttpRequestMessage(HttpMethod.Post, origUrl) { Version = UseVersion };
-                    request.Content = new StringContent(ExpectedContent);
-                    request.Headers.TransferEncodingChunked = true;
-
-                    Task<HttpResponseMessage> getResponseTask = client.SendAsync(TestAsync, request);
-
-                    await LoopbackServer.CreateServerAsync(async (redirServer, redirUrl) =>
+                await LoopbackServer.CreateServerAsync(
+                    async (origServer, origUrl) =>
                     {
-                        // Original URL will redirect to a different URL
-                        Task serverTask = origServer.AcceptConnectionAsync(async connection =>
+                        var request = new HttpRequestMessage(HttpMethod.Post, origUrl)
                         {
-                            // Send Connection: close so the client will close connection after request is sent,
-                            // meaning we can just read to the end to get the content
-                            await connection.ReadRequestHeaderAndSendResponseAsync((HttpStatusCode)statusCode, $"Location: {redirUrl}\r\nConnection: close\r\n");
-                            connection.Socket.Shutdown(SocketShutdown.Send);
-                            await connection.ReadToEndAsync();
-                        });
+                            Version = UseVersion
+                        };
+                        request.Content = new StringContent(ExpectedContent);
+                        request.Headers.TransferEncodingChunked = true;
 
-                        await Task.WhenAny(getResponseTask, serverTask);
-                        Assert.False(getResponseTask.IsCompleted, $"{getResponseTask.Status}: {getResponseTask.Exception}");
-                        await serverTask;
+                        Task<HttpResponseMessage> getResponseTask = client.SendAsync(
+                            TestAsync,
+                            request
+                        );
 
-                        // Redirected URL answers with success
-                        List<string> receivedRequest = null;
-                        string receivedContent = null;
-                        Task serverTask2 = redirServer.AcceptConnectionAsync(async connection =>
-                        {
-                            // Send Connection: close so the client will close connection after request is sent,
-                            // meaning we can just read to the end to get the content
-                            receivedRequest = await connection.ReadRequestHeaderAndSendResponseAsync(additionalHeaders: "Connection: close\r\n");
-                            connection.Socket.Shutdown(SocketShutdown.Send);
-                            receivedContent = await connection.ReadToEndAsync();
-                        });
+                        await LoopbackServer.CreateServerAsync(
+                            async (redirServer, redirUrl) =>
+                            {
+                                // Original URL will redirect to a different URL
+                                Task serverTask = origServer.AcceptConnectionAsync(
+                                    async connection =>
+                                    {
+                                        // Send Connection: close so the client will close connection after request is sent,
+                                        // meaning we can just read to the end to get the content
+                                        await connection.ReadRequestHeaderAndSendResponseAsync(
+                                            (HttpStatusCode)statusCode,
+                                            $"Location: {redirUrl}\r\nConnection: close\r\n"
+                                        );
+                                        connection.Socket.Shutdown(SocketShutdown.Send);
+                                        await connection.ReadToEndAsync();
+                                    }
+                                );
 
-                        await TestHelper.WhenAllCompletedOrAnyFailed(getResponseTask, serverTask2);
+                                await Task.WhenAny(getResponseTask, serverTask);
+                                Assert.False(
+                                    getResponseTask.IsCompleted,
+                                    $"{getResponseTask.Status}: {getResponseTask.Exception}"
+                                );
+                                await serverTask;
 
-                        string[] statusLineParts = receivedRequest[0].Split(' ');
-                        Assert.Equal("GET", statusLineParts[0]);
-                        Assert.DoesNotContain(receivedRequest, line => line.StartsWith("Transfer-Encoding"));
-                        Assert.DoesNotContain(receivedRequest, line => line.StartsWith("Content-Length"));
+                                // Redirected URL answers with success
+                                List<string> receivedRequest = null;
+                                string receivedContent = null;
+                                Task serverTask2 = redirServer.AcceptConnectionAsync(
+                                    async connection =>
+                                    {
+                                        // Send Connection: close so the client will close connection after request is sent,
+                                        // meaning we can just read to the end to get the content
+                                        receivedRequest =
+                                            await connection.ReadRequestHeaderAndSendResponseAsync(
+                                                additionalHeaders: "Connection: close\r\n"
+                                            );
+                                        connection.Socket.Shutdown(SocketShutdown.Send);
+                                        receivedContent = await connection.ReadToEndAsync();
+                                    }
+                                );
 
-                        using (HttpResponseMessage response = await getResponseTask)
-                        {
-                            Assert.Equal(200, (int)response.StatusCode);
-                        }
-                    });
-                });
+                                await TestHelper.WhenAllCompletedOrAnyFailed(
+                                    getResponseTask,
+                                    serverTask2
+                                );
+
+                                string[] statusLineParts = receivedRequest[0].Split(' ');
+                                Assert.Equal("GET", statusLineParts[0]);
+                                Assert.DoesNotContain(
+                                    receivedRequest,
+                                    line => line.StartsWith("Transfer-Encoding")
+                                );
+                                Assert.DoesNotContain(
+                                    receivedRequest,
+                                    line => line.StartsWith("Content-Length")
+                                );
+
+                                using (HttpResponseMessage response = await getResponseTask)
+                                {
+                                    Assert.Equal(200, (int)response.StatusCode);
+                                }
+                            }
+                        );
+                    }
+                );
             }
         }
 
         [OuterLoop("Uses external server")]
         [Theory, MemberData(nameof(RemoteServersAndRedirectStatusCodes))]
-        public async Task GetAsync_AllowAutoRedirectTrue_RedirectFromHttpToHttp_StatusCodeOK(Configuration.Http.RemoteServer remoteServer, int statusCode)
-        {
+        public async Task GetAsync_AllowAutoRedirectTrue_RedirectFromHttpToHttp_StatusCodeOK(
+            Configuration.Http.RemoteServer remoteServer,
+            int statusCode
+        ) {
             if (statusCode == 308 && (IsWinHttpHandler && PlatformDetection.WindowsVersion < 10))
             {
                 // 308 redirects are not supported on old versions of WinHttp, or on .NET Framework.
@@ -209,7 +295,8 @@ namespace System.Net.Http.Functional.Tests
                 Uri uri = remoteServer.RedirectUriForDestinationUri(
                     statusCode: statusCode,
                     destinationUri: remoteServer.EchoUri,
-                    hops: 1);
+                    hops: 1
+                );
                 _output.WriteLine("Uri: {0}", uri);
                 using (HttpResponseMessage response = await client.GetAsync(uri))
                 {
@@ -230,12 +317,16 @@ namespace System.Net.Http.Functional.Tests
                 Uri uri = Configuration.Http.RemoteHttp11Server.RedirectUriForDestinationUri(
                     statusCode: 302,
                     destinationUri: Configuration.Http.RemoteSecureHttp11Server.EchoUri,
-                    hops: 1);
+                    hops: 1
+                );
                 _output.WriteLine("Uri: {0}", uri);
                 using (HttpResponseMessage response = await client.GetAsync(uri))
                 {
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-                    Assert.Equal(Configuration.Http.SecureRemoteEchoServer, response.RequestMessage.RequestUri);
+                    Assert.Equal(
+                        Configuration.Http.SecureRemoteEchoServer,
+                        response.RequestMessage.RequestUri
+                    );
                 }
             }
         }
@@ -251,7 +342,8 @@ namespace System.Net.Http.Functional.Tests
                 Uri uri = Configuration.Http.RemoteSecureHttp11Server.RedirectUriForDestinationUri(
                     statusCode: 302,
                     destinationUri: Configuration.Http.RemoteHttp11Server.EchoUri,
-                    hops: 1);
+                    hops: 1
+                );
                 _output.WriteLine("Uri: {0}", uri);
 
                 using (HttpResponseMessage response = await client.GetAsync(uri))
@@ -274,33 +366,41 @@ namespace System.Net.Http.Functional.Tests
             handler.AllowAutoRedirect = true;
             using (HttpClient client = CreateHttpClient(handler))
             {
-                await LoopbackServer.CreateServerAsync(async (server, url) =>
-                {
-                    Task<HttpResponseMessage> getTask = client.GetAsync(url);
-                    Task<List<string>> serverTask = server.AcceptConnectionSendResponseAndCloseAsync(HttpStatusCode.Found);
-                    await TestHelper.WhenAllCompletedOrAnyFailed(getTask, serverTask);
-
-                    using (HttpResponseMessage response = await getTask)
+                await LoopbackServer.CreateServerAsync(
+                    async (server, url) =>
                     {
-                        Assert.Equal(302, (int)response.StatusCode);
+                        Task<HttpResponseMessage> getTask = client.GetAsync(url);
+                        Task<List<string>> serverTask =
+                            server.AcceptConnectionSendResponseAndCloseAsync(HttpStatusCode.Found);
+                        await TestHelper.WhenAllCompletedOrAnyFailed(getTask, serverTask);
+
+                        using (HttpResponseMessage response = await getTask)
+                        {
+                            Assert.Equal(302, (int)response.StatusCode);
+                        }
                     }
-                });
+                );
             }
         }
 
         [OuterLoop("Uses external server")]
         [Theory, MemberData(nameof(RemoteServersMemberData))]
-        public async Task GetAsync_AllowAutoRedirectTrue_RedirectToUriWithParams_RequestMsgUriSet(Configuration.Http.RemoteServer remoteServer)
-        {
+        public async Task GetAsync_AllowAutoRedirectTrue_RedirectToUriWithParams_RequestMsgUriSet(
+            Configuration.Http.RemoteServer remoteServer
+        ) {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.AllowAutoRedirect = true;
-            Uri targetUri = remoteServer.BasicAuthUriForCreds(userName: Username, password: Password);
+            Uri targetUri = remoteServer.BasicAuthUriForCreds(
+                userName: Username,
+                password: Password
+            );
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer, handler))
             {
                 Uri uri = remoteServer.RedirectUriForDestinationUri(
                     statusCode: 302,
                     destinationUri: targetUri,
-                    hops: 1);
+                    hops: 1
+                );
                 _output.WriteLine("Uri: {0}", uri);
                 using (HttpResponseMessage response = await client.GetAsync(uri))
                 {
@@ -315,8 +415,10 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(3, 2)]
         [InlineData(3, 3)]
         [InlineData(3, 4)]
-        public async Task GetAsync_MaxAutomaticRedirectionsNServerHops_ThrowsIfTooMany(int maxHops, int hops)
-        {
+        public async Task GetAsync_MaxAutomaticRedirectionsNServerHops_ThrowsIfTooMany(
+            int maxHops,
+            int hops
+        ) {
             if (IsWinHttpHandler && !PlatformDetection.IsWindows10Version1703OrGreater)
             {
                 // Skip this test if using WinHttpHandler but on a release prior to Windows 10 Creators Update.
@@ -328,17 +430,23 @@ namespace System.Net.Http.Functional.Tests
             handler.MaxAutomaticRedirections = maxHops;
             using (HttpClient client = CreateHttpClient(handler))
             {
-                Task<HttpResponseMessage> t = client.GetAsync(Configuration.Http.RemoteHttp11Server.RedirectUriForDestinationUri(
-                    statusCode: 302,
-                    destinationUri: Configuration.Http.RemoteHttp11Server.EchoUri,
-                    hops: hops));
+                Task<HttpResponseMessage> t = client.GetAsync(
+                    Configuration.Http.RemoteHttp11Server.RedirectUriForDestinationUri(
+                        statusCode: 302,
+                        destinationUri: Configuration.Http.RemoteHttp11Server.EchoUri,
+                        hops: hops
+                    )
+                );
 
                 if (hops <= maxHops)
                 {
                     using (HttpResponseMessage response = await t)
                     {
                         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-                        Assert.Equal(Configuration.Http.RemoteEchoServer, response.RequestMessage.RequestUri);
+                        Assert.Equal(
+                            Configuration.Http.RemoteEchoServer,
+                            response.RequestMessage.RequestUri
+                        );
                     }
                 }
                 else
@@ -360,8 +468,9 @@ namespace System.Net.Http.Functional.Tests
 
         [OuterLoop("Uses external server")]
         [Theory, MemberData(nameof(RemoteServersMemberData))]
-        public async Task GetAsync_AllowAutoRedirectTrue_RedirectWithRelativeLocation(Configuration.Http.RemoteServer remoteServer)
-        {
+        public async Task GetAsync_AllowAutoRedirectTrue_RedirectWithRelativeLocation(
+            Configuration.Http.RemoteServer remoteServer
+        ) {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.AllowAutoRedirect = true;
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer, handler))
@@ -370,7 +479,8 @@ namespace System.Net.Http.Functional.Tests
                     statusCode: 302,
                     destinationUri: remoteServer.EchoUri,
                     hops: 1,
-                    relative: true);
+                    relative: true
+                );
                 _output.WriteLine("Uri: {0}", uri);
 
                 using (HttpResponseMessage response = await client.GetAsync(uri))
@@ -385,32 +495,47 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(200)]
         [InlineData(201)]
         [InlineData(400)]
-        public async Task GetAsync_AllowAutoRedirectTrue_NonRedirectStatusCode_LocationHeader_NoRedirect(int statusCode)
-        {
+        public async Task GetAsync_AllowAutoRedirectTrue_NonRedirectStatusCode_LocationHeader_NoRedirect(
+            int statusCode
+        ) {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.AllowAutoRedirect = true;
             using (HttpClient client = CreateHttpClient(handler))
             {
-                await LoopbackServer.CreateServerAsync(async (origServer, origUrl) =>
-                {
-                    await LoopbackServer.CreateServerAsync(async (redirectServer, redirectUrl) =>
+                await LoopbackServer.CreateServerAsync(
+                    async (origServer, origUrl) =>
                     {
-                        Task<HttpResponseMessage> getResponseTask = client.GetAsync(origUrl);
+                        await LoopbackServer.CreateServerAsync(
+                            async (redirectServer, redirectUrl) =>
+                            {
+                                Task<HttpResponseMessage> getResponseTask = client.GetAsync(
+                                    origUrl
+                                );
 
-                        Task redirectTask = redirectServer.AcceptConnectionSendResponseAndCloseAsync();
+                                Task redirectTask =
+                                    redirectServer.AcceptConnectionSendResponseAndCloseAsync();
 
-                        await TestHelper.WhenAllCompletedOrAnyFailed(
-                            getResponseTask,
-                            origServer.AcceptConnectionSendResponseAndCloseAsync((HttpStatusCode)statusCode, $"Location: {redirectUrl}\r\n"));
+                                await TestHelper.WhenAllCompletedOrAnyFailed(
+                                    getResponseTask,
+                                    origServer.AcceptConnectionSendResponseAndCloseAsync(
+                                        (HttpStatusCode)statusCode,
+                                        $"Location: {redirectUrl}\r\n"
+                                    )
+                                );
 
-                        using (HttpResponseMessage response = await getResponseTask)
-                        {
-                            Assert.Equal(statusCode, (int)response.StatusCode);
-                            Assert.Equal(origUrl, response.RequestMessage.RequestUri);
-                            Assert.False(redirectTask.IsCompleted, "Should not have redirected to Location");
-                        }
-                    });
-                });
+                                using (HttpResponseMessage response = await getResponseTask)
+                                {
+                                    Assert.Equal(statusCode, (int)response.StatusCode);
+                                    Assert.Equal(origUrl, response.RequestMessage.RequestUri);
+                                    Assert.False(
+                                        redirectTask.IsCompleted,
+                                        "Should not have redirected to Location"
+                                    );
+                                }
+                            }
+                        );
+                    }
+                );
             }
         }
 
@@ -422,8 +547,11 @@ namespace System.Net.Http.Functional.Tests
         [InlineData("#origFragment", "#redirFragment", "#redirFragment", false)]
         [InlineData("#origFragment", "#redirFragment", "#redirFragment", true)]
         public async Task GetAsync_AllowAutoRedirectTrue_RetainsOriginalFragmentIfAppropriate(
-            string origFragment, string redirFragment, string expectedFragment, bool useRelativeRedirect)
-        {
+            string origFragment,
+            string redirFragment,
+            string expectedFragment,
+            bool useRelativeRedirect
+        ) {
             if (IsWinHttpHandler)
             {
                 // According to https://tools.ietf.org/html/rfc7231#section-7.1.2,
@@ -442,45 +570,68 @@ namespace System.Net.Http.Functional.Tests
             handler.AllowAutoRedirect = true;
             using (HttpClient client = CreateHttpClient(handler))
             {
-                await LoopbackServer.CreateServerAsync(async (origServer, origUrl) =>
-                {
-                    origUrl = new UriBuilder(origUrl) { Fragment = origFragment }.Uri;
-                    Uri redirectUrl = new UriBuilder(origUrl) { Fragment = redirFragment }.Uri;
-                    if (useRelativeRedirect)
+                await LoopbackServer.CreateServerAsync(
+                    async (origServer, origUrl) =>
                     {
-                        redirectUrl = new Uri(redirectUrl.GetComponents(UriComponents.PathAndQuery | UriComponents.Fragment, UriFormat.SafeUnescaped), UriKind.Relative);
+                        origUrl = new UriBuilder(origUrl) { Fragment = origFragment }.Uri;
+                        Uri redirectUrl = new UriBuilder(origUrl) { Fragment = redirFragment }.Uri;
+                        if (useRelativeRedirect)
+                        {
+                            redirectUrl = new Uri(
+                                redirectUrl.GetComponents(
+                                    UriComponents.PathAndQuery | UriComponents.Fragment,
+                                    UriFormat.SafeUnescaped
+                                ),
+                                UriKind.Relative
+                            );
+                        }
+                        Uri expectedUrl =
+                            new UriBuilder(origUrl) { Fragment = expectedFragment }.Uri;
+
+                        // Make and receive the first request that'll be redirected.
+                        Task<HttpResponseMessage> getResponse = client.GetAsync(origUrl);
+                        Task firstRequest = origServer.AcceptConnectionSendResponseAndCloseAsync(
+                            HttpStatusCode.Found,
+                            $"Location: {redirectUrl}\r\n"
+                        );
+                        Assert.Equal(firstRequest, await Task.WhenAny(firstRequest, getResponse));
+
+                        // Receive the second request.
+                        Task<List<string>> secondRequest =
+                            origServer.AcceptConnectionSendResponseAndCloseAsync();
+                        await TestHelper.WhenAllCompletedOrAnyFailed(secondRequest, getResponse);
+
+                        // Make sure the server received the second request for the right Uri.
+                        Assert.NotEmpty(secondRequest.Result);
+                        string[] statusLineParts = secondRequest.Result[0].Split(' ');
+                        Assert.Equal(3, statusLineParts.Length);
+                        Assert.Equal(
+                            expectedUrl.GetComponents(
+                                UriComponents.PathAndQuery,
+                                UriFormat.SafeUnescaped
+                            ),
+                            statusLineParts[1]
+                        );
+
+                        // Make sure the request message was updated with the correct redirected location.
+                        using (HttpResponseMessage response = await getResponse)
+                        {
+                            Assert.Equal(200, (int)response.StatusCode);
+                            Assert.Equal(
+                                expectedUrl.ToString(),
+                                response.RequestMessage.RequestUri.ToString()
+                            );
+                        }
                     }
-                    Uri expectedUrl = new UriBuilder(origUrl) { Fragment = expectedFragment }.Uri;
-
-                    // Make and receive the first request that'll be redirected.
-                    Task<HttpResponseMessage> getResponse = client.GetAsync(origUrl);
-                    Task firstRequest = origServer.AcceptConnectionSendResponseAndCloseAsync(HttpStatusCode.Found, $"Location: {redirectUrl}\r\n");
-                    Assert.Equal(firstRequest, await Task.WhenAny(firstRequest, getResponse));
-
-                    // Receive the second request.
-                    Task<List<string>> secondRequest = origServer.AcceptConnectionSendResponseAndCloseAsync();
-                    await TestHelper.WhenAllCompletedOrAnyFailed(secondRequest, getResponse);
-
-                    // Make sure the server received the second request for the right Uri.
-                    Assert.NotEmpty(secondRequest.Result);
-                    string[] statusLineParts = secondRequest.Result[0].Split(' ');
-                    Assert.Equal(3, statusLineParts.Length);
-                    Assert.Equal(expectedUrl.GetComponents(UriComponents.PathAndQuery, UriFormat.SafeUnescaped), statusLineParts[1]);
-
-                    // Make sure the request message was updated with the correct redirected location.
-                    using (HttpResponseMessage response = await getResponse)
-                    {
-                        Assert.Equal(200, (int)response.StatusCode);
-                        Assert.Equal(expectedUrl.ToString(), response.RequestMessage.RequestUri.ToString());
-                    }
-                });
+                );
             }
         }
 
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         [OuterLoop("Uses external server")]
-        public async Task GetAsync_CredentialIsNetworkCredentialUriRedirect_StatusCodeUnauthorized(Configuration.Http.RemoteServer remoteServer)
-        {
+        public async Task GetAsync_CredentialIsNetworkCredentialUriRedirect_StatusCodeUnauthorized(
+            Configuration.Http.RemoteServer remoteServer
+        ) {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.Credentials = _credential;
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer, handler))
@@ -488,7 +639,8 @@ namespace System.Net.Http.Functional.Tests
                 Uri redirectUri = remoteServer.RedirectUriForCreds(
                     statusCode: 302,
                     userName: Username,
-                    password: Password);
+                    password: Password
+                );
                 using (HttpResponseMessage unAuthResponse = await client.GetAsync(redirectUri))
                 {
                     Assert.Equal(HttpStatusCode.Unauthorized, unAuthResponse.StatusCode);
@@ -498,8 +650,9 @@ namespace System.Net.Http.Functional.Tests
 
         [Theory, MemberData(nameof(RemoteServersMemberData))]
         [OuterLoop("Uses external server")]
-        public async Task HttpClientHandler_CredentialIsNotCredentialCacheAfterRedirect_StatusCodeOK(Configuration.Http.RemoteServer remoteServer)
-        {
+        public async Task HttpClientHandler_CredentialIsNotCredentialCacheAfterRedirect_StatusCodeOK(
+            Configuration.Http.RemoteServer remoteServer
+        ) {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.Credentials = _credential;
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer, handler))
@@ -507,7 +660,8 @@ namespace System.Net.Http.Functional.Tests
                 Uri redirectUri = remoteServer.RedirectUriForCreds(
                     statusCode: 302,
                     userName: Username,
-                    password: Password);
+                    password: Password
+                );
                 using (HttpResponseMessage unAuthResponse = await client.GetAsync(redirectUri))
                 {
                     Assert.Equal(HttpStatusCode.Unauthorized, unAuthResponse.StatusCode);
@@ -524,8 +678,10 @@ namespace System.Net.Http.Functional.Tests
 
         [OuterLoop("Uses external server")]
         [Theory, MemberData(nameof(RemoteServersAndRedirectStatusCodes))]
-        public async Task GetAsync_CredentialIsCredentialCacheUriRedirect_StatusCodeOK(Configuration.Http.RemoteServer remoteServer, int statusCode)
-        {
+        public async Task GetAsync_CredentialIsCredentialCacheUriRedirect_StatusCodeOK(
+            Configuration.Http.RemoteServer remoteServer,
+            int statusCode
+        ) {
             if (statusCode == 308 && (IsWinHttpHandler && PlatformDetection.WindowsVersion < 10))
             {
                 // 308 redirects are not supported on old versions of WinHttp, or on .NET Framework.
@@ -536,7 +692,8 @@ namespace System.Net.Http.Functional.Tests
             Uri redirectUri = remoteServer.RedirectUriForCreds(
                 statusCode: statusCode,
                 userName: Username,
-                password: Password);
+                password: Password
+            );
             _output.WriteLine(uri.AbsoluteUri);
             _output.WriteLine(redirectUri.AbsoluteUri);
             var credentialCache = new CredentialCache();
@@ -556,8 +713,10 @@ namespace System.Net.Http.Functional.Tests
 
         [OuterLoop("Uses external server")]
         [Theory, MemberData(nameof(RemoteServersAndRedirectStatusCodes))]
-        public async Task DefaultHeaders_SetCredentials_ClearedOnRedirect(Configuration.Http.RemoteServer remoteServer, int statusCode)
-        {
+        public async Task DefaultHeaders_SetCredentials_ClearedOnRedirect(
+            Configuration.Http.RemoteServer remoteServer,
+            int statusCode
+        ) {
             if (statusCode == 308 && (IsWinHttpHandler && PlatformDetection.WindowsVersion < 10))
             {
                 // 308 redirects are not supported on old versions of WinHttp, or on .NET Framework.
@@ -568,11 +727,15 @@ namespace System.Net.Http.Functional.Tests
             using (HttpClient client = CreateHttpClientForRemoteServer(remoteServer, handler))
             {
                 string credentialString = _credential.UserName + ":" + _credential.Password;
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentialString);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                    "Basic",
+                    credentialString
+                );
                 Uri uri = remoteServer.RedirectUriForDestinationUri(
                     statusCode: statusCode,
                     destinationUri: remoteServer.EchoUri,
-                    hops: 1);
+                    hops: 1
+                );
                 _output.WriteLine("Uri: {0}", uri);
                 using (HttpResponseMessage response = await client.GetAsync(uri))
                 {

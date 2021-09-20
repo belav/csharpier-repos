@@ -112,6 +112,7 @@ public class Test
                                 break;
                         }
                     }
+
                     finally
                     {
                         switch (type)
@@ -733,6 +734,7 @@ public class Test
                                 break;
                         }
                     }
+
                     finally
                     {
                         switch (type)
@@ -1163,6 +1165,7 @@ public class Test
                                 break;
                         }
                     }
+
                     finally
                     {
                         switch (type)
@@ -1780,6 +1783,7 @@ public class Test
                                 break;
                         }
                     }
+
                     finally
                     {
                         switch (type)
@@ -3065,6 +3069,7 @@ public class Test
                                 break;
                         }
                     }
+
                     finally
                     {
                         switch (type)
@@ -3950,6 +3955,7 @@ public class Test
                                 break;
                         }
                     }
+
                     finally
                     {
                         switch (type)
@@ -5035,6 +5041,7 @@ public class Test
                                 break;
                         }
                     }
+
                     finally
                     {
                         switch (type)
@@ -6151,6 +6158,7 @@ public class Test
                                 break;
                         }
                     }
+
                     finally
                     {
                         switch (type)
@@ -6534,6 +6542,7 @@ public class Test
                     break;
             }
         }
+
         finally
         {
             switch (type)
@@ -7236,6 +7245,7 @@ public class Test
                                 break;
                         }
                     }
+
                     finally
                     {
                         switch (type)
@@ -8132,6 +8142,7 @@ public class Test
                                 break;
                         }
                     }
+
                     finally
                     {
                         switch (type)
@@ -8734,6 +8745,7 @@ public class Test
                                 break;
                         }
                     }
+
                     finally
                     {
                         switch (type)
@@ -9256,6 +9268,7 @@ public class Test
                                 break;
                         }
                     }
+
                     finally
                     {
                         switch (type)
@@ -9693,6 +9706,7 @@ public class Test
                                 break;
                         }
                     }
+
                     finally
                     {
                         switch (type)
@@ -10203,6 +10217,7 @@ public class Test
                                 break;
                         }
                     }
+
                     finally
                     {
                         switch (type)

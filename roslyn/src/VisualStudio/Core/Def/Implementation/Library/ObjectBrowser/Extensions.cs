@@ -14,22 +14,29 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
 {
     internal static class Extensions
     {
-        private static readonly SymbolDisplayFormat s_typeDisplayFormat = new(
-            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes,
-            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeVariance);
+        private static readonly SymbolDisplayFormat s_typeDisplayFormat =
+            new(
+                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes,
+                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
+                    | SymbolDisplayGenericsOptions.IncludeVariance
+            );
 
-        private static readonly SymbolDisplayFormat s_memberDisplayFormat = new(
-            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeVariance,
-            memberOptions: SymbolDisplayMemberOptions.IncludeExplicitInterface | SymbolDisplayMemberOptions.IncludeParameters,
-            parameterOptions: SymbolDisplayParameterOptions.IncludeType,
-            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+        private static readonly SymbolDisplayFormat s_memberDisplayFormat =
+            new(
+                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
+                    | SymbolDisplayGenericsOptions.IncludeVariance,
+                memberOptions: SymbolDisplayMemberOptions.IncludeExplicitInterface
+                    | SymbolDisplayMemberOptions.IncludeParameters,
+                parameterOptions: SymbolDisplayParameterOptions.IncludeType,
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+            );
 
         public static string GetMemberNavInfoNameOrEmpty(this ISymbol memberSymbol)
         {
             return memberSymbol != null
-                ? memberSymbol.ToDisplayString(s_memberDisplayFormat)
-                : string.Empty;
+              ? memberSymbol.ToDisplayString(s_memberDisplayFormat)
+              : string.Empty;
         }
 
         public static string GetNamespaceNavInfoNameOrEmpty(this INamespaceSymbol namespaceSymbol)
@@ -40,15 +47,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             }
 
             return !namespaceSymbol.IsGlobalNamespace
-                ? namespaceSymbol.ToDisplayString()
-                : string.Empty;
+              ? namespaceSymbol.ToDisplayString()
+              : string.Empty;
         }
 
         public static string GetTypeNavInfoNameOrEmpty(this ITypeSymbol typeSymbol)
         {
             return typeSymbol != null
-                ? typeSymbol.ToDisplayString(s_typeDisplayFormat)
-                : string.Empty;
+              ? typeSymbol.ToDisplayString(s_typeDisplayFormat)
+              : string.Empty;
         }
 
         public static string GetProjectDisplayName(this Project project)
@@ -64,12 +71,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             {
                 return project.Name;
             }
-            else if (project.Solution.Workspace is VisualStudioWorkspace workspace
+            else if (
+                project.Solution.Workspace is VisualStudioWorkspace workspace
                 && workspace.GetHierarchy(project.Id) is { } hierarchy
-                && (IVsSolution3)ServiceProvider.GlobalProvider.GetService(typeof(SVsSolution)) is { } solution)
-            {
-                if (ErrorHandler.Succeeded(solution.GetUniqueUINameOfProject(hierarchy, out var name)) && name != null)
-                {
+                && (IVsSolution3)ServiceProvider.GlobalProvider.GetService(typeof(SVsSolution))
+                    is { } solution
+            ) {
+                if (
+                    ErrorHandler.Succeeded(
+                        solution.GetUniqueUINameOfProject(hierarchy, out var name)
+                    )
+                    && name != null
+                ) {
                     return name;
                 }
             }
@@ -138,8 +151,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                 return result;
             }
 
-            if (hierarchy.TryGetParentHierarchy(out var parentHierarchy) && !(parentHierarchy is IVsSolution))
-            {
+            if (
+                hierarchy.TryGetParentHierarchy(out var parentHierarchy)
+                && !(parentHierarchy is IVsSolution)
+            ) {
                 var builder = new StringBuilder(result);
 
                 while (parentHierarchy != null && !(parentHierarchy is IVsSolution))

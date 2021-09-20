@@ -14,11 +14,12 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
         private readonly DiagnosticDescriptor _descriptor;
         private readonly AnalyzerSettingsUpdater _settingsUpdater;
 
-        public AnalyzerSetting(DiagnosticDescriptor descriptor,
-                               ReportDiagnostic effectiveSeverity,
-                               AnalyzerSettingsUpdater settingsUpdater,
-                               Language language)
-        {
+        public AnalyzerSetting(
+            DiagnosticDescriptor descriptor,
+            ReportDiagnostic effectiveSeverity,
+            AnalyzerSettingsUpdater settingsUpdater,
+            Language language
+        ) {
             _descriptor = descriptor;
             _settingsUpdater = settingsUpdater;
             DiagnosticSeverity severity = default;

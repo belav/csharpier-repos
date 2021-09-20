@@ -30,9 +30,10 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             {
                 // Validator for tag constraint for StatusString
                 {
-                    if (!Asn1Tag.TryDecode(StatusString.Value.Span, out Asn1Tag validateTag, out _) ||
-                        !validateTag.HasSameClassAndValue(new Asn1Tag((UniversalTagNumber)16)))
-                    {
+                    if (
+                        !Asn1Tag.TryDecode(StatusString.Value.Span, out Asn1Tag validateTag, out _)
+                        || !validateTag.HasSameClassAndValue(new Asn1Tag((UniversalTagNumber)16))
+                    ) {
                         throw new CryptographicException();
                     }
                 }
@@ -47,7 +48,6 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                 }
             }
 
-
             if (FailInfo.HasValue)
             {
                 writer.WriteNamedBitList(FailInfo.Value);
@@ -61,8 +61,11 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
-        internal static PkiStatusInfo Decode(Asn1Tag expectedTag, ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
-        {
+        internal static PkiStatusInfo Decode(
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        ) {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -77,13 +80,20 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out PkiStatusInfo decoded)
-        {
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out PkiStatusInfo decoded
+        ) {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
-        internal static void Decode(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out PkiStatusInfo decoded)
-        {
+        internal static void Decode(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out PkiStatusInfo decoded
+        ) {
             try
             {
                 DecodeCore(ref reader, expectedTag, rebind, out decoded);
@@ -94,33 +104,38 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out PkiStatusInfo decoded)
-        {
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out PkiStatusInfo decoded
+        ) {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
             ReadOnlySpan<byte> rebindSpan = rebind.Span;
             int offset;
             ReadOnlySpan<byte> tmpSpan;
 
-
             if (!sequenceReader.TryReadInt32(out decoded.Status))
             {
                 sequenceReader.ThrowIfNotEmpty();
             }
 
-
             if (sequenceReader.HasData)
             {
                 tmpSpan = sequenceReader.ReadEncodedValue();
-                decoded.StatusString = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
+                decoded.StatusString = rebindSpan.Overlaps(tmpSpan, out offset)
+                    ? rebind.Slice(offset, tmpSpan.Length)
+                    : tmpSpan.ToArray();
             }
 
-
-            if (sequenceReader.HasData && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.PrimitiveBitString))
-            {
-                decoded.FailInfo = sequenceReader.ReadNamedBitListValue<System.Security.Cryptography.Pkcs.Asn1.PkiFailureInfo>();
+            if (
+                sequenceReader.HasData
+                && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.PrimitiveBitString)
+            ) {
+                decoded.FailInfo =
+                    sequenceReader.ReadNamedBitListValue<System.Security.Cryptography.Pkcs.Asn1.PkiFailureInfo>();
             }
-
 
             sequenceReader.ThrowIfNotEmpty();
         }

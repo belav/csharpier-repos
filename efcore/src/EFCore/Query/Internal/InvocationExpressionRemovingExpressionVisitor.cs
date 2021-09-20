@@ -29,26 +29,31 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             var invokedExpression = StripTrivialConversions(invocationExpression.Expression);
 
             return invokedExpression is LambdaExpression lambdaExpression
-                ? Visit(InlineLambdaExpression(lambdaExpression, invocationExpression.Arguments))
-                : base.VisitInvocation(invocationExpression);
+              ? Visit(InlineLambdaExpression(lambdaExpression, invocationExpression.Arguments))
+              : base.VisitInvocation(invocationExpression);
         }
 
         private Expression StripTrivialConversions(Expression expression)
         {
-            while (expression is UnaryExpression unaryExpression
+            while (
+                expression is UnaryExpression unaryExpression
                 && unaryExpression.NodeType == ExpressionType.Convert
                 && expression.Type == unaryExpression.Operand.Type
-                && unaryExpression.Method == null)
-            {
+                && unaryExpression.Method == null
+            ) {
                 expression = unaryExpression.Operand;
             }
 
             return expression;
         }
 
-        private Expression InlineLambdaExpression(LambdaExpression lambdaExpression, ReadOnlyCollection<Expression> arguments)
-            => new ReplacingExpressionVisitor(
-                    lambdaExpression.Parameters.ToArray<Expression>(), arguments.ToArray())
-                .Visit(lambdaExpression.Body);
+        private Expression InlineLambdaExpression(
+            LambdaExpression lambdaExpression,
+            ReadOnlyCollection<Expression> arguments
+        ) =>
+            new ReplacingExpressionVisitor(
+                lambdaExpression.Parameters.ToArray<Expression>(),
+                arguments.ToArray()
+            ).Visit(lambdaExpression.Body);
     }
 }

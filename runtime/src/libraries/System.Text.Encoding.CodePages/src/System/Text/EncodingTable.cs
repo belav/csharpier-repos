@@ -10,9 +10,16 @@ namespace System.Text
 {
     internal static partial class EncodingTable
     {
-        private static readonly Dictionary<string, int> s_nameToCodePageCache = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
-        private static readonly Dictionary<int, string> s_codePageToWebNameCache = new Dictionary<int, string>();
-        private static readonly Dictionary<int, string> s_codePageToEnglishNameCache = new Dictionary<int, string>();
+        private static readonly Dictionary<string, int> s_nameToCodePageCache = new Dictionary<
+            string,
+            int
+        >(StringComparer.OrdinalIgnoreCase);
+        private static readonly Dictionary<int, string> s_codePageToWebNameCache = new Dictionary<
+            int,
+            string
+        >();
+        private static readonly Dictionary<int, string> s_codePageToEnglishNameCache =
+            new Dictionary<int, string>();
         private static readonly ReaderWriterLockSlim s_cacheLock = new ReaderWriterLockSlim();
 
         internal static int GetCodePageFromName(string name)
@@ -46,12 +53,14 @@ namespace System.Text
                         }
                         s_nameToCodePageCache.Add(name, codePage);
                     }
+
                     finally
                     {
                         s_cacheLock.ExitWriteLock();
                     }
                 }
             }
+
             finally
             {
                 s_cacheLock.ExitUpgradeableReadLock();
@@ -68,7 +77,9 @@ namespace System.Text
             int result;
 
             Debug.Assert(s_encodingNameIndices.Length == s_codePagesByName.Length + 1);
-            Debug.Assert(s_encodingNameIndices[s_encodingNameIndices.Length - 1] == s_encodingNames.Length);
+            Debug.Assert(
+                s_encodingNameIndices[s_encodingNameIndices.Length - 1] == s_encodingNames.Length
+            );
 
             name = name.ToLowerInvariant();
 
@@ -79,7 +90,12 @@ namespace System.Text
                 index = ((right - left) / 2) + left;
 
                 Debug.Assert(index < s_encodingNameIndices.Length - 1);
-                result = CompareOrdinal(name, s_encodingNames, s_encodingNameIndices[index], s_encodingNameIndices[index + 1] - s_encodingNameIndices[index]);
+                result = CompareOrdinal(
+                    name,
+                    s_encodingNames,
+                    s_encodingNameIndices[index],
+                    s_encodingNameIndices[index + 1] - s_encodingNameIndices[index]
+                );
                 if (result == 0)
                 {
                     //We found the item, return the associated codePage.
@@ -101,8 +117,14 @@ namespace System.Text
             for (; left <= right; left++)
             {
                 Debug.Assert(left < s_encodingNameIndices.Length - 1);
-                if (CompareOrdinal(name, s_encodingNames, s_encodingNameIndices[left], s_encodingNameIndices[left + 1] - s_encodingNameIndices[left]) == 0)
-                {
+                if (
+                    CompareOrdinal(
+                        name,
+                        s_encodingNames,
+                        s_encodingNameIndices[left],
+                        s_encodingNameIndices[left + 1] - s_encodingNameIndices[left]
+                    ) == 0
+                ) {
                     return (s_codePagesByName[left]);
                 }
             }
@@ -129,16 +151,30 @@ namespace System.Text
 
         internal static string? GetWebNameFromCodePage(int codePage)
         {
-            return GetNameFromCodePage(codePage, s_webNames, s_webNameIndices, s_codePageToWebNameCache);
+            return GetNameFromCodePage(
+                codePage,
+                s_webNames,
+                s_webNameIndices,
+                s_codePageToWebNameCache
+            );
         }
 
         internal static string? GetEnglishNameFromCodePage(int codePage)
         {
-            return GetNameFromCodePage(codePage, s_englishNames, s_englishNameIndices, s_codePageToEnglishNameCache);
+            return GetNameFromCodePage(
+                codePage,
+                s_englishNames,
+                s_englishNameIndices,
+                s_codePageToEnglishNameCache
+            );
         }
 
-        private static string? GetNameFromCodePage(int codePage, string names, int[] indices, Dictionary<int, string> cache)
-        {
+        private static string? GetNameFromCodePage(
+            int codePage,
+            string names,
+            int[] indices,
+            Dictionary<int, string> cache
+        ) {
             string? name;
 
             Debug.Assert(s_mappedCodePages.Length + 1 == indices.Length);
@@ -172,12 +208,14 @@ namespace System.Text
 
                                 cache.Add(codePage, name);
                             }
+
                             finally
                             {
                                 s_cacheLock.ExitWriteLock();
                             }
                         }
                     }
+
                     finally
                     {
                         s_cacheLock.ExitUpgradeableReadLock();

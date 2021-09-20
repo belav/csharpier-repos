@@ -16,7 +16,7 @@ using Xunit;
 namespace Microsoft.AspNetCore.Mvc.Infrastructure
 {
     // The ActionSelectionTable has different code paths for ActionDescriptor and
-    // RouteEndpoint for creating a table. We're trying to test both code paths 
+    // RouteEndpoint for creating a table. We're trying to test both code paths
     // for creation, but selection works the same for both cases.
     public class ActionSelectionTableTest
     {
@@ -84,9 +84,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             var table = CreateTableWithActionDescriptors(actions);
             var values = new RouteValueDictionary(new { controller = "Home", action = "Index", });
-            values.Add(
-                "date",
-                new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7)));
+            values.Add("date", new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7)));
 
             // Act
             var matches = table.Select(values);
@@ -124,15 +122,16 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             var table = CreateTableWithEndpoints(actions);
             var values = new RouteValueDictionary(new { controller = "Home", action = "Index", });
-            values.Add(
-                "date",
-                new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7)));
+            values.Add("date", new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7)));
 
             // Act
             var matches = table.Select(values);
 
             // Assert
-            Assert.Collection(matches, (e) => Assert.Same(actions[0], e.Metadata.GetMetadata<ActionDescriptor>()));
+            Assert.Collection(
+                matches,
+                (e) => Assert.Same(actions[0], e.Metadata.GetMetadata<ActionDescriptor>())
+            );
         }
 
         [Fact]
@@ -202,7 +201,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             var matches = table.Select(values);
 
             // Assert
-            Assert.Equal(actions.ToArray(), matches.Select(e => e.Metadata.GetMetadata<ActionDescriptor>()).ToArray());
+            Assert.Equal(
+                actions.ToArray(),
+                matches.Select(e => e.Metadata.GetMetadata<ActionDescriptor>()).ToArray()
+            );
         }
 
         [Fact]
@@ -253,10 +255,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                         { "controller", "Home" },
                         { "action", "Index" }
                     },
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "/Home",
-                    }
+                    AttributeRouteInfo = new AttributeRouteInfo() { Template = "/Home", }
                 },
             };
 
@@ -283,10 +282,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                         { "controller", "Home" },
                         { "action", "Index" }
                     },
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "/Home",
-                    }
+                    AttributeRouteInfo = new AttributeRouteInfo() { Template = "/Home", }
                 },
             };
 
@@ -419,7 +415,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             // Example: In conventional route, one could set non-inline defaults
             // new { area = "", controller = "Home", action = "Index" }
-            var values = new RouteValueDictionary(new { area = "", controller = "Home", action = "Index", });
+            var values = new RouteValueDictionary(
+                new { area = "", controller = "Home", action = "Index", }
+            );
 
             // Act
             var matches = table.Select(values);
@@ -450,7 +448,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             // Example: In conventional route, one could set non-inline defaults
             // new { area = "", controller = "Home", action = "Index" }
-            var values = new RouteValueDictionary(new { area = "", controller = "HoMe", action = "InDeX", });
+            var values = new RouteValueDictionary(
+                new { area = "", controller = "HoMe", action = "InDeX", }
+            );
 
             // Act
             var matches = table.Select(values);
@@ -481,7 +481,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             // Example: In conventional route, one could set non-inline defaults
             // new { area = (string)null, controller = "Foo", action = "Index" }
-            var values = new RouteValueDictionary(new { area = (string)null, controller = "Home", action = "Index", });
+            var values = new RouteValueDictionary(
+                new { area = (string)null, controller = "Home", action = "Index", }
+            );
 
             // Act
             var matches = table.Select(values);
@@ -510,7 +512,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             var table = CreateTableWithActionDescriptors(actions);
 
-            var values = new RouteValueDictionary(new { foo = "", controller = "Home", action = "Index", });
+            var values = new RouteValueDictionary(
+                new { foo = "", controller = "Home", action = "Index", }
+            );
 
             // Act
             var matches = table.Select(values);
@@ -539,7 +543,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             var table = CreateTableWithActionDescriptors(actions);
 
-            var values = new RouteValueDictionary(new { foo = (string)null, controller = "Home", action = "Index", });
+            var values = new RouteValueDictionary(
+                new { foo = (string)null, controller = "Home", action = "Index", }
+            );
 
             // Act
             var matches = table.Select(values);
@@ -549,22 +555,29 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             Assert.Same(actions[0], action);
         }
 
-        private static ActionSelectionTable<ActionDescriptor> CreateTableWithActionDescriptors(IReadOnlyList<ActionDescriptor> actions)
-        {
-            return ActionSelectionTable<ActionDescriptor>.Create(new ActionDescriptorCollection(actions, 0));
+        private static ActionSelectionTable<ActionDescriptor> CreateTableWithActionDescriptors(
+            IReadOnlyList<ActionDescriptor> actions
+        ) {
+            return ActionSelectionTable<ActionDescriptor>.Create(
+                new ActionDescriptorCollection(actions, 0)
+            );
         }
 
-        private static ActionSelectionTable<Endpoint> CreateTableWithEndpoints(IReadOnlyList<ActionDescriptor> actions)
-        {
-            var endpoints = actions.Select(a =>
-            {
-                var metadata = new List<object>(a.EndpointMetadata ?? Array.Empty<object>());
-                metadata.Add(a);
-                return new Endpoint(
-                    requestDelegate: context => Task.CompletedTask, 
-                    metadata: new EndpointMetadataCollection(metadata),
-                    displayName: a.DisplayName);
-            });
+        private static ActionSelectionTable<Endpoint> CreateTableWithEndpoints(
+            IReadOnlyList<ActionDescriptor> actions
+        ) {
+            var endpoints = actions.Select(
+                a =>
+                {
+                    var metadata = new List<object>(a.EndpointMetadata ?? Array.Empty<object>());
+                    metadata.Add(a);
+                    return new Endpoint(
+                        requestDelegate: context => Task.CompletedTask,
+                        metadata: new EndpointMetadataCollection(metadata),
+                        displayName: a.DisplayName
+                    );
+                }
+            );
 
             return ActionSelectionTable<ActionDescriptor>.Create(endpoints);
         }

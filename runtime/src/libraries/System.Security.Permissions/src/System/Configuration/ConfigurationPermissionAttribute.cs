@@ -7,12 +7,20 @@ using System.Security.Permissions;
 namespace System.Configuration
 {
 #if NET50_OBSOLETIONS
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = false)]
     public sealed class ConfigurationPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public ConfigurationPermissionAttribute(SecurityAction action) : base(default(SecurityAction)) { }
-        public override IPermission CreatePermission() { return default(IPermission); }
+        public ConfigurationPermissionAttribute(SecurityAction action)
+            : base(default(SecurityAction)) { }
+        public override IPermission CreatePermission()
+        {
+            return default(IPermission);
+        }
     }
 }

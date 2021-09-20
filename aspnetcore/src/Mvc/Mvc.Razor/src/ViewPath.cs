@@ -21,21 +21,25 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 length++;
             }
 
-            return string.Create(length, (path, addLeadingSlash), (span, tuple) =>
-            {
-                var (pathValue, addLeadingSlashValue) = tuple;
-                var spanIndex = 0;
-
-                if (addLeadingSlashValue)
+            return string.Create(
+                length,
+                (path, addLeadingSlash),
+                (span, tuple) =>
                 {
-                    span[spanIndex++] = '/';
-                }
+                    var (pathValue, addLeadingSlashValue) = tuple;
+                    var spanIndex = 0;
 
-                foreach (var ch in pathValue)
-                {
-                    span[spanIndex++] = ch == '\\' ? '/' : ch;
+                    if (addLeadingSlashValue)
+                    {
+                        span[spanIndex++] = '/';
+                    }
+
+                    foreach (var ch in pathValue)
+                    {
+                        span[spanIndex++] = ch == '\\' ? '/' : ch;
+                    }
                 }
-            });
+            );
         }
     }
 }

@@ -40,16 +40,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <summary>
         ///     The internal builder being used to configure the property.
         /// </summary>
-        IConventionPropertyBuilder IInfrastructure<IConventionPropertyBuilder>.Instance
-            => Builder;
+        IConventionPropertyBuilder IInfrastructure<IConventionPropertyBuilder>.Instance => Builder;
 
         private InternalPropertyBuilder Builder { get; }
 
         /// <summary>
         ///     The property being configured.
         /// </summary>
-        public virtual IMutableProperty Metadata
-            => Builder.Metadata;
+        public virtual IMutableProperty Metadata => Builder.Metadata;
 
         /// <summary>
         ///     Adds or updates an annotation on the property. If an annotation with the key specified in
@@ -237,8 +235,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </summary>
         /// <param name="factory"> A delegate that will be used to create value generator instances. </param>
         /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
-        public virtual PropertyBuilder HasValueGenerator(Func<IProperty, IEntityType, ValueGenerator> factory)
-        {
+        public virtual PropertyBuilder HasValueGenerator(
+            Func<IProperty, IEntityType, ValueGenerator> factory
+        ) {
             Check.NotNull(factory, nameof(factory));
 
             Builder.HasValueGenerator(factory, ConfigurationSource.Explicit);
@@ -382,8 +381,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </summary>
         /// <typeparam name="TProvider"> The type to convert to and from. </typeparam>
         /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
-        public virtual PropertyBuilder HasConversion<TProvider>()
-            => HasConversion(typeof(TProvider));
+        public virtual PropertyBuilder HasConversion<TProvider>() =>
+            HasConversion(typeof(TProvider));
 
         /// <summary>
         ///     Configures the property so that the property value is converted to the given type before
@@ -418,8 +417,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <param name="valueComparer"> The comparer to use for values before conversion. </param>
         /// <typeparam name="TProvider"> The type to convert to and from. </typeparam>
         /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
-        public virtual PropertyBuilder HasConversion<TProvider>(ValueComparer? valueComparer)
-            => HasConversion(typeof(TProvider), valueComparer);
+        public virtual PropertyBuilder HasConversion<TProvider>(ValueComparer? valueComparer) =>
+            HasConversion(typeof(TProvider), valueComparer);
 
         /// <summary>
         ///     Configures the property so that the property value is converted to the given type before
@@ -428,8 +427,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <param name="providerClrType"> The type to convert to and from. </param>
         /// <param name="valueComparer"> The comparer to use for values before conversion. </param>
         /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
-        public virtual PropertyBuilder HasConversion(Type? providerClrType, ValueComparer? valueComparer)
-        {
+        public virtual PropertyBuilder HasConversion(
+            Type? providerClrType,
+            ValueComparer? valueComparer
+        ) {
             Builder.HasConversion(providerClrType, ConfigurationSource.Explicit);
             Builder.HasValueComparer(valueComparer, ConfigurationSource.Explicit);
 
@@ -443,8 +444,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <param name="converter"> The converter to use. </param>
         /// <param name="valueComparer"> The comparer to use for values before conversion. </param>
         /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
-        public virtual PropertyBuilder HasConversion(ValueConverter? converter, ValueComparer? valueComparer)
-        {
+        public virtual PropertyBuilder HasConversion(
+            ValueConverter? converter,
+            ValueComparer? valueComparer
+        ) {
             Builder.HasConversion(converter, ConfigurationSource.Explicit);
             Builder.HasValueComparer(valueComparer, ConfigurationSource.Explicit);
 
@@ -458,8 +461,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </summary>
         /// <returns> A string that represents the current object. </returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override string? ToString()
-            => base.ToString();
+        public override string? ToString() => base.ToString();
 
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
@@ -468,8 +470,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> <see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />. </returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectEqualsIsObjectEquals
-        public override bool Equals(object? obj)
-            => base.Equals(obj);
+        public override bool Equals(object? obj) => base.Equals(obj);
 
         /// <summary>
         ///     Serves as the default hash function.
@@ -477,9 +478,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns> A hash code for the current object. </returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-        public override int GetHashCode()
-            => base.GetHashCode();
-
+        public override int GetHashCode() => base.GetHashCode();
         #endregion
     }
 }

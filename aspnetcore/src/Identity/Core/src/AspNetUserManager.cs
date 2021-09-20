@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Identity
         /// <param name="errors">The <see cref="IdentityErrorDescriber"/> used to provider error messages.</param>
         /// <param name="services">The <see cref="IServiceProvider"/> used to resolve services.</param>
         /// <param name="logger">The logger used to log messages, warnings and errors.</param>
-        public AspNetUserManager(IUserStore<TUser> store,
+        public AspNetUserManager(
+            IUserStore<TUser> store,
             IOptions<IdentityOptions> optionsAccessor,
             IPasswordHasher<TUser> passwordHasher,
             IEnumerable<IUserValidator<TUser>> userValidators,
@@ -39,15 +40,26 @@ namespace Microsoft.AspNetCore.Identity
             ILookupNormalizer keyNormalizer,
             IdentityErrorDescriber errors,
             IServiceProvider services,
-            ILogger<UserManager<TUser>> logger)
-            : base(store, optionsAccessor, passwordHasher, userValidators, passwordValidators, keyNormalizer, errors, services, logger)
-        {
-            _cancel = services?.GetService<IHttpContextAccessor>()?.HttpContext?.RequestAborted ?? CancellationToken.None;
+            ILogger<UserManager<TUser>> logger
+        ) : base(
+            store,
+            optionsAccessor,
+            passwordHasher,
+            userValidators,
+            passwordValidators,
+            keyNormalizer,
+            errors,
+            services,
+            logger
+        ) {
+            _cancel =
+                services?.GetService<IHttpContextAccessor>()?.HttpContext?.RequestAborted
+                ?? CancellationToken.None;
         }
 
         /// <summary>
         /// The cancellation token associated with the current HttpContext.RequestAborted or CancellationToken.None if unavailable.
         /// </summary>
         protected override CancellationToken CancellationToken => _cancel;
-   }
+    }
 }

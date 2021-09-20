@@ -14,13 +14,14 @@ namespace System.DirectoryServices.ActiveDirectory
         private readonly bool _isBound;
         private readonly DirectoryContext _context;
 
-        internal ActiveDirectorySchemaPropertyCollection(DirectoryContext context,
-                                                        ActiveDirectorySchemaClass schemaClass,
-                                                        bool isBound,
-                                                        string propertyName,
-                                                        ICollection propertyNames,
-                                                        bool onlyNames)
-        {
+        internal ActiveDirectorySchemaPropertyCollection(
+            DirectoryContext context,
+            ActiveDirectorySchemaClass schemaClass,
+            bool isBound,
+            string propertyName,
+            ICollection propertyNames,
+            bool onlyNames
+        ) {
             _schemaClass = schemaClass;
             _propertyName = propertyName;
             _isBound = isBound;
@@ -30,16 +31,24 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 // all properties in writeable property collection are non-defunct
                 // so calling constructor for non-defunct property
-                this.InnerList.Add(new ActiveDirectorySchemaProperty(context, ldapDisplayName, (DirectoryEntry?)null, null));
+                this.InnerList.Add(
+                    new ActiveDirectorySchemaProperty(
+                        context,
+                        ldapDisplayName,
+                        (DirectoryEntry?)null,
+                        null
+                    )
+                );
             }
         }
 
-        internal ActiveDirectorySchemaPropertyCollection(DirectoryContext context,
-                                                        ActiveDirectorySchemaClass schemaClass,
-                                                        bool isBound,
-                                                        string propertyName,
-                                                        ICollection properties)
-        {
+        internal ActiveDirectorySchemaPropertyCollection(
+            DirectoryContext context,
+            ActiveDirectorySchemaClass schemaClass,
+            bool isBound,
+            string propertyName,
+            ICollection properties
+        ) {
             _schemaClass = schemaClass;
             _propertyName = propertyName;
             _isBound = isBound;
@@ -61,7 +70,9 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 if (!value.isBound)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.SchemaObjectNotCommitted, value.Name));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.SchemaObjectNotCommitted, value.Name)
+                    );
                 }
 
                 if (!Contains(value))
@@ -70,7 +81,10 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
                 else
                 {
-                    throw new ArgumentException(SR.Format(SR.AlreadyExistingInCollection, value), nameof(value));
+                    throw new ArgumentException(
+                        SR.Format(SR.AlreadyExistingInCollection, value),
+                        nameof(value)
+                    );
                 }
             }
         }
@@ -84,7 +98,9 @@ namespace System.DirectoryServices.ActiveDirectory
 
             if (!schemaProperty.isBound)
             {
-                throw new InvalidOperationException(SR.Format(SR.SchemaObjectNotCommitted, schemaProperty.Name));
+                throw new InvalidOperationException(
+                    SR.Format(SR.SchemaObjectNotCommitted, schemaProperty.Name)
+                );
             }
 
             if (!Contains(schemaProperty))
@@ -93,7 +109,10 @@ namespace System.DirectoryServices.ActiveDirectory
             }
             else
             {
-                throw new ArgumentException(SR.Format(SR.AlreadyExistingInCollection, schemaProperty), nameof(schemaProperty));
+                throw new ArgumentException(
+                    SR.Format(SR.AlreadyExistingInCollection, schemaProperty),
+                    nameof(schemaProperty)
+                );
             }
         }
 
@@ -173,7 +192,9 @@ namespace System.DirectoryServices.ActiveDirectory
 
             if (!schemaProperty.isBound)
             {
-                throw new InvalidOperationException(SR.Format(SR.SchemaObjectNotCommitted, schemaProperty.Name));
+                throw new InvalidOperationException(
+                    SR.Format(SR.SchemaObjectNotCommitted, schemaProperty.Name)
+                );
             }
 
             for (int i = 0; i < InnerList.Count; i++)
@@ -185,7 +206,10 @@ namespace System.DirectoryServices.ActiveDirectory
                     return;
                 }
             }
-            throw new ArgumentException(SR.Format(SR.NotFoundInCollection, schemaProperty), nameof(schemaProperty));
+            throw new ArgumentException(
+                SR.Format(SR.NotFoundInCollection, schemaProperty),
+                nameof(schemaProperty)
+            );
         }
 
         public void Insert(int index, ActiveDirectorySchemaProperty schemaProperty)
@@ -197,7 +221,9 @@ namespace System.DirectoryServices.ActiveDirectory
 
             if (!schemaProperty.isBound)
             {
-                throw new InvalidOperationException(SR.Format(SR.SchemaObjectNotCommitted, schemaProperty.Name));
+                throw new InvalidOperationException(
+                    SR.Format(SR.SchemaObjectNotCommitted, schemaProperty.Name)
+                );
             }
 
             if (!Contains(schemaProperty))
@@ -206,7 +232,10 @@ namespace System.DirectoryServices.ActiveDirectory
             }
             else
             {
-                throw new ArgumentException(SR.Format(SR.AlreadyExistingInCollection, schemaProperty), nameof(schemaProperty));
+                throw new ArgumentException(
+                    SR.Format(SR.AlreadyExistingInCollection, schemaProperty),
+                    nameof(schemaProperty)
+                );
             }
         }
 
@@ -219,7 +248,9 @@ namespace System.DirectoryServices.ActiveDirectory
 
             if (!schemaProperty.isBound)
             {
-                throw new InvalidOperationException(SR.Format(SR.SchemaObjectNotCommitted, schemaProperty.Name));
+                throw new InvalidOperationException(
+                    SR.Format(SR.SchemaObjectNotCommitted, schemaProperty.Name)
+                );
             }
 
             for (int i = 0; i < InnerList.Count; i++)
@@ -262,7 +293,9 @@ namespace System.DirectoryServices.ActiveDirectory
 
             if (!schemaProperty.isBound)
             {
-                throw new InvalidOperationException(SR.Format(SR.SchemaObjectNotCommitted, schemaProperty.Name));
+                throw new InvalidOperationException(
+                    SR.Format(SR.SchemaObjectNotCommitted, schemaProperty.Name)
+                );
             }
 
             for (int i = 0; i < InnerList.Count; i++)
@@ -312,7 +345,9 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 try
                 {
-                    _classEntry.Properties[_propertyName].Add(((ActiveDirectorySchemaProperty)value).Name);
+                    _classEntry.Properties[_propertyName].Add(
+                        ((ActiveDirectorySchemaProperty)value).Name
+                    );
                 }
                 catch (COMException e)
                 {
@@ -372,13 +407,19 @@ namespace System.DirectoryServices.ActiveDirectory
 
         protected override void OnValidate(object value)
         {
-            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
 
             if (!(value is ActiveDirectorySchemaProperty))
                 throw new ArgumentException(null, nameof(value));
 
             if (!((ActiveDirectorySchemaProperty)value).isBound)
-                throw new InvalidOperationException(SR.Format(SR.SchemaObjectNotCommitted, ((ActiveDirectorySchemaProperty)value).Name));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.SchemaObjectNotCommitted,
+                        ((ActiveDirectorySchemaProperty)value).Name
+                    )
+                );
         }
 
         internal string[] GetMultiValuedProperty()

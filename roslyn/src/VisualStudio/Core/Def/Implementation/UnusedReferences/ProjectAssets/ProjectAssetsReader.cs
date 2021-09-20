@@ -21,8 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
         public static ImmutableArray<ReferenceInfo> ReadReferences(
             ImmutableArray<ReferenceInfo> projectReferences,
-            string projectAssetsFilePath)
-        {
+            string projectAssetsFilePath
+        ) {
             if (!File.Exists(projectAssetsFilePath))
             {
                 return ImmutableArray<ReferenceInfo>.Empty;
@@ -33,39 +33,44 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
             try
             {
-                projectAssets = JsonConvert.DeserializeObject<ProjectAssetsFile>(projectAssetsFileContents);
+                projectAssets = JsonConvert.DeserializeObject<ProjectAssetsFile>(
+                    projectAssetsFileContents
+                );
             }
             catch
             {
                 return ImmutableArray<ReferenceInfo>.Empty;
             }
 
-            if (projectAssets is null ||
-                projectAssets.Version != 3)
+            if (projectAssets is null || projectAssets.Version != 3)
             {
                 return ImmutableArray<ReferenceInfo>.Empty;
             }
 
-            if (projectAssets.Targets is null ||
-                projectAssets.Targets.Count == 0)
+            if (projectAssets.Targets is null || projectAssets.Targets.Count == 0)
             {
                 return ImmutableArray<ReferenceInfo>.Empty;
             }
 
-            if (projectAssets.Libraries is null ||
-                projectAssets.Libraries.Count == 0)
+            if (projectAssets.Libraries is null || projectAssets.Libraries.Count == 0)
             {
                 return ImmutableArray<ReferenceInfo>.Empty;
             }
 
-            var autoReferences = projectAssets.Project?.Frameworks?.Values
-                .SelectMany(framework => framework.Dependencies?.Keys.Where(key => framework.Dependencies[key].AutoReferenced))
+            var autoReferences = projectAssets.Project?.Frameworks?.Values.SelectMany(
+                    framework =>
+                        framework.Dependencies?.Keys.Where(
+                            key => framework.Dependencies[key].AutoReferenced
+                        )
+                )
                 .Distinct()
                 .ToImmutableHashSet();
             autoReferences ??= ImmutableHashSet<string>.Empty;
 
-            var references = projectReferences
-                .Select(projectReference => BuildReference(projectAssets, projectReference, autoReferences))
+            var references = projectReferences.Select(
+                    projectReference =>
+                        BuildReference(projectAssets, projectReference, autoReferences)
+                )
                 .WhereNotNull()
                 .ToImmutableArray();
 
@@ -75,11 +80,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
         private static ReferenceInfo? BuildReference(
             ProjectAssetsFile projectAssets,
             ReferenceInfo referenceInfo,
-            ImmutableHashSet<string> autoReferences)
-        {
-            var referenceName = referenceInfo.ReferenceType == ReferenceType.Project
-                ? Path.GetFileNameWithoutExtension(referenceInfo.ItemSpecification)
-                : referenceInfo.ItemSpecification;
+            ImmutableHashSet<string> autoReferences
+        ) {
+            var referenceName =
+                referenceInfo.ReferenceType == ReferenceType.Project
+                    ? Path.GetFileNameWithoutExtension(referenceInfo.ItemSpecification)
+                    : referenceInfo.ItemSpecification;
 
             if (autoReferences.Contains(referenceName))
             {
@@ -92,8 +98,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
         private static ReferenceInfo? BuildReference(
             ProjectAssetsFile projectAssets,
             string referenceName,
-            bool treatAsUsed)
-        {
+            bool treatAsUsed
+        ) {
             var dependencyNames = new HashSet<string>();
             var compilationAssemblies = ImmutableArray.CreateBuilder<string>();
             var referenceType = ReferenceType.Unknown;
@@ -105,9 +111,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
             foreach (var target in projectAssets.Targets.Values)
             {
-                var key = target.Keys.FirstOrDefault(library => library.Split('/')[0] == referenceName);
-                if (key is null ||
-                    !projectAssets.Libraries.TryGetValue(key, out var library))
+                var key = target.Keys.FirstOrDefault(
+                    library => library.Split('/')[0] == referenceName
+                );
+                if (key is null || !projectAssets.Libraries.TryGetValue(key, out var library))
                 {
                     continue;
                 }
@@ -128,9 +135,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
                 if (targetLibrary.Compile != null)
                 {
-                    compilationAssemblies.AddRange(targetLibrary.Compile.Keys
-                        .Where(assemblyPath => !assemblyPath.EndsWith(NuGetEmptyFileName))
-                        .Select(assemblyPath => Path.GetFullPath(Path.Combine(packagesPath, library.Path, assemblyPath))));
+                    compilationAssemblies.AddRange(
+                        targetLibrary.Compile.Keys.Where(
+                                assemblyPath => !assemblyPath.EndsWith(NuGetEmptyFileName)
+                            )
+                            .Select(
+                                assemblyPath =>
+                                    Path.GetFullPath(
+                                        Path.Combine(packagesPath, library.Path, assemblyPath)
+                                    )
+                            )
+                    );
                 }
             }
 
@@ -139,12 +154,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 return null;
             }
 
-            var dependencies = dependencyNames
-                .Select(dependency => BuildReference(projectAssets, dependency, treatAsUsed: false))
+            var dependencies = dependencyNames.Select(
+                    dependency => BuildReference(projectAssets, dependency, treatAsUsed: false)
+                )
                 .WhereNotNull()
                 .ToImmutableArray();
 
-            return new ReferenceInfo(referenceType, referenceName, treatAsUsed, compilationAssemblies.ToImmutable(), dependencies);
+            return new ReferenceInfo(
+                referenceType,
+                referenceName,
+                treatAsUsed,
+                compilationAssemblies.ToImmutable(),
+                dependencies
+            );
         }
     }
 }

@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -21,8 +21,10 @@ namespace Microsoft.AspNetCore.Builder.Extensions
         {
             // Arrange
             var useCalled = false;
-            var builder = new ApplicationBuilderWrapper(CreateBuilder(), () => useCalled = true)
-                .UsePathBase(pathBase);
+            var builder = new ApplicationBuilderWrapper(
+                CreateBuilder(),
+                () => useCalled = true
+            ).UsePathBase(pathBase);
 
             // Act
             builder.Build();
@@ -36,8 +38,10 @@ namespace Microsoft.AspNetCore.Builder.Extensions
             private readonly IApplicationBuilder _wrappedBuilder;
             private readonly Action _useCallback;
 
-            public ApplicationBuilderWrapper(IApplicationBuilder applicationBuilder, Action useCallback)
-            {
+            public ApplicationBuilderWrapper(
+                IApplicationBuilder applicationBuilder,
+                Action useCallback
+            ) {
                 _wrappedBuilder = applicationBuilder;
                 _useCallback = useCallback;
             }
@@ -58,7 +62,6 @@ namespace Microsoft.AspNetCore.Builder.Extensions
             public IFeatureCollection ServerFeatures => _wrappedBuilder.ServerFeatures;
             public RequestDelegate Build() => _wrappedBuilder.Build();
             public IApplicationBuilder New() => _wrappedBuilder.New();
-
         }
 
         [Theory]
@@ -74,11 +77,34 @@ namespace Microsoft.AspNetCore.Builder.Extensions
         [InlineData("/base", "/oldbase", "/base/something", "/oldbase/base", "/something")]
         [InlineData("/base", "/oldbase", "/base/something/", "/oldbase/base", "/something/")]
         [InlineData("/base/more", "/oldbase", "/base/more", "/oldbase/base/more", "")]
-        [InlineData("/base/more", "/oldbase", "/base/more/something", "/oldbase/base/more", "/something")]
-        [InlineData("/base/more", "/oldbase", "/base/more/something/", "/oldbase/base/more", "/something/")]
-        public Task RequestPathBaseContainingPathBase_IsSplit(string registeredPathBase, string pathBase, string requestPath, string expectedPathBase, string expectedPath)
-        {
-            return TestPathBase(registeredPathBase, pathBase, requestPath, expectedPathBase, expectedPath);
+        [InlineData(
+            "/base/more",
+            "/oldbase",
+            "/base/more/something",
+            "/oldbase/base/more",
+            "/something"
+        )]
+        [InlineData(
+            "/base/more",
+            "/oldbase",
+            "/base/more/something/",
+            "/oldbase/base/more",
+            "/something/"
+        )]
+        public Task RequestPathBaseContainingPathBase_IsSplit(
+            string registeredPathBase,
+            string pathBase,
+            string requestPath,
+            string expectedPathBase,
+            string expectedPath
+        ) {
+            return TestPathBase(
+                registeredPathBase,
+                pathBase,
+                requestPath,
+                expectedPathBase,
+                expectedPath
+            );
         }
 
         [Theory]
@@ -90,9 +116,20 @@ namespace Microsoft.AspNetCore.Builder.Extensions
         [InlineData("/base", "/oldbase", "/baseandsomething", "/oldbase", "/baseandsomething")]
         [InlineData("/base", "/oldbase", "/ba", "/oldbase", "/ba")]
         [InlineData("/base", "/oldbase", "/ba/se", "/oldbase", "/ba/se")]
-        public Task RequestPathBaseNotContainingPathBase_IsNotSplit(string registeredPathBase, string pathBase, string requestPath, string expectedPathBase, string expectedPath)
-        {
-            return TestPathBase(registeredPathBase, pathBase, requestPath, expectedPathBase, expectedPath);
+        public Task RequestPathBaseNotContainingPathBase_IsNotSplit(
+            string registeredPathBase,
+            string pathBase,
+            string requestPath,
+            string expectedPathBase,
+            string expectedPath
+        ) {
+            return TestPathBase(
+                registeredPathBase,
+                pathBase,
+                requestPath,
+                expectedPathBase,
+                expectedPath
+            );
         }
 
         [Theory]
@@ -106,17 +143,39 @@ namespace Microsoft.AspNetCore.Builder.Extensions
         [InlineData("/base", "/oldbase", "/base/", "/oldbase/base", "/")]
         [InlineData("/base/", "/oldbase", "/base", "/oldbase/base", "")]
         [InlineData("/base/", "/oldbase", "/base/", "/oldbase/base", "/")]
-        public Task PathBaseNeverEndsWithSlash(string registeredPathBase, string pathBase, string requestPath, string expectedPathBase, string expectedPath)
-        {
-            return TestPathBase(registeredPathBase, pathBase, requestPath, expectedPathBase, expectedPath);
+        public Task PathBaseNeverEndsWithSlash(
+            string registeredPathBase,
+            string pathBase,
+            string requestPath,
+            string expectedPathBase,
+            string expectedPath
+        ) {
+            return TestPathBase(
+                registeredPathBase,
+                pathBase,
+                requestPath,
+                expectedPathBase,
+                expectedPath
+            );
         }
 
         [Theory]
         [InlineData("/base", "", "/Base/Something", "/Base", "/Something")]
         [InlineData("/base", "/OldBase", "/Base/Something", "/OldBase/Base", "/Something")]
-        public Task PathBaseAndPathPreserveRequestCasing(string registeredPathBase, string pathBase, string requestPath, string expectedPathBase, string expectedPath)
-        {
-            return TestPathBase(registeredPathBase, pathBase, requestPath, expectedPathBase, expectedPath);
+        public Task PathBaseAndPathPreserveRequestCasing(
+            string registeredPathBase,
+            string pathBase,
+            string requestPath,
+            string expectedPathBase,
+            string expectedPath
+        ) {
+            return TestPathBase(
+                registeredPathBase,
+                pathBase,
+                requestPath,
+                expectedPathBase,
+                expectedPath
+            );
         }
 
         [Theory]
@@ -126,27 +185,50 @@ namespace Microsoft.AspNetCore.Builder.Extensions
         [InlineData("/b♫se", "/oldb♫se", "/b♫se/something", "/oldb♫se/b♫se", "/something")]
         [InlineData("/b♫se", "/oldb♫se", "/b♫se/Something", "/oldb♫se/b♫se", "/Something")]
         [InlineData("/b♫se", "/oldb♫se", "/B♫se/something", "/oldb♫se/B♫se", "/something")]
-        public Task PathBaseCanHaveUnicodeCharacters(string registeredPathBase, string pathBase, string requestPath, string expectedPathBase, string expectedPath)
-        {
-            return TestPathBase(registeredPathBase, pathBase, requestPath, expectedPathBase, expectedPath);
+        public Task PathBaseCanHaveUnicodeCharacters(
+            string registeredPathBase,
+            string pathBase,
+            string requestPath,
+            string expectedPathBase,
+            string expectedPath
+        ) {
+            return TestPathBase(
+                registeredPathBase,
+                pathBase,
+                requestPath,
+                expectedPathBase,
+                expectedPath
+            );
         }
 
-        private static async Task TestPathBase(string registeredPathBase, string pathBase, string requestPath, string expectedPathBase, string expectedPath)
-        {
+        private static async Task TestPathBase(
+            string registeredPathBase,
+            string pathBase,
+            string requestPath,
+            string expectedPathBase,
+            string expectedPath
+        ) {
             HttpContext requestContext = CreateRequest(pathBase, requestPath);
-            var builder = CreateBuilder()
-                .UsePathBase(registeredPathBase);
-            builder.Run(context =>
-            {
-                context.Items["test.Path"] = context.Request.Path;
-                context.Items["test.PathBase"] = context.Request.PathBase;
-                return Task.FromResult(0);
-            });
+            var builder = CreateBuilder().UsePathBase(registeredPathBase);
+            builder.Run(
+                context =>
+                {
+                    context.Items["test.Path"] = context.Request.Path;
+                    context.Items["test.PathBase"] = context.Request.PathBase;
+                    return Task.FromResult(0);
+                }
+            );
             await builder.Build().Invoke(requestContext);
 
             // Assert path and pathBase are split after middleware
-            Assert.Equal(expectedPath, ((PathString?)requestContext.Items["test.Path"])!.Value.Value);
-            Assert.Equal(expectedPathBase, ((PathString?)requestContext.Items["test.PathBase"])!.Value.Value);
+            Assert.Equal(
+                expectedPath,
+                ((PathString?)requestContext.Items["test.Path"])!.Value.Value
+            );
+            Assert.Equal(
+                expectedPathBase,
+                ((PathString?)requestContext.Items["test.PathBase"])!.Value.Value
+            );
 
             // Assert path and pathBase are reset after request
             Assert.Equal(pathBase, requestContext.Request.PathBase.Value);

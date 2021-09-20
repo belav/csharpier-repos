@@ -14,8 +14,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         public ImmutableHashSet<(string Id, LocalizableString Justification)> Suppressions { get; }
 
-        internal ProgrammaticSuppressionInfo(ImmutableHashSet<(string Id, LocalizableString Justification)> suppressions)
-        {
+        internal ProgrammaticSuppressionInfo(
+            ImmutableHashSet<(string Id, LocalizableString Justification)> suppressions
+        ) {
             Suppressions = suppressions;
         }
 
@@ -26,8 +27,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return true;
             }
 
-            return other != null &&
-                this.Suppressions.SetEquals(other.Suppressions);
+            return other != null && this.Suppressions.SetEquals(other.Suppressions);
         }
 
         public override bool Equals(object? obj)

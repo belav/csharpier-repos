@@ -12,26 +12,26 @@ namespace System.CommandLine.Suggest
         private readonly string _nullableToolsShimPath;
         private readonly IEnumerable<string> _filesNameWithoutExtensionUnderDotnetProfileTools;
 
-        public GlobalToolsSuggestionRegistration(string dotnetProfileDirectory = null,
-            IEnumerable<string> filesNameWithoutExtensionUnderDotnetProfileTools = null)
-        {
+        public GlobalToolsSuggestionRegistration(
+            string dotnetProfileDirectory = null,
+            IEnumerable<string> filesNameWithoutExtensionUnderDotnetProfileTools = null
+        ) {
             var directory = dotnetProfileDirectory;
             if (directory == null)
             {
                 DotnetProfileDirectory.TryGet(out directory);
             }
 
-            _nullableToolsShimPath = directory != null
-                ? Path.Combine(directory, "tools")
-                : null;
+            _nullableToolsShimPath = directory != null ? Path.Combine(directory, "tools") : null;
 
-            _filesNameWithoutExtensionUnderDotnetProfileTools 
-                = filesNameWithoutExtensionUnderDotnetProfileTools ?? FileEnumerator.EnumerateFilesWithoutExtension(new DirectoryInfo(_nullableToolsShimPath));
+            _filesNameWithoutExtensionUnderDotnetProfileTools =
+                filesNameWithoutExtensionUnderDotnetProfileTools
+                ?? FileEnumerator.EnumerateFilesWithoutExtension(
+                    new DirectoryInfo(_nullableToolsShimPath)
+                );
         }
 
-        public void AddSuggestionRegistration(Registration registration)
-        {
-        }
+        public void AddSuggestionRegistration(Registration registration) { }
 
         public IEnumerable<Registration> FindAllRegistrations()
         {
@@ -40,8 +40,9 @@ namespace System.CommandLine.Suggest
                 return Array.Empty<Registration>();
             }
 
-            return _filesNameWithoutExtensionUnderDotnetProfileTools.Select(p =>
-                new Registration(Path.Combine(_nullableToolsShimPath, p)));
+            return _filesNameWithoutExtensionUnderDotnetProfileTools.Select(
+                p => new Registration(Path.Combine(_nullableToolsShimPath, p))
+            );
         }
 
         public Registration FindRegistration(FileInfo soughtExecutable)

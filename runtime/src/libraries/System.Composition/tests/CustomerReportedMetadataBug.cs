@@ -25,9 +25,7 @@ namespace System.Composition.Lightweight.UnitTests
         [Export(typeof(IService)), ExportMetadata("Name", "1")]
         public class SampleService1 : IService
         {
-            public SampleService1()
-            {
-            }
+            public SampleService1() { }
         }
 
         public class LooseImporter
@@ -39,8 +37,7 @@ namespace System.Composition.Lightweight.UnitTests
         [Fact]
         public void SampleServicesCorrectlyImported()
         {
-            var container = new ContainerConfiguration()
-                .WithPart<SampleService1>()
+            var container = new ContainerConfiguration().WithPart<SampleService1>()
                 .CreateContainer();
 
             var importer = new LooseImporter();

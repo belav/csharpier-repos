@@ -11,7 +11,9 @@ using Xunit;
 
 namespace AppHost.Bundle.Tests
 {
-    public class HammerServiceTest : BundleTestBase, IClassFixture<HammerServiceTest.SharedTestState>
+    public class HammerServiceTest
+        : BundleTestBase,
+          IClassFixture<HammerServiceTest.SharedTestState>
     {
         private SharedTestState sharedTestState;
 
@@ -37,14 +39,29 @@ namespace AppHost.Bundle.Tests
 
             // Annotate the app as servicible, and then publish to a single-file.
             string depsjson = BundleHelper.GetDepsJsonPath(fixture);
-            File.WriteAllText(depsjson, File.ReadAllText(depsjson).Replace("\"serviceable\": false", "\"serviceable\": true"));
+            File.WriteAllText(
+                depsjson,
+                File.ReadAllText(depsjson)
+                    .Replace("\"serviceable\": false", "\"serviceable\": true")
+            );
             var singleFile = BundleSelfContainedApp(fixture);
 
             // Create the servicing directory, and copy the servived DLL from service fixture to the servicing directory.
-            var serviceBasePath = Path.Combine(fixture.TestProject.ProjectDirectory, "coreservicing");
-            var servicePath = Path.Combine(serviceBasePath, "pkgs", BundleHelper.GetAppBaseName(servicer), "1.0.0");
+            var serviceBasePath = Path.Combine(
+                fixture.TestProject.ProjectDirectory,
+                "coreservicing"
+            );
+            var servicePath = Path.Combine(
+                serviceBasePath,
+                "pkgs",
+                BundleHelper.GetAppBaseName(servicer),
+                "1.0.0"
+            );
             Directory.CreateDirectory(servicePath);
-            File.Copy(BundleHelper.GetAppPath(servicer), Path.Combine(servicePath, BundleHelper.GetAppName(servicer)));
+            File.Copy(
+                BundleHelper.GetAppPath(servicer),
+                Path.Combine(servicePath, BundleHelper.GetAppName(servicer))
+            );
 
             // Verify that the test DLL is loaded from the bundle when not being serviced
             Command.Create(singleFile)
@@ -53,8 +70,7 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hi Bellevue!");
+                .And.HaveStdOutContaining("Hi Bellevue!");
 
             // Verify that the test DLL is loaded from the servicing location when being serviced
             Command.Create(singleFile)
@@ -64,8 +80,7 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hi Bengaluru!");
+                .And.HaveStdOutContaining("Hi Bengaluru!");
         }
 
         public class SharedTestState : SharedTestStateBase, IDisposable
@@ -78,11 +93,13 @@ namespace AppHost.Bundle.Tests
                 RepoDirectories = new RepoDirectoriesProvider();
                 TestFixture = PreparePublishedSelfContainedTestProject("HammerServiceApp");
 
-                ServiceFixture = new TestProjectFixture("ServicedLocation", RepoDirectories, assemblyName: "Location");
-                ServiceFixture
-                    .EnsureRestored()
+                ServiceFixture = new TestProjectFixture(
+                    "ServicedLocation",
+                    RepoDirectories,
+                    assemblyName: "Location"
+                );
+                ServiceFixture.EnsureRestored()
                     .PublishProject(outputDirectory: BundleHelper.GetPublishPath(ServiceFixture));
-
             }
 
             public void Dispose()

@@ -26,8 +26,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     AttributeData attribute,
                     Project project,
                     Diagnostic diagnostic,
-                    AbstractSuppressionCodeFixProvider fixer)
-                {
+                    AbstractSuppressionCodeFixProvider fixer
+                ) {
                     return new AttributeRemoveAction(attribute, project, diagnostic, fixer);
                 }
 
@@ -36,36 +36,53 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     Project project,
                     Diagnostic diagnostic,
                     AbstractSuppressionCodeFixProvider fixer,
-                    bool forFixMultipleContext = false)
-                    : base(diagnostic, fixer, forFixMultipleContext)
+                    bool forFixMultipleContext = false
+                ) : base(diagnostic, fixer, forFixMultipleContext)
                 {
                     _project = project;
                     _attribute = attribute;
                 }
 
-                public override RemoveSuppressionCodeAction CloneForFixMultipleContext()
-                    => new AttributeRemoveAction(_attribute, _project, _diagnostic, Fixer, forFixMultipleContext: true);
+                public override RemoveSuppressionCodeAction CloneForFixMultipleContext() =>
+                    new AttributeRemoveAction(
+                        _attribute,
+                        _project,
+                        _diagnostic,
+                        Fixer,
+                        forFixMultipleContext: true
+                    );
 
-                public override SyntaxTree SyntaxTreeToModify => _attribute.ApplicationSyntaxReference.SyntaxTree;
+                public override SyntaxTree SyntaxTreeToModify =>
+                    _attribute.ApplicationSyntaxReference.SyntaxTree;
 
-                public async Task<SyntaxNode> GetAttributeToRemoveAsync(CancellationToken cancellationToken)
-                {
-                    var attributeNode = await _attribute.ApplicationSyntaxReference.GetSyntaxAsync(cancellationToken).ConfigureAwait(false);
-                    return Fixer.IsSingleAttributeInAttributeList(attributeNode) ?
-                        attributeNode.Parent :
-                        attributeNode;
+                public async Task<SyntaxNode> GetAttributeToRemoveAsync(
+                    CancellationToken cancellationToken
+                ) {
+                    var attributeNode = await _attribute.ApplicationSyntaxReference.GetSyntaxAsync(
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
+                    return Fixer.IsSingleAttributeInAttributeList(attributeNode)
+                      ? attributeNode.Parent
+                      : attributeNode;
                 }
 
-                protected override async Task<Solution> GetChangedSolutionAsync(CancellationToken cancellationToken)
-                {
-                    var attributeNode = await GetAttributeToRemoveAsync(cancellationToken).ConfigureAwait(false);
+                protected override async Task<Solution> GetChangedSolutionAsync(
+                    CancellationToken cancellationToken
+                ) {
+                    var attributeNode = await GetAttributeToRemoveAsync(cancellationToken)
+                        .ConfigureAwait(false);
                     var documentWithAttribute = _project.GetDocument(attributeNode.SyntaxTree);
                     if (documentWithAttribute == null)
                     {
                         return _project.Solution;
                     }
 
-                    var editor = await DocumentEditor.CreateAsync(documentWithAttribute, cancellationToken).ConfigureAwait(false);
+                    var editor = await DocumentEditor.CreateAsync(
+                            documentWithAttribute,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     editor.RemoveNode(attributeNode);
                     return editor.GetChangedDocument().Project.Solution;
                 }

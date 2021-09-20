@@ -14,14 +14,19 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
     {
         private class FormattingRule : AbstractFormattingRule
         {
-            public FormattingRule()
-            {
-            }
+            public FormattingRule() { }
 
-            public override AdjustNewLinesOperation GetAdjustNewLinesOperation(in SyntaxToken previousToken, in SyntaxToken currentToken, in NextGetAdjustNewLinesOperation nextOperation)
-            {
+            public override AdjustNewLinesOperation GetAdjustNewLinesOperation(
+                in SyntaxToken previousToken,
+                in SyntaxToken currentToken,
+                in NextGetAdjustNewLinesOperation nextOperation
+            ) {
                 // for extract method case, for a hybrid case, don't force rule, but preserve user style
-                var operation = base.GetAdjustNewLinesOperation(in previousToken, in currentToken, in nextOperation);
+                var operation = base.GetAdjustNewLinesOperation(
+                    in previousToken,
+                    in currentToken,
+                    in nextOperation
+                );
                 if (operation == null)
                 {
                     return null;
@@ -29,7 +34,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 if (operation.Option == AdjustNewLinesOption.ForceLinesIfOnSingleLine)
                 {
-                    return FormattingOperations.CreateAdjustNewLinesOperation(operation.Line, AdjustNewLinesOption.PreserveLines);
+                    return FormattingOperations.CreateAdjustNewLinesOperation(
+                        operation.Line,
+                        AdjustNewLinesOption.PreserveLines
+                    );
                 }
 
                 if (operation.Option != AdjustNewLinesOption.ForceLines)
@@ -45,21 +53,33 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 if (previousToken.BetweenFieldAndNonFieldMember(currentToken))
                 {
                     // make sure to have at least 2 line breaks between field and other members except field
-                    return FormattingOperations.CreateAdjustNewLinesOperation(2, AdjustNewLinesOption.PreserveLines);
+                    return FormattingOperations.CreateAdjustNewLinesOperation(
+                        2,
+                        AdjustNewLinesOption.PreserveLines
+                    );
                 }
 
                 if (previousToken.HasHybridTriviaBetween(currentToken))
                 {
-                    return FormattingOperations.CreateAdjustNewLinesOperation(operation.Line, AdjustNewLinesOption.PreserveLines);
+                    return FormattingOperations.CreateAdjustNewLinesOperation(
+                        operation.Line,
+                        AdjustNewLinesOption.PreserveLines
+                    );
                 }
 
                 return operation;
             }
 
-            public override void AddAnchorIndentationOperations(List<AnchorIndentationOperation> list, SyntaxNode node, in NextAnchorIndentationOperationAction nextOperation)
-            {
-                if (node.IsKind(SyntaxKind.SimpleLambdaExpression) || node.IsKind(SyntaxKind.ParenthesizedLambdaExpression) || node.IsKind(SyntaxKind.AnonymousMethodExpression))
-                {
+            public override void AddAnchorIndentationOperations(
+                List<AnchorIndentationOperation> list,
+                SyntaxNode node,
+                in NextAnchorIndentationOperationAction nextOperation
+            ) {
+                if (
+                    node.IsKind(SyntaxKind.SimpleLambdaExpression)
+                    || node.IsKind(SyntaxKind.ParenthesizedLambdaExpression)
+                    || node.IsKind(SyntaxKind.AnonymousMethodExpression)
+                ) {
                     return;
                 }
 

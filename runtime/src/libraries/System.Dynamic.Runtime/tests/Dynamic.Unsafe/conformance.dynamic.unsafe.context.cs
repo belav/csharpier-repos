@@ -33,8 +33,6 @@ namespace ManagedTests.DynamicCSharp.conformance.dynamic.unsfe.context.class01.c
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.conformance.dynamic.unsfe.context.codeblock01.codeblock01
 {
     public unsafe class Test
@@ -58,8 +56,6 @@ namespace ManagedTests.DynamicCSharp.conformance.dynamic.unsfe.context.codeblock
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.conformance.dynamic.unsfe.context.freach01.freach01
 {
@@ -85,11 +81,7 @@ namespace ManagedTests.DynamicCSharp.conformance.dynamic.unsfe.context.freach01.
 
         public static int MainMethod(string[] args)
         {
-            C[] arrayC = new C[]
-            {
-            new C(), new C(), new C()}
-
-            ;
+            C[] arrayC = new C[] { new C(), new C(), new C() };
             foreach (dynamic d in arrayC) // C is an unsafe type
             {
                 if (d.GetType() != typeof(C))
@@ -103,8 +95,6 @@ namespace ManagedTests.DynamicCSharp.conformance.dynamic.unsfe.context.freach01.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.conformance.dynamic.unsfe.context.freach02.freach02
 {
@@ -130,11 +120,7 @@ namespace ManagedTests.DynamicCSharp.conformance.dynamic.unsfe.context.freach02.
 
         public static int MainMethod(string[] args)
         {
-            dynamic arrayC = new C[]
-            {
-            new C(), new C(), new C()}
-
-            ;
+            dynamic arrayC = new C[] { new C(), new C(), new C() };
             foreach (C c in arrayC) // C is an unsafe type
             {
                 if (c.GetType() != typeof(C))
@@ -147,8 +133,6 @@ namespace ManagedTests.DynamicCSharp.conformance.dynamic.unsfe.context.freach02.
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.conformance.dynamic.unsfe.context.freach03.freach03
 {
@@ -187,8 +171,6 @@ namespace ManagedTests.DynamicCSharp.conformance.dynamic.unsfe.context.freach03.
     //// </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.conformance.dynamic.unsfe.context.strct01.strct01
 {
     // <Area> dynamic in unsafe code </Area>
@@ -219,8 +201,6 @@ namespace ManagedTests.DynamicCSharp.conformance.dynamic.unsfe.context.strct01.s
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.conformance.dynamic.unsfe.context.while01.while01
 {
@@ -254,8 +234,7 @@ namespace ManagedTests.DynamicCSharp.conformance.dynamic.unsfe.context.while01.w
                     dynamic d = new C();
                     int* p = &index;
                     *p = *p - 1;
-                }
-                while (index > 0);
+                } while (index > 0);
             }
 
             return 0;

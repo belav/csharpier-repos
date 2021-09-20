@@ -38,8 +38,10 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         /// <param name="componentType">The view component <see cref="Type"/>.</param>
         /// <returns>A <see cref="Task"/> that on completion returns the rendered <see cref="IHtmlContent" />.
         /// </returns>
-        public static Task<IHtmlContent> InvokeAsync(this IViewComponentHelper helper, Type componentType)
-        {
+        public static Task<IHtmlContent> InvokeAsync(
+            this IViewComponentHelper helper,
+            Type componentType
+        ) {
             if (helper == null)
             {
                 throw new ArgumentNullException(nameof(helper));
@@ -56,8 +58,10 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         /// <typeparam name="TComponent">The <see cref="Type"/> of the view component.</typeparam>
         /// <returns>A <see cref="Task"/> that on completion returns the rendered <see cref="IHtmlContent" />.
         /// </returns>
-        public static Task<IHtmlContent> InvokeAsync<TComponent>(this IViewComponentHelper helper, object? arguments)
-        {
+        public static Task<IHtmlContent> InvokeAsync<TComponent>(
+            this IViewComponentHelper helper,
+            object? arguments
+        ) {
             if (helper == null)
             {
                 throw new ArgumentNullException(nameof(helper));

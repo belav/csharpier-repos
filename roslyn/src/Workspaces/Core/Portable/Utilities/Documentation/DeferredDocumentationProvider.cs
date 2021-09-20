@@ -11,25 +11,31 @@ namespace Microsoft.CodeAnalysis
     {
         private readonly Compilation _compilation;
 
-        public DeferredDocumentationProvider(Compilation compilation)
-            => _compilation = compilation;
+        public DeferredDocumentationProvider(Compilation compilation) => _compilation = compilation;
 
-        protected override string? GetDocumentationForSymbol(string documentationMemberID, CultureInfo preferredCulture, CancellationToken cancellationToken = default)
-        {
-            var symbol = DocumentationCommentId.GetFirstSymbolForDeclarationId(documentationMemberID, _compilation);
+        protected override string? GetDocumentationForSymbol(
+            string documentationMemberID,
+            CultureInfo preferredCulture,
+            CancellationToken cancellationToken = default
+        ) {
+            var symbol = DocumentationCommentId.GetFirstSymbolForDeclarationId(
+                documentationMemberID,
+                _compilation
+            );
 
             if (symbol != null)
             {
-                return symbol.GetDocumentationCommentXml(preferredCulture, cancellationToken: cancellationToken);
+                return symbol.GetDocumentationCommentXml(
+                    preferredCulture,
+                    cancellationToken: cancellationToken
+                );
             }
 
             return string.Empty;
         }
 
-        public override bool Equals(object? obj)
-            => object.ReferenceEquals(this, obj);
+        public override bool Equals(object? obj) => object.ReferenceEquals(this, obj);
 
-        public override int GetHashCode()
-            => _compilation.GetHashCode();
+        public override int GetHashCode() => _compilation.GetHashCode();
     }
 }

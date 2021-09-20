@@ -35,8 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
                 bool includeXmlDocComments = false,
                 string? sourceWithSymbolReference = null,
                 string? languageVersion = null,
-                string? metadataLanguageVersion = null)
-            {
+                string? metadataLanguageVersion = null
+            ) {
                 projectLanguage ??= LanguageNames.CSharp;
                 metadataSources ??= SpecializedCollections.EmptyEnumerable<string>();
                 metadataSources = !metadataSources.Any()
@@ -44,8 +44,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
                     : metadataSources;
 
                 var workspace = CreateWorkspace(
-                    projectLanguage, metadataSources, includeXmlDocComments,
-                    sourceWithSymbolReference, languageVersion, metadataLanguageVersion);
+                    projectLanguage,
+                    metadataSources,
+                    includeXmlDocComments,
+                    sourceWithSymbolReference,
+                    languageVersion,
+                    metadataLanguageVersion
+                );
                 return new TestContext(workspace);
             }
 
@@ -65,17 +70,27 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
                 get { return this.CurrentSolution.Projects.First(); }
             }
 
-            public Task<MetadataAsSourceFile> GenerateSourceAsync(ISymbol symbol, Project? project = null, bool allowDecompilation = false)
-            {
+            public Task<MetadataAsSourceFile> GenerateSourceAsync(
+                ISymbol symbol,
+                Project? project = null,
+                bool allowDecompilation = false
+            ) {
                 project ??= this.DefaultProject;
                 Contract.ThrowIfNull(symbol);
 
                 // Generate and hold onto the result so it can be disposed of with this context
-                return _metadataAsSourceService.GetGeneratedFileAsync(project, symbol, allowDecompilation);
+                return _metadataAsSourceService.GetGeneratedFileAsync(
+                    project,
+                    symbol,
+                    allowDecompilation
+                );
             }
 
-            public async Task<MetadataAsSourceFile> GenerateSourceAsync(string? symbolMetadataName = null, Project? project = null, bool allowDecompilation = false)
-            {
+            public async Task<MetadataAsSourceFile> GenerateSourceAsync(
+                string? symbolMetadataName = null,
+                Project? project = null,
+                bool allowDecompilation = false
+            ) {
                 symbolMetadataName ??= AbstractMetadataAsSourceTests.DefaultSymbolMetadataName;
                 project ??= this.DefaultProject;
 
@@ -87,7 +102,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
                 Contract.ThrowIfNull(symbol);
 
                 // Generate and hold onto the result so it can be disposed of with this context
-                var result = await _metadataAsSourceService.GetGeneratedFileAsync(project, symbol, allowDecompilation);
+                var result = await _metadataAsSourceService.GetGeneratedFileAsync(
+                    project,
+                    symbol,
+                    allowDecompilation
+                );
 
                 return result;
             }
@@ -105,17 +124,24 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
                 Assert.Equal(expectedSpan.End, actualSpan.End);
             }
 
-            public async Task GenerateAndVerifySourceAsync(string symbolMetadataName, string expected, Project? project = null)
-            {
+            public async Task GenerateAndVerifySourceAsync(
+                string symbolMetadataName,
+                string expected,
+                Project? project = null
+            ) {
                 var result = await GenerateSourceAsync(symbolMetadataName, project);
                 VerifyResult(result, expected);
             }
 
-            public static void VerifyDocumentReused(MetadataAsSourceFile a, MetadataAsSourceFile b)
-                => Assert.Same(a.FilePath, b.FilePath);
+            public static void VerifyDocumentReused(
+                MetadataAsSourceFile a,
+                MetadataAsSourceFile b
+            ) => Assert.Same(a.FilePath, b.FilePath);
 
-            public static void VerifyDocumentNotReused(MetadataAsSourceFile a, MetadataAsSourceFile b)
-                => Assert.NotSame(a.FilePath, b.FilePath);
+            public static void VerifyDocumentNotReused(
+                MetadataAsSourceFile a,
+                MetadataAsSourceFile b
+            ) => Assert.NotSame(a.FilePath, b.FilePath);
 
             public void Dispose()
             {
@@ -123,24 +149,31 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
                 {
                     _metadataAsSourceService.CleanupGeneratedFiles();
                 }
+
                 finally
                 {
                     _workspace.Dispose();
                 }
             }
 
-            public async Task<ISymbol?> ResolveSymbolAsync(string symbolMetadataName, Compilation? compilation = null)
-            {
+            public async Task<ISymbol?> ResolveSymbolAsync(
+                string symbolMetadataName,
+                Compilation? compilation = null
+            ) {
                 if (compilation == null)
                 {
-                    compilation = await this.DefaultProject.GetRequiredCompilationAsync(CancellationToken.None);
+                    compilation = await this.DefaultProject.GetRequiredCompilationAsync(
+                        CancellationToken.None
+                    );
                     var diagnostics = compilation.GetDiagnostics().ToArray();
                     Assert.Equal(0, diagnostics.Length);
                 }
 
                 foreach (var reference in compilation.References)
                 {
-                    var assemblySymbol = (IAssemblySymbol?)compilation.GetAssemblyOrModuleSymbol(reference);
+                    var assemblySymbol = (IAssemblySymbol?)compilation.GetAssemblyOrModuleSymbol(
+                        reference
+                    );
                     Contract.ThrowIfNull(assemblySymbol);
 
                     var namedTypeSymbol = assemblySymbol.GetTypeByMetadataName(symbolMetadataName);
@@ -191,19 +224,19 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
 
             private static bool ContainsVisualBasicKeywords(string input)
             {
-                return
-                    input.Contains("Class") ||
-                    input.Contains("Structure") ||
-                    input.Contains("Namespace") ||
-                    input.Contains("Sub") ||
-                    input.Contains("Function") ||
-                    input.Contains("Dim");
+                return input.Contains("Class")
+                    || input.Contains("Structure")
+                    || input.Contains("Namespace")
+                    || input.Contains("Sub")
+                    || input.Contains("Function")
+                    || input.Contains("Dim");
             }
 
             private static string DeduceLanguageString(string input)
             {
                 return ContainsVisualBasicKeywords(input)
-                    ? LanguageNames.VisualBasic : LanguageNames.CSharp;
+                  ? LanguageNames.VisualBasic
+                  : LanguageNames.CSharp;
             }
 
             private static TestWorkspace CreateWorkspace(
@@ -212,13 +245,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
                 bool includeXmlDocComments,
                 string? sourceWithSymbolReference,
                 string? languageVersion,
-                string? metadataLanguageVersion)
-            {
-                var languageVersionAttribute = languageVersion is null ? "" : $@" LanguageVersion=""{languageVersion}""";
+                string? metadataLanguageVersion
+            ) {
+                var languageVersionAttribute = languageVersion is null
+                    ? ""
+                    : $@" LanguageVersion=""{languageVersion}""";
 
-                var xmlString = string.Concat(@"
+                var xmlString = string.Concat(
+                    @"
 <Workspace>
-    <Project Language=""", projectLanguage, @""" CommonReferences=""true""", languageVersionAttribute);
+    <Project Language=""",
+                    projectLanguage,
+                    @""" CommonReferences=""true""",
+                    languageVersionAttribute
+                );
 
                 xmlString += ">";
 
@@ -227,27 +267,40 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
                 foreach (var source in metadataSources)
                 {
                     var metadataLanguage = DeduceLanguageString(source);
-                    var metadataLanguageVersionAttribute = metadataLanguageVersion is null ? "" : $@" LanguageVersion=""{metadataLanguageVersion}""";
-                    xmlString = string.Concat(xmlString, $@"
+                    var metadataLanguageVersionAttribute = metadataLanguageVersion is null
+                        ? ""
+                        : $@" LanguageVersion=""{metadataLanguageVersion}""";
+                    xmlString = string.Concat(
+                        xmlString,
+                        $@"
         <MetadataReferenceFromSource Language=""{metadataLanguage}"" CommonReferences=""true"" {metadataLanguageVersionAttribute} IncludeXmlDocComments=""{includeXmlDocComments}"">
             <Document FilePath=""MetadataDocument"">
 {SecurityElement.Escape(source)}
             </Document>
-        </MetadataReferenceFromSource>");
+        </MetadataReferenceFromSource>"
+                    );
                 }
 
                 if (sourceWithSymbolReference != null)
                 {
-                    xmlString = string.Concat(xmlString, string.Format(@"
+                    xmlString = string.Concat(
+                        xmlString,
+                        string.Format(
+                            @"
         <Document FilePath=""SourceDocument"">
 {0}
         </Document>",
-                        sourceWithSymbolReference));
+                            sourceWithSymbolReference
+                        )
+                    );
                 }
 
-                xmlString = string.Concat(xmlString, @"
+                xmlString = string.Concat(
+                    xmlString,
+                    @"
     </Project>
-</Workspace>");
+</Workspace>"
+                );
 
                 return TestWorkspace.Create(xmlString);
             }
@@ -257,7 +310,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
                 using var reader = File.OpenRead(file.FilePath);
                 var stringText = EncodedStringText.Create(reader);
 
-                Assert.True(_metadataAsSourceService.TryAddDocumentToWorkspace(file.FilePath, stringText.Container));
+                Assert.True(
+                    _metadataAsSourceService.TryAddDocumentToWorkspace(
+                        file.FilePath,
+                        stringText.Container
+                    )
+                );
 
                 return stringText.Container.GetRelatedDocuments().Single();
             }
@@ -268,8 +326,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
                 var document = _workspace.CurrentSolution.GetRequiredDocument(testDocument.Id);
 
                 var syntaxRoot = await document.GetRequiredSyntaxRootAsync(CancellationToken.None);
-                var semanticModel = await document.GetRequiredSemanticModelAsync(CancellationToken.None);
-                var symbol = semanticModel.GetSymbolInfo(syntaxRoot.FindNode(testDocument.SelectedSpans.Single())).Symbol;
+                var semanticModel = await document.GetRequiredSemanticModelAsync(
+                    CancellationToken.None
+                );
+                var symbol =
+                    semanticModel.GetSymbolInfo(
+                        syntaxRoot.FindNode(testDocument.SelectedSpans.Single())
+                    ).Symbol;
                 Contract.ThrowIfNull(symbol);
                 return symbol;
             }

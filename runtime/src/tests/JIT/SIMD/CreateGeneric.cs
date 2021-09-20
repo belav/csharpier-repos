@@ -8,8 +8,8 @@ namespace VectorMathTests
 {
     class Program
     {
-		const float EPS = Single.Epsilon * 5;
-		
+        const float EPS = Single.Epsilon * 5;
+
         static int Main(string[] args)
         {
             var a = new System.Numerics.Vector<short>(51);

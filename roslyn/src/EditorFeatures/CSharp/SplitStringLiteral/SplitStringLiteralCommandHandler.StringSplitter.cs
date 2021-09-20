@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
             protected static readonly SyntaxToken PlusNewLineToken = SyntaxFactory.Token(
                 leading: default,
                 SyntaxKind.PlusToken,
-                SyntaxFactory.TriviaList(SyntaxFactory.ElasticCarriageReturnLineFeed));
+                SyntaxFactory.TriviaList(SyntaxFactory.ElasticCarriageReturnLineFeed)
+            );
 
             protected readonly Document Document;
             protected readonly int CursorPosition;
@@ -39,11 +40,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
             private readonly IndentStyle _indentStyle;
 
             public StringSplitter(
-                Document document, int position,
-                SyntaxNode root, SourceText sourceText,
-                bool useTabs, int tabSize,
-                IndentStyle indentStyle, CancellationToken cancellationToken)
-            {
+                Document document,
+                int position,
+                SyntaxNode root,
+                SourceText sourceText,
+                bool useTabs,
+                int tabSize,
+                IndentStyle indentStyle,
+                CancellationToken cancellationToken
+            ) {
                 Document = document;
                 CursorPosition = position;
                 Root = root;
@@ -55,40 +60,63 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
             }
 
             public static StringSplitter Create(
-                Document document, int position,
-                SyntaxNode root, SourceText sourceText,
-                bool useTabs, int tabSize, IndentStyle indentStyle,
-                CancellationToken cancellationToken)
-            {
+                Document document,
+                int position,
+                SyntaxNode root,
+                SourceText sourceText,
+                bool useTabs,
+                int tabSize,
+                IndentStyle indentStyle,
+                CancellationToken cancellationToken
+            ) {
                 var token = root.FindToken(position);
 
                 if (token.IsKind(SyntaxKind.StringLiteralToken))
                 {
                     return new SimpleStringSplitter(
-                        document, position, root,
-                        sourceText, token, useTabs, tabSize,
-                        indentStyle, cancellationToken);
+                        document,
+                        position,
+                        root,
+                        sourceText,
+                        token,
+                        useTabs,
+                        tabSize,
+                        indentStyle,
+                        cancellationToken
+                    );
                 }
 
-                var interpolatedStringExpression = TryGetInterpolatedStringExpression(token, position);
+                var interpolatedStringExpression = TryGetInterpolatedStringExpression(
+                    token,
+                    position
+                );
                 if (interpolatedStringExpression != null)
                 {
                     return new InterpolatedStringSplitter(
-                        document, position, root,
-                        sourceText, interpolatedStringExpression,
-                        useTabs, tabSize, indentStyle, cancellationToken);
+                        document,
+                        position,
+                        root,
+                        sourceText,
+                        interpolatedStringExpression,
+                        useTabs,
+                        tabSize,
+                        indentStyle,
+                        cancellationToken
+                    );
                 }
 
                 return null;
             }
 
             private static InterpolatedStringExpressionSyntax TryGetInterpolatedStringExpression(
-                SyntaxToken token, int position)
-            {
-                if (token.IsKind(SyntaxKind.InterpolatedStringTextToken) ||
-                    token.IsKind(SyntaxKind.InterpolatedStringEndToken) ||
-                    IsInterpolationOpenBrace(token, position))
-                {
+                SyntaxToken token,
+                int position
+            ) {
+                if (
+                    token.IsKind(SyntaxKind.InterpolatedStringTextToken)
+                    || token.IsKind(SyntaxKind.InterpolatedStringEndToken)
+                    || IsInterpolationOpenBrace(token, position)
+                ) {
                     return token.GetAncestor<InterpolatedStringExpressionSyntax>();
                 }
 
@@ -97,9 +125,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
 
             private static bool IsInterpolationOpenBrace(SyntaxToken token, int position)
             {
-                return token.Kind() == SyntaxKind.OpenBraceToken &&
-                    token.Parent.IsKind(SyntaxKind.Interpolation) &&
-                    position == token.SpanStart;
+                return token.Kind() == SyntaxKind.OpenBraceToken
+                    && token.Parent.IsKind(SyntaxKind.Interpolation)
+                    && position == token.SpanStart;
             }
 
             protected abstract int StringOpenQuoteLength();
@@ -114,8 +142,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
             {
                 var nodeToReplace = GetNodeToReplace();
 
-                if (CursorPosition <= nodeToReplace.SpanStart || CursorPosition >= nodeToReplace.Span.End)
-                {
+                if (
+                    CursorPosition <= nodeToReplace.SpanStart
+                    || CursorPosition >= nodeToReplace.Span.End
+                ) {
                     return null;
                 }
 
@@ -146,11 +176,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
                 var rightExpression = newRoot.GetAnnotatedNodes(RightNodeAnnotation).Single();
 
                 var indentString = GetIndentString(newRoot);
-                var newRightExpression = rightExpression.WithLeadingTrivia(SyntaxFactory.ElasticWhitespace(indentString));
+                var newRightExpression = rightExpression.WithLeadingTrivia(
+                    SyntaxFactory.ElasticWhitespace(indentString)
+                );
                 var newRoot2 = newRoot.ReplaceNode(rightExpression, newRightExpression);
                 var newDocument2 = Document.WithSyntaxRoot(newRoot2);
 
-                return (newDocument2, rightExpression.Span.Start + indentString.Length + StringOpenQuoteLength());
+                return (
+                    newDocument2,
+                    rightExpression.Span.Start + indentString.Length + StringOpenQuoteLength()
+                );
             }
 
             private string GetIndentString(SyntaxNode newRoot)
@@ -158,16 +193,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
                 var newDocument = Document.WithSyntaxRoot(newRoot);
 
                 var indentationService = newDocument.GetLanguageService<IIndentationService>();
-                var originalLineNumber = SourceText.Lines.GetLineFromPosition(CursorPosition).LineNumber;
+                var originalLineNumber =
+                    SourceText.Lines.GetLineFromPosition(CursorPosition).LineNumber;
 
                 var desiredIndentation = indentationService.GetIndentation(
-                    newDocument, originalLineNumber + 1, _indentStyle, CancellationToken);
+                    newDocument,
+                    originalLineNumber + 1,
+                    _indentStyle,
+                    CancellationToken
+                );
 
-                var newSourceText = newDocument.GetSyntaxRootSynchronously(CancellationToken).SyntaxTree.GetText(CancellationToken);
-                var baseLine = newSourceText.Lines.GetLineFromPosition(desiredIndentation.BasePosition);
+                var newSourceText = newDocument.GetSyntaxRootSynchronously(CancellationToken)
+                    .SyntaxTree.GetText(CancellationToken);
+                var baseLine = newSourceText.Lines.GetLineFromPosition(
+                    desiredIndentation.BasePosition
+                );
 
                 var baseOffsetInLineInPositions = desiredIndentation.BasePosition - baseLine.Start;
-                var baseOffsetInLineInColumns = baseLine.GetColumnFromLineOffset(baseOffsetInLineInPositions, TabSize);
+                var baseOffsetInLineInColumns = baseLine.GetColumnFromLineOffset(
+                    baseOffsetInLineInPositions,
+                    TabSize
+                );
 
                 var indent = baseOffsetInLineInColumns + desiredIndentation.Offset;
                 var indentString = indent.CreateIndentationString(UseTabs, TabSize);

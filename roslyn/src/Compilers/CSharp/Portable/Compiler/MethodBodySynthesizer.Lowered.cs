@@ -30,20 +30,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 int i = 0;
                 goto start;
 
-again:
+                again:
                 hashCode = unchecked((text[i] ^ hashCode) * 16777619);
                 i = i + 1;
 
-start:
+                start:
                 if (i < text.Length)
                     goto again;
             }
             return hashCode;
         }
 
-        internal override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
-        {
-            SyntheticBoundNodeFactory F = new SyntheticBoundNodeFactory(this, this.GetNonNullSyntaxNode(), compilationState, diagnostics);
+        internal override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        ) {
+            SyntheticBoundNodeFactory F = new SyntheticBoundNodeFactory(
+                this,
+                this.GetNonNullSyntaxNode(),
+                compilationState,
+                diagnostics
+            );
             F.CurrentFunction = this;
 
             try
@@ -78,41 +85,67 @@ start:
                 //return hashCode;
 
                 var body = F.Block(
-                        ImmutableArray.Create<LocalSymbol>(hashCode, i),
-                        F.If(
-                            F.Binary(BinaryOperatorKind.ObjectNotEqual, F.SpecialType(SpecialType.System_Boolean),
-                                F.Parameter(text),
-                                F.Null(text.Type)),
-                            F.Block(
-                                F.Assignment(F.Local(hashCode), F.Literal((uint)2166136261)),
-                                F.Assignment(F.Local(i), F.Literal(0)),
-                                F.Goto(start),
-                                F.Label(again),
-                                F.Assignment(
-                                    F.Local(hashCode),
-                                    F.Binary(BinaryOperatorKind.Multiplication, hashCode.Type,
-                                        F.Binary(BinaryOperatorKind.Xor, hashCode.Type,
-                                            F.Convert(hashCode.Type,
-                                                F.Call(
-                                                    F.Parameter(text),
-                                                    F.SpecialMethod(SpecialMember.System_String__Chars),
-                                                    F.Local(i)),
-                                                Conversion.ImplicitNumeric),
-                                            F.Local(hashCode)),
-                                        F.Literal(16777619))),
-                                F.Assignment(
+                    ImmutableArray.Create<LocalSymbol>(hashCode, i),
+                    F.If(
+                        F.Binary(
+                            BinaryOperatorKind.ObjectNotEqual,
+                            F.SpecialType(SpecialType.System_Boolean),
+                            F.Parameter(text),
+                            F.Null(text.Type)
+                        ),
+                        F.Block(
+                            F.Assignment(F.Local(hashCode), F.Literal((uint)2166136261)),
+                            F.Assignment(F.Local(i), F.Literal(0)),
+                            F.Goto(start),
+                            F.Label(again),
+                            F.Assignment(
+                                F.Local(hashCode),
+                                F.Binary(
+                                    BinaryOperatorKind.Multiplication,
+                                    hashCode.Type,
+                                    F.Binary(
+                                        BinaryOperatorKind.Xor,
+                                        hashCode.Type,
+                                        F.Convert(
+                                            hashCode.Type,
+                                            F.Call(
+                                                F.Parameter(text),
+                                                F.SpecialMethod(SpecialMember.System_String__Chars),
+                                                F.Local(i)
+                                            ),
+                                            Conversion.ImplicitNumeric
+                                        ),
+                                        F.Local(hashCode)
+                                    ),
+                                    F.Literal(16777619)
+                                )
+                            ),
+                            F.Assignment(
+                                F.Local(i),
+                                F.Binary(
+                                    BinaryOperatorKind.Addition,
+                                    i.Type,
                                     F.Local(i),
-                                    F.Binary(BinaryOperatorKind.Addition, i.Type,
-                                        F.Local(i),
-                                        F.Literal(1))),
-                                F.Label(start),
-                                F.If(
-                                    F.Binary(BinaryOperatorKind.LessThan, F.SpecialType(SpecialType.System_Boolean),
-                                        F.Local(i),
-                                        F.Call(F.Parameter(text), F.SpecialMethod(SpecialMember.System_String__Length))),
-                                    F.Goto(again)))),
-                        F.Return(F.Local(hashCode))
-                    );
+                                    F.Literal(1)
+                                )
+                            ),
+                            F.Label(start),
+                            F.If(
+                                F.Binary(
+                                    BinaryOperatorKind.LessThan,
+                                    F.SpecialType(SpecialType.System_Boolean),
+                                    F.Local(i),
+                                    F.Call(
+                                        F.Parameter(text),
+                                        F.SpecialMethod(SpecialMember.System_String__Length)
+                                    )
+                                ),
+                                F.Goto(again)
+                            )
+                        )
+                    ),
+                    F.Return(F.Local(hashCode))
+                );
 
                 // NOTE: we created this block in its most-lowered form, so analysis is unnecessary
                 F.CloseMethod(body);
@@ -125,7 +158,8 @@ start:
         }
     }
 
-    internal sealed partial class SynthesizedExplicitImplementationForwardingMethod : SynthesizedImplementationMethod
+    internal sealed partial class SynthesizedExplicitImplementationForwardingMethod
+        : SynthesizedImplementationMethod
     {
         internal override bool SynthesizesLoweredBoundBody
         {
@@ -142,19 +176,33 @@ start:
         ///     return this.Goo&lt;T1, T2, ...&gt;(a1, a2, ...);
         /// }
         /// </summary>
-        internal override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
-        {
-            SyntheticBoundNodeFactory F = new SyntheticBoundNodeFactory(this, this.GetNonNullSyntaxNode(), compilationState, diagnostics);
+        internal override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        ) {
+            SyntheticBoundNodeFactory F = new SyntheticBoundNodeFactory(
+                this,
+                this.GetNonNullSyntaxNode(),
+                compilationState,
+                diagnostics
+            );
             F.CurrentFunction = (MethodSymbol)this.OriginalDefinition;
 
             try
             {
-                MethodSymbol methodToInvoke =
-                    this.IsGenericMethod ?
-                        this.ImplementingMethod.Construct(this.TypeParameters.Cast<TypeParameterSymbol, TypeSymbol>()) :
-                        this.ImplementingMethod;
+                MethodSymbol methodToInvoke = this.IsGenericMethod
+                    ? this.ImplementingMethod.Construct(
+                          this.TypeParameters.Cast<TypeParameterSymbol, TypeSymbol>()
+                      )
+                    : this.ImplementingMethod;
 
-                F.CloseMethod(MethodBodySynthesizer.ConstructSingleInvocationMethodBody(F, methodToInvoke, useBaseReference: false));
+                F.CloseMethod(
+                    MethodBodySynthesizer.ConstructSingleInvocationMethodBody(
+                        F,
+                        methodToInvoke,
+                        useBaseReference: false
+                    )
+                );
             }
             catch (SyntheticBoundNodeFactory.MissingPredefinedMember ex)
             {
@@ -164,7 +212,8 @@ start:
         }
     }
 
-    internal sealed partial class SynthesizedSealedPropertyAccessor : SynthesizedInstanceMethodSymbol
+    internal sealed partial class SynthesizedSealedPropertyAccessor
+        : SynthesizedInstanceMethodSymbol
     {
         internal override bool SynthesizesLoweredBoundBody
         {
@@ -180,14 +229,27 @@ start:
         /// Given a SynthesizedSealedPropertyAccessor (an accessor with a reference to the accessor it overrides),
         /// construct a BoundBlock body.
         /// </summary>
-        internal override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
-        {
-            SyntheticBoundNodeFactory F = new SyntheticBoundNodeFactory(this, this.GetNonNullSyntaxNode(), compilationState, diagnostics);
+        internal override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        ) {
+            SyntheticBoundNodeFactory F = new SyntheticBoundNodeFactory(
+                this,
+                this.GetNonNullSyntaxNode(),
+                compilationState,
+                diagnostics
+            );
             F.CurrentFunction = (MethodSymbol)this.OriginalDefinition;
 
             try
             {
-                F.CloseMethod(MethodBodySynthesizer.ConstructSingleInvocationMethodBody(F, this.OverriddenAccessor, useBaseReference: true));
+                F.CloseMethod(
+                    MethodBodySynthesizer.ConstructSingleInvocationMethodBody(
+                        F,
+                        this.OverriddenAccessor,
+                        useBaseReference: true
+                    )
+                );
             }
             catch (SyntheticBoundNodeFactory.MissingPredefinedMember ex)
             {
@@ -215,9 +277,16 @@ start:
             /// Given a SynthesizedSealedPropertyAccessor (an accessor with a reference to the accessor it overrides),
             /// construct a BoundBlock body.
             /// </summary>
-            internal override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
-            {
-                SyntheticBoundNodeFactory F = new SyntheticBoundNodeFactory(this, this.GetNonNullSyntaxNode(), compilationState, diagnostics);
+            internal override void GenerateMethodBody(
+                TypeCompilationState compilationState,
+                BindingDiagnosticBag diagnostics
+            ) {
+                SyntheticBoundNodeFactory F = new SyntheticBoundNodeFactory(
+                    this,
+                    this.GetNonNullSyntaxNode(),
+                    compilationState,
+                    diagnostics
+                );
                 F.CurrentFunction = this.OriginalDefinition;
 
                 try
@@ -227,11 +296,18 @@ start:
                     if (this.Arity > 0)
                     {
                         Debug.Assert(this.Arity == methodBeingWrapped.Arity);
-                        methodBeingWrapped = methodBeingWrapped.ConstructedFrom.Construct(StaticCast<TypeSymbol>.From(this.TypeParameters));
+                        methodBeingWrapped = methodBeingWrapped.ConstructedFrom.Construct(
+                            StaticCast<TypeSymbol>.From(this.TypeParameters)
+                        );
                     }
 
-                    BoundBlock body = MethodBodySynthesizer.ConstructSingleInvocationMethodBody(F, methodBeingWrapped, useBaseReference: true);
-                    if (body.Kind != BoundKind.Block) body = F.Block(body);
+                    BoundBlock body = MethodBodySynthesizer.ConstructSingleInvocationMethodBody(
+                        F,
+                        methodBeingWrapped,
+                        useBaseReference: true
+                    );
+                    if (body.Kind != BoundKind.Block)
+                        body = F.Block(body);
                     F.CompilationState.AddMethodWrapper(methodBeingWrapped, this, body);
                 }
                 catch (SyntheticBoundNodeFactory.MissingPredefinedMember ex)
@@ -256,22 +332,34 @@ start:
             MethodSymbol system_Collections_Generic_EqualityComparer_T__get_Default,
             ref BoundLiteral? boundHashFactor,
             BoundExpression valueToHash,
-            SyntheticBoundNodeFactory F)
-        {
+            SyntheticBoundNodeFactory F
+        ) {
             TypeSymbol system_Int32 = currentHashValue.Type!;
             Debug.Assert(system_Int32.SpecialType == SpecialType.System_Int32);
 
             //  bound HASH_FACTOR
             boundHashFactor ??= F.Literal(HASH_FACTOR);
 
-            // Generate 'currentHashValue' <= 'currentHashValue * HASH_FACTOR 
-            currentHashValue = F.Binary(BinaryOperatorKind.IntMultiplication, system_Int32, currentHashValue, boundHashFactor);
+            // Generate 'currentHashValue' <= 'currentHashValue * HASH_FACTOR
+            currentHashValue = F.Binary(
+                BinaryOperatorKind.IntMultiplication,
+                system_Int32,
+                currentHashValue,
+                boundHashFactor
+            );
 
             // Generate 'currentHashValue' <= 'currentHashValue + EqualityComparer<valueToHash type>.Default.GetHashCode(valueToHash)'
-            currentHashValue = F.Binary(BinaryOperatorKind.IntAddition,
-                                     system_Int32,
-                                     currentHashValue,
-                                     GenerateGetHashCode(system_Collections_Generic_EqualityComparer_T__GetHashCode, system_Collections_Generic_EqualityComparer_T__get_Default, valueToHash, F));
+            currentHashValue = F.Binary(
+                BinaryOperatorKind.IntAddition,
+                system_Int32,
+                currentHashValue,
+                GenerateGetHashCode(
+                    system_Collections_Generic_EqualityComparer_T__GetHashCode,
+                    system_Collections_Generic_EqualityComparer_T__get_Default,
+                    valueToHash,
+                    F
+                )
+            );
             return currentHashValue;
         }
 
@@ -279,16 +367,27 @@ start:
             MethodSymbol system_Collections_Generic_EqualityComparer_T__GetHashCode,
             MethodSymbol system_Collections_Generic_EqualityComparer_T__get_Default,
             BoundExpression valueToHash,
-            SyntheticBoundNodeFactory F)
-        {
+            SyntheticBoundNodeFactory F
+        ) {
             // Prepare constructed symbols
-            NamedTypeSymbol equalityComparerType = system_Collections_Generic_EqualityComparer_T__GetHashCode.ContainingType;
-            NamedTypeSymbol constructedEqualityComparer = equalityComparerType.Construct(valueToHash.Type);
+            NamedTypeSymbol equalityComparerType =
+                system_Collections_Generic_EqualityComparer_T__GetHashCode.ContainingType;
+            NamedTypeSymbol constructedEqualityComparer = equalityComparerType.Construct(
+                valueToHash.Type
+            );
 
-            return F.Call(F.StaticCall(constructedEqualityComparer,
-                                       system_Collections_Generic_EqualityComparer_T__get_Default.AsMember(constructedEqualityComparer)),
-                          system_Collections_Generic_EqualityComparer_T__GetHashCode.AsMember(constructedEqualityComparer),
-                          valueToHash);
+            return F.Call(
+                F.StaticCall(
+                    constructedEqualityComparer,
+                    system_Collections_Generic_EqualityComparer_T__get_Default.AsMember(
+                        constructedEqualityComparer
+                    )
+                ),
+                system_Collections_Generic_EqualityComparer_T__GetHashCode.AsMember(
+                    constructedEqualityComparer
+                ),
+                valueToHash
+            );
         }
 
         /// <summary>
@@ -300,8 +399,8 @@ start:
             BoundExpression? initialExpression,
             BoundExpression otherReceiver,
             ArrayBuilder<FieldSymbol> fields,
-            SyntheticBoundNodeFactory F)
-        {
+            SyntheticBoundNodeFactory F
+        ) {
             Debug.Assert(fields.Count > 0);
 
             //  Expression:
@@ -312,9 +411,11 @@ start:
 
             //  prepare symbols
             var equalityComparer_get_Default = F.WellKnownMethod(
-                WellKnownMember.System_Collections_Generic_EqualityComparer_T__get_Default);
+                WellKnownMember.System_Collections_Generic_EqualityComparer_T__get_Default
+            );
             var equalityComparer_Equals = F.WellKnownMethod(
-                WellKnownMember.System_Collections_Generic_EqualityComparer_T__Equals);
+                WellKnownMember.System_Collections_Generic_EqualityComparer_T__Equals
+            );
 
             NamedTypeSymbol equalityComparerType = equalityComparer_Equals.ContainingType;
 
@@ -329,11 +430,14 @@ start:
                 // System.Collections.Generic.EqualityComparer<T_index>.
                 //   Default.Equals(this.backingFld_index, local.backingFld_index)'
                 BoundExpression nextEquals = F.Call(
-                    F.StaticCall(constructedEqualityComparer,
-                                 equalityComparer_get_Default.AsMember(constructedEqualityComparer)),
+                    F.StaticCall(
+                        constructedEqualityComparer,
+                        equalityComparer_get_Default.AsMember(constructedEqualityComparer)
+                    ),
                     equalityComparer_Equals.AsMember(constructedEqualityComparer),
                     F.Field(F.This(), field),
-                    F.Field(otherReceiver, field));
+                    F.Field(otherReceiver, field)
+                );
 
                 // Generate 'retExpression' = 'retExpression && nextEquals'
                 retExpression = retExpression is null
@@ -353,8 +457,11 @@ start:
         /// <param name="methodToInvoke">Method to invoke in constructed body.</param>
         /// <param name="useBaseReference">True for "base.", false for "this.".</param>
         /// <returns>Body for implementedMethod.</returns>
-        internal static BoundBlock ConstructSingleInvocationMethodBody(SyntheticBoundNodeFactory F, MethodSymbol methodToInvoke, bool useBaseReference)
-        {
+        internal static BoundBlock ConstructSingleInvocationMethodBody(
+            SyntheticBoundNodeFactory F,
+            MethodSymbol methodToInvoke,
+            bool useBaseReference
+        ) {
             var argBuilder = ArrayBuilder<BoundExpression>.GetInstance();
 
             RoslynDebug.AssertNotNull(F.CurrentFunction);
@@ -363,13 +470,17 @@ start:
                 argBuilder.Add(F.Parameter(param));
             }
 
-            BoundExpression invocation = F.Call(useBaseReference ? (BoundExpression)F.Base(baseType: methodToInvoke.ContainingType) : F.This(),
-                                                methodToInvoke,
-                                                argBuilder.ToImmutableAndFree());
+            BoundExpression invocation = F.Call(
+                useBaseReference
+                  ? (BoundExpression)F.Base(baseType: methodToInvoke.ContainingType)
+                  : F.This(),
+                methodToInvoke,
+                argBuilder.ToImmutableAndFree()
+            );
 
             return F.CurrentFunction.ReturnsVoid
-                        ? F.Block(F.ExpressionStatement(invocation), F.Return())
-                        : F.Block(F.Return(invocation));
+              ? F.Block(F.ExpressionStatement(invocation), F.Return())
+              : F.Block(F.Return(invocation));
         }
     }
 }

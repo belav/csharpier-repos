@@ -24,9 +24,14 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.HotReload
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class WebAssemblyHotReload
     {
-        private static readonly ConcurrentDictionary<Guid, List<(byte[] metadataDelta, byte[] ilDelta)>> _deltas = new();
+        private static readonly ConcurrentDictionary<
+            Guid,
+            List<(byte[] metadataDelta, byte[] ilDelta)>
+        > _deltas = new();
         private static readonly ConcurrentDictionary<Assembly, Assembly> _appliedAssemblies = new();
-        private static (List<Action<Type[]?>> BeforeUpdates, List<Action<Type[]?>> AfterUpdates)? _handlerActions;
+        private static (List<Action<Type[]?>> BeforeUpdates, List<
+            Action<Type[]?>
+        > AfterUpdates)? _handlerActions;
 
         static WebAssemblyHotReload()
         {
@@ -47,8 +52,10 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.HotReload
                     return;
                 }
 
-                if (_deltas.TryGetValue(moduleId.Value, out var result) && _appliedAssemblies.TryAdd(loadedAssembly, loadedAssembly))
-                {
+                if (
+                    _deltas.TryGetValue(moduleId.Value, out var result)
+                    && _appliedAssemblies.TryAdd(loadedAssembly, loadedAssembly)
+                ) {
                     // A delta for this specific Module exists and we haven't called ApplyUpdate on this instance of Assembly as yet.
                     foreach (var (metadataDelta, ilDelta) in CollectionsMarshal.AsSpan(result))
                     {
@@ -65,7 +72,12 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.HotReload
                 return;
             }
 
-            var jsObjectReference = (IJSUnmarshalledObjectReference)(await DefaultWebAssemblyJSRuntime.Instance.InvokeAsync<IJSObjectReference>("import", "./_framework/blazor-hotreload.js"));
+            var jsObjectReference = (IJSUnmarshalledObjectReference)(
+                await DefaultWebAssemblyJSRuntime.Instance.InvokeAsync<IJSObjectReference>(
+                    "import",
+                    "./_framework/blazor-hotreload.js"
+                )
+            );
             await jsObjectReference.InvokeUnmarshalled<Task<int>>("receiveHotReload");
         }
 
@@ -73,10 +85,16 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.HotReload
         /// For framework use only.
         /// </summary>
         [JSInvokable(nameof(ApplyHotReloadDelta))]
-        public static void ApplyHotReloadDelta(string moduleIdString, byte[] metadataDelta, byte[] ilDeta)
-        {
+        public static void ApplyHotReloadDelta(
+            string moduleIdString,
+            byte[] metadataDelta,
+            byte[] ilDeta
+        ) {
             var moduleId = Guid.Parse(moduleIdString);
-            var assembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a => a.Modules.FirstOrDefault() is Module m && m.ModuleVersionId == moduleId);
+            var assembly = AppDomain.CurrentDomain.GetAssemblies()
+                .FirstOrDefault(
+                    a => a.Modules.FirstOrDefault() is Module m && m.ModuleVersionId == moduleId
+                );
 
             Debug.Assert(HotReloadEnvironment.Instance.IsHotReloadEnabled);
 
@@ -92,10 +110,7 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.HotReload
             }
             else
             {
-                _deltas[moduleId] = new List<(byte[], byte[])>(1)
-                {
-                    (metadataDelta, ilDeta)
-                };
+                _deltas[moduleId] = new List<(byte[], byte[])>(1) { (metadataDelta, ilDeta) };
             }
         }
 
@@ -105,19 +120,27 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.HotReload
             var (beforeUpdates, afterUpdates) = _handlerActions.Value;
 
             beforeUpdates.ForEach(a => a(null));
-            System.Reflection.Metadata.AssemblyExtensions.ApplyUpdate(assembly, metadataDelta, ilDeta, ReadOnlySpan<byte>.Empty);
+            System.Reflection.Metadata.AssemblyExtensions.ApplyUpdate(
+                assembly,
+                metadataDelta,
+                ilDeta,
+                ReadOnlySpan<byte>.Empty
+            );
             afterUpdates.ForEach(a => a(null));
         }
 
-        private static (List<Action<Type[]?>> BeforeUpdates, List<Action<Type[]?>> AfterUpdates) GetMetadataUpdateHandlerActions()
+        private static (List<Action<Type[]?>> BeforeUpdates, List<
+            Action<Type[]?>
+        > AfterUpdates) GetMetadataUpdateHandlerActions()
         {
             var beforeUpdates = new List<Action<Type[]?>>();
             var afterUpdates = new List<Action<Type[]?>>();
 
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                foreach (var attribute in assembly.GetCustomAttributes<MetadataUpdateHandlerAttribute>())
-                {
+                foreach (
+                    var attribute in assembly.GetCustomAttributes<MetadataUpdateHandlerAttribute>()
+                ) {
                     var handlerType = attribute.HandlerType;
 
                     var methodFound = false;
@@ -135,7 +158,9 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.HotReload
 
                     if (!methodFound)
                     {
-                        Debug.WriteLine($"No BeforeUpdate or AfterUpdate method found on '{handlerType}'.");
+                        Debug.WriteLine(
+                            $"No BeforeUpdate or AfterUpdate method found on '{handlerType}'."
+                        );
                     }
 
                     static Action<Type[]?> CreateAction(MethodInfo update)
@@ -158,8 +183,13 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.HotReload
 
             static MethodInfo? GetUpdateMethod(Type handlerType, string name)
             {
-                var bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
-                var updateMethod = handlerType.GetMethod(name, bindingFlags, new[] { typeof(Type[]) });
+                var bindingFlags =
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
+                var updateMethod = handlerType.GetMethod(
+                    name,
+                    bindingFlags,
+                    new[] { typeof(Type[]) }
+                );
                 if (updateMethod is not null)
                 {
                     return updateMethod;
@@ -171,7 +201,9 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.HotReload
 
                 if (methods.Length > 0)
                 {
-                    Debug.WriteLine($"MetadataUpdateHandler type '{handlerType}' has a method named '{name}' that does not match the required signature.");
+                    Debug.WriteLine(
+                        $"MetadataUpdateHandler type '{handlerType}' has a method named '{name}' that does not match the required signature."
+                    );
                 }
 
                 return null;

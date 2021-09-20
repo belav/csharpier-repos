@@ -14,7 +14,8 @@ namespace System.ComponentModel.Design
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.Design.DesignerVerb'/> class.
         /// </summary>
-        public DesignerVerb(string text, EventHandler handler) : base(handler, StandardCommands.VerbFirst)
+        public DesignerVerb(string text, EventHandler handler)
+            : base(handler, StandardCommands.VerbFirst)
         {
             Properties["Text"] = text == null ? null : Regex.Replace(text, @"\(\&.\)", "");
         }
@@ -23,7 +24,8 @@ namespace System.ComponentModel.Design
         /// Initializes a new instance of the <see cref='System.ComponentModel.Design.DesignerVerb'/>
         /// class.
         /// </summary>
-        public DesignerVerb(string text, EventHandler handler, CommandID startCommandID) : base(handler, startCommandID)
+        public DesignerVerb(string text, EventHandler handler, CommandID startCommandID)
+            : base(handler, startCommandID)
         {
             Properties["Text"] = text == null ? null : Regex.Replace(text, @"\(\&.\)", "");
         }

@@ -118,7 +118,9 @@ namespace Newtonsoft.Json.Serialization
             set => _serializer.MetadataPropertyHandling = value;
         }
 
-        [Obsolete("TypeNameAssemblyFormat is obsolete. Use TypeNameAssemblyFormatHandling instead.")]
+        [Obsolete(
+            "TypeNameAssemblyFormat is obsolete. Use TypeNameAssemblyFormatHandling instead."
+        )]
         public override FormatterAssemblyStyle TypeNameAssemblyFormat
         {
             get => _serializer.TypeNameAssemblyFormat;
@@ -274,8 +276,11 @@ namespace Newtonsoft.Json.Serialization
             }
         }
 
-        internal override void SerializeInternal(JsonWriter jsonWriter, object? value, Type? rootType)
-        {
+        internal override void SerializeInternal(
+            JsonWriter jsonWriter,
+            object? value,
+            Type? rootType
+        ) {
             if (_serializerWriter != null)
             {
                 _serializerWriter.Serialize(jsonWriter, value, rootType);

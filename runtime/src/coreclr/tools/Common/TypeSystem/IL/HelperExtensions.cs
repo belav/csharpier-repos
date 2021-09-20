@@ -20,21 +20,33 @@ namespace Internal.IL
             return helperType;
         }
 
-        public static MetadataType GetOptionalHelperType(this TypeSystemContext context, string name)
-        {
-            MetadataType helperType = context.SystemModule.GetType(HelperTypesNamespace, name, NotFoundBehavior.ReturnNull);
+        public static MetadataType GetOptionalHelperType(
+            this TypeSystemContext context,
+            string name
+        ) {
+            MetadataType helperType = context.SystemModule.GetType(
+                HelperTypesNamespace,
+                name,
+                NotFoundBehavior.ReturnNull
+            );
             return helperType;
         }
 
-        public static MethodDesc GetHelperEntryPoint(this TypeSystemContext context, string typeName, string methodName)
-        {
+        public static MethodDesc GetHelperEntryPoint(
+            this TypeSystemContext context,
+            string typeName,
+            string methodName
+        ) {
             MetadataType helperType = context.GetHelperType(typeName);
             MethodDesc helperMethod = helperType.GetKnownMethod(methodName, null);
             return helperMethod;
         }
 
-        public static MethodDesc GetOptionalHelperEntryPoint(this TypeSystemContext context, string typeName, string methodName)
-        {
+        public static MethodDesc GetOptionalHelperEntryPoint(
+            this TypeSystemContext context,
+            string typeName,
+            string methodName
+        ) {
             MetadataType helperType = context.GetOptionalHelperType(typeName);
             MethodDesc helperMethod = helperType?.GetMethod(methodName, null);
             return helperMethod;
@@ -45,8 +57,11 @@ namespace Internal.IL
         /// The advantage of using this extension method is that you don't have to deal with what code to emit after
         /// the call (e.g. do you need to make sure the stack is balanced?).
         /// </summary>
-        public static void EmitCallThrowHelper(this ILCodeStream codeStream, ILEmitter emitter, MethodDesc method)
-        {
+        public static void EmitCallThrowHelper(
+            this ILCodeStream codeStream,
+            ILEmitter emitter,
+            MethodDesc method
+        ) {
             Debug.Assert(method.Signature.Length == 0 && method.Signature.IsStatic);
 
             // Emit a call followed by a branch to the call.
@@ -64,12 +79,17 @@ namespace Internal.IL
         /// Retrieves a method on <paramref name="type"/> that is well known to the compiler.
         /// Throws an exception if the method doesn't exist.
         /// </summary>
-        public static MethodDesc GetKnownMethod(this TypeDesc type, string name, MethodSignature signature)
-        {
+        public static MethodDesc GetKnownMethod(
+            this TypeDesc type,
+            string name,
+            MethodSignature signature
+        ) {
             MethodDesc method = type.GetMethod(name, signature);
             if (method == null)
             {
-                throw new InvalidOperationException(String.Format("Expected method '{0}' not found on type '{1}'", name, type));
+                throw new InvalidOperationException(
+                    String.Format("Expected method '{0}' not found on type '{1}'", name, type)
+                );
             }
 
             return method;
@@ -84,7 +104,9 @@ namespace Internal.IL
             FieldDesc field = type.GetField(name);
             if (field == null)
             {
-                throw new InvalidOperationException(String.Format("Expected field '{0}' not found on type '{1}'", name, type));
+                throw new InvalidOperationException(
+                    String.Format("Expected field '{0}' not found on type '{1}'", name, type)
+                );
             }
 
             return field;
@@ -99,7 +121,9 @@ namespace Internal.IL
             MetadataType nestedType = type.GetNestedType(name);
             if (nestedType == null)
             {
-                throw new InvalidOperationException(String.Format("Expected type '{0}' not found on type '{1}'", name, type));
+                throw new InvalidOperationException(
+                    String.Format("Expected type '{0}' not found on type '{1}'", name, type)
+                );
             }
 
             return nestedType;
@@ -109,15 +133,21 @@ namespace Internal.IL
         /// Retrieves a namespace type in <paramref name= "module" /> that is well known to the compiler.
         /// Throws an exception if the type doesn't exist.
         /// </summary>
-        public static MetadataType GetKnownType(this ModuleDesc module, string @namespace, string name)
-        {
+        public static MetadataType GetKnownType(
+            this ModuleDesc module,
+            string @namespace,
+            string name
+        ) {
             MetadataType type = module.GetType(@namespace, name, NotFoundBehavior.ReturnNull);
             if (type == null)
             {
                 throw new InvalidOperationException(
-                    String.Format("Expected type '{0}' not found in module '{1}'",
-                    @namespace.Length > 0 ? String.Concat(@namespace, ".", name) : name,
-                    module));
+                    String.Format(
+                        "Expected type '{0}' not found in module '{1}'",
+                        @namespace.Length > 0 ? String.Concat(@namespace, ".", name) : name,
+                        module
+                    )
+                );
             }
 
             return type;

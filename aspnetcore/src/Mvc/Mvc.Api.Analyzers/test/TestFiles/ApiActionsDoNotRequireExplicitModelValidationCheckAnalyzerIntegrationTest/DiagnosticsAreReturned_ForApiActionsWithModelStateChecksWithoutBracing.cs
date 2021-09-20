@@ -2,7 +2,8 @@
 {
     [ApiController]
     [Route("/api/[controller]")]
-    public class DiagnosticsAreReturned_ForApiActionsWithModelStateChecksWithoutBracing : ControllerBase
+    public class DiagnosticsAreReturned_ForApiActionsWithModelStateChecksWithoutBracing
+        : ControllerBase
     {
         public IActionResult Method(int id)
         {

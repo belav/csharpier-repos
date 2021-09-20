@@ -21,7 +21,9 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             {
                 if (usedTags.TryGetValue(tag, out string? existing))
                 {
-                    throw new InvalidOperationException($"Tag '{tag}' is in use by both '{existing}' and '{fieldName}'");
+                    throw new InvalidOperationException(
+                        $"Tag '{tag}' is in use by both '{existing}' and '{fieldName}'"
+                    );
                 }
 
                 usedTags.Add(tag, fieldName);
@@ -42,9 +44,10 @@ namespace System.Security.Cryptography.Pkcs.Asn1
 
                 // Validator for tag constraint for Certificate
                 {
-                    if (!Asn1Tag.TryDecode(Certificate.Value.Span, out Asn1Tag validateTag, out _) ||
-                        !validateTag.HasSameClassAndValue(new Asn1Tag((UniversalTagNumber)16)))
-                    {
+                    if (
+                        !Asn1Tag.TryDecode(Certificate.Value.Span, out Asn1Tag validateTag, out _)
+                        || !validateTag.HasSameClassAndValue(new Asn1Tag((UniversalTagNumber)16))
+                    ) {
                         throw new CryptographicException();
                     }
                 }
@@ -66,8 +69,10 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        internal static CertificateChoiceAsn Decode(ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
-        {
+        internal static CertificateChoiceAsn Decode(
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        ) {
             try
             {
                 AsnValueReader reader = new AsnValueReader(encoded.Span, ruleSet);
@@ -82,8 +87,11 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out CertificateChoiceAsn decoded)
-        {
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out CertificateChoiceAsn decoded
+        ) {
             try
             {
                 DecodeCore(ref reader, rebind, out decoded);
@@ -94,8 +102,11 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out CertificateChoiceAsn decoded)
-        {
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out CertificateChoiceAsn decoded
+        ) {
             decoded = default;
             Asn1Tag tag = reader.PeekTag();
             ReadOnlySpan<byte> rebindSpan = rebind.Span;
@@ -105,7 +116,9 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             if (tag.HasSameClassAndValue(new Asn1Tag((UniversalTagNumber)16)))
             {
                 tmpSpan = reader.ReadEncodedValue();
-                decoded.Certificate = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
+                decoded.Certificate = rebindSpan.Overlaps(tmpSpan, out offset)
+                    ? rebind.Slice(offset, tmpSpan.Length)
+                    : tmpSpan.ToArray();
             }
             else
             {

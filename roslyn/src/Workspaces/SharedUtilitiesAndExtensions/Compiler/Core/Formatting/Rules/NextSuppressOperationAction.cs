@@ -20,16 +20,16 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
             ImmutableArray<AbstractFormattingRule> formattingRules,
             int index,
             SyntaxNode node,
-            List<SuppressOperation> list)
-        {
+            List<SuppressOperation> list
+        ) {
             _formattingRules = formattingRules;
             _index = index;
             _node = node;
             _list = list;
         }
 
-        private NextSuppressOperationAction NextAction
-            => new(_formattingRules, _index + 1, _node, _list);
+        private NextSuppressOperationAction NextAction =>
+            new(_formattingRules, _index + 1, _node, _list);
 
         public void Invoke()
         {

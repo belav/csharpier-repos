@@ -23,8 +23,11 @@ namespace System.Runtime.CompilerServices
         /// <returns>The quoted expression.</returns>
         [Obsolete("do not use this method", true), EditorBrowsable(EditorBrowsableState.Never)]
         [return: NotNullIfNotNull("expression")]
-        public static Expression? Quote(Expression? expression, object hoistedLocals, object[] locals)
-        {
+        public static Expression? Quote(
+            Expression? expression,
+            object hoistedLocals,
+            object[] locals
+        ) {
             Debug.Assert(hoistedLocals != null && locals != null);
             var quoter = new ExpressionQuoter((HoistedLocals)hoistedLocals, locals);
             return quoter.Visit(expression);
@@ -38,8 +41,11 @@ namespace System.Runtime.CompilerServices
         /// <param name="indexes">The index array indicating which list to get variables from.</param>
         /// <returns>The merged runtime variables.</returns>
         [Obsolete("do not use this method", true), EditorBrowsable(EditorBrowsableState.Never)]
-        public static IRuntimeVariables MergeRuntimeVariables(IRuntimeVariables first, IRuntimeVariables second, int[] indexes)
-        {
+        public static IRuntimeVariables MergeRuntimeVariables(
+            IRuntimeVariables first,
+            IRuntimeVariables second,
+            int[] indexes
+        ) {
             return new MergedRuntimeVariables(first, second, indexes);
         }
 
@@ -57,7 +63,9 @@ namespace System.Runtime.CompilerServices
             // A stack of variables that are defined in nested scopes. We search
             // this first when resolving a variable in case a nested scope shadows
             // one of our variable instances.
-            private readonly Stack<HashSet<ParameterExpression>> _shadowedVars = new Stack<HashSet<ParameterExpression>>();
+            private readonly Stack<HashSet<ParameterExpression>> _shadowedVars = new Stack<
+                HashSet<ParameterExpression>
+            >();
 
             internal ExpressionQuoter(HoistedLocals scope, object[] locals)
             {
@@ -127,8 +135,9 @@ namespace System.Runtime.CompilerServices
                 return Expression.MakeCatchBlock(node.Test, node.Variable, b, f);
             }
 
-            protected internal override Expression VisitRuntimeVariables(RuntimeVariablesExpression node)
-            {
+            protected internal override Expression VisitRuntimeVariables(
+                RuntimeVariablesExpression node
+            ) {
                 int count = node.Variables.Count;
                 var boxes = new List<IStrongBox>();
                 var vars = new List<ParameterExpression>();
@@ -154,7 +163,10 @@ namespace System.Runtime.CompilerServices
                     return node;
                 }
 
-                ConstantExpression boxesConst = Expression.Constant(new RuntimeVariables(boxes.ToArray()), typeof(IRuntimeVariables));
+                ConstantExpression boxesConst = Expression.Constant(
+                    new RuntimeVariables(boxes.ToArray()),
+                    typeof(IRuntimeVariables)
+                );
                 // All of them were rewritten. Just return the array as a constant
                 if (vars.Count == 0)
                 {
@@ -164,7 +176,9 @@ namespace System.Runtime.CompilerServices
                 // Otherwise, we need to return an object that merges them
                 return Expression.Call(
                     RuntimeOps_MergeRuntimeVariables,
-                    Expression.RuntimeVariables(new TrueReadOnlyCollection<ParameterExpression>(vars.ToArray())),
+                    Expression.RuntimeVariables(
+                        new TrueReadOnlyCollection<ParameterExpression>(vars.ToArray())
+                    ),
                     boxesConst,
                     Expression.Constant(indexes)
                 );

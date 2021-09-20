@@ -24,7 +24,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore";
             var testExpression = @"child::*[position()=10]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -35,10 +36,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value =
                         "\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -51,7 +58,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore";
             var testExpression = @"descendant::node()[position()=7 or position()=2]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -70,11 +78,18 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "author",
                     Name = "author",
                     HasNameTable = true,
-                    Value = "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
-                });
+                    Value =
+                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -87,7 +102,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore";
             var testExpression = @"(descendant::node()[position()=7 or position()=2])[last()]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -95,11 +111,18 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "author",
                     Name = "author",
                     HasNameTable = true,
-                    Value = "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
-                });
+                    Value =
+                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -112,7 +135,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore";
             var testExpression = @"descendant::node()[position()<7][position()=2]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -123,10 +147,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value =
                         "\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -139,7 +169,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore/book[2]/author/publication/country/text()";
             var testExpression = @"ancestor::node()[position()<5][position()>2][last()]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -150,10 +181,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value =
                         "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -166,7 +203,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore/book[2]/author/publication/country/text()";
             var testExpression = @"ancestor::node()[position()=3]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -176,10 +214,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value =
                         "\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -192,17 +236,24 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore/book[2]/author/publication/country/text()";
             var testExpression = @"ancestor::node()/ancestor::node()[position()=last()]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     HasChildren = true,
                     HasNameTable = true,
                     Value =
                         "\n\t\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t\n\t\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t\n\t\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t\n\t\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t\n\t\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t\n\t\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t\n\t\n\t\tPC Magazine Best Product of 1997\n\t\n\t\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t\n\t\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t\n\t\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t\n\t\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t\n\t\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t\n\t\n\t\tWho's Who in Trenton\n\t\tRobert Bob\n\t\n\t\n\t\tWhere is Trenton?\n\t\n\t\n\t\tWhere in the world is Trenton?\n\t\n"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -215,7 +266,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore/book[2]/author/publication/country/text()";
             var testExpression = @"ancestor::node()/ancestor::node()[position()=1]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     HasChildren = true,
@@ -262,11 +314,18 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "publication",
                     Name = "publication",
                     HasNameTable = true,
-                    Value = "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t"
-                });
+                    Value =
+                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t"
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -279,12 +338,19 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore";
             var testExpression = @"descendant-or-self::node()[position()=7 or position()=2]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true });
+                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -297,11 +363,18 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore";
             var testExpression = @"descendant-or-self::node()[position()<7][position()=2]";
-            var expected = new XPathResult(0,
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true });
+            var expected = new XPathResult(
+                0,
+                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -314,7 +387,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore";
             var testExpression = @"descendant-or-self::node()[position()=1]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -325,10 +399,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value =
                         "\n\t\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t\n\t\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t\n\t\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t\n\t\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t\n\t\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t\n\t\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t\n\t\n\t\tPC Magazine Best Product of 1997\n\t\n\t\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t\n\t\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t\n\t\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t\n\t\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t\n\t\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t\n\t\n\t\tWho's Who in Trenton\n\t\tRobert Bob\n\t\n\t\n\t\tWhere is Trenton?\n\t\n\t\n\t\tWhere in the world is Trenton?\n\t\n"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -341,7 +421,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore/book[2]/author/publication/country/text()";
             var testExpression = @"ancestor-or-self::node()[position()=3]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -349,11 +430,18 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "publication",
                     Name = "publication",
                     HasNameTable = true,
-                    Value = "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t"
-                });
+                    Value =
+                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t"
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -366,7 +454,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore/book[2]/author/publication/country/text()";
             var testExpression = @"ancestor-or-self::node()[position()<5][position()>2][last()]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -376,10 +465,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value =
                         "\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -391,8 +486,10 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "books.xml";
             var startingNodePath = "/bookstore/book[2]/author/publication/country/text()";
-            var testExpression = @"(ancestor-or-self::node()[position()=5 or position()=2])[last()]";
-            var expected = new XPathResult(0,
+            var testExpression =
+                @"(ancestor-or-self::node()[position()=5 or position()=2])[last()]";
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -401,10 +498,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Name = "country",
                     HasNameTable = true,
                     Value = "US"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -417,7 +520,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore/book[1]";
             var testExpression = @"following::node()[position()=9]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -426,10 +530,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Name = "first-name",
                     HasNameTable = true,
                     Value = "Mary"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -442,7 +552,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore/book";
             var testExpression = @"following-sibling::node()[position()=2]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -453,10 +564,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value =
                         "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -469,11 +586,18 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore/book[5]/author";
             var testExpression = @"preceding::node()[position()=6]";
-            var expected = new XPathResult(0,
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true });
+            var expected = new XPathResult(
+                0,
+                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -486,7 +610,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore/book[7]";
             var testExpression = @"preceding-sibling::node()[position()=6]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -495,11 +620,18 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "book",
                     Name = "book",
                     HasNameTable = true,
-                    Value = "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
-                });
+                    Value =
+                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -512,7 +644,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore";
             var testExpression = @"magazine/attribute::*[position()=2]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Attribute,
@@ -560,10 +693,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Name = "frequency",
                     HasNameTable = true,
                     Value = "monthly"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -575,8 +714,10 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "books.xml";
             var startingNodePath = "/bookstore";
-            var testExpression = @"magazine/attribute::*[position()=1 or position()=2][position()=last()]";
-            var expected = new XPathResult(0,
+            var testExpression =
+                @"magazine/attribute::*[position()=1 or position()=2][position()=last()]";
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Attribute,
@@ -624,10 +765,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Name = "frequency",
                     HasNameTable = true,
                     Value = "monthly"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -640,7 +787,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore/book/author";
             var testExpression = @"parent::*[position()=1 or position()=2]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -651,10 +799,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value =
                         "\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -670,7 +824,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var expected = new XPathResult(0);
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -686,7 +845,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var expected = new XPathResult(0);
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -699,7 +863,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore/book/author";
             var testExpression = @"self::node()[position()=1 or position()=2]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -707,11 +872,18 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "author",
                     Name = "author",
                     HasNameTable = true,
-                    Value = "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
-                });
+                    Value =
+                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -724,7 +896,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore/book/author";
             var testExpression = @"(ancestor::*)[position()=1]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -735,10 +908,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value =
                         "\n\t\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t\n\t\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t\n\t\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t\n\t\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t\n\t\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t\n\t\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t\n\t\n\t\tPC Magazine Best Product of 1997\n\t\n\t\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t\n\t\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t\n\t\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t\n\t\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t\n\t\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t\n\t\n\t\tWho's Who in Trenton\n\t\tRobert Bob\n\t\n\t\n\t\tWhere is Trenton?\n\t\n\t\n\t\tWhere in the world is Trenton?\n\t\n"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -751,7 +930,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore";
             var testExpression = @"(child::*/child::*)[position()=last()]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -762,10 +942,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Prefix = "my",
                     Value = "Where in the world is Trenton?"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -778,7 +964,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore";
             var testExpression = @"child::*/child::*[position()=last()]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -941,10 +1128,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Prefix = "my",
                     Value = "Where in the world is Trenton?"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -956,7 +1149,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "numbers.xml";
             var testExpression = @"//*[position()=//n]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -964,7 +1158,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "mydoc",
                     Name = "mydoc",
                     HasNameTable = true,
-                    Value = "\n\n\t1\n\t2\n\t3\n\n\n\t1\n\t1\n\t2\n\t2\n\t3\n\t4\n\n\n\t5\n\tNaN\n\t0\n\n\n"
+                    Value =
+                        "\n\n\t1\n\t2\n\t3\n\n\n\t1\n\t1\n\t2\n\t2\n\t3\n\t4\n\n\n\t5\n\tNaN\n\t0\n\n\n"
                 },
                 new XPathResultToken
                 {
@@ -1091,7 +1286,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Name = "n",
                     HasNameTable = true,
                     Value = "0"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -1106,7 +1302,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "numbers.xml";
             var testExpression = @"//*[position()=true()]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -1114,7 +1311,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "mydoc",
                     Name = "mydoc",
                     HasNameTable = true,
-                    Value = "\n\n\t1\n\t2\n\t3\n\n\n\t1\n\t1\n\t2\n\t2\n\t3\n\t4\n\n\n\t5\n\tNaN\n\t0\n\n\n"
+                    Value =
+                        "\n\n\t1\n\t2\n\t3\n\n\n\t1\n\t1\n\t2\n\t2\n\t3\n\t4\n\n\n\t5\n\tNaN\n\t0\n\n\n"
                 },
                 new XPathResultToken
                 {
@@ -1250,7 +1448,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Name = "n",
                     HasNameTable = true,
                     Value = "0"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -1280,7 +1479,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "numbers.xml";
             var testExpression = @"//*[position()=""5""]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -1289,7 +1489,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Name = "n",
                     HasNameTable = true,
                     Value = "3"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -1379,7 +1580,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "numbers.xml";
             var testExpression = @"//*[position()<1 div 0]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -1387,7 +1589,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "mydoc",
                     Name = "mydoc",
                     HasNameTable = true,
-                    Value = "\n\n\t1\n\t2\n\t3\n\n\n\t1\n\t1\n\t2\n\t2\n\t3\n\t4\n\n\n\t5\n\tNaN\n\t0\n\n\n"
+                    Value =
+                        "\n\n\t1\n\t2\n\t3\n\n\n\t1\n\t1\n\t2\n\t2\n\t3\n\t4\n\n\n\t5\n\tNaN\n\t0\n\n\n"
                 },
                 new XPathResultToken
                 {
@@ -1523,7 +1726,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Name = "n",
                     HasNameTable = true,
                     Value = "0"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -1568,7 +1772,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "numbers.xml";
             var testExpression = @"//*[position()>-1 div 0]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -1576,7 +1781,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "mydoc",
                     Name = "mydoc",
                     HasNameTable = true,
-                    Value = "\n\n\t1\n\t2\n\t3\n\n\n\t1\n\t1\n\t2\n\t2\n\t3\n\t4\n\n\n\t5\n\tNaN\n\t0\n\n\n"
+                    Value =
+                        "\n\n\t1\n\t2\n\t3\n\n\n\t1\n\t1\n\t2\n\t2\n\t3\n\t4\n\n\n\t5\n\tNaN\n\t0\n\n\n"
                 },
                 new XPathResultToken
                 {
@@ -1712,7 +1918,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Name = "n",
                     HasNameTable = true,
                     Value = "0"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -1742,7 +1949,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "numbers.xml";
             var testExpression = @"//*[position()>1 and position()<20]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -1841,7 +2049,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Name = "n",
                     HasNameTable = true,
                     Value = "0"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -1901,7 +2110,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "numbers.xml";
             var testExpression = @"//*[position()>-1 div 0 and position()<20]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -1909,7 +2119,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "mydoc",
                     Name = "mydoc",
                     HasNameTable = true,
-                    Value = "\n\n\t1\n\t2\n\t3\n\n\n\t1\n\t1\n\t2\n\t2\n\t3\n\t4\n\n\n\t5\n\tNaN\n\t0\n\n\n"
+                    Value =
+                        "\n\n\t1\n\t2\n\t3\n\n\n\t1\n\t1\n\t2\n\t2\n\t3\n\t4\n\n\n\t5\n\tNaN\n\t0\n\n\n"
                 },
                 new XPathResultToken
                 {
@@ -2045,7 +2256,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Name = "n",
                     HasNameTable = true,
                     Value = "0"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -2060,7 +2272,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "numbers.xml";
             var testExpression = @"//*[position()>0 and position()<1 div 0]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -2068,7 +2281,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "mydoc",
                     Name = "mydoc",
                     HasNameTable = true,
-                    Value = "\n\n\t1\n\t2\n\t3\n\n\n\t1\n\t1\n\t2\n\t2\n\t3\n\t4\n\n\n\t5\n\tNaN\n\t0\n\n\n"
+                    Value =
+                        "\n\n\t1\n\t2\n\t3\n\n\n\t1\n\t1\n\t2\n\t2\n\t3\n\t4\n\n\n\t5\n\tNaN\n\t0\n\n\n"
                 },
                 new XPathResultToken
                 {
@@ -2204,7 +2418,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Name = "n",
                     HasNameTable = true,
                     Value = "0"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -2234,7 +2449,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "numbers.xml";
             var testExpression = @"//*[position()>1 or position()<20]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -2242,7 +2458,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "mydoc",
                     Name = "mydoc",
                     HasNameTable = true,
-                    Value = "\n\n\t1\n\t2\n\t3\n\n\n\t1\n\t1\n\t2\n\t2\n\t3\n\t4\n\n\n\t5\n\tNaN\n\t0\n\n\n"
+                    Value =
+                        "\n\n\t1\n\t2\n\t3\n\n\n\t1\n\t1\n\t2\n\t2\n\t3\n\t4\n\n\n\t5\n\tNaN\n\t0\n\n\n"
                 },
                 new XPathResultToken
                 {
@@ -2378,7 +2595,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Name = "n",
                     HasNameTable = true,
                     Value = "0"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -2393,7 +2611,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "numbers.xml";
             var testExpression = @"//*[position()>-1 div 0 or position()<1 div 0]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -2401,7 +2620,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "mydoc",
                     Name = "mydoc",
                     HasNameTable = true,
-                    Value = "\n\n\t1\n\t2\n\t3\n\n\n\t1\n\t1\n\t2\n\t2\n\t3\n\t4\n\n\n\t5\n\tNaN\n\t0\n\n\n"
+                    Value =
+                        "\n\n\t1\n\t2\n\t3\n\n\n\t1\n\t1\n\t2\n\t2\n\t3\n\t4\n\n\n\t5\n\tNaN\n\t0\n\n\n"
                 },
                 new XPathResultToken
                 {
@@ -2537,7 +2757,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Name = "n",
                     HasNameTable = true,
                     Value = "0"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -2552,7 +2773,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "numbers.xml";
             var testExpression = @"//*[position()>""-Infinity"" or position()<""Infinity""]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -2560,7 +2782,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "mydoc",
                     Name = "mydoc",
                     HasNameTable = true,
-                    Value = "\n\n\t1\n\t2\n\t3\n\n\n\t1\n\t1\n\t2\n\t2\n\t3\n\t4\n\n\n\t5\n\tNaN\n\t0\n\n\n"
+                    Value =
+                        "\n\n\t1\n\t2\n\t3\n\n\n\t1\n\t1\n\t2\n\t2\n\t3\n\t4\n\n\n\t5\n\tNaN\n\t0\n\n\n"
                 },
                 new XPathResultToken
                 {
@@ -2696,7 +2919,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Name = "n",
                     HasNameTable = true,
                     Value = "0"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -2712,7 +2936,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var testExpression =
                 @"(//node() | //attribute::*)[(position() >2 and position()<7)or (position() >8 and position()<16) or position()=last()]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Attribute,
@@ -2755,7 +2980,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "author",
                     Name = "author",
                     HasNameTable = true,
-                    Value = "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
+                    Value =
+                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
@@ -2767,9 +2993,15 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "Joe"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Joe" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Joe"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true });
+                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -2787,7 +3019,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"position()+last() div 13";
             var expected = 1.0769230769230769d;
 
-            Utils.XPathNumberTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNumberTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -2802,7 +3039,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"position()>5";
             var expected = false;
 
-            Utils.XPathBooleanTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -2817,7 +3059,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"position()=0";
             var expected = false;
 
-            Utils.XPathBooleanTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -2832,7 +3079,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var testExpression = @"concat(""The current position"","" = "",position())";
             var expected = @"The current position = 1";
 
-            Utils.XPathStringTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathStringTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -2845,7 +3097,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "numbers.xml";
             var startingNodePath = "//n";
             var testExpression = @"//n [. = position()]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -2881,10 +3134,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Name = "n",
                     HasNameTable = true,
                     Value = "1"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -2898,7 +3157,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var startingNodePath = "/bookstore";
             var testExpression =
                 @"descendant-or-self::node()[position() = ceiling(number(string(child::*[descendant::*[contains(string(),'MSFT')]]/child::price))) div round(19.123 mod 5)]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -2909,10 +3169,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value =
                         "\n\t\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t\n\t\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t\n\t\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t\n\t\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t\n\t\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t\n\t\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t\n\t\n\t\tPC Magazine Best Product of 1997\n\t\n\t\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t\n\t\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t\n\t\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t\n\t\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t\n\t\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t\n\t\n\t\tWho's Who in Trenton\n\t\tRobert Bob\n\t\n\t\n\t\tWhere is Trenton?\n\t\n\t\n\t\tWhere in the world is Trenton?\n\t\n"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -2929,7 +3195,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var expected = new XPathResult(0);
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -2943,7 +3214,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var startingNodePath = "/bookstore/magazine[3]//story3";
             var testExpression =
                 @"preceding::*[following::price[.=""free""]][ancestor::bookstore][child::title][position() = 1]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -2953,10 +3225,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Name = "magazine",
                     HasNameTable = true,
                     Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -2968,7 +3246,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "books.xml";
             var testExpression = @"/descendant-or-self::node()/child::node()[position()=last()]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -2986,27 +3265,82 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "Seven Years in Trenton"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Joe" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Bob" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Joe"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Bob"
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "Trenton Literary Review Honorable Mention"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "USA" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "USA"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "12" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "12"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "History of Trenton" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Mary" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Bob" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "JoeBob" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Loser" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "US" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "History of Trenton"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Mary"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Bob"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "JoeBob"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Loser"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "US"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "55" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "55"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
@@ -3014,25 +3348,95 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "XQL The Golden Years"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Mike" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Hyman" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Jonathan" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Marsh" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Mike"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Hyman"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Jonathan"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Marsh"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "55.95" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "55.95"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Road and Track" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "3.50" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Yes" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Road and Track"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "3.50"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Yes"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "PC Week" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "free" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Ziff Davis" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "PC Week"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "free"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Ziff Davis"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "PC Magazine" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "3.95" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Ziff Davis" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "PC Magazine"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "3.95"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Ziff Davis"
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -3046,8 +3450,18 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "Can Netscape stay alive with Microsoft eating up its browser share?"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "MSFT 99.30" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "1998-06-23" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "MSFT 99.30"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "1998-06-23"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
@@ -3078,13 +3492,38 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "History of Trenton 2"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Mary F" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Robinson" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Mary F" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Robinson" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Mary F"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Robinson"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Mary F"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Robinson"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "55" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "55"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
@@ -3092,16 +3531,56 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "History of Trenton Vol 3"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Mary F" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Robinson" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Frank" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Anderson" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Pulizer" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Mary F" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Robinson" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Mary F"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Robinson"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Frank"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Anderson"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Pulizer"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Mary F"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Robinson"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "10" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "10"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
@@ -3109,14 +3588,44 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "How To Fix Computers"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Hack" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "er" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Ph.D." },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Hack"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "er"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Ph.D."
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "08" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "08"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Tracking Trenton" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "2.50" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Tracking Trenton"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "2.50"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
@@ -3124,7 +3633,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "Tracking Trenton Stocks"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "0.98" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "0.98"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
@@ -3132,25 +3646,85 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "Trenton Today, Trenton Tomorrow"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Toni" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Bob" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "B.A." },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Ph.D." },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Pulizer" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Still in Trenton" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Trenton Forever" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Toni"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Bob"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "B.A."
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Ph.D."
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Pulizer"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Still in Trenton"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Trenton Forever"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "6.50" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "6.50"
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "It was a dark and stormy night."
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "I" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = " have.\n\t\t\t" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Trenton" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "misery" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "I"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = " have.\n\t\t\t"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Trenton"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "misery"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -3160,9 +3734,19 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "Who's Who in Trenton"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Robert Bob" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Robert Bob"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Where is Trenton?" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Where is Trenton?"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
@@ -3171,7 +3755,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Value = "Where in the world is Trenton?"
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true });
+                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -3187,7 +3772,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var testExpression =
                 @"/descendant-or-self::node()[position()> 3 and position() < 30]/child::node()[position()<last() and position()<30 and position()!=13]/preceding::*[position()>=2 and position()<= last() - 2][position()>2][position()>2]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -3195,7 +3781,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "author",
                     Name = "author",
                     HasNameTable = true,
-                    Value = "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
+                    Value =
+                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
                 },
                 new XPathResultToken
                 {
@@ -3271,7 +3858,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Name = "first-name",
                     HasNameTable = true,
                     Value = "Mary"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -3288,7 +3876,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore";
             var testExpression = @"//*[position()=2 and //*[position()=3 and //*[position()=2]]]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -3296,7 +3885,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "author",
                     Name = "author",
                     HasNameTable = true,
-                    Value = "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
+                    Value =
+                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
                 },
                 new XPathResultToken
                 {
@@ -3561,10 +4151,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Prefix = "my",
                     Value = "Robert Bob"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -3580,7 +4176,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var expected = new XPathResult(0);
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -3592,7 +4193,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore";
             var testExpression = @"book[position()<2.999998999]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -3614,10 +4216,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value =
                         "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -3628,8 +4236,10 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "books.xml";
             var startingNodePath = "/bookstore";
-            var testExpression = @"book/title/text()/ancestor::*[position()=1 or position()=2][position()=1]";
-            var expected = new XPathResult(0,
+            var testExpression =
+                @"book/title/text()/ancestor::*[position()=1 or position()=2][position()=1]";
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -3692,10 +4302,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Name = "title",
                     HasNameTable = true,
                     Value = "Trenton Today, Trenton Tomorrow"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -3711,7 +4327,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
 
             namespaceManager.AddNamespace("def", "http://default.htm");
             namespaceManager.AddNamespace("bk", "http://book.htm");
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Namespace,
@@ -3719,11 +4336,17 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Name = "xml",
                     HasNameTable = true,
                     Value = "http://www.w3.org/XML/1998/namespace"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -3733,8 +4356,10 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         public static void UsingPositionFunctionTest668()
         {
             var xml = "name2.xml";
-            var testExpression = @"//namespace::*[position()<last()][position()>1][position()=last()]";
-            var expected = new XPathResult(0,
+            var testExpression =
+                @"//namespace::*[position()<last()][position()>1][position()=last()]";
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Namespace,
@@ -3824,7 +4449,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     NodeType = XPathNodeType.Namespace,
                     HasNameTable = true,
                     Value = "http://default.htm"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -3844,17 +4470,24 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
 
             namespaceManager.AddNamespace("def", "http://default.htm");
             namespaceManager.AddNamespace("bk", "http://book.htm");
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Namespace,
                     HasNameTable = true,
                     Value = "http://default.htm"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, namespaceManager: namespaceManager,
-                startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -3866,7 +4499,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore/book[3]/author/last.name";
             var testExpression = @"preceding::*[position()>2][position()>2][position()<last()]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -3883,7 +4517,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "author",
                     Name = "author",
                     HasNameTable = true,
-                    Value = "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
+                    Value =
+                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
                 },
                 new XPathResultToken
                 {
@@ -3987,7 +4622,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "publication",
                     Name = "publication",
                     HasNameTable = true,
-                    Value = "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t"
+                    Value =
+                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t"
                 },
                 new XPathResultToken
                 {
@@ -4006,10 +4642,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Name = "last-name",
                     HasNameTable = true,
                     Value = "Loser"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -4020,8 +4662,10 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "books.xml";
             var startingNodePath = "/bookstore/*[last()]";
-            var testExpression = @"preceding-sibling::*[position()>2][position()>1][position()<last()]";
-            var expected = new XPathResult(0,
+            var testExpression =
+                @"preceding-sibling::*[position()>2][position()>1][position()<last()]";
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -4125,7 +4769,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "book",
                     Name = "book",
                     HasNameTable = true,
-                    Value = "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
+                    Value =
+                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
                 },
                 new XPathResultToken
                 {
@@ -4148,10 +4793,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Prefix = "my",
                     Value = "\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -4163,7 +4814,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
             var xml = "books.xml";
             var startingNodePath = "/bookstore/book[2]/author/publication/country/text()";
             var testExpression = @"ancestor::node()[position()<5][position()>2][last()]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -4174,10 +4826,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value =
                         "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -4188,7 +4846,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "books.xml";
             var testExpression = @"//title/text()/ancestor::*[name()='book'][position()=1][last()]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -4252,7 +4911,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "book",
                     Name = "book",
                     HasNameTable = true,
-                    Value = "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
+                    Value =
+                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
                 },
                 new XPathResultToken
                 {
@@ -4264,7 +4924,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value =
                         "\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -4277,8 +4938,10 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         public static void UsingPositionFunctionTest674()
         {
             var xml = "books.xml";
-            var testExpression = @"//title/text()/ancestor-or-self::*[name()='book'][position()=1][last()]";
-            var expected = new XPathResult(0,
+            var testExpression =
+                @"//title/text()/ancestor-or-self::*[name()='book'][position()=1][last()]";
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -4342,7 +5005,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "book",
                     Name = "book",
                     HasNameTable = true,
-                    Value = "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
+                    Value =
+                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
                 },
                 new XPathResultToken
                 {
@@ -4354,7 +5018,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value =
                         "\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -4367,8 +5032,10 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         public static void UsingPositionFunctionTest675()
         {
             var xml = "books.xml";
-            var testExpression = @"//title/text()/ancestor::*[name()='book'][position()=1][following::magazine]";
-            var expected = new XPathResult(0,
+            var testExpression =
+                @"//title/text()/ancestor::*[name()='book'][position()=1][following::magazine]";
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -4432,8 +5099,10 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "book",
                     Name = "book",
                     HasNameTable = true,
-                    Value = "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
-                });
+                    Value =
+                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -4447,8 +5116,10 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "books.xml";
             var startingNodePath = "/bookstore/book[6]";
-            var testExpression = @"preceding::*/child::text()[position()=1 or position()=last()][1]";
-            var expected = new XPathResult(0,
+            var testExpression =
+                @"preceding::*/child::text()[position()=1 or position()=last()][1]";
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
@@ -4457,31 +5128,86 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Value = "Seven Years in Trenton"
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Joe" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Bob" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Joe"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Bob"
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "Trenton Literary Review Honorable Mention"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "USA" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "12" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "USA"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "12"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "History of Trenton" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "History of Trenton"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Mary" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Bob" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Mary"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Bob"
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "\n\t\t\t\tSelected Short Stories of\n\t\t\t\t"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "JoeBob" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Loser" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "US" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "55" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "JoeBob"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Loser"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "US"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "55"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
@@ -4490,29 +5216,99 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Value = "XQL The Golden Years"
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Mike" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Hyman" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Mike"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Hyman"
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "\n\t\t\t\tXQL For Dummies\n\t\t\t\t"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Jonathan" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Marsh" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "55.95" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Jonathan"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Marsh"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "55.95"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Road and Track" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "3.50" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Yes" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Road and Track"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "3.50"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Yes"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "PC Week" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "free" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Ziff Davis" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "PC Week"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "free"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Ziff Davis"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "PC Magazine" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "3.95" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Ziff Davis" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "PC Magazine"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "3.95"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Ziff Davis"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
@@ -4538,8 +5334,18 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value = "Can Netscape stay alive with Microsoft eating up its browser share?"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "MSFT 99.30" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "1998-06-23" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "MSFT 99.30"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "1998-06-23"
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
@@ -4569,17 +5375,42 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Value = "History of Trenton 2"
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Mary F" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Robinson" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Mary F"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Robinson"
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "\n\t\t\t\tSelected Short Stories of\n\t\t\t\t"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Mary F" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Robinson" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "55" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Mary F"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Robinson"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "55"
+                },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
@@ -4588,23 +5419,69 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Value = "History of Trenton Vol 3"
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Mary F" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Robinson" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Frank" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Anderson" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Pulizer" },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Mary F"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Robinson"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Frank"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Anderson"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Pulizer"
+                },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value = "\n\t\t\t\tSelected Short Stories of\n\t\t\t\t"
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Mary F" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "Robinson" },
-                new XPathResultToken { NodeType = XPathNodeType.Text, HasNameTable = true, Value = "10" });
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Mary F"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Robinson"
+                },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "10"
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -4615,8 +5492,10 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "books.xml";
             var startingNodePath = "/bookstore/book[6]";
-            var testExpression = @"preceding-sibling::*/self::*[position()=1][position()=last()][1][child::title]";
-            var expected = new XPathResult(0,
+            var testExpression =
+                @"preceding-sibling::*/self::*[position()=1][position()=last()][1][child::title]";
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -4702,10 +5581,16 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value =
                         "\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t"
-                });
+                }
+            );
             ;
 
-            Utils.XPathNodesetTest(xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathNodesetTest(
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -4716,7 +5601,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "books.xml";
             var testExpression = @"//book/descendant::*[position()=1][position()=last()][1]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -4779,7 +5665,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     Name = "title",
                     HasNameTable = true,
                     Value = "Trenton Today, Trenton Tomorrow"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -4792,8 +5679,10 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         public static void UsingPositionFunctionTest679()
         {
             var xml = "books.xml";
-            var testExpression = @"//book/descendant-or-self::*[position()=1][position()=last()][1]";
-            var expected = new XPathResult(0,
+            var testExpression =
+                @"//book/descendant-or-self::*[position()=1][position()=last()][1]";
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -4857,7 +5746,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "book",
                     Name = "book",
                     HasNameTable = true,
-                    Value = "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
+                    Value =
+                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
                 },
                 new XPathResultToken
                 {
@@ -4869,7 +5759,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value =
                         "\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -4882,7 +5773,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         public static void UsingPositionFunctionTest680()
         {
             var xml = "books.xml";
-            var testExpression = @"//book/descendant-or-self::*/parent[position()=1][position()=last()][1]";
+            var testExpression =
+                @"//book/descendant-or-self::*/parent[position()=1][position()=last()][1]";
             var expected = new XPathResult(0);
             ;
 
@@ -4896,8 +5788,10 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         public static void UsingPositionFunctionTest681()
         {
             var xml = "books.xml";
-            var testExpression = @"//book/namespace::*/parent::*[position()=1][position()=last()][1]";
-            var expected = new XPathResult(0,
+            var testExpression =
+                @"//book/namespace::*/parent::*[position()=1][position()=last()][1]";
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -4961,7 +5855,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "book",
                     Name = "book",
                     HasNameTable = true,
-                    Value = "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
+                    Value =
+                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
                 },
                 new XPathResultToken
                 {
@@ -4973,7 +5868,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value =
                         "\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -4986,8 +5882,10 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         public static void UsingPositionFunctionTest682()
         {
             var xml = "books.xml";
-            var testExpression = @"//book/following::*/parent::*[position()=1][position()=last()][1]";
-            var expected = new XPathResult(0,
+            var testExpression =
+                @"//book/following::*/parent::*[position()=1][position()=last()][1]";
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -5027,7 +5925,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "publication",
                     Name = "publication",
                     HasNameTable = true,
-                    Value = "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t"
+                    Value =
+                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t"
                 },
                 new XPathResultToken
                 {
@@ -5176,7 +6075,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "publication",
                     Name = "publication",
                     HasNameTable = true,
-                    Value = "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t"
+                    Value =
+                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t"
                 },
                 new XPathResultToken
                 {
@@ -5206,7 +6106,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "publication",
                     Name = "publication",
                     HasNameTable = true,
-                    Value = "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t"
+                    Value =
+                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t"
                 },
                 new XPathResultToken
                 {
@@ -5216,7 +6117,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "book",
                     Name = "book",
                     HasNameTable = true,
-                    Value = "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
+                    Value =
+                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
                 },
                 new XPathResultToken
                 {
@@ -5334,7 +6236,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Prefix = "my",
                     Value = "\n\t\tWhere in the world is Trenton?\n\t"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -5348,7 +6251,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "books.xml";
             var testExpression = @"//book/following::*[position()=1][position()=last()][1]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -5400,7 +6304,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "book",
                     Name = "book",
                     HasNameTable = true,
-                    Value = "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
+                    Value =
+                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
                 },
                 new XPathResultToken
                 {
@@ -5423,7 +6328,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Prefix = "my",
                     Value = "\n\t\tWho's Who in Trenton\n\t\tRobert Bob\n\t"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -5436,8 +6342,10 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         public static void UsingPositionFunctionTest684()
         {
             var xml = "books.xml";
-            var testExpression = @"//book/following-sibling::*/parent::*[position()=1][position()=last()][1]";
-            var expected = new XPathResult(0,
+            var testExpression =
+                @"//book/following-sibling::*/parent::*[position()=1][position()=last()][1]";
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -5448,7 +6356,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Value =
                         "\n\t\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t\n\t\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t\n\t\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t\n\t\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t\n\t\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t\n\t\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t\n\t\n\t\tPC Magazine Best Product of 1997\n\t\n\t\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t\n\t\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t\n\t\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t\n\t\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t\n\t\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t\n\t\n\t\tWho's Who in Trenton\n\t\tRobert Bob\n\t\n\t\n\t\tWhere is Trenton?\n\t\n\t\n\t\tWhere in the world is Trenton?\n\t\n"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -5462,7 +6371,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "books.xml";
             var testExpression = @"//book/following-sibling::*[position()=1][position()=last()][1]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -5514,7 +6424,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "book",
                     Name = "book",
                     HasNameTable = true,
-                    Value = "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
+                    Value =
+                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
                 },
                 new XPathResultToken
                 {
@@ -5537,7 +6448,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Prefix = "my",
                     Value = "\n\t\tWho's Who in Trenton\n\t\tRobert Bob\n\t"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -5551,7 +6463,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "books.xml";
             var testExpression = @"//book/preceding::*[position()=1][position()=last()][1]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -5605,7 +6518,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     LocalName = "subscription",
                     Name = "subscription",
                     HasNameTable = true
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);
@@ -5619,7 +6533,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
         {
             var xml = "books.xml";
             var testExpression = @"//book/preceding-sibling::*[position()=1][position()=last()][1]";
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -5685,7 +6600,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Predicates
                     HasNameTable = true,
                     Prefix = "my",
                     Value = "\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t"
-                });
+                }
+            );
             ;
 
             Utils.XPathNodesetTest(xml, testExpression, expected);

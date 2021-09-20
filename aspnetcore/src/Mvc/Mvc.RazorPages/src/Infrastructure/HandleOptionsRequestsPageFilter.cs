@@ -29,9 +29,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         /// </summary>
         public int Order => 1000;
 
-        public void OnPageHandlerExecuted(PageHandlerExecutedContext context)
-        {
-        }
+        public void OnPageHandlerExecuted(PageHandlerExecutedContext context) { }
 
         public void OnPageHandlerExecuting(PageHandlerExecutingContext context)
         {
@@ -40,16 +38,15 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 throw new ArgumentNullException(nameof(context));
             }
 
-            if (context.HandlerMethod == null &&
-                context.Result == null &&
-                HttpMethods.IsOptions(context.HttpContext.Request.Method))
-            {
+            if (
+                context.HandlerMethod == null
+                && context.Result == null
+                && HttpMethods.IsOptions(context.HttpContext.Request.Method)
+            ) {
                 context.Result = new OkResult();
             }
         }
 
-        public void OnPageHandlerSelected(PageHandlerSelectedContext context)
-        {
-        }
+        public void OnPageHandlerSelected(PageHandlerSelectedContext context) { }
     }
 }

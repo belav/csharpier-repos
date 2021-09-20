@@ -49,7 +49,12 @@ class CommonStringTests
 
         Assert.IsTrue(VerifyReversed(InitialString, (orig, rev) => rev == Helpers.Reverse(orig)));
 
-        Assert.IsTrue(ReverseInCallback(InitialString, (string str, out string rev) => rev = Helpers.Reverse(InitialString)));
+        Assert.IsTrue(
+            ReverseInCallback(
+                InitialString,
+                (string str, out string rev) => rev = Helpers.Reverse(InitialString)
+            )
+        );
 
         Assert.IsTrue(ReverseInCallbackReturned(InitialString, str => Helpers.Reverse(str)));
     }
@@ -65,22 +70,28 @@ class CommonStringTests
         Assert.AreEqual(Helpers.Reverse(InitialString), builder.ToString());
 
         builder = new StringBuilder(InitialString);
-        Assert.IsTrue(ReverseInplaceInCallback(builder, b =>
-        {
-            string reversed = Helpers.Reverse(b.ToString());
-            b.Clear();
-            b.Append(reversed);
-        }));
+        Assert.IsTrue(
+            ReverseInplaceInCallback(
+                builder,
+                b =>
+                {
+                    string reversed = Helpers.Reverse(b.ToString());
+                    b.Clear();
+                    b.Append(reversed);
+                }
+            )
+        );
     }
 
     private static void RunStructTests()
     {
-        Assert.IsTrue(MatchFunctionNameInStruct(new StringInStruct { str = nameof(MatchFunctionNameInStruct)}));
+        Assert.IsTrue(
+            MatchFunctionNameInStruct(
+                new StringInStruct { str = nameof(MatchFunctionNameInStruct) }
+            )
+        );
 
-        var str = new StringInStruct
-        {
-            str = InitialString
-        };
+        var str = new StringInStruct { str = InitialString };
 
         ReverseInplaceByrefInStruct(ref str);
 

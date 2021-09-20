@@ -57,7 +57,6 @@ public class Test
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
@@ -82,6 +81,5 @@ public class Test
             return 1;
         }
     }
-
 }
 

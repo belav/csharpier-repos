@@ -15,7 +15,10 @@ namespace Microsoft.TestCommon
     {
         private static readonly GenericTypeAssert singleton = new GenericTypeAssert();
 
-        public static GenericTypeAssert Singleton { get { return singleton; } }
+        public static GenericTypeAssert Singleton
+        {
+            get { return singleton; }
+        }
 
         /// <summary>
         /// Asserts the given <paramref name="genericBaseType"/> is a generic type and creates a new
@@ -26,8 +29,11 @@ namespace Microsoft.TestCommon
         /// <param name="genericParameterType">The type of the single generic parameter to apply to create a bound generic type.</param>
         /// <param name="parameterTypes">The list of parameter types for a constructor that must exist.</param>
         /// <returns>The <see cref="ConstructorInfo"/> of that constructor which may be invoked to create that new generic type.</returns>
-        public ConstructorInfo GetConstructor(Type genericBaseType, Type genericParameterType, params Type[] parameterTypes)
-        {
+        public ConstructorInfo GetConstructor(
+            Type genericBaseType,
+            Type genericParameterType,
+            params Type[] parameterTypes
+        ) {
             Assert.NotNull(genericBaseType);
             Assert.True(genericBaseType.IsGenericTypeDefinition);
             Assert.NotNull(genericParameterType);
@@ -35,7 +41,14 @@ namespace Microsoft.TestCommon
 
             Type genericType = genericBaseType.MakeGenericType(new Type[] { genericParameterType });
             ConstructorInfo ctor = genericType.GetConstructor(parameterTypes);
-            Assert.True(ctor != null, String.Format("Test error: failed to locate generic ctor for type '{0}<{1}>',", genericBaseType.Name, genericParameterType.Name));
+            Assert.True(
+                ctor != null,
+                String.Format(
+                    "Test error: failed to locate generic ctor for type '{0}<{1}>',",
+                    genericBaseType.Name,
+                    genericParameterType.Name
+                )
+            );
             return ctor;
         }
 
@@ -48,8 +61,11 @@ namespace Microsoft.TestCommon
         /// <param name="genericParameterTypes">The types of the generic parameters to apply to create a bound generic type.</param>
         /// <param name="parameterTypes">The list of parameter types for a constructor that must exist.</param>
         /// <returns>The <see cref="ConstructorInfo"/> of that constructor which may be invoked to create that new generic type.</returns>
-        public ConstructorInfo GetConstructor(Type genericBaseType, Type[] genericParameterTypes, params Type[] parameterTypes)
-        {
+        public ConstructorInfo GetConstructor(
+            Type genericBaseType,
+            Type[] genericParameterTypes,
+            params Type[] parameterTypes
+        ) {
             Assert.NotNull(genericBaseType);
             Assert.True(genericBaseType.IsGenericTypeDefinition);
             Assert.NotNull(genericParameterTypes);
@@ -57,7 +73,13 @@ namespace Microsoft.TestCommon
 
             Type genericType = genericBaseType.MakeGenericType(genericParameterTypes);
             ConstructorInfo ctor = genericType.GetConstructor(parameterTypes);
-            Assert.True(ctor != null, String.Format("Test error: failed to locate generic ctor for type '{0}<>',", genericBaseType.Name));
+            Assert.True(
+                ctor != null,
+                String.Format(
+                    "Test error: failed to locate generic ctor for type '{0}<>',",
+                    genericBaseType.Name
+                )
+            );
             return ctor;
         }
 
@@ -69,9 +91,17 @@ namespace Microsoft.TestCommon
         /// <param name="parameterTypes">The list of parameter types for a constructor that must exist.</param>
         /// <param name="parameterValues">The list of values to supply to the constructor</param>
         /// <returns>The instance created by calling that constructor.</returns>
-        public object InvokeConstructor(Type genericBaseType, Type genericParameterType, Type[] parameterTypes, object[] parameterValues)
-        {
-            ConstructorInfo ctor = GetConstructor(genericBaseType, genericParameterType, parameterTypes);
+        public object InvokeConstructor(
+            Type genericBaseType,
+            Type genericParameterType,
+            Type[] parameterTypes,
+            object[] parameterValues
+        ) {
+            ConstructorInfo ctor = GetConstructor(
+                genericBaseType,
+                genericParameterType,
+                parameterTypes
+            );
             Assert.NotNull(parameterValues);
             Assert.Equal(parameterTypes.Length, parameterValues.Length);
             return ctor.Invoke(parameterValues);
@@ -85,9 +115,17 @@ namespace Microsoft.TestCommon
         /// <param name="parameterTypes">The list of parameter types for a constructor that must exist.</param>
         /// <param name="parameterValues">The list of values to supply to the constructor</param>
         /// <returns>The instance created by calling that constructor.</returns>
-        public object InvokeConstructor(Type genericBaseType, Type[] genericParameterTypes, Type[] parameterTypes, object[] parameterValues)
-        {
-            ConstructorInfo ctor = GetConstructor(genericBaseType, genericParameterTypes, parameterTypes);
+        public object InvokeConstructor(
+            Type genericBaseType,
+            Type[] genericParameterTypes,
+            Type[] parameterTypes,
+            object[] parameterValues
+        ) {
+            ConstructorInfo ctor = GetConstructor(
+                genericBaseType,
+                genericParameterTypes,
+                parameterTypes
+            );
             Assert.NotNull(parameterValues);
             Assert.Equal(parameterTypes.Length, parameterValues.Length);
             return ctor.Invoke(parameterValues);
@@ -100,8 +138,11 @@ namespace Microsoft.TestCommon
         /// <param name="genericParameterType">The type of the single generic parameter to apply to create a bound generic type.</param>
         /// <param name="parameterValues">The list of values to supply to the constructor.  It must be possible to determine the</param>
         /// <returns>The instance created by calling that constructor.</returns>
-        public object InvokeConstructor(Type genericBaseType, Type genericParameterType, params object[] parameterValues)
-        {
+        public object InvokeConstructor(
+            Type genericBaseType,
+            Type genericParameterType,
+            params object[] parameterValues
+        ) {
             Assert.NotNull(genericBaseType);
             Assert.True(genericBaseType.IsGenericTypeDefinition);
             Assert.NotNull(genericParameterType);
@@ -109,7 +150,14 @@ namespace Microsoft.TestCommon
             Type genericType = genericBaseType.MakeGenericType(new Type[] { genericParameterType });
 
             ConstructorInfo ctor = FindConstructor(genericType, parameterValues);
-            Assert.True(ctor != null, String.Format("Test error: failed to locate generic ctor for type '{0}<{1}>',", genericBaseType.Name, genericParameterType.Name));
+            Assert.True(
+                ctor != null,
+                String.Format(
+                    "Test error: failed to locate generic ctor for type '{0}<{1}>',",
+                    genericBaseType.Name,
+                    genericParameterType.Name
+                )
+            );
             return ctor.Invoke(parameterValues);
         }
 
@@ -120,8 +168,11 @@ namespace Microsoft.TestCommon
         /// <param name="genericParameterTypes">The types of the generic parameters to apply to create a bound generic type.</param>
         /// <param name="parameterValues">The list of values to supply to the constructor.  It must be possible to determine the</param>
         /// <returns>The instance created by calling that constructor.</returns>
-        public object InvokeConstructor(Type genericBaseType, Type[] genericParameterTypes, params object[] parameterValues)
-        {
+        public object InvokeConstructor(
+            Type genericBaseType,
+            Type[] genericParameterTypes,
+            params object[] parameterValues
+        ) {
             Assert.NotNull(genericBaseType);
             Assert.True(genericBaseType.IsGenericTypeDefinition);
             Assert.NotNull(genericParameterTypes);
@@ -129,7 +180,13 @@ namespace Microsoft.TestCommon
             Type genericType = genericBaseType.MakeGenericType(genericParameterTypes);
 
             ConstructorInfo ctor = FindConstructor(genericType, parameterValues);
-            Assert.True(ctor != null, String.Format("Test error: failed to locate generic ctor for type '{0}<>',", genericBaseType.Name));
+            Assert.True(
+                ctor != null,
+                String.Format(
+                    "Test error: failed to locate generic ctor for type '{0}<>',",
+                    genericBaseType.Name
+                )
+            );
             return ctor.Invoke(parameterValues);
         }
 
@@ -142,9 +199,17 @@ namespace Microsoft.TestCommon
         /// <param name="parameterTypes">The list of parameter types for a constructor that must exist.</param>
         /// <param name="parameterValues">The list of values to supply to the constructor</param>
         /// <returns>An instance of type <typeparamref name="T"/>.</returns>
-        public T InvokeConstructor<T>(Type genericBaseType, Type genericParameterType, Type[] parameterTypes, object[] parameterValues)
-        {
-            ConstructorInfo ctor = GetConstructor(genericBaseType, genericParameterType, parameterTypes);
+        public T InvokeConstructor<T>(
+            Type genericBaseType,
+            Type genericParameterType,
+            Type[] parameterTypes,
+            object[] parameterValues
+        ) {
+            ConstructorInfo ctor = GetConstructor(
+                genericBaseType,
+                genericParameterType,
+                parameterTypes
+            );
             Assert.NotNull(parameterValues);
             Assert.Equal(parameterTypes.Length, parameterValues.Length);
             return (T)ctor.Invoke(parameterValues);
@@ -159,9 +224,17 @@ namespace Microsoft.TestCommon
         /// <param name="parameterTypes">The list of parameter types for a constructor that must exist.</param>
         /// <param name="parameterValues">The list of values to supply to the constructor</param>
         /// <returns>An instance of type <typeparamref name="T"/>.</returns>
-        public T InvokeConstructor<T>(Type genericBaseType, Type[] genericParameterTypes, Type[] parameterTypes, object[] parameterValues)
-        {
-            ConstructorInfo ctor = GetConstructor(genericBaseType, genericParameterTypes, parameterTypes);
+        public T InvokeConstructor<T>(
+            Type genericBaseType,
+            Type[] genericParameterTypes,
+            Type[] parameterTypes,
+            object[] parameterValues
+        ) {
+            ConstructorInfo ctor = GetConstructor(
+                genericBaseType,
+                genericParameterTypes,
+                parameterTypes
+            );
             Assert.NotNull(parameterValues);
             Assert.Equal(parameterTypes.Length, parameterValues.Length);
             return (T)ctor.Invoke(parameterValues);
@@ -176,8 +249,11 @@ namespace Microsoft.TestCommon
         /// <param name="parameterValues">The list of values to supply to the constructor.  It must be possible to determine the</param>
         /// <returns>The instance created by calling that constructor.</returns>
         /// <returns>An instance of type <typeparamref name="T"/>.</returns>
-        public T InvokeConstructor<T>(Type genericBaseType, Type genericParameterType, params object[] parameterValues)
-        {
+        public T InvokeConstructor<T>(
+            Type genericBaseType,
+            Type genericParameterType,
+            params object[] parameterValues
+        ) {
             Assert.NotNull(genericBaseType);
             Assert.True(genericBaseType.IsGenericTypeDefinition);
             Assert.NotNull(genericParameterType);
@@ -185,7 +261,14 @@ namespace Microsoft.TestCommon
             Type genericType = genericBaseType.MakeGenericType(new Type[] { genericParameterType });
 
             ConstructorInfo ctor = FindConstructor(genericType, parameterValues);
-            Assert.True(ctor != null, String.Format("Test error: failed to locate generic ctor for type '{0}<{1}>',", genericBaseType.Name, genericParameterType.Name));
+            Assert.True(
+                ctor != null,
+                String.Format(
+                    "Test error: failed to locate generic ctor for type '{0}<{1}>',",
+                    genericBaseType.Name,
+                    genericParameterType.Name
+                )
+            );
             return (T)ctor.Invoke(parameterValues);
         }
 
@@ -198,8 +281,11 @@ namespace Microsoft.TestCommon
         /// <param name="parameterValues">The list of values to supply to the constructor.  It must be possible to determine the</param>
         /// <returns>The instance created by calling that constructor.</returns>
         /// <returns>An instance of type <typeparamref name="T"/>.</returns>
-        public T InvokeConstructor<T>(Type genericBaseType, Type[] genericParameterTypes, params object[] parameterValues)
-        {
+        public T InvokeConstructor<T>(
+            Type genericBaseType,
+            Type[] genericParameterTypes,
+            params object[] parameterValues
+        ) {
             Assert.NotNull(genericBaseType);
             Assert.True(genericBaseType.IsGenericTypeDefinition);
             Assert.NotNull(genericParameterTypes);
@@ -207,7 +293,13 @@ namespace Microsoft.TestCommon
             Type genericType = genericBaseType.MakeGenericType(genericParameterTypes);
 
             ConstructorInfo ctor = FindConstructor(genericType, parameterValues);
-            Assert.True(ctor != null, String.Format("Test error: failed to locate generic ctor for type '{0}<>',", genericBaseType.Name));
+            Assert.True(
+                ctor != null,
+                String.Format(
+                    "Test error: failed to locate generic ctor for type '{0}<>',",
+                    genericBaseType.Name
+                )
+            );
             return (T)ctor.Invoke(parameterValues);
         }
 
@@ -235,8 +327,12 @@ namespace Microsoft.TestCommon
         /// <param name="parameterTypes">The types of the parameters to the method.</param>
         /// <param name="parameterValues">The values to supply to the method.</param>
         /// <returns>The results of the method.</returns>
-        public object InvokeMethod(object instance, string methodName, Type[] parameterTypes, object[] parameterValues)
-        {
+        public object InvokeMethod(
+            object instance,
+            string methodName,
+            Type[] parameterTypes,
+            object[] parameterValues
+        ) {
             Assert.NotNull(instance);
             Assert.NotNull(parameterTypes);
             Assert.NotNull(parameterValues);
@@ -254,8 +350,12 @@ namespace Microsoft.TestCommon
         /// <param name="parameterTypes">The types of the parameters to the method.</param>
         /// <param name="parameterValues">The values to supply to the method.</param>
         /// <returns>The results of the method.</returns>
-        public object InvokeMethod(Type type, string methodName, Type[] parameterTypes, object[] parameterValues)
-        {
+        public object InvokeMethod(
+            Type type,
+            string methodName,
+            Type[] parameterTypes,
+            object[] parameterValues
+        ) {
             Assert.NotNull(type);
             Assert.NotNull(parameterTypes);
             Assert.NotNull(parameterValues);
@@ -274,13 +374,24 @@ namespace Microsoft.TestCommon
         /// <param name="parameterTypes">The types of the parameters to the method.</param>
         /// <param name="parameterValues">The values to supply to the method.</param>
         /// <returns>The results of the method.</returns>
-        public MethodInfo CreateGenericMethod(Type type, string methodName, Type genericParameterType, Type[] parameterTypes)
-        {
+        public MethodInfo CreateGenericMethod(
+            Type type,
+            string methodName,
+            Type genericParameterType,
+            Type[] parameterTypes
+        ) {
             Assert.NotNull(type);
             Assert.NotNull(parameterTypes);
             Assert.NotNull(genericParameterType);
             //MethodInfo methodInfo = type.GetMethod(methodName, parameterTypes);
-            MethodInfo methodInfo = type.GetMethods().Where((m) => m.Name.Equals(methodName, StringComparison.OrdinalIgnoreCase) && m.IsGenericMethod && AreAssignableFrom(m.GetParameters(), parameterTypes)).FirstOrDefault();
+            MethodInfo methodInfo = type.GetMethods()
+                .Where(
+                    (m) =>
+                        m.Name.Equals(methodName, StringComparison.OrdinalIgnoreCase)
+                        && m.IsGenericMethod
+                        && AreAssignableFrom(m.GetParameters(), parameterTypes)
+                )
+                .FirstOrDefault();
             Assert.NotNull(methodInfo);
             Assert.True(methodInfo.IsGenericMethod);
             MethodInfo genericMethod = methodInfo.MakeGenericMethod(genericParameterType);
@@ -297,9 +408,19 @@ namespace Microsoft.TestCommon
         /// <param name="parameterTypes">The types of the parameters to the method.</param>
         /// <param name="parameterValues">The values to supply to the method.</param>
         /// <returns>The results of the method.</returns>
-        public object InvokeGenericMethod(Type type, string methodName, Type genericParameterType, Type[] parameterTypes, object[] parameterValues)
-        {
-            MethodInfo methodInfo = CreateGenericMethod(type, methodName, genericParameterType, parameterTypes);
+        public object InvokeGenericMethod(
+            Type type,
+            string methodName,
+            Type genericParameterType,
+            Type[] parameterTypes,
+            object[] parameterValues
+        ) {
+            MethodInfo methodInfo = CreateGenericMethod(
+                type,
+                methodName,
+                genericParameterType,
+                parameterTypes
+            );
             Assert.Equal(parameterTypes.Length, parameterValues.Length);
             return methodInfo.Invoke(null, parameterValues);
         }
@@ -313,10 +434,20 @@ namespace Microsoft.TestCommon
         /// <param name="parameterTypes">The types of the parameters to the method.</param>
         /// <param name="parameterValues">The values to supply to the method.</param>
         /// <returns>The results of the method.</returns>
-        public object InvokeGenericMethod(object instance, string methodName, Type genericParameterType, Type[] parameterTypes, object[] parameterValues)
-        {
+        public object InvokeGenericMethod(
+            object instance,
+            string methodName,
+            Type genericParameterType,
+            Type[] parameterTypes,
+            object[] parameterValues
+        ) {
             Assert.NotNull(instance);
-            MethodInfo methodInfo = CreateGenericMethod(instance.GetType(), methodName, genericParameterType, parameterTypes);
+            MethodInfo methodInfo = CreateGenericMethod(
+                instance.GetType(),
+                methodName,
+                genericParameterType,
+                parameterTypes
+            );
             Assert.Equal(parameterTypes.Length, parameterValues.Length);
             return methodInfo.Invoke(instance, parameterValues);
         }
@@ -331,9 +462,20 @@ namespace Microsoft.TestCommon
         /// <param name="parameterTypes">The types of the parameters to the method.</param>
         /// <param name="parameterValues">The values to supply to the method.</param>
         /// <returns>The results of the method.</returns>
-        public T InvokeGenericMethod<T>(object instance, string methodName, Type genericParameterType, Type[] parameterTypes, object[] parameterValues)
-        {
-            return (T)InvokeGenericMethod(instance, methodName, genericParameterType, parameterTypes, parameterValues);
+        public T InvokeGenericMethod<T>(
+            object instance,
+            string methodName,
+            Type genericParameterType,
+            Type[] parameterTypes,
+            object[] parameterValues
+        ) {
+            return (T)InvokeGenericMethod(
+                instance,
+                methodName,
+                genericParameterType,
+                parameterTypes,
+                parameterValues
+            );
         }
 
         /// <summary>
@@ -343,8 +485,11 @@ namespace Microsoft.TestCommon
         /// <param name="methodName">The name of the method to call.</param>
         /// <param name="parameterValues">The values to supply to the method.</param>
         /// <returns>The results of the method.</returns>
-        public object InvokeMethod(object instance, string methodName, params object[] parameterValues)
-        {
+        public object InvokeMethod(
+            object instance,
+            string methodName,
+            params object[] parameterValues
+        ) {
             Assert.NotNull(instance);
             MethodInfo methodInfo = FindMethod(instance.GetType(), methodName, parameterValues);
             Assert.NotNull(methodInfo);
@@ -374,8 +519,12 @@ namespace Microsoft.TestCommon
         /// <param name="genericParameterType">The type of the generic parameter.</param>
         /// <param name="parameterValues">The values to supply to the method.</param>
         /// <returns>The results of the method.</returns>
-        public object InvokeGenericMethod(object instance, string methodName, Type genericParameterType, params object[] parameterValues)
-        {
+        public object InvokeGenericMethod(
+            object instance,
+            string methodName,
+            Type genericParameterType,
+            params object[] parameterValues
+        ) {
             Assert.NotNull(instance);
             Assert.NotNull(genericParameterType);
             MethodInfo methodInfo = FindMethod(instance.GetType(), methodName, parameterValues);
@@ -393,8 +542,12 @@ namespace Microsoft.TestCommon
         /// <param name="genericParameterType">The type of the generic parameter.</param>
         /// <param name="parameterValues">The values to supply to the method.</param>
         /// <returns>The results of the method.</returns>
-        public object InvokeGenericMethod(Type type, string methodName, Type genericParameterType, params object[] parameterValues)
-        {
+        public object InvokeGenericMethod(
+            Type type,
+            string methodName,
+            Type genericParameterType,
+            params object[] parameterValues
+        ) {
             Assert.NotNull(type);
             Assert.NotNull(genericParameterType);
             MethodInfo methodInfo = FindMethod(type, methodName, parameterValues);
@@ -418,8 +571,10 @@ namespace Microsoft.TestCommon
             return propertyInfo.GetValue(instance, null);
         }
 
-        private static bool AreAssignableFrom(Type[] parameterTypes, params object[] parameterValues)
-        {
+        private static bool AreAssignableFrom(
+            Type[] parameterTypes,
+            params object[] parameterValues
+        ) {
             Assert.NotNull(parameterTypes);
             Assert.NotNull(parameterValues);
             if (parameterTypes.Length != parameterValues.Length)
@@ -438,11 +593,16 @@ namespace Microsoft.TestCommon
             return true;
         }
 
-        private static bool AreAssignableFrom(ParameterInfo[] parameterInfos, params Type[] parameterTypes)
-        {
+        private static bool AreAssignableFrom(
+            ParameterInfo[] parameterInfos,
+            params Type[] parameterTypes
+        ) {
             Assert.NotNull(parameterInfos);
             Assert.NotNull(parameterTypes);
-            Type[] parameterInfoTypes = parameterInfos.Select<ParameterInfo, Type>((info) => info.ParameterType).ToArray();
+            Type[] parameterInfoTypes = parameterInfos.Select<ParameterInfo, Type>(
+                    (info) => info.ParameterType
+                )
+                .ToArray();
             if (parameterInfoTypes.Length != parameterTypes.Length)
             {
                 return false;
@@ -465,11 +625,16 @@ namespace Microsoft.TestCommon
             return true;
         }
 
-        private static bool AreAssignableFrom(ParameterInfo[] parameterInfos, params object[] parameterValues)
-        {
+        private static bool AreAssignableFrom(
+            ParameterInfo[] parameterInfos,
+            params object[] parameterValues
+        ) {
             Assert.NotNull(parameterInfos);
             Assert.NotNull(parameterValues);
-            Type[] parameterTypes = parameterInfos.Select<ParameterInfo, Type>((info) => info.ParameterType).ToArray();
+            Type[] parameterTypes = parameterInfos.Select<ParameterInfo, Type>(
+                    (info) => info.ParameterType
+                )
+                .ToArray();
             return AreAssignableFrom(parameterTypes, parameterValues);
         }
 
@@ -477,15 +642,24 @@ namespace Microsoft.TestCommon
         {
             Assert.NotNull(type);
             Assert.NotNull(parameterValues);
-            return type.GetConstructors().FirstOrDefault((c) => AreAssignableFrom(c.GetParameters(), parameterValues));
+            return type.GetConstructors()
+                .FirstOrDefault((c) => AreAssignableFrom(c.GetParameters(), parameterValues));
         }
 
-        private static MethodInfo FindMethod(Type type, string methodName, params object[] parameterValues)
-        {
+        private static MethodInfo FindMethod(
+            Type type,
+            string methodName,
+            params object[] parameterValues
+        ) {
             Assert.NotNull(type);
             Assert.False(String.IsNullOrWhiteSpace(methodName));
             Assert.NotNull(parameterValues);
-            return type.GetMethods().FirstOrDefault((m) => String.Equals(m.Name, methodName, StringComparison.Ordinal) && AreAssignableFrom(m.GetParameters(), parameterValues));
+            return type.GetMethods()
+                .FirstOrDefault(
+                    (m) =>
+                        String.Equals(m.Name, methodName, StringComparison.Ordinal)
+                        && AreAssignableFrom(m.GetParameters(), parameterValues)
+                );
         }
     }
 }

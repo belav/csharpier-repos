@@ -49,8 +49,10 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             // instead create a timer that will report the changes and we enqueue any pending updates to
             // a list that will be updated all at once the timer actually runs.
             private bool _notificationRequestEnqueued;
-            private readonly SortedDictionary<int, NormalizedSnapshotSpanCollection> _snapshotVersionToSpansMap =
-                new();
+            private readonly SortedDictionary<
+                int,
+                NormalizedSnapshotSpanCollection
+            > _snapshotVersionToSpansMap = new();
 
             /// <summary>
             /// True if we are currently suppressing UI updates.  While suppressed we still continue
@@ -70,8 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 IAsynchronousOperationListener listener,
                 IForegroundNotificationService notificationService,
                 Action<NormalizedSnapshotSpanCollection> notifyEditorNow,
-                CancellationToken cancellationToken)
-                : base(threadingContext)
+                CancellationToken cancellationToken
+            ) : base(threadingContext)
             {
                 Contract.ThrowIfNull(notifyEditorNow);
                 _subjectBuffer = subjectBuffer;
@@ -96,11 +98,10 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 this.IsPaused = false;
             }
 
-            private static readonly Func<int, NormalizedSnapshotSpanCollection> s_addFunction =
-                _ => new NormalizedSnapshotSpanCollection();
+            private static readonly Func<int, NormalizedSnapshotSpanCollection> s_addFunction = _ =>
+                new NormalizedSnapshotSpanCollection();
 
-            internal void EnqueueChanges(
-                NormalizedSnapshotSpanCollection changedSpans)
+            internal void EnqueueChanges(NormalizedSnapshotSpanCollection changedSpans)
             {
                 AssertIsForeground();
                 if (changedSpans.Count == 0)
@@ -121,8 +122,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             // We may get a flurry of 'Notify' calls if we've enqueued a lot of work and it's now just
             // completed.  Batch up all the notifications so we can tell the editor about them at the
             // same time.
-            private void EnqueueNotificationRequest(
-                TaggerDelay delay)
+            private void EnqueueNotificationRequest(TaggerDelay delay)
             {
                 AssertIsForeground();
 
@@ -134,8 +134,10 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 }
 
                 var currentTick = Environment.TickCount;
-                if (Math.Abs(currentTick - _lastReportTick) > TaggerDelay.NearImmediate.ComputeTimeDelay(_subjectBuffer).TotalMilliseconds)
-                {
+                if (
+                    Math.Abs(currentTick - _lastReportTick)
+                    > TaggerDelay.NearImmediate.ComputeTimeDelay(_subjectBuffer).TotalMilliseconds
+                ) {
                     _lastReportTick = currentTick;
                     this.NotifyEditor();
                 }
@@ -161,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                         },
                         (int)delay.ComputeTimeDelay(_subjectBuffer).TotalMilliseconds,
                         _listener.BeginAsyncOperation("EnqueueNotificationRequest"),
-                        _cancellationToken);
+                        _cancellationToken
+                    );
                 }
             }
 
@@ -184,8 +187,12 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     }
                 }
 
-                using (Logger.LogBlock(FunctionId.Tagger_BatchChangeNotifier_NotifyEditor, CancellationToken.None))
-                {
+                using (
+                    Logger.LogBlock(
+                        FunctionId.Tagger_BatchChangeNotifier_NotifyEditor,
+                        CancellationToken.None
+                    )
+                ) {
                     // Go through and report the snapshots from oldest to newest.
                     foreach (var snapshotAndSpans in _snapshotVersionToSpansMap)
                     {

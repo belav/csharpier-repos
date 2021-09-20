@@ -13,10 +13,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
     {
         private ExpressionFinder _expressionFinder;
 
-        public InjectWhereExpressionMutator(DbContext context)
-            : base(context)
-        {
-        }
+        public InjectWhereExpressionMutator(DbContext context) : base(context) { }
 
         public override bool IsValid(Expression expression)
         {
@@ -34,14 +31,19 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
             var typeArgument = expressionToInject.Type.GetGenericArguments()[0];
             var prm = Expression.Parameter(typeArgument, "prm");
 
-            var candidateExpressions = new List<Expression> { Expression.Constant(random.Choose(new List<bool> { true, false })) };
+            var candidateExpressions = new List<Expression>
+            {
+                Expression.Constant(random.Choose(new List<bool> { true, false }))
+            };
 
             if (typeArgument == typeof(bool))
             {
                 candidateExpressions.Add(prm);
             }
 
-            var properties = typeArgument.GetProperties().Where(p => !p.GetMethod.IsStatic).ToList();
+            var properties = typeArgument.GetProperties()
+                .Where(p => !p.GetMethod.IsStatic)
+                .ToList();
             properties = FilterPropertyInfos(typeArgument, properties);
 
             var boolProperties = properties.Where(p => p.PropertyType == typeof(bool)).ToList();
@@ -51,16 +53,24 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
             }
 
             // compare two properties
-            var propertiesOfTheSameType = properties.GroupBy(p => p.PropertyType).Where(g => g.Count() > 1).ToList();
+            var propertiesOfTheSameType = properties.GroupBy(p => p.PropertyType)
+                .Where(g => g.Count() > 1)
+                .ToList();
             if (propertiesOfTheSameType.Any())
             {
                 var propertyGroup = random.Choose(propertiesOfTheSameType).ToList();
 
                 var firstProperty = random.Choose(propertyGroup);
-                var secondProperty = random.Choose(propertyGroup.Where(p => p != firstProperty).ToList());
+                var secondProperty = random.Choose(
+                    propertyGroup.Where(p => p != firstProperty).ToList()
+                );
 
                 candidateExpressions.Add(
-                    Expression.NotEqual(Expression.Property(prm, firstProperty), Expression.Property(prm, secondProperty)));
+                    Expression.NotEqual(
+                        Expression.Property(prm, firstProperty),
+                        Expression.Property(prm, secondProperty)
+                    )
+                );
             }
 
             // compare property to constant
@@ -70,7 +80,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                 candidateExpressions.Add(
                     Expression.NotEqual(
                         Expression.Property(prm, property),
-                        Expression.Default(property.PropertyType)));
+                        Expression.Default(property.PropertyType)
+                    )
+                );
             }
 
             if (IsEntityType(typeArgument))
@@ -83,13 +95,16 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                 if (collectionNavigation != null)
                 {
                     var any = EnumerableMethods.AnyWithoutPredicate.MakeGenericMethod(
-                        collectionNavigation.ForeignKey.DeclaringEntityType.ClrType);
+                        collectionNavigation.ForeignKey.DeclaringEntityType.ClrType
+                    );
 
                     // collection.Any()
                     candidateExpressions.Add(
                         Expression.Call(
                             any,
-                            Expression.Property(prm, collectionNavigation.PropertyInfo)));
+                            Expression.Property(prm, collectionNavigation.PropertyInfo)
+                        )
+                    );
                 }
 
                 var navigation = random.Choose(navigations);
@@ -105,7 +120,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
 
             var where = QueryableMethods.Where.MakeGenericMethod(typeArgument);
             var lambda = Expression.Lambda(lambdaBody, prm);
-            var injector = new ExpressionInjector(expressionToInject, e => Expression.Call(where, e, lambda));
+            var injector = new ExpressionInjector(
+                expressionToInject,
+                e => Expression.Call(where, e, lambda)
+            );
 
             return injector.Visit(expression);
         }
@@ -123,18 +141,20 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
 
             public override Expression Visit(Expression expression)
             {
-                if (expression is MethodCallExpression methodCallExpression
-                    && (methodCallExpression.Method.Name == "ThenInclude"
+                if (
+                    expression is MethodCallExpression methodCallExpression
+                    && (
+                        methodCallExpression.Method.Name == "ThenInclude"
                         || methodCallExpression.Method.Name == "ThenBy"
                         || methodCallExpression.Method.Name == "ThenByDescending"
                         || methodCallExpression.Method.Name == "Skip"
-                        || methodCallExpression.Method.Name == "Take"))
-                {
+                        || methodCallExpression.Method.Name == "Take"
+                    )
+                ) {
                     return expression;
                 }
 
-                if (expression != null
-                    && IsQueryableResult(expression))
+                if (expression != null && IsQueryableResult(expression))
                 {
                     FoundExpressions.Add(expression);
                 }

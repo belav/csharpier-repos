@@ -31,17 +31,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             TLanguageService languageService,
             SourceCodeKind sourceCodeKind,
             IFormattingRule vbHelperFormattingRule,
-            Workspace workspace)
-            : base(bufferCoordinator,
-                   componentModel,
-                   project.VisualStudioProject,
-                   hierarchy,
-                   itemid,
-                   project.ProjectTracker,
-                   project.Id,
-                   languageService.LanguageServiceId,
-                   vbHelperFormattingRule: null)
-        {
+            Workspace workspace
+        ) : base(
+            bufferCoordinator,
+            componentModel,
+            project.VisualStudioProject,
+            hierarchy,
+            itemid,
+            project.ProjectTracker,
+            project.Id,
+            languageService.LanguageServiceId,
+            vbHelperFormattingRule: null
+        ) {
             Contract.ThrowIfTrue(vbHelperFormattingRule != null);
         }
 
@@ -54,17 +55,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             uint itemid,
             TLanguageService languageService,
             SourceCodeKind sourceCodeKind,
-            IFormattingRule vbHelperFormattingRule)
-            : base(bufferCoordinator,
-                   componentModel,
-                   project.VisualStudioProject,
-                   hierarchy,
-                   itemid,
-                   projectTrackerOpt: null,
-                   project.VisualStudioProject.Id,
-                   languageService.LanguageServiceId,
-                   vbHelperFormattingRule: null)
-        {
+            IFormattingRule vbHelperFormattingRule
+        ) : base(
+            bufferCoordinator,
+            componentModel,
+            project.VisualStudioProject,
+            hierarchy,
+            itemid,
+            projectTrackerOpt: null,
+            project.VisualStudioProject.Id,
+            languageService.LanguageServiceId,
+            vbHelperFormattingRule: null
+        ) {
             Contract.ThrowIfTrue(vbHelperFormattingRule != null);
         }
     }

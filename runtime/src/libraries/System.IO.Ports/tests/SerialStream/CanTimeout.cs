@@ -13,11 +13,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void CanTimeout_Open()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            {
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            ) {
                 com.Open();
 
-                Debug.WriteLine("Verifying CanTimeout property returns true after a call to Open()");
+                Debug.WriteLine(
+                    "Verifying CanTimeout property returns true after a call to Open()"
+                );
 
                 Assert.True(com.BaseStream.CanTimeout);
             }
@@ -26,13 +31,18 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void CanTimeout_Open_Close()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            {
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            ) {
                 com.Open();
                 Stream serialStream = com.BaseStream;
                 com.Close();
 
-                Debug.WriteLine("Verifying CanTimeout property retunrs false After Open() then Close()");
+                Debug.WriteLine(
+                    "Verifying CanTimeout property retunrs false After Open() then Close()"
+                );
 
                 Assert.False(serialStream.CanTimeout);
             }
@@ -41,14 +51,19 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void CanTimeout_Open_Close_Open()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            {
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            ) {
                 com.Open();
                 com.Close();
                 com.Open();
                 Stream serialStream = com.BaseStream;
 
-                Debug.WriteLine("Verifying CanTimeout property returns false After Open() then Close()");
+                Debug.WriteLine(
+                    "Verifying CanTimeout property returns false After Open() then Close()"
+                );
 
                 Assert.True(serialStream.CanTimeout);
             }
@@ -57,13 +72,18 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void CanTimeout_Open_BaseStreamClose()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            {
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            ) {
                 com.Open();
                 Stream serialStream = com.BaseStream;
                 com.BaseStream.Close();
 
-                Debug.WriteLine("Verifying CanTimeout property returns false After Open() then BaseStream.Close()");
+                Debug.WriteLine(
+                    "Verifying CanTimeout property returns false After Open() then BaseStream.Close()"
+                );
 
                 Assert.False(serialStream.CanTimeout);
             }

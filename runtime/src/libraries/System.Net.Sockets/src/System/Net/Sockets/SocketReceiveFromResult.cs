@@ -8,7 +8,6 @@ namespace System.Net.Sockets
         public int ReceivedBytes;
         public EndPoint RemoteEndPoint;
     }
-
     // Alternative:
     //    public struct SocketReceiveFromResult
     //    {

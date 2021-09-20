@@ -14,19 +14,13 @@ namespace Microsoft.AspNetCore.Builder
         /// <summary>
         /// Enabled directory browsing for all request paths
         /// </summary>
-        public DirectoryBrowserOptions()
-            : this(new SharedOptions())
-        {
-        }
+        public DirectoryBrowserOptions() : this(new SharedOptions()) { }
 
         /// <summary>
         /// Enabled directory browsing all request paths
         /// </summary>
         /// <param name="sharedOptions"></param>
-        public DirectoryBrowserOptions(SharedOptions sharedOptions)
-            : base(sharedOptions)
-        {
-        }
+        public DirectoryBrowserOptions(SharedOptions sharedOptions) : base(sharedOptions) { }
 
         /// <summary>
         /// The component that generates the view.

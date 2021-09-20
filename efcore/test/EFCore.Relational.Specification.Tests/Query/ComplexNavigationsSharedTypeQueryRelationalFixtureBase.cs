@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public abstract class ComplexNavigationsSharedTypeQueryRelationalFixtureBase : ComplexNavigationsSharedTypeQueryFixtureBase
+    public abstract class ComplexNavigationsSharedTypeQueryRelationalFixtureBase
+        : ComplexNavigationsSharedTypeQueryFixtureBase
     {
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {

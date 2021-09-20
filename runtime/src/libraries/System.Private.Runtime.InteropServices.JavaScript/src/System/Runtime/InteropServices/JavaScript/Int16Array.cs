@@ -15,16 +15,17 @@ namespace System.Runtime.InteropServices.JavaScript
 
         public Int16Array(ArrayBuffer buffer, int byteOffset) : base(buffer, byteOffset) { }
 
-        public Int16Array(ArrayBuffer buffer, int byteOffset, int length) : base(buffer, byteOffset, length) { }
+        public Int16Array(ArrayBuffer buffer, int byteOffset, int length)
+            : base(buffer, byteOffset, length) { }
 
         public Int16Array(SharedArrayBuffer buffer) : base(buffer) { }
 
         public Int16Array(SharedArrayBuffer buffer, int byteOffset) : base(buffer, byteOffset) { }
 
-        public Int16Array(SharedArrayBuffer buffer, int byteOffset, int length) : base(buffer, byteOffset, length) { }
+        public Int16Array(SharedArrayBuffer buffer, int byteOffset, int length)
+            : base(buffer, byteOffset, length) { }
 
-        internal Int16Array(IntPtr jsHandle, bool ownsHandle) : base(jsHandle, ownsHandle)
-        { }
+        internal Int16Array(IntPtr jsHandle, bool ownsHandle) : base(jsHandle, ownsHandle) { }
 
         /// <summary>
         /// Defines an implicit conversion of Int16Array class to a short

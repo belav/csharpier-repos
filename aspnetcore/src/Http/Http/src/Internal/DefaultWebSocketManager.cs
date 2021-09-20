@@ -13,8 +13,12 @@ namespace Microsoft.AspNetCore.Http
     internal sealed class DefaultWebSocketManager : WebSocketManager
     {
         // Lambdas hoisted to static readonly fields to improve inlining https://github.com/dotnet/roslyn/issues/13624
-        private readonly static Func<IFeatureCollection, IHttpRequestFeature?> _nullRequestFeature = f => null;
-        private readonly static Func<IFeatureCollection, IHttpWebSocketFeature?> _nullWebSocketFeature = f => null;
+        private readonly static Func<IFeatureCollection, IHttpRequestFeature?> _nullRequestFeature =
+            f => null;
+        private readonly static Func<
+            IFeatureCollection,
+            IHttpWebSocketFeature?
+        > _nullWebSocketFeature = f => null;
 
         private FeatureReferences<FeatureInterfaces> _features;
 
@@ -46,17 +50,16 @@ namespace Microsoft.AspNetCore.Http
 
         public override bool IsWebSocketRequest
         {
-            get
-            {
-                return WebSocketFeature != null && WebSocketFeature.IsWebSocketRequest;
-            }
+            get { return WebSocketFeature != null && WebSocketFeature.IsWebSocketRequest; }
         }
 
         public override IList<string> WebSocketRequestedProtocols
         {
             get
             {
-                return HttpRequestFeature.Headers.GetCommaSeparatedValues(HeaderNames.WebSocketSubProtocols);
+                return HttpRequestFeature.Headers.GetCommaSeparatedValues(
+                    HeaderNames.WebSocketSubProtocols
+                );
             }
         }
 
@@ -66,7 +69,9 @@ namespace Microsoft.AspNetCore.Http
             {
                 throw new NotSupportedException("WebSockets are not supported");
             }
-            return WebSocketFeature.AcceptAsync(new WebSocketAcceptContext() { SubProtocol = subProtocol });
+            return WebSocketFeature.AcceptAsync(
+                new WebSocketAcceptContext() { SubProtocol = subProtocol }
+            );
         }
 
         struct FeatureInterfaces

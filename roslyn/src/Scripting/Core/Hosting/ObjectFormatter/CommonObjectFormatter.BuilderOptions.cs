@@ -25,8 +25,13 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             public readonly int MaximumLineLength;
             public readonly int MaximumOutputLength;
 
-            public BuilderOptions(string indentation, string newLine, string ellipsis, int maximumLineLength, int maximumOutputLength)
-            {
+            public BuilderOptions(
+                string indentation,
+                string newLine,
+                string ellipsis,
+                int maximumLineLength,
+                int maximumOutputLength
+            ) {
                 Indentation = indentation;
                 NewLine = newLine;
                 Ellipsis = ellipsis;
@@ -41,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     NewLine,
                     Ellipsis,
                     MaximumLineLength,
-                    maximumOutputLength);
+                    maximumOutputLength
+                );
             }
         }
     }

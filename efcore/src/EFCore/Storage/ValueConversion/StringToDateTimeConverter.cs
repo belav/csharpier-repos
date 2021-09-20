@@ -19,17 +19,17 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         ///     facets for the converted data.
         /// </param>
         public StringToDateTimeConverter(ConverterMappingHints? mappingHints = null)
-            : base(
-                ToDateTime(),
-                ToString(),
-                _defaultHints.With(mappingHints))
-        {
-        }
+            : base(ToDateTime(), ToString(), _defaultHints.With(mappingHints)) { }
 
         /// <summary>
         ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
         /// </summary>
-        public static ValueConverterInfo DefaultInfo { get; }
-            = new(typeof(string), typeof(DateTime), i => new StringToDateTimeConverter(i.MappingHints), _defaultHints);
+        public static ValueConverterInfo DefaultInfo { get; } =
+            new(
+                typeof(string),
+                typeof(DateTime),
+                i => new StringToDateTimeConverter(i.MappingHints),
+                _defaultHints
+            );
     }
 }

@@ -15,17 +15,22 @@ namespace Microsoft.Extensions.Http.Test
         {
             // Arrange
             var primaryHandler = Mock.Of<HttpMessageHandler>();
-            var additionalHandlers = new DelegatingHandler[]
-            {
-                null,
-            };
+            var additionalHandlers = new DelegatingHandler[] { null, };
 
             // Act & Assert
-            var exception = Assert.Throws<InvalidOperationException>(() =>
-            {
-                HttpMessageHandlerBuilder.CreateHandlerPipeline(primaryHandler, additionalHandlers);
-            });
-            Assert.Equal("The 'additionalHandlers' must not contain a null entry.", exception.Message);
+            var exception = Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    HttpMessageHandlerBuilder.CreateHandlerPipeline(
+                        primaryHandler,
+                        additionalHandlers
+                    );
+                }
+            );
+            Assert.Equal(
+                "The 'additionalHandlers' must not contain a null entry.",
+                exception.Message
+            );
         }
 
         [Fact]
@@ -39,15 +44,22 @@ namespace Microsoft.Extensions.Http.Test
             };
 
             // Act & Assert
-            var exception = Assert.Throws<InvalidOperationException>(() =>
-            {
-                HttpMessageHandlerBuilder.CreateHandlerPipeline(primaryHandler, additionalHandlers);
-            });
+            var exception = Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    HttpMessageHandlerBuilder.CreateHandlerPipeline(
+                        primaryHandler,
+                        additionalHandlers
+                    );
+                }
+            );
             Assert.Equal(
-                "The 'InnerHandler' property must be null. " +
-                "'DelegatingHandler' instances provided to 'HttpMessageHandlerBuilder' must not be reused or cached." + Environment.NewLine +
-                $"Handler: '{additionalHandlers[0].ToString()}'",
-                exception.Message);
+                "The 'InnerHandler' property must be null. "
+                    + "'DelegatingHandler' instances provided to 'HttpMessageHandlerBuilder' must not be reused or cached."
+                    + Environment.NewLine
+                    + $"Handler: '{additionalHandlers[0].ToString()}'",
+                exception.Message
+            );
         }
     }
 }

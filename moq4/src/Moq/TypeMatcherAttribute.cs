@@ -5,7 +5,7 @@ using System;
 
 namespace Moq
 {
-	/// <summary>
+    /// <summary>
 	///   Marks a type as a type matcher, optionally specifying another <see cref="ITypeMatcher"/> type that will perform the matching.
 	///   <para>
 	///     Type matchers preferably implement <see cref="ITypeMatcher"/> themselves. Use the parameterized form of this attribute
@@ -13,23 +13,31 @@ namespace Moq
 	///     <see langword="enum"/> type in order to satisfy generic type constraints of the method where it is used.
 	///   </para>
 	/// </summary>
-	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Delegate | AttributeTargets.Enum | AttributeTargets.Interface | AttributeTargets.Struct, AllowMultiple = false, Inherited = true)]
-	public class TypeMatcherAttribute : Attribute
-	{
-		private readonly Type type;
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Delegate
+            | AttributeTargets.Enum
+            | AttributeTargets.Interface
+            | AttributeTargets.Struct,
+        AllowMultiple = false,
+        Inherited = true
+    )]
+    public class TypeMatcherAttribute : Attribute
+    {
+        private readonly Type type;
 
-		/// <summary>
+        /// <summary>
 		///   Initializes a new instance of the <see cref="TypeMatcherAttribute"/> class.
 		///   <para>
 		///     Use this constructor overload if the type on which this attribute is placed implements <see cref="ITypeMatcher"/> itself.
 		///   </para>
 		/// </summary>
-		public TypeMatcherAttribute()
-		{
-			this.type = null;
-		}
+        public TypeMatcherAttribute()
+        {
+            this.type = null;
+        }
 
-		/// <summary>
+        /// <summary>
 		///   Initializes a new instance of the <see cref="TypeMatcherAttribute"/> class.
 		///   <para>
 		///     Use this constructor overload if the type on which this attribute is placed does not implement <see cref="ITypeMatcher"/>.
@@ -37,16 +45,16 @@ namespace Moq
 		///   </para>
 		/// </summary>
 		/// <param name="type">The <see cref="Type"/> of a type that implements <see cref="ITypeMatcher"/>.</param>
-		public TypeMatcherAttribute(Type type)
-		{
-			if (type == null)
-			{
-				throw new ArgumentNullException(nameof(type));
-			}
+        public TypeMatcherAttribute(Type type)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
 
-			this.type = type;
-		}
+            this.type = type;
+        }
 
-		internal Type Type => this.type;
-	}
+        internal Type Type => this.type;
+    }
 }

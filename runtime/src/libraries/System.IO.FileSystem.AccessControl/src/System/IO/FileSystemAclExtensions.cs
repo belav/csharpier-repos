@@ -17,11 +17,18 @@ namespace System.IO
                 throw new ArgumentNullException(nameof(directoryInfo));
             }
 
-            return new DirectorySecurity(directoryInfo.FullName, AccessControlSections.Access | AccessControlSections.Owner | AccessControlSections.Group);
+            return new DirectorySecurity(
+                directoryInfo.FullName,
+                AccessControlSections.Access
+                    | AccessControlSections.Owner
+                    | AccessControlSections.Group
+            );
         }
 
-        public static DirectorySecurity GetAccessControl(this DirectoryInfo directoryInfo, AccessControlSections includeSections)
-        {
+        public static DirectorySecurity GetAccessControl(
+            this DirectoryInfo directoryInfo,
+            AccessControlSections includeSections
+        ) {
             if (directoryInfo == null)
             {
                 throw new ArgumentNullException(nameof(directoryInfo));
@@ -30,8 +37,10 @@ namespace System.IO
             return new DirectorySecurity(directoryInfo.FullName, includeSections);
         }
 
-        public static void SetAccessControl(this DirectoryInfo directoryInfo, DirectorySecurity directorySecurity)
-        {
+        public static void SetAccessControl(
+            this DirectoryInfo directoryInfo,
+            DirectorySecurity directorySecurity
+        ) {
             if (directorySecurity == null)
             {
                 throw new ArgumentNullException(nameof(directorySecurity));
@@ -48,11 +57,18 @@ namespace System.IO
                 throw new ArgumentNullException(nameof(fileInfo));
             }
 
-            return GetAccessControl(fileInfo, AccessControlSections.Access | AccessControlSections.Owner | AccessControlSections.Group);
+            return GetAccessControl(
+                fileInfo,
+                AccessControlSections.Access
+                    | AccessControlSections.Owner
+                    | AccessControlSections.Group
+            );
         }
 
-        public static FileSecurity GetAccessControl(this FileInfo fileInfo, AccessControlSections includeSections)
-        {
+        public static FileSecurity GetAccessControl(
+            this FileInfo fileInfo,
+            AccessControlSections includeSections
+        ) {
             if (fileInfo == null)
             {
                 throw new ArgumentNullException(nameof(fileInfo));
@@ -97,7 +113,12 @@ namespace System.IO
                 throw new ObjectDisposedException(null, SR.ObjectDisposed_FileClosed);
             }
 
-            return new FileSecurity(handle, AccessControlSections.Access | AccessControlSections.Owner | AccessControlSections.Group);
+            return new FileSecurity(
+                handle,
+                AccessControlSections.Access
+                    | AccessControlSections.Owner
+                    | AccessControlSections.Group
+            );
         }
 
         /// <summary>
@@ -135,8 +156,10 @@ namespace System.IO
         /// <exception cref="DirectoryNotFoundException">Could not find a part of the path.</exception>
         /// <exception cref="UnauthorizedAccessException">Access to the path is denied.</exception>
         /// <remarks>This extension method was added to .NET Core to bring the functionality that was provided by the `System.IO.DirectoryInfo.Create(System.Security.AccessControl.DirectorySecurity)` .NET Framework method.</remarks>
-        public static void Create(this DirectoryInfo directoryInfo, DirectorySecurity directorySecurity)
-        {
+        public static void Create(
+            this DirectoryInfo directoryInfo,
+            DirectorySecurity directorySecurity
+        ) {
             if (directoryInfo == null)
             {
                 throw new ArgumentNullException(nameof(directoryInfo));
@@ -147,7 +170,10 @@ namespace System.IO
                 throw new ArgumentNullException(nameof(directorySecurity));
             }
 
-            FileSystem.CreateDirectory(directoryInfo.FullName, directorySecurity.GetSecurityDescriptorBinaryForm());
+            FileSystem.CreateDirectory(
+                directoryInfo.FullName,
+                directorySecurity.GetSecurityDescriptorBinaryForm()
+            );
         }
 
         /// <summary>
@@ -170,8 +196,15 @@ namespace System.IO
         /// <exception cref="IOException">An I/O error occurs.</exception>
         /// <exception cref="UnauthorizedAccessException">Access to the path is denied.</exception>
         /// <remarks>This extension method was added to .NET Core to bring the functionality that was provided by the `System.IO.FileStream.#ctor(System.String,System.IO.FileMode,System.Security.AccessControl.FileSystemRights,System.IO.FileShare,System.Int32,System.IO.FileOptions,System.Security.AccessControl.FileSecurity)` .NET Framework constructor.</remarks>
-        public static FileStream Create(this FileInfo fileInfo, FileMode mode, FileSystemRights rights, FileShare share, int bufferSize, FileOptions options, FileSecurity fileSecurity)
-        {
+        public static FileStream Create(
+            this FileInfo fileInfo,
+            FileMode mode,
+            FileSystemRights rights,
+            FileShare share,
+            int bufferSize,
+            FileOptions options,
+            FileSecurity fileSecurity
+        ) {
             if (fileInfo == null)
             {
                 throw new ArgumentNullException(nameof(fileInfo));
@@ -197,21 +230,44 @@ namespace System.IO
 
             if (bufferSize <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(bufferSize), SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(bufferSize),
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
             }
 
             // Do not allow using combinations of non-writing file system rights with writing file modes
-            if ((rights & FileSystemRights.Write) == 0 &&
-                (mode == FileMode.Truncate || mode == FileMode.CreateNew || mode == FileMode.Create || mode == FileMode.Append))
-            {
-                throw new ArgumentException(SR.Format(SR.Argument_InvalidFileModeAndFileSystemRightsCombo, mode, rights));
+            if (
+                (rights & FileSystemRights.Write) == 0
+                && (
+                    mode == FileMode.Truncate
+                    || mode == FileMode.CreateNew
+                    || mode == FileMode.Create
+                    || mode == FileMode.Append
+                )
+            ) {
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_InvalidFileModeAndFileSystemRightsCombo, mode, rights)
+                );
             }
 
-            SafeFileHandle handle = CreateFileHandle(fileInfo.FullName, mode, rights, share, options, fileSecurity);
+            SafeFileHandle handle = CreateFileHandle(
+                fileInfo.FullName,
+                mode,
+                rights,
+                share,
+                options,
+                fileSecurity
+            );
 
             try
             {
-                return new FileStream(handle, GetFileStreamFileAccess(rights), bufferSize, (options & FileOptions.Asynchronous) != 0);
+                return new FileStream(
+                    handle,
+                    GetFileStreamFileAccess(rights),
+                    bufferSize,
+                    (options & FileOptions.Asynchronous) != 0
+                );
             }
             catch
             {
@@ -232,8 +288,10 @@ namespace System.IO
         /// <exception cref="DirectoryNotFoundException">Could not find a part of the path.</exception>
         /// <exception cref="UnauthorizedAccessException">Access to the path is denied.</exception>
         /// <remarks>This extension method was added to .NET Core to bring the functionality that was provided by the `System.IO.Directory.CreateDirectory(System.String,System.Security.AccessControl.DirectorySecurity)` .NET Framework method.</remarks>
-        public static DirectoryInfo CreateDirectory(this DirectorySecurity directorySecurity, string path)
-        {
+        public static DirectoryInfo CreateDirectory(
+            this DirectorySecurity directorySecurity,
+            string path
+        ) {
             if (directorySecurity == null)
             {
                 throw new ArgumentNullException(nameof(directorySecurity));
@@ -261,21 +319,31 @@ namespace System.IO
         private static FileAccess GetFileStreamFileAccess(FileSystemRights rights)
         {
             FileAccess access = 0;
-            if ((rights & FileSystemRights.ReadData) != 0 || ((int)rights & Interop.Kernel32.GenericOperations.GENERIC_READ) != 0)
-            {
+            if (
+                (rights & FileSystemRights.ReadData) != 0
+                || ((int)rights & Interop.Kernel32.GenericOperations.GENERIC_READ) != 0
+            ) {
                 access = FileAccess.Read;
             }
 
-            if ((rights & FileSystemRights.WriteData) != 0 || ((int)rights & Interop.Kernel32.GenericOperations.GENERIC_WRITE) != 0)
-            {
+            if (
+                (rights & FileSystemRights.WriteData) != 0
+                || ((int)rights & Interop.Kernel32.GenericOperations.GENERIC_WRITE) != 0
+            ) {
                 access = access == FileAccess.Read ? FileAccess.ReadWrite : FileAccess.Write;
             }
 
             return access;
         }
 
-        private static unsafe SafeFileHandle CreateFileHandle(string fullPath, FileMode mode, FileSystemRights rights, FileShare share, FileOptions options, FileSecurity security)
-        {
+        private static unsafe SafeFileHandle CreateFileHandle(
+            string fullPath,
+            FileMode mode,
+            FileSystemRights rights,
+            FileShare share,
+            FileOptions options,
+            FileSecurity security
+        ) {
             Debug.Assert(fullPath != null);
 
             // Must use a valid Win32 constant
@@ -287,7 +355,10 @@ namespace System.IO
             // For mitigating local elevation of privilege attack through named pipes make sure we always call CreateFile with SECURITY_ANONYMOUS so that the
             // named pipe server can't impersonate a high privileged client security context (note that this is the effective default on CreateFile2)
             // SECURITY_SQOS_PRESENT flags that a SECURITY_ flag is present.
-            int flagsAndAttributes = (int)options | Interop.Kernel32.SecurityOptions.SECURITY_SQOS_PRESENT | Interop.Kernel32.SecurityOptions.SECURITY_ANONYMOUS;
+            int flagsAndAttributes =
+                (int)options
+                | Interop.Kernel32.SecurityOptions.SECURITY_SQOS_PRESENT
+                | Interop.Kernel32.SecurityOptions.SECURITY_ANONYMOUS;
 
             SafeFileHandle handle;
 
@@ -296,13 +367,24 @@ namespace System.IO
                 var secAttrs = new Interop.Kernel32.SECURITY_ATTRIBUTES
                 {
                     nLength = (uint)sizeof(Interop.Kernel32.SECURITY_ATTRIBUTES),
-                    bInheritHandle = ((share & FileShare.Inheritable) != 0) ? Interop.BOOL.TRUE : Interop.BOOL.FALSE,
+                    bInheritHandle =
+                        ((share & FileShare.Inheritable) != 0)
+                            ? Interop.BOOL.TRUE
+                            : Interop.BOOL.FALSE,
                     lpSecurityDescriptor = (IntPtr)pSecurityDescriptor
                 };
 
                 using (DisableMediaInsertionPrompt.Create())
                 {
-                    handle = Interop.Kernel32.CreateFile(fullPath, (int)rights, share, &secAttrs, mode, flagsAndAttributes, IntPtr.Zero);
+                    handle = Interop.Kernel32.CreateFile(
+                        fullPath,
+                        (int)rights,
+                        share,
+                        &secAttrs,
+                        mode,
+                        flagsAndAttributes,
+                        IntPtr.Zero
+                    );
                     ValidateFileHandle(handle, fullPath);
                 }
             }
@@ -321,8 +403,10 @@ namespace System.IO
                 // probably be consistent w/ every other directory.
                 int errorCode = Marshal.GetLastWin32Error();
 
-                if (errorCode == Interop.Errors.ERROR_PATH_NOT_FOUND && fullPath.Length == Path.GetPathRoot(fullPath)!.Length)
-                {
+                if (
+                    errorCode == Interop.Errors.ERROR_PATH_NOT_FOUND
+                    && fullPath.Length == Path.GetPathRoot(fullPath)!.Length
+                ) {
                     errorCode = Interop.Errors.ERROR_ACCESS_DENIED;
                 }
 

@@ -20,14 +20,24 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
         [JsonProperty("inVs")]
         public Id<Vertex>[] InVertices { get; }
 
-        public Edge(string label, Id<Vertex> outVertex, Id<Vertex>[] inVertices, IdFactory idFactory)
-            : base(type: "edge", label: label, idFactory)
+        public Edge(
+            string label,
+            Id<Vertex> outVertex,
+            Id<Vertex>[] inVertices,
+            IdFactory idFactory
+        ) : base(type: "edge", label: label, idFactory)
         {
             OutVertex = outVertex;
             InVertices = inVertices;
         }
 
-        public static Edge Create<TOutVertex, TInVertex>(string label, Id<TOutVertex> outVertex, Id<TInVertex> inVertex, IdFactory idFactory) where TOutVertex : Vertex where TInVertex : Vertex
+        public static Edge Create<TOutVertex, TInVertex>(
+            string label,
+            Id<TOutVertex> outVertex,
+            Id<TInVertex> inVertex,
+            IdFactory idFactory
+        ) where TOutVertex : Vertex
+          where TInVertex : Vertex
         {
             var inVerticesArray = new Id<Vertex>[1];
             inVerticesArray[0] = inVertex.As<TInVertex, Vertex>();
@@ -35,7 +45,13 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
             return new Edge(label, outVertex.As<TOutVertex, Vertex>(), inVerticesArray, idFactory);
         }
 
-        public static Edge Create<TOutVertex, TInVertex>(string label, Id<TOutVertex> outVertex, IList<Id<TInVertex>> inVertices, IdFactory idFactory) where TOutVertex : Vertex where TInVertex : Vertex
+        public static Edge Create<TOutVertex, TInVertex>(
+            string label,
+            Id<TOutVertex> outVertex,
+            IList<Id<TInVertex>> inVertices,
+            IdFactory idFactory
+        ) where TOutVertex : Vertex
+          where TInVertex : Vertex
         {
             var inVerticesArray = new Id<Vertex>[inVertices.Count];
 

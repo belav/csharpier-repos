@@ -24,19 +24,30 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
         [Fact]
         public async Task ConnectionIsDisposedIfItFailsToStartAsync()
         {
-            var testHandler = new TestHttpMessageHandler(autoNegotiate: false, handleFirstPoll: false);
-            testHandler.OnRequest((req, next, ct) => Task.FromException<HttpResponseMessage>(new Exception("BOOM")));
+            var testHandler = new TestHttpMessageHandler(
+                autoNegotiate: false,
+                handleFirstPoll: false
+            );
+            testHandler.OnRequest(
+                (req, next, ct) => Task.FromException<HttpResponseMessage>(new Exception("BOOM"))
+            );
 
             var factory = new HttpConnectionFactory(
-                Options.Create(new HttpConnectionOptions
-                {
-                    DefaultTransferFormat = TransferFormat.Text,
-                    HttpMessageHandlerFactory = _ => testHandler,
-                }),
-                NullLoggerFactory.Instance);
+                Options.Create(
+                    new HttpConnectionOptions
+                    {
+                        DefaultTransferFormat = TransferFormat.Text,
+                        HttpMessageHandlerFactory = _ => testHandler,
+                    }
+                ),
+                NullLoggerFactory.Instance
+            );
 
             // We don't care about the specific exception
-            await Assert.ThrowsAnyAsync<Exception>(async () => await factory.ConnectAsync(new UriEndPoint(new Uri("http://example.com"))));
+            await Assert.ThrowsAnyAsync<Exception>(
+                async () =>
+                    await factory.ConnectAsync(new UriEndPoint(new Uri("http://example.com")))
+            );
 
             // We care that the handler (and by extension the client) was disposed
             Assert.True(testHandler.Disposed);
@@ -46,10 +57,15 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
         public async Task DoesNotSupportNonUriEndPoints()
         {
             var factory = new HttpConnectionFactory(
-                Options.Create(new HttpConnectionOptions { DefaultTransferFormat = TransferFormat.Text }),
-                NullLoggerFactory.Instance);
+                Options.Create(
+                    new HttpConnectionOptions { DefaultTransferFormat = TransferFormat.Text }
+                ),
+                NullLoggerFactory.Instance
+            );
 
-            var ex = await Assert.ThrowsAsync<NotSupportedException>(async () => await factory.ConnectAsync(new IPEndPoint(IPAddress.Loopback, 0)));
+            var ex = await Assert.ThrowsAsync<NotSupportedException>(
+                async () => await factory.ConnectAsync(new IPEndPoint(IPAddress.Loopback, 0))
+            );
 
             Assert.Equal("The provided EndPoint must be of type UriEndPoint.", ex.Message);
         }
@@ -61,15 +77,23 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             var url2 = new Uri("http://example.com/2");
 
             var factory = new HttpConnectionFactory(
-                Options.Create(new HttpConnectionOptions
-                {
-                    Url = url1,
-                    DefaultTransferFormat = TransferFormat.Text
-                }),
-                NullLoggerFactory.Instance);
+                Options.Create(
+                    new HttpConnectionOptions
+                    {
+                        Url = url1,
+                        DefaultTransferFormat = TransferFormat.Text
+                    }
+                ),
+                NullLoggerFactory.Instance
+            );
 
-            var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () => await factory.ConnectAsync(new UriEndPoint(url2)));
-            Assert.Equal("If HttpConnectionOptions.Url was set, it must match the UriEndPoint.Uri passed to ConnectAsync.", ex.Message);
+            var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await factory.ConnectAsync(new UriEndPoint(url2))
+            );
+            Assert.Equal(
+                "If HttpConnectionOptions.Url was set, it must match the UriEndPoint.Uri passed to ConnectAsync.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -83,10 +107,16 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             {
                 { $"{nameof(HttpConnectionOptions.HttpMessageHandlerFactory)}", handlerFactory },
                 { $"{nameof(HttpConnectionOptions.Headers)}", new Dictionary<string, string>() },
-                { $"{nameof(HttpConnectionOptions.ClientCertificates)}", new X509CertificateCollection() },
+                {
+                    $"{nameof(HttpConnectionOptions.ClientCertificates)}",
+                    new X509CertificateCollection()
+                },
                 { $"{nameof(HttpConnectionOptions.Cookies)}", new CookieContainer() },
                 { $"{nameof(HttpConnectionOptions.Url)}", new Uri("https://example.com") },
-                { $"{nameof(HttpConnectionOptions.Transports)}", HttpTransportType.ServerSentEvents },
+                {
+                    $"{nameof(HttpConnectionOptions.Transports)}",
+                    HttpTransportType.ServerSentEvents
+                },
                 { $"{nameof(HttpConnectionOptions.SkipNegotiation)}", true },
                 { $"{nameof(HttpConnectionOptions.AccessTokenProvider)}", tokenProvider },
                 { $"{nameof(HttpConnectionOptions.CloseTimeout)}", TimeSpan.FromDays(1) },
@@ -98,15 +128,18 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             };
 
             var options = new HttpConnectionOptions();
-            var properties = typeof(HttpConnectionOptions)
-                .GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var properties = typeof(HttpConnectionOptions).GetProperties(
+                BindingFlags.Public | BindingFlags.Instance
+            );
 
             foreach (var property in properties)
             {
                 property.SetValue(options, testValues[property.Name]);
             }
 
-            var shallowCopiedOptions = HttpConnectionFactory.ShallowCopyHttpConnectionOptions(options);
+            var shallowCopiedOptions = HttpConnectionFactory.ShallowCopyHttpConnectionOptions(
+                options
+            );
 
             foreach (var property in properties)
             {

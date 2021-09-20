@@ -13,7 +13,8 @@ public static class GitHub_23159
 {
     static int Main(string[] args)
     {
-        var str = "application/json,text/html;q=0.9,application/xhtml+xml;q=0.9,application/xml;q=0.8,*/*;q=0.7";
+        var str =
+            "application/json,text/html;q=0.9,application/xhtml+xml;q=0.9,application/xml;q=0.8,*/*;q=0.7";
         var span = Encoding.ASCII.GetBytes(str).AsSpan();
 
         if (BytesOrdinalEqualsStringAndAscii(str, span))
@@ -27,8 +28,10 @@ public static class GitHub_23159
     }
 
     [MethodImpl(MethodImplOptions.AggressiveOptimization)]
-    public unsafe static bool BytesOrdinalEqualsStringAndAscii(string previousValue, Span<byte> newValue)
-    {
+    public unsafe static bool BytesOrdinalEqualsStringAndAscii(
+        string previousValue,
+        Span<byte> newValue
+    ) {
         // We just widen the bytes to char for comparision, if either the string or the bytes are not ascii
         // this will result in non-equality, so we don't need to specifically test for non-ascii.
         Debug.Assert(previousValue.Length == newValue.Length);
@@ -47,22 +50,31 @@ public static class GitHub_23159
         do
         {
             // If Vector not-accelerated or remaining less than vector size
-            if (!Vector.IsHardwareAccelerated || (byte*)(offset + Vector<byte>.Count) > (byte*)count)
-            {
+            if (
+                !Vector.IsHardwareAccelerated || (byte*)(offset + Vector<byte>.Count) > (byte*)count
+            ) {
                 if (IntPtr.Size == 8) // Use Intrinsic switch for branch elimination
                 {
                     // 64-bit: Loop longs by default
                     while ((byte*)(offset + sizeof(long)) <= (byte*)count)
                     {
-                        if (Unsafe.Add(ref str, offset) != (char)Unsafe.Add(ref bytes, offset) ||
-                            Unsafe.Add(ref str, offset + 1) != (char)Unsafe.Add(ref bytes, offset + 1) ||
-                            Unsafe.Add(ref str, offset + 2) != (char)Unsafe.Add(ref bytes, offset + 2) ||
-                            Unsafe.Add(ref str, offset + 3) != (char)Unsafe.Add(ref bytes, offset + 3) ||
-                            Unsafe.Add(ref str, offset + 4) != (char)Unsafe.Add(ref bytes, offset + 4) ||
-                            Unsafe.Add(ref str, offset + 5) != (char)Unsafe.Add(ref bytes, offset + 5) ||
-                            Unsafe.Add(ref str, offset + 6) != (char)Unsafe.Add(ref bytes, offset + 6) ||
-                            Unsafe.Add(ref str, offset + 7) != (char)Unsafe.Add(ref bytes, offset + 7))
-                        {
+                        if (
+                            Unsafe.Add(ref str, offset) != (char)Unsafe.Add(ref bytes, offset)
+                            || Unsafe.Add(ref str, offset + 1)
+                                != (char)Unsafe.Add(ref bytes, offset + 1)
+                            || Unsafe.Add(ref str, offset + 2)
+                                != (char)Unsafe.Add(ref bytes, offset + 2)
+                            || Unsafe.Add(ref str, offset + 3)
+                                != (char)Unsafe.Add(ref bytes, offset + 3)
+                            || Unsafe.Add(ref str, offset + 4)
+                                != (char)Unsafe.Add(ref bytes, offset + 4)
+                            || Unsafe.Add(ref str, offset + 5)
+                                != (char)Unsafe.Add(ref bytes, offset + 5)
+                            || Unsafe.Add(ref str, offset + 6)
+                                != (char)Unsafe.Add(ref bytes, offset + 6)
+                            || Unsafe.Add(ref str, offset + 7)
+                                != (char)Unsafe.Add(ref bytes, offset + 7)
+                        ) {
                             goto NotEqual;
                         }
 
@@ -70,11 +82,15 @@ public static class GitHub_23159
                     }
                     if ((byte*)(offset + sizeof(int)) <= (byte*)count)
                     {
-                        if (Unsafe.Add(ref str, offset) != (char)Unsafe.Add(ref bytes, offset) ||
-                            Unsafe.Add(ref str, offset + 1) != (char)Unsafe.Add(ref bytes, offset + 1) ||
-                            Unsafe.Add(ref str, offset + 2) != (char)Unsafe.Add(ref bytes, offset + 2) ||
-                            Unsafe.Add(ref str, offset + 3) != (char)Unsafe.Add(ref bytes, offset + 3))
-                        {
+                        if (
+                            Unsafe.Add(ref str, offset) != (char)Unsafe.Add(ref bytes, offset)
+                            || Unsafe.Add(ref str, offset + 1)
+                                != (char)Unsafe.Add(ref bytes, offset + 1)
+                            || Unsafe.Add(ref str, offset + 2)
+                                != (char)Unsafe.Add(ref bytes, offset + 2)
+                            || Unsafe.Add(ref str, offset + 3)
+                                != (char)Unsafe.Add(ref bytes, offset + 3)
+                        ) {
                             goto NotEqual;
                         }
 
@@ -86,11 +102,15 @@ public static class GitHub_23159
                     // 32-bit: Loop ints by default
                     while ((byte*)(offset + sizeof(int)) <= (byte*)count)
                     {
-                        if (Unsafe.Add(ref str, offset) != (char)Unsafe.Add(ref bytes, offset) ||
-                            Unsafe.Add(ref str, offset + 1) != (char)Unsafe.Add(ref bytes, offset + 1) ||
-                            Unsafe.Add(ref str, offset + 2) != (char)Unsafe.Add(ref bytes, offset + 2) ||
-                            Unsafe.Add(ref str, offset + 3) != (char)Unsafe.Add(ref bytes, offset + 3))
-                        {
+                        if (
+                            Unsafe.Add(ref str, offset) != (char)Unsafe.Add(ref bytes, offset)
+                            || Unsafe.Add(ref str, offset + 1)
+                                != (char)Unsafe.Add(ref bytes, offset + 1)
+                            || Unsafe.Add(ref str, offset + 2)
+                                != (char)Unsafe.Add(ref bytes, offset + 2)
+                            || Unsafe.Add(ref str, offset + 3)
+                                != (char)Unsafe.Add(ref bytes, offset + 3)
+                        ) {
                             goto NotEqual;
                         }
 
@@ -99,9 +119,11 @@ public static class GitHub_23159
                 }
                 if ((byte*)(offset + sizeof(short)) <= (byte*)count)
                 {
-                    if (Unsafe.Add(ref str, offset) != (char)Unsafe.Add(ref bytes, offset) ||
-                        Unsafe.Add(ref str, offset + 1) != (char)Unsafe.Add(ref bytes, offset + 1))
-                    {
+                    if (
+                        Unsafe.Add(ref str, offset) != (char)Unsafe.Add(ref bytes, offset)
+                        || Unsafe.Add(ref str, offset + 1)
+                            != (char)Unsafe.Add(ref bytes, offset + 1)
+                    ) {
                         goto NotEqual;
                     }
 
@@ -125,25 +147,29 @@ public static class GitHub_23159
                 var vector = Unsafe.As<byte, Vector<byte>>(ref Unsafe.Add(ref bytes, offset));
                 Vector.Widen(vector, out var vector0, out var vector1);
                 var compare0 = Unsafe.As<char, Vector<ushort>>(ref Unsafe.Add(ref str, offset));
-                var compare1 = Unsafe.As<char, Vector<ushort>>(ref Unsafe.Add(ref str, offset + Vector<ushort>.Count));
+                var compare1 = Unsafe.As<char, Vector<ushort>>(
+                    ref Unsafe.Add(ref str, offset + Vector<ushort>.Count)
+                );
 
-                if (!AllTrue.Equals(
-                    Vector.BitwiseAnd(
-                        Vector.Equals(compare0, vector0),
-                        Vector.Equals(compare1, vector1))))
-                {
+                if (
+                    !AllTrue.Equals(
+                        Vector.BitwiseAnd(
+                            Vector.Equals(compare0, vector0),
+                            Vector.Equals(compare1, vector1)
+                        )
+                    )
+                ) {
                     goto NotEqual;
                 }
 
                 offset += Vector<byte>.Count;
             } while ((byte*)(offset + Vector<byte>.Count) <= (byte*)count);
-
             // Vector path done, loop back to do non-Vector
             // If is a exact multiple of vector size, bail now
         } while ((byte*)offset < (byte*)count);
 
         return true;
-    NotEqual:
+        NotEqual:
         return false;
     }
 }

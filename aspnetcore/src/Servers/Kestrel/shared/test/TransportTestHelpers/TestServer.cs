@@ -33,23 +33,30 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         private ListenOptions _listenOptions;
         private readonly RequestDelegate _app;
 
-        public TestServer(RequestDelegate app)
-            : this(app, new TestServiceContext())
-        {
-        }
+        public TestServer(RequestDelegate app) : this(app, new TestServiceContext()) { }
 
         public TestServer(RequestDelegate app, TestServiceContext context)
-            : this(app, context, new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)))
-        {
-        }
+            : this(app, context, new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))) { }
 
-        public TestServer(RequestDelegate app, TestServiceContext context, ListenOptions listenOptions)
-            : this(app, context, options => options.CodeBackedListenOptions.Add(listenOptions), _ => { })
-        {
-        }
+        public TestServer(
+            RequestDelegate app,
+            TestServiceContext context,
+            ListenOptions listenOptions
+        ) : this(
+            app,
+            context,
+            options => options.CodeBackedListenOptions.Add(listenOptions),
+            _ => { }
+        ) { }
 
-        public TestServer(RequestDelegate app, TestServiceContext context, Action<ListenOptions> configureListenOptions)
-            : this(app, context, options =>
+        public TestServer(
+            RequestDelegate app,
+            TestServiceContext context,
+            Action<ListenOptions> configureListenOptions
+        ) : this(
+            app,
+            context,
+            options =>
             {
                 var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
                 {
@@ -57,58 +64,95 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                 };
                 configureListenOptions(listenOptions);
                 options.CodeBackedListenOptions.Add(listenOptions);
-            }, _ => { })
-        {
-        }
+            },
+            _ => { }
+        ) { }
 
-        public TestServer(RequestDelegate app, TestServiceContext context, Action<KestrelServerOptions> configureKestrel)
-            : this(app, context, configureKestrel, _ => { })
-        {
-        }
+        public TestServer(
+            RequestDelegate app,
+            TestServiceContext context,
+            Action<KestrelServerOptions> configureKestrel
+        ) : this(app, context, configureKestrel, _ => { }) { }
 
-        public TestServer(RequestDelegate app, TestServiceContext context, Action<KestrelServerOptions> configureKestrel, Action<IServiceCollection> configureServices)
-        {
+        public TestServer(
+            RequestDelegate app,
+            TestServiceContext context,
+            Action<KestrelServerOptions> configureKestrel,
+            Action<IServiceCollection> configureServices
+        ) {
             _app = app;
             Context = context;
 
-            _host = TransportSelector.GetHostBuilder(context.MemoryPoolFactory, context.ServerOptions.Limits.MaxRequestBufferSize)
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(options =>
-                        {
-                            configureKestrel(options);
-                            _listenOptions = options.ListenOptions.First();
-                        })
-                        .ConfigureServices(services =>
-                        {
-                            services.AddSingleton<IStartup>(this);
-                            services.AddSingleton(context.LoggerFactory);
-                            services.AddSingleton<IServer>(sp =>
-                            {
-                                // Manually configure options on the TestServiceContext.
-                                // We're doing this so we can use the same instance that was passed in
-                                var configureOptions = sp.GetServices<IConfigureOptions<KestrelServerOptions>>();
-                                foreach (var c in configureOptions)
-                                {
-                                    c.Configure(context.ServerOptions);
-                                }
-
-                                return new KestrelServerImpl(sp.GetRequiredService<IConnectionListenerFactory>(), context);
-                            });
-                            configureServices(services);
-                        })
-                        .UseSetting(WebHostDefaults.ApplicationKey, typeof(TestServer).Assembly.FullName)
-                        .UseSetting(WebHostDefaults.ShutdownTimeoutKey, TestConstants.DefaultTimeout.TotalSeconds.ToString(CultureInfo.InvariantCulture))
-                        .Configure(app => { app.Run(_app); });
-                })
-                .ConfigureServices(services =>
-                {
-                    services.Configure<HostOptions>(option =>
+            _host = TransportSelector.GetHostBuilder(
+                    context.MemoryPoolFactory,
+                    context.ServerOptions.Limits.MaxRequestBufferSize
+                )
+                .ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        option.ShutdownTimeout = TestConstants.DefaultTimeout;
-                    });
-                })
+                        webHostBuilder.UseKestrel(
+                                options =>
+                                {
+                                    configureKestrel(options);
+                                    _listenOptions = options.ListenOptions.First();
+                                }
+                            )
+                            .ConfigureServices(
+                                services =>
+                                {
+                                    services.AddSingleton<IStartup>(this);
+                                    services.AddSingleton(context.LoggerFactory);
+                                    services.AddSingleton<IServer>(
+                                        sp =>
+                                        {
+                                            // Manually configure options on the TestServiceContext.
+                                            // We're doing this so we can use the same instance that was passed in
+                                            var configureOptions = sp.GetServices<
+                                                IConfigureOptions<KestrelServerOptions>
+                                            >();
+                                            foreach (var c in configureOptions)
+                                            {
+                                                c.Configure(context.ServerOptions);
+                                            }
+
+                                            return new KestrelServerImpl(
+                                                sp.GetRequiredService<IConnectionListenerFactory>(),
+                                                context
+                                            );
+                                        }
+                                    );
+                                    configureServices(services);
+                                }
+                            )
+                            .UseSetting(
+                                WebHostDefaults.ApplicationKey,
+                                typeof(TestServer).Assembly.FullName
+                            )
+                            .UseSetting(
+                                WebHostDefaults.ShutdownTimeoutKey,
+                                TestConstants.DefaultTimeout.TotalSeconds.ToString(
+                                    CultureInfo.InvariantCulture
+                                )
+                            )
+                            .Configure(
+                                app =>
+                                {
+                                    app.Run(_app);
+                                }
+                            );
+                    }
+                )
+                .ConfigureServices(
+                    services =>
+                    {
+                        services.Configure<HostOptions>(
+                            option =>
+                            {
+                                option.ShutdownTimeout = TestConstants.DefaultTimeout;
+                            }
+                        );
+                    }
+                )
                 .Build();
 
             _host.Start();

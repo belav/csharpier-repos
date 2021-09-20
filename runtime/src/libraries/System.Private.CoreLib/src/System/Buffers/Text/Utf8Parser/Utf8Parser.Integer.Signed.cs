@@ -32,9 +32,13 @@ namespace System.Buffers.Text
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
         [CLSCompliant(false)]
-        public static bool TryParse(ReadOnlySpan<byte> source, out sbyte value, out int bytesConsumed, char standardFormat = default)
-        {
-        FastPath:
+        public static bool TryParse(
+            ReadOnlySpan<byte> source,
+            out sbyte value,
+            out int bytesConsumed,
+            char standardFormat = default
+        ) {
+            FastPath:
             if (standardFormat == default)
             {
                 return TryParseSByteD(source, out value, out bytesConsumed);
@@ -43,7 +47,9 @@ namespace System.Buffers.Text
             // There's small but measurable overhead when entering the switch block below.
             // We optimize for the default case by hoisting it above the switch block.
 
-            switch (standardFormat | 0x20) // convert to lowercase
+            switch (
+                standardFormat | 0x20
+            ) // convert to lowercase
             {
                 case 'g':
                 case 'd':
@@ -55,10 +61,18 @@ namespace System.Buffers.Text
 
                 case 'x':
                     Unsafe.SkipInit(out value); // will be populated by TryParseByteX
-                    return TryParseByteX(source, out Unsafe.As<sbyte, byte>(ref value), out bytesConsumed);
+                    return TryParseByteX(
+                        source,
+                        out Unsafe.As<sbyte, byte>(ref value),
+                        out bytesConsumed
+                    );
 
                 default:
-                    return ParserHelpers.TryParseThrowFormatException(source, out value, out bytesConsumed);
+                    return ParserHelpers.TryParseThrowFormatException(
+                        source,
+                        out value,
+                        out bytesConsumed
+                    );
             }
         }
 
@@ -83,9 +97,13 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryParse(ReadOnlySpan<byte> source, out short value, out int bytesConsumed, char standardFormat = default)
-        {
-        FastPath:
+        public static bool TryParse(
+            ReadOnlySpan<byte> source,
+            out short value,
+            out int bytesConsumed,
+            char standardFormat = default
+        ) {
+            FastPath:
             if (standardFormat == default)
             {
                 return TryParseInt16D(source, out value, out bytesConsumed);
@@ -94,7 +112,9 @@ namespace System.Buffers.Text
             // There's small but measurable overhead when entering the switch block below.
             // We optimize for the default case by hoisting it above the switch block.
 
-            switch (standardFormat | 0x20) // convert to lowercase
+            switch (
+                standardFormat | 0x20
+            ) // convert to lowercase
             {
                 case 'g':
                 case 'd':
@@ -106,10 +126,18 @@ namespace System.Buffers.Text
 
                 case 'x':
                     Unsafe.SkipInit(out value); // will be populated by TryParseUInt16X
-                    return TryParseUInt16X(source, out Unsafe.As<short, ushort>(ref value), out bytesConsumed);
+                    return TryParseUInt16X(
+                        source,
+                        out Unsafe.As<short, ushort>(ref value),
+                        out bytesConsumed
+                    );
 
                 default:
-                    return ParserHelpers.TryParseThrowFormatException(source, out value, out bytesConsumed);
+                    return ParserHelpers.TryParseThrowFormatException(
+                        source,
+                        out value,
+                        out bytesConsumed
+                    );
             }
         }
 
@@ -134,9 +162,13 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryParse(ReadOnlySpan<byte> source, out int value, out int bytesConsumed, char standardFormat = default)
-        {
-        FastPath:
+        public static bool TryParse(
+            ReadOnlySpan<byte> source,
+            out int value,
+            out int bytesConsumed,
+            char standardFormat = default
+        ) {
+            FastPath:
             if (standardFormat == default)
             {
                 return TryParseInt32D(source, out value, out bytesConsumed);
@@ -145,7 +177,9 @@ namespace System.Buffers.Text
             // There's small but measurable overhead when entering the switch block below.
             // We optimize for the default case by hoisting it above the switch block.
 
-            switch (standardFormat | 0x20) // convert to lowercase
+            switch (
+                standardFormat | 0x20
+            ) // convert to lowercase
             {
                 case 'g':
                 case 'd':
@@ -157,10 +191,18 @@ namespace System.Buffers.Text
 
                 case 'x':
                     Unsafe.SkipInit(out value); // will be populated by TryParseUInt32X
-                    return TryParseUInt32X(source, out Unsafe.As<int, uint>(ref value), out bytesConsumed);
+                    return TryParseUInt32X(
+                        source,
+                        out Unsafe.As<int, uint>(ref value),
+                        out bytesConsumed
+                    );
 
                 default:
-                    return ParserHelpers.TryParseThrowFormatException(source, out value, out bytesConsumed);
+                    return ParserHelpers.TryParseThrowFormatException(
+                        source,
+                        out value,
+                        out bytesConsumed
+                    );
             }
         }
 
@@ -185,9 +227,13 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryParse(ReadOnlySpan<byte> source, out long value, out int bytesConsumed, char standardFormat = default)
-        {
-        FastPath:
+        public static bool TryParse(
+            ReadOnlySpan<byte> source,
+            out long value,
+            out int bytesConsumed,
+            char standardFormat = default
+        ) {
+            FastPath:
             if (standardFormat == default)
             {
                 return TryParseInt64D(source, out value, out bytesConsumed);
@@ -196,7 +242,9 @@ namespace System.Buffers.Text
             // There's small but measurable overhead when entering the switch block below.
             // We optimize for the default case by hoisting it above the switch block.
 
-            switch (standardFormat | 0x20) // convert to lowercase
+            switch (
+                standardFormat | 0x20
+            ) // convert to lowercase
             {
                 case 'g':
                 case 'd':
@@ -208,10 +256,18 @@ namespace System.Buffers.Text
 
                 case 'x':
                     Unsafe.SkipInit(out value); // will be populated by TryParseUInt64X
-                    return TryParseUInt64X(source, out Unsafe.As<long, ulong>(ref value), out bytesConsumed);
+                    return TryParseUInt64X(
+                        source,
+                        out Unsafe.As<long, ulong>(ref value),
+                        out bytesConsumed
+                    );
 
                 default:
-                    return ParserHelpers.TryParseThrowFormatException(source, out value, out bytesConsumed);
+                    return ParserHelpers.TryParseThrowFormatException(
+                        source,
+                        out value,
+                        out bytesConsumed
+                    );
             }
         }
     }

@@ -55,8 +55,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
         /// <param name="inner">
         /// The inner <see cref="TextWriter"/> to write output to when this instance is no longer buffering.
         /// </param>
-        public ViewBufferTextWriter(ViewBuffer buffer, Encoding encoding, HtmlEncoder htmlEncoder, TextWriter inner)
-        {
+        public ViewBufferTextWriter(
+            ViewBuffer buffer,
+            Encoding encoding,
+            HtmlEncoder htmlEncoder,
+            TextWriter inner
+        ) {
             if (buffer == null)
             {
                 throw new ArgumentNullException(nameof(buffer));
@@ -271,7 +275,6 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
             Buffer.AppendHtml(new string(value, start, offset));
             Buffer.AppendHtml(NewLine);
             return Task.CompletedTask;
-
         }
 
         /// <inheritdoc />

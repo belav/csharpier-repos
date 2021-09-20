@@ -37,10 +37,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// </summary>
         public Exception? Exception { get; }
 
-        public AnalyzerLoadFailureEventArgs(FailureErrorCode errorCode, string message, Exception? exceptionOpt = null, string? typeNameOpt = null)
-        {
-            if (errorCode <= FailureErrorCode.None || errorCode > FailureErrorCode.ReferencesFramework)
-            {
+        public AnalyzerLoadFailureEventArgs(
+            FailureErrorCode errorCode,
+            string message,
+            Exception? exceptionOpt = null,
+            string? typeNameOpt = null
+        ) {
+            if (
+                errorCode <= FailureErrorCode.None
+                || errorCode > FailureErrorCode.ReferencesFramework
+            ) {
                 throw new ArgumentOutOfRangeException(nameof(errorCode));
             }
 

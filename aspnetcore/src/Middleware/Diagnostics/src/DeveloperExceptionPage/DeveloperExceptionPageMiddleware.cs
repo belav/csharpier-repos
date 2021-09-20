@@ -33,7 +33,9 @@ namespace Microsoft.AspNetCore.Diagnostics
         private readonly DiagnosticSource _diagnosticSource;
         private readonly ExceptionDetailsProvider _exceptionDetailsProvider;
         private readonly Func<ErrorContext, Task> _exceptionHandler;
-        private static readonly MediaTypeHeaderValue _textHtmlMediaType = new MediaTypeHeaderValue("text/html");
+        private static readonly MediaTypeHeaderValue _textHtmlMediaType = new MediaTypeHeaderValue(
+            "text/html"
+        );
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DeveloperExceptionPageMiddleware"/> class
@@ -50,8 +52,8 @@ namespace Microsoft.AspNetCore.Diagnostics
             ILoggerFactory loggerFactory,
             IWebHostEnvironment hostingEnvironment,
             DiagnosticSource diagnosticSource,
-            IEnumerable<IDeveloperPageExceptionFilter> filters)
-        {
+            IEnumerable<IDeveloperPageExceptionFilter> filters
+        ) {
             if (next == null)
             {
                 throw new ArgumentNullException(nameof(next));
@@ -72,13 +74,18 @@ namespace Microsoft.AspNetCore.Diagnostics
             _logger = loggerFactory.CreateLogger<DeveloperExceptionPageMiddleware>();
             _fileProvider = _options.FileProvider ?? hostingEnvironment.ContentRootFileProvider;
             _diagnosticSource = diagnosticSource;
-            _exceptionDetailsProvider = new ExceptionDetailsProvider(_fileProvider, _logger, _options.SourceCodeLineCount);
+            _exceptionDetailsProvider = new ExceptionDetailsProvider(
+                _fileProvider,
+                _logger,
+                _options.SourceCodeLineCount
+            );
             _exceptionHandler = DisplayException;
 
             foreach (var filter in filters.Reverse())
             {
                 var nextFilter = _exceptionHandler;
-                _exceptionHandler = errorContext => filter.HandleExceptionAsync(errorContext, nextFilter);
+                _exceptionHandler = errorContext =>
+                    filter.HandleExceptionAsync(errorContext, nextFilter);
             }
         }
 
@@ -110,9 +117,15 @@ namespace Microsoft.AspNetCore.Diagnostics
 
                     await _exceptionHandler(new ErrorContext(context, ex));
 
-                    if (_diagnosticSource.IsEnabled("Microsoft.AspNetCore.Diagnostics.UnhandledException"))
-                    {
-                        _diagnosticSource.Write("Microsoft.AspNetCore.Diagnostics.UnhandledException", new { httpContext = context, exception = ex });
+                    if (
+                        _diagnosticSource.IsEnabled(
+                            "Microsoft.AspNetCore.Diagnostics.UnhandledException"
+                        )
+                    ) {
+                        _diagnosticSource.Write(
+                            "Microsoft.AspNetCore.Diagnostics.UnhandledException",
+                            new { httpContext = context, exception = ex }
+                        );
                     }
 
                     return;
@@ -161,14 +174,11 @@ namespace Microsoft.AspNetCore.Diagnostics
 
         private Task DisplayCompilationException(
             HttpContext context,
-            ICompilationException compilationException)
-        {
+            ICompilationException compilationException
+        ) {
             var model = new CompilationErrorPageModel(_options);
 
-            var errorPage = new CompilationErrorPage
-            {
-                Model = model
-            };
+            var errorPage = new CompilationErrorPage { Model = model };
 
             if (compilationException.CompilationFailures == null)
             {
@@ -183,7 +193,10 @@ namespace Microsoft.AspNetCore.Diagnostics
                 }
 
                 var stackFrames = new List<StackFrameSourceCodeInfo>();
-                var exceptionDetails = new ExceptionDetails(compilationFailure.FailureSummary!, stackFrames);
+                var exceptionDetails = new ExceptionDetails(
+                    compilationFailure.FailureSummary!,
+                    stackFrames
+                );
                 model.ErrorDetails.Add(exceptionDetails);
                 model.CompiledContent.Add(compilationFailure.CompiledContent);
 
@@ -192,9 +205,10 @@ namespace Microsoft.AspNetCore.Diagnostics
                     continue;
                 }
 
-                var sourceLines = compilationFailure
-                        .SourceFileContent?
-                        .Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+                var sourceLines = compilationFailure.SourceFileContent?.Split(
+                    new[] { Environment.NewLine },
+                    StringSplitOptions.None
+                );
 
                 foreach (var item in compilationFailure.Messages)
                 {
@@ -212,7 +226,12 @@ namespace Microsoft.AspNetCore.Diagnostics
 
                     if (sourceLines != null)
                     {
-                        _exceptionDetailsProvider.ReadFrameContent(frame, sourceLines, item.StartLine, item.EndLine);
+                        _exceptionDetailsProvider.ReadFrameContent(
+                            frame,
+                            sourceLines,
+                            item.StartLine,
+                            item.EndLine
+                        );
                     }
 
                     frame.ErrorDetails = item.Message;
@@ -239,7 +258,8 @@ namespace Microsoft.AspNetCore.Diagnostics
                     endpointModel.RoutePattern = routeEndpoint.RoutePattern.RawText;
                     endpointModel.Order = routeEndpoint.Order;
 
-                    var httpMethods = endpoint.Metadata.GetMetadata<IHttpMethodMetadata>()?.HttpMethods;
+                    var httpMethods =
+                        endpoint.Metadata.GetMetadata<IHttpMethodMetadata>()?.HttpMethods;
                     if (httpMethods != null)
                     {
                         endpointModel.HttpMethods = string.Join(", ", httpMethods);

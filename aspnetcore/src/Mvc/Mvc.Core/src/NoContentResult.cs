@@ -17,9 +17,6 @@ namespace Microsoft.AspNetCore.Mvc
         /// <summary>
         /// Initializes a new <see cref="NoContentResult"/> instance.
         /// </summary>
-        public NoContentResult()
-            : base(DefaultStatusCode)
-        {
-        }
+        public NoContentResult() : base(DefaultStatusCode) { }
     }
 }

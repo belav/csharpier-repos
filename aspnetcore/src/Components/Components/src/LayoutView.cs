@@ -65,19 +65,22 @@ namespace Microsoft.AspNetCore.Components
             _renderHandle.Render(fragment);
         }
 
-        private static RenderFragment WrapInLayout([DynamicallyAccessedMembers(Component)] Type layoutType, RenderFragment bodyParam)
-        {
+        private static RenderFragment WrapInLayout(
+            [DynamicallyAccessedMembers(Component)] Type layoutType,
+            RenderFragment bodyParam
+        ) {
             void Render(RenderTreeBuilder builder)
-            { 
+            {
                 builder.OpenComponent(0, layoutType);
                 builder.AddAttribute(1, LayoutComponentBase.BodyPropertyName, bodyParam);
                 builder.CloseComponent();
-            };
+            }
+            ;
 
             return Render;
         }
 
-        private static Type? GetParentLayoutType(Type type)
-            => type.GetCustomAttribute<LayoutAttribute>()?.LayoutType;
+        private static Type? GetParentLayoutType(Type type) =>
+            type.GetCustomAttribute<LayoutAttribute>()?.LayoutType;
     }
 }

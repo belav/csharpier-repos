@@ -180,8 +180,12 @@ namespace System.Numerics.Tests
             return DoBinaryOperatorSN(num1, num2, op, out num3);
         }
 
-        private BigInteger DoBinaryOperatorSN(BigInteger num1, BigInteger num2, string op, out BigInteger num3)
-        {
+        private BigInteger DoBinaryOperatorSN(
+            BigInteger num1,
+            BigInteger num2,
+            string op,
+            out BigInteger num3
+        ) {
             num3 = 0;
             switch (op)
             {
@@ -233,8 +237,12 @@ namespace System.Numerics.Tests
             }
         }
 
-        private BigInteger DoTertanaryOperatorSN(BigInteger num1, BigInteger num2, BigInteger num3, string op)
-        {
+        private BigInteger DoTertanaryOperatorSN(
+            BigInteger num1,
+            BigInteger num2,
+            BigInteger num3,
+            string op
+        ) {
             switch (op)
             {
                 case "tModPow":
@@ -254,7 +262,7 @@ namespace System.Numerics.Tests
 
         private static string Print(byte[] bytes)
         {
-           return MyBigIntImp.PrintFormatX(bytes);
+            return MyBigIntImp.PrintFormatX(bytes);
         }
     }
 }

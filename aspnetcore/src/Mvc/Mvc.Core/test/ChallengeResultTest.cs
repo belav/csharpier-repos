@@ -31,9 +31,11 @@ namespace Microsoft.AspNetCore.Mvc
             var routeData = new RouteData();
             routeData.Routers.Add(Mock.Of<IRouter>());
 
-            var actionContext = new ActionContext(httpContext.Object,
-                                                  routeData,
-                                                  new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext.Object,
+                routeData,
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);
@@ -46,7 +48,7 @@ namespace Microsoft.AspNetCore.Mvc
         public async Task ChallengeResult_ExecuteNoSchemes()
         {
             // Arrange
-            var result = new ChallengeResult(new string[] { }, null);
+            var result = new ChallengeResult(new string[] {  }, null);
 
             var auth = new Mock<IAuthenticationService>();
             var httpContext = new Mock<HttpContext>();
@@ -56,9 +58,11 @@ namespace Microsoft.AspNetCore.Mvc
             var routeData = new RouteData();
             routeData.Routers.Add(Mock.Of<IRouter>());
 
-            var actionContext = new ActionContext(httpContext.Object,
-                                                  routeData,
-                                                  new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext.Object,
+                routeData,
+                new ActionDescriptor()
+            );
 
             // Act
             await result.ExecuteResultAsync(actionContext);

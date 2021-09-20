@@ -17,10 +17,20 @@ namespace Microsoft.CodeAnalysis.CSharp
             return VisitPropertyAccess(node, isLeftOfAssignment: false);
         }
 
-        private BoundExpression VisitPropertyAccess(BoundPropertyAccess node, bool isLeftOfAssignment)
-        {
+        private BoundExpression VisitPropertyAccess(
+            BoundPropertyAccess node,
+            bool isLeftOfAssignment
+        ) {
             var rewrittenReceiverOpt = VisitExpression(node.ReceiverOpt);
-            return MakePropertyAccess(node.Syntax, rewrittenReceiverOpt, node.PropertySymbol, node.ResultKind, node.Type, isLeftOfAssignment, node);
+            return MakePropertyAccess(
+                node.Syntax,
+                rewrittenReceiverOpt,
+                node.PropertySymbol,
+                node.ResultKind,
+                node.Type,
+                isLeftOfAssignment,
+                node
+            );
         }
 
         private BoundExpression MakePropertyAccess(
@@ -30,20 +40,32 @@ namespace Microsoft.CodeAnalysis.CSharp
             LookupResultKind resultKind,
             TypeSymbol type,
             bool isLeftOfAssignment,
-            BoundPropertyAccess? oldNodeOpt = null)
-        {
+            BoundPropertyAccess? oldNodeOpt = null
+        ) {
             // check for System.Array.[Length|LongLength] on a single dimensional array,
             // we have a special node for such cases.
-            if (rewrittenReceiverOpt is { Type: { TypeKind: TypeKind.Array } } && !isLeftOfAssignment)
-            {
+            if (
+                rewrittenReceiverOpt is { Type: { TypeKind: TypeKind.Array } }
+                && !isLeftOfAssignment
+            ) {
                 var asArrayType = (ArrayTypeSymbol)rewrittenReceiverOpt.Type;
                 if (asArrayType.IsSZArray)
                 {
                     // NOTE: we are not interested in potential badness of Array.Length property.
                     // If it is bad reference compare will not succeed.
-                    if (ReferenceEquals(propertySymbol, _compilation.GetSpecialTypeMember(SpecialMember.System_Array__Length)) ||
-                        !_inExpressionLambda && ReferenceEquals(propertySymbol, _compilation.GetSpecialTypeMember(SpecialMember.System_Array__LongLength)))
-                    {
+                    if (
+                        ReferenceEquals(
+                            propertySymbol,
+                            _compilation.GetSpecialTypeMember(SpecialMember.System_Array__Length)
+                        )
+                        || !_inExpressionLambda
+                            && ReferenceEquals(
+                                propertySymbol,
+                                _compilation.GetSpecialTypeMember(
+                                    SpecialMember.System_Array__LongLength
+                                )
+                            )
+                    ) {
                         return new BoundArrayLength(syntax, rewrittenReceiverOpt, type);
                     }
                 }
@@ -54,20 +76,42 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // This is a property set access. We return a BoundPropertyAccess node here.
                 // This node will be rewritten with MakePropertyAssignment when rewriting the enclosing BoundAssignmentOperator.
 
-                return oldNodeOpt != null ?
-                    oldNodeOpt.Update(rewrittenReceiverOpt, propertySymbol, resultKind, type) :
-                    new BoundPropertyAccess(syntax, rewrittenReceiverOpt, propertySymbol, resultKind, type);
+                return oldNodeOpt != null
+                  ? oldNodeOpt.Update(rewrittenReceiverOpt, propertySymbol, resultKind, type)
+                  : new BoundPropertyAccess(
+                        syntax,
+                        rewrittenReceiverOpt,
+                        propertySymbol,
+                        resultKind,
+                        type
+                    );
             }
             else
             {
                 // This is a property get access
-                return MakePropertyGetAccess(syntax, rewrittenReceiverOpt, propertySymbol, oldNodeOpt);
+                return MakePropertyGetAccess(
+                    syntax,
+                    rewrittenReceiverOpt,
+                    propertySymbol,
+                    oldNodeOpt
+                );
             }
         }
 
-        private BoundExpression MakePropertyGetAccess(SyntaxNode syntax, BoundExpression? rewrittenReceiver, PropertySymbol property, BoundPropertyAccess? oldNodeOpt)
-        {
-            return MakePropertyGetAccess(syntax, rewrittenReceiver, property, ImmutableArray<BoundExpression>.Empty, null, oldNodeOpt);
+        private BoundExpression MakePropertyGetAccess(
+            SyntaxNode syntax,
+            BoundExpression? rewrittenReceiver,
+            PropertySymbol property,
+            BoundPropertyAccess? oldNodeOpt
+        ) {
+            return MakePropertyGetAccess(
+                syntax,
+                rewrittenReceiver,
+                property,
+                ImmutableArray<BoundExpression>.Empty,
+                null,
+                oldNodeOpt
+            );
         }
 
         private BoundExpression MakePropertyGetAccess(
@@ -76,13 +120,24 @@ namespace Microsoft.CodeAnalysis.CSharp
             PropertySymbol property,
             ImmutableArray<BoundExpression> rewrittenArguments,
             MethodSymbol? getMethodOpt = null,
-            BoundPropertyAccess? oldNodeOpt = null)
-        {
+            BoundPropertyAccess? oldNodeOpt = null
+        ) {
             if (_inExpressionLambda && rewrittenArguments.IsEmpty)
             {
-                return oldNodeOpt != null ?
-                    oldNodeOpt.Update(rewrittenReceiver, property, LookupResultKind.Viable, property.Type) :
-                    new BoundPropertyAccess(syntax, rewrittenReceiver, property, LookupResultKind.Viable, property.Type);
+                return oldNodeOpt != null
+                  ? oldNodeOpt.Update(
+                        rewrittenReceiver,
+                        property,
+                        LookupResultKind.Viable,
+                        property.Type
+                    )
+                  : new BoundPropertyAccess(
+                        syntax,
+                        rewrittenReceiver,
+                        property,
+                        LookupResultKind.Viable,
+                        property.Type
+                    );
             }
             else
             {
@@ -96,7 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     syntax,
                     rewrittenReceiver,
                     getMethod,
-                    rewrittenArguments);
+                    rewrittenArguments
+                );
             }
         }
     }

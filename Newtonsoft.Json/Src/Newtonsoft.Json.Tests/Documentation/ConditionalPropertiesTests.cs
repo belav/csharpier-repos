@@ -60,20 +60,22 @@ namespace Newtonsoft.Json.Tests.Documentation
     #region ShouldSerializeContractResolver
     public class ShouldSerializeContractResolver : DefaultContractResolver
     {
-        public new static readonly ShouldSerializeContractResolver Instance = new ShouldSerializeContractResolver();
+        public new static readonly ShouldSerializeContractResolver Instance =
+            new ShouldSerializeContractResolver();
 
-        protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
-        {
+        protected override JsonProperty CreateProperty(
+            MemberInfo member,
+            MemberSerialization memberSerialization
+        ) {
             JsonProperty property = base.CreateProperty(member, memberSerialization);
 
             if (property.DeclaringType == typeof(Employee) && property.PropertyName == "Manager")
             {
-                property.ShouldSerialize =
-                    instance =>
-                    {
-                        Employee e = (Employee)instance;
-                        return e.Manager != e;
-                    };
+                property.ShouldSerialize = instance =>
+                {
+                    Employee e = (Employee)instance;
+                    return e.Manager != e;
+                };
             }
 
             return property;
@@ -127,7 +129,8 @@ namespace Newtonsoft.Json.Tests.Documentation
             // ]
             #endregion
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""Name"": ""Joe Employee"",
     ""Manager"": {
@@ -137,15 +140,19 @@ namespace Newtonsoft.Json.Tests.Documentation
   {
     ""Name"": ""Mike Manager""
   }
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
         public void ShouldSerializeContractResolverTest()
         {
-            Newtonsoft.Json.Tests.Documentation.Employee joe = new Newtonsoft.Json.Tests.Documentation.Employee();
+            Newtonsoft.Json.Tests.Documentation.Employee joe =
+                new Newtonsoft.Json.Tests.Documentation.Employee();
             joe.Name = "Joe Employee";
-            Newtonsoft.Json.Tests.Documentation.Employee mike = new Newtonsoft.Json.Tests.Documentation.Employee();
+            Newtonsoft.Json.Tests.Documentation.Employee mike =
+                new Newtonsoft.Json.Tests.Documentation.Employee();
             mike.Name = "Mike Manager";
 
             joe.Manager = mike;
@@ -157,9 +164,11 @@ namespace Newtonsoft.Json.Tests.Documentation
                 new JsonSerializerSettings
                 {
                     ContractResolver = ShouldSerializeContractResolver.Instance
-                });
+                }
+            );
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""Name"": ""Joe Employee"",
     ""Manager"": {
@@ -169,7 +178,9 @@ namespace Newtonsoft.Json.Tests.Documentation
   {
     ""Name"": ""Mike Manager""
   }
-]", json);
+]",
+                json
+            );
         }
     }
 }

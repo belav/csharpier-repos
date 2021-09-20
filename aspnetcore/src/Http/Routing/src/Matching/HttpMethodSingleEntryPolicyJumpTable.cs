@@ -21,8 +21,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
             int destination,
             bool supportsCorsPreflight,
             int corsPreflightExitDestination,
-            int corsPreflightDestination)
-        {
+            int corsPreflightDestination
+        ) {
             _exitDestination = exitDestination;
             _method = method;
             _destination = destination;
@@ -34,9 +34,17 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public override int GetDestination(HttpContext httpContext)
         {
             var httpMethod = httpContext.Request.Method;
-            if (_supportsCorsPreflight && HttpMethodMatcherPolicy.IsCorsPreflightRequest(httpContext, httpMethod, out var accessControlRequestMethod))
-            {
-                return HttpMethods.Equals(accessControlRequestMethod, _method) ? _corsPreflightDestination : _corsPreflightExitDestination;
+            if (
+                _supportsCorsPreflight
+                && HttpMethodMatcherPolicy.IsCorsPreflightRequest(
+                    httpContext,
+                    httpMethod,
+                    out var accessControlRequestMethod
+                )
+            ) {
+                return HttpMethods.Equals(accessControlRequestMethod, _method)
+                  ? _corsPreflightDestination
+                  : _corsPreflightExitDestination;
             }
 
             return HttpMethods.Equals(httpMethod, _method) ? _destination : _exitDestination;

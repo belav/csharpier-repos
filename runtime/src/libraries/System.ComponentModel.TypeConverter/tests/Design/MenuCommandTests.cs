@@ -11,7 +11,11 @@ namespace System.ComponentModel.Design.Tests
     {
         public static IEnumerable<object[]> Ctor_EventHandler_CommandID_TestData()
         {
-            yield return new object[] { new EventHandler(EventHandler), new CommandID(Guid.NewGuid(), 10) };
+            yield return new object[]
+            {
+                new EventHandler(EventHandler),
+                new CommandID(Guid.NewGuid(), 10)
+            };
             yield return new object[] { null, null };
         }
 
@@ -34,12 +38,12 @@ namespace System.ComponentModel.Design.Tests
         [Theory]
         [InlineData(true, 7, 3)]
         [InlineData(false, 3, 7)]
-        public void Checked_Set_GetReturnsExpected(bool value, int expectedOleStatus1, int expectedOleStatus2)
-        {
-            var command = new MenuCommand(null, null)
-            {
-                Checked = value 
-            };
+        public void Checked_Set_GetReturnsExpected(
+            bool value,
+            int expectedOleStatus1,
+            int expectedOleStatus2
+        ) {
+            var command = new MenuCommand(null, null) { Checked = value };
             Assert.Equal(value, command.Checked);
             Assert.Equal(expectedOleStatus1, command.OleStatus);
 
@@ -92,12 +96,12 @@ namespace System.ComponentModel.Design.Tests
         [Theory]
         [InlineData(true, 3, 1)]
         [InlineData(false, 1, 3)]
-        public void Enabled_Set_GetReturnsExpected(bool value, int expectedOleStatus1, int expectedOleStatus2)
-        {
-            var command = new MenuCommand(null, null)
-            {
-                Enabled = value
-            };
+        public void Enabled_Set_GetReturnsExpected(
+            bool value,
+            int expectedOleStatus1,
+            int expectedOleStatus2
+        ) {
+            var command = new MenuCommand(null, null) { Enabled = value };
             Assert.Equal(value, command.Enabled);
             Assert.Equal(expectedOleStatus1, command.OleStatus);
 
@@ -150,12 +154,12 @@ namespace System.ComponentModel.Design.Tests
         [Theory]
         [InlineData(true, 3, 2)]
         [InlineData(false, 2, 3)]
-        public void Supported_Set_GetReturnsExpected(bool value, int expectedOleStatus1, int expectedOleStatus2)
-        {
-            var command = new MenuCommand(null, null)
-            {
-                Supported = value
-            };
+        public void Supported_Set_GetReturnsExpected(
+            bool value,
+            int expectedOleStatus1,
+            int expectedOleStatus2
+        ) {
+            var command = new MenuCommand(null, null) { Supported = value };
             Assert.Equal(value, command.Supported);
             Assert.Equal(expectedOleStatus1, command.OleStatus);
 
@@ -208,12 +212,12 @@ namespace System.ComponentModel.Design.Tests
         [Theory]
         [InlineData(true, 3, 19)]
         [InlineData(false, 19, 3)]
-        public void Visible_Set_GetReturnsExpected(bool value, int expectedOleStatus1, int expectedOleStatus2)
-        {
-            var command = new MenuCommand(null, null)
-            {
-                Visible = value
-            };
+        public void Visible_Set_GetReturnsExpected(
+            bool value,
+            int expectedOleStatus1,
+            int expectedOleStatus2
+        ) {
+            var command = new MenuCommand(null, null) { Visible = value };
             Assert.Equal(value, command.Visible);
             Assert.Equal(expectedOleStatus1, command.OleStatus);
 
@@ -319,7 +323,11 @@ namespace System.ComponentModel.Design.Tests
                 "00000000-0000-0000-0000-000000000000 : 0 : Supported|Enabled|Visible|Checked"
             };
 
-            yield return new object[] { new MenuCommand(new EventHandler(EventHandler), null), " : Supported|Enabled|Visible" };
+            yield return new object[]
+            {
+                new MenuCommand(new EventHandler(EventHandler), null),
+                " : Supported|Enabled|Visible"
+            };
         }
 
         [Theory]
@@ -332,7 +340,10 @@ namespace System.ComponentModel.Design.Tests
         [Fact]
         public void Invoke_NonNullEventHandler_Success()
         {
-            var command = new MenuCommand(new EventHandler(EventHandler), new CommandID(Guid.NewGuid(), 10));
+            var command = new MenuCommand(
+                new EventHandler(EventHandler),
+                new CommandID(Guid.NewGuid(), 10)
+            );
             command.Invoke();
             Assert.Same(command, CalledEventSender);
         }
@@ -340,7 +351,10 @@ namespace System.ComponentModel.Design.Tests
         [Fact]
         public void Invoke_EventHandlerThrowsCanceledCheckoutException_Nop()
         {
-            var command = new MenuCommand(new EventHandler(ThrowCanceledCheckoutException), new CommandID(Guid.NewGuid(), 10));
+            var command = new MenuCommand(
+                new EventHandler(ThrowCanceledCheckoutException),
+                new CommandID(Guid.NewGuid(), 10)
+            );
             command.Invoke();
             command.Invoke("arg");
         }
@@ -348,7 +362,10 @@ namespace System.ComponentModel.Design.Tests
         [Fact]
         public void Invoke_EventHandlerThrowsCanceledCheckoutException_ThrowsException()
         {
-            var command = new MenuCommand(new EventHandler(ThrowNonCanceledCheckoutException), new CommandID(Guid.NewGuid(), 10));
+            var command = new MenuCommand(
+                new EventHandler(ThrowNonCanceledCheckoutException),
+                new CommandID(Guid.NewGuid(), 10)
+            );
             Assert.Throws<CheckoutException>(() => command.Invoke());
             Assert.Throws<CheckoutException>(() => command.Invoke("arg"));
         }
@@ -382,8 +399,7 @@ namespace System.ComponentModel.Design.Tests
         private class SubMenuCommand : MenuCommand
         {
             public SubMenuCommand(EventHandler handler, CommandID command) : base(handler, command)
-            {
-            }
+            { }
 
             public new void OnCommandChanged(EventArgs e) => base.OnCommandChanged(e);
         }

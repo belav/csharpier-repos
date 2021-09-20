@@ -15,28 +15,33 @@ namespace System.IO.Compression.Tests
                 string file = GetTestFilePath();
                 ZipArchiveEntry e = archive.GetEntry("first.txt");
 
-                Assert.Throws<ArgumentNullException>(() => ((ZipArchiveEntry)null).ExtractToFile(file));
+                Assert.Throws<ArgumentNullException>(
+                    () => ((ZipArchiveEntry)null).ExtractToFile(file)
+                );
                 Assert.Throws<ArgumentNullException>(() => e.ExtractToFile(null));
 
                 //extract when there is nothing there
                 e.ExtractToFile(file);
 
-                using (Stream fs = File.Open(file, FileMode.Open), es = e.Open())
-                {
+                using (
+                    Stream fs = File.Open(file, FileMode.Open),
+                        es = e.Open()
+                ) {
                     StreamsEqual(fs, es);
                 }
 
                 Assert.Throws<IOException>(() => e.ExtractToFile(file, false));
 
                 //truncate file
-                using (Stream fs = File.Open(file, FileMode.Truncate))
-                { }
+                using (Stream fs = File.Open(file, FileMode.Truncate)) { }
 
                 //now use overwrite mode
                 e.ExtractToFile(file, true);
 
-                using (Stream fs = File.Open(file, FileMode.Open), es = e.Open())
-                {
+                using (
+                    Stream fs = File.Open(file, FileMode.Open),
+                        es = e.Open()
+                ) {
                     StreamsEqual(fs, es);
                 }
             }

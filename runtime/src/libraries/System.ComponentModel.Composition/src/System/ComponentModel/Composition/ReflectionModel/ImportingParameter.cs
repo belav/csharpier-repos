@@ -7,9 +7,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
 {
     internal sealed class ImportingParameter : ImportingItem
     {
-        public ImportingParameter(ContractBasedImportDefinition definition, ImportType importType)
-            : base(definition, importType)
-        {
-        }
+        public ImportingParameter(
+            ContractBasedImportDefinition definition,
+            ImportType importType
+        ) : base(definition, importType) { }
     }
 }

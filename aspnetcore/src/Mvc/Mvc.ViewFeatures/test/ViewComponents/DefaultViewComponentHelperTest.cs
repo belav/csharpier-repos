@@ -27,7 +27,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
 
             // Assert
             Assert.Equal(0, argumentDictionary.Count);
-            Assert.IsType<Dictionary<string,object>>(argumentDictionary);
+            Assert.IsType<Dictionary<string, object>>(argumentDictionary);
         }
 
         [Fact]
@@ -41,13 +41,15 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             var argumentDictionary = helper.GetArgumentDictionary(descriptor, new { a = 0 });
 
             // Assert
-            Assert.Collection(argumentDictionary,
+            Assert.Collection(
+                argumentDictionary,
                 item =>
                 {
                     Assert.Equal("a", item.Key);
                     Assert.IsType<int>(item.Value);
                     Assert.Equal(0, item.Value);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -61,13 +63,15 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             var argumentDictionary = helper.GetArgumentDictionary(descriptor, 0);
 
             // Assert
-            Assert.Collection(argumentDictionary,
+            Assert.Collection(
+                argumentDictionary,
                 item =>
                 {
                     Assert.Equal("a", item.Key);
                     Assert.IsType<int>(item.Value);
                     Assert.Equal(0, item.Value);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -78,10 +82,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             var descriptor = CreateDescriptorForType(typeof(ViewComponentMultipleParam));
 
             // Act
-            var argumentDictionary = helper.GetArgumentDictionary(descriptor, new { a = 0, b = "foo" });
+            var argumentDictionary = helper.GetArgumentDictionary(
+                descriptor,
+                new { a = 0, b = "foo" }
+            );
 
             // Assert
-            Assert.Collection(argumentDictionary,
+            Assert.Collection(
+                argumentDictionary,
                 item1 =>
                 {
                     Assert.Equal("a", item1.Key);
@@ -93,7 +101,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                     Assert.Equal("b", item2.Key);
                     Assert.IsType<string>(item2.Value);
                     Assert.Equal("foo", item2.Value);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -108,13 +117,15 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             var argumentDictionary = helper.GetArgumentDictionary(descriptor, expectedValue);
 
             // Assert
-            Assert.Collection(argumentDictionary,
+            Assert.Collection(
+                argumentDictionary,
                 item =>
                 {
                     Assert.Equal("o", item.Key);
                     Assert.IsType<object>(item.Value);
                     Assert.Same(expectedValue, item.Value);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -123,27 +134,27 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             // Arrange
             var helper = CreateHelper();
             var descriptor = CreateDescriptorForType(typeof(ViewComponentSingleParam));
-            var arguments = new Dictionary<string, object>
-            {
-                { "a", 10 }
-            };
+            var arguments = new Dictionary<string, object> { { "a", 10 } };
 
             // Act
             var argumentDictionary = helper.GetArgumentDictionary(descriptor, arguments);
 
             // Assert
-            Assert.Collection(argumentDictionary,
+            Assert.Collection(
+                argumentDictionary,
                 item =>
                 {
                     Assert.Equal("a", item.Key);
                     Assert.IsType<int>(item.Value);
                     Assert.Equal(10, item.Value);
-                });
+                }
+            );
         }
 
         private DefaultViewComponentHelper CreateHelper()
         {
-            var descriptorCollectionProvider = Mock.Of<IViewComponentDescriptorCollectionProvider>();
+            var descriptorCollectionProvider =
+                Mock.Of<IViewComponentDescriptorCollectionProvider>();
             var selector = Mock.Of<IViewComponentSelector>();
             var invokerFactory = Mock.Of<IViewComponentInvokerFactory>();
             var viewBufferScope = Mock.Of<IViewBufferScope>();
@@ -153,7 +164,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                 new HtmlTestEncoder(),
                 selector,
                 invokerFactory,
-                viewBufferScope);
+                viewBufferScope
+            );
         }
 
         private ViewComponentDescriptor CreateDescriptorForType(Type componentType)
@@ -183,15 +195,15 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
         }
 
         // This will only consider types nested inside this class as ViewComponent classes
-        private class FilteredViewComponentDescriptorProvider : DefaultViewComponentDescriptorProvider
+        private class FilteredViewComponentDescriptorProvider
+            : DefaultViewComponentDescriptorProvider
         {
             public FilteredViewComponentDescriptorProvider(params Type[] allowedTypes)
-                : base(GetApplicationPartManager(allowedTypes.Select(t => t.GetTypeInfo())))
-            {
-            }
+                : base(GetApplicationPartManager(allowedTypes.Select(t => t.GetTypeInfo()))) { }
 
-            private static ApplicationPartManager GetApplicationPartManager(IEnumerable<TypeInfo> types)
-            {
+            private static ApplicationPartManager GetApplicationPartManager(
+                IEnumerable<TypeInfo> types
+            ) {
                 var manager = new ApplicationPartManager();
                 manager.ApplicationParts.Add(new TestApplicationPart(types));
                 manager.FeatureProviders.Add(new TestFeatureProvider());
@@ -200,10 +212,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
 
             private class TestFeatureProvider : IApplicationFeatureProvider<ViewComponentFeature>
             {
-                public void PopulateFeature(IEnumerable<ApplicationPart> parts, ViewComponentFeature feature)
-                {
-                    foreach (var type in parts.OfType<IApplicationPartTypeProvider>().SelectMany(p => p.Types))
-                    {
+                public void PopulateFeature(
+                    IEnumerable<ApplicationPart> parts,
+                    ViewComponentFeature feature
+                ) {
+                    foreach (
+                        var type in parts.OfType<IApplicationPartTypeProvider>()
+                            .SelectMany(p => p.Types)
+                    ) {
                         feature.ViewComponents.Add(type);
                     }
                 }

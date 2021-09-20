@@ -7,9 +7,7 @@ namespace System.Threading
 {
     public sealed class CompressedStack : ISerializable
     {
-        private CompressedStack()
-        {
-        }
+        private CompressedStack() { }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -31,8 +29,11 @@ namespace System.Threading
             return new CompressedStack();
         }
 
-        public static void Run(CompressedStack compressedStack, ContextCallback callback, object? state)
-        {
+        public static void Run(
+            CompressedStack compressedStack,
+            ContextCallback callback,
+            object? state
+        ) {
             if (compressedStack == null)
             {
                 throw new ArgumentNullException(nameof(compressedStack));

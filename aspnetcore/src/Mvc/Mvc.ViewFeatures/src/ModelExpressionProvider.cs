@@ -28,7 +28,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
 
             _modelMetadataProvider = modelMetadataProvider;
-            _expressionTextCache = new ConcurrentDictionary<LambdaExpression, string>(LambdaExpressionComparer.Instance);
+            _expressionTextCache = new ConcurrentDictionary<LambdaExpression, string>(
+                LambdaExpressionComparer.Instance
+            );
         }
 
         /// <summary>
@@ -51,8 +53,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         /// <inheritdoc />
         public ModelExpression CreateModelExpression<TModel, TValue>(
             ViewDataDictionary<TModel> viewData,
-            Expression<Func<TModel, TValue>> expression)
-        {
+            Expression<Func<TModel, TValue>> expression
+        ) {
             if (viewData == null)
             {
                 throw new ArgumentNullException(nameof(viewData));
@@ -64,11 +66,19 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
 
             var name = GetExpressionText(expression);
-            var modelExplorer = ExpressionMetadataProvider.FromLambdaExpression(expression, viewData, _modelMetadataProvider);
+            var modelExplorer = ExpressionMetadataProvider.FromLambdaExpression(
+                expression,
+                viewData,
+                _modelMetadataProvider
+            );
             if (modelExplorer == null)
             {
                 throw new InvalidOperationException(
-                    Resources.FormatCreateModelExpression_NullModelMetadata(nameof(IModelMetadataProvider), name));
+                    Resources.FormatCreateModelExpression_NullModelMetadata(
+                        nameof(IModelMetadataProvider),
+                        name
+                    )
+                );
             }
 
             return new ModelExpression(name, modelExplorer);
@@ -84,8 +94,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         /// <returns>A new <see cref="ModelExpression"/> instance describing the given <paramref name="expression"/>.</returns>
         public ModelExpression CreateModelExpression<TModel>(
             ViewDataDictionary<TModel> viewData,
-            string expression)
-        {
+            string expression
+        ) {
             if (viewData == null)
             {
                 throw new ArgumentNullException(nameof(viewData));
@@ -96,11 +106,19 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 throw new ArgumentNullException(nameof(expression));
             }
 
-            var modelExplorer = ExpressionMetadataProvider.FromStringExpression(expression, viewData, _modelMetadataProvider);
+            var modelExplorer = ExpressionMetadataProvider.FromStringExpression(
+                expression,
+                viewData,
+                _modelMetadataProvider
+            );
             if (modelExplorer == null)
             {
                 throw new InvalidOperationException(
-                    Resources.FormatCreateModelExpression_NullModelMetadata(nameof(IModelMetadataProvider), expression));
+                    Resources.FormatCreateModelExpression_NullModelMetadata(
+                        nameof(IModelMetadataProvider),
+                        expression
+                    )
+                );
             }
 
             return new ModelExpression(expression, modelExplorer);

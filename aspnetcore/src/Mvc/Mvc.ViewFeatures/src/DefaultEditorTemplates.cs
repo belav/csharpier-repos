@@ -31,9 +31,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 value = Convert.ToBoolean(htmlHelper.ViewData.Model, CultureInfo.InvariantCulture);
             }
 
-            return htmlHelper.ViewData.ModelMetadata.IsNullableValueType ?
-                BooleanTemplateDropDownList(htmlHelper, value) :
-                BooleanTemplateCheckbox(htmlHelper, value ?? false);
+            return htmlHelper.ViewData.ModelMetadata.IsNullableValueType
+              ? BooleanTemplateDropDownList(htmlHelper, value)
+              : BooleanTemplateCheckbox(htmlHelper, value ?? false);
         }
 
         private static IHtmlContent BooleanTemplateCheckbox(IHtmlHelper htmlHelper, bool value)
@@ -41,7 +41,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             return htmlHelper.CheckBox(
                 expression: null,
                 isChecked: value,
-                htmlAttributes: CreateHtmlAttributes(htmlHelper, "check-box"));
+                htmlAttributes: CreateHtmlAttributes(htmlHelper, "check-box")
+            );
         }
 
         private static IHtmlContent BooleanTemplateDropDownList(IHtmlHelper htmlHelper, bool? value)
@@ -50,7 +51,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 expression: null,
                 selectList: DefaultDisplayTemplates.TriStateValues(value),
                 optionLabel: null,
-                htmlAttributes: CreateHtmlAttributes(htmlHelper, "list-box tri-state"));
+                htmlAttributes: CreateHtmlAttributes(htmlHelper, "list-box tri-state")
+            );
         }
 
         public static IHtmlContent CollectionTemplate(IHtmlHelper htmlHelper)
@@ -66,8 +68,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             if (enumerable == null)
             {
                 // Only way we could reach here is if user passed templateName: "Collection" to an Editor() overload.
-                throw new InvalidOperationException(Resources.FormatTemplates_TypeMustImplementIEnumerable(
-                    "Collection", model.GetType().FullName, typeof(IEnumerable).FullName));
+                throw new InvalidOperationException(
+                    Resources.FormatTemplates_TypeMustImplementIEnumerable(
+                        "Collection",
+                        model.GetType().FullName,
+                        typeof(IEnumerable).FullName
+                    )
+                );
             }
 
             var elementMetadata = htmlHelper.ViewData.ModelMetadata.ElementMetadata;
@@ -89,7 +96,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 viewData.TemplateInfo.HtmlFieldPrefix = string.Empty;
 
                 var collection = model as ICollection;
-                var result = collection == null ? new HtmlContentBuilder() : new HtmlContentBuilder(collection.Count);
+                var result =
+                    collection == null
+                        ? new HtmlContentBuilder()
+                        : new HtmlContentBuilder(collection.Count);
                 var viewEngine = serviceProvider.GetRequiredService<ICompositeViewEngine>();
                 var viewBufferScope = serviceProvider.GetRequiredService<IViewBufferScope>();
 
@@ -106,8 +116,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         metadataProvider,
                         container: htmlHelper.ViewData.ModelExplorer,
                         metadata: itemMetadata,
-                        model: item);
-                    var fieldName = string.Format(CultureInfo.InvariantCulture, "{0}[{1}]", oldPrefix, index++);
+                        model: item
+                    );
+                    var fieldName = string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}[{1}]",
+                        oldPrefix,
+                        index++
+                    );
 
                     var templateBuilder = new TemplateBuilder(
                         viewEngine,
@@ -118,12 +134,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                         htmlFieldName: fieldName,
                         templateName: null,
                         readOnly: false,
-                        additionalViewData: null);
+                        additionalViewData: null
+                    );
                     result.AppendHtml(templateBuilder.Build());
                 }
 
                 return result;
             }
+
             finally
             {
                 viewData.TemplateInfo.HtmlFieldPrefix = oldPrefix;
@@ -134,8 +152,11 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         {
             if (htmlHelper.ViewData.TemplateInfo.FormattedModelValue == htmlHelper.ViewData.Model)
             {
-                htmlHelper.ViewData.TemplateInfo.FormattedModelValue =
-                    string.Format(CultureInfo.CurrentCulture, "{0:0.00}", htmlHelper.ViewData.Model);
+                htmlHelper.ViewData.TemplateInfo.FormattedModelValue = string.Format(
+                    CultureInfo.CurrentCulture,
+                    "{0:0.00}",
+                    htmlHelper.ViewData.Model
+                );
             }
 
             return StringTemplate(htmlHelper);
@@ -157,22 +178,24 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
 
             var htmlAttributesObject = viewData[HtmlAttributeKey];
-            var hidden = htmlHelper.Hidden(expression: null, value: model, htmlAttributes: htmlAttributesObject);
+            var hidden = htmlHelper.Hidden(
+                expression: null,
+                value: model,
+                htmlAttributes: htmlAttributesObject
+            );
             if (viewData.ModelMetadata.HideSurroundingHtml)
             {
                 return hidden;
             }
 
-            return new HtmlContentBuilder(capacity: 2)
-                .AppendHtml(display)
-                .AppendHtml(hidden);
+            return new HtmlContentBuilder(capacity: 2).AppendHtml(display).AppendHtml(hidden);
         }
 
         private static IDictionary<string, object> CreateHtmlAttributes(
             IHtmlHelper htmlHelper,
             string className,
-            string inputType = null)
-        {
+            string inputType = null
+        ) {
             var htmlAttributesObject = htmlHelper.ViewData[HtmlAttributeKey];
             if (htmlAttributesObject != null)
             {
@@ -195,8 +218,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         private static IDictionary<string, object> MergeHtmlAttributes(
             object htmlAttributesObject,
             string className,
-            string inputType)
-        {
+            string inputType
+        ) {
             var htmlAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributesObject);
 
             if (htmlAttributes.TryGetValue("class", out var htmlClassObject))
@@ -225,7 +248,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 value: htmlHelper.ViewContext.ViewData.TemplateInfo.FormattedModelValue.ToString(),
                 rows: 0,
                 columns: 0,
-                htmlAttributes: CreateHtmlAttributes(htmlHelper, "text-box multi-line"));
+                htmlAttributes: CreateHtmlAttributes(htmlHelper, "text-box multi-line")
+            );
         }
 
         public static IHtmlContent ObjectTemplate(IHtmlHelper htmlHelper)
@@ -272,12 +296,17 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     htmlFieldName: propertyMetadata.PropertyName,
                     templateName: null,
                     readOnly: false,
-                    additionalViewData: null);
+                    additionalViewData: null
+                );
 
                 var templateBuilderResult = templateBuilder.Build();
                 if (!propertyMetadata.HideSurroundingHtml)
                 {
-                    var label = htmlHelper.Label(propertyMetadata.PropertyName, labelText: null, htmlAttributes: null);
+                    var label = htmlHelper.Label(
+                        propertyMetadata.PropertyName,
+                        labelText: null,
+                        htmlAttributes: null
+                    );
                     using (var writer = new HasContentTextWriter())
                     {
                         label.WriteTo(writer, PassThroughHtmlEncoder.Default);
@@ -295,11 +324,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
                     valueDivTag.InnerHtml.AppendHtml(templateBuilderResult);
                     valueDivTag.InnerHtml.AppendHtml(" ");
-                    valueDivTag.InnerHtml.AppendHtml(htmlHelper.ValidationMessage(
-                        propertyMetadata.PropertyName,
-                        message: null,
-                        htmlAttributes: null,
-                        tag: null));
+                    valueDivTag.InnerHtml.AppendHtml(
+                        htmlHelper.ValidationMessage(
+                            propertyMetadata.PropertyName,
+                            message: null,
+                            htmlAttributes: null,
+                            tag: null
+                        )
+                    );
 
                     content.AppendLine(valueDivTag);
                 }
@@ -315,23 +347,25 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public static IHtmlContent PasswordTemplate(IHtmlHelper htmlHelper)
         {
             object value = null;
-            if (AppContext.TryGetSwitch(UsePasswordValue, out var usePasswordValue) && usePasswordValue)
-            {
+            if (
+                AppContext.TryGetSwitch(UsePasswordValue, out var usePasswordValue)
+                && usePasswordValue
+            ) {
                 value = htmlHelper.ViewData.TemplateInfo.FormattedModelValue;
             }
 
             return htmlHelper.Password(
                 expression: null,
                 value: value,
-                htmlAttributes: CreateHtmlAttributes(htmlHelper, "text-box single-line password"));
+                htmlAttributes: CreateHtmlAttributes(htmlHelper, "text-box single-line password")
+            );
         }
 
         private static bool ShouldShow(ModelExplorer modelExplorer, TemplateInfo templateInfo)
         {
-            return
-                modelExplorer.Metadata.ShowForEdit &&
-                !modelExplorer.Metadata.IsComplexType &&
-                !templateInfo.Visited(modelExplorer);
+            return modelExplorer.Metadata.ShowForEdit
+                && !modelExplorer.Metadata.IsComplexType
+                && !templateInfo.Visited(modelExplorer);
         }
 
         public static IHtmlContent StringTemplate(IHtmlHelper htmlHelper)
@@ -413,15 +447,24 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 throw new ArgumentNullException(nameof(htmlHelper));
             }
 
-            var htmlAttributes =
-                CreateHtmlAttributes(htmlHelper, className: "text-box single-line", inputType: "file");
+            var htmlAttributes = CreateHtmlAttributes(
+                htmlHelper,
+                className: "text-box single-line",
+                inputType: "file"
+            );
             htmlAttributes["multiple"] = "multiple";
 
-            return GenerateTextBox(htmlHelper, htmlHelper.ViewData.TemplateInfo.FormattedModelValue, htmlAttributes);
+            return GenerateTextBox(
+                htmlHelper,
+                htmlHelper.ViewData.TemplateInfo.FormattedModelValue,
+                htmlAttributes
+            );
         }
 
-        private static void ApplyRfc3339DateFormattingIfNeeded(IHtmlHelper htmlHelper, string format)
-        {
+        private static void ApplyRfc3339DateFormattingIfNeeded(
+            IHtmlHelper htmlHelper,
+            string format
+        ) {
             if (htmlHelper.Html5DateRenderingMode != Html5DateRenderingMode.Rfc3339)
             {
                 return;
@@ -429,38 +472,57 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             var metadata = htmlHelper.ViewData.ModelMetadata;
             var value = htmlHelper.ViewData.Model;
-            if (htmlHelper.ViewData.TemplateInfo.FormattedModelValue != value && metadata.HasNonDefaultEditFormat)
-            {
+            if (
+                htmlHelper.ViewData.TemplateInfo.FormattedModelValue != value
+                && metadata.HasNonDefaultEditFormat
+            ) {
                 return;
             }
 
             if (value is DateTime || value is DateTimeOffset)
             {
-                htmlHelper.ViewData.TemplateInfo.FormattedModelValue =
-                    string.Format(CultureInfo.InvariantCulture, format, value);
+                htmlHelper.ViewData.TemplateInfo.FormattedModelValue = string.Format(
+                    CultureInfo.InvariantCulture,
+                    format,
+                    value
+                );
             }
         }
 
         private static IHtmlContent GenerateTextBox(IHtmlHelper htmlHelper, string inputType = null)
         {
-            return GenerateTextBox(htmlHelper, inputType, htmlHelper.ViewData.TemplateInfo.FormattedModelValue);
+            return GenerateTextBox(
+                htmlHelper,
+                inputType,
+                htmlHelper.ViewData.TemplateInfo.FormattedModelValue
+            );
         }
 
-        private static IHtmlContent GenerateTextBox(IHtmlHelper htmlHelper, string inputType, object value)
-        {
-            var htmlAttributes =
-                CreateHtmlAttributes(htmlHelper, className: "text-box single-line", inputType: inputType);
+        private static IHtmlContent GenerateTextBox(
+            IHtmlHelper htmlHelper,
+            string inputType,
+            object value
+        ) {
+            var htmlAttributes = CreateHtmlAttributes(
+                htmlHelper,
+                className: "text-box single-line",
+                inputType: inputType
+            );
 
             return GenerateTextBox(htmlHelper, value, htmlAttributes);
         }
 
-        private static IHtmlContent GenerateTextBox(IHtmlHelper htmlHelper, object value, object htmlAttributes)
-        {
+        private static IHtmlContent GenerateTextBox(
+            IHtmlHelper htmlHelper,
+            object value,
+            object htmlAttributes
+        ) {
             return htmlHelper.TextBox(
                 expression: null,
                 value: value,
                 format: null,
-                htmlAttributes: htmlAttributes);
+                htmlAttributes: htmlAttributes
+            );
         }
 
         private class HasContentTextWriter : TextWriter
@@ -494,11 +556,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         // Copied from Microsoft.AspNetCore.Razor.TagHelpers.NullHtmlEncoder.
         private class PassThroughHtmlEncoder : HtmlEncoder
         {
-            private PassThroughHtmlEncoder()
-            {
-            }
+            private PassThroughHtmlEncoder() { }
 
-            public static new PassThroughHtmlEncoder Default { get; } = new PassThroughHtmlEncoder();
+            public static new PassThroughHtmlEncoder Default { get; } =
+                new PassThroughHtmlEncoder();
 
             public override int MaxOutputCharactersPerInputCharacter => 1;
 
@@ -507,8 +568,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 return value;
             }
 
-            public override void Encode(TextWriter output, char[] value, int startIndex, int characterCount)
-            {
+            public override void Encode(
+                TextWriter output,
+                char[] value,
+                int startIndex,
+                int characterCount
+            ) {
                 if (output == null)
                 {
                     throw new ArgumentNullException(nameof(output));
@@ -522,8 +587,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 output.Write(value, startIndex, characterCount);
             }
 
-            public override void Encode(TextWriter output, string value, int startIndex, int characterCount)
-            {
+            public override void Encode(
+                TextWriter output,
+                string value,
+                int startIndex,
+                int characterCount
+            ) {
                 if (output == null)
                 {
                     throw new ArgumentNullException(nameof(output));
@@ -551,8 +620,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 int unicodeScalar,
                 char* buffer,
                 int bufferLength,
-                out int numberOfCharactersWritten)
-            {
+                out int numberOfCharactersWritten
+            ) {
                 numberOfCharactersWritten = 0;
 
                 return false;

@@ -22,20 +22,22 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Completion
             ImmutableArray<string> searchPaths,
             string baseDirectoryOpt,
             ImmutableArray<string> allowableExtensions,
-            CompletionItemRules itemRules)
-        {
-            _fileSystemCompletionHelper =
-                new FileSystemCompletionHelper(
-                    FSharpGlyphHelpers.ConvertTo(folderGlyph),
-                    FSharpGlyphHelpers.ConvertTo(fileGlyph),
-                    searchPaths,
-                    baseDirectoryOpt,
-                    allowableExtensions,
-                    itemRules);
+            CompletionItemRules itemRules
+        ) {
+            _fileSystemCompletionHelper = new FileSystemCompletionHelper(
+                FSharpGlyphHelpers.ConvertTo(folderGlyph),
+                FSharpGlyphHelpers.ConvertTo(fileGlyph),
+                searchPaths,
+                baseDirectoryOpt,
+                allowableExtensions,
+                itemRules
+            );
         }
 
-        public Task<ImmutableArray<CompletionItem>> GetItemsAsync(string directoryPath, CancellationToken cancellationToken)
-        {
+        public Task<ImmutableArray<CompletionItem>> GetItemsAsync(
+            string directoryPath,
+            CancellationToken cancellationToken
+        ) {
             return _fileSystemCompletionHelper.GetItemsAsync(directoryPath, cancellationToken);
         }
     }

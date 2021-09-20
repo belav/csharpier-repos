@@ -21,7 +21,11 @@ namespace System.Threading.Tasks.Tests
             Assert.Equal(ct2, ex2.CancellationToken);
 
             CancellationToken ct3 = new CancellationTokenSource().Token;
-            OperationCanceledException ex3 = new OperationCanceledException("message", new Exception("inner"), ct3);
+            OperationCanceledException ex3 = new OperationCanceledException(
+                "message",
+                new Exception("inner"),
+                ct3
+            );
             Assert.Equal(ct3, ex3.CancellationToken);
         }
     }

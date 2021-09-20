@@ -10,10 +10,7 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeBCryptHashHandle : SafeBCryptHandle
     {
-        public SafeBCryptHashHandle()
-            : base()
-        {
-        }
+        public SafeBCryptHashHandle() : base() { }
 
         protected sealed override bool ReleaseHandle()
         {

@@ -62,8 +62,8 @@ namespace System.Management
         /// <param name="mgObj">Seed class from which we will get initialization info</param>
         internal static ManagementClass GetManagementClass(
             IWbemClassObjectFreeThreaded wbemObject,
-            ManagementClass mgObj)
-        {
+            ManagementClass mgObj
+        ) {
             ManagementClass newClass = new ManagementClass();
             newClass.wbemObject = wbemObject;
 
@@ -96,7 +96,6 @@ namespace System.Management
                 ObjectGetOptions options = mgObj.Options;
                 if (null != options)
                     newClass.options = ObjectGetOptions._Clone(options);
-
                 // Finally we ensure that this object is marked as bound.
                 // We do this as a last step since setting certain properties
                 // (Options, Path and Scope) would mark it as unbound
@@ -112,8 +111,8 @@ namespace System.Management
 
         internal static ManagementClass GetManagementClass(
             IWbemClassObjectFreeThreaded wbemObject,
-            ManagementScope scope)
-        {
+            ManagementScope scope
+        ) {
             ManagementClass newClass = new ManagementClass();
             newClass.path = new ManagementPath(ManagementPath.GetManagementPath(wbemObject));
 
@@ -193,7 +192,8 @@ namespace System.Management
         /// Dim c As New ManagementClass(p,o)
         ///    </code>
         /// </example>
-        public ManagementClass(ManagementPath path, ObjectGetOptions options) : this(null, path, options) { }
+        public ManagementClass(ManagementPath path, ObjectGetOptions options)
+            : this(null, path, options) { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementClass'/> class initialized to the given WMI class path
@@ -238,8 +238,11 @@ namespace System.Management
         /// Dim c As New ManagementClass(s, p, o)
         ///    </code>
         /// </example>
-        public ManagementClass(ManagementScope scope, ManagementPath path, ObjectGetOptions options)
-            : base(scope, path, options) { }
+        public ManagementClass(
+            ManagementScope scope,
+            ManagementPath path,
+            ObjectGetOptions options
+        ) : base(scope, path, options) { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementClass'/> class for the specified WMI class, in the
@@ -266,7 +269,8 @@ namespace System.Management
         public ManagementClass(string scope, string path, ObjectGetOptions options)
             : base(new ManagementScope(scope), new ManagementPath(path), options) { }
 
-        protected ManagementClass(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected ManagementClass(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             throw new PlatformNotSupportedException();
         }
@@ -295,10 +299,7 @@ namespace System.Management
         /// </example>
         public override ManagementPath Path
         {
-            get
-            {
-                return base.Path;
-            }
+            get { return base.Path; }
             set
             {
                 // This must be a class path or empty (don't allow instance paths)
@@ -338,7 +339,8 @@ namespace System.Management
             {
                 StringCollection result = new StringCollection();
 
-                int dummy1 = 0, dummy2 = 0;
+                int dummy1 = 0,
+                    dummy2 = 0;
                 object val = null;
 
                 int status = wbemObject.Get_("__DERIVATION", 0, ref val, ref dummy1, ref dummy2);
@@ -357,7 +359,6 @@ namespace System.Management
                 return result;
             }
         }
-
 
         /// <summary>
         /// <para>Gets or sets a collection of <see cref='System.Management.MethodData'/> objects that
@@ -425,7 +426,6 @@ namespace System.Management
             return GetInstances((EnumerationOptions)null);
         }
 
-
         /// <summary>
         ///    <para>Returns the collection of all instances of the class using the specified options.</para>
         /// </summary>
@@ -460,10 +460,12 @@ namespace System.Management
             Initialize(false);
             IEnumWbemClassObject enumWbem = null;
 
-            EnumerationOptions o = (null == options) ? new EnumerationOptions() : (EnumerationOptions)options.Clone();
+            EnumerationOptions o =
+                (null == options) ? new EnumerationOptions() : (EnumerationOptions)options.Clone();
             //Need to make sure that we're not passing invalid flags to enumeration APIs.
             //The only flags in EnumerationOptions not valid for enumerations are EnsureLocatable & PrototypeOnly.
-            o.EnsureLocatable = false; o.PrototypeOnly = false;
+            o.EnsureLocatable = false;
+            o.PrototypeOnly = false;
 
             SecurityHandler securityHandler = null;
             int status = (int)ManagementStatus.NoError;
@@ -471,9 +473,10 @@ namespace System.Management
             try
             {
                 securityHandler = Scope.GetSecurityHandler();
-                status = scope.GetSecuredIWbemServicesHandler(Scope.GetIWbemServices()).CreateInstanceEnum_(
-                    ClassName, o.Flags, o.GetContext(), ref enumWbem);
+                status = scope.GetSecuredIWbemServicesHandler(Scope.GetIWbemServices())
+                    .CreateInstanceEnum_(ClassName, o.Flags, o.GetContext(), ref enumWbem);
             }
+
             finally
             {
                 if (securityHandler != null)
@@ -566,7 +569,6 @@ namespace System.Management
             GetInstances(watcher, (EnumerationOptions)null);
         }
 
-
         /// <summary>
         ///    <para>Returns the collection of all instances of the class, asynchronously, using
         ///       the specified options.</para>
@@ -583,11 +585,13 @@ namespace System.Management
 
             Initialize(false);
 
-            EnumerationOptions o = (null == options) ? new EnumerationOptions() : (EnumerationOptions)options.Clone();
+            EnumerationOptions o =
+                (null == options) ? new EnumerationOptions() : (EnumerationOptions)options.Clone();
 
             //Need to make sure that we're not passing invalid flags to enumeration APIs.
             //The only flags in EnumerationOptions not valid for enumerations are EnsureLocatable & PrototypeOnly.
-            o.EnsureLocatable = false; o.PrototypeOnly = false;
+            o.EnsureLocatable = false;
+            o.PrototypeOnly = false;
 
             // Ensure we switch off ReturnImmediately as this is invalid for async calls
             o.ReturnImmediately = false;
@@ -603,9 +607,8 @@ namespace System.Management
 
             securityHandler = Scope.GetSecurityHandler();
 
-            status = scope.GetSecuredIWbemServicesHandler(Scope.GetIWbemServices()).CreateInstanceEnumAsync_(
-                ClassName, o.Flags, o.GetContext(), sink.Stub);
-
+            status = scope.GetSecuredIWbemServicesHandler(Scope.GetIWbemServices())
+                .CreateInstanceEnumAsync_(ClassName, o.Flags, o.GetContext(), sink.Stub);
 
             if (securityHandler != null)
                 securityHandler.Reset();
@@ -638,7 +641,6 @@ namespace System.Management
         {
             return GetSubclasses((EnumerationOptions)null);
         }
-
 
         /// <summary>
         ///    <para>Retrieves the subclasses of the class using the specified
@@ -678,10 +680,12 @@ namespace System.Management
             Initialize(false);
             IEnumWbemClassObject enumWbem = null;
 
-            EnumerationOptions o = (null == options) ? new EnumerationOptions() : (EnumerationOptions)options.Clone();
+            EnumerationOptions o =
+                (null == options) ? new EnumerationOptions() : (EnumerationOptions)options.Clone();
             //Need to make sure that we're not passing invalid flags to enumeration APIs.
             //The only flags in EnumerationOptions not valid for enumerations are EnsureLocatable & PrototypeOnly.
-            o.EnsureLocatable = false; o.PrototypeOnly = false;
+            o.EnsureLocatable = false;
+            o.PrototypeOnly = false;
 
             SecurityHandler securityHandler = null;
             int status = (int)ManagementStatus.NoError;
@@ -689,9 +693,10 @@ namespace System.Management
             try
             {
                 securityHandler = Scope.GetSecurityHandler();
-                status = scope.GetSecuredIWbemServicesHandler(Scope.GetIWbemServices()).CreateClassEnum_(
-                    ClassName, o.Flags, o.GetContext(), ref enumWbem);
+                status = scope.GetSecuredIWbemServicesHandler(Scope.GetIWbemServices())
+                    .CreateClassEnum_(ClassName, o.Flags, o.GetContext(), ref enumWbem);
             }
+
             finally
             {
                 if (securityHandler != null)
@@ -718,15 +723,13 @@ namespace System.Management
             GetSubclasses(watcher, (EnumerationOptions)null);
         }
 
-
         /// <summary>
         ///    <para>Retrieves all classes derived from this class, asynchronously, using the specified
         ///       options.</para>
         /// </summary>
         /// <param name='watcher'>The object to handle the asynchronous operation's progress. </param>
         /// <param name='options'>The specified additional options to use in the derived class retrieval.</param>
-        public void GetSubclasses(ManagementOperationObserver watcher,
-                                        EnumerationOptions options)
+        public void GetSubclasses(ManagementOperationObserver watcher, EnumerationOptions options)
         {
             if (null == watcher)
                 throw new ArgumentNullException(nameof(watcher));
@@ -736,12 +739,13 @@ namespace System.Management
 
             Initialize(false);
 
-            EnumerationOptions o = (null == options) ? new EnumerationOptions() :
-                                      (EnumerationOptions)options.Clone();
+            EnumerationOptions o =
+                (null == options) ? new EnumerationOptions() : (EnumerationOptions)options.Clone();
 
             //Need to make sure that we're not passing invalid flags to enumeration APIs.
             //The only flags in EnumerationOptions not valid for enumerations are EnsureLocatable & PrototypeOnly.
-            o.EnsureLocatable = false; o.PrototypeOnly = false;
+            o.EnsureLocatable = false;
+            o.PrototypeOnly = false;
 
             // Ensure we switch off ReturnImmediately as this is invalid for async calls
             o.ReturnImmediately = false;
@@ -757,9 +761,8 @@ namespace System.Management
 
             securityHandler = Scope.GetSecurityHandler();
 
-            status = scope.GetSecuredIWbemServicesHandler(Scope.GetIWbemServices()).CreateClassEnumAsync_(
-                ClassName, o.Flags, o.GetContext(), sink.Stub);
-
+            status = scope.GetSecuredIWbemServicesHandler(Scope.GetIWbemServices())
+                .CreateClassEnumAsync_(ClassName, o.Flags, o.GetContext(), sink.Stub);
 
             if (securityHandler != null)
                 securityHandler.Reset();
@@ -937,7 +940,6 @@ namespace System.Management
             return ManagementClass.GetManagementClass(theClone, this);
         }
 
-
         //******************************************************
         //GetRelatedClasses
         //******************************************************
@@ -987,12 +989,10 @@ namespace System.Management
         ///    A collection of classes related to
         ///    this class.
         /// </returns>
-        public ManagementObjectCollection GetRelatedClasses(
-            string relatedClass)
+        public ManagementObjectCollection GetRelatedClasses(string relatedClass)
         {
             return GetRelatedClasses(relatedClass, null, null, null, null, null, null);
         }
-
 
         /// <summary>
         ///    <para> Retrieves classes related to the WMI class based on the specified
@@ -1010,14 +1010,14 @@ namespace System.Management
         ///       this class.</para>
         /// </returns>
         public ManagementObjectCollection GetRelatedClasses(
-                                            string relatedClass,
-                                            string relationshipClass,
-                                            string relationshipQualifier,
-                                            string relatedQualifier,
-                                            string relatedRole,
-                                            string thisRole,
-                                            EnumerationOptions options)
-        {
+            string relatedClass,
+            string relationshipClass,
+            string relationshipQualifier,
+            string relatedQualifier,
+            string relatedRole,
+            string thisRole,
+            EnumerationOptions options
+        ) {
             if ((null == Path) || (null == Path.Path) || (0 == Path.Path.Length))
                 throw new InvalidOperationException();
 
@@ -1025,16 +1025,21 @@ namespace System.Management
 
             IEnumWbemClassObject enumWbem = null;
 
-            EnumerationOptions o = (null != options) ? (EnumerationOptions)options.Clone() : new EnumerationOptions();
+            EnumerationOptions o =
+                (null != options) ? (EnumerationOptions)options.Clone() : new EnumerationOptions();
             //Ensure EnumerateDeep flag bit is turned off as it's invalid for queries
             o.EnumerateDeep = true;
 
-            RelatedObjectQuery q = new RelatedObjectQuery(true, Path.Path,
-                                                            relatedClass,
-                                                            relationshipClass,
-                                                            relatedQualifier,
-                                                            relationshipQualifier,
-                                                            relatedRole, thisRole);
+            RelatedObjectQuery q = new RelatedObjectQuery(
+                true,
+                Path.Path,
+                relatedClass,
+                relationshipClass,
+                relatedQualifier,
+                relationshipQualifier,
+                relatedRole,
+                thisRole
+            );
 
             SecurityHandler securityHandler = null;
             int status = (int)ManagementStatus.NoError;
@@ -1042,14 +1047,16 @@ namespace System.Management
             try
             {
                 securityHandler = Scope.GetSecurityHandler();
-                status = scope.GetSecuredIWbemServicesHandler(Scope.GetIWbemServices()).ExecQuery_(
-                    q.QueryLanguage,
-                    q.QueryString,
-                    o.Flags,
-                    o.GetContext(),
-                    ref enumWbem);
-
+                status = scope.GetSecuredIWbemServicesHandler(Scope.GetIWbemServices())
+                    .ExecQuery_(
+                        q.QueryLanguage,
+                        q.QueryString,
+                        o.Flags,
+                        o.GetContext(),
+                        ref enumWbem
+                    );
             }
+
             finally
             {
                 if (securityHandler != null)
@@ -1068,14 +1075,12 @@ namespace System.Management
             return new ManagementObjectCollection(Scope, o, enumWbem);
         }
 
-
         /// <summary>
         ///    <para> Retrieves classes
         ///       related to the WMI class, asynchronously.</para>
         /// </summary>
         /// <param name='watcher'>The object to handle the asynchronous operation's progress. </param>
-        public void GetRelatedClasses(
-            ManagementOperationObserver watcher)
+        public void GetRelatedClasses(ManagementOperationObserver watcher)
         {
             GetRelatedClasses(watcher, (string)null);
         }
@@ -1086,13 +1091,10 @@ namespace System.Management
         /// </summary>
         /// <param name='watcher'>The object to handle the asynchronous operation's progress. </param>
         /// <param name=' relatedClass'>The name of the related class.</param>
-        public void GetRelatedClasses(
-            ManagementOperationObserver watcher,
-            string relatedClass)
+        public void GetRelatedClasses(ManagementOperationObserver watcher, string relatedClass)
         {
             GetRelatedClasses(watcher, relatedClass, null, null, null, null, null, null);
         }
-
 
         /// <summary>
         ///    <para> Retrieves classes related to the
@@ -1114,8 +1116,8 @@ namespace System.Management
             string relatedQualifier,
             string relatedRole,
             string thisRole,
-            EnumerationOptions options)
-        {
+            EnumerationOptions options
+        ) {
             if ((null == Path) || (null == Path.Path) || (0 == Path.Path.Length))
                 throw new InvalidOperationException();
 
@@ -1125,8 +1127,10 @@ namespace System.Management
                 throw new ArgumentNullException(nameof(watcher));
             else
             {
-                EnumerationOptions o = (null != options)
-                                ? (EnumerationOptions)options.Clone() : new EnumerationOptions();
+                EnumerationOptions o =
+                    (null != options)
+                        ? (EnumerationOptions)options.Clone()
+                        : new EnumerationOptions();
 
                 //Ensure EnumerateDeep flag bit is turned off as it's invalid for queries
                 o.EnumerateDeep = true;
@@ -1138,23 +1142,32 @@ namespace System.Management
                 if (watcher.HaveListenersForProgress)
                     o.SendStatus = true;
 
-                WmiEventSink sink = watcher.GetNewSink(
-                    Scope,
-                    o.Context);
+                WmiEventSink sink = watcher.GetNewSink(Scope, o.Context);
 
-                RelatedObjectQuery q = new RelatedObjectQuery(true, Path.Path,
-                                                                relatedClass, relationshipClass,
-                                                                relatedQualifier, relationshipQualifier,
-                                                                relatedRole, thisRole);
+                RelatedObjectQuery q = new RelatedObjectQuery(
+                    true,
+                    Path.Path,
+                    relatedClass,
+                    relationshipClass,
+                    relatedQualifier,
+                    relationshipQualifier,
+                    relatedRole,
+                    thisRole
+                );
 
                 SecurityHandler securityHandler = null;
                 int status = (int)ManagementStatus.NoError;
 
                 securityHandler = Scope.GetSecurityHandler();
 
-                status = scope.GetSecuredIWbemServicesHandler(Scope.GetIWbemServices()).ExecQueryAsync_(
-                    q.QueryLanguage, q.QueryString, o.Flags, o.GetContext(), sink.Stub);
-
+                status = scope.GetSecuredIWbemServicesHandler(Scope.GetIWbemServices())
+                    .ExecQueryAsync_(
+                        q.QueryLanguage,
+                        q.QueryString,
+                        o.Flags,
+                        o.GetContext(),
+                        sink.Stub
+                    );
 
                 if (securityHandler != null)
                     securityHandler.Reset();
@@ -1198,12 +1211,10 @@ namespace System.Management
         ///    <para>A collection of association classes
         ///       that relate the class to the specified class.</para>
         /// </returns>
-        public ManagementObjectCollection GetRelationshipClasses(
-            string relationshipClass)
+        public ManagementObjectCollection GetRelationshipClasses(string relationshipClass)
         {
             return GetRelationshipClasses(relationshipClass, null, null, null);
         }
-
 
         /// <summary>
         ///    <para> Retrieves relationship classes that relate this class to others, according to
@@ -1218,11 +1229,11 @@ namespace System.Management
         ///       that relate this class to others, according to the specified options.</para>
         /// </returns>
         public ManagementObjectCollection GetRelationshipClasses(
-                                            string relationshipClass,
-                                            string relationshipQualifier,
-                                            string thisRole,
-                                            EnumerationOptions options)
-        {
+            string relationshipClass,
+            string relationshipQualifier,
+            string thisRole,
+            EnumerationOptions options
+        ) {
             if ((null == Path) || (null == Path.Path) || (0 == Path.Path.Length))
                 throw new InvalidOperationException();
 
@@ -1234,9 +1245,13 @@ namespace System.Management
             //Ensure EnumerateDeep flag is turned off as it's invalid for queries
             o.EnumerateDeep = true;
 
-
-            RelationshipQuery q = new RelationshipQuery(true, Path.Path, relationshipClass,
-                                                        relationshipQualifier, thisRole);
+            RelationshipQuery q = new RelationshipQuery(
+                true,
+                Path.Path,
+                relationshipClass,
+                relationshipQualifier,
+                thisRole
+            );
 
             SecurityHandler securityHandler = null;
             int status = (int)ManagementStatus.NoError;
@@ -1245,10 +1260,16 @@ namespace System.Management
             try
             {
                 securityHandler = Scope.GetSecurityHandler();
-                status = scope.GetSecuredIWbemServicesHandler(Scope.GetIWbemServices()).ExecQuery_(
-                    q.QueryLanguage, q.QueryString, o.Flags, o.GetContext(), ref enumWbem);
-
+                status = scope.GetSecuredIWbemServicesHandler(Scope.GetIWbemServices())
+                    .ExecQuery_(
+                        q.QueryLanguage,
+                        q.QueryString,
+                        o.Flags,
+                        o.GetContext(),
+                        ref enumWbem
+                    );
             }
+
             finally
             {
                 if (securityHandler != null)
@@ -1267,14 +1288,12 @@ namespace System.Management
             return new ManagementObjectCollection(Scope, o, enumWbem);
         }
 
-
         /// <summary>
         ///    <para>Retrieves relationship classes that relate the class to others,
         ///       asynchronously.</para>
         /// </summary>
         /// <param name='watcher'>The object to handle the asynchronous operation's progress. </param>
-        public void GetRelationshipClasses(
-            ManagementOperationObserver watcher)
+        public void GetRelationshipClasses(ManagementOperationObserver watcher)
         {
             GetRelationshipClasses(watcher, (string)null);
         }
@@ -1287,11 +1306,10 @@ namespace System.Management
         /// <param name=' relationshipClass'>The WMI class to which all returned relationships should point.</param>
         public void GetRelationshipClasses(
             ManagementOperationObserver watcher,
-            string relationshipClass)
-        {
+            string relationshipClass
+        ) {
             GetRelationshipClasses(watcher, relationshipClass, null, null, null);
         }
-
 
         /// <summary>
         ///    <para>Retrieves relationship classes that relate the class according to the specified
@@ -1307,8 +1325,8 @@ namespace System.Management
             string relationshipClass,
             string relationshipQualifier,
             string thisRole,
-            EnumerationOptions options)
-        {
+            EnumerationOptions options
+        ) {
             if ((null == Path) || (null == Path.Path) || (0 == Path.Path.Length))
                 throw new InvalidOperationException();
             if (null == watcher)
@@ -1318,7 +1336,9 @@ namespace System.Management
                 Initialize(true);
 
                 EnumerationOptions o =
-                        (null != options) ? (EnumerationOptions)options.Clone() : new EnumerationOptions();
+                    (null != options)
+                        ? (EnumerationOptions)options.Clone()
+                        : new EnumerationOptions();
 
                 //Ensure EnumerateDeep flag is turned off as it's invalid for queries
                 o.EnumerateDeep = true;
@@ -1332,17 +1352,27 @@ namespace System.Management
 
                 WmiEventSink sink = watcher.GetNewSink(Scope, o.Context);
 
-                RelationshipQuery q = new RelationshipQuery(true, Path.Path, relationshipClass,
-                        relationshipQualifier, thisRole);
+                RelationshipQuery q = new RelationshipQuery(
+                    true,
+                    Path.Path,
+                    relationshipClass,
+                    relationshipQualifier,
+                    thisRole
+                );
 
                 SecurityHandler securityHandler = null;
                 int status = (int)ManagementStatus.NoError;
 
                 securityHandler = Scope.GetSecurityHandler();
 
-                status = scope.GetSecuredIWbemServicesHandler(Scope.GetIWbemServices()).ExecQueryAsync_(
-                    q.QueryLanguage, q.QueryString, o.Flags, o.GetContext(), sink.Stub);
-
+                status = scope.GetSecuredIWbemServicesHandler(Scope.GetIWbemServices())
+                    .ExecQueryAsync_(
+                        q.QueryLanguage,
+                        q.QueryString,
+                        o.Flags,
+                        o.GetContext(),
+                        sink.Stub
+                    );
 
                 if (securityHandler != null)
                     securityHandler.Reset();
@@ -1357,7 +1387,6 @@ namespace System.Management
                 }
             }
         }
-
 
         /// <overload>
         ///    <para>Generates a strongly-typed class for a given WMI class.</para>
@@ -1410,14 +1439,15 @@ namespace System.Management
         /// }
         ///    </code>
         /// </example>
-        public CodeTypeDeclaration GetStronglyTypedClassCode(bool includeSystemClassInClassDef, bool systemPropertyClass)
-        {
+        public CodeTypeDeclaration GetStronglyTypedClassCode(
+            bool includeSystemClassInClassDef,
+            bool systemPropertyClass
+        ) {
             // Ensure that the object is valid
             Get();
             ManagementClassGenerator classGen = new ManagementClassGenerator(this);
             return classGen.GenerateCode(includeSystemClassInClassDef, systemPropertyClass);
         }
-
 
         /// <summary>
         ///    <para>Generates a strongly-typed class for a given WMI class. This function generates code for Visual Basic,
@@ -1438,13 +1468,15 @@ namespace System.Management
         /// cls.GetStronglyTypedClassCode(CodeLanguage.CSharp,"C:\temp\Logicaldisk.cs",String.Empty);
         ///    </code>
         /// </example>
-        public bool GetStronglyTypedClassCode(CodeLanguage lang, string filePath, string classNamespace)
-        {
+        public bool GetStronglyTypedClassCode(
+            CodeLanguage lang,
+            string filePath,
+            string classNamespace
+        ) {
             // Ensure that the object is valid
             Get();
             ManagementClassGenerator classGen = new ManagementClassGenerator(this);
             return classGen.GenerateCode(lang, filePath, classNamespace);
         }
-
-    }//ManagementClass
+    } //ManagementClass
 }

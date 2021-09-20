@@ -9,7 +9,8 @@ namespace System.Composition.Diagnostics
 {
     internal sealed class DebuggerTraceWriter : TraceWriter
     {
-        private static readonly string s_sourceName = typeof(DebuggerTraceWriter).Assembly.GetName().Name!;
+        private static readonly string s_sourceName =
+            typeof(DebuggerTraceWriter).Assembly.GetName().Name!;
 
         public override bool CanWriteInformation
         {
@@ -26,23 +27,36 @@ namespace System.Composition.Diagnostics
             get { return Debugger.IsLogging(); }
         }
 
-        public override void WriteInformation(CompositionTraceId traceId, string format, params object[] arguments)
-        {
+        public override void WriteInformation(
+            CompositionTraceId traceId,
+            string format,
+            params object[] arguments
+        ) {
             WriteEvent(TraceEventType.Information, traceId, format, arguments);
         }
 
-        public override void WriteWarning(CompositionTraceId traceId, string format, params object[] arguments)
-        {
+        public override void WriteWarning(
+            CompositionTraceId traceId,
+            string format,
+            params object[] arguments
+        ) {
             WriteEvent(TraceEventType.Warning, traceId, format, arguments);
         }
 
-        public override void WriteError(CompositionTraceId traceId, string format, params object[] arguments)
-        {
+        public override void WriteError(
+            CompositionTraceId traceId,
+            string format,
+            params object[] arguments
+        ) {
             WriteEvent(TraceEventType.Error, traceId, format, arguments);
         }
 
-        private static void WriteEvent(TraceEventType eventType, CompositionTraceId traceId, string format, params object[] arguments)
-        {
+        private static void WriteEvent(
+            TraceEventType eventType,
+            CompositionTraceId traceId,
+            string format,
+            params object[] arguments
+        ) {
             if (!Debugger.IsLogging())
             {
                 return;
@@ -52,13 +66,22 @@ namespace System.Composition.Diagnostics
             Debugger.Log(0, null, logMessage);
         }
 
-        private static string CreateLogMessage(TraceEventType eventType, CompositionTraceId traceId, string format, params object[] arguments)
-        {
+        private static string CreateLogMessage(
+            TraceEventType eventType,
+            CompositionTraceId traceId,
+            string format,
+            params object[] arguments
+        ) {
             StringBuilder messageBuilder = new StringBuilder();
 
             // Format taken from TraceListener.TraceEvent in .NET Framework
-            messageBuilder.AppendFormat(CultureInfo.InvariantCulture, "{0} {1}: {2} : ",
-                s_sourceName, eventType.ToString(), (int)traceId);
+            messageBuilder.AppendFormat(
+                CultureInfo.InvariantCulture,
+                "{0} {1}: {2} : ",
+                s_sourceName,
+                eventType.ToString(),
+                (int)traceId
+            );
 
             if (arguments == null)
             {

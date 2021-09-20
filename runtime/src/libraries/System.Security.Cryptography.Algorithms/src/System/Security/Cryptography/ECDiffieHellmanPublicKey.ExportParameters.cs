@@ -47,8 +47,10 @@ namespace System.Security.Cryptography
         /// </exception>
         /// <exception cref="ObjectDisposedException">The object has already been disposed.</exception>
         /// <exception cref="CryptographicException">The key is invalid and could not be exported.</exception>
-        public virtual bool TryExportSubjectPublicKeyInfo(Span<byte> destination, out int bytesWritten)
-        {
+        public virtual bool TryExportSubjectPublicKeyInfo(
+            Span<byte> destination,
+            out int bytesWritten
+        ) {
             ECParameters ecParameters = ExportParameters();
             AsnWriter writer = EccKeyFormatHelper.WriteSubjectPublicKeyInfo(ecParameters);
             return writer.TryEncode(destination, out bytesWritten);

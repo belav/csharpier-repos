@@ -8,13 +8,13 @@ using System.Runtime.InteropServices;
 
 // Purpose of program: exercise the GC, with various object sizes and lifetimes.
 // Allocate objects that have an expiration time specified. When the object's lifetime expires, it is made garbage and then other new objects are created.
-// 
+//
 // Each object has a lifetime attached to it (in ObjectWrapper). New objects are added to a collection. When the lifetime is expired, the object is removed from the collection and subject to GC.
 // There are several threads which access  the collection in random positions and if there is no object in that position they will create a new one.
 //One thread is responsible to updating the objects'age and removing expired objects.
 //The lifetime and the objects'size can be set by command line arguments.
 //The objects'size is organized in buckets (size ranges), the user can specify the percentage for each bucket.
-//Collection type can be array or binary tree. 
+//Collection type can be array or binary tree.
 
 
 
@@ -28,7 +28,7 @@ namespace StressAllocator
         {
             public int minsize;
             public int maxsize;
-            public float percentage;  //percentage of objects that fall into this bucket
+            public float percentage; //percentage of objects that fall into this bucket
             public SizeBucket(int min, int max, float percentObj)
             {
                 minsize = min;
@@ -63,7 +63,7 @@ namespace StressAllocator
         public const float DEFAULT_BUCKET3 = 20.0F;
         public const float DEFAULT_BUCKET4 = 10.0F;
         //remaining will be allocated on Large Object Heap
-        public const int DEFAULT_THREADS = 4;  //number of allocating threads
+        public const int DEFAULT_THREADS = 4; //number of allocating threads
         public const int THREAD_IDLE_TIME = 0; //milliseconds
         public const int MAX_REFS = 4; //max number of refernces to another object
         ///////////// end default parameters
@@ -79,20 +79,18 @@ namespace StressAllocator
         //how many objects will be initially allocated
         public static int objCount = DEFAULT_OBJCOUNT;
 
-
         public static int countIters = DEFAULT_ITERATIONS;
         public static float percentPinned = DEFAULT_PINNED;
-        public static bool usePOH = false;  // if true, use POH allocations instead of pinned handles.
-        public static bool LOHpin = false;  //if true, apply the percentPinned to just LOH, not overall.
+        public static bool usePOH = false; // if true, use POH allocations instead of pinned handles.
+        public static bool LOHpin = false; //if true, apply the percentPinned to just LOH, not overall.
         public static float percentBucket1 = DEFAULT_BUCKET1;
         public static float percentBucket2 = DEFAULT_BUCKET2;
         public static float percentBucket3 = DEFAULT_BUCKET3;
         public static float percentBucket4 = DEFAULT_BUCKET4;
 
-
         public static int maxRef = MAX_REFS;
         public static int numThreads = DEFAULT_THREADS;
-        public static int threadIdleTime = THREAD_IDLE_TIME;//milliseconds
+        public static int threadIdleTime = THREAD_IDLE_TIME; //milliseconds
         public static int randomSeed;
 
         public static ObjArray objectCollection;
@@ -101,28 +99,27 @@ namespace StressAllocator
 
         public static System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
         public static Object objLock = new Object();
-        private static bool s_noLocks = false;  //for the option to not use locks when accessing objects.
+        private static bool s_noLocks = false; //for the option to not use locks when accessing objects.
 
         //keeping track of status:
         public static UInt64 current_TotalObjCount;
         public static UInt64 current_pinObjCount;
-        public static UInt64[] current_bucketObjCount = new UInt64[SIZEBUCKET_COUNT];  //how many objects are in each bucket
+        public static UInt64[] current_bucketObjCount = new UInt64[SIZEBUCKET_COUNT]; //how many objects are in each bucket
         public static UInt64 current_LOHObjects = 0;
         public static bool testDone = false;
         //for status output:
         //keep track of the collection count for generations 0, 1, 2
         public static int[] currentCollections = new int[3];
-        public static int outputFrequency = 0; //after how many iterations the data is printed 
+        public static int outputFrequency = 0; //after how many iterations the data is printed
         public static System.TimeSpan totalTime;
         //weak ref array that keeps track of all objects
         public static WeakReferenceCollection WR_All = new WeakReferenceCollection();
         public static ObjectWrapper dummyObject;
-        public static int pointerSize = 4;  //bytes
+        public static int pointerSize = 4; //bytes
         [ThreadStatic]
         public static Random Rand;
 
-
-        //This is because Random is not thread safe and it stops returning a random number after a while 
+        //This is because Random is not thread safe and it stops returning a random number after a while
         //public static int GetRandomNumber(int min, int max)
         //{
         //    lock(objLock)
@@ -143,15 +140,17 @@ namespace StressAllocator
             {
                 //First find what bucket to assign
                 //find current percentage for bucket i; if smaller than target percentage, assign to this bucket
-                if ((float)current_bucketObjCount[i] * 100.0F / (float)current_TotalObjCount < sizeBuckets[i].percentage)
-                {
+                if (
+                    (float)current_bucketObjCount[i] * 100.0F / (float)current_TotalObjCount
+                    < sizeBuckets[i].percentage
+                ) {
                     size = Rand.Next(sizeBuckets[i].minsize, sizeBuckets[i].maxsize);
                     //Console.WriteLine("bucket={0}, size {1}", i, size);
                     current_bucketObjCount[i]++;
                     break;
                 }
             }
-            if (size == 0)  //buckets are full; assign to LOH
+            if (size == 0) //buckets are full; assign to LOH
             {
                 isLOHObject = true;
                 size = Rand.Next(85000, 130000);
@@ -160,7 +159,7 @@ namespace StressAllocator
             }
             int references = Rand.Next(1, maxRef);
 
-            //decide if to make this object pinned 
+            //decide if to make this object pinned
             bool pin = false;
 
             if ((LOHpin && isLOHObject) || !LOHpin)
@@ -172,7 +171,8 @@ namespace StressAllocator
                 }
                 else
                 {
-                    pinPercentage = (float)current_pinObjCount * 100.0F / (float)current_TotalObjCount;
+                    pinPercentage =
+                        (float)current_pinObjCount * 100.0F / (float)current_TotalObjCount;
                 }
                 if (pinPercentage < percentPinned)
                 {
@@ -180,8 +180,6 @@ namespace StressAllocator
                     current_pinObjCount++;
                 }
             }
-
-
 
             ObjectWrapper myNewObject;
             myNewObject = new ObjectWrapper(lifeSpan, size, pin, references);
@@ -197,7 +195,6 @@ namespace StressAllocator
              */
 
             WR_All.Add(myNewObject);
-
 
             return myNewObject;
         }
@@ -255,7 +252,6 @@ namespace StressAllocator
             {
                 Thread thread = new Thread(RunTest);
 
-
                 threadList.Add(thread);
                 thread.Start(i);
             }
@@ -268,7 +264,6 @@ namespace StressAllocator
 
             return 100;
         }
-
 
         public static void RunTest(object threadInfoObj)
         {
@@ -287,7 +282,9 @@ namespace StressAllocator
             }
 
             int begin = threadIndex * (objCount / numThreads);
-            Console.WriteLine("thread " + threadIndex + "; allocating " + objPerThread + " objects;");
+            Console.WriteLine(
+                "thread " + threadIndex + "; allocating " + objPerThread + " objects;"
+            );
             int beginIndex = threadIndex * (objCount / numThreads);
             for (int i = beginIndex; i < beginIndex + objPerThread; i++)
             {
@@ -362,7 +359,6 @@ namespace StressAllocator
             }
         }
 
-
         public static void RemoveExpiredObjects(object threadInfoObj)
         {
             long previousTime = 0;
@@ -389,7 +385,6 @@ namespace StressAllocator
                 WR_All.RemoveDeadObjects();
             }
         }
-
 
         public static void OutputGCStats(int iterations)
         {
@@ -506,49 +501,68 @@ namespace StressAllocator
                     //          currentArgValue = args[++i];
                     //          maxRef = Int32.Parse(currentArgValue);
                     //      }
-                    else if (String.Compare(currentArg.ToLower(), "threads") == 0 || String.Compare(currentArg, "t") == 0)
-                    {
+                    else if (
+                        String.Compare(currentArg.ToLower(), "threads") == 0
+                        || String.Compare(currentArg, "t") == 0
+                    ) {
                         currentArgValue = args[++i];
                         numThreads = Int32.Parse(currentArgValue);
                     }
-                    else if (String.Compare(currentArg.ToLower(), "idletime") == 0 || String.Compare(currentArg, "t") == 0)
-                    {
+                    else if (
+                        String.Compare(currentArg.ToLower(), "idletime") == 0
+                        || String.Compare(currentArg, "t") == 0
+                    ) {
                         currentArgValue = args[++i];
                         threadIdleTime = Int32.Parse(currentArgValue);
                     }
                     else if (String.Compare(currentArg.ToLower(), "pinned") == 0)
                     {
                         currentArgValue = args[++i];
-                        percentPinned = float.Parse(currentArgValue, System.Globalization.CultureInfo.InvariantCulture);
+                        percentPinned = float.Parse(
+                            currentArgValue,
+                            System.Globalization.CultureInfo.InvariantCulture
+                        );
                     }
                     else if (String.Compare(currentArg.ToLower(), "usepoh") == 0)
                     {
                         currentArgValue = args[++i];
                         usePOH = bool.Parse(currentArgValue);
                     }
-                    else if (String.Compare(currentArg.ToLower(), "lohpin") == 0)  //for LOH compacting testing, this is the option to apply the pinning percentage to LOH
+                    else if (String.Compare(currentArg.ToLower(), "lohpin") == 0) //for LOH compacting testing, this is the option to apply the pinning percentage to LOH
                     {
                         LOHpin = true;
                     }
                     else if (String.Compare(currentArg.ToLower(), "bucket1") == 0)
                     {
                         currentArgValue = args[++i];
-                        percentBucket1 = float.Parse(currentArgValue, System.Globalization.CultureInfo.InvariantCulture);
+                        percentBucket1 = float.Parse(
+                            currentArgValue,
+                            System.Globalization.CultureInfo.InvariantCulture
+                        );
                     }
                     else if (String.Compare(currentArg.ToLower(), "bucket2") == 0)
                     {
                         currentArgValue = args[++i];
-                        percentBucket2 = float.Parse(currentArgValue, System.Globalization.CultureInfo.InvariantCulture);
+                        percentBucket2 = float.Parse(
+                            currentArgValue,
+                            System.Globalization.CultureInfo.InvariantCulture
+                        );
                     }
                     else if (String.Compare(currentArg.ToLower(), "bucket3") == 0)
                     {
                         currentArgValue = args[++i];
-                        percentBucket3 = float.Parse(currentArgValue, System.Globalization.CultureInfo.InvariantCulture);
+                        percentBucket3 = float.Parse(
+                            currentArgValue,
+                            System.Globalization.CultureInfo.InvariantCulture
+                        );
                     }
                     else if (String.Compare(currentArg.ToLower(), "bucket4") == 0)
                     {
                         currentArgValue = args[++i];
-                        percentBucket4 = float.Parse(currentArgValue, System.Globalization.CultureInfo.InvariantCulture);
+                        percentBucket4 = float.Parse(
+                            currentArgValue,
+                            System.Globalization.CultureInfo.InvariantCulture
+                        );
                     }
                     else if (String.Compare(currentArg.ToLower(), "nolocks") == 0)
                     {
@@ -588,8 +602,14 @@ namespace StressAllocator
             }
 
             //do some basic checking of the arguments
-            if (countIters < 1 || numThreads < 1 || minLife < 1 || maxLife < 1 || objCount < 1 || outputFrequency < 0)
-            {
+            if (
+                countIters < 1
+                || numThreads < 1
+                || minLife < 1
+                || maxLife < 1
+                || objCount < 1
+                || outputFrequency < 0
+            ) {
                 Console.WriteLine("Incorrect values for arguments");
                 return false;
             }
@@ -626,40 +646,78 @@ namespace StressAllocator
             return true;
         }
 
-
         public static void Usage()
         {
             Console.WriteLine("GCSimulator [options]");
             Console.WriteLine("\nOptions");
             Console.WriteLine("-? Display the usage and exit");
-            Console.WriteLine("-i [-iter] <num iterations> : specify number of iterations for the test, default is " + countIters);
-            Console.WriteLine("-t <number of threads> : specifiy number of threads, default is " + numThreads);
-            Console.WriteLine("-minlife  <milliseconds> : minimum object lifetime, default is " + minLife);
-            Console.WriteLine("-maxlife  <milliseconds> : maximum object lifetime, default is " + maxLife);
-            Console.WriteLine("-objcount <count> : how many objects are initially allocated, default is " + objCount);
-            Console.WriteLine("-pinned <percent of pinned objects> : specify the percentage of data that we want to pin (number from 0 to 100), default is " + percentPinned);
-            Console.WriteLine("-usepoh <true/false> : specify whether to use poh for pinning, default is " + false);
-            Console.WriteLine("-bucket1 <percentage> : specify the percentage of be in size bucket1(" + BUCKET1_MIN + "bytes to " + BUCKET2_MIN + "bytes), default is " + DEFAULT_BUCKET1);
-            Console.WriteLine("-bucket2 <percentage> : specify the percentage of be in size bucket2(" + BUCKET2_MIN + "bytes to " + BUCKET3_MIN + "bytes), default is " + DEFAULT_BUCKET2);
-            Console.WriteLine("-bucket3 <percentage> : specify the percentage of be in size bucket3(" + BUCKET3_MIN + "bytes to " + BUCKET4_MIN + "bytes), default is " + DEFAULT_BUCKET3);
-            Console.WriteLine("-bucket4 <percentage> : specify the percentage of be in size bucket4(" + BUCKET4_MIN + "bytes to " + BUCKETS_MAX + "bytes), default is " + DEFAULT_BUCKET4);
+            Console.WriteLine(
+                "-i [-iter] <num iterations> : specify number of iterations for the test, default is "
+                    + countIters
+            );
+            Console.WriteLine(
+                "-t <number of threads> : specifiy number of threads, default is " + numThreads
+            );
+            Console.WriteLine(
+                "-minlife  <milliseconds> : minimum object lifetime, default is " + minLife
+            );
+            Console.WriteLine(
+                "-maxlife  <milliseconds> : maximum object lifetime, default is " + maxLife
+            );
+            Console.WriteLine(
+                "-objcount <count> : how many objects are initially allocated, default is "
+                    + objCount
+            );
+            Console.WriteLine(
+                "-pinned <percent of pinned objects> : specify the percentage of data that we want to pin (number from 0 to 100), default is "
+                    + percentPinned
+            );
+            Console.WriteLine(
+                "-usepoh <true/false> : specify whether to use poh for pinning, default is " + false
+            );
+            Console.WriteLine(
+                "-bucket1 <percentage> : specify the percentage of be in size bucket1("
+                    + BUCKET1_MIN
+                    + "bytes to "
+                    + BUCKET2_MIN
+                    + "bytes), default is "
+                    + DEFAULT_BUCKET1
+            );
+            Console.WriteLine(
+                "-bucket2 <percentage> : specify the percentage of be in size bucket2("
+                    + BUCKET2_MIN
+                    + "bytes to "
+                    + BUCKET3_MIN
+                    + "bytes), default is "
+                    + DEFAULT_BUCKET2
+            );
+            Console.WriteLine(
+                "-bucket3 <percentage> : specify the percentage of be in size bucket3("
+                    + BUCKET3_MIN
+                    + "bytes to "
+                    + BUCKET4_MIN
+                    + "bytes), default is "
+                    + DEFAULT_BUCKET3
+            );
+            Console.WriteLine(
+                "-bucket4 <percentage> : specify the percentage of be in size bucket4("
+                    + BUCKET4_MIN
+                    + "bytes to "
+                    + BUCKETS_MAX
+                    + "bytes), default is "
+                    + DEFAULT_BUCKET4
+            );
             //     Console.WriteLine("-collectiontype  <List|Tree|Graph> : specify whether to use a list, tree or graph, default is " + CollectionTypeToString(objectCollectionType));
             //     Console.WriteLine("-maxref <number of references> : maximum number of references an object can have(only for tree and graph collection type), default is " + maxRef);
             Console.WriteLine("-out <iterations> : after how many iterations to output data");
             Console.WriteLine("-randomseed <seed> : random seed(for repro)");
         }
 
-
-
-
-
-
-
         public class ObjectWrapper
         {
             public GCHandle m_pinnedHandle;
             public bool m_pinned = false;
-            public int m_lifeTime;  //milliseconds
+            public int m_lifeTime; //milliseconds
             public long m_age = 0;
             public long m_creationTime;
             //           public Object[] objRef = new Object[maxRef]; //references to other objects
@@ -668,7 +726,6 @@ namespace StressAllocator
             public Object[] m_data;
             protected byte[] m_pinnedData;
             public int m_dataSize;
-
 
             public ObjectWrapper(int lifetime, int datasize, bool pinned, int references)
             {
@@ -699,14 +756,14 @@ namespace StressAllocator
                         int fromIndex = Rand.Next(0, m_data.Length);
                         switch (option)
                         {
-                            case 0:  //objects in the (strong reference) collection
+                            case 0: //objects in the (strong reference) collection
                                 toIndex = Rand.Next(0, objectCollection.Count);
                                 ObjectWrapper ow = objectCollection.GetObjectAt(toIndex);
                                 if (ow != dummyObject)
                                     m_data[fromIndex] = ow;
                                 break;
 
-                            case 1:  //objects in the weak reference collection
+                            case 1: //objects in the weak reference collection
                                 toIndex = Rand.Next(0, WR_All.Count);
                                 m_data[fromIndex] = WR_All.GetObjectAt(toIndex);
                                 break;
@@ -718,7 +775,7 @@ namespace StressAllocator
 
                     WR_All.Add(m_data);
                 }
-                else   //pinned
+                else //pinned
                 {
                     m_pinnedData = System.GC.AllocateArray<byte>(m_dataSize, pinned: usePOH);
                     for (int i = 0; i < m_dataSize; i += 1000)
@@ -745,8 +802,6 @@ namespace StressAllocator
                 CleanUp();
             }
         }
-
-
 
         /*
                 /////////////////////////// Collection definition
@@ -799,7 +854,8 @@ namespace StressAllocator
             {
                 if (index >= _size)
                     return false;
-                if (/*m_Array[index] == null || */_array[index] == dummyObject)
+                if ( /*m_Array[index] == null || */
+                    _array[index] == dummyObject)
                 {
                     _array[index] = CreateObject();
                     return true;
@@ -845,13 +901,10 @@ namespace StressAllocator
 
             public int Size
             {
-                get
-                {
-                    return _size;
-                }
+                get { return _size; }
             }
 
-            //One pass through the collection, updates objects'age 
+            //One pass through the collection, updates objects'age
             public void UpdateObjectsAge(long elapsedMsec)
             {
                 for (int i = 0; i < _size; i++)
@@ -860,7 +913,6 @@ namespace StressAllocator
                     o.m_age += (int)elapsedMsec;
                 }
             }
-
 
             //One pass through the collection, removes expired ones
             public void RemoveExpiredObjects()

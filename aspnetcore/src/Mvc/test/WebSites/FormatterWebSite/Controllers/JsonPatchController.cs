@@ -36,14 +36,8 @@ namespace FormatterWebSite.Controllers
                 Name = "Book1",
                 Reviews = new List<Review>()
                 {
-                    new Review
-                    {
-                         Rating = 4
-                    },
-                    new Review
-                    {
-                        Rating = 3
-                    }
+                    new Review { Rating = 4 },
+                    new Review { Rating = 3 }
                 }
             };
         }

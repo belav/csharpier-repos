@@ -11,41 +11,119 @@ namespace System.Security.Cryptography
     {
         // DigestInfo header values taken from https://tools.ietf.org/html/rfc3447#section-9.2, Note 1.
         private static readonly byte[] s_digestInfoMD5 =
-            {
-                0x30, 0x20, 0x30, 0x0C, 0x06, 0x08, 0x2A, 0x86,
-                0x48, 0x86, 0xF7, 0x0D, 0x02, 0x05, 0x05, 0x00,
-                0x04, 0x10,
-            };
+        {
+            0x30,
+            0x20,
+            0x30,
+            0x0C,
+            0x06,
+            0x08,
+            0x2A,
+            0x86,
+            0x48,
+            0x86,
+            0xF7,
+            0x0D,
+            0x02,
+            0x05,
+            0x05,
+            0x00,
+            0x04,
+            0x10,
+        };
 
         private static readonly byte[] s_digestInfoSha1 =
-            {
-                0x30, 0x21, 0x30, 0x09, 0x06, 0x05, 0x2B, 0x0E, 0x03,
-                0x02, 0x1A, 0x05, 0x00, 0x04, 0x14,
-            };
+        {
+            0x30,
+            0x21,
+            0x30,
+            0x09,
+            0x06,
+            0x05,
+            0x2B,
+            0x0E,
+            0x03,
+            0x02,
+            0x1A,
+            0x05,
+            0x00,
+            0x04,
+            0x14,
+        };
 
         private static readonly byte[] s_digestInfoSha256 =
-            {
-                0x30, 0x31, 0x30, 0x0D, 0x06, 0x09, 0x60, 0x86, 0x48,
-                0x01, 0x65, 0x03, 0x04, 0x02, 0x01, 0x05, 0x00, 0x04,
-                0x20,
-            };
+        {
+            0x30,
+            0x31,
+            0x30,
+            0x0D,
+            0x06,
+            0x09,
+            0x60,
+            0x86,
+            0x48,
+            0x01,
+            0x65,
+            0x03,
+            0x04,
+            0x02,
+            0x01,
+            0x05,
+            0x00,
+            0x04,
+            0x20,
+        };
 
         private static readonly byte[] s_digestInfoSha384 =
-            {
-                0x30, 0x41, 0x30, 0x0D, 0x06, 0x09, 0x60, 0x86, 0x48,
-                0x01, 0x65, 0x03, 0x04, 0x02, 0x02, 0x05, 0x00, 0x04,
-                0x30,
-            };
+        {
+            0x30,
+            0x41,
+            0x30,
+            0x0D,
+            0x06,
+            0x09,
+            0x60,
+            0x86,
+            0x48,
+            0x01,
+            0x65,
+            0x03,
+            0x04,
+            0x02,
+            0x02,
+            0x05,
+            0x00,
+            0x04,
+            0x30,
+        };
 
         private static readonly byte[] s_digestInfoSha512 =
-            {
-                0x30, 0x51, 0x30, 0x0D, 0x06, 0x09, 0x60, 0x86, 0x48,
-                0x01, 0x65, 0x03, 0x04, 0x02, 0x03, 0x05, 0x00, 0x04,
-                0x40,
-            };
+        {
+            0x30,
+            0x51,
+            0x30,
+            0x0D,
+            0x06,
+            0x09,
+            0x60,
+            0x86,
+            0x48,
+            0x01,
+            0x65,
+            0x03,
+            0x04,
+            0x02,
+            0x03,
+            0x05,
+            0x00,
+            0x04,
+            0x40,
+        };
 
-        private static readonly ConcurrentDictionary<HashAlgorithmName, RsaPaddingProcessor> s_lookup =
-            new ConcurrentDictionary<HashAlgorithmName, RsaPaddingProcessor>();
+        private static readonly ConcurrentDictionary<
+            HashAlgorithmName,
+            RsaPaddingProcessor
+        > s_lookup = new ConcurrentDictionary<HashAlgorithmName, RsaPaddingProcessor>();
 
         private readonly HashAlgorithmName _hashAlgorithmName;
         private readonly int _hLen;
@@ -54,8 +132,8 @@ namespace System.Security.Cryptography
         private RsaPaddingProcessor(
             HashAlgorithmName hashAlgorithmName,
             int hLen,
-            ReadOnlyMemory<byte> digestInfoPrefix)
-        {
+            ReadOnlyMemory<byte> digestInfoPrefix
+        ) {
             _hashAlgorithmName = hashAlgorithmName;
             _hLen = hLen;
             _digestInfoPrefix = digestInfoPrefix;
@@ -110,18 +188,25 @@ namespace System.Security.Cryptography
 
                         if (hasher.TryGetHashAndReset(stackDest, out int bytesWritten))
                         {
-                            return new RsaPaddingProcessor(hashAlgorithmName, bytesWritten, digestInfoPrefix);
+                            return new RsaPaddingProcessor(
+                                hashAlgorithmName,
+                                bytesWritten,
+                                digestInfoPrefix
+                            );
                         }
 
                         byte[] big = hasher.GetHashAndReset();
-                        return new RsaPaddingProcessor(hashAlgorithmName, big.Length, digestInfoPrefix);
+                        return new RsaPaddingProcessor(
+                            hashAlgorithmName,
+                            big.Length,
+                            digestInfoPrefix
+                        );
                     }
-                });
+                }
+            );
         }
 
-        internal static void PadPkcs1Encryption(
-            ReadOnlySpan<byte> source,
-            Span<byte> destination)
+        internal static void PadPkcs1Encryption(ReadOnlySpan<byte> source, Span<byte> destination)
         {
             // https://tools.ietf.org/html/rfc3447#section-7.2.1
 
@@ -147,9 +232,7 @@ namespace System.Security.Cryptography
             source.CopyTo(mInEM);
         }
 
-        internal void PadPkcs1Signature(
-            ReadOnlySpan<byte> source,
-            Span<byte> destination)
+        internal void PadPkcs1Signature(ReadOnlySpan<byte> source, Span<byte> destination)
         {
             // https://tools.ietf.org/html/rfc3447#section-9.2
 
@@ -185,9 +268,7 @@ namespace System.Security.Cryptography
             source.CopyTo(destination.Slice(paddingLength + 3 + digestInfoPrefix.Length));
         }
 
-        internal void PadOaep(
-            ReadOnlySpan<byte> source,
-            Span<byte> destination)
+        internal void PadOaep(ReadOnlySpan<byte> source, Span<byte> destination)
         {
             // https://tools.ietf.org/html/rfc3447#section-7.1.1
 
@@ -206,7 +287,8 @@ namespace System.Security.Cryptography
                 if (source.Length > maxInput)
                 {
                     throw new CryptographicException(
-                        SR.Format(SR.Cryptography_Encryption_MessageTooLong, maxInput));
+                        SR.Format(SR.Cryptography_Encryption_MessageTooLong, maxInput)
+                    );
                 }
 
                 // The final message (step 2(i)) will be
@@ -278,8 +360,8 @@ namespace System.Security.Cryptography
         internal bool DepadOaep(
             ReadOnlySpan<byte> source,
             Span<byte> destination,
-            out int bytesWritten)
-        {
+            out int bytesWritten
+        ) {
             // https://tools.ietf.org/html/rfc3447#section-7.1.2
             using (IncrementalHash hasher = IncrementalHash.CreateHash(_hashAlgorithmName))
             {
@@ -362,6 +444,7 @@ namespace System.Security.Cryptography
                         return false;
                     }
                 }
+
                 finally
                 {
                     CryptoPool.Return(tmp, source.Length);
@@ -557,6 +640,7 @@ namespace System.Security.Cryptography
                     return h.SequenceEqual(hPrime);
                 }
             }
+
             finally
             {
                 CryptographicOperations.ZeroMemory(dbMask);

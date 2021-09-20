@@ -16,8 +16,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class DynamicKeywordRecommender : IKeywordRecommender<CSharpSyntaxContext>
     {
-        private static bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-        {
+        private static bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) {
             if (context.IsPreProcessorDirectiveContext)
             {
                 return false;
@@ -26,16 +29,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             return IsDynamicTypeContext(position, context, cancellationToken);
         }
 
-        public ImmutableArray<RecommendedKeyword> RecommendKeywords(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-        {
+        public ImmutableArray<RecommendedKeyword> RecommendKeywords(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) {
             return IsValidContext(position, context, cancellationToken)
-                ? ImmutableArray.Create(new RecommendedKeyword("dynamic"))
-                : ImmutableArray<RecommendedKeyword>.Empty;
+              ? ImmutableArray.Create(new RecommendedKeyword("dynamic"))
+              : ImmutableArray<RecommendedKeyword>.Empty;
         }
 
         protected static bool IsDynamicTypeContext(
-            int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-        {
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) {
             var syntaxTree = context.SyntaxTree;
 
             // first do quick exit check
@@ -44,32 +52,40 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 return false;
             }
 
-            return
-                context.IsStatementContext ||
-                context.IsGlobalStatementContext ||
-                context.IsDefiniteCastTypeContext ||
-                syntaxTree.IsPossibleCastTypeContext(position, context.LeftToken, cancellationToken) ||
-                context.IsObjectCreationTypeContext ||
-                context.IsGenericTypeArgumentContext ||
-                context.IsFunctionPointerTypeArgumentContext ||
-                context.IsIsOrAsTypeContext ||
-                syntaxTree.IsDefaultExpressionContext(position, context.LeftToken) ||
-                syntaxTree.IsAfterKeyword(position, SyntaxKind.ConstKeyword, cancellationToken) ||
-                IsAfterRefTypeContext(context) ||
-                context.IsLocalVariableDeclarationContext ||
-                context.IsParameterTypeContext ||
-                context.IsPossibleLambdaOrAnonymousMethodParameterTypeContext ||
-                context.IsDelegateReturnTypeContext ||
-                syntaxTree.IsGlobalMemberDeclarationContext(position, SyntaxKindSet.AllGlobalMemberModifiers, cancellationToken) ||
-                context.IsMemberDeclarationContext(
+            return context.IsStatementContext
+                || context.IsGlobalStatementContext
+                || context.IsDefiniteCastTypeContext
+                || syntaxTree.IsPossibleCastTypeContext(
+                    position,
+                    context.LeftToken,
+                    cancellationToken
+                )
+                || context.IsObjectCreationTypeContext
+                || context.IsGenericTypeArgumentContext
+                || context.IsFunctionPointerTypeArgumentContext
+                || context.IsIsOrAsTypeContext
+                || syntaxTree.IsDefaultExpressionContext(position, context.LeftToken)
+                || syntaxTree.IsAfterKeyword(position, SyntaxKind.ConstKeyword, cancellationToken)
+                || IsAfterRefTypeContext(context)
+                || context.IsLocalVariableDeclarationContext
+                || context.IsParameterTypeContext
+                || context.IsPossibleLambdaOrAnonymousMethodParameterTypeContext
+                || context.IsDelegateReturnTypeContext
+                || syntaxTree.IsGlobalMemberDeclarationContext(
+                    position,
+                    SyntaxKindSet.AllGlobalMemberModifiers,
+                    cancellationToken
+                )
+                || context.IsMemberDeclarationContext(
                     validModifiers: SyntaxKindSet.AllMemberModifiers,
                     validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
                     canBePartial: false,
-                    cancellationToken: cancellationToken);
+                    cancellationToken: cancellationToken
+                );
         }
 
-        private static bool IsAfterRefTypeContext(CSharpSyntaxContext context)
-            => context.TargetToken.IsKind(SyntaxKind.RefKeyword, SyntaxKind.ReadOnlyKeyword) &&
-               context.TargetToken.Parent.IsKind(SyntaxKind.RefType);
+        private static bool IsAfterRefTypeContext(CSharpSyntaxContext context) =>
+            context.TargetToken.IsKind(SyntaxKind.RefKeyword, SyntaxKind.ReadOnlyKeyword)
+            && context.TargetToken.Parent.IsKind(SyntaxKind.RefType);
     }
 }

@@ -22,8 +22,15 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="authenticationScheme">The authentication scheme.</param>
         /// <param name="configureOptions">A delegate to configure <see cref="OAuthOptions"/>.</param>
         /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
-        public static AuthenticationBuilder AddOAuth(this AuthenticationBuilder builder, string authenticationScheme, Action<OAuthOptions> configureOptions)
-            => builder.AddOAuth<OAuthOptions, OAuthHandler<OAuthOptions>>(authenticationScheme, configureOptions);
+        public static AuthenticationBuilder AddOAuth(
+            this AuthenticationBuilder builder,
+            string authenticationScheme,
+            Action<OAuthOptions> configureOptions
+        ) =>
+            builder.AddOAuth<OAuthOptions, OAuthHandler<OAuthOptions>>(
+                authenticationScheme,
+                configureOptions
+            );
 
         /// <summary>
         /// Adds OAuth 2.0 based authentication to <see cref="AuthenticationBuilder"/> using the specified authentication scheme.
@@ -33,8 +40,17 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="displayName">A display name for the authentication handler.</param>
         /// <param name="configureOptions">A delegate to configure <see cref="OAuthOptions"/>.</param>
         /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
-        public static AuthenticationBuilder AddOAuth(this AuthenticationBuilder builder, string authenticationScheme, string displayName, Action<OAuthOptions> configureOptions)
-            => builder.AddOAuth<OAuthOptions, OAuthHandler<OAuthOptions>>(authenticationScheme, displayName, configureOptions);
+        public static AuthenticationBuilder AddOAuth(
+            this AuthenticationBuilder builder,
+            string authenticationScheme,
+            string displayName,
+            Action<OAuthOptions> configureOptions
+        ) =>
+            builder.AddOAuth<OAuthOptions, OAuthHandler<OAuthOptions>>(
+                authenticationScheme,
+                displayName,
+                configureOptions
+            );
 
         /// <summary>
         /// Adds OAuth 2.0 based authentication to <see cref="AuthenticationBuilder"/> using the specified authentication scheme.
@@ -43,10 +59,20 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="authenticationScheme">The authentication scheme.</param>
         /// <param name="configureOptions">A delegate to configure the handler specific options.</param>
         /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
-        public static AuthenticationBuilder AddOAuth<TOptions, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]THandler>(this AuthenticationBuilder builder, string authenticationScheme, Action<TOptions> configureOptions)
-            where TOptions : OAuthOptions, new()
-            where THandler : OAuthHandler<TOptions>
-            => builder.AddOAuth<TOptions, THandler>(authenticationScheme, OAuthDefaults.DisplayName, configureOptions);
+        public static AuthenticationBuilder AddOAuth<
+            TOptions,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] THandler
+        >(
+            this AuthenticationBuilder builder,
+            string authenticationScheme,
+            Action<TOptions> configureOptions
+        ) where TOptions : OAuthOptions, new()
+          where THandler : OAuthHandler<TOptions> =>
+            builder.AddOAuth<TOptions, THandler>(
+                authenticationScheme,
+                OAuthDefaults.DisplayName,
+                configureOptions
+            );
 
         /// <summary>
         /// Adds OAuth 2.0 based authentication to <see cref="AuthenticationBuilder"/> using the specified authentication scheme.
@@ -56,12 +82,28 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="displayName">A display name for the authentication handler.</param>
         /// <param name="configureOptions">A delegate to configure the handler specific options.</param>
         /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
-        public static AuthenticationBuilder AddOAuth<TOptions, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]THandler>(this AuthenticationBuilder builder, string authenticationScheme, string displayName, Action<TOptions> configureOptions)
-            where TOptions : OAuthOptions, new()
-            where THandler : OAuthHandler<TOptions>
+        public static AuthenticationBuilder AddOAuth<
+            TOptions,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] THandler
+        >(
+            this AuthenticationBuilder builder,
+            string authenticationScheme,
+            string displayName,
+            Action<TOptions> configureOptions
+        ) where TOptions : OAuthOptions, new()
+          where THandler : OAuthHandler<TOptions>
         {
-            builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IPostConfigureOptions<TOptions>, OAuthPostConfigureOptions<TOptions, THandler>>());
-            return builder.AddRemoteScheme<TOptions, THandler>(authenticationScheme, displayName, configureOptions);
+            builder.Services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IPostConfigureOptions<TOptions>,
+                    OAuthPostConfigureOptions<TOptions, THandler>
+                >()
+            );
+            return builder.AddRemoteScheme<TOptions, THandler>(
+                authenticationScheme,
+                displayName,
+                configureOptions
+            );
         }
     }
 }

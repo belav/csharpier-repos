@@ -8,7 +8,7 @@ class Program
     static int Main()
     {
         var matrix = new double[128 * 128];
-        
+
         GC.Collect(GC.MaxGeneration);
 
         GC.KeepAlive(matrix);

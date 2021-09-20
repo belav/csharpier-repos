@@ -11,8 +11,8 @@ namespace System.Text.Json.Serialization.Tests
     {
         public enum MyBoolEnum
         {
-            True = 1,   // JSON is "TRUE"
-            False = 2,  // JSON is "FALSE"
+            True = 1, // JSON is "TRUE"
+            False = 2, // JSON is "FALSE"
             Unknown = 3 // JSON is "?"
         }
 
@@ -21,8 +21,11 @@ namespace System.Text.Json.Serialization.Tests
         {
             // CanConvert does not need to be implemented here since we only convert MyBoolEnum.
 
-            public override MyBoolEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            {
+            public override MyBoolEnum Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) {
                 string enumValue = reader.GetString();
                 if (enumValue == "TRUE")
                 {
@@ -42,8 +45,11 @@ namespace System.Text.Json.Serialization.Tests
                 throw new JsonException();
             }
 
-            public override void Write(Utf8JsonWriter writer, MyBoolEnum value, JsonSerializerOptions options)
-            {
+            public override void Write(
+                Utf8JsonWriter writer,
+                MyBoolEnum value,
+                JsonSerializerOptions options
+            ) {
                 if (value is MyBoolEnum.True)
                 {
                     writer.WriteStringValue("TRUE");
@@ -124,29 +130,34 @@ namespace System.Text.Json.Serialization.Tests
                 return typeToConvert.IsEnum;
             }
 
-            public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
-            {
+            public override JsonConverter CreateConverter(
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) {
                 JsonConverter converter = (JsonConverter)Activator.CreateInstance(
                     typeof(JsonConverterEnumArray<>).MakeGenericType(typeToConvert),
                     BindingFlags.Instance | BindingFlags.Public,
                     binder: null,
                     args: null,
-                    culture: null);
+                    culture: null
+                );
 
                 return converter;
             }
         }
 
-        internal class JsonConverterEnumArray<T> : JsonConverter<T>
-            where T : struct, Enum
+        internal class JsonConverterEnumArray<T> : JsonConverter<T> where T : struct, Enum
         {
             public override bool CanConvert(Type type)
             {
                 return type.IsEnum;
             }
 
-            public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            {
+            public override T Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) {
                 if (reader.TokenType != JsonTokenType.StartArray)
                 {
                     throw new JsonException();
@@ -190,8 +201,11 @@ namespace System.Text.Json.Serialization.Tests
                 return value;
             }
 
-            public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
-            {
+            public override void Write(
+                Utf8JsonWriter writer,
+                T value,
+                JsonSerializerOptions options
+            ) {
                 string[] enumString = value.ToString().Split(',');
 
                 writer.WriteStartArray();
@@ -255,8 +269,12 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [Theory]
-        [InlineData(@"{""Connections"":[{""Device"":[""PC"",""Tablet""]},{""Device"":[""PC"",""Laptop""]}]}")]
-        [InlineData(@"{""Connections"":[{""Device"":[""Tablet"",""PC""]},{""Device"":[""Laptop"",""PC""]}]}")]
+        [InlineData(
+            @"{""Connections"":[{""Device"":[""PC"",""Tablet""]},{""Device"":[""PC"",""Laptop""]}]}"
+        )]
+        [InlineData(
+            @"{""Connections"":[{""Device"":[""Tablet"",""PC""]},{""Device"":[""Laptop"",""PC""]}]}"
+        )]
         public static void EnumArray(string json)
         {
             ConnectionList obj;

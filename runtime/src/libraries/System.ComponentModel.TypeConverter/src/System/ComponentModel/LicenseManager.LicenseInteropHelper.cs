@@ -88,8 +88,8 @@ namespace System.ComponentModel
                 LicenseContext context,
                 Type type,
                 out License license,
-                out string licenseKey)
-            {
+                out string licenseKey
+            ) {
                 if (context == null)
                 {
                     context = LicenseManager.CurrentContext;
@@ -101,14 +101,18 @@ namespace System.ComponentModel
                     instance: null,
                     allowExceptions: false,
                     out license,
-                    out licenseKey);
+                    out licenseKey
+                );
             }
 
             // The CLR invokes this when instantiating an unmanaged COM
             // object. The purpose is to decide which IClassFactory method to
             // use.
-            public static LicenseContext GetCurrentContextInfo(Type type, out bool isDesignTime, out string key)
-            {
+            public static LicenseContext GetCurrentContextInfo(
+                Type type,
+                out bool isDesignTime,
+                out string key
+            ) {
                 LicenseContext licContext = LicenseManager.CurrentContext;
                 isDesignTime = licContext.UsageMode == LicenseUsageMode.Designtime;
                 key = null;

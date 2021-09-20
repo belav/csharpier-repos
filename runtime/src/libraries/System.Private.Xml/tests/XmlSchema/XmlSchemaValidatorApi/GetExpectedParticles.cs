@@ -13,7 +13,7 @@ namespace System.Xml.Tests
     public class TCGetExpectedParticles : CXmlSchemaValidatorTestCase
     {
         private ITestOutputHelper _output;
-        public TCGetExpectedParticles(ITestOutputHelper output): base(output)
+        public TCGetExpectedParticles(ITestOutputHelper output) : base(output)
         {
             _output = output;
         }
@@ -35,10 +35,10 @@ namespace System.Xml.Tests
             {
                 val.Initialize();
                 val.EndValidation();
-                CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] { });
+                CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] {  });
             }
             else
-                CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] { });
+                CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] {  });
 
             return;
         }
@@ -65,7 +65,10 @@ namespace System.Xml.Tests
                 val.ValidateEndOfAttributes(null);
             }
 
-            CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] { new XmlQualifiedName("elem1") });
+            CheckExpectedElements(
+                val.GetExpectedParticles(),
+                new XmlQualifiedName[] { new XmlQualifiedName("elem1") }
+            );
 
             return;
         }
@@ -94,7 +97,7 @@ namespace System.Xml.Tests
                 val.ValidateElement("elem2", "", info);
                 val.SkipToEndElement(info);
 
-                names = new XmlQualifiedName[] { };
+                names = new XmlQualifiedName[] {  };
             }
             else
             {
@@ -128,7 +131,14 @@ namespace System.Xml.Tests
                 val.ValidateEndOfAttributes(null);
             }
 
-            CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] { new XmlQualifiedName("elem1"), new XmlQualifiedName("elem2") });
+            CheckExpectedElements(
+                val.GetExpectedParticles(),
+                new XmlQualifiedName[]
+                {
+                    new XmlQualifiedName("elem1"),
+                    new XmlQualifiedName("elem2")
+                }
+            );
 
             return;
         }
@@ -152,7 +162,7 @@ namespace System.Xml.Tests
             val.ValidateElement(elem, "", info);
             val.SkipToEndElement(info);
 
-            CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] { });
+            CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] {  });
 
             return;
         }
@@ -179,7 +189,14 @@ namespace System.Xml.Tests
                 val.ValidateEndOfAttributes(null);
             }
 
-            CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] { new XmlQualifiedName("elem1"), new XmlQualifiedName("elem2") });
+            CheckExpectedElements(
+                val.GetExpectedParticles(),
+                new XmlQualifiedName[]
+                {
+                    new XmlQualifiedName("elem1"),
+                    new XmlQualifiedName("elem2")
+                }
+            );
 
             return;
         }
@@ -204,7 +221,10 @@ namespace System.Xml.Tests
             val.ValidateElement(elem, "", info);
             val.SkipToEndElement(info);
 
-            CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] { new XmlQualifiedName(notElem) });
+            CheckExpectedElements(
+                val.GetExpectedParticles(),
+                new XmlQualifiedName[] { new XmlQualifiedName(notElem) }
+            );
 
             return;
         }
@@ -227,7 +247,7 @@ namespace System.Xml.Tests
                 val.SkipToEndElement(info);
             }
 
-            CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] { });
+            CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] {  });
 
             return;
         }
@@ -244,7 +264,10 @@ namespace System.Xml.Tests
 
             foreach (string elem in new string[] { "NestedElement", "foo", "bar" })
             {
-                CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] { new XmlQualifiedName(elem) });
+                CheckExpectedElements(
+                    val.GetExpectedParticles(),
+                    new XmlQualifiedName[] { new XmlQualifiedName(elem) }
+                );
 
                 val.ValidateElement(elem, "", info);
                 val.ValidateEndOfAttributes(null);
@@ -253,7 +276,7 @@ namespace System.Xml.Tests
             foreach (string elem in new string[] { "bar", "foo", "NestedElement" })
             {
                 val.ValidateEndElement(info);
-                CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] { });
+                CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] {  });
             }
 
             return;
@@ -269,7 +292,10 @@ namespace System.Xml.Tests
             val.ValidateElement("MinOccurs0Element", "", info);
             val.ValidateEndOfAttributes(null);
 
-            CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] { new XmlQualifiedName("foo"), new XmlQualifiedName("bar") });
+            CheckExpectedElements(
+                val.GetExpectedParticles(),
+                new XmlQualifiedName[] { new XmlQualifiedName("foo"), new XmlQualifiedName("bar") }
+            );
 
             return;
         }
@@ -284,7 +310,10 @@ namespace System.Xml.Tests
             val.ValidateElement("MaxOccurs0Element", "", info);
             val.ValidateEndOfAttributes(null);
 
-            CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] { new XmlQualifiedName("bar") });
+            CheckExpectedElements(
+                val.GetExpectedParticles(),
+                new XmlQualifiedName[] { new XmlQualifiedName("bar") }
+            );
 
             return;
         }
@@ -314,13 +343,19 @@ namespace System.Xml.Tests
                 Assert.Equal(1, result.Length);
                 Assert.True(result[0] is XmlSchemaAny);
                 Assert.Equal("uri:tempuri", (result[0] as XmlSchemaAny).Namespace);
-                Assert.Equal(XmlSchemaContentProcessing.Strict, (result[0] as XmlSchemaAny).ProcessContents);
+                Assert.Equal(
+                    XmlSchemaContentProcessing.Strict,
+                    (result[0] as XmlSchemaAny).ProcessContents
+                );
             }
             else
             {
                 val.ValidateElement("elem1", "uri:tempuri", info);
                 val.SkipToEndElement(info);
-                CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] { new XmlQualifiedName("foo") });
+                CheckExpectedElements(
+                    val.GetExpectedParticles(),
+                    new XmlQualifiedName[] { new XmlQualifiedName("foo") }
+                );
             }
 
             return;
@@ -353,19 +388,31 @@ namespace System.Xml.Tests
                 if (result[0] is XmlSchemaAny)
                 {
                     Assert.Equal("uri:tempuri", (result[0] as XmlSchemaAny).Namespace);
-                    Assert.Equal(XmlSchemaContentProcessing.Strict, (result[0] as XmlSchemaAny).ProcessContents);
+                    Assert.Equal(
+                        XmlSchemaContentProcessing.Strict,
+                        (result[0] as XmlSchemaAny).ProcessContents
+                    );
 
                     Assert.True(result[1] is XmlSchemaElement);
-                    Assert.Equal((result[1] as XmlSchemaElement).QualifiedName, new XmlQualifiedName("foo"));
+                    Assert.Equal(
+                        (result[1] as XmlSchemaElement).QualifiedName,
+                        new XmlQualifiedName("foo")
+                    );
                 }
                 else
                 {
                     Assert.True(result[1] is XmlSchemaAny);
                     Assert.Equal("uri:tempuri", (result[1] as XmlSchemaAny).Namespace);
-                    Assert.Equal(XmlSchemaContentProcessing.Strict, (result[1] as XmlSchemaAny).ProcessContents);
+                    Assert.Equal(
+                        XmlSchemaContentProcessing.Strict,
+                        (result[1] as XmlSchemaAny).ProcessContents
+                    );
 
                     Assert.True(result[0] is XmlSchemaElement);
-                    Assert.Equal((result[0] as XmlSchemaElement).QualifiedName, new XmlQualifiedName("foo"));
+                    Assert.Equal(
+                        (result[0] as XmlSchemaElement).QualifiedName,
+                        new XmlQualifiedName("foo")
+                    );
                 }
             }
             else
@@ -373,7 +420,7 @@ namespace System.Xml.Tests
                 val.ValidateElement("elem1", "uri:tempuri", info);
                 val.SkipToEndElement(info);
 
-                CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] { });
+                CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] {  });
             }
 
             return;
@@ -382,8 +429,9 @@ namespace System.Xml.Tests
         [Theory]
         [InlineData("before")]
         [InlineData("after")]
-        public void CallForSequenceWithChoiceGroup_Before_After_ValidatingGroupMembers(string callOrder)
-        {
+        public void CallForSequenceWithChoiceGroup_Before_After_ValidatingGroupMembers(
+            string callOrder
+        ) {
             XmlSchemaValidator val = CreateValidator(XSDFILE_GET_EXPECTED_PARTICLES);
             XmlSchemaInfo info = new XmlSchemaInfo();
             XmlQualifiedName[] names;
@@ -394,7 +442,11 @@ namespace System.Xml.Tests
 
             if (callOrder == "before")
             {
-                names = new XmlQualifiedName[] { new XmlQualifiedName("g1"), new XmlQualifiedName("g2") };
+                names = new XmlQualifiedName[]
+                {
+                    new XmlQualifiedName("g1"),
+                    new XmlQualifiedName("g2")
+                };
             }
             else
             {
@@ -412,8 +464,9 @@ namespace System.Xml.Tests
         [Theory]
         [InlineData("before")]
         [InlineData("after")]
-        public void CallForChoiceWithSequenceGroup_Before_After_ValidatingGroupMembers(string callOrder)
-        {
+        public void CallForChoiceWithSequenceGroup_Before_After_ValidatingGroupMembers(
+            string callOrder
+        ) {
             XmlSchemaValidator val = CreateValidator(XSDFILE_GET_EXPECTED_PARTICLES);
             XmlSchemaInfo info = new XmlSchemaInfo();
             XmlQualifiedName[] names;
@@ -424,7 +477,11 @@ namespace System.Xml.Tests
 
             if (callOrder == "before")
             {
-                names = new XmlQualifiedName[] { new XmlQualifiedName("g1"), new XmlQualifiedName("foo") };
+                names = new XmlQualifiedName[]
+                {
+                    new XmlQualifiedName("g1"),
+                    new XmlQualifiedName("foo")
+                };
             }
             else
             {
@@ -442,8 +499,9 @@ namespace System.Xml.Tests
         [Theory]
         [InlineData("before")]
         [InlineData("after")]
-        public void CallForExtendedSequence_Before_After_ValidatingSeqOrAllBaseElements(string callOrder)
-        {
+        public void CallForExtendedSequence_Before_After_ValidatingSeqOrAllBaseElements(
+            string callOrder
+        ) {
             XmlSchemaValidator val = CreateValidator(XSDFILE_GET_EXPECTED_PARTICLES);
             XmlSchemaInfo info = new XmlSchemaInfo();
 
@@ -488,14 +546,22 @@ namespace System.Xml.Tests
 
             if (callOrder == "before")
             {
-                names = new XmlQualifiedName[] { new XmlQualifiedName("elem1"), new XmlQualifiedName("elem2") };
+                names = new XmlQualifiedName[]
+                {
+                    new XmlQualifiedName("elem1"),
+                    new XmlQualifiedName("elem2")
+                };
             }
             else
             {
                 val.ValidateElement("elem1", "", info);
                 val.ValidateEndElement(info);
 
-                names = new XmlQualifiedName[] { new XmlQualifiedName("ext1"), new XmlQualifiedName("ext2") };
+                names = new XmlQualifiedName[]
+                {
+                    new XmlQualifiedName("ext1"),
+                    new XmlQualifiedName("ext2")
+                };
             }
 
             CheckExpectedElements(val.GetExpectedParticles(), names);
@@ -507,11 +573,13 @@ namespace System.Xml.Tests
         [InlineData("Sequence", "before")]
         [InlineData("Sequence", "after")]
         [InlineData("Choice", "before")]
-        [InlineData("Choice", "after" )]
+        [InlineData("Choice", "after")]
         [InlineData("All", "before")]
         [InlineData("All", "after")]
-        public void CallForRestricted_Sequence_Choice_All__Before_After_ValidatingSeqElements(string restrType, string callOrder)
-        {
+        public void CallForRestricted_Sequence_Choice_All__Before_After_ValidatingSeqElements(
+            string restrType,
+            string callOrder
+        ) {
             XmlSchemaValidator val = CreateValidator(XSDFILE_GET_EXPECTED_PARTICLES);
             XmlSchemaInfo info = new XmlSchemaInfo();
 
@@ -530,7 +598,7 @@ namespace System.Xml.Tests
                 val.ValidateElement("elem1", "", info);
                 val.ValidateEndElement(info);
 
-                names = new XmlQualifiedName[] { };
+                names = new XmlQualifiedName[] {  };
             }
 
             CheckExpectedElements(val.GetExpectedParticles(), names);
@@ -545,20 +613,27 @@ namespace System.Xml.Tests
             XmlSchemaInfo info = new XmlSchemaInfo();
             XmlSchemaSet schemas = new XmlSchemaSet();
 
-            schemas.Add("", XmlReader.Create(new StringReader("<?xml version=\"1.0\"?>\n" +
-                                                              "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" +
-                                                              "           xmlns:temp=\"uri:tempuri\">\n" +
-                                                              "    <xs:import namespace=\"uri:tempuri\" />\n" +
-                                                              "    <xs:element name=\"ImportElement\">\n" +
-                                                              "        <xs:complexType>\n" +
-                                                              "            <xs:choice>\n" +
-                                                              "                <xs:element name=\"elem1\" />\n" +
-                                                              "                <xs:element ref=\"temp:elem1\" />\n" +
-                                                              "                <xs:element name=\"elem2\" />\n" +
-                                                              "            </xs:choice>\n" +
-                                                              "        </xs:complexType>\n" +
-                                                              "    </xs:element>\n" +
-                                                              "</xs:schema>")));
+            schemas.Add(
+                "",
+                XmlReader.Create(
+                    new StringReader(
+                        "<?xml version=\"1.0\"?>\n"
+                            + "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n"
+                            + "           xmlns:temp=\"uri:tempuri\">\n"
+                            + "    <xs:import namespace=\"uri:tempuri\" />\n"
+                            + "    <xs:element name=\"ImportElement\">\n"
+                            + "        <xs:complexType>\n"
+                            + "            <xs:choice>\n"
+                            + "                <xs:element name=\"elem1\" />\n"
+                            + "                <xs:element ref=\"temp:elem1\" />\n"
+                            + "                <xs:element name=\"elem2\" />\n"
+                            + "            </xs:choice>\n"
+                            + "        </xs:complexType>\n"
+                            + "    </xs:element>\n"
+                            + "</xs:schema>"
+                    )
+                )
+            );
             schemas.Add("uri:tempuri", Path.Combine(TestData, XSDFILE_TARGET_NAMESPACE));
             val = CreateValidator(schemas);
 
@@ -566,7 +641,15 @@ namespace System.Xml.Tests
             val.ValidateElement("ImportElement", "", info);
             val.ValidateEndOfAttributes(null);
 
-            CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] { new XmlQualifiedName("elem1"), new XmlQualifiedName("elem1", "uri:tempuri"), new XmlQualifiedName("elem2") });
+            CheckExpectedElements(
+                val.GetExpectedParticles(),
+                new XmlQualifiedName[]
+                {
+                    new XmlQualifiedName("elem1"),
+                    new XmlQualifiedName("elem1", "uri:tempuri"),
+                    new XmlQualifiedName("elem2")
+                }
+            );
 
             return;
         }
@@ -590,7 +673,10 @@ namespace System.Xml.Tests
 
             Assert.True(result[0] is XmlSchemaAny);
             Assert.Null((result[0] as XmlSchemaAny).Namespace);
-            Assert.Equal(XmlSchemaContentProcessing.Lax, (result[0] as XmlSchemaAny).ProcessContents);
+            Assert.Equal(
+                XmlSchemaContentProcessing.Lax,
+                (result[0] as XmlSchemaAny).ProcessContents
+            );
 
             return;
         }

@@ -34,10 +34,12 @@ namespace System.Runtime
             get => GetGCLatencyMode();
             set
             {
-                if ((value < GCLatencyMode.Batch) ||
-                    (value > GCLatencyMode.SustainedLowLatency))
+                if ((value < GCLatencyMode.Batch) || (value > GCLatencyMode.SustainedLowLatency))
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.ArgumentOutOfRange_Enum);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.ArgumentOutOfRange_Enum
+                    );
                 }
 
                 SetLatencyModeStatus status = SetGCLatencyMode(value);
@@ -46,7 +48,10 @@ namespace System.Runtime
                     throw new InvalidOperationException(SR.InvalidOperation_SetLatencyModeNoGC);
                 }
 
-                Debug.Assert(status == SetLatencyModeStatus.Succeeded, $"Unexpected return value '{status}' from {nameof(SetGCLatencyMode)}.");
+                Debug.Assert(
+                    status == SetLatencyModeStatus.Succeeded,
+                    $"Unexpected return value '{status}' from {nameof(SetGCLatencyMode)}."
+                );
             }
         }
 
@@ -55,10 +60,14 @@ namespace System.Runtime
             get => GetLOHCompactionMode();
             set
             {
-                if ((value < GCLargeObjectHeapCompactionMode.Default) ||
-                    (value > GCLargeObjectHeapCompactionMode.CompactOnce))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.ArgumentOutOfRange_Enum);
+                if (
+                    (value < GCLargeObjectHeapCompactionMode.Default)
+                    || (value > GCLargeObjectHeapCompactionMode.CompactOnce)
+                ) {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.ArgumentOutOfRange_Enum
+                    );
                 }
 
                 SetLOHCompactionMode(value);

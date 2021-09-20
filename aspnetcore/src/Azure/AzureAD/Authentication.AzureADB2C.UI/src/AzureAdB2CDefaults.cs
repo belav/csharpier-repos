@@ -9,7 +9,9 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI
     /// <summary>
     /// Constants for different Azure Active Directory B2C authentication components.
     /// </summary>
-    [Obsolete("This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web.")]
+    [Obsolete(
+        "This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web."
+    )]
     public static class AzureADB2CDefaults
     {
         /// <summary>

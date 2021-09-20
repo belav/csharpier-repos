@@ -31,8 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public CosmosQueryTranslationPreprocessorFactory(
-            QueryTranslationPreprocessorDependencies dependencies)
-        {
+            QueryTranslationPreprocessorDependencies dependencies
+        ) {
             Check.NotNull(dependencies, nameof(dependencies));
             _dependencies = dependencies;
         }
@@ -43,7 +43,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual QueryTranslationPreprocessor Create(QueryCompilationContext queryCompilationContext)
-            => new CosmosQueryTranslationPreprocessor(_dependencies, (CosmosQueryCompilationContext)queryCompilationContext);
+        public virtual QueryTranslationPreprocessor Create(
+            QueryCompilationContext queryCompilationContext
+        ) =>
+            new CosmosQueryTranslationPreprocessor(
+                _dependencies,
+                (CosmosQueryCompilationContext)queryCompilationContext
+            );
     }
 }

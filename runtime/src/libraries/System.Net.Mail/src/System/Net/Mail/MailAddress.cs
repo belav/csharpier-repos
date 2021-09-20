@@ -24,30 +24,29 @@ namespace System.Net.Mail
 
         // For internal use only by MailAddressParser.
         // The components were already validated before this is called.
-        internal MailAddress(string displayName, string userName, string domain, Encoding? displayNameEncoding)
-        {
+        internal MailAddress(
+            string displayName,
+            string userName,
+            string domain,
+            Encoding? displayNameEncoding
+        ) {
             _host = domain;
             _userName = userName;
             _displayName = displayName;
-            _displayNameEncoding = displayNameEncoding ?? Encoding.GetEncoding(MimeBasePart.DefaultCharSet);
+            _displayNameEncoding =
+                displayNameEncoding ?? Encoding.GetEncoding(MimeBasePart.DefaultCharSet);
 
-            Debug.Assert(_host != null,
-                "host was null in internal constructor");
+            Debug.Assert(_host != null, "host was null in internal constructor");
 
-            Debug.Assert(userName != null,
-                "userName was null in internal constructor");
+            Debug.Assert(userName != null, "userName was null in internal constructor");
 
-            Debug.Assert(displayName != null,
-                "displayName was null in internal constructor");
+            Debug.Assert(displayName != null, "displayName was null in internal constructor");
         }
 
-        public MailAddress(string address) : this(address, null, (Encoding?)null)
-        {
-        }
+        public MailAddress(string address) : this(address, null, (Encoding?)null) { }
 
-        public MailAddress(string address, string? displayName) : this(address, displayName, (Encoding?)null)
-        {
-        }
+        public MailAddress(string address, string? displayName)
+            : this(address, displayName, (Encoding?)null) { }
 
         //
         // This constructor validates and stores the components of an e-mail address.
@@ -64,9 +63,13 @@ namespace System.Net.Mail
         // A FormatException will be thrown if any of the components in 'address' are invalid.
         public MailAddress(string address, string? displayName, Encoding? displayNameEncoding)
         {
-            bool parseSuccess = TryParse(address, displayName, displayNameEncoding,
-                                        out (string displayName, string user, string host, Encoding displayNameEncoding) parsedData,
-                                        throwExceptionIfFail: true);
+            bool parseSuccess = TryParse(
+                address,
+                displayName,
+                displayNameEncoding,
+                out (string displayName, string user, string host, Encoding displayNameEncoding) parsedData,
+                throwExceptionIfFail: true
+            );
 
             _displayName = parsedData.displayName;
             _userName = parsedData.user;
@@ -82,7 +85,8 @@ namespace System.Net.Mail
         /// <param name="address">A <see cref="string"/> that contains an email address.</param>
         /// <param name="result">When this method returns, contains the <see cref="MailAddress"/> instance if address parsing succeed</param>
         /// <returns>A <see cref="bool"/> value that is true if the <see cref="MailAddress"/> was successfully created; otherwise, false.</returns>
-        public static bool TryCreate(string address, [NotNullWhen(true)] out MailAddress? result) => TryCreate(address, displayName: null, out result);
+        public static bool TryCreate(string address, [NotNullWhen(true)] out MailAddress? result) =>
+            TryCreate(address, displayName: null, out result);
 
         /// <summary>
         /// Create a new <see cref="MailAddress"/>. Does not throw an exception if the MailAddress cannot be created.
@@ -91,7 +95,11 @@ namespace System.Net.Mail
         /// <param name="displayName">A <see cref="string"/> that contains the display name associated with address. This parameter can be null.</param>
         /// <param name="result">When this method returns, contains the <see cref="MailAddress"/> instance if address parsing succeed</param>
         /// <returns>A <see cref="bool"/> value that is true if the <see cref="MailAddress"/> was successfully created; otherwise, false.</returns>
-        public static bool TryCreate(string address, string? displayName, [NotNullWhen(true)] out MailAddress? result) => TryCreate(address, displayName, displayNameEncoding: null, out result);
+        public static bool TryCreate(
+            string address,
+            string? displayName,
+            [NotNullWhen(true)] out MailAddress? result
+        ) => TryCreate(address, displayName, displayNameEncoding: null, out result);
 
         /// <summary>
         /// Create a new <see cref="MailAddress"/>. Does not throw an exception if the MailAddress cannot be created.
@@ -101,13 +109,27 @@ namespace System.Net.Mail
         /// <param name="displayNameEncoding">The <see cref="Encoding"/> that defines the character set used for displayName</param>
         /// <param name="result">When this method returns, contains the <see cref="MailAddress"/> instance if address parsing succeed</param>
         /// <returns>A <see cref="bool"/> value that is true if the <see cref="MailAddress"/> was successfully created; otherwise, false.</returns>
-        public static bool TryCreate(string address, string? displayName, Encoding? displayNameEncoding, [NotNullWhen(true)] out MailAddress? result)
-        {
-            if (TryParse(address, displayName, displayNameEncoding,
-                        out (string displayName, string user, string host, Encoding displayNameEncoding) parsed,
-                        throwExceptionIfFail: false))
-            {
-                result = new MailAddress(parsed.displayName, parsed.user, parsed.host, parsed.displayNameEncoding);
+        public static bool TryCreate(
+            string address,
+            string? displayName,
+            Encoding? displayNameEncoding,
+            [NotNullWhen(true)] out MailAddress? result
+        ) {
+            if (
+                TryParse(
+                    address,
+                    displayName,
+                    displayNameEncoding,
+                    out (string displayName, string user, string host, Encoding displayNameEncoding) parsed,
+                    throwExceptionIfFail: false
+                )
+            ) {
+                result = new MailAddress(
+                    parsed.displayName,
+                    parsed.user,
+                    parsed.host,
+                    parsed.displayNameEncoding
+                );
                 return true;
             }
             else
@@ -117,15 +139,23 @@ namespace System.Net.Mail
             }
         }
 
-        private static bool TryParse(string address, string? displayName, Encoding? displayNameEncoding, out (string displayName, string user, string host, Encoding displayNameEncoding) parsedData, bool throwExceptionIfFail)
-        {
+        private static bool TryParse(
+            string address,
+            string? displayName,
+            Encoding? displayNameEncoding,
+            out (string displayName, string user, string host, Encoding displayNameEncoding) parsedData,
+            bool throwExceptionIfFail
+        ) {
             if (string.IsNullOrEmpty(address))
             {
                 if (throwExceptionIfFail)
                 {
-                    throw address is null ?
-                        new ArgumentNullException(nameof(address)) :
-                        new ArgumentException(SR.Format(SR.net_emptystringcall, nameof(address)), nameof(address));
+                    throw address is null
+                        ? new ArgumentNullException(nameof(address))
+                        : new ArgumentException(
+                              SR.Format(SR.net_emptystringcall, nameof(address)),
+                              nameof(address)
+                          );
                 }
 
                 parsedData = default;
@@ -138,8 +168,13 @@ namespace System.Net.Mail
             // Check for bounding quotes
             if (!string.IsNullOrEmpty(displayName))
             {
-                if (!MailAddressParser.TryNormalizeOrThrow(displayName, out displayName, throwExceptionIfFail))
-                {
+                if (
+                    !MailAddressParser.TryNormalizeOrThrow(
+                        displayName,
+                        out displayName,
+                        throwExceptionIfFail
+                    )
+                ) {
                     parsedData = default;
                     return false;
                 }
@@ -151,8 +186,13 @@ namespace System.Net.Mail
                 }
             }
 
-            if (!MailAddressParser.TryParseAddress(address, out ParseAddressInfo info, throwExceptionIfFail))
-            {
+            if (
+                !MailAddressParser.TryParseAddress(
+                    address,
+                    out ParseAddressInfo info,
+                    throwExceptionIfFail
+                )
+            ) {
                 parsedData = default;
                 return false;
             }
@@ -170,18 +210,12 @@ namespace System.Net.Mail
 
         public string DisplayName
         {
-            get
-            {
-                return _displayName;
-            }
+            get { return _displayName; }
         }
 
         public string User
         {
-            get
-            {
-                return _userName;
-            }
+            get { return _userName; }
         }
 
         private string GetUser(bool allowUnicode)
@@ -196,10 +230,7 @@ namespace System.Net.Mail
 
         public string Host
         {
-            get
-            {
-                return _host;
-            }
+            get { return _host; }
         }
 
         private string GetHost(bool allowUnicode)
@@ -224,10 +255,7 @@ namespace System.Net.Mail
 
         public string Address
         {
-            get
-            {
-                return _userName + "@" + _host;
-            }
+            get { return _userName + "@" + _host; }
         }
 
         private string GetAddress(bool allowUnicode)
@@ -237,10 +265,7 @@ namespace System.Net.Mail
 
         private string SmtpAddress
         {
-            get
-            {
-                return "<" + Address + ">";
-            }
+            get { return "<" + Address + ">"; }
         }
 
         internal string GetSmtpAddress(bool allowUnicode)
@@ -303,7 +328,11 @@ namespace System.Net.Mail
                 else
                 {
                     //encode the displayname since it's non-ascii
-                    encoder = s_encoderFactory.GetEncoderForHeader(_displayNameEncoding, false, charsConsumed);
+                    encoder = s_encoderFactory.GetEncoderForHeader(
+                        _displayNameEncoding,
+                        false,
+                        charsConsumed
+                    );
                     encoder.EncodeString(_displayName, _displayNameEncoding);
                     encodedAddress = encoder.GetEncodedString();
                 }

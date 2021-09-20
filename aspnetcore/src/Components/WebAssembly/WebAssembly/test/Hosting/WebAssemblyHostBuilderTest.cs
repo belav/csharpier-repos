@@ -22,10 +22,9 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
             // Arrange
             var builder = new WebAssemblyHostBuilder(new TestJSUnmarshalledRuntime());
 
-            builder.Configuration.AddInMemoryCollection(new[]
-            {
-                new KeyValuePair<string, string>("key", "value"),
-            });
+            builder.Configuration.AddInMemoryCollection(
+                new[] { new KeyValuePair<string, string>("key", "value"), }
+            );
 
             // Act
             var host = builder.Build();
@@ -77,10 +76,13 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
             builder.Services.AddScoped<StringBuilder>();
 
             var factory = new MyFakeServiceProviderFactory();
-            builder.ConfigureContainer(factory, builder =>
-            {
-                builder.ServiceCollection.AddScoped<List<string>>();
-            });
+            builder.ConfigureContainer(
+                factory,
+                builder =>
+                {
+                    builder.ServiceCollection.AddScoped<List<string>>();
+                }
+            );
 
             // Act
             var host = builder.Build();
@@ -95,7 +97,9 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
         public void Build_InDevelopment_ConfiguresWithServiceProviderWithScopeValidation()
         {
             // Arrange
-            var builder = new WebAssemblyHostBuilder(new TestJSUnmarshalledRuntime(environment: "Development"));
+            var builder = new WebAssemblyHostBuilder(
+                new TestJSUnmarshalledRuntime(environment: "Development")
+            );
 
             builder.Services.AddScoped<StringBuilder>();
             builder.Services.AddSingleton<TestServiceThatTakesStringBuilder>();
@@ -105,7 +109,9 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
 
             // Assert
             Assert.NotNull(host.Services.GetRequiredService<StringBuilder>());
-            Assert.Throws<InvalidOperationException>(() => host.Services.GetRequiredService<TestServiceThatTakesStringBuilder>());
+            Assert.Throws<InvalidOperationException>(
+                () => host.Services.GetRequiredService<TestServiceThatTakesStringBuilder>()
+            );
         }
 
         [Fact]
@@ -129,18 +135,24 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
         public void Builder_InDevelopment_SetsHostEnvironmentProperty()
         {
             // Arrange
-            var builder = new WebAssemblyHostBuilder(new TestJSUnmarshalledRuntime(environment: "Development"));
+            var builder = new WebAssemblyHostBuilder(
+                new TestJSUnmarshalledRuntime(environment: "Development")
+            );
 
             // Assert
             Assert.NotNull(builder.HostEnvironment);
-            Assert.True(WebAssemblyHostEnvironmentExtensions.IsDevelopment(builder.HostEnvironment));
+            Assert.True(
+                WebAssemblyHostEnvironmentExtensions.IsDevelopment(builder.HostEnvironment)
+            );
         }
 
         [Fact]
         public void Builder_CreatesNavigationManager()
         {
             // Arrange
-            var builder = new WebAssemblyHostBuilder(new TestJSUnmarshalledRuntime(environment: "Development"));
+            var builder = new WebAssemblyHostBuilder(
+                new TestJSUnmarshalledRuntime(environment: "Development")
+            );
 
             // Act
             var host = builder.Build();
@@ -149,14 +161,16 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
             var navigationManager = host.Services.GetRequiredService<NavigationManager>();
             Assert.NotNull(navigationManager);
             Assert.Equal("https://www.example.com/", navigationManager.BaseUri);
-            Assert.Equal("https://www.example.com/awesome-part-that-will-be-truncated-in-tests/cool", navigationManager.Uri);
+            Assert.Equal(
+                "https://www.example.com/awesome-part-that-will-be-truncated-in-tests/cool",
+                navigationManager.Uri
+            );
         }
 
         private class TestServiceThatTakesStringBuilder
         {
             public TestServiceThatTakesStringBuilder(StringBuilder builder) { }
         }
-
 
         private class MyFakeDIBuilderThing
         {
@@ -193,10 +207,9 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
             // Arrange
             var builder = new WebAssemblyHostBuilder(new TestJSUnmarshalledRuntime());
 
-            builder.Configuration.AddInMemoryCollection(new[]
-            {
-                new KeyValuePair<string, string>("key", "value"),
-            });
+            builder.Configuration.AddInMemoryCollection(
+                new[] { new KeyValuePair<string, string>("key", "value"), }
+            );
 
             // Act
             var host = builder.Build();
@@ -249,7 +262,6 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
             var loggerProvider = host.Services.GetRequiredService<ILoggerProvider>();
             Assert.NotNull(loggerProvider);
             Assert.Equal<ILoggerProvider>(provider.Object, loggerProvider);
-
         }
     }
 }

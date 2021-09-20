@@ -8,19 +8,18 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 {
     public class CosmosTestHelpers : TestHelpers
     {
-        protected CosmosTestHelpers()
-        {
-        }
+        protected CosmosTestHelpers() { }
 
         public static CosmosTestHelpers Instance { get; } = new();
 
-        public override IServiceCollection AddProviderServices(IServiceCollection services)
-            => services.AddEntityFrameworkCosmos();
+        public override IServiceCollection AddProviderServices(IServiceCollection services) =>
+            services.AddEntityFrameworkCosmos();
 
-        public override void UseProviderOptions(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseCosmos(
+        public override void UseProviderOptions(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseCosmos(
                 TestEnvironment.DefaultConnection,
                 TestEnvironment.AuthToken,
-                "UnitTests");
+                "UnitTests"
+            );
     }
 }

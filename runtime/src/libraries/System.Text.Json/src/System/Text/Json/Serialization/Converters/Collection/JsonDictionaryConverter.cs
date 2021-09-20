@@ -8,8 +8,14 @@ namespace System.Text.Json.Serialization
     /// </summary>
     internal abstract class JsonDictionaryConverter<T> : JsonResumableConverter<T>
     {
-        internal sealed override ConverterStrategy ConverterStrategy => ConverterStrategy.Dictionary;
+        internal sealed override ConverterStrategy ConverterStrategy =>
+            ConverterStrategy.Dictionary;
 
-        protected internal abstract bool OnWriteResume(Utf8JsonWriter writer, T dictionary, JsonSerializerOptions options, ref WriteStack state);
+        protected internal abstract bool OnWriteResume(
+            Utf8JsonWriter writer,
+            T dictionary,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        );
     }
 }

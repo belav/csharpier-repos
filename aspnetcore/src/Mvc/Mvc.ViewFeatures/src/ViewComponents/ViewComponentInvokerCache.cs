@@ -15,8 +15,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
 
         private volatile InnerCache _currentCache;
 
-        public ViewComponentInvokerCache(IViewComponentDescriptorCollectionProvider collectionProvider)
-        {
+        public ViewComponentInvokerCache(
+            IViewComponentDescriptorCollectionProvider collectionProvider
+        ) {
             _collectionProvider = collectionProvider;
         }
 
@@ -37,8 +38,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             }
         }
 
-        internal ObjectMethodExecutor GetViewComponentMethodExecutor(ViewComponentContext viewComponentContext)
-        {
+        internal ObjectMethodExecutor GetViewComponentMethodExecutor(
+            ViewComponentContext viewComponentContext
+        ) {
             var cache = CurrentCache;
             var viewComponentDescriptor = viewComponentContext.ViewComponentDescriptor;
 
@@ -50,18 +52,23 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             var methodInfo = viewComponentContext.ViewComponentDescriptor?.MethodInfo;
             if (methodInfo == null)
             {
-                throw new InvalidOperationException(Resources.FormatPropertyOfTypeCannotBeNull(
-                    nameof(ViewComponentDescriptor.MethodInfo),
-                    nameof(ViewComponentDescriptor)));
+                throw new InvalidOperationException(
+                    Resources.FormatPropertyOfTypeCannotBeNull(
+                        nameof(ViewComponentDescriptor.MethodInfo),
+                        nameof(ViewComponentDescriptor)
+                    )
+                );
             }
 
-            var parameterDefaultValues = ParameterDefaultValues
-                .GetParameterDefaultValues(methodInfo);
+            var parameterDefaultValues = ParameterDefaultValues.GetParameterDefaultValues(
+                methodInfo
+            );
 
             executor = ObjectMethodExecutor.Create(
                 viewComponentDescriptor.MethodInfo,
                 viewComponentDescriptor.TypeInfo,
-                parameterDefaultValues);
+                parameterDefaultValues
+            );
 
             cache.Entries.TryAdd(viewComponentDescriptor, executor);
             return executor;
@@ -74,7 +81,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                 Version = version;
             }
 
-            public ConcurrentDictionary<ViewComponentDescriptor, ObjectMethodExecutor> Entries { get; } =
+            public ConcurrentDictionary<
+                ViewComponentDescriptor,
+                ObjectMethodExecutor
+            > Entries { get; } =
                 new ConcurrentDictionary<ViewComponentDescriptor, ObjectMethodExecutor>();
 
             public int Version { get; }

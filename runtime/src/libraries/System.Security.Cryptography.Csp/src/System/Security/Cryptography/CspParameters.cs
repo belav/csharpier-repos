@@ -24,21 +24,23 @@ namespace System.Security.Cryptography
         /// </summary>
         public CspProviderFlags Flags
         {
-            get
-            {
-                return (CspProviderFlags)_flags;
-            }
+            get { return (CspProviderFlags)_flags; }
             set
             {
                 int allFlags = 0x00FF; // this should change if more values are added to CspProviderFlags
-                Debug.Assert((CspProviderFlags.UseMachineKeyStore |
-                              CspProviderFlags.UseDefaultKeyContainer |
-                              CspProviderFlags.UseNonExportableKey |
-                              CspProviderFlags.UseExistingKey |
-                              CspProviderFlags.UseArchivableKey |
-                              CspProviderFlags.UseUserProtectedKey |
-                              CspProviderFlags.NoPrompt |
-                              CspProviderFlags.CreateEphemeralKey) == (CspProviderFlags)allFlags, "allFlags does not match all CspProviderFlags");
+                Debug.Assert(
+                    (
+                        CspProviderFlags.UseMachineKeyStore
+                        | CspProviderFlags.UseDefaultKeyContainer
+                        | CspProviderFlags.UseNonExportableKey
+                        | CspProviderFlags.UseExistingKey
+                        | CspProviderFlags.UseArchivableKey
+                        | CspProviderFlags.UseUserProtectedKey
+                        | CspProviderFlags.NoPrompt
+                        | CspProviderFlags.CreateEphemeralKey
+                    ) == (CspProviderFlags)allFlags,
+                    "allFlags does not match all CspProviderFlags"
+                );
 
                 int flags = (int)value;
                 if ((flags & ~allFlags) != 0)
@@ -55,14 +57,20 @@ namespace System.Security.Cryptography
         public CspParameters() : this(CapiHelper.DefaultRsaProviderType, null, null) { }
 
         public CspParameters(int dwTypeIn) : this(dwTypeIn, null, null) { }
-        public CspParameters(int dwTypeIn, string? strProviderNameIn) : this(dwTypeIn, strProviderNameIn, null) { }
-        public CspParameters(int dwTypeIn, string? strProviderNameIn, string? strContainerNameIn) :
-            this(dwTypeIn, strProviderNameIn, strContainerNameIn, CspProviderFlags.NoFlags)
-        {
-        }
+        public CspParameters(int dwTypeIn, string? strProviderNameIn)
+            : this(dwTypeIn, strProviderNameIn, null) { }
+        public CspParameters(
+            int dwTypeIn,
+            string? strProviderNameIn,
+            string? strContainerNameIn
+        ) : this(dwTypeIn, strProviderNameIn, strContainerNameIn, CspProviderFlags.NoFlags) { }
 
-        internal CspParameters(int providerType, string? providerName, string? keyContainerName, CspProviderFlags flags)
-        {
+        internal CspParameters(
+            int providerType,
+            string? providerName,
+            string? keyContainerName,
+            CspProviderFlags flags
+        ) {
             ProviderType = providerType;
             ProviderName = providerName;
             KeyContainerName = keyContainerName;
@@ -84,14 +92,8 @@ namespace System.Security.Cryptography
 
         public IntPtr ParentWindowHandle
         {
-            get
-            {
-                return _parentWindowHandle;
-            }
-            set
-            {
-                _parentWindowHandle = value;
-            }
+            get { return _parentWindowHandle; }
+            set { _parentWindowHandle = value; }
         }
     }
 }

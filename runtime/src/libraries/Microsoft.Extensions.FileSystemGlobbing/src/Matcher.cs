@@ -104,10 +104,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing
         /// <summary>
         /// Initializes an instance of <see cref="Matcher" /> using case-insensitive matching
         /// </summary>
-        public Matcher()
-            : this(StringComparison.OrdinalIgnoreCase)
-        {
-        }
+        public Matcher() : this(StringComparison.OrdinalIgnoreCase) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="Matcher" /> using the string comparison method specified
@@ -162,7 +159,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing
         /// <returns>Always returns instance of <see cref="PatternMatchingResult" />, even if not files were matched</returns>
         public virtual PatternMatchingResult Execute(DirectoryInfoBase directoryInfo)
         {
-            var context = new MatcherContext(_includePatterns, _excludePatterns, directoryInfo, _comparison);
+            var context = new MatcherContext(
+                _includePatterns,
+                _excludePatterns,
+                directoryInfo,
+                _comparison
+            );
             return context.Execute();
         }
     }

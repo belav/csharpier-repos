@@ -14,7 +14,7 @@ namespace Microsoft.AspNetCore.Components.Test.Helpers
             _renderFragment = renderFragment;
         }
 
-        protected override void BuildRenderTree(RenderTreeBuilder builder)
-            => _renderFragment(builder);
+        protected override void BuildRenderTree(RenderTreeBuilder builder) =>
+            _renderFragment(builder);
     }
 }

@@ -56,8 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public ExecutionStrategyDependencies(
             ICurrentDbContext currentContext,
             IDbContextOptions options,
-            IDiagnosticsLogger<DbLoggerCategory.Infrastructure> logger)
-        {
+            IDiagnosticsLogger<DbLoggerCategory.Infrastructure> logger
+        ) {
             Check.NotNull(currentContext, nameof(currentContext));
 
             Options = options;

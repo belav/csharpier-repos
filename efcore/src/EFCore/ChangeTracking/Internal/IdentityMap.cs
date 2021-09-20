@@ -19,8 +19,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class IdentityMap<TKey> : IIdentityMap
-        where TKey : notnull
+    public class IdentityMap<TKey> : IIdentityMap where TKey : notnull
     {
         private readonly bool _sensitiveLoggingEnabled;
         private readonly Dictionary<TKey, InternalEntityEntry> _identityMap;
@@ -36,17 +35,18 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public IdentityMap(
             IKey key,
             IPrincipalKeyValueFactory<TKey> principalKeyValueFactory,
-            bool sensitiveLoggingEnabled)
-        {
+            bool sensitiveLoggingEnabled
+        ) {
             _sensitiveLoggingEnabled = sensitiveLoggingEnabled;
             Key = key;
             PrincipalKeyValueFactory = principalKeyValueFactory;
-            _identityMap = new Dictionary<TKey, InternalEntityEntry>(principalKeyValueFactory.EqualityComparer);
+            _identityMap = new Dictionary<TKey, InternalEntityEntry>(
+                principalKeyValueFactory.EqualityComparer
+            );
 
             if (key.IsPrimaryKey())
             {
-                _foreignKeys = key.DeclaringEntityType
-                    .GetDerivedTypesInclusive()
+                _foreignKeys = key.DeclaringEntityType.GetDerivedTypesInclusive()
                     .SelectMany(t => t.GetDeclaredForeignKeys())
                     .ToArray();
             }
@@ -86,9 +86,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool Contains(IForeignKey foreignKey, in ValueBuffer valueBuffer)
-            => foreignKey.GetDependentKeyValueFactory<TKey>()!.TryCreateFromBuffer(valueBuffer, out var key)
-                && _identityMap.ContainsKey(key);
+        public virtual bool Contains(IForeignKey foreignKey, in ValueBuffer valueBuffer) =>
+            foreignKey.GetDependentKeyValueFactory<TKey>()!.TryCreateFromBuffer(
+                valueBuffer,
+                out var key
+            ) && _identityMap.ContainsKey(key);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -108,8 +110,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual InternalEntityEntry? TryGetEntry(object?[] keyValues, bool throwOnNullKey, out bool hasNullKey)
-        {
+        public virtual InternalEntityEntry? TryGetEntry(
+            object?[] keyValues,
+            bool throwOnNullKey,
+            out bool hasNullKey
+        ) {
             var key = PrincipalKeyValueFactory.CreateFromKeyValues(keyValues);
 
             if (key == null)
@@ -121,13 +126,19 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         throw new InvalidOperationException(
                             CoreStrings.InvalidKeyValue(
                                 Key.DeclaringEntityType.DisplayName(),
-                                PrincipalKeyValueFactory.FindNullPropertyInKeyValues(keyValues)!.Name));
+                                PrincipalKeyValueFactory.FindNullPropertyInKeyValues(
+                                    keyValues
+                                )!.Name
+                            )
+                        );
                     }
 
                     throw new InvalidOperationException(
                         CoreStrings.InvalidAlternateKeyValue(
                             Key.DeclaringEntityType.DisplayName(),
-                            PrincipalKeyValueFactory.FindNullPropertyInKeyValues(keyValues)!.Name));
+                            PrincipalKeyValueFactory.FindNullPropertyInKeyValues(keyValues)!.Name
+                        )
+                    );
                 }
 
                 hasNullKey = true;
@@ -139,9 +150,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             try
             {
-                return _identityMap.TryGetValue((TKey)key, out var entry)
-                    ? entry
-                    : null;
+                return _identityMap.TryGetValue((TKey)key, out var entry) ? entry : null;
             }
             catch (InvalidCastException e)
             {
@@ -151,8 +160,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         Key.DeclaringEntityType.DisplayName(),
                         Key.Properties.First().Name,
                         typeof(TKey),
-                        key.GetType()),
-                    e);
+                        key.GetType()
+                    ),
+                    e
+                );
             }
         }
 
@@ -162,11 +173,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual InternalEntityEntry? TryGetEntry(IForeignKey foreignKey, InternalEntityEntry dependentEntry)
-            => foreignKey.GetDependentKeyValueFactory<TKey>()!.TryCreateFromCurrentValues(dependentEntry, out var key)
-                && _identityMap.TryGetValue(key, out var entry)
-                    ? entry
-                    : null;
+        public virtual InternalEntityEntry? TryGetEntry(
+            IForeignKey foreignKey,
+            InternalEntityEntry dependentEntry
+        ) =>
+            foreignKey.GetDependentKeyValueFactory<TKey>()!.TryCreateFromCurrentValues(
+                dependentEntry,
+                out var key
+            ) && _identityMap.TryGetValue(key, out var entry)
+                ? entry
+                : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -176,11 +192,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         /// </summary>
         public virtual InternalEntityEntry? TryGetEntryUsingPreStoreGeneratedValues(
             IForeignKey foreignKey,
-            InternalEntityEntry dependentEntry)
-            => foreignKey.GetDependentKeyValueFactory<TKey>()!.TryCreateFromPreStoreGeneratedCurrentValues(dependentEntry, out var key)
-                && _identityMap.TryGetValue(key, out var entry)
-                    ? entry
-                    : null;
+            InternalEntityEntry dependentEntry
+        ) =>
+            foreignKey.GetDependentKeyValueFactory<TKey>()!.TryCreateFromPreStoreGeneratedCurrentValues(
+                dependentEntry,
+                out var key
+            ) && _identityMap.TryGetValue(key, out var entry)
+                ? entry
+                : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -188,11 +207,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual InternalEntityEntry? TryGetEntryUsingRelationshipSnapshot(IForeignKey foreignKey, InternalEntityEntry dependentEntry)
-            => foreignKey.GetDependentKeyValueFactory<TKey>()!.TryCreateFromRelationshipSnapshot(dependentEntry, out var key)
-                && _identityMap.TryGetValue(key, out var entry)
-                    ? entry
-                    : null;
+        public virtual InternalEntityEntry? TryGetEntryUsingRelationshipSnapshot(
+            IForeignKey foreignKey,
+            InternalEntityEntry dependentEntry
+        ) =>
+            foreignKey.GetDependentKeyValueFactory<TKey>()!.TryCreateFromRelationshipSnapshot(
+                dependentEntry,
+                out var key
+            ) && _identityMap.TryGetValue(key, out var entry)
+                ? entry
+                : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -200,8 +224,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual void AddOrUpdate(InternalEntityEntry entry)
-            => Add(PrincipalKeyValueFactory.CreateFromCurrentValues(entry), entry, updateDuplicate: true);
+        public virtual void AddOrUpdate(InternalEntityEntry entry) =>
+            Add(
+                PrincipalKeyValueFactory.CreateFromCurrentValues(entry),
+                entry,
+                updateDuplicate: true
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -209,8 +237,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual void Add(InternalEntityEntry entry)
-            => Add(PrincipalKeyValueFactory.CreateFromCurrentValues(entry), entry);
+        public virtual void Add(InternalEntityEntry entry) =>
+            Add(PrincipalKeyValueFactory.CreateFromCurrentValues(entry), entry);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -218,8 +246,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual void Add(object[] keyValues, InternalEntityEntry entry)
-            => Add((TKey)PrincipalKeyValueFactory.CreateFromKeyValues(keyValues)!, entry);
+        public virtual void Add(object[] keyValues, InternalEntityEntry entry) =>
+            Add((TKey)PrincipalKeyValueFactory.CreateFromKeyValues(keyValues)!, entry);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -227,8 +255,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected virtual void Add(TKey key, InternalEntityEntry entry)
-            => Add(key, entry, updateDuplicate: false);
+        protected virtual void Add(TKey key, InternalEntityEntry entry) =>
+            Add(key, entry, updateDuplicate: false);
 
         private void ThrowIdentityConflict(InternalEntityEntry entry)
         {
@@ -239,13 +267,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     throw new InvalidOperationException(
                         CoreStrings.IdentityConflictOwnedSensitive(
                             entry.EntityType.DisplayName(),
-                            entry.BuildCurrentValuesString(Key.Properties)));
+                            entry.BuildCurrentValuesString(Key.Properties)
+                        )
+                    );
                 }
 
                 throw new InvalidOperationException(
                     CoreStrings.IdentityConflictOwned(
                         entry.EntityType.DisplayName(),
-                        Key.Properties.Format()));
+                        Key.Properties.Format()
+                    )
+                );
             }
 
             if (_sensitiveLoggingEnabled)
@@ -253,20 +285,26 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 throw new InvalidOperationException(
                     CoreStrings.IdentityConflictSensitive(
                         entry.EntityType.DisplayName(),
-                        entry.BuildCurrentValuesString(Key.Properties)));
+                        entry.BuildCurrentValuesString(Key.Properties)
+                    )
+                );
             }
 
             throw new InvalidOperationException(
                 CoreStrings.IdentityConflict(
                     entry.EntityType.DisplayName(),
-                    Key.Properties.Format()));
+                    Key.Properties.Format()
+                )
+            );
         }
 
         private void Add(TKey key, InternalEntityEntry entry, bool updateDuplicate)
         {
             if (_identityMap.TryGetValue(key, out var existingEntry))
             {
-                var bothStatesEquivalent = (entry.EntityState == EntityState.Deleted) == (existingEntry.EntityState == EntityState.Deleted);
+                var bothStatesEquivalent =
+                    (entry.EntityState == EntityState.Deleted)
+                    == (existingEntry.EntityState == EntityState.Deleted);
                 if (!updateDuplicate)
                 {
                     if (existingEntry == entry)
@@ -290,8 +328,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     }
                 }
 
-                if (!bothStatesEquivalent
-                    && Key.IsPrimaryKey())
+                if (!bothStatesEquivalent && Key.IsPrimaryKey())
                 {
                     entry.SharedIdentityEntry = existingEntry;
                     existingEntry.SharedIdentityEntry = entry;
@@ -304,8 +341,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             _identityMap[key] = entry;
 
-            if (_dependentMaps != null
-                && _foreignKeys != null)
+            if (_dependentMaps != null && _foreignKeys != null)
             {
                 foreach (var foreignKey in _foreignKeys)
                 {
@@ -332,7 +368,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         {
             if (_dependentMaps == null)
             {
-                _dependentMaps = new Dictionary<IForeignKey, IDependentsMap>(LegacyReferenceEqualityComparer.Instance);
+                _dependentMaps = new Dictionary<IForeignKey, IDependentsMap>(
+                    LegacyReferenceEqualityComparer.Instance
+                );
             }
 
             if (!_dependentMaps.TryGetValue(foreignKey, out var map))
@@ -356,11 +394,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IDependentsMap? FindDependentsMap(IForeignKey foreignKey)
-            => _dependentMaps != null
-                && _dependentMaps.TryGetValue(foreignKey, out var map)
-                    ? map
-                    : null;
+        public virtual IDependentsMap? FindDependentsMap(IForeignKey foreignKey) =>
+            _dependentMaps != null && _dependentMaps.TryGetValue(foreignKey, out var map)
+                ? map
+                : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -380,8 +417,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual void Remove(InternalEntityEntry entry)
-            => Remove(PrincipalKeyValueFactory.CreateFromCurrentValues(entry)!, entry);
+        public virtual void Remove(InternalEntityEntry entry) =>
+            Remove(PrincipalKeyValueFactory.CreateFromCurrentValues(entry)!, entry);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -389,8 +426,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual void RemoveUsingRelationshipSnapshot(InternalEntityEntry entry)
-            => Remove(PrincipalKeyValueFactory.CreateFromRelationshipSnapshot(entry)!, entry);
+        public virtual void RemoveUsingRelationshipSnapshot(InternalEntityEntry entry) =>
+            Remove(PrincipalKeyValueFactory.CreateFromRelationshipSnapshot(entry)!, entry);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -415,8 +452,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             if (otherEntry == null)
             {
-                if (_identityMap.TryGetValue(key, out var existingEntry)
-                    && existingEntry == entry)
+                if (_identityMap.TryGetValue(key, out var existingEntry) && existingEntry == entry)
                 {
                     _identityMap.Remove(key);
                 }
@@ -426,8 +462,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 _identityMap[key] = otherEntry;
             }
 
-            if (_dependentMaps != null
-                && _foreignKeys != null)
+            if (_dependentMaps != null && _foreignKeys != null)
             {
                 foreach (var foreignKey in _foreignKeys)
                 {

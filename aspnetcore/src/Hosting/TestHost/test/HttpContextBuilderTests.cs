@@ -26,12 +26,14 @@ namespace Microsoft.AspNetCore.TestHost
             var builder = new WebHostBuilder().Configure(app => { });
             var server = new TestServer(builder);
             server.BaseAddress = new Uri("https://example.com/A/Path/");
-            var context = await server.SendAsync(c =>
-            {
-                c.Request.Method = HttpMethods.Post;
-                c.Request.Path = "/and/file.txt";
-                c.Request.QueryString = new QueryString("?and=query");
-            });
+            var context = await server.SendAsync(
+                c =>
+                {
+                    c.Request.Method = HttpMethods.Post;
+                    c.Request.Path = "/and/file.txt";
+                    c.Request.QueryString = new QueryString("?and=query");
+                }
+            );
 
             Assert.True(context.RequestAborted.CanBeCanceled);
             Assert.Equal(HttpProtocol.Http11, context.Request.Protocol);
@@ -53,14 +55,17 @@ namespace Microsoft.AspNetCore.TestHost
         [Fact]
         public async Task UserAgentHeaderWorks()
         {
-            var userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0";
+            var userAgent =
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0";
             var builder = new WebHostBuilder().Configure(app => { });
             var server = new TestServer(builder);
             server.BaseAddress = new Uri("https://example.com/");
-            var context = await server.SendAsync(c =>
-            {
-                c.Request.Headers[HeaderNames.UserAgent] = userAgent;
-            });
+            var context = await server.SendAsync(
+                c =>
+                {
+                    c.Request.Headers[HeaderNames.UserAgent] = userAgent;
+                }
+            );
 
             var actualResult = context.Request.Headers[HeaderNames.UserAgent];
             Assert.Equal(userAgent, actualResult);
@@ -71,10 +76,12 @@ namespace Microsoft.AspNetCore.TestHost
         {
             var builder = new WebHostBuilder().Configure(app => { });
             var server = new TestServer(builder);
-            var context = await server.SendAsync(c =>
-            {
-                c.Request.Path = "/";
-            });
+            var context = await server.SendAsync(
+                c =>
+                {
+                    c.Request.Path = "/";
+                }
+            );
 
             Assert.Equal("", context.Request.PathBase.Value);
             Assert.Equal("/", context.Request.Path.Value);
@@ -83,14 +90,18 @@ namespace Microsoft.AspNetCore.TestHost
         [Fact]
         public async Task MiddlewareOnlySetsHeaders()
         {
-            var builder = new WebHostBuilder().Configure(app =>
-            {
-                app.Run(c =>
+            var builder = new WebHostBuilder().Configure(
+                app =>
                 {
-                    c.Response.Headers["TestHeader"] = "TestValue";
-                    return Task.FromResult(0);
-                });
-            });
+                    app.Run(
+                        c =>
+                        {
+                            c.Response.Headers["TestHeader"] = "TestValue";
+                            return Task.FromResult(0);
+                        }
+                    );
+                }
+            );
             var server = new TestServer(builder);
             var context = await server.SendAsync(c => { });
 
@@ -101,14 +112,18 @@ namespace Microsoft.AspNetCore.TestHost
         public async Task BlockingMiddlewareShouldNotBlockClient()
         {
             var block = new ManualResetEvent(false);
-            var builder = new WebHostBuilder().Configure(app =>
-            {
-                app.Run(c =>
+            var builder = new WebHostBuilder().Configure(
+                app =>
                 {
-                    block.WaitOne();
-                    return Task.FromResult(0);
-                });
-            });
+                    app.Run(
+                        c =>
+                        {
+                            block.WaitOne();
+                            return Task.FromResult(0);
+                        }
+                    );
+                }
+            );
             var server = new TestServer(builder);
             var task = server.SendAsync(c => { });
 
@@ -121,20 +136,26 @@ namespace Microsoft.AspNetCore.TestHost
         [Fact]
         public async Task HeadersAvailableBeforeSyncBodyFinished()
         {
-            var block = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var builder = new WebHostBuilder().Configure(app =>
-            {
-                app.Run(async c =>
+            var block = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var builder = new WebHostBuilder().Configure(
+                app =>
                 {
-                    c.Response.Headers["TestHeader"] = "TestValue";
-                    var bytes = Encoding.UTF8.GetBytes("BodyStarted" + Environment.NewLine);
-                    c.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO = true;
-                    c.Response.Body.Write(bytes, 0, bytes.Length);
-                    await block.Task;
-                    bytes = Encoding.UTF8.GetBytes("BodyFinished");
-                    c.Response.Body.Write(bytes, 0, bytes.Length);
-                });
-            });
+                    app.Run(
+                        async c =>
+                        {
+                            c.Response.Headers["TestHeader"] = "TestValue";
+                            var bytes = Encoding.UTF8.GetBytes("BodyStarted" + Environment.NewLine);
+                            c.Features.Get<IHttpBodyControlFeature>().AllowSynchronousIO = true;
+                            c.Response.Body.Write(bytes, 0, bytes.Length);
+                            await block.Task;
+                            bytes = Encoding.UTF8.GetBytes("BodyFinished");
+                            c.Response.Body.Write(bytes, 0, bytes.Length);
+                        }
+                    );
+                }
+            );
             var server = new TestServer(builder);
             var context = await server.SendAsync(c => { });
 
@@ -148,17 +169,23 @@ namespace Microsoft.AspNetCore.TestHost
         [Fact]
         public async Task HeadersAvailableBeforeAsyncBodyFinished()
         {
-            var block = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var builder = new WebHostBuilder().Configure(app =>
-            {
-                app.Run(async c =>
+            var block = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var builder = new WebHostBuilder().Configure(
+                app =>
                 {
-                    c.Response.Headers["TestHeader"] = "TestValue";
-                    await c.Response.WriteAsync("BodyStarted" + Environment.NewLine);
-                    await block.Task;
-                    await c.Response.WriteAsync("BodyFinished");
-                });
-            });
+                    app.Run(
+                        async c =>
+                        {
+                            c.Response.Headers["TestHeader"] = "TestValue";
+                            await c.Response.WriteAsync("BodyStarted" + Environment.NewLine);
+                            await block.Task;
+                            await c.Response.WriteAsync("BodyFinished");
+                        }
+                    );
+                }
+            );
             var server = new TestServer(builder);
             var context = await server.SendAsync(c => { });
 
@@ -172,17 +199,23 @@ namespace Microsoft.AspNetCore.TestHost
         [Fact]
         public async Task FlushSendsHeaders()
         {
-            var block = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var builder = new WebHostBuilder().Configure(app =>
-            {
-                app.Run(async c =>
+            var block = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var builder = new WebHostBuilder().Configure(
+                app =>
                 {
-                    c.Response.Headers["TestHeader"] = "TestValue";
-                    await c.Response.Body.FlushAsync();
-                    await block.Task;
-                    await c.Response.WriteAsync("BodyFinished");
-                });
-            });
+                    app.Run(
+                        async c =>
+                        {
+                            c.Response.Headers["TestHeader"] = "TestValue";
+                            await c.Response.Body.FlushAsync();
+                            await block.Task;
+                            await c.Response.WriteAsync("BodyFinished");
+                        }
+                    );
+                }
+            );
             var server = new TestServer(builder);
             var context = await server.SendAsync(c => { });
 
@@ -194,17 +227,23 @@ namespace Microsoft.AspNetCore.TestHost
         [Fact]
         public async Task ClientDisposalCloses()
         {
-            var block = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var builder = new WebHostBuilder().Configure(app =>
-            {
-                app.Run(async c =>
+            var block = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var builder = new WebHostBuilder().Configure(
+                app =>
                 {
-                    c.Response.Headers["TestHeader"] = "TestValue";
-                    await c.Response.Body.FlushAsync();
-                    await block.Task;
-                    await c.Response.WriteAsync("BodyFinished");
-                });
-            });
+                    app.Run(
+                        async c =>
+                        {
+                            c.Response.Headers["TestHeader"] = "TestValue";
+                            await c.Response.Body.FlushAsync();
+                            await block.Task;
+                            await c.Response.WriteAsync("BodyFinished");
+                        }
+                    );
+                }
+            );
             var server = new TestServer(builder);
             var context = await server.SendAsync(c => { });
 
@@ -220,40 +259,56 @@ namespace Microsoft.AspNetCore.TestHost
         [Fact]
         public async Task ClientCancellationAborts()
         {
-            var block = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var builder = new WebHostBuilder().Configure(app =>
-            {
-                app.Run(c =>
+            var block = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var builder = new WebHostBuilder().Configure(
+                app =>
                 {
-                    block.SetResult(0);
-                    Assert.True(c.RequestAborted.WaitHandle.WaitOne(TimeSpan.FromSeconds(10)));
-                    c.RequestAborted.ThrowIfCancellationRequested();
-                    return Task.CompletedTask;
-                });
-            });
+                    app.Run(
+                        c =>
+                        {
+                            block.SetResult(0);
+                            Assert.True(
+                                c.RequestAborted.WaitHandle.WaitOne(TimeSpan.FromSeconds(10))
+                            );
+                            c.RequestAborted.ThrowIfCancellationRequested();
+                            return Task.CompletedTask;
+                        }
+                    );
+                }
+            );
             var server = new TestServer(builder);
             var cts = new CancellationTokenSource();
             var contextTask = server.SendAsync(c => { }, cts.Token);
             await block.Task;
             cts.Cancel();
 
-            await Assert.ThrowsAsync<OperationCanceledException>(() => contextTask.DefaultTimeout());
+            await Assert.ThrowsAsync<OperationCanceledException>(
+                () => contextTask.DefaultTimeout()
+            );
         }
 
         [Fact]
         public async Task ClientCancellationAbortsReadAsync()
         {
-            var block = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var builder = new WebHostBuilder().Configure(app =>
-            {
-                app.Run(async c =>
+            var block = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var builder = new WebHostBuilder().Configure(
+                app =>
                 {
-                    c.Response.Headers["TestHeader"] = "TestValue";
-                    await c.Response.Body.FlushAsync();
-                    await block.Task;
-                    await c.Response.WriteAsync("BodyFinished");
-                });
-            });
+                    app.Run(
+                        async c =>
+                        {
+                            c.Response.Headers["TestHeader"] = "TestValue";
+                            await c.Response.Body.FlushAsync();
+                            await block.Task;
+                            await c.Response.WriteAsync("BodyFinished");
+                        }
+                    );
+                }
+            );
             var server = new TestServer(builder);
             var context = await server.SendAsync(c => { });
 
@@ -270,13 +325,17 @@ namespace Microsoft.AspNetCore.TestHost
         [Fact]
         public Task ExceptionBeforeFirstWriteIsReported()
         {
-            var builder = new WebHostBuilder().Configure(app =>
-            {
-                app.Run(c =>
+            var builder = new WebHostBuilder().Configure(
+                app =>
                 {
-                    throw new InvalidOperationException("Test Exception");
-                });
-            });
+                    app.Run(
+                        c =>
+                        {
+                            throw new InvalidOperationException("Test Exception");
+                        }
+                    );
+                }
+            );
             var server = new TestServer(builder);
             return Assert.ThrowsAsync<InvalidOperationException>(() => server.SendAsync(c => { }));
         }
@@ -284,24 +343,32 @@ namespace Microsoft.AspNetCore.TestHost
         [Fact]
         public async Task ExceptionAfterFirstWriteIsReported()
         {
-            var block = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var builder = new WebHostBuilder().Configure(app =>
-            {
-                app.Run(async c =>
+            var block = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var builder = new WebHostBuilder().Configure(
+                app =>
                 {
-                    c.Response.Headers["TestHeader"] = "TestValue";
-                    await c.Response.WriteAsync("BodyStarted");
-                    await block.Task;
-                    throw new InvalidOperationException("Test Exception");
-                });
-            });
+                    app.Run(
+                        async c =>
+                        {
+                            c.Response.Headers["TestHeader"] = "TestValue";
+                            await c.Response.WriteAsync("BodyStarted");
+                            await block.Task;
+                            throw new InvalidOperationException("Test Exception");
+                        }
+                    );
+                }
+            );
             var server = new TestServer(builder);
             var context = await server.SendAsync(c => { });
 
             Assert.Equal("TestValue", context.Response.Headers["TestHeader"]);
             Assert.Equal(11, context.Response.Body.Read(new byte[100], 0, 100));
             block.SetResult(0);
-            var ex = Assert.Throws<IOException>(() => context.Response.Body.Read(new byte[100], 0, 100));
+            var ex = Assert.Throws<IOException>(
+                () => context.Response.Body.Read(new byte[100], 0, 100)
+            );
             Assert.IsAssignableFrom<InvalidOperationException>(ex.InnerException);
         }
 
@@ -310,18 +377,23 @@ namespace Microsoft.AspNetCore.TestHost
         {
             // This logger will attempt to access information from HttpRequest once the HttpContext is created
             var logger = new VerifierLogger();
-            var builder = new WebHostBuilder()
-                .ConfigureServices(services =>
-                {
-                    services.AddSingleton<ILogger<IWebHost>>(logger);
-                })
-                .Configure(app =>
-                {
-                    app.Run(context =>
+            var builder = new WebHostBuilder().ConfigureServices(
+                    services =>
                     {
-                        return Task.FromResult(0);
-                    });
-                });
+                        services.AddSingleton<ILogger<IWebHost>>(logger);
+                    }
+                )
+                .Configure(
+                    app =>
+                    {
+                        app.Run(
+                            context =>
+                            {
+                                return Task.FromResult(0);
+                            }
+                        );
+                    }
+                );
             var server = new TestServer(builder);
 
             // The HttpContext will be created and the logger will make sure that the HttpRequest exists and contains reasonable values
@@ -331,17 +403,22 @@ namespace Microsoft.AspNetCore.TestHost
         [Fact]
         public async Task CallingAbortInsideHandlerShouldSetRequestAborted()
         {
-            var requestAborted = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var builder = new WebHostBuilder()
-                .Configure(app =>
+            var requestAborted = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var builder = new WebHostBuilder().Configure(
+                app =>
                 {
-                    app.Run(context =>
-                    {
-                        context.RequestAborted.Register(() => requestAborted.SetResult(0));
-                        context.Abort();
-                        return Task.CompletedTask;
-                    });
-                });
+                    app.Run(
+                        context =>
+                        {
+                            context.RequestAborted.Register(() => requestAborted.SetResult(0));
+                            context.Abort();
+                            return Task.CompletedTask;
+                        }
+                    );
+                }
+            );
             var server = new TestServer(builder);
 
             var ex = await Assert.ThrowsAsync<Exception>(() => server.SendAsync(c => { }));
@@ -356,13 +433,17 @@ namespace Microsoft.AspNetCore.TestHost
             public bool IsEnabled(LogLevel logLevel) => true;
 
             // This call verifies that fields of HttpRequest are accessed and valid
-            public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter) => formatter(state, exception);
+            public void Log<TState>(
+                LogLevel logLevel,
+                EventId eventId,
+                TState state,
+                Exception exception,
+                Func<TState, Exception, string> formatter
+            ) => formatter(state, exception);
 
             class NoopDispoasble : IDisposable
             {
-                public void Dispose()
-                {
-                }
+                public void Dispose() { }
             }
         }
     }

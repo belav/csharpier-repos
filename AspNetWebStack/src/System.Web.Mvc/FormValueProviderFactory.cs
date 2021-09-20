@@ -9,15 +9,15 @@ namespace System.Web.Mvc
     {
         private readonly UnvalidatedRequestValuesAccessor _unvalidatedValuesAccessor;
 
-        public FormValueProviderFactory()
-            : this(null)
-        {
-        }
+        public FormValueProviderFactory() : this(null) { }
 
         // For unit testing
-        internal FormValueProviderFactory(UnvalidatedRequestValuesAccessor unvalidatedValuesAccessor)
-        {
-            _unvalidatedValuesAccessor = unvalidatedValuesAccessor ?? (cc => new UnvalidatedRequestValuesWrapper(cc.HttpContext.Request.Unvalidated));
+        internal FormValueProviderFactory(
+            UnvalidatedRequestValuesAccessor unvalidatedValuesAccessor
+        ) {
+            _unvalidatedValuesAccessor =
+                unvalidatedValuesAccessor
+                ?? (cc => new UnvalidatedRequestValuesWrapper(cc.HttpContext.Request.Unvalidated));
         }
 
         public override IValueProvider GetValueProvider(ControllerContext controllerContext)
@@ -27,7 +27,10 @@ namespace System.Web.Mvc
                 throw new ArgumentNullException("controllerContext");
             }
 
-            return new FormValueProvider(controllerContext, _unvalidatedValuesAccessor(controllerContext));
+            return new FormValueProvider(
+                controllerContext,
+                _unvalidatedValuesAccessor(controllerContext)
+            );
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Bug565326
 
         public static int intValue = 2;
 
-        // Case1: 
+        // Case1:
         // Forward jumping with distance 0 caused the entire condition tree
         // to be ignored. Therefore MethodReturningBool is not called.
         public void Case1()
@@ -36,10 +36,9 @@ namespace Bug565326
             return boolRetValue;
         }
 
-
-        // Case2: 
+        // Case2:
         // Forward jumping with distance 0 caused the entire condition tree
-        // to be ignored. Therefore MethodReturningInt is not called.  
+        // to be ignored. Therefore MethodReturningInt is not called.
         // Note: This case demonstrates that the CALL does NOT have to be evaluated right before the jump.
         public void Case2()
         {
@@ -53,7 +52,6 @@ namespace Bug565326
             Console.WriteLine("Should see this line: In E()");
             return intValue;
         }
-
     }
 
     class Class1

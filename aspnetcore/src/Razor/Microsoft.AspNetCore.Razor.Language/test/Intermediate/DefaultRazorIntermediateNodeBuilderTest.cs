@@ -62,7 +62,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             // Act & Assert
             ExceptionAssert.Throws<InvalidOperationException>(
                 () => builder.Pop(),
-                "The 'Pop' operation is not valid when the builder is empty.");
+                "The 'Pop' operation is not valid when the builder is empty."
+            );
         }
 
         [Fact]
@@ -159,7 +160,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
             // Assert
             Assert.Same(parent, builder.Current);
-            Assert.Collection(parent.Children, n => Assert.Same(node, n), n => Assert.Same(child, n));
+            Assert.Collection(
+                parent.Children,
+                n => Assert.Same(node, n),
+                n => Assert.Same(child, n)
+            );
         }
 
         [Fact]
@@ -181,7 +186,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
             // Assert
             Assert.Same(parent, builder.Current);
-            Assert.Collection(parent.Children, n => Assert.Same(child, n), n => Assert.Same(node, n));
+            Assert.Collection(
+                parent.Children,
+                n => Assert.Same(child, n),
+                n => Assert.Same(node, n)
+            );
         }
 
         [Fact]
@@ -206,7 +215,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
         private class BasicIntermediateNode : IntermediateNode
         {
-            public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();
+            public override IntermediateNodeCollection Children { get; } =
+                new IntermediateNodeCollection();
 
             public override void Accept(IntermediateNodeVisitor visitor)
             {

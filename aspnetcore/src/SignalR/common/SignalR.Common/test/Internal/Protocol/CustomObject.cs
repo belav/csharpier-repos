@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
 
         public int IntProp { get; set; } = 42;
 
-        public DateTime DateTimeProp { get; set; } = new DateTime(2017, 4, 11, 0, 0, 0, DateTimeKind.Utc);
+        public DateTime DateTimeProp { get; set; } =
+            new DateTime(2017, 4, 11, 0, 0, 0, DateTimeKind.Utc);
 
         public object NullProp { get; set; } = null;
 
@@ -34,12 +35,12 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
         public bool Equals(CustomObject right)
         {
             // This allows the comparer below to properly compare the object in the test.
-            return string.Equals(StringProp, right.StringProp, StringComparison.Ordinal) &&
-                DoubleProp == right.DoubleProp &&
-                IntProp == right.IntProp &&
-                DateTime.Equals(DateTimeProp, right.DateTimeProp) &&
-                NullProp == right.NullProp &&
-                System.Linq.Enumerable.SequenceEqual(ByteArrProp, right.ByteArrProp);
+            return string.Equals(StringProp, right.StringProp, StringComparison.Ordinal)
+                && DoubleProp == right.DoubleProp
+                && IntProp == right.IntProp
+                && DateTime.Equals(DateTimeProp, right.DateTimeProp)
+                && NullProp == right.NullProp
+                && System.Linq.Enumerable.SequenceEqual(ByteArrProp, right.ByteArrProp);
         }
     }
 }

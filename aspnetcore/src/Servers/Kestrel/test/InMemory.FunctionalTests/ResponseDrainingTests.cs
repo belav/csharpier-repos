@@ -15,46 +15,53 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 {
     public class ResponseDrainingTests : TestApplicationErrorLoggerLoggedTest
     {
-        public static TheoryData<ListenOptions> ConnectionMiddlewareData => new TheoryData<ListenOptions>
-        {
-            new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)),
-            new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)).UsePassThrough()
-        };
+        public static TheoryData<ListenOptions> ConnectionMiddlewareData =>
+            new TheoryData<ListenOptions>
+            {
+                new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)),
+                new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)).UsePassThrough()
+            };
 
         [Theory]
         [MemberData(nameof(ConnectionMiddlewareData))]
-        public async Task ConnectionClosedWhenResponseNotDrainedAtMinimumDataRate(ListenOptions listenOptions)
-        {
+        public async Task ConnectionClosedWhenResponseNotDrainedAtMinimumDataRate(
+            ListenOptions listenOptions
+        ) {
             var testContext = new TestServiceContext(LoggerFactory);
             var heartbeatManager = new HeartbeatManager(testContext.ConnectionManager);
             var minRate = new MinDataRate(16384, TimeSpan.FromSeconds(2));
 
-            await using (var server = new TestServer(context =>
-            {
-                context.Features.Get<IHttpMinResponseDataRateFeature>().MinDataRate = minRate;
-                return Task.CompletedTask;
-            }, testContext, listenOptions))
-            {
+            await using (
+                var server = new TestServer(
+                    context =>
+                    {
+                        context.Features.Get<IHttpMinResponseDataRateFeature>().MinDataRate =
+                            minRate;
+                        return Task.CompletedTask;
+                    },
+                    testContext,
+                    listenOptions
+                )
+            ) {
                 using (var connection = server.CreateConnection())
                 {
                     var transportConnection = connection.TransportConnection;
 
-                    var outputBufferedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                    var outputBufferedTcs = new TaskCompletionSource(
+                        TaskCreationOptions.RunContinuationsAsynchronously
+                    );
 
 #pragma warning disable 0618 // TODO: Repalce OnWriterCompleted
-                    transportConnection.Output.OnWriterCompleted((ex, state) =>
-                    {
-                        ((TaskCompletionSource)state).SetResult();
-                    },
-                    outputBufferedTcs);
+                    transportConnection.Output.OnWriterCompleted(
+                        (ex, state) =>
+                        {
+                            ((TaskCompletionSource)state).SetResult();
+                        },
+                        outputBufferedTcs
+                    );
 #pragma warning restore
 
-                    await connection.Send(
-                        "GET / HTTP/1.1",
-                        "Host:",
-                        "Connection: close",
-                        "",
-                        "");
+                    await connection.Send("GET / HTTP/1.1", "Host:", "Connection: close", "", "");
 
                     // Wait for the drain timeout to be set.
                     await outputBufferedTcs.Task.DefaultTimeout();
@@ -66,7 +73,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                         heartbeatManager.OnHeartbeat(testContext.SystemClock.UtcNow);
                     }
 
-                    testContext.MockSystemClock.UtcNow += Heartbeat.Interval - TimeSpan.FromSeconds(.5);
+                    testContext.MockSystemClock.UtcNow +=
+                        Heartbeat.Interval - TimeSpan.FromSeconds(.5);
                     heartbeatManager.OnHeartbeat(testContext.SystemClock.UtcNow);
 
                     Assert.Null(transportConnection.AbortReason);
@@ -75,9 +83,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                     heartbeatManager.OnHeartbeat(testContext.SystemClock.UtcNow);
 
                     Assert.NotNull(transportConnection.AbortReason);
-                    Assert.Equal(CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied, transportConnection.AbortReason.Message);
+                    Assert.Equal(
+                        CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied,
+                        transportConnection.AbortReason.Message
+                    );
 
-                    Assert.Single(LogMessages, w => w.EventId.Id == 28 && w.LogLevel <= LogLevel.Debug);
+                    Assert.Single(
+                        LogMessages,
+                        w => w.EventId.Id == 28 && w.LogLevel <= LogLevel.Debug
+                    );
                 }
             }
         }

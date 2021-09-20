@@ -16,14 +16,20 @@ namespace Microsoft.AspNetCore.Builder
 {
     public class MapEndpointEndpointDataSourceBuilderExtensionsTest
     {
-        private ModelEndpointDataSource GetBuilderEndpointDataSource(IEndpointRouteBuilder endpointRouteBuilder)
-        {
-            return Assert.IsType<ModelEndpointDataSource>(Assert.Single(endpointRouteBuilder.DataSources));
+        private ModelEndpointDataSource GetBuilderEndpointDataSource(
+            IEndpointRouteBuilder endpointRouteBuilder
+        ) {
+            return Assert.IsType<ModelEndpointDataSource>(
+                Assert.Single(endpointRouteBuilder.DataSources)
+            );
         }
 
-        private RouteEndpointBuilder GetRouteEndpointBuilder(IEndpointRouteBuilder endpointRouteBuilder)
-        {
-            return Assert.IsType<RouteEndpointBuilder>(Assert.Single(GetBuilderEndpointDataSource(endpointRouteBuilder).EndpointBuilders));
+        private RouteEndpointBuilder GetRouteEndpointBuilder(
+            IEndpointRouteBuilder endpointRouteBuilder
+        ) {
+            return Assert.IsType<RouteEndpointBuilder>(
+                Assert.Single(GetBuilderEndpointDataSource(endpointRouteBuilder).EndpointBuilders)
+            );
         }
 
         [Fact]
@@ -69,7 +75,7 @@ namespace Microsoft.AspNetCore.Builder
             var builder = new DefaultEndpointRouteBuilder(Mock.Of<IApplicationBuilder>());
 
             // Act
-            var endpointBuilder = builder.Map(RoutePatternFactory.Parse("/"),  Handle);
+            var endpointBuilder = builder.Map(RoutePatternFactory.Parse("/"), Handle);
 
             // Assert
             var endpointBuilder1 = GetRouteEndpointBuilder(builder);
@@ -114,7 +120,10 @@ namespace Microsoft.AspNetCore.Builder
             Assert.Equal("METHOD", GetMethod(endpoint.Metadata[1]));
             Assert.Equal("BUILDER", GetMethod(endpoint.Metadata[2]));
 
-            Assert.Equal("BUILDER", endpoint.Metadata.GetMetadata<IHttpMethodMetadata>().HttpMethods.Single());
+            Assert.Equal(
+                "BUILDER",
+                endpoint.Metadata.GetMetadata<IHttpMethodMetadata>().HttpMethods.Single()
+            );
 
             string GetMethod(object metadata)
             {

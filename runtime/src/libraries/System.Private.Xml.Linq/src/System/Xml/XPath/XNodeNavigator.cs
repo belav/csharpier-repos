@@ -13,29 +13,27 @@ namespace System.Xml.XPath
         internal static readonly string xmlPrefixNamespace = XNamespace.Xml.NamespaceName;
         internal static readonly string xmlnsPrefixNamespace = XNamespace.Xmlns.NamespaceName;
         private const int DocumentContentMask =
-            (1 << (int)XmlNodeType.Element) |
-            (1 << (int)XmlNodeType.ProcessingInstruction) |
-            (1 << (int)XmlNodeType.Comment);
-        private static readonly int[] s_ElementContentMasks = {
-            0,                                              // Root
-            (1 << (int)XmlNodeType.Element),                // Element
-            0,                                              // Attribute
-            0,                                              // Namespace
-            (1 << (int)XmlNodeType.CDATA) |
-            (1 << (int)XmlNodeType.Text),                   // Text
-            0,                                              // SignificantWhitespace
-            0,                                              // Whitespace
-            (1 << (int)XmlNodeType.ProcessingInstruction),  // ProcessingInstruction
-            (1 << (int)XmlNodeType.Comment),                // Comment
-            (1 << (int)XmlNodeType.Element) |
-            (1 << (int)XmlNodeType.CDATA) |
-            (1 << (int)XmlNodeType.Text) |
-            (1 << (int)XmlNodeType.ProcessingInstruction) |
-            (1 << (int)XmlNodeType.Comment)                 // All
+            (1 << (int)XmlNodeType.Element)
+            | (1 << (int)XmlNodeType.ProcessingInstruction)
+            | (1 << (int)XmlNodeType.Comment);
+        private static readonly int[] s_ElementContentMasks =
+        {
+            0, // Root
+            (1 << (int)XmlNodeType.Element), // Element
+            0, // Attribute
+            0, // Namespace
+            (1 << (int)XmlNodeType.CDATA) | (1 << (int)XmlNodeType.Text), // Text
+            0, // SignificantWhitespace
+            0, // Whitespace
+            (1 << (int)XmlNodeType.ProcessingInstruction), // ProcessingInstruction
+            (1 << (int)XmlNodeType.Comment), // Comment
+            (1 << (int)XmlNodeType.Element)
+                | (1 << (int)XmlNodeType.CDATA)
+                | (1 << (int)XmlNodeType.Text)
+                | (1 << (int)XmlNodeType.ProcessingInstruction)
+                | (1 << (int)XmlNodeType.Comment) // All
         };
-        private const int TextMask =
-            (1 << (int)XmlNodeType.CDATA) |
-            (1 << (int)XmlNodeType.Text);
+        private const int TextMask = (1 << (int)XmlNodeType.CDATA) | (1 << (int)XmlNodeType.Text);
 
         private static XAttribute? s_XmlNamespaceDeclaration;
 
@@ -206,7 +204,9 @@ namespace System.Xml.XPath
                             return XPathNodeType.Element;
                         case XmlNodeType.Attribute:
                             XAttribute attribute = (XAttribute)_source;
-                            return attribute.IsNamespaceDeclaration ? XPathNodeType.Namespace : XPathNodeType.Attribute;
+                            return attribute.IsNamespaceDeclaration
+                              ? XPathNodeType.Namespace
+                              : XPathNodeType.Attribute;
                         case XmlNodeType.Document:
                             return XPathNodeType.Root;
                         case XmlNodeType.Comment:
@@ -256,10 +256,7 @@ namespace System.Xml.XPath
 
         public override object UnderlyingObject
         {
-            get
-            {
-                return _source;
-            }
+            get { return _source; }
         }
 
         public override string Value
@@ -326,10 +323,11 @@ namespace System.Xml.XPath
             {
                 foreach (XAttribute attribute in e.Attributes())
                 {
-                    if (attribute.Name.LocalName == localName &&
-                        attribute.Name.NamespaceName == namespaceName &&
-                        !attribute.IsNamespaceDeclaration)
-                    {
+                    if (
+                        attribute.Name.LocalName == localName
+                        && attribute.Name.NamespaceName == namespaceName
+                        && !attribute.IsNamespaceDeclaration
+                    ) {
                         _source = attribute;
                         return true;
                     }
@@ -345,9 +343,10 @@ namespace System.Xml.XPath
             {
                 foreach (XElement element in c.Elements())
                 {
-                    if (element.Name.LocalName == localName &&
-                        element.Name.NamespaceName == namespaceName)
-                    {
+                    if (
+                        element.Name.LocalName == localName
+                        && element.Name.NamespaceName == namespaceName
+                    ) {
                         _source = element;
                         return true;
                     }
@@ -524,9 +523,10 @@ namespace System.Xml.XPath
             {
                 foreach (XElement element in currentNode.ElementsAfterSelf())
                 {
-                    if (element.Name.LocalName == localName &&
-                        element.Name.NamespaceName == namespaceName)
-                    {
+                    if (
+                        element.Name.LocalName == localName
+                        && element.Name.NamespaceName == namespaceName
+                    ) {
                         _source = element;
                         return true;
                     }
@@ -544,20 +544,25 @@ namespace System.Xml.XPath
                 if (container != null)
                 {
                     int mask = GetElementContentMask(type);
-                    if ((TextMask & mask) != 0 && container.GetParent() == null && container is XDocument)
-                    {
+                    if (
+                        (TextMask & mask) != 0
+                        && container.GetParent() == null
+                        && container is XDocument
+                    ) {
                         mask &= ~TextMask;
                     }
                     XNode? next = null;
-                    for (XNode node = currentNode; ; node = next)
+                    for (XNode node = currentNode;; node = next)
                     {
                         next = node.NextNode;
                         if (next == null)
                         {
                             break;
                         }
-                        if (((1 << (int)next.NodeType) & mask) != 0 && !(node is XText && next is XText))
-                        {
+                        if (
+                            ((1 << (int)next.NodeType) & mask) != 0
+                            && !(node is XText && next is XText)
+                        ) {
                             _source = next;
                             return true;
                         }
@@ -575,8 +580,11 @@ namespace System.Xml.XPath
                 XElement? e = (XElement?)currentAttribute.GetParent();
                 if (e != null)
                 {
-                    for (XAttribute? attribute = currentAttribute.NextAttribute; attribute != null; attribute = attribute.NextAttribute)
-                    {
+                    for (
+                        XAttribute? attribute = currentAttribute.NextAttribute;
+                        attribute != null;
+                        attribute = attribute.NextAttribute
+                    ) {
                         if (!attribute.IsNamespaceDeclaration)
                         {
                             _source = attribute;
@@ -606,19 +614,26 @@ namespace System.Xml.XPath
                         do
                         {
                             a = GetNextNamespaceDeclarationGlobal(a);
-                        } while (a != null &&
-                                 (a.Name.LocalName == "xml" ||
-                                  HasNamespaceDeclarationInScope(a, _parent)));
+                        } while (
+                            a != null
+                            && (
+                                a.Name.LocalName == "xml"
+                                || HasNamespaceDeclarationInScope(a, _parent)
+                            )
+                        );
                         break;
                     case XPathNamespaceScope.All:
                         do
                         {
                             a = GetNextNamespaceDeclarationGlobal(a);
-                        } while (a != null &&
-                                 HasNamespaceDeclarationInScope(a, _parent));
-                        if (a == null &&
-                            !HasNamespaceDeclarationInScope(GetXmlNamespaceDeclaration(), _parent))
-                        {
+                        } while (a != null && HasNamespaceDeclarationInScope(a, _parent));
+                        if (
+                            a == null
+                            && !HasNamespaceDeclarationInScope(
+                                GetXmlNamespaceDeclaration(),
+                                _parent
+                            )
+                        ) {
                             a = GetXmlNamespaceDeclaration();
                         }
                         break;
@@ -683,7 +698,10 @@ namespace System.Xml.XPath
         public override XmlReader ReadSubtree()
         {
             XContainer? c = _source as XContainer;
-            if (c == null) throw new InvalidOperationException(SR.Format(SR.InvalidOperation_BadNodeType, NodeType));
+            if (c == null)
+                throw new InvalidOperationException(
+                    SR.Format(SR.InvalidOperation_BadNodeType, NodeType)
+                );
             return c.CreateReader();
         }
 
@@ -731,7 +749,8 @@ namespace System.Xml.XPath
                 foreach (XNode node in n.NodesAfterSelf())
                 {
                     XText? t = node as XText;
-                    if (t == null) break;
+                    if (t == null)
+                        break;
                     s += t.Value;
                 }
             }
@@ -842,7 +861,11 @@ namespace System.Xml.XPath
         {
             if (s_XmlNamespaceDeclaration == null)
             {
-                System.Threading.Interlocked.CompareExchange(ref s_XmlNamespaceDeclaration, new XAttribute(XNamespace.Xmlns.GetName("xml"), xmlPrefixNamespace), null);
+                System.Threading.Interlocked.CompareExchange(
+                    ref s_XmlNamespaceDeclaration,
+                    new XAttribute(XNamespace.Xmlns.GetName("xml"), xmlPrefixNamespace),
+                    null
+                );
             }
             return s_XmlNamespaceDeclaration;
         }
@@ -865,7 +888,8 @@ namespace System.Xml.XPath
 
     internal readonly struct XPathEvaluator
     {
-        public object Evaluate<T>(XNode node, string expression, IXmlNamespaceResolver? resolver) where T : class
+        public object Evaluate<T>(XNode node, string expression, IXmlNamespaceResolver? resolver)
+            where T : class
         {
             XPathNavigator navigator = node.CreateNavigator();
             object result = navigator.Evaluate(expression, resolver);
@@ -874,7 +898,10 @@ namespace System.Xml.XPath
             {
                 return EvaluateIterator<T>(iterator);
             }
-            if (!(result is T)) throw new InvalidOperationException(SR.Format(SR.InvalidOperation_UnexpectedEvaluation, result.GetType()));
+            if (!(result is T))
+                throw new InvalidOperationException(
+                    SR.Format(SR.InvalidOperation_UnexpectedEvaluation, result.GetType())
+                );
             return (T)result;
         }
 
@@ -884,7 +911,10 @@ namespace System.Xml.XPath
             {
                 Debug.Assert(navigator.UnderlyingObject != null);
                 object r = navigator.UnderlyingObject;
-                if (!(r is T)) throw new InvalidOperationException(SR.Format(SR.InvalidOperation_UnexpectedEvaluation, r.GetType()));
+                if (!(r is T))
+                    throw new InvalidOperationException(
+                        SR.Format(SR.InvalidOperation_UnexpectedEvaluation, r.GetType())
+                    );
                 yield return (T)r;
                 XText? t = r as XText;
                 if (t != null && t.GetParent() != null)
@@ -892,7 +922,8 @@ namespace System.Xml.XPath
                     do
                     {
                         t = t.NextNode as XText;
-                        if (t == null) break;
+                        if (t == null)
+                            break;
                         yield return (T)(object)t;
                     } while (t != t.GetParent()!.LastNode);
                 }
@@ -924,12 +955,19 @@ namespace System.Xml.XPath
         /// <returns>An <see cref="XPathNavigator"/></returns>
         public static XPathNavigator CreateNavigator(this XNode node, XmlNameTable? nameTable)
         {
-            if (node == null) throw new ArgumentNullException(nameof(node));
-            if (node is XDocumentType) throw new ArgumentException(SR.Format(SR.Argument_CreateNavigator, XmlNodeType.DocumentType));
+            if (node == null)
+                throw new ArgumentNullException(nameof(node));
+            if (node is XDocumentType)
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_CreateNavigator, XmlNodeType.DocumentType)
+                );
             XText? text = node as XText;
             if (text != null)
             {
-                if (text.GetParent() is XDocument) throw new ArgumentException(SR.Format(SR.Argument_CreateNavigator, XmlNodeType.Whitespace));
+                if (text.GetParent() is XDocument)
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_CreateNavigator, XmlNodeType.Whitespace)
+                    );
                 node = CalibrateText(text);
             }
             return new XNodeNavigator(node, nameTable);
@@ -956,9 +994,13 @@ namespace System.Xml.XPath
         /// prefixes used in the XPath expression</see></param>
         /// <returns>The result of evaluating the expression which can be typed as bool, double, string or
         /// IEnumerable</returns>
-        public static object XPathEvaluate(this XNode node, string expression, IXmlNamespaceResolver? resolver)
-        {
-            if (node == null) throw new ArgumentNullException(nameof(node));
+        public static object XPathEvaluate(
+            this XNode node,
+            string expression,
+            IXmlNamespaceResolver? resolver
+        ) {
+            if (node == null)
+                throw new ArgumentNullException(nameof(node));
             return default(XPathEvaluator).Evaluate<object>(node, expression, resolver);
         }
 
@@ -981,8 +1023,11 @@ namespace System.Xml.XPath
         /// <param name="resolver">A <see cref="IXmlNamespaceResolver"/> for the namespace
         /// prefixes used in the XPath expression</param>
         /// <returns>An <see cref="XElement"> or null</see></returns>
-        public static XElement? XPathSelectElement(this XNode node, string expression, IXmlNamespaceResolver? resolver)
-        {
+        public static XElement? XPathSelectElement(
+            this XNode node,
+            string expression,
+            IXmlNamespaceResolver? resolver
+        ) {
             return node.XPathSelectElements(expression, resolver).FirstOrDefault();
         }
 
@@ -1005,10 +1050,18 @@ namespace System.Xml.XPath
         /// <param name="resolver">A <see cref="IXmlNamespaceResolver"/> for the namespace
         /// prefixes used in the XPath expression</param>
         /// <returns>An <see cref="IEnumerable&lt;XElement&gt;"/> corresponding to the resulting set of elements</returns>
-        public static IEnumerable<XElement> XPathSelectElements(this XNode node, string expression, IXmlNamespaceResolver? resolver)
-        {
-            if (node == null) throw new ArgumentNullException(nameof(node));
-            return (IEnumerable<XElement>)default(XPathEvaluator).Evaluate<XElement>(node, expression, resolver);
+        public static IEnumerable<XElement> XPathSelectElements(
+            this XNode node,
+            string expression,
+            IXmlNamespaceResolver? resolver
+        ) {
+            if (node == null)
+                throw new ArgumentNullException(nameof(node));
+            return (IEnumerable<XElement>)default(XPathEvaluator).Evaluate<XElement>(
+                node,
+                expression,
+                resolver
+            );
         }
 
         private static XText CalibrateText(XText n)

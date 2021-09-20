@@ -45,7 +45,6 @@ namespace SciMark2
         private double _right = 1.0;
         private double _width = 1.0;
 
-
         /* ------------------------------------------------------------------------------
 		CONSTRUCTORS
 		------------------------------------------------------------------------------ */
@@ -198,7 +197,6 @@ namespace SciMark2
                     else
                         _j--;
 
-
                     x[count] = _dm1 * (double)k;
                 }
 
@@ -218,7 +216,6 @@ namespace SciMark2
                         _j--;
                     x[count] = _dm1 * (double)k;
 
-
                     k = _m[_i] - _m[_j];
                     if (_i == 0)
                         _i = 16;
@@ -233,7 +230,6 @@ namespace SciMark2
                         _j--;
                     x[count + 1] = _dm1 * (double)k;
 
-
                     k = _m[_i] - _m[_j];
                     if (_i == 0)
                         _i = 16;
@@ -247,7 +243,6 @@ namespace SciMark2
                     else
                         _j--;
                     x[count + 2] = _dm1 * (double)k;
-
 
                     k = _m[_i] - _m[_j];
                     if (_i == 0)
@@ -277,7 +272,12 @@ namespace SciMark2
             _m2 = one << mdig / 2;
             _dm1 = 1.0 / (double)_m1;
 
-            int jseed, k0, k1, j0, j1, iloop;
+            int jseed,
+                k0,
+                k1,
+                j0,
+                j1,
+                iloop;
 
             this.seed = seed;
 

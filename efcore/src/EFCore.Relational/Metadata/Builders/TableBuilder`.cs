@@ -12,8 +12,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
     ///     </para>
     /// </summary>
     /// <typeparam name="TEntity"> The entity type being configured. </typeparam>
-    public class TableBuilder<TEntity> : TableBuilder
-        where TEntity : class
+    public class TableBuilder<TEntity> : TableBuilder where TEntity : class
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -23,16 +22,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </summary>
         [EntityFrameworkInternal]
         public TableBuilder(string name, string? schema, IMutableEntityType entityType)
-            : base(name, schema, entityType)
-        {
-        }
+            : base(name, schema, entityType) { }
 
         /// <summary>
         ///     Configures the table to be ignored by migrations.
         /// </summary>
         /// <param name="excluded"> A value indicating whether the table should be managed by migrations. </param>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
-        public new virtual TableBuilder<TEntity> ExcludeFromMigrations(bool excluded = true)
-            => (TableBuilder<TEntity>)base.ExcludeFromMigrations(excluded);
+        public new virtual TableBuilder<TEntity> ExcludeFromMigrations(bool excluded = true) =>
+            (TableBuilder<TEntity>)base.ExcludeFromMigrations(excluded);
     }
 }

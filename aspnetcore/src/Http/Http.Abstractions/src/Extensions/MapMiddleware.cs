@@ -53,8 +53,13 @@ namespace Microsoft.AspNetCore.Builder.Extensions
                 throw new ArgumentNullException(nameof(context));
             }
 
-            if (context.Request.Path.StartsWithSegments(_options.PathMatch, out var matchedPath, out var remainingPath))
-            {
+            if (
+                context.Request.Path.StartsWithSegments(
+                    _options.PathMatch,
+                    out var matchedPath,
+                    out var remainingPath
+                )
+            ) {
                 var path = context.Request.Path;
                 var pathBase = context.Request.PathBase;
 
@@ -69,6 +74,7 @@ namespace Microsoft.AspNetCore.Builder.Extensions
                 {
                     await _options.Branch!(context);
                 }
+
                 finally
                 {
                     if (!_options.PreserveMatchedPathSegment)

@@ -26,14 +26,21 @@ namespace Tests.System.Net
 
         [Theory]
         [MemberData(nameof(UnknownHeaderNames))]
-        public unsafe void TryGetHeaderName_IntPtrBuffer_UnknownStrings_NotFound(string shouldNotBeFound)
-        {
+        public unsafe void TryGetHeaderName_IntPtrBuffer_UnknownStrings_NotFound(
+            string shouldNotBeFound
+        ) {
             byte[] buffer = shouldNotBeFound.Select(c => checked((byte)c)).ToArray();
 
             fixed (byte* pBuffer = buffer)
             {
                 string name;
-                Assert.False(HttpKnownHeaderNames.TryGetHeaderName(new IntPtr(pBuffer), buffer.Length, out name));
+                Assert.False(
+                    HttpKnownHeaderNames.TryGetHeaderName(
+                        new IntPtr(pBuffer),
+                        buffer.Length,
+                        out name
+                    )
+                );
                 Assert.Null(name);
             }
         }
@@ -46,8 +53,9 @@ namespace Tests.System.Net
 
         [Theory]
         [MemberData(nameof(HttpKnownHeaderNamesPublicStringConstants))]
-        public void TryGetHeaderName_CharArray_AllHttpKnownHeaderNamesPublicStringConstants_Found(string constant)
-        {
+        public void TryGetHeaderName_CharArray_AllHttpKnownHeaderNamesPublicStringConstants_Found(
+            string constant
+        ) {
             char[] array = constant.ToCharArray();
 
             string name1;
@@ -65,8 +73,9 @@ namespace Tests.System.Net
 
         [Theory]
         [MemberData(nameof(HttpKnownHeaderNamesPublicStringConstants))]
-        public unsafe void TryGetHeaderName_IntPtrBuffer_AllHttpKnownHeaderNamesPublicStringConstants_Found(string constant)
-        {
+        public unsafe void TryGetHeaderName_IntPtrBuffer_AllHttpKnownHeaderNamesPublicStringConstants_Found(
+            string constant
+        ) {
             byte[] buffer = constant.Select(c => checked((byte)c)).ToArray();
 
             fixed (byte* pBuffer = buffer)
@@ -74,12 +83,24 @@ namespace Tests.System.Net
                 Assert.True(pBuffer != null);
 
                 string name1;
-                Assert.True(HttpKnownHeaderNames.TryGetHeaderName(new IntPtr(pBuffer), buffer.Length, out name1));
+                Assert.True(
+                    HttpKnownHeaderNames.TryGetHeaderName(
+                        new IntPtr(pBuffer),
+                        buffer.Length,
+                        out name1
+                    )
+                );
                 Assert.NotNull(name1);
                 Assert.Equal(constant, name1);
 
                 string name2;
-                Assert.True(HttpKnownHeaderNames.TryGetHeaderName(new IntPtr(pBuffer), buffer.Length, out name2));
+                Assert.True(
+                    HttpKnownHeaderNames.TryGetHeaderName(
+                        new IntPtr(pBuffer),
+                        buffer.Length,
+                        out name2
+                    )
+                );
                 Assert.NotNull(name2);
                 Assert.Equal(constant, name2);
 
@@ -91,10 +112,11 @@ namespace Tests.System.Net
         {
             get
             {
-                string[] constants = typeof(HttpKnownHeaderNames)
-                    .GetTypeInfo()
-                    .DeclaredFields
-                    .Where(f => f.IsLiteral && f.IsStatic && f.IsPublic && f.FieldType == typeof(string))
+                string[] constants = typeof(HttpKnownHeaderNames).GetTypeInfo()
+                    .DeclaredFields.Where(
+                        f =>
+                            f.IsLiteral && f.IsStatic && f.IsPublic && f.FieldType == typeof(string)
+                    )
                     .Select(f => (string)f.GetValue(null))
                     .ToArray();
 

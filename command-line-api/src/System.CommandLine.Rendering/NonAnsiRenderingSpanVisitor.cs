@@ -9,16 +9,13 @@ namespace System.CommandLine.Rendering
     {
         private ITerminal Terminal { get; }
 
-        public NonAnsiRenderingSpanVisitor(
-            ITerminal terminal,
-            Region region) : base(terminal?.Out, region)
+        public NonAnsiRenderingSpanVisitor(ITerminal terminal, Region region)
+            : base(terminal?.Out, region)
         {
             Terminal = terminal ?? throw new ArgumentNullException(nameof(terminal));
         }
 
-        protected override void SetCursorPosition(
-            int? left = null, 
-            int? top = null)
+        protected override void SetCursorPosition(int? left = null, int? top = null)
         {
             if (left != null && top != null)
             {
@@ -36,9 +33,10 @@ namespace System.CommandLine.Rendering
 
         public override void VisitForegroundColorSpan(ForegroundColorSpan span)
         {
-            if (span.RgbColor == null &&
-                _foregroundColorMappings.TryGetValue(span.Name, out var color))
-            {
+            if (
+                span.RgbColor == null
+                && _foregroundColorMappings.TryGetValue(span.Name, out var color)
+            ) {
                 Terminal.ForegroundColor = color;
             }
             else
@@ -51,9 +49,10 @@ namespace System.CommandLine.Rendering
 
         public override void VisitBackgroundColorSpan(BackgroundColorSpan span)
         {
-            if (span.RgbColor == null &&
-                _backgroundColorMappings.TryGetValue(span.Name, out var color))
-            {
+            if (
+                span.RgbColor == null
+                && _backgroundColorMappings.TryGetValue(span.Name, out var color)
+            ) {
                 Terminal.BackgroundColor = color;
             }
             else
@@ -66,7 +65,7 @@ namespace System.CommandLine.Rendering
 
         public override void VisitCursorControlSpan(CursorControlSpan cursorControlSpan)
         {
-            switch(cursorControlSpan.Name)
+            switch (cursorControlSpan.Name)
             {
                 case nameof(CursorControlSpan.Hide):
                     Terminal.HideCursor();

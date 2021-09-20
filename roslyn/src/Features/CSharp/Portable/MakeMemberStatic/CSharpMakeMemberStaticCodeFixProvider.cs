@@ -14,14 +14,23 @@ using Microsoft.CodeAnalysis.MakeMemberStatic;
 
 namespace Microsoft.CodeAnalysis.CSharp.MakeMemberStatic
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.MakeMemberStatic), Shared]
-    internal sealed class CSharpMakeMemberStaticCodeFixProvider : AbstractMakeMemberStaticCodeFixProvider
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.MakeMemberStatic
+        ),
+        Shared
+    ]
+    internal sealed class CSharpMakeMemberStaticCodeFixProvider
+        : AbstractMakeMemberStaticCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpMakeMemberStaticCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpMakeMemberStaticCodeFixProvider() { }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(
@@ -29,7 +38,15 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMemberStatic
             );
 
         protected override bool IsValidMemberNode(SyntaxNode node) =>
-            node is MemberDeclarationSyntax ||
-            (node.IsKind(SyntaxKind.VariableDeclarator) && node.Ancestors().Any(a => a.IsKind(SyntaxKind.FieldDeclaration) || a.IsKind(SyntaxKind.EventFieldDeclaration)));
+            node is MemberDeclarationSyntax
+            || (
+                node.IsKind(SyntaxKind.VariableDeclarator)
+                && node.Ancestors()
+                    .Any(
+                        a =>
+                            a.IsKind(SyntaxKind.FieldDeclaration)
+                            || a.IsKind(SyntaxKind.EventFieldDeclaration)
+                    )
+            );
     }
 }

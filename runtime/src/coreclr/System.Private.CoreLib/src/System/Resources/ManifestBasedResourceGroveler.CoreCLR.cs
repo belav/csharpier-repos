@@ -9,11 +9,16 @@ namespace System.Resources
     internal sealed partial class ManifestBasedResourceGroveler
     {
         // Internal version of GetSatelliteAssembly that avoids throwing FileNotFoundException
-        private static Assembly? InternalGetSatelliteAssembly(Assembly mainAssembly,
-                                                             CultureInfo culture,
-                                                             Version? version)
-        {
-            return ((RuntimeAssembly)mainAssembly).InternalGetSatelliteAssembly(culture, version, throwOnFileNotFound: false);
+        private static Assembly? InternalGetSatelliteAssembly(
+            Assembly mainAssembly,
+            CultureInfo culture,
+            Version? version
+        ) {
+            return ((RuntimeAssembly)mainAssembly).InternalGetSatelliteAssembly(
+                culture,
+                version,
+                throwOnFileNotFound: false
+            );
         }
     }
 }

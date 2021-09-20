@@ -10,14 +10,46 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
     public partial class EventDeclarationSyntax
     {
-        public EventDeclarationSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, SyntaxToken eventKeyword, TypeSyntax type, ExplicitInterfaceSpecifierSyntax explicitInterfaceSpecifier, SyntaxToken identifier, AccessorListSyntax accessorList)
-        {
-            return Update(attributeLists, modifiers, eventKeyword, type, explicitInterfaceSpecifier, identifier, accessorList, SemicolonToken);
+        public EventDeclarationSyntax Update(
+            SyntaxList<AttributeListSyntax> attributeLists,
+            SyntaxTokenList modifiers,
+            SyntaxToken eventKeyword,
+            TypeSyntax type,
+            ExplicitInterfaceSpecifierSyntax explicitInterfaceSpecifier,
+            SyntaxToken identifier,
+            AccessorListSyntax accessorList
+        ) {
+            return Update(
+                attributeLists,
+                modifiers,
+                eventKeyword,
+                type,
+                explicitInterfaceSpecifier,
+                identifier,
+                accessorList,
+                SemicolonToken
+            );
         }
 
-        public EventDeclarationSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, SyntaxToken eventKeyword, TypeSyntax type, ExplicitInterfaceSpecifierSyntax explicitInterfaceSpecifier, SyntaxToken identifier, SyntaxToken semicolonToken)
-        {
-            return Update(attributeLists, modifiers, eventKeyword, type, explicitInterfaceSpecifier, identifier, AccessorList, semicolonToken);
+        public EventDeclarationSyntax Update(
+            SyntaxList<AttributeListSyntax> attributeLists,
+            SyntaxTokenList modifiers,
+            SyntaxToken eventKeyword,
+            TypeSyntax type,
+            ExplicitInterfaceSpecifierSyntax explicitInterfaceSpecifier,
+            SyntaxToken identifier,
+            SyntaxToken semicolonToken
+        ) {
+            return Update(
+                attributeLists,
+                modifiers,
+                eventKeyword,
+                type,
+                explicitInterfaceSpecifier,
+                identifier,
+                AccessorList,
+                semicolonToken
+            );
         }
     }
 }
